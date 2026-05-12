@@ -22,6 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temperature", type=float, default=0.8)
     parser.add_argument("--top-k", type=int, default=30)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
+    parser.add_argument("--out", type=Path, default=None, help="Optional file path for generated text")
     return parser.parse_args()
 
 
@@ -53,7 +54,13 @@ def main() -> None:
         temperature=args.temperature,
         top_k=args.top_k,
     )
-    print(tokenizer.decode(out[0].tolist()))
+    generated = tokenizer.decode(out[0].tolist())
+    if args.out is not None:
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(generated, encoding="utf-8")
+        print(f"saved={args.out}")
+    else:
+        print(generated)
 
 
 if __name__ == "__main__":

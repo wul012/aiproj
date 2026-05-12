@@ -25,6 +25,12 @@
 
 04-tests-docs.md
  -> tests、README、a/1 归档：如何证明项目能跑、能讲清楚、能继续迭代
+
+05-v2-training-artifacts.md
+ -> history.py、plot_history.py、train.py v2：训练历史、loss 曲线、样例输出和 resume
+
+06-version-2-tests-docs.md
+ -> v2 测试、README、a/2 归档和版本说明更新
 ```
 
 ## 项目整体理解
@@ -42,6 +48,7 @@
  -> logits
  -> cross entropy loss
  -> AdamW 更新参数
+ -> metrics.jsonl / loss_curve.svg / sample.txt
  -> generate 自回归采样新 token
  -> CharTokenizer.decode
  -> 生成文本
