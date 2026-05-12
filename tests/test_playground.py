@@ -20,6 +20,7 @@ class PlaygroundTests(unittest.TestCase):
             (run_dir / "train_config.json").write_text(json.dumps({"tokenizer": "char"}), encoding="utf-8")
             (run_dir / "run_manifest.json").write_text(json.dumps({"git": {"short_commit": "abc1234"}}), encoding="utf-8")
             (run_dir / "dataset_quality.json").write_text(json.dumps({"status": "pass"}), encoding="utf-8")
+            (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
             eval_suite_dir = run_dir / "eval_suite"
             eval_suite_dir.mkdir()
             (eval_suite_dir / "eval_suite.json").write_text(json.dumps({"case_count": 1, "results": []}), encoding="utf-8")
@@ -52,6 +53,7 @@ class PlaygroundTests(unittest.TestCase):
             self.assertTrue(any(link["key"] == "run_manifest" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "dataset_quality" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "eval_suite" and link["exists"] for link in payload["links"]))
+            self.assertTrue(any(link["key"] == "experiment_card_html" and link["exists"] for link in payload["links"]))
 
     def test_render_playground_escapes_text_and_has_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -74,6 +76,7 @@ class PlaygroundTests(unittest.TestCase):
         self.assertIn(f"'{run_dir / 'checkpoint.pt'}'", commands["generate"])
         self.assertIn("'hello \"ai\"'", commands["generate"])
         self.assertIn("sample_lab.py", commands["sample_lab"])
+        self.assertIn("build_experiment_card.py", commands["experiment_card"])
 
     def test_write_playground_creates_html(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

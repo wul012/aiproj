@@ -31,6 +31,9 @@ REGISTRY_ARTIFACT_PATHS = [
     "dashboard.html",
     "playground.html",
     "run_notes.json",
+    "experiment_card.json",
+    "experiment_card.md",
+    "experiment_card.html",
 ]
 
 
@@ -552,6 +555,7 @@ def _registry_links(run: dict[str, Any], base_dir: str | Path | None) -> str:
     root = Path(str(run.get("path", "")))
     specs = [
         ("dashboard", root / "dashboard.html"),
+        ("card", root / "experiment_card.html"),
         ("manifest", root / "run_manifest.json"),
         ("eval", root / "eval_suite" / "eval_suite.json"),
     ]

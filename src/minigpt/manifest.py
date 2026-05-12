@@ -36,6 +36,9 @@ RUN_ARTIFACT_SPECS = [
     ("attention_chart", "attention/attention.svg", "attention heatmap"),
     ("transcript", "transcript.json", "chat transcript"),
     ("generated", "generated.txt", "standalone generation output"),
+    ("experiment_card_json", "experiment_card.json", "machine-readable experiment card"),
+    ("experiment_card_md", "experiment_card.md", "markdown experiment card"),
+    ("experiment_card_html", "experiment_card.html", "browser experiment card"),
     ("dashboard", "dashboard.html", "static dashboard"),
     ("playground", "playground.html", "static playground"),
 ]

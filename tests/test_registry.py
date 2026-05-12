@@ -112,6 +112,7 @@ class RegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             run_dir = make_run(root, "one", 1.0)
+            (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
             registry = build_run_registry([run_dir])
 
             outputs = write_registry_outputs(registry, root / "registry")
@@ -121,7 +122,9 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("best_val_loss_rank", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
-            self.assertIn("MiniGPT run registry", Path(outputs["html"]).read_text(encoding="utf-8"))
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            self.assertIn("MiniGPT run registry", html)
+            self.assertIn(">card</a>", html)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

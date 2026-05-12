@@ -93,6 +93,7 @@ def build_playground_commands(run_dir: str | Path, prompt: str = "人工智能")
         "inspect_model": f"python scripts/inspect_model.py --checkpoint {_quote_arg(str(checkpoint))}",
         "dashboard": f"python scripts/build_dashboard.py --run-dir {_quote_arg(str(root))}",
         "playground": f"python scripts/build_playground.py --run-dir {_quote_arg(str(root))}",
+        "experiment_card": f"python scripts/build_experiment_card.py --run-dir {_quote_arg(str(root))}",
     }
 
 
@@ -181,6 +182,9 @@ def _collect_links(root: Path, out_path: Path, base_dir: Path) -> list[Playgroun
         ("model_report", "Model report", root / "model_report" / "model_report.json", "JSON"),
         ("prediction_report", "Prediction report", root / "predictions" / "predictions.json", "JSON"),
         ("attention_report", "Attention report", root / "attention" / "attention.json", "JSON"),
+        ("experiment_card_json", "Experiment card JSON", root / "experiment_card.json", "JSON"),
+        ("experiment_card_md", "Experiment card Markdown", root / "experiment_card.md", "MD"),
+        ("experiment_card_html", "Experiment card HTML", root / "experiment_card.html", "HTML"),
     ]
     return [
         _link(key, title, path, kind, base_dir, assume_exists=(key == "playground"))

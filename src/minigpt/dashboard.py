@@ -107,6 +107,9 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("attention_svg", "Attention chart", "attention/attention.svg", "SVG", "attention heatmap"),
         ("transcript", "Chat transcript", "transcript.json", "JSON", "one-shot or interactive chat transcript"),
         ("generated", "Generated text", "generated.txt", "TXT", "standalone generation output"),
+        ("experiment_card_json", "Experiment card", "experiment_card.json", "JSON", "machine-readable experiment card"),
+        ("experiment_card_md", "Experiment card markdown", "experiment_card.md", "MD", "shareable experiment summary"),
+        ("experiment_card_html", "Experiment card HTML", "experiment_card.html", "HTML", "browser-readable experiment card"),
     ]
     return [
         _artifact(key, title, root / relative, kind, description, base)

@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 22 is a MiniGPT learning project with registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 23 is a MiniGPT learning project with generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -20,6 +20,7 @@ Version 22 is a MiniGPT learning project with registry loss leaderboards and run
 - Registry HTML view state in the URL plus visible-row CSV export for sharing and downstream analysis
 - Optional `run_notes.json` annotations with note text, tags, tag counts, CSV columns, SVG summary text, and searchable HTML chips
 - Registry best-val leaderboard with per-run rank, loss delta from the current best run, CSV columns, SVG labels, and an HTML leaderboard section
+- Experiment card exporter that summarizes one run into `experiment_card.json`, `experiment_card.md`, and `experiment_card.html`, with registry rank, notes, data quality, training, evaluation, artifact, and recommendation sections
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -44,7 +45,7 @@ Version 22 is a MiniGPT learning project with registry loss leaderboards and run
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, and registry leaderboards
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, and experiment cards
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -75,6 +76,7 @@ v19.0.0 MiniGPT v19 registry interactions
 v20.0.0 MiniGPT v20 registry saved views
 v21.0.0 MiniGPT v21 registry annotations
 v22.0.0 MiniGPT v22 registry leaderboards
+v23.0.0 MiniGPT v23 experiment cards
 ```
 
 ## Project structure
@@ -169,7 +171,11 @@ v22.0.0 MiniGPT v22 registry leaderboards
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 22/
+│   ├── 22/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 23/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -178,6 +184,7 @@ v22.0.0 MiniGPT v22 registry leaderboards
 │   └── sample_zh.txt
 ├── scripts/
 │   ├── build_dashboard.py
+│   ├── build_experiment_card.py
 │   ├── build_playground.py
 │   ├── chat.py
 │   ├── compare_runs.py
@@ -205,6 +212,7 @@ v22.0.0 MiniGPT v22 registry leaderboards
 │       ├── data_quality.py
 │       ├── dataset.py
 │       ├── eval_suite.py
+│       ├── experiment_card.py
 │       ├── history.py
 │       ├── manifest.py
 │       ├── model.py
@@ -224,6 +232,7 @@ v22.0.0 MiniGPT v22 registry leaderboards
 │   ├── test_data_quality.py
 │   ├── test_dataset.py
 │   ├── test_eval_suite.py
+│   ├── test_experiment_card.py
 │   ├── test_history.py
 │   ├── test_manifest.py
 │   ├── test_model.py
@@ -272,7 +281,8 @@ v22.0.0 MiniGPT v22 registry leaderboards
 │   ├── 34-v19-registry-interactions.md
 │   ├── 35-v20-registry-saved-views.md
 │   ├── 36-v21-registry-annotations.md
-│   └── 37-v22-registry-leaderboards.md
+│   ├── 37-v22-registry-leaderboards.md
+│   └── 38-v23-experiment-cards.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -427,6 +437,14 @@ Save that as `run_notes.json` inside the run directory. The registry will includ
 
 The registry also ranks runs by `best_val_loss`. `registry.json` includes `loss_leaderboard`, each run gets `best_val_loss_rank`, `best_val_loss_delta`, and `is_best_val_loss`, and the HTML report shows a Loss Leaderboard panel plus rank/delta sorting.
 
+Build a single-run experiment card:
+
+```powershell
+python scripts/build_experiment_card.py --run-dir runs/minigpt --registry runs/registry/registry.json
+```
+
+The output directory contains `experiment_card.json`, `experiment_card.md`, and `experiment_card.html`. The card summarizes run status, notes/tags, dataset quality, training settings, evaluation, registry rank, artifacts, and follow-up recommendations.
+
 Discover run directories under a parent:
 
 ```powershell
@@ -526,6 +544,8 @@ a/21/图片
 a/21/解释/说明.md
 a/22/图片
 a/22/解释/说明.md
+a/23/图片
+a/23/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -704,6 +724,14 @@ Version 22 screenshots:
 - `04-playwright-leaderboard-screenshot.png`: registry HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v22 docs and archive check
 
+Version 23 screenshots:
+
+- `01-unit-tests.png`: experiment card and integration tests plus existing regression tests
+- `02-experiment-card-smoke.png`: two small runs, registry ranking, card generation, dashboard/playground integration, and registry refresh
+- `03-experiment-card-structure-check.png`: JSON/Markdown/HTML card fields plus dashboard/playground/registry links
+- `04-playwright-experiment-card.png`: experiment card HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v23 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -752,6 +780,7 @@ Suggested reading order:
 35-v20-registry-saved-views.md
 36-v21-registry-annotations.md
 37-v22-registry-leaderboards.md
+38-v23-experiment-cards.md
 ```
 
 ## Learning map
@@ -789,9 +818,11 @@ The eval suite layer runs a fixed set of prompts against a checkpoint and saves 
 
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
+The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add a model card or experiment card generated from registry and manifest data.
+- Add a richer model card that compares several experiment cards.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

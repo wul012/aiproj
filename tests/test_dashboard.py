@@ -18,6 +18,7 @@ class DashboardTests(unittest.TestCase):
             run_dir = Path(tmp)
             (run_dir / "checkpoint.pt").write_bytes(b"fake")
             (run_dir / "run_manifest.json").write_text(json.dumps({"git": {"short_commit": "abc1234"}}), encoding="utf-8")
+            (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
 
             artifacts = collect_artifacts(run_dir, run_dir)
 
@@ -26,6 +27,8 @@ class DashboardTests(unittest.TestCase):
             self.assertEqual(checkpoint.href, "checkpoint.pt")
             manifest = next(artifact for artifact in artifacts if artifact.key == "run_manifest")
             self.assertTrue(manifest.exists)
+            card = next(artifact for artifact in artifacts if artifact.key == "experiment_card_html")
+            self.assertTrue(card.exists)
 
     def test_build_payload_reads_summary_sources(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

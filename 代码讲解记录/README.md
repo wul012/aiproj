@@ -123,6 +123,8 @@
  -> registry.py、register_runs.py、test_registry.py：读取 run_notes.json，把 notes/tags 纳入 registry JSON/CSV/SVG/HTML
 37-v22-registry-leaderboards.md
  -> registry.py、register_runs.py、test_registry.py：给 registry 增加 best-val 排名、loss delta 和 HTML leaderboard
+38-v23-experiment-cards.md
+ -> experiment_card.py、build_experiment_card.py、dashboard.py、playground.py、registry.py：把单个 run 汇总成 JSON/Markdown/HTML 实验卡
 ```
 
 ## 项目整体理解
@@ -158,6 +160,7 @@
  -> /api/generate 本地调用 checkpoint 生成
  -> registry.json/csv/svg 索引多个实验 run
  -> registry.html 在浏览器里浏览、搜索、筛选、排序、分享和导出多个 run、notes、tags、质量状态、best-val 排名、loss delta 和 artifact 链接
+ -> experiment_card.json/md/html 汇总单个 run 的状态、数据、训练、评估、registry 排名和建议
  -> tokenizer.decode
  -> 生成文本
 ```

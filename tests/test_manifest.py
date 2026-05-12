@@ -27,6 +27,7 @@ class ManifestTests(unittest.TestCase):
             run_dir = Path(tmp)
             (run_dir / "checkpoint.pt").write_bytes(b"model")
             (run_dir / "metrics.jsonl").write_text("{}", encoding="utf-8")
+            (run_dir / "experiment_card.md").write_text("# card", encoding="utf-8")
 
             artifacts = collect_run_artifacts(run_dir)
 
@@ -34,6 +35,8 @@ class ManifestTests(unittest.TestCase):
             self.assertTrue(checkpoint["exists"])
             self.assertEqual(checkpoint["path"], "checkpoint.pt")
             self.assertIsNotNone(checkpoint["sha256"])
+            card = next(item for item in artifacts if item["key"] == "experiment_card_md")
+            self.assertTrue(card["exists"])
 
     def test_build_run_manifest_records_reproducibility_fields(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
