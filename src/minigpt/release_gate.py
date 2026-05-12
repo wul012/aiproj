@@ -16,12 +16,18 @@ def build_release_gate(
     *,
     minimum_audit_score: float = 90.0,
     minimum_ready_runs: int = 1,
+    require_generation_quality: bool = True,
     title: str = "MiniGPT release gate",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     bundle_file = Path(bundle_path)
     bundle = _read_required_json(bundle_file)
-    checks = _build_checks(bundle, minimum_audit_score=minimum_audit_score, minimum_ready_runs=minimum_ready_runs)
+    checks = _build_checks(
+        bundle,
+        minimum_audit_score=minimum_audit_score,
+        minimum_ready_runs=minimum_ready_runs,
+        require_generation_quality=require_generation_quality,
+    )
     summary = _build_summary(bundle, checks)
 
     return {
@@ -36,6 +42,7 @@ def build_release_gate(
             "minimum_audit_score": float(minimum_audit_score),
             "minimum_ready_runs": int(minimum_ready_runs),
             "require_all_evidence_artifacts": True,
+            "require_generation_quality_audit_checks": bool(require_generation_quality),
         },
         "summary": summary,
         "checks": checks,
@@ -184,7 +191,13 @@ def _read_required_json(path: Path) -> dict[str, Any]:
     return payload
 
 
-def _build_checks(bundle: dict[str, Any], *, minimum_audit_score: float, minimum_ready_runs: int) -> list[dict[str, Any]]:
+def _build_checks(
+    bundle: dict[str, Any],
+    *,
+    minimum_audit_score: float,
+    minimum_ready_runs: int,
+    require_generation_quality: bool,
+) -> list[dict[str, Any]]:
     summary = _dict(bundle.get("summary"))
     release_status = summary.get("release_status")
     audit_status = summary.get("audit_status")
@@ -250,6 +263,12 @@ def _build_checks(bundle: dict[str, Any], *, minimum_audit_score: float, minimum
             "Audit checks are clean",
             _audit_checks_result(audit_checks),
             _audit_checks_detail(audit_checks),
+        ),
+        _check(
+            "generation_quality_audit_checks",
+            "Generation quality audit checks passed",
+            _generation_quality_audit_result(audit_checks, require_generation_quality),
+            _generation_quality_audit_detail(audit_checks, require_generation_quality),
         ),
         _check(
             "bundle_warnings",
@@ -321,6 +340,38 @@ def _audit_checks_detail(audit_checks: list[dict[str, Any]]) -> str:
         status_counts[status] = status_counts.get(status, 0) + 1
     ordered = [f"{key}={status_counts[key]}" for key in sorted(status_counts)]
     return ", ".join(ordered) + "."
+
+
+def _generation_quality_audit_result(audit_checks: list[dict[str, Any]], require_generation_quality: bool) -> str:
+    if not require_generation_quality:
+        return "pass"
+    by_id = _audit_checks_by_id(audit_checks)
+    required = ["generation_quality", "non_pass_generation_quality"]
+    statuses = [str(_dict(by_id.get(check_id)).get("status") or "missing") for check_id in required]
+    if "missing" in statuses or "fail" in statuses:
+        return "fail"
+    if "warn" in statuses:
+        return "warn"
+    return "pass"
+
+
+def _generation_quality_audit_detail(audit_checks: list[dict[str, Any]], require_generation_quality: bool) -> str:
+    if not require_generation_quality:
+        return "generation quality audit checks are not required by policy."
+    by_id = _audit_checks_by_id(audit_checks)
+    required = ["generation_quality", "non_pass_generation_quality"]
+    missing = [check_id for check_id in required if check_id not in by_id]
+    if missing:
+        return "missing required audit check(s): " + ", ".join(missing) + "."
+    details = []
+    for check_id in required:
+        check = _dict(by_id.get(check_id))
+        details.append(f"{check_id}={check.get('status') or 'missing'}")
+    return ", ".join(details) + "."
+
+
+def _audit_checks_by_id(audit_checks: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    return {str(check.get("id")): check for check in audit_checks if check.get("id")}
 
 
 def _recommendations(summary: dict[str, Any], checks: list[dict[str, Any]], bundle: dict[str, Any]) -> list[str]:

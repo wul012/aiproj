@@ -151,6 +151,8 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
  -> generation_quality.py、analyze_generation_quality.py、test_generation_quality.py：读取 eval suite/sample lab 输出并检查生成长度、多样性、重复和 prompt echo
 44-v29-generation-quality-chain.md
  -> registry.py、model_card.py、project_audit.py：把 generation_quality.json 接入 registry/model card/audit 证据链
+45-v30-release-gate-generation-quality-policy.md
+ -> release_gate.py、check_release_gate.py、test_release_gate.py：把 generation quality audit checks 变成 release gate 显式策略
 ```
 
 ## 项目整体理解
@@ -193,6 +195,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
  -> project_audit.json/md/html 检查实验系列是否满足 release-style review 的基本门禁
  -> release_bundle.json/md/html 汇总最终交付证据、审计状态、top runs 和 artifact 链接
  -> gate_report.json/md/html 把 release bundle 转成可自动化的 pass/warn/fail 放行决策
+ -> release gate policy 显式要求 generation_quality / non_pass_generation_quality audit checks
  -> tokenizer.decode
  -> 生成文本
 ```

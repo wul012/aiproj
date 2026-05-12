@@ -32,7 +32,27 @@ def make_bundle(
     ready_runs: int = 1,
     missing_artifacts: int = 0,
     warnings: list[str] | None = None,
+    include_generation_checks: bool = True,
+    generation_status: str = "pass",
 ) -> Path:
+    audit_checks = [{"id": "ready_run", "title": "At least one ready run", "status": audit_status, "detail": "1 ready run."}]
+    if include_generation_checks:
+        audit_checks.extend(
+            [
+                {
+                    "id": "generation_quality",
+                    "title": "Generation quality coverage",
+                    "status": generation_status,
+                    "detail": "2/2 run(s).",
+                },
+                {
+                    "id": "non_pass_generation_quality",
+                    "title": "No non-pass generation quality runs",
+                    "status": generation_status,
+                    "detail": "all analyzed runs pass",
+                },
+            ]
+        )
     bundle = {
         "schema_version": 1,
         "title": "MiniGPT release bundle",
@@ -65,9 +85,7 @@ def make_bundle(
                 "eval_suite_cases": 3,
             }
         ],
-        "audit_checks": [
-            {"id": "ready_run", "title": "At least one ready run", "status": audit_status, "detail": "1 ready run."}
-        ],
+        "audit_checks": audit_checks,
         "recommendations": ["Release evidence is complete."],
         "warnings": warnings or [],
     }
@@ -86,6 +104,8 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["summary"]["gate_status"], "pass")
             self.assertEqual(gate["summary"]["decision"], "approved")
             self.assertEqual(gate["summary"]["fail_count"], 0)
+            self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], True)
+            self.assertIn("generation_quality_audit_checks", {check["id"] for check in gate["checks"]})
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertIn("Release gate passed", " ".join(gate["recommendations"]))
 
@@ -100,6 +120,42 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
             self.assertIn("Bundle has no warnings", " ".join(gate["recommendations"]))
+
+    def test_build_release_gate_fails_when_generation_quality_checks_are_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_generation_checks=False)
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "fail")
+            self.assertEqual(gate["summary"]["decision"], "blocked")
+            check = next(item for item in gate["checks"] if item["id"] == "generation_quality_audit_checks")
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("missing required audit check", check["detail"])
+            self.assertEqual(exit_code_for_gate(gate), 1)
+
+    def test_build_release_gate_can_allow_legacy_bundles_without_generation_quality(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_generation_checks=False)
+
+            gate = build_release_gate(bundle_path, require_generation_quality=False)
+
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
+            self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
+            check = next(item for item in gate["checks"] if item["id"] == "generation_quality_audit_checks")
+            self.assertEqual(check["status"], "pass")
+
+    def test_build_release_gate_warns_for_generation_quality_audit_warnings(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), generation_status="warn")
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "warn")
+            check = next(item for item in gate["checks"] if item["id"] == "generation_quality_audit_checks")
+            self.assertEqual(check["status"], "warn")
+            self.assertEqual(exit_code_for_gate(gate), 0)
+            self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
 
     def test_build_release_gate_fails_for_incomplete_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
