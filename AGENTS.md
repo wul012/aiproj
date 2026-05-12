@@ -8,7 +8,13 @@ Before sending the final response for any task, perform a cleanup pass for files
 
 ## Code Explanation Rule
 
-后续新增或更新 `代码讲解记录/*.md` 时，讲解风格要向 `D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md` 靠齐。
+后续新增或更新 `代码讲解记录/*.md` 或 `代码讲解记录_*/*.md` 时，讲解风格要向 `D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md` 靠齐。
+
+代码讲解目录按阶段拆分：
+
+- `代码讲解记录/` 保留 v1-v30 的历史讲解，45 篇不需要迁移；后续只做必要修正，不再继续堆新版本。
+- 从 v31 开始，新讲解写入 `代码讲解记录_发布治理阶段/`，文件编号继续全局递增，例如 `46-v31-主题.md`。
+- 如果项目进入新的大阶段，再新建同级目录 `代码讲解记录_阶段名称/`，不要回头移动旧阶段文件。
 
 具体要求：
 

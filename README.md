@@ -302,47 +302,9 @@ v30.0.0 MiniGPT v30 release gate generation quality policy
 │   └── test_tokenizer.py
 ├── 代码讲解记录/
 │   ├── README.md
-│   ├── 01-tokenizer-and-dataset.md
-│   ├── 02-model-core.md
-│   ├── 03-train-generate.md
-│   ├── 04-tests-docs.md
-│   ├── 05-v2-training-artifacts.md
-│   ├── 06-version-2-tests-docs.md
-│   ├── 07-v3-bpe-tokenizer.md
-│   ├── 08-version-3-tests-docs.md
-│   ├── 09-v4-attention-inspection.md
-│   ├── 10-version-4-tests-docs.md
-│   ├── 11-v5-prediction-evaluation.md
-│   ├── 12-version-5-tests-docs.md
-│   ├── 13-v6-chat-wrapper.md
-│   ├── 14-version-6-tests-docs.md
-│   ├── 15-v7-model-report.md
-│   ├── 16-version-7-tests-docs.md
-│   ├── 17-v8-dashboard.md
-│   ├── 18-version-8-tests-docs.md
-│   ├── 19-v9-run-comparison.md
-│   ├── 20-version-9-tests-docs.md
-│   ├── 21-v10-sampling-lab.md
-│   ├── 22-version-10-tests-docs.md
-│   ├── 23-v11-playground-ui.md
-│   ├── 24-version-11-tests-docs.md
-│   ├── 25-v12-playground-server.md
-│   ├── 26-version-12-tests-docs.md
-│   ├── 27-v13-dataset-preparation.md
-│   ├── 28-version-13-tests-docs.md
-│   ├── 29-v14-run-manifest.md
-│   ├── 30-v15-dataset-quality.md
-│   ├── 31-v16-eval-suite.md
-│   ├── 32-v17-run-registry.md
-│   ├── 33-v18-registry-html.md
-│   ├── 34-v19-registry-interactions.md
-│   ├── 35-v20-registry-saved-views.md
-│   ├── 36-v21-registry-annotations.md
-│   ├── 37-v22-registry-leaderboards.md
-│   ├── 38-v23-experiment-cards.md
-│   ├── 39-v24-model-cards.md
-│   ├── 40-v25-project-audit.md
-│   └── 41-v26-release-bundle.md
+│   └── 01-...45-*.md
+├── 代码讲解记录_发布治理阶段/
+│   └── README.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -912,9 +874,12 @@ Start here:
 
 ```text
 代码讲解记录/README.md
+代码讲解记录_发布治理阶段/README.md
 ```
 
-Suggested reading order:
+The original `代码讲解记录` directory keeps the v1-v30 history in place. Starting with v31, new code explanation records should be written to `代码讲解记录_发布治理阶段` so the project can split future phases without moving old evidence.
+
+First-stage reading order:
 
 ```text
 01-tokenizer-and-dataset.md
@@ -962,6 +927,14 @@ Suggested reading order:
 43-v28-generation-quality.md
 44-v29-generation-quality-chain.md
 45-v30-release-gate-generation-quality-policy.md
+```
+
+Future release-governance records continue with the same global numbering:
+
+```text
+代码讲解记录_发布治理阶段/
+46-v31-待定主题.md
+47-v32-待定主题.md
 ```
 
 ## Learning map
