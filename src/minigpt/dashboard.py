@@ -29,7 +29,7 @@ def _read_json(path: Path, warnings: list[str]) -> dict[str, Any] | list[Any] | 
     if not path.exists():
         return None
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as exc:
         warnings.append(f"{path.name} is not valid JSON: {exc}")
         return None

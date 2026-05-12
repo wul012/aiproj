@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 10 is a MiniGPT learning project with a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 11 is a MiniGPT learning project with a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -18,6 +18,7 @@ Version 10 is a MiniGPT learning project with a sampling lab, multi-run comparis
 - Evaluation script that reports validation loss and perplexity for a checkpoint
 - Model report script that exports parameter groups, per-block parameter counts, tensor shapes, JSON reports, and SVG architecture diagrams
 - Dashboard builder that combines run artifacts into a local `dashboard.html` report
+- Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, and artifact links
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
 - Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
 - Chat prompt utilities for formatting system/user/assistant turns, trimming context windows, and stopping at role markers
@@ -29,8 +30,8 @@ Version 10 is a MiniGPT learning project with a sampling lab, multi-run comparis
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, and sampling lab
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, and sampling lab
+- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, and playground UI export
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, and playground UI
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -49,6 +50,7 @@ v7.0.0  MiniGPT v7 model report
 v8.0.0  MiniGPT v8 dashboard
 v9.0.0  MiniGPT v9 run comparison
 v10.0.0 MiniGPT v10 sampling lab
+v11.0.0 MiniGPT v11 playground UI
 ```
 
 ## Project structure
@@ -95,7 +97,11 @@ v10.0.0 MiniGPT v10 sampling lab
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 10/
+│   ├── 10/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 11/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -103,6 +109,7 @@ v10.0.0 MiniGPT v10 sampling lab
 │   └── sample_zh.txt
 ├── scripts/
 │   ├── build_dashboard.py
+│   ├── build_playground.py
 │   ├── chat.py
 │   ├── compare_runs.py
 │   ├── evaluate.py
@@ -125,6 +132,7 @@ v10.0.0 MiniGPT v10 sampling lab
 │       ├── model.py
 │       ├── model_report.py
 │       ├── prediction.py
+│       ├── playground.py
 │       ├── sampling.py
 │       └── tokenizer.py
 ├── tests/
@@ -136,6 +144,7 @@ v10.0.0 MiniGPT v10 sampling lab
 │   ├── test_history.py
 │   ├── test_model.py
 │   ├── test_model_report.py
+│   ├── test_playground.py
 │   ├── test_prediction.py
 │   ├── test_sampling.py
 │   └── test_tokenizer.py
@@ -162,7 +171,9 @@ v10.0.0 MiniGPT v10 sampling lab
 │   ├── 19-v9-run-comparison.md
 │   ├── 20-version-9-tests-docs.md
 │   ├── 21-v10-sampling-lab.md
-│   └── 22-version-10-tests-docs.md
+│   ├── 22-version-10-tests-docs.md
+│   ├── 23-v11-playground-ui.md
+│   └── 24-version-11-tests-docs.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -258,6 +269,12 @@ Build a static experiment dashboard:
 python scripts/build_dashboard.py --run-dir runs/minigpt
 ```
 
+Build a static playground UI:
+
+```powershell
+python scripts/build_playground.py --run-dir runs/minigpt
+```
+
 Compare multiple run directories:
 
 ```powershell
@@ -327,6 +344,8 @@ a/9/图片
 a/9/解释/说明.md
 a/10/图片
 a/10/解释/说明.md
+a/11/图片
+a/11/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -409,6 +428,14 @@ Version 10 screenshots:
 - `04-sampling-artifacts-check.png`: sampling artifact structure check
 - `05-docs-check.png`: v10 docs and archive check
 
+Version 11 screenshots:
+
+- `01-unit-tests.png`: playground UI, dashboard, and comparison regression tests; full torch-backed test discovery was attempted but timed out in this Windows session
+- `02-playground-artifacts-smoke.png`: lightweight run artifacts prepared for playground
+- `03-build-playground.png`: playground HTML export
+- `04-playground-html-check.png`: generated playground structure check
+- `05-docs-check.png`: v11 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -442,6 +469,8 @@ Suggested reading order:
 20-version-9-tests-docs.md
 21-v10-sampling-lab.md
 22-version-10-tests-docs.md
+23-v11-playground-ui.md
+24-version-11-tests-docs.md
 ```
 
 ## Learning map
@@ -465,8 +494,10 @@ The comparison exporter reads multiple run directories and makes side-by-side ex
 
 The sampling lab compares how generation changes when temperature, top-k, and seed change.
 
+The playground UI turns a run directory into a local browser surface for prompt controls, command snippets, sampling tables, and artifact links.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add a simple Web UI for chat and inspection artifacts.
+- Add a lightweight local API server so the playground can run generation live.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

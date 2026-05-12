@@ -1,14 +1,9 @@
 """MiniGPT learning project."""
 
-from .chat import ChatTurn, PreparedChatPrompt, build_chat_prompt
-from .comparison import RunComparison, build_comparison_report
-from .dashboard import DashboardArtifact, build_dashboard_payload, write_dashboard
-from .history import TrainingRecord
-from .model import GPTConfig, MiniGPT
-from .model_report import ParameterGroup, build_model_report
-from .prediction import TokenPrediction
-from .sampling import SamplingCase, SamplingResult, default_sampling_cases
-from .tokenizer import BPETokenizer, CharTokenizer, load_tokenizer
+from __future__ import annotations
+
+from importlib import import_module
+from typing import Any
 
 __all__ = [
     "GPTConfig",
@@ -28,7 +23,45 @@ __all__ = [
     "write_dashboard",
     "ParameterGroup",
     "build_model_report",
+    "PlaygroundLink",
+    "build_playground_payload",
+    "write_playground",
     "SamplingCase",
     "SamplingResult",
     "default_sampling_cases",
 ]
+
+_EXPORTS = {
+    "GPTConfig": ("model", "GPTConfig"),
+    "MiniGPT": ("model", "MiniGPT"),
+    "CharTokenizer": ("tokenizer", "CharTokenizer"),
+    "BPETokenizer": ("tokenizer", "BPETokenizer"),
+    "load_tokenizer": ("tokenizer", "load_tokenizer"),
+    "TrainingRecord": ("history", "TrainingRecord"),
+    "TokenPrediction": ("prediction", "TokenPrediction"),
+    "ChatTurn": ("chat", "ChatTurn"),
+    "PreparedChatPrompt": ("chat", "PreparedChatPrompt"),
+    "build_chat_prompt": ("chat", "build_chat_prompt"),
+    "RunComparison": ("comparison", "RunComparison"),
+    "build_comparison_report": ("comparison", "build_comparison_report"),
+    "DashboardArtifact": ("dashboard", "DashboardArtifact"),
+    "build_dashboard_payload": ("dashboard", "build_dashboard_payload"),
+    "write_dashboard": ("dashboard", "write_dashboard"),
+    "ParameterGroup": ("model_report", "ParameterGroup"),
+    "build_model_report": ("model_report", "build_model_report"),
+    "PlaygroundLink": ("playground", "PlaygroundLink"),
+    "build_playground_payload": ("playground", "build_playground_payload"),
+    "write_playground": ("playground", "write_playground"),
+    "SamplingCase": ("sampling", "SamplingCase"),
+    "SamplingResult": ("sampling", "SamplingResult"),
+    "default_sampling_cases": ("sampling", "default_sampling_cases"),
+}
+
+
+def __getattr__(name: str) -> Any:
+    if name not in _EXPORTS:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    module_name, attr_name = _EXPORTS[name]
+    value = getattr(import_module(f"{__name__}.{module_name}"), attr_name)
+    globals()[name] = value
+    return value

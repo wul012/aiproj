@@ -79,6 +79,12 @@
 
 22-version-10-tests-docs.md
  -> v10 sampling smoke、README、a/10 归档和 tag 说明
+
+23-v11-playground-ui.md
+ -> playground.py、build_playground.py：生成本地静态 Playground Web UI
+
+24-version-11-tests-docs.md
+ -> v11 playground smoke、README、a/11 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -105,6 +111,7 @@
  -> dashboard.html 汇总实验产物
  -> comparison.json/csv/svg 横向比较多个 run
  -> sample_lab.json/csv/svg 比较采样参数
+ -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> tokenizer.decode
  -> 生成文本
 ```

@@ -182,7 +182,7 @@ def _best_run(runs: list[RunComparison], field: str) -> dict[str, Any] | None:
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:
     if not path.exists():
         return None
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def _line_count(path: Path) -> int:
