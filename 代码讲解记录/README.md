@@ -55,6 +55,12 @@
 
 14-version-6-tests-docs.md
  -> v6 chat smoke、README、a/6 归档和 tag 说明
+
+15-v7-model-report.md
+ -> model_report.py、inspect_model.py：导出模型结构、参数量和关键张量形状
+
+16-version-7-tests-docs.md
+ -> v7 model report smoke、README、a/7 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -67,6 +73,7 @@
 中文文本
  -> CharTokenizer 或 BPETokenizer encode
  -> token id 序列
+ -> model report 可检查参数量和张量形状
  -> get_batch 采样 x/y
  -> MiniGPT.forward
  -> attention capture 可选记录每层注意力矩阵
