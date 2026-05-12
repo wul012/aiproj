@@ -106,6 +106,9 @@
 
 31-v16-eval-suite.md
  -> eval_suite.py、scripts/eval_suite.py、data/eval_prompts.json：固定 prompt 评估套件
+
+32-v17-run-registry.md
+ -> registry.py、scripts/register_runs.py：索引多个 run 的 manifest、数据指纹、质量状态和 eval suite
 ```
 
 ## 项目整体理解
@@ -139,6 +142,7 @@
  -> sample_lab.json/csv/svg 比较采样参数
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> /api/generate 本地调用 checkpoint 生成
+ -> registry.json/csv/svg 索引多个实验 run
  -> tokenizer.decode
  -> 生成文本
 ```

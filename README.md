@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 16 is a MiniGPT learning project with a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 17 is a MiniGPT learning project with a run registry for indexing experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -14,6 +14,7 @@ Version 16 is a MiniGPT learning project with a fixed prompt evaluation suite, d
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
 - Fixed prompt evaluation suite for running the same prompts against different checkpoints and exporting JSON/CSV/SVG reports
+- Run registry builder that indexes multiple run directories, manifests, data fingerprints, quality status, eval suite summaries, metrics, and artifacts
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -25,6 +26,7 @@ Version 16 is a MiniGPT learning project with a fixed prompt evaluation suite, d
 - Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, eval suites, run manifests, dataset quality reports, and artifact links
 - Playground server that serves the UI and exposes `/api/health` plus `/api/generate` for local live generation
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
+- Run registry script that discovers or accepts run directories and exports registry JSON/CSV/SVG summaries
 - Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
 - Chat prompt utilities for formatting system/user/assistant turns, trimming context windows, and stopping at role markers
 - Chat script for one-shot or interactive assistant-style generation from a checkpoint, with transcript JSON output
@@ -36,8 +38,8 @@ Version 16 is a MiniGPT learning project with a fixed prompt evaluation suite, d
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, and eval suites
+- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, and run registry
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -62,6 +64,7 @@ v13.0.0 MiniGPT v13 dataset preparation
 v14.0.0 MiniGPT v14 run manifest
 v15.0.0 MiniGPT v15 dataset quality
 v16.0.0 MiniGPT v16 eval suite
+v17.0.0 MiniGPT v17 run registry
 ```
 
 ## Project structure
@@ -132,7 +135,11 @@ v16.0.0 MiniGPT v16 eval suite
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 16/
+│   ├── 16/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 17/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -153,6 +160,7 @@ v16.0.0 MiniGPT v16 eval suite
 │   ├── inspect_tokenizer.py
 │   ├── plot_history.py
 │   ├── prepare_dataset.py
+│   ├── register_runs.py
 │   ├── sample_lab.py
 │   ├── serve_playground.py
 │   └── train.py
@@ -171,6 +179,7 @@ v16.0.0 MiniGPT v16 eval suite
 │       ├── model.py
 │       ├── model_report.py
 │       ├── prediction.py
+│       ├── registry.py
 │       ├── playground.py
 │       ├── sampling.py
 │       ├── server.py
@@ -190,6 +199,7 @@ v16.0.0 MiniGPT v16 eval suite
 │   ├── test_model_report.py
 │   ├── test_playground.py
 │   ├── test_prediction.py
+│   ├── test_registry.py
 │   ├── test_sampling.py
 │   ├── test_server.py
 │   └── test_tokenizer.py
@@ -225,7 +235,8 @@ v16.0.0 MiniGPT v16 eval suite
 │   ├── 28-version-13-tests-docs.md
 │   ├── 29-v14-run-manifest.md
 │   ├── 30-v15-dataset-quality.md
-│   └── 31-v16-eval-suite.md
+│   ├── 31-v16-eval-suite.md
+│   └── 32-v17-run-registry.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -359,6 +370,18 @@ Compare multiple run directories:
 python scripts/compare_runs.py runs/tiny runs/wide --name tiny --name wide --out-dir runs/comparison
 ```
 
+Build a run registry from multiple run directories:
+
+```powershell
+python scripts/register_runs.py runs/tiny runs/wide --name tiny --name wide --out-dir runs/registry
+```
+
+Discover run directories under a parent:
+
+```powershell
+python scripts/register_runs.py --discover runs --out-dir runs/registry
+```
+
 Compare sampling settings for one checkpoint:
 
 ```powershell
@@ -434,6 +457,8 @@ a/15/图片
 a/15/解释/说明.md
 a/16/图片
 a/16/解释/说明.md
+a/17/图片
+a/17/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -564,6 +589,14 @@ Version 16 screenshots:
 - `04-dashboard-playground-eval-suite.png`: dashboard/playground eval suite artifact checks
 - `05-docs-check.png`: v16 docs and archive check
 
+Version 17 screenshots:
+
+- `01-unit-tests.png`: run registry and existing regression tests
+- `02-registry-runs-smoke.png`: two run directories prepared with eval suite/dashboard artifacts
+- `03-register-runs.png`: registry JSON/CSV/SVG export
+- `04-registry-json-check.png`: registry best run, quality counts, fingerprints, and artifact checks
+- `05-docs-check.png`: v17 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -606,6 +639,7 @@ Suggested reading order:
 29-v14-run-manifest.md
 30-v15-dataset-quality.md
 31-v16-eval-suite.md
+32-v17-run-registry.md
 ```
 
 ## Learning map
@@ -641,9 +675,11 @@ The dataset quality layer adds a stable corpus fingerprint plus lightweight chec
 
 The eval suite layer runs a fixed set of prompts against a checkpoint and saves comparable JSON/CSV/SVG outputs.
 
+The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, and artifact count.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add a run registry that indexes multiple eval suite results.
+- Add a registry HTML report for browsing many runs.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
