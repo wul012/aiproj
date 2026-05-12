@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import shutil
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -14,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.dataset import get_batch, load_text, split_token_ids
+from minigpt.data_prep import build_dataset_report, build_prepared_dataset, write_dataset_report_json, write_dataset_report_svg
 from minigpt.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer
@@ -22,6 +24,8 @@ from minigpt.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_token
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train a tiny GPT language model.")
     parser.add_argument("--data", type=Path, default=ROOT / "data" / "sample_zh.txt")
+    parser.add_argument("--data-dir", type=Path, default=None, help="Directory of .txt files to merge for training")
+    parser.add_argument("--prepared-data", type=Path, default=None, help="Prepared corpus text file from prepare_dataset.py")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "minigpt")
     parser.add_argument("--resume", type=Path, default=None, help="Resume from a previous checkpoint.pt")
     parser.add_argument("--tokenizer", choices=["char", "bpe"], default="char")
@@ -105,6 +109,41 @@ def train_tokenizer(args: argparse.Namespace, text: str) -> Tokenizer:
     return CharTokenizer.train(text)
 
 
+def load_training_text(args: argparse.Namespace) -> tuple[str, dict[str, object], object | None]:
+    provided = [args.data_dir is not None, args.prepared_data is not None]
+    if sum(provided) > 1:
+        raise ValueError("Use only one of --data-dir or --prepared-data")
+    if args.prepared_data is not None:
+        text = load_text(args.prepared_data)
+        return text, {"kind": "prepared_data", "path": str(args.prepared_data)}, None
+    if args.data_dir is not None:
+        dataset = build_prepared_dataset([args.data_dir], recursive=True)
+        return text_or_raise(dataset.text, args.data_dir), {
+            "kind": "data_dir",
+            "path": str(args.data_dir),
+            "source_count": len(dataset.sources),
+        }, dataset
+    text = load_text(args.data)
+    return text, {"kind": "data", "path": str(args.data)}, None
+
+
+def text_or_raise(text: str, source: Path) -> str:
+    if not text.strip():
+        raise ValueError(f"Training data is empty: {source}")
+    return text
+
+
+def copy_prepared_artifacts(prepared_data: Path, out_dir: Path) -> None:
+    prepared_copy = out_dir / "prepared_corpus.txt"
+    if prepared_data.resolve() != prepared_copy.resolve():
+        shutil.copyfile(prepared_data, prepared_copy)
+
+    for artifact_name in ("dataset_report.json", "dataset_report.svg"):
+        artifact_path = prepared_data.parent / artifact_name
+        if artifact_path.exists():
+            shutil.copyfile(artifact_path, out_dir / artifact_name)
+
+
 @torch.no_grad()
 def write_sample(
     model: MiniGPT,
@@ -152,7 +191,7 @@ def main() -> None:
     random.seed(args.seed)
 
     device = choose_device(args.device)
-    text = load_text(args.data)
+    text, data_source, prepared_dataset = load_training_text(args)
 
     checkpoint = None
     resume_step = 0
@@ -191,10 +230,19 @@ def main() -> None:
     print(f"tokenizer={getattr(tokenizer, 'name', 'unknown')}")
     print(f"tokens={len(token_ids)} vocab_size={tokenizer.vocab_size}")
     print(f"parameters={model.parameter_count():,}")
+    print(f"data_source={data_source['kind']}:{data_source['path']}")
     if args.resume is not None:
         print(f"resume={args.resume} resume_step={resume_step} target_step={args.max_iters}")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    if prepared_dataset is not None:
+        prepared_path = args.out_dir / "prepared_corpus.txt"
+        prepared_path.write_text(prepared_dataset.text, encoding="utf-8")
+        report = build_dataset_report(prepared_dataset, output_text=prepared_path)
+        write_dataset_report_json(report, args.out_dir / "dataset_report.json")
+        write_dataset_report_svg(report, args.out_dir / "dataset_report.svg")
+    elif args.prepared_data is not None:
+        copy_prepared_artifacts(args.prepared_data, args.out_dir)
     history_path = args.out_dir / "metrics.jsonl"
     if args.resume is None and history_path.exists():
         history_path.unlink()
@@ -262,11 +310,12 @@ def main() -> None:
         "history_file": "metrics.jsonl",
         "sample_file": None if args.no_sample else "sample.txt",
         "tokenizer_type": getattr(tokenizer, "name", "unknown"),
+        "data_source": data_source,
     }
     torch.save(checkpoint, args.out_dir / "checkpoint.pt")
     tokenizer.save(args.out_dir / "tokenizer.json")
     (args.out_dir / "train_config.json").write_text(
-        json.dumps(vars(args) | {"device_used": str(device)}, ensure_ascii=False, indent=2, default=str),
+        json.dumps(vars(args) | {"device_used": str(device), "data_source": data_source}, ensure_ascii=False, indent=2, default=str),
         encoding="utf-8",
     )
     print(f"saved={args.out_dir}")

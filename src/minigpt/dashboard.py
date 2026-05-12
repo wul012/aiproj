@@ -87,6 +87,9 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("metrics", "Metrics history", "metrics.jsonl", "JSONL", "step-by-step train/validation losses"),
         ("history_summary", "History summary", "history_summary.json", "JSON", "best and latest loss summary"),
         ("loss_curve", "Loss curve", "loss_curve.svg", "SVG", "training and validation loss chart"),
+        ("prepared_corpus", "Prepared corpus", "prepared_corpus.txt", "TXT", "merged training corpus from data-dir sources"),
+        ("dataset_report", "Dataset report", "dataset_report.json", "JSON", "source and character statistics for the corpus"),
+        ("dataset_svg", "Dataset chart", "dataset_report.svg", "SVG", "dataset source size chart"),
         ("sample", "Sample text", "sample.txt", "TXT", "generated sample saved after training"),
         ("eval_report", "Evaluation report", "eval_report.json", "JSON", "loss and perplexity report"),
         ("model_report", "Model report", "model_report/model_report.json", "JSON", "architecture and parameter report"),
@@ -117,6 +120,7 @@ def build_dashboard_payload(
     train_config = _read_json(root / "train_config.json", warnings)
     history_summary = _read_json(root / "history_summary.json", warnings)
     eval_report = _read_json(root / "eval_report.json", warnings)
+    dataset_report = _read_json(root / "dataset_report.json", warnings)
     model_report = _read_json(root / "model_report" / "model_report.json", warnings)
     predictions = _read_json(root / "predictions" / "predictions.json", warnings)
     attention = _read_json(root / "attention" / "attention.json", warnings)
@@ -148,6 +152,8 @@ def build_dashboard_payload(
         "last_val_loss": _pick(history_summary, "last_val_loss"),
         "eval_loss": _pick(eval_report, "loss"),
         "perplexity": _pick(eval_report, "perplexity"),
+        "dataset_sources": _pick(dataset_report, "source_count"),
+        "dataset_chars": _pick(dataset_report, "char_count"),
         "total_parameters": _pick(model_report, "total_parameters"),
         "top_prediction": top_prediction,
         "last_assistant": last_assistant,
@@ -162,6 +168,7 @@ def build_dashboard_payload(
         "train_config": train_config if isinstance(train_config, dict) else None,
         "history_summary": history_summary if isinstance(history_summary, dict) else None,
         "eval_report": eval_report if isinstance(eval_report, dict) else None,
+        "dataset_report": dataset_report if isinstance(dataset_report, dict) else None,
         "model_report": model_report if isinstance(model_report, dict) else None,
         "model_config": model_config if isinstance(model_config, dict) else None,
         "predictions": predictions if isinstance(predictions, dict) else None,
@@ -199,6 +206,7 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         f"<header><h1>{_e(title)}</h1><p>{_e(str(payload['run_dir']))}</p></header>",
         _stats_grid(stats),
         _artifact_grid(artifacts),
+        _dataset_section(payload),
         _model_section(payload),
         _training_section(payload),
         _prediction_section(payload),
@@ -379,6 +387,28 @@ def _model_section(payload: dict[str, Any]) -> str:
         f"<div><table>{config_rows}</table></div>"
         f"<div><table><tr><th>Group</th><th>Params</th><th>Share</th><th></th></tr>{''.join(group_rows)}</table></div>"
         f"</div>{figure}</section>"
+    )
+
+
+def _dataset_section(payload: dict[str, Any]) -> str:
+    report = payload.get("dataset_report")
+    if not isinstance(report, dict):
+        return ""
+    rows = []
+    for source in report.get("sources", [])[:8]:
+        if isinstance(source, dict):
+            rows.append(
+                f"<tr><td>{_e(Path(str(source.get('path'))).name)}</td>"
+                f"<td>{_e(source.get('char_count'))}</td>"
+                f"<td>{_e(source.get('line_count'))}</td>"
+                f"<td>{_e(source.get('unique_char_count'))}</td></tr>"
+            )
+    figure = _image(payload, "dataset_svg", "Dataset chart")
+    return (
+        "<h2>Dataset</h2><section class=\"panel\">"
+        f"<p>Sources: {_e(report.get('source_count'))} | Characters: {_e(report.get('char_count'))} | Unique chars: {_e(report.get('unique_char_count'))}</p>"
+        f"<table><tr><th>Source</th><th>Chars</th><th>Lines</th><th>Unique</th></tr>{''.join(rows)}</table>"
+        f"{figure}</section>"
     )
 
 

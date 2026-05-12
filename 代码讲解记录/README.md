@@ -91,6 +91,12 @@
 
 26-version-12-tests-docs.md
  -> v12 server smoke、README、a/12 归档和 tag 说明
+
+27-v13-dataset-preparation.md
+ -> data_prep.py、prepare_dataset.py：合并文本语料并导出 dataset report
+
+28-version-13-tests-docs.md
+ -> v13 dataset smoke、README、a/13 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -101,6 +107,7 @@
 
 ```text
 中文文本
+ -> prepare_dataset.py 合并多个 .txt 来源
  -> CharTokenizer 或 BPETokenizer encode
  -> token id 序列
  -> model report 可检查参数量和张量形状
@@ -112,6 +119,7 @@
  -> cross entropy loss
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
+ -> dataset_report.json/svg 记录语料来源和规模
  -> generate 自回归采样新 token
  -> chat prompt 包装多轮消息
  -> dashboard.html 汇总实验产物
