@@ -21,6 +21,8 @@ RUN_ARTIFACT_SPECS = [
     ("prepared_corpus", "prepared_corpus.txt", "merged training corpus"),
     ("dataset_report", "dataset_report.json", "dataset source statistics"),
     ("dataset_chart", "dataset_report.svg", "dataset source chart"),
+    ("dataset_quality", "dataset_quality.json", "dataset quality report"),
+    ("dataset_quality_chart", "dataset_quality.svg", "dataset quality chart"),
     ("sample", "sample.txt", "post-training sample"),
     ("eval_report", "eval_report.json", "checkpoint evaluation report"),
     ("model_report", "model_report/model_report.json", "model architecture report"),
@@ -64,6 +66,7 @@ def build_run_manifest(
 ) -> dict[str, Any]:
     root = Path(run_dir)
     dataset_report = _read_json(root / "dataset_report.json")
+    dataset_quality = _read_json(root / "dataset_quality.json")
     return {
         "schema_version": 1,
         "run_dir": str(root),
@@ -80,6 +83,7 @@ def build_run_manifest(
             "train_token_count": train_token_count,
             "val_token_count": val_token_count,
             "dataset_report": _dataset_report_summary(dataset_report),
+            "dataset_quality": _dataset_quality_summary(dataset_quality),
         },
         "model": {
             "config": _jsonable(model_config),
@@ -249,6 +253,19 @@ def _dataset_report_summary(report: dict[str, Any] | None) -> dict[str, Any] | N
         "line_count": report.get("line_count"),
         "unique_char_count": report.get("unique_char_count"),
         "output_text": report.get("output_text"),
+    }
+
+
+def _dataset_quality_summary(report: dict[str, Any] | None) -> dict[str, Any] | None:
+    if report is None:
+        return None
+    return {
+        "status": report.get("status"),
+        "fingerprint": report.get("fingerprint"),
+        "short_fingerprint": report.get("short_fingerprint"),
+        "issue_count": report.get("issue_count"),
+        "warning_count": report.get("warning_count"),
+        "duplicate_line_count": report.get("duplicate_line_count"),
     }
 
 

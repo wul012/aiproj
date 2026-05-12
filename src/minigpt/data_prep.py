@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import asdict, dataclass
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -15,6 +16,7 @@ class SourceFileSummary:
     line_count: int
     nonempty_line_count: int
     unique_char_count: int
+    sha256: str
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -36,6 +38,10 @@ class PreparedDataset:
     @property
     def unique_char_count(self) -> int:
         return len(set(self.text))
+
+    @property
+    def fingerprint(self) -> str:
+        return _sha256_text(self.text)
 
 
 def discover_text_files(sources: list[str | Path], recursive: bool = True) -> list[Path]:
@@ -93,6 +99,7 @@ def build_dataset_report(dataset: PreparedDataset, output_text: str | Path | Non
         "line_count": dataset.line_count,
         "unique_char_count": dataset.unique_char_count,
         "token_count_char_estimate": dataset.char_count,
+        "fingerprint": dataset.fingerprint,
         "output_text": None if output_text is None else str(output_text),
         "sources": [source.to_dict() for source in dataset.sources],
         "most_common_chars": most_common,
@@ -109,11 +116,24 @@ def write_prepared_dataset(
     text_path = root / output_name
     json_path = root / "dataset_report.json"
     svg_path = root / "dataset_report.svg"
+    quality_json_path = root / "dataset_quality.json"
+    quality_svg_path = root / "dataset_quality.svg"
     text_path.write_text(dataset.text, encoding="utf-8")
     report = build_dataset_report(dataset, output_text=text_path)
     write_dataset_report_json(report, json_path)
     write_dataset_report_svg(report, svg_path)
-    return {"text": str(text_path), "json": str(json_path), "svg": str(svg_path)}
+    from minigpt.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg
+
+    quality = build_dataset_quality_report(dataset)
+    write_dataset_quality_json(quality, quality_json_path)
+    write_dataset_quality_svg(quality, quality_svg_path)
+    return {
+        "text": str(text_path),
+        "json": str(json_path),
+        "svg": str(svg_path),
+        "quality_json": str(quality_json_path),
+        "quality_svg": str(quality_svg_path),
+    }
 
 
 def write_dataset_report_json(report: dict[str, Any], path: str | Path) -> None:
@@ -162,6 +182,7 @@ def _summarize_source(path: Path, text: str) -> SourceFileSummary:
         line_count=len(lines),
         nonempty_line_count=sum(1 for line in lines if line.strip()),
         unique_char_count=len(set(text)),
+        sha256=_sha256_text(text),
     )
 
 
@@ -169,3 +190,7 @@ def _clip(text: str, limit: int) -> str:
     if len(text) <= limit:
         return text
     return text[: limit - 1] + "..."
+
+
+def _sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()

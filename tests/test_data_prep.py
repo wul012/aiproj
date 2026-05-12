@@ -46,6 +46,8 @@ class DataPrepTests(unittest.TestCase):
             self.assertIn("hello\n\nworld", dataset.text)
             self.assertEqual(len(dataset.sources), 2)
             self.assertGreater(dataset.char_count, 0)
+            self.assertEqual(len(dataset.fingerprint), 64)
+            self.assertEqual(len(dataset.sources[0].sha256), 64)
 
     def test_build_dataset_report_contains_common_chars(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -57,6 +59,7 @@ class DataPrepTests(unittest.TestCase):
 
             self.assertEqual(report["source_count"], 1)
             self.assertEqual(report["output_text"], "corpus.txt")
+            self.assertEqual(len(report["fingerprint"]), 64)
             self.assertEqual(report["most_common_chars"][0]["char"], "a")
 
     def test_write_prepared_dataset_outputs_text_json_svg(self) -> None:
@@ -72,6 +75,8 @@ class DataPrepTests(unittest.TestCase):
             report = json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))
             self.assertEqual(report["source_count"], 1)
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
+            self.assertTrue(Path(outputs["quality_json"]).exists())
+            self.assertIn("<svg", Path(outputs["quality_svg"]).read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

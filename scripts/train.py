@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.dataset import get_batch, load_text, split_token_ids
 from minigpt.data_prep import build_dataset_report, build_prepared_dataset, write_dataset_report_json, write_dataset_report_svg
+from minigpt.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg
 from minigpt.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
 from minigpt.manifest import build_environment_metadata, build_run_manifest, utc_now, write_run_manifest_json, write_run_manifest_svg
 from minigpt.model import GPTConfig, MiniGPT
@@ -139,7 +140,7 @@ def copy_prepared_artifacts(prepared_data: Path, out_dir: Path) -> None:
     if prepared_data.resolve() != prepared_copy.resolve():
         shutil.copyfile(prepared_data, prepared_copy)
 
-    for artifact_name in ("dataset_report.json", "dataset_report.svg"):
+    for artifact_name in ("dataset_report.json", "dataset_report.svg", "dataset_quality.json", "dataset_quality.svg"):
         artifact_path = prepared_data.parent / artifact_name
         if artifact_path.exists():
             shutil.copyfile(artifact_path, out_dir / artifact_name)
@@ -243,6 +244,9 @@ def main() -> None:
         report = build_dataset_report(prepared_dataset, output_text=prepared_path)
         write_dataset_report_json(report, args.out_dir / "dataset_report.json")
         write_dataset_report_svg(report, args.out_dir / "dataset_report.svg")
+        quality = build_dataset_quality_report(prepared_dataset)
+        write_dataset_quality_json(quality, args.out_dir / "dataset_quality.json")
+        write_dataset_quality_svg(quality, args.out_dir / "dataset_quality.svg")
     elif args.prepared_data is not None:
         copy_prepared_artifacts(args.prepared_data, args.out_dir)
     history_path = args.out_dir / "metrics.jsonl"

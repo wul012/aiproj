@@ -100,6 +100,9 @@
 
 29-v14-run-manifest.md
  -> manifest.py、train.py、dashboard.py、playground.py：记录训练 run 的复现元数据与产物索引
+
+30-v15-dataset-quality.md
+ -> data_quality.py、data_prep.py、train.py：生成 dataset fingerprint 和轻量数据质量报告
 ```
 
 ## 项目整体理解
@@ -123,6 +126,7 @@
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
  -> dataset_report.json/svg 记录语料来源和规模
+ -> dataset_quality.json/svg 记录语料指纹、重复和质量提示
  -> run_manifest.json/svg 记录代码、环境、数据、配置、指标和产物索引
  -> generate 自回归采样新 token
  -> chat prompt 包装多轮消息

@@ -19,6 +19,7 @@ class PlaygroundTests(unittest.TestCase):
             (run_dir / "checkpoint.pt").write_bytes(b"fake")
             (run_dir / "train_config.json").write_text(json.dumps({"tokenizer": "char"}), encoding="utf-8")
             (run_dir / "run_manifest.json").write_text(json.dumps({"git": {"short_commit": "abc1234"}}), encoding="utf-8")
+            (run_dir / "dataset_quality.json").write_text(json.dumps({"status": "pass"}), encoding="utf-8")
             sample_dir = run_dir / "sample_lab"
             sample_dir.mkdir()
             (sample_dir / "sample_lab.json").write_text(
@@ -46,6 +47,7 @@ class PlaygroundTests(unittest.TestCase):
             self.assertEqual(payload["summary"]["sampling_cases"], 1)
             self.assertTrue(any(link["key"] == "sample_lab_json" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "run_manifest" and link["exists"] for link in payload["links"]))
+            self.assertTrue(any(link["key"] == "dataset_quality" and link["exists"] for link in payload["links"]))
 
     def test_render_playground_escapes_text_and_has_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

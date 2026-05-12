@@ -169,6 +169,8 @@ def _collect_links(root: Path, out_path: Path, base_dir: Path) -> list[Playgroun
         ("prepared_corpus", "Prepared corpus", root / "prepared_corpus.txt", "TXT"),
         ("dataset_report", "Dataset report", root / "dataset_report.json", "JSON"),
         ("dataset_svg", "Dataset chart", root / "dataset_report.svg", "SVG"),
+        ("dataset_quality", "Dataset quality", root / "dataset_quality.json", "JSON"),
+        ("dataset_quality_svg", "Dataset quality chart", root / "dataset_quality.svg", "SVG"),
         ("sample", "Sample text", root / "sample.txt", "TXT"),
         ("sample_lab_json", "Sampling JSON", root / "sample_lab" / "sample_lab.json", "JSON"),
         ("sample_lab_csv", "Sampling CSV", root / "sample_lab" / "sample_lab.csv", "CSV"),

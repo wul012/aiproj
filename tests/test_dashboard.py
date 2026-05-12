@@ -33,6 +33,10 @@ class DashboardTests(unittest.TestCase):
             (run_dir / "train_config.json").write_text(json.dumps({"tokenizer": "char", "max_iters": 2}), encoding="utf-8")
             (run_dir / "history_summary.json").write_text(json.dumps({"best_val_loss": 1.25}), encoding="utf-8")
             (run_dir / "eval_report.json").write_text(json.dumps({"loss": 1.5, "perplexity": 4.48}), encoding="utf-8")
+            (run_dir / "dataset_quality.json").write_text(
+                json.dumps({"status": "pass", "short_fingerprint": "abc123def456", "warning_count": 0, "issue_count": 0}),
+                encoding="utf-8",
+            )
             (run_dir / "run_manifest.json").write_text(
                 json.dumps(
                     {
@@ -50,6 +54,7 @@ class DashboardTests(unittest.TestCase):
             self.assertEqual(payload["summary"]["best_val_loss"], 1.25)
             self.assertEqual(payload["summary"]["total_parameters"], 456)
             self.assertEqual(payload["summary"]["git_commit"], "abc1234")
+            self.assertEqual(payload["summary"]["dataset_quality"], "pass")
 
     def test_render_dashboard_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
