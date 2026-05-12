@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 18 is a MiniGPT learning project with a browser-friendly run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 19 is a MiniGPT learning project with an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -16,6 +16,7 @@ Version 18 is a MiniGPT learning project with a browser-friendly run registry HT
 - Fixed prompt evaluation suite for running the same prompts against different checkpoints and exporting JSON/CSV/SVG reports
 - Run registry builder that indexes multiple run directories, manifests, data fingerprints, quality status, eval suite summaries, metrics, and artifacts
 - Run registry HTML report for browsing many experiments, opening dashboard/manifest/eval links, and scanning quality/fingerprint status in a browser
+- Registry HTML controls for search, quality filtering, sorting, direction toggling, and visible-row counts
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -40,7 +41,7 @@ Version 18 is a MiniGPT learning project with a browser-friendly run registry HT
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, and registry HTML reporting
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, and registry interaction controls
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -67,6 +68,7 @@ v15.0.0 MiniGPT v15 dataset quality
 v16.0.0 MiniGPT v16 eval suite
 v17.0.0 MiniGPT v17 run registry
 v18.0.0 MiniGPT v18 registry HTML
+v19.0.0 MiniGPT v19 registry interactions
 ```
 
 ## Project structure
@@ -145,7 +147,11 @@ v18.0.0 MiniGPT v18 registry HTML
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 18/
+│   ├── 18/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 19/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -244,7 +250,8 @@ v18.0.0 MiniGPT v18 registry HTML
 │   ├── 30-v15-dataset-quality.md
 │   ├── 31-v16-eval-suite.md
 │   ├── 32-v17-run-registry.md
-│   └── 33-v18-registry-html.md
+│   ├── 33-v18-registry-html.md
+│   └── 34-v19-registry-interactions.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -477,6 +484,8 @@ a/17/图片
 a/17/解释/说明.md
 a/18/图片
 a/18/解释/说明.md
+a/19/图片
+a/19/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -623,6 +632,14 @@ Version 18 screenshots:
 - `04-registry-discover-check.png`: discovery mode exports JSON/CSV/SVG/HTML
 - `05-docs-check.png`: v18 docs and archive check
 
+Version 19 screenshots:
+
+- `01-unit-tests.png`: registry interaction tests and existing regression tests
+- `02-registry-interactive-smoke.png`: two small runs registered with searchable/sortable HTML output
+- `03-playwright-filter-check.png`: Playwright Chrome search, quality filter, sort, and count check
+- `04-registry-html-structure-check.png`: HTML controls, row data attributes, and escaping checks
+- `05-docs-check.png`: v19 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -667,6 +684,7 @@ Suggested reading order:
 31-v16-eval-suite.md
 32-v17-run-registry.md
 33-v18-registry-html.md
+34-v19-registry-interactions.md
 ```
 
 ## Learning map
@@ -702,11 +720,11 @@ The dataset quality layer adds a stable corpus fingerprint plus lightweight chec
 
 The eval suite layer runs a fixed set of prompts against a checkpoint and saves comparable JSON/CSV/SVG outputs.
 
-The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, and a local HTML table.
+The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, and an interactive local HTML table.
 
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add registry filters and sorting controls for larger experiment sets.
+- Add saved registry views or export filtered registry rows.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

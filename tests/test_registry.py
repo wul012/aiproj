@@ -101,6 +101,26 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT run registry", Path(outputs["html"]).read_text(encoding="utf-8"))
 
+    def test_render_registry_html_has_interactive_controls(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run_a = make_run(root, "alpha", 1.2, quality="pass")
+            run_b = make_run(root, "beta", 0.9, quality="warn")
+            registry = build_run_registry([run_a, run_b])
+
+            html = render_registry_html(registry)
+
+            self.assertIn('id="registry-search"', html)
+            self.assertIn('id="quality-filter"', html)
+            self.assertIn('id="sort-key"', html)
+            self.assertIn('id="sort-direction"', html)
+            self.assertIn('id="registry-count"', html)
+            self.assertIn("data-run-row", html)
+            self.assertIn("data-best-val", html)
+            self.assertIn('<option value="pass">pass</option>', html)
+            self.assertIn('<option value="warn">warn</option>', html)
+            self.assertIn("addEventListener", html)
+
     def test_render_registry_html_escapes_run_text(self) -> None:
         registry = {
             "run_count": 1,
@@ -122,7 +142,9 @@ class RegistryTests(unittest.TestCase):
         html = render_registry_html(registry)
 
         self.assertIn("&lt;script&gt;", html)
-        self.assertNotIn("<script>", html)
+        self.assertIn("<script>", html)
+        self.assertNotIn("<strong><script>", html)
+        self.assertNotIn('data-search="<script>', html)
 
 
 if __name__ == "__main__":

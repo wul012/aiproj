@@ -112,6 +112,9 @@
 
 33-v18-registry-html.md
  -> registry.py、scripts/register_runs.py、test_registry.py：把 run registry 从机器可读 JSON/CSV/SVG 扩展到可浏览 HTML 报告
+
+34-v19-registry-interactions.md
+ -> registry.py、test_registry.py、playwright_chrome_smoke.ps1：给 registry.html 增加搜索、质量筛选、排序和浏览器验证
 ```
 
 ## 项目整体理解
@@ -146,7 +149,7 @@
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> /api/generate 本地调用 checkpoint 生成
  -> registry.json/csv/svg 索引多个实验 run
- -> registry.html 在浏览器里浏览多个 run、质量状态和 artifact 链接
+ -> registry.html 在浏览器里浏览、搜索、筛选、排序多个 run、质量状态和 artifact 链接
  -> tokenizer.decode
  -> 生成文本
 ```
