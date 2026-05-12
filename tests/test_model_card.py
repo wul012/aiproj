@@ -31,6 +31,7 @@ def make_registry(root: Path, names: tuple[str, str] = ("candidate", "baseline")
             {"rank": 2, "name": names[1], "path": str(run_b), "best_val_loss": 1.2, "best_val_loss_delta": 0.32},
         ],
         "quality_counts": {"pass": 1, "warn": 1},
+        "generation_quality_counts": {"pass": 1, "warn": 1},
         "tag_counts": {"candidate": 1, "review": 1},
         "dataset_fingerprints": ["abc123def456"],
         "runs": [
@@ -42,6 +43,11 @@ def make_registry(root: Path, names: tuple[str, str] = ("candidate", "baseline")
                 "best_val_loss_delta": 0.0,
                 "dataset_quality": "pass",
                 "eval_suite_cases": 3,
+                "generation_quality_status": "pass",
+                "generation_quality_cases": 3,
+                "generation_quality_pass_count": 3,
+                "generation_quality_warn_count": 0,
+                "generation_quality_fail_count": 0,
                 "artifact_count": 12,
                 "checkpoint_exists": True,
                 "dashboard_exists": True,
@@ -56,6 +62,11 @@ def make_registry(root: Path, names: tuple[str, str] = ("candidate", "baseline")
                 "best_val_loss_delta": 0.32,
                 "dataset_quality": "warn",
                 "eval_suite_cases": 3,
+                "generation_quality_status": "warn",
+                "generation_quality_cases": 3,
+                "generation_quality_pass_count": 2,
+                "generation_quality_warn_count": 1,
+                "generation_quality_fail_count": 0,
                 "artifact_count": 10,
                 "checkpoint_exists": True,
                 "dashboard_exists": False,
@@ -105,9 +116,13 @@ class ModelCardTests(unittest.TestCase):
             self.assertEqual(card["summary"]["review_runs"], 1)
             self.assertEqual(card["coverage"]["experiment_cards_found"], 2)
             self.assertEqual(card["coverage"]["experiment_card_coverage"], 1.0)
+            self.assertEqual(card["coverage"]["generation_quality_runs"], 2)
+            self.assertEqual(card["generation_quality_counts"], {"pass": 1, "warn": 1})
             self.assertEqual(card["top_runs"][0]["name"], "candidate")
             self.assertEqual(card["runs"][0]["status"], "ready")
+            self.assertEqual(card["runs"][0]["generation_quality_status"], "pass")
             self.assertEqual(card["runs"][0]["tags"], ["candidate", "keep"])
+            self.assertIn("non-pass generation quality", " ".join(card["recommendations"]))
             self.assertIn("best ready run", " ".join(card["recommendations"]))
 
     def test_build_model_card_recommends_missing_experiment_cards(self) -> None:

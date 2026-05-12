@@ -26,6 +26,16 @@ REGISTRY_ARTIFACT_PATHS = [
     "eval_suite/eval_suite.json",
     "eval_suite/eval_suite.csv",
     "eval_suite/eval_suite.svg",
+    "generation-quality/generation_quality.json",
+    "generation-quality/generation_quality.csv",
+    "generation-quality/generation_quality.md",
+    "generation-quality/generation_quality.svg",
+    "generation-quality/generation_quality.html",
+    "eval_suite/generation-quality/generation_quality.json",
+    "eval_suite/generation-quality/generation_quality.csv",
+    "eval_suite/generation-quality/generation_quality.md",
+    "eval_suite/generation-quality/generation_quality.svg",
+    "eval_suite/generation-quality/generation_quality.html",
     "sample.txt",
     "eval_report.json",
     "dashboard.html",
@@ -53,6 +63,12 @@ class RegisteredRun:
     dataset_quality: str | None
     eval_suite_cases: int | None
     eval_suite_avg_unique: float | None
+    generation_quality_status: str | None
+    generation_quality_cases: int | None
+    generation_quality_pass_count: int | None
+    generation_quality_warn_count: int | None
+    generation_quality_fail_count: int | None
+    generation_quality_avg_unique_ratio: float | None
     artifact_count: int
     checkpoint_exists: bool
     dashboard_exists: bool
@@ -81,6 +97,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     history = _read_json(root / "history_summary.json")
     dataset_quality = _read_json(root / "dataset_quality.json")
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json")
+    generation_quality = _read_generation_quality(root)
     run_notes = _read_run_notes(root)
 
     git = _pick_dict(manifest, "git")
@@ -89,6 +106,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     model = _pick_dict(manifest, "model")
     manifest_quality = _pick_dict(data, "dataset_quality")
     source = _pick_dict(data, "source")
+    generation_summary = _pick_dict(generation_quality, "summary")
     artifacts = manifest.get("artifacts", []) if isinstance(manifest, dict) else []
     manifest_artifact_count = sum(1 for item in artifacts if isinstance(item, dict) and item.get("exists"))
     artifact_count = max(manifest_artifact_count, _actual_artifact_count(root))
@@ -108,6 +126,12 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         dataset_quality=_as_str(_pick(dataset_quality, "status") or _pick(manifest_quality, "status")),
         eval_suite_cases=_as_int(_pick(eval_suite, "case_count")),
         eval_suite_avg_unique=_as_float(_pick(eval_suite, "avg_unique_chars")),
+        generation_quality_status=_as_str(_pick(generation_summary, "overall_status")),
+        generation_quality_cases=_as_int(_pick(generation_summary, "case_count")),
+        generation_quality_pass_count=_as_int(_pick(generation_summary, "pass_count")),
+        generation_quality_warn_count=_as_int(_pick(generation_summary, "warn_count")),
+        generation_quality_fail_count=_as_int(_pick(generation_summary, "fail_count")),
+        generation_quality_avg_unique_ratio=_as_float(_pick(generation_summary, "avg_unique_ratio")),
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
         dashboard_exists=(root / "dashboard.html").exists(),
@@ -135,6 +159,7 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         "loss_leaderboard": loss_leaderboard,
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
+        "generation_quality_counts": _counts(run.generation_quality_status or "missing" for run in runs),
         "tag_counts": _counts(tag for run in runs for tag in run.tags),
     }
 
@@ -166,6 +191,12 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "dataset_quality",
         "eval_suite_cases",
         "eval_suite_avg_unique",
+        "generation_quality_status",
+        "generation_quality_cases",
+        "generation_quality_pass_count",
+        "generation_quality_warn_count",
+        "generation_quality_fail_count",
+        "generation_quality_avg_unique_ratio",
         "artifact_count",
         "checkpoint_exists",
         "dashboard_exists",
@@ -202,6 +233,7 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
         artifact_bar = 0 if max_artifacts == 0 else max(2, int(220 * artifacts / max_artifacts))
         quality = str(run.get("dataset_quality") or "missing")
         quality_color = "#047857" if quality == "pass" else "#b45309" if quality == "warn" else "#6b7280"
+        generation_quality = str(run.get("generation_quality_status") or "missing")
         note_line = _clip(_note_summary(run), 56)
         rows.append(f'<text x="28" y="{y + 20}" font-family="Arial" font-size="14" fill="#111827">{_e(run.get("name"))}</text>')
         rows.append(f'<text x="28" y="{y + 40}" font-family="Arial" font-size="12" fill="#4b5563">{_e(_clip(run.get("path"), 38))}</text>')
@@ -211,7 +243,7 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
         rows.append(f'<rect x="650" y="{y + 9}" width="{artifact_bar}" height="14" rx="3" fill="#2563eb"/>')
         rows.append(f'<text x="880" y="{y + 21}" font-family="Arial" font-size="12" fill="#374151">{artifacts} files</text>')
         rows.append(f'<circle cx="656" cy="{y + 38}" r="5" fill="{quality_color}"/>')
-        rows.append(f'<text x="670" y="{y + 42}" font-family="Arial" font-size="12" fill="#374151">{_e(quality)} | eval={_e(run.get("eval_suite_cases"))} | data={_e(run.get("dataset_fingerprint"))}</text>')
+        rows.append(f'<text x="670" y="{y + 42}" font-family="Arial" font-size="12" fill="#374151">{_e(quality)} | eval={_e(run.get("eval_suite_cases"))} | gen={_e(generation_quality)} | data={_e(run.get("dataset_fingerprint"))}</text>')
         rows.append(f'<text x="670" y="{y + 60}" font-family="Arial" font-size="12" fill="#4b5563">{_e(note_line)}</text>')
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
   <rect width="100%" height="100%" fill="#f7f7f2"/>
@@ -235,6 +267,7 @@ def render_registry_html(
     best = registry.get("best_by_best_val_loss") if isinstance(registry.get("best_by_best_val_loss"), dict) else {}
     quality_counts = registry.get("quality_counts", {})
     tag_counts = registry.get("tag_counts", {})
+    generation_quality_counts = registry.get("generation_quality_counts", {})
     loss_leaderboard = registry.get("loss_leaderboard", [])
     stats = [
         ("Runs", registry.get("run_count")),
@@ -243,6 +276,7 @@ def render_registry_html(
         ("Comparable", len(loss_leaderboard) if isinstance(loss_leaderboard, list) else 0),
         ("Fingerprints", len(registry.get("dataset_fingerprints", []))),
         ("Quality", ", ".join(f"{key}:{value}" for key, value in quality_counts.items()) if isinstance(quality_counts, dict) else None),
+        ("Gen quality", ", ".join(f"{key}:{value}" for key, value in generation_quality_counts.items()) if isinstance(generation_quality_counts, dict) else None),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
@@ -251,6 +285,10 @@ def render_registry_html(
             continue
         quality = str(run.get("dataset_quality") or "missing")
         quality_class = "pass" if quality == "pass" else "warn" if quality == "warn" else "missing"
+        generation_quality = str(run.get("generation_quality_status") or "missing")
+        generation_quality_class = (
+            "pass" if generation_quality == "pass" else "warn" if generation_quality == "warn" else "fail" if generation_quality == "fail" else "missing"
+        )
         links = _registry_links(run, base_dir)
         rows.append(
             '<tr data-run-row'
@@ -271,6 +309,7 @@ def render_registry_html(
             f"<td>{_e(run.get('data_source_kind'))}<br><span>{_e(run.get('dataset_fingerprint'))}</span></td>"
             f'<td><span class="pill {quality_class}">{_e(quality)}</span></td>'
             f"<td>{_e(run.get('eval_suite_cases'))}<br><span>avg unique={_e(run.get('eval_suite_avg_unique'))}</span></td>"
+            f'<td><span class="pill {generation_quality_class}">{_e(generation_quality)}</span><br><span>cases={_e(run.get("generation_quality_cases"))}</span></td>'
             f"<td>{_e(run.get('artifact_count'))}</td>"
             f"<td>{_tag_chips(run.get('tags'))}<br><span>{_e(run.get('note'))}</span></td>"
             f"<td>{links}</td>"
@@ -294,7 +333,7 @@ def render_registry_html(
             '<section class="panel">',
             "<h2>Runs</h2>",
             '<table id="registry-table">',
-            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
+            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
             '<tbody id="registry-rows">',
             "".join(rows),
             "</tbody>",
@@ -377,6 +416,7 @@ def _annotate_loss_leaderboard(runs: list[dict[str, Any]]) -> list[dict[str, Any
                 "best_val_loss_delta": delta,
                 "dataset_quality": run.get("dataset_quality"),
                 "eval_suite_cases": run.get("eval_suite_cases"),
+                "generation_quality_status": run.get("generation_quality_status"),
                 "tags": list(run.get("tags") or []),
                 "note": run.get("note"),
             }
@@ -401,6 +441,19 @@ def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:
 def _read_run_notes(root: Path) -> dict[str, Any]:
     payload = _read_json(root / "run_notes.json")
     return payload if isinstance(payload, dict) else {}
+
+
+def _read_generation_quality(root: Path) -> dict[str, Any]:
+    candidates = [
+        root / "generation-quality" / "generation_quality.json",
+        root / "eval_suite" / "generation-quality" / "generation_quality.json",
+    ]
+    for path in candidates:
+        payload = _read_json(path)
+        if isinstance(payload, dict):
+            payload["generation_quality_path"] = str(path)
+            return payload
+    return {}
 
 
 def _pick(payload: Any, key: str) -> Any:
@@ -516,6 +569,7 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "data_source_kind",
         "dataset_fingerprint",
         "dataset_quality",
+        "generation_quality_status",
         "note",
         "tags",
     ]
@@ -558,6 +612,8 @@ def _registry_links(run: dict[str, Any], base_dir: str | Path | None) -> str:
         ("card", root / "experiment_card.html"),
         ("manifest", root / "run_manifest.json"),
         ("eval", root / "eval_suite" / "eval_suite.json"),
+        ("gen quality", root / "generation-quality" / "generation_quality.html"),
+        ("gen quality", root / "eval_suite" / "generation-quality" / "generation_quality.html"),
     ]
     links = []
     for label, path in specs:
@@ -644,6 +700,7 @@ a { color:var(--blue); font-weight:700; text-decoration:none; margin-right:8px; 
 .pill { display:inline-block; min-width:58px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
 .pill.pass { background:var(--green); }
 .pill.warn { background:var(--amber); }
+.pill.fail { background:#b91c1c; }
 .pill.missing { background:#6b7280; }
 .leaderboard { margin:0; padding-left:24px; }
 .leaderboard li { padding:8px 0; border-bottom:1px solid var(--line); }

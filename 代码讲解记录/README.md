@@ -149,6 +149,8 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
  -> release_gate.py、check_release_gate.py、test_release_gate.py：读取 release bundle 并给出可自动化的 pass/warn/fail 发布门禁
 43-v28-generation-quality.md
  -> generation_quality.py、analyze_generation_quality.py、test_generation_quality.py：读取 eval suite/sample lab 输出并检查生成长度、多样性、重复和 prompt echo
+44-v29-generation-quality-chain.md
+ -> registry.py、model_card.py、project_audit.py：把 generation_quality.json 接入 registry/model card/audit 证据链
 ```
 
 ## 项目整体理解
@@ -184,6 +186,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> /api/generate 本地调用 checkpoint 生成
  -> registry.json/csv/svg 索引多个实验 run
+ -> registry / model_card / project_audit 消费 generation_quality 状态，形成生成质量证据链
  -> registry.html 在浏览器里浏览、搜索、筛选、排序、分享和导出多个 run、notes、tags、质量状态、best-val 排名、loss delta 和 artifact 链接
  -> experiment_card.json/md/html 汇总单个 run 的状态、数据、训练、评估、registry 排名和建议
  -> model_card.json/md/html 汇总整个实验系列的最佳 run、coverage、limitations 和后续建议

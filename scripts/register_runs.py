@@ -38,6 +38,7 @@ def main() -> None:
     print("best_by_best_val_loss=" + json.dumps(registry["best_by_best_val_loss"], ensure_ascii=False))
     print("loss_leaderboard=" + json.dumps(registry.get("loss_leaderboard", []), ensure_ascii=False))
     print("quality_counts=" + json.dumps(registry["quality_counts"], ensure_ascii=False))
+    print("generation_quality_counts=" + json.dumps(registry.get("generation_quality_counts", {}), ensure_ascii=False))
     print("tag_counts=" + json.dumps(registry.get("tag_counts", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

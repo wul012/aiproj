@@ -37,6 +37,24 @@ def make_run(root: Path, name: str, loss: float, quality: str = "pass", note: st
         json.dumps({"case_count": 3, "avg_unique_chars": 8.5, "results": []}),
         encoding="utf-8",
     )
+    quality_dir = run_dir / "generation-quality"
+    quality_dir.mkdir()
+    (quality_dir / "generation_quality.json").write_text(
+        json.dumps(
+            {
+                "summary": {
+                    "overall_status": "pass",
+                    "case_count": 3,
+                    "pass_count": 3,
+                    "warn_count": 0,
+                    "fail_count": 0,
+                    "avg_unique_ratio": 0.72,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    (quality_dir / "generation_quality.html").write_text("<html></html>", encoding="utf-8")
     (run_dir / "run_manifest.json").write_text(
         json.dumps(
             {
@@ -79,6 +97,8 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.best_val_loss, 1.0)
             self.assertEqual(run.dataset_quality, "warn")
             self.assertEqual(run.eval_suite_cases, 3)
+            self.assertEqual(run.generation_quality_status, "pass")
+            self.assertEqual(run.generation_quality_cases, 3)
             self.assertGreaterEqual(run.artifact_count, 6)
 
     def test_summarize_registered_run_reads_notes_and_tags(self) -> None:
@@ -101,6 +121,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["run_count"], 2)
             self.assertEqual(registry["best_by_best_val_loss"]["name"], "B")
             self.assertEqual(registry["quality_counts"], {"pass": 1, "warn": 1})
+            self.assertEqual(registry["generation_quality_counts"], {"pass": 2})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
             self.assertEqual(registry["loss_leaderboard"][0]["name"], "B")
             self.assertAlmostEqual(registry["loss_leaderboard"][1]["best_val_loss_delta"], 0.3)
@@ -121,10 +142,12 @@ class RegistryTests(unittest.TestCase):
             self.assertTrue(Path(outputs["csv"]).exists())
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("best_val_loss_rank", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("generation_quality_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT run registry", html)
             self.assertIn(">card</a>", html)
+            self.assertIn(">gen quality</a>", html)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -161,6 +184,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("registry-visible-", html)
             self.assertIn("new Blob", html)
             self.assertIn("<th>Notes</th>", html)
+            self.assertIn("<th>Gen Quality</th>", html)
             self.assertIn('class="tag">baseline</span>', html)
             self.assertIn("stable baseline", html)
             self.assertIn("<div class=\"label\">Tags</div>", html)

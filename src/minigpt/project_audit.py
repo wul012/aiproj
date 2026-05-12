@@ -218,6 +218,11 @@ def _build_run_rows(registry: dict[str, Any], model_card: dict[str, Any] | None)
             "best_val_loss_delta": run.get("best_val_loss_delta"),
             "dataset_quality": run.get("dataset_quality"),
             "eval_suite_cases": run.get("eval_suite_cases"),
+            "generation_quality_status": run.get("generation_quality_status"),
+            "generation_quality_cases": run.get("generation_quality_cases"),
+            "generation_quality_pass_count": run.get("generation_quality_pass_count"),
+            "generation_quality_warn_count": run.get("generation_quality_warn_count"),
+            "generation_quality_fail_count": run.get("generation_quality_fail_count"),
             "artifact_count": run.get("artifact_count"),
             "checkpoint_exists": bool(run.get("checkpoint_exists")),
             "dashboard_exists": bool(run.get("dashboard_exists")),
@@ -244,6 +249,7 @@ def _build_checks(registry: dict[str, Any], model_card: dict[str, Any] | None, r
         _coverage_check("Experiment card coverage", "experiment_cards", sum(1 for run in runs if run.get("experiment_card_exists")), total),
         _coverage_check("Dataset quality coverage", "dataset_quality", sum(1 for run in runs if run.get("dataset_quality") not in {None, "missing"}), total),
         _coverage_check("Eval suite coverage", "eval_suite", sum(1 for run in runs if run.get("eval_suite_cases") not in {None, 0}), total),
+        _coverage_check("Generation quality coverage", "generation_quality", sum(1 for run in runs if run.get("generation_quality_status") not in {None, "missing"}), total),
         _coverage_check("Checkpoint coverage", "checkpoints", sum(1 for run in runs if run.get("checkpoint_exists")), total),
         _coverage_check("Dashboard coverage", "dashboards", sum(1 for run in runs if run.get("dashboard_exists")), total),
         _check(
@@ -266,6 +272,19 @@ def _build_checks(registry: dict[str, Any], model_card: dict[str, Any] | None, r
             "No non-pass dataset quality runs",
             "pass" if not non_pass_quality else "warn",
             "all checked runs pass" if not non_pass_quality else "review: " + ", ".join(str(name) for name in non_pass_quality),
+        )
+    )
+    non_pass_generation = [
+        run.get("name")
+        for run in runs
+        if run.get("generation_quality_status") not in {"pass", None, "missing"}
+    ]
+    checks.append(
+        _check(
+            "non_pass_generation_quality",
+            "No non-pass generation quality runs",
+            "pass" if not non_pass_generation else "warn",
+            "all analyzed runs pass" if not non_pass_generation else "review: " + ", ".join(str(name) for name in non_pass_generation),
         )
     )
     return checks
@@ -337,10 +356,14 @@ def _build_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]
             items.append("Run dataset quality checks for all registered runs.")
         elif check["id"] == "eval_suite":
             items.append("Run the fixed prompt eval suite for all registered checkpoints.")
+        elif check["id"] == "generation_quality":
+            items.append("Run generation quality analysis for all registered eval suite or sampling outputs.")
         elif check["id"] == "model_card":
             items.append("Build model_card.json so the audit can include project-level context.")
         elif check["id"] == "non_pass_quality":
             items.append("Review runs with non-pass dataset quality before using them as baselines.")
+        elif check["id"] == "non_pass_generation_quality":
+            items.append("Review runs with non-pass generation quality before release-style handoff.")
         elif check["id"] == "ready_run":
             items.append("Promote at least one run to ready status by completing checkpoint, data quality, and eval artifacts.")
         elif check["id"] == "dashboards":
@@ -363,6 +386,10 @@ def _derive_status(run: dict[str, Any]) -> str:
         return "review"
     if run.get("eval_suite_cases") in {None, 0}:
         return "needs-eval"
+    if run.get("generation_quality_status") in {None, "missing"}:
+        return "needs-generation-quality"
+    if run.get("generation_quality_status") != "pass":
+        return "review"
     return "ready"
 
 
@@ -391,14 +418,15 @@ def _run_section(runs: list[dict[str, Any]]) -> str:
             f"<td>{_e(_fmt(run.get('best_val_loss')))}<br><span>{_e(_fmt_delta(run.get('best_val_loss_delta')))}</span></td>"
             f"<td>{_e(run.get('dataset_quality'))}</td>"
             f"<td>{_e(run.get('eval_suite_cases'))}</td>"
+            f"<td>{_e(_generation_quality_label(run))}</td>"
             f"<td>{_e('yes' if run.get('experiment_card_exists') else 'no')}</td>"
             "</tr>"
         )
-    return '<section class="panel"><h2>Runs</h2><table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Quality</th><th>Eval</th><th>Card</th></tr></thead><tbody>' + "".join(rows) + "</tbody></table></section>"
+    return '<section class="panel"><h2>Runs</h2><table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Card</th></tr></thead><tbody>' + "".join(rows) + "</tbody></table></section>"
 
 
 def _run_table(runs: list[dict[str, Any]]) -> list[str]:
-    lines = ["| Rank | Run | Status | Best Val | Quality | Eval | Card |", "| --- | --- | --- | --- | --- | --- | --- |"]
+    lines = ["| Rank | Run | Status | Best Val | Quality | Eval | Gen Quality | Card |", "| --- | --- | --- | --- | --- | --- | --- | --- |"]
     for run in runs:
         lines.append(
             "| "
@@ -410,6 +438,7 @@ def _run_table(runs: list[dict[str, Any]]) -> list[str]:
                     _md(_fmt(run.get("best_val_loss"))),
                     _md(run.get("dataset_quality")),
                     _md(run.get("eval_suite_cases")),
+                    _md(_generation_quality_label(run)),
                     _md("yes" if run.get("experiment_card_exists") else "no"),
                 ]
             )
@@ -481,6 +510,14 @@ def _rank_label(value: Any) -> str:
     if value is None or value == "":
         return "unranked"
     return f"#{int(value)}"
+
+
+def _generation_quality_label(run: dict[str, Any]) -> str:
+    status = run.get("generation_quality_status") or "missing"
+    cases = run.get("generation_quality_cases")
+    if cases in {None, ""}:
+        return str(status)
+    return f"{status} ({cases} cases)"
 
 
 def _fmt(value: Any) -> str:

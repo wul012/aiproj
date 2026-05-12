@@ -47,6 +47,7 @@ def build_model_card(
         ],
         "coverage": coverage,
         "quality_counts": registry.get("quality_counts", {}),
+        "generation_quality_counts": registry.get("generation_quality_counts", {}),
         "tag_counts": registry.get("tag_counts", {}),
         "dataset_fingerprints": registry.get("dataset_fingerprints", []),
         "top_runs": _top_runs(registry, runs),
@@ -83,6 +84,7 @@ def render_model_card_markdown(card: dict[str, Any]) -> str:
                 ("Experiment cards", coverage.get("experiment_cards_found")),
                 ("Quality checked", coverage.get("quality_checked_runs")),
                 ("Eval suite runs", coverage.get("eval_suite_runs")),
+                ("Generation quality", coverage.get("generation_quality_runs")),
             ]
         ),
         "",
@@ -133,6 +135,7 @@ def render_model_card_html(card: dict[str, Any], *, base_dir: str | Path | None 
         ("Review", summary.get("review_runs")),
         ("Cards", coverage.get("experiment_cards_found")),
         ("Eval suite", coverage.get("eval_suite_runs")),
+        ("Gen quality", coverage.get("generation_quality_runs")),
         ("Quality", coverage.get("quality_checked_runs")),
     ]
     return "\n".join(
@@ -154,6 +157,7 @@ def render_model_card_html(card: dict[str, Any], *, base_dir: str | Path | None 
             _run_section("Top Runs", _list_of_dicts(card.get("top_runs")), base_dir),
             _key_value_section("Coverage", coverage),
             _key_value_section("Quality Counts", _dict(card.get("quality_counts"))),
+            _key_value_section("Generation Quality Counts", _dict(card.get("generation_quality_counts"))),
             _key_value_section("Tag Counts", _dict(card.get("tag_counts"))),
             _list_section("Recommendations", card.get("recommendations")),
             _run_section("All Runs", _list_of_dicts(card.get("runs")), base_dir),
@@ -250,6 +254,11 @@ def _build_run_summaries(registry: dict[str, Any], cards: dict[str, dict[str, An
                 "best_val_loss_delta": run.get("best_val_loss_delta"),
                 "dataset_quality": run.get("dataset_quality"),
                 "eval_suite_cases": run.get("eval_suite_cases"),
+                "generation_quality_status": run.get("generation_quality_status"),
+                "generation_quality_cases": run.get("generation_quality_cases"),
+                "generation_quality_pass_count": run.get("generation_quality_pass_count"),
+                "generation_quality_warn_count": run.get("generation_quality_warn_count"),
+                "generation_quality_fail_count": run.get("generation_quality_fail_count"),
                 "artifact_count": run.get("artifact_count"),
                 "checkpoint_exists": run.get("checkpoint_exists"),
                 "dashboard_exists": run.get("dashboard_exists"),
@@ -289,6 +298,8 @@ def _build_coverage(registry: dict[str, Any], runs: list[dict[str, Any]], cards:
         "experiment_card_coverage": _ratio(len(cards), total),
         "quality_checked_runs": sum(1 for run in runs if run.get("dataset_quality") not in {None, "missing"}),
         "eval_suite_runs": sum(1 for run in runs if run.get("eval_suite_cases") not in {None, 0}),
+        "generation_quality_runs": sum(1 for run in runs if run.get("generation_quality_status") not in {None, "missing"}),
+        "generation_quality_pass_runs": sum(1 for run in runs if run.get("generation_quality_status") == "pass"),
         "checkpoint_runs": sum(1 for run in runs if run.get("checkpoint_exists")),
         "dashboard_runs": sum(1 for run in runs if run.get("dashboard_exists")),
         "dataset_fingerprint_count": len(registry.get("dataset_fingerprints", [])),
@@ -327,6 +338,10 @@ def _build_recommendations(
         items.append("Review non-pass dataset quality runs before using them as baselines.")
     if coverage.get("eval_suite_runs", 0) < coverage.get("run_count", 0):
         items.append("Run the fixed prompt eval suite for every registered run.")
+    if coverage.get("generation_quality_runs", 0) < coverage.get("run_count", 0):
+        items.append("Analyze generation quality for every registered run after eval suite or sampling output exists.")
+    if any(run.get("generation_quality_status") not in {"pass", None, "missing"} for run in runs):
+        items.append("Review non-pass generation quality runs before treating them as release candidates.")
     if warnings:
         items.append("Fix invalid or unreadable experiment card JSON files listed in warnings.")
     return items
@@ -341,11 +356,15 @@ def _derive_status(run: dict[str, Any]) -> str:
         return "review"
     if run.get("eval_suite_cases") in {None, 0}:
         return "needs-eval"
+    if run.get("generation_quality_status") in {None, "missing"}:
+        return "needs-generation-quality"
+    if run.get("generation_quality_status") != "pass":
+        return "review"
     return "ready"
 
 
 def _run_table(runs: list[dict[str, Any]]) -> list[str]:
-    lines = ["| Rank | Run | Status | Best Val | Delta | Quality | Eval | Card |", "| --- | --- | --- | --- | --- | --- | --- | --- |"]
+    lines = ["| Rank | Run | Status | Best Val | Delta | Quality | Eval | Gen Quality | Card |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for run in runs:
         lines.append(
             "| "
@@ -358,6 +377,7 @@ def _run_table(runs: list[dict[str, Any]]) -> list[str]:
                     _md(_fmt_delta(run.get("best_val_loss_delta"))),
                     _md(run.get("dataset_quality")),
                     _md(run.get("eval_suite_cases")),
+                    _md(_generation_quality_label(run)),
                     _md("yes" if run.get("experiment_card_exists") else "no"),
                 ]
             )
@@ -379,13 +399,14 @@ def _run_section(title: str, runs: list[dict[str, Any]], base_dir: str | Path | 
             f"<td>{_e(_fmt(run.get('best_val_loss')))}<br><span>{_e(_fmt_delta(run.get('best_val_loss_delta')))}</span></td>"
             f"<td>{_e(run.get('dataset_quality'))}</td>"
             f"<td>{_e(run.get('eval_suite_cases'))}</td>"
+            f"<td>{_e(_generation_quality_label(run))}</td>"
             f"<td>{_tag_chips(run.get('tags'))}<br><span>{_e(run.get('note'))}</span></td>"
             f"<td>{card_link}</td>"
             "</tr>"
         )
     return (
         f'<section class="panel"><h2>{_e(title)}</h2>'
-        '<table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Quality</th><th>Eval</th><th>Notes</th><th>Card</th></tr></thead><tbody>'
+        '<table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Notes</th><th>Card</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table></section>"
     )
@@ -458,6 +479,14 @@ def _tag_chips(value: Any) -> str:
     if not tags:
         return '<span class="muted">missing</span>'
     return "".join(f'<span class="tag">{_e(tag)}</span>' for tag in tags)
+
+
+def _generation_quality_label(run: dict[str, Any]) -> str:
+    status = run.get("generation_quality_status") or "missing"
+    cases = run.get("generation_quality_cases")
+    if cases in {None, ""}:
+        return str(status)
+    return f"{status} ({cases} cases)"
 
 
 def _path_key(value: Any) -> str:
