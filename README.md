@@ -1,10 +1,10 @@
 # MiniGPT From Scratch
 
-A PyTorch practice project for building a tiny character-level GPT language model.
+A PyTorch practice project for building and inspecting a tiny GPT language model.
 
 ## Current version
 
-Version 3 is a MiniGPT learning project with resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 4 is a MiniGPT learning project with attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -12,6 +12,8 @@ Version 3 is a MiniGPT learning project with resumable training, character/BPE t
 - Tokenizer inspection script for comparing char and BPE tokenization
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
+- Optional attention capture for inspecting causal self-attention maps
+- Attention inspection script that exports JSON and SVG heatmaps for a prompt
 - Training script with configurable model size, batch size, context window, learning rate, evaluation interval, and CPU/CUDA device selection
 - Resumable training with `--resume`, optimizer-state checkpointing, and target-step continuation
 - Training artifact output: `metrics.jsonl`, `history_summary.json`, `loss_curve.svg`, and `sample.txt`
@@ -32,6 +34,7 @@ Published tags:
 v1.0.0  MiniGPT v1 initial learning project
 v2.0.0  MiniGPT v2 training artifacts
 v3.0.0  MiniGPT v3 BPE tokenizer
+v4.0.0  MiniGPT v4 attention inspection
 ```
 
 ## Project structure
@@ -55,7 +58,11 @@ v3.0.0  MiniGPT v3 BPE tokenizer
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 3/
+│   ├── 3/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 4/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -63,6 +70,7 @@ v3.0.0  MiniGPT v3 BPE tokenizer
 │   └── sample_zh.txt
 ├── scripts/
 │   ├── generate.py
+│   ├── inspect_attention.py
 │   ├── inspect_tokenizer.py
 │   ├── plot_history.py
 │   └── train.py
@@ -74,6 +82,7 @@ v3.0.0  MiniGPT v3 BPE tokenizer
 │       ├── model.py
 │       └── tokenizer.py
 ├── tests/
+│   ├── test_attention.py
 │   ├── test_dataset.py
 │   ├── test_history.py
 │   ├── test_model.py
@@ -87,7 +96,9 @@ v3.0.0  MiniGPT v3 BPE tokenizer
 │   ├── 05-v2-training-artifacts.md
 │   ├── 06-version-2-tests-docs.md
 │   ├── 07-v3-bpe-tokenizer.md
-│   └── 08-version-3-tests-docs.md
+│   ├── 08-version-3-tests-docs.md
+│   ├── 09-v4-attention-inspection.md
+│   └── 10-version-4-tests-docs.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -153,6 +164,12 @@ Inspect tokenizer behavior:
 python scripts/inspect_tokenizer.py --tokenizer bpe --bpe-vocab-size 260 --text "人工智能"
 ```
 
+Inspect attention for a trained checkpoint:
+
+```powershell
+python scripts/inspect_attention.py --checkpoint runs/minigpt/checkpoint.pt --prompt "人工智能模型" --layer 0 --head 0
+```
+
 ## Generate
 
 ```powershell
@@ -182,6 +199,8 @@ a/2/图片
 a/2/解释/说明.md
 a/3/图片
 a/3/解释/说明.md
+a/4/图片
+a/4/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -208,6 +227,14 @@ Version 3 screenshots:
 - `04-bpe-generate-load.png`: BPE checkpoint generation and tokenizer reload
 - `05-docs-check.png`: v3 docs and archive check
 
+Version 4 screenshots:
+
+- `01-unit-tests.png`: attention capture and regression tests
+- `02-attention-train-smoke.png`: checkpoint training smoke for attention inspection
+- `03-attention-export.png`: attention JSON/SVG export
+- `04-attention-artifacts-check.png`: exported attention artifact check
+- `05-docs-check.png`: v4 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -227,6 +254,8 @@ Suggested reading order:
 06-version-2-tests-docs.md
 07-v3-bpe-tokenizer.md
 08-version-3-tests-docs.md
+09-v4-attention-inspection.md
+10-version-4-tests-docs.md
 ```
 
 ## Learning map

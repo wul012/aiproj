@@ -30,6 +30,8 @@ class CausalSelfAttention(nn.Module):
         self.c_proj = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
         self.attn_dropout = nn.Dropout(config.dropout)
         self.resid_dropout = nn.Dropout(config.dropout)
+        self.capture_attention = False
+        self.last_attention: torch.Tensor | None = None
         mask = torch.tril(torch.ones(config.block_size, config.block_size))
         self.register_buffer("causal_mask", mask.view(1, 1, config.block_size, config.block_size))
 
@@ -44,9 +46,12 @@ class CausalSelfAttention(nn.Module):
         att = (q @ k.transpose(-2, -1)) * (self.head_size**-0.5)
         att = att.masked_fill(self.causal_mask[:, :, :seq_len, :seq_len] == 0, float("-inf"))
         att = F.softmax(att, dim=-1)
-        att = self.attn_dropout(att)
+        if self.capture_attention:
+            self.last_attention = att.detach().cpu()
+        else:
+            self.last_attention = None
 
-        y = att @ v
+        y = self.attn_dropout(att) @ v
         y = y.transpose(1, 2).contiguous().view(batch_size, seq_len, embd_size)
         return self.resid_dropout(self.c_proj(y))
 
@@ -150,3 +155,16 @@ class MiniGPT(nn.Module):
 
     def parameter_count(self) -> int:
         return sum(param.numel() for param in self.parameters())
+
+    def set_attention_capture(self, enabled: bool) -> None:
+        for block in self.blocks:
+            block.attn.capture_attention = enabled
+            if not enabled:
+                block.attn.last_attention = None
+
+    def attention_maps(self) -> list[torch.Tensor]:
+        maps: list[torch.Tensor] = []
+        for block in self.blocks:
+            if block.attn.last_attention is not None:
+                maps.append(block.attn.last_attention)
+        return maps

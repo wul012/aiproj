@@ -37,6 +37,12 @@
 
 08-version-3-tests-docs.md
  -> v3 BPE smoke、README、a/3 归档和 tag 说明
+
+09-v4-attention-inspection.md
+ -> model.py attention capture、inspect_attention.py：导出 causal attention JSON/SVG
+
+10-version-4-tests-docs.md
+ -> v4 attention smoke、README、a/4 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -51,6 +57,7 @@
  -> token id 序列
  -> get_batch 采样 x/y
  -> MiniGPT.forward
+ -> attention capture 可选记录每层注意力矩阵
  -> logits
  -> cross entropy loss
  -> AdamW 更新参数
