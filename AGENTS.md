@@ -28,6 +28,15 @@ Before sending the final response for any task, perform a cleanup pass for files
 - 末尾保留“一句话总结”，用来说明这一版把项目能力推进到了哪一层。
 - 可以根据 MiniGPT 的实际内容调整章节名，但整体深度、证据链意识和边界说明要接近参考文档。
 
+## Verification Archive Rule
+
+运行截图和解释目录按阶段拆分：
+
+- `a/` 保留 v1-v31 的历史运行截图和解释，不迁移旧版本。
+- 从 v32 开始，新的运行截图和解释写入与 `a/` 同级的 `b/`。
+- 目录结构继续使用 `b/<version>/图片/` 和 `b/<version>/解释/说明.md`。
+- README、代码讲解、归档说明、tag 说明里提到新版本证据时，后续默认引用 `b/<version>`。
+
 ## Temporary Files
 
 Delete files and folders created only for intermediate editing, conversion, rendering, testing, debugging, or validation.

@@ -6,7 +6,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 Version 31 is a MiniGPT learning project with release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
-- Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
+- Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
 - Optional character-seeded BPE tokenizer for understanding subword merge rules
 - Tokenizer inspection script for comparing char and BPE tokenization
@@ -227,6 +227,8 @@ v31.0.0 MiniGPT v31 release gate policy profiles
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
+├── b/
+│   └── README.md
 ├── data/
 │   ├── eval_prompts.json
 │   └── sample_zh.txt
@@ -581,7 +583,9 @@ python -B -m unittest discover -s tests -v
 
 ## Verification archive
 
-The project keeps real command-output screenshots and explanations under:
+The project keeps real command-output screenshots and explanations under versioned archive directories.
+
+`a/` is the historical archive for v1-v31:
 
 ```text
 a/1/图片
@@ -646,6 +650,13 @@ a/30/图片
 a/30/解释/说明.md
 a/31/图片
 a/31/解释/说明.md
+```
+
+Starting with v32, new run screenshots and explanations should be written under `b/`, which is a sibling directory of `a/`:
+
+```text
+b/<version>/图片
+b/<version>/解释/说明.md
 ```
 
 Version 1 screenshots:
