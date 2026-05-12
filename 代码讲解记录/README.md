@@ -109,6 +109,9 @@
 
 32-v17-run-registry.md
  -> registry.py、scripts/register_runs.py：索引多个 run 的 manifest、数据指纹、质量状态和 eval suite
+
+33-v18-registry-html.md
+ -> registry.py、scripts/register_runs.py、test_registry.py：把 run registry 从机器可读 JSON/CSV/SVG 扩展到可浏览 HTML 报告
 ```
 
 ## 项目整体理解
@@ -143,6 +146,7 @@
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> /api/generate 本地调用 checkpoint 生成
  -> registry.json/csv/svg 索引多个实验 run
+ -> registry.html 在浏览器里浏览多个 run、质量状态和 artifact 链接
  -> tokenizer.decode
  -> 生成文本
 ```

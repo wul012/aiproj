@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.registry import build_run_registry, discover_run_dirs, summarize_registered_run, write_registry_outputs
+from minigpt.registry import build_run_registry, discover_run_dirs, render_registry_html, summarize_registered_run, write_registry_outputs
 
 
 def make_run(root: Path, name: str, loss: float, quality: str = "pass") -> Path:
@@ -99,6 +99,30 @@ class RegistryTests(unittest.TestCase):
             self.assertTrue(Path(outputs["json"]).exists())
             self.assertTrue(Path(outputs["csv"]).exists())
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
+            self.assertIn("MiniGPT run registry", Path(outputs["html"]).read_text(encoding="utf-8"))
+
+    def test_render_registry_html_escapes_run_text(self) -> None:
+        registry = {
+            "run_count": 1,
+            "best_by_best_val_loss": {"name": "<best>", "best_val_loss": 1.0},
+            "quality_counts": {"pass": 1},
+            "dataset_fingerprints": ["abc"],
+            "runs": [
+                {
+                    "name": "<script>",
+                    "path": "runs/demo",
+                    "best_val_loss": 1.0,
+                    "total_parameters": 123,
+                    "dataset_quality": "pass",
+                    "artifact_count": 3,
+                }
+            ],
+        }
+
+        html = render_registry_html(registry)
+
+        self.assertIn("&lt;script&gt;", html)
+        self.assertNotIn("<script>", html)
 
 
 if __name__ == "__main__":
