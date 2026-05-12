@@ -31,8 +31,6 @@ v1.0.0  MiniGPT v1 initial learning project
 v2.0.0  MiniGPT v2 training artifacts
 ```
 
-See `版本标记说明.md` for the short explanation of each tag.
-
 ## Project structure
 
 ```text
@@ -84,7 +82,6 @@ See `版本标记说明.md` for the short explanation of each tag.
 ├── pyproject.toml
 ├── README.md
 ├── requirements.txt
-├── 版本标记说明.md
 └── 解释代码格式说明
 ```
 
