@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 25 is a MiniGPT learning project with project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 26 is a MiniGPT learning project with release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -23,6 +23,7 @@ Version 25 is a MiniGPT learning project with project audit reports, generated m
 - Experiment card exporter that summarizes one run into `experiment_card.json`, `experiment_card.md`, and `experiment_card.html`, with registry rank, notes, data quality, training, evaluation, artifact, and recommendation sections
 - Model card exporter that summarizes a registry and experiment cards into `model_card.json`, `model_card.md`, and `model_card.html`, with intended use, limitations, top runs, coverage, and recommendations
 - Project audit exporter that checks registry/model-card readiness and writes `project_audit.json`, `project_audit.md`, and `project_audit.html` with pass/warn/fail checks, score, and recommendations
+- Release bundle exporter that combines registry, model card, and project audit evidence into `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -47,7 +48,7 @@ Version 25 is a MiniGPT learning project with project audit reports, generated m
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, and project audits
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, and release bundles
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -81,6 +82,7 @@ v22.0.0 MiniGPT v22 registry leaderboards
 v23.0.0 MiniGPT v23 experiment cards
 v24.0.0 MiniGPT v24 model cards
 v25.0.0 MiniGPT v25 project audit
+v26.0.0 MiniGPT v26 release bundle
 ```
 
 ## Project structure
@@ -187,7 +189,11 @@ v25.0.0 MiniGPT v25 project audit
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 25/
+│   ├── 25/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 26/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -198,6 +204,7 @@ v25.0.0 MiniGPT v25 project audit
 │   ├── audit_project.py
 │   ├── build_dashboard.py
 │   ├── build_experiment_card.py
+│   ├── build_release_bundle.py
 │   ├── build_model_card.py
 │   ├── build_playground.py
 │   ├── chat.py
@@ -235,6 +242,7 @@ v25.0.0 MiniGPT v25 project audit
 │       ├── project_audit.py
 │       ├── prediction.py
 │       ├── registry.py
+│       ├── release_bundle.py
 │       ├── playground.py
 │       ├── sampling.py
 │       ├── server.py
@@ -258,6 +266,7 @@ v25.0.0 MiniGPT v25 project audit
 │   ├── test_prediction.py
 │   ├── test_project_audit.py
 │   ├── test_registry.py
+│   ├── test_release_bundle.py
 │   ├── test_sampling.py
 │   ├── test_server.py
 │   └── test_tokenizer.py
@@ -302,7 +311,8 @@ v25.0.0 MiniGPT v25 project audit
 │   ├── 37-v22-registry-leaderboards.md
 │   ├── 38-v23-experiment-cards.md
 │   ├── 39-v24-model-cards.md
-│   └── 40-v25-project-audit.md
+│   ├── 40-v25-project-audit.md
+│   └── 41-v26-release-bundle.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -481,6 +491,14 @@ python scripts/audit_project.py --registry runs/registry/registry.json --model-c
 
 The output directory contains `project_audit.json`, `project_audit.md`, and `project_audit.html`. The audit checks run coverage, experiment cards, dataset quality, eval suites, checkpoints, dashboards, model-card availability, ready runs, and non-pass quality warnings.
 
+Build a release evidence bundle:
+
+```powershell
+python scripts/build_release_bundle.py --registry runs/registry/registry.json --model-card runs/model-card/model_card.json --audit runs/audit/project_audit.json --out-dir runs/release-bundle
+```
+
+The output directory contains `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`. The bundle summarizes release status, best run, audit score, top runs, evidence artifacts, and recommendations for handoff.
+
 Discover run directories under a parent:
 
 ```powershell
@@ -586,6 +604,8 @@ a/24/图片
 a/24/解释/说明.md
 a/25/图片
 a/25/解释/说明.md
+a/26/图片
+a/26/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -788,6 +808,14 @@ Version 25 screenshots:
 - `04-playwright-project-audit.png`: project audit HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v25 docs and archive check
 
+Version 26 screenshots:
+
+- `01-unit-tests.png`: release bundle tests plus existing regression tests
+- `02-release-bundle-smoke.png`: registry, experiment cards, model card, project audit, and release bundle generation
+- `03-release-bundle-structure-check.png`: JSON/Markdown/HTML release status, top runs, audit checks, and evidence artifacts
+- `04-playwright-release-bundle.png`: release bundle HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v26 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -839,6 +867,7 @@ Suggested reading order:
 38-v23-experiment-cards.md
 39-v24-model-cards.md
 40-v25-project-audit.md
+41-v26-release-bundle.md
 ```
 
 ## Learning map
@@ -881,6 +910,8 @@ The experiment card layer turns one run into a compact JSON/Markdown/HTML summar
 The model card layer turns a registry plus experiment cards into a project-level JSON/Markdown/HTML summary for presentation and model-family review.
 
 The project audit layer checks whether the registry/model-card evidence is complete enough for release-style review.
+
+The release bundle layer packages registry, model card, and audit evidence into one handoff report.
 
 Next useful extensions:
 

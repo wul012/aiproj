@@ -129,6 +129,8 @@
  -> model_card.py、build_model_card.py、test_model_card.py：把 registry 和多张 experiment card 汇总成项目级模型卡
 40-v25-project-audit.md
  -> project_audit.py、audit_project.py、test_project_audit.py：给 registry/model card 增加 pass/warn/fail 项目审计门禁
+41-v26-release-bundle.md
+ -> release_bundle.py、build_release_bundle.py、test_release_bundle.py：把 registry、model card 和 audit 汇总成 release evidence bundle
 ```
 
 ## 项目整体理解
@@ -167,6 +169,7 @@
  -> experiment_card.json/md/html 汇总单个 run 的状态、数据、训练、评估、registry 排名和建议
  -> model_card.json/md/html 汇总整个实验系列的最佳 run、coverage、limitations 和后续建议
  -> project_audit.json/md/html 检查实验系列是否满足 release-style review 的基本门禁
+ -> release_bundle.json/md/html 汇总最终交付证据、审计状态、top runs 和 artifact 链接
  -> tokenizer.decode
  -> 生成文本
 ```
