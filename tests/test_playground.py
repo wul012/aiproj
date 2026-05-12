@@ -59,9 +59,10 @@ class PlaygroundTests(unittest.TestCase):
             self.assertNotIn("<script>alert(1)</script>", html)
 
     def test_build_playground_commands_quote_paths_and_prompt(self) -> None:
-        commands = build_playground_commands(Path("runs/minigpt"), prompt='hello "ai"')
+        run_dir = Path("runs/minigpt")
+        commands = build_playground_commands(run_dir, prompt='hello "ai"')
 
-        self.assertIn("'runs\\minigpt\\checkpoint.pt'", commands["generate"])
+        self.assertIn(f"'{run_dir / 'checkpoint.pt'}'", commands["generate"])
         self.assertIn("'hello \"ai\"'", commands["generate"])
         self.assertIn("sample_lab.py", commands["sample_lab"])
 
