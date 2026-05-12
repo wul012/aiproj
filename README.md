@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 27 is a MiniGPT learning project with release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 28 is a MiniGPT learning project with generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -14,6 +14,7 @@ Version 27 is a MiniGPT learning project with release gates, release evidence bu
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
 - Fixed prompt evaluation suite for running the same prompts against different checkpoints and exporting JSON/CSV/SVG reports
+- Generation quality analyzer that reads `eval_suite.json` or `sample_lab.json`, checks length/diversity/repetition/prompt echo, and writes `generation_quality.json`, `generation_quality.csv`, `generation_quality.md`, `generation_quality.svg`, and `generation_quality.html`
 - Run registry builder that indexes multiple run directories, manifests, data fingerprints, quality status, eval suite summaries, metrics, and artifacts
 - Run registry HTML report for browsing many experiments, opening dashboard/manifest/eval links, and scanning quality/fingerprint status in a browser
 - Registry HTML controls for search, quality filtering, sorting, direction toggling, and visible-row counts
@@ -48,8 +49,8 @@ Version 27 is a MiniGPT learning project with release gates, release evidence bu
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, and release gates
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, and release gates
+- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, generation quality reports, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, and release gates
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, generation quality reports, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, and release gates
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -85,6 +86,7 @@ v24.0.0 MiniGPT v24 model cards
 v25.0.0 MiniGPT v25 project audit
 v26.0.0 MiniGPT v26 release bundle
 v27.0.0 MiniGPT v27 release gate
+v28.0.0 MiniGPT v28 generation quality
 ```
 
 ## Project structure
@@ -199,7 +201,11 @@ v27.0.0 MiniGPT v27 release gate
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 27/
+│   ├── 27/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 28/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -207,6 +213,7 @@ v27.0.0 MiniGPT v27 release gate
 │   ├── eval_prompts.json
 │   └── sample_zh.txt
 ├── scripts/
+│   ├── analyze_generation_quality.py
 │   ├── audit_project.py
 │   ├── build_dashboard.py
 │   ├── build_experiment_card.py
@@ -241,6 +248,7 @@ v27.0.0 MiniGPT v27 release gate
 │       ├── dataset.py
 │       ├── eval_suite.py
 │       ├── experiment_card.py
+│       ├── generation_quality.py
 │       ├── history.py
 │       ├── manifest.py
 │       ├── model.py
@@ -265,6 +273,7 @@ v27.0.0 MiniGPT v27 release gate
 │   ├── test_dataset.py
 │   ├── test_eval_suite.py
 │   ├── test_experiment_card.py
+│   ├── test_generation_quality.py
 │   ├── test_history.py
 │   ├── test_manifest.py
 │   ├── test_model.py
@@ -412,6 +421,14 @@ Run the fixed prompt evaluation suite:
 ```powershell
 python scripts/eval_suite.py --checkpoint runs/minigpt/checkpoint.pt --suite data/eval_prompts.json
 ```
+
+Analyze generation quality from eval suite or sampling output:
+
+```powershell
+python scripts/analyze_generation_quality.py --input runs/minigpt/eval_suite/eval_suite.json --out-dir runs/minigpt/generation-quality
+```
+
+The output directory contains `generation_quality.json`, `generation_quality.csv`, `generation_quality.md`, `generation_quality.svg`, and `generation_quality.html`. The analyzer checks continuation length, character diversity, repeated character runs, repeated n-gram ratio, and prompt echo hints.
 
 Inspect model structure and parameter counts:
 
@@ -625,6 +642,8 @@ a/26/图片
 a/26/解释/说明.md
 a/27/图片
 a/27/解释/说明.md
+a/28/图片
+a/28/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -843,6 +862,14 @@ Version 27 screenshots:
 - `04-playwright-release-gate.png`: release gate HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v27 docs and archive check
 
+Version 28 screenshots:
+
+- `01-unit-tests.png`: generation quality tests plus existing regression tests
+- `02-generation-quality-smoke.png`: eval suite input analyzed through the generation quality CLI
+- `03-generation-quality-structure-check.png`: JSON/Markdown/SVG/HTML quality status, policy, cases, and flags
+- `04-playwright-generation-quality.png`: generation quality HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v28 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -896,6 +923,7 @@ Suggested reading order:
 40-v25-project-audit.md
 41-v26-release-bundle.md
 42-v27-release-gate.md
+43-v28-generation-quality.md
 ```
 
 ## Learning map
@@ -931,6 +959,8 @@ The dataset quality layer adds a stable corpus fingerprint plus lightweight chec
 
 The eval suite layer runs a fixed set of prompts against a checkpoint and saves comparable JSON/CSV/SVG outputs.
 
+The generation quality layer reads eval suite or sampling outputs and flags short, repetitive, low-diversity, or prompt-echo generations.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
@@ -947,5 +977,5 @@ Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add richer generation-quality analysis to model cards, audits, and gates.
+- Connect generation-quality status into model cards, audits, and release gates.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

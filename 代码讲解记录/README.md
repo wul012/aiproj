@@ -133,6 +133,8 @@
  -> release_bundle.py、build_release_bundle.py、test_release_bundle.py：把 registry、model card 和 audit 汇总成 release evidence bundle
 42-v27-release-gate.md
  -> release_gate.py、check_release_gate.py、test_release_gate.py：读取 release bundle 并给出可自动化的 pass/warn/fail 发布门禁
+43-v28-generation-quality.md
+ -> generation_quality.py、analyze_generation_quality.py、test_generation_quality.py：读取 eval suite/sample lab 输出并检查生成长度、多样性、重复和 prompt echo
 ```
 
 ## 项目整体理解
@@ -153,6 +155,7 @@
  -> logits
  -> top-k next-token predictions / perplexity
  -> eval_suite.json/csv/svg 固定 prompt 生成评估
+ -> generation_quality.json/csv/md/svg/html 检查生成样本长度、多样性、重复和 prompt echo
  -> cross entropy loss
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
