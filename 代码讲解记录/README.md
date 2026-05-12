@@ -43,6 +43,12 @@
 
 10-version-4-tests-docs.md
  -> v4 attention smoke、README、a/4 归档和 tag 说明
+
+11-v5-prediction-evaluation.md
+ -> prediction.py、inspect_predictions.py、evaluate.py：查看 next-token 概率和 checkpoint perplexity
+
+12-version-5-tests-docs.md
+ -> v5 prediction/evaluation smoke、README、a/5 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -59,6 +65,7 @@
  -> MiniGPT.forward
  -> attention capture 可选记录每层注意力矩阵
  -> logits
+ -> top-k next-token predictions / perplexity
  -> cross entropy loss
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
