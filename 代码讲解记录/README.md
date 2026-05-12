@@ -61,6 +61,12 @@
 
 16-version-7-tests-docs.md
  -> v7 model report smoke、README、a/7 归档和 tag 说明
+
+17-v8-dashboard.md
+ -> dashboard.py、build_dashboard.py：把实验产物汇总成静态 HTML 报告
+
+18-version-8-tests-docs.md
+ -> v8 dashboard smoke、README、a/8 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -84,6 +90,7 @@
  -> metrics.jsonl / loss_curve.svg / sample.txt
  -> generate 自回归采样新 token
  -> chat prompt 包装多轮消息
+ -> dashboard.html 汇总实验产物
  -> tokenizer.decode
  -> 生成文本
 ```

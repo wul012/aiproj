@@ -1,6 +1,7 @@
 """MiniGPT learning project."""
 
 from .chat import ChatTurn, PreparedChatPrompt, build_chat_prompt
+from .dashboard import DashboardArtifact, build_dashboard_payload, write_dashboard
 from .history import TrainingRecord
 from .model import GPTConfig, MiniGPT
 from .model_report import ParameterGroup, build_model_report
@@ -18,6 +19,9 @@ __all__ = [
     "ChatTurn",
     "PreparedChatPrompt",
     "build_chat_prompt",
+    "DashboardArtifact",
+    "build_dashboard_payload",
+    "write_dashboard",
     "ParameterGroup",
     "build_model_report",
 ]
