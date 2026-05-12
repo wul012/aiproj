@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 23 is a MiniGPT learning project with generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 24 is a MiniGPT learning project with generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -21,6 +21,7 @@ Version 23 is a MiniGPT learning project with generated experiment cards, regist
 - Optional `run_notes.json` annotations with note text, tags, tag counts, CSV columns, SVG summary text, and searchable HTML chips
 - Registry best-val leaderboard with per-run rank, loss delta from the current best run, CSV columns, SVG labels, and an HTML leaderboard section
 - Experiment card exporter that summarizes one run into `experiment_card.json`, `experiment_card.md`, and `experiment_card.html`, with registry rank, notes, data quality, training, evaluation, artifact, and recommendation sections
+- Model card exporter that summarizes a registry and experiment cards into `model_card.json`, `model_card.md`, and `model_card.html`, with intended use, limitations, top runs, coverage, and recommendations
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -45,7 +46,7 @@ Version 23 is a MiniGPT learning project with generated experiment cards, regist
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, and experiment cards
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, and model cards
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -77,6 +78,7 @@ v20.0.0 MiniGPT v20 registry saved views
 v21.0.0 MiniGPT v21 registry annotations
 v22.0.0 MiniGPT v22 registry leaderboards
 v23.0.0 MiniGPT v23 experiment cards
+v24.0.0 MiniGPT v24 model cards
 ```
 
 ## Project structure
@@ -175,7 +177,11 @@ v23.0.0 MiniGPT v23 experiment cards
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 23/
+│   ├── 23/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 24/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -185,6 +191,7 @@ v23.0.0 MiniGPT v23 experiment cards
 ├── scripts/
 │   ├── build_dashboard.py
 │   ├── build_experiment_card.py
+│   ├── build_model_card.py
 │   ├── build_playground.py
 │   ├── chat.py
 │   ├── compare_runs.py
@@ -216,6 +223,7 @@ v23.0.0 MiniGPT v23 experiment cards
 │       ├── history.py
 │       ├── manifest.py
 │       ├── model.py
+│       ├── model_card.py
 │       ├── model_report.py
 │       ├── prediction.py
 │       ├── registry.py
@@ -236,6 +244,7 @@ v23.0.0 MiniGPT v23 experiment cards
 │   ├── test_history.py
 │   ├── test_manifest.py
 │   ├── test_model.py
+│   ├── test_model_card.py
 │   ├── test_model_report.py
 │   ├── test_playground.py
 │   ├── test_prediction.py
@@ -282,7 +291,8 @@ v23.0.0 MiniGPT v23 experiment cards
 │   ├── 35-v20-registry-saved-views.md
 │   ├── 36-v21-registry-annotations.md
 │   ├── 37-v22-registry-leaderboards.md
-│   └── 38-v23-experiment-cards.md
+│   ├── 38-v23-experiment-cards.md
+│   └── 39-v24-model-cards.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -445,6 +455,14 @@ python scripts/build_experiment_card.py --run-dir runs/minigpt --registry runs/r
 
 The output directory contains `experiment_card.json`, `experiment_card.md`, and `experiment_card.html`. The card summarizes run status, notes/tags, dataset quality, training settings, evaluation, registry rank, artifacts, and follow-up recommendations.
 
+Build a project-level model card from the registry and experiment cards:
+
+```powershell
+python scripts/build_model_card.py --registry runs/registry/registry.json --out-dir runs/model-card
+```
+
+The output directory contains `model_card.json`, `model_card.md`, and `model_card.html`. The model card summarizes intended use, limitations, best run, top runs, experiment-card coverage, quality/eval coverage, and next-step recommendations.
+
 Discover run directories under a parent:
 
 ```powershell
@@ -546,6 +564,8 @@ a/22/图片
 a/22/解释/说明.md
 a/23/图片
 a/23/解释/说明.md
+a/24/图片
+a/24/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -732,6 +752,14 @@ Version 23 screenshots:
 - `04-playwright-experiment-card.png`: experiment card HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v23 docs and archive check
 
+Version 24 screenshots:
+
+- `01-unit-tests.png`: model card tests plus existing regression tests
+- `02-model-card-smoke.png`: registry, two experiment cards, and project-level model card generation
+- `03-model-card-structure-check.png`: JSON/Markdown/HTML model card coverage, top run, links, and recommendations
+- `04-playwright-model-card.png`: model card HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v24 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -781,6 +809,7 @@ Suggested reading order:
 36-v21-registry-annotations.md
 37-v22-registry-leaderboards.md
 38-v23-experiment-cards.md
+39-v24-model-cards.md
 ```
 
 ## Learning map
@@ -820,9 +849,11 @@ The run registry layer indexes multiple run directories so experiments can be sc
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
 
+The model card layer turns a registry plus experiment cards into a project-level JSON/Markdown/HTML summary for presentation and model-family review.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add a richer model card that compares several experiment cards.
+- Add richer generation-quality analysis to model cards.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
