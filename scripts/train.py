@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.dataset import get_batch, load_text, split_token_ids
 from minigpt.data_prep import build_dataset_report, build_prepared_dataset, write_dataset_report_json, write_dataset_report_svg
 from minigpt.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
+from minigpt.manifest import build_environment_metadata, build_run_manifest, utc_now, write_run_manifest_json, write_run_manifest_svg
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer
 
@@ -182,6 +183,7 @@ def write_sample(
 
 def main() -> None:
     args = parse_args()
+    started_at = utc_now()
     default_out_dir = ROOT / "runs" / "minigpt"
     if args.resume is not None and args.out_dir == default_out_dir:
         args.out_dir = args.resume.parent
@@ -280,12 +282,13 @@ def main() -> None:
                 ),
             )
 
+    history_summary = None
     records = load_records(history_path)
     if records:
         write_loss_curve_svg(records, args.out_dir / "loss_curve.svg")
-        summary = summarize_records(records)
+        history_summary = summarize_records(records)
         (args.out_dir / "history_summary.json").write_text(
-            json.dumps(summary, ensure_ascii=False, indent=2),
+            json.dumps(history_summary, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 
@@ -314,12 +317,38 @@ def main() -> None:
     }
     torch.save(checkpoint, args.out_dir / "checkpoint.pt")
     tokenizer.save(args.out_dir / "tokenizer.json")
+    train_config = vars(args) | {"device_used": str(device), "data_source": data_source}
     (args.out_dir / "train_config.json").write_text(
-        json.dumps(vars(args) | {"device_used": str(device), "data_source": data_source}, ensure_ascii=False, indent=2, default=str),
+        json.dumps(train_config, ensure_ascii=False, indent=2, default=str),
         encoding="utf-8",
     )
+    finished_at = utc_now()
+    manifest = build_run_manifest(
+        args.out_dir,
+        args=train_config,
+        data_source=data_source,
+        model_config=asdict(config),
+        tokenizer_name=getattr(tokenizer, "name", "unknown"),
+        token_count=len(token_ids),
+        train_token_count=len(train_data),
+        val_token_count=len(val_data),
+        parameter_count=model.parameter_count(),
+        device_used=str(device),
+        started_at=started_at,
+        finished_at=finished_at,
+        start_step=start_step,
+        end_step=args.max_iters,
+        last_loss=last_loss,
+        history_summary=history_summary,
+        command=[Path(sys.executable).name, *sys.argv],
+        repo_root=ROOT,
+        environment=build_environment_metadata({"torch": torch.__version__, "numpy": np.__version__}),
+    )
+    write_run_manifest_json(manifest, args.out_dir / "run_manifest.json")
+    write_run_manifest_svg(manifest, args.out_dir / "run_manifest.svg")
     print(f"saved={args.out_dir}")
     print(f"history={history_path}")
+    print(f"manifest={args.out_dir / 'run_manifest.json'}")
     if not args.no_sample:
         print(f"sample={args.out_dir / 'sample.txt'}")
 

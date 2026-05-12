@@ -87,6 +87,8 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("metrics", "Metrics history", "metrics.jsonl", "JSONL", "step-by-step train/validation losses"),
         ("history_summary", "History summary", "history_summary.json", "JSON", "best and latest loss summary"),
         ("loss_curve", "Loss curve", "loss_curve.svg", "SVG", "training and validation loss chart"),
+        ("run_manifest", "Run manifest", "run_manifest.json", "JSON", "reproducibility metadata for the run"),
+        ("manifest_svg", "Manifest chart", "run_manifest.svg", "SVG", "run manifest summary chart"),
         ("prepared_corpus", "Prepared corpus", "prepared_corpus.txt", "TXT", "merged training corpus from data-dir sources"),
         ("dataset_report", "Dataset report", "dataset_report.json", "JSON", "source and character statistics for the corpus"),
         ("dataset_svg", "Dataset chart", "dataset_report.svg", "SVG", "dataset source size chart"),
@@ -120,6 +122,7 @@ def build_dashboard_payload(
     train_config = _read_json(root / "train_config.json", warnings)
     history_summary = _read_json(root / "history_summary.json", warnings)
     eval_report = _read_json(root / "eval_report.json", warnings)
+    run_manifest = _read_json(root / "run_manifest.json", warnings)
     dataset_report = _read_json(root / "dataset_report.json", warnings)
     model_report = _read_json(root / "model_report" / "model_report.json", warnings)
     predictions = _read_json(root / "predictions" / "predictions.json", warnings)
@@ -154,7 +157,9 @@ def build_dashboard_payload(
         "perplexity": _pick(eval_report, "perplexity"),
         "dataset_sources": _pick(dataset_report, "source_count"),
         "dataset_chars": _pick(dataset_report, "char_count"),
-        "total_parameters": _pick(model_report, "total_parameters"),
+        "git_commit": _nested_pick(run_manifest, "git", "short_commit"),
+        "manifest_created_at": _pick(run_manifest, "created_at"),
+        "total_parameters": _pick(model_report, "total_parameters") or _nested_pick(run_manifest, "model", "parameter_count"),
         "top_prediction": top_prediction,
         "last_assistant": last_assistant,
     }
@@ -168,6 +173,7 @@ def build_dashboard_payload(
         "train_config": train_config if isinstance(train_config, dict) else None,
         "history_summary": history_summary if isinstance(history_summary, dict) else None,
         "eval_report": eval_report if isinstance(eval_report, dict) else None,
+        "run_manifest": run_manifest if isinstance(run_manifest, dict) else None,
         "dataset_report": dataset_report if isinstance(dataset_report, dict) else None,
         "model_report": model_report if isinstance(model_report, dict) else None,
         "model_config": model_config if isinstance(model_config, dict) else None,
@@ -186,6 +192,15 @@ def _pick(payload: Any, key: str) -> Any:
     return None
 
 
+def _nested_pick(payload: Any, section: str, key: str) -> Any:
+    if not isinstance(payload, dict):
+        return None
+    nested = payload.get(section)
+    if isinstance(nested, dict):
+        return nested.get(key)
+    return None
+
+
 def render_dashboard_html(payload: dict[str, Any]) -> str:
     title = str(payload["title"])
     summary = payload["summary"]
@@ -198,6 +213,7 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         ("Best val", _fmt(summary.get("best_val_loss"))),
         ("Eval loss", _fmt(summary.get("eval_loss"))),
         ("Perplexity", _fmt(summary.get("perplexity"))),
+        ("Git", summary.get("git_commit")),
         ("Parameters", _fmt_int(summary.get("total_parameters"))),
     ]
 
@@ -206,6 +222,7 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         f"<header><h1>{_e(title)}</h1><p>{_e(str(payload['run_dir']))}</p></header>",
         _stats_grid(stats),
         _artifact_grid(artifacts),
+        _manifest_section(payload),
         _dataset_section(payload),
         _model_section(payload),
         _training_section(payload),
@@ -388,6 +405,33 @@ def _model_section(payload: dict[str, Any]) -> str:
         f"<div><table><tr><th>Group</th><th>Params</th><th>Share</th><th></th></tr>{''.join(group_rows)}</table></div>"
         f"</div>{figure}</section>"
     )
+
+
+def _manifest_section(payload: dict[str, Any]) -> str:
+    manifest = payload.get("run_manifest")
+    if not isinstance(manifest, dict):
+        return ""
+    git = manifest.get("git", {}) if isinstance(manifest.get("git"), dict) else {}
+    data = manifest.get("data", {}) if isinstance(manifest.get("data"), dict) else {}
+    model = manifest.get("model", {}) if isinstance(manifest.get("model"), dict) else {}
+    training = manifest.get("training", {}) if isinstance(manifest.get("training"), dict) else {}
+    results = manifest.get("results", {}) if isinstance(manifest.get("results"), dict) else {}
+    history = results.get("history_summary", {}) if isinstance(results.get("history_summary"), dict) else {}
+    rows = [
+        ("Commit", git.get("short_commit")),
+        ("Branch", git.get("branch")),
+        ("Dirty", git.get("dirty")),
+        ("Tokens", data.get("token_count")),
+        ("Train/val", f"{data.get('train_token_count')} / {data.get('val_token_count')}"),
+        ("Parameters", _fmt_int(model.get("parameter_count"))),
+        ("Tokenizer", training.get("tokenizer")),
+        ("Best val", _fmt(history.get("best_val_loss"))),
+        ("Started", manifest.get("started_at")),
+        ("Duration", f"{manifest.get('duration_seconds')}s"),
+    ]
+    table = "".join(f"<tr><th>{_e(label)}</th><td>{_e(_fmt_missing(value))}</td></tr>" for label, value in rows)
+    figure = _image(payload, "manifest_svg", "Run manifest")
+    return f"<h2>Run Manifest</h2><section class=\"panel\"><table>{table}</table>{figure}</section>"
 
 
 def _dataset_section(payload: dict[str, Any]) -> str:

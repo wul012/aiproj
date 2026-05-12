@@ -97,6 +97,9 @@
 
 28-version-13-tests-docs.md
  -> v13 dataset smoke、README、a/13 归档和 tag 说明
+
+29-v14-run-manifest.md
+ -> manifest.py、train.py、dashboard.py、playground.py：记录训练 run 的复现元数据与产物索引
 ```
 
 ## 项目整体理解
@@ -120,6 +123,7 @@
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
  -> dataset_report.json/svg 记录语料来源和规模
+ -> run_manifest.json/svg 记录代码、环境、数据、配置、指标和产物索引
  -> generate 自回归采样新 token
  -> chat prompt 包装多轮消息
  -> dashboard.html 汇总实验产物

@@ -164,6 +164,8 @@ def _collect_links(root: Path, out_path: Path, base_dir: Path) -> list[Playgroun
         ("metrics", "Metrics", root / "metrics.jsonl", "JSONL"),
         ("history_summary", "History summary", root / "history_summary.json", "JSON"),
         ("loss_curve", "Loss curve", root / "loss_curve.svg", "SVG"),
+        ("run_manifest", "Run manifest", root / "run_manifest.json", "JSON"),
+        ("manifest_svg", "Manifest chart", root / "run_manifest.svg", "SVG"),
         ("prepared_corpus", "Prepared corpus", root / "prepared_corpus.txt", "TXT"),
         ("dataset_report", "Dataset report", root / "dataset_report.json", "JSON"),
         ("dataset_svg", "Dataset chart", root / "dataset_report.svg", "SVG"),

@@ -17,12 +17,15 @@ class DashboardTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = Path(tmp)
             (run_dir / "checkpoint.pt").write_bytes(b"fake")
+            (run_dir / "run_manifest.json").write_text(json.dumps({"git": {"short_commit": "abc1234"}}), encoding="utf-8")
 
             artifacts = collect_artifacts(run_dir, run_dir)
 
             checkpoint = next(artifact for artifact in artifacts if artifact.key == "checkpoint")
             self.assertTrue(checkpoint.exists)
             self.assertEqual(checkpoint.href, "checkpoint.pt")
+            manifest = next(artifact for artifact in artifacts if artifact.key == "run_manifest")
+            self.assertTrue(manifest.exists)
 
     def test_build_payload_reads_summary_sources(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -30,10 +33,14 @@ class DashboardTests(unittest.TestCase):
             (run_dir / "train_config.json").write_text(json.dumps({"tokenizer": "char", "max_iters": 2}), encoding="utf-8")
             (run_dir / "history_summary.json").write_text(json.dumps({"best_val_loss": 1.25}), encoding="utf-8")
             (run_dir / "eval_report.json").write_text(json.dumps({"loss": 1.5, "perplexity": 4.48}), encoding="utf-8")
-            model_dir = run_dir / "model_report"
-            model_dir.mkdir()
-            (model_dir / "model_report.json").write_text(
-                json.dumps({"total_parameters": 123, "config": {"n_layer": 1}, "owned_parameter_groups": []}),
+            (run_dir / "run_manifest.json").write_text(
+                json.dumps(
+                    {
+                        "created_at": "2026-05-12T00:00:00Z",
+                        "git": {"short_commit": "abc1234"},
+                        "model": {"parameter_count": 456},
+                    }
+                ),
                 encoding="utf-8",
             )
 
@@ -41,7 +48,8 @@ class DashboardTests(unittest.TestCase):
 
             self.assertEqual(payload["summary"]["tokenizer"], "char")
             self.assertEqual(payload["summary"]["best_val_loss"], 1.25)
-            self.assertEqual(payload["summary"]["total_parameters"], 123)
+            self.assertEqual(payload["summary"]["total_parameters"], 456)
+            self.assertEqual(payload["summary"]["git_commit"], "abc1234")
 
     def test_render_dashboard_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

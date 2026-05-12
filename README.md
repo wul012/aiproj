@@ -4,13 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 13 is a MiniGPT learning project with dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 14 is a MiniGPT learning project with run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
 - Optional character-seeded BPE tokenizer for understanding subword merge rules
 - Tokenizer inspection script for comparing char and BPE tokenization
 - Dataset preparation script for merging multiple `.txt` files and exporting dataset reports
+- Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -18,8 +19,8 @@ Version 13 is a MiniGPT learning project with dataset preparation and reporting,
 - Next-token prediction inspection script that exports probability JSON and SVG bar charts
 - Evaluation script that reports validation loss and perplexity for a checkpoint
 - Model report script that exports parameter groups, per-block parameter counts, tensor shapes, JSON reports, and SVG architecture diagrams
-- Dashboard builder that combines run artifacts into a local `dashboard.html` report
-- Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, and artifact links
+- Dashboard builder that combines run artifacts, dataset reports, and run manifests into a local `dashboard.html` report
+- Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, run manifests, and artifact links
 - Playground server that serves the UI and exposes `/api/health` plus `/api/generate` for local live generation
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
 - Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
@@ -28,13 +29,13 @@ Version 13 is a MiniGPT learning project with dataset preparation and reporting,
 - Training script with configurable model size, batch size, context window, learning rate, evaluation interval, and CPU/CUDA device selection
 - Training script can read a single file, a prepared corpus, or a directory of `.txt` files
 - Resumable training with `--resume`, optimizer-state checkpointing, and target-step continuation
-- Training artifact output: `metrics.jsonl`, `history_summary.json`, `loss_curve.svg`, and `sample.txt`
+- Training artifact output: `metrics.jsonl`, `history_summary.json`, `loss_curve.svg`, `run_manifest.json`, `run_manifest.svg`, and `sample.txt`
 - Generation script with checkpoint loading, prompt encoding, temperature sampling, and top-k sampling
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, and dataset preparation
+- Unit tests for tokenizer, dataset preparation, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, and run manifests
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -56,6 +57,7 @@ v10.0.0 MiniGPT v10 sampling lab
 v11.0.0 MiniGPT v11 playground UI
 v12.0.0 MiniGPT v12 playground server
 v13.0.0 MiniGPT v13 dataset preparation
+v14.0.0 MiniGPT v14 run manifest
 ```
 
 ## Project structure
@@ -114,7 +116,11 @@ v13.0.0 MiniGPT v13 dataset preparation
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 13/
+│   ├── 13/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 14/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -145,6 +151,7 @@ v13.0.0 MiniGPT v13 dataset preparation
 │       ├── data_prep.py
 │       ├── dataset.py
 │       ├── history.py
+│       ├── manifest.py
 │       ├── model.py
 │       ├── model_report.py
 │       ├── prediction.py
@@ -160,6 +167,7 @@ v13.0.0 MiniGPT v13 dataset preparation
 │   ├── test_data_prep.py
 │   ├── test_dataset.py
 │   ├── test_history.py
+│   ├── test_manifest.py
 │   ├── test_model.py
 │   ├── test_model_report.py
 │   ├── test_playground.py
@@ -196,7 +204,8 @@ v13.0.0 MiniGPT v13 dataset preparation
 │   ├── 25-v12-playground-server.md
 │   ├── 26-version-12-tests-docs.md
 │   ├── 27-v13-dataset-preparation.md
-│   └── 28-version-13-tests-docs.md
+│   ├── 28-version-13-tests-docs.md
+│   └── 29-v14-run-manifest.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -235,6 +244,8 @@ train_config.json
 metrics.jsonl
 history_summary.json
 loss_curve.svg
+run_manifest.json
+run_manifest.svg
 sample.txt
 ```
 
@@ -391,6 +402,8 @@ a/12/图片
 a/12/解释/说明.md
 a/13/图片
 a/13/解释/说明.md
+a/14/图片
+a/14/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -497,6 +510,14 @@ Version 13 screenshots:
 - `04-dataset-artifacts-check.png`: dataset report and dashboard/playground artifact checks
 - `05-docs-check.png`: v13 docs and archive check
 
+Version 14 screenshots:
+
+- `01-unit-tests.png`: run manifest and existing regression tests
+- `02-train-manifest-smoke.png`: training writes run manifest JSON/SVG
+- `03-manifest-json-check.png`: manifest metadata, Git, data, model, training, and artifact checks
+- `04-dashboard-playground-manifest.png`: dashboard/playground manifest artifact checks
+- `05-docs-check.png`: v14 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -536,6 +557,7 @@ Suggested reading order:
 26-version-12-tests-docs.md
 27-v13-dataset-preparation.md
 28-version-13-tests-docs.md
+29-v14-run-manifest.md
 ```
 
 ## Learning map
@@ -565,9 +587,11 @@ The playground server turns that browser surface into a local API client for `/a
 
 The dataset preparation layer makes the training corpus explicit, inspectable, and reusable across runs.
 
+The run manifest makes each training run easier to reproduce by saving code version, environment, data source, model config, metrics, and artifact inventory together.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add an experiment registry that indexes every run and its dataset report.
+- Add dataset quality checks and dataset fingerprinting.
 - Add streaming token output for the playground server.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
