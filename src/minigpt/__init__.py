@@ -7,6 +7,7 @@ from .history import TrainingRecord
 from .model import GPTConfig, MiniGPT
 from .model_report import ParameterGroup, build_model_report
 from .prediction import TokenPrediction
+from .sampling import SamplingCase, SamplingResult, default_sampling_cases
 from .tokenizer import BPETokenizer, CharTokenizer, load_tokenizer
 
 __all__ = [
@@ -27,4 +28,7 @@ __all__ = [
     "write_dashboard",
     "ParameterGroup",
     "build_model_report",
+    "SamplingCase",
+    "SamplingResult",
+    "default_sampling_cases",
 ]

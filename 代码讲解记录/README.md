@@ -73,6 +73,12 @@
 
 20-version-9-tests-docs.md
  -> v9 comparison smoke、README、a/9 归档和 tag 说明
+
+21-v10-sampling-lab.md
+ -> sampling.py、sample_lab.py：比较不同 temperature/top_k/seed 下的生成结果
+
+22-version-10-tests-docs.md
+ -> v10 sampling smoke、README、a/10 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -98,6 +104,7 @@
  -> chat prompt 包装多轮消息
  -> dashboard.html 汇总实验产物
  -> comparison.json/csv/svg 横向比较多个 run
+ -> sample_lab.json/csv/svg 比较采样参数
  -> tokenizer.decode
  -> 生成文本
 ```

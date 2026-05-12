@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 9 is a MiniGPT learning project with multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 10 is a MiniGPT learning project with a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -19,6 +19,7 @@ Version 9 is a MiniGPT learning project with multi-run comparison, a static expe
 - Model report script that exports parameter groups, per-block parameter counts, tensor shapes, JSON reports, and SVG architecture diagrams
 - Dashboard builder that combines run artifacts into a local `dashboard.html` report
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
+- Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
 - Chat prompt utilities for formatting system/user/assistant turns, trimming context windows, and stopping at role markers
 - Chat script for one-shot or interactive assistant-style generation from a checkpoint, with transcript JSON output
 - Training script with configurable model size, batch size, context window, learning rate, evaluation interval, and CPU/CUDA device selection
@@ -28,8 +29,8 @@ Version 9 is a MiniGPT learning project with multi-run comparison, a static expe
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, and run comparison
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, and run comparison
+- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, and sampling lab
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, and sampling lab
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -47,6 +48,7 @@ v6.0.0  MiniGPT v6 chat wrapper
 v7.0.0  MiniGPT v7 model report
 v8.0.0  MiniGPT v8 dashboard
 v9.0.0  MiniGPT v9 run comparison
+v10.0.0 MiniGPT v10 sampling lab
 ```
 
 ## Project structure
@@ -59,11 +61,6 @@ v9.0.0  MiniGPT v9 run comparison
 ├── a/
 │   ├── 1/
 │   │   ├── 图片/
-│   │   │   ├── 01-project-tree.png
-│   │   │   ├── 02-unit-tests.png
-│   │   │   ├── 03-train-smoke.png
-│   │   │   ├── 04-generate-smoke.png
-│   │   │   └── 05-code-explanation-check.png
 │   │   └── 解释/
 │   │       └── 说明.md
 │   ├── 2/
@@ -94,7 +91,11 @@ v9.0.0  MiniGPT v9 run comparison
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 9/
+│   ├── 9/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 10/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -111,6 +112,7 @@ v9.0.0  MiniGPT v9 run comparison
 │   ├── inspect_predictions.py
 │   ├── inspect_tokenizer.py
 │   ├── plot_history.py
+│   ├── sample_lab.py
 │   └── train.py
 ├── src/
 │   └── minigpt/
@@ -123,6 +125,7 @@ v9.0.0  MiniGPT v9 run comparison
 │       ├── model.py
 │       ├── model_report.py
 │       ├── prediction.py
+│       ├── sampling.py
 │       └── tokenizer.py
 ├── tests/
 │   ├── test_attention.py
@@ -134,6 +137,7 @@ v9.0.0  MiniGPT v9 run comparison
 │   ├── test_model.py
 │   ├── test_model_report.py
 │   ├── test_prediction.py
+│   ├── test_sampling.py
 │   └── test_tokenizer.py
 ├── 代码讲解记录/
 │   ├── README.md
@@ -156,7 +160,9 @@ v9.0.0  MiniGPT v9 run comparison
 │   ├── 17-v8-dashboard.md
 │   ├── 18-version-8-tests-docs.md
 │   ├── 19-v9-run-comparison.md
-│   └── 20-version-9-tests-docs.md
+│   ├── 20-version-9-tests-docs.md
+│   ├── 21-v10-sampling-lab.md
+│   └── 22-version-10-tests-docs.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -258,6 +264,12 @@ Compare multiple run directories:
 python scripts/compare_runs.py runs/tiny runs/wide --name tiny --name wide --out-dir runs/comparison
 ```
 
+Compare sampling settings for one checkpoint:
+
+```powershell
+python scripts/sample_lab.py --checkpoint runs/minigpt/checkpoint.pt --prompt token --max-new-tokens 60
+```
+
 ## Generate
 
 ```powershell
@@ -313,6 +325,8 @@ a/8/图片
 a/8/解释/说明.md
 a/9/图片
 a/9/解释/说明.md
+a/10/图片
+a/10/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -387,6 +401,14 @@ Version 9 screenshots:
 - `04-comparison-artifacts-check.png`: comparison artifact structure check
 - `05-docs-check.png`: v9 docs and archive check
 
+Version 10 screenshots:
+
+- `01-unit-tests.png`: sampling lab and existing regression tests
+- `02-sampling-train-smoke.png`: checkpoint training smoke for sampling lab
+- `03-sample-lab.png`: multi-configuration sampling JSON/CSV/SVG export
+- `04-sampling-artifacts-check.png`: sampling artifact structure check
+- `05-docs-check.png`: v10 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -418,6 +440,8 @@ Suggested reading order:
 18-version-8-tests-docs.md
 19-v9-run-comparison.md
 20-version-9-tests-docs.md
+21-v10-sampling-lab.md
+22-version-10-tests-docs.md
 ```
 
 ## Learning map
@@ -438,6 +462,8 @@ The model report shows where parameters live and how tensor shapes move through 
 The dashboard turns those artifacts into one local HTML report that can be opened without a server.
 
 The comparison exporter reads multiple run directories and makes side-by-side experiment summaries.
+
+The sampling lab compares how generation changes when temperature, top-k, and seed change.
 
 Next useful extensions:
 
