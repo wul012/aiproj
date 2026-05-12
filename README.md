@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 11 is a MiniGPT learning project with a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 12 is a MiniGPT learning project with a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -19,6 +19,7 @@ Version 11 is a MiniGPT learning project with a static playground Web UI, a samp
 - Model report script that exports parameter groups, per-block parameter counts, tensor shapes, JSON reports, and SVG architecture diagrams
 - Dashboard builder that combines run artifacts into a local `dashboard.html` report
 - Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, and artifact links
+- Playground server that serves the UI and exposes `/api/health` plus `/api/generate` for local live generation
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
 - Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
 - Chat prompt utilities for formatting system/user/assistant turns, trimming context windows, and stopping at role markers
@@ -30,8 +31,8 @@ Version 11 is a MiniGPT learning project with a static playground Web UI, a samp
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, and playground UI export
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, and playground UI
+- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, and playground server
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -51,6 +52,7 @@ v8.0.0  MiniGPT v8 dashboard
 v9.0.0  MiniGPT v9 run comparison
 v10.0.0 MiniGPT v10 sampling lab
 v11.0.0 MiniGPT v11 playground UI
+v12.0.0 MiniGPT v12 playground server
 ```
 
 ## Project structure
@@ -101,7 +103,11 @@ v11.0.0 MiniGPT v11 playground UI
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 11/
+│   ├── 11/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 12/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -120,6 +126,7 @@ v11.0.0 MiniGPT v11 playground UI
 │   ├── inspect_tokenizer.py
 │   ├── plot_history.py
 │   ├── sample_lab.py
+│   ├── serve_playground.py
 │   └── train.py
 ├── src/
 │   └── minigpt/
@@ -134,6 +141,7 @@ v11.0.0 MiniGPT v11 playground UI
 │       ├── prediction.py
 │       ├── playground.py
 │       ├── sampling.py
+│       ├── server.py
 │       └── tokenizer.py
 ├── tests/
 │   ├── test_attention.py
@@ -147,6 +155,7 @@ v11.0.0 MiniGPT v11 playground UI
 │   ├── test_playground.py
 │   ├── test_prediction.py
 │   ├── test_sampling.py
+│   ├── test_server.py
 │   └── test_tokenizer.py
 ├── 代码讲解记录/
 │   ├── README.md
@@ -173,7 +182,9 @@ v11.0.0 MiniGPT v11 playground UI
 │   ├── 21-v10-sampling-lab.md
 │   ├── 22-version-10-tests-docs.md
 │   ├── 23-v11-playground-ui.md
-│   └── 24-version-11-tests-docs.md
+│   ├── 24-version-11-tests-docs.md
+│   ├── 25-v12-playground-server.md
+│   └── 26-version-12-tests-docs.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -275,6 +286,12 @@ Build a static playground UI:
 python scripts/build_playground.py --run-dir runs/minigpt
 ```
 
+Serve the playground with a local generation API:
+
+```powershell
+python scripts/serve_playground.py --run-dir runs/minigpt --device cpu
+```
+
 Compare multiple run directories:
 
 ```powershell
@@ -346,6 +363,8 @@ a/10/图片
 a/10/解释/说明.md
 a/11/图片
 a/11/解释/说明.md
+a/12/图片
+a/12/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -436,6 +455,14 @@ Version 11 screenshots:
 - `04-playground-html-check.png`: generated playground structure check
 - `05-docs-check.png`: v11 docs and archive check
 
+Version 12 screenshots:
+
+- `01-unit-tests.png`: server API, playground UI, and existing regression tests
+- `02-server-train-smoke.png`: small checkpoint prepared for live server generation
+- `03-serve-playground.png`: local server health and generation API smoke
+- `04-server-artifacts-check.png`: server output and artifact structure check
+- `05-docs-check.png`: v12 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -471,6 +498,8 @@ Suggested reading order:
 22-version-10-tests-docs.md
 23-v11-playground-ui.md
 24-version-11-tests-docs.md
+25-v12-playground-server.md
+26-version-12-tests-docs.md
 ```
 
 ## Learning map
@@ -496,8 +525,10 @@ The sampling lab compares how generation changes when temperature, top-k, and se
 
 The playground UI turns a run directory into a local browser surface for prompt controls, command snippets, sampling tables, and artifact links.
 
+The playground server turns that browser surface into a local API client for `/api/health` and `/api/generate`.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add a lightweight local API server so the playground can run generation live.
+- Add streaming token output for the playground server.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

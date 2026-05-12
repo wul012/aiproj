@@ -119,6 +119,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         f"<header><h1>{_e(title)}</h1><p>{_e(payload['run_dir'])}</p></header>",
         _stats(stats),
         _command_builder(defaults),
+        _live_section(),
         _sampling_section(payload.get("sampling_report")),
         _link_section(payload["links"]),
         _warning_section(payload.get("warnings", [])),
@@ -304,6 +305,17 @@ pre {
   border-radius: 7px;
   padding: 10px;
 }
+.live-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.output {
+  margin-top: 12px;
+  min-height: 92px;
+}
 .links { padding-top: 0; }
 .link { padding: 12px; min-height: 105px; }
 .link a { color: var(--blue); font-weight: 700; text-decoration: none; }
@@ -358,6 +370,32 @@ function buildCommands() {{
   document.getElementById('chatCommand').textContent = chat;
   document.getElementById('sampleCommand').textContent = sample;
 }}
+async function generateLive() {{
+  const output = document.getElementById('liveOutput');
+  const payload = {{
+    prompt: document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt,
+    max_new_tokens: Number(document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens),
+    temperature: Number(document.getElementById('temperatureInput').value || MiniGPTPlayground.defaults.temperature),
+    top_k: Number(document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k),
+    seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
+  }};
+  output.textContent = 'Generating...';
+  try {{
+    const response = await fetch('/api/generate', {{
+      method: 'POST',
+      headers: {{'Content-Type': 'application/json'}},
+      body: JSON.stringify(payload),
+    }});
+    const data = await response.json();
+    if (!response.ok) {{
+      output.textContent = data.error || 'Generation failed';
+      return;
+    }}
+    output.textContent = data.generated || data.continuation || '';
+  }} catch (error) {{
+    output.textContent = 'Start scripts/serve_playground.py to use live generation.';
+  }}
+}}
 function copyCommand(id) {{
   navigator.clipboard.writeText(document.getElementById(id).textContent);
 }}
@@ -365,6 +403,7 @@ window.addEventListener('DOMContentLoaded', () => {{
   for (const id of ['promptInput', 'maxTokensInput', 'temperatureInput', 'topKInput', 'seedInput']) {{
     document.getElementById(id).addEventListener('input', buildCommands);
   }}
+  document.getElementById('liveGenerateButton').addEventListener('click', generateLive);
   buildCommands();
 }});
 </script>"""
@@ -398,6 +437,16 @@ def _command_builder(defaults: dict[str, Any]) -> str:
     <div class="command"><pre id="chatCommand"></pre><button type="button" onclick="copyCommand('chatCommand')">Copy</button></div>
     <div class="command"><pre id="sampleCommand"></pre><button type="button" onclick="copyCommand('sampleCommand')">Copy</button></div>
   </div>
+</section>"""
+
+
+def _live_section() -> str:
+    return """<h2>Live Generate</h2>
+<section class="panel">
+  <div class="live-actions">
+    <button id="liveGenerateButton" type="button">Generate</button>
+  </div>
+  <pre id="liveOutput" class="output"></pre>
 </section>"""
 
 

@@ -56,6 +56,7 @@ class PlaygroundTests(unittest.TestCase):
             self.assertIn("&lt;MiniGPT&gt;", html)
             self.assertIn('id="promptInput"', html)
             self.assertIn("generateCommand", html)
+            self.assertIn("liveGenerateButton", html)
             self.assertNotIn("<script>alert(1)</script>", html)
 
     def test_build_playground_commands_quote_paths_and_prompt(self) -> None:

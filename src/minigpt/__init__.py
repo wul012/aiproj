@@ -29,6 +29,10 @@ __all__ = [
     "SamplingCase",
     "SamplingResult",
     "default_sampling_cases",
+    "GenerationRequest",
+    "GenerationResponse",
+    "build_health_payload",
+    "parse_generation_request",
 ]
 
 _EXPORTS = {
@@ -55,6 +59,10 @@ _EXPORTS = {
     "SamplingCase": ("sampling", "SamplingCase"),
     "SamplingResult": ("sampling", "SamplingResult"),
     "default_sampling_cases": ("sampling", "default_sampling_cases"),
+    "GenerationRequest": ("server", "GenerationRequest"),
+    "GenerationResponse": ("server", "GenerationResponse"),
+    "build_health_payload": ("server", "build_health_payload"),
+    "parse_generation_request": ("server", "parse_generation_request"),
 }
 
 

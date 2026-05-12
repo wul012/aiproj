@@ -85,6 +85,12 @@
 
 24-version-11-tests-docs.md
  -> v11 playground smoke、README、a/11 归档和 tag 说明
+
+25-v12-playground-server.md
+ -> server.py、serve_playground.py：给 Playground 增加本地 HTTP 生成接口
+
+26-version-12-tests-docs.md
+ -> v12 server smoke、README、a/12 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -112,6 +118,7 @@
  -> comparison.json/csv/svg 横向比较多个 run
  -> sample_lab.json/csv/svg 比较采样参数
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
+ -> /api/generate 本地调用 checkpoint 生成
  -> tokenizer.decode
  -> 生成文本
 ```
