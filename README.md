@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 26 is a MiniGPT learning project with release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 27 is a MiniGPT learning project with release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -24,6 +24,7 @@ Version 26 is a MiniGPT learning project with release evidence bundles, project 
 - Model card exporter that summarizes a registry and experiment cards into `model_card.json`, `model_card.md`, and `model_card.html`, with intended use, limitations, top runs, coverage, and recommendations
 - Project audit exporter that checks registry/model-card readiness and writes `project_audit.json`, `project_audit.md`, and `project_audit.html` with pass/warn/fail checks, score, and recommendations
 - Release bundle exporter that combines registry, model card, and project audit evidence into `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`
+- Release gate checker that reads `release_bundle.json`, applies a strict pass/warn/fail policy, writes `gate_report.json`, `gate_report.md`, and `gate_report.html`, and exits non-zero when the release is blocked
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -47,8 +48,8 @@ Version 26 is a MiniGPT learning project with release evidence bundles, project 
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, and release bundles
+- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, and release gates
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, and release gates
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -83,6 +84,7 @@ v23.0.0 MiniGPT v23 experiment cards
 v24.0.0 MiniGPT v24 model cards
 v25.0.0 MiniGPT v25 project audit
 v26.0.0 MiniGPT v26 release bundle
+v27.0.0 MiniGPT v27 release gate
 ```
 
 ## Project structure
@@ -193,7 +195,11 @@ v26.0.0 MiniGPT v26 release bundle
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 26/
+│   ├── 26/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 27/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -208,6 +214,7 @@ v26.0.0 MiniGPT v26 release bundle
 │   ├── build_model_card.py
 │   ├── build_playground.py
 │   ├── chat.py
+│   ├── check_release_gate.py
 │   ├── compare_runs.py
 │   ├── eval_suite.py
 │   ├── evaluate.py
@@ -243,6 +250,7 @@ v26.0.0 MiniGPT v26 release bundle
 │       ├── prediction.py
 │       ├── registry.py
 │       ├── release_bundle.py
+│       ├── release_gate.py
 │       ├── playground.py
 │       ├── sampling.py
 │       ├── server.py
@@ -267,6 +275,7 @@ v26.0.0 MiniGPT v26 release bundle
 │   ├── test_project_audit.py
 │   ├── test_registry.py
 │   ├── test_release_bundle.py
+│   ├── test_release_gate.py
 │   ├── test_sampling.py
 │   ├── test_server.py
 │   └── test_tokenizer.py
@@ -499,6 +508,14 @@ python scripts/build_release_bundle.py --registry runs/registry/registry.json --
 
 The output directory contains `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`. The bundle summarizes release status, best run, audit score, top runs, evidence artifacts, and recommendations for handoff.
 
+Check whether a release bundle passes the release gate:
+
+```powershell
+python scripts/check_release_gate.py --bundle runs/release-bundle/release_bundle.json --out-dir runs/release-gate --min-audit-score 90 --min-ready-runs 1
+```
+
+The output directory contains `gate_report.json`, `gate_report.md`, and `gate_report.html`. The command exits with code `1` when the release is blocked, and `--fail-on-warn` can also make warning states fail CI.
+
 Discover run directories under a parent:
 
 ```powershell
@@ -606,6 +623,8 @@ a/25/图片
 a/25/解释/说明.md
 a/26/图片
 a/26/解释/说明.md
+a/27/图片
+a/27/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -816,6 +835,14 @@ Version 26 screenshots:
 - `04-playwright-release-bundle.png`: release bundle HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v26 docs and archive check
 
+Version 27 screenshots:
+
+- `01-unit-tests.png`: release gate tests plus existing regression tests
+- `02-release-gate-smoke.png`: release bundle input checked through the release gate CLI
+- `03-release-gate-structure-check.png`: JSON/Markdown/HTML gate status, policy, checks, and decision fields
+- `04-playwright-release-gate.png`: release gate HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v27 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -868,6 +895,7 @@ Suggested reading order:
 39-v24-model-cards.md
 40-v25-project-audit.md
 41-v26-release-bundle.md
+42-v27-release-gate.md
 ```
 
 ## Learning map
@@ -913,9 +941,11 @@ The project audit layer checks whether the registry/model-card evidence is compl
 
 The release bundle layer packages registry, model card, and audit evidence into one handoff report.
 
+The release gate layer reads that bundle and turns release readiness into an automated pass/warn/fail decision for local scripts or CI.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add richer generation-quality analysis to model cards and audits.
+- Add richer generation-quality analysis to model cards, audits, and gates.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

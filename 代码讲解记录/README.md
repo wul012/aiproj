@@ -131,6 +131,8 @@
  -> project_audit.py、audit_project.py、test_project_audit.py：给 registry/model card 增加 pass/warn/fail 项目审计门禁
 41-v26-release-bundle.md
  -> release_bundle.py、build_release_bundle.py、test_release_bundle.py：把 registry、model card 和 audit 汇总成 release evidence bundle
+42-v27-release-gate.md
+ -> release_gate.py、check_release_gate.py、test_release_gate.py：读取 release bundle 并给出可自动化的 pass/warn/fail 发布门禁
 ```
 
 ## 项目整体理解
@@ -170,6 +172,7 @@
  -> model_card.json/md/html 汇总整个实验系列的最佳 run、coverage、limitations 和后续建议
  -> project_audit.json/md/html 检查实验系列是否满足 release-style review 的基本门禁
  -> release_bundle.json/md/html 汇总最终交付证据、审计状态、top runs 和 artifact 链接
+ -> gate_report.json/md/html 把 release bundle 转成可自动化的 pass/warn/fail 放行决策
  -> tokenizer.decode
  -> 生成文本
 ```
