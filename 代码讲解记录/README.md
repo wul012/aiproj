@@ -121,6 +121,8 @@
 
 36-v21-registry-annotations.md
  -> registry.py、register_runs.py、test_registry.py：读取 run_notes.json，把 notes/tags 纳入 registry JSON/CSV/SVG/HTML
+37-v22-registry-leaderboards.md
+ -> registry.py、register_runs.py、test_registry.py：给 registry 增加 best-val 排名、loss delta 和 HTML leaderboard
 ```
 
 ## 项目整体理解
@@ -155,7 +157,7 @@
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> /api/generate 本地调用 checkpoint 生成
  -> registry.json/csv/svg 索引多个实验 run
- -> registry.html 在浏览器里浏览、搜索、筛选、排序、分享和导出多个 run、notes、tags、质量状态和 artifact 链接
+ -> registry.html 在浏览器里浏览、搜索、筛选、排序、分享和导出多个 run、notes、tags、质量状态、best-val 排名、loss delta 和 artifact 链接
  -> tokenizer.decode
  -> 生成文本
 ```

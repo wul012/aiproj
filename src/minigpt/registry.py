@@ -122,11 +122,14 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         summarize_registered_run(run_dir, None if names is None else names[index])
         for index, run_dir in enumerate(run_dirs)
     ]
+    run_rows = [run.to_dict() for run in runs]
+    loss_leaderboard = _annotate_loss_leaderboard(run_rows)
     return {
         "schema_version": 1,
         "run_count": len(runs),
-        "runs": [run.to_dict() for run in runs],
+        "runs": run_rows,
         "best_by_best_val_loss": _best_by(runs, "best_val_loss"),
+        "loss_leaderboard": loss_leaderboard,
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
         "tag_counts": _counts(tag for run in runs for tag in run.tags),
@@ -149,7 +152,10 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "git_dirty",
         "tokenizer",
         "max_iters",
+        "best_val_loss_rank",
         "best_val_loss",
+        "best_val_loss_delta",
+        "is_best_val_loss",
         "last_val_loss",
         "total_parameters",
         "data_source_kind",
@@ -186,6 +192,8 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
     for index, run in enumerate(runs):
         y = top + index * row_h
         loss = run.get("best_val_loss")
+        rank = run.get("best_val_loss_rank")
+        delta = run.get("best_val_loss_delta")
         artifacts = int(run.get("artifact_count") or 0)
         loss_bar = 0 if loss is None else max(2, int(260 * float(loss) / max_loss))
         artifact_bar = 0 if max_artifacts == 0 else max(2, int(220 * artifacts / max_artifacts))
@@ -194,8 +202,9 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
         note_line = _clip(_note_summary(run), 56)
         rows.append(f'<text x="28" y="{y + 20}" font-family="Arial" font-size="14" fill="#111827">{_e(run.get("name"))}</text>')
         rows.append(f'<text x="28" y="{y + 40}" font-family="Arial" font-size="12" fill="#4b5563">{_e(_clip(run.get("path"), 38))}</text>')
+        rows.append(f'<text x="242" y="{y + 21}" font-family="Arial" font-size="13" fill="#111827">{_e(_rank_label(rank))}</text>')
         rows.append(f'<rect x="300" y="{y + 9}" width="{loss_bar}" height="14" rx="3" fill="#dc2626"/>')
-        rows.append(f'<text x="568" y="{y + 21}" font-family="Arial" font-size="12" fill="#374151">{_fmt(loss)}</text>')
+        rows.append(f'<text x="568" y="{y + 21}" font-family="Arial" font-size="12" fill="#374151">{_fmt(loss)} ({_fmt_delta(delta)})</text>')
         rows.append(f'<rect x="650" y="{y + 9}" width="{artifact_bar}" height="14" rx="3" fill="#2563eb"/>')
         rows.append(f'<text x="880" y="{y + 21}" font-family="Arial" font-size="12" fill="#374151">{artifacts} files</text>')
         rows.append(f'<circle cx="656" cy="{y + 38}" r="5" fill="{quality_color}"/>')
@@ -223,10 +232,12 @@ def render_registry_html(
     best = registry.get("best_by_best_val_loss") if isinstance(registry.get("best_by_best_val_loss"), dict) else {}
     quality_counts = registry.get("quality_counts", {})
     tag_counts = registry.get("tag_counts", {})
+    loss_leaderboard = registry.get("loss_leaderboard", [])
     stats = [
         ("Runs", registry.get("run_count")),
         ("Best run", _pick(best, "name")),
         ("Best val", _fmt(_pick(best, "best_val_loss"))),
+        ("Comparable", len(loss_leaderboard) if isinstance(loss_leaderboard, list) else 0),
         ("Fingerprints", len(registry.get("dataset_fingerprints", []))),
         ("Quality", ", ".join(f"{key}:{value}" for key, value in quality_counts.items()) if isinstance(quality_counts, dict) else None),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
@@ -243,12 +254,15 @@ def render_registry_html(
             f' data-search="{_e(_row_search_text(run))}"'
             f' data-quality="{_e(quality)}"'
             f' data-name="{_e(run.get("name"))}"'
+            f' data-rank="{_e(_sort_number(run.get("best_val_loss_rank")))}"'
             f' data-best-val="{_e(_sort_number(run.get("best_val_loss")))}"'
+            f' data-delta="{_e(_sort_number(run.get("best_val_loss_delta")))}"'
             f' data-params="{_e(_sort_number(run.get("total_parameters")))}"'
             f' data-artifacts="{_e(_sort_number(run.get("artifact_count")))}"'
             f' data-eval="{_e(_sort_number(run.get("eval_suite_cases")))}">'
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('path'))}</span></td>"
-            f"<td>{_e(_fmt(run.get('best_val_loss')))}</td>"
+            f"<td>{_e(_rank_label(run.get('best_val_loss_rank')))}</td>"
+            f"<td>{_e(_fmt(run.get('best_val_loss')))}<br><span>{_e(_fmt_delta(run.get('best_val_loss_delta')))}</span></td>"
             f"<td>{_e(_fmt_int(run.get('total_parameters')))}</td>"
             f"<td>{_e(run.get('git_commit'))}<br><span>dirty={_e(run.get('git_dirty'))}</span></td>"
             f"<td>{_e(run.get('data_source_kind'))}<br><span>{_e(run.get('dataset_fingerprint'))}</span></td>"
@@ -277,12 +291,13 @@ def render_registry_html(
             '<section class="panel">',
             "<h2>Runs</h2>",
             '<table id="registry-table">',
-            "<thead><tr><th>Run</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
+            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
             '<tbody id="registry-rows">',
             "".join(rows),
             "</tbody>",
             "</table>",
             "</section>",
+            _loss_leaderboard_html(loss_leaderboard),
             '<section class="panel">',
             "<h2>Dataset Fingerprints</h2>",
             "<pre>" + _e(json.dumps(registry.get("dataset_fingerprints", []), ensure_ascii=False, indent=2)) + "</pre>",
@@ -327,6 +342,43 @@ def _best_by(runs: list[RegisteredRun], field: str) -> dict[str, Any] | None:
         return None
     best = min(candidates, key=lambda run: getattr(run, field))
     return {"name": best.name, "path": best.path, field: getattr(best, field)}
+
+
+def _annotate_loss_leaderboard(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    for run in runs:
+        run["best_val_loss_rank"] = None
+        run["best_val_loss_delta"] = None
+        run["is_best_val_loss"] = False
+    candidates = [
+        run
+        for run in runs
+        if _as_optional_float(run.get("best_val_loss")) is not None
+    ]
+    candidates.sort(key=lambda run: (_as_optional_float(run.get("best_val_loss")) or float("inf"), str(run.get("name") or "")))
+    if not candidates:
+        return []
+    best_loss = _as_optional_float(candidates[0].get("best_val_loss")) or 0.0
+    leaderboard = []
+    for rank, run in enumerate(candidates, start=1):
+        loss = _as_optional_float(run.get("best_val_loss")) or 0.0
+        delta = loss - best_loss
+        run["best_val_loss_rank"] = rank
+        run["best_val_loss_delta"] = delta
+        run["is_best_val_loss"] = rank == 1
+        leaderboard.append(
+            {
+                "rank": rank,
+                "name": run.get("name"),
+                "path": run.get("path"),
+                "best_val_loss": loss,
+                "best_val_loss_delta": delta,
+                "dataset_quality": run.get("dataset_quality"),
+                "eval_suite_cases": run.get("eval_suite_cases"),
+                "tags": list(run.get("tags") or []),
+                "note": run.get("note"),
+            }
+        )
+    return leaderboard
 
 
 def _counts(values: Any) -> dict[str, int]:
@@ -374,6 +426,15 @@ def _as_float(value: Any) -> float | None:
     return float(value)
 
 
+def _as_optional_float(value: Any) -> float | None:
+    if value is None or value == "":
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
 def _as_bool(value: Any) -> bool | None:
     if value is None:
         return None
@@ -404,10 +465,23 @@ def _fmt(value: Any) -> str:
     return str(value)
 
 
+def _fmt_delta(value: Any) -> str:
+    number = _as_optional_float(value)
+    if number is None:
+        return "delta missing"
+    return f"{number:+.5g}"
+
+
 def _fmt_int(value: Any) -> str:
     if value is None:
         return "missing"
     return f"{int(value):,}"
+
+
+def _rank_label(value: Any) -> str:
+    if value is None or value == "":
+        return "unranked"
+    return f"#{int(value)}"
 
 
 def _sort_number(value: Any) -> str:
@@ -457,7 +531,9 @@ def _registry_controls(runs: list[Any]) -> str:
         + "".join(quality_options)
         + "</select></label>"
         '<label><span>Sort</span><select id="sort-key">'
+        '<option value="rank">Rank</option>'
         '<option value="bestVal">Best Val</option>'
+        '<option value="delta">Loss Delta</option>'
         '<option value="name">Name</option>'
         '<option value="artifacts">Artifacts</option>'
         '<option value="eval">Eval Cases</option>'
@@ -505,6 +581,35 @@ def _stat_card(label: str, value: Any) -> str:
     )
 
 
+def _loss_leaderboard_html(leaderboard: Any) -> str:
+    if not isinstance(leaderboard, list) or not leaderboard:
+        return (
+            '<section class="panel">'
+            "<h2>Loss Leaderboard</h2>"
+            '<p class="muted">No comparable best validation loss values.</p>'
+            "</section>"
+        )
+    items = []
+    for item in leaderboard[:8]:
+        if not isinstance(item, dict):
+            continue
+        items.append(
+            "<li>"
+            f"<strong>{_e(_rank_label(item.get('rank')))} {_e(item.get('name'))}</strong>"
+            f"<span>{_e(_fmt(item.get('best_val_loss')))} / {_e(_fmt_delta(item.get('best_val_loss_delta')))}"
+            f" / quality={_e(item.get('dataset_quality'))} / eval={_e(item.get('eval_suite_cases'))}</span>"
+            "</li>"
+        )
+    return (
+        '<section class="panel">'
+        "<h2>Loss Leaderboard</h2>"
+        '<ol class="leaderboard">'
+        + "".join(items)
+        + "</ol>"
+        "</section>"
+    )
+
+
 def _registry_style() -> str:
     return """<style>
 :root { --ink:#111827; --muted:#4b5563; --line:#d8dee9; --page:#f7f7f2; --panel:#fff; --blue:#2563eb; --green:#047857; --amber:#b45309; }
@@ -527,7 +632,7 @@ p, span, .muted { color:var(--muted); }
 .toolbar button:active { transform:translateY(1px); }
 .toolbar output { display:flex; align-items:center; justify-content:center; color:var(--muted); }
 .panel { margin:18px 32px; padding:16px; overflow-x:auto; }
-table { width:100%; border-collapse:collapse; min-width:900px; }
+table { width:100%; border-collapse:collapse; min-width:1040px; }
 th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
 th { color:var(--muted); font-size:12px; text-transform:uppercase; }
 a { color:var(--blue); font-weight:700; text-decoration:none; margin-right:8px; }
@@ -536,6 +641,11 @@ a { color:var(--blue); font-weight:700; text-decoration:none; margin-right:8px; 
 .pill.pass { background:var(--green); }
 .pill.warn { background:var(--amber); }
 .pill.missing { background:#6b7280; }
+.leaderboard { margin:0; padding-left:24px; }
+.leaderboard li { padding:8px 0; border-bottom:1px solid var(--line); }
+.leaderboard li:last-child { border-bottom:0; }
+.leaderboard strong { display:inline-block; min-width:160px; }
+.leaderboard span { color:var(--muted); }
 pre { margin:0; white-space:pre-wrap; background:#f3f4f6; padding:12px; border-radius:8px; }
 footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
 @media (max-width:760px) { header, .stats, .toolbar { padding-left:16px; padding-right:16px; } .toolbar { grid-template-columns:1fr 1fr; } .panel { margin-left:16px; margin-right:16px; } }
@@ -554,7 +664,7 @@ def _registry_script() -> str:
   const share = document.getElementById("share-view");
   const exportCsv = document.getElementById("export-visible-csv");
   const status = document.getElementById("registry-status");
-  const numericKeys = new Set(["bestVal", "params", "artifacts", "eval"]);
+  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "eval"]);
   let ascending = true;
 
   const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);
@@ -564,7 +674,7 @@ def _registry_script() -> str:
     search.value = params.get("q") || "";
     const wantedQuality = params.get("quality") || "";
     if (hasOption(quality, wantedQuality)) quality.value = wantedQuality;
-    const wantedSort = params.get("sort") || "bestVal";
+    const wantedSort = params.get("sort") || "rank";
     if (hasOption(sortKey, wantedSort)) sortKey.value = wantedSort;
     ascending = params.get("dir") !== "desc";
     direction.textContent = ascending ? "Asc" : "Desc";
@@ -576,7 +686,7 @@ def _registry_script() -> str:
     const query = (search.value || "").trim();
     if (query) params.set("q", query);
     if (quality.value) params.set("quality", quality.value);
-    if (sortKey.value !== "bestVal") params.set("sort", sortKey.value);
+    if (sortKey.value !== "rank") params.set("sort", sortKey.value);
     if (!ascending) params.set("dir", "desc");
     const next = params.toString();
     const base = window.location.href.split("#")[0];

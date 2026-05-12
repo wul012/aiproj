@@ -102,6 +102,11 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["best_by_best_val_loss"]["name"], "B")
             self.assertEqual(registry["quality_counts"], {"pass": 1, "warn": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
+            self.assertEqual(registry["loss_leaderboard"][0]["name"], "B")
+            self.assertAlmostEqual(registry["loss_leaderboard"][1]["best_val_loss_delta"], 0.3)
+            self.assertEqual(registry["runs"][1]["best_val_loss_rank"], 1)
+            self.assertTrue(registry["runs"][1]["is_best_val_loss"])
+            self.assertEqual(registry["runs"][0]["best_val_loss_rank"], 2)
 
     def test_write_registry_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -114,6 +119,8 @@ class RegistryTests(unittest.TestCase):
             self.assertTrue(Path(outputs["json"]).exists())
             self.assertTrue(Path(outputs["csv"]).exists())
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
+            self.assertIn("best_val_loss_rank", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT run registry", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
@@ -134,7 +141,15 @@ class RegistryTests(unittest.TestCase):
             self.assertIn('id="export-visible-csv"', html)
             self.assertIn('id="registry-status"', html)
             self.assertIn("data-run-row", html)
+            self.assertIn("data-rank", html)
             self.assertIn("data-best-val", html)
+            self.assertIn("data-delta", html)
+            self.assertIn("<th>Rank</th>", html)
+            self.assertIn("#1", html)
+            self.assertIn("Loss Leaderboard", html)
+            self.assertIn("<div class=\"label\">Comparable</div>", html)
+            self.assertIn('<option value="rank">Rank</option>', html)
+            self.assertIn('<option value="delta">Loss Delta</option>', html)
             self.assertIn('<option value="pass">pass</option>', html)
             self.assertIn('<option value="warn">warn</option>', html)
             self.assertIn("addEventListener", html)
