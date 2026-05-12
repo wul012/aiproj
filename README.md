@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 15 is a MiniGPT learning project with dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 16 is a MiniGPT learning project with a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -13,6 +13,7 @@ Version 15 is a MiniGPT learning project with dataset quality checks and fingerp
 - Dataset preparation script for merging multiple `.txt` files and exporting dataset reports
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
+- Fixed prompt evaluation suite for running the same prompts against different checkpoints and exporting JSON/CSV/SVG reports
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -20,8 +21,8 @@ Version 15 is a MiniGPT learning project with dataset quality checks and fingerp
 - Next-token prediction inspection script that exports probability JSON and SVG bar charts
 - Evaluation script that reports validation loss and perplexity for a checkpoint
 - Model report script that exports parameter groups, per-block parameter counts, tensor shapes, JSON reports, and SVG architecture diagrams
-- Dashboard builder that combines run artifacts, dataset reports, dataset quality reports, and run manifests into a local `dashboard.html` report
-- Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, run manifests, dataset quality reports, and artifact links
+- Dashboard builder that combines run artifacts, eval suites, dataset reports, dataset quality reports, and run manifests into a local `dashboard.html` report
+- Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, eval suites, run manifests, dataset quality reports, and artifact links
 - Playground server that serves the UI and exposes `/api/health` plus `/api/generate` for local live generation
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
 - Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
@@ -35,8 +36,8 @@ Version 15 is a MiniGPT learning project with dataset quality checks and fingerp
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, and dataset quality
+- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, and eval suites
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -60,6 +61,7 @@ v12.0.0 MiniGPT v12 playground server
 v13.0.0 MiniGPT v13 dataset preparation
 v14.0.0 MiniGPT v14 run manifest
 v15.0.0 MiniGPT v15 dataset quality
+v16.0.0 MiniGPT v16 eval suite
 ```
 
 ## Project structure
@@ -126,17 +128,23 @@ v15.0.0 MiniGPT v15 dataset quality
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 15/
+│   ├── 15/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 16/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
 ├── data/
+│   ├── eval_prompts.json
 │   └── sample_zh.txt
 ├── scripts/
 │   ├── build_dashboard.py
 │   ├── build_playground.py
 │   ├── chat.py
 │   ├── compare_runs.py
+│   ├── eval_suite.py
 │   ├── evaluate.py
 │   ├── generate.py
 │   ├── inspect_attention.py
@@ -157,6 +165,7 @@ v15.0.0 MiniGPT v15 dataset quality
 │       ├── data_prep.py
 │       ├── data_quality.py
 │       ├── dataset.py
+│       ├── eval_suite.py
 │       ├── history.py
 │       ├── manifest.py
 │       ├── model.py
@@ -174,6 +183,7 @@ v15.0.0 MiniGPT v15 dataset quality
 │   ├── test_data_prep.py
 │   ├── test_data_quality.py
 │   ├── test_dataset.py
+│   ├── test_eval_suite.py
 │   ├── test_history.py
 │   ├── test_manifest.py
 │   ├── test_model.py
@@ -214,7 +224,8 @@ v15.0.0 MiniGPT v15 dataset quality
 │   ├── 27-v13-dataset-preparation.md
 │   ├── 28-version-13-tests-docs.md
 │   ├── 29-v14-run-manifest.md
-│   └── 30-v15-dataset-quality.md
+│   ├── 30-v15-dataset-quality.md
+│   └── 31-v16-eval-suite.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -298,6 +309,12 @@ Evaluate loss and perplexity:
 
 ```powershell
 python scripts/evaluate.py --checkpoint runs/minigpt/checkpoint.pt --eval-iters 20
+```
+
+Run the fixed prompt evaluation suite:
+
+```powershell
+python scripts/eval_suite.py --checkpoint runs/minigpt/checkpoint.pt --suite data/eval_prompts.json
 ```
 
 Inspect model structure and parameter counts:
@@ -415,6 +432,8 @@ a/14/图片
 a/14/解释/说明.md
 a/15/图片
 a/15/解释/说明.md
+a/16/图片
+a/16/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -537,6 +556,14 @@ Version 15 screenshots:
 - `04-train-dashboard-quality.png`: training/dashboard/playground carry dataset quality artifacts
 - `05-docs-check.png`: v15 docs and archive check
 
+Version 16 screenshots:
+
+- `01-unit-tests.png`: eval suite and existing regression tests
+- `02-train-eval-suite-smoke.png`: train a small checkpoint and run fixed prompt eval suite
+- `03-eval-suite-json-check.png`: eval suite JSON/CSV/SVG artifact checks
+- `04-dashboard-playground-eval-suite.png`: dashboard/playground eval suite artifact checks
+- `05-docs-check.png`: v16 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -578,6 +605,7 @@ Suggested reading order:
 28-version-13-tests-docs.md
 29-v14-run-manifest.md
 30-v15-dataset-quality.md
+31-v16-eval-suite.md
 ```
 
 ## Learning map
@@ -611,9 +639,11 @@ The run manifest makes each training run easier to reproduce by saving code vers
 
 The dataset quality layer adds a stable corpus fingerprint plus lightweight checks for duplicate files, tiny sources, and repeated lines.
 
+The eval suite layer runs a fixed set of prompts against a checkpoint and saves comparable JSON/CSV/SVG outputs.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add a fixed evaluation set and reusable prompt suite.
 - Add streaming token output for the playground server.
+- Add a run registry that indexes multiple eval suite results.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

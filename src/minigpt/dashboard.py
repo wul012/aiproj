@@ -96,6 +96,9 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("dataset_quality_svg", "Dataset quality chart", "dataset_quality.svg", "SVG", "dataset quality summary chart"),
         ("sample", "Sample text", "sample.txt", "TXT", "generated sample saved after training"),
         ("eval_report", "Evaluation report", "eval_report.json", "JSON", "loss and perplexity report"),
+        ("eval_suite", "Eval suite", "eval_suite/eval_suite.json", "JSON", "fixed prompt generation evaluation report"),
+        ("eval_suite_csv", "Eval suite table", "eval_suite/eval_suite.csv", "CSV", "fixed prompt evaluation table"),
+        ("eval_suite_svg", "Eval suite chart", "eval_suite/eval_suite.svg", "SVG", "fixed prompt evaluation chart"),
         ("model_report", "Model report", "model_report/model_report.json", "JSON", "architecture and parameter report"),
         ("model_svg", "Model architecture", "model_report/model_architecture.svg", "SVG", "model structure diagram"),
         ("predictions", "Prediction report", "predictions/predictions.json", "JSON", "next-token top-k probabilities"),
@@ -124,6 +127,7 @@ def build_dashboard_payload(
     train_config = _read_json(root / "train_config.json", warnings)
     history_summary = _read_json(root / "history_summary.json", warnings)
     eval_report = _read_json(root / "eval_report.json", warnings)
+    eval_suite = _read_json(root / "eval_suite" / "eval_suite.json", warnings)
     run_manifest = _read_json(root / "run_manifest.json", warnings)
     dataset_report = _read_json(root / "dataset_report.json", warnings)
     dataset_quality = _read_json(root / "dataset_quality.json", warnings)
@@ -158,6 +162,7 @@ def build_dashboard_payload(
         "last_val_loss": _pick(history_summary, "last_val_loss"),
         "eval_loss": _pick(eval_report, "loss"),
         "perplexity": _pick(eval_report, "perplexity"),
+        "eval_suite_cases": _pick(eval_suite, "case_count"),
         "dataset_sources": _pick(dataset_report, "source_count"),
         "dataset_chars": _pick(dataset_report, "char_count"),
         "dataset_quality": _pick(dataset_quality, "status"),
@@ -178,6 +183,7 @@ def build_dashboard_payload(
         "train_config": train_config if isinstance(train_config, dict) else None,
         "history_summary": history_summary if isinstance(history_summary, dict) else None,
         "eval_report": eval_report if isinstance(eval_report, dict) else None,
+        "eval_suite": eval_suite if isinstance(eval_suite, dict) else None,
         "run_manifest": run_manifest if isinstance(run_manifest, dict) else None,
         "dataset_report": dataset_report if isinstance(dataset_report, dict) else None,
         "dataset_quality": dataset_quality if isinstance(dataset_quality, dict) else None,
@@ -219,6 +225,7 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         ("Best val", _fmt(summary.get("best_val_loss"))),
         ("Eval loss", _fmt(summary.get("eval_loss"))),
         ("Perplexity", _fmt(summary.get("perplexity"))),
+        ("Eval suite", summary.get("eval_suite_cases")),
         ("Data quality", summary.get("dataset_quality")),
         ("Git", summary.get("git_commit")),
         ("Parameters", _fmt_int(summary.get("total_parameters"))),
@@ -233,6 +240,7 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         _dataset_section(payload),
         _model_section(payload),
         _training_section(payload),
+        _eval_suite_section(payload),
         _prediction_section(payload),
         _attention_section(payload),
         _chat_section(payload),
@@ -486,6 +494,27 @@ def _training_section(payload: dict[str, Any]) -> str:
     return f"<h2>Training</h2><section class=\"panel\"><div class=\"split\"><table>{rows}</table><table>{eval_rows}</table></div>{figure}</section>"
 
 
+def _eval_suite_section(payload: dict[str, Any]) -> str:
+    report = payload.get("eval_suite")
+    if not isinstance(report, dict):
+        return ""
+    rows = []
+    for item in report.get("results", [])[:8]:
+        if isinstance(item, dict):
+            rows.append(
+                f"<tr><td>{_e(item.get('name'))}</td><td>{_e(item.get('prompt'))}</td>"
+                f"<td>{_e(item.get('seed'))}</td><td>{_e(item.get('unique_char_count'))}</td>"
+                f"<td>{_e(_clip(str(item.get('continuation', '')), 60))}</td></tr>"
+            )
+    figure = _image(payload, "eval_suite_svg", "Eval suite chart")
+    return (
+        "<h2>Eval Suite</h2><section class=\"panel\">"
+        f"<p>Cases: {_e(report.get('case_count'))} | Avg continuation chars: {_e(report.get('avg_continuation_chars'))} | Avg unique chars: {_e(report.get('avg_unique_chars'))}</p>"
+        f"<table><tr><th>Name</th><th>Prompt</th><th>Seed</th><th>Unique</th><th>Continuation</th></tr>{''.join(rows)}</table>"
+        f"{figure}</section>"
+    )
+
+
 def _prediction_section(payload: dict[str, Any]) -> str:
     predictions = payload.get("predictions")
     if not isinstance(predictions, dict):
@@ -571,6 +600,13 @@ def _fmt_missing(value: Any) -> str:
     if value is None:
         return "missing"
     return str(_fmt(value))
+
+
+def _clip(text: str, limit: int) -> str:
+    flat = text.replace("\n", "\\n").replace("\t", "\\t")
+    if len(flat) <= limit:
+        return flat
+    return flat[: limit - 1] + "..."
 
 
 def _e(value: Any) -> str:

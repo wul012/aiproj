@@ -103,6 +103,9 @@
 
 30-v15-dataset-quality.md
  -> data_quality.py、data_prep.py、train.py：生成 dataset fingerprint 和轻量数据质量报告
+
+31-v16-eval-suite.md
+ -> eval_suite.py、scripts/eval_suite.py、data/eval_prompts.json：固定 prompt 评估套件
 ```
 
 ## 项目整体理解
@@ -122,6 +125,7 @@
  -> attention capture 可选记录每层注意力矩阵
  -> logits
  -> top-k next-token predictions / perplexity
+ -> eval_suite.json/csv/svg 固定 prompt 生成评估
  -> cross entropy loss
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt

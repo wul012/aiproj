@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "name": "concept",
+      "prompt": "人工智能",
+      "max_new_tokens": 50,
+      "temperature": 0.7,
+      "top_k": 20,
+      "seed": 101
+    },
+    {
+      "name": "training",
+      "prompt": "模型训练",
+      "max_new_tokens": 50,
+      "temperature": 0.8,
+      "top_k": 30,
+      "seed": 102
+    },
+    {
+      "name": "data-quality",
+      "prompt": "数据质量",
+      "max_new_tokens": 50,
+      "temperature": 0.9,
+      "top_k": 30,
+      "seed": 103
+    }
+  ]
+}
