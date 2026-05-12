@@ -30,6 +30,7 @@ REGISTRY_ARTIFACT_PATHS = [
     "eval_report.json",
     "dashboard.html",
     "playground.html",
+    "run_notes.json",
 ]
 
 
@@ -52,6 +53,8 @@ class RegisteredRun:
     artifact_count: int
     checkpoint_exists: bool
     dashboard_exists: bool
+    note: str | None
+    tags: list[str]
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -75,6 +78,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     history = _read_json(root / "history_summary.json")
     dataset_quality = _read_json(root / "dataset_quality.json")
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json")
+    run_notes = _read_run_notes(root)
 
     git = _pick_dict(manifest, "git")
     training = _pick_dict(manifest, "training")
@@ -104,6 +108,8 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
         dashboard_exists=(root / "dashboard.html").exists(),
+        note=_as_str(_pick(run_notes, "note") or _pick(run_notes, "summary")),
+        tags=_as_str_list(_pick(run_notes, "tags")),
     )
 
 
@@ -123,6 +129,7 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         "best_by_best_val_loss": _best_by(runs, "best_val_loss"),
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
+        "tag_counts": _counts(tag for run in runs for tag in run.tags),
     }
 
 
@@ -153,12 +160,14 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "artifact_count",
         "checkpoint_exists",
         "dashboard_exists",
+        "note",
+        "tags",
     ]
     with out_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         for run in registry["runs"]:
-            writer.writerow({field: run.get(field) for field in fieldnames})
+            writer.writerow({field: _csv_value(run.get(field)) for field in fieldnames})
 
 
 def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
@@ -166,7 +175,7 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     runs = list(registry["runs"])
     width = 1040
-    row_h = 54
+    row_h = 70
     top = 94
     height = top + max(1, len(runs)) * row_h + 68
     loss_values = [run.get("best_val_loss") for run in runs if run.get("best_val_loss") is not None]
@@ -182,6 +191,7 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
         artifact_bar = 0 if max_artifacts == 0 else max(2, int(220 * artifacts / max_artifacts))
         quality = str(run.get("dataset_quality") or "missing")
         quality_color = "#047857" if quality == "pass" else "#b45309" if quality == "warn" else "#6b7280"
+        note_line = _clip(_note_summary(run), 56)
         rows.append(f'<text x="28" y="{y + 20}" font-family="Arial" font-size="14" fill="#111827">{_e(run.get("name"))}</text>')
         rows.append(f'<text x="28" y="{y + 40}" font-family="Arial" font-size="12" fill="#4b5563">{_e(_clip(run.get("path"), 38))}</text>')
         rows.append(f'<rect x="300" y="{y + 9}" width="{loss_bar}" height="14" rx="3" fill="#dc2626"/>')
@@ -190,6 +200,7 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
         rows.append(f'<text x="880" y="{y + 21}" font-family="Arial" font-size="12" fill="#374151">{artifacts} files</text>')
         rows.append(f'<circle cx="656" cy="{y + 38}" r="5" fill="{quality_color}"/>')
         rows.append(f'<text x="670" y="{y + 42}" font-family="Arial" font-size="12" fill="#374151">{_e(quality)} | eval={_e(run.get("eval_suite_cases"))} | data={_e(run.get("dataset_fingerprint"))}</text>')
+        rows.append(f'<text x="670" y="{y + 60}" font-family="Arial" font-size="12" fill="#4b5563">{_e(note_line)}</text>')
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
   <rect width="100%" height="100%" fill="#f7f7f2"/>
   <text x="28" y="34" font-family="Arial" font-size="22" fill="#111827">MiniGPT run registry</text>
@@ -211,12 +222,14 @@ def render_registry_html(
     runs = list(registry.get("runs", []))
     best = registry.get("best_by_best_val_loss") if isinstance(registry.get("best_by_best_val_loss"), dict) else {}
     quality_counts = registry.get("quality_counts", {})
+    tag_counts = registry.get("tag_counts", {})
     stats = [
         ("Runs", registry.get("run_count")),
         ("Best run", _pick(best, "name")),
         ("Best val", _fmt(_pick(best, "best_val_loss"))),
         ("Fingerprints", len(registry.get("dataset_fingerprints", []))),
         ("Quality", ", ".join(f"{key}:{value}" for key, value in quality_counts.items()) if isinstance(quality_counts, dict) else None),
+        ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
     for run in runs:
@@ -242,6 +255,7 @@ def render_registry_html(
             f'<td><span class="pill {quality_class}">{_e(quality)}</span></td>'
             f"<td>{_e(run.get('eval_suite_cases'))}<br><span>avg unique={_e(run.get('eval_suite_avg_unique'))}</span></td>"
             f"<td>{_e(run.get('artifact_count'))}</td>"
+            f"<td>{_tag_chips(run.get('tags'))}<br><span>{_e(run.get('note'))}</span></td>"
             f"<td>{links}</td>"
             "</tr>"
         )
@@ -263,7 +277,7 @@ def render_registry_html(
             '<section class="panel">',
             "<h2>Runs</h2>",
             '<table id="registry-table">',
-            "<thead><tr><th>Run</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Artifacts</th><th>Links</th></tr></thead>",
+            "<thead><tr><th>Run</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
             '<tbody id="registry-rows">',
             "".join(rows),
             "</tbody>",
@@ -329,6 +343,11 @@ def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
+def _read_run_notes(root: Path) -> dict[str, Any]:
+    payload = _read_json(root / "run_notes.json")
+    return payload if isinstance(payload, dict) else {}
+
+
 def _pick(payload: Any, key: str) -> Any:
     return payload.get(key) if isinstance(payload, dict) else None
 
@@ -367,6 +386,16 @@ def _as_str(value: Any) -> str | None:
     return str(value)
 
 
+def _as_str_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        return [item.strip() for item in value.split(",") if item.strip()]
+    if isinstance(value, list):
+        return [str(item).strip() for item in value if str(item).strip()]
+    return [str(value).strip()] if str(value).strip() else []
+
+
 def _fmt(value: Any) -> str:
     if value is None:
         return "missing"
@@ -387,6 +416,20 @@ def _sort_number(value: Any) -> str:
     return str(float(value))
 
 
+def _csv_value(value: Any) -> Any:
+    if isinstance(value, list):
+        return "; ".join(str(item) for item in value)
+    return value
+
+
+def _note_summary(run: dict[str, Any]) -> str:
+    tags = _fmt_tags(run.get("tags"))
+    note = str(run.get("note") or "")
+    if tags and note:
+        return f"{tags}: {note}"
+    return tags or note or "no notes"
+
+
 def _row_search_text(run: dict[str, Any]) -> str:
     keys = [
         "name",
@@ -396,8 +439,10 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "data_source_kind",
         "dataset_fingerprint",
         "dataset_quality",
+        "note",
+        "tags",
     ]
-    return " ".join(str(run.get(key) or "") for key in keys).lower()
+    return " ".join(_csv_value(run.get(key)) or "" for key in keys).lower()
 
 
 def _registry_controls(runs: list[Any]) -> str:
@@ -486,6 +531,7 @@ table { width:100%; border-collapse:collapse; min-width:900px; }
 th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
 th { color:var(--muted); font-size:12px; text-transform:uppercase; }
 a { color:var(--blue); font-weight:700; text-decoration:none; margin-right:8px; }
+.tag { display:inline-block; margin:0 4px 4px 0; padding:2px 6px; border-radius:999px; background:#e0f2fe; color:#075985; font-size:12px; font-weight:700; }
 .pill { display:inline-block; min-width:58px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
 .pill.pass { background:var(--green); }
 .pill.warn { background:var(--amber); }
@@ -627,6 +673,18 @@ def _clip(value: Any, limit: int) -> str:
     if len(text) <= limit:
         return text
     return text[: limit - 1] + "..."
+
+
+def _fmt_tags(value: Any) -> str:
+    tags = value if isinstance(value, list) else _as_str_list(value)
+    return ", ".join(str(tag) for tag in tags)
+
+
+def _tag_chips(value: Any) -> str:
+    tags = value if isinstance(value, list) else _as_str_list(value)
+    if not tags:
+        return '<span class="muted">no tags</span>'
+    return "".join(f'<span class="tag">{_e(tag)}</span>' for tag in tags)
 
 
 def _e(value: Any) -> str:

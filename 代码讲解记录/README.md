@@ -118,6 +118,9 @@
 
 35-v20-registry-saved-views.md
  -> registry.py、test_registry.py：给 registry.html 增加 URL 视图状态、分享链接和当前可见行 CSV 导出
+
+36-v21-registry-annotations.md
+ -> registry.py、register_runs.py、test_registry.py：读取 run_notes.json，把 notes/tags 纳入 registry JSON/CSV/SVG/HTML
 ```
 
 ## 项目整体理解
@@ -152,7 +155,7 @@
  -> playground.html 组合 prompt 控件、命令片段和 artifact 链接
  -> /api/generate 本地调用 checkpoint 生成
  -> registry.json/csv/svg 索引多个实验 run
- -> registry.html 在浏览器里浏览、搜索、筛选、排序、分享和导出多个 run、质量状态和 artifact 链接
+ -> registry.html 在浏览器里浏览、搜索、筛选、排序、分享和导出多个 run、notes、tags、质量状态和 artifact 链接
  -> tokenizer.decode
  -> 生成文本
 ```

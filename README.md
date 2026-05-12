@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 20 is a MiniGPT learning project with shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 21 is a MiniGPT learning project with run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -18,6 +18,7 @@ Version 20 is a MiniGPT learning project with shareable and exportable registry 
 - Run registry HTML report for browsing many experiments, opening dashboard/manifest/eval links, and scanning quality/fingerprint status in a browser
 - Registry HTML controls for search, quality filtering, sorting, direction toggling, and visible-row counts
 - Registry HTML view state in the URL plus visible-row CSV export for sharing and downstream analysis
+- Optional `run_notes.json` annotations with note text, tags, tag counts, CSV columns, SVG summary text, and searchable HTML chips
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Optional attention capture for inspecting causal self-attention maps
@@ -42,7 +43,7 @@ Version 20 is a MiniGPT learning project with shareable and exportable registry 
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, and playground server API
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, and shareable registry views
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, run registry, registry HTML reporting, registry interaction controls, shareable registry views, and registry annotations
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -71,6 +72,7 @@ v17.0.0 MiniGPT v17 run registry
 v18.0.0 MiniGPT v18 registry HTML
 v19.0.0 MiniGPT v19 registry interactions
 v20.0.0 MiniGPT v20 registry saved views
+v21.0.0 MiniGPT v21 registry annotations
 ```
 
 ## Project structure
@@ -157,7 +159,11 @@ v20.0.0 MiniGPT v20 registry saved views
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 20/
+│   ├── 20/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 21/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -258,7 +264,8 @@ v20.0.0 MiniGPT v20 registry saved views
 │   ├── 32-v17-run-registry.md
 │   ├── 33-v18-registry-html.md
 │   ├── 34-v19-registry-interactions.md
-│   └── 35-v20-registry-saved-views.md
+│   ├── 35-v20-registry-saved-views.md
+│   └── 36-v21-registry-annotations.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -400,6 +407,17 @@ python scripts/register_runs.py runs/tiny runs/wide --name tiny --name wide --ou
 
 The output directory contains `registry.json`, `registry.csv`, `registry.svg`, and `registry.html`. Open `registry.html` to browse runs and jump to each run's dashboard, manifest, and eval suite artifacts.
 
+Optionally add notes and tags to a run before registering it:
+
+```json
+{
+  "note": "Stable baseline for dataset v1.",
+  "tags": ["baseline", "keep"]
+}
+```
+
+Save that as `run_notes.json` inside the run directory. The registry will include the note and tags in JSON/CSV/SVG/HTML outputs.
+
 Discover run directories under a parent:
 
 ```powershell
@@ -495,6 +513,8 @@ a/19/图片
 a/19/解释/说明.md
 a/20/图片
 a/20/解释/说明.md
+a/21/图片
+a/21/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -657,6 +677,14 @@ Version 20 screenshots:
 - `04-registry-html-structure-check.png`: URL state, clipboard, CSV export, controls, and escaping checks
 - `05-docs-check.png`: v20 docs and archive check
 
+Version 21 screenshots:
+
+- `01-unit-tests.png`: registry annotations tests and existing regression tests
+- `02-registry-notes-smoke.png`: two small runs registered with `run_notes.json` annotations
+- `03-playwright-notes-search-check.png`: Playwright Chrome tag search and Notes column check
+- `04-registry-notes-structure-check.png`: JSON/CSV/SVG/HTML notes, tags, tag counts, and escaping checks
+- `05-docs-check.png`: v21 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -703,6 +731,7 @@ Suggested reading order:
 33-v18-registry-html.md
 34-v19-registry-interactions.md
 35-v20-registry-saved-views.md
+36-v21-registry-annotations.md
 ```
 
 ## Learning map
@@ -738,11 +767,11 @@ The dataset quality layer adds a stable corpus fingerprint plus lightweight chec
 
 The eval suite layer runs a fixed set of prompts against a checkpoint and saves comparable JSON/CSV/SVG outputs.
 
-The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, an interactive local HTML table, shareable URL state, and visible-row CSV export.
+The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add notes or annotations for important registry runs.
+- Add a model card or experiment card generated from registry and manifest data.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

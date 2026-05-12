@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.registry import build_run_registry, discover_run_dirs, render_registry_html, summarize_registered_run, write_registry_outputs
 
 
-def make_run(root: Path, name: str, loss: float, quality: str = "pass") -> Path:
+def make_run(root: Path, name: str, loss: float, quality: str = "pass", note: str | None = None, tags: list[str] | None = None) -> Path:
     run_dir = root / name
     run_dir.mkdir(parents=True)
     (run_dir / "checkpoint.pt").write_bytes(b"fake")
@@ -25,6 +25,11 @@ def make_run(root: Path, name: str, loss: float, quality: str = "pass") -> Path:
         json.dumps({"status": quality, "short_fingerprint": f"{name}12345678", "warning_count": 0}),
         encoding="utf-8",
     )
+    if note is not None or tags is not None:
+        (run_dir / "run_notes.json").write_text(
+            json.dumps({"note": note, "tags": tags or []}, ensure_ascii=False),
+            encoding="utf-8",
+        )
     eval_dir = run_dir / "eval_suite"
     eval_dir.mkdir()
     (run_dir / "dashboard.html").write_text("<html></html>", encoding="utf-8")
@@ -76,17 +81,27 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.eval_suite_cases, 3)
             self.assertGreaterEqual(run.artifact_count, 6)
 
+    def test_summarize_registered_run_reads_notes_and_tags(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp), "one", 1.0, note="baseline for registry", tags=["baseline", "demo"])
+
+            run = summarize_registered_run(run_dir)
+
+            self.assertEqual(run.note, "baseline for registry")
+            self.assertEqual(run.tags, ["baseline", "demo"])
+
     def test_build_registry_picks_best_and_counts_quality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_a = make_run(root, "a", 1.2, quality="pass")
-            run_b = make_run(root, "b", 0.9, quality="warn")
+            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"])
+            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"])
 
             registry = build_run_registry([run_a, run_b], names=["A", "B"])
 
             self.assertEqual(registry["run_count"], 2)
             self.assertEqual(registry["best_by_best_val_loss"]["name"], "B")
             self.assertEqual(registry["quality_counts"], {"pass": 1, "warn": 1})
+            self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
 
     def test_write_registry_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -104,8 +119,8 @@ class RegistryTests(unittest.TestCase):
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_a = make_run(root, "alpha", 1.2, quality="pass")
-            run_b = make_run(root, "beta", 0.9, quality="warn")
+            run_a = make_run(root, "alpha", 1.2, quality="pass", note="stable baseline", tags=["baseline"])
+            run_b = make_run(root, "beta", 0.9, quality="warn", note="needs review", tags=["candidate"])
             registry = build_run_registry([run_a, run_b])
 
             html = render_registry_html(registry)
@@ -127,6 +142,10 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("navigator.clipboard.writeText", html)
             self.assertIn("registry-visible-", html)
             self.assertIn("new Blob", html)
+            self.assertIn("<th>Notes</th>", html)
+            self.assertIn('class="tag">baseline</span>', html)
+            self.assertIn("stable baseline", html)
+            self.assertIn("<div class=\"label\">Tags</div>", html)
 
     def test_render_registry_html_escapes_run_text(self) -> None:
         registry = {
@@ -142,6 +161,8 @@ class RegistryTests(unittest.TestCase):
                     "total_parameters": 123,
                     "dataset_quality": "pass",
                     "artifact_count": 3,
+                    "note": "<b>note</b>",
+                    "tags": ["<tag>"],
                 }
             ],
         }
@@ -149,6 +170,8 @@ class RegistryTests(unittest.TestCase):
         html = render_registry_html(registry)
 
         self.assertIn("&lt;script&gt;", html)
+        self.assertIn("&lt;b&gt;note&lt;/b&gt;", html)
+        self.assertIn("&lt;tag&gt;", html)
         self.assertIn("<script>", html)
         self.assertNotIn("<strong><script>", html)
         self.assertNotIn('data-search="<script>', html)
