@@ -49,6 +49,12 @@
 
 12-version-5-tests-docs.md
  -> v5 prediction/evaluation smoke、README、a/5 归档和 tag 说明
+
+13-v6-chat-wrapper.md
+ -> chat.py、scripts/chat.py：把基础语言模型包装成简易对话入口
+
+14-version-6-tests-docs.md
+ -> v6 chat smoke、README、a/6 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -70,8 +76,9 @@
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
  -> generate 自回归采样新 token
+ -> chat prompt 包装多轮消息
  -> tokenizer.decode
  -> 生成文本
 ```
 
-一句话理解：这个项目用最小的工程结构复现 GPT 的核心训练目标，也就是“根据前文预测下一个 token”。
+一句话理解：这个项目用最小的工程结构复现 GPT 的核心训练目标，也就是“根据前文预测下一个 token”，再逐步补上观察、评估和对话包装这些应用层能力。

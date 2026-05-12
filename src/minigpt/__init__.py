@@ -1,5 +1,6 @@
 """MiniGPT learning project."""
 
+from .chat import ChatTurn, PreparedChatPrompt, build_chat_prompt
 from .history import TrainingRecord
 from .model import GPTConfig, MiniGPT
 from .prediction import TokenPrediction
@@ -13,4 +14,7 @@ __all__ = [
     "load_tokenizer",
     "TrainingRecord",
     "TokenPrediction",
+    "ChatTurn",
+    "PreparedChatPrompt",
+    "build_chat_prompt",
 ]

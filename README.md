@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 5 is a MiniGPT learning project with next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 6 is a MiniGPT learning project with a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -16,6 +16,8 @@ Version 5 is a MiniGPT learning project with next-token prediction inspection, e
 - Attention inspection script that exports JSON and SVG heatmaps for a prompt
 - Next-token prediction inspection script that exports probability JSON and SVG bar charts
 - Evaluation script that reports validation loss and perplexity for a checkpoint
+- Chat prompt utilities for formatting system/user/assistant turns, trimming context windows, and stopping at role markers
+- Chat script for one-shot or interactive assistant-style generation from a checkpoint, with transcript JSON output
 - Training script with configurable model size, batch size, context window, learning rate, evaluation interval, and CPU/CUDA device selection
 - Resumable training with `--resume`, optimizer-state checkpointing, and target-step continuation
 - Training artifact output: `metrics.jsonl`, `history_summary.json`, `loss_curve.svg`, and `sample.txt`
@@ -23,8 +25,8 @@ Version 5 is a MiniGPT learning project with next-token prediction inspection, e
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, and generation shape
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, v2 training artifacts, and v3 BPE tokenization
+- Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, and chat prompt handling
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, and chat wrapper
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -38,6 +40,7 @@ v2.0.0  MiniGPT v2 training artifacts
 v3.0.0  MiniGPT v3 BPE tokenizer
 v4.0.0  MiniGPT v4 attention inspection
 v5.0.0  MiniGPT v5 prediction inspection
+v6.0.0  MiniGPT v6 chat wrapper
 ```
 
 ## Project structure
@@ -69,13 +72,18 @@ v5.0.0  MiniGPT v5 prediction inspection
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 5/
+│   ├── 5/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 6/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
 ├── data/
 │   └── sample_zh.txt
 ├── scripts/
+│   ├── chat.py
 │   ├── evaluate.py
 │   ├── generate.py
 │   ├── inspect_attention.py
@@ -86,6 +94,7 @@ v5.0.0  MiniGPT v5 prediction inspection
 ├── src/
 │   └── minigpt/
 │       ├── __init__.py
+│       ├── chat.py
 │       ├── dataset.py
 │       ├── history.py
 │       ├── model.py
@@ -93,6 +102,7 @@ v5.0.0  MiniGPT v5 prediction inspection
 │       └── tokenizer.py
 ├── tests/
 │   ├── test_attention.py
+│   ├── test_chat.py
 │   ├── test_dataset.py
 │   ├── test_history.py
 │   ├── test_model.py
@@ -111,7 +121,9 @@ v5.0.0  MiniGPT v5 prediction inspection
 │   ├── 09-v4-attention-inspection.md
 │   ├── 10-version-4-tests-docs.md
 │   ├── 11-v5-prediction-evaluation.md
-│   └── 12-version-5-tests-docs.md
+│   ├── 12-version-5-tests-docs.md
+│   ├── 13-v6-chat-wrapper.md
+│   └── 14-version-6-tests-docs.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -207,6 +219,20 @@ Write generated text to a file:
 python scripts/generate.py --prompt "人工智能" --max-new-tokens 120 --out runs/minigpt/generated.txt
 ```
 
+## Chat
+
+Run one assistant-style turn:
+
+```powershell
+python scripts/chat.py --checkpoint runs/minigpt/checkpoint.pt --message "解释 token 是什么" --out runs/minigpt/transcript.json
+```
+
+Start a simple interactive loop:
+
+```powershell
+python scripts/chat.py --checkpoint runs/minigpt/checkpoint.pt
+```
+
 ## Test
 
 ```powershell
@@ -228,6 +254,8 @@ a/4/图片
 a/4/解释/说明.md
 a/5/图片
 a/5/解释/说明.md
+a/6/图片
+a/6/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -270,6 +298,14 @@ Version 5 screenshots:
 - `04-evaluate-report.png`: evaluation report with loss and perplexity
 - `05-docs-check.png`: v5 docs and archive check
 
+Version 6 screenshots:
+
+- `01-unit-tests.png`: chat prompt and existing regression tests
+- `02-chat-train-smoke.png`: checkpoint training smoke for chat wrapper
+- `03-chat-one-shot.png`: one-shot chat generation and transcript export
+- `04-transcript-check.png`: transcript JSON structure check
+- `05-docs-check.png`: v6 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -293,6 +329,8 @@ Suggested reading order:
 10-version-4-tests-docs.md
 11-v5-prediction-evaluation.md
 12-version-5-tests-docs.md
+13-v6-chat-wrapper.md
+14-version-6-tests-docs.md
 ```
 
 ## Learning map
@@ -306,8 +344,10 @@ target y: 工 智 能 正
 
 The model sees the current and previous tokens, predicts the next token at every position, and uses cross entropy loss to update its parameters.
 
+The chat wrapper does not change the model objective. It formats conversation turns into text, runs the same autoregressive generation loop, then trims the decoded result into an assistant reply.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add a simple Web UI.
+- Add a simple Web UI for chat and inspection artifacts.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
