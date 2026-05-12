@@ -6,6 +6,22 @@
 
 Before sending the final response for any task, perform a cleanup pass for files and processes created during that task.
 
+## Code Explanation Rule
+
+后续新增或更新 `代码讲解记录/*.md` 时，讲解风格要向 `D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md` 靠齐。
+
+具体要求：
+
+- 开头先说明本版目标、它解决什么问题，以及明确不做什么。
+- 写清楚本版来自哪条路线或前置能力，能关联计划文档、上一版能力或上下游产物时要写出来。
+- 列出关键新增/修改文件，并解释每个文件在链路里的角色。
+- 不只写功能清单，要解释核心数据结构、核心函数、字段语义、输入输出格式和运行流程。
+- 对 JSON/HTML/SVG/fixture/report 等产物，要说明它们是不是最终证据、是否只读、是否用于后续模块消费。
+- 测试部分要写清楚测试如何真实覆盖链路、关键断言保护了什么，而不是只写“测试通过”。
+- README、脚本、截图、归档如果参与本版闭环，也要说明它们承担的证明作用。
+- 末尾保留“一句话总结”，用来说明这一版把项目能力推进到了哪一层。
+- 可以根据 MiniGPT 的实际内容调整章节名，但整体深度、证据链意识和边界说明要接近参考文档。
+
 ## Temporary Files
 
 Delete files and folders created only for intermediate editing, conversion, rendering, testing, debugging, or validation.
