@@ -115,11 +115,18 @@ class RegistryTests(unittest.TestCase):
             self.assertIn('id="sort-key"', html)
             self.assertIn('id="sort-direction"', html)
             self.assertIn('id="registry-count"', html)
+            self.assertIn('id="share-view"', html)
+            self.assertIn('id="export-visible-csv"', html)
+            self.assertIn('id="registry-status"', html)
             self.assertIn("data-run-row", html)
             self.assertIn("data-best-val", html)
             self.assertIn('<option value="pass">pass</option>', html)
             self.assertIn('<option value="warn">warn</option>', html)
             self.assertIn("addEventListener", html)
+            self.assertIn("URLSearchParams", html)
+            self.assertIn("navigator.clipboard.writeText", html)
+            self.assertIn("registry-visible-", html)
+            self.assertIn("new Blob", html)
 
     def test_render_registry_html_escapes_run_text(self) -> None:
         registry = {

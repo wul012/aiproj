@@ -420,6 +420,9 @@ def _registry_controls(runs: list[Any]) -> str:
         "</select></label>"
         '<button id="sort-direction" type="button" aria-pressed="false">Asc</button>'
         '<output id="registry-count" for="registry-search quality-filter sort-key">0 / 0</output>'
+        '<button id="share-view" type="button">Share</button>'
+        '<button id="export-visible-csv" type="button">CSV</button>'
+        '<output id="registry-status" for="share-view export-visible-csv"></output>'
         "</section>"
     )
 
@@ -471,11 +474,12 @@ p, span, .muted { color:var(--muted); }
 .card { padding:14px; min-height:84px; }
 .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
 .value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
-.toolbar { display:grid; grid-template-columns:minmax(220px, 1fr) 160px 160px 74px 90px; gap:10px; align-items:end; padding:14px 32px 0; }
+.toolbar { display:grid; grid-template-columns:minmax(220px, 1fr) 150px 150px 74px 90px 82px 72px 120px; gap:10px; align-items:end; padding:14px 32px 0; }
 .toolbar label { display:flex; flex-direction:column; gap:5px; color:var(--muted); font-size:12px; text-transform:uppercase; }
 .toolbar input, .toolbar select, .toolbar button, .toolbar output { width:100%; min-height:38px; border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink); font:inherit; }
 .toolbar input, .toolbar select { padding:7px 9px; }
 .toolbar button { cursor:pointer; font-weight:700; }
+.toolbar button:active { transform:translateY(1px); }
 .toolbar output { display:flex; align-items:center; justify-content:center; color:var(--muted); }
 .panel { margin:18px 32px; padding:16px; overflow-x:auto; }
 table { width:100%; border-collapse:collapse; min-width:900px; }
@@ -501,8 +505,41 @@ def _registry_script() -> str:
   const sortKey = document.getElementById("sort-key");
   const direction = document.getElementById("sort-direction");
   const count = document.getElementById("registry-count");
+  const share = document.getElementById("share-view");
+  const exportCsv = document.getElementById("export-visible-csv");
+  const status = document.getElementById("registry-status");
   const numericKeys = new Set(["bestVal", "params", "artifacts", "eval"]);
   let ascending = true;
+
+  const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);
+
+  const readState = () => {
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    search.value = params.get("q") || "";
+    const wantedQuality = params.get("quality") || "";
+    if (hasOption(quality, wantedQuality)) quality.value = wantedQuality;
+    const wantedSort = params.get("sort") || "bestVal";
+    if (hasOption(sortKey, wantedSort)) sortKey.value = wantedSort;
+    ascending = params.get("dir") !== "desc";
+    direction.textContent = ascending ? "Asc" : "Desc";
+    direction.setAttribute("aria-pressed", String(!ascending));
+  };
+
+  const writeState = () => {
+    const params = new URLSearchParams();
+    const query = (search.value || "").trim();
+    if (query) params.set("q", query);
+    if (quality.value) params.set("quality", quality.value);
+    if (sortKey.value !== "bestVal") params.set("sort", sortKey.value);
+    if (!ascending) params.set("dir", "desc");
+    const next = params.toString();
+    const base = window.location.href.split("#")[0];
+    try {
+      window.history.replaceState(null, "", next ? `${base}#${next}` : base);
+    } catch {
+      if (window.location.hash.slice(1) !== next) window.location.hash = next;
+    }
+  };
 
   const numberCompare = (a, b, key) => {
     const av = a.dataset[key] || "";
@@ -535,8 +572,40 @@ def _registry_script() -> str:
       .sort((a, b) => numericKeys.has(key) ? numberCompare(a, b, key) : textCompare(a, b, key))
       .forEach((row) => row.parentElement.appendChild(row));
     count.value = `${visible.length} / ${rows.length}`;
+    writeState();
+    return visible;
   };
 
+  const csvCell = (value) => `"${String(value).replace(/"/g, '""')}"`;
+
+  const exportVisibleRows = () => {
+    const headers = Array.from(document.querySelectorAll("#registry-table thead th")).map((cell) => cell.textContent.trim());
+    const visible = rows.filter((row) => !row.hidden);
+    const records = visible.map((row) => Array.from(row.cells).map((cell) => (cell.innerText || cell.textContent).replace(/\\s+/g, " ").trim()));
+    const csv = [headers, ...records].map((record) => record.map(csvCell).join(",")).join("\\n");
+    const blob = new Blob(["\\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `registry-visible-${visible.length}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    status.value = `CSV ${visible.length}`;
+  };
+
+  const shareCurrentView = async () => {
+    writeState();
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      status.value = "Link copied";
+    } catch {
+      status.value = "Link in URL";
+    }
+  };
+
+  readState();
   search.addEventListener("input", apply);
   quality.addEventListener("change", apply);
   sortKey.addEventListener("change", apply);
@@ -546,6 +615,8 @@ def _registry_script() -> str:
     direction.setAttribute("aria-pressed", String(!ascending));
     apply();
   });
+  share.addEventListener("click", shareCurrentView);
+  exportCsv.addEventListener("click", exportVisibleRows);
   apply();
 })();
 </script>"""
