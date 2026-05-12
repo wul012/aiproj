@@ -67,6 +67,12 @@
 
 18-version-8-tests-docs.md
  -> v8 dashboard smoke、README、a/8 归档和 tag 说明
+
+19-v9-run-comparison.md
+ -> comparison.py、compare_runs.py：横向比较多个 MiniGPT 实验 run
+
+20-version-9-tests-docs.md
+ -> v9 comparison smoke、README、a/9 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -91,6 +97,7 @@
  -> generate 自回归采样新 token
  -> chat prompt 包装多轮消息
  -> dashboard.html 汇总实验产物
+ -> comparison.json/csv/svg 横向比较多个 run
  -> tokenizer.decode
  -> 生成文本
 ```
