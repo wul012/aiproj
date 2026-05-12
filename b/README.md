@@ -18,6 +18,14 @@ b/32/图片
 b/32/解释/说明.md
 ```
 
+## 当前索引
+
+```text
+b/32/图片
+b/32/解释/说明.md
+ -> v32 release gate profile comparison 的运行截图和解释
+```
+
 写入规则：
 
 - `图片/` 保存真实命令输出截图、Playwright/Chrome 截图、结构检查截图和文档检查截图。
