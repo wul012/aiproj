@@ -50,7 +50,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v32，项目已经从 MiniGPT 教学雏形推进到带实验记录、数据质量、评估套件、registry、experiment card、model card、project audit、release bundle、release gate、generation quality policy、release gate policy profiles 和 profile comparison report 的学习型 AI 工程。
+截至 v33，项目已经从 MiniGPT 教学雏形推进到带实验记录、数据质量、评估套件、registry、experiment card、model card、project audit、release bundle、release gate、generation quality policy、release gate policy profiles、profile comparison report 和 profile delta explanations 的学习型 AI 工程。
 
 当前主线能力：
 
@@ -79,6 +79,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
  -> release gate generation-quality policy
  -> release gate policy profiles
  -> release gate profile comparison
+ -> release gate profile delta explanations
 ```
 
 成熟度判断：
@@ -86,7 +87,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 ```text
 GPT 原理学习：较完整
 实验复现与索引：中高成熟
-发布证据链：进入可横向比较的发布治理阶段
+发布证据链：进入可解释分歧的发布治理阶段
 真实大模型能力：仍不是目标
 真实生产训练系统：仍需继续补强
 ```
@@ -94,7 +95,7 @@ GPT 原理学习：较完整
 还没有完成的方向：
 
 ```text
-profile-delta 差异原因解释
+可配置 baseline profile
 更稳定的质量阈值配置
 更完整的实验对比基准
 更强的数据治理和数据卡
@@ -111,9 +112,11 @@ profile-delta 差异原因解释
  -> 第三十一版代码讲解：把 release gate 的单点参数升级成 standard/review/strict/legacy 策略档位
 47-v32-release-gate-profile-comparison.md
  -> 第三十二版代码讲解：把多个 policy profile 的 gate 结果汇总成 JSON/CSV/Markdown/HTML 对比矩阵
+48-v33-release-gate-profile-deltas.md
+ -> 第三十三版代码讲解：解释 compared profile 相对 baseline profile 新增或移除了哪些 failed/warned checks
 ```
 
-后续推进 v33 时，在这里继续追加 `48-v33-主题.md`。
+后续推进 v34 时，在这里继续追加 `49-v34-主题.md`。
 
 从 v32 起，运行截图和解释归档不再继续写入 `a/`，而是写入与 `a/` 同级的 `b/`：
 

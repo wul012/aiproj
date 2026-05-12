@@ -43,7 +43,8 @@ def build_release_gate_profile_comparison(
             )
             rows.append(_row_from_gate(gate))
 
-    summary = _build_comparison_summary(rows, bundles, profiles)
+    deltas = _build_profile_deltas(rows, profiles)
+    summary = _build_comparison_summary(rows, deltas, bundles, profiles)
     return {
         "schema_version": 1,
         "title": title,
@@ -52,7 +53,8 @@ def build_release_gate_profile_comparison(
         "policy_profiles": list(profiles),
         "summary": summary,
         "rows": rows,
-        "recommendations": _comparison_recommendations(summary, rows),
+        "deltas": deltas,
+        "recommendations": _comparison_recommendations(summary, rows, deltas),
     }
 
 
@@ -90,6 +92,36 @@ def write_release_gate_profile_comparison_csv(report: dict[str, Any], path: str 
             writer.writerow({key: _csv_value(row.get(key)) for key in fieldnames})
 
 
+def write_release_gate_profile_delta_csv(report: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    deltas = _list_of_dicts(report.get("deltas"))
+    fieldnames = [
+        "bundle_path",
+        "release_name",
+        "baseline_profile",
+        "compared_profile",
+        "baseline_decision",
+        "compared_decision",
+        "delta_status",
+        "decision_changed",
+        "baseline_minimum_audit_score",
+        "compared_minimum_audit_score",
+        "baseline_require_generation_quality",
+        "compared_require_generation_quality",
+        "added_failed_checks",
+        "removed_failed_checks",
+        "added_warned_checks",
+        "removed_warned_checks",
+        "explanation",
+    ]
+    with out_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for delta in deltas:
+            writer.writerow({key: _csv_value(delta.get(key)) for key in fieldnames})
+
+
 def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     lines = [
@@ -107,6 +139,9 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
         f"| Approved | {_md(summary.get('approved_count'))} |",
         f"| Needs review | {_md(summary.get('needs_review_count'))} |",
         f"| Blocked | {_md(summary.get('blocked_count'))} |",
+        f"| Profile deltas | {_md(summary.get('delta_count'))} |",
+        f"| Decision deltas | {_md(summary.get('decision_delta_count'))} |",
+        f"| Check deltas | {_md(summary.get('check_delta_count'))} |",
         "",
         "## Profile Matrix",
         "",
@@ -131,6 +166,31 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
             )
             + " |"
         )
+    lines.extend(
+        [
+            "",
+            "## Profile Deltas",
+            "",
+            "| Bundle | Baseline | Compared | Decision delta | Added failed checks | Removed failed checks | Explanation |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for delta in _list_of_dicts(report.get("deltas")):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    _md(delta.get("release_name") or delta.get("bundle_path")),
+                    _md(delta.get("baseline_profile")),
+                    _md(delta.get("compared_profile")),
+                    _md(f"{delta.get('baseline_decision')} -> {delta.get('compared_decision')}"),
+                    _md(", ".join(_string_list(delta.get("added_failed_checks")))),
+                    _md(", ".join(_string_list(delta.get("removed_failed_checks")))),
+                    _md(delta.get("explanation")),
+                ]
+            )
+            + " |"
+        )
     lines.extend(["", "## Recommendations", ""])
     lines.extend(f"- {item}" for item in _string_list(report.get("recommendations")))
     return "\n".join(lines).rstrip() + "\n"
@@ -150,9 +210,11 @@ def render_release_gate_profile_comparison_html(report: dict[str, Any]) -> str:
         ("Approved", summary.get("approved_count")),
         ("Review", summary.get("needs_review_count")),
         ("Blocked", summary.get("blocked_count")),
+        ("Decision deltas", summary.get("decision_delta_count")),
         ("Generated", report.get("generated_at")),
     ]
     rows = "".join(_html_row(row) for row in _list_of_dicts(report.get("rows")))
+    deltas = "".join(_html_delta_row(delta) for delta in _list_of_dicts(report.get("deltas")))
     return "\n".join(
         [
             "<!doctype html>",
@@ -171,6 +233,11 @@ def render_release_gate_profile_comparison_html(report: dict[str, Any]) -> str:
             "<th>Bundle</th><th>Profile</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Min</th><th>Generation</th><th>Failed</th><th>Warned</th>"
             "</tr></thead><tbody>"
             + rows
+            + "</tbody></table></section>",
+            '<section class="panel"><h2>Profile Deltas</h2><table><thead><tr>'
+            "<th>Bundle</th><th>Baseline</th><th>Compared</th><th>Decision</th><th>Added failed</th><th>Removed failed</th><th>Explanation</th>"
+            "</tr></thead><tbody>"
+            + deltas
             + "</tbody></table></section>",
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT release gate profile comparison.</footer>",
@@ -192,11 +259,13 @@ def write_release_gate_profile_comparison_outputs(report: dict[str, Any], out_di
     paths = {
         "json": root / "release_gate_profile_comparison.json",
         "csv": root / "release_gate_profile_comparison.csv",
+        "delta_csv": root / "release_gate_profile_deltas.csv",
         "markdown": root / "release_gate_profile_comparison.md",
         "html": root / "release_gate_profile_comparison.html",
     }
     write_release_gate_profile_comparison_json(report, paths["json"])
     write_release_gate_profile_comparison_csv(report, paths["csv"])
+    write_release_gate_profile_delta_csv(report, paths["delta_csv"])
     write_release_gate_profile_comparison_markdown(report, paths["markdown"])
     write_release_gate_profile_comparison_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
@@ -234,10 +303,13 @@ def _row_from_gate(gate: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _build_comparison_summary(rows: list[dict[str, Any]], bundles: list[Path], profiles: list[str]) -> dict[str, Any]:
+def _build_comparison_summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], bundles: list[Path], profiles: list[str]) -> dict[str, Any]:
     approved = sum(1 for row in rows if row.get("decision") == "approved")
     needs_review = sum(1 for row in rows if row.get("decision") == "needs-review")
     blocked = sum(1 for row in rows if row.get("decision") == "blocked")
+    decision_deltas = sum(1 for delta in deltas if delta.get("decision_changed"))
+    check_deltas = sum(1 for delta in deltas if delta.get("added_failed_checks") or delta.get("removed_failed_checks") or delta.get("added_warned_checks") or delta.get("removed_warned_checks"))
+    diverged_bundles = len({delta.get("bundle_path") for delta in deltas if delta.get("delta_status") != "same"})
     return {
         "bundle_count": len(bundles),
         "profile_count": len(profiles),
@@ -245,21 +317,132 @@ def _build_comparison_summary(rows: list[dict[str, Any]], bundles: list[Path], p
         "approved_count": approved,
         "needs_review_count": needs_review,
         "blocked_count": blocked,
+        "delta_count": len(deltas),
+        "decision_delta_count": decision_deltas,
+        "check_delta_count": check_deltas,
+        "diverged_bundle_count": diverged_bundles,
     }
 
 
-def _comparison_recommendations(summary: dict[str, Any], rows: list[dict[str, Any]]) -> list[str]:
+def _comparison_recommendations(summary: dict[str, Any], rows: list[dict[str, Any]], deltas: list[dict[str, Any]]) -> list[str]:
     blocked = int(summary.get("blocked_count") or 0)
     needs_review = int(summary.get("needs_review_count") or 0)
+    decision_deltas = int(summary.get("decision_delta_count") or 0)
     if blocked:
         blocked_profiles = sorted({str(row.get("policy_profile")) for row in rows if row.get("decision") == "blocked"})
-        return [
+        recommendations = [
             "At least one profile blocks the release; inspect failed_checks before choosing a release policy.",
             "Blocked profile(s): " + ", ".join(blocked_profiles) + ".",
         ]
+        if decision_deltas:
+            recommendations.append("Profile deltas explain why compared profiles disagree with the baseline decision.")
+        return recommendations
     if needs_review:
         return ["No profile blocks the release, but warning profiles need manual review before external sharing."]
+    if any(delta.get("delta_status") != "same" for delta in deltas):
+        return ["All profiles approve, but profile deltas still show threshold or warning differences worth reviewing."]
     return ["All compared policy profiles approved the release bundle(s)."]
+
+
+def _build_profile_deltas(rows: list[dict[str, Any]], profiles: list[str]) -> list[dict[str, Any]]:
+    if len(profiles) < 2:
+        return []
+    baseline_profile = profiles[0]
+    grouped: dict[str, dict[str, dict[str, Any]]] = {}
+    for row in rows:
+        key = str(row.get("bundle_path") or row.get("release_name") or "")
+        grouped.setdefault(key, {})[str(row.get("policy_profile"))] = row
+
+    deltas: list[dict[str, Any]] = []
+    for bundle_path in sorted(grouped):
+        profile_rows = grouped[bundle_path]
+        baseline = profile_rows.get(baseline_profile)
+        if not baseline:
+            continue
+        for compared_profile in profiles[1:]:
+            compared = profile_rows.get(compared_profile)
+            if not compared:
+                continue
+            delta = _delta_between_rows(baseline, compared)
+            deltas.append(delta)
+    return deltas
+
+
+def _delta_between_rows(baseline: dict[str, Any], compared: dict[str, Any]) -> dict[str, Any]:
+    baseline_failed = set(_string_list(baseline.get("failed_checks")))
+    compared_failed = set(_string_list(compared.get("failed_checks")))
+    baseline_warned = set(_string_list(baseline.get("warned_checks")))
+    compared_warned = set(_string_list(compared.get("warned_checks")))
+    added_failed = sorted(compared_failed - baseline_failed)
+    removed_failed = sorted(baseline_failed - compared_failed)
+    added_warned = sorted(compared_warned - baseline_warned)
+    removed_warned = sorted(baseline_warned - compared_warned)
+    decision_changed = baseline.get("decision") != compared.get("decision")
+    check_changed = bool(added_failed or removed_failed or added_warned or removed_warned)
+    if decision_changed:
+        delta_status = "decision-delta"
+    elif check_changed:
+        delta_status = "check-delta"
+    else:
+        delta_status = "same"
+    delta = {
+        "bundle_path": baseline.get("bundle_path"),
+        "release_name": baseline.get("release_name"),
+        "baseline_profile": baseline.get("policy_profile"),
+        "compared_profile": compared.get("policy_profile"),
+        "baseline_decision": baseline.get("decision"),
+        "compared_decision": compared.get("decision"),
+        "baseline_gate_status": baseline.get("gate_status"),
+        "compared_gate_status": compared.get("gate_status"),
+        "baseline_minimum_audit_score": baseline.get("minimum_audit_score"),
+        "compared_minimum_audit_score": compared.get("minimum_audit_score"),
+        "baseline_require_generation_quality": baseline.get("require_generation_quality_audit_checks"),
+        "compared_require_generation_quality": compared.get("require_generation_quality_audit_checks"),
+        "decision_changed": decision_changed,
+        "delta_status": delta_status,
+        "added_failed_checks": added_failed,
+        "removed_failed_checks": removed_failed,
+        "added_warned_checks": added_warned,
+        "removed_warned_checks": removed_warned,
+    }
+    delta["explanation"] = _delta_explanation(delta)
+    return delta
+
+
+def _delta_explanation(delta: dict[str, Any]) -> str:
+    baseline = delta.get("baseline_profile")
+    compared = delta.get("compared_profile")
+    decision = f"{delta.get('baseline_decision')} -> {delta.get('compared_decision')}"
+    parts = []
+    if delta.get("decision_changed"):
+        parts.append(f"{compared} changes the decision from {decision}.")
+    else:
+        parts.append(f"{compared} keeps the same decision as {baseline}: {delta.get('compared_decision')}.")
+
+    added_failed = _string_list(delta.get("added_failed_checks"))
+    removed_failed = _string_list(delta.get("removed_failed_checks"))
+    added_warned = _string_list(delta.get("added_warned_checks"))
+    removed_warned = _string_list(delta.get("removed_warned_checks"))
+    if added_failed:
+        parts.append("It adds failed check(s): " + ", ".join(added_failed) + ".")
+    if removed_failed:
+        parts.append("It removes failed check(s): " + ", ".join(removed_failed) + ".")
+    if added_warned:
+        parts.append("It adds warning check(s): " + ", ".join(added_warned) + ".")
+    if removed_warned:
+        parts.append("It removes warning check(s): " + ", ".join(removed_warned) + ".")
+    if not any([added_failed, removed_failed, added_warned, removed_warned]):
+        parts.append("No failed or warning check delta is present.")
+
+    if delta.get("baseline_minimum_audit_score") != delta.get("compared_minimum_audit_score"):
+        parts.append(
+            f"Audit-score threshold changes from {delta.get('baseline_minimum_audit_score')} to {delta.get('compared_minimum_audit_score')}."
+        )
+    if delta.get("baseline_require_generation_quality") != delta.get("compared_require_generation_quality"):
+        parts.append(
+            f"Generation-quality requirement changes from {delta.get('baseline_require_generation_quality')} to {delta.get('compared_require_generation_quality')}."
+        )
+    return " ".join(parts)
 
 
 def _check_ids(checks: list[dict[str, Any]], status: str) -> list[str]:
@@ -279,6 +462,21 @@ def _html_row(row: dict[str, Any]) -> str:
         f"<td>{_e(row.get('require_generation_quality_audit_checks'))}</td>"
         f"<td>{_e(', '.join(_string_list(row.get('failed_checks'))))}</td>"
         f"<td>{_e(', '.join(_string_list(row.get('warned_checks'))))}</td>"
+        "</tr>"
+    )
+
+
+def _html_delta_row(delta: dict[str, Any]) -> str:
+    status = str(delta.get("delta_status") or "same")
+    return (
+        "<tr>"
+        f"<td>{_e(delta.get('release_name') or delta.get('bundle_path'))}<br><span>{_e(delta.get('bundle_path'))}</span></td>"
+        f"<td>{_e(delta.get('baseline_profile'))}</td>"
+        f"<td><strong>{_e(delta.get('compared_profile'))}</strong><br><span>{_e(status)}</span></td>"
+        f"<td>{_e(delta.get('baseline_decision'))} -> {_e(delta.get('compared_decision'))}</td>"
+        f"<td>{_e(', '.join(_string_list(delta.get('added_failed_checks'))))}</td>"
+        f"<td>{_e(', '.join(_string_list(delta.get('removed_failed_checks'))))}</td>"
+        f"<td>{_e(delta.get('explanation'))}</td>"
         "</tr>"
     )
 

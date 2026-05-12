@@ -101,11 +101,19 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["row_count"], 4)
             self.assertEqual(report["summary"]["approved_count"], 3)
             self.assertEqual(report["summary"]["blocked_count"], 1)
+            self.assertEqual(report["summary"]["delta_count"], 3)
+            self.assertEqual(report["summary"]["decision_delta_count"], 1)
+            self.assertEqual(report["summary"]["check_delta_count"], 1)
             strict = next(row for row in report["rows"] if row["policy_profile"] == "strict")
             self.assertEqual(strict["decision"], "blocked")
             self.assertIn("audit_score", strict["failed_checks"])
             standard = next(row for row in report["rows"] if row["policy_profile"] == "standard")
             self.assertEqual(standard["decision"], "approved")
+            strict_delta = next(delta for delta in report["deltas"] if delta["compared_profile"] == "strict")
+            self.assertEqual(strict_delta["baseline_profile"], "standard")
+            self.assertEqual(strict_delta["delta_status"], "decision-delta")
+            self.assertEqual(strict_delta["added_failed_checks"], ["audit_score"])
+            self.assertIn("adds failed check(s): audit_score", strict_delta["explanation"])
 
     def test_legacy_profile_can_be_compared_against_missing_generation_quality_bundle(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -121,6 +129,11 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             self.assertIn("generation_quality_audit_checks", by_profile["review"]["failed_checks"])
             self.assertEqual(by_profile["legacy"]["decision"], "approved")
             self.assertEqual(by_profile["legacy"]["require_generation_quality_audit_checks"], False)
+            legacy_delta = next(delta for delta in report["deltas"] if delta["compared_profile"] == "legacy")
+            self.assertEqual(legacy_delta["compared_decision"], "approved")
+            self.assertIn("audit_score", legacy_delta["removed_failed_checks"])
+            self.assertIn("generation_quality_audit_checks", legacy_delta["removed_failed_checks"])
+            self.assertIn("removes failed check(s)", legacy_delta["explanation"])
 
     def test_profile_comparison_supports_multiple_bundles(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -154,12 +167,18 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
 
             json_payload = json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))
             csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            delta_csv_text = Path(outputs["delta_csv"]).read_text(encoding="utf-8")
             md_text = Path(outputs["markdown"]).read_text(encoding="utf-8")
             html_text = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertEqual(json_payload["summary"]["row_count"], 4)
+            self.assertEqual(json_payload["summary"]["delta_count"], 3)
             self.assertIn("policy_profile,gate_status", csv_text)
+            self.assertIn("baseline_profile,compared_profile", delta_csv_text)
+            self.assertIn("audit_score", delta_csv_text)
             self.assertIn("## Profile Matrix", md_text)
+            self.assertIn("## Profile Deltas", md_text)
             self.assertIn("Profile Matrix", html_text)
+            self.assertIn("Profile Deltas", html_text)
 
     def test_profile_comparison_renderers_escape_release_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

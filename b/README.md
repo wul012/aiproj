@@ -24,6 +24,9 @@ b/32/解释/说明.md
 b/32/图片
 b/32/解释/说明.md
  -> v32 release gate profile comparison 的运行截图和解释
+b/33/图片
+b/33/解释/说明.md
+ -> v33 release gate profile delta explanations 的运行截图和解释
 ```
 
 写入规则：

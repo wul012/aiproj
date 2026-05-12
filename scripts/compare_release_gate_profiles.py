@@ -68,6 +68,9 @@ def main() -> None:
     print(f"approved={summary['approved_count']}")
     print(f"needs_review={summary['needs_review_count']}")
     print(f"blocked={summary['blocked_count']}")
+    print(f"deltas={summary['delta_count']}")
+    print(f"decision_deltas={summary['decision_delta_count']}")
+    print(f"check_deltas={summary['check_delta_count']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if args.fail_on_blocked and summary["blocked_count"]:
         raise SystemExit(1)
