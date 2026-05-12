@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.model import GPTConfig, MiniGPT
-from minigpt.tokenizer import CharTokenizer
+from minigpt.tokenizer import load_tokenizer
 
 
 def parse_args() -> argparse.Namespace:
@@ -40,7 +40,7 @@ def main() -> None:
     tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
 
     checkpoint = torch.load(args.checkpoint, map_location=device, weights_only=False)
-    tokenizer = CharTokenizer.load(tokenizer_path)
+    tokenizer = load_tokenizer(tokenizer_path)
     config = GPTConfig(**checkpoint["config"])
     model = MiniGPT(config).to(device)
     model.load_state_dict(checkpoint["model"])

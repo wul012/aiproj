@@ -16,7 +16,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.dataset import get_batch, load_text, split_token_ids
 from minigpt.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
 from minigpt.model import GPTConfig, MiniGPT
-from minigpt.tokenizer import CharTokenizer
+from minigpt.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer
 
 
 def parse_args() -> argparse.Namespace:
@@ -24,6 +24,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data", type=Path, default=ROOT / "data" / "sample_zh.txt")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "minigpt")
     parser.add_argument("--resume", type=Path, default=None, help="Resume from a previous checkpoint.pt")
+    parser.add_argument("--tokenizer", choices=["char", "bpe"], default="char")
+    parser.add_argument("--bpe-vocab-size", type=int, default=256)
+    parser.add_argument("--bpe-min-frequency", type=int, default=2)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--block-size", type=int, default=128)
     parser.add_argument("--max-iters", type=int, default=1000)
@@ -78,12 +81,12 @@ def estimate_loss(
     return out
 
 
-def load_resume_state(resume_path: Path, device: torch.device) -> tuple[dict, CharTokenizer, GPTConfig]:
+def load_resume_state(resume_path: Path, device: torch.device) -> tuple[dict, Tokenizer, GPTConfig]:
     checkpoint = torch.load(resume_path, map_location=device, weights_only=False)
     tokenizer_path = resume_path.parent / "tokenizer.json"
     if not tokenizer_path.exists():
         raise FileNotFoundError(f"Resume tokenizer not found: {tokenizer_path}")
-    tokenizer = CharTokenizer.load(tokenizer_path)
+    tokenizer = load_tokenizer(tokenizer_path)
     config = GPTConfig(**checkpoint["config"])
     if config.vocab_size != tokenizer.vocab_size:
         raise ValueError(
@@ -92,10 +95,20 @@ def load_resume_state(resume_path: Path, device: torch.device) -> tuple[dict, Ch
     return checkpoint, tokenizer, config
 
 
+def train_tokenizer(args: argparse.Namespace, text: str) -> Tokenizer:
+    if args.tokenizer == "bpe":
+        return BPETokenizer.train(
+            text,
+            vocab_size=args.bpe_vocab_size,
+            min_frequency=args.bpe_min_frequency,
+        )
+    return CharTokenizer.train(text)
+
+
 @torch.no_grad()
 def write_sample(
     model: MiniGPT,
-    tokenizer: CharTokenizer,
+    tokenizer: Tokenizer,
     prompt: str,
     max_new_tokens: int,
     temperature: float,
@@ -147,7 +160,7 @@ def main() -> None:
         checkpoint, tokenizer, config = load_resume_state(args.resume, device)
         resume_step = int(checkpoint.get("step", 0))
     else:
-        tokenizer = CharTokenizer.train(text)
+        tokenizer = train_tokenizer(args, text)
         config = GPTConfig(
             vocab_size=tokenizer.vocab_size,
             block_size=args.block_size,
@@ -175,6 +188,7 @@ def main() -> None:
         )
 
     print(f"device={device}")
+    print(f"tokenizer={getattr(tokenizer, 'name', 'unknown')}")
     print(f"tokens={len(token_ids)} vocab_size={tokenizer.vocab_size}")
     print(f"parameters={model.parameter_count():,}")
     if args.resume is not None:
@@ -247,6 +261,7 @@ def main() -> None:
         "step": args.max_iters,
         "history_file": "metrics.jsonl",
         "sample_file": None if args.no_sample else "sample.txt",
+        "tokenizer_type": getattr(tokenizer, "name", "unknown"),
     }
     torch.save(checkpoint, args.out_dir / "checkpoint.pt")
     tokenizer.save(args.out_dir / "tokenizer.json")

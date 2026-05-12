@@ -31,6 +31,12 @@
 
 06-version-2-tests-docs.md
  -> v2 测试、README、a/2 归档和版本说明更新
+
+07-v3-bpe-tokenizer.md
+ -> BPETokenizer、load_tokenizer、inspect_tokenizer.py：从字符级走向子词合并
+
+08-version-3-tests-docs.md
+ -> v3 BPE smoke、README、a/3 归档和 tag 说明
 ```
 
 ## 项目整体理解
@@ -41,7 +47,7 @@
 
 ```text
 中文文本
- -> CharTokenizer.encode
+ -> CharTokenizer 或 BPETokenizer encode
  -> token id 序列
  -> get_batch 采样 x/y
  -> MiniGPT.forward
@@ -50,7 +56,7 @@
  -> AdamW 更新参数
  -> metrics.jsonl / loss_curve.svg / sample.txt
  -> generate 自回归采样新 token
- -> CharTokenizer.decode
+ -> tokenizer.decode
  -> 生成文本
 ```
 

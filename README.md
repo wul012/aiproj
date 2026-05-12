@@ -4,10 +4,12 @@ A PyTorch practice project for building a tiny character-level GPT language mode
 
 ## Current version
 
-Version 2 is a resumable MiniGPT learning project with source code, tests, code explanations, and archived verification screenshots:
+Version 3 is a MiniGPT learning project with resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
+- Optional character-seeded BPE tokenizer for understanding subword merge rules
+- Tokenizer inspection script for comparing char and BPE tokenization
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
 - Training script with configurable model size, batch size, context window, learning rate, evaluation interval, and CPU/CUDA device selection
@@ -18,8 +20,8 @@ Version 2 is a resumable MiniGPT learning project with source code, tests, code 
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset sampling, history artifacts, model forward/loss, and generation shape
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, and v2 training artifacts
-- First and second version verification archives with key screenshots and command explanations
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, v2 training artifacts, and v3 BPE tokenization
+- Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
 ## Version tags
@@ -29,6 +31,7 @@ Published tags:
 ```text
 v1.0.0  MiniGPT v1 initial learning project
 v2.0.0  MiniGPT v2 training artifacts
+v3.0.0  MiniGPT v3 BPE tokenizer
 ```
 
 ## Project structure
@@ -48,7 +51,11 @@ v2.0.0  MiniGPT v2 training artifacts
 │   │   │   └── 05-code-explanation-check.png
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 2/
+│   ├── 2/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 3/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -56,6 +63,7 @@ v2.0.0  MiniGPT v2 training artifacts
 │   └── sample_zh.txt
 ├── scripts/
 │   ├── generate.py
+│   ├── inspect_tokenizer.py
 │   ├── plot_history.py
 │   └── train.py
 ├── src/
@@ -77,7 +85,9 @@ v2.0.0  MiniGPT v2 training artifacts
 │   ├── 03-train-generate.md
 │   ├── 04-tests-docs.md
 │   ├── 05-v2-training-artifacts.md
-│   └── 06-version-2-tests-docs.md
+│   ├── 06-version-2-tests-docs.md
+│   ├── 07-v3-bpe-tokenizer.md
+│   └── 08-version-3-tests-docs.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -131,6 +141,18 @@ Rebuild the loss curve from history:
 python scripts/plot_history.py --history runs/minigpt/metrics.jsonl
 ```
 
+Train with the BPE tokenizer:
+
+```powershell
+python scripts/train.py --tokenizer bpe --bpe-vocab-size 260 --max-iters 300
+```
+
+Inspect tokenizer behavior:
+
+```powershell
+python scripts/inspect_tokenizer.py --tokenizer bpe --bpe-vocab-size 260 --text "人工智能"
+```
+
 ## Generate
 
 ```powershell
@@ -158,6 +180,8 @@ a/1/图片
 a/1/解释/说明.md
 a/2/图片
 a/2/解释/说明.md
+a/3/图片
+a/3/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -176,6 +200,14 @@ Version 2 screenshots:
 - `04-plot-and-generate-out.png`: standalone history plot and generated output file
 - `05-docs-check.png`: v2 docs and archive check
 
+Version 3 screenshots:
+
+- `01-unit-tests.png`: expanded tokenizer and regression tests
+- `02-bpe-inspect.png`: BPE tokenizer merge inspection
+- `03-bpe-train-smoke.png`: BPE training smoke test
+- `04-bpe-generate-load.png`: BPE checkpoint generation and tokenizer reload
+- `05-docs-check.png`: v3 docs and archive check
+
 ## Code explanation records
 
 Start here:
@@ -193,6 +225,8 @@ Suggested reading order:
 04-tests-docs.md
 05-v2-training-artifacts.md
 06-version-2-tests-docs.md
+07-v3-bpe-tokenizer.md
+08-version-3-tests-docs.md
 ```
 
 ## Learning map
@@ -208,8 +242,6 @@ The model sees the current and previous tokens, predicts the next token at every
 
 Next useful extensions:
 
-- Replace character tokenization with BPE tokenization.
 - Train on a larger Chinese corpus.
-- Add a BPE tokenizer.
 - Add a simple Web UI.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
