@@ -50,7 +50,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v30，项目已经从 MiniGPT 教学雏形推进到带实验记录、数据质量、评估套件、registry、experiment card、model card、project audit、release bundle、release gate 和 generation quality policy 的学习型 AI 工程。
+截至 v31，项目已经从 MiniGPT 教学雏形推进到带实验记录、数据质量、评估套件、registry、experiment card、model card、project audit、release bundle、release gate、generation quality policy 和 release gate policy profiles 的学习型 AI 工程。
 
 当前主线能力：
 
@@ -77,6 +77,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
  -> generation quality analysis
  -> generation quality audit chain
  -> release gate generation-quality policy
+ -> release gate policy profiles
 ```
 
 成熟度判断：
@@ -84,7 +85,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 ```text
 GPT 原理学习：较完整
 实验复现与索引：中高成熟
-发布证据链：进入发布治理阶段
+发布证据链：进入可分场景治理阶段
 真实大模型能力：仍不是目标
 真实生产训练系统：仍需继续补强
 ```
@@ -92,7 +93,6 @@ GPT 原理学习：较完整
 还没有完成的方向：
 
 ```text
-release gate policy profiles
 更稳定的质量阈值配置
 更完整的实验对比基准
 更强的数据治理和数据卡
@@ -105,11 +105,11 @@ release gate policy profiles
 新版本讲解从这里继续追加：
 
 ```text
-46-v31-待定主题.md
- -> 第三十一版代码讲解和发布治理阶段进度说明
+46-v31-release-gate-policy-profiles.md
+ -> 第三十一版代码讲解：把 release gate 的单点参数升级成 standard/review/strict/legacy 策略档位
 ```
 
-实际推进 v31 时，再把 `待定主题` 替换为本版真实主题，并补齐具体讲解。
+后续推进 v32 时，在这里继续追加 `47-v32-主题.md`。
 
 ## 一句话总览
 

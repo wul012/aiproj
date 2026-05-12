@@ -12,7 +12,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.release_gate import (
     build_release_gate,
     exit_code_for_gate,
+    release_gate_policy_profiles,
     render_release_gate_html,
+    resolve_release_gate_policy,
     write_release_gate_outputs,
 )
 
@@ -95,6 +97,20 @@ def make_bundle(
 
 
 class ReleaseGateTests(unittest.TestCase):
+    def test_release_gate_policy_profiles_are_available(self) -> None:
+        profiles = release_gate_policy_profiles()
+
+        self.assertEqual(set(profiles), {"legacy", "review", "standard", "strict"})
+        self.assertEqual(profiles["standard"]["minimum_audit_score"], 90.0)
+        self.assertEqual(profiles["legacy"]["require_generation_quality"], False)
+
+        profiles["standard"]["minimum_audit_score"] = 1.0
+        self.assertEqual(release_gate_policy_profiles()["standard"]["minimum_audit_score"], 90.0)
+
+    def test_resolve_release_gate_policy_rejects_unknown_profile(self) -> None:
+        with self.assertRaises(ValueError):
+            resolve_release_gate_policy("unknown")
+
     def test_build_release_gate_passes_ready_bundle(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             bundle_path = make_bundle(Path(tmp))
@@ -104,10 +120,36 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["summary"]["gate_status"], "pass")
             self.assertEqual(gate["summary"]["decision"], "approved")
             self.assertEqual(gate["summary"]["fail_count"], 0)
+            self.assertEqual(gate["policy"]["policy_profile"], "standard")
+            self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], True)
             self.assertIn("generation_quality_audit_checks", {check["id"] for check in gate["checks"]})
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertIn("Release gate passed", " ".join(gate["recommendations"]))
+
+    def test_strict_profile_raises_audit_score_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), audit_score=92.0)
+
+            gate = build_release_gate(bundle_path, policy_profile="strict")
+
+            self.assertEqual(gate["policy"]["policy_profile"], "strict")
+            self.assertEqual(gate["policy"]["minimum_audit_score"], 95.0)
+            self.assertEqual(gate["summary"]["gate_status"], "fail")
+            check = next(item for item in gate["checks"] if item["id"] == "audit_score")
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("minimum=95%", check["detail"])
+
+    def test_review_profile_lowers_audit_score_threshold_but_keeps_generation_quality(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), audit_score=85.0)
+
+            gate = build_release_gate(bundle_path, policy_profile="review")
+
+            self.assertEqual(gate["policy"]["policy_profile"], "review")
+            self.assertEqual(gate["policy"]["minimum_audit_score"], 80.0)
+            self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], True)
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
 
     def test_build_release_gate_warns_for_bundle_warnings(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -144,6 +186,41 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
             check = next(item for item in gate["checks"] if item["id"] == "generation_quality_audit_checks")
             self.assertEqual(check["status"], "pass")
+
+    def test_legacy_profile_allows_missing_generation_quality_checks(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_generation_checks=False, audit_score=84.0)
+
+            gate = build_release_gate(bundle_path, policy_profile="legacy")
+
+            self.assertEqual(gate["policy"]["policy_profile"], "legacy")
+            self.assertEqual(gate["policy"]["minimum_audit_score"], 80.0)
+            self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
+
+    def test_explicit_overrides_take_precedence_over_policy_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_generation_checks=False, audit_score=92.0)
+
+            gate = build_release_gate(
+                bundle_path,
+                policy_profile="strict",
+                minimum_audit_score=90.0,
+                require_generation_quality=False,
+            )
+
+            self.assertEqual(gate["policy"]["policy_profile"], "strict")
+            self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
+            self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
+            self.assertEqual(
+                gate["policy"]["overrides"],
+                {
+                    "minimum_audit_score": True,
+                    "minimum_ready_runs": False,
+                    "require_generation_quality": True,
+                },
+            )
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
 
     def test_build_release_gate_warns_for_generation_quality_audit_warnings(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

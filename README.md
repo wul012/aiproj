@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 30 is a MiniGPT learning project with release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 31 is a MiniGPT learning project with release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, and `a/<version>` archive directories
 - Character-level tokenizer for turning Chinese text into token ids
@@ -27,6 +27,7 @@ Version 30 is a MiniGPT learning project with release gate generation-quality po
 - Project audit exporter that checks registry/model-card readiness and writes `project_audit.json`, `project_audit.md`, and `project_audit.html` with pass/warn/fail checks, score, and recommendations
 - Release bundle exporter that combines registry, model card, and project audit evidence into `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`
 - Release gate checker that reads `release_bundle.json`, applies a strict pass/warn/fail policy, writes `gate_report.json`, `gate_report.md`, and `gate_report.html`, and exits non-zero when the release is blocked
+- Release gate policy profiles (`standard`, `review`, `strict`, and `legacy`) for choosing audit-score thresholds and generation-quality requirements without hand-tuning every CLI flag
 - Release gate generation-quality policy that requires project audit checks `generation_quality` and `non_pass_generation_quality` to be present and clean by default
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
@@ -51,8 +52,8 @@ Version 30 is a MiniGPT learning project with release gate generation-quality po
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, and release gate generation-quality policy
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, and release gate generation-quality policy
+- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, and release gate policy profiles
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, and release gate policy profiles
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -91,6 +92,7 @@ v27.0.0 MiniGPT v27 release gate
 v28.0.0 MiniGPT v28 generation quality
 v29.0.0 MiniGPT v29 generation quality evidence chain
 v30.0.0 MiniGPT v30 release gate generation quality policy
+v31.0.0 MiniGPT v31 release gate policy profiles
 ```
 
 ## Project structure
@@ -217,7 +219,11 @@ v30.0.0 MiniGPT v30 release gate generation quality policy
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 30/
+│   ├── 30/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 31/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -304,7 +310,8 @@ v30.0.0 MiniGPT v30 release gate generation quality policy
 │   ├── README.md
 │   └── 01-...45-*.md
 ├── 代码讲解记录_发布治理阶段/
-│   └── README.md
+│   ├── README.md
+│   └── 46-v31-release-gate-policy-profiles.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -504,10 +511,21 @@ The output directory contains `release_bundle.json`, `release_bundle.md`, and `r
 Check whether a release bundle passes the release gate:
 
 ```powershell
-python scripts/check_release_gate.py --bundle runs/release-bundle/release_bundle.json --out-dir runs/release-gate --min-audit-score 90 --min-ready-runs 1
+python scripts/check_release_gate.py --bundle runs/release-bundle/release_bundle.json --out-dir runs/release-gate --policy-profile standard
 ```
 
 The output directory contains `gate_report.json`, `gate_report.md`, and `gate_report.html`. The command exits with code `1` when the release is blocked, and `--fail-on-warn` can also make warning states fail CI.
+
+The release gate supports named policy profiles:
+
+```text
+standard -> audit score >= 90, at least 1 ready run, generation-quality audit checks required
+review   -> audit score >= 80, at least 1 ready run, generation-quality audit checks required
+strict   -> audit score >= 95, at least 1 ready run, generation-quality audit checks required
+legacy   -> audit score >= 80, at least 1 ready run, generation-quality audit checks not required
+```
+
+You can still override profile values with `--min-audit-score`, `--min-ready-runs`, or `--allow-missing-generation-quality` when checking a special bundle.
 
 By default the release gate also requires the project audit to include passing `generation_quality` and `non_pass_generation_quality` checks. Use `--allow-missing-generation-quality` only when checking legacy release bundles that predate v29/v30 generation-quality evidence.
 
@@ -626,6 +644,8 @@ a/29/图片
 a/29/解释/说明.md
 a/30/图片
 a/30/解释/说明.md
+a/31/图片
+a/31/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -868,6 +888,14 @@ Version 30 screenshots:
 - `04-playwright-release-gate-generation-quality.png`: release gate HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v30 docs and archive check
 
+Version 31 screenshots:
+
+- `01-unit-tests.png`: release gate policy profile tests plus existing regression tests
+- `02-release-gate-policy-profiles-smoke.png`: standard/review/strict/legacy profiles checked against release bundle fixtures
+- `03-release-gate-policy-profiles-structure-check.png`: gate report policy profile fields, thresholds, overrides, and CLI output checked
+- `04-playwright-release-gate-policy-profiles.png`: release gate HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v31 docs, new code explanation phase directory, and archive check
+
 ## Code explanation records
 
 Start here:
@@ -933,7 +961,7 @@ Future release-governance records continue with the same global numbering:
 
 ```text
 代码讲解记录_发布治理阶段/
-46-v31-待定主题.md
+46-v31-release-gate-policy-profiles.md
 47-v32-待定主题.md
 ```
 
@@ -988,9 +1016,11 @@ The release gate layer reads that bundle and turns release readiness into an aut
 
 The release gate generation-quality policy layer explicitly requires clean generation-quality audit checks before a release bundle can be approved.
 
+The release gate policy profile layer gives the same gate named operating modes: `standard`, `review`, `strict`, and `legacy`.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add release-gate policy profiles for strict portfolio release versus relaxed local exploration.
+- Add policy-profile comparison reports for multiple release bundles.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
