@@ -18,6 +18,7 @@ def build_release_gate_profile_comparison(
     minimum_audit_score: float | None = None,
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
+    baseline_profile: str | None = None,
     title: str = "MiniGPT release gate profile comparison",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -27,6 +28,7 @@ def build_release_gate_profile_comparison(
 
     profiles = policy_profiles or list(DEFAULT_COMPARISON_PROFILES)
     _validate_profiles(profiles)
+    baseline = _resolve_baseline_profile(profiles, baseline_profile)
     timestamp = generated_at or utc_now()
 
     rows: list[dict[str, Any]] = []
@@ -43,14 +45,15 @@ def build_release_gate_profile_comparison(
             )
             rows.append(_row_from_gate(gate))
 
-    deltas = _build_profile_deltas(rows, profiles)
-    summary = _build_comparison_summary(rows, deltas, bundles, profiles)
+    deltas = _build_profile_deltas(rows, profiles, baseline)
+    summary = _build_comparison_summary(rows, deltas, bundles, profiles, baseline)
     return {
         "schema_version": 1,
         "title": title,
         "generated_at": timestamp,
         "bundle_paths": [str(path) for path in bundles],
         "policy_profiles": list(profiles),
+        "baseline_profile": baseline,
         "summary": summary,
         "rows": rows,
         "deltas": deltas,
@@ -130,6 +133,7 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
         f"- Generated: `{report.get('generated_at')}`",
         f"- Bundles: `{summary.get('bundle_count', 0)}`",
         f"- Profiles: `{', '.join(_string_list(report.get('policy_profiles')))}`",
+        f"- Baseline profile: `{report.get('baseline_profile')}`",
         "",
         "## Summary",
         "",
@@ -139,6 +143,7 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
         f"| Approved | {_md(summary.get('approved_count'))} |",
         f"| Needs review | {_md(summary.get('needs_review_count'))} |",
         f"| Blocked | {_md(summary.get('blocked_count'))} |",
+        f"| Baseline profile | {_md(summary.get('baseline_profile'))} |",
         f"| Profile deltas | {_md(summary.get('delta_count'))} |",
         f"| Decision deltas | {_md(summary.get('decision_delta_count'))} |",
         f"| Check deltas | {_md(summary.get('check_delta_count'))} |",
@@ -210,6 +215,7 @@ def render_release_gate_profile_comparison_html(report: dict[str, Any]) -> str:
         ("Approved", summary.get("approved_count")),
         ("Review", summary.get("needs_review_count")),
         ("Blocked", summary.get("blocked_count")),
+        ("Baseline", summary.get("baseline_profile")),
         ("Decision deltas", summary.get("decision_delta_count")),
         ("Generated", report.get("generated_at")),
     ]
@@ -227,7 +233,7 @@ def render_release_gate_profile_comparison_html(report: dict[str, Any]) -> str:
             _style(),
             "</head>",
             "<body>",
-            f"<header><h1>{_e(report.get('title', 'MiniGPT release gate profile comparison'))}</h1><p>{_e(', '.join(_string_list(report.get('policy_profiles'))))}</p></header>",
+            f"<header><h1>{_e(report.get('title', 'MiniGPT release gate profile comparison'))}</h1><p>profiles: {_e(', '.join(_string_list(report.get('policy_profiles'))))}; baseline: {_e(report.get('baseline_profile'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
             '<section class="panel"><h2>Profile Matrix</h2><table><thead><tr>'
             "<th>Bundle</th><th>Profile</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Min</th><th>Generation</th><th>Failed</th><th>Warned</th>"
@@ -279,6 +285,19 @@ def _validate_profiles(profiles: list[str]) -> None:
         raise ValueError(f"unknown release gate policy profile(s): {', '.join(unknown)}; choices: {choices}")
 
 
+def _resolve_baseline_profile(profiles: list[str], baseline_profile: str | None) -> str:
+    if not profiles:
+        raise ValueError("at least one policy profile is required")
+    baseline = baseline_profile or profiles[0]
+    available = release_gate_policy_profiles()
+    if baseline not in available:
+        choices = ", ".join(sorted(available))
+        raise ValueError(f"unknown baseline policy profile: {baseline!r}; choices: {choices}")
+    if baseline not in profiles:
+        raise ValueError("baseline policy profile must be included in policy_profiles")
+    return baseline
+
+
 def _row_from_gate(gate: dict[str, Any]) -> dict[str, Any]:
     policy = _dict(gate.get("policy"))
     summary = _dict(gate.get("summary"))
@@ -303,7 +322,13 @@ def _row_from_gate(gate: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _build_comparison_summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], bundles: list[Path], profiles: list[str]) -> dict[str, Any]:
+def _build_comparison_summary(
+    rows: list[dict[str, Any]],
+    deltas: list[dict[str, Any]],
+    bundles: list[Path],
+    profiles: list[str],
+    baseline_profile: str,
+) -> dict[str, Any]:
     approved = sum(1 for row in rows if row.get("decision") == "approved")
     needs_review = sum(1 for row in rows if row.get("decision") == "needs-review")
     blocked = sum(1 for row in rows if row.get("decision") == "blocked")
@@ -313,6 +338,7 @@ def _build_comparison_summary(rows: list[dict[str, Any]], deltas: list[dict[str,
     return {
         "bundle_count": len(bundles),
         "profile_count": len(profiles),
+        "baseline_profile": baseline_profile,
         "row_count": len(rows),
         "approved_count": approved,
         "needs_review_count": needs_review,
@@ -344,10 +370,9 @@ def _comparison_recommendations(summary: dict[str, Any], rows: list[dict[str, An
     return ["All compared policy profiles approved the release bundle(s)."]
 
 
-def _build_profile_deltas(rows: list[dict[str, Any]], profiles: list[str]) -> list[dict[str, Any]]:
+def _build_profile_deltas(rows: list[dict[str, Any]], profiles: list[str], baseline_profile: str) -> list[dict[str, Any]]:
     if len(profiles) < 2:
         return []
-    baseline_profile = profiles[0]
     grouped: dict[str, dict[str, dict[str, Any]]] = {}
     for row in rows:
         key = str(row.get("bundle_path") or row.get("release_name") or "")
@@ -359,7 +384,7 @@ def _build_profile_deltas(rows: list[dict[str, Any]], profiles: list[str]) -> li
         baseline = profile_rows.get(baseline_profile)
         if not baseline:
             continue
-        for compared_profile in profiles[1:]:
+        for compared_profile in [profile for profile in profiles if profile != baseline_profile]:
             compared = profile_rows.get(compared_profile)
             if not compared:
                 continue

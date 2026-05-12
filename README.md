@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 33 is a MiniGPT learning project with release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 34 is a MiniGPT learning project with configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -30,6 +30,7 @@ Version 33 is a MiniGPT learning project with release gate profile delta explana
 - Release gate policy profiles (`standard`, `review`, `strict`, and `legacy`) for choosing audit-score thresholds and generation-quality requirements without hand-tuning every CLI flag
 - Release gate profile comparison exporter that checks one or more release bundles across selected policy profiles and writes JSON/CSV/Markdown/HTML matrix reports
 - Release gate profile delta explanations that compare each profile against the baseline profile and name added/removed failed or warned checks
+- Configurable release gate delta baseline profile via `--baseline-profile`, so profile differences can be explained from `standard`, `review`, `strict`, or `legacy` as the reference point
 - Release gate generation-quality policy that requires project audit checks `generation_quality` and `non_pass_generation_quality` to be present and clean by default
 - Dataset helpers for train/validation split and next-token batch sampling
 - Transformer decoder with causal self-attention, multi-head attention, MLP blocks, residual connections, LayerNorm, and tied token embedding/output weights
@@ -54,8 +55,8 @@ Version 33 is a MiniGPT learning project with release gate profile delta explana
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, and release gate profile delta explanations
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, and release gate profile delta explanations
+- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -97,6 +98,7 @@ v30.0.0 MiniGPT v30 release gate generation quality policy
 v31.0.0 MiniGPT v31 release gate policy profiles
 v32.0.0 MiniGPT v32 release gate profile comparison
 v33.0.0 MiniGPT v33 release gate profile delta explanations
+v34.0.0 MiniGPT v34 configurable release gate delta baseline
 ```
 
 ## Project structure
@@ -237,7 +239,11 @@ v33.0.0 MiniGPT v33 release gate profile delta explanations
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 33/
+│   ├── 33/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 34/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -330,7 +336,8 @@ v33.0.0 MiniGPT v33 release gate profile delta explanations
 │   ├── README.md
 │   ├── 46-v31-release-gate-policy-profiles.md
 │   ├── 47-v32-release-gate-profile-comparison.md
-│   └── 48-v33-release-gate-profile-deltas.md
+│   ├── 48-v33-release-gate-profile-deltas.md
+│   └── 49-v34-configurable-release-gate-baseline.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -554,7 +561,13 @@ Compare release gate policy profiles for one or more release bundles:
 python scripts/compare_release_gate_profiles.py --bundle runs/release-bundle/release_bundle.json --profiles standard review strict legacy --out-dir runs/release-gate-profiles
 ```
 
-The output directory contains `release_gate_profile_comparison.json`, `release_gate_profile_comparison.csv`, `release_gate_profile_deltas.csv`, `release_gate_profile_comparison.md`, and `release_gate_profile_comparison.html`. Use repeated `--bundle` arguments to compare several release bundles under the same profile set. The delta CSV and the Markdown/HTML Profile Deltas section explain how each compared profile differs from the baseline profile.
+Use `--baseline-profile review` when the delta explanations should compare every selected profile against `review` instead of the first selected profile:
+
+```powershell
+python scripts/compare_release_gate_profiles.py --bundle runs/release-bundle/release_bundle.json --profiles standard review strict legacy --baseline-profile review --out-dir runs/release-gate-profiles
+```
+
+The output directory contains `release_gate_profile_comparison.json`, `release_gate_profile_comparison.csv`, `release_gate_profile_deltas.csv`, `release_gate_profile_comparison.md`, and `release_gate_profile_comparison.html`. Use repeated `--bundle` arguments to compare several release bundles under the same profile set. The reports record `baseline_profile`; the delta CSV and the Markdown/HTML Profile Deltas section explain how each compared profile differs from that baseline profile.
 
 Discover run directories under a parent:
 
@@ -684,6 +697,8 @@ b/32/图片
 b/32/解释/说明.md
 b/33/图片
 b/33/解释/说明.md
+b/34/图片
+b/34/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -950,6 +965,14 @@ Version 33 screenshots:
 - `04-playwright-release-gate-profile-deltas.png`: comparison HTML Profile Deltas section opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v33 docs, b/33 archive, and release-governance explanation check
 
+Version 34 screenshots:
+
+- `01-unit-tests.png`: release gate configurable baseline tests plus existing regression tests
+- `02-release-gate-baseline-profile-smoke.png`: comparison CLI output with `baseline_profile=review`
+- `03-release-gate-baseline-profile-structure-check.png`: JSON/CSV/Markdown/HTML baseline fields and review-based deltas verified
+- `04-playwright-release-gate-baseline-profile.png`: comparison HTML with baseline `review` opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v34 docs, b/34 archive, and release-governance explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1018,7 +1041,7 @@ Future release-governance records continue with the same global numbering:
 46-v31-release-gate-policy-profiles.md
 47-v32-release-gate-profile-comparison.md
 48-v33-release-gate-profile-deltas.md
-49-v34-待定主题.md
+49-v34-configurable-release-gate-baseline.md
 ```
 
 ## Learning map
@@ -1078,9 +1101,11 @@ The release gate profile comparison layer turns those modes into a matrix report
 
 The release gate profile delta layer explains why compared profiles disagree with the baseline by naming added/removed failed and warned checks.
 
+The configurable release gate baseline layer lets profile delta explanations use an explicit baseline profile instead of always using the first selected profile.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
 - Add streaming token output for the playground server.
-- Add configurable baseline profile selection for profile-delta reports.
+- Add profile-delta severity grouping and filtering.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

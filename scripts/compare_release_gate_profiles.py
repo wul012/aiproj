@@ -36,6 +36,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-audit-score", type=float, default=None, help="Override every selected policy profile")
     parser.add_argument("--min-ready-runs", type=int, default=None, help="Override every selected policy profile")
     parser.add_argument(
+        "--baseline-profile",
+        choices=sorted(release_gate_policy_profiles()),
+        default=None,
+        help="Profile used as the baseline for delta explanations. Defaults to the first selected profile.",
+    )
+    parser.add_argument(
         "--allow-missing-generation-quality",
         action="store_true",
         help="Override every selected policy profile and do not require generation quality audit checks",
@@ -57,6 +63,7 @@ def main() -> None:
         minimum_audit_score=args.min_audit_score,
         minimum_ready_runs=args.min_ready_runs,
         require_generation_quality=require_generation_quality,
+        baseline_profile=args.baseline_profile,
         title=args.title,
     )
     outputs = write_release_gate_profile_comparison_outputs(report, out_dir)
@@ -64,6 +71,7 @@ def main() -> None:
 
     print("bundles=" + str(summary["bundle_count"]))
     print("profiles=" + ",".join(report["policy_profiles"]))
+    print(f"baseline_profile={report['baseline_profile']}")
     print(f"rows={summary['row_count']}")
     print(f"approved={summary['approved_count']}")
     print(f"needs_review={summary['needs_review_count']}")

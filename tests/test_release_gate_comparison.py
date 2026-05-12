@@ -98,6 +98,8 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["bundle_count"], 1)
             self.assertEqual(report["summary"]["profile_count"], 4)
+            self.assertEqual(report["baseline_profile"], "standard")
+            self.assertEqual(report["summary"]["baseline_profile"], "standard")
             self.assertEqual(report["summary"]["row_count"], 4)
             self.assertEqual(report["summary"]["approved_count"], 3)
             self.assertEqual(report["summary"]["blocked_count"], 1)
@@ -114,6 +116,26 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             self.assertEqual(strict_delta["delta_status"], "decision-delta")
             self.assertEqual(strict_delta["added_failed_checks"], ["audit_score"])
             self.assertIn("adds failed check(s): audit_score", strict_delta["explanation"])
+
+    def test_profile_comparison_accepts_explicit_baseline_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), audit_score=92.0)
+
+            report = build_release_gate_profile_comparison(
+                [bundle_path],
+                policy_profiles=["standard", "review", "strict", "legacy"],
+                baseline_profile="review",
+            )
+
+            self.assertEqual(report["baseline_profile"], "review")
+            self.assertEqual(report["summary"]["baseline_profile"], "review")
+            self.assertEqual(report["summary"]["delta_count"], 3)
+            self.assertEqual({delta["baseline_profile"] for delta in report["deltas"]}, {"review"})
+            self.assertEqual({delta["compared_profile"] for delta in report["deltas"]}, {"standard", "strict", "legacy"})
+            strict_delta = next(delta for delta in report["deltas"] if delta["compared_profile"] == "strict")
+            self.assertEqual(strict_delta["baseline_decision"], "approved")
+            self.assertEqual(strict_delta["compared_decision"], "blocked")
+            self.assertIn("Audit-score threshold changes from 80.0 to 95.0", strict_delta["explanation"])
 
     def test_legacy_profile_can_be_compared_against_missing_generation_quality_bundle(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -156,6 +178,8 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             bundle_path = make_bundle(Path(tmp))
             with self.assertRaises(ValueError):
                 build_release_gate_profile_comparison([bundle_path], policy_profiles=["unknown"])
+            with self.assertRaises(ValueError):
+                build_release_gate_profile_comparison([bundle_path], policy_profiles=["standard", "strict"], baseline_profile="review")
 
     def test_write_profile_comparison_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -171,13 +195,16 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             md_text = Path(outputs["markdown"]).read_text(encoding="utf-8")
             html_text = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertEqual(json_payload["summary"]["row_count"], 4)
+            self.assertEqual(json_payload["baseline_profile"], "standard")
             self.assertEqual(json_payload["summary"]["delta_count"], 3)
             self.assertIn("policy_profile,gate_status", csv_text)
             self.assertIn("baseline_profile,compared_profile", delta_csv_text)
             self.assertIn("audit_score", delta_csv_text)
             self.assertIn("## Profile Matrix", md_text)
+            self.assertIn("Baseline profile", md_text)
             self.assertIn("## Profile Deltas", md_text)
             self.assertIn("Profile Matrix", html_text)
+            self.assertIn("baseline: standard", html_text)
             self.assertIn("Profile Deltas", html_text)
 
     def test_profile_comparison_renderers_escape_release_text(self) -> None:
