@@ -94,6 +94,8 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("dataset_svg", "Dataset chart", "dataset_report.svg", "SVG", "dataset source size chart"),
         ("dataset_quality", "Dataset quality", "dataset_quality.json", "JSON", "fingerprint and lightweight corpus quality checks"),
         ("dataset_quality_svg", "Dataset quality chart", "dataset_quality.svg", "SVG", "dataset quality summary chart"),
+        ("dataset_version", "Dataset version", "dataset_version.json", "JSON", "dataset name/version/fingerprint manifest"),
+        ("dataset_version_html", "Dataset version report", "dataset_version.html", "HTML", "browser dataset version report"),
         ("sample", "Sample text", "sample.txt", "TXT", "generated sample saved after training"),
         ("eval_report", "Evaluation report", "eval_report.json", "JSON", "loss and perplexity report"),
         ("eval_suite", "Eval suite", "eval_suite/eval_suite.json", "JSON", "fixed prompt generation evaluation report"),
@@ -135,6 +137,7 @@ def build_dashboard_payload(
     run_manifest = _read_json(root / "run_manifest.json", warnings)
     dataset_report = _read_json(root / "dataset_report.json", warnings)
     dataset_quality = _read_json(root / "dataset_quality.json", warnings)
+    dataset_version = _read_json(root / "dataset_version.json", warnings)
     model_report = _read_json(root / "model_report" / "model_report.json", warnings)
     predictions = _read_json(root / "predictions" / "predictions.json", warnings)
     attention = _read_json(root / "attention" / "attention.json", warnings)
@@ -171,6 +174,7 @@ def build_dashboard_payload(
         "dataset_chars": _pick(dataset_report, "char_count"),
         "dataset_quality": _pick(dataset_quality, "status"),
         "dataset_fingerprint": _pick(dataset_quality, "short_fingerprint"),
+        "dataset_version": _nested_pick(dataset_version, "dataset", "id"),
         "git_commit": _nested_pick(run_manifest, "git", "short_commit"),
         "manifest_created_at": _pick(run_manifest, "created_at"),
         "total_parameters": _pick(model_report, "total_parameters") or _nested_pick(run_manifest, "model", "parameter_count"),
@@ -191,6 +195,7 @@ def build_dashboard_payload(
         "run_manifest": run_manifest if isinstance(run_manifest, dict) else None,
         "dataset_report": dataset_report if isinstance(dataset_report, dict) else None,
         "dataset_quality": dataset_quality if isinstance(dataset_quality, dict) else None,
+        "dataset_version": dataset_version if isinstance(dataset_version, dict) else None,
         "model_report": model_report if isinstance(model_report, dict) else None,
         "model_config": model_config if isinstance(model_config, dict) else None,
         "predictions": predictions if isinstance(predictions, dict) else None,
@@ -456,8 +461,11 @@ def _manifest_section(payload: dict[str, Any]) -> str:
 def _dataset_section(payload: dict[str, Any]) -> str:
     report = payload.get("dataset_report")
     quality = payload.get("dataset_quality")
-    if not isinstance(report, dict) and not isinstance(quality, dict):
+    version = payload.get("dataset_version")
+    if not isinstance(report, dict) and not isinstance(quality, dict) and not isinstance(version, dict):
         return ""
+    dataset_id = _nested_pick(version, "dataset", "id")
+    version_stats = _pick(version, "stats")
     rows = []
     if isinstance(report, dict):
         for source in report.get("sources", [])[:8]:
@@ -474,11 +482,17 @@ def _dataset_section(payload: dict[str, Any]) -> str:
             f"<p>Quality: {_e(quality.get('status'))} | Fingerprint: {_e(quality.get('short_fingerprint'))} | "
             f"Warnings: {_e(quality.get('warning_count'))} | Issues: {_e(quality.get('issue_count'))}</p>"
         )
+    version_rows = ""
+    if isinstance(version, dict):
+        version_rows = (
+            f"<p>Dataset version: {_e(dataset_id)} | Version fingerprint: {_e(_pick(version_stats, 'short_fingerprint'))}</p>"
+        )
     figure = _image(payload, "dataset_svg", "Dataset chart")
     quality_figure = _image(payload, "dataset_quality_svg", "Dataset quality chart")
     return (
         "<h2>Dataset</h2><section class=\"panel\">"
         f"<p>Sources: {_e(_pick(report, 'source_count'))} | Characters: {_e(_pick(report, 'char_count'))} | Unique chars: {_e(_pick(report, 'unique_char_count'))}</p>"
+        f"{version_rows}"
         f"{quality_rows}"
         f"<table><tr><th>Source</th><th>Chars</th><th>Lines</th><th>Unique</th></tr>{''.join(rows)}</table>"
         f"{figure}{quality_figure}</section>"

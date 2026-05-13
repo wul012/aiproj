@@ -11,8 +11,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.data_prep import (
     build_dataset_report,
+    build_dataset_version_manifest,
     build_prepared_dataset,
     discover_text_files,
+    render_dataset_version_html,
     normalize_text,
     write_prepared_dataset,
 )
@@ -62,6 +64,33 @@ class DataPrepTests(unittest.TestCase):
             self.assertEqual(len(report["fingerprint"]), 64)
             self.assertEqual(report["most_common_chars"][0]["char"], "a")
 
+    def test_build_dataset_version_manifest_records_identity_and_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "one.txt").write_text("MiniGPT dataset version", encoding="utf-8")
+            dataset = build_prepared_dataset([root])
+            report = build_dataset_report(dataset, output_text="corpus.txt")
+            quality = {"status": "pass", "warning_count": 0, "issue_count": 0}
+
+            manifest = build_dataset_version_manifest(
+                dataset,
+                report,
+                quality,
+                dataset_name="demo-zh",
+                dataset_version="v1",
+                description="demo dataset",
+                source_roots=[root],
+                outputs={"text": "corpus.txt"},
+                created_at="2026-05-13T00:00:00Z",
+            )
+            html = render_dataset_version_html(manifest)
+
+            self.assertEqual(manifest["dataset"]["id"], "demo-zh@v1")
+            self.assertEqual(manifest["stats"]["short_fingerprint"], dataset.fingerprint[:12])
+            self.assertEqual(manifest["quality"]["status"], "pass")
+            self.assertEqual(manifest["outputs"]["text"], "corpus.txt")
+            self.assertIn("demo-zh@v1", html)
+
     def test_write_prepared_dataset_outputs_text_json_svg(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -77,6 +106,9 @@ class DataPrepTests(unittest.TestCase):
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertTrue(Path(outputs["quality_json"]).exists())
             self.assertIn("<svg", Path(outputs["quality_svg"]).read_text(encoding="utf-8"))
+            version = json.loads(Path(outputs["version_json"]).read_text(encoding="utf-8"))
+            self.assertEqual(version["dataset"]["id"], "dataset@unversioned")
+            self.assertIn("dataset@unversioned", Path(outputs["version_html"]).read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

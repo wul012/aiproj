@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.registry import build_run_registry, discover_run_dirs, render_registry_html, summarize_registered_run, write_registry_outputs
+from minigpt.registry import REGISTRY_ARTIFACT_PATHS, build_run_registry, discover_run_dirs, render_registry_html, summarize_registered_run, write_registry_outputs
 
 
 def make_run(root: Path, name: str, loss: float, quality: str = "pass", note: str | None = None, tags: list[str] | None = None) -> Path:
@@ -100,6 +100,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.generation_quality_status, "pass")
             self.assertEqual(run.generation_quality_cases, 3)
             self.assertGreaterEqual(run.artifact_count, 6)
+            self.assertIn("dataset_version.json", REGISTRY_ARTIFACT_PATHS)
 
     def test_summarize_registered_run_reads_notes_and_tags(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

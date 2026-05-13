@@ -23,6 +23,8 @@ REGISTRY_ARTIFACT_PATHS = [
     "dataset_report.svg",
     "dataset_quality.json",
     "dataset_quality.svg",
+    "dataset_version.json",
+    "dataset_version.html",
     "eval_suite/eval_suite.json",
     "eval_suite/eval_suite.csv",
     "eval_suite/eval_suite.svg",

@@ -43,6 +43,10 @@ class DashboardTests(unittest.TestCase):
                 json.dumps({"status": "pass", "short_fingerprint": "abc123def456", "warning_count": 0, "issue_count": 0}),
                 encoding="utf-8",
             )
+            (run_dir / "dataset_version.json").write_text(
+                json.dumps({"dataset": {"id": "demo-zh@v1"}, "stats": {"short_fingerprint": "abc123def456"}}),
+                encoding="utf-8",
+            )
             (run_dir / "run_manifest.json").write_text(
                 json.dumps(
                     {
@@ -61,6 +65,7 @@ class DashboardTests(unittest.TestCase):
             self.assertEqual(payload["summary"]["total_parameters"], 456)
             self.assertEqual(payload["summary"]["git_commit"], "abc1234")
             self.assertEqual(payload["summary"]["dataset_quality"], "pass")
+            self.assertEqual(payload["summary"]["dataset_version"], "demo-zh@v1")
             self.assertEqual(payload["summary"]["eval_suite_cases"], 3)
 
     def test_render_dashboard_escapes_text(self) -> None:

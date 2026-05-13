@@ -23,6 +23,8 @@ RUN_ARTIFACT_SPECS = [
     ("dataset_chart", "dataset_report.svg", "dataset source chart"),
     ("dataset_quality", "dataset_quality.json", "dataset quality report"),
     ("dataset_quality_chart", "dataset_quality.svg", "dataset quality chart"),
+    ("dataset_version", "dataset_version.json", "dataset version manifest"),
+    ("dataset_version_html", "dataset_version.html", "browser dataset version report"),
     ("sample", "sample.txt", "post-training sample"),
     ("eval_report", "eval_report.json", "checkpoint evaluation report"),
     ("eval_suite", "eval_suite/eval_suite.json", "fixed prompt evaluation suite"),
@@ -74,6 +76,7 @@ def build_run_manifest(
     root = Path(run_dir)
     dataset_report = _read_json(root / "dataset_report.json")
     dataset_quality = _read_json(root / "dataset_quality.json")
+    dataset_version = _read_json(root / "dataset_version.json")
     return {
         "schema_version": 1,
         "run_dir": str(root),
@@ -91,6 +94,7 @@ def build_run_manifest(
             "val_token_count": val_token_count,
             "dataset_report": _dataset_report_summary(dataset_report),
             "dataset_quality": _dataset_quality_summary(dataset_quality),
+            "dataset_version": _dataset_version_summary(dataset_version),
         },
         "model": {
             "config": _jsonable(model_config),
@@ -273,6 +277,23 @@ def _dataset_quality_summary(report: dict[str, Any] | None) -> dict[str, Any] | 
         "issue_count": report.get("issue_count"),
         "warning_count": report.get("warning_count"),
         "duplicate_line_count": report.get("duplicate_line_count"),
+    }
+
+
+def _dataset_version_summary(report: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(report, dict):
+        return None
+    dataset = _pick(report, "dataset")
+    stats = _pick(report, "stats")
+    quality = _pick(report, "quality")
+    return {
+        "id": _pick(dataset, "id"),
+        "name": _pick(dataset, "name"),
+        "version": _pick(dataset, "version"),
+        "short_fingerprint": _pick(stats, "short_fingerprint"),
+        "source_count": _pick(stats, "source_count"),
+        "char_count": _pick(stats, "char_count"),
+        "quality_status": _pick(quality, "status"),
     }
 
 

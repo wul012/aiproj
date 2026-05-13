@@ -20,6 +20,7 @@ class PlaygroundTests(unittest.TestCase):
             (run_dir / "train_config.json").write_text(json.dumps({"tokenizer": "char"}), encoding="utf-8")
             (run_dir / "run_manifest.json").write_text(json.dumps({"git": {"short_commit": "abc1234"}}), encoding="utf-8")
             (run_dir / "dataset_quality.json").write_text(json.dumps({"status": "pass"}), encoding="utf-8")
+            (run_dir / "dataset_version.html").write_text("<html></html>", encoding="utf-8")
             (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
             eval_suite_dir = run_dir / "eval_suite"
             eval_suite_dir.mkdir()
@@ -52,6 +53,7 @@ class PlaygroundTests(unittest.TestCase):
             self.assertTrue(any(link["key"] == "sample_lab_json" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "run_manifest" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "dataset_quality" and link["exists"] for link in payload["links"]))
+            self.assertTrue(any(link["key"] == "dataset_version_html" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "eval_suite" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "experiment_card_html" and link["exists"] for link in payload["links"]))
 

@@ -172,6 +172,8 @@ def _collect_links(root: Path, out_path: Path, base_dir: Path) -> list[Playgroun
         ("dataset_svg", "Dataset chart", root / "dataset_report.svg", "SVG"),
         ("dataset_quality", "Dataset quality", root / "dataset_quality.json", "JSON"),
         ("dataset_quality_svg", "Dataset quality chart", root / "dataset_quality.svg", "SVG"),
+        ("dataset_version", "Dataset version", root / "dataset_version.json", "JSON"),
+        ("dataset_version_html", "Dataset version report", root / "dataset_version.html", "HTML"),
         ("sample", "Sample text", root / "sample.txt", "TXT"),
         ("eval_suite", "Eval suite", root / "eval_suite" / "eval_suite.json", "JSON"),
         ("eval_suite_csv", "Eval suite CSV", root / "eval_suite" / "eval_suite.csv", "CSV"),

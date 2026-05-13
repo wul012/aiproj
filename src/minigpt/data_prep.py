@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 import hashlib
 import html
 import json
@@ -106,10 +107,73 @@ def build_dataset_report(dataset: PreparedDataset, output_text: str | Path | Non
     }
 
 
+def build_dataset_version_manifest(
+    dataset: PreparedDataset,
+    report: dict[str, Any] | None = None,
+    quality: dict[str, Any] | None = None,
+    *,
+    dataset_name: str = "dataset",
+    dataset_version: str = "unversioned",
+    description: str = "",
+    source_roots: list[str | Path] | None = None,
+    recursive: bool = True,
+    output_name: str = "corpus.txt",
+    outputs: dict[str, str] | None = None,
+    created_at: str | None = None,
+) -> dict[str, Any]:
+    name = dataset_name.strip()
+    version = dataset_version.strip()
+    if not name:
+        raise ValueError("dataset_name cannot be empty")
+    if not version:
+        raise ValueError("dataset_version cannot be empty")
+    dataset_report = report or build_dataset_report(dataset)
+    dataset_quality = quality if quality is not None else build_dataset_quality_report(dataset)
+    fingerprint = str(dataset_report.get("fingerprint") or dataset.fingerprint)
+    return {
+        "schema_version": 1,
+        "dataset": {
+            "name": name,
+            "version": version,
+            "id": f"{name}@{version}",
+            "description": description,
+        },
+        "created_at": created_at or _utc_now(),
+        "preparation": {
+            "recursive": bool(recursive),
+            "output_name": output_name,
+            "source_roots": [str(path) for path in (source_roots or [])],
+        },
+        "stats": {
+            "source_count": len(dataset.sources),
+            "char_count": dataset.char_count,
+            "line_count": dataset.line_count,
+            "unique_char_count": dataset.unique_char_count,
+            "token_count_char_estimate": dataset.char_count,
+            "fingerprint": fingerprint,
+            "short_fingerprint": fingerprint[:12],
+        },
+        "quality": {
+            "status": dataset_quality.get("status"),
+            "warning_count": dataset_quality.get("warning_count"),
+            "issue_count": dataset_quality.get("issue_count"),
+            "duplicate_line_count": dataset_quality.get("duplicate_line_count"),
+        },
+        "outputs": dict(outputs or {}),
+        "sources": [source.to_dict() for source in dataset.sources],
+    }
+
+
 def write_prepared_dataset(
     dataset: PreparedDataset,
     out_dir: str | Path,
     output_name: str = "corpus.txt",
+    *,
+    dataset_name: str = "dataset",
+    dataset_version: str = "unversioned",
+    dataset_description: str = "",
+    source_roots: list[str | Path] | None = None,
+    recursive: bool = True,
 ) -> dict[str, str]:
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
@@ -118,6 +182,8 @@ def write_prepared_dataset(
     svg_path = root / "dataset_report.svg"
     quality_json_path = root / "dataset_quality.json"
     quality_svg_path = root / "dataset_quality.svg"
+    version_json_path = root / "dataset_version.json"
+    version_html_path = root / "dataset_version.html"
     text_path.write_text(dataset.text, encoding="utf-8")
     report = build_dataset_report(dataset, output_text=text_path)
     write_dataset_report_json(report, json_path)
@@ -127,13 +193,30 @@ def write_prepared_dataset(
     quality = build_dataset_quality_report(dataset)
     write_dataset_quality_json(quality, quality_json_path)
     write_dataset_quality_svg(quality, quality_svg_path)
-    return {
+    outputs = {
         "text": str(text_path),
         "json": str(json_path),
         "svg": str(svg_path),
         "quality_json": str(quality_json_path),
         "quality_svg": str(quality_svg_path),
+        "version_json": str(version_json_path),
+        "version_html": str(version_html_path),
     }
+    version_manifest = build_dataset_version_manifest(
+        dataset,
+        report,
+        quality,
+        dataset_name=dataset_name,
+        dataset_version=dataset_version,
+        description=dataset_description,
+        source_roots=source_roots,
+        recursive=recursive,
+        output_name=output_name,
+        outputs=outputs,
+    )
+    write_dataset_version_json(version_manifest, version_json_path)
+    write_dataset_version_html(version_manifest, version_html_path)
+    return outputs
 
 
 def write_dataset_report_json(report: dict[str, Any], path: str | Path) -> None:
@@ -174,6 +257,76 @@ def write_dataset_report_svg(report: dict[str, Any], path: str | Path) -> None:
     out_path.write_text(svg, encoding="utf-8")
 
 
+def write_dataset_version_json(manifest: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def render_dataset_version_html(manifest: dict[str, Any]) -> str:
+    dataset = _dict(manifest.get("dataset"))
+    stats = _dict(manifest.get("stats"))
+    quality = _dict(manifest.get("quality"))
+    preparation = _dict(manifest.get("preparation"))
+    outputs = _dict(manifest.get("outputs"))
+    cards = [
+        ("Dataset", dataset.get("id")),
+        ("Fingerprint", stats.get("short_fingerprint")),
+        ("Sources", stats.get("source_count")),
+        ("Characters", stats.get("char_count")),
+        ("Quality", quality.get("status")),
+        ("Warnings", quality.get("warning_count")),
+        ("Recursive", preparation.get("recursive")),
+        ("Created", manifest.get("created_at")),
+    ]
+    output_rows = "".join(
+        f"<tr><td>{_e(key)}</td><td>{_e(value)}</td></tr>"
+        for key, value in outputs.items()
+    )
+    source_rows = []
+    for source in manifest.get("sources", [])[:24]:
+        if isinstance(source, dict):
+            source_rows.append(
+                "<tr>"
+                f"<td>{_e(Path(str(source.get('path'))).name)}</td>"
+                f"<td>{_e(source.get('char_count'))}</td>"
+                f"<td>{_e(source.get('line_count'))}</td>"
+                f"<td>{_e(str(source.get('sha256', ''))[:12])}</td>"
+                "</tr>"
+            )
+    return "\n".join(
+        [
+            "<!doctype html>",
+            '<html lang="zh-CN">',
+            "<head>",
+            '<meta charset="utf-8">',
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
+            '<link rel="icon" href="data:,">',
+            f"<title>{_e(dataset.get('id') or 'MiniGPT dataset version')}</title>",
+            _html_style(),
+            "</head>",
+            "<body>",
+            f"<header><h1>{_e(dataset.get('id') or 'MiniGPT dataset version')}</h1><p>{_e(dataset.get('description'))}</p></header>",
+            '<section class="stats">' + "".join(_stat(label, value) for label, value in cards) + "</section>",
+            '<section class="panel"><h2>Outputs</h2><table><thead><tr><th>Key</th><th>Path</th></tr></thead><tbody>'
+            + output_rows
+            + "</tbody></table></section>",
+            '<section class="panel"><h2>Sources</h2><table><thead><tr><th>File</th><th>Chars</th><th>Lines</th><th>SHA-256</th></tr></thead><tbody>'
+            + "".join(source_rows)
+            + "</tbody></table></section>",
+            "<footer>Generated by MiniGPT dataset preparation.</footer>",
+            "</body>",
+            "</html>",
+        ]
+    )
+
+
+def write_dataset_version_html(manifest: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(render_dataset_version_html(manifest), encoding="utf-8")
+
+
 def _summarize_source(path: Path, text: str) -> SourceFileSummary:
     lines = text.splitlines()
     return SourceFileSummary(
@@ -194,3 +347,41 @@ def _clip(text: str, limit: int) -> str:
 
 def _sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _dict(value: Any) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
+
+
+def _e(value: Any) -> str:
+    return html.escape("" if value is None else str(value), quote=True)
+
+
+def _stat(label: str, value: Any) -> str:
+    return f'<div class="card"><div class="label">{_e(label)}</div><div class="value">{_e(value)}</div></div>'
+
+
+def _html_style() -> str:
+    return """<style>
+:root { --ink:#111827; --muted:#4b5563; --line:#d8dee8; --page:#f6f8fb; --panel:#ffffff; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:30px 36px 18px; background:#ffffff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 14px; font-size:20px; letter-spacing:0; }
+p { margin:0; color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; padding:18px 36px 0; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+.card { padding:14px 16px; min-height:74px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:16px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 36px; padding:18px; overflow:auto; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:#1f2937; background:#eef2f7; font-weight:700; }
+footer { padding:12px 36px 28px; color:var(--muted); font-size:12px; }
+</style>"""

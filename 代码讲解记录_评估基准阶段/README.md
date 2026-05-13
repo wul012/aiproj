@@ -1,6 +1,6 @@
 # MiniGPT 代码讲解记录_评估基准阶段
 
-本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集稳定比较”。
+本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v36 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集和稳定数据版本比较”。
 
 ## 写入规则
 
@@ -8,7 +8,7 @@
 
 ```text
 50-v35-benchmark-eval-suite.md
-51-v36-主题.md
+51-v36-dataset-versioning.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -28,10 +28,11 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v35，项目已经具备从训练、数据治理、实验记录、发布治理到 benchmark prompt suite 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
+截至 v36，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理到 benchmark prompt suite 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
 
 ```text
 同一个 checkpoint 在固定任务集上表现如何？
+同一个 checkpoint 到底用了哪个 dataset version？
 不同 checkpoint、tokenizer、模型大小和训练步数以后能否横向比较？
 ```
 
@@ -40,6 +41,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 ```text
 eval prompts
  -> benchmark prompt metadata
+ -> dataset version manifest
  -> eval suite JSON/CSV/SVG/HTML
  -> generation quality analysis
  -> registry / dashboard / playground artifact links
@@ -51,10 +53,12 @@ eval prompts
 ```text
 50-v35-benchmark-eval-suite.md
  -> 第三十五版代码讲解：把 fixed prompt eval suite 升级成带任务类型、难度、预期行为和 HTML 报告的 benchmark prompt suite
+51-v36-dataset-versioning.md
+ -> 第三十六版代码讲解：给 prepared corpus 增加 dataset id、version manifest、HTML 报告和下游 artifact 链路
 ```
 
-后续推进 v36 时，在这里继续追加 `51-v36-主题.md`。
+后续推进 v37 时，在这里继续追加 `52-v37-主题.md`。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集稳定比较”的过程。
+本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集和稳定数据版本比较”的过程。

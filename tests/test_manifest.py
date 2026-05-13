@@ -50,6 +50,16 @@ class ManifestTests(unittest.TestCase):
                 json.dumps({"status": "pass", "fingerprint": "a" * 64, "short_fingerprint": "a" * 12, "issue_count": 0, "warning_count": 0}),
                 encoding="utf-8",
             )
+            (run_dir / "dataset_version.json").write_text(
+                json.dumps(
+                    {
+                        "dataset": {"name": "demo-zh", "version": "v1", "id": "demo-zh@v1"},
+                        "stats": {"short_fingerprint": "a" * 12, "source_count": 2, "char_count": 120},
+                        "quality": {"status": "pass"},
+                    }
+                ),
+                encoding="utf-8",
+            )
 
             manifest = build_run_manifest(
                 run_dir,
@@ -76,6 +86,7 @@ class ManifestTests(unittest.TestCase):
             self.assertEqual(manifest["duration_seconds"], 3.0)
             self.assertEqual(manifest["data"]["dataset_report"]["source_count"], 2)
             self.assertEqual(manifest["data"]["dataset_quality"]["status"], "pass")
+            self.assertEqual(manifest["data"]["dataset_version"]["id"], "demo-zh@v1")
             self.assertEqual(manifest["training"]["args"]["data"], str(Path("data/sample.txt")))
             self.assertEqual(manifest["results"]["history_summary"]["best_val_loss"], 1.1)
 
