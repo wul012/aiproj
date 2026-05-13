@@ -355,6 +355,7 @@ pre {
   padding: 12px;
   background: #ffffff;
 }
+.artifact-link { color: var(--blue); font-weight: 700; text-decoration: none; }
 .output {
   margin-top: 12px;
   min-height: 92px;
@@ -576,10 +577,27 @@ async function generateLive() {{
     output.textContent = 'Start scripts/serve_playground.py to use live generation.';
   }}
 }}
-async function generatePairLive() {{
+function renderPairArtifact(artifact) {{
+  const status = document.getElementById('pairArtifactStatus');
+  if (!status) return;
+  status.textContent = '';
+  if (!artifact || !artifact.html_href) {{
+    return;
+  }}
+  const link = document.createElement('a');
+  link.href = artifact.html_href;
+  link.textContent = 'Open saved pair HTML';
+  link.className = 'artifact-link';
+  status.appendChild(link);
+  const detail = document.createElement('span');
+  detail.textContent = ' (' + (artifact.json_href || artifact.json_path || 'json saved') + ')';
+  status.appendChild(detail);
+}}
+async function generatePairLive(saveArtifact = false) {{
   const leftOutput = document.getElementById('pairLeftOutput');
   const rightOutput = document.getElementById('pairRightOutput');
   const status = document.getElementById('pairGenerateStatus');
+  const artifactStatus = document.getElementById('pairArtifactStatus');
   const left = selectedCheckpointOption('pairLeftCheckpointSelect');
   const right = selectedCheckpointOption('pairRightCheckpointSelect');
   const payload = {{
@@ -593,9 +611,11 @@ async function generatePairLive() {{
   }};
   leftOutput.textContent = 'Generating...';
   rightOutput.textContent = 'Generating...';
-  status.textContent = 'Generating pair...';
+  status.textContent = saveArtifact ? 'Generating and saving pair...' : 'Generating pair...';
+  if (artifactStatus) artifactStatus.textContent = '';
   try {{
-    const response = await fetch('/api/generate-pair', {{
+    const endpoint = saveArtifact ? '/api/generate-pair-artifact' : '/api/generate-pair';
+    const response = await fetch(endpoint, {{
       method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
       body: JSON.stringify(payload),
@@ -611,6 +631,7 @@ async function generatePairLive() {{
     rightOutput.textContent = data.right?.generated || data.right?.continuation || '';
     const comparison = data.comparison || {{}};
     status.textContent = `same output: ${{formatValue(comparison.generated_equal)}}; char delta: ${{formatDelta(comparison.generated_char_delta)}}`;
+    renderPairArtifact(data.artifact);
   }} catch (error) {{
     leftOutput.textContent = 'Start scripts/serve_playground.py to use pair generation.';
     rightOutput.textContent = 'Start scripts/serve_playground.py to use pair generation.';
@@ -629,7 +650,8 @@ window.addEventListener('DOMContentLoaded', () => {{
     renderCheckpointComparison();
   }});
   document.getElementById('liveGenerateButton').addEventListener('click', generateLive);
-  document.getElementById('pairGenerateButton').addEventListener('click', generatePairLive);
+  document.getElementById('pairGenerateButton').addEventListener('click', () => generatePairLive(false));
+  document.getElementById('pairSaveButton').addEventListener('click', () => generatePairLive(true));
   document.getElementById('pairLeftCheckpointSelect').addEventListener('change', renderCheckpointComparison);
   document.getElementById('pairRightCheckpointSelect').addEventListener('change', renderCheckpointComparison);
   document.getElementById('refreshCheckpointCompareButton').addEventListener('click', loadCheckpointComparison);
@@ -706,7 +728,9 @@ def _pair_generation_section() -> str:
     <label><span class="label">Left checkpoint</span><select id="pairLeftCheckpointSelect"><option value="">default</option></select></label>
     <label><span class="label">Right checkpoint</span><select id="pairRightCheckpointSelect"><option value="">default</option></select></label>
     <button id="pairGenerateButton" type="button">Generate Pair</button>
+    <button id="pairSaveButton" type="button">Generate & Save Pair</button>
     <output id="pairGenerateStatus">Pair generation uses /api/generate-pair.</output>
+    <output id="pairArtifactStatus"></output>
   </div>
   <div class="pair-grid">
     <article class="pair-card">

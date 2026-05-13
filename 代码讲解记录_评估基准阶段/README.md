@@ -1,6 +1,6 @@
 # MiniGPT 代码讲解记录_评估基准阶段
 
-本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v41 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界、checkpoint 选择、checkpoint 快速比较入口和 side-by-side 生成表达出来”。
+本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v42 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界、checkpoint 选择、checkpoint 快速比较入口、side-by-side 生成和可留档 pair artifacts 表达出来”。
 
 ## 写入规则
 
@@ -14,6 +14,7 @@
 54-v39-checkpoint-selector.md
 55-v40-checkpoint-comparison-shortcuts.md
 56-v41-side-by-side-generation.md
+57-v42-pair-generation-artifacts.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -33,7 +34,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v41，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像、playground checkpoint selector、checkpoint comparison shortcuts 到 side-by-side checkpoint generation 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
+截至 v42，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像、playground checkpoint selector、checkpoint comparison shortcuts、side-by-side checkpoint generation 到 persisted pair generation artifacts 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
 
 ```text
 同一个 checkpoint 在固定任务集上表现如何？
@@ -42,6 +43,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 本地 playground 当前选择的是哪个 checkpoint？
 多个候选 checkpoint 的文件、tokenizer、参数量和数据版本差异是什么？
 同一个 prompt 用两个 checkpoint 生成时，输出是否相同、长度差异是多少？
+这次左右 checkpoint 生成对比是否能保存成可复查的本地 JSON/HTML 证据？
 ```
 
 当前评估主线：
@@ -58,6 +60,7 @@ eval prompts
  -> checkpoint selector
  -> checkpoint comparison shortcuts
  -> side-by-side generation
+ -> pair generation artifacts
 ```
 
 ## 后续讲解索引
@@ -77,10 +80,12 @@ eval prompts
  -> 第四十版代码讲解：给 playground server 和页面增加 checkpoint compare endpoint、差异字段、model-info 快捷入口和选择动作
 56-v41-side-by-side-generation.md
  -> 第四十一版代码讲解：给 playground server 和页面增加 generate-pair endpoint、左右 checkpoint 路由、输出对比摘要和 pair request 日志
+57-v42-pair-generation-artifacts.md
+ -> 第四十二版代码讲解：给 side-by-side generation 增加 `/api/generate-pair-artifact`、本地 JSON/HTML 留档、playground 保存入口和日志 artifact 路径
 ```
 
-后续推进 v42 时，在这里继续追加 `57-v42-主题.md`，或在新阶段目录开始新的能力线。
+后续推进 v43 时，在这里继续追加 `58-v43-主题.md`，或在新阶段目录开始新的能力线。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline、可选择 checkpoint、checkpoint 快速对比入口和同 prompt 双 checkpoint 生成结果比较”的过程。
+本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline、可选择 checkpoint、checkpoint 快速对比入口、同 prompt 双 checkpoint 生成结果比较以及本地 pair artifact 留档”的过程。

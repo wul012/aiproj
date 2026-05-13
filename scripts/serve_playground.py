@@ -61,6 +61,7 @@ def main() -> None:
     print(f"run_dir={args.run_dir}", flush=True)
     print(f"model_info={url}api/model-info", flush=True)
     print(f"generate_pair={url}api/generate-pair", flush=True)
+    print(f"generate_pair_artifact={url}api/generate-pair-artifact", flush=True)
     print(f"checkpoints={url}api/checkpoints", flush=True)
     print(f"checkpoint_compare={url}api/checkpoint-compare", flush=True)
     print(f"checkpoint_count={len(checkpoint_options)}", flush=True)

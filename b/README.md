@@ -51,6 +51,9 @@ b/40/解释/说明.md
 b/41/图片
 b/41/解释/说明.md
  -> v41 side-by-side checkpoint generation 的运行截图和解释
+b/42/图片
+b/42/解释/说明.md
+ -> v42 persisted pair generation artifacts 的运行截图和解释
 ```
 
 写入规则：

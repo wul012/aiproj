@@ -117,6 +117,7 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(health["safety"]["max_prompt_chars"], 123)
             self.assertEqual(health["model_info_endpoint"], "/api/model-info")
             self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
+            self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
             self.assertEqual(Path(health["request_log"]).name, "requests.jsonl")
             self.assertEqual(health["checkpoints_endpoint"], "/api/checkpoints")
             self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
@@ -249,6 +250,7 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(health["safety"]["max_new_tokens"], 512)
                 self.assertEqual(health["default_checkpoint_id"], "default")
                 self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
+                self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
                 self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
 
                 info = _get_json(base + "/api/model-info")
@@ -323,6 +325,32 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(log_record["left_checkpoint_id"], "default")
                 self.assertEqual(log_record["right_checkpoint_id"], "candidate")
                 self.assertEqual(log_record["requested_right_checkpoint"], "candidate")
+
+                saved = _post_json(
+                    base + "/api/generate-pair-artifact",
+                    {
+                        "prompt": "abc",
+                        "max_new_tokens": 5,
+                        "temperature": 0.8,
+                        "top_k": 0,
+                        "seed": 8,
+                        "left_checkpoint": "default",
+                        "right_checkpoint": "candidate",
+                    },
+                )
+                artifact = saved["artifact"]
+                json_path = Path(artifact["json_path"])
+                html_path = Path(artifact["html_path"])
+                self.assertTrue(json_path.exists())
+                self.assertTrue(html_path.exists())
+                record = json.loads(json_path.read_text(encoding="utf-8"))
+                self.assertEqual(record["kind"], "minigpt_pair_generation")
+                self.assertEqual(record["right"]["checkpoint_id"], "candidate")
+                self.assertIn("abc::generated", html_path.read_text(encoding="utf-8"))
+                artifact_log = json.loads((run_dir / "inference_requests.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+                self.assertEqual(artifact_log["endpoint"], "/api/generate-pair-artifact")
+                self.assertEqual(artifact_log["artifact_json"], str(json_path))
+                self.assertEqual(artifact_log["artifact_html"], str(html_path))
             finally:
                 server.shutdown()
                 server.server_close()

@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from functools import partial
+import html as html_lib
 import json
 import mimetypes
 from pathlib import Path
@@ -237,6 +238,7 @@ def build_health_payload(
         "model_info_endpoint": "/api/model-info",
         "generate_endpoint": "/api/generate",
         "generate_pair_endpoint": "/api/generate-pair",
+        "generate_pair_artifact_endpoint": "/api/generate-pair-artifact",
         "checkpoints_endpoint": "/api/checkpoints",
         "checkpoint_compare_endpoint": "/api/checkpoint-compare",
         "checkpoint_count": len(checkpoints),
@@ -416,6 +418,97 @@ def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
+def write_pair_generation_artifacts(
+    run_dir: str | Path,
+    payload: dict[str, Any],
+    output_dir: str | Path | None = None,
+    created_at: str | None = None,
+) -> dict[str, Any]:
+    root = Path(run_dir)
+    out_dir = Path(output_dir) if output_dir is not None else root / "pair_generations"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = created_at or _utc_now()
+    left_id = _pick_dict(payload, "left").get("checkpoint_id") or "left"
+    right_id = _pick_dict(payload, "right").get("checkpoint_id") or "right"
+    stem = _unique_artifact_stem(out_dir, f"{_timestamp_slug(timestamp)}-{_slug(left_id)}-vs-{_slug(right_id)}")
+    json_path = out_dir / f"{stem}.json"
+    html_path = out_dir / f"{stem}.html"
+    record = {
+        "schema_version": 1,
+        "kind": "minigpt_pair_generation",
+        "created_at": timestamp,
+        "run_dir": str(root),
+        "request": {
+            "prompt": payload.get("prompt"),
+            "max_new_tokens": payload.get("max_new_tokens"),
+            "temperature": payload.get("temperature"),
+            "top_k": payload.get("top_k"),
+            "seed": payload.get("seed"),
+        },
+        "left": payload.get("left"),
+        "right": payload.get("right"),
+        "comparison": payload.get("comparison"),
+        "artifact": {
+            "json_path": str(json_path),
+            "html_path": str(html_path),
+            "json_href": _artifact_href(root, json_path),
+            "html_href": _artifact_href(root, html_path),
+        },
+    }
+    json_path.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
+    html_path.write_text(render_pair_generation_html(record), encoding="utf-8")
+    return record["artifact"]
+
+
+def render_pair_generation_html(record: dict[str, Any]) -> str:
+    left = _pick_dict(record, "left")
+    right = _pick_dict(record, "right")
+    comparison = _pick_dict(record, "comparison")
+    request = _pick_dict(record, "request")
+    rows = [
+        ("Created", record.get("created_at")),
+        ("Prompt", request.get("prompt")),
+        ("Max tokens", request.get("max_new_tokens")),
+        ("Temperature", request.get("temperature")),
+        ("Top-k", request.get("top_k")),
+        ("Seed", request.get("seed")),
+        ("Left checkpoint", left.get("checkpoint_id")),
+        ("Right checkpoint", right.get("checkpoint_id")),
+        ("Generated equal", comparison.get("generated_equal")),
+        ("Generated char delta", comparison.get("generated_char_delta")),
+        ("Continuation equal", comparison.get("continuation_equal")),
+        ("Continuation char delta", comparison.get("continuation_char_delta")),
+    ]
+    table = "".join(f"<tr><th>{_html(label)}</th><td>{_html(value)}</td></tr>" for label, value in rows)
+    return "\n".join(
+        [
+            "<!doctype html>",
+            '<html lang="zh-CN">',
+            "<head>",
+            '<meta charset="utf-8">',
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
+            f"<title>MiniGPT pair generation {_html(record.get('created_at'))}</title>",
+            "<style>",
+            "body{font-family:Arial,'Microsoft YaHei',sans-serif;margin:24px;color:#172033;background:#f6f8fa;line-height:1.5}",
+            "main{max-width:1100px;margin:auto;background:#fff;border:1px solid #d0d7de;border-radius:8px;padding:20px}",
+            "table{width:100%;border-collapse:collapse;margin:12px 0 18px}th,td{border-bottom:1px solid #d8dee4;padding:8px;text-align:left;vertical-align:top}",
+            ".grid{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:14px}.panel{border:1px solid #d8dee4;border-radius:8px;padding:12px;background:#fbfcfd}",
+            "pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef3f7;border-radius:7px;padding:10px;min-height:120px}",
+            "@media(max-width:760px){.grid{grid-template-columns:1fr}body{margin:12px}}",
+            "</style>",
+            "</head>",
+            "<body><main>",
+            "<h1>MiniGPT Pair Generation</h1>",
+            f"<table>{table}</table>",
+            '<section class="grid">',
+            f"<article class=\"panel\"><h2>Left: {_html(left.get('checkpoint_id'))}</h2><pre>{_html(left.get('generated'))}</pre></article>",
+            f"<article class=\"panel\"><h2>Right: {_html(right.get('checkpoint_id'))}</h2><pre>{_html(right.get('generated'))}</pre></article>",
+            "</section>",
+            "</main></body></html>",
+        ]
+    )
+
+
 def create_handler(
     run_dir: str | Path,
     checkpoint_path: str | Path | None = None,
@@ -480,6 +573,9 @@ def create_handler(
 
         def do_POST(self) -> None:
             parsed = urlparse(self.path)
+            if parsed.path == "/api/generate-pair-artifact":
+                self._handle_generate_pair(save_artifact=True)
+                return
             if parsed.path == "/api/generate-pair":
                 self._handle_generate_pair()
                 return
@@ -508,12 +604,14 @@ def create_handler(
             payload["checkpoint_id"] = option.id
             self._send_json(payload)
 
-        def _handle_generate_pair(self) -> None:
+        def _handle_generate_pair(self, *, save_artifact: bool = False) -> None:
+            endpoint = "/api/generate-pair-artifact" if save_artifact else "/api/generate-pair"
             pair_request: GenerationPairRequest | None = None
             left_option: CheckpointOption | None = None
             right_option: CheckpointOption | None = None
             left_response: GenerationResponse | None = None
             right_response: GenerationResponse | None = None
+            artifact: dict[str, Any] | None = None
             try:
                 payload = self._read_json_body()
                 pair_request = parse_generation_pair_request(payload, safety)
@@ -532,6 +630,7 @@ def create_handler(
                     left_option=left_option,
                     right_option=right_option,
                     error=str(exc),
+                    endpoint=endpoint,
                 )
                 self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
                 return
@@ -544,9 +643,14 @@ def create_handler(
                     left_response=left_response,
                     right_response=right_response,
                     error=str(exc),
+                    endpoint=endpoint,
                 )
                 self._send_json({"error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
                 return
+            payload = _pair_generation_payload(pair_request, left_option, right_option, left_response, right_response)
+            if save_artifact:
+                artifact = write_pair_generation_artifacts(root, payload)
+                payload["artifact"] = artifact
             self._log_pair_generation(
                 "ok",
                 pair_request=pair_request,
@@ -554,8 +658,10 @@ def create_handler(
                 right_option=right_option,
                 left_response=left_response,
                 right_response=right_response,
+                artifact=artifact,
+                endpoint=endpoint,
             )
-            self._send_json(_pair_generation_payload(pair_request, left_option, right_option, left_response, right_response))
+            self._send_json(payload)
 
         def do_OPTIONS(self) -> None:
             self.send_response(HTTPStatus.NO_CONTENT)
@@ -634,10 +740,12 @@ def create_handler(
             right_option: CheckpointOption | None = None,
             left_response: GenerationResponse | None = None,
             right_response: GenerationResponse | None = None,
+            artifact: dict[str, Any] | None = None,
             error: str | None = None,
+            endpoint: str = "/api/generate-pair",
         ) -> None:
             event: dict[str, Any] = {
-                "endpoint": "/api/generate-pair",
+                "endpoint": endpoint,
                 "status": status,
                 "client": self.client_address[0] if self.client_address else None,
                 "left_checkpoint": left_option.path if left_option is not None else None,
@@ -666,6 +774,9 @@ def create_handler(
             if left_response is not None and right_response is not None:
                 event["generated_equal"] = left_response.generated == right_response.generated
                 event["continuation_equal"] = left_response.continuation == right_response.continuation
+            if artifact is not None:
+                event["artifact_json"] = artifact.get("json_path")
+                event["artifact_html"] = artifact.get("html_path")
             if error is not None:
                 event["error"] = error
             append_inference_log(request_log, event)
@@ -861,6 +972,31 @@ def _same_known(value: Any, baseline: Any) -> bool | None:
     if value is None or baseline is None:
         return None
     return value == baseline
+
+
+def _artifact_href(root: Path, path: Path) -> str:
+    try:
+        return path.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _timestamp_slug(value: str) -> str:
+    return _slug(value.replace("Z", "utc"))
+
+
+def _unique_artifact_stem(out_dir: Path, base: str) -> str:
+    stem = base or "pair-generation"
+    candidate = stem
+    index = 2
+    while (out_dir / f"{candidate}.json").exists() or (out_dir / f"{candidate}.html").exists():
+        candidate = f"{stem}-{index}"
+        index += 1
+    return candidate
+
+
+def _html(value: Any) -> str:
+    return html_lib.escape("" if value is None else str(value), quote=True)
 
 
 def _pair_generation_payload(
