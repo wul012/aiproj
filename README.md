@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 53 is a MiniGPT learning project with cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 54 is a MiniGPT learning project with dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -13,6 +13,7 @@ Version 53 is a MiniGPT learning project with cross-run benchmark scorecard comp
 - Dataset preparation script for merging multiple `.txt` files and exporting dataset reports
 - Dataset version manifest with `dataset_name`, `dataset_version`, dataset id, fingerprint, source roots, outputs, quality summary, JSON output, and browser HTML report under `datasets/<name>/<version>` when requested
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
+- Dataset card exporter that combines dataset version, quality, provenance, intended use, limitations, artifacts, recommendations, JSON, Markdown, and browser HTML evidence
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
 - Benchmark prompt evaluation suite for running the same Chinese task set against different checkpoints, with suite metadata, task types, difficulty, expected behavior, JSON/CSV/SVG/HTML reports, and dashboard/playground artifact links
 - Generation quality analyzer that reads `eval_suite.json` or `sample_lab.json`, checks length/diversity/repetition/prompt echo, and writes `generation_quality.json`, `generation_quality.csv`, `generation_quality.md`, `generation_quality.svg`, and `generation_quality.html`
@@ -73,8 +74,8 @@ Version 53 is a MiniGPT learning project with cross-run benchmark scorecard comp
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -136,6 +137,7 @@ v50.0.0 MiniGPT v50 benchmark scorecard drilldowns
 v51.0.0 MiniGPT v51 benchmark rubric scoring
 v52.0.0 MiniGPT v52 registry benchmark rubric tracking
 v53.0.0 MiniGPT v53 benchmark scorecard comparison
+v54.0.0 MiniGPT v54 dataset cards
 ```
 
 ## Project structure
@@ -1257,6 +1259,14 @@ Version 53 screenshots:
 - `04-playwright-scorecard-comparison-html.png`: generated scorecard comparison HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v53 docs, b/53 archive, and project-maturity explanation check
 
+Version 54 screenshots:
+
+- `01-unit-tests.png`: dataset card tests, compile check, and full regression tests
+- `02-dataset-card-smoke.png`: local prepared dataset generated dataset_card JSON/Markdown/HTML and CLI output
+- `03-dataset-card-structure-check.png`: dataset card summary, quality, artifacts, Markdown, and HTML structure verified
+- `04-playwright-dataset-card-html.png`: generated dataset card HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v54 docs, b/54 archive, and project-maturity explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1358,6 +1368,7 @@ Project-maturity records start at v48:
 66-v51-benchmark-rubric-scoring.md
 67-v52-registry-benchmark-rubric-tracking.md
 68-v53-benchmark-scorecard-comparison.md
+69-v54-dataset-cards.md
 ```
 
 ## Learning map
@@ -1450,6 +1461,5 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add dataset cards that summarize intended use, source limits, quality status, and version history.
 - Add streaming token output for the playground server.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

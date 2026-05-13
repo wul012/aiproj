@@ -87,6 +87,9 @@ b/52/解释/说明.md
 b/53/图片
 b/53/解释/说明.md
  -> v53 benchmark scorecard comparison 的运行截图和解释
+b/54/图片
+b/54/解释/说明.md
+ -> v54 dataset cards 的运行截图和解释
 ```
 
 写入规则：
