@@ -31,6 +31,10 @@ def main() -> None:
     print(f"overall_score={summary.get('overall_score')}")
     print(f"component_count={summary.get('component_count')}")
     print(f"case_score_count={len(scorecard.get('case_scores', []))}")
+    print(f"task_type_group_count={summary.get('task_type_group_count')}")
+    print(f"weakest_task_type={summary.get('weakest_task_type')}")
+    print(f"difficulty_group_count={summary.get('difficulty_group_count')}")
+    print(f"weakest_difficulty={summary.get('weakest_difficulty')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 
 

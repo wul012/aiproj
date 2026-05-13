@@ -75,6 +75,9 @@ b/48/解释/说明.md
 b/49/图片
 b/49/解释/说明.md
  -> v49 benchmark scorecard 的运行截图和解释
+b/50/图片
+b/50/解释/说明.md
+ -> v50 benchmark scorecard drilldowns 的运行截图和解释
 ```
 
 写入规则：

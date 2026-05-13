@@ -33,18 +33,21 @@ def build_benchmark_scorecard(
         _pair_delta_stability_component(pair_batch, root / "pair_batch" / "pair_generation_batch.json"),
         _evidence_completeness_component(root),
     ]
-    summary = _score_summary(components, eval_suite, generation_quality, pair_batch)
+    case_scores = _case_scores(eval_suite, generation_quality, pair_batch)
+    drilldowns = _benchmark_drilldowns(case_scores)
+    summary = _score_summary(components, eval_suite, generation_quality, pair_batch, drilldowns)
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "title": title,
         "generated_at": generated_at or utc_now(),
         "run_dir": str(root),
         "registry_path": str(registry_path) if registry_path is not None else None,
         "summary": summary,
         "components": components,
-        "case_scores": _case_scores(eval_suite, generation_quality, pair_batch),
+        "drilldowns": drilldowns,
+        "case_scores": case_scores,
         "registry_context": _registry_context(registry, root),
-        "recommendations": _recommendations(summary, components),
+        "recommendations": _recommendations(summary, components, drilldowns),
         "warnings": warnings,
     }
 
@@ -66,8 +69,43 @@ def write_benchmark_scorecard_csv(scorecard: dict[str, Any], path: str | Path) -
             writer.writerow({field: _csv_value(component.get(field)) for field in fieldnames})
 
 
+def write_benchmark_scorecard_drilldown_csv(scorecard: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "group_by",
+        "key",
+        "status",
+        "score",
+        "case_count",
+        "coverage_score",
+        "generation_quality_score",
+        "pair_consistency_score",
+        "pair_delta_stability_score",
+        "generation_pass_count",
+        "generation_warn_count",
+        "generation_fail_count",
+        "pair_equal_count",
+        "pair_difference_count",
+        "avg_abs_generated_delta",
+        "max_abs_generated_delta",
+        "avg_eval_chars",
+        "cases",
+    ]
+    rows = []
+    drilldowns = _dict(scorecard.get("drilldowns"))
+    rows.extend(_list_of_dicts(drilldowns.get("task_type")))
+    rows.extend(_list_of_dicts(drilldowns.get("difficulty")))
+    with out_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({field: _csv_value(row.get(field)) for field in fieldnames})
+
+
 def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
     summary = _dict(scorecard.get("summary"))
+    drilldowns = _dict(scorecard.get("drilldowns"))
     lines = [
         f"# {scorecard.get('title', 'MiniGPT benchmark scorecard')}",
         "",
@@ -85,6 +123,10 @@ def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
                 ("Generation quality", summary.get("generation_quality_status")),
                 ("Pair batch cases", summary.get("pair_batch_cases")),
                 ("Pair generated differences", summary.get("pair_generated_differences")),
+                ("Task type groups", summary.get("task_type_group_count")),
+                ("Weakest task type", summary.get("weakest_task_type")),
+                ("Difficulty groups", summary.get("difficulty_group_count")),
+                ("Weakest difficulty", summary.get("weakest_difficulty")),
             ]
         ),
         "",
@@ -107,6 +149,8 @@ def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
             )
             + " |"
         )
+    lines.extend(_markdown_drilldown_table("Task Type Drilldown", drilldowns.get("task_type")))
+    lines.extend(_markdown_drilldown_table("Difficulty Drilldown", drilldowns.get("difficulty")))
     lines.extend(["", "## Case Scores", "", "| Case | Task | Eval chars | Gen status | Pair delta | Pair equal |", "| --- | --- | ---: | --- | ---: | --- |"])
     for case in _list_of_dicts(scorecard.get("case_scores")):
         lines.append(
@@ -140,6 +184,7 @@ def write_benchmark_scorecard_markdown(scorecard: dict[str, Any], path: str | Pa
 
 def render_benchmark_scorecard_html(scorecard: dict[str, Any]) -> str:
     summary = _dict(scorecard.get("summary"))
+    drilldowns = _dict(scorecard.get("drilldowns"))
     stats = [
         ("Status", summary.get("overall_status")),
         ("Score", summary.get("overall_score")),
@@ -148,6 +193,8 @@ def render_benchmark_scorecard_html(scorecard: dict[str, Any]) -> str:
         ("Pair cases", summary.get("pair_batch_cases")),
         ("Pair diff", summary.get("pair_generated_differences")),
         ("Max delta", summary.get("max_abs_generated_delta")),
+        ("Task groups", summary.get("task_type_group_count")),
+        ("Difficulty groups", summary.get("difficulty_group_count")),
         ("Registry rank", _dict(scorecard.get("registry_context")).get("best_val_loss_rank")),
     ]
     return "\n".join(
@@ -165,6 +212,8 @@ def render_benchmark_scorecard_html(scorecard: dict[str, Any]) -> str:
             f"<header><h1>{_e(scorecard.get('title', 'MiniGPT benchmark scorecard'))}</h1><p>{_e(scorecard.get('run_dir'))}</p></header>",
             '<section class="stats">' + "".join(_card(label, value) for label, value in stats) + "</section>",
             _component_section(_list_of_dicts(scorecard.get("components"))),
+            _drilldown_section("Task Type Drilldown", _list_of_dicts(drilldowns.get("task_type"))),
+            _drilldown_section("Difficulty Drilldown", _list_of_dicts(drilldowns.get("difficulty"))),
             _case_section(_list_of_dicts(scorecard.get("case_scores"))),
             _registry_section(_dict(scorecard.get("registry_context"))),
             _list_section("Recommendations", scorecard.get("recommendations")),
@@ -188,11 +237,13 @@ def write_benchmark_scorecard_outputs(scorecard: dict[str, Any], out_dir: str | 
     paths = {
         "json": root / "benchmark_scorecard.json",
         "csv": root / "benchmark_scorecard.csv",
+        "drilldowns_csv": root / "benchmark_scorecard_drilldowns.csv",
         "markdown": root / "benchmark_scorecard.md",
         "html": root / "benchmark_scorecard.html",
     }
     write_benchmark_scorecard_json(scorecard, paths["json"])
     write_benchmark_scorecard_csv(scorecard, paths["csv"])
+    write_benchmark_scorecard_drilldown_csv(scorecard, paths["drilldowns_csv"])
     write_benchmark_scorecard_markdown(scorecard, paths["markdown"])
     write_benchmark_scorecard_html(scorecard, paths["html"])
     return {key: str(value) for key, value in paths.items()}
@@ -323,9 +374,17 @@ def _component(
     }
 
 
-def _score_summary(components: list[dict[str, Any]], eval_suite: Any, generation_quality: Any, pair_batch: Any) -> dict[str, Any]:
+def _score_summary(
+    components: list[dict[str, Any]],
+    eval_suite: Any,
+    generation_quality: Any,
+    pair_batch: Any,
+    drilldowns: dict[str, Any],
+) -> dict[str, Any]:
     total_weight = sum(float(item.get("weight") or 0) for item in components)
     overall = 0.0 if total_weight == 0 else sum(float(item.get("weighted_score") or 0) for item in components) / total_weight
+    weakest_task_type = _dict(_pick(drilldowns, "weakest_task_type"))
+    weakest_difficulty = _dict(_pick(drilldowns, "weakest_difficulty"))
     return {
         "overall_score": round(overall, 2),
         "overall_status": _status(overall),
@@ -336,6 +395,12 @@ def _score_summary(components: list[dict[str, Any]], eval_suite: Any, generation
         "pair_batch_cases": _pick(pair_batch, "case_count"),
         "pair_generated_differences": _pick(pair_batch, "generated_difference_count"),
         "max_abs_generated_delta": _max_abs_generated_delta(pair_batch),
+        "task_type_group_count": len(_list_of_dicts(_pick(drilldowns, "task_type"))),
+        "difficulty_group_count": len(_list_of_dicts(_pick(drilldowns, "difficulty"))),
+        "weakest_task_type": weakest_task_type.get("key"),
+        "weakest_task_type_score": weakest_task_type.get("score"),
+        "weakest_difficulty": weakest_difficulty.get("key"),
+        "weakest_difficulty_score": weakest_difficulty.get("score"),
     }
 
 
@@ -379,6 +444,91 @@ def _case_scores(eval_suite: Any, generation_quality: Any, pair_batch: Any) -> l
     return [rows[key] for key in sorted(rows)]
 
 
+def _benchmark_drilldowns(case_scores: list[dict[str, Any]]) -> dict[str, Any]:
+    task_type_rows = _group_drilldowns(case_scores, "task_type")
+    difficulty_rows = _group_drilldowns(case_scores, "difficulty")
+    return {
+        "task_type": task_type_rows,
+        "difficulty": difficulty_rows,
+        "weakest_task_type": _weakest_drilldown(task_type_rows),
+        "weakest_difficulty": _weakest_drilldown(difficulty_rows),
+    }
+
+
+def _group_drilldowns(case_scores: list[dict[str, Any]], group_by: str) -> list[dict[str, Any]]:
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for case in case_scores:
+        key = str(case.get(group_by) or "unknown")
+        groups.setdefault(key, []).append(case)
+    rows = [_build_drilldown_row(group_by, key, rows) for key, rows in groups.items()]
+    return sorted(rows, key=lambda item: (-int(item.get("case_count") or 0), str(item.get("key"))))
+
+
+def _build_drilldown_row(group_by: str, key: str, cases: list[dict[str, Any]]) -> dict[str, Any]:
+    generation_counts = {"pass": 0, "warn": 0, "fail": 0}
+    generation_case_count = 0
+    for case in cases:
+        status = str(case.get("generation_quality_status") or "")
+        if status in generation_counts:
+            generation_counts[status] += 1
+            generation_case_count += 1
+    generation_score = (
+        0.0
+        if generation_case_count == 0
+        else ((generation_counts["pass"] + generation_counts["warn"] * 0.5) / generation_case_count) * 100.0
+    )
+
+    pair_values = [case.get("pair_generated_equal") for case in cases if isinstance(case.get("pair_generated_equal"), bool)]
+    pair_equal_count = sum(1 for value in pair_values if value is True)
+    pair_difference_count = len(pair_values) - pair_equal_count
+    pair_score = 0.0 if not pair_values else pair_equal_count / len(pair_values) * 100.0
+
+    deltas = [_number(case.get("pair_generated_char_delta")) for case in cases]
+    abs_deltas = [abs(value) for value in deltas if value is not None]
+    avg_delta = None if not abs_deltas else sum(abs_deltas) / len(abs_deltas)
+    max_delta = None if not abs_deltas else max(abs_deltas)
+    delta_score = 0.0 if avg_delta is None else max(0.0, 100.0 - avg_delta * 10.0)
+
+    eval_chars = [_number(case.get("eval_char_count")) for case in cases]
+    eval_chars = [value for value in eval_chars if value is not None]
+    avg_eval_chars = None if not eval_chars else sum(eval_chars) / len(eval_chars)
+
+    coverage_score = min(100.0, len(cases) * 50.0)
+    score = generation_score * 0.4 + pair_score * 0.25 + delta_score * 0.25 + coverage_score * 0.1
+    return {
+        "group_by": group_by,
+        "key": key,
+        "status": _status(score),
+        "score": round(score, 2),
+        "case_count": len(cases),
+        "coverage_score": round(coverage_score, 2),
+        "generation_quality_score": round(generation_score, 2),
+        "pair_consistency_score": round(pair_score, 2),
+        "pair_delta_stability_score": round(delta_score, 2),
+        "generation_pass_count": generation_counts["pass"],
+        "generation_warn_count": generation_counts["warn"],
+        "generation_fail_count": generation_counts["fail"],
+        "pair_equal_count": pair_equal_count,
+        "pair_difference_count": pair_difference_count,
+        "avg_abs_generated_delta": _round_optional(avg_delta),
+        "max_abs_generated_delta": _round_optional(max_delta),
+        "avg_eval_chars": _round_optional(avg_eval_chars),
+        "cases": [str(case.get("name")) for case in sorted(cases, key=lambda item: str(item.get("name")))],
+    }
+
+
+def _weakest_drilldown(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
+    if not rows:
+        return None
+    weakest = min(rows, key=lambda item: (float(item.get("score") or 0), -int(item.get("case_count") or 0), str(item.get("key"))))
+    return {
+        "key": weakest.get("key"),
+        "status": weakest.get("status"),
+        "score": weakest.get("score"),
+        "case_count": weakest.get("case_count"),
+    }
+
+
 def _registry_context(registry: Any, root: Path) -> dict[str, Any]:
     if not isinstance(registry, dict):
         return {"available": False}
@@ -394,7 +544,7 @@ def _registry_context(registry: Any, root: Path) -> dict[str, Any]:
     }
 
 
-def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]]) -> list[str]:
+def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], drilldowns: dict[str, Any] | None = None) -> list[str]:
     recs = []
     if summary.get("overall_status") == "pass":
         recs.append("Use this scorecard as the single benchmark entry point for the current run.")
@@ -403,7 +553,18 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]]) 
     weak = [item for item in components if item.get("status") != "pass"]
     if weak:
         recs.append("Improve weak components: " + ", ".join(str(item.get("title")) for item in weak) + ".")
-    recs.append("Next step: add task-type and difficulty level scoring so benchmark changes are easier to explain.")
+    drilldowns = _dict(drilldowns)
+    weakest_task = _dict(drilldowns.get("weakest_task_type"))
+    weakest_difficulty = _dict(drilldowns.get("weakest_difficulty"))
+    if weakest_task:
+        recs.append(
+            f"Review weakest task type `{weakest_task.get('key')}` at score {weakest_task.get('score')} before expanding the suite."
+        )
+    if weakest_difficulty:
+        recs.append(
+            f"Review weakest difficulty `{weakest_difficulty.get('key')}` at score {weakest_difficulty.get('score')} before comparing runs."
+        )
+    recs.append("Next step: add rubric-style per-prompt scoring so benchmark drilldowns reflect task correctness, not only output shape.")
     return recs
 
 
@@ -480,6 +641,30 @@ def _component_section(components: list[dict[str, Any]]) -> str:
         '<section class="panel"><h2>Benchmark Components</h2>'
         '<table><thead><tr><th>Component</th><th>Status</th><th>Score</th><th>Weight</th><th>Weighted</th><th>Detail</th></tr></thead><tbody>'
         + "".join(rows)
+        + "</tbody></table></section>"
+    )
+
+
+def _drilldown_section(title: str, rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return f'<section class="panel"><h2>{_e(title)}</h2><p class="muted">No drilldown rows found.</p></section>'
+    html_rows = []
+    for item in rows:
+        html_rows.append(
+            "<tr>"
+            f"<td><strong>{_e(item.get('key'))}</strong><br><span>{_e(item.get('case_count'))} case(s)</span></td>"
+            f"<td><span class=\"pill {_e(item.get('status'))}\">{_e(item.get('status'))}</span></td>"
+            f"<td>{_e(item.get('score'))}</td>"
+            f"<td>{_e(item.get('generation_quality_score'))}<br><span>{_e(item.get('generation_pass_count'))} pass / {_e(item.get('generation_warn_count'))} warn / {_e(item.get('generation_fail_count'))} fail</span></td>"
+            f"<td>{_e(item.get('pair_consistency_score'))}<br><span>{_e(item.get('pair_equal_count'))} equal / {_e(item.get('pair_difference_count'))} diff</span></td>"
+            f"<td>{_e(item.get('pair_delta_stability_score'))}<br><span>avg={_e(item.get('avg_abs_generated_delta'))}, max={_e(item.get('max_abs_generated_delta'))}</span></td>"
+            f"<td>{_e(', '.join(_string_list(item.get('cases'))))}</td>"
+            "</tr>"
+        )
+    return (
+        f'<section class="panel"><h2>{_e(title)}</h2>'
+        '<table><thead><tr><th>Group</th><th>Status</th><th>Score</th><th>Generation</th><th>Pair</th><th>Delta</th><th>Cases</th></tr></thead><tbody>'
+        + "".join(html_rows)
         + "</tbody></table></section>"
     )
 
@@ -570,6 +755,30 @@ def _markdown_table(rows: list[tuple[Any, Any]]) -> list[str]:
     return lines
 
 
+def _markdown_drilldown_table(title: str, rows: Any) -> list[str]:
+    lines = ["", f"## {title}", "", "| Group | Status | Score | Cases | Gen score | Pair score | Delta score | Cases |", "| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |"]
+    for item in _list_of_dicts(rows):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    _md(item.get("key")),
+                    _md(item.get("status")),
+                    _md(item.get("score")),
+                    _md(item.get("case_count")),
+                    _md(item.get("generation_quality_score")),
+                    _md(item.get("pair_consistency_score")),
+                    _md(item.get("pair_delta_stability_score")),
+                    _md(", ".join(_string_list(item.get("cases")))),
+                ]
+            )
+            + " |"
+        )
+    if len(lines) == 5:
+        lines.append("| missing | missing | 0 | 0 | 0 | 0 | 0 |  |")
+    return lines
+
+
 def _dict(value: Any) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
@@ -602,6 +811,14 @@ def _fmt_mapping(value: Any) -> str:
     if not isinstance(value, dict) or not value:
         return "missing"
     return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
+
+
+def _round_optional(value: Any) -> float | int | None:
+    number = _number(value)
+    if number is None:
+        return None
+    rounded = round(number, 2)
+    return int(rounded) if float(rounded).is_integer() else rounded
 
 
 def _csv_value(value: Any) -> Any:

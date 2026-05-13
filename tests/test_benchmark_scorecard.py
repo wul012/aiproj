@@ -115,9 +115,14 @@ class BenchmarkScorecardTests(unittest.TestCase):
                 generated_at="2026-05-13T00:00:00Z",
             )
 
+            self.assertEqual(scorecard["schema_version"], 2)
             self.assertEqual(scorecard["summary"]["overall_status"], "pass")
             self.assertGreaterEqual(scorecard["summary"]["overall_score"], 80)
             self.assertEqual(scorecard["summary"]["component_count"], 5)
+            self.assertEqual(scorecard["summary"]["task_type_group_count"], 4)
+            self.assertEqual(scorecard["summary"]["difficulty_group_count"], 3)
+            self.assertEqual(scorecard["summary"]["weakest_task_type"], "qa")
+            self.assertEqual(scorecard["summary"]["weakest_difficulty"], "hard")
             self.assertEqual({item["key"] for item in scorecard["components"]}, {
                 "eval_coverage",
                 "generation_quality",
@@ -126,6 +131,8 @@ class BenchmarkScorecardTests(unittest.TestCase):
                 "evidence_completeness",
             })
             self.assertEqual(len(scorecard["case_scores"]), 5)
+            self.assertEqual(scorecard["drilldowns"]["weakest_task_type"]["score"], 75.0)
+            self.assertEqual(scorecard["drilldowns"]["weakest_difficulty"]["status"], "fail")
             self.assertEqual(scorecard["registry_context"]["best_val_loss_rank"], 1)
             self.assertEqual(scorecard["registry_context"]["pair_delta_cases"], 5)
             self.assertEqual(scorecard["warnings"], [])
@@ -138,11 +145,15 @@ class BenchmarkScorecardTests(unittest.TestCase):
 
             outputs = write_benchmark_scorecard_outputs(scorecard, root / "scorecard")
 
-            self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
+            self.assertEqual(set(outputs), {"json", "csv", "drilldowns_csv", "markdown", "html"})
             self.assertIn("benchmark_scorecard", Path(outputs["json"]).name)
             self.assertIn("key,title,status,score", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("group_by,key,status,score", Path(outputs["drilldowns_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Components", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("## Task Type Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("## Difficulty Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Components", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Task Type Drilldown", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_benchmark_scorecard_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
