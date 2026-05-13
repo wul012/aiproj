@@ -111,6 +111,9 @@ b/60/解释/说明.md
 b/61/图片
 b/61/解释/说明.md
  -> v61 request history audit gates 的运行截图和解释
+b/62/图片
+b/62/解释/说明.md
+ -> v62 release readiness dashboard 的运行截图和解释
 ```
 
 写入规则：

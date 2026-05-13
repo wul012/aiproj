@@ -38,6 +38,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 74-v59-request-history-detail-json.md
 75-v60-request-history-summary-context.md
 76-v61-request-history-audit-gates.md
+77-v62-release-readiness-dashboard.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -57,7 +58,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v61，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成，到请求历史审计门禁和 release evidence 集成的完整学习型 AI 工程链路。
+截至 v62，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -83,6 +84,7 @@ v58 的关键变化是：给 `/api/request-history` 增加 `status`、`endpoint`
 v59 的关键变化是：给每条有效请求日志分配可见 `log_index`，新增 `/api/request-history-detail?log_index=N`，并在 playground 的 Request History 表格里加入 Details 按钮和 JSON 链接。
 v60 的关键变化是：新增 request history summary 产物，把 JSONL 请求日志聚合成状态/端点/checkpoint 计数、timeout/bad_request/error rate、最近请求和建议，并让 maturity summary 读取这份上下文。
 v61 的关键变化是：让 project audit 读取 request history summary，release bundle 把它列为证据 artifact，standard/review/strict release gate 默认要求 `request_history_summary` 审计检查，legacy profile 继续兼容旧 bundle。
+v62 的关键变化是：新增 release readiness dashboard，把 registry、release bundle、project audit、release gate、request history summary 和 maturity summary 汇总为一个 JSON/Markdown/HTML 就绪总览。
 
 ## 后续讲解索引
 
@@ -115,10 +117,12 @@ v61 的关键变化是：让 project audit 读取 request history summary，rele
  -> 第六十版代码讲解：把请求历史从单条追溯推进到稳定性摘要产物，并接入项目成熟度上下文
 76-v61-request-history-audit-gates.md
  -> 第六十一版代码讲解：把请求历史稳定性摘要接入 project audit、release bundle 和 release gate policy
+77-v62-release-readiness-dashboard.md
+ -> 第六十二版代码讲解：把分散的 registry、audit、bundle、gate、request history 和 maturity 证据汇总为发布就绪 dashboard
 ```
 
-后续继续推进时，在这里追加 `77-v62-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `78-v63-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard 和下一阶段路线”的过程。
