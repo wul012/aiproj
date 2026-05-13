@@ -1,6 +1,6 @@
 # MiniGPT 代码讲解记录_评估基准阶段
 
-本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v39 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界和 checkpoint 选择链路比较”。
+本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v40 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界、checkpoint 选择和 checkpoint 快速比较入口表达出来”。
 
 ## 写入规则
 
@@ -12,6 +12,7 @@
 52-v37-baseline-model-comparison.md
 53-v38-inference-safety-profile.md
 54-v39-checkpoint-selector.md
+55-v40-checkpoint-comparison-shortcuts.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -31,13 +32,14 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v39，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像到 playground checkpoint selector 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
+截至 v40，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像、playground checkpoint selector 到 checkpoint comparison shortcuts 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
 
 ```text
 同一个 checkpoint 在固定任务集上表现如何？
 同一个 checkpoint 到底用了哪个 dataset version？
 不同 checkpoint、tokenizer、模型大小和训练步数以后能否横向比较？
 本地 playground 当前选择的是哪个 checkpoint？
+多个候选 checkpoint 的文件、tokenizer、参数量和数据版本差异是什么？
 ```
 
 当前评估主线：
@@ -52,6 +54,7 @@ eval prompts
  -> baseline model comparison
  -> local inference safety profile
  -> checkpoint selector
+ -> checkpoint comparison shortcuts
 ```
 
 ## 后续讲解索引
@@ -67,10 +70,12 @@ eval prompts
  -> 第三十八版代码讲解：给本地推理 API 增加安全画像、model-info 端点、请求日志和浏览器验证证据
 54-v39-checkpoint-selector.md
  -> 第三十九版代码讲解：给 playground server 增加 checkpoint 发现、选择、model-info 查询、生成路由和请求日志证据
+55-v40-checkpoint-comparison-shortcuts.md
+ -> 第四十版代码讲解：给 playground server 和页面增加 checkpoint compare endpoint、差异字段、model-info 快捷入口和选择动作
 ```
 
-后续推进 v40 时，在这里继续追加 `55-v40-主题.md`，或在新阶段目录开始新的能力线。
+后续推进 v41 时，在这里继续追加 `56-v41-主题.md`，或在新阶段目录开始新的能力线。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline 和可选择 checkpoint 比较”的过程。
+本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline、可选择 checkpoint 和 checkpoint 快速对比入口比较”的过程。

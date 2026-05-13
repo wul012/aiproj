@@ -16,6 +16,7 @@ from minigpt.server import (
     GenerationResponse,
     InferenceSafetyProfile,
     append_inference_log,
+    build_checkpoint_compare_payload,
     build_checkpoints_payload,
     build_health_payload,
     build_model_info_payload,
@@ -96,6 +97,7 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(health["model_info_endpoint"], "/api/model-info")
             self.assertEqual(Path(health["request_log"]).name, "requests.jsonl")
             self.assertEqual(health["checkpoints_endpoint"], "/api/checkpoints")
+            self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
             self.assertEqual(health["checkpoint_count"], 1)
 
     def test_discover_checkpoint_options_finds_default_and_candidates(self) -> None:
@@ -118,6 +120,48 @@ class ServerTests(unittest.TestCase):
             self.assertIn("checkpoints-wide", {option.id for option in options})
             self.assertEqual(payload["default_checkpoint_id"], "default")
             self.assertGreaterEqual(payload["checkpoint_count"], 3)
+
+    def test_checkpoint_compare_payload_adds_metadata_and_deltas(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            (run_dir / "checkpoint.pt").write_bytes(b"default")
+            (run_dir / "tokenizer.json").write_text("{}", encoding="utf-8")
+            (run_dir / "run_manifest.json").write_text(
+                json.dumps(
+                    {
+                        "training": {"tokenizer": "char"},
+                        "model": {"parameter_count": 100, "config": {"n_layer": 1}},
+                        "data": {"dataset_version": {"id": "demo@v1", "short_fingerprint": "aaa111"}},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            wide = run_dir / "wide"
+            wide.mkdir()
+            (wide / "checkpoint.pt").write_bytes(b"wide-model")
+            (wide / "tokenizer.json").write_text("{}", encoding="utf-8")
+            (wide / "run_manifest.json").write_text(
+                json.dumps(
+                    {
+                        "training": {"tokenizer": "bpe"},
+                        "model": {"parameter_count": 150, "config": {"n_layer": 2}},
+                        "data": {"dataset_version": {"id": "demo@v2", "short_fingerprint": "bbb222"}},
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            payload = build_checkpoint_compare_payload(run_dir)
+            rows = {row["id"]: row for row in payload["checkpoints"]}
+
+            self.assertEqual(payload["summary"]["ready_count"], 2)
+            self.assertEqual(rows["default"]["parameter_delta"], 0)
+            self.assertEqual(rows["wide"]["parameter_count"], 150)
+            self.assertEqual(rows["wide"]["parameter_delta"], 50)
+            self.assertEqual(rows["wide"]["dataset_version"], "demo@v2")
+            self.assertFalse(rows["wide"]["same_dataset_version"])
+            self.assertFalse(rows["wide"]["same_model_config"])
+            self.assertTrue(rows["wide"]["model_info_endpoint"].endswith("checkpoint=wide"))
 
     def test_model_info_payload_reads_run_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -182,6 +226,7 @@ class ServerTests(unittest.TestCase):
                 self.assertTrue(health["checkpoint_exists"])
                 self.assertEqual(health["safety"]["max_new_tokens"], 512)
                 self.assertEqual(health["default_checkpoint_id"], "default")
+                self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
 
                 info = _get_json(base + "/api/model-info")
                 self.assertEqual(info["status"], "ok")
@@ -191,6 +236,10 @@ class ServerTests(unittest.TestCase):
                 checkpoints = _get_json(base + "/api/checkpoints")
                 self.assertEqual(checkpoints["default_checkpoint_id"], "default")
                 self.assertTrue(any(item["id"] == "candidate" for item in checkpoints["checkpoints"]))
+
+                compare = _get_json(base + "/api/checkpoint-compare")
+                self.assertEqual(compare["default_checkpoint_id"], "default")
+                self.assertTrue(any(item["id"] == "candidate" for item in compare["checkpoints"]))
 
                 candidate_info = _get_json(base + "/api/model-info?checkpoint=candidate")
                 self.assertEqual(candidate_info["checkpoint_id"], "candidate")

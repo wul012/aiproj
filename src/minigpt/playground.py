@@ -114,6 +114,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         "defaults": defaults,
         "commands": payload["commands"],
         "checkpoints": [],
+        "checkpointComparison": [],
     }
     sections = [
         _style(),
@@ -122,6 +123,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         _stats(stats),
         _command_builder(defaults),
         _live_section(),
+        _checkpoint_comparison_section(),
         _sampling_section(payload.get("sampling_report")),
         _link_section(payload["links"]),
         _warning_section(payload.get("warnings", [])),
@@ -331,6 +333,15 @@ pre {
   margin-top: 12px;
   flex-wrap: wrap;
 }
+.live-actions label { min-width: 220px; }
+.selected-row { background: #eef6ff; }
+.row-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.row-actions a { color: var(--blue); font-weight: 700; text-decoration: none; }
 .output {
   margin-top: 12px;
   min-height: 92px;
@@ -380,6 +391,32 @@ function selectedCheckpointOption() {{
   if (!select || !select.value) return null;
   return (MiniGPTPlayground.checkpoints || []).find((item) => item.id === select.value) || null;
 }}
+function formatValue(value) {{
+  if (value === null || value === undefined || value === '') return 'missing';
+  if (typeof value === 'boolean') return value ? 'yes' : 'no';
+  return String(value);
+}}
+function formatBytes(value) {{
+  if (typeof value !== 'number') return 'missing';
+  return value.toLocaleString() + ' B';
+}}
+function formatDelta(value) {{
+  if (typeof value !== 'number') return 'missing';
+  if (value === 0) return '0';
+  return (value > 0 ? '+' : '') + value.toLocaleString();
+}}
+function appendCell(row, value) {{
+  const cell = document.createElement('td');
+  cell.textContent = formatValue(value);
+  row.appendChild(cell);
+  return cell;
+}}
+function selectCheckpoint(id) {{
+  const select = document.getElementById('checkpointSelect');
+  if (select) select.value = id;
+  buildCommands();
+  renderCheckpointComparison();
+}}
 function buildCommands() {{
   const prompt = document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt;
   const maxTokens = document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens;
@@ -416,10 +453,66 @@ async function loadCheckpoints() {{
     status.textContent = `${{MiniGPTPlayground.checkpoints.length}} checkpoint option(s)`;
     select.disabled = MiniGPTPlayground.checkpoints.length === 0;
     buildCommands();
+    renderCheckpointComparison();
   }} catch (error) {{
     MiniGPTPlayground.checkpoints = [];
     status.textContent = 'Start scripts/serve_playground.py for checkpoint selection.';
     select.disabled = true;
+  }}
+}}
+function renderCheckpointComparison() {{
+  const body = document.getElementById('checkpointCompareBody');
+  const status = document.getElementById('checkpointCompareStatus');
+  if (!body || !status) return;
+  const rows = MiniGPTPlayground.checkpointComparison || [];
+  body.innerHTML = '';
+  if (!rows.length) {{
+    status.textContent = 'Start scripts/serve_playground.py for checkpoint comparison.';
+    return;
+  }}
+  const selected = selectedCheckpointOption();
+  for (const item of rows) {{
+    const row = document.createElement('tr');
+    if (selected && item.id === selected.id) row.className = 'selected-row';
+    appendCell(row, `${{item.id}}${{item.is_default ? ' (default)' : ''}}`);
+    appendCell(row, item.status);
+    appendCell(row, formatBytes(item.size_bytes));
+    appendCell(row, item.parameter_count);
+    appendCell(row, item.dataset_version);
+    appendCell(row, formatDelta(item.parameter_delta));
+    appendCell(row, formatDelta(item.size_delta_bytes));
+    const actions = document.createElement('td');
+    const actionWrap = document.createElement('div');
+    actionWrap.className = 'row-actions';
+    const useButton = document.createElement('button');
+    useButton.type = 'button';
+    useButton.textContent = 'Use';
+    useButton.disabled = !item.exists;
+    useButton.addEventListener('click', () => selectCheckpoint(item.id));
+    const infoLink = document.createElement('a');
+    infoLink.href = item.model_info_endpoint || `/api/model-info?checkpoint=${{encodeURIComponent(item.id)}}`;
+    infoLink.textContent = 'Model info';
+    actionWrap.appendChild(useButton);
+    actionWrap.appendChild(infoLink);
+    actions.appendChild(actionWrap);
+    row.appendChild(actions);
+    body.appendChild(row);
+  }}
+}}
+async function loadCheckpointComparison() {{
+  const status = document.getElementById('checkpointCompareStatus');
+  try {{
+    const response = await fetch('/api/checkpoint-compare');
+    if (!response.ok) throw new Error('checkpoint comparison endpoint unavailable');
+    const data = await response.json();
+    MiniGPTPlayground.checkpointComparison = Array.isArray(data.checkpoints) ? data.checkpoints : [];
+    const summary = data.summary || {{}};
+    if (status) status.textContent = `${{formatValue(summary.ready_count)}} ready / ${{formatValue(data.checkpoint_count)}} checkpoint option(s)`;
+    renderCheckpointComparison();
+  }} catch (error) {{
+    MiniGPTPlayground.checkpointComparison = [];
+    if (status) status.textContent = 'Start scripts/serve_playground.py for checkpoint comparison.';
+    renderCheckpointComparison();
   }}
 }}
 async function generateLive() {{
@@ -457,10 +550,15 @@ window.addEventListener('DOMContentLoaded', () => {{
   for (const id of ['promptInput', 'maxTokensInput', 'temperatureInput', 'topKInput', 'seedInput']) {{
     document.getElementById(id).addEventListener('input', buildCommands);
   }}
-  document.getElementById('checkpointSelect').addEventListener('change', buildCommands);
+  document.getElementById('checkpointSelect').addEventListener('change', () => {{
+    buildCommands();
+    renderCheckpointComparison();
+  }});
   document.getElementById('liveGenerateButton').addEventListener('click', generateLive);
+  document.getElementById('refreshCheckpointCompareButton').addEventListener('click', loadCheckpointComparison);
   buildCommands();
   loadCheckpoints();
+  loadCheckpointComparison();
 }});
 </script>"""
 
@@ -505,6 +603,22 @@ def _live_section() -> str:
     <output id="checkpointStatus">Checkpoint selector loads from /api/checkpoints.</output>
   </div>
   <pre id="liveOutput" class="output"></pre>
+</section>"""
+
+
+def _checkpoint_comparison_section() -> str:
+    return """<h2>Checkpoint Compare</h2>
+<section class="panel">
+  <div class="live-actions">
+    <button id="refreshCheckpointCompareButton" type="button">Refresh</button>
+    <output id="checkpointCompareStatus">Checkpoint comparison loads from /api/checkpoint-compare.</output>
+  </div>
+  <table id="checkpointCompareTable">
+    <thead>
+      <tr><th>ID</th><th>Status</th><th>Size</th><th>Params</th><th>Dataset</th><th>Param delta</th><th>Size delta</th><th>Actions</th></tr>
+    </thead>
+    <tbody id="checkpointCompareBody"></tbody>
+  </table>
 </section>"""
 
 

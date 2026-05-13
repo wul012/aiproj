@@ -71,6 +71,9 @@ class PlaygroundTests(unittest.TestCase):
             self.assertIn("liveGenerateButton", html)
             self.assertIn("checkpointSelect", html)
             self.assertIn("/api/checkpoints", html)
+            self.assertIn("checkpointCompareTable", html)
+            self.assertIn("/api/checkpoint-compare", html)
+            self.assertIn("selectCheckpoint", html)
             self.assertIn("payload.checkpoint", html)
             self.assertNotIn("<script>alert(1)</script>", html)
 

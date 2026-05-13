@@ -45,6 +45,9 @@ b/38/解释/说明.md
 b/39/图片
 b/39/解释/说明.md
  -> v39 checkpoint selector 的运行截图和解释
+b/40/图片
+b/40/解释/说明.md
+ -> v40 checkpoint comparison shortcuts 的运行截图和解释
 ```
 
 写入规则：

@@ -207,6 +207,7 @@ def build_health_payload(
         "model_info_endpoint": "/api/model-info",
         "generate_endpoint": "/api/generate",
         "checkpoints_endpoint": "/api/checkpoints",
+        "checkpoint_compare_endpoint": "/api/checkpoint-compare",
         "checkpoint_count": len(checkpoints),
         "default_checkpoint_id": checkpoints[0].id if checkpoints else None,
         "safety": safety.to_dict(),
@@ -321,6 +322,38 @@ def build_checkpoints_payload(
     }
 
 
+def build_checkpoint_compare_payload(
+    run_dir: str | Path,
+    checkpoint_path: str | Path | None = None,
+    tokenizer_path: str | Path | None = None,
+    checkpoint_candidates: list[str | Path] | None = None,
+) -> dict[str, Any]:
+    root = Path(run_dir)
+    options = discover_checkpoint_options(
+        root,
+        checkpoint_path,
+        tokenizer_path=tokenizer_path,
+        checkpoint_candidates=checkpoint_candidates,
+    )
+    rows = [_checkpoint_compare_row(root, option) for option in options]
+    baseline = rows[0] if rows else None
+    for row in rows:
+        _attach_checkpoint_deltas(row, baseline)
+    return {
+        "status": "ok",
+        "run_dir": str(root),
+        "default_checkpoint_id": options[0].id if options else None,
+        "checkpoint_count": len(rows),
+        "summary": {
+            "existing_count": sum(1 for row in rows if row["exists"]),
+            "missing_count": sum(1 for row in rows if not row["exists"]),
+            "tokenizer_ready_count": sum(1 for row in rows if row["tokenizer_exists"]),
+            "ready_count": sum(1 for row in rows if row["status"] == "ready"),
+        },
+        "checkpoints": rows,
+    }
+
+
 def resolve_checkpoint_option(options: list[CheckpointOption], selector: str | None = None) -> CheckpointOption:
     if not options:
         raise ValueError("no checkpoints are configured")
@@ -376,7 +409,7 @@ def create_handler(
         return generators[option.id]
 
     class MiniGPTServerHandler(BaseHTTPRequestHandler):
-        server_version = "MiniGPTServer/0.3"
+        server_version = "MiniGPTServer/0.4"
 
         def do_GET(self) -> None:
             parsed = urlparse(self.path)
@@ -394,6 +427,9 @@ def create_handler(
             if parsed.path == "/api/checkpoints":
                 self._send_json(build_checkpoints_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
                 return
+            if parsed.path == "/api/checkpoint-compare":
+                self._send_json(build_checkpoint_compare_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
+                return
             if parsed.path == "/api/model-info":
                 selector = _query_value(parsed.query, "checkpoint")
                 try:
@@ -401,7 +437,7 @@ def create_handler(
                 except ValueError as exc:
                     self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
                     return
-                self._send_json(build_model_info_payload(root, option.path, option.tokenizer_path, option.id))
+                self._send_json(build_model_info_payload(_metadata_run_dir(root, option), option.path, option.tokenizer_path, option.id))
                 return
             if parsed.path in {"/", "/playground.html"}:
                 html_path = root / "playground.html"
@@ -594,6 +630,8 @@ def _checkpoint_id(root: Path, path: Path, *, is_default: bool) -> str:
             return _slug(relative.parts[-2])
         return _slug(relative.with_suffix("").as_posix())
     except ValueError:
+        if path.name == "checkpoint.pt" and path.parent.name:
+            return _slug(path.parent.name)
         return _slug(path.stem)
 
 
@@ -621,6 +659,80 @@ def _slug(value: Any) -> str:
     while "--" in slug:
         slug = slug.replace("--", "-")
     return slug or "checkpoint"
+
+
+def _checkpoint_compare_row(root: Path, option: CheckpointOption) -> dict[str, Any]:
+    checkpoint_path = Path(option.path)
+    size_bytes: int | None = None
+    modified_utc: str | None = None
+    if checkpoint_path.exists() and checkpoint_path.is_file():
+        stat = checkpoint_path.stat()
+        size_bytes = stat.st_size
+        modified_utc = datetime.fromtimestamp(stat.st_mtime, timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    metadata_root = _metadata_run_dir(root, option)
+    info = build_model_info_payload(metadata_root, checkpoint_path, option.tokenizer_path, option.id)
+    notes: list[str] = []
+    if not option.exists:
+        notes.append("checkpoint missing")
+    if not option.tokenizer_exists:
+        notes.append("tokenizer missing")
+    if info.get("model_config") is None:
+        notes.append("model config missing")
+    if info.get("dataset_version") is None:
+        notes.append("dataset version missing")
+    status = "ready" if option.exists and option.tokenizer_exists else "incomplete"
+    return {
+        **option.to_dict(),
+        "status": status,
+        "size_bytes": size_bytes,
+        "modified_utc": modified_utc,
+        "metadata_run_dir": str(metadata_root),
+        "model_info_endpoint": f"/api/model-info?checkpoint={option.id}",
+        "tokenizer": info.get("tokenizer"),
+        "parameter_count": info.get("parameter_count"),
+        "dataset_version": info.get("dataset_version"),
+        "dataset_fingerprint": info.get("dataset_fingerprint"),
+        "model_config": info.get("model_config"),
+        "artifact_count": info.get("artifact_count"),
+        "notes": notes,
+    }
+
+
+def _attach_checkpoint_deltas(row: dict[str, Any], baseline: dict[str, Any] | None) -> None:
+    if baseline is None:
+        row["size_delta_bytes"] = None
+        row["parameter_delta"] = None
+        row["same_tokenizer"] = None
+        row["same_dataset_version"] = None
+        row["same_dataset_fingerprint"] = None
+        row["same_model_config"] = None
+        return
+    row["size_delta_bytes"] = _numeric_delta(row.get("size_bytes"), baseline.get("size_bytes"))
+    row["parameter_delta"] = _numeric_delta(row.get("parameter_count"), baseline.get("parameter_count"))
+    row["same_tokenizer"] = _same_known(row.get("tokenizer"), baseline.get("tokenizer"))
+    row["same_dataset_version"] = _same_known(row.get("dataset_version"), baseline.get("dataset_version"))
+    row["same_dataset_fingerprint"] = _same_known(row.get("dataset_fingerprint"), baseline.get("dataset_fingerprint"))
+    row["same_model_config"] = _same_known(row.get("model_config"), baseline.get("model_config"))
+
+
+def _metadata_run_dir(root: Path, option: CheckpointOption) -> Path:
+    checkpoint_parent = Path(option.path).parent
+    metadata_files = ("run_manifest.json", "train_config.json", "dataset_version.json")
+    if checkpoint_parent != root and any((checkpoint_parent / name).exists() for name in metadata_files):
+        return checkpoint_parent
+    return root
+
+
+def _numeric_delta(value: Any, baseline: Any) -> int | float | None:
+    if isinstance(value, (int, float)) and isinstance(baseline, (int, float)):
+        return value - baseline
+    return None
+
+
+def _same_known(value: Any, baseline: Any) -> bool | None:
+    if value is None or baseline is None:
+        return None
+    return value == baseline
 
 
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:

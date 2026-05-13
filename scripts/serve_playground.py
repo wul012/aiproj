@@ -61,6 +61,7 @@ def main() -> None:
     print(f"run_dir={args.run_dir}", flush=True)
     print(f"model_info={url}api/model-info", flush=True)
     print(f"checkpoints={url}api/checkpoints", flush=True)
+    print(f"checkpoint_compare={url}api/checkpoint-compare", flush=True)
     print(f"checkpoint_count={len(checkpoint_options)}", flush=True)
     print(f"request_log={args.request_log or args.run_dir / 'inference_requests.jsonl'}", flush=True)
     print(f"safety={safety.to_dict()}", flush=True)
