@@ -90,6 +90,9 @@ b/53/解释/说明.md
 b/54/图片
 b/54/解释/说明.md
  -> v54 dataset cards 的运行截图和解释
+b/55/图片
+b/55/解释/说明.md
+ -> v55 streaming playground generation 的运行截图和解释
 ```
 
 写入规则：

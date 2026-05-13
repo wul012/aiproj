@@ -9,7 +9,7 @@ import mimetypes
 from pathlib import Path
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from typing import Any, Callable
+from typing import Any, Callable, Iterator
 from urllib.parse import parse_qs, unquote, urlparse
 
 from .playground import write_playground
@@ -85,6 +85,20 @@ class GenerationResponse:
         return asdict(self)
 
 
+@dataclass(frozen=True)
+class GenerationStreamChunk:
+    index: int
+    token_id: int | None
+    text: str
+    generated: str
+    continuation: str
+    checkpoint: str
+    tokenizer: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
 class MiniGPTGenerator:
     def __init__(
         self,
@@ -130,6 +144,35 @@ class MiniGPTGenerator:
             checkpoint=str(self.checkpoint_path),
             tokenizer=getattr(tokenizer, "name", "unknown"),
         )
+
+    def stream(self, request: GenerationRequest) -> Iterator[GenerationStreamChunk]:
+        torch, model, tokenizer = self._load()
+        prompt_ids = tokenizer.encode(request.prompt)
+        if not prompt_ids:
+            raise ValueError("prompt produced no token ids")
+        if len(prompt_ids) > model.config.block_size:
+            prompt_ids = prompt_ids[-model.config.block_size :]
+        if request.seed is not None:
+            torch.manual_seed(request.seed)
+            if self._device(torch).type == "cuda":
+                torch.cuda.manual_seed_all(request.seed)
+
+        idx = torch.tensor([prompt_ids], dtype=torch.long, device=self._device(torch))
+        for index in range(request.max_new_tokens):
+            next_idx = model.sample_next(idx, temperature=request.temperature, top_k=request.top_k)
+            idx = torch.cat((idx, next_idx), dim=1)
+            token_id = int(next_idx[0, 0].item())
+            generated = tokenizer.decode(idx[0].tolist())
+            continuation = generated[len(request.prompt) :] if generated.startswith(request.prompt) else generated
+            yield GenerationStreamChunk(
+                index=index,
+                token_id=token_id,
+                text=tokenizer.decode([token_id]),
+                generated=generated,
+                continuation=continuation,
+                checkpoint=str(self.checkpoint_path),
+                tokenizer=getattr(tokenizer, "name", "unknown"),
+            )
 
     def _load(self) -> tuple[Any, Any, Any]:
         if self._loaded is not None:
@@ -237,6 +280,7 @@ def build_health_payload(
         "sample_lab_exists": (root / "sample_lab" / "sample_lab.json").exists(),
         "model_info_endpoint": "/api/model-info",
         "generate_endpoint": "/api/generate",
+        "generate_stream_endpoint": "/api/generate-stream",
         "generate_pair_endpoint": "/api/generate-pair",
         "generate_pair_artifact_endpoint": "/api/generate-pair-artifact",
         "checkpoints_endpoint": "/api/checkpoints",
@@ -418,6 +462,10 @@ def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
+def sse_message(event: str, data: dict[str, Any]) -> bytes:
+    return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n".encode("utf-8")
+
+
 def write_pair_generation_artifacts(
     run_dir: str | Path,
     payload: dict[str, Any],
@@ -579,6 +627,9 @@ def create_handler(
             if parsed.path == "/api/generate-pair":
                 self._handle_generate_pair()
                 return
+            if parsed.path == "/api/generate-stream":
+                self._handle_generate_stream()
+                return
             if parsed.path != "/api/generate":
                 self._send_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
                 return
@@ -603,6 +654,102 @@ def create_handler(
             payload = response.to_dict()
             payload["checkpoint_id"] = option.id
             self._send_json(payload)
+
+        def _handle_generate_stream(self) -> None:
+            request: GenerationRequest | None = None
+            option: CheckpointOption | None = None
+            response: GenerationResponse | None = None
+            chunk_count = 0
+            stream_open = False
+            try:
+                payload = self._read_json_body()
+                request = parse_generation_request(payload, safety)
+                option = resolve_checkpoint_option(checkpoint_options, request.checkpoint)
+                if not option.exists:
+                    raise ValueError(f"checkpoint does not exist: {option.id}")
+                self._send_sse_headers()
+                stream_open = True
+                self._write_sse(
+                    "start",
+                    {
+                        "prompt": request.prompt,
+                        "max_new_tokens": request.max_new_tokens,
+                        "temperature": request.temperature,
+                        "top_k": request.top_k,
+                        "seed": request.seed,
+                        "checkpoint_id": option.id,
+                        "checkpoint": option.path,
+                    },
+                )
+                generated = request.prompt
+                continuation = ""
+                tokenizer = "unknown"
+                checkpoint_path = option.path
+                for chunk in generator_for(option).stream(request):
+                    chunk_count += 1
+                    chunk_payload = chunk.to_dict()
+                    chunk_payload["checkpoint_id"] = option.id
+                    generated = chunk.generated
+                    continuation = chunk.continuation
+                    tokenizer = chunk.tokenizer
+                    checkpoint_path = chunk.checkpoint
+                    self._write_sse("token", chunk_payload)
+                response = GenerationResponse(
+                    prompt=request.prompt,
+                    generated=generated,
+                    continuation=continuation,
+                    max_new_tokens=request.max_new_tokens,
+                    temperature=request.temperature,
+                    top_k=request.top_k,
+                    seed=request.seed,
+                    checkpoint=checkpoint_path,
+                    tokenizer=tokenizer,
+                    checkpoint_id=option.id,
+                )
+                self._write_sse(
+                    "end",
+                    {
+                        "done": True,
+                        "chunk_count": chunk_count,
+                        "response": response.to_dict(),
+                    },
+                )
+            except ValueError as exc:
+                self._log_generation(
+                    "bad_request",
+                    request=request,
+                    checkpoint_option=option,
+                    error=str(exc),
+                    endpoint="/api/generate-stream",
+                )
+                if stream_open:
+                    self._write_sse("error", {"error": str(exc)})
+                else:
+                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                return
+            except Exception as exc:
+                self._log_generation(
+                    "error",
+                    request=request,
+                    response=response,
+                    checkpoint_option=option,
+                    error=str(exc),
+                    endpoint="/api/generate-stream",
+                    stream_chunks=chunk_count,
+                )
+                if stream_open:
+                    self._write_sse("error", {"error": str(exc)})
+                else:
+                    self._send_json({"error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+            self._log_generation(
+                "ok",
+                request=request,
+                response=response,
+                checkpoint_option=option,
+                endpoint="/api/generate-stream",
+                stream_chunks=chunk_count,
+            )
 
         def _handle_generate_pair(self, *, save_artifact: bool = False) -> None:
             endpoint = "/api/generate-pair-artifact" if save_artifact else "/api/generate-pair"
@@ -704,9 +851,11 @@ def create_handler(
             response: GenerationResponse | None = None,
             checkpoint_option: CheckpointOption | None = None,
             error: str | None = None,
+            endpoint: str = "/api/generate",
+            stream_chunks: int | None = None,
         ) -> None:
             event: dict[str, Any] = {
-                "endpoint": "/api/generate",
+                "endpoint": endpoint,
                 "status": status,
                 "client": self.client_address[0] if self.client_address else None,
                 "checkpoint": checkpoint_option.path if checkpoint_option is not None else str(checkpoint),
@@ -727,6 +876,8 @@ def create_handler(
                 event["generated_chars"] = len(response.generated)
                 event["continuation_chars"] = len(response.continuation)
                 event["tokenizer"] = response.tokenizer
+            if stream_chunks is not None:
+                event["stream_chunks"] = stream_chunks
             if error is not None:
                 event["error"] = error
             append_inference_log(request_log, event)
@@ -790,6 +941,19 @@ def create_handler(
             self.send_header("Access-Control-Allow-Headers", "Content-Type")
             self.end_headers()
             self.wfile.write(body)
+
+        def _send_sse_headers(self) -> None:
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Content-Type", "text/event-stream; charset=utf-8")
+            self.send_header("Cache-Control", "no-cache")
+            self.send_header("Connection", "close")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.end_headers()
+
+        def _write_sse(self, event: str, data: dict[str, Any]) -> None:
+            self.wfile.write(sse_message(event, data))
+            self.wfile.flush()
 
         def _send_file(self, path: Path) -> None:
             body = path.read_bytes()

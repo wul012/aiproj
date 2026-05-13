@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.server import (
     GenerationResponse,
+    GenerationStreamChunk,
     InferenceSafetyProfile,
     append_inference_log,
     build_checkpoint_compare_payload,
@@ -24,6 +25,7 @@ from minigpt.server import (
     discover_checkpoint_options,
     parse_generation_pair_request,
     parse_generation_request,
+    sse_message,
 )
 from http.server import ThreadingHTTPServer
 
@@ -44,6 +46,22 @@ class StubGenerator:
             checkpoint=self.checkpoint,
             tokenizer="stub",
         )
+
+    def stream(self, request):
+        generated = request.prompt
+        continuation = ""
+        for index, text in enumerate(["::", "generated"]):
+            generated += text
+            continuation += text
+            yield GenerationStreamChunk(
+                index=index,
+                token_id=100 + index,
+                text=text,
+                generated=generated,
+                continuation=continuation,
+                checkpoint=self.checkpoint,
+                tokenizer="stub",
+            )
 
 
 class ServerTests(unittest.TestCase):
@@ -232,6 +250,11 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(record["status"], "ok")
             self.assertIn("timestamp", record)
 
+    def test_sse_message_formats_event_and_json_data(self) -> None:
+        message = sse_message("token", {"text": "中", "index": 1}).decode("utf-8")
+
+        self.assertEqual(message, 'event: token\ndata: {"text": "中", "index": 1}\n\n')
+
     def test_http_health_and_generate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = Path(tmp)
@@ -249,6 +272,7 @@ class ServerTests(unittest.TestCase):
                 self.assertTrue(health["checkpoint_exists"])
                 self.assertEqual(health["safety"]["max_new_tokens"], 512)
                 self.assertEqual(health["default_checkpoint_id"], "default")
+                self.assertEqual(health["generate_stream_endpoint"], "/api/generate-stream")
                 self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
                 self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
                 self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
@@ -284,6 +308,39 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(log_record["prompt_chars"], 3)
                 self.assertEqual(log_record["checkpoint_id"], "candidate")
                 self.assertEqual(log_record["requested_checkpoint"], "candidate")
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=5)
+
+    def test_http_generate_stream_sends_sse_events(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            (run_dir / "checkpoint.pt").write_bytes(b"fake")
+            handler = create_handler(run_dir, device="cpu", generator_factory=StubGenerator)
+            server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            base = f"http://127.0.0.1:{server.server_port}"
+            try:
+                body, content_type = _post_raw(
+                    base + "/api/generate-stream",
+                    {"prompt": "abc", "max_new_tokens": 5, "temperature": 0.8, "top_k": 0, "seed": 7},
+                )
+
+                self.assertTrue(content_type.startswith("text/event-stream"))
+                events = _parse_sse(body)
+                self.assertEqual([event["event"] for event in events], ["start", "token", "token", "end"])
+                self.assertEqual(events[0]["data"]["prompt"], "abc")
+                self.assertEqual(events[1]["data"]["text"], "::")
+                self.assertEqual(events[2]["data"]["generated"], "abc::generated")
+                self.assertEqual(events[-1]["data"]["chunk_count"], 2)
+                self.assertEqual(events[-1]["data"]["response"]["generated"], "abc::generated")
+                log_record = json.loads((run_dir / "inference_requests.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+                self.assertEqual(log_record["endpoint"], "/api/generate-stream")
+                self.assertEqual(log_record["status"], "ok")
+                self.assertEqual(log_record["stream_chunks"], 2)
+                self.assertEqual(log_record["generated_chars"], len("abc::generated"))
             finally:
                 server.shutdown()
                 server.server_close()
@@ -392,6 +449,27 @@ def _post_json(url: str, payload: dict) -> dict:
     request = Request(url, data=body, method="POST", headers={"Content-Type": "application/json"})
     with urlopen(request, timeout=5) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def _post_raw(url: str, payload: dict) -> tuple[str, str]:
+    body = json.dumps(payload).encode("utf-8")
+    request = Request(url, data=body, method="POST", headers={"Content-Type": "application/json"})
+    with urlopen(request, timeout=5) as response:
+        return response.read().decode("utf-8"), response.headers.get("Content-Type", "")
+
+
+def _parse_sse(body: str) -> list[dict]:
+    events = []
+    for block in body.strip().split("\n\n"):
+        event_name = "message"
+        data = None
+        for line in block.splitlines():
+            if line.startswith("event:"):
+                event_name = line.partition(":")[2].strip()
+            if line.startswith("data:"):
+                data = json.loads(line.partition(":")[2].strip())
+        events.append({"event": event_name, "data": data})
+    return events
 
 
 if __name__ == "__main__":

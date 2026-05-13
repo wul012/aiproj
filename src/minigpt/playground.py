@@ -578,21 +578,69 @@ async function generateLive() {{
     seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
   }};
   if (checkpoint) payload.checkpoint = checkpoint.id;
-  output.textContent = 'Generating...';
+  output.textContent = '';
   try {{
-    const response = await fetch('/api/generate', {{
+    const response = await fetch('/api/generate-stream', {{
       method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
       body: JSON.stringify(payload),
     }});
-    const data = await response.json();
     if (!response.ok) {{
+      const data = await response.json();
       output.textContent = data.error || 'Generation failed';
       return;
     }}
-    output.textContent = data.generated || data.continuation || '';
+    if (!response.body) {{
+      output.textContent = 'Streaming response is unavailable in this browser.';
+      return;
+    }}
+    await readGenerationStream(response, output);
   }} catch (error) {{
     output.textContent = 'Start scripts/serve_playground.py to use live generation.';
+  }}
+}}
+async function readGenerationStream(response, output) {{
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder('utf-8');
+  let buffer = '';
+  let generated = '';
+  while (true) {{
+    const result = await reader.read();
+    if (result.done) break;
+    buffer += decoder.decode(result.value, {{stream: true}});
+    const parts = buffer.split('\\n\\n');
+    buffer = parts.pop() || '';
+    for (const part of parts) {{
+      const event = parseSseEvent(part);
+      if (!event) continue;
+      if (event.name === 'start') {{
+        generated = event.data.prompt || '';
+        output.textContent = generated;
+      }} else if (event.name === 'token') {{
+        generated = event.data.generated || (generated + (event.data.text || ''));
+        output.textContent = generated;
+      }} else if (event.name === 'end') {{
+        const finalResponse = event.data.response || {{}};
+        output.textContent = finalResponse.generated || generated;
+      }} else if (event.name === 'error') {{
+        output.textContent = event.data.error || 'Generation failed';
+      }}
+    }}
+  }}
+}}
+function parseSseEvent(block) {{
+  const lines = block.split('\\n');
+  let name = 'message';
+  const dataLines = [];
+  for (const line of lines) {{
+    if (line.startsWith('event:')) name = line.slice(6).trim();
+    if (line.startsWith('data:')) dataLines.push(line.slice(5).trimStart());
+  }}
+  if (!dataLines.length) return null;
+  try {{
+    return {{name, data: JSON.parse(dataLines.join('\\n'))}};
+  }} catch (error) {{
+    return null;
   }}
 }}
 function renderPairArtifact(artifact) {{
@@ -716,7 +764,7 @@ def _live_section() -> str:
 <section class="panel">
   <div class="live-actions">
     <label><span class="label">Checkpoint</span><select id="checkpointSelect"><option value="">default</option></select></label>
-    <button id="liveGenerateButton" type="button">Generate</button>
+    <button id="liveGenerateButton" type="button">Stream Generate</button>
     <output id="checkpointStatus">Checkpoint selector loads from /api/checkpoints.</output>
   </div>
   <pre id="liveOutput" class="output"></pre>

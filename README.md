@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 54 is a MiniGPT learning project with dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 55 is a MiniGPT learning project with streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -51,7 +51,8 @@ Version 54 is a MiniGPT learning project with dataset cards, cross-run benchmark
 - Model report script that exports parameter groups, per-block parameter counts, tensor shapes, JSON reports, and SVG architecture diagrams
 - Dashboard builder that combines run artifacts, eval suites, dataset reports, dataset quality reports, and run manifests into a local `dashboard.html` report
 - Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, eval suites, run manifests, dataset quality reports, and artifact links
-- Playground server that serves the UI and exposes `/api/health`, `/api/checkpoints`, `/api/checkpoint-compare`, `/api/model-info`, `/api/generate`, `/api/generate-pair`, and `/api/generate-pair-artifact` for local live generation
+- Playground server that serves the UI and exposes `/api/health`, `/api/checkpoints`, `/api/checkpoint-compare`, `/api/model-info`, `/api/generate`, `/api/generate-stream`, `/api/generate-pair`, and `/api/generate-pair-artifact` for local live generation
+- Streaming generation endpoint `/api/generate-stream` with Server-Sent Events (`start`, `token`, `end`, `error`), per-token sampling through `MiniGPT.sample_next`, checkpoint-aware routing, JSONL request logging, and a playground `Stream Generate` button
 - Local inference safety profile for prompt length, generated token count, temperature, top-k, request body size, and JSONL request logging
 - Checkpoint selector API with `/api/checkpoints`, `checkpoint` request selection for `/api/generate`, checkpoint-aware `/api/model-info`, and a playground dropdown for live generation
 - Checkpoint comparison API with `/api/checkpoint-compare`, file-size/model/dataset deltas, model-info shortcuts, and a playground table for choosing candidate checkpoints
@@ -74,8 +75,8 @@ Version 54 is a MiniGPT learning project with dataset cards, cross-run benchmark
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, streaming generation, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -138,6 +139,7 @@ v51.0.0 MiniGPT v51 benchmark rubric scoring
 v52.0.0 MiniGPT v52 registry benchmark rubric tracking
 v53.0.0 MiniGPT v53 benchmark scorecard comparison
 v54.0.0 MiniGPT v54 dataset cards
+v55.0.0 MiniGPT v55 streaming playground generation
 ```
 
 ## Project structure
@@ -282,35 +284,8 @@ v54.0.0 MiniGPT v54 dataset cards
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   ├── 34/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   ├── 35/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   ├── 36/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   ├── 37/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   ├── 38/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   ├── 39/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   ├── 40/
-│   │   ├── 图片/
-│   │   └── 解释/
-│   │       └── 说明.md
-│   └── 41/
+│   ├── ...
+│   └── 55/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -561,7 +536,9 @@ Serve the playground with a local generation API:
 python scripts/serve_playground.py --run-dir runs/minigpt --device cpu --max-prompt-chars 2000 --max-new-tokens-limit 512 --checkpoint-candidate runs/minigpt-wide/checkpoint.pt
 ```
 
-The local server exposes `/api/health`, `/api/checkpoints`, `/api/checkpoint-compare`, `/api/model-info`, `/api/generate`, `/api/generate-pair`, and `/api/generate-pair-artifact`. Generation requests are checked against the inference safety profile (`max_prompt_chars`, `max_new_tokens`, temperature range, `max_top_k`, and `max_body_bytes`) and are recorded in `inference_requests.jsonl` by default. The playground dropdown reads `/api/checkpoints`, sends `checkpoint` in `/api/generate`, asks `/api/model-info?checkpoint=<id>` for the selected checkpoint, renders `/api/checkpoint-compare` as a quick comparison table with model-info shortcuts, sends left/right checkpoint ids to `/api/generate-pair` for side-by-side outputs, and uses `Generate & Save Pair` to write `pair_generations/*.json` plus `pair_generations/*.html` evidence through `/api/generate-pair-artifact`.
+The local server exposes `/api/health`, `/api/checkpoints`, `/api/checkpoint-compare`, `/api/model-info`, `/api/generate`, `/api/generate-stream`, `/api/generate-pair`, and `/api/generate-pair-artifact`. Generation requests are checked against the inference safety profile (`max_prompt_chars`, `max_new_tokens`, temperature range, `max_top_k`, and `max_body_bytes`) and are recorded in `inference_requests.jsonl` by default. The playground dropdown reads `/api/checkpoints`, sends `checkpoint` in `/api/generate-stream`, asks `/api/model-info?checkpoint=<id>` for the selected checkpoint, renders `/api/checkpoint-compare` as a quick comparison table with model-info shortcuts, sends left/right checkpoint ids to `/api/generate-pair` for side-by-side outputs, and uses `Generate & Save Pair` to write `pair_generations/*.json` plus `pair_generations/*.html` evidence through `/api/generate-pair-artifact`.
+
+The streaming endpoint returns `text/event-stream` records with `start`, one or more `token`, and final `end` events. Each token event carries the sampled token id, decoded text, accumulated generated text, continuation text, checkpoint, tokenizer, and checkpoint id. `/api/generate` remains available for clients that want the whole JSON response at once.
 
 Run fixed prompt pair-generation batches across two checkpoints:
 
@@ -1267,6 +1244,14 @@ Version 54 screenshots:
 - `04-playwright-dataset-card-html.png`: generated dataset card HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v54 docs, b/54 archive, and project-maturity explanation check
 
+Version 55 screenshots:
+
+- `01-unit-tests.png`: streaming generation, playground stream UI, model sampling helper, compile check, and full regression tests
+- `02-streaming-api-smoke.png`: local HTTP smoke for `/api/generate-stream`, SSE event order, final response, health endpoint, and request log
+- `03-streaming-structure-check.png`: source/test/docs structure check for `sample_next`, `GenerationStreamChunk`, `/api/generate-stream`, playground stream reader, and v55 docs
+- `04-playwright-streaming-playground.png`: generated playground opened through Playwright with installed Google Chrome, showing the stream generation control
+- `05-docs-check.png`: v55 docs, b/55 archive, and project-maturity explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1369,6 +1354,7 @@ Project-maturity records start at v48:
 67-v52-registry-benchmark-rubric-tracking.md
 68-v53-benchmark-scorecard-comparison.md
 69-v54-dataset-cards.md
+70-v55-streaming-generation.md
 ```
 
 ## Learning map
@@ -1394,7 +1380,9 @@ The sampling lab compares how generation changes when temperature, top-k, and se
 
 The playground UI turns a run directory into a local browser surface for prompt controls, command snippets, sampling tables, and artifact links.
 
-The playground server turns that browser surface into a local API client for `/api/health`, `/api/checkpoints`, `/api/checkpoint-compare`, `/api/model-info`, `/api/generate`, `/api/generate-pair`, and `/api/generate-pair-artifact`, with local request limits, selected checkpoint routing, side-by-side generation, checkpoint comparison shortcuts, saved pair artifacts, and JSONL inference logs.
+The playground server turns that browser surface into a local API client for `/api/health`, `/api/checkpoints`, `/api/checkpoint-compare`, `/api/model-info`, `/api/generate`, `/api/generate-stream`, `/api/generate-pair`, and `/api/generate-pair-artifact`, with local request limits, selected checkpoint routing, streaming token events, side-by-side generation, checkpoint comparison shortcuts, saved pair artifacts, and JSONL inference logs.
+
+The streaming generation layer splits the MiniGPT autoregressive loop into `sample_next`, sends Server-Sent Events for `start/token/end/error`, and lets the playground update output text as tokens arrive while keeping the older one-shot JSON endpoint intact.
 
 The checkpoint comparison layer turns selectable checkpoints into a small local comparison table with file status, tokenizer readiness, parameter/dataset deltas, model-info links, and one-click selection inside the playground.
 
@@ -1461,5 +1449,5 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add streaming token output for the playground server.
+- Add cancellation and timeout handling for streaming generation requests.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

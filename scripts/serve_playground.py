@@ -60,6 +60,7 @@ def main() -> None:
     print(f"serving={url}", flush=True)
     print(f"run_dir={args.run_dir}", flush=True)
     print(f"model_info={url}api/model-info", flush=True)
+    print(f"generate_stream={url}api/generate-stream", flush=True)
     print(f"generate_pair={url}api/generate-pair", flush=True)
     print(f"generate_pair_artifact={url}api/generate-pair-artifact", flush=True)
     print(f"checkpoints={url}api/checkpoints", flush=True)

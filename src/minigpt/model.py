@@ -129,6 +129,27 @@ class MiniGPT(nn.Module):
         return logits, loss
 
     @torch.no_grad()
+    def sample_next(
+        self,
+        idx: torch.Tensor,
+        temperature: float = 1.0,
+        top_k: int | None = None,
+    ) -> torch.Tensor:
+        if temperature <= 0:
+            raise ValueError("temperature must be greater than 0")
+
+        idx_cond = idx[:, -self.config.block_size :]
+        logits, _ = self(idx_cond)
+        logits = logits[:, -1, :] / temperature
+
+        if top_k is not None:
+            top_values, _ = torch.topk(logits, min(top_k, logits.size(-1)))
+            logits[logits < top_values[:, [-1]]] = -float("inf")
+
+        probs = F.softmax(logits, dim=-1)
+        return torch.multinomial(probs, num_samples=1)
+
+    @torch.no_grad()
     def generate(
         self,
         idx: torch.Tensor,
@@ -140,16 +161,7 @@ class MiniGPT(nn.Module):
             raise ValueError("temperature must be greater than 0")
 
         for _ in range(max_new_tokens):
-            idx_cond = idx[:, -self.config.block_size :]
-            logits, _ = self(idx_cond)
-            logits = logits[:, -1, :] / temperature
-
-            if top_k is not None:
-                top_values, _ = torch.topk(logits, min(top_k, logits.size(-1)))
-                logits[logits < top_values[:, [-1]]] = -float("inf")
-
-            probs = F.softmax(logits, dim=-1)
-            next_idx = torch.multinomial(probs, num_samples=1)
+            next_idx = self.sample_next(idx, temperature=temperature, top_k=top_k)
             idx = torch.cat((idx, next_idx), dim=1)
         return idx
 
