@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 36 is a MiniGPT learning project with dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 37 is a MiniGPT learning project with baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -43,7 +43,8 @@ Version 36 is a MiniGPT learning project with dataset version manifests and brow
 - Dashboard builder that combines run artifacts, eval suites, dataset reports, dataset quality reports, and run manifests into a local `dashboard.html` report
 - Playground builder that creates a local `playground.html` UI for prompt controls, command generation, sampling tables, eval suites, run manifests, dataset quality reports, and artifact links
 - Playground server that serves the UI and exposes `/api/health` plus `/api/generate` for local live generation
-- Run comparison script that compares multiple experiments and exports JSON/CSV/SVG summaries
+- Run comparison script that compares multiple experiments and exports JSON/CSV/SVG/Markdown/HTML summaries
+- Baseline model comparison layer with explicit baseline selection, best-val/eval/perplexity/parameter deltas, model signatures, dataset version checks, and recommendations
 - Run registry script that discovers or accepts run directories and exports registry JSON/CSV/SVG/HTML summaries
 - Sampling lab script that compares generation under multiple `temperature`, `top_k`, and `seed` settings
 - Chat prompt utilities for formatting system/user/assistant turns, trimming context windows, and stopping at role markers
@@ -56,8 +57,8 @@ Version 36 is a MiniGPT learning project with dataset version manifests and brow
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, baseline model comparison reports, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -102,6 +103,7 @@ v33.0.0 MiniGPT v33 release gate profile delta explanations
 v34.0.0 MiniGPT v34 configurable release gate delta baseline
 v35.0.0 MiniGPT v35 benchmark eval suite metadata
 v36.0.0 MiniGPT v36 dataset version manifests
+v37.0.0 MiniGPT v37 baseline model comparison
 ```
 
 ## Project structure
@@ -254,7 +256,11 @@ v36.0.0 MiniGPT v36 dataset version manifests
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 36/
+│   ├── 36/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 37/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -352,7 +358,8 @@ v36.0.0 MiniGPT v36 dataset version manifests
 ├── 代码讲解记录_评估基准阶段/
 │   ├── README.md
 │   ├── 50-v35-benchmark-eval-suite.md
-│   └── 51-v36-dataset-versioning.md
+│   ├── 51-v36-dataset-versioning.md
+│   └── 52-v37-baseline-model-comparison.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -503,8 +510,10 @@ python scripts/serve_playground.py --run-dir runs/minigpt --device cpu
 Compare multiple run directories:
 
 ```powershell
-python scripts/compare_runs.py runs/tiny runs/wide --name tiny --name wide --out-dir runs/comparison
+python scripts/compare_runs.py runs/tiny runs/wide --name tiny --name wide --baseline tiny --out-dir runs/comparison
 ```
+
+The output directory contains `comparison.json`, `comparison.csv`, `comparison.svg`, `comparison.md`, and `comparison.html`. `--baseline` can be a run name, run path, or 1-based index; when omitted, the first run is the baseline.
 
 Build a run registry from multiple run directories:
 
@@ -728,6 +737,8 @@ b/35/图片
 b/35/解释/说明.md
 b/36/图片
 b/36/解释/说明.md
+b/37/图片
+b/37/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -1018,6 +1029,14 @@ Version 36 screenshots:
 - `04-playwright-dataset-version.png`: dataset version HTML report opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v36 docs, b/36 archive, and evaluation-benchmark explanation check
 
+Version 37 screenshots:
+
+- `01-unit-tests.png`: baseline model comparison tests plus existing regression tests
+- `02-baseline-comparison-smoke.png`: three fixture runs compared with `baseline-char` as the selected baseline
+- `03-baseline-comparison-structure-check.png`: JSON/CSV/SVG/Markdown/HTML baseline delta fields verified
+- `04-playwright-baseline-comparison.png`: comparison HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v37 docs, b/37 archive, and evaluation-benchmark explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1096,6 +1115,7 @@ Evaluation-benchmark records start at v35:
 代码讲解记录_评估基准阶段/
 50-v35-benchmark-eval-suite.md
 51-v36-dataset-versioning.md
+52-v37-baseline-model-comparison.md
 ```
 
 ## Learning map
@@ -1115,7 +1135,7 @@ The model report shows where parameters live and how tensor shapes move through 
 
 The dashboard turns those artifacts into one local HTML report that can be opened without a server.
 
-The comparison exporter reads multiple run directories and makes side-by-side experiment summaries.
+The comparison exporter reads multiple run directories, selects a baseline, and makes side-by-side model summaries with validation-loss, evaluation-loss, perplexity, parameter, tokenizer, model-signature, and dataset-version deltas.
 
 The sampling lab compares how generation changes when temperature, top-k, and seed change.
 
@@ -1162,7 +1182,7 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Add baseline model comparison across tokenizer, model size, and training steps.
 - Add dataset cards that summarize intended use, source limits, quality status, and version history.
+- Add local inference API hardening around request limits, logging, and checkpoint selection.
 - Add streaming token output for the playground server.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

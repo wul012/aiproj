@@ -1,6 +1,6 @@
 # MiniGPT 代码讲解记录_评估基准阶段
 
-本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v36 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集和稳定数据版本比较”。
+本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v37 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本和 baseline model comparison 比较”。
 
 ## 写入规则
 
@@ -9,6 +9,7 @@
 ```text
 50-v35-benchmark-eval-suite.md
 51-v36-dataset-versioning.md
+52-v37-baseline-model-comparison.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -28,7 +29,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v36，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理到 benchmark prompt suite 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
+截至 v37，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite 到 baseline model comparison 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
 
 ```text
 同一个 checkpoint 在固定任务集上表现如何？
@@ -45,7 +46,7 @@ eval prompts
  -> eval suite JSON/CSV/SVG/HTML
  -> generation quality analysis
  -> registry / dashboard / playground artifact links
- -> later baseline model comparison
+ -> baseline model comparison
 ```
 
 ## 后续讲解索引
@@ -55,9 +56,11 @@ eval prompts
  -> 第三十五版代码讲解：把 fixed prompt eval suite 升级成带任务类型、难度、预期行为和 HTML 报告的 benchmark prompt suite
 51-v36-dataset-versioning.md
  -> 第三十六版代码讲解：给 prepared corpus 增加 dataset id、version manifest、HTML 报告和下游 artifact 链路
+52-v37-baseline-model-comparison.md
+ -> 第三十七版代码讲解：给 compare_runs 增加 baseline、模型签名、loss/参数 delta、Markdown/HTML 报告和截图证据
 ```
 
-后续推进 v37 时，在这里继续追加 `52-v37-主题.md`。
+后续推进 v38 时，在这里继续追加 `53-v38-主题.md`。
 
 ## 一句话总览
 
