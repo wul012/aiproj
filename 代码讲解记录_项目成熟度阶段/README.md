@@ -16,6 +16,7 @@
 registry 能显示多 run 正确性排名之后，能否进一步解释分数为什么变了、具体退化在哪个 case？
 已有 dataset version 和 quality report 之后，能否给人一张说明用途、来源、限制和质量状态的数据卡？
 本地 playground 已经能同步生成之后，能否把真实 autoregressive 采样拆成可流式消费的 token 事件？
+流式生成可用之后，能否补上超时边界、取消控制和可追溯日志，避免本地推理体验停在演示层？
 ```
 
 ## 写入规则
@@ -51,7 +52,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v54，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison 到 dataset cards 的完整学习型 AI 工程链路。
+截至 v56，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理，到流式超时与取消控制的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 

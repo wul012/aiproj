@@ -6,7 +6,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 Version 56 is a MiniGPT learning project with streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
-- Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
+- Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and current `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
 - Optional character-seeded BPE tokenizer for understanding subword merge rules
 - Tokenizer inspection script for comparing char and BPE tokenization
@@ -1271,7 +1271,7 @@ Start here:
 代码讲解记录_评估基准阶段/README.md
 ```
 
-The original `代码讲解记录` directory keeps the v1-v30 history in place. v31-v34 release-governance records live in `代码讲解记录_发布治理阶段`; v35 and later benchmark/evaluation records start in `代码讲解记录_评估基准阶段` so the project can split future phases without moving old evidence.
+The original `代码讲解记录` directory keeps the v1-v30 history in place. v31-v34 release-governance records live in `代码讲解记录_发布治理阶段`; v35-v47 benchmark/evaluation records live in `代码讲解记录_评估基准阶段`; v48 and later project-maturity records live in `代码讲解记录_项目成熟度阶段` so each phase can keep growing without moving old evidence.
 
 First-stage reading order:
 
