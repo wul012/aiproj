@@ -26,24 +26,28 @@ def build_benchmark_scorecard(
     pair_batch = _read_json(root / "pair_batch" / "pair_generation_batch.json", warnings)
     registry = _read_json(Path(registry_path), warnings) if registry_path is not None else None
 
+    case_scores = _case_scores(eval_suite, generation_quality, pair_batch)
+    rubric_scores = _rubric_scores(case_scores)
+    case_scores = _case_scores_with_rubric(case_scores, rubric_scores)
     components = [
         _eval_coverage_component(eval_suite, root / "eval_suite" / "eval_suite.json"),
         _generation_quality_component(generation_quality),
+        _rubric_correctness_component(rubric_scores),
         _pair_consistency_component(pair_batch, root / "pair_batch" / "pair_generation_batch.json"),
         _pair_delta_stability_component(pair_batch, root / "pair_batch" / "pair_generation_batch.json"),
         _evidence_completeness_component(root),
     ]
-    case_scores = _case_scores(eval_suite, generation_quality, pair_batch)
     drilldowns = _benchmark_drilldowns(case_scores)
-    summary = _score_summary(components, eval_suite, generation_quality, pair_batch, drilldowns)
+    summary = _score_summary(components, eval_suite, generation_quality, pair_batch, drilldowns, rubric_scores)
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "title": title,
         "generated_at": generated_at or utc_now(),
         "run_dir": str(root),
         "registry_path": str(registry_path) if registry_path is not None else None,
         "summary": summary,
         "components": components,
+        "rubric_scores": rubric_scores,
         "drilldowns": drilldowns,
         "case_scores": case_scores,
         "registry_context": _registry_context(registry, root),
@@ -79,6 +83,10 @@ def write_benchmark_scorecard_drilldown_csv(scorecard: dict[str, Any], path: str
         "score",
         "case_count",
         "coverage_score",
+        "rubric_score",
+        "rubric_pass_count",
+        "rubric_warn_count",
+        "rubric_fail_count",
         "generation_quality_score",
         "pair_consistency_score",
         "pair_delta_stability_score",
@@ -103,9 +111,34 @@ def write_benchmark_scorecard_drilldown_csv(scorecard: dict[str, Any], path: str
             writer.writerow({field: _csv_value(row.get(field)) for field in fieldnames})
 
 
+def write_benchmark_scorecard_rubric_csv(scorecard: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "name",
+        "task_type",
+        "difficulty",
+        "status",
+        "score",
+        "passed_checks",
+        "total_checks",
+        "matched_terms",
+        "missing_terms",
+        "failed_checks",
+        "expected_behavior",
+    ]
+    rows = _list_of_dicts(_dict(scorecard.get("rubric_scores")).get("cases"))
+    with out_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({field: _csv_value(row.get(field)) for field in fieldnames})
+
+
 def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
     summary = _dict(scorecard.get("summary"))
     drilldowns = _dict(scorecard.get("drilldowns"))
+    rubric_scores = _dict(scorecard.get("rubric_scores"))
     lines = [
         f"# {scorecard.get('title', 'MiniGPT benchmark scorecard')}",
         "",
@@ -121,6 +154,9 @@ def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
                 ("Overall score", summary.get("overall_score")),
                 ("Eval cases", summary.get("eval_suite_cases")),
                 ("Generation quality", summary.get("generation_quality_status")),
+                ("Rubric correctness", summary.get("rubric_status")),
+                ("Rubric average", summary.get("rubric_avg_score")),
+                ("Weakest rubric case", summary.get("weakest_rubric_case")),
                 ("Pair batch cases", summary.get("pair_batch_cases")),
                 ("Pair generated differences", summary.get("pair_generated_differences")),
                 ("Task type groups", summary.get("task_type_group_count")),
@@ -151,7 +187,8 @@ def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         )
     lines.extend(_markdown_drilldown_table("Task Type Drilldown", drilldowns.get("task_type")))
     lines.extend(_markdown_drilldown_table("Difficulty Drilldown", drilldowns.get("difficulty")))
-    lines.extend(["", "## Case Scores", "", "| Case | Task | Eval chars | Gen status | Pair delta | Pair equal |", "| --- | --- | ---: | --- | ---: | --- |"])
+    lines.extend(_markdown_rubric_table(rubric_scores.get("cases")))
+    lines.extend(["", "## Case Scores", "", "| Case | Task | Eval chars | Gen status | Rubric | Pair delta | Pair equal |", "| --- | --- | ---: | --- | ---: | ---: | --- |"])
     for case in _list_of_dicts(scorecard.get("case_scores")):
         lines.append(
             "| "
@@ -161,6 +198,7 @@ def render_benchmark_scorecard_markdown(scorecard: dict[str, Any]) -> str:
                     _md(case.get("task_type")),
                     _md(case.get("eval_char_count")),
                     _md(case.get("generation_quality_status")),
+                    _md(case.get("rubric_score")),
                     _md(case.get("pair_generated_char_delta")),
                     _md(case.get("pair_generated_equal")),
                 ]
@@ -185,11 +223,14 @@ def write_benchmark_scorecard_markdown(scorecard: dict[str, Any], path: str | Pa
 def render_benchmark_scorecard_html(scorecard: dict[str, Any]) -> str:
     summary = _dict(scorecard.get("summary"))
     drilldowns = _dict(scorecard.get("drilldowns"))
+    rubric_scores = _dict(scorecard.get("rubric_scores"))
     stats = [
         ("Status", summary.get("overall_status")),
         ("Score", summary.get("overall_score")),
         ("Eval cases", summary.get("eval_suite_cases")),
         ("Gen quality", summary.get("generation_quality_status")),
+        ("Rubric", summary.get("rubric_status")),
+        ("Rubric avg", summary.get("rubric_avg_score")),
         ("Pair cases", summary.get("pair_batch_cases")),
         ("Pair diff", summary.get("pair_generated_differences")),
         ("Max delta", summary.get("max_abs_generated_delta")),
@@ -212,6 +253,7 @@ def render_benchmark_scorecard_html(scorecard: dict[str, Any]) -> str:
             f"<header><h1>{_e(scorecard.get('title', 'MiniGPT benchmark scorecard'))}</h1><p>{_e(scorecard.get('run_dir'))}</p></header>",
             '<section class="stats">' + "".join(_card(label, value) for label, value in stats) + "</section>",
             _component_section(_list_of_dicts(scorecard.get("components"))),
+            _rubric_section(_list_of_dicts(rubric_scores.get("cases"))),
             _drilldown_section("Task Type Drilldown", _list_of_dicts(drilldowns.get("task_type"))),
             _drilldown_section("Difficulty Drilldown", _list_of_dicts(drilldowns.get("difficulty"))),
             _case_section(_list_of_dicts(scorecard.get("case_scores"))),
@@ -238,12 +280,14 @@ def write_benchmark_scorecard_outputs(scorecard: dict[str, Any], out_dir: str | 
         "json": root / "benchmark_scorecard.json",
         "csv": root / "benchmark_scorecard.csv",
         "drilldowns_csv": root / "benchmark_scorecard_drilldowns.csv",
+        "rubric_csv": root / "benchmark_scorecard_rubric.csv",
         "markdown": root / "benchmark_scorecard.md",
         "html": root / "benchmark_scorecard.html",
     }
     write_benchmark_scorecard_json(scorecard, paths["json"])
     write_benchmark_scorecard_csv(scorecard, paths["csv"])
     write_benchmark_scorecard_drilldown_csv(scorecard, paths["drilldowns_csv"])
+    write_benchmark_scorecard_rubric_csv(scorecard, paths["rubric_csv"])
     write_benchmark_scorecard_markdown(scorecard, paths["markdown"])
     write_benchmark_scorecard_html(scorecard, paths["html"])
     return {key: str(value) for key, value in paths.items()}
@@ -257,7 +301,7 @@ def _eval_coverage_component(eval_suite: Any, path: Path) -> dict[str, Any]:
         "eval_coverage",
         "Eval Suite Coverage",
         score,
-        0.2,
+        0.15,
         status,
         str(path),
         f"{int(case_count)} fixed prompt case(s).",
@@ -277,7 +321,7 @@ def _generation_quality_component(report: Any) -> dict[str, Any]:
         "generation_quality",
         "Generation Quality",
         score,
-        0.3,
+        0.2,
         status,
         _as_str(_pick(report, "source_path")) or "generation_quality.json",
         f"{int(pass_count)} pass / {int(warn_count)} warn / {int(fail_count)} fail.",
@@ -291,6 +335,26 @@ def _generation_quality_component(report: Any) -> dict[str, Any]:
     )
 
 
+def _rubric_correctness_component(rubric_scores: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(rubric_scores.get("summary"))
+    case_count = _number(summary.get("case_count")) or 0
+    avg_score = _number(summary.get("avg_score")) or 0
+    return _component(
+        "rubric_correctness",
+        "Rubric Correctness",
+        avg_score,
+        0.25,
+        _status(avg_score) if case_count else "fail",
+        "benchmark_scorecard.rubric_scores",
+        f"{int(summary.get('pass_count') or 0)} pass / {int(summary.get('warn_count') or 0)} warn / {int(summary.get('fail_count') or 0)} fail.",
+        {
+            "case_count": int(case_count),
+            "avg_score": round(avg_score, 2),
+            "weakest_case": summary.get("weakest_case"),
+        },
+    )
+
+
 def _pair_consistency_component(pair_batch: Any, path: Path) -> dict[str, Any]:
     case_count = _number(_pick(pair_batch, "case_count")) or 0
     equal_count = _number(_pick(pair_batch, "generated_equal_count")) or 0
@@ -300,7 +364,7 @@ def _pair_consistency_component(pair_batch: Any, path: Path) -> dict[str, Any]:
         "pair_consistency",
         "Pair Consistency",
         score,
-        0.2,
+        0.15,
         status,
         str(path),
         f"{int(equal_count)} / {int(case_count)} pair generations matched exactly.",
@@ -317,7 +381,7 @@ def _pair_delta_stability_component(pair_batch: Any, path: Path) -> dict[str, An
         "pair_delta_stability",
         "Pair Delta Stability",
         score,
-        0.2,
+        0.15,
         status,
         str(path),
         f"avg abs generated delta={_fmt(avg_delta)}, max abs generated delta={_fmt(max_delta)}.",
@@ -380,11 +444,13 @@ def _score_summary(
     generation_quality: Any,
     pair_batch: Any,
     drilldowns: dict[str, Any],
+    rubric_scores: dict[str, Any],
 ) -> dict[str, Any]:
     total_weight = sum(float(item.get("weight") or 0) for item in components)
     overall = 0.0 if total_weight == 0 else sum(float(item.get("weighted_score") or 0) for item in components) / total_weight
     weakest_task_type = _dict(_pick(drilldowns, "weakest_task_type"))
     weakest_difficulty = _dict(_pick(drilldowns, "weakest_difficulty"))
+    rubric_summary = _dict(rubric_scores.get("summary"))
     return {
         "overall_score": round(overall, 2),
         "overall_status": _status(overall),
@@ -392,6 +458,13 @@ def _score_summary(
         "eval_suite_cases": _pick(eval_suite, "case_count"),
         "generation_quality_status": _pick(_dict(_pick(generation_quality, "summary")), "overall_status"),
         "generation_quality_cases": _pick(_dict(_pick(generation_quality, "summary")), "case_count"),
+        "rubric_status": rubric_summary.get("overall_status"),
+        "rubric_avg_score": rubric_summary.get("avg_score"),
+        "rubric_pass_count": rubric_summary.get("pass_count"),
+        "rubric_warn_count": rubric_summary.get("warn_count"),
+        "rubric_fail_count": rubric_summary.get("fail_count"),
+        "weakest_rubric_case": rubric_summary.get("weakest_case"),
+        "weakest_rubric_score": rubric_summary.get("weakest_score"),
         "pair_batch_cases": _pick(pair_batch, "case_count"),
         "pair_generated_differences": _pick(pair_batch, "generated_difference_count"),
         "max_abs_generated_delta": _max_abs_generated_delta(pair_batch),
@@ -413,6 +486,13 @@ def _case_scores(eval_suite: Any, generation_quality: Any, pair_batch: Any) -> l
             {
                 "task_type": result.get("task_type"),
                 "difficulty": result.get("difficulty"),
+                "prompt": result.get("prompt"),
+                "generated": result.get("generated"),
+                "continuation": result.get("continuation"),
+                "expected_behavior": result.get("expected_behavior"),
+                "tags": result.get("tags") if isinstance(result.get("tags"), list) else [],
+                "rubric": _dict(result.get("rubric")),
+                "max_new_tokens": result.get("max_new_tokens"),
                 "eval_char_count": result.get("char_count"),
                 "eval_unique_char_count": result.get("unique_char_count"),
             }
@@ -442,6 +522,139 @@ def _case_scores(eval_suite: Any, generation_quality: Any, pair_batch: Any) -> l
             }
         )
     return [rows[key] for key in sorted(rows)]
+
+
+def _rubric_scores(case_scores: list[dict[str, Any]]) -> dict[str, Any]:
+    cases = [_rubric_case_score(case) for case in case_scores]
+    scores = [_number(case.get("score")) or 0 for case in cases]
+    avg_score = 0.0 if not scores else round(sum(scores) / len(scores), 2)
+    weakest = min(cases, key=lambda item: (_number(item.get("score")) or 0, str(item.get("name"))), default={})
+    return {
+        "schema_version": 1,
+        "summary": {
+            "case_count": len(cases),
+            "avg_score": avg_score,
+            "overall_status": _status(avg_score) if cases else "fail",
+            "pass_count": sum(1 for case in cases if case.get("status") == "pass"),
+            "warn_count": sum(1 for case in cases if case.get("status") == "warn"),
+            "fail_count": sum(1 for case in cases if case.get("status") == "fail"),
+            "weakest_case": weakest.get("name"),
+            "weakest_score": weakest.get("score"),
+        },
+        "cases": cases,
+    }
+
+
+def _case_scores_with_rubric(case_scores: list[dict[str, Any]], rubric_scores: dict[str, Any]) -> list[dict[str, Any]]:
+    rubric_by_name = {str(item.get("name")): item for item in _list_of_dicts(rubric_scores.get("cases"))}
+    rows = []
+    for case in case_scores:
+        row = dict(case)
+        rubric = rubric_by_name.get(str(case.get("name")))
+        if rubric:
+            row["rubric_score"] = rubric.get("score")
+            row["rubric_status"] = rubric.get("status")
+            row["rubric_failed_checks"] = rubric.get("failed_checks")
+            row["rubric_missing_terms"] = rubric.get("missing_terms")
+        rows.append(row)
+    return rows
+
+
+def _rubric_case_score(case: dict[str, Any]) -> dict[str, Any]:
+    name = str(case.get("name") or "unknown")
+    rubric = _dict(case.get("rubric"))
+    text = _case_text(case)
+    char_count = _number(case.get("eval_char_count"))
+    if char_count is None:
+        char_count = len(str(case.get("continuation") or ""))
+    min_chars = int(_number(rubric.get("min_chars")) or _default_min_chars(case))
+    max_chars = _number(rubric.get("max_chars"))
+    must_include = _rubric_terms(case, rubric)
+    must_avoid = _term_list(_first_present(rubric, ["must_avoid", "forbidden_terms", "avoid_terms"]))
+
+    checks = [
+        _rubric_check("has_output", "Output is present", 0.2, bool(text.strip()), "Generated text is non-empty."),
+        _rubric_check(
+            "length_bounds",
+            "Length fits prompt bounds",
+            0.2,
+            char_count >= min_chars and (max_chars is None or char_count <= max_chars),
+            f"char_count={_fmt(char_count)}, min={min_chars}, max={_fmt(max_chars)}.",
+        ),
+        _term_check("must_include", "Required terms appear", 0.25, text, must_include),
+        _forbidden_term_check("must_avoid", "Forbidden terms are absent", 0.15, text, must_avoid),
+        _task_shape_check(case, text, char_count, min_chars),
+    ]
+    weighted = sum(float(check["weight"]) * float(check["score"]) for check in checks)
+    total_weight = sum(float(check["weight"]) for check in checks)
+    score = 0.0 if total_weight == 0 else round(weighted / total_weight * 100.0, 2)
+    failed_checks = [str(check["id"]) for check in checks if float(check.get("score") or 0) < 1.0]
+    return {
+        "name": name,
+        "task_type": case.get("task_type"),
+        "difficulty": case.get("difficulty"),
+        "status": _status(score),
+        "score": score,
+        "passed_checks": len(checks) - len(failed_checks),
+        "total_checks": len(checks),
+        "matched_terms": _matched_terms(text, must_include),
+        "missing_terms": _missing_terms(text, must_include),
+        "failed_checks": failed_checks,
+        "expected_behavior": case.get("expected_behavior"),
+        "checks": checks,
+    }
+
+
+def _rubric_check(check_id: str, title: str, weight: float, passed: bool, detail: str) -> dict[str, Any]:
+    return {
+        "id": check_id,
+        "title": title,
+        "weight": weight,
+        "score": 1.0 if passed else 0.0,
+        "passed": passed,
+        "detail": detail,
+    }
+
+
+def _term_check(check_id: str, title: str, weight: float, text: str, terms: list[str]) -> dict[str, Any]:
+    if not terms:
+        return _rubric_check(check_id, title, weight, True, "No explicit required terms configured.")
+    matched = _matched_terms(text, terms)
+    score = len(matched) / len(terms)
+    return {
+        "id": check_id,
+        "title": title,
+        "weight": weight,
+        "score": round(score, 4),
+        "passed": score >= 1.0,
+        "detail": f"matched={len(matched)} / {len(terms)} required term(s).",
+    }
+
+
+def _forbidden_term_check(check_id: str, title: str, weight: float, text: str, terms: list[str]) -> dict[str, Any]:
+    found = _matched_terms(text, terms)
+    return {
+        "id": check_id,
+        "title": title,
+        "weight": weight,
+        "score": 0.0 if found else 1.0,
+        "passed": not found,
+        "detail": "found forbidden term(s): " + ", ".join(found) if found else "No forbidden terms found.",
+    }
+
+
+def _task_shape_check(case: dict[str, Any], text: str, char_count: float, min_chars: int) -> dict[str, Any]:
+    task_type = str(case.get("task_type") or "").lower()
+    if "structured" in task_type or "format" in task_type or "json" in task_type:
+        passed = any(token in text for token in ["{", "}", "[", "]", ":", '"'])
+        detail = "Structured task expects JSON/list-like punctuation."
+    elif "summary" in task_type:
+        passed = char_count >= min_chars and char_count <= 140
+        detail = "Summary task expects a concise non-empty continuation."
+    else:
+        passed = char_count >= min_chars
+        detail = "Task expects enough continuation text for review."
+    return _rubric_check("task_shape", "Task shape is plausible", 0.2, passed, detail)
 
 
 def _benchmark_drilldowns(case_scores: list[dict[str, Any]]) -> dict[str, Any]:
@@ -493,8 +706,17 @@ def _build_drilldown_row(group_by: str, key: str, cases: list[dict[str, Any]]) -
     eval_chars = [value for value in eval_chars if value is not None]
     avg_eval_chars = None if not eval_chars else sum(eval_chars) / len(eval_chars)
 
+    rubric_scores = [_number(case.get("rubric_score")) for case in cases]
+    rubric_scores = [value for value in rubric_scores if value is not None]
+    rubric_score = 0.0 if not rubric_scores else sum(rubric_scores) / len(rubric_scores)
+    rubric_counts = {"pass": 0, "warn": 0, "fail": 0}
+    for case in cases:
+        status = str(case.get("rubric_status") or "")
+        if status in rubric_counts:
+            rubric_counts[status] += 1
+
     coverage_score = min(100.0, len(cases) * 50.0)
-    score = generation_score * 0.4 + pair_score * 0.25 + delta_score * 0.25 + coverage_score * 0.1
+    score = rubric_score * 0.3 + generation_score * 0.25 + pair_score * 0.2 + delta_score * 0.15 + coverage_score * 0.1
     return {
         "group_by": group_by,
         "key": key,
@@ -502,6 +724,10 @@ def _build_drilldown_row(group_by: str, key: str, cases: list[dict[str, Any]]) -
         "score": round(score, 2),
         "case_count": len(cases),
         "coverage_score": round(coverage_score, 2),
+        "rubric_score": round(rubric_score, 2),
+        "rubric_pass_count": rubric_counts["pass"],
+        "rubric_warn_count": rubric_counts["warn"],
+        "rubric_fail_count": rubric_counts["fail"],
         "generation_quality_score": round(generation_score, 2),
         "pair_consistency_score": round(pair_score, 2),
         "pair_delta_stability_score": round(delta_score, 2),
@@ -553,6 +779,10 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], 
     weak = [item for item in components if item.get("status") != "pass"]
     if weak:
         recs.append("Improve weak components: " + ", ".join(str(item.get("title")) for item in weak) + ".")
+    if summary.get("weakest_rubric_case"):
+        recs.append(
+            f"Review weakest rubric case `{summary.get('weakest_rubric_case')}` at score {summary.get('weakest_rubric_score')} before trusting benchmark gains."
+        )
     drilldowns = _dict(drilldowns)
     weakest_task = _dict(drilldowns.get("weakest_task_type"))
     weakest_difficulty = _dict(drilldowns.get("weakest_difficulty"))
@@ -564,7 +794,7 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], 
         recs.append(
             f"Review weakest difficulty `{weakest_difficulty.get('key')}` at score {weakest_difficulty.get('score')} before comparing runs."
         )
-    recs.append("Next step: add rubric-style per-prompt scoring so benchmark drilldowns reflect task correctness, not only output shape.")
+    recs.append("Next step: compare rubric score changes across runs so correctness regressions are visible in the registry.")
     return recs
 
 
@@ -655,6 +885,7 @@ def _drilldown_section(title: str, rows: list[dict[str, Any]]) -> str:
             f"<td><strong>{_e(item.get('key'))}</strong><br><span>{_e(item.get('case_count'))} case(s)</span></td>"
             f"<td><span class=\"pill {_e(item.get('status'))}\">{_e(item.get('status'))}</span></td>"
             f"<td>{_e(item.get('score'))}</td>"
+            f"<td>{_e(item.get('rubric_score'))}<br><span>{_e(item.get('rubric_pass_count'))} pass / {_e(item.get('rubric_warn_count'))} warn / {_e(item.get('rubric_fail_count'))} fail</span></td>"
             f"<td>{_e(item.get('generation_quality_score'))}<br><span>{_e(item.get('generation_pass_count'))} pass / {_e(item.get('generation_warn_count'))} warn / {_e(item.get('generation_fail_count'))} fail</span></td>"
             f"<td>{_e(item.get('pair_consistency_score'))}<br><span>{_e(item.get('pair_equal_count'))} equal / {_e(item.get('pair_difference_count'))} diff</span></td>"
             f"<td>{_e(item.get('pair_delta_stability_score'))}<br><span>avg={_e(item.get('avg_abs_generated_delta'))}, max={_e(item.get('max_abs_generated_delta'))}</span></td>"
@@ -663,8 +894,32 @@ def _drilldown_section(title: str, rows: list[dict[str, Any]]) -> str:
         )
     return (
         f'<section class="panel"><h2>{_e(title)}</h2>'
-        '<table><thead><tr><th>Group</th><th>Status</th><th>Score</th><th>Generation</th><th>Pair</th><th>Delta</th><th>Cases</th></tr></thead><tbody>'
+        '<table><thead><tr><th>Group</th><th>Status</th><th>Score</th><th>Rubric</th><th>Generation</th><th>Pair</th><th>Delta</th><th>Cases</th></tr></thead><tbody>'
         + "".join(html_rows)
+        + "</tbody></table></section>"
+    )
+
+
+def _rubric_section(cases: list[dict[str, Any]]) -> str:
+    if not cases:
+        return '<section class="panel"><h2>Rubric Scores</h2><p class="muted">No rubric rows found.</p></section>'
+    rows = []
+    for item in cases:
+        rows.append(
+            "<tr>"
+            f"<td><strong>{_e(item.get('name'))}</strong><br><span>{_e(item.get('task_type'))} / {_e(item.get('difficulty'))}</span></td>"
+            f"<td><span class=\"pill {_e(item.get('status'))}\">{_e(item.get('status'))}</span></td>"
+            f"<td>{_e(item.get('score'))}</td>"
+            f"<td>{_e(item.get('passed_checks'))} / {_e(item.get('total_checks'))}</td>"
+            f"<td>{_e(', '.join(_string_list(item.get('matched_terms'))))}</td>"
+            f"<td>{_e(', '.join(_string_list(item.get('missing_terms'))))}</td>"
+            f"<td>{_e(', '.join(_string_list(item.get('failed_checks'))))}</td>"
+            "</tr>"
+        )
+    return (
+        '<section class="panel"><h2>Rubric Scores</h2>'
+        '<table><thead><tr><th>Case</th><th>Status</th><th>Score</th><th>Checks</th><th>Matched Terms</th><th>Missing Terms</th><th>Failed Checks</th></tr></thead><tbody>'
+        + "".join(rows)
         + "</tbody></table></section>"
     )
 
@@ -679,12 +934,13 @@ def _case_section(cases: list[dict[str, Any]]) -> str:
             f"<td><strong>{_e(item.get('name'))}</strong><br><span>{_e(item.get('task_type'))} / {_e(item.get('difficulty'))}</span></td>"
             f"<td>{_e(item.get('eval_char_count'))}<br><span>unique={_e(item.get('eval_unique_char_count'))}</span></td>"
             f"<td>{_e(item.get('generation_quality_status'))}<br><span>flags={_e(item.get('generation_flag_count'))}</span></td>"
+            f"<td>{_e(item.get('rubric_status'))}<br><span>score={_e(item.get('rubric_score'))}</span></td>"
             f"<td>{_e(item.get('pair_generated_equal'))}<br><span>delta={_e(item.get('pair_generated_char_delta'))}</span></td>"
             "</tr>"
         )
     return (
         '<section class="panel"><h2>Case Scores</h2>'
-        '<table><thead><tr><th>Case</th><th>Eval</th><th>Generation Quality</th><th>Pair</th></tr></thead><tbody>'
+        '<table><thead><tr><th>Case</th><th>Eval</th><th>Generation Quality</th><th>Rubric</th><th>Pair</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table></section>"
     )
@@ -756,7 +1012,7 @@ def _markdown_table(rows: list[tuple[Any, Any]]) -> list[str]:
 
 
 def _markdown_drilldown_table(title: str, rows: Any) -> list[str]:
-    lines = ["", f"## {title}", "", "| Group | Status | Score | Cases | Gen score | Pair score | Delta score | Cases |", "| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |"]
+    lines = ["", f"## {title}", "", "| Group | Status | Score | Cases | Rubric | Gen score | Pair score | Delta score | Cases |", "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |"]
     for item in _list_of_dicts(rows):
         lines.append(
             "| "
@@ -766,6 +1022,7 @@ def _markdown_drilldown_table(title: str, rows: Any) -> list[str]:
                     _md(item.get("status")),
                     _md(item.get("score")),
                     _md(item.get("case_count")),
+                    _md(item.get("rubric_score")),
                     _md(item.get("generation_quality_score")),
                     _md(item.get("pair_consistency_score")),
                     _md(item.get("pair_delta_stability_score")),
@@ -775,7 +1032,30 @@ def _markdown_drilldown_table(title: str, rows: Any) -> list[str]:
             + " |"
         )
     if len(lines) == 5:
-        lines.append("| missing | missing | 0 | 0 | 0 | 0 | 0 |  |")
+        lines.append("| missing | missing | 0 | 0 | 0 | 0 | 0 | 0 |  |")
+    return lines
+
+
+def _markdown_rubric_table(rows: Any) -> list[str]:
+    lines = ["", "## Rubric Scores", "", "| Case | Status | Score | Checks | Matched Terms | Missing Terms | Failed Checks |", "| --- | --- | ---: | ---: | --- | --- | --- |"]
+    for item in _list_of_dicts(rows):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    _md(item.get("name")),
+                    _md(item.get("status")),
+                    _md(item.get("score")),
+                    _md(f"{item.get('passed_checks')} / {item.get('total_checks')}"),
+                    _md(", ".join(_string_list(item.get("matched_terms")))),
+                    _md(", ".join(_string_list(item.get("missing_terms")))),
+                    _md(", ".join(_string_list(item.get("failed_checks")))),
+                ]
+            )
+            + " |"
+        )
+    if len(lines) == 5:
+        lines.append("| missing | missing | 0 | 0 / 0 |  |  |  |")
     return lines
 
 
@@ -819,6 +1099,112 @@ def _round_optional(value: Any) -> float | int | None:
         return None
     rounded = round(number, 2)
     return int(rounded) if float(rounded).is_integer() else rounded
+
+
+def _case_text(case: dict[str, Any]) -> str:
+    generated = str(case.get("generated") or "")
+    continuation = str(case.get("continuation") or "")
+    return (generated + "\n" + continuation).strip()
+
+
+def _default_min_chars(case: dict[str, Any]) -> int:
+    task_type = str(case.get("task_type") or "").lower()
+    if "structured" in task_type or "format" in task_type:
+        return 4
+    if "summary" in task_type:
+        return 8
+    return 6
+
+
+def _rubric_terms(case: dict[str, Any], rubric: dict[str, Any]) -> list[str]:
+    explicit = _term_list(_first_present(rubric, ["must_include", "expected_terms", "keywords", "required_terms"]))
+    if explicit:
+        return explicit
+    explicit = _term_list(_first_present(case, ["must_include", "expected_terms", "keywords", "required_terms"]))
+    if explicit:
+        return explicit
+    return _terms_from_expected_behavior(str(case.get("expected_behavior") or ""))
+
+
+def _terms_from_expected_behavior(text: str) -> list[str]:
+    stopwords = {
+        "with",
+        "that",
+        "this",
+        "the",
+        "and",
+        "briefly",
+        "produce",
+        "answer",
+        "continue",
+        "sentence",
+        "coherent",
+        "generate",
+        "compact",
+        "structured",
+        "list",
+        "fields",
+        "mentions",
+        "mention",
+        "stay",
+        "topic",
+        "reject",
+        "false",
+        "premise",
+        "explain",
+        "usually",
+    }
+    words = []
+    current = []
+    for char in text.lower():
+        if char.isalpha() or char in {"-", "_"}:
+            current.append(char)
+        else:
+            if current:
+                words.append("".join(current).strip("-_"))
+                current = []
+    if current:
+        words.append("".join(current).strip("-_"))
+    terms = []
+    for word in words:
+        if len(word) >= 4 and word not in stopwords and word not in terms:
+            terms.append(word)
+    return terms[:6]
+
+
+def _first_present(source: dict[str, Any], keys: list[str]) -> Any:
+    for key in keys:
+        value = source.get(key)
+        if value not in (None, "", []):
+            return value
+    return None
+
+
+def _term_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        raw = value.replace(";", ",").split(",")
+    elif isinstance(value, list):
+        raw = value
+    else:
+        raw = [value]
+    terms = []
+    for item in raw:
+        text = str(item).strip()
+        if text and text not in terms:
+            terms.append(text)
+    return terms
+
+
+def _matched_terms(text: str, terms: list[str]) -> list[str]:
+    lowered = text.lower()
+    return [term for term in terms if str(term).lower() in lowered]
+
+
+def _missing_terms(text: str, terms: list[str]) -> list[str]:
+    matched = set(_matched_terms(text, terms))
+    return [term for term in terms if term not in matched]
 
 
 def _csv_value(value: Any) -> Any:

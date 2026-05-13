@@ -11,6 +11,7 @@
 下一步应该补 benchmark scoring、数据规模，还是服务化硬化？
 已有 benchmark、generation quality、pair batch 和 registry 证据，能否合成一个 run 级评分入口？
 合成总分之后，能否继续解释到 task type 和 difficulty 这两层？
+分组以后，能否再解释每个 prompt 是否满足基本正确性 rubric？
 ```
 
 ## 写入规则
@@ -21,6 +22,7 @@
 63-v48-maturity-summary.md
 64-v49-benchmark-scorecard.md
 65-v50-benchmark-scorecard-drilldowns.md
+66-v51-benchmark-rubric-scoring.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -40,13 +42,15 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v50，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结到 benchmark scorecard drilldown 的完整学习型 AI 工程链路。
+截至 v51，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown 到 rubric-style correctness scoring 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
 v49 的关键变化是：把 eval suite、generation quality、pair consistency、pair delta stability、evidence completeness 和 registry context 汇总为一个可评分、可导出、可截图的 benchmark scorecard。
 
 v50 的关键变化是：不只给 run 一个总分，还按 task type 和 difficulty 输出 drilldown 分数、最弱分组和独立 CSV，让 benchmark 短板能定位到任务切片。
+
+v51 的关键变化是：给每个 prompt 增加 rubric-style correctness scoring，记录 required/forbidden terms、长度、任务形态、最弱 case 和 rubric CSV，让 benchmark 不只看输出形状，也能表达基本正确性。
 
 ## 后续讲解索引
 
@@ -57,10 +61,12 @@ v50 的关键变化是：不只给 run 一个总分，还按 task type 和 diffi
  -> 第四十九版代码讲解：生成统一 benchmark scorecard，把 run 级评估覆盖、生成质量、pair 稳定性和 registry 上下文合成一个评分报告
 65-v50-benchmark-scorecard-drilldowns.md
  -> 第五十版代码讲解：给 benchmark scorecard 增加 task type / difficulty drilldown，解释总分背后的弱项分组
+66-v51-benchmark-rubric-scoring.md
+ -> 第五十一版代码讲解：给 benchmark scorecard 增加 per-prompt rubric scoring，把正确性检查写入 case、drilldown、summary 和导出文件
 ```
 
-后续推进 v51 时，在这里继续追加 `66-v51-主题.md`，或者在新的能力线目录继续拆分。
+后续推进 v52 时，在这里继续追加 `67-v52-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性和下一阶段路线”的过程。
