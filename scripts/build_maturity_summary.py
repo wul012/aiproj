@@ -15,6 +15,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a MiniGPT project maturity summary.")
     parser.add_argument("--project-root", type=Path, default=ROOT)
     parser.add_argument("--registry", type=Path, default=None, help="Optional registry.json path")
+    parser.add_argument("--request-history-summary", type=Path, default=None, help="Optional request_history_summary.json path")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "maturity-summary")
     parser.add_argument("--title", type=str, default="MiniGPT project maturity summary")
     return parser.parse_args()
@@ -22,13 +23,20 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    summary = build_maturity_summary(args.project_root, registry_path=args.registry, title=args.title)
+    summary = build_maturity_summary(
+        args.project_root,
+        registry_path=args.registry,
+        request_history_summary_path=args.request_history_summary,
+        title=args.title,
+    )
     outputs = write_maturity_summary_outputs(summary, args.out_dir)
     overview = summary["summary"]
     print(f"project_root={summary['project_root']}")
     print(f"current_version={overview.get('current_version')}")
     print(f"overall_status={overview.get('overall_status')}")
     print(f"average_maturity_level={overview.get('average_maturity_level')}")
+    print(f"request_history_status={overview.get('request_history_status')}")
+    print(f"request_history_records={overview.get('request_history_records')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 
 

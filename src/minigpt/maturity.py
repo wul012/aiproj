@@ -48,10 +48,10 @@ CAPABILITY_SPECS = (
     CapabilitySpec(
         "local_inference",
         "Local Inference And Playground",
-        (11, 12, 38, 39, 40, 41, 42),
-        4,
-        "Static playground, local API, safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and saved pair artifacts.",
-        "Add streaming output and a small end-to-end local inference smoke for selected checkpoints.",
+        (11, 12, 38, 39, 40, 41, 42, 55, 56, 57, 58, 59, 60),
+        5,
+        "Static playground, local API, safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, saved pair artifacts, streaming, request history, row detail JSON, and request history summaries.",
+        "Connect request history stability summaries to audit/release handoff when local serving evidence becomes release-relevant.",
     ),
     CapabilitySpec(
         "registry_reporting",
@@ -98,14 +98,20 @@ def build_maturity_summary(
     title: str = "MiniGPT project maturity summary",
     generated_at: str | None = None,
     registry_path: str | Path | None = None,
+    request_history_summary_path: str | Path | None = None,
 ) -> dict[str, Any]:
     root = Path(project_root)
     published_versions = _discover_published_versions(root)
     archive_versions = _discover_archive_versions(root)
     explanation_versions = _discover_explanation_versions(root)
     registry = _read_json(Path(registry_path)) if registry_path is not None else _read_json(root / "runs" / "registry" / "registry.json")
+    request_history_summary = (
+        _read_json(Path(request_history_summary_path))
+        if request_history_summary_path is not None
+        else _read_json(root / "runs" / "request-history-summary" / "request_history_summary.json")
+    )
     capabilities = [_capability_row(spec, published_versions) for spec in CAPABILITY_SPECS]
-    summary = _summary(published_versions, archive_versions, explanation_versions, capabilities, registry)
+    summary = _summary(published_versions, archive_versions, explanation_versions, capabilities, registry, request_history_summary)
     return {
         "schema_version": 1,
         "title": title,
@@ -115,7 +121,8 @@ def build_maturity_summary(
         "capabilities": capabilities,
         "phase_timeline": _phase_timeline(published_versions),
         "registry_context": _registry_context(registry),
-        "recommendations": _recommendations(capabilities, registry),
+        "request_history_context": _request_history_context(request_history_summary),
+        "recommendations": _recommendations(capabilities, registry, request_history_summary),
     }
 
 
@@ -167,6 +174,8 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Average maturity level", overview.get("average_maturity_level")),
                 ("Overall status", overview.get("overall_status")),
                 ("Registry runs", overview.get("registry_runs")),
+                ("Request history status", overview.get("request_history_status")),
+                ("Request history records", overview.get("request_history_records")),
             ]
         ),
         "",
@@ -193,6 +202,27 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
     lines.extend(["", "## Phase Timeline", "", "| Versions | Phase | Status |", "| --- | --- | --- |"])
     for phase in _list_of_dicts(summary.get("phase_timeline")):
         lines.append(f"| {_md(phase.get('versions'))} | {_md(phase.get('title'))} | {_md(phase.get('status'))} |")
+    request_history = _dict(summary.get("request_history_context"))
+    lines.extend(
+        [
+            "",
+            "## Request History Context",
+            "",
+            *_markdown_table(
+                [
+                    ("Available", request_history.get("available")),
+                    ("Status", request_history.get("status")),
+                    ("Records", request_history.get("total_log_records")),
+                    ("Invalid", request_history.get("invalid_record_count")),
+                    ("Timeout rate", request_history.get("timeout_rate")),
+                    ("Bad request rate", request_history.get("bad_request_rate")),
+                    ("Error rate", request_history.get("error_rate")),
+                    ("Checkpoints", request_history.get("unique_checkpoint_count")),
+                    ("Latest", request_history.get("latest_timestamp")),
+                ]
+            ),
+        ]
+    )
     lines.extend(["", "## Recommendations", ""])
     lines.extend(f"- {item}" for item in _string_list(summary.get("recommendations")))
     return "\n".join(lines).rstrip() + "\n"
@@ -207,6 +237,7 @@ def write_maturity_summary_markdown(summary: dict[str, Any], path: str | Path) -
 def render_maturity_summary_html(summary: dict[str, Any]) -> str:
     overview = _dict(summary.get("summary"))
     registry = _dict(summary.get("registry_context"))
+    request_history = _dict(summary.get("request_history_context"))
     stats = [
         ("Current", overview.get("current_version")),
         ("Versions", overview.get("published_version_count")),
@@ -216,6 +247,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("Status", overview.get("overall_status")),
         ("Runs", overview.get("registry_runs")),
         ("Pair deltas", registry.get("pair_delta_cases")),
+        ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
         [
@@ -234,6 +266,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
             _capability_section(_list_of_dicts(summary.get("capabilities"))),
             _timeline_section(_list_of_dicts(summary.get("phase_timeline"))),
             _registry_section(registry),
+            _request_history_section(request_history),
             _recommendation_section(_string_list(summary.get("recommendations"))),
             "<footer>Generated by MiniGPT maturity summary exporter.</footer>",
             "</body>",
@@ -321,6 +354,7 @@ def _summary(
     explanation_versions: list[int],
     capabilities: list[dict[str, Any]],
     registry: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
 ) -> dict[str, Any]:
     average = 0.0
     if capabilities:
@@ -335,6 +369,10 @@ def _summary(
         "average_maturity_level": average,
         "overall_status": overall,
         "registry_runs": _pick(registry, "run_count"),
+        "request_history_status": _nested_pick(request_history_summary, "summary", "status"),
+        "request_history_records": _nested_pick(request_history_summary, "summary", "total_log_records"),
+        "request_history_timeout_rate": _nested_pick(request_history_summary, "summary", "timeout_rate"),
+        "request_history_error_rate": _nested_pick(request_history_summary, "summary", "error_rate"),
     }
 
 
@@ -345,7 +383,7 @@ def _phase_timeline(published_versions: list[int]) -> list[dict[str, Any]]:
         ("v13-v24", "Data, registry, and cards", range(13, 25)),
         ("v25-v34", "Release governance", range(25, 35)),
         ("v35-v47", "Evaluation benchmark and pair reports", range(35, 48)),
-        ("v48", "Maturity summary and phase synthesis", range(48, 49)),
+        ("v48-v60", "Project maturity and local inference hardening", range(48, 61)),
     ]
     rows = []
     for versions, title, version_range in phases:
@@ -384,7 +422,42 @@ def _registry_context(registry: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
-def _recommendations(capabilities: list[dict[str, Any]], registry: dict[str, Any] | None) -> list[str]:
+def _request_history_context(request_history_summary: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(request_history_summary, dict):
+        return {
+            "available": False,
+            "status": None,
+            "total_log_records": None,
+            "timeout_rate": None,
+            "bad_request_rate": None,
+            "error_rate": None,
+        }
+    summary = _dict(request_history_summary.get("summary"))
+    return {
+        "available": True,
+        "request_log": request_history_summary.get("request_log"),
+        "status": summary.get("status"),
+        "total_log_records": summary.get("total_log_records"),
+        "invalid_record_count": summary.get("invalid_record_count"),
+        "ok_count": summary.get("ok_count"),
+        "timeout_count": summary.get("timeout_count"),
+        "bad_request_count": summary.get("bad_request_count"),
+        "error_count": summary.get("error_count"),
+        "timeout_rate": summary.get("timeout_rate"),
+        "bad_request_rate": summary.get("bad_request_rate"),
+        "error_rate": summary.get("error_rate"),
+        "stream_request_count": summary.get("stream_request_count"),
+        "pair_request_count": summary.get("pair_request_count"),
+        "unique_checkpoint_count": summary.get("unique_checkpoint_count"),
+        "latest_timestamp": summary.get("latest_timestamp"),
+    }
+
+
+def _recommendations(
+    capabilities: list[dict[str, Any]],
+    registry: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
+) -> list[str]:
     recs = [
         "Treat v48 as a phase summary: avoid continuing to split links/trends/dashboard unless the change improves evaluation quality.",
         "Next high-value step: consolidate eval suite, generation quality, pair batch, and pair delta leaders into one benchmark scoring suite.",
@@ -395,6 +468,12 @@ def _recommendations(capabilities: list[dict[str, Any]], registry: dict[str, Any
         recs.append("Revisit weaker areas first: " + ", ".join(str(item.get("title")) for item in weak[:3]) + ".")
     if not isinstance(registry, dict):
         recs.append("Generate a fresh registry before final portfolio review so the maturity summary can include live run counts.")
+    if not isinstance(request_history_summary, dict):
+        recs.append("Generate request_history_summary.json before local serving review so maturity context includes recent inference stability.")
+    else:
+        request_summary = _dict(request_history_summary.get("summary"))
+        if request_summary.get("status") not in {"pass", "empty"}:
+            recs.append("Review request history summary warnings before using the playground session as stable local inference evidence.")
     return recs
 
 
@@ -456,6 +535,26 @@ def _registry_section(registry: dict[str, Any]) -> str:
         ("Generation quality", _fmt_mapping(registry.get("generation_quality_counts"))),
     ]
     return '<section class="panel"><h2>Registry Context</h2><table>' + "".join(
+        f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows
+    ) + "</table></section>"
+
+
+def _request_history_section(request_history: dict[str, Any]) -> str:
+    rows = [
+        ("Available", request_history.get("available")),
+        ("Status", request_history.get("status")),
+        ("Records", request_history.get("total_log_records")),
+        ("Invalid", request_history.get("invalid_record_count")),
+        ("OK", request_history.get("ok_count")),
+        ("Timeout", request_history.get("timeout_count")),
+        ("Bad request", request_history.get("bad_request_count")),
+        ("Error", request_history.get("error_count")),
+        ("Timeout rate", request_history.get("timeout_rate")),
+        ("Error rate", request_history.get("error_rate")),
+        ("Checkpoints", request_history.get("unique_checkpoint_count")),
+        ("Latest", request_history.get("latest_timestamp")),
+    ]
+    return '<section class="panel"><h2>Request History Context</h2><table>' + "".join(
         f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows
     ) + "</table></section>"
 
@@ -532,6 +631,15 @@ def _dict(value: Any) -> dict[str, Any]:
 
 def _pick(value: Any, key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
+
+
+def _nested_pick(value: Any, *keys: str) -> Any:
+    current = value
+    for key in keys:
+        if not isinstance(current, dict):
+            return None
+        current = current.get(key)
+    return current
 
 
 def _list_of_dicts(value: Any) -> list[dict[str, Any]]:

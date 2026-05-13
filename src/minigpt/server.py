@@ -512,8 +512,7 @@ def build_request_history_payload(
 ) -> dict[str, Any]:
     history_limit = _request_history_limit(limit)
     log_path = Path(request_log_path)
-    entries, invalid_count = _read_inference_log_entries(log_path)
-    normalized_records = [_request_history_record(record, log_index=log_index) for log_index, record in entries]
+    normalized_records, invalid_count = read_request_history_log_records(log_path)
     filtered_records = _filter_request_history_records(
         normalized_records,
         status_filter=status_filter,
@@ -529,7 +528,7 @@ def build_request_history_payload(
         "request_log_exists": log_path.exists(),
         "limit": history_limit,
         "newest_first": True,
-        "total_log_records": len(entries),
+        "total_log_records": len(normalized_records),
         "matching_log_records": len(filtered_records),
         "invalid_record_count": invalid_count,
         "record_count": len(requests),
@@ -539,7 +538,7 @@ def build_request_history_payload(
             "checkpoint": checkpoint_filter,
         },
         "summary": {
-            "total_log_records": len(entries),
+            "total_log_records": len(normalized_records),
             "matching_records": len(filtered_records),
             "returned_records": len(requests),
             "invalid_record_count": invalid_count,
@@ -554,6 +553,11 @@ def build_request_history_payload(
         },
         "requests": requests,
     }
+
+
+def read_request_history_log_records(request_log_path: str | Path) -> tuple[list[dict[str, Any]], int]:
+    entries, invalid_count = _read_inference_log_entries(Path(request_log_path))
+    return [_request_history_record(record, log_index=log_index) for log_index, record in entries], invalid_count
 
 
 def build_request_history_detail_payload(request_log_path: str | Path, log_index: int) -> dict[str, Any]:
