@@ -62,7 +62,9 @@ __all__ = [
     "parse_generation_pair_request",
     "build_pair_batch_case_result",
     "build_pair_batch_report",
+    "build_pair_batch_trend_report",
     "write_pair_batch_outputs",
+    "write_pair_batch_trend_outputs",
     "render_pair_generation_html",
     "write_pair_generation_artifacts",
 ]
@@ -124,7 +126,9 @@ _EXPORTS = {
     "parse_generation_pair_request": ("server", "parse_generation_pair_request"),
     "build_pair_batch_case_result": ("pair_batch", "build_pair_batch_case_result"),
     "build_pair_batch_report": ("pair_batch", "build_pair_batch_report"),
+    "build_pair_batch_trend_report": ("pair_trend", "build_pair_batch_trend_report"),
     "write_pair_batch_outputs": ("pair_batch", "write_pair_batch_outputs"),
+    "write_pair_batch_trend_outputs": ("pair_trend", "write_pair_batch_trend_outputs"),
     "render_pair_generation_html": ("server", "render_pair_generation_html"),
     "write_pair_generation_artifacts": ("server", "write_pair_generation_artifacts"),
 }
