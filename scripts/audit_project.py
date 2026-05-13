@@ -15,6 +15,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Audit MiniGPT registry/model-card readiness.")
     parser.add_argument("--registry", type=Path, default=ROOT / "runs" / "registry" / "registry.json")
     parser.add_argument("--model-card", type=Path, default=None, help="Optional model_card.json path")
+    parser.add_argument("--request-history-summary", type=Path, default=None, help="Optional request_history_summary.json path")
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory, defaults to the registry directory")
     parser.add_argument("--title", type=str, default="MiniGPT project audit")
     parser.add_argument("--fail-on-warn", action="store_true", help="Exit non-zero for warn as well as fail")
@@ -24,13 +25,20 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     out_dir = args.out_dir or args.registry.parent
-    audit = build_project_audit(args.registry, model_card_path=args.model_card, title=args.title)
+    audit = build_project_audit(
+        args.registry,
+        model_card_path=args.model_card,
+        request_history_summary_path=args.request_history_summary,
+        title=args.title,
+    )
     outputs = write_project_audit_outputs(audit, out_dir)
     summary = audit["summary"]
 
     print(f"registry={args.registry}")
     print(f"overall_status={summary['overall_status']}")
     print(f"score_percent={summary['score_percent']}")
+    print(f"request_history_status={summary.get('request_history_status')}")
+    print(f"request_history_records={summary.get('request_history_records')}")
     print(f"checks={summary['pass_count']} pass/{summary['warn_count']} warn/{summary['fail_count']} fail")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if audit["warnings"]:

@@ -35,6 +35,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Override the selected policy profile and do not require generation_quality/non_pass_generation_quality audit checks",
     )
+    parser.add_argument(
+        "--allow-missing-request-history-summary",
+        action="store_true",
+        help="Override the selected policy profile and do not require the request_history_summary audit check",
+    )
     parser.add_argument("--fail-on-warn", action="store_true", help="Exit non-zero for warn as well as fail")
     return parser.parse_args()
 
@@ -43,12 +48,14 @@ def main() -> None:
     args = parse_args()
     out_dir = args.out_dir or args.bundle.parent.parent / "release-gate"
     require_generation_quality = False if args.allow_missing_generation_quality else None
+    require_request_history_summary = False if args.allow_missing_request_history_summary else None
     gate = build_release_gate(
         args.bundle,
         policy_profile=args.policy_profile,
         minimum_audit_score=args.min_audit_score,
         minimum_ready_runs=args.min_ready_runs,
         require_generation_quality=require_generation_quality,
+        require_request_history_summary=require_request_history_summary,
         title=args.title,
     )
     outputs = write_release_gate_outputs(gate, out_dir)
@@ -64,6 +71,7 @@ def main() -> None:
     print(f"minimum_audit_score={gate['policy']['minimum_audit_score']}")
     print(f"minimum_ready_runs={gate['policy']['minimum_ready_runs']}")
     print(f"require_generation_quality={gate['policy']['require_generation_quality_audit_checks']}")
+    print(f"require_request_history_summary={gate['policy']['require_request_history_summary_audit_check']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if gate["warnings"]:
         print("warnings=" + json.dumps(gate["warnings"], ensure_ascii=False))

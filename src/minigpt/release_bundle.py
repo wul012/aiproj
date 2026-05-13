@@ -17,6 +17,7 @@ def build_release_bundle(
     *,
     model_card_path: str | Path | None = None,
     audit_path: str | Path | None = None,
+    request_history_summary_path: str | Path | None = None,
     release_name: str | None = None,
     title: str = "MiniGPT release bundle",
     generated_at: str | None = None,
@@ -26,11 +27,23 @@ def build_release_bundle(
     registry = _read_required_json(registry_file)
     model_file = _resolve_model_card_path(registry_file, model_card_path)
     audit_file = _resolve_audit_path(registry_file, audit_path)
+    request_history_summary_file = _resolve_request_history_summary_path(registry_file, audit_file, request_history_summary_path)
     model_card = _read_json(model_file, warnings, "model card") if model_file is not None else None
     audit = _read_json(audit_file, warnings, "project audit") if audit_file is not None else None
-    artifacts = _collect_release_artifacts(registry_file, model_file, audit_file)
+    request_history_summary = (
+        _read_json(request_history_summary_file, warnings, "request history summary")
+        if request_history_summary_file is not None
+        else None
+    )
+    artifacts = _collect_release_artifacts(registry_file, model_file, audit_file, request_history_summary_file)
     top_runs = _top_runs(registry, model_card if isinstance(model_card, dict) else None)
-    summary = _build_summary(registry, model_card if isinstance(model_card, dict) else None, audit if isinstance(audit, dict) else None, artifacts)
+    summary = _build_summary(
+        registry,
+        model_card if isinstance(model_card, dict) else None,
+        audit if isinstance(audit, dict) else None,
+        request_history_summary if isinstance(request_history_summary, dict) else None,
+        artifacts,
+    )
 
     return {
         "schema_version": 1,
@@ -42,10 +55,12 @@ def build_release_bundle(
             "registry_path": str(registry_file),
             "model_card_path": None if model_file is None else str(model_file),
             "project_audit_path": None if audit_file is None else str(audit_file),
+            "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
         },
         "artifacts": artifacts,
         "top_runs": top_runs,
         "audit_checks": _audit_checks(audit if isinstance(audit, dict) else None),
+        "request_history_context": _request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
         "recommendations": _recommendations(model_card if isinstance(model_card, dict) else None, audit if isinstance(audit, dict) else None, summary),
         "warnings": warnings,
     }
@@ -76,6 +91,7 @@ def render_release_bundle_markdown(bundle: dict[str, Any]) -> str:
                 ("Best run", summary.get("best_run_name")),
                 ("Best val loss", _fmt(summary.get("best_val_loss"))),
                 ("Ready runs", summary.get("ready_runs")),
+                ("Request history status", summary.get("request_history_status")),
                 ("Evidence artifacts", summary.get("available_artifacts")),
             ]
         ),
@@ -121,6 +137,7 @@ def render_release_bundle_html(bundle: dict[str, Any], *, base_dir: str | Path |
         ("Runs", summary.get("run_count")),
         ("Best run", summary.get("best_run_name")),
         ("Ready", summary.get("ready_runs")),
+        ("Req history", summary.get("request_history_status")),
         ("Artifacts", summary.get("available_artifacts")),
         ("Generated", bundle.get("generated_at")),
     ]
@@ -217,6 +234,32 @@ def _resolve_audit_path(registry_path: Path, audit_path: str | Path | None) -> P
     return next((path for path in candidates if path.exists()), None)
 
 
+def _resolve_request_history_summary_path(
+    registry_path: Path,
+    audit_path: Path | None,
+    request_history_summary_path: str | Path | None,
+) -> Path | None:
+    if request_history_summary_path is not None:
+        return Path(request_history_summary_path)
+    candidates: list[Path] = []
+    if audit_path is not None:
+        try:
+            audit = _read_required_json(audit_path)
+        except (FileNotFoundError, json.JSONDecodeError, ValueError):
+            audit = {}
+        path = audit.get("request_history_summary_path") if isinstance(audit, dict) else None
+        if path:
+            candidates.append(Path(str(path)))
+    candidates.extend(
+        [
+            registry_path.parent / "request_history_summary.json",
+            registry_path.parent / "request-history-summary" / "request_history_summary.json",
+            registry_path.parent.parent / "request-history-summary" / "request_history_summary.json",
+        ]
+    )
+    return next((path for path in candidates if path.exists()), None)
+
+
 def _default_release_name(registry_path: Path) -> str:
     return f"{registry_path.parent.name or 'registry'} release"
 
@@ -225,11 +268,13 @@ def _build_summary(
     registry: dict[str, Any],
     model_card: dict[str, Any] | None,
     audit: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
     artifacts: list[dict[str, Any]],
 ) -> dict[str, Any]:
     best = _dict(registry.get("best_by_best_val_loss"))
     audit_summary = _dict(audit.get("summary")) if audit else {}
     model_summary = _dict(model_card.get("summary")) if model_card else {}
+    request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
     audit_status = audit_summary.get("overall_status")
     release_status = _release_status(audit_status, audit_summary.get("fail_count"), audit_summary.get("warn_count"))
     return {
@@ -240,6 +285,8 @@ def _build_summary(
         "best_run_name": best.get("name") or model_summary.get("best_run_name"),
         "best_val_loss": best.get("best_val_loss") or model_summary.get("best_val_loss"),
         "ready_runs": audit_summary.get("ready_runs") or model_summary.get("ready_runs"),
+        "request_history_status": audit_summary.get("request_history_status") or request_summary.get("status"),
+        "request_history_records": audit_summary.get("request_history_records") or request_summary.get("total_log_records"),
         "available_artifacts": sum(1 for artifact in artifacts if artifact.get("exists")),
         "missing_artifacts": sum(1 for artifact in artifacts if not artifact.get("exists")),
     }
@@ -257,7 +304,12 @@ def _release_status(audit_status: Any, fail_count: Any, warn_count: Any) -> str:
     return "needs-audit"
 
 
-def _collect_release_artifacts(registry_path: Path, model_card_path: Path | None, audit_path: Path | None) -> list[dict[str, Any]]:
+def _collect_release_artifacts(
+    registry_path: Path,
+    model_card_path: Path | None,
+    audit_path: Path | None,
+    request_history_summary_path: Path | None,
+) -> list[dict[str, Any]]:
     registry_dir = registry_path.parent
     specs = [
         ("registry_json", "Registry JSON", registry_path, "JSON", "machine-readable run registry"),
@@ -283,7 +335,51 @@ def _collect_release_artifacts(registry_path: Path, model_card_path: Path | None
                 ("project_audit_html", "Project audit HTML", audit_dir / "project_audit.html", "HTML", "browser project audit"),
             ]
         )
+    if request_history_summary_path is not None:
+        request_dir = request_history_summary_path.parent
+        specs.extend(
+            [
+                (
+                    "request_history_summary_json",
+                    "Request history summary JSON",
+                    request_history_summary_path,
+                    "JSON",
+                    "machine-readable local inference request stability summary",
+                ),
+                (
+                    "request_history_summary_md",
+                    "Request history summary Markdown",
+                    request_dir / "request_history_summary.md",
+                    "MD",
+                    "markdown local inference request stability summary",
+                ),
+                (
+                    "request_history_summary_html",
+                    "Request history summary HTML",
+                    request_dir / "request_history_summary.html",
+                    "HTML",
+                    "browser local inference request stability summary",
+                ),
+            ]
+        )
     return [_artifact(key, title, path, kind, description) for key, title, path, kind, description in specs]
+
+
+def _request_history_context(request_history_summary: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(request_history_summary, dict):
+        return {"available": False, "status": None, "total_log_records": None}
+    summary = _dict(request_history_summary.get("summary"))
+    return {
+        "available": True,
+        "request_log": request_history_summary.get("request_log"),
+        "status": summary.get("status"),
+        "total_log_records": summary.get("total_log_records"),
+        "invalid_record_count": summary.get("invalid_record_count"),
+        "timeout_rate": summary.get("timeout_rate"),
+        "bad_request_rate": summary.get("bad_request_rate"),
+        "error_rate": summary.get("error_rate"),
+        "latest_timestamp": summary.get("latest_timestamp"),
+    }
 
 
 def _artifact(key: str, title: str, path: Path, kind: str, description: str) -> dict[str, Any]:

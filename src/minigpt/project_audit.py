@@ -22,6 +22,7 @@ def build_project_audit(
     registry_path: str | Path,
     *,
     model_card_path: str | Path | None = None,
+    request_history_summary_path: str | Path | None = None,
     title: str = "MiniGPT project audit",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -29,10 +30,28 @@ def build_project_audit(
     registry_file = Path(registry_path)
     registry = _read_required_json(registry_file)
     model_card_file = _resolve_model_card_path(registry_file, model_card_path)
-    model_card = _read_json(model_card_file, warnings) if model_card_file is not None else None
+    request_history_summary_file = _resolve_request_history_summary_path(registry_file, request_history_summary_path)
+    model_card = _read_json(model_card_file, warnings, "model card") if model_card_file is not None else None
+    request_history_summary = (
+        _read_json(request_history_summary_file, warnings, "request history summary")
+        if request_history_summary_file is not None
+        else None
+    )
     runs = _build_run_rows(registry, model_card if isinstance(model_card, dict) else None)
-    checks = _build_checks(registry, model_card if isinstance(model_card, dict) else None, runs)
-    summary = _summarize_checks(checks, registry, model_card if isinstance(model_card, dict) else None, runs)
+    checks = _build_checks(
+        registry,
+        model_card if isinstance(model_card, dict) else None,
+        request_history_summary if isinstance(request_history_summary, dict) else None,
+        request_history_summary_file,
+        runs,
+    )
+    summary = _summarize_checks(
+        checks,
+        registry,
+        model_card if isinstance(model_card, dict) else None,
+        request_history_summary if isinstance(request_history_summary, dict) else None,
+        runs,
+    )
 
     return {
         "schema_version": 1,
@@ -40,8 +59,10 @@ def build_project_audit(
         "generated_at": generated_at or utc_now(),
         "registry_path": str(registry_file),
         "model_card_path": None if model_card_file is None else str(model_card_file),
+        "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
         "summary": summary,
         "checks": checks,
+        "request_history_context": _request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
         "runs": runs,
         "recommendations": _build_recommendations(checks, summary),
         "warnings": warnings,
@@ -62,6 +83,7 @@ def render_project_audit_markdown(audit: dict[str, Any]) -> str:
         f"- Generated: `{audit.get('generated_at')}`",
         f"- Registry: `{audit.get('registry_path')}`",
         f"- Model card: `{audit.get('model_card_path') or 'missing'}`",
+        f"- Request history summary: `{audit.get('request_history_summary_path') or 'missing'}`",
         "",
         "## Summary",
         "",
@@ -72,6 +94,8 @@ def render_project_audit_markdown(audit: dict[str, Any]) -> str:
                 ("Runs", summary.get("run_count")),
                 ("Best run", summary.get("best_run_name")),
                 ("Ready runs", summary.get("ready_runs")),
+                ("Request history status", summary.get("request_history_status")),
+                ("Request history records", summary.get("request_history_records")),
                 ("Pass checks", summary.get("pass_count")),
                 ("Warn checks", summary.get("warn_count")),
                 ("Fail checks", summary.get("fail_count")),
@@ -110,6 +134,7 @@ def render_project_audit_html(audit: dict[str, Any]) -> str:
         ("Runs", summary.get("run_count")),
         ("Best run", summary.get("best_run_name")),
         ("Ready", summary.get("ready_runs")),
+        ("Req history", summary.get("request_history_status")),
         ("Pass", summary.get("pass_count")),
         ("Warn", summary.get("warn_count")),
         ("Fail", summary.get("fail_count")),
@@ -173,6 +198,20 @@ def _resolve_model_card_path(registry_path: Path, model_card_path: str | Path | 
     return None
 
 
+def _resolve_request_history_summary_path(registry_path: Path, request_history_summary_path: str | Path | None) -> Path | None:
+    if request_history_summary_path is not None:
+        return Path(request_history_summary_path)
+    candidates = [
+        registry_path.parent / "request_history_summary.json",
+        registry_path.parent / "request-history-summary" / "request_history_summary.json",
+        registry_path.parent.parent / "request-history-summary" / "request_history_summary.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
 def _read_required_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(path)
@@ -182,9 +221,9 @@ def _read_required_json(path: Path) -> dict[str, Any]:
     return payload
 
 
-def _read_json(path: Path, warnings: list[str]) -> dict[str, Any] | None:
+def _read_json(path: Path, warnings: list[str], label: str) -> dict[str, Any] | None:
     if not path.exists():
-        warnings.append(f"model card not found: {path}")
+        warnings.append(f"{label} not found: {path}")
         return None
     try:
         payload = json.loads(path.read_text(encoding="utf-8-sig"))
@@ -235,7 +274,13 @@ def _build_run_rows(registry: dict[str, Any], model_card: dict[str, Any] | None)
     return rows
 
 
-def _build_checks(registry: dict[str, Any], model_card: dict[str, Any] | None, runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _build_checks(
+    registry: dict[str, Any],
+    model_card: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
+    request_history_summary_path: Path | None,
+    runs: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     total = len(runs)
     checks = [
         _check("registry_runs", "Registry has runs", "pass" if total > 0 else "fail", f"{total} registered run(s)."),
@@ -264,6 +309,7 @@ def _build_checks(registry: dict[str, Any], model_card: dict[str, Any] | None, r
             "pass" if any(run.get("status") == "ready" for run in runs) else "warn",
             f"{sum(1 for run in runs if run.get('status') == 'ready')} ready run(s).",
         ),
+        _request_history_summary_check(request_history_summary, request_history_summary_path),
     ]
     non_pass_quality = [run.get("name") for run in runs if run.get("dataset_quality") not in {"pass", None, "missing"}]
     checks.append(
@@ -312,10 +358,77 @@ def _check(check_id: str, title: str, status: str, detail: str, evidence: dict[s
     }
 
 
+def _request_history_summary_check(
+    request_history_summary: dict[str, Any] | None,
+    request_history_summary_path: Path | None,
+) -> dict[str, Any]:
+    if not isinstance(request_history_summary, dict):
+        detail = (
+            f"request_history_summary.json missing at {request_history_summary_path}"
+            if request_history_summary_path is not None
+            else "request_history_summary.json missing; local inference stability was not summarized."
+        )
+        return _check("request_history_summary", "Request history summary is clean", "warn", detail)
+    summary = _dict(request_history_summary.get("summary"))
+    status = str(summary.get("status") or "missing")
+    records = summary.get("total_log_records")
+    invalid = summary.get("invalid_record_count")
+    timeout_rate = summary.get("timeout_rate")
+    error_rate = summary.get("error_rate")
+    audit_status = "pass" if status == "pass" else "warn"
+    detail = (
+        f"status={status}; records={_fmt_any(records)}; invalid={_fmt_any(invalid)}; "
+        f"timeout_rate={_fmt_any(timeout_rate)}; error_rate={_fmt_any(error_rate)}."
+    )
+    return _check(
+        "request_history_summary",
+        "Request history summary is clean",
+        audit_status,
+        detail,
+        {
+            "status": status,
+            "total_log_records": records,
+            "invalid_record_count": invalid,
+            "timeout_rate": timeout_rate,
+            "bad_request_rate": summary.get("bad_request_rate"),
+            "error_rate": error_rate,
+            "path": None if request_history_summary_path is None else str(request_history_summary_path),
+        },
+    )
+
+
+def _request_history_context(request_history_summary: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(request_history_summary, dict):
+        return {
+            "available": False,
+            "status": None,
+            "total_log_records": None,
+            "timeout_rate": None,
+            "error_rate": None,
+        }
+    summary = _dict(request_history_summary.get("summary"))
+    return {
+        "available": True,
+        "request_log": request_history_summary.get("request_log"),
+        "status": summary.get("status"),
+        "total_log_records": summary.get("total_log_records"),
+        "invalid_record_count": summary.get("invalid_record_count"),
+        "timeout_count": summary.get("timeout_count"),
+        "bad_request_count": summary.get("bad_request_count"),
+        "error_count": summary.get("error_count"),
+        "timeout_rate": summary.get("timeout_rate"),
+        "bad_request_rate": summary.get("bad_request_rate"),
+        "error_rate": summary.get("error_rate"),
+        "unique_checkpoint_count": summary.get("unique_checkpoint_count"),
+        "latest_timestamp": summary.get("latest_timestamp"),
+    }
+
+
 def _summarize_checks(
     checks: list[dict[str, Any]],
     registry: dict[str, Any],
     model_card: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
     runs: list[dict[str, Any]],
 ) -> dict[str, Any]:
     pass_count = sum(1 for check in checks if check["status"] == "pass")
@@ -329,6 +442,7 @@ def _summarize_checks(
     else:
         overall = "pass"
     model_summary = _dict(model_card.get("summary")) if isinstance(model_card, dict) else {}
+    request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
     best = _dict(registry.get("best_by_best_val_loss"))
     return {
         "overall_status": overall,
@@ -342,6 +456,10 @@ def _summarize_checks(
         "best_val_loss": best.get("best_val_loss"),
         "ready_runs": model_summary.get("ready_runs") if model_summary else sum(1 for run in runs if run.get("status") == "ready"),
         "review_runs": model_summary.get("review_runs") if model_summary else sum(1 for run in runs if run.get("status") == "review"),
+        "request_history_status": request_summary.get("status"),
+        "request_history_records": request_summary.get("total_log_records"),
+        "request_history_timeout_rate": request_summary.get("timeout_rate"),
+        "request_history_error_rate": request_summary.get("error_rate"),
     }
 
 
@@ -366,6 +484,8 @@ def _build_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]
             items.append("Review runs with non-pass generation quality before release-style handoff.")
         elif check["id"] == "ready_run":
             items.append("Promote at least one run to ready status by completing checkpoint, data quality, and eval artifacts.")
+        elif check["id"] == "request_history_summary":
+            items.append("Generate or review request_history_summary.json before using local playground activity as release evidence.")
         elif check["id"] == "dashboards":
             items.append("Build dashboards for missing runs to improve reviewability.")
         elif check["id"] == "checkpoints":

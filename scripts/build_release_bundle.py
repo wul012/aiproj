@@ -16,6 +16,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--registry", type=Path, default=ROOT / "runs" / "registry" / "registry.json")
     parser.add_argument("--model-card", type=Path, default=None, help="Optional model_card.json path")
     parser.add_argument("--audit", type=Path, default=None, help="Optional project_audit.json path")
+    parser.add_argument("--request-history-summary", type=Path, default=None, help="Optional request_history_summary.json path")
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory, defaults to runs/release-bundle")
     parser.add_argument("--release-name", type=str, default=None)
     parser.add_argument("--title", type=str, default="MiniGPT release bundle")
@@ -29,6 +30,7 @@ def main() -> None:
         args.registry,
         model_card_path=args.model_card,
         audit_path=args.audit,
+        request_history_summary_path=args.request_history_summary,
         release_name=args.release_name,
         title=args.title,
     )
@@ -38,6 +40,7 @@ def main() -> None:
     print(f"registry={args.registry}")
     print(f"release_status={summary['release_status']}")
     print(f"audit_status={summary['audit_status']}")
+    print(f"request_history_status={summary.get('request_history_status')}")
     print(f"best_run={summary['best_run_name']}")
     print(f"artifacts={summary['available_artifacts']} available/{summary['missing_artifacts']} missing")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

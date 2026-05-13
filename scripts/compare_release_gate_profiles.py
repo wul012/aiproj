@@ -46,6 +46,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Override every selected policy profile and do not require generation quality audit checks",
     )
+    parser.add_argument(
+        "--allow-missing-request-history-summary",
+        action="store_true",
+        help="Override every selected policy profile and do not require request history summary audit checks",
+    )
     parser.add_argument("--title", type=str, default="MiniGPT release gate profile comparison")
     parser.add_argument("--fail-on-blocked", action="store_true", help="Exit non-zero if any compared profile blocks")
     return parser.parse_args()
@@ -56,6 +61,7 @@ def main() -> None:
     bundles = args.bundle or [ROOT / "runs" / "release-bundle" / "release_bundle.json"]
     out_dir = args.out_dir or ROOT / "runs" / "release-gate-profiles"
     require_generation_quality = False if args.allow_missing_generation_quality else None
+    require_request_history_summary = False if args.allow_missing_request_history_summary else None
     profiles = args.profiles or list(DEFAULT_COMPARISON_PROFILES)
     report = build_release_gate_profile_comparison(
         bundles,
@@ -63,6 +69,7 @@ def main() -> None:
         minimum_audit_score=args.min_audit_score,
         minimum_ready_runs=args.min_ready_runs,
         require_generation_quality=require_generation_quality,
+        require_request_history_summary=require_request_history_summary,
         baseline_profile=args.baseline_profile,
         title=args.title,
     )

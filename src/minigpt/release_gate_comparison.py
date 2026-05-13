@@ -18,6 +18,7 @@ def build_release_gate_profile_comparison(
     minimum_audit_score: float | None = None,
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
+    require_request_history_summary: bool | None = None,
     baseline_profile: str | None = None,
     title: str = "MiniGPT release gate profile comparison",
     generated_at: str | None = None,
@@ -40,6 +41,7 @@ def build_release_gate_profile_comparison(
                 minimum_audit_score=minimum_audit_score,
                 minimum_ready_runs=minimum_ready_runs,
                 require_generation_quality=require_generation_quality,
+                require_request_history_summary=require_request_history_summary,
                 title=f"{title}: {profile}",
                 generated_at=timestamp,
             )
@@ -82,6 +84,7 @@ def write_release_gate_profile_comparison_csv(report: dict[str, Any], path: str 
         "ready_runs",
         "minimum_ready_runs",
         "require_generation_quality_audit_checks",
+        "require_request_history_summary_audit_check",
         "pass_count",
         "warn_count",
         "fail_count",
@@ -112,6 +115,8 @@ def write_release_gate_profile_delta_csv(report: dict[str, Any], path: str | Pat
         "compared_minimum_audit_score",
         "baseline_require_generation_quality",
         "compared_require_generation_quality",
+        "baseline_require_request_history_summary",
+        "compared_require_request_history_summary",
         "added_failed_checks",
         "removed_failed_checks",
         "added_warned_checks",
@@ -150,8 +155,8 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
         "",
         "## Profile Matrix",
         "",
-        "| Bundle | Profile | Decision | Gate | Audit score | Min score | Generation quality required | Failed checks | Warned checks |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Bundle | Profile | Decision | Gate | Audit score | Min score | Generation quality required | Request history required | Failed checks | Warned checks |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("rows")):
         lines.append(
@@ -165,6 +170,7 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
                     _md(row.get("audit_score_percent")),
                     _md(row.get("minimum_audit_score")),
                     _md(row.get("require_generation_quality_audit_checks")),
+                    _md(row.get("require_request_history_summary_audit_check")),
                     _md(", ".join(_string_list(row.get("failed_checks")))),
                     _md(", ".join(_string_list(row.get("warned_checks")))),
                 ]
@@ -236,7 +242,7 @@ def render_release_gate_profile_comparison_html(report: dict[str, Any]) -> str:
             f"<header><h1>{_e(report.get('title', 'MiniGPT release gate profile comparison'))}</h1><p>profiles: {_e(', '.join(_string_list(report.get('policy_profiles'))))}; baseline: {_e(report.get('baseline_profile'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
             '<section class="panel"><h2>Profile Matrix</h2><table><thead><tr>'
-            "<th>Bundle</th><th>Profile</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Min</th><th>Generation</th><th>Failed</th><th>Warned</th>"
+            "<th>Bundle</th><th>Profile</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Min</th><th>Generation</th><th>Request history</th><th>Failed</th><th>Warned</th>"
             "</tr></thead><tbody>"
             + rows
             + "</tbody></table></section>",
@@ -314,6 +320,7 @@ def _row_from_gate(gate: dict[str, Any]) -> dict[str, Any]:
         "ready_runs": summary.get("ready_runs"),
         "minimum_ready_runs": policy.get("minimum_ready_runs"),
         "require_generation_quality_audit_checks": policy.get("require_generation_quality_audit_checks"),
+        "require_request_history_summary_audit_check": policy.get("require_request_history_summary_audit_check"),
         "pass_count": summary.get("pass_count"),
         "warn_count": summary.get("warn_count"),
         "fail_count": summary.get("fail_count"),
@@ -423,6 +430,8 @@ def _delta_between_rows(baseline: dict[str, Any], compared: dict[str, Any]) -> d
         "compared_minimum_audit_score": compared.get("minimum_audit_score"),
         "baseline_require_generation_quality": baseline.get("require_generation_quality_audit_checks"),
         "compared_require_generation_quality": compared.get("require_generation_quality_audit_checks"),
+        "baseline_require_request_history_summary": baseline.get("require_request_history_summary_audit_check"),
+        "compared_require_request_history_summary": compared.get("require_request_history_summary_audit_check"),
         "decision_changed": decision_changed,
         "delta_status": delta_status,
         "added_failed_checks": added_failed,
@@ -467,6 +476,11 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append(
             f"Generation-quality requirement changes from {delta.get('baseline_require_generation_quality')} to {delta.get('compared_require_generation_quality')}."
         )
+    if delta.get("baseline_require_request_history_summary") != delta.get("compared_require_request_history_summary"):
+        parts.append(
+            "Request-history-summary requirement changes from "
+            f"{delta.get('baseline_require_request_history_summary')} to {delta.get('compared_require_request_history_summary')}."
+        )
     return " ".join(parts)
 
 
@@ -485,6 +499,7 @@ def _html_row(row: dict[str, Any]) -> str:
         f"<td>{_e(row.get('audit_score_percent'))}</td>"
         f"<td>{_e(row.get('minimum_audit_score'))}</td>"
         f"<td>{_e(row.get('require_generation_quality_audit_checks'))}</td>"
+        f"<td>{_e(row.get('require_request_history_summary_audit_check'))}</td>"
         f"<td>{_e(', '.join(_string_list(row.get('failed_checks'))))}</td>"
         f"<td>{_e(', '.join(_string_list(row.get('warned_checks'))))}</td>"
         "</tr>"

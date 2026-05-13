@@ -36,6 +36,8 @@ def make_bundle(
     warnings: list[str] | None = None,
     include_generation_checks: bool = True,
     generation_status: str = "pass",
+    include_request_history_check: bool = True,
+    request_history_status: str = "pass",
 ) -> Path:
     audit_checks = [{"id": "ready_run", "title": "At least one ready run", "status": audit_status, "detail": "1 ready run."}]
     if include_generation_checks:
@@ -54,6 +56,15 @@ def make_bundle(
                     "detail": "all analyzed runs pass",
                 },
             ]
+        )
+    if include_request_history_check:
+        audit_checks.append(
+            {
+                "id": "request_history_summary",
+                "title": "Request history summary is clean",
+                "status": request_history_status,
+                "detail": f"status={request_history_status}; records=4; invalid=0; timeout_rate=0; error_rate=0.",
+            }
         )
     bundle = {
         "schema_version": 1,
@@ -103,6 +114,8 @@ class ReleaseGateTests(unittest.TestCase):
         self.assertEqual(set(profiles), {"legacy", "review", "standard", "strict"})
         self.assertEqual(profiles["standard"]["minimum_audit_score"], 90.0)
         self.assertEqual(profiles["legacy"]["require_generation_quality"], False)
+        self.assertEqual(profiles["standard"]["require_request_history_summary"], True)
+        self.assertEqual(profiles["legacy"]["require_request_history_summary"], False)
 
         profiles["standard"]["minimum_audit_score"] = 1.0
         self.assertEqual(release_gate_policy_profiles()["standard"]["minimum_audit_score"], 90.0)
@@ -123,7 +136,9 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["policy_profile"], "standard")
             self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], True)
+            self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], True)
             self.assertIn("generation_quality_audit_checks", {check["id"] for check in gate["checks"]})
+            self.assertIn("request_history_summary_audit_check", {check["id"] for check in gate["checks"]})
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertIn("Release gate passed", " ".join(gate["recommendations"]))
 
@@ -196,6 +211,7 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["policy_profile"], "legacy")
             self.assertEqual(gate["policy"]["minimum_audit_score"], 80.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
+            self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], False)
             self.assertEqual(gate["summary"]["gate_status"], "pass")
 
     def test_explicit_overrides_take_precedence_over_policy_profile(self) -> None:
@@ -207,17 +223,20 @@ class ReleaseGateTests(unittest.TestCase):
                 policy_profile="strict",
                 minimum_audit_score=90.0,
                 require_generation_quality=False,
+                require_request_history_summary=False,
             )
 
             self.assertEqual(gate["policy"]["policy_profile"], "strict")
             self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
+            self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], False)
             self.assertEqual(
                 gate["policy"]["overrides"],
                 {
                     "minimum_audit_score": True,
                     "minimum_ready_runs": False,
                     "require_generation_quality": True,
+                    "require_request_history_summary": True,
                 },
             )
             self.assertEqual(gate["summary"]["gate_status"], "pass")
@@ -233,6 +252,36 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(check["status"], "warn")
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
+
+    def test_build_release_gate_fails_when_request_history_summary_check_is_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_request_history_check=False)
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "fail")
+            check = next(item for item in gate["checks"] if item["id"] == "request_history_summary_audit_check")
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("missing required audit check", check["detail"])
+
+    def test_legacy_profile_allows_missing_request_history_summary_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_request_history_check=False, audit_score=84.0)
+
+            gate = build_release_gate(bundle_path, policy_profile="legacy")
+
+            self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], False)
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
+
+    def test_build_release_gate_warns_for_request_history_summary_warnings(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), request_history_status="warn")
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "warn")
+            check = next(item for item in gate["checks"] if item["id"] == "request_history_summary_audit_check")
+            self.assertEqual(check["status"], "warn")
 
     def test_build_release_gate_fails_for_incomplete_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
