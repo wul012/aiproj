@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 from functools import partial
 import json
 import mimetypes
@@ -11,6 +12,19 @@ from typing import Any, Callable
 from urllib.parse import unquote, urlparse
 
 from .playground import write_playground
+
+
+@dataclass(frozen=True)
+class InferenceSafetyProfile:
+    max_prompt_chars: int = 2000
+    max_new_tokens: int = 512
+    min_temperature: float = 0.05
+    max_temperature: float = 2.0
+    max_top_k: int = 200
+    max_body_bytes: int = 16 * 1024
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass(frozen=True)
@@ -114,20 +128,28 @@ class MiniGPTGenerator:
         return torch.device(self.device_name)
 
 
-def parse_generation_request(payload: dict[str, Any]) -> GenerationRequest:
+def parse_generation_request(
+    payload: dict[str, Any],
+    safety_profile: InferenceSafetyProfile | None = None,
+) -> GenerationRequest:
+    safety = safety_profile or InferenceSafetyProfile()
     prompt = str(payload.get("prompt", "")).strip()
     if not prompt:
         raise ValueError("prompt cannot be empty")
+    if len(prompt) > safety.max_prompt_chars:
+        raise ValueError(f"prompt must be at most {safety.max_prompt_chars} characters")
     max_new_tokens = _as_int(payload.get("max_new_tokens", 80), "max_new_tokens")
-    if max_new_tokens < 1 or max_new_tokens > 512:
-        raise ValueError("max_new_tokens must be between 1 and 512")
+    if max_new_tokens < 1 or max_new_tokens > safety.max_new_tokens:
+        raise ValueError(f"max_new_tokens must be between 1 and {safety.max_new_tokens}")
     temperature = _as_float(payload.get("temperature", 0.8), "temperature")
-    if temperature <= 0:
-        raise ValueError("temperature must be greater than 0")
+    if temperature < safety.min_temperature or temperature > safety.max_temperature:
+        raise ValueError(f"temperature must be between {safety.min_temperature:g} and {safety.max_temperature:g}")
     top_k_raw = payload.get("top_k", 30)
-    top_k = None if top_k_raw in {None, "", 0, "0", "none", "None"} else _as_int(top_k_raw, "top_k")
+    top_k = None if _empty_top_k(top_k_raw) else _as_int(top_k_raw, "top_k")
     if top_k is not None and top_k < 1:
         raise ValueError("top_k must be at least 1 when provided")
+    if top_k is not None and top_k > safety.max_top_k:
+        raise ValueError(f"top_k must be at most {safety.max_top_k}")
     seed_raw = payload.get("seed")
     seed = None if seed_raw in {None, ""} else _as_int(seed_raw, "seed")
     return GenerationRequest(
@@ -139,9 +161,17 @@ def parse_generation_request(payload: dict[str, Any]) -> GenerationRequest:
     )
 
 
-def build_health_payload(run_dir: str | Path, checkpoint_path: str | Path | None = None) -> dict[str, Any]:
+def build_health_payload(
+    run_dir: str | Path,
+    checkpoint_path: str | Path | None = None,
+    *,
+    safety_profile: InferenceSafetyProfile | None = None,
+    request_log_path: str | Path | None = None,
+) -> dict[str, Any]:
     root = Path(run_dir)
     checkpoint = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
+    request_log = Path(request_log_path) if request_log_path is not None else root / "inference_requests.jsonl"
+    safety = safety_profile or InferenceSafetyProfile()
     return {
         "status": "ok",
         "run_dir": str(root),
@@ -150,7 +180,56 @@ def build_health_payload(run_dir: str | Path, checkpoint_path: str | Path | None
         "tokenizer_exists": (root / "tokenizer.json").exists(),
         "playground_exists": (root / "playground.html").exists(),
         "sample_lab_exists": (root / "sample_lab" / "sample_lab.json").exists(),
+        "model_info_endpoint": "/api/model-info",
+        "generate_endpoint": "/api/generate",
+        "safety": safety.to_dict(),
+        "request_log": str(request_log),
+        "request_log_exists": request_log.exists(),
     }
+
+
+def build_model_info_payload(
+    run_dir: str | Path,
+    checkpoint_path: str | Path | None = None,
+    tokenizer_path: str | Path | None = None,
+) -> dict[str, Any]:
+    root = Path(run_dir)
+    checkpoint = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
+    tokenizer = Path(tokenizer_path) if tokenizer_path is not None else root / "tokenizer.json"
+    manifest = _read_json(root / "run_manifest.json")
+    train_config = _read_json(root / "train_config.json")
+    model_report = _read_json(root / "model_report" / "model_report.json")
+    dataset_version = _read_json(root / "dataset_version.json")
+    model = _pick_dict(manifest, "model")
+    training = _pick_dict(manifest, "training")
+    data = _pick_dict(manifest, "data")
+    report_config = _pick_dict(model_report, "config")
+    config = _pick_dict(model, "config") or report_config
+    version_summary = _pick_dict(data, "dataset_version")
+    return {
+        "status": "ok",
+        "run_dir": str(root),
+        "checkpoint": str(checkpoint),
+        "checkpoint_exists": checkpoint.exists(),
+        "tokenizer_path": str(tokenizer),
+        "tokenizer_exists": tokenizer.exists(),
+        "tokenizer": _pick(training, "tokenizer") or _pick(train_config, "tokenizer") or _pick(model_report, "tokenizer"),
+        "model_config": config or None,
+        "parameter_count": _pick(model, "parameter_count") or _pick(model_report, "total_parameters"),
+        "data_source": _pick(data, "source"),
+        "dataset_version": _pick(version_summary, "id") or _nested_pick(dataset_version, "dataset", "id"),
+        "dataset_fingerprint": _pick(version_summary, "short_fingerprint") or _nested_pick(dataset_version, "stats", "short_fingerprint"),
+        "git": _pick(manifest, "git"),
+        "artifact_count": _artifact_count(manifest),
+    }
+
+
+def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
+    log_path = Path(path)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {"timestamp": _utc_now(), **event}
+    with log_path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
 def create_handler(
@@ -159,18 +238,25 @@ def create_handler(
     tokenizer_path: str | Path | None = None,
     device: str = "auto",
     generator_factory: Callable[[str | Path, str | Path | None, str], Any] = MiniGPTGenerator,
+    safety_profile: InferenceSafetyProfile | None = None,
+    request_log_path: str | Path | None = None,
 ) -> type[BaseHTTPRequestHandler]:
     root = Path(run_dir)
     checkpoint = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
     generator = generator_factory(checkpoint, tokenizer_path, device)
+    safety = safety_profile or InferenceSafetyProfile()
+    request_log = Path(request_log_path) if request_log_path is not None else root / "inference_requests.jsonl"
 
     class MiniGPTServerHandler(BaseHTTPRequestHandler):
-        server_version = "MiniGPTServer/0.1"
+        server_version = "MiniGPTServer/0.2"
 
         def do_GET(self) -> None:
             parsed = urlparse(self.path)
             if parsed.path == "/api/health":
-                self._send_json(build_health_payload(root, checkpoint))
+                self._send_json(build_health_payload(root, checkpoint, safety_profile=safety, request_log_path=request_log))
+                return
+            if parsed.path == "/api/model-info":
+                self._send_json(build_model_info_payload(root, checkpoint, tokenizer_path))
                 return
             if parsed.path in {"/", "/playground.html"}:
                 html_path = root / "playground.html"
@@ -185,17 +271,28 @@ def create_handler(
             if parsed.path != "/api/generate":
                 self._send_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
                 return
+            request: GenerationRequest | None = None
             try:
                 payload = self._read_json_body()
-                request = parse_generation_request(payload)
+                request = parse_generation_request(payload, safety)
                 response = generator.generate(request)
             except ValueError as exc:
+                self._log_generation("bad_request", request=request, error=str(exc))
                 self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
                 return
             except Exception as exc:
+                self._log_generation("error", request=request, error=str(exc))
                 self._send_json({"error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
                 return
+            self._log_generation("ok", request=request, response=response)
             self._send_json(response.to_dict())
+
+        def do_OPTIONS(self) -> None:
+            self.send_response(HTTPStatus.NO_CONTENT)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.end_headers()
 
         def log_message(self, format: str, *args: Any) -> None:
             return
@@ -215,11 +312,45 @@ def create_handler(
 
         def _read_json_body(self) -> dict[str, Any]:
             length = int(self.headers.get("Content-Length", "0"))
+            if length > safety.max_body_bytes:
+                raise ValueError(f"request body must be at most {safety.max_body_bytes} bytes")
             body = self.rfile.read(length).decode("utf-8")
             payload = json.loads(body or "{}")
             if not isinstance(payload, dict):
                 raise ValueError("request body must be a JSON object")
             return payload
+
+        def _log_generation(
+            self,
+            status: str,
+            *,
+            request: GenerationRequest | None = None,
+            response: GenerationResponse | None = None,
+            error: str | None = None,
+        ) -> None:
+            event: dict[str, Any] = {
+                "endpoint": "/api/generate",
+                "status": status,
+                "client": self.client_address[0] if self.client_address else None,
+                "checkpoint": str(checkpoint),
+            }
+            if request is not None:
+                event.update(
+                    {
+                        "prompt_chars": len(request.prompt),
+                        "max_new_tokens": request.max_new_tokens,
+                        "temperature": request.temperature,
+                        "top_k": request.top_k,
+                        "seed": request.seed,
+                    }
+                )
+            if response is not None:
+                event["generated_chars"] = len(response.generated)
+                event["continuation_chars"] = len(response.continuation)
+                event["tokenizer"] = response.tokenizer
+            if error is not None:
+                event["error"] = error
+            append_inference_log(request_log, event)
 
         def _send_json(self, payload: dict[str, Any], status: HTTPStatus = HTTPStatus.OK) -> None:
             body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -227,6 +358,7 @@ def create_handler(
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
             self.end_headers()
             self.wfile.write(body)
 
@@ -249,8 +381,17 @@ def run_server(
     checkpoint_path: str | Path | None = None,
     tokenizer_path: str | Path | None = None,
     device: str = "auto",
+    safety_profile: InferenceSafetyProfile | None = None,
+    request_log_path: str | Path | None = None,
 ) -> ThreadingHTTPServer:
-    handler = create_handler(run_dir, checkpoint_path=checkpoint_path, tokenizer_path=tokenizer_path, device=device)
+    handler = create_handler(
+        run_dir,
+        checkpoint_path=checkpoint_path,
+        tokenizer_path=tokenizer_path,
+        device=device,
+        safety_profile=safety_profile,
+        request_log_path=request_log_path,
+    )
     server = ThreadingHTTPServer((host, port), handler)
     return server
 
@@ -267,3 +408,48 @@ def _as_float(value: Any, name: str) -> float:
         return float(value)
     except (TypeError, ValueError) as exc:
         raise ValueError(f"{name} must be a number") from exc
+
+
+def _empty_top_k(value: Any) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, str):
+        return value.strip() in {"", "0", "none", "None"}
+    return value == 0
+
+
+def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def _pick(payload: Any, key: str) -> Any:
+    if isinstance(payload, dict):
+        return payload.get(key)
+    return None
+
+
+def _pick_dict(payload: Any, key: str) -> dict[str, Any]:
+    value = _pick(payload, key)
+    return value if isinstance(value, dict) else {}
+
+
+def _nested_pick(payload: Any, *keys: str) -> Any:
+    value = payload
+    for key in keys:
+        if not isinstance(value, dict):
+            return None
+        value = value.get(key)
+    return value
+
+
+def _artifact_count(manifest: Any) -> int | None:
+    artifacts = _pick(manifest, "artifacts")
+    if not isinstance(artifacts, list):
+        return None
+    return sum(1 for item in artifacts if isinstance(item, dict) and item.get("exists"))
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")

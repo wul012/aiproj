@@ -39,6 +39,9 @@ b/36/解释/说明.md
 b/37/图片
 b/37/解释/说明.md
  -> v37 baseline model comparison 的运行截图和解释
+b/38/图片
+b/38/解释/说明.md
+ -> v38 inference safety profile 的运行截图和解释
 ```
 
 写入规则：

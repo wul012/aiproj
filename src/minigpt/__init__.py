@@ -48,9 +48,11 @@ __all__ = [
     "SamplingCase",
     "SamplingResult",
     "default_sampling_cases",
+    "InferenceSafetyProfile",
     "GenerationRequest",
     "GenerationResponse",
     "build_health_payload",
+    "build_model_info_payload",
     "parse_generation_request",
 ]
 
@@ -97,9 +99,11 @@ _EXPORTS = {
     "SamplingCase": ("sampling", "SamplingCase"),
     "SamplingResult": ("sampling", "SamplingResult"),
     "default_sampling_cases": ("sampling", "default_sampling_cases"),
+    "InferenceSafetyProfile": ("server", "InferenceSafetyProfile"),
     "GenerationRequest": ("server", "GenerationRequest"),
     "GenerationResponse": ("server", "GenerationResponse"),
     "build_health_payload": ("server", "build_health_payload"),
+    "build_model_info_payload": ("server", "build_model_info_payload"),
     "parse_generation_request": ("server", "parse_generation_request"),
 }
 

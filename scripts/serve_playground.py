@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.server import run_server
+from minigpt.server import InferenceSafetyProfile, run_server
 
 
 def parse_args() -> argparse.Namespace:
@@ -18,11 +18,26 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--host", type=str, default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
+    parser.add_argument("--max-prompt-chars", type=int, default=2000)
+    parser.add_argument("--max-new-tokens-limit", type=int, default=512)
+    parser.add_argument("--min-temperature", type=float, default=0.05)
+    parser.add_argument("--max-temperature", type=float, default=2.0)
+    parser.add_argument("--max-top-k", type=int, default=200)
+    parser.add_argument("--max-body-bytes", type=int, default=16 * 1024)
+    parser.add_argument("--request-log", type=Path, default=None, help="JSONL log path. Defaults to <run-dir>/inference_requests.jsonl")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    safety = InferenceSafetyProfile(
+        max_prompt_chars=args.max_prompt_chars,
+        max_new_tokens=args.max_new_tokens_limit,
+        min_temperature=args.min_temperature,
+        max_temperature=args.max_temperature,
+        max_top_k=args.max_top_k,
+        max_body_bytes=args.max_body_bytes,
+    )
     server = run_server(
         args.run_dir,
         host=args.host,
@@ -30,10 +45,15 @@ def main() -> None:
         checkpoint_path=args.checkpoint,
         tokenizer_path=args.tokenizer,
         device=args.device,
+        safety_profile=safety,
+        request_log_path=args.request_log,
     )
     url = f"http://{args.host}:{server.server_port}/"
     print(f"serving={url}", flush=True)
     print(f"run_dir={args.run_dir}", flush=True)
+    print(f"model_info={url}api/model-info", flush=True)
+    print(f"request_log={args.request_log or args.run_dir / 'inference_requests.jsonl'}", flush=True)
+    print(f"safety={safety.to_dict()}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
