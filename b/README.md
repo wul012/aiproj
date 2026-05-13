@@ -69,6 +69,9 @@ b/46/解释/说明.md
 b/47/图片
 b/47/解释/说明.md
  -> v47 registry pair delta leaders 的运行截图和解释
+b/48/图片
+b/48/解释/说明.md
+ -> v48 project maturity summary 的运行截图和解释
 ```
 
 写入规则：

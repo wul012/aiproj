@@ -109,7 +109,7 @@ eval prompts
  -> 第四十七版代码讲解：把多个 run 的 pair batch case delta 聚合成 pair_delta_summary 和 Pair Delta Leaders 面板
 ```
 
-后续推进 v48 时，在这里继续追加 `63-v48-主题.md`，或在新阶段目录开始新的能力线。
+v48 已经转入 `代码讲解记录_项目成熟度阶段`，本目录的评估基准阶段到 v47 收口；后续如果继续做 benchmark scoring 再按实际能力线决定是否回到本目录。
 
 ## 一句话总览
 
