@@ -27,6 +27,7 @@ from minigpt.server import (
     discover_checkpoint_options,
     parse_generation_pair_request,
     parse_generation_request,
+    request_history_to_csv,
     sse_message,
     stream_timeout_payload,
 )
@@ -329,6 +330,69 @@ class ServerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "limit"):
                 build_request_history_payload(log_path, limit=0)
 
+    def test_request_history_payload_filters_and_exports_csv(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = Path(tmp) / "requests.jsonl"
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate",
+                    "status": "ok",
+                    "checkpoint_id": "default",
+                    "requested_checkpoint": "default",
+                    "prompt_chars": 3,
+                    "generated_chars": 10,
+                },
+            )
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate-stream",
+                    "status": "timeout",
+                    "checkpoint_id": "wide",
+                    "requested_checkpoint": "wide",
+                    "prompt_chars": 4,
+                    "generated_chars": 11,
+                    "stream_chunks": 2,
+                    "stream_timed_out": True,
+                },
+            )
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate-pair",
+                    "status": "ok",
+                    "left_checkpoint_id": "default",
+                    "right_checkpoint_id": "wide",
+                    "requested_right_checkpoint": "wide",
+                    "prompt_chars": 5,
+                    "left_generated_chars": 12,
+                    "right_generated_chars": 13,
+                    "generated_equal": False,
+                },
+            )
+
+            payload = build_request_history_payload(
+                log_path,
+                limit=10,
+                status_filter="ok",
+                checkpoint_filter="wide",
+            )
+            csv_text = request_history_to_csv(payload["requests"])
+
+            self.assertEqual(payload["matching_log_records"], 1)
+            self.assertEqual(payload["record_count"], 1)
+            self.assertEqual(payload["filters"]["status"], "ok")
+            self.assertEqual(payload["filters"]["checkpoint"], "wide")
+            self.assertEqual(payload["requests"][0]["endpoint"], "/api/generate-pair")
+            self.assertIn("timestamp,endpoint,status,checkpoint_id", csv_text)
+            self.assertIn("/api/generate-pair", csv_text)
+            self.assertIn("false", csv_text)
+
+            endpoint_payload = build_request_history_payload(log_path, endpoint_filter="/api/generate-stream")
+            self.assertEqual(endpoint_payload["matching_log_records"], 1)
+            self.assertEqual(endpoint_payload["requests"][0]["status"], "timeout")
+
     def test_sse_message_formats_event_and_json_data(self) -> None:
         message = sse_message("token", {"text": "中", "index": 1}).decode("utf-8")
 
@@ -448,6 +512,13 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(history["record_count"], 1)
                 self.assertEqual(history["requests"][0]["endpoint"], "/api/generate")
                 self.assertEqual(history["requests"][0]["checkpoint_id"], "candidate")
+                filtered = _get_json(base + "/api/request-history?status=ok&endpoint=/api/generate&checkpoint=candidate")
+                self.assertEqual(filtered["matching_log_records"], 1)
+                self.assertEqual(filtered["filters"]["checkpoint"], "candidate")
+                csv_text, csv_content_type = _get_raw(base + "/api/request-history?status=ok&format=csv")
+                self.assertTrue(csv_content_type.startswith("text/csv"))
+                self.assertIn("timestamp,endpoint,status,checkpoint_id", csv_text)
+                self.assertIn("/api/generate", csv_text)
                 with self.assertRaises(HTTPError) as cm:
                     _get_json(base + "/api/request-history?limit=999")
                 self.assertEqual(cm.exception.code, 400)
@@ -622,6 +693,11 @@ class ServerTests(unittest.TestCase):
 def _get_json(url: str) -> dict:
     with urlopen(url, timeout=5) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def _get_raw(url: str) -> tuple[str, str]:
+    with urlopen(url, timeout=5) as response:
+        return response.read().decode("utf-8"), response.headers.get("Content-Type", "")
 
 
 def _post_json(url: str, payload: dict) -> dict:

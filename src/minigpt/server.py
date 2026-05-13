@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import csv
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from functools import partial
 import html as html_lib
+import io
 import json
 import mimetypes
 from pathlib import Path
@@ -18,6 +20,35 @@ from .playground import write_playground
 
 REQUEST_HISTORY_DEFAULT_LIMIT = 20
 REQUEST_HISTORY_MAX_LIMIT = 200
+REQUEST_HISTORY_CSV_COLUMNS = [
+    "timestamp",
+    "endpoint",
+    "status",
+    "checkpoint_id",
+    "requested_checkpoint",
+    "left_checkpoint_id",
+    "right_checkpoint_id",
+    "requested_left_checkpoint",
+    "requested_right_checkpoint",
+    "prompt_chars",
+    "max_new_tokens",
+    "temperature",
+    "top_k",
+    "seed",
+    "generated_chars",
+    "continuation_chars",
+    "left_generated_chars",
+    "right_generated_chars",
+    "generated_equal",
+    "continuation_equal",
+    "stream_chunks",
+    "stream_timed_out",
+    "stream_cancelled",
+    "stream_elapsed_seconds",
+    "artifact_json",
+    "artifact_html",
+    "error",
+]
 
 
 @dataclass(frozen=True)
@@ -472,12 +503,22 @@ def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
 def build_request_history_payload(
     request_log_path: str | Path,
     limit: int = REQUEST_HISTORY_DEFAULT_LIMIT,
+    *,
+    status_filter: str | None = None,
+    endpoint_filter: str | None = None,
+    checkpoint_filter: str | None = None,
 ) -> dict[str, Any]:
     history_limit = _request_history_limit(limit)
     log_path = Path(request_log_path)
     records, invalid_count = _read_inference_log_records(log_path)
-    selected = records[-history_limit:][::-1]
-    requests = [_request_history_record(record) for record in selected]
+    normalized_records = [_request_history_record(record) for record in records]
+    filtered_records = _filter_request_history_records(
+        normalized_records,
+        status_filter=status_filter,
+        endpoint_filter=endpoint_filter,
+        checkpoint_filter=checkpoint_filter,
+    )
+    requests = filtered_records[-history_limit:][::-1]
     status_counts = _count_values(requests, "status")
     endpoint_counts = _count_values(requests, "endpoint")
     return {
@@ -487,10 +528,17 @@ def build_request_history_payload(
         "limit": history_limit,
         "newest_first": True,
         "total_log_records": len(records),
+        "matching_log_records": len(filtered_records),
         "invalid_record_count": invalid_count,
         "record_count": len(requests),
+        "filters": {
+            "status": status_filter,
+            "endpoint": endpoint_filter,
+            "checkpoint": checkpoint_filter,
+        },
         "summary": {
             "total_log_records": len(records),
+            "matching_records": len(filtered_records),
             "returned_records": len(requests),
             "invalid_record_count": invalid_count,
             "latest_timestamp": requests[0].get("timestamp") if requests else None,
@@ -504,6 +552,15 @@ def build_request_history_payload(
         },
         "requests": requests,
     }
+
+
+def request_history_to_csv(records: list[dict[str, Any]]) -> str:
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=REQUEST_HISTORY_CSV_COLUMNS, extrasaction="ignore", lineterminator="\n")
+    writer.writeheader()
+    for record in records:
+        writer.writerow({column: _csv_value(record.get(column)) for column in REQUEST_HISTORY_CSV_COLUMNS})
+    return output.getvalue()
 
 
 def sse_message(event: str, data: dict[str, Any]) -> bytes:
@@ -683,10 +740,19 @@ def create_handler(
             if parsed.path == "/api/request-history":
                 try:
                     history_limit = _request_history_limit_from_query(parsed.query)
+                    history_filters = _request_history_filters_from_query(parsed.query)
                 except ValueError as exc:
                     self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
                     return
-                self._send_json(build_request_history_payload(request_log, limit=history_limit))
+                payload = build_request_history_payload(request_log, limit=history_limit, **history_filters)
+                if _query_value(parsed.query, "format") == "csv":
+                    self._send_text(
+                        request_history_to_csv(payload["requests"]),
+                        content_type="text/csv; charset=utf-8",
+                        filename="request_history.csv",
+                    )
+                    return
+                self._send_json(payload)
                 return
             if parsed.path == "/api/model-info":
                 selector = _query_value(parsed.query, "checkpoint")
@@ -1098,6 +1164,25 @@ def create_handler(
             self.end_headers()
             self.wfile.write(body)
 
+        def _send_text(
+            self,
+            text: str,
+            *,
+            content_type: str = "text/plain; charset=utf-8",
+            filename: str | None = None,
+            status: HTTPStatus = HTTPStatus.OK,
+        ) -> None:
+            body = text.encode("utf-8")
+            self.send_response(status)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            if filename is not None:
+                self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+            self.end_headers()
+            self.wfile.write(body)
+
         def _send_sse_headers(self) -> None:
             self.send_response(HTTPStatus.OK)
             self.send_header("Content-Type", "text/event-stream; charset=utf-8")
@@ -1189,6 +1274,23 @@ def _request_history_limit_from_query(query: str) -> int:
     return _request_history_limit(_as_int(raw, "limit"))
 
 
+def _request_history_filters_from_query(query: str) -> dict[str, str | None]:
+    return {
+        "status_filter": _clean_query_filter(_query_value(query, "status")),
+        "endpoint_filter": _clean_query_filter(_query_value(query, "endpoint")),
+        "checkpoint_filter": _clean_query_filter(_query_value(query, "checkpoint")),
+    }
+
+
+def _clean_query_filter(value: str | None) -> str | None:
+    if value is None:
+        return None
+    text = value.strip()
+    if not text or text.lower() in {"all", "*"}:
+        return None
+    return text
+
+
 def _read_inference_log_records(path: Path) -> tuple[list[dict[str, Any]], int]:
     if not path.exists():
         return [], 0
@@ -1207,6 +1309,40 @@ def _read_inference_log_records(path: Path) -> tuple[list[dict[str, Any]], int]:
         else:
             invalid_count += 1
     return records, invalid_count
+
+
+def _filter_request_history_records(
+    records: list[dict[str, Any]],
+    *,
+    status_filter: str | None = None,
+    endpoint_filter: str | None = None,
+    checkpoint_filter: str | None = None,
+) -> list[dict[str, Any]]:
+    filtered: list[dict[str, Any]] = []
+    status_wanted = status_filter.casefold() if status_filter is not None else None
+    endpoint_wanted = endpoint_filter.casefold() if endpoint_filter is not None else None
+    checkpoint_wanted = checkpoint_filter.casefold() if checkpoint_filter is not None else None
+    for record in records:
+        if status_wanted is not None and str(record.get("status", "")).casefold() != status_wanted:
+            continue
+        if endpoint_wanted is not None and str(record.get("endpoint", "")).casefold() != endpoint_wanted:
+            continue
+        if checkpoint_wanted is not None and not _request_history_record_matches_checkpoint(record, checkpoint_wanted):
+            continue
+        filtered.append(record)
+    return filtered
+
+
+def _request_history_record_matches_checkpoint(record: dict[str, Any], wanted: str) -> bool:
+    fields = [
+        "checkpoint_id",
+        "requested_checkpoint",
+        "left_checkpoint_id",
+        "right_checkpoint_id",
+        "requested_left_checkpoint",
+        "requested_right_checkpoint",
+    ]
+    return any(str(record.get(field, "")).casefold() == wanted for field in fields)
 
 
 def _request_history_record(record: dict[str, Any]) -> dict[str, Any]:
@@ -1247,6 +1383,14 @@ def _request_history_record(record: dict[str, Any]) -> dict[str, Any]:
         "error",
     ]
     return {field: record.get(field) for field in fields if field in record}
+
+
+def _csv_value(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    return str(value)
 
 
 def _count_values(records: list[dict[str, Any]], key: str) -> dict[str, int]:

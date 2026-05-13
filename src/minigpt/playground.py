@@ -126,6 +126,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         "checkpoints": [],
         "checkpointComparison": [],
         "requestHistory": [],
+        "requestHistoryFilters": {"status": "", "endpoint": "", "checkpoint": "", "limit": 12},
         "streamController": None,
     }
     sections = [
@@ -469,6 +470,15 @@ function formatTimestamp(value) {{
   if (Number.isNaN(parsed)) return String(value);
   return new Date(parsed).toLocaleString();
 }}
+function buildQuery(params) {{
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {{
+    if (value !== null && value !== undefined && String(value).trim() !== '') {{
+      query.set(key, String(value).trim());
+    }}
+  }}
+  return query.toString();
+}}
 function appendCell(row, value) {{
   const cell = document.createElement('td');
   cell.textContent = formatValue(value);
@@ -619,6 +629,30 @@ function appendStatusCell(row, status) {{
   cell.appendChild(badge);
   row.appendChild(cell);
 }}
+function requestHistoryFilters() {{
+  return {{
+    status: document.getElementById('requestHistoryStatusFilter')?.value || '',
+    endpoint: document.getElementById('requestHistoryEndpointFilter')?.value || '',
+    checkpoint: document.getElementById('requestHistoryCheckpointFilter')?.value || '',
+    limit: Number(document.getElementById('requestHistoryLimitInput')?.value || MiniGPTPlayground.requestHistoryFilters.limit || 12),
+  }};
+}}
+function requestHistoryQuery(format) {{
+  const filters = requestHistoryFilters();
+  const query = buildQuery({{
+    limit: filters.limit || 12,
+    status: filters.status,
+    endpoint: filters.endpoint,
+    checkpoint: filters.checkpoint,
+    format,
+  }});
+  return `/api/request-history?${{query}}`;
+}}
+function updateRequestHistoryExportLink() {{
+  const link = document.getElementById('requestHistoryExportLink');
+  if (!link) return;
+  link.href = requestHistoryQuery('csv');
+}}
 function renderRequestHistory() {{
   const body = document.getElementById('requestHistoryBody');
   const status = document.getElementById('requestHistoryStatus');
@@ -647,18 +681,27 @@ function renderRequestHistory() {{
 async function loadRequestHistory() {{
   const status = document.getElementById('requestHistoryStatus');
   try {{
-    const response = await fetch('/api/request-history?limit=12');
-    if (!response.ok) throw new Error('request history endpoint unavailable');
+    updateRequestHistoryExportLink();
+    const response = await fetch(requestHistoryQuery());
+    if (!response.ok) {{
+      let message = 'request history endpoint unavailable';
+      try {{
+        const errorData = await response.json();
+        message = errorData.error || message;
+      }} catch (error) {{}}
+      throw new Error(message);
+    }}
     const data = await response.json();
     MiniGPTPlayground.requestHistory = Array.isArray(data.requests) ? data.requests : [];
+    MiniGPTPlayground.requestHistoryFilters = data.filters || requestHistoryFilters();
     const summary = data.summary || {{}};
     if (status) {{
-      status.textContent = `${{formatValue(data.record_count)}} shown / ${{formatValue(summary.total_log_records)}} recorded`;
+      status.textContent = `${{formatValue(data.record_count)}} shown / ${{formatValue(summary.matching_records)}} matched / ${{formatValue(summary.total_log_records)}} recorded`;
     }}
     renderRequestHistory();
   }} catch (error) {{
     MiniGPTPlayground.requestHistory = [];
-    if (status) status.textContent = 'Start scripts/serve_playground.py for request history.';
+    if (status) status.textContent = error.message || 'Start scripts/serve_playground.py for request history.';
     renderRequestHistory();
   }}
 }}
@@ -852,9 +895,18 @@ window.addEventListener('DOMContentLoaded', () => {{
   document.getElementById('pairRightCheckpointSelect').addEventListener('change', renderCheckpointComparison);
   document.getElementById('refreshCheckpointCompareButton').addEventListener('click', loadCheckpointComparison);
   document.getElementById('refreshRequestHistoryButton').addEventListener('click', loadRequestHistory);
+  for (const id of ['requestHistoryStatusFilter', 'requestHistoryEndpointFilter', 'requestHistoryCheckpointFilter', 'requestHistoryLimitInput']) {{
+    document.getElementById(id).addEventListener('input', () => {{
+      updateRequestHistoryExportLink();
+    }});
+    document.getElementById(id).addEventListener('change', () => {{
+      updateRequestHistoryExportLink();
+    }});
+  }}
   buildCommands();
   loadCheckpoints();
   loadCheckpointComparison();
+  updateRequestHistoryExportLink();
   loadRequestHistory();
 }});
 </script>"""
@@ -908,7 +960,12 @@ def _request_history_section() -> str:
     return """<h2>Request History</h2>
 <section class="panel">
   <div class="live-actions">
+    <label><span class="label">Status</span><select id="requestHistoryStatusFilter"><option value="">all</option><option value="ok">ok</option><option value="timeout">timeout</option><option value="cancelled">cancelled</option><option value="bad_request">bad_request</option><option value="error">error</option></select></label>
+    <label><span class="label">Endpoint</span><select id="requestHistoryEndpointFilter"><option value="">all</option><option value="/api/generate">/api/generate</option><option value="/api/generate-stream">/api/generate-stream</option><option value="/api/generate-pair">/api/generate-pair</option><option value="/api/generate-pair-artifact">/api/generate-pair-artifact</option></select></label>
+    <label><span class="label">Checkpoint</span><input id="requestHistoryCheckpointFilter" type="text" placeholder="default"></label>
+    <label><span class="label">Limit</span><input id="requestHistoryLimitInput" type="number" min="1" max="200" value="12"></label>
     <button id="refreshRequestHistoryButton" type="button">Refresh</button>
+    <a id="requestHistoryExportLink" class="artifact-link" href="/api/request-history?format=csv">Export CSV</a>
     <output id="requestHistoryStatus">Request history loads from /api/request-history.</output>
   </div>
   <table id="requestHistoryTable">
