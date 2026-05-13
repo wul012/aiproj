@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 46 is a MiniGPT learning project with registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 47 is a MiniGPT learning project with registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -22,6 +22,7 @@ Version 46 is a MiniGPT learning project with registry-level pair batch/trend li
 - Registry HTML controls for search, quality filtering, sorting, direction toggling, and visible-row counts
 - Registry HTML view state in the URL plus visible-row CSV export for sharing and downstream analysis
 - Registry-level pair batch/trend summaries, CSV fields, sortable Pair Reports column, and direct links to each run's pair batch and pair trend HTML reports
+- Registry pair delta leaderboard that aggregates pair batch case deltas across many runs, records `pair_delta_summary`, and shows the largest generated deltas in registry HTML
 - Optional `run_notes.json` annotations with note text, tags, tag counts, CSV columns, SVG summary text, and searchable HTML chips
 - Registry best-val leaderboard with per-run rank, loss delta from the current best run, CSV columns, SVG labels, and an HTML leaderboard section
 - Experiment card exporter that summarizes one run into `experiment_card.json`, `experiment_card.md`, and `experiment_card.html`, with registry rank, notes, data quality, training, evaluation, artifact, and recommendation sections
@@ -66,8 +67,8 @@ Version 46 is a MiniGPT learning project with registry-level pair batch/trend li
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -122,6 +123,7 @@ v43.0.0 MiniGPT v43 fixed prompt pair generation batches
 v44.0.0 MiniGPT v44 pair batch trend comparison
 v45.0.0 MiniGPT v45 pair batch dashboard links
 v46.0.0 MiniGPT v46 registry pair report links
+v47.0.0 MiniGPT v47 registry pair delta leaders
 ```
 
 ## Project structure
@@ -813,6 +815,8 @@ b/45/图片
 b/45/解释/说明.md
 b/46/图片
 b/46/解释/说明.md
+b/47/图片
+b/47/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -1183,6 +1187,14 @@ Version 46 screenshots:
 - `04-playwright-registry-pair-links.png`: generated registry HTML opened through Playwright with installed Google Chrome and pair report links visible
 - `05-docs-check.png`: v46 docs, b/46 archive, and evaluation-benchmark explanation check
 
+Version 47 screenshots:
+
+- `01-unit-tests.png`: registry pair delta summary, leaderboard sorting, Pair Delta Leaders HTML panel, compile check, and regression tests
+- `02-registry-pair-delta-smoke.png`: three local runs registered with cross-run pair delta summary and largest generated-delta leaderboard
+- `03-registry-pair-delta-structure-check.png`: registry JSON summary, leaderboard rows, relative report links, stats card, and HTML panel verified
+- `04-playwright-registry-pair-delta-leaders.png`: generated registry HTML opened through Playwright with installed Google Chrome and Pair Delta Leaders visible
+- `05-docs-check.png`: v47 docs, b/47 archive, and evaluation-benchmark explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1271,6 +1283,7 @@ Evaluation-benchmark records start at v35:
 59-v44-pair-batch-trends.md
 60-v45-pair-batch-dashboard-links.md
 61-v46-registry-pair-report-links.md
+62-v47-registry-pair-delta-leaders.md
 ```
 
 ## Learning map
@@ -1311,6 +1324,8 @@ The pair batch trend layer compares multiple saved pair batch reports, tracks eq
 The pair batch dashboard/playground link layer surfaces saved pair batch and trend reports in dashboard and playground artifact sections so review starts from one local HTML page.
 
 The registry pair report link layer carries those pair batch/trend summaries into the multi-run registry so many experiments can be scanned and opened from one index.
+
+The registry pair delta leader layer aggregates pair batch case deltas across runs and highlights the largest generated-character differences in the registry HTML report.
 
 The dataset preparation layer makes the training corpus explicit, inspectable, and reusable across runs.
 
@@ -1353,5 +1368,5 @@ Next useful extensions:
 - Train on a larger Chinese corpus.
 - Add dataset cards that summarize intended use, source limits, quality status, and version history.
 - Add streaming token output for the playground server.
-- Add a registry pair-report aggregate view for largest generated deltas across many runs.
+- Add registry filters or drill-down exports for pair delta leaders by task type and difficulty.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

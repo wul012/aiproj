@@ -1,6 +1,6 @@
 # MiniGPT 代码讲解记录_评估基准阶段
 
-本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v46 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界、checkpoint 选择、checkpoint 快速比较入口、side-by-side 生成、可留档 pair artifacts、固定 prompt pair batch、pair batch trend、dashboard/playground 报告入口和 registry 多 run 索引表达出来”。
+本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v47 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界、checkpoint 选择、checkpoint 快速比较入口、side-by-side 生成、可留档 pair artifacts、固定 prompt pair batch、pair batch trend、dashboard/playground 报告入口、registry 多 run 索引和跨 run pair delta 聚合表达出来”。
 
 ## 写入规则
 
@@ -19,6 +19,7 @@
 59-v44-pair-batch-trends.md
 60-v45-pair-batch-dashboard-links.md
 61-v46-registry-pair-report-links.md
+62-v47-registry-pair-delta-leaders.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -38,7 +39,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v46，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像、playground checkpoint selector、checkpoint comparison shortcuts、side-by-side checkpoint generation、persisted pair generation artifacts、fixed prompt pair batch comparison、pair batch trend comparison、pair batch dashboard/playground links 到 registry pair report links 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
+截至 v47，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像、playground checkpoint selector、checkpoint comparison shortcuts、side-by-side checkpoint generation、persisted pair generation artifacts、fixed prompt pair batch comparison、pair batch trend comparison、pair batch dashboard/playground links、registry pair report links 到 registry pair delta leaders 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
 
 ```text
 同一个 checkpoint 在固定任务集上表现如何？
@@ -52,6 +53,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 多个已保存 pair batch 报告之间，哪些 case 的相等状态或长度 delta 变化最大？
 pair batch 和 trend 报告能否从 dashboard/playground 一处打开？
 多个 run 的 pair batch 和 trend 报告能否从 registry 一处扫描和打开？
+多个 run 里哪些 prompt case 的左右 checkpoint 生成长度差异最大？
 ```
 
 当前评估主线：
@@ -73,6 +75,7 @@ eval prompts
  -> pair batch trend comparison
  -> pair batch dashboard/playground links
  -> registry pair report links
+ -> registry pair delta leaders
 ```
 
 ## 后续讲解索引
@@ -102,10 +105,12 @@ eval prompts
  -> 第四十五版代码讲解：把 pair_generation_batch 和 pair_batch_trend 报告接入 dashboard/playground，一页查看摘要和浏览器链接
 61-v46-registry-pair-report-links.md
  -> 第四十六版代码讲解：把 pair batch/trend 摘要、CSV 字段、HTML Pair Reports 列和报告链接接入 run registry
+62-v47-registry-pair-delta-leaders.md
+ -> 第四十七版代码讲解：把多个 run 的 pair batch case delta 聚合成 pair_delta_summary 和 Pair Delta Leaders 面板
 ```
 
-后续推进 v47 时，在这里继续追加 `62-v47-主题.md`，或在新阶段目录开始新的能力线。
+后续推进 v48 时，在这里继续追加 `63-v48-主题.md`，或在新阶段目录开始新的能力线。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline、可选择 checkpoint、checkpoint 快速对比入口、同 prompt 双 checkpoint 生成结果比较、本地 pair artifact 留档、固定 prompt pair batch 横向比较、batch trend 跨报告比较、dashboard/playground 一处打开报告以及 registry 多 run 扫描报告”的过程。
+本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline、可选择 checkpoint、checkpoint 快速对比入口、同 prompt 双 checkpoint 生成结果比较、本地 pair artifact 留档、固定 prompt pair batch 横向比较、batch trend 跨报告比较、dashboard/playground 一处打开报告、registry 多 run 扫描报告以及跨 run pair delta 聚合”的过程。

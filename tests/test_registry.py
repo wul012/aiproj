@@ -20,6 +20,7 @@ def make_run(
     note: str | None = None,
     tags: list[str] | None = None,
     pair_reports: bool = False,
+    pair_generated_delta: int = 5,
 ) -> Path:
     run_dir = root / name
     run_dir.mkdir(parents=True)
@@ -67,7 +68,39 @@ def make_run(
         pair_batch_dir = run_dir / "pair_batch"
         pair_batch_dir.mkdir()
         (pair_batch_dir / "pair_generation_batch.json").write_text(
-            json.dumps({"case_count": 2, "generated_difference_count": 1, "results": []}),
+            json.dumps(
+                {
+                    "suite": {"name": "registry-pair-suite", "version": "1"},
+                    "left": {"checkpoint_id": "base"},
+                    "right": {"checkpoint_id": "wide"},
+                    "case_count": 2,
+                    "generated_difference_count": 1,
+                    "results": [
+                        {
+                            "name": f"{name}-delta",
+                            "task_type": "qa",
+                            "difficulty": "medium",
+                            "comparison": {
+                                "generated_equal": False,
+                                "continuation_equal": False,
+                                "generated_char_delta": pair_generated_delta,
+                                "continuation_char_delta": pair_generated_delta - 1,
+                            },
+                        },
+                        {
+                            "name": f"{name}-stable",
+                            "task_type": "continuation",
+                            "difficulty": "easy",
+                            "comparison": {
+                                "generated_equal": True,
+                                "continuation_equal": True,
+                                "generated_char_delta": 0,
+                                "continuation_char_delta": 0,
+                            },
+                        },
+                    ],
+                }
+            ),
             encoding="utf-8",
         )
         (pair_batch_dir / "pair_generation_batch.html").write_text("<html></html>", encoding="utf-8")
@@ -163,11 +196,34 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["generation_quality_counts"], {"pass": 2})
             self.assertEqual(registry["pair_report_counts"], {"pair_batch": 1, "pair_trend": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
+            self.assertEqual(registry["pair_delta_summary"]["case_count"], 2)
+            self.assertEqual(registry["pair_delta_summary"]["max_abs_generated_char_delta"], 5)
+            self.assertEqual(registry["pair_delta_leaderboard"][0]["case"], "a-delta")
             self.assertEqual(registry["loss_leaderboard"][0]["name"], "B")
             self.assertAlmostEqual(registry["loss_leaderboard"][1]["best_val_loss_delta"], 0.3)
             self.assertEqual(registry["runs"][1]["best_val_loss_rank"], 1)
             self.assertTrue(registry["runs"][1]["is_best_val_loss"])
             self.assertEqual(registry["runs"][0]["best_val_loss_rank"], 2)
+
+    def test_pair_delta_leaderboard_aggregates_runs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run_a = make_run(root, "a", 1.2, pair_reports=True, pair_generated_delta=4)
+            run_b = make_run(root, "b", 0.9, pair_reports=True, pair_generated_delta=-9)
+
+            registry = build_run_registry([run_a, run_b], names=["A", "B"])
+
+            self.assertEqual(registry["pair_delta_summary"]["case_count"], 4)
+            self.assertEqual(registry["pair_delta_summary"]["run_count"], 2)
+            self.assertEqual(registry["pair_delta_summary"]["max_abs_generated_char_delta"], 9)
+            self.assertEqual(registry["pair_delta_summary"]["max_abs_continuation_char_delta"], 10)
+            leader = registry["pair_delta_leaderboard"][0]
+            self.assertEqual(leader["run_name"], "B")
+            self.assertEqual(leader["case"], "b-delta")
+            self.assertEqual(leader["generated_char_delta"], -9)
+            self.assertEqual(leader["abs_generated_char_delta"], 9)
+            self.assertEqual(leader["left_checkpoint_id"], "base")
+            self.assertEqual(leader["right_checkpoint_id"], "wide")
 
     def test_write_registry_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -194,6 +250,11 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("Pair Reports", html)
             self.assertIn("batch cases=2 diff=1", html)
             self.assertIn("trend reports=2 changed=1", html)
+            self.assertIn("Pair Delta Leaders", html)
+            self.assertIn("Abs Gen Delta", html)
+            self.assertIn("one-delta", html)
+            self.assertIn("<div class=\"label\">Pair deltas</div>", html)
+            self.assertIn("../one/pair_batch/pair_generation_batch.json", html)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -220,6 +281,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<th>Rank</th>", html)
             self.assertIn("#1", html)
             self.assertIn("Loss Leaderboard", html)
+            self.assertIn("Pair Delta Leaders", html)
             self.assertIn("<div class=\"label\">Comparable</div>", html)
             self.assertIn('<option value="rank">Rank</option>', html)
             self.assertIn('<option value="delta">Loss Delta</option>', html)

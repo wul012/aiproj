@@ -176,12 +176,16 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
     ]
     run_rows = [run.to_dict() for run in runs]
     loss_leaderboard = _annotate_loss_leaderboard(run_rows)
+    pair_delta_rows = _collect_pair_delta_rows(run_dirs, names)
+    pair_delta_leaderboard = _pair_delta_leaderboard(pair_delta_rows)
     return {
         "schema_version": 1,
         "run_count": len(runs),
         "runs": run_rows,
         "best_by_best_val_loss": _best_by(runs, "best_val_loss"),
         "loss_leaderboard": loss_leaderboard,
+        "pair_delta_summary": _pair_delta_summary(pair_delta_rows),
+        "pair_delta_leaderboard": pair_delta_leaderboard,
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
         "generation_quality_counts": _counts(run.generation_quality_status or "missing" for run in runs),
@@ -304,6 +308,7 @@ def render_registry_html(
     tag_counts = registry.get("tag_counts", {})
     generation_quality_counts = registry.get("generation_quality_counts", {})
     pair_report_counts = registry.get("pair_report_counts", {})
+    pair_delta_summary = registry.get("pair_delta_summary", {})
     loss_leaderboard = registry.get("loss_leaderboard", [])
     stats = [
         ("Runs", registry.get("run_count")),
@@ -314,6 +319,7 @@ def render_registry_html(
         ("Quality", ", ".join(f"{key}:{value}" for key, value in quality_counts.items()) if isinstance(quality_counts, dict) else None),
         ("Gen quality", ", ".join(f"{key}:{value}" for key, value in generation_quality_counts.items()) if isinstance(generation_quality_counts, dict) else None),
         ("Pair reports", _pair_report_count_label(pair_report_counts)),
+        ("Pair deltas", _pair_delta_summary_label(pair_delta_summary)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
@@ -379,6 +385,7 @@ def render_registry_html(
             "</table>",
             "</section>",
             _loss_leaderboard_html(loss_leaderboard),
+            _pair_delta_leaderboard_html(registry.get("pair_delta_leaderboard", []), base_dir),
             '<section class="panel">',
             "<h2>Dataset Fingerprints</h2>",
             "<pre>" + _e(json.dumps(registry.get("dataset_fingerprints", []), ensure_ascii=False, indent=2)) + "</pre>",
@@ -471,6 +478,77 @@ def _counts(values: Any) -> dict[str, int]:
     return counts
 
 
+def _collect_pair_delta_rows(run_dirs: list[str | Path], names: list[str] | None) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for index, run_dir in enumerate(run_dirs):
+        root = Path(run_dir)
+        run_name = str(names[index]) if names is not None else root.name
+        report_path = root / "pair_batch" / "pair_generation_batch.json"
+        report = _read_json(report_path)
+        if not isinstance(report, dict):
+            continue
+        suite = _pick_dict(report, "suite")
+        left = _pick_dict(report, "left")
+        right = _pick_dict(report, "right")
+        for result in report.get("results", []):
+            if not isinstance(result, dict):
+                continue
+            comparison = _pick_dict(result, "comparison")
+            generated_delta = _as_optional_float(_pick(comparison, "generated_char_delta"))
+            continuation_delta = _as_optional_float(_pick(comparison, "continuation_char_delta"))
+            if generated_delta is None and continuation_delta is None:
+                continue
+            rows.append(
+                {
+                    "run_name": run_name,
+                    "run_path": str(root),
+                    "case": _as_str(_pick(result, "name")) or "unknown",
+                    "task_type": _as_str(_pick(result, "task_type")),
+                    "difficulty": _as_str(_pick(result, "difficulty")),
+                    "generated_equal": _pick(comparison, "generated_equal"),
+                    "continuation_equal": _pick(comparison, "continuation_equal"),
+                    "generated_char_delta": _int_if_whole(generated_delta),
+                    "continuation_char_delta": _int_if_whole(continuation_delta),
+                    "abs_generated_char_delta": _int_if_whole(abs(generated_delta)) if generated_delta is not None else None,
+                    "abs_continuation_char_delta": _int_if_whole(abs(continuation_delta)) if continuation_delta is not None else None,
+                    "suite_name": _as_str(_pick(suite, "name")),
+                    "suite_version": _as_str(_pick(suite, "version")),
+                    "left_checkpoint_id": _as_str(_pick(left, "checkpoint_id")),
+                    "right_checkpoint_id": _as_str(_pick(right, "checkpoint_id")),
+                    "report_path": str(report_path),
+                }
+            )
+    return rows
+
+
+def _pair_delta_leaderboard(rows: list[dict[str, Any]], limit: int = 10) -> list[dict[str, Any]]:
+    ordered = sorted(
+        rows,
+        key=lambda item: (
+            _as_optional_float(item.get("abs_generated_char_delta")) or -1.0,
+            _as_optional_float(item.get("abs_continuation_char_delta")) or -1.0,
+            str(item.get("run_name") or ""),
+            str(item.get("case") or ""),
+        ),
+        reverse=True,
+    )
+    return ordered[:limit]
+
+
+def _pair_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    run_names = {str(row.get("run_name")) for row in rows if row.get("run_name")}
+    generated_values = [_as_optional_float(row.get("abs_generated_char_delta")) for row in rows]
+    continuation_values = [_as_optional_float(row.get("abs_continuation_char_delta")) for row in rows]
+    generated_values = [value for value in generated_values if value is not None]
+    continuation_values = [value for value in continuation_values if value is not None]
+    return {
+        "case_count": len(rows),
+        "run_count": len(run_names),
+        "max_abs_generated_char_delta": _int_if_whole(max(generated_values)) if generated_values else None,
+        "max_abs_continuation_char_delta": _int_if_whole(max(continuation_values)) if continuation_values else None,
+    }
+
+
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:
     if not path.exists():
         return None
@@ -528,6 +606,12 @@ def _as_optional_float(value: Any) -> float | None:
         return float(value)
     except (TypeError, ValueError):
         return None
+
+
+def _int_if_whole(value: float | None) -> int | float | None:
+    if value is None:
+        return None
+    return int(value) if float(value).is_integer() else value
 
 
 def _as_bool(value: Any) -> bool | None:
@@ -682,6 +766,16 @@ def _pair_report_count_label(value: Any) -> str:
     return f"batch:{value.get('pair_batch', 0)}, trend:{value.get('pair_trend', 0)}"
 
 
+def _pair_delta_summary_label(value: Any) -> str:
+    if not isinstance(value, dict) or not value.get("case_count"):
+        return "cases:0"
+    return (
+        f"cases:{value.get('case_count')}, "
+        f"max gen:{_fmt(value.get('max_abs_generated_char_delta'))}, "
+        f"max cont:{_fmt(value.get('max_abs_continuation_char_delta'))}"
+    )
+
+
 def _pair_report_score(run: dict[str, Any]) -> int:
     score = 0
     if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists"):
@@ -746,6 +840,43 @@ def _loss_leaderboard_html(leaderboard: Any) -> str:
         '<ol class="leaderboard">'
         + "".join(items)
         + "</ol>"
+        "</section>"
+    )
+
+
+def _pair_delta_leaderboard_html(leaderboard: Any, base_dir: str | Path | None) -> str:
+    if not isinstance(leaderboard, list) or not leaderboard:
+        return (
+            '<section class="panel">'
+            "<h2>Pair Delta Leaders</h2>"
+            '<p class="muted">No pair batch case deltas were found.</p>'
+            "</section>"
+        )
+    rows = []
+    for item in leaderboard[:10]:
+        if not isinstance(item, dict):
+            continue
+        report_link = ""
+        report_path = item.get("report_path")
+        if report_path and Path(str(report_path)).exists():
+            report_link = f'<a href="{_e(_href(Path(str(report_path)), base_dir))}">pair batch</a>'
+        rows.append(
+            "<tr>"
+            f"<td><strong>{_e(item.get('run_name'))}</strong><br><span>{_e(item.get('case'))}</span></td>"
+            f"<td>{_e(_fmt(item.get('abs_generated_char_delta')))}</td>"
+            f"<td>{_e(_fmt(item.get('generated_char_delta')))}<br><span>cont={_e(_fmt(item.get('continuation_char_delta')))}</span></td>"
+            f"<td>{_e(item.get('generated_equal'))}<br><span>cont={_e(item.get('continuation_equal'))}</span></td>"
+            f"<td>{_e(item.get('task_type'))}<br><span>{_e(item.get('difficulty'))}</span></td>"
+            f"<td>{_e(item.get('left_checkpoint_id'))} -> {_e(item.get('right_checkpoint_id'))}<br><span>{_e(item.get('suite_name'))} v{_e(item.get('suite_version'))}</span></td>"
+            f"<td>{report_link}</td>"
+            "</tr>"
+        )
+    return (
+        '<section class="panel">'
+        "<h2>Pair Delta Leaders</h2>"
+        '<table><thead><tr><th>Run / Case</th><th>Abs Gen Delta</th><th>Delta</th><th>Equal</th><th>Task</th><th>Pair</th><th>Report</th></tr></thead><tbody>'
+        + "".join(rows)
+        + "</tbody></table>"
         "</section>"
     )
 
