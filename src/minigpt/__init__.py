@@ -51,6 +51,7 @@ __all__ = [
     "CheckpointOption",
     "InferenceSafetyProfile",
     "GenerationRequest",
+    "GenerationPairRequest",
     "GenerationResponse",
     "build_checkpoint_compare_payload",
     "build_checkpoints_payload",
@@ -58,6 +59,7 @@ __all__ = [
     "build_model_info_payload",
     "discover_checkpoint_options",
     "parse_generation_request",
+    "parse_generation_pair_request",
 ]
 
 _EXPORTS = {
@@ -106,6 +108,7 @@ _EXPORTS = {
     "CheckpointOption": ("server", "CheckpointOption"),
     "InferenceSafetyProfile": ("server", "InferenceSafetyProfile"),
     "GenerationRequest": ("server", "GenerationRequest"),
+    "GenerationPairRequest": ("server", "GenerationPairRequest"),
     "GenerationResponse": ("server", "GenerationResponse"),
     "build_checkpoint_compare_payload": ("server", "build_checkpoint_compare_payload"),
     "build_checkpoints_payload": ("server", "build_checkpoints_payload"),
@@ -113,6 +116,7 @@ _EXPORTS = {
     "build_model_info_payload": ("server", "build_model_info_payload"),
     "discover_checkpoint_options": ("server", "discover_checkpoint_options"),
     "parse_generation_request": ("server", "parse_generation_request"),
+    "parse_generation_pair_request": ("server", "parse_generation_pair_request"),
 }
 
 

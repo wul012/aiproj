@@ -48,6 +48,9 @@ b/39/解释/说明.md
 b/40/图片
 b/40/解释/说明.md
  -> v40 checkpoint comparison shortcuts 的运行截图和解释
+b/41/图片
+b/41/解释/说明.md
+ -> v41 side-by-side checkpoint generation 的运行截图和解释
 ```
 
 写入规则：

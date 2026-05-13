@@ -56,6 +56,18 @@ class GenerationRequest:
 
 
 @dataclass(frozen=True)
+class GenerationPairRequest:
+    left: GenerationRequest
+    right: GenerationRequest
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "left": self.left.to_dict(),
+            "right": self.right.to_dict(),
+        }
+
+
+@dataclass(frozen=True)
 class GenerationResponse:
     prompt: str
     generated: str
@@ -183,6 +195,24 @@ def parse_generation_request(
     )
 
 
+def parse_generation_pair_request(
+    payload: dict[str, Any],
+    safety_profile: InferenceSafetyProfile | None = None,
+) -> GenerationPairRequest:
+    left_selector = payload.get("left_checkpoint", payload.get("checkpoint"))
+    right_selector = payload.get("right_checkpoint")
+    if right_selector in {None, ""}:
+        raise ValueError("right_checkpoint is required")
+    left_payload = dict(payload)
+    right_payload = dict(payload)
+    left_payload["checkpoint"] = left_selector
+    right_payload["checkpoint"] = right_selector
+    return GenerationPairRequest(
+        left=parse_generation_request(left_payload, safety_profile),
+        right=parse_generation_request(right_payload, safety_profile),
+    )
+
+
 def build_health_payload(
     run_dir: str | Path,
     checkpoint_path: str | Path | None = None,
@@ -206,6 +236,7 @@ def build_health_payload(
         "sample_lab_exists": (root / "sample_lab" / "sample_lab.json").exists(),
         "model_info_endpoint": "/api/model-info",
         "generate_endpoint": "/api/generate",
+        "generate_pair_endpoint": "/api/generate-pair",
         "checkpoints_endpoint": "/api/checkpoints",
         "checkpoint_compare_endpoint": "/api/checkpoint-compare",
         "checkpoint_count": len(checkpoints),
@@ -409,7 +440,7 @@ def create_handler(
         return generators[option.id]
 
     class MiniGPTServerHandler(BaseHTTPRequestHandler):
-        server_version = "MiniGPTServer/0.4"
+        server_version = "MiniGPTServer/0.5"
 
         def do_GET(self) -> None:
             parsed = urlparse(self.path)
@@ -449,6 +480,9 @@ def create_handler(
 
         def do_POST(self) -> None:
             parsed = urlparse(self.path)
+            if parsed.path == "/api/generate-pair":
+                self._handle_generate_pair()
+                return
             if parsed.path != "/api/generate":
                 self._send_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
                 return
@@ -473,6 +507,55 @@ def create_handler(
             payload = response.to_dict()
             payload["checkpoint_id"] = option.id
             self._send_json(payload)
+
+        def _handle_generate_pair(self) -> None:
+            pair_request: GenerationPairRequest | None = None
+            left_option: CheckpointOption | None = None
+            right_option: CheckpointOption | None = None
+            left_response: GenerationResponse | None = None
+            right_response: GenerationResponse | None = None
+            try:
+                payload = self._read_json_body()
+                pair_request = parse_generation_pair_request(payload, safety)
+                left_option = resolve_checkpoint_option(checkpoint_options, pair_request.left.checkpoint)
+                right_option = resolve_checkpoint_option(checkpoint_options, pair_request.right.checkpoint)
+                if not left_option.exists:
+                    raise ValueError(f"checkpoint does not exist: {left_option.id}")
+                if not right_option.exists:
+                    raise ValueError(f"checkpoint does not exist: {right_option.id}")
+                left_response = generator_for(left_option).generate(pair_request.left)
+                right_response = generator_for(right_option).generate(pair_request.right)
+            except ValueError as exc:
+                self._log_pair_generation(
+                    "bad_request",
+                    pair_request=pair_request,
+                    left_option=left_option,
+                    right_option=right_option,
+                    error=str(exc),
+                )
+                self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                return
+            except Exception as exc:
+                self._log_pair_generation(
+                    "error",
+                    pair_request=pair_request,
+                    left_option=left_option,
+                    right_option=right_option,
+                    left_response=left_response,
+                    right_response=right_response,
+                    error=str(exc),
+                )
+                self._send_json({"error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+            self._log_pair_generation(
+                "ok",
+                pair_request=pair_request,
+                left_option=left_option,
+                right_option=right_option,
+                left_response=left_response,
+                right_response=right_response,
+            )
+            self._send_json(_pair_generation_payload(pair_request, left_option, right_option, left_response, right_response))
 
         def do_OPTIONS(self) -> None:
             self.send_response(HTTPStatus.NO_CONTENT)
@@ -538,6 +621,51 @@ def create_handler(
                 event["generated_chars"] = len(response.generated)
                 event["continuation_chars"] = len(response.continuation)
                 event["tokenizer"] = response.tokenizer
+            if error is not None:
+                event["error"] = error
+            append_inference_log(request_log, event)
+
+        def _log_pair_generation(
+            self,
+            status: str,
+            *,
+            pair_request: GenerationPairRequest | None = None,
+            left_option: CheckpointOption | None = None,
+            right_option: CheckpointOption | None = None,
+            left_response: GenerationResponse | None = None,
+            right_response: GenerationResponse | None = None,
+            error: str | None = None,
+        ) -> None:
+            event: dict[str, Any] = {
+                "endpoint": "/api/generate-pair",
+                "status": status,
+                "client": self.client_address[0] if self.client_address else None,
+                "left_checkpoint": left_option.path if left_option is not None else None,
+                "left_checkpoint_id": left_option.id if left_option is not None else None,
+                "right_checkpoint": right_option.path if right_option is not None else None,
+                "right_checkpoint_id": right_option.id if right_option is not None else None,
+            }
+            if pair_request is not None:
+                event.update(
+                    {
+                        "requested_left_checkpoint": pair_request.left.checkpoint,
+                        "requested_right_checkpoint": pair_request.right.checkpoint,
+                        "prompt_chars": len(pair_request.left.prompt),
+                        "max_new_tokens": pair_request.left.max_new_tokens,
+                        "temperature": pair_request.left.temperature,
+                        "top_k": pair_request.left.top_k,
+                        "seed": pair_request.left.seed,
+                    }
+                )
+            if left_response is not None:
+                event["left_generated_chars"] = len(left_response.generated)
+                event["left_continuation_chars"] = len(left_response.continuation)
+            if right_response is not None:
+                event["right_generated_chars"] = len(right_response.generated)
+                event["right_continuation_chars"] = len(right_response.continuation)
+            if left_response is not None and right_response is not None:
+                event["generated_equal"] = left_response.generated == right_response.generated
+                event["continuation_equal"] = left_response.continuation == right_response.continuation
             if error is not None:
                 event["error"] = error
             append_inference_log(request_log, event)
@@ -733,6 +861,40 @@ def _same_known(value: Any, baseline: Any) -> bool | None:
     if value is None or baseline is None:
         return None
     return value == baseline
+
+
+def _pair_generation_payload(
+    pair_request: GenerationPairRequest,
+    left_option: CheckpointOption,
+    right_option: CheckpointOption,
+    left_response: GenerationResponse,
+    right_response: GenerationResponse,
+) -> dict[str, Any]:
+    left_payload = left_response.to_dict()
+    right_payload = right_response.to_dict()
+    left_payload["checkpoint_id"] = left_option.id
+    right_payload["checkpoint_id"] = right_option.id
+    return {
+        "status": "ok",
+        "prompt": pair_request.left.prompt,
+        "max_new_tokens": pair_request.left.max_new_tokens,
+        "temperature": pair_request.left.temperature,
+        "top_k": pair_request.left.top_k,
+        "seed": pair_request.left.seed,
+        "left": left_payload,
+        "right": right_payload,
+        "comparison": {
+            "same_checkpoint": left_option.id == right_option.id,
+            "generated_equal": left_response.generated == right_response.generated,
+            "continuation_equal": left_response.continuation == right_response.continuation,
+            "left_generated_chars": len(left_response.generated),
+            "right_generated_chars": len(right_response.generated),
+            "generated_char_delta": len(right_response.generated) - len(left_response.generated),
+            "left_continuation_chars": len(left_response.continuation),
+            "right_continuation_chars": len(right_response.continuation),
+            "continuation_char_delta": len(right_response.continuation) - len(left_response.continuation),
+        },
+    }
 
 
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:

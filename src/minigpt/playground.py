@@ -124,6 +124,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         _command_builder(defaults),
         _live_section(),
         _checkpoint_comparison_section(),
+        _pair_generation_section(),
         _sampling_section(payload.get("sampling_report")),
         _link_section(payload["links"]),
         _warning_section(payload.get("warnings", [])),
@@ -342,6 +343,18 @@ pre {
   flex-wrap: wrap;
 }
 .row-actions a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.pair-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.pair-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #ffffff;
+}
 .output {
   margin-top: 12px;
   min-height: 92px;
@@ -374,6 +387,7 @@ footer { padding: 22px 32px 34px; color: var(--muted); font-size: 13px; }
   .panel { margin-left: 16px; margin-right: 16px; }
   .builder { grid-template-columns: 1fr; }
   .command { grid-template-columns: 1fr; }
+  .pair-grid { grid-template-columns: 1fr; }
 }
 </style>"""
 
@@ -386,10 +400,14 @@ function quoteArg(value) {{
   const text = String(value).replaceAll("'", "''");
   return "'" + text + "'";
 }}
-function selectedCheckpointOption() {{
-  const select = document.getElementById('checkpointSelect');
+function checkpointOptionById(id) {{
+  if (!id) return null;
+  return (MiniGPTPlayground.checkpoints || []).find((item) => item.id === id) || null;
+}}
+function selectedCheckpointOption(selectId = 'checkpointSelect') {{
+  const select = document.getElementById(selectId);
   if (!select || !select.value) return null;
-  return (MiniGPTPlayground.checkpoints || []).find((item) => item.id === select.value) || null;
+  return checkpointOptionById(select.value);
 }}
 function formatValue(value) {{
   if (value === null || value === undefined || value === '') return 'missing';
@@ -411,9 +429,13 @@ function appendCell(row, value) {{
   row.appendChild(cell);
   return cell;
 }}
-function selectCheckpoint(id) {{
-  const select = document.getElementById('checkpointSelect');
+function setCheckpointSelect(selectId, id) {{
+  const select = document.getElementById(selectId);
   if (select) select.value = id;
+}}
+function selectCheckpoint(id) {{
+  setCheckpointSelect('checkpointSelect', id);
+  setCheckpointSelect('pairLeftCheckpointSelect', id);
   buildCommands();
   renderCheckpointComparison();
 }}
@@ -441,14 +463,9 @@ async function loadCheckpoints() {{
     if (!response.ok) throw new Error('checkpoint endpoint unavailable');
     const data = await response.json();
     MiniGPTPlayground.checkpoints = Array.isArray(data.checkpoints) ? data.checkpoints : [];
-    select.innerHTML = '';
-    for (const item of MiniGPTPlayground.checkpoints) {{
-      const option = document.createElement('option');
-      option.value = item.id;
-      option.textContent = `${{item.id}}${{item.is_default ? ' (default)' : ''}}`;
-      option.disabled = !item.exists;
-      select.appendChild(option);
-    }}
+    populateCheckpointSelect(select, data.default_checkpoint_id, 0);
+    populateCheckpointSelect(document.getElementById('pairLeftCheckpointSelect'), data.default_checkpoint_id, 0);
+    populateCheckpointSelect(document.getElementById('pairRightCheckpointSelect'), data.default_checkpoint_id, 1);
     if (data.default_checkpoint_id) select.value = data.default_checkpoint_id;
     status.textContent = `${{MiniGPTPlayground.checkpoints.length}} checkpoint option(s)`;
     select.disabled = MiniGPTPlayground.checkpoints.length === 0;
@@ -459,6 +476,22 @@ async function loadCheckpoints() {{
     status.textContent = 'Start scripts/serve_playground.py for checkpoint selection.';
     select.disabled = true;
   }}
+}}
+function populateCheckpointSelect(select, defaultId, preferredIndex) {{
+  if (!select) return;
+  const previous = select.value;
+  const options = MiniGPTPlayground.checkpoints || [];
+  select.innerHTML = '';
+  for (const item of options) {{
+    const option = document.createElement('option');
+    option.value = item.id;
+    option.textContent = `${{item.id}}${{item.is_default ? ' (default)' : ''}}`;
+    option.disabled = !item.exists;
+    select.appendChild(option);
+  }}
+  const fallback = options[Math.min(preferredIndex, Math.max(options.length - 1, 0))];
+  select.value = previous && checkpointOptionById(previous) ? previous : (fallback ? fallback.id : defaultId || '');
+  select.disabled = options.length === 0;
 }}
 function renderCheckpointComparison() {{
   const body = document.getElementById('checkpointCompareBody');
@@ -543,6 +576,47 @@ async function generateLive() {{
     output.textContent = 'Start scripts/serve_playground.py to use live generation.';
   }}
 }}
+async function generatePairLive() {{
+  const leftOutput = document.getElementById('pairLeftOutput');
+  const rightOutput = document.getElementById('pairRightOutput');
+  const status = document.getElementById('pairGenerateStatus');
+  const left = selectedCheckpointOption('pairLeftCheckpointSelect');
+  const right = selectedCheckpointOption('pairRightCheckpointSelect');
+  const payload = {{
+    prompt: document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt,
+    max_new_tokens: Number(document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens),
+    temperature: Number(document.getElementById('temperatureInput').value || MiniGPTPlayground.defaults.temperature),
+    top_k: Number(document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k),
+    seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
+    left_checkpoint: left ? left.id : undefined,
+    right_checkpoint: right ? right.id : undefined,
+  }};
+  leftOutput.textContent = 'Generating...';
+  rightOutput.textContent = 'Generating...';
+  status.textContent = 'Generating pair...';
+  try {{
+    const response = await fetch('/api/generate-pair', {{
+      method: 'POST',
+      headers: {{'Content-Type': 'application/json'}},
+      body: JSON.stringify(payload),
+    }});
+    const data = await response.json();
+    if (!response.ok) {{
+      leftOutput.textContent = data.error || 'Pair generation failed';
+      rightOutput.textContent = data.error || 'Pair generation failed';
+      status.textContent = 'failed';
+      return;
+    }}
+    leftOutput.textContent = data.left?.generated || data.left?.continuation || '';
+    rightOutput.textContent = data.right?.generated || data.right?.continuation || '';
+    const comparison = data.comparison || {{}};
+    status.textContent = `same output: ${{formatValue(comparison.generated_equal)}}; char delta: ${{formatDelta(comparison.generated_char_delta)}}`;
+  }} catch (error) {{
+    leftOutput.textContent = 'Start scripts/serve_playground.py to use pair generation.';
+    rightOutput.textContent = 'Start scripts/serve_playground.py to use pair generation.';
+    status.textContent = 'unavailable';
+  }}
+}}
 function copyCommand(id) {{
   navigator.clipboard.writeText(document.getElementById(id).textContent);
 }}
@@ -555,6 +629,9 @@ window.addEventListener('DOMContentLoaded', () => {{
     renderCheckpointComparison();
   }});
   document.getElementById('liveGenerateButton').addEventListener('click', generateLive);
+  document.getElementById('pairGenerateButton').addEventListener('click', generatePairLive);
+  document.getElementById('pairLeftCheckpointSelect').addEventListener('change', renderCheckpointComparison);
+  document.getElementById('pairRightCheckpointSelect').addEventListener('change', renderCheckpointComparison);
   document.getElementById('refreshCheckpointCompareButton').addEventListener('click', loadCheckpointComparison);
   buildCommands();
   loadCheckpoints();
@@ -619,6 +696,28 @@ def _checkpoint_comparison_section() -> str:
     </thead>
     <tbody id="checkpointCompareBody"></tbody>
   </table>
+</section>"""
+
+
+def _pair_generation_section() -> str:
+    return """<h2>Side-by-Side Generate</h2>
+<section class="panel">
+  <div class="live-actions">
+    <label><span class="label">Left checkpoint</span><select id="pairLeftCheckpointSelect"><option value="">default</option></select></label>
+    <label><span class="label">Right checkpoint</span><select id="pairRightCheckpointSelect"><option value="">default</option></select></label>
+    <button id="pairGenerateButton" type="button">Generate Pair</button>
+    <output id="pairGenerateStatus">Pair generation uses /api/generate-pair.</output>
+  </div>
+  <div class="pair-grid">
+    <article class="pair-card">
+      <h3>Left</h3>
+      <pre id="pairLeftOutput" class="output"></pre>
+    </article>
+    <article class="pair-card">
+      <h3>Right</h3>
+      <pre id="pairRightOutput" class="output"></pre>
+    </article>
+  </div>
 </section>"""
 
 

@@ -74,6 +74,12 @@ class PlaygroundTests(unittest.TestCase):
             self.assertIn("checkpointCompareTable", html)
             self.assertIn("/api/checkpoint-compare", html)
             self.assertIn("selectCheckpoint", html)
+            self.assertIn("pairLeftCheckpointSelect", html)
+            self.assertIn("pairRightCheckpointSelect", html)
+            self.assertIn("pairGenerateButton", html)
+            self.assertIn("/api/generate-pair", html)
+            self.assertIn("left_checkpoint", html)
+            self.assertIn("right_checkpoint", html)
             self.assertIn("payload.checkpoint", html)
             self.assertNotIn("<script>alert(1)</script>", html)
 

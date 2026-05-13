@@ -22,6 +22,7 @@ from minigpt.server import (
     build_model_info_payload,
     create_handler,
     discover_checkpoint_options,
+    parse_generation_pair_request,
     parse_generation_request,
 )
 from http.server import ThreadingHTTPServer
@@ -57,6 +58,26 @@ class ServerTests(unittest.TestCase):
         self.assertIsNone(request.top_k)
         self.assertEqual(request.seed, 5)
         self.assertIsNone(request.checkpoint)
+
+    def test_parse_generation_pair_request(self) -> None:
+        request = parse_generation_pair_request(
+            {
+                "prompt": "hello",
+                "max_new_tokens": "12",
+                "temperature": "0.7",
+                "top_k": "0",
+                "seed": "5",
+                "left_checkpoint": "default",
+                "right_checkpoint": "wide",
+            }
+        )
+
+        self.assertEqual(request.left.prompt, "hello")
+        self.assertEqual(request.left.checkpoint, "default")
+        self.assertEqual(request.right.checkpoint, "wide")
+        self.assertIsNone(request.right.top_k)
+        with self.assertRaisesRegex(ValueError, "right_checkpoint"):
+            parse_generation_pair_request({"prompt": "hello", "left_checkpoint": "default"})
 
     def test_parse_generation_request_rejects_bad_values(self) -> None:
         with self.assertRaises(ValueError):
@@ -95,6 +116,7 @@ class ServerTests(unittest.TestCase):
             self.assertTrue(health["tokenizer_exists"])
             self.assertEqual(health["safety"]["max_prompt_chars"], 123)
             self.assertEqual(health["model_info_endpoint"], "/api/model-info")
+            self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
             self.assertEqual(Path(health["request_log"]).name, "requests.jsonl")
             self.assertEqual(health["checkpoints_endpoint"], "/api/checkpoints")
             self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
@@ -226,6 +248,7 @@ class ServerTests(unittest.TestCase):
                 self.assertTrue(health["checkpoint_exists"])
                 self.assertEqual(health["safety"]["max_new_tokens"], 512)
                 self.assertEqual(health["default_checkpoint_id"], "default")
+                self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
                 self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
 
                 info = _get_json(base + "/api/model-info")
@@ -259,6 +282,47 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(log_record["prompt_chars"], 3)
                 self.assertEqual(log_record["checkpoint_id"], "candidate")
                 self.assertEqual(log_record["requested_checkpoint"], "candidate")
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=5)
+
+    def test_http_generate_pair_routes_two_checkpoints(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            (run_dir / "checkpoint.pt").write_bytes(b"fake")
+            candidate = run_dir / "candidate" / "checkpoint.pt"
+            candidate.parent.mkdir()
+            candidate.write_bytes(b"candidate")
+            handler = create_handler(run_dir, device="cpu", generator_factory=StubGenerator)
+            server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            base = f"http://127.0.0.1:{server.server_port}"
+            try:
+                response = _post_json(
+                    base + "/api/generate-pair",
+                    {
+                        "prompt": "abc",
+                        "max_new_tokens": 5,
+                        "temperature": 0.8,
+                        "top_k": 0,
+                        "seed": 7,
+                        "left_checkpoint": "default",
+                        "right_checkpoint": "candidate",
+                    },
+                )
+
+                self.assertEqual(response["status"], "ok")
+                self.assertEqual(response["left"]["checkpoint_id"], "default")
+                self.assertEqual(response["right"]["checkpoint_id"], "candidate")
+                self.assertEqual(response["comparison"]["same_checkpoint"], False)
+                log_record = json.loads((run_dir / "inference_requests.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+                self.assertEqual(log_record["endpoint"], "/api/generate-pair")
+                self.assertEqual(log_record["status"], "ok")
+                self.assertEqual(log_record["left_checkpoint_id"], "default")
+                self.assertEqual(log_record["right_checkpoint_id"], "candidate")
+                self.assertEqual(log_record["requested_right_checkpoint"], "candidate")
             finally:
                 server.shutdown()
                 server.server_close()
