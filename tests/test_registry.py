@@ -12,7 +12,15 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.registry import REGISTRY_ARTIFACT_PATHS, build_run_registry, discover_run_dirs, render_registry_html, summarize_registered_run, write_registry_outputs
 
 
-def make_run(root: Path, name: str, loss: float, quality: str = "pass", note: str | None = None, tags: list[str] | None = None) -> Path:
+def make_run(
+    root: Path,
+    name: str,
+    loss: float,
+    quality: str = "pass",
+    note: str | None = None,
+    tags: list[str] | None = None,
+    pair_reports: bool = False,
+) -> Path:
     run_dir = root / name
     run_dir.mkdir(parents=True)
     (run_dir / "checkpoint.pt").write_bytes(b"fake")
@@ -55,6 +63,21 @@ def make_run(root: Path, name: str, loss: float, quality: str = "pass", note: st
         encoding="utf-8",
     )
     (quality_dir / "generation_quality.html").write_text("<html></html>", encoding="utf-8")
+    if pair_reports:
+        pair_batch_dir = run_dir / "pair_batch"
+        pair_batch_dir.mkdir()
+        (pair_batch_dir / "pair_generation_batch.json").write_text(
+            json.dumps({"case_count": 2, "generated_difference_count": 1, "results": []}),
+            encoding="utf-8",
+        )
+        (pair_batch_dir / "pair_generation_batch.html").write_text("<html></html>", encoding="utf-8")
+        pair_trend_dir = run_dir / "pair_batch_trend"
+        pair_trend_dir.mkdir()
+        (pair_trend_dir / "pair_batch_trend.json").write_text(
+            json.dumps({"report_count": 2, "changed_generated_equal_cases": 1, "case_trends": []}),
+            encoding="utf-8",
+        )
+        (pair_trend_dir / "pair_batch_trend.html").write_text("<html></html>", encoding="utf-8")
     (run_dir / "run_manifest.json").write_text(
         json.dumps(
             {
@@ -101,6 +124,21 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.generation_quality_cases, 3)
             self.assertGreaterEqual(run.artifact_count, 6)
             self.assertIn("dataset_version.json", REGISTRY_ARTIFACT_PATHS)
+            self.assertIn("pair_batch/pair_generation_batch.html", REGISTRY_ARTIFACT_PATHS)
+            self.assertIn("pair_batch_trend/pair_batch_trend.html", REGISTRY_ARTIFACT_PATHS)
+
+    def test_summarize_registered_run_reads_pair_reports(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp), "one", 1.0, pair_reports=True)
+
+            run = summarize_registered_run(run_dir)
+
+            self.assertEqual(run.pair_batch_cases, 2)
+            self.assertEqual(run.pair_batch_generated_differences, 1)
+            self.assertTrue(run.pair_batch_html_exists)
+            self.assertEqual(run.pair_trend_reports, 2)
+            self.assertEqual(run.pair_trend_changed_cases, 1)
+            self.assertTrue(run.pair_trend_html_exists)
 
     def test_summarize_registered_run_reads_notes_and_tags(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -114,7 +152,7 @@ class RegistryTests(unittest.TestCase):
     def test_build_registry_picks_best_and_counts_quality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"])
+            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"], pair_reports=True)
             run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"])
 
             registry = build_run_registry([run_a, run_b], names=["A", "B"])
@@ -123,6 +161,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["best_by_best_val_loss"]["name"], "B")
             self.assertEqual(registry["quality_counts"], {"pass": 1, "warn": 1})
             self.assertEqual(registry["generation_quality_counts"], {"pass": 2})
+            self.assertEqual(registry["pair_report_counts"], {"pair_batch": 1, "pair_trend": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
             self.assertEqual(registry["loss_leaderboard"][0]["name"], "B")
             self.assertAlmostEqual(registry["loss_leaderboard"][1]["best_val_loss_delta"], 0.3)
@@ -133,7 +172,7 @@ class RegistryTests(unittest.TestCase):
     def test_write_registry_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_dir = make_run(root, "one", 1.0)
+            run_dir = make_run(root, "one", 1.0, pair_reports=True)
             (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
             registry = build_run_registry([run_dir])
 
@@ -144,11 +183,17 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("best_val_loss_rank", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("generation_quality_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("pair_batch_cases", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT run registry", html)
             self.assertIn(">card</a>", html)
             self.assertIn(">gen quality</a>", html)
+            self.assertIn(">pair batch</a>", html)
+            self.assertIn(">pair trend</a>", html)
+            self.assertIn("Pair Reports", html)
+            self.assertIn("batch cases=2 diff=1", html)
+            self.assertIn("trend reports=2 changed=1", html)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -171,12 +216,14 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("data-rank", html)
             self.assertIn("data-best-val", html)
             self.assertIn("data-delta", html)
+            self.assertIn("data-pair", html)
             self.assertIn("<th>Rank</th>", html)
             self.assertIn("#1", html)
             self.assertIn("Loss Leaderboard", html)
             self.assertIn("<div class=\"label\">Comparable</div>", html)
             self.assertIn('<option value="rank">Rank</option>', html)
             self.assertIn('<option value="delta">Loss Delta</option>', html)
+            self.assertIn('<option value="pair">Pair Reports</option>', html)
             self.assertIn('<option value="pass">pass</option>', html)
             self.assertIn('<option value="warn">warn</option>', html)
             self.assertIn("addEventListener", html)
@@ -186,6 +233,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("new Blob", html)
             self.assertIn("<th>Notes</th>", html)
             self.assertIn("<th>Gen Quality</th>", html)
+            self.assertIn("<th>Pair Reports</th>", html)
             self.assertIn('class="tag">baseline</span>', html)
             self.assertIn("stable baseline", html)
             self.assertIn("<div class=\"label\">Tags</div>", html)

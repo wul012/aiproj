@@ -29,6 +29,14 @@ REGISTRY_ARTIFACT_PATHS = [
     "eval_suite/eval_suite.csv",
     "eval_suite/eval_suite.svg",
     "eval_suite/eval_suite.html",
+    "pair_batch/pair_generation_batch.json",
+    "pair_batch/pair_generation_batch.csv",
+    "pair_batch/pair_generation_batch.md",
+    "pair_batch/pair_generation_batch.html",
+    "pair_batch_trend/pair_batch_trend.json",
+    "pair_batch_trend/pair_batch_trend.csv",
+    "pair_batch_trend/pair_batch_trend.md",
+    "pair_batch_trend/pair_batch_trend.html",
     "generation-quality/generation_quality.json",
     "generation-quality/generation_quality.csv",
     "generation-quality/generation_quality.md",
@@ -72,6 +80,12 @@ class RegisteredRun:
     generation_quality_warn_count: int | None
     generation_quality_fail_count: int | None
     generation_quality_avg_unique_ratio: float | None
+    pair_batch_cases: int | None
+    pair_batch_generated_differences: int | None
+    pair_batch_html_exists: bool
+    pair_trend_reports: int | None
+    pair_trend_changed_cases: int | None
+    pair_trend_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
     dashboard_exists: bool
@@ -101,6 +115,8 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     dataset_quality = _read_json(root / "dataset_quality.json")
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json")
     generation_quality = _read_generation_quality(root)
+    pair_batch = _read_json(root / "pair_batch" / "pair_generation_batch.json")
+    pair_trend = _read_json(root / "pair_batch_trend" / "pair_batch_trend.json")
     run_notes = _read_run_notes(root)
 
     git = _pick_dict(manifest, "git")
@@ -135,6 +151,12 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         generation_quality_warn_count=_as_int(_pick(generation_summary, "warn_count")),
         generation_quality_fail_count=_as_int(_pick(generation_summary, "fail_count")),
         generation_quality_avg_unique_ratio=_as_float(_pick(generation_summary, "avg_unique_ratio")),
+        pair_batch_cases=_as_int(_pick(pair_batch, "case_count")),
+        pair_batch_generated_differences=_as_int(_pick(pair_batch, "generated_difference_count")),
+        pair_batch_html_exists=(root / "pair_batch" / "pair_generation_batch.html").exists(),
+        pair_trend_reports=_as_int(_pick(pair_trend, "report_count")),
+        pair_trend_changed_cases=_as_int(_pick(pair_trend, "changed_generated_equal_cases")),
+        pair_trend_html_exists=(root / "pair_batch_trend" / "pair_batch_trend.html").exists(),
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
         dashboard_exists=(root / "dashboard.html").exists(),
@@ -163,6 +185,10 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
         "generation_quality_counts": _counts(run.generation_quality_status or "missing" for run in runs),
+        "pair_report_counts": {
+            "pair_batch": sum(1 for run in run_rows if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists")),
+            "pair_trend": sum(1 for run in run_rows if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists")),
+        },
         "tag_counts": _counts(tag for run in runs for tag in run.tags),
     }
 
@@ -200,6 +226,12 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "generation_quality_warn_count",
         "generation_quality_fail_count",
         "generation_quality_avg_unique_ratio",
+        "pair_batch_cases",
+        "pair_batch_generated_differences",
+        "pair_batch_html_exists",
+        "pair_trend_reports",
+        "pair_trend_changed_cases",
+        "pair_trend_html_exists",
         "artifact_count",
         "checkpoint_exists",
         "dashboard_exists",
@@ -271,6 +303,7 @@ def render_registry_html(
     quality_counts = registry.get("quality_counts", {})
     tag_counts = registry.get("tag_counts", {})
     generation_quality_counts = registry.get("generation_quality_counts", {})
+    pair_report_counts = registry.get("pair_report_counts", {})
     loss_leaderboard = registry.get("loss_leaderboard", [])
     stats = [
         ("Runs", registry.get("run_count")),
@@ -280,6 +313,7 @@ def render_registry_html(
         ("Fingerprints", len(registry.get("dataset_fingerprints", []))),
         ("Quality", ", ".join(f"{key}:{value}" for key, value in quality_counts.items()) if isinstance(quality_counts, dict) else None),
         ("Gen quality", ", ".join(f"{key}:{value}" for key, value in generation_quality_counts.items()) if isinstance(generation_quality_counts, dict) else None),
+        ("Pair reports", _pair_report_count_label(pair_report_counts)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
@@ -303,6 +337,7 @@ def render_registry_html(
             f' data-delta="{_e(_sort_number(run.get("best_val_loss_delta")))}"'
             f' data-params="{_e(_sort_number(run.get("total_parameters")))}"'
             f' data-artifacts="{_e(_sort_number(run.get("artifact_count")))}"'
+            f' data-pair="{_e(_sort_number(_pair_report_score(run)))}"'
             f' data-eval="{_e(_sort_number(run.get("eval_suite_cases")))}">'
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('path'))}</span></td>"
             f"<td>{_e(_rank_label(run.get('best_val_loss_rank')))}</td>"
@@ -313,6 +348,7 @@ def render_registry_html(
             f'<td><span class="pill {quality_class}">{_e(quality)}</span></td>'
             f"<td>{_e(run.get('eval_suite_cases'))}<br><span>avg unique={_e(run.get('eval_suite_avg_unique'))}</span></td>"
             f'<td><span class="pill {generation_quality_class}">{_e(generation_quality)}</span><br><span>cases={_e(run.get("generation_quality_cases"))}</span></td>'
+            f"<td>{_pair_report_cell(run)}</td>"
             f"<td>{_e(run.get('artifact_count'))}</td>"
             f"<td>{_tag_chips(run.get('tags'))}<br><span>{_e(run.get('note'))}</span></td>"
             f"<td>{links}</td>"
@@ -336,7 +372,7 @@ def render_registry_html(
             '<section class="panel">',
             "<h2>Runs</h2>",
             '<table id="registry-table">',
-            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
+            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Pair Reports</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
             '<tbody id="registry-rows">',
             "".join(rows),
             "</tbody>",
@@ -573,10 +609,12 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "dataset_fingerprint",
         "dataset_quality",
         "generation_quality_status",
+        "pair_batch_cases",
+        "pair_trend_reports",
         "note",
         "tags",
     ]
-    return " ".join(_csv_value(run.get(key)) or "" for key in keys).lower()
+    return " ".join(str(_csv_value(run.get(key)) or "") for key in keys).lower()
 
 
 def _registry_controls(runs: list[Any]) -> str:
@@ -596,6 +634,7 @@ def _registry_controls(runs: list[Any]) -> str:
         '<option value="delta">Loss Delta</option>'
         '<option value="name">Name</option>'
         '<option value="artifacts">Artifacts</option>'
+        '<option value="pair">Pair Reports</option>'
         '<option value="eval">Eval Cases</option>'
         '<option value="params">Params</option>'
         "</select></label>"
@@ -615,6 +654,8 @@ def _registry_links(run: dict[str, Any], base_dir: str | Path | None) -> str:
         ("card", root / "experiment_card.html"),
         ("manifest", root / "run_manifest.json"),
         ("eval", root / "eval_suite" / "eval_suite.json"),
+        ("pair batch", root / "pair_batch" / "pair_generation_batch.html"),
+        ("pair trend", root / "pair_batch_trend" / "pair_batch_trend.html"),
         ("gen quality", root / "generation-quality" / "generation_quality.html"),
         ("gen quality", root / "eval_suite" / "generation-quality" / "generation_quality.html"),
     ]
@@ -633,6 +674,42 @@ def _href(path: Path, base_dir: str | Path | None) -> str:
         return Path(os.path.relpath(path, Path(base_dir))).as_posix()
     except ValueError:
         return path.as_posix()
+
+
+def _pair_report_count_label(value: Any) -> str:
+    if not isinstance(value, dict):
+        return "batch:0, trend:0"
+    return f"batch:{value.get('pair_batch', 0)}, trend:{value.get('pair_trend', 0)}"
+
+
+def _pair_report_score(run: dict[str, Any]) -> int:
+    score = 0
+    if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists"):
+        score += int(run.get("pair_batch_cases") or 1)
+    if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists"):
+        score += int(run.get("pair_trend_reports") or 1)
+    return score
+
+
+def _pair_report_cell(run: dict[str, Any]) -> str:
+    rows = []
+    if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists"):
+        rows.append(
+            "batch cases="
+            + _e(run.get("pair_batch_cases") if run.get("pair_batch_cases") is not None else "html")
+            + " diff="
+            + _e(_fmt(run.get("pair_batch_generated_differences")))
+        )
+    if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists"):
+        rows.append(
+            "trend reports="
+            + _e(run.get("pair_trend_reports") if run.get("pair_trend_reports") is not None else "html")
+            + " changed="
+            + _e(_fmt(run.get("pair_trend_changed_cases")))
+        )
+    if not rows:
+        return '<span class="muted">missing</span>'
+    return "<br>".join(f"<span>{row}</span>" for row in rows)
 
 
 def _stat_card(label: str, value: Any) -> str:
@@ -728,7 +805,7 @@ def _registry_script() -> str:
   const share = document.getElementById("share-view");
   const exportCsv = document.getElementById("export-visible-csv");
   const status = document.getElementById("registry-status");
-  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "eval"]);
+  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "pair", "eval"]);
   let ascending = true;
 
   const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);

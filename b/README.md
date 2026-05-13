@@ -63,6 +63,9 @@ b/44/解释/说明.md
 b/45/图片
 b/45/解释/说明.md
  -> v45 pair batch dashboard/playground links 的运行截图和解释
+b/46/图片
+b/46/解释/说明.md
+ -> v46 registry pair report links 的运行截图和解释
 ```
 
 写入规则：
