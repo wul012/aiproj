@@ -93,6 +93,9 @@ b/54/解释/说明.md
 b/55/图片
 b/55/解释/说明.md
  -> v55 streaming playground generation 的运行截图和解释
+b/56/图片
+b/56/解释/说明.md
+ -> v56 streaming timeout and cancellation 的运行截图和解释
 ```
 
 写入规则：

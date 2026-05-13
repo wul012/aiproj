@@ -4,6 +4,7 @@ import json
 import sys
 import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 from urllib.error import HTTPError
@@ -26,6 +27,7 @@ from minigpt.server import (
     parse_generation_pair_request,
     parse_generation_request,
     sse_message,
+    stream_timeout_payload,
 )
 from http.server import ThreadingHTTPServer
 
@@ -56,6 +58,25 @@ class StubGenerator:
             yield GenerationStreamChunk(
                 index=index,
                 token_id=100 + index,
+                text=text,
+                generated=generated,
+                continuation=continuation,
+                checkpoint=self.checkpoint,
+                tokenizer="stub",
+            )
+
+
+class SlowStreamGenerator(StubGenerator):
+    def stream(self, request):
+        generated = request.prompt
+        continuation = ""
+        for index, text in enumerate(["a", "b", "c"]):
+            time.sleep(0.02)
+            generated += text
+            continuation += text
+            yield GenerationStreamChunk(
+                index=index,
+                token_id=200 + index,
                 text=text,
                 generated=generated,
                 continuation=continuation,
@@ -255,6 +276,60 @@ class ServerTests(unittest.TestCase):
 
         self.assertEqual(message, 'event: token\ndata: {"text": "中", "index": 1}\n\n')
 
+    def test_stream_timeout_payload_keeps_partial_response(self) -> None:
+        request = parse_generation_request({"prompt": "abc", "max_new_tokens": 5})
+
+        payload = stream_timeout_payload(
+            request,
+            elapsed_seconds=1.2345678,
+            max_stream_seconds=1.0,
+            chunk_count=2,
+            generated="abcde",
+            continuation="de",
+            checkpoint="checkpoint.pt",
+            tokenizer="char",
+            checkpoint_id="default",
+        )
+
+        self.assertFalse(payload["done"])
+        self.assertEqual(payload["reason"], "timeout")
+        self.assertEqual(payload["elapsed_seconds"], 1.234568)
+        self.assertEqual(payload["chunk_count"], 2)
+        self.assertEqual(payload["response"]["generated"], "abcde")
+        self.assertEqual(payload["response"]["checkpoint_id"], "default")
+
+    def test_log_generation_can_record_cancelled_stream(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            handler = create_handler(run_dir, device="cpu", generator_factory=StubGenerator)
+
+            class Harness(handler):
+                def __init__(self) -> None:
+                    self.client_address = ("127.0.0.1", 12345)
+
+            harness = Harness()
+            request = parse_generation_request({"prompt": "abc", "max_new_tokens": 5})
+            response = GenerationResponse("abc", "abc::", "::", 5, 0.8, 30, None, "checkpoint.pt", "stub", "default")
+
+            harness._log_generation(
+                "cancelled",
+                request=request,
+                response=response,
+                endpoint="/api/generate-stream",
+                stream_chunks=1,
+                stream_timed_out=False,
+                stream_cancelled=True,
+                stream_elapsed_seconds=0.25,
+            )
+
+            record = json.loads((run_dir / "inference_requests.jsonl").read_text(encoding="utf-8").strip())
+            self.assertEqual(record["status"], "cancelled")
+            self.assertEqual(record["endpoint"], "/api/generate-stream")
+            self.assertEqual(record["stream_chunks"], 1)
+            self.assertEqual(record["stream_cancelled"], True)
+            self.assertEqual(record["stream_timed_out"], False)
+            self.assertEqual(record["stream_elapsed_seconds"], 0.25)
+
     def test_http_health_and_generate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = Path(tmp)
@@ -271,6 +346,7 @@ class ServerTests(unittest.TestCase):
                 health = _get_json(base + "/api/health")
                 self.assertTrue(health["checkpoint_exists"])
                 self.assertEqual(health["safety"]["max_new_tokens"], 512)
+                self.assertEqual(health["safety"]["max_stream_seconds"], 30.0)
                 self.assertEqual(health["default_checkpoint_id"], "default")
                 self.assertEqual(health["generate_stream_endpoint"], "/api/generate-stream")
                 self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
@@ -341,6 +417,40 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(log_record["status"], "ok")
                 self.assertEqual(log_record["stream_chunks"], 2)
                 self.assertEqual(log_record["generated_chars"], len("abc::generated"))
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=5)
+
+    def test_http_generate_stream_times_out_and_logs_partial(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            (run_dir / "checkpoint.pt").write_bytes(b"fake")
+            safety = InferenceSafetyProfile(max_stream_seconds=0.01)
+            handler = create_handler(run_dir, device="cpu", generator_factory=SlowStreamGenerator, safety_profile=safety)
+            server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            base = f"http://127.0.0.1:{server.server_port}"
+            try:
+                body, content_type = _post_raw(
+                    base + "/api/generate-stream",
+                    {"prompt": "abc", "max_new_tokens": 5, "temperature": 0.8, "top_k": 0, "seed": 7},
+                )
+
+                self.assertTrue(content_type.startswith("text/event-stream"))
+                events = _parse_sse(body)
+                self.assertEqual([event["event"] for event in events], ["start", "token", "timeout"])
+                self.assertEqual(events[-1]["data"]["reason"], "timeout")
+                self.assertFalse(events[-1]["data"]["done"])
+                self.assertEqual(events[-1]["data"]["chunk_count"], 1)
+                self.assertEqual(events[-1]["data"]["response"]["generated"], "abca")
+                log_record = json.loads((run_dir / "inference_requests.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+                self.assertEqual(log_record["endpoint"], "/api/generate-stream")
+                self.assertEqual(log_record["status"], "timeout")
+                self.assertTrue(log_record["stream_timed_out"])
+                self.assertEqual(log_record["stream_chunks"], 1)
+                self.assertGreaterEqual(log_record["stream_elapsed_seconds"], 0.01)
             finally:
                 server.shutdown()
                 server.server_close()

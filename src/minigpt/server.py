@@ -9,6 +9,7 @@ import mimetypes
 from pathlib import Path
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from time import monotonic
 from typing import Any, Callable, Iterator
 from urllib.parse import parse_qs, unquote, urlparse
 
@@ -23,6 +24,7 @@ class InferenceSafetyProfile:
     max_temperature: float = 2.0
     max_top_k: int = 200
     max_body_bytes: int = 16 * 1024
+    max_stream_seconds: float = 30.0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -466,6 +468,40 @@ def sse_message(event: str, data: dict[str, Any]) -> bytes:
     return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n".encode("utf-8")
 
 
+def stream_timeout_payload(
+    request: GenerationRequest,
+    *,
+    elapsed_seconds: float,
+    max_stream_seconds: float,
+    chunk_count: int,
+    generated: str,
+    continuation: str,
+    checkpoint: str,
+    tokenizer: str,
+    checkpoint_id: str | None = None,
+) -> dict[str, Any]:
+    response = GenerationResponse(
+        prompt=request.prompt,
+        generated=generated,
+        continuation=continuation,
+        max_new_tokens=request.max_new_tokens,
+        temperature=request.temperature,
+        top_k=request.top_k,
+        seed=request.seed,
+        checkpoint=checkpoint,
+        tokenizer=tokenizer,
+        checkpoint_id=checkpoint_id,
+    )
+    return {
+        "done": False,
+        "reason": "timeout",
+        "elapsed_seconds": round(elapsed_seconds, 6),
+        "max_stream_seconds": max_stream_seconds,
+        "chunk_count": chunk_count,
+        "response": response.to_dict(),
+    }
+
+
 def write_pair_generation_artifacts(
     run_dir: str | Path,
     payload: dict[str, Any],
@@ -661,6 +697,13 @@ def create_handler(
             response: GenerationResponse | None = None
             chunk_count = 0
             stream_open = False
+            timed_out = False
+            cancelled = False
+            elapsed_seconds = 0.0
+            generated = ""
+            continuation = ""
+            tokenizer = "unknown"
+            checkpoint_path = str(checkpoint)
             try:
                 payload = self._read_json_body()
                 request = parse_generation_request(payload, safety)
@@ -679,12 +722,12 @@ def create_handler(
                         "seed": request.seed,
                         "checkpoint_id": option.id,
                         "checkpoint": option.path,
+                        "max_stream_seconds": safety.max_stream_seconds,
                     },
                 )
                 generated = request.prompt
-                continuation = ""
-                tokenizer = "unknown"
                 checkpoint_path = option.path
+                started_at = monotonic()
                 for chunk in generator_for(option).stream(request):
                     chunk_count += 1
                     chunk_payload = chunk.to_dict()
@@ -694,6 +737,24 @@ def create_handler(
                     tokenizer = chunk.tokenizer
                     checkpoint_path = chunk.checkpoint
                     self._write_sse("token", chunk_payload)
+                    elapsed_seconds = monotonic() - started_at
+                    if elapsed_seconds >= safety.max_stream_seconds:
+                        timed_out = True
+                        self._write_sse(
+                            "timeout",
+                            stream_timeout_payload(
+                                request,
+                                elapsed_seconds=elapsed_seconds,
+                                max_stream_seconds=safety.max_stream_seconds,
+                                chunk_count=chunk_count,
+                                generated=generated,
+                                continuation=continuation,
+                                checkpoint=checkpoint_path,
+                                tokenizer=tokenizer,
+                                checkpoint_id=option.id,
+                            ),
+                        )
+                        break
                 response = GenerationResponse(
                     prompt=request.prompt,
                     generated=generated,
@@ -706,14 +767,17 @@ def create_handler(
                     tokenizer=tokenizer,
                     checkpoint_id=option.id,
                 )
-                self._write_sse(
-                    "end",
-                    {
-                        "done": True,
-                        "chunk_count": chunk_count,
-                        "response": response.to_dict(),
-                    },
-                )
+                if not timed_out:
+                    elapsed_seconds = monotonic() - started_at
+                    self._write_sse(
+                        "end",
+                        {
+                            "done": True,
+                            "chunk_count": chunk_count,
+                            "elapsed_seconds": round(elapsed_seconds, 6),
+                            "response": response.to_dict(),
+                        },
+                    )
             except ValueError as exc:
                 self._log_generation(
                     "bad_request",
@@ -727,6 +791,33 @@ def create_handler(
                 else:
                     self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
                 return
+            except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+                cancelled = True
+                if request is not None:
+                    response = GenerationResponse(
+                        prompt=request.prompt,
+                        generated=generated or request.prompt,
+                        continuation=continuation,
+                        max_new_tokens=request.max_new_tokens,
+                        temperature=request.temperature,
+                        top_k=request.top_k,
+                        seed=request.seed,
+                        checkpoint=checkpoint_path,
+                        tokenizer=tokenizer,
+                        checkpoint_id=option.id if option is not None else None,
+                    )
+                self._log_generation(
+                    "cancelled",
+                    request=request,
+                    response=response,
+                    checkpoint_option=option,
+                    endpoint="/api/generate-stream",
+                    stream_chunks=chunk_count,
+                    stream_timed_out=timed_out,
+                    stream_cancelled=cancelled,
+                    stream_elapsed_seconds=elapsed_seconds,
+                )
+                return
             except Exception as exc:
                 self._log_generation(
                     "error",
@@ -736,6 +827,9 @@ def create_handler(
                     error=str(exc),
                     endpoint="/api/generate-stream",
                     stream_chunks=chunk_count,
+                    stream_timed_out=timed_out,
+                    stream_cancelled=cancelled,
+                    stream_elapsed_seconds=elapsed_seconds,
                 )
                 if stream_open:
                     self._write_sse("error", {"error": str(exc)})
@@ -743,12 +837,15 @@ def create_handler(
                     self._send_json({"error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
                 return
             self._log_generation(
-                "ok",
+                "timeout" if timed_out else "ok",
                 request=request,
                 response=response,
                 checkpoint_option=option,
                 endpoint="/api/generate-stream",
                 stream_chunks=chunk_count,
+                stream_timed_out=timed_out,
+                stream_cancelled=cancelled,
+                stream_elapsed_seconds=elapsed_seconds,
             )
 
         def _handle_generate_pair(self, *, save_artifact: bool = False) -> None:
@@ -853,6 +950,9 @@ def create_handler(
             error: str | None = None,
             endpoint: str = "/api/generate",
             stream_chunks: int | None = None,
+            stream_timed_out: bool | None = None,
+            stream_cancelled: bool | None = None,
+            stream_elapsed_seconds: float | None = None,
         ) -> None:
             event: dict[str, Any] = {
                 "endpoint": endpoint,
@@ -878,6 +978,12 @@ def create_handler(
                 event["tokenizer"] = response.tokenizer
             if stream_chunks is not None:
                 event["stream_chunks"] = stream_chunks
+            if stream_timed_out is not None:
+                event["stream_timed_out"] = stream_timed_out
+            if stream_cancelled is not None:
+                event["stream_cancelled"] = stream_cancelled
+            if stream_elapsed_seconds is not None:
+                event["stream_elapsed_seconds"] = round(stream_elapsed_seconds, 6)
             if error is not None:
                 event["error"] = error
             append_inference_log(request_log, event)

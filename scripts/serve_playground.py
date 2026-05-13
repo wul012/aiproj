@@ -25,6 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-temperature", type=float, default=2.0)
     parser.add_argument("--max-top-k", type=int, default=200)
     parser.add_argument("--max-body-bytes", type=int, default=16 * 1024)
+    parser.add_argument("--max-stream-seconds", type=float, default=30.0)
     parser.add_argument("--request-log", type=Path, default=None, help="JSONL log path. Defaults to <run-dir>/inference_requests.jsonl")
     return parser.parse_args()
 
@@ -38,6 +39,7 @@ def main() -> None:
         max_temperature=args.max_temperature,
         max_top_k=args.max_top_k,
         max_body_bytes=args.max_body_bytes,
+        max_stream_seconds=args.max_stream_seconds,
     )
     server = run_server(
         args.run_dir,

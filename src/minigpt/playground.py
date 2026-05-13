@@ -125,6 +125,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         "commands": payload["commands"],
         "checkpoints": [],
         "checkpointComparison": [],
+        "streamController": None,
     }
     sections = [
         _style(),
@@ -569,6 +570,8 @@ async function loadCheckpointComparison() {{
 }}
 async function generateLive() {{
   const output = document.getElementById('liveOutput');
+  const generateButton = document.getElementById('liveGenerateButton');
+  const stopButton = document.getElementById('liveStopButton');
   const checkpoint = selectedCheckpointOption();
   const payload = {{
     prompt: document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt,
@@ -578,12 +581,20 @@ async function generateLive() {{
     seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
   }};
   if (checkpoint) payload.checkpoint = checkpoint.id;
+  if (MiniGPTPlayground.streamController) {{
+    MiniGPTPlayground.streamController.abort();
+  }}
+  const controller = new AbortController();
+  MiniGPTPlayground.streamController = controller;
+  if (generateButton) generateButton.disabled = true;
+  if (stopButton) stopButton.disabled = false;
   output.textContent = '';
   try {{
     const response = await fetch('/api/generate-stream', {{
       method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
       body: JSON.stringify(payload),
+      signal: controller.signal,
     }});
     if (!response.ok) {{
       const data = await response.json();
@@ -596,7 +607,24 @@ async function generateLive() {{
     }}
     await readGenerationStream(response, output);
   }} catch (error) {{
-    output.textContent = 'Start scripts/serve_playground.py to use live generation.';
+    if (error.name === 'AbortError') {{
+      if (MiniGPTPlayground.streamController === controller) {{
+        output.textContent = (output.textContent || '') + '\\n[stream cancelled]';
+      }}
+    }} else {{
+      output.textContent = 'Start scripts/serve_playground.py to use live generation.';
+    }}
+  }} finally {{
+    if (MiniGPTPlayground.streamController === controller) {{
+      MiniGPTPlayground.streamController = null;
+    }}
+    if (generateButton) generateButton.disabled = false;
+    if (stopButton) stopButton.disabled = true;
+  }}
+}}
+function stopLiveGeneration() {{
+  if (MiniGPTPlayground.streamController) {{
+    MiniGPTPlayground.streamController.abort();
   }}
 }}
 async function readGenerationStream(response, output) {{
@@ -622,6 +650,10 @@ async function readGenerationStream(response, output) {{
       }} else if (event.name === 'end') {{
         const finalResponse = event.data.response || {{}};
         output.textContent = finalResponse.generated || generated;
+      }} else if (event.name === 'timeout') {{
+        const finalResponse = event.data.response || {{}};
+        const partial = finalResponse.generated || generated;
+        output.textContent = `${{partial}}\\n[stream timeout after ${{event.data.chunk_count}} chunk(s)]`;
       }} else if (event.name === 'error') {{
         output.textContent = event.data.error || 'Generation failed';
       }}
@@ -716,6 +748,7 @@ window.addEventListener('DOMContentLoaded', () => {{
     renderCheckpointComparison();
   }});
   document.getElementById('liveGenerateButton').addEventListener('click', generateLive);
+  document.getElementById('liveStopButton').addEventListener('click', stopLiveGeneration);
   document.getElementById('pairGenerateButton').addEventListener('click', () => generatePairLive(false));
   document.getElementById('pairSaveButton').addEventListener('click', () => generatePairLive(true));
   document.getElementById('pairLeftCheckpointSelect').addEventListener('change', renderCheckpointComparison);
@@ -765,6 +798,7 @@ def _live_section() -> str:
   <div class="live-actions">
     <label><span class="label">Checkpoint</span><select id="checkpointSelect"><option value="">default</option></select></label>
     <button id="liveGenerateButton" type="button">Stream Generate</button>
+    <button id="liveStopButton" type="button" disabled>Stop</button>
     <output id="checkpointStatus">Checkpoint selector loads from /api/checkpoints.</output>
   </div>
   <pre id="liveOutput" class="output"></pre>
