@@ -114,6 +114,9 @@ b/61/解释/说明.md
 b/62/图片
 b/62/解释/说明.md
  -> v62 release readiness dashboard 的运行截图和解释
+b/63/图片
+b/63/解释/说明.md
+ -> v63 release readiness comparison 的运行截图和解释
 ```
 
 写入规则：
