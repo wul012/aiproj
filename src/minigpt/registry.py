@@ -37,6 +37,11 @@ REGISTRY_ARTIFACT_PATHS = [
     "pair_batch_trend/pair_batch_trend.csv",
     "pair_batch_trend/pair_batch_trend.md",
     "pair_batch_trend/pair_batch_trend.html",
+    "release-readiness-comparison/release_readiness_comparison.json",
+    "release-readiness-comparison/release_readiness_comparison.csv",
+    "release-readiness-comparison/release_readiness_deltas.csv",
+    "release-readiness-comparison/release_readiness_comparison.md",
+    "release-readiness-comparison/release_readiness_comparison.html",
     "benchmark-scorecard/benchmark_scorecard.json",
     "benchmark-scorecard/benchmark_scorecard.csv",
     "benchmark-scorecard/benchmark_scorecard_drilldowns.csv",
@@ -102,6 +107,15 @@ class RegisteredRun:
     pair_trend_reports: int | None
     pair_trend_changed_cases: int | None
     pair_trend_html_exists: bool
+    release_readiness_comparison_status: str | None
+    release_readiness_report_count: int | None
+    release_readiness_baseline_status: str | None
+    release_readiness_ready_count: int | None
+    release_readiness_blocked_count: int | None
+    release_readiness_improved_count: int | None
+    release_readiness_regressed_count: int | None
+    release_readiness_changed_panel_delta_count: int | None
+    release_readiness_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
     dashboard_exists: bool
@@ -134,6 +148,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     benchmark_scorecard = _read_benchmark_scorecard(root)
     pair_batch = _read_json(root / "pair_batch" / "pair_generation_batch.json")
     pair_trend = _read_json(root / "pair_batch_trend" / "pair_batch_trend.json")
+    release_readiness_comparison = _read_release_readiness_comparison(root)
     run_notes = _read_run_notes(root)
 
     git = _pick_dict(manifest, "git")
@@ -144,6 +159,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     source = _pick_dict(data, "source")
     generation_summary = _pick_dict(generation_quality, "summary")
     benchmark_summary = _pick_dict(benchmark_scorecard, "summary")
+    release_readiness_summary = _pick_dict(release_readiness_comparison, "summary")
     artifacts = manifest.get("artifacts", []) if isinstance(manifest, dict) else []
     manifest_artifact_count = sum(1 for item in artifacts if isinstance(item, dict) and item.get("exists"))
     artifact_count = max(manifest_artifact_count, _actual_artifact_count(root))
@@ -185,6 +201,15 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         pair_trend_reports=_as_int(_pick(pair_trend, "report_count")),
         pair_trend_changed_cases=_as_int(_pick(pair_trend, "changed_generated_equal_cases")),
         pair_trend_html_exists=(root / "pair_batch_trend" / "pair_batch_trend.html").exists(),
+        release_readiness_comparison_status=_release_readiness_comparison_status(release_readiness_summary),
+        release_readiness_report_count=_as_int(_pick(release_readiness_summary, "readiness_count")),
+        release_readiness_baseline_status=_as_str(_pick(release_readiness_summary, "baseline_status")),
+        release_readiness_ready_count=_as_int(_pick(release_readiness_summary, "ready_count")),
+        release_readiness_blocked_count=_as_int(_pick(release_readiness_summary, "blocked_count")),
+        release_readiness_improved_count=_as_int(_pick(release_readiness_summary, "improved_count")),
+        release_readiness_regressed_count=_as_int(_pick(release_readiness_summary, "regressed_count")),
+        release_readiness_changed_panel_delta_count=_as_int(_pick(release_readiness_summary, "changed_panel_delta_count")),
+        release_readiness_html_exists=_release_readiness_html_exists(root),
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
         dashboard_exists=(root / "dashboard.html").exists(),
@@ -207,6 +232,8 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
     rubric_leaderboard = _annotate_rubric_leaderboard(run_rows)
     pair_delta_rows = _collect_pair_delta_rows(run_dirs, names)
     pair_delta_leaderboard = _pair_delta_leaderboard(pair_delta_rows)
+    release_readiness_delta_rows = _collect_release_readiness_delta_rows(run_dirs, names)
+    release_readiness_delta_leaderboard = _release_readiness_delta_leaderboard(release_readiness_delta_rows)
     return {
         "schema_version": 1,
         "run_count": len(runs),
@@ -217,10 +244,13 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         "benchmark_rubric_summary": _benchmark_rubric_summary(rubric_leaderboard),
         "pair_delta_summary": _pair_delta_summary(pair_delta_rows),
         "pair_delta_leaderboard": pair_delta_leaderboard,
+        "release_readiness_delta_summary": _release_readiness_delta_summary(release_readiness_delta_rows),
+        "release_readiness_delta_leaderboard": release_readiness_delta_leaderboard,
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
         "generation_quality_counts": _counts(run.generation_quality_status or "missing" for run in runs),
         "benchmark_rubric_counts": _counts(run.benchmark_rubric_status or "missing" for run in runs),
+        "release_readiness_comparison_counts": _counts(run.release_readiness_comparison_status or "missing" for run in runs),
         "pair_report_counts": {
             "pair_batch": sum(1 for run in run_rows if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists")),
             "pair_trend": sum(1 for run in run_rows if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists")),
@@ -281,6 +311,15 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "pair_trend_reports",
         "pair_trend_changed_cases",
         "pair_trend_html_exists",
+        "release_readiness_comparison_status",
+        "release_readiness_report_count",
+        "release_readiness_baseline_status",
+        "release_readiness_ready_count",
+        "release_readiness_blocked_count",
+        "release_readiness_improved_count",
+        "release_readiness_regressed_count",
+        "release_readiness_changed_panel_delta_count",
+        "release_readiness_html_exists",
         "artifact_count",
         "checkpoint_exists",
         "dashboard_exists",
@@ -356,6 +395,8 @@ def render_registry_html(
     benchmark_rubric_summary = registry.get("benchmark_rubric_summary", {})
     pair_report_counts = registry.get("pair_report_counts", {})
     pair_delta_summary = registry.get("pair_delta_summary", {})
+    release_readiness_counts = registry.get("release_readiness_comparison_counts", {})
+    release_readiness_delta_summary = registry.get("release_readiness_delta_summary", {})
     loss_leaderboard = registry.get("loss_leaderboard", [])
     stats = [
         ("Runs", registry.get("run_count")),
@@ -368,6 +409,8 @@ def render_registry_html(
         ("Rubric", _benchmark_rubric_summary_label(benchmark_rubric_summary, benchmark_rubric_counts)),
         ("Pair reports", _pair_report_count_label(pair_report_counts)),
         ("Pair deltas", _pair_delta_summary_label(pair_delta_summary)),
+        ("Release readiness", _release_readiness_counts_label(release_readiness_counts)),
+        ("Readiness deltas", _release_readiness_delta_summary_label(release_readiness_delta_summary)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
@@ -393,6 +436,7 @@ def render_registry_html(
             f' data-artifacts="{_e(_sort_number(run.get("artifact_count")))}"'
             f' data-rubric="{_e(_sort_number(run.get("benchmark_rubric_avg_score")))}"'
             f' data-pair="{_e(_sort_number(_pair_report_score(run)))}"'
+            f' data-readiness="{_e(_sort_number(_release_readiness_sort_score(run)))}"'
             f' data-eval="{_e(_sort_number(run.get("eval_suite_cases")))}">'
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('path'))}</span></td>"
             f"<td>{_e(_rank_label(run.get('best_val_loss_rank')))}</td>"
@@ -405,6 +449,7 @@ def render_registry_html(
             f'<td><span class="pill {generation_quality_class}">{_e(generation_quality)}</span><br><span>cases={_e(run.get("generation_quality_cases"))}</span></td>'
             f"<td>{_benchmark_rubric_cell(run)}</td>"
             f"<td>{_pair_report_cell(run)}</td>"
+            f"<td>{_release_readiness_cell(run)}</td>"
             f"<td>{_e(run.get('artifact_count'))}</td>"
             f"<td>{_tag_chips(run.get('tags'))}<br><span>{_e(run.get('note'))}</span></td>"
             f"<td>{links}</td>"
@@ -428,7 +473,7 @@ def render_registry_html(
             '<section class="panel">',
             "<h2>Runs</h2>",
             '<table id="registry-table">',
-            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Rubric</th><th>Pair Reports</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
+            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Rubric</th><th>Pair Reports</th><th>Release Readiness</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
             '<tbody id="registry-rows">',
             "".join(rows),
             "</tbody>",
@@ -437,6 +482,7 @@ def render_registry_html(
             _loss_leaderboard_html(loss_leaderboard),
             _benchmark_rubric_leaderboard_html(registry.get("benchmark_rubric_leaderboard", [])),
             _pair_delta_leaderboard_html(registry.get("pair_delta_leaderboard", []), base_dir),
+            _release_readiness_delta_leaderboard_html(registry.get("release_readiness_delta_leaderboard", []), base_dir),
             '<section class="panel">',
             "<h2>Dataset Fingerprints</h2>",
             "<pre>" + _e(json.dumps(registry.get("dataset_fingerprints", []), ensure_ascii=False, indent=2)) + "</pre>",
@@ -670,6 +716,73 @@ def _pair_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list[str] | None) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for index, run_dir in enumerate(run_dirs):
+        root = Path(run_dir)
+        run_name = str(names[index]) if names is not None else root.name
+        report = _read_release_readiness_comparison(root)
+        if not isinstance(report, dict):
+            continue
+        report_path = _as_str(report.get("release_readiness_comparison_path"))
+        for delta in report.get("deltas", []):
+            if not isinstance(delta, dict):
+                continue
+            changed_panels = _as_str_list(delta.get("changed_panels"))
+            rows.append(
+                {
+                    "run_name": run_name,
+                    "run_path": str(root),
+                    "baseline_release": _as_str(delta.get("baseline_release")),
+                    "compared_release": _as_str(delta.get("compared_release")),
+                    "baseline_status": _as_str(delta.get("baseline_status")),
+                    "compared_status": _as_str(delta.get("compared_status")),
+                    "status_delta": _int_if_whole(_as_optional_float(delta.get("status_delta"))),
+                    "delta_status": _as_str(delta.get("delta_status")) or "same",
+                    "audit_score_delta": _int_if_whole(_as_optional_float(delta.get("audit_score_delta"))),
+                    "missing_artifact_delta": _int_if_whole(_as_optional_float(delta.get("missing_artifact_delta"))),
+                    "fail_panel_delta": _int_if_whole(_as_optional_float(delta.get("fail_panel_delta"))),
+                    "warn_panel_delta": _int_if_whole(_as_optional_float(delta.get("warn_panel_delta"))),
+                    "changed_panel_count": len(changed_panels),
+                    "changed_panels": changed_panels,
+                    "explanation": _as_str(delta.get("explanation")),
+                    "report_path": report_path,
+                }
+            )
+    return rows
+
+
+def _release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int = 10) -> list[dict[str, Any]]:
+    status_priority = {"regressed": 0, "improved": 1, "panel-changed": 2, "same": 3}
+    ordered = sorted(
+        rows,
+        key=lambda item: (
+            status_priority.get(str(item.get("delta_status") or ""), 4),
+            -abs(_as_optional_float(item.get("status_delta")) or 0.0),
+            -int(item.get("changed_panel_count") or 0),
+            str(item.get("run_name") or ""),
+            str(item.get("compared_release") or ""),
+        ),
+    )
+    return ordered[:limit]
+
+
+def _release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    run_names = {str(row.get("run_name")) for row in rows if row.get("run_name")}
+    counts = _counts(row.get("delta_status") or "missing" for row in rows)
+    status_deltas = [abs(value) for value in (_as_optional_float(row.get("status_delta")) for row in rows) if value is not None]
+    return {
+        "delta_count": len(rows),
+        "run_count": len(run_names),
+        "regressed_count": counts.get("regressed", 0),
+        "improved_count": counts.get("improved", 0),
+        "panel_changed_count": counts.get("panel-changed", 0),
+        "same_count": counts.get("same", 0),
+        "changed_panel_delta_count": sum(1 for row in rows if int(row.get("changed_panel_count") or 0) > 0),
+        "max_abs_status_delta": _int_if_whole(max(status_deltas)) if status_deltas else None,
+    }
+
+
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:
     if not path.exists():
         return None
@@ -705,6 +818,43 @@ def _read_benchmark_scorecard(root: Path) -> dict[str, Any]:
             payload["benchmark_scorecard_path"] = str(path)
             return payload
     return {}
+
+
+def _read_release_readiness_comparison(root: Path) -> dict[str, Any]:
+    candidates = [
+        root / "release-readiness-comparison" / "release_readiness_comparison.json",
+        root / "release_readiness_comparison.json",
+    ]
+    for path in candidates:
+        payload = _read_json(path)
+        if isinstance(payload, dict):
+            payload["release_readiness_comparison_path"] = str(path)
+            return payload
+    return {}
+
+
+def _release_readiness_html_exists(root: Path) -> bool:
+    return any(
+        path.exists()
+        for path in [
+            root / "release-readiness-comparison" / "release_readiness_comparison.html",
+            root / "release_readiness_comparison.html",
+        ]
+    )
+
+
+def _release_readiness_comparison_status(summary: dict[str, Any]) -> str | None:
+    if not summary:
+        return None
+    if int(summary.get("regressed_count") or 0) > 0:
+        return "regressed"
+    if int(summary.get("improved_count") or 0) > 0:
+        return "improved"
+    if int(summary.get("changed_panel_delta_count") or 0) > 0:
+        return "panel-changed"
+    if int(summary.get("blocked_count") or 0) > 0:
+        return "blocked"
+    return "stable"
 
 
 def _pick(payload: Any, key: str) -> Any:
@@ -832,6 +982,10 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "benchmark_weakest_rubric_case",
         "pair_batch_cases",
         "pair_trend_reports",
+        "release_readiness_comparison_status",
+        "release_readiness_baseline_status",
+        "release_readiness_improved_count",
+        "release_readiness_regressed_count",
         "note",
         "tags",
     ]
@@ -857,6 +1011,7 @@ def _registry_controls(runs: list[Any]) -> str:
         '<option value="artifacts">Artifacts</option>'
         '<option value="rubric">Rubric</option>'
         '<option value="pair">Pair Reports</option>'
+        '<option value="readiness">Release Readiness</option>'
         '<option value="eval">Eval Cases</option>'
         '<option value="params">Params</option>'
         "</select></label>"
@@ -879,6 +1034,8 @@ def _registry_links(run: dict[str, Any], base_dir: str | Path | None) -> str:
         ("scorecard", root / "benchmark-scorecard" / "benchmark_scorecard.html"),
         ("pair batch", root / "pair_batch" / "pair_generation_batch.html"),
         ("pair trend", root / "pair_batch_trend" / "pair_batch_trend.html"),
+        ("readiness cmp", root / "release-readiness-comparison" / "release_readiness_comparison.html"),
+        ("readiness cmp", root / "release_readiness_comparison.html"),
         ("gen quality", root / "generation-quality" / "generation_quality.html"),
         ("gen quality", root / "eval_suite" / "generation-quality" / "generation_quality.html"),
     ]
@@ -915,6 +1072,23 @@ def _pair_delta_summary_label(value: Any) -> str:
     )
 
 
+def _release_readiness_counts_label(value: Any) -> str:
+    if not isinstance(value, dict) or not value:
+        return "missing"
+    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
+
+
+def _release_readiness_delta_summary_label(value: Any) -> str:
+    if not isinstance(value, dict) or not value.get("delta_count"):
+        return "deltas:0"
+    return (
+        f"deltas:{value.get('delta_count')}, "
+        f"regressed:{value.get('regressed_count')}, "
+        f"improved:{value.get('improved_count')}, "
+        f"panels:{value.get('changed_panel_delta_count')}"
+    )
+
+
 def _benchmark_rubric_summary_label(summary: Any, counts: Any) -> str:
     if isinstance(summary, dict) and summary.get("available"):
         return (
@@ -934,6 +1108,18 @@ def _pair_report_score(run: dict[str, Any]) -> int:
     if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists"):
         score += int(run.get("pair_trend_reports") or 1)
     return score
+
+
+def _release_readiness_sort_score(run: dict[str, Any]) -> int:
+    order = {
+        "regressed": 0,
+        "blocked": 1,
+        "panel-changed": 2,
+        "stable": 3,
+        "improved": 4,
+        "missing": 5,
+    }
+    return order.get(str(run.get("release_readiness_comparison_status") or "missing"), 5)
 
 
 def _benchmark_rubric_cell(run: dict[str, Any]) -> str:
@@ -968,6 +1154,28 @@ def _pair_report_cell(run: dict[str, Any]) -> str:
     if not rows:
         return '<span class="muted">missing</span>'
     return "<br>".join(f"<span>{row}</span>" for row in rows)
+
+
+def _release_readiness_cell(run: dict[str, Any]) -> str:
+    status = str(run.get("release_readiness_comparison_status") or "missing")
+    status_class = (
+        "pass"
+        if status in {"improved", "stable"}
+        else "warn"
+        if status == "panel-changed"
+        else "fail"
+        if status in {"regressed", "blocked"}
+        else "missing"
+    )
+    if status == "missing" and not run.get("release_readiness_html_exists"):
+        return '<span class="muted">missing</span>'
+    return (
+        f'<span class="pill {status_class}">{_e(status)}</span>'
+        f"<br><span>reports={_e(_fmt(run.get('release_readiness_report_count')))} baseline={_e(_fmt(run.get('release_readiness_baseline_status')))}</span>"
+        f"<br><span>ready={_e(_fmt(run.get('release_readiness_ready_count')))} blocked={_e(_fmt(run.get('release_readiness_blocked_count')))}</span>"
+        f"<br><span>improved={_e(_fmt(run.get('release_readiness_improved_count')))} regressed={_e(_fmt(run.get('release_readiness_regressed_count')))}</span>"
+        f"<br><span>panel deltas={_e(_fmt(run.get('release_readiness_changed_panel_delta_count')))}</span>"
+    )
 
 
 def _stat_card(label: str, value: Any) -> str:
@@ -1074,6 +1282,43 @@ def _pair_delta_leaderboard_html(leaderboard: Any, base_dir: str | Path | None) 
     )
 
 
+def _release_readiness_delta_leaderboard_html(leaderboard: Any, base_dir: str | Path | None) -> str:
+    if not isinstance(leaderboard, list) or not leaderboard:
+        return (
+            '<section class="panel">'
+            "<h2>Release Readiness Deltas</h2>"
+            '<p class="muted">No release readiness comparison deltas were found.</p>'
+            "</section>"
+        )
+    rows = []
+    for item in leaderboard[:10]:
+        if not isinstance(item, dict):
+            continue
+        report_link = ""
+        report_path = item.get("report_path")
+        if report_path and Path(str(report_path)).exists():
+            report_link = f'<a href="{_e(_href(Path(str(report_path)), base_dir))}">comparison</a>'
+        rows.append(
+            "<tr>"
+            f"<td><strong>{_e(item.get('run_name'))}</strong><br><span>{_e(item.get('compared_release'))}</span></td>"
+            f"<td>{_e(item.get('delta_status'))}<br><span>{_e(_fmt_delta(item.get('status_delta')))}</span></td>"
+            f"<td>{_e(item.get('baseline_status'))} -> {_e(item.get('compared_status'))}</td>"
+            f"<td>{_e(item.get('changed_panel_count'))}<br><span>{_e('; '.join(_as_str_list(item.get('changed_panels'))))}</span></td>"
+            f"<td>{_e(_fmt_delta(item.get('audit_score_delta')))}<br><span>missing={_e(_fmt_delta(item.get('missing_artifact_delta')))}</span></td>"
+            f"<td>{_e(item.get('explanation'))}</td>"
+            f"<td>{report_link}</td>"
+            "</tr>"
+        )
+    return (
+        '<section class="panel">'
+        "<h2>Release Readiness Deltas</h2>"
+        '<table><thead><tr><th>Run / Compared</th><th>Trend</th><th>Status</th><th>Panels</th><th>Audit / Missing</th><th>Explanation</th><th>Report</th></tr></thead><tbody>'
+        + "".join(rows)
+        + "</tbody></table>"
+        "</section>"
+    )
+
+
 def _registry_style() -> str:
     return """<style>
 :root { --ink:#111827; --muted:#4b5563; --line:#d8dee9; --page:#f7f7f2; --panel:#fff; --blue:#2563eb; --green:#047857; --amber:#b45309; }
@@ -1129,7 +1374,7 @@ def _registry_script() -> str:
   const share = document.getElementById("share-view");
   const exportCsv = document.getElementById("export-visible-csv");
   const status = document.getElementById("registry-status");
-  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "rubric", "pair", "eval"]);
+  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "rubric", "pair", "readiness", "eval"]);
   let ascending = true;
 
   const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);

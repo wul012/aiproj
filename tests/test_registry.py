@@ -21,6 +21,7 @@ def make_run(
     tags: list[str] | None = None,
     pair_reports: bool = False,
     pair_generated_delta: int = 5,
+    readiness_trend: str | None = None,
     rubric_score: float | None = 92.0,
     rubric_status: str = "pass",
 ) -> Path:
@@ -147,6 +148,63 @@ def make_run(
             encoding="utf-8",
         )
         (pair_trend_dir / "pair_batch_trend.html").write_text("<html></html>", encoding="utf-8")
+    if readiness_trend is not None:
+        readiness_dir = run_dir / "release-readiness-comparison"
+        readiness_dir.mkdir()
+        if readiness_trend == "regressed":
+            baseline_status = "ready"
+            compared_status = "blocked"
+            status_delta = -3
+            improved_count = 0
+            regressed_count = 1
+            changed_panels = ["release_gate:pass->fail"]
+        elif readiness_trend == "panel-changed":
+            baseline_status = "ready"
+            compared_status = "ready"
+            status_delta = 0
+            improved_count = 0
+            regressed_count = 0
+            changed_panels = ["request_history:warn->pass"]
+        else:
+            baseline_status = "blocked"
+            compared_status = "ready"
+            status_delta = 3
+            improved_count = 1
+            regressed_count = 0
+            changed_panels = ["release_gate:fail->pass"]
+        report = {
+            "schema_version": 1,
+            "summary": {
+                "readiness_count": 2,
+                "baseline_release": "v62",
+                "baseline_status": baseline_status,
+                "ready_count": 1 if compared_status == "ready" else 0,
+                "review_count": 0,
+                "blocked_count": 1 if compared_status == "blocked" or baseline_status == "blocked" else 0,
+                "incomplete_count": 0,
+                "improved_count": improved_count,
+                "regressed_count": regressed_count,
+                "changed_panel_delta_count": 1 if changed_panels else 0,
+            },
+            "deltas": [
+                {
+                    "baseline_release": "v62",
+                    "compared_release": "v63",
+                    "baseline_status": baseline_status,
+                    "compared_status": compared_status,
+                    "status_delta": status_delta,
+                    "delta_status": readiness_trend if readiness_trend != "stable" else "same",
+                    "audit_score_delta": 12.5 if status_delta > 0 else -12.5 if status_delta < 0 else 0,
+                    "missing_artifact_delta": -2 if status_delta > 0 else 2 if status_delta < 0 else 0,
+                    "fail_panel_delta": -1 if status_delta > 0 else 1 if status_delta < 0 else 0,
+                    "warn_panel_delta": 0,
+                    "changed_panels": changed_panels,
+                    "explanation": f"{name} release readiness {readiness_trend}",
+                }
+            ],
+        }
+        (readiness_dir / "release_readiness_comparison.json").write_text(json.dumps(report), encoding="utf-8")
+        (readiness_dir / "release_readiness_comparison.html").write_text("<html>readiness comparison</html>", encoding="utf-8")
     (run_dir / "run_manifest.json").write_text(
         json.dumps(
             {
@@ -203,6 +261,21 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("pair_batch_trend/pair_batch_trend.html", REGISTRY_ARTIFACT_PATHS)
             self.assertIn("benchmark-scorecard/benchmark_scorecard.html", REGISTRY_ARTIFACT_PATHS)
 
+    def test_summarize_registered_run_reads_release_readiness_comparison(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp), "one", 1.0, readiness_trend="improved")
+
+            run = summarize_registered_run(run_dir)
+
+            self.assertEqual(run.release_readiness_comparison_status, "improved")
+            self.assertEqual(run.release_readiness_report_count, 2)
+            self.assertEqual(run.release_readiness_baseline_status, "blocked")
+            self.assertEqual(run.release_readiness_improved_count, 1)
+            self.assertEqual(run.release_readiness_regressed_count, 0)
+            self.assertEqual(run.release_readiness_changed_panel_delta_count, 1)
+            self.assertTrue(run.release_readiness_html_exists)
+            self.assertIn("release-readiness-comparison/release_readiness_comparison.html", REGISTRY_ARTIFACT_PATHS)
+
     def test_summarize_registered_run_reads_pair_reports(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = make_run(Path(tmp), "one", 1.0, pair_reports=True)
@@ -228,8 +301,8 @@ class RegistryTests(unittest.TestCase):
     def test_build_registry_picks_best_and_counts_quality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"], pair_reports=True, rubric_score=94.0)
-            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"], rubric_score=76.0, rubric_status="warn")
+            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"], pair_reports=True, readiness_trend="improved", rubric_score=94.0)
+            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"], readiness_trend="regressed", rubric_score=76.0, rubric_status="warn")
 
             registry = build_run_registry([run_a, run_b], names=["A", "B"])
 
@@ -245,6 +318,12 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["runs"][0]["benchmark_rubric_rank"], 1)
             self.assertEqual(registry["runs"][1]["benchmark_rubric_rank"], 2)
             self.assertAlmostEqual(registry["runs"][1]["benchmark_rubric_delta_from_best"], -18.0)
+            self.assertEqual(registry["release_readiness_comparison_counts"], {"improved": 1, "regressed": 1})
+            self.assertEqual(registry["release_readiness_delta_summary"]["delta_count"], 2)
+            self.assertEqual(registry["release_readiness_delta_summary"]["regressed_count"], 1)
+            self.assertEqual(registry["release_readiness_delta_summary"]["improved_count"], 1)
+            self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["run_name"], "B")
+            self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["delta_status"], "regressed")
             self.assertEqual(registry["pair_report_counts"], {"pair_batch": 1, "pair_trend": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
             self.assertEqual(registry["pair_delta_summary"]["case_count"], 2)
@@ -279,7 +358,7 @@ class RegistryTests(unittest.TestCase):
     def test_write_registry_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_dir = make_run(root, "one", 1.0, pair_reports=True)
+            run_dir = make_run(root, "one", 1.0, pair_reports=True, readiness_trend="improved")
             (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
             registry = build_run_registry([run_dir])
 
@@ -292,6 +371,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("generation_quality_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_rubric_avg_score", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("pair_batch_cases", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT run registry", html)
@@ -306,10 +386,15 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("one-rubric-weak", html)
             self.assertIn("batch cases=2 diff=1", html)
             self.assertIn("trend reports=2 changed=1", html)
+            self.assertIn("Release Readiness", html)
+            self.assertIn("Release Readiness Deltas", html)
+            self.assertIn("readiness cmp", html)
+            self.assertIn("improved=1 regressed=0", html)
             self.assertIn("Pair Delta Leaders", html)
             self.assertIn("Abs Gen Delta", html)
             self.assertIn("one-delta", html)
             self.assertIn("<div class=\"label\">Pair deltas</div>", html)
+            self.assertIn("<div class=\"label\">Release readiness</div>", html)
             self.assertIn("../one/pair_batch/pair_generation_batch.json", html)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
@@ -334,14 +419,17 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("data-best-val", html)
             self.assertIn("data-delta", html)
             self.assertIn("data-pair", html)
+            self.assertIn("data-readiness", html)
             self.assertIn("<th>Rank</th>", html)
             self.assertIn("#1", html)
             self.assertIn("Loss Leaderboard", html)
             self.assertIn("Pair Delta Leaders", html)
+            self.assertIn("Release Readiness Deltas", html)
             self.assertIn("<div class=\"label\">Comparable</div>", html)
             self.assertIn('<option value="rank">Rank</option>', html)
             self.assertIn('<option value="delta">Loss Delta</option>', html)
             self.assertIn('<option value="pair">Pair Reports</option>', html)
+            self.assertIn('<option value="readiness">Release Readiness</option>', html)
             self.assertIn('<option value="pass">pass</option>', html)
             self.assertIn('<option value="warn">warn</option>', html)
             self.assertIn("addEventListener", html)
@@ -353,6 +441,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<th>Gen Quality</th>", html)
             self.assertIn("<th>Rubric</th>", html)
             self.assertIn("<th>Pair Reports</th>", html)
+            self.assertIn("<th>Release Readiness</th>", html)
             self.assertIn('<option value="rubric">Rubric</option>', html)
             self.assertIn('class="tag">baseline</span>', html)
             self.assertIn("stable baseline", html)
