@@ -19,6 +19,9 @@ class DashboardTests(unittest.TestCase):
             (run_dir / "checkpoint.pt").write_bytes(b"fake")
             (run_dir / "run_manifest.json").write_text(json.dumps({"git": {"short_commit": "abc1234"}}), encoding="utf-8")
             (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
+            pair_batch_dir = run_dir / "pair_batch"
+            pair_batch_dir.mkdir()
+            (pair_batch_dir / "pair_generation_batch.html").write_text("<html></html>", encoding="utf-8")
 
             artifacts = collect_artifacts(run_dir, run_dir)
 
@@ -29,6 +32,9 @@ class DashboardTests(unittest.TestCase):
             self.assertTrue(manifest.exists)
             card = next(artifact for artifact in artifacts if artifact.key == "experiment_card_html")
             self.assertTrue(card.exists)
+            pair_batch = next(artifact for artifact in artifacts if artifact.key == "pair_batch_html")
+            self.assertTrue(pair_batch.exists)
+            self.assertEqual(pair_batch.href, "pair_batch/pair_generation_batch.html")
 
     def test_build_payload_reads_summary_sources(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -39,6 +45,18 @@ class DashboardTests(unittest.TestCase):
             eval_suite_dir = run_dir / "eval_suite"
             eval_suite_dir.mkdir()
             (eval_suite_dir / "eval_suite.json").write_text(json.dumps({"case_count": 3, "results": []}), encoding="utf-8")
+            pair_batch_dir = run_dir / "pair_batch"
+            pair_batch_dir.mkdir()
+            (pair_batch_dir / "pair_generation_batch.json").write_text(
+                json.dumps({"case_count": 2, "generated_difference_count": 1, "results": []}),
+                encoding="utf-8",
+            )
+            pair_trend_dir = run_dir / "pair_batch_trend"
+            pair_trend_dir.mkdir()
+            (pair_trend_dir / "pair_batch_trend.json").write_text(
+                json.dumps({"report_count": 2, "changed_generated_equal_cases": 1, "case_trends": []}),
+                encoding="utf-8",
+            )
             (run_dir / "dataset_quality.json").write_text(
                 json.dumps({"status": "pass", "short_fingerprint": "abc123def456", "warning_count": 0, "issue_count": 0}),
                 encoding="utf-8",
@@ -67,6 +85,54 @@ class DashboardTests(unittest.TestCase):
             self.assertEqual(payload["summary"]["dataset_quality"], "pass")
             self.assertEqual(payload["summary"]["dataset_version"], "demo-zh@v1")
             self.assertEqual(payload["summary"]["eval_suite_cases"], 3)
+            self.assertEqual(payload["summary"]["pair_batch_cases"], 2)
+            self.assertEqual(payload["summary"]["pair_batch_generated_differences"], 1)
+            self.assertEqual(payload["summary"]["pair_trend_reports"], 2)
+            self.assertEqual(payload["summary"]["pair_trend_changed_cases"], 1)
+
+    def test_render_dashboard_links_pair_batch_reports(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            pair_batch_dir = run_dir / "pair_batch"
+            pair_batch_dir.mkdir()
+            (pair_batch_dir / "pair_generation_batch.json").write_text(
+                json.dumps(
+                    {
+                        "suite": {"name": "demo", "version": "1"},
+                        "left": {"checkpoint_id": "base"},
+                        "right": {"checkpoint_id": "wide"},
+                        "case_count": 2,
+                        "generated_difference_count": 1,
+                        "avg_abs_generated_char_delta": 3,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (pair_batch_dir / "pair_generation_batch.html").write_text("<html>batch</html>", encoding="utf-8")
+            pair_trend_dir = run_dir / "pair_batch_trend"
+            pair_trend_dir.mkdir()
+            (pair_trend_dir / "pair_batch_trend.json").write_text(
+                json.dumps(
+                    {
+                        "report_count": 2,
+                        "case_count": 2,
+                        "changed_generated_equal_cases": 1,
+                        "max_abs_generated_char_delta": 4,
+                        "max_abs_continuation_char_delta": 5,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (pair_trend_dir / "pair_batch_trend.html").write_text("<html>trend</html>", encoding="utf-8")
+
+            payload = build_dashboard_payload(run_dir)
+            html = render_dashboard_html(payload)
+
+            self.assertIn("Pair Batch Reports", html)
+            self.assertIn("Open pair batch HTML", html)
+            self.assertIn("pair_batch/pair_generation_batch.html", html)
+            self.assertIn("Open pair trend HTML", html)
+            self.assertIn("pair_batch_trend/pair_batch_trend.html", html)
 
     def test_render_dashboard_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

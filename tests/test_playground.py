@@ -57,6 +57,26 @@ class PlaygroundTests(unittest.TestCase):
             self.assertTrue(any(link["key"] == "eval_suite" and link["exists"] for link in payload["links"]))
             self.assertTrue(any(link["key"] == "experiment_card_html" and link["exists"] for link in payload["links"]))
 
+    def test_playground_links_pair_batch_reports(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            pair_batch_dir = run_dir / "pair_batch"
+            pair_batch_dir.mkdir()
+            (pair_batch_dir / "pair_generation_batch.html").write_text("<html></html>", encoding="utf-8")
+            pair_trend_dir = run_dir / "pair_batch_trend"
+            pair_trend_dir.mkdir()
+            (pair_trend_dir / "pair_batch_trend.html").write_text("<html></html>", encoding="utf-8")
+
+            payload = build_playground_payload(run_dir)
+            html = render_playground_html(payload)
+
+            self.assertTrue(any(link["key"] == "pair_batch_html" and link["exists"] for link in payload["links"]))
+            self.assertTrue(any(link["key"] == "pair_trend_html" and link["exists"] for link in payload["links"]))
+            self.assertIn("Pair batch HTML", html)
+            self.assertIn("pair_batch/pair_generation_batch.html", html)
+            self.assertIn("Pair trend HTML", html)
+            self.assertIn("pair_batch_trend/pair_batch_trend.html", html)
+
     def test_render_playground_escapes_text_and_has_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = Path(tmp)
@@ -93,6 +113,8 @@ class PlaygroundTests(unittest.TestCase):
         self.assertIn(f"'{run_dir / 'checkpoint.pt'}'", commands["generate"])
         self.assertIn("'hello \"ai\"'", commands["generate"])
         self.assertIn("sample_lab.py", commands["sample_lab"])
+        self.assertIn("pair_batch.py", commands["pair_batch"])
+        self.assertIn("compare_pair_batches.py", commands["pair_trend"])
         self.assertIn("build_experiment_card.py", commands["experiment_card"])
 
     def test_write_playground_creates_html(self) -> None:

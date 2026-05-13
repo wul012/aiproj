@@ -102,6 +102,14 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("eval_suite_csv", "Eval suite table", "eval_suite/eval_suite.csv", "CSV", "fixed prompt evaluation table"),
         ("eval_suite_svg", "Eval suite chart", "eval_suite/eval_suite.svg", "SVG", "fixed prompt evaluation chart"),
         ("eval_suite_html", "Eval suite report", "eval_suite/eval_suite.html", "HTML", "browser benchmark evaluation report"),
+        ("pair_batch_json", "Pair batch", "pair_batch/pair_generation_batch.json", "JSON", "fixed prompt pair-generation batch report"),
+        ("pair_batch_csv", "Pair batch table", "pair_batch/pair_generation_batch.csv", "CSV", "pair-generation batch table"),
+        ("pair_batch_md", "Pair batch markdown", "pair_batch/pair_generation_batch.md", "MD", "pair-generation batch summary"),
+        ("pair_batch_html", "Pair batch HTML", "pair_batch/pair_generation_batch.html", "HTML", "browser pair-generation batch report"),
+        ("pair_trend_json", "Pair batch trend", "pair_batch_trend/pair_batch_trend.json", "JSON", "trend comparison for saved pair batch reports"),
+        ("pair_trend_csv", "Pair batch trend table", "pair_batch_trend/pair_batch_trend.csv", "CSV", "pair batch trend table"),
+        ("pair_trend_md", "Pair batch trend markdown", "pair_batch_trend/pair_batch_trend.md", "MD", "pair batch trend summary"),
+        ("pair_trend_html", "Pair batch trend HTML", "pair_batch_trend/pair_batch_trend.html", "HTML", "browser pair batch trend report"),
         ("model_report", "Model report", "model_report/model_report.json", "JSON", "architecture and parameter report"),
         ("model_svg", "Model architecture", "model_report/model_architecture.svg", "SVG", "model structure diagram"),
         ("predictions", "Prediction report", "predictions/predictions.json", "JSON", "next-token top-k probabilities"),
@@ -134,6 +142,8 @@ def build_dashboard_payload(
     history_summary = _read_json(root / "history_summary.json", warnings)
     eval_report = _read_json(root / "eval_report.json", warnings)
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json", warnings)
+    pair_batch = _read_json(root / "pair_batch" / "pair_generation_batch.json", warnings)
+    pair_trend = _read_json(root / "pair_batch_trend" / "pair_batch_trend.json", warnings)
     run_manifest = _read_json(root / "run_manifest.json", warnings)
     dataset_report = _read_json(root / "dataset_report.json", warnings)
     dataset_quality = _read_json(root / "dataset_quality.json", warnings)
@@ -170,6 +180,10 @@ def build_dashboard_payload(
         "eval_loss": _pick(eval_report, "loss"),
         "perplexity": _pick(eval_report, "perplexity"),
         "eval_suite_cases": _pick(eval_suite, "case_count"),
+        "pair_batch_cases": _pick(pair_batch, "case_count"),
+        "pair_batch_generated_differences": _pick(pair_batch, "generated_difference_count"),
+        "pair_trend_reports": _pick(pair_trend, "report_count"),
+        "pair_trend_changed_cases": _pick(pair_trend, "changed_generated_equal_cases"),
         "dataset_sources": _pick(dataset_report, "source_count"),
         "dataset_chars": _pick(dataset_report, "char_count"),
         "dataset_quality": _pick(dataset_quality, "status"),
@@ -192,6 +206,8 @@ def build_dashboard_payload(
         "history_summary": history_summary if isinstance(history_summary, dict) else None,
         "eval_report": eval_report if isinstance(eval_report, dict) else None,
         "eval_suite": eval_suite if isinstance(eval_suite, dict) else None,
+        "pair_batch": pair_batch if isinstance(pair_batch, dict) else None,
+        "pair_trend": pair_trend if isinstance(pair_trend, dict) else None,
         "run_manifest": run_manifest if isinstance(run_manifest, dict) else None,
         "dataset_report": dataset_report if isinstance(dataset_report, dict) else None,
         "dataset_quality": dataset_quality if isinstance(dataset_quality, dict) else None,
@@ -235,6 +251,8 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         ("Eval loss", _fmt(summary.get("eval_loss"))),
         ("Perplexity", _fmt(summary.get("perplexity"))),
         ("Eval suite", summary.get("eval_suite_cases")),
+        ("Pair batch", summary.get("pair_batch_cases")),
+        ("Pair trend", summary.get("pair_trend_reports")),
         ("Data quality", summary.get("dataset_quality")),
         ("Git", summary.get("git_commit")),
         ("Parameters", _fmt_int(summary.get("total_parameters"))),
@@ -250,6 +268,7 @@ def render_dashboard_html(payload: dict[str, Any]) -> str:
         _model_section(payload),
         _training_section(payload),
         _eval_suite_section(payload),
+        _pair_batch_section(payload),
         _prediction_section(payload),
         _attention_section(payload),
         _chat_section(payload),
@@ -537,6 +556,58 @@ def _eval_suite_section(payload: dict[str, Any]) -> str:
     )
 
 
+def _pair_batch_section(payload: dict[str, Any]) -> str:
+    batch = payload.get("pair_batch")
+    trend = payload.get("pair_trend")
+    if not isinstance(batch, dict) and not isinstance(trend, dict):
+        return ""
+    batch_links = [
+        _artifact_anchor(payload, "pair_batch_html", "Open pair batch HTML"),
+        _artifact_anchor(payload, "pair_batch_json", "JSON"),
+        _artifact_anchor(payload, "pair_batch_csv", "CSV"),
+        _artifact_anchor(payload, "pair_batch_md", "Markdown"),
+    ]
+    trend_links = [
+        _artifact_anchor(payload, "pair_trend_html", "Open pair trend HTML"),
+        _artifact_anchor(payload, "pair_trend_json", "JSON"),
+        _artifact_anchor(payload, "pair_trend_csv", "CSV"),
+        _artifact_anchor(payload, "pair_trend_md", "Markdown"),
+    ]
+    batch_rows = ""
+    if isinstance(batch, dict):
+        suite = batch.get("suite") if isinstance(batch.get("suite"), dict) else {}
+        left = batch.get("left") if isinstance(batch.get("left"), dict) else {}
+        right = batch.get("right") if isinstance(batch.get("right"), dict) else {}
+        batch_rows = "".join(
+            f"<tr><th>{_e(label)}</th><td>{_e(_fmt_missing(value))}</td></tr>"
+            for label, value in [
+                ("Suite", f"{suite.get('name')} v{suite.get('version')}"),
+                ("Pair", f"{left.get('checkpoint_id')} -> {right.get('checkpoint_id')}"),
+                ("Cases", batch.get("case_count")),
+                ("Generated diff", batch.get("generated_difference_count")),
+                ("Avg gen delta", batch.get("avg_abs_generated_char_delta")),
+            ]
+        )
+    trend_rows = ""
+    if isinstance(trend, dict):
+        trend_rows = "".join(
+            f"<tr><th>{_e(label)}</th><td>{_e(_fmt_missing(value))}</td></tr>"
+            for label, value in [
+                ("Reports", trend.get("report_count")),
+                ("Cases", trend.get("case_count")),
+                ("Changed cases", trend.get("changed_generated_equal_cases")),
+                ("Max gen delta", trend.get("max_abs_generated_char_delta")),
+                ("Max cont delta", trend.get("max_abs_continuation_char_delta")),
+            ]
+        )
+    return (
+        "<h2>Pair Batch Reports</h2><section class=\"panel\"><div class=\"split\">"
+        f"<div><h3>Batch</h3><table>{batch_rows}</table><p>{' | '.join(link for link in batch_links if link)}</p></div>"
+        f"<div><h3>Trend</h3><table>{trend_rows}</table><p>{' | '.join(link for link in trend_links if link)}</p></div>"
+        "</div></section>"
+    )
+
+
 def _prediction_section(payload: dict[str, Any]) -> str:
     predictions = payload.get("predictions")
     if not isinstance(predictions, dict):
@@ -604,6 +675,13 @@ def _image(payload: dict[str, Any], key: str, alt: str) -> str:
     if artifact is None:
         return ""
     return f'<p><img class="figure" src="{_e(artifact["href"])}" alt="{_e(alt)}"></p>'
+
+
+def _artifact_anchor(payload: dict[str, Any], key: str, label: str) -> str:
+    artifact = next((item for item in payload["artifacts"] if item["key"] == key and item.get("href")), None)
+    if artifact is None:
+        return ""
+    return f'<a href="{_e(artifact["href"])}">{_e(label)}</a>'
 
 
 def _fmt(value: Any) -> Any:

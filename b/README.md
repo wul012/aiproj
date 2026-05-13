@@ -60,6 +60,9 @@ b/43/解释/说明.md
 b/44/图片
 b/44/解释/说明.md
  -> v44 pair batch trend comparison 的运行截图和解释
+b/45/图片
+b/45/解释/说明.md
+ -> v45 pair batch dashboard/playground links 的运行截图和解释
 ```
 
 写入规则：

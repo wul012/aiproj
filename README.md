@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 44 is a MiniGPT learning project with pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 45 is a MiniGPT learning project with pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -50,6 +50,7 @@ Version 44 is a MiniGPT learning project with pair batch trend comparison report
 - Persisted pair generation artifacts through `/api/generate-pair-artifact`, writing local `pair_generations/*.json` and `pair_generations/*.html` reports with replayable request/output/comparison evidence
 - Fixed prompt pair-generation batch script for running a prompt suite across two checkpoints and exporting `pair_generation_batch.json`, `pair_generation_batch.csv`, `pair_generation_batch.md`, and `pair_generation_batch.html`
 - Pair batch trend comparison script for comparing saved pair batch reports and exporting `pair_batch_trend.json`, `pair_batch_trend.csv`, `pair_batch_trend.md`, and `pair_batch_trend.html`
+- Dashboard and playground artifact links for pair batch and pair trend reports, including a dashboard Pair Batch Reports panel with batch/trend summaries and browser links
 - Run comparison script that compares multiple experiments and exports JSON/CSV/SVG/Markdown/HTML summaries
 - Baseline model comparison layer with explicit baseline selection, best-val/eval/perplexity/parameter deltas, model signatures, dataset version checks, and recommendations
 - Run registry script that discovers or accepts run directories and exports registry JSON/CSV/SVG/HTML summaries
@@ -64,8 +65,8 @@ Version 44 is a MiniGPT learning project with pair batch trend comparison report
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, benchmark eval suites, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -118,6 +119,7 @@ v41.0.0 MiniGPT v41 side-by-side checkpoint generation
 v42.0.0 MiniGPT v42 persisted pair generation artifacts
 v43.0.0 MiniGPT v43 fixed prompt pair generation batches
 v44.0.0 MiniGPT v44 pair batch trend comparison
+v45.0.0 MiniGPT v45 pair batch dashboard links
 ```
 
 ## Project structure
@@ -805,6 +807,8 @@ b/43/图片
 b/43/解释/说明.md
 b/44/图片
 b/44/解释/说明.md
+b/45/图片
+b/45/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -1159,6 +1163,14 @@ Version 44 screenshots:
 - `04-playwright-pair-trend-html.png`: generated `pair_batch_trend.html` opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v44 docs, b/44 archive, and evaluation-benchmark explanation check
 
+Version 45 screenshots:
+
+- `01-unit-tests.png`: dashboard/playground pair batch links, dashboard Pair Batch Reports panel, link discovery, command helpers, and regression tests
+- `02-dashboard-playground-smoke.png`: local run artifacts rendered through dashboard and playground builders with pair batch/trend links
+- `03-dashboard-playground-structure-check.png`: dashboard summary fields, pair batch panel links, playground Run Files links, and command helper strings verified
+- `04-playwright-dashboard-pair-links.png`: generated dashboard Pair Batch Reports panel opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v45 docs, b/45 archive, and evaluation-benchmark explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1245,6 +1257,7 @@ Evaluation-benchmark records start at v35:
 57-v42-pair-generation-artifacts.md
 58-v43-pair-batch-comparison.md
 59-v44-pair-batch-trends.md
+60-v45-pair-batch-dashboard-links.md
 ```
 
 ## Learning map
@@ -1281,6 +1294,8 @@ The persisted pair artifact layer saves side-by-side generation responses as loc
 The fixed prompt pair batch layer runs the same prompt suite across two checkpoints and writes JSON/CSV/Markdown/HTML reports with per-case equality flags and character deltas.
 
 The pair batch trend layer compares multiple saved pair batch reports, tracks equality variants and maximum deltas per case, and writes JSON/CSV/Markdown/HTML trend reports.
+
+The pair batch dashboard/playground link layer surfaces saved pair batch and trend reports in dashboard and playground artifact sections so review starts from one local HTML page.
 
 The dataset preparation layer makes the training corpus explicit, inspectable, and reusable across runs.
 
@@ -1323,5 +1338,5 @@ Next useful extensions:
 - Train on a larger Chinese corpus.
 - Add dataset cards that summarize intended use, source limits, quality status, and version history.
 - Add streaming token output for the playground server.
-- Add a pair batch dashboard panel that links batch and trend reports from the playground or registry.
+- Add registry-level links for pair batch and trend reports across many runs.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

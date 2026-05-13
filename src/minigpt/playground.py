@@ -90,6 +90,16 @@ def build_playground_commands(run_dir: str | Path, prompt: str = "人工智能")
             f"python scripts/sample_lab.py --checkpoint {_quote_arg(str(checkpoint))} "
             f"--prompt {_quote_arg(prompt)} --max-new-tokens 80"
         ),
+        "pair_batch": (
+            f"python scripts/pair_batch.py --left-checkpoint {_quote_arg(str(checkpoint))} "
+            f"--right-checkpoint {_quote_arg(str(root / 'wide' / 'checkpoint.pt'))} --left-id base --right-id wide "
+            f"--suite {_quote_arg('data/eval_prompts.json')} --out-dir {_quote_arg(str(root / 'pair_batch'))}"
+        ),
+        "pair_trend": (
+            f"python scripts/compare_pair_batches.py {_quote_arg(str(root / 'pair_batch' / 'pair_generation_batch.json'))} "
+            f"{_quote_arg(str(root / 'pair_batch_candidate' / 'pair_generation_batch.json'))} --name current --name candidate "
+            f"--out-dir {_quote_arg(str(root / 'pair_batch_trend'))}"
+        ),
         "inspect_model": f"python scripts/inspect_model.py --checkpoint {_quote_arg(str(checkpoint))}",
         "dashboard": f"python scripts/build_dashboard.py --run-dir {_quote_arg(str(root))}",
         "playground": f"python scripts/build_playground.py --run-dir {_quote_arg(str(root))}",
@@ -183,6 +193,14 @@ def _collect_links(root: Path, out_path: Path, base_dir: Path) -> list[Playgroun
         ("eval_suite_csv", "Eval suite CSV", root / "eval_suite" / "eval_suite.csv", "CSV"),
         ("eval_suite_svg", "Eval suite chart", root / "eval_suite" / "eval_suite.svg", "SVG"),
         ("eval_suite_html", "Eval suite report", root / "eval_suite" / "eval_suite.html", "HTML"),
+        ("pair_batch_json", "Pair batch JSON", root / "pair_batch" / "pair_generation_batch.json", "JSON"),
+        ("pair_batch_csv", "Pair batch CSV", root / "pair_batch" / "pair_generation_batch.csv", "CSV"),
+        ("pair_batch_md", "Pair batch Markdown", root / "pair_batch" / "pair_generation_batch.md", "MD"),
+        ("pair_batch_html", "Pair batch HTML", root / "pair_batch" / "pair_generation_batch.html", "HTML"),
+        ("pair_trend_json", "Pair trend JSON", root / "pair_batch_trend" / "pair_batch_trend.json", "JSON"),
+        ("pair_trend_csv", "Pair trend CSV", root / "pair_batch_trend" / "pair_batch_trend.csv", "CSV"),
+        ("pair_trend_md", "Pair trend Markdown", root / "pair_batch_trend" / "pair_batch_trend.md", "MD"),
+        ("pair_trend_html", "Pair trend HTML", root / "pair_batch_trend" / "pair_batch_trend.html", "HTML"),
         ("sample_lab_json", "Sampling JSON", root / "sample_lab" / "sample_lab.json", "JSON"),
         ("sample_lab_csv", "Sampling CSV", root / "sample_lab" / "sample_lab.csv", "CSV"),
         ("sample_lab_svg", "Sampling SVG", root / "sample_lab" / "sample_lab.svg", "SVG"),
