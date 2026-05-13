@@ -54,6 +54,9 @@ b/41/解释/说明.md
 b/42/图片
 b/42/解释/说明.md
  -> v42 persisted pair generation artifacts 的运行截图和解释
+b/43/图片
+b/43/解释/说明.md
+ -> v43 fixed prompt pair generation batches 的运行截图和解释
 ```
 
 写入规则：

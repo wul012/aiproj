@@ -60,6 +60,9 @@ __all__ = [
     "discover_checkpoint_options",
     "parse_generation_request",
     "parse_generation_pair_request",
+    "build_pair_batch_case_result",
+    "build_pair_batch_report",
+    "write_pair_batch_outputs",
     "render_pair_generation_html",
     "write_pair_generation_artifacts",
 ]
@@ -119,6 +122,9 @@ _EXPORTS = {
     "discover_checkpoint_options": ("server", "discover_checkpoint_options"),
     "parse_generation_request": ("server", "parse_generation_request"),
     "parse_generation_pair_request": ("server", "parse_generation_pair_request"),
+    "build_pair_batch_case_result": ("pair_batch", "build_pair_batch_case_result"),
+    "build_pair_batch_report": ("pair_batch", "build_pair_batch_report"),
+    "write_pair_batch_outputs": ("pair_batch", "write_pair_batch_outputs"),
     "render_pair_generation_html": ("server", "render_pair_generation_html"),
     "write_pair_generation_artifacts": ("server", "write_pair_generation_artifacts"),
 }
