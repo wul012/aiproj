@@ -9,6 +9,7 @@
 哪些能力已经有证据链？
 哪些能力只是教学展示，还不是生产能力？
 下一步应该补 benchmark scoring、数据规模，还是服务化硬化？
+已有 benchmark、generation quality、pair batch 和 registry 证据，能否合成一个 run 级评分入口？
 ```
 
 ## 写入规则
@@ -17,6 +18,7 @@
 
 ```text
 63-v48-maturity-summary.md
+64-v49-benchmark-scorecard.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -36,19 +38,23 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v48，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理到项目成熟度总结的完整学习型 AI 工程链路。
+截至 v49，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结到 benchmark scorecard 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
+
+v49 的关键变化是：把 eval suite、generation quality、pair consistency、pair delta stability、evidence completeness 和 registry context 汇总为一个可评分、可导出、可截图的 benchmark scorecard。
 
 ## 后续讲解索引
 
 ```text
 63-v48-maturity-summary.md
  -> 第四十八版代码讲解：生成项目成熟度总览，把 v1-v48 汇总为能力矩阵、阶段时间线、registry 上下文和下一步建议
+64-v49-benchmark-scorecard.md
+ -> 第四十九版代码讲解：生成统一 benchmark scorecard，把 run 级评估覆盖、生成质量、pair 稳定性和 registry 上下文合成一个评分报告
 ```
 
-后续推进 v49 时，在这里继续追加 `64-v49-主题.md`，或者在新的能力线目录继续拆分。
+后续推进 v50 时，在这里继续追加 `65-v50-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数和下一阶段路线”的过程。

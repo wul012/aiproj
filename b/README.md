@@ -72,6 +72,9 @@ b/47/解释/说明.md
 b/48/图片
 b/48/解释/说明.md
  -> v48 project maturity summary 的运行截图和解释
+b/49/图片
+b/49/解释/说明.md
+ -> v49 benchmark scorecard 的运行截图和解释
 ```
 
 写入规则：
