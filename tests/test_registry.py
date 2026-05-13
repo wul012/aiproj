@@ -21,6 +21,8 @@ def make_run(
     tags: list[str] | None = None,
     pair_reports: bool = False,
     pair_generated_delta: int = 5,
+    rubric_score: float | None = 92.0,
+    rubric_status: str = "pass",
 ) -> Path:
     run_dir = root / name
     run_dir.mkdir(parents=True)
@@ -64,6 +66,40 @@ def make_run(
         encoding="utf-8",
     )
     (quality_dir / "generation_quality.html").write_text("<html></html>", encoding="utf-8")
+    if rubric_score is not None:
+        scorecard_dir = run_dir / "benchmark-scorecard"
+        scorecard_dir.mkdir()
+        (scorecard_dir / "benchmark_scorecard.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": 3,
+                    "summary": {
+                        "overall_status": "pass" if rubric_score >= 80 else "warn" if rubric_score >= 60 else "fail",
+                        "overall_score": rubric_score,
+                        "rubric_status": rubric_status,
+                        "rubric_avg_score": rubric_score,
+                        "rubric_pass_count": 2 if rubric_status == "pass" else 1,
+                        "rubric_warn_count": 0 if rubric_status == "pass" else 1,
+                        "rubric_fail_count": 0,
+                        "weakest_rubric_case": f"{name}-rubric-weak",
+                        "weakest_rubric_score": max(0.0, rubric_score - 18),
+                    },
+                    "rubric_scores": {
+                        "summary": {
+                            "case_count": 2,
+                            "avg_score": rubric_score,
+                            "overall_status": rubric_status,
+                            "weakest_case": f"{name}-rubric-weak",
+                            "weakest_score": max(0.0, rubric_score - 18),
+                        },
+                        "cases": [],
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        (scorecard_dir / "benchmark_scorecard.html").write_text("<html></html>", encoding="utf-8")
+        (scorecard_dir / "benchmark_scorecard_rubric.csv").write_text("name,score\n", encoding="utf-8")
     if pair_reports:
         pair_batch_dir = run_dir / "pair_batch"
         pair_batch_dir.mkdir()
@@ -155,10 +191,17 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.eval_suite_cases, 3)
             self.assertEqual(run.generation_quality_status, "pass")
             self.assertEqual(run.generation_quality_cases, 3)
+            self.assertEqual(run.benchmark_scorecard_status, "pass")
+            self.assertEqual(run.benchmark_scorecard_score, 92.0)
+            self.assertEqual(run.benchmark_rubric_status, "pass")
+            self.assertEqual(run.benchmark_rubric_avg_score, 92.0)
+            self.assertEqual(run.benchmark_weakest_rubric_case, "one-rubric-weak")
+            self.assertTrue(run.benchmark_scorecard_html_exists)
             self.assertGreaterEqual(run.artifact_count, 6)
             self.assertIn("dataset_version.json", REGISTRY_ARTIFACT_PATHS)
             self.assertIn("pair_batch/pair_generation_batch.html", REGISTRY_ARTIFACT_PATHS)
             self.assertIn("pair_batch_trend/pair_batch_trend.html", REGISTRY_ARTIFACT_PATHS)
+            self.assertIn("benchmark-scorecard/benchmark_scorecard.html", REGISTRY_ARTIFACT_PATHS)
 
     def test_summarize_registered_run_reads_pair_reports(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -185,8 +228,8 @@ class RegistryTests(unittest.TestCase):
     def test_build_registry_picks_best_and_counts_quality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"], pair_reports=True)
-            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"])
+            run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"], pair_reports=True, rubric_score=94.0)
+            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"], rubric_score=76.0, rubric_status="warn")
 
             registry = build_run_registry([run_a, run_b], names=["A", "B"])
 
@@ -194,6 +237,14 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["best_by_best_val_loss"]["name"], "B")
             self.assertEqual(registry["quality_counts"], {"pass": 1, "warn": 1})
             self.assertEqual(registry["generation_quality_counts"], {"pass": 2})
+            self.assertEqual(registry["benchmark_rubric_counts"], {"pass": 1, "warn": 1})
+            self.assertEqual(registry["benchmark_rubric_summary"]["best_run"], "A")
+            self.assertEqual(registry["benchmark_rubric_summary"]["weakest_run"], "B")
+            self.assertEqual(registry["benchmark_rubric_summary"]["regression_count"], 1)
+            self.assertEqual(registry["benchmark_rubric_leaderboard"][0]["name"], "A")
+            self.assertEqual(registry["runs"][0]["benchmark_rubric_rank"], 1)
+            self.assertEqual(registry["runs"][1]["benchmark_rubric_rank"], 2)
+            self.assertAlmostEqual(registry["runs"][1]["benchmark_rubric_delta_from_best"], -18.0)
             self.assertEqual(registry["pair_report_counts"], {"pair_batch": 1, "pair_trend": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
             self.assertEqual(registry["pair_delta_summary"]["case_count"], 2)
@@ -239,15 +290,20 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("best_val_loss_rank", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("generation_quality_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("benchmark_rubric_avg_score", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("pair_batch_cases", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT run registry", html)
             self.assertIn(">card</a>", html)
             self.assertIn(">gen quality</a>", html)
+            self.assertIn(">scorecard</a>", html)
             self.assertIn(">pair batch</a>", html)
             self.assertIn(">pair trend</a>", html)
             self.assertIn("Pair Reports", html)
+            self.assertIn("Rubric Leaderboard", html)
+            self.assertIn("score=92", html)
+            self.assertIn("one-rubric-weak", html)
             self.assertIn("batch cases=2 diff=1", html)
             self.assertIn("trend reports=2 changed=1", html)
             self.assertIn("Pair Delta Leaders", html)
@@ -295,7 +351,9 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("new Blob", html)
             self.assertIn("<th>Notes</th>", html)
             self.assertIn("<th>Gen Quality</th>", html)
+            self.assertIn("<th>Rubric</th>", html)
             self.assertIn("<th>Pair Reports</th>", html)
+            self.assertIn('<option value="rubric">Rubric</option>', html)
             self.assertIn('class="tag">baseline</span>', html)
             self.assertIn("stable baseline", html)
             self.assertIn("<div class=\"label\">Tags</div>", html)

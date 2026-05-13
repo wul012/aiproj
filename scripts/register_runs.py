@@ -39,6 +39,8 @@ def main() -> None:
     print("loss_leaderboard=" + json.dumps(registry.get("loss_leaderboard", []), ensure_ascii=False))
     print("quality_counts=" + json.dumps(registry["quality_counts"], ensure_ascii=False))
     print("generation_quality_counts=" + json.dumps(registry.get("generation_quality_counts", {}), ensure_ascii=False))
+    print("benchmark_rubric_counts=" + json.dumps(registry.get("benchmark_rubric_counts", {}), ensure_ascii=False))
+    print("benchmark_rubric_summary=" + json.dumps(registry.get("benchmark_rubric_summary", {}), ensure_ascii=False))
     print("tag_counts=" + json.dumps(registry.get("tag_counts", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

@@ -37,6 +37,12 @@ REGISTRY_ARTIFACT_PATHS = [
     "pair_batch_trend/pair_batch_trend.csv",
     "pair_batch_trend/pair_batch_trend.md",
     "pair_batch_trend/pair_batch_trend.html",
+    "benchmark-scorecard/benchmark_scorecard.json",
+    "benchmark-scorecard/benchmark_scorecard.csv",
+    "benchmark-scorecard/benchmark_scorecard_drilldowns.csv",
+    "benchmark-scorecard/benchmark_scorecard_rubric.csv",
+    "benchmark-scorecard/benchmark_scorecard.md",
+    "benchmark-scorecard/benchmark_scorecard.html",
     "generation-quality/generation_quality.json",
     "generation-quality/generation_quality.csv",
     "generation-quality/generation_quality.md",
@@ -80,6 +86,16 @@ class RegisteredRun:
     generation_quality_warn_count: int | None
     generation_quality_fail_count: int | None
     generation_quality_avg_unique_ratio: float | None
+    benchmark_scorecard_status: str | None
+    benchmark_scorecard_score: float | None
+    benchmark_rubric_status: str | None
+    benchmark_rubric_avg_score: float | None
+    benchmark_rubric_pass_count: int | None
+    benchmark_rubric_warn_count: int | None
+    benchmark_rubric_fail_count: int | None
+    benchmark_weakest_rubric_case: str | None
+    benchmark_weakest_rubric_score: float | None
+    benchmark_scorecard_html_exists: bool
     pair_batch_cases: int | None
     pair_batch_generated_differences: int | None
     pair_batch_html_exists: bool
@@ -115,6 +131,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     dataset_quality = _read_json(root / "dataset_quality.json")
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json")
     generation_quality = _read_generation_quality(root)
+    benchmark_scorecard = _read_benchmark_scorecard(root)
     pair_batch = _read_json(root / "pair_batch" / "pair_generation_batch.json")
     pair_trend = _read_json(root / "pair_batch_trend" / "pair_batch_trend.json")
     run_notes = _read_run_notes(root)
@@ -126,6 +143,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     manifest_quality = _pick_dict(data, "dataset_quality")
     source = _pick_dict(data, "source")
     generation_summary = _pick_dict(generation_quality, "summary")
+    benchmark_summary = _pick_dict(benchmark_scorecard, "summary")
     artifacts = manifest.get("artifacts", []) if isinstance(manifest, dict) else []
     manifest_artifact_count = sum(1 for item in artifacts if isinstance(item, dict) and item.get("exists"))
     artifact_count = max(manifest_artifact_count, _actual_artifact_count(root))
@@ -151,6 +169,16 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         generation_quality_warn_count=_as_int(_pick(generation_summary, "warn_count")),
         generation_quality_fail_count=_as_int(_pick(generation_summary, "fail_count")),
         generation_quality_avg_unique_ratio=_as_float(_pick(generation_summary, "avg_unique_ratio")),
+        benchmark_scorecard_status=_as_str(_pick(benchmark_summary, "overall_status")),
+        benchmark_scorecard_score=_as_float(_pick(benchmark_summary, "overall_score")),
+        benchmark_rubric_status=_as_str(_pick(benchmark_summary, "rubric_status")),
+        benchmark_rubric_avg_score=_as_float(_pick(benchmark_summary, "rubric_avg_score")),
+        benchmark_rubric_pass_count=_as_int(_pick(benchmark_summary, "rubric_pass_count")),
+        benchmark_rubric_warn_count=_as_int(_pick(benchmark_summary, "rubric_warn_count")),
+        benchmark_rubric_fail_count=_as_int(_pick(benchmark_summary, "rubric_fail_count")),
+        benchmark_weakest_rubric_case=_as_str(_pick(benchmark_summary, "weakest_rubric_case")),
+        benchmark_weakest_rubric_score=_as_float(_pick(benchmark_summary, "weakest_rubric_score")),
+        benchmark_scorecard_html_exists=(root / "benchmark-scorecard" / "benchmark_scorecard.html").exists(),
         pair_batch_cases=_as_int(_pick(pair_batch, "case_count")),
         pair_batch_generated_differences=_as_int(_pick(pair_batch, "generated_difference_count")),
         pair_batch_html_exists=(root / "pair_batch" / "pair_generation_batch.html").exists(),
@@ -176,6 +204,7 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
     ]
     run_rows = [run.to_dict() for run in runs]
     loss_leaderboard = _annotate_loss_leaderboard(run_rows)
+    rubric_leaderboard = _annotate_rubric_leaderboard(run_rows)
     pair_delta_rows = _collect_pair_delta_rows(run_dirs, names)
     pair_delta_leaderboard = _pair_delta_leaderboard(pair_delta_rows)
     return {
@@ -184,11 +213,14 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         "runs": run_rows,
         "best_by_best_val_loss": _best_by(runs, "best_val_loss"),
         "loss_leaderboard": loss_leaderboard,
+        "benchmark_rubric_leaderboard": rubric_leaderboard,
+        "benchmark_rubric_summary": _benchmark_rubric_summary(rubric_leaderboard),
         "pair_delta_summary": _pair_delta_summary(pair_delta_rows),
         "pair_delta_leaderboard": pair_delta_leaderboard,
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
         "quality_counts": _counts(run.dataset_quality or "missing" for run in runs),
         "generation_quality_counts": _counts(run.generation_quality_status or "missing" for run in runs),
+        "benchmark_rubric_counts": _counts(run.benchmark_rubric_status or "missing" for run in runs),
         "pair_report_counts": {
             "pair_batch": sum(1 for run in run_rows if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists")),
             "pair_trend": sum(1 for run in run_rows if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists")),
@@ -230,6 +262,19 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "generation_quality_warn_count",
         "generation_quality_fail_count",
         "generation_quality_avg_unique_ratio",
+        "benchmark_scorecard_status",
+        "benchmark_scorecard_score",
+        "benchmark_rubric_rank",
+        "benchmark_rubric_delta_from_best",
+        "is_best_benchmark_rubric",
+        "benchmark_rubric_status",
+        "benchmark_rubric_avg_score",
+        "benchmark_rubric_pass_count",
+        "benchmark_rubric_warn_count",
+        "benchmark_rubric_fail_count",
+        "benchmark_weakest_rubric_case",
+        "benchmark_weakest_rubric_score",
+        "benchmark_scorecard_html_exists",
         "pair_batch_cases",
         "pair_batch_generated_differences",
         "pair_batch_html_exists",
@@ -307,6 +352,8 @@ def render_registry_html(
     quality_counts = registry.get("quality_counts", {})
     tag_counts = registry.get("tag_counts", {})
     generation_quality_counts = registry.get("generation_quality_counts", {})
+    benchmark_rubric_counts = registry.get("benchmark_rubric_counts", {})
+    benchmark_rubric_summary = registry.get("benchmark_rubric_summary", {})
     pair_report_counts = registry.get("pair_report_counts", {})
     pair_delta_summary = registry.get("pair_delta_summary", {})
     loss_leaderboard = registry.get("loss_leaderboard", [])
@@ -318,6 +365,7 @@ def render_registry_html(
         ("Fingerprints", len(registry.get("dataset_fingerprints", []))),
         ("Quality", ", ".join(f"{key}:{value}" for key, value in quality_counts.items()) if isinstance(quality_counts, dict) else None),
         ("Gen quality", ", ".join(f"{key}:{value}" for key, value in generation_quality_counts.items()) if isinstance(generation_quality_counts, dict) else None),
+        ("Rubric", _benchmark_rubric_summary_label(benchmark_rubric_summary, benchmark_rubric_counts)),
         ("Pair reports", _pair_report_count_label(pair_report_counts)),
         ("Pair deltas", _pair_delta_summary_label(pair_delta_summary)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
@@ -343,6 +391,7 @@ def render_registry_html(
             f' data-delta="{_e(_sort_number(run.get("best_val_loss_delta")))}"'
             f' data-params="{_e(_sort_number(run.get("total_parameters")))}"'
             f' data-artifacts="{_e(_sort_number(run.get("artifact_count")))}"'
+            f' data-rubric="{_e(_sort_number(run.get("benchmark_rubric_avg_score")))}"'
             f' data-pair="{_e(_sort_number(_pair_report_score(run)))}"'
             f' data-eval="{_e(_sort_number(run.get("eval_suite_cases")))}">'
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('path'))}</span></td>"
@@ -354,6 +403,7 @@ def render_registry_html(
             f'<td><span class="pill {quality_class}">{_e(quality)}</span></td>'
             f"<td>{_e(run.get('eval_suite_cases'))}<br><span>avg unique={_e(run.get('eval_suite_avg_unique'))}</span></td>"
             f'<td><span class="pill {generation_quality_class}">{_e(generation_quality)}</span><br><span>cases={_e(run.get("generation_quality_cases"))}</span></td>'
+            f"<td>{_benchmark_rubric_cell(run)}</td>"
             f"<td>{_pair_report_cell(run)}</td>"
             f"<td>{_e(run.get('artifact_count'))}</td>"
             f"<td>{_tag_chips(run.get('tags'))}<br><span>{_e(run.get('note'))}</span></td>"
@@ -378,13 +428,14 @@ def render_registry_html(
             '<section class="panel">',
             "<h2>Runs</h2>",
             '<table id="registry-table">',
-            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Pair Reports</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
+            "<thead><tr><th>Run</th><th>Rank</th><th>Best Val</th><th>Params</th><th>Git</th><th>Data</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Rubric</th><th>Pair Reports</th><th>Artifacts</th><th>Notes</th><th>Links</th></tr></thead>",
             '<tbody id="registry-rows">',
             "".join(rows),
             "</tbody>",
             "</table>",
             "</section>",
             _loss_leaderboard_html(loss_leaderboard),
+            _benchmark_rubric_leaderboard_html(registry.get("benchmark_rubric_leaderboard", [])),
             _pair_delta_leaderboard_html(registry.get("pair_delta_leaderboard", []), base_dir),
             '<section class="panel">',
             "<h2>Dataset Fingerprints</h2>",
@@ -463,11 +514,81 @@ def _annotate_loss_leaderboard(runs: list[dict[str, Any]]) -> list[dict[str, Any
                 "dataset_quality": run.get("dataset_quality"),
                 "eval_suite_cases": run.get("eval_suite_cases"),
                 "generation_quality_status": run.get("generation_quality_status"),
+                "benchmark_rubric_avg_score": run.get("benchmark_rubric_avg_score"),
+                "benchmark_rubric_status": run.get("benchmark_rubric_status"),
                 "tags": list(run.get("tags") or []),
                 "note": run.get("note"),
             }
         )
     return leaderboard
+
+
+def _annotate_rubric_leaderboard(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    for run in runs:
+        run["benchmark_rubric_rank"] = None
+        run["benchmark_rubric_delta_from_best"] = None
+        run["is_best_benchmark_rubric"] = False
+    candidates = [
+        run
+        for run in runs
+        if _as_optional_float(run.get("benchmark_rubric_avg_score")) is not None
+    ]
+    candidates.sort(key=lambda run: (-(_as_optional_float(run.get("benchmark_rubric_avg_score")) or 0.0), str(run.get("name") or "")))
+    if not candidates:
+        return []
+    best_score = _as_optional_float(candidates[0].get("benchmark_rubric_avg_score")) or 0.0
+    leaderboard = []
+    for rank, run in enumerate(candidates, start=1):
+        score = _as_optional_float(run.get("benchmark_rubric_avg_score")) or 0.0
+        delta = score - best_score
+        run["benchmark_rubric_rank"] = rank
+        run["benchmark_rubric_delta_from_best"] = delta
+        run["is_best_benchmark_rubric"] = rank == 1
+        leaderboard.append(
+            {
+                "rank": rank,
+                "name": run.get("name"),
+                "path": run.get("path"),
+                "benchmark_rubric_avg_score": score,
+                "benchmark_rubric_delta_from_best": delta,
+                "benchmark_rubric_status": run.get("benchmark_rubric_status"),
+                "benchmark_weakest_rubric_case": run.get("benchmark_weakest_rubric_case"),
+                "benchmark_weakest_rubric_score": run.get("benchmark_weakest_rubric_score"),
+                "best_val_loss": run.get("best_val_loss"),
+                "generation_quality_status": run.get("generation_quality_status"),
+                "tags": list(run.get("tags") or []),
+                "note": run.get("note"),
+            }
+        )
+    return leaderboard
+
+
+def _benchmark_rubric_summary(leaderboard: list[dict[str, Any]]) -> dict[str, Any]:
+    if not leaderboard:
+        return {
+            "available": False,
+            "run_count": 0,
+            "regression_count": 0,
+        }
+    regressions = [item for item in leaderboard if (_as_optional_float(item.get("benchmark_rubric_delta_from_best")) or 0.0) < 0]
+    weakest = leaderboard[-1]
+    largest_regression = min(
+        regressions,
+        key=lambda item: _as_optional_float(item.get("benchmark_rubric_delta_from_best")) or 0.0,
+        default=None,
+    )
+    best = leaderboard[0]
+    return {
+        "available": True,
+        "run_count": len(leaderboard),
+        "best_run": best.get("name"),
+        "best_score": best.get("benchmark_rubric_avg_score"),
+        "weakest_run": weakest.get("name"),
+        "weakest_score": weakest.get("benchmark_rubric_avg_score"),
+        "regression_count": len(regressions),
+        "largest_regression_run": _pick(largest_regression, "name"),
+        "largest_regression_delta": _pick(largest_regression, "benchmark_rubric_delta_from_best"),
+    }
 
 
 def _counts(values: Any) -> dict[str, int]:
@@ -569,6 +690,19 @@ def _read_generation_quality(root: Path) -> dict[str, Any]:
         payload = _read_json(path)
         if isinstance(payload, dict):
             payload["generation_quality_path"] = str(path)
+            return payload
+    return {}
+
+
+def _read_benchmark_scorecard(root: Path) -> dict[str, Any]:
+    candidates = [
+        root / "benchmark-scorecard" / "benchmark_scorecard.json",
+        root / "benchmark_scorecard.json",
+    ]
+    for path in candidates:
+        payload = _read_json(path)
+        if isinstance(payload, dict):
+            payload["benchmark_scorecard_path"] = str(path)
             return payload
     return {}
 
@@ -693,6 +827,9 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "dataset_fingerprint",
         "dataset_quality",
         "generation_quality_status",
+        "benchmark_scorecard_status",
+        "benchmark_rubric_status",
+        "benchmark_weakest_rubric_case",
         "pair_batch_cases",
         "pair_trend_reports",
         "note",
@@ -718,6 +855,7 @@ def _registry_controls(runs: list[Any]) -> str:
         '<option value="delta">Loss Delta</option>'
         '<option value="name">Name</option>'
         '<option value="artifacts">Artifacts</option>'
+        '<option value="rubric">Rubric</option>'
         '<option value="pair">Pair Reports</option>'
         '<option value="eval">Eval Cases</option>'
         '<option value="params">Params</option>'
@@ -738,6 +876,7 @@ def _registry_links(run: dict[str, Any], base_dir: str | Path | None) -> str:
         ("card", root / "experiment_card.html"),
         ("manifest", root / "run_manifest.json"),
         ("eval", root / "eval_suite" / "eval_suite.json"),
+        ("scorecard", root / "benchmark-scorecard" / "benchmark_scorecard.html"),
         ("pair batch", root / "pair_batch" / "pair_generation_batch.html"),
         ("pair trend", root / "pair_batch_trend" / "pair_batch_trend.html"),
         ("gen quality", root / "generation-quality" / "generation_quality.html"),
@@ -776,6 +915,18 @@ def _pair_delta_summary_label(value: Any) -> str:
     )
 
 
+def _benchmark_rubric_summary_label(summary: Any, counts: Any) -> str:
+    if isinstance(summary, dict) and summary.get("available"):
+        return (
+            f"best:{_fmt(summary.get('best_score'))}, "
+            f"weakest:{_fmt(summary.get('weakest_score'))}, "
+            f"regressions:{summary.get('regression_count')}"
+        )
+    if isinstance(counts, dict) and counts:
+        return ", ".join(f"{key}:{value}" for key, value in counts.items())
+    return "missing"
+
+
 def _pair_report_score(run: dict[str, Any]) -> int:
     score = 0
     if run.get("pair_batch_cases") is not None or run.get("pair_batch_html_exists"):
@@ -783,6 +934,19 @@ def _pair_report_score(run: dict[str, Any]) -> int:
     if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists"):
         score += int(run.get("pair_trend_reports") or 1)
     return score
+
+
+def _benchmark_rubric_cell(run: dict[str, Any]) -> str:
+    status = str(run.get("benchmark_rubric_status") or "missing")
+    status_class = "pass" if status == "pass" else "warn" if status == "warn" else "fail" if status == "fail" else "missing"
+    if run.get("benchmark_rubric_avg_score") is None and status == "missing":
+        return '<span class="muted">missing</span>'
+    return (
+        f'<span class="pill {status_class}">{_e(status)}</span>'
+        f"<br><span>score={_e(_fmt(run.get('benchmark_rubric_avg_score')))} rank={_e(_rank_label(run.get('benchmark_rubric_rank')))}</span>"
+        f"<br><span>delta={_e(_fmt_delta(run.get('benchmark_rubric_delta_from_best')))}</span>"
+        f"<br><span>weak={_e(run.get('benchmark_weakest_rubric_case'))}:{_e(_fmt(run.get('benchmark_weakest_rubric_score')))}</span>"
+    )
 
 
 def _pair_report_cell(run: dict[str, Any]) -> str:
@@ -837,6 +1001,35 @@ def _loss_leaderboard_html(leaderboard: Any) -> str:
     return (
         '<section class="panel">'
         "<h2>Loss Leaderboard</h2>"
+        '<ol class="leaderboard">'
+        + "".join(items)
+        + "</ol>"
+        "</section>"
+    )
+
+
+def _benchmark_rubric_leaderboard_html(leaderboard: Any) -> str:
+    if not isinstance(leaderboard, list) or not leaderboard:
+        return (
+            '<section class="panel">'
+            "<h2>Rubric Leaderboard</h2>"
+            '<p class="muted">No benchmark rubric scores were found.</p>'
+            "</section>"
+        )
+    items = []
+    for item in leaderboard[:8]:
+        if not isinstance(item, dict):
+            continue
+        items.append(
+            "<li>"
+            f"<strong>{_e(_rank_label(item.get('rank')))} {_e(item.get('name'))}</strong>"
+            f"<span>score={_e(_fmt(item.get('benchmark_rubric_avg_score')))} / {_e(_fmt_delta(item.get('benchmark_rubric_delta_from_best')))}"
+            f" / status={_e(item.get('benchmark_rubric_status'))} / weak={_e(item.get('benchmark_weakest_rubric_case'))}:{_e(_fmt(item.get('benchmark_weakest_rubric_score')))}</span>"
+            "</li>"
+        )
+    return (
+        '<section class="panel">'
+        "<h2>Rubric Leaderboard</h2>"
         '<ol class="leaderboard">'
         + "".join(items)
         + "</ol>"
@@ -936,7 +1129,7 @@ def _registry_script() -> str:
   const share = document.getElementById("share-view");
   const exportCsv = document.getElementById("export-visible-csv");
   const status = document.getElementById("registry-status");
-  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "pair", "eval"]);
+  const numericKeys = new Set(["rank", "bestVal", "delta", "params", "artifacts", "rubric", "pair", "eval"]);
   let ascending = true;
 
   const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);
