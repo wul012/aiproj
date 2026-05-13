@@ -16,6 +16,10 @@ from urllib.parse import parse_qs, unquote, urlparse
 from .playground import write_playground
 
 
+REQUEST_HISTORY_DEFAULT_LIMIT = 20
+REQUEST_HISTORY_MAX_LIMIT = 200
+
+
 @dataclass(frozen=True)
 class InferenceSafetyProfile:
     max_prompt_chars: int = 2000
@@ -287,6 +291,7 @@ def build_health_payload(
         "generate_pair_artifact_endpoint": "/api/generate-pair-artifact",
         "checkpoints_endpoint": "/api/checkpoints",
         "checkpoint_compare_endpoint": "/api/checkpoint-compare",
+        "request_history_endpoint": "/api/request-history",
         "checkpoint_count": len(checkpoints),
         "default_checkpoint_id": checkpoints[0].id if checkpoints else None,
         "safety": safety.to_dict(),
@@ -464,6 +469,43 @@ def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
+def build_request_history_payload(
+    request_log_path: str | Path,
+    limit: int = REQUEST_HISTORY_DEFAULT_LIMIT,
+) -> dict[str, Any]:
+    history_limit = _request_history_limit(limit)
+    log_path = Path(request_log_path)
+    records, invalid_count = _read_inference_log_records(log_path)
+    selected = records[-history_limit:][::-1]
+    requests = [_request_history_record(record) for record in selected]
+    status_counts = _count_values(requests, "status")
+    endpoint_counts = _count_values(requests, "endpoint")
+    return {
+        "status": "ok",
+        "request_log": str(log_path),
+        "request_log_exists": log_path.exists(),
+        "limit": history_limit,
+        "newest_first": True,
+        "total_log_records": len(records),
+        "invalid_record_count": invalid_count,
+        "record_count": len(requests),
+        "summary": {
+            "total_log_records": len(records),
+            "returned_records": len(requests),
+            "invalid_record_count": invalid_count,
+            "latest_timestamp": requests[0].get("timestamp") if requests else None,
+            "ok_count": status_counts.get("ok", 0),
+            "timeout_count": status_counts.get("timeout", 0),
+            "cancelled_count": status_counts.get("cancelled", 0),
+            "error_count": status_counts.get("error", 0),
+            "bad_request_count": status_counts.get("bad_request", 0),
+            "returned_status_counts": status_counts,
+            "returned_endpoint_counts": endpoint_counts,
+        },
+        "requests": requests,
+    }
+
+
 def sse_message(event: str, data: dict[str, Any]) -> bytes:
     return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n".encode("utf-8")
 
@@ -637,6 +679,14 @@ def create_handler(
                 return
             if parsed.path == "/api/checkpoint-compare":
                 self._send_json(build_checkpoint_compare_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
+                return
+            if parsed.path == "/api/request-history":
+                try:
+                    history_limit = _request_history_limit_from_query(parsed.query)
+                except ValueError as exc:
+                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                self._send_json(build_request_history_payload(request_log, limit=history_limit))
                 return
             if parsed.path == "/api/model-info":
                 selector = _query_value(parsed.query, "checkpoint")
@@ -1124,6 +1174,90 @@ def _query_value(query: str, key: str) -> str | None:
     if not values:
         return None
     return values[0]
+
+
+def _request_history_limit(value: int) -> int:
+    if value < 1 or value > REQUEST_HISTORY_MAX_LIMIT:
+        raise ValueError(f"limit must be between 1 and {REQUEST_HISTORY_MAX_LIMIT}")
+    return value
+
+
+def _request_history_limit_from_query(query: str) -> int:
+    raw = _query_value(query, "limit")
+    if raw is None:
+        return REQUEST_HISTORY_DEFAULT_LIMIT
+    return _request_history_limit(_as_int(raw, "limit"))
+
+
+def _read_inference_log_records(path: Path) -> tuple[list[dict[str, Any]], int]:
+    if not path.exists():
+        return [], 0
+    records: list[dict[str, Any]] = []
+    invalid_count = 0
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        if not line.strip():
+            continue
+        try:
+            payload = json.loads(line)
+        except json.JSONDecodeError:
+            invalid_count += 1
+            continue
+        if isinstance(payload, dict):
+            records.append(payload)
+        else:
+            invalid_count += 1
+    return records, invalid_count
+
+
+def _request_history_record(record: dict[str, Any]) -> dict[str, Any]:
+    fields = [
+        "timestamp",
+        "endpoint",
+        "status",
+        "client",
+        "checkpoint",
+        "checkpoint_id",
+        "requested_checkpoint",
+        "left_checkpoint",
+        "left_checkpoint_id",
+        "right_checkpoint",
+        "right_checkpoint_id",
+        "requested_left_checkpoint",
+        "requested_right_checkpoint",
+        "prompt_chars",
+        "max_new_tokens",
+        "temperature",
+        "top_k",
+        "seed",
+        "generated_chars",
+        "continuation_chars",
+        "left_generated_chars",
+        "left_continuation_chars",
+        "right_generated_chars",
+        "right_continuation_chars",
+        "generated_equal",
+        "continuation_equal",
+        "tokenizer",
+        "stream_chunks",
+        "stream_timed_out",
+        "stream_cancelled",
+        "stream_elapsed_seconds",
+        "artifact_json",
+        "artifact_html",
+        "error",
+    ]
+    return {field: record.get(field) for field in fields if field in record}
+
+
+def _count_values(records: list[dict[str, Any]], key: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for record in records:
+        value = record.get(key)
+        if value is None:
+            continue
+        text = str(value)
+        counts[text] = counts.get(text, 0) + 1
+    return counts
 
 
 def _path_key(path: str | Path) -> str:

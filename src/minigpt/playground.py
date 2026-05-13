@@ -125,6 +125,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         "commands": payload["commands"],
         "checkpoints": [],
         "checkpointComparison": [],
+        "requestHistory": [],
         "streamController": None,
     }
     sections = [
@@ -134,6 +135,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         _stats(stats),
         _command_builder(defaults),
         _live_section(),
+        _request_history_section(),
         _checkpoint_comparison_section(),
         _pair_generation_section(),
         _sampling_section(payload.get("sampling_report")),
@@ -362,6 +364,20 @@ pre {
   flex-wrap: wrap;
 }
 .row-actions a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.status-pill {
+  display: inline-block;
+  min-width: 58px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #eef3f7;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+.status-pill.ok { background: #dcfce7; color: var(--green); }
+.status-pill.timeout { background: #fef3c7; color: var(--amber); }
+.status-pill.cancelled, .status-pill.error, .status-pill.bad-request { background: #fee2e2; color: var(--red); }
 .pair-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(260px, 1fr));
@@ -442,6 +458,16 @@ function formatDelta(value) {{
   if (typeof value !== 'number') return 'missing';
   if (value === 0) return '0';
   return (value > 0 ? '+' : '') + value.toLocaleString();
+}}
+function formatSeconds(value) {{
+  if (typeof value !== 'number') return 'missing';
+  return value.toFixed(3) + 's';
+}}
+function formatTimestamp(value) {{
+  if (!value) return 'missing';
+  const parsed = Date.parse(value);
+  if (Number.isNaN(parsed)) return String(value);
+  return new Date(parsed).toLocaleString();
 }}
 function appendCell(row, value) {{
   const cell = document.createElement('td');
@@ -568,6 +594,74 @@ async function loadCheckpointComparison() {{
     renderCheckpointComparison();
   }}
 }}
+function requestCheckpointLabel(item) {{
+  return item.checkpoint_id || item.requested_checkpoint || item.left_checkpoint_id || item.requested_left_checkpoint || 'default';
+}}
+function requestOutputChars(item) {{
+  if (typeof item.generated_chars === 'number') return item.generated_chars;
+  if (typeof item.left_generated_chars === 'number' || typeof item.right_generated_chars === 'number') {{
+    return `${{formatValue(item.left_generated_chars)}} / ${{formatValue(item.right_generated_chars)}}`;
+  }}
+  return 'missing';
+}}
+function requestStreamSummary(item) {{
+  if (item.endpoint !== '/api/generate-stream') return 'n/a';
+  const flags = [];
+  if (item.stream_timed_out) flags.push('timeout');
+  if (item.stream_cancelled) flags.push('cancelled');
+  return `${{formatValue(item.stream_chunks)}} chunk(s)${{flags.length ? ' / ' + flags.join(', ') : ''}}`;
+}}
+function appendStatusCell(row, status) {{
+  const cell = document.createElement('td');
+  const badge = document.createElement('span');
+  badge.className = 'status-pill ' + String(status || 'missing').replaceAll('_', '-');
+  badge.textContent = formatValue(status);
+  cell.appendChild(badge);
+  row.appendChild(cell);
+}}
+function renderRequestHistory() {{
+  const body = document.getElementById('requestHistoryBody');
+  const status = document.getElementById('requestHistoryStatus');
+  if (!body || !status) return;
+  const rows = MiniGPTPlayground.requestHistory || [];
+  body.innerHTML = '';
+  if (!rows.length) {{
+    if (!status.textContent.startsWith('Start scripts/serve_playground.py')) {{
+      status.textContent = 'No inference requests recorded yet.';
+    }}
+    return;
+  }}
+  for (const item of rows) {{
+    const row = document.createElement('tr');
+    appendCell(row, formatTimestamp(item.timestamp));
+    appendCell(row, item.endpoint);
+    appendStatusCell(row, item.status);
+    appendCell(row, requestCheckpointLabel(item));
+    appendCell(row, item.prompt_chars);
+    appendCell(row, requestOutputChars(item));
+    appendCell(row, requestStreamSummary(item));
+    appendCell(row, formatSeconds(item.stream_elapsed_seconds));
+    body.appendChild(row);
+  }}
+}}
+async function loadRequestHistory() {{
+  const status = document.getElementById('requestHistoryStatus');
+  try {{
+    const response = await fetch('/api/request-history?limit=12');
+    if (!response.ok) throw new Error('request history endpoint unavailable');
+    const data = await response.json();
+    MiniGPTPlayground.requestHistory = Array.isArray(data.requests) ? data.requests : [];
+    const summary = data.summary || {{}};
+    if (status) {{
+      status.textContent = `${{formatValue(data.record_count)}} shown / ${{formatValue(summary.total_log_records)}} recorded`;
+    }}
+    renderRequestHistory();
+  }} catch (error) {{
+    MiniGPTPlayground.requestHistory = [];
+    if (status) status.textContent = 'Start scripts/serve_playground.py for request history.';
+    renderRequestHistory();
+  }}
+}}
 async function generateLive() {{
   const output = document.getElementById('liveOutput');
   const generateButton = document.getElementById('liveGenerateButton');
@@ -620,6 +714,7 @@ async function generateLive() {{
     }}
     if (generateButton) generateButton.disabled = false;
     if (stopButton) stopButton.disabled = true;
+    setTimeout(loadRequestHistory, 200);
   }}
 }}
 function stopLiveGeneration() {{
@@ -734,6 +829,8 @@ async function generatePairLive(saveArtifact = false) {{
     leftOutput.textContent = 'Start scripts/serve_playground.py to use pair generation.';
     rightOutput.textContent = 'Start scripts/serve_playground.py to use pair generation.';
     status.textContent = 'unavailable';
+  }} finally {{
+    setTimeout(loadRequestHistory, 200);
   }}
 }}
 function copyCommand(id) {{
@@ -754,9 +851,11 @@ window.addEventListener('DOMContentLoaded', () => {{
   document.getElementById('pairLeftCheckpointSelect').addEventListener('change', renderCheckpointComparison);
   document.getElementById('pairRightCheckpointSelect').addEventListener('change', renderCheckpointComparison);
   document.getElementById('refreshCheckpointCompareButton').addEventListener('click', loadCheckpointComparison);
+  document.getElementById('refreshRequestHistoryButton').addEventListener('click', loadRequestHistory);
   buildCommands();
   loadCheckpoints();
   loadCheckpointComparison();
+  loadRequestHistory();
 }});
 </script>"""
 
@@ -802,6 +901,22 @@ def _live_section() -> str:
     <output id="checkpointStatus">Checkpoint selector loads from /api/checkpoints.</output>
   </div>
   <pre id="liveOutput" class="output"></pre>
+</section>"""
+
+
+def _request_history_section() -> str:
+    return """<h2>Request History</h2>
+<section class="panel">
+  <div class="live-actions">
+    <button id="refreshRequestHistoryButton" type="button">Refresh</button>
+    <output id="requestHistoryStatus">Request history loads from /api/request-history.</output>
+  </div>
+  <table id="requestHistoryTable">
+    <thead>
+      <tr><th>Time</th><th>Endpoint</th><th>Status</th><th>Checkpoint</th><th>Prompt</th><th>Output</th><th>Stream</th><th>Elapsed</th></tr>
+    </thead>
+    <tbody id="requestHistoryBody"></tbody>
+  </table>
 </section>"""
 
 

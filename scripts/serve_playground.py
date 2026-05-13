@@ -65,6 +65,7 @@ def main() -> None:
     print(f"generate_stream={url}api/generate-stream", flush=True)
     print(f"generate_pair={url}api/generate-pair", flush=True)
     print(f"generate_pair_artifact={url}api/generate-pair-artifact", flush=True)
+    print(f"request_history={url}api/request-history", flush=True)
     print(f"checkpoints={url}api/checkpoints", flush=True)
     print(f"checkpoint_compare={url}api/checkpoint-compare", flush=True)
     print(f"checkpoint_count={len(checkpoint_options)}", flush=True)

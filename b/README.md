@@ -96,6 +96,9 @@ b/55/解释/说明.md
 b/56/图片
 b/56/解释/说明.md
  -> v56 streaming timeout and cancellation 的运行截图和解释
+b/57/图片
+b/57/解释/说明.md
+ -> v57 request history view 的运行截图和解释
 ```
 
 写入规则：

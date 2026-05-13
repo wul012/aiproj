@@ -33,6 +33,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 69-v54-dataset-cards.md
 70-v55-streaming-generation.md
 71-v56-streaming-cancel-timeout.md
+72-v57-request-history-view.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -52,7 +53,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v56，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理，到流式超时与取消控制的完整学习型 AI 工程链路。
+截至 v57，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制，到本地推理请求历史视图的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -71,6 +72,8 @@ v54 的关键变化是：读取 dataset version、dataset report 和 dataset qua
 v55 的关键变化是：把 MiniGPT 的生成循环拆出 `sample_next`，新增 `/api/generate-stream` SSE 端点，并让 playground 通过 `Stream Generate` 按钮逐 token 更新输出。
 
 v56 的关键变化是：给流式生成增加 `max_stream_seconds` 超时边界、`timeout` SSE 事件、超时/取消日志字段，并在 playground 里加入 `Stop` 取消按钮。
+
+v57 的关键变化是：读取 `inference_requests.jsonl`，新增 `/api/request-history`，把普通生成、流式生成、超时、取消和 pair 请求归一成最近请求列表，并在 playground 里加入 Request History 表格。
 
 ## 后续讲解索引
 
@@ -93,10 +96,12 @@ v56 的关键变化是：给流式生成增加 `max_stream_seconds` 超时边界
  -> 第五十五版代码讲解：把本地 playground 生成从一次性 JSON 返回推进到 Server-Sent Events 流式 token 输出
 71-v56-streaming-cancel-timeout.md
  -> 第五十六版代码讲解：给流式生成增加服务端超时边界和浏览器端取消控制
+72-v57-request-history-view.md
+ -> 第五十七版代码讲解：把本地推理 JSONL 日志整理成 `/api/request-history` 和 playground 请求历史视图
 ```
 
-后续继续推进时，在这里追加 `72-v57-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `73-v58-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯和下一阶段路线”的过程。

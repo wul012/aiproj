@@ -22,6 +22,7 @@ from minigpt.server import (
     build_checkpoints_payload,
     build_health_payload,
     build_model_info_payload,
+    build_request_history_payload,
     create_handler,
     discover_checkpoint_options,
     parse_generation_pair_request,
@@ -157,6 +158,7 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(health["model_info_endpoint"], "/api/model-info")
             self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
             self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
+            self.assertEqual(health["request_history_endpoint"], "/api/request-history")
             self.assertEqual(Path(health["request_log"]).name, "requests.jsonl")
             self.assertEqual(health["checkpoints_endpoint"], "/api/checkpoints")
             self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
@@ -271,6 +273,62 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(record["status"], "ok")
             self.assertIn("timestamp", record)
 
+    def test_request_history_payload_reads_recent_records(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = Path(tmp) / "requests.jsonl"
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate",
+                    "status": "ok",
+                    "checkpoint_id": "default",
+                    "prompt_chars": 3,
+                    "generated_chars": 12,
+                },
+            )
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate-stream",
+                    "status": "timeout",
+                    "checkpoint_id": "default",
+                    "prompt_chars": 4,
+                    "generated_chars": 8,
+                    "stream_chunks": 2,
+                    "stream_timed_out": True,
+                    "stream_elapsed_seconds": 0.5,
+                },
+            )
+            log_path.write_text(log_path.read_text(encoding="utf-8") + "{broken\n", encoding="utf-8")
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate-stream",
+                    "status": "cancelled",
+                    "checkpoint_id": "wide",
+                    "prompt_chars": 5,
+                    "stream_chunks": 1,
+                    "stream_cancelled": True,
+                },
+            )
+
+            payload = build_request_history_payload(log_path, limit=2)
+
+            self.assertEqual(payload["status"], "ok")
+            self.assertTrue(payload["request_log_exists"])
+            self.assertEqual(payload["limit"], 2)
+            self.assertEqual(payload["total_log_records"], 3)
+            self.assertEqual(payload["invalid_record_count"], 1)
+            self.assertEqual(payload["record_count"], 2)
+            self.assertEqual(payload["requests"][0]["status"], "cancelled")
+            self.assertEqual(payload["requests"][1]["status"], "timeout")
+            self.assertEqual(payload["summary"]["timeout_count"], 1)
+            self.assertEqual(payload["summary"]["cancelled_count"], 1)
+            self.assertEqual(payload["summary"]["returned_endpoint_counts"]["/api/generate-stream"], 2)
+            self.assertNotIn("generated", payload["requests"][0])
+            with self.assertRaisesRegex(ValueError, "limit"):
+                build_request_history_payload(log_path, limit=0)
+
     def test_sse_message_formats_event_and_json_data(self) -> None:
         message = sse_message("token", {"text": "中", "index": 1}).decode("utf-8")
 
@@ -352,6 +410,7 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
                 self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
                 self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
+                self.assertEqual(health["request_history_endpoint"], "/api/request-history")
 
                 info = _get_json(base + "/api/model-info")
                 self.assertEqual(info["status"], "ok")
@@ -384,6 +443,14 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(log_record["prompt_chars"], 3)
                 self.assertEqual(log_record["checkpoint_id"], "candidate")
                 self.assertEqual(log_record["requested_checkpoint"], "candidate")
+                history = _get_json(base + "/api/request-history?limit=5")
+                self.assertEqual(history["status"], "ok")
+                self.assertEqual(history["record_count"], 1)
+                self.assertEqual(history["requests"][0]["endpoint"], "/api/generate")
+                self.assertEqual(history["requests"][0]["checkpoint_id"], "candidate")
+                with self.assertRaises(HTTPError) as cm:
+                    _get_json(base + "/api/request-history?limit=999")
+                self.assertEqual(cm.exception.code, 400)
             finally:
                 server.shutdown()
                 server.server_close()
@@ -417,6 +484,9 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(log_record["status"], "ok")
                 self.assertEqual(log_record["stream_chunks"], 2)
                 self.assertEqual(log_record["generated_chars"], len("abc::generated"))
+                history = _get_json(base + "/api/request-history?limit=1")
+                self.assertEqual(history["requests"][0]["endpoint"], "/api/generate-stream")
+                self.assertEqual(history["requests"][0]["stream_chunks"], 2)
             finally:
                 server.shutdown()
                 server.server_close()
