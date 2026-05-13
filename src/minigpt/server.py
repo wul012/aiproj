@@ -21,6 +21,7 @@ from .playground import write_playground
 REQUEST_HISTORY_DEFAULT_LIMIT = 20
 REQUEST_HISTORY_MAX_LIMIT = 200
 REQUEST_HISTORY_CSV_COLUMNS = [
+    "log_index",
     "timestamp",
     "endpoint",
     "status",
@@ -323,6 +324,7 @@ def build_health_payload(
         "checkpoints_endpoint": "/api/checkpoints",
         "checkpoint_compare_endpoint": "/api/checkpoint-compare",
         "request_history_endpoint": "/api/request-history",
+        "request_history_detail_endpoint": "/api/request-history-detail",
         "checkpoint_count": len(checkpoints),
         "default_checkpoint_id": checkpoints[0].id if checkpoints else None,
         "safety": safety.to_dict(),
@@ -510,8 +512,8 @@ def build_request_history_payload(
 ) -> dict[str, Any]:
     history_limit = _request_history_limit(limit)
     log_path = Path(request_log_path)
-    records, invalid_count = _read_inference_log_records(log_path)
-    normalized_records = [_request_history_record(record) for record in records]
+    entries, invalid_count = _read_inference_log_entries(log_path)
+    normalized_records = [_request_history_record(record, log_index=log_index) for log_index, record in entries]
     filtered_records = _filter_request_history_records(
         normalized_records,
         status_filter=status_filter,
@@ -527,7 +529,7 @@ def build_request_history_payload(
         "request_log_exists": log_path.exists(),
         "limit": history_limit,
         "newest_first": True,
-        "total_log_records": len(records),
+        "total_log_records": len(entries),
         "matching_log_records": len(filtered_records),
         "invalid_record_count": invalid_count,
         "record_count": len(requests),
@@ -537,7 +539,7 @@ def build_request_history_payload(
             "checkpoint": checkpoint_filter,
         },
         "summary": {
-            "total_log_records": len(records),
+            "total_log_records": len(entries),
             "matching_records": len(filtered_records),
             "returned_records": len(requests),
             "invalid_record_count": invalid_count,
@@ -552,6 +554,25 @@ def build_request_history_payload(
         },
         "requests": requests,
     }
+
+
+def build_request_history_detail_payload(request_log_path: str | Path, log_index: int) -> dict[str, Any]:
+    wanted_index = _request_history_log_index(log_index)
+    log_path = Path(request_log_path)
+    entries, invalid_count = _read_inference_log_entries(log_path)
+    for current_index, record in entries:
+        if current_index == wanted_index:
+            return {
+                "status": "ok",
+                "request_log": str(log_path),
+                "request_log_exists": log_path.exists(),
+                "log_index": current_index,
+                "total_log_records": len(entries),
+                "invalid_record_count": invalid_count,
+                "normalized": _request_history_record(record, log_index=current_index),
+                "record": record,
+            }
+    raise LookupError(f"request history record not found: log_index={wanted_index}")
 
 
 def request_history_to_csv(records: list[dict[str, Any]]) -> str:
@@ -751,6 +772,18 @@ def create_handler(
                         content_type="text/csv; charset=utf-8",
                         filename="request_history.csv",
                     )
+                    return
+                self._send_json(payload)
+                return
+            if parsed.path == "/api/request-history-detail":
+                try:
+                    log_index = _request_history_log_index_from_query(parsed.query)
+                    payload = build_request_history_detail_payload(request_log, log_index)
+                except ValueError as exc:
+                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                except LookupError as exc:
+                    self._send_json({"error": str(exc)}, status=HTTPStatus.NOT_FOUND)
                     return
                 self._send_json(payload)
                 return
@@ -1274,6 +1307,19 @@ def _request_history_limit_from_query(query: str) -> int:
     return _request_history_limit(_as_int(raw, "limit"))
 
 
+def _request_history_log_index(value: int) -> int:
+    if value < 1:
+        raise ValueError("log_index must be at least 1")
+    return value
+
+
+def _request_history_log_index_from_query(query: str) -> int:
+    raw = _query_value(query, "log_index")
+    if raw is None:
+        raise ValueError("log_index is required")
+    return _request_history_log_index(_as_int(raw, "log_index"))
+
+
 def _request_history_filters_from_query(query: str) -> dict[str, str | None]:
     return {
         "status_filter": _clean_query_filter(_query_value(query, "status")),
@@ -1292,11 +1338,16 @@ def _clean_query_filter(value: str | None) -> str | None:
 
 
 def _read_inference_log_records(path: Path) -> tuple[list[dict[str, Any]], int]:
+    entries, invalid_count = _read_inference_log_entries(path)
+    return [record for _, record in entries], invalid_count
+
+
+def _read_inference_log_entries(path: Path) -> tuple[list[tuple[int, dict[str, Any]]], int]:
     if not path.exists():
         return [], 0
-    records: list[dict[str, Any]] = []
+    records: list[tuple[int, dict[str, Any]]] = []
     invalid_count = 0
-    for line in path.read_text(encoding="utf-8-sig").splitlines():
+    for log_index, line in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), start=1):
         if not line.strip():
             continue
         try:
@@ -1305,7 +1356,7 @@ def _read_inference_log_records(path: Path) -> tuple[list[dict[str, Any]], int]:
             invalid_count += 1
             continue
         if isinstance(payload, dict):
-            records.append(payload)
+            records.append((log_index, payload))
         else:
             invalid_count += 1
     return records, invalid_count
@@ -1345,7 +1396,7 @@ def _request_history_record_matches_checkpoint(record: dict[str, Any], wanted: s
     return any(str(record.get(field, "")).casefold() == wanted for field in fields)
 
 
-def _request_history_record(record: dict[str, Any]) -> dict[str, Any]:
+def _request_history_record(record: dict[str, Any], log_index: int | None = None) -> dict[str, Any]:
     fields = [
         "timestamp",
         "endpoint",
@@ -1382,7 +1433,10 @@ def _request_history_record(record: dict[str, Any]) -> dict[str, Any]:
         "artifact_html",
         "error",
     ]
-    return {field: record.get(field) for field in fields if field in record}
+    normalized = {field: record.get(field) for field in fields if field in record}
+    if log_index is not None:
+        return {"log_index": log_index, **normalized}
+    return normalized
 
 
 def _csv_value(value: Any) -> str:

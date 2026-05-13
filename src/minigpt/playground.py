@@ -126,6 +126,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         "checkpoints": [],
         "checkpointComparison": [],
         "requestHistory": [],
+        "requestHistoryDetail": None,
         "requestHistoryFilters": {"status": "", "endpoint": "", "checkpoint": "", "limit": 12},
         "streamController": None,
     }
@@ -365,6 +366,12 @@ pre {
   flex-wrap: wrap;
 }
 .row-actions a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.detail-panel {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+.detail-panel pre { min-height: 118px; }
 .status-pill {
   display: inline-block;
   min-width: 58px;
@@ -648,10 +655,17 @@ function requestHistoryQuery(format) {{
   }});
   return `/api/request-history?${{query}}`;
 }}
+function requestHistoryDetailUrl(logIndex) {{
+  return `/api/request-history-detail?log_index=${{encodeURIComponent(logIndex)}}`;
+}}
 function updateRequestHistoryExportLink() {{
   const link = document.getElementById('requestHistoryExportLink');
   if (!link) return;
   link.href = requestHistoryQuery('csv');
+}}
+function setRequestHistoryDetail(text) {{
+  const output = document.getElementById('requestHistoryDetailOutput');
+  if (output) output.textContent = text;
 }}
 function renderRequestHistory() {{
   const body = document.getElementById('requestHistoryBody');
@@ -667,6 +681,7 @@ function renderRequestHistory() {{
   }}
   for (const item of rows) {{
     const row = document.createElement('tr');
+    appendCell(row, item.log_index);
     appendCell(row, formatTimestamp(item.timestamp));
     appendCell(row, item.endpoint);
     appendStatusCell(row, item.status);
@@ -675,7 +690,44 @@ function renderRequestHistory() {{
     appendCell(row, requestOutputChars(item));
     appendCell(row, requestStreamSummary(item));
     appendCell(row, formatSeconds(item.stream_elapsed_seconds));
+    const actions = document.createElement('td');
+    const actionWrap = document.createElement('div');
+    actionWrap.className = 'row-actions';
+    const logIndex = item.log_index;
+    const detailButton = document.createElement('button');
+    detailButton.type = 'button';
+    detailButton.textContent = 'Details';
+    detailButton.disabled = !logIndex;
+    detailButton.addEventListener('click', () => showRequestHistoryDetail(logIndex));
+    const jsonLink = document.createElement('a');
+    jsonLink.textContent = 'JSON';
+    jsonLink.href = logIndex ? requestHistoryDetailUrl(logIndex) : '#';
+    if (logIndex) jsonLink.download = `request_history_${{logIndex}}.json`;
+    actionWrap.appendChild(detailButton);
+    actionWrap.appendChild(jsonLink);
+    actions.appendChild(actionWrap);
+    row.appendChild(actions);
     body.appendChild(row);
+  }}
+}}
+async function showRequestHistoryDetail(logIndex) {{
+  const status = document.getElementById('requestHistoryDetailStatus');
+  if (!logIndex) {{
+    if (status) status.textContent = 'Missing log_index for this request.';
+    return;
+  }}
+  try {{
+    if (status) status.textContent = `Loading request #${{logIndex}}`;
+    const response = await fetch(requestHistoryDetailUrl(logIndex));
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'request history detail endpoint unavailable');
+    MiniGPTPlayground.requestHistoryDetail = data;
+    if (status) status.textContent = `Request #${{data.log_index}}`;
+    setRequestHistoryDetail(JSON.stringify(data, null, 2));
+  }} catch (error) {{
+    MiniGPTPlayground.requestHistoryDetail = null;
+    if (status) status.textContent = error.message || 'Start scripts/serve_playground.py for request history details.';
+    setRequestHistoryDetail('');
   }}
 }}
 async function loadRequestHistory() {{
@@ -970,10 +1022,14 @@ def _request_history_section() -> str:
   </div>
   <table id="requestHistoryTable">
     <thead>
-      <tr><th>Time</th><th>Endpoint</th><th>Status</th><th>Checkpoint</th><th>Prompt</th><th>Output</th><th>Stream</th><th>Elapsed</th></tr>
+      <tr><th>Log</th><th>Time</th><th>Endpoint</th><th>Status</th><th>Checkpoint</th><th>Prompt</th><th>Output</th><th>Stream</th><th>Elapsed</th><th>Actions</th></tr>
     </thead>
     <tbody id="requestHistoryBody"></tbody>
   </table>
+  <div id="requestHistoryDetailPanel" class="detail-panel">
+    <output id="requestHistoryDetailStatus">Select a request row to inspect normalized and raw JSON.</output>
+    <pre id="requestHistoryDetailOutput"></pre>
+  </div>
 </section>"""
 
 

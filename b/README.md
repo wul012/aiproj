@@ -102,6 +102,9 @@ b/57/解释/说明.md
 b/58/图片
 b/58/解释/说明.md
  -> v58 request history filters and CSV export 的运行截图和解释
+b/59/图片
+b/59/解释/说明.md
+ -> v59 request history detail JSON 的运行截图和解释
 ```
 
 写入规则：

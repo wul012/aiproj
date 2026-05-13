@@ -22,6 +22,7 @@ from minigpt.server import (
     build_checkpoints_payload,
     build_health_payload,
     build_model_info_payload,
+    build_request_history_detail_payload,
     build_request_history_payload,
     create_handler,
     discover_checkpoint_options,
@@ -322,7 +323,9 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(payload["invalid_record_count"], 1)
             self.assertEqual(payload["record_count"], 2)
             self.assertEqual(payload["requests"][0]["status"], "cancelled")
+            self.assertEqual(payload["requests"][0]["log_index"], 4)
             self.assertEqual(payload["requests"][1]["status"], "timeout")
+            self.assertEqual(payload["requests"][1]["log_index"], 2)
             self.assertEqual(payload["summary"]["timeout_count"], 1)
             self.assertEqual(payload["summary"]["cancelled_count"], 1)
             self.assertEqual(payload["summary"]["returned_endpoint_counts"]["/api/generate-stream"], 2)
@@ -385,13 +388,55 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(payload["filters"]["status"], "ok")
             self.assertEqual(payload["filters"]["checkpoint"], "wide")
             self.assertEqual(payload["requests"][0]["endpoint"], "/api/generate-pair")
-            self.assertIn("timestamp,endpoint,status,checkpoint_id", csv_text)
+            self.assertEqual(payload["requests"][0]["log_index"], 3)
+            self.assertIn("log_index,timestamp,endpoint,status,checkpoint_id", csv_text)
             self.assertIn("/api/generate-pair", csv_text)
             self.assertIn("false", csv_text)
 
             endpoint_payload = build_request_history_payload(log_path, endpoint_filter="/api/generate-stream")
             self.assertEqual(endpoint_payload["matching_log_records"], 1)
             self.assertEqual(endpoint_payload["requests"][0]["status"], "timeout")
+
+    def test_request_history_detail_payload_reads_original_record(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = Path(tmp) / "requests.jsonl"
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate",
+                    "status": "ok",
+                    "checkpoint_id": "default",
+                    "prompt_chars": 3,
+                    "generated_chars": 10,
+                },
+            )
+            log_path.write_text(log_path.read_text(encoding="utf-8") + "{broken\n", encoding="utf-8")
+            append_inference_log(
+                log_path,
+                {
+                    "endpoint": "/api/generate-stream",
+                    "status": "timeout",
+                    "checkpoint_id": "wide",
+                    "prompt_chars": 4,
+                    "stream_chunks": 2,
+                    "stream_timed_out": True,
+                },
+            )
+
+            detail = build_request_history_detail_payload(log_path, log_index=3)
+
+            self.assertEqual(detail["status"], "ok")
+            self.assertEqual(detail["log_index"], 3)
+            self.assertEqual(detail["total_log_records"], 2)
+            self.assertEqual(detail["invalid_record_count"], 1)
+            self.assertEqual(detail["normalized"]["log_index"], 3)
+            self.assertEqual(detail["normalized"]["endpoint"], "/api/generate-stream")
+            self.assertEqual(detail["record"]["checkpoint_id"], "wide")
+            self.assertTrue(detail["record"]["stream_timed_out"])
+            with self.assertRaisesRegex(ValueError, "log_index"):
+                build_request_history_detail_payload(log_path, log_index=0)
+            with self.assertRaisesRegex(LookupError, "not found"):
+                build_request_history_detail_payload(log_path, log_index=2)
 
     def test_sse_message_formats_event_and_json_data(self) -> None:
         message = sse_message("token", {"text": "中", "index": 1}).decode("utf-8")
@@ -475,6 +520,7 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
                 self.assertEqual(health["checkpoint_compare_endpoint"], "/api/checkpoint-compare")
                 self.assertEqual(health["request_history_endpoint"], "/api/request-history")
+                self.assertEqual(health["request_history_detail_endpoint"], "/api/request-history-detail")
 
                 info = _get_json(base + "/api/model-info")
                 self.assertEqual(info["status"], "ok")
@@ -512,13 +558,24 @@ class ServerTests(unittest.TestCase):
                 self.assertEqual(history["record_count"], 1)
                 self.assertEqual(history["requests"][0]["endpoint"], "/api/generate")
                 self.assertEqual(history["requests"][0]["checkpoint_id"], "candidate")
+                self.assertEqual(history["requests"][0]["log_index"], 1)
+                detail = _get_json(base + "/api/request-history-detail?log_index=1")
+                self.assertEqual(detail["status"], "ok")
+                self.assertEqual(detail["normalized"]["checkpoint_id"], "candidate")
+                self.assertEqual(detail["record"]["requested_checkpoint"], "candidate")
                 filtered = _get_json(base + "/api/request-history?status=ok&endpoint=/api/generate&checkpoint=candidate")
                 self.assertEqual(filtered["matching_log_records"], 1)
                 self.assertEqual(filtered["filters"]["checkpoint"], "candidate")
                 csv_text, csv_content_type = _get_raw(base + "/api/request-history?status=ok&format=csv")
                 self.assertTrue(csv_content_type.startswith("text/csv"))
-                self.assertIn("timestamp,endpoint,status,checkpoint_id", csv_text)
+                self.assertIn("log_index,timestamp,endpoint,status,checkpoint_id", csv_text)
                 self.assertIn("/api/generate", csv_text)
+                with self.assertRaises(HTTPError) as missing_index:
+                    _get_json(base + "/api/request-history-detail")
+                self.assertEqual(missing_index.exception.code, 400)
+                with self.assertRaises(HTTPError) as missing_record:
+                    _get_json(base + "/api/request-history-detail?log_index=9")
+                self.assertEqual(missing_record.exception.code, 404)
                 with self.assertRaises(HTTPError) as cm:
                     _get_json(base + "/api/request-history?limit=999")
                 self.assertEqual(cm.exception.code, 400)
