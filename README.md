@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 34 is a MiniGPT learning project with configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a fixed prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 35 is a MiniGPT learning project with benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and future `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -13,7 +13,7 @@ Version 34 is a MiniGPT learning project with configurable release gate delta ba
 - Dataset preparation script for merging multiple `.txt` files and exporting dataset reports
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
-- Fixed prompt evaluation suite for running the same prompts against different checkpoints and exporting JSON/CSV/SVG reports
+- Benchmark prompt evaluation suite for running the same Chinese task set against different checkpoints, with suite metadata, task types, difficulty, expected behavior, JSON/CSV/SVG/HTML reports, and dashboard/playground artifact links
 - Generation quality analyzer that reads `eval_suite.json` or `sample_lab.json`, checks length/diversity/repetition/prompt echo, and writes `generation_quality.json`, `generation_quality.csv`, `generation_quality.md`, `generation_quality.svg`, and `generation_quality.html`
 - Generation quality evidence-chain integration across run registry, model card, and project audit, so generation quality status can affect release-style review
 - Run registry builder that indexes multiple run directories, manifests, data fingerprints, quality status, eval suite summaries, metrics, and artifacts
@@ -55,8 +55,8 @@ Version 34 is a MiniGPT learning project with configurable release gate delta ba
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset quality, fixed prompt eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset quality, benchmark eval suites, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, sampling lab, playground UI, playground server, dataset preparation, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -99,6 +99,7 @@ v31.0.0 MiniGPT v31 release gate policy profiles
 v32.0.0 MiniGPT v32 release gate profile comparison
 v33.0.0 MiniGPT v33 release gate profile delta explanations
 v34.0.0 MiniGPT v34 configurable release gate delta baseline
+v35.0.0 MiniGPT v35 benchmark eval suite metadata
 ```
 
 ## Project structure
@@ -243,7 +244,11 @@ v34.0.0 MiniGPT v34 configurable release gate delta baseline
 │   │   ├── 图片/
 │   │   └── 解释/
 │   │       └── 说明.md
-│   └── 34/
+│   ├── 34/
+│   │   ├── 图片/
+│   │   └── 解释/
+│   │       └── 说明.md
+│   └── 35/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -338,6 +343,9 @@ v34.0.0 MiniGPT v34 configurable release gate delta baseline
 │   ├── 47-v32-release-gate-profile-comparison.md
 │   ├── 48-v33-release-gate-profile-deltas.md
 │   └── 49-v34-configurable-release-gate-baseline.md
+├── 代码讲解记录_评估基准阶段/
+│   ├── README.md
+│   └── 50-v35-benchmark-eval-suite.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -423,11 +431,13 @@ Evaluate loss and perplexity:
 python scripts/evaluate.py --checkpoint runs/minigpt/checkpoint.pt --eval-iters 20
 ```
 
-Run the fixed prompt evaluation suite:
+Run the benchmark prompt evaluation suite:
 
 ```powershell
 python scripts/eval_suite.py --checkpoint runs/minigpt/checkpoint.pt --suite data/eval_prompts.json
 ```
+
+The output directory contains `eval_suite.json`, `eval_suite.csv`, `eval_suite.svg`, and `eval_suite.html`. The default suite records `suite_name`, `suite_version`, task type, difficulty, tags, and expected behavior for continuation, QA, summary, structured output, and factual-consistency prompts.
 
 Analyze generation quality from eval suite or sampling output:
 
@@ -699,6 +709,8 @@ b/33/图片
 b/33/解释/说明.md
 b/34/图片
 b/34/解释/说明.md
+b/35/图片
+b/35/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -973,6 +985,14 @@ Version 34 screenshots:
 - `04-playwright-release-gate-baseline-profile.png`: comparison HTML with baseline `review` opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v34 docs, b/34 archive, and release-governance explanation check
 
+Version 35 screenshots:
+
+- `01-unit-tests.png`: benchmark eval suite metadata tests plus existing regression tests
+- `02-benchmark-eval-suite-smoke.png`: benchmark suite fixture exported to JSON/CSV/SVG/HTML
+- `03-benchmark-eval-suite-structure-check.png`: suite metadata, task counts, CSV fields, dashboard/playground links, and registry artifacts verified
+- `04-playwright-benchmark-eval-suite.png`: eval suite HTML report opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v35 docs, b/35 archive, and evaluation-benchmark explanation check
+
 ## Code explanation records
 
 Start here:
@@ -980,9 +1000,10 @@ Start here:
 ```text
 代码讲解记录/README.md
 代码讲解记录_发布治理阶段/README.md
+代码讲解记录_评估基准阶段/README.md
 ```
 
-The original `代码讲解记录` directory keeps the v1-v30 history in place. Starting with v31, new code explanation records should be written to `代码讲解记录_发布治理阶段` so the project can split future phases without moving old evidence.
+The original `代码讲解记录` directory keeps the v1-v30 history in place. v31-v34 release-governance records live in `代码讲解记录_发布治理阶段`; v35 and later benchmark/evaluation records start in `代码讲解记录_评估基准阶段` so the project can split future phases without moving old evidence.
 
 First-stage reading order:
 
@@ -1034,7 +1055,7 @@ First-stage reading order:
 45-v30-release-gate-generation-quality-policy.md
 ```
 
-Future release-governance records continue with the same global numbering:
+Release-governance records continue with the same global numbering:
 
 ```text
 代码讲解记录_发布治理阶段/
@@ -1042,6 +1063,13 @@ Future release-governance records continue with the same global numbering:
 47-v32-release-gate-profile-comparison.md
 48-v33-release-gate-profile-deltas.md
 49-v34-configurable-release-gate-baseline.md
+```
+
+Evaluation-benchmark records start at v35:
+
+```text
+代码讲解记录_评估基准阶段/
+50-v35-benchmark-eval-suite.md
 ```
 
 ## Learning map
@@ -1075,7 +1103,7 @@ The run manifest makes each training run easier to reproduce by saving code vers
 
 The dataset quality layer adds a stable corpus fingerprint plus lightweight checks for duplicate files, tiny sources, and repeated lines.
 
-The eval suite layer runs a fixed set of prompts against a checkpoint and saves comparable JSON/CSV/SVG outputs.
+The eval suite layer runs a fixed benchmark prompt set against a checkpoint and saves comparable JSON/CSV/SVG/HTML outputs with suite metadata, task types, difficulty, tags, and expected behavior.
 
 The generation quality layer reads eval suite or sampling outputs and flags short, repetitive, low-diversity, or prompt-echo generations.
 
@@ -1106,6 +1134,7 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
+- Add dataset versioning under named dataset directories.
+- Add baseline model comparison across tokenizer, model size, and training steps.
 - Add streaming token output for the playground server.
-- Add profile-delta severity grouping and filtering.
 - Compare from-scratch training with LoRA fine-tuning of an open model.

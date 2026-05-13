@@ -30,6 +30,9 @@ b/33/解释/说明.md
 b/34/图片
 b/34/解释/说明.md
  -> v34 configurable release gate delta baseline 的运行截图和解释
+b/35/图片
+b/35/解释/说明.md
+ -> v35 benchmark eval suite metadata 的运行截图和解释
 ```
 
 写入规则：

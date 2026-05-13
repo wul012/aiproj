@@ -1,28 +1,68 @@
 {
+  "suite_name": "minigpt-zh-benchmark",
+  "suite_version": "1",
+  "description": "Small fixed Chinese benchmark prompts for MiniGPT learning runs.",
+  "language": "zh-CN",
   "cases": [
     {
-      "name": "concept",
-      "prompt": "人工智能",
-      "max_new_tokens": 50,
+      "name": "continuation-basic",
+      "task_type": "continuation",
+      "difficulty": "easy",
+      "prompt": "人工智能正在改变",
+      "expected_behavior": "Continue the sentence with coherent Chinese text.",
+      "tags": ["zh", "continuation"],
+      "max_new_tokens": 60,
       "temperature": 0.7,
       "top_k": 20,
       "seed": 101
     },
     {
-      "name": "training",
-      "prompt": "模型训练",
-      "max_new_tokens": 50,
-      "temperature": 0.8,
-      "top_k": 30,
+      "name": "qa-training",
+      "task_type": "qa",
+      "difficulty": "easy",
+      "prompt": "问题：什么是模型训练？\n回答：",
+      "expected_behavior": "Answer the question briefly and stay on the topic of model training.",
+      "tags": ["zh", "qa", "training"],
+      "max_new_tokens": 70,
+      "temperature": 0.7,
+      "top_k": 25,
       "seed": 102
     },
     {
-      "name": "data-quality",
-      "prompt": "数据质量",
-      "max_new_tokens": 50,
-      "temperature": 0.9,
-      "top_k": 30,
+      "name": "summary-data-quality",
+      "task_type": "summary",
+      "difficulty": "medium",
+      "prompt": "请用一句话总结：数据质量会影响模型训练稳定性、评估可信度和最终生成效果。\n总结：",
+      "expected_behavior": "Produce a one-sentence summary that mentions data quality and model outcomes.",
+      "tags": ["zh", "summary", "data"],
+      "max_new_tokens": 70,
+      "temperature": 0.6,
+      "top_k": 25,
       "seed": 103
+    },
+    {
+      "name": "structured-run-record",
+      "task_type": "structured",
+      "difficulty": "medium",
+      "prompt": "请按 JSON 风格列出一次 MiniGPT 实验需要记录的三项信息：",
+      "expected_behavior": "Generate a compact structured list with experiment metadata fields.",
+      "tags": ["zh", "structured", "experiment"],
+      "max_new_tokens": 90,
+      "temperature": 0.6,
+      "top_k": 30,
+      "seed": 104
+    },
+    {
+      "name": "consistency-val-loss",
+      "task_type": "factual-consistency",
+      "difficulty": "medium",
+      "prompt": "判断：如果验证集损失持续上升，模型一定更好吗？请回答原因：",
+      "expected_behavior": "Reject the false premise and explain that rising validation loss is usually worse.",
+      "tags": ["zh", "reasoning", "evaluation"],
+      "max_new_tokens": 80,
+      "temperature": 0.7,
+      "top_k": 30,
+      "seed": 105
     }
   ]
 }

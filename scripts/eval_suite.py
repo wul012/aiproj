@@ -10,7 +10,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.eval_suite import build_eval_suite_report, build_prompt_result, load_prompt_cases, write_eval_suite_outputs
+from minigpt.eval_suite import build_eval_suite_report, build_prompt_result, load_prompt_suite, write_eval_suite_outputs
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.tokenizer import load_tokenizer
 
@@ -47,7 +47,8 @@ def main() -> None:
     model.load_state_dict(checkpoint["model"])
     model.eval()
 
-    cases = load_prompt_cases(args.suite)
+    suite = load_prompt_suite(args.suite)
+    cases = list(suite.cases)
     results = []
     for case in cases:
         torch.manual_seed(case.seed)
@@ -67,9 +68,16 @@ def main() -> None:
         checkpoint=str(args.checkpoint),
         tokenizer=str(tokenizer_path),
         suite=str(args.suite),
+        suite_name=suite.name,
+        suite_version=suite.version,
+        suite_description=suite.description,
+        suite_language=suite.language,
     )
     outputs = write_eval_suite_outputs(report, out_dir)
     print(f"cases={len(results)}")
+    print(f"suite_name={suite.name}")
+    print(f"suite_version={suite.version}")
+    print("task_types=" + ",".join(report["task_type_counts"]))
     print(f"out_dir={out_dir}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

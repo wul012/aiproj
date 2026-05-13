@@ -26,6 +26,7 @@ REGISTRY_ARTIFACT_PATHS = [
     "eval_suite/eval_suite.json",
     "eval_suite/eval_suite.csv",
     "eval_suite/eval_suite.svg",
+    "eval_suite/eval_suite.html",
     "generation-quality/generation_quality.json",
     "generation-quality/generation_quality.csv",
     "generation-quality/generation_quality.md",

@@ -28,6 +28,7 @@ RUN_ARTIFACT_SPECS = [
     ("eval_suite", "eval_suite/eval_suite.json", "fixed prompt evaluation suite"),
     ("eval_suite_csv", "eval_suite/eval_suite.csv", "fixed prompt evaluation table"),
     ("eval_suite_chart", "eval_suite/eval_suite.svg", "fixed prompt evaluation chart"),
+    ("eval_suite_html", "eval_suite/eval_suite.html", "browser benchmark evaluation report"),
     ("model_report", "model_report/model_report.json", "model architecture report"),
     ("model_chart", "model_report/model_architecture.svg", "model architecture chart"),
     ("prediction_report", "predictions/predictions.json", "next-token prediction report"),

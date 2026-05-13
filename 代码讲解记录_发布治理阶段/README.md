@@ -119,7 +119,12 @@ profile-delta 严重度分组/筛选
  -> 第三十四版代码讲解：让 profile deltas 可以显式选择 baseline profile
 ```
 
-后续推进 v35 时，在这里继续追加 `50-v35-主题.md`。
+v31-v34 的发布治理阶段到 `49-v34-configurable-release-gate-baseline.md` 先收口。v35 开始转入评估基准阶段，新的讲解记录写入同级目录：
+
+```text
+代码讲解记录_评估基准阶段/
+50-v35-benchmark-eval-suite.md
+```
 
 从 v32 起，运行截图和解释归档不再继续写入 `a/`，而是写入与 `a/` 同级的 `b/`：
 

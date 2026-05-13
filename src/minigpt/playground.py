@@ -176,6 +176,7 @@ def _collect_links(root: Path, out_path: Path, base_dir: Path) -> list[Playgroun
         ("eval_suite", "Eval suite", root / "eval_suite" / "eval_suite.json", "JSON"),
         ("eval_suite_csv", "Eval suite CSV", root / "eval_suite" / "eval_suite.csv", "CSV"),
         ("eval_suite_svg", "Eval suite chart", root / "eval_suite" / "eval_suite.svg", "SVG"),
+        ("eval_suite_html", "Eval suite report", root / "eval_suite" / "eval_suite.html", "HTML"),
         ("sample_lab_json", "Sampling JSON", root / "sample_lab" / "sample_lab.json", "JSON"),
         ("sample_lab_csv", "Sampling CSV", root / "sample_lab" / "sample_lab.csv", "CSV"),
         ("sample_lab_svg", "Sampling SVG", root / "sample_lab" / "sample_lab.svg", "SVG"),

@@ -99,6 +99,7 @@ def collect_artifacts(run_dir: str | Path, base_dir: str | Path) -> list[Dashboa
         ("eval_suite", "Eval suite", "eval_suite/eval_suite.json", "JSON", "fixed prompt generation evaluation report"),
         ("eval_suite_csv", "Eval suite table", "eval_suite/eval_suite.csv", "CSV", "fixed prompt evaluation table"),
         ("eval_suite_svg", "Eval suite chart", "eval_suite/eval_suite.svg", "SVG", "fixed prompt evaluation chart"),
+        ("eval_suite_html", "Eval suite report", "eval_suite/eval_suite.html", "HTML", "browser benchmark evaluation report"),
         ("model_report", "Model report", "model_report/model_report.json", "JSON", "architecture and parameter report"),
         ("model_svg", "Model architecture", "model_report/model_architecture.svg", "SVG", "model structure diagram"),
         ("predictions", "Prediction report", "predictions/predictions.json", "JSON", "next-token top-k probabilities"),
@@ -501,19 +502,23 @@ def _eval_suite_section(payload: dict[str, Any]) -> str:
     report = payload.get("eval_suite")
     if not isinstance(report, dict):
         return ""
+    benchmark = report.get("benchmark") if isinstance(report.get("benchmark"), dict) else {}
+    task_counts = benchmark.get("task_type_counts") or report.get("task_type_counts") or {}
+    difficulty_counts = benchmark.get("difficulty_counts") or report.get("difficulty_counts") or {}
     rows = []
     for item in report.get("results", [])[:8]:
         if isinstance(item, dict):
             rows.append(
-                f"<tr><td>{_e(item.get('name'))}</td><td>{_e(item.get('prompt'))}</td>"
+                f"<tr><td>{_e(item.get('name'))}</td><td>{_e(item.get('task_type'))}</td><td>{_e(item.get('difficulty'))}</td><td>{_e(item.get('prompt'))}</td>"
                 f"<td>{_e(item.get('seed'))}</td><td>{_e(item.get('unique_char_count'))}</td>"
                 f"<td>{_e(_clip(str(item.get('continuation', '')), 60))}</td></tr>"
             )
     figure = _image(payload, "eval_suite_svg", "Eval suite chart")
     return (
         "<h2>Eval Suite</h2><section class=\"panel\">"
-        f"<p>Cases: {_e(report.get('case_count'))} | Avg continuation chars: {_e(report.get('avg_continuation_chars'))} | Avg unique chars: {_e(report.get('avg_unique_chars'))}</p>"
-        f"<table><tr><th>Name</th><th>Prompt</th><th>Seed</th><th>Unique</th><th>Continuation</th></tr>{''.join(rows)}</table>"
+        f"<p>Suite: {_e(benchmark.get('suite_name') or report.get('suite'))} | Cases: {_e(report.get('case_count'))} | Tasks: {_e(_join_counts(task_counts))} | Difficulty: {_e(_join_counts(difficulty_counts))}</p>"
+        f"<p>Avg continuation chars: {_e(report.get('avg_continuation_chars'))} | Avg unique chars: {_e(report.get('avg_unique_chars'))}</p>"
+        f"<table><tr><th>Name</th><th>Task</th><th>Difficulty</th><th>Prompt</th><th>Seed</th><th>Unique</th><th>Continuation</th></tr>{''.join(rows)}</table>"
         f"{figure}</section>"
     )
 
@@ -610,6 +615,12 @@ def _clip(text: str, limit: int) -> str:
     if len(flat) <= limit:
         return flat
     return flat[: limit - 1] + "..."
+
+
+def _join_counts(value: Any) -> str:
+    if not isinstance(value, dict) or not value:
+        return ""
+    return ", ".join(f"{key}={count}" for key, count in value.items())
 
 
 def _e(value: Any) -> str:
