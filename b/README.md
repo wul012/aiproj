@@ -84,6 +84,9 @@ b/51/解释/说明.md
 b/52/图片
 b/52/解释/说明.md
  -> v52 registry benchmark rubric tracking 的运行截图和解释
+b/53/图片
+b/53/解释/说明.md
+ -> v53 benchmark scorecard comparison 的运行截图和解释
 ```
 
 写入规则：
