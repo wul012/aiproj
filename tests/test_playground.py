@@ -69,6 +69,9 @@ class PlaygroundTests(unittest.TestCase):
             self.assertIn('id="promptInput"', html)
             self.assertIn("generateCommand", html)
             self.assertIn("liveGenerateButton", html)
+            self.assertIn("checkpointSelect", html)
+            self.assertIn("/api/checkpoints", html)
+            self.assertIn("payload.checkpoint", html)
             self.assertNotIn("<script>alert(1)</script>", html)
 
     def test_build_playground_commands_quote_paths_and_prompt(self) -> None:

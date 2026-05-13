@@ -9,7 +9,7 @@ from pathlib import Path
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 from .playground import write_playground
 
@@ -28,12 +28,28 @@ class InferenceSafetyProfile:
 
 
 @dataclass(frozen=True)
+class CheckpointOption:
+    id: str
+    name: str
+    path: str
+    exists: bool
+    is_default: bool
+    tokenizer_path: str | None
+    tokenizer_exists: bool
+    source: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class GenerationRequest:
     prompt: str
     max_new_tokens: int
     temperature: float
     top_k: int | None
     seed: int | None
+    checkpoint: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -50,6 +66,7 @@ class GenerationResponse:
     seed: int | None
     checkpoint: str
     tokenizer: str
+    checkpoint_id: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -152,12 +169,17 @@ def parse_generation_request(
         raise ValueError(f"top_k must be at most {safety.max_top_k}")
     seed_raw = payload.get("seed")
     seed = None if seed_raw in {None, ""} else _as_int(seed_raw, "seed")
+    checkpoint_raw = payload.get("checkpoint")
+    checkpoint = None if checkpoint_raw in {None, ""} else str(checkpoint_raw).strip()
+    if checkpoint == "":
+        checkpoint = None
     return GenerationRequest(
         prompt=prompt,
         max_new_tokens=max_new_tokens,
         temperature=temperature,
         top_k=top_k,
         seed=seed,
+        checkpoint=checkpoint,
     )
 
 
@@ -167,11 +189,13 @@ def build_health_payload(
     *,
     safety_profile: InferenceSafetyProfile | None = None,
     request_log_path: str | Path | None = None,
+    checkpoint_candidates: list[str | Path] | None = None,
 ) -> dict[str, Any]:
     root = Path(run_dir)
     checkpoint = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
     request_log = Path(request_log_path) if request_log_path is not None else root / "inference_requests.jsonl"
     safety = safety_profile or InferenceSafetyProfile()
+    checkpoints = discover_checkpoint_options(root, checkpoint, checkpoint_candidates=checkpoint_candidates)
     return {
         "status": "ok",
         "run_dir": str(root),
@@ -182,6 +206,9 @@ def build_health_payload(
         "sample_lab_exists": (root / "sample_lab" / "sample_lab.json").exists(),
         "model_info_endpoint": "/api/model-info",
         "generate_endpoint": "/api/generate",
+        "checkpoints_endpoint": "/api/checkpoints",
+        "checkpoint_count": len(checkpoints),
+        "default_checkpoint_id": checkpoints[0].id if checkpoints else None,
         "safety": safety.to_dict(),
         "request_log": str(request_log),
         "request_log_exists": request_log.exists(),
@@ -192,6 +219,7 @@ def build_model_info_payload(
     run_dir: str | Path,
     checkpoint_path: str | Path | None = None,
     tokenizer_path: str | Path | None = None,
+    checkpoint_id: str | None = None,
 ) -> dict[str, Any]:
     root = Path(run_dir)
     checkpoint = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
@@ -209,6 +237,7 @@ def build_model_info_payload(
     return {
         "status": "ok",
         "run_dir": str(root),
+        "checkpoint_id": checkpoint_id,
         "checkpoint": str(checkpoint),
         "checkpoint_exists": checkpoint.exists(),
         "tokenizer_path": str(tokenizer),
@@ -222,6 +251,97 @@ def build_model_info_payload(
         "git": _pick(manifest, "git"),
         "artifact_count": _artifact_count(manifest),
     }
+
+
+def discover_checkpoint_options(
+    run_dir: str | Path,
+    checkpoint_path: str | Path | None = None,
+    *,
+    tokenizer_path: str | Path | None = None,
+    checkpoint_candidates: list[str | Path] | None = None,
+) -> list[CheckpointOption]:
+    root = Path(run_dir)
+    default_path = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
+    paths: list[tuple[Path, str]] = [(default_path, "default")]
+    if checkpoint_candidates:
+        paths.extend((Path(path), "candidate") for path in checkpoint_candidates)
+    else:
+        paths.extend((path, "run-root") for path in sorted(root.glob("*.pt")))
+        checkpoint_dir = root / "checkpoints"
+        if checkpoint_dir.exists():
+            paths.extend((path, "checkpoints") for path in sorted(checkpoint_dir.glob("*.pt")))
+        paths.extend((path, "nested-run") for path in sorted(root.glob("*/checkpoint.pt")))
+
+    options: list[CheckpointOption] = []
+    seen: set[str] = set()
+    used_ids: set[str] = set()
+    default_key = _path_key(default_path)
+    for path, source in paths:
+        key = _path_key(path)
+        if key in seen:
+            continue
+        seen.add(key)
+        is_default = key == default_key
+        option_id = _unique_checkpoint_id(_checkpoint_id(root, path, is_default=is_default), used_ids)
+        option_tokenizer = Path(tokenizer_path) if tokenizer_path is not None and is_default else path.parent / "tokenizer.json"
+        options.append(
+            CheckpointOption(
+                id=option_id,
+                name=path.parent.name if path.name == "checkpoint.pt" and path.parent != root else path.stem,
+                path=str(path),
+                exists=path.exists(),
+                is_default=is_default,
+                tokenizer_path=str(option_tokenizer),
+                tokenizer_exists=option_tokenizer.exists(),
+                source=source,
+            )
+        )
+    options.sort(key=lambda item: (not item.is_default, item.id))
+    return options
+
+
+def build_checkpoints_payload(
+    run_dir: str | Path,
+    checkpoint_path: str | Path | None = None,
+    tokenizer_path: str | Path | None = None,
+    checkpoint_candidates: list[str | Path] | None = None,
+) -> dict[str, Any]:
+    options = discover_checkpoint_options(
+        run_dir,
+        checkpoint_path,
+        tokenizer_path=tokenizer_path,
+        checkpoint_candidates=checkpoint_candidates,
+    )
+    return {
+        "status": "ok",
+        "run_dir": str(Path(run_dir)),
+        "default_checkpoint_id": options[0].id if options else None,
+        "checkpoint_count": len(options),
+        "checkpoints": [option.to_dict() for option in options],
+    }
+
+
+def resolve_checkpoint_option(options: list[CheckpointOption], selector: str | None = None) -> CheckpointOption:
+    if not options:
+        raise ValueError("no checkpoints are configured")
+    if selector is None:
+        return options[0]
+    wanted = selector.strip()
+    if not wanted:
+        return options[0]
+    if wanted.isdigit():
+        index = int(wanted) - 1
+        if 0 <= index < len(options):
+            option = options[index]
+            if not option.exists:
+                raise ValueError(f"checkpoint does not exist: {option.id}")
+            return option
+    for option in options:
+        if wanted in {option.id, option.name, option.path, Path(option.path).name}:
+            if not option.exists:
+                raise ValueError(f"checkpoint does not exist: {option.id}")
+            return option
+    raise ValueError(f"checkpoint selector did not match an allowed checkpoint: {selector}")
 
 
 def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
@@ -240,23 +360,48 @@ def create_handler(
     generator_factory: Callable[[str | Path, str | Path | None, str], Any] = MiniGPTGenerator,
     safety_profile: InferenceSafetyProfile | None = None,
     request_log_path: str | Path | None = None,
+    checkpoint_candidates: list[str | Path] | None = None,
 ) -> type[BaseHTTPRequestHandler]:
     root = Path(run_dir)
     checkpoint = Path(checkpoint_path) if checkpoint_path is not None else root / "checkpoint.pt"
-    generator = generator_factory(checkpoint, tokenizer_path, device)
     safety = safety_profile or InferenceSafetyProfile()
     request_log = Path(request_log_path) if request_log_path is not None else root / "inference_requests.jsonl"
+    checkpoint_options = discover_checkpoint_options(root, checkpoint, tokenizer_path=tokenizer_path, checkpoint_candidates=checkpoint_candidates)
+    generators: dict[str, Any] = {}
+
+    def generator_for(option: CheckpointOption) -> Any:
+        if option.id not in generators:
+            selected_tokenizer = Path(option.tokenizer_path) if option.tokenizer_path is not None else tokenizer_path
+            generators[option.id] = generator_factory(option.path, selected_tokenizer, device)
+        return generators[option.id]
 
     class MiniGPTServerHandler(BaseHTTPRequestHandler):
-        server_version = "MiniGPTServer/0.2"
+        server_version = "MiniGPTServer/0.3"
 
         def do_GET(self) -> None:
             parsed = urlparse(self.path)
             if parsed.path == "/api/health":
-                self._send_json(build_health_payload(root, checkpoint, safety_profile=safety, request_log_path=request_log))
+                self._send_json(
+                    build_health_payload(
+                        root,
+                        checkpoint,
+                        safety_profile=safety,
+                        request_log_path=request_log,
+                        checkpoint_candidates=checkpoint_candidates,
+                    )
+                )
+                return
+            if parsed.path == "/api/checkpoints":
+                self._send_json(build_checkpoints_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
                 return
             if parsed.path == "/api/model-info":
-                self._send_json(build_model_info_payload(root, checkpoint, tokenizer_path))
+                selector = _query_value(parsed.query, "checkpoint")
+                try:
+                    option = resolve_checkpoint_option(checkpoint_options, selector)
+                except ValueError as exc:
+                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                self._send_json(build_model_info_payload(root, option.path, option.tokenizer_path, option.id))
                 return
             if parsed.path in {"/", "/playground.html"}:
                 html_path = root / "playground.html"
@@ -272,20 +417,26 @@ def create_handler(
                 self._send_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
                 return
             request: GenerationRequest | None = None
+            option: CheckpointOption | None = None
             try:
                 payload = self._read_json_body()
                 request = parse_generation_request(payload, safety)
-                response = generator.generate(request)
+                option = resolve_checkpoint_option(checkpoint_options, request.checkpoint)
+                if not option.exists:
+                    raise ValueError(f"checkpoint does not exist: {option.id}")
+                response = generator_for(option).generate(request)
             except ValueError as exc:
-                self._log_generation("bad_request", request=request, error=str(exc))
+                self._log_generation("bad_request", request=request, checkpoint_option=option, error=str(exc))
                 self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
                 return
             except Exception as exc:
-                self._log_generation("error", request=request, error=str(exc))
+                self._log_generation("error", request=request, checkpoint_option=option, error=str(exc))
                 self._send_json({"error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
                 return
-            self._log_generation("ok", request=request, response=response)
-            self._send_json(response.to_dict())
+            self._log_generation("ok", request=request, response=response, checkpoint_option=option)
+            payload = response.to_dict()
+            payload["checkpoint_id"] = option.id
+            self._send_json(payload)
 
         def do_OPTIONS(self) -> None:
             self.send_response(HTTPStatus.NO_CONTENT)
@@ -326,17 +477,20 @@ def create_handler(
             *,
             request: GenerationRequest | None = None,
             response: GenerationResponse | None = None,
+            checkpoint_option: CheckpointOption | None = None,
             error: str | None = None,
         ) -> None:
             event: dict[str, Any] = {
                 "endpoint": "/api/generate",
                 "status": status,
                 "client": self.client_address[0] if self.client_address else None,
-                "checkpoint": str(checkpoint),
+                "checkpoint": checkpoint_option.path if checkpoint_option is not None else str(checkpoint),
+                "checkpoint_id": checkpoint_option.id if checkpoint_option is not None else None,
             }
             if request is not None:
                 event.update(
                     {
+                        "requested_checkpoint": request.checkpoint,
                         "prompt_chars": len(request.prompt),
                         "max_new_tokens": request.max_new_tokens,
                         "temperature": request.temperature,
@@ -383,6 +537,7 @@ def run_server(
     device: str = "auto",
     safety_profile: InferenceSafetyProfile | None = None,
     request_log_path: str | Path | None = None,
+    checkpoint_candidates: list[str | Path] | None = None,
 ) -> ThreadingHTTPServer:
     handler = create_handler(
         run_dir,
@@ -391,6 +546,7 @@ def run_server(
         device=device,
         safety_profile=safety_profile,
         request_log_path=request_log_path,
+        checkpoint_candidates=checkpoint_candidates,
     )
     server = ThreadingHTTPServer((host, port), handler)
     return server
@@ -416,6 +572,55 @@ def _empty_top_k(value: Any) -> bool:
     if isinstance(value, str):
         return value.strip() in {"", "0", "none", "None"}
     return value == 0
+
+
+def _query_value(query: str, key: str) -> str | None:
+    values = parse_qs(query).get(key)
+    if not values:
+        return None
+    return values[0]
+
+
+def _path_key(path: str | Path) -> str:
+    return str(Path(path).resolve()).casefold()
+
+
+def _checkpoint_id(root: Path, path: Path, *, is_default: bool) -> str:
+    if is_default:
+        return "default"
+    try:
+        relative = path.resolve().relative_to(root.resolve())
+        if relative.name == "checkpoint.pt" and len(relative.parts) > 1:
+            return _slug(relative.parts[-2])
+        return _slug(relative.with_suffix("").as_posix())
+    except ValueError:
+        return _slug(path.stem)
+
+
+def _unique_checkpoint_id(base: str, used: set[str]) -> str:
+    candidate = base or "checkpoint"
+    index = 2
+    while candidate in used:
+        candidate = f"{base}-{index}"
+        index += 1
+    used.add(candidate)
+    return candidate
+
+
+def _slug(value: Any) -> str:
+    text = str(value).replace("\\", "/").strip().strip("/")
+    output = []
+    for char in text:
+        if char.isalnum():
+            output.append(char.lower())
+        elif char in {"-", "_", ".", "/"}:
+            output.append("-")
+        else:
+            output.append("-")
+    slug = "".join(output).strip("-")
+    while "--" in slug:
+        slug = slug.replace("--", "-")
+    return slug or "checkpoint"
 
 
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:

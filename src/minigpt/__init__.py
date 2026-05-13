@@ -48,11 +48,14 @@ __all__ = [
     "SamplingCase",
     "SamplingResult",
     "default_sampling_cases",
+    "CheckpointOption",
     "InferenceSafetyProfile",
     "GenerationRequest",
     "GenerationResponse",
+    "build_checkpoints_payload",
     "build_health_payload",
     "build_model_info_payload",
+    "discover_checkpoint_options",
     "parse_generation_request",
 ]
 
@@ -99,11 +102,14 @@ _EXPORTS = {
     "SamplingCase": ("sampling", "SamplingCase"),
     "SamplingResult": ("sampling", "SamplingResult"),
     "default_sampling_cases": ("sampling", "default_sampling_cases"),
+    "CheckpointOption": ("server", "CheckpointOption"),
     "InferenceSafetyProfile": ("server", "InferenceSafetyProfile"),
     "GenerationRequest": ("server", "GenerationRequest"),
     "GenerationResponse": ("server", "GenerationResponse"),
+    "build_checkpoints_payload": ("server", "build_checkpoints_payload"),
     "build_health_payload": ("server", "build_health_payload"),
     "build_model_info_payload": ("server", "build_model_info_payload"),
+    "discover_checkpoint_options": ("server", "discover_checkpoint_options"),
     "parse_generation_request": ("server", "parse_generation_request"),
 }
 

@@ -1,6 +1,6 @@
 # MiniGPT 代码讲解记录_评估基准阶段
 
-本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v38 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison 和本地推理安全边界比较”。
+本目录从 v35 开始记录 MiniGPT 的“评估基准阶段”。上一阶段 `代码讲解记录_发布治理阶段` 已经把 v31-v34 的 release gate profiles、profile comparison、profile deltas 和 configurable baseline 收口；v35-v39 开始，项目重点从“发布治理继续细分”转向“模型能力如何被固定任务集、稳定数据版本、baseline model comparison、本地推理安全边界和 checkpoint 选择链路比较”。
 
 ## 写入规则
 
@@ -11,6 +11,7 @@
 51-v36-dataset-versioning.md
 52-v37-baseline-model-comparison.md
 53-v38-inference-safety-profile.md
+54-v39-checkpoint-selector.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -30,12 +31,13 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v38，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison 到本地推理 API 安全画像的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
+截至 v39，项目已经具备从训练、数据治理、数据版本、实验记录、发布治理、benchmark prompt suite、baseline model comparison、本地推理 API 安全画像到 playground checkpoint selector 的完整学习型 AI 工程链路。发布治理已经能解释 profile 分歧；评估基准阶段开始回答更直接的问题：
 
 ```text
 同一个 checkpoint 在固定任务集上表现如何？
 同一个 checkpoint 到底用了哪个 dataset version？
 不同 checkpoint、tokenizer、模型大小和训练步数以后能否横向比较？
+本地 playground 当前选择的是哪个 checkpoint？
 ```
 
 当前评估主线：
@@ -48,6 +50,8 @@ eval prompts
  -> generation quality analysis
  -> registry / dashboard / playground artifact links
  -> baseline model comparison
+ -> local inference safety profile
+ -> checkpoint selector
 ```
 
 ## 后续讲解索引
@@ -61,10 +65,12 @@ eval prompts
  -> 第三十七版代码讲解：给 compare_runs 增加 baseline、模型签名、loss/参数 delta、Markdown/HTML 报告和截图证据
 53-v38-inference-safety-profile.md
  -> 第三十八版代码讲解：给本地推理 API 增加安全画像、model-info 端点、请求日志和浏览器验证证据
+54-v39-checkpoint-selector.md
+ -> 第三十九版代码讲解：给 playground server 增加 checkpoint 发现、选择、model-info 查询、生成路由和请求日志证据
 ```
 
-后续推进 v39 时，在这里继续追加 `54-v39-主题.md`。
+后续推进 v40 时，在这里继续追加 `55-v40-主题.md`，或在新阶段目录开始新的能力线。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集和稳定数据版本比较”的过程。
+本目录记录 MiniGPT 从“证据链很完整”转向“模型能力可以被固定任务集、稳定数据版本、baseline 和可选择 checkpoint 比较”的过程。

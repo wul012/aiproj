@@ -7,13 +7,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.server import InferenceSafetyProfile, run_server
+from minigpt.server import InferenceSafetyProfile, discover_checkpoint_options, run_server
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Serve MiniGPT playground and local generation API.")
     parser.add_argument("--run-dir", type=Path, default=ROOT / "runs" / "minigpt")
     parser.add_argument("--checkpoint", type=Path, default=None)
+    parser.add_argument("--checkpoint-candidate", type=Path, action="append", default=[], help="Additional selectable checkpoint path, repeatable")
     parser.add_argument("--tokenizer", type=Path, default=None)
     parser.add_argument("--host", type=str, default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
@@ -47,11 +48,20 @@ def main() -> None:
         device=args.device,
         safety_profile=safety,
         request_log_path=args.request_log,
+        checkpoint_candidates=args.checkpoint_candidate or None,
+    )
+    checkpoint_options = discover_checkpoint_options(
+        args.run_dir,
+        args.checkpoint,
+        tokenizer_path=args.tokenizer,
+        checkpoint_candidates=args.checkpoint_candidate or None,
     )
     url = f"http://{args.host}:{server.server_port}/"
     print(f"serving={url}", flush=True)
     print(f"run_dir={args.run_dir}", flush=True)
     print(f"model_info={url}api/model-info", flush=True)
+    print(f"checkpoints={url}api/checkpoints", flush=True)
+    print(f"checkpoint_count={len(checkpoint_options)}", flush=True)
     print(f"request_log={args.request_log or args.run_dir / 'inference_requests.jsonl'}", flush=True)
     print(f"safety={safety.to_dict()}", flush=True)
     try:

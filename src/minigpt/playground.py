@@ -113,6 +113,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
         "runDir": payload["run_dir"],
         "defaults": defaults,
         "commands": payload["commands"],
+        "checkpoints": [],
     }
     sections = [
         _style(),
@@ -256,7 +257,7 @@ h1 { margin: 0 0 6px; font-size: 27px; letter-spacing: 0; }
 h2 { margin: 26px 32px 12px; font-size: 18px; letter-spacing: 0; }
 h3 { margin: 10px 0 5px; font-size: 15px; letter-spacing: 0; }
 p { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
-button, input, textarea {
+button, input, output, select, textarea {
   font: inherit;
 }
 button {
@@ -268,7 +269,7 @@ button {
   cursor: pointer;
 }
 button:hover { border-color: var(--blue); color: var(--blue); }
-textarea, input {
+textarea, input, select {
   width: 100%;
   border: 1px solid #b8c5d2;
   border-radius: 7px;
@@ -277,6 +278,7 @@ textarea, input {
   color: var(--ink);
 }
 textarea { min-height: 96px; resize: vertical; }
+output { color: var(--muted); }
 .stats, .links {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
@@ -373,13 +375,19 @@ function quoteArg(value) {{
   const text = String(value).replaceAll("'", "''");
   return "'" + text + "'";
 }}
+function selectedCheckpointOption() {{
+  const select = document.getElementById('checkpointSelect');
+  if (!select || !select.value) return null;
+  return (MiniGPTPlayground.checkpoints || []).find((item) => item.id === select.value) || null;
+}}
 function buildCommands() {{
   const prompt = document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt;
   const maxTokens = document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens;
   const temperature = document.getElementById('temperatureInput').value || MiniGPTPlayground.defaults.temperature;
   const topK = document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k;
   const seed = document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed;
-  const checkpoint = MiniGPTPlayground.runDir + '/checkpoint.pt';
+  const option = selectedCheckpointOption();
+  const checkpoint = option ? option.path : MiniGPTPlayground.runDir + '/checkpoint.pt';
   const generate = `python scripts/generate.py --checkpoint ${{quoteArg(checkpoint)}} --prompt ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --temperature ${{temperature}} --top-k ${{topK}}`;
   const chat = `python scripts/chat.py --checkpoint ${{quoteArg(checkpoint)}} --message ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --temperature ${{temperature}} --top-k ${{topK}}`;
   const sample = `python scripts/sample_lab.py --checkpoint ${{quoteArg(checkpoint)}} --prompt ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --case conservative:0.6:10:${{seed}} --case balanced:${{temperature}}:${{topK}}:${{Number(seed) + 1}} --case creative:1.1:0:${{Number(seed) + 2}}`;
@@ -387,8 +395,36 @@ function buildCommands() {{
   document.getElementById('chatCommand').textContent = chat;
   document.getElementById('sampleCommand').textContent = sample;
 }}
+async function loadCheckpoints() {{
+  const select = document.getElementById('checkpointSelect');
+  const status = document.getElementById('checkpointStatus');
+  if (!select || !status) return;
+  try {{
+    const response = await fetch('/api/checkpoints');
+    if (!response.ok) throw new Error('checkpoint endpoint unavailable');
+    const data = await response.json();
+    MiniGPTPlayground.checkpoints = Array.isArray(data.checkpoints) ? data.checkpoints : [];
+    select.innerHTML = '';
+    for (const item of MiniGPTPlayground.checkpoints) {{
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.textContent = `${{item.id}}${{item.is_default ? ' (default)' : ''}}`;
+      option.disabled = !item.exists;
+      select.appendChild(option);
+    }}
+    if (data.default_checkpoint_id) select.value = data.default_checkpoint_id;
+    status.textContent = `${{MiniGPTPlayground.checkpoints.length}} checkpoint option(s)`;
+    select.disabled = MiniGPTPlayground.checkpoints.length === 0;
+    buildCommands();
+  }} catch (error) {{
+    MiniGPTPlayground.checkpoints = [];
+    status.textContent = 'Start scripts/serve_playground.py for checkpoint selection.';
+    select.disabled = true;
+  }}
+}}
 async function generateLive() {{
   const output = document.getElementById('liveOutput');
+  const checkpoint = selectedCheckpointOption();
   const payload = {{
     prompt: document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt,
     max_new_tokens: Number(document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens),
@@ -396,6 +432,7 @@ async function generateLive() {{
     top_k: Number(document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k),
     seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
   }};
+  if (checkpoint) payload.checkpoint = checkpoint.id;
   output.textContent = 'Generating...';
   try {{
     const response = await fetch('/api/generate', {{
@@ -420,8 +457,10 @@ window.addEventListener('DOMContentLoaded', () => {{
   for (const id of ['promptInput', 'maxTokensInput', 'temperatureInput', 'topKInput', 'seedInput']) {{
     document.getElementById(id).addEventListener('input', buildCommands);
   }}
+  document.getElementById('checkpointSelect').addEventListener('change', buildCommands);
   document.getElementById('liveGenerateButton').addEventListener('click', generateLive);
   buildCommands();
+  loadCheckpoints();
 }});
 </script>"""
 
@@ -461,7 +500,9 @@ def _live_section() -> str:
     return """<h2>Live Generate</h2>
 <section class="panel">
   <div class="live-actions">
+    <label><span class="label">Checkpoint</span><select id="checkpointSelect"><option value="">default</option></select></label>
     <button id="liveGenerateButton" type="button">Generate</button>
+    <output id="checkpointStatus">Checkpoint selector loads from /api/checkpoints.</output>
   </div>
   <pre id="liveOutput" class="output"></pre>
 </section>"""

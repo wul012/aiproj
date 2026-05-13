@@ -42,6 +42,9 @@ b/37/解释/说明.md
 b/38/图片
 b/38/解释/说明.md
  -> v38 inference safety profile 的运行截图和解释
+b/39/图片
+b/39/解释/说明.md
+ -> v39 checkpoint selector 的运行截图和解释
 ```
 
 写入规则：

@@ -16,9 +16,11 @@ from minigpt.server import (
     GenerationResponse,
     InferenceSafetyProfile,
     append_inference_log,
+    build_checkpoints_payload,
     build_health_payload,
     build_model_info_payload,
     create_handler,
+    discover_checkpoint_options,
     parse_generation_request,
 )
 from http.server import ThreadingHTTPServer
@@ -53,6 +55,7 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(request.temperature, 0.7)
         self.assertIsNone(request.top_k)
         self.assertEqual(request.seed, 5)
+        self.assertIsNone(request.checkpoint)
 
     def test_parse_generation_request_rejects_bad_values(self) -> None:
         with self.assertRaises(ValueError):
@@ -92,6 +95,29 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(health["safety"]["max_prompt_chars"], 123)
             self.assertEqual(health["model_info_endpoint"], "/api/model-info")
             self.assertEqual(Path(health["request_log"]).name, "requests.jsonl")
+            self.assertEqual(health["checkpoints_endpoint"], "/api/checkpoints")
+            self.assertEqual(health["checkpoint_count"], 1)
+
+    def test_discover_checkpoint_options_finds_default_and_candidates(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            (run_dir / "checkpoint.pt").write_bytes(b"default")
+            candidate = run_dir / "candidate" / "checkpoint.pt"
+            candidate.parent.mkdir()
+            candidate.write_bytes(b"candidate")
+            extra = run_dir / "checkpoints" / "wide.pt"
+            extra.parent.mkdir()
+            extra.write_bytes(b"wide")
+
+            options = discover_checkpoint_options(run_dir)
+            payload = build_checkpoints_payload(run_dir)
+
+            self.assertEqual(options[0].id, "default")
+            self.assertTrue(options[0].is_default)
+            self.assertIn("candidate", {option.id for option in options})
+            self.assertIn("checkpoints-wide", {option.id for option in options})
+            self.assertEqual(payload["default_checkpoint_id"], "default")
+            self.assertGreaterEqual(payload["checkpoint_count"], 3)
 
     def test_model_info_payload_reads_run_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -119,6 +145,7 @@ class ServerTests(unittest.TestCase):
             info = build_model_info_payload(run_dir)
 
             self.assertEqual(info["status"], "ok")
+            self.assertIsNone(info["checkpoint_id"])
             self.assertTrue(info["checkpoint_exists"])
             self.assertEqual(info["tokenizer"], "char")
             self.assertEqual(info["model_config"], {"n_layer": 1})
@@ -142,6 +169,9 @@ class ServerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = Path(tmp)
             (run_dir / "checkpoint.pt").write_bytes(b"fake")
+            candidate = run_dir / "candidate" / "checkpoint.pt"
+            candidate.parent.mkdir()
+            candidate.write_bytes(b"candidate")
             handler = create_handler(run_dir, device="cpu", generator_factory=StubGenerator)
             server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
             thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -151,22 +181,35 @@ class ServerTests(unittest.TestCase):
                 health = _get_json(base + "/api/health")
                 self.assertTrue(health["checkpoint_exists"])
                 self.assertEqual(health["safety"]["max_new_tokens"], 512)
+                self.assertEqual(health["default_checkpoint_id"], "default")
 
                 info = _get_json(base + "/api/model-info")
                 self.assertEqual(info["status"], "ok")
                 self.assertTrue(info["checkpoint_exists"])
+                self.assertEqual(info["checkpoint_id"], "default")
+
+                checkpoints = _get_json(base + "/api/checkpoints")
+                self.assertEqual(checkpoints["default_checkpoint_id"], "default")
+                self.assertTrue(any(item["id"] == "candidate" for item in checkpoints["checkpoints"]))
+
+                candidate_info = _get_json(base + "/api/model-info?checkpoint=candidate")
+                self.assertEqual(candidate_info["checkpoint_id"], "candidate")
 
                 response = _post_json(
                     base + "/api/generate",
-                    {"prompt": "abc", "max_new_tokens": 5, "temperature": 0.8, "top_k": 0, "seed": 7},
+                    {"prompt": "abc", "max_new_tokens": 5, "temperature": 0.8, "top_k": 0, "seed": 7, "checkpoint": "candidate"},
                 )
                 self.assertEqual(response["generated"], "abc::generated")
                 self.assertIsNone(response["top_k"])
+                self.assertEqual(response["checkpoint_id"], "candidate")
+                self.assertTrue(response["checkpoint"].endswith(str(Path("candidate") / "checkpoint.pt")))
                 log_path = run_dir / "inference_requests.jsonl"
                 self.assertTrue(log_path.exists())
                 log_record = json.loads(log_path.read_text(encoding="utf-8").splitlines()[-1])
                 self.assertEqual(log_record["status"], "ok")
                 self.assertEqual(log_record["prompt_chars"], 3)
+                self.assertEqual(log_record["checkpoint_id"], "candidate")
+                self.assertEqual(log_record["requested_checkpoint"], "candidate")
             finally:
                 server.shutdown()
                 server.server_close()
