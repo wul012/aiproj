@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 98 is a readability and maturity-summary cleanup for the MiniGPT learning project. The codebase still contains the same model, data, benchmark, registry, local inference, release governance, training-scale, and report-utils capabilities from v97; this version changes how the README presents that maturity so a reviewer can understand the project without reading a long feature ledger first.
+Version 99 is a project audit report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, audit policy, and release behavior, while moving the project audit exporter onto the shared report utility foundation used by the recent migration series.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -12,16 +12,16 @@ Version 98 is a readability and maturity-summary cleanup for the MiniGPT learnin
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, cross-run scorecard comparison | benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
-| Release and maturity governance | Registry, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
+| Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v97 report-utils migration series, including release bundle in v97 | `src/minigpt/report_utils.py`, report-utils tests, v83-v97 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v99 report-utils migration series, including project audit in v99 | `src/minigpt/report_utils.py`, report-utils tests, v83-v99 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v97 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v99 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 98 is a readability and maturity-summary cleanup for the MiniGPT learnin
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 98 focus
+## Version 99 focus
 
-- Replaced the overlong current-version feature ledger with a maturity matrix, capability map, and explicit next pressure points.
-- Kept the detailed historical version list, project structure, commands, and screenshot archive sections available below for traceability.
-- Added v98 archive and explanation records so this documentation cleanup remains part of the same evidence discipline as code changes.
-- No model behavior, training policy, release gate logic, or report generation code changed in this version.
+- Migrated `project_audit.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict/list normalization.
+- Kept audit scoring, request-history checks, recommendations, Markdown/HTML layout, and run-row policy unchanged.
+- Left audit-specific `_string_list`, Markdown cell, ranking, and formatting helpers local because they encode project audit display semantics.
+- Added v99 archive and explanation records so the release-governance upstream cleanup has the same evidence trail as earlier migrations.
 
 ## Version tags
 
@@ -143,6 +143,7 @@ v95.0.0 MiniGPT v95 promoted training scale comparison report utility migration
 v96.0.0 MiniGPT v96 generation quality report utility migration
 v97.0.0 MiniGPT v97 release bundle report utility migration
 v98.0.0 MiniGPT v98 README maturity summary cleanup
+v99.0.0 MiniGPT v99 project audit report utility migration
 ```
 
 ## Project structure
@@ -1872,6 +1873,15 @@ Version 98 screenshots are archived under `c/98`:
 - `03-git-diff-check.png`: staged documentation-only diff and whitespace check for the README maturity cleanup
 - `04-doc-content-check.png`: v98 explanation files describe the boundary, evidence role, and no-code-change policy
 
+Version 99 screenshots are archived under `c/99`:
+
+- `01-unit-tests.png`: migrated project audit tests, report utility tests, compile check, and full regression tests
+- `02-project-audit-complete-smoke.png`: project audit smoke confirming complete registry/model-card/request-history evidence still passes
+- `03-project-audit-missing-model-card-smoke.png`: project audit smoke confirming missing model-card evidence still fails with recommendations
+- `04-project-audit-structure-check.png`: source/test/docs structure check for conservative project audit migration and archive indexes
+- `05-playwright-project-audit-html.png`: generated project audit HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v99 README, c/99 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -1992,6 +2002,7 @@ Project-maturity records start at v48:
 84-v69-training-portfolio-batch.md
 ...
 113-v98-readme-maturity-summary.md
+114-v99-project-audit-report-utils.md
 ```
 
 ## Learning map
