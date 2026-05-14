@@ -88,6 +88,9 @@ c/91/解释/说明.md
 c/92/图片
 c/92/解释/说明.md
  -> v92 training scale workflow report utility migration 的运行截图和解释
+c/93/图片
+c/93/解释/说明.md
+ -> v93 training scale promotion report utility migration 的运行截图和解释
 ```
 
 写入规则：
