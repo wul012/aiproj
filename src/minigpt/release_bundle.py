@@ -1,15 +1,17 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import html
 import json
 import os
 from pathlib import Path
 from typing import Any
 
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    utc_now,
+    write_json_payload,
+)
 
 
 def build_release_bundle(
@@ -67,9 +69,7 @@ def build_release_bundle(
 
 
 def write_release_bundle_json(bundle: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(bundle, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(bundle, path)
 
 
 def render_release_bundle_markdown(bundle: dict[str, Any]) -> str:
@@ -575,16 +575,8 @@ def _markdown_table(rows: list[tuple[str, Any]]) -> list[str]:
     return lines
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _fmt(value: Any) -> str:
@@ -621,7 +613,3 @@ def _rank_label(value: Any) -> str:
 
 def _md(value: Any) -> str:
     return _fmt_any(value).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
