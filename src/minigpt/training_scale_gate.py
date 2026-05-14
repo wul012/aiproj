@@ -1,11 +1,21 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    csv_cell as _csv_value,
+    display_command as _display_command,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_json_payload,
+)
 
 
 POLICY_PROFILES: dict[str, dict[str, Any]] = {
@@ -86,9 +96,7 @@ def build_training_scale_gate(
 
 
 def write_training_scale_gate_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_training_scale_gate_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -105,7 +113,7 @@ def write_training_scale_gate_csv(report: dict[str, Any], path: str | Path) -> N
                     "status": check.get("status"),
                     "message": check.get("message"),
                     "recommendation": check.get("recommendation"),
-                    "details": json.dumps(check.get("details", {}), ensure_ascii=False, sort_keys=True),
+                    "details": _csv_value(check.get("details", {})),
                 }
             )
 
@@ -214,10 +222,6 @@ def write_training_scale_gate_outputs(report: dict[str, Any], out_dir: str | Pat
     write_training_scale_gate_markdown(report, paths["markdown"])
     write_training_scale_gate_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _policy(profile: str, overrides: dict[str, Any] | None) -> dict[str, Any]:
@@ -490,28 +494,6 @@ def _card(label: str, value: Any) -> str:
     return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
 
 
-def _display_command(value: Any) -> str:
-    if isinstance(value, list):
-        return " ".join(str(part) for part in value)
-    return "" if value is None else str(value)
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
 def _int(value: Any) -> int:
     try:
         return int(value)
@@ -524,12 +506,3 @@ def _float(value: Any) -> float:
         return float(value)
     except (TypeError, ValueError):
         return 0.0
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

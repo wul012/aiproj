@@ -79,6 +79,9 @@ c/88/解释/说明.md
 c/89/图片
 c/89/解释/说明.md
  -> v89 gated run report utility migration 的运行截图和解释
+c/90/图片
+c/90/解释/说明.md
+ -> v90 training scale gate report utility migration 的运行截图和解释
 ```
 
 写入规则：
