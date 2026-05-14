@@ -1,12 +1,20 @@
 from __future__ import annotations
 
-import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
 
+from minigpt.report_utils import (
+    as_dict as _dict,
+    display_command as _display_command,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_csv_row,
+    write_json_payload,
+)
 from minigpt.training_scale_run_comparison import load_training_scale_run
 
 
@@ -97,9 +105,7 @@ def build_training_scale_run_decision(
 
 
 def write_training_scale_run_decision_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -118,22 +124,21 @@ def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Pa
         "rejected_count",
         "execute_command",
     ]
-    with out_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerow(
-            {
-                "decision_status": report.get("decision_status"),
-                "recommended_action": report.get("recommended_action"),
-                "selected_run": selected.get("name"),
-                "selected_gate_status": selected.get("gate_status"),
-                "selected_batch_status": selected.get("batch_status"),
-                "selected_readiness_score": selected.get("readiness_score"),
-                "candidate_count": summary.get("candidate_count"),
-                "rejected_count": summary.get("rejected_count"),
-                "execute_command": report.get("execute_command_text"),
-            }
-        )
+    write_csv_row(
+        {
+            "decision_status": report.get("decision_status"),
+            "recommended_action": report.get("recommended_action"),
+            "selected_run": selected.get("name"),
+            "selected_gate_status": selected.get("gate_status"),
+            "selected_batch_status": selected.get("batch_status"),
+            "selected_readiness_score": selected.get("readiness_score"),
+            "candidate_count": summary.get("candidate_count"),
+            "rejected_count": summary.get("rejected_count"),
+            "execute_command": report.get("execute_command_text"),
+        },
+        out_path,
+        fieldnames,
+    )
 
 
 def render_training_scale_run_decision_markdown(report: dict[str, Any]) -> str:
@@ -245,10 +250,6 @@ def write_training_scale_run_decision_outputs(report: dict[str, Any], out_dir: s
     write_training_scale_run_decision_markdown(report, paths["markdown"])
     write_training_scale_run_decision_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _resolve_comparison_path(path: Path) -> Path:
@@ -505,47 +506,8 @@ def _card(label: str, value: Any) -> str:
     return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
 def _int(value: Any) -> int:
     try:
         return int(value)
     except (TypeError, ValueError):
         return 0
-
-
-def _display_command(value: Any) -> str:
-    if not isinstance(value, list):
-        return "" if value is None else str(value)
-    return " ".join(_quote_command_part(str(part)) for part in value)
-
-
-def _quote_command_part(part: str) -> str:
-    if not part:
-        return '""'
-    if any(char.isspace() for char in part) or '"' in part:
-        return '"' + part.replace('"', '\\"') + '"'
-    return part
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
