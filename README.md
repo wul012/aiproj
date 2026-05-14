@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 74 is a MiniGPT learning project with training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, reproducible training portfolio pipelines, training portfolio comparison reports, release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 75 is a MiniGPT learning project with a consolidated training scale workflow, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, reproducible training portfolio pipelines, training portfolio comparison reports, release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` and `b/<version>` archives, and current `c/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -15,6 +15,7 @@ Version 74 is a MiniGPT learning project with training scale run decisions, gate
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Dataset card exporter that combines dataset version, quality, provenance, intended use, limitations, artifacts, recommendations, JSON, Markdown, and browser HTML evidence
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
+- Consolidated training scale workflow that runs planning, gated profile dry-runs, comparison, and decision from one CLI, reducing the v70-v74 command chain to one auditable handoff
 - Training scale run decision report that reads a v73 comparison, selects the safest candidate for execution, records rejected runs, and emits the next `--execute` command as JSON/CSV/Markdown/HTML evidence
 - Gated training scale run comparison that compares several `training_scale_run.json` reports, explains allowed/blocked and gate/batch deltas, and exports JSON/CSV/Markdown/HTML evidence
 - Gated training scale runner that reads a scale plan, writes gate evidence, and only hands variants to the portfolio batch runner when the selected policy allows it
@@ -91,8 +92,8 @@ Version 74 is a MiniGPT learning project with training scale run decisions, gate
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, release-quality maturity narratives, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, release-quality maturity narratives, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, consolidated training scale workflows, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, release-quality maturity narratives, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, release-quality maturity narratives, consolidated training scale workflows, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -175,6 +176,7 @@ v71.0.0 MiniGPT v71 training scale gate
 v72.0.0 MiniGPT v72 gated training scale run
 v73.0.0 MiniGPT v73 gated training scale run comparison
 v74.0.0 MiniGPT v74 training scale run decision
+v75.0.0 MiniGPT v75 consolidated training scale workflow
 ```
 
 ## Project structure
@@ -362,6 +364,7 @@ v74.0.0 MiniGPT v74 training scale run decision
 │   ├── plan_training_scale.py
 │   ├── prepare_dataset.py
 │   ├── register_runs.py
+│   ├── run_training_scale_workflow.py
 │   ├── run_training_scale_plan.py
 │   ├── run_training_portfolio_batch.py
 │   ├── run_training_portfolio.py
@@ -396,6 +399,7 @@ v74.0.0 MiniGPT v74 training scale run decision
 │       ├── sampling.py
 │       ├── server.py
 │       ├── tokenizer.py
+│       ├── training_scale_workflow.py
 │       ├── training_scale_run_decision.py
 │       ├── training_scale_run_comparison.py
 │       ├── training_scale_run.py
@@ -431,6 +435,7 @@ v74.0.0 MiniGPT v74 training scale run decision
 │   ├── test_sampling.py
 │   ├── test_server.py
 │   ├── test_tokenizer.py
+│   ├── test_training_scale_workflow.py
 │   ├── test_training_scale_run_decision.py
 │   ├── test_training_scale_run_comparison.py
 │   ├── test_training_scale_run.py
@@ -785,6 +790,14 @@ python scripts/decide_training_scale_run.py runs/training-scale-run-comparison/t
 ```
 
 The decision report writes `training_scale_run_decision.json`, `training_scale_run_decision.csv`, `training_scale_run_decision.md`, and `training_scale_run_decision.html`. It selects the highest-readiness gate-allowed run that reached the batch dry-run layer, records rejected runs and rejection reasons, and emits the follow-up `run_training_scale_plan.py --execute` command. Use `--require-gate-pass` when warning-level gates should not be executable.
+
+Run the whole scale-governance chain from one command:
+
+```powershell
+python scripts/run_training_scale_workflow.py data --out-root runs/training-scale-workflow --profile review --profile standard --baseline-profile review
+```
+
+The workflow writes `training_scale_workflow.json`, `training_scale_workflow.csv`, `training_scale_workflow.md`, and `training_scale_workflow.html`, plus nested `plan/`, `runs/<profile>/`, `comparison/`, and `decision/` artifacts. It is the v75 consolidation path for v70-v74: plan the corpus, run selected gate profiles, compare them, choose the next executable candidate, and keep the generated `--execute` command as a reviewed handoff rather than automatically running it.
 
 Plan a batch matrix of multiple training portfolio variants:
 
@@ -1599,6 +1612,15 @@ Version 74 screenshots are archived under `c/74`:
 - `05-playwright-training-scale-run-decision-html.png`: generated decision HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v74 README, c/74 archive, project-maturity explanation, and c README check
 
+Version 75 screenshots are archived under `c/75`:
+
+- `01-unit-tests.png`: consolidated training scale workflow tests, compile check, and full regression tests
+- `02-training-scale-workflow-smoke.png`: one-command workflow smoke covering plan, review/standard gated runs, comparison, and decision
+- `03-training-scale-workflow-strict-smoke.png`: stricter decision mode showing how the consolidated workflow stops before execution
+- `04-training-scale-workflow-structure-check.png`: source/test/docs structure check for workflow builder, CLI, renderers, c archive, and AGENTS rule
+- `05-playwright-training-scale-workflow-html.png`: generated workflow HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v75 README, c/75 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -1784,6 +1806,8 @@ The gated training scale run comparison layer reads several `training_scale_run.
 
 The training scale run decision layer reads that comparison, selects the safest candidate for staged execution, records rejected alternatives, and prints the exact follow-up `--execute` command.
 
+The consolidated training scale workflow layer ties v70-v74 into one command so scale planning, profile gating, comparison, and execution decision can be reviewed as one artifact set.
+
 The checkpoint comparison layer turns selectable checkpoints into a small local comparison table with file status, tokenizer readiness, parameter/dataset deltas, model-info links, and one-click selection inside the playground.
 
 The side-by-side generation layer sends the same prompt and sampling settings to two selected checkpoints, returns left/right outputs with a compact comparison summary, and records the pair request in JSONL.
@@ -1849,5 +1873,5 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Use the v72 gated runner on a real larger Chinese corpus, then use v73 comparison and v74 decision to compare review/standard profiles before executing the generated v69-compatible batch.
+- Use the v75 consolidated workflow on a real larger Chinese corpus, then execute only the selected profile after reviewing the generated handoff command.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
