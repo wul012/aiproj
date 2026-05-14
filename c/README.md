@@ -19,6 +19,9 @@ c/<version>/解释/说明.md
 c/69/图片
 c/69/解释/说明.md
  -> v69 training portfolio batch matrix 的运行截图和解释
+c/70/图片
+c/70/解释/说明.md
+ -> v70 training scale planner 的运行截图和解释
 ```
 
 写入规则：
