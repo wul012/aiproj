@@ -52,6 +52,9 @@ c/79/解释/说明.md
 c/80/图片
 c/80/解释/说明.md
  -> v80 promoted training scale baseline decision 的运行截图和解释
+c/81/图片
+c/81/解释/说明.md
+ -> v81 promoted training scale next-cycle seed 的运行截图和解释
 ```
 
 写入规则：

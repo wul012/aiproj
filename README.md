@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 80 is a MiniGPT learning project with a promoted training scale baseline decision layer, a promoted training scale comparison layer, a promoted training scale index layer, a training scale promotion acceptance layer, a controlled training scale execution handoff, a consolidated training scale workflow, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, reproducible training portfolio pipelines, training portfolio comparison reports, release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 81 is a MiniGPT learning project with a promoted training scale next-cycle seed layer, a promoted training scale baseline decision layer, a promoted training scale comparison layer, a promoted training scale index layer, a training scale promotion acceptance layer, a controlled training scale execution handoff, a consolidated training scale workflow, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, reproducible training portfolio pipelines, training portfolio comparison reports, release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` and `b/<version>` archives, and current `c/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -15,6 +15,7 @@ Version 80 is a MiniGPT learning project with a promoted training scale baseline
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Dataset card exporter that combines dataset version, quality, provenance, intended use, limitations, artifacts, recommendations, JSON, Markdown, and browser HTML evidence
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
+- Promoted training scale next-cycle seed that reads a v80 promoted baseline decision, turns the selected baseline into the next training-scale planning entry point, and blocks the seed when the baseline decision or next corpus inputs are incomplete
 - Promoted training scale baseline decision that reads a v79 promoted comparison, selects the next stable promoted baseline, and blocks baseline selection when the upstream comparison is incomplete or candidates miss readiness gates
 - Promoted training scale comparison that consumes a v78 promotion index, filters to promoted runs, reuses the gated scale run comparison logic, and blocks comparison when promoted inputs are insufficient or missing
 - Promoted training scale index that reads one or more v77 promotion reports, filters to compare-ready promoted runs, and emits a stable compare command and HTML/CSV/Markdown/JSON index
@@ -98,7 +99,9 @@ Version 80 is a MiniGPT learning project with a promoted training scale baseline
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
 - Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, promoted training scale baseline decisions, promoted training scale comparisons, training scale promotion indexes, training scale promotions, controlled training scale handoffs, consolidated training scale workflows, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, release-quality maturity narratives, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- v81 unit tests cover promoted training scale next-cycle seeds, including ready, review, blocked, missing-source, output, and HTML escaping paths
 - Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, release-quality maturity narratives, promoted training scale baseline decisions, promoted training scale comparisons, training scale promotion indexes, training scale promotions, controlled training scale handoffs, consolidated training scale workflows, training scale run decisions, gated training scale run comparisons, gated training scale runs, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- v81 code explanation records describe how the next-cycle seed consumes a baseline decision and produces the next training-scale plan command
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -187,6 +190,7 @@ v77.0.0 MiniGPT v77 training scale promotion acceptance
 v78.0.0 MiniGPT v78 training scale promotion index
 v79.0.0 MiniGPT v79 promoted training scale comparison
 v80.0.0 MiniGPT v80 promoted training scale baseline decision
+v81.0.0 MiniGPT v81 promoted training scale next-cycle seed
 ```
 
 ## Project structure
@@ -363,6 +367,7 @@ v80.0.0 MiniGPT v80 promoted training scale baseline decision
 │   ├── compare_runs.py
 │   ├── compare_promoted_training_scale_runs.py
 │   ├── decide_promoted_training_scale_baseline.py
+│   ├── build_promoted_training_scale_seed.py
 │   ├── compare_training_portfolios.py
 │   ├── compare_training_scale_runs.py
 │   ├── decide_training_scale_run.py
@@ -407,6 +412,7 @@ v80.0.0 MiniGPT v80 promoted training scale baseline decision
 │       ├── project_audit.py
 │       ├── prediction.py
 │       ├── promoted_training_scale_decision.py
+│       ├── promoted_training_scale_seed.py
 │       ├── promoted_training_scale_comparison.py
 │       ├── registry.py
 │       ├── release_bundle.py
@@ -448,6 +454,7 @@ v80.0.0 MiniGPT v80 promoted training scale baseline decision
 │   ├── test_playground.py
 │   ├── test_prediction.py
 │   ├── test_promoted_training_scale_decision.py
+│   ├── test_promoted_training_scale_seed.py
 │   ├── test_promoted_training_scale_comparison.py
 │   ├── test_project_audit.py
 │   ├── test_registry.py
@@ -864,6 +871,14 @@ python scripts/decide_promoted_training_scale_baseline.py runs/training-scale-wo
 ```
 
 The promoted decision writes `promoted_training_scale_decision.json`, `promoted_training_scale_decision.csv`, `promoted_training_scale_decision.md`, and `promoted_training_scale_decision.html`. It selects a stable promoted baseline only after the promoted comparison has completed, and marks the decision as `accepted`, `review`, or `blocked` based on readiness, gate status, batch status, and upstream comparison state.
+
+Build the next-cycle training scale seed from a promoted baseline decision:
+
+```powershell
+python scripts/build_promoted_training_scale_seed.py runs/training-scale-workflow/promoted-decision data --out-dir runs/training-scale-workflow/promoted-seed --plan-out-dir runs/training-scale-workflow/next-plan
+```
+
+The promoted seed writes `promoted_training_scale_seed.json`, `promoted_training_scale_seed.csv`, `promoted_training_scale_seed.md`, and `promoted_training_scale_seed.html`. It records the selected promoted baseline, validates the next corpus sources, and prints the follow-up `plan_training_scale.py` command only when the decision and corpus handoff are complete.
 
 Plan a batch matrix of multiple training portfolio variants:
 
@@ -1732,6 +1747,15 @@ Version 80 screenshots are archived under `c/80`:
 - `05-playwright-promoted-training-scale-decision-html.png`: generated promoted decision HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v80 README, c/80 archive, project-maturity explanation, and c README check
 
+Version 81 screenshots are archived under `c/81`:
+
+- `01-unit-tests.png`: promoted training scale next-cycle seed tests, compile check, and full regression tests
+- `02-promoted-training-scale-seed-ready-smoke.png`: accepted baseline decision plus corpus sources producing a ready next-plan command
+- `03-promoted-training-scale-seed-blocked-smoke.png`: blocked seed when the next corpus input is missing
+- `04-promoted-training-scale-seed-structure-check.png`: source/test/docs structure check for seed builder, CLI, renderers, c archive, and AGENTS rule
+- `05-playwright-promoted-training-scale-seed-html.png`: generated seed HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v81 README, c/81 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -1930,6 +1954,8 @@ The promoted training scale comparison layer consumes that index and runs the co
 
 The promoted training scale baseline decision layer consumes the promoted comparison, selects the next stable baseline, and keeps the comparison blocked or in review when the upstream evidence is incomplete.
 
+The promoted training scale next-cycle seed layer consumes that baseline decision, checks the selected run and next corpus sources, and emits the next `plan_training_scale.py` command only when the handoff evidence is complete.
+
 The checkpoint comparison layer turns selectable checkpoints into a small local comparison table with file status, tokenizer readiness, parameter/dataset deltas, model-info links, and one-click selection inside the playground.
 
 The side-by-side generation layer sends the same prompt and sampling settings to two selected checkpoints, returns left/right outputs with a compact comparison summary, and records the pair request in JSONL.
@@ -1995,5 +2021,5 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Use the v75-v80 workflow/handoff/promotion/index/promoted-comparison/decision chain on a real larger Chinese corpus.
+- Use the v75-v81 workflow/handoff/promotion/index/promoted-comparison/decision/seed chain on a real larger Chinese corpus.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
