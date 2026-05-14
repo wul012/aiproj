@@ -1,13 +1,25 @@
 from __future__ import annotations
 
-import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 import subprocess
 import time
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    count_available_artifacts,
+    display_command as _display_command,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    list_of_strs as _list_of_strs,
+    make_artifact_rows,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_csv_row,
+    write_json_payload,
+)
 
 
 def load_promoted_training_scale_seed(path: str | Path) -> dict[str, Any]:
@@ -74,9 +86,7 @@ def build_promoted_training_scale_seed_handoff(
 
 
 def write_promoted_training_scale_seed_handoff_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -98,25 +108,24 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "next_batch_command_available",
         "blocked_reason",
     ]
-    with out_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerow(
-            {
-                "handoff_status": summary.get("handoff_status"),
-                "seed_status": report.get("seed_status"),
-                "decision_status": summary.get("decision_status"),
-                "execute": report.get("execute"),
-                "returncode": execution.get("returncode"),
-                "elapsed_seconds": execution.get("elapsed_seconds"),
-                "artifact_count": summary.get("artifact_count"),
-                "available_artifact_count": summary.get("available_artifact_count"),
-                "plan_status": summary.get("plan_status"),
-                "plan_variant_count": summary.get("plan_variant_count"),
-                "next_batch_command_available": summary.get("next_batch_command_available"),
-                "blocked_reason": report.get("blocked_reason"),
-            }
-        )
+    write_csv_row(
+        {
+            "handoff_status": summary.get("handoff_status"),
+            "seed_status": report.get("seed_status"),
+            "decision_status": summary.get("decision_status"),
+            "execute": report.get("execute"),
+            "returncode": execution.get("returncode"),
+            "elapsed_seconds": execution.get("elapsed_seconds"),
+            "artifact_count": summary.get("artifact_count"),
+            "available_artifact_count": summary.get("available_artifact_count"),
+            "plan_status": summary.get("plan_status"),
+            "plan_variant_count": summary.get("plan_variant_count"),
+            "next_batch_command_available": summary.get("next_batch_command_available"),
+            "blocked_reason": report.get("blocked_reason"),
+        },
+        out_path,
+        fieldnames,
+    )
 
 
 def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any]) -> str:
@@ -231,10 +240,6 @@ def write_promoted_training_scale_seed_handoff_outputs(report: dict[str, Any], o
     return {key: str(value) for key, value in paths.items()}
 
 
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
-
 def _resolve_path(value: Any, base_dir: Path) -> Path:
     if value is None:
         return base_dir
@@ -278,17 +283,15 @@ def _plan_report_path(project_root: Path, next_plan: dict[str, Any]) -> Path:
 
 def _artifact_rows(project_root: Path, next_plan: dict[str, Any]) -> list[dict[str, Any]]:
     plan_out_dir = _resolve_path(next_plan.get("plan_out_dir"), project_root)
-    return [
-        _artifact("training_scale_plan_json", plan_out_dir / "training_scale_plan.json"),
-        _artifact("training_scale_variants_json", plan_out_dir / "training_scale_variants.json"),
-        _artifact("training_scale_plan_csv", plan_out_dir / "training_scale_plan.csv"),
-        _artifact("training_scale_plan_markdown", plan_out_dir / "training_scale_plan.md"),
-        _artifact("training_scale_plan_html", plan_out_dir / "training_scale_plan.html"),
-    ]
-
-
-def _artifact(key: str, path: Path) -> dict[str, Any]:
-    return {"key": key, "path": str(path), "exists": path.exists(), "count": 1 if path.exists() else 0}
+    return make_artifact_rows(
+        [
+            ("training_scale_plan_json", plan_out_dir / "training_scale_plan.json"),
+            ("training_scale_variants_json", plan_out_dir / "training_scale_variants.json"),
+            ("training_scale_plan_csv", plan_out_dir / "training_scale_plan.csv"),
+            ("training_scale_plan_markdown", plan_out_dir / "training_scale_plan.md"),
+            ("training_scale_plan_html", plan_out_dir / "training_scale_plan.html"),
+        ]
+    )
 
 
 def _summary(
@@ -313,7 +316,7 @@ def _summary(
         "source_count": len(_list_of_dicts(next_plan.get("sources"))),
         "missing_source_count": sum(1 for row in _list_of_dicts(next_plan.get("sources")) if not row.get("exists")),
         "artifact_count": len(artifact_rows),
-        "available_artifact_count": sum(1 for row in artifact_rows if row.get("exists")),
+        "available_artifact_count": count_available_artifacts(artifact_rows),
         "plan_status": "available" if plan_report else "missing",
         "plan_scale_tier": plan_dataset.get("scale_tier"),
         "plan_variant_count": len(_list_of_dicts(plan_report.get("variants"))),
@@ -525,48 +528,3 @@ def _decode_timeout_text(value: Any) -> str:
 def _tail(text: str, max_chars: int = 700) -> str:
     text = text.strip()
     return text[-max_chars:] if len(text) > max_chars else text
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _list_of_strs(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
-def _display_command(value: Any) -> str:
-    if not isinstance(value, list):
-        return "" if value is None else str(value)
-    return " ".join(_quote_command_part(str(part)) for part in value)
-
-
-def _quote_command_part(part: str) -> str:
-    if not part:
-        return '""'
-    if any(char.isspace() for char in part) or '"' in part:
-        return '"' + part.replace('"', '\\"') + '"'
-    return part
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

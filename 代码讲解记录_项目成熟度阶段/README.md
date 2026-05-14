@@ -59,6 +59,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 95-v80-promoted-training-scale-decision.md
 96-v81-promoted-training-scale-seed.md
 97-v82-promoted-training-scale-seed-handoff.md
+98-v83-report-utils-consolidation.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -78,7 +79,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v82，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed 与 promoted training scale seed handoff 的完整学习型 AI 工程链路。
+截至 v83，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff 与 shared report utility consolidation 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -125,6 +126,7 @@ v79 的关键变化是：新增 promoted training scale comparison，读取 v78 
 v80 的关键变化是：新增 promoted training scale baseline decision，读取 v79 promoted comparison，选择下一阶段稳定 baseline，并在上游比较不完整或候选不合格时输出 blocked/review。
 v81 的关键变化是：新增 promoted training scale next-cycle seed，读取 v80 baseline decision 和下一轮语料来源，输出下一阶段的 training-scale plan 命令，并在 baseline decision 或 corpus 输入不完整时保持 blocked。
 v82 的关键变化是：新增 promoted training scale seed handoff，读取 v81 seed，默认验证下一轮 plan 命令，显式 `--execute` 时生成 training scale plan 产物，并暴露后续 batch command。
+v83 的关键变化是：不继续新拆一层报告，而是新增 shared report utility，把 artifact row、JSON/CSV 写出、命令展示、Markdown/HTML 转义和 list/dict 归一化收口，并先迁移 v82 handoff 验证这条公共层。
 
 ## 后续讲解索引
 
@@ -199,12 +201,15 @@ v82 的关键变化是：新增 promoted training scale seed handoff，读取 v8
  -> 第八十一版代码讲解：读取 promoted baseline decision 和下一轮语料来源，生成下一阶段 training-scale plan 命令并保留阻断边界
 97-v82-promoted-training-scale-seed-handoff.md
  -> 第八十二版代码讲解：读取 next-cycle seed，验证或执行 plan 命令，记录 plan 产物和后续 batch command
+98-v83-report-utils-consolidation.md
+ -> 第八十三版代码讲解：把近期重复的报告小工具收口为 report_utils，并迁移 promoted seed handoff 作为低风险验证点
 ```
 
-后续继续推进时，在这里追加 `98-v83-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `99-v84-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
 本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision 和下一阶段路线”的过程。
 v81 起还会把 promoted baseline 再往前推进到 next-cycle seed，让下一轮训练规模规划能直接消费上一步的决策结果。
 v82 起会把 seed 里的 plan 命令落成可审计的 plan 产物，让下一轮 batch command 也能作为证据继续传递。
+v83 起开始把重复报告基础设施收口为公共工具，后续版本要优先复用公共层，而不是继续复制私有 helper。

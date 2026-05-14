@@ -58,6 +58,9 @@ c/81/解释/说明.md
 c/82/图片
 c/82/解释/说明.md
  -> v82 promoted training scale seed handoff 的运行截图和解释
+c/83/图片
+c/83/解释/说明.md
+ -> v83 report utility consolidation 的运行截图和解释
 ```
 
 写入规则：
