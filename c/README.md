@@ -64,6 +64,9 @@ c/83/解释/说明.md
 c/84/图片
 c/84/解释/说明.md
  -> v84 controlled handoff report utility migration 的运行截图和解释
+c/85/图片
+c/85/解释/说明.md
+ -> v85 promoted seed report utility migration 的运行截图和解释
 ```
 
 写入规则：
