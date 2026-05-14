@@ -1,13 +1,24 @@
 from __future__ import annotations
 
-import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 import subprocess
 import time
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    count_available_artifacts,
+    display_command as _display_command,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    make_artifact_row,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_csv_row,
+    write_json_payload,
+)
 
 
 def load_training_scale_workflow(path: str | Path) -> dict[str, Any]:
@@ -69,9 +80,7 @@ def build_training_scale_handoff(
 
 
 def write_training_scale_handoff_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -90,22 +99,21 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
         "command",
         "blocked_reason",
     ]
-    with out_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerow(
-            {
-                "handoff_status": summary.get("handoff_status"),
-                "decision_status": report.get("decision_status"),
-                "execute": report.get("execute"),
-                "returncode": execution.get("returncode"),
-                "elapsed_seconds": execution.get("elapsed_seconds"),
-                "artifact_count": summary.get("artifact_count"),
-                "available_artifact_count": summary.get("available_artifact_count"),
-                "command": report.get("command_text"),
-                "blocked_reason": report.get("blocked_reason"),
-            }
-        )
+    write_csv_row(
+        {
+            "handoff_status": summary.get("handoff_status"),
+            "decision_status": report.get("decision_status"),
+            "execute": report.get("execute"),
+            "returncode": execution.get("returncode"),
+            "elapsed_seconds": execution.get("elapsed_seconds"),
+            "artifact_count": summary.get("artifact_count"),
+            "available_artifact_count": summary.get("available_artifact_count"),
+            "command": report.get("command_text"),
+            "blocked_reason": report.get("blocked_reason"),
+        },
+        out_path,
+        fieldnames,
+    )
 
 
 def render_training_scale_handoff_markdown(report: dict[str, Any]) -> str:
@@ -210,10 +218,6 @@ def write_training_scale_handoff_outputs(report: dict[str, Any], out_dir: str | 
     write_training_scale_handoff_markdown(report, paths["markdown"])
     write_training_scale_handoff_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _resolve_workflow_path(path: Path) -> Path:
@@ -321,20 +325,16 @@ def _artifact_rows(command: list[str]) -> list[dict[str, Any]]:
         return []
     root = Path(out_root)
     rows = [
-        _artifact("training_scale_run_json", root / "training_scale_run.json"),
-        _artifact("training_scale_run_html", root / "training_scale_run.html"),
-        _artifact("batch_json", root / "batch" / "training_portfolio_batch.json"),
-        _artifact("batch_html", root / "batch" / "training_portfolio_batch.html"),
+        make_artifact_row("training_scale_run_json", root / "training_scale_run.json"),
+        make_artifact_row("training_scale_run_html", root / "training_scale_run.html"),
+        make_artifact_row("batch_json", root / "batch" / "training_portfolio_batch.json"),
+        make_artifact_row("batch_html", root / "batch" / "training_portfolio_batch.html"),
     ]
     variant_reports = sorted((root / "batch" / "variants").glob("*/training_portfolio.json")) if (root / "batch" / "variants").exists() else []
-    rows.append({"key": "variant_portfolio_reports", "path": str(root / "batch" / "variants"), "exists": bool(variant_reports), "count": len(variant_reports)})
+    rows.append(make_artifact_row("variant_portfolio_reports", root / "batch" / "variants", exists=bool(variant_reports), count=len(variant_reports)))
     checkpoints = sorted((root / "batch" / "variants").glob("*/runs/*/checkpoint.pt")) if (root / "batch" / "variants").exists() else []
-    rows.append({"key": "variant_checkpoints", "path": str(root / "batch" / "variants"), "exists": bool(checkpoints), "count": len(checkpoints)})
+    rows.append(make_artifact_row("variant_checkpoints", root / "batch" / "variants", exists=bool(checkpoints), count=len(checkpoints)))
     return rows
-
-
-def _artifact(key: str, path: Path) -> dict[str, Any]:
-    return {"key": key, "path": str(path), "exists": path.exists(), "count": 1 if path.exists() else 0}
 
 
 def _summary(
@@ -343,7 +343,6 @@ def _summary(
     execution: dict[str, Any],
     artifact_rows: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    available = sum(1 for row in artifact_rows if row.get("exists"))
     decision_summary = _dict(decision.get("summary"))
     workflow_summary = _dict(workflow.get("summary"))
     return {
@@ -352,7 +351,7 @@ def _summary(
         "selected_profile": decision_summary.get("selected_run_name") or workflow_summary.get("selected_profile"),
         "recommended_action": decision.get("recommended_action") or workflow_summary.get("recommended_action"),
         "artifact_count": len(artifact_rows),
-        "available_artifact_count": available,
+        "available_artifact_count": count_available_artifacts(artifact_rows),
         "returncode": execution.get("returncode"),
     }
 
@@ -459,42 +458,3 @@ def _decode_timeout_text(value: Any) -> str:
 def _tail(text: str, max_chars: int = 700) -> str:
     text = text.strip()
     return text[-max_chars:] if len(text) > max_chars else text
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
-def _display_command(value: Any) -> str:
-    if not isinstance(value, list):
-        return "" if value is None else str(value)
-    return " ".join(_quote_command_part(str(part)) for part in value)
-
-
-def _quote_command_part(part: str) -> str:
-    if not part:
-        return '""'
-    if any(char.isspace() for char in part) or '"' in part:
-        return '"' + part.replace('"', '\\"') + '"'
-    return part
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
