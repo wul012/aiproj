@@ -40,6 +40,9 @@ c/75/解释/说明.md
 c/76/图片
 c/76/解释/说明.md
  -> v76 controlled training scale handoff 的运行截图和解释
+c/77/图片
+c/77/解释/说明.md
+ -> v77 training scale promotion acceptance 的运行截图和解释
 ```
 
 写入规则：

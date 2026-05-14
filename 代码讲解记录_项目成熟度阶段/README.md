@@ -53,6 +53,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 89-v74-training-scale-run-decision.md
 90-v75-training-scale-workflow.md
 91-v76-training-scale-handoff.md
+92-v77-training-scale-promotion.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -72,7 +73,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v76，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow 与 controlled training scale handoff 的完整学习型 AI 工程链路。
+截至 v77，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff 与 training scale promotion acceptance 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -113,6 +114,7 @@ v73 的关键变化是：新增 training scale run comparison，比较多份 `tr
 v74 的关键变化是：新增 training scale run decision，读取 v73 comparison，选择下一次最适合进入 `--execute` 的 run，并记录被拒绝候选和原因。
 v75 的关键变化是：新增 consolidated training scale workflow，把 v70-v74 的 plan、profile run、comparison 和 decision 收口为一个入口与一组总览产物。
 v76 的关键变化是：新增 controlled training scale handoff，读取 v75 workflow decision，默认验证 handoff，显式 `--execute` 时才运行选中的训练命令并记录真实执行证据；同时修正 tiny corpus 训练规模计划的 `block_size`，避免默认 90/10 split 后验证集 token 数不足。
+v77 的关键变化是：新增 training scale promotion acceptance，读取完成的 handoff、gated scale run、batch 和 per-variant portfolio 产物，判断本次训练结果是 `promoted`、`review` 还是 `blocked`。
 
 ## 后续讲解索引
 
@@ -175,10 +177,12 @@ v76 的关键变化是：新增 controlled training scale handoff，读取 v75 w
  -> 第七十五版代码讲解：把 v70-v74 训练规模治理链收口为统一 workflow 入口和总览报告
 91-v76-training-scale-handoff.md
  -> 第七十六版代码讲解：把 workflow 选中的执行命令变成可验证、可执行、可记录产物状态的 handoff
+92-v77-training-scale-promotion.md
+ -> 第七十七版代码讲解：把完成的 handoff 结果验收为 promoted/review/blocked，承接后续 registry、maturity 和对比链路
 ```
 
-后续继续推进时，在这里追加 `92-v77-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `93-v78-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff 和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance 和下一阶段路线”的过程。
