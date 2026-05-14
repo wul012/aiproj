@@ -48,6 +48,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 84-v69-training-portfolio-batch.md
 85-v70-training-scale-plan.md
 86-v71-training-scale-gate.md
+87-v72-gated-training-scale-run.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -67,7 +68,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v71，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner 与 training scale gate 的完整学习型 AI 工程链路。
+截至 v72，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate 与 gated training scale run 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -103,6 +104,7 @@ v68 的关键变化是：新增 training portfolio comparison，读取多份 `tr
 v69 的关键变化是：新增 training portfolio batch matrix，把多个训练 variant 组织成批量计划/执行入口，每个 variant 生成自己的 portfolio 报告，并自动接入 v68 的 portfolio comparison。
 v70 的关键变化是：新增 training scale planner，在执行更大语料训练前先扫描语料规模、质量状态和 token budget，生成可直接交给 v69 batch runner 的 `training_scale_variants.json`。
 v71 的关键变化是：新增 training scale gate，读取 v70 `training_scale_plan.json`，用 review/standard/strict profile 检查语料规模、质量警告、baseline、variant、token budget 和 corpus pass 是否适合执行。
+v72 的关键变化是：新增 gated training scale run，把 v70 scale plan、v71 gate 和 v69 batch runner 串成受控启动链路，gate 未允许时不会写 batch 产物。
 
 ## 后续讲解索引
 
@@ -155,10 +157,12 @@ v71 的关键变化是：新增 training scale gate，读取 v70 `training_scale
  -> 第七十版代码讲解：训练前扫描语料规模和质量，输出 batch 兼容的训练规模规划和 variants JSON
 86-v71-training-scale-gate.md
  -> 第七十一版代码讲解：在执行 batch 前对训练规模规划做准入检查，输出 pass/warn/fail gate 证据
+87-v72-gated-training-scale-run.md
+ -> 第七十二版代码讲解：把 scale plan 先过 gate，再在允许时交给 batch runner 生成 dry-run 或执行产物
 ```
 
-后续继续推进时，在这里追加 `87-v72-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `88-v73-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate 和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run 和下一阶段路线”的过程。
