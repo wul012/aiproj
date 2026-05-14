@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 65 is a MiniGPT learning project with project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 66 is a MiniGPT learning project with release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` archives, and current `b/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -26,6 +26,7 @@ Version 65 is a MiniGPT learning project with project maturity release readiness
 - Registry pair delta leaderboard that aggregates pair batch case deltas across many runs, records `pair_delta_summary`, and shows the largest generated deltas in registry HTML
 - Registry-level release readiness comparison tracking that reads per-run `release-readiness-comparison/release_readiness_comparison.json`, records improved/regressed/panel-changed counts, adds CSV columns, and shows Release Readiness Deltas in registry HTML
 - Project maturity release readiness trend context that reads registry readiness deltas, surfaces trend status in JSON/Markdown/HTML, and downgrades maturity review to `warn` when release readiness regressions are present
+- Release-quality maturity narrative exporter that combines maturity summary, registry release readiness trend, request-history stability, benchmark scorecards, and dataset cards into JSON/Markdown/HTML portfolio evidence
 - Project maturity summary builder that reads version tags, archives, code explanations, optional registry evidence, optional request history summary evidence, and writes a capability matrix plus request-history context to JSON/CSV/Markdown/HTML
 - Benchmark scorecard builder that consolidates eval suite coverage, generation quality, pair consistency, pair delta stability, evidence completeness, and optional registry context into JSON/CSV/Markdown/HTML
 - Benchmark scorecard drilldowns that group case scores by task type and difficulty, export a drilldown CSV, and identify the weakest task/difficulty groups
@@ -82,8 +83,8 @@ Version 65 is a MiniGPT learning project with project maturity release readiness
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, release-quality maturity narratives, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, release-quality maturity narratives, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -157,6 +158,7 @@ v62.0.0 MiniGPT v62 release readiness dashboard
 v63.0.0 MiniGPT v63 release readiness comparison
 v64.0.0 MiniGPT v64 registry release readiness tracking
 v65.0.0 MiniGPT v65 maturity release readiness trend context
+v66.0.0 MiniGPT v66 release-quality maturity narrative
 ```
 
 ## Project structure
@@ -302,7 +304,7 @@ v65.0.0 MiniGPT v65 maturity release readiness trend context
 │   │   └── 解释/
 │   │       └── 说明.md
 │   ├── ...
-│   └── 56/
+│   └── 66/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -314,6 +316,7 @@ v65.0.0 MiniGPT v65 maturity release readiness trend context
 │   ├── audit_project.py
 │   ├── build_dashboard.py
 │   ├── build_experiment_card.py
+│   ├── build_maturity_narrative.py
 │   ├── build_release_bundle.py
 │   ├── build_model_card.py
 │   ├── build_playground.py
@@ -349,6 +352,7 @@ v65.0.0 MiniGPT v65 maturity release readiness trend context
 │       ├── generation_quality.py
 │       ├── history.py
 │       ├── manifest.py
+│       ├── maturity_narrative.py
 │       ├── model.py
 │       ├── model_card.py
 │       ├── model_report.py
@@ -375,6 +379,7 @@ v65.0.0 MiniGPT v65 maturity release readiness trend context
 │   ├── test_generation_quality.py
 │   ├── test_history.py
 │   ├── test_manifest.py
+│   ├── test_maturity_narrative.py
 │   ├── test_model.py
 │   ├── test_model_card.py
 │   ├── test_model_report.py
@@ -669,6 +674,14 @@ python scripts/compare_release_gate_profiles.py --bundle runs/release-bundle/rel
 
 The output directory contains `release_gate_profile_comparison.json`, `release_gate_profile_comparison.csv`, `release_gate_profile_deltas.csv`, `release_gate_profile_comparison.md`, and `release_gate_profile_comparison.html`. Use repeated `--bundle` arguments to compare several release bundles under the same profile set. The reports record `baseline_profile`; the delta CSV and the Markdown/HTML Profile Deltas section explain how each compared profile differs from that baseline profile.
 
+Build a release-quality maturity narrative from the current evidence chain:
+
+```powershell
+python scripts/build_maturity_narrative.py --project-root . --maturity runs/maturity-summary/maturity_summary.json --registry runs/registry/registry.json --request-history-summary runs/request-history-summary/request_history_summary.json --benchmark-scorecard runs/minigpt/benchmark-scorecard/benchmark_scorecard.json --dataset-card datasets/sample-zh/v1/dataset_card.json --out-dir runs/maturity-narrative
+```
+
+The output directory contains `maturity_narrative.json`, `maturity_narrative.md`, and `maturity_narrative.html`. The narrative does not retrain the model or recompute scorecards; it reads existing maturity, release-readiness trend, request-history, benchmark, and dataset-card evidence and turns them into one portfolio-facing review surface with `ready`, `review`, or `incomplete` status.
+
 Discover run directories under a parent:
 
 ```powershell
@@ -827,6 +840,42 @@ b/47/图片
 b/47/解释/说明.md
 b/48/图片
 b/48/解释/说明.md
+b/49/图片
+b/49/解释/说明.md
+b/50/图片
+b/50/解释/说明.md
+b/51/图片
+b/51/解释/说明.md
+b/52/图片
+b/52/解释/说明.md
+b/53/图片
+b/53/解释/说明.md
+b/54/图片
+b/54/解释/说明.md
+b/55/图片
+b/55/解释/说明.md
+b/56/图片
+b/56/解释/说明.md
+b/57/图片
+b/57/解释/说明.md
+b/58/图片
+b/58/解释/说明.md
+b/59/图片
+b/59/解释/说明.md
+b/60/图片
+b/60/解释/说明.md
+b/61/图片
+b/61/解释/说明.md
+b/62/图片
+b/62/解释/说明.md
+b/63/图片
+b/63/解释/说明.md
+b/64/图片
+b/64/解释/说明.md
+b/65/图片
+b/65/解释/说明.md
+b/66/图片
+b/66/解释/说明.md
 ```
 
 Version 1 screenshots:
@@ -1355,6 +1404,15 @@ Version 65 screenshots:
 - `05-playwright-maturity-release-readiness-html.png`: generated maturity HTML opened through Playwright with installed Google Chrome and Release Readiness Trend Context visible
 - `06-docs-check.png`: v65 docs, b/65 archive, and project-maturity explanation check
 
+Version 66 screenshots:
+
+- `01-unit-tests.png`: maturity narrative tests, compile check, and full regression tests
+- `02-maturity-narrative-ready-smoke.png`: CLI smoke where maturity, release-readiness trend, request history, benchmark scorecard, and dataset card produce a ready portfolio narrative
+- `03-maturity-narrative-review-smoke.png`: CLI smoke where a release-readiness regression changes the portfolio narrative to review
+- `04-maturity-narrative-structure-check.png`: source/test/docs structure check for the narrative builder, CLI, renderers, evidence matrix, and recommendations
+- `05-playwright-maturity-narrative-html.png`: generated maturity narrative HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v66 docs, b/66 archive, and project-maturity explanation check
+
 ## Code explanation records
 
 Start here:
@@ -1469,6 +1527,7 @@ Project-maturity records start at v48:
 78-v63-release-readiness-comparison.md
 79-v64-registry-release-readiness-tracking.md
 80-v65-maturity-release-readiness-trend.md
+81-v66-maturity-narrative.md
 ```
 
 ## Learning map
@@ -1517,6 +1576,8 @@ The release readiness comparison layer compares multiple readiness dashboards ag
 The registry release readiness tracking layer reads per-run release readiness comparison outputs, adds improved/regressed/panel-changed columns and counts, and surfaces Release Readiness Deltas beside loss, rubric, and pair evidence in registry HTML.
 
 The maturity release readiness trend layer reads registry-level readiness comparison summaries, surfaces Release Readiness Trend Context in maturity JSON/Markdown/HTML, and marks maturity review as `warn` when release readiness regressions exist.
+
+The maturity narrative layer combines maturity summary, registry release-readiness trend, request-history stability, benchmark scorecards, and dataset cards into one JSON/Markdown/HTML portfolio review surface.
 
 The checkpoint comparison layer turns selectable checkpoints into a small local comparison table with file status, tokenizer readiness, parameter/dataset deltas, model-info links, and one-click selection inside the playground.
 
@@ -1583,5 +1644,5 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Generate a release-quality maturity narrative that combines request-history stability, release readiness trend, benchmark scorecards, and dataset cards into one portfolio summary.
+- Run a real larger-data training and evaluation pass, then feed the resulting scorecard, dataset card, and maturity narrative into the release-quality portfolio.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
