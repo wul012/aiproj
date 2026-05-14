@@ -70,6 +70,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 106-v91-training-scale-plan-report-utils.md
 107-v92-training-scale-workflow-report-utils.md
 108-v93-training-scale-promotion-report-utils.md
+109-v94-training-scale-promotion-index-report-utils.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -89,7 +90,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v93，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff、shared report utility consolidation、controlled handoff report-utils migration、promoted seed report-utils migration、promoted decision report-utils migration、run decision report-utils migration、run comparison report-utils migration、gated run report-utils migration、training scale gate report-utils migration、training scale plan report-utils migration、training scale workflow report-utils migration 与 training scale promotion report-utils migration 的完整学习型 AI 工程链路。
+截至 v94，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff、shared report utility consolidation、controlled handoff report-utils migration、promoted seed report-utils migration、promoted decision report-utils migration、run decision report-utils migration、run comparison report-utils migration、gated run report-utils migration、training scale gate report-utils migration、training scale plan report-utils migration、training scale workflow report-utils migration、training scale promotion report-utils migration 与 training scale promotion index report-utils migration 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -147,6 +148,7 @@ v90 的关键变化是：把 training scale gate 迁移到 `report_utils`，让 
 v91 的关键变化是：把 training scale planner 迁移到 `report_utils`，让 v70 的 corpus-scale planning evidence 也复用公共 JSON 写出、命令展示、Markdown/HTML 转义和 list/dict 归一化工具。
 v92 的关键变化是：把 consolidated training scale workflow 迁移到 `report_utils`，让 v75 的总入口 evidence 也复用公共 JSON 写出、Markdown/HTML 转义和 list/dict 归一化工具。
 v93 的关键变化是：把 training scale promotion acceptance 迁移到 `report_utils`，让 v77 的验收层 evidence 也复用公共 JSON 写出、Markdown/HTML 转义和 list/dict 归一化工具。
+v94 的关键变化是：把 training scale promotion index 迁移到 `report_utils`，让 v78 的 promoted-only 索引层 evidence 也复用公共 JSON 写出、Markdown/HTML 转义和 list/dict 归一化工具。
 
 ## 后续讲解索引
 
@@ -243,9 +245,11 @@ v93 的关键变化是：把 training scale promotion acceptance 迁移到 `repo
  -> 第九十二版代码讲解：把 consolidated training scale workflow 迁移到 report_utils，让 plan、gate、run、comparison、decision、workflow 六层训练规模证据共用报告基础层
 108-v93-training-scale-promotion-report-utils.md
  -> 第九十三版代码讲解：把 training scale promotion acceptance 迁移到 report_utils，让执行验收层也进入公共报告基础层
+109-v94-training-scale-promotion-index-report-utils.md
+ -> 第九十四版代码讲解：把 training scale promotion index 迁移到 report_utils，让 promoted-only 索引层也进入公共报告基础层
 ```
 
-后续继续推进时，在这里追加 `109-v94-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `110-v95-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
@@ -263,3 +267,4 @@ v90 起 training scale gate 也接入公共工具，说明 gate -> run -> compar
 v91 起 training scale planner 也接入公共工具，说明 plan -> gate -> run -> comparison -> decision 五层训练规模证据已经共享同一套报告基础设施。
 v92 起 consolidated training scale workflow 也接入公共工具，说明 plan -> gate -> run -> comparison -> decision -> workflow 六层训练规模证据已经共享同一套报告基础设施。
 v93 起 training scale promotion acceptance 也接入公共工具，说明训练规模执行验收层开始和前置执行链路共享同一套报告基础设施。
+v94 起 training scale promotion index 也接入公共工具，说明 promoted-only 索引层开始和训练规模执行验收层共享同一套报告基础设施。
