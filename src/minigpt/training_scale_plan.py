@@ -1,14 +1,21 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
-import html
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.data_prep import build_dataset_report, build_prepared_dataset
 from minigpt.data_quality import build_dataset_quality_report
+from minigpt.report_utils import (
+    as_dict as _dict,
+    display_command as _display_command,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_json_payload,
+)
 
 
 SCALE_TIERS = [
@@ -117,14 +124,10 @@ def scale_tier(char_count: int) -> str:
 
 
 def write_training_scale_plan_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_training_scale_variants_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema_version": 1,
         "generated_at": report.get("generated_at"),
@@ -132,7 +135,7 @@ def write_training_scale_variants_json(report: dict[str, Any], path: str | Path)
         "dataset": report.get("dataset", {}),
         "variants": list(report.get("variants", [])),
     }
-    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(payload, path)
 
 
 def write_training_scale_plan_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -280,10 +283,6 @@ def write_training_scale_plan_outputs(report: dict[str, Any], out_dir: str | Pat
     write_training_scale_plan_markdown(report, paths["markdown"])
     write_training_scale_plan_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _recommended_variants(
@@ -540,34 +539,3 @@ def _config_label(row: dict[str, Any]) -> str:
         f"iters={row.get('max_iters')}, batch={row.get('batch_size')}, block={row.get('block_size')}, "
         f"layers={row.get('n_layer')}, heads={row.get('n_head')}, embd={row.get('n_embd')}, seed={row.get('seed')}"
     )
-
-
-def _display_command(value: Any) -> str:
-    if isinstance(value, list):
-        return " ".join(str(part) for part in value)
-    return "" if value is None else str(value)
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
