@@ -67,6 +67,9 @@ c/84/解释/说明.md
 c/85/图片
 c/85/解释/说明.md
  -> v85 promoted seed report utility migration 的运行截图和解释
+c/86/图片
+c/86/解释/说明.md
+ -> v86 promoted decision report utility migration 的运行截图和解释
 ```
 
 写入规则：
