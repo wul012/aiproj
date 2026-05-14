@@ -56,34 +56,34 @@ CAPABILITY_SPECS = (
     CapabilitySpec(
         "registry_reporting",
         "Registry And Reporting",
-        (8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 46, 47),
+        (8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 46, 47, 64),
         5,
-        "Dashboard, run comparison, registry HTML, saved views, annotations, leaderboards, experiment/model cards, and pair report registry views.",
-        "Add drill-down exports for pair delta leaders by task type, difficulty, and checkpoint pair.",
+        "Dashboard, run comparison, registry HTML, saved views, annotations, leaderboards, experiment/model cards, pair report registry views, and release readiness trend tracking.",
+        "Feed release readiness trend context into maturity review and release summaries.",
     ),
     CapabilitySpec(
         "release_governance",
         "Release Governance",
-        (25, 26, 27, 28, 29, 30, 31, 32, 33, 34),
+        (25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 61, 62, 63),
         5,
-        "Project audit, release bundle, release gate, generation quality policy, policy profiles, profile comparison, deltas, and configurable baselines.",
-        "Keep release gates as a stable review layer instead of adding more profile variants.",
+        "Project audit, release bundle, release gate, generation quality policy, policy profiles, profile comparison, deltas, configurable baselines, request-history audit gates, readiness dashboard, and readiness comparison.",
+        "Use release readiness trend context to guide maturity and release review instead of adding more gate variants.",
     ),
     CapabilitySpec(
         "documentation_evidence",
         "Documentation And Evidence",
-        (1, 8, 13, 23, 32, 35, 45, 46, 47, 48),
+        (1, 8, 13, 23, 32, 35, 45, 46, 47, 48, 64, 65),
         5,
-        "Version tags, README history, code explanations, archived screenshots, browser checks, and maturity summary.",
+        "Version tags, README history, code explanations, archived screenshots, browser checks, maturity summary, and release trend evidence.",
         "Keep future code explanations tied to concrete evidence and summarize phases instead of expanding every small link change.",
     ),
     CapabilitySpec(
         "project_synthesis",
         "Project Synthesis",
-        (23, 24, 25, 26, 27, 37, 46, 47, 48),
+        (23, 24, 25, 26, 27, 37, 46, 47, 48, 60, 61, 62, 63, 64, 65),
         4,
-        "Experiment cards, model cards, audit/bundle/gate outputs, baseline comparison, registry pair report links, delta leaders, and maturity summary.",
-        "Use the maturity summary to choose the next real capability: benchmark scoring, larger data, or serving hardening.",
+        "Experiment cards, model cards, audit/bundle/gate outputs, baseline comparison, request-history context, release readiness context, registry trend tracking, and maturity summary.",
+        "Use maturity trend context to choose the next real capability: larger data, benchmark hardening, or serving review.",
     ),
 )
 
@@ -111,7 +111,18 @@ def build_maturity_summary(
         else _read_json(root / "runs" / "request-history-summary" / "request_history_summary.json")
     )
     capabilities = [_capability_row(spec, published_versions) for spec in CAPABILITY_SPECS]
-    summary = _summary(published_versions, archive_versions, explanation_versions, capabilities, registry, request_history_summary)
+    registry_context = _registry_context(registry)
+    release_readiness_context = _release_readiness_context(registry)
+    request_history_context = _request_history_context(request_history_summary)
+    summary = _summary(
+        published_versions,
+        archive_versions,
+        explanation_versions,
+        capabilities,
+        registry,
+        request_history_summary,
+        release_readiness_context,
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -120,9 +131,10 @@ def build_maturity_summary(
         "summary": summary,
         "capabilities": capabilities,
         "phase_timeline": _phase_timeline(published_versions),
-        "registry_context": _registry_context(registry),
-        "request_history_context": _request_history_context(request_history_summary),
-        "recommendations": _recommendations(capabilities, registry, request_history_summary),
+        "registry_context": registry_context,
+        "release_readiness_context": release_readiness_context,
+        "request_history_context": request_history_context,
+        "recommendations": _recommendations(capabilities, registry, request_history_summary, release_readiness_context),
     }
 
 
@@ -174,6 +186,9 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Average maturity level", overview.get("average_maturity_level")),
                 ("Overall status", overview.get("overall_status")),
                 ("Registry runs", overview.get("registry_runs")),
+                ("Release readiness trend", overview.get("release_readiness_trend_status")),
+                ("Release readiness deltas", overview.get("release_readiness_delta_count")),
+                ("Release readiness regressions", overview.get("release_readiness_regressed_count")),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -223,6 +238,28 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
             ),
         ]
     )
+    release_readiness = _dict(summary.get("release_readiness_context"))
+    lines.extend(
+        [
+            "",
+            "## Release Readiness Trend Context",
+            "",
+            *_markdown_table(
+                [
+                    ("Available", release_readiness.get("available")),
+                    ("Trend status", release_readiness.get("trend_status")),
+                    ("Comparison counts", _fmt_mapping(release_readiness.get("comparison_counts"))),
+                    ("Delta count", release_readiness.get("delta_count")),
+                    ("Runs with deltas", release_readiness.get("run_count")),
+                    ("Regressed", release_readiness.get("regressed_count")),
+                    ("Improved", release_readiness.get("improved_count")),
+                    ("Panel changed", release_readiness.get("panel_changed_count")),
+                    ("Changed panels", release_readiness.get("changed_panel_delta_count")),
+                    ("Max status delta", release_readiness.get("max_abs_status_delta")),
+                ]
+            ),
+        ]
+    )
     lines.extend(["", "## Recommendations", ""])
     lines.extend(f"- {item}" for item in _string_list(summary.get("recommendations")))
     return "\n".join(lines).rstrip() + "\n"
@@ -237,6 +274,7 @@ def write_maturity_summary_markdown(summary: dict[str, Any], path: str | Path) -
 def render_maturity_summary_html(summary: dict[str, Any]) -> str:
     overview = _dict(summary.get("summary"))
     registry = _dict(summary.get("registry_context"))
+    release_readiness = _dict(summary.get("release_readiness_context"))
     request_history = _dict(summary.get("request_history_context"))
     stats = [
         ("Current", overview.get("current_version")),
@@ -247,6 +285,8 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("Status", overview.get("overall_status")),
         ("Runs", overview.get("registry_runs")),
         ("Pair deltas", registry.get("pair_delta_cases")),
+        ("Release trend", release_readiness.get("trend_status")),
+        ("Readiness deltas", release_readiness.get("delta_count")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -266,6 +306,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
             _capability_section(_list_of_dicts(summary.get("capabilities"))),
             _timeline_section(_list_of_dicts(summary.get("phase_timeline"))),
             _registry_section(registry),
+            _release_readiness_section(release_readiness),
             _request_history_section(request_history),
             _recommendation_section(_string_list(summary.get("recommendations"))),
             "<footer>Generated by MiniGPT maturity summary exporter.</footer>",
@@ -355,12 +396,15 @@ def _summary(
     capabilities: list[dict[str, Any]],
     registry: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
+    release_readiness_context: dict[str, Any],
 ) -> dict[str, Any]:
     average = 0.0
     if capabilities:
         average = round(sum(float(item.get("maturity_level") or 0) for item in capabilities) / len(capabilities), 2)
     statuses = [str(item.get("status")) for item in capabilities]
     overall = "fail" if "fail" in statuses else "warn" if "warn" in statuses else "pass"
+    if overall == "pass" and release_readiness_context.get("trend_status") == "regressed":
+        overall = "warn"
     return {
         "current_version": max(published_versions) if published_versions else None,
         "published_version_count": len(published_versions),
@@ -369,6 +413,10 @@ def _summary(
         "average_maturity_level": average,
         "overall_status": overall,
         "registry_runs": _pick(registry, "run_count"),
+        "release_readiness_trend_status": release_readiness_context.get("trend_status"),
+        "release_readiness_delta_count": release_readiness_context.get("delta_count"),
+        "release_readiness_regressed_count": release_readiness_context.get("regressed_count"),
+        "release_readiness_improved_count": release_readiness_context.get("improved_count"),
         "request_history_status": _nested_pick(request_history_summary, "summary", "status"),
         "request_history_records": _nested_pick(request_history_summary, "summary", "total_log_records"),
         "request_history_timeout_rate": _nested_pick(request_history_summary, "summary", "timeout_rate"),
@@ -384,6 +432,7 @@ def _phase_timeline(published_versions: list[int]) -> list[dict[str, Any]]:
         ("v25-v34", "Release governance", range(25, 35)),
         ("v35-v47", "Evaluation benchmark and pair reports", range(35, 48)),
         ("v48-v60", "Project maturity and local inference hardening", range(48, 61)),
+        ("v61-v65", "Release readiness and maturity trend context", range(61, 66)),
     ]
     rows = []
     for versions, title, version_range in phases:
@@ -422,6 +471,55 @@ def _registry_context(registry: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
+def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(registry, dict):
+        return {
+            "available": False,
+            "trend_status": None,
+            "comparison_counts": {},
+            "delta_count": None,
+            "run_count": None,
+            "regressed_count": None,
+            "improved_count": None,
+            "panel_changed_count": None,
+            "changed_panel_delta_count": None,
+            "max_abs_status_delta": None,
+        }
+    counts = registry.get("release_readiness_comparison_counts")
+    delta_summary = _dict(registry.get("release_readiness_delta_summary"))
+    context = {
+        "available": bool(delta_summary) or isinstance(counts, dict),
+        "comparison_counts": counts if isinstance(counts, dict) else {},
+        "delta_count": delta_summary.get("delta_count"),
+        "run_count": delta_summary.get("run_count"),
+        "regressed_count": delta_summary.get("regressed_count"),
+        "improved_count": delta_summary.get("improved_count"),
+        "panel_changed_count": delta_summary.get("panel_changed_count"),
+        "same_count": delta_summary.get("same_count"),
+        "changed_panel_delta_count": delta_summary.get("changed_panel_delta_count"),
+        "max_abs_status_delta": delta_summary.get("max_abs_status_delta"),
+    }
+    context["trend_status"] = _release_readiness_trend_status(context)
+    return context
+
+
+def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
+    if not context.get("available"):
+        return None
+    if int(context.get("regressed_count") or 0) > 0:
+        return "regressed"
+    if int(context.get("improved_count") or 0) > 0:
+        return "improved"
+    if int(context.get("panel_changed_count") or 0) > 0 or int(context.get("changed_panel_delta_count") or 0) > 0:
+        return "panel-changed"
+    if int(context.get("delta_count") or 0) > 0:
+        return "stable"
+    counts = _dict(context.get("comparison_counts"))
+    if counts:
+        return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))
+    return None
+
+
 def _request_history_context(request_history_summary: dict[str, Any] | None) -> dict[str, Any]:
     if not isinstance(request_history_summary, dict):
         return {
@@ -457,6 +555,7 @@ def _recommendations(
     capabilities: list[dict[str, Any]],
     registry: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
+    release_readiness_context: dict[str, Any],
 ) -> list[str]:
     recs = [
         "Treat v48 as a phase summary: avoid continuing to split links/trends/dashboard unless the change improves evaluation quality.",
@@ -468,6 +567,12 @@ def _recommendations(
         recs.append("Revisit weaker areas first: " + ", ".join(str(item.get("title")) for item in weak[:3]) + ".")
     if not isinstance(registry, dict):
         recs.append("Generate a fresh registry before final portfolio review so the maturity summary can include live run counts.")
+    if not release_readiness_context.get("available"):
+        recs.append("Generate a registry with release readiness comparison outputs so maturity review can include release quality trend context.")
+    elif int(release_readiness_context.get("regressed_count") or 0) > 0:
+        recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")
+    elif int(release_readiness_context.get("improved_count") or 0) > 0:
+        recs.append("Keep release readiness comparison evidence in the registry so improvement history remains visible during maturity review.")
     if not isinstance(request_history_summary, dict):
         recs.append("Generate request_history_summary.json before local serving review so maturity context includes recent inference stability.")
     else:
@@ -535,6 +640,24 @@ def _registry_section(registry: dict[str, Any]) -> str:
         ("Generation quality", _fmt_mapping(registry.get("generation_quality_counts"))),
     ]
     return '<section class="panel"><h2>Registry Context</h2><table>' + "".join(
+        f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows
+    ) + "</table></section>"
+
+
+def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
+    rows = [
+        ("Available", release_readiness.get("available")),
+        ("Trend status", release_readiness.get("trend_status")),
+        ("Comparison counts", _fmt_mapping(release_readiness.get("comparison_counts"))),
+        ("Delta count", release_readiness.get("delta_count")),
+        ("Runs with deltas", release_readiness.get("run_count")),
+        ("Regressed", release_readiness.get("regressed_count")),
+        ("Improved", release_readiness.get("improved_count")),
+        ("Panel changed", release_readiness.get("panel_changed_count")),
+        ("Changed panels", release_readiness.get("changed_panel_delta_count")),
+        ("Max status delta", release_readiness.get("max_abs_status_delta")),
+    ]
+    return '<section class="panel"><h2>Release Readiness Trend Context</h2><table>' + "".join(
         f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows
     ) + "</table></section>"
 

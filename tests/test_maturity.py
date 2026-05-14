@@ -34,6 +34,17 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                 "generation_quality_counts": {"pass": 2},
                 "pair_report_counts": {"pair_batch": 2, "pair_trend": 1},
                 "pair_delta_summary": {"case_count": 6, "max_abs_generated_char_delta": 11},
+                "release_readiness_comparison_counts": {"improved": 1, "stable": 1},
+                "release_readiness_delta_summary": {
+                    "delta_count": 2,
+                    "run_count": 2,
+                    "regressed_count": 0,
+                    "improved_count": 1,
+                    "panel_changed_count": 0,
+                    "same_count": 1,
+                    "changed_panel_delta_count": 1,
+                    "max_abs_status_delta": 3,
+                },
             },
             ensure_ascii=False,
         ),
@@ -79,19 +90,25 @@ class MaturitySummaryTests(unittest.TestCase):
     def test_build_maturity_summary_reads_versions_and_registry(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            make_project(root, version_count=60)
+            make_project(root, version_count=65)
             make_request_history_summary(root)
 
             summary = build_maturity_summary(root, generated_at="2026-05-13T00:00:00Z")
 
-            self.assertEqual(summary["summary"]["current_version"], 60)
-            self.assertEqual(summary["summary"]["published_version_count"], 60)
-            self.assertEqual(summary["summary"]["archive_version_count"], 60)
+            self.assertEqual(summary["summary"]["current_version"], 65)
+            self.assertEqual(summary["summary"]["published_version_count"], 65)
+            self.assertEqual(summary["summary"]["archive_version_count"], 65)
             self.assertEqual(summary["summary"]["registry_runs"], 2)
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "improved")
+            self.assertEqual(summary["summary"]["release_readiness_delta_count"], 2)
+            self.assertEqual(summary["summary"]["release_readiness_regressed_count"], 0)
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
             self.assertEqual(summary["summary"]["overall_status"], "pass")
             self.assertEqual(summary["registry_context"]["pair_delta_cases"], 6)
+            self.assertEqual(summary["release_readiness_context"]["trend_status"], "improved")
+            self.assertEqual(summary["release_readiness_context"]["improved_count"], 1)
+            self.assertEqual(summary["release_readiness_context"]["max_abs_status_delta"], 3)
             self.assertEqual(summary["request_history_context"]["timeout_rate"], 0.25)
             capability_titles = [item["title"] for item in summary["capabilities"]]
             self.assertIn("Project Synthesis", capability_titles)
@@ -115,10 +132,28 @@ class MaturitySummaryTests(unittest.TestCase):
             markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
             self.assertIn("Capability Matrix", markdown)
             self.assertIn("Request History Context", markdown)
+            self.assertIn("Release Readiness Trend Context", markdown)
             self.assertIn("Project Synthesis", Path(outputs["csv"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT project maturity summary", html)
             self.assertIn("Request History Context", html)
+            self.assertIn("Release Readiness Trend Context", html)
+
+    def test_release_readiness_regression_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"regressed": 1}
+            registry["release_readiness_delta_summary"]["regressed_count"] = 1
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertIn("release readiness regressions", " ".join(summary["recommendations"]))
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -120,6 +120,9 @@ b/63/解释/说明.md
 b/64/图片
 b/64/解释/说明.md
  -> v64 registry release readiness tracking 的运行截图和解释
+b/65/图片
+b/65/解释/说明.md
+ -> v65 maturity release readiness trend context 的运行截图和解释
 ```
 
 写入规则：

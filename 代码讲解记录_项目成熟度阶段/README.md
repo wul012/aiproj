@@ -41,6 +41,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 77-v62-release-readiness-dashboard.md
 78-v63-release-readiness-comparison.md
 79-v64-registry-release-readiness-tracking.md
+80-v65-maturity-release-readiness-trend.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -60,7 +61,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v64，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison 与 registry-level release readiness tracking 的完整学习型 AI 工程链路。
+截至 v65，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking 与 maturity release readiness trend context 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -89,6 +90,7 @@ v61 的关键变化是：让 project audit 读取 request history summary，rele
 v62 的关键变化是：新增 release readiness dashboard，把 registry、release bundle、project audit、release gate、request history summary 和 maturity summary 汇总为一个 JSON/Markdown/HTML 就绪总览。
 v63 的关键变化是：读取多个 `release_readiness.json`，以默认首个输入或 `--baseline` 指定文件作为基线，输出 JSON/CSV/delta CSV/Markdown/HTML 比较报告，解释 readiness 状态、panel、audit score 和缺失 artifact 的跨版本变化。
 v64 的关键变化是：让 run registry 读取每个 run 下的 `release-readiness-comparison/release_readiness_comparison.json`，记录 improved/regressed/panel-changed 计数、delta summary、delta leaderboard、CSV 字段和 HTML Release Readiness Deltas 面板。
+v65 的关键变化是：让 project maturity summary 读取 registry 的 release readiness trend context，输出 Release Readiness Trend Context，并在发现 release readiness regression 时把 maturity overall status 降为 `warn`。
 
 ## 后续讲解索引
 
@@ -127,9 +129,11 @@ v64 的关键变化是：让 run registry 读取每个 run 下的 `release-readi
  -> 第六十三版代码讲解：比较多个 release readiness dashboard，解释相对 baseline 的改善、退化和 panel 变化
 79-v64-registry-release-readiness-tracking.md
  -> 第六十四版代码讲解：把 release readiness comparison 接入 registry，让发布质量趋势和实验质量证据一起索引
+80-v65-maturity-release-readiness-trend.md
+ -> 第六十五版代码讲解：把 registry 中的 release readiness trend 接入 maturity summary，让发布质量历史参与成熟度评审
 ```
 
-后续继续推进时，在这里追加 `80-v65-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `81-v66-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
