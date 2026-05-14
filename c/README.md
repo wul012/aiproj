@@ -76,6 +76,9 @@ c/87/解释/说明.md
 c/88/图片
 c/88/解释/说明.md
  -> v88 run comparison report utility migration 的运行截图和解释
+c/89/图片
+c/89/解释/说明.md
+ -> v89 gated run report utility migration 的运行截图和解释
 ```
 
 写入规则：

@@ -1,12 +1,19 @@
 from __future__ import annotations
 
-import csv
-from datetime import datetime, timezone
-import html
-import json
 from pathlib import Path
 from typing import Any
 
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    list_of_strs as _list_of_strings,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_csv_row,
+    write_json_payload,
+)
 from minigpt.training_portfolio_batch import (
     build_training_portfolio_batch_plan,
     load_training_portfolio_batch_variants,
@@ -93,33 +100,30 @@ def run_training_scale_plan(
 
 
 def write_training_scale_run_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = ["status", "allowed", "gate_status", "gate_profile", "execute", "variant_count", "batch_status", "blocked_reason"]
-    with out_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        gate = _dict(report.get("gate"))
-        batch = _dict(report.get("batch_summary"))
-        plan = _dict(report.get("scale_plan_summary"))
-        writer.writerow(
-            {
-                "status": report.get("status"),
-                "allowed": report.get("allowed"),
-                "gate_status": gate.get("overall_status"),
-                "gate_profile": report.get("gate_profile"),
-                "execute": report.get("execute"),
-                "variant_count": plan.get("variant_count"),
-                "batch_status": batch.get("status"),
-                "blocked_reason": report.get("blocked_reason"),
-            }
-        )
+    gate = _dict(report.get("gate"))
+    batch = _dict(report.get("batch_summary"))
+    plan = _dict(report.get("scale_plan_summary"))
+    write_csv_row(
+        {
+            "status": report.get("status"),
+            "allowed": report.get("allowed"),
+            "gate_status": gate.get("overall_status"),
+            "gate_profile": report.get("gate_profile"),
+            "execute": report.get("execute"),
+            "variant_count": plan.get("variant_count"),
+            "batch_status": batch.get("status"),
+            "blocked_reason": report.get("blocked_reason"),
+        },
+        out_path,
+        fieldnames,
+    )
 
 
 def render_training_scale_run_markdown(report: dict[str, Any]) -> str:
@@ -233,10 +237,6 @@ def write_training_scale_run_outputs(report: dict[str, Any], out_dir: str | Path
     write_training_scale_run_markdown(report, paths["markdown"])
     write_training_scale_run_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _is_allowed(gate: dict[str, Any], *, allow_warn: bool, allow_fail: bool) -> tuple[bool, str | None]:
@@ -364,34 +364,3 @@ def _display_dict(value: Any) -> str:
     if not isinstance(value, dict):
         return ""
     return ", ".join(f"{key}={item}" for key, item in value.items())
-
-
-def _list_of_strings(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
