@@ -55,6 +55,9 @@ c/80/解释/说明.md
 c/81/图片
 c/81/解释/说明.md
  -> v81 promoted training scale next-cycle seed 的运行截图和解释
+c/82/图片
+c/82/解释/说明.md
+ -> v82 promoted training scale seed handoff 的运行截图和解释
 ```
 
 写入规则：
