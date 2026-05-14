@@ -31,6 +31,9 @@ c/72/解释/说明.md
 c/73/图片
 c/73/解释/说明.md
  -> v73 gated training scale run comparison 的运行截图和解释
+c/74/图片
+c/74/解释/说明.md
+ -> v74 training scale run decision 的运行截图和解释
 ```
 
 写入规则：
