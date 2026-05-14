@@ -46,6 +46,7 @@ def build_training_scale_plan(
     batch_out = Path(batch_out_root) if batch_out_root is not None else out.parent / "training-portfolio-batch-from-scale-plan"
     variants = _recommended_variants(
         tier,
+        char_count=dataset.char_count,
         dataset_name=dataset_name,
         dataset_version_prefix=dataset_version_prefix,
         dataset_description=dataset_description,
@@ -288,6 +289,7 @@ def utc_now() -> str:
 def _recommended_variants(
     tier: str,
     *,
+    char_count: int,
     dataset_name: str,
     dataset_version_prefix: str,
     dataset_description: str,
@@ -352,7 +354,7 @@ def _recommended_variants(
                 sample_tokens=64,
             )
         )
-    return rows
+    return _fit_variant_contexts(rows, char_count)
 
 
 def _variant(
@@ -377,6 +379,39 @@ def _variant(
     }
 
 
+def _fit_variant_contexts(variants: list[dict[str, Any]], char_count: int) -> list[dict[str, Any]]:
+    fitted = []
+    for variant in variants:
+        item = dict(variant)
+        requested = int(item.get("block_size") or 1)
+        adjusted = safe_block_size_for_char_count(char_count, requested)
+        if adjusted < requested:
+            item["block_size"] = adjusted
+            item["context_adjustment"] = (
+                f"block_size reduced from {requested} to {adjusted} "
+                "so the default 90/10 train/val split can produce batches."
+            )
+        fitted.append(item)
+    return fitted
+
+
+def safe_block_size_for_char_count(char_count: int, requested: int, train_ratio: float = 0.9) -> int:
+    if char_count < 0:
+        raise ValueError("char_count cannot be negative")
+    if requested < 1:
+        raise ValueError("requested block_size must be at least 1")
+    if not 0.0 < train_ratio < 1.0:
+        raise ValueError("train_ratio must be between 0 and 1")
+
+    split_idx = max(1, int(char_count * train_ratio))
+    val_count = char_count - split_idx
+    effective_eval_count = val_count if val_count >= 2 else split_idx
+    max_block_size = max(1, effective_eval_count - 2)
+    if max_block_size >= 16:
+        max_block_size = max(16, (max_block_size // 8) * 8)
+    return min(requested, max_block_size)
+
+
 def _variant_matrix_row(variant: dict[str, Any], char_count: int, tier: str) -> dict[str, Any]:
     token_budget = int(variant["batch_size"]) * int(variant["block_size"]) * int(variant["max_iters"])
     passes = round(token_budget / max(1, char_count), 3)
@@ -389,6 +424,7 @@ def _variant_matrix_row(variant: dict[str, Any], char_count: int, tier: str) -> 
         "eval_interval": variant.get("eval_interval"),
         "batch_size": variant.get("batch_size"),
         "block_size": variant.get("block_size"),
+        "context_adjustment": variant.get("context_adjustment"),
         "n_layer": variant.get("n_layer"),
         "n_head": variant.get("n_head"),
         "n_embd": variant.get("n_embd"),
@@ -412,6 +448,8 @@ def _recommendations(tier: str, quality: dict[str, Any], matrix: list[dict[str, 
         recommendations.append("The corpus is large enough for staged runs; keep the smoke pass as a release gate before expensive variants.")
     if int(quality.get("warning_count") or 0) > 0:
         recommendations.append("Inspect dataset quality warnings before executing the extended training variant.")
+    if any(row.get("context_adjustment") for row in matrix):
+        recommendations.append("At least one block_size was reduced so tiny corpora can pass the training split.")
     if matrix:
         best = max(matrix, key=lambda row: int(row.get("token_budget") or 0))
         recommendations.append(

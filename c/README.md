@@ -37,6 +37,9 @@ c/74/解释/说明.md
 c/75/图片
 c/75/解释/说明.md
  -> v75 consolidated training scale workflow 的运行截图和解释
+c/76/图片
+c/76/解释/说明.md
+ -> v76 controlled training scale handoff 的运行截图和解释
 ```
 
 写入规则：

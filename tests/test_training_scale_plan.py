@@ -17,6 +17,7 @@ from minigpt.training_scale_plan import (  # noqa: E402
     build_training_scale_plan,
     render_training_scale_plan_html,
     render_training_scale_plan_markdown,
+    safe_block_size_for_char_count,
     scale_tier,
     write_training_scale_plan_outputs,
 )
@@ -95,6 +96,18 @@ class TrainingScalePlanTests(unittest.TestCase):
             self.assertEqual(len(report["variants"]), 1)
             self.assertGreaterEqual(report["dataset"]["warning_count"], 1)
             self.assertTrue(any("tiny" in item for item in report["recommendations"]))
+            self.assertLess(report["variants"][0]["block_size"], 64)
+            self.assertIn("context_adjustment", report["variants"][0])
+            self.assertTrue(any("block_size was reduced" in item for item in report["recommendations"]))
+
+    def test_safe_block_size_keeps_tiny_validation_batches_possible(self) -> None:
+        self.assertEqual(safe_block_size_for_char_count(507, 64), 48)
+        self.assertEqual(safe_block_size_for_char_count(3, 64), 1)
+        self.assertEqual(safe_block_size_for_char_count(10_000, 64), 64)
+        with self.assertRaises(ValueError):
+            safe_block_size_for_char_count(-1, 64)
+        with self.assertRaises(ValueError):
+            safe_block_size_for_char_count(100, 0)
 
     def test_no_recursive_ignores_nested_sources(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
