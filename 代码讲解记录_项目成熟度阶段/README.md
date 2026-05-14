@@ -72,6 +72,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 108-v93-training-scale-promotion-report-utils.md
 109-v94-training-scale-promotion-index-report-utils.md
 110-v95-promoted-training-scale-comparison-report-utils.md
+111-v96-generation-quality-report-utils.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -91,7 +92,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v95，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff、shared report utility consolidation、controlled handoff report-utils migration、promoted seed report-utils migration、promoted decision report-utils migration、run decision report-utils migration、run comparison report-utils migration、gated run report-utils migration、training scale gate report-utils migration、training scale plan report-utils migration、training scale workflow report-utils migration、training scale promotion report-utils migration、training scale promotion index report-utils migration 与 promoted training scale comparison report-utils migration 的完整学习型 AI 工程链路。
+截至 v96，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff、shared report utility consolidation、controlled handoff report-utils migration、promoted seed report-utils migration、promoted decision report-utils migration、run decision report-utils migration、run comparison report-utils migration、gated run report-utils migration、training scale gate report-utils migration、training scale plan report-utils migration、training scale workflow report-utils migration、training scale promotion report-utils migration、training scale promotion index report-utils migration、promoted training scale comparison report-utils migration 与 generation quality report-utils migration 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -151,6 +152,7 @@ v92 的关键变化是：把 consolidated training scale workflow 迁移到 `rep
 v93 的关键变化是：把 training scale promotion acceptance 迁移到 `report_utils`，让 v77 的验收层 evidence 也复用公共 JSON 写出、Markdown/HTML 转义和 list/dict 归一化工具。
 v94 的关键变化是：把 training scale promotion index 迁移到 `report_utils`，让 v78 的 promoted-only 索引层 evidence 也复用公共 JSON 写出、Markdown/HTML 转义和 list/dict 归一化工具。
 v95 的关键变化是：把 promoted training scale comparison 迁移到 `report_utils`，让 v79 的 promoted-only comparison evidence 也复用公共 JSON 写出、Markdown/HTML 转义和 list/dict 归一化工具。
+v96 的关键变化是：把 generation quality 迁移到 `report_utils`，但只迁移语义一致的 JSON 写出、UTC 时间、HTML/SVG 转义和 list/dict 归一化工具，保留本模块特有的 Markdown/字符串格式化规则。
 
 ## 后续讲解索引
 
@@ -251,9 +253,11 @@ v95 的关键变化是：把 promoted training scale comparison 迁移到 `repor
  -> 第九十四版代码讲解：把 training scale promotion index 迁移到 report_utils，让 promoted-only 索引层也进入公共报告基础层
 110-v95-promoted-training-scale-comparison-report-utils.md
  -> 第九十五版代码讲解：把 promoted training scale comparison 迁移到 report_utils，让 promoted-only 比较层也进入公共报告基础层
+111-v96-generation-quality-report-utils.md
+ -> 第九十六版代码讲解：把 generation quality 迁移到 report_utils，同时保留模块特有的显示格式化 helper
 ```
 
-后续继续推进时，在这里追加 `111-v96-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `112-v97-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
@@ -273,3 +277,4 @@ v92 起 consolidated training scale workflow 也接入公共工具，说明 plan
 v93 起 training scale promotion acceptance 也接入公共工具，说明训练规模执行验收层开始和前置执行链路共享同一套报告基础设施。
 v94 起 training scale promotion index 也接入公共工具，说明 promoted-only 索引层开始和训练规模执行验收层共享同一套报告基础设施。
 v95 起 promoted training scale comparison 也接入公共工具，说明 promoted-only 索引层到比较层已经共享同一套报告基础设施。
+v96 起 generation quality 也接入公共工具，说明公共报告基础层开始覆盖模型输出质量证据，同时保留局部格式化语义。

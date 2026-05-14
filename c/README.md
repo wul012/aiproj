@@ -97,6 +97,9 @@ c/94/解释/说明.md
 c/95/图片
 c/95/解释/说明.md
  -> v95 promoted training scale comparison report utility migration 的运行截图和解释
+c/96/图片
+c/96/解释/说明.md
+ -> v96 generation quality report utility migration 的运行截图和解释
 ```
 
 写入规则：

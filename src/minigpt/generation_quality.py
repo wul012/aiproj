@@ -1,15 +1,17 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
 
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    utc_now,
+    write_json_payload,
+)
 
 
 def build_generation_quality_report(
@@ -69,9 +71,7 @@ def build_generation_quality_report(
 
 
 def write_generation_quality_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_generation_quality_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -184,17 +184,17 @@ def write_generation_quality_svg(report: dict[str, Any], path: str | Path) -> No
         repeated_bar = max(2, int(bar_w * min(1.0, repeated)))
         color = _status_color(str(case.get("status") or "warn"))
         label = f"{case.get('name')}  {case.get('status')}  flags={case.get('flag_count')}"
-        rows.append(f'<text x="28" y="{y + 16}" font-family="Arial" font-size="13" fill="#111827">{html.escape(label)}</text>')
+        rows.append(f'<text x="28" y="{y + 16}" font-family="Arial" font-size="13" fill="#111827">{_e(label)}</text>')
         rows.append(f'<rect x="{bar_x}" y="{y + 24}" width="{unique_bar}" height="12" rx="3" fill="{color}"/>')
         rows.append(f'<rect x="{bar_x}" y="{y + 42}" width="{repeated_bar}" height="12" rx="3" fill="#64748b"/>')
         rows.append(f'<text x="{bar_x + bar_w + 16}" y="{y + 35}" font-family="Arial" font-size="12" fill="#374151">unique={_ratio_label(ratio)}</text>')
         rows.append(f'<text x="{bar_x + bar_w + 16}" y="{y + 53}" font-family="Arial" font-size="12" fill="#374151">repeat={_ratio_label(repeated)}</text>')
-        rows.append(f'<text x="28" y="{y + 48}" font-family="Arial" font-size="12" fill="#4b5563">{html.escape(str(case.get("continuation_preview") or ""))}</text>')
+        rows.append(f'<text x="28" y="{y + 48}" font-family="Arial" font-size="12" fill="#4b5563">{_e(str(case.get("continuation_preview") or ""))}</text>')
     summary = _dict(report.get("summary"))
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
   <rect width="100%" height="100%" fill="#f8fafc"/>
   <text x="28" y="34" font-family="Arial" font-size="20" fill="#111827">MiniGPT generation quality</text>
-  <text x="28" y="58" font-family="Arial" font-size="13" fill="#374151">Status: {html.escape(str(summary.get("overall_status")))} | Cases: {summary.get("case_count")} | Avg chars: {summary.get("avg_continuation_chars")}</text>
+  <text x="28" y="58" font-family="Arial" font-size="13" fill="#374151">Status: {_e(str(summary.get("overall_status")))} | Cases: {summary.get("case_count")} | Avg chars: {summary.get("avg_continuation_chars")}</text>
   <text x="28" y="78" font-family="Arial" font-size="12" fill="#374151">Colored bars show unique ratio; gray bars show repeated n-gram ratio.</text>
   {''.join(rows)}
 </svg>
@@ -552,10 +552,6 @@ def _markdown_table(rows: list[tuple[str, Any]]) -> list[str]:
     return lines
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
@@ -564,10 +560,6 @@ def _string_list(value: Any) -> list[str]:
 
 def _flag_ids(case: dict[str, Any]) -> list[str]:
     return [str(flag.get("id")) for flag in _list_of_dicts(case.get("flags")) if flag.get("id")]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _number(value: Any) -> float | None:
@@ -604,10 +596,6 @@ def _fmt_any(value: Any) -> str:
 
 def _md(value: Any) -> str:
     return _fmt_any(value).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _clip(text: str, limit: int) -> str:
