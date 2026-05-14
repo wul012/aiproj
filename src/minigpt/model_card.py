@@ -1,15 +1,17 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import html
 import json
 import os
 from pathlib import Path
 from typing import Any
 
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    utc_now,
+    write_json_payload,
+)
 
 
 def build_model_card(
@@ -58,9 +60,7 @@ def build_model_card(
 
 
 def write_model_card_json(card: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(card, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(card, path)
 
 
 def render_model_card_markdown(card: dict[str, Any]) -> str:
@@ -508,14 +508,6 @@ def _ratio(count: int, total: int) -> float:
     return round(count / total, 4)
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
@@ -562,7 +554,3 @@ def _rank_label(value: Any) -> str:
 
 def _md(value: Any) -> str:
     return _fmt_any(value).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

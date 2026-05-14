@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 99 is a project audit report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, audit policy, and release behavior, while moving the project audit exporter onto the shared report utility foundation used by the recent migration series.
+Version 100 is a model card report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, model-card content, project-audit behavior, and release behavior, while moving the model card exporter onto the shared report utility foundation.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 99 is a project audit report-utils migration for the MiniGPT learning pr
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v99 report-utils migration series, including project audit in v99 | `src/minigpt/report_utils.py`, report-utils tests, v83-v99 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v100 report-utils migration series, including model card in v100 | `src/minigpt/report_utils.py`, report-utils tests, v83-v100 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v99 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v100 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 99 is a project audit report-utils migration for the MiniGPT learning pr
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 99 focus
+## Version 100 focus
 
-- Migrated `project_audit.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict/list normalization.
-- Kept audit scoring, request-history checks, recommendations, Markdown/HTML layout, and run-row policy unchanged.
-- Left audit-specific `_string_list`, Markdown cell, ranking, and formatting helpers local because they encode project audit display semantics.
-- Added v99 archive and explanation records so the release-governance upstream cleanup has the same evidence trail as earlier migrations.
+- Migrated `model_card.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict/list normalization.
+- Kept model-card summaries, intended use, limitations, coverage, recommendations, run rows, and HTML/Markdown layout unchanged.
+- Left model-card-specific `_string_list`, tag parsing, Markdown cells, rank labels, relative links, and formatting helpers local because they encode display semantics.
+- Added v100 archive and explanation records so the model-card to project-audit handoff has the same evidence trail as earlier migrations.
 
 ## Version tags
 
@@ -144,6 +144,7 @@ v96.0.0 MiniGPT v96 generation quality report utility migration
 v97.0.0 MiniGPT v97 release bundle report utility migration
 v98.0.0 MiniGPT v98 README maturity summary cleanup
 v99.0.0 MiniGPT v99 project audit report utility migration
+v100.0.0 MiniGPT v100 model card report utility migration
 ```
 
 ## Project structure
@@ -1882,6 +1883,15 @@ Version 99 screenshots are archived under `c/99`:
 - `05-playwright-project-audit-html.png`: generated project audit HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v99 README, c/99 archive, project-maturity explanation, and c README check
 
+Version 100 screenshots are archived under `c/100`:
+
+- `01-unit-tests.png`: migrated model card tests, report utility tests, compile check, and full regression tests
+- `02-model-card-complete-smoke.png`: model card smoke confirming registry plus experiment cards still produce ready/review run summaries
+- `03-model-card-missing-cards-smoke.png`: model card smoke confirming missing experiment cards still produce coverage warnings and recommendations
+- `04-model-card-structure-check.png`: source/test/docs structure check for conservative model card migration and archive indexes
+- `05-playwright-model-card-html.png`: generated model card HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v100 README, c/100 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2003,6 +2013,7 @@ Project-maturity records start at v48:
 ...
 113-v98-readme-maturity-summary.md
 114-v99-project-audit-report-utils.md
+115-v100-model-card-report-utils.md
 ```
 
 ## Learning map
