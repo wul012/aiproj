@@ -56,6 +56,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 92-v77-training-scale-promotion.md
 93-v78-training-scale-promotion-index.md
 94-v79-promoted-training-scale-comparison.md
+95-v80-promoted-training-scale-decision.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -75,7 +76,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v79，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index 与 promoted training scale comparison 的完整学习型 AI 工程链路。
+截至 v80，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison 与 promoted training scale baseline decision 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -119,6 +120,7 @@ v76 的关键变化是：新增 controlled training scale handoff，读取 v75 w
 v77 的关键变化是：新增 training scale promotion acceptance，读取完成的 handoff、gated scale run、batch 和 per-variant portfolio 产物，判断本次训练结果是 `promoted`、`review` 还是 `blocked`。
 v78 的关键变化是：新增 training scale promotion index，读取一个或多个 promotion 报告，筛出可比较的 promoted 结果，并生成后续 compare 脚本可直接消费的输入列表与命令。
 v79 的关键变化是：新增 promoted training scale comparison，读取 v78 index，只比较 promoted 结果，并在 promoted 输入不足或 baseline 不合法时输出 blocked 报告。
+v80 的关键变化是：新增 promoted training scale baseline decision，读取 v79 promoted comparison，选择下一阶段稳定 baseline，并在上游比较不完整或候选不合格时输出 blocked/review。
 
 ## 后续讲解索引
 
@@ -187,10 +189,12 @@ v79 的关键变化是：新增 promoted training scale comparison，读取 v78 
  -> 第七十八版代码讲解：把多个 promotion 报告收口成 compare-ready 索引，只让 promoted 结果进入后续训练规模对比
 94-v79-promoted-training-scale-comparison.md
  -> 第七十九版代码讲解：读取 promotion index 并复用 training scale run comparison，只比较 promoted 运行
+95-v80-promoted-training-scale-decision.md
+ -> 第八十版代码讲解：读取 promoted comparison，选出下一阶段稳定 promoted baseline，并保留 blocked/review 边界
 ```
 
-后续继续推进时，在这里追加 `95-v80-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `96-v81-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison 和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision 和下一阶段路线”的过程。

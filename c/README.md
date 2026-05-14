@@ -49,6 +49,9 @@ c/78/解释/说明.md
 c/79/图片
 c/79/解释/说明.md
  -> v79 promoted training scale comparison 的运行截图和解释
+c/80/图片
+c/80/解释/说明.md
+ -> v80 promoted training scale baseline decision 的运行截图和解释
 ```
 
 写入规则：
