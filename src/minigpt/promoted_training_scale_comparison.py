@@ -1,12 +1,19 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
 
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_json_payload,
+)
 from minigpt.training_scale_run_comparison import build_training_scale_run_comparison
 
 
@@ -73,9 +80,7 @@ def build_promoted_training_scale_comparison(
 
 
 def write_promoted_training_scale_comparison_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -260,10 +265,6 @@ def write_promoted_training_scale_comparison_outputs(report: dict[str, Any], out
     write_promoted_training_scale_comparison_markdown(report, paths["markdown"])
     write_promoted_training_scale_comparison_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _resolve_index_path(path: Path) -> Path:
@@ -496,28 +497,3 @@ def _resolve_path(value: Any, base_dir: Path) -> Path:
 
 def _block_reason(report: dict[str, Any]) -> str | None:
     return _dict(report.get("summary")).get("blocked_reason") or (_string_list(report.get("blockers"))[0] if _string_list(report.get("blockers")) else None)
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

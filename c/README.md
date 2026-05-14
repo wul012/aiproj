@@ -94,6 +94,9 @@ c/93/解释/说明.md
 c/94/图片
 c/94/解释/说明.md
  -> v94 training scale promotion index report utility migration 的运行截图和解释
+c/95/图片
+c/95/解释/说明.md
+ -> v95 promoted training scale comparison report utility migration 的运行截图和解释
 ```
 
 写入规则：
