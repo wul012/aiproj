@@ -1,11 +1,20 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    csv_cell as _csv_value,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_json_payload,
+)
 
 
 GATE_ORDER = {"fail": 0, "warn": 1, "pass": 2}
@@ -54,9 +63,7 @@ def build_training_scale_run_comparison(
 
 
 def write_training_scale_run_comparison_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -206,10 +213,6 @@ def write_training_scale_run_comparison_outputs(report: dict[str, Any], out_dir:
     write_training_scale_run_comparison_markdown(report, paths["markdown"])
     write_training_scale_run_comparison_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _resolve_run_path(path: Path) -> Path:
@@ -445,22 +448,6 @@ def _card(label: str, value: Any) -> str:
     return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _string_list(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [str(item) for item in value]
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return dict(value) if isinstance(value, dict) else {}
-
-
 def _int(value: Any) -> int:
     try:
         return int(value)
@@ -470,18 +457,3 @@ def _int(value: Any) -> int:
 
 def _signed(value: int) -> str:
     return f"+{value}" if value > 0 else str(value)
-
-
-def _csv_value(value: Any) -> Any:
-    if isinstance(value, (dict, list)):
-        return json.dumps(value, ensure_ascii=False, sort_keys=True)
-    return value
-
-
-def _md(value: Any) -> str:
-    text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

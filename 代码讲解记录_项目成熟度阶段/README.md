@@ -64,6 +64,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 100-v85-promoted-seed-report-utils.md
 101-v86-promoted-decision-report-utils.md
 102-v87-run-decision-report-utils.md
+103-v88-run-comparison-report-utils.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -83,7 +84,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v87，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff、shared report utility consolidation、controlled handoff report-utils migration、promoted seed report-utils migration、promoted decision report-utils migration 与 run decision report-utils migration 的完整学习型 AI 工程链路。
+截至 v88，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision、promoted training scale next-cycle seed、promoted training scale seed handoff、shared report utility consolidation、controlled handoff report-utils migration、promoted seed report-utils migration、promoted decision report-utils migration、run decision report-utils migration 与 run comparison report-utils migration 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -135,6 +136,7 @@ v84 的关键变化是：把原始 controlled training scale handoff 迁移为 `
 v85 的关键变化是：把 promoted training scale next-cycle seed 迁移为 `report_utils` 的第三个消费者，让 seed、seed handoff 和 execution handoff 共用同一套报告基础工具。
 v86 的关键变化是：把 promoted training scale baseline decision 迁移为 `report_utils` 的第四个消费者，让 baseline decision、seed、seed handoff 和 controlled execution handoff 形成连续的公共报告基础层。
 v87 的关键变化是：把 training scale run decision 迁移到 `report_utils`，让 v74 的 execute-candidate selector 也复用公共输出、命令展示和转义工具。
+v88 的关键变化是：把 training scale run comparison 迁移到 `report_utils`，让 v73 的 gated-run comparison 也复用公共输出、Markdown/HTML 转义和 list/dict 归一化工具。
 
 ## 后续讲解索引
 
@@ -219,9 +221,11 @@ v87 的关键变化是：把 training scale run decision 迁移到 `report_utils
  -> 第八十六版代码讲解：把 promoted baseline decision 迁移到 report_utils，让 baseline selector 也复用公共输出和转义工具
 102-v87-run-decision-report-utils.md
  -> 第八十七版代码讲解：把 training scale run decision 迁移到 report_utils，让原始训练规模执行候选决策也复用公共报告基础层
+103-v88-run-comparison-report-utils.md
+ -> 第八十八版代码讲解：把 training scale run comparison 迁移到 report_utils，让 comparison evidence 和 decision evidence 共用报告基础层
 ```
 
-后续继续推进时，在这里追加 `103-v88-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `104-v89-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
@@ -233,3 +237,4 @@ v84 起公共工具不再只是新模块的实验点，而开始回收早期 han
 v85 起 promoted seed generation 也接入公共工具，说明这条收口线已经覆盖“生成 seed -> 执行 seed handoff -> controlled execution handoff”的连续链路。
 v86 起 baseline decision 也接入公共工具，说明这条收口线已经向 seed 上游继续延伸。
 v87 起原始 training scale run decision 也接入公共工具，说明收口线开始回到 promoted 链路之前的基础训练规模决策层。
+v88 起原始 training scale run comparison 也接入公共工具，说明 comparison evidence 到 decision evidence 的相邻两层已经共享同一套报告基础设施。
