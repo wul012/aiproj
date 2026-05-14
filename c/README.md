@@ -103,6 +103,9 @@ c/96/解释/说明.md
 c/97/图片
 c/97/解释/说明.md
  -> v97 release bundle report utility migration 的运行截图和解释
+c/98/图片
+c/98/解释/说明.md
+ -> v98 README maturity summary cleanup 的运行截图和解释
 ```
 
 写入规则：
