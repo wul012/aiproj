@@ -129,6 +129,9 @@ b/66/解释/说明.md
 b/67/图片
 b/67/解释/说明.md
  -> v67 training portfolio pipeline 的运行截图和解释
+b/68/图片
+b/68/解释/说明.md
+ -> v68 training portfolio comparison 的运行截图和解释
 ```
 
 写入规则：
