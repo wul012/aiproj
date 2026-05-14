@@ -45,6 +45,7 @@ registry 能显示多 run 正确性排名之后，能否进一步解释分数为
 81-v66-maturity-narrative.md
 82-v67-training-portfolio-pipeline.md
 83-v68-training-portfolio-comparison.md
+84-v69-training-portfolio-batch.md
 ```
 
 说明文档继续向参考文档靠齐：
@@ -64,7 +65,7 @@ D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
 
 ## 当前项目进度基线
 
-截至 v68，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline 与 training portfolio comparison 的完整学习型 AI 工程链路。
+截至 v69，项目已经具备从 MiniGPT 模型学习、数据治理、实验复现、评估基准、pair/report 证据链、registry 多 run 索引、发布治理、项目成熟度总结、benchmark scorecard drilldown、rubric-style correctness scoring、registry-level rubric tracking、cross-run scorecard comparison、dataset cards、本地流式推理、流式超时与取消控制、本地推理请求历史视图、请求历史过滤和 CSV 导出、请求历史单条详情 JSON、请求历史稳定性摘要和成熟度上下文集成、请求历史审计门禁和 release evidence 集成，到发布就绪总览 dashboard、跨版本 release readiness comparison、registry-level release readiness tracking、maturity release readiness trend context、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison 与 training portfolio batch matrix 的完整学习型 AI 工程链路。
 
 v48 的关键变化是：不继续拆 `links/trends/dashboard`，而是把 v1-v48 汇总为 capability matrix、phase timeline、registry context 和 recommendations。
 
@@ -97,6 +98,7 @@ v65 的关键变化是：让 project maturity summary 读取 registry 的 releas
 v66 的关键变化是：新增 release-quality maturity narrative，读取 maturity summary、registry、request history summary、benchmark scorecard 和 dataset card，把分散证据合成一份面向 portfolio/答辩/交接的 JSON/Markdown/HTML 叙事报告。
 v67 的关键变化是：新增 training portfolio pipeline，把 prepare dataset、train、eval suite、generation quality、benchmark scorecard、dataset card、registry、maturity summary 和 maturity narrative 串成可 dry-run 或 execute 的端到端训练组合跑。
 v68 的关键变化是：新增 training portfolio comparison，读取多份 `training_portfolio.json` 及其链接的 scorecard、dataset card、manifest、eval suite、generation quality 和 maturity narrative，输出相对 baseline 的 JSON/CSV/Markdown/HTML 对比证据。
+v69 的关键变化是：新增 training portfolio batch matrix，把多个训练 variant 组织成批量计划/执行入口，每个 variant 生成自己的 portfolio 报告，并自动接入 v68 的 portfolio comparison。
 
 ## 后续讲解索引
 
@@ -143,10 +145,12 @@ v68 的关键变化是：新增 training portfolio comparison，读取多份 `tr
  -> 第六十七版代码讲解：把数据准备、真实训练、评估、质量分析、scorecard、数据卡和成熟度叙事串成可执行训练组合跑
 83-v68-training-portfolio-comparison.md
  -> 第六十八版代码讲解：比较多份 training portfolio，解释相对 baseline 的模型分数、验证损失、产物覆盖、数据警告和成熟度变化
+84-v69-training-portfolio-batch.md
+ -> 第六十九版代码讲解：把多组训练参数组织成 batch matrix，生成每个 portfolio 并自动接入基线对比
 ```
 
-后续继续推进时，在这里追加 `84-v69-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `85-v70-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
-本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison 和下一阶段路线”的过程。
+本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix 和下一阶段路线”的过程。

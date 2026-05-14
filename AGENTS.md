@@ -30,6 +30,15 @@ Before sending the final response for any task, perform a cleanup pass for files
 
 ## Verification Archive Rule
 
+Current update from v69 onward:
+
+- `a/` keeps v1-v31 runtime screenshots and explanations.
+- `b/` keeps v32-v68 runtime screenshots and explanations.
+- From v69 onward, new runtime screenshots and explanations go to `c/`.
+- The structure is `c/<version>/图片/` and `c/<version>/解释/说明.md`.
+- README, code explanations, archive notes, and tag notes should cite `c/<version>` for v69 and later evidence.
+- Do not migrate old `a/` or `b/` evidence unless the user explicitly asks.
+
 运行截图和解释目录按阶段拆分：
 
 - `a/` 保留 v1-v31 的历史运行截图和解释，不迁移旧版本。
