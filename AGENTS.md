@@ -6,6 +6,14 @@
 
 Before sending the final response for any task, perform a cleanup pass for files and processes created during that task.
 
+## Context Compression Stop Rule
+
+When the conversation context is clearly becoming long and close to a compression-risk zone, stop before making any new code, document, archive, test, commit, tag, or push changes.
+
+Tell the user to compress the context first, then wait for the next instruction after compaction.
+
+This rule applies even when the user's context limit is large. Use judgment based on the current session state, not only on the configured limit.
+
 ## Code Explanation Rule
 
 后续新增或更新 `代码讲解记录/*.md` 或 `代码讲解记录_*/*.md` 时，讲解风格要向 `D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md` 靠齐。
