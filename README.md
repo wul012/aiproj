@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 70 is a MiniGPT learning project with training scale plans, training portfolio batch matrices, reproducible training portfolio pipelines, training portfolio comparison reports, release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
+Version 71 is a MiniGPT learning project with training scale gates, training scale plans, training portfolio batch matrices, reproducible training portfolio pipelines, training portfolio comparison reports, release-quality maturity narratives, project maturity release readiness trend context, registry-level release readiness comparison tracking, cross-version release readiness comparison, a consolidated release readiness dashboard, request history audit gates and release evidence integration, request history stability summaries and maturity-context integration, request history row details and per-row JSON export, filtered and exportable local inference request history, streaming timeout and cancellation controls, streaming playground generation, dataset cards, cross-run benchmark scorecard comparison, registry-level benchmark rubric tracking, rubric-style benchmark correctness scoring, benchmark scorecard drilldowns, benchmark scorecards, project maturity summaries, registry pair delta leaders, registry-level pair batch/trend links, pair batch dashboard/playground links, pair batch trend comparison reports, fixed prompt pair-generation batch reports, persisted side-by-side generation artifacts, side-by-side checkpoint generation, playground checkpoint comparison shortcuts, checkpoint selector support, local inference safety profiles and model-info endpoints, baseline model comparison reports and browser views, dataset version manifests and browser reports, benchmark prompt suite metadata and HTML reports, configurable release gate delta baseline profiles, release gate profile delta explanations, release gate profile comparison reports, release gate policy profiles, release gate generation-quality policy, generation quality evidence-chain integration, generation quality reports, release gates, release evidence bundles, project audit reports, generated model cards, generated experiment cards, registry loss leaderboards and run rankings, run notes and tags in the registry, shareable and exportable registry HTML views, an interactive run registry HTML report, registry indexing for experiments, a benchmark prompt evaluation suite, dataset quality checks and fingerprints, run manifests for experiment reproducibility, dataset preparation and reporting, a local playground server, a static playground Web UI, a sampling lab, multi-run comparison, a static experiment dashboard, model architecture reports, a tiny chat wrapper, next-token prediction inspection, evaluation reports, attention inspection, resumable training, character/BPE tokenizers, source code, tests, code explanations, and archived verification screenshots:
 
 - Python project layout with `src`, `scripts`, `tests`, `data`, `.github/workflows`, `代码讲解记录`, historical `a/<version>` and `b/<version>` archives, and current `c/<version>` archives
 - Character-level tokenizer for turning Chinese text into token ids
@@ -15,6 +15,7 @@ Version 70 is a MiniGPT learning project with training scale plans, training por
 - Dataset quality report with corpus fingerprint, duplicate-source checks, tiny/empty source warnings, repeated-line hints, JSON output, and SVG summary
 - Dataset card exporter that combines dataset version, quality, provenance, intended use, limitations, artifacts, recommendations, JSON, Markdown, and browser HTML evidence
 - Run manifest writer that records Git metadata, environment, data source, model config, metrics, and artifact inventory for each training run
+- Training scale gate that reads a v70 `training_scale_plan.json`, applies review/standard/strict policies, and writes pass/warn/fail preflight evidence before batch execution
 - Training scale planner that scans text sources, classifies corpus scale, summarizes dataset quality, estimates variant token budgets, and exports `training_scale_variants.json` for the v69 batch runner
 - Training portfolio batch runner that plans multiple portfolio variants, writes per-variant portfolio reports, and automatically hooks the batch into the v68 portfolio comparison output
 - Training portfolio pipeline that can dry-run or execute `prepare_dataset -> train -> eval_suite -> generation_quality -> benchmark_scorecard -> dataset_card -> registry -> maturity_summary -> maturity_narrative`, writing JSON/Markdown/HTML pipeline evidence
@@ -87,8 +88,8 @@ Version 70 is a MiniGPT learning project with training scale plans, training por
 - Generation script can write output to a file with `--out`
 - History plotting script for rebuilding the loss curve from `metrics.jsonl`
 - Sample Chinese training corpus for first-run experiments
-- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, release-quality maturity narratives, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
-- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, release-quality maturity narratives, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Unit tests for tokenizer, dataset preparation, dataset versioning, dataset quality, dataset cards, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, benchmark eval suites, benchmark scorecard comparison reports, registry-level benchmark rubric tracking, rubric-style benchmark scoring, benchmark scorecard drilldowns, benchmark scorecards, release-quality maturity narratives, project maturity summaries, maturity release readiness trend context, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, registry pair delta leaders, registry-level pair report links, pair batch dashboard/playground links, pair batch trend reports, pair batch comparison reports, baseline model comparison reports, inference safety profiles, request history detail APIs, request history filters/export APIs and playground views, streaming timeout and cancellation controls, streaming generation, checkpoint selector, checkpoint comparison, side-by-side generation, and pair artifact APIs, model-info endpoints, request logs, generation quality reports, generation quality evidence-chain integration, run registry, run manifest generation, dataset sampling, history artifacts, model forward/loss, generation shape, prediction inspection, chat prompt handling, model reports, dashboard export, run comparison, sampling lab, playground UI export, playground server API, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
+- Code explanation records for tokenizer/dataset, model core, train/generate scripts, tests/docs, training artifacts, BPE, attention, prediction/evaluation, chat wrapper, model reports, dashboard export, run comparison, baseline model comparison, sampling lab, playground UI, playground server, request history view, request history filters/export, request history detail JSON, request history summaries, request history audit gates, release readiness dashboards, release readiness comparisons, registry release readiness comparison tracking, maturity release readiness trend context, release-quality maturity narratives, training scale gates, training scale plans, training portfolio batch matrices, training portfolio pipelines, training portfolio comparison reports, streaming generation, streaming timeout/cancellation controls, inference safety profiles, checkpoint selector, checkpoint comparison shortcuts, side-by-side generation, persisted pair artifacts, fixed prompt pair batch comparison, pair batch trend comparison, pair batch dashboard links, registry pair report links, registry pair delta leaders, project maturity summaries, benchmark scorecards, benchmark scorecard drilldowns, rubric-style benchmark scoring, registry-level benchmark rubric tracking, benchmark scorecard comparison reports, dataset cards, dataset preparation, dataset versioning, run manifests, dataset quality, eval suites, benchmark prompt suites, generation quality reports, generation quality evidence-chain integration, run registry, registry HTML reporting, registry interaction controls, shareable registry views, registry annotations, registry leaderboards, experiment cards, model cards, project audits, release bundles, release gates, release gate generation-quality policy, release gate policy profiles, release gate profile comparison reports, release gate profile delta explanations, and configurable delta baselines
 - Versioned verification archives with key screenshots and command explanations
 - GitHub Actions workflow for syntax checks and unit tests
 
@@ -167,6 +168,7 @@ v67.0.0 MiniGPT v67 training portfolio pipeline
 v68.0.0 MiniGPT v68 training portfolio comparison
 v69.0.0 MiniGPT v69 training portfolio batch matrix
 v70.0.0 MiniGPT v70 training scale planner
+v71.0.0 MiniGPT v71 training scale gate
 ```
 
 ## Project structure
@@ -335,6 +337,7 @@ v70.0.0 MiniGPT v70 training scale planner
 │   ├── build_model_card.py
 │   ├── build_playground.py
 │   ├── chat.py
+│   ├── check_training_scale_gate.py
 │   ├── check_release_gate.py
 │   ├── compare_release_gate_profiles.py
 │   ├── compare_runs.py
@@ -384,6 +387,7 @@ v70.0.0 MiniGPT v70 training scale planner
 │       ├── sampling.py
 │       ├── server.py
 │       ├── tokenizer.py
+│       ├── training_scale_gate.py
 │       ├── training_scale_plan.py
 │       ├── training_portfolio_batch.py
 │       ├── training_portfolio.py
@@ -415,6 +419,7 @@ v70.0.0 MiniGPT v70 training scale planner
 │   ├── test_sampling.py
 │   ├── test_server.py
 │   ├── test_tokenizer.py
+│   ├── test_training_scale_gate.py
 │   ├── test_training_scale_plan.py
 │   ├── test_training_portfolio_batch.py
 │   ├── test_training_portfolio.py
@@ -733,6 +738,14 @@ python scripts/run_training_portfolio_batch.py data --variants runs/training-sca
 ```
 
 The scale planner reads the same `.txt` sources as training, classifies the corpus as `tiny`, `small`, `medium`, or `large`, records quality warnings, estimates each variant's token budget, and writes `training_scale_plan.json`, `training_scale_plan.csv`, `training_scale_plan.md`, `training_scale_plan.html`, plus the batch-compatible `training_scale_variants.json`.
+
+Check whether a scale plan is ready to execute:
+
+```powershell
+python scripts/check_training_scale_gate.py --plan runs/training-scale-plan/training_scale_plan.json --out-dir runs/training-scale-gate --profile review
+```
+
+The scale gate writes `training_scale_gate.json`, `training_scale_gate.csv`, `training_scale_gate.md`, and `training_scale_gate.html`. Profiles `review`, `standard`, and `strict` check source count, fingerprint, minimum characters, tiny-corpus status, quality warnings, variant count, baseline handoff, dataset versions, token budget, and estimated corpus passes. The command exits non-zero when the selected profile produces `fail`, unless `--no-fail` is used for report-only checks.
 
 Plan a batch matrix of multiple training portfolio variants:
 
@@ -1511,6 +1524,15 @@ Version 70 screenshots are archived under `c/70`:
 - `05-playwright-training-scale-plan-html.png`: generated training scale plan HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v70 README, c/70 archive, project-maturity explanation, and c README check
 
+Version 71 screenshots are archived under `c/71`:
+
+- `01-unit-tests.png`: training scale gate tests, compile check, and full regression tests
+- `02-training-scale-gate-review-smoke.png`: v70 scale plan checked with the v71 review profile, including pass/warn/fail counts and outputs
+- `03-training-scale-gate-standard-smoke.png`: standard profile report-only smoke showing how tiny corpora and excessive corpus passes become blocking evidence
+- `04-training-scale-gate-structure-check.png`: source/test/docs structure check for scale gate, CLI, renderers, c archive, and AGENTS rule
+- `05-playwright-training-scale-gate-html.png`: generated training scale gate HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v71 README, c/71 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -1688,6 +1710,8 @@ The training portfolio batch layer plans several portfolio variants at once, wri
 
 The training scale planner layer reads text sources before training, classifies corpus size, records quality context, estimates token budgets, and writes a batch-compatible variant matrix for the training portfolio batch layer.
 
+The training scale gate layer reads a scale plan before execution, applies review/standard/strict policy checks, and blocks or warns before an expensive or misleading batch run starts.
+
 The checkpoint comparison layer turns selectable checkpoints into a small local comparison table with file status, tokenizer readiness, parameter/dataset deltas, model-info links, and one-click selection inside the playground.
 
 The side-by-side generation layer sends the same prompt and sampling settings to two selected checkpoints, returns left/right outputs with a compact comparison summary, and records the pair request in JSONL.
@@ -1753,5 +1777,5 @@ The configurable release gate baseline layer lets profile delta explanations use
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
-- Use the v70 scale planner on a real larger Chinese corpus, then execute the generated v69-compatible batch and archive the resulting c/<version> evidence.
+- Use the v70 scale planner and v71 gate on a real larger Chinese corpus, then execute the generated v69-compatible batch and archive the resulting c/<version> evidence.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
