@@ -4,24 +4,24 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 112 applies the v110 module pressure audit to the local inference server with a targeted pair artifact split. It keeps the same model, training, inference, data, benchmark, release, playground, and HTTP API behavior, while moving pair generation JSON/HTML artifact writing into `pair_artifacts.py` so `server.py` can shrink without changing `/api/generate-pair-artifact` or saved evidence records.
+Version 113 applies the v110 module pressure audit to the local inference server with a targeted request-history core split. It keeps the same model, training, inference, data, benchmark, release, playground, and HTTP API behavior, while moving JSONL request-history reading, filtering, detail lookup, query parsing, and CSV export into `request_history.py` so `server.py` can shrink without changing `/api/request-history`, `/api/request-history-detail`, or request-history summary evidence.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, cross-run scorecard comparison | benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
-| Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `pair_artifacts.py`, `playground.py`, request-history and pair-artifact tests, Playwright screenshots | Keep extracting evidence/UI helpers before touching HTTP routing or generation behavior |
+| Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, request-history and pair-artifact tests, Playwright screenshots | Keep extracting evidence/UI helpers before touching HTTP routing or generation behavior |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, related tests and v83-v112 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, related tests and v83-v113 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server. The next pressure point is targeted extraction around remaining server request-history helpers, `benchmark_scorecard.py`, and `playground.py`, not broad rewrites.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server. The next pressure point is targeted extraction around `benchmark_scorecard.py`, `playground.py`, or remaining server UI edges, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,13 @@ Version 112 applies the v110 module pressure audit to the local inference server
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 112 focus
+## Version 113 focus
 
-- Added `pair_artifacts.py` for pair generation JSON/HTML artifact writing, artifact hrefs, slug/timestamp naming, unique filename handling, and HTML rendering.
-- Updated `server.py` to delegate `write_pair_generation_artifacts()` and `render_pair_generation_html()` to the new module while preserving the existing public server exports and `/api/generate-pair-artifact` behavior.
-- Added `tests/test_pair_artifacts.py` to lock artifact naming, collision handling, run-relative hrefs, HTML escaping, and server wrapper delegation.
-- Used the v110 pressure check as evidence: `server.py` drops from about 1676 lines to about 1571 lines, while server HTTP tests and Playwright artifact HTML smoke continue to pass.
+- Added `request_history.py` for inference JSONL append/read, normalized request rows, request-history payloads, detail lookup, query filters, limit/log-index validation, checkpoint matching, and CSV export.
+- Updated `server.py` to import the request-history core helpers while preserving the existing public server exports and `/api/request-history` plus `/api/request-history-detail` behavior.
+- Updated `request_history_summary.py` to depend on the new request-history module directly instead of reaching through `server.py`.
+- Added `tests/test_request_history.py` to lock JSONL invalid-row handling, newest-first filtering, checkpoint matching, detail payloads, query parsing, CSV boolean export, and raw log reads.
+- Used the v110 pressure check as evidence: `server.py` drops from about 1571 lines to about 1279 lines, while server HTTP tests, request-history summary tests, full regression tests, and Playwright request-history summary HTML smoke continue to pass.
 
 ## Version tags
 
@@ -157,6 +158,7 @@ v109.0.0 MiniGPT v109 maintenance batching policy
 v110.0.0 MiniGPT v110 module pressure audit
 v111.0.0 MiniGPT v111 registry asset split
 v112.0.0 MiniGPT v112 pair artifact split
+v113.0.0 MiniGPT v113 request history core split
 ```
 
 ## Project structure
@@ -2022,6 +2024,15 @@ Version 112 screenshots are archived under `c/112`:
 - `04-pair-artifact-output-check.png`: generated pair artifact JSON/HTML checked for schema, hrefs, slug names, escaping, and output files
 - `05-playwright-pair-artifact-html.png`: generated pair artifact HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v112 README, c/112 archive, project-maturity explanation, and c README check
+
+Version 113 screenshots are archived under `c/113`:
+
+- `01-unit-tests.png`: request-history core tests, server regression tests, request-history summary tests, compile check, and full regression tests
+- `02-request-history-smoke.png`: smoke showing server module line reduction and request-history payload/detail/CSV behavior after the split
+- `03-request-history-structure-check.png`: source/test/docs structure check for `request_history.py`, server imports, summary dependency, archive, and explanation records
+- `04-request-history-output-check.png`: generated JSONL request-history outputs checked for invalid rows, filters, detail lookup, CSV booleans, and raw reads
+- `05-playwright-request-history-summary-html.png`: generated request-history summary HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v113 README, c/113 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 

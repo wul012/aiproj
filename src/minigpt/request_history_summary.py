@@ -12,7 +12,7 @@ from minigpt.report_utils import (
     write_json_payload,
 )
 
-from .server import read_request_history_log_records
+from .request_history import read_request_history_log_records
 
 
 SUMMARY_CSV_COLUMNS = [
