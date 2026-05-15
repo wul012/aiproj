@@ -1,5 +1,10 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
+## 最新追加
+
+141-v126-comparison-artifact-split.md
+ -> 第一百二十六版代码讲解：按 v110 压力报告拆 baseline run comparison 的 artifact 输出边界，降低比较模块体量但不改变 comparison schema、CLI 输出和旧导出。
+
 本目录从 v48 开始记录 MiniGPT 的“项目成熟度阶段”。前一阶段 `代码讲解记录_评估基准阶段` 已经把 v35-v47 的 benchmark、dataset version、baseline comparison、本地推理边界、checkpoint/pair generation、pair batch/trend、dashboard/playground、registry links 和 pair delta leaders 收口。
 
 从 v48 开始，重点不再是继续拆细某一种 report/link，而是回答更高一层的问题：

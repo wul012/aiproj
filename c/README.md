@@ -187,6 +187,9 @@ c/124/解释/说明.md
 c/125/图片
 c/125/解释/说明.md
  -> v125 server generator split 的运行截图和解释
+c/126/图片
+c/126/解释/说明.md
+ -> v126 comparison artifact split 的运行截图和解释
 ```
 
 写入规则：
