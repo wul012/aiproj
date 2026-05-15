@@ -157,6 +157,9 @@ c/114/解释/说明.md
 c/115/图片
 c/115/解释/说明.md
  -> v115 playground asset split 的运行截图和解释
+c/116/图片
+c/116/解释/说明.md
+ -> v116 registry data/render split 的运行截图和解释
 ```
 
 写入规则：
