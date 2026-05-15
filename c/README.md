@@ -172,6 +172,9 @@ c/119/解释/说明.md
 c/120/图片
 c/120/解释/说明.md
  -> v120 benchmark scorecard scoring split 的运行截图和解释
+c/121/图片
+c/121/解释/说明.md
+ -> v121 maturity artifact split 的运行截图和解释
 ```
 
 写入规则：
