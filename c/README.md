@@ -142,6 +142,9 @@ c/109/解释/说明.md
 c/110/图片
 c/110/解释/说明.md
  -> v110 module pressure audit 的运行截图和解释
+c/111/图片
+c/111/解释/说明.md
+ -> v111 registry asset split 的运行截图和解释
 ```
 
 写入规则：

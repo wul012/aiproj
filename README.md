@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 110 extends the maintenance policy/check for the MiniGPT learning project. It keeps the same model, training, inference, data, benchmark, release, and report utility behavior, while adding a module pressure audit that scans Python modules, flags large files such as `server.py` and `registry.py`, and keeps future refactors targeted instead of turning code-size concerns into a broad rewrite.
+Version 111 applies the v110 module pressure audit with a targeted registry asset split. It keeps the same model, training, inference, data, benchmark, release, and registry behavior, while moving the registry HTML CSS/JavaScript assets into `registry_assets.py` so `registry.py` can shrink without changing run discovery, registry JSON/CSV/SVG/HTML contracts, or browser interactions.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 110 extends the maintenance policy/check for the MiniGPT learning projec
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching, and v110 adds module pressure scanning so large-module cleanup is planned, not guessed | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, report-utils and maintenance-policy tests, v83-v110 explanations | Batch related low-risk cleanup; split large modules only behind stable tests and concrete follow-up changes |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 starts applying it by extracting registry HTML assets | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, report-utils, maintenance-policy, registry, and registry-assets tests, v83-v111 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report. The next pressure point is targeted extraction around `server.py`, `registry.py`, `benchmark_scorecard.py`, and `playground.py`, not broad rewrites.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 begins applying that report with a low-risk registry asset split. The next pressure point is targeted extraction around `server.py`, `benchmark_scorecard.py`, and `playground.py`, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 110 extends the maintenance policy/check for the MiniGPT learning projec
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 110 focus
+## Version 111 focus
 
-- Extended `maintenance_policy.py` with `build_module_pressure_report`, an AST-backed scanner for Python module line counts, function counts, class counts, largest function spans, and size-pressure recommendations.
-- Extended `scripts/check_maintenance_batching.py` so the same maintenance check now writes both `maintenance_batching.*` and `module_pressure.*` outputs by default.
-- Kept the policy conservative: critical-size modules become planned refactor candidates, but the report explicitly says not to rewrite storage, service, or UI code only to reduce line count.
-- Added v110 archive and explanation records to document the current measured pressure: `server.py`, `registry.py`, and `benchmark_scorecard.py` are critical-size modules; `playground.py` and several report modules are watch-list modules.
+- Added `registry_assets.py` for registry HTML CSS and JavaScript assets, keeping the browser interaction contract in a dedicated module.
+- Updated `registry.py` to call the extracted asset helpers while leaving the public registry payload, output writers, table data attributes, links, and leaderboard rendering unchanged.
+- Added `tests/test_registry_assets.py` to lock the extracted asset contracts: toolbar CSS, interactive controls, numeric sort keys, hash state, CSV export, share link, and integration into `render_registry_html`.
+- Used the v110 pressure check as evidence: `registry.py` drops from about 1511 lines to about 1352 lines, while the same registry tests and Playwright HTML smoke continue to pass.
 
 ## Version tags
 
@@ -155,6 +155,7 @@ v107.0.0 MiniGPT v107 release readiness comparison report utility migration
 v108.0.0 MiniGPT v108 batched release governance report utility migration
 v109.0.0 MiniGPT v109 maintenance batching policy
 v110.0.0 MiniGPT v110 module pressure audit
+v111.0.0 MiniGPT v111 registry asset split
 ```
 
 ## Project structure
@@ -2002,6 +2003,15 @@ Version 110 screenshots are archived under `c/110`:
 - `04-module-pressure-output-check.png`: generated module pressure JSON/CSV/Markdown/HTML checked for critical modules and recommendations
 - `05-playwright-module-pressure-html.png`: generated module pressure HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v110 README, c/110 archive, project-maturity explanation, and c README check
+
+Version 111 screenshots are archived under `c/111`:
+
+- `01-unit-tests.png`: registry asset tests, registry regression tests, compile check, and full regression tests
+- `02-registry-asset-smoke.png`: CLI smoke showing registry module line reduction and module pressure output after the asset split
+- `03-registry-asset-structure-check.png`: source/test/docs structure check for `registry_assets.py`, registry wrappers, archive, and explanation records
+- `04-registry-asset-output-check.png`: generated registry HTML checked for extracted CSS/JS contracts, links, sorting metadata, and output files
+- `05-playwright-registry-asset-html.png`: generated registry HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v111 README, c/111 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 

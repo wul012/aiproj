@@ -309,9 +309,11 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
  -> 第一百零九版代码讲解：把版本粒度批评落成 maintenance batching policy，判断低风险维护是否应该合并成批量版本
 125-v110-module-pressure-audit.md
  -> 第一百一十版代码讲解：把代码膨胀批评落成 module pressure audit，用 AST 和行数扫描标出需要计划性拆分的大模块
+126-v111-registry-asset-split.md
+ -> 第一百一十一版代码讲解：按 v110 压力报告先拆 registry 的 HTML CSS/JS 资产，降低大模块体量但不改变 registry 数据契约
 ```
 
-后续继续推进时，在这里追加 `126-v111-主题.md`，或者在新的能力线目录继续拆分。
+后续继续推进时，在这里追加 `127-v112-主题.md`，或者在新的能力线目录继续拆分。
 
 ## 一句话总览
 
@@ -346,3 +348,4 @@ v107 起 release readiness comparison 也接入公共工具，说明发布就绪
 v108 起同类低风险 utils migration 开始合并发布，说明项目维护节奏从“逐模块验证公共工具”转向“批量收束重复 helper，同时用代表性证据控制风险”。
 v109 起项目有了 maintenance batching policy，说明后续版本推进不只看功能能否继续拆，还会检查低风险维护是否应该合并，避免版本粒度继续碎片化。
 v110 起项目有了 module pressure audit，说明“代码膨胀持续”的判断不再只靠主观印象，而会先扫描模块行数、函数跨度和风险级别，再决定是否做小步、定向的拆分。
+v111 起项目开始按 module pressure audit 做第一处小步拆分，把 registry HTML CSS/JS 资产抽到独立模块，证明“代码膨胀治理”可以先从展示资产边界开始，而不是直接改业务主流程。
