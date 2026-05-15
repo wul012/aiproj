@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 108 is a batched release governance report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, data-quality checks, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, release-bundle behavior, readiness decisions, release gate policies, gate profile comparisons, and request-history summary rules, while moving three related release-governance exporters onto the shared report utility foundation.
+Version 109 is a maintenance batching policy/check for the MiniGPT learning project. It keeps the same model, training, inference, data, benchmark, release, and report utility behavior, while adding a small policy report that detects over-fragmented utility-migration version history and recommends batching related low-risk maintenance work into one version.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 108 is a batched release governance report-utils migration for the MiniG
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v108 report-utils migration series, including a batched release-governance migration in v108 | `src/minigpt/report_utils.py`, report-utils tests, v83-v108 explanations | Continue batching low-risk related migrations instead of tagging every small helper move |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series, and v109 adds a maintenance batching check so future low-risk utility migrations do not become one-module tags by default | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, report-utils and maintenance-policy tests, v83-v109 explanations | Batch related low-risk cleanup; keep high-risk behavior, service, schema, or UI changes as focused versions |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v108 switches this cleanup line from one-module tags to batched, low-risk migrations. The next pressure point is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns the critique about over-fragmented utility migrations into a runnable batching policy. The next pressure point is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 108 is a batched release governance report-utils migration for the MiniG
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 108 focus
+## Version 109 focus
 
-- Migrated `release_gate.py`, `release_gate_comparison.py`, and `request_history_summary.py` to reuse `report_utils` for JSON output, UTC timestamps, HTML escaping, dict/list normalization, and selected CSV scalar cell formatting.
-- Kept release gate policy resolution, strict/review/legacy decisions, profile deltas, request-history status counts, recommendation rules, Markdown/HTML layout, and module-specific CSV list formatting unchanged.
-- Left gate-specific scoring, profile comparison deltas, request-history statistics, and display formatting local because they encode release-governance semantics rather than generic report utilities.
-- Added v108 archive and explanation records as a batched migration, reducing version fragmentation while keeping focused tests and representative browser evidence.
+- Added `maintenance_policy.py` to classify recent version history, detect consecutive single-module low-risk utility migrations, and decide whether a proposed maintenance set should be batched, split, grouped by category, or kept as a focused version.
+- Added `scripts/check_maintenance_batching.py` so the batching rule can be run from the command line and exported as JSON/CSV/Markdown/HTML evidence.
+- Kept the rule deliberately light: low-risk `report-utils`, `utils-migration`, docs-only, and test-helper work can batch; behavior, schema, service/API, UI, large-module, or unclear-boundary changes should stay focused.
+- Added v109 archive and explanation records to document the judgement behind the critique: the concern is reasonable, and future cleanup versions should merge related low-risk migrations instead of tagging every small helper move.
 
 ## Version tags
 
@@ -153,6 +153,7 @@ v105.0.0 MiniGPT v105 data quality report utility migration
 v106.0.0 MiniGPT v106 release readiness report utility migration
 v107.0.0 MiniGPT v107 release readiness comparison report utility migration
 v108.0.0 MiniGPT v108 batched release governance report utility migration
+v109.0.0 MiniGPT v109 maintenance batching policy
 ```
 
 ## Project structure
@@ -323,6 +324,7 @@ v108.0.0 MiniGPT v108 batched release governance report utility migration
 │   ├── build_model_card.py
 │   ├── build_playground.py
 │   ├── chat.py
+│   ├── check_maintenance_batching.py
 │   ├── check_training_scale_gate.py
 │   ├── check_release_gate.py
 │   ├── compare_release_gate_profiles.py
@@ -368,6 +370,7 @@ v108.0.0 MiniGPT v108 batched release governance report utility migration
 │       ├── generation_quality.py
 │       ├── history.py
 │       ├── manifest.py
+│       ├── maintenance_policy.py
 │       ├── maturity_narrative.py
 │       ├── model.py
 │       ├── model_card.py
@@ -412,6 +415,7 @@ v108.0.0 MiniGPT v108 batched release governance report utility migration
 │   ├── test_generation_quality.py
 │   ├── test_history.py
 │   ├── test_manifest.py
+│   ├── test_maintenance_policy.py
 │   ├── test_maturity_narrative.py
 │   ├── test_model.py
 │   ├── test_model_card.py
@@ -723,6 +727,14 @@ python scripts/compare_release_gate_profiles.py --bundle runs/release-bundle/rel
 ```
 
 The output directory contains `release_gate_profile_comparison.json`, `release_gate_profile_comparison.csv`, `release_gate_profile_deltas.csv`, `release_gate_profile_comparison.md`, and `release_gate_profile_comparison.html`. Use repeated `--bundle` arguments to compare several release bundles under the same profile set. The reports record `baseline_profile`; the delta CSV and the Markdown/HTML Profile Deltas section explain how each compared profile differs from that baseline profile.
+
+Check whether maintenance work should be batched before creating the next version:
+
+```powershell
+python scripts/check_maintenance_batching.py --out-dir runs/maintenance-batching
+```
+
+The output directory contains `maintenance_batching.json`, `maintenance_batching.csv`, `maintenance_batching.md`, and `maintenance_batching.html`. Optional `--history` and `--proposal` files accept JSON lists; the default smoke data demonstrates the v109 rule by warning on a run of single-module report-utils migrations and recommending one batched version for related low-risk helpers.
 
 Build a release-quality maturity narrative from the current evidence chain:
 
@@ -1972,6 +1984,15 @@ Version 108 screenshots are archived under `c/108`:
 - `05-playwright-release-gate-comparison-html.png`: generated release gate profile comparison HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v108 README, c/108 archive, project-maturity explanation, and c README check
 
+Version 109 screenshots are archived under `c/109`:
+
+- `01-unit-tests.png`: maintenance policy tests, report utility tests, compile check, and full regression tests
+- `02-maintenance-policy-smoke.png`: default CLI smoke warning on fragmented single-module utility migrations and recommending a batched proposal
+- `03-maintenance-policy-structure-check.png`: source/test/docs structure check for the policy module, CLI, archive, and explanation records
+- `04-maintenance-policy-output-check.png`: generated JSON/CSV/Markdown/HTML maintenance batching outputs checked for status, proposal decision, and recommendations
+- `05-playwright-maintenance-policy-html.png`: generated maintenance batching HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v109 README, c/109 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2102,6 +2123,7 @@ Project-maturity records start at v48:
 121-v106-release-readiness-report-utils.md
 122-v107-release-readiness-comparison-report-utils.md
 123-v108-release-governance-batch-report-utils.md
+124-v109-maintenance-batching-policy.md
 ```
 
 ## Learning map
@@ -2269,6 +2291,8 @@ The release gate profile comparison layer turns those modes into a matrix report
 The release gate profile delta layer explains why compared profiles disagree with the baseline by naming added/removed failed and warned checks.
 
 The configurable release gate baseline layer lets profile delta explanations use an explicit baseline profile instead of always using the first selected profile.
+
+The maintenance batching policy layer turns the v84-v108 version-fragmentation critique into a runnable check: related low-risk utility migrations should batch, while behavior, service/API, schema, UI, large-module, or unclear-boundary changes keep focused versions.
 
 Next useful extensions:
 

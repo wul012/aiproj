@@ -67,6 +67,9 @@ __all__ = [
     "write_pair_batch_trend_outputs",
     "render_pair_generation_html",
     "write_pair_generation_artifacts",
+    "build_maintenance_batching_report",
+    "build_maintenance_proposal_decision",
+    "write_maintenance_batching_outputs",
 ]
 
 _EXPORTS = {
@@ -131,6 +134,9 @@ _EXPORTS = {
     "write_pair_batch_trend_outputs": ("pair_trend", "write_pair_batch_trend_outputs"),
     "render_pair_generation_html": ("server", "render_pair_generation_html"),
     "write_pair_generation_artifacts": ("server", "write_pair_generation_artifacts"),
+    "build_maintenance_batching_report": ("maintenance_policy", "build_maintenance_batching_report"),
+    "build_maintenance_proposal_decision": ("maintenance_policy", "build_maintenance_proposal_decision"),
+    "write_maintenance_batching_outputs": ("maintenance_policy", "write_maintenance_batching_outputs"),
 }
 
 

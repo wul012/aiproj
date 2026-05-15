@@ -136,6 +136,9 @@ c/107/解释/说明.md
 c/108/图片
 c/108/解释/说明.md
  -> v108 batched release governance report utility migration 的运行截图和解释
+c/109/图片
+c/109/解释/说明.md
+ -> v109 maintenance batching policy 的运行截图和解释
 ```
 
 写入规则：
