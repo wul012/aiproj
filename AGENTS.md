@@ -1,5 +1,40 @@
 # Completion Cleanup Gate
 
+## Four-Project Research Rules
+
+For cross-project research, quality evaluation, and planning, use `[MODE: RESEARCH]`.
+Prefer read-only inspection, evidence-backed summaries, and clear separation between facts, judgments, and recommendations.
+
+Developer capability baseline across Node/Java/mini-kv/aiproj:
+
+| Dimension | Rating |
+|---|---|
+| Architecture design | A- |
+| Multi-language engineering | A |
+| Test engineering | B+ |
+| Output speed | S |
+| Refactoring and debt management | B |
+| Security and compliance awareness | A |
+| Engineering discipline and restraint | C+ |
+
+Core judgment: high-output, strong-design, multi-stack developer with good safety awareness; main growth area is knowing when to stop, refactor, and trade about 30% speed for restraint.
+
+Evaluation rules:
+- Praise speed, architecture, multi-language execution, and safety awareness, but do not overstate production readiness.
+- Distinguish contract/evidence chain from live runtime integration.
+- Treat large files, long names, repeated report renderers, string-based fixture checks, and delayed refactoring as real debt signals.
+- Separate latest committed version from dirty working tree changes.
+- Until real integration exists, describe the state as `single-project validation + cross-project contract alignment`.
+
+aiproj-specific focus:
+- aiproj is AI engineering governance, not just training scripts.
+- Evaluate data cards, experiment cards, model cards, audits, release bundles, gates, promotion, and report utilities as the core engineering value.
+- Model quality is educational unless stronger eval evidence exists; do not present governance tooling as proof of production model quality.
+
+Refactoring rhythm:
+- After 3-4 feature versions, prefer 1 version of contract-preserving refactor, deduplication, or test hardening.
+- Split report builders, renderers, styles, artifact helpers, and validators when modules keep growing past roughly 500-800 lines.
+
 ## Collaboration Rule
 
 能完成的自己做；不能做的、权限不足的、或有疑惑需要用户确认的事项，明确说明原因并让用户配合。
