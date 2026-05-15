@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 103 is a run manifest report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, and release behavior, while moving the run manifest exporter onto the shared report utility foundation.
+Version 104 is a data preparation report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, and release behavior, while moving the data preparation exporter onto the shared report utility foundation.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 103 is a run manifest report-utils migration for the MiniGPT learning pr
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v103 report-utils migration series, including run manifest in v103 | `src/minigpt/report_utils.py`, report-utils tests, v83-v103 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v104 report-utils migration series, including data preparation in v104 | `src/minigpt/report_utils.py`, report-utils tests, v83-v104 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v103 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v104 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 103 is a run manifest report-utils migration for the MiniGPT learning pr
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 103 focus
+## Version 104 focus
 
-- Migrated `manifest.py` to reuse `report_utils` for UTC timestamps, JSON output, and HTML escaping.
-- Kept run-manifest schema, git/environment/data/model/training/results/artifacts fields, SHA-256 handling, and SVG layout unchanged.
-- Left manifest-specific artifact specs, digest limits, git probing, duration parsing, byte formatting, clipping, and JSONability helpers local because they encode reproducibility-manifest semantics.
-- Added v103 archive and explanation records so the run-manifest to dataset-card/experiment-card handoff has the same evidence trail as earlier migrations.
+- Migrated `data_prep.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict normalization.
+- Kept source discovery, text normalization, prepared corpus output, dataset report fields, dataset version fields, quality handoff, SVG chart, and HTML layout unchanged.
+- Left data-prep-specific source summaries, fingerprinting, clipping, statistics, dataset version HTML, and prepared corpus writing local because they encode corpus-preparation semantics.
+- Added v104 archive and explanation records so the prepared-dataset to run-manifest/dataset-card handoff has the same evidence trail as earlier migrations.
 
 ## Version tags
 
@@ -148,6 +148,7 @@ v100.0.0 MiniGPT v100 model card report utility migration
 v101.0.0 MiniGPT v101 experiment card report utility migration
 v102.0.0 MiniGPT v102 dataset card report utility migration
 v103.0.0 MiniGPT v103 run manifest report utility migration
+v104.0.0 MiniGPT v104 data preparation report utility migration
 ```
 
 ## Project structure
@@ -1922,6 +1923,15 @@ Version 103 screenshots are archived under `c/103`:
 - `05-playwright-manifest-svg.png`: generated run manifest SVG opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v103 README, c/103 archive, project-maturity explanation, and c README check
 
+Version 104 screenshots are archived under `c/104`:
+
+- `01-unit-tests.png`: migrated data preparation tests, report utility tests, compile check, and full regression tests
+- `02-data-prep-complete-smoke.png`: data preparation smoke confirming prepared corpus, dataset report, quality report, dataset version JSON, and HTML still generate
+- `03-data-prep-nonrecursive-smoke.png`: data preparation smoke confirming non-recursive source discovery still excludes nested files
+- `04-data-prep-structure-check.png`: source/test/docs structure check for conservative data preparation migration and archive indexes
+- `05-playwright-dataset-version-html.png`: generated dataset version HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v104 README, c/104 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2047,6 +2057,7 @@ Project-maturity records start at v48:
 116-v101-experiment-card-report-utils.md
 117-v102-dataset-card-report-utils.md
 118-v103-run-manifest-report-utils.md
+119-v104-data-prep-report-utils.md
 ```
 
 ## Learning map

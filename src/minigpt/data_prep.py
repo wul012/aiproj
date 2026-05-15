@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
 import hashlib
-import html
 import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import as_dict as _dict, html_escape as _e, utc_now, write_json_payload
 
 
 @dataclass(frozen=True)
@@ -220,9 +220,7 @@ def write_prepared_dataset(
 
 
 def write_dataset_report_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_dataset_report_svg(report: dict[str, Any], path: str | Path) -> None:
@@ -242,7 +240,7 @@ def write_dataset_report_svg(report: dict[str, Any], path: str | Path) -> None:
         chars = int(source.get("char_count", 0))
         bar = 0 if max_chars == 0 else max(2, int(bar_w * chars / max_chars))
         name = _clip(Path(str(source.get("path", ""))).name, 34)
-        rows.append(f'<text x="28" y="{y + 24}" font-family="Arial" font-size="13" fill="#111827">{html.escape(name)}</text>')
+        rows.append(f'<text x="28" y="{y + 24}" font-family="Arial" font-size="13" fill="#111827">{_e(name)}</text>')
         rows.append(f'<rect x="{bar_x}" y="{y + 9}" width="{bar}" height="16" rx="3" fill="#047857"/>')
         rows.append(f'<text x="{bar_x + bar + 10}" y="{y + 22}" font-family="Arial" font-size="12" fill="#374151">{chars} chars</text>')
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
@@ -258,9 +256,7 @@ def write_dataset_report_svg(report: dict[str, Any], path: str | Path) -> None:
 
 
 def write_dataset_version_json(manifest: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(manifest, path)
 
 
 def render_dataset_version_html(manifest: dict[str, Any]) -> str:
@@ -350,15 +346,7 @@ def _sha256_text(text: str) -> str:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
+    return utc_now()
 
 
 def _stat(label: str, value: Any) -> str:

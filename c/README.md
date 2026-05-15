@@ -121,6 +121,9 @@ c/102/解释/说明.md
 c/103/图片
 c/103/解释/说明.md
  -> v103 run manifest report utility migration 的运行截图和解释
+c/104/图片
+c/104/解释/说明.md
+ -> v104 data preparation report utility migration 的运行截图和解释
 ```
 
 写入规则：
