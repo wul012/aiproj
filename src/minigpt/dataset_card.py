@@ -1,10 +1,15 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    utc_now,
+    write_json_payload,
+)
 
 
 DEFAULT_INTENDED_USE = [
@@ -18,10 +23,6 @@ DEFAULT_LIMITATIONS = [
     "Quality checks are lightweight heuristics and do not prove factual accuracy, consent, or safety.",
     "Source files and licenses must still be reviewed by the project owner before external sharing.",
 ]
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def build_dataset_card(
@@ -63,9 +64,7 @@ def build_dataset_card(
 
 
 def write_dataset_card_json(card: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(card, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(card, path)
 
 
 def render_dataset_card_markdown(card: dict[str, Any]) -> str:
@@ -522,10 +521,6 @@ def _markdown_table(rows: list[tuple[Any, Any]]) -> list[str]:
     return lines
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
 def _pick(value: Any, key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
 
@@ -540,10 +535,6 @@ def _string_list(value: Any) -> list[str]:
 
 def _md(value: Any) -> str:
     return ("missing" if value is None else str(value)).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _stat(label: str, value: Any) -> str:
