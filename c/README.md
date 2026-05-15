@@ -178,6 +178,9 @@ c/121/解释/说明.md
 c/122/图片
 c/122/解释/说明.md
  -> v122 training portfolio comparison artifact split 的运行截图和解释
+c/123/图片
+c/123/解释/说明.md
+ -> v123 dashboard render split 的运行截图和解释
 ```
 
 写入规则：
