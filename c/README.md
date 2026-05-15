@@ -184,6 +184,9 @@ c/123/解释/说明.md
 c/124/图片
 c/124/解释/说明.md
  -> v124 playground asset module split 的运行截图和解释
+c/125/图片
+c/125/解释/说明.md
+ -> v125 server generator split 的运行截图和解释
 ```
 
 写入规则：

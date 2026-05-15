@@ -337,6 +337,8 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
  -> 第一百二十三版代码讲解：按 v110 压力报告拆 dashboard 的 HTML 渲染边界，降低 dashboard 主模块体量但不改变 dashboard payload、CLI 和旧导出
 139-v124-playground-asset-module-split.md
  -> 第一百二十四版代码讲解：按 v110 压力报告继续拆 playground_assets 的 CSS/JavaScript 资产边界，降低 facade 体量但不改 playground 静态页面、本地 API 名称和旧导出
+140-v125-server-generator-split.md
+ -> 第一百二十五版代码讲解：按 v110 压力报告拆 server 的 MiniGPTGenerator 推理生成边界，降低 HTTP server 体量但不改路由、SSE、日志和旧导出
 ```
 
 后续继续推进时，在这里追加新的全局编号文档，或者在新的能力线目录继续拆分。
@@ -378,3 +380,4 @@ v111 起项目开始按 module pressure audit 做第一处小步拆分，把 reg
 v112 起项目把 server 里的 pair artifact 保存边界抽成独立模块，说明服务端大文件治理也可以先从证据写入和 HTML 渲染这类稳定边界开始，而不触碰 HTTP 路由和模型推理主流程。v113 起项目把 request-history 的 JSONL 读取、过滤、详情查询、query 解析和 CSV 导出抽成独立核心模块，说明服务端厚模块治理开始从展示证据层推进到本地推理日志证据链的可复用数据处理层。v114 起项目把 benchmark scorecard 的 JSON/CSV/Markdown/HTML 输出层抽成独立模块，说明评估模块也开始区分“评分计算”和“证据发布”。v115 起项目把 playground 的 CSS/JavaScript 资产抽成独立模块，说明 UI 大文件治理也优先从稳定展示资产边界开始，保留本地 API 和静态页面契约不变。v116 起项目回到 registry 主体，把 run discovery、artifact reading、leaderboard summary 和 output rendering 拆开，说明前面只拆资产的治理可以继续推进到真实数据汇总边界，同时用 facade 保留旧入口。v117 起项目继续回到 server 主体，把纯契约、payload 和 checkpoint metadata 逻辑抽成 `server_contracts.py`，说明服务端治理开始把 HTTP handler、真实生成和可复用契约分开。v118 起项目回到 benchmark scorecard comparison，把输出写入和页面渲染抽成 artifact 模块，说明评估比较链路也开始区分“比较计算”和“证据发布”。v119 起项目回到 maintenance policy 本身，把维护批处理和 module pressure 的证据输出抽成 artifact 模块，说明治理工具也开始区分“策略判断”和“证据发布”。v120 起项目继续回到 benchmark scorecard，把 case 合并、rubric 打分和 group drilldown 抽成 scoring 模块，说明评估模块开始区分“运行证据编排”和“评分计算”。v121 起项目回到 maturity summary，把 JSON/CSV/Markdown/HTML 输出和页面渲染抽成 artifact 模块，说明成熟度汇总也开始区分“成熟度/context 计算”和“证据发布”。v122 起项目回到 training portfolio comparison，把组合比较的 JSON/CSV/Markdown/HTML 输出抽成 artifact 模块，说明训练规模证据链也开始区分“比较计算”和“证据发布”。v123 起项目回到 dashboard，把 HTML/CSS 和各区块渲染抽成 render 模块，说明运行证据页面也开始区分“payload 组装”和“页面发布”。
 
 v124 起项目继续回到 playground assets，把 CSS 与 JavaScript 分成专用模块并让 `playground_assets.py` 退为 facade，说明 UI 资产治理开始从“抽出资产”推进到“资产内部边界清晰化”。
+v125 起项目回到本地推理 server，把 `MiniGPTGenerator` 抽成 `server_generator.py`，说明服务端治理进一步区分“HTTP 路由/日志/SSE 编排”和“PyTorch checkpoint/tokenizer 加载及 token 生成”。
