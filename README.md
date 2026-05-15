@@ -4,24 +4,24 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 116 applies the v110 module pressure audit to the run registry layer with a contract-preserving data/render split. It keeps the same registry CLI, public `minigpt.registry` imports, JSON/CSV/SVG/HTML outputs, and HTML interaction contract, while moving run discovery, artifact reading, summary construction, and leaderboard data into `registry_data.py`, and moving registry writers plus SVG/HTML rendering helpers into `registry_render.py`.
+Version 117 applies the v110 module pressure audit to the local inference server with a contract-preserving server contract split. It keeps the same `minigpt.server` public imports, playground server CLI, HTTP routes, request logging, streaming behavior, and pair-generation behavior, while moving safety profiles, generation request/response dataclasses, request parsing, checkpoint discovery, model-info payloads, health payloads, checkpoint comparison payloads, SSE formatting, timeout payloads, and pair response payloads into `server_contracts.py`.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, cross-run scorecard comparison | `benchmark_scorecard.py`, `benchmark_scorecard_artifacts.py`, benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
-| Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep extracting evidence/UI helpers before touching HTTP routing or generation behavior |
+| Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts | `server.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, related tests and v83-v116 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, related tests and v83-v117 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules. The next pressure point is remaining server UI edges or benchmark scoring subdomains, not broad rewrites.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server. The next pressure point is remaining server route orchestration or benchmark scoring subdomains, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 116 applies the v110 module pressure audit to the run registry layer wit
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 116 focus
+## Version 117 focus
 
-- Added `registry_data.py` for run discovery, `RegisteredRun`, artifact readers, run summaries, best-loss ranking, benchmark rubric leaderboard data, pair delta leaders, release-readiness delta leaders, and registry-level count summaries.
-- Added `registry_render.py` for registry JSON/CSV/SVG/HTML writers and HTML/SVG helper functions, while keeping `registry.py` as the public compatibility facade used by scripts and existing imports.
-- Added `tests/test_registry_split.py` to lock direct use of the data/render modules and verify that the old `minigpt.registry` API still points to the new implementations.
-- Used the v110 pressure check and later quality feedback as evidence: the former 1352-line `registry.py` is now a 29-line facade, with responsibilities split into `registry_data.py` and `registry_render.py` without changing registry outputs or CLI behavior.
+- Added `server_contracts.py` for inference safety profiles, generation request/response dataclasses, request parsing, checkpoint discovery, model-info/health/checkpoint-compare payloads, SSE message formatting, timeout payloads, and pair generation response payloads.
+- Updated `server.py` to import those contracts while keeping the same `minigpt.server` public API, HTTP handler, streaming behavior, pair generation, request logging, and playground server behavior.
+- Added `tests/test_server_contracts.py` to lock direct use of the contract module and verify that legacy `minigpt.server` imports still point to the new implementation.
+- Used the v110 pressure check and later quality feedback as evidence: `server.py` drops from 1162 lines to 678 lines, while `server_contracts.py` isolates pure contract/payload logic without changing local inference runtime behavior.
 
 ## Version tags
 
@@ -161,6 +161,7 @@ v113.0.0 MiniGPT v113 request history core split
 v114.0.0 MiniGPT v114 benchmark scorecard artifact split
 v115.0.0 MiniGPT v115 playground asset split
 v116.0.0 MiniGPT v116 registry data/render split
+v117.0.0 MiniGPT v117 server contract split
 ```
 
 ## Project structure
@@ -399,6 +400,7 @@ v116.0.0 MiniGPT v116 registry data/render split
 │       ├── playground_assets.py
 │       ├── sampling.py
 │       ├── server.py
+│       ├── server_contracts.py
 │       ├── tokenizer.py
 │       ├── training_scale_handoff.py
 │       ├── training_scale_promotion.py
@@ -445,6 +447,7 @@ v116.0.0 MiniGPT v116 registry data/render split
 │   ├── test_release_gate.py
 │   ├── test_sampling.py
 │   ├── test_server.py
+│   ├── test_server_contracts.py
 │   ├── test_tokenizer.py
 │   ├── test_training_scale_handoff.py
 │   ├── test_training_scale_promotion.py
@@ -2066,6 +2069,15 @@ Version 116 screenshots are archived under `c/116`:
 - `04-registry-output-check.png`: generated registry JSON/CSV/SVG/HTML checked for output files, leaderboards, links, and wrapper parity
 - `05-playwright-registry-html.png`: generated registry HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v116 README, c/116 archive, project-maturity explanation, and c README check
+
+Version 117 screenshots are archived under `c/117`:
+
+- `01-unit-tests.png`: server contracts tests, server/request-history/pair regression tests, compile check, and full regression tests
+- `02-server-contract-smoke.png`: smoke showing `server.py` line reduction and maintenance pressure output after the split
+- `03-server-contract-structure-check.png`: source/test/docs structure check for `server_contracts.py`, `server.py` facade imports, archive, and explanation records
+- `04-server-contract-output-check.png`: direct contract module output check for health, checkpoints, model-info, comparison, SSE, timeout, and pair payloads
+- `05-playwright-server-health.png`: local playground server health endpoint opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v117 README, c/117 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 
