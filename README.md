@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 118 applies the v110 module pressure audit to cross-run benchmark scorecard comparison with a contract-preserving artifact split. It keeps the same comparison builder, CLI, report schema, JSON/CSV/Markdown/HTML output names, and public `minigpt.benchmark_scorecard_comparison` imports, while moving comparison JSON/CSV writers, case-delta CSV writer, Markdown renderer, HTML renderer, and display helpers into `benchmark_scorecard_comparison_artifacts.py`.
+Version 119 applies the v110 module pressure audit to the maintenance policy itself with a contract-preserving artifact split. It keeps the same batching policy, module pressure scanner, CLI, report schemas, output file names, and public `minigpt.maintenance_policy` imports, while moving maintenance batching and module pressure JSON/CSV/Markdown/HTML writers plus display helpers into `maintenance_policy_artifacts.py`.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 118 applies the v110 module pressure audit to cross-run benchmark scorec
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts | `server.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, related tests and v83-v118 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, related tests and v83-v119 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server; v118 splits benchmark scorecard comparison output artifacts from comparison logic. The next pressure point is maintenance policy or remaining report modules, not broad rewrites.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server; v118 splits benchmark scorecard comparison output artifacts from comparison logic; v119 splits maintenance policy artifact outputs from policy/scanner logic. The next pressure point is `benchmark_scorecard.py` or remaining report modules, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 118 applies the v110 module pressure audit to cross-run benchmark scorec
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 118 focus
+## Version 119 focus
 
-- Added `benchmark_scorecard_comparison_artifacts.py` for comparison JSON/CSV writers, case-delta CSV writer, Markdown renderer, HTML renderer, and display helper functions.
-- Updated `benchmark_scorecard_comparison.py` to keep scorecard loading, baseline selection, run/case/group delta computation, summary and recommendation logic, while re-exporting the old artifact functions from the new module.
-- Added `tests/test_benchmark_scorecard_comparison_artifacts.py` to lock direct artifact module use and verify that legacy `benchmark_scorecard_comparison` artifact exports still point to the new implementation.
-- Used the v110 pressure check and later quality feedback as evidence: `benchmark_scorecard_comparison.py` drops from 781 lines to 425 lines, while output file names, report schema, CLI behavior, Markdown and HTML rendering remain unchanged.
+- Added `maintenance_policy_artifacts.py` for maintenance batching and module pressure JSON/CSV writers, Markdown renderers, HTML renderers, and display helper functions.
+- Updated `maintenance_policy.py` to keep batching policy decisions, proposal normalization, module pressure scanning, AST summaries, recommendations, and old artifact exports, while delegating output publishing to the new module.
+- Added `tests/test_maintenance_policy_artifacts.py` to lock direct artifact module use and verify that legacy `maintenance_policy` artifact exports still point to the new implementation.
+- Used the v110 pressure check and v118 next-pressure note as evidence: `maintenance_policy.py` drops from 751 nonblank lines to 414 nonblank lines, while the check-maintenance CLI, report schemas, output file names, Markdown and HTML rendering remain unchanged.
 
 ## Version tags
 
@@ -163,6 +163,7 @@ v115.0.0 MiniGPT v115 playground asset split
 v116.0.0 MiniGPT v116 registry data/render split
 v117.0.0 MiniGPT v117 server contract split
 v118.0.0 MiniGPT v118 benchmark comparison artifact split
+v119.0.0 MiniGPT v119 maintenance policy artifact split
 ```
 
 ## Project structure
@@ -384,6 +385,7 @@ v118.0.0 MiniGPT v118 benchmark comparison artifact split
 │       ├── history.py
 │       ├── manifest.py
 │       ├── maintenance_policy.py
+│       ├── maintenance_policy_artifacts.py
 │       ├── maturity_narrative.py
 │       ├── model.py
 │       ├── model_card.py
@@ -437,6 +439,7 @@ v118.0.0 MiniGPT v118 benchmark comparison artifact split
 │   ├── test_history.py
 │   ├── test_manifest.py
 │   ├── test_maintenance_policy.py
+│   ├── test_maintenance_policy_artifacts.py
 │   ├── test_maturity_narrative.py
 │   ├── test_model.py
 │   ├── test_model_card.py
@@ -2096,6 +2099,15 @@ Version 118 screenshots are archived under `c/118`:
 - `04-benchmark-comparison-output-check.png`: generated comparison JSON/CSV/case CSV/Markdown/HTML checked for output files, escaped HTML, case deltas, and facade parity
 - `05-playwright-benchmark-comparison-html.png`: generated benchmark comparison HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v118 README, c/118 archive, project-maturity explanation, and c README check
+
+Version 119 screenshots are archived under `c/119`:
+
+- `01-unit-tests.png`: maintenance policy artifact tests, maintenance policy regression tests, compile check, and full regression tests
+- `02-maintenance-policy-artifact-smoke.png`: smoke showing maintenance policy module line reduction and maintenance pressure output after the split
+- `03-maintenance-policy-artifact-structure-check.png`: source/test/docs structure check for `maintenance_policy_artifacts.py`, legacy facade exports, archive, and explanation records
+- `04-maintenance-policy-output-check.png`: generated maintenance batching and module pressure JSON/CSV/Markdown/HTML checked for output files, escaping, headers, and facade parity
+- `05-playwright-maintenance-policy-html.png`: generated maintenance policy HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v119 README, c/119 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 
