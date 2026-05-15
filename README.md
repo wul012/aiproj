@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 107 is a release readiness comparison report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, data-quality checks, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, release-bundle behavior, readiness decisions, and readiness comparison rules, while moving the release readiness comparison exporter onto the shared report utility foundation.
+Version 108 is a batched release governance report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, data-quality checks, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, release-bundle behavior, readiness decisions, release gate policies, gate profile comparisons, and request-history summary rules, while moving three related release-governance exporters onto the shared report utility foundation.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 107 is a release readiness comparison report-utils migration for the Min
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v107 report-utils migration series, including release readiness comparison in v107 | `src/minigpt/report_utils.py`, report-utils tests, v83-v107 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v108 report-utils migration series, including a batched release-governance migration in v108 | `src/minigpt/report_utils.py`, report-utils tests, v83-v108 explanations | Continue batching low-risk related migrations instead of tagging every small helper move |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v107 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v108 switches this cleanup line from one-module tags to batched, low-risk migrations. The next pressure point is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 107 is a release readiness comparison report-utils migration for the Min
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 107 focus
+## Version 108 focus
 
-- Migrated `release_readiness_comparison.py` to reuse `report_utils` for JSON output, UTC timestamps, HTML escaping, dict/list normalization, and CSV scalar cell formatting.
-- Kept baseline override, status delta scoring, panel-change detection, audit/missing-artifact deltas, recommendations, Markdown/HTML layout, and delta explanations unchanged.
-- Left comparison-specific scoring, delta explanation, string-list filtering, list-to-semicolon CSV formatting, and report layout local because they encode release readiness comparison behavior.
-- Added v107 archive and explanation records so cross-release readiness comparison has the same conservative evidence trail as the v106 dashboard migration.
+- Migrated `release_gate.py`, `release_gate_comparison.py`, and `request_history_summary.py` to reuse `report_utils` for JSON output, UTC timestamps, HTML escaping, dict/list normalization, and selected CSV scalar cell formatting.
+- Kept release gate policy resolution, strict/review/legacy decisions, profile deltas, request-history status counts, recommendation rules, Markdown/HTML layout, and module-specific CSV list formatting unchanged.
+- Left gate-specific scoring, profile comparison deltas, request-history statistics, and display formatting local because they encode release-governance semantics rather than generic report utilities.
+- Added v108 archive and explanation records as a batched migration, reducing version fragmentation while keeping focused tests and representative browser evidence.
 
 ## Version tags
 
@@ -152,6 +152,7 @@ v104.0.0 MiniGPT v104 data preparation report utility migration
 v105.0.0 MiniGPT v105 data quality report utility migration
 v106.0.0 MiniGPT v106 release readiness report utility migration
 v107.0.0 MiniGPT v107 release readiness comparison report utility migration
+v108.0.0 MiniGPT v108 batched release governance report utility migration
 ```
 
 ## Project structure
@@ -1962,6 +1963,15 @@ Version 107 screenshots are archived under `c/107`:
 - `05-playwright-readiness-comparison-html.png`: generated release readiness comparison HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v107 README, c/107 archive, project-maturity explanation, and c README check
 
+Version 108 screenshots are archived under `c/108`:
+
+- `01-unit-tests.png`: batched release gate, gate comparison, request-history summary, report utility, compile, and full regression tests
+- `02-release-gate-batch-smoke.png`: smoke confirming release gate pass/fail behavior and profile comparison deltas still work after the batch migration
+- `03-request-history-summary-smoke.png`: smoke confirming request-history summary pass/review counts, JSON/CSV/Markdown/HTML outputs, and recommendations still work
+- `04-release-governance-batch-structure-check.png`: source/test/docs structure check for conservative batched migration and archive indexes
+- `05-playwright-release-gate-comparison-html.png`: generated release gate profile comparison HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v108 README, c/108 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2091,6 +2101,7 @@ Project-maturity records start at v48:
 120-v105-data-quality-report-utils.md
 121-v106-release-readiness-report-utils.md
 122-v107-release-readiness-comparison-report-utils.md
+123-v108-release-governance-batch-report-utils.md
 ```
 
 ## Learning map

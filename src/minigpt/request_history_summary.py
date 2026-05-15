@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
-import html
-import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    utc_now,
+    write_json_payload,
+)
 
 from .server import read_request_history_log_records
 
@@ -29,11 +34,6 @@ SUMMARY_CSV_COLUMNS = [
     "unique_checkpoint_count",
     "latest_timestamp",
 ]
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
 
 def build_request_history_summary(
     request_log_path: str | Path,
@@ -85,9 +85,7 @@ def build_request_history_summary(
 
 
 def write_request_history_summary_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_request_history_summary_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -372,14 +370,6 @@ def _csv_value(value: Any) -> Any:
     return value
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value] if isinstance(value, list) else []
 
@@ -387,7 +377,3 @@ def _string_list(value: Any) -> list[str]:
 def _md(value: Any) -> str:
     text = "" if value is None else str(value)
     return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

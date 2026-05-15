@@ -133,6 +133,9 @@ c/106/解释/说明.md
 c/107/图片
 c/107/解释/说明.md
  -> v107 release readiness comparison report utility migration 的运行截图和解释
+c/108/图片
+c/108/解释/说明.md
+ -> v108 batched release governance report utility migration 的运行截图和解释
 ```
 
 写入规则：

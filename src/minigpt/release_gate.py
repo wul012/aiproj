@@ -1,10 +1,16 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    utc_now,
+    write_json_payload,
+)
 
 DEFAULT_RELEASE_GATE_POLICY_PROFILE = "standard"
 
@@ -38,11 +44,6 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "require_request_history_summary": False,
     },
 }
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
 
 def release_gate_policy_profiles() -> dict[str, dict[str, Any]]:
     return {name: dict(profile) for name, profile in RELEASE_GATE_POLICY_PROFILES.items()}
@@ -141,9 +142,7 @@ def build_release_gate(
 
 
 def write_release_gate_json(gate: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(gate, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(gate, path)
 
 
 def render_release_gate_markdown(gate: dict[str, Any]) -> str:
@@ -583,16 +582,8 @@ def _markdown_table(rows: list[tuple[str, Any]]) -> list[str]:
     return lines
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _number(value: Any) -> float | None:
@@ -630,7 +621,3 @@ def _fmt_any(value: Any) -> str:
 
 def _md(value: Any) -> str:
     return _fmt_any(value).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

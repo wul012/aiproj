@@ -1,10 +1,16 @@
 from __future__ import annotations
 
 import csv
-import html
-import json
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    csv_cell,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    write_json_payload,
+)
 
 from .release_gate import build_release_gate, release_gate_policy_profiles, utc_now
 
@@ -64,9 +70,7 @@ def build_release_gate_profile_comparison(
 
 
 def write_release_gate_profile_comparison_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_release_gate_profile_comparison_csv(report: dict[str, Any], path: str | Path) -> None:
@@ -557,22 +561,14 @@ footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
 </style>"""
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _csv_value(value: Any) -> str:
     if isinstance(value, list):
         return ";".join(_string_list(value))
-    return "" if value is None else str(value)
+    return str(csv_cell(value))
 
 
 def _fmt_any(value: Any) -> str:
@@ -583,7 +579,3 @@ def _fmt_any(value: Any) -> str:
 
 def _md(value: Any) -> str:
     return _fmt_any(value).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
