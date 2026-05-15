@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 126 applies the v110 module pressure audit to the baseline run comparison module with a contract-preserving artifact split. It keeps `build_comparison_report()`, `scripts/compare_runs.py`, comparison schema, output filenames, and legacy `minigpt.comparison` exports stable while moving JSON/CSV/SVG/Markdown/HTML writers and renderer helpers into `comparison_artifacts.py`.
+Version 127 turns the earlier UTF-8 BOM CI failure into a source encoding hygiene gate. It keeps the model and training paths unchanged while adding `source_encoding_hygiene.py`, `scripts/check_source_encoding.py`, and CI coverage that fails early on BOM or syntax regressions in `src`, `scripts`, and `tests`.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 126 applies the v110 module pressure audit to the baseline run compariso
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers; v120 extracts benchmark scorecard scoring helpers; v121 extracts maturity summary artifact writers/renderers; v122 extracts training portfolio comparison artifact writers/renderers; v123 extracts dashboard HTML renderers; v124 splits playground CSS and JavaScript assets behind the old facade; v125 extracts the server generator class from HTTP routing; v126 extracts baseline run comparison artifact writers/renderers from comparison logic | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, related tests and v83-v126 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers; v120 extracts benchmark scorecard scoring helpers; v121 extracts maturity summary artifact writers/renderers; v122 extracts training portfolio comparison artifact writers/renderers; v123 extracts dashboard HTML renderers; v124 splits playground CSS and JavaScript assets behind the old facade; v125 extracts the server generator class from HTTP routing; v126 extracts baseline run comparison artifact writers/renderers from comparison logic; v127 adds source encoding hygiene checks and report writers | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, related tests and v83-v127 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server; v118 splits benchmark scorecard comparison output artifacts from comparison logic; v119 splits maintenance policy artifact outputs from policy/scanner logic; v120 splits benchmark scorecard scoring helpers from scorecard orchestration; v121 splits maturity summary artifact outputs from maturity logic; v122 splits training portfolio comparison artifact outputs from comparison logic; v123 splits dashboard HTML rendering from payload assembly; v124 turns `playground_assets.py` into a small facade over dedicated style/script modules; v125 extracts the PyTorch generator from server routing; v126 extracts baseline run comparison artifact outputs from comparison logic. The latest module pressure smoke is back to pass with zero warn modules, so the next step can be another small pressure-guided split only if a new warn appears.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server; v118 splits benchmark scorecard comparison output artifacts from comparison logic; v119 splits maintenance policy artifact outputs from policy/scanner logic; v120 splits benchmark scorecard scoring helpers from scorecard orchestration; v121 splits maturity summary artifact outputs from maturity logic; v122 splits training portfolio comparison artifact outputs from comparison logic; v123 splits dashboard HTML rendering from payload assembly; v124 turns `playground_assets.py` into a small facade over dedicated style/script modules; v125 extracts the PyTorch generator from server routing; v126 extracts baseline run comparison artifact outputs from comparison logic; v127 adds a source encoding hygiene gate after a BOM-related CI failure. The latest hygiene smoke reports zero BOMs and zero syntax errors, so the next step should be another small pressure-guided split only if a new warn appears.
 
 ## Capability map
 
@@ -33,13 +33,14 @@ Version 126 applies the v110 module pressure audit to the baseline run compariso
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 126 focus
+## Version 127 focus
 
-- Added `comparison_artifacts.py` for baseline comparison JSON, CSV, SVG, Markdown, HTML writers plus formatting and escaping helpers.
-- Updated `comparison.py` to keep run summarization, baseline selection, deltas, summary, recommendations, and legacy artifact re-exports stable.
-- Added `tests/test_comparison_artifacts.py` to lock facade parity, output file generation, HTML escaping, and summary rendering.
-- Kept `scripts/compare_runs.py`, comparison schema version, output filenames, `minigpt.comparison` imports, and README examples unchanged.
-- Used the v110 pressure check and v125 next-pressure note as evidence: `comparison.py` is reduced to 342 nonblank lines, the extracted artifact module carries 293 nonblank lines, and the latest module pressure smoke reports `module_pressure_status=pass` with zero warn modules.
+- Added `src/minigpt/source_encoding_hygiene.py` for scanning Python sources, detecting UTF-8 BOMs, catching syntax errors, and rendering JSON/CSV/Markdown/HTML hygiene reports.
+- Added `scripts/check_source_encoding.py` as the CLI gate that scans `src`, `scripts`, and `tests`, writes hygiene outputs, and returns a non-zero exit code when BOM or syntax problems are found.
+- Updated `.github/workflows/ci.yml` so CI runs the source encoding check before unit tests, catching parse-time BOM regressions early.
+- Added `tests/test_source_encoding_hygiene.py` to lock the no-BOM baseline, BOM/syntax detection, output writing, HTML escaping, and CLI failure behavior.
+- Kept the model, training, inference, and comparison code paths unchanged; this version is purely an engineering hygiene gate.
+- Used the smoke output as evidence: `source_count=194`, `clean_count=194`, `bom_count=0`, and `syntax_error_count=0`.
 
 ## Version tags
 
@@ -172,6 +173,7 @@ v123.0.0 MiniGPT v123 dashboard render split
 v124.0.0 MiniGPT v124 playground asset module split
 v125.0.0 MiniGPT v125 server generator split
 v126.0.0 MiniGPT v126 comparison artifact split
+v127.0.0 MiniGPT v127 source encoding hygiene gate
 ```
 
 ## Project structure
@@ -2194,6 +2196,15 @@ Version 126 screenshots are archived under `c/126`:
 - `04-comparison-output-check.png`: generated comparison JSON/CSV/SVG/Markdown/HTML outputs and facade parity checks
 - `05-playwright-comparison-html.png`: generated comparison HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v126 README, c/126 archive, project-maturity explanation, and c README check
+
+Version 127 screenshots are archived under `c/127`:
+
+- `01-unit-tests.png`: source encoding tests, compile check, full unittest discovery, and BOM baseline check
+- `02-source-encoding-smoke.png`: source encoding smoke showing clean source count, zero BOMs, and zero syntax errors
+- `03-source-encoding-structure-check.png`: source/test/docs structure check for `source_encoding_hygiene.py`, CLI, archive, and explanation records
+- `04-source-encoding-output-check.png`: generated JSON/CSV/Markdown/HTML hygiene outputs and facade parity checks
+- `05-playwright-source-encoding-html.png`: generated hygiene HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v127 README, c/127 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 

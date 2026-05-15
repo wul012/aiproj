@@ -190,6 +190,9 @@ c/125/解释/说明.md
 c/126/图片
 c/126/解释/说明.md
  -> v126 comparison artifact split 的运行截图和解释
+c/127/图片
+c/127/解释/说明.md
+ -> v127 source encoding hygiene gate 的运行截图和解释
 ```
 
 写入规则：

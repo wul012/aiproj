@@ -2,8 +2,8 @@
 
 ## 最新追加
 
-141-v126-comparison-artifact-split.md
- -> 第一百二十六版代码讲解：按 v110 压力报告拆 baseline run comparison 的 artifact 输出边界，降低比较模块体量但不改变 comparison schema、CLI 输出和旧导出。
+142-v127-source-encoding-hygiene.md
+ -> 第一百二十七版代码讲解：把 UTF-8 BOM 相关 CI 故障收口为 source encoding hygiene gate，新增源文件扫描、报告输出和早期失败检查，但不改模型、训练和比较逻辑。
 
 本目录从 v48 开始记录 MiniGPT 的“项目成熟度阶段”。前一阶段 `代码讲解记录_评估基准阶段` 已经把 v35-v47 的 benchmark、dataset version、baseline comparison、本地推理边界、checkpoint/pair generation、pair batch/trend、dashboard/playground、registry links 和 pair delta leaders 收口。
 

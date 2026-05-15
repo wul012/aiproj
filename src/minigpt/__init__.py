@@ -72,6 +72,14 @@ __all__ = [
     "write_maintenance_batching_outputs",
     "build_module_pressure_report",
     "write_module_pressure_outputs",
+    "build_source_encoding_report",
+    "render_source_encoding_html",
+    "render_source_encoding_markdown",
+    "write_source_encoding_csv",
+    "write_source_encoding_html",
+    "write_source_encoding_json",
+    "write_source_encoding_markdown",
+    "write_source_encoding_outputs",
 ]
 
 _EXPORTS = {
@@ -141,6 +149,14 @@ _EXPORTS = {
     "write_maintenance_batching_outputs": ("maintenance_policy", "write_maintenance_batching_outputs"),
     "build_module_pressure_report": ("maintenance_policy", "build_module_pressure_report"),
     "write_module_pressure_outputs": ("maintenance_policy", "write_module_pressure_outputs"),
+    "build_source_encoding_report": ("source_encoding_hygiene", "build_source_encoding_report"),
+    "render_source_encoding_html": ("source_encoding_hygiene", "render_source_encoding_html"),
+    "render_source_encoding_markdown": ("source_encoding_hygiene", "render_source_encoding_markdown"),
+    "write_source_encoding_csv": ("source_encoding_hygiene", "write_source_encoding_csv"),
+    "write_source_encoding_html": ("source_encoding_hygiene", "write_source_encoding_html"),
+    "write_source_encoding_json": ("source_encoding_hygiene", "write_source_encoding_json"),
+    "write_source_encoding_markdown": ("source_encoding_hygiene", "write_source_encoding_markdown"),
+    "write_source_encoding_outputs": ("source_encoding_hygiene", "write_source_encoding_outputs"),
 }
 
 
