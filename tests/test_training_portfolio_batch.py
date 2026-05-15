@@ -12,10 +12,19 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.training_portfolio_batch import (
     build_training_portfolio_batch_plan,
     load_training_portfolio_batch_variants,
-    render_training_portfolio_batch_html,
-    render_training_portfolio_batch_markdown,
+    render_training_portfolio_batch_html as facade_render_training_portfolio_batch_html,
+    render_training_portfolio_batch_markdown as facade_render_training_portfolio_batch_markdown,
     run_training_portfolio_batch_plan,
     write_training_portfolio_batch_outputs,
+    write_training_portfolio_batch_html as facade_write_training_portfolio_batch_html,
+    write_training_portfolio_batch_markdown as facade_write_training_portfolio_batch_markdown,
+)
+from minigpt.training_portfolio_batch_artifacts import (
+    render_training_portfolio_batch_html,
+    render_training_portfolio_batch_markdown,
+    write_training_portfolio_batch_outputs as artifact_write_training_portfolio_batch_outputs,
+    write_training_portfolio_batch_html as artifact_write_training_portfolio_batch_html,
+    write_training_portfolio_batch_markdown as artifact_write_training_portfolio_batch_markdown,
 )
 
 
@@ -72,11 +81,18 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertEqual(report["execution"]["comparison_status"], "written")
             self.assertEqual(len(report["variant_results"]), 2)
             self.assertIn("json", outputs)
+            self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertTrue((root / "batch" / "variants" / "small" / "training_portfolio.json").exists())
             self.assertTrue((root / "batch" / "comparison" / "training_portfolio_comparison.json").exists())
             comparison = json.loads((root / "batch" / "comparison" / "training_portfolio_comparison.json").read_text(encoding="utf-8"))
             self.assertEqual(comparison["portfolio_count"], 2)
             self.assertEqual(comparison["summary"]["planned_count"], 2)
+            artifact_outputs = artifact_write_training_portfolio_batch_outputs(report, root / "batch-copy")
+            self.assertEqual(set(artifact_outputs), {"json", "csv", "markdown", "html"})
+            self.assertTrue(Path(artifact_outputs["json"]).exists())
+            self.assertTrue(Path(artifact_outputs["csv"]).exists())
+            self.assertTrue(Path(artifact_outputs["markdown"]).exists())
+            self.assertTrue(Path(artifact_outputs["html"]).exists())
 
     def test_load_variants_accepts_object_or_list(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -122,6 +138,13 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertIn("## Variants", markdown)
             self.assertIn("&lt;base&gt;", html)
             self.assertNotIn("<strong><base>", html)
+
+    def test_facade_keeps_artifact_identity(self) -> None:
+        self.assertIs(facade_render_training_portfolio_batch_markdown, render_training_portfolio_batch_markdown)
+        self.assertIs(facade_render_training_portfolio_batch_html, render_training_portfolio_batch_html)
+        self.assertIs(facade_write_training_portfolio_batch_markdown, artifact_write_training_portfolio_batch_markdown)
+        self.assertIs(facade_write_training_portfolio_batch_html, artifact_write_training_portfolio_batch_html)
+        self.assertIs(write_training_portfolio_batch_outputs, artifact_write_training_portfolio_batch_outputs)
 
 
 if __name__ == "__main__":

@@ -18,6 +18,10 @@ from minigpt.training_portfolio_batch import (
     build_training_portfolio_batch_plan,
     load_training_portfolio_batch_variants,
     run_training_portfolio_batch_plan,
+)
+from minigpt.training_portfolio_batch_artifacts import (
+    render_training_portfolio_batch_html,
+    render_training_portfolio_batch_markdown,
     write_training_portfolio_batch_outputs,
 )
 from minigpt.training_scale_gate import build_training_scale_gate, load_training_scale_plan, write_training_scale_gate_outputs
