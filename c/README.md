@@ -130,6 +130,9 @@ c/105/解释/说明.md
 c/106/图片
 c/106/解释/说明.md
  -> v106 release readiness report utility migration 的运行截图和解释
+c/107/图片
+c/107/解释/说明.md
+ -> v107 release readiness comparison report utility migration 的运行截图和解释
 ```
 
 写入规则：

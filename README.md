@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 106 is a release readiness report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, data-quality checks, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, release-bundle behavior, and readiness decisions, while moving the release readiness dashboard exporter onto the shared report utility foundation.
+Version 107 is a release readiness comparison report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, data-quality checks, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, release-bundle behavior, readiness decisions, and readiness comparison rules, while moving the release readiness comparison exporter onto the shared report utility foundation.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 106 is a release readiness report-utils migration for the MiniGPT learni
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v106 report-utils migration series, including release readiness in v106 | `src/minigpt/report_utils.py`, report-utils tests, v83-v106 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v107 report-utils migration series, including release readiness comparison in v107 | `src/minigpt/report_utils.py`, report-utils tests, v83-v107 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v106 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v107 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 106 is a release readiness report-utils migration for the MiniGPT learni
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 106 focus
+## Version 107 focus
 
-- Migrated `release_readiness.py` to reuse `report_utils` for JSON output, UTC timestamps, HTML escaping, and dict/list normalization.
-- Kept readiness status, panel status, gate/audit/request-history/maturity summaries, action recommendations, Markdown/HTML layout, and evidence table semantics unchanged.
-- Left release-readiness-specific panel builders, action rules, source resolution, JSON loading warnings, byte formatting, Markdown cell formatting, and local string-list filtering in the module because they encode dashboard behavior.
-- Added v106 archive and explanation records so release readiness has the same conservative evidence trail as earlier report-utils migrations.
+- Migrated `release_readiness_comparison.py` to reuse `report_utils` for JSON output, UTC timestamps, HTML escaping, dict/list normalization, and CSV scalar cell formatting.
+- Kept baseline override, status delta scoring, panel-change detection, audit/missing-artifact deltas, recommendations, Markdown/HTML layout, and delta explanations unchanged.
+- Left comparison-specific scoring, delta explanation, string-list filtering, list-to-semicolon CSV formatting, and report layout local because they encode release readiness comparison behavior.
+- Added v107 archive and explanation records so cross-release readiness comparison has the same conservative evidence trail as the v106 dashboard migration.
 
 ## Version tags
 
@@ -151,6 +151,7 @@ v103.0.0 MiniGPT v103 run manifest report utility migration
 v104.0.0 MiniGPT v104 data preparation report utility migration
 v105.0.0 MiniGPT v105 data quality report utility migration
 v106.0.0 MiniGPT v106 release readiness report utility migration
+v107.0.0 MiniGPT v107 release readiness comparison report utility migration
 ```
 
 ## Project structure
@@ -1952,6 +1953,15 @@ Version 106 screenshots are archived under `c/106`:
 - `05-playwright-release-readiness-html.png`: generated release readiness HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v106 README, c/106 archive, project-maturity explanation, and c README check
 
+Version 107 screenshots are archived under `c/107`:
+
+- `01-unit-tests.png`: migrated release readiness comparison tests, report utility tests, compile check, and full regression tests
+- `02-readiness-comparison-improved-smoke.png`: comparison smoke confirming blocked-to-ready inputs still produce an improved delta
+- `03-readiness-comparison-regressed-smoke.png`: comparison smoke confirming baseline override still exposes a regressed delta
+- `04-readiness-comparison-structure-check.png`: source/test/docs structure check for conservative comparison migration and archive indexes
+- `05-playwright-readiness-comparison-html.png`: generated release readiness comparison HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v107 README, c/107 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2080,6 +2090,7 @@ Project-maturity records start at v48:
 119-v104-data-prep-report-utils.md
 120-v105-data-quality-report-utils.md
 121-v106-release-readiness-report-utils.md
+122-v107-release-readiness-comparison-report-utils.md
 ```
 
 ## Learning map
