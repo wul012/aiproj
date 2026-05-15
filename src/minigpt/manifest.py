@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 import hashlib
-import html
 import json
 import platform
 from pathlib import Path
 import subprocess
 import sys
 from typing import Any
+
+from minigpt.report_utils import html_escape as _e, utc_now, write_json_payload
 
 
 RUN_ARTIFACT_SPECS = [
@@ -45,10 +46,6 @@ RUN_ARTIFACT_SPECS = [
     ("dashboard", "dashboard.html", "static dashboard"),
     ("playground", "playground.html", "static playground"),
 ]
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def build_run_manifest(
@@ -175,9 +172,7 @@ def sha256_file(path: str | Path, max_digest_bytes: int = 20 * 1024 * 1024) -> s
 
 
 def write_run_manifest_json(manifest: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(manifest, path)
 
 
 def write_run_manifest_svg(manifest: dict[str, Any], path: str | Path) -> None:
@@ -337,7 +332,3 @@ def _clip(value: Any, limit: int) -> str:
     if len(text) <= limit:
         return text
     return text[: limit - 1] + "..."
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
