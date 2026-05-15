@@ -163,6 +163,9 @@ c/116/解释/说明.md
 c/117/图片
 c/117/解释/说明.md
  -> v117 server contract split 的运行截图和解释
+c/118/图片
+c/118/解释/说明.md
+ -> v118 benchmark comparison artifact split 的运行截图和解释
 ```
 
 写入规则：
