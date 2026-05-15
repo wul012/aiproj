@@ -1,14 +1,16 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import html
 import json
 from pathlib import Path
 from typing import Any
 
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    list_of_dicts as _list_of_dicts,
+    utc_now,
+    write_json_payload,
+)
 
 
 def build_release_readiness_dashboard(
@@ -76,9 +78,7 @@ def build_release_readiness_dashboard(
 
 
 def write_release_readiness_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def render_release_readiness_markdown(report: dict[str, Any]) -> str:
@@ -539,21 +539,9 @@ def _fmt_bytes(value: Any) -> str:
     return f"{size / (1024 * 1024):.1f} MB"
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
 def _md(value: Any) -> str:
     return _fmt(value).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
