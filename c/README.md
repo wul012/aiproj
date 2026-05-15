@@ -193,6 +193,9 @@ c/126/解释/说明.md
 c/127/图片
 c/127/解释/说明.md
  -> v127 source encoding hygiene gate 的运行截图和解释
+c/128/图片
+c/128/解释/说明.md
+ -> v128 registry artifact split 的运行截图和解释
 ```
 
 写入规则：

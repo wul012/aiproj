@@ -7,13 +7,15 @@ from minigpt.registry_data import (
     discover_run_dirs,
     summarize_registered_run,
 )
-from minigpt.registry_render import (
-    render_registry_html,
+from minigpt.registry_artifacts import (
     write_registry_csv,
     write_registry_html,
     write_registry_json,
     write_registry_outputs,
     write_registry_svg,
+)
+from minigpt.registry_render import (
+    render_registry_html,
 )
 
 __all__ = [

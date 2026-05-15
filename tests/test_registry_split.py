@@ -10,8 +10,11 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.registry import build_run_registry as facade_build_run_registry
 from minigpt.registry import render_registry_html as facade_render_registry_html
+from minigpt.registry import write_registry_outputs as facade_write_registry_outputs
+from minigpt.registry_artifacts import write_registry_html as artifact_write_registry_html
+from minigpt.registry_artifacts import write_registry_outputs as artifact_write_registry_outputs
 from minigpt.registry_data import build_run_registry, discover_run_dirs, summarize_registered_run
-from minigpt.registry_render import render_registry_html, write_registry_outputs
+from minigpt.registry_render import render_registry_html, write_registry_outputs as render_write_registry_outputs
 from tests.test_registry import make_run
 
 
@@ -37,7 +40,7 @@ class RegistrySplitTests(unittest.TestCase):
             run_dir = make_run(root, "alpha", 1.0, tags=["baseline"], pair_reports=True)
             registry = build_run_registry([run_dir])
 
-            outputs = write_registry_outputs(registry, root / "registry")
+            outputs = render_write_registry_outputs(registry, root / "registry")
             html = render_registry_html(registry, base_dir=root / "registry")
 
             self.assertTrue(Path(outputs["json"]).exists())
@@ -50,6 +53,25 @@ class RegistrySplitTests(unittest.TestCase):
     def test_registry_facade_keeps_public_api_identity(self) -> None:
         self.assertIs(facade_build_run_registry, build_run_registry)
         self.assertIs(facade_render_registry_html, render_registry_html)
+        self.assertIs(facade_write_registry_outputs, artifact_write_registry_outputs)
+
+    def test_artifact_module_keeps_public_writer_identity(self) -> None:
+        from minigpt.registry import write_registry_html as facade_write_registry_html
+
+        self.assertIs(facade_write_registry_html, artifact_write_registry_html)
+
+    def test_artifact_module_writes_outputs_from_registry(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run_dir = make_run(root, "alpha", 1.0, tags=["baseline"], pair_reports=True)
+            registry = build_run_registry([run_dir])
+
+            outputs = artifact_write_registry_outputs(registry, root / "registry-artifacts")
+
+            self.assertTrue(Path(outputs["json"]).exists())
+            self.assertTrue(Path(outputs["csv"]).exists())
+            self.assertTrue(Path(outputs["svg"]).exists())
+            self.assertTrue(Path(outputs["html"]).exists())
 
 
 if __name__ == "__main__":
