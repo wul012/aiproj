@@ -3,12 +3,11 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import asdict, dataclass
 import hashlib
-import html
-import json
 from pathlib import Path
 from typing import Any
 
 from .data_prep import PreparedDataset
+from minigpt.report_utils import html_escape as _e, write_json_payload
 
 
 @dataclass(frozen=True)
@@ -129,9 +128,7 @@ def build_dataset_quality_report(
 
 
 def write_dataset_quality_json(report: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(report, path)
 
 
 def write_dataset_quality_svg(report: dict[str, Any], path: str | Path) -> None:
@@ -193,7 +190,3 @@ def _clip(value: Any, limit: int) -> str:
     if len(text) <= limit:
         return text
     return text[: limit - 1] + "..."
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

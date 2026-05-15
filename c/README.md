@@ -124,6 +124,9 @@ c/103/解释/说明.md
 c/104/图片
 c/104/解释/说明.md
  -> v104 data preparation report utility migration 的运行截图和解释
+c/105/图片
+c/105/解释/说明.md
+ -> v105 data quality report utility migration 的运行截图和解释
 ```
 
 写入规则：

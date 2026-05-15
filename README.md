@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 104 is a data preparation report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, and release behavior, while moving the data preparation exporter onto the shared report utility foundation.
+Version 105 is a data quality report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, data-quality checks, prepared-dataset content, run-manifest content, dataset-card content, experiment-card content, model-card aggregation, project-audit behavior, and release behavior, while moving the data quality exporter onto the shared report utility foundation.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 104 is a data preparation report-utils migration for the MiniGPT learnin
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v104 report-utils migration series, including data preparation in v104 | `src/minigpt/report_utils.py`, report-utils tests, v83-v104 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v105 report-utils migration series, including data quality in v105 | `src/minigpt/report_utils.py`, report-utils tests, v83-v105 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v104 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v105 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 104 is a data preparation report-utils migration for the MiniGPT learnin
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 104 focus
+## Version 105 focus
 
-- Migrated `data_prep.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict normalization.
-- Kept source discovery, text normalization, prepared corpus output, dataset report fields, dataset version fields, quality handoff, SVG chart, and HTML layout unchanged.
-- Left data-prep-specific source summaries, fingerprinting, clipping, statistics, dataset version HTML, and prepared corpus writing local because they encode corpus-preparation semantics.
-- Added v104 archive and explanation records so the prepared-dataset to run-manifest/dataset-card handoff has the same evidence trail as earlier migrations.
+- Migrated `data_quality.py` to reuse `report_utils` for JSON output and HTML escaping.
+- Kept data-quality checks, issue schema, warning/pass policy, duplicate-source detection, repeated-line detection, fingerprinting, and SVG layout unchanged.
+- Left data-quality-specific issue objects, threshold rules, duplicate-line search, SHA-256 helper, clipping, and chart layout local because they encode corpus-quality semantics.
+- Added v105 archive and explanation records so the data-quality to prepared-dataset/run-manifest/dataset-card handoff has the same evidence trail as earlier migrations.
 
 ## Version tags
 
@@ -149,6 +149,7 @@ v101.0.0 MiniGPT v101 experiment card report utility migration
 v102.0.0 MiniGPT v102 dataset card report utility migration
 v103.0.0 MiniGPT v103 run manifest report utility migration
 v104.0.0 MiniGPT v104 data preparation report utility migration
+v105.0.0 MiniGPT v105 data quality report utility migration
 ```
 
 ## Project structure
@@ -1932,6 +1933,15 @@ Version 104 screenshots are archived under `c/104`:
 - `05-playwright-dataset-version-html.png`: generated dataset version HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v104 README, c/104 archive, project-maturity explanation, and c README check
 
+Version 105 screenshots are archived under `c/105`:
+
+- `01-unit-tests.png`: migrated data quality tests, report utility tests, compile check, and full regression tests
+- `02-data-quality-pass-smoke.png`: data quality smoke confirming a reasonable corpus still produces pass status and JSON/SVG outputs
+- `03-data-quality-warn-smoke.png`: data quality smoke confirming duplicate-source and repeated-line warnings remain visible
+- `04-data-quality-structure-check.png`: source/test/docs structure check for conservative data quality migration and archive indexes
+- `05-playwright-data-quality-svg.png`: generated dataset quality SVG opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v105 README, c/105 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2058,6 +2068,7 @@ Project-maturity records start at v48:
 117-v102-dataset-card-report-utils.md
 118-v103-run-manifest-report-utils.md
 119-v104-data-prep-report-utils.md
+120-v105-data-quality-report-utils.md
 ```
 
 ## Learning map
