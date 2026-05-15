@@ -151,6 +151,9 @@ c/112/解释/说明.md
 c/113/图片
 c/113/解释/说明.md
  -> v113 request history core split 的运行截图和解释
+c/114/图片
+c/114/解释/说明.md
+ -> v114 benchmark scorecard artifact split 的运行截图和解释
 ```
 
 写入规则：
