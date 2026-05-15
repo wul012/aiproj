@@ -1,11 +1,16 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import html
 import json
 import os
 from pathlib import Path
 from typing import Any
+
+from minigpt.report_utils import (
+    as_dict as _dict,
+    html_escape as _e,
+    utc_now,
+    write_json_payload,
+)
 
 
 CARD_ARTIFACT_PATHS = [
@@ -23,11 +28,6 @@ CARD_ARTIFACT_PATHS = [
     ("experiment_card_md", "experiment_card.md", "markdown experiment card"),
     ("experiment_card_html", "experiment_card.html", "browser experiment card"),
 ]
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
 
 def build_experiment_card(
     run_dir: str | Path,
@@ -77,9 +77,7 @@ def build_experiment_card(
 
 
 def write_experiment_card_json(card: dict[str, Any], path: str | Path) -> None:
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(card, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_payload(card, path)
 
 
 def render_experiment_card_markdown(card: dict[str, Any]) -> str:
@@ -585,10 +583,6 @@ def _tag_chips(value: Any) -> str:
     return "".join(f'<span class="tag">{_e(tag)}</span>' for tag in tags)
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
 def _pick(payload: Any, key: str) -> Any:
     return payload.get(key) if isinstance(payload, dict) else None
 
@@ -681,7 +675,3 @@ def _fmt_any(value: Any) -> str:
 def _md(value: Any) -> str:
     text = _fmt_any(value)
     return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

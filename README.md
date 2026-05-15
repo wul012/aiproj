@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 100 is a model card report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, model-card content, project-audit behavior, and release behavior, while moving the model card exporter onto the shared report utility foundation.
+Version 101 is an experiment card report-utils migration for the MiniGPT learning project. It keeps the same model, training, inference, experiment-card content, model-card aggregation, project-audit behavior, and release behavior, while moving the experiment card exporter onto the shared report utility foundation.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 100 is a model card report-utils migration for the MiniGPT learning proj
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` now backs the v83-v100 report-utils migration series, including model card in v100 | `src/minigpt/report_utils.py`, report-utils tests, v83-v100 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
+| Shared report infrastructure | `report_utils` now backs the v83-v101 report-utils migration series, including experiment card in v101 | `src/minigpt/report_utils.py`, report-utils tests, v83-v101 explanations | Continue light, targeted migrations only where duplicated helpers are obvious |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v100 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v101 reduced repeated report helpers through `report_utils`; the next cleanup pressure is large modules such as `server.py`, `registry.py`, and `playground.py`.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 100 is a model card report-utils migration for the MiniGPT learning proj
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 100 focus
+## Version 101 focus
 
-- Migrated `model_card.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict/list normalization.
-- Kept model-card summaries, intended use, limitations, coverage, recommendations, run rows, and HTML/Markdown layout unchanged.
-- Left model-card-specific `_string_list`, tag parsing, Markdown cells, rank labels, relative links, and formatting helpers local because they encode display semantics.
-- Added v100 archive and explanation records so the model-card to project-audit handoff has the same evidence trail as earlier migrations.
+- Migrated `experiment_card.py` to reuse `report_utils` for UTC timestamps, JSON output, HTML escaping, and defensive dict normalization.
+- Kept experiment-card summaries, registry context, artifacts, recommendations, warnings, and HTML/Markdown layout unchanged.
+- Left experiment-card-specific artifact links, tag chips, nested picking, Markdown cells, rank labels, and formatting helpers local because they encode run-card display semantics.
+- Added v101 archive and explanation records so the experiment-card to model-card handoff has the same evidence trail as earlier migrations.
 
 ## Version tags
 
@@ -145,6 +145,7 @@ v97.0.0 MiniGPT v97 release bundle report utility migration
 v98.0.0 MiniGPT v98 README maturity summary cleanup
 v99.0.0 MiniGPT v99 project audit report utility migration
 v100.0.0 MiniGPT v100 model card report utility migration
+v101.0.0 MiniGPT v101 experiment card report utility migration
 ```
 
 ## Project structure
@@ -1892,6 +1893,15 @@ Version 100 screenshots are archived under `c/100`:
 - `05-playwright-model-card-html.png`: generated model card HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v100 README, c/100 archive, project-maturity explanation, and c README check
 
+Version 101 screenshots are archived under `c/101`:
+
+- `01-unit-tests.png`: migrated experiment card tests, report utility tests, compile check, and full regression tests
+- `02-experiment-card-complete-smoke.png`: experiment card smoke confirming run artifacts plus registry context still produce ready summary evidence
+- `03-experiment-card-missing-artifacts-smoke.png`: experiment card smoke confirming sparse runs still keep warnings and recommendations
+- `04-experiment-card-structure-check.png`: source/test/docs structure check for conservative experiment card migration and archive indexes
+- `05-playwright-experiment-card-html.png`: generated experiment card HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v101 README, c/101 archive, project-maturity explanation, and c README check
+
 ## Code explanation records
 
 Start here:
@@ -2014,6 +2024,7 @@ Project-maturity records start at v48:
 113-v98-readme-maturity-summary.md
 114-v99-project-audit-report-utils.md
 115-v100-model-card-report-utils.md
+116-v101-experiment-card-report-utils.md
 ```
 
 ## Learning map
