@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+144-v129-v130-artifact-splits.md
+ -> 第一百二十九/一百三十版合并代码讲解：把 training portfolio batch 与 experiment card 的输出写入层拆成 artifact 模块，保留旧 facade、schema 和脚本调用方式。
 143-v128-registry-artifact-split.md
  -> 第一百二十八版代码讲解：把 registry 输出写入层从 renderer 中拆到独立 artifact 模块，保留旧 facade 和 HTML 交互，但让 registry_render 更专注于渲染逻辑。
 

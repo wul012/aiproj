@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import experiment_card, experiment_card_artifacts
 from minigpt.experiment_card import build_experiment_card, render_experiment_card_html, write_experiment_card_outputs
 
 
@@ -136,6 +137,13 @@ class ExperimentCardTests(unittest.TestCase):
             self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", html)
             self.assertIn("&lt;tag&gt;", html)
             self.assertNotIn("<script>alert(1)</script>", html)
+
+    def test_experiment_card_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(experiment_card.render_experiment_card_html, experiment_card_artifacts.render_experiment_card_html)
+        self.assertIs(
+            experiment_card.write_experiment_card_outputs,
+            experiment_card_artifacts.write_experiment_card_outputs,
+        )
 
 
 if __name__ == "__main__":
