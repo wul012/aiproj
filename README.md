@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 109 is a maintenance batching policy/check for the MiniGPT learning project. It keeps the same model, training, inference, data, benchmark, release, and report utility behavior, while adding a small policy report that detects over-fragmented utility-migration version history and recommends batching related low-risk maintenance work into one version.
+Version 110 extends the maintenance policy/check for the MiniGPT learning project. It keeps the same model, training, inference, data, benchmark, release, and report utility behavior, while adding a module pressure audit that scans Python modules, flags large files such as `server.py` and `registry.py`, and keeps future refactors targeted instead of turning code-size concerns into a broad rewrite.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -14,14 +14,14 @@ Version 109 is a maintenance batching policy/check for the MiniGPT learning proj
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `playground.py`, request-history tests, Playwright screenshots | Split large server/playground files and keep UI contracts easier to maintain |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series, and v109 adds a maintenance batching check so future low-risk utility migrations do not become one-module tags by default | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, report-utils and maintenance-policy tests, v83-v109 explanations | Batch related low-risk cleanup; keep high-risk behavior, service, schema, or UI changes as focused versions |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching, and v110 adds module pressure scanning so large-module cleanup is planned, not guessed | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, report-utils and maintenance-policy tests, v83-v110 explanations | Batch related low-risk cleanup; split large modules only behind stable tests and concrete follow-up changes |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns the critique about over-fragmented utility migrations into a runnable batching policy. The next pressure point is large modules such as `server.py`, `registry.py`, and `playground.py`.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report. The next pressure point is targeted extraction around `server.py`, `registry.py`, `benchmark_scorecard.py`, and `playground.py`, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 109 is a maintenance batching policy/check for the MiniGPT learning proj
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 109 focus
+## Version 110 focus
 
-- Added `maintenance_policy.py` to classify recent version history, detect consecutive single-module low-risk utility migrations, and decide whether a proposed maintenance set should be batched, split, grouped by category, or kept as a focused version.
-- Added `scripts/check_maintenance_batching.py` so the batching rule can be run from the command line and exported as JSON/CSV/Markdown/HTML evidence.
-- Kept the rule deliberately light: low-risk `report-utils`, `utils-migration`, docs-only, and test-helper work can batch; behavior, schema, service/API, UI, large-module, or unclear-boundary changes should stay focused.
-- Added v109 archive and explanation records to document the judgement behind the critique: the concern is reasonable, and future cleanup versions should merge related low-risk migrations instead of tagging every small helper move.
+- Extended `maintenance_policy.py` with `build_module_pressure_report`, an AST-backed scanner for Python module line counts, function counts, class counts, largest function spans, and size-pressure recommendations.
+- Extended `scripts/check_maintenance_batching.py` so the same maintenance check now writes both `maintenance_batching.*` and `module_pressure.*` outputs by default.
+- Kept the policy conservative: critical-size modules become planned refactor candidates, but the report explicitly says not to rewrite storage, service, or UI code only to reduce line count.
+- Added v110 archive and explanation records to document the current measured pressure: `server.py`, `registry.py`, and `benchmark_scorecard.py` are critical-size modules; `playground.py` and several report modules are watch-list modules.
 
 ## Version tags
 
@@ -154,6 +154,7 @@ v106.0.0 MiniGPT v106 release readiness report utility migration
 v107.0.0 MiniGPT v107 release readiness comparison report utility migration
 v108.0.0 MiniGPT v108 batched release governance report utility migration
 v109.0.0 MiniGPT v109 maintenance batching policy
+v110.0.0 MiniGPT v110 module pressure audit
 ```
 
 ## Project structure
@@ -734,7 +735,7 @@ Check whether maintenance work should be batched before creating the next versio
 python scripts/check_maintenance_batching.py --out-dir runs/maintenance-batching
 ```
 
-The output directory contains `maintenance_batching.json`, `maintenance_batching.csv`, `maintenance_batching.md`, and `maintenance_batching.html`. Optional `--history` and `--proposal` files accept JSON lists; the default smoke data demonstrates the v109 rule by warning on a run of single-module report-utils migrations and recommending one batched version for related low-risk helpers.
+The output directory contains `maintenance_batching.json`, `maintenance_batching.csv`, `maintenance_batching.md`, `maintenance_batching.html`, `module_pressure.json`, `module_pressure.csv`, `module_pressure.md`, and `module_pressure.html`. Optional `--history` and `--proposal` files accept JSON lists; the default smoke data demonstrates the v109 batching rule, while the v110 module pressure audit scans `src/minigpt` by default. Use `--module-scope`, `--module-warning-lines`, `--module-critical-lines`, or `--skip-module-pressure` when checking a narrower refactor candidate.
 
 Build a release-quality maturity narrative from the current evidence chain:
 
@@ -1992,6 +1993,15 @@ Version 109 screenshots are archived under `c/109`:
 - `04-maintenance-policy-output-check.png`: generated JSON/CSV/Markdown/HTML maintenance batching outputs checked for status, proposal decision, and recommendations
 - `05-playwright-maintenance-policy-html.png`: generated maintenance batching HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v109 README, c/109 archive, project-maturity explanation, and c README check
+
+Version 110 screenshots are archived under `c/110`:
+
+- `01-unit-tests.png`: maintenance policy tests, report utility tests, compile check, and full regression tests
+- `02-maintenance-pressure-smoke.png`: default CLI smoke writing both batching and module pressure reports
+- `03-module-pressure-structure-check.png`: source/test/docs structure check for module pressure exports and archive records
+- `04-module-pressure-output-check.png`: generated module pressure JSON/CSV/Markdown/HTML checked for critical modules and recommendations
+- `05-playwright-module-pressure-html.png`: generated module pressure HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v110 README, c/110 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 

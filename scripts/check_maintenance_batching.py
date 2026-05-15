@@ -9,7 +9,12 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.maintenance_policy import build_maintenance_batching_report, write_maintenance_batching_outputs
+from minigpt.maintenance_policy import (
+    build_maintenance_batching_report,
+    build_module_pressure_report,
+    write_maintenance_batching_outputs,
+    write_module_pressure_outputs,
+)
 
 
 DEFAULT_RECENT_HISTORY = [
@@ -40,6 +45,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--title", type=str, default="MiniGPT maintenance batching policy")
     parser.add_argument("--single-module-limit", type=int, default=3)
     parser.add_argument("--min-batch-items", type=int, default=2)
+    parser.add_argument("--module-scope", type=Path, default=ROOT / "src" / "minigpt", help="Python file or directory to scan for module size pressure.")
+    parser.add_argument("--module-warning-lines", type=int, default=700)
+    parser.add_argument("--module-critical-lines", type=int, default=1200)
+    parser.add_argument("--module-top-n", type=int, default=12)
+    parser.add_argument("--skip-module-pressure", action="store_true", help="Only write the v109 batching report.")
     return parser.parse_args()
 
 
@@ -55,6 +65,19 @@ def main() -> None:
         min_batch_items=args.min_batch_items,
     )
     outputs = write_maintenance_batching_outputs(report, args.out_dir)
+    module_outputs: dict[str, str] = {}
+    module_report = None
+    if not args.skip_module_pressure:
+        module_paths = _collect_python_paths(args.module_scope)
+        module_report = build_module_pressure_report(
+            module_paths,
+            project_root=ROOT,
+            title="MiniGPT module pressure audit",
+            warning_lines=args.module_warning_lines,
+            critical_lines=args.module_critical_lines,
+            top_n=args.module_top_n,
+        )
+        module_outputs = write_module_pressure_outputs(module_report, args.out_dir)
     summary = report["summary"]
     proposal_summary = report["proposal"]
     print(f"status={summary['status']}")
@@ -66,6 +89,15 @@ def main() -> None:
     print(f"proposal_decision={proposal_summary['decision']}")
     print(f"proposal_target={proposal_summary['target_version_kind']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    if module_report is not None:
+        module_summary = module_report["summary"]
+        print(f"module_pressure_status={module_summary['status']}")
+        print(f"module_pressure_decision={module_summary['decision']}")
+        print(f"module_count={module_summary['module_count']}")
+        print(f"module_warn_count={module_summary['warn_count']}")
+        print(f"module_critical_count={module_summary['critical_count']}")
+        print(f"largest_module={module_summary['largest_module']}")
+        print("module_outputs=" + json.dumps(module_outputs, ensure_ascii=False))
 
 
 def _read_json_list(path: Path | None, fallback: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -75,6 +107,14 @@ def _read_json_list(path: Path | None, fallback: list[dict[str, Any]]) -> list[d
     if not isinstance(payload, list):
         raise ValueError(f"{path} must contain a JSON list")
     return [dict(item) for item in payload if isinstance(item, dict)]
+
+
+def _collect_python_paths(scope: Path) -> list[Path]:
+    if scope.is_file():
+        return [scope]
+    if not scope.exists():
+        raise FileNotFoundError(f"Module pressure scope does not exist: {scope}")
+    return sorted(path for path in scope.rglob("*.py") if path.is_file())
 
 
 if __name__ == "__main__":

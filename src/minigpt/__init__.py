@@ -70,6 +70,8 @@ __all__ = [
     "build_maintenance_batching_report",
     "build_maintenance_proposal_decision",
     "write_maintenance_batching_outputs",
+    "build_module_pressure_report",
+    "write_module_pressure_outputs",
 ]
 
 _EXPORTS = {
@@ -137,6 +139,8 @@ _EXPORTS = {
     "build_maintenance_batching_report": ("maintenance_policy", "build_maintenance_batching_report"),
     "build_maintenance_proposal_decision": ("maintenance_policy", "build_maintenance_proposal_decision"),
     "write_maintenance_batching_outputs": ("maintenance_policy", "write_maintenance_batching_outputs"),
+    "build_module_pressure_report": ("maintenance_policy", "build_module_pressure_report"),
+    "write_module_pressure_outputs": ("maintenance_policy", "write_module_pressure_outputs"),
 }
 
 

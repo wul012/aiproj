@@ -11,10 +11,14 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.maintenance_policy import (  # noqa: E402
     build_maintenance_batching_report,
+    build_module_pressure_report,
     build_maintenance_proposal_decision,
+    render_module_pressure_html,
+    render_module_pressure_markdown,
     render_maintenance_batching_html,
     render_maintenance_batching_markdown,
     write_maintenance_batching_outputs,
+    write_module_pressure_outputs,
 )
 
 
@@ -99,6 +103,70 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("<Maintenance>", markdown)
             payload = json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))
             self.assertEqual(payload["proposal"]["decision"], "single_ok")
+
+    def test_module_pressure_report_flags_large_modules(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            large = root / "large_module.py"
+            small = root / "small_module.py"
+            large.write_text(
+                "\n".join(
+                    [
+                        "class Service:",
+                        "    def handle(self):",
+                        *["        value = 1" for _ in range(15)],
+                        "        return value",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            small.write_text("def ok():\n    return 1\n", encoding="utf-8")
+
+            report = build_module_pressure_report(
+                [large, small],
+                project_root=root,
+                warning_lines=8,
+                critical_lines=18,
+                generated_at="2026-05-15T00:00:00Z",
+            )
+
+            self.assertEqual(report["summary"]["status"], "warn")
+            self.assertEqual(report["summary"]["critical_count"], 1)
+            self.assertEqual(report["summary"]["largest_module"], "large_module.py")
+            self.assertEqual(report["top_modules"][0]["largest_function"], "handle")
+            self.assertEqual(report["summary"]["decision"], "plan_targeted_split")
+            self.assertIn("split", " ".join(report["recommendations"]))
+
+    def test_module_pressure_report_handles_syntax_errors(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            broken = root / "broken.py"
+            broken.write_text("def broken(:\n    pass\n", encoding="utf-8")
+
+            report = build_module_pressure_report([broken], project_root=root, warning_lines=10, critical_lines=20)
+
+            self.assertEqual(report["modules"][0]["path"], "broken.py")
+            self.assertEqual(report["modules"][0]["parse_error"], "syntax-error:1")
+            self.assertEqual(report["modules"][0]["status"], "pass")
+
+    def test_module_pressure_outputs_and_renderers_escape_html(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            module = root / "module.py"
+            module.write_text("def risky_name():\n    return '<x>'\n", encoding="utf-8")
+            report = build_module_pressure_report([module], project_root=root, title="<Pressure>")
+
+            outputs = write_module_pressure_outputs(report, root / "out")
+            html = render_module_pressure_html(report)
+            markdown = render_module_pressure_markdown(report)
+
+            self.assertTrue(Path(outputs["json"]).exists())
+            self.assertTrue(Path(outputs["csv"]).exists())
+            self.assertTrue(Path(outputs["markdown"]).exists())
+            self.assertTrue(Path(outputs["html"]).exists())
+            self.assertIn("&lt;Pressure&gt;", html)
+            self.assertIn("<Pressure>", markdown)
+            self.assertIn("module.py", Path(outputs["csv"]).read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
