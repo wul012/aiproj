@@ -154,6 +154,9 @@ c/113/解释/说明.md
 c/114/图片
 c/114/解释/说明.md
  -> v114 benchmark scorecard artifact split 的运行截图和解释
+c/115/图片
+c/115/解释/说明.md
+ -> v115 playground asset split 的运行截图和解释
 ```
 
 写入规则：

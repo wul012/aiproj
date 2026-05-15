@@ -4,24 +4,24 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 114 applies the v110 module pressure audit to the benchmark scorecard layer with a targeted artifact split. It keeps the same model, training, inference, data, benchmark, release, playground, and HTTP API behavior, while moving benchmark scorecard JSON/CSV/Markdown/HTML output rendering into `benchmark_scorecard_artifacts.py` so `benchmark_scorecard.py` can focus on scoring logic without changing scorecard schemas or CLI outputs.
+Version 115 applies the v110 module pressure audit to the playground UI layer with a targeted asset split. It keeps the same model, training, inference, data, benchmark, release, playground, and HTTP API behavior, while moving playground CSS/JavaScript assets into `playground_assets.py` so `playground.py` can focus on payload construction, run-file links, and HTML section assembly without changing the static playground contract.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, cross-run scorecard comparison | `benchmark_scorecard.py`, `benchmark_scorecard_artifacts.py`, benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
-| Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, request-history and pair-artifact tests, Playwright screenshots | Keep extracting evidence/UI helpers before touching HTTP routing or generation behavior |
+| Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts | `server.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep extracting evidence/UI helpers before touching HTTP routing or generation behavior |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, related tests and v83-v114 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/playground_assets.py`, related tests and v83-v115 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module. The next pressure point is targeted extraction around `playground.py`, remaining server UI edges, or benchmark scoring subdomains, not broad rewrites.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module. The next pressure point is targeted extraction around `registry.py`, remaining server UI edges, or benchmark scoring subdomains, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 114 applies the v110 module pressure audit to the benchmark scorecard la
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 114 focus
+## Version 115 focus
 
-- Added `benchmark_scorecard_artifacts.py` for benchmark scorecard JSON, component CSV, drilldown CSV, rubric CSV, Markdown, and HTML output rendering.
-- Updated `benchmark_scorecard.py` to delegate public writer/render functions to the new artifact module while preserving the existing imports used by tests and `scripts/build_benchmark_scorecard.py`.
-- Added `tests/test_benchmark_scorecard_artifacts.py` to lock HTML escaping, Markdown sections, CSV headers, output file set, and wrapper delegation.
-- Used the v110 pressure check as evidence: `benchmark_scorecard.py` drops from about 1224 lines to about 816 lines, while scorecard builder tests, scorecard comparison tests, full regression tests, and Playwright benchmark scorecard HTML smoke continue to pass.
+- Added `playground_assets.py` for the static playground `<style>` and `<script>` blocks that drive layout, checkpoint selection, streaming generation, request history, checkpoint comparison, and pair generation.
+- Updated `playground.py` to delegate `_style()` and `_script()` to the new asset module while preserving the existing `render_playground_html()`, `write_playground()`, payload schema, and generated HTML behavior.
+- Added `tests/test_playground_assets.py` to lock CSS layout contracts, JavaScript interaction contracts, and render integration.
+- Used the v110 pressure check and later quality feedback as evidence: `playground.py` drops from about 1157 lines to about 454 lines, while playground regression tests, full regression tests, and Playwright playground HTML smoke continue to pass. `registry.py` remains a later split candidate rather than widening this version.
 
 ## Version tags
 
@@ -159,6 +159,7 @@ v111.0.0 MiniGPT v111 registry asset split
 v112.0.0 MiniGPT v112 pair artifact split
 v113.0.0 MiniGPT v113 request history core split
 v114.0.0 MiniGPT v114 benchmark scorecard artifact split
+v115.0.0 MiniGPT v115 playground asset split
 ```
 
 ## Project structure
@@ -392,6 +393,7 @@ v114.0.0 MiniGPT v114 benchmark scorecard artifact split
 │       ├── release_gate_comparison.py
 │       ├── release_gate.py
 │       ├── playground.py
+│       ├── playground_assets.py
 │       ├── sampling.py
 │       ├── server.py
 │       ├── tokenizer.py
@@ -2042,6 +2044,15 @@ Version 114 screenshots are archived under `c/114`:
 - `04-benchmark-artifact-output-check.png`: generated scorecard JSON/CSV/Markdown/HTML checked for schemas, headers, escaping, and wrapper parity
 - `05-playwright-benchmark-scorecard-html.png`: generated benchmark scorecard HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v114 README, c/114 archive, project-maturity explanation, and c README check
+
+Version 115 screenshots are archived under `c/115`:
+
+- `01-unit-tests.png`: playground asset tests, playground regression tests, compile check, and full regression tests
+- `02-playground-asset-smoke.png`: smoke showing playground module line reduction and asset contract checks after the split
+- `03-playground-asset-structure-check.png`: source/test/docs structure check for `playground_assets.py`, playground wrappers, archive, and explanation records
+- `04-playground-output-check.png`: generated playground HTML checked for CSS/JS embedding, checkpoint/request-history/pair-generation contracts, and wrapper parity
+- `05-playwright-playground-html.png`: generated playground HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v115 README, c/115 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 
