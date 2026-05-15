@@ -181,6 +181,9 @@ c/122/解释/说明.md
 c/123/图片
 c/123/解释/说明.md
  -> v123 dashboard render split 的运行截图和解释
+c/124/图片
+c/124/解释/说明.md
+ -> v124 playground asset module split 的运行截图和解释
 ```
 
 写入规则：
