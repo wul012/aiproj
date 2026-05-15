@@ -4,24 +4,24 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 119 applies the v110 module pressure audit to the maintenance policy itself with a contract-preserving artifact split. It keeps the same batching policy, module pressure scanner, CLI, report schemas, output file names, and public `minigpt.maintenance_policy` imports, while moving maintenance batching and module pressure JSON/CSV/Markdown/HTML writers plus display helpers into `maintenance_policy_artifacts.py`.
+Version 120 applies the v110 module pressure audit to benchmark scorecard scoring with a contract-preserving scoring split. It keeps the same scorecard builder, rubric weights, drilldown formulas, CLI, report schema, artifact output names, and public `minigpt.benchmark_scorecard` imports, while moving case merging, rubric case scoring, task/difficulty drilldowns, and scoring helpers into `benchmark_scorecard_scoring.py`.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
-| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, cross-run scorecard comparison with extracted artifact output | `benchmark_scorecard.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
+| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, cross-run scorecard comparison with extracted artifact and scoring layers | `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts | `server.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, related tests and v83-v119 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers; v120 extracts benchmark scorecard scoring helpers | `src/minigpt/report_utils.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/server_contracts.py`, related tests and v83-v120 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server; v118 splits benchmark scorecard comparison output artifacts from comparison logic; v119 splits maintenance policy artifact outputs from policy/scanner logic. The next pressure point is `benchmark_scorecard.py` or remaining report modules, not broad rewrites.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111 extracts registry assets; v112 extracts pair artifact evidence helpers from the server; v113 extracts request-history core helpers from the server; v114 extracts benchmark scorecard artifact writers from the scoring module; v115 extracts playground CSS/JavaScript assets from the UI module; v116 splits the registry into data assembly, render/output, and compatibility facade modules; v117 splits pure server contracts and payload builders out of the local inference server; v118 splits benchmark scorecard comparison output artifacts from comparison logic; v119 splits maintenance policy artifact outputs from policy/scanner logic; v120 splits benchmark scorecard scoring helpers from scorecard orchestration. The next pressure point is `maturity.py` or remaining report modules, not broad rewrites.
 
 ## Capability map
 
@@ -33,12 +33,12 @@ Version 119 applies the v110 module pressure audit to the maintenance policy its
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 119 focus
+## Version 120 focus
 
-- Added `maintenance_policy_artifacts.py` for maintenance batching and module pressure JSON/CSV writers, Markdown renderers, HTML renderers, and display helper functions.
-- Updated `maintenance_policy.py` to keep batching policy decisions, proposal normalization, module pressure scanning, AST summaries, recommendations, and old artifact exports, while delegating output publishing to the new module.
-- Added `tests/test_maintenance_policy_artifacts.py` to lock direct artifact module use and verify that legacy `maintenance_policy` artifact exports still point to the new implementation.
-- Used the v110 pressure check and v118 next-pressure note as evidence: `maintenance_policy.py` drops from 751 nonblank lines to 414 nonblank lines, while the check-maintenance CLI, report schemas, output file names, Markdown and HTML rendering remain unchanged.
+- Added `benchmark_scorecard_scoring.py` for eval/generation/pair case merging, rubric case scoring, rubric summary, task type drilldowns, difficulty drilldowns, and scoring helper functions.
+- Updated `benchmark_scorecard.py` to keep run evidence reading, component scores, summary assembly, registry context, recommendations, artifact facade wrappers, and CLI-facing builder behavior.
+- Added `tests/test_benchmark_scorecard_scoring.py` to lock direct scoring module use for cases, rubric scores, missing/forbidden terms, and task/difficulty drilldowns.
+- Used the v110 pressure check and v119 next-pressure note as evidence: `benchmark_scorecard.py` drops from 696 nonblank lines to 347 nonblank lines, while schema version 3, score weights, CLI behavior, rubric/drilldown outputs, Markdown and HTML artifacts remain unchanged.
 
 ## Version tags
 
@@ -164,6 +164,7 @@ v116.0.0 MiniGPT v116 registry data/render split
 v117.0.0 MiniGPT v117 server contract split
 v118.0.0 MiniGPT v118 benchmark comparison artifact split
 v119.0.0 MiniGPT v119 maintenance policy artifact split
+v120.0.0 MiniGPT v120 benchmark scorecard scoring split
 ```
 
 ## Project structure
@@ -371,6 +372,7 @@ v119.0.0 MiniGPT v119 maintenance policy artifact split
 │       ├── __init__.py
 │       ├── benchmark_scorecard.py
 │       ├── benchmark_scorecard_artifacts.py
+│       ├── benchmark_scorecard_scoring.py
 │       ├── benchmark_scorecard_comparison.py
 │       ├── benchmark_scorecard_comparison_artifacts.py
 │       ├── chat.py
@@ -425,6 +427,7 @@ v119.0.0 MiniGPT v119 maintenance policy artifact split
 │   ├── test_attention.py
 │   ├── test_benchmark_scorecard.py
 │   ├── test_benchmark_scorecard_artifacts.py
+│   ├── test_benchmark_scorecard_scoring.py
 │   ├── test_benchmark_scorecard_comparison.py
 │   ├── test_benchmark_scorecard_comparison_artifacts.py
 │   ├── test_chat.py
@@ -2108,6 +2111,15 @@ Version 119 screenshots are archived under `c/119`:
 - `04-maintenance-policy-output-check.png`: generated maintenance batching and module pressure JSON/CSV/Markdown/HTML checked for output files, escaping, headers, and facade parity
 - `05-playwright-maintenance-policy-html.png`: generated maintenance policy HTML opened through Playwright with installed Google Chrome
 - `06-docs-check.png`: v119 README, c/119 archive, project-maturity explanation, and c README check
+
+Version 120 screenshots are archived under `c/120`:
+
+- `01-unit-tests.png`: benchmark scorecard scoring tests, benchmark scorecard regression tests, compile check, and full regression tests
+- `02-benchmark-scorecard-scoring-smoke.png`: smoke showing benchmark scorecard module line reduction and maintenance pressure output after the split
+- `03-benchmark-scorecard-scoring-structure-check.png`: source/test/docs structure check for `benchmark_scorecard_scoring.py`, scorecard imports, archive, and explanation records
+- `04-benchmark-scorecard-output-check.png`: generated scorecard JSON/CSV/drilldown CSV/rubric CSV/Markdown/HTML checked for output files, rubric/drilldown fields, and schema stability
+- `05-playwright-benchmark-scorecard-html.png`: generated benchmark scorecard HTML opened through Playwright with installed Google Chrome
+- `06-docs-check.png`: v120 README, c/120 archive, project-maturity explanation, and c README check
 
 ## Code explanation records
 

@@ -169,6 +169,9 @@ c/118/解释/说明.md
 c/119/图片
 c/119/解释/说明.md
  -> v119 maintenance policy artifact split 的运行截图和解释
+c/120/图片
+c/120/解释/说明.md
+ -> v120 benchmark scorecard scoring split 的运行截图和解释
 ```
 
 写入规则：
