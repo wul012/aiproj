@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+190-v176-benchmark-scorecard-decision-artifact-split.md
+ -> v176 code explanation: split benchmark scorecard decision JSON/CSV/Markdown/HTML artifact writers into `benchmark_scorecard_decision_artifacts.py`, while keeping comparison loading, candidate evaluation, baseline exclusion, rubric threshold checks, generation-quality review items, selected-run ranking, recommendations, script usage, and old facade exports unchanged.
 189-v175-promoted-training-scale-comparison-artifact-split.md
  -> v175 code explanation: split promoted training scale comparison JSON/CSV/Markdown/HTML artifact writers into `promoted_training_scale_comparison_artifacts.py`, while keeping promotion index loading, promoted-run filtering, comparison input resolution, baseline handling, blockers, recommendations, script usage, and old facade exports unchanged.
 188-v174-training-scale-gate-artifact-split.md

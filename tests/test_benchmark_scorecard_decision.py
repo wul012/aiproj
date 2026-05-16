@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import benchmark_scorecard_decision  # noqa: E402
+from minigpt import benchmark_scorecard_decision_artifacts  # noqa: E402
 from minigpt.benchmark_scorecard_decision import (  # noqa: E402
     build_benchmark_scorecard_decision,
     load_benchmark_scorecard_comparison,
@@ -105,6 +107,20 @@ def make_comparison(root: Path, *, clean_candidate: bool = False) -> Path:
 
 
 class BenchmarkScorecardDecisionTests(unittest.TestCase):
+    def test_decision_module_reexports_artifact_writers(self) -> None:
+        self.assertIs(
+            benchmark_scorecard_decision.write_benchmark_scorecard_decision_outputs,
+            benchmark_scorecard_decision_artifacts.write_benchmark_scorecard_decision_outputs,
+        )
+        self.assertIs(
+            benchmark_scorecard_decision.render_benchmark_scorecard_decision_html,
+            benchmark_scorecard_decision_artifacts.render_benchmark_scorecard_decision_html,
+        )
+        self.assertIs(
+            benchmark_scorecard_decision.render_benchmark_scorecard_decision_markdown,
+            benchmark_scorecard_decision_artifacts.render_benchmark_scorecard_decision_markdown,
+        )
+
     def test_blocks_regressed_candidate_and_keeps_baseline_out(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             comparison = make_comparison(Path(tmp), clean_candidate=False)
