@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+170-v156-server-checkpoint-split.md
+ -> 第一百五十六版代码讲解：把 server contracts 的 checkpoint discovery、health、model-info 和 comparison payload 拆到 `server_checkpoints.py`，保留 `server_contracts.py`/`server.py` facade 兼容，让本地推理 checkpoint 证据链更独立。
 169-v155-server-logging-split.md
  -> 第一百五十五版代码讲解：把 server 的 request-history 事件构造拆到 `server_logging.py`，保留 `server.py` facade 兼容，让 HTTP handler 更聚焦路由、响应和 append。
 168-v154-release-readiness-artifact-split.md

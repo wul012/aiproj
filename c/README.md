@@ -274,6 +274,9 @@ c/154/解释/说明.md
 c/155/图片
 c/155/解释/说明.md
  -> v155 server logging split 的运行截图和解释
+c/156/图片
+c/156/解释/说明.md
+ -> v156 server checkpoint split 的运行截图和解释
 ```
 
 写入规则：
