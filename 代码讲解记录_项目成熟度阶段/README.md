@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+181-v167-playground-request-history-script-split.md
+ -> 第一百六十七版代码讲解：把 `playground_script.py` 里的 request-history JavaScript 片段拆到 `playground_request_history_script.py`，保持 playground HTML、请求历史查询、详情 JSON 和 CSV 导出契约不变。
+
 180-v166-project-audit-context-split.md
  -> ????????????? `project_audit.py` ? request-history summary ? CI workflow hygiene ??/??????? `project_audit_contexts.py`??? audit schema?artifact ???CLI ? facade ?????
 

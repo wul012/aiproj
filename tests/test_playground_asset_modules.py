@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import playground_assets  # noqa: E402
+from minigpt.playground_request_history_script import playground_request_history_script  # noqa: E402
 from minigpt.playground_script import playground_script  # noqa: E402
 from minigpt.playground_style import playground_style  # noqa: E402
 
@@ -48,6 +49,7 @@ class PlaygroundAssetModuleSplitTests(unittest.TestCase):
         self.assertIn("/api/generate-stream", script)
         self.assertIn("/api/request-history-detail", script)
         self.assertIn("/api/generate-pair-artifact", script)
+        self.assertIn(playground_request_history_script(), script)
 
 
 if __name__ == "__main__":

@@ -307,6 +307,9 @@ c/165/解释/说明.md
 c/166/图片
 c/166/解释/说明.md
  -> v166 project audit context split 的运行截图和解释
+c/167/图片
+c/167/解释/说明.md
+ -> v167 playground request history script split 的运行截图和解释
 ```
 
 写入规则：
