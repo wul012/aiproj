@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+158-v144-github-actions-node24-native-actions.md
+ -> 第一百四十四版代码讲解：把 CI 从 v143 的 Node 24 force flag 修正为 checkout/setup-python v6 原生 node24 action，真正消除 Node 20 target annotation。
 157-v143-github-actions-node24-runtime.md
  -> 第一百四十三版代码讲解：把 GitHub Actions 显式切到 Node 24 JavaScript action runtime，并用测试守住 workflow 策略，消除 Node.js 20 deprecation 提醒。
 156-v142-source-encoding-target-compatibility.md
