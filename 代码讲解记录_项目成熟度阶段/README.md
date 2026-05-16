@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+167-v153-release-bundle-artifact-split.md
+ -> 第一百五十三版代码讲解：把 release bundle 的 JSON/Markdown/HTML 渲染写出拆到 `release_bundle_artifacts.py`，保留 `release_bundle.py` facade 兼容，并让 module pressure 回到 pass。
+
 166-v152-ci-workflow-hygiene-typed-schema.md
  -> 第一百五十二版代码讲解：给 CI workflow hygiene 的 check/action/summary/report 补局部 TypedDict，并把 action major 解析从只认 `v6` 扩展到 `v6`、`v6.0.0`、`6`。
 

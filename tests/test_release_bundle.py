@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import release_bundle_artifacts
+from minigpt import release_bundle as release_bundle_facade
 from minigpt.release_bundle import build_release_bundle, render_release_bundle_html, write_release_bundle_outputs
 
 
@@ -237,6 +239,12 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("&lt;Release&gt;", html)
             self.assertIn("&lt;script&gt;", html)
             self.assertNotIn("<strong><script>", html)
+
+    def test_release_bundle_keeps_legacy_artifact_exports(self) -> None:
+        self.assertIs(release_bundle_facade.render_release_bundle_html, release_bundle_artifacts.render_release_bundle_html)
+        self.assertIs(release_bundle_facade.render_release_bundle_markdown, release_bundle_artifacts.render_release_bundle_markdown)
+        self.assertIs(release_bundle_facade.write_release_bundle_outputs, release_bundle_artifacts.write_release_bundle_outputs)
+        self.assertIs(release_bundle_facade.write_release_bundle_json, release_bundle_artifacts.write_release_bundle_json)
 
 
 if __name__ == "__main__":
