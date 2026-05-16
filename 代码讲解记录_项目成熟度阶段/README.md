@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+149-v135-release-gate-artifact-split.md
+ -> 第一百三十五版代码讲解：把 release gate 的 JSON/Markdown/HTML 输出写入层拆成 artifact 模块，保留 policy/check/summary、旧 facade 和脚本调用方式。
 148-v134-maturity-narrative-artifact-split.md
  -> 第一百三十四版代码讲解：把 maturity narrative 的 JSON/Markdown/HTML 输出写入层拆成 artifact 模块，保留 narrative summary/sections/evidence matrix、旧 facade 和脚本调用方式。
 147-v133-registry-ranking-split.md

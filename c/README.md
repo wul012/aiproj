@@ -211,6 +211,9 @@ c/133/解释/说明.md
 c/134/图片
 c/134/解释/说明.md
  -> v134 maturity narrative artifact split 的运行截图和解释
+c/135/图片
+c/135/解释/说明.md
+ -> v135 release gate artifact split 的运行截图和解释
 ```
 
 写入规则：

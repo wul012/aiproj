@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import release_gate, release_gate_artifacts
 from minigpt.release_gate import (
     build_release_gate,
     exit_code_for_gate,
@@ -108,6 +109,16 @@ def make_bundle(
 
 
 class ReleaseGateTests(unittest.TestCase):
+    def test_release_gate_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(
+            release_gate.render_release_gate_html,
+            release_gate_artifacts.render_release_gate_html,
+        )
+        self.assertIs(
+            release_gate.write_release_gate_outputs,
+            release_gate_artifacts.write_release_gate_outputs,
+        )
+
     def test_release_gate_policy_profiles_are_available(self) -> None:
         profiles = release_gate_policy_profiles()
 
