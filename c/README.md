@@ -229,6 +229,9 @@ c/139/瑙ｉ噴/璇存槑.md
 c/140/鍥剧墖
 c/140/瑙ｉ噴/璇存槑.md
  -> v140 benchmark scorecard promotion decision 鐨勮繍琛屾埅鍥惧拰瑙ｉ噴
+c/141/图片
+c/141/解释/说明.md
+ -> v141 maturity narrative scorecard decision 的运行截图和解释
 ```
 
 写入规则：

@@ -30,6 +30,13 @@ def parse_args() -> argparse.Namespace:
         help="Optional benchmark_scorecard.json path. Repeat for multiple scorecards.",
     )
     parser.add_argument(
+        "--benchmark-scorecard-decision",
+        type=Path,
+        action="append",
+        default=[],
+        help="Optional benchmark_scorecard_decision.json path. Repeat for multiple decisions.",
+    )
+    parser.add_argument(
         "--dataset-card",
         type=Path,
         action="append",
@@ -49,6 +56,7 @@ def main() -> None:
         registry_path=args.registry,
         request_history_summary_path=args.request_history_summary,
         benchmark_scorecard_paths=args.benchmark_scorecard or None,
+        benchmark_scorecard_decision_paths=args.benchmark_scorecard_decision or None,
         dataset_card_paths=args.dataset_card or None,
         title=args.title,
     )
@@ -61,6 +69,8 @@ def main() -> None:
     print(f"release_readiness_trend_status={summary.get('release_readiness_trend_status')}")
     print(f"request_history_status={summary.get('request_history_status')}")
     print(f"benchmark_scorecards={summary.get('benchmark_scorecard_count')}")
+    print(f"benchmark_scorecard_decisions={summary.get('benchmark_decision_count')}")
+    print(f"benchmark_decision_selected_run={summary.get('benchmark_decision_selected_run')}")
     print(f"dataset_cards={summary.get('dataset_card_count')}")
     print("warnings=" + json.dumps(narrative.get("warnings", []), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

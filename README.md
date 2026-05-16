@@ -4,13 +4,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 140 turns benchmark scorecard comparison into a lightweight promotion decision. `benchmark_scorecard_decision.py` reads `benchmark_scorecard_comparison.json`, evaluates non-baseline candidates with rubric/overall deltas, case regressions, and generation-quality flag taxonomy changes, then writes JSON/CSV/Markdown/HTML evidence that says whether a compared scorecard can be promoted, needs review, or should stay blocked.
+Version 141 carries benchmark scorecard promotion decisions into the maturity narrative. `maturity_narrative.py` can now discover or accept `benchmark_scorecard_decision.json`, summarize decision count, selected run, selected generation flag delta, review item count, and blocker count, then render a Benchmark Promotion Decision section in JSON/Markdown/HTML so promotion evidence is visible inside the portfolio-level story.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
-| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, generation-quality flag taxonomy, scorecard-level flag taxonomy consumption, cross-scorecard flag taxonomy deltas, and scorecard promotion decision evidence | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `benchmark_scorecard_decision.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
+| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, generation-quality flag taxonomy, scorecard-level flag taxonomy consumption, cross-scorecard flag taxonomy deltas, scorecard promotion decision evidence, and maturity narrative consumption of that decision | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `benchmark_scorecard_decision.py`, `maturity_narrative.py`, `maturity_narrative_artifacts.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, maturity-narrative, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline with extracted artifact writers, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122/c132 archives | Move from dry-run/governance evidence toward real promoted training runs |
@@ -21,26 +21,26 @@ Version 140 turns benchmark scorecard comparison into a lightweight promotion de
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs; v133 extracts registry ranking and delta aggregation; v134 extracts maturity narrative artifact outputs; v135 extracts release gate artifact outputs; v136 extracts generation quality artifact outputs and closes the current two-step split cycle; v137 deliberately shifts back to evidence enrichment with generation-quality flag taxonomy; v138 carries that taxonomy into the benchmark scorecard; v139 carries it into cross-run scorecard comparison; v140 consumes the comparison in a promotion decision instead of starting another split run. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs; v133 extracts registry ranking and delta aggregation; v134 extracts maturity narrative artifact outputs; v135 extracts release gate artifact outputs; v136 extracts generation quality artifact outputs and closes the current two-step split cycle; v137 deliberately shifts back to evidence enrichment with generation-quality flag taxonomy; v138 carries that taxonomy into the benchmark scorecard; v139 carries it into cross-run scorecard comparison; v140 consumes the comparison in a promotion decision; v141 folds that decision into the maturity narrative instead of leaving it as isolated report evidence. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
 
 ## Capability map
 
 - Model learning path: tokenizer -> dataset -> transformer model -> training -> generation -> inspection -> evaluation.
 - Data path: source text -> prepared corpus -> quality report -> dataset version/card -> run manifest.
-- Evaluation path: fixed prompts -> generation quality -> benchmark scorecard -> rubric/drilldown -> cross-run comparison.
+- Evaluation path: fixed prompts -> generation quality -> benchmark scorecard -> rubric/drilldown -> cross-run comparison -> scorecard promotion decision -> maturity narrative.
 - Experiment path: run artifacts -> registry -> experiment/model cards -> project audit -> release bundle -> release gate.
 - Local inference path: checkpoint discovery -> generate/stream/pair APIs -> playground -> request history -> request-history summary.
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 140 focus
+## Version 141 focus
 
-- Added `src/minigpt/benchmark_scorecard_decision.py` to consume `benchmark_scorecard_comparison.json` and produce a promote/review/blocked decision for non-baseline scorecard candidates.
-- Added decision rules for rubric/overall regressions, minimum rubric score, case regressions, generation-quality flag increases, dominant flag changes, and worst generation case changes.
-- Added `scripts/build_benchmark_scorecard_decision.py` so the decision can be generated from an existing comparison directory or JSON file.
-- Added JSON/CSV/Markdown/HTML decision outputs with selected candidate, blockers, review items, and recommendations.
-- Added `tests/test_benchmark_scorecard_decision.py` to cover blocked, reviewed/promoted, directory loading, rendering, and empty-comparison rejection paths.
-- Reran decision tests, compile checks, decision smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/140`.
+- Added optional `benchmark_scorecard_decision_paths` input to `build_maturity_narrative` and auto-discovery under `runs/**/benchmark-scorecard-decision/benchmark_scorecard_decision.json`.
+- Added maturity summary fields for scorecard decision count, status counts, selected run, selected flag delta, review item count, and blocker count.
+- Added a `Benchmark Promotion Decision` section plus evidence-matrix rows so promotion decisions sit beside maturity, release readiness, request history, benchmark, and dataset evidence.
+- Updated Markdown/HTML maturity narrative artifacts and `scripts/build_maturity_narrative.py` CLI output to expose scorecard decision context.
+- Strengthened `tests/test_maturity_narrative.py` with scorecard-decision fixtures, section assertions, output assertions, and evidence-matrix assertions.
+- Reran maturity narrative tests, compile checks, narrative smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/141`.
 
 ## Version tags
 
@@ -187,6 +187,7 @@ v137.0.0 MiniGPT v137 generation quality flag taxonomy
 v138.0.0 MiniGPT v138 benchmark scorecard flag taxonomy
 v139.0.0 MiniGPT v139 benchmark scorecard comparison flag taxonomy
 v140.0.0 MiniGPT v140 benchmark scorecard promotion decision
+v141.0.0 MiniGPT v141 maturity narrative scorecard decision
 ```
 
 ## Project structure
@@ -2321,6 +2322,14 @@ Version 140 screenshots are archived under `c/140`:
 - `03-benchmark-scorecard-decision-smoke.png`: generated scorecard decision JSON/CSV/Markdown/HTML outputs from a comparison with clean and risky candidates
 - `04-playwright-benchmark-scorecard-decision-html.png`: generated scorecard decision HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v140 README, c/140 archive, project-maturity explanation, and source encoding check
+
+Version 141 screenshots are archived under `c/141`:
+
+- `01-unit-tests.png`: maturity narrative scorecard decision tests, compile check, and full unittest discovery
+- `02-maintenance-smoke.png`: maintenance batching and module pressure smoke after folding scorecard decisions into maturity narrative
+- `03-maturity-narrative-scorecard-decision-smoke.png`: generated maturity narrative JSON/Markdown/HTML outputs with `benchmark_scorecard_decisions=1` and selected run context
+- `04-playwright-maturity-narrative-scorecard-decision-html.png`: generated maturity narrative HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v141 README, c/141 archive, project-maturity explanation, and source encoding check
 
 ## Code explanation records
 

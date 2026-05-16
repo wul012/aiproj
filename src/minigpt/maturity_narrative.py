@@ -26,6 +26,7 @@ def build_maturity_narrative(
     registry_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
     benchmark_scorecard_paths: list[str | Path] | None = None,
+    benchmark_scorecard_decision_paths: list[str | Path] | None = None,
     dataset_card_paths: list[str | Path] | None = None,
     title: str = "MiniGPT release-quality maturity narrative",
     generated_at: str | None = None,
@@ -39,21 +40,24 @@ def build_maturity_narrative(
         else root / "runs" / "request-history-summary" / "request_history_summary.json"
     )
     scorecard_files = [Path(path) for path in (benchmark_scorecard_paths or _discover_scorecards(root))]
+    scorecard_decision_files = [Path(path) for path in (benchmark_scorecard_decision_paths or _discover_scorecard_decisions(root))]
     dataset_card_files = [Path(path) for path in (dataset_card_paths or _discover_dataset_cards(root))]
 
     maturity = _read_json(maturity_file)
     registry = _read_json(registry_file)
     request_history = _read_json(request_file)
     scorecards = [_read_json(path) for path in scorecard_files]
+    scorecard_decisions = [_read_json(path) for path in scorecard_decision_files]
     dataset_cards = [_read_json(path) for path in dataset_card_files]
 
-    summary = _summary(maturity, registry, request_history, scorecards, dataset_cards)
-    sections = _sections(summary, maturity, registry, request_history, scorecards, dataset_cards)
+    summary = _summary(maturity, registry, request_history, scorecards, scorecard_decisions, dataset_cards)
+    sections = _sections(summary, maturity, registry, request_history, scorecards, scorecard_decisions, dataset_cards)
     evidence = _evidence_matrix(
         maturity_file,
         registry_file,
         request_file,
         scorecard_files,
+        scorecard_decision_files,
         dataset_card_files,
         sections,
     )
@@ -67,6 +71,7 @@ def build_maturity_narrative(
             "registry_path": str(registry_file),
             "request_history_summary_path": str(request_file),
             "benchmark_scorecard_paths": [str(path) for path in scorecard_files],
+            "benchmark_scorecard_decision_paths": [str(path) for path in scorecard_decision_files],
             "dataset_card_paths": [str(path) for path in dataset_card_files],
         },
         "summary": summary,
@@ -82,12 +87,14 @@ def _summary(
     registry: dict[str, Any] | None,
     request_history: dict[str, Any] | None,
     scorecards: list[dict[str, Any] | None],
+    scorecard_decisions: list[dict[str, Any] | None],
     dataset_cards: list[dict[str, Any] | None],
 ) -> dict[str, Any]:
     maturity_summary = _dict(_pick(maturity, "summary"))
     release = _release_summary(maturity_summary, _dict(_pick(maturity, "release_readiness_context")))
     request = _request_summary(maturity, request_history)
     benchmark_rows = [_scorecard_summary(item) for item in scorecards if isinstance(item, dict)]
+    decision_rows = [_scorecard_decision_summary(item) for item in scorecard_decisions if isinstance(item, dict)]
     dataset_rows = [_dataset_summary(item) for item in dataset_cards if isinstance(item, dict)]
     benchmark_scores = [row["overall_score"] for row in benchmark_rows if row.get("overall_score") is not None]
     dataset_warnings = sum(int(row.get("warning_count") or 0) for row in dataset_rows)
@@ -115,6 +122,12 @@ def _summary(
         "benchmark_status_counts": _counts(row.get("overall_status") or "missing" for row in benchmark_rows),
         "benchmark_avg_score": round(sum(float(score) for score in benchmark_scores) / len(benchmark_scores), 2) if benchmark_scores else None,
         "benchmark_weakest_case": _weakest_benchmark_case(benchmark_rows),
+        "benchmark_decision_count": len(decision_rows),
+        "benchmark_decision_status_counts": _counts(row.get("decision_status") or "missing" for row in decision_rows),
+        "benchmark_decision_selected_run": _selected_decision_run(decision_rows),
+        "benchmark_decision_review_item_count": sum(int(row.get("review_item_count") or 0) for row in decision_rows),
+        "benchmark_decision_blocker_count": sum(int(row.get("blocker_count") or 0) for row in decision_rows),
+        "benchmark_decision_selected_flag_delta": _selected_decision_flag_delta(decision_rows),
         "dataset_card_count": len(dataset_rows),
         "dataset_status_counts": _counts(row.get("quality_status") or "missing" for row in dataset_rows),
         "dataset_warning_count": dataset_warnings,
@@ -127,6 +140,7 @@ def _sections(
     registry: dict[str, Any] | None,
     request_history: dict[str, Any] | None,
     scorecards: list[dict[str, Any] | None],
+    scorecard_decisions: list[dict[str, Any] | None],
     dataset_cards: list[dict[str, Any] | None],
 ) -> list[dict[str, Any]]:
     return [
@@ -167,6 +181,15 @@ def _sections(
             "next_step": "Expand fixed prompts and compare larger or fine-tuned models when data size grows.",
         },
         {
+            "key": "benchmark_promotion",
+            "title": "Benchmark Promotion Decision",
+            "status": _status_from_counts(summary.get("benchmark_decision_status_counts")),
+            "claim": _benchmark_decision_claim(summary),
+            "evidence": "Benchmark scorecard decisions consume cross-run scorecard comparison deltas, case regressions, and generation-quality flag taxonomy shifts.",
+            "boundary": "A promote decision means benchmark evidence can advance; it is not a production release approval.",
+            "next_step": "Keep promoted scorecards tied to their raw comparison and generation-quality reports before claiming model improvement.",
+        },
+        {
             "key": "data_governance",
             "title": "Data Governance",
             "status": _status_from_counts(summary.get("dataset_status_counts")),
@@ -192,6 +215,7 @@ def _evidence_matrix(
     registry_path: Path,
     request_path: Path,
     scorecard_paths: list[Path],
+    scorecard_decision_paths: list[Path],
     dataset_card_paths: list[Path],
     sections: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
@@ -202,8 +226,10 @@ def _evidence_matrix(
     ]
     for path in scorecard_paths:
         rows.append(_evidence("benchmark", "benchmark scorecard", path, sections[3]))
+    for path in scorecard_decision_paths:
+        rows.append(_evidence("benchmark", "scorecard promotion decision", path, sections[4]))
     for path in dataset_card_paths:
-        rows.append(_evidence("dataset", "dataset card", path, sections[4]))
+        rows.append(_evidence("dataset", "dataset card", path, sections[5]))
     return rows
 
 
@@ -302,6 +328,28 @@ def _scorecard_summary(scorecard: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _scorecard_decision_summary(decision: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(decision.get("summary"))
+    selected = _dict(decision.get("selected_run"))
+    evaluations = _list_of_dicts(decision.get("candidate_evaluations"))
+    return {
+        "decision_status": decision.get("decision_status"),
+        "recommended_action": decision.get("recommended_action"),
+        "selected_run": selected.get("name") or summary.get("selected_name"),
+        "selected_relation": selected.get("decision_relation") or summary.get("selected_relation"),
+        "selected_rubric_avg_score": selected.get("rubric_avg_score") or summary.get("selected_rubric_avg_score"),
+        "selected_generation_quality_total_flags_delta": selected.get("generation_quality_total_flags_delta")
+        if selected
+        else summary.get("selected_generation_quality_total_flags_delta"),
+        "candidate_count": summary.get("candidate_count"),
+        "clean_candidate_count": summary.get("clean_candidate_count"),
+        "review_candidate_count": summary.get("review_candidate_count"),
+        "blocked_candidate_count": summary.get("blocked_candidate_count"),
+        "review_item_count": sum(len(_string_list(row.get("review_items"))) for row in evaluations),
+        "blocker_count": sum(len(_string_list(row.get("blockers"))) for row in evaluations if not row.get("is_baseline")),
+    }
+
+
 def _dataset_summary(card: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(card.get("summary"))
     quality = _dict(card.get("quality"))
@@ -321,15 +369,29 @@ def _weakest_benchmark_case(rows: list[dict[str, Any]]) -> str | None:
     return weakest.get("weakest_rubric_case")
 
 
+def _selected_decision_run(rows: list[dict[str, Any]]) -> str | None:
+    selected = [row for row in rows if row.get("selected_run")]
+    if not selected:
+        return None
+    return str(selected[-1].get("selected_run"))
+
+
+def _selected_decision_flag_delta(rows: list[dict[str, Any]]) -> Any:
+    selected = [row for row in rows if row.get("selected_run")]
+    if not selected:
+        return None
+    return selected[-1].get("selected_generation_quality_total_flags_delta")
+
+
 def _status_from_counts(counts: Any) -> str:
     values = _dict(counts)
     if not values:
         return "missing"
-    if int(values.get("fail") or 0) > 0:
+    if int(values.get("fail") or 0) > 0 or int(values.get("blocked") or 0) > 0:
         return "fail"
     if int(values.get("warn") or 0) > 0 or int(values.get("review") or 0) > 0:
         return "warn"
-    if int(values.get("pass") or 0) > 0 or int(values.get("ready") or 0) > 0:
+    if int(values.get("pass") or 0) > 0 or int(values.get("ready") or 0) > 0 or int(values.get("promote") or 0) > 0:
         return "pass"
     return sorted(values)[0]
 
@@ -357,6 +419,14 @@ def _benchmark_claim(summary: dict[str, Any]) -> str:
     )
 
 
+def _benchmark_decision_claim(summary: dict[str, Any]) -> str:
+    return (
+        f"{summary.get('benchmark_decision_count')} scorecard decision report(s) are available; "
+        f"selected run is {summary.get('benchmark_decision_selected_run') or 'missing'} with generation flag delta "
+        f"{summary.get('benchmark_decision_selected_flag_delta') if summary.get('benchmark_decision_selected_flag_delta') is not None else 'missing'}."
+    )
+
+
 def _dataset_claim(summary: dict[str, Any]) -> str:
     return (
         f"{summary.get('dataset_card_count')} dataset card(s) are available with "
@@ -370,6 +440,10 @@ def _portfolio_claim(summary: dict[str, Any]) -> str:
 
 def _discover_scorecards(root: Path) -> list[Path]:
     return sorted(root.glob("runs/**/benchmark-scorecard/benchmark_scorecard.json"))
+
+
+def _discover_scorecard_decisions(root: Path) -> list[Path]:
+    return sorted(root.glob("runs/**/benchmark-scorecard-decision/benchmark_scorecard_decision.json"))
 
 
 def _discover_dataset_cards(root: Path) -> list[Path]:

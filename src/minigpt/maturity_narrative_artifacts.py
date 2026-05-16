@@ -31,6 +31,9 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                 ("Request history status", summary.get("request_history_status")),
                 ("Benchmark scorecards", summary.get("benchmark_scorecard_count")),
                 ("Benchmark average", summary.get("benchmark_avg_score")),
+                ("Benchmark decisions", summary.get("benchmark_decision_count")),
+                ("Scorecard decision run", summary.get("benchmark_decision_selected_run")),
+                ("Scorecard decision flag delta", summary.get("benchmark_decision_selected_flag_delta")),
                 ("Dataset cards", summary.get("dataset_card_count")),
                 ("Dataset warnings", summary.get("dataset_warning_count")),
             ]
@@ -92,6 +95,8 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Requests", summary.get("request_history_status")),
         ("Benchmarks", summary.get("benchmark_scorecard_count")),
         ("Benchmark avg", summary.get("benchmark_avg_score")),
+        ("Decisions", summary.get("benchmark_decision_count")),
+        ("Decision run", summary.get("benchmark_decision_selected_run")),
         ("Dataset cards", summary.get("dataset_card_count")),
     ]
     return "\n".join(

@@ -28,6 +28,7 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
     registry_path = project / "runs" / "registry" / "registry.json"
     request_path = project / "runs" / "request-history-summary" / "request_history_summary.json"
     scorecard_path = project / "runs" / "demo-run" / "benchmark-scorecard" / "benchmark_scorecard.json"
+    decision_path = project / "runs" / "demo-run" / "benchmark-scorecard-decision" / "benchmark_scorecard_decision.json"
     dataset_card_path = project / "datasets" / "demo" / "v1" / "dataset_card.json"
 
     write_json(
@@ -98,6 +99,34 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
         },
     )
     write_json(
+        decision_path,
+        {
+            "schema_version": 1,
+            "decision_status": "promote",
+            "recommended_action": "promote_selected_scorecard",
+            "summary": {
+                "candidate_count": 1,
+                "clean_candidate_count": 1,
+                "review_candidate_count": 0,
+                "blocked_candidate_count": 0,
+                "selected_name": "demo-run",
+                "selected_relation": "promote",
+                "selected_rubric_avg_score": 90.0,
+                "selected_generation_quality_total_flags_delta": -2,
+            },
+            "selected_run": {
+                "name": "demo-run",
+                "decision_relation": "promote",
+                "rubric_avg_score": 90.0,
+                "generation_quality_total_flags_delta": -2,
+            },
+            "candidate_evaluations": [
+                {"name": "baseline", "is_baseline": True, "blockers": ["baseline run is not a promotion candidate"], "review_items": []},
+                {"name": "demo-run", "is_baseline": False, "blockers": [], "review_items": []},
+            ],
+        },
+    )
+    write_json(
         dataset_card_path,
         {
             "schema_version": 1,
@@ -116,6 +145,7 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
         "registry": registry_path,
         "request": request_path,
         "scorecard": scorecard_path,
+        "scorecard_decision": decision_path,
         "dataset_card": dataset_card_path,
     }
 
@@ -149,11 +179,15 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["benchmark_scorecard_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_avg_score"], 88.5)
             self.assertEqual(narrative["summary"]["benchmark_weakest_case"], "summary-short")
+            self.assertEqual(narrative["summary"]["benchmark_decision_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_decision_selected_run"], "demo-run")
+            self.assertEqual(narrative["summary"]["benchmark_decision_selected_flag_delta"], -2)
             self.assertEqual(narrative["summary"]["dataset_card_count"], 1)
             self.assertEqual(narrative["summary"]["dataset_warning_count"], 0)
             self.assertEqual(narrative["warnings"], [])
             self.assertIn("Release Quality Trend", {item["title"] for item in narrative["sections"]})
             self.assertIn("benchmark", {item["area"] for item in narrative["evidence_matrix"]})
+            self.assertIn("scorecard promotion decision", {item["signal"] for item in narrative["evidence_matrix"]})
             self.assertIn("dataset", {item["area"] for item in narrative["evidence_matrix"]})
 
     def test_build_maturity_narrative_marks_review_for_release_regression(self) -> None:
@@ -189,7 +223,9 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("maturity_narrative", Path(outputs["json"]).name)
             self.assertIn("## Evidence Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release Quality Trend", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Quality", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_maturity_narrative_html_escapes_text(self) -> None:

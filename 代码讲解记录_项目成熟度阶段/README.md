@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+155-v141-maturity-narrative-scorecard-decision.md
+ -> 第一百四十一版代码讲解：把 benchmark scorecard promotion decision 接入 maturity narrative，让 selected run、status counts、review/blocker 和 flag delta 进入项目成熟度叙事。
+
 154-v140-benchmark-scorecard-promotion-decision.md
  -> 第一百四十版代码讲解：新增 benchmark scorecard promotion decision，把 scorecard comparison 的 rubric/overall delta、case regression 和 generation-quality flag taxonomy 变化转成 promote/review/blocked 决策证据。
 153-v139-benchmark-scorecard-comparison-flag-taxonomy.md
