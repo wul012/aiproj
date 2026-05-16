@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+186-v172-eval-suite-artifact-split.md
+ -> v172 code explanation: split eval suite JSON/CSV/SVG/HTML artifact writers into `eval_suite_artifacts.py`, while keeping prompt suite loading, prompt result construction, eval report schema, CLI usage, and old facade exports unchanged.
 185-v171-server-get-route-split.md
  -> v171 code explanation: split MiniGPT server GET route dispatch into `server_routes.py`, while keeping health/checkpoints/model-info/request-history/playground/run-file GET semantics, POST generation routes, request logging, and old server facade exports unchanged.
 184-v170-release-readiness-comparison-artifact-split.md

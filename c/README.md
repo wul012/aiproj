@@ -322,6 +322,9 @@ c/170/解释/说明.md
 c/171/图片
 c/171/解释/说明.md
  -> v171 server GET route split 的运行截图和解释
+c/172/图片
+c/172/解释/说明.md
+ -> v172 eval suite artifact split 的运行截图和解释
 ```
 
 写入规则：

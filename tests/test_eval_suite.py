@@ -19,6 +19,8 @@ from minigpt.eval_suite import (
     load_prompt_cases,
     write_eval_suite_outputs,
 )
+from minigpt import eval_suite
+from minigpt import eval_suite_artifacts
 
 
 class EvalSuiteTests(unittest.TestCase):
@@ -125,6 +127,10 @@ class EvalSuiteTests(unittest.TestCase):
             self.assertIn("task_type,difficulty", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
             self.assertIn("Prompt Results", Path(outputs["html"]).read_text(encoding="utf-8"))
+
+    def test_eval_suite_reexports_artifact_writers(self) -> None:
+        self.assertIs(eval_suite.write_eval_suite_outputs, eval_suite_artifacts.write_eval_suite_outputs)
+        self.assertIs(eval_suite.render_eval_suite_html, eval_suite_artifacts.render_eval_suite_html)
 
 
 if __name__ == "__main__":
