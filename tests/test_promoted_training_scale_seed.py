@@ -16,9 +16,25 @@ from minigpt.promoted_training_scale_seed import (  # noqa: E402
     render_promoted_training_scale_seed_markdown,
     write_promoted_training_scale_seed_outputs,
 )
+from minigpt import promoted_training_scale_seed as seed_module  # noqa: E402
+from minigpt import promoted_training_scale_seed_artifacts as artifact_module  # noqa: E402
 
 
 class PromotedTrainingScaleSeedTests(unittest.TestCase):
+    def test_artifact_functions_are_reexported_from_seed_module(self) -> None:
+        self.assertIs(
+            seed_module.render_promoted_training_scale_seed_html,
+            artifact_module.render_promoted_training_scale_seed_html,
+        )
+        self.assertIs(
+            seed_module.render_promoted_training_scale_seed_markdown,
+            artifact_module.render_promoted_training_scale_seed_markdown,
+        )
+        self.assertIs(
+            seed_module.write_promoted_training_scale_seed_outputs,
+            artifact_module.write_promoted_training_scale_seed_outputs,
+        )
+
     def test_builds_ready_seed_from_accepted_decision_and_sources(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

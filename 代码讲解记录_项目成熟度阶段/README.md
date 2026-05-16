@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+182-v168-promoted-training-scale-seed-artifact-split.md
+ -> 第一百六十八版代码讲解：把 `promoted_training_scale_seed.py` 的 JSON/CSV/Markdown/HTML artifact 写出和渲染拆到 `promoted_training_scale_seed_artifacts.py`，保持 seed schema、next-plan 命令和旧 facade 导出不变。
+
 181-v167-playground-request-history-script-split.md
  -> 第一百六十七版代码讲解：把 `playground_script.py` 里的 request-history JavaScript 片段拆到 `playground_request_history_script.py`，保持 playground HTML、请求历史查询、详情 JSON 和 CSV 导出契约不变。
 
