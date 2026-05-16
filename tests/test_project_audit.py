@@ -98,6 +98,30 @@ def make_request_history_summary(root: Path, *, status: str = "pass") -> Path:
     return path
 
 
+def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
+    summary = {
+        "status": status,
+        "decision": "continue_with_node24_native_ci" if status == "pass" else "fix_ci_workflow_hygiene",
+        "check_count": 7,
+        "passed_check_count": 7 if status == "pass" else 4,
+        "failed_check_count": 0 if status == "pass" else 3,
+        "action_count": 2,
+        "node24_native_action_count": 2 if status == "pass" else 0,
+        "forbidden_env_count": 0 if status == "pass" else 1,
+        "missing_step_count": 0 if status == "pass" else 1,
+        "python_version": "3.11",
+    }
+    report = {
+        "schema_version": 1,
+        "workflow_path": ".github/workflows/ci.yml",
+        "summary": summary,
+        "checks": [],
+    }
+    path = root / "ci-workflow-hygiene" / "ci_workflow_hygiene.json"
+    write_json(path, report)
+    return path
+
+
 class ProjectAuditTests(unittest.TestCase):
     def test_build_project_audit_passes_complete_project(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -105,11 +129,13 @@ class ProjectAuditTests(unittest.TestCase):
             registry_path = make_registry(root)
             model_card_path = make_model_card(root, registry_path)
             request_history_summary_path = make_request_history_summary(root)
+            ci_workflow_hygiene_path = make_ci_workflow_hygiene(root)
 
             audit = build_project_audit(
                 registry_path,
                 model_card_path=model_card_path,
                 request_history_summary_path=request_history_summary_path,
+                ci_workflow_hygiene_path=ci_workflow_hygiene_path,
                 generated_at="2026-05-12T00:00:00Z",
             )
 
@@ -119,8 +145,12 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["ready_runs"], 1)
             self.assertEqual(audit["summary"]["request_history_status"], "pass")
             self.assertEqual(audit["summary"]["request_history_records"], 4)
+            self.assertEqual(audit["summary"]["ci_workflow_status"], "pass")
+            self.assertEqual(audit["summary"]["ci_workflow_failed_checks"], 0)
             self.assertEqual(audit["request_history_context"]["status"], "pass")
+            self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
+            self.assertIn("ci_workflow_hygiene", {check["id"] for check in audit["checks"]})
             self.assertEqual(audit["runs"][0]["experiment_card_exists"], True)
             self.assertIn("All audit checks passed", " ".join(audit["recommendations"]))
 
@@ -142,6 +172,29 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(check["status"], "warn")
             self.assertIn("status=watch", check["detail"])
             self.assertIn("Generate or review request_history_summary.json", " ".join(audit["recommendations"]))
+
+    def test_build_project_audit_warns_for_ci_workflow_hygiene_fail_status(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_registry(root)
+            model_card_path = make_model_card(root, registry_path)
+            request_history_summary_path = make_request_history_summary(root)
+            ci_workflow_hygiene_path = make_ci_workflow_hygiene(root, status="fail")
+
+            audit = build_project_audit(
+                registry_path,
+                model_card_path=model_card_path,
+                request_history_summary_path=request_history_summary_path,
+                ci_workflow_hygiene_path=ci_workflow_hygiene_path,
+            )
+
+            self.assertEqual(audit["summary"]["overall_status"], "warn")
+            self.assertEqual(audit["summary"]["ci_workflow_status"], "fail")
+            check = next(item for item in audit["checks"] if item["id"] == "ci_workflow_hygiene")
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("status=fail", check["detail"])
+            self.assertIn("failed_checks=3", check["detail"])
+            self.assertIn("Generate or review ci_workflow_hygiene.json", " ".join(audit["recommendations"]))
 
     def test_build_project_audit_fails_for_missing_experiment_cards(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -167,6 +220,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(Path(outputs["markdown"]).exists())
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("CI workflow hygiene", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT project audit", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_project_audit_html_escapes_run_text(self) -> None:

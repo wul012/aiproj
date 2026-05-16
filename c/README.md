@@ -244,6 +244,9 @@ c/144/解释/说明.md
 c/145/图片
 c/145/解释/说明.md
  -> v145 CI workflow hygiene report 的运行截图和解释
+c/146/图片
+c/146/解释/说明.md
+ -> v146 project audit CI workflow hygiene context 的运行截图和解释
 ```
 
 写入规则：

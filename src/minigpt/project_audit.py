@@ -30,6 +30,7 @@ def build_project_audit(
     *,
     model_card_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
+    ci_workflow_hygiene_path: str | Path | None = None,
     title: str = "MiniGPT project audit",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -38,10 +39,16 @@ def build_project_audit(
     registry = _read_required_json(registry_file)
     model_card_file = _resolve_model_card_path(registry_file, model_card_path)
     request_history_summary_file = _resolve_request_history_summary_path(registry_file, request_history_summary_path)
+    ci_workflow_hygiene_file = _resolve_ci_workflow_hygiene_path(registry_file, ci_workflow_hygiene_path)
     model_card = _read_json(model_card_file, warnings, "model card") if model_card_file is not None else None
     request_history_summary = (
         _read_json(request_history_summary_file, warnings, "request history summary")
         if request_history_summary_file is not None
+        else None
+    )
+    ci_workflow_hygiene = (
+        _read_json(ci_workflow_hygiene_file, warnings, "CI workflow hygiene")
+        if ci_workflow_hygiene_file is not None
         else None
     )
     runs = _build_run_rows(registry, model_card if isinstance(model_card, dict) else None)
@@ -50,6 +57,8 @@ def build_project_audit(
         model_card if isinstance(model_card, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
         request_history_summary_file,
+        ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
+        ci_workflow_hygiene_file,
         runs,
     )
     summary = _summarize_checks(
@@ -57,6 +66,7 @@ def build_project_audit(
         registry,
         model_card if isinstance(model_card, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
+        ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
         runs,
     )
 
@@ -67,9 +77,11 @@ def build_project_audit(
         "registry_path": str(registry_file),
         "model_card_path": None if model_card_file is None else str(model_card_file),
         "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
+        "ci_workflow_hygiene_path": None if ci_workflow_hygiene_file is None else str(ci_workflow_hygiene_file),
         "summary": summary,
         "checks": checks,
         "request_history_context": _request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
+        "ci_workflow_context": _ci_workflow_context(ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None),
         "runs": runs,
         "recommendations": _build_recommendations(checks, summary),
         "warnings": warnings,
@@ -97,6 +109,20 @@ def _resolve_request_history_summary_path(registry_path: Path, request_history_s
         registry_path.parent / "request_history_summary.json",
         registry_path.parent / "request-history-summary" / "request_history_summary.json",
         registry_path.parent.parent / "request-history-summary" / "request_history_summary.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_ci_workflow_hygiene_path(registry_path: Path, ci_workflow_hygiene_path: str | Path | None) -> Path | None:
+    if ci_workflow_hygiene_path is not None:
+        return Path(ci_workflow_hygiene_path)
+    candidates = [
+        registry_path.parent / "ci_workflow_hygiene.json",
+        registry_path.parent / "ci-workflow-hygiene" / "ci_workflow_hygiene.json",
+        registry_path.parent.parent / "ci-workflow-hygiene" / "ci_workflow_hygiene.json",
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -171,6 +197,8 @@ def _build_checks(
     model_card: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
     request_history_summary_path: Path | None,
+    ci_workflow_hygiene: dict[str, Any] | None,
+    ci_workflow_hygiene_path: Path | None,
     runs: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     total = len(runs)
@@ -202,6 +230,7 @@ def _build_checks(
             f"{sum(1 for run in runs if run.get('status') == 'ready')} ready run(s).",
         ),
         _request_history_summary_check(request_history_summary, request_history_summary_path),
+        _ci_workflow_hygiene_check(ci_workflow_hygiene, ci_workflow_hygiene_path),
     ]
     non_pass_quality = [run.get("name") for run in runs if run.get("dataset_quality") not in {"pass", None, "missing"}]
     checks.append(
@@ -316,11 +345,81 @@ def _request_history_context(request_history_summary: dict[str, Any] | None) -> 
     }
 
 
+def _ci_workflow_hygiene_check(
+    ci_workflow_hygiene: dict[str, Any] | None,
+    ci_workflow_hygiene_path: Path | None,
+) -> dict[str, Any]:
+    if not isinstance(ci_workflow_hygiene, dict):
+        detail = (
+            f"ci_workflow_hygiene.json missing at {ci_workflow_hygiene_path}"
+            if ci_workflow_hygiene_path is not None
+            else "ci_workflow_hygiene.json missing; CI workflow policy was not summarized."
+        )
+        return _check("ci_workflow_hygiene", "CI workflow hygiene is clean", "warn", detail)
+    summary = _dict(ci_workflow_hygiene.get("summary"))
+    status = str(summary.get("status") or "missing")
+    action_count = summary.get("action_count")
+    node24_actions = summary.get("node24_native_action_count")
+    failed_checks = summary.get("failed_check_count")
+    missing_steps = summary.get("missing_step_count")
+    forbidden_env = summary.get("forbidden_env_count")
+    audit_status = "pass" if status == "pass" else "warn"
+    detail = (
+        f"status={status}; actions={_fmt_any(action_count)}; node24_native={_fmt_any(node24_actions)}; "
+        f"failed_checks={_fmt_any(failed_checks)}; forbidden_env={_fmt_any(forbidden_env)}; "
+        f"missing_steps={_fmt_any(missing_steps)}."
+    )
+    return _check(
+        "ci_workflow_hygiene",
+        "CI workflow hygiene is clean",
+        audit_status,
+        detail,
+        {
+            "status": status,
+            "decision": summary.get("decision"),
+            "action_count": action_count,
+            "node24_native_action_count": node24_actions,
+            "failed_check_count": failed_checks,
+            "forbidden_env_count": forbidden_env,
+            "missing_step_count": missing_steps,
+            "python_version": summary.get("python_version"),
+            "path": None if ci_workflow_hygiene_path is None else str(ci_workflow_hygiene_path),
+        },
+    )
+
+
+def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(ci_workflow_hygiene, dict):
+        return {
+            "available": False,
+            "status": None,
+            "decision": None,
+            "action_count": None,
+            "node24_native_action_count": None,
+            "failed_check_count": None,
+        }
+    summary = _dict(ci_workflow_hygiene.get("summary"))
+    return {
+        "available": True,
+        "workflow_path": ci_workflow_hygiene.get("workflow_path"),
+        "status": summary.get("status"),
+        "decision": summary.get("decision"),
+        "check_count": summary.get("check_count"),
+        "failed_check_count": summary.get("failed_check_count"),
+        "action_count": summary.get("action_count"),
+        "node24_native_action_count": summary.get("node24_native_action_count"),
+        "forbidden_env_count": summary.get("forbidden_env_count"),
+        "missing_step_count": summary.get("missing_step_count"),
+        "python_version": summary.get("python_version"),
+    }
+
+
 def _summarize_checks(
     checks: list[dict[str, Any]],
     registry: dict[str, Any],
     model_card: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
+    ci_workflow_hygiene: dict[str, Any] | None,
     runs: list[dict[str, Any]],
 ) -> dict[str, Any]:
     pass_count = sum(1 for check in checks if check["status"] == "pass")
@@ -335,6 +434,7 @@ def _summarize_checks(
         overall = "pass"
     model_summary = _dict(model_card.get("summary")) if isinstance(model_card, dict) else {}
     request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
+    ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
     best = _dict(registry.get("best_by_best_val_loss"))
     return {
         "overall_status": overall,
@@ -352,6 +452,10 @@ def _summarize_checks(
         "request_history_records": request_summary.get("total_log_records"),
         "request_history_timeout_rate": request_summary.get("timeout_rate"),
         "request_history_error_rate": request_summary.get("error_rate"),
+        "ci_workflow_status": ci_summary.get("status"),
+        "ci_workflow_decision": ci_summary.get("decision"),
+        "ci_workflow_failed_checks": ci_summary.get("failed_check_count"),
+        "ci_workflow_node24_actions": ci_summary.get("node24_native_action_count"),
     }
 
 
@@ -378,6 +482,8 @@ def _build_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]
             items.append("Promote at least one run to ready status by completing checkpoint, data quality, and eval artifacts.")
         elif check["id"] == "request_history_summary":
             items.append("Generate or review request_history_summary.json before using local playground activity as release evidence.")
+        elif check["id"] == "ci_workflow_hygiene":
+            items.append("Generate or review ci_workflow_hygiene.json before using CI workflow policy as release evidence.")
         elif check["id"] == "dashboards":
             items.append("Build dashboards for missing runs to improve reviewability.")
         elif check["id"] == "checkpoints":

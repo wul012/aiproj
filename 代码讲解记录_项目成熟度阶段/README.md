@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+160-v146-project-audit-ci-workflow-hygiene-context.md
+ -> 第一百四十六版代码讲解：把 v145 的 CI workflow hygiene report 接入 project audit，作为项目治理上下文参与审计摘要、check 和输出展示。
 159-v145-ci-workflow-hygiene-report.md
  -> 第一百四十五版代码讲解：把 CI workflow 的 Node 24 native action 策略做成可运行 hygiene gate，并接入 GitHub Actions 输出 JSON/CSV/Markdown/HTML 证据。
 158-v144-github-actions-node24-native-actions.md
