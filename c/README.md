@@ -268,6 +268,9 @@ c/152/解释/说明.md
 c/153/图片
 c/153/解释/说明.md
  -> v153 release bundle artifact split 的运行截图和解释
+c/154/图片
+c/154/解释/说明.md
+ -> v154 release readiness artifact split 的运行截图和解释
 ```
 
 写入规则：

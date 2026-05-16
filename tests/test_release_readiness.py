@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import release_readiness as release_readiness_facade
+from minigpt import release_readiness_artifacts
 from minigpt.release_readiness import (
     build_release_readiness_dashboard,
     render_release_readiness_html,
@@ -289,6 +291,12 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertIn("## Panels", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Readiness&gt;", html)
             self.assertNotIn("<h1><Readiness>", html)
+
+    def test_release_readiness_keeps_legacy_artifact_exports(self) -> None:
+        self.assertIs(release_readiness_facade.render_release_readiness_html, release_readiness_artifacts.render_release_readiness_html)
+        self.assertIs(release_readiness_facade.render_release_readiness_markdown, release_readiness_artifacts.render_release_readiness_markdown)
+        self.assertIs(release_readiness_facade.write_release_readiness_outputs, release_readiness_artifacts.write_release_readiness_outputs)
+        self.assertIs(release_readiness_facade.write_release_readiness_json, release_readiness_artifacts.write_release_readiness_json)
 
 
 if __name__ == "__main__":
