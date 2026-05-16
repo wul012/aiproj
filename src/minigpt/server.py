@@ -56,6 +56,7 @@ from minigpt.server_logging import (
     build_generation_log_event,
     build_pair_generation_log_event,
 )
+from minigpt.server_routes import handle_get_request
 from minigpt.server_request_history import (
     handle_request_history_detail_endpoint,
     handle_request_history_endpoint,
@@ -104,46 +105,17 @@ def create_handler(
         server_version = "MiniGPTServer/0.5"
 
         def do_GET(self) -> None:
-            parsed = urlparse(self.path)
-            if parsed.path == "/api/health":
-                self._send_json(
-                    build_health_payload(
-                        root,
-                        checkpoint,
-                        safety_profile=safety,
-                        request_log_path=request_log,
-                        checkpoint_candidates=checkpoint_candidates,
-                    )
-                )
-                return
-            if parsed.path == "/api/checkpoints":
-                self._send_json(build_checkpoints_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
-                return
-            if parsed.path == "/api/checkpoint-compare":
-                self._send_json(build_checkpoint_compare_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
-                return
-            if parsed.path == "/api/request-history":
-                handle_request_history_endpoint(self, request_log, parsed.query)
-                return
-            if parsed.path == "/api/request-history-detail":
-                handle_request_history_detail_endpoint(self, request_log, parsed.query)
-                return
-            if parsed.path == "/api/model-info":
-                selector = _query_value(parsed.query, "checkpoint")
-                try:
-                    option = resolve_checkpoint_option(checkpoint_options, selector)
-                except ValueError as exc:
-                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
-                    return
-                self._send_json(build_model_info_payload(_metadata_run_dir(root, option), option.path, option.tokenizer_path, option.id))
-                return
-            if parsed.path in {"/", "/playground.html"}:
-                html_path = root / "playground.html"
-                if not html_path.exists():
-                    write_playground(root, output_path=html_path)
-                self._send_file(html_path)
-                return
-            self._serve_run_file(parsed.path)
+            handle_get_request(
+                self,
+                self.path,
+                root=root,
+                checkpoint=checkpoint,
+                tokenizer_path=tokenizer_path,
+                safety=safety,
+                request_log=request_log,
+                checkpoint_candidates=checkpoint_candidates,
+                checkpoint_options=checkpoint_options,
+            )
 
         def do_POST(self) -> None:
             parsed = urlparse(self.path)

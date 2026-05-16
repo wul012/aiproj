@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+185-v171-server-get-route-split.md
+ -> v171 code explanation: split MiniGPT server GET route dispatch into `server_routes.py`, while keeping health/checkpoints/model-info/request-history/playground/run-file GET semantics, POST generation routes, request logging, and old server facade exports unchanged.
 184-v170-release-readiness-comparison-artifact-split.md
  -> v170 code explanation: split release readiness comparison JSON/CSV/delta CSV/Markdown/HTML artifact writers into `release_readiness_comparison_artifacts.py`, while keeping comparison schema, baseline override, delta logic, registry consumption, and old facade exports unchanged.
 183-v169-promoted-training-scale-seed-handoff-artifact-split.md

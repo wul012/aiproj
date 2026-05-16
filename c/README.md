@@ -319,6 +319,9 @@ c/169/解释/说明.md
 c/170/图片
 c/170/解释/说明.md
  -> v170 release readiness comparison artifact split 的运行截图和解释
+c/171/图片
+c/171/解释/说明.md
+ -> v171 server GET route split 的运行截图和解释
 ```
 
 写入规则：
