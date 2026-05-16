@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import training_scale_promotion_artifacts
+from minigpt import training_scale_promotion as training_scale_promotion_facade
 from minigpt.training_scale_promotion import (  # noqa: E402
     build_training_scale_promotion,
     render_training_scale_promotion_html,
@@ -81,6 +83,20 @@ class TrainingScalePromotionTests(unittest.TestCase):
             self.assertIn("## Variant Readiness", markdown)
             self.assertIn("&lt;Promotion&gt;", html)
             self.assertNotIn("<Promotion>", html)
+
+    def test_facade_keeps_legacy_artifact_exports(self) -> None:
+        self.assertIs(
+            training_scale_promotion_facade.write_training_scale_promotion_outputs,
+            training_scale_promotion_artifacts.write_training_scale_promotion_outputs,
+        )
+        self.assertIs(
+            training_scale_promotion_facade.render_training_scale_promotion_html,
+            training_scale_promotion_artifacts.render_training_scale_promotion_html,
+        )
+        self.assertIs(
+            training_scale_promotion_facade.render_training_scale_promotion_markdown,
+            training_scale_promotion_artifacts.render_training_scale_promotion_markdown,
+        )
 
 
 def make_completed_handoff_tree(root: Path, missing: set[str] | None = None) -> Path:

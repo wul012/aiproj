@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+174-v160-training-scale-promotion-artifact-split.md
+ -> 第一百六十版代码讲解：把 `training_scale_promotion.py` 的 JSON/CSV/Markdown/HTML artifact 写出和渲染拆到 `training_scale_promotion_artifacts.py`，保持 promotion decision schema、CLI 和旧导出不变。
 173-v159-server-http-helper-split.md
  -> 第一百五十九版代码讲解：把 `server.py` 的 JSON/text/SSE/file response、request body parsing 和 run file serving helper 拆到 `server_http.py`，保持 `create_handler()`/`run_server()` 路由行为和旧 facade 导出不变。
 172-v158-release-gate-comparison-artifact-split.md
