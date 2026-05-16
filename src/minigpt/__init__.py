@@ -80,6 +80,8 @@ __all__ = [
     "write_source_encoding_json",
     "write_source_encoding_markdown",
     "write_source_encoding_outputs",
+    "build_benchmark_scorecard_decision",
+    "write_benchmark_scorecard_decision_outputs",
 ]
 
 _EXPORTS = {
@@ -157,6 +159,8 @@ _EXPORTS = {
     "write_source_encoding_json": ("source_encoding_hygiene", "write_source_encoding_json"),
     "write_source_encoding_markdown": ("source_encoding_hygiene", "write_source_encoding_markdown"),
     "write_source_encoding_outputs": ("source_encoding_hygiene", "write_source_encoding_outputs"),
+    "build_benchmark_scorecard_decision": ("benchmark_scorecard_decision", "build_benchmark_scorecard_decision"),
+    "write_benchmark_scorecard_decision_outputs": ("benchmark_scorecard_decision", "write_benchmark_scorecard_decision_outputs"),
 }
 
 

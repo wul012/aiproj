@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+154-v140-benchmark-scorecard-promotion-decision.md
+ -> 第一百四十版代码讲解：新增 benchmark scorecard promotion decision，把 scorecard comparison 的 rubric/overall delta、case regression 和 generation-quality flag taxonomy 变化转成 promote/review/blocked 决策证据。
 153-v139-benchmark-scorecard-comparison-flag-taxonomy.md
  -> 第一百三十九版代码讲解：把 benchmark scorecard 的 generation-quality flag taxonomy 接入跨 scorecard comparison，比较 total flags delta、dominant flag 变化和 worst generation case 变化，让 promotion review 能看到分数背后的问题类型漂移。
 152-v138-benchmark-scorecard-flag-taxonomy.md

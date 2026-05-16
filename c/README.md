@@ -226,6 +226,9 @@ c/138/解释/说明.md
 c/139/鍥剧墖
 c/139/瑙ｉ噴/璇存槑.md
  -> v139 benchmark scorecard comparison flag taxonomy 鐨勮繍琛屾埅鍥惧拰瑙ｉ噴
+c/140/鍥剧墖
+c/140/瑙ｉ噴/璇存槑.md
+ -> v140 benchmark scorecard promotion decision 鐨勮繍琛屾埅鍥惧拰瑙ｉ噴
 ```
 
 写入规则：
