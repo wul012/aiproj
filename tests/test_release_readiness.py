@@ -29,6 +29,8 @@ def make_readiness_inputs(
     gate_status: str = "pass",
     gate_decision: str = "approved",
     include_request_history: bool = True,
+    include_ci_workflow: bool = True,
+    ci_workflow_status: str = "pass",
 ) -> Path:
     runs = root / "runs"
     registry_path = runs / "registry" / "registry.json"
@@ -36,10 +38,37 @@ def make_readiness_inputs(
     request_path = runs / "request-history-summary" / "request_history_summary.json"
     gate_path = runs / "release-gate" / "gate_report.json"
     maturity_path = runs / "maturity-summary" / "maturity_summary.json"
+    ci_workflow_path = runs / "ci-workflow-hygiene" / "ci_workflow_hygiene.json"
     bundle_path = runs / "release-bundle" / "release_bundle.json"
     artifact_path = runs / "request-history-summary" / "request_history_summary.html"
+    ci_artifact_path = runs / "ci-workflow-hygiene" / "ci_workflow_hygiene.html"
     artifact_path.parent.mkdir(parents=True, exist_ok=True)
     artifact_path.write_text("<html></html>", encoding="utf-8")
+    ci_artifact_path.parent.mkdir(parents=True, exist_ok=True)
+    ci_artifact_path.write_text("<html></html>", encoding="utf-8")
+    artifact_rows = []
+    if include_request_history:
+        artifact_rows.append(
+            {
+                "key": "request_history_summary_html",
+                "title": "Request history summary HTML",
+                "path": str(artifact_path),
+                "kind": "HTML",
+                "exists": True,
+                "size_bytes": artifact_path.stat().st_size,
+            }
+        )
+    if include_ci_workflow:
+        artifact_rows.append(
+            {
+                "key": "ci_workflow_hygiene_html",
+                "title": "CI workflow hygiene HTML",
+                "path": str(ci_artifact_path),
+                "kind": "HTML",
+                "exists": True,
+                "size_bytes": ci_artifact_path.stat().st_size,
+            }
+        )
 
     write_json(
         registry_path,
@@ -61,10 +90,14 @@ def make_readiness_inputs(
                 "ready_runs": 1,
                 "request_history_status": "pass" if include_request_history else None,
                 "request_history_records": 4 if include_request_history else None,
+                "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
+                "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
+                "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
             },
             "checks": [
                 {"id": "ready_run", "status": "pass", "title": "At least one ready run", "detail": "1 ready run."},
                 {"id": "request_history_summary", "status": "pass", "title": "Request history summary is clean", "detail": "status=pass."},
+                {"id": "ci_workflow_hygiene", "status": ci_workflow_status, "title": "CI workflow hygiene is clean", "detail": f"status={ci_workflow_status}."},
             ],
             "recommendations": ["All audit checks passed."],
         },
@@ -81,6 +114,27 @@ def make_readiness_inputs(
                     "bad_request_rate": 0.0,
                     "error_rate": 0.0,
                 }
+            },
+        )
+    if include_ci_workflow:
+        write_json(
+            ci_workflow_path,
+            {
+                "summary": {
+                    "status": ci_workflow_status,
+                    "decision": "keep" if ci_workflow_status == "pass" else "review_workflow_hygiene",
+                    "check_count": 4,
+                    "failed_check_count": 0 if ci_workflow_status == "pass" else 1,
+                    "node24_native_action_count": 2,
+                    "legacy_node_actions": 0 if ci_workflow_status == "pass" else 1,
+                },
+                "checks": [
+                    {
+                        "id": "actions_node24_native",
+                        "status": ci_workflow_status,
+                        "detail": "all actions are Node 24 native" if ci_workflow_status == "pass" else "legacy action found",
+                    }
+                ],
             },
         )
     if include_gate:
@@ -126,24 +180,25 @@ def make_readiness_inputs(
                 "ready_runs": 1,
                 "request_history_status": "pass" if include_request_history else None,
                 "request_history_records": 4 if include_request_history else None,
-                "available_artifacts": 1,
+                "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
+                "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
+                "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
+                "available_artifacts": len(artifact_rows),
                 "missing_artifacts": 0,
             },
             "inputs": {
                 "registry_path": str(registry_path),
                 "project_audit_path": str(audit_path),
                 "request_history_summary_path": str(request_path) if include_request_history else None,
+                "ci_workflow_hygiene_path": str(ci_workflow_path) if include_ci_workflow else None,
             },
-            "artifacts": [
-                {
-                    "key": "request_history_summary_html",
-                    "title": "Request history summary HTML",
-                    "path": str(artifact_path),
-                    "kind": "HTML",
-                    "exists": True,
-                    "size_bytes": artifact_path.stat().st_size,
-                }
-            ],
+            "artifacts": artifact_rows,
+            "ci_workflow_context": {
+                "status": ci_workflow_status if include_ci_workflow else None,
+                "failed_check_count": 0 if ci_workflow_status == "pass" else 1,
+                "node24_native_action_count": 2 if include_ci_workflow else None,
+                "path": str(ci_workflow_path) if include_ci_workflow else None,
+            },
             "recommendations": ["Release evidence is complete."],
         },
     )
@@ -162,8 +217,27 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["decision"], "ship")
             self.assertEqual(report["summary"]["gate_status"], "pass")
             self.assertEqual(report["summary"]["request_history_status"], "pass")
+            self.assertEqual(report["summary"]["ci_workflow_status"], "pass")
+            self.assertEqual(report["summary"]["ci_workflow_failed_checks"], 0)
+            self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
+            self.assertIn("ci_workflow_hygiene", {panel["key"] for panel in report["panels"]})
             self.assertIn("All readiness panels are clean", " ".join(report["actions"]))
+
+    def test_build_release_readiness_uses_bundle_ci_context_when_report_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle_path = make_readiness_inputs(root)
+            (root / "runs" / "ci-workflow-hygiene" / "ci_workflow_hygiene.json").unlink()
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "ready")
+            self.assertEqual(report["summary"]["ci_workflow_status"], "pass")
+            self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
+            ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
+            self.assertEqual(ci_panel["status"], "pass")
+            self.assertIn("source=bundle summary/context", ci_panel["detail"])
 
     def test_build_release_readiness_dashboard_incomplete_without_gate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -186,6 +260,19 @@ class ReleaseReadinessTests(unittest.TestCase):
             gate_panel = next(panel for panel in report["panels"] if panel["key"] == "release_gate")
             self.assertEqual(gate_panel["status"], "fail")
             self.assertIn("Gate fail: request_history_summary_audit_check", " ".join(report["actions"]))
+
+    def test_build_release_readiness_reviews_failed_ci_workflow(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_readiness_inputs(Path(tmp), ci_workflow_status="fail")
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "review")
+            self.assertEqual(report["summary"]["decision"], "review")
+            self.assertEqual(report["summary"]["ci_workflow_status"], "fail")
+            ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
+            self.assertEqual(ci_panel["status"], "warn")
+            self.assertIn("Review warning panel: CI Workflow Hygiene", " ".join(report["actions"]))
 
     def test_write_release_readiness_outputs_and_escape_html(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

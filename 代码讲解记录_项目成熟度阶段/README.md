@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+162-v148-release-readiness-ci-workflow-hygiene-panel.md
+ -> 第一百四十八版代码讲解：把 CI workflow hygiene evidence 从 release bundle 继续带入 release readiness dashboard，新增独立面板、summary 字段、CLI 参数，并保持 review 而非 hard block 边界。
 161-v147-release-bundle-ci-workflow-hygiene-evidence.md
  -> 第一百四十七版代码讲解：把 CI workflow hygiene evidence 从 project audit 继续带入 release bundle，发布总包携带 CI workflow 状态、context 和 JSON/Markdown/HTML artifact。
 160-v146-project-audit-ci-workflow-hygiene-context.md

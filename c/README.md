@@ -250,6 +250,9 @@ c/146/解释/说明.md
 c/147/图片
 c/147/解释/说明.md
  -> v147 release bundle CI workflow hygiene evidence 的运行截图和解释
+c/148/图片
+c/148/解释/说明.md
+ -> v148 release readiness CI workflow hygiene panel 的运行截图和解释
 ```
 
 写入规则：

@@ -20,6 +20,7 @@ def build_release_readiness_dashboard(
     audit_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
     maturity_path: str | Path | None = None,
+    ci_workflow_hygiene_path: str | Path | None = None,
     title: str = "MiniGPT release readiness dashboard",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -38,12 +39,18 @@ def build_release_readiness_dashboard(
     )
     gate_file = _resolve_optional_path(gate_path, None, _candidate(root, "release-gate", "gate_report.json"))
     maturity_file = _resolve_optional_path(maturity_path, None, _candidate(root, "maturity-summary", "maturity_summary.json"))
+    ci_file = _resolve_optional_path(
+        ci_workflow_hygiene_path,
+        inputs.get("ci_workflow_hygiene_path"),
+        _candidate(root, "ci-workflow-hygiene", "ci_workflow_hygiene.json"),
+    )
 
     registry = _read_json(registry_file, warnings, "registry") if registry_file is not None else None
     audit = _read_json(audit_file, warnings, "project audit") if audit_file is not None else None
     request_history = _read_json(request_file, warnings, "request history summary") if request_file is not None else None
     gate = _read_json(gate_file, warnings, "release gate") if gate_file is not None else None
     maturity = _read_json(maturity_file, warnings, "maturity summary") if maturity_file is not None else None
+    ci_workflow = _read_json(ci_file, warnings, "CI workflow hygiene") if ci_file is not None else None
 
     panels = [
         _registry_panel(registry_file, registry),
@@ -52,9 +59,18 @@ def build_release_readiness_dashboard(
         _gate_panel(gate_file, gate),
         _request_history_panel(request_file, request_history),
         _maturity_panel(maturity_file, maturity),
+        _ci_workflow_panel(ci_file, ci_workflow, bundle),
     ]
     actions = _actions(bundle, gate if isinstance(gate, dict) else None, audit if isinstance(audit, dict) else None, panels)
-    summary = _summary(bundle, gate if isinstance(gate, dict) else None, audit if isinstance(audit, dict) else None, request_history if isinstance(request_history, dict) else None, maturity if isinstance(maturity, dict) else None, panels)
+    summary = _summary(
+        bundle,
+        gate if isinstance(gate, dict) else None,
+        audit if isinstance(audit, dict) else None,
+        request_history if isinstance(request_history, dict) else None,
+        maturity if isinstance(maturity, dict) else None,
+        ci_workflow if isinstance(ci_workflow, dict) else None,
+        panels,
+    )
     evidence = _evidence(bundle)
 
     return {
@@ -68,6 +84,7 @@ def build_release_readiness_dashboard(
             "release_gate_path": None if gate_file is None else str(gate_file),
             "request_history_summary_path": None if request_file is None else str(request_file),
             "maturity_summary_path": None if maturity_file is None else str(maturity_file),
+            "ci_workflow_hygiene_path": None if ci_file is None else str(ci_file),
         },
         "summary": summary,
         "panels": panels,
@@ -99,6 +116,7 @@ def render_release_readiness_markdown(report: dict[str, Any]) -> str:
                 ("Gate", summary.get("gate_status")),
                 ("Audit", summary.get("audit_status")),
                 ("Audit score", summary.get("audit_score_percent")),
+                ("CI workflow", summary.get("ci_workflow_status")),
                 ("Request history", summary.get("request_history_status")),
                 ("Maturity", summary.get("maturity_status")),
                 ("Ready runs", summary.get("ready_runs")),
@@ -139,6 +157,7 @@ def render_release_readiness_html(report: dict[str, Any]) -> str:
         ("Gate", summary.get("gate_status")),
         ("Audit", summary.get("audit_status")),
         ("Score", _fmt(summary.get("audit_score_percent"))),
+        ("CI workflow", summary.get("ci_workflow_status")),
         ("Requests", summary.get("request_history_status")),
         ("Maturity", summary.get("maturity_status")),
     ]
@@ -193,6 +212,7 @@ def _summary(
     audit: dict[str, Any] | None,
     request_history: dict[str, Any] | None,
     maturity: dict[str, Any] | None,
+    ci_workflow: dict[str, Any] | None,
     panels: list[dict[str, Any]],
 ) -> dict[str, Any]:
     bundle_summary = _dict(bundle.get("summary"))
@@ -200,6 +220,8 @@ def _summary(
     audit_summary = _dict(audit.get("summary")) if isinstance(audit, dict) else {}
     request_summary = _dict(request_history.get("summary")) if isinstance(request_history, dict) else {}
     maturity_summary = _dict(maturity.get("summary")) if isinstance(maturity, dict) else {}
+    ci_summary = _dict(ci_workflow.get("summary")) if isinstance(ci_workflow, dict) else {}
+    ci_context = _dict(bundle.get("ci_workflow_context"))
     status = _readiness_status(panels, gate)
     return {
         "readiness_status": status,
@@ -214,6 +236,19 @@ def _summary(
         "request_history_records": request_summary.get("total_log_records") or bundle_summary.get("request_history_records"),
         "maturity_status": maturity_summary.get("overall_status"),
         "current_version": maturity_summary.get("current_version"),
+        "ci_workflow_status": ci_summary.get("status") or bundle_summary.get("ci_workflow_status") or ci_context.get("status"),
+        "ci_workflow_failed_checks": _first_present(
+            ci_summary.get("failed_check_count"),
+            bundle_summary.get("ci_workflow_failed_checks"),
+            ci_context.get("failed_check_count"),
+        ),
+        "ci_workflow_node24_actions": _first_present(
+            ci_summary.get("node24_native_actions"),
+            ci_summary.get("node24_native_action_count"),
+            bundle_summary.get("ci_workflow_node24_actions"),
+            ci_context.get("node24_native_actions"),
+            ci_context.get("node24_native_action_count"),
+        ),
         "ready_runs": bundle_summary.get("ready_runs") or audit_summary.get("ready_runs"),
         "missing_artifacts": bundle_summary.get("missing_artifacts"),
         "panel_count": len(panels),
@@ -324,6 +359,45 @@ def _maturity_panel(path: Path | None, maturity: dict[str, Any] | None) -> dict[
     )
 
 
+def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bundle: dict[str, Any]) -> dict[str, Any]:
+    if isinstance(ci_workflow, dict):
+        summary = _dict(ci_workflow.get("summary"))
+        ci_status = str(summary.get("status") or "missing")
+        return _panel(
+            "ci_workflow_hygiene",
+            "CI Workflow Hygiene",
+            "pass" if ci_status == "pass" else "warn",
+            "status="
+            + ci_status
+            + f"; failed_checks={_fmt(summary.get('failed_check_count'))}; node24_native={_fmt(_first_present(summary.get('node24_native_actions'), summary.get('node24_native_action_count')))}",
+            path,
+        )
+    bundle_summary = _dict(bundle.get("summary"))
+    bundle_context = _dict(bundle.get("ci_workflow_context"))
+    ci_status = bundle_summary.get("ci_workflow_status") or bundle_context.get("status")
+    if ci_status:
+        return _panel(
+            "ci_workflow_hygiene",
+            "CI Workflow Hygiene",
+            "pass" if ci_status == "pass" else "warn",
+            "status="
+            + str(ci_status)
+            + "; failed_checks="
+            + _fmt(_first_present(bundle_summary.get("ci_workflow_failed_checks"), bundle_context.get("failed_check_count")))
+            + "; node24_native="
+            + _fmt(
+                _first_present(
+                    bundle_summary.get("ci_workflow_node24_actions"),
+                    bundle_context.get("node24_native_actions"),
+                    bundle_context.get("node24_native_action_count"),
+                )
+            )
+            + "; source=bundle summary/context",
+            path,
+        )
+    return _panel("ci_workflow_hygiene", "CI Workflow Hygiene", "warn", "ci_workflow_hygiene.json missing", path)
+
+
 def _panel(key: str, title: str, status: str, detail: str, source_path: Path | None) -> dict[str, Any]:
     return {
         "key": key,
@@ -383,6 +457,13 @@ def _status_from_check_status(value: str) -> str:
     if value == "fail" or value == "blocked":
         return "fail"
     return "warn"
+
+
+def _first_present(*values: Any) -> Any:
+    for value in values:
+        if value is not None:
+            return value
+    return None
 
 
 def _resolve_optional_path(explicit: str | Path | None, hinted: Any, candidate: Path) -> Path | None:
