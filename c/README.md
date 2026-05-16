@@ -214,6 +214,9 @@ c/134/解释/说明.md
 c/135/图片
 c/135/解释/说明.md
  -> v135 release gate artifact split 的运行截图和解释
+c/136/图片
+c/136/解释/说明.md
+ -> v136 generation quality artifact split 的运行截图和解释
 ```
 
 写入规则：

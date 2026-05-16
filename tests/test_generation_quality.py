@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import generation_quality, generation_quality_artifacts
 from minigpt.generation_quality import (
     build_generation_quality_report,
     render_generation_quality_html,
@@ -63,6 +64,16 @@ def make_eval_suite(root: Path, *, title_case: str = "good") -> Path:
 
 
 class GenerationQualityTests(unittest.TestCase):
+    def test_generation_quality_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(
+            generation_quality.render_generation_quality_html,
+            generation_quality_artifacts.render_generation_quality_html,
+        )
+        self.assertIs(
+            generation_quality.write_generation_quality_outputs,
+            generation_quality_artifacts.write_generation_quality_outputs,
+        )
+
     def test_build_generation_quality_report_marks_pass_warn_fail(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = make_eval_suite(Path(tmp))

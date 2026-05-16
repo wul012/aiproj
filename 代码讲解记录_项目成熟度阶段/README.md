@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+150-v136-generation-quality-artifact-split.md
+ -> 第一百三十六版代码讲解：把 generation quality 的 JSON/CSV/Markdown/SVG/HTML 输出写入层拆成 artifact 模块，保留 metrics/flags/summary、旧 facade 和脚本调用方式。
 149-v135-release-gate-artifact-split.md
  -> 第一百三十五版代码讲解：把 release gate 的 JSON/Markdown/HTML 输出写入层拆成 artifact 模块，保留 policy/check/summary、旧 facade 和脚本调用方式。
 148-v134-maturity-narrative-artifact-split.md
