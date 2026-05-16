@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import ast
 import csv
+import io
+import token as token_module
+import tokenize
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -16,21 +19,26 @@ def build_source_encoding_report(
     *,
     project_root: str | Path | None = None,
     title: str = "MiniGPT source encoding hygiene",
+    target_python: str = "3.11",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     root = Path(project_root).resolve() if project_root is not None else None
-    files = sorted((_scan_source_file(Path(path), root) for path in paths), key=lambda item: str(item["path"]))
+    files = sorted((_scan_source_file(Path(path), root, target_python) for path in paths), key=lambda item: str(item["path"]))
     bom_files = [item for item in files if item["has_bom"]]
     syntax_errors = [item for item in files if not item["syntax_ok"]]
+    compatibility_errors = [item for item in files if not item["compatibility_ok"]]
+    has_failures = bool(bom_files or syntax_errors or compatibility_errors)
     summary = {
-        "status": "pass" if not bom_files and not syntax_errors else "fail",
-        "decision": "continue_with_clean_sources" if not bom_files and not syntax_errors else "fix_bom_or_syntax_errors",
+        "status": "pass" if not has_failures else "fail",
+        "decision": "continue_with_clean_sources" if not has_failures else "fix_bom_syntax_or_compatibility_errors",
         "source_count": len(files),
-        "clean_count": sum(1 for item in files if item["syntax_ok"] and not item["has_bom"]),
+        "clean_count": sum(1 for item in files if item["syntax_ok"] and item["compatibility_ok"] and not item["has_bom"]),
         "bom_count": len(bom_files),
         "syntax_error_count": len(syntax_errors),
+        "compatibility_error_count": len(compatibility_errors),
         "bom_paths": [item["path"] for item in bom_files],
         "syntax_error_paths": [item["path"] for item in syntax_errors],
+        "compatibility_error_paths": [item["path"] for item in compatibility_errors],
     }
     return {
         "schema_version": 1,
@@ -40,6 +48,8 @@ def build_source_encoding_report(
             "roots": [str(path) for path in DEFAULT_SCAN_ROOTS],
             "encoding": "utf-8-sig",
             "bom_marker": "UTF-8 BOM",
+            "target_python": target_python,
+            "compatibility_checks": ["python311_fstring_same_quote_expression"],
         },
         "summary": summary,
         "files": files,
@@ -54,7 +64,7 @@ def write_source_encoding_json(report: dict[str, Any], path: str | Path) -> None
 def write_source_encoding_csv(report: dict[str, Any], path: str | Path) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = ["path", "has_bom", "syntax_ok", "byte_count", "parse_error"]
+    fieldnames = ["path", "has_bom", "syntax_ok", "compatibility_ok", "byte_count", "parse_error", "compatibility_error"]
     with out_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
@@ -76,10 +86,10 @@ def render_source_encoding_markdown(report: dict[str, Any]) -> str:
         "| Metric | Value |",
         "| --- | --- |",
     ]
-    for key in ["source_count", "clean_count", "bom_count", "syntax_error_count"]:
+    for key in ["source_count", "clean_count", "bom_count", "syntax_error_count", "compatibility_error_count"]:
         lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
-    lines.extend(["", "## Offending Files", "", "| Path | BOM | Syntax OK | Bytes | Parse Error |", "| --- | --- | --- | --- | --- |"])
-    offenders = [item for item in _files(report) if item.get("has_bom") or not item.get("syntax_ok")]
+    lines.extend(["", "## Offending Files", "", "| Path | BOM | Syntax OK | Compatibility OK | Bytes | Parse Error | Compatibility Error |", "| --- | --- | --- | --- | --- | --- | --- |"])
+    offenders = [item for item in _files(report) if item.get("has_bom") or not item.get("syntax_ok") or not item.get("compatibility_ok")]
     if offenders:
         for item in offenders:
             lines.append(
@@ -89,14 +99,16 @@ def render_source_encoding_markdown(report: dict[str, Any]) -> str:
                         _md(item.get("path")),
                         _md(item.get("has_bom")),
                         _md(item.get("syntax_ok")),
+                        _md(item.get("compatibility_ok")),
                         _md(item.get("byte_count")),
                         _md(item.get("parse_error") or ""),
+                        _md(item.get("compatibility_error") or ""),
                     ]
                 )
                 + " |"
             )
     else:
-        lines.append("|  |  |  |  |  |")
+        lines.append("|  |  |  |  |  |  |  |")
     lines.extend(["", "## Recommendations", ""])
     lines.extend(f"- {item}" for item in _string_list(report.get("recommendations")))
     return "\n".join(lines).rstrip() + "\n"
@@ -111,18 +123,19 @@ def write_source_encoding_markdown(report: dict[str, Any], path: str | Path) -> 
 def render_source_encoding_html(report: dict[str, Any]) -> str:
     summary = _summary(report)
     files = _files(report)
-    offenders = [item for item in files if item.get("has_bom") or not item.get("syntax_ok")]
+    offenders = [item for item in files if item.get("has_bom") or not item.get("syntax_ok") or not item.get("compatibility_ok")]
     stats = [
         ("Status", summary.get("status")),
         ("Decision", summary.get("decision")),
         ("Sources", summary.get("source_count")),
         ("BOM", summary.get("bom_count")),
         ("Syntax errors", summary.get("syntax_error_count")),
+        ("Compatibility", summary.get("compatibility_error_count")),
         ("Clean", summary.get("clean_count")),
     ]
     rows = "".join(_file_row(item) for item in offenders)
     if not rows:
-        rows = '<tr><td colspan="5" class="muted">No BOM or syntax errors detected.</td></tr>'
+        rows = '<tr><td colspan="7" class="muted">No BOM, syntax, or target-version compatibility errors detected.</td></tr>'
     return "\n".join(
         [
             "<!doctype html>",
@@ -135,9 +148,9 @@ def render_source_encoding_html(report: dict[str, Any]) -> str:
             _style(),
             "</head>",
             "<body>",
-            f"<header><h1>{_e(report.get('title', 'MiniGPT source encoding hygiene'))}</h1><p>Python sources should stay UTF-8 clean, and CI should fail before BOMs can trigger parse-time surprises.</p></header>",
+            f"<header><h1>{_e(report.get('title', 'MiniGPT source encoding hygiene'))}</h1><p>Python sources should stay UTF-8 clean and compatible with the CI parser target.</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
-            "<section><h2>Offending Files</h2><table><tr><th>Path</th><th>BOM</th><th>Syntax OK</th><th>Bytes</th><th>Parse Error</th></tr>"
+            "<section><h2>Offending Files</h2><table><tr><th>Path</th><th>BOM</th><th>Syntax OK</th><th>Compatibility OK</th><th>Bytes</th><th>Parse Error</th><th>Compatibility Error</th></tr>"
             + rows
             + "</table></section>",
             _list_section("Recommendations", report.get("recommendations")),
@@ -170,22 +183,26 @@ def write_source_encoding_outputs(report: dict[str, Any], out_dir: str | Path) -
     return {key: str(value) for key, value in paths.items()}
 
 
-def _scan_source_file(path: Path, project_root: Path | None) -> dict[str, Any]:
+def _scan_source_file(path: Path, project_root: Path | None, target_python: str) -> dict[str, Any]:
     data = path.read_bytes()
     has_bom = data.startswith(BOM)
     parse_error = ""
+    text = data.decode("utf-8-sig")
     try:
-        ast.parse(data.decode("utf-8-sig"), filename=str(path))
+        ast.parse(text, filename=str(path))
         syntax_ok = True
     except SyntaxError as exc:
         syntax_ok = False
         parse_error = f"syntax-error:{exc.lineno or 1}"
+    compatibility_error = _target_compatibility_error(text, target_python)
     return {
         "path": _relative_path(path, project_root),
         "absolute_path": str(path.resolve()),
         "has_bom": has_bom,
         "syntax_ok": syntax_ok,
+        "compatibility_ok": not compatibility_error,
         "parse_error": parse_error,
+        "compatibility_error": compatibility_error,
         "byte_count": len(data),
     }
 
@@ -216,8 +233,10 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append("Remove UTF-8 BOM markers from the offending Python files and rerun the hygiene gate.")
     if summary.get("syntax_error_count", 0):
         recommendations.append("Fix the syntax errors reported by the hygiene gate before merging.")
+    if summary.get("compatibility_error_count", 0):
+        recommendations.append("Rewrite target-version compatibility errors, such as Python 3.12+ f-string expression syntax, before merging.")
     if not recommendations:
-        recommendations.append("Keep Python sources UTF-8 clean so CI syntax checks stay predictable.")
+        recommendations.append("Keep Python sources UTF-8 clean and compatible with the CI parser target.")
     return recommendations
 
 
@@ -227,10 +246,132 @@ def _file_row(item: dict[str, Any]) -> str:
         f"<td>{_e(item.get('path'))}</td>"
         f"<td>{_e(item.get('has_bom'))}</td>"
         f"<td>{_e(item.get('syntax_ok'))}</td>"
+        f"<td>{_e(item.get('compatibility_ok'))}</td>"
         f"<td>{_e(item.get('byte_count'))}</td>"
         f"<td>{_e(item.get('parse_error'))}</td>"
+        f"<td>{_e(item.get('compatibility_error'))}</td>"
         "</tr>"
     )
+
+
+def _target_compatibility_error(text: str, target_python: str) -> str:
+    if target_python != "3.11":
+        return ""
+    lines = text.splitlines()
+    try:
+        tokens = tokenize.generate_tokens(io.StringIO(text).readline)
+        for source_token in tokens:
+            if not _token_opens_fstring(source_token):
+                continue
+            lineno, column = source_token.start
+            line = lines[lineno - 1] if 0 <= lineno - 1 < len(lines) else ""
+            if _python311_fstring_quote_risk_at(line, column):
+                return f"python-3.11-fstring-compat:{lineno}"
+    except tokenize.TokenError:
+        return ""
+    return ""
+
+
+def _token_opens_fstring(source_token: tokenize.TokenInfo) -> bool:
+    token_name = token_module.tok_name.get(source_token.type, "")
+    if token_name == "FSTRING_START":
+        return True
+    if source_token.type != token_module.STRING:
+        return False
+    token_text = source_token.string
+    quote_index = min((index for index, char in enumerate(token_text) if char in {"'", '"'}), default=-1)
+    if quote_index <= 0:
+        return False
+    prefix = token_text[:quote_index].lower()
+    return "f" in prefix and all(char in "rubf" for char in prefix)
+
+
+def _python311_fstring_quote_risk_at(line: str, start: int) -> bool:
+    literal = _next_fstring_literal(line, start)
+    if literal is None:
+        return False
+    literal_start, quote, body_start, body_end = literal
+    if literal_start != start:
+        return False
+    return _fstring_body_has_same_quote_expression(line[body_start:body_end], quote)
+
+
+def _next_fstring_literal(line: str, start: int) -> tuple[int, str, int, int] | None:
+    index = start
+    while index < len(line):
+        char = line[index]
+        if char in {"'", '"'}:
+            prefix_start = index
+            while prefix_start > 0 and line[prefix_start - 1].lower() in {"r", "u", "b", "f"}:
+                prefix_start -= 1
+            prefix = line[prefix_start:index].lower()
+            if "f" in prefix and all(item in "rubf" for item in prefix):
+                quote = char
+                if line[index : index + 3] == quote * 3:
+                    end = line.find(quote * 3, index + 3)
+                    if end != -1:
+                        return prefix_start, quote, index + 3, end
+                else:
+                    end = _string_end(line, index + 1, quote)
+                    if end != -1:
+                        return prefix_start, quote, index + 1, end
+        index += 1
+    return None
+
+
+def _string_end(line: str, start: int, quote: str) -> int:
+    escaped = False
+    depth = 0
+    for index in range(start, len(line)):
+        char = line[index]
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\":
+            escaped = True
+            continue
+        if char == "{" and index + 1 < len(line) and line[index + 1] == "{":
+            continue
+        if char == "}" and index + 1 < len(line) and line[index + 1] == "}":
+            continue
+        if char == "{":
+            depth += 1
+            continue
+        if char == "}" and depth:
+            depth -= 1
+            continue
+        if char == quote and depth == 0:
+            return index
+    return -1
+
+
+def _fstring_body_has_same_quote_expression(body: str, quote: str) -> bool:
+    depth = 0
+    expression_start: int | None = None
+    escaped = False
+    for index, char in enumerate(body):
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\":
+            escaped = True
+            continue
+        if char == "{" and index + 1 < len(body) and body[index + 1] == "{":
+            continue
+        if char == "}" and index + 1 < len(body) and body[index + 1] == "}":
+            continue
+        if char == "{":
+            if depth == 0:
+                expression_start = index + 1
+            depth += 1
+            continue
+        if char == "}" and depth:
+            depth -= 1
+            if depth == 0 and expression_start is not None:
+                if quote in body[expression_start:index]:
+                    return True
+                expression_start = None
+    return False
 
 
 def _list_section(title: str, items: Any) -> str:

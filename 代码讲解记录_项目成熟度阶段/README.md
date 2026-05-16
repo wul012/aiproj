@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+156-v142-source-encoding-target-compatibility.md
+ -> 第一百四十二版代码讲解：把 source encoding hygiene 从 BOM/语法检查推进到目标 Python 兼容性门禁，避免本地新版解释器通过而 Python 3.11 CI 失败。
 155-v141-maturity-narrative-scorecard-decision.md
  -> 第一百四十一版代码讲解：把 benchmark scorecard promotion decision 接入 maturity narrative，让 selected run、status counts、review/blocker 和 flag delta 进入项目成熟度叙事。
 

@@ -16,6 +16,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("paths", nargs="*", type=Path, default=[ROOT / "src", ROOT / "scripts", ROOT / "tests"])
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "source-encoding-hygiene")
     parser.add_argument("--title", type=str, default="MiniGPT source encoding hygiene")
+    parser.add_argument("--target-python", type=str, default="3.11", help="Python parser target used by CI compatibility checks.")
     parser.add_argument("--no-fail", action="store_true", help="Write the report without returning a non-zero status.")
     return parser.parse_args()
 
@@ -23,7 +24,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     source_paths = _collect_python_paths(args.paths)
-    report = build_source_encoding_report(source_paths, project_root=ROOT, title=args.title)
+    report = build_source_encoding_report(source_paths, project_root=ROOT, title=args.title, target_python=args.target_python)
     outputs = write_source_encoding_outputs(report, args.out_dir)
     summary = report["summary"]
     print(f"status={summary['status']}")
@@ -32,6 +33,8 @@ def main() -> None:
     print(f"clean_count={summary['clean_count']}")
     print(f"bom_count={summary['bom_count']}")
     print(f"syntax_error_count={summary['syntax_error_count']}")
+    print(f"compatibility_error_count={summary['compatibility_error_count']}")
+    print(f"target_python={report['policy']['target_python']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if summary["status"] != "pass" and not args.no_fail:
         raise SystemExit(1)

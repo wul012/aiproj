@@ -46,6 +46,36 @@ class SourceEncodingHygieneTests(unittest.TestCase):
             self.assertEqual(report["summary"]["bom_paths"], ["bom.py"])
             self.assertEqual(report["summary"]["syntax_error_paths"], ["broken.py"])
 
+    def test_report_detects_python311_fstring_compatibility_errors(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "py312_fstring.py"
+            source.write_text('def render(values):\n    return f"<ul>{\'\'.join(f"<li>{item}</li>" for item in values)}</ul>"\n', encoding="utf-8")
+
+            report = build_source_encoding_report([source], project_root=root, generated_at="2026-05-15T00:00:00Z")
+
+            self.assertEqual(report["summary"]["status"], "fail")
+            expected_syntax_errors = 1 if sys.version_info < (3, 12) else 0
+            self.assertEqual(report["summary"]["syntax_error_count"], expected_syntax_errors)
+            self.assertEqual(report["summary"]["compatibility_error_count"], 1)
+            self.assertEqual(report["summary"]["compatibility_error_paths"], ["py312_fstring.py"])
+            self.assertEqual(report["files"][0]["compatibility_error"], "python-3.11-fstring-compat:2")
+            html = render_source_encoding_html(report)
+            self.assertIn("py312_fstring.py", html)
+            self.assertIn("python-3.11-fstring-compat:2", html)
+
+    def test_report_allows_compatibility_target_override(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "py312_fstring.py"
+            source.write_text('def render(values):\n    return f"<ul>{\'\'.join(f"<li>{item}</li>" for item in values)}</ul>"\n', encoding="utf-8")
+
+            report = build_source_encoding_report([source], project_root=root, target_python="3.13", generated_at="2026-05-15T00:00:00Z")
+
+            expected_status = "fail" if sys.version_info < (3, 12) else "pass"
+            self.assertEqual(report["summary"]["status"], expected_status)
+            self.assertEqual(report["summary"]["compatibility_error_count"], 0)
+
     def test_outputs_and_html_escape(self) -> None:
         report = build_source_encoding_report([], title="Encoding <gate>", generated_at="2026-05-15T00:00:00Z")
         with tempfile.TemporaryDirectory() as tmp:
@@ -54,8 +84,8 @@ class SourceEncodingHygieneTests(unittest.TestCase):
 
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertEqual(json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))["summary"]["status"], "pass")
-            self.assertIn("parse_error", Path(outputs["csv"]).read_text(encoding="utf-8"))
-            self.assertIn("source_count", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("compatibility_error", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("compatibility_error_count", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Encoding &lt;gate&gt;", html)
             self.assertNotIn("Encoding <gate>", html)
 
@@ -75,6 +105,7 @@ class SourceEncodingHygieneTests(unittest.TestCase):
 
             self.assertEqual(result.returncode, 1)
             self.assertIn("bom_count=1", result.stdout)
+            self.assertIn("target_python=3.11", result.stdout)
             self.assertTrue((root / "out" / "source_encoding_hygiene.json").exists())
 
 

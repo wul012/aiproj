@@ -232,6 +232,9 @@ c/140/瑙ｉ噴/璇存槑.md
 c/141/图片
 c/141/解释/说明.md
  -> v141 maturity narrative scorecard decision 的运行截图和解释
+c/142/图片
+c/142/解释/说明.md
+ -> v142 source encoding target compatibility 的运行截图和解释
 ```
 
 写入规则：
