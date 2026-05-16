@@ -22,6 +22,7 @@ def make_run(
     pair_reports: bool = False,
     pair_generated_delta: int = 5,
     readiness_trend: str | None = None,
+    readiness_ci_regression: bool = False,
     rubric_score: float | None = 92.0,
     rubric_status: str = "pass",
 ) -> Path:
@@ -172,6 +173,12 @@ def make_run(
             improved_count = 1
             regressed_count = 0
             changed_panels = ["release_gate:fail->pass"]
+        ci_regression_count = 1 if readiness_ci_regression else 0
+        baseline_ci_status = "pass"
+        compared_ci_status = "fail" if readiness_ci_regression else "pass"
+        ci_failed_delta = 2 if readiness_ci_regression else 0
+        if readiness_ci_regression and "ci_workflow_hygiene:pass->warn" not in changed_panels:
+            changed_panels = [*changed_panels, "ci_workflow_hygiene:pass->warn"]
         report = {
             "schema_version": 1,
             "summary": {
@@ -185,6 +192,7 @@ def make_run(
                 "improved_count": improved_count,
                 "regressed_count": regressed_count,
                 "changed_panel_delta_count": 1 if changed_panels else 0,
+                "ci_workflow_regression_count": ci_regression_count,
             },
             "deltas": [
                 {
@@ -194,6 +202,10 @@ def make_run(
                     "compared_status": compared_status,
                     "status_delta": status_delta,
                     "delta_status": readiness_trend if readiness_trend != "stable" else "same",
+                    "baseline_ci_workflow_status": baseline_ci_status,
+                    "compared_ci_workflow_status": compared_ci_status,
+                    "ci_workflow_failed_check_delta": ci_failed_delta,
+                    "ci_workflow_status_changed": readiness_ci_regression,
                     "audit_score_delta": 12.5 if status_delta > 0 else -12.5 if status_delta < 0 else 0,
                     "missing_artifact_delta": -2 if status_delta > 0 else 2 if status_delta < 0 else 0,
                     "fail_panel_delta": -1 if status_delta > 0 else 1 if status_delta < 0 else 0,
@@ -273,8 +285,18 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.release_readiness_improved_count, 1)
             self.assertEqual(run.release_readiness_regressed_count, 0)
             self.assertEqual(run.release_readiness_changed_panel_delta_count, 1)
+            self.assertEqual(run.release_readiness_ci_workflow_regression_count, 0)
             self.assertTrue(run.release_readiness_html_exists)
             self.assertIn("release-readiness-comparison/release_readiness_comparison.html", REGISTRY_ARTIFACT_PATHS)
+
+    def test_summarize_registered_run_reads_ci_workflow_readiness_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp), "one", 1.0, readiness_trend="panel-changed", readiness_ci_regression=True)
+
+            run = summarize_registered_run(run_dir)
+
+            self.assertEqual(run.release_readiness_comparison_status, "ci-regressed")
+            self.assertEqual(run.release_readiness_ci_workflow_regression_count, 1)
 
     def test_summarize_registered_run_reads_pair_reports(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -302,7 +324,7 @@ class RegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             run_a = make_run(root, "a", 1.2, quality="pass", tags=["baseline"], pair_reports=True, readiness_trend="improved", rubric_score=94.0)
-            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"], readiness_trend="regressed", rubric_score=76.0, rubric_status="warn")
+            run_b = make_run(root, "b", 0.9, quality="warn", tags=["baseline", "candidate"], readiness_trend="regressed", readiness_ci_regression=True, rubric_score=76.0, rubric_status="warn")
 
             registry = build_run_registry([run_a, run_b], names=["A", "B"])
 
@@ -318,12 +340,15 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["runs"][0]["benchmark_rubric_rank"], 1)
             self.assertEqual(registry["runs"][1]["benchmark_rubric_rank"], 2)
             self.assertAlmostEqual(registry["runs"][1]["benchmark_rubric_delta_from_best"], -18.0)
-            self.assertEqual(registry["release_readiness_comparison_counts"], {"improved": 1, "regressed": 1})
+            self.assertEqual(registry["release_readiness_comparison_counts"], {"improved": 1, "ci-regressed": 1})
             self.assertEqual(registry["release_readiness_delta_summary"]["delta_count"], 2)
             self.assertEqual(registry["release_readiness_delta_summary"]["regressed_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["improved_count"], 1)
+            self.assertEqual(registry["release_readiness_delta_summary"]["ci_workflow_regression_count"], 1)
+            self.assertEqual(registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["run_name"], "B")
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["delta_status"], "regressed")
+            self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["ci_workflow_failed_check_delta"], 2)
             self.assertEqual(registry["pair_report_counts"], {"pair_batch": 1, "pair_trend": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})
             self.assertEqual(registry["pair_delta_summary"]["case_count"], 2)
@@ -372,6 +397,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("benchmark_rubric_avg_score", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("pair_batch_cases", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_ci_workflow_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT run registry", html)
@@ -390,6 +416,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("Release Readiness Deltas", html)
             self.assertIn("readiness cmp", html)
             self.assertIn("improved=1 regressed=0", html)
+            self.assertIn("ci regressions=0", html)
             self.assertIn("Pair Delta Leaders", html)
             self.assertIn("Abs Gen Delta", html)
             self.assertIn("one-delta", html)

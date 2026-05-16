@@ -256,6 +256,9 @@ c/148/解释/说明.md
 c/149/图片
 c/149/解释/说明.md
  -> v149 release readiness comparison CI workflow deltas 的运行截图和解释
+c/150/图片
+c/150/解释/说明.md
+ -> v150 registry CI workflow readiness regression tracking 的运行截图和解释
 ```
 
 写入规则：

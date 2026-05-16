@@ -223,6 +223,10 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     "compared_status": _as_str(delta.get("compared_status")),
                     "status_delta": _int_if_whole(_as_optional_float(delta.get("status_delta"))),
                     "delta_status": _as_str(delta.get("delta_status")) or "same",
+                    "baseline_ci_workflow_status": _as_str(delta.get("baseline_ci_workflow_status")),
+                    "compared_ci_workflow_status": _as_str(delta.get("compared_ci_workflow_status")),
+                    "ci_workflow_failed_check_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_failed_check_delta"))),
+                    "ci_workflow_status_changed": bool(delta.get("ci_workflow_status_changed")),
                     "audit_score_delta": _int_if_whole(_as_optional_float(delta.get("audit_score_delta"))),
                     "missing_artifact_delta": _int_if_whole(_as_optional_float(delta.get("missing_artifact_delta"))),
                     "fail_panel_delta": _int_if_whole(_as_optional_float(delta.get("fail_panel_delta"))),
@@ -242,6 +246,8 @@ def release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int =
         rows,
         key=lambda item: (
             status_priority.get(str(item.get("delta_status") or ""), 4),
+            -int(bool(item.get("ci_workflow_status_changed"))),
+            -abs(_as_optional_float(item.get("ci_workflow_failed_check_delta")) or 0.0),
             -abs(_as_optional_float(item.get("status_delta")) or 0.0),
             -int(item.get("changed_panel_count") or 0),
             str(item.get("run_name") or ""),
@@ -255,6 +261,11 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
     run_names = {str(row.get("run_name")) for row in rows if row.get("run_name")}
     result_counts = counts(row.get("delta_status") or "missing" for row in rows)
     status_deltas = [abs(value) for value in (_as_optional_float(row.get("status_delta")) for row in rows) if value is not None]
+    ci_failed_deltas = [
+        abs(value)
+        for value in (_as_optional_float(row.get("ci_workflow_failed_check_delta")) for row in rows)
+        if value is not None
+    ]
     return {
         "delta_count": len(rows),
         "run_count": len(run_names),
@@ -263,8 +274,25 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         "panel_changed_count": result_counts.get("panel-changed", 0),
         "same_count": result_counts.get("same", 0),
         "changed_panel_delta_count": sum(1 for row in rows if int(row.get("changed_panel_count") or 0) > 0),
+        "ci_workflow_regression_count": sum(1 for row in rows if _is_ci_workflow_regression_row(row)),
+        "ci_workflow_status_changed_count": sum(1 for row in rows if bool(row.get("ci_workflow_status_changed"))),
+        "max_abs_ci_workflow_failed_check_delta": _int_if_whole(max(ci_failed_deltas)) if ci_failed_deltas else None,
         "max_abs_status_delta": _int_if_whole(max(status_deltas)) if status_deltas else None,
     }
+
+
+def _is_ci_workflow_regression_row(row: dict[str, Any]) -> bool:
+    failed_delta = _as_optional_float(row.get("ci_workflow_failed_check_delta"))
+    if failed_delta is not None and failed_delta > 0:
+        return True
+    if not row.get("ci_workflow_status_changed"):
+        return False
+    return _ci_status_score(row.get("compared_ci_workflow_status")) < _ci_status_score(row.get("baseline_ci_workflow_status"))
+
+
+def _ci_status_score(value: Any) -> int:
+    order = {"missing": 0, "fail": 0, "warn": 1, "review": 1, "pass": 2}
+    return order.get(str(value or "missing"), 0)
 
 
 def _read_json(path: Path) -> dict[str, Any] | list[Any] | None:

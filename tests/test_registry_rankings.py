@@ -47,7 +47,7 @@ class RegistryRankingsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             run_a = make_run(root, "a", 1.2, pair_reports=True, pair_generated_delta=4, readiness_trend="improved")
-            run_b = make_run(root, "b", 0.9, pair_reports=True, pair_generated_delta=-9, readiness_trend="regressed")
+            run_b = make_run(root, "b", 0.9, pair_reports=True, pair_generated_delta=-9, readiness_trend="regressed", readiness_ci_regression=True)
 
             pair_rows = collect_pair_delta_rows([run_a, run_b], ["A", "B"])
             pair_summary = pair_delta_summary(pair_rows)
@@ -62,8 +62,11 @@ class RegistryRankingsTests(unittest.TestCase):
             self.assertEqual(pair_leader["case"], "b-delta")
             self.assertEqual(readiness_summary["regressed_count"], 1)
             self.assertEqual(readiness_summary["improved_count"], 1)
+            self.assertEqual(readiness_summary["ci_workflow_regression_count"], 1)
+            self.assertEqual(readiness_summary["max_abs_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(readiness_leader["run_name"], "B")
             self.assertEqual(readiness_leader["delta_status"], "regressed")
+            self.assertEqual(readiness_leader["ci_workflow_failed_check_delta"], 2)
             self.assertEqual(counts(["pass", "warn", "pass"]), {"pass": 2, "warn": 1})
 
 

@@ -126,6 +126,7 @@ class RegisteredRun:
     release_readiness_improved_count: int | None
     release_readiness_regressed_count: int | None
     release_readiness_changed_panel_delta_count: int | None
+    release_readiness_ci_workflow_regression_count: int | None
     release_readiness_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
@@ -220,6 +221,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         release_readiness_improved_count=_as_int(_pick(release_readiness_summary, "improved_count")),
         release_readiness_regressed_count=_as_int(_pick(release_readiness_summary, "regressed_count")),
         release_readiness_changed_panel_delta_count=_as_int(_pick(release_readiness_summary, "changed_panel_delta_count")),
+        release_readiness_ci_workflow_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_regression_count")),
         release_readiness_html_exists=_release_readiness_html_exists(root),
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
@@ -336,6 +338,8 @@ def _release_readiness_html_exists(root: Path) -> bool:
 def _release_readiness_comparison_status(summary: dict[str, Any]) -> str | None:
     if not summary:
         return None
+    if int(summary.get("ci_workflow_regression_count") or 0) > 0:
+        return "ci-regressed"
     if int(summary.get("regressed_count") or 0) > 0:
         return "regressed"
     if int(summary.get("improved_count") or 0) > 0:

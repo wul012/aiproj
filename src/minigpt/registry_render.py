@@ -221,6 +221,7 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "release_readiness_baseline_status",
         "release_readiness_improved_count",
         "release_readiness_regressed_count",
+        "release_readiness_ci_workflow_regression_count",
         "note",
         "tags",
     ]
@@ -348,13 +349,14 @@ def _pair_report_score(run: dict[str, Any]) -> int:
 def _release_readiness_sort_score(run: dict[str, Any]) -> int:
     order = {
         "regressed": 0,
-        "blocked": 1,
-        "panel-changed": 2,
-        "stable": 3,
-        "improved": 4,
-        "missing": 5,
+        "ci-regressed": 1,
+        "blocked": 2,
+        "panel-changed": 3,
+        "stable": 4,
+        "improved": 5,
+        "missing": 6,
     }
-    return order.get(str(run.get("release_readiness_comparison_status") or "missing"), 5)
+    return order.get(str(run.get("release_readiness_comparison_status") or "missing"), 6)
 
 
 def _benchmark_rubric_cell(run: dict[str, Any]) -> str:
@@ -397,7 +399,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         "pass"
         if status in {"improved", "stable"}
         else "warn"
-        if status == "panel-changed"
+        if status in {"panel-changed", "ci-regressed"}
         else "fail"
         if status in {"regressed", "blocked"}
         else "missing"
@@ -409,7 +411,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         f"<br><span>reports={_e(_fmt(run.get('release_readiness_report_count')))} baseline={_e(_fmt(run.get('release_readiness_baseline_status')))}</span>"
         f"<br><span>ready={_e(_fmt(run.get('release_readiness_ready_count')))} blocked={_e(_fmt(run.get('release_readiness_blocked_count')))}</span>"
         f"<br><span>improved={_e(_fmt(run.get('release_readiness_improved_count')))} regressed={_e(_fmt(run.get('release_readiness_regressed_count')))}</span>"
-        f"<br><span>panel deltas={_e(_fmt(run.get('release_readiness_changed_panel_delta_count')))}</span>"
+        f"<br><span>panel deltas={_e(_fmt(run.get('release_readiness_changed_panel_delta_count')))} ci regressions={_e(_fmt(run.get('release_readiness_ci_workflow_regression_count')))}</span>"
     )
 
 
@@ -540,6 +542,7 @@ def _release_readiness_delta_leaderboard_html(leaderboard: Any, base_dir: str | 
             f"<td>{_e(item.get('baseline_status'))} -> {_e(item.get('compared_status'))}</td>"
             f"<td>{_e(item.get('changed_panel_count'))}<br><span>{_e('; '.join(_as_str_list(item.get('changed_panels'))))}</span></td>"
             f"<td>{_e(_fmt_delta(item.get('audit_score_delta')))}<br><span>missing={_e(_fmt_delta(item.get('missing_artifact_delta')))}</span></td>"
+            f"<td>{_e(item.get('baseline_ci_workflow_status'))} -> {_e(item.get('compared_ci_workflow_status'))}<br><span>failed={_e(_fmt_delta(item.get('ci_workflow_failed_check_delta')))}</span></td>"
             f"<td>{_e(item.get('explanation'))}</td>"
             f"<td>{report_link}</td>"
             "</tr>"
@@ -547,7 +550,7 @@ def _release_readiness_delta_leaderboard_html(leaderboard: Any, base_dir: str | 
     return (
         '<section class="panel">'
         "<h2>Release Readiness Deltas</h2>"
-        '<table><thead><tr><th>Run / Compared</th><th>Trend</th><th>Status</th><th>Panels</th><th>Audit / Missing</th><th>Explanation</th><th>Report</th></tr></thead><tbody>'
+        '<table><thead><tr><th>Run / Compared</th><th>Trend</th><th>Status</th><th>Panels</th><th>Audit / Missing</th><th>CI workflow</th><th>Explanation</th><th>Report</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table>"
         "</section>"

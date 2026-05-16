@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 149 carries CI workflow hygiene context into release readiness comparisons. Cross-version readiness comparison reports now show CI workflow status, failed-check deltas, and CI hygiene regression counts so a release can spot workflow-policy drift without changing release gate hard rules.
+Version 150 carries CI workflow readiness regression evidence into the run registry. Registry summaries, CSV rows, HTML readiness cells, and Release Readiness Delta leaders now surface CI workflow regression counts from readiness comparisons without changing release gate hard rules.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -12,16 +12,16 @@ Version 149 carries CI workflow hygiene context into release readiness compariso
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits with request-history and CI-workflow hygiene context | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, generation-quality flag taxonomy, scorecard-level flag taxonomy consumption, cross-scorecard flag taxonomy deltas, scorecard promotion decision evidence, and maturity narrative consumption of that decision | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `benchmark_scorecard_decision.py`, `maturity_narrative.py`, `maturity_narrative_artifacts.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, maturity-narrative, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
-| Release and maturity governance | Registry, project audit, release bundle with request-history and CI-workflow hygiene evidence, release gate profiles, release readiness dashboards and comparisons with CI workflow hygiene context, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
+| Release and maturity governance | Registry, project audit, release bundle with request-history and CI-workflow hygiene evidence, release gate profiles, release readiness dashboards/comparisons/registry tracking with CI workflow hygiene context, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline with extracted artifact writers, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122/c132 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, project-audit, release-gate, maturity, and generation-quality boundaries; v142 adds target-Python compatibility checks to source encoding hygiene; v143 tries the Node 24 runtime opt-in; v144 upgrades actions to Node 24 native versions; v145 turns that workflow policy into a runnable JSON/CSV/Markdown/HTML hygiene gate; v146 feeds CI workflow hygiene evidence into project audit; v147 carries that evidence into release bundles; v148 surfaces it in release readiness dashboards; v149 compares it across readiness reports | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/maturity_narrative.py`, `src/minigpt/maturity_narrative_artifacts.py`, `src/minigpt/release_gate.py`, `src/minigpt/release_gate_artifacts.py`, `src/minigpt/generation_quality.py`, `src/minigpt/generation_quality_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio.py`, `src/minigpt/training_portfolio_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/training_portfolio_batch.py`, `src/minigpt/training_portfolio_batch_artifacts.py`, `src/minigpt/experiment_card.py`, `src/minigpt/experiment_card_artifacts.py`, `src/minigpt/project_audit.py`, `src/minigpt/project_audit_artifacts.py`, `src/minigpt/release_bundle.py`, `src/minigpt/release_readiness.py`, `src/minigpt/release_readiness_comparison.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/registry_rankings.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/registry_artifacts.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, `src/minigpt/ci_workflow_hygiene.py`, related tests and v83-v149 explanations | Keep hygiene gates and CI runtime aligned with action metadata rather than force flags |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, project-audit, release-gate, maturity, and generation-quality boundaries; v142 adds target-Python compatibility checks to source encoding hygiene; v143 tries the Node 24 runtime opt-in; v144 upgrades actions to Node 24 native versions; v145 turns that workflow policy into a runnable JSON/CSV/Markdown/HTML hygiene gate; v146 feeds CI workflow hygiene evidence into project audit; v147 carries that evidence into release bundles; v148 surfaces it in release readiness dashboards; v149 compares it across readiness reports; v150 rolls it into registry tracking | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/maturity_narrative.py`, `src/minigpt/maturity_narrative_artifacts.py`, `src/minigpt/release_gate.py`, `src/minigpt/release_gate_artifacts.py`, `src/minigpt/generation_quality.py`, `src/minigpt/generation_quality_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio.py`, `src/minigpt/training_portfolio_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/training_portfolio_batch.py`, `src/minigpt/training_portfolio_batch_artifacts.py`, `src/minigpt/experiment_card.py`, `src/minigpt/experiment_card_artifacts.py`, `src/minigpt/project_audit.py`, `src/minigpt/project_audit_artifacts.py`, `src/minigpt/release_bundle.py`, `src/minigpt/release_readiness.py`, `src/minigpt/release_readiness_comparison.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/registry_rankings.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/registry_artifacts.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, `src/minigpt/ci_workflow_hygiene.py`, related tests and v83-v150 explanations | Keep hygiene gates and CI runtime aligned with action metadata rather than force flags |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, and artifact boundaries; v137-v141 enriched generation-quality and scorecard promotion evidence; v142-v145 hardened source and CI workflow hygiene after real CI findings; v146-v149 carry the new CI hygiene evidence through project audit, release bundle, release readiness, and readiness comparison. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, and artifact boundaries; v137-v141 enriched generation-quality and scorecard promotion evidence; v142-v145 hardened source and CI workflow hygiene after real CI findings; v146-v150 carry the new CI hygiene evidence through project audit, release bundle, release readiness, readiness comparison, and registry tracking. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
 
 ## Capability map
 
@@ -33,13 +33,13 @@ Version 149 carries CI workflow hygiene context into release readiness compariso
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 149 focus
+## Version 150 focus
 
-- Added CI workflow status and failed check counts to release readiness comparison rows.
-- Added CI workflow failed-check delta and status-change fields to comparison deltas.
-- Added `ci_workflow_regression_count` to comparison summary and recommendation priority.
-- Added CI workflow columns to CSV, Markdown, and HTML readiness comparison outputs.
-- Kept the signal as comparison evidence only; release gate hard rules remain unchanged.
+- Added `release_readiness_ci_workflow_regression_count` to registered run rows and registry CSV.
+- Added `ci-regressed` as a registry readiness comparison status when CI workflow regression exists.
+- Added CI workflow regression counts and max failed-check delta to release readiness delta summaries.
+- Added CI workflow fields to release readiness delta leaders and registry HTML readiness cells.
+- Kept the signal as registry tracking evidence only; release gate hard rules remain unchanged.
 
 ## Version tags
 
@@ -195,6 +195,7 @@ v146.0.0 MiniGPT v146 project audit CI workflow hygiene context
 v147.0.0 MiniGPT v147 release bundle CI workflow hygiene evidence
 v148.0.0 MiniGPT v148 release readiness CI workflow hygiene panel
 v149.0.0 MiniGPT v149 release readiness comparison CI workflow deltas
+v150.0.0 MiniGPT v150 registry CI workflow readiness regression tracking
 ```
 
 ## Project structure
@@ -2445,6 +2446,16 @@ Version 149 screenshots are archived under `c/149`:
 - `06-full-unittest.png`: full unittest discovery after v149
 - `07-docs-check.png`: README, `c/149`, project-maturity explanation, comparison source, tests, and CI workflow keywords checked
 
+Version 150 screenshots are archived under `c/150`:
+
+- `01-registry-tests.png`: registry and ranking tests covering CI workflow readiness regression tracking
+- `02-registry-cli-smoke.png`: registry CLI smoke showing CI workflow regression counts in JSON/CSV/HTML
+- `03-ci-workflow-hygiene-smoke.png`: CI workflow hygiene smoke remains green after registry consumption
+- `04-source-encoding-smoke.png`: source encoding and Python 3.11 compatibility smoke after registry integration
+- `05-maintenance-smoke.png`: maintenance batching and module pressure smoke after registry integration
+- `06-full-unittest.png`: full unittest discovery after v150
+- `07-docs-check.png`: README, `c/150`, project-maturity explanation, registry source/tests, and CI workflow keywords checked
+
 ## Code explanation records
 
 Start here:
@@ -2621,7 +2632,7 @@ The release readiness dashboard layer consolidates registry, release bundle, pro
 
 The release readiness comparison layer compares multiple readiness dashboards against a baseline and explains readiness status, panel, audit-score, missing-artifact, CI workflow, and action deltas across versions.
 
-The registry release readiness tracking layer reads per-run release readiness comparison outputs, adds improved/regressed/panel-changed columns and counts, and surfaces Release Readiness Deltas beside loss, rubric, and pair evidence in registry HTML.
+The registry release readiness tracking layer reads per-run release readiness comparison outputs, adds improved/regressed/panel-changed/CI-regressed columns and counts, and surfaces Release Readiness Deltas beside loss, rubric, and pair evidence in registry HTML.
 
 The maturity release readiness trend layer reads registry-level readiness comparison summaries, surfaces Release Readiness Trend Context in maturity JSON/Markdown/HTML, and marks maturity review as `warn` when release readiness regressions exist.
 
