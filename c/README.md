@@ -331,6 +331,9 @@ c/173/解释/说明.md
 c/174/图片
 c/174/解释/说明.md
  -> v174 training scale gate artifact split 的运行截图和解释
+c/175/图片
+c/175/解释/说明.md
+ -> v175 promoted training scale comparison artifact split 的运行截图和解释
 ```
 
 写入规则：

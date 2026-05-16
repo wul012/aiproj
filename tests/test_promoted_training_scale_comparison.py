@@ -10,6 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import promoted_training_scale_comparison  # noqa: E402
+from minigpt import promoted_training_scale_comparison_artifacts  # noqa: E402
 from minigpt.promoted_training_scale_comparison import (  # noqa: E402
     build_promoted_training_scale_comparison,
     render_promoted_training_scale_comparison_html,
@@ -19,6 +21,20 @@ from minigpt.promoted_training_scale_comparison import (  # noqa: E402
 
 
 class PromotedTrainingScaleComparisonTests(unittest.TestCase):
+    def test_comparison_module_reexports_artifact_writers(self) -> None:
+        self.assertIs(
+            promoted_training_scale_comparison.write_promoted_training_scale_comparison_outputs,
+            promoted_training_scale_comparison_artifacts.write_promoted_training_scale_comparison_outputs,
+        )
+        self.assertIs(
+            promoted_training_scale_comparison.render_promoted_training_scale_comparison_html,
+            promoted_training_scale_comparison_artifacts.render_promoted_training_scale_comparison_html,
+        )
+        self.assertIs(
+            promoted_training_scale_comparison.render_promoted_training_scale_comparison_markdown,
+            promoted_training_scale_comparison_artifacts.render_promoted_training_scale_comparison_markdown,
+        )
+
     def test_compares_only_promoted_runs_from_index(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

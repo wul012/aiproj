@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+189-v175-promoted-training-scale-comparison-artifact-split.md
+ -> v175 code explanation: split promoted training scale comparison JSON/CSV/Markdown/HTML artifact writers into `promoted_training_scale_comparison_artifacts.py`, while keeping promotion index loading, promoted-run filtering, comparison input resolution, baseline handling, blockers, recommendations, script usage, and old facade exports unchanged.
 188-v174-training-scale-gate-artifact-split.md
  -> v174 code explanation: split training scale gate JSON/CSV/Markdown/HTML artifact writers into `training_scale_gate_artifacts.py`, while keeping policy profiles, plan loading, gate checks, status summaries, recommendations, workflow usage, and old facade exports unchanged.
 187-v173-training-scale-run-decision-artifact-split.md
