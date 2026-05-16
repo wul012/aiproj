@@ -3,7 +3,7 @@ from __future__ import annotations
 import csv
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, TypedDict
 
 from minigpt.report_utils import csv_cell, html_escape as _e, markdown_cell as _md, string_list as _string_list, utc_now, write_json_payload
 
@@ -19,6 +19,55 @@ REQUIRED_PYTHON_VERSION = "3.11"
 
 _USES_RE = re.compile(r"^\s*-\s+uses:\s*(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<version>[A-Za-z0-9_.-]+)\s*$")
 _PYTHON_VERSION_RE = re.compile(r"python-version:\s*[\"']?(?P<version>[0-9.]+)[\"']?")
+_ACTION_MAJOR_RE = re.compile(r"^v?(?P<major>[0-9]+)(?:\.[0-9]+){0,2}$")
+
+CheckStatus = Literal["pass", "fail"]
+
+
+class CiWorkflowCheck(TypedDict):
+    id: str
+    category: str
+    target: str
+    expected: str
+    actual: str
+    status: CheckStatus
+    detail: str
+
+
+class CiWorkflowAction(TypedDict):
+    repository: str
+    version: str
+    raw: str
+    line: int
+    node24_native: bool
+
+
+class CiWorkflowSummary(TypedDict):
+    status: CheckStatus
+    decision: str
+    check_count: int
+    passed_check_count: int
+    failed_check_count: int
+    action_count: int
+    required_action_count: int
+    found_required_action_count: int
+    node24_native_action_count: int
+    forbidden_env_count: int
+    required_step_count: int
+    missing_step_count: int
+    python_version: str
+
+
+class CiWorkflowReport(TypedDict):
+    schema_version: int
+    title: str
+    generated_at: str
+    workflow_path: str
+    policy: dict[str, Any]
+    summary: CiWorkflowSummary
+    actions: list[CiWorkflowAction]
+    checks: list[CiWorkflowCheck]
+    recommendations: list[str]
 
 
 def build_ci_workflow_hygiene_report(
@@ -27,7 +76,7 @@ def build_ci_workflow_hygiene_report(
     project_root: str | Path | None = None,
     title: str = "MiniGPT CI workflow hygiene",
     generated_at: str | None = None,
-) -> dict[str, Any]:
+) -> CiWorkflowReport:
     root = Path(project_root).resolve() if project_root is not None else None
     path = Path(workflow_path)
     text = path.read_text(encoding="utf-8")
@@ -38,7 +87,7 @@ def build_ci_workflow_hygiene_report(
     found_required_actions = [item for item in actions if item.get("repository") in required_action_repos]
     forbidden_env_hits = _forbidden_env_hits(text)
     missing_steps = [check for check in checks if check.get("category") == "required_command" and check.get("status") != "pass"]
-    summary = {
+    summary: CiWorkflowSummary = {
         "status": "pass" if not failed_checks else "fail",
         "decision": "continue_with_node24_native_ci" if not failed_checks else "fix_ci_workflow_hygiene",
         "check_count": len(checks),
@@ -206,8 +255,8 @@ def write_ci_workflow_hygiene_outputs(report: dict[str, Any], out_dir: str | Pat
     return {key: str(value) for key, value in paths.items()}
 
 
-def _build_checks(text: str, actions: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    checks: list[dict[str, Any]] = []
+def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflowCheck]:
+    checks: list[CiWorkflowCheck] = []
     action_versions = {str(item.get("repository")): str(item.get("version")) for item in actions}
     for repository, expected in REQUIRED_ACTIONS.items():
         actual = action_versions.get(repository, "")
@@ -255,20 +304,20 @@ def _build_checks(text: str, actions: list[dict[str, Any]]) -> list[dict[str, An
     return checks
 
 
-def _check(check_id: str, category: str, target: str, expected: Any, actual: Any, status: str, detail: str) -> dict[str, Any]:
+def _check(check_id: str, category: str, target: str, expected: Any, actual: Any, status: CheckStatus, detail: str) -> CiWorkflowCheck:
     return {
         "id": check_id,
         "category": category,
         "target": target,
-        "expected": expected,
-        "actual": actual,
+        "expected": str(expected),
+        "actual": str(actual),
         "status": status,
         "detail": detail,
     }
 
 
-def _collect_actions(text: str) -> list[dict[str, Any]]:
-    actions: list[dict[str, Any]] = []
+def _collect_actions(text: str) -> list[CiWorkflowAction]:
+    actions: list[CiWorkflowAction] = []
     for line_no, line in enumerate(text.splitlines(), start=1):
         match = _USES_RE.match(line)
         if not match:
@@ -288,7 +337,7 @@ def _collect_actions(text: str) -> list[dict[str, Any]]:
 
 
 def _major(version: str) -> int:
-    match = re.match(r"v(?P<major>[0-9]+)$", version)
+    match = _ACTION_MAJOR_RE.match(version.strip())
     return int(match.group("major")) if match else 0
 
 

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+166-v152-ci-workflow-hygiene-typed-schema.md
+ -> 第一百五十二版代码讲解：给 CI workflow hygiene 的 check/action/summary/report 补局部 TypedDict，并把 action major 解析从只认 `v6` 扩展到 `v6`、`v6.0.0`、`6`。
+
 165-v151-maturity-ci-workflow-readiness-context.md
  -> 第一百五十一版代码讲解：把 registry 汇总出的 CI workflow readiness regression 接入 maturity summary，形成 maturity review 级别的 `ci-regressed` 趋势、CLI/Markdown/HTML 展示和 `c/` 证据计数对齐。
 

@@ -262,6 +262,9 @@ c/150/解释/说明.md
 c/151/图片
 c/151/解释/说明.md
  -> v151 maturity CI workflow readiness context 的运行截图和解释
+c/152/图片
+c/152/解释/说明.md
+ -> v152 CI workflow hygiene typed schema 的运行截图和解释
 ```
 
 写入规则：

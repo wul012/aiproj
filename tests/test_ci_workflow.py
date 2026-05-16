@@ -73,6 +73,41 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertEqual(report["summary"]["missing_step_count"], 2)
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
+    def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
+        with TemporaryDirectory() as tmp:
+            workflow = Path(tmp) / "ci.yml"
+            workflow.write_text(
+                "\n".join(
+                    [
+                        "name: ci",
+                        "jobs:",
+                        "  test:",
+                        "    steps:",
+                        "      - uses: actions/checkout@v6.0.0",
+                        "      - uses: actions/setup-python@6",
+                        "        with:",
+                        '          python-version: "3.11"',
+                        "      - name: Source encoding and syntax check",
+                        "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+                        "      - name: CI workflow hygiene check",
+                        "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Unit tests",
+                        "        run: python -B -m unittest discover -s tests -v",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+
+            self.assertEqual(report["summary"]["status"], "fail")
+            self.assertEqual(report["summary"]["node24_native_action_count"], 2)
+            self.assertEqual(
+                {item["version"]: item["node24_native"] for item in report["actions"]},
+                {"v6.0.0": True, "6": True},
+            )
+            self.assertIn("Action version must be upgraded", " ".join(item["detail"] for item in report["checks"]))
+
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
         report = build_ci_workflow_hygiene_report(CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z")
 
