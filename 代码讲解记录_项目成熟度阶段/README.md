@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+178-v164-server-request-history-endpoint-split.md
+ -> 第一百六十四版代码讲解：把 `server.py` 的 `/api/request-history` 和 `/api/request-history-detail` HTTP endpoint 处理拆到 `server_request_history.py`，保持 request-history JSON/CSV/detail 契约和 `minigpt.server` facade 导出不变。
 177-v163-benchmark-scorecard-comparison-delta-split.md
  -> 第一百六十三版代码讲解：把 `benchmark_scorecard_comparison.py` 的 run/case/group delta、summary、recommendation 和 best-run 选择拆到 `benchmark_scorecard_comparison_deltas.py`，保持比较 schema、CLI、artifact facade 和 promotion decision 消费不变。
 176-v162-model-card-artifact-split.md

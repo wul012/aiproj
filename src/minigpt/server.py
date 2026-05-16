@@ -18,11 +18,8 @@ from minigpt.request_history import (
     append_inference_log,
     build_request_history_detail_payload,
     build_request_history_payload,
-    query_value as _query_value,
     read_request_history_log_records,
-    request_history_filters_from_query as _request_history_filters_from_query,
-    request_history_limit_from_query as _request_history_limit_from_query,
-    request_history_log_index_from_query as _request_history_log_index_from_query,
+    query_value as _query_value,
     request_history_to_csv,
 )
 from minigpt.server_contracts import (
@@ -58,6 +55,10 @@ from minigpt.server_http import (
 from minigpt.server_logging import (
     build_generation_log_event,
     build_pair_generation_log_event,
+)
+from minigpt.server_request_history import (
+    handle_request_history_detail_endpoint,
+    handle_request_history_endpoint,
 )
 
 from .playground import write_playground
@@ -122,33 +123,10 @@ def create_handler(
                 self._send_json(build_checkpoint_compare_payload(root, checkpoint, tokenizer_path, checkpoint_candidates))
                 return
             if parsed.path == "/api/request-history":
-                try:
-                    history_limit = _request_history_limit_from_query(parsed.query)
-                    history_filters = _request_history_filters_from_query(parsed.query)
-                except ValueError as exc:
-                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
-                    return
-                payload = build_request_history_payload(request_log, limit=history_limit, **history_filters)
-                if _query_value(parsed.query, "format") == "csv":
-                    self._send_text(
-                        request_history_to_csv(payload["requests"]),
-                        content_type="text/csv; charset=utf-8",
-                        filename="request_history.csv",
-                    )
-                    return
-                self._send_json(payload)
+                handle_request_history_endpoint(self, request_log, parsed.query)
                 return
             if parsed.path == "/api/request-history-detail":
-                try:
-                    log_index = _request_history_log_index_from_query(parsed.query)
-                    payload = build_request_history_detail_payload(request_log, log_index)
-                except ValueError as exc:
-                    self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
-                    return
-                except LookupError as exc:
-                    self._send_json({"error": str(exc)}, status=HTTPStatus.NOT_FOUND)
-                    return
-                self._send_json(payload)
+                handle_request_history_detail_endpoint(self, request_log, parsed.query)
                 return
             if parsed.path == "/api/model-info":
                 selector = _query_value(parsed.query, "checkpoint")
