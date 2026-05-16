@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+152-v138-benchmark-scorecard-flag-taxonomy.md
+ -> 第一百三十八版代码讲解：把 generation quality 的 flag taxonomy 接入 benchmark scorecard，让 run 级评分入口能看到 total flags、dominant flag、worst generation case 和 flag penalty。
 151-v137-generation-quality-flag-taxonomy.md
  -> 第一百三十七版代码讲解：给 generation quality 增加 flag taxonomy，汇总问题类型、严重级别、最差样本和 dominant flag，让生成质量证据从粗粒度状态推进到可追踪弱项诊断。
 150-v136-generation-quality-artifact-split.md

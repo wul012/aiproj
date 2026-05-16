@@ -135,12 +135,23 @@ def _eval_coverage_component(eval_suite: Any, path: Path) -> dict[str, Any]:
 
 def _generation_quality_component(report: Any) -> dict[str, Any]:
     summary = _dict(_pick(report, "summary"))
+    flag_summary = _dict(summary.get("flag_summary"))
+    flag_id_counts = _dict(flag_summary.get("flag_id_counts"))
+    worst_cases = _list_of_dicts(flag_summary.get("worst_cases"))
     case_count = _number(_pick(summary, "case_count")) or 0
     pass_count = _number(_pick(summary, "pass_count")) or 0
     warn_count = _number(_pick(summary, "warn_count")) or 0
     fail_count = _number(_pick(summary, "fail_count")) or 0
-    score = 0.0 if case_count == 0 else ((pass_count + warn_count * 0.5) / case_count) * 100.0
+    total_flags = _number(flag_summary.get("total_flags")) or 0
+    raw_score = 0.0 if case_count == 0 else ((pass_count + warn_count * 0.5) / case_count) * 100.0
+    flag_penalty = 0.0 if case_count == 0 else min(20.0, (total_flags / case_count) * 5.0)
+    score = max(0.0, raw_score - flag_penalty)
     status = _status(score)
+    dominant_flag = _dominant_flag(flag_id_counts)
+    worst_case = worst_cases[0] if worst_cases else {}
+    detail_parts = [f"{int(pass_count)} pass / {int(warn_count)} warn / {int(fail_count)} fail."]
+    if total_flags:
+        detail_parts.append(f"{int(total_flags)} flag(s); dominant={dominant_flag or 'missing'}.")
     return _component(
         "generation_quality",
         "Generation Quality",
@@ -148,13 +159,21 @@ def _generation_quality_component(report: Any) -> dict[str, Any]:
         0.2,
         status,
         _as_str(_pick(report, "source_path")) or "generation_quality.json",
-        f"{int(pass_count)} pass / {int(warn_count)} warn / {int(fail_count)} fail.",
+        " ".join(detail_parts),
         {
             "case_count": int(case_count),
             "pass_count": int(pass_count),
             "warn_count": int(warn_count),
             "fail_count": int(fail_count),
             "overall_status": _pick(summary, "overall_status"),
+            "total_flags": int(total_flags),
+            "dominant_flag": dominant_flag,
+            "flag_id_counts": flag_id_counts,
+            "worst_generation_case": worst_case.get("name"),
+            "worst_generation_case_status": worst_case.get("status"),
+            "worst_generation_case_flags": worst_case.get("flag_ids") if isinstance(worst_case.get("flag_ids"), list) else [],
+            "raw_score": round(raw_score, 2),
+            "flag_penalty": round(flag_penalty, 2),
         },
     )
 
@@ -275,13 +294,22 @@ def _score_summary(
     weakest_task_type = _dict(_pick(drilldowns, "weakest_task_type"))
     weakest_difficulty = _dict(_pick(drilldowns, "weakest_difficulty"))
     rubric_summary = _dict(rubric_scores.get("summary"))
+    generation_summary = _dict(_pick(generation_quality, "summary"))
+    flag_summary = _dict(generation_summary.get("flag_summary"))
+    flag_id_counts = _dict(flag_summary.get("flag_id_counts"))
+    worst_cases = _list_of_dicts(flag_summary.get("worst_cases"))
+    worst_case = worst_cases[0] if worst_cases else {}
     return {
         "overall_score": round(overall, 2),
         "overall_status": _status(overall),
         "component_count": len(components),
         "eval_suite_cases": _pick(eval_suite, "case_count"),
-        "generation_quality_status": _pick(_dict(_pick(generation_quality, "summary")), "overall_status"),
-        "generation_quality_cases": _pick(_dict(_pick(generation_quality, "summary")), "case_count"),
+        "generation_quality_status": _pick(generation_summary, "overall_status"),
+        "generation_quality_cases": _pick(generation_summary, "case_count"),
+        "generation_quality_total_flags": flag_summary.get("total_flags"),
+        "generation_quality_dominant_flag": _dominant_flag(flag_id_counts),
+        "generation_quality_worst_case": worst_case.get("name"),
+        "generation_quality_worst_case_status": worst_case.get("status"),
         "rubric_status": rubric_summary.get("overall_status"),
         "rubric_avg_score": rubric_summary.get("avg_score"),
         "rubric_pass_count": rubric_summary.get("pass_count"),
@@ -329,6 +357,14 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], 
         recs.append(
             f"Review weakest rubric case `{summary.get('weakest_rubric_case')}` at score {summary.get('weakest_rubric_score')} before trusting benchmark gains."
         )
+    if summary.get("generation_quality_dominant_flag"):
+        recs.append(
+            f"Prioritize generation-quality flag `{summary.get('generation_quality_dominant_flag')}` before comparing this run as improved."
+        )
+    if summary.get("generation_quality_worst_case"):
+        recs.append(
+            f"Inspect worst generation-quality case `{summary.get('generation_quality_worst_case')}` ({summary.get('generation_quality_worst_case_status')})."
+        )
     drilldowns = _dict(drilldowns)
     weakest_task = _dict(drilldowns.get("weakest_task_type"))
     weakest_difficulty = _dict(drilldowns.get("weakest_difficulty"))
@@ -369,6 +405,14 @@ def _read_json(path: Path, warnings: list[str], *, missing_ok: bool = False) -> 
         warnings.append(f"{path} must contain a JSON object")
         return None
     return payload
+
+
+def _dominant_flag(flag_id_counts: dict[str, Any]) -> str | None:
+    counts = {str(key): _number(value) or 0 for key, value in flag_id_counts.items()}
+    counts = {key: value for key, value in counts.items() if key and value > 0}
+    if not counts:
+        return None
+    return max(counts.items(), key=lambda item: (item[1], item[0]))[0]
 
 
 def _max_abs_generated_delta(pair_batch: Any) -> float | int | None:

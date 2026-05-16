@@ -220,6 +220,9 @@ c/136/解释/说明.md
 c/137/图片
 c/137/解释/说明.md
  -> v137 generation quality flag taxonomy 的运行截图和解释
+c/138/图片
+c/138/解释/说明.md
+ -> v138 benchmark scorecard flag taxonomy 的运行截图和解释
 ```
 
 写入规则：

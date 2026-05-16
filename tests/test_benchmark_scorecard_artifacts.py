@@ -34,6 +34,9 @@ def make_scorecard() -> dict:
             "overall_score": 91.25,
             "eval_suite_cases": 2,
             "generation_quality_status": "pass",
+            "generation_quality_total_flags": 3,
+            "generation_quality_dominant_flag": "low_diversity",
+            "generation_quality_worst_case": "qa-hard",
             "rubric_status": "pass",
             "rubric_avg_score": 88.5,
             "weakest_rubric_case": "qa-hard",
@@ -107,9 +110,11 @@ class BenchmarkScorecardArtifactTests(unittest.TestCase):
         self.assertIn("&lt;Benchmark&gt;", html)
         self.assertNotIn("<h1><Benchmark>", html)
         self.assertIn("Benchmark Components", html)
+        self.assertIn("low_diversity", html)
         self.assertIn("Rubric Scores", html)
         self.assertIn("Task Type Drilldown", html)
         self.assertIn("## Components", markdown)
+        self.assertIn("Dominant generation flag", markdown)
         self.assertIn("## Rubric Scores", markdown)
         self.assertIn("## Difficulty Drilldown", markdown)
 

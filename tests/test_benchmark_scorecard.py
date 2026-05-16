@@ -64,6 +64,19 @@ def make_run(root: Path) -> tuple[Path, Path]:
                 "pass_count": 4,
                 "warn_count": 1,
                 "fail_count": 0,
+                "flag_summary": {
+                    "total_flags": 3,
+                    "flag_id_counts": {"low_diversity": 2, "long_repeat_run": 1},
+                    "flag_level_counts": {"warn": 3, "fail": 0},
+                    "worst_cases": [
+                        {
+                            "name": "fact-check",
+                            "status": "warn",
+                            "flag_count": 2,
+                            "flag_ids": ["low_diversity", "long_repeat_run"],
+                        }
+                    ],
+                },
             },
             "cases": [
                 {"name": name, "status": status, "unique_ratio": 0.72, "flag_count": 1 if status == "warn" else 0}
@@ -127,6 +140,9 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["summary"]["rubric_status"], "pass")
             self.assertEqual(scorecard["summary"]["rubric_avg_score"], 92.0)
             self.assertEqual(scorecard["summary"]["weakest_rubric_case"], "fact-check")
+            self.assertEqual(scorecard["summary"]["generation_quality_total_flags"], 3)
+            self.assertEqual(scorecard["summary"]["generation_quality_dominant_flag"], "low_diversity")
+            self.assertEqual(scorecard["summary"]["generation_quality_worst_case"], "fact-check")
             self.assertEqual(scorecard["summary"]["task_type_group_count"], 4)
             self.assertEqual(scorecard["summary"]["difficulty_group_count"], 3)
             self.assertEqual(scorecard["summary"]["weakest_task_type"], "qa")
@@ -139,6 +155,14 @@ class BenchmarkScorecardTests(unittest.TestCase):
                 "pair_delta_stability",
                 "evidence_completeness",
             })
+            generation_quality = next(item for item in scorecard["components"] if item["key"] == "generation_quality")
+            self.assertEqual(generation_quality["score"], 87.0)
+            self.assertEqual(generation_quality["metrics"]["raw_score"], 90.0)
+            self.assertEqual(generation_quality["metrics"]["flag_penalty"], 3.0)
+            self.assertEqual(generation_quality["metrics"]["total_flags"], 3)
+            self.assertEqual(generation_quality["metrics"]["dominant_flag"], "low_diversity")
+            self.assertEqual(generation_quality["metrics"]["worst_generation_case"], "fact-check")
+            self.assertIn("dominant=low_diversity", generation_quality["detail"])
             self.assertEqual(len(scorecard["case_scores"]), 5)
             self.assertEqual(scorecard["rubric_scores"]["summary"]["fail_count"], 0)
             fact_check = next(item for item in scorecard["rubric_scores"]["cases"] if item["name"] == "fact-check")
@@ -147,6 +171,7 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["drilldowns"]["weakest_difficulty"]["status"], "fail")
             self.assertEqual(scorecard["registry_context"]["best_val_loss_rank"], 1)
             self.assertEqual(scorecard["registry_context"]["pair_delta_cases"], 5)
+            self.assertIn("Prioritize generation-quality flag `low_diversity`", " ".join(scorecard["recommendations"]))
             self.assertEqual(scorecard["warnings"], [])
 
     def test_write_benchmark_scorecard_outputs(self) -> None:
@@ -163,6 +188,7 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertIn("group_by,key,status,score", Path(outputs["drilldowns_csv"]).read_text(encoding="utf-8"))
             self.assertIn("name,task_type,difficulty,status,score", Path(outputs["rubric_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Components", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Dominant generation flag", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Rubric Scores", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Task Type Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Difficulty Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
