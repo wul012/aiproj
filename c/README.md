@@ -235,6 +235,9 @@ c/141/解释/说明.md
 c/142/图片
 c/142/解释/说明.md
  -> v142 source encoding target compatibility 的运行截图和解释
+c/143/图片
+c/143/解释/说明.md
+ -> v143 GitHub Actions Node 24 runtime 的运行截图和解释
 ```
 
 写入规则：

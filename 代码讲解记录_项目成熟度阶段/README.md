@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+157-v143-github-actions-node24-runtime.md
+ -> 第一百四十三版代码讲解：把 GitHub Actions 显式切到 Node 24 JavaScript action runtime，并用测试守住 workflow 策略，消除 Node.js 20 deprecation 提醒。
 156-v142-source-encoding-target-compatibility.md
  -> 第一百四十二版代码讲解：把 source encoding hygiene 从 BOM/语法检查推进到目标 Python 兼容性门禁，避免本地新版解释器通过而 Python 3.11 CI 失败。
 155-v141-maturity-narrative-scorecard-decision.md
