@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+148-v134-maturity-narrative-artifact-split.md
+ -> 第一百三十四版代码讲解：把 maturity narrative 的 JSON/Markdown/HTML 输出写入层拆成 artifact 模块，保留 narrative summary/sections/evidence matrix、旧 facade 和脚本调用方式。
 147-v133-registry-ranking-split.md
  -> 第一百三十三版代码讲解：把 registry 的 loss/rubric leaderboard、pair delta、release readiness delta 聚合拆成 ranking 模块，保留 registry schema 和 facade。
 146-v132-training-portfolio-artifact-split.md

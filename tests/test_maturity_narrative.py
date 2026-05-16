@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import maturity_narrative, maturity_narrative_artifacts
 from minigpt.maturity_narrative import (
     build_maturity_narrative,
     render_maturity_narrative_html,
@@ -120,6 +121,16 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
 
 
 class MaturityNarrativeTests(unittest.TestCase):
+    def test_maturity_narrative_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(
+            maturity_narrative.render_maturity_narrative_html,
+            maturity_narrative_artifacts.render_maturity_narrative_html,
+        )
+        self.assertIs(
+            maturity_narrative.write_maturity_narrative_outputs,
+            maturity_narrative_artifacts.write_maturity_narrative_outputs,
+        )
+
     def test_build_maturity_narrative_ready_portfolio(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             paths = make_project(Path(tmp))
