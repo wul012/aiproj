@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+179-v165-training-scale-plan-artifact-split.md
+ -> 第一百六十五版代码讲解：把 `training_scale_plan.py` 的 JSON/variants/CSV/Markdown/HTML artifact 写出和渲染拆到 `training_scale_plan_artifacts.py`，保持 scale plan schema、CLI、facade 导出和训练规模链路消费不变。
+
 178-v164-server-request-history-endpoint-split.md
  -> 第一百六十四版代码讲解：把 `server.py` 的 `/api/request-history` 和 `/api/request-history-detail` HTTP endpoint 处理拆到 `server_request_history.py`，保持 request-history JSON/CSV/detail 契约和 `minigpt.server` facade 导出不变。
 177-v163-benchmark-scorecard-comparison-delta-split.md

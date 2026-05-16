@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import training_scale_plan as training_scale_plan_facade  # noqa: E402
+from minigpt import training_scale_plan_artifacts  # noqa: E402
 from minigpt.training_portfolio_batch import (  # noqa: E402
     build_training_portfolio_batch_plan,
     load_training_portfolio_batch_variants,
@@ -155,6 +157,20 @@ class TrainingScalePlanTests(unittest.TestCase):
         self.assertEqual(scale_tier(200_000), "large")
         with self.assertRaises(ValueError):
             scale_tier(-1)
+
+    def test_training_scale_plan_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(
+            training_scale_plan_facade.write_training_scale_plan_outputs,
+            training_scale_plan_artifacts.write_training_scale_plan_outputs,
+        )
+        self.assertIs(
+            training_scale_plan_facade.render_training_scale_plan_html,
+            training_scale_plan_artifacts.render_training_scale_plan_html,
+        )
+        self.assertIs(
+            training_scale_plan_facade.render_training_scale_plan_markdown,
+            training_scale_plan_artifacts.render_training_scale_plan_markdown,
+        )
 
 
 if __name__ == "__main__":
