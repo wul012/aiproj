@@ -202,6 +202,9 @@ c/130/解释/说明.md
 c/131/图片
 c/131/解释/说明.md
  -> v131 project audit artifact split 的运行截图和解释
+c/132/图片
+c/132/解释/说明.md
+ -> v132 training portfolio artifact split 的运行截图和解释
 ```
 
 写入规则：

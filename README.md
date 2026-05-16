@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 131 continues the pressure-guided cleanup by splitting project audit JSON/Markdown/HTML writers into `project_audit_artifacts.py`. It keeps `project_audit.py` focused on registry/model-card/request-history checks and preserves the old public imports used by `scripts/audit_project.py`.
+Version 132 continues the pressure-guided cleanup by splitting training portfolio JSON/Markdown/HTML writers into `training_portfolio_artifacts.py`. It keeps `training_portfolio.py` focused on pipeline planning, dry-run/execution status, artifact availability, and recommendations while preserving the old public imports used by `scripts/run_training_portfolio.py`.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -13,15 +13,15 @@ Version 131 continues the pressure-guided cleanup by splitting project audit JSO
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, and cross-run scorecard comparison with extracted artifact and scoring layers | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
-| Training scale workflow | Training portfolio pipeline, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers; v120 extracts benchmark scorecard scoring helpers; v121 extracts maturity summary artifact writers/renderers; v122 extracts training portfolio comparison artifact writers/renderers; v123 extracts dashboard HTML renderers; v124 splits playground CSS and JavaScript assets behind the old facade; v125 extracts the server generator class from HTTP routing; v126 extracts baseline run comparison artifact writers/renderers from comparison logic; v127 adds source encoding hygiene checks and report writers; v128 splits registry output writers; v129 splits training portfolio batch output writers; v130 splits experiment card output writers; v131 splits project audit output writers | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/training_portfolio_batch.py`, `src/minigpt/training_portfolio_batch_artifacts.py`, `src/minigpt/experiment_card.py`, `src/minigpt/experiment_card_artifacts.py`, `src/minigpt/project_audit.py`, `src/minigpt/project_audit_artifacts.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/registry_artifacts.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, related tests and v83-v131 explanations | Continue small, contract-preserving splits before touching service/model behavior |
+| Training scale workflow | Training portfolio pipeline with extracted artifact writers, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122/c132 archives | Move from dry-run/governance evidence toward real promoted training runs |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111 extracts registry HTML assets; v112 extracts pair artifact evidence helpers; v113 extracts request-history core helpers; v114 extracts benchmark scorecard artifact writers; v115 extracts playground HTML assets; v116 splits registry data assembly from output rendering; v117 extracts server contracts and payload builders; v118 extracts benchmark comparison artifact writers/renderers; v119 extracts maintenance policy artifact writers/renderers; v120 extracts benchmark scorecard scoring helpers; v121 extracts maturity summary artifact writers/renderers; v122 extracts training portfolio comparison artifact writers/renderers; v123 extracts dashboard HTML renderers; v124 splits playground CSS and JavaScript assets behind the old facade; v125 extracts the server generator class from HTTP routing; v126 extracts baseline run comparison artifact writers/renderers from comparison logic; v127 adds source encoding hygiene checks and report writers; v128 splits registry output writers; v129 splits training portfolio batch output writers; v130 splits experiment card output writers; v131 splits project audit output writers; v132 splits training portfolio output writers | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio.py`, `src/minigpt/training_portfolio_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/training_portfolio_batch.py`, `src/minigpt/training_portfolio_batch_artifacts.py`, `src/minigpt/experiment_card.py`, `src/minigpt/experiment_card_artifacts.py`, `src/minigpt/project_audit.py`, `src/minigpt/project_audit_artifacts.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/registry_artifacts.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, related tests and v83-v132 explanations | Continue small, contract-preserving splits before touching service/model behavior |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs. The latest module pressure smoke still reports zero warn modules, so future work should stay small, pressure-guided, and ready to pause when no clear ownership boundary exists.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs. The latest module pressure smoke still reports zero warn modules, so future work should stay small, pressure-guided, and ready to pause when no clear ownership boundary exists.
 
 ## Capability map
 
@@ -33,14 +33,14 @@ Version 131 continues the pressure-guided cleanup by splitting project audit JSO
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 131 focus
+## Version 132 focus
 
-- Added `src/minigpt/project_audit_artifacts.py` for project audit JSON, Markdown, and HTML writers plus rendering helpers.
-- Updated `src/minigpt/project_audit.py` to keep registry/model-card/request-history checks and facade-compatible artifact exports while moving file writing into the artifact module.
-- Added a facade identity regression in `tests/test_project_audit.py` so old imports stay wired to the new artifact implementation.
-- Kept project audit schema, readiness scoring, recommendations, output filenames, HTML escaping, and `scripts/audit_project.py` behavior unchanged.
-- Used the maintenance precheck before the split to confirm `project_audit.py` was the next largest module while module pressure remained below warning thresholds.
-- Reran maintenance after the split; module pressure stayed pass and the largest module moved to `training_portfolio.py`.
+- Added `src/minigpt/training_portfolio_artifacts.py` for training portfolio JSON, Markdown, and HTML writers plus rendering helpers.
+- Updated `src/minigpt/training_portfolio.py` to keep pipeline planning, optional execution, artifact availability checks, and recommendations while re-exporting the artifact functions for old callers.
+- Added a facade identity regression in `tests/test_training_portfolio.py` so old imports stay wired to the new artifact implementation.
+- Kept training portfolio schema, output filenames, dry-run CLI behavior, HTML escaping, and `scripts/run_training_portfolio.py` behavior unchanged.
+- Used the v132 maintenance precheck after v131 showed `training_portfolio.py` as the largest remaining module while module pressure stayed below warning thresholds.
+- Reran targeted tests, compile checks, dry-run CLI smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/132`.
 
 ## Version tags
 
@@ -178,6 +178,7 @@ v128.0.0 MiniGPT v128 registry artifact split
 v129.0.0 MiniGPT v129 training portfolio batch artifact split
 v130.0.0 MiniGPT v130 experiment card artifact split
 v131.0.0 MiniGPT v131 project audit artifact split
+v132.0.0 MiniGPT v132 training portfolio artifact split
 ```
 
 ## Project structure
@@ -441,6 +442,7 @@ v131.0.0 MiniGPT v131 project audit artifact split
 │       ├── training_scale_plan.py
 │       ├── training_portfolio_batch.py
 │       ├── training_portfolio.py
+│       ├── training_portfolio_artifacts.py
 │       ├── training_portfolio_comparison.py
 │       └── training_portfolio_comparison_artifacts.py
 ├── tests/
@@ -2234,6 +2236,14 @@ Version 131 screenshots are archived under `c/131`:
 - `03-project-audit-smoke.png`: generated project audit JSON/Markdown/HTML outputs plus facade identity checks
 - `04-playwright-project-audit-html.png`: generated project audit HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v131 README, c/131 archive, project-maturity explanation, and source encoding check
+
+Version 132 screenshots are archived under `c/132`:
+
+- `01-unit-tests.png`: training portfolio artifact tests, compile check, and full unittest discovery
+- `02-maintenance-smoke.png`: maintenance batching and module pressure smoke after `training_portfolio_artifacts.py`
+- `03-training-portfolio-smoke.png`: dry-run training portfolio JSON/Markdown/HTML outputs plus facade identity checks
+- `04-playwright-training-portfolio-html.png`: generated training portfolio HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v132 README, c/132 archive, project-maturity explanation, and source encoding check
 
 ## Code explanation records
 

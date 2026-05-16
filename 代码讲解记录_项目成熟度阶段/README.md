@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+146-v132-training-portfolio-artifact-split.md
+ -> 第一百三十二版代码讲解：把 training portfolio 的输出写入层拆成 artifact 模块，保留 pipeline planning、dry-run/execute 状态、旧 facade 和脚本调用方式。
 145-v131-project-audit-artifact-split.md
  -> 第一百三十一版代码讲解：把 project audit 的输出写入层拆成 artifact 模块，保留旧 facade、schema、审计评分和脚本调用方式。
 144-v129-v130-artifact-splits.md

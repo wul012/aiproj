@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import training_portfolio, training_portfolio_artifacts  # noqa: E402
 from minigpt.training_portfolio import (  # noqa: E402
     build_training_portfolio_plan,
     render_training_portfolio_html,
@@ -122,6 +123,16 @@ class TrainingPortfolioTests(unittest.TestCase):
             self.assertIn("Pipeline Steps", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Portfolio&gt;", html)
             self.assertNotIn("<h1><Portfolio>", html)
+
+    def test_training_portfolio_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(
+            training_portfolio.render_training_portfolio_html,
+            training_portfolio_artifacts.render_training_portfolio_html,
+        )
+        self.assertIs(
+            training_portfolio.write_training_portfolio_outputs,
+            training_portfolio_artifacts.write_training_portfolio_outputs,
+        )
 
 
 if __name__ == "__main__":
