@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+177-v163-benchmark-scorecard-comparison-delta-split.md
+ -> 第一百六十三版代码讲解：把 `benchmark_scorecard_comparison.py` 的 run/case/group delta、summary、recommendation 和 best-run 选择拆到 `benchmark_scorecard_comparison_deltas.py`，保持比较 schema、CLI、artifact facade 和 promotion decision 消费不变。
 176-v162-model-card-artifact-split.md
  -> 第一百六十二版代码讲解：把 `model_card.py` 的 JSON/Markdown/HTML artifact 写出和渲染拆到 `model_card_artifacts.py`，保持 model card schema、CLI 和旧导出不变。
 175-v161-dataset-card-artifact-split.md
