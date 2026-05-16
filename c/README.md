@@ -283,6 +283,9 @@ c/157/解释/说明.md
 c/158/图片
 c/158/解释/说明.md
  -> v158 release gate comparison artifact split 的运行截图和解释
+c/159/图片
+c/159/解释/说明.md
+ -> v159 server HTTP helper split 的运行截图和解释
 ```
 
 写入规则：

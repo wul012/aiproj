@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+173-v159-server-http-helper-split.md
+ -> 第一百五十九版代码讲解：把 `server.py` 的 JSON/text/SSE/file response、request body parsing 和 run file serving helper 拆到 `server_http.py`，保持 `create_handler()`/`run_server()` 路由行为和旧 facade 导出不变。
 172-v158-release-gate-comparison-artifact-split.md
  -> 第一百五十八版代码讲解：把 release gate profile comparison 的 JSON/CSV/Markdown/HTML artifact 写出和渲染拆到 `release_gate_comparison_artifacts.py`，保留 `release_gate_comparison.py` 旧导出和比较 schema 不变。
 171-v157-registry-leaderboard-split.md

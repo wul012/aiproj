@@ -1,14 +1,12 @@
 from __future__ import annotations
 
 from functools import partial
-import json
-import mimetypes
 from pathlib import Path
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from time import monotonic
 from typing import Any, Callable
-from urllib.parse import unquote, urlparse
+from urllib.parse import urlparse
 
 from minigpt.pair_artifacts import (
     render_pair_generation_html as _render_pair_generation_html,
@@ -48,6 +46,15 @@ from minigpt.server_contracts import (
     stream_timeout_payload,
 )
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.server_http import (
+    read_json_body,
+    send_file,
+    send_json,
+    send_sse_headers,
+    send_text,
+    serve_run_file,
+    write_sse,
+)
 from minigpt.server_logging import (
     build_generation_log_event,
     build_pair_generation_log_event,
@@ -423,27 +430,10 @@ def create_handler(
             return
 
         def _serve_run_file(self, request_path: str) -> None:
-            relative = unquote(request_path.lstrip("/"))
-            target = (root / relative).resolve()
-            try:
-                target.relative_to(root.resolve())
-            except ValueError:
-                self._send_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
-                return
-            if not target.exists() or not target.is_file():
-                self._send_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
-                return
-            self._send_file(target)
+            serve_run_file(self, root, request_path)
 
         def _read_json_body(self) -> dict[str, Any]:
-            length = int(self.headers.get("Content-Length", "0"))
-            if length > safety.max_body_bytes:
-                raise ValueError(f"request body must be at most {safety.max_body_bytes} bytes")
-            body = self.rfile.read(length).decode("utf-8")
-            payload = json.loads(body or "{}")
-            if not isinstance(payload, dict):
-                raise ValueError("request body must be a JSON object")
-            return payload
+            return read_json_body(self, safety.max_body_bytes)
 
         def _log_generation(
             self,
@@ -503,14 +493,7 @@ def create_handler(
             append_inference_log(request_log, event)
 
         def _send_json(self, payload: dict[str, Any], status: HTTPStatus = HTTPStatus.OK) -> None:
-            body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-            self.send_response(status)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
-            self.send_header("Content-Length", str(len(body)))
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
-            self.end_headers()
-            self.wfile.write(body)
+            send_json(self, payload, status=status)
 
         def _send_text(
             self,
@@ -520,38 +503,16 @@ def create_handler(
             filename: str | None = None,
             status: HTTPStatus = HTTPStatus.OK,
         ) -> None:
-            body = text.encode("utf-8")
-            self.send_response(status)
-            self.send_header("Content-Type", content_type)
-            self.send_header("Content-Length", str(len(body)))
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
-            if filename is not None:
-                self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
-            self.end_headers()
-            self.wfile.write(body)
+            send_text(self, text, content_type=content_type, filename=filename, status=status)
 
         def _send_sse_headers(self) -> None:
-            self.send_response(HTTPStatus.OK)
-            self.send_header("Content-Type", "text/event-stream; charset=utf-8")
-            self.send_header("Cache-Control", "no-cache")
-            self.send_header("Connection", "close")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
-            self.end_headers()
+            send_sse_headers(self)
 
         def _write_sse(self, event: str, data: dict[str, Any]) -> None:
-            self.wfile.write(sse_message(event, data))
-            self.wfile.flush()
+            write_sse(self, event, data)
 
         def _send_file(self, path: Path) -> None:
-            body = path.read_bytes()
-            content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
-            self.send_response(HTTPStatus.OK)
-            self.send_header("Content-Type", content_type)
-            self.send_header("Content-Length", str(len(body)))
-            self.end_headers()
-            self.wfile.write(body)
+            send_file(self, path)
 
     return MiniGPTServerHandler
 
