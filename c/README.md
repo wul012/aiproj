@@ -277,6 +277,9 @@ c/155/解释/说明.md
 c/156/图片
 c/156/解释/说明.md
  -> v156 server checkpoint split 的运行截图和解释
+c/157/图片
+c/157/解释/说明.md
+ -> v157 registry leaderboard split 的运行截图和解释
 ```
 
 写入规则：

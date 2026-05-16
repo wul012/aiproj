@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+171-v157-registry-leaderboard-split.md
+ -> 第一百五十七版代码讲解：把 registry HTML 的 loss、rubric、pair delta 和 release readiness delta leaderboard 渲染拆到 `registry_leaderboards.py`，保持 `render_registry_html()` 和 registry payload 契约不变，继续降低当前最大渲染模块压力。
 170-v156-server-checkpoint-split.md
  -> 第一百五十六版代码讲解：把 server contracts 的 checkpoint discovery、health、model-info 和 comparison payload 拆到 `server_checkpoints.py`，保留 `server_contracts.py`/`server.py` facade 兼容，让本地推理 checkpoint 证据链更独立。
 169-v155-server-logging-split.md
