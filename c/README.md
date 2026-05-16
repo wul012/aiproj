@@ -199,6 +199,9 @@ c/128/解释/说明.md
 c/130/图片
 c/130/解释/说明.md
  -> v130 experiment card artifact split 的运行截图和解释；v129 为相邻 training portfolio batch artifact split，已合并记录到本轮说明
+c/131/图片
+c/131/解释/说明.md
+ -> v131 project audit artifact split 的运行截图和解释
 ```
 
 写入规则：

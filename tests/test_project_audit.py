@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import project_audit, project_audit_artifacts
 from minigpt.project_audit import build_project_audit, render_project_audit_html, write_project_audit_outputs
 
 
@@ -180,6 +181,10 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("&lt;Audit&gt;", html)
             self.assertIn("&lt;script&gt;", html)
             self.assertNotIn("<strong><script>", html)
+
+    def test_project_audit_facade_keeps_artifact_writer_identity(self) -> None:
+        self.assertIs(project_audit.render_project_audit_html, project_audit_artifacts.render_project_audit_html)
+        self.assertIs(project_audit.write_project_audit_outputs, project_audit_artifacts.write_project_audit_outputs)
 
 
 if __name__ == "__main__":
