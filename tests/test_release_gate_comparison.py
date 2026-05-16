@@ -15,6 +15,8 @@ from minigpt.release_gate_comparison import (
     render_release_gate_profile_comparison_markdown,
     write_release_gate_profile_comparison_outputs,
 )
+from minigpt import release_gate_comparison as comparison_module
+from minigpt import release_gate_comparison_artifacts as artifact_module
 
 
 def write_json(path: Path, payload: dict) -> None:
@@ -243,6 +245,24 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             self.assertIn("&lt;script&gt;", html)
             self.assertNotIn("<td><script>", html)
             self.assertIn("<script>", markdown)
+
+    def test_comparison_module_keeps_artifact_facade_identity(self) -> None:
+        self.assertIs(
+            comparison_module.render_release_gate_profile_comparison_html,
+            artifact_module.render_release_gate_profile_comparison_html,
+        )
+        self.assertIs(
+            comparison_module.render_release_gate_profile_comparison_markdown,
+            artifact_module.render_release_gate_profile_comparison_markdown,
+        )
+        self.assertIs(
+            comparison_module.write_release_gate_profile_comparison_outputs,
+            artifact_module.write_release_gate_profile_comparison_outputs,
+        )
+        self.assertIs(
+            comparison_module.write_release_gate_profile_delta_csv,
+            artifact_module.write_release_gate_profile_delta_csv,
+        )
 
 
 if __name__ == "__main__":

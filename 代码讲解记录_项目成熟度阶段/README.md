@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+172-v158-release-gate-comparison-artifact-split.md
+ -> 第一百五十八版代码讲解：把 release gate profile comparison 的 JSON/CSV/Markdown/HTML artifact 写出和渲染拆到 `release_gate_comparison_artifacts.py`，保留 `release_gate_comparison.py` 旧导出和比较 schema 不变。
 171-v157-registry-leaderboard-split.md
  -> 第一百五十七版代码讲解：把 registry HTML 的 loss、rubric、pair delta 和 release readiness delta leaderboard 渲染拆到 `registry_leaderboards.py`，保持 `render_registry_html()` 和 registry payload 契约不变，继续降低当前最大渲染模块压力。
 170-v156-server-checkpoint-split.md
