@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 146 connects the v145 CI workflow hygiene report to the project audit. `project_audit` can now read `ci_workflow_hygiene.json`, score it as project governance evidence, expose CI workflow status in JSON/Markdown/HTML, and keep missing or failing CI hygiene as a review warning rather than confusing it with model quality.
+Version 147 carries the CI workflow hygiene context from project audit into the release bundle. Release bundles can now resolve `ci_workflow_hygiene.json`, include its JSON/Markdown/HTML evidence artifacts, and show CI workflow status alongside request-history and audit status without turning it into a release gate hard requirement yet.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -12,16 +12,16 @@ Version 146 connects the v145 CI workflow hygiene report to the project audit. `
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits with request-history and CI-workflow hygiene context | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
 | Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, generation-quality flag taxonomy, scorecard-level flag taxonomy consumption, cross-scorecard flag taxonomy deltas, scorecard promotion decision evidence, and maturity narrative consumption of that decision | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `benchmark_scorecard_decision.py`, `maturity_narrative.py`, `maturity_narrative_artifacts.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, maturity-narrative, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
-| Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
+| Release and maturity governance | Registry, project audit, release bundle with request-history and CI-workflow hygiene evidence, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline with extracted artifact writers, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122/c132 archives | Move from dry-run/governance evidence toward real promoted training runs |
-| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, project-audit, release-gate, maturity, and generation-quality boundaries; v142 adds target-Python compatibility checks to source encoding hygiene; v143 tries the Node 24 runtime opt-in; v144 upgrades actions to Node 24 native versions; v145 turns that workflow policy into a runnable JSON/CSV/Markdown/HTML hygiene gate; v146 feeds CI workflow hygiene evidence into project audit | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/maturity_narrative.py`, `src/minigpt/maturity_narrative_artifacts.py`, `src/minigpt/release_gate.py`, `src/minigpt/release_gate_artifacts.py`, `src/minigpt/generation_quality.py`, `src/minigpt/generation_quality_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio.py`, `src/minigpt/training_portfolio_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/training_portfolio_batch.py`, `src/minigpt/training_portfolio_batch_artifacts.py`, `src/minigpt/experiment_card.py`, `src/minigpt/experiment_card_artifacts.py`, `src/minigpt/project_audit.py`, `src/minigpt/project_audit_artifacts.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/registry_rankings.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/registry_artifacts.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, `src/minigpt/ci_workflow_hygiene.py`, related tests and v83-v146 explanations | Keep hygiene gates and CI runtime aligned with action metadata rather than force flags |
+| Shared report infrastructure | `report_utils` backs the v83-v108 migration series; v109 adds maintenance batching; v110 adds module pressure scanning; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, project-audit, release-gate, maturity, and generation-quality boundaries; v142 adds target-Python compatibility checks to source encoding hygiene; v143 tries the Node 24 runtime opt-in; v144 upgrades actions to Node 24 native versions; v145 turns that workflow policy into a runnable JSON/CSV/Markdown/HTML hygiene gate; v146 feeds CI workflow hygiene evidence into project audit; v147 carries that evidence into release bundles | `src/minigpt/report_utils.py`, `src/minigpt/dashboard.py`, `src/minigpt/dashboard_render.py`, `src/minigpt/maturity.py`, `src/minigpt/maturity_artifacts.py`, `src/minigpt/maturity_narrative.py`, `src/minigpt/maturity_narrative_artifacts.py`, `src/minigpt/release_gate.py`, `src/minigpt/release_gate_artifacts.py`, `src/minigpt/generation_quality.py`, `src/minigpt/generation_quality_artifacts.py`, `src/minigpt/comparison.py`, `src/minigpt/comparison_artifacts.py`, `src/minigpt/training_portfolio.py`, `src/minigpt/training_portfolio_artifacts.py`, `src/minigpt/training_portfolio_comparison.py`, `src/minigpt/training_portfolio_comparison_artifacts.py`, `src/minigpt/training_portfolio_batch.py`, `src/minigpt/training_portfolio_batch_artifacts.py`, `src/minigpt/experiment_card.py`, `src/minigpt/experiment_card_artifacts.py`, `src/minigpt/project_audit.py`, `src/minigpt/project_audit_artifacts.py`, `src/minigpt/release_bundle.py`, `src/minigpt/maintenance_policy.py`, `src/minigpt/maintenance_policy_artifacts.py`, `src/minigpt/registry_assets.py`, `src/minigpt/registry_rankings.py`, `src/minigpt/pair_artifacts.py`, `src/minigpt/request_history.py`, `src/minigpt/benchmark_scorecard_scoring.py`, `src/minigpt/benchmark_scorecard_artifacts.py`, `src/minigpt/benchmark_scorecard_comparison_artifacts.py`, `src/minigpt/playground_assets.py`, `src/minigpt/playground_style.py`, `src/minigpt/playground_script.py`, `src/minigpt/registry_data.py`, `src/minigpt/registry_render.py`, `src/minigpt/registry_artifacts.py`, `src/minigpt/server_contracts.py`, `src/minigpt/server_generator.py`, `src/minigpt/source_encoding_hygiene.py`, `src/minigpt/ci_workflow_hygiene.py`, related tests and v83-v147 explanations | Keep hygiene gates and CI runtime aligned with action metadata rather than force flags |
 
 ## Maturity snapshot
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, and artifact boundaries; v137-v141 enriched generation-quality and scorecard promotion evidence; v142-v145 hardened source and CI workflow hygiene after real CI findings; v146 feeds the new CI hygiene report into project audit. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, and artifact boundaries; v137-v141 enriched generation-quality and scorecard promotion evidence; v142-v145 hardened source and CI workflow hygiene after real CI findings; v146-v147 carry the new CI hygiene evidence through project audit and release bundle. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
 
 ## Capability map
 
@@ -33,13 +33,13 @@ Version 146 connects the v145 CI workflow hygiene report to the project audit. `
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 146 focus
+## Version 147 focus
 
-- Added optional `ci_workflow_hygiene_path` input to `build_project_audit`.
-- Added a `ci_workflow_hygiene` audit check, `ci_workflow_context`, and summary fields such as `ci_workflow_status` and `ci_workflow_failed_checks`.
-- Added `--ci-workflow-hygiene` to `scripts/audit_project.py`.
-- Updated project audit Markdown/HTML to show CI workflow hygiene status.
-- Expanded project audit tests to cover pass and fail CI workflow hygiene evidence.
+- Added optional `ci_workflow_hygiene_path` input to `build_release_bundle`.
+- Let release bundle resolve `ci_workflow_hygiene_path` from `project_audit.json` when present.
+- Added CI workflow status, failed check count, and Node 24 native action count to release bundle summary/context.
+- Added CI workflow hygiene JSON/Markdown/HTML rows to release evidence artifacts.
+- Added `--ci-workflow-hygiene` to `scripts/build_release_bundle.py`.
 
 ## Version tags
 
@@ -192,6 +192,7 @@ v143.0.0 MiniGPT v143 GitHub Actions Node 24 runtime
 v144.0.0 MiniGPT v144 GitHub Actions Node 24 native actions
 v145.0.0 MiniGPT v145 CI workflow hygiene report
 v146.0.0 MiniGPT v146 project audit CI workflow hygiene context
+v147.0.0 MiniGPT v147 release bundle CI workflow hygiene evidence
 ```
 
 ## Project structure
@@ -772,7 +773,13 @@ Build a release evidence bundle:
 python scripts/build_release_bundle.py --registry runs/registry/registry.json --model-card runs/model-card/model_card.json --audit runs/audit/project_audit.json --out-dir runs/release-bundle
 ```
 
-The output directory contains `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`. The bundle summarizes release status, best run, audit score, top runs, evidence artifacts, and recommendations for handoff.
+Recommended with CI workflow hygiene evidence:
+
+```powershell
+python scripts/build_release_bundle.py --registry runs/registry/registry.json --model-card runs/model-card/model_card.json --audit runs/audit/project_audit.json --ci-workflow-hygiene runs/ci-workflow-hygiene/ci_workflow_hygiene.json --out-dir runs/release-bundle
+```
+
+The output directory contains `release_bundle.json`, `release_bundle.md`, and `release_bundle.html`. The bundle summarizes release status, best run, audit score, request-history status, CI workflow hygiene status, top runs, evidence artifacts, and recommendations for handoff.
 
 Check whether a release bundle passes the release gate:
 
@@ -2384,6 +2391,15 @@ Version 146 screenshots are archived under `c/146`:
 - `04-maintenance-smoke.png`: maintenance batching and module pressure smoke after the audit integration
 - `05-full-unittest.png`: full unittest discovery after v146
 - `06-docs-check.png`: README, `c/146`, project-maturity explanation, audit script, project audit, and CI hygiene keyword check
+
+Version 147 screenshots are archived under `c/147`:
+
+- `01-release-bundle-tests.png`: release bundle tests covering CI workflow hygiene summary, context, and evidence artifacts
+- `02-ci-workflow-hygiene-smoke.png`: CI workflow hygiene smoke used as the release-bundle evidence family
+- `03-source-encoding-smoke.png`: source encoding and Python 3.11 compatibility smoke after the bundle integration
+- `04-maintenance-smoke.png`: maintenance batching and module pressure smoke after the bundle integration
+- `05-full-unittest.png`: full unittest discovery after v147
+- `06-docs-check.png`: README, `c/147`, project-maturity explanation, release bundle script, release bundle source, and CI hygiene keyword check
 
 ## Code explanation records
 

@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+161-v147-release-bundle-ci-workflow-hygiene-evidence.md
+ -> 第一百四十七版代码讲解：把 CI workflow hygiene evidence 从 project audit 继续带入 release bundle，发布总包携带 CI workflow 状态、context 和 JSON/Markdown/HTML artifact。
 160-v146-project-audit-ci-workflow-hygiene-context.md
  -> 第一百四十六版代码讲解：把 v145 的 CI workflow hygiene report 接入 project audit，作为项目治理上下文参与审计摘要、check 和输出展示。
 159-v145-ci-workflow-hygiene-report.md
