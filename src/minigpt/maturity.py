@@ -156,7 +156,7 @@ def _discover_published_versions(root: Path) -> list[int]:
 
 def _discover_archive_versions(root: Path) -> list[int]:
     versions = set()
-    for archive_root in [root / "a", root / "b"]:
+    for archive_root in [root / "a", root / "b", root / "c"]:
         if not archive_root.exists():
             continue
         for child in archive_root.iterdir():
@@ -167,10 +167,13 @@ def _discover_archive_versions(root: Path) -> list[int]:
 
 def _discover_explanation_versions(root: Path) -> list[int]:
     versions = set()
-    for path in root.glob("代码讲解记录*/*.md"):
-        match = re.search(r"-v(\d+)-", path.name)
-        if match:
-            versions.add(int(match.group(1)))
+    for directory in root.iterdir():
+        if not directory.is_dir() or not directory.name.startswith("代码讲解记录"):
+            continue
+        for path in directory.glob("*.md"):
+            match = re.search(r"-v(\d+)-", path.name)
+            if match:
+                versions.add(int(match.group(1)))
     return sorted(versions)
 
 
@@ -211,7 +214,7 @@ def _summary(
         average = round(sum(float(item.get("maturity_level") or 0) for item in capabilities) / len(capabilities), 2)
     statuses = [str(item.get("status")) for item in capabilities]
     overall = "fail" if "fail" in statuses else "warn" if "warn" in statuses else "pass"
-    if overall == "pass" and release_readiness_context.get("trend_status") == "regressed":
+    if overall == "pass" and release_readiness_context.get("trend_status") in {"regressed", "ci-regressed"}:
         overall = "warn"
     return {
         "current_version": max(published_versions) if published_versions else None,
@@ -225,6 +228,9 @@ def _summary(
         "release_readiness_delta_count": release_readiness_context.get("delta_count"),
         "release_readiness_regressed_count": release_readiness_context.get("regressed_count"),
         "release_readiness_improved_count": release_readiness_context.get("improved_count"),
+        "release_readiness_ci_workflow_regression_count": release_readiness_context.get("ci_workflow_regression_count"),
+        "release_readiness_ci_workflow_status_changed_count": release_readiness_context.get("ci_workflow_status_changed_count"),
+        "release_readiness_max_ci_workflow_failed_check_delta": release_readiness_context.get("max_abs_ci_workflow_failed_check_delta"),
         "request_history_status": _nested_pick(request_history_summary, "summary", "status"),
         "request_history_records": _nested_pick(request_history_summary, "summary", "total_log_records"),
         "request_history_timeout_rate": _nested_pick(request_history_summary, "summary", "timeout_rate"),
@@ -292,6 +298,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "panel_changed_count": None,
             "changed_panel_delta_count": None,
             "max_abs_status_delta": None,
+            "ci_workflow_regression_count": None,
+            "ci_workflow_status_changed_count": None,
+            "max_abs_ci_workflow_failed_check_delta": None,
         }
     counts = registry.get("release_readiness_comparison_counts")
     delta_summary = _dict(registry.get("release_readiness_delta_summary"))
@@ -306,6 +315,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "same_count": delta_summary.get("same_count"),
         "changed_panel_delta_count": delta_summary.get("changed_panel_delta_count"),
         "max_abs_status_delta": delta_summary.get("max_abs_status_delta"),
+        "ci_workflow_regression_count": delta_summary.get("ci_workflow_regression_count"),
+        "ci_workflow_status_changed_count": delta_summary.get("ci_workflow_status_changed_count"),
+        "max_abs_ci_workflow_failed_check_delta": delta_summary.get("max_abs_ci_workflow_failed_check_delta"),
     }
     context["trend_status"] = _release_readiness_trend_status(context)
     return context
@@ -316,6 +328,8 @@ def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
         return None
     if int(context.get("regressed_count") or 0) > 0:
         return "regressed"
+    if int(context.get("ci_workflow_regression_count") or 0) > 0:
+        return "ci-regressed"
     if int(context.get("improved_count") or 0) > 0:
         return "improved"
     if int(context.get("panel_changed_count") or 0) > 0 or int(context.get("changed_panel_delta_count") or 0) > 0:
@@ -379,6 +393,8 @@ def _recommendations(
         recs.append("Generate a registry with release readiness comparison outputs so maturity review can include release quality trend context.")
     elif int(release_readiness_context.get("regressed_count") or 0) > 0:
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")
+    elif int(release_readiness_context.get("ci_workflow_regression_count") or 0) > 0:
+        recs.append("Review CI workflow hygiene regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("improved_count") or 0) > 0:
         recs.append("Keep release readiness comparison evidence in the registry so improvement history remains visible during maturity review.")
     if not isinstance(request_history_summary, dict):

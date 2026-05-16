@@ -15,11 +15,9 @@ from minigpt.maturity import build_maturity_summary, render_maturity_summary_htm
 def make_project(root: Path, version_count: int = 48) -> Path:
     tags = "\n".join(f"v{version}.0.0 MiniGPT v{version}" for version in range(1, version_count + 1))
     (root / "README.md").write_text("# Demo\n\n" + tags + "\n", encoding="utf-8")
-    for version in range(1, 32):
-        archive = root / "a" / str(version) / "图片"
-        archive.mkdir(parents=True)
-    for version in range(32, version_count + 1):
-        archive = root / "b" / str(version) / "图片"
+    for version in range(1, version_count + 1):
+        archive_root = "a" if version <= 31 else "b" if version <= 68 else "c"
+        archive = root / archive_root / str(version) / "图片"
         archive.mkdir(parents=True)
     docs = root / "代码讲解记录_项目成熟度阶段"
     docs.mkdir(parents=True)
@@ -44,6 +42,9 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "same_count": 1,
                     "changed_panel_delta_count": 1,
                     "max_abs_status_delta": 3,
+                    "ci_workflow_regression_count": 0,
+                    "ci_workflow_status_changed_count": 0,
+                    "max_abs_ci_workflow_failed_check_delta": 0,
                 },
             },
             ensure_ascii=False,
@@ -102,6 +103,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_trend_status"], "improved")
             self.assertEqual(summary["summary"]["release_readiness_delta_count"], 2)
             self.assertEqual(summary["summary"]["release_readiness_regressed_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 0)
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
             self.assertEqual(summary["summary"]["overall_status"], "pass")
@@ -109,6 +111,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["trend_status"], "improved")
             self.assertEqual(summary["release_readiness_context"]["improved_count"], 1)
             self.assertEqual(summary["release_readiness_context"]["max_abs_status_delta"], 3)
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 0)
             self.assertEqual(summary["request_history_context"]["timeout_rate"], 0.25)
             capability_titles = [item["title"] for item in summary["capabilities"]]
             self.assertIn("Project Synthesis", capability_titles)
@@ -116,6 +119,16 @@ class MaturitySummaryTests(unittest.TestCase):
             local_inference = next(item for item in summary["capabilities"] if item["key"] == "local_inference")
             self.assertIn(60, local_inference["covered_versions"])
             self.assertEqual(local_inference["target_level"], 5)
+
+    def test_archive_discovery_counts_c_phase(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=70)
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["current_version"], 70)
+            self.assertEqual(summary["summary"]["archive_version_count"], 70)
 
     def test_write_maturity_summary_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -154,6 +167,29 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_trend_status"], "regressed")
             self.assertEqual(summary["summary"]["overall_status"], "warn")
             self.assertIn("release readiness regressions", " ".join(summary["recommendations"]))
+
+    def test_ci_workflow_regression_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"ci-regressed": 1}
+            registry["release_readiness_delta_summary"]["regressed_count"] = 0
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["ci_workflow_regression_count"] = 1
+            registry["release_readiness_delta_summary"]["ci_workflow_status_changed_count"] = 1
+            registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"] = 2
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "ci-regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_status_changed_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_failed_check_delta"], 2)
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 1)
+            self.assertIn("CI workflow hygiene regressions", " ".join(summary["recommendations"]))
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

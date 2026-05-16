@@ -30,6 +30,7 @@ class MaturityArtifactSplitTests(unittest.TestCase):
                 "release_readiness_trend_status": "improved",
                 "release_readiness_delta_count": 2,
                 "release_readiness_regressed_count": 0,
+                "release_readiness_ci_workflow_regression_count": 1,
                 "request_history_status": "watch",
                 "request_history_records": 4,
             },
@@ -51,7 +52,7 @@ class MaturityArtifactSplitTests(unittest.TestCase):
             ],
             "phase_timeline": [{"versions": "v1-v12", "title": "MiniGPT learning core", "covered_count": 12, "target_count": 12, "status": "pass"}],
             "registry_context": {"available": True, "run_count": 2, "pair_report_counts": {"pair_batch": 1}, "pair_delta_cases": 6, "pair_delta_max_generated": 11, "quality_counts": {"pass": 1}, "generation_quality_counts": {"pass": 2}},
-            "release_readiness_context": {"available": True, "trend_status": "improved", "comparison_counts": {"improved": 1}, "delta_count": 2, "run_count": 2, "regressed_count": 0, "improved_count": 1, "panel_changed_count": 0, "changed_panel_delta_count": 1, "max_abs_status_delta": 3},
+            "release_readiness_context": {"available": True, "trend_status": "improved", "comparison_counts": {"improved": 1}, "delta_count": 2, "run_count": 2, "regressed_count": 0, "improved_count": 1, "panel_changed_count": 0, "changed_panel_delta_count": 1, "max_abs_status_delta": 3, "ci_workflow_regression_count": 1, "ci_workflow_status_changed_count": 1, "max_abs_ci_workflow_failed_check_delta": 2},
             "request_history_context": {"available": True, "status": "watch", "total_log_records": 4, "invalid_record_count": 0, "ok_count": 3, "timeout_count": 1, "bad_request_count": 0, "error_count": 0, "timeout_rate": 0.25, "error_rate": 0.0, "unique_checkpoint_count": 2, "latest_timestamp": "2026-05-15T00:00:00Z"},
             "recommendations": ["Keep maturity evidence current."],
         }
@@ -66,6 +67,8 @@ class MaturityArtifactSplitTests(unittest.TestCase):
             self.assertIn("Maturity &lt;summary&gt;", html)
             self.assertNotIn("Maturity <summary>", html)
             self.assertIn("## Release Readiness Trend Context", markdown)
+            self.assertIn("CI workflow regressions", markdown)
+            self.assertIn("CI workflow regressions", html)
             self.assertIn("## Request History Context", markdown)
 
     def test_maturity_module_keeps_legacy_artifact_exports(self) -> None:

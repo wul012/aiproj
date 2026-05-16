@@ -38,6 +38,8 @@ def main() -> None:
     print(f"release_readiness_trend_status={overview.get('release_readiness_trend_status')}")
     print(f"release_readiness_delta_count={overview.get('release_readiness_delta_count')}")
     print(f"release_readiness_regressed_count={overview.get('release_readiness_regressed_count')}")
+    print(f"release_readiness_ci_workflow_regression_count={overview.get('release_readiness_ci_workflow_regression_count')}")
+    print(f"release_readiness_ci_workflow_status_changed_count={overview.get('release_readiness_ci_workflow_status_changed_count')}")
     print(f"request_history_status={overview.get('request_history_status')}")
     print(f"request_history_records={overview.get('request_history_records')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

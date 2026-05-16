@@ -58,6 +58,7 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Release readiness trend", overview.get("release_readiness_trend_status")),
                 ("Release readiness deltas", overview.get("release_readiness_delta_count")),
                 ("Release readiness regressions", overview.get("release_readiness_regressed_count")),
+                ("Release readiness CI workflow regressions", overview.get("release_readiness_ci_workflow_regression_count")),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -125,6 +126,9 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     ("Panel changed", release_readiness.get("panel_changed_count")),
                     ("Changed panels", release_readiness.get("changed_panel_delta_count")),
                     ("Max status delta", release_readiness.get("max_abs_status_delta")),
+                    ("CI workflow regressions", release_readiness.get("ci_workflow_regression_count")),
+                    ("CI workflow status changes", release_readiness.get("ci_workflow_status_changed_count")),
+                    ("Max CI workflow failed-check delta", release_readiness.get("max_abs_ci_workflow_failed_check_delta")),
                 ]
             ),
         ]
@@ -156,6 +160,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("Pair deltas", registry.get("pair_delta_cases")),
         ("Release trend", release_readiness.get("trend_status")),
         ("Readiness deltas", release_readiness.get("delta_count")),
+        ("CI regressions", release_readiness.get("ci_workflow_regression_count")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -274,6 +279,9 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         ("Panel changed", release_readiness.get("panel_changed_count")),
         ("Changed panels", release_readiness.get("changed_panel_delta_count")),
         ("Max status delta", release_readiness.get("max_abs_status_delta")),
+        ("CI workflow regressions", release_readiness.get("ci_workflow_regression_count")),
+        ("CI workflow status changes", release_readiness.get("ci_workflow_status_changed_count")),
+        ("Max CI workflow failed-check delta", release_readiness.get("max_abs_ci_workflow_failed_check_delta")),
     ]
     return '<section class="panel"><h2>Release Readiness Trend Context</h2><table>' + "".join(
         f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+165-v151-maturity-ci-workflow-readiness-context.md
+ -> 第一百五十一版代码讲解：把 registry 汇总出的 CI workflow readiness regression 接入 maturity summary，形成 maturity review 级别的 `ci-regressed` 趋势、CLI/Markdown/HTML 展示和 `c/` 证据计数对齐。
+
 164-v150-registry-ci-workflow-readiness-regression.md
  -> 第一百五十版代码讲解：把 release readiness comparison 的 CI workflow regression 汇总进 registry，形成 dashboard -> comparison -> registry 的连续治理链。
 163-v149-release-readiness-comparison-ci-workflow-deltas.md
