@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.data_prep import build_prepared_dataset, write_prepared_dataset
+from minigpt import dataset_card_artifacts
+from minigpt import dataset_card as dataset_card_facade
 from minigpt.dataset_card import (
     build_dataset_card,
     render_dataset_card_html,
@@ -112,6 +114,11 @@ class DatasetCardTests(unittest.TestCase):
             self.assertEqual(card["summary"]["readiness_status"], "incomplete")
             self.assertTrue(card["warnings"])
             self.assertIn("Resolve missing or invalid dataset evidence files", " ".join(card["recommendations"]))
+
+    def test_facade_keeps_legacy_artifact_exports(self) -> None:
+        self.assertIs(dataset_card_facade.write_dataset_card_outputs, dataset_card_artifacts.write_dataset_card_outputs)
+        self.assertIs(dataset_card_facade.render_dataset_card_html, dataset_card_artifacts.render_dataset_card_html)
+        self.assertIs(dataset_card_facade.render_dataset_card_markdown, dataset_card_artifacts.render_dataset_card_markdown)
 
 
 if __name__ == "__main__":

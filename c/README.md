@@ -289,6 +289,9 @@ c/159/解释/说明.md
 c/160/图片
 c/160/解释/说明.md
  -> v160 training scale promotion artifact split 的运行截图和解释
+c/161/图片
+c/161/解释/说明.md
+ -> v161 dataset card artifact split 的运行截图和解释
 ```
 
 写入规则：
