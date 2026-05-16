@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+163-v149-release-readiness-comparison-ci-workflow-deltas.md
+ -> 第一百四十九版代码讲解：把 CI workflow hygiene 状态接入 release readiness comparison，比较跨版本 CI 状态、failed check delta 和 regression 建议。
 162-v148-release-readiness-ci-workflow-hygiene-panel.md
  -> 第一百四十八版代码讲解：把 CI workflow hygiene evidence 从 release bundle 继续带入 release readiness dashboard，新增独立面板、summary 字段、CLI 参数，并保持 review 而非 hard block 边界。
 161-v147-release-bundle-ci-workflow-hygiene-evidence.md

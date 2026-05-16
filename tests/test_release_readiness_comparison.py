@@ -31,6 +31,8 @@ def make_readiness(
     gate_status: str,
     request_status: str = "pass",
     audit_score: float = 100.0,
+    ci_workflow_status: str = "pass",
+    ci_workflow_failed_checks: int = 0,
     fail_panels: int = 0,
     warn_panels: int = 0,
 ) -> Path:
@@ -42,6 +44,7 @@ def make_readiness(
         "release_gate": "pass" if gate_status == "pass" else "fail",
         "request_history": "pass" if request_status == "pass" else "warn",
         "maturity": "pass",
+        "ci_workflow_hygiene": "pass" if ci_workflow_status == "pass" else "warn",
     }
     report = {
         "schema_version": 1,
@@ -53,6 +56,9 @@ def make_readiness(
             "gate_status": gate_status,
             "audit_status": "pass",
             "audit_score_percent": audit_score,
+            "ci_workflow_status": ci_workflow_status,
+            "ci_workflow_failed_checks": ci_workflow_failed_checks,
+            "ci_workflow_node24_actions": 2 if ci_workflow_status == "pass" else 1,
             "request_history_status": request_status,
             "maturity_status": "pass",
             "ready_runs": 1,
@@ -85,6 +91,7 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertEqual(delta["delta_status"], "improved")
             self.assertGreater(delta["status_delta"], 0)
             self.assertIn("release_gate:fail->pass", delta["changed_panels"])
+            self.assertEqual(delta["ci_workflow_failed_check_delta"], 0)
             self.assertIn("Readiness improved", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_marks_regression_with_baseline_override(self) -> None:
@@ -102,6 +109,30 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertLess(delta["status_delta"], 0)
             self.assertIn("regressed", " ".join(report["recommendations"]))
 
+    def test_build_release_readiness_comparison_flags_ci_workflow_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(root, "baseline", status="ready", decision="ship", gate_status="pass")
+            current = make_readiness(
+                root,
+                "current",
+                status="review",
+                decision="review",
+                gate_status="pass",
+                ci_workflow_status="fail",
+                ci_workflow_failed_checks=2,
+                warn_panels=1,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["ci_workflow_regression_count"], 1)
+            delta = report["deltas"][0]
+            self.assertTrue(delta["ci_workflow_status_changed"])
+            self.assertEqual(delta["ci_workflow_failed_check_delta"], 2)
+            self.assertIn("ci_workflow_hygiene:pass->warn", delta["changed_panels"])
+            self.assertIn("CI workflow hygiene regression", " ".join(report["recommendations"]))
+
     def test_write_release_readiness_comparison_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -117,7 +148,9 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertTrue(Path(outputs["markdown"]).exists())
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("readiness_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("ci_workflow_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("changed_panels", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
+            self.assertIn("ci_workflow_failed_check_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Readiness Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 
     def test_renderers_escape_release_text(self) -> None:
