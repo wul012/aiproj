@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+176-v162-model-card-artifact-split.md
+ -> 第一百六十二版代码讲解：把 `model_card.py` 的 JSON/Markdown/HTML artifact 写出和渲染拆到 `model_card_artifacts.py`，保持 model card schema、CLI 和旧导出不变。
 175-v161-dataset-card-artifact-split.md
  -> 第一百六十一版代码讲解：把 `dataset_card.py` 的 JSON/Markdown/HTML artifact 写出和渲染拆到 `dataset_card_artifacts.py`，保持 dataset card schema、CLI 和旧导出不变。
 174-v160-training-scale-promotion-artifact-split.md

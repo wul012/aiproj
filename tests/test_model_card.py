@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import model_card_artifacts
+from minigpt import model_card as model_card_facade
 from minigpt.model_card import build_model_card, render_model_card_html, write_model_card_outputs
 
 
@@ -161,6 +163,11 @@ class ModelCardTests(unittest.TestCase):
             self.assertIn("&lt;Model Card&gt;", html)
             self.assertIn("&lt;script&gt;", html)
             self.assertNotIn("<strong><script>", html)
+
+    def test_facade_keeps_legacy_artifact_exports(self) -> None:
+        self.assertIs(model_card_facade.write_model_card_outputs, model_card_artifacts.write_model_card_outputs)
+        self.assertIs(model_card_facade.render_model_card_html, model_card_artifacts.render_model_card_html)
+        self.assertIs(model_card_facade.render_model_card_markdown, model_card_artifacts.render_model_card_markdown)
 
 
 if __name__ == "__main__":

@@ -292,6 +292,9 @@ c/160/解释/说明.md
 c/161/图片
 c/161/解释/说明.md
  -> v161 dataset card artifact split 的运行截图和解释
+c/162/图片
+c/162/解释/说明.md
+ -> v162 model card artifact split 的运行截图和解释
 ```
 
 写入规则：
