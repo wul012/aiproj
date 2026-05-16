@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+187-v173-training-scale-run-decision-artifact-split.md
+ -> v173 code explanation: split training scale run decision JSON/CSV/Markdown/HTML artifact writers into `training_scale_run_decision_artifacts.py`, while keeping candidate selection, rejection reasons, readiness thresholds, execute command construction, workflow usage, and old facade exports unchanged.
 
 186-v172-eval-suite-artifact-split.md
  -> v172 code explanation: split eval suite JSON/CSV/SVG/HTML artifact writers into `eval_suite_artifacts.py`, while keeping prompt suite loading, prompt result construction, eval report schema, CLI usage, and old facade exports unchanged.

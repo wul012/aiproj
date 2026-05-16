@@ -22,6 +22,8 @@ from minigpt.training_scale_run_decision import (  # noqa: E402
     render_training_scale_run_decision_markdown,
     write_training_scale_run_decision_outputs,
 )
+from minigpt import training_scale_run_decision  # noqa: E402
+from minigpt import training_scale_run_decision_artifacts  # noqa: E402
 
 
 class TrainingScaleRunDecisionTests(unittest.TestCase):
@@ -106,6 +108,16 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
 
             with self.assertRaises(ValueError):
                 build_training_scale_run_decision(comparison)
+
+    def test_decision_module_reexports_artifact_writers(self) -> None:
+        self.assertIs(
+            training_scale_run_decision.write_training_scale_run_decision_outputs,
+            training_scale_run_decision_artifacts.write_training_scale_run_decision_outputs,
+        )
+        self.assertIs(
+            training_scale_run_decision.render_training_scale_run_decision_html,
+            training_scale_run_decision_artifacts.render_training_scale_run_decision_html,
+        )
 
     def _make_comparison(self, root: Path, names: list[str] | None = None) -> Path:
         source = root / "corpus.txt"

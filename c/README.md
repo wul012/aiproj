@@ -325,6 +325,9 @@ c/171/解释/说明.md
 c/172/图片
 c/172/解释/说明.md
  -> v172 eval suite artifact split 的运行截图和解释
+c/173/图片
+c/173/解释/说明.md
+ -> v173 training scale run decision artifact split 的运行截图和解释
 ```
 
 写入规则：
