@@ -400,7 +400,8 @@ def _list_section(title: str, items: Any) -> str:
     values = _string_list(items)
     if not values:
         return ""
-    return f'<section class="panel"><h2>{_e(title)}</h2><ul>{''.join(f'<li>{_e(item)}</li>' for item in values)}</ul></section>'
+    items_html = "".join(f"<li>{_e(item)}</li>" for item in values)
+    return f'<section class="panel"><h2>{_e(title)}</h2><ul>{items_html}</ul></section>'
 
 
 def _style() -> str:
