@@ -313,6 +313,9 @@ c/167/解释/说明.md
 c/168/图片
 c/168/解释/说明.md
  -> v168 promoted training scale seed artifact split 的运行截图和解释
+c/169/图片
+c/169/解释/说明.md
+ -> v169 promoted training scale seed handoff artifact split 的运行截图和解释
 ```
 
 写入规则：

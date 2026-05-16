@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import promoted_training_scale_seed_handoff as handoff_module  # noqa: E402
+from minigpt import promoted_training_scale_seed_handoff_artifacts as artifact_module  # noqa: E402
 from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     build_promoted_training_scale_seed_handoff,
     render_promoted_training_scale_seed_handoff_html,
@@ -18,6 +20,20 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
 
 
 class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
+    def test_artifact_functions_are_reexported_from_handoff_module(self) -> None:
+        self.assertIs(
+            handoff_module.render_promoted_training_scale_seed_handoff_html,
+            artifact_module.render_promoted_training_scale_seed_handoff_html,
+        )
+        self.assertIs(
+            handoff_module.render_promoted_training_scale_seed_handoff_markdown,
+            artifact_module.render_promoted_training_scale_seed_handoff_markdown,
+        )
+        self.assertIs(
+            handoff_module.write_promoted_training_scale_seed_handoff_outputs,
+            artifact_module.write_promoted_training_scale_seed_handoff_outputs,
+        )
+
     def test_validates_ready_seed_without_executing(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

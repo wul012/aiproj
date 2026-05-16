@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+183-v169-promoted-training-scale-seed-handoff-artifact-split.md
+ -> v169 code explanation: split promoted seed handoff JSON/CSV/Markdown/HTML artifact writers into `promoted_training_scale_seed_handoff_artifacts.py`, while keeping handoff schema, command execution, timeout handling, plan artifact detection, and old facade exports unchanged.
 182-v168-promoted-training-scale-seed-artifact-split.md
  -> 第一百六十八版代码讲解：把 `promoted_training_scale_seed.py` 的 JSON/CSV/Markdown/HTML artifact 写出和渲染拆到 `promoted_training_scale_seed_artifacts.py`，保持 seed schema、next-plan 命令和旧 facade 导出不变。
 
