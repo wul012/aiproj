@@ -34,6 +34,9 @@ def make_scorecard(
     qa_failed: list[str],
     summary_missing: list[str],
     weakest: str,
+    generation_flags: int = 0,
+    dominant_flag: str | None = None,
+    worst_generation_case: str | None = None,
 ) -> Path:
     run_dir = root / "runs" / name
     scorecard_path = run_dir / "benchmark-scorecard" / "benchmark_scorecard.json"
@@ -58,6 +61,10 @@ def make_scorecard(
                 "rubric_fail_count": sum(1 for item in [qa_status, summary_status] if item == "fail"),
                 "weakest_rubric_case": weakest,
                 "weakest_rubric_score": min(qa_score, summary_score),
+                "generation_quality_total_flags": generation_flags,
+                "generation_quality_dominant_flag": dominant_flag,
+                "generation_quality_worst_case": worst_generation_case,
+                "generation_quality_worst_case_status": "fail" if generation_flags else None,
                 "weakest_task_type": "qa" if qa_score <= summary_score else "summary",
                 "weakest_task_type_score": min(qa_score, summary_score),
                 "weakest_difficulty": "hard" if qa_score <= summary_score else "medium",
@@ -169,8 +176,34 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
     def test_build_comparison_records_run_and_case_deltas(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            baseline = make_scorecard(root, "baseline", overall=88, qa_score=90, summary_score=86, qa_missing=[], qa_failed=[], summary_missing=[], weakest="summary-short")
-            stronger = make_scorecard(root, "stronger", overall=92, qa_score=94, summary_score=90, qa_missing=[], qa_failed=[], summary_missing=[], weakest="summary-short")
+            baseline = make_scorecard(
+                root,
+                "baseline",
+                overall=88,
+                qa_score=90,
+                summary_score=86,
+                qa_missing=[],
+                qa_failed=[],
+                summary_missing=[],
+                weakest="summary-short",
+                generation_flags=4,
+                dominant_flag="low_diversity",
+                worst_generation_case="summary-short",
+            )
+            stronger = make_scorecard(
+                root,
+                "stronger",
+                overall=92,
+                qa_score=94,
+                summary_score=90,
+                qa_missing=[],
+                qa_failed=[],
+                summary_missing=[],
+                weakest="summary-short",
+                generation_flags=1,
+                dominant_flag="low_diversity",
+                worst_generation_case="summary-short",
+            )
             regressed = make_scorecard(
                 root,
                 "regressed",
@@ -181,6 +214,9 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
                 qa_failed=["must_include"],
                 summary_missing=[],
                 weakest="qa-basic",
+                generation_flags=7,
+                dominant_flag="empty_continuation",
+                worst_generation_case="qa-basic",
             )
 
             report = build_benchmark_scorecard_comparison(
@@ -195,10 +231,22 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
             self.assertEqual(report["best_by_rubric_avg_score"]["name"], "candidate")
             self.assertEqual(report["summary"]["improved_rubric_count"], 1)
             self.assertEqual(report["summary"]["regressed_rubric_count"], 1)
+            self.assertEqual(report["summary"]["generation_quality_flag_improvement_count"], 1)
+            self.assertEqual(report["summary"]["generation_quality_flag_regression_count"], 1)
+            self.assertEqual(report["summary"]["generation_quality_dominant_flag_change_count"], 1)
+            self.assertEqual(report["summary"]["baseline_generation_quality_dominant_flag"], "low_diversity")
+            self.assertEqual(report["summary"]["worst_generation_quality_flag_regression_run"], "bad")
+            self.assertEqual(report["summary"]["worst_generation_quality_flag_regression_delta"], 3)
             self.assertEqual(report["summary"]["case_regression_count"], 1)
             self.assertEqual(report["summary"]["weakest_case_regression"], "qa-basic")
             bad_delta = next(row for row in report["baseline_deltas"] if row["name"] == "bad")
             self.assertEqual(bad_delta["rubric_relation"], "regressed")
+            self.assertEqual(bad_delta["generation_quality_total_flags_delta"], 3)
+            self.assertEqual(bad_delta["generation_quality_flag_relation"], "regressed")
+            self.assertTrue(bad_delta["generation_quality_dominant_flag_changed"])
+            candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
+            self.assertEqual(candidate_delta["generation_quality_total_flags_delta"], -3)
+            self.assertEqual(candidate_delta["generation_quality_flag_relation"], "improved")
             self.assertTrue(bad_delta["weakest_case_changed"])
             qa_delta = next(row for row in report["case_deltas"] if row["run_name"] == "bad" and row["case"] == "qa-basic")
             self.assertEqual(qa_delta["relation"], "regressed")
@@ -215,8 +263,34 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
     def test_write_outputs_and_renderers(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            baseline = make_scorecard(root, "baseline", overall=88, qa_score=90, summary_score=86, qa_missing=[], qa_failed=[], summary_missing=[], weakest="summary-short")
-            regressed = make_scorecard(root, "regressed", overall=80, qa_score=62, summary_score=88, qa_missing=["事实"], qa_failed=["must_include"], summary_missing=[], weakest="qa-basic")
+            baseline = make_scorecard(
+                root,
+                "baseline",
+                overall=88,
+                qa_score=90,
+                summary_score=86,
+                qa_missing=[],
+                qa_failed=[],
+                summary_missing=[],
+                weakest="summary-short",
+                generation_flags=2,
+                dominant_flag="low_diversity",
+                worst_generation_case="summary-short",
+            )
+            regressed = make_scorecard(
+                root,
+                "regressed",
+                overall=80,
+                qa_score=62,
+                summary_score=88,
+                qa_missing=["事实"],
+                qa_failed=["must_include"],
+                summary_missing=[],
+                weakest="qa-basic",
+                generation_flags=5,
+                dominant_flag="empty_continuation",
+                worst_generation_case="qa-basic",
+            )
             report = build_benchmark_scorecard_comparison([baseline, regressed], names=["<base>", "<bad>"])
 
             outputs = write_benchmark_scorecard_comparison_outputs(report, root / "out")
@@ -226,8 +300,11 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "case_delta_csv", "markdown", "html"})
             self.assertIn("benchmark_scorecard_comparison", Path(outputs["json"]).name)
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("generation_quality_total_flags_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("added_missing_terms", Path(outputs["case_delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Case Deltas", markdown)
+            self.assertIn("Dominant Flag", markdown)
+            self.assertIn("Gen Flags", html)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("Case Deltas", html)
             self.assertNotIn("<strong><base>", html)

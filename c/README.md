@@ -223,6 +223,9 @@ c/137/解释/说明.md
 c/138/图片
 c/138/解释/说明.md
  -> v138 benchmark scorecard flag taxonomy 的运行截图和解释
+c/139/鍥剧墖
+c/139/瑙ｉ噴/璇存槑.md
+ -> v139 benchmark scorecard comparison flag taxonomy 鐨勮繍琛屾埅鍥惧拰瑙ｉ噴
 ```
 
 写入规则：

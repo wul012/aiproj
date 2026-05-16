@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+153-v139-benchmark-scorecard-comparison-flag-taxonomy.md
+ -> 第一百三十九版代码讲解：把 benchmark scorecard 的 generation-quality flag taxonomy 接入跨 scorecard comparison，比较 total flags delta、dominant flag 变化和 worst generation case 变化，让 promotion review 能看到分数背后的问题类型漂移。
 152-v138-benchmark-scorecard-flag-taxonomy.md
  -> 第一百三十八版代码讲解：把 generation quality 的 flag taxonomy 接入 benchmark scorecard，让 run 级评分入口能看到 total flags、dominant flag、worst generation case 和 flag penalty。
 151-v137-generation-quality-flag-taxonomy.md

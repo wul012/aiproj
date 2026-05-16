@@ -43,6 +43,10 @@ def main() -> None:
     print("best_by_overall_score=" + json.dumps(report["best_by_overall_score"], ensure_ascii=False))
     print("best_by_rubric_avg_score=" + json.dumps(report["best_by_rubric_avg_score"], ensure_ascii=False))
     print("summary=" + json.dumps(report["summary"], ensure_ascii=False))
+    summary = report["summary"]
+    print(f"generation_quality_flag_regression_count={summary.get('generation_quality_flag_regression_count')}")
+    print(f"generation_quality_flag_improvement_count={summary.get('generation_quality_flag_improvement_count')}")
+    print(f"baseline_generation_quality_dominant_flag={summary.get('baseline_generation_quality_dominant_flag')}")
     for key, path in outputs.items():
         print(f"saved_{key}={path}")
 

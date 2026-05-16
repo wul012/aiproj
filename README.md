@@ -4,13 +4,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 138 carries the generation-quality flag taxonomy into the run-level benchmark scorecard. `benchmark_scorecard.py` now reads `summary.flag_summary`, applies a small flag-density penalty to the generation-quality component, and exposes total flags, dominant flag, and worst generation case in scorecard summaries, recommendations, Markdown, HTML, and CLI smoke output.
+Version 139 carries the scorecard-level generation-quality flag taxonomy into cross-run benchmark scorecard comparison. `benchmark_scorecard_comparison.py` now compares total generation flags, dominant flag changes, and worst generation case changes across scorecards, while the comparison CSV/Markdown/HTML/CLI outputs expose those deltas as promotion-review evidence.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
-| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, generation-quality flag taxonomy, and scorecard-level flag taxonomy consumption | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
+| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, generation-quality flag taxonomy, scorecard-level flag taxonomy consumption, and cross-scorecard flag taxonomy deltas | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline with extracted artifact writers, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122/c132 archives | Move from dry-run/governance evidence toward real promoted training runs |
@@ -21,7 +21,7 @@ Version 138 carries the generation-quality flag taxonomy into the run-level benc
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs; v133 extracts registry ranking and delta aggregation; v134 extracts maturity narrative artifact outputs; v135 extracts release gate artifact outputs; v136 extracts generation quality artifact outputs and closes the current two-step split cycle; v137 deliberately shifts back to evidence enrichment with generation-quality flag taxonomy; v138 carries that taxonomy into the benchmark scorecard instead of starting another split run. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs; v133 extracts registry ranking and delta aggregation; v134 extracts maturity narrative artifact outputs; v135 extracts release gate artifact outputs; v136 extracts generation quality artifact outputs and closes the current two-step split cycle; v137 deliberately shifts back to evidence enrichment with generation-quality flag taxonomy; v138 carries that taxonomy into the benchmark scorecard; v139 carries it into cross-run scorecard comparison instead of starting another split run. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
 
 ## Capability map
 
@@ -33,14 +33,14 @@ Version 138 carries the generation-quality flag taxonomy into the run-level benc
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 138 focus
+## Version 139 focus
 
-- Updated `src/minigpt/benchmark_scorecard.py` to consume `summary.flag_summary` from generation-quality reports.
-- Added scorecard summary fields for generation-quality total flags, dominant flag, worst case, and worst-case status.
-- Applied a capped flag-density penalty to the generation-quality component while preserving the existing pass/warn/fail score base.
-- Updated benchmark scorecard Markdown/HTML and CLI output so `Dominant generation flag`, `Gen flags`, and `generation_quality_worst_case` are visible outside the raw JSON.
-- Strengthened benchmark scorecard tests around `raw_score`, `flag_penalty`, dominant flag, worst generation case, and report rendering.
-- Reran benchmark scorecard tests, compile checks, scorecard taxonomy smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/138`.
+- Updated `src/minigpt/benchmark_scorecard_comparison.py` to lift scorecard summary fields for generation-quality total flags, dominant flag, and worst generation case into each compared run.
+- Added cross-run deltas for `generation_quality_total_flags`, dominant flag changes, worst generation case changes, and flag-improvement/regression counts.
+- Updated comparison recommendations so increased generation-quality flags are treated as promotion-review risk even when the rest of the scorecard still renders.
+- Updated comparison CSV/Markdown/HTML and CLI output so `Gen Flags`, dominant flag, and flag regression/improvement counts are visible outside raw JSON.
+- Strengthened benchmark scorecard comparison tests around flag deltas, taxonomy shifts, CSV headers, and report rendering.
+- Reran comparison tests, compile checks, scorecard-comparison taxonomy smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/139`.
 
 ## Version tags
 
@@ -185,6 +185,7 @@ v135.0.0 MiniGPT v135 release gate artifact split
 v136.0.0 MiniGPT v136 generation quality artifact split
 v137.0.0 MiniGPT v137 generation quality flag taxonomy
 v138.0.0 MiniGPT v138 benchmark scorecard flag taxonomy
+v139.0.0 MiniGPT v139 benchmark scorecard comparison flag taxonomy
 ```
 
 ## Project structure
@@ -2303,6 +2304,14 @@ Version 138 screenshots are archived under `c/138`:
 - `03-benchmark-scorecard-taxonomy-smoke.png`: generated benchmark scorecard JSON/CSV/Markdown/HTML outputs with generation-quality total flags, dominant flag, penalty, and worst case checks
 - `04-playwright-benchmark-scorecard-html.png`: generated benchmark scorecard HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v138 README, c/138 archive, project-maturity explanation, and source encoding check
+
+Version 139 screenshots are archived under `c/139`:
+
+- `01-unit-tests.png`: benchmark scorecard comparison flag taxonomy tests, compile check, and full unittest discovery
+- `02-maintenance-smoke.png`: maintenance batching and module pressure smoke after comparison taxonomy consumption
+- `03-benchmark-scorecard-comparison-taxonomy-smoke.png`: generated scorecard comparison JSON/CSV/Markdown/HTML outputs with generation-quality flag deltas, dominant flag changes, worst case changes, and CLI summary checks
+- `04-playwright-benchmark-scorecard-comparison-html.png`: generated scorecard comparison HTML opened through Playwright with installed Google Chrome
+- `05-docs-check.png`: v139 README, c/139 archive, project-maturity explanation, and source encoding check
 
 ## Code explanation records
 

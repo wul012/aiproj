@@ -121,6 +121,10 @@ def _scorecard_run_summary(scorecard: dict[str, Any], name: str, index: int) -> 
         "rubric_fail_count": _as_int(_first_present(summary, rubric_summary, "rubric_fail_count", "fail_count")),
         "weakest_rubric_case": _first_present(summary, rubric_summary, "weakest_rubric_case", "weakest_case"),
         "weakest_rubric_score": _number(_first_present(summary, rubric_summary, "weakest_rubric_score", "weakest_score")),
+        "generation_quality_total_flags": _as_int(summary.get("generation_quality_total_flags")),
+        "generation_quality_dominant_flag": summary.get("generation_quality_dominant_flag"),
+        "generation_quality_worst_case": summary.get("generation_quality_worst_case"),
+        "generation_quality_worst_case_status": summary.get("generation_quality_worst_case_status"),
         "weakest_task_type": summary.get("weakest_task_type"),
         "weakest_task_type_score": _number(summary.get("weakest_task_type_score")),
         "weakest_difficulty": summary.get("weakest_difficulty"),
@@ -151,19 +155,25 @@ def _select_baseline(runs: list[dict[str, Any]], baseline: str | int | None) -> 
 def _run_delta(run: dict[str, Any], baseline: dict[str, Any]) -> dict[str, Any]:
     overall_delta = _delta(run.get("overall_score"), baseline.get("overall_score"))
     rubric_delta = _delta(run.get("rubric_avg_score"), baseline.get("rubric_avg_score"))
+    flag_delta = _int_delta(run.get("generation_quality_total_flags"), baseline.get("generation_quality_total_flags"))
+    is_baseline = run.get("source_path") == baseline.get("source_path") and run.get("name") == baseline.get("name")
     row = {
         "name": run.get("name"),
         "source_path": run.get("source_path"),
         "baseline_name": baseline.get("name"),
-        "is_baseline": run.get("source_path") == baseline.get("source_path") and run.get("name") == baseline.get("name"),
+        "is_baseline": is_baseline,
         "overall_score_delta": overall_delta,
         "rubric_avg_score_delta": rubric_delta,
         "rubric_pass_count_delta": _int_delta(run.get("rubric_pass_count"), baseline.get("rubric_pass_count")),
         "rubric_warn_count_delta": _int_delta(run.get("rubric_warn_count"), baseline.get("rubric_warn_count")),
         "rubric_fail_count_delta": _int_delta(run.get("rubric_fail_count"), baseline.get("rubric_fail_count")),
         "weakest_case_changed": _changed(run.get("weakest_rubric_case"), baseline.get("weakest_rubric_case")),
-        "overall_relation": _score_relation(overall_delta, is_baseline=run.get("name") == baseline.get("name")),
-        "rubric_relation": _score_relation(rubric_delta, is_baseline=run.get("name") == baseline.get("name")),
+        "generation_quality_total_flags_delta": flag_delta,
+        "generation_quality_flag_relation": _flag_relation(flag_delta, is_baseline=is_baseline),
+        "generation_quality_dominant_flag_changed": _changed(run.get("generation_quality_dominant_flag"), baseline.get("generation_quality_dominant_flag")),
+        "generation_quality_worst_case_changed": _changed(run.get("generation_quality_worst_case"), baseline.get("generation_quality_worst_case")),
+        "overall_relation": _score_relation(overall_delta, is_baseline=is_baseline),
+        "rubric_relation": _score_relation(rubric_delta, is_baseline=is_baseline),
     }
     row["explanation"] = _run_explanation(row, run, baseline)
     return row
@@ -296,14 +306,28 @@ def _comparison_summary(
     regressions = [row for row in comparable_cases if float(row.get("rubric_score_delta") or 0) < 0]
     improvements = [row for row in comparable_cases if float(row.get("rubric_score_delta") or 0) > 0]
     weakest = min(regressions, key=lambda row: (float(row.get("rubric_score_delta") or 0), str(row.get("case"))), default={})
+    flag_rows = [row for row in deltas if not row.get("is_baseline") and row.get("generation_quality_total_flags_delta") is not None]
+    flag_regressions = [row for row in flag_rows if int(row.get("generation_quality_total_flags_delta") or 0) > 0]
+    flag_improvements = [row for row in flag_rows if int(row.get("generation_quality_total_flags_delta") or 0) < 0]
+    worst_flag_regression = max(flag_regressions, key=lambda row: (int(row.get("generation_quality_total_flags_delta") or 0), str(row.get("name"))), default={})
     return {
         "baseline_name": baseline.get("name"),
         "baseline_source_path": baseline.get("source_path"),
+        "baseline_generation_quality_total_flags": baseline.get("generation_quality_total_flags"),
+        "baseline_generation_quality_dominant_flag": baseline.get("generation_quality_dominant_flag"),
+        "baseline_generation_quality_worst_case": baseline.get("generation_quality_worst_case"),
         "scorecard_count": len(runs),
         "improved_overall_count": sum(1 for row in deltas if row.get("overall_relation") == "improved"),
         "regressed_overall_count": sum(1 for row in deltas if row.get("overall_relation") == "regressed"),
         "improved_rubric_count": sum(1 for row in deltas if row.get("rubric_relation") == "improved"),
         "regressed_rubric_count": sum(1 for row in deltas if row.get("rubric_relation") == "regressed"),
+        "generation_quality_flag_delta_count": len(flag_rows),
+        "generation_quality_flag_improvement_count": len(flag_improvements),
+        "generation_quality_flag_regression_count": len(flag_regressions),
+        "generation_quality_dominant_flag_change_count": sum(1 for row in flag_rows if row.get("generation_quality_dominant_flag_changed")),
+        "generation_quality_worst_case_change_count": sum(1 for row in flag_rows if row.get("generation_quality_worst_case_changed")),
+        "worst_generation_quality_flag_regression_run": worst_flag_regression.get("name"),
+        "worst_generation_quality_flag_regression_delta": worst_flag_regression.get("generation_quality_total_flags_delta"),
         "case_delta_count": len(case_deltas),
         "case_regression_count": len(regressions),
         "case_improvement_count": len(improvements),
@@ -340,6 +364,14 @@ def _recommendations(
     weak_difficulties = [row for row in difficulty_deltas if not row.get("is_baseline") and row.get("relation") == "regressed"]
     if weak_difficulties:
         recs.append("Difficulty regressions are present: " + ", ".join(sorted({str(row.get("key")) for row in weak_difficulties})) + ".")
+    if int(summary.get("generation_quality_flag_regression_count") or 0):
+        recs.append(
+            "Generation-quality flags increased in at least one compared scorecard; inspect dominant flag and worst generation case before promotion."
+        )
+    elif int(summary.get("generation_quality_flag_improvement_count") or 0):
+        recs.append("Generation-quality flags decreased in at least one compared scorecard; confirm the improvement also holds at case and rubric level.")
+    if int(summary.get("generation_quality_dominant_flag_change_count") or 0):
+        recs.append("Dominant generation-quality flag changed for at least one run; treat the comparison as a taxonomy shift, not just a score delta.")
     if any(row.get("added_missing_terms") or row.get("added_failed_checks") for row in case_deltas if not row.get("is_baseline")):
         recs.append("Inspect added missing terms and failed checks to separate wording drift from true task failure.")
     return recs
@@ -364,6 +396,16 @@ def _run_explanation(delta: dict[str, Any], run: dict[str, Any], baseline: dict[
         parts.append(f"Rubric fail count changed {_fmt_signed(delta.get('rubric_fail_count_delta'))}.")
     if delta.get("weakest_case_changed"):
         parts.append(f"Weakest case moved from {baseline.get('weakest_rubric_case')} to {run.get('weakest_rubric_case')}.")
+    if delta.get("generation_quality_total_flags_delta") is not None:
+        parts.append(f"Generation-quality flags changed {_fmt_signed(delta.get('generation_quality_total_flags_delta'))}.")
+    if delta.get("generation_quality_dominant_flag_changed"):
+        parts.append(
+            f"Dominant generation flag moved from {baseline.get('generation_quality_dominant_flag')} to {run.get('generation_quality_dominant_flag')}."
+        )
+    if delta.get("generation_quality_worst_case_changed"):
+        parts.append(
+            f"Worst generation case moved from {baseline.get('generation_quality_worst_case')} to {run.get('generation_quality_worst_case')}."
+        )
     return " ".join(parts)
 
 
@@ -405,6 +447,19 @@ def _score_relation(delta: Any, *, is_baseline: bool) -> str:
     if number > 0:
         return "improved"
     if number < 0:
+        return "regressed"
+    return "tied"
+
+
+def _flag_relation(delta: Any, *, is_baseline: bool) -> str:
+    if is_baseline:
+        return "baseline"
+    if delta is None:
+        return "missing"
+    number = int(delta)
+    if number < 0:
+        return "improved"
+    if number > 0:
         return "regressed"
     return "tied"
 

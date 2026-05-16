@@ -28,6 +28,10 @@ def write_benchmark_scorecard_comparison_csv(report: dict[str, Any], path: str |
         "rubric_pass_count",
         "rubric_warn_count",
         "rubric_fail_count",
+        "generation_quality_total_flags",
+        "generation_quality_dominant_flag",
+        "generation_quality_worst_case",
+        "generation_quality_worst_case_status",
         "weakest_rubric_case",
         "weakest_rubric_score",
         "case_count",
@@ -41,6 +45,10 @@ def write_benchmark_scorecard_comparison_csv(report: dict[str, Any], path: str |
         "rubric_pass_count_delta",
         "rubric_warn_count_delta",
         "rubric_fail_count_delta",
+        "generation_quality_total_flags_delta",
+        "generation_quality_flag_relation",
+        "generation_quality_dominant_flag_changed",
+        "generation_quality_worst_case_changed",
         "weakest_case_changed",
         "overall_relation",
         "rubric_relation",
@@ -104,14 +112,17 @@ def render_benchmark_scorecard_comparison_markdown(report: dict[str, Any]) -> st
         f"| Regressed overall | {_md(summary.get('regressed_overall_count'))} |",
         f"| Improved rubric | {_md(summary.get('improved_rubric_count'))} |",
         f"| Regressed rubric | {_md(summary.get('regressed_rubric_count'))} |",
+        f"| Generation flag improvements | {_md(summary.get('generation_quality_flag_improvement_count'))} |",
+        f"| Generation flag regressions | {_md(summary.get('generation_quality_flag_regression_count'))} |",
+        f"| Baseline dominant generation flag | {_md(summary.get('baseline_generation_quality_dominant_flag'))} |",
         f"| Case regressions | {_md(summary.get('case_regression_count'))} |",
         f"| Case improvements | {_md(summary.get('case_improvement_count'))} |",
         f"| Weakest regression case | {_md(summary.get('weakest_case_regression'))} |",
         "",
         "## Runs",
         "",
-        "| Run | Overall | Rubric | Case Count | Weakest Case | Relation | Explanation |",
-        "| --- | ---: | ---: | ---: | --- | --- | --- |",
+        "| Run | Overall | Rubric | Gen Flags | Dominant Flag | Case Count | Weakest Case | Relation | Explanation |",
+        "| --- | ---: | ---: | ---: | --- | ---: | --- | --- | --- |",
     ]
     deltas = {row.get("name"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     for run in _list_of_dicts(report.get("runs")):
@@ -123,6 +134,8 @@ def render_benchmark_scorecard_comparison_markdown(report: dict[str, Any]) -> st
                     _md(run.get("name")),
                     _md(f"{_fmt(run.get('overall_score'))} ({_fmt_signed(delta.get('overall_score_delta'))})"),
                     _md(f"{_fmt(run.get('rubric_avg_score'))} ({_fmt_signed(delta.get('rubric_avg_score_delta'))})"),
+                    _md(f"{_fmt(run.get('generation_quality_total_flags'))} ({_fmt_signed(delta.get('generation_quality_total_flags_delta'))})"),
+                    _md(run.get("generation_quality_dominant_flag")),
                     _md(run.get("case_count")),
                     _md(f"{run.get('weakest_rubric_case')}:{_fmt(run.get('weakest_rubric_score'))}"),
                     _md(delta.get("rubric_relation")),
@@ -179,6 +192,8 @@ def render_benchmark_scorecard_comparison_html(report: dict[str, Any]) -> str:
         ("Best overall", _pick(_dict(report.get("best_by_overall_score")), "name")),
         ("Best rubric", _pick(_dict(report.get("best_by_rubric_avg_score")), "name")),
         ("Rubric regressions", summary.get("regressed_rubric_count")),
+        ("Generation flag regressions", summary.get("generation_quality_flag_regression_count")),
+        ("Baseline dominant flag", summary.get("baseline_generation_quality_dominant_flag")),
         ("Case regressions", summary.get("case_regression_count")),
         ("Weakest case", summary.get("weakest_case_regression")),
         ("Generated", report.get("generated_at")),
@@ -244,6 +259,8 @@ def _run_section(report: dict[str, Any]) -> str:
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('run_dir') or run.get('source_path'))}</span></td>"
             f"<td>{_e(_fmt(run.get('overall_score')))}<br><span>{_e(_fmt_signed(delta.get('overall_score_delta')))}</span></td>"
             f"<td><span class=\"pill {_relation_class(relation)}\">{_e(relation)}</span><br><span>{_e(_fmt(run.get('rubric_avg_score')))} ({_e(_fmt_signed(delta.get('rubric_avg_score_delta')))})</span></td>"
+            f"<td><span class=\"pill {_relation_class(str(delta.get('generation_quality_flag_relation') or 'missing'))}\">{_e(delta.get('generation_quality_flag_relation'))}</span><br><span>{_e(_fmt(run.get('generation_quality_total_flags')))} ({_e(_fmt_signed(delta.get('generation_quality_total_flags_delta')))})</span></td>"
+            f"<td>{_e(run.get('generation_quality_dominant_flag'))}<br><span>{_e(run.get('generation_quality_worst_case'))}</span></td>"
             f"<td>{_e(run.get('rubric_pass_count'))} pass / {_e(run.get('rubric_warn_count'))} warn / {_e(run.get('rubric_fail_count'))} fail</td>"
             f"<td>{_e(run.get('weakest_rubric_case'))}<br><span>{_e(_fmt(run.get('weakest_rubric_score')))}</span></td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
@@ -251,7 +268,7 @@ def _run_section(report: dict[str, Any]) -> str:
         )
     return (
         '<section class="panel"><h2>Runs</h2><table><thead><tr>'
-        "<th>Run</th><th>Overall</th><th>Rubric</th><th>Rubric Counts</th><th>Weakest Case</th><th>Explanation</th>"
+        "<th>Run</th><th>Overall</th><th>Rubric</th><th>Gen Flags</th><th>Dominant Flag</th><th>Rubric Counts</th><th>Weakest Case</th><th>Explanation</th>"
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></section>"
