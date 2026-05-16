@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import training_scale_gate  # noqa: E402
+from minigpt import training_scale_gate_artifacts  # noqa: E402
 from minigpt.training_scale_gate import (  # noqa: E402
     build_training_scale_gate,
     load_training_scale_plan,
@@ -146,6 +148,16 @@ class TrainingScaleGateTests(unittest.TestCase):
     def test_unknown_profile_fails_fast(self) -> None:
         with self.assertRaises(ValueError):
             build_training_scale_gate({}, profile="missing")
+
+    def test_gate_module_reexports_artifact_writers(self) -> None:
+        self.assertIs(
+            training_scale_gate.write_training_scale_gate_outputs,
+            training_scale_gate_artifacts.write_training_scale_gate_outputs,
+        )
+        self.assertIs(
+            training_scale_gate.render_training_scale_gate_html,
+            training_scale_gate_artifacts.render_training_scale_gate_html,
+        )
 
 
 if __name__ == "__main__":

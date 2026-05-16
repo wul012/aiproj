@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+188-v174-training-scale-gate-artifact-split.md
+ -> v174 code explanation: split training scale gate JSON/CSV/Markdown/HTML artifact writers into `training_scale_gate_artifacts.py`, while keeping policy profiles, plan loading, gate checks, status summaries, recommendations, workflow usage, and old facade exports unchanged.
 187-v173-training-scale-run-decision-artifact-split.md
  -> v173 code explanation: split training scale run decision JSON/CSV/Markdown/HTML artifact writers into `training_scale_run_decision_artifacts.py`, while keeping candidate selection, rejection reasons, readiness thresholds, execute command construction, workflow usage, and old facade exports unchanged.
 

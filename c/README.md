@@ -328,6 +328,9 @@ c/172/解释/说明.md
 c/173/图片
 c/173/解释/说明.md
  -> v173 training scale run decision artifact split 的运行截图和解释
+c/174/图片
+c/174/解释/说明.md
+ -> v174 training scale gate artifact split 的运行截图和解释
 ```
 
 写入规则：
