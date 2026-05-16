@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+169-v155-server-logging-split.md
+ -> 第一百五十五版代码讲解：把 server 的 request-history 事件构造拆到 `server_logging.py`，保留 `server.py` facade 兼容，让 HTTP handler 更聚焦路由、响应和 append。
 168-v154-release-readiness-artifact-split.md
  -> 第一百五十四版代码讲解：把 release readiness dashboard 的 JSON/Markdown/HTML 渲染写出拆到 `release_readiness_artifacts.py`，保留 `release_readiness.py` facade 兼容，并让 readiness 构建逻辑从展示输出层里解耦。
 167-v153-release-bundle-artifact-split.md

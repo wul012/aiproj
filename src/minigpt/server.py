@@ -48,6 +48,10 @@ from minigpt.server_contracts import (
     stream_timeout_payload,
 )
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.server_logging import (
+    build_generation_log_event,
+    build_pair_generation_log_event,
+)
 
 from .playground import write_playground
 
@@ -455,38 +459,20 @@ def create_handler(
             stream_cancelled: bool | None = None,
             stream_elapsed_seconds: float | None = None,
         ) -> None:
-            event: dict[str, Any] = {
-                "endpoint": endpoint,
-                "status": status,
-                "client": self.client_address[0] if self.client_address else None,
-                "checkpoint": checkpoint_option.path if checkpoint_option is not None else str(checkpoint),
-                "checkpoint_id": checkpoint_option.id if checkpoint_option is not None else None,
-            }
-            if request is not None:
-                event.update(
-                    {
-                        "requested_checkpoint": request.checkpoint,
-                        "prompt_chars": len(request.prompt),
-                        "max_new_tokens": request.max_new_tokens,
-                        "temperature": request.temperature,
-                        "top_k": request.top_k,
-                        "seed": request.seed,
-                    }
-                )
-            if response is not None:
-                event["generated_chars"] = len(response.generated)
-                event["continuation_chars"] = len(response.continuation)
-                event["tokenizer"] = response.tokenizer
-            if stream_chunks is not None:
-                event["stream_chunks"] = stream_chunks
-            if stream_timed_out is not None:
-                event["stream_timed_out"] = stream_timed_out
-            if stream_cancelled is not None:
-                event["stream_cancelled"] = stream_cancelled
-            if stream_elapsed_seconds is not None:
-                event["stream_elapsed_seconds"] = round(stream_elapsed_seconds, 6)
-            if error is not None:
-                event["error"] = error
+            event = build_generation_log_event(
+                status,
+                endpoint=endpoint,
+                client=self.client_address[0] if self.client_address else None,
+                default_checkpoint=str(checkpoint),
+                request=request,
+                response=response,
+                checkpoint_option=checkpoint_option,
+                error=error,
+                stream_chunks=stream_chunks,
+                stream_timed_out=stream_timed_out,
+                stream_cancelled=stream_cancelled,
+                stream_elapsed_seconds=stream_elapsed_seconds,
+            )
             append_inference_log(request_log, event)
 
         def _log_pair_generation(
@@ -502,41 +488,18 @@ def create_handler(
             error: str | None = None,
             endpoint: str = "/api/generate-pair",
         ) -> None:
-            event: dict[str, Any] = {
-                "endpoint": endpoint,
-                "status": status,
-                "client": self.client_address[0] if self.client_address else None,
-                "left_checkpoint": left_option.path if left_option is not None else None,
-                "left_checkpoint_id": left_option.id if left_option is not None else None,
-                "right_checkpoint": right_option.path if right_option is not None else None,
-                "right_checkpoint_id": right_option.id if right_option is not None else None,
-            }
-            if pair_request is not None:
-                event.update(
-                    {
-                        "requested_left_checkpoint": pair_request.left.checkpoint,
-                        "requested_right_checkpoint": pair_request.right.checkpoint,
-                        "prompt_chars": len(pair_request.left.prompt),
-                        "max_new_tokens": pair_request.left.max_new_tokens,
-                        "temperature": pair_request.left.temperature,
-                        "top_k": pair_request.left.top_k,
-                        "seed": pair_request.left.seed,
-                    }
-                )
-            if left_response is not None:
-                event["left_generated_chars"] = len(left_response.generated)
-                event["left_continuation_chars"] = len(left_response.continuation)
-            if right_response is not None:
-                event["right_generated_chars"] = len(right_response.generated)
-                event["right_continuation_chars"] = len(right_response.continuation)
-            if left_response is not None and right_response is not None:
-                event["generated_equal"] = left_response.generated == right_response.generated
-                event["continuation_equal"] = left_response.continuation == right_response.continuation
-            if artifact is not None:
-                event["artifact_json"] = artifact.get("json_path")
-                event["artifact_html"] = artifact.get("html_path")
-            if error is not None:
-                event["error"] = error
+            event = build_pair_generation_log_event(
+                status,
+                endpoint=endpoint,
+                client=self.client_address[0] if self.client_address else None,
+                pair_request=pair_request,
+                left_option=left_option,
+                right_option=right_option,
+                left_response=left_response,
+                right_response=right_response,
+                artifact=artifact,
+                error=error,
+            )
             append_inference_log(request_log, event)
 
         def _send_json(self, payload: dict[str, Any], status: HTTPStatus = HTTPStatus.OK) -> None:
