@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+147-v133-registry-ranking-split.md
+ -> 第一百三十三版代码讲解：把 registry 的 loss/rubric leaderboard、pair delta、release readiness delta 聚合拆成 ranking 模块，保留 registry schema 和 facade。
 146-v132-training-portfolio-artifact-split.md
  -> 第一百三十二版代码讲解：把 training portfolio 的输出写入层拆成 artifact 模块，保留 pipeline planning、dry-run/execute 状态、旧 facade 和脚本调用方式。
 145-v131-project-audit-artifact-split.md

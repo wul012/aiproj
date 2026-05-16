@@ -205,6 +205,9 @@ c/131/解释/说明.md
 c/132/图片
 c/132/解释/说明.md
  -> v132 training portfolio artifact split 的运行截图和解释
+c/133/图片
+c/133/解释/说明.md
+ -> v133 registry ranking split 的运行截图和解释
 ```
 
 写入规则：
