@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+159-v145-ci-workflow-hygiene-report.md
+ -> 第一百四十五版代码讲解：把 CI workflow 的 Node 24 native action 策略做成可运行 hygiene gate，并接入 GitHub Actions 输出 JSON/CSV/Markdown/HTML 证据。
 158-v144-github-actions-node24-native-actions.md
  -> 第一百四十四版代码讲解：把 CI 从 v143 的 Node 24 force flag 修正为 checkout/setup-python v6 原生 node24 action，真正消除 Node 20 target annotation。
 157-v143-github-actions-node24-runtime.md

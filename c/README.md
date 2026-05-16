@@ -241,6 +241,9 @@ c/143/解释/说明.md
 c/144/图片
 c/144/解释/说明.md
  -> v144 GitHub Actions Node 24 native actions 的运行截图和解释
+c/145/图片
+c/145/解释/说明.md
+ -> v145 CI workflow hygiene report 的运行截图和解释
 ```
 
 写入规则：

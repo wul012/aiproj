@@ -23,5 +23,8 @@ jobs:
       - name: Source encoding and syntax check
         run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci
 
+      - name: CI workflow hygiene check
+        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci
+
       - name: Unit tests
         run: python -B -m unittest discover -s tests -v
