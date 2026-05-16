@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+151-v137-generation-quality-flag-taxonomy.md
+ -> 第一百三十七版代码讲解：给 generation quality 增加 flag taxonomy，汇总问题类型、严重级别、最差样本和 dominant flag，让生成质量证据从粗粒度状态推进到可追踪弱项诊断。
 150-v136-generation-quality-artifact-split.md
  -> 第一百三十六版代码讲解：把 generation quality 的 JSON/CSV/Markdown/SVG/HTML 输出写入层拆成 artifact 模块，保留 metrics/flags/summary、旧 facade 和脚本调用方式。
 149-v135-release-gate-artifact-split.md

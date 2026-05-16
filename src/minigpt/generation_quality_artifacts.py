@@ -67,6 +67,8 @@ def render_generation_quality_markdown(report: dict[str, Any]) -> str:
             ]
         ),
         "",
+        *_flag_summary_markdown(_dict(summary.get("flag_summary"))),
+        "",
         "## Policy",
         "",
         *_markdown_table([(key, value) for key, value in policy.items()]),
@@ -170,6 +172,7 @@ def render_generation_quality_html(report: dict[str, Any]) -> str:
             "<body>",
             f"<header><h1>{_e(report.get('title', 'MiniGPT generation quality report'))}</h1><p>{_e(report.get('source_path'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
+            _flag_summary_section(_dict(summary.get("flag_summary"))),
             _key_value_section("Policy", _dict(report.get("policy"))),
             _case_section(_list_of_dicts(report.get("cases"))),
             _list_section("Recommendations", report.get("recommendations")),
@@ -178,6 +181,40 @@ def render_generation_quality_html(report: dict[str, Any]) -> str:
             "</body>",
             "</html>",
         ]
+    )
+
+
+def _flag_summary_section(flag_summary: dict[str, Any]) -> str:
+    if not flag_summary:
+        return ""
+    level_counts = _dict(flag_summary.get("flag_level_counts"))
+    flag_counts = _dict(flag_summary.get("flag_id_counts"))
+    worst_cases = _list_of_dicts(flag_summary.get("worst_cases"))
+    level_rows = "".join(f"<tr><th>{_e(key)}</th><td>{_e(value)}</td></tr>" for key, value in level_counts.items())
+    flag_rows = "".join(f"<tr><th>{_e(key)}</th><td>{_e(value)}</td></tr>" for key, value in flag_counts.items())
+    worst_rows = "".join(
+        "<tr>"
+        f"<td>{_e(case.get('status'))}</td>"
+        f"<td>{_e(case.get('name'))}</td>"
+        f"<td>{_e(case.get('flag_count'))}</td>"
+        f"<td>{_e(', '.join(_string_list(case.get('flag_ids'))))}</td>"
+        "</tr>"
+        for case in worst_cases
+    )
+    if not flag_rows:
+        flag_rows = '<tr><th>none</th><td>0</td></tr>'
+    if not worst_rows:
+        worst_rows = '<tr><td colspan="4">No flagged cases.</td></tr>'
+    return (
+        '<section class="panel"><h2>Flag Breakdown</h2>'
+        f'<p class="muted">Total flags: {_e(flag_summary.get("total_flags"))}</p>'
+        '<div class="split">'
+        f'<table><caption>By level</caption>{level_rows}</table>'
+        f'<table><caption>By flag id</caption>{flag_rows}</table>'
+        "</div>"
+        '<table><caption>Worst cases</caption><thead><tr><th>Status</th><th>Case</th><th>Flags</th><th>Flag ids</th></tr></thead><tbody>'
+        + worst_rows
+        + "</tbody></table></section>"
     )
 
 
@@ -266,7 +303,60 @@ th { color:var(--muted); font-size:12px; text-transform:uppercase; }
 .pill.fail { background:var(--red); }
 footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
 @media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+.split { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:14px; }
+.split table { min-width:0; }
+caption { text-align:left; color:var(--muted); font-size:12px; font-weight:700; padding:0 0 6px; text-transform:uppercase; }
 </style>"""
+
+
+def _flag_summary_markdown(flag_summary: dict[str, Any]) -> list[str]:
+    if not flag_summary:
+        return []
+    level_counts = _dict(flag_summary.get("flag_level_counts"))
+    flag_counts = _dict(flag_summary.get("flag_id_counts"))
+    worst_cases = _list_of_dicts(flag_summary.get("worst_cases"))
+    lines = [
+        "## Flag Breakdown",
+        "",
+        *_markdown_table(
+            [
+                ("Total flags", flag_summary.get("total_flags")),
+                ("Fail flags", level_counts.get("fail", 0)),
+                ("Warn flags", level_counts.get("warn", 0)),
+            ]
+        ),
+        "",
+        "| Flag id | Count |",
+        "| --- | --- |",
+    ]
+    if flag_counts:
+        lines.extend(f"| {_md(key)} | {_md(value)} |" for key, value in flag_counts.items())
+    else:
+        lines.append("| none | 0 |")
+    lines.extend(
+        [
+            "",
+            "| Status | Case | Flag Count | Flag ids |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    if worst_cases:
+        for case in worst_cases:
+            lines.append(
+                "| "
+                + " | ".join(
+                    [
+                        _md(case.get("status")),
+                        _md(case.get("name")),
+                        _md(case.get("flag_count")),
+                        _md(", ".join(_string_list(case.get("flag_ids")))),
+                    ]
+                )
+                + " |"
+            )
+    else:
+        lines.append("| pass | none | 0 | none |")
+    return lines
 
 
 def _markdown_table(rows: list[tuple[str, Any]]) -> list[str]:

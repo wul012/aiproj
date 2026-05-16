@@ -90,7 +90,16 @@ class GenerationQualityTests(unittest.TestCase):
             self.assertEqual(report["cases"][2]["status"], "fail")
             self.assertIn("low_diversity", {flag["id"] for flag in report["cases"][1]["flags"]})
             self.assertIn("empty_continuation", {flag["id"] for flag in report["cases"][2]["flags"]})
+            flag_summary = report["summary"]["flag_summary"]
+            self.assertEqual(flag_summary["flag_id_counts"]["empty_continuation"], 1)
+            self.assertEqual(flag_summary["flag_id_counts"]["low_diversity"], 1)
+            self.assertEqual(flag_summary["flag_id_counts"]["high_ngram_repetition"], 1)
+            self.assertEqual(flag_summary["flag_id_counts"]["long_repeat_run"], 1)
+            self.assertEqual(flag_summary["flag_level_counts"]["fail"], 1)
+            self.assertEqual(flag_summary["flag_level_counts"]["warn"], 3)
+            self.assertEqual(flag_summary["worst_cases"][0]["name"], "empty")
             self.assertIn("Fix failed generation cases", " ".join(report["recommendations"]))
+            self.assertIn("Prioritize dominant generation flag", " ".join(report["recommendations"]))
 
     def test_build_generation_quality_report_reads_sample_lab_generated_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -132,7 +141,11 @@ class GenerationQualityTests(unittest.TestCase):
             self.assertTrue(Path(outputs["markdown"]).exists())
             self.assertTrue(Path(outputs["svg"]).exists())
             self.assertTrue(Path(outputs["html"]).exists())
-            self.assertIn("## Cases", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            self.assertIn("## Flag Breakdown", markdown)
+            self.assertIn("## Cases", markdown)
+            self.assertIn("Flag Breakdown", html)
             self.assertIn("generation_quality", Path(outputs["json"]).name)
 
     def test_render_generation_quality_html_escapes_text(self) -> None:

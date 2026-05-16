@@ -266,6 +266,51 @@ def _build_summary(cases: list[dict[str, Any]], source_type: str) -> dict[str, A
         "avg_unique_ratio": _round_avg(case.get("unique_ratio") for case in cases),
         "avg_repeated_ngram_ratio": _round_avg(case.get("repeated_ngram_ratio") for case in cases),
         "max_repeat_run": max((int(case.get("longest_repeat_run") or 0) for case in cases), default=0),
+        "flag_summary": _build_flag_summary(cases),
+    }
+
+
+def _build_flag_summary(cases: list[dict[str, Any]]) -> dict[str, Any]:
+    flag_id_counts: dict[str, int] = {}
+    flag_level_counts: dict[str, int] = {"fail": 0, "warn": 0}
+    worst_cases: list[dict[str, Any]] = []
+    total_flags = 0
+
+    for case in cases:
+        flags = _list_of_dicts(case.get("flags"))
+        flag_ids = []
+        for flag in flags:
+            flag_id = str(flag.get("id") or "").strip()
+            level = str(flag.get("level") or "").strip()
+            if flag_id:
+                flag_id_counts[flag_id] = flag_id_counts.get(flag_id, 0) + 1
+                flag_ids.append(flag_id)
+                total_flags += 1
+            if level:
+                flag_level_counts[level] = flag_level_counts.get(level, 0) + 1
+        if flag_ids:
+            worst_cases.append(
+                {
+                    "name": str(case.get("name") or ""),
+                    "status": str(case.get("status") or "warn"),
+                    "flag_count": len(flag_ids),
+                    "flag_ids": flag_ids,
+                }
+            )
+
+    severity = {"fail": 2, "warn": 1, "pass": 0}
+    worst_cases.sort(
+        key=lambda item: (
+            -severity.get(str(item.get("status")), 0),
+            -int(item.get("flag_count") or 0),
+            str(item.get("name") or ""),
+        )
+    )
+    return {
+        "total_flags": total_flags,
+        "flag_id_counts": dict(sorted(flag_id_counts.items())),
+        "flag_level_counts": dict(sorted(flag_level_counts.items())),
+        "worst_cases": worst_cases[:5],
     }
 
 
@@ -277,6 +322,10 @@ def _recommendations(summary: dict[str, Any], cases: list[dict[str, Any]]) -> li
         items.append("Fix failed generation cases before using this checkpoint as a release candidate.")
     if summary.get("warn_count"):
         items.append("Review warning cases for repetition, low diversity, or prompt echo before model-card handoff.")
+    flag_id_counts = _dict(_dict(summary.get("flag_summary")).get("flag_id_counts"))
+    if flag_id_counts:
+        dominant_flag = max(flag_id_counts.items(), key=lambda item: (int(item[1]), item[0]))
+        items.append(f"Prioritize dominant generation flag: {dominant_flag[0]} ({dominant_flag[1]} occurrence(s)).")
     for case in cases:
         if case.get("status") != "pass":
             flag_ids = ", ".join(flag["id"] for flag in _list_of_dicts(case.get("flags")))

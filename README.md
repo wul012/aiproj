@@ -4,13 +4,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 136 closes the current two-step cleanup by splitting generation quality CSV/SVG/Markdown/HTML artifact writers into `generation_quality_artifacts.py`. It keeps `generation_quality.py` focused on reading generation outputs, computing continuation metrics, flags, summaries, recommendations, and warnings while preserving the quality schema and old facade imports.
+Version 137 resumes evidence enrichment after the v135-v136 split cycle by adding a generation-quality flag taxonomy. `generation_quality.py` now summarizes flag counts by id and severity, records the worst flagged cases, and feeds that diagnosis into recommendations, while `generation_quality_artifacts.py` renders the same machine-readable summary in Markdown and HTML reports.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
 | MiniGPT model core | Character/BPE tokenizers, causal self-attention, training, generation, evaluation, attention and prediction inspection | `src/minigpt/model.py`, `scripts/train.py`, tokenizer/model/eval tests, v1-v16 archives | Real larger-corpus training and stronger external benchmark comparison |
 | Data and experiment governance | Dataset preparation, dataset quality, dataset cards, run manifests, experiment cards, model cards, project audits | `data_prep`, `data_quality`, `manifest`, `experiment_card`, `model_card`, `project_audit` modules and tests | Dataset version scale, dedupe policy, reproducible corpus snapshots |
-| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, and cross-run scorecard comparison with extracted artifact and scoring layers | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, benchmark, pair, comparison, registry tests and b/c evidence archives | More stable human-readable benchmark suites and real checkpoint deltas |
+| Benchmark and model comparison | Fixed prompts, benchmark scorecards, rubric scoring, pair generation, pair batch/trend comparison, baseline run comparison with extracted artifact writers, cross-run scorecard comparison with extracted artifact and scoring layers, and generation-quality flag taxonomy | `comparison.py`, `comparison_artifacts.py`, `benchmark_scorecard.py`, `benchmark_scorecard_scoring.py`, `benchmark_scorecard_artifacts.py`, `benchmark_scorecard_comparison.py`, `benchmark_scorecard_comparison_artifacts.py`, `generation_quality.py`, `generation_quality_artifacts.py`, benchmark, pair, comparison, registry, and generation-quality tests plus b/c evidence archives | More stable human-readable benchmark suites, richer failure taxonomy, and real checkpoint deltas |
 | Local inference and UI | Playground server, checkpoint selector, streaming generation, cancellation/timeout controls, request history, pair artifacts, extracted server contracts, split playground assets, extracted generator class | `server.py`, `server_generator.py`, `server_contracts.py`, `request_history.py`, `pair_artifacts.py`, `playground.py`, `playground_assets.py`, `playground_style.py`, `playground_script.py`, server-generator, server-contract, request-history, pair-artifact, and playground-asset tests plus Playwright screenshots | Keep HTTP routing and model generation stable while extracting pure contracts, generator, and payload helpers |
 | Release and maturity governance | Registry, project audit, release bundle, release gate profiles, release readiness dashboards, maturity summaries and narratives | release, readiness, maturity, audit tests plus versioned screenshots | Keep governance useful while avoiding more report-only fragmentation |
 | Training scale workflow | Training portfolio pipeline with extracted artifact writers, comparison artifact layer, batch matrix, scale planner, gates, controlled handoff, promotion, promoted baseline/seed handoff | training-scale modules/tests and c/69-c/97/c122/c132 archives | Move from dry-run/governance evidence toward real promoted training runs |
@@ -21,7 +21,7 @@ Version 136 closes the current two-step cleanup by splitting generation quality 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
 - Model capability maturity: medium. The architecture and evaluation loop are real, but the repository still needs larger data, stronger baselines, and repeated training evidence before claiming strong model quality.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs; v133 extracts registry ranking and delta aggregation; v134 extracts maturity narrative artifact outputs; v135 extracts release gate artifact outputs; v136 extracts generation quality artifact outputs and closes the current two-step split cycle. The latest module pressure smoke still reports zero warn modules, so future work should shift back toward real evaluation, data, and training evidence unless a concrete new boundary is required.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v128 split several high-pressure rendering, service, registry, dashboard, comparison, and source-encoding boundaries; v129 extracts training portfolio batch artifact outputs; v130 extracts experiment card artifact outputs; v131 extracts project audit artifact outputs; v132 extracts training portfolio artifact outputs; v133 extracts registry ranking and delta aggregation; v134 extracts maturity narrative artifact outputs; v135 extracts release gate artifact outputs; v136 extracts generation quality artifact outputs and closes the current two-step split cycle; v137 deliberately shifts back to evidence enrichment with generation-quality flag taxonomy. The latest module pressure smoke still reports zero warn modules, so future work should keep favoring real evaluation, data, and training evidence unless a concrete new boundary is required.
 
 ## Capability map
 
@@ -33,14 +33,14 @@ Version 136 closes the current two-step cleanup by splitting generation quality 
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 136 focus
+## Version 137 focus
 
-- Added `src/minigpt/generation_quality_artifacts.py` for generation quality JSON, CSV, Markdown, SVG, and HTML writers/renderers.
-- Updated `src/minigpt/generation_quality.py` to keep source reading, continuation metrics, flags, summary, recommendations, and warnings while re-exporting artifact functions.
-- Added a facade identity regression in `tests/test_generation_quality.py` so old imports keep pointing at the extracted artifact layer.
-- Kept generation quality schema, output filenames, CLI behavior, HTML escaping, SVG output, and `scripts/analyze_generation_quality.py` unchanged.
-- Used v136 as the second and final planned split after v135, choosing model-output quality evidence over more release-governance fragmentation.
-- Reran generation quality tests, compile checks, generation quality output smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/136`.
+- Added `summary.flag_summary` to generation quality reports with total flag count, counts by flag id, counts by severity, and the top worst flagged cases.
+- Updated recommendations so reports call out the dominant generation-quality flag instead of stopping at coarse pass/warn/fail status.
+- Rendered the flag taxonomy in generation quality Markdown and HTML artifacts without changing output filenames or CLI input contracts.
+- Extended `scripts/analyze_generation_quality.py` so terminal smoke output prints `flags=` and `dominant_flag=`.
+- Strengthened `tests/test_generation_quality.py` around multi-flag repetition cases, worst-case ordering, Markdown output, and HTML output.
+- Reran generation quality tests, compile checks, generation quality taxonomy smoke, maintenance smoke, source encoding hygiene, full unittest discovery, and Playwright/Chrome HTML rendering for `c/137`.
 
 ## Version tags
 
@@ -183,6 +183,7 @@ v133.0.0 MiniGPT v133 registry ranking split
 v134.0.0 MiniGPT v134 maturity narrative artifact split
 v135.0.0 MiniGPT v135 release gate artifact split
 v136.0.0 MiniGPT v136 generation quality artifact split
+v137.0.0 MiniGPT v137 generation quality flag taxonomy
 ```
 
 ## Project structure
@@ -2285,6 +2286,14 @@ Version 136 screenshots are archived under `c/136`:
 - `03-generation-quality-smoke.png`: generated generation quality JSON/CSV/Markdown/SVG/HTML outputs plus facade identity checks
 - `04-playwright-generation-quality-html.png`: generated generation quality HTML opened through Playwright with installed Google Chrome
 - `05-docs-check.png`: v136 README, c/136 archive, project-maturity explanation, and source encoding check
+
+Version 137 screenshots are archived under `c/137`:
+
+- `01-unit-tests.png`: generation quality flag taxonomy tests, compile check, and full unittest discovery
+- `02-maintenance-smoke.png`: maintenance batching and module pressure smoke after the taxonomy addition
+- `03-generation-quality-taxonomy-smoke.png`: generated generation quality JSON/CSV/Markdown/SVG/HTML outputs with `flag_summary`, dominant flag, and Flag Breakdown checks
+- `04-playwright-generation-quality-html.png`: generated generation quality HTML with Flag Breakdown opened through Playwright and installed Google Chrome
+- `05-docs-check.png`: v137 README, c/137 archive, project-maturity explanation, and source encoding check
 
 ## Code explanation records
 

@@ -47,6 +47,12 @@ def main() -> None:
     print(f"cases={summary['case_count']}")
     print(f"checks={summary['pass_count']} pass/{summary['warn_count']} warn/{summary['fail_count']} fail")
     print(f"avg_unique_ratio={summary['avg_unique_ratio']}")
+    flag_summary = summary.get("flag_summary") if isinstance(summary.get("flag_summary"), dict) else {}
+    flag_id_counts = flag_summary.get("flag_id_counts") if isinstance(flag_summary.get("flag_id_counts"), dict) else {}
+    dominant_flag = max(flag_id_counts.items(), key=lambda item: (int(item[1]), item[0]), default=None)
+    print(f"flags={flag_summary.get('total_flags', 0)}")
+    if dominant_flag:
+        print(f"dominant_flag={dominant_flag[0]}:{dominant_flag[1]}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 
 
