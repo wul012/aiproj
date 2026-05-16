@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+180-v166-project-audit-context-split.md
+ -> ????????????? `project_audit.py` ? request-history summary ? CI workflow hygiene ??/??????? `project_audit_contexts.py`??? audit schema?artifact ???CLI ? facade ?????
+
 179-v165-training-scale-plan-artifact-split.md
  -> 第一百六十五版代码讲解：把 `training_scale_plan.py` 的 JSON/variants/CSV/Markdown/HTML artifact 写出和渲染拆到 `training_scale_plan_artifacts.py`，保持 scale plan schema、CLI、facade 导出和训练规模链路消费不变。
 

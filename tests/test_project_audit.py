@@ -10,6 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import project_audit, project_audit_artifacts
+from minigpt.project_audit_contexts import (
+    build_ci_workflow_context,
+    build_ci_workflow_hygiene_check,
+    build_request_history_context,
+    build_request_history_summary_check,
+)
 from minigpt.project_audit import build_project_audit, render_project_audit_html, write_project_audit_outputs
 
 
@@ -239,6 +245,49 @@ class ProjectAuditTests(unittest.TestCase):
     def test_project_audit_facade_keeps_artifact_writer_identity(self) -> None:
         self.assertIs(project_audit.render_project_audit_html, project_audit_artifacts.render_project_audit_html)
         self.assertIs(project_audit.write_project_audit_outputs, project_audit_artifacts.write_project_audit_outputs)
+
+    def test_project_audit_context_helpers_map_statuses_and_missing_inputs(self) -> None:
+        request_summary = {
+            "request_log": "runs/minigpt/inference_requests.jsonl",
+            "summary": {
+                "status": "watch",
+                "total_log_records": 2,
+                "invalid_record_count": 0,
+                "timeout_rate": 0.5,
+                "bad_request_rate": 0.0,
+                "error_rate": 0.0,
+            },
+        }
+        ci_hygiene = {
+            "workflow_path": ".github/workflows/ci.yml",
+            "summary": {
+                "status": "fail",
+                "decision": "fix_ci_workflow_hygiene",
+                "action_count": 2,
+                "node24_native_action_count": 0,
+                "failed_check_count": 3,
+                "forbidden_env_count": 1,
+                "missing_step_count": 1,
+                "python_version": "3.11",
+            },
+        }
+
+        request_check = build_request_history_summary_check(request_summary, Path("request_history_summary.json"))
+        ci_check = build_ci_workflow_hygiene_check(ci_hygiene, Path("ci_workflow_hygiene.json"))
+
+        self.assertEqual(request_check["status"], "warn")
+        self.assertIn("status=watch", request_check["detail"])
+        self.assertEqual(request_check["evidence"]["timeout_rate"], 0.5)
+        self.assertEqual(build_request_history_context(request_summary)["request_log"], "runs/minigpt/inference_requests.jsonl")
+        self.assertEqual(build_request_history_summary_check(None, None)["status"], "warn")
+        self.assertFalse(build_request_history_context(None)["available"])
+
+        self.assertEqual(ci_check["status"], "warn")
+        self.assertIn("failed_checks=3", ci_check["detail"])
+        self.assertEqual(ci_check["evidence"]["decision"], "fix_ci_workflow_hygiene")
+        self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
+        self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
+        self.assertFalse(build_ci_workflow_context(None)["available"])
 
 
 if __name__ == "__main__":
