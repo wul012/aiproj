@@ -2,6 +2,8 @@
 
 ## 最新追加
 
+184-v170-release-readiness-comparison-artifact-split.md
+ -> v170 code explanation: split release readiness comparison JSON/CSV/delta CSV/Markdown/HTML artifact writers into `release_readiness_comparison_artifacts.py`, while keeping comparison schema, baseline override, delta logic, registry consumption, and old facade exports unchanged.
 183-v169-promoted-training-scale-seed-handoff-artifact-split.md
  -> v169 code explanation: split promoted seed handoff JSON/CSV/Markdown/HTML artifact writers into `promoted_training_scale_seed_handoff_artifacts.py`, while keeping handoff schema, command execution, timeout handling, plan artifact detection, and old facade exports unchanged.
 182-v168-promoted-training-scale-seed-artifact-split.md

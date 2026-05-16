@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from minigpt import release_readiness_comparison as comparison_module  # noqa: E402
+from minigpt import release_readiness_comparison_artifacts as artifact_module  # noqa: E402
 from minigpt.release_readiness_comparison import (
     build_release_readiness_comparison,
     render_release_readiness_comparison_html,
@@ -76,6 +78,24 @@ def make_readiness(
 
 
 class ReleaseReadinessComparisonTests(unittest.TestCase):
+    def test_artifact_functions_are_reexported_from_comparison_module(self) -> None:
+        self.assertIs(
+            comparison_module.render_release_readiness_comparison_html,
+            artifact_module.render_release_readiness_comparison_html,
+        )
+        self.assertIs(
+            comparison_module.render_release_readiness_comparison_markdown,
+            artifact_module.render_release_readiness_comparison_markdown,
+        )
+        self.assertIs(
+            comparison_module.write_release_readiness_comparison_outputs,
+            artifact_module.write_release_readiness_comparison_outputs,
+        )
+        self.assertIs(
+            comparison_module.write_release_readiness_delta_csv,
+            artifact_module.write_release_readiness_delta_csv,
+        )
+
     def test_build_release_readiness_comparison_marks_improvement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
