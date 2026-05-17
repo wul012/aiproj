@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+217-v203-strict-suite-consistency-decision-guard.md
+ -> v203 code explanation: add an opt-in `--require-suite-consistency` guard to training-scale and promoted baseline decisions so mixed/missing benchmark-suite comparisons can be blocked for clean model-quality decisions.
 216-v202-training-scale-suite-consistency-evidence.md
  -> v202 code explanation: carry benchmark suite consistency into training scale run comparison/decision and promoted comparison/decision, so mixed-suite deltas are not mistaken for clean model-quality gains.
 215-v201-promoted-seed-standard-suite-carryover.md

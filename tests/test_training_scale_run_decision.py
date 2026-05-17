@@ -94,8 +94,33 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
 
             self.assertEqual(report["summary"]["suite_consistency"], "mixed")
+            self.assertFalse(report["summary"]["require_suite_consistency"])
             self.assertEqual(report["summary"]["selected_suite_path"], "builtin:standard-zh")
             self.assertTrue(any("different benchmark suites" in item for item in report["recommendations"]))
+
+    def test_require_suite_consistency_blocks_mixed_suite_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+            payload = json.loads(comparison.read_text(encoding="utf-8"))
+            payload["runs"][0]["suite_path"] = "builtin:standard-zh"
+            payload["summary"]["suite_consistency"] = "mixed"
+            payload["summary"]["suite_paths"] = ["builtin:standard-zh", "data/eval_prompts.json"]
+            payload["summary"]["suite_mismatch_count"] = 1
+            comparison.write_text(json.dumps(payload), encoding="utf-8")
+
+            report = build_training_scale_run_decision(
+                comparison,
+                require_suite_consistency=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(report["decision_status"], "blocked")
+            self.assertIsNone(report["selected_run"])
+            self.assertTrue(report["summary"]["require_suite_consistency"])
+            reasons = [reason for row in report["rejected_runs"] for reason in row["reasons"]]
+            self.assertIn("benchmark suite consistency is mixed", reasons)
+            self.assertTrue(any("Fix benchmark suite consistency" in item for item in report["recommendations"]))
 
     def test_write_outputs_load_directory_and_render_html_safely(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

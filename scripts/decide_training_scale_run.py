@@ -21,6 +21,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-readiness", type=int, default=60)
     parser.add_argument("--require-gate-pass", action="store_true", help="Reject warn-status gate runs.")
     parser.add_argument("--no-require-batch-started", action="store_true", help="Allow candidates that did not reach batch dry-run.")
+    parser.add_argument("--require-suite-consistency", action="store_true", help="Reject comparisons that mix or omit benchmark suite paths.")
     parser.add_argument("--execute-out-root", type=Path, default=None, help="Output directory for the generated --execute command.")
     parser.add_argument("--python", type=str, default=sys.executable)
     parser.add_argument("--title", type=str, default="MiniGPT training scale run decision")
@@ -34,6 +35,7 @@ def main() -> None:
         min_readiness=args.min_readiness,
         require_gate_pass=args.require_gate_pass,
         require_batch_started=not args.no_require_batch_started,
+        require_suite_consistency=args.require_suite_consistency,
         execute_out_root=args.execute_out_root,
         python_executable=args.python,
         title=args.title,

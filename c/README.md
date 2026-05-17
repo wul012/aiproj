@@ -415,6 +415,9 @@ c/201/解释/说明.md
 c/202/图片
 c/202/解释/说明.md
  -> v202 training scale suite consistency evidence 的运行截图和解释
+c/203/图片
+c/203/解释/说明.md
+ -> v203 strict suite consistency decision guard 的运行截图和解释
 ```
 
 写入规则：

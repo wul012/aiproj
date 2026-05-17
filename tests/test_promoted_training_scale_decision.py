@@ -75,12 +75,38 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
             self.assertIn("&lt;Decision&gt;", html)
             self.assertNotIn("<Decision>", html)
 
+    def test_require_suite_consistency_blocks_mixed_promoted_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison_dir = make_compared_comparison_tree(root, mixed_suite=True)
 
-def make_compared_comparison_tree(root: Path, second_promoted: bool = True, title: str = "MiniGPT promoted training scale comparison") -> Path:
+            default_report = build_promoted_training_scale_decision(comparison_dir, min_readiness=60)
+            strict_report = build_promoted_training_scale_decision(
+                comparison_dir,
+                min_readiness=60,
+                require_suite_consistency=True,
+            )
+
+            self.assertEqual(default_report["decision_status"], "accepted")
+            self.assertEqual(default_report["summary"]["suite_consistency"], "mixed")
+            self.assertFalse(default_report["summary"]["require_suite_consistency"])
+            self.assertTrue(any("different benchmark suites" in item for item in default_report["recommendations"]))
+            self.assertEqual(strict_report["decision_status"], "blocked")
+            self.assertTrue(strict_report["summary"]["require_suite_consistency"])
+            reasons = [reason for row in strict_report["rejected_runs"] for reason in row["reasons"]]
+            self.assertIn("benchmark suite consistency is mixed", reasons)
+            self.assertTrue(any("Fix benchmark suite consistency" in item for item in strict_report["recommendations"]))
+
+def make_compared_comparison_tree(
+    root: Path,
+    second_promoted: bool = True,
+    title: str = "MiniGPT promoted training scale comparison",
+    mixed_suite: bool = False,
+) -> Path:
     index_dir = root / "promotion-index"
     alpha_run = root / "alpha" / "scale-run" / "training_scale_run.json"
     beta_run = root / "beta" / "scale-run" / "training_scale_run.json"
-    write_json(alpha_run, run_payload("alpha", "warn", 88))
+    write_json(alpha_run, run_payload("alpha", "warn", 88, suite_name=None if mixed_suite else "standard-zh"))
     write_json(beta_run, run_payload("beta", "pass", 91))
     promotions = [
         {
@@ -164,7 +190,12 @@ def make_blocked_comparison_tree(root: Path) -> Path:
     return comparison_dir
 
 
-def run_payload(name: str, gate_status: str, readiness: int) -> dict:
+def run_payload(name: str, gate_status: str, readiness: int, suite_name: str | None = "standard-zh") -> dict:
+    suite = (
+        {"suite_mode": "builtin", "suite_name": suite_name, "suite_path": f"builtin:{suite_name}"}
+        if suite_name
+        else {"suite_mode": "file", "suite_name": None, "suite_path": str(ROOT / "data" / "eval_prompts.json")}
+    )
     return {
         "name": name,
         "status": "completed",
@@ -185,9 +216,7 @@ def run_payload(name: str, gate_status: str, readiness: int) -> dict:
             "warning_count": 0 if gate_status == "pass" else 1,
             "variant_count": 1,
             "baseline": name,
-            "suite_mode": "builtin",
-            "suite_name": "standard-zh",
-            "suite_path": "builtin:standard-zh",
+            **suite,
         },
         "batch_summary": {
             "status": "completed",

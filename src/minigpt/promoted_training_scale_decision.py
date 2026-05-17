@@ -36,6 +36,7 @@ def build_promoted_training_scale_decision(
     min_readiness: int = 70,
     require_gate_pass: bool = False,
     require_batch_completed: bool = True,
+    require_suite_consistency: bool = False,
     title: str = "MiniGPT promoted training scale baseline decision",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -43,6 +44,7 @@ def build_promoted_training_scale_decision(
     comparison_file = Path(str(comparison.get("_source_path")))
     comparison_dir = comparison_file.parent
     comparison_summary = _dict(comparison.get("summary"))
+    suite_reasons = _suite_consistency_reasons(comparison_summary, require_suite_consistency)
     promotions = _promotion_rows(comparison, comparison_dir)
     candidates: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
@@ -54,13 +56,22 @@ def build_promoted_training_scale_decision(
             require_gate_pass=require_gate_pass,
             require_batch_completed=require_batch_completed,
         )
+        reasons.extend(suite_reasons)
         if reasons:
             rejected.append({**row, "reasons": reasons})
         else:
             candidates.append(row)
     selected = _select_candidate(candidates)
     decision_status = _decision_status(comparison, selected, rejected)
-    summary = _summary(comparison_summary, promotions, candidates, rejected, selected, decision_status)
+    summary = _summary(
+        comparison_summary,
+        promotions,
+        candidates,
+        rejected,
+        selected,
+        decision_status,
+        require_suite_consistency=require_suite_consistency,
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -72,7 +83,13 @@ def build_promoted_training_scale_decision(
         "rejected_runs": rejected,
         "summary": summary,
         "decision_status": decision_status,
-        "recommendations": _recommendations(decision_status, selected, rejected),
+        "recommendations": _recommendations(
+            decision_status,
+            selected,
+            rejected,
+            comparison_summary=comparison_summary,
+            require_suite_consistency=require_suite_consistency,
+        ),
     }
 
 
@@ -92,6 +109,7 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
         "selected_batch_status",
         "selected_readiness_score",
         "selected_suite_path",
+        "require_suite_consistency",
         "candidate_count",
         "rejected_count",
         "comparison_status",
@@ -105,6 +123,7 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
             "selected_batch_status": selected.get("batch_status"),
             "selected_readiness_score": selected.get("readiness_score"),
             "selected_suite_path": summary.get("selected_suite_path"),
+            "require_suite_consistency": summary.get("require_suite_consistency"),
             "candidate_count": summary.get("candidate_count"),
             "rejected_count": summary.get("rejected_count"),
             "comparison_status": summary.get("comparison_status"),
@@ -128,6 +147,7 @@ def render_promoted_training_scale_decision_markdown(report: dict[str, Any]) -> 
         f"- Batch: `{selected.get('batch_status')}`",
         f"- Readiness: `{selected.get('readiness_score')}`",
         f"- Selected suite: `{summary.get('selected_suite_path')}`",
+        f"- Require suite consistency: `{summary.get('require_suite_consistency')}`",
         f"- Candidates: `{summary.get('candidate_count')}`",
         f"- Rejected: `{summary.get('rejected_count')}`",
         f"- Comparison status: `{summary.get('comparison_status')}`",
@@ -173,6 +193,7 @@ def render_promoted_training_scale_decision_html(report: dict[str, Any]) -> str:
         ("Batch", selected.get("batch_status")),
         ("Score", selected.get("readiness_score")),
         ("Suite path", summary.get("selected_suite_path")),
+        ("Require suite consistency", summary.get("require_suite_consistency")),
         ("Candidates", summary.get("candidate_count")),
         ("Rejected", summary.get("rejected_count")),
         ("Suite", summary.get("suite_consistency")),
@@ -281,6 +302,15 @@ def _rejection_reasons(
     return reasons
 
 
+def _suite_consistency_reasons(comparison_summary: dict[str, Any], require_suite_consistency: bool) -> list[str]:
+    if not require_suite_consistency:
+        return []
+    suite_consistency = str(comparison_summary.get("suite_consistency") or "")
+    if suite_consistency == "consistent":
+        return []
+    return [f"benchmark suite consistency is {suite_consistency or 'missing'}"]
+
+
 def _select_candidate(candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
     if not candidates:
         return None
@@ -317,6 +347,8 @@ def _summary(
     rejected: list[dict[str, Any]],
     selected: dict[str, Any] | None,
     decision_status: str,
+    *,
+    require_suite_consistency: bool,
 ) -> dict[str, Any]:
     return {
         "decision_status": decision_status,
@@ -330,6 +362,7 @@ def _summary(
         "selected_batch_status": None if selected is None else selected.get("batch_status"),
         "selected_readiness_score": None if selected is None else selected.get("readiness_score"),
         "selected_suite_path": None if selected is None else selected.get("suite_path"),
+        "require_suite_consistency": bool(require_suite_consistency),
         "selected_promotion_status": None if selected is None else selected.get("promotion_status"),
         "suite_consistency": comparison_summary.get("suite_consistency"),
         "suite_paths": comparison_summary.get("suite_paths"),
@@ -341,6 +374,9 @@ def _recommendations(
     decision_status: str,
     selected: dict[str, Any] | None,
     rejected: list[dict[str, Any]],
+    *,
+    comparison_summary: dict[str, Any],
+    require_suite_consistency: bool,
 ) -> list[str]:
     if decision_status == "accepted":
         recommendations = [
@@ -349,15 +385,29 @@ def _recommendations(
         ]
         if selected and selected.get("suite_path"):
             recommendations.append(f"Carry `{selected.get('suite_path')}` into the next promoted seed so later comparisons stay suite-consistent.")
+        if require_suite_consistency and comparison_summary.get("suite_consistency") != "consistent":
+            recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
+        elif comparison_summary.get("suite_consistency") == "mixed":
+            recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
         return recommendations
     if decision_status == "review":
-        return [
+        recommendations = [
             "Review the remaining promoted runs before turning this baseline into the next run seed.",
             "Gate warnings can be accepted for review, but they should be justified before larger training.",
         ]
-    return [
+        if require_suite_consistency and comparison_summary.get("suite_consistency") != "consistent":
+            recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
+        elif comparison_summary.get("suite_consistency") == "mixed":
+            recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+        return recommendations
+    recommendations = [
         "Fix the promoted comparison or promote more runs before selecting a new baseline.",
     ]
+    if require_suite_consistency and comparison_summary.get("suite_consistency") != "consistent":
+        recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
+    elif comparison_summary.get("suite_consistency") == "mixed":
+        recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+    return recommendations
 
 
 def _rejected_table(report: dict[str, Any]) -> str:

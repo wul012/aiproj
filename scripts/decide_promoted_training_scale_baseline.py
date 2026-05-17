@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-readiness", type=int, default=70)
     parser.add_argument("--require-gate-pass", action="store_true")
     parser.add_argument("--allow-incomplete-batch", action="store_true")
+    parser.add_argument("--require-suite-consistency", action="store_true", help="Reject promoted comparisons that mix or omit benchmark suite paths.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "promoted-training-scale-decision")
     parser.add_argument("--title", type=str, default="MiniGPT promoted training scale baseline decision")
     parser.add_argument("--require-accepted", action="store_true", help="Exit non-zero unless the selected baseline is accepted")
@@ -33,6 +34,7 @@ def main() -> None:
         min_readiness=args.min_readiness,
         require_gate_pass=args.require_gate_pass,
         require_batch_completed=not args.allow_incomplete_batch,
+        require_suite_consistency=args.require_suite_consistency,
         title=args.title,
     )
     outputs = write_promoted_training_scale_decision_outputs(report, args.out_dir)
