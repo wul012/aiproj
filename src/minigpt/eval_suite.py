@@ -179,9 +179,17 @@ def default_prompt_cases() -> list[PromptCase]:
     return list(default_prompt_suite().cases)
 
 
+def load_builtin_prompt_suite(name: str) -> PromptSuite:
+    from minigpt.eval_suites import named_prompt_suite
+
+    return named_prompt_suite(name)
+
+
 def load_prompt_suite(path: str | Path | None = None) -> PromptSuite:
     if path is None:
         return default_prompt_suite()
+    if str(path).startswith("builtin:"):
+        return load_builtin_prompt_suite(str(path).split(":", 1)[1])
     suite_path = Path(path)
     payload = json.loads(suite_path.read_text(encoding="utf-8-sig"))
     if isinstance(payload, dict):

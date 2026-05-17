@@ -10,7 +10,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.eval_suite import build_eval_suite_report, build_prompt_result, load_prompt_suite, write_eval_suite_outputs
+from minigpt.eval_suite import build_eval_suite_report, build_prompt_result, load_builtin_prompt_suite, load_prompt_suite, write_eval_suite_outputs
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.tokenizer import load_tokenizer
 
@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "runs" / "minigpt" / "checkpoint.pt")
     parser.add_argument("--tokenizer", type=Path, default=None)
     parser.add_argument("--suite", type=Path, default=ROOT / "data" / "eval_prompts.json")
+    parser.add_argument("--suite-name", choices=["default", "standard-zh"], default=None, help="Use a built-in prompt suite instead of --suite.")
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     return parser.parse_args()
@@ -47,7 +48,7 @@ def main() -> None:
     model.load_state_dict(checkpoint["model"])
     model.eval()
 
-    suite = load_prompt_suite(args.suite)
+    suite = load_builtin_prompt_suite(args.suite_name) if args.suite_name else load_prompt_suite(args.suite)
     cases = list(suite.cases)
     results = []
     for case in cases:
@@ -67,7 +68,7 @@ def main() -> None:
         results,
         checkpoint=str(args.checkpoint),
         tokenizer=str(tokenizer_path),
-        suite=str(args.suite),
+        suite=f"builtin:{args.suite_name}" if args.suite_name else str(args.suite),
         suite_name=suite.name,
         suite_version=suite.version,
         suite_description=suite.description,

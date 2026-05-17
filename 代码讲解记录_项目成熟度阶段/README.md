@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+212-v198-standard-zh-benchmark-suite.md
+ -> v198 code explanation: add a standard Chinese benchmark prompt suite with built-in loading, file-based parity, and eval/pair-batch `--suite-name standard-zh` support for broader repeated checkpoint comparison.
 211-v197-benchmark-scorecard-artifact-helper-consolidation.md
  -> v197 code explanation: replace benchmark scorecard artifact local `_dict` and `_list_of_dicts` helpers with `report_utils.as_dict/list_of_dicts`, preserving valid artifact rows when mixed lists contain non-dict noise.
 210-v196-benchmark-scorecard-report-utils-helper-consolidation.md

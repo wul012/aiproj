@@ -400,6 +400,9 @@ c/196/解释/说明.md
 c/197/图片
 c/197/解释/说明.md
  -> v197 benchmark scorecard artifact helper consolidation 的运行截图和解释
+c/198/图片
+c/198/解释/说明.md
+ -> v198 standard Chinese benchmark suite 的运行截图和解释
 ```
 
 写入规则：

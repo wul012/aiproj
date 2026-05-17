@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.eval_suite import load_prompt_suite
+from minigpt.eval_suite import load_builtin_prompt_suite, load_prompt_suite
 from minigpt.pair_batch import build_pair_batch_case_result, build_pair_batch_report, write_pair_batch_outputs
 from minigpt.server import GenerationRequest, MiniGPTGenerator
 
@@ -22,6 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--left-id", type=str, default="left")
     parser.add_argument("--right-id", type=str, default="right")
     parser.add_argument("--suite", type=Path, default=ROOT / "data" / "eval_prompts.json")
+    parser.add_argument("--suite-name", choices=["default", "standard-zh"], default=None, help="Use a built-in prompt suite instead of --suite.")
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     return parser.parse_args()
@@ -29,7 +30,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    suite = load_prompt_suite(args.suite)
+    suite = load_builtin_prompt_suite(args.suite_name) if args.suite_name else load_prompt_suite(args.suite)
     left_tokenizer = args.left_tokenizer or args.left_checkpoint.parent / "tokenizer.json"
     right_tokenizer = args.right_tokenizer or args.right_checkpoint.parent / "tokenizer.json"
     out_dir = args.out_dir or args.left_checkpoint.parent / "pair_batch"
@@ -69,7 +70,7 @@ def main() -> None:
     report = build_pair_batch_report(
         results,
         suite=suite,
-        suite_path=args.suite,
+        suite_path=f"builtin:{args.suite_name}" if args.suite_name else args.suite,
         left_checkpoint=args.left_checkpoint,
         right_checkpoint=args.right_checkpoint,
         left_checkpoint_id=args.left_id,

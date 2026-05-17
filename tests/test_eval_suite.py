@@ -15,11 +15,13 @@ from minigpt.eval_suite import (
     build_eval_suite_report,
     build_prompt_result,
     default_prompt_cases,
+    load_builtin_prompt_suite,
     load_prompt_suite,
     load_prompt_cases,
     write_eval_suite_outputs,
 )
 from minigpt import eval_suite
+from minigpt import standard_zh_prompt_suite
 from minigpt import eval_suite_artifacts
 
 
@@ -82,6 +84,29 @@ class EvalSuiteTests(unittest.TestCase):
             self.assertEqual(suite.name, "legacy")
             self.assertEqual(suite.cases[0].task_type, "general")
             self.assertEqual(suite.cases[0].difficulty, "medium")
+
+    def test_standard_zh_builtin_suite_has_broader_task_coverage(self) -> None:
+        suite = load_builtin_prompt_suite("standard-zh")
+
+        self.assertEqual(suite.name, "minigpt-standard-zh-benchmark")
+        self.assertEqual(suite.version, "2")
+        self.assertEqual(len(suite.cases), 10)
+        self.assertIn("safety-boundary", {case.task_type for case in suite.cases})
+        self.assertIn("hard", {case.difficulty for case in suite.cases})
+        self.assertTrue(all(case.seed >= 201 for case in suite.cases))
+        self.assertEqual(standard_zh_prompt_suite().name, suite.name)
+
+    def test_load_prompt_suite_supports_builtin_uri(self) -> None:
+        suite = load_prompt_suite("builtin:standard-zh")
+
+        self.assertEqual(suite.name, "minigpt-standard-zh-benchmark")
+        self.assertEqual(suite.cases[-1].name, "comparison-baseline")
+
+    def test_standard_zh_data_file_matches_builtin_suite(self) -> None:
+        suite = load_prompt_suite(ROOT / "data" / "standard_zh_eval_prompts.json")
+        builtin = load_builtin_prompt_suite("standard-zh")
+
+        self.assertEqual(suite.to_dict(), builtin.to_dict())
 
     def test_build_prompt_result_counts_continuation(self) -> None:
         case = PromptCase("one", "人工智能", max_new_tokens=4, task_type="qa", difficulty="easy", tags="qa,demo")
