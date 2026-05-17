@@ -421,6 +421,9 @@ c/203/解释/说明.md
 c/204/图片
 c/204/解释/说明.md
  -> v204 workflow suite guard handoff 的运行截图和解释
+c/207/图片
+c/207/解释/说明.md
+ -> v207 training scale promotion index suite guard evidence 的运行截图和解释
 ```
 
 写入规则：

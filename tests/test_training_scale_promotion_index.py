@@ -84,6 +84,65 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertNotIn("<Index>", html)
             self.assertNotIn("<alpha>", html)
 
+    def test_carries_suite_guard_into_index_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            alpha = make_promotion(root, "alpha", "promoted", include_suite_guard=True)
+            beta = make_promotion(root, "beta", "promoted", include_suite_guard=True)
+
+            report = build_training_scale_promotion_index([alpha, beta], names=["alpha-run", "beta-run"])
+            outputs = write_training_scale_promotion_index_outputs(report, root / "index")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+
+            row = report["promotions"][0]
+            summary = report["summary"]
+            self.assertTrue(row["handoff_require_suite_consistency"])
+            self.assertEqual(row["handoff_suite_consistency"], "consistent")
+            self.assertEqual(row["handoff_suite_mismatch_count"], 0)
+            self.assertEqual(row["handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["handoff_require_suite_consistency_count"], 2)
+            self.assertEqual(summary["handoff_suite_consistent_count"], 2)
+            self.assertEqual(summary["handoff_suite_mismatch_total"], 0)
+            self.assertEqual(summary["handoff_selected_suite_path_count"], 2)
+            self.assertIn("handoff_require_suite_consistency", csv_text)
+            self.assertIn("Handoff Suite", markdown)
+            self.assertIn("Selected Suite", markdown)
+            self.assertIn("Handoff strict suite", html)
+            self.assertIn("Suite mismatches", html)
+
+    def test_index_script_reports_suite_guard_counts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            alpha = make_promotion(root, "alpha", "promoted", include_suite_guard=True)
+            beta = make_promotion(root, "beta", "promoted", include_suite_guard=True)
+
+            out_dir = root / "index"
+            command = [
+                sys.executable,
+                "-B",
+                str(ROOT / "scripts" / "index_training_scale_promotions.py"),
+                "--out-dir",
+                str(out_dir),
+                "--title",
+                "MiniGPT v207 training scale promotion index",
+                str(alpha),
+                str(beta),
+                "--name",
+                "alpha-run",
+                "--name",
+                "beta-run",
+            ]
+            completed = __import__("subprocess").run(command, check=True, capture_output=True, text=True)
+
+            self.assertIn("handoff_require_suite_consistency_count=2", completed.stdout)
+            self.assertIn("handoff_suite_consistent_count=2", completed.stdout)
+            self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
+            self.assertIn("handoff_selected_suite_path_count=2", completed.stdout)
+            self.assertTrue((out_dir / "training_scale_promotion_index.json").exists())
+            self.assertTrue((out_dir / "training_scale_promotion_index.html").exists())
+
     def test_helper_module_still_drives_comparison_inputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -97,7 +156,14 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertEqual(promotion_helpers._summary(report["promotions"], report["comparison_inputs"])["promoted_count"], 1)
 
 
-def make_promotion(root: Path, name: str, status: str, title: str | None = None) -> Path:
+def make_promotion(
+    root: Path,
+    name: str,
+    status: str,
+    title: str | None = None,
+    *,
+    include_suite_guard: bool = False,
+) -> Path:
     promotion_root = root / name / "promotion"
     run_root = root / name / "scale-run"
     run_json = run_root / "training_scale_run.json"
@@ -110,6 +176,21 @@ def make_promotion(root: Path, name: str, status: str, title: str | None = None)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("{}" if path.suffix == ".json" else "checkpoint", encoding="utf-8")
     variant_status = "ready" if status == "promoted" else "review"
+    suite_guard = {}
+    summary_suite_fields = {}
+    if include_suite_guard:
+        suite_guard = {
+            "handoff_require_suite_consistency": True,
+            "handoff_suite_consistency": "consistent",
+            "handoff_suite_mismatch_count": 0,
+            "handoff_selected_suite_path": "builtin:standard-zh",
+        }
+        summary_suite_fields = {
+            "handoff_require_suite_consistency": True,
+            "handoff_suite_consistency": "consistent",
+            "handoff_suite_mismatch_count": 0,
+            "handoff_selected_suite_path": "builtin:standard-zh",
+        }
     report = {
         "title": title or f"{name} promotion",
         "generated_at": "2026-05-14T00:00:00Z",
@@ -132,7 +213,9 @@ def make_promotion(root: Path, name: str, status: str, title: str | None = None)
             "available_required_artifact_count": 9 if status == "promoted" else 7,
             "blocker_count": 1 if status == "blocked" else 0,
             "review_item_count": 1 if status == "review" else 0,
+            **summary_suite_fields,
         },
+        "suite_guard": suite_guard,
         "variants": [
             {
                 "name": f"{name}-variant",

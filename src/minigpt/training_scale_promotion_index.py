@@ -76,6 +76,10 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
         "handoff_status",
         "scale_run_status",
         "batch_status",
+        "handoff_require_suite_consistency",
+        "handoff_suite_consistency",
+        "handoff_suite_mismatch_count",
+        "handoff_selected_suite_path",
         "variant_count",
         "ready_variant_count",
         "required_artifacts",
@@ -97,6 +101,10 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
                     "handoff_status": row.get("handoff_status"),
                     "scale_run_status": row.get("scale_run_status"),
                     "batch_status": row.get("batch_status"),
+                    "handoff_require_suite_consistency": row.get("handoff_require_suite_consistency"),
+                    "handoff_suite_consistency": row.get("handoff_suite_consistency"),
+                    "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
+                    "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
                     "variant_count": row.get("variant_count"),
                     "ready_variant_count": row.get("ready_variant_count"),
                     "required_artifacts": row.get("required_artifact_count"),
@@ -121,13 +129,17 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         f"- Review: `{summary.get('review_count')}`",
         f"- Blocked: `{summary.get('blocked_count')}`",
         f"- Comparison ready: `{summary.get('comparison_ready_count')}`",
+        f"- Handoff strict suite: `{summary.get('handoff_require_suite_consistency_count')}`",
+        f"- Handoff suite consistent: `{summary.get('handoff_suite_consistent_count')}`",
+        f"- Handoff suite mismatches: `{summary.get('handoff_suite_mismatch_total')}`",
+        f"- Selected suite references: `{summary.get('handoff_selected_suite_path_count')}`",
         f"- Compare command ready: `{summary.get('compare_command_ready')}`",
         f"- Baseline: `{comparison.get('baseline_name')}`",
         "",
         "## Promotions",
         "",
-        "| Name | Status | Compare | Variants | Required Artifacts | Primary Variant | Scale Run |",
-        "| --- | --- | --- | ---: | ---: | --- | --- |",
+        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Suite Mismatches | Selected Suite | Variants | Required Artifacts | Primary Variant | Scale Run |",
+        "| --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -137,6 +149,10 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
                     _md(row.get("name")),
                     _md(row.get("promotion_status")),
                     _md(row.get("promoted_for_comparison")),
+                    _md(row.get("handoff_require_suite_consistency")),
+                    _md(row.get("handoff_suite_consistency")),
+                    _md(row.get("handoff_suite_mismatch_count")),
+                    _md(row.get("handoff_selected_suite_path")),
                     _md(row.get("variant_count")),
                     _md(f"{row.get('available_required_artifact_count')}/{row.get('required_artifact_count')}"),
                     _md(row.get("primary_variant")),
@@ -173,6 +189,10 @@ def render_training_scale_promotion_index_html(report: dict[str, Any]) -> str:
         ("Review", summary.get("review_count")),
         ("Blocked", summary.get("blocked_count")),
         ("Comparison ready", summary.get("comparison_ready_count")),
+        ("Handoff strict suite", summary.get("handoff_require_suite_consistency_count")),
+        ("Handoff suite consistent", summary.get("handoff_suite_consistent_count")),
+        ("Suite mismatches", summary.get("handoff_suite_mismatch_total")),
+        ("Selected suite refs", summary.get("handoff_selected_suite_path_count")),
         ("Command ready", summary.get("compare_command_ready")),
         ("Baseline", comparison.get("baseline_name")),
     ]
@@ -246,6 +266,10 @@ def _promotions_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('name'))}</td>"
             f"<td>{_e(row.get('promotion_status'))}</td>"
             f"<td>{_e(row.get('promoted_for_comparison'))}</td>"
+            f"<td>{_e(row.get('handoff_require_suite_consistency'))}</td>"
+            f"<td>{_e(row.get('handoff_suite_consistency'))}</td>"
+            f"<td>{_e(row.get('handoff_suite_mismatch_count'))}</td>"
+            f"<td>{_e(row.get('handoff_selected_suite_path'))}</td>"
             f"<td>{_e(row.get('ready_variant_count'))}/{_e(row.get('variant_count'))}</td>"
             f"<td>{_e(row.get('available_required_artifact_count'))}/{_e(row.get('required_artifact_count'))}</td>"
             f"<td>{_e(row.get('primary_variant'))}</td>"
@@ -254,7 +278,7 @@ def _promotions_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Promotions</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

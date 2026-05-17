@@ -31,6 +31,7 @@ def _resolve_names(reports: list[dict[str, Any]], names: list[str] | None) -> li
 
 def _promotion_row(report: dict[str, Any], name: str, index: int) -> dict[str, Any]:
     summary = _dict(report.get("summary"))
+    suite_guard = _suite_guard(report)
     variants = _list_of_dicts(report.get("variants"))
     primary = _primary_variant(variants)
     artifacts = _artifact_map(primary)
@@ -62,6 +63,10 @@ def _promotion_row(report: dict[str, Any], name: str, index: int) -> dict[str, A
         "available_required_artifact_count": summary.get("available_required_artifact_count"),
         "blocker_count": summary.get("blocker_count") or len(_string_list(report.get("blockers"))),
         "review_item_count": summary.get("review_item_count") or len(_string_list(report.get("review_items"))),
+        "handoff_require_suite_consistency": suite_guard.get("handoff_require_suite_consistency"),
+        "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
+        "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
+        "handoff_selected_suite_path": suite_guard.get("handoff_selected_suite_path"),
         "primary_variant": primary.get("name"),
         "primary_variant_status": primary.get("promotion_status"),
         "primary_portfolio_json": primary.get("portfolio_json"),
@@ -141,6 +146,10 @@ def _summary(promotions: list[dict[str, Any]], comparison_inputs: dict[str, Any]
         "comparison_ready_count": comparison_inputs.get("run_count"),
         "compare_command_ready": comparison_inputs.get("compare_command_ready"),
         "non_comparable_count": sum(1 for row in promotions if not row.get("promoted_for_comparison")),
+        "handoff_require_suite_consistency_count": sum(1 for row in promotions if row.get("handoff_require_suite_consistency")),
+        "handoff_suite_consistent_count": sum(1 for row in promotions if row.get("handoff_suite_consistency") == "consistent"),
+        "handoff_suite_mismatch_total": sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
+        "handoff_selected_suite_path_count": sum(1 for row in promotions if row.get("handoff_selected_suite_path")),
     }
 
 
@@ -168,3 +177,43 @@ def _int(value: Any) -> int:
         return int(value)
     except (TypeError, ValueError):
         return 0
+
+
+def _suite_guard(report: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(report.get("summary"))
+    guard = _dict(report.get("suite_guard"))
+    required = guard.get("handoff_require_suite_consistency")
+    if required is None:
+        required = guard.get("require_suite_consistency")
+    if required is None:
+        required = summary.get("handoff_require_suite_consistency")
+    if required is None:
+        required = summary.get("require_suite_consistency")
+    return {
+        "handoff_require_suite_consistency": bool(required),
+        "handoff_suite_consistency": _first_present(
+            guard.get("handoff_suite_consistency"),
+            guard.get("suite_consistency"),
+            summary.get("handoff_suite_consistency"),
+            summary.get("suite_consistency"),
+        ),
+        "handoff_suite_mismatch_count": _first_present(
+            guard.get("handoff_suite_mismatch_count"),
+            guard.get("suite_mismatch_count"),
+            summary.get("handoff_suite_mismatch_count"),
+            summary.get("suite_mismatch_count"),
+        ),
+        "handoff_selected_suite_path": _first_present(
+            guard.get("handoff_selected_suite_path"),
+            guard.get("selected_suite_path"),
+            summary.get("handoff_selected_suite_path"),
+            summary.get("selected_suite_path"),
+        ),
+    }
+
+
+def _first_present(*values: Any) -> Any:
+    for value in values:
+        if value is not None:
+            return value
+    return None
