@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+210-v196-benchmark-scorecard-report-utils-helper-consolidation.md
+ -> v196 code explanation: replace benchmark scorecard local `_dict` and duplicate `_list_of_dicts` helpers with `report_utils.as_dict/list_of_dicts`, preserving mixed-list pair-result filtering and scorecard contracts.
 209-v195-training-evaluation-timestamp-helper-consolidation.md
  -> v195 code explanation: replace duplicate local `utc_now()` helpers in benchmark scorecard, training portfolio, and training portfolio batch modules with the shared `report_utils.utc_now` helper while keeping timestamp call sites and output contracts unchanged.
 208-v194-training-run-evidence-component-split.md

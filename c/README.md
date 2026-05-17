@@ -394,6 +394,9 @@ c/194/解释/说明.md
 c/195/图片
 c/195/解释/说明.md
  -> v195 training evaluation timestamp helper consolidation 的运行截图和解释
+c/196/图片
+c/196/解释/说明.md
+ -> v196 benchmark scorecard report utils helper consolidation 的运行截图和解释
 ```
 
 写入规则：

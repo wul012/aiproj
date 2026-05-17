@@ -22,6 +22,8 @@ from .benchmark_scorecard_scoring import (
     rubric_scores as _rubric_scores,
     status as _status,
 )
+from .report_utils import as_dict as _dict
+from .report_utils import list_of_dicts as _list_of_dicts
 from .report_utils import utc_now
 
 
@@ -67,14 +69,6 @@ def build_benchmark_scorecard(
         "recommendations": _recommendations(summary, components, drilldowns),
         "warnings": warnings,
     }
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return value if isinstance(value, list) and all(isinstance(item, dict) for item in value) else []
 
 
 def write_benchmark_scorecard_json(scorecard: dict[str, Any], path: str | Path) -> None:
@@ -491,10 +485,6 @@ def _number(value: Any) -> float | None:
 
 def _pick(value: Any, key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _as_str(value: Any) -> str | None:

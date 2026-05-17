@@ -217,6 +217,29 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertFalse(scorecard["summary"]["pair_same_checkpoint_baseline"])
             self.assertEqual(scorecard["summary"]["pair_comparison_mode"], "cross_checkpoint_or_unknown")
 
+    def test_pair_results_ignore_non_dict_items_after_helper_consolidation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir, registry_path = make_run(Path(tmp))
+            pair_path = run_dir / "pair_batch" / "pair_generation_batch.json"
+            pair = json.loads(pair_path.read_text(encoding="utf-8"))
+            pair["case_count"] = 2
+            pair["generated_equal_count"] = 1
+            pair["generated_difference_count"] = 1
+            pair["avg_abs_generated_char_delta"] = 1.5
+            pair["results"] = [
+                "ignored-non-dict-item",
+                {"comparison": {"same_checkpoint": False, "generated_char_delta": -3}},
+            ]
+            pair_path.write_text(json.dumps(pair), encoding="utf-8")
+
+            scorecard = build_benchmark_scorecard(run_dir, registry_path=registry_path)
+
+            self.assertEqual(scorecard["summary"]["pair_batch_cases"], 2)
+            self.assertEqual(scorecard["summary"]["pair_generated_differences"], 1)
+            self.assertEqual(scorecard["summary"]["max_abs_generated_delta"], 3)
+            self.assertFalse(scorecard["summary"]["pair_same_checkpoint_baseline"])
+            self.assertEqual(scorecard["summary"]["pair_comparison_mode"], "cross_checkpoint_or_unknown")
+
     def test_write_benchmark_scorecard_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
