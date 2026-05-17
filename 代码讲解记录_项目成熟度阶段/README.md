@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+213-v199-portfolio-standard-suite-selection.md
+ -> v199 code explanation: connect the v198 standard Chinese benchmark suite into training portfolio and batch planning through `suite_name`, `--suite-name standard-zh`, and `builtin:standard-zh` plan evidence.
 212-v198-standard-zh-benchmark-suite.md
  -> v198 code explanation: add a standard Chinese benchmark prompt suite with built-in loading, file-based parity, and eval/pair-batch `--suite-name standard-zh` support for broader repeated checkpoint comparison.
 211-v197-benchmark-scorecard-artifact-helper-consolidation.md

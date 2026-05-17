@@ -25,6 +25,7 @@ def build_training_portfolio_plan(
     dataset_version: str = "v1",
     dataset_description: str = "MiniGPT training portfolio dataset.",
     suite_path: str | Path | None = None,
+    suite_name: str | None = None,
     request_log_path: str | Path | None = None,
     python_executable: str = "python",
     device: str = "cpu",
@@ -62,7 +63,8 @@ def build_training_portfolio_plan(
     maturity_dir = out / "maturity-summary"
     request_summary_dir = out / "request-history-summary"
     narrative_dir = out / "maturity-narrative"
-    suite = Path(suite_path) if suite_path is not None else root / "data" / "eval_prompts.json"
+    suite_ref = _suite_ref(root, suite_path=suite_path, suite_name=suite_name)
+    suite_args = _suite_args(suite_ref)
     pair_config = _pair_config(
         run_dir,
         run_name=run_name,
@@ -159,8 +161,7 @@ def build_training_portfolio_plan(
                 str(root / "scripts" / "eval_suite.py"),
                 "--checkpoint",
                 str(run_dir / "checkpoint.pt"),
-                "--suite",
-                str(suite),
+                *suite_args,
                 "--out-dir",
                 str(eval_dir),
                 "--device",
@@ -197,8 +198,7 @@ def build_training_portfolio_plan(
                 pair_config["left_id"],
                 "--right-id",
                 pair_config["right_id"],
-                "--suite",
-                str(suite),
+                *suite_args,
                 "--out-dir",
                 str(pair_batch_dir),
                 "--device",
@@ -315,7 +315,8 @@ def build_training_portfolio_plan(
         "run_name": run_name,
         "dataset_name": dataset_name,
         "dataset_version": dataset_version,
-        "suite_path": str(suite),
+        "suite": suite_ref,
+        "suite_path": suite_ref["path"],
         "request_log_path": str(request_log_path) if request_log_path is not None else None,
         "pair_config": pair_config,
         "artifacts": artifacts,
@@ -408,6 +409,21 @@ def _pair_config(
 
 def _tokenizer_args(flag: str, value: Any) -> list[str]:
     return [flag, str(value)] if value is not None and str(value).strip() else []
+
+
+def _suite_ref(root: Path, *, suite_path: str | Path | None, suite_name: str | None) -> dict[str, Any]:
+    if suite_name and suite_path is not None:
+        raise ValueError("suite_name and suite_path cannot both be provided")
+    if suite_name:
+        return {"mode": "builtin", "name": str(suite_name), "path": f"builtin:{suite_name}"}
+    suite = Path(suite_path) if suite_path is not None else root / "data" / "eval_prompts.json"
+    return {"mode": "file", "name": None, "path": str(suite)}
+
+
+def _suite_args(suite_ref: dict[str, Any]) -> list[str]:
+    if suite_ref.get("mode") == "builtin":
+        return ["--suite-name", str(suite_ref.get("name"))]
+    return ["--suite", str(suite_ref.get("path"))]
 
 
 def _train_command(

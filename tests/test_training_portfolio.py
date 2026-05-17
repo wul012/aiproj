@@ -101,6 +101,44 @@ class TrainingPortfolioTests(unittest.TestCase):
             self.assertIn("--left-id base-v1", pair_command)
             self.assertIn("--right-id candidate-v2", pair_command)
 
+    def test_build_training_portfolio_plan_accepts_builtin_standard_suite(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "data.txt"
+            source.write_text("人工智能训练数据", encoding="utf-8")
+
+            plan = build_training_portfolio_plan(
+                root,
+                [source],
+                out_root=root / "portfolio",
+                run_name="standard-suite-run",
+                suite_name="standard-zh",
+            )
+
+            eval_command = " ".join(plan["steps"][3]["command"])
+            pair_command = " ".join(plan["steps"][5]["command"])
+            self.assertEqual(plan["suite"], {"mode": "builtin", "name": "standard-zh", "path": "builtin:standard-zh"})
+            self.assertEqual(plan["suite_path"], "builtin:standard-zh")
+            self.assertIn("--suite-name standard-zh", eval_command)
+            self.assertIn("--suite-name standard-zh", pair_command)
+            self.assertNotIn("--suite ", eval_command)
+            self.assertNotIn("--suite ", pair_command)
+
+    def test_build_training_portfolio_plan_rejects_suite_name_and_path_together(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "data.txt"
+            source.write_text("人工智能训练数据", encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                build_training_portfolio_plan(
+                    root,
+                    [source],
+                    out_root=root / "portfolio",
+                    suite_path=root / "suite.json",
+                    suite_name="standard-zh",
+                )
+
     def test_dry_run_report_marks_artifacts_as_planned(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

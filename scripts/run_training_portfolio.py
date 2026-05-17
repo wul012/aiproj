@@ -25,6 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset-version", type=str, default="v1")
     parser.add_argument("--dataset-description", type=str, default="MiniGPT training portfolio dataset.")
     parser.add_argument("--suite", type=Path, default=ROOT / "data" / "eval_prompts.json")
+    parser.add_argument("--suite-name", choices=["default", "standard-zh"], default=None, help="Use a built-in prompt suite instead of --suite.")
     parser.add_argument("--request-log", type=Path, default=None, help="Optional inference_requests.jsonl to summarize")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="cpu")
     parser.add_argument("--max-iters", type=int, default=100)
@@ -59,7 +60,8 @@ def main() -> None:
         dataset_name=args.dataset_name,
         dataset_version=args.dataset_version,
         dataset_description=args.dataset_description,
-        suite_path=args.suite,
+        suite_path=None if args.suite_name else args.suite,
+        suite_name=args.suite_name,
         request_log_path=args.request_log,
         python_executable=args.python,
         device=args.device,

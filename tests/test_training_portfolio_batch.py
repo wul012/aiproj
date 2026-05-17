@@ -108,6 +108,35 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertEqual(context_pair["right_id"], "global-candidate")
             self.assertIn("--left-checkpoint " + str(variant_baseline), context_command)
 
+    def test_build_batch_plan_passes_standard_suite_to_variants(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "data.txt"
+            source.write_text("MiniGPT batch data", encoding="utf-8")
+            variants = [
+                {"name": "standard", "suite_name": "standard-zh"},
+                {"name": "file-suite", "suite_path": str(root / "custom-suite.json")},
+            ]
+
+            plan = build_training_portfolio_batch_plan(
+                root,
+                [source],
+                out_root=root / "batch",
+                variants=variants,
+                suite_name="standard-zh",
+            )
+
+            standard = plan["variants"][0]["portfolio_plan"]
+            file_suite = plan["variants"][1]["portfolio_plan"]
+            standard_eval = " ".join(standard["steps"][3]["command"])
+            standard_pair = " ".join(standard["steps"][5]["command"])
+            file_eval = " ".join(file_suite["steps"][3]["command"])
+            self.assertEqual(standard["suite_path"], "builtin:standard-zh")
+            self.assertIn("--suite-name standard-zh", standard_eval)
+            self.assertIn("--suite-name standard-zh", standard_pair)
+            self.assertIn("--suite " + str(root / "custom-suite.json"), file_eval)
+            self.assertEqual(file_suite["suite"]["mode"], "file")
+
     def test_run_batch_dry_run_writes_variant_reports_and_comparison(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

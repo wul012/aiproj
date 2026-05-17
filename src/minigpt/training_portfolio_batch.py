@@ -64,6 +64,8 @@ VARIANT_OVERRIDE_KEYS = {
     "dataset_name",
     "dataset_version",
     "dataset_description",
+    "suite_path",
+    "suite_name",
     "device",
     "max_iters",
     "eval_interval",
@@ -102,6 +104,7 @@ def build_training_portfolio_batch_plan(
     dataset_name: str = "portfolio-zh",
     dataset_description: str = "MiniGPT training portfolio batch dataset.",
     suite_path: str | Path | None = None,
+    suite_name: str | None = None,
     request_log_path: str | Path | None = None,
     python_executable: str = "python",
     device: str = "cpu",
@@ -138,6 +141,7 @@ def build_training_portfolio_batch_plan(
         "dataset_name": dataset_name,
         "dataset_description": dataset_description,
         "suite_path": suite_path,
+        "suite_name": suite_name,
         "request_log_path": request_log_path,
         "python_executable": python_executable,
         "device": device,
@@ -172,6 +176,7 @@ def build_training_portfolio_batch_plan(
             dataset_version=str(config["dataset_version"]),
             dataset_description=str(config["dataset_description"]),
             suite_path=config.get("suite_path"),
+            suite_name=_optional_str(config.get("suite_name")),
             request_log_path=config.get("request_log_path"),
             python_executable=str(config["python_executable"]),
             device=str(config["device"]),
@@ -319,6 +324,10 @@ def _normalize_variant(value: Any, index: int) -> dict[str, Any]:
 def _variant_config(common: dict[str, Any], variant: dict[str, Any]) -> dict[str, Any]:
     config = dict(common)
     config.update({key: variant[key] for key in VARIANT_OVERRIDE_KEYS if key in variant})
+    if "suite_path" in variant and "suite_name" not in variant:
+        config["suite_name"] = None
+    if "suite_name" in variant and "suite_path" not in variant:
+        config["suite_path"] = None
     if "pair_baseline_checkpoint" in variant and "pair_baseline_tokenizer" not in variant:
         config["pair_baseline_tokenizer"] = None
     name = str(variant["name"])
@@ -359,6 +368,8 @@ def _public_config(config: dict[str, Any]) -> dict[str, Any]:
             "learning_rate",
             "seed",
             "sample_tokens",
+            "suite_path",
+            "suite_name",
             "pair_baseline_checkpoint",
             "pair_baseline_tokenizer",
             "pair_baseline_id",
