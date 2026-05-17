@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+193-v179-maturity-narrative-summary-section-split.md
+ -> v179 code explanation: split maturity narrative portfolio summary/recommendation/warning calculation into `maturity_narrative_summary.py` and human-readable sections/evidence matrix into `maturity_narrative_sections.py`, while keeping `build_maturity_narrative()`, narrative schema, artifact writers, CLI behavior, and old imports unchanged.
 192-v178-server-post-route-split.md
  -> v178 code explanation: split MiniGPT server POST route handling for `/api/generate`, `/api/generate-stream`, `/api/generate-pair`, and `/api/generate-pair-artifact` into `server_post_routes.py`, while keeping request parsing, checkpoint resolution, SSE timeout/cancel behavior, pair artifact writing, request logging, handler assembly, and old server facade exports unchanged.
 191-v177-dashboard-section-helper-split.md

@@ -343,6 +343,9 @@ c/177/解释/说明.md
 c/178/图片
 c/178/解释/说明.md
  -> v178 server POST route split 的运行截图和解释
+c/179/图片
+c/179/解释/说明.md
+ -> v179 maturity narrative summary section split 的运行截图和解释
 ```
 
 写入规则：

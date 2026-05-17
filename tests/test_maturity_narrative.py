@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import maturity_narrative, maturity_narrative_artifacts
+from minigpt import maturity_narrative_sections, maturity_narrative_summary
 from minigpt.maturity_narrative import (
     build_maturity_narrative,
     render_maturity_narrative_html,
@@ -160,6 +161,28 @@ class MaturityNarrativeTests(unittest.TestCase):
             maturity_narrative.write_maturity_narrative_outputs,
             maturity_narrative_artifacts.write_maturity_narrative_outputs,
         )
+
+    def test_maturity_narrative_uses_split_summary_and_section_helpers(self) -> None:
+        self.assertIs(
+            maturity_narrative.build_maturity_narrative.__globals__["build_maturity_narrative_summary"],
+            maturity_narrative_summary.build_maturity_narrative_summary,
+        )
+        self.assertIs(
+            maturity_narrative.build_maturity_narrative.__globals__["build_maturity_narrative_sections"],
+            maturity_narrative_sections.build_maturity_narrative_sections,
+        )
+        summary = maturity_narrative_summary.build_maturity_narrative_summary(
+            {"summary": {"current_version": 1, "overall_status": "pass", "average_maturity_level": 1.0}, "release_readiness_context": {"trend_status": "improved"}},
+            {"run_count": 1},
+            {"summary": {"status": "pass", "total_log_records": 1}},
+            [{"summary": {"overall_status": "pass", "overall_score": 80}}],
+            [{"decision_status": "promote", "selected_run": {"name": "demo"}}],
+            [{"summary": {"quality_status": "pass", "warning_count": 0}}],
+        )
+        sections = maturity_narrative_sections.build_maturity_narrative_sections(summary)
+
+        self.assertEqual(summary["portfolio_status"], "ready")
+        self.assertEqual(sections[4]["title"], "Benchmark Promotion Decision")
 
     def test_build_maturity_narrative_ready_portfolio(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
