@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    first_present,
     list_of_dicts as _list_of_dicts,
     utc_now,
 )
@@ -131,12 +132,12 @@ def _summary(
         "maturity_status": maturity_summary.get("overall_status"),
         "current_version": maturity_summary.get("current_version"),
         "ci_workflow_status": ci_summary.get("status") or bundle_summary.get("ci_workflow_status") or ci_context.get("status"),
-        "ci_workflow_failed_checks": _first_present(
+        "ci_workflow_failed_checks": first_present(
             ci_summary.get("failed_check_count"),
             bundle_summary.get("ci_workflow_failed_checks"),
             ci_context.get("failed_check_count"),
         ),
-        "ci_workflow_node24_actions": _first_present(
+        "ci_workflow_node24_actions": first_present(
             ci_summary.get("node24_native_actions"),
             ci_summary.get("node24_native_action_count"),
             bundle_summary.get("ci_workflow_node24_actions"),
@@ -263,7 +264,7 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             "pass" if ci_status == "pass" else "warn",
             "status="
             + ci_status
-            + f"; failed_checks={_fmt(summary.get('failed_check_count'))}; node24_native={_fmt(_first_present(summary.get('node24_native_actions'), summary.get('node24_native_action_count')))}",
+            + f"; failed_checks={_fmt(summary.get('failed_check_count'))}; node24_native={_fmt(first_present(summary.get('node24_native_actions'), summary.get('node24_native_action_count')))}",
             path,
         )
     bundle_summary = _dict(bundle.get("summary"))
@@ -277,10 +278,10 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             "status="
             + str(ci_status)
             + "; failed_checks="
-            + _fmt(_first_present(bundle_summary.get("ci_workflow_failed_checks"), bundle_context.get("failed_check_count")))
+            + _fmt(first_present(bundle_summary.get("ci_workflow_failed_checks"), bundle_context.get("failed_check_count")))
             + "; node24_native="
             + _fmt(
-                _first_present(
+                first_present(
                     bundle_summary.get("ci_workflow_node24_actions"),
                     bundle_context.get("node24_native_actions"),
                     bundle_context.get("node24_native_action_count"),
@@ -351,14 +352,6 @@ def _status_from_check_status(value: str) -> str:
     if value == "fail" or value == "blocked":
         return "fail"
     return "warn"
-
-
-def _first_present(*values: Any) -> Any:
-    for value in values:
-        if value is not None:
-            return value
-    return None
-
 
 def _resolve_optional_path(explicit: str | Path | None, hinted: Any, candidate: Path) -> Path | None:
     if explicit is not None:

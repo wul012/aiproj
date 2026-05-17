@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
 from typing import Any
 
+from minigpt.report_utils import utc_now
 from minigpt.maturity_artifacts import (
     render_maturity_summary_html,
     render_maturity_summary_markdown,
@@ -94,10 +94,6 @@ CAPABILITY_SPECS = (
         "Use maturity trend context to choose the next real capability: larger data, benchmark hardening, or serving review.",
     ),
 )
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def build_maturity_summary(

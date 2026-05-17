@@ -3,10 +3,11 @@ from __future__ import annotations
 import csv
 import io
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs
+
+from minigpt.report_utils import utc_now
 
 
 REQUEST_HISTORY_DEFAULT_LIMIT = 20
@@ -316,4 +317,4 @@ def as_int(value: Any, name: str) -> int:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return utc_now()

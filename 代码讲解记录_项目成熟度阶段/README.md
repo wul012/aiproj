@@ -516,6 +516,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `222-v208-promoted-comparison-suite-guard-evidence.md`：第二百零八版代码讲解，把 promotion index 的 handoff suite guard 继续接到 promoted-only comparison。
 - `223-v209-promoted-decision-suite-guard-evidence.md`：第二百零九版代码讲解，把 promoted-only comparison 的 handoff suite guard 继续接到 promoted baseline decision。
 - `224-v210-promoted-seed-suite-guard-evidence.md`：第二百一十版代码讲解，把 promoted baseline decision 的 handoff suite guard 继续接到 promoted training-scale seed。
+- `225-v211-promoted-seed-handoff-suite-guard-evidence.md`：第二百一十一版代码讲解，把 promoted training-scale seed 的 handoff suite guard 继续接到 seed handoff，并顺手收束同语义 `first_present` / `utc_now` helper。
 
 ## 一句话总览
 

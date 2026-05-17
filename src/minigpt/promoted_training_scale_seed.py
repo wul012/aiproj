@@ -16,6 +16,7 @@ from minigpt.promoted_training_scale_seed_artifacts import (
 from minigpt.report_utils import (
     as_dict as _dict,
     display_command as _display_command,
+    first_present,
     list_of_dicts as _list_of_dicts,
     utc_now,
 )
@@ -410,19 +411,19 @@ def _summary(
 def _handoff_suite_guard(decision: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(decision.get("summary"))
     return {
-        "selected_handoff_require_suite_consistency": _first_present(
+        "selected_handoff_require_suite_consistency": first_present(
             summary.get("selected_handoff_require_suite_consistency"),
             selected.get("handoff_require_suite_consistency"),
         ),
-        "selected_handoff_suite_consistency": _first_present(
+        "selected_handoff_suite_consistency": first_present(
             summary.get("selected_handoff_suite_consistency"),
             selected.get("handoff_suite_consistency"),
         ),
-        "selected_handoff_suite_mismatch_count": _first_present(
+        "selected_handoff_suite_mismatch_count": first_present(
             summary.get("selected_handoff_suite_mismatch_count"),
             selected.get("handoff_suite_mismatch_count"),
         ),
-        "selected_handoff_selected_suite_path": _first_present(
+        "selected_handoff_selected_suite_path": first_present(
             summary.get("selected_handoff_selected_suite_path"),
             selected.get("handoff_selected_suite_path"),
         ),
@@ -453,12 +454,6 @@ def _recommendations(
         return ["Fix the seed blockers before starting the next training scale planning cycle."]
     return ["Inspect the promoted baseline decision before building a next-cycle plan."]
 
-
-def _first_present(*values: Any) -> Any:
-    for value in values:
-        if value is not None:
-            return value
-    return None
 
 __all__ = [
     "build_promoted_training_scale_seed",

@@ -10,6 +10,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     count_available_artifacts,
     display_command as _display_command,
+    first_present,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     make_artifact_row,
@@ -406,19 +407,12 @@ def _suite_guard(workflow: dict[str, Any], decision: dict[str, Any]) -> dict[str
     return {
         "decision_require_suite_consistency": bool(required),
         "require_suite_consistency": bool(required),
-        "suite_consistency": _first_present(decision_summary.get("suite_consistency"), workflow_summary.get("suite_consistency")),
-        "suite_mismatch_count": _first_present(decision_summary.get("suite_mismatch_count"), workflow_summary.get("suite_mismatch_count")),
-        "selected_suite_path": _first_present(decision_summary.get("selected_suite_path"), workflow_summary.get("selected_suite_path")),
+        "suite_consistency": first_present(decision_summary.get("suite_consistency"), workflow_summary.get("suite_consistency")),
+        "suite_mismatch_count": first_present(decision_summary.get("suite_mismatch_count"), workflow_summary.get("suite_mismatch_count")),
+        "selected_suite_path": first_present(decision_summary.get("selected_suite_path"), workflow_summary.get("selected_suite_path")),
         "workflow_suite_path": workflow_summary.get("suite_path"),
         "workflow_suite_name": workflow_summary.get("suite_name"),
     }
-
-
-def _first_present(*values: Any) -> Any:
-    for value in values:
-        if value is not None:
-            return value
-    return None
 
 
 def _option_value(command: list[str], option: str) -> str | None:

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
@@ -16,6 +15,7 @@ from minigpt.comparison_artifacts import (
     write_comparison_outputs,
     write_comparison_svg,
 )
+from minigpt.report_utils import utc_now
 
 
 @dataclass(frozen=True)
@@ -392,7 +392,7 @@ def _missing(value: Any) -> str:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return utc_now()
 
 
 def _fmt_signed(value: Any) -> str:

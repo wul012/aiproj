@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
 
+from minigpt.report_utils import utc_now
 from minigpt.maturity_narrative_artifacts import (
     render_maturity_narrative_html,
     render_maturity_narrative_markdown,
@@ -22,10 +22,6 @@ from minigpt.maturity_narrative_summary import (
     build_maturity_narrative_summary,
     build_maturity_narrative_warnings,
 )
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def build_maturity_narrative(

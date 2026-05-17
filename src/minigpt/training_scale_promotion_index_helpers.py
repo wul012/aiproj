@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    first_present,
     list_of_dicts as _list_of_dicts,
     string_list as _string_list,
 )
@@ -191,29 +192,22 @@ def _suite_guard(report: dict[str, Any]) -> dict[str, Any]:
         required = summary.get("require_suite_consistency")
     return {
         "handoff_require_suite_consistency": bool(required),
-        "handoff_suite_consistency": _first_present(
+        "handoff_suite_consistency": first_present(
             guard.get("handoff_suite_consistency"),
             guard.get("suite_consistency"),
             summary.get("handoff_suite_consistency"),
             summary.get("suite_consistency"),
         ),
-        "handoff_suite_mismatch_count": _first_present(
+        "handoff_suite_mismatch_count": first_present(
             guard.get("handoff_suite_mismatch_count"),
             guard.get("suite_mismatch_count"),
             summary.get("handoff_suite_mismatch_count"),
             summary.get("suite_mismatch_count"),
         ),
-        "handoff_selected_suite_path": _first_present(
+        "handoff_selected_suite_path": first_present(
             guard.get("handoff_selected_suite_path"),
             guard.get("selected_suite_path"),
             summary.get("handoff_selected_suite_path"),
             summary.get("selected_suite_path"),
         ),
     }
-
-
-def _first_present(*values: Any) -> Any:
-    for value in values:
-        if value is not None:
-            return value
-    return None

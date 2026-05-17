@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
@@ -24,6 +23,7 @@ from minigpt.benchmark_scorecard_comparison_deltas import (
     select_best_benchmark_scorecard_run,
     summarize_benchmark_scorecard_run,
 )
+from minigpt.report_utils import utc_now
 
 
 def load_benchmark_scorecard(path: str | Path) -> dict[str, Any]:
@@ -127,7 +127,7 @@ def _select_baseline(runs: list[dict[str, Any]], baseline: str | int | None) -> 
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return utc_now()
 
 
 def _as_str(value: Any) -> str | None:

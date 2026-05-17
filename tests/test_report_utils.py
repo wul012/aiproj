@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.report_utils import (  # noqa: E402
     count_available_artifacts,
     display_command,
+    first_present,
     html_escape,
     list_of_dicts,
     make_artifact_row,
@@ -70,6 +71,11 @@ class ReportUtilsTests(unittest.TestCase):
 
     def test_list_of_dicts_filters_invalid_items(self) -> None:
         self.assertEqual(list_of_dicts([{"a": 1}, "bad", {"b": 2}]), [{"a": 1}, {"b": 2}])
+
+    def test_first_present_returns_first_non_none_value(self) -> None:
+        self.assertEqual(first_present(None, 0, "fallback"), 0)
+        self.assertEqual(first_present(None, "", "fallback"), "")
+        self.assertIsNone(first_present(None, None))
 
 
 if __name__ == "__main__":

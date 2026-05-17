@@ -155,6 +155,7 @@ def _summary(
     plan_summary = _dict(plan_report.get("summary"))
     plan_suite = _dict(plan_report.get("suite"))
     plan_dataset = _dict(plan_report.get("dataset"))
+    handoff_guard = _dict(baseline.get("handoff_suite_guard"))
     return {
         "handoff_status": execution.get("status"),
         "seed_status": seed.get("seed_status"),
@@ -170,6 +171,13 @@ def _summary(
         "plan_status": "available" if plan_report else "missing",
         "seed_suite_path": _dict(next_plan.get("suite")).get("path"),
         "seed_suite_source": next_plan.get("suite_source"),
+        "selected_handoff_require_suite_consistency": handoff_guard.get("selected_handoff_require_suite_consistency"),
+        "selected_handoff_suite_consistency": handoff_guard.get("selected_handoff_suite_consistency"),
+        "selected_handoff_suite_mismatch_count": handoff_guard.get("selected_handoff_suite_mismatch_count"),
+        "selected_handoff_selected_suite_path": handoff_guard.get("selected_handoff_selected_suite_path"),
+        "handoff_suite_consistent_count": handoff_guard.get("handoff_suite_consistent_count"),
+        "handoff_suite_mismatch_total": handoff_guard.get("handoff_suite_mismatch_total"),
+        "comparison_ready_handoff_suite_mismatch_total": handoff_guard.get("comparison_ready_handoff_suite_mismatch_total"),
         "plan_suite_mode": plan_suite.get("mode") or plan_summary.get("suite_mode"),
         "plan_suite_name": plan_suite.get("name") or plan_summary.get("suite_name"),
         "plan_suite_path": plan_suite.get("path") or plan_summary.get("suite_path"),

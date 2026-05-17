@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
 
+from minigpt.report_utils import utc_now
 from minigpt.training_portfolio_comparison_artifacts import (
     render_training_portfolio_comparison_html,
     render_training_portfolio_comparison_markdown,
@@ -388,7 +388,7 @@ def _missing_artifact(key: str) -> dict[str, Any]:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return utc_now()
 
 
 def _dict(value: Any) -> dict[str, Any]:

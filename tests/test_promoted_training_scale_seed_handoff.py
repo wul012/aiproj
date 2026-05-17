@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -100,6 +101,45 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("--suite-name", report["next_batch_command"])
             self.assertIn("standard-zh", report["next_batch_command"])
 
+    def test_carries_seed_handoff_suite_guard_into_handoff_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+
+            report = build_promoted_training_scale_seed_handoff(seed, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_seed_handoff_outputs(report, root / "handoff")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            summary = report["summary"]
+            self.assertEqual(summary["handoff_status"], "planned")
+            self.assertEqual(summary["selected_handoff_suite_consistency"], "consistent")
+            self.assertEqual(summary["selected_handoff_suite_mismatch_count"], 0)
+            self.assertEqual(summary["selected_handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["handoff_suite_mismatch_total"], 0)
+            self.assertIn("selected_handoff_suite_consistency", csv_text)
+            self.assertIn("Selected handoff suite", markdown)
+            self.assertIn("Handoff suite mismatches", markdown)
+            self.assertIn("Selected handoff suite", html)
+            self.assertIn("selected_handoff_suite_consistency=consistent", completed.stdout)
+            self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+
     def test_execute_reports_failed_command(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -141,6 +181,7 @@ def write_seed_tree(
     seed_status: str = "ready",
     command: list[str] | None = None,
     suite_name: str | None = None,
+    include_handoff_suite_guard: bool = False,
 ) -> Path:
     source = root / "corpus.txt"
     source.write_text("MiniGPT v82 next cycle corpus.\n" * 180, encoding="utf-8")
@@ -173,22 +214,34 @@ def write_seed_tree(
         if suite_name
         else {"mode": "file", "name": None, "path": str(ROOT / "data" / "eval_prompts.json"), "source": "default"}
     )
+    baseline_seed = {
+        "selected_name": "beta",
+        "decision_status": "accepted" if seed_status != "blocked" else "blocked",
+        "gate_status": "pass",
+        "batch_status": "completed",
+        "readiness_score": 107,
+        "training_scale_run_path": str(root / "beta" / "training_scale_run.json"),
+        "training_scale_run_exists": True,
+        "suite": suite,
+        "suite_path": suite["path"],
+    }
+    if include_handoff_suite_guard:
+        baseline_seed["handoff_suite_guard"] = {
+            "selected_handoff_require_suite_consistency": True,
+            "selected_handoff_suite_consistency": "consistent",
+            "selected_handoff_suite_mismatch_count": 0,
+            "selected_handoff_selected_suite_path": "builtin:standard-zh",
+            "handoff_require_suite_consistency_count": 2,
+            "handoff_suite_consistent_count": 2,
+            "handoff_suite_mismatch_total": 0,
+            "comparison_ready_handoff_suite_mismatch_total": 0,
+        }
     seed = {
         "schema_version": 1,
         "title": "seed",
         "generated_at": "2026-05-14T00:00:00Z",
         "seed_status": seed_status,
-        "baseline_seed": {
-            "selected_name": "beta",
-            "decision_status": "accepted" if seed_status != "blocked" else "blocked",
-            "gate_status": "pass",
-            "batch_status": "completed",
-            "readiness_score": 107,
-            "training_scale_run_path": str(root / "beta" / "training_scale_run.json"),
-            "training_scale_run_exists": True,
-            "suite": suite,
-            "suite_path": suite["path"],
-        },
+        "baseline_seed": baseline_seed,
         "next_plan": {
             "project_root": str(ROOT),
             "dataset_name": "next-zh",
