@@ -388,6 +388,9 @@ c/192/解释/说明.md
 c/193/图片
 c/193/解释/说明.md
  -> v193 training portfolio batch external baseline 的运行截图和解释
+c/194/图片
+c/194/解释/说明.md
+ -> v194 training run evidence component split 的运行截图和解释
 ```
 
 写入规则：
