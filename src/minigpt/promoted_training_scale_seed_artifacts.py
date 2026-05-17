@@ -34,6 +34,12 @@ def write_promoted_training_scale_seed_csv(report: dict[str, Any], path: str | P
         "source_count",
         "missing_source_count",
         "baseline_suite_path",
+        "selected_handoff_require_suite_consistency",
+        "selected_handoff_suite_consistency",
+        "selected_handoff_suite_mismatch_count",
+        "selected_handoff_selected_suite_path",
+        "handoff_suite_consistent_count",
+        "handoff_suite_mismatch_total",
         "next_suite_path",
         "next_suite_source",
         "command_available",
@@ -51,6 +57,12 @@ def write_promoted_training_scale_seed_csv(report: dict[str, Any], path: str | P
             "source_count": summary.get("source_count"),
             "missing_source_count": summary.get("missing_source_count"),
             "baseline_suite_path": summary.get("baseline_suite_path"),
+            "selected_handoff_require_suite_consistency": summary.get("selected_handoff_require_suite_consistency"),
+            "selected_handoff_suite_consistency": summary.get("selected_handoff_suite_consistency"),
+            "selected_handoff_suite_mismatch_count": summary.get("selected_handoff_suite_mismatch_count"),
+            "selected_handoff_selected_suite_path": summary.get("selected_handoff_selected_suite_path"),
+            "handoff_suite_consistent_count": summary.get("handoff_suite_consistent_count"),
+            "handoff_suite_mismatch_total": summary.get("handoff_suite_mismatch_total"),
             "next_suite_path": summary.get("next_suite_path"),
             "next_suite_source": summary.get("next_suite_source"),
             "command_available": plan.get("command_available"),
@@ -79,6 +91,11 @@ def render_promoted_training_scale_seed_markdown(report: dict[str, Any]) -> str:
         f"- Sources: `{summary.get('source_count')}`",
         f"- Missing sources: `{summary.get('missing_source_count')}`",
         f"- Baseline suite: `{summary.get('baseline_suite_path')}`",
+        f"- Selected handoff suite: `{summary.get('selected_handoff_suite_consistency')}`",
+        f"- Selected handoff mismatches: `{summary.get('selected_handoff_suite_mismatch_count')}`",
+        f"- Selected handoff suite path: `{summary.get('selected_handoff_selected_suite_path')}`",
+        f"- Handoff suite consistent: `{summary.get('handoff_suite_consistent_count')}`",
+        f"- Handoff suite mismatches: `{summary.get('handoff_suite_mismatch_total')}`",
         f"- Next suite: `{summary.get('next_suite_path')}`",
         f"- Next suite source: `{summary.get('next_suite_source')}`",
         "",
@@ -123,6 +140,9 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Score", seed.get("readiness_score")),
         ("Sources", summary.get("source_count")),
         ("Missing", summary.get("missing_source_count")),
+        ("Selected handoff suite", summary.get("selected_handoff_suite_consistency")),
+        ("Selected handoff mismatch", summary.get("selected_handoff_suite_mismatch_count")),
+        ("Handoff suite mismatches", summary.get("handoff_suite_mismatch_total")),
         ("Next suite", summary.get("next_suite_path")),
     ]
     return "\n".join(
@@ -181,6 +201,15 @@ def _baseline_section(seed: dict[str, Any]) -> str:
         ("Run exists", seed.get("training_scale_run_exists")),
         ("Comparison", seed.get("comparison_path")),
     ]
+    guard = _dict(seed.get("handoff_suite_guard"))
+    rows.extend(
+        [
+            ("Selected handoff strict", guard.get("selected_handoff_require_suite_consistency")),
+            ("Selected handoff suite", guard.get("selected_handoff_suite_consistency")),
+            ("Selected handoff mismatch", guard.get("selected_handoff_suite_mismatch_count")),
+            ("Selected handoff suite path", guard.get("selected_handoff_selected_suite_path")),
+        ]
+    )
     summary = _dict(seed.get("selected_run_summary"))
     rows.extend(
         [

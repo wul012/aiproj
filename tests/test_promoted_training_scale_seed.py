@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -94,6 +95,73 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
             self.assertEqual(report["summary"]["next_suite_path"], "builtin:standard-zh")
             self.assertIn("--suite-name standard-zh", command)
 
+    def test_carries_decision_handoff_suite_guard_into_seed_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decision = write_decision_tree(
+                root,
+                decision_status="accepted",
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+            )
+            source = write_source(root)
+
+            report = build_promoted_training_scale_seed(
+                decision,
+                [source],
+                project_root=root,
+                plan_out_dir=root / "plan",
+                batch_out_root=root / "batch",
+                dataset_version_prefix="v210-smoke",
+            )
+            outputs = write_promoted_training_scale_seed_outputs(report, root / "seed")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "build_promoted_training_scale_seed.py"),
+                    str(decision),
+                    str(source),
+                    "--project-root",
+                    str(root),
+                    "--out-dir",
+                    str(script_out),
+                    "--plan-out-dir",
+                    str(root / "script-plan"),
+                    "--batch-out-root",
+                    str(root / "script-batch"),
+                    "--dataset-version-prefix",
+                    "v210-smoke",
+                    "--require-ready",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            guard = report["baseline_seed"]["handoff_suite_guard"]
+            summary = report["summary"]
+            self.assertEqual(report["seed_status"], "ready")
+            self.assertTrue(guard["selected_handoff_require_suite_consistency"])
+            self.assertEqual(guard["selected_handoff_suite_consistency"], "consistent")
+            self.assertEqual(guard["selected_handoff_suite_mismatch_count"], 0)
+            self.assertEqual(guard["selected_handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["selected_handoff_suite_consistency"], "consistent")
+            self.assertEqual(summary["selected_handoff_suite_mismatch_count"], 0)
+            self.assertEqual(summary["selected_handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["handoff_suite_mismatch_total"], 0)
+            self.assertIn("selected_handoff_suite_consistency", csv_text)
+            self.assertIn("Selected handoff suite", markdown)
+            self.assertIn("Handoff suite mismatches", markdown)
+            self.assertIn("Selected handoff suite", html)
+            self.assertIn("selected_handoff_suite_consistency=consistent", completed.stdout)
+            self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_seed.json").exists())
+
     def test_default_suite_override_does_not_emit_fake_builtin_default(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -172,6 +240,7 @@ def write_decision_tree(
     decision_status: str,
     selected: bool = True,
     suite_name: str | None = None,
+    include_handoff_suite_guard: bool = False,
 ) -> Path:
     scale_summary = {
         "dataset_name": "sample-zh",
@@ -201,22 +270,43 @@ def write_decision_tree(
             "batch_summary": {"status": "completed", "variant_count": 1},
         },
     )
+    selected_baseline = {
+        "name": "beta",
+        "gate_status": "pass",
+        "batch_status": "completed",
+        "readiness_score": 107,
+        "training_scale_run_path": str(run_path),
+        "promotion_status": "promoted",
+    }
+    summary_fields = {"decision_status": decision_status, "selected_name": "beta" if selected else None}
+    if include_handoff_suite_guard:
+        selected_baseline.update(
+            {
+                "handoff_require_suite_consistency": True,
+                "handoff_suite_consistency": "consistent",
+                "handoff_suite_mismatch_count": 0,
+                "handoff_selected_suite_path": "builtin:standard-zh",
+            }
+        )
+        summary_fields.update(
+            {
+                "selected_handoff_require_suite_consistency": True,
+                "selected_handoff_suite_consistency": "consistent",
+                "selected_handoff_suite_mismatch_count": 0,
+                "selected_handoff_selected_suite_path": "builtin:standard-zh",
+                "handoff_require_suite_consistency_count": 2,
+                "handoff_suite_consistent_count": 2,
+                "handoff_suite_mismatch_total": 0,
+                "comparison_ready_handoff_suite_mismatch_total": 0,
+            }
+        )
     payload = {
         "schema_version": 1,
         "title": "decision",
         "decision_status": decision_status,
         "comparison_path": str(root / "comparison" / "promoted_training_scale_comparison.json"),
-        "selected_baseline": {
-            "name": "beta",
-            "gate_status": "pass",
-            "batch_status": "completed",
-            "readiness_score": 107,
-            "training_scale_run_path": str(run_path),
-            "promotion_status": "promoted",
-        }
-        if selected
-        else None,
-        "summary": {"decision_status": decision_status, "selected_name": "beta" if selected else None},
+        "selected_baseline": selected_baseline if selected else None,
+        "summary": summary_fields,
     }
     decision_path = root / "promoted-decision" / "promoted_training_scale_decision.json"
     write_json(decision_path, payload)

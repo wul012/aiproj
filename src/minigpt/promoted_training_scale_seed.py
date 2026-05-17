@@ -88,6 +88,7 @@ def build_promoted_training_scale_seed(
         "selected_run_summary": _selected_run_summary(selected_run),
         "suite": inherited_suite,
         "suite_path": inherited_suite.get("path"),
+        "handoff_suite_guard": _handoff_suite_guard(decision, selected),
     }
     plan = {
         "project_root": str(root),
@@ -394,9 +395,41 @@ def _summary(
         "command_available": plan.get("command_available"),
         "execution_ready": plan.get("execution_ready"),
         "baseline_suite_path": _dict(seed.get("suite")).get("path"),
+        "selected_handoff_require_suite_consistency": _dict(seed.get("handoff_suite_guard")).get("selected_handoff_require_suite_consistency"),
+        "selected_handoff_suite_consistency": _dict(seed.get("handoff_suite_guard")).get("selected_handoff_suite_consistency"),
+        "selected_handoff_suite_mismatch_count": _dict(seed.get("handoff_suite_guard")).get("selected_handoff_suite_mismatch_count"),
+        "selected_handoff_selected_suite_path": _dict(seed.get("handoff_suite_guard")).get("selected_handoff_selected_suite_path"),
+        "handoff_suite_consistent_count": _dict(seed.get("handoff_suite_guard")).get("handoff_suite_consistent_count"),
+        "handoff_suite_mismatch_total": _dict(seed.get("handoff_suite_guard")).get("handoff_suite_mismatch_total"),
         "next_suite_path": _dict(plan.get("suite")).get("path"),
         "next_suite_source": plan.get("suite_source"),
         "blocker_count": len(blockers),
+    }
+
+
+def _handoff_suite_guard(decision: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(decision.get("summary"))
+    return {
+        "selected_handoff_require_suite_consistency": _first_present(
+            summary.get("selected_handoff_require_suite_consistency"),
+            selected.get("handoff_require_suite_consistency"),
+        ),
+        "selected_handoff_suite_consistency": _first_present(
+            summary.get("selected_handoff_suite_consistency"),
+            selected.get("handoff_suite_consistency"),
+        ),
+        "selected_handoff_suite_mismatch_count": _first_present(
+            summary.get("selected_handoff_suite_mismatch_count"),
+            selected.get("handoff_suite_mismatch_count"),
+        ),
+        "selected_handoff_selected_suite_path": _first_present(
+            summary.get("selected_handoff_selected_suite_path"),
+            selected.get("handoff_selected_suite_path"),
+        ),
+        "handoff_require_suite_consistency_count": summary.get("handoff_require_suite_consistency_count"),
+        "handoff_suite_consistent_count": summary.get("handoff_suite_consistent_count"),
+        "handoff_suite_mismatch_total": summary.get("handoff_suite_mismatch_total"),
+        "comparison_ready_handoff_suite_mismatch_total": summary.get("comparison_ready_handoff_suite_mismatch_total"),
     }
 
 
@@ -419,6 +452,13 @@ def _recommendations(
     if blockers:
         return ["Fix the seed blockers before starting the next training scale planning cycle."]
     return ["Inspect the promoted baseline decision before building a next-cycle plan."]
+
+
+def _first_present(*values: Any) -> Any:
+    for value in values:
+        if value is not None:
+            return value
+    return None
 
 __all__ = [
     "build_promoted_training_scale_seed",

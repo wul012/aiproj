@@ -430,6 +430,9 @@ c/208/解释/说明.md
 c/209/图片
 c/209/解释/说明.md
  -> v209 promoted baseline decision suite guard evidence 的运行截图和解释
+c/210/图片
+c/210/解释/说明.md
+ -> v210 promoted training scale seed suite guard evidence 的运行截图和解释
 ```
 
 写入规则：
