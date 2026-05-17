@@ -28,6 +28,7 @@ def build_pair_batch_case_result(
     right_generated_chars = len(right_generated)
     left_continuation_chars = len(left_continuation)
     right_continuation_chars = len(right_continuation)
+    same_checkpoint = _same_checkpoint(left, right, left_checkpoint_id, right_checkpoint_id)
     return {
         "name": case.name,
         "prompt": case.prompt,
@@ -52,7 +53,7 @@ def build_pair_batch_case_result(
             "unique_continuation_chars": len(set(right_continuation)),
         },
         "comparison": {
-            "same_checkpoint": left_checkpoint_id == right_checkpoint_id,
+            "same_checkpoint": same_checkpoint,
             "generated_equal": left_generated == right_generated,
             "continuation_equal": left_continuation == right_continuation,
             "left_generated_chars": left_generated_chars,
@@ -328,6 +329,14 @@ def _response_payload(response: Any, checkpoint_id: str) -> dict[str, Any]:
     payload["generated"] = str(payload.get("generated") or "")
     payload["continuation"] = str(payload.get("continuation") or "")
     return payload
+
+
+def _same_checkpoint(left: dict[str, Any], right: dict[str, Any], left_checkpoint_id: str, right_checkpoint_id: str) -> bool:
+    left_checkpoint = left.get("checkpoint")
+    right_checkpoint = right.get("checkpoint")
+    if left_checkpoint is not None and right_checkpoint is not None:
+        return str(left_checkpoint) == str(right_checkpoint)
+    return left_checkpoint_id == right_checkpoint_id
 
 
 def _summary_by(results: list[dict[str, Any]], key: str) -> list[dict[str, Any]]:

@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+206-v192-external-pair-baseline-portfolio.md
+ -> v192 code explanation: add optional external baseline checkpoint/tokenizer/id parameters to the training portfolio pair step, expose `pair_config` in JSON/Markdown/HTML, and make pair batch same-checkpoint detection prefer checkpoint paths over display ids.
 205-v191-training-portfolio-pair-baseline-evidence.md
  -> v191 code explanation: connect `scripts/pair_batch.py` into the real training portfolio before benchmark scorecard generation, add pair batch artifacts to the plan, and mark same-checkpoint pair evidence as a reproducibility baseline instead of cross-checkpoint model improvement.
 204-v190-benchmark-scorecard-generation-quality-path-compatibility.md

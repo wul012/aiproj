@@ -59,6 +59,27 @@ class PairBatchTests(unittest.TestCase):
         self.assertEqual(report["task_type_counts"], {"qa": 1})
         self.assertEqual(report["left"]["checkpoint_id"], "base")
 
+    def test_case_result_same_checkpoint_prefers_checkpoint_path_over_id(self) -> None:
+        case = PromptCase("one", "AI", max_new_tokens=4, task_type="qa", difficulty="easy", seed=7)
+
+        same_path = build_pair_batch_case_result(
+            case,
+            {"generated": "AI one", "continuation": " one", "checkpoint": "same.pt"},
+            {"generated": "AI two", "continuation": " two", "checkpoint": "same.pt"},
+            left_checkpoint_id="baseline",
+            right_checkpoint_id="candidate",
+        )
+        different_path = build_pair_batch_case_result(
+            case,
+            {"generated": "AI one", "continuation": " one", "checkpoint": "base.pt"},
+            {"generated": "AI one", "continuation": " one", "checkpoint": "candidate.pt"},
+            left_checkpoint_id="same-id",
+            right_checkpoint_id="same-id",
+        )
+
+        self.assertTrue(same_path["comparison"]["same_checkpoint"])
+        self.assertFalse(different_path["comparison"]["same_checkpoint"])
+
     def test_write_pair_batch_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             suite = PromptSuite("demo-suite", cases=(PromptCase("one", "AI", task_type="qa", difficulty="easy"),))

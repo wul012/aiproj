@@ -14,6 +14,7 @@ def write_training_portfolio_json(report: dict[str, Any], path: str | Path) -> N
 
 def render_training_portfolio_markdown(report: dict[str, Any]) -> str:
     execution = _dict(report.get("execution"))
+    pair_config = _dict(report.get("pair_config"))
     lines = [
         f"# {report.get('title', 'MiniGPT training portfolio pipeline')}",
         "",
@@ -22,6 +23,7 @@ def render_training_portfolio_markdown(report: dict[str, Any]) -> str:
         f"- Status: `{execution.get('status')}`",
         f"- Dataset: `{report.get('dataset_name')}@{report.get('dataset_version')}`",
         f"- Run name: `{report.get('run_name')}`",
+        f"- Pair mode: `{pair_config.get('mode') or 'missing'}`",
         "",
         "## Pipeline Steps",
         "",
@@ -73,6 +75,7 @@ def write_training_portfolio_markdown(report: dict[str, Any], path: str | Path) 
 
 def render_training_portfolio_html(report: dict[str, Any]) -> str:
     execution = _dict(report.get("execution"))
+    pair_config = _dict(report.get("pair_config"))
     stats = [
         ("Status", execution.get("status")),
         ("Steps", execution.get("step_count")),
@@ -80,6 +83,7 @@ def render_training_portfolio_html(report: dict[str, Any]) -> str:
         ("Artifacts", f"{execution.get('available_artifact_count')}/{execution.get('artifact_count')}"),
         ("Dataset", f"{report.get('dataset_name')}@{report.get('dataset_version')}"),
         ("Run", report.get("run_name")),
+        ("Pair mode", pair_config.get("mode")),
     ]
     return "\n".join(
         [

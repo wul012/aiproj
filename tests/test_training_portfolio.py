@@ -71,6 +71,35 @@ class TrainingPortfolioTests(unittest.TestCase):
             self.assertIn("--right-checkpoint", pair_command)
             self.assertIn("--left-id tiny-run", pair_command)
             self.assertIn("--right-id tiny-run", pair_command)
+            self.assertEqual(plan["pair_config"]["mode"], "same_checkpoint_baseline")
+
+    def test_build_training_portfolio_plan_accepts_external_pair_baseline(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "data.txt"
+            source.write_text("人工智能训练数据", encoding="utf-8")
+            baseline = root / "baseline" / "checkpoint.pt"
+            baseline_tokenizer = root / "baseline" / "tokenizer.json"
+
+            plan = build_training_portfolio_plan(
+                root,
+                [source],
+                out_root=root / "portfolio",
+                run_name="candidate-run",
+                pair_baseline_checkpoint=baseline,
+                pair_baseline_tokenizer=baseline_tokenizer,
+                pair_baseline_id="base-v1",
+                pair_candidate_id="candidate-v2",
+            )
+
+            pair_command = " ".join(plan["steps"][5]["command"])
+            self.assertEqual(plan["pair_config"]["mode"], "external_baseline")
+            self.assertEqual(plan["pair_config"]["left_checkpoint"], str(baseline))
+            self.assertEqual(Path(plan["pair_config"]["right_checkpoint"]).parts[-2:], ("candidate-run", "checkpoint.pt"))
+            self.assertIn(str(baseline), pair_command)
+            self.assertIn(str(baseline_tokenizer), pair_command)
+            self.assertIn("--left-id base-v1", pair_command)
+            self.assertIn("--right-id candidate-v2", pair_command)
 
     def test_dry_run_report_marks_artifacts_as_planned(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -129,13 +158,17 @@ class TrainingPortfolioTests(unittest.TestCase):
             report = run_training_portfolio_plan(plan, execute=False)
 
             outputs = write_training_portfolio_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
             html = render_training_portfolio_html(report)
 
             self.assertEqual(set(outputs), {"json", "markdown", "html"})
             self.assertIn("training_portfolio", Path(outputs["json"]).name)
             self.assertEqual(json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))["schema_version"], 1)
-            self.assertIn("Pipeline Steps", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Pipeline Steps", markdown)
+            self.assertIn("Pair mode: `same_checkpoint_baseline`", markdown)
             self.assertIn("&lt;Portfolio&gt;", html)
+            self.assertIn("Pair mode", html)
+            self.assertIn("same_checkpoint_baseline", html)
             self.assertNotIn("<h1><Portfolio>", html)
 
     def test_training_portfolio_facade_keeps_artifact_writer_identity(self) -> None:

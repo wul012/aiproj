@@ -39,6 +39,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=1337)
     parser.add_argument("--sample-prompt", type=str, default="MiniGPT")
     parser.add_argument("--sample-tokens", type=int, default=40)
+    parser.add_argument("--pair-baseline-checkpoint", type=Path, default=None, help="Optional baseline checkpoint for pair batch comparison.")
+    parser.add_argument("--pair-baseline-tokenizer", type=Path, default=None, help="Optional tokenizer for --pair-baseline-checkpoint.")
+    parser.add_argument("--pair-baseline-id", type=str, default=None, help="Display id for the pair batch baseline side.")
+    parser.add_argument("--pair-candidate-id", type=str, default=None, help="Display id for the current trained checkpoint in pair batch.")
     parser.add_argument("--python", type=str, default=sys.executable)
     parser.add_argument("--title", type=str, default="MiniGPT training portfolio pipeline")
     parser.add_argument("--execute", action="store_true", help="Actually run the pipeline. Omit for dry-run planning.")
@@ -71,6 +75,10 @@ def main() -> None:
         seed=args.seed,
         sample_prompt=args.sample_prompt,
         sample_tokens=args.sample_tokens,
+        pair_baseline_checkpoint=args.pair_baseline_checkpoint,
+        pair_baseline_tokenizer=args.pair_baseline_tokenizer,
+        pair_baseline_id=args.pair_baseline_id,
+        pair_candidate_id=args.pair_candidate_id,
         title=args.title,
     )
     report = run_training_portfolio_plan(plan, execute=args.execute)

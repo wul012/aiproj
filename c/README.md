@@ -382,6 +382,9 @@ c/190/解释/说明.md
 c/191/图片
 c/191/解释/说明.md
  -> v191 training portfolio pair baseline evidence 的运行截图和解释
+c/192/图片
+c/192/解释/说明.md
+ -> v192 external pair baseline portfolio 的运行截图和解释
 ```
 
 写入规则：

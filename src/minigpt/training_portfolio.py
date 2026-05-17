@@ -44,6 +44,10 @@ def build_training_portfolio_plan(
     seed: int = 1337,
     sample_prompt: str = "MiniGPT",
     sample_tokens: int = 40,
+    pair_baseline_checkpoint: str | Path | None = None,
+    pair_baseline_tokenizer: str | Path | None = None,
+    pair_baseline_id: str | None = None,
+    pair_candidate_id: str | None = None,
     title: str = "MiniGPT training portfolio pipeline",
 ) -> dict[str, Any]:
     if not sources:
@@ -63,6 +67,14 @@ def build_training_portfolio_plan(
     request_summary_dir = out / "request-history-summary"
     narrative_dir = out / "maturity-narrative"
     suite = Path(suite_path) if suite_path is not None else root / "data" / "eval_prompts.json"
+    pair_config = _pair_config(
+        run_dir,
+        run_name=run_name,
+        baseline_checkpoint=pair_baseline_checkpoint,
+        baseline_tokenizer=pair_baseline_tokenizer,
+        baseline_id=pair_baseline_id,
+        candidate_id=pair_candidate_id,
+    )
 
     artifacts = {
         "dataset_dir": str(dataset_dir),
@@ -180,17 +192,15 @@ def build_training_portfolio_plan(
                 python_executable,
                 str(root / "scripts" / "pair_batch.py"),
                 "--left-checkpoint",
-                str(run_dir / "checkpoint.pt"),
+                pair_config["left_checkpoint"],
                 "--right-checkpoint",
-                str(run_dir / "checkpoint.pt"),
-                "--left-tokenizer",
-                str(run_dir / "tokenizer.json"),
-                "--right-tokenizer",
-                str(run_dir / "tokenizer.json"),
+                pair_config["right_checkpoint"],
+                *_tokenizer_args("--left-tokenizer", pair_config.get("left_tokenizer")),
+                *_tokenizer_args("--right-tokenizer", pair_config.get("right_tokenizer")),
                 "--left-id",
-                run_name,
+                pair_config["left_id"],
                 "--right-id",
-                run_name,
+                pair_config["right_id"],
                 "--suite",
                 str(suite),
                 "--out-dir",
@@ -311,6 +321,7 @@ def build_training_portfolio_plan(
         "dataset_version": dataset_version,
         "suite_path": str(suite),
         "request_log_path": str(request_log_path) if request_log_path is not None else None,
+        "pair_config": pair_config,
         "artifacts": artifacts,
         "steps": steps,
     }
@@ -363,6 +374,44 @@ def _step(key: str, title: str, command: list[str], expected_outputs: list[str])
         "command": [str(part) for part in command],
         "expected_outputs": [str(path) for path in expected_outputs],
     }
+
+
+def _pair_config(
+    run_dir: Path,
+    *,
+    run_name: str,
+    baseline_checkpoint: str | Path | None,
+    baseline_tokenizer: str | Path | None,
+    baseline_id: str | None,
+    candidate_id: str | None,
+) -> dict[str, str | None]:
+    candidate_checkpoint = run_dir / "checkpoint.pt"
+    candidate_tokenizer = run_dir / "tokenizer.json"
+    if baseline_checkpoint is None:
+        return {
+            "mode": "same_checkpoint_baseline",
+            "left_checkpoint": str(candidate_checkpoint),
+            "right_checkpoint": str(candidate_checkpoint),
+            "left_tokenizer": str(candidate_tokenizer),
+            "right_tokenizer": str(candidate_tokenizer),
+            "left_id": baseline_id or run_name,
+            "right_id": candidate_id or run_name,
+        }
+    baseline_path = Path(baseline_checkpoint)
+    baseline_tokenizer_path = Path(baseline_tokenizer) if baseline_tokenizer is not None else baseline_path.parent / "tokenizer.json"
+    return {
+        "mode": "external_baseline",
+        "left_checkpoint": str(baseline_path),
+        "right_checkpoint": str(candidate_checkpoint),
+        "left_tokenizer": str(baseline_tokenizer_path),
+        "right_tokenizer": str(candidate_tokenizer),
+        "left_id": baseline_id or "baseline",
+        "right_id": candidate_id or run_name,
+    }
+
+
+def _tokenizer_args(flag: str, value: Any) -> list[str]:
+    return [flag, str(value)] if value is not None and str(value).strip() else []
 
 
 def _train_command(
