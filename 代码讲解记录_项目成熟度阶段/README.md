@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+201-v187-training-run-evidence-eval-summary.md
+ -> v187 code explanation: enrich real training run evidence with fixed eval suite summaries, including case count, suite metadata, task/difficulty coverage, average continuation length, and ready/review boundary semantics.
 200-v186-real-training-run-evidence.md
  -> v186 code explanation: add real training run evidence reports, connect them into the training portfolio after the train step, and show how checkpoint, metrics, manifest, sample, and eval-suite status become promotion-review evidence.
 199-v185-training-scale-promotion-index-helper-split.md

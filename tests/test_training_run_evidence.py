@@ -70,7 +70,19 @@ def make_run(root: Path) -> Path:
     (run_dir / "sample.txt").write_text("prompt: MiniGPT\n\nMiniGPT sample output", encoding="utf-8")
     eval_dir = run_dir / "eval_suite"
     eval_dir.mkdir()
-    (eval_dir / "eval_suite.json").write_text(json.dumps({"case_count": 1}), encoding="utf-8")
+    (eval_dir / "eval_suite.json").write_text(
+        json.dumps(
+            {
+                "case_count": 2,
+                "avg_continuation_chars": 12.5,
+                "avg_unique_chars": 8.5,
+                "task_type_counts": {"qa": 1, "summary": 1},
+                "difficulty_counts": {"easy": 1, "medium": 1},
+                "benchmark": {"suite_name": "demo-suite", "suite_version": "1", "language": "zh-CN"},
+            }
+        ),
+        encoding="utf-8",
+    )
     return run_dir
 
 
@@ -86,6 +98,9 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertEqual(report["training"]["actual_last_step"], 2)
             self.assertEqual(report["training"]["best_val_loss"], 1.1)
             self.assertEqual(report["data"]["dataset_quality_status"], "pass")
+            self.assertEqual(report["evaluation"]["case_count"], 2)
+            self.assertEqual(report["evaluation"]["task_type_count"], 2)
+            self.assertEqual(report["summary"]["eval_suite_case_count"], 2)
             self.assertTrue(any(item["key"] == "checkpoint" and item["exists"] for item in report["artifacts"]))
 
     def test_missing_checkpoint_blocks_promotion_evidence(self) -> None:
@@ -100,6 +115,17 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             failed = [check["code"] for check in report["checks"] if check["status"] == "fail"]
             self.assertIn("checkpoint_present", failed)
 
+    def test_missing_eval_suite_only_reviews_when_not_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp))
+            (run_dir / "eval_suite" / "eval_suite.json").unlink()
+
+            report = build_training_run_evidence(run_dir)
+
+            self.assertEqual(report["summary"]["status"], "review")
+            self.assertEqual(report["summary"]["eval_suite_case_count"], 0)
+            self.assertTrue(any(check["code"] == "eval_suite_present" and check["status"] == "warn" for check in report["checks"]))
+
     def test_write_outputs_and_render_html_escape(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = make_run(Path(tmp))
@@ -111,6 +137,7 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("training_run_evidence", Path(outputs["json"]).name)
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("## Evaluation", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Evidence&gt;", html)
             self.assertNotIn("<h1><Evidence>", html)
 

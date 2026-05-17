@@ -367,6 +367,9 @@ c/185/解释/说明.md
 c/186/图片
 c/186/解释/说明.md
  -> v186 real training run evidence 的运行截图和解释
+c/187/图片
+c/187/解释/说明.md
+ -> v187 training run evidence eval summary 的运行截图和解释
 ```
 
 写入规则：

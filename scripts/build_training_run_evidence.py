@@ -33,11 +33,14 @@ def main() -> None:
     )
     outputs = write_training_run_evidence_outputs(report, out_dir)
     summary = report["summary"]
+    evaluation = report["evaluation"]
     print(f"run_dir={report['run_dir']}")
     print(f"status={summary.get('status')}")
     print(f"readiness_score={summary.get('readiness_score')}")
     print(f"core_artifacts={summary.get('core_available_count')}/{summary.get('core_artifact_count')}")
     print(f"artifacts={summary.get('available_artifact_count')}/{summary.get('artifact_count')}")
+    print(f"eval_suite_cases={evaluation.get('case_count')}")
+    print(f"eval_task_types={','.join(str(item) for item in evaluation.get('task_types', []))}")
     print(f"critical_missing_count={summary.get('critical_missing_count')}")
     print(f"warning_count={summary.get('warning_count')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

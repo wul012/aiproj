@@ -44,6 +44,8 @@ def build_training_run_evidence(
     stored_history = _read_json(root / "history_summary.json", warnings, "history_summary")
     history_summary = _merge_history_summary(stored_history, computed_history)
     artifacts = _artifact_rows(root)
+    eval_suite = _read_json(root / "eval_suite" / "eval_suite.json", warnings, "eval_suite")
+    evaluation = _evaluation_section(eval_suite, root / "eval_suite" / "eval_suite.json")
     checks = _checks(
         root=root,
         artifacts=artifacts,
@@ -51,10 +53,11 @@ def build_training_run_evidence(
         manifest=manifest,
         records=records,
         history_summary=history_summary,
+        evaluation=evaluation,
         require_sample=require_sample,
         require_eval_suite=require_eval_suite,
     )
-    summary = _summary(checks, artifacts, root)
+    summary = _summary(checks, artifacts, root, evaluation)
     training = _training_section(train_config, manifest, history_summary)
     data = _data_section(train_config, manifest)
     report = {
@@ -65,11 +68,12 @@ def build_training_run_evidence(
         "summary": summary,
         "training": training,
         "data": data,
+        "evaluation": evaluation,
         "sample": _sample_section(root / "sample.txt"),
         "checks": checks,
         "artifacts": artifacts,
         "warnings": warnings,
-        "recommendations": _recommendations(summary, checks, data),
+        "recommendations": _recommendations(summary, checks, data, evaluation),
     }
     return report
 
@@ -142,6 +146,7 @@ def _checks(
     manifest: dict[str, Any],
     records: list[Any],
     history_summary: dict[str, Any],
+    evaluation: dict[str, Any],
     require_sample: bool,
     require_eval_suite: bool,
 ) -> list[dict[str, Any]]:
@@ -186,18 +191,7 @@ def _checks(
             {"required": bool(require_sample)},
         )
     )
-    eval_suite_exists = (root / "eval_suite" / "eval_suite.json").exists()
-    eval_status = "pass" if eval_suite_exists else "fail" if require_eval_suite else "warn"
-    checks.append(
-        _check(
-            "eval_suite_present",
-            "evaluation",
-            eval_status,
-            "eval suite evidence is present" if eval_suite_exists else "eval suite evidence is missing",
-            "Run scripts/eval_suite.py before comparing model quality across checkpoints.",
-            {"required": bool(require_eval_suite)},
-        )
-    )
+    checks.append(_eval_suite_check(evaluation, require_eval_suite))
     if not train_config:
         checks.append(
             _check(
@@ -275,7 +269,40 @@ def _loss_check(history_summary: dict[str, Any]) -> dict[str, Any]:
     )
 
 
-def _summary(checks: list[dict[str, Any]], artifacts: list[dict[str, Any]], root: Path) -> dict[str, Any]:
+def _eval_suite_check(evaluation: dict[str, Any], require_eval_suite: bool) -> dict[str, Any]:
+    exists = bool(evaluation.get("exists"))
+    case_count = _int(evaluation.get("case_count")) or 0
+    required = bool(require_eval_suite)
+    if exists and case_count > 0:
+        status = "pass"
+        message = "eval suite evidence is present with generated cases"
+        recommendation = "Keep eval suite evidence next to the checkpoint when comparing model quality."
+    elif exists:
+        status = "fail" if required else "warn"
+        message = "eval suite evidence exists but has no generated cases"
+        recommendation = "Re-run scripts/eval_suite.py so fixed prompts produce case-level evidence."
+    else:
+        status = "fail" if required else "warn"
+        message = "eval suite evidence is missing"
+        recommendation = "Run scripts/eval_suite.py before comparing model quality across checkpoints."
+    return _check(
+        "eval_suite_present",
+        "evaluation",
+        status,
+        message,
+        recommendation,
+        {
+            "required": required,
+            "case_count": case_count,
+            "task_type_count": _int(evaluation.get("task_type_count")) or 0,
+            "difficulty_count": _int(evaluation.get("difficulty_count")) or 0,
+        },
+    )
+
+
+def _summary(
+    checks: list[dict[str, Any]], artifacts: list[dict[str, Any]], root: Path, evaluation: dict[str, Any]
+) -> dict[str, Any]:
     fail_count = sum(1 for check in checks if check.get("status") == "fail")
     warn_count = sum(1 for check in checks if check.get("status") == "warn")
     status = "blocked" if fail_count else "review" if warn_count else "ready"
@@ -293,6 +320,10 @@ def _summary(checks: list[dict[str, Any]], artifacts: list[dict[str, Any]], root
         "checkpoint_exists": (root / "checkpoint.pt").exists(),
         "run_manifest_exists": (root / "run_manifest.json").exists(),
         "sample_exists": (root / "sample.txt").exists(),
+        "eval_suite_exists": bool(evaluation.get("exists")),
+        "eval_suite_case_count": _int(evaluation.get("case_count")) or 0,
+        "eval_suite_task_type_count": _int(evaluation.get("task_type_count")) or 0,
+        "eval_suite_difficulty_count": _int(evaluation.get("difficulty_count")) or 0,
     }
 
 
@@ -348,7 +379,36 @@ def _sample_section(path: Path) -> dict[str, Any]:
     }
 
 
-def _recommendations(summary: dict[str, Any], checks: list[dict[str, Any]], data: dict[str, Any]) -> list[str]:
+def _evaluation_section(report: dict[str, Any], path: Path) -> dict[str, Any]:
+    benchmark = _dict(report.get("benchmark"))
+    task_type_counts = _dict(report.get("task_type_counts") or benchmark.get("task_type_counts"))
+    difficulty_counts = _dict(report.get("difficulty_counts") or benchmark.get("difficulty_counts"))
+    results = _list_of_dicts(report.get("results"))
+    case_count = _int(report.get("case_count"))
+    if case_count is None and results:
+        case_count = len(results)
+    task_types = sorted(str(key) for key in task_type_counts)
+    difficulties = sorted(str(key) for key in difficulty_counts)
+    return {
+        "exists": path.exists(),
+        "path": str(path),
+        "suite_name": benchmark.get("suite_name"),
+        "suite_version": benchmark.get("suite_version"),
+        "language": benchmark.get("language"),
+        "case_count": case_count or 0,
+        "result_count": len(results),
+        "avg_continuation_chars": _float(report.get("avg_continuation_chars")),
+        "avg_unique_chars": _float(report.get("avg_unique_chars")),
+        "task_type_count": len(task_types),
+        "difficulty_count": len(difficulties),
+        "task_types": task_types,
+        "difficulties": difficulties,
+    }
+
+
+def _recommendations(
+    summary: dict[str, Any], checks: list[dict[str, Any]], data: dict[str, Any], evaluation: dict[str, Any]
+) -> list[str]:
     if summary.get("status") == "blocked":
         failing = [str(check.get("code")) for check in checks if check.get("status") == "fail"]
         return ["Fix blocking training evidence checks before promotion: " + ", ".join(failing[:6]) + "."]
@@ -359,8 +419,10 @@ def _recommendations(summary: dict[str, Any], checks: list[dict[str, Any]], data
         recs.append("This run has the core checkpoint, tokenizer, metrics, manifest, and loss evidence needed for promotion review.")
     if data.get("dataset_quality_status") is None:
         recs.append("Attach dataset quality or dataset version evidence so the training data can be audited.")
-    if not any(check.get("code") == "eval_suite_present" and check.get("status") == "pass" for check in checks):
+    if not evaluation.get("case_count"):
         recs.append("Run the fixed eval suite next so model quality can be compared beyond validation loss.")
+    else:
+        recs.append("Use the eval suite case and coverage summary when comparing this checkpoint with later runs.")
     return recs
 
 

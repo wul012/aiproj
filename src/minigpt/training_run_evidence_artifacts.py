@@ -21,6 +21,7 @@ def write_training_run_evidence_json(report: dict[str, Any], path: str | Path) -
 def write_training_run_evidence_csv(report: dict[str, Any], path: str | Path) -> None:
     summary = _dict(report.get("summary"))
     training = _dict(report.get("training"))
+    evaluation = _dict(report.get("evaluation"))
     fieldnames = [
         "status",
         "readiness_score",
@@ -36,6 +37,12 @@ def write_training_run_evidence_csv(report: dict[str, Any], path: str | Path) ->
         "best_val_loss",
         "last_val_loss",
         "sample_exists",
+        "eval_suite_exists",
+        "eval_suite_case_count",
+        "avg_continuation_chars",
+        "avg_unique_chars",
+        "eval_task_type_count",
+        "eval_difficulty_count",
     ]
     write_csv_row(
         {
@@ -53,6 +60,12 @@ def write_training_run_evidence_csv(report: dict[str, Any], path: str | Path) ->
             "best_val_loss": training.get("best_val_loss"),
             "last_val_loss": training.get("last_val_loss"),
             "sample_exists": summary.get("sample_exists"),
+            "eval_suite_exists": summary.get("eval_suite_exists"),
+            "eval_suite_case_count": summary.get("eval_suite_case_count"),
+            "avg_continuation_chars": evaluation.get("avg_continuation_chars"),
+            "avg_unique_chars": evaluation.get("avg_unique_chars"),
+            "eval_task_type_count": evaluation.get("task_type_count"),
+            "eval_difficulty_count": evaluation.get("difficulty_count"),
         },
         path,
         fieldnames,
@@ -63,6 +76,7 @@ def render_training_run_evidence_markdown(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     training = _dict(report.get("training"))
     data = _dict(report.get("data"))
+    evaluation = _dict(report.get("evaluation"))
     sample = _dict(report.get("sample"))
     lines = [
         f"# {report.get('title', 'MiniGPT training run evidence')}",
@@ -82,6 +96,7 @@ def render_training_run_evidence_markdown(report: dict[str, Any]) -> str:
                 ("All artifacts", f"{summary.get('available_artifact_count')}/{summary.get('artifact_count')}"),
                 ("Critical missing", summary.get("critical_missing_count")),
                 ("Warnings", summary.get("warning_count")),
+                ("Eval cases", summary.get("eval_suite_case_count")),
             ]
         ),
         "",
@@ -110,6 +125,23 @@ def render_training_run_evidence_markdown(report: dict[str, Any]) -> str:
                 ("Val tokens", _fmt_int(data.get("val_token_count"))),
                 ("Dataset quality", data.get("dataset_quality_status")),
                 ("Dataset fingerprint", data.get("dataset_fingerprint")),
+            ]
+        ),
+        "",
+        "## Evaluation",
+        "",
+        *_markdown_table(
+            [
+                ("Exists", evaluation.get("exists")),
+                ("Suite", evaluation.get("suite_name")),
+                ("Version", evaluation.get("suite_version")),
+                ("Language", evaluation.get("language")),
+                ("Cases", evaluation.get("case_count")),
+                ("Results", evaluation.get("result_count")),
+                ("Avg continuation chars", _fmt(evaluation.get("avg_continuation_chars"))),
+                ("Avg unique chars", _fmt(evaluation.get("avg_unique_chars"))),
+                ("Task types", evaluation.get("task_types")),
+                ("Difficulties", evaluation.get("difficulties")),
             ]
         ),
         "",
@@ -170,6 +202,7 @@ def write_training_run_evidence_markdown(report: dict[str, Any], path: str | Pat
 def render_training_run_evidence_html(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     training = _dict(report.get("training"))
+    evaluation = _dict(report.get("evaluation"))
     stats = [
         ("Status", summary.get("status")),
         ("Score", summary.get("readiness_score")),
@@ -177,8 +210,8 @@ def render_training_run_evidence_html(report: dict[str, Any]) -> str:
         ("Artifacts", f"{summary.get('available_artifact_count')}/{summary.get('artifact_count')}"),
         ("Step", f"{training.get('actual_last_step')}/{training.get('target_step')}"),
         ("Best val", _fmt(training.get("best_val_loss"))),
-        ("Device", training.get("device_used")),
-        ("Tokenizer", training.get("tokenizer")),
+        ("Eval cases", evaluation.get("case_count")),
+        ("Task types", evaluation.get("task_type_count")),
     ]
     return "\n".join(
         [
@@ -196,6 +229,7 @@ def render_training_run_evidence_html(report: dict[str, Any]) -> str:
             '<section class="stats">' + "".join(_card(label, value) for label, value in stats) + "</section>",
             _key_value_section("Training", _dict(report.get("training"))),
             _key_value_section("Data", _dict(report.get("data"))),
+            _key_value_section("Evaluation", _dict(report.get("evaluation"))),
             _key_value_section("Sample", _dict(report.get("sample"))),
             _checks_section(_list_of_dicts(report.get("checks"))),
             _artifacts_section(_list_of_dicts(report.get("artifacts"))),
