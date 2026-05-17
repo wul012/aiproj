@@ -56,6 +56,7 @@ def build_training_portfolio_plan(
     run_dir = out / "runs" / run_name
     eval_dir = run_dir / "eval_suite"
     generation_quality_dir = eval_dir / "generation-quality"
+    pair_batch_dir = run_dir / "pair_batch"
     scorecard_dir = run_dir / "benchmark-scorecard"
     registry_dir = out / "registry"
     maturity_dir = out / "maturity-summary"
@@ -76,6 +77,8 @@ def build_training_portfolio_plan(
         "training_run_evidence_html": str(run_dir / "training-run-evidence" / "training_run_evidence.html"),
         "eval_suite": str(eval_dir / "eval_suite.json"),
         "generation_quality": str(generation_quality_dir / "generation_quality.json"),
+        "pair_batch": str(pair_batch_dir / "pair_generation_batch.json"),
+        "pair_batch_html": str(pair_batch_dir / "pair_generation_batch.html"),
         "benchmark_scorecard": str(scorecard_dir / "benchmark_scorecard.json"),
         "registry": str(registry_dir / "registry.json"),
         "maturity_summary": str(maturity_dir / "maturity_summary.json"),
@@ -169,6 +172,33 @@ def build_training_portfolio_plan(
                 str(generation_quality_dir),
             ],
             [artifacts["generation_quality"]],
+        ),
+        _step(
+            "pair_batch",
+            "Build a same-checkpoint pair baseline for scorecard evidence",
+            [
+                python_executable,
+                str(root / "scripts" / "pair_batch.py"),
+                "--left-checkpoint",
+                str(run_dir / "checkpoint.pt"),
+                "--right-checkpoint",
+                str(run_dir / "checkpoint.pt"),
+                "--left-tokenizer",
+                str(run_dir / "tokenizer.json"),
+                "--right-tokenizer",
+                str(run_dir / "tokenizer.json"),
+                "--left-id",
+                run_name,
+                "--right-id",
+                run_name,
+                "--suite",
+                str(suite),
+                "--out-dir",
+                str(pair_batch_dir),
+                "--device",
+                device,
+            ],
+            [artifacts["pair_batch"], artifacts["pair_batch_html"]],
         ),
         _step(
             "benchmark_scorecard",

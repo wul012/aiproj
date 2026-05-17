@@ -45,6 +45,7 @@ class TrainingPortfolioTests(unittest.TestCase):
                 "training_run_evidence",
                 "eval_suite",
                 "generation_quality",
+                "pair_batch",
                 "benchmark_scorecard",
                 "dataset_card",
                 "registry",
@@ -54,6 +55,8 @@ class TrainingPortfolioTests(unittest.TestCase):
             ])
             self.assertIn("checkpoint.pt", plan["artifacts"]["checkpoint"])
             self.assertIn("training_run_evidence.json", plan["artifacts"]["training_run_evidence"])
+            self.assertIn("pair_generation_batch.json", plan["artifacts"]["pair_batch"])
+            self.assertIn("pair_generation_batch.html", plan["artifacts"]["pair_batch_html"])
             self.assertIn("dataset_card.json", plan["artifacts"]["dataset_card"])
             self.assertIn("--request-history-summary", plan["steps"][-1]["command"])
             train_command = " ".join(plan["steps"][1]["command"])
@@ -62,6 +65,12 @@ class TrainingPortfolioTests(unittest.TestCase):
             evidence_command = " ".join(plan["steps"][2]["command"])
             self.assertIn("build_training_run_evidence.py", evidence_command)
             self.assertIn("training-run-evidence", evidence_command)
+            pair_command = " ".join(plan["steps"][5]["command"])
+            self.assertIn("pair_batch.py", pair_command)
+            self.assertIn("--left-checkpoint", pair_command)
+            self.assertIn("--right-checkpoint", pair_command)
+            self.assertIn("--left-id tiny-run", pair_command)
+            self.assertIn("--right-id tiny-run", pair_command)
 
     def test_dry_run_report_marks_artifacts_as_planned(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

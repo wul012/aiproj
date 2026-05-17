@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+205-v191-training-portfolio-pair-baseline-evidence.md
+ -> v191 code explanation: connect `scripts/pair_batch.py` into the real training portfolio before benchmark scorecard generation, add pair batch artifacts to the plan, and mark same-checkpoint pair evidence as a reproducibility baseline instead of cross-checkpoint model improvement.
 204-v190-benchmark-scorecard-generation-quality-path-compatibility.md
  -> v190 code explanation: remove real scorecard-chain path friction by accepting both `generation_quality/` and `generation-quality/` locations, including `eval_suite/` variants, without changing benchmark scoring policy.
 203-v189-training-run-evidence-benchmark-scorecard-summary.md

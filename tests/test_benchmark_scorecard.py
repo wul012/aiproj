@@ -143,6 +143,8 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["summary"]["generation_quality_total_flags"], 3)
             self.assertEqual(scorecard["summary"]["generation_quality_dominant_flag"], "low_diversity")
             self.assertEqual(scorecard["summary"]["generation_quality_worst_case"], "fact-check")
+            self.assertFalse(scorecard["summary"]["pair_same_checkpoint_baseline"])
+            self.assertEqual(scorecard["summary"]["pair_comparison_mode"], "cross_checkpoint_or_unknown")
             self.assertEqual(scorecard["summary"]["task_type_group_count"], 4)
             self.assertEqual(scorecard["summary"]["difficulty_group_count"], 3)
             self.assertEqual(scorecard["summary"]["weakest_task_type"], "qa")
@@ -174,6 +176,47 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertIn("Prioritize generation-quality flag `low_diversity`", " ".join(scorecard["recommendations"]))
             self.assertEqual(scorecard["warnings"], [])
 
+    def test_same_checkpoint_pair_baseline_is_marked_without_overstating_improvement(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir, registry_path = make_run(Path(tmp))
+            pair_path = run_dir / "pair_batch" / "pair_generation_batch.json"
+            pair = json.loads(pair_path.read_text(encoding="utf-8"))
+            pair["left"] = {"checkpoint_id": "same", "checkpoint": "checkpoint.pt"}
+            pair["right"] = {"checkpoint_id": "same", "checkpoint": "checkpoint.pt"}
+            pair["generated_equal_count"] = pair["case_count"]
+            pair["generated_difference_count"] = 0
+            pair["avg_abs_generated_char_delta"] = 0.0
+            for result in pair["results"]:
+                result["comparison"]["same_checkpoint"] = True
+                result["comparison"]["generated_equal"] = True
+                result["comparison"]["continuation_equal"] = True
+                result["comparison"]["generated_char_delta"] = 0
+                result["comparison"]["continuation_char_delta"] = 0
+            pair_path.write_text(json.dumps(pair), encoding="utf-8")
+
+            scorecard = build_benchmark_scorecard(run_dir, registry_path=registry_path)
+
+            self.assertTrue(scorecard["summary"]["pair_same_checkpoint_baseline"])
+            self.assertEqual(scorecard["summary"]["pair_comparison_mode"], "same_checkpoint_baseline")
+            pair_components = [item for item in scorecard["components"] if item["key"].startswith("pair_")]
+            self.assertTrue(all(item["score"] == 90.0 for item in pair_components))
+            self.assertTrue(all(item["metrics"]["same_checkpoint_baseline"] for item in pair_components))
+            self.assertIn("different candidate checkpoint pair", " ".join(scorecard["recommendations"]))
+
+    def test_same_checkpoint_baseline_prefers_paths_over_reused_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir, registry_path = make_run(Path(tmp))
+            pair_path = run_dir / "pair_batch" / "pair_generation_batch.json"
+            pair = json.loads(pair_path.read_text(encoding="utf-8"))
+            pair["left"] = {"checkpoint_id": "candidate", "checkpoint": "base.pt"}
+            pair["right"] = {"checkpoint_id": "candidate", "checkpoint": "wide.pt"}
+            pair_path.write_text(json.dumps(pair), encoding="utf-8")
+
+            scorecard = build_benchmark_scorecard(run_dir, registry_path=registry_path)
+
+            self.assertFalse(scorecard["summary"]["pair_same_checkpoint_baseline"])
+            self.assertEqual(scorecard["summary"]["pair_comparison_mode"], "cross_checkpoint_or_unknown")
+
     def test_write_benchmark_scorecard_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -189,6 +232,7 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertIn("name,task_type,difficulty,status,score", Path(outputs["rubric_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Components", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Dominant generation flag", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Pair comparison mode", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Rubric Scores", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Task Type Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Difficulty Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))

@@ -43,6 +43,8 @@ def make_scorecard() -> dict:
             "pair_batch_cases": 2,
             "pair_generated_differences": 1,
             "max_abs_generated_delta": 4,
+            "pair_comparison_mode": "cross_checkpoint_or_unknown",
+            "pair_same_checkpoint_baseline": False,
             "task_type_group_count": 1,
             "difficulty_group_count": 1,
             "weakest_task_type": "qa",
@@ -115,6 +117,7 @@ class BenchmarkScorecardArtifactTests(unittest.TestCase):
         self.assertIn("Task Type Drilldown", html)
         self.assertIn("## Components", markdown)
         self.assertIn("Dominant generation flag", markdown)
+        self.assertIn("Pair comparison mode", markdown)
         self.assertIn("## Rubric Scores", markdown)
         self.assertIn("## Difficulty Drilldown", markdown)
 

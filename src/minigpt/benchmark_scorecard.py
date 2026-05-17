@@ -202,7 +202,13 @@ def _pair_consistency_component(pair_batch: Any, path: Path) -> dict[str, Any]:
     case_count = _number(_pick(pair_batch, "case_count")) or 0
     equal_count = _number(_pick(pair_batch, "generated_equal_count")) or 0
     score = 0.0 if case_count == 0 else (equal_count / case_count) * 100.0
+    same_checkpoint = _same_checkpoint_pair_baseline(pair_batch)
+    if same_checkpoint:
+        score = min(score, 90.0)
     status = _status(score)
+    detail = f"{int(equal_count)} / {int(case_count)} pair generations matched exactly."
+    if same_checkpoint:
+        detail += " Same-checkpoint baseline proves reproducibility, not cross-checkpoint improvement."
     return _component(
         "pair_consistency",
         "Pair Consistency",
@@ -210,8 +216,13 @@ def _pair_consistency_component(pair_batch: Any, path: Path) -> dict[str, Any]:
         0.15,
         status,
         str(path),
-        f"{int(equal_count)} / {int(case_count)} pair generations matched exactly.",
-        {"case_count": int(case_count), "generated_equal_count": int(equal_count)},
+        detail,
+        {
+            "case_count": int(case_count),
+            "generated_equal_count": int(equal_count),
+            "same_checkpoint_baseline": same_checkpoint,
+            "comparison_mode": _pair_comparison_mode(pair_batch),
+        },
     )
 
 
@@ -219,7 +230,13 @@ def _pair_delta_stability_component(pair_batch: Any, path: Path) -> dict[str, An
     avg_delta = _number(_pick(pair_batch, "avg_abs_generated_char_delta"))
     max_delta = _max_abs_generated_delta(pair_batch)
     score = 0.0 if avg_delta is None else max(0.0, 100.0 - avg_delta * 10.0)
+    same_checkpoint = _same_checkpoint_pair_baseline(pair_batch)
+    if same_checkpoint:
+        score = min(score, 90.0)
     status = _status(score)
+    detail = f"avg abs generated delta={_fmt(avg_delta)}, max abs generated delta={_fmt(max_delta)}."
+    if same_checkpoint:
+        detail += " Same-checkpoint delta is a reproducibility baseline."
     return _component(
         "pair_delta_stability",
         "Pair Delta Stability",
@@ -227,8 +244,13 @@ def _pair_delta_stability_component(pair_batch: Any, path: Path) -> dict[str, An
         0.15,
         status,
         str(path),
-        f"avg abs generated delta={_fmt(avg_delta)}, max abs generated delta={_fmt(max_delta)}.",
-        {"avg_abs_generated_char_delta": avg_delta, "max_abs_generated_char_delta": max_delta},
+        detail,
+        {
+            "avg_abs_generated_char_delta": avg_delta,
+            "max_abs_generated_char_delta": max_delta,
+            "same_checkpoint_baseline": same_checkpoint,
+            "comparison_mode": _pair_comparison_mode(pair_batch),
+        },
     )
 
 
@@ -322,6 +344,8 @@ def _score_summary(
         "pair_batch_cases": _pick(pair_batch, "case_count"),
         "pair_generated_differences": _pick(pair_batch, "generated_difference_count"),
         "max_abs_generated_delta": _max_abs_generated_delta(pair_batch),
+        "pair_same_checkpoint_baseline": _same_checkpoint_pair_baseline(pair_batch),
+        "pair_comparison_mode": _pair_comparison_mode(pair_batch),
         "task_type_group_count": len(_list_of_dicts(_pick(drilldowns, "task_type"))),
         "difficulty_group_count": len(_list_of_dicts(_pick(drilldowns, "difficulty"))),
         "weakest_task_type": weakest_task_type.get("key"),
@@ -367,6 +391,8 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], 
         recs.append(
             f"Inspect worst generation-quality case `{summary.get('generation_quality_worst_case')}` ({summary.get('generation_quality_worst_case_status')})."
         )
+    if summary.get("pair_same_checkpoint_baseline"):
+        recs.append("Run a different candidate checkpoint pair before using pair metrics as model improvement evidence.")
     drilldowns = _dict(drilldowns)
     weakest_task = _dict(drilldowns.get("weakest_task_type"))
     weakest_difficulty = _dict(drilldowns.get("weakest_difficulty"))
@@ -429,6 +455,32 @@ def _max_abs_generated_delta(pair_batch: Any) -> float | int | None:
         return None
     value = max(values)
     return int(value) if float(value).is_integer() else value
+
+
+def _pair_comparison_mode(pair_batch: Any) -> str:
+    if (_number(_pick(pair_batch, "case_count")) or 0) <= 0:
+        return "missing"
+    if _same_checkpoint_pair_baseline(pair_batch):
+        return "same_checkpoint_baseline"
+    return "cross_checkpoint_or_unknown"
+
+
+def _same_checkpoint_pair_baseline(pair_batch: Any) -> bool:
+    case_count = int(_number(_pick(pair_batch, "case_count")) or 0)
+    if case_count <= 0:
+        return False
+    comparisons = [_dict(result.get("comparison")) for result in _list_of_dicts(_pick(pair_batch, "results"))]
+    if comparisons and len(comparisons) == case_count:
+        return all(item.get("same_checkpoint") is True for item in comparisons)
+    left = _dict(_pick(pair_batch, "left"))
+    right = _dict(_pick(pair_batch, "right"))
+    left_checkpoint = left.get("checkpoint")
+    right_checkpoint = right.get("checkpoint")
+    if left_checkpoint is not None and right_checkpoint is not None:
+        return str(left_checkpoint) == str(right_checkpoint)
+    left_id = left.get("checkpoint_id")
+    right_id = right.get("checkpoint_id")
+    return left_id is not None and right_id is not None and str(left_id) == str(right_id)
 
 
 def _number(value: Any) -> float | None:
