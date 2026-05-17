@@ -439,6 +439,9 @@ c/211/解释/说明.md
 c/212/图片
 c/212/解释/说明.md
  -> v212 promoted training scale seed handoff suite alignment verdict 的运行截图和解释
+c/213/图片
+c/213/解释/说明.md
+ -> v213 promoted training scale seed handoff alignment recommendations 的运行截图和解释
 ```
 
 写入规则：

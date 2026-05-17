@@ -164,6 +164,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(summary["seed_handoff_suite_alignment_mismatch_count"], 0)
             self.assertEqual(summary["seed_handoff_suite_alignment_missing_count"], 0)
             self.assertIn("selected_handoff, seed, and plan suite paths align", summary["seed_handoff_suite_alignment_detail"])
+            self.assertIn("Suite alignment is consistent", report["recommendations"][0])
 
     def test_reports_mismatched_selected_suite_alignment_without_blocking(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -177,6 +178,24 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(summary["seed_handoff_suite_alignment_status"], "mismatch")
             self.assertEqual(summary["seed_handoff_suite_alignment_mismatch_count"], 1)
             self.assertIn("selected_handoff=builtin:standard-zh differs from seed=builtin:default", summary["seed_handoff_suite_alignment_detail"])
+            self.assertIn("Review suite alignment mismatch", report["recommendations"][0])
+            self.assertIn("Review the generated seed command", report["recommendations"][1])
+
+    def test_missing_suite_alignment_adds_review_recommendation_without_blocking_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh")
+
+            report = build_promoted_training_scale_seed_handoff(
+                seed,
+                execute=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(report["summary"]["handoff_status"], "completed")
+            self.assertEqual(report["summary"]["seed_handoff_suite_alignment_status"], "missing")
+            self.assertIn("Record missing suite alignment evidence", report["recommendations"][0])
+            self.assertIn("Use the generated plan report", report["recommendations"][1])
 
     def test_execute_reports_failed_command(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

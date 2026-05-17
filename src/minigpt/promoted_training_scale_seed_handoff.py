@@ -240,15 +240,16 @@ def _recommendations(
     next_batch_command: list[str],
 ) -> list[str]:
     status = str(summary.get("handoff_status") or "")
+    alignment_recommendations = _suite_alignment_recommendations(summary)
     if status == "planned":
-        return ["Review the generated seed command, then rerun with --execute to materialize the next training scale plan."]
+        return alignment_recommendations + ["Review the generated seed command, then rerun with --execute to materialize the next training scale plan."]
     if status == "blocked":
-        return ["Fix the seed or plan blockers before trying to produce the next training scale plan."]
+        return alignment_recommendations + ["Fix the seed or plan blockers before trying to produce the next training scale plan."]
     if status == "timeout":
-        return ["Inspect the partial plan output tree and rerun with a larger timeout if the plan command is still valid."]
+        return alignment_recommendations + ["Inspect the partial plan output tree and rerun with a larger timeout if the plan command is still valid."]
     if status == "failed":
-        return ["Inspect stdout/stderr tails and the seed command before retrying the next plan handoff."]
-    recommendations = [
+        return alignment_recommendations + ["Inspect stdout/stderr tails and the seed command before retrying the next plan handoff."]
+    recommendations = alignment_recommendations + [
         "Use the generated plan report and batch command as the next input to the training-scale workflow.",
     ]
     if plan_report:
@@ -260,6 +261,20 @@ def _recommendations(
     if execution.get("returncode") not in {None, 0}:
         recommendations.append("The plan command returned a non-zero exit code, so treat the seed handoff as failed.")
     return recommendations
+
+
+def _suite_alignment_recommendations(summary: dict[str, Any]) -> list[str]:
+    status = str(summary.get("seed_handoff_suite_alignment_status") or "")
+    detail = str(summary.get("seed_handoff_suite_alignment_detail") or "")
+    if status == "pending-plan":
+        return ["Suite alignment is pending plan generation; execute the seed handoff before treating the plan suite as confirmed."]
+    if status == "consistent":
+        return ["Suite alignment is consistent across selected handoff, seed, and generated plan paths."]
+    if status == "mismatch":
+        return [f"Review suite alignment mismatch before using this handoff as clean model-quality evidence: {detail}"]
+    if status == "missing":
+        return [f"Record missing suite alignment evidence before treating this handoff as a clean comparison: {detail}"]
+    return ["Review suite alignment evidence before continuing the next training-scale cycle."]
 
 
 def _handoff_allowed(seed_status: str, command: list[str], *, allow_review: bool) -> tuple[bool, str | None]:
