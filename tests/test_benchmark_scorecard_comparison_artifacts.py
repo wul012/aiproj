@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import benchmark_scorecard_comparison
 from minigpt import benchmark_scorecard_comparison_artifacts
+from minigpt import benchmark_scorecard_comparison_sections
 
 
 class BenchmarkScorecardComparisonArtifactSplitTests(unittest.TestCase):
@@ -57,6 +58,14 @@ class BenchmarkScorecardComparisonArtifactSplitTests(unittest.TestCase):
             self.assertNotIn("Demo <comparison>", html)
 
     def test_comparison_module_keeps_legacy_artifact_exports(self) -> None:
+        self.assertIs(
+            benchmark_scorecard_comparison_artifacts.render_benchmark_scorecard_comparison_html,
+            benchmark_scorecard_comparison_sections.render_benchmark_scorecard_comparison_html,
+        )
+        self.assertIs(
+            benchmark_scorecard_comparison_artifacts.render_benchmark_scorecard_comparison_markdown,
+            benchmark_scorecard_comparison_sections.render_benchmark_scorecard_comparison_markdown,
+        )
         self.assertIs(
             benchmark_scorecard_comparison.render_benchmark_scorecard_comparison_html,
             benchmark_scorecard_comparison_artifacts.render_benchmark_scorecard_comparison_html,

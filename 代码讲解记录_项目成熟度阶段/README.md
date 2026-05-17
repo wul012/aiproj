@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+196-v182-benchmark-scorecard-comparison-section-split.md
+ -> v182 code explanation: split benchmark scorecard comparison Markdown/HTML section rendering into `benchmark_scorecard_comparison_sections.py`, while keeping comparison schema, JSON/CSV writers, case-delta CSV, script behavior, and old facade imports unchanged.
 195-v181-ci-workflow-hygiene-artifact-split.md
  -> v181 code explanation: split CI workflow hygiene JSON/CSV/Markdown/HTML artifact rendering and writing into `ci_workflow_hygiene_artifacts.py`, while keeping `build_ci_workflow_hygiene_report()`, TypedDict schema, policy checks, script behavior, and old facade imports unchanged.
 194-v180-training-scale-workflow-artifact-split.md

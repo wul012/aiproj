@@ -352,6 +352,9 @@ c/180/解释/说明.md
 c/181/图片
 c/181/解释/说明.md
  -> v181 CI workflow hygiene artifact split 的运行截图和解释
+c/182/图片
+c/182/解释/说明.md
+ -> v182 benchmark scorecard comparison section split 的运行截图和解释
 ```
 
 写入规则：
