@@ -135,6 +135,45 @@ class BenchmarkScorecardArtifactTests(unittest.TestCase):
             self.assertIn("Review weakest rubric case.", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Components", Path(outputs["html"]).read_text(encoding="utf-8"))
 
+    def test_artifacts_filter_non_dict_rows_after_helper_consolidation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            scorecard = make_scorecard()
+            scorecard["components"] = [
+                "ignored-component",
+                {
+                    "key": "generation_quality",
+                    "title": "Generation Quality",
+                    "status": "warn",
+                    "score": 80.0,
+                    "weight": 0.2,
+                    "weighted_score": 16.0,
+                    "evidence_path": "generation_quality.json",
+                    "detail": "kept component",
+                },
+            ]
+            scorecard["drilldowns"]["task_type"] = [
+                "ignored-task-row",
+                {"group_by": "task_type", "key": "qa", "status": "warn", "score": 80.0, "case_count": 1},
+            ]
+            scorecard["rubric_scores"]["cases"] = [
+                "ignored-rubric-row",
+                {"name": "qa-hard", "task_type": "qa", "difficulty": "hard", "status": "warn", "score": 72.5},
+            ]
+
+            outputs = write_benchmark_scorecard_outputs(scorecard, Path(tmp) / "scorecard")
+
+            component_csv = Path(outputs["csv"]).read_text(encoding="utf-8")
+            drilldown_csv = Path(outputs["drilldowns_csv"]).read_text(encoding="utf-8")
+            rubric_csv = Path(outputs["rubric_csv"]).read_text(encoding="utf-8")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            self.assertIn("generation_quality,Generation Quality,warn", component_csv)
+            self.assertIn("task_type,qa,warn,80.0000", drilldown_csv)
+            self.assertIn("qa-hard,qa,hard,warn,72.5000", rubric_csv)
+            self.assertIn("Generation Quality", markdown)
+            self.assertNotIn("ignored-component", component_csv)
+            self.assertNotIn("ignored-task-row", drilldown_csv)
+            self.assertNotIn("ignored-rubric-row", rubric_csv)
+
     def test_benchmark_scorecard_public_wrappers_delegate_to_artifacts(self) -> None:
         scorecard = make_scorecard()
 

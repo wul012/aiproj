@@ -397,6 +397,9 @@ c/195/解释/说明.md
 c/196/图片
 c/196/解释/说明.md
  -> v196 benchmark scorecard report utils helper consolidation 的运行截图和解释
+c/197/图片
+c/197/解释/说明.md
+ -> v197 benchmark scorecard artifact helper consolidation 的运行截图和解释
 ```
 
 写入规则：

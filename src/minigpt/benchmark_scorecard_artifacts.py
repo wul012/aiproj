@@ -6,6 +6,9 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .report_utils import as_dict as _dict
+from .report_utils import list_of_dicts as _list_of_dicts
+
 
 def write_benchmark_scorecard_json(scorecard: dict[str, Any], path: str | Path) -> None:
     out_path = Path(path)
@@ -249,14 +252,6 @@ def write_benchmark_scorecard_outputs(scorecard: dict[str, Any], out_dir: str | 
     write_benchmark_scorecard_markdown(scorecard, paths["markdown"])
     write_benchmark_scorecard_html(scorecard, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return value if isinstance(value, list) and all(isinstance(item, dict) for item in value) else []
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _string_list(value: Any) -> list[str]:
