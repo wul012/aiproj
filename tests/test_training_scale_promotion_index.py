@@ -15,6 +15,7 @@ from minigpt.training_scale_promotion_index import (  # noqa: E402
     render_training_scale_promotion_index_markdown,
     write_training_scale_promotion_index_outputs,
 )
+from minigpt import training_scale_promotion_index_helpers as promotion_helpers  # noqa: E402
 
 
 class TrainingScalePromotionIndexTests(unittest.TestCase):
@@ -82,6 +83,18 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("&lt;alpha&gt;", html)
             self.assertNotIn("<Index>", html)
             self.assertNotIn("<alpha>", html)
+
+    def test_helper_module_still_drives_comparison_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            promoted = make_promotion(root, "alpha", "promoted")
+            report = build_training_scale_promotion_index([promoted], names=["alpha-run"])
+
+            comparison = promotion_helpers._comparison_inputs(report["promotions"], None)
+
+            self.assertEqual(comparison["names"], ["alpha-run"])
+            self.assertFalse(comparison["compare_command_ready"])
+            self.assertEqual(promotion_helpers._summary(report["promotions"], report["comparison_inputs"])["promoted_count"], 1)
 
 
 def make_promotion(root: Path, name: str, status: str, title: str | None = None) -> Path:

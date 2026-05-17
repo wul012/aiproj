@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+199-v185-training-scale-promotion-index-helper-split.md
+ -> v185 code explanation: split training scale promotion index name resolution, promotion row construction, compare-input selection, summary, and recommendations into `training_scale_promotion_index_helpers.py`, while keeping the index schema, artifact writers, renderers, script behavior, and public API unchanged.
 198-v184-benchmark-scorecard-comparison-helper-split.md
  -> v184 code explanation: split benchmark scorecard comparison relation, normalization, explanation, and helper plumbing into `benchmark_scorecard_comparison_helpers.py`, while keeping the comparison builders, schema, artifact writers, script behavior, and old facade imports unchanged.
 197-v183-maintenance-pressure-builder-split.md
