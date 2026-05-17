@@ -337,6 +337,9 @@ c/175/解释/说明.md
 c/176/图片
 c/176/解释/说明.md
  -> v176 benchmark scorecard decision artifact split 的运行截图和解释
+c/177/图片
+c/177/解释/说明.md
+ -> v177 dashboard section helper split 的运行截图和解释
 ```
 
 写入规则：

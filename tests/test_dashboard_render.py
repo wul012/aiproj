@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import dashboard
 from minigpt import dashboard_render
+from minigpt import dashboard_sections
 
 
 class DashboardRenderSplitTests(unittest.TestCase):
@@ -59,6 +60,19 @@ class DashboardRenderSplitTests(unittest.TestCase):
 
     def test_dashboard_module_keeps_legacy_render_export(self) -> None:
         self.assertIs(dashboard.render_dashboard_html, dashboard_render.render_dashboard_html)
+
+    def test_dashboard_section_helpers_are_split_from_entrypoint(self) -> None:
+        self.assertIn("style", dashboard_sections.__all__)
+        self.assertIn("stats_grid", dashboard_sections.__all__)
+        self.assertIn("escape", dashboard_sections.__all__)
+        self.assertIs(dashboard_render.render_dashboard_html.__globals__["_stats_grid"], dashboard_sections.stats_grid)
+        self.assertIs(dashboard_render.render_dashboard_html.__globals__["_style"], dashboard_sections.style)
+
+        html = dashboard_sections.stats_grid([("Unsafe", "<value>")])
+
+        self.assertIn("Unsafe", html)
+        self.assertIn("&lt;value&gt;", html)
+        self.assertNotIn("<value>", html)
 
     def test_write_dashboard_uses_render_module(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

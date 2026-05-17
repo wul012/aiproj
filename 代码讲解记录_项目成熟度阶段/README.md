@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+191-v177-dashboard-section-helper-split.md
+ -> v177 code explanation: split dashboard style, stats grid, artifact cards, content sections, links, images, formatting, and escaping helpers into `dashboard_sections.py`, while keeping dashboard payload building, artifact collection, write_dashboard, script usage, legacy render export, and public render entrypoint unchanged.
 190-v176-benchmark-scorecard-decision-artifact-split.md
  -> v176 code explanation: split benchmark scorecard decision JSON/CSV/Markdown/HTML artifact writers into `benchmark_scorecard_decision_artifacts.py`, while keeping comparison loading, candidate evaluation, baseline exclusion, rubric threshold checks, generation-quality review items, selected-run ranking, recommendations, script usage, and old facade exports unchanged.
 189-v175-promoted-training-scale-comparison-artifact-split.md
