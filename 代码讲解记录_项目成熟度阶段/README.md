@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+194-v180-training-scale-workflow-artifact-split.md
+ -> v180 code explanation: split training scale workflow JSON/CSV/Markdown/HTML artifact rendering and writing into `training_scale_workflow_artifacts.py`, while keeping `run_training_scale_workflow()`, workflow schema, nested artifacts, CLI behavior, and old facade imports unchanged.
 193-v179-maturity-narrative-summary-section-split.md
  -> v179 code explanation: split maturity narrative portfolio summary/recommendation/warning calculation into `maturity_narrative_summary.py` and human-readable sections/evidence matrix into `maturity_narrative_sections.py`, while keeping `build_maturity_narrative()`, narrative schema, artifact writers, CLI behavior, and old imports unchanged.
 192-v178-server-post-route-split.md

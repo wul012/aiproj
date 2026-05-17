@@ -346,6 +346,9 @@ c/178/解释/说明.md
 c/179/图片
 c/179/解释/说明.md
  -> v179 maturity narrative summary section split 的运行截图和解释
+c/180/图片
+c/180/解释/说明.md
+ -> v180 training scale workflow artifact split 的运行截图和解释
 ```
 
 写入规则：

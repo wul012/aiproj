@@ -15,6 +15,10 @@ from minigpt.training_scale_workflow import (  # noqa: E402
     run_training_scale_workflow,
     write_training_scale_workflow_outputs,
 )
+from minigpt.training_scale_workflow_artifacts import (  # noqa: E402
+    render_training_scale_workflow_html as artifact_render_training_scale_workflow_html,
+    write_training_scale_workflow_outputs as artifact_write_training_scale_workflow_outputs,
+)
 
 
 class TrainingScaleWorkflowTests(unittest.TestCase):
@@ -101,6 +105,10 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             payload = json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))
             self.assertEqual(payload["schema_version"], 1)
             self.assertTrue(Path(outputs["csv"]).exists())
+
+    def test_artifact_helpers_are_reexported_from_workflow_module(self) -> None:
+        self.assertIs(render_training_scale_workflow_html, artifact_render_training_scale_workflow_html)
+        self.assertIs(write_training_scale_workflow_outputs, artifact_write_training_scale_workflow_outputs)
 
     def _write_source(self, root: Path) -> Path:
         source = root / "corpus.txt"
