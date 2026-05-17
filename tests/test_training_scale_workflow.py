@@ -41,6 +41,8 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             self.assertEqual(report["summary"]["selected_profile"], "review")
             self.assertEqual(report["summary"]["allowed_count"], 1)
             self.assertEqual(report["summary"]["blocked_count"], 1)
+            self.assertFalse(report["summary"]["decision_require_suite_consistency"])
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
             self.assertTrue((root / "workflow" / "plan" / "training_scale_plan.json").exists())
             self.assertTrue((root / "workflow" / "runs" / "review" / "training_scale_run.json").exists())
             self.assertTrue((root / "workflow" / "comparison" / "training_scale_run_comparison.json").exists())
@@ -67,6 +69,7 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             self.assertEqual(report["plan_summary"]["suite_mode"], "builtin")
             self.assertEqual(report["plan_summary"]["suite_name"], "standard-zh")
             self.assertEqual(report["plan_summary"]["suite_path"], "builtin:standard-zh")
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
             plan_payload = json.loads(Path(report["plan_outputs"]["json"]).read_text(encoding="utf-8"))
             self.assertIn("--suite-name", plan_payload["batch"]["command"])
             self.assertIn("standard-zh", plan_payload["batch"]["command"])
@@ -89,6 +92,28 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             self.assertEqual(report["summary"]["decision_status"], "blocked")
             self.assertIsNone(report["summary"]["selected_profile"])
             self.assertEqual(report["decision_summary"]["candidate_count"], 0)
+
+    def test_workflow_passes_suite_consistency_guard_to_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._write_source(root)
+
+            report = run_training_scale_workflow(
+                [source],
+                project_root=root,
+                out_root=root / "workflow",
+                profiles=["review", "standard"],
+                decision_require_suite_consistency=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertTrue(report["decision_require_suite_consistency"])
+            self.assertTrue(report["summary"]["decision_require_suite_consistency"])
+            self.assertTrue(report["decision_summary"]["require_suite_consistency"])
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
+            self.assertNotEqual(report["summary"]["decision_status"], "blocked")
+            decision_payload = json.loads(Path(report["decision_outputs"]["json"]).read_text(encoding="utf-8"))
+            self.assertTrue(decision_payload["require_suite_consistency"])
 
     def test_rejects_duplicate_profiles_and_missing_baseline(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -51,6 +51,7 @@ def run_training_scale_workflow(
     decision_min_readiness: int = 60,
     decision_require_gate_pass: bool = False,
     decision_require_batch_started: bool = True,
+    decision_require_suite_consistency: bool = False,
     decision_execute_out_root: str | Path | None = None,
     python_executable: str = "python",
     generated_at: str | None = None,
@@ -120,6 +121,7 @@ def run_training_scale_workflow(
         min_readiness=decision_min_readiness,
         require_gate_pass=decision_require_gate_pass,
         require_batch_started=decision_require_batch_started,
+        require_suite_consistency=decision_require_suite_consistency,
         execute_out_root=decision_execute_out_root,
         python_executable=python_executable,
         title="MiniGPT training scale workflow decision",
@@ -143,6 +145,8 @@ def run_training_scale_workflow(
         "decision_min_readiness": int(decision_min_readiness),
         "decision_require_gate_pass": bool(decision_require_gate_pass),
         "decision_require_batch_started": bool(decision_require_batch_started),
+        "decision_require_suite_consistency": bool(decision_require_suite_consistency),
+        "require_suite_consistency": bool(decision_require_suite_consistency),
         "plan_summary": _plan_summary(plan),
         "plan_outputs": plan_outputs,
         "runs": run_rows,
@@ -235,6 +239,10 @@ def _workflow_summary(
         "selected_gate_status": selected.get("gate_status") or decision_summary.get("selected_gate_status"),
         "selected_batch_status": selected.get("batch_status") or decision_summary.get("selected_batch_status"),
         "selected_readiness_score": selected.get("readiness_score") or decision_summary.get("selected_readiness_score"),
+        "selected_suite_path": selected.get("suite_path") or decision_summary.get("selected_suite_path"),
+        "decision_require_suite_consistency": decision_summary.get("require_suite_consistency"),
+        "suite_consistency": decision_summary.get("suite_consistency"),
+        "suite_mismatch_count": decision_summary.get("suite_mismatch_count"),
         "suite_mode": _dict(plan.get("suite")).get("mode"),
         "suite_name": _dict(plan.get("suite")).get("name"),
         "suite_path": _dict(plan.get("suite")).get("path"),
@@ -252,6 +260,8 @@ def _workflow_recommendations(summary: dict[str, Any], decision: dict[str, Any])
         recommendations.append("Use the selected profile as the staged execution candidate after reviewing workflow evidence.")
     if int(summary.get("blocked_count") or 0):
         recommendations.append("Keep blocked profile outputs as evidence for why the selected profile was safer.")
+    if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
+        recommendations.append("Fix workflow benchmark suite consistency before using the decision as clean model-quality evidence.")
     command = str(decision.get("execute_command_text") or "")
     if command:
         recommendations.append("The generated execute command is a handoff command, not automatically run by this workflow.")

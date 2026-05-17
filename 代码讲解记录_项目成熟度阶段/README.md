@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+218-v204-workflow-suite-guard-handoff.md
+ -> v204 code explanation: carry the opt-in suite-consistency guard into the consolidated training-scale workflow through `decision_require_suite_consistency` / `--decision-require-suite-consistency` and workflow artifacts.
 217-v203-strict-suite-consistency-decision-guard.md
  -> v203 code explanation: add an opt-in `--require-suite-consistency` guard to training-scale and promoted baseline decisions so mixed/missing benchmark-suite comparisons can be blocked for clean model-quality decisions.
 216-v202-training-scale-suite-consistency-evidence.md

@@ -418,6 +418,9 @@ c/202/解释/说明.md
 c/203/图片
 c/203/解释/说明.md
  -> v203 strict suite consistency decision guard 的运行截图和解释
+c/204/图片
+c/204/解释/说明.md
+ -> v204 workflow suite guard handoff 的运行截图和解释
 ```
 
 写入规则：

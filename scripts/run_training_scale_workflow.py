@@ -34,6 +34,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--decision-min-readiness", type=int, default=60)
     parser.add_argument("--decision-require-gate-pass", action="store_true", help="Only let pass-status gates become decision candidates.")
     parser.add_argument("--decision-no-require-batch-started", action="store_true", help="Allow decision candidates that did not reach batch dry-run.")
+    parser.add_argument("--decision-require-suite-consistency", action="store_true", help="Block workflow decisions when compared runs mix or omit benchmark suite paths.")
     parser.add_argument("--decision-execute-out-root", type=Path, default=None)
     parser.add_argument("--title", type=str, default="MiniGPT training scale workflow")
     parser.add_argument("--no-recursive", action="store_true", help="Only read top-level .txt files from directories.")
@@ -63,6 +64,7 @@ def main() -> None:
         decision_min_readiness=args.decision_min_readiness,
         decision_require_gate_pass=args.decision_require_gate_pass,
         decision_require_batch_started=not args.decision_no_require_batch_started,
+        decision_require_suite_consistency=args.decision_require_suite_consistency,
         decision_execute_out_root=args.decision_execute_out_root,
         python_executable=args.python,
         title=args.title,
