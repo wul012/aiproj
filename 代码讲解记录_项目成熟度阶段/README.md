@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+195-v181-ci-workflow-hygiene-artifact-split.md
+ -> v181 code explanation: split CI workflow hygiene JSON/CSV/Markdown/HTML artifact rendering and writing into `ci_workflow_hygiene_artifacts.py`, while keeping `build_ci_workflow_hygiene_report()`, TypedDict schema, policy checks, script behavior, and old facade imports unchanged.
 194-v180-training-scale-workflow-artifact-split.md
  -> v180 code explanation: split training scale workflow JSON/CSV/Markdown/HTML artifact rendering and writing into `training_scale_workflow_artifacts.py`, while keeping `run_training_scale_workflow()`, workflow schema, nested artifacts, CLI behavior, and old facade imports unchanged.
 193-v179-maturity-narrative-summary-section-split.md

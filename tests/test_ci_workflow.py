@@ -14,6 +14,10 @@ from minigpt.ci_workflow_hygiene import (
     render_ci_workflow_hygiene_markdown,
     write_ci_workflow_hygiene_outputs,
 )
+from minigpt.ci_workflow_hygiene_artifacts import (
+    render_ci_workflow_hygiene_html as artifact_render_ci_workflow_hygiene_html,
+    write_ci_workflow_hygiene_outputs as artifact_write_ci_workflow_hygiene_outputs,
+)
 
 CI_WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
 
@@ -119,6 +123,10 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("actions/setup-python", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("CI &lt;workflow&gt;", render_ci_workflow_hygiene_html(report))
             self.assertIn("continue_with_node24_native_ci", render_ci_workflow_hygiene_markdown(report))
+
+    def test_ci_workflow_module_reexports_artifact_writers(self) -> None:
+        self.assertIs(render_ci_workflow_hygiene_html, artifact_render_ci_workflow_hygiene_html)
+        self.assertIs(write_ci_workflow_hygiene_outputs, artifact_write_ci_workflow_hygiene_outputs)
 
 
 if __name__ == "__main__":

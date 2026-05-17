@@ -349,6 +349,9 @@ c/179/解释/说明.md
 c/180/图片
 c/180/解释/说明.md
  -> v180 training scale workflow artifact split 的运行截图和解释
+c/181/图片
+c/181/解释/说明.md
+ -> v181 CI workflow hygiene artifact split 的运行截图和解释
 ```
 
 写入规则：
