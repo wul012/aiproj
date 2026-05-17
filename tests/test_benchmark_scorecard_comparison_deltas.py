@@ -16,6 +16,7 @@ from minigpt.benchmark_scorecard_comparison_deltas import (
     select_best_benchmark_scorecard_run,
     summarize_benchmark_scorecard_run,
 )
+from minigpt import benchmark_scorecard_comparison as comparison_facade
 
 
 def make_scorecard(name: str, *, overall: float, qa_score: float, flags: int, missing: list[str]) -> dict:
@@ -94,6 +95,11 @@ class BenchmarkScorecardComparisonDeltaTests(unittest.TestCase):
         self.assertEqual(select_best_benchmark_scorecard_run(runs, "rubric_avg_score")["name"], "base")
         self.assertTrue(any("Generation-quality flags increased" in item for item in recommendations))
         self.assertTrue(any("missing terms" in item.lower() for item in recommendations))
+
+    def test_public_facade_still_reexports_delta_builders(self) -> None:
+        self.assertIs(comparison_facade.build_benchmark_scorecard_run_delta, build_benchmark_scorecard_run_delta)
+        self.assertIs(comparison_facade.build_benchmark_scorecard_case_deltas, build_benchmark_scorecard_case_deltas)
+        self.assertIs(comparison_facade.build_benchmark_scorecard_group_deltas, build_benchmark_scorecard_group_deltas)
 
 
 if __name__ == "__main__":

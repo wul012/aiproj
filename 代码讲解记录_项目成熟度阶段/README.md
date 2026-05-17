@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+198-v184-benchmark-scorecard-comparison-helper-split.md
+ -> v184 code explanation: split benchmark scorecard comparison relation, normalization, explanation, and helper plumbing into `benchmark_scorecard_comparison_helpers.py`, while keeping the comparison builders, schema, artifact writers, script behavior, and old facade imports unchanged.
 197-v183-maintenance-pressure-builder-split.md
  -> v183 code explanation: split module-pressure AST scanning, line-count status, summary, and recommendations into `maintenance_pressure.py`, while keeping maintenance batching/proposal policy, pressure report schema, artifact writers, script behavior, and old facade imports unchanged.
 196-v182-benchmark-scorecard-comparison-section-split.md
