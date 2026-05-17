@@ -436,6 +436,9 @@ c/210/解释/说明.md
 c/211/图片
 c/211/解释/说明.md
  -> v211 promoted training scale seed handoff suite guard evidence 的运行截图和解释
+c/212/图片
+c/212/解释/说明.md
+ -> v212 promoted training scale seed handoff suite alignment verdict 的运行截图和解释
 ```
 
 写入规则：

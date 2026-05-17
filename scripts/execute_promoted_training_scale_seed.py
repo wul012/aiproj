@@ -51,6 +51,8 @@ def main() -> None:
     print(f"selected_handoff_suite_mismatch_count={summary.get('selected_handoff_suite_mismatch_count')}")
     print(f"handoff_suite_mismatch_total={summary.get('handoff_suite_mismatch_total')}")
     print(f"plan_suite_path={summary.get('plan_suite_path')}")
+    print(f"seed_handoff_suite_alignment_status={summary.get('seed_handoff_suite_alignment_status')}")
+    print(f"seed_handoff_suite_alignment_mismatch_count={summary.get('seed_handoff_suite_alignment_mismatch_count')}")
     print(f"next_batch_command_available={summary.get('next_batch_command_available')}")
     print("summary=" + json.dumps(summary, ensure_ascii=False))
     print(f"command={report.get('command_text')}")

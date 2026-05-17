@@ -97,6 +97,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(report["summary"]["handoff_status"], "completed")
             self.assertEqual(report["summary"]["seed_suite_path"], "builtin:standard-zh")
             self.assertEqual(report["summary"]["plan_suite_path"], "builtin:standard-zh")
+            self.assertEqual(report["summary"]["seed_handoff_suite_alignment_status"], "missing")
             self.assertEqual(plan_payload["suite"], {"mode": "builtin", "name": "standard-zh", "path": "builtin:standard-zh"})
             self.assertIn("--suite-name", report["next_batch_command"])
             self.assertIn("standard-zh", report["next_batch_command"])
@@ -132,13 +133,50 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(summary["selected_handoff_suite_mismatch_count"], 0)
             self.assertEqual(summary["selected_handoff_selected_suite_path"], "builtin:standard-zh")
             self.assertEqual(summary["handoff_suite_mismatch_total"], 0)
+            self.assertEqual(summary["seed_handoff_suite_alignment_status"], "pending-plan")
+            self.assertEqual(summary["seed_handoff_suite_alignment_mismatch_count"], 0)
             self.assertIn("selected_handoff_suite_consistency", csv_text)
+            self.assertIn("seed_handoff_suite_alignment_status", csv_text)
             self.assertIn("Selected handoff suite", markdown)
             self.assertIn("Handoff suite mismatches", markdown)
+            self.assertIn("Seed handoff suite alignment", markdown)
             self.assertIn("Selected handoff suite", html)
+            self.assertIn("Suite alignment", html)
             self.assertIn("selected_handoff_suite_consistency=consistent", completed.stdout)
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
+            self.assertIn("seed_handoff_suite_alignment_status=pending-plan", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+
+    def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+
+            report = build_promoted_training_scale_seed_handoff(
+                seed,
+                execute=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            summary = report["summary"]
+            self.assertEqual(summary["handoff_status"], "completed")
+            self.assertEqual(summary["seed_handoff_suite_alignment_status"], "consistent")
+            self.assertEqual(summary["seed_handoff_suite_alignment_mismatch_count"], 0)
+            self.assertEqual(summary["seed_handoff_suite_alignment_missing_count"], 0)
+            self.assertIn("selected_handoff, seed, and plan suite paths align", summary["seed_handoff_suite_alignment_detail"])
+
+    def test_reports_mismatched_selected_suite_alignment_without_blocking(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="default", include_handoff_suite_guard=True)
+
+            report = build_promoted_training_scale_seed_handoff(seed, generated_at="2026-05-14T00:00:00Z")
+
+            summary = report["summary"]
+            self.assertEqual(summary["handoff_status"], "planned")
+            self.assertEqual(summary["seed_handoff_suite_alignment_status"], "mismatch")
+            self.assertEqual(summary["seed_handoff_suite_alignment_mismatch_count"], 1)
+            self.assertIn("selected_handoff=builtin:standard-zh differs from seed=builtin:default", summary["seed_handoff_suite_alignment_detail"])
 
     def test_execute_reports_failed_command(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -156,6 +156,10 @@ def _summary(
     plan_suite = _dict(plan_report.get("suite"))
     plan_dataset = _dict(plan_report.get("dataset"))
     handoff_guard = _dict(baseline.get("handoff_suite_guard"))
+    seed_suite_path = _dict(next_plan.get("suite")).get("path")
+    selected_handoff_suite_path = handoff_guard.get("selected_handoff_selected_suite_path")
+    plan_suite_path = plan_suite.get("path") or plan_summary.get("suite_path")
+    suite_alignment = _suite_alignment(selected_handoff_suite_path, seed_suite_path, plan_suite_path)
     return {
         "handoff_status": execution.get("status"),
         "seed_status": seed.get("seed_status"),
@@ -169,18 +173,22 @@ def _summary(
         "artifact_count": len(artifact_rows),
         "available_artifact_count": count_available_artifacts(artifact_rows),
         "plan_status": "available" if plan_report else "missing",
-        "seed_suite_path": _dict(next_plan.get("suite")).get("path"),
+        "seed_suite_path": seed_suite_path,
         "seed_suite_source": next_plan.get("suite_source"),
         "selected_handoff_require_suite_consistency": handoff_guard.get("selected_handoff_require_suite_consistency"),
         "selected_handoff_suite_consistency": handoff_guard.get("selected_handoff_suite_consistency"),
         "selected_handoff_suite_mismatch_count": handoff_guard.get("selected_handoff_suite_mismatch_count"),
-        "selected_handoff_selected_suite_path": handoff_guard.get("selected_handoff_selected_suite_path"),
+        "selected_handoff_selected_suite_path": selected_handoff_suite_path,
         "handoff_suite_consistent_count": handoff_guard.get("handoff_suite_consistent_count"),
         "handoff_suite_mismatch_total": handoff_guard.get("handoff_suite_mismatch_total"),
         "comparison_ready_handoff_suite_mismatch_total": handoff_guard.get("comparison_ready_handoff_suite_mismatch_total"),
         "plan_suite_mode": plan_suite.get("mode") or plan_summary.get("suite_mode"),
         "plan_suite_name": plan_suite.get("name") or plan_summary.get("suite_name"),
-        "plan_suite_path": plan_suite.get("path") or plan_summary.get("suite_path"),
+        "plan_suite_path": plan_suite_path,
+        "seed_handoff_suite_alignment_status": suite_alignment["status"],
+        "seed_handoff_suite_alignment_detail": suite_alignment["detail"],
+        "seed_handoff_suite_alignment_mismatch_count": suite_alignment["mismatch_count"],
+        "seed_handoff_suite_alignment_missing_count": suite_alignment["missing_count"],
         "plan_scale_tier": plan_dataset.get("scale_tier"),
         "plan_variant_count": len(_list_of_dicts(plan_report.get("variants"))),
         "plan_source_count": plan_dataset.get("source_count"),
@@ -188,6 +196,39 @@ def _summary(
         "next_batch_command_available": bool(next_batch_command),
         "execution_returncode": execution.get("returncode"),
         "execution_elapsed_seconds": execution.get("elapsed_seconds"),
+    }
+
+
+def _suite_alignment(selected_handoff_path: Any, seed_path: Any, plan_path: Any) -> dict[str, Any]:
+    selected = None if selected_handoff_path is None else str(selected_handoff_path)
+    seed = None if seed_path is None else str(seed_path)
+    plan = None if plan_path is None else str(plan_path)
+    missing = [name for name, value in (("selected_handoff", selected), ("seed", seed)) if not value]
+    mismatches = []
+    if selected and seed and selected != seed:
+        mismatches.append(f"selected_handoff={selected} differs from seed={seed}")
+    if plan:
+        if seed and plan != seed:
+            mismatches.append(f"plan={plan} differs from seed={seed}")
+        if selected and plan != selected:
+            mismatches.append(f"plan={plan} differs from selected_handoff={selected}")
+    if missing:
+        status = "missing"
+        detail = "missing required suite path(s): " + ", ".join(missing)
+    elif mismatches:
+        status = "mismatch"
+        detail = "; ".join(mismatches)
+    elif plan:
+        status = "consistent"
+        detail = f"selected_handoff, seed, and plan suite paths align at {plan}"
+    else:
+        status = "pending-plan"
+        detail = f"selected_handoff and seed suite paths align at {seed}; plan suite is not available yet"
+    return {
+        "status": status,
+        "detail": detail,
+        "mismatch_count": len(mismatches),
+        "missing_count": len(missing),
     }
 
 
