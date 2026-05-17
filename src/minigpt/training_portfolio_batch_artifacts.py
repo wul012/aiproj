@@ -30,6 +30,7 @@ def write_training_portfolio_batch_csv(report: dict[str, Any], path: str | Path)
         "portfolio_json",
         "artifact_count",
         "available_artifact_count",
+        "pair_mode",
         "max_iters",
         "batch_size",
         "block_size",
@@ -53,6 +54,7 @@ def write_training_portfolio_batch_csv(report: dict[str, Any], path: str | Path)
                     "portfolio_json": row.get("portfolio_json") or row.get("portfolio_path"),
                     "artifact_count": row.get("artifact_count"),
                     "available_artifact_count": row.get("available_artifact_count"),
+                    "pair_mode": row.get("pair_mode") or _planned_pair_mode(row),
                     "max_iters": config.get("max_iters"),
                     "batch_size": config.get("batch_size"),
                     "block_size": config.get("block_size"),
@@ -78,11 +80,12 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
         f"- Variants: `{report.get('variant_count')}`",
         f"- Baseline: `{report.get('baseline_name')}`",
         f"- Total planned iterations: `{summary.get('total_max_iters')}`",
+        f"- Pair modes: `{_pair_mode_label(summary.get('pair_mode_counts'))}`",
         "",
         "## Variants",
         "",
-        "| Variant | Status | Config | Out Root | Portfolio |",
-        "| --- | --- | --- | --- | --- |",
+        "| Variant | Status | Pair Mode | Config | Out Root | Portfolio |",
+        "| --- | --- | --- | --- | --- | --- |",
     ]
     rows = _list_of_dicts(report.get("variant_results")) or _planned_rows(report)
     for row in rows:
@@ -93,6 +96,7 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
                 [
                     _md(row.get("name")),
                     _md(row.get("status") or "planned"),
+                    _md(row.get("pair_mode") or _planned_pair_mode(row)),
                     _md(_config_label(config)),
                     _md(row.get("out_root")),
                     _md(row.get("portfolio_json") or row.get("portfolio_path")),
@@ -142,6 +146,7 @@ def render_training_portfolio_batch_html(report: dict[str, Any]) -> str:
         ("Total iters", summary.get("total_max_iters")),
         ("Max block", summary.get("max_block_size")),
         ("Max embd", summary.get("max_n_embd")),
+        ("Pair modes", _pair_mode_label(summary.get("pair_mode_counts"))),
         ("Compare", execution.get("comparison_status", "planned")),
         ("Generated", report.get("generated_at")),
     ]
@@ -226,6 +231,7 @@ def _variant_table(report: dict[str, Any]) -> str:
             "<tr>"
             f"<td><strong>{_e(row.get('name'))}</strong><br><span>{_e(row.get('description'))}</span></td>"
             f"<td>{_e(row.get('status') or 'planned')}<br><span>{_e(row.get('completed_steps'))}/{_e(row.get('step_count'))} steps</span></td>"
+            f"<td>{_e(row.get('pair_mode') or _planned_pair_mode(row))}</td>"
             f"<td>{_e(_config_label(config))}</td>"
             f"<td>{_e(row.get('out_root'))}</td>"
             f"<td>{_e(row.get('portfolio_json') or row.get('portfolio_path'))}</td>"
@@ -233,7 +239,7 @@ def _variant_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section class="panel"><h2>Variant Matrix</h2>'
-        '<table><thead><tr><th>Variant</th><th>Status</th><th>Config</th><th>Out Root</th><th>Portfolio</th></tr></thead><tbody>'
+        '<table><thead><tr><th>Variant</th><th>Status</th><th>Pair Mode</th><th>Config</th><th>Out Root</th><th>Portfolio</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table></section>"
     )
@@ -304,6 +310,19 @@ def _config_label(config: dict[str, Any]) -> str:
 
 def _display_command(command: Any) -> str:
     return " ".join(_quote(part) for part in _string_list(command))
+
+
+def _planned_pair_mode(row: dict[str, Any]) -> str:
+    portfolio_plan = _dict(row.get("portfolio_plan"))
+    pair_config = _dict(portfolio_plan.get("pair_config"))
+    return str(pair_config.get("mode") or "missing")
+
+
+def _pair_mode_label(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return "missing"
+    return ", ".join(f"{key}={counts[key]}" for key in sorted(counts))
 
 
 def _quote(value: str) -> str:

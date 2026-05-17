@@ -77,6 +77,10 @@ VARIANT_OVERRIDE_KEYS = {
     "seed",
     "sample_prompt",
     "sample_tokens",
+    "pair_baseline_checkpoint",
+    "pair_baseline_tokenizer",
+    "pair_baseline_id",
+    "pair_candidate_id",
     "title",
 }
 
@@ -113,6 +117,10 @@ def build_training_portfolio_batch_plan(
     seed: int = 1337,
     sample_prompt: str = "MiniGPT",
     sample_tokens: int = 40,
+    pair_baseline_checkpoint: str | Path | None = None,
+    pair_baseline_tokenizer: str | Path | None = None,
+    pair_baseline_id: str | None = None,
+    pair_candidate_id: str | None = None,
     baseline: str | None = None,
     title: str = "MiniGPT training portfolio batch",
 ) -> dict[str, Any]:
@@ -145,6 +153,10 @@ def build_training_portfolio_batch_plan(
         "seed": seed,
         "sample_prompt": sample_prompt,
         "sample_tokens": sample_tokens,
+        "pair_baseline_checkpoint": pair_baseline_checkpoint,
+        "pair_baseline_tokenizer": pair_baseline_tokenizer,
+        "pair_baseline_id": pair_baseline_id,
+        "pair_candidate_id": pair_candidate_id,
     }
     variant_rows = []
     for index, variant in enumerate(normalized, start=1):
@@ -175,6 +187,10 @@ def build_training_portfolio_batch_plan(
             seed=int(config["seed"]),
             sample_prompt=str(config["sample_prompt"]),
             sample_tokens=int(config["sample_tokens"]),
+            pair_baseline_checkpoint=config.get("pair_baseline_checkpoint"),
+            pair_baseline_tokenizer=config.get("pair_baseline_tokenizer"),
+            pair_baseline_id=_optional_str(config.get("pair_baseline_id")),
+            pair_candidate_id=_optional_str(config.get("pair_candidate_id")),
             title=str(config["title"]),
         )
         variant_rows.append(
@@ -307,6 +323,8 @@ def _normalize_variant(value: Any, index: int) -> dict[str, Any]:
 def _variant_config(common: dict[str, Any], variant: dict[str, Any]) -> dict[str, Any]:
     config = dict(common)
     config.update({key: variant[key] for key in VARIANT_OVERRIDE_KEYS if key in variant})
+    if "pair_baseline_checkpoint" in variant and "pair_baseline_tokenizer" not in variant:
+        config["pair_baseline_tokenizer"] = None
     name = str(variant["name"])
     config.setdefault("dataset_version", f"v1-{name}")
     config["run_name"] = str(config.get("run_name") or _safe_path_name(name))
@@ -314,6 +332,8 @@ def _variant_config(common: dict[str, Any], variant: dict[str, Any]) -> dict[str
     config["dataset_version"] = str(config.get("dataset_version") or f"v1-{name}")
     config["dataset_description"] = str(config.get("dataset_description") or "MiniGPT training portfolio batch dataset.")
     config["title"] = str(config.get("title") or f"MiniGPT training portfolio pipeline ({name})")
+    for key in ["pair_baseline_checkpoint", "pair_baseline_tokenizer", "pair_baseline_id", "pair_candidate_id"]:
+        config[key] = _optional_str(config.get(key))
     return config
 
 
@@ -325,7 +345,7 @@ def _safe_path_name(value: str) -> str:
 
 
 def _public_config(config: dict[str, Any]) -> dict[str, Any]:
-    return {
+    public = {
         key: config.get(key)
         for key in [
             "run_name",
@@ -343,12 +363,24 @@ def _public_config(config: dict[str, Any]) -> dict[str, Any]:
             "learning_rate",
             "seed",
             "sample_tokens",
+            "pair_baseline_checkpoint",
+            "pair_baseline_tokenizer",
+            "pair_baseline_id",
+            "pair_candidate_id",
         ]
     }
+    for key in ["pair_baseline_checkpoint", "pair_baseline_tokenizer", "pair_baseline_id", "pair_candidate_id"]:
+        value = public.get(key)
+        public[key] = _optional_str(value)
+    return public
 
 
 def _plan_summary(variants: list[dict[str, Any]], baseline_name: str) -> dict[str, Any]:
     configs = [_dict(row.get("config")) for row in variants]
+    pair_modes = [
+        _dict(_dict(row.get("portfolio_plan")).get("pair_config")).get("mode") or "missing"
+        for row in variants
+    ]
     return {
         "variant_count": len(variants),
         "variant_names": [row.get("name") for row in variants],
@@ -358,11 +390,13 @@ def _plan_summary(variants: list[dict[str, Any]], baseline_name: str) -> dict[st
         "max_n_embd": max((int(config.get("n_embd") or 0) for config in configs), default=0),
         "model_shape_count": len({(config.get("n_layer"), config.get("n_head"), config.get("n_embd")) for config in configs}),
         "dataset_version_count": len({config.get("dataset_version") for config in configs}),
+        "pair_mode_counts": {mode: pair_modes.count(mode) for mode in sorted(set(pair_modes))},
     }
 
 
 def _variant_result(variant: dict[str, Any], report: dict[str, Any], outputs: dict[str, str]) -> dict[str, Any]:
     execution = _dict(report.get("execution"))
+    pair_config = _dict(report.get("pair_config"))
     return {
         "name": variant.get("name"),
         "description": variant.get("description"),
@@ -377,6 +411,7 @@ def _variant_result(variant: dict[str, Any], report: dict[str, Any], outputs: di
         "failed_step": execution.get("failed_step"),
         "artifact_count": execution.get("artifact_count"),
         "available_artifact_count": execution.get("available_artifact_count"),
+        "pair_mode": pair_config.get("mode"),
         "config": variant.get("config"),
     }
 
@@ -391,3 +426,10 @@ def _recommendations(execution: dict[str, Any], comparison_summary: dict[str, An
     if execution.get("comparison_status") == "written" and comparison_summary:
         return ["Open the batch comparison HTML to choose the next baseline for larger-corpus or model-size experiments."]
     return ["Use the generated per-variant training_portfolio.html files to inspect each run before comparing them."]
+
+
+def _optional_str(value: Any) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None

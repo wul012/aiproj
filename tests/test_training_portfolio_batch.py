@@ -63,6 +63,51 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertEqual(plan["variants"][1]["config"]["n_embd"], 96)
             self.assertTrue(plan["variants"][0]["portfolio_path"].endswith("training_portfolio.json"))
 
+    def test_build_batch_plan_passes_pair_baseline_to_variants(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "data.txt"
+            source.write_text("MiniGPT batch data", encoding="utf-8")
+            baseline = root / "baseline" / "checkpoint.pt"
+            baseline_tokenizer = root / "baseline" / "tokenizer.json"
+            variant_baseline = root / "variant-baseline" / "checkpoint.pt"
+            variants = [
+                {"name": "small", "pair_candidate_id": "small-candidate"},
+                {"name": "context", "pair_baseline_checkpoint": str(variant_baseline), "pair_baseline_id": "variant-base"},
+            ]
+
+            plan = build_training_portfolio_batch_plan(
+                root,
+                [source],
+                out_root=root / "batch",
+                variants=variants,
+                pair_baseline_checkpoint=baseline,
+                pair_baseline_tokenizer=baseline_tokenizer,
+                pair_baseline_id="global-base",
+                pair_candidate_id="global-candidate",
+            )
+
+            small = plan["variants"][0]
+            context = plan["variants"][1]
+            small_pair = small["portfolio_plan"]["pair_config"]
+            context_pair = context["portfolio_plan"]["pair_config"]
+            small_command = " ".join(small["portfolio_plan"]["steps"][5]["command"])
+            context_command = " ".join(context["portfolio_plan"]["steps"][5]["command"])
+
+            self.assertEqual(plan["summary"]["pair_mode_counts"], {"external_baseline": 2})
+            self.assertEqual(small["config"]["pair_baseline_checkpoint"], str(baseline))
+            self.assertEqual(small_pair["left_checkpoint"], str(baseline))
+            self.assertEqual(small_pair["left_tokenizer"], str(baseline_tokenizer))
+            self.assertEqual(small_pair["left_id"], "global-base")
+            self.assertEqual(small_pair["right_id"], "small-candidate")
+            self.assertIn("--left-checkpoint " + str(baseline), small_command)
+            self.assertIn("--right-id small-candidate", small_command)
+            self.assertEqual(context_pair["left_checkpoint"], str(variant_baseline))
+            self.assertEqual(context_pair["left_tokenizer"], str(variant_baseline.parent / "tokenizer.json"))
+            self.assertEqual(context_pair["left_id"], "variant-base")
+            self.assertEqual(context_pair["right_id"], "global-candidate")
+            self.assertIn("--left-checkpoint " + str(variant_baseline), context_command)
+
     def test_run_batch_dry_run_writes_variant_reports_and_comparison(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -87,6 +132,8 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             comparison = json.loads((root / "batch" / "comparison" / "training_portfolio_comparison.json").read_text(encoding="utf-8"))
             self.assertEqual(comparison["portfolio_count"], 2)
             self.assertEqual(comparison["summary"]["planned_count"], 2)
+            self.assertEqual(report["summary"]["pair_mode_counts"], {"same_checkpoint_baseline": 2})
+            self.assertEqual(report["variant_results"][0]["pair_mode"], "same_checkpoint_baseline")
             artifact_outputs = artifact_write_training_portfolio_batch_outputs(report, root / "batch-copy")
             self.assertEqual(set(artifact_outputs), {"json", "csv", "markdown", "html"})
             self.assertTrue(Path(artifact_outputs["json"]).exists())
@@ -136,7 +183,9 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             html = render_training_portfolio_batch_html(report)
 
             self.assertIn("## Variants", markdown)
+            self.assertIn("Pair modes: `same_checkpoint_baseline=1`", markdown)
             self.assertIn("&lt;base&gt;", html)
+            self.assertIn("same_checkpoint_baseline", html)
             self.assertNotIn("<strong><base>", html)
 
     def test_facade_keeps_artifact_identity(self) -> None:
