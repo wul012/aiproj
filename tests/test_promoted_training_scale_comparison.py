@@ -55,9 +55,31 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["comparison_ready_count"], 2)
             self.assertEqual(report["summary"]["compared_run_count"], 2)
             self.assertEqual(report["summary"]["baseline_name"], "beta")
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
             self.assertEqual([row["name"] for row in report["comparison"]["runs"]], ["alpha", "beta"])
             self.assertNotIn("review", [row["name"] for row in report["comparison"]["runs"]])
             self.assertFalse(report["blockers"])
+
+    def test_mixed_promoted_run_suites_are_carried_to_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index_dir = make_index_tree(
+                root,
+                [
+                    entry("alpha", "alpha", "promoted", "warn", suite_name=None),
+                    entry("beta", "beta", "promoted", "pass", suite_name="standard-zh"),
+                ],
+                baseline_name="alpha",
+            )
+
+            report = build_promoted_training_scale_comparison(index_dir, generated_at="2026-05-14T00:00:00Z")
+
+            self.assertEqual(report["comparison_status"], "compared")
+            self.assertEqual(report["summary"]["suite_consistency"], "mixed")
+            self.assertEqual(report["summary"]["suite_mismatch_count"], 1)
+            self.assertTrue(any("different benchmark suites" in item for item in report["recommendations"]))
+            beta = next(row for row in report["promotions"] if row["name"] == "beta")
+            self.assertEqual(beta["suite_path"], "builtin:standard-zh")
 
     def test_blocks_when_promoted_input_is_insufficient(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -120,8 +142,8 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertNotIn("<alpha>", html)
 
 
-def entry(safe_id: str, name: str, status: str, gate_status: str) -> dict:
-    return {"safe_id": safe_id, "name": name, "status": status, "gate_status": gate_status}
+def entry(safe_id: str, name: str, status: str, gate_status: str, suite_name: str | None = "standard-zh") -> dict:
+    return {"safe_id": safe_id, "name": name, "status": status, "gate_status": gate_status, "suite_name": suite_name}
 
 
 def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None = None) -> Path:
@@ -131,7 +153,7 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
     compare_paths = []
     for item in entries:
         run_path = root / "runs" / item["safe_id"] / "training_scale_run.json"
-        write_json(run_path, scale_run(item["name"], item["gate_status"]))
+        write_json(run_path, scale_run(item["name"], item["gate_status"], item.get("suite_name")))
         rel_run_path = os.path.relpath(run_path, index_dir)
         promoted = item["status"] == "promoted"
         promotions.append(
@@ -172,7 +194,12 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
     return index_dir
 
 
-def scale_run(name: str, gate_status: str) -> dict:
+def scale_run(name: str, gate_status: str, suite_name: str | None = "standard-zh") -> dict:
+    suite = (
+        {"suite_mode": "builtin", "suite_name": suite_name, "suite_path": f"builtin:{suite_name}"}
+        if suite_name
+        else {"suite_mode": "file", "suite_name": None, "suite_path": str(ROOT / "data" / "eval_prompts.json")}
+    )
     return {
         "name": name,
         "status": "completed",
@@ -193,6 +220,7 @@ def scale_run(name: str, gate_status: str) -> dict:
             "warning_count": 0 if gate_status == "pass" else 1,
             "variant_count": 1,
             "baseline": name,
+            **suite,
         },
         "batch_summary": {
             "status": "completed",

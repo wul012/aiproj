@@ -156,6 +156,7 @@ def _merge_comparison_rows(promotions: list[dict[str, Any]], comparison_report: 
                     "allowed": run.get("allowed"),
                     "gate_status": run.get("gate_status"),
                     "batch_status": run.get("batch_status"),
+                    "suite_path": run.get("suite_path"),
                     "readiness_score": run.get("readiness_score"),
                 }
             )
@@ -181,6 +182,10 @@ def _summary(
         "compared_run_count": _dict(comparison_report.get("summary")).get("run_count"),
         "baseline_name": compared.get("baseline_name") or comparison_inputs.get("baseline_name"),
         "best_by_readiness": _dict(comparison_report.get("best_by_readiness")).get("name"),
+        "suite_consistency": compared.get("suite_consistency"),
+        "suite_path_count": compared.get("suite_path_count"),
+        "suite_paths": compared.get("suite_paths"),
+        "suite_mismatch_count": compared.get("suite_mismatch_count"),
         "allowed_count": compared.get("allowed_count"),
         "blocked_count": compared.get("blocked_count"),
         "gate_warn_count": compared.get("gate_warn_count"),
@@ -212,10 +217,13 @@ def _index_status(index_summary: dict[str, Any]) -> str:
 
 def _recommendations(summary: dict[str, Any]) -> list[str]:
     if summary.get("comparison_status") == "compared":
-        return [
+        recommendations = [
             "Use the compared promoted runs as the baseline for the next training-scale decision.",
             "Keep review and blocked promotions in the index, but do not feed them into comparison runs.",
         ]
+        if summary.get("suite_consistency") == "mixed":
+            recommendations.append("Compared promoted runs use different benchmark suites; review suite paths before treating readiness deltas as clean model-quality deltas.")
+        return recommendations
     return [
         "Add another promoted run or fix the blocked baseline before comparing promoted results.",
         "Use the promotion index to keep review and blocked evidence visible without mixing it into model comparison.",

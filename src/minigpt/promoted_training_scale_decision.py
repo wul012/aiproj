@@ -91,9 +91,11 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
         "selected_gate_status",
         "selected_batch_status",
         "selected_readiness_score",
+        "selected_suite_path",
         "candidate_count",
         "rejected_count",
         "comparison_status",
+        "suite_consistency",
     ]
     write_csv_row(
         {
@@ -102,9 +104,11 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
             "selected_gate_status": selected.get("gate_status"),
             "selected_batch_status": selected.get("batch_status"),
             "selected_readiness_score": selected.get("readiness_score"),
+            "selected_suite_path": summary.get("selected_suite_path"),
             "candidate_count": summary.get("candidate_count"),
             "rejected_count": summary.get("rejected_count"),
             "comparison_status": summary.get("comparison_status"),
+            "suite_consistency": summary.get("suite_consistency"),
         },
         out_path,
         fieldnames,
@@ -123,9 +127,11 @@ def render_promoted_training_scale_decision_markdown(report: dict[str, Any]) -> 
         f"- Gate: `{selected.get('gate_status')}`",
         f"- Batch: `{selected.get('batch_status')}`",
         f"- Readiness: `{selected.get('readiness_score')}`",
+        f"- Selected suite: `{summary.get('selected_suite_path')}`",
         f"- Candidates: `{summary.get('candidate_count')}`",
         f"- Rejected: `{summary.get('rejected_count')}`",
         f"- Comparison status: `{summary.get('comparison_status')}`",
+        f"- Suite consistency: `{summary.get('suite_consistency')}`",
         "",
         "## Rejected Runs",
         "",
@@ -166,8 +172,10 @@ def render_promoted_training_scale_decision_html(report: dict[str, Any]) -> str:
         ("Gate", selected.get("gate_status")),
         ("Batch", selected.get("batch_status")),
         ("Score", selected.get("readiness_score")),
+        ("Suite path", summary.get("selected_suite_path")),
         ("Candidates", summary.get("candidate_count")),
         ("Rejected", summary.get("rejected_count")),
+        ("Suite", summary.get("suite_consistency")),
     ]
     return "\n".join(
         [
@@ -242,6 +250,7 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 "gate_status": row.get("gate_status"),
                 "batch_status": row.get("batch_status"),
                 "readiness_score": row.get("readiness_score"),
+                "suite_path": row.get("suite_path"),
                 "training_scale_run_path": str(resolved_path),
                 "source_path": row.get("source_path"),
             }
@@ -320,7 +329,11 @@ def _summary(
         "selected_gate_status": None if selected is None else selected.get("gate_status"),
         "selected_batch_status": None if selected is None else selected.get("batch_status"),
         "selected_readiness_score": None if selected is None else selected.get("readiness_score"),
+        "selected_suite_path": None if selected is None else selected.get("suite_path"),
         "selected_promotion_status": None if selected is None else selected.get("promotion_status"),
+        "suite_consistency": comparison_summary.get("suite_consistency"),
+        "suite_paths": comparison_summary.get("suite_paths"),
+        "suite_mismatch_count": comparison_summary.get("suite_mismatch_count"),
     }
 
 
@@ -330,10 +343,13 @@ def _recommendations(
     rejected: list[dict[str, Any]],
 ) -> list[str]:
     if decision_status == "accepted":
-        return [
+        recommendations = [
             "Use the selected promoted baseline for the next training-scale planning cycle.",
             "Keep the rejected promoted runs around as comparison evidence so the baseline choice stays explainable.",
         ]
+        if selected and selected.get("suite_path"):
+            recommendations.append(f"Carry `{selected.get('suite_path')}` into the next promoted seed so later comparisons stay suite-consistent.")
+        return recommendations
     if decision_status == "review":
         return [
             "Review the remaining promoted runs before turning this baseline into the next run seed.",

@@ -30,6 +30,8 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
             self.assertEqual(report["decision_status"], "accepted")
             self.assertEqual(report["summary"]["candidate_count"], 2)
             self.assertEqual(report["summary"]["selected_name"], "beta")
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
+            self.assertEqual(report["summary"]["selected_suite_path"], "builtin:standard-zh")
             self.assertFalse(report["rejected_runs"])
             self.assertEqual(report["selected_baseline"]["name"], "beta")
 
@@ -183,6 +185,9 @@ def run_payload(name: str, gate_status: str, readiness: int) -> dict:
             "warning_count": 0 if gate_status == "pass" else 1,
             "variant_count": 1,
             "baseline": name,
+            "suite_mode": "builtin",
+            "suite_name": "standard-zh",
+            "suite_path": "builtin:standard-zh",
         },
         "batch_summary": {
             "status": "completed",

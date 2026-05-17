@@ -37,9 +37,34 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["blocked_count"], 1)
             self.assertEqual(report["summary"]["batch_started_count"], 1)
             self.assertEqual(report["summary"]["gate_fail_count"], 1)
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
             blocked_delta = next(row for row in report["baseline_deltas"] if row["name"] == "blocked")
             self.assertLess(blocked_delta["readiness_delta"], 0)
             self.assertEqual(blocked_delta["batch_relation"], "regressed")
+
+    def test_mixed_suite_runs_are_reported_as_not_clean_quality_comparison(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "corpus.txt"
+            source.write_text(("MiniGPT mixed suite comparison data.\n" * 80), encoding="utf-8")
+            default_run = self._make_run(root, source, "default-suite", suite_name=None)
+            standard_run = self._make_run(root, source, "standard-suite", suite_name="standard-zh")
+
+            report = build_training_scale_run_comparison(
+                [default_run, standard_run],
+                names=["default", "standard"],
+                baseline="default",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            standard_delta = next(row for row in report["baseline_deltas"] if row["name"] == "standard")
+            self.assertEqual(report["summary"]["suite_consistency"], "mixed")
+            self.assertEqual(report["summary"]["suite_mismatch_count"], 1)
+            self.assertEqual(report["summary"]["suite_path_count"], 2)
+            self.assertIn("builtin:standard-zh", report["summary"]["suite_paths"])
+            self.assertEqual(standard_delta["suite_relation"], "changed")
+            self.assertIn("suite", standard_delta["explanation"])
+            self.assertTrue(any("different benchmark suites" in item for item in report["recommendations"]))
 
     def test_write_outputs_and_load_directory_input(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -110,28 +135,35 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
     def _make_allowed_and_blocked_runs(self, root: Path) -> tuple[Path, Path]:
         source = root / "corpus.txt"
         source.write_text(("MiniGPT scale comparison data.\n" * 40), encoding="utf-8")
+        allowed = self._make_run(root, source, "allowed", gate_profile="review")
+        blocked = self._make_run(root, source, "blocked", gate_profile="standard")
+        return allowed, blocked
+
+    def _make_run(
+        self,
+        root: Path,
+        source: Path,
+        name: str,
+        *,
+        gate_profile: str = "review",
+        suite_name: str | None = None,
+    ) -> Path:
         plan = build_training_scale_plan(
             [source],
             project_root=root,
-            out_root=root / "scale",
+            out_root=root / f"scale-{name}",
+            suite_name=suite_name,
             generated_at="2026-05-14T00:00:00Z",
         )
-        plan_outputs = write_training_scale_plan_outputs(plan, root / "scale")
+        plan_outputs = write_training_scale_plan_outputs(plan, root / f"scale-{name}")
         run_training_scale_plan(
             plan_outputs["json"],
             project_root=root,
-            out_root=root / "allowed",
-            gate_profile="review",
+            out_root=root / name,
+            gate_profile=gate_profile,
             generated_at="2026-05-14T00:00:00Z",
         )
-        run_training_scale_plan(
-            plan_outputs["json"],
-            project_root=root,
-            out_root=root / "blocked",
-            gate_profile="standard",
-            generated_at="2026-05-14T00:00:00Z",
-        )
-        return root / "allowed" / "training_scale_run.json", root / "blocked" / "training_scale_run.json"
+        return root / name / "training_scale_run.json"
 
 
 if __name__ == "__main__":

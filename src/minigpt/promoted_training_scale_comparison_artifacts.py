@@ -41,6 +41,7 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
         "allowed",
         "gate_status",
         "batch_status",
+        "suite_path",
         "readiness_score",
         "baseline_name",
         "is_baseline",
@@ -64,6 +65,7 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
                     "allowed": row.get("allowed"),
                     "gate_status": row.get("gate_status"),
                     "batch_status": row.get("batch_status"),
+                    "suite_path": row.get("suite_path"),
                     "readiness_score": row.get("readiness_score"),
                     "baseline_name": delta.get("baseline_name"),
                     "is_baseline": delta.get("is_baseline"),
@@ -87,6 +89,7 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
         f"- Compare-ready inputs: `{summary.get('comparison_ready_count')}`",
         f"- Compared runs: `{summary.get('compared_run_count')}`",
         f"- Baseline: `{summary.get('baseline_name')}`",
+        f"- Suite consistency: `{summary.get('suite_consistency')}`",
         "",
         "## Promoted Inputs",
         "",
@@ -114,10 +117,11 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
                 f"- Compared runs: `{comparison.get('run_count')}`",
                 f"- Allowed: `{comparison.get('summary', {}).get('allowed_count')}`",
                 f"- Blocked: `{comparison.get('summary', {}).get('blocked_count')}`",
+                f"- Suite consistency: `{comparison.get('summary', {}).get('suite_consistency')}`",
                 f"- Best by readiness: `{_dict(comparison.get('best_by_readiness')).get('name')}`",
             ]
         )
-        lines.extend(["", "| Run | Status | Allowed | Gate | Batch | Score | Relation |", "| --- | --- | --- | --- | --- | ---: | --- |"])
+        lines.extend(["", "| Run | Status | Allowed | Gate | Batch | Suite | Score | Relation |", "| --- | --- | --- | --- | --- | --- | ---: | --- |"])
         deltas = {row.get("name"): row for row in _list_of_dicts(comparison.get("baseline_deltas"))}
         for row in _list_of_dicts(comparison.get("runs")):
             delta = deltas.get(row.get("name"), {})
@@ -130,6 +134,7 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
                         _md(row.get("allowed")),
                         _md(row.get("gate_status")),
                         _md(row.get("batch_status")),
+                        _md(row.get("suite_path")),
                         _md(row.get("readiness_score")),
                         _md(delta.get("explanation")),
                     ]
@@ -162,6 +167,7 @@ def render_promoted_training_scale_comparison_html(report: dict[str, Any]) -> st
         ("Compare-ready", summary.get("comparison_ready_count")),
         ("Compared", summary.get("compared_run_count")),
         ("Baseline", summary.get("baseline_name")),
+        ("Suite", summary.get("suite_consistency")),
         ("Best", _dict(comparison.get("best_by_readiness")).get("name")),
     ]
     return "\n".join(
@@ -244,13 +250,14 @@ def _comparison_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('allowed'))}</td>"
             f"<td>{_e(row.get('gate_status'))}</td>"
             f"<td>{_e(row.get('batch_status'))}</td>"
+            f"<td>{_e(row.get('suite_path'))}</td>"
             f"<td>{_e(row.get('readiness_score'))}</td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )
     return (
         '<section><h2>Comparison</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Batch</th><th>Score</th><th>Relation</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Batch</th><th>Suite</th><th>Score</th><th>Relation</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

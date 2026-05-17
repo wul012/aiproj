@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+216-v202-training-scale-suite-consistency-evidence.md
+ -> v202 code explanation: carry benchmark suite consistency into training scale run comparison/decision and promoted comparison/decision, so mixed-suite deltas are not mistaken for clean model-quality gains.
 215-v201-promoted-seed-standard-suite-carryover.md
  -> v201 code explanation: carry the selected `builtin:standard-zh` benchmark suite from promoted training-scale baselines into next-cycle seed commands and seed-handoff plan evidence, while treating `--suite-name default` as the default file suite.
 214-v200-training-scale-standard-suite-handoff.md

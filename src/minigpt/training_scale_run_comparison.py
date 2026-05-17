@@ -82,6 +82,9 @@ def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | 
         "scale_tier",
         "char_count",
         "variant_count",
+        "suite_mode",
+        "suite_name",
+        "suite_path",
         "batch_status",
         "comparison_status",
         "execute",
@@ -91,6 +94,7 @@ def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | 
         "is_baseline",
         "allowed_delta",
         "readiness_delta",
+        "suite_relation",
         "gate_relation",
         "batch_relation",
         "explanation",
@@ -118,11 +122,13 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
         f"- Batch started: `{summary.get('batch_started_count')}`",
         f"- Gate warnings: `{summary.get('gate_warn_count')}`",
         f"- Gate failures: `{summary.get('gate_fail_count')}`",
+        f"- Suite consistency: `{summary.get('suite_consistency')}`",
+        f"- Baseline suite: `{summary.get('baseline_suite_path')}`",
         "",
         "## Runs",
         "",
-        "| Run | Status | Allowed | Gate | Profile | Scale | Variants | Batch | Score | Relation |",
-        "| --- | --- | --- | --- | --- | --- | ---: | --- | ---: | --- |",
+        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Score | Relation |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | --- |",
     ]
     deltas = {row.get("name"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     for run in _list_of_dicts(report.get("runs")):
@@ -137,6 +143,7 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
                     _md(run.get("gate_status")),
                     _md(run.get("gate_profile")),
                     _md(run.get("scale_tier")),
+                    _md(run.get("suite_path")),
                     _md(run.get("variant_count")),
                     _md(run.get("batch_status")),
                     _md(run.get("readiness_score")),
@@ -168,6 +175,7 @@ def render_training_scale_run_comparison_html(report: dict[str, Any]) -> str:
         ("Batch started", summary.get("batch_started_count")),
         ("Gate warn", summary.get("gate_warn_count")),
         ("Gate fail", summary.get("gate_fail_count")),
+        ("Suite", summary.get("suite_consistency")),
         ("Best", best.get("name")),
     ]
     return "\n".join(
@@ -263,6 +271,9 @@ def _run_summary(report: dict[str, Any], name: str, index: int) -> dict[str, Any
         "warning_count": plan.get("warning_count"),
         "variant_count": plan.get("variant_count"),
         "baseline": plan.get("baseline"),
+        "suite_mode": plan.get("suite_mode") or batch.get("suite_mode"),
+        "suite_name": plan.get("suite_name") or batch.get("suite_name"),
+        "suite_path": plan.get("suite_path") or batch.get("suite_path"),
         "batch_status": batch.get("status"),
         "comparison_status": batch.get("comparison_status"),
         "completed_variant_count": batch.get("completed_variant_count"),
@@ -311,6 +322,7 @@ def _run_delta(run: dict[str, Any], baseline: dict[str, Any]) -> dict[str, Any]:
         "is_baseline": run.get("name") == baseline.get("name"),
         "allowed_delta": allowed_delta,
         "readiness_delta": readiness_delta,
+        "suite_relation": _suite_relation(run, baseline),
         "gate_relation": _relation(gate_delta),
         "batch_relation": _batch_relation(run, baseline),
         "explanation": _delta_explanation(run, baseline, readiness_delta, gate_delta, allowed_delta),
@@ -318,8 +330,10 @@ def _run_delta(run: dict[str, Any], baseline: dict[str, Any]) -> dict[str, Any]:
 
 
 def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], deltas: list[dict[str, Any]]) -> dict[str, Any]:
+    suite_paths = sorted({str(row.get("suite_path")) for row in runs if row.get("suite_path")})
     return {
         "baseline_name": baseline.get("name"),
+        "baseline_suite_path": baseline.get("suite_path"),
         "run_count": len(runs),
         "allowed_count": sum(1 for row in runs if row.get("allowed")),
         "blocked_count": sum(1 for row in runs if row.get("status") == "blocked" or not row.get("allowed")),
@@ -328,6 +342,10 @@ def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], de
         "gate_pass_count": sum(1 for row in runs if row.get("gate_status") == "pass"),
         "gate_warn_count": sum(1 for row in runs if row.get("gate_status") == "warn"),
         "gate_fail_count": sum(1 for row in runs if row.get("gate_status") == "fail"),
+        "suite_consistency": _suite_consistency(runs, suite_paths),
+        "suite_path_count": len(suite_paths),
+        "suite_paths": suite_paths,
+        "suite_mismatch_count": sum(1 for row in deltas if row.get("suite_relation") == "changed"),
         "readiness_improvement_count": sum(1 for row in deltas if _int(row.get("readiness_delta")) > 0),
         "readiness_regression_count": sum(1 for row in deltas if _int(row.get("readiness_delta")) < 0),
     }
@@ -347,6 +365,10 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
         recommendations.append("Gate failures should be fixed or explicitly justified before using --allow-fail.")
     if _int(summary.get("gate_warn_count")):
         recommendations.append("Gate warnings can support smoke evidence, but should not be treated as model capability proof.")
+    if summary.get("suite_consistency") == "mixed":
+        recommendations.append("Compared runs use different benchmark suites; treat readiness deltas as governance evidence, not clean model-quality deltas.")
+    elif summary.get("suite_consistency") == "missing":
+        recommendations.append("Some compared runs do not report a benchmark suite; review their plan summaries before selecting a promoted baseline.")
     if _int(summary.get("batch_started_count")) and not _int(summary.get("blocked_count")):
         recommendations.append("All compared runs reached the batch layer; review batch comparisons before moving to --execute.")
     if any(_int(row.get("readiness_delta")) < 0 for row in deltas):
@@ -374,6 +396,22 @@ def _batch_relation(run: dict[str, Any], baseline: dict[str, Any]) -> str:
     return "changed"
 
 
+def _suite_relation(run: dict[str, Any], baseline: dict[str, Any]) -> str:
+    if run.get("suite_path") == baseline.get("suite_path"):
+        return "unchanged"
+    if run.get("suite_path") and baseline.get("suite_path"):
+        return "changed"
+    return "unknown"
+
+
+def _suite_consistency(runs: list[dict[str, Any]], suite_paths: list[str]) -> str:
+    if any(not row.get("suite_path") for row in runs):
+        return "missing"
+    if len(suite_paths) > 1:
+        return "mixed"
+    return "consistent"
+
+
 def _delta_explanation(run: dict[str, Any], baseline: dict[str, Any], readiness_delta: int, gate_delta: int, allowed_delta: int) -> str:
     if run.get("name") == baseline.get("name"):
         return "baseline"
@@ -386,6 +424,8 @@ def _delta_explanation(run: dict[str, Any], baseline: dict[str, Any], readiness_
         parts.append("allowed changed")
     if run.get("batch_status") != baseline.get("batch_status"):
         parts.append(f"batch {baseline.get('batch_status')} -> {run.get('batch_status')}")
+    if run.get("suite_path") != baseline.get("suite_path"):
+        parts.append(f"suite {baseline.get('suite_path') or 'missing'} -> {run.get('suite_path') or 'missing'}")
     return "; ".join(parts) or "unchanged"
 
 
@@ -402,6 +442,7 @@ def _runs_table(report: dict[str, Any]) -> str:
             f"<td>{_e(run.get('gate_status'))}</td>"
             f"<td>{_e(run.get('gate_profile'))}</td>"
             f"<td>{_e(run.get('scale_tier'))}</td>"
+            f"<td>{_e(run.get('suite_path'))}</td>"
             f"<td>{_e(run.get('variant_count'))}</td>"
             f"<td>{_e(run.get('batch_status'))}</td>"
             f"<td>{_e(run.get('readiness_score'))}</td>"
@@ -410,7 +451,7 @@ def _runs_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Runs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Variants</th><th>Batch</th><th>Score</th><th>Relation</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Score</th><th>Relation</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

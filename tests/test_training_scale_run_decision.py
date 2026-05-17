@@ -43,6 +43,8 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertEqual(report["selected_run"]["name"], "allowed")
             self.assertEqual(report["summary"]["candidate_count"], 1)
             self.assertEqual(report["summary"]["rejected_count"], 1)
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
+            self.assertTrue(str(report["summary"]["selected_suite_path"]).replace("\\", "/").endswith("data/eval_prompts.json"))
             self.assertIn("--execute", report["execute_command"])
             self.assertIn("--gate-profile", report["execute_command"])
             self.assertIn("review", report["execute_command"])
@@ -77,6 +79,23 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertEqual(report["decision_status"], "blocked")
             reasons = [reason for row in report["rejected_runs"] for reason in row["reasons"]]
             self.assertIn("readiness_score below 90", reasons)
+
+    def test_mixed_suite_summary_is_carried_into_decision_recommendations(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+            payload = json.loads(comparison.read_text(encoding="utf-8"))
+            payload["runs"][0]["suite_path"] = "builtin:standard-zh"
+            payload["summary"]["suite_consistency"] = "mixed"
+            payload["summary"]["suite_paths"] = ["builtin:standard-zh", "data/eval_prompts.json"]
+            payload["summary"]["suite_mismatch_count"] = 1
+            comparison.write_text(json.dumps(payload), encoding="utf-8")
+
+            report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
+
+            self.assertEqual(report["summary"]["suite_consistency"], "mixed")
+            self.assertEqual(report["summary"]["selected_suite_path"], "builtin:standard-zh")
+            self.assertTrue(any("different benchmark suites" in item for item in report["recommendations"]))
 
     def test_write_outputs_load_directory_and_render_html_safely(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

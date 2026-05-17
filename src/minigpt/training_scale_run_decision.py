@@ -52,6 +52,7 @@ def build_training_scale_run_decision(
     runs = _list_of_dicts(comparison.get("runs"))
     if not runs:
         raise ValueError("comparison must contain at least one run")
+    comparison_summary = _dict(comparison.get("summary"))
     base_dir = Path(str(comparison.get("_source_path"))).parent
     deltas = {row.get("name"): row for row in _list_of_dicts(comparison.get("baseline_deltas"))}
     candidates: list[dict[str, Any]] = []
@@ -103,8 +104,22 @@ def build_training_scale_run_decision(
         "execute_command": execute_command,
         "execute_command_text": _display_command(execute_command),
         "rejected_runs": rejected,
-        "summary": _decision_summary(runs, candidates, rejected, selected, status, action),
-        "recommendations": _recommendations(status, selected, rejected, execute_command),
+        "summary": _decision_summary(
+            runs,
+            candidates,
+            rejected,
+            selected,
+            status,
+            action,
+            comparison_summary=comparison_summary,
+        ),
+        "recommendations": _recommendations(
+            status,
+            selected,
+            rejected,
+            execute_command,
+            comparison_summary=comparison_summary,
+        ),
     }
     return report
 
@@ -265,7 +280,13 @@ def _decision_summary(
     selected: dict[str, Any] | None,
     status: str,
     action: str,
+    *,
+    comparison_summary: dict[str, Any],
 ) -> dict[str, Any]:
+    suite_paths = _string_list(comparison_summary.get("suite_paths"))
+    selected_suite_path = None if selected is None else selected.get("suite_path")
+    if not selected_suite_path and len(suite_paths) == 1:
+        selected_suite_path = suite_paths[0]
     return {
         "decision_status": status,
         "recommended_action": action,
@@ -276,6 +297,10 @@ def _decision_summary(
         "selected_gate_status": None if selected is None else selected.get("gate_status"),
         "selected_batch_status": None if selected is None else selected.get("batch_status"),
         "selected_readiness_score": None if selected is None else selected.get("readiness_score"),
+        "selected_suite_path": selected_suite_path,
+        "suite_consistency": comparison_summary.get("suite_consistency"),
+        "suite_paths": suite_paths,
+        "suite_mismatch_count": _int(comparison_summary.get("suite_mismatch_count")),
     }
 
 
@@ -284,6 +309,8 @@ def _recommendations(
     selected: dict[str, Any] | None,
     rejected: list[dict[str, Any]],
     execute_command: list[str],
+    *,
+    comparison_summary: dict[str, Any],
 ) -> list[str]:
     recommendations: list[str] = []
     if status == "blocked":
@@ -298,6 +325,17 @@ def _recommendations(
         recommendations.append("Keep rejected runs as comparison evidence; they explain why the selected run is safer.")
     if execute_command:
         recommendations.append("Use the execute command only after confirming dataset quality, hardware budget, and expected runtime.")
+    suite_consistency = comparison_summary.get("suite_consistency")
+    if suite_consistency == "mixed":
+        recommendations.append(
+            "Compared runs use different benchmark suites; treat the selected run as execution triage, not a clean model-quality delta."
+        )
+    selected_suite_path = None if selected is None else selected.get("suite_path")
+    suite_paths = _string_list(comparison_summary.get("suite_paths"))
+    if not selected_suite_path and len(suite_paths) == 1:
+        selected_suite_path = suite_paths[0]
+    if selected_suite_path and selected:
+        recommendations.append(f"Carry `{selected_suite_path}` into follow-up execution so later comparisons stay suite-consistent.")
     return recommendations
 
 
