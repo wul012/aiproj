@@ -55,6 +55,7 @@ def main() -> None:
     print(f"seed_handoff_suite_alignment_mismatch_count={summary.get('seed_handoff_suite_alignment_mismatch_count')}")
     print(f"seed_handoff_clean_evidence_status={summary.get('seed_handoff_clean_evidence_status')}")
     print(f"seed_handoff_clean_evidence_ready={summary.get('seed_handoff_clean_evidence_ready')}")
+    print(f"seed_handoff_clean_evidence_status_domain={summary.get('seed_handoff_clean_evidence_status_domain')}")
     print(f"next_batch_command_available={summary.get('next_batch_command_available')}")
     print("summary=" + json.dumps(summary, ensure_ascii=False))
     print(f"command={report.get('command_text')}")

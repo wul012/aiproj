@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt import promoted_training_scale_seed_handoff as handoff_module  # noqa: E402
 from minigpt import promoted_training_scale_seed_handoff_artifacts as artifact_module  # noqa: E402
 from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
+    SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
     build_promoted_training_scale_seed_handoff,
     render_promoted_training_scale_seed_handoff_html,
     render_promoted_training_scale_seed_handoff_markdown,
@@ -21,6 +22,12 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
 
 
 class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
+    def test_clean_evidence_status_domain_is_public_contract(self) -> None:
+        self.assertEqual(
+            SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
+            ("ready", "pending-plan", "review", "incomplete"),
+        )
+
     def test_artifact_functions_are_reexported_from_handoff_module(self) -> None:
         self.assertIs(
             handoff_module.render_promoted_training_scale_seed_handoff_html,
@@ -137,20 +144,25 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(summary["seed_handoff_suite_alignment_mismatch_count"], 0)
             self.assertFalse(summary["seed_handoff_clean_evidence_ready"])
             self.assertEqual(summary["seed_handoff_clean_evidence_status"], "pending-plan")
+            self.assertEqual(summary["seed_handoff_clean_evidence_status_domain"], list(SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES))
             self.assertIn("selected_handoff_suite_consistency", csv_text)
             self.assertIn("seed_handoff_suite_alignment_status", csv_text)
             self.assertIn("seed_handoff_clean_evidence_status", csv_text)
+            self.assertIn("seed_handoff_clean_evidence_status_domain", csv_text)
             self.assertIn("Selected handoff suite", markdown)
             self.assertIn("Handoff suite mismatches", markdown)
             self.assertIn("Seed handoff suite alignment", markdown)
             self.assertIn("Seed handoff clean evidence", markdown)
+            self.assertIn("Seed handoff clean evidence status domain", markdown)
             self.assertIn("Selected handoff suite", html)
             self.assertIn("Suite alignment", html)
             self.assertIn("Clean evidence", html)
+            self.assertIn("Clean evidence domain", html)
             self.assertIn("selected_handoff_suite_consistency=consistent", completed.stdout)
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
             self.assertIn("seed_handoff_suite_alignment_status=pending-plan", completed.stdout)
             self.assertIn("seed_handoff_clean_evidence_status=pending-plan", completed.stdout)
+            self.assertIn("seed_handoff_clean_evidence_status_domain=", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
 
     def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
@@ -171,6 +183,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(summary["seed_handoff_suite_alignment_missing_count"], 0)
             self.assertTrue(summary["seed_handoff_clean_evidence_ready"])
             self.assertEqual(summary["seed_handoff_clean_evidence_status"], "ready")
+            self.assertEqual(summary["seed_handoff_clean_evidence_status_domain"], list(SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES))
             self.assertIn("selected_handoff, seed, and plan suite paths align", summary["seed_handoff_suite_alignment_detail"])
             self.assertIn("Suite alignment is consistent", report["recommendations"][0])
 

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import subprocess
 import time
-from typing import Any
+from typing import Any, Literal, TypedDict
 
 from minigpt.promoted_training_scale_seed_handoff_artifacts import (
     render_promoted_training_scale_seed_handoff_html,
@@ -23,6 +23,24 @@ from minigpt.report_utils import (
     list_of_strs as _list_of_strs,
     make_artifact_rows,
     utc_now,
+)
+
+
+SeedHandoffCleanEvidenceStatus = Literal["ready", "pending-plan", "review", "incomplete"]
+
+
+class SeedHandoffCleanEvidenceReadiness(TypedDict):
+    ready: bool
+    status: SeedHandoffCleanEvidenceStatus
+    detail: str
+    status_domain: list[SeedHandoffCleanEvidenceStatus]
+
+
+SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...] = (
+    "ready",
+    "pending-plan",
+    "review",
+    "incomplete",
 )
 
 
@@ -193,6 +211,7 @@ def _summary(
         "seed_handoff_clean_evidence_ready": clean_evidence_readiness["ready"],
         "seed_handoff_clean_evidence_status": clean_evidence_readiness["status"],
         "seed_handoff_clean_evidence_detail": clean_evidence_readiness["detail"],
+        "seed_handoff_clean_evidence_status_domain": clean_evidence_readiness["status_domain"],
         "plan_scale_tier": plan_dataset.get("scale_tier"),
         "plan_variant_count": len(_list_of_dicts(plan_report.get("variants"))),
         "plan_source_count": plan_dataset.get("source_count"),
@@ -203,37 +222,51 @@ def _summary(
     }
 
 
-def _clean_evidence_readiness(handoff_status: Any, suite_alignment: dict[str, Any]) -> dict[str, Any]:
+def _clean_evidence_readiness(handoff_status: Any, suite_alignment: dict[str, Any]) -> SeedHandoffCleanEvidenceReadiness:
     alignment_status = str(suite_alignment.get("status") or "")
     detail = str(suite_alignment.get("detail") or "")
     if alignment_status == "consistent" and handoff_status == "completed":
-        return {
-            "ready": True,
-            "status": "ready",
-            "detail": "completed handoff has consistent suite alignment and can be used as clean comparison evidence",
-        }
+        return _clean_evidence_payload(
+            ready=True,
+            status="ready",
+            detail="completed handoff has consistent suite alignment and can be used as clean comparison evidence",
+        )
     if alignment_status == "pending-plan":
-        return {
-            "ready": False,
-            "status": "pending-plan",
-            "detail": "execute the seed handoff before treating clean comparison evidence as ready",
-        }
+        return _clean_evidence_payload(
+            ready=False,
+            status="pending-plan",
+            detail="execute the seed handoff before treating clean comparison evidence as ready",
+        )
     if alignment_status == "missing":
-        return {
-            "ready": False,
-            "status": "incomplete",
-            "detail": f"missing suite alignment evidence: {detail}",
-        }
+        return _clean_evidence_payload(
+            ready=False,
+            status="incomplete",
+            detail=f"missing suite alignment evidence: {detail}",
+        )
     if alignment_status == "mismatch":
-        return {
-            "ready": False,
-            "status": "review",
-            "detail": f"review suite alignment mismatch before using this as clean comparison evidence: {detail}",
-        }
+        return _clean_evidence_payload(
+            ready=False,
+            status="review",
+            detail=f"review suite alignment mismatch before using this as clean comparison evidence: {detail}",
+        )
+    return _clean_evidence_payload(
+        ready=False,
+        status="review",
+        detail="review seed handoff suite alignment before treating this as clean comparison evidence",
+    )
+
+
+def _clean_evidence_payload(
+    *,
+    ready: bool,
+    status: SeedHandoffCleanEvidenceStatus,
+    detail: str,
+) -> SeedHandoffCleanEvidenceReadiness:
     return {
-        "ready": False,
-        "status": "review",
-        "detail": "review seed handoff suite alignment before treating this as clean comparison evidence",
+        "ready": ready,
+        "status": status,
+        "detail": detail,
+        "status_domain": list(SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES),
     }
 
 

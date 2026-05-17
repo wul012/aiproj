@@ -42,6 +42,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "seed_handoff_suite_alignment_missing_count",
         "seed_handoff_clean_evidence_ready",
         "seed_handoff_clean_evidence_status",
+        "seed_handoff_clean_evidence_status_domain",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -68,6 +69,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "seed_handoff_suite_alignment_missing_count": summary.get("seed_handoff_suite_alignment_missing_count"),
             "seed_handoff_clean_evidence_ready": summary.get("seed_handoff_clean_evidence_ready"),
             "seed_handoff_clean_evidence_status": summary.get("seed_handoff_clean_evidence_status"),
+            "seed_handoff_clean_evidence_status_domain": summary.get("seed_handoff_clean_evidence_status_domain"),
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -105,6 +107,7 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Seed handoff clean evidence: `{summary.get('seed_handoff_clean_evidence_status')}`",
         f"- Seed handoff clean evidence ready: `{summary.get('seed_handoff_clean_evidence_ready')}`",
         f"- Seed handoff clean evidence detail: `{summary.get('seed_handoff_clean_evidence_detail')}`",
+        f"- Seed handoff clean evidence status domain: `{summary.get('seed_handoff_clean_evidence_status_domain')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -147,6 +150,9 @@ def write_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any], 
 def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     execution = _dict(report.get("execution"))
+    clean_evidence_domain = ", ".join(
+        str(item) for item in _string_list(summary.get("seed_handoff_clean_evidence_status_domain"))
+    )
     stats = [
         ("Status", summary.get("handoff_status")),
         ("Seed", report.get("seed_status")),
@@ -162,6 +168,7 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Plan suite", summary.get("plan_suite_path")),
         ("Suite alignment", summary.get("seed_handoff_suite_alignment_status")),
         ("Clean evidence", summary.get("seed_handoff_clean_evidence_status")),
+        ("Clean evidence domain", clean_evidence_domain),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(

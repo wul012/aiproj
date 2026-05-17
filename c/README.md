@@ -445,6 +445,9 @@ c/213/解释/说明.md
 c/214/图片
 c/214/解释/说明.md
  -> v214 promoted training scale seed handoff clean evidence readiness 的运行截图和解释
+c/215/图片
+c/215/解释/说明.md
+ -> v215 promoted training scale seed handoff clean evidence status contract 的运行截图和解释
 ```
 
 写入规则：
