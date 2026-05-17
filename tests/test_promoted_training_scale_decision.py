@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -97,11 +98,60 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
             self.assertIn("benchmark suite consistency is mixed", reasons)
             self.assertTrue(any("Fix benchmark suite consistency" in item for item in strict_report["recommendations"]))
 
+    def test_carries_promoted_comparison_handoff_suite_guard_into_decision_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison_dir = make_compared_comparison_tree(root, include_handoff_suite_guard=True)
+
+            report = build_promoted_training_scale_decision(comparison_dir, min_readiness=60)
+            outputs = write_promoted_training_scale_decision_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "decide_promoted_training_scale_baseline.py"),
+                    str(comparison_dir),
+                    "--min-readiness",
+                    "60",
+                    "--out-dir",
+                    str(script_out),
+                    "--require-accepted",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            selected = report["selected_baseline"]
+            summary = report["summary"]
+            self.assertEqual(report["decision_status"], "accepted")
+            self.assertTrue(selected["handoff_require_suite_consistency"])
+            self.assertEqual(selected["handoff_suite_consistency"], "consistent")
+            self.assertEqual(selected["handoff_suite_mismatch_count"], 0)
+            self.assertEqual(selected["handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["selected_handoff_suite_consistency"], "consistent")
+            self.assertEqual(summary["selected_handoff_suite_mismatch_count"], 0)
+            self.assertEqual(summary["selected_handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["handoff_suite_consistent_count"], 2)
+            self.assertEqual(summary["handoff_suite_mismatch_total"], 0)
+            self.assertIn("selected_handoff_suite_consistency", csv_text)
+            self.assertIn("Selected handoff suite", markdown)
+            self.assertIn("Handoff suite mismatches", markdown)
+            self.assertIn("Selected handoff suite", html)
+            self.assertIn("selected_handoff_suite_consistency=consistent", completed.stdout)
+            self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_decision.json").exists())
+
 def make_compared_comparison_tree(
     root: Path,
     second_promoted: bool = True,
     title: str = "MiniGPT promoted training scale comparison",
     mixed_suite: bool = False,
+    include_handoff_suite_guard: bool = False,
 ) -> Path:
     index_dir = root / "promotion-index"
     alpha_run = root / "alpha" / "scale-run" / "training_scale_run.json"
@@ -109,31 +159,13 @@ def make_compared_comparison_tree(
     write_json(alpha_run, run_payload("alpha", "warn", 88, suite_name=None if mixed_suite else "standard-zh"))
     write_json(beta_run, run_payload("beta", "pass", 91))
     promotions = [
-        {
-            "name": "alpha",
-            "promotion_status": "promoted",
-            "promoted_for_comparison": True,
-            "training_scale_run_path": os_rel(alpha_run, index_dir),
-            "training_scale_run_exists": True,
-            "gate_status": "warn",
-            "batch_status": "completed",
-            "readiness_score": 88,
-        }
+        promotion_row("alpha", os_rel(alpha_run, index_dir), "warn", 88, include_handoff_suite_guard=include_handoff_suite_guard)
     ]
     compare_names = ["alpha"]
     compare_paths = [os_rel(alpha_run, index_dir)]
     if second_promoted:
         promotions.append(
-            {
-                "name": "beta",
-                "promotion_status": "promoted",
-                "promoted_for_comparison": True,
-                "training_scale_run_path": os_rel(beta_run, index_dir),
-                "training_scale_run_exists": True,
-                "gate_status": "pass",
-                "batch_status": "completed",
-                "readiness_score": 91,
-            }
+            promotion_row("beta", os_rel(beta_run, index_dir), "pass", 91, include_handoff_suite_guard=include_handoff_suite_guard)
         )
         compare_names.append("beta")
         compare_paths.append(os_rel(beta_run, index_dir))
@@ -164,6 +196,36 @@ def make_compared_comparison_tree(
     comparison_dir = root / "comparison"
     write_json(comparison_dir / "promoted_training_scale_comparison.json", index_report)
     return comparison_dir
+
+
+def promotion_row(
+    name: str,
+    run_path: str,
+    gate_status: str,
+    readiness_score: int,
+    *,
+    include_handoff_suite_guard: bool,
+) -> dict:
+    row = {
+        "name": name,
+        "promotion_status": "promoted",
+        "promoted_for_comparison": True,
+        "training_scale_run_path": run_path,
+        "training_scale_run_exists": True,
+        "gate_status": gate_status,
+        "batch_status": "completed",
+        "readiness_score": readiness_score,
+    }
+    if include_handoff_suite_guard:
+        row.update(
+            {
+                "handoff_require_suite_consistency": True,
+                "handoff_suite_consistency": "consistent",
+                "handoff_suite_mismatch_count": 0,
+                "handoff_selected_suite_path": "builtin:standard-zh",
+            }
+        )
+    return row
 
 
 def make_blocked_comparison_tree(root: Path) -> Path:
