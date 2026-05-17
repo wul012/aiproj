@@ -81,6 +81,25 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("run_training_portfolio_batch.py", report["next_batch_command_text"])
             self.assertTrue((root / "next-plan" / "training_scale_plan.json").exists())
 
+    def test_execute_preserves_seed_standard_suite_in_plan_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh")
+
+            report = build_promoted_training_scale_seed_handoff(
+                seed,
+                execute=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            plan_payload = json.loads((root / "next-plan" / "training_scale_plan.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["summary"]["handoff_status"], "completed")
+            self.assertEqual(report["summary"]["seed_suite_path"], "builtin:standard-zh")
+            self.assertEqual(report["summary"]["plan_suite_path"], "builtin:standard-zh")
+            self.assertEqual(plan_payload["suite"], {"mode": "builtin", "name": "standard-zh", "path": "builtin:standard-zh"})
+            self.assertIn("--suite-name", report["next_batch_command"])
+            self.assertIn("standard-zh", report["next_batch_command"])
+
     def test_execute_reports_failed_command(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -116,7 +135,13 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertNotIn("<Handoff>", html)
 
 
-def write_seed_tree(root: Path, *, seed_status: str = "ready", command: list[str] | None = None) -> Path:
+def write_seed_tree(
+    root: Path,
+    *,
+    seed_status: str = "ready",
+    command: list[str] | None = None,
+    suite_name: str | None = None,
+) -> Path:
     source = root / "corpus.txt"
     source.write_text("MiniGPT v82 next cycle corpus.\n" * 180, encoding="utf-8")
     plan_out = root / "next-plan"
@@ -135,9 +160,19 @@ def write_seed_tree(root: Path, *, seed_status: str = "ready", command: list[str
         "next-zh",
         "--dataset-version-prefix",
         "v82-test",
+        *(
+            ["--suite-name", suite_name]
+            if suite_name
+            else []
+        ),
         "--max-variants",
         "1",
     ]
+    suite = (
+        {"mode": "builtin", "name": suite_name, "path": f"builtin:{suite_name}", "source": "inherited"}
+        if suite_name
+        else {"mode": "file", "name": None, "path": str(ROOT / "data" / "eval_prompts.json"), "source": "default"}
+    )
     seed = {
         "schema_version": 1,
         "title": "seed",
@@ -151,11 +186,16 @@ def write_seed_tree(root: Path, *, seed_status: str = "ready", command: list[str
             "readiness_score": 107,
             "training_scale_run_path": str(root / "beta" / "training_scale_run.json"),
             "training_scale_run_exists": True,
+            "suite": suite,
+            "suite_path": suite["path"],
         },
         "next_plan": {
             "project_root": str(ROOT),
             "dataset_name": "next-zh",
             "dataset_version_prefix": "v82-test",
+            "suite": suite,
+            "suite_path": suite["path"],
+            "suite_source": suite["source"],
             "plan_out_dir": str(plan_out),
             "batch_out_root": str(batch_out),
             "sources": [

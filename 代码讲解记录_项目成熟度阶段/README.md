@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+215-v201-promoted-seed-standard-suite-carryover.md
+ -> v201 code explanation: carry the selected `builtin:standard-zh` benchmark suite from promoted training-scale baselines into next-cycle seed commands and seed-handoff plan evidence, while treating `--suite-name default` as the default file suite.
 214-v200-training-scale-standard-suite-handoff.md
  -> v200 code explanation: carry the v199 standard Chinese suite selection into training-scale plan, gated run, and consolidated workflow evidence through `suite_name`, `suite.path=builtin:standard-zh`, and generated `--suite-name standard-zh` batch handoff commands.
 213-v199-portfolio-standard-suite-selection.md

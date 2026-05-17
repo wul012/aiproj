@@ -409,6 +409,9 @@ c/199/解释/说明.md
 c/200/图片
 c/200/解释/说明.md
  -> v200 training scale standard suite handoff 的运行截图和解释
+c/201/图片
+c/201/解释/说明.md
+ -> v201 promoted seed standard suite carryover 的运行截图和解释
 ```
 
 写入规则：

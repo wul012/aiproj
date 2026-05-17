@@ -33,6 +33,9 @@ def write_promoted_training_scale_seed_csv(report: dict[str, Any], path: str | P
         "readiness_score",
         "source_count",
         "missing_source_count",
+        "baseline_suite_path",
+        "next_suite_path",
+        "next_suite_source",
         "command_available",
         "execution_ready",
         "command",
@@ -47,6 +50,9 @@ def write_promoted_training_scale_seed_csv(report: dict[str, Any], path: str | P
             "readiness_score": seed.get("readiness_score"),
             "source_count": summary.get("source_count"),
             "missing_source_count": summary.get("missing_source_count"),
+            "baseline_suite_path": summary.get("baseline_suite_path"),
+            "next_suite_path": summary.get("next_suite_path"),
+            "next_suite_source": summary.get("next_suite_source"),
             "command_available": plan.get("command_available"),
             "execution_ready": plan.get("execution_ready"),
             "command": plan.get("command_text"),
@@ -72,6 +78,9 @@ def render_promoted_training_scale_seed_markdown(report: dict[str, Any]) -> str:
         f"- Readiness: `{seed.get('readiness_score')}`",
         f"- Sources: `{summary.get('source_count')}`",
         f"- Missing sources: `{summary.get('missing_source_count')}`",
+        f"- Baseline suite: `{summary.get('baseline_suite_path')}`",
+        f"- Next suite: `{summary.get('next_suite_path')}`",
+        f"- Next suite source: `{summary.get('next_suite_source')}`",
         "",
         "## Next Plan Command",
         "",
@@ -114,6 +123,7 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Score", seed.get("readiness_score")),
         ("Sources", summary.get("source_count")),
         ("Missing", summary.get("missing_source_count")),
+        ("Next suite", summary.get("next_suite_path")),
     ]
     return "\n".join(
         [
@@ -177,6 +187,9 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             ("Source scale tier", summary.get("scale_tier")),
             ("Source characters", summary.get("char_count")),
             ("Source variants", summary.get("variant_count")),
+            ("Source suite mode", summary.get("suite_mode")),
+            ("Source suite name", summary.get("suite_name")),
+            ("Source suite path", summary.get("suite_path")),
         ]
     )
     body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)

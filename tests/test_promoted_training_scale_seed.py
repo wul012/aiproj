@@ -72,6 +72,49 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
             self.assertFalse(report["next_plan"]["execution_ready"])
             self.assertTrue(any("Review" in item or "review" in item for item in report["recommendations"]))
 
+    def test_inherits_standard_suite_from_selected_scale_run(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decision = write_decision_tree(root, decision_status="accepted", suite_name="standard-zh")
+            source = write_source(root)
+
+            report = build_promoted_training_scale_seed(
+                decision,
+                [source],
+                project_root=root,
+                plan_out_dir=root / "plan",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            command = " ".join(report["next_plan"]["command"])
+            self.assertEqual(report["baseline_seed"]["suite"]["path"], "builtin:standard-zh")
+            self.assertEqual(report["next_plan"]["suite"]["path"], "builtin:standard-zh")
+            self.assertEqual(report["next_plan"]["suite_source"], "inherited")
+            self.assertEqual(report["summary"]["baseline_suite_path"], "builtin:standard-zh")
+            self.assertEqual(report["summary"]["next_suite_path"], "builtin:standard-zh")
+            self.assertIn("--suite-name standard-zh", command)
+
+    def test_default_suite_override_does_not_emit_fake_builtin_default(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decision = write_decision_tree(root, decision_status="accepted", suite_name="standard-zh")
+            source = write_source(root)
+
+            report = build_promoted_training_scale_seed(
+                decision,
+                [source],
+                project_root=root,
+                suite_name="default",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            command = " ".join(report["next_plan"]["command"])
+            self.assertEqual(report["next_plan"]["suite"]["mode"], "file")
+            self.assertEqual(report["next_plan"]["suite"]["path"], str(root / "data" / "eval_prompts.json"))
+            self.assertEqual(report["next_plan"]["suite_source"], "default")
+            self.assertNotIn("builtin:default", json.dumps(report, ensure_ascii=False))
+            self.assertNotIn("--suite-name default", command)
+
     def test_blocks_when_decision_has_no_selected_baseline(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -123,7 +166,28 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
             self.assertNotIn("<Seed>", html)
 
 
-def write_decision_tree(root: Path, *, decision_status: str, selected: bool = True) -> Path:
+def write_decision_tree(
+    root: Path,
+    *,
+    decision_status: str,
+    selected: bool = True,
+    suite_name: str | None = None,
+) -> Path:
+    scale_summary = {
+        "dataset_name": "sample-zh",
+        "version_prefix": "v80",
+        "scale_tier": "tiny",
+        "char_count": 2048,
+        "variant_count": 1,
+    }
+    if suite_name:
+        scale_summary.update(
+            {
+                "suite_mode": "builtin",
+                "suite_name": suite_name,
+                "suite_path": f"builtin:{suite_name}",
+            }
+        )
     run_path = root / "beta" / "scale-run" / "training_scale_run.json"
     write_json(
         run_path,
@@ -133,13 +197,7 @@ def write_decision_tree(root: Path, *, decision_status: str, selected: bool = Tr
             "allowed": True,
             "gate_profile": "review",
             "gate": {"overall_status": "pass"},
-            "scale_plan_summary": {
-                "dataset_name": "sample-zh",
-                "version_prefix": "v80",
-                "scale_tier": "tiny",
-                "char_count": 2048,
-                "variant_count": 1,
-            },
+            "scale_plan_summary": scale_summary,
             "batch_summary": {"status": "completed", "variant_count": 1},
         },
     )

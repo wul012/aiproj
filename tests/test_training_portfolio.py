@@ -139,6 +139,25 @@ class TrainingPortfolioTests(unittest.TestCase):
                     suite_name="standard-zh",
                 )
 
+    def test_build_training_portfolio_plan_treats_default_suite_name_as_file_default(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "data.txt"
+            source.write_text("人工智能训练数据", encoding="utf-8")
+
+            plan = build_training_portfolio_plan(
+                root,
+                [source],
+                out_root=root / "portfolio",
+                suite_name="default",
+            )
+
+            eval_command = " ".join(plan["steps"][3]["command"])
+            self.assertEqual(plan["suite"]["mode"], "file")
+            self.assertEqual(plan["suite_path"], str(root / "data" / "eval_prompts.json"))
+            self.assertNotIn("builtin:default", json.dumps(plan, ensure_ascii=False))
+            self.assertIn("--suite " + str(root / "data" / "eval_prompts.json"), eval_command)
+
     def test_dry_run_report_marks_artifacts_as_planned(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

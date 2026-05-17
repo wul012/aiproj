@@ -44,6 +44,7 @@ Before sending the final response for any task, perform a cleanup pass for files
 ## Code Explanation Rule
 
 后续新增或更新 `代码讲解记录/*.md` 或 `代码讲解记录_*/*.md` 时，讲解风格要向 `D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md` 靠齐。
+当讲解内容更偏发布治理、验证清单、manifest、证据链和只读样本时，也要参考 `D:\javaproj\advanced-order-platform\代码讲解记录_生产雏形阶段\58-version-54-release-verification-manifest.md` 的写法：先交代本版目标和边界，再讲输入输出、静态证据、测试覆盖与链路角色。
 
 代码讲解目录按阶段拆分：
 

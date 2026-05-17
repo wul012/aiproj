@@ -62,7 +62,7 @@ def main() -> None:
         variants=variants,
         dataset_name=args.dataset_name,
         dataset_description=args.dataset_description,
-        suite_path=None if args.suite_name else args.suite,
+        suite_path=None if args.suite_name and args.suite_name != "default" else args.suite,
         suite_name=args.suite_name,
         request_log_path=args.request_log,
         python_executable=args.python,

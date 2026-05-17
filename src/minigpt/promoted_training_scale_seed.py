@@ -41,6 +41,8 @@ def build_promoted_training_scale_seed(
     dataset_name: str = "portfolio-zh",
     dataset_version_prefix: str = "v81",
     dataset_description: str = "MiniGPT corpus seeded from a promoted training scale baseline.",
+    suite_path: str | Path | None = None,
+    suite_name: str | None = None,
     sample_prompt: str = "MiniGPT",
     max_variants: int = 3,
     python_executable: str = "python",
@@ -57,6 +59,8 @@ def build_promoted_training_scale_seed(
     selected_run = _load_selected_run(selected_run_path)
     source_rows = _source_rows(sources or [])
     root = Path(project_root) if project_root is not None else Path.cwd()
+    inherited_suite = _suite_ref_from_selected_run(selected_run)
+    next_suite = _next_suite_ref(root, inherited_suite, suite_path=suite_path, suite_name=suite_name)
     blockers = _blockers(decision, selected, selected_run_path, source_rows)
     seed_status = _seed_status(str(decision.get("decision_status") or ""), blockers)
     command = [] if blockers else _plan_command(
@@ -67,6 +71,7 @@ def build_promoted_training_scale_seed(
         dataset_name=dataset_name,
         dataset_version_prefix=dataset_version_prefix,
         dataset_description=dataset_description,
+        suite=next_suite,
         sample_prompt=sample_prompt,
         max_variants=max_variants,
         python_executable=python_executable,
@@ -81,12 +86,17 @@ def build_promoted_training_scale_seed(
         "training_scale_run_exists": bool(selected_run_path and selected_run_path.exists()),
         "comparison_path": decision.get("comparison_path"),
         "selected_run_summary": _selected_run_summary(selected_run),
+        "suite": inherited_suite,
+        "suite_path": inherited_suite.get("path"),
     }
     plan = {
         "project_root": str(root),
         "dataset_name": dataset_name,
         "dataset_version_prefix": dataset_version_prefix,
         "dataset_description": dataset_description,
+        "suite": next_suite,
+        "suite_path": next_suite.get("path"),
+        "suite_source": next_suite.get("source"),
         "sample_prompt": sample_prompt,
         "max_variants": int(max_variants),
         "plan_out_dir": str(plan_out_dir),
@@ -205,6 +215,101 @@ def _seed_status(decision_status: str, blockers: list[str]) -> str:
     return "ready"
 
 
+def _suite_ref_from_selected_run(run: dict[str, Any]) -> dict[str, Any]:
+    scale = _dict(run.get("scale_plan_summary"))
+    batch = _dict(run.get("batch_summary"))
+    mode = _optional_str(scale.get("suite_mode") or batch.get("suite_mode"))
+    name = _selected_suite_name(scale.get("suite_name") or batch.get("suite_name"))
+    path = _optional_str(scale.get("suite_path") or batch.get("suite_path"))
+    if name == "default":
+        name = None
+    if path and path.startswith("builtin:"):
+        builtin_name = path.removeprefix("builtin:") or None
+        if builtin_name == "default":
+            path = None
+        elif builtin_name:
+            name = name or builtin_name
+            mode = "builtin"
+    if name:
+        return {
+            "mode": "builtin",
+            "name": name,
+            "path": path or f"builtin:{name}",
+            "source": "selected_run",
+        }
+    if path:
+        return {
+            "mode": mode or "file",
+            "name": None,
+            "path": path,
+            "source": "selected_run",
+        }
+    return {"mode": "missing", "name": None, "path": None, "source": "selected_run"}
+
+
+def _next_suite_ref(
+    root: Path,
+    inherited: dict[str, Any],
+    *,
+    suite_path: str | Path | None,
+    suite_name: str | None,
+) -> dict[str, Any]:
+    if suite_name is not None and suite_path is not None:
+        raise ValueError("suite_name and suite_path cannot both be provided")
+    if suite_name == "default":
+        return {
+            "mode": "file",
+            "name": None,
+            "path": str(root / "data" / "eval_prompts.json"),
+            "source": "default",
+        }
+    if suite_name:
+        return {
+            "mode": "builtin",
+            "name": suite_name,
+            "path": f"builtin:{suite_name}",
+            "source": "override",
+        }
+    if suite_path is not None:
+        return {"mode": "file", "name": None, "path": str(Path(suite_path)), "source": "override"}
+    if inherited.get("path"):
+        return {
+            "mode": inherited.get("mode") or "file",
+            "name": inherited.get("name"),
+            "path": inherited.get("path"),
+            "source": "inherited",
+        }
+    return {
+        "mode": "file",
+        "name": None,
+        "path": str(root / "data" / "eval_prompts.json"),
+        "source": "default",
+    }
+
+
+def _suite_args(root: Path, suite: dict[str, Any]) -> list[str]:
+    if suite.get("mode") == "builtin":
+        return ["--suite-name", str(suite.get("name"))]
+    if suite.get("mode") == "file" and suite.get("path"):
+        path = Path(str(suite.get("path")))
+        if path == root / "data" / "eval_prompts.json":
+            return []
+        return ["--suite", str(path)]
+    return []
+
+
+def _selected_suite_name(value: Any) -> str | None:
+    text = str(value).strip() if value is not None else ""
+    if not text:
+        return None
+    return text
+
+
+def _optional_str(value: Any) -> str | None:
+    text = str(value).strip() if value is not None else ""
+    return text or None
+
+
 def _plan_command(
     source_rows: list[dict[str, Any]],
     *,
@@ -214,12 +319,14 @@ def _plan_command(
     dataset_name: str,
     dataset_version_prefix: str,
     dataset_description: str,
+    suite: dict[str, Any],
     sample_prompt: str,
     max_variants: int,
     python_executable: str,
 ) -> list[str]:
     if not source_rows or any(not row.get("exists") for row in source_rows):
         return []
+    suite_args = _suite_args(project_root, suite)
     return [
         str(python_executable),
         "scripts/plan_training_scale.py",
@@ -236,6 +343,7 @@ def _plan_command(
         dataset_version_prefix,
         "--dataset-description",
         dataset_description,
+        *suite_args,
         "--sample-prompt",
         sample_prompt,
         "--max-variants",
@@ -259,6 +367,9 @@ def _selected_run_summary(run: dict[str, Any]) -> dict[str, Any]:
         "scale_tier": scale.get("scale_tier"),
         "char_count": scale.get("char_count"),
         "variant_count": scale.get("variant_count") or batch.get("variant_count"),
+        "suite_mode": scale.get("suite_mode") or batch.get("suite_mode"),
+        "suite_name": scale.get("suite_name") or batch.get("suite_name"),
+        "suite_path": scale.get("suite_path") or batch.get("suite_path"),
     }
 
 
@@ -282,6 +393,9 @@ def _summary(
         "missing_source_count": sum(1 for row in sources if not row.get("exists")),
         "command_available": plan.get("command_available"),
         "execution_ready": plan.get("execution_ready"),
+        "baseline_suite_path": _dict(seed.get("suite")).get("path"),
+        "next_suite_path": _dict(plan.get("suite")).get("path"),
+        "next_suite_source": plan.get("suite_source"),
         "blocker_count": len(blockers),
     }
 

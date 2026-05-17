@@ -44,7 +44,7 @@ def main() -> None:
         dataset_version_prefix=args.dataset_version_prefix,
         dataset_description=args.dataset_description,
         suite_path=args.suite,
-        suite_name=args.suite_name,
+        suite_name=None if args.suite_name == "default" else args.suite_name,
         recursive=not args.no_recursive,
         max_variants=args.max_variants,
         python_executable=args.python,

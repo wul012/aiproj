@@ -153,6 +153,7 @@ def _summary(
 ) -> dict[str, Any]:
     baseline = _dict(seed.get("baseline_seed"))
     plan_summary = _dict(plan_report.get("summary"))
+    plan_suite = _dict(plan_report.get("suite"))
     plan_dataset = _dict(plan_report.get("dataset"))
     return {
         "handoff_status": execution.get("status"),
@@ -167,6 +168,11 @@ def _summary(
         "artifact_count": len(artifact_rows),
         "available_artifact_count": count_available_artifacts(artifact_rows),
         "plan_status": "available" if plan_report else "missing",
+        "seed_suite_path": _dict(next_plan.get("suite")).get("path"),
+        "seed_suite_source": next_plan.get("suite_source"),
+        "plan_suite_mode": plan_suite.get("mode") or plan_summary.get("suite_mode"),
+        "plan_suite_name": plan_suite.get("name") or plan_summary.get("suite_name"),
+        "plan_suite_path": plan_suite.get("path") or plan_summary.get("suite_path"),
         "plan_scale_tier": plan_dataset.get("scale_tier"),
         "plan_variant_count": len(_list_of_dicts(plan_report.get("variants"))),
         "plan_source_count": plan_dataset.get("source_count"),

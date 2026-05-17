@@ -31,6 +31,8 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "execute",
         "returncode",
         "elapsed_seconds",
+        "seed_suite_path",
+        "plan_suite_path",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -46,6 +48,8 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "execute": report.get("execute"),
             "returncode": execution.get("returncode"),
             "elapsed_seconds": execution.get("elapsed_seconds"),
+            "seed_suite_path": summary.get("seed_suite_path"),
+            "plan_suite_path": summary.get("plan_suite_path"),
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -72,6 +76,8 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Return code: `{execution.get('returncode')}`",
         f"- Artifacts: `{summary.get('available_artifact_count')}/{summary.get('artifact_count')}`",
         f"- Plan status: `{summary.get('plan_status')}`",
+        f"- Seed suite: `{summary.get('seed_suite_path')}`",
+        f"- Plan suite: `{summary.get('plan_suite_path')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -122,6 +128,8 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Return", execution.get("returncode")),
         ("Artifacts", f"{summary.get('available_artifact_count')}/{summary.get('artifact_count')}"),
         ("Plan", summary.get("plan_status")),
+        ("Seed suite", summary.get("seed_suite_path")),
+        ("Plan suite", summary.get("plan_suite_path")),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(
@@ -186,6 +194,9 @@ def _plan_section(report: dict[str, Any]) -> str:
         ("Warning count", dataset.get("warning_count")),
         ("Variant count", len(_list_of_dicts(plan.get("variants")))),
         ("Batch baseline", batch.get("baseline")),
+        ("Suite mode", _dict(plan.get("suite")).get("mode")),
+        ("Suite name", _dict(plan.get("suite")).get("name")),
+        ("Suite path", _dict(plan.get("suite")).get("path")),
     ]
     body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
     next_batch = _display_command(report.get("next_batch_command"))

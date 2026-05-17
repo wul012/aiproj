@@ -305,6 +305,8 @@ def _recommendations(tier: str, quality: dict[str, Any], matrix: list[dict[str, 
 
 
 def _suite_ref(root: Path, *, suite_path: str | Path | None, suite_name: str | None) -> dict[str, Any]:
+    if suite_name == "default":
+        suite_name = None
     if suite_name and suite_path is not None:
         raise ValueError("suite_name and suite_path cannot both be provided")
     if suite_name:

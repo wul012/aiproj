@@ -46,6 +46,8 @@ def main() -> None:
     print(f"returncode={execution.get('returncode')}")
     print(f"available_artifacts={summary.get('available_artifact_count')}/{summary.get('artifact_count')}")
     print(f"plan_status={summary.get('plan_status')}")
+    print(f"seed_suite_path={summary.get('seed_suite_path')}")
+    print(f"plan_suite_path={summary.get('plan_suite_path')}")
     print(f"next_batch_command_available={summary.get('next_batch_command_available')}")
     print("summary=" + json.dumps(summary, ensure_ascii=False))
     print(f"command={report.get('command_text')}")

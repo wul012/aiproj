@@ -25,6 +25,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset-name", type=str, default="portfolio-zh")
     parser.add_argument("--dataset-version-prefix", type=str, default="v81")
     parser.add_argument("--dataset-description", type=str, default="MiniGPT corpus seeded from a promoted training scale baseline.")
+    parser.add_argument("--suite", type=Path, default=None, help="Override the inherited prompt suite with a prompt suite JSON path.")
+    parser.add_argument("--suite-name", choices=["default", "standard-zh"], default=None, help="Override the inherited prompt suite with a built-in suite, or default to the standard file suite.")
     parser.add_argument("--sample-prompt", type=str, default="MiniGPT")
     parser.add_argument("--max-variants", type=int, default=3)
     parser.add_argument("--python", type=str, default=sys.executable)
@@ -44,6 +46,8 @@ def main() -> None:
         dataset_name=args.dataset_name,
         dataset_version_prefix=args.dataset_version_prefix,
         dataset_description=args.dataset_description,
+        suite_path=args.suite,
+        suite_name=args.suite_name,
         sample_prompt=args.sample_prompt,
         max_variants=args.max_variants,
         python_executable=args.python,
@@ -58,6 +62,9 @@ def main() -> None:
     print(f"decision_status={seed.get('decision_status')}")
     print(f"source_count={summary.get('source_count')}")
     print(f"missing_source_count={summary.get('missing_source_count')}")
+    print(f"baseline_suite_path={summary.get('baseline_suite_path')}")
+    print(f"next_suite_path={summary.get('next_suite_path')}")
+    print(f"next_suite_source={summary.get('next_suite_source')}")
     print(f"command_available={plan.get('command_available')}")
     print(f"execution_ready={plan.get('execution_ready')}")
     print("summary=" + json.dumps(summary, ensure_ascii=False))

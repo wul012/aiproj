@@ -87,6 +87,24 @@ class TrainingScalePlanTests(unittest.TestCase):
                     generated_at="2026-05-14T00:00:00Z",
                 )
 
+    def test_build_training_scale_plan_treats_default_suite_name_as_file_default(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "corpus.txt"
+            source.write_text(("MiniGPT 训练规模规划。\n" * 180), encoding="utf-8")
+
+            report = build_training_scale_plan(
+                [source],
+                project_root=root,
+                out_root=root / "scale",
+                suite_name="default",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(report["suite"]["mode"], "file")
+            self.assertEqual(report["suite"]["path"], str(root / "data" / "eval_prompts.json"))
+            self.assertNotIn("builtin:default", json.dumps(report, ensure_ascii=False))
+
     def test_write_outputs_and_variants_are_batch_compatible(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
