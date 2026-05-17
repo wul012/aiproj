@@ -106,6 +106,30 @@ def make_run(root: Path) -> Path:
         ),
         encoding="utf-8",
     )
+    scorecard_dir = run_dir / "benchmark-scorecard"
+    scorecard_dir.mkdir()
+    (scorecard_dir / "benchmark_scorecard.json").write_text(
+        json.dumps(
+            {
+                "summary": {
+                    "overall_status": "pass",
+                    "overall_score": 91.5,
+                    "component_count": 6,
+                    "rubric_status": "pass",
+                    "rubric_avg_score": 94.0,
+                    "weakest_rubric_case": "summary",
+                    "weakest_rubric_score": 88.0,
+                    "weakest_task_type": "summary",
+                    "weakest_task_type_score": 88.0,
+                    "weakest_difficulty": "medium",
+                    "weakest_difficulty_score": 88.0,
+                    "generation_quality_dominant_flag": None,
+                    "generation_quality_total_flags": 0,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
     return run_dir
 
 
@@ -125,6 +149,9 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertEqual(report["evaluation"]["task_type_count"], 2)
             self.assertEqual(report["quality"]["overall_status"], "pass")
             self.assertEqual(report["summary"]["generation_quality_status"], "pass")
+            self.assertEqual(report["scorecard"]["overall_status"], "pass")
+            self.assertEqual(report["scorecard"]["overall_score"], 91.5)
+            self.assertEqual(report["summary"]["benchmark_scorecard_status"], "pass")
             self.assertEqual(report["summary"]["eval_suite_case_count"], 2)
             self.assertTrue(any(item["key"] == "checkpoint" and item["exists"] for item in report["artifacts"]))
 
@@ -162,6 +189,17 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertFalse(report["summary"]["generation_quality_exists"])
             self.assertTrue(any(check["code"] == "generation_quality_present" and check["status"] == "warn" for check in report["checks"]))
 
+    def test_missing_benchmark_scorecard_keeps_run_in_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp))
+            (run_dir / "benchmark-scorecard" / "benchmark_scorecard.json").unlink()
+
+            report = build_training_run_evidence(run_dir)
+
+            self.assertEqual(report["summary"]["status"], "review")
+            self.assertFalse(report["summary"]["benchmark_scorecard_exists"])
+            self.assertTrue(any(check["code"] == "benchmark_scorecard_present" and check["status"] == "warn" for check in report["checks"]))
+
     def test_write_outputs_and_render_html_escape(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = make_run(Path(tmp))
@@ -175,6 +213,7 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Evaluation", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Generation Quality", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("## Benchmark Scorecard", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Evidence&gt;", html)
             self.assertNotIn("<h1><Evidence>", html)
 

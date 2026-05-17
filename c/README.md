@@ -373,6 +373,9 @@ c/187/解释/说明.md
 c/188/图片
 c/188/解释/说明.md
  -> v188 training run evidence generation quality summary 的运行截图和解释
+c/189/图片
+c/189/解释/说明.md
+ -> v189 training run evidence benchmark scorecard summary 的运行截图和解释
 ```
 
 写入规则：

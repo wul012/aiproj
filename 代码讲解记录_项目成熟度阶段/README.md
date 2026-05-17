@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+203-v189-training-run-evidence-benchmark-scorecard-summary.md
+ -> v189 code explanation: enrich real training run evidence with benchmark scorecard summaries, including overall status/score, rubric average, weakest rubric case, weakest task/difficulty groups, generation flag context, and review boundary semantics.
 202-v188-training-run-evidence-generation-quality-summary.md
  -> v188 code explanation: enrich real training run evidence with generation quality summaries, including overall status, pass/warn/fail counts, diversity/repetition metrics, total flags, dominant flag, and review boundary semantics.
 201-v187-training-run-evidence-eval-summary.md

@@ -48,6 +48,8 @@ def build_training_run_evidence(
     evaluation = _evaluation_section(eval_suite, root / "eval_suite" / "eval_suite.json")
     quality_report = _read_json(root / "generation_quality" / "generation_quality.json", warnings, "generation_quality")
     quality = _quality_section(quality_report, root / "generation_quality" / "generation_quality.json")
+    scorecard_report = _read_json(root / "benchmark-scorecard" / "benchmark_scorecard.json", warnings, "benchmark_scorecard")
+    scorecard = _scorecard_section(scorecard_report, root / "benchmark-scorecard" / "benchmark_scorecard.json")
     checks = _checks(
         root=root,
         artifacts=artifacts,
@@ -57,10 +59,11 @@ def build_training_run_evidence(
         history_summary=history_summary,
         evaluation=evaluation,
         quality=quality,
+        scorecard=scorecard,
         require_sample=require_sample,
         require_eval_suite=require_eval_suite,
     )
-    summary = _summary(checks, artifacts, root, evaluation, quality)
+    summary = _summary(checks, artifacts, root, evaluation, quality, scorecard)
     training = _training_section(train_config, manifest, history_summary)
     data = _data_section(train_config, manifest)
     report = {
@@ -73,11 +76,12 @@ def build_training_run_evidence(
         "data": data,
         "evaluation": evaluation,
         "quality": quality,
+        "scorecard": scorecard,
         "sample": _sample_section(root / "sample.txt"),
         "checks": checks,
         "artifacts": artifacts,
         "warnings": warnings,
-        "recommendations": _recommendations(summary, checks, data, evaluation, quality),
+        "recommendations": _recommendations(summary, checks, data, evaluation, quality, scorecard),
     }
     return report
 
@@ -152,6 +156,7 @@ def _checks(
     history_summary: dict[str, Any],
     evaluation: dict[str, Any],
     quality: dict[str, Any],
+    scorecard: dict[str, Any],
     require_sample: bool,
     require_eval_suite: bool,
 ) -> list[dict[str, Any]]:
@@ -198,6 +203,7 @@ def _checks(
     )
     checks.append(_eval_suite_check(evaluation, require_eval_suite))
     checks.append(_quality_check(quality))
+    checks.append(_scorecard_check(scorecard))
     if not train_config:
         checks.append(
             _check(
@@ -307,7 +313,12 @@ def _eval_suite_check(evaluation: dict[str, Any], require_eval_suite: bool) -> d
 
 
 def _summary(
-    checks: list[dict[str, Any]], artifacts: list[dict[str, Any]], root: Path, evaluation: dict[str, Any], quality: dict[str, Any]
+    checks: list[dict[str, Any]],
+    artifacts: list[dict[str, Any]],
+    root: Path,
+    evaluation: dict[str, Any],
+    quality: dict[str, Any],
+    scorecard: dict[str, Any],
 ) -> dict[str, Any]:
     fail_count = sum(1 for check in checks if check.get("status") == "fail")
     warn_count = sum(1 for check in checks if check.get("status") == "warn")
@@ -335,6 +346,11 @@ def _summary(
         "generation_quality_fail_count": _int(quality.get("fail_count")) or 0,
         "generation_quality_warn_count": _int(quality.get("warn_count")) or 0,
         "generation_quality_total_flags": _int(quality.get("total_flags")) or 0,
+        "benchmark_scorecard_exists": bool(scorecard.get("exists")),
+        "benchmark_scorecard_status": scorecard.get("overall_status"),
+        "benchmark_scorecard_score": _float(scorecard.get("overall_score")),
+        "benchmark_scorecard_rubric_status": scorecard.get("rubric_status"),
+        "benchmark_scorecard_rubric_avg_score": _float(scorecard.get("rubric_avg_score")),
     }
 
 
@@ -476,12 +492,65 @@ def _quality_check(quality: dict[str, Any]) -> dict[str, Any]:
     )
 
 
+def _scorecard_section(report: dict[str, Any], path: Path) -> dict[str, Any]:
+    summary = _dict(report.get("summary"))
+    return {
+        "exists": path.exists(),
+        "path": str(path),
+        "overall_status": summary.get("overall_status"),
+        "overall_score": _float(summary.get("overall_score")),
+        "component_count": _int(summary.get("component_count")) or 0,
+        "rubric_status": summary.get("rubric_status"),
+        "rubric_avg_score": _float(summary.get("rubric_avg_score")),
+        "weakest_rubric_case": summary.get("weakest_rubric_case"),
+        "weakest_rubric_score": _float(summary.get("weakest_rubric_score")),
+        "weakest_task_type": summary.get("weakest_task_type"),
+        "weakest_task_type_score": _float(summary.get("weakest_task_type_score")),
+        "weakest_difficulty": summary.get("weakest_difficulty"),
+        "weakest_difficulty_score": _float(summary.get("weakest_difficulty_score")),
+        "generation_quality_dominant_flag": summary.get("generation_quality_dominant_flag"),
+        "generation_quality_total_flags": _int(summary.get("generation_quality_total_flags")) or 0,
+    }
+
+
+def _scorecard_check(scorecard: dict[str, Any]) -> dict[str, Any]:
+    exists = bool(scorecard.get("exists"))
+    status_value = str(scorecard.get("overall_status") or "")
+    if not exists:
+        status = "warn"
+        message = "benchmark scorecard evidence is missing"
+        recommendation = "Run scripts/build_benchmark_scorecard.py after eval and generation quality evidence."
+    elif status_value == "pass":
+        status = "pass"
+        message = "benchmark scorecard passed"
+        recommendation = "Keep benchmark scorecard evidence with this training run."
+    else:
+        status = "warn"
+        message = f"benchmark scorecard status is {status_value or 'unknown'}"
+        recommendation = "Review weak benchmark components before promoting this checkpoint."
+    return _check(
+        "benchmark_scorecard_present",
+        "benchmark",
+        status,
+        message,
+        recommendation,
+        {
+            "overall_score": _float(scorecard.get("overall_score")),
+            "rubric_status": scorecard.get("rubric_status"),
+            "rubric_avg_score": _float(scorecard.get("rubric_avg_score")),
+            "weakest_task_type": scorecard.get("weakest_task_type"),
+            "weakest_difficulty": scorecard.get("weakest_difficulty"),
+        },
+    )
+
+
 def _recommendations(
     summary: dict[str, Any],
     checks: list[dict[str, Any]],
     data: dict[str, Any],
     evaluation: dict[str, Any],
     quality: dict[str, Any],
+    scorecard: dict[str, Any],
 ) -> list[str]:
     if summary.get("status") == "blocked":
         failing = [str(check.get("code")) for check in checks if check.get("status") == "fail"]
@@ -501,6 +570,10 @@ def _recommendations(
         recs.append("Run generation quality analysis so short, repetitive, or low-diversity outputs are visible.")
     elif quality.get("overall_status") != "pass":
         recs.append("Review generation quality flags before promoting this run beyond local evidence.")
+    if not scorecard.get("exists"):
+        recs.append("Build the benchmark scorecard so rubric, quality, and evidence completeness can be reviewed together.")
+    elif scorecard.get("overall_status") != "pass":
+        recs.append("Review benchmark scorecard weak components before treating this run as improved.")
     return recs
 
 

@@ -23,6 +23,7 @@ def write_training_run_evidence_csv(report: dict[str, Any], path: str | Path) ->
     training = _dict(report.get("training"))
     evaluation = _dict(report.get("evaluation"))
     quality = _dict(report.get("quality"))
+    scorecard = _dict(report.get("scorecard"))
     fieldnames = [
         "status",
         "readiness_score",
@@ -50,6 +51,13 @@ def write_training_run_evidence_csv(report: dict[str, Any], path: str | Path) ->
         "generation_quality_warn_count",
         "generation_quality_total_flags",
         "generation_quality_dominant_flag",
+        "benchmark_scorecard_exists",
+        "benchmark_scorecard_status",
+        "benchmark_scorecard_score",
+        "benchmark_scorecard_rubric_status",
+        "benchmark_scorecard_rubric_avg_score",
+        "benchmark_scorecard_weakest_task_type",
+        "benchmark_scorecard_weakest_difficulty",
     ]
     write_csv_row(
         {
@@ -79,6 +87,13 @@ def write_training_run_evidence_csv(report: dict[str, Any], path: str | Path) ->
             "generation_quality_warn_count": summary.get("generation_quality_warn_count"),
             "generation_quality_total_flags": summary.get("generation_quality_total_flags"),
             "generation_quality_dominant_flag": quality.get("dominant_flag"),
+            "benchmark_scorecard_exists": summary.get("benchmark_scorecard_exists"),
+            "benchmark_scorecard_status": summary.get("benchmark_scorecard_status"),
+            "benchmark_scorecard_score": summary.get("benchmark_scorecard_score"),
+            "benchmark_scorecard_rubric_status": summary.get("benchmark_scorecard_rubric_status"),
+            "benchmark_scorecard_rubric_avg_score": summary.get("benchmark_scorecard_rubric_avg_score"),
+            "benchmark_scorecard_weakest_task_type": scorecard.get("weakest_task_type"),
+            "benchmark_scorecard_weakest_difficulty": scorecard.get("weakest_difficulty"),
         },
         path,
         fieldnames,
@@ -91,6 +106,7 @@ def render_training_run_evidence_markdown(report: dict[str, Any]) -> str:
     data = _dict(report.get("data"))
     evaluation = _dict(report.get("evaluation"))
     quality = _dict(report.get("quality"))
+    scorecard = _dict(report.get("scorecard"))
     sample = _dict(report.get("sample"))
     lines = [
         f"# {report.get('title', 'MiniGPT training run evidence')}",
@@ -112,6 +128,7 @@ def render_training_run_evidence_markdown(report: dict[str, Any]) -> str:
                 ("Warnings", summary.get("warning_count")),
                 ("Eval cases", summary.get("eval_suite_case_count")),
                 ("Generation quality", summary.get("generation_quality_status")),
+                ("Benchmark scorecard", summary.get("benchmark_scorecard_status")),
             ]
         ),
         "",
@@ -180,6 +197,26 @@ def render_training_run_evidence_markdown(report: dict[str, Any]) -> str:
             ]
         ),
         "",
+        "## Benchmark Scorecard",
+        "",
+        *_markdown_table(
+            [
+                ("Exists", scorecard.get("exists")),
+                ("Status", scorecard.get("overall_status")),
+                ("Overall score", _fmt(scorecard.get("overall_score"))),
+                ("Components", scorecard.get("component_count")),
+                ("Rubric status", scorecard.get("rubric_status")),
+                ("Rubric average", _fmt(scorecard.get("rubric_avg_score"))),
+                ("Weakest rubric case", scorecard.get("weakest_rubric_case")),
+                ("Weakest task type", scorecard.get("weakest_task_type")),
+                ("Weakest task type score", _fmt(scorecard.get("weakest_task_type_score"))),
+                ("Weakest difficulty", scorecard.get("weakest_difficulty")),
+                ("Weakest difficulty score", _fmt(scorecard.get("weakest_difficulty_score"))),
+                ("Dominant generation flag", scorecard.get("generation_quality_dominant_flag")),
+                ("Generation flags", scorecard.get("generation_quality_total_flags")),
+            ]
+        ),
+        "",
         "## Sample",
         "",
         *_markdown_table(
@@ -239,6 +276,7 @@ def render_training_run_evidence_html(report: dict[str, Any]) -> str:
     training = _dict(report.get("training"))
     evaluation = _dict(report.get("evaluation"))
     quality = _dict(report.get("quality"))
+    scorecard = _dict(report.get("scorecard"))
     stats = [
         ("Status", summary.get("status")),
         ("Score", summary.get("readiness_score")),
@@ -248,6 +286,7 @@ def render_training_run_evidence_html(report: dict[str, Any]) -> str:
         ("Best val", _fmt(training.get("best_val_loss"))),
         ("Eval cases", evaluation.get("case_count")),
         ("Quality", quality.get("overall_status")),
+        ("Scorecard", scorecard.get("overall_status")),
     ]
     return "\n".join(
         [
@@ -267,6 +306,7 @@ def render_training_run_evidence_html(report: dict[str, Any]) -> str:
             _key_value_section("Data", _dict(report.get("data"))),
             _key_value_section("Evaluation", _dict(report.get("evaluation"))),
             _key_value_section("Generation Quality", _dict(report.get("quality"))),
+            _key_value_section("Benchmark Scorecard", _dict(report.get("scorecard"))),
             _key_value_section("Sample", _dict(report.get("sample"))),
             _checks_section(_list_of_dicts(report.get("checks"))),
             _artifacts_section(_list_of_dicts(report.get("artifacts"))),
