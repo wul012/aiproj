@@ -83,6 +83,29 @@ def make_run(root: Path) -> Path:
         ),
         encoding="utf-8",
     )
+    quality_dir = run_dir / "generation_quality"
+    quality_dir.mkdir()
+    (quality_dir / "generation_quality.json").write_text(
+        json.dumps(
+            {
+                "source_type": "eval_suite",
+                "summary": {
+                    "overall_status": "pass",
+                    "case_count": 2,
+                    "pass_count": 2,
+                    "warn_count": 0,
+                    "fail_count": 0,
+                    "avg_continuation_chars": 12.5,
+                    "avg_unique_ratio": 0.62,
+                    "avg_repeated_ngram_ratio": 0.1,
+                    "max_repeat_run": 2,
+                    "flag_summary": {"total_flags": 0, "flag_id_counts": {}, "flag_level_counts": {"fail": 0, "warn": 0}},
+                },
+                "cases": [{"name": "qa", "status": "pass"}, {"name": "summary", "status": "pass"}],
+            }
+        ),
+        encoding="utf-8",
+    )
     return run_dir
 
 
@@ -100,6 +123,8 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertEqual(report["data"]["dataset_quality_status"], "pass")
             self.assertEqual(report["evaluation"]["case_count"], 2)
             self.assertEqual(report["evaluation"]["task_type_count"], 2)
+            self.assertEqual(report["quality"]["overall_status"], "pass")
+            self.assertEqual(report["summary"]["generation_quality_status"], "pass")
             self.assertEqual(report["summary"]["eval_suite_case_count"], 2)
             self.assertTrue(any(item["key"] == "checkpoint" and item["exists"] for item in report["artifacts"]))
 
@@ -126,6 +151,17 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertEqual(report["summary"]["eval_suite_case_count"], 0)
             self.assertTrue(any(check["code"] == "eval_suite_present" and check["status"] == "warn" for check in report["checks"]))
 
+    def test_missing_generation_quality_keeps_run_in_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp))
+            (run_dir / "generation_quality" / "generation_quality.json").unlink()
+
+            report = build_training_run_evidence(run_dir)
+
+            self.assertEqual(report["summary"]["status"], "review")
+            self.assertFalse(report["summary"]["generation_quality_exists"])
+            self.assertTrue(any(check["code"] == "generation_quality_present" and check["status"] == "warn" for check in report["checks"]))
+
     def test_write_outputs_and_render_html_escape(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = make_run(Path(tmp))
@@ -138,6 +174,7 @@ class TrainingRunEvidenceTests(unittest.TestCase):
             self.assertIn("training_run_evidence", Path(outputs["json"]).name)
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Evaluation", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("## Generation Quality", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Evidence&gt;", html)
             self.assertNotIn("<h1><Evidence>", html)
 

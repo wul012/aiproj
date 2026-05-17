@@ -370,6 +370,9 @@ c/186/解释/说明.md
 c/187/图片
 c/187/解释/说明.md
  -> v187 training run evidence eval summary 的运行截图和解释
+c/188/图片
+c/188/解释/说明.md
+ -> v188 training run evidence generation quality summary 的运行截图和解释
 ```
 
 写入规则：

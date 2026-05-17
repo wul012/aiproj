@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+202-v188-training-run-evidence-generation-quality-summary.md
+ -> v188 code explanation: enrich real training run evidence with generation quality summaries, including overall status, pass/warn/fail counts, diversity/repetition metrics, total flags, dominant flag, and review boundary semantics.
 201-v187-training-run-evidence-eval-summary.md
  -> v187 code explanation: enrich real training run evidence with fixed eval suite summaries, including case count, suite metadata, task/difficulty coverage, average continuation length, and ready/review boundary semantics.
 200-v186-real-training-run-evidence.md

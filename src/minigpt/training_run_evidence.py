@@ -46,6 +46,8 @@ def build_training_run_evidence(
     artifacts = _artifact_rows(root)
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json", warnings, "eval_suite")
     evaluation = _evaluation_section(eval_suite, root / "eval_suite" / "eval_suite.json")
+    quality_report = _read_json(root / "generation_quality" / "generation_quality.json", warnings, "generation_quality")
+    quality = _quality_section(quality_report, root / "generation_quality" / "generation_quality.json")
     checks = _checks(
         root=root,
         artifacts=artifacts,
@@ -54,10 +56,11 @@ def build_training_run_evidence(
         records=records,
         history_summary=history_summary,
         evaluation=evaluation,
+        quality=quality,
         require_sample=require_sample,
         require_eval_suite=require_eval_suite,
     )
-    summary = _summary(checks, artifacts, root, evaluation)
+    summary = _summary(checks, artifacts, root, evaluation, quality)
     training = _training_section(train_config, manifest, history_summary)
     data = _data_section(train_config, manifest)
     report = {
@@ -69,11 +72,12 @@ def build_training_run_evidence(
         "training": training,
         "data": data,
         "evaluation": evaluation,
+        "quality": quality,
         "sample": _sample_section(root / "sample.txt"),
         "checks": checks,
         "artifacts": artifacts,
         "warnings": warnings,
-        "recommendations": _recommendations(summary, checks, data, evaluation),
+        "recommendations": _recommendations(summary, checks, data, evaluation, quality),
     }
     return report
 
@@ -147,6 +151,7 @@ def _checks(
     records: list[Any],
     history_summary: dict[str, Any],
     evaluation: dict[str, Any],
+    quality: dict[str, Any],
     require_sample: bool,
     require_eval_suite: bool,
 ) -> list[dict[str, Any]]:
@@ -192,6 +197,7 @@ def _checks(
         )
     )
     checks.append(_eval_suite_check(evaluation, require_eval_suite))
+    checks.append(_quality_check(quality))
     if not train_config:
         checks.append(
             _check(
@@ -301,7 +307,7 @@ def _eval_suite_check(evaluation: dict[str, Any], require_eval_suite: bool) -> d
 
 
 def _summary(
-    checks: list[dict[str, Any]], artifacts: list[dict[str, Any]], root: Path, evaluation: dict[str, Any]
+    checks: list[dict[str, Any]], artifacts: list[dict[str, Any]], root: Path, evaluation: dict[str, Any], quality: dict[str, Any]
 ) -> dict[str, Any]:
     fail_count = sum(1 for check in checks if check.get("status") == "fail")
     warn_count = sum(1 for check in checks if check.get("status") == "warn")
@@ -324,6 +330,11 @@ def _summary(
         "eval_suite_case_count": _int(evaluation.get("case_count")) or 0,
         "eval_suite_task_type_count": _int(evaluation.get("task_type_count")) or 0,
         "eval_suite_difficulty_count": _int(evaluation.get("difficulty_count")) or 0,
+        "generation_quality_exists": bool(quality.get("exists")),
+        "generation_quality_status": quality.get("overall_status"),
+        "generation_quality_fail_count": _int(quality.get("fail_count")) or 0,
+        "generation_quality_warn_count": _int(quality.get("warn_count")) or 0,
+        "generation_quality_total_flags": _int(quality.get("total_flags")) or 0,
     }
 
 
@@ -406,8 +417,71 @@ def _evaluation_section(report: dict[str, Any], path: Path) -> dict[str, Any]:
     }
 
 
+def _quality_section(report: dict[str, Any], path: Path) -> dict[str, Any]:
+    summary = _dict(report.get("summary"))
+    flag_summary = _dict(summary.get("flag_summary"))
+    flag_counts = _dict(flag_summary.get("flag_id_counts"))
+    cases = _list_of_dicts(report.get("cases"))
+    dominant_flag = None
+    if flag_counts:
+        dominant_flag = max(flag_counts.items(), key=lambda item: (_int(item[1]) or 0, str(item[0])))[0]
+    return {
+        "exists": path.exists(),
+        "path": str(path),
+        "source_type": report.get("source_type"),
+        "overall_status": summary.get("overall_status"),
+        "case_count": _int(summary.get("case_count")) or len(cases),
+        "pass_count": _int(summary.get("pass_count")) or 0,
+        "warn_count": _int(summary.get("warn_count")) or 0,
+        "fail_count": _int(summary.get("fail_count")) or 0,
+        "avg_continuation_chars": _float(summary.get("avg_continuation_chars")),
+        "avg_unique_ratio": _float(summary.get("avg_unique_ratio")),
+        "avg_repeated_ngram_ratio": _float(summary.get("avg_repeated_ngram_ratio")),
+        "max_repeat_run": _int(summary.get("max_repeat_run")) or 0,
+        "total_flags": _int(flag_summary.get("total_flags")) or 0,
+        "dominant_flag": dominant_flag,
+    }
+
+
+def _quality_check(quality: dict[str, Any]) -> dict[str, Any]:
+    exists = bool(quality.get("exists"))
+    status_value = str(quality.get("overall_status") or "")
+    fail_count = _int(quality.get("fail_count")) or 0
+    warn_count = _int(quality.get("warn_count")) or 0
+    if not exists:
+        status = "warn"
+        message = "generation quality evidence is missing"
+        recommendation = "Run scripts/analyze_generation_quality.py after eval suite generation."
+    elif status_value == "pass":
+        status = "pass"
+        message = "generation quality checks passed"
+        recommendation = "Keep generation quality evidence next to eval suite artifacts."
+    else:
+        status = "warn"
+        message = f"generation quality status is {status_value or 'unknown'}"
+        recommendation = "Review generation quality flags before treating this checkpoint as fully ready."
+    return _check(
+        "generation_quality_present",
+        "generation",
+        status,
+        message,
+        recommendation,
+        {
+            "case_count": _int(quality.get("case_count")) or 0,
+            "fail_count": fail_count,
+            "warn_count": warn_count,
+            "total_flags": _int(quality.get("total_flags")) or 0,
+            "dominant_flag": quality.get("dominant_flag"),
+        },
+    )
+
+
 def _recommendations(
-    summary: dict[str, Any], checks: list[dict[str, Any]], data: dict[str, Any], evaluation: dict[str, Any]
+    summary: dict[str, Any],
+    checks: list[dict[str, Any]],
+    data: dict[str, Any],
+    evaluation: dict[str, Any],
+    quality: dict[str, Any],
 ) -> list[str]:
     if summary.get("status") == "blocked":
         failing = [str(check.get("code")) for check in checks if check.get("status") == "fail"]
@@ -423,6 +497,10 @@ def _recommendations(
         recs.append("Run the fixed eval suite next so model quality can be compared beyond validation loss.")
     else:
         recs.append("Use the eval suite case and coverage summary when comparing this checkpoint with later runs.")
+    if not quality.get("exists"):
+        recs.append("Run generation quality analysis so short, repetitive, or low-diversity outputs are visible.")
+    elif quality.get("overall_status") != "pass":
+        recs.append("Review generation quality flags before promoting this run beyond local evidence.")
     return recs
 
 
