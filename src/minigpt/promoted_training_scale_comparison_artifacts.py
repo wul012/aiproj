@@ -43,6 +43,10 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
         "batch_status",
         "suite_path",
         "readiness_score",
+        "handoff_require_suite_consistency",
+        "handoff_suite_consistency",
+        "handoff_suite_mismatch_count",
+        "handoff_selected_suite_path",
         "baseline_name",
         "is_baseline",
         "readiness_delta",
@@ -67,6 +71,10 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
                     "batch_status": row.get("batch_status"),
                     "suite_path": row.get("suite_path"),
                     "readiness_score": row.get("readiness_score"),
+                    "handoff_require_suite_consistency": row.get("handoff_require_suite_consistency"),
+                    "handoff_suite_consistency": row.get("handoff_suite_consistency"),
+                    "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
+                    "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
                     "baseline_name": delta.get("baseline_name"),
                     "is_baseline": delta.get("is_baseline"),
                     "readiness_delta": delta.get("readiness_delta"),
@@ -90,11 +98,15 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
         f"- Compared runs: `{summary.get('compared_run_count')}`",
         f"- Baseline: `{summary.get('baseline_name')}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
+        f"- Handoff strict suite: `{summary.get('handoff_require_suite_consistency_count')}`",
+        f"- Handoff suite consistent: `{summary.get('handoff_suite_consistent_count')}`",
+        f"- Handoff suite mismatches: `{summary.get('handoff_suite_mismatch_total')}`",
+        f"- Comparison-ready handoff suite mismatches: `{summary.get('comparison_ready_handoff_suite_mismatch_total')}`",
         "",
         "## Promoted Inputs",
         "",
-        "| Name | Status | Compare | Readiness | Run |",
-        "| --- | --- | --- | ---: | --- |",
+        "| Name | Status | Compare | Readiness | Handoff Suite | Mismatches | Selected Suite | Run |",
+        "| --- | --- | --- | ---: | --- | ---: | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -105,6 +117,9 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
                     _md(row.get("promotion_status")),
                     _md(row.get("promoted_for_comparison")),
                     _md(row.get("readiness_score")),
+                    _md(row.get("handoff_suite_consistency")),
+                    _md(row.get("handoff_suite_mismatch_count")),
+                    _md(row.get("handoff_selected_suite_path")),
                     _md(row.get("training_scale_run_path")),
                 ]
             )
@@ -168,6 +183,10 @@ def render_promoted_training_scale_comparison_html(report: dict[str, Any]) -> st
         ("Compared", summary.get("compared_run_count")),
         ("Baseline", summary.get("baseline_name")),
         ("Suite", summary.get("suite_consistency")),
+        ("Handoff strict suite", summary.get("handoff_require_suite_consistency_count")),
+        ("Handoff suite consistent", summary.get("handoff_suite_consistent_count")),
+        ("Handoff suite mismatches", summary.get("handoff_suite_mismatch_total")),
+        ("Ready suite mismatches", summary.get("comparison_ready_handoff_suite_mismatch_total")),
         ("Best", _dict(comparison.get("best_by_readiness")).get("name")),
     ]
     return "\n".join(
@@ -225,12 +244,15 @@ def _promotion_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('promotion_status'))}</td>"
             f"<td>{_e(row.get('promoted_for_comparison'))}</td>"
             f"<td>{_e(row.get('readiness_score'))}</td>"
+            f"<td>{_e(row.get('handoff_suite_consistency'))}</td>"
+            f"<td>{_e(row.get('handoff_suite_mismatch_count'))}</td>"
+            f"<td>{_e(row.get('handoff_selected_suite_path'))}</td>"
             f"<td>{_e(row.get('training_scale_run_path'))}</td>"
             "</tr>"
         )
     return (
         '<section><h2>Promoted Inputs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Readiness</th><th>Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Readiness</th><th>Handoff Suite</th><th>Mismatches</th><th>Selected Suite</th><th>Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

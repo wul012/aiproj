@@ -42,6 +42,10 @@ def main() -> None:
     print(f"compared_run_count={summary.get('compared_run_count')}")
     print(f"baseline={summary.get('baseline_name')}")
     print(f"best_by_readiness={summary.get('best_by_readiness')}")
+    print(f"handoff_require_suite_consistency_count={summary.get('handoff_require_suite_consistency_count')}")
+    print(f"handoff_suite_consistent_count={summary.get('handoff_suite_consistent_count')}")
+    print(f"handoff_suite_mismatch_total={summary.get('handoff_suite_mismatch_total')}")
+    print(f"comparison_ready_handoff_suite_mismatch_total={summary.get('comparison_ready_handoff_suite_mismatch_total')}")
     if summary.get("blocked_reason"):
         print(f"blocked_reason={summary.get('blocked_reason')}")
     print("summary=" + json.dumps(summary, ensure_ascii=False))

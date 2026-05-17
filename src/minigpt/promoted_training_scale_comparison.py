@@ -115,6 +115,10 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 "gate_status": row.get("gate_status"),
                 "batch_status": row.get("batch_status"),
                 "readiness_score": row.get("readiness_score"),
+                "handoff_require_suite_consistency": bool(row.get("handoff_require_suite_consistency")),
+                "handoff_suite_consistency": row.get("handoff_suite_consistency"),
+                "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
+                "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
             }
         )
     return rows
@@ -186,6 +190,13 @@ def _summary(
         "suite_path_count": compared.get("suite_path_count"),
         "suite_paths": compared.get("suite_paths"),
         "suite_mismatch_count": compared.get("suite_mismatch_count"),
+        "handoff_require_suite_consistency_count": sum(1 for row in promotions if row.get("handoff_require_suite_consistency")),
+        "handoff_suite_consistent_count": sum(1 for row in promotions if row.get("handoff_suite_consistency") == "consistent"),
+        "handoff_suite_mismatch_total": sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
+        "handoff_selected_suite_path_count": sum(1 for row in promotions if row.get("handoff_selected_suite_path")),
+        "comparison_ready_handoff_suite_mismatch_total": sum(
+            _int(row.get("handoff_suite_mismatch_count")) for row in promotions if row.get("promoted_for_comparison")
+        ),
         "allowed_count": compared.get("allowed_count"),
         "blocked_count": compared.get("blocked_count"),
         "gate_warn_count": compared.get("gate_warn_count"),
@@ -242,3 +253,10 @@ def _resolve_path(value: Any, base_dir: Path) -> Path:
         if candidate.exists():
             return candidate
     return candidates[0]
+
+
+def _int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0

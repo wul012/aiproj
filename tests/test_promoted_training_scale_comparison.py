@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -81,6 +82,59 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             beta = next(row for row in report["promotions"] if row["name"] == "beta")
             self.assertEqual(beta["suite_path"], "builtin:standard-zh")
 
+    def test_carries_index_handoff_suite_guard_into_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index_dir = make_index_tree(
+                root,
+                [
+                    entry("alpha", "alpha", "promoted", "warn", include_handoff_suite_guard=True),
+                    entry("beta", "beta", "promoted", "pass", include_handoff_suite_guard=True),
+                ],
+                baseline_name="alpha",
+            )
+
+            report = build_promoted_training_scale_comparison(index_dir, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_comparison_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "compare_promoted_training_scale_runs.py"),
+                    str(index_dir),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-compared",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            row = report["promotions"][0]
+            summary = report["summary"]
+            self.assertTrue(row["handoff_require_suite_consistency"])
+            self.assertEqual(row["handoff_suite_consistency"], "consistent")
+            self.assertEqual(row["handoff_suite_mismatch_count"], 0)
+            self.assertEqual(row["handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertEqual(summary["handoff_require_suite_consistency_count"], 2)
+            self.assertEqual(summary["handoff_suite_consistent_count"], 2)
+            self.assertEqual(summary["handoff_suite_mismatch_total"], 0)
+            self.assertEqual(summary["comparison_ready_handoff_suite_mismatch_total"], 0)
+            self.assertIn("handoff_suite_consistency", csv_text)
+            self.assertIn("Handoff Suite", markdown)
+            self.assertIn("Comparison-ready handoff suite mismatches", markdown)
+            self.assertIn("Handoff suite consistent", html)
+            self.assertIn("Ready suite mismatches", html)
+            self.assertIn("handoff_require_suite_consistency_count=2", completed.stdout)
+            self.assertIn("handoff_suite_consistent_count=2", completed.stdout)
+            self.assertIn("comparison_ready_handoff_suite_mismatch_total=0", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
+
     def test_blocks_when_promoted_input_is_insufficient(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -142,8 +196,23 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertNotIn("<alpha>", html)
 
 
-def entry(safe_id: str, name: str, status: str, gate_status: str, suite_name: str | None = "standard-zh") -> dict:
-    return {"safe_id": safe_id, "name": name, "status": status, "gate_status": gate_status, "suite_name": suite_name}
+def entry(
+    safe_id: str,
+    name: str,
+    status: str,
+    gate_status: str,
+    suite_name: str | None = "standard-zh",
+    *,
+    include_handoff_suite_guard: bool = False,
+) -> dict:
+    return {
+        "safe_id": safe_id,
+        "name": name,
+        "status": status,
+        "gate_status": gate_status,
+        "suite_name": suite_name,
+        "include_handoff_suite_guard": include_handoff_suite_guard,
+    }
 
 
 def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None = None) -> Path:
@@ -156,15 +225,23 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
         write_json(run_path, scale_run(item["name"], item["gate_status"], item.get("suite_name")))
         rel_run_path = os.path.relpath(run_path, index_dir)
         promoted = item["status"] == "promoted"
-        promotions.append(
-            {
-                "name": item["name"],
-                "promotion_status": item["status"],
-                "promoted_for_comparison": promoted,
-                "training_scale_run_path": rel_run_path,
-                "training_scale_run_exists": True,
-            }
-        )
+        promotion = {
+            "name": item["name"],
+            "promotion_status": item["status"],
+            "promoted_for_comparison": promoted,
+            "training_scale_run_path": rel_run_path,
+            "training_scale_run_exists": True,
+        }
+        if item.get("include_handoff_suite_guard"):
+            promotion.update(
+                {
+                    "handoff_require_suite_consistency": True,
+                    "handoff_suite_consistency": "consistent",
+                    "handoff_suite_mismatch_count": 0,
+                    "handoff_selected_suite_path": "builtin:standard-zh",
+                }
+            )
+        promotions.append(promotion)
         if promoted:
             compare_names.append(item["name"])
             compare_paths.append(rel_run_path)

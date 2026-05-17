@@ -510,6 +510,11 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 
 后续继续推进时，在这里追加新的全局编号文档，或者在新的能力线目录继续拆分。
 
+## 最新补充
+
+- `221-v207-promotion-index-suite-guard-evidence.md`：第二百零七版代码讲解，把 promotion acceptance 的 handoff suite guard 继续汇入 promotion index。
+- `222-v208-promoted-comparison-suite-guard-evidence.md`：第二百零八版代码讲解，把 promotion index 的 handoff suite guard 继续接到 promoted-only comparison。
+
 ## 一句话总览
 
 本目录记录 MiniGPT 从“证据链越来越完整”转向“能解释项目成熟度、短板、benchmark 分数、分组弱项、prompt 正确性、多 run 正确性退化、跨 run scorecard 变化原因、数据卡、本地流式推理、流式推理硬化、请求历史可追溯、请求历史可筛选导出、请求历史单条详情 JSON、请求历史稳定性摘要、请求历史审计门禁、发布就绪 dashboard、release-quality maturity narrative、training portfolio pipeline、training portfolio comparison、training portfolio batch matrix、training scale planner、training scale gate、gated training scale run、training scale run comparison、training scale run decision、consolidated training scale workflow、controlled training scale handoff、training scale promotion acceptance、training scale promotion index、promoted training scale comparison、promoted training scale baseline decision 和下一阶段路线”的过程。
