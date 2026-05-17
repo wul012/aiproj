@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+197-v183-maintenance-pressure-builder-split.md
+ -> v183 code explanation: split module-pressure AST scanning, line-count status, summary, and recommendations into `maintenance_pressure.py`, while keeping maintenance batching/proposal policy, pressure report schema, artifact writers, script behavior, and old facade imports unchanged.
 196-v182-benchmark-scorecard-comparison-section-split.md
  -> v182 code explanation: split benchmark scorecard comparison Markdown/HTML section rendering into `benchmark_scorecard_comparison_sections.py`, while keeping comparison schema, JSON/CSV writers, case-delta CSV, script behavior, and old facade imports unchanged.
 195-v181-ci-workflow-hygiene-artifact-split.md

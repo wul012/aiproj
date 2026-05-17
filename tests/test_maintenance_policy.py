@@ -10,6 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.maintenance_policy import (  # noqa: E402
+    DEFAULT_MODULE_CRITICAL_LINES,
+    DEFAULT_MODULE_TOP_N,
+    DEFAULT_MODULE_WARNING_LINES,
     build_maintenance_batching_report,
     build_module_pressure_report,
     build_maintenance_proposal_decision,
@@ -20,6 +23,7 @@ from minigpt.maintenance_policy import (  # noqa: E402
     write_maintenance_batching_outputs,
     write_module_pressure_outputs,
 )
+from minigpt import maintenance_policy, maintenance_pressure  # noqa: E402
 
 
 class MaintenancePolicyTests(unittest.TestCase):
@@ -136,6 +140,13 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertEqual(report["top_modules"][0]["largest_function"], "handle")
             self.assertEqual(report["summary"]["decision"], "plan_targeted_split")
             self.assertIn("split", " ".join(report["recommendations"]))
+
+    def test_module_pressure_builder_is_split_but_legacy_export_stays(self) -> None:
+        self.assertIs(build_module_pressure_report, maintenance_pressure.build_module_pressure_report)
+        self.assertIs(maintenance_policy.build_module_pressure_report, maintenance_pressure.build_module_pressure_report)
+        self.assertEqual(DEFAULT_MODULE_WARNING_LINES, maintenance_pressure.DEFAULT_MODULE_WARNING_LINES)
+        self.assertEqual(DEFAULT_MODULE_CRITICAL_LINES, maintenance_pressure.DEFAULT_MODULE_CRITICAL_LINES)
+        self.assertEqual(DEFAULT_MODULE_TOP_N, maintenance_pressure.DEFAULT_MODULE_TOP_N)
 
     def test_module_pressure_report_handles_syntax_errors(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
