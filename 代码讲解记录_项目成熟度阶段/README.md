@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+200-v186-real-training-run-evidence.md
+ -> v186 code explanation: add real training run evidence reports, connect them into the training portfolio after the train step, and show how checkpoint, metrics, manifest, sample, and eval-suite status become promotion-review evidence.
 199-v185-training-scale-promotion-index-helper-split.md
  -> v185 code explanation: split training scale promotion index name resolution, promotion row construction, compare-input selection, summary, and recommendations into `training_scale_promotion_index_helpers.py`, while keeping the index schema, artifact writers, renderers, script behavior, and public API unchanged.
 198-v184-benchmark-scorecard-comparison-helper-split.md

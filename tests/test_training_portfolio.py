@@ -42,6 +42,7 @@ class TrainingPortfolioTests(unittest.TestCase):
             self.assertEqual([step["key"] for step in plan["steps"]], [
                 "prepare_dataset",
                 "train",
+                "training_run_evidence",
                 "eval_suite",
                 "generation_quality",
                 "benchmark_scorecard",
@@ -52,11 +53,15 @@ class TrainingPortfolioTests(unittest.TestCase):
                 "maturity_narrative",
             ])
             self.assertIn("checkpoint.pt", plan["artifacts"]["checkpoint"])
+            self.assertIn("training_run_evidence.json", plan["artifacts"]["training_run_evidence"])
             self.assertIn("dataset_card.json", plan["artifacts"]["dataset_card"])
             self.assertIn("--request-history-summary", plan["steps"][-1]["command"])
             train_command = " ".join(plan["steps"][1]["command"])
             self.assertIn("--max-iters 3", train_command)
             self.assertIn("--eval-iters 1", train_command)
+            evidence_command = " ".join(plan["steps"][2]["command"])
+            self.assertIn("build_training_run_evidence.py", evidence_command)
+            self.assertIn("training-run-evidence", evidence_command)
 
     def test_dry_run_report_marks_artifacts_as_planned(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

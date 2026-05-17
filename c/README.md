@@ -364,6 +364,9 @@ c/184/解释/说明.md
 c/185/图片
 c/185/解释/说明.md
  -> v185 training scale promotion index helper split 的运行截图和解释
+c/186/图片
+c/186/解释/说明.md
+ -> v186 real training run evidence 的运行截图和解释
 ```
 
 写入规则：

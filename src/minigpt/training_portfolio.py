@@ -72,6 +72,8 @@ def build_training_portfolio_plan(
         "run_dir": str(run_dir),
         "checkpoint": str(run_dir / "checkpoint.pt"),
         "run_manifest": str(run_dir / "run_manifest.json"),
+        "training_run_evidence": str(run_dir / "training-run-evidence" / "training_run_evidence.json"),
+        "training_run_evidence_html": str(run_dir / "training-run-evidence" / "training_run_evidence.html"),
         "eval_suite": str(eval_dir / "eval_suite.json"),
         "generation_quality": str(generation_quality_dir / "generation_quality.json"),
         "benchmark_scorecard": str(scorecard_dir / "benchmark_scorecard.json"),
@@ -124,6 +126,19 @@ def build_training_portfolio_plan(
                 sample_tokens=sample_tokens,
             ),
             [artifacts["checkpoint"], artifacts["run_manifest"]],
+        ),
+        _step(
+            "training_run_evidence",
+            "Summarize real checkpoint, metrics, manifest, and sample evidence",
+            [
+                python_executable,
+                str(root / "scripts" / "build_training_run_evidence.py"),
+                "--run-dir",
+                str(run_dir),
+                "--out-dir",
+                str(run_dir / "training-run-evidence"),
+            ],
+            [artifacts["training_run_evidence"], artifacts["training_run_evidence_html"]],
         ),
         _step(
             "eval_suite",
