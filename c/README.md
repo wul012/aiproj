@@ -442,6 +442,9 @@ c/212/解释/说明.md
 c/213/图片
 c/213/解释/说明.md
  -> v213 promoted training scale seed handoff alignment recommendations 的运行截图和解释
+c/214/图片
+c/214/解释/说明.md
+ -> v214 promoted training scale seed handoff clean evidence readiness 的运行截图和解释
 ```
 
 写入规则：

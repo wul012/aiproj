@@ -519,6 +519,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `225-v211-promoted-seed-handoff-suite-guard-evidence.md`：第二百一十一版代码讲解，把 promoted training-scale seed 的 handoff suite guard 继续接到 seed handoff，并顺手收束同语义 `first_present` / `utc_now` helper。
 - `226-v212-promoted-seed-handoff-suite-alignment-verdict.md`：第二百一十二版代码讲解，把 seed handoff 里的 selected/seed/plan suite path 变成显式 alignment verdict。
 - `227-v213-promoted-seed-handoff-alignment-recommendations.md`：第二百一十三版代码讲解，把 seed handoff alignment verdict 转成对应 review recommendations。
+- `228-v214-promoted-seed-handoff-clean-evidence-readiness.md`：第二百一十四版代码讲解，把 seed handoff alignment verdict 转成机器可消费的 clean-evidence readiness 字段。
 
 ## 一句话总览
 

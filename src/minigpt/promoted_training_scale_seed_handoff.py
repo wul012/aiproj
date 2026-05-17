@@ -160,6 +160,7 @@ def _summary(
     selected_handoff_suite_path = handoff_guard.get("selected_handoff_selected_suite_path")
     plan_suite_path = plan_suite.get("path") or plan_summary.get("suite_path")
     suite_alignment = _suite_alignment(selected_handoff_suite_path, seed_suite_path, plan_suite_path)
+    clean_evidence_readiness = _clean_evidence_readiness(execution.get("status"), suite_alignment)
     return {
         "handoff_status": execution.get("status"),
         "seed_status": seed.get("seed_status"),
@@ -189,6 +190,9 @@ def _summary(
         "seed_handoff_suite_alignment_detail": suite_alignment["detail"],
         "seed_handoff_suite_alignment_mismatch_count": suite_alignment["mismatch_count"],
         "seed_handoff_suite_alignment_missing_count": suite_alignment["missing_count"],
+        "seed_handoff_clean_evidence_ready": clean_evidence_readiness["ready"],
+        "seed_handoff_clean_evidence_status": clean_evidence_readiness["status"],
+        "seed_handoff_clean_evidence_detail": clean_evidence_readiness["detail"],
         "plan_scale_tier": plan_dataset.get("scale_tier"),
         "plan_variant_count": len(_list_of_dicts(plan_report.get("variants"))),
         "plan_source_count": plan_dataset.get("source_count"),
@@ -196,6 +200,40 @@ def _summary(
         "next_batch_command_available": bool(next_batch_command),
         "execution_returncode": execution.get("returncode"),
         "execution_elapsed_seconds": execution.get("elapsed_seconds"),
+    }
+
+
+def _clean_evidence_readiness(handoff_status: Any, suite_alignment: dict[str, Any]) -> dict[str, Any]:
+    alignment_status = str(suite_alignment.get("status") or "")
+    detail = str(suite_alignment.get("detail") or "")
+    if alignment_status == "consistent" and handoff_status == "completed":
+        return {
+            "ready": True,
+            "status": "ready",
+            "detail": "completed handoff has consistent suite alignment and can be used as clean comparison evidence",
+        }
+    if alignment_status == "pending-plan":
+        return {
+            "ready": False,
+            "status": "pending-plan",
+            "detail": "execute the seed handoff before treating clean comparison evidence as ready",
+        }
+    if alignment_status == "missing":
+        return {
+            "ready": False,
+            "status": "incomplete",
+            "detail": f"missing suite alignment evidence: {detail}",
+        }
+    if alignment_status == "mismatch":
+        return {
+            "ready": False,
+            "status": "review",
+            "detail": f"review suite alignment mismatch before using this as clean comparison evidence: {detail}",
+        }
+    return {
+        "ready": False,
+        "status": "review",
+        "detail": "review seed handoff suite alignment before treating this as clean comparison evidence",
     }
 
 
