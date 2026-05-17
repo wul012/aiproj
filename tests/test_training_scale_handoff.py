@@ -96,6 +96,33 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertIn("&lt;handoff&gt;", html)
             self.assertNotIn("<handoff>", html)
 
+    def test_carries_suite_guard_from_workflow_and_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(
+                root,
+                decision_status="ready",
+                require_suite_consistency=True,
+                suite_consistency="consistent",
+                suite_mismatch_count=0,
+                selected_suite_path=str(root / "suite" / "standard-zh.json"),
+            )
+
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+            markdown = render_training_scale_handoff_markdown(report)
+            html = render_training_scale_handoff_html(report)
+            outputs = write_training_scale_handoff_outputs(report, root / "handoff")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+
+            self.assertTrue(report["suite_guard"]["decision_require_suite_consistency"])
+            self.assertEqual(report["summary"]["decision_require_suite_consistency"], True)
+            self.assertEqual(report["summary"]["suite_consistency"], "consistent")
+            self.assertEqual(report["summary"]["suite_mismatch_count"], 0)
+            self.assertIn("Require suite consistency", markdown)
+            self.assertIn("Require suite consistency", html)
+            self.assertIn("decision_require_suite_consistency", csv_text)
+            self.assertIn("suite_consistency", csv_text)
+
     def _write_workflow(
         self,
         root: Path,
@@ -103,6 +130,10 @@ class TrainingScaleHandoffTests(unittest.TestCase):
         decision_status: str,
         command: list[str] | None = None,
         title: str = "MiniGPT workflow",
+        require_suite_consistency: bool = False,
+        suite_consistency: str | None = None,
+        suite_mismatch_count: int | None = None,
+        selected_suite_path: str | None = None,
     ) -> Path:
         workflow_dir = root / "workflow"
         decision_dir = workflow_dir / "decision"
@@ -126,6 +157,10 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "decision_status": decision_status,
                 "selected_run_name": "review",
                 "recommended_action": "execute_selected_run",
+                "require_suite_consistency": require_suite_consistency,
+                "suite_consistency": suite_consistency,
+                "suite_mismatch_count": suite_mismatch_count,
+                "selected_suite_path": selected_suite_path,
             },
         }
         decision_path = decision_dir / "training_scale_run_decision.json"
@@ -138,6 +173,12 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "decision_status": decision_status,
                 "selected_profile": "review",
                 "recommended_action": decision["recommended_action"],
+                "decision_require_suite_consistency": require_suite_consistency,
+                "suite_consistency": suite_consistency,
+                "suite_mismatch_count": suite_mismatch_count,
+                "selected_suite_path": selected_suite_path,
+                "suite_name": "standard-zh" if selected_suite_path else None,
+                "suite_path": selected_suite_path,
             },
             "decision_outputs": {"json": str(decision_path)},
         }

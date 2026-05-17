@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+219-v205-workflow-handoff-suite-guard-evidence.md
+ -> v205 code explanation: carry the strict suite-consistency guard from the workflow decision into the controlled handoff report so reviewed execute commands keep the suite boundary visible in JSON/CSV/Markdown/HTML evidence.
 218-v204-workflow-suite-guard-handoff.md
  -> v204 code explanation: carry the opt-in suite-consistency guard into the consolidated training-scale workflow through `decision_require_suite_consistency` / `--decision-require-suite-consistency` and workflow artifacts.
 217-v203-strict-suite-consistency-decision-guard.md

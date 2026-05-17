@@ -56,13 +56,15 @@ def build_training_scale_handoff(
         timeout_seconds=timeout_seconds,
     )
     artifact_rows = _artifact_rows(command)
-    summary = _summary(workflow, decision, execution, artifact_rows)
+    suite_guard = _suite_guard(workflow, decision)
+    summary = _summary(workflow, decision, execution, artifact_rows, suite_guard=suite_guard)
     return {
         "schema_version": 1,
         "title": title,
         "generated_at": generated_at or utc_now(),
         "workflow_path": str(workflow_file),
         "workflow_summary": _dict(workflow.get("summary")),
+        "suite_guard": suite_guard,
         "decision_path": _dict(workflow.get("decision_outputs")).get("json"),
         "decision_status": decision_status,
         "allow_review": bool(allow_review),
@@ -96,6 +98,10 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
         "elapsed_seconds",
         "artifact_count",
         "available_artifact_count",
+        "decision_require_suite_consistency",
+        "suite_consistency",
+        "suite_mismatch_count",
+        "selected_suite_path",
         "command",
         "blocked_reason",
     ]
@@ -108,6 +114,10 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
             "elapsed_seconds": execution.get("elapsed_seconds"),
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
+            "decision_require_suite_consistency": summary.get("decision_require_suite_consistency"),
+            "suite_consistency": summary.get("suite_consistency"),
+            "suite_mismatch_count": summary.get("suite_mismatch_count"),
+            "selected_suite_path": summary.get("selected_suite_path"),
             "command": report.get("command_text"),
             "blocked_reason": report.get("blocked_reason"),
         },
@@ -128,6 +138,9 @@ def render_training_scale_handoff_markdown(report: dict[str, Any]) -> str:
         f"- Execute: `{report.get('execute')}`",
         f"- Return code: `{execution.get('returncode')}`",
         f"- Artifacts: `{summary.get('available_artifact_count')}/{summary.get('artifact_count')}`",
+        f"- Require suite consistency: `{summary.get('decision_require_suite_consistency')}`",
+        f"- Suite consistency: `{summary.get('suite_consistency')}`",
+        f"- Selected suite path: `{summary.get('selected_suite_path')}`",
         "",
         "## Command",
         "",
@@ -172,6 +185,8 @@ def render_training_scale_handoff_html(report: dict[str, Any]) -> str:
         ("Return", execution.get("returncode")),
         ("Elapsed", execution.get("elapsed_seconds")),
         ("Artifacts", f"{summary.get('available_artifact_count')}/{summary.get('artifact_count')}"),
+        ("Require suite consistency", summary.get("decision_require_suite_consistency")),
+        ("Suite", summary.get("suite_consistency")),
     ]
     return "\n".join(
         [
@@ -342,6 +357,8 @@ def _summary(
     decision: dict[str, Any],
     execution: dict[str, Any],
     artifact_rows: list[dict[str, Any]],
+    *,
+    suite_guard: dict[str, Any],
 ) -> dict[str, Any]:
     decision_summary = _dict(decision.get("summary"))
     workflow_summary = _dict(workflow.get("summary"))
@@ -350,6 +367,11 @@ def _summary(
         "decision_status": decision.get("decision_status") or workflow_summary.get("decision_status"),
         "selected_profile": decision_summary.get("selected_run_name") or workflow_summary.get("selected_profile"),
         "recommended_action": decision.get("recommended_action") or workflow_summary.get("recommended_action"),
+        "decision_require_suite_consistency": suite_guard.get("decision_require_suite_consistency"),
+        "require_suite_consistency": suite_guard.get("require_suite_consistency"),
+        "suite_consistency": suite_guard.get("suite_consistency"),
+        "suite_mismatch_count": suite_guard.get("suite_mismatch_count"),
+        "selected_suite_path": suite_guard.get("selected_suite_path"),
         "artifact_count": len(artifact_rows),
         "available_artifact_count": count_available_artifacts(artifact_rows),
         "returncode": execution.get("returncode"),
@@ -357,6 +379,8 @@ def _summary(
 
 
 def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifact_rows: list[dict[str, Any]]) -> list[str]:
+    if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
+        return ["Fix benchmark suite consistency before executing this handoff as clean model-quality evidence."]
     status = str(summary.get("handoff_status") or "")
     if status == "planned":
         return ["Review the handoff command, then rerun this tool with --execute when ready."]
@@ -369,6 +393,32 @@ def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifac
     if artifact_rows and summary.get("available_artifact_count") != summary.get("artifact_count"):
         return ["Execution completed, but some expected artifacts are missing; inspect the batch output tree."]
     return ["Execution completed and expected handoff artifacts were found."]
+
+
+def _suite_guard(workflow: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
+    decision_summary = _dict(decision.get("summary"))
+    workflow_summary = _dict(workflow.get("summary"))
+    required = (
+        decision_summary.get("require_suite_consistency")
+        if "require_suite_consistency" in decision_summary
+        else workflow_summary.get("decision_require_suite_consistency")
+    )
+    return {
+        "decision_require_suite_consistency": bool(required),
+        "require_suite_consistency": bool(required),
+        "suite_consistency": _first_present(decision_summary.get("suite_consistency"), workflow_summary.get("suite_consistency")),
+        "suite_mismatch_count": _first_present(decision_summary.get("suite_mismatch_count"), workflow_summary.get("suite_mismatch_count")),
+        "selected_suite_path": _first_present(decision_summary.get("selected_suite_path"), workflow_summary.get("selected_suite_path")),
+        "workflow_suite_path": workflow_summary.get("suite_path"),
+        "workflow_suite_name": workflow_summary.get("suite_name"),
+    }
+
+
+def _first_present(*values: Any) -> Any:
+    for value in values:
+        if value is not None:
+            return value
+    return None
 
 
 def _option_value(command: list[str], option: str) -> str | None:
