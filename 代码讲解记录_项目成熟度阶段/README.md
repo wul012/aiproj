@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+192-v178-server-post-route-split.md
+ -> v178 code explanation: split MiniGPT server POST route handling for `/api/generate`, `/api/generate-stream`, `/api/generate-pair`, and `/api/generate-pair-artifact` into `server_post_routes.py`, while keeping request parsing, checkpoint resolution, SSE timeout/cancel behavior, pair artifact writing, request logging, handler assembly, and old server facade exports unchanged.
 191-v177-dashboard-section-helper-split.md
  -> v177 code explanation: split dashboard style, stats grid, artifact cards, content sections, links, images, formatting, and escaping helpers into `dashboard_sections.py`, while keeping dashboard payload building, artifact collection, write_dashboard, script usage, legacy render export, and public render entrypoint unchanged.
 190-v176-benchmark-scorecard-decision-artifact-split.md

@@ -340,6 +340,9 @@ c/176/解释/说明.md
 c/177/图片
 c/177/解释/说明.md
  -> v177 dashboard section helper split 的运行截图和解释
+c/178/图片
+c/178/解释/说明.md
+ -> v178 server POST route split 的运行截图和解释
 ```
 
 写入规则：
