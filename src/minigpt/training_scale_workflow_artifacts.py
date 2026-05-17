@@ -63,6 +63,7 @@ def render_training_scale_workflow_markdown(report: dict[str, Any]) -> str:
         f"- Generated: `{report.get('generated_at')}`",
         f"- Scale: `{plan.get('scale_tier')}`",
         f"- Characters: `{plan.get('char_count')}`",
+        f"- Suite: `{summary.get('suite_path')}`",
         f"- Profiles: `{', '.join(_string_list(report.get('profiles')))}`",
         f"- Decision: `{summary.get('decision_status')}`",
         f"- Selected profile: `{summary.get('selected_profile')}`",
@@ -123,6 +124,7 @@ def render_training_scale_workflow_html(report: dict[str, Any]) -> str:
     stats = [
         ("Scale", plan.get("scale_tier")),
         ("Chars", plan.get("char_count")),
+        ("Suite", summary.get("suite_path")),
         ("Profiles", summary.get("profile_count")),
         ("Allowed", summary.get("allowed_count")),
         ("Blocked", summary.get("blocked_count")),

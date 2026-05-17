@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+214-v200-training-scale-standard-suite-handoff.md
+ -> v200 code explanation: carry the v199 standard Chinese suite selection into training-scale plan, gated run, and consolidated workflow evidence through `suite_name`, `suite.path=builtin:standard-zh`, and generated `--suite-name standard-zh` batch handoff commands.
 213-v199-portfolio-standard-suite-selection.md
  -> v199 code explanation: connect the v198 standard Chinese benchmark suite into training portfolio and batch planning through `suite_name`, `--suite-name standard-zh`, and `builtin:standard-zh` plan evidence.
 212-v198-standard-zh-benchmark-suite.md

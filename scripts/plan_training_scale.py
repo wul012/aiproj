@@ -23,6 +23,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset-name", type=str, default="portfolio-zh")
     parser.add_argument("--dataset-version-prefix", type=str, default="v70")
     parser.add_argument("--dataset-description", type=str, default="MiniGPT corpus planned for scale-aware training.")
+    parser.add_argument("--suite", type=Path, default=None, help="Optional prompt suite JSON for the generated batch command.")
+    parser.add_argument("--suite-name", choices=["default", "standard-zh"], default=None, help="Use a built-in prompt suite for the generated batch command.")
     parser.add_argument("--max-variants", type=int, default=3)
     parser.add_argument("--sample-prompt", type=str, default="MiniGPT")
     parser.add_argument("--python", type=str, default=sys.executable)
@@ -41,6 +43,8 @@ def main() -> None:
         dataset_name=args.dataset_name,
         dataset_version_prefix=args.dataset_version_prefix,
         dataset_description=args.dataset_description,
+        suite_path=args.suite,
+        suite_name=args.suite_name,
         recursive=not args.no_recursive,
         max_variants=args.max_variants,
         python_executable=args.python,

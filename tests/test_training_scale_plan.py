@@ -49,6 +49,44 @@ class TrainingScalePlanTests(unittest.TestCase):
             self.assertIn("run_training_portfolio_batch.py", " ".join(report["batch"]["command"]))
             self.assertEqual(report["variant_matrix"][0]["token_budget"], 8 * 64 * 50)
 
+    def test_build_training_scale_plan_accepts_builtin_standard_suite(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "corpus.txt"
+            source.write_text(("MiniGPT 训练规模规划。\n" * 180), encoding="utf-8")
+
+            report = build_training_scale_plan(
+                [source],
+                project_root=root,
+                out_root=root / "scale",
+                dataset_name="demo-zh",
+                dataset_version_prefix="v70",
+                suite_name="standard-zh",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            batch_command = " ".join(report["batch"]["command"])
+            self.assertEqual(report["suite"], {"mode": "builtin", "name": "standard-zh", "path": "builtin:standard-zh"})
+            self.assertEqual(report["suite_path"], "builtin:standard-zh")
+            self.assertIn("--suite-name standard-zh", batch_command)
+            self.assertNotIn("--suite ", batch_command)
+
+    def test_build_training_scale_plan_rejects_suite_name_and_path_together(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "corpus.txt"
+            source.write_text(("MiniGPT 训练规模规划。\n" * 180), encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                build_training_scale_plan(
+                    [source],
+                    project_root=root,
+                    out_root=root / "scale",
+                    suite_path=root / "suite.json",
+                    suite_name="standard-zh",
+                    generated_at="2026-05-14T00:00:00Z",
+                )
+
     def test_write_outputs_and_variants_are_batch_compatible(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

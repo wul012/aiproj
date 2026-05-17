@@ -46,6 +46,33 @@ class TrainingScaleRunTests(unittest.TestCase):
             self.assertTrue((root / "run" / "batch" / "training_portfolio_batch.json").exists())
             self.assertTrue((root / "run" / "training_scale_run.json").exists())
 
+    def test_review_gate_can_handoff_builtin_standard_suite(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "corpus.txt"
+            source.write_text(("MiniGPT gated scale run data.\n" * 40), encoding="utf-8")
+            plan = build_training_scale_plan(
+                [source],
+                project_root=root,
+                out_root=root / "scale",
+                suite_name="standard-zh",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            plan_outputs = write_training_scale_plan_outputs(plan, root / "scale")
+
+            report = run_training_scale_plan(
+                plan_outputs["json"],
+                project_root=root,
+                out_root=root / "run",
+                gate_profile="review",
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(report["scale_plan_summary"]["suite_mode"], "builtin")
+            self.assertEqual(report["scale_plan_summary"]["suite_path"], "builtin:standard-zh")
+            self.assertEqual(report["batch_summary"]["suite_path"], "builtin:standard-zh")
+            self.assertTrue(report["batch_outputs"])
+
     def test_warn_plan_can_be_blocked(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

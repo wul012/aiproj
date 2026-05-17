@@ -406,6 +406,9 @@ c/198/解释/说明.md
 c/199/图片
 c/199/解释/说明.md
  -> v199 portfolio standard suite selection 的运行截图和解释
+c/200/图片
+c/200/解释/说明.md
+ -> v200 training scale standard suite handoff 的运行截图和解释
 ```
 
 写入规则：

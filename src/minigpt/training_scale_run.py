@@ -62,6 +62,7 @@ def run_training_scale_plan(
     batch_outputs: dict[str, str] = {}
     if allowed:
         variants = load_training_portfolio_batch_variants(variants_path)
+        suite = _dict(scale_plan.get("suite"))
         batch_plan = build_training_portfolio_batch_plan(
             root,
             [Path(source) for source in _list_of_strings(scale_plan.get("sources"))],
@@ -69,6 +70,8 @@ def run_training_scale_plan(
             variants=variants,
             dataset_name=str(_dict(scale_plan.get("dataset")).get("name") or "portfolio-zh"),
             dataset_description=str(_dict(scale_plan.get("dataset")).get("description") or "MiniGPT gated scale run dataset."),
+            suite_path=None if suite.get("mode") == "builtin" else suite.get("path"),
+            suite_name=suite.get("name") if suite.get("mode") == "builtin" else None,
             python_executable=python_executable,
             baseline=str(_dict(scale_plan.get("batch")).get("baseline") or variants[0]["name"]),
             title="MiniGPT gated training portfolio batch",
@@ -141,6 +144,7 @@ def render_training_scale_run_markdown(report: dict[str, Any]) -> str:
         f"- Allowed: `{report.get('allowed')}`",
         f"- Gate: `{gate.get('overall_status')}` / `{report.get('gate_profile')}`",
         f"- Execute: `{report.get('execute')}`",
+        f"- Suite: `{_dict(report.get('scale_plan_summary')).get('suite_path')}`",
         f"- Batch status: `{batch.get('status')}`",
         f"- Plan: `{report.get('plan_path')}`",
         f"- Variants: `{report.get('variants_path')}`",
@@ -192,6 +196,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
         ("Gate", gate.get("overall_status")),
         ("Profile", report.get("gate_profile")),
         ("Dataset", plan.get("dataset_name")),
+        ("Suite", plan.get("suite_path")),
         ("Execute", report.get("execute")),
         ("Scale", plan.get("scale_tier")),
         ("Variants", plan.get("variant_count")),
@@ -275,6 +280,9 @@ def _scale_plan_summary(plan: dict[str, Any]) -> dict[str, Any]:
         "warning_count": dataset.get("warning_count"),
         "variant_count": len(_list_of_dicts(plan.get("variants"))),
         "baseline": _dict(plan.get("batch")).get("baseline"),
+        "suite_mode": _dict(plan.get("suite")).get("mode"),
+        "suite_name": _dict(plan.get("suite")).get("name"),
+        "suite_path": _dict(plan.get("suite")).get("path"),
     }
 
 
@@ -292,12 +300,16 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
     if not batch_report:
         return {"status": "skipped", "variant_count": 0, "comparison_status": "skipped"}
     execution = _dict(batch_report.get("execution"))
+    first_variant = _dict(next(iter(_list_of_dicts(batch_report.get("variants"))), {}))
+    first_plan = _dict(first_variant.get("portfolio_plan"))
     return {
         "status": execution.get("status"),
         "variant_count": execution.get("variant_count"),
         "completed_variant_count": execution.get("completed_variant_count"),
         "failed_variant": execution.get("failed_variant"),
         "comparison_status": execution.get("comparison_status"),
+        "suite_path": first_plan.get("suite_path"),
+        "suite_name": _dict(first_plan.get("suite")).get("name"),
     }
 
 

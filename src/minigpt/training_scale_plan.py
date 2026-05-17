@@ -37,6 +37,8 @@ def build_training_scale_plan(
     dataset_name: str = "portfolio-zh",
     dataset_version_prefix: str = "v70",
     dataset_description: str = "MiniGPT corpus planned for scale-aware training.",
+    suite_path: str | Path | None = None,
+    suite_name: str | None = None,
     recursive: bool = True,
     max_variants: int = 3,
     python_executable: str = "python",
@@ -53,6 +55,8 @@ def build_training_scale_plan(
     out = Path(out_root)
     root = Path(project_root) if project_root is not None else Path.cwd()
     batch_out = Path(batch_out_root) if batch_out_root is not None else out.parent / "training-portfolio-batch-from-scale-plan"
+    suite_ref = _suite_ref(root, suite_path=suite_path, suite_name=suite_name)
+    suite_args = _suite_args(root, suite_ref)
     variants = _recommended_variants(
         tier,
         char_count=dataset.char_count,
@@ -75,6 +79,7 @@ def build_training_scale_plan(
         dataset_name,
         "--baseline",
         str(variants[0]["name"]),
+        *suite_args,
     ]
     report = {
         "schema_version": 1,
@@ -103,6 +108,8 @@ def build_training_scale_plan(
         },
         "sources_detail": dataset_report["sources"],
         "quality_issues": quality.get("issues", []),
+        "suite": suite_ref,
+        "suite_path": suite_ref["path"],
         "variants": variants,
         "variant_matrix": matrix,
         "batch": {
@@ -295,6 +302,25 @@ def _recommendations(tier: str, quality: dict[str, Any], matrix: list[dict[str, 
             f"The largest planned token budget is {best.get('token_budget')} tokens in `{best.get('name')}`."
         )
     return recommendations
+
+
+def _suite_ref(root: Path, *, suite_path: str | Path | None, suite_name: str | None) -> dict[str, Any]:
+    if suite_name and suite_path is not None:
+        raise ValueError("suite_name and suite_path cannot both be provided")
+    if suite_name:
+        return {"mode": "builtin", "name": str(suite_name), "path": f"builtin:{suite_name}"}
+    suite = Path(suite_path) if suite_path is not None else root / "data" / "eval_prompts.json"
+    return {"mode": "file", "name": None, "path": str(suite)}
+
+
+def _suite_args(root: Path, suite_ref: dict[str, Any]) -> list[str]:
+    if suite_ref.get("mode") == "builtin":
+        return ["--suite-name", str(suite_ref.get("name"))]
+    default_suite = root / "data" / "eval_prompts.json"
+    suite_path = Path(str(suite_ref.get("path") or ""))
+    if suite_path == default_suite:
+        return []
+    return ["--suite", str(suite_path)]
 
 
 __all__ = [

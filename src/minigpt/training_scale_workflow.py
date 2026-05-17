@@ -39,6 +39,8 @@ def run_training_scale_workflow(
     dataset_name: str = "portfolio-zh",
     dataset_version_prefix: str = "v75",
     dataset_description: str = "MiniGPT corpus planned for scale-aware training.",
+    suite_path: str | Path | None = None,
+    suite_name: str | None = None,
     recursive: bool = True,
     max_variants: int = 3,
     sample_prompt: str = "MiniGPT",
@@ -70,6 +72,8 @@ def run_training_scale_workflow(
         dataset_name=dataset_name,
         dataset_version_prefix=dataset_version_prefix,
         dataset_description=dataset_description,
+        suite_path=suite_path,
+        suite_name=suite_name,
         recursive=recursive,
         max_variants=max_variants,
         python_executable=python_executable,
@@ -202,6 +206,9 @@ def _plan_summary(plan: dict[str, Any]) -> dict[str, Any]:
         "warning_count": dataset.get("warning_count"),
         "variant_count": len(_list_of_dicts(plan.get("variants"))),
         "baseline": _dict(plan.get("batch")).get("baseline"),
+        "suite_mode": _dict(plan.get("suite")).get("mode"),
+        "suite_name": _dict(plan.get("suite")).get("name"),
+        "suite_path": _dict(plan.get("suite")).get("path"),
     }
 
 
@@ -228,6 +235,9 @@ def _workflow_summary(
         "selected_gate_status": selected.get("gate_status") or decision_summary.get("selected_gate_status"),
         "selected_batch_status": selected.get("batch_status") or decision_summary.get("selected_batch_status"),
         "selected_readiness_score": selected.get("readiness_score") or decision_summary.get("selected_readiness_score"),
+        "suite_mode": _dict(plan.get("suite")).get("mode"),
+        "suite_name": _dict(plan.get("suite")).get("name"),
+        "suite_path": _dict(plan.get("suite")).get("path"),
     }
 
 

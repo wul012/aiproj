@@ -48,6 +48,30 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             self.assertTrue((root / "workflow" / "training_scale_workflow.html").exists())
             self.assertIn("--execute", report["execute_command_text"])
 
+    def test_workflow_can_use_builtin_standard_suite(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._write_source(root)
+
+            report = run_training_scale_workflow(
+                [source],
+                project_root=root,
+                out_root=root / "workflow",
+                profiles=["review", "standard"],
+                baseline_profile="review",
+                suite_name="standard-zh",
+                generated_at="2026-05-14T00:00:00Z",
+                python_executable="python",
+            )
+
+            self.assertEqual(report["plan_summary"]["suite_mode"], "builtin")
+            self.assertEqual(report["plan_summary"]["suite_name"], "standard-zh")
+            self.assertEqual(report["plan_summary"]["suite_path"], "builtin:standard-zh")
+            plan_payload = json.loads(Path(report["plan_outputs"]["json"]).read_text(encoding="utf-8"))
+            self.assertIn("--suite-name", plan_payload["batch"]["command"])
+            self.assertIn("standard-zh", plan_payload["batch"]["command"])
+            self.assertIn("builtin:standard-zh", report["summary"]["suite_path"])
+
     def test_strict_decision_blocks_warn_candidate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
