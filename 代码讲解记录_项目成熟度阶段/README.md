@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+220-v206-promotion-suite-guard-evidence.md
+ -> v206 code explanation: carry handoff suite guard evidence into training-scale promotion acceptance reports so promoted/review/blocked decisions retain the clean-comparison boundary without changing promotion status semantics.
 219-v205-workflow-handoff-suite-guard-evidence.md
  -> v205 code explanation: carry the strict suite-consistency guard from the workflow decision into the controlled handoff report so reviewed execute commands keep the suite boundary visible in JSON/CSV/Markdown/HTML evidence.
 218-v204-workflow-suite-guard-handoff.md

@@ -84,6 +84,27 @@ class TrainingScalePromotionTests(unittest.TestCase):
             self.assertIn("&lt;Promotion&gt;", html)
             self.assertNotIn("<Promotion>", html)
 
+    def test_carries_handoff_suite_guard_into_promotion_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(root, include_suite_guard=True)
+
+            report = build_training_scale_promotion(handoff_dir)
+            outputs = write_training_scale_promotion_outputs(report, root / "promotion")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_promotion_markdown(report)
+            html = render_training_scale_promotion_html(report)
+
+            self.assertEqual(report["summary"]["promotion_status"], "promoted")
+            self.assertTrue(report["suite_guard"]["handoff_require_suite_consistency"])
+            self.assertEqual(report["summary"]["handoff_suite_consistency"], "consistent")
+            self.assertEqual(report["summary"]["handoff_selected_suite_path"], "builtin:standard-zh")
+            self.assertIn("handoff_require_suite_consistency", csv_text)
+            self.assertIn("Handoff require suite consistency", markdown)
+            self.assertIn("Handoff suite mismatch count", markdown)
+            self.assertIn("Handoff strict suite", html)
+            self.assertIn("Selected suite", html)
+
     def test_facade_keeps_legacy_artifact_exports(self) -> None:
         self.assertIs(
             training_scale_promotion_facade.write_training_scale_promotion_outputs,
@@ -99,7 +120,7 @@ class TrainingScalePromotionTests(unittest.TestCase):
         )
 
 
-def make_completed_handoff_tree(root: Path, missing: set[str] | None = None) -> Path:
+def make_completed_handoff_tree(root: Path, missing: set[str] | None = None, *, include_suite_guard: bool = False) -> Path:
     missing = missing or set()
     scale_root = root / "runs" / "scale"
     batch_root = scale_root / "batch"
@@ -166,30 +187,47 @@ def make_completed_handoff_tree(root: Path, missing: set[str] | None = None) -> 
         },
     )
     (batch_root / "training_portfolio_batch.html").write_text("<html>batch</html>", encoding="utf-8")
-    write_json(
-        handoff_dir / "training_scale_handoff.json",
-        {
-            "summary": {"handoff_status": "completed", "artifact_count": 6, "available_artifact_count": 6},
-            "execution": {"status": "completed", "returncode": 0},
-            "command": [
-                "python",
-                "scripts/run_training_scale_plan.py",
-                "--project-root",
-                str(root),
-                "--out-root",
-                "runs/scale",
-                "--execute",
-            ],
-            "artifact_rows": [
-                {"key": "training_scale_run_json", "path": "runs/scale/training_scale_run.json", "exists": True},
-                {"key": "training_scale_run_html", "path": "runs/scale/training_scale_run.html", "exists": True},
-                {"key": "batch_json", "path": "runs/scale/batch/training_portfolio_batch.json", "exists": True},
-                {"key": "batch_html", "path": "runs/scale/batch/training_portfolio_batch.html", "exists": True},
-                {"key": "variant_portfolio_reports", "path": "runs/scale/batch/variants", "exists": True, "count": 1},
-                {"key": "variant_checkpoints", "path": "runs/scale/batch/variants", "exists": True, "count": 1},
-            ],
-        },
-    )
+    handoff_payload = {
+        "summary": {"handoff_status": "completed", "artifact_count": 6, "available_artifact_count": 6},
+        "execution": {"status": "completed", "returncode": 0},
+        "command": [
+            "python",
+            "scripts/run_training_scale_plan.py",
+            "--project-root",
+            str(root),
+            "--out-root",
+            "runs/scale",
+            "--execute",
+        ],
+        "artifact_rows": [
+            {"key": "training_scale_run_json", "path": "runs/scale/training_scale_run.json", "exists": True},
+            {"key": "training_scale_run_html", "path": "runs/scale/training_scale_run.html", "exists": True},
+            {"key": "batch_json", "path": "runs/scale/batch/training_portfolio_batch.json", "exists": True},
+            {"key": "batch_html", "path": "runs/scale/batch/training_portfolio_batch.html", "exists": True},
+            {"key": "variant_portfolio_reports", "path": "runs/scale/batch/variants", "exists": True, "count": 1},
+            {"key": "variant_checkpoints", "path": "runs/scale/batch/variants", "exists": True, "count": 1},
+        ],
+    }
+    if include_suite_guard:
+        handoff_payload["suite_guard"] = {
+            "decision_require_suite_consistency": True,
+            "require_suite_consistency": True,
+            "suite_consistency": "consistent",
+            "suite_mismatch_count": 0,
+            "selected_suite_path": "builtin:standard-zh",
+            "workflow_suite_path": "builtin:standard-zh",
+            "workflow_suite_name": "standard-zh",
+        }
+        handoff_payload["summary"].update(
+            {
+                "decision_require_suite_consistency": True,
+                "require_suite_consistency": True,
+                "suite_consistency": "consistent",
+                "suite_mismatch_count": 0,
+                "selected_suite_path": "builtin:standard-zh",
+            }
+        )
+    write_json(handoff_dir / "training_scale_handoff.json", handoff_payload)
     return handoff_dir
 
 

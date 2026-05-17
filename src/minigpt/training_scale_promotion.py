@@ -63,8 +63,9 @@ def build_training_scale_promotion(
     batch = _read_json(batch_path)
     variants = _variant_rows(batch, project_root, handoff_dir)
     evidence_rows = _evidence_rows(handoff_file, handoff, scale_run_path, batch_path, variants, project_root, handoff_dir)
+    suite_guard = _suite_guard(handoff)
     blockers, review_items = _issues(handoff, scale_run, batch, variants, evidence_rows)
-    summary = _summary(handoff, scale_run, batch, variants, evidence_rows, blockers, review_items)
+    summary = _summary(handoff, scale_run, batch, variants, evidence_rows, blockers, review_items, suite_guard)
     return {
         "schema_version": 1,
         "title": title,
@@ -72,6 +73,7 @@ def build_training_scale_promotion(
         "handoff_path": str(handoff_file),
         "project_root": str(project_root),
         "out_root": str(out_root),
+        "suite_guard": suite_guard,
         "handoff_summary": _dict(handoff.get("summary")),
         "training_scale_run_path": str(scale_run_path),
         "training_scale_run": _scale_run_digest(scale_run),
@@ -247,6 +249,7 @@ def _summary(
     evidence_rows: list[dict[str, Any]],
     blockers: list[str],
     review_items: list[str],
+    suite_guard: dict[str, Any],
 ) -> dict[str, Any]:
     ready_variants = [row for row in variants if row.get("promotion_status") == "ready"]
     required_total = sum(int(row.get("required_artifact_count") or 0) for row in variants)
@@ -255,6 +258,10 @@ def _summary(
     return {
         "promotion_status": promotion_status,
         "handoff_status": _dict(handoff.get("summary")).get("handoff_status") or _dict(handoff.get("execution")).get("status"),
+        "handoff_require_suite_consistency": suite_guard.get("handoff_require_suite_consistency"),
+        "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
+        "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
+        "handoff_selected_suite_path": suite_guard.get("handoff_selected_suite_path"),
         "scale_run_status": scale_run.get("status"),
         "batch_status": _nested(batch, "execution", "status") or _nested(scale_run, "batch_summary", "status"),
         "variant_count": len(variants),
@@ -308,6 +315,33 @@ def _recommendations(summary: dict[str, Any], blockers: list[str], review_items:
     if review_items:
         return ["Review missing optional evidence before treating this handoff as a mature baseline."]
     return ["Inspect the promotion summary before selecting the next larger training profile."]
+
+
+def _suite_guard(handoff: dict[str, Any]) -> dict[str, Any]:
+    handoff_summary = _dict(handoff.get("summary"))
+    guard = _dict(handoff.get("suite_guard"))
+    required = guard.get("decision_require_suite_consistency")
+    if required is None:
+        required = guard.get("require_suite_consistency")
+    if required is None:
+        required = handoff_summary.get("decision_require_suite_consistency")
+    if required is None:
+        required = handoff_summary.get("require_suite_consistency")
+    return {
+        "handoff_require_suite_consistency": bool(required),
+        "handoff_suite_consistency": _first_present(guard.get("suite_consistency"), handoff_summary.get("suite_consistency")),
+        "handoff_suite_mismatch_count": _first_present(guard.get("suite_mismatch_count"), handoff_summary.get("suite_mismatch_count")),
+        "handoff_selected_suite_path": _first_present(guard.get("selected_suite_path"), handoff_summary.get("selected_suite_path")),
+        "workflow_suite_path": guard.get("workflow_suite_path") or handoff_summary.get("workflow_suite_path"),
+        "workflow_suite_name": guard.get("workflow_suite_name") or handoff_summary.get("workflow_suite_name"),
+    }
+
+
+def _first_present(*values: Any) -> Any:
+    for value in values:
+        if value is not None:
+            return value
+    return None
 
 
 def _artifact_exists(rows: list[dict[str, Any]], key: str) -> bool:
