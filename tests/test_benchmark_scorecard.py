@@ -196,6 +196,27 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertIn("Rubric Scores", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Task Type Drilldown", Path(outputs["html"]).read_text(encoding="utf-8"))
 
+    def test_build_benchmark_scorecard_accepts_underscore_generation_quality_dir(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir, registry_path = make_run(Path(tmp))
+            source = run_dir / "generation-quality"
+            target = run_dir / "generation_quality"
+            target.mkdir()
+            (target / "generation_quality.json").write_text(
+                (source / "generation_quality.json").read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+            (source / "generation_quality.json").unlink()
+
+            scorecard = build_benchmark_scorecard(run_dir, registry_path=registry_path)
+
+            self.assertEqual(scorecard["summary"]["generation_quality_total_flags"], 3)
+            self.assertEqual(scorecard["summary"]["generation_quality_dominant_flag"], "low_diversity")
+            generation_quality = next(item for item in scorecard["components"] if item["key"] == "generation_quality")
+            self.assertIn("generation_quality", generation_quality["evidence_path"])
+            evidence = next(item for item in scorecard["components"] if item["key"] == "evidence_completeness")
+            self.assertTrue(evidence["metrics"]["generation_quality"])
+
     def test_render_benchmark_scorecard_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir, registry_path = make_run(Path(tmp))

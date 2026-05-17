@@ -235,14 +235,16 @@ def _pair_delta_stability_component(pair_batch: Any, path: Path) -> dict[str, An
 def _evidence_completeness_component(root: Path) -> dict[str, Any]:
     paths = [
         root / "eval_suite" / "eval_suite.json",
+        root / "generation_quality" / "generation_quality.json",
         root / "generation-quality" / "generation_quality.json",
+        root / "eval_suite" / "generation_quality" / "generation_quality.json",
         root / "eval_suite" / "generation-quality" / "generation_quality.json",
         root / "pair_batch" / "pair_generation_batch.json",
         root / "pair_batch" / "pair_generation_batch.html",
     ]
     eval_exists = paths[0].exists()
-    quality_exists = paths[1].exists() or paths[2].exists()
-    pair_exists = paths[3].exists() and paths[4].exists()
+    quality_exists = any(path.exists() for path in paths[1:5])
+    pair_exists = paths[5].exists() and paths[6].exists()
     present = sum(1 for item in [eval_exists, quality_exists, pair_exists] if item)
     score = present / 3 * 100.0
     return _component(
@@ -382,7 +384,9 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], 
 
 def _read_generation_quality(root: Path, warnings: list[str]) -> dict[str, Any] | None:
     candidates = [
+        root / "generation_quality" / "generation_quality.json",
         root / "generation-quality" / "generation_quality.json",
+        root / "eval_suite" / "generation_quality" / "generation_quality.json",
         root / "eval_suite" / "generation-quality" / "generation_quality.json",
     ]
     for path in candidates:

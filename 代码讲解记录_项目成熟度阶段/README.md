@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+204-v190-benchmark-scorecard-generation-quality-path-compatibility.md
+ -> v190 code explanation: remove real scorecard-chain path friction by accepting both `generation_quality/` and `generation-quality/` locations, including `eval_suite/` variants, without changing benchmark scoring policy.
 203-v189-training-run-evidence-benchmark-scorecard-summary.md
  -> v189 code explanation: enrich real training run evidence with benchmark scorecard summaries, including overall status/score, rubric average, weakest rubric case, weakest task/difficulty groups, generation flag context, and review boundary semantics.
 202-v188-training-run-evidence-generation-quality-summary.md
