@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+209-v195-training-evaluation-timestamp-helper-consolidation.md
+ -> v195 code explanation: replace duplicate local `utc_now()` helpers in benchmark scorecard, training portfolio, and training portfolio batch modules with the shared `report_utils.utc_now` helper while keeping timestamp call sites and output contracts unchanged.
 208-v194-training-run-evidence-component-split.md
  -> v194 code explanation: split training run evidence checks, summaries, sections, recommendations, and value helpers into `training_run_evidence_components.py`, reducing the orchestration module from 580 to 151 lines without changing its public API.
 207-v193-training-portfolio-batch-external-baseline.md

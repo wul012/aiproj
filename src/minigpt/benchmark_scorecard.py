@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
@@ -23,10 +22,7 @@ from .benchmark_scorecard_scoring import (
     rubric_scores as _rubric_scores,
     status as _status,
 )
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+from .report_utils import utc_now
 
 
 def build_benchmark_scorecard(

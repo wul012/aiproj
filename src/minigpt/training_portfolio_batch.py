@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import as_dict as _dict
 from minigpt.report_utils import list_of_dicts as _list_of_dicts
+from minigpt.report_utils import utc_now
 from minigpt.training_portfolio import (
     build_training_portfolio_plan,
     run_training_portfolio_plan,
@@ -303,10 +303,6 @@ def run_training_portfolio_batch_plan(
         "recommendations": _recommendations(execution, comparison_summary, warnings),
         "warnings": warnings,
     }
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _normalize_variant(value: Any, index: int) -> dict[str, Any]:

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from pathlib import Path
 import subprocess
 from typing import Any
 
+from minigpt.report_utils import utc_now
 from minigpt.training_portfolio_artifacts import (
     render_training_portfolio_html,
     render_training_portfolio_markdown,
@@ -13,10 +13,6 @@ from minigpt.training_portfolio_artifacts import (
     write_training_portfolio_markdown,
     write_training_portfolio_outputs,
 )
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def build_training_portfolio_plan(
