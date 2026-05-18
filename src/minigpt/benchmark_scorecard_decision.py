@@ -129,6 +129,9 @@ def _evaluate_run(
         review_items.append("dominant generation-quality flag changed")
     if delta.get("generation_quality_worst_case_changed"):
         review_items.append("worst generation-quality case changed")
+    eval_comparison_status = run.get("eval_suite_comparison_status")
+    if eval_comparison_status not in {None, "pass"}:
+        review_items.append(f"eval-suite comparison readiness is {eval_comparison_status}")
     counts = case_counts.get(str(name), {"regressed": 0, "improved": 0})
     if counts.get("regressed"):
         review_items.append(f"{counts.get('regressed')} case regression(s)")
@@ -148,6 +151,8 @@ def _evaluate_run(
         "generation_quality_flag_relation": delta.get("generation_quality_flag_relation"),
         "generation_quality_dominant_flag": run.get("generation_quality_dominant_flag"),
         "generation_quality_worst_case": run.get("generation_quality_worst_case"),
+        "eval_suite_coverage_status": run.get("eval_suite_coverage_status"),
+        "eval_suite_comparison_status": eval_comparison_status,
         "case_regression_count": int(counts.get("regressed") or 0),
         "case_improvement_count": int(counts.get("improved") or 0),
         "blockers": blockers,
@@ -197,6 +202,7 @@ def _summary(
 ) -> dict[str, Any]:
     nonbaseline = [row for row in evaluations if not row.get("is_baseline")]
     comparison_summary = _dict(comparison.get("summary"))
+    non_ready = [row for row in nonbaseline if row.get("eval_suite_comparison_status") not in {None, "pass"}]
     return {
         "decision_status": decision_status,
         "comparison_scorecard_count": comparison.get("scorecard_count"),
@@ -204,11 +210,18 @@ def _summary(
         "clean_candidate_count": len(clean_candidates),
         "review_candidate_count": sum(1 for row in nonbaseline if row.get("review_items") and not row.get("blockers")),
         "blocked_candidate_count": sum(1 for row in nonbaseline if row.get("blockers")),
+        "non_comparison_ready_candidate_count": len(non_ready),
+        "non_comparison_ready_candidates": [row.get("name") for row in non_ready],
         "selected_name": None if selected is None else selected.get("name"),
         "selected_relation": None if selected is None else selected.get("decision_relation"),
         "selected_rubric_avg_score": None if selected is None else selected.get("rubric_avg_score"),
         "selected_generation_quality_total_flags_delta": None if selected is None else selected.get("generation_quality_total_flags_delta"),
         "comparison_case_regression_count": comparison_summary.get("case_regression_count"),
+        "comparison_non_comparison_ready_count": comparison_summary.get("non_comparison_ready_count"),
+        "comparison_non_comparison_ready_runs": comparison_summary.get("non_comparison_ready_runs")
+        if isinstance(comparison_summary.get("non_comparison_ready_runs"), list)
+        else [],
+        "comparison_baseline_eval_suite_comparison_status": comparison_summary.get("baseline_eval_suite_comparison_status"),
         "comparison_generation_quality_flag_regression_count": comparison_summary.get("generation_quality_flag_regression_count"),
         "comparison_generation_quality_dominant_flag_change_count": comparison_summary.get("generation_quality_dominant_flag_change_count"),
     }
@@ -229,9 +242,16 @@ def _recommendations(
         recommendations.append("Keep the baseline or fix candidate scorecard regressions before promotion.")
     if selected and selected.get("review_items"):
         recommendations.append("Selected review item(s): " + "; ".join(_string_list(selected.get("review_items"))) + ".")
+    if selected and selected.get("eval_suite_comparison_status") not in {None, "pass"}:
+        recommendations.append("Do not treat the selected scorecard as clean model-quality evidence until its eval suite is comparison-ready.")
     if any(row.get("blockers") for row in evaluations if not row.get("is_baseline")):
         recommendations.append("Blocked candidates should stay in the comparison as evidence for why they were not promoted.")
     summary = _dict(comparison.get("summary"))
+    non_ready = _string_list(summary.get("non_comparison_ready_runs"))
+    if non_ready:
+        recommendations.append("Scorecard comparison includes non-comparison-ready eval suites: " + ", ".join(non_ready) + ".")
+    if summary.get("baseline_eval_suite_comparison_status") not in {None, "pass"}:
+        recommendations.append("Baseline eval suite is not comparison-ready; choose a cleaner baseline before promotion decisions.")
     if _int(summary.get("generation_quality_flag_regression_count")):
         recommendations.append("At least one compared scorecard increased generation-quality flags; inspect raw generation-quality reports.")
     if _int(summary.get("case_regression_count")):

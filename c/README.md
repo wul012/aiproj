@@ -487,6 +487,9 @@ c/227/解释/说明.md
 c/228/图片
 c/228/解释/说明.md
  -> v228 scorecard comparison eval readiness 的运行截图和解释
+c/229/图片
+c/229/解释/说明.md
+ -> v229 scorecard decision eval readiness 的运行截图和解释
 ```
 
 写入规则：

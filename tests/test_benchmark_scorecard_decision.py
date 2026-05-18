@@ -25,7 +25,7 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
-def make_comparison(root: Path, *, clean_candidate: bool = False) -> Path:
+def make_comparison(root: Path, *, clean_candidate: bool = False, candidate_eval_status: str | None = "pass") -> Path:
     comparison_path = root / "comparison" / "benchmark_scorecard_comparison.json"
     candidate_flag_delta = -2 if clean_candidate else 3
     candidate_flag_relation = "improved" if clean_candidate else "regressed"
@@ -47,6 +47,8 @@ def make_comparison(root: Path, *, clean_candidate: bool = False) -> Path:
                 "generation_quality_total_flags": 5,
                 "generation_quality_dominant_flag": "low_diversity",
                 "generation_quality_worst_case": "summary-short",
+                "eval_suite_coverage_status": "pass",
+                "eval_suite_comparison_status": "pass",
             },
             {
                 "name": "candidate",
@@ -57,6 +59,8 @@ def make_comparison(root: Path, *, clean_candidate: bool = False) -> Path:
                 "generation_quality_total_flags": 3 if clean_candidate else 8,
                 "generation_quality_dominant_flag": "low_diversity" if clean_candidate else "empty_continuation",
                 "generation_quality_worst_case": "summary-short" if clean_candidate else "qa-basic",
+                "eval_suite_coverage_status": "pass" if candidate_eval_status else None,
+                "eval_suite_comparison_status": candidate_eval_status,
             },
         ],
         "baseline_deltas": [
@@ -100,6 +104,9 @@ def make_comparison(root: Path, *, clean_candidate: bool = False) -> Path:
             "generation_quality_flag_regression_count": 0 if clean_candidate else 1,
             "generation_quality_dominant_flag_change_count": 0 if clean_candidate else 1,
             "case_regression_count": 0 if clean_candidate else 1,
+            "baseline_eval_suite_comparison_status": "pass",
+            "non_comparison_ready_count": 0 if candidate_eval_status in {None, "pass"} else 1,
+            "non_comparison_ready_runs": [] if candidate_eval_status in {None, "pass"} else ["candidate"],
         },
     }
     write_json(comparison_path, payload)
@@ -135,6 +142,7 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertIn("rubric score regressed from baseline", candidate["blockers"])
             self.assertIn("overall score regressed from baseline", candidate["blockers"])
             self.assertIn("generation-quality flags increased by 3", candidate["review_items"])
+            self.assertEqual(candidate["eval_suite_comparison_status"], "pass")
             self.assertEqual(report["summary"]["blocked_candidate_count"], 1)
 
     def test_promotes_clean_candidate(self) -> None:
@@ -148,6 +156,21 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertEqual(report["selected_run"]["name"], "candidate")
             self.assertEqual(report["selected_run"]["generation_quality_total_flags_delta"], -2)
             self.assertEqual(report["summary"]["clean_candidate_count"], 1)
+
+    def test_eval_suite_non_ready_candidate_requires_review_without_blocking(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            comparison = make_comparison(Path(tmp), clean_candidate=True, candidate_eval_status="warn")
+
+            report = build_benchmark_scorecard_decision(comparison, generated_at="2026-05-16T00:00:00Z")
+
+            self.assertEqual(report["decision_status"], "review")
+            self.assertEqual(report["recommended_action"], "review_generation_flags_and_case_deltas")
+            self.assertEqual(report["selected_run"]["name"], "candidate")
+            self.assertIn("eval-suite comparison readiness is warn", report["selected_run"]["review_items"])
+            self.assertEqual(report["summary"]["non_comparison_ready_candidate_count"], 1)
+            self.assertEqual(report["summary"]["non_comparison_ready_candidates"], ["candidate"])
+            self.assertEqual(report["summary"]["comparison_non_comparison_ready_runs"], ["candidate"])
+            self.assertIn("not treat the selected scorecard as clean model-quality evidence", " ".join(report["recommendations"]))
 
     def test_load_directory_and_write_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -164,7 +187,10 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("benchmark_scorecard_decision", Path(outputs["json"]).name)
             self.assertIn("generation_quality_total_flags_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("eval_suite_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Candidate Evaluations", markdown)
+            self.assertIn("Eval Compare", markdown)
+            self.assertIn("Eval compare review", html)
             self.assertIn("Demo &lt;scorecard comparison&gt;", html)
             self.assertNotIn("Demo <scorecard comparison>", html)
 

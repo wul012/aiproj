@@ -42,6 +42,8 @@ def write_benchmark_scorecard_decision_csv(report: dict[str, Any], path: str | P
         "generation_quality_total_flags",
         "generation_quality_total_flags_delta",
         "generation_quality_flag_relation",
+        "eval_suite_coverage_status",
+        "eval_suite_comparison_status",
         "case_regression_count",
         "case_improvement_count",
         "blockers",
@@ -71,11 +73,12 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
         f"- Clean candidates: `{summary.get('clean_candidate_count')}`",
         f"- Review candidates: `{summary.get('review_candidate_count')}`",
         f"- Blocked candidates: `{summary.get('blocked_candidate_count')}`",
+        f"- Non comparison-ready candidates: `{summary.get('non_comparison_ready_candidate_count')}`",
         "",
         "## Candidate Evaluations",
         "",
-        "| Run | Relation | Rubric | Overall Delta | Flag Delta | Case Regressions | Blockers | Review Items |",
-        "| --- | --- | ---: | ---: | ---: | ---: | --- | --- |",
+        "| Run | Relation | Rubric | Eval Compare | Overall Delta | Flag Delta | Case Regressions | Blockers | Review Items |",
+        "| --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("candidate_evaluations")):
         lines.append(
@@ -85,6 +88,7 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
                     _md(row.get("name")),
                     _md(row.get("decision_relation")),
                     _md(row.get("rubric_avg_score")),
+                    _md(row.get("eval_suite_comparison_status")),
                     _md(_fmt_signed(row.get("overall_score_delta"))),
                     _md(_fmt_signed(row.get("generation_quality_total_flags_delta"))),
                     _md(row.get("case_regression_count")),
@@ -118,6 +122,7 @@ def render_benchmark_scorecard_decision_html(report: dict[str, Any]) -> str:
         ("Clean", summary.get("clean_candidate_count")),
         ("Review", summary.get("review_candidate_count")),
         ("Blocked", summary.get("blocked_candidate_count")),
+        ("Eval compare review", summary.get("non_comparison_ready_candidate_count")),
     ]
     return "\n".join(
         [
@@ -173,6 +178,7 @@ def _candidate_table(report: dict[str, Any]) -> str:
             f"<td><span class=\"pill {_relation_class(relation)}\">{_e(relation)}</span></td>"
             f"<td>{_e(_fmt(row.get('rubric_avg_score')))}<br><span>{_e(_fmt_signed(row.get('rubric_avg_score_delta')))}</span></td>"
             f"<td>{_e(_fmt(row.get('overall_score')))}<br><span>{_e(_fmt_signed(row.get('overall_score_delta')))}</span></td>"
+            f"<td>{_e(row.get('eval_suite_comparison_status') or 'missing')}<br><span>{_e(row.get('eval_suite_coverage_status') or 'missing')}</span></td>"
             f"<td>{_e(_fmt(row.get('generation_quality_total_flags')))}<br><span>{_e(_fmt_signed(row.get('generation_quality_total_flags_delta')))}</span></td>"
             f"<td>{_e(row.get('case_regression_count'))} regressed / {_e(row.get('case_improvement_count'))} improved</td>"
             f"<td>{_e('; '.join(_string_list(row.get('blockers'))))}</td>"
@@ -181,7 +187,7 @@ def _candidate_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section class="panel"><h2>Candidate Evaluations</h2><table><thead><tr>'
-        "<th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Review Items</th>"
+        "<th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Eval Compare</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Review Items</th>"
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></section>"
