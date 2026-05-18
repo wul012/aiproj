@@ -520,6 +520,9 @@ c/238/解释/说明.md
 c/239/图片
 c/239/解释/说明.md
  -> v239 test coverage baseline report 的运行截图和解释
+c/240/图片
+c/240/解释/说明.md
+ -> v240 conservative coverage fail-under gate 的运行截图和解释
 ```
 
 写入规则：

@@ -27,4 +27,4 @@ jobs:
         run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci
 
       - name: Unit tests
-        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci
+        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80

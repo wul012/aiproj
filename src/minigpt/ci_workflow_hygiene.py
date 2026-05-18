@@ -22,6 +22,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
     "test_coverage_report": "scripts/run_test_coverage.py",
+    "coverage_fail_under_gate": "--fail-under 80",
 }
 REQUIRED_PYTHON_VERSION = "3.11"
 

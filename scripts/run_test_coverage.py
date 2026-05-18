@@ -18,11 +18,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--title", type=str, default="MiniGPT test coverage report")
     parser.add_argument("--source", type=str, default="src/minigpt")
     parser.add_argument("--tests", type=Path, default=ROOT / "tests")
+    parser.add_argument("--fail-under", type=float, default=None, help="Optional minimum line coverage percentage required for success.")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    if args.fail_under is not None and not 0 <= args.fail_under <= 100:
+        raise SystemExit("--fail-under must be between 0 and 100")
     out_dir = args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     coverage_json = out_dir / "coverage.json"
@@ -48,6 +51,7 @@ def main() -> None:
         project_root=ROOT,
         title=args.title,
         test_command=test_command,
+        fail_under=args.fail_under,
     )
     outputs = write_test_coverage_outputs(report, out_dir)
     summary = report["summary"]
@@ -59,7 +63,11 @@ def main() -> None:
     print(f"missing_lines={summary['missing_lines']}")
     print(f"file_count={summary['file_count']}")
     print(f"threshold_enabled={summary['threshold_enabled']}")
+    print(f"fail_under={summary['fail_under']}")
+    print(f"coverage_gap={summary['coverage_gap']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    if summary["status"] != "pass":
+        raise SystemExit(2)
 
 
 def _run(command: list[str]) -> None:

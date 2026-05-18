@@ -25,24 +25,31 @@ def build_test_coverage_report(
     title: str = "MiniGPT test coverage report",
     generated_at: str | None = None,
     test_command: list[str] | None = None,
+    fail_under: float | None = None,
 ) -> dict[str, Any]:
     root = Path(project_root).resolve() if project_root is not None else None
     path = Path(coverage_json_path)
     payload = json.loads(path.read_text(encoding="utf-8"))
     files = _file_rows(payload, root)
     totals = as_dict(payload.get("totals"))
+    fail_under_value = _fail_under_value(fail_under)
+    line_coverage_percent = _round_percent(totals.get("percent_covered"))
+    coverage_gap = _coverage_gap(line_coverage_percent, fail_under_value)
+    threshold_enabled = fail_under_value is not None
+    passed_threshold = coverage_gap == 0.0
     summary = {
-        "status": "pass",
-        "decision": "record_coverage_baseline",
+        "status": "pass" if passed_threshold else "fail",
+        "decision": _decision(threshold_enabled, passed_threshold),
         "coverage_json_path": _relative_path(path, root),
-        "line_coverage_percent": _round_percent(totals.get("percent_covered")),
+        "line_coverage_percent": line_coverage_percent,
         "covered_lines": _as_int(totals.get("covered_lines")),
         "num_statements": _as_int(totals.get("num_statements")),
         "missing_lines": _as_int(totals.get("missing_lines")),
         "file_count": len(files),
         "measured_file_count": sum(1 for item in files if _as_int(item.get("num_statements")) > 0),
-        "threshold_enabled": False,
-        "fail_under": None,
+        "threshold_enabled": threshold_enabled,
+        "fail_under": fail_under_value,
+        "coverage_gap": coverage_gap,
     }
     return {
         "schema_version": 1,
@@ -80,6 +87,8 @@ def render_test_coverage_markdown(report: dict[str, Any]) -> str:
         f"- Line coverage: `{summary.get('line_coverage_percent')}`",
         f"- Covered lines: `{summary.get('covered_lines')}/{summary.get('num_statements')}`",
         f"- Threshold enabled: `{summary.get('threshold_enabled')}`",
+        f"- Fail under: `{summary.get('fail_under')}`",
+        f"- Coverage gap: `{summary.get('coverage_gap')}`",
         "",
         "## Lowest Coverage Files",
         "",
@@ -114,11 +123,13 @@ def write_test_coverage_markdown(report: dict[str, Any], path: str | Path) -> No
 def render_test_coverage_html(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     stats = [
+        ("Status", summary.get("status")),
         ("Decision", summary.get("decision")),
         ("Line coverage", summary.get("line_coverage_percent")),
         ("Covered lines", f"{summary.get('covered_lines')}/{summary.get('num_statements')}"),
         ("Files", summary.get("file_count")),
-        ("Threshold", "off"),
+        ("Threshold", f">= {summary.get('fail_under')}" if summary.get("threshold_enabled") else "off"),
+        ("Gap", summary.get("coverage_gap")),
     ]
     rows = []
     for row in _lowest_coverage_files(report):
@@ -202,10 +213,19 @@ def _lowest_coverage_files(report: dict[str, Any], limit: int = 12) -> list[dict
 
 def _recommendations(summary: dict[str, Any]) -> list[str]:
     percent = summary.get("line_coverage_percent")
-    return [
-        f"Use {percent}% as the initial observed coverage baseline before introducing a fail-under gate.",
-        "Review the lowest-coverage files first; add focused tests before raising any threshold.",
-    ]
+    recommendations = []
+    if summary.get("threshold_enabled"):
+        fail_under = summary.get("fail_under")
+        if summary.get("status") == "pass":
+            recommendations.append(f"Coverage {percent}% meets the configured fail-under gate of {fail_under}%.")
+        else:
+            recommendations.append(
+                f"Coverage {percent}% is {summary.get('coverage_gap')}% below the fail-under gate of {fail_under}%; add focused tests before raising the threshold."
+            )
+    else:
+        recommendations.append(f"Use {percent}% as the initial observed coverage baseline before introducing a fail-under gate.")
+    recommendations.append("Review the lowest-coverage files first; add focused tests before raising any threshold.")
+    return recommendations
 
 
 def _relative_path(path: Path, root: Path | None) -> str:
@@ -218,6 +238,27 @@ def _relative_path(path: Path, root: Path | None) -> str:
 
 def _round_percent(value: Any) -> float:
     return round(float(number_or_default(value, 0.0, float)), 2)
+
+
+def _fail_under_value(value: float | None) -> float | None:
+    if value is None:
+        return None
+    threshold = _round_percent(value)
+    if threshold < 0 or threshold > 100:
+        raise ValueError("fail_under must be between 0 and 100")
+    return threshold
+
+
+def _coverage_gap(percent: float, fail_under: float | None) -> float:
+    if fail_under is None:
+        return 0.0
+    return round(max(0.0, fail_under - percent), 2)
+
+
+def _decision(threshold_enabled: bool, passed_threshold: bool) -> str:
+    if not threshold_enabled:
+        return "record_coverage_baseline"
+    return "continue_with_coverage_gate" if passed_threshold else "improve_test_coverage"
 
 
 def _as_int(value: Any) -> int:

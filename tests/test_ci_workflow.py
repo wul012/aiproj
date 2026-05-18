@@ -61,7 +61,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "        with:",
                         '          python-version: "3.12"',
                         "      - name: Unit tests",
-                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
                 ),
                 encoding="utf-8",
@@ -75,6 +75,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
             self.assertEqual(report["summary"]["missing_step_count"], 2)
+            self.assertEqual(report["summary"]["required_step_count"], 4)
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
@@ -96,7 +97,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Unit tests",
-                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
                 ),
                 encoding="utf-8",

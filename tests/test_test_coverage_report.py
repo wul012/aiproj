@@ -28,10 +28,52 @@ class TestCoverageReportTests(unittest.TestCase):
 
             self.assertEqual(report["schema_version"], 1)
             self.assertEqual(report["summary"]["decision"], "record_coverage_baseline")
+            self.assertEqual(report["summary"]["status"], "pass")
             self.assertEqual(report["summary"]["line_coverage_percent"], 80.0)
             self.assertFalse(report["summary"]["threshold_enabled"])
+            self.assertIsNone(report["summary"]["fail_under"])
+            self.assertEqual(report["summary"]["coverage_gap"], 0.0)
             self.assertEqual(report["summary"]["file_count"], 2)
             self.assertEqual(report["files"][0]["path"], "src/minigpt/a.py")
+
+    def test_fail_under_passes_when_coverage_meets_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            coverage_json = root / "coverage.json"
+            coverage_json.write_text(json.dumps(_coverage_payload(root), ensure_ascii=False), encoding="utf-8")
+
+            report = build_test_coverage_report(coverage_json, project_root=root, fail_under=75)
+
+            self.assertEqual(report["summary"]["status"], "pass")
+            self.assertEqual(report["summary"]["decision"], "continue_with_coverage_gate")
+            self.assertTrue(report["summary"]["threshold_enabled"])
+            self.assertEqual(report["summary"]["fail_under"], 75.0)
+            self.assertEqual(report["summary"]["coverage_gap"], 0.0)
+            self.assertIn("meets the configured fail-under gate", " ".join(report["recommendations"]))
+
+    def test_fail_under_fails_when_coverage_is_below_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            coverage_json = root / "coverage.json"
+            coverage_json.write_text(json.dumps(_coverage_payload(root), ensure_ascii=False), encoding="utf-8")
+
+            report = build_test_coverage_report(coverage_json, project_root=root, fail_under=82.5)
+
+            self.assertEqual(report["summary"]["status"], "fail")
+            self.assertEqual(report["summary"]["decision"], "improve_test_coverage")
+            self.assertTrue(report["summary"]["threshold_enabled"])
+            self.assertEqual(report["summary"]["fail_under"], 82.5)
+            self.assertEqual(report["summary"]["coverage_gap"], 2.5)
+            self.assertIn("below the fail-under gate", " ".join(report["recommendations"]))
+
+    def test_rejects_invalid_fail_under_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            coverage_json = root / "coverage.json"
+            coverage_json.write_text(json.dumps(_coverage_payload(root), ensure_ascii=False), encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                build_test_coverage_report(coverage_json, project_root=root, fail_under=101)
 
     def test_outputs_and_renderers_escape_html(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -47,6 +89,7 @@ class TestCoverageReportTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("line_coverage_percent", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("record_coverage_baseline", markdown)
+            self.assertIn("Coverage gap", markdown)
             self.assertIn("Coverage &lt;report&gt;", html)
             self.assertNotIn("Coverage <report>", html)
 
