@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+238-v224-release-gate-numeric-helper-consolidation.md
+ -> v224 code explanation: migrate release-gate policy checks and artifact numeric adapters to shared report_utils numeric helpers while preserving score-label and default-zero semantics.
 237-v223-generation-quality-numeric-helper-consolidation.md
  -> v223 code explanation: migrate generation-quality analysis and artifact numeric adapters to shared report_utils numeric helpers while preserving ratio and missing-value semantics.
 236-v222-benchmark-scorecard-numeric-helper-consolidation.md

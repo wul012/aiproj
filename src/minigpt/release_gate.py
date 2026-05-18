@@ -7,6 +7,8 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    number_or_default,
+    number_or_none,
     utc_now,
 )
 from minigpt.release_gate_artifacts import (
@@ -408,21 +410,12 @@ def _string_list(value: Any) -> list[str]:
 
 
 def _number(value: Any) -> float | None:
-    try:
-        if value is None or value == "":
-            return None
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 def _integer(value: Any) -> int:
-    try:
-        if value is None or value == "":
-            return 0
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
+    return int(number_or_default(value, 0, int))
 
 
 def _score_label(value: Any) -> str:

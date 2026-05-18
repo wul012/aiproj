@@ -472,6 +472,9 @@ c/222/解释/说明.md
 c/223/图片
 c/223/解释/说明.md
  -> v223 generation quality numeric helper consolidation 的运行截图和解释
+c/224/图片
+c/224/解释/说明.md
+ -> v224 release gate numeric helper consolidation 的运行截图和解释
 ```
 
 写入规则：
