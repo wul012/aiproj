@@ -7,6 +7,8 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    number_or_default,
+    number_or_none,
     string_list as _string_list,
     utc_now,
 )
@@ -239,25 +241,14 @@ def _recommendations(
 
 
 def _number(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 def _int(value: Any) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
+    return int(number_or_default(value, 0, int))
 
 
 def _int_or_none(value: Any) -> int | None:
-    if value is None or value == "":
-        return None
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, int)
+    return int(number) if number is not None else None

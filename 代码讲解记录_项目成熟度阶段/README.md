@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+236-v222-benchmark-scorecard-numeric-helper-consolidation.md
+ -> v222 code explanation: migrate benchmark scorecard scoring, comparison helpers, and promotion decision numeric adapters to shared report_utils numeric helpers while preserving none/default semantics.
 235-v221-numeric-helper-consolidation.md
  -> v221 code explanation: add shared numeric conversion helpers in report_utils and migrate training run evidence / training scale gate adapters while preserving none/default semantics.
 234-v220-promoted-seed-handoff-clean-evidence-recommendation-actions.md

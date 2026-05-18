@@ -24,6 +24,7 @@ from .benchmark_scorecard_scoring import (
 )
 from .report_utils import as_dict as _dict
 from .report_utils import list_of_dicts as _list_of_dicts
+from .report_utils import number_or_none
 from .report_utils import utc_now
 
 
@@ -474,12 +475,8 @@ def _same_checkpoint_pair_baseline(pair_batch: Any) -> bool:
 
 
 def _number(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 

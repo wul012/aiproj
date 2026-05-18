@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from minigpt.report_utils import number_or_none
+
 
 def _case_delta(
     case_name: str,
@@ -182,12 +184,8 @@ def _first_present(primary: dict[str, Any], fallback: dict[str, Any], primary_ke
 
 
 def _number(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 def _as_int(value: Any) -> int | None:

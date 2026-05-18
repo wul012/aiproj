@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from minigpt.report_utils import number_or_none
+
 
 def case_scores(eval_suite: Any, generation_quality: Any, pair_batch: Any) -> list[dict[str, Any]]:
     rows: dict[str, dict[str, Any]] = {}
@@ -302,12 +304,8 @@ def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
 
 
 def _number(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 def _fmt(value: Any) -> str:
