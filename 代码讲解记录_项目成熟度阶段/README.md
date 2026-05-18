@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+249-v235-portfolio-maturity-review-names.md
+ -> v235 code explanation: add maturity review portfolio names to training portfolio comparison summary, Markdown, HTML, and tests so review counts become traceable.
 248-v234-portfolio-maturity-recommendation-precision.md
  -> v234 code explanation: refine training portfolio comparison recommendations so best-score review and non-leading review portfolios produce distinct human guidance.
 247-v233-portfolio-comparison-maturity-output.md

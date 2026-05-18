@@ -190,6 +190,7 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["score_regression_count"], 1)
             self.assertEqual(report["summary"]["artifact_regression_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
+            self.assertEqual(report["summary"]["maturity_review_names"], ["review"])
             self.assertEqual(report["summary"]["best_score_name"], "candidate")
             self.assertEqual(report["summary"]["best_score_maturity_status"], "ready")
             candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
@@ -220,6 +221,7 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["best_score_name"], "candidate")
             self.assertEqual(report["summary"]["best_score_maturity_status"], "review")
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
+            self.assertEqual(report["summary"]["maturity_review_names"], ["candidate"])
             self.assertIn("best-scoring portfolio's maturity narrative", " ".join(report["recommendations"]))
 
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
@@ -247,8 +249,10 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Artifact Coverage", markdown)
+            self.assertIn("Maturity review portfolios", markdown)
             self.assertIn("Best score maturity", markdown)
             self.assertIn("&lt;base&gt;", html)
+            self.assertIn("Maturity reviews", html)
             self.assertIn("Best score maturity", html)
             self.assertNotIn("<strong><base>", html)
 

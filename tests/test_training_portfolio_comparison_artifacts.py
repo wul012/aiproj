@@ -85,6 +85,7 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
                 "artifact_regression_count": 1,
                 "dataset_warning_count": 1,
                 "maturity_review_count": 1,
+                "maturity_review_names": ["candidate"],
                 "best_score_maturity_status": "review",
             },
             "best_by_overall_score": {"name": "candidate"},
@@ -100,8 +101,10 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("Best score maturity", markdown)
+            self.assertIn("Maturity review portfolios", markdown)
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Best score maturity", html)
+            self.assertIn("Maturity reviews", html)
             self.assertIn("Training portfolio &lt;comparison&gt;", html)
             self.assertNotIn("Training portfolio <comparison>", html)
 

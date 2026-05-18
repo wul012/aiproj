@@ -83,6 +83,7 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
         f"| Artifact regressions | {_md(summary.get('artifact_regression_count'))} |",
         f"| Dataset warnings | {_md(summary.get('dataset_warning_count'))} |",
         f"| Maturity reviews | {_md(summary.get('maturity_review_count'))} |",
+        f"| Maturity review portfolios | {_md(', '.join(_string_list(summary.get('maturity_review_names'))) or 'none')} |",
         f"| Best score maturity | {_md(summary.get('best_score_maturity_status'))} |",
         "",
         "## Portfolios",
@@ -148,6 +149,7 @@ def render_training_portfolio_comparison_html(report: dict[str, Any]) -> str:
         ("Score regressed", summary.get("score_regression_count")),
         ("Best score", _pick(_dict(report.get("best_by_overall_score")), "name")),
         ("Best score maturity", summary.get("best_score_maturity_status")),
+        ("Maturity reviews", ", ".join(_string_list(summary.get("maturity_review_names"))) or "none"),
         ("Best val loss", _pick(_dict(report.get("best_by_final_val_loss")), "name")),
     ]
     return "\n".join(
