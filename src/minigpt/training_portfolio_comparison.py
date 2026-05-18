@@ -27,6 +27,8 @@ CORE_ARTIFACT_KEYS = [
     "maturity_narrative",
 ]
 
+REVIEW_STATUSES = {"review", "warn", "fail", "incomplete"}
+
 
 def load_training_portfolio(path: str | Path) -> dict[str, Any]:
     portfolio_path = _resolve_portfolio_path(Path(path))
@@ -60,6 +62,10 @@ def build_training_portfolio_comparison(
     baseline_portfolio = _select_baseline(portfolios, baseline)
     deltas = [_portfolio_delta(item, baseline_portfolio) for item in portfolios]
     summary = _comparison_summary(portfolios, baseline_portfolio, deltas)
+    review_actions = _review_actions(summary, portfolios, deltas)
+    summary = dict(summary)
+    summary["review_action_count"] = len(review_actions)
+    summary["blocker_action_count"] = sum(1 for action in review_actions if action.get("severity") == "blocker")
     return {
         "schema_version": 1,
         "title": title,
@@ -73,6 +79,7 @@ def build_training_portfolio_comparison(
         "best_by_rubric_avg_score": _best_numeric(portfolios, "rubric_avg_score", higher_is_better=True),
         "best_by_artifact_coverage": _best_numeric(portfolios, "artifact_coverage", higher_is_better=True),
         "best_by_final_val_loss": _best_numeric(portfolios, "final_val_loss", higher_is_better=False),
+        "review_actions": review_actions,
         "recommendations": _recommendations(summary, deltas),
     }
 
@@ -261,9 +268,7 @@ def _comparison_summary(
     best_score = _best_numeric(portfolios, "overall_score", higher_is_better=True)
     best_artifact = _best_numeric(portfolios, "artifact_coverage", higher_is_better=True)
     lowest_val_loss = _best_numeric(portfolios, "final_val_loss", higher_is_better=False)
-    maturity_review_rows = [
-        item for item in portfolios if item.get("maturity_portfolio_status") in {"review", "warn", "fail", "incomplete"}
-    ]
+    maturity_review_rows = [item for item in portfolios if item.get("maturity_portfolio_status") in REVIEW_STATUSES]
     return {
         "portfolio_count": len(portfolios),
         "baseline_name": baseline.get("name"),
@@ -305,6 +310,139 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs
+
+
+def _review_actions(
+    summary: dict[str, Any],
+    portfolios: list[dict[str, Any]],
+    deltas: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    deltas_by_name = {row.get("name"): row for row in deltas}
+    actions = []
+    best_score_name = _as_str(summary.get("best_score_name"))
+    for portfolio in portfolios:
+        name = _as_str(portfolio.get("name")) or f"portfolio-{portfolio.get('index') or len(actions) + 1}"
+        delta = _dict(deltas_by_name.get(portfolio.get("name")))
+        status = _as_str(portfolio.get("status"))
+        if status == "failed":
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "execution",
+                    "blocker",
+                    "portfolio_failed",
+                    "Inspect the failed step before comparing benchmark or maturity evidence.",
+                    {"failed_step": portfolio.get("failed_step")},
+                )
+            )
+        elif status == "planned":
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "execution",
+                    "review",
+                    "portfolio_not_executed",
+                    "Run the planned portfolio with --execute before using it as model-quality evidence.",
+                    {"completed_steps": portfolio.get("completed_steps"), "step_count": portfolio.get("step_count")},
+                )
+            )
+
+        missing_artifacts = [
+            str(row.get("key"))
+            for row in portfolio.get("core_artifacts", [])
+            if isinstance(row, dict) and not row.get("exists") and row.get("key")
+        ]
+        artifact_delta = _number(delta.get("artifact_coverage_delta"))
+        if missing_artifacts or (artifact_delta is not None and float(artifact_delta) < 0):
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "artifact",
+                    "review",
+                    "artifact_coverage_gap",
+                    "Restore missing core artifacts before treating the comparison as a complete handoff.",
+                    {"missing_artifacts": missing_artifacts, "artifact_coverage_delta": artifact_delta},
+                )
+            )
+
+        if delta.get("overall_relation") == "regressed" or delta.get("final_val_loss_relation") == "regressed":
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "quality",
+                    "review",
+                    "quality_regression",
+                    "Compare dataset version, training config, validation loss, and weakest benchmark cases against the baseline.",
+                    {
+                        "overall_relation": delta.get("overall_relation"),
+                        "final_val_loss_relation": delta.get("final_val_loss_relation"),
+                    },
+                )
+            )
+
+        dataset_status = _as_str(portfolio.get("dataset_readiness_status"))
+        dataset_quality = _as_str(portfolio.get("dataset_quality_status"))
+        dataset_warning_count = _as_int(portfolio.get("dataset_warning_count")) or 0
+        if dataset_warning_count > 0 or dataset_status in REVIEW_STATUSES or dataset_quality in REVIEW_STATUSES:
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "dataset",
+                    "review",
+                    "dataset_card_review",
+                    "Resolve dataset-card warnings before using this portfolio as a maturity baseline.",
+                    {
+                        "dataset_readiness_status": dataset_status,
+                        "dataset_quality_status": dataset_quality,
+                        "dataset_warning_count": dataset_warning_count,
+                    },
+                )
+            )
+
+        maturity_status = _as_str(portfolio.get("maturity_portfolio_status"))
+        if maturity_status in REVIEW_STATUSES:
+            is_best_score = name == best_score_name
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "maturity",
+                    "blocker" if is_best_score else "review",
+                    "best_score_maturity_review" if is_best_score else "non_leading_maturity_review",
+                    (
+                        "Review this best-scoring portfolio's maturity narrative before promoting it as a clean baseline."
+                        if is_best_score
+                        else "Review maturity-narrative findings before archiving this non-leading portfolio."
+                    ),
+                    {"maturity_portfolio_status": maturity_status, "best_score_name": best_score_name},
+                )
+            )
+    return actions
+
+
+def _review_action(
+    actions: list[dict[str, Any]],
+    portfolio: str,
+    category: str,
+    severity: str,
+    reason: str,
+    action: str,
+    evidence: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "id": f"{category}-{len(actions) + 1}",
+        "portfolio": portfolio,
+        "category": category,
+        "severity": severity,
+        "reason": reason,
+        "action": action,
+        "evidence": evidence,
+    }
 
 
 def _select_baseline(portfolios: list[dict[str, Any]], baseline: str | int | None) -> dict[str, Any]:

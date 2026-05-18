@@ -191,6 +191,8 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["artifact_regression_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_names"], ["review"])
+            self.assertEqual(report["summary"]["review_action_count"], 4)
+            self.assertEqual(report["summary"]["blocker_action_count"], 0)
             self.assertEqual(report["summary"]["best_score_name"], "candidate")
             self.assertEqual(report["summary"]["best_score_maturity_status"], "ready")
             candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
@@ -201,6 +203,11 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(review_delta["final_val_loss_relation"], "regressed")
             self.assertTrue(report["recommendations"])
             self.assertIn("non-leading portfolios", " ".join(report["recommendations"]))
+            reasons = {action["reason"] for action in report["review_actions"]}
+            self.assertIn("artifact_coverage_gap", reasons)
+            self.assertIn("quality_regression", reasons)
+            self.assertIn("dataset_card_review", reasons)
+            self.assertIn("non_leading_maturity_review", reasons)
 
     def test_best_scoring_review_portfolio_keeps_maturity_warning(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -222,6 +229,10 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["best_score_maturity_status"], "review")
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_names"], ["candidate"])
+            self.assertEqual(report["summary"]["review_action_count"], 1)
+            self.assertEqual(report["summary"]["blocker_action_count"], 1)
+            self.assertEqual(report["review_actions"][0]["reason"], "best_score_maturity_review")
+            self.assertEqual(report["review_actions"][0]["severity"], "blocker")
             self.assertIn("best-scoring portfolio's maturity narrative", " ".join(report["recommendations"]))
 
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
@@ -250,9 +261,11 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Maturity review portfolios", markdown)
+            self.assertIn("## Review Actions", markdown)
             self.assertIn("Best score maturity", markdown)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("Maturity reviews", html)
+            self.assertIn("Review Actions", html)
             self.assertIn("Best score maturity", html)
             self.assertNotIn("<strong><base>", html)
 

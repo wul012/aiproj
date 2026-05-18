@@ -87,9 +87,22 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
                 "maturity_review_count": 1,
                 "maturity_review_names": ["candidate"],
                 "best_score_maturity_status": "review",
+                "review_action_count": 1,
+                "blocker_action_count": 1,
             },
             "best_by_overall_score": {"name": "candidate"},
             "best_by_final_val_loss": {"name": "candidate"},
+            "review_actions": [
+                {
+                    "id": "maturity-1",
+                    "portfolio": "candidate",
+                    "severity": "blocker",
+                    "category": "maturity",
+                    "reason": "best_score_maturity_review",
+                    "action": "Review this best-scoring portfolio's maturity narrative before promoting it as a clean baseline.",
+                    "evidence": {"maturity_portfolio_status": "review"},
+                }
+            ],
             "recommendations": ["Review artifact coverage regressions."],
         }
 
@@ -102,9 +115,13 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("Best score maturity", markdown)
             self.assertIn("Maturity review portfolios", markdown)
+            self.assertIn("## Review Actions", markdown)
+            self.assertIn("best_score_maturity_review", markdown)
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Best score maturity", html)
             self.assertIn("Maturity reviews", html)
+            self.assertIn("Review Actions", html)
+            self.assertIn("best_score_maturity_review", html)
             self.assertIn("Training portfolio &lt;comparison&gt;", html)
             self.assertNotIn("Training portfolio <comparison>", html)
 
