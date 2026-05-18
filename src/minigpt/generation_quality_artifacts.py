@@ -8,6 +8,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
+    number_or_none,
     write_json_payload,
 )
 
@@ -377,12 +378,8 @@ def _flag_ids(case: dict[str, Any]) -> list[str]:
 
 
 def _number(value: Any) -> float | None:
-    try:
-        if value is None or value == "":
-            return None
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 def _ratio_label(value: Any) -> str:

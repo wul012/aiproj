@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+237-v223-generation-quality-numeric-helper-consolidation.md
+ -> v223 code explanation: migrate generation-quality analysis and artifact numeric adapters to shared report_utils numeric helpers while preserving ratio and missing-value semantics.
 236-v222-benchmark-scorecard-numeric-helper-consolidation.md
  -> v222 code explanation: migrate benchmark scorecard scoring, comparison helpers, and promotion decision numeric adapters to shared report_utils numeric helpers while preserving none/default semantics.
 235-v221-numeric-helper-consolidation.md

@@ -17,6 +17,7 @@ from minigpt.generation_quality_artifacts import (
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    number_or_none,
     utc_now,
 )
 
@@ -351,12 +352,8 @@ def _string_list(value: Any) -> list[str]:
 
 
 def _number(value: Any) -> float | None:
-    try:
-        if value is None or value == "":
-            return None
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 def _round_avg(values: Any) -> float:

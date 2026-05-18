@@ -469,6 +469,9 @@ c/221/解释/说明.md
 c/222/图片
 c/222/解释/说明.md
  -> v222 benchmark scorecard numeric helper consolidation 的运行截图和解释
+c/223/图片
+c/223/解释/说明.md
+ -> v223 generation quality numeric helper consolidation 的运行截图和解释
 ```
 
 写入规则：
