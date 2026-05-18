@@ -47,6 +47,7 @@ def render_registry_html(
         ("Pair deltas", _pair_delta_summary_label(pair_delta_summary)),
         ("Release readiness", _release_readiness_counts_label(release_readiness_counts)),
         ("Readiness deltas", _release_readiness_delta_summary_label(release_readiness_delta_summary)),
+        ("Coverage regressions", _release_readiness_coverage_summary_label(release_readiness_delta_summary)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
@@ -228,6 +229,7 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "release_readiness_improved_count",
         "release_readiness_regressed_count",
         "release_readiness_ci_workflow_regression_count",
+        "release_readiness_test_coverage_regression_count",
         "note",
         "tags",
     ]
@@ -327,7 +329,18 @@ def _release_readiness_delta_summary_label(value: Any) -> str:
         f"deltas:{value.get('delta_count')}, "
         f"regressed:{value.get('regressed_count')}, "
         f"improved:{value.get('improved_count')}, "
-        f"panels:{value.get('changed_panel_delta_count')}"
+        f"panels:{value.get('changed_panel_delta_count')}, "
+        f"coverage:{value.get('test_coverage_regression_count', 0)}"
+    )
+
+
+def _release_readiness_coverage_summary_label(value: Any) -> str:
+    if not isinstance(value, dict) or not value.get("delta_count"):
+        return "missing"
+    return (
+        f"regressions:{value.get('test_coverage_regression_count', 0)}, "
+        f"gap:{_fmt(value.get('max_abs_test_coverage_gap_delta'))}, "
+        f"percent:{_fmt(value.get('max_abs_test_coverage_percent_delta'))}"
     )
 
 
@@ -354,15 +367,16 @@ def _pair_report_score(run: dict[str, Any]) -> int:
 
 def _release_readiness_sort_score(run: dict[str, Any]) -> int:
     order = {
-        "regressed": 0,
+        "coverage-regressed": 0,
         "ci-regressed": 1,
-        "blocked": 2,
-        "panel-changed": 3,
-        "stable": 4,
-        "improved": 5,
-        "missing": 6,
+        "regressed": 2,
+        "blocked": 3,
+        "panel-changed": 4,
+        "stable": 5,
+        "improved": 6,
+        "missing": 7,
     }
-    return order.get(str(run.get("release_readiness_comparison_status") or "missing"), 6)
+    return order.get(str(run.get("release_readiness_comparison_status") or "missing"), 7)
 
 
 def _benchmark_rubric_cell(run: dict[str, Any]) -> str:
@@ -405,7 +419,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         "pass"
         if status in {"improved", "stable"}
         else "warn"
-        if status in {"panel-changed", "ci-regressed"}
+        if status in {"panel-changed", "ci-regressed", "coverage-regressed"}
         else "fail"
         if status in {"regressed", "blocked"}
         else "missing"
@@ -418,6 +432,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         f"<br><span>ready={_e(_fmt(run.get('release_readiness_ready_count')))} blocked={_e(_fmt(run.get('release_readiness_blocked_count')))}</span>"
         f"<br><span>improved={_e(_fmt(run.get('release_readiness_improved_count')))} regressed={_e(_fmt(run.get('release_readiness_regressed_count')))}</span>"
         f"<br><span>panel deltas={_e(_fmt(run.get('release_readiness_changed_panel_delta_count')))} ci regressions={_e(_fmt(run.get('release_readiness_ci_workflow_regression_count')))}</span>"
+        f"<br><span>coverage regressions={_e(_fmt(run.get('release_readiness_test_coverage_regression_count')))}</span>"
     )
 
 

@@ -538,6 +538,9 @@ c/244/解释/说明.md
 c/245/图片
 c/245/解释/说明.md
  -> v245 release readiness coverage comparison 的运行截图和解释
+c/246/图片
+c/246/解释/说明.md
+ -> v246 registry coverage regression tracking 的运行截图和解释
 ```
 
 写入规则：
