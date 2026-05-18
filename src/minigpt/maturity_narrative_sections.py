@@ -45,11 +45,11 @@ def build_maturity_narrative_sections(summary: dict[str, Any]) -> list[dict[str,
         {
             "key": "benchmark_promotion",
             "title": "Benchmark Promotion Decision",
-            "status": _status_from_counts(summary.get("benchmark_decision_status_counts")),
+            "status": _benchmark_decision_status(summary),
             "claim": _benchmark_decision_claim(summary),
-            "evidence": "Benchmark scorecard decisions consume cross-run scorecard comparison deltas, case regressions, and generation-quality flag taxonomy shifts.",
-            "boundary": "A promote decision means benchmark evidence can advance; it is not a production release approval.",
-            "next_step": "Keep promoted scorecards tied to their raw comparison and generation-quality reports before claiming model improvement.",
+            "evidence": "Benchmark scorecard decisions consume cross-run scorecard comparison deltas, case regressions, generation-quality flag taxonomy shifts, and eval-suite comparison readiness.",
+            "boundary": "A promote decision means benchmark evidence can advance; it is not a production release approval or clean model-quality claim when eval suites are not comparison-ready.",
+            "next_step": "Keep promoted scorecards tied to raw comparison, generation-quality, and eval-suite coverage evidence before claiming model improvement.",
         },
         {
             "key": "data_governance",
@@ -119,6 +119,12 @@ def _status_from_counts(counts: Any) -> str:
     return sorted(values)[0]
 
 
+def _benchmark_decision_status(summary: dict[str, Any]) -> str:
+    if int(summary.get("benchmark_decision_non_comparison_ready_candidate_count") or 0) > 0:
+        return "warn"
+    return _status_from_counts(summary.get("benchmark_decision_status_counts"))
+
+
 def _release_claim(summary: dict[str, Any]) -> str:
     return (
         f"Release readiness trend is {summary.get('release_readiness_trend_status') or 'missing'} "
@@ -146,7 +152,10 @@ def _benchmark_decision_claim(summary: dict[str, Any]) -> str:
     return (
         f"{summary.get('benchmark_decision_count')} scorecard decision report(s) are available; "
         f"selected run is {summary.get('benchmark_decision_selected_run') or 'missing'} with generation flag delta "
-        f"{summary.get('benchmark_decision_selected_flag_delta') if summary.get('benchmark_decision_selected_flag_delta') is not None else 'missing'}."
+        f"{summary.get('benchmark_decision_selected_flag_delta') if summary.get('benchmark_decision_selected_flag_delta') is not None else 'missing'} "
+        f"and selected eval comparison status "
+        f"{summary.get('benchmark_decision_selected_eval_suite_comparison_status') or 'missing'}; "
+        f"{summary.get('benchmark_decision_non_comparison_ready_candidate_count') or 0} candidate(s) are not comparison-ready."
     )
 
 

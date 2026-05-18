@@ -19,11 +19,13 @@ def build_maturity_narrative_summary(
     dataset_rows = [_dataset_summary(item) for item in dataset_cards if isinstance(item, dict)]
     benchmark_scores = [row["overall_score"] for row in benchmark_rows if row.get("overall_score") is not None]
     dataset_warnings = sum(int(row.get("warning_count") or 0) for row in dataset_rows)
+    decision_non_ready_count = sum(int(row.get("non_comparison_ready_candidate_count") or 0) for row in decision_rows)
     status = _portfolio_status(
         maturity_summary,
         release,
         request,
         benchmark_rows,
+        decision_rows,
         dataset_rows,
         request_history_available=isinstance(request_history, dict),
     )
@@ -51,6 +53,12 @@ def build_maturity_narrative_summary(
         "benchmark_decision_review_item_count": sum(int(row.get("review_item_count") or 0) for row in decision_rows),
         "benchmark_decision_blocker_count": sum(int(row.get("blocker_count") or 0) for row in decision_rows),
         "benchmark_decision_selected_flag_delta": _selected_decision_flag_delta(decision_rows),
+        "benchmark_decision_selected_eval_suite_comparison_status": _selected_decision_eval_status(decision_rows),
+        "benchmark_decision_non_comparison_ready_candidate_count": decision_non_ready_count,
+        "benchmark_decision_non_comparison_ready_candidates": _decision_non_ready_candidates(decision_rows),
+        "benchmark_decision_eval_suite_comparison_status_counts": _merge_counts(
+            row.get("eval_suite_comparison_status_counts") for row in decision_rows
+        ),
         "dataset_card_count": len(dataset_rows),
         "dataset_status_counts": _counts(row.get("quality_status") or "missing" for row in dataset_rows),
         "dataset_warning_count": dataset_warnings,
@@ -58,10 +66,16 @@ def build_maturity_narrative_summary(
 
 
 def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: list[dict[str, Any]]) -> list[str]:
+    recommendations = []
+    if int(summary.get("benchmark_decision_non_comparison_ready_candidate_count") or 0) > 0:
+        recommendations.append(
+            "Treat scorecard promotion as review-only until non-comparison-ready eval suites are rerun with comparable benchmark evidence."
+        )
     if summary.get("portfolio_status") == "review":
-        return [
+        recommendations.append(
             "Resolve review-level release, request-history, benchmark, or dataset concerns before using this as a release-ready portfolio summary."
-        ]
+        )
+        return recommendations
     if summary.get("portfolio_status") == "incomplete":
         return ["Generate missing maturity, request-history, benchmark scorecard, or dataset-card evidence before presenting the narrative."]
     return [
@@ -96,6 +110,7 @@ def _portfolio_status(
     release: dict[str, Any],
     request: dict[str, Any],
     benchmark_rows: list[dict[str, Any]],
+    decision_rows: list[dict[str, Any]],
     dataset_rows: list[dict[str, Any]],
     *,
     request_history_available: bool,
@@ -110,6 +125,8 @@ def _portfolio_status(
         or int(release.get("regressed_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
+        or any(row.get("decision_status") in {"review", "blocked"} for row in decision_rows)
+        or any(int(row.get("non_comparison_ready_candidate_count") or 0) > 0 for row in decision_rows)
         or any(row.get("quality_status") in {"warn", "fail"} for row in dataset_rows)
     ):
         return "review"
@@ -147,6 +164,7 @@ def _scorecard_decision_summary(decision: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(decision.get("summary"))
     selected = _dict(decision.get("selected_run"))
     evaluations = _list_of_dicts(decision.get("candidate_evaluations"))
+    non_ready_candidates = _decision_row_non_ready_candidates(evaluations, summary)
     return {
         "decision_status": decision.get("decision_status"),
         "recommended_action": decision.get("recommended_action"),
@@ -156,10 +174,20 @@ def _scorecard_decision_summary(decision: dict[str, Any]) -> dict[str, Any]:
         "selected_generation_quality_total_flags_delta": selected.get("generation_quality_total_flags_delta")
         if selected
         else summary.get("selected_generation_quality_total_flags_delta"),
+        "selected_eval_suite_comparison_status": selected.get("eval_suite_comparison_status")
+        or summary.get("selected_eval_suite_comparison_status"),
         "candidate_count": summary.get("candidate_count"),
         "clean_candidate_count": summary.get("clean_candidate_count"),
         "review_candidate_count": summary.get("review_candidate_count"),
         "blocked_candidate_count": summary.get("blocked_candidate_count"),
+        "non_comparison_ready_candidate_count": _coalesce(
+            summary.get("non_comparison_ready_candidate_count"),
+            len(non_ready_candidates),
+        ),
+        "non_comparison_ready_candidates": non_ready_candidates,
+        "eval_suite_comparison_status_counts": _counts(
+            row.get("eval_suite_comparison_status") or "missing" for row in evaluations if not row.get("is_baseline")
+        ),
         "review_item_count": sum(len(_string_list(row.get("review_items"))) for row in evaluations),
         "blocker_count": sum(len(_string_list(row.get("blockers"))) for row in evaluations if not row.get("is_baseline")),
     }
@@ -196,6 +224,44 @@ def _selected_decision_flag_delta(rows: list[dict[str, Any]]) -> Any:
     if not selected:
         return None
     return selected[-1].get("selected_generation_quality_total_flags_delta")
+
+
+def _selected_decision_eval_status(rows: list[dict[str, Any]]) -> str | None:
+    selected = [row for row in rows if row.get("selected_run")]
+    if not selected:
+        return None
+    value = selected[-1].get("selected_eval_suite_comparison_status")
+    return None if value is None else str(value)
+
+
+def _decision_non_ready_candidates(rows: list[dict[str, Any]]) -> list[str]:
+    names: list[str] = []
+    for row in rows:
+        for name in _string_list(row.get("non_comparison_ready_candidates")):
+            if name not in names:
+                names.append(name)
+    return names
+
+
+def _decision_row_non_ready_candidates(evaluations: list[dict[str, Any]], summary: dict[str, Any]) -> list[str]:
+    from_summary = _string_list(summary.get("non_comparison_ready_candidates"))
+    if from_summary:
+        return from_summary
+    return [
+        str(row.get("name"))
+        for row in evaluations
+        if not row.get("is_baseline") and row.get("eval_suite_comparison_status") not in {None, "pass"} and row.get("name")
+    ]
+
+
+def _merge_counts(rows: Any) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        for key, value in row.items():
+            counts[str(key)] = counts.get(str(key), 0) + int(value or 0)
+    return counts
 
 
 def _dict(value: Any) -> dict[str, Any]:

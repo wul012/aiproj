@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+244-v230-maturity-narrative-eval-readiness.md
+ -> v230 code explanation: carry scorecard decision eval-suite comparison readiness into maturity narrative summary, portfolio review status, sections, and rendered outputs.
 243-v229-scorecard-decision-eval-readiness.md
  -> v229 code explanation: carry eval-suite comparison readiness into benchmark scorecard promotion decision candidate evaluations, summary, artifacts, and recommendations as review-level evidence.
 242-v228-scorecard-comparison-eval-readiness.md

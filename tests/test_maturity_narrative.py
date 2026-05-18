@@ -110,20 +110,24 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
                 "clean_candidate_count": 1,
                 "review_candidate_count": 0,
                 "blocked_candidate_count": 0,
+                "non_comparison_ready_candidate_count": 0,
+                "non_comparison_ready_candidates": [],
                 "selected_name": "demo-run",
                 "selected_relation": "promote",
                 "selected_rubric_avg_score": 90.0,
                 "selected_generation_quality_total_flags_delta": -2,
+                "selected_eval_suite_comparison_status": "pass",
             },
             "selected_run": {
                 "name": "demo-run",
                 "decision_relation": "promote",
                 "rubric_avg_score": 90.0,
                 "generation_quality_total_flags_delta": -2,
+                "eval_suite_comparison_status": "pass",
             },
             "candidate_evaluations": [
                 {"name": "baseline", "is_baseline": True, "blockers": ["baseline run is not a promotion candidate"], "review_items": []},
-                {"name": "demo-run", "is_baseline": False, "blockers": [], "review_items": []},
+                {"name": "demo-run", "is_baseline": False, "eval_suite_comparison_status": "pass", "blockers": [], "review_items": []},
             ],
         },
     )
@@ -205,6 +209,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["benchmark_decision_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_decision_selected_run"], "demo-run")
             self.assertEqual(narrative["summary"]["benchmark_decision_selected_flag_delta"], -2)
+            self.assertEqual(narrative["summary"]["benchmark_decision_selected_eval_suite_comparison_status"], "pass")
+            self.assertEqual(narrative["summary"]["benchmark_decision_non_comparison_ready_candidate_count"], 0)
             self.assertEqual(narrative["summary"]["dataset_card_count"], 1)
             self.assertEqual(narrative["summary"]["dataset_warning_count"], 0)
             self.assertEqual(narrative["warnings"], [])
@@ -223,6 +229,34 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "regressed")
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 1)
             self.assertIn("Resolve review-level release", narrative["recommendations"][0])
+
+    def test_build_maturity_narrative_marks_review_for_non_comparison_ready_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp))
+            decision = json.loads(paths["scorecard_decision"].read_text(encoding="utf-8"))
+            decision["decision_status"] = "review"
+            decision["summary"]["clean_candidate_count"] = 0
+            decision["summary"]["review_candidate_count"] = 1
+            decision["summary"]["non_comparison_ready_candidate_count"] = 1
+            decision["summary"]["non_comparison_ready_candidates"] = ["demo-run"]
+            decision["summary"]["selected_relation"] = "review"
+            decision["summary"]["selected_eval_suite_comparison_status"] = "warn"
+            decision["selected_run"]["decision_relation"] = "review"
+            decision["selected_run"]["eval_suite_comparison_status"] = "warn"
+            decision["candidate_evaluations"][1]["decision_relation"] = "review"
+            decision["candidate_evaluations"][1]["eval_suite_comparison_status"] = "warn"
+            decision["candidate_evaluations"][1]["review_items"] = ["eval-suite comparison readiness is warn"]
+            write_json(paths["scorecard_decision"], decision)
+
+            narrative = build_maturity_narrative(paths["project"])
+            decision_section = next(item for item in narrative["sections"] if item["key"] == "benchmark_promotion")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["benchmark_decision_selected_eval_suite_comparison_status"], "warn")
+            self.assertEqual(narrative["summary"]["benchmark_decision_non_comparison_ready_candidate_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_decision_non_comparison_ready_candidates"], ["demo-run"])
+            self.assertEqual(decision_section["status"], "warn")
+            self.assertIn("review-only", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_requires_request_history_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -247,8 +281,11 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("## Evidence Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release Quality Trend", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Scorecard decision eval compare", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Decision eval", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Quality", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_maturity_narrative_html_escapes_text(self) -> None:

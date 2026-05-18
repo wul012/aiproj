@@ -490,6 +490,9 @@ c/228/解释/说明.md
 c/229/图片
 c/229/解释/说明.md
  -> v229 scorecard decision eval readiness 的运行截图和解释
+c/230/图片
+c/230/解释/说明.md
+ -> v230 maturity narrative eval readiness 的运行截图和解释
 ```
 
 写入规则：
