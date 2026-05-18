@@ -526,6 +526,9 @@ c/240/解释/说明.md
 c/241/图片
 c/241/解释/说明.md
  -> v241 project audit coverage gate context 的运行截图和解释
+c/242/图片
+c/242/解释/说明.md
+ -> v242 release bundle coverage gate context 的运行截图和解释
 ```
 
 写入规则：

@@ -19,7 +19,7 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
-def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path, Path, Path, Path]:
+def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path, Path, Path, Path, Path]:
     run_dir = root / "run-a"
     run_dir.mkdir()
     registry_dir = root / "registry"
@@ -27,6 +27,7 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
     audit_dir = root / "audit"
     request_dir = root / "request-history-summary"
     ci_dir = root / "ci-workflow-hygiene"
+    coverage_dir = root / "test-coverage"
     registry = {
         "run_count": 1,
         "best_by_best_val_loss": {"name": name, "path": str(run_dir), "best_val_loss": 0.8},
@@ -63,6 +64,7 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
     audit = {
         "request_history_summary_path": str(request_dir / "request_history_summary.json"),
         "ci_workflow_hygiene_path": str(ci_dir / "ci_workflow_hygiene.json"),
+        "test_coverage_report_path": str(coverage_dir / "test_coverage_report.json"),
         "summary": {
             "overall_status": "pass",
             "score_percent": 100.0,
@@ -75,6 +77,11 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "ci_workflow_status": "pass",
             "ci_workflow_failed_checks": 0,
             "ci_workflow_node24_actions": 2,
+            "test_coverage_status": "pass",
+            "test_coverage_decision": "continue_with_coverage_gate",
+            "test_coverage_percent": 90.17,
+            "test_coverage_fail_under": 80.0,
+            "test_coverage_gap": 0.0,
         },
         "ci_workflow_context": {
             "available": True,
@@ -89,6 +96,19 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "missing_step_count": 0,
             "python_version": "3.11",
         },
+        "test_coverage_context": {
+            "available": True,
+            "status": "pass",
+            "decision": "continue_with_coverage_gate",
+            "line_coverage_percent": 90.17,
+            "covered_lines": 12367,
+            "num_statements": 13715,
+            "missing_lines": 1348,
+            "file_count": 122,
+            "threshold_enabled": True,
+            "fail_under": 80.0,
+            "coverage_gap": 0.0,
+        },
         "checks": [
             {"id": "ready_run", "title": "At least one ready run", "status": "pass", "detail": "1 ready run(s)."},
             {
@@ -102,6 +122,12 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
                 "title": "CI workflow hygiene is clean",
                 "status": "pass",
                 "detail": "status=pass; actions=2; node24_native=2; failed_checks=0; forbidden_env=0; missing_steps=0.",
+            },
+            {
+                "id": "test_coverage_report",
+                "title": "Test coverage gate is clean",
+                "status": "pass",
+                "detail": "status=pass; decision=continue_with_coverage_gate; line_coverage=90.17; fail_under=80; coverage_gap=0.",
             },
         ],
         "recommendations": ["All audit checks passed."],
@@ -135,6 +161,22 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "python_version": "3.11",
         },
     }
+    test_coverage_report = {
+        "schema_version": 1,
+        "title": "MiniGPT test coverage report",
+        "summary": {
+            "status": "pass",
+            "decision": "continue_with_coverage_gate",
+            "line_coverage_percent": 90.17,
+            "covered_lines": 12367,
+            "num_statements": 13715,
+            "missing_lines": 1348,
+            "file_count": 122,
+            "threshold_enabled": True,
+            "fail_under": 80.0,
+            "coverage_gap": 0.0,
+        },
+    }
     registry_path = registry_dir / "registry.json"
     model_path = model_dir / "model_card.json"
     audit_path = audit_dir / "project_audit.json"
@@ -155,20 +197,25 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
     write_json(ci_workflow_hygiene_path, ci_workflow_hygiene)
     (ci_dir / "ci_workflow_hygiene.md").write_text("# ci workflow hygiene", encoding="utf-8")
     (ci_dir / "ci_workflow_hygiene.html").write_text("<html></html>", encoding="utf-8")
-    return registry_path, model_path, audit_path, request_summary_path, ci_workflow_hygiene_path
+    test_coverage_report_path = coverage_dir / "test_coverage_report.json"
+    write_json(test_coverage_report_path, test_coverage_report)
+    (coverage_dir / "test_coverage_report.md").write_text("# test coverage report", encoding="utf-8")
+    (coverage_dir / "test_coverage_report.html").write_text("<html></html>", encoding="utf-8")
+    return registry_path, model_path, audit_path, request_summary_path, ci_workflow_hygiene_path, test_coverage_report_path
 
 
 class ReleaseBundleTests(unittest.TestCase):
     def test_build_release_bundle_summarizes_ready_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, request_summary_path, _ci_workflow_hygiene_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, request_summary_path, _ci_workflow_hygiene_path, test_coverage_report_path = make_release_inputs(root)
 
             bundle = build_release_bundle(
                 registry_path,
                 model_card_path=model_path,
                 audit_path=audit_path,
                 request_history_summary_path=request_summary_path,
+                test_coverage_report_path=test_coverage_report_path,
                 release_name="v26-demo",
                 generated_at="2026-05-12T00:00:00Z",
             )
@@ -178,10 +225,16 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["request_history_status"], "pass")
             self.assertEqual(bundle["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(bundle["summary"]["ci_workflow_failed_checks"], 0)
+            self.assertEqual(bundle["summary"]["test_coverage_status"], "pass")
+            self.assertEqual(bundle["summary"]["test_coverage_percent"], 90.17)
+            self.assertEqual(bundle["summary"]["test_coverage_fail_under"], 80.0)
+            self.assertEqual(bundle["summary"]["test_coverage_gap"], 0.0)
             self.assertEqual(bundle["summary"]["best_run_name"], "candidate")
             self.assertIn("request_history_summary_json", {item["key"] for item in bundle["artifacts"]})
             self.assertIn("ci_workflow_hygiene_json", {item["key"] for item in bundle["artifacts"]})
+            self.assertIn("test_coverage_report_json", {item["key"] for item in bundle["artifacts"]})
             self.assertEqual(bundle["ci_workflow_context"]["status"], "pass")
+            self.assertEqual(bundle["test_coverage_context"]["coverage_gap"], 0.0)
             self.assertGreaterEqual(bundle["summary"]["available_artifacts"], 10)
             self.assertEqual(bundle["top_runs"][0]["name"], "candidate")
             self.assertIn("Release evidence is complete", " ".join(bundle["recommendations"]))
@@ -189,7 +242,7 @@ class ReleaseBundleTests(unittest.TestCase):
     def test_build_release_bundle_accepts_explicit_ci_workflow_hygiene_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, ci_workflow_hygiene_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
 
             bundle = build_release_bundle(
                 registry_path,
@@ -202,10 +255,27 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["ci_workflow_node24_actions"], 2)
             self.assertIn("ci_workflow_hygiene_html", {item["key"] for item in bundle["artifacts"]})
 
+    def test_build_release_bundle_accepts_explicit_test_coverage_report_path(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, test_coverage_report_path = make_release_inputs(root)
+
+            bundle = build_release_bundle(
+                registry_path,
+                model_card_path=model_path,
+                audit_path=audit_path,
+                test_coverage_report_path=test_coverage_report_path,
+            )
+
+            self.assertEqual(bundle["inputs"]["test_coverage_report_path"], str(test_coverage_report_path))
+            self.assertEqual(bundle["summary"]["test_coverage_status"], "pass")
+            self.assertEqual(bundle["test_coverage_context"]["line_coverage_percent"], 90.17)
+            self.assertIn("test_coverage_report_html", {item["key"] for item in bundle["artifacts"]})
+
     def test_build_release_bundle_marks_missing_audit(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
             audit_path.unlink()
 
             bundle = build_release_bundle(registry_path, model_card_path=model_path)
@@ -216,7 +286,7 @@ class ReleaseBundleTests(unittest.TestCase):
     def test_write_release_bundle_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
             bundle = build_release_bundle(registry_path, model_card_path=model_path, audit_path=audit_path)
 
             outputs = write_release_bundle_outputs(bundle, root / "release-bundle")
@@ -226,12 +296,13 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Evidence Artifacts", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("CI workflow status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Test coverage status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT release bundle", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_release_bundle_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path = make_release_inputs(root, name="<script>")
+            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root, name="<script>")
             bundle = build_release_bundle(registry_path, model_card_path=model_path, audit_path=audit_path, title="<Release>")
 
             html = render_release_bundle_html(bundle)

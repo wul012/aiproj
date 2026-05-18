@@ -38,6 +38,10 @@ def render_release_bundle_markdown(bundle: dict[str, Any]) -> str:
                 ("Request history status", summary.get("request_history_status")),
                 ("CI workflow status", summary.get("ci_workflow_status")),
                 ("CI workflow failed checks", summary.get("ci_workflow_failed_checks")),
+                ("Test coverage status", summary.get("test_coverage_status")),
+                ("Test coverage percent", summary.get("test_coverage_percent")),
+                ("Test coverage fail under", summary.get("test_coverage_fail_under")),
+                ("Test coverage gap", summary.get("test_coverage_gap")),
                 ("Evidence artifacts", summary.get("available_artifacts")),
             ]
         ),
@@ -85,6 +89,8 @@ def render_release_bundle_html(bundle: dict[str, Any], *, base_dir: str | Path |
         ("Ready", summary.get("ready_runs")),
         ("Req history", summary.get("request_history_status")),
         ("CI workflow", summary.get("ci_workflow_status")),
+        ("Coverage", summary.get("test_coverage_status")),
+        ("Coverage %", summary.get("test_coverage_percent")),
         ("Artifacts", summary.get("available_artifacts")),
         ("Generated", bundle.get("generated_at")),
     ]

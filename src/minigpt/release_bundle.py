@@ -26,6 +26,7 @@ def build_release_bundle(
     audit_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
     ci_workflow_hygiene_path: str | Path | None = None,
+    test_coverage_report_path: str | Path | None = None,
     release_name: str | None = None,
     title: str = "MiniGPT release bundle",
     generated_at: str | None = None,
@@ -37,6 +38,7 @@ def build_release_bundle(
     audit_file = _resolve_audit_path(registry_file, audit_path)
     request_history_summary_file = _resolve_request_history_summary_path(registry_file, audit_file, request_history_summary_path)
     ci_workflow_hygiene_file = _resolve_ci_workflow_hygiene_path(registry_file, audit_file, ci_workflow_hygiene_path)
+    test_coverage_report_file = _resolve_test_coverage_report_path(registry_file, audit_file, test_coverage_report_path)
     model_card = _read_json(model_file, warnings, "model card") if model_file is not None else None
     audit = _read_json(audit_file, warnings, "project audit") if audit_file is not None else None
     request_history_summary = (
@@ -49,7 +51,19 @@ def build_release_bundle(
         if ci_workflow_hygiene_file is not None
         else None
     )
-    artifacts = _collect_release_artifacts(registry_file, model_file, audit_file, request_history_summary_file, ci_workflow_hygiene_file)
+    test_coverage_report = (
+        _read_json(test_coverage_report_file, warnings, "test coverage report")
+        if test_coverage_report_file is not None
+        else None
+    )
+    artifacts = _collect_release_artifacts(
+        registry_file,
+        model_file,
+        audit_file,
+        request_history_summary_file,
+        ci_workflow_hygiene_file,
+        test_coverage_report_file,
+    )
     top_runs = _top_runs(registry, model_card if isinstance(model_card, dict) else None)
     summary = _build_summary(
         registry,
@@ -57,6 +71,7 @@ def build_release_bundle(
         audit if isinstance(audit, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
         ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
+        test_coverage_report if isinstance(test_coverage_report, dict) else None,
         artifacts,
     )
 
@@ -72,12 +87,14 @@ def build_release_bundle(
             "project_audit_path": None if audit_file is None else str(audit_file),
             "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
             "ci_workflow_hygiene_path": None if ci_workflow_hygiene_file is None else str(ci_workflow_hygiene_file),
+            "test_coverage_report_path": None if test_coverage_report_file is None else str(test_coverage_report_file),
         },
         "artifacts": artifacts,
         "top_runs": top_runs,
         "audit_checks": _audit_checks(audit if isinstance(audit, dict) else None),
         "request_history_context": _request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
         "ci_workflow_context": _ci_workflow_context(ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None, audit if isinstance(audit, dict) else None),
+        "test_coverage_context": _test_coverage_context(test_coverage_report if isinstance(test_coverage_report, dict) else None, audit if isinstance(audit, dict) else None),
         "recommendations": _recommendations(model_card if isinstance(model_card, dict) else None, audit if isinstance(audit, dict) else None, summary),
         "warnings": warnings,
     }
@@ -181,6 +198,32 @@ def _resolve_ci_workflow_hygiene_path(
     return next((path for path in candidates if path.exists()), None)
 
 
+def _resolve_test_coverage_report_path(
+    registry_path: Path,
+    audit_path: Path | None,
+    test_coverage_report_path: str | Path | None,
+) -> Path | None:
+    if test_coverage_report_path is not None:
+        return Path(test_coverage_report_path)
+    candidates: list[Path] = []
+    if audit_path is not None:
+        try:
+            audit = _read_required_json(audit_path)
+        except (FileNotFoundError, json.JSONDecodeError, ValueError):
+            audit = {}
+        path = audit.get("test_coverage_report_path") if isinstance(audit, dict) else None
+        if path:
+            candidates.append(Path(str(path)))
+    candidates.extend(
+        [
+            registry_path.parent / "test_coverage_report.json",
+            registry_path.parent / "test-coverage" / "test_coverage_report.json",
+            registry_path.parent.parent / "test-coverage" / "test_coverage_report.json",
+        ]
+    )
+    return next((path for path in candidates if path.exists()), None)
+
+
 def _default_release_name(registry_path: Path) -> str:
     return f"{registry_path.parent.name or 'registry'} release"
 
@@ -191,6 +234,7 @@ def _build_summary(
     audit: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
     ci_workflow_hygiene: dict[str, Any] | None,
+    test_coverage_report: dict[str, Any] | None,
     artifacts: list[dict[str, Any]],
 ) -> dict[str, Any]:
     best = _dict(registry.get("best_by_best_val_loss"))
@@ -198,6 +242,7 @@ def _build_summary(
     model_summary = _dict(model_card.get("summary")) if model_card else {}
     request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
     ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
+    coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
     audit_status = audit_summary.get("overall_status")
     release_status = _release_status(audit_status, audit_summary.get("fail_count"), audit_summary.get("warn_count"))
     return {
@@ -213,6 +258,11 @@ def _build_summary(
         "ci_workflow_status": audit_summary.get("ci_workflow_status") or ci_summary.get("status"),
         "ci_workflow_failed_checks": audit_summary.get("ci_workflow_failed_checks") if audit_summary.get("ci_workflow_failed_checks") is not None else ci_summary.get("failed_check_count"),
         "ci_workflow_node24_actions": audit_summary.get("ci_workflow_node24_actions") if audit_summary.get("ci_workflow_node24_actions") is not None else ci_summary.get("node24_native_action_count"),
+        "test_coverage_status": audit_summary.get("test_coverage_status") or coverage_summary.get("status"),
+        "test_coverage_decision": audit_summary.get("test_coverage_decision") or coverage_summary.get("decision"),
+        "test_coverage_percent": audit_summary.get("test_coverage_percent") if audit_summary.get("test_coverage_percent") is not None else coverage_summary.get("line_coverage_percent"),
+        "test_coverage_fail_under": audit_summary.get("test_coverage_fail_under") if audit_summary.get("test_coverage_fail_under") is not None else coverage_summary.get("fail_under"),
+        "test_coverage_gap": audit_summary.get("test_coverage_gap") if audit_summary.get("test_coverage_gap") is not None else coverage_summary.get("coverage_gap"),
         "available_artifacts": sum(1 for artifact in artifacts if artifact.get("exists")),
         "missing_artifacts": sum(1 for artifact in artifacts if not artifact.get("exists")),
     }
@@ -236,6 +286,7 @@ def _collect_release_artifacts(
     audit_path: Path | None,
     request_history_summary_path: Path | None,
     ci_workflow_hygiene_path: Path | None,
+    test_coverage_report_path: Path | None,
 ) -> list[dict[str, Any]]:
     registry_dir = registry_path.parent
     specs = [
@@ -316,6 +367,33 @@ def _collect_release_artifacts(
                 ),
             ]
         )
+    if test_coverage_report_path is not None:
+        coverage_dir = test_coverage_report_path.parent
+        specs.extend(
+            [
+                (
+                    "test_coverage_report_json",
+                    "Test coverage report JSON",
+                    test_coverage_report_path,
+                    "JSON",
+                    "machine-readable coverage gate report",
+                ),
+                (
+                    "test_coverage_report_md",
+                    "Test coverage report Markdown",
+                    coverage_dir / "test_coverage_report.md",
+                    "MD",
+                    "markdown coverage gate report",
+                ),
+                (
+                    "test_coverage_report_html",
+                    "Test coverage report HTML",
+                    coverage_dir / "test_coverage_report.html",
+                    "HTML",
+                    "browser coverage gate report",
+                ),
+            ]
+        )
     return [_artifact(key, title, path, kind, description) for key, title, path, kind, description in specs]
 
 
@@ -356,6 +434,28 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
     if audit_context:
         return dict(audit_context)
     return {"available": False, "status": None, "failed_check_count": None}
+
+
+def _test_coverage_context(test_coverage_report: dict[str, Any] | None, audit: dict[str, Any] | None) -> dict[str, Any]:
+    audit_context = _dict(audit.get("test_coverage_context")) if isinstance(audit, dict) else {}
+    if isinstance(test_coverage_report, dict):
+        summary = _dict(test_coverage_report.get("summary"))
+        return {
+            "available": True,
+            "status": summary.get("status"),
+            "decision": summary.get("decision"),
+            "line_coverage_percent": summary.get("line_coverage_percent"),
+            "covered_lines": summary.get("covered_lines"),
+            "num_statements": summary.get("num_statements"),
+            "missing_lines": summary.get("missing_lines"),
+            "file_count": summary.get("file_count"),
+            "threshold_enabled": summary.get("threshold_enabled"),
+            "fail_under": summary.get("fail_under"),
+            "coverage_gap": summary.get("coverage_gap"),
+        }
+    if audit_context:
+        return dict(audit_context)
+    return {"available": False, "status": None, "line_coverage_percent": None, "coverage_gap": None}
 
 
 def _artifact(key: str, title: str, path: Path, kind: str, description: str) -> dict[str, Any]:
