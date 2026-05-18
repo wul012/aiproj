@@ -82,6 +82,8 @@ def render_eval_suite_html(report: dict[str, Any]) -> str:
     benchmark = report.get("benchmark") if isinstance(report.get("benchmark"), dict) else {}
     task_counts = benchmark.get("task_type_counts") or report.get("task_type_counts") or {}
     difficulty_counts = benchmark.get("difficulty_counts") or report.get("difficulty_counts") or {}
+    coverage = benchmark.get("coverage") if isinstance(benchmark.get("coverage"), dict) else report.get("coverage")
+    coverage = coverage if isinstance(coverage, dict) else {}
     stats = [
         ("Suite", benchmark.get("suite_name") or report.get("suite")),
         ("Version", benchmark.get("suite_version")),
@@ -90,6 +92,8 @@ def render_eval_suite_html(report: dict[str, Any]) -> str:
         ("Avg unique", report.get("avg_unique_chars")),
         ("Tasks", _join_counts(task_counts)),
         ("Difficulty", _join_counts(difficulty_counts)),
+        ("Coverage", coverage.get("status") or "missing"),
+        ("Comparison", coverage.get("comparison_status") or "missing"),
     ]
     result_rows = []
     for result in report.get("results", []):
@@ -132,6 +136,24 @@ def render_eval_suite_html(report: dict[str, Any]) -> str:
             "<body>",
             f"<header><h1>{_e(benchmark.get('suite_name') or 'MiniGPT benchmark eval suite')}</h1><p>{_e(benchmark.get('description') or 'Fixed prompt benchmark report')}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
+            '<section class="panel"><h2>Coverage Readiness</h2>'
+            + _key_value_table(
+                [
+                    ("Status", coverage.get("status")),
+                    ("Comparison status", coverage.get("comparison_status")),
+                    ("Decision", coverage.get("decision")),
+                    ("Comparison decision", coverage.get("comparison_decision")),
+                    ("Task types", coverage.get("task_type_count")),
+                    ("Difficulties", coverage.get("difficulty_count")),
+                    ("Tags", coverage.get("tag_count")),
+                    ("Missing task types", ", ".join(coverage.get("missing_recommended_task_types") or [])),
+                    ("Missing difficulties", ", ".join(coverage.get("missing_recommended_difficulties") or [])),
+                    ("Missing comparison difficulties", ", ".join(coverage.get("missing_comparison_difficulties") or [])),
+                    ("Blockers", "; ".join(coverage.get("blockers") or [])),
+                    ("Comparison blockers", "; ".join(coverage.get("comparison_blockers") or [])),
+                ]
+            )
+            + "</section>",
             '<section class="panel"><h2>Task Summary</h2><table><thead><tr><th>Task</th><th>Cases</th><th>Avg Chars</th><th>Avg Unique</th></tr></thead><tbody>'
             + "".join(summary_rows)
             + "</tbody></table></section>",
@@ -186,6 +208,11 @@ def _e(value: Any) -> str:
 
 def _stat(label: str, value: Any) -> str:
     return f'<div class="card"><div class="label">{_e(label)}</div><div class="value">{_e(value)}</div></div>'
+
+
+def _key_value_table(rows: list[tuple[str, Any]]) -> str:
+    body = "".join(f"<tr><th>{_e(key)}</th><td>{_e(value)}</td></tr>" for key, value in rows)
+    return f"<table><tbody>{body}</tbody></table>"
 
 
 def _html_style() -> str:

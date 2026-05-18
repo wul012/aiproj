@@ -14,6 +14,15 @@ from minigpt.eval_suite_artifacts import (
     write_eval_suite_svg,
 )
 
+RECOMMENDED_TASK_TYPES = ("continuation", "qa", "summary", "structured", "factual-consistency")
+RECOMMENDED_DIFFICULTIES = ("easy", "medium")
+COMPARISON_RECOMMENDED_DIFFICULTIES = ("hard",)
+MIN_RECOMMENDED_CASES = 5
+MIN_RECOMMENDED_TAGS = 4
+MIN_COMPARISON_CASES = 8
+MIN_COMPARISON_TASK_TYPES = 8
+MIN_COMPARISON_TAGS = 8
+
 
 @dataclass(frozen=True)
 class PromptCase:
@@ -249,6 +258,7 @@ def build_eval_suite_report(
         raise ValueError("eval suite report requires at least one result")
     task_type_counts = _count_by(result.task_type for result in results)
     difficulty_counts = _count_by(result.difficulty for result in results)
+    coverage = _coverage_summary(results, task_type_counts, difficulty_counts)
     return {
         "schema_version": 1,
         "checkpoint": checkpoint,
@@ -263,7 +273,9 @@ def build_eval_suite_report(
             "difficulty_counts": difficulty_counts,
             "task_type_summary": _summary_by(results, "task_type"),
             "difficulty_summary": _summary_by(results, "difficulty"),
+            "coverage": coverage,
         },
+        "coverage": coverage,
         "case_count": len(results),
         "avg_continuation_chars": round(sum(result.char_count for result in results) / len(results), 4),
         "avg_unique_chars": round(sum(result.unique_char_count for result in results) / len(results), 4),
@@ -301,6 +313,78 @@ def _count_by(values: Any) -> dict[str, int]:
         key = str(value or "unknown")
         counts[key] = counts.get(key, 0) + 1
     return dict(sorted(counts.items()))
+
+
+def _coverage_summary(
+    results: list[PromptResult],
+    task_type_counts: dict[str, int],
+    difficulty_counts: dict[str, int],
+) -> dict[str, Any]:
+    observed_task_types = sorted(task_type_counts)
+    observed_difficulties = sorted(difficulty_counts)
+    observed_tags = sorted({tag for result in results for tag in result.tags if tag})
+    missing_task_types = [task_type for task_type in RECOMMENDED_TASK_TYPES if task_type not in task_type_counts]
+    missing_difficulties = [difficulty for difficulty in RECOMMENDED_DIFFICULTIES if difficulty not in difficulty_counts]
+    missing_comparison_difficulties = [
+        difficulty for difficulty in COMPARISON_RECOMMENDED_DIFFICULTIES if difficulty not in difficulty_counts
+    ]
+    case_count = len(results)
+    tag_count = len(observed_tags)
+    ready = (
+        case_count >= MIN_RECOMMENDED_CASES
+        and not missing_task_types
+        and not missing_difficulties
+        and tag_count >= MIN_RECOMMENDED_TAGS
+    )
+    blockers = []
+    if case_count < MIN_RECOMMENDED_CASES:
+        blockers.append(f"only {case_count} case(s), expected at least {MIN_RECOMMENDED_CASES}")
+    if missing_task_types:
+        blockers.append("missing recommended task types: " + ", ".join(missing_task_types))
+    if missing_difficulties:
+        blockers.append("missing recommended difficulties: " + ", ".join(missing_difficulties))
+    if tag_count < MIN_RECOMMENDED_TAGS:
+        blockers.append(f"only {tag_count} tag(s), expected at least {MIN_RECOMMENDED_TAGS}")
+    comparison_blockers = []
+    if case_count < MIN_COMPARISON_CASES:
+        comparison_blockers.append(f"only {case_count} case(s), expected at least {MIN_COMPARISON_CASES}")
+    if len(observed_task_types) < MIN_COMPARISON_TASK_TYPES:
+        comparison_blockers.append(
+            f"only {len(observed_task_types)} task type(s), expected at least {MIN_COMPARISON_TASK_TYPES}"
+        )
+    if missing_comparison_difficulties:
+        comparison_blockers.append("missing comparison difficulties: " + ", ".join(missing_comparison_difficulties))
+    if tag_count < MIN_COMPARISON_TAGS:
+        comparison_blockers.append(f"only {tag_count} tag(s), expected at least {MIN_COMPARISON_TAGS}")
+    comparison_ready = ready and not comparison_blockers
+    return {
+        "status": "pass" if ready else "warn",
+        "comparison_status": "pass" if comparison_ready else "warn",
+        "decision": "suite_has_representative_prompt_coverage" if ready else "expand_prompt_suite_before_model_quality_claims",
+        "comparison_decision": "suite_ready_for_repeated_checkpoint_comparison"
+        if comparison_ready
+        else "prefer_standard_suite_before_checkpoint_quality_claims",
+        "case_count": case_count,
+        "task_type_count": len(observed_task_types),
+        "difficulty_count": len(observed_difficulties),
+        "tag_count": tag_count,
+        "observed_task_types": observed_task_types,
+        "observed_difficulties": observed_difficulties,
+        "observed_tags": observed_tags,
+        "recommended_task_types": list(RECOMMENDED_TASK_TYPES),
+        "recommended_difficulties": list(RECOMMENDED_DIFFICULTIES),
+        "comparison_recommended_difficulties": list(COMPARISON_RECOMMENDED_DIFFICULTIES),
+        "min_recommended_cases": MIN_RECOMMENDED_CASES,
+        "min_recommended_tags": MIN_RECOMMENDED_TAGS,
+        "min_comparison_cases": MIN_COMPARISON_CASES,
+        "min_comparison_task_types": MIN_COMPARISON_TASK_TYPES,
+        "min_comparison_tags": MIN_COMPARISON_TAGS,
+        "missing_recommended_task_types": missing_task_types,
+        "missing_recommended_difficulties": missing_difficulties,
+        "missing_comparison_difficulties": missing_comparison_difficulties,
+        "blockers": blockers,
+        "comparison_blockers": comparison_blockers,
+    }
 
 
 def _summary_by(results: list[PromptResult], attribute: str) -> list[dict[str, Any]]:

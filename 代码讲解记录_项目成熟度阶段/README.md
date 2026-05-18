@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+240-v226-eval-suite-coverage-readiness.md
+ -> v226 code explanation: add eval-suite coverage readiness and comparison readiness so standard benchmark evidence can be distinguished from small ad hoc prompt runs.
 239-v225-training-scale-run-numeric-helper-consolidation.md
  -> v225 code explanation: migrate training scale run decision/comparison/index and promoted decision numeric adapters to shared report_utils numeric helpers while preserving default-zero semantics.
 238-v224-release-gate-numeric-helper-consolidation.md

@@ -478,6 +478,9 @@ c/224/解释/说明.md
 c/225/图片
 c/225/解释/说明.md
  -> v225 training scale run numeric helper consolidation 的运行截图和解释
+c/226/图片
+c/226/解释/说明.md
+ -> v226 eval suite coverage readiness 的运行截图和解释
 ```
 
 写入规则：
