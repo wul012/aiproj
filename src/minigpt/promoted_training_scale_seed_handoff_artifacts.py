@@ -24,6 +24,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     summary = _dict(report.get("summary"))
     execution = _dict(report.get("execution"))
+    clean_requirement = _dict(report.get("clean_evidence_requirement"))
     fieldnames = [
         "handoff_status",
         "seed_status",
@@ -43,6 +44,10 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "seed_handoff_clean_evidence_ready",
         "seed_handoff_clean_evidence_status",
         "seed_handoff_clean_evidence_status_domain",
+        "clean_evidence_requirement_required",
+        "clean_evidence_requirement_status",
+        "clean_evidence_requirement_ready",
+        "clean_evidence_requirement_readiness_status",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -70,6 +75,10 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "seed_handoff_clean_evidence_ready": summary.get("seed_handoff_clean_evidence_ready"),
             "seed_handoff_clean_evidence_status": summary.get("seed_handoff_clean_evidence_status"),
             "seed_handoff_clean_evidence_status_domain": summary.get("seed_handoff_clean_evidence_status_domain"),
+            "clean_evidence_requirement_required": clean_requirement.get("required"),
+            "clean_evidence_requirement_status": clean_requirement.get("status"),
+            "clean_evidence_requirement_ready": clean_requirement.get("ready"),
+            "clean_evidence_requirement_readiness_status": clean_requirement.get("readiness_status"),
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -85,6 +94,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
 def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     execution = _dict(report.get("execution"))
+    clean_requirement = _dict(report.get("clean_evidence_requirement"))
     lines = [
         f"# {report.get('title', 'MiniGPT promoted training scale seed handoff')}",
         "",
@@ -108,6 +118,8 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Seed handoff clean evidence ready: `{summary.get('seed_handoff_clean_evidence_ready')}`",
         f"- Seed handoff clean evidence detail: `{summary.get('seed_handoff_clean_evidence_detail')}`",
         f"- Seed handoff clean evidence status domain: `{summary.get('seed_handoff_clean_evidence_status_domain')}`",
+        f"- Clean evidence requirement: `{clean_requirement.get('status')}`",
+        f"- Clean evidence requirement detail: `{clean_requirement.get('detail')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -150,6 +162,7 @@ def write_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any], 
 def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     execution = _dict(report.get("execution"))
+    clean_requirement = _dict(report.get("clean_evidence_requirement"))
     clean_evidence_domain = ", ".join(
         str(item) for item in _string_list(summary.get("seed_handoff_clean_evidence_status_domain"))
     )
@@ -169,6 +182,7 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Suite alignment", summary.get("seed_handoff_suite_alignment_status")),
         ("Clean evidence", summary.get("seed_handoff_clean_evidence_status")),
         ("Clean evidence domain", clean_evidence_domain),
+        ("Clean evidence gate", clean_requirement.get("status")),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(

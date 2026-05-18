@@ -41,8 +41,10 @@ def main() -> None:
         timeout_seconds=args.timeout_seconds,
         title=args.title,
     )
-    outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     summary = report["summary"]
+    clean_evidence_requirement = _clean_evidence_requirement(summary, required=args.require_clean_evidence)
+    report["clean_evidence_requirement"] = clean_evidence_requirement
+    outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
     print(f"seed_status={report.get('seed_status')}")
@@ -67,12 +69,11 @@ def main() -> None:
     print(f"next_batch_command={report.get('next_batch_command_text')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if args.require_clean_evidence:
-        clean_evidence_ready = bool(summary.get("seed_handoff_clean_evidence_ready"))
-        print(f"clean_evidence_required_status={summary.get('seed_handoff_clean_evidence_status')}")
-        print(f"clean_evidence_required_ready={clean_evidence_ready}")
-        print(f"clean_evidence_required_detail={summary.get('seed_handoff_clean_evidence_detail')}")
-        print(f"clean_evidence_required={'pass' if clean_evidence_ready else 'fail'}")
-        if not clean_evidence_ready:
+        print(f"clean_evidence_required_status={clean_evidence_requirement.get('readiness_status')}")
+        print(f"clean_evidence_required_ready={clean_evidence_requirement.get('ready')}")
+        print(f"clean_evidence_required_detail={clean_evidence_requirement.get('detail')}")
+        print(f"clean_evidence_required={clean_evidence_requirement.get('status')}")
+        if clean_evidence_requirement.get("status") == "fail":
             raise SystemExit(1)
     if summary.get("handoff_status") in {"blocked", "failed", "timeout"}:
         raise SystemExit(1)
@@ -82,6 +83,18 @@ def _default_out_dir(path: Path) -> Path:
     if path.is_dir():
         return path / "handoff"
     return path.parent / "handoff"
+
+
+def _clean_evidence_requirement(summary: dict[str, object], *, required: bool) -> dict[str, object]:
+    ready = bool(summary.get("seed_handoff_clean_evidence_ready"))
+    status = "pass" if required and ready else "fail" if required else "not-required"
+    return {
+        "required": bool(required),
+        "status": status,
+        "ready": ready,
+        "readiness_status": summary.get("seed_handoff_clean_evidence_status"),
+        "detail": summary.get("seed_handoff_clean_evidence_detail"),
+    }
 
 
 if __name__ == "__main__":

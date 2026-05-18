@@ -163,6 +163,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("seed_handoff_suite_alignment_status=pending-plan", completed.stdout)
             self.assertIn("seed_handoff_clean_evidence_status=pending-plan", completed.stdout)
             self.assertIn("seed_handoff_clean_evidence_status_domain=", completed.stdout)
+            script_payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            self.assertEqual(script_payload["clean_evidence_requirement"]["status"], "not-required")
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
 
     def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
@@ -214,7 +216,10 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_evidence_required_ready=True", completed.stdout)
             self.assertIn("clean_evidence_required_detail=completed handoff has consistent suite alignment", completed.stdout)
             self.assertIn("clean_evidence_required=pass", completed.stdout)
-            self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["clean_evidence_requirement"]["status"], "pass")
+            self.assertTrue(payload["clean_evidence_requirement"]["required"])
+            self.assertTrue(payload["clean_evidence_requirement"]["ready"])
 
     def test_script_rejects_pending_clean_evidence_when_required(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -242,7 +247,17 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_evidence_required_ready=False", completed.stdout)
             self.assertIn("clean_evidence_required_detail=execute the seed handoff before treating clean comparison evidence as ready", completed.stdout)
             self.assertIn("clean_evidence_required=fail", completed.stdout)
-            self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            csv_text = (script_out / "promoted_training_scale_seed_handoff.csv").read_text(encoding="utf-8")
+            markdown = (script_out / "promoted_training_scale_seed_handoff.md").read_text(encoding="utf-8")
+            html = (script_out / "promoted_training_scale_seed_handoff.html").read_text(encoding="utf-8")
+            self.assertEqual(payload["clean_evidence_requirement"]["status"], "fail")
+            self.assertTrue(payload["clean_evidence_requirement"]["required"])
+            self.assertFalse(payload["clean_evidence_requirement"]["ready"])
+            self.assertEqual(payload["clean_evidence_requirement"]["readiness_status"], "pending-plan")
+            self.assertIn("clean_evidence_requirement_status", csv_text)
+            self.assertIn("Clean evidence requirement", markdown)
+            self.assertIn("Clean evidence gate", html)
 
     def test_reports_mismatched_selected_suite_alignment_without_blocking(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
