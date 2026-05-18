@@ -63,7 +63,7 @@ def build_training_portfolio_comparison(
     return {
         "schema_version": 1,
         "title": title,
-        "generated_at": generated_at or _utc_now(),
+        "generated_at": generated_at or utc_now(),
         "portfolio_count": len(portfolios),
         "baseline": baseline_portfolio,
         "portfolios": portfolios,
@@ -385,10 +385,6 @@ def _loss_relation(delta: float | None) -> str:
 
 def _missing_artifact(key: str) -> dict[str, Any]:
     return {"key": key, "path": None, "exists": False}
-
-
-def _utc_now() -> str:
-    return utc_now()
 
 
 def _dict(value: Any) -> dict[str, Any]:

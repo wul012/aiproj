@@ -138,7 +138,7 @@ def build_dataset_version_manifest(
             "id": f"{name}@{version}",
             "description": description,
         },
-        "created_at": created_at or _utc_now(),
+        "created_at": created_at or utc_now(),
         "preparation": {
             "recursive": bool(recursive),
             "output_name": output_name,
@@ -343,10 +343,6 @@ def _clip(text: str, limit: int) -> str:
 
 def _sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
-
-def _utc_now() -> str:
-    return utc_now()
 
 
 def _stat(label: str, value: Any) -> str:

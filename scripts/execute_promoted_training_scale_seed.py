@@ -38,12 +38,12 @@ def main() -> None:
         seed_path,
         execute=args.execute,
         allow_review=not args.no_allow_review,
+        require_clean_evidence=args.require_clean_evidence,
         timeout_seconds=args.timeout_seconds,
         title=args.title,
     )
     summary = report["summary"]
-    clean_evidence_requirement = _clean_evidence_requirement(summary, required=args.require_clean_evidence)
-    report["clean_evidence_requirement"] = clean_evidence_requirement
+    clean_evidence_requirement = report["clean_evidence_requirement"]
     outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
@@ -83,18 +83,6 @@ def _default_out_dir(path: Path) -> Path:
     if path.is_dir():
         return path / "handoff"
     return path.parent / "handoff"
-
-
-def _clean_evidence_requirement(summary: dict[str, object], *, required: bool) -> dict[str, object]:
-    ready = bool(summary.get("seed_handoff_clean_evidence_ready"))
-    status = "pass" if required and ready else "fail" if required else "not-required"
-    return {
-        "required": bool(required),
-        "status": status,
-        "ready": ready,
-        "readiness_status": summary.get("seed_handoff_clean_evidence_status"),
-        "detail": summary.get("seed_handoff_clean_evidence_detail"),
-    }
 
 
 if __name__ == "__main__":

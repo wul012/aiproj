@@ -61,7 +61,7 @@ def build_benchmark_scorecard_comparison(
     return {
         "schema_version": 1,
         "title": title,
-        "generated_at": generated_at or _utc_now(),
+        "generated_at": generated_at or utc_now(),
         "scorecard_count": len(scorecards),
         "baseline": baseline_run,
         "runs": runs,
@@ -124,10 +124,6 @@ def _select_baseline(runs: list[dict[str, Any]], baseline: str | int | None) -> 
         if wanted in {str(run.get("name")), str(run.get("source_path")), str(run.get("run_dir")), Path(str(run.get("run_dir") or "")).name}:
             return run
     raise ValueError(f"baseline did not match a scorecard name, path, run_dir, or 1-based index: {baseline}")
-
-
-def _utc_now() -> str:
-    return utc_now()
 
 
 def _as_str(value: Any) -> str | None:

@@ -47,7 +47,7 @@ REQUEST_HISTORY_CSV_COLUMNS = [
 def append_inference_log(path: str | Path, event: dict[str, Any]) -> None:
     log_path = Path(path)
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    payload = {"timestamp": _utc_now(), **event}
+    payload = {"timestamp": utc_now(), **event}
     with log_path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
 
@@ -314,7 +314,3 @@ def as_int(value: Any, name: str) -> int:
         return int(value)
     except (TypeError, ValueError) as exc:
         raise ValueError(f"{name} must be an integer") from exc
-
-
-def _utc_now() -> str:
-    return utc_now()

@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+233-v219-promoted-seed-handoff-clean-evidence-requirement-contract.md
+ -> v219 code explanation: promote the promoted seed handoff clean-evidence requirement decision into a reusable library contract, export the not-required/pass/fail status domain, and finish the pending duplicate `_utc_now()` wrapper cleanup.
 220-v206-promotion-suite-guard-evidence.md
  -> v206 code explanation: carry handoff suite guard evidence into training-scale promotion acceptance reports so promoted/review/blocked decisions retain the clean-comparison boundary without changing promotion status semantics.
 219-v205-workflow-handoff-suite-guard-evidence.md

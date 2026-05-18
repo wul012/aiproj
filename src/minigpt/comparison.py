@@ -152,7 +152,7 @@ def build_comparison_report(
     summary = _comparison_summary(runs, baseline_run, baseline_deltas)
     report = {
         "schema_version": 2,
-        "generated_at": generated_at or _utc_now(),
+        "generated_at": generated_at or utc_now(),
         "run_count": len(runs),
         "baseline": baseline_run.to_dict(),
         "runs": [run.to_dict() for run in runs],
@@ -389,10 +389,6 @@ def _model_signature(
 
 def _missing(value: Any) -> str:
     return "?" if value is None else str(value)
-
-
-def _utc_now() -> str:
-    return utc_now()
 
 
 def _fmt_signed(value: Any) -> str:

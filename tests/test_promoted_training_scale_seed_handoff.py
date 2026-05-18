@@ -13,8 +13,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt import promoted_training_scale_seed_handoff as handoff_module  # noqa: E402
 from minigpt import promoted_training_scale_seed_handoff_artifacts as artifact_module  # noqa: E402
 from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
+    SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
     build_promoted_training_scale_seed_handoff,
+    build_seed_handoff_clean_evidence_requirement,
     render_promoted_training_scale_seed_handoff_html,
     render_promoted_training_scale_seed_handoff_markdown,
     write_promoted_training_scale_seed_handoff_outputs,
@@ -27,6 +29,32 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
             ("ready", "pending-plan", "review", "incomplete"),
         )
+        self.assertEqual(
+            SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
+            ("not-required", "pass", "fail"),
+        )
+
+    def test_clean_evidence_requirement_helper_maps_public_statuses(self) -> None:
+        pending_summary = {
+            "seed_handoff_clean_evidence_ready": False,
+            "seed_handoff_clean_evidence_status": "pending-plan",
+            "seed_handoff_clean_evidence_detail": "execute the seed handoff first",
+        }
+        ready_summary = {
+            "seed_handoff_clean_evidence_ready": True,
+            "seed_handoff_clean_evidence_status": "ready",
+            "seed_handoff_clean_evidence_detail": "clean evidence is ready",
+        }
+
+        optional = build_seed_handoff_clean_evidence_requirement(pending_summary)
+        required_pending = build_seed_handoff_clean_evidence_requirement(pending_summary, required=True)
+        required_ready = build_seed_handoff_clean_evidence_requirement(ready_summary, required=True)
+
+        self.assertEqual(optional["status"], "not-required")
+        self.assertEqual(required_pending["status"], "fail")
+        self.assertEqual(required_pending["readiness_status"], "pending-plan")
+        self.assertEqual(required_ready["status"], "pass")
+        self.assertEqual(required_ready["status_domain"], list(SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES))
 
     def test_artifact_functions_are_reexported_from_handoff_module(self) -> None:
         self.assertIs(
@@ -54,6 +82,29 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertFalse(report["execute"])
             self.assertIn("scripts/plan_training_scale.py", report["command"])
             self.assertEqual(report["summary"]["artifact_count"], 5)
+            self.assertEqual(report["clean_evidence_requirement"]["status"], "not-required")
+
+    def test_builder_can_attach_required_clean_evidence_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+
+            planned = build_promoted_training_scale_seed_handoff(
+                seed,
+                require_clean_evidence=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            executed = build_promoted_training_scale_seed_handoff(
+                seed,
+                execute=True,
+                require_clean_evidence=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(planned["clean_evidence_requirement"]["status"], "fail")
+            self.assertEqual(planned["clean_evidence_requirement"]["readiness_status"], "pending-plan")
+            self.assertEqual(executed["clean_evidence_requirement"]["status"], "pass")
+            self.assertEqual(executed["clean_evidence_requirement"]["readiness_status"], "ready")
 
     def test_blocks_review_when_allow_review_false(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -149,15 +200,18 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("seed_handoff_suite_alignment_status", csv_text)
             self.assertIn("seed_handoff_clean_evidence_status", csv_text)
             self.assertIn("seed_handoff_clean_evidence_status_domain", csv_text)
+            self.assertIn("clean_evidence_requirement_status_domain", csv_text)
             self.assertIn("Selected handoff suite", markdown)
             self.assertIn("Handoff suite mismatches", markdown)
             self.assertIn("Seed handoff suite alignment", markdown)
             self.assertIn("Seed handoff clean evidence", markdown)
             self.assertIn("Seed handoff clean evidence status domain", markdown)
+            self.assertIn("Clean evidence requirement status domain", markdown)
             self.assertIn("Selected handoff suite", html)
             self.assertIn("Suite alignment", html)
             self.assertIn("Clean evidence", html)
             self.assertIn("Clean evidence domain", html)
+            self.assertIn("Clean evidence gate domain", html)
             self.assertIn("selected_handoff_suite_consistency=consistent", completed.stdout)
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
             self.assertIn("seed_handoff_suite_alignment_status=pending-plan", completed.stdout)
@@ -165,6 +219,10 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("seed_handoff_clean_evidence_status_domain=", completed.stdout)
             script_payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
             self.assertEqual(script_payload["clean_evidence_requirement"]["status"], "not-required")
+            self.assertEqual(
+                script_payload["clean_evidence_requirement"]["status_domain"],
+                list(SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES),
+            )
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
 
     def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
@@ -220,6 +278,10 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(payload["clean_evidence_requirement"]["status"], "pass")
             self.assertTrue(payload["clean_evidence_requirement"]["required"])
             self.assertTrue(payload["clean_evidence_requirement"]["ready"])
+            self.assertEqual(
+                payload["clean_evidence_requirement"]["status_domain"],
+                list(SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES),
+            )
 
     def test_script_rejects_pending_clean_evidence_when_required(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -256,8 +318,10 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertFalse(payload["clean_evidence_requirement"]["ready"])
             self.assertEqual(payload["clean_evidence_requirement"]["readiness_status"], "pending-plan")
             self.assertIn("clean_evidence_requirement_status", csv_text)
+            self.assertIn("clean_evidence_requirement_status_domain", csv_text)
             self.assertIn("Clean evidence requirement", markdown)
             self.assertIn("Clean evidence gate", html)
+            self.assertIn("Clean evidence gate domain", html)
 
     def test_reports_mismatched_selected_suite_alignment_without_blocking(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

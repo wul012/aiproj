@@ -27,6 +27,7 @@ from minigpt.report_utils import (
 
 
 SeedHandoffCleanEvidenceStatus = Literal["ready", "pending-plan", "review", "incomplete"]
+SeedHandoffCleanEvidenceRequirementStatus = Literal["not-required", "pass", "fail"]
 
 
 class SeedHandoffCleanEvidenceReadiness(TypedDict):
@@ -36,11 +37,26 @@ class SeedHandoffCleanEvidenceReadiness(TypedDict):
     status_domain: list[SeedHandoffCleanEvidenceStatus]
 
 
+class SeedHandoffCleanEvidenceRequirement(TypedDict):
+    required: bool
+    status: SeedHandoffCleanEvidenceRequirementStatus
+    ready: bool
+    readiness_status: SeedHandoffCleanEvidenceStatus | None
+    detail: str | None
+    status_domain: list[SeedHandoffCleanEvidenceRequirementStatus]
+
+
 SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...] = (
     "ready",
     "pending-plan",
     "review",
     "incomplete",
+)
+
+SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES: tuple[SeedHandoffCleanEvidenceRequirementStatus, ...] = (
+    "not-required",
+    "pass",
+    "fail",
 )
 
 
@@ -59,6 +75,7 @@ def build_promoted_training_scale_seed_handoff(
     *,
     execute: bool = False,
     allow_review: bool = True,
+    require_clean_evidence: bool = False,
     timeout_seconds: int = 900,
     generated_at: str | None = None,
     title: str = "MiniGPT promoted training scale seed handoff",
@@ -83,6 +100,10 @@ def build_promoted_training_scale_seed_handoff(
     artifact_rows = _artifact_rows(project_root, next_plan)
     next_batch_command = _list_of_strs(_dict(plan_report.get("batch")).get("command"))
     summary = _summary(seed, next_plan, plan_report, execution, artifact_rows, next_batch_command)
+    clean_evidence_requirement = build_seed_handoff_clean_evidence_requirement(
+        summary,
+        required=require_clean_evidence,
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -103,7 +124,31 @@ def build_promoted_training_scale_seed_handoff(
         "next_batch_command_text": _display_command(next_batch_command),
         "artifact_rows": artifact_rows,
         "summary": summary,
+        "clean_evidence_requirement": clean_evidence_requirement,
         "recommendations": _recommendations(summary, plan_report, execution, artifact_rows, next_batch_command),
+    }
+
+
+def build_seed_handoff_clean_evidence_requirement(
+    summary: dict[str, Any],
+    *,
+    required: bool = False,
+) -> SeedHandoffCleanEvidenceRequirement:
+    ready = bool(summary.get("seed_handoff_clean_evidence_ready"))
+    status: SeedHandoffCleanEvidenceRequirementStatus = "not-required"
+    if required:
+        status = "pass" if ready else "fail"
+    readiness_status = summary.get("seed_handoff_clean_evidence_status")
+    if readiness_status not in SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES:
+        readiness_status = None
+    detail = summary.get("seed_handoff_clean_evidence_detail")
+    return {
+        "required": bool(required),
+        "status": status,
+        "ready": ready,
+        "readiness_status": readiness_status,
+        "detail": str(detail) if detail is not None else None,
+        "status_domain": list(SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES),
     }
 
 
@@ -430,7 +475,14 @@ def _tail(text: str, max_chars: int = 700) -> str:
     return text[-max_chars:] if len(text) > max_chars else text
 
 __all__ = [
+    "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
+    "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
+    "SeedHandoffCleanEvidenceRequirement",
+    "SeedHandoffCleanEvidenceRequirementStatus",
+    "SeedHandoffCleanEvidenceReadiness",
+    "SeedHandoffCleanEvidenceStatus",
     "build_promoted_training_scale_seed_handoff",
+    "build_seed_handoff_clean_evidence_requirement",
     "load_promoted_training_scale_seed",
     "render_promoted_training_scale_seed_handoff_html",
     "render_promoted_training_scale_seed_handoff_markdown",
