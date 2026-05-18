@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+241-v227-scorecard-eval-coverage-readiness.md
+ -> v227 code explanation: carry eval-suite coverage/comparison readiness into benchmark scorecard scoring, summary, metrics, and recommendations while preserving legacy case-count behavior.
 240-v226-eval-suite-coverage-readiness.md
  -> v226 code explanation: add eval-suite coverage readiness and comparison readiness so standard benchmark evidence can be distinguished from small ad hoc prompt runs.
 239-v225-training-scale-run-numeric-helper-consolidation.md

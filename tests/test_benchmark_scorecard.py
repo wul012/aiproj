@@ -137,6 +137,8 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["summary"]["overall_status"], "pass")
             self.assertGreaterEqual(scorecard["summary"]["overall_score"], 80)
             self.assertEqual(scorecard["summary"]["component_count"], 6)
+            self.assertIsNone(scorecard["summary"]["eval_suite_coverage_status"])
+            self.assertIsNone(scorecard["summary"]["eval_suite_comparison_status"])
             self.assertEqual(scorecard["summary"]["rubric_status"], "pass")
             self.assertEqual(scorecard["summary"]["rubric_avg_score"], 92.0)
             self.assertEqual(scorecard["summary"]["weakest_rubric_case"], "fact-check")
@@ -175,6 +177,37 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["registry_context"]["pair_delta_cases"], 5)
             self.assertIn("Prioritize generation-quality flag `low_diversity`", " ".join(scorecard["recommendations"]))
             self.assertEqual(scorecard["warnings"], [])
+
+    def test_eval_coverage_component_uses_eval_suite_readiness_when_available(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir, registry_path = make_run(Path(tmp))
+            eval_path = run_dir / "eval_suite" / "eval_suite.json"
+            payload = json.loads(eval_path.read_text(encoding="utf-8"))
+            payload["coverage"] = {
+                "status": "pass",
+                "comparison_status": "warn",
+                "decision": "suite_has_representative_prompt_coverage",
+                "comparison_decision": "prefer_standard_suite_before_checkpoint_quality_claims",
+                "case_count": payload["case_count"],
+                "task_type_count": 5,
+                "difficulty_count": 2,
+                "tag_count": 5,
+                "blockers": [],
+                "comparison_blockers": ["missing comparison difficulties: hard"],
+            }
+            eval_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            scorecard = build_benchmark_scorecard(run_dir, registry_path=registry_path)
+
+            eval_component = next(item for item in scorecard["components"] if item["key"] == "eval_coverage")
+            self.assertEqual(eval_component["status"], "warn")
+            self.assertEqual(eval_component["score"], 75.0)
+            self.assertEqual(eval_component["metrics"]["coverage_status"], "pass")
+            self.assertEqual(eval_component["metrics"]["comparison_status"], "warn")
+            self.assertEqual(scorecard["summary"]["eval_suite_coverage_status"], "pass")
+            self.assertEqual(scorecard["summary"]["eval_suite_comparison_status"], "warn")
+            self.assertIn("comparison-ready suite", " ".join(scorecard["recommendations"]))
+            self.assertIn("missing comparison difficulties: hard", " ".join(scorecard["recommendations"]))
 
     def test_same_checkpoint_pair_baseline_is_marked_without_overstating_improvement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

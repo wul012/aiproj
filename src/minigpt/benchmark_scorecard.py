@@ -109,9 +109,20 @@ def write_benchmark_scorecard_outputs(scorecard: dict[str, Any], out_dir: str | 
 
 
 def _eval_coverage_component(eval_suite: Any, path: Path) -> dict[str, Any]:
-    case_count = _number(_pick(eval_suite, "case_count")) or 0
+    coverage = _eval_suite_coverage(eval_suite)
+    case_count = _number(_pick(eval_suite, "case_count")) or _number(coverage.get("case_count")) or 0
     score = min(100.0, case_count * 20.0)
+    if coverage:
+        coverage_status = str(coverage.get("status") or "missing")
+        comparison_status = str(coverage.get("comparison_status") or "missing")
+        if coverage_status != "pass":
+            score = min(score, 55.0)
+        elif comparison_status != "pass":
+            score = min(score, 75.0)
     status = _status(score)
+    detail = f"{int(case_count)} fixed prompt case(s)."
+    if coverage:
+        detail += f" coverage={coverage.get('status') or 'missing'}, comparison={coverage.get('comparison_status') or 'missing'}."
     return _component(
         "eval_coverage",
         "Eval Suite Coverage",
@@ -119,9 +130,39 @@ def _eval_coverage_component(eval_suite: Any, path: Path) -> dict[str, Any]:
         0.15,
         status,
         str(path),
-        f"{int(case_count)} fixed prompt case(s).",
-        {"case_count": int(case_count)},
+        detail,
+        _eval_coverage_metrics(int(case_count), coverage),
     )
+
+
+def _eval_suite_coverage(eval_suite: Any) -> dict[str, Any]:
+    payload = _dict(eval_suite)
+    coverage = _dict(payload.get("coverage"))
+    if coverage:
+        return coverage
+    benchmark = _dict(payload.get("benchmark"))
+    return _dict(benchmark.get("coverage"))
+
+
+def _eval_coverage_metrics(case_count: int, coverage: dict[str, Any]) -> dict[str, Any]:
+    metrics: dict[str, Any] = {"case_count": case_count, "coverage_available": bool(coverage)}
+    if coverage:
+        metrics.update(
+            {
+                "coverage_status": coverage.get("status"),
+                "comparison_status": coverage.get("comparison_status"),
+                "decision": coverage.get("decision"),
+                "comparison_decision": coverage.get("comparison_decision"),
+                "task_type_count": coverage.get("task_type_count"),
+                "difficulty_count": coverage.get("difficulty_count"),
+                "tag_count": coverage.get("tag_count"),
+                "blockers": coverage.get("blockers") if isinstance(coverage.get("blockers"), list) else [],
+                "comparison_blockers": coverage.get("comparison_blockers")
+                if isinstance(coverage.get("comparison_blockers"), list)
+                else [],
+            }
+        )
+    return metrics
 
 
 def _generation_quality_component(report: Any) -> dict[str, Any]:
@@ -310,6 +351,7 @@ def _score_summary(
     weakest_difficulty = _dict(_pick(drilldowns, "weakest_difficulty"))
     rubric_summary = _dict(rubric_scores.get("summary"))
     generation_summary = _dict(_pick(generation_quality, "summary"))
+    eval_coverage = _eval_suite_coverage(eval_suite)
     flag_summary = _dict(generation_summary.get("flag_summary"))
     flag_id_counts = _dict(flag_summary.get("flag_id_counts"))
     worst_cases = _list_of_dicts(flag_summary.get("worst_cases"))
@@ -319,6 +361,8 @@ def _score_summary(
         "overall_status": _status(overall),
         "component_count": len(components),
         "eval_suite_cases": _pick(eval_suite, "case_count"),
+        "eval_suite_coverage_status": eval_coverage.get("status"),
+        "eval_suite_comparison_status": eval_coverage.get("comparison_status"),
         "generation_quality_status": _pick(generation_summary, "overall_status"),
         "generation_quality_cases": _pick(generation_summary, "case_count"),
         "generation_quality_total_flags": flag_summary.get("total_flags"),
@@ -370,6 +414,13 @@ def _recommendations(summary: dict[str, Any], components: list[dict[str, Any]], 
     weak = [item for item in components if item.get("status") != "pass"]
     if weak:
         recs.append("Improve weak components: " + ", ".join(str(item.get("title")) for item in weak) + ".")
+    eval_component = next((item for item in components if item.get("key") == "eval_coverage"), {})
+    eval_metrics = _dict(eval_component.get("metrics"))
+    if eval_metrics.get("comparison_status") not in {None, "pass"}:
+        recs.append("Prefer `builtin:standard-zh` or another comparison-ready suite before claiming checkpoint quality gains.")
+    comparison_blockers = [str(item) for item in eval_metrics.get("comparison_blockers", []) if str(item)]
+    if comparison_blockers:
+        recs.append("Resolve eval comparison blockers: " + "; ".join(comparison_blockers) + ".")
     if summary.get("weakest_rubric_case"):
         recs.append(
             f"Review weakest rubric case `{summary.get('weakest_rubric_case')}` at score {summary.get('weakest_rubric_score')} before trusting benchmark gains."
