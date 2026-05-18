@@ -246,7 +246,9 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Artifact Coverage", markdown)
+            self.assertIn("Best score maturity", markdown)
             self.assertIn("&lt;base&gt;", html)
+            self.assertIn("Best score maturity", html)
             self.assertNotIn("<strong><base>", html)
 
     def test_build_comparison_rejects_name_mismatch(self) -> None:

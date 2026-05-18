@@ -499,6 +499,9 @@ c/231/解释/说明.md
 c/232/图片
 c/232/解释/说明.md
  -> v232 portfolio comparison maturity review guard 的运行截图和解释
+c/233/图片
+c/233/解释/说明.md
+ -> v233 portfolio comparison maturity output 的运行截图和解释
 ```
 
 写入规则：
