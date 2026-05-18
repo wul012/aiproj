@@ -59,6 +59,7 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Release readiness deltas", overview.get("release_readiness_delta_count")),
                 ("Release readiness regressions", overview.get("release_readiness_regressed_count")),
                 ("Release readiness CI workflow regressions", overview.get("release_readiness_ci_workflow_regression_count")),
+                ("Release readiness test coverage regressions", overview.get("release_readiness_test_coverage_regression_count")),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -129,6 +130,10 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     ("CI workflow regressions", release_readiness.get("ci_workflow_regression_count")),
                     ("CI workflow status changes", release_readiness.get("ci_workflow_status_changed_count")),
                     ("Max CI workflow failed-check delta", release_readiness.get("max_abs_ci_workflow_failed_check_delta")),
+                    ("Test coverage regressions", release_readiness.get("test_coverage_regression_count")),
+                    ("Test coverage status changes", release_readiness.get("test_coverage_status_changed_count")),
+                    ("Max coverage percent delta", release_readiness.get("max_abs_test_coverage_percent_delta")),
+                    ("Max coverage gap delta", release_readiness.get("max_abs_test_coverage_gap_delta")),
                 ]
             ),
         ]
@@ -161,6 +166,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("Release trend", release_readiness.get("trend_status")),
         ("Readiness deltas", release_readiness.get("delta_count")),
         ("CI regressions", release_readiness.get("ci_workflow_regression_count")),
+        ("Coverage regressions", release_readiness.get("test_coverage_regression_count")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -282,6 +288,10 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         ("CI workflow regressions", release_readiness.get("ci_workflow_regression_count")),
         ("CI workflow status changes", release_readiness.get("ci_workflow_status_changed_count")),
         ("Max CI workflow failed-check delta", release_readiness.get("max_abs_ci_workflow_failed_check_delta")),
+        ("Test coverage regressions", release_readiness.get("test_coverage_regression_count")),
+        ("Test coverage status changes", release_readiness.get("test_coverage_status_changed_count")),
+        ("Max coverage percent delta", release_readiness.get("max_abs_test_coverage_percent_delta")),
+        ("Max coverage gap delta", release_readiness.get("max_abs_test_coverage_gap_delta")),
     ]
     return '<section class="panel"><h2>Release Readiness Trend Context</h2><table>' + "".join(
         f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows

@@ -45,6 +45,10 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "ci_workflow_regression_count": 0,
                     "ci_workflow_status_changed_count": 0,
                     "max_abs_ci_workflow_failed_check_delta": 0,
+                    "test_coverage_regression_count": 0,
+                    "test_coverage_status_changed_count": 0,
+                    "max_abs_test_coverage_percent_delta": 0,
+                    "max_abs_test_coverage_gap_delta": 0,
                 },
             },
             ensure_ascii=False,
@@ -104,6 +108,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_delta_count"], 2)
             self.assertEqual(summary["summary"]["release_readiness_regressed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
             self.assertEqual(summary["summary"]["overall_status"], "pass")
@@ -112,6 +117,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["improved_count"], 1)
             self.assertEqual(summary["release_readiness_context"]["max_abs_status_delta"], 3)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 0)
+            self.assertEqual(summary["release_readiness_context"]["test_coverage_regression_count"], 0)
             self.assertEqual(summary["request_history_context"]["timeout_rate"], 0.25)
             capability_titles = [item["title"] for item in summary["capabilities"]]
             self.assertIn("Project Synthesis", capability_titles)
@@ -190,6 +196,32 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 1)
             self.assertIn("CI workflow hygiene regressions", " ".join(summary["recommendations"]))
+
+    def test_test_coverage_regression_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"coverage-regressed": 1}
+            registry["release_readiness_delta_summary"]["regressed_count"] = 0
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["ci_workflow_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["test_coverage_regression_count"] = 1
+            registry["release_readiness_delta_summary"]["test_coverage_status_changed_count"] = 1
+            registry["release_readiness_delta_summary"]["max_abs_test_coverage_percent_delta"] = 7.5
+            registry["release_readiness_delta_summary"]["max_abs_test_coverage_gap_delta"] = 3
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "coverage-regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_test_coverage_status_changed_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_max_test_coverage_percent_delta"], 7.5)
+            self.assertEqual(summary["summary"]["release_readiness_max_test_coverage_gap_delta"], 3)
+            self.assertEqual(summary["release_readiness_context"]["test_coverage_regression_count"], 1)
+            self.assertIn("test coverage regressions", " ".join(summary["recommendations"]))
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

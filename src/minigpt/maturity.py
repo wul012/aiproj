@@ -210,7 +210,7 @@ def _summary(
         average = round(sum(float(item.get("maturity_level") or 0) for item in capabilities) / len(capabilities), 2)
     statuses = [str(item.get("status")) for item in capabilities]
     overall = "fail" if "fail" in statuses else "warn" if "warn" in statuses else "pass"
-    if overall == "pass" and release_readiness_context.get("trend_status") in {"regressed", "ci-regressed"}:
+    if overall == "pass" and release_readiness_context.get("trend_status") in {"regressed", "ci-regressed", "coverage-regressed"}:
         overall = "warn"
     return {
         "current_version": max(published_versions) if published_versions else None,
@@ -227,6 +227,10 @@ def _summary(
         "release_readiness_ci_workflow_regression_count": release_readiness_context.get("ci_workflow_regression_count"),
         "release_readiness_ci_workflow_status_changed_count": release_readiness_context.get("ci_workflow_status_changed_count"),
         "release_readiness_max_ci_workflow_failed_check_delta": release_readiness_context.get("max_abs_ci_workflow_failed_check_delta"),
+        "release_readiness_test_coverage_regression_count": release_readiness_context.get("test_coverage_regression_count"),
+        "release_readiness_test_coverage_status_changed_count": release_readiness_context.get("test_coverage_status_changed_count"),
+        "release_readiness_max_test_coverage_percent_delta": release_readiness_context.get("max_abs_test_coverage_percent_delta"),
+        "release_readiness_max_test_coverage_gap_delta": release_readiness_context.get("max_abs_test_coverage_gap_delta"),
         "request_history_status": _nested_pick(request_history_summary, "summary", "status"),
         "request_history_records": _nested_pick(request_history_summary, "summary", "total_log_records"),
         "request_history_timeout_rate": _nested_pick(request_history_summary, "summary", "timeout_rate"),
@@ -297,6 +301,10 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "ci_workflow_regression_count": None,
             "ci_workflow_status_changed_count": None,
             "max_abs_ci_workflow_failed_check_delta": None,
+            "test_coverage_regression_count": None,
+            "test_coverage_status_changed_count": None,
+            "max_abs_test_coverage_percent_delta": None,
+            "max_abs_test_coverage_gap_delta": None,
         }
     counts = registry.get("release_readiness_comparison_counts")
     delta_summary = _dict(registry.get("release_readiness_delta_summary"))
@@ -314,6 +322,10 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "ci_workflow_regression_count": delta_summary.get("ci_workflow_regression_count"),
         "ci_workflow_status_changed_count": delta_summary.get("ci_workflow_status_changed_count"),
         "max_abs_ci_workflow_failed_check_delta": delta_summary.get("max_abs_ci_workflow_failed_check_delta"),
+        "test_coverage_regression_count": delta_summary.get("test_coverage_regression_count"),
+        "test_coverage_status_changed_count": delta_summary.get("test_coverage_status_changed_count"),
+        "max_abs_test_coverage_percent_delta": delta_summary.get("max_abs_test_coverage_percent_delta"),
+        "max_abs_test_coverage_gap_delta": delta_summary.get("max_abs_test_coverage_gap_delta"),
     }
     context["trend_status"] = _release_readiness_trend_status(context)
     return context
@@ -322,6 +334,8 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
 def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
     if not context.get("available"):
         return None
+    if int(context.get("test_coverage_regression_count") or 0) > 0:
+        return "coverage-regressed"
     if int(context.get("regressed_count") or 0) > 0:
         return "regressed"
     if int(context.get("ci_workflow_regression_count") or 0) > 0:
@@ -387,6 +401,8 @@ def _recommendations(
         recs.append("Generate a fresh registry before final portfolio review so the maturity summary can include live run counts.")
     if not release_readiness_context.get("available"):
         recs.append("Generate a registry with release readiness comparison outputs so maturity review can include release quality trend context.")
+    elif int(release_readiness_context.get("test_coverage_regression_count") or 0) > 0:
+        recs.append("Review test coverage regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("regressed_count") or 0) > 0:
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("ci_workflow_regression_count") or 0) > 0:

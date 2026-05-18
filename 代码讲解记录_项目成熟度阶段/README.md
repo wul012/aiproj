@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+261-v247-maturity-coverage-regression-context.md
+ -> v247 code explanation: carry registry-level coverage regressions into maturity summary status, Markdown/HTML context, CLI output, and recommendations.
 260-v246-registry-coverage-regression-tracking.md
  -> v246 code explanation: carry release readiness coverage regressions into registry summaries, CSV, HTML, delta leaders, and CLI output.
 259-v245-release-readiness-coverage-comparison.md
