@@ -544,6 +544,9 @@ c/246/解释/说明.md
 c/247/图片
 c/247/解释/说明.md
  -> v247 maturity coverage regression context 的运行截图和解释
+c/248/图片
+c/248/解释/说明.md
+ -> v248 maturity narrative coverage regression context 的运行截图和解释
 ```
 
 写入规则：

@@ -28,6 +28,8 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                 ("Current version", summary.get("current_version")),
                 ("Maturity status", summary.get("maturity_status")),
                 ("Release readiness trend", summary.get("release_readiness_trend_status")),
+                ("Release coverage regressions", summary.get("release_readiness_test_coverage_regression_count")),
+                ("Release coverage gap delta", summary.get("release_readiness_max_test_coverage_gap_delta")),
                 ("Request history status", summary.get("request_history_status")),
                 ("Benchmark scorecards", summary.get("benchmark_scorecard_count")),
                 ("Benchmark average", summary.get("benchmark_avg_score")),
@@ -97,6 +99,8 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Version", summary.get("current_version")),
         ("Maturity", summary.get("maturity_status")),
         ("Release trend", summary.get("release_readiness_trend_status")),
+        ("Coverage regressions", summary.get("release_readiness_test_coverage_regression_count")),
+        ("Coverage gap delta", summary.get("release_readiness_max_test_coverage_gap_delta")),
         ("Requests", summary.get("request_history_status")),
         ("Benchmarks", summary.get("benchmark_scorecard_count")),
         ("Benchmark avg", summary.get("benchmark_avg_score")),
@@ -242,7 +246,7 @@ th { color:var(--muted); font-size:12px; text-transform:uppercase; }
 .pill { display:inline-block; min-width:62px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; background:var(--blue); }
 .pill.ready, .pill.pass, .pill.improved, .pill.stable { background:var(--green); }
 .pill.review, .pill.warn, .pill.panel-changed, .pill.incomplete { background:var(--amber); }
-.pill.fail, .pill.regressed { background:var(--red); }
+.pill.fail, .pill.regressed, .pill.coverage-regressed { background:var(--red); }
 .pill.missing { background:#6b7280; }
 ul { margin:0; padding-left:22px; }
 li { margin:8px 0; }

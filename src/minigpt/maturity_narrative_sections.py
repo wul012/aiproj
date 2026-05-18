@@ -129,7 +129,9 @@ def _release_claim(summary: dict[str, Any]) -> str:
     return (
         f"Release readiness trend is {summary.get('release_readiness_trend_status') or 'missing'} "
         f"with {summary.get('release_readiness_regressed_count') or 0} regression(s) and "
-        f"{summary.get('release_readiness_improved_count') or 0} improvement(s)."
+        f"{summary.get('release_readiness_improved_count') or 0} improvement(s); "
+        f"test coverage regressions={summary.get('release_readiness_test_coverage_regression_count') or 0}, "
+        f"max coverage gap delta={summary.get('release_readiness_max_test_coverage_gap_delta') if summary.get('release_readiness_max_test_coverage_gap_delta') is not None else 'missing'}."
     )
 
 

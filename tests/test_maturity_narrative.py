@@ -23,7 +23,13 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
-def make_project(root: Path, *, release_trend: str = "improved", regressed_count: int = 0) -> dict[str, Path]:
+def make_project(
+    root: Path,
+    *,
+    release_trend: str = "improved",
+    regressed_count: int = 0,
+    coverage_regression_count: int = 0,
+) -> dict[str, Path]:
     project = root / "project"
     maturity_path = project / "runs" / "maturity-summary" / "maturity_summary.json"
     registry_path = project / "runs" / "registry" / "registry.json"
@@ -44,6 +50,10 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
                 "release_readiness_trend_status": release_trend,
                 "release_readiness_regressed_count": regressed_count,
                 "release_readiness_improved_count": 2,
+                "release_readiness_test_coverage_regression_count": coverage_regression_count,
+                "release_readiness_test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
+                "release_readiness_max_test_coverage_percent_delta": 7.5 if coverage_regression_count else 0,
+                "release_readiness_max_test_coverage_gap_delta": 3 if coverage_regression_count else 0,
             },
             "release_readiness_context": {
                 "available": True,
@@ -52,6 +62,10 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
                 "regressed_count": regressed_count,
                 "improved_count": 2,
                 "panel_changed_count": 0,
+                "test_coverage_regression_count": coverage_regression_count,
+                "test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
+                "max_abs_test_coverage_percent_delta": 7.5 if coverage_regression_count else 0,
+                "max_abs_test_coverage_gap_delta": 3 if coverage_regression_count else 0,
             },
             "request_history_context": {
                 "status": "pass",
@@ -70,6 +84,10 @@ def make_project(root: Path, *, release_trend: str = "improved", regressed_count
                 "regressed_count": regressed_count,
                 "improved_count": 2,
                 "panel_changed_count": 0,
+                "test_coverage_regression_count": coverage_regression_count,
+                "test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
+                "max_abs_test_coverage_percent_delta": 7.5 if coverage_regression_count else 0,
+                "max_abs_test_coverage_gap_delta": 3 if coverage_regression_count else 0,
             },
         },
     )
@@ -202,6 +220,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["current_version"], 66)
             self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "improved")
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(narrative["summary"]["request_history_status"], "pass")
             self.assertEqual(narrative["summary"]["benchmark_scorecard_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_avg_score"], 88.5)
@@ -228,6 +247,24 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["portfolio_status"], "review")
             self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "regressed")
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 1)
+            self.assertIn("Resolve review-level release", narrative["recommendations"][0])
+
+    def test_build_maturity_narrative_marks_review_for_coverage_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp), release_trend="coverage-regressed", coverage_regression_count=1)
+
+            narrative = build_maturity_narrative(paths["project"])
+            release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "coverage-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_test_coverage_regression_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_test_coverage_status_changed_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_max_test_coverage_percent_delta"], 7.5)
+            self.assertEqual(narrative["summary"]["release_readiness_max_test_coverage_gap_delta"], 3)
+            self.assertEqual(release_section["status"], "coverage-regressed")
+            self.assertIn("test coverage regressions=1", release_section["claim"])
+            self.assertIn("max coverage gap delta=3", release_section["claim"])
             self.assertIn("Resolve review-level release", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_marks_review_for_non_comparison_ready_decision(self) -> None:
@@ -280,10 +317,14 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("maturity_narrative", Path(outputs["json"]).name)
             self.assertIn("## Evidence Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release Quality Trend", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release coverage regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release coverage gap delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision eval compare", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Coverage regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Coverage gap delta", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Decision eval", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Quality", Path(outputs["html"]).read_text(encoding="utf-8"))

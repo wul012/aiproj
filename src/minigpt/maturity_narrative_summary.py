@@ -38,6 +38,10 @@ def build_maturity_narrative_summary(
         "release_readiness_trend_status": release.get("trend_status"),
         "release_readiness_regressed_count": release.get("regressed_count"),
         "release_readiness_improved_count": release.get("improved_count"),
+        "release_readiness_test_coverage_regression_count": release.get("test_coverage_regression_count"),
+        "release_readiness_test_coverage_status_changed_count": release.get("test_coverage_status_changed_count"),
+        "release_readiness_max_test_coverage_percent_delta": release.get("max_abs_test_coverage_percent_delta"),
+        "release_readiness_max_test_coverage_gap_delta": release.get("max_abs_test_coverage_gap_delta"),
         "request_history_status": request.get("status"),
         "request_history_records": request.get("total_log_records"),
         "request_history_timeout_rate": request.get("timeout_rate"),
@@ -121,8 +125,9 @@ def _portfolio_status(
         return "incomplete"
     if (
         maturity.get("overall_status") in {"warn", "fail"}
-        or release.get("trend_status") == "regressed"
+        or release.get("trend_status") in {"regressed", "coverage-regressed"}
         or int(release.get("regressed_count") or 0) > 0
+        or int(release.get("test_coverage_regression_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
         or any(row.get("decision_status") in {"review", "blocked"} for row in decision_rows)
@@ -145,6 +150,22 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "trend_status": _coalesce(release_context.get("trend_status"), maturity_summary.get("release_readiness_trend_status")),
         "regressed_count": _coalesce(release_context.get("regressed_count"), maturity_summary.get("release_readiness_regressed_count")),
         "improved_count": _coalesce(release_context.get("improved_count"), maturity_summary.get("release_readiness_improved_count")),
+        "test_coverage_regression_count": _coalesce(
+            release_context.get("test_coverage_regression_count"),
+            maturity_summary.get("release_readiness_test_coverage_regression_count"),
+        ),
+        "test_coverage_status_changed_count": _coalesce(
+            release_context.get("test_coverage_status_changed_count"),
+            maturity_summary.get("release_readiness_test_coverage_status_changed_count"),
+        ),
+        "max_abs_test_coverage_percent_delta": _coalesce(
+            release_context.get("max_abs_test_coverage_percent_delta"),
+            maturity_summary.get("release_readiness_max_test_coverage_percent_delta"),
+        ),
+        "max_abs_test_coverage_gap_delta": _coalesce(
+            release_context.get("max_abs_test_coverage_gap_delta"),
+            maturity_summary.get("release_readiness_max_test_coverage_gap_delta"),
+        ),
     }
 
 
