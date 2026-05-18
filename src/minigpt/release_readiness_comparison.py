@@ -36,6 +36,14 @@ CI_STATUS_ORDER = {
     "pass": 2,
 }
 
+COVERAGE_STATUS_ORDER = {
+    "missing": 0,
+    "fail": 0,
+    "warn": 1,
+    "review": 1,
+    "pass": 2,
+}
+
 
 def build_release_readiness_comparison(
     readiness_paths: list[str | Path],
@@ -85,6 +93,10 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "ci_workflow_failed_checks": summary.get("ci_workflow_failed_checks"),
         "ci_workflow_node24_actions": summary.get("ci_workflow_node24_actions"),
         "request_history_status": summary.get("request_history_status"),
+        "test_coverage_status": summary.get("test_coverage_status"),
+        "test_coverage_percent": summary.get("test_coverage_percent"),
+        "test_coverage_fail_under": summary.get("test_coverage_fail_under"),
+        "test_coverage_gap": summary.get("test_coverage_gap"),
         "maturity_status": summary.get("maturity_status"),
         "ready_runs": summary.get("ready_runs"),
         "missing_artifacts": summary.get("missing_artifacts"),
@@ -114,11 +126,16 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "compared_status": compared.get("readiness_status"),
         "baseline_ci_workflow_status": baseline.get("ci_workflow_status"),
         "compared_ci_workflow_status": compared.get("ci_workflow_status"),
+        "baseline_test_coverage_status": baseline.get("test_coverage_status"),
+        "compared_test_coverage_status": compared.get("test_coverage_status"),
         "status_delta": status_delta,
         "delta_status": _delta_status(status_delta, changed),
         "audit_score_delta": _number_delta(compared.get("audit_score_percent"), baseline.get("audit_score_percent")),
         "ci_workflow_failed_check_delta": _number_delta(compared.get("ci_workflow_failed_checks"), baseline.get("ci_workflow_failed_checks")),
         "ci_workflow_status_changed": compared.get("ci_workflow_status") != baseline.get("ci_workflow_status"),
+        "test_coverage_percent_delta": _number_delta(compared.get("test_coverage_percent"), baseline.get("test_coverage_percent")),
+        "test_coverage_gap_delta": _number_delta(compared.get("test_coverage_gap"), baseline.get("test_coverage_gap")),
+        "test_coverage_status_changed": compared.get("test_coverage_status") != baseline.get("test_coverage_status"),
         "missing_artifact_delta": _number_delta(compared.get("missing_artifacts"), baseline.get("missing_artifacts")),
         "fail_panel_delta": _number_delta(compared.get("fail_panel_count"), baseline.get("fail_panel_count")),
         "warn_panel_delta": _number_delta(compared.get("warn_panel_count"), baseline.get("warn_panel_count")),
@@ -153,6 +170,12 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append("CI workflow status changed.")
     if delta.get("ci_workflow_failed_check_delta") not in {None, 0, 0.0}:
         parts.append(f"CI workflow failed check delta is {delta.get('ci_workflow_failed_check_delta')}.")
+    if delta.get("test_coverage_status_changed"):
+        parts.append("Test coverage status changed.")
+    if delta.get("test_coverage_percent_delta") not in {None, 0, 0.0}:
+        parts.append(f"Test coverage percent delta is {delta.get('test_coverage_percent_delta')}.")
+    if delta.get("test_coverage_gap_delta") not in {None, 0, 0.0}:
+        parts.append(f"Test coverage gap delta is {delta.get('test_coverage_gap_delta')}.")
     if status == "same" and not changed:
         parts.append("No readiness status or panel delta is present.")
     return " ".join(parts)
@@ -178,10 +201,13 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "regressed_count": sum(1 for delta in deltas if delta.get("delta_status") == "regressed"),
         "changed_panel_delta_count": sum(1 for delta in deltas if delta.get("changed_panels")),
         "ci_workflow_regression_count": sum(1 for delta in deltas if _is_ci_workflow_regression(delta)),
+        "test_coverage_regression_count": sum(1 for delta in deltas if _is_test_coverage_regression(delta)),
     }
 
 
 def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> list[str]:
+    if int(summary.get("test_coverage_regression_count") or 0):
+        return ["At least one readiness comparison shows test coverage regression; inspect coverage percent and gap deltas before release handoff."]
     if int(summary.get("ci_workflow_regression_count") or 0):
         return ["At least one readiness comparison shows CI workflow hygiene regression; inspect CI failed-check deltas before release handoff."]
     if int(summary.get("regressed_count") or 0):
@@ -220,8 +246,24 @@ def _is_ci_workflow_regression(delta: dict[str, Any]) -> bool:
     return False
 
 
+def _is_test_coverage_regression(delta: dict[str, Any]) -> bool:
+    percent_delta = delta.get("test_coverage_percent_delta")
+    if isinstance(percent_delta, (int, float)) and percent_delta < 0:
+        return True
+    gap_delta = delta.get("test_coverage_gap_delta")
+    if isinstance(gap_delta, (int, float)) and gap_delta > 0:
+        return True
+    if delta.get("test_coverage_status_changed"):
+        return _coverage_status_score(delta.get("compared_test_coverage_status")) < _coverage_status_score(delta.get("baseline_test_coverage_status"))
+    return False
+
+
 def _ci_status_score(value: Any) -> int:
     return CI_STATUS_ORDER.get(str(value or "missing"), 0)
+
+
+def _coverage_status_score(value: Any) -> int:
+    return COVERAGE_STATUS_ORDER.get(str(value or "missing"), 0)
 
 
 def _string_list(value: Any) -> list[str]:

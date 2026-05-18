@@ -35,6 +35,9 @@ def make_readiness(
     audit_score: float = 100.0,
     ci_workflow_status: str = "pass",
     ci_workflow_failed_checks: int = 0,
+    test_coverage_status: str = "pass",
+    test_coverage_percent: float = 90.17,
+    test_coverage_gap: float = 0.0,
     fail_panels: int = 0,
     warn_panels: int = 0,
 ) -> Path:
@@ -47,6 +50,7 @@ def make_readiness(
         "request_history": "pass" if request_status == "pass" else "warn",
         "maturity": "pass",
         "ci_workflow_hygiene": "pass" if ci_workflow_status == "pass" else "warn",
+        "test_coverage": "pass" if test_coverage_status == "pass" else "warn",
     }
     report = {
         "schema_version": 1,
@@ -62,6 +66,10 @@ def make_readiness(
             "ci_workflow_failed_checks": ci_workflow_failed_checks,
             "ci_workflow_node24_actions": 2 if ci_workflow_status == "pass" else 1,
             "request_history_status": request_status,
+            "test_coverage_status": test_coverage_status,
+            "test_coverage_percent": test_coverage_percent,
+            "test_coverage_fail_under": 80.0,
+            "test_coverage_gap": test_coverage_gap,
             "maturity_status": "pass",
             "ready_runs": 1,
             "missing_artifacts": 0,
@@ -112,6 +120,7 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertGreater(delta["status_delta"], 0)
             self.assertIn("release_gate:fail->pass", delta["changed_panels"])
             self.assertEqual(delta["ci_workflow_failed_check_delta"], 0)
+            self.assertEqual(delta["test_coverage_percent_delta"], 0)
             self.assertIn("Readiness improved", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_marks_regression_with_baseline_override(self) -> None:
@@ -153,6 +162,32 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("ci_workflow_hygiene:pass->warn", delta["changed_panels"])
             self.assertIn("CI workflow hygiene regression", " ".join(report["recommendations"]))
 
+    def test_build_release_readiness_comparison_flags_test_coverage_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(root, "baseline", status="ready", decision="ship", gate_status="pass", test_coverage_percent=90.17, test_coverage_gap=0.0)
+            current = make_readiness(
+                root,
+                "current",
+                status="review",
+                decision="review",
+                gate_status="pass",
+                test_coverage_status="fail",
+                test_coverage_percent=76.0,
+                test_coverage_gap=4.0,
+                warn_panels=1,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["test_coverage_regression_count"], 1)
+            delta = report["deltas"][0]
+            self.assertTrue(delta["test_coverage_status_changed"])
+            self.assertEqual(delta["test_coverage_percent_delta"], -14.17)
+            self.assertEqual(delta["test_coverage_gap_delta"], 4)
+            self.assertIn("test_coverage:pass->warn", delta["changed_panels"])
+            self.assertIn("test coverage regression", " ".join(report["recommendations"]))
+
     def test_write_release_readiness_comparison_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -169,8 +204,10 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("readiness_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("test_coverage_percent", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("changed_panels", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_failed_check_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
+            self.assertIn("test_coverage_gap_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Readiness Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 
     def test_renderers_escape_release_text(self) -> None:
