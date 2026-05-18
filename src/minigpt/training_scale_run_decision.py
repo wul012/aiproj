@@ -8,6 +8,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     display_command as _display_command,
     list_of_dicts as _list_of_dicts,
+    number_or_default,
     string_list as _string_list,
     utc_now,
 )
@@ -360,7 +361,4 @@ def _recommendations(
 
 
 def _int(value: Any) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
+    return int(number_or_default(value, 0, int))

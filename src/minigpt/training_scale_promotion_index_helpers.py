@@ -7,6 +7,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     first_present,
     list_of_dicts as _list_of_dicts,
+    number_or_default,
     string_list as _string_list,
 )
 
@@ -174,10 +175,7 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
 
 
 def _int(value: Any) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
+    return int(number_or_default(value, 0, int))
 
 
 def _suite_guard(report: dict[str, Any]) -> dict[str, Any]:

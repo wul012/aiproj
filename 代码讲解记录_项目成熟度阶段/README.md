@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+239-v225-training-scale-run-numeric-helper-consolidation.md
+ -> v225 code explanation: migrate training scale run decision/comparison/index and promoted decision numeric adapters to shared report_utils numeric helpers while preserving default-zero semantics.
 238-v224-release-gate-numeric-helper-consolidation.md
  -> v224 code explanation: migrate release-gate policy checks and artifact numeric adapters to shared report_utils numeric helpers while preserving score-label and default-zero semantics.
 237-v223-generation-quality-numeric-helper-consolidation.md

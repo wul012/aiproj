@@ -11,6 +11,7 @@ from minigpt.report_utils import (
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     markdown_cell as _md,
+    number_or_default,
     string_list as _string_list,
     utc_now,
     write_json_payload,
@@ -490,10 +491,7 @@ def _card(label: str, value: Any) -> str:
 
 
 def _int(value: Any) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
+    return int(number_or_default(value, 0, int))
 
 
 def _signed(value: int) -> str:

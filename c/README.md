@@ -475,6 +475,9 @@ c/223/解释/说明.md
 c/224/图片
 c/224/解释/说明.md
  -> v224 release gate numeric helper consolidation 的运行截图和解释
+c/225/图片
+c/225/解释/说明.md
+ -> v225 training scale run numeric helper consolidation 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 224 extends targeted numeric-helper consolidation into the release-gate chain. Release-gate policy checks and artifact rendering now consume `report_utils.number_or_none()` / `number_or_default()` while preserving score-label and default-zero semantics.
+Version 225 extends targeted numeric-helper consolidation into the training-scale run and promotion chain. Run decision, run comparison, promotion-index helper, promoted comparison, and promoted decision integer helpers now consume `report_utils.number_or_default()` while preserving default-zero semantics.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -32,13 +32,14 @@ Version 224 extends targeted numeric-helper consolidation into the release-gate 
 - Training-scale path: plan -> gate -> run -> comparison -> decision -> workflow -> handoff -> promotion -> promoted seed -> seed handoff.
 - Documentation path: README summary -> staged code explanations -> `a/`, `b/`, `c/` screenshot evidence archives -> Git tags.
 
-## Version 224 focus
+## Version 225 focus
 
-- Migrated release-gate `_number()` to `report_utils.number_or_none()`.
-- Migrated release-gate `_integer()` to `report_utils.number_or_default()`.
-- Migrated release-gate artifact `_number()` to `report_utils.number_or_none()`.
-- Preserved policy thresholds, score labels, default-zero behavior, and release-gate artifact schema.
-- Verified focused release-gate/release-gate-comparison/report-utils tests, helper scans, full unittest discovery, source encoding, and docs/evidence alignment.
+- Migrated training-scale run decision `_int()` to `report_utils.number_or_default()`.
+- Migrated training-scale run comparison `_int()` to `report_utils.number_or_default()`.
+- Migrated training-scale promotion index helper `_int()` to `report_utils.number_or_default()`.
+- Migrated promoted comparison and promoted decision `_int()` helpers to `report_utils.number_or_default()`.
+- Preserved default-zero behavior and the existing comparison, index, and decision schemas.
+- Verified focused training-scale run/comparison/index/promoted decision tests, helper scans, full unittest discovery, source encoding, and docs/evidence alignment.
 
 ## Version tags
 
