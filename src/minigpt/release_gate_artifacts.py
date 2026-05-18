@@ -38,6 +38,10 @@ def render_release_gate_markdown(gate: dict[str, Any]) -> str:
                 ("Audit score", summary.get("audit_score_percent")),
                 ("Ready runs", summary.get("ready_runs")),
                 ("Missing artifacts", summary.get("missing_artifacts")),
+                ("Test coverage status", summary.get("test_coverage_status")),
+                ("Test coverage percent", summary.get("test_coverage_percent")),
+                ("Test coverage fail under", summary.get("test_coverage_fail_under")),
+                ("Test coverage gap", summary.get("test_coverage_gap")),
                 ("Pass checks", summary.get("pass_count")),
                 ("Warn checks", summary.get("warn_count")),
                 ("Fail checks", summary.get("fail_count")),
@@ -84,6 +88,8 @@ def render_release_gate_html(gate: dict[str, Any]) -> str:
         ("Score", _score_label(summary.get("audit_score_percent"))),
         ("Ready", summary.get("ready_runs")),
         ("Missing", summary.get("missing_artifacts")),
+        ("Coverage", summary.get("test_coverage_status")),
+        ("Coverage %", summary.get("test_coverage_percent")),
         ("Generated", gate.get("generated_at")),
     ]
     return "\n".join(

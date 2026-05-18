@@ -33,6 +33,7 @@ def write_release_gate_profile_comparison_csv(report: dict[str, Any], path: str 
         "minimum_ready_runs",
         "require_generation_quality_audit_checks",
         "require_request_history_summary_audit_check",
+        "require_test_coverage_audit_check",
         "pass_count",
         "warn_count",
         "fail_count",
@@ -65,6 +66,8 @@ def write_release_gate_profile_delta_csv(report: dict[str, Any], path: str | Pat
         "compared_require_generation_quality",
         "baseline_require_request_history_summary",
         "compared_require_request_history_summary",
+        "baseline_require_test_coverage",
+        "compared_require_test_coverage",
         "added_failed_checks",
         "removed_failed_checks",
         "added_warned_checks",
@@ -103,8 +106,8 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
         "",
         "## Profile Matrix",
         "",
-        "| Bundle | Profile | Decision | Gate | Audit score | Min score | Generation quality required | Request history required | Failed checks | Warned checks |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Bundle | Profile | Decision | Gate | Audit score | Min score | Generation quality required | Request history required | Test coverage required | Failed checks | Warned checks |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("rows")):
         lines.append(
@@ -119,6 +122,7 @@ def render_release_gate_profile_comparison_markdown(report: dict[str, Any]) -> s
                     _md(row.get("minimum_audit_score")),
                     _md(row.get("require_generation_quality_audit_checks")),
                     _md(row.get("require_request_history_summary_audit_check")),
+                    _md(row.get("require_test_coverage_audit_check")),
                     _md(", ".join(_string_list(row.get("failed_checks")))),
                     _md(", ".join(_string_list(row.get("warned_checks")))),
                 ]
@@ -190,7 +194,7 @@ def render_release_gate_profile_comparison_html(report: dict[str, Any]) -> str:
             f"<header><h1>{_e(report.get('title', 'MiniGPT release gate profile comparison'))}</h1><p>profiles: {_e(', '.join(_string_list(report.get('policy_profiles'))))}; baseline: {_e(report.get('baseline_profile'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
             '<section class="panel"><h2>Profile Matrix</h2><table><thead><tr>'
-            "<th>Bundle</th><th>Profile</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Min</th><th>Generation</th><th>Request history</th><th>Failed</th><th>Warned</th>"
+            "<th>Bundle</th><th>Profile</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Min</th><th>Generation</th><th>Request history</th><th>Coverage</th><th>Failed</th><th>Warned</th>"
             "</tr></thead><tbody>"
             + rows
             + "</tbody></table></section>",
@@ -243,6 +247,7 @@ def _html_row(row: dict[str, Any]) -> str:
         f"<td>{_e(row.get('minimum_audit_score'))}</td>"
         f"<td>{_e(row.get('require_generation_quality_audit_checks'))}</td>"
         f"<td>{_e(row.get('require_request_history_summary_audit_check'))}</td>"
+        f"<td>{_e(row.get('require_test_coverage_audit_check'))}</td>"
         f"<td>{_e(', '.join(_string_list(row.get('failed_checks'))))}</td>"
         f"<td>{_e(', '.join(_string_list(row.get('warned_checks'))))}</td>"
         "</tr>"

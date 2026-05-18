@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+257-v243-release-gate-coverage-audit-policy.md
+ -> v243 code explanation: require coverage audit evidence in standard/review/strict release gate policies while keeping legacy bundles compatible.
 256-v242-release-bundle-coverage-gate-context.md
  -> v242 code explanation: carry project-audit/test coverage gate context into release bundle summary, inputs, artifacts, CLI output, and rendered evidence.
 255-v241-project-audit-coverage-gate-context.md

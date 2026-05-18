@@ -40,6 +40,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Override the selected policy profile and do not require the request_history_summary audit check",
     )
+    parser.add_argument(
+        "--allow-missing-test-coverage",
+        action="store_true",
+        help="Override the selected policy profile and do not require the test_coverage_report audit check",
+    )
     parser.add_argument("--fail-on-warn", action="store_true", help="Exit non-zero for warn as well as fail")
     return parser.parse_args()
 
@@ -49,6 +54,7 @@ def main() -> None:
     out_dir = args.out_dir or args.bundle.parent.parent / "release-gate"
     require_generation_quality = False if args.allow_missing_generation_quality else None
     require_request_history_summary = False if args.allow_missing_request_history_summary else None
+    require_test_coverage = False if args.allow_missing_test_coverage else None
     gate = build_release_gate(
         args.bundle,
         policy_profile=args.policy_profile,
@@ -56,6 +62,7 @@ def main() -> None:
         minimum_ready_runs=args.min_ready_runs,
         require_generation_quality=require_generation_quality,
         require_request_history_summary=require_request_history_summary,
+        require_test_coverage=require_test_coverage,
         title=args.title,
     )
     outputs = write_release_gate_outputs(gate, out_dir)
@@ -67,11 +74,16 @@ def main() -> None:
     print(f"checks={summary['pass_count']} pass/{summary['warn_count']} warn/{summary['fail_count']} fail")
     print(f"release_status={summary['release_status']}")
     print(f"audit_status={summary['audit_status']}")
+    print(f"test_coverage_status={summary.get('test_coverage_status')}")
+    print(f"test_coverage_percent={summary.get('test_coverage_percent')}")
+    print(f"test_coverage_fail_under={summary.get('test_coverage_fail_under')}")
+    print(f"test_coverage_gap={summary.get('test_coverage_gap')}")
     print(f"policy_profile={gate['policy']['policy_profile']}")
     print(f"minimum_audit_score={gate['policy']['minimum_audit_score']}")
     print(f"minimum_ready_runs={gate['policy']['minimum_ready_runs']}")
     print(f"require_generation_quality={gate['policy']['require_generation_quality_audit_checks']}")
     print(f"require_request_history_summary={gate['policy']['require_request_history_summary_audit_check']}")
+    print(f"require_test_coverage={gate['policy']['require_test_coverage_audit_check']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if gate["warnings"]:
         print("warnings=" + json.dumps(gate["warnings"], ensure_ascii=False))

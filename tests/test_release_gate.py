@@ -39,6 +39,8 @@ def make_bundle(
     generation_status: str = "pass",
     include_request_history_check: bool = True,
     request_history_status: str = "pass",
+    include_test_coverage_check: bool = True,
+    test_coverage_status: str = "pass",
 ) -> Path:
     audit_checks = [{"id": "ready_run", "title": "At least one ready run", "status": audit_status, "detail": "1 ready run."}]
     if include_generation_checks:
@@ -67,6 +69,15 @@ def make_bundle(
                 "detail": f"status={request_history_status}; records=4; invalid=0; timeout_rate=0; error_rate=0.",
             }
         )
+    if include_test_coverage_check:
+        audit_checks.append(
+            {
+                "id": "test_coverage_report",
+                "title": "Test coverage gate is clean",
+                "status": test_coverage_status,
+                "detail": f"status={test_coverage_status}; decision=continue_with_coverage_gate; line_coverage=90.15; fail_under=80; coverage_gap=0.",
+            }
+        )
     bundle = {
         "schema_version": 1,
         "title": "MiniGPT release bundle",
@@ -82,6 +93,10 @@ def make_bundle(
             "ready_runs": ready_runs,
             "available_artifacts": 9,
             "missing_artifacts": missing_artifacts,
+            "test_coverage_status": test_coverage_status if include_test_coverage_check else None,
+            "test_coverage_percent": 90.15 if include_test_coverage_check else None,
+            "test_coverage_fail_under": 80.0 if include_test_coverage_check else None,
+            "test_coverage_gap": 0.0 if include_test_coverage_check else None,
         },
         "artifacts": [
             {"key": "registry_json", "title": "Registry JSON", "path": str(root / "registry.json"), "exists": True},
@@ -100,6 +115,13 @@ def make_bundle(
             }
         ],
         "audit_checks": audit_checks,
+        "test_coverage_context": {
+            "available": include_test_coverage_check,
+            "status": test_coverage_status if include_test_coverage_check else None,
+            "line_coverage_percent": 90.15 if include_test_coverage_check else None,
+            "fail_under": 80.0 if include_test_coverage_check else None,
+            "coverage_gap": 0.0 if include_test_coverage_check else None,
+        },
         "recommendations": ["Release evidence is complete."],
         "warnings": warnings or [],
     }
@@ -127,6 +149,8 @@ class ReleaseGateTests(unittest.TestCase):
         self.assertEqual(profiles["legacy"]["require_generation_quality"], False)
         self.assertEqual(profiles["standard"]["require_request_history_summary"], True)
         self.assertEqual(profiles["legacy"]["require_request_history_summary"], False)
+        self.assertEqual(profiles["standard"]["require_test_coverage"], True)
+        self.assertEqual(profiles["legacy"]["require_test_coverage"], False)
 
         profiles["standard"]["minimum_audit_score"] = 1.0
         self.assertEqual(release_gate_policy_profiles()["standard"]["minimum_audit_score"], 90.0)
@@ -148,8 +172,10 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], True)
             self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], True)
+            self.assertEqual(gate["policy"]["require_test_coverage_audit_check"], True)
             self.assertIn("generation_quality_audit_checks", {check["id"] for check in gate["checks"]})
             self.assertIn("request_history_summary_audit_check", {check["id"] for check in gate["checks"]})
+            self.assertIn("test_coverage_audit_check", {check["id"] for check in gate["checks"]})
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertIn("Release gate passed", " ".join(gate["recommendations"]))
 
@@ -235,12 +261,14 @@ class ReleaseGateTests(unittest.TestCase):
                 minimum_audit_score=90.0,
                 require_generation_quality=False,
                 require_request_history_summary=False,
+                require_test_coverage=False,
             )
 
             self.assertEqual(gate["policy"]["policy_profile"], "strict")
             self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
             self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], False)
+            self.assertEqual(gate["policy"]["require_test_coverage_audit_check"], False)
             self.assertEqual(
                 gate["policy"]["overrides"],
                 {
@@ -248,6 +276,7 @@ class ReleaseGateTests(unittest.TestCase):
                     "minimum_ready_runs": False,
                     "require_generation_quality": True,
                     "require_request_history_summary": True,
+                    "require_test_coverage": True,
                 },
             )
             self.assertEqual(gate["summary"]["gate_status"], "pass")
@@ -292,6 +321,36 @@ class ReleaseGateTests(unittest.TestCase):
 
             self.assertEqual(gate["summary"]["gate_status"], "warn")
             check = next(item for item in gate["checks"] if item["id"] == "request_history_summary_audit_check")
+            self.assertEqual(check["status"], "warn")
+
+    def test_build_release_gate_fails_when_test_coverage_check_is_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_test_coverage_check=False)
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "fail")
+            check = next(item for item in gate["checks"] if item["id"] == "test_coverage_audit_check")
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("missing required audit check", check["detail"])
+
+    def test_legacy_profile_allows_missing_test_coverage_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_test_coverage_check=False, audit_score=84.0)
+
+            gate = build_release_gate(bundle_path, policy_profile="legacy")
+
+            self.assertEqual(gate["policy"]["require_test_coverage_audit_check"], False)
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
+
+    def test_build_release_gate_warns_for_test_coverage_warnings(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), test_coverage_status="warn")
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "warn")
+            check = next(item for item in gate["checks"] if item["id"] == "test_coverage_audit_check")
             self.assertEqual(check["status"], "warn")
 
     def test_build_release_gate_fails_for_incomplete_release(self) -> None:

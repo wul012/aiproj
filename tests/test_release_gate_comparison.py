@@ -31,6 +31,7 @@ def make_bundle(
     audit_score: float | None = 100.0,
     include_generation_checks: bool = True,
     include_request_history_check: bool = True,
+    include_test_coverage_check: bool = True,
     warnings: list[str] | None = None,
 ) -> Path:
     audit_checks = [{"id": "ready_run", "title": "At least one ready run", "status": "pass", "detail": "1 ready run."}]
@@ -60,6 +61,15 @@ def make_bundle(
                 "detail": "status=pass; records=4; invalid=0; timeout_rate=0; error_rate=0.",
             }
         )
+    if include_test_coverage_check:
+        audit_checks.append(
+            {
+                "id": "test_coverage_report",
+                "title": "Test coverage gate is clean",
+                "status": "pass",
+                "detail": "status=pass; decision=continue_with_coverage_gate; line_coverage=90.15; fail_under=80; coverage_gap=0.",
+            }
+        )
     bundle = {
         "schema_version": 1,
         "title": "MiniGPT release bundle",
@@ -75,6 +85,10 @@ def make_bundle(
             "ready_runs": 1,
             "available_artifacts": 9,
             "missing_artifacts": 0,
+            "test_coverage_status": "pass" if include_test_coverage_check else None,
+            "test_coverage_percent": 90.15 if include_test_coverage_check else None,
+            "test_coverage_fail_under": 80.0 if include_test_coverage_check else None,
+            "test_coverage_gap": 0.0 if include_test_coverage_check else None,
         },
         "artifacts": [
             {"key": "registry_json", "title": "Registry JSON", "path": str(root / "registry.json"), "exists": True},

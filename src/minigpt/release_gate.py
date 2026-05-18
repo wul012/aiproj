@@ -29,6 +29,7 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": True,
         "require_request_history_summary": True,
+        "require_test_coverage": True,
     },
     "review": {
         "description": "Internal review policy with a lower audit-score bar while keeping generation-quality evidence required.",
@@ -36,6 +37,7 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": True,
         "require_request_history_summary": True,
+        "require_test_coverage": True,
     },
     "strict": {
         "description": "Stricter release policy for external handoff or final review.",
@@ -43,13 +45,15 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": True,
         "require_request_history_summary": True,
+        "require_test_coverage": True,
     },
     "legacy": {
-        "description": "Compatibility policy for release bundles created before generation-quality and request-history audit checks existed.",
+        "description": "Compatibility policy for release bundles created before generation-quality, request-history, and coverage audit checks existed.",
         "minimum_audit_score": 80.0,
         "minimum_ready_runs": 1,
         "require_generation_quality": False,
         "require_request_history_summary": False,
+        "require_test_coverage": False,
     },
 }
 
@@ -64,6 +68,7 @@ def resolve_release_gate_policy(
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
     require_request_history_summary: bool | None = None,
+    require_test_coverage: bool | None = None,
 ) -> dict[str, Any]:
     if policy_profile not in RELEASE_GATE_POLICY_PROFILES:
         choices = ", ".join(sorted(RELEASE_GATE_POLICY_PROFILES))
@@ -74,6 +79,7 @@ def resolve_release_gate_policy(
         "minimum_ready_runs": minimum_ready_runs is not None,
         "require_generation_quality": require_generation_quality is not None,
         "require_request_history_summary": require_request_history_summary is not None,
+        "require_test_coverage": require_test_coverage is not None,
     }
     if minimum_audit_score is not None:
         profile["minimum_audit_score"] = float(minimum_audit_score)
@@ -83,6 +89,8 @@ def resolve_release_gate_policy(
         profile["require_generation_quality"] = bool(require_generation_quality)
     if require_request_history_summary is not None:
         profile["require_request_history_summary"] = bool(require_request_history_summary)
+    if require_test_coverage is not None:
+        profile["require_test_coverage"] = bool(require_test_coverage)
     return {
         "policy_profile": policy_profile,
         "profile_description": profile["description"],
@@ -90,6 +98,7 @@ def resolve_release_gate_policy(
         "minimum_ready_runs": int(profile["minimum_ready_runs"]),
         "require_generation_quality": bool(profile["require_generation_quality"]),
         "require_request_history_summary": bool(profile["require_request_history_summary"]),
+        "require_test_coverage": bool(profile["require_test_coverage"]),
         "overrides": overrides,
     }
 
@@ -102,6 +111,7 @@ def build_release_gate(
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
     require_request_history_summary: bool | None = None,
+    require_test_coverage: bool | None = None,
     title: str = "MiniGPT release gate",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -113,6 +123,7 @@ def build_release_gate(
         minimum_ready_runs=minimum_ready_runs,
         require_generation_quality=require_generation_quality,
         require_request_history_summary=require_request_history_summary,
+        require_test_coverage=require_test_coverage,
     )
     checks = _build_checks(
         bundle,
@@ -120,6 +131,7 @@ def build_release_gate(
         minimum_ready_runs=policy["minimum_ready_runs"],
         require_generation_quality=policy["require_generation_quality"],
         require_request_history_summary=policy["require_request_history_summary"],
+        require_test_coverage=policy["require_test_coverage"],
     )
     summary = _build_summary(bundle, checks)
 
@@ -139,6 +151,7 @@ def build_release_gate(
             "require_all_evidence_artifacts": True,
             "require_generation_quality_audit_checks": policy["require_generation_quality"],
             "require_request_history_summary_audit_check": policy["require_request_history_summary"],
+            "require_test_coverage_audit_check": policy["require_test_coverage"],
             "overrides": policy["overrides"],
         },
         "summary": summary,
@@ -174,6 +187,7 @@ def _build_checks(
     minimum_ready_runs: int,
     require_generation_quality: bool,
     require_request_history_summary: bool,
+    require_test_coverage: bool,
 ) -> list[dict[str, Any]]:
     summary = _dict(bundle.get("summary"))
     release_status = summary.get("release_status")
@@ -254,6 +268,12 @@ def _build_checks(
             _request_history_summary_audit_detail(audit_checks, require_request_history_summary),
         ),
         _check(
+            "test_coverage_audit_check",
+            "Test coverage audit check passed",
+            _test_coverage_audit_result(audit_checks, require_test_coverage),
+            _test_coverage_audit_detail(audit_checks, require_test_coverage),
+        ),
+        _check(
             "bundle_warnings",
             "Bundle has no warnings",
             "pass" if not bundle_warnings else "warn",
@@ -292,6 +312,10 @@ def _build_summary(bundle: dict[str, Any], checks: list[dict[str, Any]]) -> dict
         "ready_runs": bundle_summary.get("ready_runs"),
         "available_artifacts": bundle_summary.get("available_artifacts"),
         "missing_artifacts": bundle_summary.get("missing_artifacts"),
+        "test_coverage_status": bundle_summary.get("test_coverage_status"),
+        "test_coverage_percent": bundle_summary.get("test_coverage_percent"),
+        "test_coverage_fail_under": bundle_summary.get("test_coverage_fail_under"),
+        "test_coverage_gap": bundle_summary.get("test_coverage_gap"),
     }
 
 
@@ -373,6 +397,28 @@ def _request_history_summary_audit_detail(audit_checks: list[dict[str, Any]], re
     if not check:
         return "missing required audit check: request_history_summary."
     return f"request_history_summary={check.get('status') or 'missing'}."
+
+
+def _test_coverage_audit_result(audit_checks: list[dict[str, Any]], require_test_coverage: bool) -> str:
+    if not require_test_coverage:
+        return "pass"
+    by_id = _audit_checks_by_id(audit_checks)
+    status = str(_dict(by_id.get("test_coverage_report")).get("status") or "missing")
+    if status in {"missing", "fail"}:
+        return "fail"
+    if status == "warn":
+        return "warn"
+    return "pass"
+
+
+def _test_coverage_audit_detail(audit_checks: list[dict[str, Any]], require_test_coverage: bool) -> str:
+    if not require_test_coverage:
+        return "test coverage audit check is not required by policy."
+    by_id = _audit_checks_by_id(audit_checks)
+    check = _dict(by_id.get("test_coverage_report"))
+    if not check:
+        return "missing required audit check: test_coverage_report."
+    return f"test_coverage_report={check.get('status') or 'missing'}."
 
 
 def _audit_checks_by_id(audit_checks: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
