@@ -210,6 +210,9 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             )
 
             self.assertIn("seed_handoff_clean_evidence_status=ready", completed.stdout)
+            self.assertIn("clean_evidence_required_status=ready", completed.stdout)
+            self.assertIn("clean_evidence_required_ready=True", completed.stdout)
+            self.assertIn("clean_evidence_required_detail=completed handoff has consistent suite alignment", completed.stdout)
             self.assertIn("clean_evidence_required=pass", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
 
@@ -235,6 +238,9 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
 
             self.assertNotEqual(completed.returncode, 0)
             self.assertIn("seed_handoff_clean_evidence_status=pending-plan", completed.stdout)
+            self.assertIn("clean_evidence_required_status=pending-plan", completed.stdout)
+            self.assertIn("clean_evidence_required_ready=False", completed.stdout)
+            self.assertIn("clean_evidence_required_detail=execute the seed handoff before treating clean comparison evidence as ready", completed.stdout)
             self.assertIn("clean_evidence_required=fail", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
 

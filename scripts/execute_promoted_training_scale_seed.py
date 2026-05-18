@@ -68,6 +68,9 @@ def main() -> None:
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if args.require_clean_evidence:
         clean_evidence_ready = bool(summary.get("seed_handoff_clean_evidence_ready"))
+        print(f"clean_evidence_required_status={summary.get('seed_handoff_clean_evidence_status')}")
+        print(f"clean_evidence_required_ready={clean_evidence_ready}")
+        print(f"clean_evidence_required_detail={summary.get('seed_handoff_clean_evidence_detail')}")
         print(f"clean_evidence_required={'pass' if clean_evidence_ready else 'fail'}")
         if not clean_evidence_ready:
             raise SystemExit(1)

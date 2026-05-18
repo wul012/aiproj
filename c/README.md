@@ -451,6 +451,9 @@ c/215/解释/说明.md
 c/216/图片
 c/216/解释/说明.md
  -> v216 promoted training scale seed handoff clean evidence CLI gate 的运行截图和解释
+c/217/图片
+c/217/解释/说明.md
+ -> v217 promoted training scale seed handoff clean evidence gate diagnostics 的运行截图和解释
 ```
 
 写入规则：

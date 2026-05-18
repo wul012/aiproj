@@ -522,6 +522,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `228-v214-promoted-seed-handoff-clean-evidence-readiness.md`：第二百一十四版代码讲解，把 seed handoff alignment verdict 转成机器可消费的 clean-evidence readiness 字段。
 - `229-v215-promoted-seed-handoff-clean-evidence-status-contract.md`：第二百一十五版代码讲解，把 clean-evidence readiness 状态域固化成 typed/public contract。
 - `230-v216-promoted-seed-handoff-clean-evidence-cli-gate.md`：第二百一十六版代码讲解，给 seed handoff CLI 增加显式 opt-in 的 clean-evidence requirement。
+- `231-v217-promoted-seed-handoff-clean-evidence-gate-diagnostics.md`：第二百一十七版代码讲解，给 clean-evidence CLI gate 增加结构化诊断输出。
 
 ## 一句话总览
 
