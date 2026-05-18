@@ -484,6 +484,9 @@ c/226/解释/说明.md
 c/227/图片
 c/227/解释/说明.md
  -> v227 scorecard eval coverage readiness consumption 的运行截图和解释
+c/228/图片
+c/228/解释/说明.md
+ -> v228 scorecard comparison eval readiness 的运行截图和解释
 ```
 
 写入规则：

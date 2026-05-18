@@ -37,6 +37,7 @@ def make_scorecard(
     generation_flags: int = 0,
     dominant_flag: str | None = None,
     worst_generation_case: str | None = None,
+    eval_comparison_status: str | None = "pass",
 ) -> Path:
     run_dir = root / "runs" / name
     scorecard_path = run_dir / "benchmark-scorecard" / "benchmark_scorecard.json"
@@ -54,6 +55,8 @@ def make_scorecard(
                 "overall_score": overall,
                 "overall_status": "pass" if overall >= 80 else "warn",
                 "component_count": 6,
+                "eval_suite_coverage_status": "pass" if eval_comparison_status else None,
+                "eval_suite_comparison_status": eval_comparison_status,
                 "rubric_status": "pass" if avg >= 80 else "warn",
                 "rubric_avg_score": avg,
                 "rubric_pass_count": sum(1 for item in [qa_status, summary_status] if item == "pass"),
@@ -217,6 +220,7 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
                 generation_flags=7,
                 dominant_flag="empty_continuation",
                 worst_generation_case="qa-basic",
+                eval_comparison_status="warn",
             )
 
             report = build_benchmark_scorecard_comparison(
@@ -235,6 +239,9 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["generation_quality_flag_regression_count"], 1)
             self.assertEqual(report["summary"]["generation_quality_dominant_flag_change_count"], 1)
             self.assertEqual(report["summary"]["baseline_generation_quality_dominant_flag"], "low_diversity")
+            self.assertEqual(report["summary"]["baseline_eval_suite_comparison_status"], "pass")
+            self.assertEqual(report["summary"]["non_comparison_ready_count"], 1)
+            self.assertEqual(report["summary"]["non_comparison_ready_runs"], ["bad"])
             self.assertEqual(report["summary"]["worst_generation_quality_flag_regression_run"], "bad")
             self.assertEqual(report["summary"]["worst_generation_quality_flag_regression_delta"], 3)
             self.assertEqual(report["summary"]["case_regression_count"], 1)
@@ -255,6 +262,7 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
             hard_delta = next(row for row in report["difficulty_deltas"] if row["run_name"] == "bad" and row["key"] == "hard")
             self.assertEqual(hard_delta["relation"], "regressed")
             self.assertTrue(report["recommendations"])
+            self.assertIn("not eval-suite comparison-ready: bad", " ".join(report["recommendations"]))
 
     def test_build_comparison_rejects_name_mismatch(self) -> None:
         with self.assertRaises(ValueError):
@@ -290,6 +298,7 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
                 generation_flags=5,
                 dominant_flag="empty_continuation",
                 worst_generation_case="qa-basic",
+                eval_comparison_status="warn",
             )
             report = build_benchmark_scorecard_comparison([baseline, regressed], names=["<base>", "<bad>"])
 
@@ -301,10 +310,13 @@ class BenchmarkScorecardComparisonTests(unittest.TestCase):
             self.assertIn("benchmark_scorecard_comparison", Path(outputs["json"]).name)
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("generation_quality_total_flags_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("eval_suite_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("added_missing_terms", Path(outputs["case_delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Case Deltas", markdown)
             self.assertIn("Dominant Flag", markdown)
+            self.assertIn("Non comparison-ready runs", markdown)
             self.assertIn("Gen Flags", html)
+            self.assertIn("Eval Compare", html)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("Case Deltas", html)
             self.assertNotIn("<strong><base>", html)

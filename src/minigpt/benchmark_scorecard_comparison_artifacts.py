@@ -39,6 +39,8 @@ def write_benchmark_scorecard_comparison_csv(report: dict[str, Any], path: str |
         "weakest_rubric_case",
         "weakest_rubric_score",
         "case_count",
+        "eval_suite_coverage_status",
+        "eval_suite_comparison_status",
         "component_count",
         "task_type_count",
         "difficulty_count",

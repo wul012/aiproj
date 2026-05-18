@@ -40,6 +40,8 @@ def summarize_benchmark_scorecard_run(scorecard: dict[str, Any], name: str, inde
         "overall_score": _number(summary.get("overall_score")),
         "component_count": _as_int(summary.get("component_count")),
         "case_count": len(_list_of_dicts(scorecard.get("case_scores"))) or _as_int(rubric_summary.get("case_count")),
+        "eval_suite_coverage_status": summary.get("eval_suite_coverage_status"),
+        "eval_suite_comparison_status": summary.get("eval_suite_comparison_status"),
         "task_type_count": len(_list_of_dicts(drilldowns.get("task_type"))),
         "difficulty_count": len(_list_of_dicts(drilldowns.get("difficulty"))),
         "rubric_status": summary.get("rubric_status") or rubric_summary.get("overall_status"),
@@ -158,13 +160,21 @@ def build_benchmark_scorecard_summary(
     flag_regressions = [row for row in flag_rows if int(row.get("generation_quality_total_flags_delta") or 0) > 0]
     flag_improvements = [row for row in flag_rows if int(row.get("generation_quality_total_flags_delta") or 0) < 0]
     worst_flag_regression = max(flag_regressions, key=lambda row: (int(row.get("generation_quality_total_flags_delta") or 0), str(row.get("name"))), default={})
+    coverage_known = [row for row in runs if row.get("eval_suite_comparison_status") is not None]
+    not_comparison_ready = [row for row in coverage_known if row.get("eval_suite_comparison_status") != "pass"]
+    baseline_comparison_status = baseline.get("eval_suite_comparison_status")
     return {
         "baseline_name": baseline.get("name"),
         "baseline_source_path": baseline.get("source_path"),
+        "baseline_eval_suite_coverage_status": baseline.get("eval_suite_coverage_status"),
+        "baseline_eval_suite_comparison_status": baseline_comparison_status,
         "baseline_generation_quality_total_flags": baseline.get("generation_quality_total_flags"),
         "baseline_generation_quality_dominant_flag": baseline.get("generation_quality_dominant_flag"),
         "baseline_generation_quality_worst_case": baseline.get("generation_quality_worst_case"),
         "scorecard_count": len(runs),
+        "eval_suite_readiness_known_count": len(coverage_known),
+        "non_comparison_ready_count": len(not_comparison_ready),
+        "non_comparison_ready_runs": [row.get("name") for row in not_comparison_ready],
         "improved_overall_count": sum(1 for row in deltas if row.get("overall_relation") == "improved"),
         "regressed_overall_count": sum(1 for row in deltas if row.get("overall_relation") == "regressed"),
         "improved_rubric_count": sum(1 for row in deltas if row.get("rubric_relation") == "improved"),
@@ -201,6 +211,15 @@ def build_benchmark_scorecard_recommendations(
         recs.append("Rubric correctness improved for at least one run; inspect case deltas before treating the gain as robust.")
     else:
         recs.append("No rubric average change was detected; use case-level rows to check whether individual prompts moved in opposite directions.")
+    non_ready = _string_list(summary.get("non_comparison_ready_runs"))
+    if non_ready:
+        recs.append(
+            "Treat scorecard deltas as provisional because these runs are not eval-suite comparison-ready: "
+            + ", ".join(non_ready)
+            + "."
+        )
+    if summary.get("baseline_eval_suite_comparison_status") not in {None, "pass"}:
+        recs.append("Baseline scorecard is not eval-suite comparison-ready; choose a comparison-ready baseline before claiming model-quality gains.")
     weakest_case = summary.get("weakest_case_regression")
     if weakest_case:
         recs.append(
