@@ -6,6 +6,7 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    number_or_none,
 )
 
 
@@ -468,21 +469,13 @@ def _nested_pick(payload: Any, *keys: str) -> Any:
 
 
 def _int(value: Any) -> int | None:
-    if value is None or value == "":
-        return None
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, int)
+    return int(number) if number is not None else None
 
 
 def _float(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+    number = number_or_none(value, float)
+    return float(number) if number is not None else None
 
 
 __all__ = [

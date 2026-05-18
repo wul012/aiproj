@@ -8,6 +8,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     display_command as _display_command,
     list_of_dicts as _list_of_dicts,
+    number_or_default,
     utc_now,
 )
 from minigpt.training_scale_gate_artifacts import (
@@ -301,14 +302,8 @@ def _max_row(rows: list[dict[str, Any]], key: str) -> dict[str, Any]:
 
 
 def _int(value: Any) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
+    return int(number_or_default(value, 0, int))
 
 
 def _float(value: Any) -> float:
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return 0.0
+    return float(number_or_default(value, 0.0, float))

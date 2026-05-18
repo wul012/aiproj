@@ -18,6 +18,8 @@ from minigpt.report_utils import (  # noqa: E402
     make_artifact_row,
     make_artifact_rows,
     markdown_cell,
+    number_or_default,
+    number_or_none,
     write_csv_row,
     write_json_payload,
 )
@@ -76,6 +78,15 @@ class ReportUtilsTests(unittest.TestCase):
         self.assertEqual(first_present(None, 0, "fallback"), 0)
         self.assertEqual(first_present(None, "", "fallback"), "")
         self.assertIsNone(first_present(None, None))
+
+    def test_number_helpers_keep_none_and_default_semantics(self) -> None:
+        self.assertEqual(number_or_none("3", int), 3)
+        self.assertEqual(number_or_none("2.5"), 2.5)
+        self.assertIsNone(number_or_none(""))
+        self.assertIsNone(number_or_none(None))
+        self.assertIsNone(number_or_none(True, int))
+        self.assertEqual(number_or_default("bad", 7, int), 7)
+        self.assertEqual(number_or_default("4.5", 0.0), 4.5)
 
 
 if __name__ == "__main__":

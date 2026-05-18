@@ -79,6 +79,20 @@ def string_list(value: Any) -> list[str]:
     return [str(item) for item in value]
 
 
+def number_or_none(value: Any, number_type: type[int] | type[float] = float) -> int | float | None:
+    if isinstance(value, bool) or value is None or value == "":
+        return None
+    try:
+        return number_type(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def number_or_default(value: Any, default: int | float = 0, number_type: type[int] | type[float] = float) -> int | float:
+    number = number_or_none(value, number_type)
+    return default if number is None else number
+
+
 def display_command(value: Any) -> str:
     if not isinstance(value, list):
         return "" if value is None else str(value)

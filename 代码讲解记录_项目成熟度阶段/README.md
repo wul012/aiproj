@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+235-v221-numeric-helper-consolidation.md
+ -> v221 code explanation: add shared numeric conversion helpers in report_utils and migrate training run evidence / training scale gate adapters while preserving none/default semantics.
 234-v220-promoted-seed-handoff-clean-evidence-recommendation-actions.md
  -> v220 code explanation: carry required clean-evidence pass/fail status into seed handoff recommendations so JSON/Markdown/HTML readers get explicit next actions without changing default non-required behavior.
 233-v219-promoted-seed-handoff-clean-evidence-requirement-contract.md
