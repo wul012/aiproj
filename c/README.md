@@ -514,6 +514,9 @@ c/236/解释/说明.md
 c/237/图片
 c/237/解释/说明.md
  -> v237 portfolio comparison blocker action CLI gate 的运行截图和解释
+c/238/图片
+c/238/解释/说明.md
+ -> v238 dependabot automation 的运行截图和解释
 ```
 
 写入规则：

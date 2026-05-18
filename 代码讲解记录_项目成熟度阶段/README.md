@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+252-v238-dependabot-automation.md
+ -> v238 code explanation: add Dependabot automation for GitHub Actions and Python dependency updates with a lightweight config-shape test.
 251-v237-portfolio-comparison-blocker-action-cli-gate.md
  -> v237 code explanation: add an opt-in CLI gate for training portfolio comparison blocker review actions while preserving default compatibility.
 250-v236-portfolio-comparison-review-actions.md
