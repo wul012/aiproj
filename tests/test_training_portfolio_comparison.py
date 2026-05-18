@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -268,6 +269,47 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("Review Actions", html)
             self.assertIn("Best score maturity", html)
             self.assertNotIn("<strong><base>", html)
+
+    def test_cli_can_fail_on_blocker_review_actions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_portfolio(root, "baseline", overall_score=82, rubric_score=80, final_val_loss=1.2, best_val_loss=1.1)
+            candidate = make_portfolio(
+                root,
+                "candidate",
+                overall_score=91,
+                rubric_score=88,
+                final_val_loss=0.9,
+                best_val_loss=0.88,
+                maturity_status="review",
+            )
+            out_dir = root / "out"
+            command = [
+                sys.executable,
+                "-B",
+                str(ROOT / "scripts" / "compare_training_portfolios.py"),
+                str(baseline),
+                str(candidate),
+                "--name",
+                "base",
+                "--name",
+                "candidate",
+                "--baseline",
+                "base",
+                "--out-dir",
+                str(out_dir),
+            ]
+
+            default_result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+            gated_result = subprocess.run(command + ["--fail-on-blocker-action"], cwd=ROOT, capture_output=True, text=True, check=False)
+
+            self.assertEqual(default_result.returncode, 0)
+            self.assertIn("blocker_action_count=1", default_result.stdout)
+            self.assertIn("decision=continue_with_portfolio_comparison", default_result.stdout)
+            self.assertEqual(gated_result.returncode, 1)
+            self.assertIn("blocker_action_count=1", gated_result.stdout)
+            self.assertIn("decision=blocked_by_review_actions", gated_result.stdout)
+            self.assertTrue((out_dir / "training_portfolio_comparison.json").exists())
 
     def test_build_comparison_rejects_name_mismatch(self) -> None:
         with self.assertRaises(ValueError):

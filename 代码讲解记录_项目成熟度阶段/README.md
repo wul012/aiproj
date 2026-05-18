@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+251-v237-portfolio-comparison-blocker-action-cli-gate.md
+ -> v237 code explanation: add an opt-in CLI gate for training portfolio comparison blocker review actions while preserving default compatibility.
 250-v236-portfolio-comparison-review-actions.md
  -> v236 code explanation: turn training portfolio comparison issues into structured review actions with severity, reason, evidence, and Markdown/HTML rendering.
 249-v235-portfolio-maturity-review-names.md

@@ -511,6 +511,9 @@ c/235/解释/说明.md
 c/236/图片
 c/236/解释/说明.md
  -> v236 portfolio comparison review actions 的运行截图和解释
+c/237/图片
+c/237/解释/说明.md
+ -> v237 portfolio comparison blocker action CLI gate 的运行截图和解释
 ```
 
 写入规则：

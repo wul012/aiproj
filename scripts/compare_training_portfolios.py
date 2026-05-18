@@ -21,6 +21,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--baseline", type=str, default=None, help="Baseline name, path, run_name, or 1-based index")
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory; defaults near the first portfolio")
     parser.add_argument("--title", type=str, default="MiniGPT training portfolio comparison")
+    parser.add_argument(
+        "--fail-on-blocker-action",
+        action="store_true",
+        help="Exit non-zero after writing outputs when review_actions contain blocker severity.",
+    )
     return parser.parse_args()
 
 
@@ -43,8 +48,14 @@ def main() -> None:
     print("best_by_overall_score=" + json.dumps(report["best_by_overall_score"], ensure_ascii=False))
     print("best_by_final_val_loss=" + json.dumps(report["best_by_final_val_loss"], ensure_ascii=False))
     print("summary=" + json.dumps(report["summary"], ensure_ascii=False))
+    print(f"review_action_count={report['summary'].get('review_action_count', 0)}")
+    print(f"blocker_action_count={report['summary'].get('blocker_action_count', 0)}")
     for key, path in outputs.items():
         print(f"saved_{key}={path}")
+    if args.fail_on_blocker_action and report["summary"].get("blocker_action_count", 0):
+        print("decision=blocked_by_review_actions")
+        raise SystemExit(1)
+    print("decision=continue_with_portfolio_comparison")
 
 
 def _default_out_dir(path: Path) -> Path:
