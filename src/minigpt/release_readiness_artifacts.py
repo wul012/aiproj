@@ -35,6 +35,10 @@ def render_release_readiness_markdown(report: dict[str, Any]) -> str:
                 ("Audit score", summary.get("audit_score_percent")),
                 ("CI workflow", summary.get("ci_workflow_status")),
                 ("Request history", summary.get("request_history_status")),
+                ("Test coverage", summary.get("test_coverage_status")),
+                ("Coverage percent", summary.get("test_coverage_percent")),
+                ("Coverage fail under", summary.get("test_coverage_fail_under")),
+                ("Coverage gap", summary.get("test_coverage_gap")),
                 ("Maturity", summary.get("maturity_status")),
                 ("Ready runs", summary.get("ready_runs")),
                 ("Missing artifacts", summary.get("missing_artifacts")),
@@ -76,6 +80,8 @@ def render_release_readiness_html(report: dict[str, Any]) -> str:
         ("Score", _fmt(summary.get("audit_score_percent"))),
         ("CI workflow", summary.get("ci_workflow_status")),
         ("Requests", summary.get("request_history_status")),
+        ("Coverage", summary.get("test_coverage_status")),
+        ("Coverage %", summary.get("test_coverage_percent")),
         ("Maturity", summary.get("maturity_status")),
     ]
     return "\n".join(

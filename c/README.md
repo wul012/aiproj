@@ -532,6 +532,9 @@ c/242/解释/说明.md
 c/243/图片
 c/243/解释/说明.md
  -> v243 release gate coverage audit policy 的运行截图和解释
+c/244/图片
+c/244/解释/说明.md
+ -> v244 release readiness coverage dashboard 的运行截图和解释
 ```
 
 写入规则：

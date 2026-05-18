@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+258-v244-release-readiness-coverage-dashboard.md
+ -> v244 code explanation: surface coverage gate evidence in release readiness dashboard summaries, panels, CLI output, and rendered reports.
 257-v243-release-gate-coverage-audit-policy.md
  -> v243 code explanation: require coverage audit evidence in standard/review/strict release gate policies while keeping legacy bundles compatible.
 256-v242-release-bundle-coverage-gate-context.md

@@ -33,6 +33,8 @@ def make_readiness_inputs(
     include_request_history: bool = True,
     include_ci_workflow: bool = True,
     ci_workflow_status: str = "pass",
+    include_test_coverage: bool = True,
+    test_coverage_status: str = "pass",
 ) -> Path:
     runs = root / "runs"
     registry_path = runs / "registry" / "registry.json"
@@ -41,13 +43,17 @@ def make_readiness_inputs(
     gate_path = runs / "release-gate" / "gate_report.json"
     maturity_path = runs / "maturity-summary" / "maturity_summary.json"
     ci_workflow_path = runs / "ci-workflow-hygiene" / "ci_workflow_hygiene.json"
+    coverage_path = runs / "test-coverage" / "test_coverage_report.json"
     bundle_path = runs / "release-bundle" / "release_bundle.json"
     artifact_path = runs / "request-history-summary" / "request_history_summary.html"
     ci_artifact_path = runs / "ci-workflow-hygiene" / "ci_workflow_hygiene.html"
+    coverage_artifact_path = runs / "test-coverage" / "test_coverage_report.html"
     artifact_path.parent.mkdir(parents=True, exist_ok=True)
     artifact_path.write_text("<html></html>", encoding="utf-8")
     ci_artifact_path.parent.mkdir(parents=True, exist_ok=True)
     ci_artifact_path.write_text("<html></html>", encoding="utf-8")
+    coverage_artifact_path.parent.mkdir(parents=True, exist_ok=True)
+    coverage_artifact_path.write_text("<html></html>", encoding="utf-8")
     artifact_rows = []
     if include_request_history:
         artifact_rows.append(
@@ -69,6 +75,17 @@ def make_readiness_inputs(
                 "kind": "HTML",
                 "exists": True,
                 "size_bytes": ci_artifact_path.stat().st_size,
+            }
+        )
+    if include_test_coverage:
+        artifact_rows.append(
+            {
+                "key": "test_coverage_report_html",
+                "title": "Test coverage report HTML",
+                "path": str(coverage_artifact_path),
+                "kind": "HTML",
+                "exists": True,
+                "size_bytes": coverage_artifact_path.stat().st_size,
             }
         )
 
@@ -95,11 +112,16 @@ def make_readiness_inputs(
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
                 "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
+                "test_coverage_status": test_coverage_status if include_test_coverage else None,
+                "test_coverage_percent": 90.17 if include_test_coverage else None,
+                "test_coverage_fail_under": 80.0 if include_test_coverage else None,
+                "test_coverage_gap": 0.0 if test_coverage_status == "pass" else 8.0,
             },
             "checks": [
                 {"id": "ready_run", "status": "pass", "title": "At least one ready run", "detail": "1 ready run."},
                 {"id": "request_history_summary", "status": "pass", "title": "Request history summary is clean", "detail": "status=pass."},
                 {"id": "ci_workflow_hygiene", "status": ci_workflow_status, "title": "CI workflow hygiene is clean", "detail": f"status={ci_workflow_status}."},
+                {"id": "test_coverage_report", "status": test_coverage_status, "title": "Test coverage gate is clean", "detail": f"status={test_coverage_status}."},
             ],
             "recommendations": ["All audit checks passed."],
         },
@@ -139,6 +161,19 @@ def make_readiness_inputs(
                 ],
             },
         )
+    if include_test_coverage:
+        write_json(
+            coverage_path,
+            {
+                "summary": {
+                    "status": test_coverage_status,
+                    "decision": "continue_with_coverage_gate" if test_coverage_status == "pass" else "improve_test_coverage",
+                    "line_coverage_percent": 90.17 if test_coverage_status == "pass" else 72.0,
+                    "fail_under": 80.0,
+                    "coverage_gap": 0.0 if test_coverage_status == "pass" else 8.0,
+                }
+            },
+        )
     if include_gate:
         write_json(
             gate_path,
@@ -154,6 +189,10 @@ def make_readiness_inputs(
                     "audit_status": "pass",
                     "audit_score_percent": 100.0,
                     "ready_runs": 1,
+                    "test_coverage_status": test_coverage_status if include_test_coverage else None,
+                    "test_coverage_percent": 90.17 if include_test_coverage else None,
+                    "test_coverage_fail_under": 80.0 if include_test_coverage else None,
+                    "test_coverage_gap": 0.0 if test_coverage_status == "pass" else 8.0,
                 },
                 "checks": [
                     {"id": "request_history_summary_audit_check", "status": gate_status, "title": "Request history summary audit check passed", "detail": "request_history_summary=pass." if gate_status == "pass" else "missing required audit check: request_history_summary."}
@@ -185,6 +224,10 @@ def make_readiness_inputs(
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
                 "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
+                "test_coverage_status": test_coverage_status if include_test_coverage else None,
+                "test_coverage_percent": 90.17 if include_test_coverage else None,
+                "test_coverage_fail_under": 80.0 if include_test_coverage else None,
+                "test_coverage_gap": 0.0 if test_coverage_status == "pass" else 8.0,
                 "available_artifacts": len(artifact_rows),
                 "missing_artifacts": 0,
             },
@@ -193,6 +236,7 @@ def make_readiness_inputs(
                 "project_audit_path": str(audit_path),
                 "request_history_summary_path": str(request_path) if include_request_history else None,
                 "ci_workflow_hygiene_path": str(ci_workflow_path) if include_ci_workflow else None,
+                "test_coverage_report_path": str(coverage_path) if include_test_coverage else None,
             },
             "artifacts": artifact_rows,
             "ci_workflow_context": {
@@ -200,6 +244,13 @@ def make_readiness_inputs(
                 "failed_check_count": 0 if ci_workflow_status == "pass" else 1,
                 "node24_native_action_count": 2 if include_ci_workflow else None,
                 "path": str(ci_workflow_path) if include_ci_workflow else None,
+            },
+            "test_coverage_context": {
+                "status": test_coverage_status if include_test_coverage else None,
+                "line_coverage_percent": 90.17 if include_test_coverage else None,
+                "fail_under": 80.0 if include_test_coverage else None,
+                "coverage_gap": 0.0 if test_coverage_status == "pass" else 8.0,
+                "path": str(coverage_path) if include_test_coverage else None,
             },
             "recommendations": ["Release evidence is complete."],
         },
@@ -222,8 +273,11 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(report["summary"]["ci_workflow_failed_checks"], 0)
             self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
+            self.assertEqual(report["summary"]["test_coverage_status"], "pass")
+            self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
             self.assertIn("ci_workflow_hygiene", {panel["key"] for panel in report["panels"]})
+            self.assertIn("test_coverage", {panel["key"] for panel in report["panels"]})
             self.assertIn("All readiness panels are clean", " ".join(report["actions"]))
 
     def test_build_release_readiness_uses_bundle_ci_context_when_report_missing(self) -> None:
@@ -240,6 +294,21 @@ class ReleaseReadinessTests(unittest.TestCase):
             ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
             self.assertEqual(ci_panel["status"], "pass")
             self.assertIn("source=bundle summary/context", ci_panel["detail"])
+
+    def test_build_release_readiness_uses_bundle_coverage_context_when_report_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle_path = make_readiness_inputs(root)
+            (root / "runs" / "test-coverage" / "test_coverage_report.json").unlink()
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "ready")
+            self.assertEqual(report["summary"]["test_coverage_status"], "pass")
+            self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
+            coverage_panel = next(panel for panel in report["panels"] if panel["key"] == "test_coverage")
+            self.assertEqual(coverage_panel["status"], "pass")
+            self.assertIn("source=bundle summary/context", coverage_panel["detail"])
 
     def test_build_release_readiness_dashboard_incomplete_without_gate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -276,6 +345,19 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(ci_panel["status"], "warn")
             self.assertIn("Review warning panel: CI Workflow Hygiene", " ".join(report["actions"]))
 
+    def test_build_release_readiness_reviews_failed_test_coverage(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_readiness_inputs(Path(tmp), test_coverage_status="fail")
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "review")
+            self.assertEqual(report["summary"]["decision"], "review")
+            self.assertEqual(report["summary"]["test_coverage_status"], "fail")
+            coverage_panel = next(panel for panel in report["panels"] if panel["key"] == "test_coverage")
+            self.assertEqual(coverage_panel["status"], "warn")
+            self.assertIn("Review warning panel: Test Coverage Gate", " ".join(report["actions"]))
+
     def test_write_release_readiness_outputs_and_escape_html(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -289,6 +371,7 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertTrue(Path(outputs["markdown"]).exists())
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Panels", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Test coverage", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Readiness&gt;", html)
             self.assertNotIn("<h1><Readiness>", html)
 

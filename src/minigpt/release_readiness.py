@@ -28,6 +28,7 @@ def build_release_readiness_dashboard(
     request_history_summary_path: str | Path | None = None,
     maturity_path: str | Path | None = None,
     ci_workflow_hygiene_path: str | Path | None = None,
+    test_coverage_report_path: str | Path | None = None,
     title: str = "MiniGPT release readiness dashboard",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -51,6 +52,11 @@ def build_release_readiness_dashboard(
         inputs.get("ci_workflow_hygiene_path"),
         _candidate(root, "ci-workflow-hygiene", "ci_workflow_hygiene.json"),
     )
+    coverage_file = _resolve_optional_path(
+        test_coverage_report_path,
+        inputs.get("test_coverage_report_path"),
+        _candidate(root, "test-coverage", "test_coverage_report.json"),
+    )
 
     registry = _read_json(registry_file, warnings, "registry") if registry_file is not None else None
     audit = _read_json(audit_file, warnings, "project audit") if audit_file is not None else None
@@ -58,6 +64,7 @@ def build_release_readiness_dashboard(
     gate = _read_json(gate_file, warnings, "release gate") if gate_file is not None else None
     maturity = _read_json(maturity_file, warnings, "maturity summary") if maturity_file is not None else None
     ci_workflow = _read_json(ci_file, warnings, "CI workflow hygiene") if ci_file is not None else None
+    test_coverage = _read_json(coverage_file, warnings, "test coverage report") if coverage_file is not None else None
 
     panels = [
         _registry_panel(registry_file, registry),
@@ -67,6 +74,7 @@ def build_release_readiness_dashboard(
         _request_history_panel(request_file, request_history),
         _maturity_panel(maturity_file, maturity),
         _ci_workflow_panel(ci_file, ci_workflow, bundle),
+        _test_coverage_panel(coverage_file, test_coverage, bundle),
     ]
     actions = _actions(bundle, gate if isinstance(gate, dict) else None, audit if isinstance(audit, dict) else None, panels)
     summary = _summary(
@@ -76,6 +84,7 @@ def build_release_readiness_dashboard(
         request_history if isinstance(request_history, dict) else None,
         maturity if isinstance(maturity, dict) else None,
         ci_workflow if isinstance(ci_workflow, dict) else None,
+        test_coverage if isinstance(test_coverage, dict) else None,
         panels,
     )
     evidence = _evidence(bundle)
@@ -92,6 +101,7 @@ def build_release_readiness_dashboard(
             "request_history_summary_path": None if request_file is None else str(request_file),
             "maturity_summary_path": None if maturity_file is None else str(maturity_file),
             "ci_workflow_hygiene_path": None if ci_file is None else str(ci_file),
+            "test_coverage_report_path": None if coverage_file is None else str(coverage_file),
         },
         "summary": summary,
         "panels": panels,
@@ -108,6 +118,7 @@ def _summary(
     request_history: dict[str, Any] | None,
     maturity: dict[str, Any] | None,
     ci_workflow: dict[str, Any] | None,
+    test_coverage: dict[str, Any] | None,
     panels: list[dict[str, Any]],
 ) -> dict[str, Any]:
     bundle_summary = _dict(bundle.get("summary"))
@@ -117,6 +128,8 @@ def _summary(
     maturity_summary = _dict(maturity.get("summary")) if isinstance(maturity, dict) else {}
     ci_summary = _dict(ci_workflow.get("summary")) if isinstance(ci_workflow, dict) else {}
     ci_context = _dict(bundle.get("ci_workflow_context"))
+    coverage_summary = _dict(test_coverage.get("summary")) if isinstance(test_coverage, dict) else {}
+    coverage_context = _dict(bundle.get("test_coverage_context"))
     status = _readiness_status(panels, gate)
     return {
         "readiness_status": status,
@@ -143,6 +156,22 @@ def _summary(
             bundle_summary.get("ci_workflow_node24_actions"),
             ci_context.get("node24_native_actions"),
             ci_context.get("node24_native_action_count"),
+        ),
+        "test_coverage_status": coverage_summary.get("status") or bundle_summary.get("test_coverage_status") or coverage_context.get("status"),
+        "test_coverage_percent": first_present(
+            coverage_summary.get("line_coverage_percent"),
+            bundle_summary.get("test_coverage_percent"),
+            coverage_context.get("line_coverage_percent"),
+        ),
+        "test_coverage_fail_under": first_present(
+            coverage_summary.get("fail_under"),
+            bundle_summary.get("test_coverage_fail_under"),
+            coverage_context.get("fail_under"),
+        ),
+        "test_coverage_gap": first_present(
+            coverage_summary.get("coverage_gap"),
+            bundle_summary.get("test_coverage_gap"),
+            coverage_context.get("coverage_gap"),
         ),
         "ready_runs": bundle_summary.get("ready_runs") or audit_summary.get("ready_runs"),
         "missing_artifacts": bundle_summary.get("missing_artifacts"),
@@ -291,6 +320,41 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             path,
         )
     return _panel("ci_workflow_hygiene", "CI Workflow Hygiene", "warn", "ci_workflow_hygiene.json missing", path)
+
+
+def _test_coverage_panel(path: Path | None, test_coverage: dict[str, Any] | None, bundle: dict[str, Any]) -> dict[str, Any]:
+    if isinstance(test_coverage, dict):
+        summary = _dict(test_coverage.get("summary"))
+        coverage_status = str(summary.get("status") or "missing")
+        return _panel(
+            "test_coverage",
+            "Test Coverage Gate",
+            "pass" if coverage_status == "pass" else "warn",
+            "status="
+            + coverage_status
+            + f"; coverage={_fmt(summary.get('line_coverage_percent'))}; fail_under={_fmt(summary.get('fail_under'))}; gap={_fmt(summary.get('coverage_gap'))}",
+            path,
+        )
+    bundle_summary = _dict(bundle.get("summary"))
+    bundle_context = _dict(bundle.get("test_coverage_context"))
+    coverage_status = bundle_summary.get("test_coverage_status") or bundle_context.get("status")
+    if coverage_status:
+        return _panel(
+            "test_coverage",
+            "Test Coverage Gate",
+            "pass" if coverage_status == "pass" else "warn",
+            "status="
+            + str(coverage_status)
+            + "; coverage="
+            + _fmt(first_present(bundle_summary.get("test_coverage_percent"), bundle_context.get("line_coverage_percent")))
+            + "; fail_under="
+            + _fmt(first_present(bundle_summary.get("test_coverage_fail_under"), bundle_context.get("fail_under")))
+            + "; gap="
+            + _fmt(first_present(bundle_summary.get("test_coverage_gap"), bundle_context.get("coverage_gap")))
+            + "; source=bundle summary/context",
+            path,
+        )
+    return _panel("test_coverage", "Test Coverage Gate", "warn", "test_coverage_report.json missing", path)
 
 
 def _panel(key: str, title: str, status: str, detail: str, source_path: Path | None) -> dict[str, Any]:
