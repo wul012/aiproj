@@ -199,6 +199,7 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(review_delta["overall_relation"], "regressed")
             self.assertEqual(review_delta["final_val_loss_relation"], "regressed")
             self.assertTrue(report["recommendations"])
+            self.assertIn("non-leading portfolios", " ".join(report["recommendations"]))
 
     def test_best_scoring_review_portfolio_keeps_maturity_warning(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -219,7 +220,7 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["best_score_name"], "candidate")
             self.assertEqual(report["summary"]["best_score_maturity_status"], "review")
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
-            self.assertIn("maturity narrative status", " ".join(report["recommendations"]))
+            self.assertIn("best-scoring portfolio's maturity narrative", " ".join(report["recommendations"]))
 
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

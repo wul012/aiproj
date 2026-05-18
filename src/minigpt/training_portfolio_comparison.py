@@ -294,7 +294,10 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
     if summary.get("dataset_warning_count"):
         recs.append("Resolve dataset-card warnings before using the best-scoring run as a maturity baseline.")
     if summary.get("maturity_review_count"):
-        recs.append("Review maturity narrative status before promoting the best-scoring portfolio as a clean baseline.")
+        if summary.get("best_score_maturity_status") in {"review", "warn", "fail", "incomplete"}:
+            recs.append("Review the best-scoring portfolio's maturity narrative before promoting it as a clean baseline.")
+        else:
+            recs.append("Review maturity-narrative findings for non-leading portfolios before archiving the comparison.")
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs

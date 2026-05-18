@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+248-v234-portfolio-maturity-recommendation-precision.md
+ -> v234 code explanation: refine training portfolio comparison recommendations so best-score review and non-leading review portfolios produce distinct human guidance.
 247-v233-portfolio-comparison-maturity-output.md
  -> v233 code explanation: expose best-score maturity status in training portfolio comparison Markdown and HTML outputs so v232 review boundaries are visible to human reviewers.
 246-v232-portfolio-comparison-maturity-review-guard.md

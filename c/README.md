@@ -502,6 +502,9 @@ c/232/解释/说明.md
 c/233/图片
 c/233/解释/说明.md
  -> v233 portfolio comparison maturity output 的运行截图和解释
+c/234/图片
+c/234/解释/说明.md
+ -> v234 portfolio maturity recommendation precision 的运行截图和解释
 ```
 
 写入规则：
