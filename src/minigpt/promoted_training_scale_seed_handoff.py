@@ -125,7 +125,14 @@ def build_promoted_training_scale_seed_handoff(
         "artifact_rows": artifact_rows,
         "summary": summary,
         "clean_evidence_requirement": clean_evidence_requirement,
-        "recommendations": _recommendations(summary, plan_report, execution, artifact_rows, next_batch_command),
+        "recommendations": _recommendations(
+            summary,
+            plan_report,
+            execution,
+            artifact_rows,
+            next_batch_command,
+            clean_evidence_requirement,
+        ),
     }
 
 
@@ -354,18 +361,36 @@ def _recommendations(
     execution: dict[str, Any],
     artifact_rows: list[dict[str, Any]],
     next_batch_command: list[str],
+    clean_evidence_requirement: SeedHandoffCleanEvidenceRequirement | None = None,
 ) -> list[str]:
     status = str(summary.get("handoff_status") or "")
     alignment_recommendations = _suite_alignment_recommendations(summary)
+    clean_evidence_recommendations = _clean_evidence_requirement_recommendations(clean_evidence_requirement)
     if status == "planned":
-        return alignment_recommendations + ["Review the generated seed command, then rerun with --execute to materialize the next training scale plan."]
+        return (
+            alignment_recommendations
+            + clean_evidence_recommendations
+            + ["Review the generated seed command, then rerun with --execute to materialize the next training scale plan."]
+        )
     if status == "blocked":
-        return alignment_recommendations + ["Fix the seed or plan blockers before trying to produce the next training scale plan."]
+        return (
+            alignment_recommendations
+            + clean_evidence_recommendations
+            + ["Fix the seed or plan blockers before trying to produce the next training scale plan."]
+        )
     if status == "timeout":
-        return alignment_recommendations + ["Inspect the partial plan output tree and rerun with a larger timeout if the plan command is still valid."]
+        return (
+            alignment_recommendations
+            + clean_evidence_recommendations
+            + ["Inspect the partial plan output tree and rerun with a larger timeout if the plan command is still valid."]
+        )
     if status == "failed":
-        return alignment_recommendations + ["Inspect stdout/stderr tails and the seed command before retrying the next plan handoff."]
-    recommendations = alignment_recommendations + [
+        return (
+            alignment_recommendations
+            + clean_evidence_recommendations
+            + ["Inspect stdout/stderr tails and the seed command before retrying the next plan handoff."]
+        )
+    recommendations = alignment_recommendations + clean_evidence_recommendations + [
         "Use the generated plan report and batch command as the next input to the training-scale workflow.",
     ]
     if plan_report:
@@ -377,6 +402,22 @@ def _recommendations(
     if execution.get("returncode") not in {None, 0}:
         recommendations.append("The plan command returned a non-zero exit code, so treat the seed handoff as failed.")
     return recommendations
+
+
+def _clean_evidence_requirement_recommendations(
+    clean_evidence_requirement: SeedHandoffCleanEvidenceRequirement | None,
+) -> list[str]:
+    requirement = _dict(clean_evidence_requirement)
+    if not requirement.get("required"):
+        return []
+    status = str(requirement.get("status") or "")
+    detail = str(requirement.get("detail") or "")
+    if status == "pass":
+        return ["Clean-evidence requirement passed; this seed handoff can be used as clean comparison evidence."]
+    if status == "fail":
+        suffix = f": {detail}" if detail else "."
+        return [f"Clean-evidence requirement failed; resolve readiness before using this handoff as clean comparison evidence{suffix}"]
+    return ["Review clean-evidence requirement status before using this handoff as clean comparison evidence."]
 
 
 def _suite_alignment_recommendations(summary: dict[str, Any]) -> list[str]:

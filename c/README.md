@@ -460,6 +460,9 @@ c/218/解释/说明.md
 c/219/图片
 c/219/解释/说明.md
  -> v219 promoted training scale seed handoff clean evidence requirement contract 的运行截图和解释
+c/220/图片
+c/220/解释/说明.md
+ -> v220 promoted training scale seed handoff clean evidence recommendation actions 的运行截图和解释
 ```
 
 写入规则：

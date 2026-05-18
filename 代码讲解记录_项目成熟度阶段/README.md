@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+234-v220-promoted-seed-handoff-clean-evidence-recommendation-actions.md
+ -> v220 code explanation: carry required clean-evidence pass/fail status into seed handoff recommendations so JSON/Markdown/HTML readers get explicit next actions without changing default non-required behavior.
 233-v219-promoted-seed-handoff-clean-evidence-requirement-contract.md
  -> v219 code explanation: promote the promoted seed handoff clean-evidence requirement decision into a reusable library contract, export the not-required/pass/fail status domain, and finish the pending duplicate `_utc_now()` wrapper cleanup.
 220-v206-promotion-suite-guard-evidence.md

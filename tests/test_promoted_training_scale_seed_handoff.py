@@ -105,6 +105,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(planned["clean_evidence_requirement"]["readiness_status"], "pending-plan")
             self.assertEqual(executed["clean_evidence_requirement"]["status"], "pass")
             self.assertEqual(executed["clean_evidence_requirement"]["readiness_status"], "ready")
+            self.assertIn("Clean-evidence requirement failed", planned["recommendations"][1])
+            self.assertIn("Clean-evidence requirement passed", executed["recommendations"][1])
 
     def test_blocks_review_when_allow_review_false(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -278,6 +280,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(payload["clean_evidence_requirement"]["status"], "pass")
             self.assertTrue(payload["clean_evidence_requirement"]["required"])
             self.assertTrue(payload["clean_evidence_requirement"]["ready"])
+            self.assertIn("Clean-evidence requirement passed", payload["recommendations"][1])
             self.assertEqual(
                 payload["clean_evidence_requirement"]["status_domain"],
                 list(SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES),
@@ -317,6 +320,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertTrue(payload["clean_evidence_requirement"]["required"])
             self.assertFalse(payload["clean_evidence_requirement"]["ready"])
             self.assertEqual(payload["clean_evidence_requirement"]["readiness_status"], "pending-plan")
+            self.assertIn("Clean-evidence requirement failed", payload["recommendations"][1])
+            self.assertIn("execute the seed handoff", payload["recommendations"][1])
             self.assertIn("clean_evidence_requirement_status", csv_text)
             self.assertIn("clean_evidence_requirement_status_domain", csv_text)
             self.assertIn("Clean evidence requirement", markdown)
