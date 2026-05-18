@@ -21,7 +21,7 @@ FORBIDDEN_ENV_VARS = ("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",)
 REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
-    "unit_test_discovery": "unittest discover -s tests -v",
+    "test_coverage_report": "scripts/run_test_coverage.py",
 }
 REQUIRED_PYTHON_VERSION = "3.11"
 

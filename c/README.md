@@ -517,6 +517,9 @@ c/237/解释/说明.md
 c/238/图片
 c/238/解释/说明.md
  -> v238 dependabot automation 的运行截图和解释
+c/239/图片
+c/239/解释/说明.md
+ -> v239 test coverage baseline report 的运行截图和解释
 ```
 
 写入规则：

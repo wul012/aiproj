@@ -61,7 +61,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "        with:",
                         '          python-version: "3.12"',
                         "      - name: Unit tests",
-                        "        run: python -B -m unittest discover -s tests -v",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci",
                     ]
                 ),
                 encoding="utf-8",
@@ -96,7 +96,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Unit tests",
-                        "        run: python -B -m unittest discover -s tests -v",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci",
                     ]
                 ),
                 encoding="utf-8",

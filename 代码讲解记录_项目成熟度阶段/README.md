@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+253-v239-test-coverage-baseline-report.md
+ -> v239 code explanation: add a non-blocking unittest coverage report, route CI unit tests through it, and record baseline coverage evidence before any fail-under gate.
 252-v238-dependabot-automation.md
  -> v238 code explanation: add Dependabot automation for GitHub Actions and Python dependency updates with a lightweight config-shape test.
 251-v237-portfolio-comparison-blocker-action-cli-gate.md
