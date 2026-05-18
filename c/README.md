@@ -496,6 +496,9 @@ c/230/解释/说明.md
 c/231/图片
 c/231/解释/说明.md
  -> v231 eval readiness chain integration test 的运行截图和解释
+c/232/图片
+c/232/解释/说明.md
+ -> v232 portfolio comparison maturity review guard 的运行截图和解释
 ```
 
 写入规则：

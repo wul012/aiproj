@@ -190,6 +190,8 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["score_regression_count"], 1)
             self.assertEqual(report["summary"]["artifact_regression_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
+            self.assertEqual(report["summary"]["best_score_name"], "candidate")
+            self.assertEqual(report["summary"]["best_score_maturity_status"], "ready")
             candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
             self.assertEqual(candidate_delta["overall_relation"], "improved")
             self.assertEqual(candidate_delta["final_val_loss_relation"], "improved")
@@ -197,6 +199,27 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(review_delta["overall_relation"], "regressed")
             self.assertEqual(review_delta["final_val_loss_relation"], "regressed")
             self.assertTrue(report["recommendations"])
+
+    def test_best_scoring_review_portfolio_keeps_maturity_warning(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_portfolio(root, "baseline", overall_score=82, rubric_score=80, final_val_loss=1.2, best_val_loss=1.1)
+            candidate = make_portfolio(
+                root,
+                "candidate",
+                overall_score=91,
+                rubric_score=88,
+                final_val_loss=0.9,
+                best_val_loss=0.88,
+                maturity_status="review",
+            )
+
+            report = build_training_portfolio_comparison([baseline, candidate], names=["base", "candidate"], baseline="base")
+
+            self.assertEqual(report["summary"]["best_score_name"], "candidate")
+            self.assertEqual(report["summary"]["best_score_maturity_status"], "review")
+            self.assertEqual(report["summary"]["maturity_review_count"], 1)
+            self.assertIn("maturity narrative status", " ".join(report["recommendations"]))
 
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

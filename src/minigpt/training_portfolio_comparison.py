@@ -258,6 +258,9 @@ def _comparison_summary(
     deltas: list[dict[str, Any]],
 ) -> dict[str, Any]:
     non_baseline = [row for row in deltas if not row.get("is_baseline")]
+    best_score = _best_numeric(portfolios, "overall_score", higher_is_better=True)
+    best_artifact = _best_numeric(portfolios, "artifact_coverage", higher_is_better=True)
+    lowest_val_loss = _best_numeric(portfolios, "final_val_loss", higher_is_better=False)
     return {
         "portfolio_count": len(portfolios),
         "baseline_name": baseline.get("name"),
@@ -271,9 +274,10 @@ def _comparison_summary(
         "loss_regression_count": sum(1 for item in non_baseline if item.get("final_val_loss_relation") == "regressed"),
         "dataset_warning_count": sum(int(item.get("dataset_warning_count") or 0) for item in portfolios),
         "maturity_review_count": sum(1 for item in portfolios if item.get("maturity_portfolio_status") in {"review", "warn", "fail", "incomplete"}),
-        "best_score_name": _pick(_best_numeric(portfolios, "overall_score", higher_is_better=True), "name"),
-        "best_artifact_name": _pick(_best_numeric(portfolios, "artifact_coverage", higher_is_better=True), "name"),
-        "lowest_val_loss_name": _pick(_best_numeric(portfolios, "final_val_loss", higher_is_better=False), "name"),
+        "best_score_name": _pick(best_score, "name"),
+        "best_score_maturity_status": _pick(best_score, "maturity_portfolio_status"),
+        "best_artifact_name": _pick(best_artifact, "name"),
+        "lowest_val_loss_name": _pick(lowest_val_loss, "name"),
     }
 
 
@@ -289,6 +293,8 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
         recs.append("Compare the regressed portfolio's dataset version, training config, and weakest benchmark cases against the baseline.")
     if summary.get("dataset_warning_count"):
         recs.append("Resolve dataset-card warnings before using the best-scoring run as a maturity baseline.")
+    if summary.get("maturity_review_count"):
+        recs.append("Review maturity narrative status before promoting the best-scoring portfolio as a clean baseline.")
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs
