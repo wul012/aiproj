@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+245-v231-eval-readiness-chain-test.md
+ -> v231 code explanation: add a cross-module integration test that protects eval readiness from scorecard comparison through promotion decision into maturity narrative review status.
 244-v230-maturity-narrative-eval-readiness.md
  -> v230 code explanation: carry scorecard decision eval-suite comparison readiness into maturity narrative summary, portfolio review status, sections, and rendered outputs.
 243-v229-scorecard-decision-eval-readiness.md
