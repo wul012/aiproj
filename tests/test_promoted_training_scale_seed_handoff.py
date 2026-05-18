@@ -187,6 +187,57 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("selected_handoff, seed, and plan suite paths align", summary["seed_handoff_suite_alignment_detail"])
             self.assertIn("Suite alignment is consistent", report["recommendations"][0])
 
+    def test_script_can_require_clean_evidence_after_consistent_execute(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertIn("seed_handoff_clean_evidence_status=ready", completed.stdout)
+            self.assertIn("clean_evidence_required=pass", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+
+    def test_script_rejects_pending_clean_evidence_when_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-clean-evidence",
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("seed_handoff_clean_evidence_status=pending-plan", completed.stdout)
+            self.assertIn("clean_evidence_required=fail", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+
     def test_reports_mismatched_selected_suite_alignment_without_blocking(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

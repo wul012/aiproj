@@ -448,6 +448,9 @@ c/214/解释/说明.md
 c/215/图片
 c/215/解释/说明.md
  -> v215 promoted training scale seed handoff clean evidence status contract 的运行截图和解释
+c/216/图片
+c/216/解释/说明.md
+ -> v216 promoted training scale seed handoff clean evidence CLI gate 的运行截图和解释
 ```
 
 写入规则：

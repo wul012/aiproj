@@ -20,6 +20,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory; defaults to <seed>/handoff")
     parser.add_argument("--execute", action="store_true", help="Run the generated next-cycle plan command. Default only validates it.")
     parser.add_argument("--no-allow-review", action="store_true", help="Block review-status seeds instead of allowing their plan command.")
+    parser.add_argument(
+        "--require-clean-evidence",
+        action="store_true",
+        help="Exit non-zero unless the seed handoff clean-evidence readiness is true.",
+    )
     parser.add_argument("--timeout-seconds", type=int, default=900)
     parser.add_argument("--title", type=str, default="MiniGPT promoted training scale seed handoff")
     return parser.parse_args()
@@ -61,6 +66,11 @@ def main() -> None:
     print(f"command={report.get('command_text')}")
     print(f"next_batch_command={report.get('next_batch_command_text')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    if args.require_clean_evidence:
+        clean_evidence_ready = bool(summary.get("seed_handoff_clean_evidence_ready"))
+        print(f"clean_evidence_required={'pass' if clean_evidence_ready else 'fail'}")
+        if not clean_evidence_ready:
+            raise SystemExit(1)
     if summary.get("handoff_status") in {"blocked", "failed", "timeout"}:
         raise SystemExit(1)
 
