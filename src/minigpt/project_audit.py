@@ -17,6 +17,8 @@ from minigpt.project_audit_contexts import (
     build_ci_workflow_hygiene_check,
     build_request_history_context,
     build_request_history_summary_check,
+    build_test_coverage_check,
+    build_test_coverage_context,
 )
 from minigpt.report_utils import (
     as_dict as _dict,
@@ -37,6 +39,7 @@ def build_project_audit(
     model_card_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
     ci_workflow_hygiene_path: str | Path | None = None,
+    test_coverage_report_path: str | Path | None = None,
     title: str = "MiniGPT project audit",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -46,6 +49,7 @@ def build_project_audit(
     model_card_file = _resolve_model_card_path(registry_file, model_card_path)
     request_history_summary_file = _resolve_request_history_summary_path(registry_file, request_history_summary_path)
     ci_workflow_hygiene_file = _resolve_ci_workflow_hygiene_path(registry_file, ci_workflow_hygiene_path)
+    test_coverage_report_file = _resolve_test_coverage_report_path(registry_file, test_coverage_report_path)
     model_card = _read_json(model_card_file, warnings, "model card") if model_card_file is not None else None
     request_history_summary = (
         _read_json(request_history_summary_file, warnings, "request history summary")
@@ -57,6 +61,11 @@ def build_project_audit(
         if ci_workflow_hygiene_file is not None
         else None
     )
+    test_coverage_report = (
+        _read_json(test_coverage_report_file, warnings, "test coverage report")
+        if test_coverage_report_file is not None
+        else None
+    )
     runs = _build_run_rows(registry, model_card if isinstance(model_card, dict) else None)
     checks = _build_checks(
         registry,
@@ -65,6 +74,8 @@ def build_project_audit(
         request_history_summary_file,
         ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
         ci_workflow_hygiene_file,
+        test_coverage_report if isinstance(test_coverage_report, dict) else None,
+        test_coverage_report_file,
         runs,
     )
     summary = _summarize_checks(
@@ -73,6 +84,7 @@ def build_project_audit(
         model_card if isinstance(model_card, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
         ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
+        test_coverage_report if isinstance(test_coverage_report, dict) else None,
         runs,
     )
 
@@ -84,10 +96,12 @@ def build_project_audit(
         "model_card_path": None if model_card_file is None else str(model_card_file),
         "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
         "ci_workflow_hygiene_path": None if ci_workflow_hygiene_file is None else str(ci_workflow_hygiene_file),
+        "test_coverage_report_path": None if test_coverage_report_file is None else str(test_coverage_report_file),
         "summary": summary,
         "checks": checks,
         "request_history_context": build_request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
         "ci_workflow_context": build_ci_workflow_context(ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None),
+        "test_coverage_context": build_test_coverage_context(test_coverage_report if isinstance(test_coverage_report, dict) else None),
         "runs": runs,
         "recommendations": _build_recommendations(checks, summary),
         "warnings": warnings,
@@ -129,6 +143,20 @@ def _resolve_ci_workflow_hygiene_path(registry_path: Path, ci_workflow_hygiene_p
         registry_path.parent / "ci_workflow_hygiene.json",
         registry_path.parent / "ci-workflow-hygiene" / "ci_workflow_hygiene.json",
         registry_path.parent.parent / "ci-workflow-hygiene" / "ci_workflow_hygiene.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_test_coverage_report_path(registry_path: Path, test_coverage_report_path: str | Path | None) -> Path | None:
+    if test_coverage_report_path is not None:
+        return Path(test_coverage_report_path)
+    candidates = [
+        registry_path.parent / "test_coverage_report.json",
+        registry_path.parent / "test-coverage" / "test_coverage_report.json",
+        registry_path.parent.parent / "test-coverage" / "test_coverage_report.json",
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -205,6 +233,8 @@ def _build_checks(
     request_history_summary_path: Path | None,
     ci_workflow_hygiene: dict[str, Any] | None,
     ci_workflow_hygiene_path: Path | None,
+    test_coverage_report: dict[str, Any] | None,
+    test_coverage_report_path: Path | None,
     runs: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     total = len(runs)
@@ -237,6 +267,7 @@ def _build_checks(
         ),
         build_request_history_summary_check(request_history_summary, request_history_summary_path),
         build_ci_workflow_hygiene_check(ci_workflow_hygiene, ci_workflow_hygiene_path),
+        build_test_coverage_check(test_coverage_report, test_coverage_report_path),
     ]
     non_pass_quality = [run.get("name") for run in runs if run.get("dataset_quality") not in {"pass", None, "missing"}]
     checks.append(
@@ -291,6 +322,7 @@ def _summarize_checks(
     model_card: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
     ci_workflow_hygiene: dict[str, Any] | None,
+    test_coverage_report: dict[str, Any] | None,
     runs: list[dict[str, Any]],
 ) -> dict[str, Any]:
     pass_count = sum(1 for check in checks if check["status"] == "pass")
@@ -306,6 +338,7 @@ def _summarize_checks(
     model_summary = _dict(model_card.get("summary")) if isinstance(model_card, dict) else {}
     request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
     ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
+    coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
     best = _dict(registry.get("best_by_best_val_loss"))
     return {
         "overall_status": overall,
@@ -327,6 +360,11 @@ def _summarize_checks(
         "ci_workflow_decision": ci_summary.get("decision"),
         "ci_workflow_failed_checks": ci_summary.get("failed_check_count"),
         "ci_workflow_node24_actions": ci_summary.get("node24_native_action_count"),
+        "test_coverage_status": coverage_summary.get("status"),
+        "test_coverage_decision": coverage_summary.get("decision"),
+        "test_coverage_percent": coverage_summary.get("line_coverage_percent"),
+        "test_coverage_fail_under": coverage_summary.get("fail_under"),
+        "test_coverage_gap": coverage_summary.get("coverage_gap"),
     }
 
 
@@ -355,6 +393,8 @@ def _build_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]
             items.append("Generate or review request_history_summary.json before using local playground activity as release evidence.")
         elif check["id"] == "ci_workflow_hygiene":
             items.append("Generate or review ci_workflow_hygiene.json before using CI workflow policy as release evidence.")
+        elif check["id"] == "test_coverage_report":
+            items.append("Generate or review test_coverage_report.json before using coverage gate status as audit evidence.")
         elif check["id"] == "dashboards":
             items.append("Build dashboards for missing runs to improve reviewability.")
         elif check["id"] == "checkpoints":

@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+255-v241-project-audit-coverage-gate-context.md
+ -> v241 code explanation: carry test coverage gate status into project audit summary, checks, context, CLI output, and human-readable artifacts.
 254-v240-conservative-coverage-fail-under-gate.md
  -> v240 code explanation: turn the v239 coverage baseline into a conservative `--fail-under 80` CI gate while keeping coverage artifacts inspectable on failure.
 253-v239-test-coverage-baseline-report.md

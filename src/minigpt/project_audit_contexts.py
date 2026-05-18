@@ -141,6 +141,78 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
     }
 
 
+def build_test_coverage_check(
+    test_coverage_report: dict[str, Any] | None,
+    test_coverage_report_path: Path | None,
+) -> dict[str, Any]:
+    if not isinstance(test_coverage_report, dict):
+        detail = (
+            f"test_coverage_report.json missing at {test_coverage_report_path}"
+            if test_coverage_report_path is not None
+            else "test_coverage_report.json missing; coverage gate evidence was not summarized."
+        )
+        return _check("test_coverage_report", "Test coverage gate is clean", "warn", detail)
+    summary = _dict(test_coverage_report.get("summary"))
+    status = str(summary.get("status") or "missing")
+    decision = summary.get("decision")
+    percent = summary.get("line_coverage_percent")
+    fail_under = summary.get("fail_under")
+    threshold_enabled = summary.get("threshold_enabled")
+    coverage_gap = summary.get("coverage_gap")
+    audit_status = "pass" if status == "pass" and threshold_enabled else "warn"
+    detail = (
+        f"status={status}; decision={_fmt_any(decision)}; line_coverage={_fmt_any(percent)}; "
+        f"fail_under={_fmt_any(fail_under)}; coverage_gap={_fmt_any(coverage_gap)}; "
+        f"threshold_enabled={_fmt_any(threshold_enabled)}."
+    )
+    return _check(
+        "test_coverage_report",
+        "Test coverage gate is clean",
+        audit_status,
+        detail,
+        {
+            "status": status,
+            "decision": decision,
+            "line_coverage_percent": percent,
+            "covered_lines": summary.get("covered_lines"),
+            "num_statements": summary.get("num_statements"),
+            "missing_lines": summary.get("missing_lines"),
+            "file_count": summary.get("file_count"),
+            "threshold_enabled": threshold_enabled,
+            "fail_under": fail_under,
+            "coverage_gap": coverage_gap,
+            "path": None if test_coverage_report_path is None else str(test_coverage_report_path),
+        },
+    )
+
+
+def build_test_coverage_context(test_coverage_report: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(test_coverage_report, dict):
+        return {
+            "available": False,
+            "status": None,
+            "decision": None,
+            "line_coverage_percent": None,
+            "threshold_enabled": None,
+            "fail_under": None,
+            "coverage_gap": None,
+        }
+    summary = _dict(test_coverage_report.get("summary"))
+    return {
+        "available": True,
+        "status": summary.get("status"),
+        "decision": summary.get("decision"),
+        "line_coverage_percent": summary.get("line_coverage_percent"),
+        "covered_lines": summary.get("covered_lines"),
+        "num_statements": summary.get("num_statements"),
+        "missing_lines": summary.get("missing_lines"),
+        "file_count": summary.get("file_count"),
+        "threshold_enabled": summary.get("threshold_enabled"),
+        "fail_under": summary.get("fail_under"),
+        "coverage_gap": summary.get("coverage_gap"),
+    }
+
+
 def _check(
     check_id: str,
     title: str,
@@ -168,4 +240,6 @@ __all__ = [
     "build_ci_workflow_hygiene_check",
     "build_request_history_context",
     "build_request_history_summary_check",
+    "build_test_coverage_check",
+    "build_test_coverage_context",
 ]

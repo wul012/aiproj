@@ -15,6 +15,8 @@ from minigpt.project_audit_contexts import (
     build_ci_workflow_hygiene_check,
     build_request_history_context,
     build_request_history_summary_check,
+    build_test_coverage_check,
+    build_test_coverage_context,
 )
 from minigpt.project_audit import build_project_audit, render_project_audit_html, write_project_audit_outputs
 
@@ -128,6 +130,29 @@ def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
     return path
 
 
+def make_test_coverage_report(root: Path, *, status: str = "pass", threshold_enabled: bool = True) -> Path:
+    summary = {
+        "status": status,
+        "decision": "continue_with_coverage_gate" if status == "pass" and threshold_enabled else "improve_test_coverage",
+        "line_coverage_percent": 90.16 if status == "pass" else 72.0,
+        "covered_lines": 12336,
+        "num_statements": 13683,
+        "missing_lines": 1347,
+        "file_count": 122,
+        "threshold_enabled": threshold_enabled,
+        "fail_under": 80.0 if threshold_enabled else None,
+        "coverage_gap": 0.0 if status == "pass" else 8.0,
+    }
+    report = {
+        "schema_version": 1,
+        "title": "MiniGPT test coverage report",
+        "summary": summary,
+    }
+    path = root / "test-coverage" / "test_coverage_report.json"
+    write_json(path, report)
+    return path
+
+
 class ProjectAuditTests(unittest.TestCase):
     def test_build_project_audit_passes_complete_project(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -136,12 +161,14 @@ class ProjectAuditTests(unittest.TestCase):
             model_card_path = make_model_card(root, registry_path)
             request_history_summary_path = make_request_history_summary(root)
             ci_workflow_hygiene_path = make_ci_workflow_hygiene(root)
+            test_coverage_report_path = make_test_coverage_report(root)
 
             audit = build_project_audit(
                 registry_path,
                 model_card_path=model_card_path,
                 request_history_summary_path=request_history_summary_path,
                 ci_workflow_hygiene_path=ci_workflow_hygiene_path,
+                test_coverage_report_path=test_coverage_report_path,
                 generated_at="2026-05-12T00:00:00Z",
             )
 
@@ -153,10 +180,15 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["request_history_records"], 4)
             self.assertEqual(audit["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(audit["summary"]["ci_workflow_failed_checks"], 0)
+            self.assertEqual(audit["summary"]["test_coverage_status"], "pass")
+            self.assertEqual(audit["summary"]["test_coverage_percent"], 90.16)
+            self.assertEqual(audit["summary"]["test_coverage_fail_under"], 80.0)
             self.assertEqual(audit["request_history_context"]["status"], "pass")
             self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
+            self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
             self.assertIn("ci_workflow_hygiene", {check["id"] for check in audit["checks"]})
+            self.assertIn("test_coverage_report", {check["id"] for check in audit["checks"]})
             self.assertEqual(audit["runs"][0]["experiment_card_exists"], True)
             self.assertIn("All audit checks passed", " ".join(audit["recommendations"]))
 
@@ -202,6 +234,31 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("failed_checks=3", check["detail"])
             self.assertIn("Generate or review ci_workflow_hygiene.json", " ".join(audit["recommendations"]))
 
+    def test_build_project_audit_warns_for_test_coverage_gate_fail_status(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_registry(root)
+            model_card_path = make_model_card(root, registry_path)
+            request_history_summary_path = make_request_history_summary(root)
+            ci_workflow_hygiene_path = make_ci_workflow_hygiene(root)
+            test_coverage_report_path = make_test_coverage_report(root, status="fail")
+
+            audit = build_project_audit(
+                registry_path,
+                model_card_path=model_card_path,
+                request_history_summary_path=request_history_summary_path,
+                ci_workflow_hygiene_path=ci_workflow_hygiene_path,
+                test_coverage_report_path=test_coverage_report_path,
+            )
+
+            self.assertEqual(audit["summary"]["overall_status"], "warn")
+            self.assertEqual(audit["summary"]["test_coverage_status"], "fail")
+            self.assertEqual(audit["summary"]["test_coverage_gap"], 8.0)
+            check = next(item for item in audit["checks"] if item["id"] == "test_coverage_report")
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("coverage_gap=8", check["detail"])
+            self.assertIn("Generate or review test_coverage_report.json", " ".join(audit["recommendations"]))
+
     def test_build_project_audit_fails_for_missing_experiment_cards(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             registry_path = make_registry(Path(tmp))
@@ -227,6 +284,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("CI workflow hygiene", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Test coverage report", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT project audit", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_project_audit_html_escapes_run_text(self) -> None:
@@ -271,9 +329,24 @@ class ProjectAuditTests(unittest.TestCase):
                 "python_version": "3.11",
             },
         }
+        coverage = {
+            "summary": {
+                "status": "pass",
+                "decision": "continue_with_coverage_gate",
+                "line_coverage_percent": 90.16,
+                "covered_lines": 12336,
+                "num_statements": 13683,
+                "missing_lines": 1347,
+                "file_count": 122,
+                "threshold_enabled": True,
+                "fail_under": 80.0,
+                "coverage_gap": 0.0,
+            }
+        }
 
         request_check = build_request_history_summary_check(request_summary, Path("request_history_summary.json"))
         ci_check = build_ci_workflow_hygiene_check(ci_hygiene, Path("ci_workflow_hygiene.json"))
+        coverage_check = build_test_coverage_check(coverage, Path("test_coverage_report.json"))
 
         self.assertEqual(request_check["status"], "warn")
         self.assertIn("status=watch", request_check["detail"])
@@ -288,6 +361,14 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
         self.assertFalse(build_ci_workflow_context(None)["available"])
+
+        self.assertEqual(coverage_check["status"], "pass")
+        self.assertIn("line_coverage=90.16", coverage_check["detail"])
+        self.assertEqual(coverage_check["evidence"]["fail_under"], 80.0)
+        self.assertEqual(build_test_coverage_context(coverage)["coverage_gap"], 0.0)
+        self.assertEqual(build_test_coverage_check({"summary": {"status": "pass", "threshold_enabled": False}}, None)["status"], "warn")
+        self.assertEqual(build_test_coverage_check(None, None)["status"], "warn")
+        self.assertFalse(build_test_coverage_context(None)["available"])
 
 
 if __name__ == "__main__":

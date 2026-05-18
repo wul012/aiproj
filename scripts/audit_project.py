@@ -17,6 +17,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-card", type=Path, default=None, help="Optional model_card.json path")
     parser.add_argument("--request-history-summary", type=Path, default=None, help="Optional request_history_summary.json path")
     parser.add_argument("--ci-workflow-hygiene", type=Path, default=None, help="Optional ci_workflow_hygiene.json path")
+    parser.add_argument("--test-coverage-report", type=Path, default=None, help="Optional test_coverage_report.json path")
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory, defaults to the registry directory")
     parser.add_argument("--title", type=str, default="MiniGPT project audit")
     parser.add_argument("--fail-on-warn", action="store_true", help="Exit non-zero for warn as well as fail")
@@ -31,6 +32,7 @@ def main() -> None:
         model_card_path=args.model_card,
         request_history_summary_path=args.request_history_summary,
         ci_workflow_hygiene_path=args.ci_workflow_hygiene,
+        test_coverage_report_path=args.test_coverage_report,
         title=args.title,
     )
     outputs = write_project_audit_outputs(audit, out_dir)
@@ -43,6 +45,10 @@ def main() -> None:
     print(f"request_history_records={summary.get('request_history_records')}")
     print(f"ci_workflow_status={summary.get('ci_workflow_status')}")
     print(f"ci_workflow_failed_checks={summary.get('ci_workflow_failed_checks')}")
+    print(f"test_coverage_status={summary.get('test_coverage_status')}")
+    print(f"test_coverage_percent={summary.get('test_coverage_percent')}")
+    print(f"test_coverage_fail_under={summary.get('test_coverage_fail_under')}")
+    print(f"test_coverage_gap={summary.get('test_coverage_gap')}")
     print(f"checks={summary['pass_count']} pass/{summary['warn_count']} warn/{summary['fail_count']} fail")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if audit["warnings"]:
