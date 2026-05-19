@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+286-v272-promotion-index-clean-batch-review-gate.md
+ -> v272 code explanation: carry promotion clean batch-review guard fields into promotion index rows, summaries, artifacts, CLI output, and comparison input selection.
+
 285-v271-promotion-clean-batch-review-gate.md
  -> v271 code explanation: carry handoff clean batch-review requirements into training-scale promotion acceptance, artifacts, CLI output, and tests.
 

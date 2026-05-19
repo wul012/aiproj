@@ -40,7 +40,12 @@ def _promotion_row(report: dict[str, Any], name: str, index: int) -> dict[str, A
     scale_run_path = str(report.get("training_scale_run_path") or "")
     scale_run_exists = bool(scale_run_path and Path(scale_run_path).is_file())
     promotion_status = str(summary.get("promotion_status") or "missing")
-    promoted_for_comparison = promotion_status == "promoted" and scale_run_exists
+    clean_batch_review = _clean_batch_review_guard(report)
+    clean_requirement_satisfied = (
+        not clean_batch_review.get("handoff_require_clean_batch_review")
+        or clean_batch_review.get("handoff_clean_batch_review_status") == "clean"
+    )
+    promoted_for_comparison = promotion_status == "promoted" and scale_run_exists and clean_requirement_satisfied
     return {
         "index": index + 1,
         "name": name,
@@ -69,6 +74,8 @@ def _promotion_row(report: dict[str, Any], name: str, index: int) -> dict[str, A
         "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
         "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
         "handoff_selected_suite_path": suite_guard.get("handoff_selected_suite_path"),
+        "handoff_require_clean_batch_review": clean_batch_review.get("handoff_require_clean_batch_review"),
+        "handoff_clean_batch_review_status": clean_batch_review.get("handoff_clean_batch_review_status"),
         "handoff_selected_batch_review_status": summary.get("handoff_selected_batch_review_status"),
         "handoff_selected_batch_comparison_review_action_count": summary.get(
             "handoff_selected_batch_comparison_review_action_count"
@@ -165,6 +172,17 @@ def _summary(promotions: list[dict[str, Any]], comparison_inputs: dict[str, Any]
         "handoff_suite_consistent_count": sum(1 for row in promotions if row.get("handoff_suite_consistency") == "consistent"),
         "handoff_suite_mismatch_total": sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
         "handoff_selected_suite_path_count": sum(1 for row in promotions if row.get("handoff_selected_suite_path")),
+        "handoff_require_clean_batch_review_count": sum(1 for row in promotions if row.get("handoff_require_clean_batch_review")),
+        "handoff_clean_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") == "clean"
+        ),
+        "handoff_unclean_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean"
+        ),
         "handoff_selected_batch_review_count": sum(
             1 for row in promotions if row.get("handoff_selected_batch_review_status") == "review"
         ),
@@ -199,12 +217,15 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
     review_count = _int(summary.get("review_count"))
     batch_blockers = _int(summary.get("handoff_selected_batch_blocker_count"))
     batch_reviews = _int(summary.get("handoff_selected_batch_review_count"))
+    unclean_required = _int(summary.get("handoff_unclean_batch_review_count"))
     if ready_count >= 2:
         items = [
             "Run the generated compare command to compare only promoted training scale runs.",
             "Keep review and blocked promotions out of baseline selection until their evidence is fixed.",
         ]
-        if batch_blockers:
+        if unclean_required:
+            items.append("Resolve handoff clean batch-review requirements before treating promoted compare inputs as clean evidence.")
+        elif batch_blockers:
             items.append("Resolve selected handoff batch blocker actions before treating promoted compare inputs as clean evidence.")
         elif batch_reviews:
             items.append("Review selected handoff batch actions before treating promoted compare inputs as clean evidence.")
@@ -214,7 +235,9 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
             "Use the single promoted run as the baseline candidate and add another promoted run before comparison.",
             "Do not compare review or blocked promotions against the baseline as model capability evidence.",
         ]
-        if batch_blockers:
+        if unclean_required:
+            items.append("Resolve handoff clean batch-review requirements before using this single promoted run as baseline evidence.")
+        elif batch_blockers:
             items.append("Resolve selected handoff batch blocker actions before using this single promoted run as baseline evidence.")
         elif batch_reviews:
             items.append("Review selected handoff batch actions before using this single promoted run as baseline evidence.")
@@ -257,5 +280,27 @@ def _suite_guard(report: dict[str, Any]) -> dict[str, Any]:
             guard.get("selected_suite_path"),
             summary.get("handoff_selected_suite_path"),
             summary.get("selected_suite_path"),
+        ),
+    }
+
+
+def _clean_batch_review_guard(report: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(report.get("summary"))
+    guard = _dict(report.get("clean_batch_review_guard"))
+    required = first_present(
+        guard.get("handoff_require_clean_batch_review"),
+        guard.get("decision_require_clean_batch_review"),
+        guard.get("require_clean_batch_review"),
+        summary.get("handoff_require_clean_batch_review"),
+        summary.get("decision_require_clean_batch_review"),
+        summary.get("require_clean_batch_review"),
+    )
+    return {
+        "handoff_require_clean_batch_review": bool(required),
+        "handoff_clean_batch_review_status": first_present(
+            guard.get("handoff_clean_batch_review_status"),
+            guard.get("clean_batch_review_status"),
+            summary.get("handoff_clean_batch_review_status"),
+            summary.get("clean_batch_review_status"),
         ),
     }

@@ -145,6 +145,59 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("Batch Review", html)
             self.assertIn("Batch blocker actions", html)
 
+    def test_carries_handoff_clean_batch_review_guard_into_index_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            alpha = make_promotion(root, "alpha", "promoted", require_clean_batch_review=True, clean_batch_review_status="clean")
+            beta = make_promotion(root, "beta", "promoted", require_clean_batch_review=True, clean_batch_review_status="clean")
+
+            report = build_training_scale_promotion_index([alpha, beta], names=["alpha-run", "beta-run"])
+            outputs = write_training_scale_promotion_index_outputs(report, root / "index")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+
+            row = report["promotions"][0]
+            summary = report["summary"]
+            self.assertTrue(row["promoted_for_comparison"])
+            self.assertTrue(row["handoff_require_clean_batch_review"])
+            self.assertEqual(row["handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["comparison_ready_count"], 2)
+            self.assertEqual(summary["handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_unclean_batch_review_count"], 0)
+            self.assertIn("handoff_require_clean_batch_review", csv_text)
+            self.assertIn("handoff_clean_batch_review_status", csv_text)
+            self.assertIn("Handoff require clean batch review", markdown)
+            self.assertIn("Handoff clean batch review", markdown)
+            self.assertIn("Handoff clean required", html)
+            self.assertIn("Clean Status", html)
+
+    def test_unclean_handoff_clean_batch_requirement_is_excluded_from_compare_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            clean = make_promotion(root, "clean", "promoted", require_clean_batch_review=True, clean_batch_review_status="clean")
+            dirty = make_promotion(
+                root,
+                "dirty",
+                "promoted",
+                require_clean_batch_review=True,
+                clean_batch_review_status="review",
+                selected_batch_review_status="review",
+            )
+
+            report = build_training_scale_promotion_index([clean, dirty], names=["clean-run", "dirty-run"])
+
+            self.assertEqual(report["summary"]["promoted_count"], 2)
+            self.assertEqual(report["summary"]["comparison_ready_count"], 1)
+            self.assertEqual(report["summary"]["handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(report["summary"]["handoff_clean_batch_review_count"], 1)
+            self.assertEqual(report["summary"]["handoff_unclean_batch_review_count"], 1)
+            self.assertTrue(report["promotions"][0]["promoted_for_comparison"])
+            self.assertFalse(report["promotions"][1]["promoted_for_comparison"])
+            self.assertEqual(report["comparison_inputs"]["names"], ["clean-run"])
+            self.assertIn("Resolve handoff clean batch-review requirements", " ".join(report["recommendations"]))
+
     def test_index_script_reports_suite_guard_counts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -173,6 +226,8 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("handoff_suite_consistent_count=2", completed.stdout)
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
             self.assertIn("handoff_selected_suite_path_count=2", completed.stdout)
+            self.assertIn("handoff_require_clean_batch_review_count=0", completed.stdout)
+            self.assertIn("handoff_unclean_batch_review_count=0", completed.stdout)
             self.assertIn("handoff_selected_batch_review_count=0", completed.stdout)
             self.assertIn("handoff_batch_comparison_blocker_action_total=0", completed.stdout)
             self.assertTrue((out_dir / "training_scale_promotion_index.json").exists())
@@ -198,6 +253,8 @@ def make_promotion(
     title: str | None = None,
     *,
     include_suite_guard: bool = False,
+    require_clean_batch_review: bool = False,
+    clean_batch_review_status: str | None = None,
     selected_batch_review_status: str = "clean",
 ) -> Path:
     promotion_root = root / name / "promotion"
@@ -250,6 +307,8 @@ def make_promotion(
             "blocker_count": 1 if status == "blocked" else 0,
             "review_item_count": 1 if status == "review" else 0,
             "handoff_selected_batch_review_status": selected_batch_review_status,
+            "handoff_require_clean_batch_review": require_clean_batch_review,
+            "handoff_clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
             "handoff_selected_batch_comparison_review_action_count": (
                 2 if selected_batch_review_status in {"review", "blocker"} else 0
             ),
@@ -265,6 +324,12 @@ def make_promotion(
             **summary_suite_fields,
         },
         "suite_guard": suite_guard,
+        "clean_batch_review_guard": {
+            "handoff_require_clean_batch_review": require_clean_batch_review,
+            "handoff_clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
+        }
+        if require_clean_batch_review
+        else {},
         "variants": [
             {
                 "name": f"{name}-variant",
