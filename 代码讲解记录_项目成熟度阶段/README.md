@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+287-v273-promoted-comparison-clean-batch-review-gate.md
+ -> v273 code explanation: carry promotion-index clean batch-review guard fields into promoted training-scale comparison filtering, artifacts, CLI output, and tests.
+
 286-v272-promotion-index-clean-batch-review-gate.md
  -> v272 code explanation: carry promotion clean batch-review guard fields into promotion index rows, summaries, artifacts, CLI output, and comparison input selection.
 

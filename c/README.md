@@ -619,6 +619,9 @@ c/271/解释/说明.md
 c/272/图片
 c/272/解释/说明.md
  -> v272 training scale promotion index clean batch gate 的运行截图和解释
+c/273/图片
+c/273/解释/说明.md
+ -> v273 promoted training scale comparison clean batch gate 的运行截图和解释
 ```
 
 写入规则：

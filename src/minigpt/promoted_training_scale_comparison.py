@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    first_present,
     list_of_dicts as _list_of_dicts,
     number_or_default,
     string_list as _string_list,
@@ -106,11 +107,15 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
     for row in _list_of_dicts(index.get("promotions")):
         run_path = row.get("training_scale_run_path")
         resolved_run_path = _resolve_path(run_path, index_dir)
+        clean_guard = _clean_batch_review_guard(row)
+        promoted_for_comparison = bool(row.get("promoted_for_comparison"))
+        if clean_guard.get("handoff_require_clean_batch_review") and clean_guard.get("handoff_clean_batch_review_status") != "clean":
+            promoted_for_comparison = False
         rows.append(
             {
                 "name": row.get("name"),
                 "promotion_status": row.get("promotion_status"),
-                "promoted_for_comparison": bool(row.get("promoted_for_comparison")),
+                "promoted_for_comparison": promoted_for_comparison,
                 "training_scale_run_path": str(resolved_run_path),
                 "training_scale_run_exists": resolved_run_path.exists(),
                 "gate_status": row.get("gate_status"),
@@ -120,6 +125,8 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 "handoff_suite_consistency": row.get("handoff_suite_consistency"),
                 "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
                 "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
+                "handoff_require_clean_batch_review": clean_guard.get("handoff_require_clean_batch_review"),
+                "handoff_clean_batch_review_status": clean_guard.get("handoff_clean_batch_review_status"),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                 "handoff_selected_batch_comparison_review_action_count": row.get(
                     "handoff_selected_batch_comparison_review_action_count"
@@ -208,6 +215,17 @@ def _summary(
         "handoff_suite_consistent_count": sum(1 for row in promotions if row.get("handoff_suite_consistency") == "consistent"),
         "handoff_suite_mismatch_total": sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
         "handoff_selected_suite_path_count": sum(1 for row in promotions if row.get("handoff_selected_suite_path")),
+        "handoff_require_clean_batch_review_count": sum(1 for row in promotions if row.get("handoff_require_clean_batch_review")),
+        "handoff_clean_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") == "clean"
+        ),
+        "handoff_unclean_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean"
+        ),
         "comparison_ready_handoff_selected_batch_review_count": sum(
             1
             for row in promotions
@@ -245,6 +263,23 @@ def _summary(
                 if row.get("promoted_for_comparison")
                 for reason in _string_list(row.get("handoff_batch_comparison_blocker_reasons"))
             }
+        ),
+        "comparison_ready_handoff_require_clean_batch_review_count": sum(
+            1 for row in promotions if row.get("promoted_for_comparison") and row.get("handoff_require_clean_batch_review")
+        ),
+        "comparison_ready_handoff_clean_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("promoted_for_comparison")
+            and row.get("handoff_require_clean_batch_review")
+            and row.get("handoff_clean_batch_review_status") == "clean"
+        ),
+        "comparison_ready_handoff_unclean_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("promoted_for_comparison")
+            and row.get("handoff_require_clean_batch_review")
+            and row.get("handoff_clean_batch_review_status") != "clean"
         ),
         "comparison_ready_handoff_suite_mismatch_total": sum(
             _int(row.get("handoff_suite_mismatch_count")) for row in promotions if row.get("promoted_for_comparison")
@@ -284,13 +319,17 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
             "Use the compared promoted runs as the baseline for the next training-scale decision.",
             "Keep review and blocked promotions in the index, but do not feed them into comparison runs.",
         ]
-        if _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
+        if _int(summary.get("comparison_ready_handoff_unclean_batch_review_count")):
+            recommendations.append(
+                "Comparison-ready promoted inputs still include unclean clean-required handoffs; resolve them before treating this comparison as clean model-quality evidence."
+            )
+        elif _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
             recommendations.append(
                 "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; resolve them before treating this comparison as clean model-quality evidence."
             )
-            reasons = _string_list(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"))
-            if reasons:
-                recommendations.append("Comparison-ready batch blocker reasons: " + ", ".join(reasons))
+        reasons = _string_list(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"))
+        if reasons:
+            recommendations.append("Comparison-ready batch blocker reasons: " + ", ".join(reasons))
         elif _int(summary.get("comparison_ready_handoff_selected_batch_review_count")):
             recommendations.append(
                 "Comparison-ready promoted inputs still carry selected handoff batch review actions; review them before treating this comparison as clean model-quality evidence."
@@ -302,7 +341,11 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         "Add another promoted run or fix the blocked baseline before comparing promoted results.",
         "Use the promotion index to keep review and blocked evidence visible without mixing it into model comparison.",
     ]
-    if _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
+    if _int(summary.get("comparison_ready_handoff_unclean_batch_review_count")):
+        recommendations.append(
+            "Comparison-ready promoted inputs still include unclean clean-required handoffs; clean them before treating later comparisons as baseline evidence."
+        )
+    elif _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
         recommendations.append(
             "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; clean them before treating later comparisons as baseline evidence."
         )
@@ -329,3 +372,25 @@ def _resolve_path(value: Any, base_dir: Path) -> Path:
 
 def _int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
+
+
+def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(row.get("summary"))
+    guard = _dict(row.get("clean_batch_review_guard"))
+    required = first_present(
+        guard.get("handoff_require_clean_batch_review"),
+        guard.get("decision_require_clean_batch_review"),
+        guard.get("require_clean_batch_review"),
+        summary.get("handoff_require_clean_batch_review"),
+        summary.get("decision_require_clean_batch_review"),
+        summary.get("require_clean_batch_review"),
+    )
+    return {
+        "handoff_require_clean_batch_review": bool(required),
+        "handoff_clean_batch_review_status": first_present(
+            guard.get("handoff_clean_batch_review_status"),
+            guard.get("clean_batch_review_status"),
+            summary.get("handoff_clean_batch_review_status"),
+            summary.get("clean_batch_review_status"),
+        ),
+    }

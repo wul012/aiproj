@@ -199,6 +199,92 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_batch_comparison_blocker_reasons", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
 
+    def test_carries_clean_batch_review_guard_and_filters_unclean_promoted_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index_dir = make_index_tree(
+                root,
+                [
+                    entry(
+                        "alpha",
+                        "alpha",
+                        "promoted",
+                        "warn",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                        require_clean_batch_review=True,
+                        clean_batch_review_status="clean",
+                    ),
+                    entry(
+                        "beta",
+                        "beta",
+                        "promoted",
+                        "pass",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                        require_clean_batch_review=True,
+                        clean_batch_review_status="review",
+                    ),
+                    entry(
+                        "gamma",
+                        "gamma",
+                        "promoted",
+                        "pass",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                        require_clean_batch_review=False,
+                    ),
+                ],
+                baseline_name="alpha",
+            )
+
+            report = build_promoted_training_scale_comparison(index_dir, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_comparison_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "compare_promoted_training_scale_runs.py"),
+                    str(index_dir),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-compared",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            rows = {row["name"]: row for row in report["promotions"]}
+            summary = report["summary"]
+            self.assertTrue(rows["alpha"]["promoted_for_comparison"])
+            self.assertFalse(rows["beta"]["promoted_for_comparison"])
+            self.assertTrue(rows["gamma"]["promoted_for_comparison"])
+            self.assertEqual([row["name"] for row in report["comparison"]["runs"]], ["alpha", "gamma"])
+            self.assertEqual(summary["comparison_ready_count"], 2)
+            self.assertEqual(summary["compared_run_count"], 2)
+            self.assertEqual(rows["alpha"]["handoff_require_clean_batch_review"], True)
+            self.assertEqual(rows["alpha"]["handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(rows["beta"]["handoff_clean_batch_review_status"], "review")
+            self.assertEqual(summary["handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_clean_batch_review_count"], 1)
+            self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_require_clean_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_clean_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_unclean_batch_review_count"], 0)
+            self.assertIn("handoff_require_clean_batch_review", csv_text)
+            self.assertIn("Clean Required", markdown)
+            self.assertIn("Clean Status", markdown)
+            self.assertIn("Ready clean-required", html)
+            self.assertIn("handoff_require_clean_batch_review_count=2", completed.stdout)
+            self.assertIn("comparison_ready_handoff_clean_batch_review_count=1", completed.stdout)
+            self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
+
     def test_blocks_when_promoted_input_is_insufficient(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -269,6 +355,8 @@ def entry(
     *,
     include_handoff_suite_guard: bool = False,
     include_handoff_batch_review_context: bool = False,
+    require_clean_batch_review: bool = False,
+    clean_batch_review_status: str | None = None,
 ) -> dict:
     return {
         "safe_id": safe_id,
@@ -278,6 +366,8 @@ def entry(
         "suite_name": suite_name,
         "include_handoff_suite_guard": include_handoff_suite_guard,
         "include_handoff_batch_review_context": include_handoff_batch_review_context,
+        "require_clean_batch_review": require_clean_batch_review,
+        "clean_batch_review_status": clean_batch_review_status,
     }
 
 
@@ -298,6 +388,7 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
             "training_scale_run_path": rel_run_path,
             "training_scale_run_exists": True,
         }
+        clean_batch_review_status = item.get("clean_batch_review_status") or "review"
         if item.get("include_handoff_suite_guard"):
             promotion.update(
                 {
@@ -319,6 +410,20 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
                     "handoff_batch_comparison_blocker_reasons": ["coverage-regressed"] if item["name"] == "alpha" else [],
                 }
             )
+        if item.get("require_clean_batch_review"):
+            promotion["clean_batch_review_guard"] = {
+                "handoff_require_clean_batch_review": True,
+                "handoff_clean_batch_review_status": clean_batch_review_status,
+            }
+            promotion.setdefault("summary", {})
+            promotion["summary"].update(
+                {
+                    "handoff_require_clean_batch_review": True,
+                    "handoff_clean_batch_review_status": clean_batch_review_status,
+                }
+            )
+        if item.get("require_clean_batch_review") and clean_batch_review_status != "clean":
+            promoted = False
         promotions.append(promotion)
         if promoted:
             compare_names.append(item["name"])
@@ -334,6 +439,17 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
                 "review_count": sum(1 for item in entries if item["status"] == "review"),
                 "blocked_count": sum(1 for item in entries if item["status"] == "blocked"),
                 "comparison_ready_count": len(compare_names),
+                "handoff_require_clean_batch_review_count": sum(1 for item in entries if item.get("require_clean_batch_review")),
+                "handoff_clean_batch_review_count": sum(
+                    1
+                    for item in entries
+                    if item.get("require_clean_batch_review") and item.get("clean_batch_review_status") == "clean"
+                ),
+                "handoff_unclean_batch_review_count": sum(
+                    1
+                    for item in entries
+                    if item.get("require_clean_batch_review") and item.get("clean_batch_review_status") != "clean"
+                ),
                 "compare_command_ready": len(compare_names) >= 2,
             },
             "promotions": promotions,
