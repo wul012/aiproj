@@ -15,6 +15,7 @@ from minigpt.promoted_training_scale_decision_artifacts import (
 )
 from minigpt.promoted_training_scale_decision_review import (
     append_decision_handoff_batch_recommendations,
+    append_decision_handoff_clean_batch_recommendations,
     build_decision_handoff_review_summary,
 )
 from minigpt.report_utils import (
@@ -136,6 +137,8 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 "handoff_suite_consistency": row.get("handoff_suite_consistency"),
                 "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
                 "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
+                "handoff_require_clean_batch_review": bool(row.get("handoff_require_clean_batch_review")),
+                "handoff_clean_batch_review_status": row.get("handoff_clean_batch_review_status"),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                 "handoff_selected_batch_comparison_review_action_count": row.get(
                     "handoff_selected_batch_comparison_review_action_count"
@@ -170,6 +173,8 @@ def _rejection_reasons(
     reasons: list[str] = []
     if not row.get("promoted_for_comparison"):
         reasons.append("run was not promoted for comparison")
+    if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean":
+        reasons.append("clean batch-review requirement is not clean")
     if row.get("gate_status") == "fail":
         reasons.append("gate failed")
     elif require_gate_pass and row.get("gate_status") != "pass":
@@ -272,6 +277,7 @@ def _recommendations(
             recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
         elif comparison_summary.get("suite_consistency") == "mixed":
             recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+        append_decision_handoff_clean_batch_recommendations(recommendations, selected, comparison_summary)
         append_decision_handoff_batch_recommendations(recommendations, selected, comparison_summary)
         return recommendations
     if decision_status == "review":
@@ -283,6 +289,7 @@ def _recommendations(
             recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
         elif comparison_summary.get("suite_consistency") == "mixed":
             recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+        append_decision_handoff_clean_batch_recommendations(recommendations, selected, comparison_summary)
         append_decision_handoff_batch_recommendations(recommendations, selected, comparison_summary)
         return recommendations
     recommendations = [
@@ -292,6 +299,7 @@ def _recommendations(
         recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
     elif comparison_summary.get("suite_consistency") == "mixed":
         recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+    append_decision_handoff_clean_batch_recommendations(recommendations, selected, comparison_summary)
     append_decision_handoff_batch_recommendations(recommendations, selected, comparison_summary)
     return recommendations
 

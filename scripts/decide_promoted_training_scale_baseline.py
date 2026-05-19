@@ -45,6 +45,23 @@ def main() -> None:
     print(f"selected_readiness={selected.get('readiness_score')}")
     print(f"selected_handoff_suite_consistency={summary.get('selected_handoff_suite_consistency')}")
     print(f"selected_handoff_suite_mismatch_count={summary.get('selected_handoff_suite_mismatch_count')}")
+    print(f"selected_handoff_require_clean_batch_review={summary.get('selected_handoff_require_clean_batch_review')}")
+    print(f"selected_handoff_clean_batch_review_status={summary.get('selected_handoff_clean_batch_review_status')}")
+    print(f"handoff_require_clean_batch_review_count={summary.get('handoff_require_clean_batch_review_count')}")
+    print(f"handoff_clean_batch_review_count={summary.get('handoff_clean_batch_review_count')}")
+    print(f"handoff_unclean_batch_review_count={summary.get('handoff_unclean_batch_review_count')}")
+    print(
+        "comparison_ready_handoff_require_clean_batch_review_count="
+        f"{summary.get('comparison_ready_handoff_require_clean_batch_review_count')}"
+    )
+    print(
+        "comparison_ready_handoff_clean_batch_review_count="
+        f"{summary.get('comparison_ready_handoff_clean_batch_review_count')}"
+    )
+    print(
+        "comparison_ready_handoff_unclean_batch_review_count="
+        f"{summary.get('comparison_ready_handoff_unclean_batch_review_count')}"
+    )
     print(f"selected_handoff_selected_batch_review_status={summary.get('selected_handoff_selected_batch_review_status')}")
     print(
         "selected_handoff_selected_batch_comparison_review_action_count="

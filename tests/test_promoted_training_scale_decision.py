@@ -119,7 +119,6 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
                     "60",
                     "--out-dir",
                     str(script_out),
-                    "--require-accepted",
                 ],
                 check=True,
                 capture_output=True,
@@ -171,7 +170,6 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
                     "60",
                     "--out-dir",
                     str(script_out),
-                    "--require-accepted",
                 ],
                 check=True,
                 capture_output=True,
@@ -200,6 +198,64 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_selected_batch_blocker_count=1", completed.stdout)
             self.assertTrue(any("selected handoff batch blocker" in item for item in report["recommendations"]))
 
+    def test_carries_promoted_comparison_clean_batch_review_into_decision_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison_dir = make_compared_comparison_tree(
+                root,
+                include_handoff_suite_guard=True,
+                include_clean_batch_review=True,
+                include_unclean_promoted_review=True,
+            )
+
+            report = build_promoted_training_scale_decision(comparison_dir, min_readiness=60)
+            outputs = write_promoted_training_scale_decision_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "decide_promoted_training_scale_baseline.py"),
+                    str(comparison_dir),
+                    "--min-readiness",
+                    "60",
+                    "--out-dir",
+                    str(script_out),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            selected = report["selected_baseline"]
+            summary = report["summary"]
+            rejected = {row["name"]: row for row in report["rejected_runs"]}
+            self.assertEqual(report["decision_status"], "review")
+            self.assertEqual(selected["name"], "beta")
+            self.assertTrue(selected["handoff_require_clean_batch_review"])
+            self.assertEqual(selected["handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["selected_handoff_require_clean_batch_review"], True)
+            self.assertEqual(summary["selected_handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["handoff_require_clean_batch_review_count"], 3)
+            self.assertEqual(summary["handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(summary["comparison_ready_handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["comparison_ready_handoff_unclean_batch_review_count"], 0)
+            self.assertIn("dirty", rejected)
+            self.assertIn("run was not promoted for comparison", rejected["dirty"]["reasons"])
+            self.assertIn("clean batch-review requirement is not clean", rejected["dirty"]["reasons"])
+            self.assertIn("selected_handoff_require_clean_batch_review", csv_text)
+            self.assertIn("Selected handoff clean batch review", markdown)
+            self.assertIn("Ready clean batch", html)
+            self.assertIn("selected_handoff_clean_batch_review_status=clean", completed.stdout)
+            self.assertIn("handoff_unclean_batch_review_count=1", completed.stdout)
+            self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
+            self.assertTrue(any("Rejected promoted inputs include unclean clean-required handoffs" in item for item in report["recommendations"]))
+
 
 def make_compared_comparison_tree(
     root: Path,
@@ -208,6 +264,8 @@ def make_compared_comparison_tree(
     mixed_suite: bool = False,
     include_handoff_suite_guard: bool = False,
     include_handoff_batch_review: bool = False,
+    include_clean_batch_review: bool = False,
+    include_unclean_promoted_review: bool = False,
 ) -> Path:
     index_dir = root / "promotion-index"
     alpha_run = root / "alpha" / "scale-run" / "training_scale_run.json"
@@ -222,6 +280,7 @@ def make_compared_comparison_tree(
             88,
             include_handoff_suite_guard=include_handoff_suite_guard,
             include_handoff_batch_review=include_handoff_batch_review,
+            include_clean_batch_review=include_clean_batch_review,
         )
     ]
     compare_names = ["alpha"]
@@ -235,10 +294,26 @@ def make_compared_comparison_tree(
                 91,
                 include_handoff_suite_guard=include_handoff_suite_guard,
                 include_handoff_batch_review=include_handoff_batch_review,
+                include_clean_batch_review=include_clean_batch_review,
             )
         )
         compare_names.append("beta")
         compare_paths.append(os_rel(beta_run, index_dir))
+    if include_unclean_promoted_review:
+        dirty_run = root / "dirty" / "scale-run" / "training_scale_run.json"
+        write_json(dirty_run, run_payload("dirty", "pass", 93))
+        promotions.append(
+            promotion_row(
+                "dirty",
+                os_rel(dirty_run, index_dir),
+                "pass",
+                93,
+                include_handoff_suite_guard=include_handoff_suite_guard,
+                include_handoff_batch_review=include_handoff_batch_review,
+                include_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+        )
     write_json(
         index_dir / "training_scale_promotion_index.json",
         {
@@ -276,6 +351,8 @@ def promotion_row(
     *,
     include_handoff_suite_guard: bool,
     include_handoff_batch_review: bool,
+    include_clean_batch_review: bool = False,
+    clean_batch_review_status: str = "clean",
 ) -> dict:
     row = {
         "name": name,
@@ -306,6 +383,17 @@ def promotion_row(
                 "handoff_batch_comparison_review_action_count": 2,
                 "handoff_batch_comparison_blocker_action_count": 1 if name == "beta" else 0,
                 "handoff_batch_comparison_blocker_reasons": ["coverage-regressed"] if name == "beta" else [],
+            }
+        )
+    if include_clean_batch_review:
+        row.update(
+            {
+                "clean_batch_review_guard": {
+                    "handoff_require_clean_batch_review": True,
+                    "handoff_clean_batch_review_status": clean_batch_review_status,
+                },
+                "handoff_require_clean_batch_review": True,
+                "handoff_clean_batch_review_status": clean_batch_review_status,
             }
         )
     return row

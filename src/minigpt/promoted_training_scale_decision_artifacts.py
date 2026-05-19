@@ -35,6 +35,8 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
         "selected_handoff_suite_consistency",
         "selected_handoff_suite_mismatch_count",
         "selected_handoff_selected_suite_path",
+        "selected_handoff_require_clean_batch_review",
+        "selected_handoff_clean_batch_review_status",
         "selected_handoff_selected_batch_review_status",
         "selected_handoff_selected_batch_comparison_review_action_count",
         "selected_handoff_selected_batch_comparison_blocker_action_count",
@@ -45,6 +47,12 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
         "handoff_require_suite_consistency_count",
         "handoff_suite_consistent_count",
         "handoff_suite_mismatch_total",
+        "handoff_require_clean_batch_review_count",
+        "handoff_clean_batch_review_count",
+        "handoff_unclean_batch_review_count",
+        "comparison_ready_handoff_require_clean_batch_review_count",
+        "comparison_ready_handoff_clean_batch_review_count",
+        "comparison_ready_handoff_unclean_batch_review_count",
         "comparison_ready_handoff_selected_batch_review_count",
         "comparison_ready_handoff_selected_batch_blocker_count",
         "comparison_ready_handoff_selected_batch_comparison_review_action_total",
@@ -70,6 +78,8 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
             "selected_handoff_suite_consistency": summary.get("selected_handoff_suite_consistency"),
             "selected_handoff_suite_mismatch_count": summary.get("selected_handoff_suite_mismatch_count"),
             "selected_handoff_selected_suite_path": summary.get("selected_handoff_selected_suite_path"),
+            "selected_handoff_require_clean_batch_review": summary.get("selected_handoff_require_clean_batch_review"),
+            "selected_handoff_clean_batch_review_status": summary.get("selected_handoff_clean_batch_review_status"),
             "selected_handoff_selected_batch_review_status": summary.get("selected_handoff_selected_batch_review_status"),
             "selected_handoff_selected_batch_comparison_review_action_count": summary.get(
                 "selected_handoff_selected_batch_comparison_review_action_count"
@@ -92,6 +102,18 @@ def write_promoted_training_scale_decision_csv(report: dict[str, Any], path: str
             "handoff_require_suite_consistency_count": summary.get("handoff_require_suite_consistency_count"),
             "handoff_suite_consistent_count": summary.get("handoff_suite_consistent_count"),
             "handoff_suite_mismatch_total": summary.get("handoff_suite_mismatch_total"),
+            "handoff_require_clean_batch_review_count": summary.get("handoff_require_clean_batch_review_count"),
+            "handoff_clean_batch_review_count": summary.get("handoff_clean_batch_review_count"),
+            "handoff_unclean_batch_review_count": summary.get("handoff_unclean_batch_review_count"),
+            "comparison_ready_handoff_require_clean_batch_review_count": summary.get(
+                "comparison_ready_handoff_require_clean_batch_review_count"
+            ),
+            "comparison_ready_handoff_clean_batch_review_count": summary.get(
+                "comparison_ready_handoff_clean_batch_review_count"
+            ),
+            "comparison_ready_handoff_unclean_batch_review_count": summary.get(
+                "comparison_ready_handoff_unclean_batch_review_count"
+            ),
             "comparison_ready_handoff_selected_batch_review_count": summary.get(
                 "comparison_ready_handoff_selected_batch_review_count"
             ),
@@ -140,6 +162,14 @@ def render_promoted_training_scale_decision_markdown(report: dict[str, Any]) -> 
         f"- Selected handoff suite: `{summary.get('selected_handoff_suite_consistency')}`",
         f"- Selected handoff mismatches: `{summary.get('selected_handoff_suite_mismatch_count')}`",
         f"- Selected handoff suite path: `{summary.get('selected_handoff_selected_suite_path')}`",
+        f"- Selected handoff require clean batch review: `{summary.get('selected_handoff_require_clean_batch_review')}`",
+        f"- Selected handoff clean batch review: `{summary.get('selected_handoff_clean_batch_review_status')}`",
+        f"- Handoff require clean batch review: `{summary.get('handoff_require_clean_batch_review_count')}`",
+        f"- Handoff clean batch review: `{summary.get('handoff_clean_batch_review_count')}`",
+        f"- Handoff unclean batch review: `{summary.get('handoff_unclean_batch_review_count')}`",
+        f"- Comparison-ready clean-required handoffs: `{summary.get('comparison_ready_handoff_require_clean_batch_review_count')}`",
+        f"- Comparison-ready clean handoffs: `{summary.get('comparison_ready_handoff_clean_batch_review_count')}`",
+        f"- Comparison-ready unclean handoffs: `{summary.get('comparison_ready_handoff_unclean_batch_review_count')}`",
         f"- Selected handoff batch review: `{summary.get('selected_handoff_selected_batch_review_status')}`",
         f"- Selected handoff batch review actions: `{summary.get('selected_handoff_selected_batch_comparison_review_action_count')}`",
         f"- Selected handoff batch blocker actions: `{summary.get('selected_handoff_selected_batch_comparison_blocker_action_count')}`",
@@ -197,6 +227,14 @@ def render_promoted_training_scale_decision_html(report: dict[str, Any]) -> str:
         ("Selected handoff suite", summary.get("selected_handoff_suite_consistency")),
         ("Selected handoff mismatch", summary.get("selected_handoff_suite_mismatch_count")),
         ("Selected handoff suite path", summary.get("selected_handoff_selected_suite_path")),
+        ("Selected clean required", summary.get("selected_handoff_require_clean_batch_review")),
+        ("Selected clean batch", summary.get("selected_handoff_clean_batch_review_status")),
+        ("Handoff clean required", summary.get("handoff_require_clean_batch_review_count")),
+        ("Handoff clean", summary.get("handoff_clean_batch_review_count")),
+        ("Handoff unclean", summary.get("handoff_unclean_batch_review_count")),
+        ("Ready clean-required", summary.get("comparison_ready_handoff_require_clean_batch_review_count")),
+        ("Ready clean batch", summary.get("comparison_ready_handoff_clean_batch_review_count")),
+        ("Ready unclean batch", summary.get("comparison_ready_handoff_unclean_batch_review_count")),
         ("Selected handoff batch", summary.get("selected_handoff_selected_batch_review_status")),
         ("Selected batch blockers", summary.get("selected_handoff_selected_batch_comparison_blocker_action_count")),
         ("Ready batch reviews", summary.get("comparison_ready_handoff_selected_batch_review_count")),

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+288-v274-promoted-decision-clean-batch-review-gate.md
+ -> v274 code explanation: carry promoted comparison clean batch-review evidence into promoted baseline decision filtering, summaries, artifacts, CLI output, and tests.
+
 287-v273-promoted-comparison-clean-batch-review-gate.md
  -> v273 code explanation: carry promotion-index clean batch-review guard fields into promoted training-scale comparison filtering, artifacts, CLI output, and tests.
 

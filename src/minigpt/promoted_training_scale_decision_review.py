@@ -25,6 +25,27 @@ def append_decision_handoff_batch_recommendations(
         )
 
 
+def append_decision_handoff_clean_batch_recommendations(
+    recommendations: list[str],
+    selected: dict[str, Any] | None,
+    comparison_summary: dict[str, Any],
+) -> None:
+    selected_required = bool(selected.get("handoff_require_clean_batch_review")) if selected else False
+    selected_status = str(selected.get("handoff_clean_batch_review_status") or "") if selected else ""
+    if selected_required and selected_status != "clean":
+        recommendations.append(
+            "Resolve the selected clean batch-review requirement before using this baseline as clean model-quality evidence."
+        )
+    elif _int(comparison_summary.get("comparison_ready_handoff_unclean_batch_review_count")):
+        recommendations.append(
+            "Comparison-ready promoted inputs still include unclean clean-required handoffs; keep the decision in review."
+        )
+    elif _int(comparison_summary.get("handoff_unclean_batch_review_count")):
+        recommendations.append(
+            "Rejected promoted inputs include unclean clean-required handoffs; keep them out of baseline selection until the review is clean."
+        )
+
+
 def build_decision_handoff_review_summary(
     comparison_summary: dict[str, Any],
     promotions: list[dict[str, Any]],
@@ -41,6 +62,12 @@ def build_decision_handoff_review_summary(
         "selected_handoff_selected_suite_path": None
         if selected is None
         else selected.get("handoff_selected_suite_path"),
+        "selected_handoff_require_clean_batch_review": None
+        if selected is None
+        else selected.get("handoff_require_clean_batch_review"),
+        "selected_handoff_clean_batch_review_status": None
+        if selected is None
+        else selected.get("handoff_clean_batch_review_status"),
         "selected_handoff_selected_batch_review_status": None
         if selected is None
         else selected.get("handoff_selected_batch_review_status"),
@@ -71,6 +98,56 @@ def build_decision_handoff_review_summary(
         else sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
         "comparison_ready_handoff_suite_mismatch_total": comparison_summary.get(
             "comparison_ready_handoff_suite_mismatch_total"
+        ),
+        "handoff_require_clean_batch_review_count": _summary_number(
+            comparison_summary,
+            "handoff_require_clean_batch_review_count",
+            sum(1 for row in promotions if row.get("handoff_require_clean_batch_review")),
+        ),
+        "handoff_clean_batch_review_count": _summary_number(
+            comparison_summary,
+            "handoff_clean_batch_review_count",
+            sum(
+                1
+                for row in promotions
+                if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") == "clean"
+            ),
+        ),
+        "handoff_unclean_batch_review_count": _summary_number(
+            comparison_summary,
+            "handoff_unclean_batch_review_count",
+            sum(
+                1
+                for row in promotions
+                if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean"
+            ),
+        ),
+        "comparison_ready_handoff_require_clean_batch_review_count": _summary_number(
+            comparison_summary,
+            "comparison_ready_handoff_require_clean_batch_review_count",
+            sum(1 for row in promotions if row.get("promoted_for_comparison") and row.get("handoff_require_clean_batch_review")),
+        ),
+        "comparison_ready_handoff_clean_batch_review_count": _summary_number(
+            comparison_summary,
+            "comparison_ready_handoff_clean_batch_review_count",
+            sum(
+                1
+                for row in promotions
+                if row.get("promoted_for_comparison")
+                and row.get("handoff_require_clean_batch_review")
+                and row.get("handoff_clean_batch_review_status") == "clean"
+            ),
+        ),
+        "comparison_ready_handoff_unclean_batch_review_count": _summary_number(
+            comparison_summary,
+            "comparison_ready_handoff_unclean_batch_review_count",
+            sum(
+                1
+                for row in promotions
+                if row.get("promoted_for_comparison")
+                and row.get("handoff_require_clean_batch_review")
+                and row.get("handoff_clean_batch_review_status") != "clean"
+            ),
         ),
         "comparison_ready_handoff_selected_batch_review_count": _summary_number(
             comparison_summary,
@@ -153,5 +230,6 @@ def _int(value: Any) -> int:
 
 __all__ = [
     "append_decision_handoff_batch_recommendations",
+    "append_decision_handoff_clean_batch_recommendations",
     "build_decision_handoff_review_summary",
 ]
