@@ -547,6 +547,9 @@ c/247/解释/说明.md
 c/248/图片
 c/248/解释/说明.md
  -> v248 maturity narrative coverage regression context 的运行截图和解释
+c/249/图片
+c/249/解释/说明.md
+ -> v249 coverage governance chain test 的运行截图和解释
 ```
 
 写入规则：
