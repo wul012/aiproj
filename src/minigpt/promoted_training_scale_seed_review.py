@@ -20,6 +20,66 @@ def append_seed_handoff_batch_review_recommendation(recommendations: list[str], 
         )
 
 
+def append_seed_handoff_clean_batch_recommendation(recommendations: list[str], seed: dict[str, Any]) -> None:
+    review = _dict(seed.get("handoff_clean_batch_review"))
+    selected_required = bool(review.get("selected_handoff_require_clean_batch_review"))
+    selected_status = str(review.get("selected_handoff_clean_batch_review_status") or "")
+    if selected_required and selected_status != "clean":
+        recommendations.append(
+            "Resolve selected handoff clean batch-review status before treating the next-cycle seed as clean model-quality evidence."
+        )
+    elif _int(review.get("handoff_unclean_batch_review_count")):
+        recommendations.append(
+            "Rejected promoted decision inputs include unclean clean-required handoffs; keep them out of the next-cycle seed baseline."
+        )
+
+
+def build_seed_handoff_clean_batch_review(decision: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(decision.get("summary"))
+    return {
+        "selected_handoff_require_clean_batch_review": first_present(
+            summary.get("selected_handoff_require_clean_batch_review"),
+            selected.get("handoff_require_clean_batch_review"),
+        ),
+        "selected_handoff_clean_batch_review_status": first_present(
+            summary.get("selected_handoff_clean_batch_review_status"),
+            selected.get("handoff_clean_batch_review_status"),
+        ),
+        "handoff_require_clean_batch_review_count": summary.get("handoff_require_clean_batch_review_count"),
+        "handoff_clean_batch_review_count": summary.get("handoff_clean_batch_review_count"),
+        "handoff_unclean_batch_review_count": summary.get("handoff_unclean_batch_review_count"),
+        "comparison_ready_handoff_require_clean_batch_review_count": summary.get(
+            "comparison_ready_handoff_require_clean_batch_review_count"
+        ),
+        "comparison_ready_handoff_clean_batch_review_count": summary.get(
+            "comparison_ready_handoff_clean_batch_review_count"
+        ),
+        "comparison_ready_handoff_unclean_batch_review_count": summary.get(
+            "comparison_ready_handoff_unclean_batch_review_count"
+        ),
+    }
+
+
+def build_seed_handoff_clean_batch_review_summary(seed: dict[str, Any]) -> dict[str, Any]:
+    review = _dict(seed.get("handoff_clean_batch_review"))
+    return {
+        "selected_handoff_require_clean_batch_review": review.get("selected_handoff_require_clean_batch_review"),
+        "selected_handoff_clean_batch_review_status": review.get("selected_handoff_clean_batch_review_status"),
+        "handoff_require_clean_batch_review_count": review.get("handoff_require_clean_batch_review_count"),
+        "handoff_clean_batch_review_count": review.get("handoff_clean_batch_review_count"),
+        "handoff_unclean_batch_review_count": review.get("handoff_unclean_batch_review_count"),
+        "comparison_ready_handoff_require_clean_batch_review_count": review.get(
+            "comparison_ready_handoff_require_clean_batch_review_count"
+        ),
+        "comparison_ready_handoff_clean_batch_review_count": review.get(
+            "comparison_ready_handoff_clean_batch_review_count"
+        ),
+        "comparison_ready_handoff_unclean_batch_review_count": review.get(
+            "comparison_ready_handoff_unclean_batch_review_count"
+        ),
+    }
+
+
 def build_seed_handoff_batch_review(decision: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(decision.get("summary"))
     return {
@@ -151,9 +211,19 @@ def build_seed_handoff_suite_guard(decision: dict[str, Any], selected: dict[str,
     }
 
 
+def _int(value: Any) -> int:
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return 0
+
+
 __all__ = [
     "append_seed_handoff_batch_review_recommendation",
+    "append_seed_handoff_clean_batch_recommendation",
     "build_seed_handoff_batch_review",
     "build_seed_handoff_batch_review_summary",
+    "build_seed_handoff_clean_batch_review",
+    "build_seed_handoff_clean_batch_review_summary",
     "build_seed_handoff_suite_guard",
 ]

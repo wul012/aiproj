@@ -231,6 +231,76 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_selected_batch_blocker_count=1", completed.stdout)
             self.assertTrue(any("selected handoff batch blocker" in item for item in report["recommendations"]))
 
+    def test_carries_decision_clean_batch_review_into_seed_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decision = write_decision_tree(
+                root,
+                decision_status="accepted",
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_clean_batch_review=True,
+            )
+            source = write_source(root)
+
+            report = build_promoted_training_scale_seed(
+                decision,
+                [source],
+                project_root=root,
+                plan_out_dir=root / "plan",
+                batch_out_root=root / "batch",
+                dataset_version_prefix="v275-smoke",
+            )
+            outputs = write_promoted_training_scale_seed_outputs(report, root / "seed")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "build_promoted_training_scale_seed.py"),
+                    str(decision),
+                    str(source),
+                    "--project-root",
+                    str(root),
+                    "--out-dir",
+                    str(script_out),
+                    "--plan-out-dir",
+                    str(root / "script-plan"),
+                    "--batch-out-root",
+                    str(root / "script-batch"),
+                    "--dataset-version-prefix",
+                    "v275-smoke",
+                    "--require-ready",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            clean_review = report["baseline_seed"]["handoff_clean_batch_review"]
+            summary = report["summary"]
+            self.assertEqual(report["seed_status"], "ready")
+            self.assertTrue(clean_review["selected_handoff_require_clean_batch_review"])
+            self.assertEqual(clean_review["selected_handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["selected_handoff_require_clean_batch_review"], True)
+            self.assertEqual(summary["selected_handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["handoff_require_clean_batch_review_count"], 3)
+            self.assertEqual(summary["handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(summary["comparison_ready_handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["comparison_ready_handoff_unclean_batch_review_count"], 0)
+            self.assertIn("selected_handoff_require_clean_batch_review", csv_text)
+            self.assertIn("Selected handoff clean batch review", markdown)
+            self.assertIn("Ready clean batch", html)
+            self.assertIn("selected_handoff_clean_batch_review_status=clean", completed.stdout)
+            self.assertIn("handoff_unclean_batch_review_count=1", completed.stdout)
+            self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
+            self.assertTrue(any("Rejected promoted decision inputs include unclean clean-required handoffs" in item for item in report["recommendations"]))
+
     def test_default_suite_override_does_not_emit_fake_builtin_default(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -311,6 +381,7 @@ def write_decision_tree(
     suite_name: str | None = None,
     include_handoff_suite_guard: bool = False,
     include_handoff_batch_review: bool = False,
+    include_clean_batch_review: bool = False,
 ) -> Path:
     scale_summary = {
         "dataset_name": "sample-zh",
@@ -398,6 +469,25 @@ def write_decision_tree(
                 "comparison_ready_handoff_batch_comparison_review_action_total": 4,
                 "comparison_ready_handoff_batch_comparison_blocker_action_total": 1,
                 "comparison_ready_handoff_batch_comparison_blocker_reasons": ["coverage-regressed"],
+            }
+        )
+    if include_clean_batch_review:
+        selected_baseline.update(
+            {
+                "handoff_require_clean_batch_review": True,
+                "handoff_clean_batch_review_status": "clean",
+            }
+        )
+        summary_fields.update(
+            {
+                "selected_handoff_require_clean_batch_review": True,
+                "selected_handoff_clean_batch_review_status": "clean",
+                "handoff_require_clean_batch_review_count": 3,
+                "handoff_clean_batch_review_count": 2,
+                "handoff_unclean_batch_review_count": 1,
+                "comparison_ready_handoff_require_clean_batch_review_count": 2,
+                "comparison_ready_handoff_clean_batch_review_count": 2,
+                "comparison_ready_handoff_unclean_batch_review_count": 0,
             }
         )
     payload = {

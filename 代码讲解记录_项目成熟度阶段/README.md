@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+289-v275-promoted-seed-clean-batch-review-gate.md
+ -> v275 code explanation: carry promoted decision clean batch-review evidence into promoted next-cycle seed summaries, artifacts, CLI output, recommendations, and tests.
+
 288-v274-promoted-decision-clean-batch-review-gate.md
  -> v274 code explanation: carry promoted comparison clean batch-review evidence into promoted baseline decision filtering, summaries, artifacts, CLI output, and tests.
 

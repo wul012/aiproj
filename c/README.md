@@ -625,6 +625,9 @@ c/273/解释/说明.md
 c/274/图片
 c/274/解释/说明.md
  -> v274 promoted training scale decision clean batch gate 的运行截图和解释
+c/275/图片
+c/275/解释/说明.md
+ -> v275 promoted training scale seed clean batch gate 的运行截图和解释
 ```
 
 写入规则：

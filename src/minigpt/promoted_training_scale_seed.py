@@ -15,8 +15,11 @@ from minigpt.promoted_training_scale_seed_artifacts import (
 )
 from minigpt.promoted_training_scale_seed_review import (
     append_seed_handoff_batch_review_recommendation,
+    append_seed_handoff_clean_batch_recommendation,
     build_seed_handoff_batch_review,
     build_seed_handoff_batch_review_summary,
+    build_seed_handoff_clean_batch_review,
+    build_seed_handoff_clean_batch_review_summary,
     build_seed_handoff_suite_guard,
 )
 from minigpt.report_utils import (
@@ -95,6 +98,7 @@ def build_promoted_training_scale_seed(
         "suite": inherited_suite,
         "suite_path": inherited_suite.get("path"),
         "handoff_suite_guard": build_seed_handoff_suite_guard(decision, selected),
+        "handoff_clean_batch_review": build_seed_handoff_clean_batch_review(decision, selected),
         "handoff_batch_review": build_seed_handoff_batch_review(decision, selected),
     }
     plan = {
@@ -412,6 +416,7 @@ def _summary(
         "next_suite_source": plan.get("suite_source"),
         "blocker_count": len(blockers),
     }
+    summary.update(build_seed_handoff_clean_batch_review_summary(seed))
     summary.update(build_seed_handoff_batch_review_summary(seed))
     return summary
 
@@ -427,6 +432,7 @@ def _recommendations(
             "Run the generated plan command on the next corpus, then pass its outputs through the v70-v80 training scale chain.",
             "Keep the selected promoted baseline path in the seed report so the next cycle can explain where it came from.",
         ]
+        append_seed_handoff_clean_batch_recommendation(recommendations, seed)
         append_seed_handoff_batch_review_recommendation(recommendations, seed)
         return recommendations
     if seed_status == "review":
@@ -434,6 +440,7 @@ def _recommendations(
             "Review the promoted baseline decision before running the next plan command.",
             "If the review is accepted, reuse the generated command and keep this seed as the cycle handoff artifact.",
         ]
+        append_seed_handoff_clean_batch_recommendation(recommendations, seed)
         append_seed_handoff_batch_review_recommendation(recommendations, seed)
         return recommendations
     if blockers:
