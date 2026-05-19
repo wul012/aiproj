@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+265-v251-portfolio-comparison-review-split.md
+ -> v251 code explanation: split portfolio comparison review actions and recommendations into a dedicated module while preserving comparison outputs.
 264-v250-portfolio-comparison-coverage-review.md
  -> v250 code explanation: make training portfolio comparison consume maturity narrative coverage regressions and block best-score promotion when coverage evidence regresses.
 263-v249-coverage-governance-chain-test.md
