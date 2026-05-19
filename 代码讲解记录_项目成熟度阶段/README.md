@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+275-v261-promoted-seed-handoff-batch-review-propagation.md
+ -> v261 code explanation: carry promoted-seed handoff selected batch review/blocker context into seed handoff summaries, artifacts, CLI output, and recommendations.
 274-v260-promoted-seed-batch-review-propagation.md
  -> v260 code explanation: carry promoted-decision handoff selected batch review/blocker context into promoted next-cycle seed summaries, artifacts, CLI output, and recommendations.
 273-v259-promoted-decision-batch-review-propagation.md

@@ -583,6 +583,9 @@ c/259/解释/说明.md
 c/260/图片
 c/260/解释/说明.md
  -> v260 promoted seed batch review propagation 的运行截图和解释
+c/261/图片
+c/261/解释/说明.md
+ -> v261 promoted seed handoff batch review propagation 的运行截图和解释
 ```
 
 写入规则：

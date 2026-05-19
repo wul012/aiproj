@@ -56,6 +56,27 @@ def main() -> None:
     print(f"seed_suite_path={summary.get('seed_suite_path')}")
     print(f"selected_handoff_suite_consistency={summary.get('selected_handoff_suite_consistency')}")
     print(f"selected_handoff_suite_mismatch_count={summary.get('selected_handoff_suite_mismatch_count')}")
+    print(f"selected_handoff_selected_batch_review_status={summary.get('selected_handoff_selected_batch_review_status')}")
+    print(
+        "selected_handoff_selected_batch_comparison_review_action_count="
+        f"{summary.get('selected_handoff_selected_batch_comparison_review_action_count')}"
+    )
+    print(
+        "selected_handoff_selected_batch_comparison_blocker_action_count="
+        f"{summary.get('selected_handoff_selected_batch_comparison_blocker_action_count')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_review_count="
+        f"{summary.get('comparison_ready_handoff_selected_batch_review_count')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_blocker_count="
+        f"{summary.get('comparison_ready_handoff_selected_batch_blocker_count')}"
+    )
+    print(
+        "comparison_ready_handoff_batch_comparison_blocker_reasons="
+        + json.dumps(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"), ensure_ascii=False)
+    )
     print(f"handoff_suite_mismatch_total={summary.get('handoff_suite_mismatch_total')}")
     print(f"plan_suite_path={summary.get('plan_suite_path')}")
     print(f"seed_handoff_suite_alignment_status={summary.get('seed_handoff_suite_alignment_status')}")

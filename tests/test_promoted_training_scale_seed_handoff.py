@@ -227,6 +227,52 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             )
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
 
+    def test_carries_seed_handoff_batch_review_into_handoff_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_batch_review=True,
+            )
+
+            report = build_promoted_training_scale_seed_handoff(seed, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_seed_handoff_outputs(report, root / "handoff")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            summary = report["summary"]
+            self.assertEqual(summary["handoff_status"], "planned")
+            self.assertEqual(summary["selected_handoff_selected_batch_review_status"], "blocker")
+            self.assertEqual(summary["selected_handoff_selected_batch_comparison_review_action_count"], 2)
+            self.assertEqual(summary["selected_handoff_selected_batch_comparison_blocker_action_count"], 1)
+            self.assertEqual(summary["selected_handoff_batch_comparison_blocker_reasons"], ["coverage-regressed"])
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_blocker_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_batch_comparison_blocker_reasons"], ["coverage-regressed"])
+            self.assertIn("selected_handoff_selected_batch_review_status", csv_text)
+            self.assertIn("Selected handoff batch review", markdown)
+            self.assertIn("Selected handoff batch", html)
+            self.assertIn("selected_handoff_selected_batch_review_status=blocker", completed.stdout)
+            self.assertIn("comparison_ready_handoff_selected_batch_blocker_count=1", completed.stdout)
+            self.assertTrue(any("selected handoff batch blocker" in item for item in report["recommendations"]))
+
     def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -405,6 +451,7 @@ def write_seed_tree(
     command: list[str] | None = None,
     suite_name: str | None = None,
     include_handoff_suite_guard: bool = False,
+    include_handoff_batch_review: bool = False,
 ) -> Path:
     source = root / "corpus.txt"
     source.write_text("MiniGPT v82 next cycle corpus.\n" * 180, encoding="utf-8")
@@ -458,6 +505,23 @@ def write_seed_tree(
             "handoff_suite_consistent_count": 2,
             "handoff_suite_mismatch_total": 0,
             "comparison_ready_handoff_suite_mismatch_total": 0,
+        }
+    if include_handoff_batch_review:
+        baseline_seed["handoff_batch_review"] = {
+            "selected_handoff_selected_batch_review_status": "blocker",
+            "selected_handoff_selected_batch_comparison_review_action_count": 2,
+            "selected_handoff_selected_batch_comparison_blocker_action_count": 1,
+            "selected_handoff_selected_batch_maturity_coverage_regression_count": 1,
+            "selected_handoff_batch_comparison_review_action_count": 2,
+            "selected_handoff_batch_comparison_blocker_action_count": 1,
+            "selected_handoff_batch_comparison_blocker_reasons": ["coverage-regressed"],
+            "comparison_ready_handoff_selected_batch_review_count": 1,
+            "comparison_ready_handoff_selected_batch_blocker_count": 1,
+            "comparison_ready_handoff_selected_batch_comparison_review_action_total": 4,
+            "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": 1,
+            "comparison_ready_handoff_batch_comparison_review_action_total": 4,
+            "comparison_ready_handoff_batch_comparison_blocker_action_total": 1,
+            "comparison_ready_handoff_batch_comparison_blocker_reasons": ["coverage-regressed"],
         }
     seed = {
         "schema_version": 1,

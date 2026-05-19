@@ -22,6 +22,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     list_of_strs as _list_of_strs,
     make_artifact_rows,
+    string_list as _string_list,
     utc_now,
 )
 
@@ -226,6 +227,7 @@ def _summary(
     plan_suite = _dict(plan_report.get("suite"))
     plan_dataset = _dict(plan_report.get("dataset"))
     handoff_guard = _dict(baseline.get("handoff_suite_guard"))
+    batch_review = _dict(baseline.get("handoff_batch_review"))
     seed_suite_path = _dict(next_plan.get("suite")).get("path")
     selected_handoff_suite_path = handoff_guard.get("selected_handoff_selected_suite_path")
     plan_suite_path = plan_suite.get("path") or plan_summary.get("suite_path")
@@ -253,6 +255,48 @@ def _summary(
         "handoff_suite_consistent_count": handoff_guard.get("handoff_suite_consistent_count"),
         "handoff_suite_mismatch_total": handoff_guard.get("handoff_suite_mismatch_total"),
         "comparison_ready_handoff_suite_mismatch_total": handoff_guard.get("comparison_ready_handoff_suite_mismatch_total"),
+        "selected_handoff_selected_batch_review_status": batch_review.get(
+            "selected_handoff_selected_batch_review_status"
+        ),
+        "selected_handoff_selected_batch_comparison_review_action_count": batch_review.get(
+            "selected_handoff_selected_batch_comparison_review_action_count"
+        ),
+        "selected_handoff_selected_batch_comparison_blocker_action_count": batch_review.get(
+            "selected_handoff_selected_batch_comparison_blocker_action_count"
+        ),
+        "selected_handoff_selected_batch_maturity_coverage_regression_count": batch_review.get(
+            "selected_handoff_selected_batch_maturity_coverage_regression_count"
+        ),
+        "selected_handoff_batch_comparison_review_action_count": batch_review.get(
+            "selected_handoff_batch_comparison_review_action_count"
+        ),
+        "selected_handoff_batch_comparison_blocker_action_count": batch_review.get(
+            "selected_handoff_batch_comparison_blocker_action_count"
+        ),
+        "selected_handoff_batch_comparison_blocker_reasons": _string_list(
+            batch_review.get("selected_handoff_batch_comparison_blocker_reasons")
+        ),
+        "comparison_ready_handoff_selected_batch_review_count": batch_review.get(
+            "comparison_ready_handoff_selected_batch_review_count"
+        ),
+        "comparison_ready_handoff_selected_batch_blocker_count": batch_review.get(
+            "comparison_ready_handoff_selected_batch_blocker_count"
+        ),
+        "comparison_ready_handoff_selected_batch_comparison_review_action_total": batch_review.get(
+            "comparison_ready_handoff_selected_batch_comparison_review_action_total"
+        ),
+        "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": batch_review.get(
+            "comparison_ready_handoff_selected_batch_comparison_blocker_action_total"
+        ),
+        "comparison_ready_handoff_batch_comparison_review_action_total": batch_review.get(
+            "comparison_ready_handoff_batch_comparison_review_action_total"
+        ),
+        "comparison_ready_handoff_batch_comparison_blocker_action_total": batch_review.get(
+            "comparison_ready_handoff_batch_comparison_blocker_action_total"
+        ),
+        "comparison_ready_handoff_batch_comparison_blocker_reasons": _string_list(
+            batch_review.get("comparison_ready_handoff_batch_comparison_blocker_reasons")
+        ),
         "plan_suite_mode": plan_suite.get("mode") or plan_summary.get("suite_mode"),
         "plan_suite_name": plan_suite.get("name") or plan_summary.get("suite_name"),
         "plan_suite_path": plan_suite_path,
@@ -366,31 +410,36 @@ def _recommendations(
     status = str(summary.get("handoff_status") or "")
     alignment_recommendations = _suite_alignment_recommendations(summary)
     clean_evidence_recommendations = _clean_evidence_requirement_recommendations(clean_evidence_requirement)
+    batch_review_recommendations = _handoff_batch_review_recommendations(summary)
     if status == "planned":
         return (
             alignment_recommendations
             + clean_evidence_recommendations
+            + batch_review_recommendations
             + ["Review the generated seed command, then rerun with --execute to materialize the next training scale plan."]
         )
     if status == "blocked":
         return (
             alignment_recommendations
             + clean_evidence_recommendations
+            + batch_review_recommendations
             + ["Fix the seed or plan blockers before trying to produce the next training scale plan."]
         )
     if status == "timeout":
         return (
             alignment_recommendations
             + clean_evidence_recommendations
+            + batch_review_recommendations
             + ["Inspect the partial plan output tree and rerun with a larger timeout if the plan command is still valid."]
         )
     if status == "failed":
         return (
             alignment_recommendations
             + clean_evidence_recommendations
+            + batch_review_recommendations
             + ["Inspect stdout/stderr tails and the seed command before retrying the next plan handoff."]
         )
-    recommendations = alignment_recommendations + clean_evidence_recommendations + [
+    recommendations = alignment_recommendations + clean_evidence_recommendations + batch_review_recommendations + [
         "Use the generated plan report and batch command as the next input to the training-scale workflow.",
     ]
     if plan_report:
@@ -402,6 +451,23 @@ def _recommendations(
     if execution.get("returncode") not in {None, 0}:
         recommendations.append("The plan command returned a non-zero exit code, so treat the seed handoff as failed.")
     return recommendations
+
+
+def _handoff_batch_review_recommendations(summary: dict[str, Any]) -> list[str]:
+    selected_status = str(summary.get("selected_handoff_selected_batch_review_status") or "")
+    if selected_status == "blocker":
+        return [
+            "Resolve selected handoff batch blocker actions before treating this seed handoff as clean model-quality evidence."
+        ]
+    if selected_status == "review":
+        return [
+            "Review selected handoff batch actions before treating this seed handoff as clean model-quality evidence."
+        ]
+    if summary.get("comparison_ready_handoff_selected_batch_blocker_count"):
+        return [
+            "Other comparison-ready promoted inputs carried handoff batch blockers; keep them with this handoff review context."
+        ]
+    return []
 
 
 def _clean_evidence_requirement_recommendations(
