@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+278-v264-promoted-decision-review-helper-split.md
+ -> v264 code explanation: split promoted decision selected handoff suite/batch-review summary projection and recommendation helper logic out of the baseline decision builder.
+
 277-v263-promoted-seed-review-helper-split.md
  -> v263 code explanation: split promoted seed suite-guard, handoff batch-review, summary projection, and recommendation helper logic out of the next-cycle seed orchestration module.
 
