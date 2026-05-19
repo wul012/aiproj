@@ -120,6 +120,19 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 "handoff_suite_consistency": row.get("handoff_suite_consistency"),
                 "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
                 "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
+                "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
+                "handoff_selected_batch_comparison_review_action_count": row.get(
+                    "handoff_selected_batch_comparison_review_action_count"
+                ),
+                "handoff_selected_batch_comparison_blocker_action_count": row.get(
+                    "handoff_selected_batch_comparison_blocker_action_count"
+                ),
+                "handoff_selected_batch_maturity_coverage_regression_count": row.get(
+                    "handoff_selected_batch_maturity_coverage_regression_count"
+                ),
+                "handoff_batch_comparison_review_action_count": row.get("handoff_batch_comparison_review_action_count"),
+                "handoff_batch_comparison_blocker_action_count": row.get("handoff_batch_comparison_blocker_action_count"),
+                "handoff_batch_comparison_blocker_reasons": _string_list(row.get("handoff_batch_comparison_blocker_reasons")),
             }
         )
     return rows
@@ -195,6 +208,44 @@ def _summary(
         "handoff_suite_consistent_count": sum(1 for row in promotions if row.get("handoff_suite_consistency") == "consistent"),
         "handoff_suite_mismatch_total": sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
         "handoff_selected_suite_path_count": sum(1 for row in promotions if row.get("handoff_selected_suite_path")),
+        "comparison_ready_handoff_selected_batch_review_count": sum(
+            1
+            for row in promotions
+            if row.get("promoted_for_comparison") and row.get("handoff_selected_batch_review_status") == "review"
+        ),
+        "comparison_ready_handoff_selected_batch_blocker_count": sum(
+            1
+            for row in promotions
+            if row.get("promoted_for_comparison") and row.get("handoff_selected_batch_review_status") == "blocker"
+        ),
+        "comparison_ready_handoff_selected_batch_comparison_review_action_total": sum(
+            _int(row.get("handoff_selected_batch_comparison_review_action_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": sum(
+            _int(row.get("handoff_selected_batch_comparison_blocker_action_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_batch_comparison_review_action_total": sum(
+            _int(row.get("handoff_batch_comparison_review_action_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_batch_comparison_blocker_action_total": sum(
+            _int(row.get("handoff_batch_comparison_blocker_action_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_batch_comparison_blocker_reasons": sorted(
+            {
+                reason
+                for row in promotions
+                if row.get("promoted_for_comparison")
+                for reason in _string_list(row.get("handoff_batch_comparison_blocker_reasons"))
+            }
+        ),
         "comparison_ready_handoff_suite_mismatch_total": sum(
             _int(row.get("handoff_suite_mismatch_count")) for row in promotions if row.get("promoted_for_comparison")
         ),
@@ -233,13 +284,33 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
             "Use the compared promoted runs as the baseline for the next training-scale decision.",
             "Keep review and blocked promotions in the index, but do not feed them into comparison runs.",
         ]
+        if _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
+            recommendations.append(
+                "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; resolve them before treating this comparison as clean model-quality evidence."
+            )
+            reasons = _string_list(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"))
+            if reasons:
+                recommendations.append("Comparison-ready batch blocker reasons: " + ", ".join(reasons))
+        elif _int(summary.get("comparison_ready_handoff_selected_batch_review_count")):
+            recommendations.append(
+                "Comparison-ready promoted inputs still carry selected handoff batch review actions; review them before treating this comparison as clean model-quality evidence."
+            )
         if summary.get("suite_consistency") == "mixed":
             recommendations.append("Compared promoted runs use different benchmark suites; review suite paths before treating readiness deltas as clean model-quality deltas.")
         return recommendations
-    return [
+    recommendations = [
         "Add another promoted run or fix the blocked baseline before comparing promoted results.",
         "Use the promotion index to keep review and blocked evidence visible without mixing it into model comparison.",
     ]
+    if _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
+        recommendations.append(
+            "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; clean them before treating later comparisons as baseline evidence."
+        )
+    elif _int(summary.get("comparison_ready_handoff_selected_batch_review_count")):
+        recommendations.append(
+            "Comparison-ready promoted inputs still carry selected handoff batch review actions; review them before treating later comparisons as baseline evidence."
+        )
+    return recommendations
 
 
 

@@ -47,6 +47,11 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
         "handoff_suite_consistency",
         "handoff_suite_mismatch_count",
         "handoff_selected_suite_path",
+        "handoff_selected_batch_review_status",
+        "handoff_selected_batch_comparison_review_action_count",
+        "handoff_selected_batch_comparison_blocker_action_count",
+        "handoff_batch_comparison_review_action_count",
+        "handoff_batch_comparison_blocker_action_count",
         "baseline_name",
         "is_baseline",
         "readiness_delta",
@@ -75,6 +80,19 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
                     "handoff_suite_consistency": row.get("handoff_suite_consistency"),
                     "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
                     "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
+                    "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
+                    "handoff_selected_batch_comparison_review_action_count": row.get(
+                        "handoff_selected_batch_comparison_review_action_count"
+                    ),
+                    "handoff_selected_batch_comparison_blocker_action_count": row.get(
+                        "handoff_selected_batch_comparison_blocker_action_count"
+                    ),
+                    "handoff_batch_comparison_review_action_count": row.get(
+                        "handoff_batch_comparison_review_action_count"
+                    ),
+                    "handoff_batch_comparison_blocker_action_count": row.get(
+                        "handoff_batch_comparison_blocker_action_count"
+                    ),
                     "baseline_name": delta.get("baseline_name"),
                     "is_baseline": delta.get("is_baseline"),
                     "readiness_delta": delta.get("readiness_delta"),
@@ -102,11 +120,15 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
         f"- Handoff suite consistent: `{summary.get('handoff_suite_consistent_count')}`",
         f"- Handoff suite mismatches: `{summary.get('handoff_suite_mismatch_total')}`",
         f"- Comparison-ready handoff suite mismatches: `{summary.get('comparison_ready_handoff_suite_mismatch_total')}`",
+        f"- Comparison-ready selected batch reviews: `{summary.get('comparison_ready_handoff_selected_batch_review_count')}`",
+        f"- Comparison-ready selected batch blockers: `{summary.get('comparison_ready_handoff_selected_batch_blocker_count')}`",
+        f"- Comparison-ready batch review actions: `{summary.get('comparison_ready_handoff_selected_batch_comparison_review_action_total')}`",
+        f"- Comparison-ready batch blocker actions: `{summary.get('comparison_ready_handoff_selected_batch_comparison_blocker_action_total')}`",
         "",
         "## Promoted Inputs",
         "",
-        "| Name | Status | Compare | Readiness | Handoff Suite | Mismatches | Selected Suite | Run |",
-        "| --- | --- | --- | ---: | --- | ---: | --- | --- |",
+        "| Name | Status | Compare | Readiness | Handoff Suite | Mismatches | Selected Suite | Batch Review | Batch Blockers | Run |",
+        "| --- | --- | --- | ---: | --- | ---: | --- | --- | ---: | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -120,6 +142,8 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
                     _md(row.get("handoff_suite_consistency")),
                     _md(row.get("handoff_suite_mismatch_count")),
                     _md(row.get("handoff_selected_suite_path")),
+                    _md(row.get("handoff_selected_batch_review_status")),
+                    _md(row.get("handoff_selected_batch_comparison_blocker_action_count")),
                     _md(row.get("training_scale_run_path")),
                 ]
             )
@@ -187,6 +211,8 @@ def render_promoted_training_scale_comparison_html(report: dict[str, Any]) -> st
         ("Handoff suite consistent", summary.get("handoff_suite_consistent_count")),
         ("Handoff suite mismatches", summary.get("handoff_suite_mismatch_total")),
         ("Ready suite mismatches", summary.get("comparison_ready_handoff_suite_mismatch_total")),
+        ("Ready batch reviews", summary.get("comparison_ready_handoff_selected_batch_review_count")),
+        ("Ready batch blockers", summary.get("comparison_ready_handoff_selected_batch_blocker_count")),
         ("Best", _dict(comparison.get("best_by_readiness")).get("name")),
     ]
     return "\n".join(
@@ -247,12 +273,14 @@ def _promotion_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('handoff_suite_consistency'))}</td>"
             f"<td>{_e(row.get('handoff_suite_mismatch_count'))}</td>"
             f"<td>{_e(row.get('handoff_selected_suite_path'))}</td>"
+            f"<td>{_e(row.get('handoff_selected_batch_review_status'))}</td>"
+            f"<td>{_e(row.get('handoff_selected_batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e(row.get('training_scale_run_path'))}</td>"
             "</tr>"
         )
     return (
         '<section><h2>Promoted Inputs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Readiness</th><th>Handoff Suite</th><th>Mismatches</th><th>Selected Suite</th><th>Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Readiness</th><th>Handoff Suite</th><th>Mismatches</th><th>Selected Suite</th><th>Batch Review</th><th>Batch Blockers</th><th>Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

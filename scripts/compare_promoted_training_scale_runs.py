@@ -46,6 +46,20 @@ def main() -> None:
     print(f"handoff_suite_consistent_count={summary.get('handoff_suite_consistent_count')}")
     print(f"handoff_suite_mismatch_total={summary.get('handoff_suite_mismatch_total')}")
     print(f"comparison_ready_handoff_suite_mismatch_total={summary.get('comparison_ready_handoff_suite_mismatch_total')}")
+    print(f"comparison_ready_handoff_selected_batch_review_count={summary.get('comparison_ready_handoff_selected_batch_review_count')}")
+    print(f"comparison_ready_handoff_selected_batch_blocker_count={summary.get('comparison_ready_handoff_selected_batch_blocker_count')}")
+    print(
+        "comparison_ready_handoff_selected_batch_comparison_review_action_total="
+        f"{summary.get('comparison_ready_handoff_selected_batch_comparison_review_action_total')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_comparison_blocker_action_total="
+        f"{summary.get('comparison_ready_handoff_selected_batch_comparison_blocker_action_total')}"
+    )
+    print(
+        "comparison_ready_handoff_batch_comparison_blocker_reasons="
+        f"{json.dumps(summary.get('comparison_ready_handoff_batch_comparison_blocker_reasons', []), ensure_ascii=False)}"
+    )
     if summary.get("blocked_reason"):
         print(f"blocked_reason={summary.get('blocked_reason')}")
     print("summary=" + json.dumps(summary, ensure_ascii=False))

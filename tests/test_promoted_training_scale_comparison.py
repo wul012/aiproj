@@ -135,6 +135,70 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_suite_mismatch_total=0", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
 
+    def test_carries_index_handoff_batch_review_context_into_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index_dir = make_index_tree(
+                root,
+                [
+                    entry(
+                        "alpha",
+                        "alpha",
+                        "promoted",
+                        "warn",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                    ),
+                    entry(
+                        "beta",
+                        "beta",
+                        "promoted",
+                        "pass",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                    ),
+                ],
+                baseline_name="alpha",
+            )
+
+            report = build_promoted_training_scale_comparison(index_dir, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_comparison_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "compare_promoted_training_scale_runs.py"),
+                    str(index_dir),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-compared",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            row = report["promotions"][0]
+            summary = report["summary"]
+            self.assertEqual(row["handoff_selected_batch_review_status"], "blocker")
+            self.assertEqual(row["handoff_selected_batch_comparison_blocker_action_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_blocker_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_comparison_review_action_total"], 4)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_comparison_blocker_action_total"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_batch_comparison_blocker_reasons"], ["coverage-regressed"])
+            self.assertIn("handoff_selected_batch_review_status", csv_text)
+            self.assertIn("Batch Review", markdown)
+            self.assertIn("Comparison-ready selected batch blockers", markdown)
+            self.assertIn("Batch Review", html)
+            self.assertIn("comparison_ready_handoff_selected_batch_blocker_count=1", completed.stdout)
+            self.assertIn("comparison_ready_handoff_batch_comparison_blocker_reasons", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
+
     def test_blocks_when_promoted_input_is_insufficient(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -204,6 +268,7 @@ def entry(
     suite_name: str | None = "standard-zh",
     *,
     include_handoff_suite_guard: bool = False,
+    include_handoff_batch_review_context: bool = False,
 ) -> dict:
     return {
         "safe_id": safe_id,
@@ -212,6 +277,7 @@ def entry(
         "gate_status": gate_status,
         "suite_name": suite_name,
         "include_handoff_suite_guard": include_handoff_suite_guard,
+        "include_handoff_batch_review_context": include_handoff_batch_review_context,
     }
 
 
@@ -239,6 +305,18 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
                     "handoff_suite_consistency": "consistent",
                     "handoff_suite_mismatch_count": 0,
                     "handoff_selected_suite_path": "builtin:standard-zh",
+                }
+            )
+        if item.get("include_handoff_batch_review_context"):
+            promotion.update(
+                {
+                    "handoff_selected_batch_review_status": "blocker" if item["name"] == "alpha" else "review",
+                    "handoff_selected_batch_comparison_review_action_count": 2,
+                    "handoff_selected_batch_comparison_blocker_action_count": 1 if item["name"] == "alpha" else 0,
+                    "handoff_selected_batch_maturity_coverage_regression_count": 1,
+                    "handoff_batch_comparison_review_action_count": 2,
+                    "handoff_batch_comparison_blocker_action_count": 1 if item["name"] == "alpha" else 0,
+                    "handoff_batch_comparison_blocker_reasons": ["coverage-regressed"] if item["name"] == "alpha" else [],
                 }
             )
         promotions.append(promotion)
