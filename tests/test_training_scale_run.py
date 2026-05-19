@@ -43,6 +43,9 @@ class TrainingScaleRunTests(unittest.TestCase):
             self.assertEqual(report["status"], "planned_with_warnings")
             self.assertEqual(report["gate"]["overall_status"], "warn")
             self.assertEqual(report["batch_summary"]["status"], "planned")
+            self.assertGreater(report["batch_summary"]["comparison_review_action_count"], 0)
+            self.assertEqual(report["batch_summary"]["comparison_blocker_action_count"], 0)
+            self.assertTrue(any("Review batch comparison actions" in item for item in report["recommendations"]))
             self.assertTrue((root / "run" / "batch" / "training_portfolio_batch.json").exists())
             self.assertTrue((root / "run" / "training_scale_run.json").exists())
 
@@ -71,6 +74,7 @@ class TrainingScaleRunTests(unittest.TestCase):
             self.assertEqual(report["scale_plan_summary"]["suite_mode"], "builtin")
             self.assertEqual(report["scale_plan_summary"]["suite_path"], "builtin:standard-zh")
             self.assertEqual(report["batch_summary"]["suite_path"], "builtin:standard-zh")
+            self.assertGreaterEqual(report["batch_summary"]["comparison_review_action_count"], 0)
             self.assertTrue(report["batch_outputs"])
 
     def test_warn_plan_can_be_blocked(self) -> None:
@@ -178,7 +182,9 @@ class TrainingScaleRunTests(unittest.TestCase):
             html = render_training_scale_run_html(report)
 
             self.assertIn("## Batch", markdown)
+            self.assertIn("Comparison review actions", markdown)
             self.assertIn("&lt;demo&gt;", html)
+            self.assertIn("Batch review", html)
             self.assertNotIn("<demo>", html)
 
     def test_run_outputs_are_machine_readable(self) -> None:

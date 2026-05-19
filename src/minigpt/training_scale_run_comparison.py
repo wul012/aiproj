@@ -88,6 +88,9 @@ def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | 
         "suite_path",
         "batch_status",
         "comparison_status",
+        "batch_comparison_review_action_count",
+        "batch_comparison_blocker_action_count",
+        "batch_maturity_coverage_regression_count",
         "execute",
         "blocked_reason",
         "readiness_score",
@@ -123,13 +126,16 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
         f"- Batch started: `{summary.get('batch_started_count')}`",
         f"- Gate warnings: `{summary.get('gate_warn_count')}`",
         f"- Gate failures: `{summary.get('gate_fail_count')}`",
+        f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
+        f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
+        f"- Batch coverage regressions: `{summary.get('batch_maturity_coverage_regression_count')}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
         f"- Baseline suite: `{summary.get('baseline_suite_path')}`",
         "",
         "## Runs",
         "",
-        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Score | Relation |",
-        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | --- |",
+        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | Score | Relation |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | --- |",
     ]
     deltas = {row.get("name"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     for run in _list_of_dicts(report.get("runs")):
@@ -147,6 +153,8 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
                     _md(run.get("suite_path")),
                     _md(run.get("variant_count")),
                     _md(run.get("batch_status")),
+                    _md(run.get("batch_comparison_review_action_count")),
+                    _md(run.get("batch_comparison_blocker_action_count")),
                     _md(run.get("readiness_score")),
                     _md(delta.get("explanation")),
                 ]
@@ -174,6 +182,9 @@ def render_training_scale_run_comparison_html(report: dict[str, Any]) -> str:
         ("Allowed", summary.get("allowed_count")),
         ("Blocked", summary.get("blocked_count")),
         ("Batch started", summary.get("batch_started_count")),
+        ("Batch reviews", summary.get("batch_comparison_review_action_count")),
+        ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
+        ("Coverage regressions", summary.get("batch_maturity_coverage_regression_count")),
         ("Gate warn", summary.get("gate_warn_count")),
         ("Gate fail", summary.get("gate_fail_count")),
         ("Suite", summary.get("suite_consistency")),
@@ -277,6 +288,14 @@ def _run_summary(report: dict[str, Any], name: str, index: int) -> dict[str, Any
         "suite_path": plan.get("suite_path") or batch.get("suite_path"),
         "batch_status": batch.get("status"),
         "comparison_status": batch.get("comparison_status"),
+        "batch_comparison_review_action_count": _int(batch.get("comparison_review_action_count")),
+        "batch_comparison_blocker_action_count": _int(batch.get("comparison_blocker_action_count")),
+        "batch_maturity_review_count": _int(batch.get("maturity_review_count")),
+        "batch_maturity_coverage_regression_count": _int(batch.get("maturity_coverage_regression_count")),
+        "batch_maturity_review_names": _string_list(batch.get("maturity_review_names")),
+        "batch_maturity_coverage_regression_names": _string_list(batch.get("maturity_coverage_regression_names")),
+        "batch_comparison_blocker_reasons": _string_list(batch.get("comparison_blocker_reasons")),
+        "batch_comparison_blocker_portfolios": _string_list(batch.get("comparison_blocker_portfolios")),
         "completed_variant_count": batch.get("completed_variant_count"),
         "blocked_reason": report.get("blocked_reason"),
         "gate_outputs": _dict(report.get("gate_outputs")),
@@ -294,6 +313,7 @@ def _readiness_score(row: dict[str, Any]) -> int:
     score += {"completed": 25, "planned": 18, "skipped": 0, "failed": -10}.get(str(row.get("batch_status")), 0)
     if row.get("comparison_status") == "written":
         score += 7
+    score -= 8 * _int(row.get("batch_comparison_blocker_action_count"))
     if row.get("execute"):
         score += 5
     return max(0, score)
@@ -347,6 +367,24 @@ def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], de
         "suite_path_count": len(suite_paths),
         "suite_paths": suite_paths,
         "suite_mismatch_count": sum(1 for row in deltas if row.get("suite_relation") == "changed"),
+        "batch_comparison_review_action_count": sum(_int(row.get("batch_comparison_review_action_count")) for row in runs),
+        "batch_comparison_blocker_action_count": sum(_int(row.get("batch_comparison_blocker_action_count")) for row in runs),
+        "batch_maturity_review_count": sum(_int(row.get("batch_maturity_review_count")) for row in runs),
+        "batch_maturity_coverage_regression_count": sum(_int(row.get("batch_maturity_coverage_regression_count")) for row in runs),
+        "batch_maturity_coverage_regression_names": sorted(
+            {
+                name
+                for row in runs
+                for name in _string_list(row.get("batch_maturity_coverage_regression_names"))
+            }
+        ),
+        "batch_comparison_blocker_reasons": sorted(
+            {
+                reason
+                for row in runs
+                for reason in _string_list(row.get("batch_comparison_blocker_reasons"))
+            }
+        ),
         "readiness_improvement_count": sum(1 for row in deltas if _int(row.get("readiness_delta")) > 0),
         "readiness_regression_count": sum(1 for row in deltas if _int(row.get("readiness_delta")) < 0),
     }
@@ -372,6 +410,10 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
         recommendations.append("Some compared runs do not report a benchmark suite; review their plan summaries before selecting a promoted baseline.")
     if _int(summary.get("batch_started_count")) and not _int(summary.get("blocked_count")):
         recommendations.append("All compared runs reached the batch layer; review batch comparisons before moving to --execute.")
+    if _int(summary.get("batch_comparison_blocker_action_count")):
+        recommendations.append("Resolve batch comparison blocker actions before promoting any scale run from this comparison.")
+    elif _int(summary.get("batch_comparison_review_action_count")):
+        recommendations.append("Review batch comparison actions before treating readiness ranking as clean baseline evidence.")
     if any(_int(row.get("readiness_delta")) < 0 for row in deltas):
         recommendations.append("At least one run regressed against the baseline readiness score.")
     if not recommendations:
@@ -446,13 +488,15 @@ def _runs_table(report: dict[str, Any]) -> str:
             f"<td>{_e(run.get('suite_path'))}</td>"
             f"<td>{_e(run.get('variant_count'))}</td>"
             f"<td>{_e(run.get('batch_status'))}</td>"
+            f"<td>{_e(run.get('batch_comparison_review_action_count'))}</td>"
+            f"<td>{_e(run.get('batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e(run.get('readiness_score'))}</td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )
     return (
         '<section><h2>Runs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Score</th><th>Relation</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>Score</th><th>Relation</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

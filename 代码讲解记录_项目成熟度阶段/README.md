@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+267-v253-scale-run-batch-review-propagation.md
+ -> v253 code explanation: propagate portfolio-batch comparison review and blocker counts into gated scale-run evidence and scale-run comparison readiness context.
 266-v252-portfolio-batch-comparison-review-summary.md
  -> v252 code explanation: carry training portfolio comparison review and blocker counts into batch summaries, recommendations, Markdown, and HTML outputs.
 265-v251-portfolio-comparison-review-split.md

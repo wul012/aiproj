@@ -37,6 +37,8 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["blocked_count"], 1)
             self.assertEqual(report["summary"]["batch_started_count"], 1)
             self.assertEqual(report["summary"]["gate_fail_count"], 1)
+            self.assertGreater(report["summary"]["batch_comparison_review_action_count"], 0)
+            self.assertEqual(report["summary"]["batch_comparison_blocker_action_count"], 0)
             self.assertEqual(report["summary"]["suite_consistency"], "consistent")
             blocked_delta = next(row for row in report["baseline_deltas"] if row["name"] == "blocked")
             self.assertLess(blocked_delta["readiness_delta"], 0)
@@ -119,7 +121,9 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
 
             self.assertIn("## Runs", markdown)
             self.assertIn("## Recommendations", markdown)
+            self.assertIn("Batch comparison reviews", markdown)
             self.assertIn("&lt;allowed&gt;", html)
+            self.assertIn("Batch reviews", html)
             self.assertNotIn("<allowed>", html)
 
     def test_rejects_duplicate_names_and_empty_inputs(self) -> None:

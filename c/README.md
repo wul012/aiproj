@@ -559,6 +559,9 @@ c/251/解释/说明.md
 c/252/图片
 c/252/解释/说明.md
  -> v252 portfolio batch comparison review summary 的运行截图和解释
+c/253/图片
+c/253/解释/说明.md
+ -> v253 scale run batch review propagation 的运行截图和解释
 ```
 
 写入规则：

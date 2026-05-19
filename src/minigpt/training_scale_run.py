@@ -5,10 +5,12 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    first_present as _first_present,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     list_of_strs as _list_of_strings,
     markdown_cell as _md,
+    number_or_default,
     string_list as _string_list,
     utc_now,
     write_csv_row,
@@ -113,7 +115,19 @@ def write_training_scale_run_json(report: dict[str, Any], path: str | Path) -> N
 def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = ["status", "allowed", "gate_status", "gate_profile", "execute", "variant_count", "batch_status", "blocked_reason"]
+    fieldnames = [
+        "status",
+        "allowed",
+        "gate_status",
+        "gate_profile",
+        "execute",
+        "variant_count",
+        "batch_status",
+        "comparison_review_action_count",
+        "comparison_blocker_action_count",
+        "maturity_coverage_regression_count",
+        "blocked_reason",
+    ]
     gate = _dict(report.get("gate"))
     batch = _dict(report.get("batch_summary"))
     plan = _dict(report.get("scale_plan_summary"))
@@ -126,6 +140,9 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
             "execute": report.get("execute"),
             "variant_count": plan.get("variant_count"),
             "batch_status": batch.get("status"),
+            "comparison_review_action_count": batch.get("comparison_review_action_count"),
+            "comparison_blocker_action_count": batch.get("comparison_blocker_action_count"),
+            "maturity_coverage_regression_count": batch.get("maturity_coverage_regression_count"),
             "blocked_reason": report.get("blocked_reason"),
         },
         out_path,
@@ -168,6 +185,10 @@ def render_training_scale_run_markdown(report: dict[str, Any]) -> str:
                 ("Status", batch.get("status")),
                 ("Variant count", batch.get("variant_count")),
                 ("Comparison", batch.get("comparison_status")),
+                ("Comparison review actions", batch.get("comparison_review_action_count")),
+                ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
+                ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
+                ("Blocker reasons", ", ".join(_string_list(batch.get("comparison_blocker_reasons"))) or "none"),
                 ("Outputs", _display_dict(report.get("batch_outputs"))),
                 ("Blocked reason", report.get("blocked_reason")),
             ]
@@ -201,6 +222,8 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
         ("Scale", plan.get("scale_tier")),
         ("Variants", plan.get("variant_count")),
         ("Batch", batch.get("status")),
+        ("Batch review", batch.get("comparison_review_action_count")),
+        ("Batch blockers", batch.get("comparison_blocker_action_count")),
     ]
     return "\n".join(
         [
@@ -217,7 +240,20 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
             f"<header><h1>{_e(report.get('title', 'MiniGPT gated training scale run'))}</h1><p>{_e(report.get('plan_path'))}</p></header>",
             '<section class="stats">' + "".join(_card(label, value) for label, value in stats) + "</section>",
             _summary_section("Gate", [("Status", gate.get("overall_status")), ("Pass", gate.get("pass_count")), ("Warn", gate.get("warn_count")), ("Fail", gate.get("fail_count")), ("Outputs", _display_dict(report.get("gate_outputs")))]),
-            _summary_section("Batch", [("Status", batch.get("status")), ("Variant count", batch.get("variant_count")), ("Comparison", batch.get("comparison_status")), ("Outputs", _display_dict(report.get("batch_outputs"))), ("Blocked reason", report.get("blocked_reason"))]),
+            _summary_section(
+                "Batch",
+                [
+                    ("Status", batch.get("status")),
+                    ("Variant count", batch.get("variant_count")),
+                    ("Comparison", batch.get("comparison_status")),
+                    ("Comparison review actions", batch.get("comparison_review_action_count")),
+                    ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
+                    ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
+                    ("Blocker reasons", ", ".join(_string_list(batch.get("comparison_blocker_reasons"))) or "none"),
+                    ("Outputs", _display_dict(report.get("batch_outputs"))),
+                    ("Blocked reason", report.get("blocked_reason")),
+                ],
+            ),
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT gated training scale run.</footer>",
             "</body>",
@@ -298,8 +334,21 @@ def _gate_summary(gate: dict[str, Any]) -> dict[str, Any]:
 
 def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
     if not batch_report:
-        return {"status": "skipped", "variant_count": 0, "comparison_status": "skipped"}
+        return {
+            "status": "skipped",
+            "variant_count": 0,
+            "comparison_status": "skipped",
+            "comparison_review_action_count": 0,
+            "comparison_blocker_action_count": 0,
+            "maturity_review_count": 0,
+            "maturity_coverage_regression_count": 0,
+            "maturity_review_names": [],
+            "maturity_coverage_regression_names": [],
+            "comparison_blocker_reasons": [],
+            "comparison_blocker_portfolios": [],
+        }
     execution = _dict(batch_report.get("execution"))
+    review = _dict(batch_report.get("comparison_review_summary"))
     first_variant = _dict(next(iter(_list_of_dicts(batch_report.get("variants"))), {}))
     first_plan = _dict(first_variant.get("portfolio_plan"))
     return {
@@ -308,6 +357,14 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
         "completed_variant_count": execution.get("completed_variant_count"),
         "failed_variant": execution.get("failed_variant"),
         "comparison_status": execution.get("comparison_status"),
+        "comparison_review_action_count": _as_int(_first_present(review.get("review_action_count"), execution.get("comparison_review_action_count"))),
+        "comparison_blocker_action_count": _as_int(_first_present(review.get("blocker_action_count"), execution.get("comparison_blocker_action_count"))),
+        "maturity_review_count": _as_int(review.get("maturity_review_count")),
+        "maturity_coverage_regression_count": _as_int(review.get("maturity_coverage_regression_count")),
+        "maturity_review_names": _string_list(review.get("maturity_review_names")),
+        "maturity_coverage_regression_names": _string_list(review.get("maturity_coverage_regression_names")),
+        "comparison_blocker_reasons": _string_list(review.get("blocker_reasons")),
+        "comparison_blocker_portfolios": _string_list(review.get("blocker_portfolios")),
         "suite_path": first_plan.get("suite_path"),
         "suite_name": _dict(first_plan.get("suite")).get("name"),
     }
@@ -327,6 +384,11 @@ def _recommendations(
         recommendations.append("Review gate warnings before treating batch outputs as capability evidence.")
     if batch_report:
         recommendations.extend(str(item) for item in _string_list(batch_report.get("recommendations")))
+        batch = _batch_summary(batch_report)
+        if _as_int(batch.get("comparison_blocker_action_count")):
+            recommendations.append("Resolve batch comparison blocker actions before using this scale run as promotion evidence.")
+        elif _as_int(batch.get("comparison_review_action_count")):
+            recommendations.append("Review batch comparison actions before treating this scale run as clean baseline evidence.")
     if status == "completed":
         recommendations.append("Executed batch outputs are available under the batch directory.")
     return recommendations
@@ -335,6 +397,10 @@ def _recommendations(
 def _summary_section(title: str, rows: list[tuple[str, Any]]) -> str:
     body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
     return f'<section><h2>{_e(title)}</h2><table>{body}</table></section>'
+
+
+def _as_int(value: Any) -> int:
+    return int(number_or_default(value, 0, int))
 
 
 def _list_section(title: str, items: Any) -> str:
