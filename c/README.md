@@ -595,6 +595,9 @@ c/263/解释/说明.md
 c/264/图片
 c/264/解释/说明.md
  -> v264 promoted decision review helper split 的运行截图和解释
+c/265/图片
+c/265/解释/说明.md
+ -> v265 promoted decision artifact writer split 的运行截图和解释
 ```
 
 写入规则：

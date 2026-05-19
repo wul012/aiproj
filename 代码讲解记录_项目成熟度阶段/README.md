@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+279-v265-promoted-decision-artifact-writer-split.md
+ -> v265 code explanation: split promoted decision JSON/CSV/Markdown/HTML artifact writers out of the baseline decision builder while preserving compatibility exports.
+
 278-v264-promoted-decision-review-helper-split.md
  -> v264 code explanation: split promoted decision selected handoff suite/batch-review summary projection and recommendation helper logic out of the baseline decision builder.
 
