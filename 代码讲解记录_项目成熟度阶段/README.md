@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+282-v268-training-scale-run-decision-clean-batch-gate.md
+ -> v268 code explanation: add an opt-in clean batch-review gate to training-scale run decisions so automation can reject review/blocker/coverage-regression evidence before execute selection.
+
 281-v267-training-scale-run-comparison-artifact-writer-split.md
  -> v267 code explanation: split training-scale run comparison JSON/CSV/Markdown/HTML artifact writers out of the comparison builder while preserving compatibility exports.
 

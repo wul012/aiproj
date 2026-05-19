@@ -45,6 +45,7 @@ def build_training_scale_run_decision(
     require_gate_pass: bool = False,
     require_batch_started: bool = True,
     require_suite_consistency: bool = False,
+    require_clean_batch_review: bool = False,
     execute_out_root: str | Path | None = None,
     python_executable: str = "python",
     title: str = "MiniGPT training scale run decision",
@@ -56,6 +57,7 @@ def build_training_scale_run_decision(
         raise ValueError("comparison must contain at least one run")
     comparison_summary = _dict(comparison.get("summary"))
     suite_reasons = _suite_consistency_reasons(comparison_summary, require_suite_consistency)
+    clean_batch_reasons = _clean_batch_review_reasons(comparison_summary, require_clean_batch_review)
     base_dir = Path(str(comparison.get("_source_path"))).parent
     deltas = {row.get("name"): row for row in _list_of_dicts(comparison.get("baseline_deltas"))}
     candidates: list[dict[str, Any]] = []
@@ -68,6 +70,7 @@ def build_training_scale_run_decision(
             require_batch_started=require_batch_started,
         )
         reasons.extend(suite_reasons)
+        reasons.extend(clean_batch_reasons)
         row = {
             "name": run.get("name"),
             "gate_status": run.get("gate_status"),
@@ -104,6 +107,7 @@ def build_training_scale_run_decision(
         "require_gate_pass": bool(require_gate_pass),
         "require_batch_started": bool(require_batch_started),
         "require_suite_consistency": bool(require_suite_consistency),
+        "require_clean_batch_review": bool(require_clean_batch_review),
         "decision_status": status,
         "recommended_action": action,
         "selected_run": dict(selected) if selected else None,
@@ -121,6 +125,7 @@ def build_training_scale_run_decision(
             action,
             comparison_summary=comparison_summary,
             require_suite_consistency=require_suite_consistency,
+            require_clean_batch_review=require_clean_batch_review,
         ),
         "recommendations": _recommendations(
             status,
@@ -129,6 +134,7 @@ def build_training_scale_run_decision(
             execute_command,
             comparison_summary=comparison_summary,
             require_suite_consistency=require_suite_consistency,
+            require_clean_batch_review=require_clean_batch_review,
         ),
     }
     return report
@@ -176,6 +182,19 @@ def _suite_consistency_reasons(comparison_summary: dict[str, Any], require_suite
     if suite_consistency == "consistent":
         return []
     return [f"benchmark suite consistency is {suite_consistency or 'missing'}"]
+
+
+def _clean_batch_review_reasons(comparison_summary: dict[str, Any], require_clean_batch_review: bool) -> list[str]:
+    if not require_clean_batch_review:
+        return []
+    reasons: list[str] = []
+    if _int(comparison_summary.get("batch_comparison_blocker_action_count")):
+        reasons.append("batch comparison blocker actions are present")
+    if _int(comparison_summary.get("batch_comparison_review_action_count")):
+        reasons.append("batch comparison review actions are present")
+    if _int(comparison_summary.get("batch_maturity_coverage_regression_count")):
+        reasons.append("batch maturity coverage regressions are present")
+    return reasons
 
 
 def _select_candidate(candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
@@ -304,6 +323,7 @@ def _decision_summary(
     *,
     comparison_summary: dict[str, Any],
     require_suite_consistency: bool,
+    require_clean_batch_review: bool,
 ) -> dict[str, Any]:
     suite_paths = _string_list(comparison_summary.get("suite_paths"))
     selected_suite_path = None if selected is None else selected.get("suite_path")
@@ -325,6 +345,8 @@ def _decision_summary(
         "selected_batch_review_status": _batch_review_status(selected),
         "selected_suite_path": selected_suite_path,
         "require_suite_consistency": bool(require_suite_consistency),
+        "require_clean_batch_review": bool(require_clean_batch_review),
+        "clean_batch_review_status": _clean_batch_review_status(comparison_summary),
         "suite_consistency": comparison_summary.get("suite_consistency"),
         "suite_paths": suite_paths,
         "suite_mismatch_count": _int(comparison_summary.get("suite_mismatch_count")),
@@ -345,6 +367,7 @@ def _recommendations(
     *,
     comparison_summary: dict[str, Any],
     require_suite_consistency: bool,
+    require_clean_batch_review: bool,
 ) -> list[str]:
     recommendations: list[str] = []
     if status == "blocked":
@@ -370,6 +393,8 @@ def _recommendations(
     suite_consistency = comparison_summary.get("suite_consistency")
     if require_suite_consistency and suite_consistency != "consistent":
         recommendations.append("Fix benchmark suite consistency before selecting an executable run for clean model-quality comparison.")
+    if require_clean_batch_review and _clean_batch_review_status(comparison_summary) != "clean":
+        recommendations.append("Resolve batch review, blocker, and coverage-regression evidence before allowing clean execution automation.")
     if suite_consistency == "mixed":
         recommendations.append(
             "Compared runs use different benchmark suites; treat the selected run as execution triage, not a clean model-quality delta."
@@ -397,5 +422,15 @@ def _batch_review_status(selected: dict[str, Any] | None) -> str:
     if _int(selected.get("batch_comparison_blocker_action_count")):
         return "blocker"
     if _int(selected.get("batch_comparison_review_action_count")) or _int(selected.get("batch_maturity_coverage_regression_count")):
+        return "review"
+    return "clean"
+
+
+def _clean_batch_review_status(comparison_summary: dict[str, Any]) -> str:
+    if _int(comparison_summary.get("batch_comparison_blocker_action_count")):
+        return "blocker"
+    if _int(comparison_summary.get("batch_comparison_review_action_count")) or _int(
+        comparison_summary.get("batch_maturity_coverage_regression_count")
+    ):
         return "review"
     return "clean"

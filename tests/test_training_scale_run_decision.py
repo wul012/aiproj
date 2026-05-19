@@ -177,6 +177,53 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertEqual(report["summary"]["selected_batch_comparison_blocker_action_count"], 1)
             self.assertTrue(any("Resolve selected batch comparison blocker actions" in item for item in report["recommendations"]))
 
+    def test_require_clean_batch_review_blocks_review_or_blocker_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+
+            default_report = build_training_scale_run_decision(
+                comparison,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            strict_report = build_training_scale_run_decision(
+                comparison,
+                require_clean_batch_review=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(default_report["decision_status"], "review")
+            self.assertEqual(default_report["summary"]["clean_batch_review_status"], "review")
+            self.assertEqual(strict_report["decision_status"], "blocked")
+            self.assertTrue(strict_report["summary"]["require_clean_batch_review"])
+            self.assertEqual(strict_report["summary"]["clean_batch_review_status"], "review")
+            self.assertIsNone(strict_report["selected_run"])
+            reasons = [reason for row in strict_report["rejected_runs"] for reason in row["reasons"]]
+            self.assertIn("batch comparison review actions are present", reasons)
+            self.assertTrue(any("Resolve batch review" in item for item in strict_report["recommendations"]))
+
+    def test_clean_batch_review_fields_are_rendered(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+
+            report = build_training_scale_run_decision(
+                comparison,
+                require_clean_batch_review=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            outputs = write_training_scale_run_decision_outputs(report, root / "decision")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_run_decision_markdown(report)
+            html = render_training_scale_run_decision_html(report)
+
+            self.assertIn("require_clean_batch_review", csv_text)
+            self.assertIn("clean_batch_review_status", csv_text)
+            self.assertIn("Require clean batch review", markdown)
+            self.assertIn("Clean batch review status", markdown)
+            self.assertIn("Require clean batch review", html)
+            self.assertIn("Clean batch review", html)
+
     def test_rejects_comparison_without_runs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
