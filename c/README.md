@@ -556,6 +556,9 @@ c/250/解释/说明.md
 c/251/图片
 c/251/解释/说明.md
  -> v251 portfolio comparison review split 的运行截图和解释
+c/252/图片
+c/252/解释/说明.md
+ -> v252 portfolio batch comparison review summary 的运行截图和解释
 ```
 
 写入规则：

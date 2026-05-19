@@ -264,6 +264,7 @@ def run_training_portfolio_batch_plan(
     comparison_status = "skipped"
     comparison_outputs: dict[str, str] = {}
     comparison_summary: dict[str, Any] | None = None
+    comparison_review_summary: dict[str, Any] | None = None
     warnings: list[str] = []
     if compare and failed_variant is None and variant_results:
         comparison = _dict(plan.get("comparison"))
@@ -279,6 +280,7 @@ def run_training_portfolio_batch_plan(
                 comparison.get("out_dir") or Path(str(plan.get("out_root") or ".")) / "comparison",
             )
             comparison_summary = _dict(comparison_report.get("summary"))
+            comparison_review_summary = _comparison_review_summary(comparison_report)
             comparison_status = "written"
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             comparison_status = "failed"
@@ -297,6 +299,8 @@ def run_training_portfolio_batch_plan(
         "completed_variant_count": sum(1 for row in variant_results if row.get("status") == "completed"),
         "failed_variant": failed_variant,
         "comparison_status": comparison_status,
+        "comparison_review_action_count": _dict(comparison_review_summary).get("review_action_count", 0),
+        "comparison_blocker_action_count": _dict(comparison_review_summary).get("blocker_action_count", 0),
     }
     return {
         **plan,
@@ -305,7 +309,8 @@ def run_training_portfolio_batch_plan(
         "variant_results": variant_results,
         "comparison_outputs": comparison_outputs,
         "comparison_summary": comparison_summary,
-        "recommendations": _recommendations(execution, comparison_summary, warnings),
+        "comparison_review_summary": comparison_review_summary,
+        "recommendations": _recommendations(execution, comparison_summary, comparison_review_summary, warnings),
         "warnings": warnings,
     }
 
@@ -423,16 +428,58 @@ def _variant_result(variant: dict[str, Any], report: dict[str, Any], outputs: di
     }
 
 
-def _recommendations(execution: dict[str, Any], comparison_summary: dict[str, Any] | None, warnings: list[str]) -> list[str]:
+def _comparison_review_summary(comparison_report: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(comparison_report.get("summary"))
+    actions = _list_of_dicts(comparison_report.get("review_actions"))
+    blockers = [action for action in actions if action.get("severity") == "blocker"]
+    return {
+        "review_action_count": _as_int(summary.get("review_action_count")) or len(actions),
+        "blocker_action_count": _as_int(summary.get("blocker_action_count")) or len(blockers),
+        "maturity_review_count": _as_int(summary.get("maturity_review_count")) or 0,
+        "maturity_review_names": _string_list(summary.get("maturity_review_names")),
+        "maturity_coverage_regression_count": _as_int(summary.get("maturity_coverage_regression_count")) or 0,
+        "maturity_coverage_regression_names": _string_list(summary.get("maturity_coverage_regression_names")),
+        "blocker_reasons": _string_list([action.get("reason") for action in blockers]),
+        "blocker_portfolios": _string_list([action.get("portfolio") for action in blockers]),
+    }
+
+
+def _recommendations(
+    execution: dict[str, Any],
+    comparison_summary: dict[str, Any] | None,
+    comparison_review_summary: dict[str, Any] | None,
+    warnings: list[str],
+) -> list[str]:
     if warnings:
         return ["Inspect batch warnings before trusting the comparison outputs."]
-    if execution.get("status") == "planned":
-        return ["Review the batch HTML, then rerun with --execute when the variant matrix is ready to train."]
     if execution.get("status") == "failed":
         return [f"Inspect failed variant `{execution.get('failed_variant')}` before continuing the batch."]
+    review = _dict(comparison_review_summary)
+    if execution.get("comparison_status") == "written" and review:
+        if int(review.get("blocker_action_count") or 0) > 0:
+            return ["Resolve batch comparison blocker review actions before selecting the next baseline."]
+        if int(review.get("review_action_count") or 0) > 0:
+            return ["Review batch comparison actions before choosing the next baseline or rerunning with --execute."]
+    if execution.get("status") == "planned":
+        return ["Review the batch HTML, then rerun with --execute when the variant matrix is ready to train."]
     if execution.get("comparison_status") == "written" and comparison_summary:
         return ["Open the batch comparison HTML to choose the next baseline for larger-corpus or model-size experiments."]
     return ["Use the generated per-variant training_portfolio.html files to inspect each run before comparing them."]
+
+
+def _as_int(value: Any) -> int | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(item) for item in value if str(item).strip()]
 
 
 def _optional_str(value: Any) -> str | None:

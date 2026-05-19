@@ -70,6 +70,7 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
     execution = _dict(report.get("execution"))
     summary = _dict(report.get("summary"))
     comparison = _dict(report.get("comparison"))
+    review = _dict(report.get("comparison_review_summary"))
     lines = [
         f"# {report.get('title', 'MiniGPT training portfolio batch')}",
         "",
@@ -81,6 +82,9 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
         f"- Baseline: `{report.get('baseline_name')}`",
         f"- Total planned iterations: `{summary.get('total_max_iters')}`",
         f"- Pair modes: `{_pair_mode_label(summary.get('pair_mode_counts'))}`",
+        f"- Comparison review actions: `{review.get('review_action_count', 0)}`",
+        f"- Comparison blocker actions: `{review.get('blocker_action_count', 0)}`",
+        f"- Coverage-regressed portfolios: `{', '.join(_string_list(review.get('maturity_coverage_regression_names'))) or 'none'}`",
         "",
         "## Variants",
         "",
@@ -114,6 +118,11 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
                     ("Baseline", comparison.get("baseline_name")),
                     ("Out dir", comparison.get("out_dir")),
                     ("Status", execution.get("comparison_status", "planned")),
+                    ("Review actions", review.get("review_action_count", 0)),
+                    ("Blocker actions", review.get("blocker_action_count", 0)),
+                    ("Maturity reviews", ", ".join(_string_list(review.get("maturity_review_names"))) or "none"),
+                    ("Coverage regressions", ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none"),
+                    ("Blocker reasons", ", ".join(_string_list(review.get("blocker_reasons"))) or "none"),
                     ("Command", _display_command(comparison.get("command"))),
                 ]
             ),
@@ -139,6 +148,7 @@ def write_training_portfolio_batch_markdown(report: dict[str, Any], path: str | 
 def render_training_portfolio_batch_html(report: dict[str, Any]) -> str:
     execution = _dict(report.get("execution"))
     summary = _dict(report.get("summary"))
+    review = _dict(report.get("comparison_review_summary"))
     stats = [
         ("Status", execution.get("status", "planned")),
         ("Variants", report.get("variant_count")),
@@ -148,6 +158,9 @@ def render_training_portfolio_batch_html(report: dict[str, Any]) -> str:
         ("Max embd", summary.get("max_n_embd")),
         ("Pair modes", _pair_mode_label(summary.get("pair_mode_counts"))),
         ("Compare", execution.get("comparison_status", "planned")),
+        ("Review actions", review.get("review_action_count", 0)),
+        ("Blocker actions", review.get("blocker_action_count", 0)),
+        ("Coverage regressions", review.get("maturity_coverage_regression_count", 0)),
         ("Generated", report.get("generated_at")),
     ]
     return "\n".join(
@@ -249,9 +262,15 @@ def _comparison_panel(report: dict[str, Any]) -> str:
     comparison = _dict(report.get("comparison"))
     execution = _dict(report.get("execution"))
     outputs = _dict(report.get("comparison_outputs"))
+    review = _dict(report.get("comparison_review_summary"))
     rows = [
         ("Baseline", comparison.get("baseline_name")),
         ("Status", execution.get("comparison_status", "planned")),
+        ("Review actions", review.get("review_action_count", 0)),
+        ("Blocker actions", review.get("blocker_action_count", 0)),
+        ("Maturity reviews", ", ".join(_string_list(review.get("maturity_review_names"))) or "none"),
+        ("Coverage regressions", ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none"),
+        ("Blocker reasons", ", ".join(_string_list(review.get("blocker_reasons"))) or "none"),
         ("Out dir", comparison.get("out_dir")),
         ("Command", _display_command(comparison.get("command"))),
     ]

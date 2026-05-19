@@ -18,6 +18,7 @@ from minigpt.training_portfolio_batch import (
     write_training_portfolio_batch_outputs,
     write_training_portfolio_batch_html as facade_write_training_portfolio_batch_html,
     write_training_portfolio_batch_markdown as facade_write_training_portfolio_batch_markdown,
+    _comparison_review_summary,
 )
 from minigpt.training_portfolio_batch_artifacts import (
     render_training_portfolio_batch_html,
@@ -161,14 +162,42 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             comparison = json.loads((root / "batch" / "comparison" / "training_portfolio_comparison.json").read_text(encoding="utf-8"))
             self.assertEqual(comparison["portfolio_count"], 2)
             self.assertEqual(comparison["summary"]["planned_count"], 2)
+            self.assertEqual(report["comparison_review_summary"]["review_action_count"], comparison["summary"]["review_action_count"])
+            self.assertGreaterEqual(report["comparison_review_summary"]["review_action_count"], 2)
+            self.assertEqual(report["comparison_review_summary"]["blocker_action_count"], 0)
             self.assertEqual(report["summary"]["pair_mode_counts"], {"same_checkpoint_baseline": 2})
             self.assertEqual(report["variant_results"][0]["pair_mode"], "same_checkpoint_baseline")
+            self.assertIn("Review batch comparison actions", " ".join(report["recommendations"]))
             artifact_outputs = artifact_write_training_portfolio_batch_outputs(report, root / "batch-copy")
             self.assertEqual(set(artifact_outputs), {"json", "csv", "markdown", "html"})
             self.assertTrue(Path(artifact_outputs["json"]).exists())
             self.assertTrue(Path(artifact_outputs["csv"]).exists())
             self.assertTrue(Path(artifact_outputs["markdown"]).exists())
             self.assertTrue(Path(artifact_outputs["html"]).exists())
+
+    def test_batch_comparison_review_summary_carries_blockers(self) -> None:
+        comparison_report = {
+            "summary": {
+                "review_action_count": 2,
+                "blocker_action_count": 1,
+                "maturity_review_count": 1,
+                "maturity_review_names": ["candidate"],
+                "maturity_coverage_regression_count": 1,
+                "maturity_coverage_regression_names": ["candidate"],
+            },
+            "review_actions": [
+                {"portfolio": "candidate", "severity": "blocker", "reason": "best_score_coverage_regressed"},
+                {"portfolio": "shadow", "severity": "review", "reason": "dataset_card_review"},
+            ],
+        }
+
+        summary = _comparison_review_summary(comparison_report)
+
+        self.assertEqual(summary["review_action_count"], 2)
+        self.assertEqual(summary["blocker_action_count"], 1)
+        self.assertEqual(summary["maturity_coverage_regression_names"], ["candidate"])
+        self.assertEqual(summary["blocker_reasons"], ["best_score_coverage_regressed"])
+        self.assertEqual(summary["blocker_portfolios"], ["candidate"])
 
     def test_load_variants_accepts_object_or_list(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -213,8 +242,10 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
 
             self.assertIn("## Variants", markdown)
             self.assertIn("Pair modes: `same_checkpoint_baseline=1`", markdown)
+            self.assertIn("Comparison review actions", markdown)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("same_checkpoint_baseline", html)
+            self.assertIn("Review actions", html)
             self.assertNotIn("<strong><base>", html)
 
     def test_facade_keeps_artifact_identity(self) -> None:
