@@ -31,6 +31,7 @@ class TrainingScalePromotionTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ready_variant_count"], 1)
             self.assertEqual(report["summary"]["checkpoint_count"], 1)
             self.assertEqual(report["summary"]["registry_count"], 1)
+            self.assertEqual(report["summary"]["handoff_selected_batch_review_status"], "clean")
             self.assertFalse(report["blockers"])
             self.assertFalse(report["review_items"])
 
@@ -105,6 +106,36 @@ class TrainingScalePromotionTests(unittest.TestCase):
             self.assertIn("Handoff strict suite", html)
             self.assertIn("Selected suite", html)
 
+    def test_carries_handoff_batch_review_into_promotion_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(root, selected_batch_review_status="review")
+
+            report = build_training_scale_promotion(handoff_dir)
+            outputs = write_training_scale_promotion_outputs(report, root / "promotion")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_promotion_markdown(report)
+            html = render_training_scale_promotion_html(report)
+
+            self.assertEqual(report["summary"]["promotion_status"], "promoted")
+            self.assertEqual(report["summary"]["handoff_selected_batch_review_status"], "review")
+            self.assertEqual(report["summary"]["handoff_selected_batch_comparison_review_action_count"], 2)
+            self.assertIn("handoff_selected_batch_review_status", csv_text)
+            self.assertIn("Handoff selected batch review status", markdown)
+            self.assertIn("Batch review status", html)
+
+    def test_handoff_batch_blocker_changes_promotion_recommendation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(root, selected_batch_review_status="blocker")
+
+            report = build_training_scale_promotion(handoff_dir)
+
+            self.assertEqual(report["summary"]["promotion_status"], "promoted")
+            self.assertEqual(report["summary"]["handoff_selected_batch_review_status"], "blocker")
+            self.assertEqual(report["summary"]["handoff_selected_batch_comparison_blocker_action_count"], 1)
+            self.assertTrue(any("Resolve selected batch comparison blocker actions" in item for item in report["recommendations"]))
+
     def test_facade_keeps_legacy_artifact_exports(self) -> None:
         self.assertIs(
             training_scale_promotion_facade.write_training_scale_promotion_outputs,
@@ -120,7 +151,13 @@ class TrainingScalePromotionTests(unittest.TestCase):
         )
 
 
-def make_completed_handoff_tree(root: Path, missing: set[str] | None = None, *, include_suite_guard: bool = False) -> Path:
+def make_completed_handoff_tree(
+    root: Path,
+    missing: set[str] | None = None,
+    *,
+    include_suite_guard: bool = False,
+    selected_batch_review_status: str = "clean",
+) -> Path:
     missing = missing or set()
     scale_root = root / "runs" / "scale"
     batch_root = scale_root / "batch"
@@ -188,7 +225,19 @@ def make_completed_handoff_tree(root: Path, missing: set[str] | None = None, *, 
     )
     (batch_root / "training_portfolio_batch.html").write_text("<html>batch</html>", encoding="utf-8")
     handoff_payload = {
-        "summary": {"handoff_status": "completed", "artifact_count": 6, "available_artifact_count": 6},
+        "summary": {
+            "handoff_status": "completed",
+            "artifact_count": 6,
+            "available_artifact_count": 6,
+            "selected_batch_review_status": selected_batch_review_status,
+            "selected_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+            "selected_batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+            "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "batch_comparison_blocker_reasons": ["coverage-regressed"] if selected_batch_review_status == "blocker" else [],
+        },
         "execution": {"status": "completed", "returncode": 0},
         "command": [
             "python",

@@ -568,6 +568,9 @@ c/254/解释/说明.md
 c/255/图片
 c/255/解释/说明.md
  -> v255 handoff batch review propagation 的运行截图和解释
+c/256/图片
+c/256/解释/说明.md
+ -> v256 promotion batch review propagation 的运行截图和解释
 ```
 
 写入规则：

@@ -263,6 +263,14 @@ def _summary(
         "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
         "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
         "handoff_selected_suite_path": suite_guard.get("handoff_selected_suite_path"),
+        "handoff_selected_batch_review_status": suite_guard.get("handoff_selected_batch_review_status"),
+        "handoff_selected_batch_comparison_review_action_count": suite_guard.get("handoff_selected_batch_comparison_review_action_count"),
+        "handoff_selected_batch_comparison_blocker_action_count": suite_guard.get("handoff_selected_batch_comparison_blocker_action_count"),
+        "handoff_selected_batch_maturity_coverage_regression_count": suite_guard.get("handoff_selected_batch_maturity_coverage_regression_count"),
+        "handoff_batch_comparison_review_action_count": suite_guard.get("handoff_batch_comparison_review_action_count"),
+        "handoff_batch_comparison_blocker_action_count": suite_guard.get("handoff_batch_comparison_blocker_action_count"),
+        "handoff_batch_maturity_coverage_regression_count": suite_guard.get("handoff_batch_maturity_coverage_regression_count"),
+        "handoff_batch_comparison_blocker_reasons": suite_guard.get("handoff_batch_comparison_blocker_reasons"),
         "scale_run_status": scale_run.get("status"),
         "batch_status": _nested(batch, "execution", "status") or _nested(scale_run, "batch_summary", "status"),
         "variant_count": len(variants),
@@ -306,6 +314,10 @@ def _batch_digest(batch: dict[str, Any]) -> dict[str, Any]:
 
 def _recommendations(summary: dict[str, Any], blockers: list[str], review_items: list[str]) -> list[str]:
     status = str(summary.get("promotion_status") or "")
+    if summary.get("handoff_selected_batch_review_status") == "blocker":
+        return ["Resolve selected batch comparison blocker actions before treating this handoff as promotion-ready evidence."]
+    if summary.get("handoff_selected_batch_review_status") == "review":
+        return ["Review selected batch comparison actions before treating this handoff as promotion-ready evidence."]
     if status == "promoted":
         return [
             "Use the promoted variant as a stable local baseline for the next training-scale comparison.",
@@ -332,9 +344,23 @@ def _suite_guard(handoff: dict[str, Any]) -> dict[str, Any]:
         "handoff_suite_consistency": first_present(guard.get("suite_consistency"), handoff_summary.get("suite_consistency")),
         "handoff_suite_mismatch_count": first_present(guard.get("suite_mismatch_count"), handoff_summary.get("suite_mismatch_count")),
         "handoff_selected_suite_path": first_present(guard.get("selected_suite_path"), handoff_summary.get("selected_suite_path")),
+        "handoff_selected_batch_review_status": _handoff_value(handoff, "selected_batch_review_status"),
+        "handoff_selected_batch_comparison_review_action_count": _handoff_value(handoff, "selected_batch_comparison_review_action_count"),
+        "handoff_selected_batch_comparison_blocker_action_count": _handoff_value(handoff, "selected_batch_comparison_blocker_action_count"),
+        "handoff_selected_batch_maturity_coverage_regression_count": _handoff_value(handoff, "selected_batch_maturity_coverage_regression_count"),
+        "handoff_batch_comparison_review_action_count": _handoff_value(handoff, "batch_comparison_review_action_count"),
+        "handoff_batch_comparison_blocker_action_count": _handoff_value(handoff, "batch_comparison_blocker_action_count"),
+        "handoff_batch_maturity_coverage_regression_count": _handoff_value(handoff, "batch_maturity_coverage_regression_count"),
+        "handoff_batch_comparison_blocker_reasons": _string_list(_handoff_value(handoff, "batch_comparison_blocker_reasons")),
         "workflow_suite_path": guard.get("workflow_suite_path") or handoff_summary.get("workflow_suite_path"),
         "workflow_suite_name": guard.get("workflow_suite_name") or handoff_summary.get("workflow_suite_name"),
     }
+
+
+def _handoff_value(handoff: dict[str, Any], key: str) -> Any:
+    handoff_summary = _dict(handoff.get("summary"))
+    decision_summary = _dict(handoff.get("decision_summary"))
+    return first_present(handoff_summary.get(key), decision_summary.get(key))
 
 
 def _artifact_exists(rows: list[dict[str, Any]], key: str) -> bool:
