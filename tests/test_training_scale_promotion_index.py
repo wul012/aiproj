@@ -112,6 +112,39 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("Handoff strict suite", html)
             self.assertIn("Suite mismatches", html)
 
+    def test_carries_handoff_batch_review_context_into_index_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            alpha = make_promotion(root, "alpha", "promoted", selected_batch_review_status="blocker")
+            beta = make_promotion(root, "beta", "promoted", selected_batch_review_status="review")
+
+            report = build_training_scale_promotion_index([alpha, beta], names=["alpha-run", "beta-run"])
+            outputs = write_training_scale_promotion_index_outputs(report, root / "index")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+
+            row = report["promotions"][0]
+            summary = report["summary"]
+            self.assertTrue(row["promoted_for_comparison"])
+            self.assertEqual(row["handoff_selected_batch_review_status"], "blocker")
+            self.assertEqual(row["handoff_selected_batch_comparison_blocker_action_count"], 1)
+            self.assertEqual(summary["comparison_ready_count"], 2)
+            self.assertEqual(summary["handoff_selected_batch_review_count"], 1)
+            self.assertEqual(summary["handoff_selected_batch_blocker_count"], 1)
+            self.assertEqual(summary["handoff_selected_batch_comparison_review_action_total"], 4)
+            self.assertEqual(summary["handoff_selected_batch_comparison_blocker_action_total"], 1)
+            self.assertEqual(summary["handoff_batch_comparison_review_action_total"], 4)
+            self.assertEqual(summary["handoff_batch_comparison_blocker_action_total"], 1)
+            self.assertEqual(summary["handoff_batch_comparison_blocker_reasons"], ["coverage-regressed"])
+            self.assertIn("Resolve selected handoff batch blocker actions", " ".join(report["recommendations"]))
+            self.assertIn("handoff_selected_batch_review_status", csv_text)
+            self.assertIn("Batch Review", markdown)
+            self.assertIn("Selected batch blockers", markdown)
+            self.assertIn("Batch Blockers", markdown)
+            self.assertIn("Batch Review", html)
+            self.assertIn("Batch blocker actions", html)
+
     def test_index_script_reports_suite_guard_counts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -140,6 +173,8 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("handoff_suite_consistent_count=2", completed.stdout)
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
             self.assertIn("handoff_selected_suite_path_count=2", completed.stdout)
+            self.assertIn("handoff_selected_batch_review_count=0", completed.stdout)
+            self.assertIn("handoff_batch_comparison_blocker_action_total=0", completed.stdout)
             self.assertTrue((out_dir / "training_scale_promotion_index.json").exists())
             self.assertTrue((out_dir / "training_scale_promotion_index.html").exists())
 
@@ -163,6 +198,7 @@ def make_promotion(
     title: str | None = None,
     *,
     include_suite_guard: bool = False,
+    selected_batch_review_status: str = "clean",
 ) -> Path:
     promotion_root = root / name / "promotion"
     run_root = root / name / "scale-run"
@@ -213,6 +249,19 @@ def make_promotion(
             "available_required_artifact_count": 9 if status == "promoted" else 7,
             "blocker_count": 1 if status == "blocked" else 0,
             "review_item_count": 1 if status == "review" else 0,
+            "handoff_selected_batch_review_status": selected_batch_review_status,
+            "handoff_selected_batch_comparison_review_action_count": (
+                2 if selected_batch_review_status in {"review", "blocker"} else 0
+            ),
+            "handoff_selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+            "handoff_selected_batch_maturity_coverage_regression_count": (
+                1 if selected_batch_review_status in {"review", "blocker"} else 0
+            ),
+            "handoff_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "handoff_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+            "handoff_batch_comparison_blocker_reasons": (
+                ["coverage-regressed"] if selected_batch_review_status == "blocker" else []
+            ),
             **summary_suite_fields,
         },
         "suite_guard": suite_guard,

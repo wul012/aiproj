@@ -69,6 +69,19 @@ def _promotion_row(report: dict[str, Any], name: str, index: int) -> dict[str, A
         "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
         "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
         "handoff_selected_suite_path": suite_guard.get("handoff_selected_suite_path"),
+        "handoff_selected_batch_review_status": summary.get("handoff_selected_batch_review_status"),
+        "handoff_selected_batch_comparison_review_action_count": summary.get(
+            "handoff_selected_batch_comparison_review_action_count"
+        ),
+        "handoff_selected_batch_comparison_blocker_action_count": summary.get(
+            "handoff_selected_batch_comparison_blocker_action_count"
+        ),
+        "handoff_selected_batch_maturity_coverage_regression_count": summary.get(
+            "handoff_selected_batch_maturity_coverage_regression_count"
+        ),
+        "handoff_batch_comparison_review_action_count": summary.get("handoff_batch_comparison_review_action_count"),
+        "handoff_batch_comparison_blocker_action_count": summary.get("handoff_batch_comparison_blocker_action_count"),
+        "handoff_batch_comparison_blocker_reasons": _string_list(summary.get("handoff_batch_comparison_blocker_reasons")),
         "primary_variant": primary.get("name"),
         "primary_variant_status": primary.get("promotion_status"),
         "primary_portfolio_json": primary.get("portfolio_json"),
@@ -152,6 +165,31 @@ def _summary(promotions: list[dict[str, Any]], comparison_inputs: dict[str, Any]
         "handoff_suite_consistent_count": sum(1 for row in promotions if row.get("handoff_suite_consistency") == "consistent"),
         "handoff_suite_mismatch_total": sum(_int(row.get("handoff_suite_mismatch_count")) for row in promotions),
         "handoff_selected_suite_path_count": sum(1 for row in promotions if row.get("handoff_selected_suite_path")),
+        "handoff_selected_batch_review_count": sum(
+            1 for row in promotions if row.get("handoff_selected_batch_review_status") == "review"
+        ),
+        "handoff_selected_batch_blocker_count": sum(
+            1 for row in promotions if row.get("handoff_selected_batch_review_status") == "blocker"
+        ),
+        "handoff_selected_batch_comparison_review_action_total": sum(
+            _int(row.get("handoff_selected_batch_comparison_review_action_count")) for row in promotions
+        ),
+        "handoff_selected_batch_comparison_blocker_action_total": sum(
+            _int(row.get("handoff_selected_batch_comparison_blocker_action_count")) for row in promotions
+        ),
+        "handoff_batch_comparison_review_action_total": sum(
+            _int(row.get("handoff_batch_comparison_review_action_count")) for row in promotions
+        ),
+        "handoff_batch_comparison_blocker_action_total": sum(
+            _int(row.get("handoff_batch_comparison_blocker_action_count")) for row in promotions
+        ),
+        "handoff_batch_comparison_blocker_reasons": sorted(
+            {
+                reason
+                for row in promotions
+                for reason in _string_list(row.get("handoff_batch_comparison_blocker_reasons"))
+            }
+        ),
     }
 
 
@@ -159,16 +197,28 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
     ready_count = _int(summary.get("comparison_ready_count"))
     blocked_count = _int(summary.get("blocked_count"))
     review_count = _int(summary.get("review_count"))
+    batch_blockers = _int(summary.get("handoff_selected_batch_blocker_count"))
+    batch_reviews = _int(summary.get("handoff_selected_batch_review_count"))
     if ready_count >= 2:
-        return [
+        items = [
             "Run the generated compare command to compare only promoted training scale runs.",
             "Keep review and blocked promotions out of baseline selection until their evidence is fixed.",
         ]
+        if batch_blockers:
+            items.append("Resolve selected handoff batch blocker actions before treating promoted compare inputs as clean evidence.")
+        elif batch_reviews:
+            items.append("Review selected handoff batch actions before treating promoted compare inputs as clean evidence.")
+        return items
     if ready_count == 1:
-        return [
+        items = [
             "Use the single promoted run as the baseline candidate and add another promoted run before comparison.",
             "Do not compare review or blocked promotions against the baseline as model capability evidence.",
         ]
+        if batch_blockers:
+            items.append("Resolve selected handoff batch blocker actions before using this single promoted run as baseline evidence.")
+        elif batch_reviews:
+            items.append("Review selected handoff batch actions before using this single promoted run as baseline evidence.")
+        return items
     if blocked_count or review_count:
         return ["Resolve review or blocked promotions before building a training scale comparison."]
     return ["Create at least one promoted training scale promotion before building the index."]

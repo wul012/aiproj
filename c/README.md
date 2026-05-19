@@ -571,6 +571,9 @@ c/255/解释/说明.md
 c/256/图片
 c/256/解释/说明.md
  -> v256 promotion batch review propagation 的运行截图和解释
+c/257/图片
+c/257/解释/说明.md
+ -> v257 promotion index batch review propagation 的运行截图和解释
 ```
 
 写入规则：

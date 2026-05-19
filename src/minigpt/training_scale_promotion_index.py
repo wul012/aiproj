@@ -80,6 +80,11 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
         "handoff_suite_consistency",
         "handoff_suite_mismatch_count",
         "handoff_selected_suite_path",
+        "handoff_selected_batch_review_status",
+        "handoff_selected_batch_comparison_review_action_count",
+        "handoff_selected_batch_comparison_blocker_action_count",
+        "handoff_batch_comparison_review_action_count",
+        "handoff_batch_comparison_blocker_action_count",
         "variant_count",
         "ready_variant_count",
         "required_artifacts",
@@ -105,6 +110,19 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
                     "handoff_suite_consistency": row.get("handoff_suite_consistency"),
                     "handoff_suite_mismatch_count": row.get("handoff_suite_mismatch_count"),
                     "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
+                    "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
+                    "handoff_selected_batch_comparison_review_action_count": row.get(
+                        "handoff_selected_batch_comparison_review_action_count"
+                    ),
+                    "handoff_selected_batch_comparison_blocker_action_count": row.get(
+                        "handoff_selected_batch_comparison_blocker_action_count"
+                    ),
+                    "handoff_batch_comparison_review_action_count": row.get(
+                        "handoff_batch_comparison_review_action_count"
+                    ),
+                    "handoff_batch_comparison_blocker_action_count": row.get(
+                        "handoff_batch_comparison_blocker_action_count"
+                    ),
                     "variant_count": row.get("variant_count"),
                     "ready_variant_count": row.get("ready_variant_count"),
                     "required_artifacts": row.get("required_artifact_count"),
@@ -133,13 +151,17 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         f"- Handoff suite consistent: `{summary.get('handoff_suite_consistent_count')}`",
         f"- Handoff suite mismatches: `{summary.get('handoff_suite_mismatch_total')}`",
         f"- Selected suite references: `{summary.get('handoff_selected_suite_path_count')}`",
+        f"- Selected batch reviews: `{summary.get('handoff_selected_batch_review_count')}`",
+        f"- Selected batch blockers: `{summary.get('handoff_selected_batch_blocker_count')}`",
+        f"- Batch comparison reviews: `{summary.get('handoff_batch_comparison_review_action_total')}`",
+        f"- Batch comparison blockers: `{summary.get('handoff_batch_comparison_blocker_action_total')}`",
         f"- Compare command ready: `{summary.get('compare_command_ready')}`",
         f"- Baseline: `{comparison.get('baseline_name')}`",
         "",
         "## Promotions",
         "",
-        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Suite Mismatches | Selected Suite | Variants | Required Artifacts | Primary Variant | Scale Run |",
-        "| --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | --- | --- |",
+        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Suite Mismatches | Selected Suite | Batch Review | Batch Blockers | Variants | Required Artifacts | Primary Variant | Scale Run |",
+        "| --- | --- | --- | --- | --- | ---: | --- | --- | ---: | ---: | ---: | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -153,6 +175,8 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
                     _md(row.get("handoff_suite_consistency")),
                     _md(row.get("handoff_suite_mismatch_count")),
                     _md(row.get("handoff_selected_suite_path")),
+                    _md(row.get("handoff_selected_batch_review_status")),
+                    _md(row.get("handoff_selected_batch_comparison_blocker_action_count")),
                     _md(row.get("variant_count")),
                     _md(f"{row.get('available_required_artifact_count')}/{row.get('required_artifact_count')}"),
                     _md(row.get("primary_variant")),
@@ -193,6 +217,10 @@ def render_training_scale_promotion_index_html(report: dict[str, Any]) -> str:
         ("Handoff suite consistent", summary.get("handoff_suite_consistent_count")),
         ("Suite mismatches", summary.get("handoff_suite_mismatch_total")),
         ("Selected suite refs", summary.get("handoff_selected_suite_path_count")),
+        ("Batch reviews", summary.get("handoff_selected_batch_review_count")),
+        ("Batch blockers", summary.get("handoff_selected_batch_blocker_count")),
+        ("Batch review actions", summary.get("handoff_batch_comparison_review_action_total")),
+        ("Batch blocker actions", summary.get("handoff_batch_comparison_blocker_action_total")),
         ("Command ready", summary.get("compare_command_ready")),
         ("Baseline", comparison.get("baseline_name")),
     ]
@@ -270,6 +298,8 @@ def _promotions_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('handoff_suite_consistency'))}</td>"
             f"<td>{_e(row.get('handoff_suite_mismatch_count'))}</td>"
             f"<td>{_e(row.get('handoff_selected_suite_path'))}</td>"
+            f"<td>{_e(row.get('handoff_selected_batch_review_status'))}</td>"
+            f"<td>{_e(row.get('handoff_selected_batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e(row.get('ready_variant_count'))}/{_e(row.get('variant_count'))}</td>"
             f"<td>{_e(row.get('available_required_artifact_count'))}/{_e(row.get('required_artifact_count'))}</td>"
             f"<td>{_e(row.get('primary_variant'))}</td>"
@@ -278,7 +308,7 @@ def _promotions_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Promotions</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Batch Review</th><th>Batch Blockers</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

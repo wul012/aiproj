@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+271-v257-promotion-index-batch-review-propagation.md
+ -> v257 code explanation: carry promotion-level handoff selected batch review/blocker context into training scale promotion index rows, summaries, artifacts, CLI output, and recommendations.
 270-v256-promotion-batch-review-propagation.md
  -> v256 code explanation: carry handoff selected batch review/blocker context into training scale promotion summaries, artifacts, and recommendations.
 269-v255-handoff-batch-review-propagation.md
