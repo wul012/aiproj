@@ -38,6 +38,11 @@ def write_training_portfolio_comparison_csv(report: dict[str, Any], path: str | 
         "dataset_quality_status",
         "dataset_warning_count",
         "maturity_portfolio_status",
+        "maturity_release_readiness_trend",
+        "maturity_release_readiness_test_coverage_regression_count",
+        "maturity_release_readiness_test_coverage_status_changed_count",
+        "maturity_release_readiness_max_test_coverage_percent_delta",
+        "maturity_release_readiness_max_test_coverage_gap_delta",
         "baseline_name",
         "is_baseline",
         "artifact_coverage_delta",
@@ -47,6 +52,8 @@ def write_training_portfolio_comparison_csv(report: dict[str, Any], path: str | 
         "final_val_loss_delta",
         "final_val_loss_relation",
         "dataset_warning_delta",
+        "maturity_release_readiness_trend_changed",
+        "maturity_release_readiness_test_coverage_regression_delta",
         "overall_relation",
         "explanation",
     ]
@@ -84,7 +91,10 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
         f"| Dataset warnings | {_md(summary.get('dataset_warning_count'))} |",
         f"| Maturity reviews | {_md(summary.get('maturity_review_count'))} |",
         f"| Maturity review portfolios | {_md(', '.join(_string_list(summary.get('maturity_review_names'))) or 'none')} |",
+        f"| Maturity coverage regressions | {_md(summary.get('maturity_coverage_regression_count'))} |",
+        f"| Maturity coverage portfolios | {_md(', '.join(_string_list(summary.get('maturity_coverage_regression_names'))) or 'none')} |",
         f"| Best score maturity | {_md(summary.get('best_score_maturity_status'))} |",
+        f"| Best score release readiness trend | {_md(summary.get('best_score_maturity_release_readiness_trend'))} |",
         f"| Review actions | {_md(summary.get('review_action_count'))} |",
         f"| Blocker actions | {_md(summary.get('blocker_action_count'))} |",
         "",
@@ -107,7 +117,11 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
                     _md(f"{_fmt(portfolio.get('overall_score'))} ({_fmt_signed(delta.get('overall_score_delta'))})"),
                     _md(f"{_fmt(portfolio.get('final_val_loss'))} ({_fmt_signed(delta.get('final_val_loss_delta'))})"),
                     _md(portfolio.get("dataset_readiness_status")),
-                    _md(portfolio.get("maturity_portfolio_status")),
+                    _md(
+                        f"{portfolio.get('maturity_portfolio_status')} / "
+                        f"{portfolio.get('maturity_release_readiness_trend') or 'missing'} / "
+                        f"coverage={portfolio.get('maturity_release_readiness_test_coverage_regression_count') or 0}"
+                    ),
                     _md(delta.get("explanation")),
                 ]
             )
@@ -170,7 +184,10 @@ def render_training_portfolio_comparison_html(report: dict[str, Any]) -> str:
         ("Score regressed", summary.get("score_regression_count")),
         ("Best score", _pick(_dict(report.get("best_by_overall_score")), "name")),
         ("Best score maturity", summary.get("best_score_maturity_status")),
+        ("Best score release trend", summary.get("best_score_maturity_release_readiness_trend")),
         ("Maturity reviews", ", ".join(_string_list(summary.get("maturity_review_names"))) or "none"),
+        ("Coverage regressions", summary.get("maturity_coverage_regression_count")),
+        ("Coverage regression portfolios", ", ".join(_string_list(summary.get("maturity_coverage_regression_names"))) or "none"),
         ("Review actions", summary.get("review_action_count")),
         ("Blocker actions", summary.get("blocker_action_count")),
         ("Best val loss", _pick(_dict(report.get("best_by_final_val_loss")), "name")),
@@ -260,7 +277,7 @@ def _portfolio_table(report: dict[str, Any]) -> str:
             f"<td>{_e(_fmt(item.get('rubric_avg_score')))}<br><span>{_e(_fmt_signed(delta.get('rubric_avg_score_delta')))}</span></td>"
             f"<td>{_e(_fmt(item.get('final_val_loss')))}<br><span>{_e(delta.get('final_val_loss_relation'))}</span></td>"
             f"<td>{_e(item.get('dataset_readiness_status'))}<br><span>warnings={_e(item.get('dataset_warning_count'))}</span></td>"
-            f"<td>{_e(item.get('maturity_portfolio_status'))}</td>"
+            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)}</span></td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )

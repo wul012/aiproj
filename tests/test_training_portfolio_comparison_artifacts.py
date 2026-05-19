@@ -42,6 +42,11 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
                     "dataset_quality_status": "pass",
                     "dataset_warning_count": 0,
                     "maturity_portfolio_status": "ready",
+                    "maturity_release_readiness_trend": "stable",
+                    "maturity_release_readiness_test_coverage_regression_count": 0,
+                    "maturity_release_readiness_test_coverage_status_changed_count": 0,
+                    "maturity_release_readiness_max_test_coverage_percent_delta": 0,
+                    "maturity_release_readiness_max_test_coverage_gap_delta": 0,
                     "completed_steps": 2,
                     "step_count": 2,
                     "core_artifacts": [{"key": "run_manifest", "path": "runs/base/run_manifest.json", "exists": True}],
@@ -67,14 +72,19 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
                     "dataset_quality_status": "warn",
                     "dataset_warning_count": 1,
                     "maturity_portfolio_status": "review",
+                    "maturity_release_readiness_trend": "coverage-regressed",
+                    "maturity_release_readiness_test_coverage_regression_count": 1,
+                    "maturity_release_readiness_test_coverage_status_changed_count": 1,
+                    "maturity_release_readiness_max_test_coverage_percent_delta": 7.5,
+                    "maturity_release_readiness_max_test_coverage_gap_delta": 2,
                     "completed_steps": 2,
                     "step_count": 2,
                     "core_artifacts": [{"key": "run_manifest", "path": "runs/candidate/run_manifest.json", "exists": True}],
                 },
             ],
             "baseline_deltas": [
-                {"name": "base", "baseline_name": "base", "is_baseline": True, "artifact_coverage_delta": 0, "available_artifact_delta": 0, "overall_score_delta": 0, "rubric_avg_score_delta": 0, "final_val_loss_delta": 0, "final_val_loss_relation": "baseline", "dataset_warning_delta": 0, "overall_relation": "baseline", "explanation": "Baseline portfolio."},
-                {"name": "candidate", "baseline_name": "base", "is_baseline": False, "artifact_coverage_delta": -0.125, "available_artifact_delta": -1, "overall_score_delta": 6, "rubric_avg_score_delta": 4, "final_val_loss_delta": -0.3, "final_val_loss_relation": "improved", "dataset_warning_delta": 1, "overall_relation": "improved", "explanation": "overall +6; final val loss -0.3; artifact coverage regressed"},
+                {"name": "base", "baseline_name": "base", "is_baseline": True, "artifact_coverage_delta": 0, "available_artifact_delta": 0, "overall_score_delta": 0, "rubric_avg_score_delta": 0, "final_val_loss_delta": 0, "final_val_loss_relation": "baseline", "dataset_warning_delta": 0, "maturity_release_readiness_trend_changed": False, "maturity_release_readiness_test_coverage_regression_delta": 0, "overall_relation": "baseline", "explanation": "Baseline portfolio."},
+                {"name": "candidate", "baseline_name": "base", "is_baseline": False, "artifact_coverage_delta": -0.125, "available_artifact_delta": -1, "overall_score_delta": 6, "rubric_avg_score_delta": 4, "final_val_loss_delta": -0.3, "final_val_loss_relation": "improved", "dataset_warning_delta": 1, "maturity_release_readiness_trend_changed": True, "maturity_release_readiness_test_coverage_regression_delta": 1, "overall_relation": "improved", "explanation": "overall +6; final val loss -0.3; artifact coverage regressed; release-readiness coverage regressed"},
             ],
             "summary": {
                 "completed_count": 2,
@@ -86,7 +96,11 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
                 "dataset_warning_count": 1,
                 "maturity_review_count": 1,
                 "maturity_review_names": ["candidate"],
+                "maturity_coverage_regression_count": 1,
+                "maturity_coverage_regression_names": ["candidate"],
                 "best_score_maturity_status": "review",
+                "best_score_maturity_release_readiness_trend": "coverage-regressed",
+                "best_score_maturity_release_readiness_test_coverage_regression_count": 1,
                 "review_action_count": 1,
                 "blocker_action_count": 1,
             },
@@ -112,14 +126,20 @@ class TrainingPortfolioComparisonArtifactSplitTests(unittest.TestCase):
             html = training_portfolio_comparison_artifacts.render_training_portfolio_comparison_html(report)
 
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
-            self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            self.assertIn("overall_score_delta", csv_text)
+            self.assertIn("maturity_release_readiness_test_coverage_regression_count", csv_text)
             self.assertIn("Best score maturity", markdown)
             self.assertIn("Maturity review portfolios", markdown)
+            self.assertIn("Maturity coverage regressions", markdown)
+            self.assertIn("Best score release readiness trend", markdown)
             self.assertIn("## Review Actions", markdown)
             self.assertIn("best_score_maturity_review", markdown)
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Best score maturity", html)
             self.assertIn("Maturity reviews", html)
+            self.assertIn("Coverage regressions", html)
+            self.assertIn("Best score release trend", html)
             self.assertIn("Review Actions", html)
             self.assertIn("best_score_maturity_review", html)
             self.assertIn("Training portfolio &lt;comparison&gt;", html)

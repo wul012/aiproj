@@ -550,6 +550,9 @@ c/248/解释/说明.md
 c/249/图片
 c/249/解释/说明.md
  -> v249 coverage governance chain test 的运行截图和解释
+c/250/图片
+c/250/解释/说明.md
+ -> v250 portfolio comparison coverage review 的运行截图和解释
 ```
 
 写入规则：

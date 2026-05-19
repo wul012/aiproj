@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+264-v250-portfolio-comparison-coverage-review.md
+ -> v250 code explanation: make training portfolio comparison consume maturity narrative coverage regressions and block best-score promotion when coverage evidence regresses.
 263-v249-coverage-governance-chain-test.md
  -> v249 code explanation: add an end-to-end regression test that protects coverage regression flow from readiness comparison through registry, maturity summary, and maturity narrative.
 262-v248-maturity-narrative-coverage-regression-context.md

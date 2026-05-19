@@ -35,6 +35,8 @@ def make_portfolio(
     status: str = "completed",
     dataset_warnings: int = 0,
     maturity_status: str = "ready",
+    maturity_release_trend: str = "stable",
+    coverage_regression_count: int = 0,
     relative_artifacts: bool = False,
     missing_artifacts: set[str] | None = None,
 ) -> Path:
@@ -84,7 +86,11 @@ def make_portfolio(
                 "schema_version": 1,
                 "summary": {
                     "portfolio_status": maturity_status,
-                    "release_readiness_trend_status": "stable",
+                    "release_readiness_trend_status": maturity_release_trend,
+                    "release_readiness_test_coverage_regression_count": coverage_regression_count,
+                    "release_readiness_test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
+                    "release_readiness_max_test_coverage_percent_delta": 8.5 if coverage_regression_count else 0,
+                    "release_readiness_max_test_coverage_gap_delta": 3 if coverage_regression_count else 0,
                     "request_history_status": "pass",
                 },
             },
@@ -192,10 +198,13 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["artifact_regression_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_names"], ["review"])
+            self.assertEqual(report["summary"]["maturity_coverage_regression_count"], 0)
+            self.assertEqual(report["summary"]["maturity_coverage_regression_names"], [])
             self.assertEqual(report["summary"]["review_action_count"], 4)
             self.assertEqual(report["summary"]["blocker_action_count"], 0)
             self.assertEqual(report["summary"]["best_score_name"], "candidate")
             self.assertEqual(report["summary"]["best_score_maturity_status"], "ready")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_trend"], "stable")
             candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
             self.assertEqual(candidate_delta["overall_relation"], "improved")
             self.assertEqual(candidate_delta["final_val_loss_relation"], "improved")
@@ -236,6 +245,40 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["review_actions"][0]["severity"], "blocker")
             self.assertIn("best-scoring portfolio's maturity narrative", " ".join(report["recommendations"]))
 
+    def test_best_scoring_coverage_regressed_portfolio_blocks_promotion(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_portfolio(root, "baseline", overall_score=82, rubric_score=80, final_val_loss=1.2, best_val_loss=1.1)
+            candidate = make_portfolio(
+                root,
+                "candidate",
+                overall_score=92,
+                rubric_score=88,
+                final_val_loss=0.9,
+                best_val_loss=0.88,
+                maturity_release_trend="coverage-regressed",
+                coverage_regression_count=2,
+            )
+
+            report = build_training_portfolio_comparison([baseline, candidate], names=["base", "candidate"], baseline="base")
+
+            self.assertEqual(report["summary"]["best_score_name"], "candidate")
+            self.assertEqual(report["summary"]["best_score_maturity_status"], "ready")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_trend"], "coverage-regressed")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_test_coverage_regression_count"], 2)
+            self.assertEqual(report["summary"]["maturity_coverage_regression_count"], 1)
+            self.assertEqual(report["summary"]["maturity_coverage_regression_names"], ["candidate"])
+            self.assertEqual(report["summary"]["review_action_count"], 1)
+            self.assertEqual(report["summary"]["blocker_action_count"], 1)
+            self.assertEqual(report["review_actions"][0]["reason"], "best_score_coverage_regressed")
+            self.assertEqual(report["review_actions"][0]["severity"], "blocker")
+            self.assertEqual(report["review_actions"][0]["evidence"]["coverage_regression_count"], 2)
+            candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
+            self.assertTrue(candidate_delta["maturity_release_readiness_trend_changed"])
+            self.assertEqual(candidate_delta["maturity_release_readiness_test_coverage_regression_delta"], 2)
+            self.assertIn("release-readiness coverage regressed", candidate_delta["explanation"])
+            self.assertIn("coverage regressions", " ".join(report["recommendations"]))
+
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -262,10 +305,14 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Maturity review portfolios", markdown)
+            self.assertIn("Maturity coverage regressions", markdown)
+            self.assertIn("Best score release readiness trend", markdown)
             self.assertIn("## Review Actions", markdown)
             self.assertIn("Best score maturity", markdown)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("Maturity reviews", html)
+            self.assertIn("Coverage regressions", html)
+            self.assertIn("Best score release trend", html)
             self.assertIn("Review Actions", html)
             self.assertIn("Best score maturity", html)
             self.assertNotIn("<strong><base>", html)

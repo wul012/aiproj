@@ -28,6 +28,7 @@ CORE_ARTIFACT_KEYS = [
 ]
 
 REVIEW_STATUSES = {"review", "warn", "fail", "incomplete"}
+COVERAGE_REGRESSED_TREND = "coverage-regressed"
 
 
 def load_training_portfolio(path: str | Path) -> dict[str, Any]:
@@ -192,6 +193,22 @@ def _portfolio_summary(report: dict[str, Any], name: str, index: int) -> dict[st
         "dataset_warning_count": _as_int(dataset_summary.get("warning_count")) or 0,
         "maturity_portfolio_status": maturity_summary.get("portfolio_status"),
         "maturity_release_readiness_trend": maturity_summary.get("release_readiness_trend_status"),
+        "maturity_release_readiness_test_coverage_regression_count": _as_int(
+            maturity_summary.get("release_readiness_test_coverage_regression_count")
+        )
+        or 0,
+        "maturity_release_readiness_test_coverage_status_changed_count": _as_int(
+            maturity_summary.get("release_readiness_test_coverage_status_changed_count")
+        )
+        or 0,
+        "maturity_release_readiness_max_test_coverage_percent_delta": _as_float(
+            maturity_summary.get("release_readiness_max_test_coverage_percent_delta")
+        )
+        or 0.0,
+        "maturity_release_readiness_max_test_coverage_gap_delta": _as_int(
+            maturity_summary.get("release_readiness_max_test_coverage_gap_delta")
+        )
+        or 0,
         "maturity_request_history_status": maturity_summary.get("request_history_status"),
     }
 
@@ -239,6 +256,10 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
     artifact_delta = _numeric_delta(portfolio.get("artifact_coverage"), baseline.get("artifact_coverage"))
     available_artifact_delta = _int_delta(portfolio.get("available_artifact_count"), baseline.get("available_artifact_count"))
     dataset_warning_delta = _int_delta(portfolio.get("dataset_warning_count"), baseline.get("dataset_warning_count"))
+    coverage_regression_delta = _int_delta(
+        portfolio.get("maturity_release_readiness_test_coverage_regression_count"),
+        baseline.get("maturity_release_readiness_test_coverage_regression_count"),
+    )
     return {
         "name": portfolio.get("name"),
         "baseline_name": baseline.get("name"),
@@ -251,6 +272,8 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
         "final_val_loss_delta": val_loss_delta,
         "dataset_warning_delta": dataset_warning_delta,
         "maturity_status_changed": portfolio.get("maturity_portfolio_status") != baseline.get("maturity_portfolio_status"),
+        "maturity_release_readiness_trend_changed": portfolio.get("maturity_release_readiness_trend") != baseline.get("maturity_release_readiness_trend"),
+        "maturity_release_readiness_test_coverage_regression_delta": coverage_regression_delta,
         "overall_relation": "baseline" if is_baseline else _score_relation(overall_delta),
         "rubric_relation": "baseline" if is_baseline else _score_relation(rubric_delta),
         "artifact_relation": "baseline" if is_baseline else _score_relation(artifact_delta),
@@ -269,6 +292,7 @@ def _comparison_summary(
     best_artifact = _best_numeric(portfolios, "artifact_coverage", higher_is_better=True)
     lowest_val_loss = _best_numeric(portfolios, "final_val_loss", higher_is_better=False)
     maturity_review_rows = [item for item in portfolios if item.get("maturity_portfolio_status") in REVIEW_STATUSES]
+    maturity_coverage_rows = [item for item in portfolios if _has_maturity_coverage_regression(item)]
     return {
         "portfolio_count": len(portfolios),
         "baseline_name": baseline.get("name"),
@@ -283,8 +307,15 @@ def _comparison_summary(
         "dataset_warning_count": sum(int(item.get("dataset_warning_count") or 0) for item in portfolios),
         "maturity_review_count": len(maturity_review_rows),
         "maturity_review_names": [name for item in maturity_review_rows if (name := _as_str(item.get("name")))],
+        "maturity_coverage_regression_count": len(maturity_coverage_rows),
+        "maturity_coverage_regression_names": [name for item in maturity_coverage_rows if (name := _as_str(item.get("name")))],
         "best_score_name": _pick(best_score, "name"),
         "best_score_maturity_status": _pick(best_score, "maturity_portfolio_status"),
+        "best_score_maturity_release_readiness_trend": _pick(best_score, "maturity_release_readiness_trend"),
+        "best_score_maturity_release_readiness_test_coverage_regression_count": _pick(
+            best_score,
+            "maturity_release_readiness_test_coverage_regression_count",
+        ),
         "best_artifact_name": _pick(best_artifact, "name"),
         "lowest_val_loss_name": _pick(lowest_val_loss, "name"),
     }
@@ -307,6 +338,14 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
             recs.append("Review the best-scoring portfolio's maturity narrative before promoting it as a clean baseline.")
         else:
             recs.append("Review maturity-narrative findings for non-leading portfolios before archiving the comparison.")
+    if summary.get("maturity_coverage_regression_count"):
+        if (
+            summary.get("best_score_maturity_release_readiness_trend") == COVERAGE_REGRESSED_TREND
+            or int(summary.get("best_score_maturity_release_readiness_test_coverage_regression_count") or 0) > 0
+        ):
+            recs.append("Block best-score promotion until release-readiness test coverage regressions are explained or fixed.")
+        else:
+            recs.append("Review coverage-regressed maturity narratives before using non-leading portfolios as future baselines.")
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs
@@ -404,8 +443,34 @@ def _review_actions(
                 )
             )
 
+        coverage_regressed = _has_maturity_coverage_regression(portfolio)
+        if coverage_regressed:
+            is_best_score = name == best_score_name
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "maturity",
+                    "blocker" if is_best_score else "review",
+                    "best_score_coverage_regressed" if is_best_score else "portfolio_coverage_regressed",
+                    (
+                        "Explain or fix release-readiness test coverage regressions before promoting this best-scoring portfolio."
+                        if is_best_score
+                        else "Review release-readiness test coverage regressions before archiving this portfolio as a future baseline."
+                    ),
+                    {
+                        "maturity_release_readiness_trend": portfolio.get("maturity_release_readiness_trend"),
+                        "coverage_regression_count": portfolio.get("maturity_release_readiness_test_coverage_regression_count"),
+                        "coverage_status_changed_count": portfolio.get("maturity_release_readiness_test_coverage_status_changed_count"),
+                        "max_test_coverage_percent_delta": portfolio.get("maturity_release_readiness_max_test_coverage_percent_delta"),
+                        "max_test_coverage_gap_delta": portfolio.get("maturity_release_readiness_max_test_coverage_gap_delta"),
+                        "best_score_name": best_score_name,
+                    },
+                )
+            )
+
         maturity_status = _as_str(portfolio.get("maturity_portfolio_status"))
-        if maturity_status in REVIEW_STATUSES:
+        if maturity_status in REVIEW_STATUSES and not coverage_regressed:
             is_best_score = name == best_score_name
             actions.append(
                 _review_action(
@@ -487,7 +552,17 @@ def _delta_explanation(
         parts.append(f"status changed {baseline.get('status')} -> {portfolio.get('status')}")
     if portfolio.get("maturity_portfolio_status") != baseline.get("maturity_portfolio_status"):
         parts.append("maturity status changed")
+    if _has_maturity_coverage_regression(portfolio):
+        parts.append("release-readiness coverage regressed")
     return "; ".join(parts) if parts else "Comparable to baseline."
+
+
+def _has_maturity_coverage_regression(portfolio: dict[str, Any]) -> bool:
+    regression_count = _as_int(portfolio.get("maturity_release_readiness_test_coverage_regression_count")) or 0
+    return (
+        portfolio.get("maturity_release_readiness_trend") == COVERAGE_REGRESSED_TREND
+        or regression_count > 0
+    )
 
 
 def _dataset_label(report: dict[str, Any], dataset: dict[str, Any]) -> str:
