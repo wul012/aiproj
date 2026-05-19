@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+283-v269-workflow-clean-batch-review-gate.md
+ -> v269 code explanation: carry the clean batch-review gate from standalone training-scale run decisions into the consolidated workflow API, CLI, workflow artifacts, and tests.
+
 282-v268-training-scale-run-decision-clean-batch-gate.md
  -> v268 code explanation: add an opt-in clean batch-review gate to training-scale run decisions so automation can reject review/blocker/coverage-regression evidence before execute selection.
 

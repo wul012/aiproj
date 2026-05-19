@@ -607,6 +607,9 @@ c/267/解释/说明.md
 c/268/图片
 c/268/解释/说明.md
  -> v268 training scale run decision clean batch gate 的运行截图和解释
+c/269/图片
+c/269/解释/说明.md
+ -> v269 training scale workflow clean batch review gate 的运行截图和解释
 ```
 
 写入规则：

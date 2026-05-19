@@ -52,6 +52,7 @@ def run_training_scale_workflow(
     decision_require_gate_pass: bool = False,
     decision_require_batch_started: bool = True,
     decision_require_suite_consistency: bool = False,
+    decision_require_clean_batch_review: bool = False,
     decision_execute_out_root: str | Path | None = None,
     python_executable: str = "python",
     generated_at: str | None = None,
@@ -122,6 +123,7 @@ def run_training_scale_workflow(
         require_gate_pass=decision_require_gate_pass,
         require_batch_started=decision_require_batch_started,
         require_suite_consistency=decision_require_suite_consistency,
+        require_clean_batch_review=decision_require_clean_batch_review,
         execute_out_root=decision_execute_out_root,
         python_executable=python_executable,
         title="MiniGPT training scale workflow decision",
@@ -146,7 +148,9 @@ def run_training_scale_workflow(
         "decision_require_gate_pass": bool(decision_require_gate_pass),
         "decision_require_batch_started": bool(decision_require_batch_started),
         "decision_require_suite_consistency": bool(decision_require_suite_consistency),
+        "decision_require_clean_batch_review": bool(decision_require_clean_batch_review),
         "require_suite_consistency": bool(decision_require_suite_consistency),
+        "require_clean_batch_review": bool(decision_require_clean_batch_review),
         "plan_summary": _plan_summary(plan),
         "plan_outputs": plan_outputs,
         "runs": run_rows,
@@ -241,6 +245,8 @@ def _workflow_summary(
         "selected_readiness_score": selected.get("readiness_score") or decision_summary.get("selected_readiness_score"),
         "selected_suite_path": selected.get("suite_path") or decision_summary.get("selected_suite_path"),
         "decision_require_suite_consistency": decision_summary.get("require_suite_consistency"),
+        "decision_require_clean_batch_review": decision_summary.get("require_clean_batch_review"),
+        "clean_batch_review_status": decision_summary.get("clean_batch_review_status"),
         "suite_consistency": decision_summary.get("suite_consistency"),
         "suite_mismatch_count": decision_summary.get("suite_mismatch_count"),
         "suite_mode": _dict(plan.get("suite")).get("mode"),
@@ -262,6 +268,8 @@ def _workflow_recommendations(summary: dict[str, Any], decision: dict[str, Any])
         recommendations.append("Keep blocked profile outputs as evidence for why the selected profile was safer.")
     if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
         recommendations.append("Fix workflow benchmark suite consistency before using the decision as clean model-quality evidence.")
+    if summary.get("decision_require_clean_batch_review") and summary.get("clean_batch_review_status") != "clean":
+        recommendations.append("Resolve workflow batch review, blocker, and coverage-regression evidence before using this as clean execute automation.")
     command = str(decision.get("execute_command_text") or "")
     if command:
         recommendations.append("The generated execute command is a handoff command, not automatically run by this workflow.")

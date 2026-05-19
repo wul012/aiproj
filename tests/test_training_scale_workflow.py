@@ -115,6 +115,70 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             decision_payload = json.loads(Path(report["decision_outputs"]["json"]).read_text(encoding="utf-8"))
             self.assertTrue(decision_payload["require_suite_consistency"])
 
+    def test_workflow_can_require_clean_batch_review_for_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._write_source(root)
+
+            default_report = run_training_scale_workflow(
+                [source],
+                project_root=root,
+                out_root=root / "default-workflow",
+                profiles=["review", "standard"],
+                baseline_profile="review",
+                generated_at="2026-05-14T00:00:00Z",
+                python_executable="python",
+            )
+            strict_report = run_training_scale_workflow(
+                [source],
+                project_root=root,
+                out_root=root / "strict-workflow",
+                profiles=["review", "standard"],
+                baseline_profile="review",
+                decision_require_clean_batch_review=True,
+                generated_at="2026-05-14T00:00:00Z",
+                python_executable="python",
+            )
+
+            self.assertEqual(default_report["summary"]["decision_status"], "review")
+            self.assertFalse(default_report["summary"]["decision_require_clean_batch_review"])
+            self.assertEqual(default_report["summary"]["clean_batch_review_status"], "review")
+            self.assertEqual(strict_report["summary"]["decision_status"], "blocked")
+            self.assertTrue(strict_report["decision_require_clean_batch_review"])
+            self.assertTrue(strict_report["summary"]["decision_require_clean_batch_review"])
+            self.assertEqual(strict_report["summary"]["clean_batch_review_status"], "review")
+            self.assertIsNone(strict_report["summary"]["selected_profile"])
+            self.assertEqual(strict_report["decision_summary"]["candidate_count"], 0)
+            self.assertTrue(any("Resolve workflow batch review" in item for item in strict_report["recommendations"]))
+            decision_payload = json.loads(Path(strict_report["decision_outputs"]["json"]).read_text(encoding="utf-8"))
+            self.assertTrue(decision_payload["require_clean_batch_review"])
+            self.assertEqual(decision_payload["summary"]["clean_batch_review_status"], "review")
+
+    def test_workflow_clean_batch_fields_are_rendered(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._write_source(root)
+
+            report = run_training_scale_workflow(
+                [source],
+                project_root=root,
+                out_root=root / "workflow",
+                profiles=["review", "standard"],
+                decision_require_clean_batch_review=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            outputs = write_training_scale_workflow_outputs(report, root / "export")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_workflow_markdown(report)
+            html = render_training_scale_workflow_html(report)
+
+            self.assertIn("decision_require_clean_batch_review", csv_text)
+            self.assertIn("clean_batch_review_status", csv_text)
+            self.assertIn("Require clean batch review", markdown)
+            self.assertIn("Clean batch review status", markdown)
+            self.assertIn("Require clean batch review", html)
+            self.assertIn("Clean batch review", html)
+
     def test_rejects_duplicate_profiles_and_missing_baseline(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

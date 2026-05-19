@@ -35,6 +35,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--decision-require-gate-pass", action="store_true", help="Only let pass-status gates become decision candidates.")
     parser.add_argument("--decision-no-require-batch-started", action="store_true", help="Allow decision candidates that did not reach batch dry-run.")
     parser.add_argument("--decision-require-suite-consistency", action="store_true", help="Block workflow decisions when compared runs mix or omit benchmark suite paths.")
+    parser.add_argument(
+        "--decision-require-clean-batch-review",
+        action="store_true",
+        help="Block workflow decisions when batch review actions, blockers, or maturity coverage regressions are present.",
+    )
     parser.add_argument("--decision-execute-out-root", type=Path, default=None)
     parser.add_argument("--title", type=str, default="MiniGPT training scale workflow")
     parser.add_argument("--no-recursive", action="store_true", help="Only read top-level .txt files from directories.")
@@ -65,6 +70,7 @@ def main() -> None:
         decision_require_gate_pass=args.decision_require_gate_pass,
         decision_require_batch_started=not args.decision_no_require_batch_started,
         decision_require_suite_consistency=args.decision_require_suite_consistency,
+        decision_require_clean_batch_review=args.decision_require_clean_batch_review,
         decision_execute_out_root=args.decision_execute_out_root,
         python_executable=args.python,
         title=args.title,
@@ -72,6 +78,7 @@ def main() -> None:
     print(f"workflow_status={report.get('summary', {}).get('decision_status')}")
     print(f"recommended_action={report.get('summary', {}).get('recommended_action')}")
     print(f"selected_profile={report.get('summary', {}).get('selected_profile')}")
+    print(f"clean_batch_review_status={report.get('summary', {}).get('clean_batch_review_status')}")
     print(f"scale_tier={report.get('summary', {}).get('scale_tier')}")
     print(f"profiles={','.join(report.get('profiles', []))}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
