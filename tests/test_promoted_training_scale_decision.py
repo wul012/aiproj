@@ -146,12 +146,68 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_decision.json").exists())
 
+    def test_carries_promoted_comparison_handoff_batch_review_into_decision_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison_dir = make_compared_comparison_tree(
+                root,
+                include_handoff_suite_guard=True,
+                include_handoff_batch_review=True,
+            )
+
+            report = build_promoted_training_scale_decision(comparison_dir, min_readiness=60)
+            outputs = write_promoted_training_scale_decision_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "decide_promoted_training_scale_baseline.py"),
+                    str(comparison_dir),
+                    "--min-readiness",
+                    "60",
+                    "--out-dir",
+                    str(script_out),
+                    "--require-accepted",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            selected = report["selected_baseline"]
+            summary = report["summary"]
+            self.assertEqual(report["decision_status"], "accepted")
+            self.assertEqual(selected["name"], "beta")
+            self.assertEqual(selected["handoff_selected_batch_review_status"], "blocker")
+            self.assertEqual(selected["handoff_selected_batch_comparison_blocker_action_count"], 1)
+            self.assertEqual(summary["selected_handoff_selected_batch_review_status"], "blocker")
+            self.assertEqual(summary["selected_handoff_selected_batch_comparison_review_action_count"], 2)
+            self.assertEqual(summary["selected_handoff_selected_batch_comparison_blocker_action_count"], 1)
+            self.assertEqual(summary["selected_handoff_batch_comparison_blocker_reasons"], ["coverage-regressed"])
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_blocker_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_comparison_review_action_total"], 4)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_comparison_blocker_action_total"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_batch_comparison_blocker_reasons"], ["coverage-regressed"])
+            self.assertIn("selected_handoff_selected_batch_review_status", csv_text)
+            self.assertIn("Selected handoff batch review", markdown)
+            self.assertIn("Selected handoff batch", html)
+            self.assertIn("selected_handoff_selected_batch_review_status=blocker", completed.stdout)
+            self.assertIn("comparison_ready_handoff_selected_batch_blocker_count=1", completed.stdout)
+            self.assertTrue(any("selected handoff batch blocker" in item for item in report["recommendations"]))
+
+
 def make_compared_comparison_tree(
     root: Path,
     second_promoted: bool = True,
     title: str = "MiniGPT promoted training scale comparison",
     mixed_suite: bool = False,
     include_handoff_suite_guard: bool = False,
+    include_handoff_batch_review: bool = False,
 ) -> Path:
     index_dir = root / "promotion-index"
     alpha_run = root / "alpha" / "scale-run" / "training_scale_run.json"
@@ -159,13 +215,27 @@ def make_compared_comparison_tree(
     write_json(alpha_run, run_payload("alpha", "warn", 88, suite_name=None if mixed_suite else "standard-zh"))
     write_json(beta_run, run_payload("beta", "pass", 91))
     promotions = [
-        promotion_row("alpha", os_rel(alpha_run, index_dir), "warn", 88, include_handoff_suite_guard=include_handoff_suite_guard)
+        promotion_row(
+            "alpha",
+            os_rel(alpha_run, index_dir),
+            "warn",
+            88,
+            include_handoff_suite_guard=include_handoff_suite_guard,
+            include_handoff_batch_review=include_handoff_batch_review,
+        )
     ]
     compare_names = ["alpha"]
     compare_paths = [os_rel(alpha_run, index_dir)]
     if second_promoted:
         promotions.append(
-            promotion_row("beta", os_rel(beta_run, index_dir), "pass", 91, include_handoff_suite_guard=include_handoff_suite_guard)
+            promotion_row(
+                "beta",
+                os_rel(beta_run, index_dir),
+                "pass",
+                91,
+                include_handoff_suite_guard=include_handoff_suite_guard,
+                include_handoff_batch_review=include_handoff_batch_review,
+            )
         )
         compare_names.append("beta")
         compare_paths.append(os_rel(beta_run, index_dir))
@@ -205,6 +275,7 @@ def promotion_row(
     readiness_score: int,
     *,
     include_handoff_suite_guard: bool,
+    include_handoff_batch_review: bool,
 ) -> dict:
     row = {
         "name": name,
@@ -223,6 +294,18 @@ def promotion_row(
                 "handoff_suite_consistency": "consistent",
                 "handoff_suite_mismatch_count": 0,
                 "handoff_selected_suite_path": "builtin:standard-zh",
+            }
+        )
+    if include_handoff_batch_review:
+        row.update(
+            {
+                "handoff_selected_batch_review_status": "blocker" if name == "beta" else "review",
+                "handoff_selected_batch_comparison_review_action_count": 2,
+                "handoff_selected_batch_comparison_blocker_action_count": 1 if name == "beta" else 0,
+                "handoff_selected_batch_maturity_coverage_regression_count": 1,
+                "handoff_batch_comparison_review_action_count": 2,
+                "handoff_batch_comparison_blocker_action_count": 1 if name == "beta" else 0,
+                "handoff_batch_comparison_blocker_reasons": ["coverage-regressed"] if name == "beta" else [],
             }
         )
     return row

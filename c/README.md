@@ -577,6 +577,9 @@ c/257/解释/说明.md
 c/258/图片
 c/258/解释/说明.md
  -> v258 promoted comparison batch review propagation 的运行截图和解释
+c/259/图片
+c/259/解释/说明.md
+ -> v259 promoted decision batch review propagation 的运行截图和解释
 ```
 
 写入规则：

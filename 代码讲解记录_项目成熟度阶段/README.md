@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+273-v259-promoted-decision-batch-review-propagation.md
+ -> v259 code explanation: carry promoted-comparison handoff selected batch review/blocker context into promoted baseline decision rows, summaries, artifacts, CLI output, and recommendations.
 272-v258-promoted-comparison-batch-review-propagation.md
  -> v258 code explanation: carry promotion-index handoff selected batch review/blocker context into promoted comparison rows, summaries, artifacts, CLI output, and recommendations.
 271-v257-promotion-index-batch-review-propagation.md
