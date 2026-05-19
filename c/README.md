@@ -586,6 +586,9 @@ c/260/解释/说明.md
 c/261/图片
 c/261/解释/说明.md
  -> v261 promoted seed handoff batch review propagation 的运行截图和解释
+c/262/图片
+c/262/解释/说明.md
+ -> v262 promoted seed handoff review helper split 的运行截图和解释
 ```
 
 写入规则：

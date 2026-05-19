@@ -1,6 +1,10 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+
+276-v262-promoted-seed-handoff-review-helper-split.md
+ -> v262 code explanation: split seed handoff review, suite alignment, clean-evidence, and batch-review helper logic out of the orchestration module while preserving the public contract.
+
 275-v261-promoted-seed-handoff-batch-review-propagation.md
  -> v261 code explanation: carry promoted-seed handoff selected batch review/blocker context into seed handoff summaries, artifacts, CLI output, and recommendations.
 274-v260-promoted-seed-batch-review-propagation.md
