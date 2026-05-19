@@ -65,8 +65,9 @@ def build_training_scale_promotion(
     variants = _variant_rows(batch, project_root, handoff_dir)
     evidence_rows = _evidence_rows(handoff_file, handoff, scale_run_path, batch_path, variants, project_root, handoff_dir)
     suite_guard = _suite_guard(handoff)
-    blockers, review_items = _issues(handoff, scale_run, batch, variants, evidence_rows)
-    summary = _summary(handoff, scale_run, batch, variants, evidence_rows, blockers, review_items, suite_guard)
+    clean_batch_review_guard = _clean_batch_review_guard(handoff)
+    blockers, review_items = _issues(handoff, scale_run, batch, variants, evidence_rows, clean_batch_review_guard)
+    summary = _summary(handoff, scale_run, batch, variants, evidence_rows, blockers, review_items, suite_guard, clean_batch_review_guard)
     return {
         "schema_version": 1,
         "title": title,
@@ -75,6 +76,7 @@ def build_training_scale_promotion(
         "project_root": str(project_root),
         "out_root": str(out_root),
         "suite_guard": suite_guard,
+        "clean_batch_review_guard": clean_batch_review_guard,
         "handoff_summary": _dict(handoff.get("summary")),
         "training_scale_run_path": str(scale_run_path),
         "training_scale_run": _scale_run_digest(scale_run),
@@ -211,6 +213,7 @@ def _issues(
     batch: dict[str, Any],
     variants: list[dict[str, Any]],
     evidence_rows: list[dict[str, Any]],
+    clean_batch_review_guard: dict[str, Any],
 ) -> tuple[list[str], list[str]]:
     blockers = []
     review_items = []
@@ -220,6 +223,8 @@ def _issues(
         blockers.append(f"handoff status is {handoff_status or 'missing'}")
     if _dict(handoff.get("execution")).get("returncode") not in (0, None):
         blockers.append("handoff execute command returned non-zero")
+    if clean_batch_review_guard.get("handoff_require_clean_batch_review") and clean_batch_review_guard.get("handoff_clean_batch_review_status") != "clean":
+        blockers.append("handoff requires clean batch-review evidence but status is not clean")
     if scale_run.get("status") != "completed":
         blockers.append(f"training scale run status is {scale_run.get('status') or 'missing'}")
     batch_status = _nested(batch, "execution", "status") or _nested(scale_run, "batch_summary", "status")
@@ -251,6 +256,7 @@ def _summary(
     blockers: list[str],
     review_items: list[str],
     suite_guard: dict[str, Any],
+    clean_batch_review_guard: dict[str, Any],
 ) -> dict[str, Any]:
     ready_variants = [row for row in variants if row.get("promotion_status") == "ready"]
     required_total = sum(int(row.get("required_artifact_count") or 0) for row in variants)
@@ -263,6 +269,8 @@ def _summary(
         "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
         "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
         "handoff_selected_suite_path": suite_guard.get("handoff_selected_suite_path"),
+        "handoff_require_clean_batch_review": clean_batch_review_guard.get("handoff_require_clean_batch_review"),
+        "handoff_clean_batch_review_status": clean_batch_review_guard.get("handoff_clean_batch_review_status"),
         "handoff_selected_batch_review_status": suite_guard.get("handoff_selected_batch_review_status"),
         "handoff_selected_batch_comparison_review_action_count": suite_guard.get("handoff_selected_batch_comparison_review_action_count"),
         "handoff_selected_batch_comparison_blocker_action_count": suite_guard.get("handoff_selected_batch_comparison_blocker_action_count"),
@@ -314,6 +322,8 @@ def _batch_digest(batch: dict[str, Any]) -> dict[str, Any]:
 
 def _recommendations(summary: dict[str, Any], blockers: list[str], review_items: list[str]) -> list[str]:
     status = str(summary.get("promotion_status") or "")
+    if summary.get("handoff_require_clean_batch_review") and summary.get("handoff_clean_batch_review_status") != "clean":
+        return ["Resolve handoff clean batch-review requirement before accepting this run as promotion-ready evidence."]
     if summary.get("handoff_selected_batch_review_status") == "blocker":
         return ["Resolve selected batch comparison blocker actions before treating this handoff as promotion-ready evidence."]
     if summary.get("handoff_selected_batch_review_status") == "review":
@@ -354,6 +364,43 @@ def _suite_guard(handoff: dict[str, Any]) -> dict[str, Any]:
         "handoff_batch_comparison_blocker_reasons": _string_list(_handoff_value(handoff, "batch_comparison_blocker_reasons")),
         "workflow_suite_path": guard.get("workflow_suite_path") or handoff_summary.get("workflow_suite_path"),
         "workflow_suite_name": guard.get("workflow_suite_name") or handoff_summary.get("workflow_suite_name"),
+    }
+
+
+def _clean_batch_review_guard(handoff: dict[str, Any]) -> dict[str, Any]:
+    handoff_summary = _dict(handoff.get("summary"))
+    guard = _dict(handoff.get("clean_batch_review_guard"))
+    required = first_present(
+        guard.get("decision_require_clean_batch_review"),
+        guard.get("require_clean_batch_review"),
+        handoff_summary.get("decision_require_clean_batch_review"),
+        handoff_summary.get("require_clean_batch_review"),
+    )
+    return {
+        "handoff_require_clean_batch_review": bool(required),
+        "handoff_clean_batch_review_status": first_present(
+            guard.get("clean_batch_review_status"),
+            handoff_summary.get("clean_batch_review_status"),
+            handoff_summary.get("selected_batch_review_status"),
+        ),
+        "handoff_batch_comparison_review_action_count": first_present(
+            guard.get("batch_comparison_review_action_count"),
+            handoff_summary.get("batch_comparison_review_action_count"),
+        ),
+        "handoff_batch_comparison_blocker_action_count": first_present(
+            guard.get("batch_comparison_blocker_action_count"),
+            handoff_summary.get("batch_comparison_blocker_action_count"),
+        ),
+        "handoff_batch_maturity_coverage_regression_count": first_present(
+            guard.get("batch_maturity_coverage_regression_count"),
+            handoff_summary.get("batch_maturity_coverage_regression_count"),
+        ),
+        "handoff_batch_comparison_blocker_reasons": _string_list(
+            first_present(
+                guard.get("batch_comparison_blocker_reasons"),
+                handoff_summary.get("batch_comparison_blocker_reasons"),
+            )
+        ),
     }
 
 

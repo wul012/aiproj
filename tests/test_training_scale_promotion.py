@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -136,6 +137,63 @@ class TrainingScalePromotionTests(unittest.TestCase):
             self.assertEqual(report["summary"]["handoff_selected_batch_comparison_blocker_action_count"], 1)
             self.assertTrue(any("Resolve selected batch comparison blocker actions" in item for item in report["recommendations"]))
 
+    def test_carries_clean_batch_review_guard_into_promotion_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(
+                root,
+                require_clean_batch_review=True,
+                clean_batch_review_status="clean",
+            )
+
+            report = build_training_scale_promotion(handoff_dir)
+            outputs = write_training_scale_promotion_outputs(report, root / "promotion")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_promotion_markdown(report)
+            html = render_training_scale_promotion_html(report)
+
+            self.assertEqual(report["summary"]["promotion_status"], "promoted")
+            self.assertTrue(report["clean_batch_review_guard"]["handoff_require_clean_batch_review"])
+            self.assertTrue(report["summary"]["handoff_require_clean_batch_review"])
+            self.assertEqual(report["summary"]["handoff_clean_batch_review_status"], "clean")
+            self.assertIn("handoff_require_clean_batch_review", csv_text)
+            self.assertIn("handoff_clean_batch_review_status", csv_text)
+            self.assertIn("Handoff require clean batch review", markdown)
+            self.assertIn("Handoff clean batch review status", markdown)
+            self.assertIn("Handoff clean batch required", html)
+            self.assertIn("Handoff clean batch", html)
+
+    def test_blocks_promotion_when_clean_batch_review_requirement_is_not_satisfied(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(
+                root,
+                require_clean_batch_review=True,
+                clean_batch_review_status="review",
+                selected_batch_review_status="review",
+            )
+
+            report = build_training_scale_promotion(handoff_dir)
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/build_training_scale_promotion.py",
+                    str(handoff_dir),
+                    "--out-dir",
+                    str(root / "script-promotion"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(report["summary"]["promotion_status"], "blocked")
+            self.assertTrue(any("requires clean batch-review" in item for item in report["blockers"]))
+            self.assertTrue(any("clean batch-review requirement" in item for item in report["recommendations"]))
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("handoff_clean_batch_review_status=review", completed.stdout)
+
     def test_facade_keeps_legacy_artifact_exports(self) -> None:
         self.assertIs(
             training_scale_promotion_facade.write_training_scale_promotion_outputs,
@@ -156,6 +214,8 @@ def make_completed_handoff_tree(
     missing: set[str] | None = None,
     *,
     include_suite_guard: bool = False,
+    require_clean_batch_review: bool = False,
+    clean_batch_review_status: str | None = None,
     selected_batch_review_status: str = "clean",
 ) -> Path:
     missing = missing or set()
@@ -229,6 +289,9 @@ def make_completed_handoff_tree(
             "handoff_status": "completed",
             "artifact_count": 6,
             "available_artifact_count": 6,
+            "decision_require_clean_batch_review": require_clean_batch_review,
+            "require_clean_batch_review": require_clean_batch_review,
+            "clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
             "selected_batch_review_status": selected_batch_review_status,
             "selected_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
             "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
@@ -257,6 +320,16 @@ def make_completed_handoff_tree(
             {"key": "variant_checkpoints", "path": "runs/scale/batch/variants", "exists": True, "count": 1},
         ],
     }
+    if require_clean_batch_review:
+        handoff_payload["clean_batch_review_guard"] = {
+            "decision_require_clean_batch_review": True,
+            "require_clean_batch_review": True,
+            "clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
+            "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+            "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "batch_comparison_blocker_reasons": ["coverage-regressed"] if selected_batch_review_status == "blocker" else [],
+        }
     if include_suite_guard:
         handoff_payload["suite_guard"] = {
             "decision_require_suite_consistency": True,

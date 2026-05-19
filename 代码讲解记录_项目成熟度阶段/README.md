@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+285-v271-promotion-clean-batch-review-gate.md
+ -> v271 code explanation: carry handoff clean batch-review requirements into training-scale promotion acceptance, artifacts, CLI output, and tests.
+
 284-v270-handoff-clean-batch-review-gate.md
  -> v270 code explanation: carry workflow clean batch-review requirements into training-scale execution handoff validation, artifacts, CLI output, and tests.
 
