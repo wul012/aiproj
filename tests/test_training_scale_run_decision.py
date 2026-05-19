@@ -44,10 +44,15 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertEqual(report["summary"]["candidate_count"], 1)
             self.assertEqual(report["summary"]["rejected_count"], 1)
             self.assertEqual(report["summary"]["suite_consistency"], "consistent")
+            self.assertGreater(report["summary"]["batch_comparison_review_action_count"], 0)
+            self.assertEqual(report["summary"]["batch_comparison_blocker_action_count"], 0)
+            self.assertEqual(report["summary"]["selected_batch_review_status"], "review")
+            self.assertGreater(report["summary"]["selected_batch_comparison_review_action_count"], 0)
             self.assertTrue(str(report["summary"]["selected_suite_path"]).replace("\\", "/").endswith("data/eval_prompts.json"))
             self.assertIn("--execute", report["execute_command"])
             self.assertIn("--gate-profile", report["execute_command"])
             self.assertIn("review", report["execute_command"])
+            self.assertTrue(any("Review selected batch comparison actions" in item for item in report["recommendations"]))
 
     def test_require_gate_pass_blocks_warn_only_comparison(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -139,10 +144,38 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertEqual(loaded["schema_version"], 1)
             self.assertIn("## Execute command", markdown)
+            self.assertIn("Selected batch review status", markdown)
+            self.assertIn("Batch comparison reviews", markdown)
+            self.assertIn("Batch review status", html)
             self.assertIn("&lt;allowed&gt;", html)
             self.assertNotIn("<allowed>", html)
             payload = json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))
             self.assertEqual(payload["schema_version"], 1)
+
+    def test_selected_batch_blocker_downgrades_ready_decision_to_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+            payload = json.loads(comparison.read_text(encoding="utf-8"))
+            allowed = payload["runs"][0]
+            allowed["gate_status"] = "pass"
+            allowed["readiness_score"] = 95
+            allowed["batch_comparison_review_action_count"] = 1
+            allowed["batch_comparison_blocker_action_count"] = 1
+            allowed["batch_maturity_coverage_regression_count"] = 1
+            payload["summary"]["batch_comparison_review_action_count"] = 1
+            payload["summary"]["batch_comparison_blocker_action_count"] = 1
+            payload["summary"]["batch_maturity_coverage_regression_count"] = 1
+            payload["summary"]["batch_comparison_blocker_reasons"] = ["coverage-regressed"]
+            comparison.write_text(json.dumps(payload), encoding="utf-8")
+
+            report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
+
+            self.assertEqual(report["selected_run"]["name"], "allowed")
+            self.assertEqual(report["decision_status"], "review")
+            self.assertEqual(report["summary"]["selected_batch_review_status"], "blocker")
+            self.assertEqual(report["summary"]["selected_batch_comparison_blocker_action_count"], 1)
+            self.assertTrue(any("Resolve selected batch comparison blocker actions" in item for item in report["recommendations"]))
 
     def test_rejects_comparison_without_runs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

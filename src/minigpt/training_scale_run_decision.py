@@ -74,6 +74,9 @@ def build_training_scale_run_decision(
             "batch_status": run.get("batch_status"),
             "allowed": bool(run.get("allowed")),
             "readiness_score": _int(run.get("readiness_score")),
+            "batch_comparison_review_action_count": _int(run.get("batch_comparison_review_action_count")),
+            "batch_comparison_blocker_action_count": _int(run.get("batch_comparison_blocker_action_count")),
+            "batch_maturity_coverage_regression_count": _int(run.get("batch_maturity_coverage_regression_count")),
             "reasons": reasons,
         }
         if reasons:
@@ -261,6 +264,8 @@ def _default_execute_out_root(origin: dict[str, Any], selected: dict[str, Any]) 
 def _decision_status(selected: dict[str, Any] | None, *, require_gate_pass: bool) -> str:
     if not selected:
         return "blocked"
+    if _int(selected.get("batch_comparison_blocker_action_count")):
+        return "review"
     gate_status = selected.get("gate_status")
     if gate_status == "pass":
         return "ready"
@@ -314,11 +319,21 @@ def _decision_summary(
         "selected_gate_status": None if selected is None else selected.get("gate_status"),
         "selected_batch_status": None if selected is None else selected.get("batch_status"),
         "selected_readiness_score": None if selected is None else selected.get("readiness_score"),
+        "selected_batch_comparison_review_action_count": _selected_int(selected, "batch_comparison_review_action_count"),
+        "selected_batch_comparison_blocker_action_count": _selected_int(selected, "batch_comparison_blocker_action_count"),
+        "selected_batch_maturity_coverage_regression_count": _selected_int(selected, "batch_maturity_coverage_regression_count"),
+        "selected_batch_review_status": _batch_review_status(selected),
         "selected_suite_path": selected_suite_path,
         "require_suite_consistency": bool(require_suite_consistency),
         "suite_consistency": comparison_summary.get("suite_consistency"),
         "suite_paths": suite_paths,
         "suite_mismatch_count": _int(comparison_summary.get("suite_mismatch_count")),
+        "batch_comparison_review_action_count": _int(comparison_summary.get("batch_comparison_review_action_count")),
+        "batch_comparison_blocker_action_count": _int(comparison_summary.get("batch_comparison_blocker_action_count")),
+        "batch_maturity_review_count": _int(comparison_summary.get("batch_maturity_review_count")),
+        "batch_maturity_coverage_regression_count": _int(comparison_summary.get("batch_maturity_coverage_regression_count")),
+        "batch_maturity_coverage_regression_names": _string_list(comparison_summary.get("batch_maturity_coverage_regression_names")),
+        "batch_comparison_blocker_reasons": _string_list(comparison_summary.get("batch_comparison_blocker_reasons")),
     }
 
 
@@ -340,6 +355,14 @@ def _recommendations(
         recommendations.append("The selected scale run is ready for staged execution after reviewing the dry-run evidence.")
     if selected and selected.get("gate_status") == "warn":
         recommendations.append("A warn-status gate is acceptable for smoke evidence, but it should be justified before larger training.")
+    if selected and _int(selected.get("batch_comparison_blocker_action_count")):
+        recommendations.append("Resolve selected batch comparison blocker actions before using this decision as execute evidence.")
+    elif selected and _int(selected.get("batch_comparison_review_action_count")):
+        recommendations.append("Review selected batch comparison actions before treating this decision as clean execute evidence.")
+    if _int(comparison_summary.get("batch_comparison_blocker_action_count")):
+        recommendations.append("Keep batch comparison blocker reasons with the decision record for downstream promotion review.")
+    elif _int(comparison_summary.get("batch_maturity_coverage_regression_count")):
+        recommendations.append("Carry batch coverage regression context into follow-up promotion and maturity review.")
     if rejected:
         recommendations.append("Keep rejected runs as comparison evidence; they explain why the selected run is safer.")
     if execute_command:
@@ -362,3 +385,17 @@ def _recommendations(
 
 def _int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
+
+
+def _selected_int(selected: dict[str, Any] | None, key: str) -> int:
+    return 0 if selected is None else _int(selected.get(key))
+
+
+def _batch_review_status(selected: dict[str, Any] | None) -> str:
+    if selected is None:
+        return "missing"
+    if _int(selected.get("batch_comparison_blocker_action_count")):
+        return "blocker"
+    if _int(selected.get("batch_comparison_review_action_count")) or _int(selected.get("batch_maturity_coverage_regression_count")):
+        return "review"
+    return "clean"

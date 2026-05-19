@@ -30,6 +30,13 @@ def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Pa
         "selected_gate_status",
         "selected_batch_status",
         "selected_readiness_score",
+        "selected_batch_review_status",
+        "selected_batch_comparison_review_action_count",
+        "selected_batch_comparison_blocker_action_count",
+        "selected_batch_maturity_coverage_regression_count",
+        "batch_comparison_review_action_count",
+        "batch_comparison_blocker_action_count",
+        "batch_maturity_coverage_regression_count",
         "selected_suite_path",
         "require_suite_consistency",
         "suite_consistency",
@@ -45,6 +52,13 @@ def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Pa
             "selected_gate_status": selected.get("gate_status"),
             "selected_batch_status": selected.get("batch_status"),
             "selected_readiness_score": selected.get("readiness_score"),
+            "selected_batch_review_status": summary.get("selected_batch_review_status"),
+            "selected_batch_comparison_review_action_count": summary.get("selected_batch_comparison_review_action_count"),
+            "selected_batch_comparison_blocker_action_count": summary.get("selected_batch_comparison_blocker_action_count"),
+            "selected_batch_maturity_coverage_regression_count": summary.get("selected_batch_maturity_coverage_regression_count"),
+            "batch_comparison_review_action_count": summary.get("batch_comparison_review_action_count"),
+            "batch_comparison_blocker_action_count": summary.get("batch_comparison_blocker_action_count"),
+            "batch_maturity_coverage_regression_count": summary.get("batch_maturity_coverage_regression_count"),
             "selected_suite_path": summary.get("selected_suite_path"),
             "require_suite_consistency": summary.get("require_suite_consistency"),
             "suite_consistency": summary.get("suite_consistency"),
@@ -70,6 +84,12 @@ def render_training_scale_run_decision_markdown(report: dict[str, Any]) -> str:
         f"- Gate: `{selected.get('gate_status')}`",
         f"- Batch: `{selected.get('batch_status')}`",
         f"- Readiness: `{selected.get('readiness_score')}`",
+        f"- Selected batch review status: `{summary.get('selected_batch_review_status')}`",
+        f"- Selected batch reviews: `{summary.get('selected_batch_comparison_review_action_count')}`",
+        f"- Selected batch blockers: `{summary.get('selected_batch_comparison_blocker_action_count')}`",
+        f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
+        f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
+        f"- Batch coverage regressions: `{summary.get('batch_maturity_coverage_regression_count')}`",
         f"- Selected suite: `{summary.get('selected_suite_path')}`",
         f"- Require suite consistency: `{summary.get('require_suite_consistency')}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
@@ -84,8 +104,8 @@ def render_training_scale_run_decision_markdown(report: dict[str, Any]) -> str:
         "",
         "## Rejected runs",
         "",
-        "| Run | Gate | Batch | Score | Reasons |",
-        "| --- | --- | --- | ---: | --- |",
+        "| Run | Gate | Batch | Score | Review | Blockers | Reasons |",
+        "| --- | --- | --- | ---: | ---: | ---: | --- |",
     ]
     for run in _list_of_dicts(report.get("rejected_runs")):
         lines.append(
@@ -96,6 +116,8 @@ def render_training_scale_run_decision_markdown(report: dict[str, Any]) -> str:
                     _md(run.get("gate_status")),
                     _md(run.get("batch_status")),
                     _md(run.get("readiness_score")),
+                    _md(run.get("batch_comparison_review_action_count")),
+                    _md(run.get("batch_comparison_blocker_action_count")),
                     _md("; ".join(_string_list(run.get("reasons")))),
                 ]
             )
@@ -122,6 +144,12 @@ def render_training_scale_run_decision_html(report: dict[str, Any]) -> str:
         ("Gate", selected.get("gate_status")),
         ("Batch", selected.get("batch_status")),
         ("Readiness", selected.get("readiness_score")),
+        ("Batch review status", summary.get("selected_batch_review_status")),
+        ("Selected reviews", summary.get("selected_batch_comparison_review_action_count")),
+        ("Selected blockers", summary.get("selected_batch_comparison_blocker_action_count")),
+        ("Batch reviews", summary.get("batch_comparison_review_action_count")),
+        ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
+        ("Coverage regressions", summary.get("batch_maturity_coverage_regression_count")),
         ("Suite", summary.get("selected_suite_path")),
         ("Require suite consistency", summary.get("require_suite_consistency")),
         ("Suite consistency", summary.get("suite_consistency")),
@@ -190,6 +218,8 @@ def _rejected_table(report: dict[str, Any]) -> str:
             f"<td>{_e(run.get('gate_status'))}</td>"
             f"<td>{_e(run.get('batch_status'))}</td>"
             f"<td>{_e(run.get('readiness_score'))}</td>"
+            f"<td>{_e(run.get('batch_comparison_review_action_count'))}</td>"
+            f"<td>{_e(run.get('batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e('; '.join(_string_list(run.get('reasons'))))}</td>"
             "</tr>"
         )
@@ -197,7 +227,7 @@ def _rejected_table(report: dict[str, Any]) -> str:
         return "<section><h2>Rejected Runs</h2><p>No rejected runs.</p></section>"
     return (
         '<section><h2>Rejected Runs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Gate</th><th>Batch</th><th>Score</th><th>Reasons</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Gate</th><th>Batch</th><th>Score</th><th>Review</th><th>Blockers</th><th>Reasons</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 
