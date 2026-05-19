@@ -38,6 +38,15 @@ def write_promoted_training_scale_seed_csv(report: dict[str, Any], path: str | P
         "selected_handoff_suite_consistency",
         "selected_handoff_suite_mismatch_count",
         "selected_handoff_selected_suite_path",
+        "selected_handoff_selected_batch_review_status",
+        "selected_handoff_selected_batch_comparison_review_action_count",
+        "selected_handoff_selected_batch_comparison_blocker_action_count",
+        "selected_handoff_batch_comparison_blocker_reasons",
+        "comparison_ready_handoff_selected_batch_review_count",
+        "comparison_ready_handoff_selected_batch_blocker_count",
+        "comparison_ready_handoff_selected_batch_comparison_review_action_total",
+        "comparison_ready_handoff_selected_batch_comparison_blocker_action_total",
+        "comparison_ready_handoff_batch_comparison_blocker_reasons",
         "handoff_suite_consistent_count",
         "handoff_suite_mismatch_total",
         "next_suite_path",
@@ -61,6 +70,31 @@ def write_promoted_training_scale_seed_csv(report: dict[str, Any], path: str | P
             "selected_handoff_suite_consistency": summary.get("selected_handoff_suite_consistency"),
             "selected_handoff_suite_mismatch_count": summary.get("selected_handoff_suite_mismatch_count"),
             "selected_handoff_selected_suite_path": summary.get("selected_handoff_selected_suite_path"),
+            "selected_handoff_selected_batch_review_status": summary.get("selected_handoff_selected_batch_review_status"),
+            "selected_handoff_selected_batch_comparison_review_action_count": summary.get(
+                "selected_handoff_selected_batch_comparison_review_action_count"
+            ),
+            "selected_handoff_selected_batch_comparison_blocker_action_count": summary.get(
+                "selected_handoff_selected_batch_comparison_blocker_action_count"
+            ),
+            "selected_handoff_batch_comparison_blocker_reasons": "; ".join(
+                _string_list(summary.get("selected_handoff_batch_comparison_blocker_reasons"))
+            ),
+            "comparison_ready_handoff_selected_batch_review_count": summary.get(
+                "comparison_ready_handoff_selected_batch_review_count"
+            ),
+            "comparison_ready_handoff_selected_batch_blocker_count": summary.get(
+                "comparison_ready_handoff_selected_batch_blocker_count"
+            ),
+            "comparison_ready_handoff_selected_batch_comparison_review_action_total": summary.get(
+                "comparison_ready_handoff_selected_batch_comparison_review_action_total"
+            ),
+            "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": summary.get(
+                "comparison_ready_handoff_selected_batch_comparison_blocker_action_total"
+            ),
+            "comparison_ready_handoff_batch_comparison_blocker_reasons": "; ".join(
+                _string_list(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"))
+            ),
             "handoff_suite_consistent_count": summary.get("handoff_suite_consistent_count"),
             "handoff_suite_mismatch_total": summary.get("handoff_suite_mismatch_total"),
             "next_suite_path": summary.get("next_suite_path"),
@@ -94,6 +128,12 @@ def render_promoted_training_scale_seed_markdown(report: dict[str, Any]) -> str:
         f"- Selected handoff suite: `{summary.get('selected_handoff_suite_consistency')}`",
         f"- Selected handoff mismatches: `{summary.get('selected_handoff_suite_mismatch_count')}`",
         f"- Selected handoff suite path: `{summary.get('selected_handoff_selected_suite_path')}`",
+        f"- Selected handoff batch review: `{summary.get('selected_handoff_selected_batch_review_status')}`",
+        f"- Selected handoff batch review actions: `{summary.get('selected_handoff_selected_batch_comparison_review_action_count')}`",
+        f"- Selected handoff batch blocker actions: `{summary.get('selected_handoff_selected_batch_comparison_blocker_action_count')}`",
+        f"- Comparison-ready handoff batch reviews: `{summary.get('comparison_ready_handoff_selected_batch_review_count')}`",
+        f"- Comparison-ready handoff batch blockers: `{summary.get('comparison_ready_handoff_selected_batch_blocker_count')}`",
+        f"- Comparison-ready handoff batch blocker reasons: `{', '.join(_string_list(summary.get('comparison_ready_handoff_batch_comparison_blocker_reasons')))}`",
         f"- Handoff suite consistent: `{summary.get('handoff_suite_consistent_count')}`",
         f"- Handoff suite mismatches: `{summary.get('handoff_suite_mismatch_total')}`",
         f"- Next suite: `{summary.get('next_suite_path')}`",
@@ -142,6 +182,10 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Missing", summary.get("missing_source_count")),
         ("Selected handoff suite", summary.get("selected_handoff_suite_consistency")),
         ("Selected handoff mismatch", summary.get("selected_handoff_suite_mismatch_count")),
+        ("Selected handoff batch", summary.get("selected_handoff_selected_batch_review_status")),
+        ("Selected batch blockers", summary.get("selected_handoff_selected_batch_comparison_blocker_action_count")),
+        ("Ready batch reviews", summary.get("comparison_ready_handoff_selected_batch_review_count")),
+        ("Ready batch blockers", summary.get("comparison_ready_handoff_selected_batch_blocker_count")),
         ("Handoff suite mismatches", summary.get("handoff_suite_mismatch_total")),
         ("Next suite", summary.get("next_suite_path")),
     ]
@@ -208,6 +252,28 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             ("Selected handoff suite", guard.get("selected_handoff_suite_consistency")),
             ("Selected handoff mismatch", guard.get("selected_handoff_suite_mismatch_count")),
             ("Selected handoff suite path", guard.get("selected_handoff_selected_suite_path")),
+        ]
+    )
+    batch_review = _dict(seed.get("handoff_batch_review"))
+    rows.extend(
+        [
+            ("Selected handoff batch review", batch_review.get("selected_handoff_selected_batch_review_status")),
+            (
+                "Selected handoff batch review actions",
+                batch_review.get("selected_handoff_selected_batch_comparison_review_action_count"),
+            ),
+            (
+                "Selected handoff batch blocker actions",
+                batch_review.get("selected_handoff_selected_batch_comparison_blocker_action_count"),
+            ),
+            (
+                "Selected handoff batch blocker reasons",
+                ", ".join(_string_list(batch_review.get("selected_handoff_batch_comparison_blocker_reasons"))),
+            ),
+            (
+                "Comparison-ready batch blockers",
+                batch_review.get("comparison_ready_handoff_selected_batch_blocker_count"),
+            ),
         ]
     )
     summary = _dict(seed.get("selected_run_summary"))
