@@ -31,6 +31,9 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertFalse(report["execute"])
             self.assertIn("--execute", report["command"])
             self.assertEqual(report["summary"]["artifact_count"], 6)
+            self.assertEqual(report["summary"]["selected_batch_review_status"], "review")
+            self.assertEqual(report["summary"]["selected_batch_comparison_review_action_count"], 2)
+            self.assertTrue(any("Review selected batch comparison actions" in item for item in report["recommendations"]))
 
     def test_blocks_review_when_allow_review_false(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -93,6 +96,9 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertTrue(Path(outputs["json"]).exists())
             self.assertTrue(Path(outputs["csv"]).exists())
             self.assertIn("## Command", markdown)
+            self.assertIn("Selected batch review status", markdown)
+            self.assertIn("Batch comparison reviews", markdown)
+            self.assertIn("Batch review status", html)
             self.assertIn("&lt;handoff&gt;", html)
             self.assertNotIn("<handoff>", html)
 
@@ -123,6 +129,18 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertIn("decision_require_suite_consistency", csv_text)
             self.assertIn("suite_consistency", csv_text)
 
+    def test_selected_batch_blocker_is_carried_into_handoff_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(root, decision_status="review", selected_batch_review_status="blocker")
+
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+
+            self.assertTrue(report["handoff_allowed"])
+            self.assertEqual(report["summary"]["selected_batch_review_status"], "blocker")
+            self.assertEqual(report["summary"]["selected_batch_comparison_blocker_action_count"], 1)
+            self.assertTrue(any("Resolve selected batch comparison blocker actions" in item for item in report["recommendations"]))
+
     def _write_workflow(
         self,
         root: Path,
@@ -134,6 +152,7 @@ class TrainingScaleHandoffTests(unittest.TestCase):
         suite_consistency: str | None = None,
         suite_mismatch_count: int | None = None,
         selected_suite_path: str | None = None,
+        selected_batch_review_status: str = "review",
     ) -> Path:
         workflow_dir = root / "workflow"
         decision_dir = workflow_dir / "decision"
@@ -161,6 +180,14 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "suite_consistency": suite_consistency,
                 "suite_mismatch_count": suite_mismatch_count,
                 "selected_suite_path": selected_suite_path,
+                "selected_batch_review_status": selected_batch_review_status,
+                "selected_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
+                "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+                "selected_batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+                "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
+                "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
+                "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+                "batch_comparison_blocker_reasons": ["coverage-regressed"] if selected_batch_review_status == "blocker" else [],
             },
         }
         decision_path = decision_dir / "training_scale_run_decision.json"

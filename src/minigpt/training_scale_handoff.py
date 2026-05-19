@@ -103,6 +103,13 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
         "suite_consistency",
         "suite_mismatch_count",
         "selected_suite_path",
+        "selected_batch_review_status",
+        "selected_batch_comparison_review_action_count",
+        "selected_batch_comparison_blocker_action_count",
+        "selected_batch_maturity_coverage_regression_count",
+        "batch_comparison_review_action_count",
+        "batch_comparison_blocker_action_count",
+        "batch_maturity_coverage_regression_count",
         "command",
         "blocked_reason",
     ]
@@ -119,6 +126,13 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
             "suite_consistency": summary.get("suite_consistency"),
             "suite_mismatch_count": summary.get("suite_mismatch_count"),
             "selected_suite_path": summary.get("selected_suite_path"),
+            "selected_batch_review_status": summary.get("selected_batch_review_status"),
+            "selected_batch_comparison_review_action_count": summary.get("selected_batch_comparison_review_action_count"),
+            "selected_batch_comparison_blocker_action_count": summary.get("selected_batch_comparison_blocker_action_count"),
+            "selected_batch_maturity_coverage_regression_count": summary.get("selected_batch_maturity_coverage_regression_count"),
+            "batch_comparison_review_action_count": summary.get("batch_comparison_review_action_count"),
+            "batch_comparison_blocker_action_count": summary.get("batch_comparison_blocker_action_count"),
+            "batch_maturity_coverage_regression_count": summary.get("batch_maturity_coverage_regression_count"),
             "command": report.get("command_text"),
             "blocked_reason": report.get("blocked_reason"),
         },
@@ -142,6 +156,11 @@ def render_training_scale_handoff_markdown(report: dict[str, Any]) -> str:
         f"- Require suite consistency: `{summary.get('decision_require_suite_consistency')}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
         f"- Selected suite path: `{summary.get('selected_suite_path')}`",
+        f"- Selected batch review status: `{summary.get('selected_batch_review_status')}`",
+        f"- Selected batch reviews: `{summary.get('selected_batch_comparison_review_action_count')}`",
+        f"- Selected batch blockers: `{summary.get('selected_batch_comparison_blocker_action_count')}`",
+        f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
+        f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
         "",
         "## Command",
         "",
@@ -188,6 +207,11 @@ def render_training_scale_handoff_html(report: dict[str, Any]) -> str:
         ("Artifacts", f"{summary.get('available_artifact_count')}/{summary.get('artifact_count')}"),
         ("Require suite consistency", summary.get("decision_require_suite_consistency")),
         ("Suite", summary.get("suite_consistency")),
+        ("Batch review status", summary.get("selected_batch_review_status")),
+        ("Selected reviews", summary.get("selected_batch_comparison_review_action_count")),
+        ("Selected blockers", summary.get("selected_batch_comparison_blocker_action_count")),
+        ("Batch reviews", summary.get("batch_comparison_review_action_count")),
+        ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
     ]
     return "\n".join(
         [
@@ -373,6 +397,14 @@ def _summary(
         "suite_consistency": suite_guard.get("suite_consistency"),
         "suite_mismatch_count": suite_guard.get("suite_mismatch_count"),
         "selected_suite_path": suite_guard.get("selected_suite_path"),
+        "selected_batch_review_status": decision_summary.get("selected_batch_review_status"),
+        "selected_batch_comparison_review_action_count": decision_summary.get("selected_batch_comparison_review_action_count"),
+        "selected_batch_comparison_blocker_action_count": decision_summary.get("selected_batch_comparison_blocker_action_count"),
+        "selected_batch_maturity_coverage_regression_count": decision_summary.get("selected_batch_maturity_coverage_regression_count"),
+        "batch_comparison_review_action_count": decision_summary.get("batch_comparison_review_action_count"),
+        "batch_comparison_blocker_action_count": decision_summary.get("batch_comparison_blocker_action_count"),
+        "batch_maturity_coverage_regression_count": decision_summary.get("batch_maturity_coverage_regression_count"),
+        "batch_comparison_blocker_reasons": _string_list(decision_summary.get("batch_comparison_blocker_reasons")),
         "artifact_count": len(artifact_rows),
         "available_artifact_count": count_available_artifacts(artifact_rows),
         "returncode": execution.get("returncode"),
@@ -382,8 +414,12 @@ def _summary(
 def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifact_rows: list[dict[str, Any]]) -> list[str]:
     if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
         return ["Fix benchmark suite consistency before executing this handoff as clean model-quality evidence."]
+    if summary.get("selected_batch_review_status") == "blocker":
+        return ["Resolve selected batch comparison blocker actions before executing this handoff as clean evidence."]
     status = str(summary.get("handoff_status") or "")
     if status == "planned":
+        if summary.get("selected_batch_review_status") == "review":
+            return ["Review selected batch comparison actions, then rerun this tool with --execute when ready."]
         return ["Review the handoff command, then rerun this tool with --execute when ready."]
     if status == "blocked":
         return ["Do not execute until the workflow decision provides an allowed handoff command."]

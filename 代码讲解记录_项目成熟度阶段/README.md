@@ -1,6 +1,8 @@
 # MiniGPT 代码讲解记录_项目成熟度阶段
 
 ## 最新追加
+269-v255-handoff-batch-review-propagation.md
+ -> v255 code explanation: carry decision-level selected batch review/blocker context into controlled training scale handoff summaries, artifacts, and recommendations.
 268-v254-run-decision-batch-review-propagation.md
  -> v254 code explanation: carry batch comparison review and blocker counts from scale-run comparison into run decision summaries, artifacts, status, and recommendations.
 267-v253-scale-run-batch-review-propagation.md
