@@ -273,6 +273,62 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_selected_batch_blocker_count=1", completed.stdout)
             self.assertTrue(any("selected handoff batch blocker" in item for item in report["recommendations"]))
 
+    def test_carries_seed_clean_batch_review_into_handoff_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+            )
+
+            report = build_promoted_training_scale_seed_handoff(seed, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_seed_handoff_outputs(report, root / "handoff")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            summary = report["summary"]
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            self.assertEqual(summary["handoff_status"], "planned")
+            self.assertTrue(summary["selected_handoff_require_clean_batch_review"])
+            self.assertEqual(summary["selected_handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["handoff_require_clean_batch_review_count"], 3)
+            self.assertEqual(summary["handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(summary["comparison_ready_handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(summary["comparison_ready_handoff_clean_batch_review_count"], 2)
+            self.assertEqual(summary["comparison_ready_handoff_unclean_batch_review_count"], 0)
+            self.assertIn("selected_handoff_require_clean_batch_review", csv_text)
+            self.assertIn("selected_handoff_clean_batch_review_status", csv_text)
+            self.assertIn("Selected handoff require clean batch review", markdown)
+            self.assertIn("Comparison-ready clean handoffs", markdown)
+            self.assertIn("Selected clean batch", html)
+            self.assertIn("Ready clean batch", html)
+            self.assertIn("selected_handoff_require_clean_batch_review=True", completed.stdout)
+            self.assertIn("selected_handoff_clean_batch_review_status=clean", completed.stdout)
+            self.assertIn("handoff_unclean_batch_review_count=1", completed.stdout)
+            self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
+            self.assertEqual(payload["summary"]["selected_handoff_clean_batch_review_status"], "clean")
+            self.assertTrue(
+                any("Rejected promoted decision inputs include unclean clean-required handoffs" in item for item in report["recommendations"])
+            )
+
     def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -451,6 +507,7 @@ def write_seed_tree(
     command: list[str] | None = None,
     suite_name: str | None = None,
     include_handoff_suite_guard: bool = False,
+    include_handoff_clean_batch_review: bool = False,
     include_handoff_batch_review: bool = False,
 ) -> Path:
     source = root / "corpus.txt"
@@ -505,6 +562,17 @@ def write_seed_tree(
             "handoff_suite_consistent_count": 2,
             "handoff_suite_mismatch_total": 0,
             "comparison_ready_handoff_suite_mismatch_total": 0,
+        }
+    if include_handoff_clean_batch_review:
+        baseline_seed["handoff_clean_batch_review"] = {
+            "selected_handoff_require_clean_batch_review": True,
+            "selected_handoff_clean_batch_review_status": "clean",
+            "handoff_require_clean_batch_review_count": 3,
+            "handoff_clean_batch_review_count": 2,
+            "handoff_unclean_batch_review_count": 1,
+            "comparison_ready_handoff_require_clean_batch_review_count": 2,
+            "comparison_ready_handoff_clean_batch_review_count": 2,
+            "comparison_ready_handoff_unclean_batch_review_count": 0,
         }
     if include_handoff_batch_review:
         baseline_seed["handoff_batch_review"] = {

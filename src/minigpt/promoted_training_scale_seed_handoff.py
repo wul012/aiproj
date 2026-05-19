@@ -23,6 +23,7 @@ from minigpt.promoted_training_scale_seed_handoff_review import (
     SeedHandoffCleanEvidenceReadiness,
     SeedHandoffCleanEvidenceStatus,
     build_seed_handoff_batch_review_summary,
+    build_seed_handoff_clean_batch_review_summary,
     build_seed_handoff_clean_evidence_readiness,
     build_seed_handoff_clean_evidence_requirement,
     build_seed_handoff_review_recommendations,
@@ -228,6 +229,7 @@ def _summary(
         "execution_returncode": execution.get("returncode"),
         "execution_elapsed_seconds": execution.get("elapsed_seconds"),
     }
+    summary.update(build_seed_handoff_clean_batch_review_summary(baseline))
     summary.update(build_seed_handoff_batch_review_summary(baseline))
     return summary
 

@@ -88,6 +88,32 @@ def build_seed_handoff_batch_review_summary(baseline: dict[str, Any]) -> dict[st
     }
 
 
+def build_seed_handoff_clean_batch_review_summary(baseline: dict[str, Any]) -> dict[str, Any]:
+    clean_review = _dict(baseline.get("handoff_clean_batch_review"))
+    return {
+        "selected_handoff_require_clean_batch_review": clean_review.get(
+            "selected_handoff_require_clean_batch_review"
+        ),
+        "selected_handoff_clean_batch_review_status": clean_review.get(
+            "selected_handoff_clean_batch_review_status"
+        ),
+        "handoff_require_clean_batch_review_count": clean_review.get(
+            "handoff_require_clean_batch_review_count"
+        ),
+        "handoff_clean_batch_review_count": clean_review.get("handoff_clean_batch_review_count"),
+        "handoff_unclean_batch_review_count": clean_review.get("handoff_unclean_batch_review_count"),
+        "comparison_ready_handoff_require_clean_batch_review_count": clean_review.get(
+            "comparison_ready_handoff_require_clean_batch_review_count"
+        ),
+        "comparison_ready_handoff_clean_batch_review_count": clean_review.get(
+            "comparison_ready_handoff_clean_batch_review_count"
+        ),
+        "comparison_ready_handoff_unclean_batch_review_count": clean_review.get(
+            "comparison_ready_handoff_unclean_batch_review_count"
+        ),
+    }
+
+
 def build_seed_handoff_clean_evidence_requirement(
     summary: dict[str, Any],
     *,
@@ -155,6 +181,7 @@ def build_seed_handoff_review_recommendations(
     return (
         _suite_alignment_recommendations(summary)
         + _clean_evidence_requirement_recommendations(clean_evidence_requirement)
+        + _handoff_clean_batch_review_recommendations(summary)
         + _handoff_batch_review_recommendations(summary)
     )
 
@@ -239,6 +266,20 @@ def _handoff_batch_review_recommendations(summary: dict[str, Any]) -> list[str]:
     return []
 
 
+def _handoff_clean_batch_review_recommendations(summary: dict[str, Any]) -> list[str]:
+    selected_required = bool(summary.get("selected_handoff_require_clean_batch_review"))
+    selected_status = str(summary.get("selected_handoff_clean_batch_review_status") or "")
+    if selected_required and selected_status != "clean":
+        return [
+            "Resolve selected handoff clean batch-review status before treating this seed handoff as clean model-quality evidence."
+        ]
+    if _int(summary.get("handoff_unclean_batch_review_count")):
+        return [
+            "Rejected promoted decision inputs include unclean clean-required handoffs; keep them out of the seed handoff baseline."
+        ]
+    return []
+
+
 def _suite_alignment_recommendations(summary: dict[str, Any]) -> list[str]:
     status = str(summary.get("seed_handoff_suite_alignment_status") or "")
     detail = str(summary.get("seed_handoff_suite_alignment_detail") or "")
@@ -253,6 +294,13 @@ def _suite_alignment_recommendations(summary: dict[str, Any]) -> list[str]:
     return ["Review suite alignment evidence before continuing the next training-scale cycle."]
 
 
+def _int(value: Any) -> int:
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return 0
+
+
 __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
@@ -261,6 +309,7 @@ __all__ = [
     "SeedHandoffCleanEvidenceReadiness",
     "SeedHandoffCleanEvidenceStatus",
     "build_seed_handoff_batch_review_summary",
+    "build_seed_handoff_clean_batch_review_summary",
     "build_seed_handoff_clean_evidence_readiness",
     "build_seed_handoff_clean_evidence_requirement",
     "build_seed_handoff_review_recommendations",
