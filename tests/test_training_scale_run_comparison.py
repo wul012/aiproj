@@ -18,6 +18,11 @@ from minigpt.training_scale_run_comparison import (  # noqa: E402
     render_training_scale_run_comparison_markdown,
     write_training_scale_run_comparison_outputs,
 )
+from minigpt.training_scale_run_comparison_artifacts import (  # noqa: E402
+    render_training_scale_run_comparison_html as render_comparison_artifact_html,
+    render_training_scale_run_comparison_markdown as render_comparison_artifact_markdown,
+    write_training_scale_run_comparison_outputs as write_comparison_artifact_outputs,
+)
 
 
 class TrainingScaleRunComparisonTests(unittest.TestCase):
@@ -135,6 +140,27 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
                 build_training_scale_run_comparison([])
             with self.assertRaises(ValueError):
                 build_training_scale_run_comparison([allowed, blocked], names=["dup", "dup"])
+
+    def test_artifact_module_matches_legacy_exports(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            allowed, blocked = self._make_allowed_and_blocked_runs(root)
+            report = build_training_scale_run_comparison(
+                [allowed, blocked],
+                names=["allowed", "blocked"],
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            legacy_outputs = write_training_scale_run_comparison_outputs(report, root / "legacy")
+            artifact_outputs = write_comparison_artifact_outputs(report, root / "artifact")
+
+            self.assertEqual(render_training_scale_run_comparison_markdown(report), render_comparison_artifact_markdown(report))
+            self.assertEqual(render_training_scale_run_comparison_html(report), render_comparison_artifact_html(report))
+            self.assertEqual(
+                Path(legacy_outputs["csv"]).read_text(encoding="utf-8"),
+                Path(artifact_outputs["csv"]).read_text(encoding="utf-8"),
+            )
+            self.assertIn("training_scale_run_comparison.html", artifact_outputs["html"])
 
     def _make_allowed_and_blocked_runs(self, root: Path) -> tuple[Path, Path]:
         source = root / "corpus.txt"

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+281-v267-training-scale-run-comparison-artifact-writer-split.md
+ -> v267 code explanation: split training-scale run comparison JSON/CSV/Markdown/HTML artifact writers out of the comparison builder while preserving compatibility exports.
+
 280-v266-training-scale-handoff-artifact-writer-split.md
  -> v266 code explanation: split training-scale handoff JSON/CSV/Markdown/HTML artifact writers out of the validation and execution handoff builder while preserving compatibility exports.
 

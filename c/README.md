@@ -601,6 +601,9 @@ c/265/解释/说明.md
 c/266/图片
 c/266/解释/说明.md
  -> v266 training scale handoff artifact writer split 的运行截图和解释
+c/267/图片
+c/267/解释/说明.md
+ -> v267 training scale run comparison artifact writer split 的运行截图和解释
 ```
 
 写入规则：
