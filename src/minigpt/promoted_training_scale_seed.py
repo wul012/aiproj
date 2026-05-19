@@ -13,12 +13,16 @@ from minigpt.promoted_training_scale_seed_artifacts import (
     write_promoted_training_scale_seed_markdown,
     write_promoted_training_scale_seed_outputs,
 )
+from minigpt.promoted_training_scale_seed_review import (
+    append_seed_handoff_batch_review_recommendation,
+    build_seed_handoff_batch_review,
+    build_seed_handoff_batch_review_summary,
+    build_seed_handoff_suite_guard,
+)
 from minigpt.report_utils import (
     as_dict as _dict,
     display_command as _display_command,
-    first_present,
     list_of_dicts as _list_of_dicts,
-    string_list as _string_list,
     utc_now,
 )
 
@@ -90,8 +94,8 @@ def build_promoted_training_scale_seed(
         "selected_run_summary": _selected_run_summary(selected_run),
         "suite": inherited_suite,
         "suite_path": inherited_suite.get("path"),
-        "handoff_suite_guard": _handoff_suite_guard(decision, selected),
-        "handoff_batch_review": _handoff_batch_review(decision, selected),
+        "handoff_suite_guard": build_seed_handoff_suite_guard(decision, selected),
+        "handoff_batch_review": build_seed_handoff_batch_review(decision, selected),
     }
     plan = {
         "project_root": str(root),
@@ -385,7 +389,7 @@ def _summary(
     blockers: list[str],
 ) -> dict[str, Any]:
     sources = _list_of_dicts(plan.get("sources"))
-    return {
+    summary = {
         "seed_status": seed_status,
         "decision_status": decision.get("decision_status"),
         "selected_name": seed.get("selected_name"),
@@ -404,135 +408,12 @@ def _summary(
         "selected_handoff_selected_suite_path": _dict(seed.get("handoff_suite_guard")).get("selected_handoff_selected_suite_path"),
         "handoff_suite_consistent_count": _dict(seed.get("handoff_suite_guard")).get("handoff_suite_consistent_count"),
         "handoff_suite_mismatch_total": _dict(seed.get("handoff_suite_guard")).get("handoff_suite_mismatch_total"),
-        "selected_handoff_selected_batch_review_status": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_selected_batch_review_status"
-        ),
-        "selected_handoff_selected_batch_comparison_review_action_count": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_selected_batch_comparison_review_action_count"
-        ),
-        "selected_handoff_selected_batch_comparison_blocker_action_count": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_selected_batch_comparison_blocker_action_count"
-        ),
-        "selected_handoff_selected_batch_maturity_coverage_regression_count": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_selected_batch_maturity_coverage_regression_count"
-        ),
-        "selected_handoff_batch_comparison_review_action_count": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_batch_comparison_review_action_count"
-        ),
-        "selected_handoff_batch_comparison_blocker_action_count": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_batch_comparison_blocker_action_count"
-        ),
-        "selected_handoff_batch_comparison_blocker_reasons": _dict(seed.get("handoff_batch_review")).get(
-            "selected_handoff_batch_comparison_blocker_reasons"
-        ),
-        "comparison_ready_handoff_selected_batch_review_count": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_selected_batch_review_count"
-        ),
-        "comparison_ready_handoff_selected_batch_blocker_count": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_selected_batch_blocker_count"
-        ),
-        "comparison_ready_handoff_selected_batch_comparison_review_action_total": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_selected_batch_comparison_review_action_total"
-        ),
-        "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_selected_batch_comparison_blocker_action_total"
-        ),
-        "comparison_ready_handoff_batch_comparison_review_action_total": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_batch_comparison_review_action_total"
-        ),
-        "comparison_ready_handoff_batch_comparison_blocker_action_total": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_batch_comparison_blocker_action_total"
-        ),
-        "comparison_ready_handoff_batch_comparison_blocker_reasons": _dict(seed.get("handoff_batch_review")).get(
-            "comparison_ready_handoff_batch_comparison_blocker_reasons"
-        ),
         "next_suite_path": _dict(plan.get("suite")).get("path"),
         "next_suite_source": plan.get("suite_source"),
         "blocker_count": len(blockers),
     }
-
-
-def _handoff_suite_guard(decision: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
-    summary = _dict(decision.get("summary"))
-    return {
-        "selected_handoff_require_suite_consistency": first_present(
-            summary.get("selected_handoff_require_suite_consistency"),
-            selected.get("handoff_require_suite_consistency"),
-        ),
-        "selected_handoff_suite_consistency": first_present(
-            summary.get("selected_handoff_suite_consistency"),
-            selected.get("handoff_suite_consistency"),
-        ),
-        "selected_handoff_suite_mismatch_count": first_present(
-            summary.get("selected_handoff_suite_mismatch_count"),
-            selected.get("handoff_suite_mismatch_count"),
-        ),
-        "selected_handoff_selected_suite_path": first_present(
-            summary.get("selected_handoff_selected_suite_path"),
-            selected.get("handoff_selected_suite_path"),
-        ),
-        "handoff_require_suite_consistency_count": summary.get("handoff_require_suite_consistency_count"),
-        "handoff_suite_consistent_count": summary.get("handoff_suite_consistent_count"),
-        "handoff_suite_mismatch_total": summary.get("handoff_suite_mismatch_total"),
-        "comparison_ready_handoff_suite_mismatch_total": summary.get("comparison_ready_handoff_suite_mismatch_total"),
-    }
-
-
-def _handoff_batch_review(decision: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
-    summary = _dict(decision.get("summary"))
-    return {
-        "selected_handoff_selected_batch_review_status": first_present(
-            summary.get("selected_handoff_selected_batch_review_status"),
-            selected.get("handoff_selected_batch_review_status"),
-        ),
-        "selected_handoff_selected_batch_comparison_review_action_count": first_present(
-            summary.get("selected_handoff_selected_batch_comparison_review_action_count"),
-            selected.get("handoff_selected_batch_comparison_review_action_count"),
-        ),
-        "selected_handoff_selected_batch_comparison_blocker_action_count": first_present(
-            summary.get("selected_handoff_selected_batch_comparison_blocker_action_count"),
-            selected.get("handoff_selected_batch_comparison_blocker_action_count"),
-        ),
-        "selected_handoff_selected_batch_maturity_coverage_regression_count": first_present(
-            summary.get("selected_handoff_selected_batch_maturity_coverage_regression_count"),
-            selected.get("handoff_selected_batch_maturity_coverage_regression_count"),
-        ),
-        "selected_handoff_batch_comparison_review_action_count": first_present(
-            summary.get("selected_handoff_batch_comparison_review_action_count"),
-            selected.get("handoff_batch_comparison_review_action_count"),
-        ),
-        "selected_handoff_batch_comparison_blocker_action_count": first_present(
-            summary.get("selected_handoff_batch_comparison_blocker_action_count"),
-            selected.get("handoff_batch_comparison_blocker_action_count"),
-        ),
-        "selected_handoff_batch_comparison_blocker_reasons": _string_list(
-            first_present(
-                summary.get("selected_handoff_batch_comparison_blocker_reasons"),
-                selected.get("handoff_batch_comparison_blocker_reasons"),
-            )
-        ),
-        "comparison_ready_handoff_selected_batch_review_count": summary.get(
-            "comparison_ready_handoff_selected_batch_review_count"
-        ),
-        "comparison_ready_handoff_selected_batch_blocker_count": summary.get(
-            "comparison_ready_handoff_selected_batch_blocker_count"
-        ),
-        "comparison_ready_handoff_selected_batch_comparison_review_action_total": summary.get(
-            "comparison_ready_handoff_selected_batch_comparison_review_action_total"
-        ),
-        "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": summary.get(
-            "comparison_ready_handoff_selected_batch_comparison_blocker_action_total"
-        ),
-        "comparison_ready_handoff_batch_comparison_review_action_total": summary.get(
-            "comparison_ready_handoff_batch_comparison_review_action_total"
-        ),
-        "comparison_ready_handoff_batch_comparison_blocker_action_total": summary.get(
-            "comparison_ready_handoff_batch_comparison_blocker_action_total"
-        ),
-        "comparison_ready_handoff_batch_comparison_blocker_reasons": _string_list(
-            summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons")
-        ),
-    }
+    summary.update(build_seed_handoff_batch_review_summary(seed))
+    return summary
 
 
 def _recommendations(
@@ -546,31 +427,18 @@ def _recommendations(
             "Run the generated plan command on the next corpus, then pass its outputs through the v70-v80 training scale chain.",
             "Keep the selected promoted baseline path in the seed report so the next cycle can explain where it came from.",
         ]
-        _append_handoff_batch_review_recommendation(recommendations, seed)
+        append_seed_handoff_batch_review_recommendation(recommendations, seed)
         return recommendations
     if seed_status == "review":
         recommendations = [
             "Review the promoted baseline decision before running the next plan command.",
             "If the review is accepted, reuse the generated command and keep this seed as the cycle handoff artifact.",
         ]
-        _append_handoff_batch_review_recommendation(recommendations, seed)
+        append_seed_handoff_batch_review_recommendation(recommendations, seed)
         return recommendations
     if blockers:
         return ["Fix the seed blockers before starting the next training scale planning cycle."]
     return ["Inspect the promoted baseline decision before building a next-cycle plan."]
-
-
-def _append_handoff_batch_review_recommendation(recommendations: list[str], seed: dict[str, Any]) -> None:
-    review = _dict(seed.get("handoff_batch_review"))
-    selected_status = str(review.get("selected_handoff_selected_batch_review_status") or "")
-    if selected_status == "blocker":
-        recommendations.append(
-            "Resolve selected handoff batch blocker actions before treating the next-cycle seed as clean model-quality evidence."
-        )
-    elif selected_status == "review":
-        recommendations.append(
-            "Review selected handoff batch actions before treating the next-cycle seed as clean model-quality evidence."
-        )
 
 
 __all__ = [

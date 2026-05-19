@@ -589,6 +589,9 @@ c/261/解释/说明.md
 c/262/图片
 c/262/解释/说明.md
  -> v262 promoted seed handoff review helper split 的运行截图和解释
+c/263/图片
+c/263/解释/说明.md
+ -> v263 promoted seed review helper split 的运行截图和解释
 ```
 
 写入规则：

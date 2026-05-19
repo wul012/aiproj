@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+277-v263-promoted-seed-review-helper-split.md
+ -> v263 code explanation: split promoted seed suite-guard, handoff batch-review, summary projection, and recommendation helper logic out of the next-cycle seed orchestration module.
+
 276-v262-promoted-seed-handoff-review-helper-split.md
  -> v262 code explanation: split seed handoff review, suite alignment, clean-evidence, and batch-review helper logic out of the orchestration module while preserving the public contract.
 
