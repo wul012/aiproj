@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+284-v270-handoff-clean-batch-review-gate.md
+ -> v270 code explanation: carry workflow clean batch-review requirements into training-scale execution handoff validation, artifacts, CLI output, and tests.
+
 283-v269-workflow-clean-batch-review-gate.md
  -> v269 code explanation: carry the clean batch-review gate from standalone training-scale run decisions into the consolidated workflow API, CLI, workflow artifacts, and tests.
 

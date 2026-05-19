@@ -610,6 +610,9 @@ c/268/解释/说明.md
 c/269/图片
 c/269/解释/说明.md
  -> v269 training scale workflow clean batch review gate 的运行截图和解释
+c/270/图片
+c/270/解释/说明.md
+ -> v270 training scale handoff clean batch gate 的运行截图和解释
 ```
 
 写入规则：

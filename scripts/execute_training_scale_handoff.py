@@ -40,6 +40,7 @@ def main() -> None:
     print(f"handoff_status={report.get('summary', {}).get('handoff_status')}")
     print(f"decision_status={report.get('decision_status')}")
     print(f"handoff_allowed={report.get('handoff_allowed')}")
+    print(f"clean_batch_review_status={report.get('summary', {}).get('clean_batch_review_status')}")
     print(f"execute={report.get('execute')}")
     print(f"returncode={report.get('execution', {}).get('returncode')}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))

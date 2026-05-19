@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -134,6 +135,65 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertIn("decision_require_suite_consistency", csv_text)
             self.assertIn("suite_consistency", csv_text)
 
+    def test_carries_workflow_clean_batch_review_guard_into_handoff(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(
+                root,
+                decision_status="review",
+                require_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+
+            self.assertTrue(report["clean_batch_review_guard"]["decision_require_clean_batch_review"])
+            self.assertFalse(report["handoff_allowed"])
+            self.assertEqual(report["summary"]["handoff_status"], "blocked")
+            self.assertIn("requires clean batch-review evidence", report["blocked_reason"])
+            self.assertTrue(report["summary"]["decision_require_clean_batch_review"])
+            self.assertTrue(report["summary"]["require_clean_batch_review"])
+            self.assertEqual(report["summary"]["clean_batch_review_status"], "review")
+            self.assertTrue(any("workflow clean batch-review requirement" in item for item in report["recommendations"]))
+
+    def test_clean_batch_review_guard_fields_are_rendered_and_printed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(
+                root,
+                decision_status="review",
+                require_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+            markdown = render_training_scale_handoff_markdown(report)
+            html = render_training_scale_handoff_html(report)
+            outputs = write_training_scale_handoff_outputs(report, root / "handoff")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/execute_training_scale_handoff.py",
+                    str(workflow),
+                    "--out-dir",
+                    str(root / "script-handoff"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("decision_require_clean_batch_review", csv_text)
+            self.assertIn("clean_batch_review_status", csv_text)
+            self.assertIn("Require clean batch review", markdown)
+            self.assertIn("Clean batch review status", markdown)
+            self.assertIn("Require clean batch review", html)
+            self.assertIn("Clean batch review", html)
+            self.assertIn("clean_batch_review_status=review", completed.stdout)
+
     def test_selected_batch_blocker_is_carried_into_handoff_review(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -174,6 +234,8 @@ class TrainingScaleHandoffTests(unittest.TestCase):
         suite_consistency: str | None = None,
         suite_mismatch_count: int | None = None,
         selected_suite_path: str | None = None,
+        require_clean_batch_review: bool = False,
+        clean_batch_review_status: str | None = None,
         selected_batch_review_status: str = "review",
     ) -> Path:
         workflow_dir = root / "workflow"
@@ -202,6 +264,8 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "suite_consistency": suite_consistency,
                 "suite_mismatch_count": suite_mismatch_count,
                 "selected_suite_path": selected_suite_path,
+                "require_clean_batch_review": require_clean_batch_review,
+                "clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
                 "selected_batch_review_status": selected_batch_review_status,
                 "selected_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
                 "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
@@ -228,6 +292,8 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "selected_suite_path": selected_suite_path,
                 "suite_name": "standard-zh" if selected_suite_path else None,
                 "suite_path": selected_suite_path,
+                "decision_require_clean_batch_review": require_clean_batch_review,
+                "clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
             },
             "decision_outputs": {"json": str(decision_path)},
         }
