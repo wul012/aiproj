@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+280-v266-training-scale-handoff-artifact-writer-split.md
+ -> v266 code explanation: split training-scale handoff JSON/CSV/Markdown/HTML artifact writers out of the validation and execution handoff builder while preserving compatibility exports.
+
 279-v265-promoted-decision-artifact-writer-split.md
  -> v265 code explanation: split promoted decision JSON/CSV/Markdown/HTML artifact writers out of the baseline decision builder while preserving compatibility exports.
 

@@ -598,6 +598,9 @@ c/264/解释/说明.md
 c/265/图片
 c/265/解释/说明.md
  -> v265 promoted decision artifact writer split 的运行截图和解释
+c/266/图片
+c/266/解释/说明.md
+ -> v266 training scale handoff artifact writer split 的运行截图和解释
 ```
 
 写入规则：

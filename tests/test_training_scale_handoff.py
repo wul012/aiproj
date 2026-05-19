@@ -16,6 +16,11 @@ from minigpt.training_scale_handoff import (  # noqa: E402
     render_training_scale_handoff_markdown,
     write_training_scale_handoff_outputs,
 )
+from minigpt.training_scale_handoff_artifacts import (  # noqa: E402
+    render_training_scale_handoff_html as render_handoff_artifact_html,
+    render_training_scale_handoff_markdown as render_handoff_artifact_markdown,
+    write_training_scale_handoff_outputs as write_handoff_artifact_outputs,
+)
 
 
 class TrainingScaleHandoffTests(unittest.TestCase):
@@ -140,6 +145,23 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertEqual(report["summary"]["selected_batch_review_status"], "blocker")
             self.assertEqual(report["summary"]["selected_batch_comparison_blocker_action_count"], 1)
             self.assertTrue(any("Resolve selected batch comparison blocker actions" in item for item in report["recommendations"]))
+
+    def test_artifact_module_matches_legacy_exports(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(root, decision_status="ready")
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+
+            legacy_outputs = write_training_scale_handoff_outputs(report, root / "legacy")
+            artifact_outputs = write_handoff_artifact_outputs(report, root / "artifact")
+
+            self.assertEqual(render_training_scale_handoff_markdown(report), render_handoff_artifact_markdown(report))
+            self.assertEqual(render_training_scale_handoff_html(report), render_handoff_artifact_html(report))
+            self.assertEqual(
+                Path(legacy_outputs["csv"]).read_text(encoding="utf-8"),
+                Path(artifact_outputs["csv"]).read_text(encoding="utf-8"),
+            )
+            self.assertIn("training_scale_handoff.html", artifact_outputs["html"])
 
     def _write_workflow(
         self,
