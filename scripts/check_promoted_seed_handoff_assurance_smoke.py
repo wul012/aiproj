@@ -5,8 +5,11 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+SMOKE_SUMMARY_JSON_FILENAME = "promoted_seed_handoff_assurance_smoke_summary.json"
+SMOKE_SUMMARY_TEXT_FILENAME = "promoted_seed_handoff_assurance_smoke_summary.txt"
 
 
 def parse_args() -> argparse.Namespace:
@@ -24,6 +27,8 @@ def main() -> None:
     receipt_check_dir = out_dir / "receipt-check"
     embedded_check_dir = out_dir / "embedded-receipt-check"
     assurance_dir = out_dir / "assurance"
+    stdout_path = out_dir / "execute_stdout.txt"
+    stderr_path = out_dir / "execute_stderr.txt"
     command = [
         sys.executable,
         "-B",
@@ -41,11 +46,28 @@ def main() -> None:
         str(assurance_dir),
     ]
     completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True, text=True)
-    (out_dir / "execute_stdout.txt").write_text(completed.stdout, encoding="utf-8")
-    (out_dir / "execute_stderr.txt").write_text(completed.stderr, encoding="utf-8")
-    if completed.returncode:
-        raise SystemExit(completed.returncode)
+    stdout_path.write_text(completed.stdout, encoding="utf-8")
+    stderr_path.write_text(completed.stderr, encoding="utf-8")
     report_path = handoff_dir / "promoted_training_scale_seed_handoff.json"
+    if completed.returncode:
+        summary = _build_smoke_summary(
+            out_dir=out_dir,
+            seed=seed,
+            handoff_dir=handoff_dir,
+            receipt_check_dir=receipt_check_dir,
+            embedded_check_dir=embedded_check_dir,
+            assurance_dir=assurance_dir,
+            stdout_path=stdout_path,
+            stderr_path=stderr_path,
+            report_path=report_path,
+            command=command,
+            returncode=completed.returncode,
+            checks={},
+            issues=[f"handoff execution command returned {completed.returncode}"],
+        )
+        summary_outputs = write_smoke_summary_outputs(summary, out_dir)
+        _print_smoke_summary(summary, summary_outputs)
+        raise SystemExit(completed.returncode)
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assurance = _dict(report.get("handoff_assurance"))
     assurance_outputs = _dict(report.get("handoff_assurance_outputs"))
@@ -59,33 +81,50 @@ def main() -> None:
         "handoff_assurance_output_json": assurance_outputs.get("json"),
         "handoff_assurance_output_text": assurance_outputs.get("text"),
     }
-    _require(checks["handoff_assurance_status"] == "pass", "handoff assurance status must pass")
-    _require(checks["handoff_assurance_decision"] == "continue", "handoff assurance decision must continue")
-    _require(
+    issues: list[str] = []
+    _check(checks["handoff_assurance_status"] == "pass", "handoff assurance status must pass", issues)
+    _check(checks["handoff_assurance_decision"] == "continue", "handoff assurance decision must continue", issues)
+    _check(
         checks["handoff_assurance_embedded_receipt_check_status"] == "pass",
         "embedded receipt-check status must pass",
+        issues,
     )
-    _require(
+    _check(
         checks["handoff_assurance_embedded_receipt_check_sidecar_status"] == "pass",
         "embedded receipt-check sidecar status must pass",
+        issues,
     )
-    _require(checks["handoff_assurance_output_json_exists"] is True, "assurance JSON sidecar must exist")
-    _require(checks["handoff_assurance_output_text_exists"] is True, "assurance text sidecar must exist")
-    _require(
+    _check(checks["handoff_assurance_output_json_exists"] is True, "assurance JSON sidecar must exist", issues)
+    _check(checks["handoff_assurance_output_text_exists"] is True, "assurance text sidecar must exist", issues)
+    _check(
         _is_file_reference(checks["handoff_assurance_output_json"], ROOT),
         "assurance JSON output path must be a file",
+        issues,
     )
-    _require(
+    _check(
         _is_file_reference(checks["handoff_assurance_output_text"], ROOT),
         "assurance text output path must be a file",
+        issues,
     )
-    print("status=pass")
-    print("decision=continue")
-    print(f"seed={seed}")
-    print(f"handoff_report={report_path}")
-    print("command=" + " ".join(command))
-    for key, value in checks.items():
-        print(f"{key}={value}")
+    summary = _build_smoke_summary(
+        out_dir=out_dir,
+        seed=seed,
+        handoff_dir=handoff_dir,
+        receipt_check_dir=receipt_check_dir,
+        embedded_check_dir=embedded_check_dir,
+        assurance_dir=assurance_dir,
+        stdout_path=stdout_path,
+        stderr_path=stderr_path,
+        report_path=report_path,
+        command=command,
+        returncode=completed.returncode,
+        checks=checks,
+        issues=issues,
+    )
+    summary_outputs = write_smoke_summary_outputs(summary, out_dir)
+    _print_smoke_summary(summary, summary_outputs)
+    if issues:
+        raise SystemExit(1)
 
 
 def _write_seed_tree(root: Path) -> Path:
@@ -178,9 +217,106 @@ def _dict(value: object) -> dict[str, object]:
     return dict(value) if isinstance(value, dict) else {}
 
 
-def _require(condition: bool, message: str) -> None:
+def _check(condition: bool, message: str, issues: list[str]) -> None:
     if not condition:
-        raise SystemExit(message)
+        issues.append(message)
+
+
+def _build_smoke_summary(
+    *,
+    out_dir: Path,
+    seed: Path,
+    handoff_dir: Path,
+    receipt_check_dir: Path,
+    embedded_check_dir: Path,
+    assurance_dir: Path,
+    stdout_path: Path,
+    stderr_path: Path,
+    report_path: Path,
+    command: list[str],
+    returncode: int,
+    checks: dict[str, object],
+    issues: list[str],
+) -> dict[str, Any]:
+    status = "pass" if not issues else "fail"
+    decision = "continue" if status == "pass" else "stop"
+    summary_outputs = _smoke_summary_output_paths(out_dir)
+    return {
+        "schema_version": 1,
+        "status": status,
+        "decision": decision,
+        "issue_count": len(issues),
+        "issues": issues,
+        "execute_returncode": returncode,
+        "seed": str(seed),
+        "handoff_report": str(report_path),
+        "handoff_report_exists": report_path.is_file(),
+        "command": command,
+        "command_text": " ".join(command),
+        "directories": {
+            "out_dir": str(out_dir),
+            "handoff": str(handoff_dir),
+            "receipt_check": str(receipt_check_dir),
+            "embedded_receipt_check": str(embedded_check_dir),
+            "assurance": str(assurance_dir),
+        },
+        "logs": {
+            "stdout": str(stdout_path),
+            "stderr": str(stderr_path),
+            "stdout_exists": stdout_path.is_file(),
+            "stderr_exists": stderr_path.is_file(),
+        },
+        "checks": checks,
+        "outputs": {
+            "summary_json": str(summary_outputs["json"]),
+            "summary_text": str(summary_outputs["text"]),
+            "handoff_assurance_json": str(checks.get("handoff_assurance_output_json") or ""),
+            "handoff_assurance_text": str(checks.get("handoff_assurance_output_text") or ""),
+        },
+    }
+
+
+def _render_smoke_summary(summary: dict[str, Any]) -> str:
+    checks = _dict(summary.get("checks"))
+    rows = [
+        ("smoke_status", summary.get("status")),
+        ("smoke_decision", summary.get("decision")),
+        ("smoke_execute_returncode", summary.get("execute_returncode")),
+        ("smoke_seed", summary.get("seed")),
+        ("smoke_handoff_report", summary.get("handoff_report")),
+        ("smoke_handoff_report_exists", summary.get("handoff_report_exists")),
+        ("smoke_issue_count", summary.get("issue_count")),
+        ("smoke_issues", json.dumps(summary.get("issues"), ensure_ascii=False)),
+    ]
+    rows.extend((key, value) for key, value in checks.items())
+    return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
+
+
+def _smoke_summary_output_paths(out_dir: Path) -> dict[str, Path]:
+    return {
+        "json": out_dir / SMOKE_SUMMARY_JSON_FILENAME,
+        "text": out_dir / SMOKE_SUMMARY_TEXT_FILENAME,
+    }
+
+
+def write_smoke_summary_outputs(summary: dict[str, Any], out_dir: Path) -> dict[str, str]:
+    paths = _smoke_summary_output_paths(out_dir)
+    paths["json"].write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    paths["text"].write_text(_render_smoke_summary(summary), encoding="utf-8")
+    return {key: str(value) for key, value in paths.items()}
+
+
+def _print_smoke_summary(summary: dict[str, Any], outputs: dict[str, str]) -> None:
+    checks = _dict(summary.get("checks"))
+    print(f"status={summary.get('status')}")
+    print(f"decision={summary.get('decision')}")
+    print(f"seed={summary.get('seed')}")
+    print(f"handoff_report={summary.get('handoff_report')}")
+    print(f"command={summary.get('command_text')}")
+    print(f"summary_json={outputs['json']}")
+    print(f"summary_text={outputs['text']}")
+    for key, value in checks.items():
+        print(f"{key}={value}")
 
 
 def _is_file_reference(value: object, base_dir: Path) -> bool:

@@ -933,11 +933,21 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             )
 
             report_path = out_dir / "handoff" / "promoted_training_scale_seed_handoff.json"
+            summary_path = out_dir / "promoted_seed_handoff_assurance_smoke_summary.json"
+            summary_text_path = out_dir / "promoted_seed_handoff_assurance_smoke_summary.txt"
             payload = json.loads(report_path.read_text(encoding="utf-8"))
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
             self.assertEqual(payload["handoff_assurance"]["status"], "pass")
             self.assertEqual(payload["handoff_assurance"]["decision"], "continue")
             self.assertEqual(payload["handoff_assurance"]["embedded_receipt_check_sidecar_status"], "pass")
             self.assertTrue(Path(payload["handoff_assurance_outputs"]["json"]).is_file())
+            self.assertEqual(summary["status"], "pass")
+            self.assertEqual(summary["decision"], "continue")
+            self.assertEqual(summary["checks"]["handoff_assurance_status"], "pass")
+            self.assertTrue(summary_path.is_file())
+            self.assertIn("smoke_status=pass", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("summary_json=", completed.stdout)
+            self.assertIn("summary_text=", completed.stdout)
             self.assertIn("status=pass", completed.stdout)
             self.assertIn("handoff_assurance_status=pass", completed.stdout)
             self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
