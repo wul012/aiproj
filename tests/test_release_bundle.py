@@ -77,6 +77,8 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "ci_workflow_status": "pass",
             "ci_workflow_failed_checks": 0,
             "ci_workflow_node24_actions": 2,
+            "ci_workflow_required_order_count": 1,
+            "ci_workflow_order_violation_count": 0,
             "test_coverage_status": "pass",
             "test_coverage_decision": "continue_with_coverage_gate",
             "test_coverage_percent": 90.17,
@@ -94,6 +96,8 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "node24_native_action_count": 2,
             "forbidden_env_count": 0,
             "missing_step_count": 0,
+            "required_order_count": 1,
+            "order_violation_count": 0,
             "python_version": "3.11",
         },
         "test_coverage_context": {
@@ -158,6 +162,8 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "node24_native_action_count": 2,
             "forbidden_env_count": 0,
             "missing_step_count": 0,
+            "required_order_count": 1,
+            "order_violation_count": 0,
             "python_version": "3.11",
         },
     }
@@ -225,6 +231,8 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["request_history_status"], "pass")
             self.assertEqual(bundle["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(bundle["summary"]["ci_workflow_failed_checks"], 0)
+            self.assertEqual(bundle["summary"]["ci_workflow_required_order_count"], 1)
+            self.assertEqual(bundle["summary"]["ci_workflow_order_violation_count"], 0)
             self.assertEqual(bundle["summary"]["test_coverage_status"], "pass")
             self.assertEqual(bundle["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual(bundle["summary"]["test_coverage_fail_under"], 80.0)
@@ -234,6 +242,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("ci_workflow_hygiene_json", {item["key"] for item in bundle["artifacts"]})
             self.assertIn("test_coverage_report_json", {item["key"] for item in bundle["artifacts"]})
             self.assertEqual(bundle["ci_workflow_context"]["status"], "pass")
+            self.assertEqual(bundle["ci_workflow_context"]["order_violation_count"], 0)
             self.assertEqual(bundle["test_coverage_context"]["coverage_gap"], 0.0)
             self.assertGreaterEqual(bundle["summary"]["available_artifacts"], 10)
             self.assertEqual(bundle["top_runs"][0]["name"], "candidate")
@@ -253,6 +262,7 @@ class ReleaseBundleTests(unittest.TestCase):
 
             self.assertEqual(bundle["inputs"]["ci_workflow_hygiene_path"], str(ci_workflow_hygiene_path))
             self.assertEqual(bundle["summary"]["ci_workflow_node24_actions"], 2)
+            self.assertEqual(bundle["summary"]["ci_workflow_order_violation_count"], 0)
             self.assertIn("ci_workflow_hygiene_html", {item["key"] for item in bundle["artifacts"]})
 
     def test_build_release_bundle_accepts_explicit_test_coverage_report_path(self) -> None:

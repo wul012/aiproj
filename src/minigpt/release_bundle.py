@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    first_present,
     list_of_dicts as _list_of_dicts,
     utc_now,
 )
@@ -242,6 +243,7 @@ def _build_summary(
     model_summary = _dict(model_card.get("summary")) if model_card else {}
     request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
     ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
+    audit_ci_context = _dict(audit.get("ci_workflow_context")) if isinstance(audit, dict) else {}
     coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
     audit_status = audit_summary.get("overall_status")
     release_status = _release_status(audit_status, audit_summary.get("fail_count"), audit_summary.get("warn_count"))
@@ -258,6 +260,8 @@ def _build_summary(
         "ci_workflow_status": audit_summary.get("ci_workflow_status") or ci_summary.get("status"),
         "ci_workflow_failed_checks": audit_summary.get("ci_workflow_failed_checks") if audit_summary.get("ci_workflow_failed_checks") is not None else ci_summary.get("failed_check_count"),
         "ci_workflow_node24_actions": audit_summary.get("ci_workflow_node24_actions") if audit_summary.get("ci_workflow_node24_actions") is not None else ci_summary.get("node24_native_action_count"),
+        "ci_workflow_required_order_count": first_present(ci_summary.get("required_order_count"), audit_ci_context.get("required_order_count")),
+        "ci_workflow_order_violation_count": first_present(ci_summary.get("order_violation_count"), audit_ci_context.get("order_violation_count")),
         "test_coverage_status": audit_summary.get("test_coverage_status") or coverage_summary.get("status"),
         "test_coverage_decision": audit_summary.get("test_coverage_decision") or coverage_summary.get("decision"),
         "test_coverage_percent": audit_summary.get("test_coverage_percent") if audit_summary.get("test_coverage_percent") is not None else coverage_summary.get("line_coverage_percent"),
@@ -429,11 +433,13 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
             "node24_native_action_count": summary.get("node24_native_action_count"),
             "forbidden_env_count": summary.get("forbidden_env_count"),
             "missing_step_count": summary.get("missing_step_count"),
+            "required_order_count": summary.get("required_order_count"),
+            "order_violation_count": summary.get("order_violation_count"),
             "python_version": summary.get("python_version"),
         }
     if audit_context:
         return dict(audit_context)
-    return {"available": False, "status": None, "failed_check_count": None}
+    return {"available": False, "status": None, "failed_check_count": None, "required_order_count": None, "order_violation_count": None}
 
 
 def _test_coverage_context(test_coverage_report: dict[str, Any] | None, audit: dict[str, Any] | None) -> dict[str, Any]:

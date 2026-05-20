@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+311-v297-release-readiness-ci-order-evidence.md
+ -> v297 code explanation: carry CI workflow order counts into release bundle and release readiness evidence.
+
 310-v296-ci-order-evidence-audit-context.md
  -> v296 code explanation: expose CI workflow order counts in hygiene CLI output and project audit context.
 
@@ -723,6 +726,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `308-v294-promoted-seed-handoff-assurance-workflow-hygiene.md`：第二百九十四版代码讲解，把 promoted seed handoff assurance smoke 及其 coverage 前顺序纳入 CI workflow hygiene。
 - `309-v295-promoted-seed-handoff-assurance-workflow-line-evidence.md`：第二百九十五版代码讲解，把 CI workflow hygiene 的 smoke-before-coverage 证据升级为行号形式。
 - `310-v296-ci-order-evidence-audit-context.md`：第二百九十六版代码讲解，把 CI workflow order 计数从 hygiene JSON 扩展到 CLI stdout 和 project audit context。
+- `311-v297-release-readiness-ci-order-evidence.md`：第二百九十七版代码讲解，把 CI workflow order 计数继续传入 release bundle 和 release readiness 证据。
 
 ## 一句话总览
 

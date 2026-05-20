@@ -691,6 +691,9 @@ c/295/解释/说明.md
 c/296/图片
 c/296/解释/说明.md
  -> v296 CI workflow order evidence audit context 的运行截图和解释
+c/297/图片
+c/297/解释/说明.md
+ -> v297 release bundle and readiness CI order evidence 的运行截图和解释
 ```
 
 写入规则：

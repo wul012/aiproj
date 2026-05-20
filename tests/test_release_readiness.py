@@ -112,6 +112,8 @@ def make_readiness_inputs(
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
                 "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
+                "ci_workflow_required_order_count": 1 if include_ci_workflow else None,
+                "ci_workflow_order_violation_count": (0 if ci_workflow_status == "pass" else 1) if include_ci_workflow else None,
                 "test_coverage_status": test_coverage_status if include_test_coverage else None,
                 "test_coverage_percent": 90.17 if include_test_coverage else None,
                 "test_coverage_fail_under": 80.0 if include_test_coverage else None,
@@ -150,6 +152,8 @@ def make_readiness_inputs(
                     "check_count": 4,
                     "failed_check_count": 0 if ci_workflow_status == "pass" else 1,
                     "node24_native_action_count": 2,
+                    "required_order_count": 1,
+                    "order_violation_count": 0 if ci_workflow_status == "pass" else 1,
                     "legacy_node_actions": 0 if ci_workflow_status == "pass" else 1,
                 },
                 "checks": [
@@ -224,6 +228,8 @@ def make_readiness_inputs(
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
                 "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
+                "ci_workflow_required_order_count": 1 if include_ci_workflow else None,
+                "ci_workflow_order_violation_count": (0 if ci_workflow_status == "pass" else 1) if include_ci_workflow else None,
                 "test_coverage_status": test_coverage_status if include_test_coverage else None,
                 "test_coverage_percent": 90.17 if include_test_coverage else None,
                 "test_coverage_fail_under": 80.0 if include_test_coverage else None,
@@ -243,6 +249,8 @@ def make_readiness_inputs(
                 "status": ci_workflow_status if include_ci_workflow else None,
                 "failed_check_count": 0 if ci_workflow_status == "pass" else 1,
                 "node24_native_action_count": 2 if include_ci_workflow else None,
+                "required_order_count": 1 if include_ci_workflow else None,
+                "order_violation_count": (0 if ci_workflow_status == "pass" else 1) if include_ci_workflow else None,
                 "path": str(ci_workflow_path) if include_ci_workflow else None,
             },
             "test_coverage_context": {
@@ -273,6 +281,8 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(report["summary"]["ci_workflow_failed_checks"], 0)
             self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
+            self.assertEqual(report["summary"]["ci_workflow_required_order_count"], 1)
+            self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 0)
             self.assertEqual(report["summary"]["test_coverage_status"], "pass")
             self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
@@ -291,8 +301,10 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["readiness_status"], "ready")
             self.assertEqual(report["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
+            self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 0)
             ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
             self.assertEqual(ci_panel["status"], "pass")
+            self.assertIn("order_violations=0", ci_panel["detail"])
             self.assertIn("source=bundle summary/context", ci_panel["detail"])
 
     def test_build_release_readiness_uses_bundle_coverage_context_when_report_missing(self) -> None:
@@ -341,8 +353,10 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["readiness_status"], "review")
             self.assertEqual(report["summary"]["decision"], "review")
             self.assertEqual(report["summary"]["ci_workflow_status"], "fail")
+            self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 1)
             ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
             self.assertEqual(ci_panel["status"], "warn")
+            self.assertIn("order_violations=1", ci_panel["detail"])
             self.assertIn("Review warning panel: CI Workflow Hygiene", " ".join(report["actions"]))
 
     def test_build_release_readiness_reviews_failed_test_coverage(self) -> None:
