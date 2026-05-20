@@ -71,6 +71,9 @@ d/319/解释/说明.md
 d/320/图片
 d/320/解释/说明.md
  -> v320 tiny budget comparison smoke 的运行截图和解释
+d/321/图片
+d/321/解释/说明.md
+ -> v321 promoted seed handoff artifact split 的运行截图和解释
 ```
 
 写入规则：

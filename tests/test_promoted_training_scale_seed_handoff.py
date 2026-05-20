@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import promoted_training_scale_seed_handoff as handoff_module  # noqa: E402
 from minigpt import promoted_training_scale_seed_handoff_artifacts as artifact_module  # noqa: E402
+from minigpt import promoted_training_scale_seed_handoff_receipt_artifacts as receipt_artifact_module  # noqa: E402
 from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     SEED_HANDOFF_AUTOMATION_GATE_DECISIONS,
     SEED_HANDOFF_AUTOMATION_GATE_STATUSES,
@@ -234,8 +235,16 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             artifact_module.build_promoted_training_scale_seed_handoff_automation_receipt,
         )
         self.assertIs(
+            artifact_module.build_promoted_training_scale_seed_handoff_automation_receipt,
+            receipt_artifact_module.build_promoted_training_scale_seed_handoff_automation_receipt,
+        )
+        self.assertIs(
             handoff_module.render_promoted_training_scale_seed_handoff_automation_receipt_text,
             artifact_module.render_promoted_training_scale_seed_handoff_automation_receipt_text,
+        )
+        self.assertIs(
+            artifact_module.render_promoted_training_scale_seed_handoff_automation_receipt_text,
+            receipt_artifact_module.render_promoted_training_scale_seed_handoff_automation_receipt_text,
         )
 
     def test_validates_ready_seed_without_executing(self) -> None:
