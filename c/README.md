@@ -652,6 +652,9 @@ c/282/解释/说明.md
 c/283/图片
 c/283/解释/说明.md
  -> v283 promoted training scale seed handoff receipt checker artifacts 的运行截图和解释
+c/284/图片
+c/284/解释/说明.md
+ -> v284 promoted training scale seed handoff inline receipt check 的运行截图和解释
 ```
 
 写入规则：

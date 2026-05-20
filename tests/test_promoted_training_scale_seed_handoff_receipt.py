@@ -148,6 +148,88 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("receipt_check_text=", completed.stdout)
             self.assertIn("receipt_decision=continue", check_text.read_text(encoding="utf-8"))
 
+    def test_execute_script_can_write_receipt_check_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            check_dir = root / "receipt-check"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            check_json = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.json"
+            check_text = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+            check_payload = json.loads(check_json.read_text(encoding="utf-8"))
+            self.assertEqual(check_payload["status"], "pass")
+            self.assertEqual(check_payload["decision"], "continue")
+            self.assertEqual(check_payload["checker_exit_code"], 0)
+            self.assertIn("receipt_check_status=pass", completed.stdout)
+            self.assertIn("receipt_decision=continue", completed.stdout)
+            self.assertIn("receipt_check_outputs=", completed.stdout)
+            self.assertIn("receipt_check_json=", completed.stdout)
+            self.assertIn("receipt_check_text=", completed.stdout)
+            self.assertIn("receipt_decision=continue", check_text.read_text(encoding="utf-8"))
+
+    def test_execute_script_writes_receipt_check_before_stop_exit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+            script_out = root / "script-out"
+            check_dir = root / "receipt-check"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-clean-batch-review",
+                    "--receipt-check-out-dir",
+                    str(check_dir),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            check_json = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.json"
+            check_text = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+            check_payload = json.loads(check_json.read_text(encoding="utf-8"))
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertEqual(check_payload["status"], "pass")
+            self.assertEqual(check_payload["decision"], "stop")
+            self.assertEqual(check_payload["checker_exit_code"], 1)
+            self.assertEqual(check_payload["blocking_source"], "automation_gate")
+            self.assertEqual(check_payload["failed_requirements"], ["clean_batch_review"])
+            self.assertIn("receipt_check_status=pass", completed.stdout)
+            self.assertIn("receipt_decision=stop", completed.stdout)
+            self.assertIn("receipt_blocking_source=automation_gate", completed.stdout)
+            self.assertIn("automation_summary_decision=stop", completed.stdout)
+            self.assertIn("receipt_decision=stop", check_text.read_text(encoding="utf-8"))
+
     def test_script_exits_nonzero_for_stop_unless_allowed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

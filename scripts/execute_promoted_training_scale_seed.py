@@ -12,6 +12,12 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     build_promoted_training_scale_seed_handoff,
     write_promoted_training_scale_seed_handoff_outputs,
 )
+from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
+    check_promoted_training_scale_seed_handoff_automation_receipt,
+    load_promoted_training_scale_seed_handoff_automation_receipt,
+    render_promoted_training_scale_seed_handoff_automation_receipt_check,
+    write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -29,6 +35,12 @@ def parse_args() -> argparse.Namespace:
         "--require-clean-batch-review",
         action="store_true",
         help="Exit non-zero unless selected clean-required handoff batch-review evidence is clean.",
+    )
+    parser.add_argument(
+        "--receipt-check-out-dir",
+        type=Path,
+        default=None,
+        help="Optional directory for validating the generated automation receipt and writing check JSON/text outputs.",
     )
     parser.add_argument("--timeout-seconds", type=int, default=900)
     parser.add_argument("--title", type=str, default="MiniGPT promoted training scale seed handoff")
@@ -117,6 +129,7 @@ def main() -> None:
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     print(f"automation_receipt_json={outputs.get('automation_receipt_json')}")
     print(f"automation_receipt_text={outputs.get('automation_receipt_text')}")
+    receipt_check = _write_receipt_check(outputs, args.receipt_check_out_dir)
     print(f"automation_summary_decision={automation_summary.get('decision')}")
     print(f"automation_summary_exit_code={automation_summary.get('exit_code')}")
     print(f"automation_summary_blocking_source={automation_summary.get('blocking_source')}")
@@ -150,12 +163,32 @@ def main() -> None:
         print(f"automation_gate_detail={automation_gate.get('detail')}")
     if automation_summary.get("decision") == "stop":
         raise SystemExit(int(automation_summary.get("exit_code") or 1))
+    if receipt_check is not None and receipt_check.get("status") != "pass":
+        raise SystemExit(1)
 
 
 def _default_out_dir(path: Path) -> Path:
     if path.is_dir():
         return path / "handoff"
     return path.parent / "handoff"
+
+
+def _write_receipt_check(outputs: dict[str, str], out_dir: Path | None) -> dict[str, object] | None:
+    if out_dir is None:
+        return None
+    receipt_path = outputs.get("automation_receipt_json")
+    if not receipt_path:
+        raise ValueError("automation receipt JSON output is missing")
+    receipt = load_promoted_training_scale_seed_handoff_automation_receipt(receipt_path)
+    check = check_promoted_training_scale_seed_handoff_automation_receipt(receipt)
+    check["receipt_path"] = str(receipt_path)
+    check_outputs = write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs(check, out_dir)
+    print(render_promoted_training_scale_seed_handoff_automation_receipt_check(check), end="")
+    print(f"receipt_path={receipt_path}")
+    print("receipt_check_outputs=" + json.dumps(check_outputs, ensure_ascii=False))
+    print(f"receipt_check_json={check_outputs['json']}")
+    print(f"receipt_check_text={check_outputs['text']}")
+    return check
 
 
 if __name__ == "__main__":
