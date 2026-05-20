@@ -344,7 +344,7 @@ def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
         return "coverage-regressed"
     if int(context.get("regressed_count") or 0) > 0:
         return "regressed"
-    if int(context.get("ci_workflow_regression_count") or 0) > 0:
+    if int(context.get("ci_workflow_regression_count") or 0) > 0 or int(context.get("ci_workflow_order_regression_count") or 0) > 0:
         return "ci-regressed"
     if int(context.get("improved_count") or 0) > 0:
         return "improved"
@@ -413,6 +413,8 @@ def _recommendations(
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("ci_workflow_regression_count") or 0) > 0:
         recs.append("Review CI workflow hygiene regressions before presenting the project as release-stable; maturity status is downgraded to review.")
+    elif int(release_readiness_context.get("ci_workflow_order_regression_count") or 0) > 0:
+        recs.append("Review CI workflow order regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("improved_count") or 0) > 0:
         recs.append("Keep release readiness comparison evidence in the registry so improvement history remains visible during maturity review.")
     if not isinstance(request_history_summary, dict):

@@ -38,6 +38,11 @@ def build_maturity_narrative_summary(
         "release_readiness_trend_status": release.get("trend_status"),
         "release_readiness_regressed_count": release.get("regressed_count"),
         "release_readiness_improved_count": release.get("improved_count"),
+        "release_readiness_ci_workflow_regression_count": release.get("ci_workflow_regression_count"),
+        "release_readiness_ci_workflow_order_regression_count": release.get("ci_workflow_order_regression_count"),
+        "release_readiness_ci_workflow_status_changed_count": release.get("ci_workflow_status_changed_count"),
+        "release_readiness_max_ci_workflow_failed_check_delta": release.get("max_abs_ci_workflow_failed_check_delta"),
+        "release_readiness_max_ci_workflow_order_violation_delta": release.get("max_abs_ci_workflow_order_violation_delta"),
         "release_readiness_test_coverage_regression_count": release.get("test_coverage_regression_count"),
         "release_readiness_test_coverage_status_changed_count": release.get("test_coverage_status_changed_count"),
         "release_readiness_max_test_coverage_percent_delta": release.get("max_abs_test_coverage_percent_delta"),
@@ -125,8 +130,10 @@ def _portfolio_status(
         return "incomplete"
     if (
         maturity.get("overall_status") in {"warn", "fail"}
-        or release.get("trend_status") in {"regressed", "coverage-regressed"}
+        or release.get("trend_status") in {"regressed", "ci-regressed", "coverage-regressed"}
         or int(release.get("regressed_count") or 0) > 0
+        or int(release.get("ci_workflow_regression_count") or 0) > 0
+        or int(release.get("ci_workflow_order_regression_count") or 0) > 0
         or int(release.get("test_coverage_regression_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
@@ -150,6 +157,26 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "trend_status": _coalesce(release_context.get("trend_status"), maturity_summary.get("release_readiness_trend_status")),
         "regressed_count": _coalesce(release_context.get("regressed_count"), maturity_summary.get("release_readiness_regressed_count")),
         "improved_count": _coalesce(release_context.get("improved_count"), maturity_summary.get("release_readiness_improved_count")),
+        "ci_workflow_regression_count": _coalesce(
+            release_context.get("ci_workflow_regression_count"),
+            maturity_summary.get("release_readiness_ci_workflow_regression_count"),
+        ),
+        "ci_workflow_order_regression_count": _coalesce(
+            release_context.get("ci_workflow_order_regression_count"),
+            maturity_summary.get("release_readiness_ci_workflow_order_regression_count"),
+        ),
+        "ci_workflow_status_changed_count": _coalesce(
+            release_context.get("ci_workflow_status_changed_count"),
+            maturity_summary.get("release_readiness_ci_workflow_status_changed_count"),
+        ),
+        "max_abs_ci_workflow_failed_check_delta": _coalesce(
+            release_context.get("max_abs_ci_workflow_failed_check_delta"),
+            maturity_summary.get("release_readiness_max_ci_workflow_failed_check_delta"),
+        ),
+        "max_abs_ci_workflow_order_violation_delta": _coalesce(
+            release_context.get("max_abs_ci_workflow_order_violation_delta"),
+            maturity_summary.get("release_readiness_max_ci_workflow_order_violation_delta"),
+        ),
         "test_coverage_regression_count": _coalesce(
             release_context.get("test_coverage_regression_count"),
             maturity_summary.get("release_readiness_test_coverage_regression_count"),

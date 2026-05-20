@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+314-v300-maturity-narrative-ci-order-regression-review.md
+ -> v300 code explanation: carry CI workflow order-violation regressions into maturity narrative review status and rendered artifacts.
+
 313-v299-registry-and-maturity-ci-order-regression-summary.md
  -> v299 code explanation: carry CI workflow order-violation regressions into registry and maturity summaries.
 
@@ -735,6 +738,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `311-v297-release-readiness-ci-order-evidence.md`：第二百九十七版代码讲解，把 CI workflow order 计数继续传入 release bundle 和 release readiness 证据。
 - `312-v298-release-readiness-comparison-ci-order-deltas.md`：第二百九十八版代码讲解，在 release readiness comparison 中比较 CI workflow order violation delta。
 - `313-v299-registry-and-maturity-ci-order-regression-summary.md`：第二百九十九版代码讲解，把 CI workflow order regression 继续传入 registry 和 maturity 汇总。
+- `314-v300-maturity-narrative-ci-order-regression-review.md`：第三百版代码讲解，把 CI workflow order regression 继续传入 maturity narrative 的 review 状态和渲染输出。
 
 ## 一句话总览
 

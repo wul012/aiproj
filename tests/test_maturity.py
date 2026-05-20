@@ -206,6 +206,31 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 1)
             self.assertIn("CI workflow hygiene regressions", " ".join(summary["recommendations"]))
 
+    def test_ci_workflow_order_regression_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"ci-regressed": 1}
+            registry["release_readiness_delta_summary"]["regressed_count"] = 0
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["ci_workflow_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["ci_workflow_order_regression_count"] = 1
+            registry["release_readiness_delta_summary"]["ci_workflow_status_changed_count"] = 0
+            registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"] = 0
+            registry["release_readiness_delta_summary"]["max_abs_ci_workflow_order_violation_delta"] = 1
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "ci-regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_order_regression_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 1)
+            self.assertIn("CI workflow order regressions", " ".join(summary["recommendations"]))
+
     def test_test_coverage_regression_marks_maturity_for_review(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

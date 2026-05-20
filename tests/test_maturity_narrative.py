@@ -28,6 +28,8 @@ def make_project(
     *,
     release_trend: str = "improved",
     regressed_count: int = 0,
+    ci_regression_count: int = 0,
+    ci_order_regression_count: int = 0,
     coverage_regression_count: int = 0,
 ) -> dict[str, Path]:
     project = root / "project"
@@ -50,6 +52,11 @@ def make_project(
                 "release_readiness_trend_status": release_trend,
                 "release_readiness_regressed_count": regressed_count,
                 "release_readiness_improved_count": 2,
+                "release_readiness_ci_workflow_regression_count": ci_regression_count,
+                "release_readiness_ci_workflow_order_regression_count": ci_order_regression_count,
+                "release_readiness_ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                "release_readiness_max_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
+                "release_readiness_max_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "release_readiness_test_coverage_regression_count": coverage_regression_count,
                 "release_readiness_test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
                 "release_readiness_max_test_coverage_percent_delta": 7.5 if coverage_regression_count else 0,
@@ -62,6 +69,11 @@ def make_project(
                 "regressed_count": regressed_count,
                 "improved_count": 2,
                 "panel_changed_count": 0,
+                "ci_workflow_regression_count": ci_regression_count,
+                "ci_workflow_order_regression_count": ci_order_regression_count,
+                "ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                "max_abs_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
+                "max_abs_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "test_coverage_regression_count": coverage_regression_count,
                 "test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
                 "max_abs_test_coverage_percent_delta": 7.5 if coverage_regression_count else 0,
@@ -84,6 +96,11 @@ def make_project(
                 "regressed_count": regressed_count,
                 "improved_count": 2,
                 "panel_changed_count": 0,
+                "ci_workflow_regression_count": ci_regression_count,
+                "ci_workflow_order_regression_count": ci_order_regression_count,
+                "ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                "max_abs_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
+                "max_abs_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "test_coverage_regression_count": coverage_regression_count,
                 "test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
                 "max_abs_test_coverage_percent_delta": 7.5 if coverage_regression_count else 0,
@@ -249,6 +266,22 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 1)
             self.assertIn("Resolve review-level release", narrative["recommendations"][0])
 
+    def test_build_maturity_narrative_marks_review_for_ci_order_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp), release_trend="ci-regressed", ci_order_regression_count=1)
+
+            narrative = build_maturity_narrative(paths["project"])
+            release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "ci-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_order_regression_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
+            self.assertEqual(release_section["status"], "ci-regressed")
+            self.assertIn("CI order regressions=1", release_section["claim"])
+            self.assertIn("max order violation delta=1", release_section["claim"])
+            self.assertIn("Resolve review-level release", narrative["recommendations"][0])
+
     def test_build_maturity_narrative_marks_review_for_coverage_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             paths = make_project(Path(tmp), release_trend="coverage-regressed", coverage_regression_count=1)
@@ -262,6 +295,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_test_coverage_status_changed_count"], 1)
             self.assertEqual(narrative["summary"]["release_readiness_max_test_coverage_percent_delta"], 7.5)
             self.assertEqual(narrative["summary"]["release_readiness_max_test_coverage_gap_delta"], 3)
+            self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_order_regression_count"], 0)
             self.assertEqual(release_section["status"], "coverage-regressed")
             self.assertIn("test coverage regressions=1", release_section["claim"])
             self.assertIn("max coverage gap delta=3", release_section["claim"])
@@ -317,12 +351,16 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("maturity_narrative", Path(outputs["json"]).name)
             self.assertIn("## Evidence Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release Quality Trend", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release CI workflow regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release CI order regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release coverage regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release coverage gap delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision eval compare", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("CI regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("CI order regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Coverage regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Coverage gap delta", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
