@@ -110,6 +110,9 @@ d/332/解释/说明.md
 d/333/图片
 d/333/解释/说明.md
  -> v333 remediation gate issue text 的运行截图和解释
+d/334/图片
+d/334/解释/说明.md
+ -> v334 tiny scorecard smoke checker 的运行截图和解释
 ```
 
 写入规则：
