@@ -82,9 +82,12 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
         "handoff_selected_suite_path",
         "handoff_require_clean_batch_review",
         "handoff_clean_batch_review_status",
+        "handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_regression_names",
         "handoff_selected_batch_review_status",
         "handoff_selected_batch_comparison_review_action_count",
         "handoff_selected_batch_comparison_blocker_action_count",
+        "handoff_selected_batch_maturity_ci_regression_count",
         "handoff_batch_comparison_review_action_count",
         "handoff_batch_comparison_blocker_action_count",
         "variant_count",
@@ -114,12 +117,19 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
                     "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
                     "handoff_require_clean_batch_review": row.get("handoff_require_clean_batch_review"),
                     "handoff_clean_batch_review_status": row.get("handoff_clean_batch_review_status"),
+                    "handoff_batch_maturity_ci_regression_count": row.get("handoff_batch_maturity_ci_regression_count"),
+                    "handoff_batch_maturity_ci_regression_names": ";".join(
+                        _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
+                    ),
                     "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                     "handoff_selected_batch_comparison_review_action_count": row.get(
                         "handoff_selected_batch_comparison_review_action_count"
                     ),
                     "handoff_selected_batch_comparison_blocker_action_count": row.get(
                         "handoff_selected_batch_comparison_blocker_action_count"
+                    ),
+                    "handoff_selected_batch_maturity_ci_regression_count": row.get(
+                        "handoff_selected_batch_maturity_ci_regression_count"
                     ),
                     "handoff_batch_comparison_review_action_count": row.get(
                         "handoff_batch_comparison_review_action_count"
@@ -158,6 +168,9 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         f"- Handoff require clean batch review: `{summary.get('handoff_require_clean_batch_review_count')}`",
         f"- Handoff clean batch review: `{summary.get('handoff_clean_batch_review_count')}`",
         f"- Handoff unclean batch review: `{summary.get('handoff_unclean_batch_review_count')}`",
+        f"- Handoff batch CI regressions: `{summary.get('handoff_batch_maturity_ci_regression_count')}`",
+        f"- Handoff selected batch CI regressions: `{summary.get('handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_ci_regression_names')))}`",
         f"- Selected batch reviews: `{summary.get('handoff_selected_batch_review_count')}`",
         f"- Selected batch blockers: `{summary.get('handoff_selected_batch_blocker_count')}`",
         f"- Batch comparison reviews: `{summary.get('handoff_batch_comparison_review_action_total')}`",
@@ -167,8 +180,8 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         "",
         "## Promotions",
         "",
-        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Selected Suite | Clean Required | Clean Status | Batch Review | Batch Blockers | Variants | Required Artifacts | Primary Variant | Scale Run |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | --- | --- |",
+        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Selected Suite | Clean Required | Clean Status | CI Regressions | Batch Review | Batch Blockers | Variants | Required Artifacts | Primary Variant | Scale Run |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -183,6 +196,7 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
                     _md(row.get("handoff_selected_suite_path")),
                     _md(row.get("handoff_require_clean_batch_review")),
                     _md(row.get("handoff_clean_batch_review_status")),
+                    _md(row.get("handoff_batch_maturity_ci_regression_count")),
                     _md(row.get("handoff_selected_batch_review_status")),
                     _md(row.get("handoff_selected_batch_comparison_blocker_action_count")),
                     _md(row.get("variant_count")),
@@ -228,6 +242,8 @@ def render_training_scale_promotion_index_html(report: dict[str, Any]) -> str:
         ("Handoff clean required", summary.get("handoff_require_clean_batch_review_count")),
         ("Handoff clean", summary.get("handoff_clean_batch_review_count")),
         ("Handoff unclean", summary.get("handoff_unclean_batch_review_count")),
+        ("Handoff CI regressions", summary.get("handoff_batch_maturity_ci_regression_count")),
+        ("Selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
         ("Batch reviews", summary.get("handoff_selected_batch_review_count")),
         ("Batch blockers", summary.get("handoff_selected_batch_blocker_count")),
         ("Batch review actions", summary.get("handoff_batch_comparison_review_action_total")),
@@ -311,6 +327,7 @@ def _promotions_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('handoff_selected_suite_path'))}</td>"
             f"<td>{_e(row.get('handoff_require_clean_batch_review'))}</td>"
             f"<td>{_e(row.get('handoff_clean_batch_review_status'))}</td>"
+            f"<td>{_e(row.get('handoff_batch_maturity_ci_regression_count'))}</td>"
             f"<td>{_e(row.get('handoff_selected_batch_review_status'))}</td>"
             f"<td>{_e(row.get('handoff_selected_batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e(row.get('ready_variant_count'))}/{_e(row.get('variant_count'))}</td>"
@@ -321,7 +338,7 @@ def _promotions_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Promotions</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Clean Required</th><th>Clean Status</th><th>Batch Review</th><th>Batch Blockers</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Clean Required</th><th>Clean Status</th><th>CI Regressions</th><th>Batch Review</th><th>Batch Blockers</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

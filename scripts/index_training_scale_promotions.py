@@ -51,6 +51,8 @@ def main() -> None:
     print(f"handoff_require_clean_batch_review_count={summary['handoff_require_clean_batch_review_count']}")
     print(f"handoff_clean_batch_review_count={summary['handoff_clean_batch_review_count']}")
     print(f"handoff_unclean_batch_review_count={summary['handoff_unclean_batch_review_count']}")
+    print(f"handoff_batch_maturity_ci_regression_count={summary['handoff_batch_maturity_ci_regression_count']}")
+    print(f"handoff_selected_batch_maturity_ci_regression_total={summary['handoff_selected_batch_maturity_ci_regression_total']}")
     print(f"handoff_selected_batch_review_count={summary['handoff_selected_batch_review_count']}")
     print(f"handoff_selected_batch_blocker_count={summary['handoff_selected_batch_blocker_count']}")
     print(f"handoff_batch_comparison_review_action_total={summary['handoff_batch_comparison_review_action_total']}")
