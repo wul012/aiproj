@@ -429,11 +429,25 @@ def remediation_gate_status(run_config: dict[str, Any], decision: dict[str, Any]
     required = bool(run_config.get("require_clean_remediation"))
     remediation_count = int(decision.get("remediation_count") or 0)
     failed = required and remediation_count > 0
+    issues = []
+    if failed:
+        issues.append(
+            {
+                "code": "remediation_rows_present",
+                "severity": decision.get("first_remediation_severity") or "blocker",
+                "category": decision.get("first_remediation_category"),
+                "action_code": decision.get("first_remediation_action_code"),
+                "owner_scope": decision.get("first_remediation_owner_scope"),
+                "count": remediation_count,
+            }
+        )
     return {
         "required": required,
         "status": "fail" if failed else "pass",
         "decision": "stop" if failed else "continue",
         "remediation_count": remediation_count,
+        "issue_count": len(issues),
+        "issues": issues,
         "first_category": decision.get("first_remediation_category"),
         "first_action_code": decision.get("first_remediation_action_code"),
         "first_severity": decision.get("first_remediation_severity"),
@@ -521,6 +535,7 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("remediation_gate_status", remediation_gate.get("status")),
         ("remediation_gate_decision", remediation_gate.get("decision")),
         ("remediation_gate_count", remediation_gate.get("remediation_count")),
+        ("remediation_gate_issue_count", remediation_gate.get("issue_count")),
         ("remediation_gate_first_category", remediation_gate.get("first_category")),
         ("remediation_gate_first_action_code", remediation_gate.get("first_action_code")),
         ("remediation_gate_first_severity", remediation_gate.get("first_severity")),

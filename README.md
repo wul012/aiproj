@@ -484,12 +484,12 @@ Version 331 adds an opt-in clean-remediation gate to the tiny scorecard comparis
 - Strict mode fails when remediation rows remain, while the default path keeps remediation as advisory evidence.
 - Archived clean remediation gate evidence in `d/331`.
 
-## Latest v331 checkpoint
+## Latest v332 checkpoint
 
-- `scripts/run_tiny_scorecard_comparison_smoke.py` now accepts `--require-clean-remediation`.
-- The smoke summary includes `remediation_gate` with required/status/decision/count and first remediation metadata.
-- Strict mode exits non-zero when remediation rows remain, while default mode keeps remediation as advisory evidence.
-- Archived clean remediation gate evidence in `d/331`.
+- `remediation_gate` now includes machine-readable `issue_count` and `issues`.
+- Strict clean-remediation failures expose stable issue code, severity, category, action code, owner scope, and count.
+- Tiny smoke text summaries now print `remediation_gate_issue_count`.
+- Archived clean remediation gate issue evidence in `d/332`.
 
 ## Version tags
 
@@ -827,6 +827,7 @@ v328.0.0 MiniGPT v328 remediation summary
 v329.0.0 MiniGPT v329 remediation metadata
 v330.0.0 MiniGPT v330 remediation CSV artifact
 v331.0.0 MiniGPT v331 clean remediation gate
+v332.0.0 MiniGPT v332 remediation gate issues
 ```
 
 ## Project structure

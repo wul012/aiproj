@@ -101,7 +101,12 @@ d/329/解释/说明.md
 d/330/图片
 d/330/解释/说明.md
  -> v330 remediation CSV artifact 的运行截图和解释
+d/331/图片
+d/331/解释/说明.md
  -> v331 clean remediation gate 的运行截图和解释
+d/332/图片
+d/332/解释/说明.md
+ -> v332 remediation gate issues 的运行截图和解释
 ```
 
 写入规则：
