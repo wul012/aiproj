@@ -23,6 +23,26 @@ from minigpt.benchmark_scorecard_decision_artifacts import (
 )
 
 
+BLOCKER_CATEGORY_PRIORITY = {
+    "threshold": 60,
+    "missing_rubric": 50,
+    "rubric_regression": 40,
+    "overall_regression": 30,
+    "baseline_candidate": 20,
+    "other_blocker": 10,
+}
+
+REVIEW_CATEGORY_PRIORITY = {
+    "eval_suite_not_ready": 60,
+    "rubric_fail_regression": 50,
+    "generation_quality_flag_regression": 40,
+    "case_regression": 30,
+    "generation_quality_flag_shift": 20,
+    "generation_quality_case_shift": 10,
+    "other_review": 0,
+}
+
+
 def load_benchmark_scorecard_comparison(path: str | Path) -> dict[str, Any]:
     comparison_path = _resolve_comparison_path(Path(path))
     payload = json.loads(comparison_path.read_text(encoding="utf-8-sig"))
@@ -135,6 +155,8 @@ def _evaluate_run(
     counts = case_counts.get(str(name), {"regressed": 0, "improved": 0})
     if counts.get("regressed"):
         review_items.append(f"{counts.get('regressed')} case regression(s)")
+    blocker_categories = _categorize_blockers(blockers)
+    review_categories = _categorize_review_items(review_items)
     relation = "baseline" if is_baseline else "blocked" if blockers else "review" if review_items else "promote"
     return {
         "name": name,
@@ -157,6 +179,8 @@ def _evaluate_run(
         "case_improvement_count": int(counts.get("improved") or 0),
         "blockers": blockers,
         "review_items": review_items,
+        "blocker_categories": blocker_categories,
+        "review_categories": review_categories,
     }
 
 
@@ -206,6 +230,8 @@ def _summary(
     non_ready = [row for row in nonbaseline if row.get("eval_suite_comparison_status") not in {None, "pass"}]
     threshold_blocks = _threshold_blocks(nonbaseline, min_rubric_score)
     threshold_profile = _threshold_profile(threshold_blocks)
+    blocker_category_counts = _category_counts(nonbaseline, "blocker_categories")
+    review_category_counts = _category_counts(nonbaseline, "review_categories")
     return {
         "decision_status": decision_status,
         "comparison_scorecard_count": comparison.get("scorecard_count"),
@@ -227,6 +253,10 @@ def _summary(
         "comparison_baseline_eval_suite_comparison_status": comparison_summary.get("baseline_eval_suite_comparison_status"),
         "comparison_generation_quality_flag_regression_count": comparison_summary.get("generation_quality_flag_regression_count"),
         "comparison_generation_quality_dominant_flag_change_count": comparison_summary.get("generation_quality_dominant_flag_change_count"),
+        "blocker_category_counts": blocker_category_counts,
+        "dominant_blocker_category": _dominant_category(blocker_category_counts, BLOCKER_CATEGORY_PRIORITY),
+        "review_category_counts": review_category_counts,
+        "dominant_review_category": _dominant_category(review_category_counts, REVIEW_CATEGORY_PRIORITY),
         "first_threshold_blocked_candidate": threshold_profile.get("first_threshold_blocked_candidate"),
         "first_threshold_blocker": threshold_profile.get("first_threshold_blocker"),
         "first_threshold_rubric_score": threshold_profile.get("first_threshold_rubric_score"),
@@ -239,6 +269,64 @@ def _summary(
         "threshold_largest_gap_candidate": threshold_profile.get("threshold_largest_gap_candidate"),
         "threshold_largest_gap_margin": threshold_profile.get("threshold_largest_gap_margin"),
     }
+
+
+def _categorize_blockers(blockers: list[str]) -> list[str]:
+    categories = []
+    for blocker in blockers:
+        text = str(blocker)
+        if text == "baseline run is not a promotion candidate":
+            categories.append("baseline_candidate")
+        elif text == "rubric_avg_score is missing":
+            categories.append("missing_rubric")
+        elif text.startswith("rubric_avg_score below"):
+            categories.append("threshold")
+        elif text == "rubric score regressed from baseline":
+            categories.append("rubric_regression")
+        elif text == "overall score regressed from baseline":
+            categories.append("overall_regression")
+        else:
+            categories.append("other_blocker")
+    return categories
+
+
+def _categorize_review_items(review_items: list[str]) -> list[str]:
+    categories = []
+    for item in review_items:
+        text = str(item)
+        if text == "rubric fail count increased":
+            categories.append("rubric_fail_regression")
+        elif text.startswith("generation-quality flags increased"):
+            categories.append("generation_quality_flag_regression")
+        elif text == "dominant generation-quality flag changed":
+            categories.append("generation_quality_flag_shift")
+        elif text == "worst generation-quality case changed":
+            categories.append("generation_quality_case_shift")
+        elif text.startswith("eval-suite comparison readiness is"):
+            categories.append("eval_suite_not_ready")
+        elif text.endswith("case regression(s)"):
+            categories.append("case_regression")
+        else:
+            categories.append("other_review")
+    return categories
+
+
+def _category_counts(rows: list[dict[str, Any]], key: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        values = row.get(key)
+        if not isinstance(values, list):
+            continue
+        for value in values:
+            category = str(value)
+            counts[category] = counts.get(category, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _dominant_category(counts: dict[str, int], priority: dict[str, int]) -> str | None:
+    if not counts:
+        return None
+    return max(counts.items(), key=lambda item: (item[1], priority.get(item[0], -1), item[0]))[0]
 
 
 def _threshold_blocks(rows: list[dict[str, Any]], min_rubric_score: float) -> list[dict[str, Any]]:

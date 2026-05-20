@@ -86,6 +86,9 @@ d/324/解释/说明.md
 d/325/图片
 d/325/解释/说明.md
  -> v325 decision threshold profile artifact 的运行截图和解释
+d/326/图片
+d/326/解释/说明.md
+ -> v326 decision failure taxonomy 的运行截图和解释
 ```
 
 写入规则：

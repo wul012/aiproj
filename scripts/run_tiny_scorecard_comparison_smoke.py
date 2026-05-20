@@ -372,6 +372,10 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "review_candidate_count": summary.get("review_candidate_count"),
         "blocked_candidate_count": summary.get("blocked_candidate_count"),
         "non_comparison_ready_candidate_count": summary.get("non_comparison_ready_candidate_count"),
+        "blocker_category_counts": as_dict(summary.get("blocker_category_counts")),
+        "dominant_blocker_category": summary.get("dominant_blocker_category"),
+        "review_category_counts": as_dict(summary.get("review_category_counts")),
+        "dominant_review_category": summary.get("dominant_review_category"),
         "blocked_candidate_names": [str(item.get("name")) for item in blocked if item.get("name") is not None],
         "review_candidate_names": [str(item.get("name")) for item in review if item.get("name") is not None],
         "first_blocked_candidate": first_name(blocked),
@@ -438,6 +442,10 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_candidate_evaluation_count", decision.get("candidate_evaluation_count")),
         ("decision_blocked_candidate_count", decision.get("blocked_candidate_count")),
         ("decision_blocked_candidates", ",".join(str(item) for item in decision.get("blocked_candidate_names", []))),
+        ("decision_dominant_blocker_category", decision.get("dominant_blocker_category")),
+        ("decision_dominant_review_category", decision.get("dominant_review_category")),
+        ("decision_blocker_category_counts", format_counts(decision.get("blocker_category_counts"))),
+        ("decision_review_category_counts", format_counts(decision.get("review_category_counts"))),
         ("decision_first_blocker", decision.get("first_blocker")),
         ("decision_first_threshold_candidate", decision.get("first_threshold_blocked_candidate")),
         ("decision_first_threshold_score", decision.get("first_threshold_rubric_score")),
@@ -489,6 +497,11 @@ def first_list_item(rows: list[dict[str, Any]], key: str) -> str | None:
                 if item is not None:
                     return str(item)
     return None
+
+
+def format_counts(value: Any) -> str:
+    counts = as_dict(value)
+    return ",".join(f"{key}:{counts[key]}" for key in sorted(counts))
 
 
 def first_threshold_block(rows: list[dict[str, Any]], min_rubric_score: Any, summary: dict[str, Any] | None = None) -> dict[str, Any]:

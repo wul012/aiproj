@@ -47,7 +47,9 @@ def write_benchmark_scorecard_decision_csv(report: dict[str, Any], path: str | P
         "case_regression_count",
         "case_improvement_count",
         "blockers",
+        "blocker_categories",
         "review_items",
+        "review_categories",
     ]
     with out_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -74,6 +76,8 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
         f"- Review candidates: `{summary.get('review_candidate_count')}`",
         f"- Blocked candidates: `{summary.get('blocked_candidate_count')}`",
         f"- Non comparison-ready candidates: `{summary.get('non_comparison_ready_candidate_count')}`",
+        f"- Dominant blocker category: `{summary.get('dominant_blocker_category')}`",
+        f"- Dominant review category: `{summary.get('dominant_review_category')}`",
         f"- Threshold-blocked candidates: `{summary.get('threshold_blocked_candidate_count')}`",
         f"- Threshold blocked names: `{', '.join(_string_list(summary.get('threshold_blocked_candidate_names')))}`",
         f"- Threshold closest: `{summary.get('threshold_closest_candidate')}` / `{_fmt_signed(summary.get('threshold_closest_margin'))}`",
@@ -81,8 +85,8 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
         "",
         "## Candidate Evaluations",
         "",
-        "| Run | Relation | Rubric | Eval Compare | Overall Delta | Flag Delta | Case Regressions | Blockers | Review Items |",
-        "| --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- |",
+        "| Run | Relation | Rubric | Eval Compare | Overall Delta | Flag Delta | Case Regressions | Blockers | Blocker Categories | Review Items | Review Categories |",
+        "| --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("candidate_evaluations")):
         lines.append(
@@ -97,7 +101,9 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
                     _md(_fmt_signed(row.get("generation_quality_total_flags_delta"))),
                     _md(row.get("case_regression_count")),
                     _md("; ".join(_string_list(row.get("blockers")))),
+                    _md("; ".join(_string_list(row.get("blocker_categories")))),
                     _md("; ".join(_string_list(row.get("review_items")))),
+                    _md("; ".join(_string_list(row.get("review_categories")))),
                 ]
             )
             + " |"
@@ -127,6 +133,8 @@ def render_benchmark_scorecard_decision_html(report: dict[str, Any]) -> str:
         ("Review", summary.get("review_candidate_count")),
         ("Blocked", summary.get("blocked_candidate_count")),
         ("Eval compare review", summary.get("non_comparison_ready_candidate_count")),
+        ("Top blocker", summary.get("dominant_blocker_category")),
+        ("Top review", summary.get("dominant_review_category")),
         ("Threshold blocked", summary.get("threshold_blocked_candidate_count")),
         ("Threshold closest", _format_pair(summary.get("threshold_closest_candidate"), summary.get("threshold_closest_margin"))),
         ("Threshold largest gap", _format_pair(summary.get("threshold_largest_gap_candidate"), summary.get("threshold_largest_gap_margin"))),
@@ -189,12 +197,14 @@ def _candidate_table(report: dict[str, Any]) -> str:
             f"<td>{_e(_fmt(row.get('generation_quality_total_flags')))}<br><span>{_e(_fmt_signed(row.get('generation_quality_total_flags_delta')))}</span></td>"
             f"<td>{_e(row.get('case_regression_count'))} regressed / {_e(row.get('case_improvement_count'))} improved</td>"
             f"<td>{_e('; '.join(_string_list(row.get('blockers'))))}</td>"
+            f"<td>{_e('; '.join(_string_list(row.get('blocker_categories'))))}</td>"
             f"<td>{_e('; '.join(_string_list(row.get('review_items'))))}</td>"
+            f"<td>{_e('; '.join(_string_list(row.get('review_categories'))))}</td>"
             "</tr>"
         )
     return (
         '<section class="panel"><h2>Candidate Evaluations</h2><table><thead><tr>'
-        "<th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Eval Compare</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Review Items</th>"
+        "<th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Eval Compare</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Blocker Categories</th><th>Review Items</th><th>Review Categories</th>"
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></section>"
