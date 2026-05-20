@@ -95,6 +95,9 @@
 344-v330-remediation-csv-artifact.md
  -> v330 code explanation: export remediation plan rows as a standalone CSV artifact and include it in tiny smoke artifact status.
 
+345-v331-clean-remediation-gate.md
+ -> v331 code explanation: add an opt-in clean remediation gate to the tiny scorecard comparison smoke so strict runs can stop on remaining remediation rows.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

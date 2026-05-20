@@ -10,7 +10,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from scripts.run_tiny_scorecard_comparison_smoke import build_run_config, decision_summary, render_summary  # noqa: E402
+from scripts.run_tiny_scorecard_comparison_smoke import (  # noqa: E402
+    build_run_config,
+    build_summary,
+    decision_summary,
+    remediation_gate_status,
+    render_summary,
+)
 
 
 class TinyScorecardComparisonSmokeTests(unittest.TestCase):
@@ -28,6 +34,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "max_iters_delta": 1,
                     "budget_mode": "candidate_more_iters",
                     "decision_min_rubric_score": 65.5,
+                    "require_clean_remediation": False,
                 },
                 "baseline_smoke": {
                     "scorecard_overall_status": "pass",
@@ -86,6 +93,16 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "first_remediation_action": None,
                     "first_recommendation": "Promote the selected scorecard only as benchmark evidence.",
                 },
+                "remediation_gate": {
+                    "required": False,
+                    "status": "pass",
+                    "decision": "continue",
+                    "remediation_count": 0,
+                    "first_category": None,
+                    "first_action_code": None,
+                    "first_severity": None,
+                    "first_owner_scope": None,
+                },
                 "interpretation": {"model_quality_claim": "not_claimed"},
                 "commands": [
                     {"name": "baseline_smoke", "status": "pass"},
@@ -100,6 +117,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("config_candidate_max_iters=2", text)
         self.assertIn("config_budget_mode=candidate_more_iters", text)
         self.assertIn("config_decision_min_rubric_score=65.5", text)
+        self.assertIn("config_require_clean_remediation=False", text)
         self.assertIn("comparison_scorecard_count=2", text)
         self.assertIn("comparison_case_delta_count=20", text)
         self.assertIn("decision_status=promote", text)
@@ -119,6 +137,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("decision_remediation_count=0", text)
         self.assertIn("decision_first_remediation_category=None", text)
         self.assertIn("decision_first_remediation_action_code=None", text)
+        self.assertIn("remediation_gate_required=False", text)
+        self.assertIn("remediation_gate_status=pass", text)
+        self.assertIn("remediation_gate_decision=continue", text)
+        self.assertIn("remediation_gate_count=0", text)
         self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
@@ -177,6 +199,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertEqual(summary["run_config"]["max_iters_delta"], 1)
             self.assertEqual(summary["run_config"]["budget_mode"], "candidate_more_iters")
             self.assertEqual(summary["run_config"]["decision_min_rubric_score"], 60.0)
+            self.assertFalse(summary["run_config"]["require_clean_remediation"])
             self.assertEqual(summary["scorecard_comparison"]["scorecard_count"], 2)
             self.assertEqual(summary["scorecard_comparison"]["baseline_name"], "tiny-baseline")
             self.assertEqual(summary["scorecard_comparison"]["case_delta_count"], 20)
@@ -206,6 +229,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                 self.assertEqual(summary["scorecard_decision"]["remediation_plan_count"], 1)
                 self.assertEqual(summary["scorecard_decision"]["remediation_blocker_count"], 1)
                 self.assertEqual(summary["scorecard_decision"]["dominant_remediation_category"], "threshold")
+            self.assertEqual(summary["remediation_gate"]["status"], "pass")
+            self.assertEqual(summary["remediation_gate"]["decision"], "continue")
+            self.assertFalse(summary["remediation_gate"]["required"])
+            self.assertEqual(summary["remediation_gate"]["remediation_count"], summary["scorecard_decision"]["remediation_count"])
             self.assertIsInstance(summary["scorecard_decision"]["review_candidate_names"], list)
             self.assertTrue(summary["scorecard_decision"]["first_recommendation"])
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
@@ -229,6 +256,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_decision_min_rubric_score=60.0", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("config_require_clean_remediation=False", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_first_threshold_candidate=tiny-candidate", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_first_threshold_min=60.0", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_threshold_blocked_count=1", summary_text_path.read_text(encoding="utf-8"))
@@ -241,6 +269,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("decision_first_remediation_severity=blocker", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_remediation_plan_count=1", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_dominant_remediation_category=threshold", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("remediation_gate_status=pass", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("remediation_gate_decision=continue", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
@@ -265,6 +295,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             baseline_seed = 1337
             candidate_seed = 2026
             decision_min_rubric_score = 80.0
+            require_clean_remediation = False
 
         config = build_run_config(Args())
 
@@ -273,6 +304,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertEqual(config["max_iters_delta"], 0)
         self.assertEqual(config["budget_mode"], "matched_iters")
         self.assertEqual(config["decision_min_rubric_score"], 80.0)
+        self.assertFalse(config["require_clean_remediation"])
 
     def test_build_run_config_rejects_invalid_decision_threshold(self) -> None:
         class Args:
@@ -290,9 +322,127 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             baseline_seed = 1337
             candidate_seed = 2026
             decision_min_rubric_score = 101.0
+            require_clean_remediation = False
 
         with self.assertRaisesRegex(ValueError, "--decision-min-rubric-score"):
             build_run_config(Args())
+
+    def test_build_run_config_preserves_clean_remediation_requirement(self) -> None:
+        class Args:
+            suite_name = "standard-zh"
+            case_token_cap = 3
+            max_iters = 4
+            baseline_max_iters = None
+            candidate_max_iters = None
+            eval_iters = 1
+            batch_size = 2
+            block_size = 8
+            n_layer = 1
+            n_head = 1
+            n_embd = 8
+            baseline_seed = 1337
+            candidate_seed = 2026
+            decision_min_rubric_score = 80.0
+            require_clean_remediation = True
+
+        self.assertTrue(build_run_config(Args())["require_clean_remediation"])
+
+    def test_remediation_gate_blocks_when_required_and_rows_exist(self) -> None:
+        gate = remediation_gate_status(
+            {"require_clean_remediation": True},
+            {
+                "remediation_count": 2,
+                "first_remediation_category": "threshold",
+                "first_remediation_action_code": "raise_candidate_rubric_or_change_policy",
+                "first_remediation_severity": "blocker",
+                "first_remediation_owner_scope": "model-eval",
+            },
+        )
+
+        self.assertTrue(gate["required"])
+        self.assertEqual(gate["status"], "fail")
+        self.assertEqual(gate["decision"], "stop")
+        self.assertEqual(gate["remediation_count"], 2)
+        self.assertEqual(gate["first_category"], "threshold")
+        self.assertEqual(gate["first_action_code"], "raise_candidate_rubric_or_change_policy")
+        self.assertEqual(gate["first_severity"], "blocker")
+        self.assertEqual(gate["first_owner_scope"], "model-eval")
+
+    def test_build_summary_applies_required_clean_remediation_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline_dir = root / "baseline"
+            candidate_dir = root / "candidate"
+            comparison_dir = root / "scorecard-comparison"
+            decision_dir = root / "scorecard-decision"
+            for path in [
+                baseline_dir / "run" / "benchmark-scorecard",
+                baseline_dir / "run" / "pair_batch",
+                candidate_dir / "run" / "benchmark-scorecard",
+                candidate_dir / "run" / "pair_batch",
+                comparison_dir,
+                decision_dir,
+            ]:
+                path.mkdir(parents=True, exist_ok=True)
+            for path in [
+                baseline_dir / "run" / "benchmark-scorecard" / "benchmark_scorecard.json",
+                baseline_dir / "run" / "pair_batch" / "pair_generation_batch.json",
+                candidate_dir / "run" / "benchmark-scorecard" / "benchmark_scorecard.json",
+                candidate_dir / "run" / "pair_batch" / "pair_generation_batch.json",
+                comparison_dir / "benchmark_scorecard_comparison.csv",
+                comparison_dir / "benchmark_scorecard_case_deltas.csv",
+                comparison_dir / "benchmark_scorecard_comparison.md",
+                comparison_dir / "benchmark_scorecard_comparison.html",
+                decision_dir / "benchmark_scorecard_decision.csv",
+                decision_dir / "benchmark_scorecard_decision_remediation.csv",
+                decision_dir / "benchmark_scorecard_decision.md",
+                decision_dir / "benchmark_scorecard_decision.html",
+            ]:
+                path.write_text("ok\n", encoding="utf-8")
+            for path in [
+                baseline_dir / "tiny_standard_benchmark_smoke_summary.json",
+                candidate_dir / "tiny_standard_benchmark_smoke_summary.json",
+                comparison_dir / "benchmark_scorecard_comparison.json",
+            ]:
+                path.write_text("{}\n", encoding="utf-8")
+            (decision_dir / "benchmark_scorecard_decision.json").write_text(
+                json.dumps(
+                    {
+                        "decision_status": "blocked",
+                        "recommended_action": "keep_baseline_or_fix_candidate",
+                        "summary": {"remediation_plan_count": 1},
+                        "remediation_plan": [
+                            {
+                                "category": "threshold",
+                                "action_code": "raise_candidate_rubric_or_change_policy",
+                                "severity": "blocker",
+                                "owner_scope": "model-eval",
+                            }
+                        ],
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            summary = build_summary(
+                out_dir=root,
+                baseline_dir=baseline_dir,
+                candidate_dir=candidate_dir,
+                comparison_dir=comparison_dir,
+                decision_dir=decision_dir,
+                run_config={"require_clean_remediation": True},
+                command_results=[],
+                issues=[],
+            )
+
+            self.assertEqual(summary["status"], "fail")
+            self.assertEqual(summary["decision"], "fix-comparison-smoke-chain")
+            self.assertEqual(summary["issues"], ["remediation gate blocked: decision contains remediation rows"])
+            self.assertTrue(summary["artifacts"]["decision_remediation_csv_exists"])
+            self.assertEqual(summary["remediation_gate"]["status"], "fail")
+            self.assertEqual(summary["remediation_gate"]["decision"], "stop")
+            self.assertEqual(summary["remediation_gate"]["first_action_code"], "raise_candidate_rubric_or_change_policy")
 
     def test_decision_summary_exposes_first_threshold_block(self) -> None:
         summary = decision_summary(

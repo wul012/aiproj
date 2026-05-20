@@ -44,6 +44,11 @@ def parse_args() -> argparse.Namespace:
         default=80.0,
         help="Minimum rubric average score passed to the scorecard promotion decision.",
     )
+    parser.add_argument(
+        "--require-clean-remediation",
+        action="store_true",
+        help="Fail the smoke when the decision report contains remediation rows.",
+    )
     parser.add_argument("--eval-iters", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--block-size", type=int, default=8)
@@ -176,6 +181,7 @@ def build_run_config(args: argparse.Namespace) -> dict[str, Any]:
         "max_iters_delta": max_iters_delta,
         "budget_mode": budget_mode,
         "decision_min_rubric_score": decision_min_rubric_score,
+        "require_clean_remediation": bool(args.require_clean_remediation),
         "eval_iters": args.eval_iters,
         "batch_size": args.batch_size,
         "block_size": args.block_size,
@@ -256,6 +262,11 @@ def build_summary(
     candidate_smoke = read_json(candidate_dir / "tiny_standard_benchmark_smoke_summary.json")
     comparison = read_json(comparison_dir / "benchmark_scorecard_comparison.json")
     decision = read_json(decision_dir / "benchmark_scorecard_decision.json")
+    decision_view = decision_summary(decision)
+    remediation_gate = remediation_gate_status(run_config, decision_view)
+    if remediation_gate["decision"] == "stop":
+        issue_list.append("remediation gate blocked: decision contains remediation rows")
+    status = "pass" if not issue_list else "fail"
     return {
         "schema_version": 1,
         "status": status,
@@ -273,7 +284,8 @@ def build_summary(
         "baseline_smoke": smoke_summary(baseline_smoke),
         "candidate_smoke": smoke_summary(candidate_smoke),
         "scorecard_comparison": comparison_summary(comparison),
-        "scorecard_decision": decision_summary(decision),
+        "scorecard_decision": decision_view,
+        "remediation_gate": remediation_gate,
         "interpretation": {
             "comparison_is_smoke_only": True,
             "model_quality_claim": "not_claimed",
@@ -413,6 +425,23 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def remediation_gate_status(run_config: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
+    required = bool(run_config.get("require_clean_remediation"))
+    remediation_count = int(decision.get("remediation_count") or 0)
+    failed = required and remediation_count > 0
+    return {
+        "required": required,
+        "status": "fail" if failed else "pass",
+        "decision": "stop" if failed else "continue",
+        "remediation_count": remediation_count,
+        "first_category": decision.get("first_remediation_category"),
+        "first_action_code": decision.get("first_remediation_action_code"),
+        "first_severity": decision.get("first_remediation_severity"),
+        "first_owner_scope": decision.get("first_remediation_owner_scope"),
+        "reason": "remediation rows must be cleared before strict smoke promotion" if failed else "clean remediation is not required or no remediation rows were found",
+    }
+
+
 def read_json(path: Path) -> dict[str, Any]:
     if not path.is_file():
         return {}
@@ -425,6 +454,7 @@ def render_summary(summary: dict[str, Any]) -> str:
     candidate = as_dict(summary.get("candidate_smoke"))
     comparison = as_dict(summary.get("scorecard_comparison"))
     decision = as_dict(summary.get("scorecard_decision"))
+    remediation_gate = as_dict(summary.get("remediation_gate"))
     run_config = as_dict(summary.get("run_config"))
     interpretation = as_dict(summary.get("interpretation"))
     rows = [
@@ -438,6 +468,7 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("config_max_iters_delta", run_config.get("max_iters_delta")),
         ("config_budget_mode", run_config.get("budget_mode")),
         ("config_decision_min_rubric_score", run_config.get("decision_min_rubric_score")),
+        ("config_require_clean_remediation", run_config.get("require_clean_remediation")),
         ("baseline_scorecard_status", baseline.get("scorecard_overall_status")),
         ("baseline_scorecard_score", baseline.get("scorecard_overall_score")),
         ("candidate_scorecard_status", candidate.get("scorecard_overall_status")),
@@ -486,6 +517,14 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_first_remediation_severity", decision.get("first_remediation_severity")),
         ("decision_first_remediation_owner_scope", decision.get("first_remediation_owner_scope")),
         ("decision_first_remediation_action", decision.get("first_remediation_action")),
+        ("remediation_gate_required", remediation_gate.get("required")),
+        ("remediation_gate_status", remediation_gate.get("status")),
+        ("remediation_gate_decision", remediation_gate.get("decision")),
+        ("remediation_gate_count", remediation_gate.get("remediation_count")),
+        ("remediation_gate_first_category", remediation_gate.get("first_category")),
+        ("remediation_gate_first_action_code", remediation_gate.get("first_action_code")),
+        ("remediation_gate_first_severity", remediation_gate.get("first_severity")),
+        ("remediation_gate_first_owner_scope", remediation_gate.get("first_owner_scope")),
         ("decision_first_recommendation", decision.get("first_recommendation")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
     ]
