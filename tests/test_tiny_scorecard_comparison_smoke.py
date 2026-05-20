@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from scripts.run_tiny_scorecard_comparison_smoke import render_summary  # noqa: E402
+from scripts.run_tiny_scorecard_comparison_smoke import build_run_config, render_summary  # noqa: E402
 
 
 class TinyScorecardComparisonSmokeTests(unittest.TestCase):
@@ -20,6 +20,14 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                 "status": "pass",
                 "decision": "comparison-evidence-ready",
                 "issue_count": 0,
+                "run_config": {
+                    "suite_name": "standard-zh",
+                    "case_token_cap": 3,
+                    "baseline_max_iters": 1,
+                    "candidate_max_iters": 2,
+                    "max_iters_delta": 1,
+                    "budget_mode": "candidate_more_iters",
+                },
                 "baseline_smoke": {
                     "scorecard_overall_status": "pass",
                     "scorecard_overall_score": 88.5,
@@ -61,6 +69,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         )
 
         self.assertIn("status=pass", text)
+        self.assertIn("config_baseline_max_iters=1", text)
+        self.assertIn("config_candidate_max_iters=2", text)
+        self.assertIn("config_budget_mode=candidate_more_iters", text)
         self.assertIn("comparison_scorecard_count=2", text)
         self.assertIn("comparison_case_delta_count=20", text)
         self.assertIn("decision_status=promote", text)
@@ -89,6 +100,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "3",
                     "--max-iters",
                     "1",
+                    "--baseline-max-iters",
+                    "1",
+                    "--candidate-max-iters",
+                    "2",
                     "--eval-iters",
                     "1",
                     "--batch-size",
@@ -114,6 +129,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
 
             self.assertEqual(summary["status"], "pass")
             self.assertEqual(summary["decision"], "comparison-evidence-ready")
+            self.assertEqual(summary["run_config"]["baseline_max_iters"], 1)
+            self.assertEqual(summary["run_config"]["candidate_max_iters"], 2)
+            self.assertEqual(summary["run_config"]["max_iters_delta"], 1)
+            self.assertEqual(summary["run_config"]["budget_mode"], "candidate_more_iters")
             self.assertEqual(summary["scorecard_comparison"]["scorecard_count"], 2)
             self.assertEqual(summary["scorecard_comparison"]["baseline_name"], "tiny-baseline")
             self.assertEqual(summary["scorecard_comparison"]["case_delta_count"], 20)
@@ -140,9 +159,35 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision.json").is_file())
             self.assertIn("decision_first_recommendation=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
+            candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
+            self.assertIn("--max-iters 2", candidate_command["command_text"])
             self.assertIn("model_quality_claim=not_claimed", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("command_scorecard_comparison=pass", completed.stdout)
             self.assertIn("command_scorecard_decision=pass", completed.stdout)
+
+    def test_build_run_config_defaults_to_matched_budget(self) -> None:
+        class Args:
+            suite_name = "standard-zh"
+            case_token_cap = 3
+            max_iters = 4
+            baseline_max_iters = None
+            candidate_max_iters = None
+            eval_iters = 1
+            batch_size = 2
+            block_size = 8
+            n_layer = 1
+            n_head = 1
+            n_embd = 8
+            baseline_seed = 1337
+            candidate_seed = 2026
+
+        config = build_run_config(Args())
+
+        self.assertEqual(config["baseline_max_iters"], 4)
+        self.assertEqual(config["candidate_max_iters"], 4)
+        self.assertEqual(config["max_iters_delta"], 0)
+        self.assertEqual(config["budget_mode"], "matched_iters")
 
 
 if __name__ == "__main__":

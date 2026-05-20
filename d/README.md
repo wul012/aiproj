@@ -68,6 +68,9 @@ d/318/解释/说明.md
 d/319/图片
 d/319/解释/说明.md
  -> v319 tiny decision diagnostics smoke 的运行截图和解释
+d/320/图片
+d/320/解释/说明.md
+ -> v320 tiny budget comparison smoke 的运行截图和解释
 ```
 
 写入规则：

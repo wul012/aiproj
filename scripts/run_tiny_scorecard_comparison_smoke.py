@@ -26,6 +26,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--suite-name", choices=["default", "standard-zh"], default="standard-zh")
     parser.add_argument("--case-token-cap", type=int, default=12)
     parser.add_argument("--max-iters", type=int, default=1)
+    parser.add_argument(
+        "--baseline-max-iters",
+        type=int,
+        default=None,
+        help="Override --max-iters for the baseline tiny training run.",
+    )
+    parser.add_argument(
+        "--candidate-max-iters",
+        type=int,
+        default=None,
+        help="Override --max-iters for the candidate tiny training run.",
+    )
     parser.add_argument("--eval-iters", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--block-size", type=int, default=8)
@@ -44,6 +56,11 @@ def main() -> None:
         raise ValueError("--case-token-cap must be at least 1")
     if args.max_iters < 1:
         raise ValueError("--max-iters must be at least 1")
+    run_config = build_run_config(args)
+    if int(run_config["baseline_max_iters"]) < 1:
+        raise ValueError("--baseline-max-iters must be at least 1")
+    if int(run_config["candidate_max_iters"]) < 1:
+        raise ValueError("--candidate-max-iters must be at least 1")
     out_dir = args.out_dir
     if out_dir.exists() and any(out_dir.iterdir()):
         if not args.force:
@@ -58,8 +75,8 @@ def main() -> None:
     comparison_dir = out_dir / "scorecard-comparison"
     decision_dir = out_dir / "scorecard-decision"
     commands = [
-        ("baseline_smoke", tiny_smoke_command(args, baseline_dir, args.baseline_seed)),
-        ("candidate_smoke", tiny_smoke_command(args, candidate_dir, args.candidate_seed)),
+        ("baseline_smoke", tiny_smoke_command(args, baseline_dir, args.baseline_seed, int(run_config["baseline_max_iters"]))),
+        ("candidate_smoke", tiny_smoke_command(args, candidate_dir, args.candidate_seed, int(run_config["candidate_max_iters"]))),
         (
             "scorecard_comparison",
             [
@@ -108,6 +125,7 @@ def main() -> None:
                 candidate_dir=candidate_dir,
                 comparison_dir=comparison_dir,
                 decision_dir=decision_dir,
+                run_config=run_config,
                 command_results=command_results,
                 issues=[f"{name} command returned {result['returncode']}"],
             )
@@ -121,6 +139,7 @@ def main() -> None:
         candidate_dir=candidate_dir,
         comparison_dir=comparison_dir,
         decision_dir=decision_dir,
+        run_config=run_config,
         command_results=command_results,
         issues=[],
     )
@@ -130,7 +149,35 @@ def main() -> None:
         raise SystemExit(1)
 
 
-def tiny_smoke_command(args: argparse.Namespace, out_dir: Path, seed: int) -> list[str]:
+def build_run_config(args: argparse.Namespace) -> dict[str, Any]:
+    baseline_max_iters = int(args.baseline_max_iters if args.baseline_max_iters is not None else args.max_iters)
+    candidate_max_iters = int(args.candidate_max_iters if args.candidate_max_iters is not None else args.max_iters)
+    max_iters_delta = candidate_max_iters - baseline_max_iters
+    if max_iters_delta > 0:
+        budget_mode = "candidate_more_iters"
+    elif max_iters_delta < 0:
+        budget_mode = "candidate_fewer_iters"
+    else:
+        budget_mode = "matched_iters"
+    return {
+        "suite_name": args.suite_name,
+        "case_token_cap": args.case_token_cap,
+        "baseline_max_iters": baseline_max_iters,
+        "candidate_max_iters": candidate_max_iters,
+        "max_iters_delta": max_iters_delta,
+        "budget_mode": budget_mode,
+        "eval_iters": args.eval_iters,
+        "batch_size": args.batch_size,
+        "block_size": args.block_size,
+        "n_layer": args.n_layer,
+        "n_head": args.n_head,
+        "n_embd": args.n_embd,
+        "baseline_seed": args.baseline_seed,
+        "candidate_seed": args.candidate_seed,
+    }
+
+
+def tiny_smoke_command(args: argparse.Namespace, out_dir: Path, seed: int, max_iters: int) -> list[str]:
     return [
         sys.executable,
         "-B",
@@ -142,7 +189,7 @@ def tiny_smoke_command(args: argparse.Namespace, out_dir: Path, seed: int) -> li
         "--case-token-cap",
         str(args.case_token_cap),
         "--max-iters",
-        str(args.max_iters),
+        str(max_iters),
         "--eval-iters",
         str(args.eval_iters),
         "--batch-size",
@@ -185,6 +232,7 @@ def build_summary(
     candidate_dir: Path,
     comparison_dir: Path,
     decision_dir: Path,
+    run_config: dict[str, Any],
     command_results: list[dict[str, Any]],
     issues: list[str],
 ) -> dict[str, Any]:
@@ -209,6 +257,7 @@ def build_summary(
         "candidate_dir": str(candidate_dir),
         "comparison_dir": str(comparison_dir),
         "decision_dir": str(decision_dir),
+        "run_config": run_config,
         "commands": command_results,
         "artifacts": artifacts,
         "baseline_smoke": smoke_summary(baseline_smoke),
@@ -218,7 +267,7 @@ def build_summary(
         "interpretation": {
             "comparison_is_smoke_only": True,
             "model_quality_claim": "not_claimed",
-            "reason": "Tiny one-iteration CPU scorecard deltas and decisions verify benchmark plumbing, not robust model improvement.",
+            "reason": "Tiny CPU scorecard deltas and decisions verify benchmark plumbing and configuration routing, not robust model improvement.",
         },
         "outputs": {
             "summary_json": str(out_dir / SUMMARY_JSON_FILENAME),
@@ -334,11 +383,18 @@ def render_summary(summary: dict[str, Any]) -> str:
     candidate = as_dict(summary.get("candidate_smoke"))
     comparison = as_dict(summary.get("scorecard_comparison"))
     decision = as_dict(summary.get("scorecard_decision"))
+    run_config = as_dict(summary.get("run_config"))
     interpretation = as_dict(summary.get("interpretation"))
     rows = [
         ("status", summary.get("status")),
         ("decision", summary.get("decision")),
         ("issue_count", summary.get("issue_count")),
+        ("config_suite_name", run_config.get("suite_name")),
+        ("config_case_token_cap", run_config.get("case_token_cap")),
+        ("config_baseline_max_iters", run_config.get("baseline_max_iters")),
+        ("config_candidate_max_iters", run_config.get("candidate_max_iters")),
+        ("config_max_iters_delta", run_config.get("max_iters_delta")),
+        ("config_budget_mode", run_config.get("budget_mode")),
         ("baseline_scorecard_status", baseline.get("scorecard_overall_status")),
         ("baseline_scorecard_score", baseline.get("scorecard_overall_score")),
         ("candidate_scorecard_status", candidate.get("scorecard_overall_status")),
