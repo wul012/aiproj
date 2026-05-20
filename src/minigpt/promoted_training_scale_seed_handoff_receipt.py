@@ -133,7 +133,11 @@ def write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs(
     return {key: str(value) for key, value in paths.items()}
 
 
-def check_promoted_training_scale_seed_handoff_embedded_receipt_check(report: dict[str, Any]) -> dict[str, Any]:
+def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+    report: dict[str, Any],
+    *,
+    base_dir: str | Path | None = None,
+) -> dict[str, Any]:
     payload = as_dict(report)
     embedded = as_dict(payload.get("receipt_check"))
     embedded_outputs = as_dict(payload.get("receipt_check_outputs"))
@@ -155,6 +159,13 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(report: di
         actual_value = _normalized_check_value(key, embedded.get(key))
         if expected_value != actual_value:
             issues.append(f"receipt_check.{key} expected {expected_value!r} but got {actual_value!r}")
+    sidecars = _check_embedded_receipt_sidecars(
+        embedded,
+        embedded_outputs,
+        expected_check,
+        base_dir=Path(base_dir) if base_dir is not None else None,
+    )
+    issues.extend(string_list(sidecars.get("issues")))
     status = "pass" if not issues else "fail"
     decision = str(expected_check.get("decision") or "")
     checker_exit_code = 0 if status == "pass" and decision == "continue" else 1
@@ -176,6 +187,15 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(report: di
         "expected_check": expected_check,
         "embedded_check": embedded,
         "embedded_check_outputs": embedded_outputs,
+        "sidecar_status": sidecars.get("status"),
+        "sidecar_issue_count": sidecars.get("issue_count"),
+        "sidecar_issues": sidecars.get("issues"),
+        "receipt_path_resolved": sidecars.get("receipt_path_resolved"),
+        "receipt_path_exists": sidecars.get("receipt_path_exists"),
+        "receipt_check_json_resolved": sidecars.get("receipt_check_json_resolved"),
+        "receipt_check_json_exists": sidecars.get("receipt_check_json_exists"),
+        "receipt_check_text_resolved": sidecars.get("receipt_check_text_resolved"),
+        "receipt_check_text_exists": sidecars.get("receipt_check_text_exists"),
     }
 
 
@@ -188,6 +208,10 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
         ("embedded_receipt_check_receipt_path", check.get("receipt_path")),
         ("embedded_receipt_check_json", check.get("receipt_check_json")),
         ("embedded_receipt_check_text", check.get("receipt_check_text")),
+        ("embedded_receipt_check_sidecar_status", check.get("sidecar_status")),
+        ("embedded_receipt_check_receipt_path_exists", check.get("receipt_path_exists")),
+        ("embedded_receipt_check_json_exists", check.get("receipt_check_json_exists")),
+        ("embedded_receipt_check_text_exists", check.get("receipt_check_text_exists")),
         ("embedded_receipt_check_issue_count", check.get("issue_count")),
         ("embedded_receipt_check_issues", json.dumps(check.get("issues"), ensure_ascii=False)),
     ]
@@ -227,6 +251,111 @@ def _normalized_check_value(key: str, value: Any) -> Any:
     if key == "blocking_source":
         return str(value) if value is not None else None
     return str(value or "")
+
+
+def _check_embedded_receipt_sidecars(
+    embedded: dict[str, Any],
+    embedded_outputs: dict[str, Any],
+    expected_check: dict[str, Any],
+    *,
+    base_dir: Path | None,
+) -> dict[str, Any]:
+    issues: list[str] = []
+    receipt_path = _resolve_reference_path(embedded.get("receipt_path"), base_dir)
+    check_json_path = _resolve_reference_path(embedded_outputs.get("json"), base_dir)
+    check_text_path = _resolve_reference_path(embedded_outputs.get("text"), base_dir)
+    receipt_exists = _is_file(receipt_path)
+    check_json_exists = _is_file(check_json_path)
+    check_text_exists = _is_file(check_text_path)
+    if embedded.get("receipt_path") and not receipt_exists:
+        issues.append(f"receipt_check.receipt_path does not exist: {embedded.get('receipt_path')}")
+    if embedded_outputs.get("json") and not check_json_exists:
+        issues.append(f"receipt_check_outputs.json does not exist: {embedded_outputs.get('json')}")
+    if embedded_outputs.get("text") and not check_text_exists:
+        issues.append(f"receipt_check_outputs.text does not exist: {embedded_outputs.get('text')}")
+    if receipt_exists and receipt_path is not None:
+        issues.extend(_check_receipt_file_matches_expected(receipt_path, expected_check))
+    if check_json_exists and check_json_path is not None:
+        issues.extend(_check_receipt_check_json_matches_expected(check_json_path, expected_check, embedded))
+    if check_text_exists and check_text_path is not None:
+        issues.extend(_check_receipt_check_text_matches_expected(check_text_path, expected_check))
+    return {
+        "status": "pass" if not issues else "fail",
+        "issue_count": len(issues),
+        "issues": issues,
+        "receipt_path_resolved": str(receipt_path) if receipt_path is not None else None,
+        "receipt_path_exists": receipt_exists,
+        "receipt_check_json_resolved": str(check_json_path) if check_json_path is not None else None,
+        "receipt_check_json_exists": check_json_exists,
+        "receipt_check_text_resolved": str(check_text_path) if check_text_path is not None else None,
+        "receipt_check_text_exists": check_text_exists,
+    }
+
+
+def _check_receipt_file_matches_expected(path: Path, expected_check: dict[str, Any]) -> list[str]:
+    try:
+        receipt = load_promoted_training_scale_seed_handoff_automation_receipt(path)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return [f"receipt_check.receipt_path could not be read: {exc}"]
+    actual_check = check_promoted_training_scale_seed_handoff_automation_receipt(receipt)
+    return _compare_check_fields("receipt_check.receipt_path", expected_check, actual_check)
+
+
+def _check_receipt_check_json_matches_expected(
+    path: Path,
+    expected_check: dict[str, Any],
+    embedded: dict[str, Any],
+) -> list[str]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"receipt_check_outputs.json could not be read: {exc}"]
+    if not isinstance(payload, dict):
+        return ["receipt_check_outputs.json must contain a JSON object"]
+    issues = _compare_check_fields("receipt_check_outputs.json", expected_check, payload)
+    expected_receipt_path = str(embedded.get("receipt_path") or "")
+    actual_receipt_path = str(payload.get("receipt_path") or "")
+    if expected_receipt_path != actual_receipt_path:
+        issues.append(
+            "receipt_check_outputs.json.receipt_path "
+            f"expected {expected_receipt_path!r} but got {actual_receipt_path!r}"
+        )
+    return issues
+
+
+def _check_receipt_check_text_matches_expected(path: Path, expected_check: dict[str, Any]) -> list[str]:
+    try:
+        actual_text = path.read_text(encoding="utf-8-sig")
+    except OSError as exc:
+        return [f"receipt_check_outputs.text could not be read: {exc}"]
+    expected_text = render_promoted_training_scale_seed_handoff_automation_receipt_check(expected_check)
+    if actual_text != expected_text:
+        return ["receipt_check_outputs.text content does not match rendered receipt check"]
+    return []
+
+
+def _compare_check_fields(prefix: str, expected: dict[str, Any], actual: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    for key in EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS:
+        expected_value = _normalized_check_value(key, expected.get(key))
+        actual_value = _normalized_check_value(key, actual.get(key))
+        if expected_value != actual_value:
+            issues.append(f"{prefix}.{key} expected {expected_value!r} but got {actual_value!r}")
+    return issues
+
+
+def _resolve_reference_path(value: Any, base_dir: Path | None) -> Path | None:
+    if not value:
+        return None
+    candidate = Path(str(value))
+    if candidate.is_file() or candidate.is_absolute() or base_dir is None:
+        return candidate
+    based = base_dir / candidate
+    return based if based.is_file() else candidate
+
+
+def _is_file(path: Path | None) -> bool:
+    return bool(path and path.is_file())
 
 
 __all__ = [

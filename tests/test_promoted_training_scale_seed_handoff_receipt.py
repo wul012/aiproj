@@ -342,7 +342,10 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
 
             report_path = resolve_promoted_training_scale_seed_handoff_report_path(script_out)
             report = load_promoted_training_scale_seed_handoff_report(report_path)
-            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(report)
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=report_path.parent,
+            )
             outputs = write_promoted_training_scale_seed_handoff_embedded_receipt_check_outputs(
                 check,
                 root / "library-embedded-check",
@@ -351,9 +354,14 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(check["status"], "pass")
             self.assertEqual(check["decision"], "continue")
             self.assertEqual(check["checker_exit_code"], 0)
+            self.assertEqual(check["sidecar_status"], "pass")
+            self.assertTrue(check["receipt_path_exists"])
+            self.assertTrue(check["receipt_check_json_exists"])
+            self.assertTrue(check["receipt_check_text_exists"])
             self.assertEqual(json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))["status"], "pass")
             self.assertIn("embedded_receipt_check_status=pass", completed.stdout)
             self.assertIn("embedded_receipt_check_decision=continue", completed.stdout)
+            self.assertIn("embedded_receipt_check_sidecar_status=pass", completed.stdout)
             self.assertIn("embedded_receipt_check_output_json=", completed.stdout)
             self.assertIn("embedded_receipt_check_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
             self.assertIn("embedded_receipt_check_decision=continue", render_promoted_training_scale_seed_handoff_embedded_receipt_check(check))
@@ -447,6 +455,129 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("embedded_receipt_check_status=pass", failed.stdout)
             self.assertIn("embedded_receipt_check_decision=stop", failed.stdout)
             self.assertIn("embedded_receipt_check_status=pass", allowed.stdout)
+
+    def test_embedded_receipt_check_rejects_tampered_check_json_sidecar(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            report = load_promoted_training_scale_seed_handoff_report(script_out)
+            check_json = Path(report["receipt_check_outputs"]["json"])
+            payload = json.loads(check_json.read_text(encoding="utf-8"))
+            payload["decision"] = "stop"
+            check_json.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=script_out,
+            )
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_embedded_receipt.py"),
+                    str(script_out),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertEqual(check["sidecar_status"], "fail")
+            self.assertTrue(any("receipt_check_outputs.json.decision" in issue for issue in check["issues"]))
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("embedded_receipt_check_sidecar_status=fail", completed.stdout)
+
+    def test_embedded_receipt_check_rejects_tampered_check_text_sidecar(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            report = load_promoted_training_scale_seed_handoff_report(script_out)
+            Path(report["receipt_check_outputs"]["text"]).write_text("tampered=true\n", encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=script_out,
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertEqual(check["sidecar_status"], "fail")
+            self.assertTrue(any("receipt_check_outputs.text content" in issue for issue in check["issues"]))
+
+    def test_embedded_receipt_check_rejects_missing_sidecar(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            report = load_promoted_training_scale_seed_handoff_report(script_out)
+            Path(report["receipt_check_outputs"]["json"]).unlink()
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=script_out,
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertFalse(check["receipt_check_json_exists"])
+            self.assertTrue(any("receipt_check_outputs.json does not exist" in issue for issue in check["issues"]))
 
 
 if __name__ == "__main__":

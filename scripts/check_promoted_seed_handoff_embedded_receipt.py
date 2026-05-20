@@ -43,7 +43,7 @@ def main() -> None:
     args = parse_args()
     report_path = resolve_promoted_training_scale_seed_handoff_report_path(args.handoff_report)
     report = load_promoted_training_scale_seed_handoff_report(report_path)
-    check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(report)
+    check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(report, base_dir=report_path.parent)
     check["handoff_report_path"] = str(report_path)
     print(render_promoted_training_scale_seed_handoff_embedded_receipt_check(check), end="")
     print(f"handoff_report_path={report_path}")
