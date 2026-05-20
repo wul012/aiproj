@@ -53,6 +53,9 @@
 330-v316-tiny-standard-pair-baseline-smoke.md
  -> v316 code explanation: add same-checkpoint pair-batch evidence to the CPU tiny standard benchmark smoke and keep it labeled as reproducibility evidence, not model improvement.
 
+331-v317-tiny-scorecard-comparison-smoke.md
+ -> v317 code explanation: run two real tiny benchmark smokes, compare their scorecards, and keep the result framed as comparison plumbing evidence rather than model-quality proof.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

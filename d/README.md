@@ -59,6 +59,9 @@ d/315/解释/说明.md
 d/316/图片
 d/316/解释/说明.md
  -> v316 tiny standard pair baseline smoke 的运行截图和解释
+d/317/图片
+d/317/解释/说明.md
+ -> v317 tiny scorecard comparison smoke 的运行截图和解释
 ```
 
 写入规则：
