@@ -326,6 +326,8 @@ class ProjectAuditTests(unittest.TestCase):
                 "failed_check_count": 3,
                 "forbidden_env_count": 1,
                 "missing_step_count": 1,
+                "required_order_count": 1,
+                "order_violation_count": 1,
                 "python_version": "3.11",
             },
         }
@@ -357,8 +359,11 @@ class ProjectAuditTests(unittest.TestCase):
 
         self.assertEqual(ci_check["status"], "warn")
         self.assertIn("failed_checks=3", ci_check["detail"])
+        self.assertIn("order_violations=1", ci_check["detail"])
         self.assertEqual(ci_check["evidence"]["decision"], "fix_ci_workflow_hygiene")
+        self.assertEqual(ci_check["evidence"]["order_violation_count"], 1)
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
+        self.assertEqual(build_ci_workflow_context(ci_hygiene)["order_violation_count"], 1)
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
         self.assertFalse(build_ci_workflow_context(None)["available"])
 

@@ -34,6 +34,8 @@ def main() -> None:
     print(f"node24_native_action_count={summary['node24_native_action_count']}")
     print(f"forbidden_env_count={summary['forbidden_env_count']}")
     print(f"missing_step_count={summary['missing_step_count']}")
+    print(f"required_order_count={summary['required_order_count']}")
+    print(f"order_violation_count={summary['order_violation_count']}")
     print(f"python_version={summary['python_version']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if summary["status"] != "pass" and not args.no_fail:
