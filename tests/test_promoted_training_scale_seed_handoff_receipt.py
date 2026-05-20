@@ -915,6 +915,33 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("handoff_assurance_status=pass", render_promoted_training_scale_seed_handoff_assurance_check(check))
             self.assertIn("handoff_assurance_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
 
+    def test_handoff_assurance_smoke_script_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out_dir = Path(tmp) / "smoke"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_assurance_smoke.py"),
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            report_path = out_dir / "handoff" / "promoted_training_scale_seed_handoff.json"
+            payload = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertEqual(payload["handoff_assurance"]["status"], "pass")
+            self.assertEqual(payload["handoff_assurance"]["decision"], "continue")
+            self.assertEqual(payload["handoff_assurance"]["embedded_receipt_check_sidecar_status"], "pass")
+            self.assertTrue(Path(payload["handoff_assurance_outputs"]["json"]).is_file())
+            self.assertIn("status=pass", completed.stdout)
+            self.assertIn("handoff_assurance_status=pass", completed.stdout)
+            self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
+
     def test_handoff_assurance_rejects_tampered_main_embedded_check(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

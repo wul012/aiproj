@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+306-v292-promoted-seed-handoff-assurance-ci-smoke.md
+ -> v292 code explanation: promote the inline promoted seed handoff assurance chain into a GitHub Actions smoke step before coverage.
+
 305-v291-promoted-seed-handoff-inline-assurance.md
  -> v291 code explanation: wire promoted seed handoff assurance back into the execution script and main report artifacts.
 
@@ -703,6 +706,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `303-v289-promoted-seed-handoff-embedded-receipt-check-report.md`：第二百八十九版代码讲解，把 inline embedded receipt-check 结果写回主 handoff JSON/CSV/Markdown/HTML 报告。
 - `304-v290-promoted-seed-handoff-assurance-checker.md`：第二百九十版代码讲解，新增目录级 promoted seed handoff assurance checker，整体校验主报告和 embedded receipt-check sidecar。
 - `305-v291-promoted-seed-handoff-inline-assurance.md`：第二百九十一版代码讲解，把 promoted seed handoff assurance 接回执行脚本并写回主报告。
+- `306-v292-promoted-seed-handoff-assurance-ci-smoke.md`：第二百九十二版代码讲解，把 promoted seed handoff assurance 链路提升为 GitHub Actions coverage 前的 smoke gate。
 
 ## 一句话总览
 

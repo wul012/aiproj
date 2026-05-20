@@ -676,6 +676,9 @@ c/290/解释/说明.md
 c/291/图片
 c/291/解释/说明.md
  -> v291 promoted training scale seed handoff inline assurance 的运行截图和解释
+c/292/图片
+c/292/解释/说明.md
+ -> v292 promoted training scale seed handoff assurance CI smoke 的运行截图和解释
 ```
 
 写入规则：

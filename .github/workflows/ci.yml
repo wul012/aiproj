@@ -26,5 +26,8 @@ jobs:
       - name: CI workflow hygiene check
         run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci
 
+      - name: Promoted seed handoff assurance smoke
+        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci
+
       - name: Unit tests
         run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80
