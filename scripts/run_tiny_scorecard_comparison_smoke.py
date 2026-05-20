@@ -356,6 +356,7 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
     nonbaseline = [item for item in evaluations if not item.get("is_baseline")]
     blocked = [item for item in nonbaseline if item.get("blockers")]
     review = [item for item in nonbaseline if item.get("review_items") and not item.get("blockers")]
+    threshold_profile = threshold_block_profile(blocked, payload.get("min_rubric_score"))
     threshold_block = first_threshold_block(blocked, payload.get("min_rubric_score"))
     raw_recommendations = payload.get("recommendations")
     recommendations = [str(item) for item in raw_recommendations if isinstance(item, str)] if isinstance(raw_recommendations, list) else []
@@ -380,6 +381,12 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "first_threshold_rubric_score": threshold_block.get("rubric_avg_score"),
         "first_threshold_min_rubric_score": threshold_block.get("min_rubric_score"),
         "first_threshold_margin": threshold_block.get("margin"),
+        "threshold_blocked_candidate_count": threshold_profile.get("blocked_candidate_count"),
+        "threshold_blocked_candidate_names": threshold_profile.get("blocked_candidate_names"),
+        "threshold_closest_candidate": threshold_profile.get("closest_candidate"),
+        "threshold_closest_margin": threshold_profile.get("closest_margin"),
+        "threshold_largest_gap_candidate": threshold_profile.get("largest_gap_candidate"),
+        "threshold_largest_gap_margin": threshold_profile.get("largest_gap_margin"),
         "first_review_candidate": first_name(review),
         "first_review_item": first_list_item(review, "review_items"),
         "recommendation_count": len(recommendations),
@@ -436,6 +443,12 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_first_threshold_score", decision.get("first_threshold_rubric_score")),
         ("decision_first_threshold_min", decision.get("first_threshold_min_rubric_score")),
         ("decision_first_threshold_margin", decision.get("first_threshold_margin")),
+        ("decision_threshold_blocked_count", decision.get("threshold_blocked_candidate_count")),
+        ("decision_threshold_blocked_candidates", ",".join(str(item) for item in decision.get("threshold_blocked_candidate_names", []))),
+        ("decision_threshold_closest_candidate", decision.get("threshold_closest_candidate")),
+        ("decision_threshold_closest_margin", decision.get("threshold_closest_margin")),
+        ("decision_threshold_largest_gap_candidate", decision.get("threshold_largest_gap_candidate")),
+        ("decision_threshold_largest_gap_margin", decision.get("threshold_largest_gap_margin")),
         ("decision_review_candidates", ",".join(str(item) for item in decision.get("review_candidate_names", []))),
         ("decision_first_review_item", decision.get("first_review_item")),
         ("decision_first_recommendation", decision.get("first_recommendation")),
@@ -479,21 +492,53 @@ def first_list_item(rows: list[dict[str, Any]], key: str) -> str | None:
 
 
 def first_threshold_block(rows: list[dict[str, Any]], min_rubric_score: Any) -> dict[str, Any]:
+    blocks = threshold_blocks(rows, min_rubric_score)
+    return blocks[0] if blocks else {}
+
+
+def threshold_block_profile(rows: list[dict[str, Any]], min_rubric_score: Any) -> dict[str, Any]:
+    blocks = threshold_blocks(rows, min_rubric_score)
+    if not blocks:
+        return {
+            "blocked_candidate_count": 0,
+            "blocked_candidate_names": [],
+            "closest_candidate": None,
+            "closest_margin": None,
+            "largest_gap_candidate": None,
+            "largest_gap_margin": None,
+        }
+    with_margin = [item for item in blocks if item.get("margin") is not None]
+    closest = max(with_margin, key=lambda item: float(item.get("margin") or 0.0)) if with_margin else {}
+    largest_gap = min(with_margin, key=lambda item: float(item.get("margin") or 0.0)) if with_margin else {}
+    return {
+        "blocked_candidate_count": len(blocks),
+        "blocked_candidate_names": [str(item.get("name")) for item in blocks if item.get("name") is not None],
+        "closest_candidate": closest.get("name"),
+        "closest_margin": closest.get("margin"),
+        "largest_gap_candidate": largest_gap.get("name"),
+        "largest_gap_margin": largest_gap.get("margin"),
+    }
+
+
+def threshold_blocks(rows: list[dict[str, Any]], min_rubric_score: Any) -> list[dict[str, Any]]:
     threshold = float_or_none(min_rubric_score)
+    blocks = []
     for row in rows:
         blocker = first_matching_list_item(row, "blockers", "rubric_avg_score below")
         if blocker is None:
             continue
         rubric_score = float_or_none(row.get("rubric_avg_score"))
         margin = None if rubric_score is None or threshold is None else round(rubric_score - threshold, 4)
-        return {
-            "name": None if row.get("name") is None else str(row.get("name")),
-            "blocker": blocker,
-            "rubric_avg_score": rubric_score,
-            "min_rubric_score": threshold,
-            "margin": margin,
-        }
-    return {}
+        blocks.append(
+            {
+                "name": None if row.get("name") is None else str(row.get("name")),
+                "blocker": blocker,
+                "rubric_avg_score": rubric_score,
+                "min_rubric_score": threshold,
+                "margin": margin,
+            }
+        )
+    return blocks
 
 
 def first_matching_list_item(row: dict[str, Any], key: str, prefix: str) -> str | None:

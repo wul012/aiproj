@@ -59,6 +59,12 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "first_threshold_rubric_score": None,
                     "first_threshold_min_rubric_score": None,
                     "first_threshold_margin": None,
+                    "threshold_blocked_candidate_count": 0,
+                    "threshold_blocked_candidate_names": [],
+                    "threshold_closest_candidate": None,
+                    "threshold_closest_margin": None,
+                    "threshold_largest_gap_candidate": None,
+                    "threshold_largest_gap_margin": None,
                     "review_candidate_names": [],
                     "first_blocker": None,
                     "first_review_item": None,
@@ -86,6 +92,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("decision_first_review_item=None", text)
         self.assertIn("decision_first_threshold_candidate=None", text)
         self.assertIn("decision_first_threshold_margin=None", text)
+        self.assertIn("decision_threshold_blocked_count=0", text)
+        self.assertIn("decision_threshold_blocked_candidates=", text)
+        self.assertIn("decision_threshold_closest_candidate=None", text)
+        self.assertIn("decision_threshold_largest_gap_candidate=None", text)
         self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
@@ -158,6 +168,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                 self.assertEqual(summary["scorecard_decision"]["first_threshold_blocked_candidate"], "tiny-candidate")
                 self.assertEqual(summary["scorecard_decision"]["first_threshold_min_rubric_score"], 60.0)
                 self.assertLess(summary["scorecard_decision"]["first_threshold_margin"], 0)
+                self.assertEqual(summary["scorecard_decision"]["threshold_blocked_candidate_count"], 1)
+                self.assertEqual(summary["scorecard_decision"]["threshold_blocked_candidate_names"], ["tiny-candidate"])
+                self.assertEqual(summary["scorecard_decision"]["threshold_closest_candidate"], "tiny-candidate")
+                self.assertEqual(summary["scorecard_decision"]["threshold_largest_gap_candidate"], "tiny-candidate")
             self.assertIsInstance(summary["scorecard_decision"]["review_candidate_names"], list)
             self.assertTrue(summary["scorecard_decision"]["first_recommendation"])
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
@@ -177,6 +191,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("config_decision_min_rubric_score=60.0", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_first_threshold_candidate=tiny-candidate", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_first_threshold_min=60.0", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_threshold_blocked_count=1", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_threshold_closest_candidate=tiny-candidate", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
@@ -258,6 +274,13 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                         "blockers": ["rubric_avg_score below 70.0"],
                         "review_items": [],
                     },
+                    {
+                        "name": "tiny-candidate-far",
+                        "is_baseline": False,
+                        "rubric_avg_score": 42.0,
+                        "blockers": ["rubric_avg_score below 70.0"],
+                        "review_items": [],
+                    },
                 ],
                 "recommendations": ["Keep the baseline."],
             }
@@ -268,6 +291,12 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertEqual(summary["first_threshold_rubric_score"], 65.25)
         self.assertEqual(summary["first_threshold_min_rubric_score"], 70.0)
         self.assertEqual(summary["first_threshold_margin"], -4.75)
+        self.assertEqual(summary["threshold_blocked_candidate_count"], 2)
+        self.assertEqual(summary["threshold_blocked_candidate_names"], ["tiny-candidate", "tiny-candidate-far"])
+        self.assertEqual(summary["threshold_closest_candidate"], "tiny-candidate")
+        self.assertEqual(summary["threshold_closest_margin"], -4.75)
+        self.assertEqual(summary["threshold_largest_gap_candidate"], "tiny-candidate-far")
+        self.assertEqual(summary["threshold_largest_gap_margin"], -28.0)
 
 
 if __name__ == "__main__":
