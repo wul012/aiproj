@@ -61,6 +61,25 @@ REVIEW_REMEDIATION_ACTIONS = {
     "other_review": "Inspect uncategorized review text and add a stable category if it recurs.",
 }
 
+BLOCKER_REMEDIATION_METADATA = {
+    "threshold": ("raise_candidate_rubric_or_change_policy", "blocker", "model-eval", ["benchmark_scorecard_decision", "benchmark_scorecard"]),
+    "missing_rubric": ("regenerate_scorecard_rubric", "blocker", "eval-artifact", ["benchmark_scorecard"]),
+    "rubric_regression": ("inspect_rubric_regressions", "blocker", "model-eval", ["benchmark_scorecard_comparison", "benchmark_scorecard"]),
+    "overall_regression": ("review_overall_score_components", "blocker", "model-eval", ["benchmark_scorecard_comparison"]),
+    "baseline_candidate": ("keep_baseline_as_reference", "info", "release-evidence", ["benchmark_scorecard_comparison"]),
+    "other_blocker": ("inspect_uncategorized_blocker", "blocker", "decision-maintenance", ["benchmark_scorecard_decision"]),
+}
+
+REVIEW_REMEDIATION_METADATA = {
+    "eval_suite_not_ready": ("make_eval_suite_comparison_ready", "review", "eval-artifact", ["eval_suite", "benchmark_scorecard_comparison"]),
+    "rubric_fail_regression": ("inspect_rubric_failures", "review", "model-eval", ["benchmark_scorecard", "eval_suite"]),
+    "generation_quality_flag_regression": ("inspect_generation_quality_flags", "review", "generation-quality", ["generation_quality"]),
+    "case_regression": ("inspect_case_deltas", "review", "model-eval", ["benchmark_scorecard_comparison"]),
+    "generation_quality_flag_shift": ("review_generation_quality_flag_shift", "review", "generation-quality", ["generation_quality"]),
+    "generation_quality_case_shift": ("review_generation_quality_worst_case", "review", "generation-quality", ["generation_quality"]),
+    "other_review": ("inspect_uncategorized_review", "review", "decision-maintenance", ["benchmark_scorecard_decision"]),
+}
+
 
 def load_benchmark_scorecard_comparison(path: str | Path) -> dict[str, Any]:
     comparison_path = _resolve_comparison_path(Path(path))
@@ -355,22 +374,32 @@ def _dominant_category(counts: dict[str, int], priority: dict[str, int]) -> str 
 def _remediation_plan(summary: dict[str, Any]) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     for category, count in _dict(summary.get("blocker_category_counts")).items():
+        action_code, severity, owner_scope, target_artifacts = BLOCKER_REMEDIATION_METADATA.get(str(category), BLOCKER_REMEDIATION_METADATA["other_blocker"])
         items.append(
             {
                 "kind": "blocker",
                 "category": str(category),
                 "count": _int(count),
                 "priority": BLOCKER_CATEGORY_PRIORITY.get(str(category), -1),
+                "action_code": action_code,
+                "severity": severity,
+                "owner_scope": owner_scope,
+                "target_artifacts": list(target_artifacts),
                 "action": BLOCKER_REMEDIATION_ACTIONS.get(str(category), BLOCKER_REMEDIATION_ACTIONS["other_blocker"]),
             }
         )
     for category, count in _dict(summary.get("review_category_counts")).items():
+        action_code, severity, owner_scope, target_artifacts = REVIEW_REMEDIATION_METADATA.get(str(category), REVIEW_REMEDIATION_METADATA["other_review"])
         items.append(
             {
                 "kind": "review",
                 "category": str(category),
                 "count": _int(count),
                 "priority": REVIEW_CATEGORY_PRIORITY.get(str(category), -1),
+                "action_code": action_code,
+                "severity": severity,
+                "owner_scope": owner_scope,
+                "target_artifacts": list(target_artifacts),
                 "action": REVIEW_REMEDIATION_ACTIONS.get(str(category), REVIEW_REMEDIATION_ACTIONS["other_review"]),
             }
         )

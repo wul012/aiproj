@@ -123,8 +123,8 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
                 "",
                 "## Remediation Plan",
                 "",
-                "| Kind | Category | Count | Priority | Action |",
-                "| --- | --- | ---: | ---: | --- |",
+                "| Kind | Category | Count | Priority | Severity | Owner | Action Code | Target Artifacts | Action |",
+                "| --- | --- | ---: | ---: | --- | --- | --- | --- | --- |",
             ]
         )
         for item in plan:
@@ -136,6 +136,10 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
                         _md(item.get("category")),
                         _md(item.get("count")),
                         _md(item.get("priority")),
+                        _md(item.get("severity")),
+                        _md(item.get("owner_scope")),
+                        _md(item.get("action_code")),
+                        _md(", ".join(_string_list(item.get("target_artifacts")))),
                         _md(item.get("action")),
                     ]
                 )
@@ -252,6 +256,10 @@ def _remediation_table(report: dict[str, Any]) -> str:
             f"<td><strong>{_e(item.get('category'))}</strong></td>"
             f"<td>{_e(item.get('count'))}</td>"
             f"<td>{_e(item.get('priority'))}</td>"
+            f"<td>{_e(item.get('severity'))}</td>"
+            f"<td>{_e(item.get('owner_scope'))}</td>"
+            f"<td>{_e(item.get('action_code'))}</td>"
+            f"<td>{_e(', '.join(_string_list(item.get('target_artifacts'))))}</td>"
             f"<td>{_e(item.get('action'))}</td>"
             "</tr>"
         )
@@ -259,7 +267,7 @@ def _remediation_table(report: dict[str, Any]) -> str:
         return ""
     return (
         '<section class="panel"><h2>Remediation Plan</h2><table><thead><tr>'
-        "<th>Kind</th><th>Category</th><th>Count</th><th>Priority</th><th>Action</th>"
+        "<th>Kind</th><th>Category</th><th>Count</th><th>Priority</th><th>Severity</th><th>Owner</th><th>Action Code</th><th>Target Artifacts</th><th>Action</th>"
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></section>"

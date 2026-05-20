@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 328 lifts remediation plan counts and dominant actions into decision and tiny-smoke summaries, so CI can scan the next action without opening the full plan.
+Version 329 enriches remediation plan rows with action code, severity, owner scope, and target artifacts, so the next action is easier to assign and script against.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -19,8 +19,8 @@ Version 328 lifts remediation plan counts and dominant actions into decision and
 
 - Learning and demonstration maturity: high. The project explains how a small GPT works and keeps runnable evidence, screenshots, tests, and code explanations for each stage.
 - AI engineering maturity: medium-high. Data governance, experiment records, release gates, model cards, audit reports, and reproducibility artifacts exist as local tooling.
-- Model capability maturity: medium. The architecture and evaluation loop are real, and v328 can run the CPU tiny scorecard comparison chain with decision-level remediation summaries, but the tiny run is still plumbing evidence rather than a model-quality claim.
-- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, and artifact boundaries; v137-v141 enriched generation-quality and scorecard promotion evidence; v142-v145 hardened source and CI workflow hygiene after real CI findings; v146-v151 carry the new CI hygiene evidence through project audit, release bundle, release readiness, readiness comparison, registry tracking, and maturity summary review; v152 performs a small CI hygiene quality hardening without adding a new report layer; v153-v185 move repeated artifact/render/helper boundaries into focused modules; v186-v205 return to model-eval and training-scale evidence by adding real train output, fixed suite, scorecard, pair/batch, suite consistency, strict decision guards, workflow, and handoff propagation; v206-v261 propagate handoff suite/batch review context through promotion, indexes, promoted comparisons, promoted decisions, promoted seeds, and seed handoff; v262-v267 split high-pressure promoted/scale artifact and helper boundaries; v268-v314 harden clean batch-review and CI-regressed batch evidence from standalone decisions through workflow, handoff, promotion acceptance, promotion indexing, promoted comparison filtering, promoted baseline decisions, promoted next-cycle seeds, final seed handoffs, seed-handoff automation receipt validation, and assurance-level receipt contract visibility; v315-v320 return to model-capability evidence with tiny real benchmark smoke, pair-baseline completeness, scorecard comparison smoke, decision smoke, decision diagnostics, and configurable budget comparison; v321 splits the promoted seed handoff artifact layer into a separate receipt artifact module; v322 adds a configurable decision rubric threshold to the tiny scorecard comparison smoke; v323 adds threshold blocker score and margin diagnostics to the top-level tiny smoke summary; v324 expands that into a threshold profile with counts, names, closest margin, and largest gap; v325 moves that profile into benchmark scorecard decision artifacts and lets the smoke consume it; v326 adds blocker/review taxonomy and dominant failure modes; v327 maps those categories into remediation actions; v328 summarizes remediation counts and dominant actions. The latest module pressure smoke is `pass` with zero warn modules.
+- Model capability maturity: medium. The architecture and evaluation loop are real, and v329 can run the CPU tiny scorecard comparison chain with decision-level remediation metadata, but the tiny run is still plumbing evidence rather than a model-quality claim.
+- Maintenance maturity: improving. v83-v108 reduced repeated report helpers through `report_utils`; v109 turns over-fragmented utility migrations into a runnable batching policy; v110 turns large-module concern into a runnable pressure report; v111-v136 split several high-pressure rendering, service, registry, dashboard, comparison, and artifact boundaries; v137-v141 enriched generation-quality and scorecard promotion evidence; v142-v145 hardened source and CI workflow hygiene after real CI findings; v146-v151 carry the new CI hygiene evidence through project audit, release bundle, release readiness, readiness comparison, registry tracking, and maturity summary review; v152 performs a small CI hygiene quality hardening without adding a new report layer; v153-v185 move repeated artifact/render/helper boundaries into focused modules; v186-v205 return to model-eval and training-scale evidence by adding real train output, fixed suite, scorecard, pair/batch, suite consistency, strict decision guards, workflow, and handoff propagation; v206-v261 propagate handoff suite/batch review context through promotion, indexes, promoted comparisons, promoted decisions, promoted seeds, and seed handoff; v262-v267 split high-pressure promoted/scale artifact and helper boundaries; v268-v314 harden clean batch-review and CI-regressed batch evidence from standalone decisions through workflow, handoff, promotion acceptance, promotion indexing, promoted comparison filtering, promoted baseline decisions, promoted next-cycle seeds, final seed handoffs, seed-handoff automation receipt validation, and assurance-level receipt contract visibility; v315-v320 return to model-capability evidence with tiny real benchmark smoke, pair-baseline completeness, scorecard comparison smoke, decision smoke, decision diagnostics, and configurable budget comparison; v321 splits the promoted seed handoff artifact layer into a separate receipt artifact module; v322 adds a configurable decision rubric threshold to the tiny scorecard comparison smoke; v323 adds threshold blocker score and margin diagnostics to the top-level tiny smoke summary; v324 expands that into a threshold profile with counts, names, closest margin, and largest gap; v325 moves that profile into benchmark scorecard decision artifacts and lets the smoke consume it; v326 adds blocker/review taxonomy and dominant failure modes; v327 maps those categories into remediation actions; v328 summarizes remediation counts and dominant actions; v329 enriches remediation rows with action metadata. The latest module pressure smoke is `pass` with zero warn modules.
 
 ## Capability map
 
@@ -463,6 +463,13 @@ Version 328 lifts remediation plan counts and dominant actions into decision and
 - Tiny scorecard comparison smoke summaries expose the same remediation summary fields for CI-readable next steps.
 - Archived remediation summary evidence in `d/328`.
 
+## Latest v329 checkpoint
+
+- Remediation plan rows now include stable `action_code`, `severity`, `owner_scope`, and `target_artifacts`.
+- Markdown and HTML decision artifacts show the new remediation metadata columns.
+- Tiny scorecard comparison smoke summaries expose the first remediation action code, severity, and owner scope.
+- Archived remediation metadata evidence in `d/329`.
+
 ## Version tags
 
 Published tags:
@@ -796,6 +803,7 @@ v325.0.0 MiniGPT v325 decision threshold profile artifact
 v326.0.0 MiniGPT v326 decision failure taxonomy
 v327.0.0 MiniGPT v327 decision remediation plan
 v328.0.0 MiniGPT v328 remediation summary
+v329.0.0 MiniGPT v329 remediation metadata
 ```
 
 ## Project structure
