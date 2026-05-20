@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+316-v302-training-portfolio-batch-ci-regression-summary.md
+ -> v302 code explanation: carry training portfolio comparison CI regression review summaries into batch Markdown, HTML, and CLI output.
+
 315-v301-training-portfolio-comparison-ci-regression-review.md
  -> v301 code explanation: carry maturity narrative CI workflow and CI order regressions into training portfolio comparison blocker actions and artifacts.
 
@@ -743,6 +746,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `313-v299-registry-and-maturity-ci-order-regression-summary.md`：第二百九十九版代码讲解，把 CI workflow order regression 继续传入 registry 和 maturity 汇总。
 - `314-v300-maturity-narrative-ci-order-regression-review.md`：第三百版代码讲解，把 CI workflow order regression 继续传入 maturity narrative 的 review 状态和渲染输出。
 - `315-v301-training-portfolio-comparison-ci-regression-review.md`：第三百零一版代码讲解，把 maturity narrative 里的 CI workflow/order regression 继续传入 training portfolio comparison 的 blocker action 与 artifact 输出。
+- `316-v302-training-portfolio-batch-ci-regression-summary.md`：第三百零二版代码讲解，把 training portfolio comparison 的 CI regression review summary 继续传入 batch 报告和 CLI 输出。
 
 ## 一句话总览
 

@@ -182,11 +182,13 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
                 "blocker_action_count": 1,
                 "maturity_review_count": 1,
                 "maturity_review_names": ["candidate"],
+                "maturity_ci_regression_count": 1,
+                "maturity_ci_regression_names": ["candidate"],
                 "maturity_coverage_regression_count": 1,
                 "maturity_coverage_regression_names": ["candidate"],
             },
             "review_actions": [
-                {"portfolio": "candidate", "severity": "blocker", "reason": "best_score_coverage_regressed"},
+                {"portfolio": "candidate", "severity": "blocker", "reason": "best_score_ci_regressed"},
                 {"portfolio": "shadow", "severity": "review", "reason": "dataset_card_review"},
             ],
         }
@@ -195,8 +197,10 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
 
         self.assertEqual(summary["review_action_count"], 2)
         self.assertEqual(summary["blocker_action_count"], 1)
+        self.assertEqual(summary["maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["maturity_ci_regression_names"], ["candidate"])
         self.assertEqual(summary["maturity_coverage_regression_names"], ["candidate"])
-        self.assertEqual(summary["blocker_reasons"], ["best_score_coverage_regressed"])
+        self.assertEqual(summary["blocker_reasons"], ["best_score_ci_regressed"])
         self.assertEqual(summary["blocker_portfolios"], ["candidate"])
 
     def test_load_variants_accepts_object_or_list(self) -> None:
@@ -243,6 +247,8 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertIn("## Variants", markdown)
             self.assertIn("Pair modes: `same_checkpoint_baseline=1`", markdown)
             self.assertIn("Comparison review actions", markdown)
+            self.assertIn("CI-regressed portfolios", markdown)
+            self.assertIn("CI regressions", html)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("same_checkpoint_baseline", html)
             self.assertIn("Review actions", html)

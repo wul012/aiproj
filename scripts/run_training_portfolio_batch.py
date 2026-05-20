@@ -96,6 +96,7 @@ def main() -> None:
     print(f"failed_variant={execution.get('failed_variant')}")
     print(f"comparison_status={execution.get('comparison_status')}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
+    print("comparison_review_summary=" + json.dumps(report.get("comparison_review_summary", {}), ensure_ascii=False))
     print("comparison_outputs=" + json.dumps(report.get("comparison_outputs", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if execution.get("status") == "failed" or execution.get("comparison_status") == "failed":

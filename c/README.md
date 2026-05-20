@@ -706,6 +706,9 @@ c/300/解释/说明.md
 c/301/图片
 c/301/解释/说明.md
  -> v301 training portfolio comparison CI regression review 的运行截图和解释
+c/302/图片
+c/302/解释/说明.md
+ -> v302 training portfolio batch CI regression summary 的运行截图和解释
 ```
 
 写入规则：
