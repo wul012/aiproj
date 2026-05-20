@@ -27,6 +27,10 @@ EMBEDDED_ASSURANCE_COMPARE_KEYS = (
     "embedded_decision",
     "expected_status",
     "expected_decision",
+    "receipt_schema_version",
+    "receipt_selected_handoff_batch_maturity_ci_regression_count",
+    "receipt_handoff_batch_maturity_ci_regression_count",
+    "receipt_comparison_exclusion_reasons",
     "issue_count",
     "issues",
     "sidecar_status",
@@ -91,6 +95,16 @@ def check_promoted_training_scale_seed_handoff_assurance(path: str | Path) -> di
         "embedded_receipt_check_status": expected.get("status"),
         "embedded_receipt_check_sidecar_status": expected.get("sidecar_status"),
         "embedded_receipt_check_issue_count": expected.get("issue_count"),
+        "embedded_receipt_check_receipt_schema_version": expected.get("receipt_schema_version"),
+        "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count": expected.get(
+            "receipt_selected_handoff_batch_maturity_ci_regression_count"
+        ),
+        "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": expected.get(
+            "receipt_handoff_batch_maturity_ci_regression_count"
+        ),
+        "embedded_receipt_check_receipt_comparison_exclusion_reasons": expected.get(
+            "receipt_comparison_exclusion_reasons"
+        ),
         "main_embedded_receipt_check_status": embedded.get("status"),
         "embedded_receipt_check_output_json": embedded_outputs.get("json"),
         "embedded_receipt_check_output_json_resolved": str(json_path) if json_path is not None else None,
@@ -115,6 +129,25 @@ def render_promoted_training_scale_seed_handoff_assurance_check(check: dict[str,
         ("handoff_assurance_report_path", check.get("handoff_report_path")),
         ("handoff_assurance_embedded_receipt_check_status", check.get("embedded_receipt_check_status")),
         ("handoff_assurance_embedded_receipt_check_sidecar_status", check.get("embedded_receipt_check_sidecar_status")),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_schema_version",
+            check.get("embedded_receipt_check_receipt_schema_version"),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count",
+            check.get("embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count",
+            check.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons",
+            json.dumps(
+                check.get("embedded_receipt_check_receipt_comparison_exclusion_reasons"),
+                ensure_ascii=False,
+            ),
+        ),
         ("handoff_assurance_main_embedded_receipt_check_status", check.get("main_embedded_receipt_check_status")),
         ("handoff_assurance_output_json_exists", check.get("embedded_receipt_check_output_json_exists")),
         ("handoff_assurance_output_text_exists", check.get("embedded_receipt_check_output_text_exists")),
@@ -200,9 +233,17 @@ def _is_file(path: Path | None) -> bool:
 
 
 def _normalized_assurance_value(key: str, value: Any) -> Any:
-    if key in {"exit_code", "checker_exit_code", "issue_count", "sidecar_issue_count"}:
+    if key in {
+        "exit_code",
+        "checker_exit_code",
+        "issue_count",
+        "sidecar_issue_count",
+        "receipt_schema_version",
+        "receipt_selected_handoff_batch_maturity_ci_regression_count",
+        "receipt_handoff_batch_maturity_ci_regression_count",
+    }:
         return _int(value)
-    if key in {"issues", "sidecar_issues"}:
+    if key in {"issues", "sidecar_issues", "receipt_comparison_exclusion_reasons"}:
         return string_list(value)
     if key in {"receipt_path_exists", "receipt_check_json_exists", "receipt_check_text_exists"}:
         return bool(value)

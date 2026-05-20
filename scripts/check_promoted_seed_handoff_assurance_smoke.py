@@ -76,6 +76,18 @@ def main() -> None:
         "handoff_assurance_decision": assurance.get("decision"),
         "handoff_assurance_embedded_receipt_check_status": assurance.get("embedded_receipt_check_status"),
         "handoff_assurance_embedded_receipt_check_sidecar_status": assurance.get("embedded_receipt_check_sidecar_status"),
+        "handoff_assurance_embedded_receipt_check_receipt_schema_version": assurance.get(
+            "embedded_receipt_check_receipt_schema_version"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons": assurance.get(
+            "embedded_receipt_check_receipt_comparison_exclusion_reasons"
+        ),
         "handoff_assurance_output_json_exists": assurance.get("embedded_receipt_check_output_json_exists"),
         "handoff_assurance_output_text_exists": assurance.get("embedded_receipt_check_output_text_exists"),
         "handoff_assurance_output_json": assurance_outputs.get("json"),
@@ -92,6 +104,26 @@ def main() -> None:
     _check(
         checks["handoff_assurance_embedded_receipt_check_sidecar_status"] == "pass",
         "embedded receipt-check sidecar status must pass",
+        issues,
+    )
+    _check(
+        checks["handoff_assurance_embedded_receipt_check_receipt_schema_version"] == 2,
+        "handoff assurance must expose receipt schema_version=2",
+        issues,
+    )
+    _check(
+        checks["handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"] == 0,
+        "handoff assurance must expose selected receipt CI regression count",
+        issues,
+    )
+    _check(
+        checks["handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"] == 0,
+        "handoff assurance must expose aggregate receipt CI regression count",
+        issues,
+    )
+    _check(
+        checks["handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons"] == [],
+        "handoff assurance must expose receipt comparison exclusion reasons",
         issues,
     )
     _check(checks["handoff_assurance_output_json_exists"] is True, "assurance JSON sidecar must exist", issues)

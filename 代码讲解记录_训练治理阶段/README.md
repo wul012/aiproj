@@ -44,6 +44,9 @@
 327-v313-promoted-seed-handoff-receipt-ci-contract.md
  -> v313 code explanation: upgrade promoted seed handoff automation receipts to schema v2 and validate CI-regression fields in receipt and embedded sidecar checks.
 
+328-v314-promoted-seed-handoff-assurance-ci-contract-summary.md
+ -> v314 code explanation: lift schema-v2 receipt CI-regression contract fields into embedded receipt checks, handoff assurance, and CI smoke summaries.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

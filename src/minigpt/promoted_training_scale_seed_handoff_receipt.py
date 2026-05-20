@@ -201,6 +201,14 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         "decision": decision,
         "exit_code": _int(expected_check.get("exit_code")),
         "checker_exit_code": checker_exit_code,
+        "receipt_schema_version": expected_check.get("schema_version"),
+        "receipt_selected_handoff_batch_maturity_ci_regression_count": expected_check.get(
+            "selected_handoff_batch_maturity_ci_regression_count"
+        ),
+        "receipt_handoff_batch_maturity_ci_regression_count": expected_check.get(
+            "handoff_batch_maturity_ci_regression_count"
+        ),
+        "receipt_comparison_exclusion_reasons": expected_check.get("comparison_exclusion_reasons"),
         "receipt_path": embedded.get("receipt_path"),
         "receipt_check_json": embedded_outputs.get("json"),
         "receipt_check_text": embedded_outputs.get("text"),
@@ -231,6 +239,19 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
         ("embedded_receipt_check_decision", check.get("decision")),
         ("embedded_receipt_check_exit_code", check.get("exit_code")),
         ("embedded_receipt_check_checker_exit_code", check.get("checker_exit_code")),
+        ("embedded_receipt_check_receipt_schema_version", check.get("receipt_schema_version")),
+        (
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count",
+            check.get("receipt_selected_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count",
+            check.get("receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_comparison_exclusion_reasons",
+            json.dumps(check.get("receipt_comparison_exclusion_reasons"), ensure_ascii=False),
+        ),
         ("embedded_receipt_check_receipt_path", check.get("receipt_path")),
         ("embedded_receipt_check_json", check.get("receipt_check_json")),
         ("embedded_receipt_check_text", check.get("receipt_check_text")),

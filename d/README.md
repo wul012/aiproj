@@ -50,6 +50,9 @@ d/312/解释/说明.md
 d/313/图片
 d/313/解释/说明.md
  -> v313 promoted seed handoff receipt CI contract 的运行截图和解释
+d/314/图片
+d/314/解释/说明.md
+ -> v314 promoted seed handoff assurance CI contract summary 的运行截图和解释
 ```
 
 写入规则：

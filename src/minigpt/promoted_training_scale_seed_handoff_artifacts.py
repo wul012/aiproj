@@ -134,6 +134,18 @@ def _handoff_assurance_fields(report: dict[str, Any]) -> dict[str, Any]:
         "handoff_assurance_embedded_receipt_check_sidecar_status": assurance.get(
             "embedded_receipt_check_sidecar_status"
         ),
+        "handoff_assurance_embedded_receipt_check_receipt_schema_version": assurance.get(
+            "embedded_receipt_check_receipt_schema_version"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons": "; ".join(
+            _string_list(assurance.get("embedded_receipt_check_receipt_comparison_exclusion_reasons"))
+        ),
         "handoff_assurance_output_json_exists": assurance.get("embedded_receipt_check_output_json_exists"),
         "handoff_assurance_output_text_exists": assurance.get("embedded_receipt_check_output_text_exists"),
         "handoff_assurance_issue_count": assurance.get("issue_count"),
@@ -308,6 +320,10 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "handoff_assurance_checker_exit_code",
         "handoff_assurance_embedded_receipt_check_status",
         "handoff_assurance_embedded_receipt_check_sidecar_status",
+        "handoff_assurance_embedded_receipt_check_receipt_schema_version",
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons",
         "handoff_assurance_output_json_exists",
         "handoff_assurance_output_text_exists",
         "handoff_assurance_issue_count",
@@ -577,6 +593,19 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Handoff assurance checker exit code: `{handoff_assurance.get('checker_exit_code')}`",
         f"- Handoff assurance embedded receipt check status: `{handoff_assurance.get('embedded_receipt_check_status')}`",
         f"- Handoff assurance embedded sidecar status: `{handoff_assurance.get('embedded_receipt_check_sidecar_status')}`",
+        f"- Handoff assurance receipt schema version: `{handoff_assurance.get('embedded_receipt_check_receipt_schema_version')}`",
+        (
+            "- Handoff assurance receipt selected CI regressions: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt CI regressions: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt comparison exclusions: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_comparison_exclusion_reasons')}`"
+        ),
         f"- Handoff assurance output json exists: `{handoff_assurance.get('embedded_receipt_check_output_json_exists')}`",
         f"- Handoff assurance output text exists: `{handoff_assurance.get('embedded_receipt_check_output_text_exists')}`",
         f"- Handoff assurance issue count: `{handoff_assurance.get('issue_count')}`",
@@ -734,6 +763,21 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Assurance checker exit", handoff_assurance.get("checker_exit_code")),
         ("Assurance embedded check", handoff_assurance.get("embedded_receipt_check_status")),
         ("Assurance sidecars", handoff_assurance.get("embedded_receipt_check_sidecar_status")),
+        ("Assurance receipt schema", handoff_assurance.get("embedded_receipt_check_receipt_schema_version")),
+        (
+            "Assurance selected CI regressions",
+            handoff_assurance.get(
+                "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"
+            ),
+        ),
+        (
+            "Assurance CI regressions",
+            handoff_assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "Assurance comparison exclusions",
+            ", ".join(_string_list(handoff_assurance.get("embedded_receipt_check_receipt_comparison_exclusion_reasons"))),
+        ),
         ("Assurance output json exists", handoff_assurance.get("embedded_receipt_check_output_json_exists")),
         ("Assurance output text exists", handoff_assurance.get("embedded_receipt_check_output_text_exists")),
         ("Assurance issue count", handoff_assurance.get("issue_count")),
@@ -884,6 +928,19 @@ def _handoff_assurance_section(report: dict[str, Any]) -> str:
         ("Checker exit code", assurance.get("checker_exit_code")),
         ("Embedded receipt check", assurance.get("embedded_receipt_check_status")),
         ("Embedded receipt sidecars", assurance.get("embedded_receipt_check_sidecar_status")),
+        ("Receipt schema version", assurance.get("embedded_receipt_check_receipt_schema_version")),
+        (
+            "Receipt selected CI regressions",
+            assurance.get("embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "Receipt CI regressions",
+            assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "Receipt comparison exclusions",
+            ", ".join(_string_list(assurance.get("embedded_receipt_check_receipt_comparison_exclusion_reasons"))),
+        ),
         ("Output JSON exists", assurance.get("embedded_receipt_check_output_json_exists")),
         ("Output text exists", assurance.get("embedded_receipt_check_output_text_exists")),
         ("Issue count", assurance.get("issue_count")),
