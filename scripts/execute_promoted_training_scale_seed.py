@@ -133,9 +133,38 @@ def main() -> None:
     print(f"selected_handoff_suite_mismatch_count={summary.get('selected_handoff_suite_mismatch_count')}")
     print(f"selected_handoff_require_clean_batch_review={summary.get('selected_handoff_require_clean_batch_review')}")
     print(f"selected_handoff_clean_batch_review_status={summary.get('selected_handoff_clean_batch_review_status')}")
+    print(
+        "selected_handoff_batch_maturity_ci_regression_count="
+        f"{summary.get('selected_handoff_batch_maturity_ci_regression_count')}"
+    )
+    print(
+        "selected_handoff_batch_maturity_ci_regression_names="
+        + json.dumps(summary.get("selected_handoff_batch_maturity_ci_regression_names"), ensure_ascii=False)
+    )
+    print(
+        "selected_handoff_selected_batch_maturity_ci_regression_count="
+        f"{summary.get('selected_handoff_selected_batch_maturity_ci_regression_count')}"
+    )
+    print(
+        "selected_comparison_exclusion_reasons="
+        + json.dumps(summary.get("selected_comparison_exclusion_reasons"), ensure_ascii=False)
+    )
     print(f"handoff_require_clean_batch_review_count={summary.get('handoff_require_clean_batch_review_count')}")
     print(f"handoff_clean_batch_review_count={summary.get('handoff_clean_batch_review_count')}")
     print(f"handoff_unclean_batch_review_count={summary.get('handoff_unclean_batch_review_count')}")
+    print(f"handoff_batch_maturity_ci_regression_count={summary.get('handoff_batch_maturity_ci_regression_count')}")
+    print(
+        "handoff_selected_batch_maturity_ci_regression_total="
+        f"{summary.get('handoff_selected_batch_maturity_ci_regression_total')}"
+    )
+    print(
+        "handoff_batch_maturity_ci_regression_names="
+        + json.dumps(summary.get("handoff_batch_maturity_ci_regression_names"), ensure_ascii=False)
+    )
+    print(
+        "comparison_exclusion_reasons="
+        + json.dumps(summary.get("comparison_exclusion_reasons"), ensure_ascii=False)
+    )
     print(
         "comparison_ready_handoff_require_clean_batch_review_count="
         f"{summary.get('comparison_ready_handoff_require_clean_batch_review_count')}"
@@ -147,6 +176,18 @@ def main() -> None:
     print(
         "comparison_ready_handoff_unclean_batch_review_count="
         f"{summary.get('comparison_ready_handoff_unclean_batch_review_count')}"
+    )
+    print(
+        "comparison_ready_handoff_batch_maturity_ci_regression_count="
+        f"{summary.get('comparison_ready_handoff_batch_maturity_ci_regression_count')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_total="
+        f"{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_total')}"
+    )
+    print(
+        "comparison_ready_handoff_batch_maturity_ci_regression_names="
+        + json.dumps(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_names"), ensure_ascii=False)
     )
     print(f"selected_handoff_selected_batch_review_status={summary.get('selected_handoff_selected_batch_review_status')}")
     print(
@@ -202,6 +243,10 @@ def main() -> None:
         print(f"clean_evidence_required={clean_evidence_requirement.get('status')}")
     if args.require_clean_batch_review:
         print(f"clean_batch_review_required_selected_status={clean_batch_review_requirement.get('selected_status')}")
+        print(
+            "clean_batch_review_required_selected_ci_regression_count="
+            f"{clean_batch_review_requirement.get('selected_ci_regression_count')}"
+        )
         print(f"clean_batch_review_required_clean={clean_batch_review_requirement.get('clean')}")
         print(f"clean_batch_review_required_detail={clean_batch_review_requirement.get('detail')}")
         print(f"clean_batch_review_required={clean_batch_review_requirement.get('status')}")

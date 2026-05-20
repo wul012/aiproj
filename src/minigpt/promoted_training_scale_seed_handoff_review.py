@@ -36,6 +36,7 @@ class SeedHandoffCleanBatchReviewRequirement(TypedDict):
     clean: bool
     selected_required: bool
     selected_status: str | None
+    selected_ci_regression_count: int
     detail: str | None
     status_domain: list[SeedHandoffCleanBatchReviewRequirementStatus]
 
@@ -164,11 +165,33 @@ def build_seed_handoff_clean_batch_review_summary(baseline: dict[str, Any]) -> d
         "selected_handoff_clean_batch_review_status": clean_review.get(
             "selected_handoff_clean_batch_review_status"
         ),
+        "selected_handoff_batch_maturity_ci_regression_count": clean_review.get(
+            "selected_handoff_batch_maturity_ci_regression_count"
+        ),
+        "selected_handoff_batch_maturity_ci_regression_names": _string_list(
+            clean_review.get("selected_handoff_batch_maturity_ci_regression_names")
+        ),
+        "selected_handoff_selected_batch_maturity_ci_regression_count": clean_review.get(
+            "selected_handoff_selected_batch_maturity_ci_regression_count"
+        ),
+        "selected_comparison_exclusion_reasons": _string_list(
+            clean_review.get("selected_comparison_exclusion_reasons")
+        ),
         "handoff_require_clean_batch_review_count": clean_review.get(
             "handoff_require_clean_batch_review_count"
         ),
         "handoff_clean_batch_review_count": clean_review.get("handoff_clean_batch_review_count"),
         "handoff_unclean_batch_review_count": clean_review.get("handoff_unclean_batch_review_count"),
+        "handoff_batch_maturity_ci_regression_count": clean_review.get(
+            "handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_selected_batch_maturity_ci_regression_total": clean_review.get(
+            "handoff_selected_batch_maturity_ci_regression_total"
+        ),
+        "handoff_batch_maturity_ci_regression_names": _string_list(
+            clean_review.get("handoff_batch_maturity_ci_regression_names")
+        ),
+        "comparison_exclusion_reasons": _string_list(clean_review.get("comparison_exclusion_reasons")),
         "comparison_ready_handoff_require_clean_batch_review_count": clean_review.get(
             "comparison_ready_handoff_require_clean_batch_review_count"
         ),
@@ -177,6 +200,15 @@ def build_seed_handoff_clean_batch_review_summary(baseline: dict[str, Any]) -> d
         ),
         "comparison_ready_handoff_unclean_batch_review_count": clean_review.get(
             "comparison_ready_handoff_unclean_batch_review_count"
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_count": clean_review.get(
+            "comparison_ready_handoff_batch_maturity_ci_regression_count"
+        ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": clean_review.get(
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_total"
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_names": _string_list(
+            clean_review.get("comparison_ready_handoff_batch_maturity_ci_regression_names")
         ),
     }
 
@@ -212,7 +244,8 @@ def build_seed_handoff_clean_batch_review_requirement(
     selected_required = bool(summary.get("selected_handoff_require_clean_batch_review"))
     selected_status = summary.get("selected_handoff_clean_batch_review_status")
     status_text = str(selected_status) if selected_status is not None else None
-    clean = (not selected_required) or status_text == "clean"
+    selected_ci_regressions = _int(summary.get("selected_handoff_batch_maturity_ci_regression_count"))
+    clean = (not selected_required) or (status_text == "clean" and selected_ci_regressions == 0)
     status: SeedHandoffCleanBatchReviewRequirementStatus = "not-required"
     if required:
         status = "pass" if clean else "fail"
@@ -222,7 +255,13 @@ def build_seed_handoff_clean_batch_review_requirement(
         "clean": clean,
         "selected_required": selected_required,
         "selected_status": status_text,
-        "detail": _clean_batch_review_requirement_detail(selected_required, status_text, clean),
+        "selected_ci_regression_count": selected_ci_regressions,
+        "detail": _clean_batch_review_requirement_detail(
+            selected_required,
+            status_text,
+            selected_ci_regressions,
+            clean,
+        ),
         "status_domain": list(SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES),
     }
 
@@ -429,11 +468,21 @@ def _clean_evidence_requirement_recommendations(
     return ["Review clean-evidence requirement status before using this handoff as clean comparison evidence."]
 
 
-def _clean_batch_review_requirement_detail(selected_required: bool, selected_status: str | None, clean: bool) -> str:
+def _clean_batch_review_requirement_detail(
+    selected_required: bool,
+    selected_status: str | None,
+    selected_ci_regressions: int,
+    clean: bool,
+) -> str:
     if clean:
         if selected_required:
             return "selected handoff clean batch-review requirement is clean"
         return "selected handoff does not require clean batch-review evidence"
+    if selected_required and selected_ci_regressions:
+        return (
+            "selected handoff requires clean batch-review evidence but carries "
+            f"{selected_ci_regressions} batch CI regression(s)"
+        )
     return f"selected handoff requires clean batch-review evidence but status is {selected_status or 'missing'}"
 
 
@@ -473,9 +522,18 @@ def _handoff_batch_review_recommendations(summary: dict[str, Any]) -> list[str]:
 def _handoff_clean_batch_review_recommendations(summary: dict[str, Any]) -> list[str]:
     selected_required = bool(summary.get("selected_handoff_require_clean_batch_review"))
     selected_status = str(summary.get("selected_handoff_clean_batch_review_status") or "")
+    selected_ci_regressions = _int(summary.get("selected_handoff_batch_maturity_ci_regression_count"))
     if selected_required and selected_status != "clean":
         return [
             "Resolve selected handoff clean batch-review status before treating this seed handoff as clean model-quality evidence."
+        ]
+    if selected_required and selected_ci_regressions:
+        return [
+            "Resolve selected handoff batch CI regressions before treating this seed handoff as clean model-quality evidence."
+        ]
+    if _int(summary.get("handoff_batch_maturity_ci_regression_count")):
+        return [
+            "Rejected promoted decision inputs include handoff batch CI regressions; keep them out of the seed handoff baseline."
         ]
     if _int(summary.get("handoff_unclean_batch_review_count")):
         return [

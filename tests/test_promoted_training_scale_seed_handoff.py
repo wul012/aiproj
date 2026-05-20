@@ -485,28 +485,41 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(summary["handoff_status"], "planned")
             self.assertTrue(summary["selected_handoff_require_clean_batch_review"])
             self.assertEqual(summary["selected_handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["selected_handoff_selected_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(summary["handoff_require_clean_batch_review_count"], 3)
             self.assertEqual(summary["handoff_clean_batch_review_count"], 2)
             self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(summary["comparison_ready_handoff_require_clean_batch_review_count"], 2)
             self.assertEqual(summary["comparison_ready_handoff_clean_batch_review_count"], 2)
             self.assertEqual(summary["comparison_ready_handoff_unclean_batch_review_count"], 0)
+            self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(clean_batch_requirement["status"], "not-required")
             self.assertTrue(clean_batch_requirement["clean"])
             self.assertIn("selected_handoff_require_clean_batch_review", csv_text)
             self.assertIn("selected_handoff_clean_batch_review_status", csv_text)
+            self.assertIn("selected_handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_count", csv_text)
             self.assertIn("clean_batch_review_requirement_status", csv_text)
             self.assertIn("automation_gate_status", csv_text)
             self.assertIn("automation_gate_decision", csv_text)
             self.assertIn("automation_gate_exit_code", csv_text)
             self.assertIn("automation_summary_decision", csv_text)
             self.assertIn("Selected handoff require clean batch review", markdown)
+            self.assertIn("Selected handoff batch CI regressions", markdown)
+            self.assertIn("Handoff batch CI regressions", markdown)
+            self.assertIn("Comparison-ready handoff batch CI regressions", markdown)
             self.assertIn("Comparison-ready clean handoffs", markdown)
             self.assertIn("Clean batch-review requirement", markdown)
             self.assertIn("Automation gate", markdown)
             self.assertIn("Automation gate decision", markdown)
             self.assertIn("Automation summary decision", markdown)
             self.assertIn("Selected clean batch", html)
+            self.assertIn("Selected CI regressions", html)
+            self.assertIn("Handoff CI regressions", html)
+            self.assertIn("Ready CI regressions", html)
             self.assertIn("Ready clean batch", html)
             self.assertIn("Clean batch gate", html)
             self.assertIn("Automation gate", html)
@@ -514,8 +527,11 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("Automation summary", html)
             self.assertIn("selected_handoff_require_clean_batch_review=True", completed.stdout)
             self.assertIn("selected_handoff_clean_batch_review_status=clean", completed.stdout)
+            self.assertIn("selected_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
             self.assertIn("handoff_unclean_batch_review_count=1", completed.stdout)
+            self.assertIn("handoff_batch_maturity_ci_regression_count=0", completed.stdout)
             self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
+            self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
             self.assertEqual(payload["summary"]["selected_handoff_clean_batch_review_status"], "clean")
             self.assertEqual(payload["clean_batch_review_requirement"]["status"], "not-required")
             self.assertEqual(payload["automation_gate"]["status"], "not-required")
@@ -649,6 +665,112 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertFalse(payload["clean_batch_review_requirement"]["clean"])
             self.assertEqual(payload["clean_batch_review_requirement"]["selected_status"], "review")
             self.assertIn("Clean batch-review requirement failed", payload["recommendations"][1])
+
+    def test_carries_seed_clean_batch_ci_regression_context_into_handoff_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                handoff_ci_regression_count=2,
+            )
+
+            report = build_promoted_training_scale_seed_handoff(seed, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_seed_handoff_outputs(report, root / "handoff")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            receipt = json.loads(Path(outputs["automation_receipt_json"]).read_text(encoding="utf-8"))
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            summary = report["summary"]
+            self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["selected_handoff_selected_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 0)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_names"], ["dirty-ci-old"])
+            self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+            self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(receipt["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(receipt["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+            self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("comparison_exclusion_reasons", csv_text)
+            self.assertIn("Handoff batch CI regressions", markdown)
+            self.assertIn("Comparison exclusion reasons", markdown)
+            self.assertIn("Handoff CI regressions", html)
+            self.assertIn("handoff_batch_maturity_ci_regression_count=2", completed.stdout)
+            self.assertIn(
+                'comparison_exclusion_reasons=[\"handoff batch CI regression count is 2\"]',
+                completed.stdout,
+            )
+            self.assertTrue(
+                any("Rejected promoted decision inputs include handoff batch CI regressions" in item for item in report["recommendations"])
+            )
+
+    def test_script_rejects_selected_clean_batch_ci_regression_when_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                handoff_ci_regression_count=1,
+                selected_handoff_ci_regression_count=1,
+            )
+            script_out = root / "script-out"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-clean-batch-review",
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("selected_handoff_clean_batch_review_status=clean", completed.stdout)
+            self.assertIn("selected_handoff_batch_maturity_ci_regression_count=1", completed.stdout)
+            self.assertIn("clean_batch_review_required_selected_status=clean", completed.stdout)
+            self.assertIn("clean_batch_review_required_selected_ci_regression_count=1", completed.stdout)
+            self.assertIn("clean_batch_review_required_clean=False", completed.stdout)
+            self.assertIn("clean_batch_review_required=fail", completed.stdout)
+            self.assertIn("automation_gate_status=fail", completed.stdout)
+            self.assertIn('automation_gate_failed_requirements=[\"clean_batch_review\"]', completed.stdout)
+            self.assertEqual(payload["summary"]["selected_handoff_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(payload["clean_batch_review_requirement"]["status"], "fail")
+            self.assertEqual(payload["clean_batch_review_requirement"]["selected_status"], "clean")
+            self.assertEqual(payload["clean_batch_review_requirement"]["selected_ci_regression_count"], 1)
+            self.assertFalse(payload["clean_batch_review_requirement"]["clean"])
+            self.assertEqual(payload["automation_summary"]["decision"], "stop")
+            self.assertEqual(payload["automation_summary"]["blocking_source"], "automation_gate")
+            self.assertIn("batch CI regression", payload["clean_batch_review_requirement"]["detail"])
+            self.assertIn("Clean batch-review requirement failed", payload["recommendations"][1])
+            self.assertTrue(
+                any("selected handoff batch CI regressions" in item for item in payload["recommendations"])
+            )
 
     def test_execute_reports_consistent_suite_alignment_after_plan_generation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -991,6 +1113,8 @@ def write_seed_tree(
     include_handoff_clean_batch_review: bool = False,
     include_handoff_batch_review: bool = False,
     clean_batch_review_status: str = "clean",
+    handoff_ci_regression_count: int = 0,
+    selected_handoff_ci_regression_count: int = 0,
 ) -> Path:
     source = root / "corpus.txt"
     source.write_text("MiniGPT v82 next cycle corpus.\n" * 180, encoding="utf-8")
@@ -1046,15 +1170,36 @@ def write_seed_tree(
             "comparison_ready_handoff_suite_mismatch_total": 0,
         }
     if include_handoff_clean_batch_review:
+        handoff_ci_names = ["dirty-ci-old"] if handoff_ci_regression_count else []
+        selected_ci_names = ["dirty-ci-selected"] if selected_handoff_ci_regression_count else []
         baseline_seed["handoff_clean_batch_review"] = {
             "selected_handoff_require_clean_batch_review": True,
             "selected_handoff_clean_batch_review_status": clean_batch_review_status,
+            "selected_handoff_batch_maturity_ci_regression_count": selected_handoff_ci_regression_count,
+            "selected_handoff_batch_maturity_ci_regression_names": selected_ci_names,
+            "selected_handoff_selected_batch_maturity_ci_regression_count": selected_handoff_ci_regression_count,
+            "selected_comparison_exclusion_reasons": (
+                ["selected handoff batch CI regression count is 1"]
+                if selected_handoff_ci_regression_count
+                else []
+            ),
             "handoff_require_clean_batch_review_count": 3,
             "handoff_clean_batch_review_count": 2 if clean_batch_review_status == "clean" else 1,
             "handoff_unclean_batch_review_count": 1 if clean_batch_review_status == "clean" else 2,
+            "handoff_batch_maturity_ci_regression_count": handoff_ci_regression_count,
+            "handoff_selected_batch_maturity_ci_regression_total": selected_handoff_ci_regression_count,
+            "handoff_batch_maturity_ci_regression_names": handoff_ci_names,
+            "comparison_exclusion_reasons": (
+                [f"handoff batch CI regression count is {handoff_ci_regression_count}"]
+                if handoff_ci_regression_count
+                else []
+            ),
             "comparison_ready_handoff_require_clean_batch_review_count": 2,
             "comparison_ready_handoff_clean_batch_review_count": 2 if clean_batch_review_status == "clean" else 1,
             "comparison_ready_handoff_unclean_batch_review_count": 0 if clean_batch_review_status == "clean" else 1,
+            "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
+            "comparison_ready_handoff_batch_maturity_ci_regression_names": [],
         }
     if include_handoff_batch_review:
         baseline_seed["handoff_batch_review"] = {

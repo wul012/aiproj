@@ -39,6 +39,41 @@ class PromotedTrainingScaleSeedHandoffReviewTests(unittest.TestCase):
             ["coverage-regressed"],
         )
 
+    def test_builds_clean_batch_review_summary_with_ci_regression_context(self) -> None:
+        from minigpt.promoted_training_scale_seed_handoff_review import (
+            build_seed_handoff_clean_batch_review_summary,
+        )
+
+        summary = build_seed_handoff_clean_batch_review_summary(
+            {
+                "handoff_clean_batch_review": {
+                    "selected_handoff_require_clean_batch_review": True,
+                    "selected_handoff_clean_batch_review_status": "clean",
+                    "selected_handoff_batch_maturity_ci_regression_count": 1,
+                    "selected_handoff_batch_maturity_ci_regression_names": ["dirty-selected", 7],
+                    "selected_handoff_selected_batch_maturity_ci_regression_count": 1,
+                    "selected_comparison_exclusion_reasons": ["selected stale"],
+                    "handoff_batch_maturity_ci_regression_count": 2,
+                    "handoff_selected_batch_maturity_ci_regression_total": 1,
+                    "handoff_batch_maturity_ci_regression_names": ["dirty-old"],
+                    "comparison_exclusion_reasons": ["handoff batch CI regression count is 2"],
+                    "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
+                    "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
+                    "comparison_ready_handoff_batch_maturity_ci_regression_names": [],
+                }
+            }
+        )
+
+        self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_names"], ["dirty-selected", "7"])
+        self.assertEqual(summary["selected_handoff_selected_batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["selected_comparison_exclusion_reasons"], ["selected stale"])
+        self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
+        self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 1)
+        self.assertEqual(summary["handoff_batch_maturity_ci_regression_names"], ["dirty-old"])
+        self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+        self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
+
     def test_builds_suite_alignment_without_requiring_generated_plan(self) -> None:
         alignment = build_seed_handoff_suite_alignment("suites/standard-zh.json", "suites/standard-zh.json", None)
 

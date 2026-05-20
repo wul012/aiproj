@@ -50,6 +50,11 @@ def build_promoted_training_scale_seed_handoff_automation_receipt(report: dict[s
         "passed_requirements": automation_gate.get("passed_requirements"),
         "clean_evidence_requirement_status": clean_requirement.get("status"),
         "clean_batch_review_requirement_status": clean_batch_requirement.get("status"),
+        "selected_handoff_batch_maturity_ci_regression_count": summary.get(
+            "selected_handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_batch_maturity_ci_regression_count": summary.get("handoff_batch_maturity_ci_regression_count"),
+        "comparison_exclusion_reasons": summary.get("comparison_exclusion_reasons"),
     }
 
 
@@ -155,6 +160,9 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_text(report: 
         "passed_requirements",
         "clean_evidence_requirement_status",
         "clean_batch_review_requirement_status",
+        "selected_handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_regression_count",
+        "comparison_exclusion_reasons",
     ]
     return "\n".join(f"{key}={receipt.get(key)}" for key in keys) + "\n"
 
@@ -203,12 +211,23 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "selected_handoff_selected_suite_path",
         "selected_handoff_require_clean_batch_review",
         "selected_handoff_clean_batch_review_status",
+        "selected_handoff_batch_maturity_ci_regression_count",
+        "selected_handoff_batch_maturity_ci_regression_names",
+        "selected_handoff_selected_batch_maturity_ci_regression_count",
+        "selected_comparison_exclusion_reasons",
         "handoff_require_clean_batch_review_count",
         "handoff_clean_batch_review_count",
         "handoff_unclean_batch_review_count",
+        "handoff_batch_maturity_ci_regression_count",
+        "handoff_selected_batch_maturity_ci_regression_total",
+        "handoff_batch_maturity_ci_regression_names",
+        "comparison_exclusion_reasons",
         "comparison_ready_handoff_require_clean_batch_review_count",
         "comparison_ready_handoff_clean_batch_review_count",
         "comparison_ready_handoff_unclean_batch_review_count",
+        "comparison_ready_handoff_batch_maturity_ci_regression_count",
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_total",
+        "comparison_ready_handoff_batch_maturity_ci_regression_names",
         "selected_handoff_selected_batch_review_status",
         "selected_handoff_selected_batch_comparison_review_action_count",
         "selected_handoff_selected_batch_comparison_blocker_action_count",
@@ -236,6 +255,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "clean_batch_review_requirement_clean",
         "clean_batch_review_requirement_selected_required",
         "clean_batch_review_requirement_selected_status",
+        "clean_batch_review_requirement_selected_ci_regression_count",
         "clean_batch_review_requirement_status_domain",
         "automation_gate_required",
         "automation_gate_status",
@@ -319,9 +339,29 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "selected_handoff_clean_batch_review_status": summary.get(
                 "selected_handoff_clean_batch_review_status"
             ),
+            "selected_handoff_batch_maturity_ci_regression_count": summary.get(
+                "selected_handoff_batch_maturity_ci_regression_count"
+            ),
+            "selected_handoff_batch_maturity_ci_regression_names": "; ".join(
+                _string_list(summary.get("selected_handoff_batch_maturity_ci_regression_names"))
+            ),
+            "selected_handoff_selected_batch_maturity_ci_regression_count": summary.get(
+                "selected_handoff_selected_batch_maturity_ci_regression_count"
+            ),
+            "selected_comparison_exclusion_reasons": "; ".join(
+                _string_list(summary.get("selected_comparison_exclusion_reasons"))
+            ),
             "handoff_require_clean_batch_review_count": summary.get("handoff_require_clean_batch_review_count"),
             "handoff_clean_batch_review_count": summary.get("handoff_clean_batch_review_count"),
             "handoff_unclean_batch_review_count": summary.get("handoff_unclean_batch_review_count"),
+            "handoff_batch_maturity_ci_regression_count": summary.get("handoff_batch_maturity_ci_regression_count"),
+            "handoff_selected_batch_maturity_ci_regression_total": summary.get(
+                "handoff_selected_batch_maturity_ci_regression_total"
+            ),
+            "handoff_batch_maturity_ci_regression_names": "; ".join(
+                _string_list(summary.get("handoff_batch_maturity_ci_regression_names"))
+            ),
+            "comparison_exclusion_reasons": "; ".join(_string_list(summary.get("comparison_exclusion_reasons"))),
             "comparison_ready_handoff_require_clean_batch_review_count": summary.get(
                 "comparison_ready_handoff_require_clean_batch_review_count"
             ),
@@ -330,6 +370,15 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             ),
             "comparison_ready_handoff_unclean_batch_review_count": summary.get(
                 "comparison_ready_handoff_unclean_batch_review_count"
+            ),
+            "comparison_ready_handoff_batch_maturity_ci_regression_count": summary.get(
+                "comparison_ready_handoff_batch_maturity_ci_regression_count"
+            ),
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": summary.get(
+                "comparison_ready_handoff_selected_batch_maturity_ci_regression_total"
+            ),
+            "comparison_ready_handoff_batch_maturity_ci_regression_names": "; ".join(
+                _string_list(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_names"))
             ),
             "selected_handoff_selected_batch_review_status": summary.get("selected_handoff_selected_batch_review_status"),
             "selected_handoff_selected_batch_comparison_review_action_count": summary.get(
@@ -374,6 +423,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "clean_batch_review_requirement_clean": clean_batch_requirement.get("clean"),
             "clean_batch_review_requirement_selected_required": clean_batch_requirement.get("selected_required"),
             "clean_batch_review_requirement_selected_status": clean_batch_requirement.get("selected_status"),
+            "clean_batch_review_requirement_selected_ci_regression_count": clean_batch_requirement.get(
+                "selected_ci_regression_count"
+            ),
             "clean_batch_review_requirement_status_domain": clean_batch_requirement.get("status_domain"),
             "automation_gate_required": automation_gate.get("required"),
             "automation_gate_status": automation_gate.get("status"),
@@ -441,12 +493,23 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Selected handoff suite path: `{summary.get('selected_handoff_selected_suite_path')}`",
         f"- Selected handoff require clean batch review: `{summary.get('selected_handoff_require_clean_batch_review')}`",
         f"- Selected handoff clean batch review: `{summary.get('selected_handoff_clean_batch_review_status')}`",
+        f"- Selected handoff batch CI regressions: `{summary.get('selected_handoff_batch_maturity_ci_regression_count')}`",
+        f"- Selected handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('selected_handoff_batch_maturity_ci_regression_names')))}`",
+        f"- Selected handoff selected batch CI regressions: `{summary.get('selected_handoff_selected_batch_maturity_ci_regression_count')}`",
+        f"- Selected comparison exclusion reasons: `{', '.join(_string_list(summary.get('selected_comparison_exclusion_reasons')))}`",
         f"- Handoff require clean batch review: `{summary.get('handoff_require_clean_batch_review_count')}`",
         f"- Handoff clean batch review: `{summary.get('handoff_clean_batch_review_count')}`",
         f"- Handoff unclean batch review: `{summary.get('handoff_unclean_batch_review_count')}`",
+        f"- Handoff batch CI regressions: `{summary.get('handoff_batch_maturity_ci_regression_count')}`",
+        f"- Handoff selected batch CI regressions: `{summary.get('handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_ci_regression_names')))}`",
+        f"- Comparison exclusion reasons: `{', '.join(_string_list(summary.get('comparison_exclusion_reasons')))}`",
         f"- Comparison-ready clean-required handoffs: `{summary.get('comparison_ready_handoff_require_clean_batch_review_count')}`",
         f"- Comparison-ready clean handoffs: `{summary.get('comparison_ready_handoff_clean_batch_review_count')}`",
         f"- Comparison-ready unclean handoffs: `{summary.get('comparison_ready_handoff_unclean_batch_review_count')}`",
+        f"- Comparison-ready handoff batch CI regressions: `{summary.get('comparison_ready_handoff_batch_maturity_ci_regression_count')}`",
+        f"- Comparison-ready selected batch CI regressions: `{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Comparison-ready handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('comparison_ready_handoff_batch_maturity_ci_regression_names')))}`",
         f"- Selected handoff batch review: `{summary.get('selected_handoff_selected_batch_review_status')}`",
         f"- Selected handoff batch review actions: `{summary.get('selected_handoff_selected_batch_comparison_review_action_count')}`",
         f"- Selected handoff batch blocker actions: `{summary.get('selected_handoff_selected_batch_comparison_blocker_action_count')}`",
@@ -466,6 +529,7 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Clean evidence requirement status domain: `{clean_requirement.get('status_domain')}`",
         f"- Clean batch-review requirement: `{clean_batch_requirement.get('status')}`",
         f"- Clean batch-review requirement detail: `{clean_batch_requirement.get('detail')}`",
+        f"- Clean batch-review requirement selected CI regressions: `{clean_batch_requirement.get('selected_ci_regression_count')}`",
         f"- Clean batch-review requirement status domain: `{clean_batch_requirement.get('status_domain')}`",
         f"- Automation gate: `{automation_gate.get('status')}`",
         f"- Automation gate decision: `{automation_gate.get('decision')}`",
@@ -600,12 +664,24 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Selected handoff mismatch", summary.get("selected_handoff_suite_mismatch_count")),
         ("Selected clean required", summary.get("selected_handoff_require_clean_batch_review")),
         ("Selected clean batch", summary.get("selected_handoff_clean_batch_review_status")),
+        ("Selected CI regressions", summary.get("selected_handoff_batch_maturity_ci_regression_count")),
+        (
+            "Selected selected CI regressions",
+            summary.get("selected_handoff_selected_batch_maturity_ci_regression_count"),
+        ),
         ("Handoff clean required", summary.get("handoff_require_clean_batch_review_count")),
         ("Handoff clean", summary.get("handoff_clean_batch_review_count")),
         ("Handoff unclean", summary.get("handoff_unclean_batch_review_count")),
+        ("Handoff CI regressions", summary.get("handoff_batch_maturity_ci_regression_count")),
+        ("Handoff selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
         ("Ready clean-required", summary.get("comparison_ready_handoff_require_clean_batch_review_count")),
         ("Ready clean batch", summary.get("comparison_ready_handoff_clean_batch_review_count")),
         ("Ready unclean batch", summary.get("comparison_ready_handoff_unclean_batch_review_count")),
+        ("Ready CI regressions", summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")),
+        (
+            "Ready selected CI regressions",
+            summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_total"),
+        ),
         ("Selected handoff batch", summary.get("selected_handoff_selected_batch_review_status")),
         ("Selected batch blockers", summary.get("selected_handoff_selected_batch_comparison_blocker_action_count")),
         ("Ready batch reviews", summary.get("comparison_ready_handoff_selected_batch_review_count")),
@@ -618,6 +694,7 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Clean evidence gate", clean_requirement.get("status")),
         ("Clean evidence gate domain", clean_requirement_domain),
         ("Clean batch gate", clean_batch_requirement.get("status")),
+        ("Clean batch gate selected CI", clean_batch_requirement.get("selected_ci_regression_count")),
         ("Clean batch gate domain", clean_batch_requirement_domain),
         ("Automation gate", automation_gate.get("status")),
         ("Automation decision", automation_gate.get("decision")),
