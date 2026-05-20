@@ -61,6 +61,14 @@ def _receipt_check_outputs(report: dict[str, Any]) -> dict[str, Any]:
     return _dict(report.get("receipt_check_outputs"))
 
 
+def _embedded_receipt_check(report: dict[str, Any]) -> dict[str, Any]:
+    return _dict(report.get("embedded_receipt_check"))
+
+
+def _embedded_receipt_check_outputs(report: dict[str, Any]) -> dict[str, Any]:
+    return _dict(report.get("embedded_receipt_check_outputs"))
+
+
 def _receipt_check_fields(report: dict[str, Any]) -> dict[str, Any]:
     receipt_check = _receipt_check(report)
     receipt_check_outputs = _receipt_check_outputs(report)
@@ -76,6 +84,28 @@ def _receipt_check_fields(report: dict[str, Any]) -> dict[str, Any]:
         "receipt_check_receipt_path": receipt_check.get("receipt_path"),
         "receipt_check_json": receipt_check_outputs.get("json"),
         "receipt_check_text": receipt_check_outputs.get("text"),
+    }
+
+
+def _embedded_receipt_check_fields(report: dict[str, Any]) -> dict[str, Any]:
+    embedded_check = _embedded_receipt_check(report)
+    embedded_outputs = _embedded_receipt_check_outputs(report)
+    return {
+        "embedded_receipt_check_status": embedded_check.get("status"),
+        "embedded_receipt_check_decision": embedded_check.get("decision"),
+        "embedded_receipt_check_exit_code": embedded_check.get("exit_code"),
+        "embedded_receipt_check_checker_exit_code": embedded_check.get("checker_exit_code"),
+        "embedded_receipt_check_sidecar_status": embedded_check.get("sidecar_status"),
+        "embedded_receipt_check_issue_count": embedded_check.get("issue_count"),
+        "embedded_receipt_check_issues": "; ".join(_string_list(embedded_check.get("issues"))),
+        "embedded_receipt_check_receipt_path": embedded_check.get("receipt_path"),
+        "embedded_receipt_check_receipt_path_exists": embedded_check.get("receipt_path_exists"),
+        "embedded_receipt_check_json": embedded_check.get("receipt_check_json"),
+        "embedded_receipt_check_json_exists": embedded_check.get("receipt_check_json_exists"),
+        "embedded_receipt_check_text": embedded_check.get("receipt_check_text"),
+        "embedded_receipt_check_text_exists": embedded_check.get("receipt_check_text_exists"),
+        "embedded_receipt_check_output_json": embedded_outputs.get("json"),
+        "embedded_receipt_check_output_text": embedded_outputs.get("text"),
     }
 
 
@@ -129,6 +159,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
     automation_gate = _dict(report.get("automation_gate"))
     automation_summary = _dict(report.get("automation_summary"))
     receipt_check_fields = _receipt_check_fields(report)
+    embedded_receipt_check_fields = _embedded_receipt_check_fields(report)
     fieldnames = [
         "handoff_status",
         "seed_status",
@@ -206,6 +237,21 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "receipt_check_receipt_path",
         "receipt_check_json",
         "receipt_check_text",
+        "embedded_receipt_check_status",
+        "embedded_receipt_check_decision",
+        "embedded_receipt_check_exit_code",
+        "embedded_receipt_check_checker_exit_code",
+        "embedded_receipt_check_sidecar_status",
+        "embedded_receipt_check_issue_count",
+        "embedded_receipt_check_issues",
+        "embedded_receipt_check_receipt_path",
+        "embedded_receipt_check_receipt_path_exists",
+        "embedded_receipt_check_json",
+        "embedded_receipt_check_json_exists",
+        "embedded_receipt_check_text",
+        "embedded_receipt_check_text_exists",
+        "embedded_receipt_check_output_json",
+        "embedded_receipt_check_output_text",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -309,6 +355,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "automation_summary_failed_requirements": automation_summary.get("failed_requirements"),
             "automation_summary_decision_domain": automation_summary.get("decision_domain"),
             **receipt_check_fields,
+            **embedded_receipt_check_fields,
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -330,6 +377,8 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
     automation_summary = _dict(report.get("automation_summary"))
     receipt_check = _receipt_check(report)
     receipt_check_outputs = _receipt_check_outputs(report)
+    embedded_receipt_check = _embedded_receipt_check(report)
+    embedded_receipt_check_outputs = _embedded_receipt_check_outputs(report)
     lines = [
         f"# {report.get('title', 'MiniGPT promoted training scale seed handoff')}",
         "",
@@ -398,6 +447,21 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Receipt check receipt path: `{receipt_check.get('receipt_path')}`",
         f"- Receipt check json: `{receipt_check_outputs.get('json')}`",
         f"- Receipt check text: `{receipt_check_outputs.get('text')}`",
+        f"- Embedded receipt check status: `{embedded_receipt_check.get('status')}`",
+        f"- Embedded receipt check decision: `{embedded_receipt_check.get('decision')}`",
+        f"- Embedded receipt check exit code: `{embedded_receipt_check.get('exit_code')}`",
+        f"- Embedded receipt check checker exit code: `{embedded_receipt_check.get('checker_exit_code')}`",
+        f"- Embedded receipt check sidecar status: `{embedded_receipt_check.get('sidecar_status')}`",
+        f"- Embedded receipt check issue count: `{embedded_receipt_check.get('issue_count')}`",
+        f"- Embedded receipt check issues: `{embedded_receipt_check.get('issues')}`",
+        f"- Embedded receipt check receipt path: `{embedded_receipt_check.get('receipt_path')}`",
+        f"- Embedded receipt check receipt path exists: `{embedded_receipt_check.get('receipt_path_exists')}`",
+        f"- Embedded receipt check json: `{embedded_receipt_check.get('receipt_check_json')}`",
+        f"- Embedded receipt check json exists: `{embedded_receipt_check.get('receipt_check_json_exists')}`",
+        f"- Embedded receipt check text: `{embedded_receipt_check.get('receipt_check_text')}`",
+        f"- Embedded receipt check text exists: `{embedded_receipt_check.get('receipt_check_text_exists')}`",
+        f"- Embedded receipt check output json: `{embedded_receipt_check_outputs.get('json')}`",
+        f"- Embedded receipt check output text: `{embedded_receipt_check_outputs.get('text')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -446,6 +510,8 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
     automation_summary = _dict(report.get("automation_summary"))
     receipt_check = _receipt_check(report)
     receipt_check_outputs = _receipt_check_outputs(report)
+    embedded_receipt_check = _embedded_receipt_check(report)
+    embedded_receipt_check_outputs = _embedded_receipt_check_outputs(report)
     clean_evidence_domain = ", ".join(
         str(item) for item in _string_list(summary.get("seed_handoff_clean_evidence_status_domain"))
     )
@@ -515,6 +581,17 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Receipt receipt path", receipt_check.get("receipt_path")),
         ("Receipt json", receipt_check_outputs.get("json")),
         ("Receipt text", receipt_check_outputs.get("text")),
+        ("Embedded receipt check", embedded_receipt_check.get("status")),
+        ("Embedded receipt decision", embedded_receipt_check.get("decision")),
+        ("Embedded receipt exit", embedded_receipt_check.get("exit_code")),
+        ("Embedded receipt checker exit", embedded_receipt_check.get("checker_exit_code")),
+        ("Embedded receipt sidecars", embedded_receipt_check.get("sidecar_status")),
+        ("Embedded receipt issue count", embedded_receipt_check.get("issue_count")),
+        ("Embedded receipt path exists", embedded_receipt_check.get("receipt_path_exists")),
+        ("Embedded receipt json exists", embedded_receipt_check.get("receipt_check_json_exists")),
+        ("Embedded receipt text exists", embedded_receipt_check.get("receipt_check_text_exists")),
+        ("Embedded receipt output json", embedded_receipt_check_outputs.get("json")),
+        ("Embedded receipt output text", embedded_receipt_check_outputs.get("text")),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(
@@ -536,6 +613,7 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
             _artifact_section(report),
             _plan_section(report),
             _receipt_check_section(report),
+            _embedded_receipt_check_section(report),
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT promoted training scale seed handoff.</footer>",
             "</body>",
@@ -618,6 +696,32 @@ def _receipt_check_section(report: dict[str, Any]) -> str:
     ]
     body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
     return f'<section><h2>Receipt Check</h2><div class="table-wrap"><table>{body}</table></div></section>'
+
+
+def _embedded_receipt_check_section(report: dict[str, Any]) -> str:
+    embedded_check = _embedded_receipt_check(report)
+    if not embedded_check:
+        return ""
+    embedded_outputs = _embedded_receipt_check_outputs(report)
+    rows = [
+        ("Status", embedded_check.get("status")),
+        ("Decision", embedded_check.get("decision")),
+        ("Exit code", embedded_check.get("exit_code")),
+        ("Checker exit code", embedded_check.get("checker_exit_code")),
+        ("Sidecar status", embedded_check.get("sidecar_status")),
+        ("Issue count", embedded_check.get("issue_count")),
+        ("Issues", ", ".join(_string_list(embedded_check.get("issues")))),
+        ("Receipt path", embedded_check.get("receipt_path")),
+        ("Receipt path exists", embedded_check.get("receipt_path_exists")),
+        ("Receipt check JSON", embedded_check.get("receipt_check_json")),
+        ("Receipt check JSON exists", embedded_check.get("receipt_check_json_exists")),
+        ("Receipt check text", embedded_check.get("receipt_check_text")),
+        ("Receipt check text exists", embedded_check.get("receipt_check_text_exists")),
+        ("Embedded check JSON", embedded_outputs.get("json")),
+        ("Embedded check text", embedded_outputs.get("text")),
+    ]
+    body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
+    return '<section><h2>Embedded Receipt Check</h2><div class="table-wrap"><table>' + body + "</table></div></section>"
 
 
 def _command_section(report: dict[str, Any]) -> str:

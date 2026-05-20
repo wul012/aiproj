@@ -89,6 +89,12 @@ def main() -> None:
         args.embedded_receipt_check_out_dir,
         receipt_check_out_dir=args.receipt_check_out_dir,
     )
+    if embedded_receipt_check is not None:
+        report["embedded_receipt_check"] = embedded_receipt_check
+        embedded_outputs = embedded_receipt_check.get("embedded_receipt_check_outputs")
+        if isinstance(embedded_outputs, dict):
+            report["embedded_receipt_check_outputs"] = embedded_outputs
+        outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
     print(f"seed_status={report.get('seed_status')}")
