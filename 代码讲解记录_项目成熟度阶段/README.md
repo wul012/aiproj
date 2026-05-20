@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+291-v277-promoted-seed-handoff-clean-batch-review-requirement.md
+ -> v277 code explanation: add an opt-in promoted seed handoff clean batch-review requirement contract, CLI gate, persisted artifacts, recommendations, and tests.
+
 290-v276-promoted-seed-handoff-clean-batch-review-gate.md
  -> v276 code explanation: carry promoted seed clean batch-review evidence into seed handoff summaries, artifacts, CLI output, recommendations, and tests.
 

@@ -17,13 +17,17 @@ from minigpt.promoted_training_scale_seed_handoff_artifacts import (
 )
 from minigpt.promoted_training_scale_seed_handoff_review import (
     SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
+    SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
+    SeedHandoffCleanBatchReviewRequirement,
+    SeedHandoffCleanBatchReviewRequirementStatus,
     SeedHandoffCleanEvidenceRequirement,
     SeedHandoffCleanEvidenceRequirementStatus,
     SeedHandoffCleanEvidenceReadiness,
     SeedHandoffCleanEvidenceStatus,
     build_seed_handoff_batch_review_summary,
     build_seed_handoff_clean_batch_review_summary,
+    build_seed_handoff_clean_batch_review_requirement,
     build_seed_handoff_clean_evidence_readiness,
     build_seed_handoff_clean_evidence_requirement,
     build_seed_handoff_review_recommendations,
@@ -56,6 +60,7 @@ def build_promoted_training_scale_seed_handoff(
     execute: bool = False,
     allow_review: bool = True,
     require_clean_evidence: bool = False,
+    require_clean_batch_review: bool = False,
     timeout_seconds: int = 900,
     generated_at: str | None = None,
     title: str = "MiniGPT promoted training scale seed handoff",
@@ -84,6 +89,10 @@ def build_promoted_training_scale_seed_handoff(
         summary,
         required=require_clean_evidence,
     )
+    clean_batch_review_requirement = build_seed_handoff_clean_batch_review_requirement(
+        summary,
+        required=require_clean_batch_review,
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -92,6 +101,7 @@ def build_promoted_training_scale_seed_handoff(
         "seed_status": seed_status,
         "allow_review": bool(allow_review),
         "execute": bool(execute),
+        "require_clean_batch_review": bool(require_clean_batch_review),
         "timeout_seconds": int(timeout_seconds),
         "handoff_allowed": allowed,
         "blocked_reason": blocked_reason,
@@ -105,6 +115,7 @@ def build_promoted_training_scale_seed_handoff(
         "artifact_rows": artifact_rows,
         "summary": summary,
         "clean_evidence_requirement": clean_evidence_requirement,
+        "clean_batch_review_requirement": clean_batch_review_requirement,
         "recommendations": _recommendations(
             summary,
             plan_report,
@@ -112,6 +123,7 @@ def build_promoted_training_scale_seed_handoff(
             artifact_rows,
             next_batch_command,
             clean_evidence_requirement,
+            clean_batch_review_requirement,
         ),
     }
 
@@ -241,9 +253,14 @@ def _recommendations(
     artifact_rows: list[dict[str, Any]],
     next_batch_command: list[str],
     clean_evidence_requirement: SeedHandoffCleanEvidenceRequirement | None = None,
+    clean_batch_review_requirement: SeedHandoffCleanBatchReviewRequirement | None = None,
 ) -> list[str]:
     status = str(summary.get("handoff_status") or "")
-    review_recommendations = build_seed_handoff_review_recommendations(summary, clean_evidence_requirement)
+    review_recommendations = build_seed_handoff_review_recommendations(
+        summary,
+        clean_evidence_requirement,
+        clean_batch_review_requirement,
+    )
     if status == "planned":
         return (
             review_recommendations
@@ -361,12 +378,16 @@ def _tail(text: str, max_chars: int = 700) -> str:
 
 __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
+    "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
+    "SeedHandoffCleanBatchReviewRequirement",
+    "SeedHandoffCleanBatchReviewRequirementStatus",
     "SeedHandoffCleanEvidenceRequirement",
     "SeedHandoffCleanEvidenceRequirementStatus",
     "SeedHandoffCleanEvidenceReadiness",
     "SeedHandoffCleanEvidenceStatus",
     "build_promoted_training_scale_seed_handoff",
+    "build_seed_handoff_clean_batch_review_requirement",
     "build_seed_handoff_clean_evidence_requirement",
     "load_promoted_training_scale_seed",
     "render_promoted_training_scale_seed_handoff_html",

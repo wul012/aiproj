@@ -25,6 +25,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Exit non-zero unless the seed handoff clean-evidence readiness is true.",
     )
+    parser.add_argument(
+        "--require-clean-batch-review",
+        action="store_true",
+        help="Exit non-zero unless selected clean-required handoff batch-review evidence is clean.",
+    )
     parser.add_argument("--timeout-seconds", type=int, default=900)
     parser.add_argument("--title", type=str, default="MiniGPT promoted training scale seed handoff")
     return parser.parse_args()
@@ -39,11 +44,13 @@ def main() -> None:
         execute=args.execute,
         allow_review=not args.no_allow_review,
         require_clean_evidence=args.require_clean_evidence,
+        require_clean_batch_review=args.require_clean_batch_review,
         timeout_seconds=args.timeout_seconds,
         title=args.title,
     )
     summary = report["summary"]
     clean_evidence_requirement = report["clean_evidence_requirement"]
+    clean_batch_review_requirement = report["clean_batch_review_requirement"]
     outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
@@ -112,6 +119,13 @@ def main() -> None:
         print(f"clean_evidence_required_detail={clean_evidence_requirement.get('detail')}")
         print(f"clean_evidence_required={clean_evidence_requirement.get('status')}")
         if clean_evidence_requirement.get("status") == "fail":
+            raise SystemExit(1)
+    if args.require_clean_batch_review:
+        print(f"clean_batch_review_required_selected_status={clean_batch_review_requirement.get('selected_status')}")
+        print(f"clean_batch_review_required_clean={clean_batch_review_requirement.get('clean')}")
+        print(f"clean_batch_review_required_detail={clean_batch_review_requirement.get('detail')}")
+        print(f"clean_batch_review_required={clean_batch_review_requirement.get('status')}")
+        if clean_batch_review_requirement.get("status") == "fail":
             raise SystemExit(1)
     if summary.get("handoff_status") in {"blocked", "failed", "timeout"}:
         raise SystemExit(1)

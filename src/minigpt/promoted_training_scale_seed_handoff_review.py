@@ -8,6 +8,7 @@ from minigpt.report_utils import string_list as _string_list
 
 SeedHandoffCleanEvidenceStatus = Literal["ready", "pending-plan", "review", "incomplete"]
 SeedHandoffCleanEvidenceRequirementStatus = Literal["not-required", "pass", "fail"]
+SeedHandoffCleanBatchReviewRequirementStatus = Literal["not-required", "pass", "fail"]
 
 
 class SeedHandoffCleanEvidenceReadiness(TypedDict):
@@ -26,6 +27,16 @@ class SeedHandoffCleanEvidenceRequirement(TypedDict):
     status_domain: list[SeedHandoffCleanEvidenceRequirementStatus]
 
 
+class SeedHandoffCleanBatchReviewRequirement(TypedDict):
+    required: bool
+    status: SeedHandoffCleanBatchReviewRequirementStatus
+    clean: bool
+    selected_required: bool
+    selected_status: str | None
+    detail: str | None
+    status_domain: list[SeedHandoffCleanBatchReviewRequirementStatus]
+
+
 SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...] = (
     "ready",
     "pending-plan",
@@ -34,6 +45,12 @@ SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...]
 )
 
 SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES: tuple[SeedHandoffCleanEvidenceRequirementStatus, ...] = (
+    "not-required",
+    "pass",
+    "fail",
+)
+
+SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES: tuple[SeedHandoffCleanBatchReviewRequirementStatus, ...] = (
     "not-required",
     "pass",
     "fail",
@@ -137,6 +154,29 @@ def build_seed_handoff_clean_evidence_requirement(
     }
 
 
+def build_seed_handoff_clean_batch_review_requirement(
+    summary: dict[str, Any],
+    *,
+    required: bool = False,
+) -> SeedHandoffCleanBatchReviewRequirement:
+    selected_required = bool(summary.get("selected_handoff_require_clean_batch_review"))
+    selected_status = summary.get("selected_handoff_clean_batch_review_status")
+    status_text = str(selected_status) if selected_status is not None else None
+    clean = (not selected_required) or status_text == "clean"
+    status: SeedHandoffCleanBatchReviewRequirementStatus = "not-required"
+    if required:
+        status = "pass" if clean else "fail"
+    return {
+        "required": bool(required),
+        "status": status,
+        "clean": clean,
+        "selected_required": selected_required,
+        "selected_status": status_text,
+        "detail": _clean_batch_review_requirement_detail(selected_required, status_text, clean),
+        "status_domain": list(SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES),
+    }
+
+
 def build_seed_handoff_clean_evidence_readiness(
     handoff_status: Any,
     suite_alignment: dict[str, Any],
@@ -177,10 +217,12 @@ def build_seed_handoff_clean_evidence_readiness(
 def build_seed_handoff_review_recommendations(
     summary: dict[str, Any],
     clean_evidence_requirement: SeedHandoffCleanEvidenceRequirement | None,
+    clean_batch_review_requirement: SeedHandoffCleanBatchReviewRequirement | None = None,
 ) -> list[str]:
     return (
         _suite_alignment_recommendations(summary)
         + _clean_evidence_requirement_recommendations(clean_evidence_requirement)
+        + _clean_batch_review_requirement_recommendations(clean_batch_review_requirement)
         + _handoff_clean_batch_review_recommendations(summary)
         + _handoff_batch_review_recommendations(summary)
     )
@@ -249,6 +291,30 @@ def _clean_evidence_requirement_recommendations(
     return ["Review clean-evidence requirement status before using this handoff as clean comparison evidence."]
 
 
+def _clean_batch_review_requirement_detail(selected_required: bool, selected_status: str | None, clean: bool) -> str:
+    if clean:
+        if selected_required:
+            return "selected handoff clean batch-review requirement is clean"
+        return "selected handoff does not require clean batch-review evidence"
+    return f"selected handoff requires clean batch-review evidence but status is {selected_status or 'missing'}"
+
+
+def _clean_batch_review_requirement_recommendations(
+    clean_batch_review_requirement: SeedHandoffCleanBatchReviewRequirement | None,
+) -> list[str]:
+    requirement = _dict(clean_batch_review_requirement)
+    if not requirement.get("required"):
+        return []
+    status = str(requirement.get("status") or "")
+    detail = str(requirement.get("detail") or "")
+    if status == "pass":
+        return ["Clean batch-review requirement passed; the selected handoff evidence is clean for seed handoff automation."]
+    if status == "fail":
+        suffix = f": {detail}" if detail else "."
+        return [f"Clean batch-review requirement failed; resolve selected handoff evidence before seed handoff automation{suffix}"]
+    return ["Review clean batch-review requirement status before seed handoff automation."]
+
+
 def _handoff_batch_review_recommendations(summary: dict[str, Any]) -> list[str]:
     selected_status = str(summary.get("selected_handoff_selected_batch_review_status") or "")
     if selected_status == "blocker":
@@ -303,13 +369,17 @@ def _int(value: Any) -> int:
 
 __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
+    "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
+    "SeedHandoffCleanBatchReviewRequirement",
+    "SeedHandoffCleanBatchReviewRequirementStatus",
     "SeedHandoffCleanEvidenceRequirement",
     "SeedHandoffCleanEvidenceRequirementStatus",
     "SeedHandoffCleanEvidenceReadiness",
     "SeedHandoffCleanEvidenceStatus",
     "build_seed_handoff_batch_review_summary",
     "build_seed_handoff_clean_batch_review_summary",
+    "build_seed_handoff_clean_batch_review_requirement",
     "build_seed_handoff_clean_evidence_readiness",
     "build_seed_handoff_clean_evidence_requirement",
     "build_seed_handoff_review_recommendations",
