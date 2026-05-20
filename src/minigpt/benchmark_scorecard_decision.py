@@ -92,6 +92,8 @@ def build_benchmark_scorecard_decision(
     decision_status = _decision_status(selected)
     summary = _summary(comparison, evaluations, candidates, clean_candidates, selected, decision_status, min_rubric_score)
     remediation_plan = _remediation_plan(summary)
+    remediation_summary = _remediation_summary(remediation_plan)
+    summary = {**summary, **remediation_summary}
     return {
         "schema_version": 1,
         "title": title,
@@ -373,6 +375,20 @@ def _remediation_plan(summary: dict[str, Any]) -> list[dict[str, Any]]:
             }
         )
     return sorted(items, key=lambda item: (-_int(item.get("count")), -_int(item.get("priority")), str(item.get("kind")), str(item.get("category"))))
+
+
+def _remediation_summary(remediation_plan: list[dict[str, Any]]) -> dict[str, Any]:
+    blocker_count = sum(1 for item in remediation_plan if str(item.get("kind")) == "blocker")
+    review_count = sum(1 for item in remediation_plan if str(item.get("kind")) == "review")
+    top_item = remediation_plan[0] if remediation_plan else {}
+    return {
+        "remediation_plan_count": len(remediation_plan),
+        "remediation_blocker_count": blocker_count,
+        "remediation_review_count": review_count,
+        "dominant_remediation_kind": None if not top_item else top_item.get("kind"),
+        "dominant_remediation_category": None if not top_item else top_item.get("category"),
+        "dominant_remediation_action": None if not top_item else top_item.get("action"),
+    }
 
 
 def _threshold_blocks(rows: list[dict[str, Any]], min_rubric_score: float) -> list[dict[str, Any]]:

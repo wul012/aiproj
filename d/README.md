@@ -92,6 +92,9 @@ d/326/解释/说明.md
 d/327/图片
 d/327/解释/说明.md
  -> v327 decision remediation plan 的运行截图和解释
+d/328/图片
+d/328/解释/说明.md
+ -> v328 remediation summary 的运行截图和解释
 ```
 
 写入规则：
