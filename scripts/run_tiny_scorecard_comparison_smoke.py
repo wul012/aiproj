@@ -38,6 +38,12 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Override --max-iters for the candidate tiny training run.",
     )
+    parser.add_argument(
+        "--decision-min-rubric-score",
+        type=float,
+        default=80.0,
+        help="Minimum rubric average score passed to the scorecard promotion decision.",
+    )
     parser.add_argument("--eval-iters", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--block-size", type=int, default=8)
@@ -107,7 +113,7 @@ def main() -> None:
                 "--out-dir",
                 str(decision_dir),
                 "--min-rubric-score",
-                "80",
+                str(run_config["decision_min_rubric_score"]),
                 "--title",
                 "MiniGPT tiny scorecard decision smoke",
             ],
@@ -152,6 +158,9 @@ def main() -> None:
 def build_run_config(args: argparse.Namespace) -> dict[str, Any]:
     baseline_max_iters = int(args.baseline_max_iters if args.baseline_max_iters is not None else args.max_iters)
     candidate_max_iters = int(args.candidate_max_iters if args.candidate_max_iters is not None else args.max_iters)
+    decision_min_rubric_score = float(args.decision_min_rubric_score)
+    if not 0.0 <= decision_min_rubric_score <= 100.0:
+        raise ValueError("--decision-min-rubric-score must be between 0 and 100")
     max_iters_delta = candidate_max_iters - baseline_max_iters
     if max_iters_delta > 0:
         budget_mode = "candidate_more_iters"
@@ -166,6 +175,7 @@ def build_run_config(args: argparse.Namespace) -> dict[str, Any]:
         "candidate_max_iters": candidate_max_iters,
         "max_iters_delta": max_iters_delta,
         "budget_mode": budget_mode,
+        "decision_min_rubric_score": decision_min_rubric_score,
         "eval_iters": args.eval_iters,
         "batch_size": args.batch_size,
         "block_size": args.block_size,
@@ -395,6 +405,7 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("config_candidate_max_iters", run_config.get("candidate_max_iters")),
         ("config_max_iters_delta", run_config.get("max_iters_delta")),
         ("config_budget_mode", run_config.get("budget_mode")),
+        ("config_decision_min_rubric_score", run_config.get("decision_min_rubric_score")),
         ("baseline_scorecard_status", baseline.get("scorecard_overall_status")),
         ("baseline_scorecard_score", baseline.get("scorecard_overall_score")),
         ("candidate_scorecard_status", candidate.get("scorecard_overall_status")),

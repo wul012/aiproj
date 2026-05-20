@@ -27,6 +27,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "candidate_max_iters": 2,
                     "max_iters_delta": 1,
                     "budget_mode": "candidate_more_iters",
+                    "decision_min_rubric_score": 65.5,
                 },
                 "baseline_smoke": {
                     "scorecard_overall_status": "pass",
@@ -72,6 +73,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("config_baseline_max_iters=1", text)
         self.assertIn("config_candidate_max_iters=2", text)
         self.assertIn("config_budget_mode=candidate_more_iters", text)
+        self.assertIn("config_decision_min_rubric_score=65.5", text)
         self.assertIn("comparison_scorecard_count=2", text)
         self.assertIn("comparison_case_delta_count=20", text)
         self.assertIn("decision_status=promote", text)
@@ -104,6 +106,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "1",
                     "--candidate-max-iters",
                     "2",
+                    "--decision-min-rubric-score",
+                    "60",
                     "--eval-iters",
                     "1",
                     "--batch-size",
@@ -133,6 +137,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertEqual(summary["run_config"]["candidate_max_iters"], 2)
             self.assertEqual(summary["run_config"]["max_iters_delta"], 1)
             self.assertEqual(summary["run_config"]["budget_mode"], "candidate_more_iters")
+            self.assertEqual(summary["run_config"]["decision_min_rubric_score"], 60.0)
             self.assertEqual(summary["scorecard_comparison"]["scorecard_count"], 2)
             self.assertEqual(summary["scorecard_comparison"]["baseline_name"], "tiny-baseline")
             self.assertEqual(summary["scorecard_comparison"]["case_delta_count"], 20)
@@ -160,8 +165,11 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("decision_first_recommendation=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("config_decision_min_rubric_score=60.0", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
+            decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
+            self.assertIn("--min-rubric-score 60.0", decision_command["command_text"])
             self.assertIn("model_quality_claim=not_claimed", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("command_scorecard_comparison=pass", completed.stdout)
             self.assertIn("command_scorecard_decision=pass", completed.stdout)
@@ -181,6 +189,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             n_embd = 8
             baseline_seed = 1337
             candidate_seed = 2026
+            decision_min_rubric_score = 80.0
 
         config = build_run_config(Args())
 
@@ -188,6 +197,27 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertEqual(config["candidate_max_iters"], 4)
         self.assertEqual(config["max_iters_delta"], 0)
         self.assertEqual(config["budget_mode"], "matched_iters")
+        self.assertEqual(config["decision_min_rubric_score"], 80.0)
+
+    def test_build_run_config_rejects_invalid_decision_threshold(self) -> None:
+        class Args:
+            suite_name = "standard-zh"
+            case_token_cap = 3
+            max_iters = 4
+            baseline_max_iters = None
+            candidate_max_iters = None
+            eval_iters = 1
+            batch_size = 2
+            block_size = 8
+            n_layer = 1
+            n_head = 1
+            n_embd = 8
+            baseline_seed = 1337
+            candidate_seed = 2026
+            decision_min_rubric_score = 101.0
+
+        with self.assertRaisesRegex(ValueError, "--decision-min-rubric-score"):
+            build_run_config(Args())
 
 
 if __name__ == "__main__":

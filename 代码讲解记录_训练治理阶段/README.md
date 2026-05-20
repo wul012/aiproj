@@ -68,6 +68,9 @@
 335-v321-promoted-seed-handoff-artifact-split.md
  -> v321 code explanation: split promoted seed handoff receipt/check/assurance artifact helpers into a dedicated receipt artifact module while keeping the public handoff API stable.
 
+336-v322-tiny-decision-threshold-smoke.md
+ -> v322 code explanation: make the tiny scorecard comparison smoke promotion threshold configurable and persist the threshold in run config, text summary, and real smoke evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
