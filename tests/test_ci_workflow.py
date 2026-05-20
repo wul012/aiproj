@@ -48,6 +48,10 @@ class CIWorkflowTests(unittest.TestCase):
             "order:promoted_seed_handoff_assurance_smoke_before_coverage",
             {item["id"] for item in report["checks"]},
         )
+        order_check = next(item for item in report["checks"] if item["category"] == "required_order")
+        self.assertIn("before_line=", order_check["actual"])
+        self.assertIn("after_line=", order_check["actual"])
+        self.assertIn("line", order_check["detail"])
 
     def test_ci_workflow_hygiene_report_fails_old_runtime_policy(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -155,6 +159,8 @@ class CIWorkflowTests(unittest.TestCase):
             order_check = next(item for item in report["checks"] if item["category"] == "required_order")
             self.assertEqual(order_check["status"], "fail")
             self.assertIn("before coverage", order_check["detail"])
+            self.assertIn("smoke line", order_check["detail"])
+            self.assertIn("coverage line", order_check["detail"])
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
         report = build_ci_workflow_hygiene_report(CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z")

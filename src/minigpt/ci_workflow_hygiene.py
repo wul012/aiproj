@@ -180,19 +180,19 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
             )
         )
     for order_id, (before, after) in REQUIRED_COMMAND_ORDER.items():
-        before_index = text.find(before)
-        after_index = text.find(after)
-        present = before_index >= 0 and after_index >= 0
-        in_order = present and before_index < after_index
+        before_line = _first_line_number(text, before)
+        after_line = _first_line_number(text, after)
+        present = before_line > 0 and after_line > 0
+        in_order = present and before_line < after_line
         if not present:
             actual = "missing"
             detail = "Required CI command order cannot be checked because one or both commands are missing."
         else:
-            actual = "before" if in_order else "after"
+            actual = f"before_line={before_line};after_line={after_line}"
             detail = (
-                "Required CI command order is preserved."
+                f"Required CI command order is preserved: before line {before_line}, after line {after_line}."
                 if in_order
-                else "Promoted seed handoff assurance smoke must run before coverage."
+                else f"Promoted seed handoff assurance smoke must run before coverage: smoke line {before_line}, coverage line {after_line}."
             )
         checks.append(
             _check(
@@ -264,6 +264,13 @@ def _python_version(text: str) -> str:
 
 def _forbidden_env_hits(text: str) -> list[str]:
     return [item for item in FORBIDDEN_ENV_VARS if item in text]
+
+
+def _first_line_number(text: str, fragment: str) -> int:
+    for line_no, line in enumerate(text.splitlines(), start=1):
+        if fragment in line:
+            return line_no
+    return 0
 
 
 def _relative_path(path: Path, project_root: Path | None) -> str:
