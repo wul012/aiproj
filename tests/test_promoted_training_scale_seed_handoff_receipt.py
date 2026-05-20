@@ -17,10 +17,15 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
 from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
     RECEIPT_FILENAME,
     RECEIPT_TYPE,
+    check_promoted_training_scale_seed_handoff_embedded_receipt_check,
     check_promoted_training_scale_seed_handoff_automation_receipt,
+    load_promoted_training_scale_seed_handoff_report,
+    render_promoted_training_scale_seed_handoff_embedded_receipt_check,
     load_promoted_training_scale_seed_handoff_automation_receipt,
     render_promoted_training_scale_seed_handoff_automation_receipt_check,
+    resolve_promoted_training_scale_seed_handoff_report_path,
     resolve_promoted_training_scale_seed_handoff_automation_receipt_path,
+    write_promoted_training_scale_seed_handoff_embedded_receipt_check_outputs,
     write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs,
 )
 from tests.test_promoted_training_scale_seed_handoff import write_seed_tree  # noqa: E402
@@ -295,6 +300,153 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
 
             self.assertEqual(json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))["status"], "pass")
             self.assertIn("receipt_check_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
+
+    def test_embedded_receipt_check_accepts_inline_handoff_report(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+            embedded_check_dir = root / "embedded-receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_embedded_receipt.py"),
+                    str(script_out),
+                    "--out-dir",
+                    str(embedded_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            report_path = resolve_promoted_training_scale_seed_handoff_report_path(script_out)
+            report = load_promoted_training_scale_seed_handoff_report(report_path)
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(report)
+            outputs = write_promoted_training_scale_seed_handoff_embedded_receipt_check_outputs(
+                check,
+                root / "library-embedded-check",
+            )
+            self.assertEqual(report_path, script_out / "promoted_training_scale_seed_handoff.json")
+            self.assertEqual(check["status"], "pass")
+            self.assertEqual(check["decision"], "continue")
+            self.assertEqual(check["checker_exit_code"], 0)
+            self.assertEqual(json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))["status"], "pass")
+            self.assertIn("embedded_receipt_check_status=pass", completed.stdout)
+            self.assertIn("embedded_receipt_check_decision=continue", completed.stdout)
+            self.assertIn("embedded_receipt_check_output_json=", completed.stdout)
+            self.assertIn("embedded_receipt_check_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
+            self.assertIn("embedded_receipt_check_decision=continue", render_promoted_training_scale_seed_handoff_embedded_receipt_check(check))
+
+    def test_embedded_receipt_check_rejects_tampered_inline_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            report_path = script_out / "promoted_training_scale_seed_handoff.json"
+            payload = json.loads(report_path.read_text(encoding="utf-8"))
+            payload["receipt_check"]["decision"] = "stop"
+            tampered_path = root / "tampered_handoff.json"
+            tampered_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(payload)
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_embedded_receipt.py"),
+                    str(tampered_path),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertTrue(any("receipt_check.decision" in issue for issue in check["issues"]))
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("embedded_receipt_check_status=fail", completed.stdout)
+
+    def test_embedded_receipt_check_exits_nonzero_for_stop_unless_allowed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-clean-batch-review",
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            command = [
+                sys.executable,
+                "-B",
+                str(ROOT / "scripts" / "check_promoted_seed_handoff_embedded_receipt.py"),
+                str(script_out),
+            ]
+
+            failed = subprocess.run(command, capture_output=True, text=True)
+            allowed = subprocess.run(command + ["--allow-stop"], check=True, capture_output=True, text=True)
+
+            self.assertNotEqual(failed.returncode, 0)
+            self.assertIn("embedded_receipt_check_status=pass", failed.stdout)
+            self.assertIn("embedded_receipt_check_decision=stop", failed.stdout)
+            self.assertIn("embedded_receipt_check_status=pass", allowed.stdout)
 
 
 if __name__ == "__main__":

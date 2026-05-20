@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+300-v286-promoted-seed-handoff-embedded-receipt-check.md
+ -> v286 code explanation: add an embedded receipt-check verifier for promoted seed handoff reports so the main report can be independently rechecked against a recomputed automation receipt decision.
+
 297-v283-promoted-seed-handoff-receipt-checker-artifacts.md
  -> v283 code explanation: extend the receipt checker to resolve handoff output directories and write receipt-check JSON/text artifacts for CI archival.
 
@@ -679,6 +682,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `232-v218-promoted-seed-handoff-clean-evidence-gate-artifacts.md`：第二百一十八版代码讲解，把 clean-evidence CLI gate 的 not-required/pass/fail 结果写入 JSON/CSV/Markdown/HTML artifact。
 - `298-v284-promoted-seed-handoff-inline-receipt-check.md`：第二百八十四版代码讲解，把 receipt checker 接回 promoted seed handoff 执行入口，让生成 receipt 的同一次命令也能可选写出 receipt-check JSON/text。
 - `299-v285-promoted-seed-handoff-receipt-check-report.md`：第二百八十五版代码讲解，把 inline receipt-check 结果写回 promoted seed handoff 主 JSON/CSV/Markdown/HTML 证据。
+- `300-v286-promoted-seed-handoff-embedded-receipt-check.md`：第二百八十六版代码讲解，新增主 handoff 报告内嵌 receipt-check 的可重算一致性校验器。
 
 ## 一句话总览
 

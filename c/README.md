@@ -658,6 +658,9 @@ c/284/解释/说明.md
 c/285/图片
 c/285/解释/说明.md
  -> v285 promoted training scale seed handoff receipt check report 的运行截图和解释
+c/286/图片
+c/286/解释/说明.md
+ -> v286 promoted training scale seed handoff embedded receipt check 的运行截图和解释
 ```
 
 写入规则：
