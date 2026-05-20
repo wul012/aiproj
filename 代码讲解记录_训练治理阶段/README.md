@@ -77,6 +77,9 @@
 338-v324-tiny-threshold-profile-smoke.md
  -> v324 code explanation: expand tiny threshold diagnostics into threshold-blocked counts, candidate names, closest-to-pass margin, and largest-gap margin.
 
+339-v325-decision-threshold-profile-artifact.md
+ -> v325 code explanation: move threshold profiles into benchmark scorecard decision summaries and render them through decision JSON, Markdown, HTML, and tiny smoke summaries.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

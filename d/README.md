@@ -83,6 +83,9 @@ d/323/解释/说明.md
 d/324/图片
 d/324/解释/说明.md
  -> v324 tiny threshold profile smoke 的运行截图和解释
+d/325/图片
+d/325/解释/说明.md
+ -> v325 decision threshold profile artifact 的运行截图和解释
 ```
 
 写入规则：

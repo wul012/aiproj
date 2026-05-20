@@ -25,70 +25,108 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
-def make_comparison(root: Path, *, clean_candidate: bool = False, candidate_eval_status: str | None = "pass") -> Path:
+def make_comparison(
+    root: Path,
+    *,
+    clean_candidate: bool = False,
+    candidate_eval_status: str | None = "pass",
+    extra_threshold_candidate: bool = False,
+) -> Path:
     comparison_path = root / "comparison" / "benchmark_scorecard_comparison.json"
     candidate_flag_delta = -2 if clean_candidate else 3
     candidate_flag_relation = "improved" if clean_candidate else "regressed"
     candidate_case_relation = "improved" if clean_candidate else "regressed"
     candidate_case_delta = 4 if clean_candidate else -8
+    runs = [
+        {
+            "name": "baseline",
+            "source_path": "baseline/benchmark_scorecard.json",
+            "run_dir": "baseline",
+            "overall_score": 88,
+            "rubric_avg_score": 86,
+            "generation_quality_total_flags": 5,
+            "generation_quality_dominant_flag": "low_diversity",
+            "generation_quality_worst_case": "summary-short",
+            "eval_suite_coverage_status": "pass",
+            "eval_suite_comparison_status": "pass",
+        },
+        {
+            "name": "candidate",
+            "source_path": "candidate/benchmark_scorecard.json",
+            "run_dir": "candidate",
+            "overall_score": 90 if clean_candidate else 86,
+            "rubric_avg_score": 89 if clean_candidate else 84,
+            "generation_quality_total_flags": 3 if clean_candidate else 8,
+            "generation_quality_dominant_flag": "low_diversity" if clean_candidate else "empty_continuation",
+            "generation_quality_worst_case": "summary-short" if clean_candidate else "qa-basic",
+            "eval_suite_coverage_status": "pass" if candidate_eval_status else None,
+            "eval_suite_comparison_status": candidate_eval_status,
+        },
+    ]
+    deltas = [
+        {
+            "name": "baseline",
+            "baseline_name": "baseline",
+            "is_baseline": True,
+            "overall_score_delta": 0,
+            "rubric_avg_score_delta": 0,
+            "generation_quality_total_flags_delta": 0,
+            "generation_quality_flag_relation": "baseline",
+            "overall_relation": "baseline",
+            "rubric_relation": "baseline",
+        },
+        {
+            "name": "candidate",
+            "baseline_name": "baseline",
+            "is_baseline": False,
+            "overall_score_delta": 2 if clean_candidate else -2,
+            "rubric_avg_score_delta": 3 if clean_candidate else -2,
+            "generation_quality_total_flags_delta": candidate_flag_delta,
+            "generation_quality_flag_relation": candidate_flag_relation,
+            "generation_quality_dominant_flag_changed": not clean_candidate,
+            "generation_quality_worst_case_changed": not clean_candidate,
+            "overall_relation": "improved" if clean_candidate else "regressed",
+            "rubric_relation": "improved" if clean_candidate else "regressed",
+        },
+    ]
+    if extra_threshold_candidate:
+        runs.append(
+            {
+                "name": "candidate-far",
+                "source_path": "candidate-far/benchmark_scorecard.json",
+                "run_dir": "candidate-far",
+                "overall_score": 78,
+                "rubric_avg_score": 52,
+                "generation_quality_total_flags": 9,
+                "generation_quality_dominant_flag": "empty_continuation",
+                "generation_quality_worst_case": "qa-basic",
+                "eval_suite_coverage_status": "pass",
+                "eval_suite_comparison_status": "pass",
+            }
+        )
+        deltas.append(
+            {
+                "name": "candidate-far",
+                "baseline_name": "baseline",
+                "is_baseline": False,
+                "overall_score_delta": -10,
+                "rubric_avg_score_delta": -34,
+                "generation_quality_total_flags_delta": 4,
+                "generation_quality_flag_relation": "regressed",
+                "generation_quality_dominant_flag_changed": True,
+                "generation_quality_worst_case_changed": True,
+                "overall_relation": "regressed",
+                "rubric_relation": "regressed",
+            }
+        )
     payload = {
         "schema_version": 1,
         "title": "Demo <scorecard comparison>",
         "generated_at": "2026-05-16T00:00:00Z",
-        "scorecard_count": 2,
+        "scorecard_count": len(runs),
         "baseline": {"name": "baseline"},
-        "runs": [
-            {
-                "name": "baseline",
-                "source_path": "baseline/benchmark_scorecard.json",
-                "run_dir": "baseline",
-                "overall_score": 88,
-                "rubric_avg_score": 86,
-                "generation_quality_total_flags": 5,
-                "generation_quality_dominant_flag": "low_diversity",
-                "generation_quality_worst_case": "summary-short",
-                "eval_suite_coverage_status": "pass",
-                "eval_suite_comparison_status": "pass",
-            },
-            {
-                "name": "candidate",
-                "source_path": "candidate/benchmark_scorecard.json",
-                "run_dir": "candidate",
-                "overall_score": 90 if clean_candidate else 86,
-                "rubric_avg_score": 89 if clean_candidate else 84,
-                "generation_quality_total_flags": 3 if clean_candidate else 8,
-                "generation_quality_dominant_flag": "low_diversity" if clean_candidate else "empty_continuation",
-                "generation_quality_worst_case": "summary-short" if clean_candidate else "qa-basic",
-                "eval_suite_coverage_status": "pass" if candidate_eval_status else None,
-                "eval_suite_comparison_status": candidate_eval_status,
-            },
-        ],
-        "baseline_deltas": [
-            {
-                "name": "baseline",
-                "baseline_name": "baseline",
-                "is_baseline": True,
-                "overall_score_delta": 0,
-                "rubric_avg_score_delta": 0,
-                "generation_quality_total_flags_delta": 0,
-                "generation_quality_flag_relation": "baseline",
-                "overall_relation": "baseline",
-                "rubric_relation": "baseline",
-            },
-            {
-                "name": "candidate",
-                "baseline_name": "baseline",
-                "is_baseline": False,
-                "overall_score_delta": 2 if clean_candidate else -2,
-                "rubric_avg_score_delta": 3 if clean_candidate else -2,
-                "generation_quality_total_flags_delta": candidate_flag_delta,
-                "generation_quality_flag_relation": candidate_flag_relation,
-                "generation_quality_dominant_flag_changed": not clean_candidate,
-                "generation_quality_worst_case_changed": not clean_candidate,
-                "overall_relation": "improved" if clean_candidate else "regressed",
-                "rubric_relation": "improved" if clean_candidate else "regressed",
-            },
-        ],
+        "runs": runs,
+        "baseline_deltas": deltas,
         "case_deltas": [
             {
                 "case": "qa-basic",
@@ -191,8 +229,36 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertIn("## Candidate Evaluations", markdown)
             self.assertIn("Eval Compare", markdown)
             self.assertIn("Eval compare review", html)
+            self.assertIn("Threshold blocked", html)
             self.assertIn("Demo &lt;scorecard comparison&gt;", html)
             self.assertNotIn("Demo <scorecard comparison>", html)
+
+    def test_summary_exposes_threshold_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            comparison = make_comparison(Path(tmp), clean_candidate=False, extra_threshold_candidate=True)
+
+            report = build_benchmark_scorecard_decision(
+                comparison,
+                min_rubric_score=85.0,
+                generated_at="2026-05-16T00:00:00Z",
+            )
+            summary = report["summary"]
+            markdown = render_benchmark_scorecard_decision_markdown(report)
+            html = render_benchmark_scorecard_decision_html(report)
+
+            self.assertEqual(summary["threshold_blocked_candidate_count"], 2)
+            self.assertEqual(summary["threshold_blocked_candidate_names"], ["candidate", "candidate-far"])
+            self.assertEqual(summary["first_threshold_blocked_candidate"], "candidate")
+            self.assertEqual(summary["first_threshold_rubric_score"], 84.0)
+            self.assertEqual(summary["first_threshold_min_rubric_score"], 85.0)
+            self.assertEqual(summary["first_threshold_margin"], -1.0)
+            self.assertEqual(summary["threshold_closest_candidate"], "candidate")
+            self.assertEqual(summary["threshold_closest_margin"], -1.0)
+            self.assertEqual(summary["threshold_largest_gap_candidate"], "candidate-far")
+            self.assertEqual(summary["threshold_largest_gap_margin"], -33.0)
+            self.assertIn("Threshold-blocked candidates: `2`", markdown)
+            self.assertIn("Threshold closest: `candidate` / `-1`", markdown)
+            self.assertIn("Threshold largest gap", html)
 
     def test_rejects_empty_comparison(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

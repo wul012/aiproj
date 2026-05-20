@@ -356,8 +356,8 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
     nonbaseline = [item for item in evaluations if not item.get("is_baseline")]
     blocked = [item for item in nonbaseline if item.get("blockers")]
     review = [item for item in nonbaseline if item.get("review_items") and not item.get("blockers")]
-    threshold_profile = threshold_block_profile(blocked, payload.get("min_rubric_score"))
-    threshold_block = first_threshold_block(blocked, payload.get("min_rubric_score"))
+    threshold_profile = threshold_block_profile(blocked, payload.get("min_rubric_score"), summary)
+    threshold_block = first_threshold_block(blocked, payload.get("min_rubric_score"), summary)
     raw_recommendations = payload.get("recommendations")
     recommendations = [str(item) for item in raw_recommendations if isinstance(item, str)] if isinstance(raw_recommendations, list) else []
     return {
@@ -491,12 +491,31 @@ def first_list_item(rows: list[dict[str, Any]], key: str) -> str | None:
     return None
 
 
-def first_threshold_block(rows: list[dict[str, Any]], min_rubric_score: Any) -> dict[str, Any]:
+def first_threshold_block(rows: list[dict[str, Any]], min_rubric_score: Any, summary: dict[str, Any] | None = None) -> dict[str, Any]:
+    summary = as_dict(summary)
+    if summary.get("first_threshold_blocked_candidate") is not None:
+        return {
+            "name": summary.get("first_threshold_blocked_candidate"),
+            "blocker": summary.get("first_threshold_blocker"),
+            "rubric_avg_score": summary.get("first_threshold_rubric_score"),
+            "min_rubric_score": summary.get("first_threshold_min_rubric_score"),
+            "margin": summary.get("first_threshold_margin"),
+        }
     blocks = threshold_blocks(rows, min_rubric_score)
     return blocks[0] if blocks else {}
 
 
-def threshold_block_profile(rows: list[dict[str, Any]], min_rubric_score: Any) -> dict[str, Any]:
+def threshold_block_profile(rows: list[dict[str, Any]], min_rubric_score: Any, summary: dict[str, Any] | None = None) -> dict[str, Any]:
+    summary = as_dict(summary)
+    if summary.get("threshold_blocked_candidate_count") is not None:
+        return {
+            "blocked_candidate_count": summary.get("threshold_blocked_candidate_count"),
+            "blocked_candidate_names": summary.get("threshold_blocked_candidate_names"),
+            "closest_candidate": summary.get("threshold_closest_candidate"),
+            "closest_margin": summary.get("threshold_closest_margin"),
+            "largest_gap_candidate": summary.get("threshold_largest_gap_candidate"),
+            "largest_gap_margin": summary.get("threshold_largest_gap_margin"),
+        }
     blocks = threshold_blocks(rows, min_rubric_score)
     if not blocks:
         return {

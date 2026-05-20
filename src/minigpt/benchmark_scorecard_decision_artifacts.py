@@ -74,6 +74,10 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
         f"- Review candidates: `{summary.get('review_candidate_count')}`",
         f"- Blocked candidates: `{summary.get('blocked_candidate_count')}`",
         f"- Non comparison-ready candidates: `{summary.get('non_comparison_ready_candidate_count')}`",
+        f"- Threshold-blocked candidates: `{summary.get('threshold_blocked_candidate_count')}`",
+        f"- Threshold blocked names: `{', '.join(_string_list(summary.get('threshold_blocked_candidate_names')))}`",
+        f"- Threshold closest: `{summary.get('threshold_closest_candidate')}` / `{_fmt_signed(summary.get('threshold_closest_margin'))}`",
+        f"- Threshold largest gap: `{summary.get('threshold_largest_gap_candidate')}` / `{_fmt_signed(summary.get('threshold_largest_gap_margin'))}`",
         "",
         "## Candidate Evaluations",
         "",
@@ -123,6 +127,9 @@ def render_benchmark_scorecard_decision_html(report: dict[str, Any]) -> str:
         ("Review", summary.get("review_candidate_count")),
         ("Blocked", summary.get("blocked_candidate_count")),
         ("Eval compare review", summary.get("non_comparison_ready_candidate_count")),
+        ("Threshold blocked", summary.get("threshold_blocked_candidate_count")),
+        ("Threshold closest", _format_pair(summary.get("threshold_closest_candidate"), summary.get("threshold_closest_margin"))),
+        ("Threshold largest gap", _format_pair(summary.get("threshold_largest_gap_candidate"), summary.get("threshold_largest_gap_margin"))),
     ]
     return "\n".join(
         [
@@ -258,6 +265,12 @@ def _fmt(value: Any) -> str:
     if isinstance(value, float):
         return f"{value:.5g}"
     return str(value)
+
+
+def _format_pair(name: Any, value: Any) -> str:
+    if name is None and value is None:
+        return "missing"
+    return f"{_fmt(name)} / {_fmt_signed(value)}"
 
 
 def _fmt_signed(value: Any) -> str:
