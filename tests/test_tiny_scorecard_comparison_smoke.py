@@ -72,6 +72,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "review_candidate_names": [],
                     "first_blocker": None,
                     "first_review_item": None,
+                    "remediation_count": 0,
+                    "first_remediation_category": None,
+                    "first_remediation_action": None,
                     "first_recommendation": "Promote the selected scorecard only as benchmark evidence.",
                 },
                 "interpretation": {"model_quality_claim": "not_claimed"},
@@ -102,6 +105,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("decision_threshold_blocked_candidates=", text)
         self.assertIn("decision_threshold_closest_candidate=None", text)
         self.assertIn("decision_threshold_largest_gap_candidate=None", text)
+        self.assertIn("decision_remediation_count=0", text)
+        self.assertIn("decision_first_remediation_category=None", text)
         self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
@@ -180,6 +185,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                 self.assertEqual(summary["scorecard_decision"]["threshold_largest_gap_candidate"], "tiny-candidate")
                 self.assertEqual(summary["scorecard_decision"]["dominant_blocker_category"], "threshold")
                 self.assertEqual(summary["scorecard_decision"]["blocker_category_counts"], {"threshold": 1})
+                self.assertEqual(summary["scorecard_decision"]["remediation_count"], 1)
+                self.assertEqual(summary["scorecard_decision"]["first_remediation_category"], "threshold")
+                self.assertIn("explicit policy change", summary["scorecard_decision"]["first_remediation_action"])
             self.assertIsInstance(summary["scorecard_decision"]["review_candidate_names"], list)
             self.assertTrue(summary["scorecard_decision"]["first_recommendation"])
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
@@ -203,6 +211,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("decision_threshold_closest_candidate=tiny-candidate", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_dominant_blocker_category=threshold", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_blocker_category_counts=threshold:1", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_remediation_count=1", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_first_remediation_category=threshold", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")

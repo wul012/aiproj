@@ -186,6 +186,10 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertEqual(report["summary"]["blocked_candidate_count"], 1)
             self.assertEqual(report["summary"]["blocker_category_counts"]["rubric_regression"], 1)
             self.assertEqual(report["summary"]["dominant_blocker_category"], "rubric_regression")
+            self.assertEqual(report["remediation_plan"][0]["category"], "rubric_regression")
+            self.assertEqual(report["remediation_plan"][0]["kind"], "blocker")
+            self.assertIn("rubric-regressed cases", report["remediation_plan"][0]["action"])
+            self.assertIn("Top remediation: rubric_regression", report["recommendations"][-1])
 
     def test_promotes_clean_candidate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -272,10 +276,16 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertEqual(summary["review_category_counts"]["generation_quality_flag_regression"], 2)
             self.assertEqual(summary["dominant_blocker_category"], "threshold")
             self.assertEqual(summary["dominant_review_category"], "generation_quality_flag_regression")
+            self.assertEqual(report["remediation_plan"][0]["category"], "threshold")
+            self.assertEqual(report["remediation_plan"][0]["count"], 2)
+            self.assertIn("explicit policy change", report["remediation_plan"][0]["action"])
             self.assertIn("Threshold-blocked candidates: `2`", markdown)
             self.assertIn("Threshold closest: `candidate` / `-1`", markdown)
             self.assertIn("Dominant blocker category: `threshold`", markdown)
+            self.assertIn("## Remediation Plan", markdown)
+            self.assertIn("| blocker | threshold | 2 | 60 |", markdown)
             self.assertIn("Threshold largest gap", html)
+            self.assertIn("Remediation Plan", html)
 
     def test_rejects_empty_comparison(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

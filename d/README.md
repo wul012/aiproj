@@ -89,6 +89,9 @@ d/325/解释/说明.md
 d/326/图片
 d/326/解释/说明.md
  -> v326 decision failure taxonomy 的运行截图和解释
+d/327/图片
+d/327/解释/说明.md
+ -> v327 decision remediation plan 的运行截图和解释
 ```
 
 写入规则：

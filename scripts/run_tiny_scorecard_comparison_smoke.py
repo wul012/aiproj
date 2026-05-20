@@ -360,6 +360,8 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
     threshold_block = first_threshold_block(blocked, payload.get("min_rubric_score"), summary)
     raw_recommendations = payload.get("recommendations")
     recommendations = [str(item) for item in raw_recommendations if isinstance(item, str)] if isinstance(raw_recommendations, list) else []
+    remediation_plan = list_of_dicts(payload.get("remediation_plan"))
+    first_remediation = remediation_plan[0] if remediation_plan else {}
     return {
         "available": bool(payload),
         "decision_status": payload.get("decision_status"),
@@ -393,6 +395,9 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "threshold_largest_gap_margin": threshold_profile.get("largest_gap_margin"),
         "first_review_candidate": first_name(review),
         "first_review_item": first_list_item(review, "review_items"),
+        "remediation_count": len(remediation_plan),
+        "first_remediation_category": first_remediation.get("category"),
+        "first_remediation_action": first_remediation.get("action"),
         "recommendation_count": len(recommendations),
         "first_recommendation": recommendations[0] if recommendations else None,
     }
@@ -459,6 +464,9 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_threshold_largest_gap_margin", decision.get("threshold_largest_gap_margin")),
         ("decision_review_candidates", ",".join(str(item) for item in decision.get("review_candidate_names", []))),
         ("decision_first_review_item", decision.get("first_review_item")),
+        ("decision_remediation_count", decision.get("remediation_count")),
+        ("decision_first_remediation_category", decision.get("first_remediation_category")),
+        ("decision_first_remediation_action", decision.get("first_remediation_action")),
         ("decision_first_recommendation", decision.get("first_recommendation")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
     ]

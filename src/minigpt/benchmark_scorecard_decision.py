@@ -42,6 +42,25 @@ REVIEW_CATEGORY_PRIORITY = {
     "other_review": 0,
 }
 
+BLOCKER_REMEDIATION_ACTIONS = {
+    "threshold": "Improve the candidate rubric score before promotion, or lower the threshold only with an explicit policy change.",
+    "missing_rubric": "Regenerate the benchmark scorecard with rubric outputs before making a promotion decision.",
+    "rubric_regression": "Inspect rubric-regressed cases against the baseline and fix task correctness before promotion.",
+    "overall_regression": "Review the overall score components and keep the baseline unless the regression is understood.",
+    "baseline_candidate": "Keep the baseline row as reference evidence, not as a promotable candidate.",
+    "other_blocker": "Inspect uncategorized blocker text and add a stable category if it recurs.",
+}
+
+REVIEW_REMEDIATION_ACTIONS = {
+    "eval_suite_not_ready": "Make the eval suite comparison-ready before treating this decision as clean promotion evidence.",
+    "rubric_fail_regression": "Inspect newly failing rubric cases and decide whether the run needs retraining or prompt/data fixes.",
+    "generation_quality_flag_regression": "Open the generation-quality report and inspect the prompts that increased flags.",
+    "case_regression": "Review case-level deltas to distinguish wording drift from true task failure.",
+    "generation_quality_flag_shift": "Compare dominant generation-quality flags to see whether the failure mode changed materially.",
+    "generation_quality_case_shift": "Inspect the new worst generation-quality case before promoting the candidate.",
+    "other_review": "Inspect uncategorized review text and add a stable category if it recurs.",
+}
+
 
 def load_benchmark_scorecard_comparison(path: str | Path) -> dict[str, Any]:
     comparison_path = _resolve_comparison_path(Path(path))
@@ -72,6 +91,7 @@ def build_benchmark_scorecard_decision(
     selected = _select_candidate(clean_candidates or candidates)
     decision_status = _decision_status(selected)
     summary = _summary(comparison, evaluations, candidates, clean_candidates, selected, decision_status, min_rubric_score)
+    remediation_plan = _remediation_plan(summary)
     return {
         "schema_version": 1,
         "title": title,
@@ -85,7 +105,8 @@ def build_benchmark_scorecard_decision(
         "selected_run": selected,
         "candidate_evaluations": evaluations,
         "summary": summary,
-        "recommendations": _recommendations(decision_status, selected, evaluations, comparison),
+        "remediation_plan": remediation_plan,
+        "recommendations": _recommendations(decision_status, selected, evaluations, comparison, remediation_plan),
     }
 
 
@@ -329,6 +350,31 @@ def _dominant_category(counts: dict[str, int], priority: dict[str, int]) -> str 
     return max(counts.items(), key=lambda item: (item[1], priority.get(item[0], -1), item[0]))[0]
 
 
+def _remediation_plan(summary: dict[str, Any]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for category, count in _dict(summary.get("blocker_category_counts")).items():
+        items.append(
+            {
+                "kind": "blocker",
+                "category": str(category),
+                "count": _int(count),
+                "priority": BLOCKER_CATEGORY_PRIORITY.get(str(category), -1),
+                "action": BLOCKER_REMEDIATION_ACTIONS.get(str(category), BLOCKER_REMEDIATION_ACTIONS["other_blocker"]),
+            }
+        )
+    for category, count in _dict(summary.get("review_category_counts")).items():
+        items.append(
+            {
+                "kind": "review",
+                "category": str(category),
+                "count": _int(count),
+                "priority": REVIEW_CATEGORY_PRIORITY.get(str(category), -1),
+                "action": REVIEW_REMEDIATION_ACTIONS.get(str(category), REVIEW_REMEDIATION_ACTIONS["other_review"]),
+            }
+        )
+    return sorted(items, key=lambda item: (-_int(item.get("count")), -_int(item.get("priority")), str(item.get("kind")), str(item.get("category"))))
+
+
 def _threshold_blocks(rows: list[dict[str, Any]], min_rubric_score: float) -> list[dict[str, Any]]:
     blocks = []
     threshold = float(min_rubric_score)
@@ -402,6 +448,7 @@ def _recommendations(
     selected: dict[str, Any] | None,
     evaluations: list[dict[str, Any]],
     comparison: dict[str, Any],
+    remediation_plan: list[dict[str, Any]],
 ) -> list[str]:
     recommendations: list[str] = []
     if decision_status == "promote":
@@ -426,6 +473,9 @@ def _recommendations(
         recommendations.append("At least one compared scorecard increased generation-quality flags; inspect raw generation-quality reports.")
     if _int(summary.get("case_regression_count")):
         recommendations.append("Case regressions are present; verify whether they are wording drift or true task failures.")
+    if remediation_plan:
+        top_item = remediation_plan[0]
+        recommendations.append(f"Top remediation: {top_item.get('category')} -> {top_item.get('action')}")
     return recommendations
 
 
