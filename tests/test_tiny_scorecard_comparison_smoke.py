@@ -39,10 +39,18 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "case_delta_count": 20,
                     "non_comparison_ready_count": 0,
                 },
+                "scorecard_decision": {
+                    "decision_status": "promote",
+                    "recommended_action": "promote_selected_scorecard",
+                    "selected_name": "tiny-candidate",
+                    "candidate_evaluation_count": 2,
+                    "blocked_candidate_count": 0,
+                },
                 "interpretation": {"model_quality_claim": "not_claimed"},
                 "commands": [
                     {"name": "baseline_smoke", "status": "pass"},
                     {"name": "scorecard_comparison", "status": "pass"},
+                    {"name": "scorecard_decision", "status": "pass"},
                 ],
             }
         )
@@ -50,8 +58,11 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("status=pass", text)
         self.assertIn("comparison_scorecard_count=2", text)
         self.assertIn("comparison_case_delta_count=20", text)
+        self.assertIn("decision_status=promote", text)
+        self.assertIn("decision_candidate_evaluation_count=2", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
+        self.assertIn("command_scorecard_decision=pass", text)
 
     def test_tiny_scorecard_comparison_smoke_runs_real_chain(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -99,16 +110,23 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertEqual(summary["scorecard_comparison"]["baseline_name"], "tiny-baseline")
             self.assertEqual(summary["scorecard_comparison"]["case_delta_count"], 20)
             self.assertEqual(summary["scorecard_comparison"]["non_comparison_ready_count"], 0)
+            self.assertIn(summary["scorecard_decision"]["decision_status"], {"promote", "review", "blocked"})
+            self.assertTrue(summary["scorecard_decision"]["recommended_action"])
+            self.assertEqual(summary["scorecard_decision"]["candidate_evaluation_count"], 2)
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
             self.assertTrue(summary["baseline_smoke"]["pair_same_checkpoint_baseline"])
             self.assertTrue(summary["candidate_smoke"]["pair_same_checkpoint_baseline"])
             self.assertTrue(summary["artifacts"]["comparison_json_exists"])
             self.assertTrue(summary["artifacts"]["comparison_html_exists"])
+            self.assertTrue(summary["artifacts"]["decision_json_exists"])
+            self.assertTrue(summary["artifacts"]["decision_html_exists"])
             self.assertTrue((out_dir / "baseline" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "candidate" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "scorecard-comparison" / "benchmark_scorecard_comparison.json").is_file())
+            self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision.json").is_file())
             self.assertIn("model_quality_claim=not_claimed", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("command_scorecard_comparison=pass", completed.stdout)
+            self.assertIn("command_scorecard_decision=pass", completed.stdout)
 
 
 if __name__ == "__main__":

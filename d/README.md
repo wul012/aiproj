@@ -62,6 +62,9 @@ d/316/解释/说明.md
 d/317/图片
 d/317/解释/说明.md
  -> v317 tiny scorecard comparison smoke 的运行截图和解释
+d/318/图片
+d/318/解释/说明.md
+ -> v318 tiny scorecard decision smoke 的运行截图和解释
 ```
 
 写入规则：
