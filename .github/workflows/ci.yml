@@ -29,5 +29,8 @@ jobs:
       - name: Promoted seed handoff assurance smoke
         run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci
 
+      - name: Tiny scorecard comparison inline check smoke
+        run: python -B scripts/run_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --suite-name standard-zh --case-token-cap 3 --max-iters 1 --baseline-max-iters 1 --candidate-max-iters 2 --decision-min-rubric-score 60 --eval-iters 1 --batch-size 2 --block-size 8 --n-embd 8 --baseline-seed 1337 --candidate-seed 2026 --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci --force
+
       - name: Unit tests
         run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80

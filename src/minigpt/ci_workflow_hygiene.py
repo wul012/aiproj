@@ -22,12 +22,18 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
     "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
+    "tiny_scorecard_comparison_inline_check_smoke": "scripts/run_tiny_scorecard_comparison_smoke.py",
+    "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
     "test_coverage_report": "scripts/run_test_coverage.py",
     "coverage_fail_under_gate": "--fail-under 80",
 }
 REQUIRED_COMMAND_ORDER = {
     "promoted_seed_handoff_assurance_smoke_before_coverage": (
         "scripts/check_promoted_seed_handoff_assurance_smoke.py",
+        "scripts/run_test_coverage.py",
+    ),
+    "tiny_scorecard_inline_check_smoke_before_coverage": (
+        "scripts/run_tiny_scorecard_comparison_smoke.py",
         "scripts/run_test_coverage.py",
     ),
 }
@@ -192,7 +198,7 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
             detail = (
                 f"Required CI command order is preserved: before line {before_line}, after line {after_line}."
                 if in_order
-                else f"Promoted seed handoff assurance smoke must run before coverage: smoke line {before_line}, coverage line {after_line}."
+                else f"Required smoke must run before coverage: smoke line {before_line}, coverage line {after_line}."
             )
         checks.append(
             _check(

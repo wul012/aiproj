@@ -48,10 +48,18 @@ class CIWorkflowTests(unittest.TestCase):
             "order:promoted_seed_handoff_assurance_smoke_before_coverage",
             {item["id"] for item in report["checks"]},
         )
-        order_check = next(item for item in report["checks"] if item["category"] == "required_order")
-        self.assertIn("before_line=", order_check["actual"])
-        self.assertIn("after_line=", order_check["actual"])
-        self.assertIn("line", order_check["detail"])
+        self.assertIn(
+            "order:tiny_scorecard_inline_check_smoke_before_coverage",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "command:tiny_scorecard_summary_check_sidecar",
+            {item["id"] for item in report["checks"]},
+        )
+        for order_check in (item for item in report["checks"] if item["category"] == "required_order"):
+            self.assertIn("before_line=", order_check["actual"])
+            self.assertIn("after_line=", order_check["actual"])
+            self.assertIn("line", order_check["detail"])
 
     def test_ci_workflow_hygiene_report_fails_old_runtime_policy(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -83,8 +91,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 3)
-            self.assertEqual(report["summary"]["required_step_count"], 5)
+            self.assertEqual(report["summary"]["missing_step_count"], 5)
+            self.assertEqual(report["summary"]["required_step_count"], 7)
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
@@ -107,6 +115,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+                        "      - name: Tiny scorecard comparison inline check smoke",
+                        "        run: python -B scripts/run_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
@@ -146,6 +156,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+                        "      - name: Tiny scorecard comparison inline check smoke",
+                        "        run: python -B scripts/run_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                     ]
                 ),
                 encoding="utf-8",
@@ -155,12 +167,12 @@ class CIWorkflowTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertEqual(report["summary"]["order_violation_count"], 1)
-            order_check = next(item for item in report["checks"] if item["category"] == "required_order")
-            self.assertEqual(order_check["status"], "fail")
-            self.assertIn("before coverage", order_check["detail"])
-            self.assertIn("smoke line", order_check["detail"])
-            self.assertIn("coverage line", order_check["detail"])
+            self.assertEqual(report["summary"]["order_violation_count"], 2)
+            order_checks = [item for item in report["checks"] if item["category"] == "required_order"]
+            self.assertTrue(all(item["status"] == "fail" for item in order_checks))
+            self.assertTrue(all("before coverage" in item["detail"] for item in order_checks))
+            self.assertTrue(all("smoke line" in item["detail"] for item in order_checks))
+            self.assertTrue(all("coverage line" in item["detail"] for item in order_checks))
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
         report = build_ci_workflow_hygiene_report(CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z")
