@@ -40,6 +40,14 @@ def append_decision_handoff_clean_batch_recommendations(
         recommendations.append(
             "Comparison-ready promoted inputs still include unclean clean-required handoffs; keep the decision in review."
         )
+    elif _int(comparison_summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")):
+        recommendations.append(
+            "Comparison-ready promoted inputs still include handoff batch CI regressions; keep the decision in review."
+        )
+    elif _int(comparison_summary.get("handoff_batch_maturity_ci_regression_count")):
+        recommendations.append(
+            "Rejected promoted inputs include handoff batch CI regressions; keep them out of baseline selection until CI evidence is clean."
+        )
     elif _int(comparison_summary.get("handoff_unclean_batch_review_count")):
         recommendations.append(
             "Rejected promoted inputs include unclean clean-required handoffs; keep them out of baseline selection until the review is clean."
@@ -68,6 +76,18 @@ def build_decision_handoff_review_summary(
         "selected_handoff_clean_batch_review_status": None
         if selected is None
         else selected.get("handoff_clean_batch_review_status"),
+        "selected_handoff_batch_maturity_ci_regression_count": None
+        if selected is None
+        else selected.get("handoff_batch_maturity_ci_regression_count"),
+        "selected_handoff_batch_maturity_ci_regression_names": []
+        if selected is None
+        else _string_list(selected.get("handoff_batch_maturity_ci_regression_names")),
+        "selected_handoff_selected_batch_maturity_ci_regression_count": None
+        if selected is None
+        else selected.get("handoff_selected_batch_maturity_ci_regression_count"),
+        "selected_comparison_exclusion_reasons": []
+        if selected is None
+        else _string_list(selected.get("comparison_exclusion_reasons")),
         "selected_handoff_selected_batch_review_status": None
         if selected is None
         else selected.get("handoff_selected_batch_review_status"),
@@ -110,7 +130,9 @@ def build_decision_handoff_review_summary(
             sum(
                 1
                 for row in promotions
-                if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") == "clean"
+                if row.get("handoff_require_clean_batch_review")
+                and row.get("handoff_clean_batch_review_status") == "clean"
+                and _int(row.get("handoff_batch_maturity_ci_regression_count")) == 0
             ),
         ),
         "handoff_unclean_batch_review_count": _summary_number(
@@ -119,8 +141,40 @@ def build_decision_handoff_review_summary(
             sum(
                 1
                 for row in promotions
-                if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean"
+                if row.get("handoff_require_clean_batch_review")
+                and (
+                    row.get("handoff_clean_batch_review_status") != "clean"
+                    or _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0
+                )
             ),
+        ),
+        "handoff_batch_maturity_ci_regression_count": _summary_number(
+            comparison_summary,
+            "handoff_batch_maturity_ci_regression_count",
+            sum(_int(row.get("handoff_batch_maturity_ci_regression_count")) for row in promotions),
+        ),
+        "handoff_selected_batch_maturity_ci_regression_total": _summary_number(
+            comparison_summary,
+            "handoff_selected_batch_maturity_ci_regression_total",
+            sum(_int(row.get("handoff_selected_batch_maturity_ci_regression_count")) for row in promotions),
+        ),
+        "handoff_batch_maturity_ci_regression_names": _string_list(
+            comparison_summary.get("handoff_batch_maturity_ci_regression_names")
+        )
+        or sorted(
+            {
+                name
+                for row in promotions
+                for name in _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
+            }
+        ),
+        "comparison_exclusion_reasons": _string_list(comparison_summary.get("comparison_exclusion_reasons"))
+        or sorted(
+            {
+                reason
+                for row in promotions
+                for reason in _string_list(row.get("comparison_exclusion_reasons"))
+            }
         ),
         "comparison_ready_handoff_require_clean_batch_review_count": _summary_number(
             comparison_summary,
@@ -136,6 +190,7 @@ def build_decision_handoff_review_summary(
                 if row.get("promoted_for_comparison")
                 and row.get("handoff_require_clean_batch_review")
                 and row.get("handoff_clean_batch_review_status") == "clean"
+                and _int(row.get("handoff_batch_maturity_ci_regression_count")) == 0
             ),
         ),
         "comparison_ready_handoff_unclean_batch_review_count": _summary_number(
@@ -146,8 +201,40 @@ def build_decision_handoff_review_summary(
                 for row in promotions
                 if row.get("promoted_for_comparison")
                 and row.get("handoff_require_clean_batch_review")
-                and row.get("handoff_clean_batch_review_status") != "clean"
+                and (
+                    row.get("handoff_clean_batch_review_status") != "clean"
+                    or _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0
+                )
             ),
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_count": _summary_number(
+            comparison_summary,
+            "comparison_ready_handoff_batch_maturity_ci_regression_count",
+            sum(
+                _int(row.get("handoff_batch_maturity_ci_regression_count"))
+                for row in promotions
+                if row.get("promoted_for_comparison")
+            ),
+        ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": _summary_number(
+            comparison_summary,
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_total",
+            sum(
+                _int(row.get("handoff_selected_batch_maturity_ci_regression_count"))
+                for row in promotions
+                if row.get("promoted_for_comparison")
+            ),
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_names": _string_list(
+            comparison_summary.get("comparison_ready_handoff_batch_maturity_ci_regression_names")
+        )
+        or sorted(
+            {
+                name
+                for row in promotions
+                if row.get("promoted_for_comparison")
+                for name in _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
+            }
         ),
         "comparison_ready_handoff_selected_batch_review_count": _summary_number(
             comparison_summary,

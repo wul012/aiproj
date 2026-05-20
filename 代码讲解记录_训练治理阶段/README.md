@@ -32,6 +32,9 @@
 323-v309-promoted-training-scale-comparison-ci-regression-context.md
  -> v309 code explanation: carry promotion-index handoff CI regression evidence into promoted comparisons, per-row exclusion reasons, and stale compare-ready rechecks.
 
+324-v310-promoted-training-scale-decision-ci-regression-context.md
+ -> v310 code explanation: carry promoted-comparison CI regression exclusions into promoted baseline decisions, rejected candidates, outputs, and CLI diagnostics.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -256,6 +256,68 @@ class PromotedTrainingScaleDecisionTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
             self.assertTrue(any("Rejected promoted inputs include unclean clean-required handoffs" in item for item in report["recommendations"]))
 
+    def test_carries_promoted_comparison_ci_regression_exclusions_into_decision_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison_dir = make_compared_comparison_tree(
+                root,
+                include_handoff_suite_guard=True,
+                include_clean_batch_review=True,
+                include_ci_regressed_promoted_review=True,
+            )
+
+            report = build_promoted_training_scale_decision(comparison_dir, min_readiness=60)
+            outputs = write_promoted_training_scale_decision_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "decide_promoted_training_scale_baseline.py"),
+                    str(comparison_dir),
+                    "--min-readiness",
+                    "60",
+                    "--out-dir",
+                    str(script_out),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            selected = report["selected_baseline"]
+            summary = report["summary"]
+            rejected = {row["name"]: row for row in report["rejected_runs"]}
+            self.assertEqual(report["decision_status"], "review")
+            self.assertEqual(selected["name"], "beta")
+            self.assertEqual(selected["handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(selected["comparison_exclusion_reasons"], [])
+            self.assertIn("dirty-ci", rejected)
+            self.assertEqual(rejected["dirty-ci"]["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(rejected["dirty-ci"]["handoff_batch_maturity_ci_regression_names"], ["dirty-ci-old"])
+            self.assertIn("handoff batch CI regression count is 2", rejected["dirty-ci"]["comparison_exclusion_reasons"])
+            self.assertIn("handoff batch CI regression count is 2", rejected["dirty-ci"]["reasons"])
+            self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["selected_handoff_selected_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 1)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_names"], ["dirty-ci-old"])
+            self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_maturity_ci_regression_total"], 0)
+            self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+            self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("comparison_exclusion_reasons", csv_text)
+            self.assertIn("Handoff batch CI regressions", markdown)
+            self.assertIn("Comparison exclusion reasons", markdown)
+            self.assertIn("Handoff CI regressions", html)
+            self.assertIn("handoff_batch_maturity_ci_regression_count=2", completed.stdout)
+            self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
+            self.assertIn("comparison_exclusion_reasons", completed.stdout)
+            self.assertTrue(any("handoff batch CI regressions" in item for item in report["recommendations"]))
+
 
 def make_compared_comparison_tree(
     root: Path,
@@ -266,6 +328,7 @@ def make_compared_comparison_tree(
     include_handoff_batch_review: bool = False,
     include_clean_batch_review: bool = False,
     include_unclean_promoted_review: bool = False,
+    include_ci_regressed_promoted_review: bool = False,
 ) -> Path:
     index_dir = root / "promotion-index"
     alpha_run = root / "alpha" / "scale-run" / "training_scale_run.json"
@@ -314,6 +377,24 @@ def make_compared_comparison_tree(
                 clean_batch_review_status="review",
             )
         )
+    if include_ci_regressed_promoted_review:
+        dirty_ci_run = root / "dirty-ci" / "scale-run" / "training_scale_run.json"
+        write_json(dirty_ci_run, run_payload("dirty-ci", "pass", 94))
+        promotions.append(
+            promotion_row(
+                "dirty-ci",
+                os_rel(dirty_ci_run, index_dir),
+                "pass",
+                94,
+                include_handoff_suite_guard=include_handoff_suite_guard,
+                include_handoff_batch_review=include_handoff_batch_review,
+                include_clean_batch_review=True,
+                clean_batch_review_status="clean",
+                batch_ci_regression_count=2,
+                batch_ci_regression_names=["dirty-ci-old"],
+                selected_batch_ci_regression_count=1,
+            )
+        )
     write_json(
         index_dir / "training_scale_promotion_index.json",
         {
@@ -353,6 +434,9 @@ def promotion_row(
     include_handoff_batch_review: bool,
     include_clean_batch_review: bool = False,
     clean_batch_review_status: str = "clean",
+    batch_ci_regression_count: int = 0,
+    batch_ci_regression_names: list[str] | None = None,
+    selected_batch_ci_regression_count: int = 0,
 ) -> dict:
     row = {
         "name": name,
@@ -394,6 +478,24 @@ def promotion_row(
                 },
                 "handoff_require_clean_batch_review": True,
                 "handoff_clean_batch_review_status": clean_batch_review_status,
+            }
+        )
+    if batch_ci_regression_count:
+        row.update(
+            {
+                "handoff_batch_maturity_ci_regression_count": batch_ci_regression_count,
+                "handoff_batch_maturity_ci_regression_names": batch_ci_regression_names or [],
+                "handoff_selected_batch_maturity_ci_regression_count": selected_batch_ci_regression_count,
+                "comparison_exclusion_reasons": [f"handoff batch CI regression count is {batch_ci_regression_count}"],
+                "promoted_for_comparison": False,
+            }
+        )
+        row.setdefault("clean_batch_review_guard", {})
+        row["clean_batch_review_guard"].update(
+            {
+                "handoff_batch_maturity_ci_regression_count": batch_ci_regression_count,
+                "handoff_batch_maturity_ci_regression_names": batch_ci_regression_names or [],
+                "handoff_selected_batch_maturity_ci_regression_count": selected_batch_ci_regression_count,
             }
         )
     return row

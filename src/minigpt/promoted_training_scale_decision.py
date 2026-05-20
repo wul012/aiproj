@@ -139,6 +139,16 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
                 "handoff_require_clean_batch_review": bool(row.get("handoff_require_clean_batch_review")),
                 "handoff_clean_batch_review_status": row.get("handoff_clean_batch_review_status"),
+                "handoff_batch_maturity_ci_regression_count": _int(
+                    row.get("handoff_batch_maturity_ci_regression_count")
+                ),
+                "handoff_batch_maturity_ci_regression_names": _string_list(
+                    row.get("handoff_batch_maturity_ci_regression_names")
+                ),
+                "handoff_selected_batch_maturity_ci_regression_count": _int(
+                    row.get("handoff_selected_batch_maturity_ci_regression_count")
+                ),
+                "comparison_exclusion_reasons": _string_list(row.get("comparison_exclusion_reasons")),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                 "handoff_selected_batch_comparison_review_action_count": row.get(
                     "handoff_selected_batch_comparison_review_action_count"
@@ -173,8 +183,13 @@ def _rejection_reasons(
     reasons: list[str] = []
     if not row.get("promoted_for_comparison"):
         reasons.append("run was not promoted for comparison")
+        reasons.extend(reason for reason in _string_list(row.get("comparison_exclusion_reasons")) if reason not in reasons)
     if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean":
         reasons.append("clean batch-review requirement is not clean")
+    if row.get("handoff_require_clean_batch_review") and _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0:
+        reason = "handoff batch CI regression count is " f"{row.get('handoff_batch_maturity_ci_regression_count')}"
+        if reason not in reasons:
+            reasons.append(reason)
     if row.get("gate_status") == "fail":
         reasons.append("gate failed")
     elif require_gate_pass and row.get("gate_status") != "pass":
