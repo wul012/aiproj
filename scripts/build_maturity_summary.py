@@ -39,6 +39,7 @@ def main() -> None:
     print(f"release_readiness_delta_count={overview.get('release_readiness_delta_count')}")
     print(f"release_readiness_regressed_count={overview.get('release_readiness_regressed_count')}")
     print(f"release_readiness_ci_workflow_regression_count={overview.get('release_readiness_ci_workflow_regression_count')}")
+    print(f"release_readiness_ci_workflow_order_regression_count={overview.get('release_readiness_ci_workflow_order_regression_count')}")
     print(f"release_readiness_ci_workflow_status_changed_count={overview.get('release_readiness_ci_workflow_status_changed_count')}")
     print(f"release_readiness_test_coverage_regression_count={overview.get('release_readiness_test_coverage_regression_count')}")
     print(f"release_readiness_test_coverage_status_changed_count={overview.get('release_readiness_test_coverage_status_changed_count')}")

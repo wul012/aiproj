@@ -127,6 +127,7 @@ class RegisteredRun:
     release_readiness_regressed_count: int | None
     release_readiness_changed_panel_delta_count: int | None
     release_readiness_ci_workflow_regression_count: int | None
+    release_readiness_ci_workflow_order_regression_count: int | None
     release_readiness_test_coverage_regression_count: int | None
     release_readiness_html_exists: bool
     artifact_count: int
@@ -223,6 +224,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         release_readiness_regressed_count=_as_int(_pick(release_readiness_summary, "regressed_count")),
         release_readiness_changed_panel_delta_count=_as_int(_pick(release_readiness_summary, "changed_panel_delta_count")),
         release_readiness_ci_workflow_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_regression_count")),
+        release_readiness_ci_workflow_order_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_order_regression_count")),
         release_readiness_test_coverage_regression_count=_as_int(_pick(release_readiness_summary, "test_coverage_regression_count")),
         release_readiness_html_exists=_release_readiness_html_exists(root),
         artifact_count=artifact_count,

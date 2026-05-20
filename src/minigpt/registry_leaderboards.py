@@ -126,7 +126,7 @@ def release_readiness_delta_leaderboard_html(leaderboard: Any, base_dir: str | P
             f"<td>{_e(item.get('baseline_status'))} -> {_e(item.get('compared_status'))}</td>"
             f"<td>{_e(item.get('changed_panel_count'))}<br><span>{_e('; '.join(_as_str_list(item.get('changed_panels'))))}</span></td>"
             f"<td>{_e(_fmt_delta(item.get('audit_score_delta')))}<br><span>missing={_e(_fmt_delta(item.get('missing_artifact_delta')))}</span></td>"
-            f"<td>{_e(item.get('baseline_ci_workflow_status'))} -> {_e(item.get('compared_ci_workflow_status'))}<br><span>failed={_e(_fmt_delta(item.get('ci_workflow_failed_check_delta')))}</span></td>"
+            f"<td>{_e(item.get('baseline_ci_workflow_status'))} -> {_e(item.get('compared_ci_workflow_status'))}<br><span>failed={_e(_fmt_delta(item.get('ci_workflow_failed_check_delta')))} order={_e(_fmt_delta(item.get('ci_workflow_order_violation_delta')))}</span></td>"
             f"<td>{_e(item.get('baseline_test_coverage_status'))} -> {_e(item.get('compared_test_coverage_status'))}<br><span>percent={_e(_fmt_delta(item.get('test_coverage_percent_delta')))} gap={_e(_fmt_delta(item.get('test_coverage_gap_delta')))}</span></td>"
             f"<td>{_e(item.get('explanation'))}</td>"
             f"<td>{report_link}</td>"

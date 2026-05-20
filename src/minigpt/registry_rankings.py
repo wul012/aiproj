@@ -226,6 +226,8 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     "baseline_ci_workflow_status": _as_str(delta.get("baseline_ci_workflow_status")),
                     "compared_ci_workflow_status": _as_str(delta.get("compared_ci_workflow_status")),
                     "ci_workflow_failed_check_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_failed_check_delta"))),
+                    "ci_workflow_required_order_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_required_order_delta"))),
+                    "ci_workflow_order_violation_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_order_violation_delta"))),
                     "ci_workflow_status_changed": bool(delta.get("ci_workflow_status_changed")),
                     "baseline_test_coverage_status": _as_str(delta.get("baseline_test_coverage_status")),
                     "compared_test_coverage_status": _as_str(delta.get("compared_test_coverage_status")),
@@ -252,6 +254,7 @@ def release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int =
             _release_readiness_delta_priority(item),
             -int(bool(item.get("ci_workflow_status_changed"))),
             -abs(_as_optional_float(item.get("ci_workflow_failed_check_delta")) or 0.0),
+            -abs(_as_optional_float(item.get("ci_workflow_order_violation_delta")) or 0.0),
             -abs(_as_optional_float(item.get("test_coverage_gap_delta")) or 0.0),
             -abs(_as_optional_float(item.get("test_coverage_percent_delta")) or 0.0),
             -abs(_as_optional_float(item.get("status_delta")) or 0.0),
@@ -270,6 +273,11 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
     ci_failed_deltas = [
         abs(value)
         for value in (_as_optional_float(row.get("ci_workflow_failed_check_delta")) for row in rows)
+        if value is not None
+    ]
+    ci_order_deltas = [
+        abs(value)
+        for value in (_as_optional_float(row.get("ci_workflow_order_violation_delta")) for row in rows)
         if value is not None
     ]
     coverage_percent_deltas = [
@@ -291,8 +299,10 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         "same_count": result_counts.get("same", 0),
         "changed_panel_delta_count": sum(1 for row in rows if int(row.get("changed_panel_count") or 0) > 0),
         "ci_workflow_regression_count": sum(1 for row in rows if _is_ci_workflow_regression_row(row)),
+        "ci_workflow_order_regression_count": sum(1 for row in rows if _is_ci_workflow_order_regression_row(row)),
         "ci_workflow_status_changed_count": sum(1 for row in rows if bool(row.get("ci_workflow_status_changed"))),
         "max_abs_ci_workflow_failed_check_delta": _int_if_whole(max(ci_failed_deltas)) if ci_failed_deltas else None,
+        "max_abs_ci_workflow_order_violation_delta": _int_if_whole(max(ci_order_deltas)) if ci_order_deltas else None,
         "test_coverage_regression_count": sum(1 for row in rows if _is_test_coverage_regression_row(row)),
         "test_coverage_status_changed_count": sum(1 for row in rows if bool(row.get("test_coverage_status_changed"))),
         "max_abs_test_coverage_percent_delta": _int_if_whole(max(coverage_percent_deltas)) if coverage_percent_deltas else None,
@@ -314,9 +324,16 @@ def _is_ci_workflow_regression_row(row: dict[str, Any]) -> bool:
     failed_delta = _as_optional_float(row.get("ci_workflow_failed_check_delta"))
     if failed_delta is not None and failed_delta > 0:
         return True
+    if _is_ci_workflow_order_regression_row(row):
+        return True
     if not row.get("ci_workflow_status_changed"):
         return False
     return _ci_status_score(row.get("compared_ci_workflow_status")) < _ci_status_score(row.get("baseline_ci_workflow_status"))
+
+
+def _is_ci_workflow_order_regression_row(row: dict[str, Any]) -> bool:
+    order_delta = _as_optional_float(row.get("ci_workflow_order_violation_delta"))
+    return order_delta is not None and order_delta > 0
 
 
 def _is_test_coverage_regression_row(row: dict[str, Any]) -> bool:

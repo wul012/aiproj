@@ -47,6 +47,7 @@ def render_registry_html(
         ("Pair deltas", _pair_delta_summary_label(pair_delta_summary)),
         ("Release readiness", _release_readiness_counts_label(release_readiness_counts)),
         ("Readiness deltas", _release_readiness_delta_summary_label(release_readiness_delta_summary)),
+        ("CI order regressions", _release_readiness_ci_order_summary_label(release_readiness_delta_summary)),
         ("Coverage regressions", _release_readiness_coverage_summary_label(release_readiness_delta_summary)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
@@ -344,6 +345,15 @@ def _release_readiness_coverage_summary_label(value: Any) -> str:
     )
 
 
+def _release_readiness_ci_order_summary_label(value: Any) -> str:
+    if not isinstance(value, dict) or not value.get("delta_count"):
+        return "missing"
+    return (
+        f"regressions:{value.get('ci_workflow_order_regression_count', 0)}, "
+        f"max:{_fmt(value.get('max_abs_ci_workflow_order_violation_delta'))}"
+    )
+
+
 def _benchmark_rubric_summary_label(summary: Any, counts: Any) -> str:
     if isinstance(summary, dict) and summary.get("available"):
         return (
@@ -432,6 +442,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         f"<br><span>ready={_e(_fmt(run.get('release_readiness_ready_count')))} blocked={_e(_fmt(run.get('release_readiness_blocked_count')))}</span>"
         f"<br><span>improved={_e(_fmt(run.get('release_readiness_improved_count')))} regressed={_e(_fmt(run.get('release_readiness_regressed_count')))}</span>"
         f"<br><span>panel deltas={_e(_fmt(run.get('release_readiness_changed_panel_delta_count')))} ci regressions={_e(_fmt(run.get('release_readiness_ci_workflow_regression_count')))}</span>"
+        f"<br><span>ci order regressions={_e(_fmt(run.get('release_readiness_ci_workflow_order_regression_count')))}</span>"
         f"<br><span>coverage regressions={_e(_fmt(run.get('release_readiness_test_coverage_regression_count')))}</span>"
     )
 

@@ -47,6 +47,10 @@ def main() -> None:
         "release_readiness_coverage_regressions="
         + json.dumps(registry.get("release_readiness_delta_summary", {}).get("test_coverage_regression_count", 0), ensure_ascii=False)
     )
+    print(
+        "release_readiness_ci_order_regressions="
+        + json.dumps(registry.get("release_readiness_delta_summary", {}).get("ci_workflow_order_regression_count", 0), ensure_ascii=False)
+    )
     print("tag_counts=" + json.dumps(registry.get("tag_counts", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

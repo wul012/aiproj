@@ -43,8 +43,10 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "changed_panel_delta_count": 1,
                     "max_abs_status_delta": 3,
                     "ci_workflow_regression_count": 0,
+                    "ci_workflow_order_regression_count": 0,
                     "ci_workflow_status_changed_count": 0,
                     "max_abs_ci_workflow_failed_check_delta": 0,
+                    "max_abs_ci_workflow_order_violation_delta": 0,
                     "test_coverage_regression_count": 0,
                     "test_coverage_status_changed_count": 0,
                     "max_abs_test_coverage_percent_delta": 0,
@@ -108,6 +110,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_delta_count"], 2)
             self.assertEqual(summary["summary"]["release_readiness_regressed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_order_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
@@ -117,6 +120,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["improved_count"], 1)
             self.assertEqual(summary["release_readiness_context"]["max_abs_status_delta"], 3)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 0)
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 0)
             self.assertEqual(summary["release_readiness_context"]["test_coverage_regression_count"], 0)
             self.assertEqual(summary["request_history_context"]["timeout_rate"], 0.25)
             capability_titles = [item["title"] for item in summary["capabilities"]]
@@ -183,8 +187,10 @@ class MaturitySummaryTests(unittest.TestCase):
             registry["release_readiness_delta_summary"]["regressed_count"] = 0
             registry["release_readiness_delta_summary"]["improved_count"] = 0
             registry["release_readiness_delta_summary"]["ci_workflow_regression_count"] = 1
+            registry["release_readiness_delta_summary"]["ci_workflow_order_regression_count"] = 1
             registry["release_readiness_delta_summary"]["ci_workflow_status_changed_count"] = 1
             registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"] = 2
+            registry["release_readiness_delta_summary"]["max_abs_ci_workflow_order_violation_delta"] = 1
             registry_path.write_text(json.dumps(registry), encoding="utf-8")
 
             summary = build_maturity_summary(root, registry_path=registry_path)
@@ -192,9 +198,12 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_trend_status"], "ci-regressed")
             self.assertEqual(summary["summary"]["overall_status"], "warn")
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_order_regression_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_status_changed_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_failed_check_delta"], 2)
+            self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 1)
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 1)
             self.assertIn("CI workflow hygiene regressions", " ".join(summary["recommendations"]))
 
     def test_test_coverage_regression_marks_maturity_for_review(self) -> None:
