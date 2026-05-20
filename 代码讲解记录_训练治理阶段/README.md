@@ -17,6 +17,9 @@
 318-v304-training-scale-run-ci-regression-carryover.md
  -> v304 code explanation: carry batch CI regression review context into gated training-scale run reports and training-scale run comparisons.
 
+319-v305-training-scale-decision-ci-regression-gate.md
+ -> v305 code explanation: carry batch CI regression context into training-scale run decisions and clean batch-review execution gating.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

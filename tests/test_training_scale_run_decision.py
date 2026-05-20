@@ -202,6 +202,42 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertIn("batch comparison review actions are present", reasons)
             self.assertTrue(any("Resolve batch review" in item for item in strict_report["recommendations"]))
 
+    def test_batch_ci_regression_marks_decision_review_and_clean_gate_blocks(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+            payload = json.loads(comparison.read_text(encoding="utf-8"))
+            allowed = payload["runs"][0]
+            allowed["batch_comparison_review_action_count"] = 0
+            allowed["batch_comparison_blocker_action_count"] = 0
+            allowed["batch_maturity_coverage_regression_count"] = 0
+            allowed["batch_maturity_ci_regression_count"] = 1
+            allowed["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            payload["summary"]["batch_comparison_review_action_count"] = 0
+            payload["summary"]["batch_comparison_blocker_action_count"] = 0
+            payload["summary"]["batch_maturity_coverage_regression_count"] = 0
+            payload["summary"]["batch_maturity_ci_regression_count"] = 1
+            payload["summary"]["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            comparison.write_text(json.dumps(payload), encoding="utf-8")
+
+            default_report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
+            strict_report = build_training_scale_run_decision(
+                comparison,
+                require_clean_batch_review=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+
+            self.assertEqual(default_report["summary"]["selected_batch_review_status"], "review")
+            self.assertEqual(default_report["summary"]["selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_names"], ["ci-risk"])
+            self.assertEqual(default_report["summary"]["clean_batch_review_status"], "review")
+            self.assertTrue(any("CI regression context" in item for item in default_report["recommendations"]))
+            self.assertEqual(strict_report["decision_status"], "blocked")
+            self.assertIsNone(strict_report["selected_run"])
+            reasons = [reason for row in strict_report["rejected_runs"] for reason in row["reasons"]]
+            self.assertIn("batch maturity CI regressions are present", reasons)
+
     def test_clean_batch_review_fields_are_rendered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -223,6 +259,31 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertIn("Clean batch review status", markdown)
             self.assertIn("Require clean batch review", html)
             self.assertIn("Clean batch review", html)
+
+    def test_ci_regression_fields_are_rendered(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison = self._make_comparison(root)
+            payload = json.loads(comparison.read_text(encoding="utf-8"))
+            allowed = payload["runs"][0]
+            allowed["batch_maturity_ci_regression_count"] = 1
+            allowed["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            payload["summary"]["batch_maturity_ci_regression_count"] = 1
+            payload["summary"]["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            comparison.write_text(json.dumps(payload), encoding="utf-8")
+
+            report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_training_scale_run_decision_outputs(report, root / "decision")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_run_decision_markdown(report)
+            html = render_training_scale_run_decision_html(report)
+
+            self.assertIn("selected_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("Selected batch CI regressions", markdown)
+            self.assertIn("Batch CI regressions", markdown)
+            self.assertIn("Selected CI regressions", html)
+            self.assertIn("CI regressions", html)
 
     def test_rejects_comparison_without_runs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

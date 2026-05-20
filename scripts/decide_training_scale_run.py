@@ -51,6 +51,10 @@ def main() -> None:
     print(f"recommended_action={report.get('recommended_action')}")
     print("selected_run=" + json.dumps(report.get("selected_run", {}), ensure_ascii=False))
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
+    summary = report.get("summary", {})
+    print(f"batch_maturity_ci_regression_count={summary.get('batch_maturity_ci_regression_count')}")
+    print(f"selected_batch_maturity_ci_regression_count={summary.get('selected_batch_maturity_ci_regression_count')}")
+    print(f"clean_batch_review_status={summary.get('clean_batch_review_status')}")
     print(f"execute_command={report.get('execute_command_text')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if report.get("decision_status") == "blocked":

@@ -23,6 +23,9 @@ d/303/解释/说明.md
 d/304/图片
 d/304/解释/说明.md
  -> v304 training scale run CI regression carryover 的运行截图和解释
+d/305/图片
+d/305/解释/说明.md
+ -> v305 training scale decision CI regression gate 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 304 carries training portfolio batch CI-regression review context into gated training-scale run reports and training-scale run comparisons, so CI-regressed portfolios stay visible beyond the batch layer.
+Version 305 carries batch CI-regression context into training-scale run decisions, so clean execution automation can block on CI-regressed batch evidence instead of only coverage regressions.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -271,6 +271,14 @@ Version 304 carries training portfolio batch CI-regression review context into g
 - Training-scale run comparisons aggregate batch CI regression counts/names across compared runs and render them in CSV, Markdown, and HTML.
 - Tests cover run-level CI regression summary propagation and comparison-level CI regression exports.
 - Archived training-scale run CI regression evidence in `d/304`.
+
+## Latest v305 checkpoint
+
+- Training-scale run decisions now carry selected and aggregate batch CI regression counts/names.
+- `--require-clean-batch-review` now rejects CI-regressed batch evidence in addition to review actions, blockers, and coverage regressions.
+- Decision CSV, Markdown, HTML, and CLI output expose `batch_maturity_ci_regression_count` and selected CI regression counts.
+- Tests cover CI regression review status, strict clean-batch blocking, and rendered decision outputs.
+- Archived training-scale decision CI regression evidence in `d/305`.
 
 ## Version tags
 
@@ -581,6 +589,7 @@ v301.0.0 MiniGPT v301 training portfolio comparison CI regression review
 v302.0.0 MiniGPT v302 training portfolio batch CI regression summary
 v303.0.0 MiniGPT v303 training governance documentation stage split
 v304.0.0 MiniGPT v304 training scale run CI regression carryover
+v305.0.0 MiniGPT v305 training scale decision CI regression gate
 ```
 
 ## Project structure
@@ -743,6 +752,10 @@ v304.0.0 MiniGPT v304 training scale run CI regression carryover
 │       └── 解释/
 │           └── 说明.md
 │   └── 304/
+│       ├── 图片/
+│       └── 解释/
+│           └── 说明.md
+│   └── 305/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -969,7 +982,8 @@ v304.0.0 MiniGPT v304 training scale run CI regression carryover
 ├── 代码讲解记录_训练治理阶段/
 │   ├── README.md
 │   ├── 317-v303-training-governance-doc-stage-split.md
-│   └── 318-v304-training-scale-run-ci-regression-carryover.md
+│   ├── 318-v304-training-scale-run-ci-regression-carryover.md
+│   └── 319-v305-training-scale-decision-ci-regression-gate.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -3735,6 +3749,7 @@ Training-governance records continue from v303:
 代码讲解记录_训练治理阶段/
 317-v303-training-governance-doc-stage-split.md
 318-v304-training-scale-run-ci-regression-carryover.md
+319-v305-training-scale-decision-ci-regression-gate.md
 ```
 
 ## Learning map
