@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.training_scale_plan import build_training_scale_plan, write_training_scale_plan_outputs  # noqa: E402
 from minigpt.training_scale_run import (  # noqa: E402
+    _batch_summary,
     render_training_scale_run_html,
     render_training_scale_run_markdown,
     run_training_scale_plan,
@@ -186,6 +187,56 @@ class TrainingScaleRunTests(unittest.TestCase):
             self.assertIn("&lt;demo&gt;", html)
             self.assertIn("Batch review", html)
             self.assertNotIn("<demo>", html)
+
+    def test_batch_summary_carries_ci_regression_review_context(self) -> None:
+        batch_report = {
+            "execution": {
+                "status": "planned",
+                "variant_count": 2,
+                "completed_variant_count": 2,
+                "comparison_status": "written",
+            },
+            "comparison_review_summary": {
+                "review_action_count": 2,
+                "blocker_action_count": 1,
+                "maturity_review_count": 2,
+                "maturity_coverage_regression_count": 1,
+                "maturity_coverage_regression_names": ["coverage"],
+                "maturity_ci_regression_count": 1,
+                "maturity_ci_regression_names": ["ci-risk"],
+                "blocker_reasons": ["best_score_ci_regressed"],
+                "blocker_portfolios": ["ci-risk"],
+            },
+            "variants": [{"portfolio_plan": {"suite_path": "builtin:standard-zh", "suite": {"name": "standard-zh"}}}],
+            "recommendations": [],
+        }
+
+        summary = _batch_summary(batch_report)
+        report = {
+            "title": "MiniGPT gated training scale run",
+            "generated_at": "2026-05-20T00:00:00Z",
+            "status": "planned",
+            "allowed": True,
+            "gate_profile": "review",
+            "execute": False,
+            "plan_path": "scale-plan.json",
+            "variants_path": "variants.json",
+            "scale_plan_summary": {"suite_path": "builtin:standard-zh", "variant_count": 2},
+            "gate": {"overall_status": "pass", "pass_count": 1, "warn_count": 0, "fail_count": 0},
+            "gate_outputs": {},
+            "batch_outputs": {},
+            "batch_summary": summary,
+            "recommendations": ["Review CI-regressed portfolios before using this scale run as clean automation evidence."],
+        }
+
+        self.assertEqual(summary["maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["maturity_ci_regression_names"], ["ci-risk"])
+        markdown = render_training_scale_run_markdown(report)
+        html = render_training_scale_run_html(report)
+        self.assertIn("CI regressions", markdown)
+        self.assertIn("ci-risk", markdown)
+        self.assertIn("CI regressions", html)
+        self.assertIn("ci-risk", html)
 
     def test_run_outputs_are_machine_readable(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

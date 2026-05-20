@@ -123,8 +123,10 @@ def _run_summary(report: dict[str, Any], name: str, index: int) -> dict[str, Any
         "batch_comparison_blocker_action_count": _int(batch.get("comparison_blocker_action_count")),
         "batch_maturity_review_count": _int(batch.get("maturity_review_count")),
         "batch_maturity_coverage_regression_count": _int(batch.get("maturity_coverage_regression_count")),
+        "batch_maturity_ci_regression_count": _int(batch.get("maturity_ci_regression_count")),
         "batch_maturity_review_names": _string_list(batch.get("maturity_review_names")),
         "batch_maturity_coverage_regression_names": _string_list(batch.get("maturity_coverage_regression_names")),
+        "batch_maturity_ci_regression_names": _string_list(batch.get("maturity_ci_regression_names")),
         "batch_comparison_blocker_reasons": _string_list(batch.get("comparison_blocker_reasons")),
         "batch_comparison_blocker_portfolios": _string_list(batch.get("comparison_blocker_portfolios")),
         "completed_variant_count": batch.get("completed_variant_count"),
@@ -202,11 +204,19 @@ def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], de
         "batch_comparison_blocker_action_count": sum(_int(row.get("batch_comparison_blocker_action_count")) for row in runs),
         "batch_maturity_review_count": sum(_int(row.get("batch_maturity_review_count")) for row in runs),
         "batch_maturity_coverage_regression_count": sum(_int(row.get("batch_maturity_coverage_regression_count")) for row in runs),
+        "batch_maturity_ci_regression_count": sum(_int(row.get("batch_maturity_ci_regression_count")) for row in runs),
         "batch_maturity_coverage_regression_names": sorted(
             {
                 name
                 for row in runs
                 for name in _string_list(row.get("batch_maturity_coverage_regression_names"))
+            }
+        ),
+        "batch_maturity_ci_regression_names": sorted(
+            {
+                name
+                for row in runs
+                for name in _string_list(row.get("batch_maturity_ci_regression_names"))
             }
         ),
         "batch_comparison_blocker_reasons": sorted(
@@ -245,6 +255,8 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
         recommendations.append("Resolve batch comparison blocker actions before promoting any scale run from this comparison.")
     elif _int(summary.get("batch_comparison_review_action_count")):
         recommendations.append("Review batch comparison actions before treating readiness ranking as clean baseline evidence.")
+    if _int(summary.get("batch_maturity_ci_regression_count")):
+        recommendations.append("Review CI-regressed batch portfolios before treating scale-run readiness as clean automation evidence.")
     if any(_int(row.get("readiness_delta")) < 0 for row in deltas):
         recommendations.append("At least one run regressed against the baseline readiness score.")
     if not recommendations:

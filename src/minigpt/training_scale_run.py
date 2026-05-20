@@ -126,6 +126,7 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
         "comparison_review_action_count",
         "comparison_blocker_action_count",
         "maturity_coverage_regression_count",
+        "maturity_ci_regression_count",
         "blocked_reason",
     ]
     gate = _dict(report.get("gate"))
@@ -143,6 +144,7 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
             "comparison_review_action_count": batch.get("comparison_review_action_count"),
             "comparison_blocker_action_count": batch.get("comparison_blocker_action_count"),
             "maturity_coverage_regression_count": batch.get("maturity_coverage_regression_count"),
+            "maturity_ci_regression_count": batch.get("maturity_ci_regression_count"),
             "blocked_reason": report.get("blocked_reason"),
         },
         out_path,
@@ -188,6 +190,7 @@ def render_training_scale_run_markdown(report: dict[str, Any]) -> str:
                 ("Comparison review actions", batch.get("comparison_review_action_count")),
                 ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
                 ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
+                ("CI regressions", ", ".join(_string_list(batch.get("maturity_ci_regression_names"))) or "none"),
                 ("Blocker reasons", ", ".join(_string_list(batch.get("comparison_blocker_reasons"))) or "none"),
                 ("Outputs", _display_dict(report.get("batch_outputs"))),
                 ("Blocked reason", report.get("blocked_reason")),
@@ -224,6 +227,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
         ("Batch", batch.get("status")),
         ("Batch review", batch.get("comparison_review_action_count")),
         ("Batch blockers", batch.get("comparison_blocker_action_count")),
+        ("CI regressions", batch.get("maturity_ci_regression_count")),
     ]
     return "\n".join(
         [
@@ -249,6 +253,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
                     ("Comparison review actions", batch.get("comparison_review_action_count")),
                     ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
                     ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
+                    ("CI regressions", ", ".join(_string_list(batch.get("maturity_ci_regression_names"))) or "none"),
                     ("Blocker reasons", ", ".join(_string_list(batch.get("comparison_blocker_reasons"))) or "none"),
                     ("Outputs", _display_dict(report.get("batch_outputs"))),
                     ("Blocked reason", report.get("blocked_reason")),
@@ -342,8 +347,10 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
             "comparison_blocker_action_count": 0,
             "maturity_review_count": 0,
             "maturity_coverage_regression_count": 0,
+            "maturity_ci_regression_count": 0,
             "maturity_review_names": [],
             "maturity_coverage_regression_names": [],
+            "maturity_ci_regression_names": [],
             "comparison_blocker_reasons": [],
             "comparison_blocker_portfolios": [],
         }
@@ -361,8 +368,10 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
         "comparison_blocker_action_count": _as_int(_first_present(review.get("blocker_action_count"), execution.get("comparison_blocker_action_count"))),
         "maturity_review_count": _as_int(review.get("maturity_review_count")),
         "maturity_coverage_regression_count": _as_int(review.get("maturity_coverage_regression_count")),
+        "maturity_ci_regression_count": _as_int(review.get("maturity_ci_regression_count")),
         "maturity_review_names": _string_list(review.get("maturity_review_names")),
         "maturity_coverage_regression_names": _string_list(review.get("maturity_coverage_regression_names")),
+        "maturity_ci_regression_names": _string_list(review.get("maturity_ci_regression_names")),
         "comparison_blocker_reasons": _string_list(review.get("blocker_reasons")),
         "comparison_blocker_portfolios": _string_list(review.get("blocker_portfolios")),
         "suite_path": first_plan.get("suite_path"),
@@ -389,6 +398,8 @@ def _recommendations(
             recommendations.append("Resolve batch comparison blocker actions before using this scale run as promotion evidence.")
         elif _as_int(batch.get("comparison_review_action_count")):
             recommendations.append("Review batch comparison actions before treating this scale run as clean baseline evidence.")
+        if _as_int(batch.get("maturity_ci_regression_count")):
+            recommendations.append("Review CI-regressed portfolios before using this scale run as clean automation evidence.")
     if status == "completed":
         recommendations.append("Executed batch outputs are available under the batch directory.")
     return recommendations

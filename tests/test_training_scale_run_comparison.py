@@ -16,6 +16,8 @@ from minigpt.training_scale_run_comparison import (  # noqa: E402
     load_training_scale_run,
     render_training_scale_run_comparison_html,
     render_training_scale_run_comparison_markdown,
+    _comparison_summary,
+    _run_summary,
     write_training_scale_run_comparison_outputs,
 )
 from minigpt.training_scale_run_comparison_artifacts import (  # noqa: E402
@@ -161,6 +163,70 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
                 Path(artifact_outputs["csv"]).read_text(encoding="utf-8"),
             )
             self.assertIn("training_scale_run_comparison.html", artifact_outputs["html"])
+
+    def test_comparison_carries_batch_ci_regression_context_into_outputs(self) -> None:
+        run_report = {
+            "_source_path": "runs/ci-risk/training_scale_run.json",
+            "status": "planned",
+            "allowed": True,
+            "execute": False,
+            "gate_profile": "review",
+            "gate": {"overall_status": "pass", "pass_count": 1, "warn_count": 0, "fail_count": 0},
+            "scale_plan_summary": {
+                "dataset_name": "sample",
+                "version_prefix": "v1",
+                "scale_tier": "tiny",
+                "char_count": 120,
+                "warning_count": 0,
+                "variant_count": 2,
+                "baseline": "base",
+                "suite_path": "builtin:standard-zh",
+                "suite_mode": "builtin",
+                "suite_name": "standard-zh",
+            },
+            "batch_summary": {
+                "status": "planned",
+                "comparison_status": "written",
+                "comparison_review_action_count": 2,
+                "comparison_blocker_action_count": 1,
+                "maturity_review_count": 2,
+                "maturity_coverage_regression_count": 1,
+                "maturity_coverage_regression_names": ["coverage-risk"],
+                "maturity_ci_regression_count": 1,
+                "maturity_ci_regression_names": ["ci-risk"],
+                "comparison_blocker_reasons": ["best_score_ci_regressed"],
+                "comparison_blocker_portfolios": ["ci-risk"],
+                "completed_variant_count": 2,
+            },
+        }
+        run = _run_summary(run_report, "ci-risk", 0)
+        summary = _comparison_summary([run], run, [{"name": "ci-risk", "readiness_delta": 0, "suite_relation": "unchanged"}])
+        report = {
+            "title": "MiniGPT training scale run comparison",
+            "generated_at": "2026-05-20T00:00:00Z",
+            "run_count": 1,
+            "baseline": run,
+            "runs": [run],
+            "baseline_deltas": [{"name": "ci-risk", "is_baseline": True, "explanation": "baseline"}],
+            "summary": summary,
+            "best_by_readiness": run,
+            "recommendations": ["Review CI-regressed batch portfolios before treating scale-run readiness as clean automation evidence."],
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            outputs = write_training_scale_run_comparison_outputs(report, Path(tmp))
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_run_comparison_markdown(report)
+            html = render_training_scale_run_comparison_html(report)
+
+        self.assertEqual(run["batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(run["batch_maturity_ci_regression_names"], ["ci-risk"])
+        self.assertEqual(summary["batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["batch_maturity_ci_regression_names"], ["ci-risk"])
+        self.assertIn("batch_maturity_ci_regression_count", csv_text)
+        self.assertIn("Batch CI regressions", markdown)
+        self.assertIn("| ci-risk |", markdown)
+        self.assertIn("CI regressions", html)
 
     def _make_allowed_and_blocked_runs(self, root: Path) -> tuple[Path, Path]:
         source = root / "corpus.txt"

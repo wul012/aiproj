@@ -43,6 +43,7 @@ def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | 
         "batch_comparison_review_action_count",
         "batch_comparison_blocker_action_count",
         "batch_maturity_coverage_regression_count",
+        "batch_maturity_ci_regression_count",
         "execute",
         "blocked_reason",
         "readiness_score",
@@ -81,13 +82,14 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
         f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
         f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
         f"- Batch coverage regressions: `{summary.get('batch_maturity_coverage_regression_count')}`",
+        f"- Batch CI regressions: `{summary.get('batch_maturity_ci_regression_count')}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
         f"- Baseline suite: `{summary.get('baseline_suite_path')}`",
         "",
         "## Runs",
         "",
-        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | Score | Relation |",
-        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | --- |",
+        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | CI | Score | Relation |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | ---: | --- |",
     ]
     deltas = {row.get("name"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     for run in _list_of_dicts(report.get("runs")):
@@ -107,6 +109,7 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
                     _md(run.get("batch_status")),
                     _md(run.get("batch_comparison_review_action_count")),
                     _md(run.get("batch_comparison_blocker_action_count")),
+                    _md(run.get("batch_maturity_ci_regression_count")),
                     _md(run.get("readiness_score")),
                     _md(delta.get("explanation")),
                 ]
@@ -137,6 +140,7 @@ def render_training_scale_run_comparison_html(report: dict[str, Any]) -> str:
         ("Batch reviews", summary.get("batch_comparison_review_action_count")),
         ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
         ("Coverage regressions", summary.get("batch_maturity_coverage_regression_count")),
+        ("CI regressions", summary.get("batch_maturity_ci_regression_count")),
         ("Gate warn", summary.get("gate_warn_count")),
         ("Gate fail", summary.get("gate_fail_count")),
         ("Suite", summary.get("suite_consistency")),
@@ -205,13 +209,14 @@ def _runs_table(report: dict[str, Any]) -> str:
             f"<td>{_e(run.get('batch_status'))}</td>"
             f"<td>{_e(run.get('batch_comparison_review_action_count'))}</td>"
             f"<td>{_e(run.get('batch_comparison_blocker_action_count'))}</td>"
+            f"<td>{_e(run.get('batch_maturity_ci_regression_count'))}</td>"
             f"<td>{_e(run.get('readiness_score'))}</td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )
     return (
         '<section><h2>Runs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>Score</th><th>Relation</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>CI</th><th>Score</th><th>Relation</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

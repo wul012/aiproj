@@ -20,6 +20,9 @@ d/<version>/解释/说明.md
 d/303/图片
 d/303/解释/说明.md
  -> v303 training governance documentation stage split 的运行截图和解释
+d/304/图片
+d/304/解释/说明.md
+ -> v304 training scale run CI regression carryover 的运行截图和解释
 ```
 
 写入规则：

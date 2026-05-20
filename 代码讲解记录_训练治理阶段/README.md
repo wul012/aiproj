@@ -14,6 +14,9 @@
 317-v303-training-governance-doc-stage-split.md
  -> v303 code explanation: close the dense v48-v302 project-maturity explanation directory as history and start the same-level training-governance documentation stage.
 
+318-v304-training-scale-run-ci-regression-carryover.md
+ -> v304 code explanation: carry batch CI regression review context into gated training-scale run reports and training-scale run comparisons.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -45,6 +45,7 @@ def main() -> None:
     print(f"gate_profile={report.get('gate_profile')}")
     print(f"execute={report.get('execute')}")
     print("scale_plan_summary=" + json.dumps(report.get("scale_plan_summary", {}), ensure_ascii=False))
+    print("batch_summary=" + json.dumps(report.get("batch_summary", {}), ensure_ascii=False))
     print("gate_outputs=" + json.dumps(report.get("gate_outputs", {}), ensure_ascii=False))
     print("batch_outputs=" + json.dumps(report.get("batch_outputs", {}), ensure_ascii=False))
     print(f"run_json={Path(args.out_root) / 'training_scale_run.json'}")

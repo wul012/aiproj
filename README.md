@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 303 starts a new same-level code-explanation directory for training-governance documentation, closing `代码讲解记录_项目成熟度阶段/` as the v48-v302 historical stage so future docs do not keep piling into an already dense folder.
+Version 304 carries training portfolio batch CI-regression review context into gated training-scale run reports and training-scale run comparisons, so CI-regressed portfolios stay visible beyond the batch layer.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -263,6 +263,14 @@ Version 303 starts a new same-level code-explanation directory for training-gove
 - New training-governance and documentation-routing explanations start in sibling directory `代码讲解记录_训练治理阶段/`.
 - README and AGENTS now document that dense documentation directories can be closed for history and continued in a same-level directory without migrating old files.
 - Archived documentation split evidence in `d/303`.
+
+## Latest v304 checkpoint
+
+- Gated training-scale run summaries now preserve batch `maturity_ci_regression_count` and CI-regressed portfolio names.
+- Training-scale run CSV, Markdown, HTML, and CLI output expose the CI regression fields beside coverage regressions and blocker reasons.
+- Training-scale run comparisons aggregate batch CI regression counts/names across compared runs and render them in CSV, Markdown, and HTML.
+- Tests cover run-level CI regression summary propagation and comparison-level CI regression exports.
+- Archived training-scale run CI regression evidence in `d/304`.
 
 ## Version tags
 
@@ -572,6 +580,7 @@ v300.0.0 MiniGPT v300 maturity narrative CI order regression review
 v301.0.0 MiniGPT v301 training portfolio comparison CI regression review
 v302.0.0 MiniGPT v302 training portfolio batch CI regression summary
 v303.0.0 MiniGPT v303 training governance documentation stage split
+v304.0.0 MiniGPT v304 training scale run CI regression carryover
 ```
 
 ## Project structure
@@ -730,6 +739,10 @@ v303.0.0 MiniGPT v303 training governance documentation stage split
 ├── d/
 │   ├── README.md
 │   └── 303/
+│       ├── 图片/
+│       └── 解释/
+│           └── 说明.md
+│   └── 304/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -955,7 +968,8 @@ v303.0.0 MiniGPT v303 training governance documentation stage split
 │   └── 56-v41-side-by-side-generation.md
 ├── 代码讲解记录_训练治理阶段/
 │   ├── README.md
-│   └── 317-v303-training-governance-doc-stage-split.md
+│   ├── 317-v303-training-governance-doc-stage-split.md
+│   └── 318-v304-training-scale-run-ci-regression-carryover.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -3720,6 +3734,7 @@ Training-governance records continue from v303:
 ```text
 代码讲解记录_训练治理阶段/
 317-v303-training-governance-doc-stage-split.md
+318-v304-training-scale-run-ci-regression-carryover.md
 ```
 
 ## Learning map
