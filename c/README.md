@@ -664,6 +664,9 @@ c/286/解释/说明.md
 c/287/图片
 c/287/解释/说明.md
  -> v287 promoted training scale seed handoff receipt sidecar integrity 的运行截图和解释
+c/288/图片
+c/288/解释/说明.md
+ -> v288 promoted training scale seed handoff inline embedded receipt check 的运行截图和解释
 ```
 
 写入规则：

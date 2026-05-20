@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+302-v288-promoted-seed-handoff-inline-embedded-receipt-check.md
+ -> v288 code explanation: let the promoted seed handoff execution script run embedded receipt-check sidecar integrity verification inline and archive outputs.
+
 301-v287-promoted-seed-handoff-receipt-sidecar-integrity.md
  -> v287 code explanation: extend embedded receipt-check verification to open and compare referenced receipt/check JSON/text sidecar files.
 
@@ -687,6 +690,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `299-v285-promoted-seed-handoff-receipt-check-report.md`：第二百八十五版代码讲解，把 inline receipt-check 结果写回 promoted seed handoff 主 JSON/CSV/Markdown/HTML 证据。
 - `300-v286-promoted-seed-handoff-embedded-receipt-check.md`：第二百八十六版代码讲解，新增主 handoff 报告内嵌 receipt-check 的可重算一致性校验器。
 - `301-v287-promoted-seed-handoff-receipt-sidecar-integrity.md`：第二百八十七版代码讲解，把 embedded receipt-check 校验扩展到 receipt/check JSON/text sidecar 文件完整性。
+- `302-v288-promoted-seed-handoff-inline-embedded-receipt-check.md`：第二百八十八版代码讲解，把 embedded receipt-check sidecar integrity 校验接回 seed handoff 执行脚本。
 
 ## 一句话总览
 
