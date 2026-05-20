@@ -21,7 +21,7 @@ SUMMARY_TEXT_FILENAME = "tiny_standard_benchmark_smoke_summary.txt"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run a CPU tiny MiniGPT train -> eval suite -> generation quality -> scorecard smoke."
+        description="Run a CPU tiny MiniGPT train -> eval suite -> generation quality -> pair baseline -> scorecard smoke."
     )
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "tiny-standard-benchmark-smoke")
     parser.add_argument("--suite-name", choices=["default", "standard-zh"], default="standard-zh")
@@ -130,6 +130,28 @@ def main() -> None:
             ],
         ),
         (
+            "pair_batch",
+            [
+                sys.executable,
+                "-B",
+                str(ROOT / "scripts" / "pair_batch.py"),
+                "--left-checkpoint",
+                str(run_dir / "checkpoint.pt"),
+                "--right-checkpoint",
+                str(run_dir / "checkpoint.pt"),
+                "--left-id",
+                "tiny-baseline",
+                "--right-id",
+                "tiny-repeat",
+                "--suite",
+                str(suite_path),
+                "--out-dir",
+                str(run_dir / "pair_batch"),
+                "--device",
+                "cpu",
+            ],
+        ),
+        (
             "benchmark_scorecard",
             [
                 sys.executable,
@@ -200,7 +222,7 @@ def build_tiny_corpus(suite_payload: dict[str, Any]) -> str:
     for case in list_of_dicts(suite_payload.get("cases")):
         lines.append(str(case.get("prompt") or ""))
         lines.append(str(case.get("expected_behavior") or ""))
-        lines.append("Evidence chain: train, eval suite, generation quality, benchmark scorecard.")
+        lines.append("Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.")
     return ("\n".join(lines) + "\n") * 6
 
 
@@ -238,6 +260,7 @@ def build_summary(
     status = "pass" if not issue_list else "fail"
     eval_suite = read_json(run_dir / "eval_suite" / "eval_suite.json")
     generation_quality = read_json(run_dir / "generation-quality" / "generation_quality.json")
+    pair_batch = read_json(run_dir / "pair_batch" / "pair_generation_batch.json")
     scorecard = read_json(run_dir / "benchmark-scorecard" / "benchmark_scorecard.json")
     train_history = read_json(run_dir / "history_summary.json")
     return {
@@ -255,6 +278,7 @@ def build_summary(
         "training": training_summary(train_history),
         "eval_suite": eval_suite_summary(eval_suite),
         "generation_quality": generation_quality_summary(generation_quality),
+        "pair_batch": pair_batch_summary(pair_batch),
         "benchmark_scorecard": scorecard_summary(scorecard),
         "outputs": {
             "summary_json": str(out_dir / SUMMARY_JSON_FILENAME),
@@ -273,6 +297,8 @@ def artifact_status(run_dir: Path, suite_path: Path, corpus_path: Path) -> dict[
         "history_summary": run_dir / "history_summary.json",
         "eval_suite": run_dir / "eval_suite" / "eval_suite.json",
         "generation_quality": run_dir / "generation-quality" / "generation_quality.json",
+        "pair_batch": run_dir / "pair_batch" / "pair_generation_batch.json",
+        "pair_batch_html": run_dir / "pair_batch" / "pair_generation_batch.html",
         "benchmark_scorecard": run_dir / "benchmark-scorecard" / "benchmark_scorecard.json",
     }
     return {f"{key}_path": str(path) for key, path in paths.items()} | {
@@ -317,6 +343,22 @@ def generation_quality_summary(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def pair_batch_summary(payload: dict[str, Any]) -> dict[str, Any]:
+    results = list_of_dicts(payload.get("results"))
+    same_checkpoint = same_checkpoint_pair_baseline(payload, results)
+    return {
+        "available": bool(payload),
+        "case_count": payload.get("case_count"),
+        "generated_equal_count": payload.get("generated_equal_count"),
+        "generated_difference_count": payload.get("generated_difference_count"),
+        "continuation_equal_count": payload.get("continuation_equal_count"),
+        "avg_abs_generated_char_delta": payload.get("avg_abs_generated_char_delta"),
+        "max_abs_generated_char_delta": max_abs_generated_delta(results),
+        "same_checkpoint_baseline": same_checkpoint,
+        "comparison_mode": "same_checkpoint_baseline" if same_checkpoint else "cross_checkpoint_or_unknown",
+    }
+
+
 def scorecard_summary(payload: dict[str, Any]) -> dict[str, Any]:
     summary = as_dict(payload.get("summary"))
     return {
@@ -326,6 +368,10 @@ def scorecard_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "component_count": summary.get("component_count"),
         "rubric_status": summary.get("rubric_status"),
         "rubric_avg_score": summary.get("rubric_avg_score"),
+        "pair_batch_cases": summary.get("pair_batch_cases"),
+        "pair_generated_differences": summary.get("pair_generated_differences"),
+        "pair_same_checkpoint_baseline": summary.get("pair_same_checkpoint_baseline"),
+        "pair_comparison_mode": summary.get("pair_comparison_mode"),
         "warnings": payload.get("warnings") if isinstance(payload.get("warnings"), list) else [],
     }
 
@@ -341,6 +387,7 @@ def render_summary(summary: dict[str, Any]) -> str:
     training = as_dict(summary.get("training"))
     eval_suite = as_dict(summary.get("eval_suite"))
     quality = as_dict(summary.get("generation_quality"))
+    pair_batch = as_dict(summary.get("pair_batch"))
     scorecard = as_dict(summary.get("benchmark_scorecard"))
     rows = [
         ("status", summary.get("status")),
@@ -354,8 +401,15 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("eval_suite_comparison_status", eval_suite.get("comparison_status")),
         ("generation_quality_status", quality.get("overall_status")),
         ("generation_quality_total_flags", quality.get("total_flags")),
+        ("pair_batch_case_count", pair_batch.get("case_count")),
+        ("pair_generated_difference_count", pair_batch.get("generated_difference_count")),
+        ("pair_same_checkpoint_baseline", pair_batch.get("same_checkpoint_baseline")),
+        ("pair_comparison_mode", pair_batch.get("comparison_mode")),
         ("scorecard_overall_status", scorecard.get("overall_status")),
         ("scorecard_overall_score", scorecard.get("overall_score")),
+        ("scorecard_pair_batch_cases", scorecard.get("pair_batch_cases")),
+        ("scorecard_pair_same_checkpoint_baseline", scorecard.get("pair_same_checkpoint_baseline")),
+        ("scorecard_pair_comparison_mode", scorecard.get("pair_comparison_mode")),
         ("training_best_val_loss", training.get("best_val_loss")),
         ("training_final_val_loss", training.get("final_val_loss")),
     ]
@@ -377,6 +431,28 @@ def print_summary(summary: dict[str, Any], outputs: dict[str, str]) -> None:
     print(render_summary(summary), end="")
     print(f"summary_json={outputs['json']}")
     print(f"summary_text={outputs['text']}")
+
+
+def same_checkpoint_pair_baseline(payload: dict[str, Any], results: list[dict[str, Any]]) -> bool:
+    case_count = int(payload.get("case_count") or 0)
+    comparisons = [as_dict(result.get("comparison")) for result in results]
+    if case_count > 0 and len(comparisons) == case_count:
+        return all(item.get("same_checkpoint") is True for item in comparisons)
+    left = as_dict(payload.get("left"))
+    right = as_dict(payload.get("right"))
+    if left.get("checkpoint") is not None and right.get("checkpoint") is not None:
+        return str(left.get("checkpoint")) == str(right.get("checkpoint"))
+    return bool(left.get("checkpoint_id") and left.get("checkpoint_id") == right.get("checkpoint_id"))
+
+
+def max_abs_generated_delta(results: list[dict[str, Any]]) -> int | None:
+    values = []
+    for result in results:
+        comparison = as_dict(result.get("comparison"))
+        value = comparison.get("generated_char_delta")
+        if value is not None:
+            values.append(abs(int(value)))
+    return max(values) if values else None
 
 
 if __name__ == "__main__":

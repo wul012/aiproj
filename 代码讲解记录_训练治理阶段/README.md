@@ -50,6 +50,9 @@
 329-v315-tiny-standard-benchmark-smoke.md
  -> v315 code explanation: add a CPU tiny train, standard-suite eval, generation-quality, and benchmark-scorecard smoke to separate evidence readiness from model quality claims.
 
+330-v316-tiny-standard-pair-baseline-smoke.md
+ -> v316 code explanation: add same-checkpoint pair-batch evidence to the CPU tiny standard benchmark smoke and keep it labeled as reproducibility evidence, not model improvement.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
