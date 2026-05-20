@@ -143,7 +143,10 @@ def _handoff_allowed(
         return False, "decision did not provide an execute command"
     if suite_guard.get("decision_require_suite_consistency") and suite_guard.get("suite_consistency") != "consistent":
         return False, "workflow requires suite consistency but suite consistency is not clean"
-    if clean_batch_review_guard.get("decision_require_clean_batch_review") and clean_batch_review_guard.get("clean_batch_review_status") != "clean":
+    if clean_batch_review_guard.get("decision_require_clean_batch_review") and (
+        clean_batch_review_guard.get("clean_batch_review_status") != "clean"
+        or int(clean_batch_review_guard.get("batch_maturity_ci_regression_count") or 0)
+    ):
         return False, "workflow requires clean batch-review evidence but status is not clean"
     if decision_status == "ready":
         return True, None
@@ -257,9 +260,23 @@ def _summary(
         "selected_batch_comparison_review_action_count": decision_summary.get("selected_batch_comparison_review_action_count"),
         "selected_batch_comparison_blocker_action_count": decision_summary.get("selected_batch_comparison_blocker_action_count"),
         "selected_batch_maturity_coverage_regression_count": decision_summary.get("selected_batch_maturity_coverage_regression_count"),
+        "selected_batch_maturity_ci_regression_count": first_present(
+            decision_summary.get("selected_batch_maturity_ci_regression_count"),
+            clean_batch_review_guard.get("batch_maturity_ci_regression_count"),
+        ),
         "batch_comparison_review_action_count": decision_summary.get("batch_comparison_review_action_count"),
         "batch_comparison_blocker_action_count": decision_summary.get("batch_comparison_blocker_action_count"),
         "batch_maturity_coverage_regression_count": decision_summary.get("batch_maturity_coverage_regression_count"),
+        "batch_maturity_ci_regression_count": first_present(
+            decision_summary.get("batch_maturity_ci_regression_count"),
+            clean_batch_review_guard.get("batch_maturity_ci_regression_count"),
+        ),
+        "batch_maturity_ci_regression_names": _string_list(
+            first_present(
+                decision_summary.get("batch_maturity_ci_regression_names"),
+                clean_batch_review_guard.get("batch_maturity_ci_regression_names"),
+            )
+        ),
         "batch_comparison_blocker_reasons": _string_list(decision_summary.get("batch_comparison_blocker_reasons")),
         "artifact_count": len(artifact_rows),
         "available_artifact_count": count_available_artifacts(artifact_rows),
@@ -270,10 +287,15 @@ def _summary(
 def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifact_rows: list[dict[str, Any]]) -> list[str]:
     if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
         return ["Fix benchmark suite consistency before executing this handoff as clean model-quality evidence."]
-    if summary.get("decision_require_clean_batch_review") and summary.get("clean_batch_review_status") != "clean":
+    if summary.get("decision_require_clean_batch_review") and (
+        summary.get("clean_batch_review_status") != "clean"
+        or int(summary.get("batch_maturity_ci_regression_count") or 0)
+    ):
         return ["Resolve workflow clean batch-review requirement before executing this handoff as clean automation."]
     if summary.get("selected_batch_review_status") == "blocker":
         return ["Resolve selected batch comparison blocker actions before executing this handoff as clean evidence."]
+    if int(summary.get("batch_maturity_ci_regression_count") or 0):
+        return ["Resolve CI-regressed batch evidence before executing this handoff as clean evidence."]
     status = str(summary.get("handoff_status") or "")
     if status == "planned":
         if summary.get("selected_batch_review_status") == "review":
@@ -337,6 +359,16 @@ def _clean_batch_review_guard(workflow: dict[str, Any], decision: dict[str, Any]
         "batch_maturity_coverage_regression_count": first_present(
             decision_summary.get("batch_maturity_coverage_regression_count"),
             workflow_summary.get("batch_maturity_coverage_regression_count"),
+        ),
+        "batch_maturity_ci_regression_count": first_present(
+            decision_summary.get("batch_maturity_ci_regression_count"),
+            workflow_summary.get("batch_maturity_ci_regression_count"),
+        ),
+        "batch_maturity_ci_regression_names": _string_list(
+            first_present(
+                decision_summary.get("batch_maturity_ci_regression_names"),
+                workflow_summary.get("batch_maturity_ci_regression_names"),
+            )
         ),
         "batch_comparison_blocker_reasons": _string_list(
             first_present(

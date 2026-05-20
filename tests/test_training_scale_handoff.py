@@ -194,6 +194,69 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             self.assertIn("Clean batch review", html)
             self.assertIn("clean_batch_review_status=review", completed.stdout)
 
+    def test_batch_ci_regression_context_is_carried_into_handoff(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(
+                root,
+                decision_status="review",
+                selected_batch_review_status="clean",
+                batch_ci_regression_count=2,
+                batch_ci_regression_names=["review", "standard"],
+            )
+
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+            markdown = render_training_scale_handoff_markdown(report)
+            html = render_training_scale_handoff_html(report)
+            outputs = write_training_scale_handoff_outputs(report, root / "handoff")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/execute_training_scale_handoff.py",
+                    str(workflow),
+                    "--out-dir",
+                    str(root / "script-handoff"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(report["summary"]["selected_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(report["summary"]["batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(report["summary"]["batch_maturity_ci_regression_names"], ["review", "standard"])
+            self.assertTrue(any("CI-regressed batch evidence" in item for item in report["recommendations"]))
+            self.assertIn("selected_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("review;standard", csv_text)
+            self.assertIn("Batch CI regressions", markdown)
+            self.assertIn("Batch CI regressions", html)
+            self.assertIn("batch_maturity_ci_regression_count=2", completed.stdout)
+
+    def test_strict_clean_batch_review_blocks_ci_regression_even_if_status_is_clean(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workflow = self._write_workflow(
+                root,
+                decision_status="ready",
+                require_clean_batch_review=True,
+                clean_batch_review_status="clean",
+                selected_batch_review_status="clean",
+                batch_ci_regression_count=1,
+                batch_ci_regression_names=["ci-risk"],
+            )
+
+            report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
+
+            self.assertFalse(report["handoff_allowed"])
+            self.assertEqual(report["summary"]["handoff_status"], "blocked")
+            self.assertEqual(report["summary"]["clean_batch_review_status"], "clean")
+            self.assertEqual(report["summary"]["batch_maturity_ci_regression_count"], 1)
+            self.assertIn("clean batch-review evidence", report["blocked_reason"])
+            self.assertTrue(any("clean batch-review requirement" in item for item in report["recommendations"]))
+
     def test_selected_batch_blocker_is_carried_into_handoff_review(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -237,6 +300,8 @@ class TrainingScaleHandoffTests(unittest.TestCase):
         require_clean_batch_review: bool = False,
         clean_batch_review_status: str | None = None,
         selected_batch_review_status: str = "review",
+        batch_ci_regression_count: int = 0,
+        batch_ci_regression_names: list[str] | None = None,
     ) -> Path:
         workflow_dir = root / "workflow"
         decision_dir = workflow_dir / "decision"
@@ -270,9 +335,12 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "selected_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
                 "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
                 "selected_batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+                "selected_batch_maturity_ci_regression_count": batch_ci_regression_count,
                 "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
                 "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
                 "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+                "batch_maturity_ci_regression_count": batch_ci_regression_count,
+                "batch_maturity_ci_regression_names": batch_ci_regression_names or [],
                 "batch_comparison_blocker_reasons": ["coverage-regressed"] if selected_batch_review_status == "blocker" else [],
             },
         }
@@ -294,6 +362,8 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "suite_path": selected_suite_path,
                 "decision_require_clean_batch_review": require_clean_batch_review,
                 "clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
+                "batch_maturity_ci_regression_count": batch_ci_regression_count,
+                "batch_maturity_ci_regression_names": batch_ci_regression_names or [],
             },
             "decision_outputs": {"json": str(decision_path)},
         }

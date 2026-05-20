@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -143,16 +144,61 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
             self.assertEqual(default_report["summary"]["decision_status"], "review")
             self.assertFalse(default_report["summary"]["decision_require_clean_batch_review"])
             self.assertEqual(default_report["summary"]["clean_batch_review_status"], "review")
+            self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_count"], 0)
             self.assertEqual(strict_report["summary"]["decision_status"], "blocked")
             self.assertTrue(strict_report["decision_require_clean_batch_review"])
             self.assertTrue(strict_report["summary"]["decision_require_clean_batch_review"])
             self.assertEqual(strict_report["summary"]["clean_batch_review_status"], "review")
+            self.assertEqual(strict_report["summary"]["batch_maturity_ci_regression_count"], 0)
             self.assertIsNone(strict_report["summary"]["selected_profile"])
             self.assertEqual(strict_report["decision_summary"]["candidate_count"], 0)
             self.assertTrue(any("Resolve workflow batch review" in item for item in strict_report["recommendations"]))
             decision_payload = json.loads(Path(strict_report["decision_outputs"]["json"]).read_text(encoding="utf-8"))
             self.assertTrue(decision_payload["require_clean_batch_review"])
             self.assertEqual(decision_payload["summary"]["clean_batch_review_status"], "review")
+
+    def test_workflow_carries_decision_batch_ci_regressions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._write_source(root)
+
+            import minigpt.training_scale_workflow as workflow_module  # noqa: PLC0415
+
+            real_builder = workflow_module.build_training_scale_run_decision
+
+            def builder_with_ci_regressions(*args: object, **kwargs: object) -> dict[str, object]:
+                payload = real_builder(*args, **kwargs)
+                summary = dict(payload["summary"])
+                summary["selected_batch_maturity_ci_regression_count"] = 1
+                summary["batch_maturity_ci_regression_count"] = 2
+                summary["batch_maturity_ci_regression_names"] = ["review", "standard"]
+                payload["summary"] = summary
+                return payload
+
+            with patch("minigpt.training_scale_workflow.build_training_scale_run_decision", side_effect=builder_with_ci_regressions):
+                report = run_training_scale_workflow(
+                    [source],
+                    project_root=root,
+                    out_root=root / "workflow",
+                    profiles=["review", "standard"],
+                    baseline_profile="review",
+                    generated_at="2026-05-14T00:00:00Z",
+                    python_executable="python",
+                )
+            markdown = render_training_scale_workflow_markdown(report)
+            html = render_training_scale_workflow_html(report)
+            outputs = write_training_scale_workflow_outputs(report, root / "export")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+
+            summary = report["summary"]
+            self.assertEqual(summary["selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(summary["batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(summary["batch_maturity_ci_regression_names"], ["review", "standard"])
+            self.assertIn("Batch CI regressions", markdown)
+            self.assertIn("Batch CI-regressed names", markdown)
+            self.assertIn("Batch CI regressions", html)
+            self.assertIn("batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("review;standard", csv_text)
 
     def test_workflow_clean_batch_fields_are_rendered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

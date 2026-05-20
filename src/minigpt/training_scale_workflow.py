@@ -6,6 +6,7 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    string_list as _string_list,
     utc_now,
 )
 from minigpt.training_scale_workflow_artifacts import (
@@ -244,9 +245,21 @@ def _workflow_summary(
         "selected_batch_status": selected.get("batch_status") or decision_summary.get("selected_batch_status"),
         "selected_readiness_score": selected.get("readiness_score") or decision_summary.get("selected_readiness_score"),
         "selected_suite_path": selected.get("suite_path") or decision_summary.get("selected_suite_path"),
+        "selected_batch_review_status": decision_summary.get("selected_batch_review_status"),
+        "selected_batch_comparison_review_action_count": decision_summary.get("selected_batch_comparison_review_action_count"),
+        "selected_batch_comparison_blocker_action_count": decision_summary.get("selected_batch_comparison_blocker_action_count"),
+        "selected_batch_maturity_coverage_regression_count": decision_summary.get("selected_batch_maturity_coverage_regression_count"),
+        "selected_batch_maturity_ci_regression_count": decision_summary.get("selected_batch_maturity_ci_regression_count"),
         "decision_require_suite_consistency": decision_summary.get("require_suite_consistency"),
         "decision_require_clean_batch_review": decision_summary.get("require_clean_batch_review"),
         "clean_batch_review_status": decision_summary.get("clean_batch_review_status"),
+        "batch_comparison_review_action_count": decision_summary.get("batch_comparison_review_action_count"),
+        "batch_comparison_blocker_action_count": decision_summary.get("batch_comparison_blocker_action_count"),
+        "batch_maturity_coverage_regression_count": decision_summary.get("batch_maturity_coverage_regression_count"),
+        "batch_maturity_coverage_regression_names": _string_list(decision_summary.get("batch_maturity_coverage_regression_names")),
+        "batch_maturity_ci_regression_count": decision_summary.get("batch_maturity_ci_regression_count"),
+        "batch_maturity_ci_regression_names": _string_list(decision_summary.get("batch_maturity_ci_regression_names")),
+        "batch_comparison_blocker_reasons": _string_list(decision_summary.get("batch_comparison_blocker_reasons")),
         "suite_consistency": decision_summary.get("suite_consistency"),
         "suite_mismatch_count": decision_summary.get("suite_mismatch_count"),
         "suite_mode": _dict(plan.get("suite")).get("mode"),
@@ -270,6 +283,8 @@ def _workflow_recommendations(summary: dict[str, Any], decision: dict[str, Any])
         recommendations.append("Fix workflow benchmark suite consistency before using the decision as clean model-quality evidence.")
     if summary.get("decision_require_clean_batch_review") and summary.get("clean_batch_review_status") != "clean":
         recommendations.append("Resolve workflow batch review, blocker, and coverage-regression evidence before using this as clean execute automation.")
+    if int(summary.get("batch_maturity_ci_regression_count") or 0):
+        recommendations.append("Inspect CI-regressed batch portfolio evidence before treating this workflow as a clean scale-run handoff.")
     command = str(decision.get("execute_command_text") or "")
     if command:
         recommendations.append("The generated execute command is a handoff command, not automatically run by this workflow.")

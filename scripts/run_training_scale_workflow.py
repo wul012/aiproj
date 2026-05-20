@@ -79,6 +79,8 @@ def main() -> None:
     print(f"recommended_action={report.get('summary', {}).get('recommended_action')}")
     print(f"selected_profile={report.get('summary', {}).get('selected_profile')}")
     print(f"clean_batch_review_status={report.get('summary', {}).get('clean_batch_review_status')}")
+    print(f"batch_maturity_ci_regression_count={report.get('summary', {}).get('batch_maturity_ci_regression_count')}")
+    print(f"selected_batch_maturity_ci_regression_count={report.get('summary', {}).get('selected_batch_maturity_ci_regression_count')}")
     print(f"scale_tier={report.get('summary', {}).get('scale_tier')}")
     print(f"profiles={','.join(report.get('profiles', []))}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
