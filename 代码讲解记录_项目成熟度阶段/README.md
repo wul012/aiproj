@@ -678,6 +678,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `231-v217-promoted-seed-handoff-clean-evidence-gate-diagnostics.md`：第二百一十七版代码讲解，给 clean-evidence CLI gate 增加结构化诊断输出。
 - `232-v218-promoted-seed-handoff-clean-evidence-gate-artifacts.md`：第二百一十八版代码讲解，把 clean-evidence CLI gate 的 not-required/pass/fail 结果写入 JSON/CSV/Markdown/HTML artifact。
 - `298-v284-promoted-seed-handoff-inline-receipt-check.md`：第二百八十四版代码讲解，把 receipt checker 接回 promoted seed handoff 执行入口，让生成 receipt 的同一次命令也能可选写出 receipt-check JSON/text。
+- `299-v285-promoted-seed-handoff-receipt-check-report.md`：第二百八十五版代码讲解，把 inline receipt-check 结果写回 promoted seed handoff 主 JSON/CSV/Markdown/HTML 证据。
 
 ## 一句话总览
 

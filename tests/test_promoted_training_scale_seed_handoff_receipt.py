@@ -175,10 +175,21 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
 
             check_json = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.json"
             check_text = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            csv_text = (script_out / "promoted_training_scale_seed_handoff.csv").read_text(encoding="utf-8")
+            markdown = (script_out / "promoted_training_scale_seed_handoff.md").read_text(encoding="utf-8")
+            html = (script_out / "promoted_training_scale_seed_handoff.html").read_text(encoding="utf-8")
             check_payload = json.loads(check_json.read_text(encoding="utf-8"))
             self.assertEqual(check_payload["status"], "pass")
             self.assertEqual(check_payload["decision"], "continue")
             self.assertEqual(check_payload["checker_exit_code"], 0)
+            self.assertEqual(payload["receipt_check"]["status"], "pass")
+            self.assertEqual(payload["receipt_check"]["decision"], "continue")
+            self.assertEqual(payload["receipt_check_outputs"]["json"], str(check_json))
+            self.assertIn("receipt_check_status", csv_text)
+            self.assertIn("receipt_check_decision", csv_text)
+            self.assertIn("Receipt check status", markdown)
+            self.assertIn("Receipt Check", html)
             self.assertIn("receipt_check_status=pass", completed.stdout)
             self.assertIn("receipt_decision=continue", completed.stdout)
             self.assertIn("receipt_check_outputs=", completed.stdout)
@@ -217,6 +228,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
 
             check_json = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.json"
             check_text = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
             check_payload = json.loads(check_json.read_text(encoding="utf-8"))
             self.assertNotEqual(completed.returncode, 0)
             self.assertEqual(check_payload["status"], "pass")
@@ -224,6 +236,10 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(check_payload["checker_exit_code"], 1)
             self.assertEqual(check_payload["blocking_source"], "automation_gate")
             self.assertEqual(check_payload["failed_requirements"], ["clean_batch_review"])
+            self.assertEqual(payload["receipt_check"]["status"], "pass")
+            self.assertEqual(payload["receipt_check"]["decision"], "stop")
+            self.assertEqual(payload["receipt_check"]["blocking_source"], "automation_gate")
+            self.assertEqual(payload["receipt_check_outputs"]["text"], str(check_text))
             self.assertIn("receipt_check_status=pass", completed.stdout)
             self.assertIn("receipt_decision=stop", completed.stdout)
             self.assertIn("receipt_blocking_source=automation_gate", completed.stdout)

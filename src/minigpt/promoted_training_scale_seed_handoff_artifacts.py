@@ -53,6 +53,32 @@ def build_promoted_training_scale_seed_handoff_automation_receipt(report: dict[s
     }
 
 
+def _receipt_check(report: dict[str, Any]) -> dict[str, Any]:
+    return _dict(report.get("receipt_check"))
+
+
+def _receipt_check_outputs(report: dict[str, Any]) -> dict[str, Any]:
+    return _dict(report.get("receipt_check_outputs"))
+
+
+def _receipt_check_fields(report: dict[str, Any]) -> dict[str, Any]:
+    receipt_check = _receipt_check(report)
+    receipt_check_outputs = _receipt_check_outputs(report)
+    return {
+        "receipt_check_status": receipt_check.get("status"),
+        "receipt_check_decision": receipt_check.get("decision"),
+        "receipt_check_exit_code": receipt_check.get("exit_code"),
+        "receipt_check_checker_exit_code": receipt_check.get("checker_exit_code"),
+        "receipt_check_blocking_source": receipt_check.get("blocking_source"),
+        "receipt_check_failed_requirements": "; ".join(_string_list(receipt_check.get("failed_requirements"))),
+        "receipt_check_issue_count": receipt_check.get("issue_count"),
+        "receipt_check_issues": "; ".join(_string_list(receipt_check.get("issues"))),
+        "receipt_check_receipt_path": receipt_check.get("receipt_path"),
+        "receipt_check_json": receipt_check_outputs.get("json"),
+        "receipt_check_text": receipt_check_outputs.get("text"),
+    }
+
+
 def render_promoted_training_scale_seed_handoff_automation_receipt_text(report: dict[str, Any]) -> str:
     receipt = build_promoted_training_scale_seed_handoff_automation_receipt(report)
     keys = [
@@ -102,6 +128,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
     clean_batch_requirement = _dict(report.get("clean_batch_review_requirement"))
     automation_gate = _dict(report.get("automation_gate"))
     automation_summary = _dict(report.get("automation_summary"))
+    receipt_check_fields = _receipt_check_fields(report)
     fieldnames = [
         "handoff_status",
         "seed_status",
@@ -168,6 +195,17 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "automation_summary_gate_blocking_requirement_count",
         "automation_summary_failed_requirements",
         "automation_summary_decision_domain",
+        "receipt_check_status",
+        "receipt_check_decision",
+        "receipt_check_exit_code",
+        "receipt_check_checker_exit_code",
+        "receipt_check_blocking_source",
+        "receipt_check_failed_requirements",
+        "receipt_check_issue_count",
+        "receipt_check_issues",
+        "receipt_check_receipt_path",
+        "receipt_check_json",
+        "receipt_check_text",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -270,6 +308,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             ),
             "automation_summary_failed_requirements": automation_summary.get("failed_requirements"),
             "automation_summary_decision_domain": automation_summary.get("decision_domain"),
+            **receipt_check_fields,
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -289,6 +328,8 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
     clean_batch_requirement = _dict(report.get("clean_batch_review_requirement"))
     automation_gate = _dict(report.get("automation_gate"))
     automation_summary = _dict(report.get("automation_summary"))
+    receipt_check = _receipt_check(report)
+    receipt_check_outputs = _receipt_check_outputs(report)
     lines = [
         f"# {report.get('title', 'MiniGPT promoted training scale seed handoff')}",
         "",
@@ -346,6 +387,17 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Automation summary blocking source: `{automation_summary.get('blocking_source')}`",
         f"- Automation summary failed requirements: `{automation_summary.get('failed_requirements')}`",
         f"- Automation summary decision domain: `{automation_summary.get('decision_domain')}`",
+        f"- Receipt check status: `{receipt_check.get('status')}`",
+        f"- Receipt check decision: `{receipt_check.get('decision')}`",
+        f"- Receipt check exit code: `{receipt_check.get('exit_code')}`",
+        f"- Receipt check checker exit code: `{receipt_check.get('checker_exit_code')}`",
+        f"- Receipt check blocking source: `{receipt_check.get('blocking_source')}`",
+        f"- Receipt check failed requirements: `{receipt_check.get('failed_requirements')}`",
+        f"- Receipt check issue count: `{receipt_check.get('issue_count')}`",
+        f"- Receipt check issues: `{receipt_check.get('issues')}`",
+        f"- Receipt check receipt path: `{receipt_check.get('receipt_path')}`",
+        f"- Receipt check json: `{receipt_check_outputs.get('json')}`",
+        f"- Receipt check text: `{receipt_check_outputs.get('text')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -392,6 +444,8 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
     clean_batch_requirement = _dict(report.get("clean_batch_review_requirement"))
     automation_gate = _dict(report.get("automation_gate"))
     automation_summary = _dict(report.get("automation_summary"))
+    receipt_check = _receipt_check(report)
+    receipt_check_outputs = _receipt_check_outputs(report)
     clean_evidence_domain = ", ".join(
         str(item) for item in _string_list(summary.get("seed_handoff_clean_evidence_status_domain"))
     )
@@ -451,6 +505,16 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Automation summary exit", automation_summary.get("exit_code")),
         ("Automation blocking source", automation_summary.get("blocking_source")),
         ("Automation summary domain", automation_summary_decision_domain),
+        ("Receipt check", receipt_check.get("status")),
+        ("Receipt decision", receipt_check.get("decision")),
+        ("Receipt exit", receipt_check.get("exit_code")),
+        ("Receipt checker exit", receipt_check.get("checker_exit_code")),
+        ("Receipt blocking source", receipt_check.get("blocking_source")),
+        ("Receipt failed requirements", ", ".join(_string_list(receipt_check.get("failed_requirements")))),
+        ("Receipt issue count", receipt_check.get("issue_count")),
+        ("Receipt receipt path", receipt_check.get("receipt_path")),
+        ("Receipt json", receipt_check_outputs.get("json")),
+        ("Receipt text", receipt_check_outputs.get("text")),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(
@@ -471,6 +535,7 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
             _execution_section(execution),
             _artifact_section(report),
             _plan_section(report),
+            _receipt_check_section(report),
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT promoted training scale seed handoff.</footer>",
             "</body>",
@@ -531,6 +596,28 @@ def _plan_section(report: dict[str, Any]) -> str:
         else "<p>No next batch command is available yet.</p>"
     )
     return f"<section><h2>Plan Report</h2><table>{body}</table>{extra}</section>"
+
+
+def _receipt_check_section(report: dict[str, Any]) -> str:
+    receipt_check = _receipt_check(report)
+    if not receipt_check:
+        return ""
+    receipt_check_outputs = _receipt_check_outputs(report)
+    rows = [
+        ("Status", receipt_check.get("status")),
+        ("Decision", receipt_check.get("decision")),
+        ("Exit code", receipt_check.get("exit_code")),
+        ("Checker exit code", receipt_check.get("checker_exit_code")),
+        ("Blocking source", receipt_check.get("blocking_source")),
+        ("Failed requirements", ", ".join(_string_list(receipt_check.get("failed_requirements")))),
+        ("Issue count", receipt_check.get("issue_count")),
+        ("Issues", ", ".join(_string_list(receipt_check.get("issues")))),
+        ("Receipt path", receipt_check.get("receipt_path")),
+        ("Receipt check JSON", receipt_check_outputs.get("json")),
+        ("Receipt check text", receipt_check_outputs.get("text")),
+    ]
+    body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
+    return f'<section><h2>Receipt Check</h2><div class="table-wrap"><table>{body}</table></div></section>'
 
 
 def _command_section(report: dict[str, Any]) -> str:

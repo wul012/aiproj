@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
+    build_promoted_training_scale_seed_handoff_automation_receipt,
     build_promoted_training_scale_seed_handoff,
     write_promoted_training_scale_seed_handoff_outputs,
 )
@@ -65,7 +66,11 @@ def main() -> None:
     clean_batch_review_requirement = report["clean_batch_review_requirement"]
     automation_gate = report["automation_gate"]
     automation_summary = report["automation_summary"]
+    receipt_check = _attach_receipt_check(report, args.receipt_check_out_dir)
     outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
+    if args.receipt_check_out_dir is not None:
+        report["receipt_check_outputs"] = _write_receipt_check_outputs(report, args.receipt_check_out_dir, outputs)
+        outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
     print(f"seed_status={report.get('seed_status')}")
@@ -129,7 +134,7 @@ def main() -> None:
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     print(f"automation_receipt_json={outputs.get('automation_receipt_json')}")
     print(f"automation_receipt_text={outputs.get('automation_receipt_text')}")
-    receipt_check = _write_receipt_check(outputs, args.receipt_check_out_dir)
+    _print_receipt_check(report)
     print(f"automation_summary_decision={automation_summary.get('decision')}")
     print(f"automation_summary_exit_code={automation_summary.get('exit_code')}")
     print(f"automation_summary_blocking_source={automation_summary.get('blocking_source')}")
@@ -173,22 +178,42 @@ def _default_out_dir(path: Path) -> Path:
     return path.parent / "handoff"
 
 
-def _write_receipt_check(outputs: dict[str, str], out_dir: Path | None) -> dict[str, object] | None:
+def _attach_receipt_check(report: dict[str, object], out_dir: Path | None) -> dict[str, object] | None:
     if out_dir is None:
         return None
+    receipt = build_promoted_training_scale_seed_handoff_automation_receipt(report)
+    check = check_promoted_training_scale_seed_handoff_automation_receipt(receipt)
+    report["receipt_check"] = check
+    return check
+
+
+def _write_receipt_check_outputs(
+    report: dict[str, object],
+    out_dir: Path,
+    outputs: dict[str, str],
+) -> dict[str, str]:
     receipt_path = outputs.get("automation_receipt_json")
     if not receipt_path:
         raise ValueError("automation receipt JSON output is missing")
     receipt = load_promoted_training_scale_seed_handoff_automation_receipt(receipt_path)
     check = check_promoted_training_scale_seed_handoff_automation_receipt(receipt)
     check["receipt_path"] = str(receipt_path)
+    report["receipt_check"] = check
     check_outputs = write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs(check, out_dir)
+    return check_outputs
+
+
+def _print_receipt_check(report: dict[str, object]) -> None:
+    check = report.get("receipt_check")
+    if not isinstance(check, dict):
+        return
+    check_outputs = report.get("receipt_check_outputs")
     print(render_promoted_training_scale_seed_handoff_automation_receipt_check(check), end="")
-    print(f"receipt_path={receipt_path}")
-    print("receipt_check_outputs=" + json.dumps(check_outputs, ensure_ascii=False))
-    print(f"receipt_check_json={check_outputs['json']}")
-    print(f"receipt_check_text={check_outputs['text']}")
-    return check
+    print(f"receipt_path={check.get('receipt_path')}")
+    if isinstance(check_outputs, dict):
+        print("receipt_check_outputs=" + json.dumps(check_outputs, ensure_ascii=False))
+        print(f"receipt_check_json={check_outputs.get('json')}")
+        print(f"receipt_check_text={check_outputs.get('text')}")
 
 
 if __name__ == "__main__":
