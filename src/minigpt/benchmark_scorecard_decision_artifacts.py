@@ -22,6 +22,7 @@ __all__ = [
     "write_benchmark_scorecard_decision_json",
     "write_benchmark_scorecard_decision_markdown",
     "write_benchmark_scorecard_decision_outputs",
+    "write_benchmark_scorecard_remediation_csv",
 ]
 
 def write_benchmark_scorecard_decision_json(report: dict[str, Any], path: str | Path) -> None:
@@ -55,6 +56,27 @@ def write_benchmark_scorecard_decision_csv(report: dict[str, Any], path: str | P
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         for row in _list_of_dicts(report.get("candidate_evaluations")):
+            writer.writerow({field: _csv_value(row.get(field)) for field in fieldnames})
+
+
+def write_benchmark_scorecard_remediation_csv(report: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "kind",
+        "category",
+        "count",
+        "priority",
+        "severity",
+        "owner_scope",
+        "action_code",
+        "target_artifacts",
+        "action",
+    ]
+    with out_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in _list_of_dicts(report.get("remediation_plan")):
             writer.writerow({field: _csv_value(row.get(field)) for field in fieldnames})
 
 
@@ -210,11 +232,13 @@ def write_benchmark_scorecard_decision_outputs(report: dict[str, Any], out_dir: 
     paths = {
         "json": root / "benchmark_scorecard_decision.json",
         "csv": root / "benchmark_scorecard_decision.csv",
+        "remediation_csv": root / "benchmark_scorecard_decision_remediation.csv",
         "markdown": root / "benchmark_scorecard_decision.md",
         "html": root / "benchmark_scorecard_decision.html",
     }
     write_benchmark_scorecard_decision_json(report, paths["json"])
     write_benchmark_scorecard_decision_csv(report, paths["csv"])
+    write_benchmark_scorecard_remediation_csv(report, paths["remediation_csv"])
     write_benchmark_scorecard_decision_markdown(report, paths["markdown"])
     write_benchmark_scorecard_decision_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}

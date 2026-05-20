@@ -98,6 +98,9 @@ d/328/解释/说明.md
 d/329/图片
 d/329/解释/说明.md
  -> v329 remediation metadata 的运行截图和解释
+d/330/图片
+d/330/解释/说明.md
+ -> v330 remediation CSV artifact 的运行截图和解释
 ```
 
 写入规则：

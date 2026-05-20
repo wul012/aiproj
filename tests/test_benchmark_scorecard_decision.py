@@ -165,6 +165,10 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             benchmark_scorecard_decision.render_benchmark_scorecard_decision_markdown,
             benchmark_scorecard_decision_artifacts.render_benchmark_scorecard_decision_markdown,
         )
+        self.assertIs(
+            benchmark_scorecard_decision.write_benchmark_scorecard_remediation_csv,
+            benchmark_scorecard_decision_artifacts.write_benchmark_scorecard_remediation_csv,
+        )
 
     def test_blocks_regressed_candidate_and_keeps_baseline_out(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -238,12 +242,15 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             html = render_benchmark_scorecard_decision_html(report)
 
             self.assertEqual(loaded["schema_version"], 1)
-            self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
+            self.assertEqual(set(outputs), {"json", "csv", "remediation_csv", "markdown", "html"})
             self.assertIn("benchmark_scorecard_decision", Path(outputs["json"]).name)
             self.assertIn("generation_quality_total_flags_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("eval_suite_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("blocker_categories", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("review_categories", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            remediation_csv = Path(outputs["remediation_csv"]).read_text(encoding="utf-8")
+            self.assertIn("action_code", remediation_csv)
+            self.assertIn("target_artifacts", remediation_csv)
             self.assertIn("## Candidate Evaluations", markdown)
             self.assertIn("Eval Compare", markdown)
             self.assertIn("Dominant blocker category", markdown)
@@ -306,6 +313,11 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertIn("Threshold largest gap", html)
             self.assertIn("Remediation Plan", html)
             self.assertIn("Action Code", html)
+            remediation_csv = Path(write_benchmark_scorecard_decision_outputs(report, Path(tmp) / "threshold-decision")["remediation_csv"]).read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("raise_candidate_rubric_or_change_policy", remediation_csv)
+            self.assertIn("benchmark_scorecard_decision; benchmark_scorecard", remediation_csv)
 
     def test_rejects_empty_comparison(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

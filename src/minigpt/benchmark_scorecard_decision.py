@@ -20,6 +20,7 @@ from minigpt.benchmark_scorecard_decision_artifacts import (
     write_benchmark_scorecard_decision_json,
     write_benchmark_scorecard_decision_markdown,
     write_benchmark_scorecard_decision_outputs,
+    write_benchmark_scorecard_remediation_csv,
 )
 
 

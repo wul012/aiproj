@@ -301,6 +301,7 @@ def artifact_status(baseline_dir: Path, candidate_dir: Path, comparison_dir: Pat
         "comparison_html": comparison_dir / "benchmark_scorecard_comparison.html",
         "decision_json": decision_dir / "benchmark_scorecard_decision.json",
         "decision_csv": decision_dir / "benchmark_scorecard_decision.csv",
+        "decision_remediation_csv": decision_dir / "benchmark_scorecard_decision_remediation.csv",
         "decision_markdown": decision_dir / "benchmark_scorecard_decision.md",
         "decision_html": decision_dir / "benchmark_scorecard_decision.html",
     }

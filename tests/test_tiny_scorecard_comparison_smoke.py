@@ -214,11 +214,17 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertTrue(summary["artifacts"]["comparison_json_exists"])
             self.assertTrue(summary["artifacts"]["comparison_html_exists"])
             self.assertTrue(summary["artifacts"]["decision_json_exists"])
+            self.assertTrue(summary["artifacts"]["decision_remediation_csv_exists"])
             self.assertTrue(summary["artifacts"]["decision_html_exists"])
             self.assertTrue((out_dir / "baseline" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "candidate" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "scorecard-comparison" / "benchmark_scorecard_comparison.json").is_file())
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision.json").is_file())
+            self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision_remediation.csv").is_file())
+            self.assertIn(
+                "raise_candidate_rubric_or_change_policy",
+                (out_dir / "scorecard-decision" / "benchmark_scorecard_decision_remediation.csv").read_text(encoding="utf-8"),
+            )
             self.assertIn("decision_first_recommendation=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
