@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+312-v298-release-readiness-comparison-ci-order-deltas.md
+ -> v298 code explanation: compare CI workflow order-violation deltas across release readiness reports.
+
 311-v297-release-readiness-ci-order-evidence.md
  -> v297 code explanation: carry CI workflow order counts into release bundle and release readiness evidence.
 
@@ -727,6 +730,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `309-v295-promoted-seed-handoff-assurance-workflow-line-evidence.md`：第二百九十五版代码讲解，把 CI workflow hygiene 的 smoke-before-coverage 证据升级为行号形式。
 - `310-v296-ci-order-evidence-audit-context.md`：第二百九十六版代码讲解，把 CI workflow order 计数从 hygiene JSON 扩展到 CLI stdout 和 project audit context。
 - `311-v297-release-readiness-ci-order-evidence.md`：第二百九十七版代码讲解，把 CI workflow order 计数继续传入 release bundle 和 release readiness 证据。
+- `312-v298-release-readiness-comparison-ci-order-deltas.md`：第二百九十八版代码讲解，在 release readiness comparison 中比较 CI workflow order violation delta。
 
 ## 一句话总览
 

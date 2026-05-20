@@ -694,6 +694,9 @@ c/296/解释/说明.md
 c/297/图片
 c/297/解释/说明.md
  -> v297 release bundle and readiness CI order evidence 的运行截图和解释
+c/298/图片
+c/298/解释/说明.md
+ -> v298 release readiness comparison CI order delta evidence 的运行截图和解释
 ```
 
 写入规则：

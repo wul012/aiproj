@@ -32,6 +32,8 @@ def write_release_readiness_comparison_csv(report: dict[str, Any], path: str | P
         "audit_score_percent",
         "ci_workflow_status",
         "ci_workflow_failed_checks",
+        "ci_workflow_required_order_count",
+        "ci_workflow_order_violation_count",
         "request_history_status",
         "test_coverage_status",
         "test_coverage_percent",
@@ -66,6 +68,8 @@ def write_release_readiness_delta_csv(report: dict[str, Any], path: str | Path) 
         "delta_status",
         "audit_score_delta",
         "ci_workflow_failed_check_delta",
+        "ci_workflow_required_order_delta",
+        "ci_workflow_order_violation_delta",
         "ci_workflow_status_changed",
         "test_coverage_percent_delta",
         "test_coverage_gap_delta",
@@ -103,14 +107,16 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                 ("Regressed count", summary.get("regressed_count")),
                 ("Changed panel deltas", summary.get("changed_panel_delta_count")),
                 ("CI workflow regressions", summary.get("ci_workflow_regression_count")),
+                ("CI order regressions", summary.get("ci_workflow_order_regression_count")),
+                ("Max CI order violation delta", summary.get("max_abs_ci_workflow_order_violation_delta")),
                 ("Test coverage regressions", summary.get("test_coverage_regression_count")),
             ]
         ),
         "",
         "## Readiness Matrix",
         "",
-        "| Release | Status | Decision | Gate | Audit | Score | CI workflow | CI failed | Request history | Coverage | Coverage % | Coverage gap | Maturity | Fail panels | Warn panels |",
-        "| --- | --- | --- | --- | --- | ---: | --- | ---: | --- | --- | ---: | ---: | --- | ---: | ---: |",
+        "| Release | Status | Decision | Gate | Audit | Score | CI workflow | CI failed | CI order violations | Request history | Coverage | Coverage % | Coverage gap | Maturity | Fail panels | Warn panels |",
+        "| --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | --- | --- | ---: | ---: | --- | ---: | ---: |",
     ]
     for row in _list_of_dicts(report.get("rows")):
         lines.append(
@@ -125,6 +131,7 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                     _md(row.get("audit_score_percent")),
                     _md(row.get("ci_workflow_status")),
                     _md(row.get("ci_workflow_failed_checks")),
+                    _md(row.get("ci_workflow_order_violation_count")),
                     _md(row.get("request_history_status")),
                     _md(row.get("test_coverage_status")),
                     _md(row.get("test_coverage_percent")),
@@ -141,8 +148,8 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
             "",
             "## Deltas",
             "",
-            "| Compared | Status delta | Coverage % delta | Coverage gap delta | Panel changes | Explanation |",
-            "| --- | ---: | ---: | ---: | --- | --- |",
+            "| Compared | Status delta | CI order violation delta | Coverage % delta | Coverage gap delta | Panel changes | Explanation |",
+            "| --- | ---: | ---: | ---: | ---: | --- | --- |",
         ]
     )
     for delta in _list_of_dicts(report.get("deltas")):
@@ -152,6 +159,7 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                 [
                     _md(delta.get("compared_release") or delta.get("compared_path")),
                     _md(delta.get("status_delta")),
+                    _md(delta.get("ci_workflow_order_violation_delta")),
                     _md(delta.get("test_coverage_percent_delta")),
                     _md(delta.get("test_coverage_gap_delta")),
                     _md(", ".join(_string_list(delta.get("changed_panels")))),
@@ -182,6 +190,7 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
         ("Regressed", summary.get("regressed_count")),
         ("Panel deltas", summary.get("changed_panel_delta_count")),
         ("CI regressions", summary.get("ci_workflow_regression_count")),
+        ("CI order regressions", summary.get("ci_workflow_order_regression_count")),
         ("Coverage regressions", summary.get("test_coverage_regression_count")),
         ("Generated", report.get("generated_at")),
     ]
@@ -201,8 +210,8 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
             "<body>",
             f"<header><h1>{_e(report.get('title', 'MiniGPT release readiness comparison'))}</h1><p>baseline: {_e(report.get('baseline_path'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
-            '<section class="panel"><h2>Readiness Matrix</h2><table><thead><tr><th>Release</th><th>Status</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Score</th><th>CI workflow</th><th>CI failed</th><th>Request</th><th>Coverage</th><th>Coverage %</th><th>Gap</th><th>Maturity</th><th>Panels</th></tr></thead><tbody>' + rows + "</tbody></table></section>",
-            '<section class="panel"><h2>Deltas</h2><table><thead><tr><th>Compared</th><th>Status delta</th><th>Coverage % delta</th><th>Coverage gap delta</th><th>Panel changes</th><th>Explanation</th></tr></thead><tbody>' + deltas + "</tbody></table></section>",
+            '<section class="panel"><h2>Readiness Matrix</h2><table><thead><tr><th>Release</th><th>Status</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Score</th><th>CI workflow</th><th>CI failed</th><th>CI order violations</th><th>Request</th><th>Coverage</th><th>Coverage %</th><th>Gap</th><th>Maturity</th><th>Panels</th></tr></thead><tbody>' + rows + "</tbody></table></section>",
+            '<section class="panel"><h2>Deltas</h2><table><thead><tr><th>Compared</th><th>Status delta</th><th>CI order violation delta</th><th>Coverage % delta</th><th>Coverage gap delta</th><th>Panel changes</th><th>Explanation</th></tr></thead><tbody>' + deltas + "</tbody></table></section>",
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT release readiness comparison.</footer>",
             "</body>",
@@ -247,6 +256,7 @@ def _html_row(row: dict[str, Any]) -> str:
         f"<td>{_e(_fmt(row.get('audit_score_percent')))}</td>"
         f"<td>{_e(row.get('ci_workflow_status'))}</td>"
         f"<td>{_e(row.get('ci_workflow_failed_checks'))}</td>"
+        f"<td>{_e(row.get('ci_workflow_order_violation_count'))}</td>"
         f"<td>{_e(row.get('request_history_status'))}</td>"
         f"<td>{_e(row.get('test_coverage_status'))}</td>"
         f"<td>{_e(_fmt(row.get('test_coverage_percent')))}</td>"
@@ -263,6 +273,7 @@ def _html_delta(delta: dict[str, Any]) -> str:
         "<tr>"
         f"<td>{_e(delta.get('compared_release') or delta.get('compared_path'))}<br><span>{_e(delta.get('compared_path'))}</span></td>"
         f'<td><span class="pill {status}">{_e(_status_delta_label(delta.get("status_delta")))}</span></td>'
+        f"<td>{_e(_fmt(delta.get('ci_workflow_order_violation_delta')))}</td>"
         f"<td>{_e(_fmt(delta.get('test_coverage_percent_delta')))}</td>"
         f"<td>{_e(_fmt(delta.get('test_coverage_gap_delta')))}</td>"
         f"<td>{_e(', '.join(_string_list(delta.get('changed_panels'))))}</td>"
