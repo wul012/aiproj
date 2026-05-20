@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 302 carries training portfolio comparison CI-regression review summaries into batch reports and CLI output, so batch-level review can see CI-regressed portfolios without opening the nested comparison JSON.
+Version 303 starts a new same-level code-explanation directory for training-governance documentation, closing `代码讲解记录_项目成熟度阶段/` as the v48-v302 historical stage so future docs do not keep piling into an already dense folder.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -256,6 +256,13 @@ Version 302 carries training portfolio comparison CI-regression review summaries
 - `scripts/run_training_portfolio_batch.py` prints `comparison_review_summary` so CLI logs expose CI regression review context.
 - Tests cover CI blocker propagation through `_comparison_review_summary()` and rendered batch output fields.
 - Archived training portfolio batch CI regression evidence in `c/302`.
+
+## Latest v303 checkpoint
+
+- `代码讲解记录_项目成熟度阶段/` is now treated as the v48-v302 historical explanation stage.
+- New training-governance and documentation-routing explanations start in sibling directory `代码讲解记录_训练治理阶段/`.
+- README and AGENTS now document that dense documentation directories can be closed for history and continued in a same-level directory without migrating old files.
+- Archived documentation split evidence in `d/303`.
 
 ## Version tags
 
@@ -564,6 +571,7 @@ v299.0.0 MiniGPT v299 registry and maturity CI order regression summary
 v300.0.0 MiniGPT v300 maturity narrative CI order regression review
 v301.0.0 MiniGPT v301 training portfolio comparison CI regression review
 v302.0.0 MiniGPT v302 training portfolio batch CI regression summary
+v303.0.0 MiniGPT v303 training governance documentation stage split
 ```
 
 ## Project structure
@@ -716,6 +724,12 @@ v302.0.0 MiniGPT v302 training portfolio batch CI regression summary
 ├── c/
 │   ├── README.md
 │   └── 69/
+│       ├── 图片/
+│       └── 解释/
+│           └── 说明.md
+├── d/
+│   ├── README.md
+│   └── 303/
 │       ├── 图片/
 │       └── 解释/
 │           └── 说明.md
@@ -939,6 +953,9 @@ v302.0.0 MiniGPT v302 training portfolio batch CI regression summary
 │   ├── 54-v39-checkpoint-selector.md
 │   ├── 55-v40-checkpoint-comparison-shortcuts.md
 │   └── 56-v41-side-by-side-generation.md
+├── 代码讲解记录_训练治理阶段/
+│   ├── README.md
+│   └── 317-v303-training-governance-doc-stage-split.md
 ├── AGENTS.md
 ├── pyproject.toml
 ├── README.md
@@ -3573,9 +3590,10 @@ Start here:
 代码讲解记录_发布治理阶段/README.md
 代码讲解记录_评估基准阶段/README.md
 代码讲解记录_项目成熟度阶段/README.md
+代码讲解记录_训练治理阶段/README.md
 ```
 
-The original `代码讲解记录` directory keeps the v1-v30 history in place. v31-v34 release-governance records live in `代码讲解记录_发布治理阶段`; v35-v47 benchmark/evaluation records live in `代码讲解记录_评估基准阶段`; v48 and later project-maturity records live in `代码讲解记录_项目成熟度阶段` so each phase can keep growing without moving old evidence.
+The original `代码讲解记录` directory keeps the v1-v30 history in place. v31-v34 release-governance records live in `代码讲解记录_发布治理阶段`; v35-v47 benchmark/evaluation records live in `代码讲解记录_评估基准阶段`; v48-v302 project-maturity records live in `代码讲解记录_项目成熟度阶段`; v303 and later training-governance and documentation-routing records continue in `代码讲解记录_训练治理阶段` so dense documentation directories can close as history without moving old evidence.
 
 First-stage reading order:
 
@@ -3695,6 +3713,13 @@ Project-maturity records start at v48:
 122-v107-release-readiness-comparison-report-utils.md
 123-v108-release-governance-batch-report-utils.md
 124-v109-maintenance-batching-policy.md
+```
+
+Training-governance records continue from v303:
+
+```text
+代码讲解记录_训练治理阶段/
+317-v303-training-governance-doc-stage-split.md
 ```
 
 ## Learning map

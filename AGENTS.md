@@ -50,6 +50,8 @@ Before sending the final response for any task, perform a cleanup pass for files
 
 - `代码讲解记录/` 保留 v1-v30 的历史讲解，45 篇不需要迁移；后续只做必要修正，不再继续堆新版本。
 - 从 v31 开始，新讲解写入 `代码讲解记录_发布治理阶段/`，文件编号继续全局递增，例如 `46-v31-主题.md`。
+- `代码讲解记录_项目成熟度阶段/` 保留 v48-v302 的成熟度、训练规模、自动化交接和 CI 回归治理讲解；目录内容已较密，后续只做必要修正，不再继续堆新版本。
+- 从 v303 开始，训练治理、文档分流和后续相关讲解写入 `代码讲解记录_训练治理阶段/`，编号继续全局递增，例如 `317-v303-主题.md`。
 - 如果项目进入新的大阶段，再新建同级目录 `代码讲解记录_阶段名称/`，不要回头移动旧阶段文件。
 - 文档部分如果某个目录内容明显变多、主题开始分叉、或继续写入会降低检索效率，可以新建同级目录承接后续内容；旧目录保留历史，不回头搬迁，README 只补索引和分流说明。
 
@@ -71,9 +73,10 @@ Current update from v69 onward:
 
 - `a/` keeps v1-v31 runtime screenshots and explanations.
 - `b/` keeps v32-v68 runtime screenshots and explanations.
-- From v69 onward, new runtime screenshots and explanations go to `c/`.
-- The structure is `c/<version>/图片/` and `c/<version>/解释/说明.md`.
-- README, code explanations, archive notes, and tag notes should cite `c/<version>` for v69 and later evidence.
+- `c/` keeps v69-v302 runtime screenshots and explanations.
+- From v303 onward, new runtime screenshots and explanations go to `d/`.
+- The structure is `d/<version>/图片/` and `d/<version>/解释/说明.md`.
+- README, code explanations, archive notes, and tag notes should cite `d/<version>` for v303 and later evidence.
 - Do not migrate old `a/` or `b/` evidence unless the user explicitly asks.
 
 运行截图和解释目录按阶段拆分：
@@ -82,6 +85,10 @@ Current update from v69 onward:
 - 从 v32 开始，新的运行截图和解释写入与 `a/` 同级的 `b/`。
 - 目录结构继续使用 `b/<version>/图片/` 和 `b/<version>/解释/说明.md`。
 - README、代码讲解、归档说明、tag 说明里提到新版本证据时，后续默认引用 `b/<version>`。
+- `c/` 保留 v69-v302 的运行截图和解释，不迁移旧版本。
+- 从 v303 开始，新的运行截图和解释写入与 `a/`、`b/`、`c/` 同级的 `d/`。
+- 目录结构继续使用 `d/<version>/图片/` 和 `d/<version>/解释/说明.md`。
+- README、代码讲解、归档说明、tag 说明里提到 v303 及后续证据时，默认引用 `d/<version>`。
 
 ## Temporary Files
 
