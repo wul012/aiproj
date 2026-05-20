@@ -469,6 +469,8 @@ def render_summary(summary: dict[str, Any]) -> str:
     comparison = as_dict(summary.get("scorecard_comparison"))
     decision = as_dict(summary.get("scorecard_decision"))
     remediation_gate = as_dict(summary.get("remediation_gate"))
+    remediation_gate_issues = list_of_dicts(remediation_gate.get("issues"))
+    first_remediation_gate_issue = remediation_gate_issues[0] if remediation_gate_issues else {}
     run_config = as_dict(summary.get("run_config"))
     interpretation = as_dict(summary.get("interpretation"))
     rows = [
@@ -536,6 +538,11 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("remediation_gate_decision", remediation_gate.get("decision")),
         ("remediation_gate_count", remediation_gate.get("remediation_count")),
         ("remediation_gate_issue_count", remediation_gate.get("issue_count")),
+        ("remediation_gate_first_issue_code", first_remediation_gate_issue.get("code")),
+        ("remediation_gate_first_issue_severity", first_remediation_gate_issue.get("severity")),
+        ("remediation_gate_first_issue_category", first_remediation_gate_issue.get("category")),
+        ("remediation_gate_first_issue_action_code", first_remediation_gate_issue.get("action_code")),
+        ("remediation_gate_first_issue_owner_scope", first_remediation_gate_issue.get("owner_scope")),
         ("remediation_gate_first_category", remediation_gate.get("first_category")),
         ("remediation_gate_first_action_code", remediation_gate.get("first_action_code")),
         ("remediation_gate_first_severity", remediation_gate.get("first_severity")),

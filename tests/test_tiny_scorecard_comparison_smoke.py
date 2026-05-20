@@ -143,6 +143,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("remediation_gate_decision=continue", text)
         self.assertIn("remediation_gate_count=0", text)
         self.assertIn("remediation_gate_issue_count=0", text)
+        self.assertIn("remediation_gate_first_issue_code=None", text)
+        self.assertIn("remediation_gate_first_issue_action_code=None", text)
         self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
@@ -276,6 +278,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("remediation_gate_status=pass", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("remediation_gate_decision=continue", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("remediation_gate_issue_count=0", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("remediation_gate_first_issue_code=None", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
@@ -466,6 +469,12 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertEqual(summary["remediation_gate"]["issues"][0]["severity"], "blocker")
             self.assertEqual(summary["remediation_gate"]["issues"][0]["owner_scope"], "model-eval")
             self.assertEqual(summary["remediation_gate"]["first_action_code"], "raise_candidate_rubric_or_change_policy")
+            text = render_summary(summary)
+            self.assertIn("remediation_gate_first_issue_code=remediation_rows_present", text)
+            self.assertIn("remediation_gate_first_issue_severity=blocker", text)
+            self.assertIn("remediation_gate_first_issue_category=threshold", text)
+            self.assertIn("remediation_gate_first_issue_action_code=raise_candidate_rubric_or_change_policy", text)
+            self.assertIn("remediation_gate_first_issue_owner_scope=model-eval", text)
 
     def test_decision_summary_exposes_first_threshold_block(self) -> None:
         summary = decision_summary(

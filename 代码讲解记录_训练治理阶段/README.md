@@ -101,6 +101,9 @@
 346-v332-remediation-gate-issues.md
  -> v332 code explanation: add machine-readable issue rows to the clean remediation gate and keep strict smoke failures easy for CI to classify.
 
+347-v333-remediation-gate-issue-text.md
+ -> v333 code explanation: mirror the first clean-remediation gate issue fields into the text summary for shell-only CI readers.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
