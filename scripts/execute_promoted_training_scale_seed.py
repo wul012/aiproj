@@ -115,6 +115,8 @@ def main() -> None:
     print(f"command={report.get('command_text')}")
     print(f"next_batch_command={report.get('next_batch_command_text')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    print(f"automation_receipt_json={outputs.get('automation_receipt_json')}")
+    print(f"automation_receipt_text={outputs.get('automation_receipt_text')}")
     print(f"automation_summary_decision={automation_summary.get('decision')}")
     print(f"automation_summary_exit_code={automation_summary.get('exit_code')}")
     print(f"automation_summary_blocking_source={automation_summary.get('blocking_source')}")

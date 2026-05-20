@@ -19,6 +19,80 @@ def write_promoted_training_scale_seed_handoff_json(report: dict[str, Any], path
     write_json_payload(report, path)
 
 
+def build_promoted_training_scale_seed_handoff_automation_receipt(report: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(report.get("summary"))
+    execution = _dict(report.get("execution"))
+    clean_requirement = _dict(report.get("clean_evidence_requirement"))
+    clean_batch_requirement = _dict(report.get("clean_batch_review_requirement"))
+    automation_gate = _dict(report.get("automation_gate"))
+    automation_summary = _dict(report.get("automation_summary"))
+    return {
+        "schema_version": 1,
+        "receipt_type": "promoted_training_scale_seed_handoff_automation",
+        "generated_at": report.get("generated_at"),
+        "seed_path": report.get("seed_path"),
+        "seed_status": report.get("seed_status"),
+        "handoff_status": summary.get("handoff_status"),
+        "execute": report.get("execute"),
+        "returncode": execution.get("returncode"),
+        "plan_status": summary.get("plan_status"),
+        "plan_report_path": report.get("plan_report_path"),
+        "next_batch_command_available": summary.get("next_batch_command_available"),
+        "automation_decision": automation_summary.get("decision"),
+        "automation_exit_code": automation_summary.get("exit_code"),
+        "automation_blocking_source": automation_summary.get("blocking_source"),
+        "automation_detail": automation_summary.get("detail"),
+        "gate_status": automation_gate.get("status"),
+        "gate_decision": automation_gate.get("decision"),
+        "gate_required": automation_gate.get("required"),
+        "gate_blocking_requirement_count": automation_gate.get("blocking_requirement_count"),
+        "failed_requirements": automation_summary.get("failed_requirements"),
+        "passed_requirements": automation_gate.get("passed_requirements"),
+        "clean_evidence_requirement_status": clean_requirement.get("status"),
+        "clean_batch_review_requirement_status": clean_batch_requirement.get("status"),
+    }
+
+
+def render_promoted_training_scale_seed_handoff_automation_receipt_text(report: dict[str, Any]) -> str:
+    receipt = build_promoted_training_scale_seed_handoff_automation_receipt(report)
+    keys = [
+        "receipt_type",
+        "generated_at",
+        "seed_path",
+        "handoff_status",
+        "plan_status",
+        "automation_decision",
+        "automation_exit_code",
+        "automation_blocking_source",
+        "gate_decision",
+        "gate_blocking_requirement_count",
+        "failed_requirements",
+        "passed_requirements",
+        "clean_evidence_requirement_status",
+        "clean_batch_review_requirement_status",
+    ]
+    return "\n".join(f"{key}={receipt.get(key)}" for key in keys) + "\n"
+
+
+def write_promoted_training_scale_seed_handoff_automation_receipt_json(
+    report: dict[str, Any],
+    path: str | Path,
+) -> None:
+    write_json_payload(build_promoted_training_scale_seed_handoff_automation_receipt(report), path)
+
+
+def write_promoted_training_scale_seed_handoff_automation_receipt_text(
+    report: dict[str, Any],
+    path: str | Path,
+) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(
+        render_promoted_training_scale_seed_handoff_automation_receipt_text(report),
+        encoding="utf-8",
+    )
+
+
 def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path: str | Path) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -419,11 +493,15 @@ def write_promoted_training_scale_seed_handoff_outputs(report: dict[str, Any], o
         "csv": root / "promoted_training_scale_seed_handoff.csv",
         "markdown": root / "promoted_training_scale_seed_handoff.md",
         "html": root / "promoted_training_scale_seed_handoff.html",
+        "automation_receipt_json": root / "promoted_training_scale_seed_handoff_automation_receipt.json",
+        "automation_receipt_text": root / "promoted_training_scale_seed_handoff_automation_receipt.txt",
     }
     write_promoted_training_scale_seed_handoff_json(report, paths["json"])
     write_promoted_training_scale_seed_handoff_csv(report, paths["csv"])
     write_promoted_training_scale_seed_handoff_markdown(report, paths["markdown"])
     write_promoted_training_scale_seed_handoff_html(report, paths["html"])
+    write_promoted_training_scale_seed_handoff_automation_receipt_json(report, paths["automation_receipt_json"])
+    write_promoted_training_scale_seed_handoff_automation_receipt_text(report, paths["automation_receipt_text"])
     return {key: str(value) for key, value in paths.items()}
 
 
@@ -525,8 +603,12 @@ def _card(label: str, value: Any) -> str:
 
 
 __all__ = [
+    "build_promoted_training_scale_seed_handoff_automation_receipt",
     "render_promoted_training_scale_seed_handoff_html",
+    "render_promoted_training_scale_seed_handoff_automation_receipt_text",
     "render_promoted_training_scale_seed_handoff_markdown",
+    "write_promoted_training_scale_seed_handoff_automation_receipt_json",
+    "write_promoted_training_scale_seed_handoff_automation_receipt_text",
     "write_promoted_training_scale_seed_handoff_csv",
     "write_promoted_training_scale_seed_handoff_html",
     "write_promoted_training_scale_seed_handoff_json",

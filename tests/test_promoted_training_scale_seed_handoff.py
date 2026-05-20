@@ -19,13 +19,17 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
+    build_promoted_training_scale_seed_handoff_automation_receipt,
     build_promoted_training_scale_seed_handoff,
     build_seed_handoff_automation_gate,
     build_seed_handoff_automation_summary,
     build_seed_handoff_clean_batch_review_requirement,
     build_seed_handoff_clean_evidence_requirement,
+    render_promoted_training_scale_seed_handoff_automation_receipt_text,
     render_promoted_training_scale_seed_handoff_html,
     render_promoted_training_scale_seed_handoff_markdown,
+    write_promoted_training_scale_seed_handoff_automation_receipt_json,
+    write_promoted_training_scale_seed_handoff_automation_receipt_text,
     write_promoted_training_scale_seed_handoff_outputs,
 )
 
@@ -225,6 +229,14 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             handoff_module.write_promoted_training_scale_seed_handoff_outputs,
             artifact_module.write_promoted_training_scale_seed_handoff_outputs,
         )
+        self.assertIs(
+            handoff_module.build_promoted_training_scale_seed_handoff_automation_receipt,
+            artifact_module.build_promoted_training_scale_seed_handoff_automation_receipt,
+        )
+        self.assertIs(
+            handoff_module.render_promoted_training_scale_seed_handoff_automation_receipt_text,
+            artifact_module.render_promoted_training_scale_seed_handoff_automation_receipt_text,
+        )
 
     def test_validates_ready_seed_without_executing(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -388,6 +400,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
                 list(SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES),
             )
             self.assertTrue((script_out / "promoted_training_scale_seed_handoff.json").exists())
+            self.assertTrue((script_out / "promoted_training_scale_seed_handoff_automation_receipt.json").exists())
+            self.assertTrue((script_out / "promoted_training_scale_seed_handoff_automation_receipt.txt").exists())
 
     def test_carries_seed_handoff_batch_review_into_handoff_outputs_and_script(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -547,6 +561,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("automation_gate_status=pass", completed.stdout)
             self.assertIn("automation_summary_decision=continue", completed.stdout)
             self.assertIn("automation_summary_exit_code=0", completed.stdout)
+            self.assertIn("automation_receipt_json=", completed.stdout)
+            self.assertIn("automation_receipt_text=", completed.stdout)
             self.assertIn("automation_gate_decision=continue", completed.stdout)
             self.assertIn("automation_gate_exit_code=0", completed.stdout)
             self.assertIn("automation_gate_required_requirement_count=1", completed.stdout)
@@ -557,6 +573,17 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(payload["automation_gate"]["decision"], "continue")
             self.assertEqual(payload["automation_gate"]["exit_code"], 0)
             self.assertEqual(payload["automation_summary"]["decision"], "continue")
+            receipt = json.loads(
+                (script_out / "promoted_training_scale_seed_handoff_automation_receipt.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            receipt_text = (script_out / "promoted_training_scale_seed_handoff_automation_receipt.txt").read_text(
+                encoding="utf-8"
+            )
+            self.assertEqual(receipt["automation_decision"], "continue")
+            self.assertEqual(receipt["automation_exit_code"], 0)
+            self.assertIn("automation_decision=continue", receipt_text)
             self.assertTrue(payload["clean_batch_review_requirement"]["required"])
             self.assertIn("Clean batch-review requirement passed", payload["recommendations"][1])
             self.assertIn("clean_batch_review_requirement_status", csv_text)
@@ -598,6 +625,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("automation_gate_status=fail", completed.stdout)
             self.assertIn("automation_summary_decision=stop", completed.stdout)
             self.assertIn("automation_summary_blocking_source=automation_gate", completed.stdout)
+            self.assertIn("automation_receipt_json=", completed.stdout)
             self.assertIn("automation_gate_decision=stop", completed.stdout)
             self.assertIn("automation_gate_exit_code=1", completed.stdout)
             self.assertIn("automation_gate_required_requirement_count=1", completed.stdout)
@@ -609,6 +637,14 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(payload["automation_gate"]["exit_code"], 1)
             self.assertEqual(payload["automation_summary"]["decision"], "stop")
             self.assertEqual(payload["automation_summary"]["blocking_source"], "automation_gate")
+            receipt = json.loads(
+                (script_out / "promoted_training_scale_seed_handoff_automation_receipt.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(receipt["automation_decision"], "stop")
+            self.assertEqual(receipt["automation_blocking_source"], "automation_gate")
+            self.assertEqual(receipt["failed_requirements"], ["clean_batch_review"])
             self.assertTrue(payload["clean_batch_review_requirement"]["required"])
             self.assertFalse(payload["clean_batch_review_requirement"]["clean"])
             self.assertEqual(payload["clean_batch_review_requirement"]["selected_status"], "review")
@@ -876,6 +912,51 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(payload["automation_gate"]["decision"], "not-requested")
             self.assertEqual(payload["automation_summary"]["decision"], "stop")
             self.assertEqual(payload["automation_summary"]["blocking_source"], "handoff_execution")
+            receipt = json.loads(
+                (script_out / "promoted_training_scale_seed_handoff_automation_receipt.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(receipt["automation_decision"], "stop")
+            self.assertEqual(receipt["automation_blocking_source"], "handoff_execution")
+            self.assertEqual(receipt["returncode"], 7)
+
+    def test_automation_receipt_helpers_export_compact_decision_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+
+            report = build_promoted_training_scale_seed_handoff(
+                seed,
+                require_clean_evidence=True,
+                require_clean_batch_review=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            receipt = build_promoted_training_scale_seed_handoff_automation_receipt(report)
+            receipt_text = render_promoted_training_scale_seed_handoff_automation_receipt_text(report)
+            receipt_json_path = root / "receipt.json"
+            receipt_text_path = root / "receipt.txt"
+
+            write_promoted_training_scale_seed_handoff_automation_receipt_json(report, receipt_json_path)
+            write_promoted_training_scale_seed_handoff_automation_receipt_text(report, receipt_text_path)
+
+            self.assertEqual(receipt["receipt_type"], "promoted_training_scale_seed_handoff_automation")
+            self.assertEqual(receipt["automation_decision"], "stop")
+            self.assertEqual(receipt["automation_exit_code"], 1)
+            self.assertEqual(receipt["automation_blocking_source"], "automation_gate")
+            self.assertEqual(receipt["failed_requirements"], ["clean_evidence", "clean_batch_review"])
+            self.assertIn("automation_decision=stop", receipt_text)
+            self.assertEqual(
+                json.loads(receipt_json_path.read_text(encoding="utf-8"))["automation_blocking_source"],
+                "automation_gate",
+            )
+            self.assertIn("automation_blocking_source=automation_gate", receipt_text_path.read_text(encoding="utf-8"))
 
     def test_outputs_and_renderers_escape_html(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -893,6 +974,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
 
             self.assertTrue(Path(outputs["json"]).exists())
             self.assertTrue(Path(outputs["csv"]).exists())
+            self.assertTrue(Path(outputs["automation_receipt_json"]).exists())
+            self.assertTrue(Path(outputs["automation_receipt_text"]).exists())
             self.assertIn("## Command", markdown)
             self.assertIn("&lt;Handoff&gt;", html)
             self.assertNotIn("<Handoff>", html)

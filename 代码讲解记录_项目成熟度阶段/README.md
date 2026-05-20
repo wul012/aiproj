@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+295-v281-promoted-seed-handoff-automation-receipt.md
+ -> v281 code explanation: write compact automation receipt JSON/text artifacts for promoted seed handoff so CI and scripts can consume final decision fields without parsing the full report.
+
 294-v280-promoted-seed-handoff-automation-summary.md
  -> v280 code explanation: add a top-level seed handoff automation summary that combines gate blockers with handoff execution blockers as the final CLI/CI exit contract.
 

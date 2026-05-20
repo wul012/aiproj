@@ -7,8 +7,12 @@ import time
 from typing import Any
 
 from minigpt.promoted_training_scale_seed_handoff_artifacts import (
+    build_promoted_training_scale_seed_handoff_automation_receipt,
     render_promoted_training_scale_seed_handoff_html,
+    render_promoted_training_scale_seed_handoff_automation_receipt_text,
     render_promoted_training_scale_seed_handoff_markdown,
+    write_promoted_training_scale_seed_handoff_automation_receipt_json,
+    write_promoted_training_scale_seed_handoff_automation_receipt_text,
     write_promoted_training_scale_seed_handoff_csv,
     write_promoted_training_scale_seed_handoff_html,
     write_promoted_training_scale_seed_handoff_json,
@@ -411,6 +415,7 @@ __all__ = [
     "SeedHandoffCleanEvidenceRequirementStatus",
     "SeedHandoffCleanEvidenceReadiness",
     "SeedHandoffCleanEvidenceStatus",
+    "build_promoted_training_scale_seed_handoff_automation_receipt",
     "build_promoted_training_scale_seed_handoff",
     "build_seed_handoff_automation_gate",
     "build_seed_handoff_automation_summary",
@@ -418,7 +423,10 @@ __all__ = [
     "build_seed_handoff_clean_evidence_requirement",
     "load_promoted_training_scale_seed",
     "render_promoted_training_scale_seed_handoff_html",
+    "render_promoted_training_scale_seed_handoff_automation_receipt_text",
     "render_promoted_training_scale_seed_handoff_markdown",
+    "write_promoted_training_scale_seed_handoff_automation_receipt_json",
+    "write_promoted_training_scale_seed_handoff_automation_receipt_text",
     "write_promoted_training_scale_seed_handoff_csv",
     "write_promoted_training_scale_seed_handoff_html",
     "write_promoted_training_scale_seed_handoff_json",
