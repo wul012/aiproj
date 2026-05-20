@@ -27,7 +27,7 @@ def build_promoted_training_scale_seed_handoff_automation_receipt(report: dict[s
     automation_gate = _dict(report.get("automation_gate"))
     automation_summary = _dict(report.get("automation_summary"))
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "receipt_type": "promoted_training_scale_seed_handoff_automation",
         "generated_at": report.get("generated_at"),
         "seed_path": report.get("seed_path"),

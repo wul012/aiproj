@@ -41,6 +41,9 @@
 326-v312-promoted-training-scale-seed-handoff-ci-regression-context.md
  -> v312 code explanation: carry promoted-seed CI regression exclusions into final seed handoff outputs, automation receipt, CLI diagnostics, and strict clean-batch gating.
 
+327-v313-promoted-seed-handoff-receipt-ci-contract.md
+ -> v313 code explanation: upgrade promoted seed handoff automation receipts to schema v2 and validate CI-regression fields in receipt and embedded sidecar checks.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

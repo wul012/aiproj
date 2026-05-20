@@ -23,8 +23,17 @@ EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS = (
     "checker_exit_code",
     "blocking_source",
     "failed_requirements",
+    "selected_handoff_batch_maturity_ci_regression_count",
+    "handoff_batch_maturity_ci_regression_count",
+    "comparison_exclusion_reasons",
     "issue_count",
     "issues",
+)
+
+RECEIPT_SCHEMA_V2_REQUIRED_FIELDS = (
+    "selected_handoff_batch_maturity_ci_regression_count",
+    "handoff_batch_maturity_ci_regression_count",
+    "comparison_exclusion_reasons",
 )
 
 
@@ -68,6 +77,9 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
     failed_requirements = string_list(payload.get("failed_requirements"))
     schema_version = _int(payload.get("schema_version"))
     exit_code = _int(payload.get("automation_exit_code"))
+    selected_ci_regressions = _int(payload.get("selected_handoff_batch_maturity_ci_regression_count"))
+    handoff_ci_regressions = _int(payload.get("handoff_batch_maturity_ci_regression_count"))
+    comparison_exclusion_reasons = string_list(payload.get("comparison_exclusion_reasons"))
     issues: list[str] = []
     if receipt_type != RECEIPT_TYPE:
         issues.append(f"receipt_type must be {RECEIPT_TYPE}")
@@ -85,6 +97,8 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         issues.append("continue decision must not carry automation_blocking_source")
     if blocking_source == "automation_gate" and not failed_requirements:
         issues.append("automation_gate blocking source must include failed_requirements")
+    if schema_version >= 2:
+        issues.extend(_v2_receipt_field_issues(payload))
     status = "pass" if not issues else "fail"
     checker_exit_code = 0 if status == "pass" and decision == "continue" else 1
     return {
@@ -96,6 +110,9 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         "checker_exit_code": checker_exit_code,
         "blocking_source": str(blocking_source) if blocking_source is not None else None,
         "failed_requirements": failed_requirements,
+        "selected_handoff_batch_maturity_ci_regression_count": selected_ci_regressions,
+        "handoff_batch_maturity_ci_regression_count": handoff_ci_regressions,
+        "comparison_exclusion_reasons": comparison_exclusion_reasons,
         "issue_count": len(issues),
         "issues": issues,
     }
@@ -109,6 +126,15 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
         ("receipt_checker_exit_code", check.get("checker_exit_code")),
         ("receipt_blocking_source", check.get("blocking_source")),
         ("receipt_failed_requirements", json.dumps(check.get("failed_requirements"), ensure_ascii=False)),
+        (
+            "receipt_selected_handoff_batch_maturity_ci_regression_count",
+            check.get("selected_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "receipt_handoff_batch_maturity_ci_regression_count",
+            check.get("handoff_batch_maturity_ci_regression_count"),
+        ),
+        ("receipt_comparison_exclusion_reasons", json.dumps(check.get("comparison_exclusion_reasons"), ensure_ascii=False)),
         ("receipt_issue_count", check.get("issue_count")),
         ("receipt_issues", json.dumps(check.get("issues"), ensure_ascii=False)),
     ]
@@ -244,13 +270,33 @@ def _int(value: Any) -> int:
 
 
 def _normalized_check_value(key: str, value: Any) -> Any:
-    if key in {"exit_code", "checker_exit_code", "issue_count"}:
+    if key in {
+        "exit_code",
+        "checker_exit_code",
+        "issue_count",
+        "selected_handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_regression_count",
+    }:
         return _int(value)
-    if key in {"failed_requirements", "issues"}:
+    if key in {"failed_requirements", "comparison_exclusion_reasons", "issues"}:
         return string_list(value)
     if key == "blocking_source":
         return str(value) if value is not None else None
     return str(value or "")
+
+
+def _v2_receipt_field_issues(payload: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    for key in RECEIPT_SCHEMA_V2_REQUIRED_FIELDS:
+        if key not in payload:
+            issues.append(f"schema_version >= 2 receipt must include {key}")
+    if _int(payload.get("selected_handoff_batch_maturity_ci_regression_count")) < 0:
+        issues.append("selected_handoff_batch_maturity_ci_regression_count must be >= 0")
+    if _int(payload.get("handoff_batch_maturity_ci_regression_count")) < 0:
+        issues.append("handoff_batch_maturity_ci_regression_count must be >= 0")
+    if "comparison_exclusion_reasons" in payload and not isinstance(payload.get("comparison_exclusion_reasons"), list):
+        issues.append("comparison_exclusion_reasons must be a list")
+    return issues
 
 
 def _check_embedded_receipt_sidecars(

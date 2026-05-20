@@ -122,6 +122,35 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
         self.assertGreaterEqual(check["issue_count"], 1)
         self.assertTrue(any("continue decision" in issue for issue in check["issues"]))
 
+    def test_receipt_checker_requires_v2_ci_regression_contract_fields(self) -> None:
+        missing_fields = {
+            "schema_version": 2,
+            "receipt_type": RECEIPT_TYPE,
+            "automation_decision": "continue",
+            "automation_exit_code": 0,
+            "automation_blocking_source": None,
+            "failed_requirements": [],
+        }
+        valid = {
+            **missing_fields,
+            "selected_handoff_batch_maturity_ci_regression_count": 0,
+            "handoff_batch_maturity_ci_regression_count": 2,
+            "comparison_exclusion_reasons": ["handoff batch CI regression count is 2"],
+        }
+
+        failed = check_promoted_training_scale_seed_handoff_automation_receipt(missing_fields)
+        passed = check_promoted_training_scale_seed_handoff_automation_receipt(valid)
+        text = render_promoted_training_scale_seed_handoff_automation_receipt_check(passed)
+
+        self.assertEqual(failed["status"], "fail")
+        self.assertTrue(
+            any("schema_version >= 2 receipt must include handoff_batch_maturity_ci_regression_count" in issue for issue in failed["issues"])
+        )
+        self.assertEqual(passed["status"], "pass")
+        self.assertEqual(passed["handoff_batch_maturity_ci_regression_count"], 2)
+        self.assertEqual(passed["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+        self.assertIn("receipt_handoff_batch_maturity_ci_regression_count=2", text)
+
     def test_script_checks_generated_receipt(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -147,7 +176,12 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             )
 
             loaded = load_promoted_training_scale_seed_handoff_automation_receipt(outputs["automation_receipt_json"])
+            check = check_promoted_training_scale_seed_handoff_automation_receipt(loaded)
+            self.assertEqual(loaded["schema_version"], 2)
             self.assertEqual(loaded["automation_decision"], "continue")
+            self.assertEqual(check["selected_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(check["handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(check["comparison_exclusion_reasons"], [])
             self.assertIn("receipt_check_status=pass", completed.stdout)
             self.assertIn("receipt_decision=continue", completed.stdout)
             self.assertIn("receipt_path=", completed.stdout)
@@ -228,6 +262,9 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(check_payload["status"], "pass")
             self.assertEqual(check_payload["decision"], "continue")
             self.assertEqual(check_payload["checker_exit_code"], 0)
+            self.assertEqual(check_payload["selected_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(check_payload["handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(check_payload["comparison_exclusion_reasons"], [])
             self.assertEqual(payload["receipt_check"]["status"], "pass")
             self.assertEqual(payload["receipt_check"]["decision"], "continue")
             self.assertEqual(payload["receipt_check_outputs"]["json"], str(check_json))
@@ -237,6 +274,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("Receipt Check", html)
             self.assertIn("receipt_check_status=pass", completed.stdout)
             self.assertIn("receipt_decision=continue", completed.stdout)
+            self.assertIn("receipt_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
             self.assertIn("receipt_check_outputs=", completed.stdout)
             self.assertIn("receipt_check_json=", completed.stdout)
             self.assertIn("receipt_check_text=", completed.stdout)
@@ -390,6 +428,8 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(check_payload["checker_exit_code"], 1)
             self.assertEqual(check_payload["blocking_source"], "automation_gate")
             self.assertEqual(check_payload["failed_requirements"], ["clean_batch_review"])
+            self.assertEqual(check_payload["selected_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(check_payload["handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(payload["receipt_check"]["status"], "pass")
             self.assertEqual(payload["receipt_check"]["decision"], "stop")
             self.assertEqual(payload["receipt_check"]["blocking_source"], "automation_gate")
@@ -808,6 +848,54 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertTrue(any("receipt_check_outputs.json.decision" in issue for issue in check["issues"]))
             self.assertNotEqual(completed.returncode, 0)
             self.assertIn("embedded_receipt_check_sidecar_status=fail", completed.stdout)
+
+    def test_embedded_receipt_check_rejects_tampered_receipt_ci_regression_sidecar(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                handoff_ci_regression_count=2,
+            )
+            script_out = root / "script-out"
+            receipt_check_dir = root / "receipt-check"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--receipt-check-out-dir",
+                    str(receipt_check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            report = load_promoted_training_scale_seed_handoff_report(script_out)
+            receipt_path = Path(report["receipt_check"]["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["handoff_batch_maturity_ci_regression_count"] = 0
+            receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=script_out,
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertEqual(check["sidecar_status"], "fail")
+            self.assertTrue(
+                any(
+                    "receipt_check.receipt_path.handoff_batch_maturity_ci_regression_count" in issue
+                    for issue in check["issues"]
+                )
+            )
 
     def test_embedded_receipt_check_rejects_tampered_check_text_sidecar(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

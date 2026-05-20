@@ -47,6 +47,9 @@ d/311/解释/说明.md
 d/312/图片
 d/312/解释/说明.md
  -> v312 promoted training scale seed handoff CI regression context 的运行截图和解释
+d/313/图片
+d/313/解释/说明.md
+ -> v313 promoted seed handoff receipt CI contract 的运行截图和解释
 ```
 
 写入规则：
