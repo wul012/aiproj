@@ -59,6 +59,9 @@
 332-v318-tiny-scorecard-decision-smoke.md
  -> v318 code explanation: extend the tiny scorecard comparison smoke through benchmark scorecard decision artifacts while keeping blocked/review/promote statuses as decision evidence, not model-quality proof.
 
+333-v319-tiny-decision-diagnostics-smoke.md
+ -> v319 code explanation: lift blocked/review candidate names, first blockers, review items, and recommendations from decision JSON into the tiny smoke summary for CI-readable diagnostics.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

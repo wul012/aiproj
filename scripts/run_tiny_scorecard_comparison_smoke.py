@@ -294,6 +294,11 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
     summary = as_dict(payload.get("summary"))
     selected = as_dict(payload.get("selected_run"))
     evaluations = list_of_dicts(payload.get("candidate_evaluations"))
+    nonbaseline = [item for item in evaluations if not item.get("is_baseline")]
+    blocked = [item for item in nonbaseline if item.get("blockers")]
+    review = [item for item in nonbaseline if item.get("review_items") and not item.get("blockers")]
+    raw_recommendations = payload.get("recommendations")
+    recommendations = [str(item) for item in raw_recommendations if isinstance(item, str)] if isinstance(raw_recommendations, list) else []
     return {
         "available": bool(payload),
         "decision_status": payload.get("decision_status"),
@@ -306,7 +311,14 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "review_candidate_count": summary.get("review_candidate_count"),
         "blocked_candidate_count": summary.get("blocked_candidate_count"),
         "non_comparison_ready_candidate_count": summary.get("non_comparison_ready_candidate_count"),
-        "recommendation_count": len(payload.get("recommendations")) if isinstance(payload.get("recommendations"), list) else 0,
+        "blocked_candidate_names": [str(item.get("name")) for item in blocked if item.get("name") is not None],
+        "review_candidate_names": [str(item.get("name")) for item in review if item.get("name") is not None],
+        "first_blocked_candidate": first_name(blocked),
+        "first_blocker": first_list_item(blocked, "blockers"),
+        "first_review_candidate": first_name(review),
+        "first_review_item": first_list_item(review, "review_items"),
+        "recommendation_count": len(recommendations),
+        "first_recommendation": recommendations[0] if recommendations else None,
     }
 
 
@@ -345,6 +357,11 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_selected_name", decision.get("selected_name")),
         ("decision_candidate_evaluation_count", decision.get("candidate_evaluation_count")),
         ("decision_blocked_candidate_count", decision.get("blocked_candidate_count")),
+        ("decision_blocked_candidates", ",".join(str(item) for item in decision.get("blocked_candidate_names", []))),
+        ("decision_first_blocker", decision.get("first_blocker")),
+        ("decision_review_candidates", ",".join(str(item) for item in decision.get("review_candidate_names", []))),
+        ("decision_first_review_item", decision.get("first_review_item")),
+        ("decision_first_recommendation", decision.get("first_recommendation")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
     ]
     rows.extend((f"command_{item['name']}", item["status"]) for item in list_of_dicts(summary.get("commands")))
@@ -365,6 +382,23 @@ def print_summary(summary: dict[str, Any], outputs: dict[str, str]) -> None:
     print(render_summary(summary), end="")
     print(f"summary_json={outputs['json']}")
     print(f"summary_text={outputs['text']}")
+
+
+def first_name(rows: list[dict[str, Any]]) -> str | None:
+    if not rows:
+        return None
+    value = rows[0].get("name")
+    return None if value is None else str(value)
+
+
+def first_list_item(rows: list[dict[str, Any]], key: str) -> str | None:
+    for row in rows:
+        values = row.get(key)
+        if isinstance(values, list):
+            for item in values:
+                if item is not None:
+                    return str(item)
+    return None
 
 
 if __name__ == "__main__":

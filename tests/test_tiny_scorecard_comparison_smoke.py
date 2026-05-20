@@ -45,6 +45,11 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "selected_name": "tiny-candidate",
                     "candidate_evaluation_count": 2,
                     "blocked_candidate_count": 0,
+                    "blocked_candidate_names": [],
+                    "review_candidate_names": [],
+                    "first_blocker": None,
+                    "first_review_item": None,
+                    "first_recommendation": "Promote the selected scorecard only as benchmark evidence.",
                 },
                 "interpretation": {"model_quality_claim": "not_claimed"},
                 "commands": [
@@ -60,6 +65,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("comparison_case_delta_count=20", text)
         self.assertIn("decision_status=promote", text)
         self.assertIn("decision_candidate_evaluation_count=2", text)
+        self.assertIn("decision_review_candidates=", text)
+        self.assertIn("decision_first_review_item=None", text)
+        self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
         self.assertIn("command_scorecard_decision=pass", text)
@@ -113,6 +121,12 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn(summary["scorecard_decision"]["decision_status"], {"promote", "review", "blocked"})
             self.assertTrue(summary["scorecard_decision"]["recommended_action"])
             self.assertEqual(summary["scorecard_decision"]["candidate_evaluation_count"], 2)
+            self.assertIsInstance(summary["scorecard_decision"]["blocked_candidate_names"], list)
+            if summary["scorecard_decision"]["decision_status"] == "blocked":
+                self.assertTrue(summary["scorecard_decision"]["blocked_candidate_names"])
+                self.assertTrue(summary["scorecard_decision"]["first_blocker"])
+            self.assertIsInstance(summary["scorecard_decision"]["review_candidate_names"], list)
+            self.assertTrue(summary["scorecard_decision"]["first_recommendation"])
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
             self.assertTrue(summary["baseline_smoke"]["pair_same_checkpoint_baseline"])
             self.assertTrue(summary["candidate_smoke"]["pair_same_checkpoint_baseline"])
@@ -124,6 +138,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertTrue((out_dir / "candidate" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "scorecard-comparison" / "benchmark_scorecard_comparison.json").is_file())
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision.json").is_file())
+            self.assertIn("decision_first_recommendation=", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("model_quality_claim=not_claimed", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("command_scorecard_comparison=pass", completed.stdout)
             self.assertIn("command_scorecard_decision=pass", completed.stdout)
