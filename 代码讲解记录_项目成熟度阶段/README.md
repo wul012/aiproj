@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+296-v282-promoted-seed-handoff-receipt-checker.md
+ -> v282 code explanation: add a receipt checker CLI that validates promoted seed handoff automation receipts and exits from the receipt decision for CI usage.
+
 295-v281-promoted-seed-handoff-automation-receipt.md
  -> v281 code explanation: write compact automation receipt JSON/text artifacts for promoted seed handoff so CI and scripts can consume final decision fields without parsing the full report.
 
