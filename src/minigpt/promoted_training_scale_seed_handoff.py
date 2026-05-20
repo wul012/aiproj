@@ -17,8 +17,11 @@ from minigpt.promoted_training_scale_seed_handoff_artifacts import (
 )
 from minigpt.promoted_training_scale_seed_handoff_review import (
     SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
+    SEED_HANDOFF_AUTOMATION_GATE_STATUSES,
     SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
+    SeedHandoffAutomationGate,
+    SeedHandoffAutomationGateStatus,
     SeedHandoffCleanBatchReviewRequirement,
     SeedHandoffCleanBatchReviewRequirementStatus,
     SeedHandoffCleanEvidenceRequirement,
@@ -26,6 +29,7 @@ from minigpt.promoted_training_scale_seed_handoff_review import (
     SeedHandoffCleanEvidenceReadiness,
     SeedHandoffCleanEvidenceStatus,
     build_seed_handoff_batch_review_summary,
+    build_seed_handoff_automation_gate,
     build_seed_handoff_clean_batch_review_summary,
     build_seed_handoff_clean_batch_review_requirement,
     build_seed_handoff_clean_evidence_readiness,
@@ -93,6 +97,10 @@ def build_promoted_training_scale_seed_handoff(
         summary,
         required=require_clean_batch_review,
     )
+    automation_gate = build_seed_handoff_automation_gate(
+        clean_evidence_requirement,
+        clean_batch_review_requirement,
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -116,6 +124,7 @@ def build_promoted_training_scale_seed_handoff(
         "summary": summary,
         "clean_evidence_requirement": clean_evidence_requirement,
         "clean_batch_review_requirement": clean_batch_review_requirement,
+        "automation_gate": automation_gate,
         "recommendations": _recommendations(
             summary,
             plan_report,
@@ -378,8 +387,11 @@ def _tail(text: str, max_chars: int = 700) -> str:
 
 __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
+    "SEED_HANDOFF_AUTOMATION_GATE_STATUSES",
     "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
+    "SeedHandoffAutomationGate",
+    "SeedHandoffAutomationGateStatus",
     "SeedHandoffCleanBatchReviewRequirement",
     "SeedHandoffCleanBatchReviewRequirementStatus",
     "SeedHandoffCleanEvidenceRequirement",
@@ -387,6 +399,7 @@ __all__ = [
     "SeedHandoffCleanEvidenceReadiness",
     "SeedHandoffCleanEvidenceStatus",
     "build_promoted_training_scale_seed_handoff",
+    "build_seed_handoff_automation_gate",
     "build_seed_handoff_clean_batch_review_requirement",
     "build_seed_handoff_clean_evidence_requirement",
     "load_promoted_training_scale_seed",

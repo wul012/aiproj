@@ -9,6 +9,7 @@ from minigpt.report_utils import string_list as _string_list
 SeedHandoffCleanEvidenceStatus = Literal["ready", "pending-plan", "review", "incomplete"]
 SeedHandoffCleanEvidenceRequirementStatus = Literal["not-required", "pass", "fail"]
 SeedHandoffCleanBatchReviewRequirementStatus = Literal["not-required", "pass", "fail"]
+SeedHandoffAutomationGateStatus = Literal["not-required", "pass", "fail"]
 
 
 class SeedHandoffCleanEvidenceReadiness(TypedDict):
@@ -37,6 +38,15 @@ class SeedHandoffCleanBatchReviewRequirement(TypedDict):
     status_domain: list[SeedHandoffCleanBatchReviewRequirementStatus]
 
 
+class SeedHandoffAutomationGate(TypedDict):
+    required: bool
+    status: SeedHandoffAutomationGateStatus
+    failed_requirements: list[str]
+    passed_requirements: list[str]
+    detail: str
+    status_domain: list[SeedHandoffAutomationGateStatus]
+
+
 SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...] = (
     "ready",
     "pending-plan",
@@ -51,6 +61,12 @@ SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES: tuple[SeedHandoffCleanEvidence
 )
 
 SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES: tuple[SeedHandoffCleanBatchReviewRequirementStatus, ...] = (
+    "not-required",
+    "pass",
+    "fail",
+)
+
+SEED_HANDOFF_AUTOMATION_GATE_STATUSES: tuple[SeedHandoffAutomationGateStatus, ...] = (
     "not-required",
     "pass",
     "fail",
@@ -174,6 +190,36 @@ def build_seed_handoff_clean_batch_review_requirement(
         "selected_status": status_text,
         "detail": _clean_batch_review_requirement_detail(selected_required, status_text, clean),
         "status_domain": list(SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES),
+    }
+
+
+def build_seed_handoff_automation_gate(
+    clean_evidence_requirement: SeedHandoffCleanEvidenceRequirement,
+    clean_batch_review_requirement: SeedHandoffCleanBatchReviewRequirement,
+) -> SeedHandoffAutomationGate:
+    requirements = {
+        "clean_evidence": _dict(clean_evidence_requirement),
+        "clean_batch_review": _dict(clean_batch_review_requirement),
+    }
+    required_names = [name for name, requirement in requirements.items() if requirement.get("required")]
+    failed = [name for name in required_names if requirements[name].get("status") == "fail"]
+    passed = [name for name in required_names if requirements[name].get("status") == "pass"]
+    if not required_names:
+        status: SeedHandoffAutomationGateStatus = "not-required"
+        detail = "no seed handoff automation requirements were requested"
+    elif failed:
+        status = "fail"
+        detail = "failed automation requirement(s): " + ", ".join(failed)
+    else:
+        status = "pass"
+        detail = "all requested seed handoff automation requirements passed"
+    return {
+        "required": bool(required_names),
+        "status": status,
+        "failed_requirements": failed,
+        "passed_requirements": passed,
+        "detail": detail,
+        "status_domain": list(SEED_HANDOFF_AUTOMATION_GATE_STATUSES),
     }
 
 
@@ -369,8 +415,11 @@ def _int(value: Any) -> int:
 
 __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
+    "SEED_HANDOFF_AUTOMATION_GATE_STATUSES",
     "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
+    "SeedHandoffAutomationGate",
+    "SeedHandoffAutomationGateStatus",
     "SeedHandoffCleanBatchReviewRequirement",
     "SeedHandoffCleanBatchReviewRequirementStatus",
     "SeedHandoffCleanEvidenceRequirement",
@@ -382,6 +431,7 @@ __all__ = [
     "build_seed_handoff_clean_batch_review_requirement",
     "build_seed_handoff_clean_evidence_readiness",
     "build_seed_handoff_clean_evidence_requirement",
+    "build_seed_handoff_automation_gate",
     "build_seed_handoff_review_recommendations",
     "build_seed_handoff_suite_alignment",
 ]

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+292-v278-promoted-seed-handoff-automation-gate.md
+ -> v278 code explanation: aggregate requested clean-evidence and clean batch-review requirements into a seed handoff automation gate with full CLI/artifact diagnostics.
+
 291-v277-promoted-seed-handoff-clean-batch-review-requirement.md
  -> v277 code explanation: add an opt-in promoted seed handoff clean batch-review requirement contract, CLI gate, persisted artifacts, recommendations, and tests.
 

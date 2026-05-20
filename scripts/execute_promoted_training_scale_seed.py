@@ -51,6 +51,7 @@ def main() -> None:
     summary = report["summary"]
     clean_evidence_requirement = report["clean_evidence_requirement"]
     clean_batch_review_requirement = report["clean_batch_review_requirement"]
+    automation_gate = report["automation_gate"]
     outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
@@ -118,14 +119,18 @@ def main() -> None:
         print(f"clean_evidence_required_ready={clean_evidence_requirement.get('ready')}")
         print(f"clean_evidence_required_detail={clean_evidence_requirement.get('detail')}")
         print(f"clean_evidence_required={clean_evidence_requirement.get('status')}")
-        if clean_evidence_requirement.get("status") == "fail":
-            raise SystemExit(1)
     if args.require_clean_batch_review:
         print(f"clean_batch_review_required_selected_status={clean_batch_review_requirement.get('selected_status')}")
         print(f"clean_batch_review_required_clean={clean_batch_review_requirement.get('clean')}")
         print(f"clean_batch_review_required_detail={clean_batch_review_requirement.get('detail')}")
         print(f"clean_batch_review_required={clean_batch_review_requirement.get('status')}")
-        if clean_batch_review_requirement.get("status") == "fail":
+    if args.require_clean_evidence or args.require_clean_batch_review:
+        print(f"automation_gate_required={automation_gate.get('required')}")
+        print(f"automation_gate_status={automation_gate.get('status')}")
+        print("automation_gate_failed_requirements=" + json.dumps(automation_gate.get("failed_requirements"), ensure_ascii=False))
+        print("automation_gate_passed_requirements=" + json.dumps(automation_gate.get("passed_requirements"), ensure_ascii=False))
+        print(f"automation_gate_detail={automation_gate.get('detail')}")
+        if automation_gate.get("status") == "fail":
             raise SystemExit(1)
     if summary.get("handoff_status") in {"blocked", "failed", "timeout"}:
         raise SystemExit(1)
