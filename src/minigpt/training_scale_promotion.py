@@ -223,7 +223,10 @@ def _issues(
         blockers.append(f"handoff status is {handoff_status or 'missing'}")
     if _dict(handoff.get("execution")).get("returncode") not in (0, None):
         blockers.append("handoff execute command returned non-zero")
-    if clean_batch_review_guard.get("handoff_require_clean_batch_review") and clean_batch_review_guard.get("handoff_clean_batch_review_status") != "clean":
+    if clean_batch_review_guard.get("handoff_require_clean_batch_review") and (
+        clean_batch_review_guard.get("handoff_clean_batch_review_status") != "clean"
+        or int(clean_batch_review_guard.get("handoff_batch_maturity_ci_regression_count") or 0)
+    ):
         blockers.append("handoff requires clean batch-review evidence but status is not clean")
     if scale_run.get("status") != "completed":
         blockers.append(f"training scale run status is {scale_run.get('status') or 'missing'}")
@@ -275,9 +278,12 @@ def _summary(
         "handoff_selected_batch_comparison_review_action_count": suite_guard.get("handoff_selected_batch_comparison_review_action_count"),
         "handoff_selected_batch_comparison_blocker_action_count": suite_guard.get("handoff_selected_batch_comparison_blocker_action_count"),
         "handoff_selected_batch_maturity_coverage_regression_count": suite_guard.get("handoff_selected_batch_maturity_coverage_regression_count"),
+        "handoff_selected_batch_maturity_ci_regression_count": suite_guard.get("handoff_selected_batch_maturity_ci_regression_count"),
         "handoff_batch_comparison_review_action_count": suite_guard.get("handoff_batch_comparison_review_action_count"),
         "handoff_batch_comparison_blocker_action_count": suite_guard.get("handoff_batch_comparison_blocker_action_count"),
         "handoff_batch_maturity_coverage_regression_count": suite_guard.get("handoff_batch_maturity_coverage_regression_count"),
+        "handoff_batch_maturity_ci_regression_count": suite_guard.get("handoff_batch_maturity_ci_regression_count"),
+        "handoff_batch_maturity_ci_regression_names": suite_guard.get("handoff_batch_maturity_ci_regression_names"),
         "handoff_batch_comparison_blocker_reasons": suite_guard.get("handoff_batch_comparison_blocker_reasons"),
         "scale_run_status": scale_run.get("status"),
         "batch_status": _nested(batch, "execution", "status") or _nested(scale_run, "batch_summary", "status"),
@@ -322,10 +328,15 @@ def _batch_digest(batch: dict[str, Any]) -> dict[str, Any]:
 
 def _recommendations(summary: dict[str, Any], blockers: list[str], review_items: list[str]) -> list[str]:
     status = str(summary.get("promotion_status") or "")
-    if summary.get("handoff_require_clean_batch_review") and summary.get("handoff_clean_batch_review_status") != "clean":
+    if summary.get("handoff_require_clean_batch_review") and (
+        summary.get("handoff_clean_batch_review_status") != "clean"
+        or int(summary.get("handoff_batch_maturity_ci_regression_count") or 0)
+    ):
         return ["Resolve handoff clean batch-review requirement before accepting this run as promotion-ready evidence."]
     if summary.get("handoff_selected_batch_review_status") == "blocker":
         return ["Resolve selected batch comparison blocker actions before treating this handoff as promotion-ready evidence."]
+    if int(summary.get("handoff_batch_maturity_ci_regression_count") or 0):
+        return ["Resolve CI-regressed handoff batch evidence before treating this handoff as promotion-ready evidence."]
     if summary.get("handoff_selected_batch_review_status") == "review":
         return ["Review selected batch comparison actions before treating this handoff as promotion-ready evidence."]
     if status == "promoted":
@@ -358,9 +369,12 @@ def _suite_guard(handoff: dict[str, Any]) -> dict[str, Any]:
         "handoff_selected_batch_comparison_review_action_count": _handoff_value(handoff, "selected_batch_comparison_review_action_count"),
         "handoff_selected_batch_comparison_blocker_action_count": _handoff_value(handoff, "selected_batch_comparison_blocker_action_count"),
         "handoff_selected_batch_maturity_coverage_regression_count": _handoff_value(handoff, "selected_batch_maturity_coverage_regression_count"),
+        "handoff_selected_batch_maturity_ci_regression_count": _handoff_value(handoff, "selected_batch_maturity_ci_regression_count"),
         "handoff_batch_comparison_review_action_count": _handoff_value(handoff, "batch_comparison_review_action_count"),
         "handoff_batch_comparison_blocker_action_count": _handoff_value(handoff, "batch_comparison_blocker_action_count"),
         "handoff_batch_maturity_coverage_regression_count": _handoff_value(handoff, "batch_maturity_coverage_regression_count"),
+        "handoff_batch_maturity_ci_regression_count": _handoff_value(handoff, "batch_maturity_ci_regression_count"),
+        "handoff_batch_maturity_ci_regression_names": _string_list(_handoff_value(handoff, "batch_maturity_ci_regression_names")),
         "handoff_batch_comparison_blocker_reasons": _string_list(_handoff_value(handoff, "batch_comparison_blocker_reasons")),
         "workflow_suite_path": guard.get("workflow_suite_path") or handoff_summary.get("workflow_suite_path"),
         "workflow_suite_name": guard.get("workflow_suite_name") or handoff_summary.get("workflow_suite_name"),
@@ -394,6 +408,16 @@ def _clean_batch_review_guard(handoff: dict[str, Any]) -> dict[str, Any]:
         "handoff_batch_maturity_coverage_regression_count": first_present(
             guard.get("batch_maturity_coverage_regression_count"),
             handoff_summary.get("batch_maturity_coverage_regression_count"),
+        ),
+        "handoff_batch_maturity_ci_regression_count": first_present(
+            guard.get("batch_maturity_ci_regression_count"),
+            handoff_summary.get("batch_maturity_ci_regression_count"),
+        ),
+        "handoff_batch_maturity_ci_regression_names": _string_list(
+            first_present(
+                guard.get("batch_maturity_ci_regression_names"),
+                handoff_summary.get("batch_maturity_ci_regression_names"),
+            )
         ),
         "handoff_batch_comparison_blocker_reasons": _string_list(
             first_present(

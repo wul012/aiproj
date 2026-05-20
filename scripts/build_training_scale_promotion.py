@@ -39,6 +39,8 @@ def main() -> None:
     print(f"promotion_status={summary['promotion_status']}")
     print(f"handoff_status={summary.get('handoff_status')}")
     print(f"handoff_clean_batch_review_status={summary.get('handoff_clean_batch_review_status')}")
+    print(f"handoff_batch_maturity_ci_regression_count={summary.get('handoff_batch_maturity_ci_regression_count')}")
+    print(f"handoff_selected_batch_maturity_ci_regression_count={summary.get('handoff_selected_batch_maturity_ci_regression_count')}")
     print(f"scale_run_status={summary.get('scale_run_status')}")
     print(f"batch_status={summary.get('batch_status')}")
     print(f"ready_variants={summary.get('ready_variant_count')}/{summary.get('variant_count')}")

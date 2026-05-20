@@ -23,6 +23,9 @@
 320-v306-training-scale-workflow-handoff-ci-regression-carryover.md
  -> v306 code explanation: carry decision-level batch CI regression evidence into the consolidated workflow and execution handoff guard.
 
+321-v307-training-scale-promotion-ci-regression-carryover.md
+ -> v307 code explanation: carry handoff batch CI regression evidence into promotion reports and strict clean-batch promotion acceptance.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
