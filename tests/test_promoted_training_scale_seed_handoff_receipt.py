@@ -297,6 +297,60 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("embedded_receipt_check_output_json=", completed.stdout)
             self.assertIn("embedded_receipt_check_sidecar_status=pass", embedded_text.read_text(encoding="utf-8"))
 
+    def test_execute_script_can_write_handoff_assurance_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            check_dir = root / "receipt-check"
+            embedded_check_dir = root / "embedded-receipt-check"
+            assurance_dir = root / "assurance"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--execute",
+                    "--require-clean-evidence",
+                    "--receipt-check-out-dir",
+                    str(check_dir),
+                    "--embedded-receipt-check-out-dir",
+                    str(embedded_check_dir),
+                    "--assurance-out-dir",
+                    str(assurance_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            assurance_json = assurance_dir / "promoted_training_scale_seed_handoff_assurance.json"
+            assurance_text = assurance_dir / "promoted_training_scale_seed_handoff_assurance.txt"
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            csv_text = (script_out / "promoted_training_scale_seed_handoff.csv").read_text(encoding="utf-8")
+            markdown = (script_out / "promoted_training_scale_seed_handoff.md").read_text(encoding="utf-8")
+            html = (script_out / "promoted_training_scale_seed_handoff.html").read_text(encoding="utf-8")
+            assurance_payload = json.loads(assurance_json.read_text(encoding="utf-8"))
+            self.assertEqual(assurance_payload["status"], "pass")
+            self.assertEqual(assurance_payload["embedded_receipt_check_status"], "pass")
+            self.assertEqual(assurance_payload["embedded_receipt_check_sidecar_status"], "pass")
+            self.assertTrue(assurance_payload["embedded_receipt_check_output_json_exists"])
+            self.assertTrue(assurance_payload["embedded_receipt_check_output_text_exists"])
+            self.assertEqual(payload["handoff_assurance"]["status"], "pass")
+            self.assertEqual(payload["handoff_assurance"]["embedded_receipt_check_sidecar_status"], "pass")
+            self.assertEqual(payload["handoff_assurance_outputs"]["json"], str(assurance_json))
+            self.assertIn("handoff_assurance_status", csv_text)
+            self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status", csv_text)
+            self.assertIn("Handoff assurance status", markdown)
+            self.assertIn("Handoff Assurance", html)
+            self.assertIn("handoff_assurance_status=pass", completed.stdout)
+            self.assertIn("handoff_assurance_output_json=", completed.stdout)
+            self.assertIn("handoff_assurance_status=pass", assurance_text.read_text(encoding="utf-8"))
+
     def test_execute_script_writes_receipt_check_before_stop_exit(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -396,6 +450,56 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("automation_summary_decision=stop", completed.stdout)
             self.assertIn("embedded_receipt_check_decision=stop", embedded_text.read_text(encoding="utf-8"))
 
+    def test_execute_script_writes_handoff_assurance_before_stop_exit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(
+                root,
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_handoff_clean_batch_review=True,
+                clean_batch_review_status="review",
+            )
+            script_out = root / "script-out"
+            check_dir = root / "receipt-check"
+            embedded_check_dir = root / "embedded-receipt-check"
+            assurance_dir = root / "assurance"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-clean-batch-review",
+                    "--receipt-check-out-dir",
+                    str(check_dir),
+                    "--embedded-receipt-check-out-dir",
+                    str(embedded_check_dir),
+                    "--assurance-out-dir",
+                    str(assurance_dir),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            assurance_json = assurance_dir / "promoted_training_scale_seed_handoff_assurance.json"
+            assurance_text = assurance_dir / "promoted_training_scale_seed_handoff_assurance.txt"
+            payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            assurance_payload = json.loads(assurance_json.read_text(encoding="utf-8"))
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertEqual(assurance_payload["status"], "pass")
+            self.assertEqual(assurance_payload["decision"], "stop")
+            self.assertEqual(payload["handoff_assurance"]["status"], "pass")
+            self.assertEqual(payload["handoff_assurance"]["decision"], "stop")
+            self.assertEqual(payload["handoff_assurance_outputs"]["text"], str(assurance_text))
+            self.assertIn("handoff_assurance_status=pass", completed.stdout)
+            self.assertIn("handoff_assurance_decision=stop", completed.stdout)
+            self.assertIn("automation_summary_decision=stop", completed.stdout)
+            self.assertIn("handoff_assurance_decision=stop", assurance_text.read_text(encoding="utf-8"))
+
     def test_execute_script_requires_receipt_check_for_embedded_receipt_check(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -420,6 +524,34 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
 
             self.assertNotEqual(completed.returncode, 0)
             self.assertIn("--embedded-receipt-check-out-dir requires --receipt-check-out-dir", completed.stderr)
+
+    def test_execute_script_requires_embedded_receipt_check_for_assurance(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            script_out = root / "script-out"
+            check_dir = root / "receipt-check"
+            assurance_dir = root / "assurance"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+                    str(seed),
+                    "--out-dir",
+                    str(script_out),
+                    "--receipt-check-out-dir",
+                    str(check_dir),
+                    "--assurance-out-dir",
+                    str(assurance_dir),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("--assurance-out-dir requires --embedded-receipt-check-out-dir", completed.stderr)
 
     def test_script_exits_nonzero_for_stop_unless_allowed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

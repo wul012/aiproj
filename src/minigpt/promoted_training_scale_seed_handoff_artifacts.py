@@ -69,6 +69,14 @@ def _embedded_receipt_check_outputs(report: dict[str, Any]) -> dict[str, Any]:
     return _dict(report.get("embedded_receipt_check_outputs"))
 
 
+def _handoff_assurance(report: dict[str, Any]) -> dict[str, Any]:
+    return _dict(report.get("handoff_assurance"))
+
+
+def _handoff_assurance_outputs(report: dict[str, Any]) -> dict[str, Any]:
+    return _dict(report.get("handoff_assurance_outputs"))
+
+
 def _receipt_check_fields(report: dict[str, Any]) -> dict[str, Any]:
     receipt_check = _receipt_check(report)
     receipt_check_outputs = _receipt_check_outputs(report)
@@ -106,6 +114,27 @@ def _embedded_receipt_check_fields(report: dict[str, Any]) -> dict[str, Any]:
         "embedded_receipt_check_text_exists": embedded_check.get("receipt_check_text_exists"),
         "embedded_receipt_check_output_json": embedded_outputs.get("json"),
         "embedded_receipt_check_output_text": embedded_outputs.get("text"),
+    }
+
+
+def _handoff_assurance_fields(report: dict[str, Any]) -> dict[str, Any]:
+    assurance = _handoff_assurance(report)
+    outputs = _handoff_assurance_outputs(report)
+    return {
+        "handoff_assurance_status": assurance.get("status"),
+        "handoff_assurance_decision": assurance.get("decision"),
+        "handoff_assurance_exit_code": assurance.get("exit_code"),
+        "handoff_assurance_checker_exit_code": assurance.get("checker_exit_code"),
+        "handoff_assurance_embedded_receipt_check_status": assurance.get("embedded_receipt_check_status"),
+        "handoff_assurance_embedded_receipt_check_sidecar_status": assurance.get(
+            "embedded_receipt_check_sidecar_status"
+        ),
+        "handoff_assurance_output_json_exists": assurance.get("embedded_receipt_check_output_json_exists"),
+        "handoff_assurance_output_text_exists": assurance.get("embedded_receipt_check_output_text_exists"),
+        "handoff_assurance_issue_count": assurance.get("issue_count"),
+        "handoff_assurance_issues": "; ".join(_string_list(assurance.get("issues"))),
+        "handoff_assurance_json": outputs.get("json"),
+        "handoff_assurance_text": outputs.get("text"),
     }
 
 
@@ -160,6 +189,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
     automation_summary = _dict(report.get("automation_summary"))
     receipt_check_fields = _receipt_check_fields(report)
     embedded_receipt_check_fields = _embedded_receipt_check_fields(report)
+    handoff_assurance_fields = _handoff_assurance_fields(report)
     fieldnames = [
         "handoff_status",
         "seed_status",
@@ -252,6 +282,18 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "embedded_receipt_check_text_exists",
         "embedded_receipt_check_output_json",
         "embedded_receipt_check_output_text",
+        "handoff_assurance_status",
+        "handoff_assurance_decision",
+        "handoff_assurance_exit_code",
+        "handoff_assurance_checker_exit_code",
+        "handoff_assurance_embedded_receipt_check_status",
+        "handoff_assurance_embedded_receipt_check_sidecar_status",
+        "handoff_assurance_output_json_exists",
+        "handoff_assurance_output_text_exists",
+        "handoff_assurance_issue_count",
+        "handoff_assurance_issues",
+        "handoff_assurance_json",
+        "handoff_assurance_text",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -356,6 +398,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "automation_summary_decision_domain": automation_summary.get("decision_domain"),
             **receipt_check_fields,
             **embedded_receipt_check_fields,
+            **handoff_assurance_fields,
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -379,6 +422,8 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
     receipt_check_outputs = _receipt_check_outputs(report)
     embedded_receipt_check = _embedded_receipt_check(report)
     embedded_receipt_check_outputs = _embedded_receipt_check_outputs(report)
+    handoff_assurance = _handoff_assurance(report)
+    handoff_assurance_outputs = _handoff_assurance_outputs(report)
     lines = [
         f"# {report.get('title', 'MiniGPT promoted training scale seed handoff')}",
         "",
@@ -462,6 +507,18 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Embedded receipt check text exists: `{embedded_receipt_check.get('receipt_check_text_exists')}`",
         f"- Embedded receipt check output json: `{embedded_receipt_check_outputs.get('json')}`",
         f"- Embedded receipt check output text: `{embedded_receipt_check_outputs.get('text')}`",
+        f"- Handoff assurance status: `{handoff_assurance.get('status')}`",
+        f"- Handoff assurance decision: `{handoff_assurance.get('decision')}`",
+        f"- Handoff assurance exit code: `{handoff_assurance.get('exit_code')}`",
+        f"- Handoff assurance checker exit code: `{handoff_assurance.get('checker_exit_code')}`",
+        f"- Handoff assurance embedded receipt check status: `{handoff_assurance.get('embedded_receipt_check_status')}`",
+        f"- Handoff assurance embedded sidecar status: `{handoff_assurance.get('embedded_receipt_check_sidecar_status')}`",
+        f"- Handoff assurance output json exists: `{handoff_assurance.get('embedded_receipt_check_output_json_exists')}`",
+        f"- Handoff assurance output text exists: `{handoff_assurance.get('embedded_receipt_check_output_text_exists')}`",
+        f"- Handoff assurance issue count: `{handoff_assurance.get('issue_count')}`",
+        f"- Handoff assurance issues: `{handoff_assurance.get('issues')}`",
+        f"- Handoff assurance json: `{handoff_assurance_outputs.get('json')}`",
+        f"- Handoff assurance text: `{handoff_assurance_outputs.get('text')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -512,6 +569,8 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
     receipt_check_outputs = _receipt_check_outputs(report)
     embedded_receipt_check = _embedded_receipt_check(report)
     embedded_receipt_check_outputs = _embedded_receipt_check_outputs(report)
+    handoff_assurance = _handoff_assurance(report)
+    handoff_assurance_outputs = _handoff_assurance_outputs(report)
     clean_evidence_domain = ", ".join(
         str(item) for item in _string_list(summary.get("seed_handoff_clean_evidence_status_domain"))
     )
@@ -592,6 +651,17 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Embedded receipt text exists", embedded_receipt_check.get("receipt_check_text_exists")),
         ("Embedded receipt output json", embedded_receipt_check_outputs.get("json")),
         ("Embedded receipt output text", embedded_receipt_check_outputs.get("text")),
+        ("Handoff assurance", handoff_assurance.get("status")),
+        ("Assurance decision", handoff_assurance.get("decision")),
+        ("Assurance exit", handoff_assurance.get("exit_code")),
+        ("Assurance checker exit", handoff_assurance.get("checker_exit_code")),
+        ("Assurance embedded check", handoff_assurance.get("embedded_receipt_check_status")),
+        ("Assurance sidecars", handoff_assurance.get("embedded_receipt_check_sidecar_status")),
+        ("Assurance output json exists", handoff_assurance.get("embedded_receipt_check_output_json_exists")),
+        ("Assurance output text exists", handoff_assurance.get("embedded_receipt_check_output_text_exists")),
+        ("Assurance issue count", handoff_assurance.get("issue_count")),
+        ("Assurance json", handoff_assurance_outputs.get("json")),
+        ("Assurance text", handoff_assurance_outputs.get("text")),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(
@@ -614,6 +684,7 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
             _plan_section(report),
             _receipt_check_section(report),
             _embedded_receipt_check_section(report),
+            _handoff_assurance_section(report),
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT promoted training scale seed handoff.</footer>",
             "</body>",
@@ -722,6 +793,29 @@ def _embedded_receipt_check_section(report: dict[str, Any]) -> str:
     ]
     body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
     return '<section><h2>Embedded Receipt Check</h2><div class="table-wrap"><table>' + body + "</table></div></section>"
+
+
+def _handoff_assurance_section(report: dict[str, Any]) -> str:
+    assurance = _handoff_assurance(report)
+    if not assurance:
+        return ""
+    outputs = _handoff_assurance_outputs(report)
+    rows = [
+        ("Status", assurance.get("status")),
+        ("Decision", assurance.get("decision")),
+        ("Exit code", assurance.get("exit_code")),
+        ("Checker exit code", assurance.get("checker_exit_code")),
+        ("Embedded receipt check", assurance.get("embedded_receipt_check_status")),
+        ("Embedded receipt sidecars", assurance.get("embedded_receipt_check_sidecar_status")),
+        ("Output JSON exists", assurance.get("embedded_receipt_check_output_json_exists")),
+        ("Output text exists", assurance.get("embedded_receipt_check_output_text_exists")),
+        ("Issue count", assurance.get("issue_count")),
+        ("Issues", ", ".join(_string_list(assurance.get("issues")))),
+        ("Assurance JSON", outputs.get("json")),
+        ("Assurance text", outputs.get("text")),
+    ]
+    body = "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
+    return '<section><h2>Handoff Assurance</h2><div class="table-wrap"><table>' + body + "</table></div></section>"
 
 
 def _command_section(report: dict[str, Any]) -> str:

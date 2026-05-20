@@ -13,6 +13,11 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     build_promoted_training_scale_seed_handoff,
     write_promoted_training_scale_seed_handoff_outputs,
 )
+from minigpt.promoted_training_scale_seed_handoff_assurance import (  # noqa: E402
+    check_promoted_training_scale_seed_handoff_assurance,
+    render_promoted_training_scale_seed_handoff_assurance_check,
+    write_promoted_training_scale_seed_handoff_assurance_check_outputs,
+)
 from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
     check_promoted_training_scale_seed_handoff_embedded_receipt_check,
     check_promoted_training_scale_seed_handoff_automation_receipt,
@@ -56,6 +61,15 @@ def parse_args() -> argparse.Namespace:
             "Requires --receipt-check-out-dir."
         ),
     )
+    parser.add_argument(
+        "--assurance-out-dir",
+        type=Path,
+        default=None,
+        help=(
+            "Optional directory for validating the final handoff report, embedded receipt-check fields, "
+            "and embedded receipt-check sidecars. Requires --embedded-receipt-check-out-dir."
+        ),
+    )
     parser.add_argument("--timeout-seconds", type=int, default=900)
     parser.add_argument("--title", type=str, default="MiniGPT promoted training scale seed handoff")
     return parser.parse_args()
@@ -94,6 +108,17 @@ def main() -> None:
         embedded_outputs = embedded_receipt_check.get("embedded_receipt_check_outputs")
         if isinstance(embedded_outputs, dict):
             report["embedded_receipt_check_outputs"] = embedded_outputs
+        outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
+    handoff_assurance = _write_handoff_assurance_outputs(
+        out_dir,
+        args.assurance_out_dir,
+        embedded_receipt_check_out_dir=args.embedded_receipt_check_out_dir,
+    )
+    if handoff_assurance is not None:
+        report["handoff_assurance"] = handoff_assurance
+        assurance_outputs = handoff_assurance.get("handoff_assurance_outputs")
+        if isinstance(assurance_outputs, dict):
+            report["handoff_assurance_outputs"] = assurance_outputs
         outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
@@ -160,6 +185,7 @@ def main() -> None:
     print(f"automation_receipt_text={outputs.get('automation_receipt_text')}")
     _print_receipt_check(report)
     _print_embedded_receipt_check(embedded_receipt_check)
+    _print_handoff_assurance(handoff_assurance)
     print(f"automation_summary_decision={automation_summary.get('decision')}")
     print(f"automation_summary_exit_code={automation_summary.get('exit_code')}")
     print(f"automation_summary_blocking_source={automation_summary.get('blocking_source')}")
@@ -196,6 +222,8 @@ def main() -> None:
     if receipt_check is not None and receipt_check.get("status") != "pass":
         raise SystemExit(1)
     if embedded_receipt_check is not None and embedded_receipt_check.get("status") != "pass":
+        raise SystemExit(1)
+    if handoff_assurance is not None and handoff_assurance.get("status") != "pass":
         raise SystemExit(1)
 
 
@@ -249,6 +277,22 @@ def _write_embedded_receipt_check_outputs(
     return check
 
 
+def _write_handoff_assurance_outputs(
+    handoff_out_dir: Path,
+    out_dir: Path | None,
+    *,
+    embedded_receipt_check_out_dir: Path | None,
+) -> dict[str, object] | None:
+    if out_dir is None:
+        return None
+    if embedded_receipt_check_out_dir is None:
+        raise ValueError("--assurance-out-dir requires --embedded-receipt-check-out-dir")
+    check = check_promoted_training_scale_seed_handoff_assurance(handoff_out_dir)
+    check_outputs = write_promoted_training_scale_seed_handoff_assurance_check_outputs(check, out_dir)
+    check["handoff_assurance_outputs"] = check_outputs
+    return check
+
+
 def _print_receipt_check(report: dict[str, object]) -> None:
     check = report.get("receipt_check")
     if not isinstance(check, dict):
@@ -272,6 +316,17 @@ def _print_embedded_receipt_check(check: dict[str, object] | None) -> None:
         print("embedded_receipt_check_outputs=" + json.dumps(check_outputs, ensure_ascii=False))
         print(f"embedded_receipt_check_output_json={check_outputs.get('json')}")
         print(f"embedded_receipt_check_output_text={check_outputs.get('text')}")
+
+
+def _print_handoff_assurance(check: dict[str, object] | None) -> None:
+    if not isinstance(check, dict):
+        return
+    print(render_promoted_training_scale_seed_handoff_assurance_check(check), end="")
+    check_outputs = check.get("handoff_assurance_outputs")
+    if isinstance(check_outputs, dict):
+        print("handoff_assurance_outputs=" + json.dumps(check_outputs, ensure_ascii=False))
+        print(f"handoff_assurance_output_json={check_outputs.get('json')}")
+        print(f"handoff_assurance_output_text={check_outputs.get('text')}")
 
 
 if __name__ == "__main__":

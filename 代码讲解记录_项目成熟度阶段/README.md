@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+305-v291-promoted-seed-handoff-inline-assurance.md
+ -> v291 code explanation: wire promoted seed handoff assurance back into the execution script and main report artifacts.
+
 304-v290-promoted-seed-handoff-assurance-checker.md
  -> v290 code explanation: add a directory-level promoted seed handoff assurance checker for the main report and embedded receipt-check sidecars.
 
@@ -699,6 +702,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `302-v288-promoted-seed-handoff-inline-embedded-receipt-check.md`：第二百八十八版代码讲解，把 embedded receipt-check sidecar integrity 校验接回 seed handoff 执行脚本。
 - `303-v289-promoted-seed-handoff-embedded-receipt-check-report.md`：第二百八十九版代码讲解，把 inline embedded receipt-check 结果写回主 handoff JSON/CSV/Markdown/HTML 报告。
 - `304-v290-promoted-seed-handoff-assurance-checker.md`：第二百九十版代码讲解，新增目录级 promoted seed handoff assurance checker，整体校验主报告和 embedded receipt-check sidecar。
+- `305-v291-promoted-seed-handoff-inline-assurance.md`：第二百九十一版代码讲解，把 promoted seed handoff assurance 接回执行脚本并写回主报告。
 
 ## 一句话总览
 
