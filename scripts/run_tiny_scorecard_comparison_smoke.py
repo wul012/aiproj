@@ -356,6 +356,7 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
     nonbaseline = [item for item in evaluations if not item.get("is_baseline")]
     blocked = [item for item in nonbaseline if item.get("blockers")]
     review = [item for item in nonbaseline if item.get("review_items") and not item.get("blockers")]
+    threshold_block = first_threshold_block(blocked, payload.get("min_rubric_score"))
     raw_recommendations = payload.get("recommendations")
     recommendations = [str(item) for item in raw_recommendations if isinstance(item, str)] if isinstance(raw_recommendations, list) else []
     return {
@@ -374,6 +375,11 @@ def decision_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "review_candidate_names": [str(item.get("name")) for item in review if item.get("name") is not None],
         "first_blocked_candidate": first_name(blocked),
         "first_blocker": first_list_item(blocked, "blockers"),
+        "first_threshold_blocked_candidate": threshold_block.get("name"),
+        "first_threshold_blocker": threshold_block.get("blocker"),
+        "first_threshold_rubric_score": threshold_block.get("rubric_avg_score"),
+        "first_threshold_min_rubric_score": threshold_block.get("min_rubric_score"),
+        "first_threshold_margin": threshold_block.get("margin"),
         "first_review_candidate": first_name(review),
         "first_review_item": first_list_item(review, "review_items"),
         "recommendation_count": len(recommendations),
@@ -426,6 +432,10 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_blocked_candidate_count", decision.get("blocked_candidate_count")),
         ("decision_blocked_candidates", ",".join(str(item) for item in decision.get("blocked_candidate_names", []))),
         ("decision_first_blocker", decision.get("first_blocker")),
+        ("decision_first_threshold_candidate", decision.get("first_threshold_blocked_candidate")),
+        ("decision_first_threshold_score", decision.get("first_threshold_rubric_score")),
+        ("decision_first_threshold_min", decision.get("first_threshold_min_rubric_score")),
+        ("decision_first_threshold_margin", decision.get("first_threshold_margin")),
         ("decision_review_candidates", ",".join(str(item) for item in decision.get("review_candidate_names", []))),
         ("decision_first_review_item", decision.get("first_review_item")),
         ("decision_first_recommendation", decision.get("first_recommendation")),
@@ -466,6 +476,41 @@ def first_list_item(rows: list[dict[str, Any]], key: str) -> str | None:
                 if item is not None:
                     return str(item)
     return None
+
+
+def first_threshold_block(rows: list[dict[str, Any]], min_rubric_score: Any) -> dict[str, Any]:
+    threshold = float_or_none(min_rubric_score)
+    for row in rows:
+        blocker = first_matching_list_item(row, "blockers", "rubric_avg_score below")
+        if blocker is None:
+            continue
+        rubric_score = float_or_none(row.get("rubric_avg_score"))
+        margin = None if rubric_score is None or threshold is None else round(rubric_score - threshold, 4)
+        return {
+            "name": None if row.get("name") is None else str(row.get("name")),
+            "blocker": blocker,
+            "rubric_avg_score": rubric_score,
+            "min_rubric_score": threshold,
+            "margin": margin,
+        }
+    return {}
+
+
+def first_matching_list_item(row: dict[str, Any], key: str, prefix: str) -> str | None:
+    values = row.get(key)
+    if not isinstance(values, list):
+        return None
+    for item in values:
+        text = str(item)
+        if text.startswith(prefix):
+            return text
+    return None
+
+
+def float_or_none(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return float(value)
 
 
 if __name__ == "__main__":

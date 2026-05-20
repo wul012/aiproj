@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from scripts.run_tiny_scorecard_comparison_smoke import build_run_config, render_summary  # noqa: E402
+from scripts.run_tiny_scorecard_comparison_smoke import build_run_config, decision_summary, render_summary  # noqa: E402
 
 
 class TinyScorecardComparisonSmokeTests(unittest.TestCase):
@@ -55,6 +55,10 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "candidate_evaluation_count": 2,
                     "blocked_candidate_count": 0,
                     "blocked_candidate_names": [],
+                    "first_threshold_blocked_candidate": None,
+                    "first_threshold_rubric_score": None,
+                    "first_threshold_min_rubric_score": None,
+                    "first_threshold_margin": None,
                     "review_candidate_names": [],
                     "first_blocker": None,
                     "first_review_item": None,
@@ -80,6 +84,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("decision_candidate_evaluation_count=2", text)
         self.assertIn("decision_review_candidates=", text)
         self.assertIn("decision_first_review_item=None", text)
+        self.assertIn("decision_first_threshold_candidate=None", text)
+        self.assertIn("decision_first_threshold_margin=None", text)
         self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
         self.assertIn("command_scorecard_comparison=pass", text)
@@ -149,6 +155,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             if summary["scorecard_decision"]["decision_status"] == "blocked":
                 self.assertTrue(summary["scorecard_decision"]["blocked_candidate_names"])
                 self.assertTrue(summary["scorecard_decision"]["first_blocker"])
+                self.assertEqual(summary["scorecard_decision"]["first_threshold_blocked_candidate"], "tiny-candidate")
+                self.assertEqual(summary["scorecard_decision"]["first_threshold_min_rubric_score"], 60.0)
+                self.assertLess(summary["scorecard_decision"]["first_threshold_margin"], 0)
             self.assertIsInstance(summary["scorecard_decision"]["review_candidate_names"], list)
             self.assertTrue(summary["scorecard_decision"]["first_recommendation"])
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
@@ -166,6 +175,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_decision_min_rubric_score=60.0", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_first_threshold_candidate=tiny-candidate", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("decision_first_threshold_min=60.0", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
@@ -218,6 +229,45 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "--decision-min-rubric-score"):
             build_run_config(Args())
+
+    def test_decision_summary_exposes_first_threshold_block(self) -> None:
+        summary = decision_summary(
+            {
+                "decision_status": "blocked",
+                "recommended_action": "keep_baseline_or_fix_candidate",
+                "min_rubric_score": 70.0,
+                "selected_run": None,
+                "summary": {
+                    "candidate_count": 0,
+                    "clean_candidate_count": 0,
+                    "review_candidate_count": 0,
+                    "blocked_candidate_count": 1,
+                },
+                "candidate_evaluations": [
+                    {
+                        "name": "tiny-baseline",
+                        "is_baseline": True,
+                        "rubric_avg_score": 82.0,
+                        "blockers": ["baseline run is not a promotion candidate"],
+                        "review_items": [],
+                    },
+                    {
+                        "name": "tiny-candidate",
+                        "is_baseline": False,
+                        "rubric_avg_score": 65.25,
+                        "blockers": ["rubric_avg_score below 70.0"],
+                        "review_items": [],
+                    },
+                ],
+                "recommendations": ["Keep the baseline."],
+            }
+        )
+
+        self.assertEqual(summary["first_threshold_blocked_candidate"], "tiny-candidate")
+        self.assertEqual(summary["first_threshold_blocker"], "rubric_avg_score below 70.0")
+        self.assertEqual(summary["first_threshold_rubric_score"], 65.25)
+        self.assertEqual(summary["first_threshold_min_rubric_score"], 70.0)
+        self.assertEqual(summary["first_threshold_margin"], -4.75)
 
 
 if __name__ == "__main__":

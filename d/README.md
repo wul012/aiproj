@@ -77,6 +77,9 @@ d/321/解释/说明.md
 d/322/图片
 d/322/解释/说明.md
  -> v322 tiny scorecard decision threshold smoke 的运行截图和解释
+d/323/图片
+d/323/解释/说明.md
+ -> v323 tiny threshold diagnostics smoke 的运行截图和解释
 ```
 
 写入规则：
