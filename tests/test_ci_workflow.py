@@ -40,9 +40,14 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertEqual(report["summary"]["node24_native_action_count"], 2)
         self.assertEqual(report["summary"]["forbidden_env_count"], 0)
         self.assertEqual(report["summary"]["missing_step_count"], 0)
+        self.assertEqual(report["summary"]["order_violation_count"], 0)
         self.assertEqual(report["summary"]["python_version"], "3.11")
         self.assertIn("actions/checkout", {item["repository"] for item in report["actions"]})
         self.assertTrue(all(item["status"] == "pass" for item in report["checks"]))
+        self.assertIn(
+            "order:promoted_seed_handoff_assurance_smoke_before_coverage",
+            {item["id"] for item in report["checks"]},
+        )
 
     def test_ci_workflow_hygiene_report_fails_old_runtime_policy(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -74,8 +79,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 2)
-            self.assertEqual(report["summary"]["required_step_count"], 4)
+            self.assertEqual(report["summary"]["missing_step_count"], 3)
+            self.assertEqual(report["summary"]["required_step_count"], 5)
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
@@ -96,6 +101,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Promoted seed handoff assurance smoke",
+                        "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
@@ -113,6 +120,42 @@ class CIWorkflowTests(unittest.TestCase):
             )
             self.assertIn("Action version must be upgraded", " ".join(item["detail"] for item in report["checks"]))
 
+    def test_ci_workflow_hygiene_requires_assurance_smoke_before_coverage(self) -> None:
+        with TemporaryDirectory() as tmp:
+            workflow = Path(tmp) / "ci.yml"
+            workflow.write_text(
+                "\n".join(
+                    [
+                        "name: ci",
+                        "jobs:",
+                        "  test:",
+                        "    steps:",
+                        "      - uses: actions/checkout@v6",
+                        "      - uses: actions/setup-python@v6",
+                        "        with:",
+                        '          python-version: "3.11"',
+                        "      - name: Source encoding and syntax check",
+                        "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+                        "      - name: CI workflow hygiene check",
+                        "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Unit tests",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                        "      - name: Promoted seed handoff assurance smoke",
+                        "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+
+            self.assertEqual(report["summary"]["status"], "fail")
+            self.assertEqual(report["summary"]["missing_step_count"], 0)
+            self.assertEqual(report["summary"]["order_violation_count"], 1)
+            order_check = next(item for item in report["checks"] if item["category"] == "required_order")
+            self.assertEqual(order_check["status"], "fail")
+            self.assertIn("before coverage", order_check["detail"])
+
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
         report = build_ci_workflow_hygiene_report(CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z")
 
@@ -124,6 +167,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("actions/setup-python", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("CI &lt;workflow&gt;", render_ci_workflow_hygiene_html(report))
             self.assertIn("continue_with_node24_native_ci", render_ci_workflow_hygiene_markdown(report))
+            self.assertIn("order_violation_count", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 
     def test_ci_workflow_module_reexports_artifact_writers(self) -> None:
         self.assertIs(render_ci_workflow_hygiene_html, artifact_render_ci_workflow_hygiene_html)

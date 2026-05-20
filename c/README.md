@@ -682,6 +682,9 @@ c/292/解释/说明.md
 c/293/图片
 c/293/解释/说明.md
  -> v293 promoted training scale seed handoff assurance smoke summary 的运行截图和解释
+c/294/图片
+c/294/解释/说明.md
+ -> v294 promoted training scale seed handoff assurance workflow hygiene 的运行截图和解释
 ```
 
 写入规则：

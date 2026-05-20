@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+308-v294-promoted-seed-handoff-assurance-workflow-hygiene.md
+ -> v294 code explanation: require the promoted seed handoff assurance smoke command and its before-coverage order in CI workflow hygiene.
+
 307-v293-promoted-seed-handoff-assurance-smoke-summary.md
  -> v293 code explanation: write top-level JSON/text summary artifacts from the promoted seed handoff assurance CI smoke command.
 
@@ -711,6 +714,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `305-v291-promoted-seed-handoff-inline-assurance.md`：第二百九十一版代码讲解，把 promoted seed handoff assurance 接回执行脚本并写回主报告。
 - `306-v292-promoted-seed-handoff-assurance-ci-smoke.md`：第二百九十二版代码讲解，把 promoted seed handoff assurance 链路提升为 GitHub Actions coverage 前的 smoke gate。
 - `307-v293-promoted-seed-handoff-assurance-smoke-summary.md`：第二百九十三版代码讲解，为 promoted seed handoff assurance smoke 写出顶层 JSON/text summary 证据。
+- `308-v294-promoted-seed-handoff-assurance-workflow-hygiene.md`：第二百九十四版代码讲解，把 promoted seed handoff assurance smoke 及其 coverage 前顺序纳入 CI workflow hygiene。
 
 ## 一句话总览
 

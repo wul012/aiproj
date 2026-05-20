@@ -21,8 +21,15 @@ FORBIDDEN_ENV_VARS = ("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",)
 REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
+    "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
     "test_coverage_report": "scripts/run_test_coverage.py",
     "coverage_fail_under_gate": "--fail-under 80",
+}
+REQUIRED_COMMAND_ORDER = {
+    "promoted_seed_handoff_assurance_smoke_before_coverage": (
+        "scripts/check_promoted_seed_handoff_assurance_smoke.py",
+        "scripts/run_test_coverage.py",
+    ),
 }
 REQUIRED_PYTHON_VERSION = "3.11"
 
@@ -64,6 +71,8 @@ class CiWorkflowSummary(TypedDict):
     forbidden_env_count: int
     required_step_count: int
     missing_step_count: int
+    required_order_count: int
+    order_violation_count: int
     python_version: str
 
 
@@ -96,6 +105,7 @@ def build_ci_workflow_hygiene_report(
     found_required_actions = [item for item in actions if item.get("repository") in required_action_repos]
     forbidden_env_hits = _forbidden_env_hits(text)
     missing_steps = [check for check in checks if check.get("category") == "required_command" and check.get("status") != "pass"]
+    order_violations = [check for check in checks if check.get("category") == "required_order" and check.get("status") != "pass"]
     summary: CiWorkflowSummary = {
         "status": "pass" if not failed_checks else "fail",
         "decision": "continue_with_node24_native_ci" if not failed_checks else "fix_ci_workflow_hygiene",
@@ -109,6 +119,8 @@ def build_ci_workflow_hygiene_report(
         "forbidden_env_count": len(forbidden_env_hits),
         "required_step_count": len(REQUIRED_COMMAND_FRAGMENTS),
         "missing_step_count": len(missing_steps),
+        "required_order_count": len(REQUIRED_COMMAND_ORDER),
+        "order_violation_count": len(order_violations),
         "python_version": _python_version(text),
     }
     return {
@@ -120,6 +132,10 @@ def build_ci_workflow_hygiene_report(
             "required_actions": dict(REQUIRED_ACTIONS),
             "forbidden_env_vars": list(FORBIDDEN_ENV_VARS),
             "required_command_fragments": dict(REQUIRED_COMMAND_FRAGMENTS),
+            "required_command_order": {
+                key: {"before": before, "after": after}
+                for key, (before, after) in REQUIRED_COMMAND_ORDER.items()
+            },
             "required_python_version": REQUIRED_PYTHON_VERSION,
         },
         "summary": summary,
@@ -161,6 +177,32 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
                 "present" if present else "missing",
                 "pass" if present else "fail",
                 "Required CI quality command is present." if present else "Required CI quality command is missing.",
+            )
+        )
+    for order_id, (before, after) in REQUIRED_COMMAND_ORDER.items():
+        before_index = text.find(before)
+        after_index = text.find(after)
+        present = before_index >= 0 and after_index >= 0
+        in_order = present and before_index < after_index
+        if not present:
+            actual = "missing"
+            detail = "Required CI command order cannot be checked because one or both commands are missing."
+        else:
+            actual = "before" if in_order else "after"
+            detail = (
+                "Required CI command order is preserved."
+                if in_order
+                else "Promoted seed handoff assurance smoke must run before coverage."
+            )
+        checks.append(
+            _check(
+                f"order:{order_id}",
+                "required_order",
+                order_id,
+                "before",
+                actual,
+                "pass" if in_order else "fail",
+                detail,
             )
         )
     actual_python = _python_version(text)
@@ -243,6 +285,8 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append("Remove force-runtime environment variables and rely on native action metadata instead.")
     if summary.get("missing_step_count", 0):
         recommendations.append("Restore required source hygiene and unittest commands in the CI workflow.")
+    if summary.get("order_violation_count", 0):
+        recommendations.append("Keep promoted seed handoff assurance smoke before coverage so CI fails fast on handoff evidence drift.")
     if summary.get("python_version") != REQUIRED_PYTHON_VERSION:
         recommendations.append("Align actions/setup-python with the source compatibility target.")
     return recommendations
@@ -253,6 +297,7 @@ __all__ = [
     "FORBIDDEN_ENV_VARS",
     "REQUIRED_ACTIONS",
     "REQUIRED_COMMAND_FRAGMENTS",
+    "REQUIRED_COMMAND_ORDER",
     "build_ci_workflow_hygiene_report",
     "render_ci_workflow_hygiene_html",
     "render_ci_workflow_hygiene_markdown",
