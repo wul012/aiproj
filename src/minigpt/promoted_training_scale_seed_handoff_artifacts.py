@@ -76,9 +76,16 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "clean_batch_review_requirement_status_domain",
         "automation_gate_required",
         "automation_gate_status",
+        "automation_gate_decision",
+        "automation_gate_exit_code",
+        "automation_gate_required_requirement_count",
+        "automation_gate_passed_requirement_count",
+        "automation_gate_failed_requirement_count",
+        "automation_gate_blocking_requirement_count",
         "automation_gate_failed_requirements",
         "automation_gate_passed_requirements",
         "automation_gate_status_domain",
+        "automation_gate_decision_domain",
         "artifact_count",
         "available_artifact_count",
         "plan_status",
@@ -162,9 +169,16 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "clean_batch_review_requirement_status_domain": clean_batch_requirement.get("status_domain"),
             "automation_gate_required": automation_gate.get("required"),
             "automation_gate_status": automation_gate.get("status"),
+            "automation_gate_decision": automation_gate.get("decision"),
+            "automation_gate_exit_code": automation_gate.get("exit_code"),
+            "automation_gate_required_requirement_count": automation_gate.get("required_requirement_count"),
+            "automation_gate_passed_requirement_count": automation_gate.get("passed_requirement_count"),
+            "automation_gate_failed_requirement_count": automation_gate.get("failed_requirement_count"),
+            "automation_gate_blocking_requirement_count": automation_gate.get("blocking_requirement_count"),
             "automation_gate_failed_requirements": automation_gate.get("failed_requirements"),
             "automation_gate_passed_requirements": automation_gate.get("passed_requirements"),
             "automation_gate_status_domain": automation_gate.get("status_domain"),
+            "automation_gate_decision_domain": automation_gate.get("decision_domain"),
             "artifact_count": summary.get("artifact_count"),
             "available_artifact_count": summary.get("available_artifact_count"),
             "plan_status": summary.get("plan_status"),
@@ -227,9 +241,14 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         f"- Clean batch-review requirement detail: `{clean_batch_requirement.get('detail')}`",
         f"- Clean batch-review requirement status domain: `{clean_batch_requirement.get('status_domain')}`",
         f"- Automation gate: `{automation_gate.get('status')}`",
+        f"- Automation gate decision: `{automation_gate.get('decision')}`",
+        f"- Automation gate exit code: `{automation_gate.get('exit_code')}`",
+        f"- Automation gate required count: `{automation_gate.get('required_requirement_count')}`",
+        f"- Automation gate blocking count: `{automation_gate.get('blocking_requirement_count')}`",
         f"- Automation gate detail: `{automation_gate.get('detail')}`",
         f"- Automation gate failed requirements: `{automation_gate.get('failed_requirements')}`",
         f"- Automation gate status domain: `{automation_gate.get('status_domain')}`",
+        f"- Automation gate decision domain: `{automation_gate.get('decision_domain')}`",
         f"- Next batch command: `{summary.get('next_batch_command_available')}`",
         "",
         "## Command",
@@ -285,6 +304,9 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         str(item) for item in _string_list(clean_batch_requirement.get("status_domain"))
     )
     automation_gate_domain = ", ".join(str(item) for item in _string_list(automation_gate.get("status_domain")))
+    automation_gate_decision_domain = ", ".join(
+        str(item) for item in _string_list(automation_gate.get("decision_domain"))
+    )
     stats = [
         ("Status", summary.get("handoff_status")),
         ("Seed", report.get("seed_status")),
@@ -318,7 +340,12 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         ("Clean batch gate", clean_batch_requirement.get("status")),
         ("Clean batch gate domain", clean_batch_requirement_domain),
         ("Automation gate", automation_gate.get("status")),
+        ("Automation decision", automation_gate.get("decision")),
+        ("Automation exit", automation_gate.get("exit_code")),
+        ("Automation required", automation_gate.get("required_requirement_count")),
+        ("Automation blocking", automation_gate.get("blocking_requirement_count")),
         ("Automation gate domain", automation_gate_domain),
+        ("Automation decision domain", automation_gate_decision_domain),
         ("Batch", summary.get("next_batch_command_available")),
     ]
     return "\n".join(

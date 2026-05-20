@@ -637,6 +637,9 @@ c/277/解释/说明.md
 c/278/图片
 c/278/解释/说明.md
  -> v278 promoted training scale seed handoff automation gate 的运行截图和解释
+c/279/图片
+c/279/解释/说明.md
+ -> v279 promoted training scale seed handoff automation decision contract 的运行截图和解释
 ```
 
 写入规则：

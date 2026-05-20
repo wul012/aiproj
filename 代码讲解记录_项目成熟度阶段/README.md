@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+293-v279-promoted-seed-handoff-automation-decision-contract.md
+ -> v279 code explanation: extend the seed handoff automation gate into a direct decision contract with exit code, requirement counts, decision domains, CLI output, artifacts, and tests.
+
 292-v278-promoted-seed-handoff-automation-gate.md
  -> v278 code explanation: aggregate requested clean-evidence and clean batch-review requirements into a seed handoff automation gate with full CLI/artifact diagnostics.
 

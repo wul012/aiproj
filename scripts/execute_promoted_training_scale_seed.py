@@ -127,11 +127,17 @@ def main() -> None:
     if args.require_clean_evidence or args.require_clean_batch_review:
         print(f"automation_gate_required={automation_gate.get('required')}")
         print(f"automation_gate_status={automation_gate.get('status')}")
+        print(f"automation_gate_decision={automation_gate.get('decision')}")
+        print(f"automation_gate_exit_code={automation_gate.get('exit_code')}")
+        print(f"automation_gate_required_requirement_count={automation_gate.get('required_requirement_count')}")
+        print(f"automation_gate_passed_requirement_count={automation_gate.get('passed_requirement_count')}")
+        print(f"automation_gate_failed_requirement_count={automation_gate.get('failed_requirement_count')}")
+        print(f"automation_gate_blocking_requirement_count={automation_gate.get('blocking_requirement_count')}")
         print("automation_gate_failed_requirements=" + json.dumps(automation_gate.get("failed_requirements"), ensure_ascii=False))
         print("automation_gate_passed_requirements=" + json.dumps(automation_gate.get("passed_requirements"), ensure_ascii=False))
         print(f"automation_gate_detail={automation_gate.get('detail')}")
-        if automation_gate.get("status") == "fail":
-            raise SystemExit(1)
+        if automation_gate.get("decision") == "stop":
+            raise SystemExit(int(automation_gate.get("exit_code") or 1))
     if summary.get("handoff_status") in {"blocked", "failed", "timeout"}:
         raise SystemExit(1)
 

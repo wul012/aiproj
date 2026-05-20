@@ -16,11 +16,13 @@ from minigpt.promoted_training_scale_seed_handoff_artifacts import (
     write_promoted_training_scale_seed_handoff_outputs,
 )
 from minigpt.promoted_training_scale_seed_handoff_review import (
+    SEED_HANDOFF_AUTOMATION_GATE_DECISIONS,
     SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
     SEED_HANDOFF_AUTOMATION_GATE_STATUSES,
     SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES,
     SeedHandoffAutomationGate,
+    SeedHandoffAutomationGateDecision,
     SeedHandoffAutomationGateStatus,
     SeedHandoffCleanBatchReviewRequirement,
     SeedHandoffCleanBatchReviewRequirementStatus,
@@ -386,11 +388,13 @@ def _tail(text: str, max_chars: int = 700) -> str:
     return text[-max_chars:] if len(text) > max_chars else text
 
 __all__ = [
+    "SEED_HANDOFF_AUTOMATION_GATE_DECISIONS",
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_AUTOMATION_GATE_STATUSES",
     "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
     "SeedHandoffAutomationGate",
+    "SeedHandoffAutomationGateDecision",
     "SeedHandoffAutomationGateStatus",
     "SeedHandoffCleanBatchReviewRequirement",
     "SeedHandoffCleanBatchReviewRequirementStatus",

@@ -10,6 +10,7 @@ SeedHandoffCleanEvidenceStatus = Literal["ready", "pending-plan", "review", "inc
 SeedHandoffCleanEvidenceRequirementStatus = Literal["not-required", "pass", "fail"]
 SeedHandoffCleanBatchReviewRequirementStatus = Literal["not-required", "pass", "fail"]
 SeedHandoffAutomationGateStatus = Literal["not-required", "pass", "fail"]
+SeedHandoffAutomationGateDecision = Literal["not-requested", "continue", "stop"]
 
 
 class SeedHandoffCleanEvidenceReadiness(TypedDict):
@@ -41,10 +42,17 @@ class SeedHandoffCleanBatchReviewRequirement(TypedDict):
 class SeedHandoffAutomationGate(TypedDict):
     required: bool
     status: SeedHandoffAutomationGateStatus
+    decision: SeedHandoffAutomationGateDecision
+    exit_code: int
+    required_requirement_count: int
+    passed_requirement_count: int
+    failed_requirement_count: int
+    blocking_requirement_count: int
     failed_requirements: list[str]
     passed_requirements: list[str]
     detail: str
     status_domain: list[SeedHandoffAutomationGateStatus]
+    decision_domain: list[SeedHandoffAutomationGateDecision]
 
 
 SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...] = (
@@ -70,6 +78,12 @@ SEED_HANDOFF_AUTOMATION_GATE_STATUSES: tuple[SeedHandoffAutomationGateStatus, ..
     "not-required",
     "pass",
     "fail",
+)
+
+SEED_HANDOFF_AUTOMATION_GATE_DECISIONS: tuple[SeedHandoffAutomationGateDecision, ...] = (
+    "not-requested",
+    "continue",
+    "stop",
 )
 
 
@@ -206,20 +220,33 @@ def build_seed_handoff_automation_gate(
     passed = [name for name in required_names if requirements[name].get("status") == "pass"]
     if not required_names:
         status: SeedHandoffAutomationGateStatus = "not-required"
+        decision: SeedHandoffAutomationGateDecision = "not-requested"
+        exit_code = 0
         detail = "no seed handoff automation requirements were requested"
     elif failed:
         status = "fail"
+        decision = "stop"
+        exit_code = 1
         detail = "failed automation requirement(s): " + ", ".join(failed)
     else:
         status = "pass"
+        decision = "continue"
+        exit_code = 0
         detail = "all requested seed handoff automation requirements passed"
     return {
         "required": bool(required_names),
         "status": status,
+        "decision": decision,
+        "exit_code": exit_code,
+        "required_requirement_count": len(required_names),
+        "passed_requirement_count": len(passed),
+        "failed_requirement_count": len(failed),
+        "blocking_requirement_count": len(failed),
         "failed_requirements": failed,
         "passed_requirements": passed,
         "detail": detail,
         "status_domain": list(SEED_HANDOFF_AUTOMATION_GATE_STATUSES),
+        "decision_domain": list(SEED_HANDOFF_AUTOMATION_GATE_DECISIONS),
     }
 
 
@@ -416,9 +443,11 @@ def _int(value: Any) -> int:
 __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_AUTOMATION_GATE_STATUSES",
+    "SEED_HANDOFF_AUTOMATION_GATE_DECISIONS",
     "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
     "SeedHandoffAutomationGate",
+    "SeedHandoffAutomationGateDecision",
     "SeedHandoffAutomationGateStatus",
     "SeedHandoffCleanBatchReviewRequirement",
     "SeedHandoffCleanBatchReviewRequirementStatus",

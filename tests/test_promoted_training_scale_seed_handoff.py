@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt import promoted_training_scale_seed_handoff as handoff_module  # noqa: E402
 from minigpt import promoted_training_scale_seed_handoff_artifacts as artifact_module  # noqa: E402
 from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
+    SEED_HANDOFF_AUTOMATION_GATE_DECISIONS,
     SEED_HANDOFF_AUTOMATION_GATE_STATUSES,
     SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES,
     SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
@@ -44,6 +45,10 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
         self.assertEqual(
             SEED_HANDOFF_AUTOMATION_GATE_STATUSES,
             ("not-required", "pass", "fail"),
+        )
+        self.assertEqual(
+            SEED_HANDOFF_AUTOMATION_GATE_DECISIONS,
+            ("not-requested", "continue", "stop"),
         )
 
     def test_clean_evidence_requirement_helper_maps_public_statuses(self) -> None:
@@ -131,11 +136,21 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
         )
 
         self.assertEqual(not_required["status"], "not-required")
+        self.assertEqual(not_required["decision"], "not-requested")
+        self.assertEqual(not_required["exit_code"], 0)
+        self.assertEqual(not_required["required_requirement_count"], 0)
         self.assertEqual(not_required["failed_requirements"], [])
         self.assertEqual(mixed["status"], "fail")
+        self.assertEqual(mixed["decision"], "stop")
+        self.assertEqual(mixed["exit_code"], 1)
+        self.assertEqual(mixed["required_requirement_count"], 2)
+        self.assertEqual(mixed["passed_requirement_count"], 1)
+        self.assertEqual(mixed["failed_requirement_count"], 1)
+        self.assertEqual(mixed["blocking_requirement_count"], 1)
         self.assertEqual(mixed["failed_requirements"], ["clean_evidence"])
         self.assertEqual(mixed["passed_requirements"], ["clean_batch_review"])
         self.assertEqual(mixed["status_domain"], list(SEED_HANDOFF_AUTOMATION_GATE_STATUSES))
+        self.assertEqual(mixed["decision_domain"], list(SEED_HANDOFF_AUTOMATION_GATE_DECISIONS))
 
     def test_artifact_functions_are_reexported_from_handoff_module(self) -> None:
         self.assertIs(
@@ -166,6 +181,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(report["clean_evidence_requirement"]["status"], "not-required")
             self.assertEqual(report["clean_batch_review_requirement"]["status"], "not-required")
             self.assertEqual(report["automation_gate"]["status"], "not-required")
+            self.assertEqual(report["automation_gate"]["decision"], "not-requested")
+            self.assertEqual(report["automation_gate"]["exit_code"], 0)
 
     def test_builder_can_attach_required_clean_evidence_contract(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -404,14 +421,18 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("selected_handoff_clean_batch_review_status", csv_text)
             self.assertIn("clean_batch_review_requirement_status", csv_text)
             self.assertIn("automation_gate_status", csv_text)
+            self.assertIn("automation_gate_decision", csv_text)
+            self.assertIn("automation_gate_exit_code", csv_text)
             self.assertIn("Selected handoff require clean batch review", markdown)
             self.assertIn("Comparison-ready clean handoffs", markdown)
             self.assertIn("Clean batch-review requirement", markdown)
             self.assertIn("Automation gate", markdown)
+            self.assertIn("Automation gate decision", markdown)
             self.assertIn("Selected clean batch", html)
             self.assertIn("Ready clean batch", html)
             self.assertIn("Clean batch gate", html)
             self.assertIn("Automation gate", html)
+            self.assertIn("Automation decision", html)
             self.assertIn("selected_handoff_require_clean_batch_review=True", completed.stdout)
             self.assertIn("selected_handoff_clean_batch_review_status=clean", completed.stdout)
             self.assertIn("handoff_unclean_batch_review_count=1", completed.stdout)
@@ -419,6 +440,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertEqual(payload["summary"]["selected_handoff_clean_batch_review_status"], "clean")
             self.assertEqual(payload["clean_batch_review_requirement"]["status"], "not-required")
             self.assertEqual(payload["automation_gate"]["status"], "not-required")
+            self.assertEqual(payload["automation_gate"]["decision"], "not-requested")
             self.assertTrue(
                 any("Rejected promoted decision inputs include unclean clean-required handoffs" in item for item in report["recommendations"])
             )
@@ -457,9 +479,15 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_batch_review_required_clean=True", completed.stdout)
             self.assertIn("clean_batch_review_required=pass", completed.stdout)
             self.assertIn("automation_gate_status=pass", completed.stdout)
+            self.assertIn("automation_gate_decision=continue", completed.stdout)
+            self.assertIn("automation_gate_exit_code=0", completed.stdout)
+            self.assertIn("automation_gate_required_requirement_count=1", completed.stdout)
+            self.assertIn("automation_gate_blocking_requirement_count=0", completed.stdout)
             self.assertIn('automation_gate_passed_requirements=[\"clean_batch_review\"]', completed.stdout)
             self.assertEqual(payload["clean_batch_review_requirement"]["status"], "pass")
             self.assertEqual(payload["automation_gate"]["status"], "pass")
+            self.assertEqual(payload["automation_gate"]["decision"], "continue")
+            self.assertEqual(payload["automation_gate"]["exit_code"], 0)
             self.assertTrue(payload["clean_batch_review_requirement"]["required"])
             self.assertIn("Clean batch-review requirement passed", payload["recommendations"][1])
             self.assertIn("clean_batch_review_requirement_status", csv_text)
@@ -499,9 +527,15 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_batch_review_required_clean=False", completed.stdout)
             self.assertIn("clean_batch_review_required=fail", completed.stdout)
             self.assertIn("automation_gate_status=fail", completed.stdout)
+            self.assertIn("automation_gate_decision=stop", completed.stdout)
+            self.assertIn("automation_gate_exit_code=1", completed.stdout)
+            self.assertIn("automation_gate_required_requirement_count=1", completed.stdout)
+            self.assertIn("automation_gate_blocking_requirement_count=1", completed.stdout)
             self.assertIn('automation_gate_failed_requirements=[\"clean_batch_review\"]', completed.stdout)
             self.assertEqual(payload["clean_batch_review_requirement"]["status"], "fail")
             self.assertEqual(payload["automation_gate"]["status"], "fail")
+            self.assertEqual(payload["automation_gate"]["decision"], "stop")
+            self.assertEqual(payload["automation_gate"]["exit_code"], 1)
             self.assertTrue(payload["clean_batch_review_requirement"]["required"])
             self.assertFalse(payload["clean_batch_review_requirement"]["clean"])
             self.assertEqual(payload["clean_batch_review_requirement"]["selected_status"], "review")
@@ -557,10 +591,13 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_evidence_required_detail=completed handoff has consistent suite alignment", completed.stdout)
             self.assertIn("clean_evidence_required=pass", completed.stdout)
             self.assertIn("automation_gate_status=pass", completed.stdout)
+            self.assertIn("automation_gate_decision=continue", completed.stdout)
+            self.assertIn("automation_gate_exit_code=0", completed.stdout)
             self.assertIn('automation_gate_passed_requirements=[\"clean_evidence\"]', completed.stdout)
             payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
             self.assertEqual(payload["clean_evidence_requirement"]["status"], "pass")
             self.assertEqual(payload["automation_gate"]["status"], "pass")
+            self.assertEqual(payload["automation_gate"]["decision"], "continue")
             self.assertTrue(payload["clean_evidence_requirement"]["required"])
             self.assertTrue(payload["clean_evidence_requirement"]["ready"])
             self.assertIn("Clean-evidence requirement passed", payload["recommendations"][1])
@@ -596,6 +633,8 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_evidence_required_detail=execute the seed handoff before treating clean comparison evidence as ready", completed.stdout)
             self.assertIn("clean_evidence_required=fail", completed.stdout)
             self.assertIn("automation_gate_status=fail", completed.stdout)
+            self.assertIn("automation_gate_decision=stop", completed.stdout)
+            self.assertIn("automation_gate_exit_code=1", completed.stdout)
             self.assertIn('automation_gate_failed_requirements=[\"clean_evidence\"]', completed.stdout)
             payload = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
             csv_text = (script_out / "promoted_training_scale_seed_handoff.csv").read_text(encoding="utf-8")
@@ -606,6 +645,7 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertFalse(payload["clean_evidence_requirement"]["ready"])
             self.assertEqual(payload["clean_evidence_requirement"]["readiness_status"], "pending-plan")
             self.assertEqual(payload["automation_gate"]["status"], "fail")
+            self.assertEqual(payload["automation_gate"]["decision"], "stop")
             self.assertIn("Clean-evidence requirement failed", payload["recommendations"][1])
             self.assertIn("execute the seed handoff", payload["recommendations"][1])
             self.assertIn("clean_evidence_requirement_status", csv_text)
@@ -649,15 +689,27 @@ class PromotedTrainingScaleSeedHandoffTests(unittest.TestCase):
             self.assertIn("clean_evidence_required=fail", completed.stdout)
             self.assertIn("clean_batch_review_required=fail", completed.stdout)
             self.assertIn("automation_gate_status=fail", completed.stdout)
+            self.assertIn("automation_gate_decision=stop", completed.stdout)
+            self.assertIn("automation_gate_failed_requirement_count=2", completed.stdout)
+            self.assertIn("automation_gate_blocking_requirement_count=2", completed.stdout)
             self.assertIn(
                 'automation_gate_failed_requirements=[\"clean_evidence\", \"clean_batch_review\"]',
                 completed.stdout,
             )
             self.assertEqual(payload["automation_gate"]["status"], "fail")
+            self.assertEqual(payload["automation_gate"]["decision"], "stop")
+            self.assertEqual(payload["automation_gate"]["exit_code"], 1)
+            self.assertEqual(payload["automation_gate"]["required_requirement_count"], 2)
+            self.assertEqual(payload["automation_gate"]["failed_requirement_count"], 2)
+            self.assertEqual(payload["automation_gate"]["blocking_requirement_count"], 2)
             self.assertEqual(payload["automation_gate"]["failed_requirements"], ["clean_evidence", "clean_batch_review"])
             self.assertIn("automation_gate_status", csv_text)
+            self.assertIn("automation_gate_decision", csv_text)
+            self.assertIn("automation_gate_blocking_requirement_count", csv_text)
             self.assertIn("Automation gate", markdown)
+            self.assertIn("Automation gate decision", markdown)
             self.assertIn("Automation gate", html)
+            self.assertIn("Automation decision", html)
 
     def test_reports_mismatched_selected_suite_alignment_without_blocking(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
