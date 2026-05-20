@@ -14,6 +14,11 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     build_promoted_training_scale_seed_handoff,
     write_promoted_training_scale_seed_handoff_outputs,
 )
+from minigpt.promoted_training_scale_seed_handoff_assurance import (  # noqa: E402
+    check_promoted_training_scale_seed_handoff_assurance,
+    render_promoted_training_scale_seed_handoff_assurance_check,
+    write_promoted_training_scale_seed_handoff_assurance_check_outputs,
+)
 from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
     RECEIPT_FILENAME,
     RECEIPT_TYPE,
@@ -32,6 +37,41 @@ from tests.test_promoted_training_scale_seed_handoff import write_seed_tree  # n
 
 
 class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
+    def _write_inline_checked_handoff(
+        self,
+        root: Path,
+        *,
+        clean_batch_review_status: str | None = None,
+    ) -> tuple[Path, Path, Path]:
+        seed = write_seed_tree(
+            root,
+            suite_name="standard-zh",
+            include_handoff_suite_guard=True,
+            include_handoff_clean_batch_review=clean_batch_review_status is not None,
+            clean_batch_review_status=clean_batch_review_status or "clean",
+        )
+        script_out = root / "script-out"
+        check_dir = root / "receipt-check"
+        embedded_check_dir = root / "embedded-receipt-check"
+        args = [
+            sys.executable,
+            "-B",
+            str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+            str(seed),
+            "--out-dir",
+            str(script_out),
+            "--execute",
+            "--require-clean-evidence",
+            "--receipt-check-out-dir",
+            str(check_dir),
+            "--embedded-receipt-check-out-dir",
+            str(embedded_check_dir),
+        ]
+        if clean_batch_review_status is not None:
+            args.append("--require-clean-batch-review")
+        subprocess.run(args, check=clean_batch_review_status != "review", capture_output=True, text=True)
+        return script_out, check_dir, embedded_check_dir
+
     def test_receipt_checker_accepts_continue_receipt(self) -> None:
         receipt = {
             "schema_version": 1,
@@ -708,6 +748,79 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(check["status"], "fail")
             self.assertFalse(check["receipt_check_json_exists"])
             self.assertTrue(any("receipt_check_outputs.json does not exist" in issue for issue in check["issues"]))
+
+    def test_handoff_assurance_accepts_inline_embedded_receipt_report(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script_out, _, _ = self._write_inline_checked_handoff(root)
+            out_dir = root / "assurance"
+
+            check = check_promoted_training_scale_seed_handoff_assurance(script_out)
+            outputs = write_promoted_training_scale_seed_handoff_assurance_check_outputs(check, out_dir)
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_assurance.py"),
+                    str(script_out),
+                    "--out-dir",
+                    str(out_dir / "cli"),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(check["status"], "pass")
+            self.assertEqual(check["decision"], "continue")
+            self.assertEqual(check["embedded_receipt_check_status"], "pass")
+            self.assertEqual(check["embedded_receipt_check_sidecar_status"], "pass")
+            self.assertTrue(check["embedded_receipt_check_output_json_exists"])
+            self.assertTrue(check["embedded_receipt_check_output_text_exists"])
+            self.assertIn("handoff_assurance_status=pass", completed.stdout)
+            self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
+            self.assertIn("handoff_assurance_json=", completed.stdout)
+            self.assertIn("handoff_assurance_status=pass", render_promoted_training_scale_seed_handoff_assurance_check(check))
+            self.assertIn("handoff_assurance_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
+
+    def test_handoff_assurance_rejects_tampered_main_embedded_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script_out, _, _ = self._write_inline_checked_handoff(root)
+            report_path = script_out / "promoted_training_scale_seed_handoff.json"
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            report["embedded_receipt_check"]["sidecar_status"] = "fail"
+            report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_assurance(script_out)
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_assurance.py"),
+                    str(script_out),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertTrue(any("embedded_receipt_check.sidecar_status" in issue for issue in check["issues"]))
+            self.assertIn("handoff_assurance_status=fail", completed.stdout)
+
+    def test_handoff_assurance_rejects_missing_embedded_check_sidecar(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script_out, _, _ = self._write_inline_checked_handoff(root)
+            report = json.loads((script_out / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+            Path(report["embedded_receipt_check_outputs"]["json"]).unlink()
+
+            check = check_promoted_training_scale_seed_handoff_assurance(script_out)
+
+            self.assertEqual(check["status"], "fail")
+            self.assertFalse(check["embedded_receipt_check_output_json_exists"])
+            self.assertTrue(any("embedded_receipt_check_outputs.json does not exist" in issue for issue in check["issues"]))
 
 
 if __name__ == "__main__":
