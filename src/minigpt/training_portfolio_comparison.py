@@ -17,6 +17,7 @@ from minigpt.training_portfolio_comparison_artifacts import (
 from minigpt.training_portfolio_comparison_review import (
     build_training_portfolio_recommendations,
     build_training_portfolio_review_actions,
+    has_maturity_ci_regression,
     has_maturity_coverage_regression,
     is_review_status,
 )
@@ -195,6 +196,26 @@ def _portfolio_summary(report: dict[str, Any], name: str, index: int) -> dict[st
         "dataset_warning_count": _as_int(dataset_summary.get("warning_count")) or 0,
         "maturity_portfolio_status": maturity_summary.get("portfolio_status"),
         "maturity_release_readiness_trend": maturity_summary.get("release_readiness_trend_status"),
+        "maturity_release_readiness_ci_workflow_regression_count": _as_int(
+            maturity_summary.get("release_readiness_ci_workflow_regression_count")
+        )
+        or 0,
+        "maturity_release_readiness_ci_workflow_order_regression_count": _as_int(
+            maturity_summary.get("release_readiness_ci_workflow_order_regression_count")
+        )
+        or 0,
+        "maturity_release_readiness_ci_workflow_status_changed_count": _as_int(
+            maturity_summary.get("release_readiness_ci_workflow_status_changed_count")
+        )
+        or 0,
+        "maturity_release_readiness_max_ci_workflow_failed_check_delta": _as_int(
+            maturity_summary.get("release_readiness_max_ci_workflow_failed_check_delta")
+        )
+        or 0,
+        "maturity_release_readiness_max_ci_workflow_order_violation_delta": _as_int(
+            maturity_summary.get("release_readiness_max_ci_workflow_order_violation_delta")
+        )
+        or 0,
         "maturity_release_readiness_test_coverage_regression_count": _as_int(
             maturity_summary.get("release_readiness_test_coverage_regression_count")
         )
@@ -258,6 +279,14 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
     artifact_delta = _numeric_delta(portfolio.get("artifact_coverage"), baseline.get("artifact_coverage"))
     available_artifact_delta = _int_delta(portfolio.get("available_artifact_count"), baseline.get("available_artifact_count"))
     dataset_warning_delta = _int_delta(portfolio.get("dataset_warning_count"), baseline.get("dataset_warning_count"))
+    ci_regression_delta = _int_delta(
+        portfolio.get("maturity_release_readiness_ci_workflow_regression_count"),
+        baseline.get("maturity_release_readiness_ci_workflow_regression_count"),
+    )
+    ci_order_regression_delta = _int_delta(
+        portfolio.get("maturity_release_readiness_ci_workflow_order_regression_count"),
+        baseline.get("maturity_release_readiness_ci_workflow_order_regression_count"),
+    )
     coverage_regression_delta = _int_delta(
         portfolio.get("maturity_release_readiness_test_coverage_regression_count"),
         baseline.get("maturity_release_readiness_test_coverage_regression_count"),
@@ -275,6 +304,8 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
         "dataset_warning_delta": dataset_warning_delta,
         "maturity_status_changed": portfolio.get("maturity_portfolio_status") != baseline.get("maturity_portfolio_status"),
         "maturity_release_readiness_trend_changed": portfolio.get("maturity_release_readiness_trend") != baseline.get("maturity_release_readiness_trend"),
+        "maturity_release_readiness_ci_workflow_regression_delta": ci_regression_delta,
+        "maturity_release_readiness_ci_workflow_order_regression_delta": ci_order_regression_delta,
         "maturity_release_readiness_test_coverage_regression_delta": coverage_regression_delta,
         "overall_relation": "baseline" if is_baseline else _score_relation(overall_delta),
         "rubric_relation": "baseline" if is_baseline else _score_relation(rubric_delta),
@@ -294,6 +325,7 @@ def _comparison_summary(
     best_artifact = _best_numeric(portfolios, "artifact_coverage", higher_is_better=True)
     lowest_val_loss = _best_numeric(portfolios, "final_val_loss", higher_is_better=False)
     maturity_review_rows = [item for item in portfolios if is_review_status(item.get("maturity_portfolio_status"))]
+    maturity_ci_rows = [item for item in portfolios if has_maturity_ci_regression(item)]
     maturity_coverage_rows = [item for item in portfolios if has_maturity_coverage_regression(item)]
     return {
         "portfolio_count": len(portfolios),
@@ -309,11 +341,21 @@ def _comparison_summary(
         "dataset_warning_count": sum(int(item.get("dataset_warning_count") or 0) for item in portfolios),
         "maturity_review_count": len(maturity_review_rows),
         "maturity_review_names": [name for item in maturity_review_rows if (name := _as_str(item.get("name")))],
+        "maturity_ci_regression_count": len(maturity_ci_rows),
+        "maturity_ci_regression_names": [name for item in maturity_ci_rows if (name := _as_str(item.get("name")))],
         "maturity_coverage_regression_count": len(maturity_coverage_rows),
         "maturity_coverage_regression_names": [name for item in maturity_coverage_rows if (name := _as_str(item.get("name")))],
         "best_score_name": _pick(best_score, "name"),
         "best_score_maturity_status": _pick(best_score, "maturity_portfolio_status"),
         "best_score_maturity_release_readiness_trend": _pick(best_score, "maturity_release_readiness_trend"),
+        "best_score_maturity_release_readiness_ci_workflow_regression_count": _pick(
+            best_score,
+            "maturity_release_readiness_ci_workflow_regression_count",
+        ),
+        "best_score_maturity_release_readiness_ci_workflow_order_regression_count": _pick(
+            best_score,
+            "maturity_release_readiness_ci_workflow_order_regression_count",
+        ),
         "best_score_maturity_release_readiness_test_coverage_regression_count": _pick(
             best_score,
             "maturity_release_readiness_test_coverage_regression_count",
@@ -365,6 +407,8 @@ def _delta_explanation(
         parts.append(f"status changed {baseline.get('status')} -> {portfolio.get('status')}")
     if portfolio.get("maturity_portfolio_status") != baseline.get("maturity_portfolio_status"):
         parts.append("maturity status changed")
+    if has_maturity_ci_regression(portfolio):
+        parts.append("release-readiness CI regressed")
     if has_maturity_coverage_regression(portfolio):
         parts.append("release-readiness coverage regressed")
     return "; ".join(parts) if parts else "Comparable to baseline."

@@ -703,6 +703,9 @@ c/299/解释/说明.md
 c/300/图片
 c/300/解释/说明.md
  -> v300 maturity narrative CI order regression review 的运行截图和解释
+c/301/图片
+c/301/解释/说明.md
+ -> v301 training portfolio comparison CI regression review 的运行截图和解释
 ```
 
 写入规则：

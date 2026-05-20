@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+315-v301-training-portfolio-comparison-ci-regression-review.md
+ -> v301 code explanation: carry maturity narrative CI workflow and CI order regressions into training portfolio comparison blocker actions and artifacts.
+
 314-v300-maturity-narrative-ci-order-regression-review.md
  -> v300 code explanation: carry CI workflow order-violation regressions into maturity narrative review status and rendered artifacts.
 
@@ -739,6 +742,7 @@ v109 的关键变化是：新增 maintenance batching policy，把“utils migra
 - `312-v298-release-readiness-comparison-ci-order-deltas.md`：第二百九十八版代码讲解，在 release readiness comparison 中比较 CI workflow order violation delta。
 - `313-v299-registry-and-maturity-ci-order-regression-summary.md`：第二百九十九版代码讲解，把 CI workflow order regression 继续传入 registry 和 maturity 汇总。
 - `314-v300-maturity-narrative-ci-order-regression-review.md`：第三百版代码讲解，把 CI workflow order regression 继续传入 maturity narrative 的 review 状态和渲染输出。
+- `315-v301-training-portfolio-comparison-ci-regression-review.md`：第三百零一版代码讲解，把 maturity narrative 里的 CI workflow/order regression 继续传入 training portfolio comparison 的 blocker action 与 artifact 输出。
 
 ## 一句话总览
 

@@ -36,6 +36,8 @@ def make_portfolio(
     dataset_warnings: int = 0,
     maturity_status: str = "ready",
     maturity_release_trend: str = "stable",
+    ci_regression_count: int = 0,
+    ci_order_regression_count: int = 0,
     coverage_regression_count: int = 0,
     relative_artifacts: bool = False,
     missing_artifacts: set[str] | None = None,
@@ -87,6 +89,11 @@ def make_portfolio(
                 "summary": {
                     "portfolio_status": maturity_status,
                     "release_readiness_trend_status": maturity_release_trend,
+                    "release_readiness_ci_workflow_regression_count": ci_regression_count,
+                    "release_readiness_ci_workflow_order_regression_count": ci_order_regression_count,
+                    "release_readiness_ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                    "release_readiness_max_ci_workflow_failed_check_delta": 1 if ci_regression_count else 0,
+                    "release_readiness_max_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                     "release_readiness_test_coverage_regression_count": coverage_regression_count,
                     "release_readiness_test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
                     "release_readiness_max_test_coverage_percent_delta": 8.5 if coverage_regression_count else 0,
@@ -198,6 +205,8 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["artifact_regression_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_count"], 1)
             self.assertEqual(report["summary"]["maturity_review_names"], ["review"])
+            self.assertEqual(report["summary"]["maturity_ci_regression_count"], 0)
+            self.assertEqual(report["summary"]["maturity_ci_regression_names"], [])
             self.assertEqual(report["summary"]["maturity_coverage_regression_count"], 0)
             self.assertEqual(report["summary"]["maturity_coverage_regression_names"], [])
             self.assertEqual(report["summary"]["review_action_count"], 4)
@@ -279,6 +288,38 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("release-readiness coverage regressed", candidate_delta["explanation"])
             self.assertIn("coverage regressions", " ".join(report["recommendations"]))
 
+    def test_best_scoring_ci_order_regressed_portfolio_blocks_promotion(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_portfolio(root, "baseline", overall_score=82, rubric_score=80, final_val_loss=1.2, best_val_loss=1.1)
+            candidate = make_portfolio(
+                root,
+                "candidate",
+                overall_score=92,
+                rubric_score=88,
+                final_val_loss=0.9,
+                best_val_loss=0.88,
+                maturity_release_trend="ci-regressed",
+                ci_order_regression_count=1,
+            )
+
+            report = build_training_portfolio_comparison([baseline, candidate], names=["base", "candidate"], baseline="base")
+
+            self.assertEqual(report["summary"]["best_score_name"], "candidate")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_trend"], "ci-regressed")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_ci_workflow_order_regression_count"], 1)
+            self.assertEqual(report["summary"]["maturity_ci_regression_count"], 1)
+            self.assertEqual(report["summary"]["maturity_ci_regression_names"], ["candidate"])
+            self.assertEqual(report["summary"]["review_action_count"], 1)
+            self.assertEqual(report["summary"]["blocker_action_count"], 1)
+            self.assertEqual(report["review_actions"][0]["reason"], "best_score_ci_regressed")
+            self.assertEqual(report["review_actions"][0]["severity"], "blocker")
+            self.assertEqual(report["review_actions"][0]["evidence"]["ci_workflow_order_regression_count"], 1)
+            candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
+            self.assertEqual(candidate_delta["maturity_release_readiness_ci_workflow_order_regression_delta"], 1)
+            self.assertIn("release-readiness CI regressed", candidate_delta["explanation"])
+            self.assertIn("CI workflow regressions", " ".join(report["recommendations"]))
+
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -305,12 +346,14 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("overall_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Maturity review portfolios", markdown)
+            self.assertIn("Maturity CI regressions", markdown)
             self.assertIn("Maturity coverage regressions", markdown)
             self.assertIn("Best score release readiness trend", markdown)
             self.assertIn("## Review Actions", markdown)
             self.assertIn("Best score maturity", markdown)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("Maturity reviews", html)
+            self.assertIn("CI regressions", html)
             self.assertIn("Coverage regressions", html)
             self.assertIn("Best score release trend", html)
             self.assertIn("Review Actions", html)

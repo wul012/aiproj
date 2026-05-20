@@ -7,6 +7,7 @@ from minigpt.report_utils import as_dict, number_or_none
 
 REVIEW_STATUSES = frozenset({"review", "warn", "fail", "incomplete"})
 COVERAGE_REGRESSED_TREND = "coverage-regressed"
+CI_REGRESSED_TREND = "ci-regressed"
 
 
 def build_training_portfolio_recommendations(
@@ -37,6 +38,15 @@ def build_training_portfolio_recommendations(
             recs.append("Block best-score promotion until release-readiness test coverage regressions are explained or fixed.")
         else:
             recs.append("Review coverage-regressed maturity narratives before using non-leading portfolios as future baselines.")
+    if summary.get("maturity_ci_regression_count"):
+        if (
+            summary.get("best_score_maturity_release_readiness_trend") == CI_REGRESSED_TREND
+            or (_as_int(summary.get("best_score_maturity_release_readiness_ci_workflow_regression_count")) or 0) > 0
+            or (_as_int(summary.get("best_score_maturity_release_readiness_ci_workflow_order_regression_count")) or 0) > 0
+        ):
+            recs.append("Block best-score promotion until release-readiness CI workflow regressions are explained or fixed.")
+        else:
+            recs.append("Review CI-regressed maturity narratives before using non-leading portfolios as future baselines.")
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs
@@ -160,8 +170,35 @@ def build_training_portfolio_review_actions(
                 )
             )
 
+        ci_regressed = has_maturity_ci_regression(portfolio)
+        if ci_regressed:
+            is_best_score = name == best_score_name
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "maturity",
+                    "blocker" if is_best_score else "review",
+                    "best_score_ci_regressed" if is_best_score else "portfolio_ci_regressed",
+                    (
+                        "Explain or fix release-readiness CI workflow regressions before promoting this best-scoring portfolio."
+                        if is_best_score
+                        else "Review release-readiness CI workflow regressions before archiving this portfolio as a future baseline."
+                    ),
+                    {
+                        "maturity_release_readiness_trend": portfolio.get("maturity_release_readiness_trend"),
+                        "ci_workflow_regression_count": portfolio.get("maturity_release_readiness_ci_workflow_regression_count"),
+                        "ci_workflow_order_regression_count": portfolio.get("maturity_release_readiness_ci_workflow_order_regression_count"),
+                        "ci_workflow_status_changed_count": portfolio.get("maturity_release_readiness_ci_workflow_status_changed_count"),
+                        "max_ci_workflow_failed_check_delta": portfolio.get("maturity_release_readiness_max_ci_workflow_failed_check_delta"),
+                        "max_ci_workflow_order_violation_delta": portfolio.get("maturity_release_readiness_max_ci_workflow_order_violation_delta"),
+                        "best_score_name": best_score_name,
+                    },
+                )
+            )
+
         maturity_status = _as_str(portfolio.get("maturity_portfolio_status"))
-        if is_review_status(maturity_status) and not coverage_regressed:
+        if is_review_status(maturity_status) and not coverage_regressed and not ci_regressed:
             is_best_score = name == best_score_name
             actions.append(
                 _review_action(
@@ -191,6 +228,16 @@ def has_maturity_coverage_regression(portfolio: dict[str, Any]) -> bool:
     return (
         portfolio.get("maturity_release_readiness_trend") == COVERAGE_REGRESSED_TREND
         or regression_count > 0
+    )
+
+
+def has_maturity_ci_regression(portfolio: dict[str, Any]) -> bool:
+    regression_count = _as_int(portfolio.get("maturity_release_readiness_ci_workflow_regression_count")) or 0
+    order_regression_count = _as_int(portfolio.get("maturity_release_readiness_ci_workflow_order_regression_count")) or 0
+    return (
+        portfolio.get("maturity_release_readiness_trend") == CI_REGRESSED_TREND
+        or regression_count > 0
+        or order_regression_count > 0
     )
 
 
@@ -231,10 +278,12 @@ def _as_str(value: Any) -> str | None:
 
 
 __all__ = [
+    "CI_REGRESSED_TREND",
     "COVERAGE_REGRESSED_TREND",
     "REVIEW_STATUSES",
     "build_training_portfolio_recommendations",
     "build_training_portfolio_review_actions",
+    "has_maturity_ci_regression",
     "has_maturity_coverage_regression",
     "is_review_status",
 ]
