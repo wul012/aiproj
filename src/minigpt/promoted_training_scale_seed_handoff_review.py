@@ -11,6 +11,7 @@ SeedHandoffCleanEvidenceRequirementStatus = Literal["not-required", "pass", "fai
 SeedHandoffCleanBatchReviewRequirementStatus = Literal["not-required", "pass", "fail"]
 SeedHandoffAutomationGateStatus = Literal["not-required", "pass", "fail"]
 SeedHandoffAutomationGateDecision = Literal["not-requested", "continue", "stop"]
+SeedHandoffAutomationSummaryDecision = Literal["continue", "stop"]
 
 
 class SeedHandoffCleanEvidenceReadiness(TypedDict):
@@ -55,6 +56,20 @@ class SeedHandoffAutomationGate(TypedDict):
     decision_domain: list[SeedHandoffAutomationGateDecision]
 
 
+class SeedHandoffAutomationSummary(TypedDict):
+    decision: SeedHandoffAutomationSummaryDecision
+    exit_code: int
+    blocking_source: str | None
+    handoff_status: str
+    gate_status: SeedHandoffAutomationGateStatus
+    gate_decision: SeedHandoffAutomationGateDecision
+    gate_required: bool
+    gate_blocking_requirement_count: int
+    failed_requirements: list[str]
+    detail: str
+    decision_domain: list[SeedHandoffAutomationSummaryDecision]
+
+
 SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES: tuple[SeedHandoffCleanEvidenceStatus, ...] = (
     "ready",
     "pending-plan",
@@ -82,6 +97,11 @@ SEED_HANDOFF_AUTOMATION_GATE_STATUSES: tuple[SeedHandoffAutomationGateStatus, ..
 
 SEED_HANDOFF_AUTOMATION_GATE_DECISIONS: tuple[SeedHandoffAutomationGateDecision, ...] = (
     "not-requested",
+    "continue",
+    "stop",
+)
+
+SEED_HANDOFF_AUTOMATION_SUMMARY_DECISIONS: tuple[SeedHandoffAutomationSummaryDecision, ...] = (
     "continue",
     "stop",
 )
@@ -247,6 +267,51 @@ def build_seed_handoff_automation_gate(
         "detail": detail,
         "status_domain": list(SEED_HANDOFF_AUTOMATION_GATE_STATUSES),
         "decision_domain": list(SEED_HANDOFF_AUTOMATION_GATE_DECISIONS),
+    }
+
+
+def build_seed_handoff_automation_summary(
+    summary: dict[str, Any],
+    automation_gate: SeedHandoffAutomationGate,
+) -> SeedHandoffAutomationSummary:
+    gate = _dict(automation_gate)
+    handoff_status = str(summary.get("handoff_status") or "")
+    failed_requirements = _string_list(gate.get("failed_requirements"))
+    gate_decision = str(gate.get("decision") or "")
+    gate_status = str(gate.get("status") or "")
+    gate_blocking_count = _int(gate.get("blocking_requirement_count"))
+    execution_blocking_statuses = {"blocked", "failed", "timeout"}
+    if gate_decision == "stop":
+        decision: SeedHandoffAutomationSummaryDecision = "stop"
+        exit_code = _int(gate.get("exit_code")) or 1
+        blocking_source = "automation_gate"
+        detail = str(gate.get("detail") or "automation gate requested stop")
+    elif handoff_status in execution_blocking_statuses:
+        decision = "stop"
+        exit_code = 1
+        blocking_source = "handoff_execution"
+        detail = f"seed handoff status is {handoff_status}"
+    else:
+        decision = "continue"
+        exit_code = 0
+        blocking_source = None
+        detail = "seed handoff automation can continue"
+    return {
+        "decision": decision,
+        "exit_code": exit_code,
+        "blocking_source": blocking_source,
+        "handoff_status": handoff_status,
+        "gate_status": gate_status if gate_status in SEED_HANDOFF_AUTOMATION_GATE_STATUSES else "not-required",
+        "gate_decision": (
+            gate_decision
+            if gate_decision in SEED_HANDOFF_AUTOMATION_GATE_DECISIONS
+            else "not-requested"
+        ),
+        "gate_required": bool(gate.get("required")),
+        "gate_blocking_requirement_count": gate_blocking_count,
+        "failed_requirements": failed_requirements,
+        "detail": detail,
+        "decision_domain": list(SEED_HANDOFF_AUTOMATION_SUMMARY_DECISIONS),
     }
 
 
@@ -444,11 +509,14 @@ __all__ = [
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_AUTOMATION_GATE_STATUSES",
     "SEED_HANDOFF_AUTOMATION_GATE_DECISIONS",
+    "SEED_HANDOFF_AUTOMATION_SUMMARY_DECISIONS",
     "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_CLEAN_EVIDENCE_STATUSES",
     "SeedHandoffAutomationGate",
     "SeedHandoffAutomationGateDecision",
     "SeedHandoffAutomationGateStatus",
+    "SeedHandoffAutomationSummary",
+    "SeedHandoffAutomationSummaryDecision",
     "SeedHandoffCleanBatchReviewRequirement",
     "SeedHandoffCleanBatchReviewRequirementStatus",
     "SeedHandoffCleanEvidenceRequirement",
@@ -461,6 +529,7 @@ __all__ = [
     "build_seed_handoff_clean_evidence_readiness",
     "build_seed_handoff_clean_evidence_requirement",
     "build_seed_handoff_automation_gate",
+    "build_seed_handoff_automation_summary",
     "build_seed_handoff_review_recommendations",
     "build_seed_handoff_suite_alignment",
 ]

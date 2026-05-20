@@ -52,6 +52,7 @@ def main() -> None:
     clean_evidence_requirement = report["clean_evidence_requirement"]
     clean_batch_review_requirement = report["clean_batch_review_requirement"]
     automation_gate = report["automation_gate"]
+    automation_summary = report["automation_summary"]
     outputs = write_promoted_training_scale_seed_handoff_outputs(report, out_dir)
     execution = report["execution"]
     print(f"handoff_status={summary.get('handoff_status')}")
@@ -114,6 +115,15 @@ def main() -> None:
     print(f"command={report.get('command_text')}")
     print(f"next_batch_command={report.get('next_batch_command_text')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    print(f"automation_summary_decision={automation_summary.get('decision')}")
+    print(f"automation_summary_exit_code={automation_summary.get('exit_code')}")
+    print(f"automation_summary_blocking_source={automation_summary.get('blocking_source')}")
+    print(f"automation_summary_gate_decision={automation_summary.get('gate_decision')}")
+    print(
+        "automation_summary_failed_requirements="
+        + json.dumps(automation_summary.get("failed_requirements"), ensure_ascii=False)
+    )
+    print(f"automation_summary_detail={automation_summary.get('detail')}")
     if args.require_clean_evidence:
         print(f"clean_evidence_required_status={clean_evidence_requirement.get('readiness_status')}")
         print(f"clean_evidence_required_ready={clean_evidence_requirement.get('ready')}")
@@ -136,10 +146,8 @@ def main() -> None:
         print("automation_gate_failed_requirements=" + json.dumps(automation_gate.get("failed_requirements"), ensure_ascii=False))
         print("automation_gate_passed_requirements=" + json.dumps(automation_gate.get("passed_requirements"), ensure_ascii=False))
         print(f"automation_gate_detail={automation_gate.get('detail')}")
-        if automation_gate.get("decision") == "stop":
-            raise SystemExit(int(automation_gate.get("exit_code") or 1))
-    if summary.get("handoff_status") in {"blocked", "failed", "timeout"}:
-        raise SystemExit(1)
+    if automation_summary.get("decision") == "stop":
+        raise SystemExit(int(automation_summary.get("exit_code") or 1))
 
 
 def _default_out_dir(path: Path) -> Path:

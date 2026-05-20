@@ -17,6 +17,7 @@ from minigpt.promoted_training_scale_seed_handoff_artifacts import (
 )
 from minigpt.promoted_training_scale_seed_handoff_review import (
     SEED_HANDOFF_AUTOMATION_GATE_DECISIONS,
+    SEED_HANDOFF_AUTOMATION_SUMMARY_DECISIONS,
     SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES,
     SEED_HANDOFF_AUTOMATION_GATE_STATUSES,
     SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES,
@@ -24,6 +25,8 @@ from minigpt.promoted_training_scale_seed_handoff_review import (
     SeedHandoffAutomationGate,
     SeedHandoffAutomationGateDecision,
     SeedHandoffAutomationGateStatus,
+    SeedHandoffAutomationSummary,
+    SeedHandoffAutomationSummaryDecision,
     SeedHandoffCleanBatchReviewRequirement,
     SeedHandoffCleanBatchReviewRequirementStatus,
     SeedHandoffCleanEvidenceRequirement,
@@ -32,6 +35,7 @@ from minigpt.promoted_training_scale_seed_handoff_review import (
     SeedHandoffCleanEvidenceStatus,
     build_seed_handoff_batch_review_summary,
     build_seed_handoff_automation_gate,
+    build_seed_handoff_automation_summary,
     build_seed_handoff_clean_batch_review_summary,
     build_seed_handoff_clean_batch_review_requirement,
     build_seed_handoff_clean_evidence_readiness,
@@ -103,6 +107,7 @@ def build_promoted_training_scale_seed_handoff(
         clean_evidence_requirement,
         clean_batch_review_requirement,
     )
+    automation_summary = build_seed_handoff_automation_summary(summary, automation_gate)
     return {
         "schema_version": 1,
         "title": title,
@@ -127,6 +132,7 @@ def build_promoted_training_scale_seed_handoff(
         "clean_evidence_requirement": clean_evidence_requirement,
         "clean_batch_review_requirement": clean_batch_review_requirement,
         "automation_gate": automation_gate,
+        "automation_summary": automation_summary,
         "recommendations": _recommendations(
             summary,
             plan_report,
@@ -389,6 +395,7 @@ def _tail(text: str, max_chars: int = 700) -> str:
 
 __all__ = [
     "SEED_HANDOFF_AUTOMATION_GATE_DECISIONS",
+    "SEED_HANDOFF_AUTOMATION_SUMMARY_DECISIONS",
     "SEED_HANDOFF_CLEAN_EVIDENCE_REQUIREMENT_STATUSES",
     "SEED_HANDOFF_AUTOMATION_GATE_STATUSES",
     "SEED_HANDOFF_CLEAN_BATCH_REVIEW_REQUIREMENT_STATUSES",
@@ -396,6 +403,8 @@ __all__ = [
     "SeedHandoffAutomationGate",
     "SeedHandoffAutomationGateDecision",
     "SeedHandoffAutomationGateStatus",
+    "SeedHandoffAutomationSummary",
+    "SeedHandoffAutomationSummaryDecision",
     "SeedHandoffCleanBatchReviewRequirement",
     "SeedHandoffCleanBatchReviewRequirementStatus",
     "SeedHandoffCleanEvidenceRequirement",
@@ -404,6 +413,7 @@ __all__ = [
     "SeedHandoffCleanEvidenceStatus",
     "build_promoted_training_scale_seed_handoff",
     "build_seed_handoff_automation_gate",
+    "build_seed_handoff_automation_summary",
     "build_seed_handoff_clean_batch_review_requirement",
     "build_seed_handoff_clean_evidence_requirement",
     "load_promoted_training_scale_seed",

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+294-v280-promoted-seed-handoff-automation-summary.md
+ -> v280 code explanation: add a top-level seed handoff automation summary that combines gate blockers with handoff execution blockers as the final CLI/CI exit contract.
+
 293-v279-promoted-seed-handoff-automation-decision-contract.md
  -> v279 code explanation: extend the seed handoff automation gate into a direct decision contract with exit code, requirement counts, decision domains, CLI output, artifacts, and tests.
 
