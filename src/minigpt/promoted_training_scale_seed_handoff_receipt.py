@@ -9,13 +9,23 @@ from minigpt.report_utils import string_list
 
 
 RECEIPT_TYPE = "promoted_training_scale_seed_handoff_automation"
+RECEIPT_FILENAME = "promoted_training_scale_seed_handoff_automation_receipt.json"
 
 
 def load_promoted_training_scale_seed_handoff_automation_receipt(path: str | Path) -> dict[str, Any]:
-    payload = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    payload = json.loads(resolve_promoted_training_scale_seed_handoff_automation_receipt_path(path).read_text(encoding="utf-8-sig"))
     if not isinstance(payload, dict):
         raise ValueError("promoted seed handoff automation receipt must be a JSON object")
     return dict(payload)
+
+
+def resolve_promoted_training_scale_seed_handoff_automation_receipt_path(path: str | Path) -> Path:
+    candidate = Path(path)
+    if candidate.is_dir():
+        candidate = candidate / RECEIPT_FILENAME
+    if not candidate.is_file():
+        raise FileNotFoundError(candidate)
+    return candidate
 
 
 def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[str, Any]) -> dict[str, Any]:
@@ -73,6 +83,24 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
+def write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs(
+    check: dict[str, Any],
+    out_dir: str | Path,
+) -> dict[str, str]:
+    root = Path(out_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    paths = {
+        "json": root / "promoted_training_scale_seed_handoff_automation_receipt_check.json",
+        "text": root / "promoted_training_scale_seed_handoff_automation_receipt_check.txt",
+    }
+    paths["json"].write_text(json.dumps(check, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    paths["text"].write_text(
+        render_promoted_training_scale_seed_handoff_automation_receipt_check(check),
+        encoding="utf-8",
+    )
+    return {key: str(value) for key, value in paths.items()}
+
+
 def _int(value: Any) -> int:
     try:
         return int(float(value))
@@ -81,8 +109,11 @@ def _int(value: Any) -> int:
 
 
 __all__ = [
+    "RECEIPT_FILENAME",
     "RECEIPT_TYPE",
     "check_promoted_training_scale_seed_handoff_automation_receipt",
     "load_promoted_training_scale_seed_handoff_automation_receipt",
     "render_promoted_training_scale_seed_handoff_automation_receipt_check",
+    "resolve_promoted_training_scale_seed_handoff_automation_receipt_path",
+    "write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs",
 ]

@@ -15,10 +15,13 @@ from minigpt.promoted_training_scale_seed_handoff import (  # noqa: E402
     write_promoted_training_scale_seed_handoff_outputs,
 )
 from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
+    RECEIPT_FILENAME,
     RECEIPT_TYPE,
     check_promoted_training_scale_seed_handoff_automation_receipt,
     load_promoted_training_scale_seed_handoff_automation_receipt,
     render_promoted_training_scale_seed_handoff_automation_receipt_check,
+    resolve_promoted_training_scale_seed_handoff_automation_receipt_path,
+    write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs,
 )
 from tests.test_promoted_training_scale_seed_handoff import write_seed_tree  # noqa: E402
 
@@ -102,6 +105,48 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(loaded["automation_decision"], "continue")
             self.assertIn("receipt_check_status=pass", completed.stdout)
             self.assertIn("receipt_decision=continue", completed.stdout)
+            self.assertIn("receipt_path=", completed.stdout)
+
+    def test_script_accepts_handoff_output_directory_and_writes_check_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            seed = write_seed_tree(root, suite_name="standard-zh", include_handoff_suite_guard=True)
+            report = build_promoted_training_scale_seed_handoff(
+                seed,
+                execute=True,
+                require_clean_evidence=True,
+                generated_at="2026-05-14T00:00:00Z",
+            )
+            handoff_dir = root / "handoff"
+            check_dir = root / "receipt-check"
+            write_promoted_training_scale_seed_handoff_outputs(report, handoff_dir)
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_promoted_seed_handoff_receipt.py"),
+                    str(handoff_dir),
+                    "--out-dir",
+                    str(check_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(
+                resolve_promoted_training_scale_seed_handoff_automation_receipt_path(handoff_dir),
+                handoff_dir / RECEIPT_FILENAME,
+            )
+            check_json = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.json"
+            check_text = check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+            self.assertTrue(check_json.exists())
+            self.assertTrue(check_text.exists())
+            self.assertEqual(json.loads(check_json.read_text(encoding="utf-8"))["decision"], "continue")
+            self.assertIn("receipt_check_json=", completed.stdout)
+            self.assertIn("receipt_check_text=", completed.stdout)
+            self.assertIn("receipt_decision=continue", check_text.read_text(encoding="utf-8"))
 
     def test_script_exits_nonzero_for_stop_unless_allowed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -134,6 +179,24 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("receipt_decision=stop", failed.stdout)
             self.assertIn("receipt_blocking_source=automation_gate", failed.stdout)
             self.assertIn("receipt_check_status=pass", allowed.stdout)
+
+    def test_receipt_check_outputs_can_be_written_from_library(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            check = check_promoted_training_scale_seed_handoff_automation_receipt(
+                {
+                    "schema_version": 1,
+                    "receipt_type": RECEIPT_TYPE,
+                    "automation_decision": "continue",
+                    "automation_exit_code": 0,
+                    "automation_blocking_source": None,
+                    "failed_requirements": [],
+                }
+            )
+
+            outputs = write_promoted_training_scale_seed_handoff_automation_receipt_check_outputs(check, tmp)
+
+            self.assertEqual(json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))["status"], "pass")
+            self.assertIn("receipt_check_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

@@ -2,6 +2,9 @@
 
 ## 最新追加
 
+297-v283-promoted-seed-handoff-receipt-checker-artifacts.md
+ -> v283 code explanation: extend the receipt checker to resolve handoff output directories and write receipt-check JSON/text artifacts for CI archival.
+
 296-v282-promoted-seed-handoff-receipt-checker.md
  -> v282 code explanation: add a receipt checker CLI that validates promoted seed handoff automation receipts and exits from the receipt decision for CI usage.
 
