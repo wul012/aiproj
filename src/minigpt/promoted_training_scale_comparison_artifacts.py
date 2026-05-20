@@ -49,6 +49,10 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
         "handoff_selected_suite_path",
         "handoff_require_clean_batch_review",
         "handoff_clean_batch_review_status",
+        "handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_regression_names",
+        "handoff_selected_batch_maturity_ci_regression_count",
+        "comparison_exclusion_reasons",
         "handoff_selected_batch_review_status",
         "handoff_selected_batch_comparison_review_action_count",
         "handoff_selected_batch_comparison_blocker_action_count",
@@ -84,6 +88,16 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
                     "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
                     "handoff_require_clean_batch_review": row.get("handoff_require_clean_batch_review"),
                     "handoff_clean_batch_review_status": row.get("handoff_clean_batch_review_status"),
+                    "handoff_batch_maturity_ci_regression_count": row.get(
+                        "handoff_batch_maturity_ci_regression_count"
+                    ),
+                    "handoff_batch_maturity_ci_regression_names": ";".join(
+                        _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
+                    ),
+                    "handoff_selected_batch_maturity_ci_regression_count": row.get(
+                        "handoff_selected_batch_maturity_ci_regression_count"
+                    ),
+                    "comparison_exclusion_reasons": ";".join(_string_list(row.get("comparison_exclusion_reasons"))),
                     "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                     "handoff_selected_batch_comparison_review_action_count": row.get(
                         "handoff_selected_batch_comparison_review_action_count"
@@ -126,10 +140,16 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
         f"- Handoff require clean batch review: `{summary.get('handoff_require_clean_batch_review_count')}`",
         f"- Handoff clean batch review: `{summary.get('handoff_clean_batch_review_count')}`",
         f"- Handoff unclean batch review: `{summary.get('handoff_unclean_batch_review_count')}`",
+        f"- Handoff batch CI regressions: `{summary.get('handoff_batch_maturity_ci_regression_count')}`",
+        f"- Handoff selected batch CI regressions: `{summary.get('handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_ci_regression_names')))}`",
         f"- Comparison-ready handoff suite mismatches: `{summary.get('comparison_ready_handoff_suite_mismatch_total')}`",
         f"- Comparison-ready clean-required handoffs: `{summary.get('comparison_ready_handoff_require_clean_batch_review_count')}`",
         f"- Comparison-ready clean handoffs: `{summary.get('comparison_ready_handoff_clean_batch_review_count')}`",
         f"- Comparison-ready unclean handoffs: `{summary.get('comparison_ready_handoff_unclean_batch_review_count')}`",
+        f"- Comparison-ready handoff batch CI regressions: `{summary.get('comparison_ready_handoff_batch_maturity_ci_regression_count')}`",
+        f"- Comparison-ready selected batch CI regressions: `{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Comparison-ready handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('comparison_ready_handoff_batch_maturity_ci_regression_names')))}`",
         f"- Comparison-ready selected batch reviews: `{summary.get('comparison_ready_handoff_selected_batch_review_count')}`",
         f"- Comparison-ready selected batch blockers: `{summary.get('comparison_ready_handoff_selected_batch_blocker_count')}`",
         f"- Comparison-ready batch review actions: `{summary.get('comparison_ready_handoff_selected_batch_comparison_review_action_total')}`",
@@ -137,8 +157,8 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
         "",
         "## Promoted Inputs",
         "",
-        "| Name | Status | Compare | Readiness | Handoff Suite | Mismatches | Clean Required | Clean Status | Selected Suite | Batch Review | Batch Blockers | Run |",
-        "| --- | --- | --- | ---: | --- | ---: | --- | --- | --- | --- | ---: | --- |",
+        "| Name | Status | Compare | Readiness | Handoff Suite | Mismatches | Clean Required | Clean Status | CI Regressions | Exclusion | Selected Suite | Batch Review | Batch Blockers | Run |",
+        "| --- | --- | --- | ---: | --- | ---: | --- | --- | ---: | --- | --- | --- | ---: | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -153,6 +173,8 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
                     _md(row.get("handoff_suite_mismatch_count")),
                     _md(row.get("handoff_require_clean_batch_review")),
                     _md(row.get("handoff_clean_batch_review_status")),
+                    _md(row.get("handoff_batch_maturity_ci_regression_count")),
+                    _md(", ".join(_string_list(row.get("comparison_exclusion_reasons")))),
                     _md(row.get("handoff_selected_suite_path")),
                     _md(row.get("handoff_selected_batch_review_status")),
                     _md(row.get("handoff_selected_batch_comparison_blocker_action_count")),
@@ -225,10 +247,17 @@ def render_promoted_training_scale_comparison_html(report: dict[str, Any]) -> st
         ("Handoff require clean batch review", summary.get("handoff_require_clean_batch_review_count")),
         ("Handoff clean batch review", summary.get("handoff_clean_batch_review_count")),
         ("Handoff unclean batch review", summary.get("handoff_unclean_batch_review_count")),
+        ("Handoff CI regressions", summary.get("handoff_batch_maturity_ci_regression_count")),
+        ("Handoff selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
         ("Ready suite mismatches", summary.get("comparison_ready_handoff_suite_mismatch_total")),
         ("Ready clean-required", summary.get("comparison_ready_handoff_require_clean_batch_review_count")),
         ("Ready clean batch review", summary.get("comparison_ready_handoff_clean_batch_review_count")),
         ("Ready unclean batch review", summary.get("comparison_ready_handoff_unclean_batch_review_count")),
+        ("Ready CI regressions", summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")),
+        (
+            "Ready selected CI regressions",
+            summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_total"),
+        ),
         ("Ready batch reviews", summary.get("comparison_ready_handoff_selected_batch_review_count")),
         ("Ready batch blockers", summary.get("comparison_ready_handoff_selected_batch_blocker_count")),
         ("Best", _dict(comparison.get("best_by_readiness")).get("name")),
@@ -292,6 +321,8 @@ def _promotion_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('handoff_suite_mismatch_count'))}</td>"
             f"<td>{_e(row.get('handoff_require_clean_batch_review'))}</td>"
             f"<td>{_e(row.get('handoff_clean_batch_review_status'))}</td>"
+            f"<td>{_e(row.get('handoff_batch_maturity_ci_regression_count'))}</td>"
+            f"<td>{_e(', '.join(_string_list(row.get('comparison_exclusion_reasons'))))}</td>"
             f"<td>{_e(row.get('handoff_selected_suite_path'))}</td>"
             f"<td>{_e(row.get('handoff_selected_batch_review_status'))}</td>"
             f"<td>{_e(row.get('handoff_selected_batch_comparison_blocker_action_count'))}</td>"
@@ -300,7 +331,7 @@ def _promotion_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Promoted Inputs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Readiness</th><th>Handoff Suite</th><th>Mismatches</th><th>Clean Required</th><th>Clean Status</th><th>Selected Suite</th><th>Batch Review</th><th>Batch Blockers</th><th>Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Readiness</th><th>Handoff Suite</th><th>Mismatches</th><th>Clean Required</th><th>Clean Status</th><th>CI Regressions</th><th>Exclusion</th><th>Selected Suite</th><th>Batch Review</th><th>Batch Blockers</th><th>Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

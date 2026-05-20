@@ -35,6 +35,9 @@ d/307/解释/说明.md
 d/308/图片
 d/308/解释/说明.md
  -> v308 training scale promotion index CI regression filtering 的运行截图和解释
+d/309/图片
+d/309/解释/说明.md
+ -> v309 promoted training scale comparison CI regression context 的运行截图和解释
 ```
 
 写入规则：

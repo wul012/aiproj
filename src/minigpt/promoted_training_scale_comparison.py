@@ -108,14 +108,20 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
         run_path = row.get("training_scale_run_path")
         resolved_run_path = _resolve_path(run_path, index_dir)
         clean_guard = _clean_batch_review_guard(row)
-        promoted_for_comparison = bool(row.get("promoted_for_comparison"))
-        if clean_guard.get("handoff_require_clean_batch_review") and clean_guard.get("handoff_clean_batch_review_status") != "clean":
+        index_marked_compare_ready = bool(row.get("promoted_for_comparison"))
+        exclusion_reasons = _comparison_exclusion_reasons(row, resolved_run_path, clean_guard, index_marked_compare_ready)
+        promoted_for_comparison = index_marked_compare_ready and not exclusion_reasons
+        if (
+            clean_guard.get("handoff_require_clean_batch_review")
+            and clean_guard.get("handoff_clean_batch_review_status") != "clean"
+        ):
             promoted_for_comparison = False
         rows.append(
             {
                 "name": row.get("name"),
                 "promotion_status": row.get("promotion_status"),
                 "promoted_for_comparison": promoted_for_comparison,
+                "comparison_exclusion_reasons": exclusion_reasons,
                 "training_scale_run_path": str(resolved_run_path),
                 "training_scale_run_exists": resolved_run_path.exists(),
                 "gate_status": row.get("gate_status"),
@@ -127,6 +133,15 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 "handoff_selected_suite_path": row.get("handoff_selected_suite_path"),
                 "handoff_require_clean_batch_review": clean_guard.get("handoff_require_clean_batch_review"),
                 "handoff_clean_batch_review_status": clean_guard.get("handoff_clean_batch_review_status"),
+                "handoff_batch_maturity_ci_regression_count": clean_guard.get(
+                    "handoff_batch_maturity_ci_regression_count"
+                ),
+                "handoff_batch_maturity_ci_regression_names": clean_guard.get(
+                    "handoff_batch_maturity_ci_regression_names"
+                ),
+                "handoff_selected_batch_maturity_ci_regression_count": clean_guard.get(
+                    "handoff_selected_batch_maturity_ci_regression_count"
+                ),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                 "handoff_selected_batch_comparison_review_action_count": row.get(
                     "handoff_selected_batch_comparison_review_action_count"
@@ -219,12 +234,31 @@ def _summary(
         "handoff_clean_batch_review_count": sum(
             1
             for row in promotions
-            if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") == "clean"
+            if row.get("handoff_require_clean_batch_review")
+            and row.get("handoff_clean_batch_review_status") == "clean"
+            and _int(row.get("handoff_batch_maturity_ci_regression_count")) == 0
         ),
         "handoff_unclean_batch_review_count": sum(
             1
             for row in promotions
-            if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean"
+            if row.get("handoff_require_clean_batch_review")
+            and (
+                row.get("handoff_clean_batch_review_status") != "clean"
+                or _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0
+            )
+        ),
+        "handoff_batch_maturity_ci_regression_count": sum(
+            _int(row.get("handoff_batch_maturity_ci_regression_count")) for row in promotions
+        ),
+        "handoff_selected_batch_maturity_ci_regression_total": sum(
+            _int(row.get("handoff_selected_batch_maturity_ci_regression_count")) for row in promotions
+        ),
+        "handoff_batch_maturity_ci_regression_names": sorted(
+            {
+                name
+                for row in promotions
+                for name in _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
+            }
         ),
         "comparison_ready_handoff_selected_batch_review_count": sum(
             1
@@ -273,13 +307,35 @@ def _summary(
             if row.get("promoted_for_comparison")
             and row.get("handoff_require_clean_batch_review")
             and row.get("handoff_clean_batch_review_status") == "clean"
+            and _int(row.get("handoff_batch_maturity_ci_regression_count")) == 0
         ),
         "comparison_ready_handoff_unclean_batch_review_count": sum(
             1
             for row in promotions
             if row.get("promoted_for_comparison")
             and row.get("handoff_require_clean_batch_review")
-            and row.get("handoff_clean_batch_review_status") != "clean"
+            and (
+                row.get("handoff_clean_batch_review_status") != "clean"
+                or _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0
+            )
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_count": sum(
+            _int(row.get("handoff_batch_maturity_ci_regression_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": sum(
+            _int(row.get("handoff_selected_batch_maturity_ci_regression_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_names": sorted(
+            {
+                name
+                for row in promotions
+                if row.get("promoted_for_comparison")
+                for name in _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
+            }
         ),
         "comparison_ready_handoff_suite_mismatch_total": sum(
             _int(row.get("handoff_suite_mismatch_count")) for row in promotions if row.get("promoted_for_comparison")
@@ -323,9 +379,17 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
             recommendations.append(
                 "Comparison-ready promoted inputs still include unclean clean-required handoffs; resolve them before treating this comparison as clean model-quality evidence."
             )
+        elif _int(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")):
+            recommendations.append(
+                "Comparison-ready promoted inputs still include handoff batch CI regressions; resolve them before treating this comparison as clean model-quality evidence."
+            )
         elif _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
             recommendations.append(
                 "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; resolve them before treating this comparison as clean model-quality evidence."
+            )
+        elif _int(summary.get("handoff_batch_maturity_ci_regression_count")):
+            recommendations.append(
+                "CI-regressed handoff batch evidence remains visible in the promotion list but is kept out of clean-required promoted comparisons."
             )
         reasons = _string_list(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"))
         if reasons:
@@ -345,6 +409,10 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append(
             "Comparison-ready promoted inputs still include unclean clean-required handoffs; clean them before treating later comparisons as baseline evidence."
         )
+    elif _int(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")):
+        recommendations.append(
+            "Comparison-ready promoted inputs still include handoff batch CI regressions; clean them before treating later comparisons as baseline evidence."
+        )
     elif _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
         recommendations.append(
             "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; clean them before treating later comparisons as baseline evidence."
@@ -353,8 +421,36 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append(
             "Comparison-ready promoted inputs still carry selected handoff batch review actions; review them before treating later comparisons as baseline evidence."
         )
+    elif _int(summary.get("handoff_batch_maturity_ci_regression_count")):
+        recommendations.append(
+            "CI-regressed handoff batch evidence remains visible in the promotion list but is kept out of clean-required promoted comparisons."
+        )
     return recommendations
 
+
+
+def _comparison_exclusion_reasons(
+    row: dict[str, Any],
+    resolved_run_path: Path,
+    clean_guard: dict[str, Any],
+    index_marked_compare_ready: bool,
+) -> list[str]:
+    reasons = []
+    if row.get("promotion_status") != "promoted":
+        reasons.append("not promoted")
+    if not resolved_run_path.exists():
+        reasons.append("missing training scale run path")
+    if clean_guard.get("handoff_require_clean_batch_review"):
+        if clean_guard.get("handoff_clean_batch_review_status") != "clean":
+            reasons.append(f"clean batch review status is {clean_guard.get('handoff_clean_batch_review_status')}")
+        if _int(clean_guard.get("handoff_batch_maturity_ci_regression_count")) > 0:
+            reasons.append(
+                "handoff batch CI regression count is "
+                f"{clean_guard.get('handoff_batch_maturity_ci_regression_count')}"
+            )
+    if not index_marked_compare_ready and not reasons:
+        reasons.append("not marked compare-ready by promotion index")
+    return reasons
 
 
 def _resolve_path(value: Any, base_dir: Path) -> Path:
@@ -378,6 +474,9 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(row.get("summary"))
     guard = _dict(row.get("clean_batch_review_guard"))
     required = first_present(
+        row.get("handoff_require_clean_batch_review"),
+        row.get("decision_require_clean_batch_review"),
+        row.get("require_clean_batch_review"),
         guard.get("handoff_require_clean_batch_review"),
         guard.get("decision_require_clean_batch_review"),
         guard.get("require_clean_batch_review"),
@@ -388,9 +487,33 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
     return {
         "handoff_require_clean_batch_review": bool(required),
         "handoff_clean_batch_review_status": first_present(
+            row.get("handoff_clean_batch_review_status"),
             guard.get("handoff_clean_batch_review_status"),
             guard.get("clean_batch_review_status"),
             summary.get("handoff_clean_batch_review_status"),
             summary.get("clean_batch_review_status"),
+        ),
+        "handoff_batch_maturity_ci_regression_count": first_present(
+            row.get("handoff_batch_maturity_ci_regression_count"),
+            guard.get("handoff_batch_maturity_ci_regression_count"),
+            guard.get("batch_maturity_ci_regression_count"),
+            summary.get("handoff_batch_maturity_ci_regression_count"),
+            summary.get("batch_maturity_ci_regression_count"),
+        ),
+        "handoff_batch_maturity_ci_regression_names": _string_list(
+            first_present(
+                row.get("handoff_batch_maturity_ci_regression_names"),
+                guard.get("handoff_batch_maturity_ci_regression_names"),
+                guard.get("batch_maturity_ci_regression_names"),
+                summary.get("handoff_batch_maturity_ci_regression_names"),
+                summary.get("batch_maturity_ci_regression_names"),
+            )
+        ),
+        "handoff_selected_batch_maturity_ci_regression_count": first_present(
+            row.get("handoff_selected_batch_maturity_ci_regression_count"),
+            guard.get("handoff_selected_batch_maturity_ci_regression_count"),
+            guard.get("selected_batch_maturity_ci_regression_count"),
+            summary.get("handoff_selected_batch_maturity_ci_regression_count"),
+            summary.get("selected_batch_maturity_ci_regression_count"),
         ),
     }

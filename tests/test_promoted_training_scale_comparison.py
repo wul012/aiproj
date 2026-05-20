@@ -285,6 +285,138 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_unclean_batch_review_count=0", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
 
+    def test_handoff_batch_ci_regression_explains_filtered_promoted_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index_dir = make_index_tree(
+                root,
+                [
+                    entry(
+                        "alpha",
+                        "alpha",
+                        "promoted",
+                        "warn",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                        require_clean_batch_review=True,
+                        clean_batch_review_status="clean",
+                    ),
+                    entry(
+                        "beta",
+                        "beta",
+                        "promoted",
+                        "pass",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                        require_clean_batch_review=True,
+                        clean_batch_review_status="clean",
+                        batch_ci_regression_count=2,
+                        batch_ci_regression_names=["beta-old-ci"],
+                        selected_batch_ci_regression_count=1,
+                    ),
+                    entry(
+                        "gamma",
+                        "gamma",
+                        "promoted",
+                        "pass",
+                        include_handoff_suite_guard=True,
+                        include_handoff_batch_review_context=True,
+                    ),
+                ],
+                baseline_name="alpha",
+            )
+
+            report = build_promoted_training_scale_comparison(index_dir, generated_at="2026-05-14T00:00:00Z")
+            outputs = write_promoted_training_scale_comparison_outputs(report, root / "out")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "compare_promoted_training_scale_runs.py"),
+                    str(index_dir),
+                    "--out-dir",
+                    str(script_out),
+                    "--require-compared",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            rows = {row["name"]: row for row in report["promotions"]}
+            summary = report["summary"]
+            self.assertTrue(rows["alpha"]["promoted_for_comparison"])
+            self.assertFalse(rows["beta"]["promoted_for_comparison"])
+            self.assertEqual(rows["beta"]["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(rows["beta"]["handoff_batch_maturity_ci_regression_names"], ["beta-old-ci"])
+            self.assertEqual(rows["beta"]["handoff_selected_batch_maturity_ci_regression_count"], 1)
+            self.assertIn("handoff batch CI regression count is 2", rows["beta"]["comparison_exclusion_reasons"])
+            self.assertEqual([row["name"] for row in report["comparison"]["runs"]], ["alpha", "gamma"])
+            self.assertEqual(summary["comparison_ready_count"], 2)
+            self.assertEqual(summary["handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(summary["handoff_clean_batch_review_count"], 1)
+            self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 1)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_names"], ["beta-old-ci"])
+            self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_maturity_ci_regression_total"], 0)
+            self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("comparison_exclusion_reasons", csv_text)
+            self.assertIn("Handoff batch CI regressions", markdown)
+            self.assertIn("CI Regressions", markdown)
+            self.assertIn("Handoff CI regressions", html)
+            self.assertIn("handoff_batch_maturity_ci_regression_count=2", completed.stdout)
+            self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
+            self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
+
+    def test_comparison_layer_blocks_stale_ci_regressed_clean_required_input(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index_dir = make_index_tree(
+                root,
+                [
+                    entry(
+                        "alpha",
+                        "alpha",
+                        "promoted",
+                        "warn",
+                        require_clean_batch_review=True,
+                        clean_batch_review_status="clean",
+                    ),
+                    entry(
+                        "beta",
+                        "beta",
+                        "promoted",
+                        "pass",
+                        require_clean_batch_review=True,
+                        clean_batch_review_status="clean",
+                        batch_ci_regression_count=1,
+                        batch_ci_regression_names=["stale-ci"],
+                        force_compare_ready=True,
+                    ),
+                ],
+                baseline_name="alpha",
+            )
+
+            report = build_promoted_training_scale_comparison(index_dir, generated_at="2026-05-14T00:00:00Z")
+
+            rows = {row["name"]: row for row in report["promotions"]}
+            self.assertTrue(rows["alpha"]["promoted_for_comparison"])
+            self.assertFalse(rows["beta"]["promoted_for_comparison"])
+            self.assertEqual(report["comparison_status"], "blocked")
+            self.assertEqual(report["summary"]["comparison_ready_count"], 1)
+            self.assertEqual(report["summary"]["handoff_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(report["summary"]["handoff_unclean_batch_review_count"], 1)
+            self.assertIn("handoff batch CI regression count is 1", rows["beta"]["comparison_exclusion_reasons"])
+            self.assertTrue(
+                any("CI-regressed handoff batch evidence remains visible" in item for item in report["recommendations"])
+            )
+
     def test_blocks_when_promoted_input_is_insufficient(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -357,6 +489,10 @@ def entry(
     include_handoff_batch_review_context: bool = False,
     require_clean_batch_review: bool = False,
     clean_batch_review_status: str | None = None,
+    batch_ci_regression_count: int = 0,
+    batch_ci_regression_names: list[str] | None = None,
+    selected_batch_ci_regression_count: int = 0,
+    force_compare_ready: bool = False,
 ) -> dict:
     return {
         "safe_id": safe_id,
@@ -368,6 +504,10 @@ def entry(
         "include_handoff_batch_review_context": include_handoff_batch_review_context,
         "require_clean_batch_review": require_clean_batch_review,
         "clean_batch_review_status": clean_batch_review_status,
+        "batch_ci_regression_count": batch_ci_regression_count,
+        "batch_ci_regression_names": batch_ci_regression_names or [],
+        "selected_batch_ci_regression_count": selected_batch_ci_regression_count,
+        "force_compare_ready": force_compare_ready,
     }
 
 
@@ -422,8 +562,45 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
                     "handoff_clean_batch_review_status": clean_batch_review_status,
                 }
             )
-        if item.get("require_clean_batch_review") and clean_batch_review_status != "clean":
+        if item.get("batch_ci_regression_count"):
+            promotion.update(
+                {
+                    "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+                    "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
+                    "handoff_selected_batch_maturity_ci_regression_count": item.get(
+                        "selected_batch_ci_regression_count"
+                    ),
+                }
+            )
+            promotion.setdefault("summary", {})
+            promotion["summary"].update(
+                {
+                    "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+                    "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
+                    "handoff_selected_batch_maturity_ci_regression_count": item.get(
+                        "selected_batch_ci_regression_count"
+                    ),
+                }
+            )
+            if "clean_batch_review_guard" in promotion:
+                promotion["clean_batch_review_guard"].update(
+                    {
+                        "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+                        "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
+                        "handoff_selected_batch_maturity_ci_regression_count": item.get(
+                            "selected_batch_ci_regression_count"
+                        ),
+                    }
+                )
+        if item.get("force_compare_ready"):
+            promotion["promoted_for_comparison"] = True
+        if (
+            item.get("require_clean_batch_review")
+            and (clean_batch_review_status != "clean" or item.get("batch_ci_regression_count"))
+            and not item.get("force_compare_ready")
+        ):
             promoted = False
+            promotion["promoted_for_comparison"] = False
         promotions.append(promotion)
         if promoted:
             compare_names.append(item["name"])
