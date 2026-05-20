@@ -113,6 +113,9 @@ d/333/解释/说明.md
 d/334/图片
 d/334/解释/说明.md
  -> v334 tiny scorecard smoke checker 的运行截图和解释
+d/335/图片
+d/335/解释/说明.md
+ -> v335 inline tiny scorecard smoke check 的运行截图和解释
 ```
 
 写入规则：

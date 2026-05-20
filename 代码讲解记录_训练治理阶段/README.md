@@ -107,6 +107,9 @@
 348-v334-tiny-scorecard-smoke-checker.md
  -> v334 code explanation: add a reusable checker for completed tiny scorecard comparison smoke summaries, including artifact, gate, command, and model-quality-claim boundaries.
 
+349-v335-inline-tiny-scorecard-smoke-check.md
+ -> v335 code explanation: embed the reusable tiny scorecard summary checker into the smoke command as optional sidecar output.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -9,9 +9,14 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.report_utils import as_dict, list_of_dicts  # noqa: E402
+from scripts.check_tiny_scorecard_comparison_smoke import (  # noqa: E402
+    check_summary as check_smoke_summary,
+    write_check_outputs as write_smoke_check_outputs,
+)
 
 
 SUMMARY_JSON_FILENAME = "tiny_scorecard_comparison_smoke_summary.json"
@@ -48,6 +53,22 @@ def parse_args() -> argparse.Namespace:
         "--require-clean-remediation",
         action="store_true",
         help="Fail the smoke when the decision report contains remediation rows.",
+    )
+    parser.add_argument(
+        "--summary-check-out-dir",
+        type=Path,
+        default=None,
+        help="Optionally validate the generated smoke summary and write check JSON/text sidecars.",
+    )
+    parser.add_argument(
+        "--summary-check-allow-gate-stop",
+        action="store_true",
+        help="Let the inline summary checker accept an expected strict remediation gate stop.",
+    )
+    parser.add_argument(
+        "--summary-check-no-fail",
+        action="store_true",
+        help="Write inline summary-check outputs without failing the smoke on summary-check failures.",
     )
     parser.add_argument("--eval-iters", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=2)
@@ -140,7 +161,12 @@ def main() -> None:
                 command_results=command_results,
                 issues=[f"{name} command returned {result['returncode']}"],
             )
-            outputs = write_summary_outputs(summary, out_dir)
+            outputs = write_summary_and_optional_check(
+                summary,
+                out_dir,
+                summary_check_out_dir=args.summary_check_out_dir,
+                summary_check_allow_gate_stop=args.summary_check_allow_gate_stop,
+            )
             print_summary(summary, outputs)
             raise SystemExit(int(result["returncode"] or 1))
 
@@ -154,8 +180,16 @@ def main() -> None:
         command_results=command_results,
         issues=[],
     )
-    outputs = write_summary_outputs(summary, out_dir)
+    outputs = write_summary_and_optional_check(
+        summary,
+        out_dir,
+        summary_check_out_dir=args.summary_check_out_dir,
+        summary_check_allow_gate_stop=args.summary_check_allow_gate_stop,
+    )
     print_summary(summary, outputs)
+    summary_check = as_dict(summary.get("summary_check"))
+    if summary_check.get("status") == "fail" and not args.summary_check_no_fail:
+        raise SystemExit(1)
     if summary["status"] != "pass":
         raise SystemExit(1)
 
@@ -182,6 +216,9 @@ def build_run_config(args: argparse.Namespace) -> dict[str, Any]:
         "budget_mode": budget_mode,
         "decision_min_rubric_score": decision_min_rubric_score,
         "require_clean_remediation": bool(args.require_clean_remediation),
+        "summary_check_requested": getattr(args, "summary_check_out_dir", None) is not None,
+        "summary_check_allow_gate_stop": bool(getattr(args, "summary_check_allow_gate_stop", False)),
+        "summary_check_no_fail": bool(getattr(args, "summary_check_no_fail", False)),
         "eval_iters": args.eval_iters,
         "batch_size": args.batch_size,
         "block_size": args.block_size,
@@ -485,6 +522,9 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("config_budget_mode", run_config.get("budget_mode")),
         ("config_decision_min_rubric_score", run_config.get("decision_min_rubric_score")),
         ("config_require_clean_remediation", run_config.get("require_clean_remediation")),
+        ("config_summary_check_requested", run_config.get("summary_check_requested")),
+        ("config_summary_check_allow_gate_stop", run_config.get("summary_check_allow_gate_stop")),
+        ("config_summary_check_no_fail", run_config.get("summary_check_no_fail")),
         ("baseline_scorecard_status", baseline.get("scorecard_overall_status")),
         ("baseline_scorecard_score", baseline.get("scorecard_overall_score")),
         ("candidate_scorecard_status", candidate.get("scorecard_overall_status")),
@@ -550,11 +590,27 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("decision_first_recommendation", decision.get("first_recommendation")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
     ]
+    summary_check = as_dict(summary.get("summary_check"))
+    summary_check_outputs = as_dict(summary.get("summary_check_outputs"))
+    summary_check_issues = list_of_dicts(summary_check.get("issues"))
+    first_summary_check_issue = summary_check_issues[0] if summary_check_issues else {}
+    rows.extend(
+        [
+            ("summary_check_status", summary_check.get("status")),
+            ("summary_check_decision", summary_check.get("decision")),
+            ("summary_check_issue_count", summary_check.get("issue_count")),
+            ("summary_check_allowed_gate_stop", summary_check.get("allowed_gate_stop")),
+            ("summary_check_first_issue_code", first_summary_check_issue.get("code")),
+            ("summary_check_json", summary_check_outputs.get("json")),
+            ("summary_check_text", summary_check_outputs.get("text")),
+        ]
+    )
     rows.extend((f"command_{item['name']}", item["status"]) for item in list_of_dicts(summary.get("commands")))
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
 def write_summary_outputs(summary: dict[str, Any], out_dir: Path) -> dict[str, str]:
+    out_dir.mkdir(parents=True, exist_ok=True)
     paths = {
         "json": out_dir / SUMMARY_JSON_FILENAME,
         "text": out_dir / SUMMARY_TEXT_FILENAME,
@@ -562,6 +618,27 @@ def write_summary_outputs(summary: dict[str, Any], out_dir: Path) -> dict[str, s
     paths["json"].write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     paths["text"].write_text(render_summary(summary), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
+
+
+def write_summary_and_optional_check(
+    summary: dict[str, Any],
+    out_dir: Path,
+    *,
+    summary_check_out_dir: Path | None = None,
+    summary_check_allow_gate_stop: bool = False,
+) -> dict[str, str]:
+    outputs = write_summary_outputs(summary, out_dir)
+    if summary_check_out_dir is None:
+        return outputs
+    summary_check = check_smoke_summary(
+        summary,
+        summary_path=Path(outputs["json"]),
+        allow_gate_stop=summary_check_allow_gate_stop,
+    )
+    summary_check_outputs = write_smoke_check_outputs(summary_check, summary_check_out_dir)
+    summary["summary_check"] = summary_check
+    summary["summary_check_outputs"] = summary_check_outputs
+    return write_summary_outputs(summary, out_dir)
 
 
 def print_summary(summary: dict[str, Any], outputs: dict[str, str]) -> None:

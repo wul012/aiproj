@@ -16,6 +16,7 @@ from scripts.run_tiny_scorecard_comparison_smoke import (  # noqa: E402
     decision_summary,
     remediation_gate_status,
     render_summary,
+    write_summary_and_optional_check,
 )
 
 
@@ -35,6 +36,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "budget_mode": "candidate_more_iters",
                     "decision_min_rubric_score": 65.5,
                     "require_clean_remediation": False,
+                    "summary_check_requested": False,
+                    "summary_check_allow_gate_stop": False,
+                    "summary_check_no_fail": False,
                 },
                 "baseline_smoke": {
                     "scorecard_overall_status": "pass",
@@ -119,6 +123,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("config_budget_mode=candidate_more_iters", text)
         self.assertIn("config_decision_min_rubric_score=65.5", text)
         self.assertIn("config_require_clean_remediation=False", text)
+        self.assertIn("config_summary_check_requested=False", text)
+        self.assertIn("config_summary_check_allow_gate_stop=False", text)
+        self.assertIn("config_summary_check_no_fail=False", text)
         self.assertIn("comparison_scorecard_count=2", text)
         self.assertIn("comparison_case_delta_count=20", text)
         self.assertIn("decision_status=promote", text)
@@ -147,12 +154,15 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("remediation_gate_first_issue_action_code=None", text)
         self.assertIn("decision_first_recommendation=Promote the selected scorecard only as benchmark evidence.", text)
         self.assertIn("model_quality_claim=not_claimed", text)
+        self.assertIn("summary_check_status=None", text)
+        self.assertIn("summary_check_decision=None", text)
         self.assertIn("command_scorecard_comparison=pass", text)
         self.assertIn("command_scorecard_decision=pass", text)
 
     def test_tiny_scorecard_comparison_smoke_runs_real_chain(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             out_dir = Path(tmp) / "comparison-smoke"
+            summary_check_dir = Path(tmp) / "comparison-smoke-check"
 
             completed = subprocess.run(
                 [
@@ -185,6 +195,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "1337",
                     "--candidate-seed",
                     "2026",
+                    "--summary-check-out-dir",
+                    str(summary_check_dir),
                     "--force",
                 ],
                 check=True,
@@ -194,6 +206,8 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
 
             summary_path = out_dir / "tiny_scorecard_comparison_smoke_summary.json"
             summary_text_path = out_dir / "tiny_scorecard_comparison_smoke_summary.txt"
+            summary_check_path = summary_check_dir / "tiny_scorecard_comparison_smoke_check.json"
+            summary_check_text_path = summary_check_dir / "tiny_scorecard_comparison_smoke_check.txt"
             summary = json.loads(summary_path.read_text(encoding="utf-8"))
 
             self.assertEqual(summary["status"], "pass")
@@ -204,6 +218,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertEqual(summary["run_config"]["budget_mode"], "candidate_more_iters")
             self.assertEqual(summary["run_config"]["decision_min_rubric_score"], 60.0)
             self.assertFalse(summary["run_config"]["require_clean_remediation"])
+            self.assertTrue(summary["run_config"]["summary_check_requested"])
+            self.assertFalse(summary["run_config"]["summary_check_allow_gate_stop"])
+            self.assertFalse(summary["run_config"]["summary_check_no_fail"])
             self.assertEqual(summary["scorecard_comparison"]["scorecard_count"], 2)
             self.assertEqual(summary["scorecard_comparison"]["baseline_name"], "tiny-baseline")
             self.assertEqual(summary["scorecard_comparison"]["case_delta_count"], 20)
@@ -242,6 +259,11 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIsInstance(summary["scorecard_decision"]["review_candidate_names"], list)
             self.assertTrue(summary["scorecard_decision"]["first_recommendation"])
             self.assertEqual(summary["interpretation"]["model_quality_claim"], "not_claimed")
+            self.assertEqual(summary["summary_check"]["status"], "pass")
+            self.assertEqual(summary["summary_check"]["decision"], "continue")
+            self.assertEqual(summary["summary_check"]["issue_count"], 0)
+            self.assertEqual(summary["summary_check_outputs"]["json"], str(summary_check_path))
+            self.assertEqual(summary["summary_check_outputs"]["text"], str(summary_check_text_path))
             self.assertTrue(summary["baseline_smoke"]["pair_same_checkpoint_baseline"])
             self.assertTrue(summary["candidate_smoke"]["pair_same_checkpoint_baseline"])
             self.assertTrue(summary["artifacts"]["comparison_json_exists"])
@@ -254,6 +276,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertTrue((out_dir / "scorecard-comparison" / "benchmark_scorecard_comparison.json").is_file())
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision.json").is_file())
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision_remediation.csv").is_file())
+            self.assertTrue(summary_check_path.is_file())
+            self.assertTrue(summary_check_text_path.is_file())
+            self.assertEqual(json.loads(summary_check_path.read_text(encoding="utf-8"))["status"], "pass")
             self.assertIn(
                 "raise_candidate_rubric_or_change_policy",
                 (out_dir / "scorecard-decision" / "benchmark_scorecard_decision_remediation.csv").read_text(encoding="utf-8"),
@@ -263,6 +288,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_decision_min_rubric_score=60.0", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_require_clean_remediation=False", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("config_summary_check_requested=True", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_first_threshold_candidate=tiny-candidate", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_first_threshold_min=60.0", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_threshold_blocked_count=1", summary_text_path.read_text(encoding="utf-8"))
@@ -279,6 +305,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("remediation_gate_decision=continue", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("remediation_gate_issue_count=0", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("remediation_gate_first_issue_code=None", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("summary_check_status=pass", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("summary_check_decision=continue", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("summary_check_json=", summary_text_path.read_text(encoding="utf-8"))
             candidate_command = next(item for item in summary["commands"] if item["name"] == "candidate_smoke")
             self.assertIn("--max-iters 2", candidate_command["command_text"])
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
@@ -286,6 +315,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("model_quality_claim=not_claimed", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("command_scorecard_comparison=pass", completed.stdout)
             self.assertIn("command_scorecard_decision=pass", completed.stdout)
+            self.assertIn("summary_check_status=pass", completed.stdout)
 
     def test_build_run_config_defaults_to_matched_budget(self) -> None:
         class Args:
@@ -304,6 +334,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             candidate_seed = 2026
             decision_min_rubric_score = 80.0
             require_clean_remediation = False
+            summary_check_out_dir = None
+            summary_check_allow_gate_stop = False
+            summary_check_no_fail = False
 
         config = build_run_config(Args())
 
@@ -313,6 +346,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertEqual(config["budget_mode"], "matched_iters")
         self.assertEqual(config["decision_min_rubric_score"], 80.0)
         self.assertFalse(config["require_clean_remediation"])
+        self.assertFalse(config["summary_check_requested"])
+        self.assertFalse(config["summary_check_allow_gate_stop"])
+        self.assertFalse(config["summary_check_no_fail"])
 
     def test_build_run_config_rejects_invalid_decision_threshold(self) -> None:
         class Args:
@@ -331,6 +367,9 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             candidate_seed = 2026
             decision_min_rubric_score = 101.0
             require_clean_remediation = False
+            summary_check_out_dir = None
+            summary_check_allow_gate_stop = False
+            summary_check_no_fail = False
 
         with self.assertRaisesRegex(ValueError, "--decision-min-rubric-score"):
             build_run_config(Args())
@@ -352,8 +391,51 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             candidate_seed = 2026
             decision_min_rubric_score = 80.0
             require_clean_remediation = True
+            summary_check_out_dir = ROOT / "runs" / "summary-check"
+            summary_check_allow_gate_stop = True
+            summary_check_no_fail = True
 
-        self.assertTrue(build_run_config(Args())["require_clean_remediation"])
+        config = build_run_config(Args())
+        self.assertTrue(config["require_clean_remediation"])
+        self.assertTrue(config["summary_check_requested"])
+        self.assertTrue(config["summary_check_allow_gate_stop"])
+        self.assertTrue(config["summary_check_no_fail"])
+
+    def test_write_summary_and_optional_check_embeds_sidecar_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out_dir = root / "smoke"
+            check_dir = root / "check"
+            summary = {
+                "status": "pass",
+                "decision": "comparison-evidence-ready",
+                "issue_count": 0,
+                "run_config": {"summary_check_requested": True},
+                "commands": [{"name": "scorecard_decision", "status": "pass"}],
+                "artifacts": {
+                    "baseline_smoke_summary_exists": True,
+                    "baseline_scorecard_exists": True,
+                    "candidate_smoke_summary_exists": True,
+                    "candidate_scorecard_exists": True,
+                    "comparison_json_exists": True,
+                    "comparison_html_exists": True,
+                    "decision_json_exists": True,
+                    "decision_remediation_csv_exists": True,
+                    "decision_html_exists": True,
+                },
+                "remediation_gate": {"status": "pass", "decision": "continue", "issue_count": 0, "issues": []},
+                "interpretation": {"model_quality_claim": "not_claimed"},
+            }
+
+            outputs = write_summary_and_optional_check(summary, out_dir, summary_check_out_dir=check_dir)
+
+            self.assertEqual(outputs["json"], str(out_dir / "tiny_scorecard_comparison_smoke_summary.json"))
+            self.assertEqual(summary["summary_check"]["status"], "pass")
+            self.assertEqual(summary["summary_check"]["decision"], "continue")
+            self.assertEqual(summary["summary_check_outputs"]["json"], str(check_dir / "tiny_scorecard_comparison_smoke_check.json"))
+            written_summary = json.loads((out_dir / "tiny_scorecard_comparison_smoke_summary.json").read_text(encoding="utf-8"))
+            self.assertEqual(written_summary["summary_check"]["status"], "pass")
+            self.assertTrue((check_dir / "tiny_scorecard_comparison_smoke_check.txt").is_file())
 
     def test_remediation_gate_blocks_when_required_and_rows_exist(self) -> None:
         gate = remediation_gate_status(
