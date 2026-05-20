@@ -35,6 +35,9 @@
 324-v310-promoted-training-scale-decision-ci-regression-context.md
  -> v310 code explanation: carry promoted-comparison CI regression exclusions into promoted baseline decisions, rejected candidates, outputs, and CLI diagnostics.
 
+325-v311-promoted-training-scale-seed-ci-regression-context.md
+ -> v311 code explanation: carry promoted-decision CI regression exclusions into promoted next-cycle seeds, seed outputs, and CLI diagnostics.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

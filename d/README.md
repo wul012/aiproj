@@ -41,6 +41,9 @@ d/309/解释/说明.md
 d/310/图片
 d/310/解释/说明.md
  -> v310 promoted training scale decision CI regression context 的运行截图和解释
+d/311/图片
+d/311/解释/说明.md
+ -> v311 promoted training scale seed CI regression context 的运行截图和解释
 ```
 
 写入规则：
