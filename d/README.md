@@ -53,6 +53,9 @@ d/313/解释/说明.md
 d/314/图片
 d/314/解释/说明.md
  -> v314 promoted seed handoff assurance CI contract summary 的运行截图和解释
+d/315/图片
+d/315/解释/说明.md
+ -> v315 tiny standard benchmark smoke 的运行截图和解释
 ```
 
 写入规则：
