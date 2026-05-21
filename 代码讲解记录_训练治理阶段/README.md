@@ -131,6 +131,9 @@
 356-v342-ci-tiny-scorecard-plan-digest-summary.md
  -> v342 code explanation: lift the CI tiny scorecard plan digest gate into CI workflow hygiene summary fields and project audit context.
 
+357-v343-benchmark-history-ledger.md
+ -> v343 code explanation: connect scorecard comparison and decision artifacts into a reusable benchmark history ledger with history-ready outputs and boundary labels.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

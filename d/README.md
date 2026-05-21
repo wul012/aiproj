@@ -137,6 +137,9 @@ d/341/解释/说明.md
 d/342/图片
 d/342/解释/说明.md
  -> v342 CI tiny scorecard plan digest summary 的运行截图和解释
+d/343/图片
+d/343/解释/说明.md
+ -> v343 benchmark history ledger 的运行截图和解释
 ```
 
 写入规则：
