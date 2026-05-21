@@ -149,6 +149,9 @@
 362-v348-benchmark-history-release-readiness.md
  -> v348 code explanation: carry benchmark history gate and bundle boundaries into release readiness summary, panel, CLI, Markdown, and HTML outputs.
 
+363-v349-benchmark-history-readiness-comparison.md
+ -> v349 code explanation: compare release readiness benchmark-history status, regression, quality-claim, and boundary deltas across baseline and candidate dashboards.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

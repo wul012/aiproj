@@ -50,6 +50,8 @@ def main() -> None:
     print(f"ci_workflow_order_regressions={summary.get('ci_workflow_order_regression_count')}")
     print(f"max_abs_ci_workflow_order_violation_delta={summary.get('max_abs_ci_workflow_order_violation_delta')}")
     print(f"test_coverage_regressions={summary.get('test_coverage_regression_count')}")
+    print(f"benchmark_history_deltas={summary.get('benchmark_history_delta_count')}")
+    print(f"benchmark_history_regressions={summary.get('benchmark_history_regression_count')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 
 

@@ -44,6 +44,16 @@ COVERAGE_STATUS_ORDER = {
     "pass": 2,
 }
 
+BENCHMARK_HISTORY_STATUS_ORDER = {
+    "missing": 0,
+    "fail": 0,
+    "blocked": 0,
+    "warn": 1,
+    "review": 1,
+    "pass": 2,
+    "ready": 2,
+}
+
 
 def build_release_readiness_comparison(
     readiness_paths: list[str | Path],
@@ -99,6 +109,15 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "test_coverage_percent": summary.get("test_coverage_percent"),
         "test_coverage_fail_under": summary.get("test_coverage_fail_under"),
         "test_coverage_gap": summary.get("test_coverage_gap"),
+        "benchmark_history_status": summary.get("benchmark_history_status"),
+        "benchmark_history_entries": summary.get("benchmark_history_entries"),
+        "benchmark_history_ready": summary.get("benchmark_history_ready"),
+        "benchmark_history_review": summary.get("benchmark_history_review"),
+        "benchmark_history_blocked": summary.get("benchmark_history_blocked"),
+        "benchmark_history_case_regressions": summary.get("benchmark_history_case_regressions"),
+        "benchmark_history_generation_flag_regressions": summary.get("benchmark_history_generation_flag_regressions"),
+        "benchmark_history_model_quality_claim": summary.get("benchmark_history_model_quality_claim"),
+        "benchmark_history_latest_boundary": summary.get("benchmark_history_latest_boundary"),
         "maturity_status": summary.get("maturity_status"),
         "ready_runs": summary.get("ready_runs"),
         "missing_artifacts": summary.get("missing_artifacts"),
@@ -130,6 +149,8 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "compared_ci_workflow_status": compared.get("ci_workflow_status"),
         "baseline_test_coverage_status": baseline.get("test_coverage_status"),
         "compared_test_coverage_status": compared.get("test_coverage_status"),
+        "baseline_benchmark_history_status": baseline.get("benchmark_history_status"),
+        "compared_benchmark_history_status": compared.get("benchmark_history_status"),
         "status_delta": status_delta,
         "delta_status": _delta_status(status_delta, changed),
         "audit_score_delta": _number_delta(compared.get("audit_score_percent"), baseline.get("audit_score_percent")),
@@ -140,6 +161,27 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "test_coverage_percent_delta": _number_delta(compared.get("test_coverage_percent"), baseline.get("test_coverage_percent")),
         "test_coverage_gap_delta": _number_delta(compared.get("test_coverage_gap"), baseline.get("test_coverage_gap")),
         "test_coverage_status_changed": compared.get("test_coverage_status") != baseline.get("test_coverage_status"),
+        "benchmark_history_status_delta": _benchmark_history_status_score(compared.get("benchmark_history_status"))
+        - _benchmark_history_status_score(baseline.get("benchmark_history_status")),
+        "benchmark_history_status_changed": compared.get("benchmark_history_status") != baseline.get("benchmark_history_status"),
+        "benchmark_history_entry_delta": _number_delta(compared.get("benchmark_history_entries"), baseline.get("benchmark_history_entries")),
+        "benchmark_history_ready_delta": _number_delta(compared.get("benchmark_history_ready"), baseline.get("benchmark_history_ready")),
+        "benchmark_history_review_delta": _number_delta(compared.get("benchmark_history_review"), baseline.get("benchmark_history_review")),
+        "benchmark_history_blocked_delta": _number_delta(compared.get("benchmark_history_blocked"), baseline.get("benchmark_history_blocked")),
+        "benchmark_history_case_regression_delta": _number_delta(
+            compared.get("benchmark_history_case_regressions"),
+            baseline.get("benchmark_history_case_regressions"),
+        ),
+        "benchmark_history_generation_flag_regression_delta": _number_delta(
+            compared.get("benchmark_history_generation_flag_regressions"),
+            baseline.get("benchmark_history_generation_flag_regressions"),
+        ),
+        "benchmark_history_model_quality_claim_changed": compared.get("benchmark_history_model_quality_claim")
+        != baseline.get("benchmark_history_model_quality_claim"),
+        "benchmark_history_latest_boundary_changed": compared.get("benchmark_history_latest_boundary")
+        != baseline.get("benchmark_history_latest_boundary"),
+        "baseline_benchmark_history_boundary": baseline.get("benchmark_history_latest_boundary"),
+        "compared_benchmark_history_boundary": compared.get("benchmark_history_latest_boundary"),
         "missing_artifact_delta": _number_delta(compared.get("missing_artifacts"), baseline.get("missing_artifacts")),
         "fail_panel_delta": _number_delta(compared.get("fail_panel_count"), baseline.get("fail_panel_count")),
         "warn_panel_delta": _number_delta(compared.get("warn_panel_count"), baseline.get("warn_panel_count")),
@@ -182,6 +224,20 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append(f"Test coverage percent delta is {delta.get('test_coverage_percent_delta')}.")
     if delta.get("test_coverage_gap_delta") not in {None, 0, 0.0}:
         parts.append(f"Test coverage gap delta is {delta.get('test_coverage_gap_delta')}.")
+    if delta.get("benchmark_history_status_changed"):
+        parts.append(
+            f"Benchmark history status changed from {delta.get('baseline_benchmark_history_status')} to {delta.get('compared_benchmark_history_status')}."
+        )
+    if delta.get("benchmark_history_case_regression_delta") not in {None, 0, 0.0}:
+        parts.append(f"Benchmark history case regression delta is {delta.get('benchmark_history_case_regression_delta')}.")
+    if delta.get("benchmark_history_generation_flag_regression_delta") not in {None, 0, 0.0}:
+        parts.append(
+            f"Benchmark history generation-flag regression delta is {delta.get('benchmark_history_generation_flag_regression_delta')}."
+        )
+    if delta.get("benchmark_history_latest_boundary_changed"):
+        parts.append(
+            f"Benchmark history boundary changed from {delta.get('baseline_benchmark_history_boundary')} to {delta.get('compared_benchmark_history_boundary')}."
+        )
     if status == "same" and not changed:
         parts.append("No readiness status or panel delta is present.")
     return " ".join(parts)
@@ -210,12 +266,16 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "ci_workflow_order_regression_count": sum(1 for delta in deltas if _is_ci_workflow_order_regression(delta)),
         "max_abs_ci_workflow_order_violation_delta": _max_abs_delta(deltas, "ci_workflow_order_violation_delta"),
         "test_coverage_regression_count": sum(1 for delta in deltas if _is_test_coverage_regression(delta)),
+        "benchmark_history_delta_count": sum(1 for delta in deltas if _has_benchmark_history_delta(delta)),
+        "benchmark_history_regression_count": sum(1 for delta in deltas if _is_benchmark_history_regression(delta)),
     }
 
 
 def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> list[str]:
     if int(summary.get("test_coverage_regression_count") or 0):
         return ["At least one readiness comparison shows test coverage regression; inspect coverage percent and gap deltas before release handoff."]
+    if int(summary.get("benchmark_history_regression_count") or 0):
+        return ["At least one readiness comparison shows benchmark history regression; inspect benchmark status, case-regression, and boundary deltas before release handoff."]
     if int(summary.get("ci_workflow_regression_count") or 0):
         return ["At least one readiness comparison shows CI workflow hygiene regression; inspect CI failed-check and order-violation deltas before release handoff."]
     if int(summary.get("regressed_count") or 0):
@@ -273,12 +333,48 @@ def _is_test_coverage_regression(delta: dict[str, Any]) -> bool:
     return False
 
 
+def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
+    if delta.get("benchmark_history_status_changed"):
+        return True
+    if delta.get("benchmark_history_model_quality_claim_changed") or delta.get("benchmark_history_latest_boundary_changed"):
+        return True
+    keys = [
+        "benchmark_history_entry_delta",
+        "benchmark_history_ready_delta",
+        "benchmark_history_review_delta",
+        "benchmark_history_blocked_delta",
+        "benchmark_history_case_regression_delta",
+        "benchmark_history_generation_flag_regression_delta",
+    ]
+    return any(delta.get(key) not in {None, 0, 0.0} for key in keys)
+
+
+def _is_benchmark_history_regression(delta: dict[str, Any]) -> bool:
+    if int(delta.get("benchmark_history_status_delta") or 0) < 0:
+        return True
+    for key in [
+        "benchmark_history_review_delta",
+        "benchmark_history_blocked_delta",
+        "benchmark_history_case_regression_delta",
+        "benchmark_history_generation_flag_regression_delta",
+    ]:
+        value = delta.get(key)
+        if isinstance(value, (int, float)) and value > 0:
+            return True
+    ready_delta = delta.get("benchmark_history_ready_delta")
+    return isinstance(ready_delta, (int, float)) and ready_delta < 0
+
+
 def _ci_status_score(value: Any) -> int:
     return CI_STATUS_ORDER.get(str(value or "missing"), 0)
 
 
 def _coverage_status_score(value: Any) -> int:
     return COVERAGE_STATUS_ORDER.get(str(value or "missing"), 0)
+
+
+def _benchmark_history_status_score(value: Any) -> int:
+    return BENCHMARK_HISTORY_STATUS_ORDER.get(str(value or "missing"), 0)
 
 
 def _max_abs_delta(deltas: list[dict[str, Any]], key: str) -> float | int | None:

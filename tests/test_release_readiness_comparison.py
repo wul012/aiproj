@@ -39,6 +39,15 @@ def make_readiness(
     test_coverage_status: str = "pass",
     test_coverage_percent: float = 90.17,
     test_coverage_gap: float = 0.0,
+    benchmark_history_status: str = "pass",
+    benchmark_history_entries: int = 1,
+    benchmark_history_ready: int = 1,
+    benchmark_history_review: int = 0,
+    benchmark_history_blocked: int = 0,
+    benchmark_history_case_regressions: int = 0,
+    benchmark_history_generation_flag_regressions: int = 0,
+    benchmark_history_model_quality_claim: str = "candidate_evidence",
+    benchmark_history_latest_boundary: str = "standard-benchmark-candidate-evidence",
     fail_panels: int = 0,
     warn_panels: int = 0,
 ) -> Path:
@@ -52,6 +61,7 @@ def make_readiness(
         "maturity": "pass",
         "ci_workflow_hygiene": "pass" if ci_workflow_status == "pass" else "warn",
         "test_coverage": "pass" if test_coverage_status == "pass" else "warn",
+        "benchmark_history": "pass" if benchmark_history_status == "pass" else "warn",
     }
     report = {
         "schema_version": 1,
@@ -73,6 +83,15 @@ def make_readiness(
             "test_coverage_percent": test_coverage_percent,
             "test_coverage_fail_under": 80.0,
             "test_coverage_gap": test_coverage_gap,
+            "benchmark_history_status": benchmark_history_status,
+            "benchmark_history_entries": benchmark_history_entries,
+            "benchmark_history_ready": benchmark_history_ready,
+            "benchmark_history_review": benchmark_history_review,
+            "benchmark_history_blocked": benchmark_history_blocked,
+            "benchmark_history_case_regressions": benchmark_history_case_regressions,
+            "benchmark_history_generation_flag_regressions": benchmark_history_generation_flag_regressions,
+            "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
+            "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
             "maturity_status": "pass",
             "ready_runs": 1,
             "missing_artifacts": 0,
@@ -221,6 +240,69 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("test_coverage:pass->warn", delta["changed_panels"])
             self.assertIn("test coverage regression", " ".join(report["recommendations"]))
 
+    def test_build_release_readiness_comparison_flags_benchmark_history_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(root, "baseline", status="ready", decision="ship", gate_status="pass")
+            current = make_readiness(
+                root,
+                "current",
+                status="review",
+                decision="review",
+                gate_status="pass",
+                benchmark_history_status="warn",
+                benchmark_history_ready=0,
+                benchmark_history_review=1,
+                benchmark_history_case_regressions=2,
+                benchmark_history_generation_flag_regressions=1,
+                benchmark_history_model_quality_claim="not_claimed",
+                benchmark_history_latest_boundary="tiny-smoke-plumbing-evidence",
+                warn_panels=1,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["benchmark_history_delta_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_regression_count"], 1)
+            self.assertEqual(report["rows"][1]["benchmark_history_status"], "warn")
+            delta = report["deltas"][0]
+            self.assertTrue(delta["benchmark_history_status_changed"])
+            self.assertEqual(delta["benchmark_history_status_delta"], -1)
+            self.assertEqual(delta["benchmark_history_ready_delta"], -1)
+            self.assertEqual(delta["benchmark_history_case_regression_delta"], 2)
+            self.assertEqual(delta["benchmark_history_generation_flag_regression_delta"], 1)
+            self.assertTrue(delta["benchmark_history_latest_boundary_changed"])
+            self.assertIn("benchmark_history:pass->warn", delta["changed_panels"])
+            self.assertIn("Benchmark history status changed", delta["explanation"])
+            self.assertIn("benchmark history regression", " ".join(report["recommendations"]))
+
+    def test_build_release_readiness_comparison_tracks_benchmark_history_improvement(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(
+                root,
+                "baseline",
+                status="review",
+                decision="review",
+                gate_status="pass",
+                benchmark_history_status="warn",
+                benchmark_history_ready=0,
+                benchmark_history_review=1,
+                benchmark_history_case_regressions=1,
+                warn_panels=1,
+            )
+            current = make_readiness(root, "current", status="ready", decision="ship", gate_status="pass")
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["benchmark_history_delta_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_regression_count"], 0)
+            delta = report["deltas"][0]
+            self.assertEqual(delta["benchmark_history_status_delta"], 1)
+            self.assertEqual(delta["benchmark_history_ready_delta"], 1)
+            self.assertEqual(delta["benchmark_history_case_regression_delta"], -1)
+            self.assertIn("Readiness improved", " ".join(report["recommendations"]))
+
     def test_write_release_readiness_comparison_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -239,10 +321,12 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("ci_workflow_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_order_violation_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("test_coverage_percent", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("benchmark_history_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("changed_panels", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_failed_check_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_order_violation_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("test_coverage_gap_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
+            self.assertIn("benchmark_history_case_regression_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Readiness Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 
     def test_renderers_escape_release_text(self) -> None:
