@@ -152,6 +152,9 @@ d/346/解释/说明.md
 d/347/图片
 d/347/解释/说明.md
  -> v347 benchmark history release gate 的运行截图和解释
+d/348/图片
+d/348/解释/说明.md
+ -> v348 benchmark history release readiness 的运行截图和解释
 ```
 
 写入规则：

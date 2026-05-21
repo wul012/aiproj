@@ -72,6 +72,7 @@ def build_release_readiness_dashboard(
         _audit_panel(audit_file, audit),
         _gate_panel(gate_file, gate),
         _request_history_panel(request_file, request_history),
+        _benchmark_history_panel(bundle, gate if isinstance(gate, dict) else None),
         _maturity_panel(maturity_file, maturity),
         _ci_workflow_panel(ci_file, ci_workflow, bundle),
         _test_coverage_panel(coverage_file, test_coverage, bundle),
@@ -130,6 +131,7 @@ def _summary(
     ci_context = _dict(bundle.get("ci_workflow_context"))
     coverage_summary = _dict(test_coverage.get("summary")) if isinstance(test_coverage, dict) else {}
     coverage_context = _dict(bundle.get("test_coverage_context"))
+    benchmark_summary = _benchmark_history_summary(bundle_summary, gate_summary)
     status = _readiness_status(panels, gate)
     return {
         "readiness_status": status,
@@ -142,6 +144,7 @@ def _summary(
         "audit_score_percent": audit_summary.get("score_percent") or bundle_summary.get("audit_score_percent"),
         "request_history_status": request_summary.get("status") or bundle_summary.get("request_history_status"),
         "request_history_records": request_summary.get("total_log_records") or bundle_summary.get("request_history_records"),
+        **benchmark_summary,
         "maturity_status": maturity_summary.get("overall_status"),
         "current_version": maturity_summary.get("current_version"),
         "ci_workflow_status": ci_summary.get("status") or bundle_summary.get("ci_workflow_status") or ci_context.get("status"),
@@ -279,6 +282,28 @@ def _request_history_panel(path: Path | None, request_history: dict[str, Any] | 
     )
 
 
+def _benchmark_history_panel(bundle: dict[str, Any], gate: dict[str, Any] | None) -> dict[str, Any]:
+    bundle_summary = _dict(bundle.get("summary"))
+    gate_summary = _dict(gate.get("summary")) if isinstance(gate, dict) else {}
+    check = _gate_check(gate, "benchmark_history_gate_check")
+    status = first_present(check.get("status"), gate_summary.get("benchmark_history_status"), bundle_summary.get("benchmark_history_status"))
+    if status is None:
+        return _panel("benchmark_history", "Benchmark History", "warn", "benchmark history release evidence missing", None)
+    detail = (
+        f"status={status}; entries={_fmt(first_present(gate_summary.get('benchmark_history_entries'), bundle_summary.get('benchmark_history_entries')))}; "
+        f"ready={_fmt(first_present(gate_summary.get('benchmark_history_ready'), bundle_summary.get('benchmark_history_ready')))}; "
+        f"review={_fmt(first_present(gate_summary.get('benchmark_history_review'), bundle_summary.get('benchmark_history_review')))}; "
+        f"blocked={_fmt(first_present(gate_summary.get('benchmark_history_blocked'), bundle_summary.get('benchmark_history_blocked')))}; "
+        f"case_regressions={_fmt(first_present(gate_summary.get('benchmark_history_case_regressions'), bundle_summary.get('benchmark_history_case_regressions')))}; "
+        f"generation_flag_regressions={_fmt(first_present(gate_summary.get('benchmark_history_generation_flag_regressions'), bundle_summary.get('benchmark_history_generation_flag_regressions')))}; "
+        f"model_quality_claim={_fmt(first_present(gate_summary.get('benchmark_history_model_quality_claim'), bundle_summary.get('benchmark_history_model_quality_claim')))}; "
+        f"boundary={_fmt(first_present(gate_summary.get('benchmark_history_latest_boundary'), bundle_summary.get('benchmark_history_latest_boundary')))}"
+    )
+    if check:
+        detail += f"; gate_check={check.get('status') or 'missing'}"
+    return _panel("benchmark_history", "Benchmark History", _status_from_check_status(str(status)), detail, None)
+
+
 def _maturity_panel(path: Path | None, maturity: dict[str, Any] | None) -> dict[str, Any]:
     if not isinstance(maturity, dict):
         return _panel("maturity", "Maturity Summary", "warn", "maturity_summary.json missing", path)
@@ -407,6 +432,41 @@ def _actions(bundle: dict[str, Any], gate: dict[str, Any] | None, audit: dict[st
         if item not in items:
             items.append(item)
     return items
+
+
+def _benchmark_history_summary(bundle_summary: dict[str, Any], gate_summary: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "benchmark_history_status": first_present(gate_summary.get("benchmark_history_status"), bundle_summary.get("benchmark_history_status")),
+        "benchmark_history_entries": first_present(gate_summary.get("benchmark_history_entries"), bundle_summary.get("benchmark_history_entries")),
+        "benchmark_history_ready": first_present(gate_summary.get("benchmark_history_ready"), bundle_summary.get("benchmark_history_ready")),
+        "benchmark_history_review": first_present(gate_summary.get("benchmark_history_review"), bundle_summary.get("benchmark_history_review")),
+        "benchmark_history_blocked": first_present(gate_summary.get("benchmark_history_blocked"), bundle_summary.get("benchmark_history_blocked")),
+        "benchmark_history_case_regressions": first_present(
+            gate_summary.get("benchmark_history_case_regressions"),
+            bundle_summary.get("benchmark_history_case_regressions"),
+        ),
+        "benchmark_history_generation_flag_regressions": first_present(
+            gate_summary.get("benchmark_history_generation_flag_regressions"),
+            bundle_summary.get("benchmark_history_generation_flag_regressions"),
+        ),
+        "benchmark_history_model_quality_claim": first_present(
+            gate_summary.get("benchmark_history_model_quality_claim"),
+            bundle_summary.get("benchmark_history_model_quality_claim"),
+        ),
+        "benchmark_history_latest_boundary": first_present(
+            gate_summary.get("benchmark_history_latest_boundary"),
+            bundle_summary.get("benchmark_history_latest_boundary"),
+        ),
+    }
+
+
+def _gate_check(gate: dict[str, Any] | None, check_id: str) -> dict[str, Any]:
+    if not isinstance(gate, dict):
+        return {}
+    for check in _list_of_dicts(gate.get("checks")):
+        if check.get("id") == check_id:
+            return check
+    return {}
 
 
 def _evidence(bundle: dict[str, Any]) -> list[dict[str, Any]]:

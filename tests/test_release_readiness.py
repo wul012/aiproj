@@ -30,6 +30,13 @@ def make_readiness_inputs(
     include_gate: bool = True,
     gate_status: str = "pass",
     gate_decision: str = "approved",
+    benchmark_history_status: str = "pass",
+    benchmark_history_ready: int = 1,
+    benchmark_history_review: int = 0,
+    benchmark_history_blocked: int = 0,
+    benchmark_history_case_regressions: int = 0,
+    benchmark_history_model_quality_claim: str = "candidate_evidence",
+    benchmark_history_latest_boundary: str = "standard-benchmark-candidate-evidence",
     include_request_history: bool = True,
     include_ci_workflow: bool = True,
     ci_workflow_status: str = "pass",
@@ -109,6 +116,15 @@ def make_readiness_inputs(
                 "ready_runs": 1,
                 "request_history_status": "pass" if include_request_history else None,
                 "request_history_records": 4 if include_request_history else None,
+                "benchmark_history_status": benchmark_history_status,
+                "benchmark_history_entries": 1,
+                "benchmark_history_ready": benchmark_history_ready,
+                "benchmark_history_review": benchmark_history_review,
+                "benchmark_history_blocked": benchmark_history_blocked,
+                "benchmark_history_case_regressions": benchmark_history_case_regressions,
+                "benchmark_history_generation_flag_regressions": 0,
+                "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
+                "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
                 "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
@@ -122,6 +138,12 @@ def make_readiness_inputs(
             "checks": [
                 {"id": "ready_run", "status": "pass", "title": "At least one ready run", "detail": "1 ready run."},
                 {"id": "request_history_summary", "status": "pass", "title": "Request history summary is clean", "detail": "status=pass."},
+                {
+                    "id": "benchmark_history",
+                    "status": benchmark_history_status,
+                    "title": "Benchmark history is audit-ready",
+                    "detail": f"status={benchmark_history_status}.",
+                },
                 {"id": "ci_workflow_hygiene", "status": ci_workflow_status, "title": "CI workflow hygiene is clean", "detail": f"status={ci_workflow_status}."},
                 {"id": "test_coverage_report", "status": test_coverage_status, "title": "Test coverage gate is clean", "detail": f"status={test_coverage_status}."},
             ],
@@ -179,6 +201,7 @@ def make_readiness_inputs(
             },
         )
     if include_gate:
+        request_gate_status = "fail" if gate_status == "fail" else "pass"
         write_json(
             gate_path,
             {
@@ -197,9 +220,31 @@ def make_readiness_inputs(
                     "test_coverage_percent": 90.17 if include_test_coverage else None,
                     "test_coverage_fail_under": 80.0 if include_test_coverage else None,
                     "test_coverage_gap": 0.0 if test_coverage_status == "pass" else 8.0,
+                    "benchmark_history_status": benchmark_history_status,
+                    "benchmark_history_entries": 1,
+                    "benchmark_history_ready": benchmark_history_ready,
+                    "benchmark_history_review": benchmark_history_review,
+                    "benchmark_history_blocked": benchmark_history_blocked,
+                    "benchmark_history_case_regressions": benchmark_history_case_regressions,
+                    "benchmark_history_generation_flag_regressions": 0,
+                    "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
+                    "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
                 },
                 "checks": [
-                    {"id": "request_history_summary_audit_check", "status": gate_status, "title": "Request history summary audit check passed", "detail": "request_history_summary=pass." if gate_status == "pass" else "missing required audit check: request_history_summary."}
+                    {
+                        "id": "request_history_summary_audit_check",
+                        "status": request_gate_status,
+                        "title": "Request history summary audit check passed",
+                        "detail": "request_history_summary=pass."
+                        if request_gate_status == "pass"
+                        else "missing required audit check: request_history_summary.",
+                    },
+                    {
+                        "id": "benchmark_history_gate_check",
+                        "status": benchmark_history_status,
+                        "title": "Benchmark history release evidence passed",
+                        "detail": f"benchmark_history={benchmark_history_status}; case_regressions={benchmark_history_case_regressions}; latest_boundary={benchmark_history_latest_boundary}.",
+                    },
                 ],
             },
         )
@@ -225,6 +270,15 @@ def make_readiness_inputs(
                 "ready_runs": 1,
                 "request_history_status": "pass" if include_request_history else None,
                 "request_history_records": 4 if include_request_history else None,
+                "benchmark_history_status": benchmark_history_status,
+                "benchmark_history_entries": 1,
+                "benchmark_history_ready": benchmark_history_ready,
+                "benchmark_history_review": benchmark_history_review,
+                "benchmark_history_blocked": benchmark_history_blocked,
+                "benchmark_history_case_regressions": benchmark_history_case_regressions,
+                "benchmark_history_generation_flag_regressions": 0,
+                "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
+                "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
                 "ci_workflow_failed_checks": 0 if ci_workflow_status == "pass" else 1,
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
@@ -285,9 +339,12 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 0)
             self.assertEqual(report["summary"]["test_coverage_status"], "pass")
             self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
+            self.assertEqual(report["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(report["summary"]["benchmark_history_ready"], 1)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
             self.assertIn("ci_workflow_hygiene", {panel["key"] for panel in report["panels"]})
             self.assertIn("test_coverage", {panel["key"] for panel in report["panels"]})
+            self.assertIn("benchmark_history", {panel["key"] for panel in report["panels"]})
             self.assertIn("All readiness panels are clean", " ".join(report["actions"]))
 
     def test_build_release_readiness_uses_bundle_ci_context_when_report_missing(self) -> None:
@@ -321,6 +378,51 @@ class ReleaseReadinessTests(unittest.TestCase):
             coverage_panel = next(panel for panel in report["panels"] if panel["key"] == "test_coverage")
             self.assertEqual(coverage_panel["status"], "pass")
             self.assertIn("source=bundle summary/context", coverage_panel["detail"])
+
+    def test_build_release_readiness_reviews_benchmark_history_warning(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_readiness_inputs(
+                Path(tmp),
+                gate_status="warn",
+                gate_decision="needs-review",
+                benchmark_history_status="warn",
+                benchmark_history_ready=0,
+                benchmark_history_review=1,
+                benchmark_history_case_regressions=1,
+                benchmark_history_model_quality_claim="not_claimed",
+                benchmark_history_latest_boundary="tiny-smoke-plumbing-evidence",
+            )
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "review")
+            self.assertEqual(report["summary"]["benchmark_history_status"], "warn")
+            self.assertEqual(report["summary"]["benchmark_history_case_regressions"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_latest_boundary"], "tiny-smoke-plumbing-evidence")
+            panel = next(panel for panel in report["panels"] if panel["key"] == "benchmark_history")
+            self.assertEqual(panel["status"], "warn")
+            self.assertIn("case_regressions=1", panel["detail"])
+            self.assertIn("gate_check=warn", panel["detail"])
+            self.assertIn("Gate warn: benchmark_history_gate_check", " ".join(report["actions"]))
+
+    def test_build_release_readiness_uses_bundle_benchmark_history_when_gate_summary_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle_path = make_readiness_inputs(root, benchmark_history_status="warn", benchmark_history_ready=0)
+            gate_path = root / "runs" / "release-gate" / "gate_report.json"
+            gate = json.loads(gate_path.read_text(encoding="utf-8"))
+            gate["summary"].pop("benchmark_history_status", None)
+            gate["summary"].pop("benchmark_history_ready", None)
+            gate["checks"] = [check for check in gate["checks"] if check.get("id") != "benchmark_history_gate_check"]
+            write_json(gate_path, gate)
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "review")
+            self.assertEqual(report["summary"]["benchmark_history_status"], "warn")
+            panel = next(panel for panel in report["panels"] if panel["key"] == "benchmark_history")
+            self.assertEqual(panel["status"], "warn")
+            self.assertIn("ready=0", panel["detail"])
 
     def test_build_release_readiness_dashboard_incomplete_without_gate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
