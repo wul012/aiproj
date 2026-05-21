@@ -88,6 +88,20 @@ def build_maturity_narrative_summary(
         "benchmark_history_generation_flag_regression_entry_count": sum(
             int(row.get("generation_quality_flag_regression_entry_count") or 0) for row in history_rows
         ),
+        "benchmark_history_readiness_requirement_status_counts": _counts(
+            row.get("readiness_requirement_status") or "missing" for row in history_rows
+        ),
+        "benchmark_history_readiness_requirement_failed_count": sum(
+            1 for row in history_rows if row.get("readiness_requirement_status") == "fail"
+        ),
+        "benchmark_history_readiness_requirement_exit_code_max": _max_int(
+            row.get("readiness_requirement_exit_code") for row in history_rows
+        ),
+        "benchmark_history_readiness_requirement_failed_reasons": _unique_strings(
+            reason
+            for row in history_rows
+            for reason in _string_list(row.get("readiness_requirement_failed_reasons"))
+        ),
         "benchmark_history_model_quality_claim_counts": _counts(
             row.get("model_quality_claim") or "missing" for row in history_rows
         ),
@@ -105,6 +119,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
     if int(summary.get("benchmark_decision_non_comparison_ready_candidate_count") or 0) > 0:
         recommendations.append(
             "Treat scorecard promotion as review-only until non-comparison-ready eval suites are rerun with comparable benchmark evidence."
+        )
+    if int(summary.get("benchmark_history_readiness_requirement_failed_count") or 0) > 0:
+        recommendations.append(
+            "Fix benchmark history readiness requirement failures before using the narrative as repeated model-evaluation evidence."
         )
     if int(summary.get("benchmark_history_blocked_count") or 0) > 0:
         recommendations.append("Inspect blocked benchmark history entries before using the portfolio as release-ready evidence.")
@@ -182,6 +200,7 @@ def _portfolio_status(
         or any(int(row.get("review_count") or 0) > 0 for row in history_rows)
         or any(int(row.get("case_regression_entry_count") or 0) > 0 for row in history_rows)
         or any(int(row.get("generation_quality_flag_regression_entry_count") or 0) > 0 for row in history_rows)
+        or any(row.get("readiness_requirement_status") == "fail" for row in history_rows)
         or any(row.get("quality_status") in {"warn", "fail"} for row in dataset_rows)
     ):
         return "review"
@@ -306,6 +325,7 @@ def _scorecard_decision_summary(decision: dict[str, Any]) -> dict[str, Any]:
 
 def _benchmark_history_summary(history: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(history.get("summary"))
+    readiness = _dict(history.get("readiness_requirement"))
     entries = _list_of_dicts(history.get("entries"))
     return {
         "entry_count": summary.get("entry_count") if summary else len(entries),
@@ -317,6 +337,12 @@ def _benchmark_history_summary(history: dict[str, Any]) -> dict[str, Any]:
         "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
         "best_candidate_name": summary.get("best_candidate_name"),
         "model_quality_claim": summary.get("model_quality_claim"),
+        "readiness_requirement_status": readiness.get("status"),
+        "readiness_requirement_decision": readiness.get("decision"),
+        "readiness_requirement_exit_code": readiness.get("exit_code"),
+        "readiness_requirement_min_ready_entries": readiness.get("min_ready_entries"),
+        "readiness_requirement_ready_count": readiness.get("ready_count"),
+        "readiness_requirement_failed_reasons": _string_list(readiness.get("failed_reasons")),
         "boundary_counts": _counts(row.get("boundary") or "missing" for row in entries),
         "latest_boundary": entries[-1].get("boundary") if entries else None,
     }
@@ -384,6 +410,27 @@ def _latest_history_boundary(rows: list[dict[str, Any]]) -> str | None:
     if not selected:
         return None
     return str(selected[-1].get("latest_boundary"))
+
+
+def _max_int(values: Any) -> int | None:
+    parsed: list[int] = []
+    for value in values:
+        if value is None:
+            continue
+        try:
+            parsed.append(int(value))
+        except (TypeError, ValueError):
+            continue
+    return max(parsed) if parsed else None
+
+
+def _unique_strings(values: Any) -> list[str]:
+    items: list[str] = []
+    for value in values:
+        text = str(value).strip()
+        if text and text not in items:
+            items.append(text)
+    return items
 
 
 def _decision_row_non_ready_candidates(evaluations: list[dict[str, Any]], summary: dict[str, Any]) -> list[str]:

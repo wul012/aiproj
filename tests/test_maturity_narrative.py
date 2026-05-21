@@ -199,6 +199,17 @@ def make_project(
                 "best_candidate_name": "demo-run",
                 "model_quality_claim": "candidate_evidence",
             },
+            "readiness_requirement": {
+                "status": "pass",
+                "decision": "continue",
+                "exit_code": 0,
+                "min_ready_entries": 1,
+                "ready_count": 1,
+                "entry_count": 1,
+                "evidence_kind": "real-benchmark",
+                "require_real_benchmark": True,
+                "failed_reasons": [],
+            },
             "entries": [
                 {
                     "name": "demo-history",
@@ -266,7 +277,13 @@ class MaturityNarrativeTests(unittest.TestCase):
             [{"summary": {"overall_status": "pass", "overall_score": 80}}],
             [{"decision_status": "promote", "selected_run": {"name": "demo"}}],
             [{"summary": {"quality_status": "pass", "warning_count": 0}}],
-            [{"summary": {"entry_count": 1, "ready_count": 1}, "entries": [{"boundary": "standard-benchmark-candidate-evidence"}]}],
+            [
+                {
+                    "summary": {"entry_count": 1, "ready_count": 1},
+                    "readiness_requirement": {"status": "pass", "exit_code": 0, "failed_reasons": []},
+                    "entries": [{"boundary": "standard-benchmark-candidate-evidence"}],
+                }
+            ],
         )
         sections = maturity_narrative_sections.build_maturity_narrative_sections(summary)
 
@@ -302,6 +319,9 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["benchmark_history_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_history_entry_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_history_ready_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_failed_count"], 0)
+            self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_exit_code_max"], 0)
+            self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_failed_reasons"], [])
             self.assertEqual(narrative["summary"]["benchmark_history_best_candidate"], "demo-run")
             self.assertEqual(narrative["summary"]["benchmark_history_latest_boundary"], "standard-benchmark-candidate-evidence")
             self.assertEqual(narrative["summary"]["dataset_card_count"], 1)
@@ -329,6 +349,37 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["benchmark_history_generation_flag_regression_entry_count"], 1)
             self.assertEqual(history_section["status"], "warn")
             self.assertIn("generation-quality flag regressions", narrative["recommendations"][0])
+
+    def test_build_maturity_narrative_marks_review_for_history_readiness_requirement_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp))
+            history = json.loads(paths["benchmark_history"].read_text(encoding="utf-8"))
+            history["readiness_requirement"] = {
+                "status": "fail",
+                "decision": "stop",
+                "exit_code": 1,
+                "min_ready_entries": 2,
+                "ready_count": 1,
+                "entry_count": 1,
+                "evidence_kind": "real-benchmark",
+                "require_real_benchmark": True,
+                "failed_reasons": ["insufficient_ready_entries"],
+            }
+            write_json(paths["benchmark_history"], history)
+
+            narrative = build_maturity_narrative(paths["project"])
+            history_section = next(item for item in narrative["sections"] if item["key"] == "benchmark_history")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_failed_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_exit_code_max"], 1)
+            self.assertEqual(
+                narrative["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["insufficient_ready_entries"],
+            )
+            self.assertEqual(history_section["status"], "fail")
+            self.assertIn("readiness requirement failures=1", history_section["claim"])
+            self.assertIn("Fix benchmark history readiness requirement failures", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_marks_review_for_release_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -461,6 +512,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark histories", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history boundary", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history readiness failures", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("CI regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("CI order regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
@@ -471,6 +524,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark History", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("History boundary", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("History readiness failures", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("History readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Decision eval", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Quality", Path(outputs["html"]).read_text(encoding="utf-8"))
 

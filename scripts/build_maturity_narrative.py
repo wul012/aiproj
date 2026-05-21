@@ -90,6 +90,12 @@ def main() -> None:
     print(f"benchmark_history_entries={summary.get('benchmark_history_entry_count')}")
     print(f"benchmark_history_ready={summary.get('benchmark_history_ready_count')}")
     print(f"benchmark_history_boundary={summary.get('benchmark_history_latest_boundary')}")
+    print(f"benchmark_history_readiness_requirement_failed_count={summary.get('benchmark_history_readiness_requirement_failed_count')}")
+    print(f"benchmark_history_readiness_requirement_exit_code_max={summary.get('benchmark_history_readiness_requirement_exit_code_max')}")
+    print(
+        "benchmark_history_readiness_requirement_failed_reasons="
+        + json.dumps(summary.get("benchmark_history_readiness_requirement_failed_reasons") or [], ensure_ascii=False)
+    )
     print(f"dataset_cards={summary.get('dataset_card_count')}")
     print("warnings=" + json.dumps(narrative.get("warnings", []), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

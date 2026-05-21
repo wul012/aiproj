@@ -203,6 +203,9 @@ d/363/解释/说明.md
 d/364/图片
 d/364/解释/说明.md
  -> v364 benchmark history readiness gate 的运行截图和解释
+d/365/图片
+d/365/解释/说明.md
+ -> v365 maturity benchmark readiness consumption 的运行截图和解释
 ```
 
 写入规则：

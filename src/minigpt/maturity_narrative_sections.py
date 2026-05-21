@@ -56,7 +56,7 @@ def build_maturity_narrative_sections(summary: dict[str, Any]) -> list[dict[str,
             "title": "Benchmark History",
             "status": _benchmark_history_status(summary),
             "claim": _benchmark_history_claim(summary),
-            "evidence": "Benchmark history ledgers connect scorecard comparison and decision artifacts across repeated runs, including readiness counts, best candidate, model-quality claim boundary, and regression hints.",
+            "evidence": "Benchmark history ledgers connect scorecard comparison and decision artifacts across repeated runs, including readiness counts, explicit readiness requirements, best candidate, model-quality claim boundary, and regression hints.",
             "boundary": "History entries explain benchmark evidence continuity; tiny-smoke entries remain plumbing evidence and do not prove broad model quality.",
             "next_step": "Append real standard-suite benchmark histories before treating one-off score deltas as durable improvement.",
         },
@@ -141,6 +141,8 @@ def _benchmark_decision_status(summary: dict[str, Any]) -> str:
 def _benchmark_history_status(summary: dict[str, Any]) -> str:
     if int(summary.get("benchmark_history_count") or 0) == 0:
         return "missing"
+    if int(summary.get("benchmark_history_readiness_requirement_failed_count") or 0) > 0:
+        return "fail"
     if int(summary.get("benchmark_history_blocked_count") or 0) > 0:
         return "fail"
     if (
@@ -205,7 +207,10 @@ def _benchmark_history_claim(summary: dict[str, Any]) -> str:
         f"{summary.get('benchmark_history_review_count') or 0} review, "
         f"{summary.get('benchmark_history_blocked_count') or 0} blocked; "
         f"best candidate is {summary.get('benchmark_history_best_candidate') or 'missing'} and latest boundary is "
-        f"{summary.get('benchmark_history_latest_boundary') or 'missing'}."
+        f"{summary.get('benchmark_history_latest_boundary') or 'missing'}; "
+        f"readiness requirement failures={summary.get('benchmark_history_readiness_requirement_failed_count') or 0}, "
+        f"max exit={summary.get('benchmark_history_readiness_requirement_exit_code_max') if summary.get('benchmark_history_readiness_requirement_exit_code_max') is not None else 'missing'}, "
+        f"failed reasons={', '.join(summary.get('benchmark_history_readiness_requirement_failed_reasons') or []) or 'none'}."
     )
 
 
