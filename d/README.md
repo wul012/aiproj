@@ -119,6 +119,9 @@ d/335/解释/说明.md
 d/336/图片
 d/336/解释/说明.md
  -> v336 CI tiny scorecard inline check 的运行截图和解释
+d/337/图片
+d/337/解释/说明.md
+ -> v337 CI tiny scorecard wrapper 的运行截图和解释
 ```
 
 写入规则：

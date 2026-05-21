@@ -113,6 +113,9 @@
 350-v336-ci-tiny-scorecard-inline-check.md
  -> v336 code explanation: promote the inline tiny scorecard summary-check smoke into GitHub Actions and CI workflow hygiene.
 
+351-v337-ci-tiny-scorecard-wrapper.md
+ -> v337 code explanation: wrap the CI tiny scorecard inline smoke in a stable GitHub Actions entrypoint while keeping the fixed budget testable in code.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
