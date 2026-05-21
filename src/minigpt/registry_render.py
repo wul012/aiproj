@@ -247,6 +247,8 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "release_readiness_ci_workflow_regression_count",
         "release_readiness_test_coverage_regression_count",
         "release_readiness_benchmark_history_regression_count",
+        "release_readiness_benchmark_requirement_status_change_count",
+        "release_readiness_benchmark_requirement_exit_code_delta_max",
         "note",
         "tags",
     ]
@@ -365,6 +367,7 @@ def _release_readiness_delta_summary_label(value: Any) -> str:
         f"panels:{value.get('changed_panel_delta_count')}, "
         f"coverage:{value.get('test_coverage_regression_count', 0)}"
         f", benchmark:{value.get('benchmark_history_regression_count', 0)}"
+        f", req:{value.get('benchmark_history_readiness_requirement_status_changed_count', 0)}"
     )
 
 
@@ -394,6 +397,8 @@ def _release_readiness_benchmark_summary_label(value: Any) -> str:
         f"regressions:{value.get('benchmark_history_regression_count', 0)}, "
         f"case:{_fmt(value.get('max_abs_benchmark_history_case_regression_delta'))}, "
         f"flags:{_fmt(value.get('max_abs_benchmark_history_generation_flag_regression_delta'))}, "
+        f"req:{value.get('benchmark_history_readiness_requirement_status_changed_count', 0)}, "
+        f"exit:{_fmt(value.get('max_abs_benchmark_history_readiness_requirement_exit_code_delta'))}, "
         f"boundary:{value.get('benchmark_history_boundary_changed_count', 0)}"
     )
 
@@ -509,6 +514,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         f"<br><span>ci order regressions={_e(_fmt(run.get('release_readiness_ci_workflow_order_regression_count')))}</span>"
         f"<br><span>coverage regressions={_e(_fmt(run.get('release_readiness_test_coverage_regression_count')))}</span>"
         f"<br><span>benchmark regressions={_e(_fmt(run.get('release_readiness_benchmark_history_regression_count')))} deltas={_e(_fmt(run.get('release_readiness_benchmark_history_delta_count')))}</span>"
+        f"<br><span>benchmark req changes={_e(_fmt(run.get('release_readiness_benchmark_requirement_status_change_count')))} exit max={_e(_fmt(run.get('release_readiness_benchmark_requirement_exit_code_delta_max')))}</span>"
     )
 
 

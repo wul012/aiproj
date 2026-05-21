@@ -137,6 +137,8 @@ class RegisteredRun:
     release_readiness_test_coverage_regression_count: int | None
     release_readiness_benchmark_history_delta_count: int | None
     release_readiness_benchmark_history_regression_count: int | None
+    release_readiness_benchmark_requirement_status_change_count: int | None
+    release_readiness_benchmark_requirement_exit_code_delta_max: int | float | None
     release_readiness_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
@@ -187,6 +189,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     generation_summary = _pick_dict(generation_quality, "summary")
     benchmark_summary = _pick_dict(benchmark_scorecard, "summary")
     release_readiness_summary = _pick_dict(release_readiness_comparison, "summary")
+    release_readiness_deltas = _release_readiness_deltas(release_readiness_comparison)
     artifacts = manifest.get("artifacts", []) if isinstance(manifest, dict) else []
     manifest_artifact_count = sum(1 for item in artifacts if isinstance(item, dict) and item.get("exists"))
     artifact_count = max(manifest_artifact_count, _actual_artifact_count(root))
@@ -255,6 +258,12 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         release_readiness_test_coverage_regression_count=_as_int(_pick(release_readiness_summary, "test_coverage_regression_count")),
         release_readiness_benchmark_history_delta_count=_as_int(_pick(release_readiness_summary, "benchmark_history_delta_count")),
         release_readiness_benchmark_history_regression_count=_as_int(_pick(release_readiness_summary, "benchmark_history_regression_count")),
+        release_readiness_benchmark_requirement_status_change_count=_release_readiness_benchmark_requirement_status_change_count(
+            release_readiness_deltas
+        ),
+        release_readiness_benchmark_requirement_exit_code_delta_max=_release_readiness_benchmark_requirement_exit_code_delta_max(
+            release_readiness_deltas
+        ),
         release_readiness_html_exists=_release_readiness_html_exists(root),
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
@@ -427,6 +436,26 @@ def _release_readiness_comparison_status(summary: dict[str, Any]) -> str | None:
     if int(summary.get("blocked_count") or 0) > 0:
         return "blocked"
     return "stable"
+
+
+def _release_readiness_deltas(report: dict[str, Any]) -> list[dict[str, Any]]:
+    deltas = report.get("deltas") if isinstance(report, dict) else None
+    return [delta for delta in deltas if isinstance(delta, dict)] if isinstance(deltas, list) else []
+
+
+def _release_readiness_benchmark_requirement_status_change_count(deltas: list[dict[str, Any]]) -> int | None:
+    if not deltas:
+        return None
+    return sum(1 for delta in deltas if bool(delta.get("benchmark_history_readiness_requirement_status_changed")))
+
+
+def _release_readiness_benchmark_requirement_exit_code_delta_max(deltas: list[dict[str, Any]]) -> int | float | None:
+    values = [
+        abs(value)
+        for value in (_as_optional_float(delta.get("benchmark_history_readiness_requirement_exit_code_delta")) for delta in deltas)
+        if value is not None
+    ]
+    return _int_if_whole(max(values)) if values else None
 
 
 def _pick(payload: Any, key: str) -> Any:

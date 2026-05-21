@@ -1,0 +1,254 @@
+﻿### Page
+- Page URL: http://127.0.0.1:8770/registry-v370/registry.html
+- Page Title: MiniGPT run registry
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MiniGPT run registry" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Experiment index generated from MiniGPT run directories.
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Runs
+      - generic [ref=e8]: "2"
+    - generic [ref=e9]:
+      - generic [ref=e10]: Best run
+      - generic [ref=e11]: candidate
+    - generic [ref=e12]:
+      - generic [ref=e13]: Best val
+      - generic [ref=e14]: "0.95"
+    - generic [ref=e15]:
+      - generic [ref=e16]: Comparable
+      - generic [ref=e17]: "2"
+    - generic [ref=e18]:
+      - generic [ref=e19]: Fingerprints
+      - generic [ref=e20]: "2"
+    - generic [ref=e21]:
+      - generic [ref=e22]: Dataset snapshots
+      - generic [ref=e23]: snapshots:0, missing:2, skipped-runs:0
+    - generic [ref=e24]:
+      - generic [ref=e25]: Dedupe policies
+      - generic [ref=e26]: missing:2
+    - generic [ref=e27]:
+      - generic [ref=e28]: Quality
+      - generic [ref=e29]: pass:1, warn:1
+    - generic [ref=e30]:
+      - generic [ref=e31]: Gen quality
+      - generic [ref=e32]: missing:2
+    - generic [ref=e33]:
+      - generic [ref=e34]: Rubric
+      - generic [ref=e35]: missing:2
+    - generic [ref=e36]:
+      - generic [ref=e37]: Pair reports
+      - generic [ref=e38]: batch:0, trend:0
+    - generic [ref=e39]:
+      - generic [ref=e40]: Pair deltas
+      - generic [ref=e41]: cases:0
+    - generic [ref=e42]:
+      - generic [ref=e43]: Release readiness
+      - generic [ref=e44]: benchmark-regressed:1, missing:1
+    - generic [ref=e45]:
+      - generic [ref=e46]: Readiness deltas
+      - generic [ref=e47]: deltas:1, regressed:0, improved:0, panels:1, coverage:0, benchmark:1, req:1
+    - generic [ref=e48]:
+      - generic [ref=e49]: CI order regressions
+      - generic [ref=e50]: regressions:0, max:0
+    - generic [ref=e51]:
+      - generic [ref=e52]: Coverage regressions
+      - generic [ref=e53]: regressions:0, gap:0, percent:0
+    - generic [ref=e54]:
+      - generic [ref=e55]: Benchmark regressions
+      - generic [ref=e56]: regressions:1, case:0, flags:0, req:1, exit:1, boundary:0
+    - generic [ref=e57]:
+      - generic [ref=e58]: Tags
+      - generic [ref=e59]: "0"
+  - region "Registry controls" [ref=e60]:
+    - generic [ref=e61]:
+      - generic [ref=e62]: Search
+      - searchbox "Search" [ref=e63]
+    - generic [ref=e64]:
+      - generic [ref=e65]: Quality
+      - combobox "Quality" [ref=e66]:
+        - option "All" [selected]
+        - option "pass"
+        - option "warn"
+    - generic [ref=e67]:
+      - generic [ref=e68]: Sort
+      - combobox "Sort" [ref=e69]:
+        - option "Rank" [selected]
+        - option "Best Val"
+        - option "Loss Delta"
+        - option "Name"
+        - option "Artifacts"
+        - option "Rubric"
+        - option "Pair Reports"
+        - option "Release Readiness"
+        - option "Eval Cases"
+        - option "Params"
+    - button "Asc" [ref=e70] [cursor=pointer]
+    - status [ref=e71]: 2 / 2
+    - button "Share" [ref=e72] [cursor=pointer]
+    - button "CSV" [ref=e73] [cursor=pointer]
+    - status [ref=e74]
+  - generic [ref=e75]:
+    - heading "Runs" [level=2] [ref=e76]
+    - table [ref=e77]:
+      - rowgroup [ref=e78]:
+        - row "Run Rank Best Val Params Git Data Quality Eval Gen Quality Rubric Pair Reports Release Readiness Artifacts Notes Links" [ref=e79]:
+          - columnheader "Run" [ref=e80]
+          - columnheader "Rank" [ref=e81]
+          - columnheader "Best Val" [ref=e82]
+          - columnheader "Params" [ref=e83]
+          - columnheader "Git" [ref=e84]
+          - columnheader "Data" [ref=e85]
+          - columnheader "Quality" [ref=e86]
+          - columnheader "Eval" [ref=e87]
+          - columnheader "Gen Quality" [ref=e88]
+          - columnheader "Rubric" [ref=e89]
+          - columnheader "Pair Reports" [ref=e90]
+          - columnheader "Release Readiness" [ref=e91]
+          - columnheader "Artifacts" [ref=e92]
+          - columnheader "Notes" [ref=e93]
+          - columnheader "Links" [ref=e94]
+      - rowgroup [ref=e95]:
+        - 'row "candidate runs\\__tmp_v370_registry\\candidate #1 0.95 +0 1,400 v370b dirty=False demo registry-v370@candidate cand370 snapshot missing warn avg unique= missing cases= missing missing benchmark-regressed reports=2 baseline=ready ready=1 blocked=0 improved=0 regressed=0 panel deltas=1 ci regressions=0 ci order regressions=0 coverage regressions=0 benchmark regressions=1 deltas=1 benchmark req changes=1 exit max=1 7 no tags manifest readiness cmp" [ref=e96]':
+          - cell "candidate runs\\__tmp_v370_registry\\candidate" [ref=e97]:
+            - strong [ref=e98]: candidate
+            - text: runs\__tmp_v370_registry\candidate
+          - cell "#1" [ref=e99]
+          - cell "0.95 +0" [ref=e100]:
+            - text: "0.95"
+            - text: "+0"
+          - cell "1,400" [ref=e101]
+          - cell "v370b dirty=False" [ref=e102]:
+            - text: v370b
+            - text: dirty=False
+          - cell "demo registry-v370@candidate cand370 snapshot missing" [ref=e103]:
+            - text: demo
+            - text: registry-v370@candidate
+            - text: cand370
+            - text: snapshot missing
+          - cell "warn" [ref=e104]:
+            - generic [ref=e105]: warn
+          - cell "avg unique=" [ref=e106]: avg unique=
+          - cell "missing cases=" [ref=e107]:
+            - generic [ref=e108]: missing
+            - text: cases=
+          - cell "missing" [ref=e109]
+          - cell "missing" [ref=e110]
+          - cell "benchmark-regressed reports=2 baseline=ready ready=1 blocked=0 improved=0 regressed=0 panel deltas=1 ci regressions=0 ci order regressions=0 coverage regressions=0 benchmark regressions=1 deltas=1 benchmark req changes=1 exit max=1" [ref=e111]:
+            - generic [ref=e112]: benchmark-regressed
+            - text: reports=2 baseline=ready
+            - text: ready=1 blocked=0
+            - text: improved=0 regressed=0
+            - text: panel deltas=1 ci regressions=0
+            - text: ci order regressions=0
+            - text: coverage regressions=0
+            - text: benchmark regressions=1 deltas=1
+            - text: benchmark req changes=1 exit max=1
+          - cell "7" [ref=e113]
+          - cell "no tags" [ref=e114]: no tags
+          - cell "manifest readiness cmp" [ref=e115]:
+            - link "manifest" [ref=e116] [cursor=pointer]:
+              - /url: ../__tmp_v370_registry/candidate/run_manifest.json
+            - link "readiness cmp" [ref=e117] [cursor=pointer]:
+              - /url: ../__tmp_v370_registry/candidate/release-readiness-comparison/release_readiness_comparison.html
+        - 'row "baseline runs\\__tmp_v370_registry\\baseline #2 1.2 +0.25 1,234 v370a dirty=False demo registry-v370@baseline base370 snapshot missing pass avg unique= missing cases= missing missing missing 5 no tags manifest" [ref=e118]':
+          - cell "baseline runs\\__tmp_v370_registry\\baseline" [ref=e119]:
+            - strong [ref=e120]: baseline
+            - text: runs\__tmp_v370_registry\baseline
+          - cell "#2" [ref=e121]
+          - cell "1.2 +0.25" [ref=e122]:
+            - text: "1.2"
+            - text: "+0.25"
+          - cell "1,234" [ref=e123]
+          - cell "v370a dirty=False" [ref=e124]:
+            - text: v370a
+            - text: dirty=False
+          - cell "demo registry-v370@baseline base370 snapshot missing" [ref=e125]:
+            - text: demo
+            - text: registry-v370@baseline
+            - text: base370
+            - text: snapshot missing
+          - cell "pass" [ref=e126]:
+            - generic [ref=e127]: pass
+          - cell "avg unique=" [ref=e128]: avg unique=
+          - cell "missing cases=" [ref=e129]:
+            - generic [ref=e130]: missing
+            - text: cases=
+          - cell "missing" [ref=e131]
+          - cell "missing" [ref=e132]
+          - cell "missing" [ref=e133]
+          - cell "5" [ref=e134]
+          - cell "no tags" [ref=e135]: no tags
+          - cell "manifest" [ref=e136]:
+            - link "manifest" [ref=e137] [cursor=pointer]:
+              - /url: ../__tmp_v370_registry/baseline/run_manifest.json
+  - generic [ref=e138]:
+    - heading "Loss Leaderboard" [level=2] [ref=e139]
+    - list [ref=e140]:
+      - listitem [ref=e141]:
+        - strong [ref=e142]: "#1 candidate"
+        - text: 0.95 / +0 / quality=warn / eval=
+      - listitem [ref=e143]:
+        - strong [ref=e144]: "#2 baseline"
+        - text: 1.2 / +0.25 / quality=pass / eval=
+  - generic [ref=e145]:
+    - heading "Rubric Leaderboard" [level=2] [ref=e146]
+    - paragraph [ref=e147]: No benchmark rubric scores were found.
+  - generic [ref=e148]:
+    - heading "Pair Delta Leaders" [level=2] [ref=e149]
+    - paragraph [ref=e150]: No pair batch case deltas were found.
+  - generic [ref=e151]:
+    - heading "Release Readiness Deltas" [level=2] [ref=e152]
+    - table [ref=e153]:
+      - rowgroup [ref=e154]:
+        - row "Run / Compared Trend Status Panels Audit / Missing CI workflow Coverage Benchmark history Explanation Report" [ref=e155]:
+          - columnheader "Run / Compared" [ref=e156]
+          - columnheader "Trend" [ref=e157]
+          - columnheader "Status" [ref=e158]
+          - columnheader "Panels" [ref=e159]
+          - columnheader "Audit / Missing" [ref=e160]
+          - columnheader "CI workflow" [ref=e161]
+          - columnheader "Coverage" [ref=e162]
+          - columnheader "Benchmark history" [ref=e163]
+          - columnheader "Explanation" [ref=e164]
+          - columnheader "Report" [ref=e165]
+      - rowgroup [ref=e166]:
+        - row "candidate v370 panel-changed +0 ready -> ready 1 benchmark_history:requirement-pass->fail +0 missing=+0 pass -> pass failed=+0 order=+0 pass -> pass percent=+0 gap=+0 pass -> pass case=+0 flags=+0 req=pass -> fail exit=+1 boundary=False v370 registry exposes benchmark readiness requirement regression. comparison" [ref=e167]:
+          - cell "candidate v370" [ref=e168]:
+            - strong [ref=e169]: candidate
+            - text: v370
+          - cell "panel-changed +0" [ref=e170]:
+            - text: panel-changed
+            - text: "+0"
+          - cell "ready -> ready" [ref=e171]
+          - cell "1 benchmark_history:requirement-pass->fail" [ref=e172]:
+            - text: "1"
+            - text: benchmark_history:requirement-pass->fail
+          - cell "+0 missing=+0" [ref=e173]:
+            - text: "+0"
+            - text: missing=+0
+          - cell "pass -> pass failed=+0 order=+0" [ref=e174]:
+            - text: pass -> pass
+            - text: failed=+0 order=+0
+          - cell "pass -> pass percent=+0 gap=+0" [ref=e175]:
+            - text: pass -> pass
+            - text: percent=+0 gap=+0
+          - cell "pass -> pass case=+0 flags=+0 req=pass -> fail exit=+1 boundary=False" [ref=e176]:
+            - text: pass -> pass
+            - text: case=+0 flags=+0
+            - text: req=pass -> fail exit=+1
+            - text: boundary=False
+          - cell "v370 registry exposes benchmark readiness requirement regression." [ref=e177]
+          - cell "comparison" [ref=e178]:
+            - link "comparison" [ref=e179] [cursor=pointer]:
+              - /url: ../__tmp_v370_registry/candidate/release-readiness-comparison/release_readiness_comparison.json
+  - generic [ref=e180]:
+    - heading "Dataset Fingerprints" [level=2] [ref=e181]
+    - generic [ref=e182]: "[ \"base370\", \"cand370\" ]"
+  - generic [ref=e183]:
+    - heading "Dataset Snapshot Summary" [level=2] [ref=e184]
+    - generic [ref=e185]: "{ \"run_count\": 2, \"snapshot_run_count\": 0, \"missing_snapshot_count\": 2, \"dataset_version_count\": 2, \"dataset_fingerprint_count\": 2, \"dedupe_policy_count\": 0, \"source_order_digest_count\": 0, \"skipped_source_run_count\": 0, \"total_included_source_count\": null, \"total_skipped_source_count\": null, \"total_char_count\": null }"
+  - contentinfo [ref=e186]: Generated by MiniGPT registry exporter.
+```

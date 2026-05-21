@@ -218,6 +218,9 @@ d/368/解释/说明.md
 d/369/图片
 d/369/解释/说明.md
  -> v369 release readiness benchmark requirement 的运行截图和解释
+d/370/图片
+d/370/解释/说明.md
+ -> v370 registry benchmark requirement 的运行截图和解释
 ```
 
 写入规则：

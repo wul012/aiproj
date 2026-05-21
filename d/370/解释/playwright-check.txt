@@ -1,0 +1,6 @@
+﻿### Result
+true
+### Ran Playwright code
+```js
+await page.evaluate('() => (document.body.innerText.includes(\'benchmark req changes=1 exit max=1\') && document.body.innerText.includes(\'req=pass -> fail exit=+1\'))');
+```
