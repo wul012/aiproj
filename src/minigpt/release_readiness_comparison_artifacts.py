@@ -158,6 +158,10 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                     summary.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
                 ),
                 (
+                    "Benchmark readiness failed reason mixed deltas",
+                    summary.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"),
+                ),
+                (
                     "Benchmark readiness failed reason drift",
                     _fmt_mapping(summary.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")),
                 ),
@@ -262,6 +266,7 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
         ("Benchmark reason additions", summary.get("benchmark_history_readiness_requirement_failed_reason_added_count")),
         ("Benchmark reason removals", summary.get("benchmark_history_readiness_requirement_failed_reason_removed_count")),
         ("Benchmark reason recoveries", summary.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count")),
+        ("Benchmark reason mixed", summary.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count")),
         ("Generated", report.get("generated_at")),
     ]
     rows = "".join(_html_row(row) for row in _list_of_dicts(report.get("rows")))

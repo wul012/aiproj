@@ -415,6 +415,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.release_readiness_benchmark_requirement_exit_code_delta_max, 1)
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_added_count, 1)
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_removed_count, 0)
+            self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_mixed_delta_count, 0)
 
     def test_summarize_registered_run_reads_benchmark_reason_removal(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -436,6 +437,7 @@ class RegistryTests(unittest.TestCase):
 
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_added_count, 0)
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_removed_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_mixed_delta_count, 0)
             self.assertEqual(
                 registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"],
                 1,
@@ -451,6 +453,52 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(
                 registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"],
                 {"recovered": 1},
+            )
+
+    def test_summarize_registered_run_reads_mixed_benchmark_reason_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp), "one", 1.0, readiness_trend="panel-changed")
+            path = run_dir / "release-readiness-comparison" / "release_readiness_comparison.json"
+            report = json.loads(path.read_text(encoding="utf-8"))
+            delta = report["deltas"][0]
+            delta["baseline_benchmark_history_readiness_requirement_failed_reasons"] = [
+                "insufficient_ready_entries",
+                "legacy_fixture_gap",
+            ]
+            delta["compared_benchmark_history_readiness_requirement_failed_reasons"] = [
+                "insufficient_ready_entries",
+                "tiny_smoke_only",
+            ]
+            report["summary"]["benchmark_history_delta_count"] = 1
+            report["summary"]["benchmark_history_regression_count"] = 1
+            path.write_text(json.dumps(report), encoding="utf-8")
+
+            run = summarize_registered_run(run_dir)
+            registry = build_run_registry([run_dir])
+
+            self.assertEqual(run.release_readiness_comparison_status, "benchmark-regressed")
+            self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_added_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_removed_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_mixed_delta_count, 1)
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added"],
+                ["tiny_smoke_only"],
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed"],
+                ["legacy_fixture_gap"],
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"],
+                0,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"],
+                1,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"],
+                {"mixed": 1},
             )
 
     def test_summarize_registered_run_reads_test_coverage_readiness_regression(self) -> None:
@@ -541,6 +589,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_status_changed_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"], 0)
+            self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(
                 registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added"],
                 ["insufficient_ready_entries"],
@@ -616,6 +665,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("release_readiness_benchmark_requirement_exit_code_delta_max", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_requirement_failed_reason_added_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_requirement_failed_reason_removed_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("dataset_dedupe_policy", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("dataset_included_source_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))

@@ -81,6 +81,10 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     overview.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"),
                 ),
                 (
+                    "Release readiness benchmark failed reason mixed deltas",
+                    overview.get("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"),
+                ),
+                (
                     "Release readiness benchmark failed reason drift",
                     _fmt_mapping(overview.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts")),
                 ),
@@ -176,6 +180,10 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                         release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
                     ),
                     (
+                        "Benchmark failed reason mixed deltas",
+                        release_readiness.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"),
+                    ),
+                    (
                         "Benchmark failed reason drift",
                         _fmt_mapping(release_readiness.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")),
                     ),
@@ -224,6 +232,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("Benchmark reasons added", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_added_count")),
         ("Benchmark reasons removed", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_removed_count")),
         ("Benchmark recoveries", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count")),
+        ("Benchmark mixed", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -365,6 +374,10 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         (
             "Benchmark failed reason recovery deltas",
             release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
+        ),
+        (
+            "Benchmark failed reason mixed deltas",
+            release_readiness.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"),
         ),
         (
             "Benchmark failed reason drift",

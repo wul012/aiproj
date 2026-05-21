@@ -395,6 +395,7 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"], 1)
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_removed"], ["tiny_smoke_only"])
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(
                 report["summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"],
                 {"recovered": 1},
@@ -406,6 +407,58 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_drift_status"], "recovered")
             self.assertIn("removed failed reason", delta["explanation"])
             self.assertIn("recovery evidence", " ".join(report["recommendations"]))
+
+    def test_build_release_readiness_comparison_tracks_mixed_benchmark_requirement_reason_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(
+                root,
+                "baseline",
+                status="review",
+                decision="review",
+                gate_status="warn",
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=[
+                    "insufficient_ready_entries",
+                    "legacy_fixture_gap",
+                ],
+                warn_panels=1,
+            )
+            current = make_readiness(
+                root,
+                "current",
+                status="review",
+                decision="review",
+                gate_status="warn",
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=[
+                    "insufficient_ready_entries",
+                    "tiny_smoke_only",
+                ],
+                warn_panels=1,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["benchmark_history_delta_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_regression_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_added"], ["tiny_smoke_only"])
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_removed"], ["legacy_fixture_gap"])
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"], 0)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"], 1)
+            self.assertEqual(
+                report["summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"],
+                {"mixed": 1},
+            )
+            delta = report["deltas"][0]
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_drift_status"], "mixed")
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_added"], ["tiny_smoke_only"])
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_removed"], ["legacy_fixture_gap"])
+            self.assertIn("mixed benchmark readiness failed-reason drift", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_tracks_benchmark_history_improvement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

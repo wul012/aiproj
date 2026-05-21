@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 375 promotes benchmark-history readiness failed-reason removals into an explicit recovery signal across release readiness comparison, registry, maturity summary, and maturity narrative outputs.
+Version 376 makes mixed benchmark-history readiness failed-reason drift explicit across release readiness comparison, registry, maturity summary, and maturity narrative outputs.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -669,6 +669,16 @@ Version 375 promotes benchmark-history readiness failed-reason removals into an 
 - Targeted tests cover recovered drift in comparison, registry, maturity summary, and maturity narrative.
 - Archived benchmark reason recovery signal evidence in `d/375`.
 
+## Latest v376 checkpoint
+
+- Release readiness comparison summaries now expose `benchmark_history_readiness_requirement_failed_reason_mixed_delta_count`.
+- Mixed drift means a comparison both removes an old benchmark readiness failed reason and adds a new one; it is treated as review-worthy, not as pure recovery.
+- Registry rows/CSV/HTML/search text and registry delta summaries carry mixed drift counts for multi-run scanning.
+- Maturity summary and maturity narrative consume mixed drift counts, force the trend to `benchmark-regressed`, and explain that removals do not cancel newly added reasons.
+- CLI output for comparison, registry, maturity summary, and maturity narrative now prints mixed-drift diagnostics for shell readers.
+- Targeted tests cover mixed drift in comparison, registry, maturity summary, maturity narrative, and maturity artifact rendering.
+- Archived benchmark reason mixed drift evidence in `d/376`.
+
 ## Latest v370 checkpoint
 
 - Registry run rows now expose benchmark readiness requirement status-change count and max exit-code delta from release readiness comparison deltas.
@@ -1225,6 +1235,7 @@ v372.0.0 MiniGPT v372 maintenance split consolidation
 v373.0.0 MiniGPT v373 benchmark requirement reason drift
 v374.0.0 MiniGPT v374 registry release readiness split
 v375.0.0 MiniGPT v375 benchmark reason recovery signal
+v376.0.0 MiniGPT v376 benchmark reason mixed drift
 ```
 
 ## Project structure

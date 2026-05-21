@@ -60,6 +60,10 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                     summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"),
                 ),
                 (
+                    "Release benchmark failed reason mixed deltas",
+                    summary.get("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"),
+                ),
+                (
                     "Release benchmark failed reason drift",
                     _fmt_mapping(summary.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts")),
                 ),
@@ -155,6 +159,7 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Benchmark reasons added", summary.get("release_readiness_benchmark_requirement_failed_reason_added_count")),
         ("Benchmark reasons removed", summary.get("release_readiness_benchmark_requirement_failed_reason_removed_count")),
         ("Benchmark recoveries", summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count")),
+        ("Benchmark mixed", summary.get("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count")),
         ("Requests", summary.get("request_history_status")),
         ("Benchmarks", summary.get("benchmark_scorecard_count")),
         ("Benchmark avg", summary.get("benchmark_avg_score")),

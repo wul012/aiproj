@@ -262,6 +262,9 @@ def _summary(
         "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": release_readiness_context.get(
             "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"
+        ),
         "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": release_readiness_context.get(
             "benchmark_history_readiness_requirement_failed_reason_drift_status_counts"
         ),
@@ -356,6 +359,7 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_readiness_requirement_failed_reason_added": [],
             "benchmark_history_readiness_requirement_failed_reason_removed": [],
             "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": None,
+            "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": None,
             "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": {},
             "max_abs_benchmark_history_case_regression_delta": None,
             "max_abs_benchmark_history_generation_flag_regression_delta": None,
@@ -404,6 +408,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": delta_summary.get(
             "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"
         ),
+        "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": delta_summary.get(
+            "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"
+        ),
         "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _dict(
             delta_summary.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")
         ),
@@ -425,6 +432,8 @@ def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
     if int(context.get("test_coverage_regression_count") or 0) > 0:
         return "coverage-regressed"
     if int(context.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0:
+        return "benchmark-regressed"
+    if int(context.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0) > 0:
         return "benchmark-regressed"
     if int(context.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
         return "benchmark-regressed"
@@ -497,6 +506,10 @@ def _recommendations(
         recs.append("Generate a registry with release readiness comparison outputs so maturity review can include release quality trend context.")
     elif int(release_readiness_context.get("test_coverage_regression_count") or 0) > 0:
         recs.append("Review test coverage regressions before presenting the project as release-stable; maturity status is downgraded to review.")
+    elif int(release_readiness_context.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0) > 0:
+        recs.append(
+            "Review mixed benchmark-history readiness failed-reason drift before presenting the project as release-stable; new reasons can hide behind removals."
+        )
     elif int(release_readiness_context.get("benchmark_history_regression_count") or 0) > 0:
         recs.append(
             "Review benchmark-history readiness regressions before presenting the project as release-stable; maturity status is downgraded to review."

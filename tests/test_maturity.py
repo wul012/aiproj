@@ -60,6 +60,7 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "benchmark_history_readiness_requirement_failed_reason_added": [],
                     "benchmark_history_readiness_requirement_failed_reason_removed": [],
                     "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": 0,
+                    "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": 0,
                     "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": {"stable": 2},
                     "max_abs_benchmark_history_case_regression_delta": 0,
                     "max_abs_benchmark_history_generation_flag_regression_delta": 0,
@@ -132,6 +133,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], [])
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"], {"stable": 2})
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
@@ -390,6 +392,7 @@ class MaturitySummaryTests(unittest.TestCase):
                 "tiny_smoke_only"
             ]
             registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"] = 0
             registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"] = {
                 "recovered": 1
             }
@@ -402,11 +405,51 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], ["tiny_smoke_only"])
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(
                 summary["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"],
                 {"recovered": 1},
             )
             self.assertIn("recovery evidence", " ".join(summary["recommendations"]))
+
+    def test_benchmark_requirement_mixed_reason_drift_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"benchmark-regressed": 1}
+            registry["release_readiness_delta_summary"]["delta_count"] = 1
+            registry["release_readiness_delta_summary"]["regressed_count"] = 0
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_status_changed_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added"] = [
+                "tiny_smoke_only"
+            ]
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed"] = [
+                "legacy_fixture_gap"
+            ]
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"] = {
+                "mixed": 1
+            }
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 1)
+            self.assertEqual(
+                summary["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"],
+                {"mixed": 1},
+            )
+            self.assertIn("mixed benchmark-history readiness failed-reason drift", " ".join(summary["recommendations"]))
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

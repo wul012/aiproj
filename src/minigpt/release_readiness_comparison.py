@@ -337,6 +337,9 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": sum(
             1 for delta in deltas if delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "recovered"
         ),
+        "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": sum(
+            1 for delta in deltas if delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "mixed"
+        ),
         "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _counts(
             delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status") or "stable" for delta in deltas
         ),
@@ -346,6 +349,10 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
 def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> list[str]:
     if int(summary.get("test_coverage_regression_count") or 0):
         return ["At least one readiness comparison shows test coverage regression; inspect coverage percent and gap deltas before release handoff."]
+    if int(summary.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0):
+        return [
+            "At least one readiness comparison shows mixed benchmark readiness failed-reason drift; inspect newly added reasons even when some reasons were removed."
+        ]
     if int(summary.get("benchmark_history_regression_count") or 0):
         return [
             "At least one readiness comparison shows benchmark history regression; inspect benchmark status, readiness requirement, case-regression, and boundary deltas before release handoff."

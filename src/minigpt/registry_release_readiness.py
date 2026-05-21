@@ -120,6 +120,7 @@ def release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int =
             -abs(_as_optional_float(item.get("benchmark_history_generation_flag_regression_delta")) or 0.0),
             -int(bool(item.get("benchmark_history_readiness_requirement_status_changed"))),
             -int(item.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0),
+            -int(item.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "mixed"),
             -abs(_as_optional_float(item.get("benchmark_history_readiness_requirement_exit_code_delta")) or 0.0),
             -abs(_as_optional_float(item.get("benchmark_history_status_delta")) or 0.0),
             -abs(_as_optional_float(item.get("status_delta")) or 0.0),
@@ -211,6 +212,9 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         ),
         "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": sum(
             1 for row in rows if row.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "recovered"
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": sum(
+            1 for row in rows if row.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "mixed"
         ),
         "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _counts(
             row.get("benchmark_history_readiness_requirement_failed_reason_drift_status") or "stable" for row in rows

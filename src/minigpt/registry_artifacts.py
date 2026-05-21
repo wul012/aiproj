@@ -84,6 +84,7 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "release_readiness_benchmark_requirement_exit_code_delta_max",
         "release_readiness_benchmark_requirement_failed_reason_added_count",
         "release_readiness_benchmark_requirement_failed_reason_removed_count",
+        "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count",
         "release_readiness_html_exists",
         "artifact_count",
         "checkpoint_exists",

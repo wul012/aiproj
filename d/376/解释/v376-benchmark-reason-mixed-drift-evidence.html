@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v376 benchmark reason mixed drift evidence</title>
+  <style>
+    :root { --ink:#17202a; --muted:#5c6776; --line:#d5dde7; --page:#f6f7f3; --panel:#fff; --green:#047857; --amber:#b45309; --red:#b91c1c; --blue:#1f5f74; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+    header { padding:30px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0 0 10px; color:var(--muted); }
+    main { padding:20px 34px 36px; }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:16px; }
+    .card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .card { padding:14px; min-height:86px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+    .panel { padding:18px; margin:16px 0; overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:780px; }
+    th, td { border-bottom:1px solid var(--line); padding:10px; text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f5; border:1px solid #d8e0e8; border-radius:6px; padding:2px 5px; }
+    .pill { display:inline-block; border-radius:999px; padding:4px 9px; font-weight:700; font-size:12px; }
+    .mixed { background:#fef3c7; color:var(--amber); }
+    .review { background:#fee2e2; color:var(--red); }
+    .pass { background:#dcfce7; color:var(--green); }
+    footer { color:var(--muted); padding:0 34px 24px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v376 benchmark reason mixed drift evidence</h1>
+    <p>v376 hardens the v375 drift status by promoting <code>mixed</code> into summary, registry, maturity, narrative, CLI, and artifact evidence.</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="card"><div class="label">Delta status</div><div class="value"><span class="pill mixed">mixed</span></div></div>
+      <div class="card"><div class="label">Added reasons</div><div class="value">1</div></div>
+      <div class="card"><div class="label">Removed reasons</div><div class="value">1</div></div>
+      <div class="card"><div class="label">Recovery count</div><div class="value">0</div></div>
+      <div class="card"><div class="label">Mixed count</div><div class="value">1</div></div>
+      <div class="card"><div class="label">Portfolio impact</div><div class="value"><span class="pill review">review</span></div></div>
+    </section>
+    <section class="panel">
+      <h2>Scenario</h2>
+      <table>
+        <thead>
+          <tr><th>Side</th><th>Failed reasons</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Baseline</td><td><code>insufficient_ready_entries</code>, <code>legacy_fixture_gap</code></td><td>The old run failed because readiness entries were insufficient and legacy fixture coverage was weak.</td></tr>
+          <tr><td>Compared</td><td><code>insufficient_ready_entries</code>, <code>tiny_smoke_only</code></td><td>The legacy fixture gap disappeared, but a new tiny-smoke-only reason appeared.</td></tr>
+          <tr><td>Delta</td><td><code>added=["tiny_smoke_only"]</code>, <code>removed=["legacy_fixture_gap"]</code></td><td>Because add and remove both happened, the drift is <code>mixed</code>, not pure recovery.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Evidence Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>Field</th><th>Expected value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Release readiness comparison</td><td><code>benchmark_history_readiness_requirement_failed_reason_mixed_delta_count</code></td><td>1</td></tr>
+          <tr><td>Registry summary</td><td><code>benchmark_history_readiness_requirement_failed_reason_drift_status_counts</code></td><td><code>{"mixed": 1}</code></td></tr>
+          <tr><td>Maturity summary</td><td><code>release_readiness_trend_status</code></td><td><code>benchmark-regressed</code></td></tr>
+          <tr><td>Maturity narrative</td><td><code>portfolio_status</code></td><td><code>review</code></td></tr>
+          <tr><td>CLI diagnostics</td><td><code>*_mixed_delta_count</code></td><td>printed by comparison, registry, maturity summary, and maturity narrative scripts</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>python -m pytest tests/test_release_readiness_comparison.py tests/test_registry.py tests/test_maturity.py tests/test_maturity_narrative.py tests/test_maturity_artifacts.py -q</code></p>
+      <p><span class="pill pass">61 passed</span></p>
+    </section>
+  </main>
+  <footer>Generated for d/376 evidence. This page is runtime documentation evidence, not model-quality proof.</footer>
+</body>
+</html>

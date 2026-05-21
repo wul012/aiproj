@@ -230,6 +230,9 @@
 389-v375-benchmark-reason-recovery-signal.md
  -> v375 code explanation: promote failed-reason removals into explicit recovery drift status and recovery counts across comparison, registry, maturity, and narrative outputs.
 
+390-v376-benchmark-reason-mixed-drift.md
+ -> v376 code explanation: expose mixed benchmark readiness failed-reason drift as its own review signal across comparison, registry, maturity, narrative, CLI, and artifact outputs.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

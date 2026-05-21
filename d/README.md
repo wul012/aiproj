@@ -236,6 +236,9 @@ d/374/解释/说明.md
 d/375/图片
 d/375/解释/说明.md
  -> v375 benchmark reason recovery signal 的运行截图和解释
+d/376/图片
+d/376/解释/说明.md
+ -> v376 benchmark reason mixed drift 的运行截图和解释
 ```
 
 写入规则：

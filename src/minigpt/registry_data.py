@@ -141,6 +141,7 @@ class RegisteredRun:
     release_readiness_benchmark_requirement_exit_code_delta_max: int | float | None
     release_readiness_benchmark_requirement_failed_reason_added_count: int | None
     release_readiness_benchmark_requirement_failed_reason_removed_count: int | None
+    release_readiness_benchmark_requirement_failed_reason_mixed_delta_count: int | None
     release_readiness_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
@@ -270,6 +271,9 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
             release_readiness_deltas
         ),
         release_readiness_benchmark_requirement_failed_reason_removed_count=_release_readiness_benchmark_requirement_failed_reason_removed_count(
+            release_readiness_deltas
+        ),
+        release_readiness_benchmark_requirement_failed_reason_mixed_delta_count=_release_readiness_benchmark_requirement_failed_reason_mixed_delta_count(
             release_readiness_deltas
         ),
         release_readiness_html_exists=_release_readiness_html_exists(root),
@@ -478,6 +482,12 @@ def _release_readiness_benchmark_requirement_failed_reason_removed_count(deltas:
     return sum(_release_readiness_benchmark_requirement_reason_count(delta, "removed") for delta in deltas)
 
 
+def _release_readiness_benchmark_requirement_failed_reason_mixed_delta_count(deltas: list[dict[str, Any]]) -> int | None:
+    if not deltas:
+        return None
+    return sum(1 for delta in deltas if _release_readiness_benchmark_requirement_reason_drift_status(delta) == "mixed")
+
+
 def _release_readiness_benchmark_requirement_reason_count(delta: dict[str, Any], kind: str) -> int:
     key = f"benchmark_history_readiness_requirement_failed_reason_{kind}_count"
     direct = _as_int(delta.get(key))
@@ -488,6 +498,21 @@ def _release_readiness_benchmark_requirement_reason_count(delta: dict[str, Any],
     if kind == "added":
         return len(_reason_additions(baseline, compared))
     return len(_reason_removals(baseline, compared))
+
+
+def _release_readiness_benchmark_requirement_reason_drift_status(delta: dict[str, Any]) -> str:
+    direct = _pick(delta, "benchmark_history_readiness_requirement_failed_reason_drift_status")
+    if direct:
+        return str(direct)
+    added = _release_readiness_benchmark_requirement_reason_count(delta, "added")
+    removed = _release_readiness_benchmark_requirement_reason_count(delta, "removed")
+    if added and removed:
+        return "mixed"
+    if added:
+        return "regressed"
+    if removed:
+        return "recovered"
+    return "stable"
 
 
 def _reason_additions(baseline: Any, compared: Any) -> list[str]:

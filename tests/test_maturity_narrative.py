@@ -44,6 +44,18 @@ def make_project(
     decision_path = project / "runs" / "demo-run" / "benchmark-scorecard-decision" / "benchmark_scorecard_decision.json"
     history_path = project / "runs" / "demo-run" / "benchmark-history" / "benchmark_history.json"
     dataset_card_path = project / "datasets" / "demo" / "v1" / "dataset_card.json"
+    reason_added = benchmark_requirement_reason_added or []
+    reason_removed = benchmark_requirement_reason_removed or []
+    reason_mixed_delta_count = 1 if reason_added and reason_removed else 0
+    reason_recovery_delta_count = 1 if reason_removed and not reason_added else 0
+    if reason_mixed_delta_count:
+        reason_drift_status_counts = {"mixed": 1}
+    elif reason_added:
+        reason_drift_status_counts = {"regressed": 1}
+    elif reason_removed:
+        reason_drift_status_counts = {"recovered": 1}
+    else:
+        reason_drift_status_counts = {"stable": 2}
 
     write_json(
         maturity_path,
@@ -73,16 +85,13 @@ def make_project(
                 "release_readiness_max_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
                 "release_readiness_benchmark_requirement_status_changed_count": benchmark_requirement_change_count,
                 "release_readiness_max_benchmark_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
-                "release_readiness_benchmark_requirement_failed_reason_added_count": len(benchmark_requirement_reason_added or []),
-                "release_readiness_benchmark_requirement_failed_reason_removed_count": len(benchmark_requirement_reason_removed or []),
-                "release_readiness_benchmark_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
-                "release_readiness_benchmark_requirement_failed_reason_removed": benchmark_requirement_reason_removed or [],
-                "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": 1
-                if benchmark_requirement_reason_removed
-                else 0,
-                "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": (
-                    {"recovered": 1} if benchmark_requirement_reason_removed else {"stable": 2}
-                ),
+                "release_readiness_benchmark_requirement_failed_reason_added_count": len(reason_added),
+                "release_readiness_benchmark_requirement_failed_reason_removed_count": len(reason_removed),
+                "release_readiness_benchmark_requirement_failed_reason_added": reason_added,
+                "release_readiness_benchmark_requirement_failed_reason_removed": reason_removed,
+                "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": reason_recovery_delta_count,
+                "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count": reason_mixed_delta_count,
+                "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": reason_drift_status_counts,
             },
             "release_readiness_context": {
                 "available": True,
@@ -107,16 +116,13 @@ def make_project(
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
-                "benchmark_history_readiness_requirement_failed_reason_added_count": len(benchmark_requirement_reason_added or []),
-                "benchmark_history_readiness_requirement_failed_reason_removed_count": len(benchmark_requirement_reason_removed or []),
-                "benchmark_history_readiness_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
-                "benchmark_history_readiness_requirement_failed_reason_removed": benchmark_requirement_reason_removed or [],
-                "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": 1
-                if benchmark_requirement_reason_removed
-                else 0,
-                "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": (
-                    {"recovered": 1} if benchmark_requirement_reason_removed else {"stable": 2}
-                ),
+                "benchmark_history_readiness_requirement_failed_reason_added_count": len(reason_added),
+                "benchmark_history_readiness_requirement_failed_reason_removed_count": len(reason_removed),
+                "benchmark_history_readiness_requirement_failed_reason_added": reason_added,
+                "benchmark_history_readiness_requirement_failed_reason_removed": reason_removed,
+                "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": reason_recovery_delta_count,
+                "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": reason_mixed_delta_count,
+                "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": reason_drift_status_counts,
             },
             "request_history_context": {
                 "status": "pass",
@@ -151,16 +157,13 @@ def make_project(
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
-                "benchmark_history_readiness_requirement_failed_reason_added_count": len(benchmark_requirement_reason_added or []),
-                "benchmark_history_readiness_requirement_failed_reason_removed_count": len(benchmark_requirement_reason_removed or []),
-                "benchmark_history_readiness_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
-                "benchmark_history_readiness_requirement_failed_reason_removed": benchmark_requirement_reason_removed or [],
-                "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": 1
-                if benchmark_requirement_reason_removed
-                else 0,
-                "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": (
-                    {"recovered": 1} if benchmark_requirement_reason_removed else {"stable": 2}
-                ),
+                "benchmark_history_readiness_requirement_failed_reason_added_count": len(reason_added),
+                "benchmark_history_readiness_requirement_failed_reason_removed_count": len(reason_removed),
+                "benchmark_history_readiness_requirement_failed_reason_added": reason_added,
+                "benchmark_history_readiness_requirement_failed_reason_removed": reason_removed,
+                "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": reason_recovery_delta_count,
+                "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": reason_mixed_delta_count,
+                "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": reason_drift_status_counts,
             },
         },
     )
@@ -351,6 +354,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], [])
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"], {"stable": 2})
             self.assertEqual(narrative["summary"]["request_history_status"], "pass")
             self.assertEqual(narrative["summary"]["benchmark_scorecard_count"], 1)
@@ -533,6 +537,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 1)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_added"], ["tiny_smoke_only"])
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(release_section["status"], "benchmark-regressed")
             self.assertIn("benchmark failed reasons added=1", release_section["claim"])
             self.assertIn("tiny_smoke_only", release_section["claim"])
@@ -555,6 +560,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], ["tiny_smoke_only"])
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 0)
             self.assertEqual(
                 narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"],
                 {"recovered": 1},
@@ -564,6 +570,34 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("recovery deltas=1", release_section["claim"])
             self.assertIn("tiny_smoke_only", release_section["claim"])
             self.assertIn("recovery evidence", " ".join(narrative["recommendations"]))
+
+    def test_build_maturity_narrative_marks_review_for_mixed_reason_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(
+                Path(tmp),
+                release_trend="stable",
+                benchmark_requirement_reason_added=["tiny_smoke_only"],
+                benchmark_requirement_reason_removed=["legacy_fixture_gap"],
+            )
+
+            narrative = build_maturity_narrative(paths["project"])
+            release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"], 1)
+            self.assertEqual(
+                narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"],
+                {"mixed": 1},
+            )
+            self.assertEqual(release_section["status"], "benchmark-regressed")
+            self.assertIn("mixed deltas=1", release_section["claim"])
+            self.assertIn("tiny_smoke_only", release_section["claim"])
+            self.assertIn("legacy_fixture_gap", release_section["claim"])
+            self.assertIn("mixed benchmark-history readiness failed-reason drift", " ".join(narrative["recommendations"]))
 
     def test_build_maturity_narrative_marks_review_for_non_comparison_ready_decision(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

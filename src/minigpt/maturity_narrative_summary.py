@@ -74,6 +74,9 @@ def build_maturity_narrative_summary(
         "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": release.get(
             "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count": release.get(
+            "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"
+        ),
         "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": release.get(
             "benchmark_history_readiness_requirement_failed_reason_drift_status_counts"
         ),
@@ -152,6 +155,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
         recommendations.append(
             "Review benchmark-history readiness requirement changes before treating the portfolio as release-stable."
         )
+    if int(summary.get("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count") or 0) > 0:
+        recommendations.append(
+            "Review mixed benchmark-history readiness failed-reason drift before treating the portfolio as release-stable; removals do not cancel newly added reasons."
+        )
     if int(summary.get("release_readiness_benchmark_requirement_failed_reason_added_count") or 0) > 0:
         recommendations.append(
             "Review newly added benchmark-history readiness failed reasons before treating the portfolio as release-stable."
@@ -229,6 +236,7 @@ def _portfolio_status(
         or int(release.get("test_coverage_regression_count") or 0) > 0
         or int(release.get("benchmark_history_regression_count") or 0) > 0
         or int(release.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0
+        or int(release.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0) > 0
         or int(release.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
@@ -283,12 +291,20 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         release_context.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
         maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"),
     )
+    requirement_reason_mixed_delta_count = _coalesce(
+        release_context.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count"),
+        maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"),
+    )
     requirement_reason_drift_status_counts = _coalesce(
         release_context.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts"),
         maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts"),
         {},
     )
-    if int(requirement_status_changed_count or 0) > 0 or int(requirement_reason_added_count or 0) > 0:
+    if (
+        int(requirement_status_changed_count or 0) > 0
+        or int(requirement_reason_mixed_delta_count or 0) > 0
+        or int(requirement_reason_added_count or 0) > 0
+    ):
         trend_status = "benchmark-regressed"
     return {
         **release_context,
@@ -350,6 +366,7 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "benchmark_history_readiness_requirement_failed_reason_added": _string_list(requirement_reason_added),
         "benchmark_history_readiness_requirement_failed_reason_removed": _string_list(requirement_reason_removed),
         "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": requirement_reason_recovery_delta_count,
+        "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": requirement_reason_mixed_delta_count,
         "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _dict(requirement_reason_drift_status_counts),
         "max_abs_benchmark_history_case_regression_delta": _coalesce(
             release_context.get("max_abs_benchmark_history_case_regression_delta"),

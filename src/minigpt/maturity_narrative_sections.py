@@ -177,7 +177,8 @@ def _release_claim(summary: dict[str, Any]) -> str:
         f"({', '.join(summary.get('release_readiness_benchmark_requirement_failed_reason_added') or []) or 'none'}), "
         f"removed={summary.get('release_readiness_benchmark_requirement_failed_reason_removed_count') or 0} "
         f"({', '.join(summary.get('release_readiness_benchmark_requirement_failed_reason_removed') or []) or 'none'}), "
-        f"recovery deltas={summary.get('release_readiness_benchmark_requirement_failed_reason_recovery_delta_count') or 0}."
+        f"recovery deltas={summary.get('release_readiness_benchmark_requirement_failed_reason_recovery_delta_count') or 0}, "
+        f"mixed deltas={summary.get('release_readiness_benchmark_requirement_failed_reason_mixed_delta_count') or 0}."
     )
 
 

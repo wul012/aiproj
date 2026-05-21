@@ -63,6 +63,10 @@ def main() -> None:
         + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"), ensure_ascii=False)
     )
     print(
+        "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count="
+        + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_mixed_delta_count"), ensure_ascii=False)
+    )
+    print(
         "release_readiness_benchmark_requirement_failed_reason_drift_status_counts="
         + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts") or {}, ensure_ascii=False)
     )
