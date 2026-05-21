@@ -55,6 +55,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--governance-chains", type=Path, default=None, help="Optional JSON list of governance chains to stabilize.")
     parser.add_argument("--governance-proposals", type=Path, default=None, help="Optional JSON list of governance expansion proposals to route.")
     parser.add_argument("--governance-pause-days", type=int, default=3)
+    parser.add_argument("--require-clean-governance-routing", action="store_true", help="Exit non-zero when governance proposals require review or new-chain rejection.")
     parser.add_argument("--skip-governance-stabilization", action="store_true", help="Skip governance stabilization review outputs.")
     return parser.parse_args()
 
@@ -93,6 +94,10 @@ def main() -> None:
             governance_chains,
             proposed_items=governance_proposals,
             pause_days=args.governance_pause_days,
+        )
+        governance_report["routing_requirement"] = build_governance_routing_requirement(
+            governance_report["proposal_routing"],
+            required=args.require_clean_governance_routing,
         )
         governance_outputs = write_governance_stabilization_outputs(governance_report, args.out_dir)
     summary = report["summary"]
@@ -137,7 +142,15 @@ def main() -> None:
         print(f"governance_routing_ambiguous_keyword_match_count={governance_routing['ambiguous_keyword_match_count']}")
         print("governance_routing_keyword_hits=" + ",".join(str(item) for item in governance_routing.get("keyword_hits", [])))
         print("governance_routing_ambiguous_keyword_hits=" + ",".join(str(item) for item in governance_routing.get("ambiguous_keyword_hits", [])))
+        routing_gate = governance_report["routing_requirement"]
+        print(f"governance_routing_requirement_status={routing_gate['status']}")
+        print(f"governance_routing_requirement_decision={routing_gate['decision']}")
+        print(f"governance_routing_requirement_exit_code={routing_gate['exit_code']}")
+        print(f"governance_routing_requirement_blocking_count={routing_gate['blocking_count']}")
+        print("governance_routing_requirement_failed_reasons=" + ",".join(str(item) for item in routing_gate.get("failed_reasons", [])))
         print("governance_outputs=" + json.dumps(governance_outputs, ensure_ascii=False))
+        if routing_gate["exit_code"]:
+            raise SystemExit(int(routing_gate["exit_code"]))
 
 
 def _read_json_list(path: Path | None, fallback: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -155,6 +168,38 @@ def _collect_python_paths(scope: Path) -> list[Path]:
     if not scope.exists():
         raise FileNotFoundError(f"Module pressure scope does not exist: {scope}")
     return sorted(path for path in scope.rglob("*.py") if path.is_file())
+
+
+def build_governance_routing_requirement(routing: dict[str, Any], *, required: bool = False) -> dict[str, Any]:
+    review_count = int(routing.get("review_count") or 0)
+    new_chain_candidate_count = int(routing.get("new_chain_candidate_count") or 0)
+    ambiguous_keyword_match_count = int(routing.get("ambiguous_keyword_match_count") or 0)
+    blocking_count = review_count + new_chain_candidate_count
+    failed_reasons: list[str] = []
+    if review_count:
+        failed_reasons.append("review_required")
+    if new_chain_candidate_count:
+        failed_reasons.append("new_chain_candidate")
+    if ambiguous_keyword_match_count:
+        failed_reasons.append("ambiguous_keyword")
+    if not required:
+        return {
+            "required": False,
+            "status": "not-required",
+            "decision": "report-only",
+            "exit_code": 0,
+            "blocking_count": blocking_count,
+            "failed_reasons": failed_reasons,
+        }
+    status = "pass" if blocking_count == 0 else "fail"
+    return {
+        "required": True,
+        "status": status,
+        "decision": "continue" if status == "pass" else "stop",
+        "exit_code": 0 if status == "pass" else 1,
+        "blocking_count": blocking_count,
+        "failed_reasons": failed_reasons,
+    }
 
 
 if __name__ == "__main__":

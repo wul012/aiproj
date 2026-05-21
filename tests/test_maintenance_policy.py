@@ -327,6 +327,100 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("governance_routing_ambiguous_keyword_match_count=0", completed.stdout)
             self.assertIn("governance_routing_keyword_hits=dataset", completed.stdout)
             self.assertIn("governance_routing_ambiguous_keyword_hits=", completed.stdout)
+            self.assertIn("governance_routing_requirement_status=not-required", completed.stdout)
+            self.assertIn("governance_routing_requirement_exit_code=0", completed.stdout)
+
+    def test_script_can_require_clean_governance_routing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            proposals_path = root / "proposals.json"
+            proposals_path.write_text(
+                json.dumps(
+                    [
+                        {"title": "Dataset drift note", "description": "dataset source dedupe and corpus change"},
+                        {"title": "Registry model card polish", "description": "registry model card summary"},
+                    ],
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_maintenance_batching.py"),
+                    "--skip-module-pressure",
+                    "--governance-proposals",
+                    str(proposals_path),
+                    "--require-clean-governance-routing",
+                    "--out-dir",
+                    str(root / "script-clean"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+
+            self.assertIn("governance_routing_decision=merge_existing", completed.stdout)
+            self.assertIn("governance_routing_requirement_status=pass", completed.stdout)
+            self.assertIn("governance_routing_requirement_decision=continue", completed.stdout)
+            self.assertIn("governance_routing_requirement_exit_code=0", completed.stdout)
+            self.assertIn("governance_routing_requirement_blocking_count=0", completed.stdout)
+            payload = json.loads((root / "script-clean" / "governance_stabilization.json").read_text(encoding="utf-8"))
+            markdown = (root / "script-clean" / "governance_stabilization.md").read_text(encoding="utf-8")
+            html = (root / "script-clean" / "governance_stabilization.html").read_text(encoding="utf-8")
+            self.assertEqual(payload["routing_requirement"]["status"], "pass")
+            self.assertIn("Requirement status: `pass`", markdown)
+            self.assertIn("Routing Requirement", html)
+
+    def test_script_required_clean_governance_routing_blocks_ambiguous_matches(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            proposals_path = root / "proposals.json"
+            proposals_path.write_text(
+                json.dumps(
+                    [
+                        {"title": "Dataset benchmark bridge", "description": "dataset snapshot beside benchmark history"},
+                    ],
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_maintenance_batching.py"),
+                    "--skip-module-pressure",
+                    "--governance-proposals",
+                    str(proposals_path),
+                    "--require-clean-governance-routing",
+                    "--out-dir",
+                    str(root / "script-fail"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("governance_routing_decision=review_before_merge", completed.stdout)
+            self.assertIn("governance_routing_ambiguous_keyword_match_count=1", completed.stdout)
+            self.assertIn("governance_routing_requirement_status=fail", completed.stdout)
+            self.assertIn("governance_routing_requirement_decision=stop", completed.stdout)
+            self.assertIn("governance_routing_requirement_exit_code=1", completed.stdout)
+            self.assertIn("governance_routing_requirement_blocking_count=1", completed.stdout)
+            self.assertIn("governance_routing_requirement_failed_reasons=review_required,ambiguous_keyword", completed.stdout)
+            payload = json.loads((root / "script-fail" / "governance_stabilization.json").read_text(encoding="utf-8"))
+            markdown = (root / "script-fail" / "governance_stabilization.md").read_text(encoding="utf-8")
+            html = (root / "script-fail" / "governance_stabilization.html").read_text(encoding="utf-8")
+            self.assertEqual(payload["routing_requirement"]["status"], "fail")
+            self.assertEqual(payload["routing_requirement"]["exit_code"], 1)
+            self.assertIn("Requirement status: `fail`", markdown)
+            self.assertIn("Failed reasons", html)
 
     def test_module_pressure_report_flags_large_modules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

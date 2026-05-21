@@ -197,6 +197,9 @@ d/361/解释/说明.md
 d/362/图片
 d/362/解释/说明.md
  -> v362 governance ambiguous keyword review 的运行截图和解释
+d/363/图片
+d/363/解释/说明.md
+ -> v363 governance routing gate 的运行截图和解释
 ```
 
 写入规则：
