@@ -10,8 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.maintenance_policy import (
+    build_governance_stabilization_review,
     build_maintenance_batching_report,
     build_module_pressure_report,
+    write_governance_stabilization_outputs,
     write_maintenance_batching_outputs,
     write_module_pressure_outputs,
 )
@@ -50,6 +52,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--module-critical-lines", type=int, default=1200)
     parser.add_argument("--module-top-n", type=int, default=12)
     parser.add_argument("--skip-module-pressure", action="store_true", help="Only write the v109 batching report.")
+    parser.add_argument("--governance-chains", type=Path, default=None, help="Optional JSON list of governance chains to stabilize.")
+    parser.add_argument("--governance-pause-days", type=int, default=3)
+    parser.add_argument("--skip-governance-stabilization", action="store_true", help="Skip governance stabilization review outputs.")
     return parser.parse_args()
 
 
@@ -67,6 +72,8 @@ def main() -> None:
     outputs = write_maintenance_batching_outputs(report, args.out_dir)
     module_outputs: dict[str, str] = {}
     module_report = None
+    governance_outputs: dict[str, str] = {}
+    governance_report = None
     if not args.skip_module_pressure:
         module_paths = _collect_python_paths(args.module_scope)
         module_report = build_module_pressure_report(
@@ -78,6 +85,10 @@ def main() -> None:
             top_n=args.module_top_n,
         )
         module_outputs = write_module_pressure_outputs(module_report, args.out_dir)
+    if not args.skip_governance_stabilization:
+        governance_chains = _read_json_list(args.governance_chains, []) if args.governance_chains is not None else None
+        governance_report = build_governance_stabilization_review(governance_chains, pause_days=args.governance_pause_days)
+        governance_outputs = write_governance_stabilization_outputs(governance_report, args.out_dir)
     summary = report["summary"]
     proposal_summary = report["proposal"]
     print(f"status={summary['status']}")
@@ -98,6 +109,16 @@ def main() -> None:
         print(f"module_critical_count={module_summary['critical_count']}")
         print(f"largest_module={module_summary['largest_module']}")
         print("module_outputs=" + json.dumps(module_outputs, ensure_ascii=False))
+    if governance_report is not None:
+        governance_summary = governance_report["summary"]
+        print(f"governance_status={governance_summary['status']}")
+        print(f"governance_decision={governance_summary['decision']}")
+        print(f"governance_pause_days={governance_summary['pause_days']}")
+        print(f"governance_chain_count={governance_summary['chain_count']}")
+        print(f"governance_keep_count={governance_summary['keep_count']}")
+        print(f"governance_watch_count={governance_summary['watch_count']}")
+        print(f"governance_consolidation_candidate_count={governance_summary['consolidation_candidate_count']}")
+        print("governance_outputs=" + json.dumps(governance_outputs, ensure_ascii=False))
 
 
 def _read_json_list(path: Path | None, fallback: list[dict[str, Any]]) -> list[dict[str, Any]]:

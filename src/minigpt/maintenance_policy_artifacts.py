@@ -313,6 +313,168 @@ def write_module_pressure_outputs(report: dict[str, Any], out_dir: str | Path) -
     return {key: str(value) for key, value in paths.items()}
 
 
+def write_governance_stabilization_json(report: dict[str, Any], path: str | Path) -> None:
+    write_json_payload(report, path)
+
+
+def write_governance_stabilization_csv(report: dict[str, Any], path: str | Path) -> None:
+    fieldnames = [
+        "id",
+        "name",
+        "action",
+        "necessary",
+        "has_consumer",
+        "has_evidence",
+        "consumer",
+        "evidence",
+        "next_action",
+    ]
+    rows = []
+    for item in _list_of_dicts(report.get("chains")):
+        rows.append({field: csv_cell(item.get(field)) for field in fieldnames})
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
+    summary = _dict(report.get("summary"))
+    policy = _dict(report.get("policy"))
+    lines = [
+        f"# {report.get('title', 'MiniGPT governance stabilization review')}",
+        "",
+        f"- Generated: `{report.get('generated_at')}`",
+        f"- Status: `{summary.get('status')}`",
+        f"- Decision: `{summary.get('decision')}`",
+        f"- New chain pause: `{policy.get('new_chain_pause')}` for `{policy.get('pause_days')}` days",
+        "",
+        "## Summary",
+        "",
+        "| Metric | Value |",
+        "| --- | --- |",
+    ]
+    for key in [
+        "chain_count",
+        "keep_count",
+        "watch_count",
+        "merge_count",
+        "cut_count",
+        "missing_consumer_count",
+        "missing_evidence_count",
+        "consolidation_candidate_count",
+    ]:
+        lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
+    lines.extend(
+        [
+            "",
+            "## Governance Chains",
+            "",
+            "| Chain | Action | Consumer | Evidence | Next action |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+    )
+    for item in _list_of_dicts(report.get("chains")):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    _md(item.get("name")),
+                    _md(item.get("action")),
+                    _md(item.get("consumer")),
+                    _md(item.get("evidence")),
+                    _md(item.get("next_action")),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(["", "## Recommendations", ""])
+    lines.extend(f"- {item}" for item in _string_list(report.get("recommendations")))
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_governance_stabilization_markdown(report: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(render_governance_stabilization_markdown(report), encoding="utf-8")
+
+
+def render_governance_stabilization_html(report: dict[str, Any]) -> str:
+    summary = _dict(report.get("summary"))
+    policy = _dict(report.get("policy"))
+    stats = [
+        ("Status", summary.get("status")),
+        ("Decision", summary.get("decision")),
+        ("Pause days", policy.get("pause_days")),
+        ("Chains", summary.get("chain_count")),
+        ("Keep", summary.get("keep_count")),
+        ("Watch", summary.get("watch_count")),
+        ("Merge/Cut", summary.get("consolidation_candidate_count")),
+    ]
+    rows = "".join(_governance_chain_html_row(item) for item in _list_of_dicts(report.get("chains")))
+    if not rows:
+        rows = '<tr><td colspan="5" class="muted">No governance chains were provided.</td></tr>'
+    return "\n".join(
+        [
+            "<!doctype html>",
+            '<html lang="zh-CN">',
+            "<head>",
+            '<meta charset="utf-8">',
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
+            '<link rel="icon" href="data:,">',
+            f"<title>{_e(report.get('title', 'MiniGPT governance stabilization review'))}</title>",
+            _style(),
+            "</head>",
+            "<body>",
+            f"<header><h1>{_e(report.get('title', 'MiniGPT governance stabilization review'))}</h1><p>Stabilize existing governance chains before adding new report layers.</p></header>",
+            '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
+            "<section><h2>Governance Chains</h2><table><tr><th>Chain</th><th>Action</th><th>Consumer</th><th>Evidence</th><th>Next Action</th></tr>"
+            + rows
+            + "</table></section>",
+            _list_section("Recommendations", report.get("recommendations")),
+            "<footer>Generated by MiniGPT maintenance policy.</footer>",
+            "</body>",
+            "</html>",
+        ]
+    )
+
+
+def write_governance_stabilization_html(report: dict[str, Any], path: str | Path) -> None:
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(render_governance_stabilization_html(report), encoding="utf-8")
+
+
+def write_governance_stabilization_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
+    root = Path(out_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    paths = {
+        "json": root / "governance_stabilization.json",
+        "csv": root / "governance_stabilization.csv",
+        "markdown": root / "governance_stabilization.md",
+        "html": root / "governance_stabilization.html",
+    }
+    write_governance_stabilization_json(report, paths["json"])
+    write_governance_stabilization_csv(report, paths["csv"])
+    write_governance_stabilization_markdown(report, paths["markdown"])
+    write_governance_stabilization_html(report, paths["html"])
+    return {key: str(value) for key, value in paths.items()}
+
+
+def _governance_chain_html_row(item: dict[str, Any]) -> str:
+    return (
+        "<tr>"
+        f"<td><strong>{_e(item.get('name'))}</strong><br><span class=\"muted\">{_e(item.get('id'))}</span></td>"
+        f"<td>{_e(item.get('action'))}</td>"
+        f"<td>{_e(item.get('consumer'))}</td>"
+        f"<td>{_e(item.get('evidence'))}</td>"
+        f"<td>{_e(item.get('next_action'))}</td>"
+        "</tr>"
+    )
+
+
 def _module_pressure_html_row(item: dict[str, Any]) -> str:
     largest_function = item.get("largest_function") or ""
     if largest_function:
@@ -403,10 +565,17 @@ footer { color: #687782; font-size: 12px; }
 
 
 __all__ = [
+    "render_governance_stabilization_html",
+    "render_governance_stabilization_markdown",
     "render_maintenance_batching_html",
     "render_maintenance_batching_markdown",
     "render_module_pressure_html",
     "render_module_pressure_markdown",
+    "write_governance_stabilization_csv",
+    "write_governance_stabilization_html",
+    "write_governance_stabilization_json",
+    "write_governance_stabilization_markdown",
+    "write_governance_stabilization_outputs",
     "write_maintenance_batching_csv",
     "write_maintenance_batching_html",
     "write_maintenance_batching_json",

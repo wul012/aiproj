@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -13,13 +14,17 @@ from minigpt.maintenance_policy import (  # noqa: E402
     DEFAULT_MODULE_CRITICAL_LINES,
     DEFAULT_MODULE_TOP_N,
     DEFAULT_MODULE_WARNING_LINES,
+    build_governance_stabilization_review,
     build_maintenance_batching_report,
     build_module_pressure_report,
     build_maintenance_proposal_decision,
+    render_governance_stabilization_html,
+    render_governance_stabilization_markdown,
     render_module_pressure_html,
     render_module_pressure_markdown,
     render_maintenance_batching_html,
     render_maintenance_batching_markdown,
+    write_governance_stabilization_outputs,
     write_maintenance_batching_outputs,
     write_module_pressure_outputs,
 )
@@ -107,6 +112,68 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("<Maintenance>", markdown)
             payload = json.loads(Path(outputs["json"]).read_text(encoding="utf-8"))
             self.assertEqual(payload["proposal"]["decision"], "single_ok")
+
+    def test_governance_stabilization_review_pauses_new_chains(self) -> None:
+        report = build_governance_stabilization_review(generated_at="2026-05-21T00:00:00Z")
+
+        self.assertEqual(report["summary"]["status"], "pass")
+        self.assertEqual(report["summary"]["decision"], "pause_new_governance_chains")
+        self.assertEqual(report["summary"]["chain_count"], 7)
+        self.assertEqual(report["summary"]["keep_count"], 5)
+        self.assertEqual(report["summary"]["watch_count"], 2)
+        self.assertEqual(report["policy"]["new_chain_pause"], "active")
+        self.assertIn("Treat seven active chains", " ".join(report["recommendations"]))
+
+    def test_governance_stabilization_flags_consolidation_candidates(self) -> None:
+        report = build_governance_stabilization_review(
+            [
+                {"id": "release", "name": "Release readiness", "action": "keep", "consumer": "review", "evidence": "bundle"},
+                {"id": "links", "name": "Extra link dashboard", "action": "merge", "consumer": "registry", "evidence": "links"},
+                {"id": "stale", "name": "Stale trend projection", "action": "cut", "consumer": "none", "evidence": "duplicate trend"},
+            ],
+            pause_days=2,
+        )
+
+        self.assertEqual(report["summary"]["status"], "review")
+        self.assertEqual(report["summary"]["decision"], "pause_and_consolidate_governance_chains")
+        self.assertEqual(report["summary"]["merge_count"], 1)
+        self.assertEqual(report["summary"]["cut_count"], 1)
+        self.assertEqual(report["summary"]["consolidation_candidate_count"], 2)
+        self.assertIn("Consolidate chains marked merge/cut", " ".join(report["recommendations"]))
+
+    def test_governance_stabilization_outputs_and_script_stdout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            report = build_governance_stabilization_review(title="<Governance>")
+
+            outputs = write_governance_stabilization_outputs(report, root / "review")
+            html = render_governance_stabilization_html(report)
+            markdown = render_governance_stabilization_markdown(report)
+
+            self.assertTrue(Path(outputs["json"]).exists())
+            self.assertTrue(Path(outputs["csv"]).exists())
+            self.assertTrue(Path(outputs["markdown"]).exists())
+            self.assertTrue(Path(outputs["html"]).exists())
+            self.assertIn("&lt;Governance&gt;", html)
+            self.assertIn("Dataset provenance", markdown)
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "check_maintenance_batching.py"),
+                    "--skip-module-pressure",
+                    "--out-dir",
+                    str(root / "script"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            self.assertIn("governance_status=pass", completed.stdout)
+            self.assertIn("governance_decision=pause_new_governance_chains", completed.stdout)
+            self.assertIn("governance_chain_count=7", completed.stdout)
 
     def test_module_pressure_report_flags_large_modules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

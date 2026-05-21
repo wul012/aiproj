@@ -173,6 +173,9 @@
 370-v356-model-card-dataset-snapshot.md
  -> v356 code explanation: carry registry dataset snapshot evidence into model cards so project-level summaries preserve data-boundary review context.
 
+371-v357-governance-stabilization-review.md
+ -> v357 code explanation: add a maintenance-policy governance stabilization review that pauses new chains and watches the current seven for overlap before expansion.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

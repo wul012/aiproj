@@ -9,10 +9,17 @@ from minigpt.maintenance_pressure import (
     build_module_pressure_report,
 )
 from minigpt.maintenance_policy_artifacts import (
+    render_governance_stabilization_html,
+    render_governance_stabilization_markdown,
     render_maintenance_batching_html,
     render_maintenance_batching_markdown,
     render_module_pressure_html,
     render_module_pressure_markdown,
+    write_governance_stabilization_csv,
+    write_governance_stabilization_html,
+    write_governance_stabilization_json,
+    write_governance_stabilization_markdown,
+    write_governance_stabilization_outputs,
     write_maintenance_batching_csv,
     write_maintenance_batching_html,
     write_maintenance_batching_json,
@@ -48,6 +55,69 @@ HIGH_RISK_FLAGS = {
 
 DEFAULT_SINGLE_MODULE_UTILS_LIMIT = 3
 DEFAULT_MIN_BATCH_ITEMS = 2
+DEFAULT_GOVERNANCE_PAUSE_DAYS = 3
+
+GOVERNANCE_STABILIZATION_ACTIONS = {"keep", "watch", "merge", "cut"}
+
+DEFAULT_GOVERNANCE_CHAINS = [
+    {
+        "id": "dataset-provenance",
+        "name": "Dataset provenance and snapshot flow",
+        "action": "keep",
+        "consumer": "dataset comparison, run comparison, registry, model card",
+        "evidence": "dataset_version.json, dataset snapshot summary, dedupe/source-order fields",
+        "next_action": "Keep as the data-boundary spine; do not add more display-only projections during the pause.",
+    },
+    {
+        "id": "benchmark-history",
+        "name": "Benchmark scorecard and history flow",
+        "action": "keep",
+        "consumer": "maturity narrative, project audit, release bundle, release gate, readiness dashboards",
+        "evidence": "benchmark history ledger, comparison/decision artifacts, CI plan digest checks",
+        "next_action": "Keep as model-capability review evidence while avoiding new threshold variants.",
+    },
+    {
+        "id": "registry-model-card",
+        "name": "Registry and model-card aggregation",
+        "action": "keep",
+        "consumer": "project audit, release bundle, model-family review",
+        "evidence": "registry rows, leaderboards, model_card.json/md/html",
+        "next_action": "Keep as the project-level index and summary surface.",
+    },
+    {
+        "id": "release-readiness",
+        "name": "Release bundle, gate, and readiness flow",
+        "action": "keep",
+        "consumer": "release review, readiness comparison, registry readiness tracking",
+        "evidence": "release bundle, release gate, readiness dashboard, readiness comparison",
+        "next_action": "Keep as release-style review; only fix broken contracts during the pause.",
+    },
+    {
+        "id": "ci-coverage-hygiene",
+        "name": "CI workflow and coverage hygiene",
+        "action": "keep",
+        "consumer": "GitHub Actions, project audit, maturity review, training portfolio comparison",
+        "evidence": "source encoding, CI workflow hygiene, coverage gate reports",
+        "next_action": "Keep because it catches real regressions and CI drift.",
+    },
+    {
+        "id": "training-promotion",
+        "name": "Training-scale promotion and handoff flow",
+        "action": "watch",
+        "consumer": "promoted comparison, promoted baseline, promoted seed handoff, automation receipts",
+        "evidence": "promotion reports, clean-evidence gates, schema-v2 receipt checks",
+        "next_action": "Watch for overlap and repeated fields; consolidate helper/output duplication before adding new promotion variants.",
+    },
+    {
+        "id": "maturity-portfolio",
+        "name": "Maturity narrative and portfolio review flow",
+        "action": "watch",
+        "consumer": "portfolio comparison, project-level review, release context",
+        "evidence": "maturity summary, maturity narrative, portfolio comparison review actions",
+        "next_action": "Watch as an executive summary layer; merge duplicate narrative-only fields into existing summaries.",
+    },
+]
+
 
 def build_maintenance_batching_report(
     history: list[dict[str, Any]],
@@ -77,6 +147,34 @@ def build_maintenance_batching_report(
         "single_module_utils_runs": runs,
         "proposal": proposal,
         "recommendations": _recommendations(summary, proposal),
+    }
+
+
+def build_governance_stabilization_review(
+    chains: list[dict[str, Any]] | None = None,
+    *,
+    title: str = "MiniGPT governance stabilization review",
+    generated_at: str | None = None,
+    pause_days: int = DEFAULT_GOVERNANCE_PAUSE_DAYS,
+) -> dict[str, Any]:
+    normalized = [
+        _normalize_governance_chain(item, index)
+        for index, item in enumerate(_list_of_dicts(chains if chains is not None else DEFAULT_GOVERNANCE_CHAINS), start=1)
+    ]
+    summary = _governance_summary(normalized, pause_days)
+    return {
+        "schema_version": 1,
+        "title": title,
+        "generated_at": generated_at or utc_now(),
+        "policy": {
+            "pause_days": int(pause_days),
+            "new_chain_pause": "active" if int(pause_days) > 0 else "inactive",
+            "stabilization_ceiling": 7,
+            "allowed_actions": sorted(GOVERNANCE_STABILIZATION_ACTIONS),
+        },
+        "summary": summary,
+        "chains": normalized,
+        "recommendations": _governance_recommendations(summary, normalized),
     }
 
 
@@ -226,6 +324,72 @@ def _recommendations(summary: dict[str, Any], proposal: dict[str, Any]) -> list[
         recommendations.append("Split the current proposal into category-based maintenance batches.")
     elif decision == "split":
         recommendations.append("Handle high-risk or unclear proposal items as focused versions before any cleanup batch.")
+    return recommendations
+
+
+def _normalize_governance_chain(item: dict[str, Any], index: int) -> dict[str, Any]:
+    action = str(item.get("action") or "watch").strip().lower().replace("_", "-")
+    if action not in GOVERNANCE_STABILIZATION_ACTIONS:
+        action = "watch"
+    consumer = str(item.get("consumer") or item.get("consumers") or "").strip()
+    evidence = str(item.get("evidence") or "").strip()
+    next_action = str(item.get("next_action") or item.get("recommendation") or "").strip()
+    necessary = action in {"keep", "watch"}
+    has_consumer = bool(consumer)
+    has_evidence = bool(evidence)
+    return {
+        "id": str(item.get("id") or f"chain-{index}"),
+        "name": str(item.get("name") or item.get("title") or f"Governance chain {index}"),
+        "action": action,
+        "necessary": necessary,
+        "has_consumer": has_consumer,
+        "has_evidence": has_evidence,
+        "consumer": consumer,
+        "evidence": evidence,
+        "next_action": next_action,
+    }
+
+
+def _governance_summary(chains: list[dict[str, Any]], pause_days: int) -> dict[str, Any]:
+    chain_count = len(chains)
+    action_counts = {action: sum(1 for item in chains if item.get("action") == action) for action in sorted(GOVERNANCE_STABILIZATION_ACTIONS)}
+    missing_consumer = sum(1 for item in chains if not item.get("has_consumer"))
+    missing_evidence = sum(1 for item in chains if not item.get("has_evidence"))
+    consolidation_candidates = action_counts.get("merge", 0) + action_counts.get("cut", 0)
+    status = "review" if chain_count > 7 or missing_consumer or missing_evidence or consolidation_candidates else "pass"
+    decision = "pause_new_governance_chains" if int(pause_days) > 0 else "continue_with_guardrails"
+    if status == "review" and consolidation_candidates:
+        decision = "pause_and_consolidate_governance_chains"
+    elif status == "review":
+        decision = "pause_and_review_governance_chains"
+    return {
+        "status": status,
+        "decision": decision,
+        "pause_days": int(pause_days),
+        "chain_count": chain_count,
+        "keep_count": action_counts.get("keep", 0),
+        "watch_count": action_counts.get("watch", 0),
+        "merge_count": action_counts.get("merge", 0),
+        "cut_count": action_counts.get("cut", 0),
+        "necessary_count": sum(1 for item in chains if item.get("necessary")),
+        "missing_consumer_count": missing_consumer,
+        "missing_evidence_count": missing_evidence,
+        "consolidation_candidate_count": consolidation_candidates,
+    }
+
+
+def _governance_recommendations(summary: dict[str, Any], chains: list[dict[str, Any]]) -> list[str]:
+    recommendations = [
+        f"Pause new governance-chain creation for {summary.get('pause_days')} days and only accept CI fixes, bugs, or broken-contract repairs.",
+        "Review each chain by consumer and evidence before adding new reports or projections.",
+    ]
+    if summary.get("chain_count", 0) >= 7:
+        recommendations.append("Treat seven active chains as the current ceiling; new needs should first merge into an existing chain.")
+    if summary.get("consolidation_candidate_count", 0):
+        recommendations.append("Consolidate chains marked merge/cut before any new governance surface is added.")
+    watch_names = [str(item.get("name")) for item in chains if item.get("action") == "watch"]
+    if watch_names:
+        recommendations.append("Watch for overlap in: " + ", ".join(watch_names) + ".")
     return recommendations
 
 
