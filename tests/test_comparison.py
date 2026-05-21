@@ -30,6 +30,11 @@ def make_run(
     tokenizer: str = "char",
     max_iters: int = 2,
     dataset_version: str = "demo-zh@v1",
+    dataset_dedupe_policy: str = "none",
+    dataset_source_order_digest: str = "order-a",
+    dataset_included_source_count: int = 2,
+    dataset_skipped_source_count: int = 0,
+    dataset_char_count: int = 100,
     n_layer: int = 1,
     n_head: int = 1,
     n_embd: int = 32,
@@ -46,7 +51,22 @@ def make_run(
     (run_dir / "eval_report.json").write_text(json.dumps({"loss": eval_loss, "perplexity": 10.0}), encoding="utf-8")
     (run_dir / "dataset_quality.json").write_text(json.dumps({"status": "pass", "short_fingerprint": fingerprint}), encoding="utf-8")
     (run_dir / "dataset_version.json").write_text(
-        json.dumps({"dataset": {"id": dataset_version}, "stats": {"short_fingerprint": fingerprint}}),
+        json.dumps(
+            {
+                "dataset": {"id": dataset_version},
+                "stats": {
+                    "short_fingerprint": fingerprint,
+                    "included_source_count": dataset_included_source_count,
+                    "skipped_source_count": dataset_skipped_source_count,
+                    "char_count": dataset_char_count,
+                },
+                "preparation": {"dedupe_exact_sources": dataset_dedupe_policy == "exact-source-content"},
+                "snapshot": {
+                    "dedupe_policy": dataset_dedupe_policy,
+                    "source_order_digest": dataset_source_order_digest,
+                },
+            }
+        ),
         encoding="utf-8",
     )
     (run_dir / "run_manifest.json").write_text(
@@ -94,6 +114,8 @@ class ComparisonTests(unittest.TestCase):
             self.assertEqual(summary.best_val_loss, 2.0)
             self.assertEqual(summary.total_parameters, 100)
             self.assertEqual(summary.dataset_version, "demo-zh@v1")
+            self.assertEqual(summary.dataset_dedupe_policy, "none")
+            self.assertEqual(summary.dataset_included_source_count, 2)
             self.assertEqual(summary.token_count, 100)
             self.assertIn("P=100", summary.model_signature)
 
@@ -126,6 +148,36 @@ class ComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["improved_best_val_loss_count"], 1)
             self.assertEqual(report["summary"]["model_signature_count"], 2)
             self.assertTrue(report["recommendations"])
+
+    def test_build_comparison_report_records_dataset_snapshot_deltas(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            a = make_run(root, "a", best_val=2.0, eval_loss=3.0, params=100, dataset_char_count=120)
+            b = make_run(
+                root,
+                "b",
+                best_val=1.8,
+                eval_loss=2.7,
+                params=100,
+                dataset_version="demo-zh@deduped",
+                dataset_dedupe_policy="exact-source-content",
+                dataset_source_order_digest="order-b",
+                dataset_included_source_count=1,
+                dataset_skipped_source_count=1,
+                dataset_char_count=80,
+            )
+
+            report = build_comparison_report([a, b], names=["raw", "deduped"], baseline="raw")
+            delta = next(row for row in report["baseline_deltas"] if row["name"] == "deduped")
+
+            self.assertTrue(delta["dataset_fingerprint_changed"])
+            self.assertTrue(delta["dataset_dedupe_policy_changed"])
+            self.assertTrue(delta["dataset_source_order_changed"])
+            self.assertEqual(delta["dataset_included_source_count_delta"], -1)
+            self.assertEqual(delta["dataset_skipped_source_count_delta"], 1)
+            self.assertEqual(delta["dataset_char_count_delta"], -40)
+            self.assertEqual(report["summary"]["dataset_dedupe_policy_changed_count"], 1)
+            self.assertTrue(any("Dataset fingerprints changed" in item for item in report["recommendations"]))
 
     def test_build_comparison_report_rejects_name_mismatch(self) -> None:
         with self.assertRaises(ValueError):

@@ -24,6 +24,11 @@ def write_comparison_csv(report: dict[str, Any], path: str | Path) -> None:
         "tokenizer",
         "dataset_version",
         "dataset_fingerprint",
+        "dataset_dedupe_policy",
+        "dataset_included_source_count",
+        "dataset_skipped_source_count",
+        "dataset_char_count",
+        "dataset_source_order_digest",
         "max_iters",
         "metrics_records",
         "best_val_loss",
@@ -53,6 +58,12 @@ def write_comparison_csv(report: dict[str, Any], path: str | Path) -> None:
         "tokenizer_changed",
         "model_signature_changed",
         "dataset_version_changed",
+        "dataset_fingerprint_changed",
+        "dataset_dedupe_policy_changed",
+        "dataset_source_order_changed",
+        "dataset_included_source_count_delta",
+        "dataset_skipped_source_count_delta",
+        "dataset_char_count_delta",
         "best_val_loss_relation",
     ]
     with out_path.open("w", encoding="utf-8", newline="") as f:
@@ -119,8 +130,8 @@ def render_comparison_markdown(report: dict[str, Any]) -> str:
     baseline = _pick_dict(report, "baseline")
     deltas = {row.get("path"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     rows = [
-        "| Run | Model | Dataset | Best Val | Delta | Params | Param Ratio | Relation |",
-        "| --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
+        "| Run | Model | Dataset | Data Snapshot | Best Val | Delta | Params | Param Ratio | Relation |",
+        "| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
     ]
     for run in _list_of_dicts(report.get("runs")):
         delta = deltas.get(run.get("path"), {})
@@ -131,6 +142,7 @@ def render_comparison_markdown(report: dict[str, Any]) -> str:
                     _md(run.get("name")),
                     _md(run.get("model_signature")),
                     _md(run.get("dataset_version") or run.get("dataset_fingerprint")),
+                    _md(_dataset_snapshot_label(run, delta)),
                     _md(_fmt(run.get("best_val_loss"))),
                     _md(_fmt_signed(delta.get("best_val_loss_delta"))),
                     _md(_fmt_int(run.get("total_parameters"))),
@@ -152,6 +164,8 @@ def render_comparison_markdown(report: dict[str, Any]) -> str:
             f"- Regressed vs baseline: `{summary.get('regressed_best_val_loss_count')}`",
             f"- Model signatures: `{summary.get('model_signature_count')}`",
             f"- Dataset versions: `{summary.get('dataset_version_count')}`",
+            f"- Dataset fingerprint changes: `{summary.get('dataset_fingerprint_changed_count')}`",
+            f"- Dataset dedupe policy changes: `{summary.get('dataset_dedupe_policy_changed_count')}`",
             "",
             *rows,
             "",
@@ -180,6 +194,8 @@ def render_comparison_html(report: dict[str, Any]) -> str:
         ("Regressed", summary.get("regressed_best_val_loss_count")),
         ("Models", summary.get("model_signature_count")),
         ("Datasets", summary.get("dataset_version_count")),
+        ("Data fingerprint changes", summary.get("dataset_fingerprint_changed_count")),
+        ("Dedupe changes", summary.get("dataset_dedupe_policy_changed_count")),
     ]
     rows = []
     for run in _list_of_dicts(report.get("runs")):
@@ -191,7 +207,7 @@ def render_comparison_html(report: dict[str, Any]) -> str:
             "<tr>"
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('path'))}</span></td>"
             f"<td>{_e(run.get('model_signature'))}<br><span>{_e(run.get('tokenizer'))}</span></td>"
-            f"<td>{_e(run.get('dataset_version'))}<br><span>{_e(run.get('dataset_fingerprint'))}</span></td>"
+            f"<td>{_e(run.get('dataset_version'))}<br><span>{_e(run.get('dataset_fingerprint'))}</span><br><span>{_e(_dataset_snapshot_label(run, delta))}</span></td>"
             f"<td>{_e(_fmt(run.get('best_val_loss')))}<br><span>{_e(_fmt_signed(delta.get('best_val_loss_delta')))}</span></td>"
             f"<td>{_e(_fmt(run.get('eval_loss')))}<br><span>{_e(_fmt_signed(delta.get('eval_loss_delta')))}</span></td>"
             f"<td>{_e(_fmt(run.get('perplexity')))}<br><span>{_e(_fmt_signed(delta.get('perplexity_delta')))}</span></td>"
@@ -295,6 +311,40 @@ def _fmt_int(value: Any) -> str:
     if value is None:
         return "missing"
     return f"{int(value):,}"
+
+
+def _fmt_signed_int(value: Any) -> str:
+    if value is None:
+        return "missing"
+    number = int(value)
+    if number == 0:
+        return "0"
+    return f"{number:+d}"
+
+
+def _dataset_snapshot_label(run: dict[str, Any], delta: dict[str, Any]) -> str:
+    parts = []
+    policy = run.get("dataset_dedupe_policy")
+    if policy:
+        parts.append(f"dedupe={policy}")
+    included = run.get("dataset_included_source_count")
+    skipped = run.get("dataset_skipped_source_count")
+    if included is not None or skipped is not None:
+        parts.append(f"included={_fmt_int(included)} ({_fmt_signed_int(delta.get('dataset_included_source_count_delta'))})")
+        parts.append(f"skipped={_fmt_int(skipped)} ({_fmt_signed_int(delta.get('dataset_skipped_source_count_delta'))})")
+    char_count = run.get("dataset_char_count")
+    if char_count is not None:
+        parts.append(f"chars={_fmt_int(char_count)} ({_fmt_signed_int(delta.get('dataset_char_count_delta'))})")
+    changed = []
+    if delta.get("dataset_fingerprint_changed"):
+        changed.append("fingerprint")
+    if delta.get("dataset_dedupe_policy_changed"):
+        changed.append("dedupe")
+    if delta.get("dataset_source_order_changed"):
+        changed.append("source-order")
+    if changed:
+        parts.append("changed=" + ",".join(changed))
+    return "; ".join(parts) if parts else "missing"
 
 
 def _e(value: Any) -> str:

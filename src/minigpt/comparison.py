@@ -25,6 +25,11 @@ class RunComparison:
     tokenizer: str | None
     dataset_version: str | None
     dataset_fingerprint: str | None
+    dataset_dedupe_policy: str | None
+    dataset_source_order_digest: str | None
+    dataset_included_source_count: int | None
+    dataset_skipped_source_count: int | None
+    dataset_char_count: int | None
     max_iters: int | None
     metrics_records: int
     best_val_loss: float | None
@@ -95,6 +100,14 @@ def summarize_run(run_dir: str | Path, name: str | None = None) -> RunComparison
         or _pick(manifest_dataset_quality, "short_fingerprint")
         or _pick(dataset_quality, "short_fingerprint")
     )
+    dataset_stats = _pick_dict(dataset_version_report, "stats")
+    dataset_snapshot = _pick_dict(dataset_version_report, "snapshot")
+    dataset_preparation = _pick_dict(dataset_version_report, "preparation")
+    dataset_dedupe_policy = _as_str(
+        _pick(dataset_snapshot, "dedupe_policy")
+        or ("exact-source-content" if _pick(dataset_preparation, "dedupe_exact_sources") else None)
+    )
+    dataset_source_order_digest = _as_str(_pick(dataset_snapshot, "source_order_digest"))
 
     return RunComparison(
         name=name or root.name,
@@ -102,6 +115,11 @@ def summarize_run(run_dir: str | Path, name: str | None = None) -> RunComparison
         tokenizer=tokenizer,
         dataset_version=dataset_version,
         dataset_fingerprint=dataset_fingerprint,
+        dataset_dedupe_policy=dataset_dedupe_policy,
+        dataset_source_order_digest=dataset_source_order_digest,
+        dataset_included_source_count=_as_int(_pick(dataset_stats, "included_source_count")),
+        dataset_skipped_source_count=_as_int(_pick(dataset_stats, "skipped_source_count")),
+        dataset_char_count=_as_int(_pick(dataset_stats, "char_count")),
         max_iters=max_iters,
         metrics_records=_line_count(root / "metrics.jsonl"),
         best_val_loss=_as_float(_pick(history_summary, "best_val_loss") or _nested_pick(run_manifest, "results", "history_summary", "best_val_loss")),
@@ -204,6 +222,12 @@ def _baseline_delta(run: RunComparison, baseline: RunComparison) -> dict[str, An
         "tokenizer_changed": _changed(run.tokenizer, baseline.tokenizer),
         "model_signature_changed": _changed(run.model_signature, baseline.model_signature),
         "dataset_version_changed": _changed(run.dataset_version, baseline.dataset_version),
+        "dataset_fingerprint_changed": _changed(run.dataset_fingerprint, baseline.dataset_fingerprint),
+        "dataset_dedupe_policy_changed": _changed(run.dataset_dedupe_policy, baseline.dataset_dedupe_policy),
+        "dataset_source_order_changed": _changed(run.dataset_source_order_digest, baseline.dataset_source_order_digest),
+        "dataset_included_source_count_delta": _int_delta(run.dataset_included_source_count, baseline.dataset_included_source_count),
+        "dataset_skipped_source_count_delta": _int_delta(run.dataset_skipped_source_count, baseline.dataset_skipped_source_count),
+        "dataset_char_count_delta": _int_delta(run.dataset_char_count, baseline.dataset_char_count),
         "best_val_loss_relation": _loss_relation(best_delta, is_baseline=run.path == baseline.path),
     }
 
@@ -214,6 +238,8 @@ def _comparison_summary(
     deltas: list[dict[str, Any]],
 ) -> dict[str, Any]:
     dataset_versions = sorted({run.dataset_version for run in runs if run.dataset_version})
+    dataset_fingerprints = sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint})
+    dataset_dedupe_policies = sorted({run.dataset_dedupe_policy for run in runs if run.dataset_dedupe_policy})
     model_signatures = sorted({run.model_signature for run in runs if run.model_signature})
     tokenizers = sorted({run.tokenizer for run in runs if run.tokenizer})
     return {
@@ -231,6 +257,13 @@ def _comparison_summary(
         "model_signature_count": len(model_signatures),
         "dataset_versions": dataset_versions,
         "dataset_version_count": len(dataset_versions),
+        "dataset_fingerprints": dataset_fingerprints,
+        "dataset_fingerprint_count": len(dataset_fingerprints),
+        "dataset_dedupe_policies": dataset_dedupe_policies,
+        "dataset_dedupe_policy_count": len(dataset_dedupe_policies),
+        "dataset_fingerprint_changed_count": sum(1 for row in deltas if row.get("dataset_fingerprint_changed")),
+        "dataset_dedupe_policy_changed_count": sum(1 for row in deltas if row.get("dataset_dedupe_policy_changed")),
+        "dataset_source_order_changed_count": sum(1 for row in deltas if row.get("dataset_source_order_changed")),
     }
 
 
@@ -253,6 +286,10 @@ def _comparison_recommendations(
         )
     if summary.get("dataset_version_count", 0) > 1:
         recommendations.append("Dataset versions differ across runs; compare model changes separately from data changes.")
+    if summary.get("dataset_fingerprint_changed_count", 0):
+        recommendations.append("Dataset fingerprints changed versus baseline; review dataset snapshot deltas before treating loss deltas as model-only evidence.")
+    if summary.get("dataset_dedupe_policy_changed_count", 0):
+        recommendations.append("Dedupe policies differ versus baseline; inspect included/skipped source deltas before promotion.")
     if summary.get("model_signature_count", 0) <= 1:
         recommendations.append("All runs share the same model signature; add at least one size/tokenizer/training-step variant for a stronger baseline comparison.")
     if any(run.eval_loss is None for run in runs):

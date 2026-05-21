@@ -31,6 +31,10 @@ def build_report() -> dict[str, object]:
                 "tokenizer": "char",
                 "dataset_version": "demo@v1",
                 "dataset_fingerprint": "abc123",
+                "dataset_dedupe_policy": "none",
+                "dataset_included_source_count": 2,
+                "dataset_skipped_source_count": 0,
+                "dataset_char_count": 120,
                 "best_val_loss": 2.0,
                 "eval_loss": 2.2,
                 "perplexity": 10.0,
@@ -43,6 +47,10 @@ def build_report() -> dict[str, object]:
                 "tokenizer": "char",
                 "dataset_version": "demo@v2",
                 "dataset_fingerprint": "def456",
+                "dataset_dedupe_policy": "exact-source-content",
+                "dataset_included_source_count": 1,
+                "dataset_skipped_source_count": 1,
+                "dataset_char_count": 80,
                 "best_val_loss": 1.5,
                 "eval_loss": 2.0,
                 "perplexity": 9.0,
@@ -66,6 +74,12 @@ def build_report() -> dict[str, object]:
                 "tokenizer_changed": False,
                 "model_signature_changed": False,
                 "dataset_version_changed": False,
+                "dataset_fingerprint_changed": False,
+                "dataset_dedupe_policy_changed": False,
+                "dataset_source_order_changed": False,
+                "dataset_included_source_count_delta": 0,
+                "dataset_skipped_source_count_delta": 0,
+                "dataset_char_count_delta": 0,
                 "best_val_loss_relation": "baseline",
             },
             {
@@ -83,6 +97,12 @@ def build_report() -> dict[str, object]:
                 "tokenizer_changed": False,
                 "model_signature_changed": True,
                 "dataset_version_changed": True,
+                "dataset_fingerprint_changed": True,
+                "dataset_dedupe_policy_changed": True,
+                "dataset_source_order_changed": False,
+                "dataset_included_source_count_delta": -1,
+                "dataset_skipped_source_count_delta": 1,
+                "dataset_char_count_delta": -40,
                 "best_val_loss_relation": "improved",
             },
         ],
@@ -119,6 +139,8 @@ class ComparisonArtifactTests(unittest.TestCase):
             self.assertIn("&lt;baseline&gt;", html_text)
             self.assertIn("MiniGPT baseline model comparison", md_text)
             self.assertIn("best_val_loss_delta", csv_text)
+            self.assertIn("dataset_dedupe_policy_changed", csv_text)
+            self.assertIn("dedupe=exact-source-content", html_text)
             self.assertIn("<svg", svg_text)
             self.assertEqual(json.loads(json_text)["run_count"], 2)
 
