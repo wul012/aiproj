@@ -500,6 +500,11 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_status_changed_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_boundary_changed_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_status_changed_count"], 1)
+            self.assertEqual(registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added"],
+                ["insufficient_ready_entries"],
+            )
             self.assertEqual(registry["release_readiness_delta_summary"]["max_abs_benchmark_history_case_regression_delta"], 2)
             self.assertEqual(registry["release_readiness_delta_summary"]["max_abs_benchmark_history_generation_flag_regression_delta"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["max_abs_benchmark_history_readiness_requirement_exit_code_delta"], 1)
@@ -511,6 +516,10 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["benchmark_history_case_regression_delta"], 2)
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["compared_benchmark_history_readiness_requirement_status"], "fail")
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["benchmark_history_readiness_requirement_exit_code_delta"], 1)
+            self.assertEqual(
+                registry["release_readiness_delta_leaderboard"][0]["benchmark_history_readiness_requirement_failed_reason_added"],
+                ["insufficient_ready_entries"],
+            )
             self.assertTrue(registry["release_readiness_delta_leaderboard"][0]["benchmark_history_latest_boundary_changed"])
             self.assertEqual(registry["pair_report_counts"], {"pair_batch": 1, "pair_trend": 1})
             self.assertEqual(registry["tag_counts"], {"baseline": 2, "candidate": 1})

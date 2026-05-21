@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v373 Benchmark Requirement Reason Drift Evidence</title>
+  <style>
+    :root {
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      background: #f4f6f8;
+      color: #182232;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+    }
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 3px solid #2f6f73;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      line-height: 1.6;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .metric, section {
+      background: #fff;
+      border: 1px solid #d8dee9;
+      border-radius: 8px;
+    }
+    .metric {
+      padding: 14px 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      color: #22565a;
+      margin-bottom: 4px;
+    }
+    section {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #d8dee9;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eef3f6;
+    }
+    code {
+      background: #eef3f6;
+      border-radius: 5px;
+      padding: 2px 5px;
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 0.92em;
+    }
+    .ok {
+      color: #1f7a4c;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>MiniGPT v373 benchmark requirement reason drift</h1>
+      <p>Status-stable benchmark readiness failures now remain visible when their failed reasons change.</p>
+    </header>
+
+    <div class="summary">
+      <div class="metric"><strong>4</strong>review layers carry the signal</div>
+      <div class="metric"><strong>2</strong>new reason-count fields</div>
+      <div class="metric"><strong>51</strong>targeted tests passed</div>
+      <div class="metric"><strong>0</strong>new report chains</div>
+    </div>
+
+    <section>
+      <h2>Signal Path</h2>
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>New Evidence</th><th>Review Impact</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>release_readiness_comparison.py</code></td><td>Computes failed reasons added/removed from baseline and compared readiness summaries.</td><td>Reason-only additions count as benchmark history deltas and regressions.</td></tr>
+          <tr><td><code>registry_rankings.py</code></td><td>Aggregates failed reason additions into release readiness delta summary and leaderboard rows.</td><td>Older comparison JSON can still be interpreted from baseline/compared reason lists.</td></tr>
+          <tr><td><code>maturity.py</code></td><td>Carries failed reason addition count/list into maturity summary.</td><td>New reasons turn release readiness trend into <code>benchmark-regressed</code>.</td></tr>
+          <tr><td><code>maturity_narrative_summary.py</code></td><td>Carries the signal into portfolio status and recommendations.</td><td>Reason-only drift moves the narrative into review.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p><span class="ok">Passed:</span> <code>python -m py_compile</code> for changed modules and scripts.</p>
+      <p><span class="ok">Passed:</span> <code>python -m pytest tests/test_release_readiness_comparison.py tests/test_registry.py tests/test_maturity.py tests/test_maturity_narrative.py -q</code></p>
+      <p>Targeted result: <code>51 passed</code>. The only warning is the existing pytest-asyncio loop-scope deprecation notice.</p>
+    </section>
+
+    <section>
+      <h2>Boundary Statement</h2>
+      <p>v373 does not add a new governance chain or training behavior. It makes an existing readiness signal more precise by tracking why a benchmark readiness requirement failed, not only whether it failed.</p>
+    </section>
+  </main>
+</body>
+</html>

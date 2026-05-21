@@ -33,6 +33,7 @@ def make_project(
     coverage_regression_count: int = 0,
     benchmark_history_regression_count: int = 0,
     benchmark_requirement_change_count: int = 0,
+    benchmark_requirement_reason_added: list[str] | None = None,
 ) -> dict[str, Path]:
     project = root / "project"
     maturity_path = project / "runs" / "maturity-summary" / "maturity_summary.json"
@@ -71,6 +72,8 @@ def make_project(
                 "release_readiness_max_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
                 "release_readiness_benchmark_requirement_status_changed_count": benchmark_requirement_change_count,
                 "release_readiness_max_benchmark_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
+                "release_readiness_benchmark_requirement_failed_reason_added_count": len(benchmark_requirement_reason_added or []),
+                "release_readiness_benchmark_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
             },
             "release_readiness_context": {
                 "available": True,
@@ -95,6 +98,8 @@ def make_project(
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
+                "benchmark_history_readiness_requirement_failed_reason_added_count": len(benchmark_requirement_reason_added or []),
+                "benchmark_history_readiness_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
             },
             "request_history_context": {
                 "status": "pass",
@@ -129,6 +134,8 @@ def make_project(
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
+                "benchmark_history_readiness_requirement_failed_reason_added_count": len(benchmark_requirement_reason_added or []),
+                "benchmark_history_readiness_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
             },
         },
     )
@@ -480,6 +487,27 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("benchmark requirement changes=1", release_section["claim"])
             self.assertIn("benchmark requirement exit delta=1", release_section["claim"])
             self.assertIn("benchmark-history readiness requirement changes", " ".join(narrative["recommendations"]))
+
+    def test_build_maturity_narrative_marks_review_for_benchmark_requirement_reason_addition(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(
+                Path(tmp),
+                release_trend="benchmark-regressed",
+                benchmark_requirement_reason_added=["tiny_smoke_only"],
+            )
+
+            narrative = build_maturity_narrative(paths["project"])
+            release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_added"], ["tiny_smoke_only"])
+            self.assertEqual(release_section["status"], "benchmark-regressed")
+            self.assertIn("benchmark failed reasons added=1", release_section["claim"])
+            self.assertIn("tiny_smoke_only", release_section["claim"])
+            self.assertIn("newly added benchmark-history readiness failed reasons", " ".join(narrative["recommendations"]))
 
     def test_build_maturity_narrative_marks_review_for_non_comparison_ready_decision(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

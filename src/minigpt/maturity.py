@@ -247,6 +247,15 @@ def _summary(
         "release_readiness_max_benchmark_requirement_exit_code_delta": release_readiness_context.get(
             "max_abs_benchmark_history_readiness_requirement_exit_code_delta"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_added_count": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_added_count"
+        ),
+        "release_readiness_benchmark_requirement_failed_reason_removed_count": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_removed_count"
+        ),
+        "release_readiness_benchmark_requirement_failed_reason_added": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_added"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release_readiness_context.get(
             "max_abs_benchmark_history_case_regression_delta"
         ),
@@ -333,6 +342,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_status_changed_count": None,
             "benchmark_history_boundary_changed_count": None,
             "benchmark_history_readiness_requirement_status_changed_count": None,
+            "benchmark_history_readiness_requirement_failed_reason_added_count": None,
+            "benchmark_history_readiness_requirement_failed_reason_removed_count": None,
+            "benchmark_history_readiness_requirement_failed_reason_added": [],
             "max_abs_benchmark_history_case_regression_delta": None,
             "max_abs_benchmark_history_generation_flag_regression_delta": None,
             "max_abs_benchmark_history_readiness_requirement_exit_code_delta": None,
@@ -365,6 +377,15 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "benchmark_history_readiness_requirement_status_changed_count": delta_summary.get(
             "benchmark_history_readiness_requirement_status_changed_count"
         ),
+        "benchmark_history_readiness_requirement_failed_reason_added_count": delta_summary.get(
+            "benchmark_history_readiness_requirement_failed_reason_added_count"
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_removed_count": delta_summary.get(
+            "benchmark_history_readiness_requirement_failed_reason_removed_count"
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_added": _string_list(
+            delta_summary.get("benchmark_history_readiness_requirement_failed_reason_added")
+        ),
         "max_abs_benchmark_history_case_regression_delta": delta_summary.get("max_abs_benchmark_history_case_regression_delta"),
         "max_abs_benchmark_history_generation_flag_regression_delta": delta_summary.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
@@ -383,6 +404,8 @@ def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
     if int(context.get("test_coverage_regression_count") or 0) > 0:
         return "coverage-regressed"
     if int(context.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0:
+        return "benchmark-regressed"
+    if int(context.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
         return "benchmark-regressed"
     if int(context.get("benchmark_history_regression_count") or 0) > 0:
         return "benchmark-regressed"
@@ -461,6 +484,10 @@ def _recommendations(
         recs.append(
             "Review benchmark-history readiness requirement changes before presenting the project as release-stable; maturity status is downgraded to review."
         )
+    elif int(release_readiness_context.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
+        recs.append(
+            "Review newly added benchmark-history readiness failed reasons before presenting the project as release-stable; maturity status is downgraded to review."
+        )
     elif int(release_readiness_context.get("regressed_count") or 0) > 0:
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("ci_workflow_regression_count") or 0) > 0:
@@ -487,6 +514,10 @@ def _read_json(path: Path) -> dict[str, Any] | None:
 
 def _dict(value: Any) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
+
+
+def _string_list(value: Any) -> list[str]:
+    return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
 def _pick(value: Any, key: str) -> Any:

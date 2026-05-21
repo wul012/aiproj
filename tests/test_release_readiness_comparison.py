@@ -310,7 +310,52 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertFalse(delta["benchmark_history_status_changed"])
             self.assertTrue(delta["benchmark_history_readiness_requirement_status_changed"])
             self.assertEqual(delta["benchmark_history_readiness_requirement_exit_code_delta"], 1)
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_added"], ["insufficient_ready_entries"])
             self.assertIn("Benchmark history readiness requirement changed", delta["explanation"])
+            self.assertIn("added failed reason", delta["explanation"])
+            self.assertIn("benchmark history regression", " ".join(report["recommendations"]))
+
+    def test_build_release_readiness_comparison_flags_benchmark_requirement_reason_regression_without_status_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(
+                root,
+                "baseline",
+                status="ready",
+                decision="ship",
+                gate_status="pass",
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=["insufficient_ready_entries"],
+            )
+            current = make_readiness(
+                root,
+                "current",
+                status="review",
+                decision="review",
+                gate_status="warn",
+                benchmark_history_status="pass",
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=[
+                    "insufficient_ready_entries",
+                    "tiny_smoke_only",
+                ],
+                warn_panels=1,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["benchmark_history_delta_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_regression_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_added"], ["tiny_smoke_only"])
+            delta = report["deltas"][0]
+            self.assertFalse(delta["benchmark_history_readiness_requirement_status_changed"])
+            self.assertEqual(delta["benchmark_history_readiness_requirement_exit_code_delta"], 0)
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_added"], ["tiny_smoke_only"])
+            self.assertIn("tiny_smoke_only", delta["explanation"])
             self.assertIn("benchmark history regression", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_tracks_benchmark_history_improvement(self) -> None:

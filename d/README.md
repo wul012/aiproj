@@ -227,6 +227,9 @@ d/371/解释/说明.md
 d/372/图片
 d/372/解释/说明.md
  -> v372 maintenance split consolidation 的运行截图和解释
+d/373/图片
+d/373/解释/说明.md
+ -> v373 benchmark requirement reason drift 的运行截图和解释
 ```
 
 写入规则：

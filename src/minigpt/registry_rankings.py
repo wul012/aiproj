@@ -213,6 +213,14 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
             if not isinstance(delta, dict):
                 continue
             changed_panels = _as_str_list(delta.get("changed_panels"))
+            baseline_failed_reasons = _as_str_list(delta.get("baseline_benchmark_history_readiness_requirement_failed_reasons"))
+            compared_failed_reasons = _as_str_list(delta.get("compared_benchmark_history_readiness_requirement_failed_reasons"))
+            added_failed_reasons = _as_str_list(delta.get("benchmark_history_readiness_requirement_failed_reason_added"))
+            removed_failed_reasons = _as_str_list(delta.get("benchmark_history_readiness_requirement_failed_reason_removed"))
+            if not added_failed_reasons:
+                added_failed_reasons = _reason_additions(baseline_failed_reasons, compared_failed_reasons)
+            if not removed_failed_reasons:
+                removed_failed_reasons = _reason_removals(baseline_failed_reasons, compared_failed_reasons)
             rows.append(
                 {
                     "run_name": run_name,
@@ -257,12 +265,20 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     "benchmark_history_readiness_requirement_exit_code_delta": _int_if_whole(
                         _as_optional_float(delta.get("benchmark_history_readiness_requirement_exit_code_delta"))
                     ),
-                    "baseline_benchmark_history_readiness_requirement_failed_reasons": _as_str_list(
-                        delta.get("baseline_benchmark_history_readiness_requirement_failed_reasons")
-                    ),
-                    "compared_benchmark_history_readiness_requirement_failed_reasons": _as_str_list(
-                        delta.get("compared_benchmark_history_readiness_requirement_failed_reasons")
-                    ),
+                    "baseline_benchmark_history_readiness_requirement_failed_reasons": baseline_failed_reasons,
+                    "compared_benchmark_history_readiness_requirement_failed_reasons": compared_failed_reasons,
+                    "benchmark_history_readiness_requirement_failed_reason_added_count": _as_int(
+                        delta.get("benchmark_history_readiness_requirement_failed_reason_added_count")
+                    )
+                    if delta.get("benchmark_history_readiness_requirement_failed_reason_added_count") is not None
+                    else len(added_failed_reasons),
+                    "benchmark_history_readiness_requirement_failed_reason_removed_count": _as_int(
+                        delta.get("benchmark_history_readiness_requirement_failed_reason_removed_count")
+                    )
+                    if delta.get("benchmark_history_readiness_requirement_failed_reason_removed_count") is not None
+                    else len(removed_failed_reasons),
+                    "benchmark_history_readiness_requirement_failed_reason_added": added_failed_reasons,
+                    "benchmark_history_readiness_requirement_failed_reason_removed": removed_failed_reasons,
                     "benchmark_history_model_quality_claim_changed": bool(delta.get("benchmark_history_model_quality_claim_changed")),
                     "benchmark_history_latest_boundary_changed": bool(delta.get("benchmark_history_latest_boundary_changed")),
                     "baseline_benchmark_history_boundary": _as_str(delta.get("baseline_benchmark_history_boundary")),
@@ -293,6 +309,7 @@ def release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int =
             -abs(_as_optional_float(item.get("benchmark_history_case_regression_delta")) or 0.0),
             -abs(_as_optional_float(item.get("benchmark_history_generation_flag_regression_delta")) or 0.0),
             -int(bool(item.get("benchmark_history_readiness_requirement_status_changed"))),
+            -int(item.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0),
             -abs(_as_optional_float(item.get("benchmark_history_readiness_requirement_exit_code_delta")) or 0.0),
             -abs(_as_optional_float(item.get("benchmark_history_status_delta")) or 0.0),
             -abs(_as_optional_float(item.get("status_delta")) or 0.0),
@@ -366,6 +383,17 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         "benchmark_history_readiness_requirement_status_changed_count": sum(
             1 for row in rows if bool(row.get("benchmark_history_readiness_requirement_status_changed"))
         ),
+        "benchmark_history_readiness_requirement_failed_reason_added_count": sum(
+            int(row.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) for row in rows
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_removed_count": sum(
+            int(row.get("benchmark_history_readiness_requirement_failed_reason_removed_count") or 0) for row in rows
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_added": _unique_strings(
+            reason
+            for row in rows
+            for reason in _as_str_list(row.get("benchmark_history_readiness_requirement_failed_reason_added"))
+        ),
         "max_abs_benchmark_history_case_regression_delta": _int_if_whole(max(benchmark_case_regression_deltas))
         if benchmark_case_regression_deltas
         else None,
@@ -421,6 +449,8 @@ def _is_test_coverage_regression_row(row: dict[str, Any]) -> bool:
 def _is_benchmark_history_regression_row(row: dict[str, Any]) -> bool:
     status_delta = _as_optional_float(row.get("benchmark_history_status_delta"))
     if status_delta is not None and status_delta < 0:
+        return True
+    if int(row.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
         return True
     ready_delta = _as_optional_float(row.get("benchmark_history_ready_delta"))
     if ready_delta is not None and ready_delta < 0:
@@ -494,6 +524,11 @@ def _as_optional_float(value: Any) -> float | None:
         return None
 
 
+def _as_int(value: Any) -> int | None:
+    number = _as_optional_float(value)
+    return int(number) if number is not None else None
+
+
 def _int_if_whole(value: float | None) -> int | float | None:
     if value is None:
         return None
@@ -514,3 +549,22 @@ def _as_str_list(value: Any) -> list[str]:
     if isinstance(value, list):
         return [str(item).strip() for item in value if str(item).strip()]
     return [str(value).strip()] if str(value).strip() else []
+
+
+def _reason_additions(baseline: Any, compared: Any) -> list[str]:
+    baseline_reasons = set(_as_str_list(baseline))
+    return [reason for reason in _as_str_list(compared) if reason not in baseline_reasons]
+
+
+def _reason_removals(baseline: Any, compared: Any) -> list[str]:
+    compared_reasons = set(_as_str_list(compared))
+    return [reason for reason in _as_str_list(baseline) if reason not in compared_reasons]
+
+
+def _unique_strings(values: Any) -> list[str]:
+    items: list[str] = []
+    for value in values:
+        text = str(value).strip()
+        if text and text not in items:
+            items.append(text)
+    return items

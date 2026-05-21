@@ -221,6 +221,9 @@
 386-v372-maintenance-split-consolidation.md
  -> v372 code explanation: consolidate release bundle, governance stabilization, and promoted seed handoff artifact boundaries without changing public output contracts.
 
+387-v373-benchmark-requirement-reason-drift.md
+ -> v373 code explanation: carry benchmark-history readiness failed-reason additions through release readiness comparison, registry, maturity summary, and maturity narrative review.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

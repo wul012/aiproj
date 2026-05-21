@@ -193,6 +193,26 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "compared_benchmark_history_readiness_requirement_failed_reasons": compared.get(
             "benchmark_history_readiness_requirement_failed_reasons"
         ),
+        "benchmark_history_readiness_requirement_failed_reason_added_count": len(
+            _reason_additions(
+                baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
+                compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+            )
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_removed_count": len(
+            _reason_removals(
+                baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
+                compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+            )
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_added": _reason_additions(
+            baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
+            compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_removed": _reason_removals(
+            baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
+            compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+        ),
         "benchmark_history_model_quality_claim_changed": compared.get("benchmark_history_model_quality_claim")
         != baseline.get("benchmark_history_model_quality_claim"),
         "benchmark_history_latest_boundary_changed": compared.get("benchmark_history_latest_boundary")
@@ -262,6 +282,12 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
             "Benchmark history readiness requirement exit-code delta is "
             f"{delta.get('benchmark_history_readiness_requirement_exit_code_delta')}."
         )
+    added_reasons = _string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_added"))
+    removed_reasons = _string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_removed"))
+    if added_reasons:
+        parts.append("Benchmark readiness requirement added failed reason(s): " + ", ".join(added_reasons) + ".")
+    if removed_reasons:
+        parts.append("Benchmark readiness requirement removed failed reason(s): " + ", ".join(removed_reasons) + ".")
     if delta.get("benchmark_history_latest_boundary_changed"):
         parts.append(
             f"Benchmark history boundary changed from {delta.get('baseline_benchmark_history_boundary')} to {delta.get('compared_benchmark_history_boundary')}."
@@ -296,6 +322,17 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "test_coverage_regression_count": sum(1 for delta in deltas if _is_test_coverage_regression(delta)),
         "benchmark_history_delta_count": sum(1 for delta in deltas if _has_benchmark_history_delta(delta)),
         "benchmark_history_regression_count": sum(1 for delta in deltas if _is_benchmark_history_regression(delta)),
+        "benchmark_history_readiness_requirement_failed_reason_added_count": sum(
+            int(delta.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) for delta in deltas
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_removed_count": sum(
+            int(delta.get("benchmark_history_readiness_requirement_failed_reason_removed_count") or 0) for delta in deltas
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_added": _unique_strings(
+            reason
+            for delta in deltas
+            for reason in _string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_added"))
+        ),
     }
 
 
@@ -370,6 +407,10 @@ def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
         return True
     if delta.get("benchmark_history_readiness_requirement_status_changed"):
         return True
+    if int(delta.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
+        return True
+    if int(delta.get("benchmark_history_readiness_requirement_failed_reason_removed_count") or 0) > 0:
+        return True
     keys = [
         "benchmark_history_entry_delta",
         "benchmark_history_ready_delta",
@@ -386,6 +427,8 @@ def _is_benchmark_history_regression(delta: dict[str, Any]) -> bool:
     if int(delta.get("benchmark_history_status_delta") or 0) < 0:
         return True
     if delta.get("compared_benchmark_history_readiness_requirement_status") == "fail":
+        return True
+    if int(delta.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
         return True
     compared_requirement_exit = delta.get("benchmark_history_readiness_requirement_exit_code_delta")
     if isinstance(compared_requirement_exit, (int, float)) and compared_requirement_exit > 0:
@@ -434,6 +477,25 @@ def _max_abs_delta(deltas: list[dict[str, Any]], key: str) -> float | int | None
 
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
+
+
+def _reason_additions(baseline: Any, compared: Any) -> list[str]:
+    baseline_reasons = set(_string_list(baseline))
+    return [reason for reason in _string_list(compared) if reason not in baseline_reasons]
+
+
+def _reason_removals(baseline: Any, compared: Any) -> list[str]:
+    compared_reasons = set(_string_list(compared))
+    return [reason for reason in _string_list(baseline) if reason not in compared_reasons]
+
+
+def _unique_strings(values: Any) -> list[str]:
+    items: list[str] = []
+    for value in values:
+        text = str(value).strip()
+        if text and text not in items:
+            items.append(text)
+    return items
 
 
 __all__ = [
