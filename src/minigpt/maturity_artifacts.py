@@ -62,6 +62,8 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Release readiness CI order regressions", overview.get("release_readiness_ci_workflow_order_regression_count")),
                 ("Release readiness test coverage regressions", overview.get("release_readiness_test_coverage_regression_count")),
                 ("Release readiness benchmark-history regressions", overview.get("release_readiness_benchmark_history_regression_count")),
+                ("Release readiness benchmark requirement changes", overview.get("release_readiness_benchmark_requirement_status_changed_count")),
+                ("Release readiness benchmark requirement exit delta", overview.get("release_readiness_max_benchmark_requirement_exit_code_delta")),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -181,6 +183,8 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("CI order regressions", release_readiness.get("ci_workflow_order_regression_count")),
         ("Coverage regressions", release_readiness.get("test_coverage_regression_count")),
         ("Benchmark regressions", release_readiness.get("benchmark_history_regression_count")),
+        ("Benchmark req changes", release_readiness.get("benchmark_history_readiness_requirement_status_changed_count")),
+        ("Benchmark req exit", release_readiness.get("max_abs_benchmark_history_readiness_requirement_exit_code_delta")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -311,6 +315,8 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         ("Benchmark-history regressions", release_readiness.get("benchmark_history_regression_count")),
         ("Benchmark-history status changes", release_readiness.get("benchmark_history_status_changed_count")),
         ("Benchmark-history boundary changes", release_readiness.get("benchmark_history_boundary_changed_count")),
+        ("Benchmark requirement changes", release_readiness.get("benchmark_history_readiness_requirement_status_changed_count")),
+        ("Benchmark requirement exit delta", release_readiness.get("max_abs_benchmark_history_readiness_requirement_exit_code_delta")),
         ("Max benchmark case-regression delta", release_readiness.get("max_abs_benchmark_history_case_regression_delta")),
         ("Max benchmark generation-flag regression delta", release_readiness.get("max_abs_benchmark_history_generation_flag_regression_delta")),
     ]

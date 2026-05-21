@@ -215,6 +215,9 @@
 384-v370-registry-benchmark-requirement.md
  -> v370 code explanation: carry benchmark-history readiness requirement regressions into registry rows, summaries, leaderboard rendering, CSV, and CLI output.
 
+385-v371-maturity-benchmark-requirement-carryover.md
+ -> v371 code explanation: carry benchmark-history readiness requirement changes into maturity summary, maturity narrative, CLI diagnostics, and review decisions.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

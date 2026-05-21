@@ -46,6 +46,8 @@ def main() -> None:
     print(f"release_readiness_benchmark_history_regression_count={overview.get('release_readiness_benchmark_history_regression_count')}")
     print(f"release_readiness_benchmark_history_status_changed_count={overview.get('release_readiness_benchmark_history_status_changed_count')}")
     print(f"release_readiness_benchmark_history_boundary_changed_count={overview.get('release_readiness_benchmark_history_boundary_changed_count')}")
+    print(f"release_readiness_benchmark_requirement_status_changed_count={overview.get('release_readiness_benchmark_requirement_status_changed_count')}")
+    print(f"release_readiness_max_benchmark_requirement_exit_code_delta={overview.get('release_readiness_max_benchmark_requirement_exit_code_delta')}")
     print(f"request_history_status={overview.get('request_history_status')}")
     print(f"request_history_records={overview.get('request_history_records')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

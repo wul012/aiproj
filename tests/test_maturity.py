@@ -54,8 +54,10 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "benchmark_history_regression_count": 0,
                     "benchmark_history_status_changed_count": 0,
                     "benchmark_history_boundary_changed_count": 0,
+                    "benchmark_history_readiness_requirement_status_changed_count": 0,
                     "max_abs_benchmark_history_case_regression_delta": 0,
                     "max_abs_benchmark_history_generation_flag_regression_delta": 0,
+                    "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 0,
                 },
             },
             ensure_ascii=False,
@@ -118,6 +120,8 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_order_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_history_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_max_benchmark_requirement_exit_code_delta"], 0)
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
             self.assertEqual(summary["summary"]["overall_status"], "pass")
@@ -129,6 +133,10 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 0)
             self.assertEqual(summary["release_readiness_context"]["test_coverage_regression_count"], 0)
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_regression_count"], 0)
+            self.assertEqual(
+                summary["release_readiness_context"]["benchmark_history_readiness_requirement_status_changed_count"],
+                0,
+            )
             self.assertEqual(summary["request_history_context"]["timeout_rate"], 0.25)
             capability_titles = [item["title"] for item in summary["capabilities"]]
             self.assertIn("Project Synthesis", capability_titles)
@@ -295,6 +303,33 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_regression_count"], 1)
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_boundary_changed_count"], 1)
             self.assertIn("benchmark-history readiness regressions", " ".join(summary["recommendations"]))
+
+    def test_benchmark_requirement_change_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"benchmark-regressed": 1}
+            registry["release_readiness_delta_summary"]["regressed_count"] = 0
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_status_changed_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_boundary_changed_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_status_changed_count"] = 1
+            registry["release_readiness_delta_summary"]["max_abs_benchmark_history_readiness_requirement_exit_code_delta"] = 1
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_max_benchmark_requirement_exit_code_delta"], 1)
+            self.assertEqual(
+                summary["release_readiness_context"]["benchmark_history_readiness_requirement_status_changed_count"],
+                1,
+            )
+            self.assertIn("benchmark-history readiness requirement changes", " ".join(summary["recommendations"]))
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

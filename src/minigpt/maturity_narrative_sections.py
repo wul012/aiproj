@@ -169,7 +169,10 @@ def _release_claim(summary: dict[str, Any]) -> str:
         f"benchmark-history regressions={summary.get('release_readiness_benchmark_history_regression_count') or 0}, "
         f"max benchmark case-regression delta="
         f"{summary.get('release_readiness_max_benchmark_history_case_regression_delta') if summary.get('release_readiness_max_benchmark_history_case_regression_delta') is not None else 'missing'}, "
-        f"benchmark boundary changes={summary.get('release_readiness_benchmark_history_boundary_changed_count') or 0}."
+        f"benchmark boundary changes={summary.get('release_readiness_benchmark_history_boundary_changed_count') or 0}, "
+        f"benchmark requirement changes={summary.get('release_readiness_benchmark_requirement_status_changed_count') or 0}, "
+        f"benchmark requirement exit delta="
+        f"{summary.get('release_readiness_benchmark_requirement_exit_code_delta_max') if summary.get('release_readiness_benchmark_requirement_exit_code_delta_max') is not None else 'missing'}."
     )
 
 

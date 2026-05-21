@@ -53,6 +53,12 @@ def build_maturity_narrative_summary(
         "release_readiness_benchmark_history_regression_count": release.get("benchmark_history_regression_count"),
         "release_readiness_benchmark_history_status_changed_count": release.get("benchmark_history_status_changed_count"),
         "release_readiness_benchmark_history_boundary_changed_count": release.get("benchmark_history_boundary_changed_count"),
+        "release_readiness_benchmark_requirement_status_changed_count": release.get(
+            "benchmark_history_readiness_requirement_status_changed_count"
+        ),
+        "release_readiness_benchmark_requirement_exit_code_delta_max": release.get(
+            "max_abs_benchmark_history_readiness_requirement_exit_code_delta"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release.get("max_abs_benchmark_history_case_regression_delta"),
         "release_readiness_max_benchmark_history_generation_flag_regression_delta": release.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
@@ -124,6 +130,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
         recommendations.append(
             "Fix benchmark history readiness requirement failures before using the narrative as repeated model-evaluation evidence."
         )
+    if int(summary.get("release_readiness_benchmark_requirement_status_changed_count") or 0) > 0:
+        recommendations.append(
+            "Review benchmark-history readiness requirement changes before treating the portfolio as release-stable."
+        )
     if int(summary.get("benchmark_history_blocked_count") or 0) > 0:
         recommendations.append("Inspect blocked benchmark history entries before using the portfolio as release-ready evidence.")
     elif int(summary.get("benchmark_history_case_regression_entry_count") or 0) > 0:
@@ -192,6 +202,7 @@ def _portfolio_status(
         or int(release.get("ci_workflow_order_regression_count") or 0) > 0
         or int(release.get("test_coverage_regression_count") or 0) > 0
         or int(release.get("benchmark_history_regression_count") or 0) > 0
+        or int(release.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
         or any(row.get("decision_status") in {"review", "blocked"} for row in decision_rows)
@@ -214,9 +225,20 @@ def _request_summary(maturity: dict[str, Any] | None, request_history: dict[str,
 
 
 def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str, Any]) -> dict[str, Any]:
+    trend_status = _coalesce(release_context.get("trend_status"), maturity_summary.get("release_readiness_trend_status"))
+    requirement_status_changed_count = _coalesce(
+        release_context.get("benchmark_history_readiness_requirement_status_changed_count"),
+        maturity_summary.get("release_readiness_benchmark_requirement_status_changed_count"),
+    )
+    requirement_exit_code_delta = _coalesce(
+        release_context.get("max_abs_benchmark_history_readiness_requirement_exit_code_delta"),
+        maturity_summary.get("release_readiness_benchmark_requirement_exit_code_delta_max"),
+    )
+    if int(requirement_status_changed_count or 0) > 0:
+        trend_status = "benchmark-regressed"
     return {
         **release_context,
-        "trend_status": _coalesce(release_context.get("trend_status"), maturity_summary.get("release_readiness_trend_status")),
+        "trend_status": trend_status,
         "regressed_count": _coalesce(release_context.get("regressed_count"), maturity_summary.get("release_readiness_regressed_count")),
         "improved_count": _coalesce(release_context.get("improved_count"), maturity_summary.get("release_readiness_improved_count")),
         "ci_workflow_regression_count": _coalesce(
@@ -267,6 +289,8 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
             release_context.get("benchmark_history_boundary_changed_count"),
             maturity_summary.get("release_readiness_benchmark_history_boundary_changed_count"),
         ),
+        "benchmark_history_readiness_requirement_status_changed_count": requirement_status_changed_count,
+        "max_abs_benchmark_history_readiness_requirement_exit_code_delta": requirement_exit_code_delta,
         "max_abs_benchmark_history_case_regression_delta": _coalesce(
             release_context.get("max_abs_benchmark_history_case_regression_delta"),
             maturity_summary.get("release_readiness_max_benchmark_history_case_regression_delta"),

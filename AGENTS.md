@@ -34,6 +34,7 @@ aiproj-specific focus:
 Refactoring rhythm:
 - After 3-4 feature versions, prefer 1 version of contract-preserving refactor, deduplication, or test hardening.
 - Split report builders, renderers, styles, artifact helpers, and validators when modules keep growing past roughly 500-800 lines.
+- 写代码时不要制造难于维护的巨型代码文件；当单文件职责持续变宽、增长接近约 500-800 行、或已经影响阅读和测试定位时，要做必要拆分。
 
 ## Collaboration Rule
 

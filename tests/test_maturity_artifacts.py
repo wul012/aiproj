@@ -32,6 +32,8 @@ class MaturityArtifactSplitTests(unittest.TestCase):
                 "release_readiness_regressed_count": 0,
                 "release_readiness_ci_workflow_regression_count": 1,
                 "release_readiness_test_coverage_regression_count": 1,
+                "release_readiness_benchmark_requirement_status_changed_count": 1,
+                "release_readiness_max_benchmark_requirement_exit_code_delta": 1,
                 "request_history_status": "watch",
                 "request_history_records": 4,
             },
@@ -72,6 +74,8 @@ class MaturityArtifactSplitTests(unittest.TestCase):
             self.assertIn("CI workflow regressions", html)
             self.assertIn("Test coverage regressions", markdown)
             self.assertIn("Test coverage regressions", html)
+            self.assertIn("Release readiness benchmark requirement changes", markdown)
+            self.assertIn("Benchmark req changes", html)
             self.assertIn("Coverage regressions", html)
             self.assertIn("## Request History Context", markdown)
 

@@ -35,6 +35,14 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                 ("Release coverage gap delta", summary.get("release_readiness_max_test_coverage_gap_delta")),
                 ("Release benchmark-history regressions", summary.get("release_readiness_benchmark_history_regression_count")),
                 ("Release benchmark-history boundary changes", summary.get("release_readiness_benchmark_history_boundary_changed_count")),
+                (
+                    "Release benchmark requirement changes",
+                    summary.get("release_readiness_benchmark_requirement_status_changed_count"),
+                ),
+                (
+                    "Release benchmark requirement exit delta",
+                    summary.get("release_readiness_benchmark_requirement_exit_code_delta_max"),
+                ),
                 ("Request history status", summary.get("request_history_status")),
                 ("Benchmark scorecards", summary.get("benchmark_scorecard_count")),
                 ("Benchmark average", summary.get("benchmark_avg_score")),
@@ -122,6 +130,8 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Coverage gap delta", summary.get("release_readiness_max_test_coverage_gap_delta")),
         ("Benchmark regressions", summary.get("release_readiness_benchmark_history_regression_count")),
         ("Benchmark boundary changes", summary.get("release_readiness_benchmark_history_boundary_changed_count")),
+        ("Benchmark req changes", summary.get("release_readiness_benchmark_requirement_status_changed_count")),
+        ("Benchmark req exit", summary.get("release_readiness_benchmark_requirement_exit_code_delta_max")),
         ("Requests", summary.get("request_history_status")),
         ("Benchmarks", summary.get("benchmark_scorecard_count")),
         ("Benchmark avg", summary.get("benchmark_avg_score")),

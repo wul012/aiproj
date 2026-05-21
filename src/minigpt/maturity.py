@@ -241,6 +241,12 @@ def _summary(
         "release_readiness_benchmark_history_regression_count": release_readiness_context.get("benchmark_history_regression_count"),
         "release_readiness_benchmark_history_status_changed_count": release_readiness_context.get("benchmark_history_status_changed_count"),
         "release_readiness_benchmark_history_boundary_changed_count": release_readiness_context.get("benchmark_history_boundary_changed_count"),
+        "release_readiness_benchmark_requirement_status_changed_count": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_status_changed_count"
+        ),
+        "release_readiness_max_benchmark_requirement_exit_code_delta": release_readiness_context.get(
+            "max_abs_benchmark_history_readiness_requirement_exit_code_delta"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release_readiness_context.get(
             "max_abs_benchmark_history_case_regression_delta"
         ),
@@ -326,8 +332,10 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_regression_count": None,
             "benchmark_history_status_changed_count": None,
             "benchmark_history_boundary_changed_count": None,
+            "benchmark_history_readiness_requirement_status_changed_count": None,
             "max_abs_benchmark_history_case_regression_delta": None,
             "max_abs_benchmark_history_generation_flag_regression_delta": None,
+            "max_abs_benchmark_history_readiness_requirement_exit_code_delta": None,
         }
     counts = registry.get("release_readiness_comparison_counts")
     delta_summary = _dict(registry.get("release_readiness_delta_summary"))
@@ -354,9 +362,15 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "benchmark_history_regression_count": delta_summary.get("benchmark_history_regression_count"),
         "benchmark_history_status_changed_count": delta_summary.get("benchmark_history_status_changed_count"),
         "benchmark_history_boundary_changed_count": delta_summary.get("benchmark_history_boundary_changed_count"),
+        "benchmark_history_readiness_requirement_status_changed_count": delta_summary.get(
+            "benchmark_history_readiness_requirement_status_changed_count"
+        ),
         "max_abs_benchmark_history_case_regression_delta": delta_summary.get("max_abs_benchmark_history_case_regression_delta"),
         "max_abs_benchmark_history_generation_flag_regression_delta": delta_summary.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
+        ),
+        "max_abs_benchmark_history_readiness_requirement_exit_code_delta": delta_summary.get(
+            "max_abs_benchmark_history_readiness_requirement_exit_code_delta"
         ),
     }
     context["trend_status"] = _release_readiness_trend_status(context)
@@ -368,6 +382,8 @@ def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
         return None
     if int(context.get("test_coverage_regression_count") or 0) > 0:
         return "coverage-regressed"
+    if int(context.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0:
+        return "benchmark-regressed"
     if int(context.get("benchmark_history_regression_count") or 0) > 0:
         return "benchmark-regressed"
     if int(context.get("regressed_count") or 0) > 0:
@@ -440,6 +456,10 @@ def _recommendations(
     elif int(release_readiness_context.get("benchmark_history_regression_count") or 0) > 0:
         recs.append(
             "Review benchmark-history readiness regressions before presenting the project as release-stable; maturity status is downgraded to review."
+        )
+    elif int(release_readiness_context.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0:
+        recs.append(
+            "Review benchmark-history readiness requirement changes before presenting the project as release-stable; maturity status is downgraded to review."
         )
     elif int(release_readiness_context.get("regressed_count") or 0) > 0:
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")

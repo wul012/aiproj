@@ -32,6 +32,7 @@ def make_project(
     ci_order_regression_count: int = 0,
     coverage_regression_count: int = 0,
     benchmark_history_regression_count: int = 0,
+    benchmark_requirement_change_count: int = 0,
 ) -> dict[str, Path]:
     project = root / "project"
     maturity_path = project / "runs" / "maturity-summary" / "maturity_summary.json"
@@ -68,6 +69,8 @@ def make_project(
                 "release_readiness_benchmark_history_boundary_changed_count": 1 if benchmark_history_regression_count else 0,
                 "release_readiness_max_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "release_readiness_max_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
+                "release_readiness_benchmark_requirement_status_changed_count": benchmark_requirement_change_count,
+                "release_readiness_max_benchmark_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
             },
             "release_readiness_context": {
                 "available": True,
@@ -88,8 +91,10 @@ def make_project(
                 "benchmark_history_regression_count": benchmark_history_regression_count,
                 "benchmark_history_status_changed_count": 1 if benchmark_history_regression_count else 0,
                 "benchmark_history_boundary_changed_count": 1 if benchmark_history_regression_count else 0,
+                "benchmark_history_readiness_requirement_status_changed_count": benchmark_requirement_change_count,
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
+                "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
             },
             "request_history_context": {
                 "status": "pass",
@@ -120,8 +125,10 @@ def make_project(
                 "benchmark_history_regression_count": benchmark_history_regression_count,
                 "benchmark_history_status_changed_count": 1 if benchmark_history_regression_count else 0,
                 "benchmark_history_boundary_changed_count": 1 if benchmark_history_regression_count else 0,
+                "benchmark_history_readiness_requirement_status_changed_count": benchmark_requirement_change_count,
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
+                "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
             },
         },
     )
@@ -307,6 +314,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_history_regression_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_exit_code_delta_max"], 0)
             self.assertEqual(narrative["summary"]["request_history_status"], "pass")
             self.assertEqual(narrative["summary"]["benchmark_scorecard_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_avg_score"], 88.5)
@@ -451,6 +460,27 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("benchmark boundary changes=1", release_section["claim"])
             self.assertIn("Resolve review-level release", narrative["recommendations"][0])
 
+    def test_build_maturity_narrative_marks_review_for_benchmark_requirement_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(
+                Path(tmp),
+                release_trend="benchmark-regressed",
+                benchmark_history_regression_count=0,
+                benchmark_requirement_change_count=1,
+            )
+
+            narrative = build_maturity_narrative(paths["project"])
+            release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_exit_code_delta_max"], 1)
+            self.assertEqual(release_section["status"], "benchmark-regressed")
+            self.assertIn("benchmark requirement changes=1", release_section["claim"])
+            self.assertIn("benchmark requirement exit delta=1", release_section["claim"])
+            self.assertIn("benchmark-history readiness requirement changes", " ".join(narrative["recommendations"]))
+
     def test_build_maturity_narrative_marks_review_for_non_comparison_ready_decision(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             paths = make_project(Path(tmp))
@@ -507,6 +537,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Release coverage gap delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark-history regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark-history boundary changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release benchmark requirement changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release benchmark requirement exit delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision eval compare", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
@@ -521,6 +553,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Coverage gap delta", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark boundary changes", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark req changes", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark req exit", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark History", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("History boundary", Path(outputs["html"]).read_text(encoding="utf-8"))
