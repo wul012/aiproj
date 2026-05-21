@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v377 release readiness drift contract evidence</title>
+  <style>
+    :root { --ink:#16202a; --muted:#5b6574; --line:#d7dee7; --page:#f7f7f2; --panel:#fff; --green:#047857; --amber:#a16207; --red:#b91c1c; --blue:#1f5f74; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+    header { padding:30px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0 0 10px; color:var(--muted); }
+    main { padding:20px 34px 36px; }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:12px; margin-bottom:16px; }
+    .card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .card { padding:14px; min-height:88px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+    .panel { padding:18px; margin:16px 0; overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:820px; }
+    th, td { border-bottom:1px solid var(--line); padding:10px; text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f5; border:1px solid #d8e0e8; border-radius:6px; padding:2px 5px; }
+    .pill { display:inline-block; border-radius:999px; padding:4px 9px; font-weight:700; font-size:12px; }
+    .pass { background:#dcfce7; color:var(--green); }
+    .fail { background:#fee2e2; color:var(--red); }
+    .mixed { background:#fef3c7; color:var(--amber); }
+    footer { color:var(--muted); padding:0 34px 24px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v377 release readiness drift contract evidence</h1>
+    <p>v377 validates failed-reason drift fields by recomputing additions, removals, drift status, and summary counts from the source baseline/compared reason lists.</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="card"><div class="label">Contract status</div><div class="value"><span class="pill pass">pass</span></div></div>
+      <div class="card"><div class="label">Protected layer</div><div class="value">release readiness comparison</div></div>
+      <div class="card"><div class="label">Delta scenario</div><div class="value"><span class="pill mixed">mixed</span></div></div>
+      <div class="card"><div class="label">CLI failure mode</div><div class="value"><span class="pill fail">non-zero</span></div></div>
+    </section>
+    <section class="panel">
+      <h2>Source-To-Contract Check</h2>
+      <table>
+        <thead>
+          <tr><th>Input field</th><th>Example value</th><th>Derived contract</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>baseline_benchmark_history_readiness_requirement_failed_reasons</code></td><td><code>insufficient_ready_entries</code>, <code>legacy_fixture_gap</code></td><td>Old reason set</td></tr>
+          <tr><td><code>compared_benchmark_history_readiness_requirement_failed_reasons</code></td><td><code>insufficient_ready_entries</code>, <code>tiny_smoke_only</code></td><td>New reason set</td></tr>
+          <tr><td>Recomputed delta</td><td><code>added=["tiny_smoke_only"]</code>, <code>removed=["legacy_fixture_gap"]</code></td><td><code>drift_status="mixed"</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Checked Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Scope</th><th>Fields</th><th>Failure if</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Delta</td><td><code>added_count</code>, <code>removed_count</code>, <code>added</code>, <code>removed</code>, <code>drift_status</code></td><td>Any stored field disagrees with recomputed source reasons</td></tr>
+          <tr><td>Summary</td><td><code>added_count</code>, <code>removed_count</code>, <code>recovery_delta_count</code>, <code>mixed_delta_count</code>, <code>drift_status_counts</code></td><td>Summary aggregation does not match all recomputed deltas</td></tr>
+          <tr><td>CLI</td><td><code>status</code>, <code>decision</code>, <code>issue_count</code>, first issue fields</td><td>Invalid contract exits non-zero unless <code>--no-fail</code> is supplied</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>python -m pytest tests/test_release_readiness_drift_contract.py tests/test_release_readiness_comparison.py -q</code></p>
+      <p><span class="pill pass">19 passed</span></p>
+    </section>
+  </main>
+  <footer>Generated for d/377 evidence. This is contract evidence for governance fields, not model-quality proof.</footer>
+</body>
+</html>

@@ -233,6 +233,9 @@
 390-v376-benchmark-reason-mixed-drift.md
  -> v376 code explanation: expose mixed benchmark readiness failed-reason drift as its own review signal across comparison, registry, maturity, narrative, CLI, and artifact outputs.
 
+391-v377-release-readiness-drift-contract.md
+ -> v377 code explanation: validate release readiness failed-reason drift delta and summary fields against their source baseline/compared reason lists.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

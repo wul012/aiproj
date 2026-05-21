@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 376 makes mixed benchmark-history readiness failed-reason drift explicit across release readiness comparison, registry, maturity summary, and maturity narrative outputs.
+Version 377 adds a release readiness drift contract checker that validates benchmark-history readiness failed-reason delta and summary fields against their source baseline/compared reason lists.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -679,6 +679,14 @@ Version 376 makes mixed benchmark-history readiness failed-reason drift explicit
 - Targeted tests cover mixed drift in comparison, registry, maturity summary, maturity narrative, and maturity artifact rendering.
 - Archived benchmark reason mixed drift evidence in `d/376`.
 
+## Latest v377 checkpoint
+
+- Added `release_readiness_drift_contract.py` to recompute failed-reason additions, removals, drift status, and summary counts from baseline/compared reason lists.
+- Added `scripts/check_release_readiness_drift_contract.py` so local runs and CI logs can validate `release_readiness_comparison.json` without rerunning the full release-readiness comparison.
+- The checker catches delta-level drift mismatches, summary count/list mismatches, and invalid drift status values.
+- Targeted tests cover valid mixed drift, summary mismatch, delta status mismatch, directory-path resolution, and non-zero CLI failure output.
+- Archived release readiness drift contract evidence in `d/377`.
+
 ## Latest v370 checkpoint
 
 - Registry run rows now expose benchmark readiness requirement status-change count and max exit-code delta from release readiness comparison deltas.
@@ -1236,6 +1244,7 @@ v373.0.0 MiniGPT v373 benchmark requirement reason drift
 v374.0.0 MiniGPT v374 registry release readiness split
 v375.0.0 MiniGPT v375 benchmark reason recovery signal
 v376.0.0 MiniGPT v376 benchmark reason mixed drift
+v377.0.0 MiniGPT v377 release readiness drift contract
 ```
 
 ## Project structure

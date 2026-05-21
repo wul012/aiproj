@@ -239,6 +239,9 @@ d/375/解释/说明.md
 d/376/图片
 d/376/解释/说明.md
  -> v376 benchmark reason mixed drift 的运行截图和解释
+d/377/图片
+d/377/解释/说明.md
+ -> v377 release readiness drift contract 的运行截图和解释
 ```
 
 写入规则：
