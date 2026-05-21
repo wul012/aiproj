@@ -185,6 +185,9 @@ d/357/解释/说明.md
 d/358/图片
 d/358/解释/说明.md
  -> v358 governance stabilization reasons 的运行截图和解释
+d/359/图片
+d/359/解释/说明.md
+ -> v359 governance proposal routing 的运行截图和解释
 ```
 
 写入规则：

@@ -53,6 +53,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--module-top-n", type=int, default=12)
     parser.add_argument("--skip-module-pressure", action="store_true", help="Only write the v109 batching report.")
     parser.add_argument("--governance-chains", type=Path, default=None, help="Optional JSON list of governance chains to stabilize.")
+    parser.add_argument("--governance-proposals", type=Path, default=None, help="Optional JSON list of governance expansion proposals to route.")
     parser.add_argument("--governance-pause-days", type=int, default=3)
     parser.add_argument("--skip-governance-stabilization", action="store_true", help="Skip governance stabilization review outputs.")
     return parser.parse_args()
@@ -87,7 +88,12 @@ def main() -> None:
         module_outputs = write_module_pressure_outputs(module_report, args.out_dir)
     if not args.skip_governance_stabilization:
         governance_chains = _read_json_list(args.governance_chains, []) if args.governance_chains is not None else None
-        governance_report = build_governance_stabilization_review(governance_chains, pause_days=args.governance_pause_days)
+        governance_proposals = _read_json_list(args.governance_proposals, []) if args.governance_proposals is not None else None
+        governance_report = build_governance_stabilization_review(
+            governance_chains,
+            proposed_items=governance_proposals,
+            pause_days=args.governance_pause_days,
+        )
         governance_outputs = write_governance_stabilization_outputs(governance_report, args.out_dir)
     summary = report["summary"]
     proposal_summary = report["proposal"]
@@ -120,13 +126,19 @@ def main() -> None:
         print(f"governance_missing_review_reason_count={governance_summary['missing_review_reason_count']}")
         print(f"governance_missing_expansion_rule_count={governance_summary['missing_expansion_rule_count']}")
         print(f"governance_consolidation_candidate_count={governance_summary['consolidation_candidate_count']}")
+        governance_routing = governance_report["proposal_routing"]
+        print(f"governance_routing_decision={governance_routing['decision']}")
+        print(f"governance_routing_item_count={governance_routing['item_count']}")
+        print(f"governance_routing_merge_existing_count={governance_routing['merge_existing_count']}")
+        print(f"governance_routing_review_count={governance_routing['review_count']}")
+        print(f"governance_routing_new_chain_candidate_count={governance_routing['new_chain_candidate_count']}")
         print("governance_outputs=" + json.dumps(governance_outputs, ensure_ascii=False))
 
 
 def _read_json_list(path: Path | None, fallback: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if path is None:
         return [dict(item) for item in fallback]
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
     if not isinstance(payload, list):
         raise ValueError(f"{path} must contain a JSON list")
     return [dict(item) for item in payload if isinstance(item, dict)]

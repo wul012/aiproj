@@ -127,6 +127,51 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertIn("review_reason", report["chains"][0])
         self.assertIn("expansion_rule", report["chains"][0])
         self.assertIn("Treat seven active chains", " ".join(report["recommendations"]))
+        self.assertEqual(report["proposal_routing"]["decision"], "not_applicable")
+        self.assertEqual(report["proposal_routing"]["item_count"], 0)
+
+    def test_governance_stabilization_routes_proposals_into_existing_chains(self) -> None:
+        report = build_governance_stabilization_review(
+            proposed_items=[
+                {"title": "Dataset drift note", "description": "dataset source dedupe and corpus change"},
+                {"title": "Promotion receipt field cleanup", "description": "promoted seed handoff receipt helpers", "target_chain": "training-promotion"},
+            ]
+        )
+
+        routing = report["proposal_routing"]
+        self.assertEqual(routing["decision"], "merge_existing")
+        self.assertEqual(routing["merge_existing_count"], 2)
+        self.assertEqual(routing["review_count"], 0)
+        self.assertEqual(routing["new_chain_candidate_count"], 0)
+        self.assertEqual(routing["items"][0]["suggested_chain"], "dataset-provenance")
+        self.assertEqual(routing["items"][1]["suggested_chain"], "training-promotion")
+        self.assertIn("Route current proposals", " ".join(report["recommendations"]))
+
+    def test_governance_stabilization_reviews_high_risk_proposals(self) -> None:
+        report = build_governance_stabilization_review(
+            proposed_items=[
+                {"title": "Release gate schema change", "description": "release gate output schema", "target_chain": "release-readiness", "risk_flags": ["schema_change"]},
+            ]
+        )
+
+        routing = report["proposal_routing"]
+        self.assertEqual(routing["decision"], "review_before_merge")
+        self.assertEqual(routing["review_count"], 1)
+        self.assertEqual(routing["items"][0]["route_decision"], "review")
+        self.assertIn("high-risk governance proposals", " ".join(report["recommendations"]))
+
+    def test_governance_stabilization_rejects_unmatched_proposals_during_pause(self) -> None:
+        report = build_governance_stabilization_review(
+            proposed_items=[
+                {"title": "Unknown expansion surface", "description": "new chain candidate with no match"},
+            ]
+        )
+
+        routing = report["proposal_routing"]
+        self.assertEqual(routing["decision"], "reject_new_chain_during_pause")
+        self.assertEqual(routing["new_chain_candidate_count"], 1)
+        self.assertEqual(routing["items"][0]["route_decision"], "new_chain_candidate")
+        self.assertIn("Reject unmatched governance-chain proposals", " ".join(report["recommendations"]))
 
     def test_governance_stabilization_flags_consolidation_candidates(self) -> None:
         report = build_governance_stabilization_review(
@@ -183,7 +228,21 @@ class MaintenancePolicyTests(unittest.TestCase):
     def test_governance_stabilization_outputs_and_script_stdout(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            report = build_governance_stabilization_review(title="<Governance>")
+            proposals_path = root / "proposals.json"
+            proposals_path.write_text(
+                json.dumps(
+                    [
+                        {"title": "Dataset drift note", "description": "dataset source dedupe and corpus change"},
+                        {"title": "Promotion receipt field cleanup", "description": "promoted seed handoff receipt helpers", "target_chain": "training-promotion"},
+                    ],
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            report = build_governance_stabilization_review(
+                title="<Governance>",
+                proposed_items=json.loads(proposals_path.read_text(encoding="utf-8")),
+            )
 
             outputs = write_governance_stabilization_outputs(report, root / "review")
             html = render_governance_stabilization_html(report)
@@ -195,7 +254,10 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("&lt;Governance&gt;", html)
             self.assertIn("Dataset provenance", markdown)
+            self.assertIn("Proposal Routing", markdown)
             self.assertIn("Expansion rule", markdown)
+            self.assertIn("Target chain", markdown)
+            self.assertIn("training-promotion", markdown)
 
             completed = subprocess.run(
                 [
@@ -203,6 +265,8 @@ class MaintenancePolicyTests(unittest.TestCase):
                     "-B",
                     str(ROOT / "scripts" / "check_maintenance_batching.py"),
                     "--skip-module-pressure",
+                    "--governance-proposals",
+                    str(proposals_path),
                     "--out-dir",
                     str(root / "script"),
                 ],
@@ -216,6 +280,11 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("governance_chain_count=7", completed.stdout)
             self.assertIn("governance_missing_review_reason_count=0", completed.stdout)
             self.assertIn("governance_missing_expansion_rule_count=0", completed.stdout)
+            self.assertIn("governance_routing_decision=merge_existing", completed.stdout)
+            self.assertIn("governance_routing_item_count=2", completed.stdout)
+            self.assertIn("governance_routing_merge_existing_count=2", completed.stdout)
+            self.assertIn("governance_routing_review_count=0", completed.stdout)
+            self.assertIn("governance_routing_new_chain_candidate_count=0", completed.stdout)
 
     def test_module_pressure_report_flags_large_modules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

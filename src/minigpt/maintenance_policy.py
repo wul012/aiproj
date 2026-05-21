@@ -167,6 +167,7 @@ def build_maintenance_batching_report(
 def build_governance_stabilization_review(
     chains: list[dict[str, Any]] | None = None,
     *,
+    proposed_items: list[dict[str, Any]] | None = None,
     title: str = "MiniGPT governance stabilization review",
     generated_at: str | None = None,
     pause_days: int = DEFAULT_GOVERNANCE_PAUSE_DAYS,
@@ -176,6 +177,7 @@ def build_governance_stabilization_review(
         for index, item in enumerate(_list_of_dicts(chains if chains is not None else DEFAULT_GOVERNANCE_CHAINS), start=1)
     ]
     summary = _governance_summary(normalized, pause_days)
+    routing = _route_governance_proposals(proposed_items or [], normalized)
     return {
         "schema_version": 1,
         "title": title,
@@ -188,7 +190,8 @@ def build_governance_stabilization_review(
         },
         "summary": summary,
         "chains": normalized,
-        "recommendations": _governance_recommendations(summary, normalized),
+        "proposal_routing": routing,
+        "recommendations": _governance_recommendations(summary, normalized, routing),
     }
 
 
@@ -409,7 +412,98 @@ def _governance_summary(chains: list[dict[str, Any]], pause_days: int) -> dict[s
     }
 
 
-def _governance_recommendations(summary: dict[str, Any], chains: list[dict[str, Any]]) -> list[str]:
+def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[str, Any]]) -> dict[str, Any]:
+    normalized = [_normalize_governance_proposal(item, index, chains) for index, item in enumerate(_list_of_dicts(items), start=1)]
+    if not normalized:
+        return {
+            "decision": "not_applicable",
+            "item_count": 0,
+            "merge_existing_count": 0,
+            "review_count": 0,
+            "new_chain_candidate_count": 0,
+            "items": [],
+            "reasons": ["No governance expansion proposals were provided."],
+        }
+    review_count = sum(1 for item in normalized if item.get("route_decision") == "review")
+    new_chain_candidate_count = sum(1 for item in normalized if item.get("route_decision") == "new_chain_candidate")
+    merge_existing_count = sum(1 for item in normalized if item.get("route_decision") == "merge_existing")
+    if new_chain_candidate_count:
+        decision = "reject_new_chain_during_pause"
+        reasons = ["At least one proposal cannot be routed to an existing chain during the pause window."]
+    elif review_count:
+        decision = "review_before_merge"
+        reasons = ["Review high-risk or weakly matched proposals before changing governance artifacts."]
+    else:
+        decision = "merge_existing"
+        reasons = ["All proposals can be merged into existing governance chains."]
+    return {
+        "decision": decision,
+        "item_count": len(normalized),
+        "merge_existing_count": merge_existing_count,
+        "review_count": review_count,
+        "new_chain_candidate_count": new_chain_candidate_count,
+        "items": normalized,
+        "reasons": reasons,
+    }
+
+
+def _normalize_governance_proposal(item: dict[str, Any], index: int, chains: list[dict[str, Any]]) -> dict[str, Any]:
+    title = str(item.get("title") or item.get("name") or f"proposal-{index}")
+    target = str(item.get("target_chain") or item.get("chain") or item.get("suggested_chain") or "").strip()
+    text = " ".join(
+        [
+            title,
+            str(item.get("description") or ""),
+            str(item.get("category") or ""),
+        ]
+    ).lower()
+    matched_chain = _match_governance_chain(target, text, chains)
+    risk_flags = _risk_flags(item)
+    high_risk = bool(set(risk_flags) & set(HIGH_RISK_FLAGS))
+    if matched_chain and not high_risk:
+        route_decision = "merge_existing"
+        reason = f"Merge into existing chain {matched_chain.get('id')} under its expansion rule."
+    elif matched_chain:
+        route_decision = "review"
+        reason = f"Review before merging into {matched_chain.get('id')} because risk flags are present."
+    else:
+        route_decision = "new_chain_candidate"
+        reason = "No existing governance chain matched this proposal during the pause window."
+    return {
+        "title": title,
+        "target_chain": target,
+        "suggested_chain": matched_chain.get("id") if matched_chain else "",
+        "route_decision": route_decision,
+        "risk_flags": risk_flags,
+        "reason": reason,
+        "expansion_rule": matched_chain.get("expansion_rule") if matched_chain else "",
+    }
+
+
+def _match_governance_chain(target: str, text: str, chains: list[dict[str, Any]]) -> dict[str, Any] | None:
+    target_lower = target.lower().replace("_", "-")
+    for chain in chains:
+        chain_id = str(chain.get("id") or "")
+        if target_lower and target_lower == chain_id.lower():
+            return chain
+    keyword_map = [
+        ("dataset-provenance", ["dataset", "data", "corpus", "dedupe", "source"]),
+        ("benchmark-history", ["benchmark", "scorecard", "rubric", "eval", "prompt"]),
+        ("registry-model-card", ["registry", "model card", "model-card", "leaderboard"]),
+        ("release-readiness", ["release", "readiness", "gate", "bundle"]),
+        ("ci-coverage-hygiene", ["ci", "coverage", "workflow", "encoding", "github"]),
+        ("training-promotion", ["promotion", "promoted", "handoff", "seed"]),
+        ("maturity-portfolio", ["maturity", "portfolio", "narrative"]),
+    ]
+    for chain_id, keywords in keyword_map:
+        if any(keyword in text for keyword in keywords):
+            for chain in chains:
+                if str(chain.get("id")) == chain_id:
+                    return chain
+    return None
+
+
+def _governance_recommendations(summary: dict[str, Any], chains: list[dict[str, Any]], routing: dict[str, Any]) -> list[str]:
     recommendations = [
         f"Pause new governance-chain creation for {summary.get('pause_days')} days and only accept CI fixes, bugs, or broken-contract repairs.",
         "Review each chain by consumer and evidence before adding new reports or projections.",
@@ -420,6 +514,12 @@ def _governance_recommendations(summary: dict[str, Any], chains: list[dict[str, 
         recommendations.append("Consolidate chains marked merge/cut before any new governance surface is added.")
     if summary.get("missing_review_reason_count", 0) or summary.get("missing_expansion_rule_count", 0):
         recommendations.append("Add review reasons and expansion rules before treating a governance chain as stable.")
+    if routing.get("decision") == "merge_existing":
+        recommendations.append("Route current proposals into existing governance chains instead of adding a new chain.")
+    elif routing.get("decision") == "review_before_merge":
+        recommendations.append("Review high-risk governance proposals before merging them into an existing chain.")
+    elif routing.get("decision") == "reject_new_chain_during_pause":
+        recommendations.append("Reject unmatched governance-chain proposals during the pause or rewrite them to target an existing chain.")
     watch_names = [str(item.get("name")) for item in chains if item.get("action") == "watch"]
     if watch_names:
         recommendations.append("Watch for overlap in: " + ", ".join(watch_names) + ".")
