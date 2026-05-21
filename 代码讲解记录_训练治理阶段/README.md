@@ -194,6 +194,9 @@
 377-v363-governance-routing-gate.md
  -> v363 code explanation: add an opt-in clean governance routing gate that can stop CLI runs on review-required or ambiguous proposals.
 
+378-v364-benchmark-history-readiness-gate.md
+ -> v364 code explanation: add a benchmark-history readiness gate before treating model-evaluation history as promotion-ready evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

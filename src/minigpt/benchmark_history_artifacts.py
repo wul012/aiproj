@@ -51,6 +51,7 @@ def write_benchmark_history_csv(report: dict[str, Any], path: str | Path) -> Non
 
 def render_benchmark_history_markdown(report: dict[str, Any]) -> str:
     summary = _summary(report)
+    requirement = _readiness_requirement(report)
     lines = [
         f"# {_md(report.get('title', 'MiniGPT benchmark history'))}",
         "",
@@ -61,6 +62,10 @@ def render_benchmark_history_markdown(report: dict[str, Any]) -> str:
         f"- Blocked decisions: `{summary.get('blocked_count')}`",
         f"- Model quality claim: `{summary.get('model_quality_claim')}`",
         f"- Best candidate: `{summary.get('best_candidate_name')}`",
+        f"- Readiness requirement: `{requirement.get('status', 'not-evaluated')}`",
+        f"- Readiness decision: `{requirement.get('decision', 'not-evaluated')}`",
+        f"- Readiness exit code: `{requirement.get('exit_code', 0)}`",
+        f"- Readiness failed reasons: `{', '.join(_string_list(requirement.get('failed_reasons')))}`",
         "",
         "## Ledger",
         "",
@@ -98,6 +103,7 @@ def write_benchmark_history_markdown(report: dict[str, Any], path: str | Path) -
 
 def render_benchmark_history_html(report: dict[str, Any]) -> str:
     summary = _summary(report)
+    requirement = _readiness_requirement(report)
     stats = [
         ("Entries", summary.get("entry_count")),
         ("Promote", summary.get("promote_count")),
@@ -105,6 +111,8 @@ def render_benchmark_history_html(report: dict[str, Any]) -> str:
         ("Blocked", summary.get("blocked_count")),
         ("Model claim", summary.get("model_quality_claim")),
         ("Best candidate", summary.get("best_candidate_name")),
+        ("Readiness", requirement.get("status", "not-evaluated")),
+        ("Readiness exit", requirement.get("exit_code", 0)),
     ]
     rows = "".join(_entry_row(item) for item in _ledger_entries(report))
     return "\n".join(
@@ -121,6 +129,7 @@ def render_benchmark_history_html(report: dict[str, Any]) -> str:
             "<body>",
             f"<header><h1>{_e(report.get('title', 'MiniGPT benchmark history'))}</h1><p>Tracks scorecard comparison and promotion-decision history without claiming broad model quality from tiny smoke evidence.</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
+            _readiness_requirement_section(requirement),
             "<section><h2>Ledger</h2><table><tr><th>Name</th><th>Baseline</th><th>Candidate</th><th>Decision</th><th>Readiness</th><th>Rubric Delta</th><th>Cases</th><th>Gen Flags</th><th>Boundary</th></tr>"
             + rows
             + "</table></section>",
@@ -159,6 +168,11 @@ def _summary(report: dict[str, Any]) -> dict[str, Any]:
     return dict(value) if isinstance(value, dict) else {}
 
 
+def _readiness_requirement(report: dict[str, Any]) -> dict[str, Any]:
+    value = report.get("readiness_requirement")
+    return dict(value) if isinstance(value, dict) else {}
+
+
 def _ledger_entries(report: dict[str, Any]) -> list[dict[str, Any]]:
     value = report.get("entries")
     return [dict(item) for item in value if isinstance(item, dict)] if isinstance(value, list) else []
@@ -185,6 +199,26 @@ def _list_section(title: str, items: Any) -> str:
     if not values:
         return f"<section><h2>{_e(title)}</h2><p class=\"muted\">None.</p></section>"
     return f"<section><h2>{_e(title)}</h2><ul>" + "".join(f"<li>{_e(item)}</li>" for item in values) + "</ul></section>"
+
+
+def _readiness_requirement_section(requirement: dict[str, Any]) -> str:
+    if not requirement:
+        return '<section><h2>Readiness Requirement</h2><p class="muted">Not evaluated.</p></section>'
+    rows = [
+        ("Status", requirement.get("status")),
+        ("Decision", requirement.get("decision")),
+        ("Exit code", requirement.get("exit_code")),
+        ("Ready count", requirement.get("ready_count")),
+        ("Min ready entries", requirement.get("min_ready_entries")),
+        ("Evidence kind", requirement.get("evidence_kind")),
+        ("Require real benchmark", requirement.get("require_real_benchmark")),
+        ("Failed reasons", ", ".join(_string_list(requirement.get("failed_reasons")))),
+    ]
+    return (
+        "<section><h2>Readiness Requirement</h2><table>"
+        + "".join(f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows)
+        + "</table></section>"
+    )
 
 
 def _stat(label: str, value: Any) -> str:

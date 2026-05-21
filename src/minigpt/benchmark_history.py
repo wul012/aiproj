@@ -42,6 +42,8 @@ def build_benchmark_history(
     decision_paths: list[str | Path] | None = None,
     names: list[str] | None = None,
     evidence_kind: str = "real-benchmark",
+    min_ready_entries: int = 1,
+    require_real_benchmark: bool = True,
     title: str = "MiniGPT benchmark history",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -58,14 +60,60 @@ def build_benchmark_history(
         for index, comparison in enumerate(comparisons)
     ]
     summary = _summary(entries)
+    readiness_requirement = build_benchmark_history_readiness_requirement(
+        summary,
+        evidence_kind=evidence_kind,
+        min_ready_entries=min_ready_entries,
+        require_real_benchmark=require_real_benchmark,
+    )
     return {
         "schema_version": 1,
         "title": title,
         "generated_at": generated_at or utc_now(),
         "evidence_kind": evidence_kind,
         "summary": summary,
+        "readiness_requirement": readiness_requirement,
         "entries": entries,
         "recommendations": _recommendations(summary, entries),
+    }
+
+
+def build_benchmark_history_readiness_requirement(
+    summary: dict[str, Any],
+    *,
+    evidence_kind: str,
+    min_ready_entries: int = 1,
+    require_real_benchmark: bool = True,
+) -> dict[str, Any]:
+    ready_count = _int(summary.get("ready_count"))
+    entry_count = _int(summary.get("entry_count"))
+    case_regression_count = _int(summary.get("case_regression_entry_count"))
+    flag_regression_count = _int(summary.get("generation_quality_flag_regression_entry_count"))
+    minimum_ready = max(0, int(min_ready_entries))
+    failed_reasons: list[str] = []
+    if entry_count == 0:
+        failed_reasons.append("missing_history_entries")
+    if ready_count < minimum_ready:
+        failed_reasons.append("insufficient_ready_entries")
+    if require_real_benchmark and evidence_kind != "real-benchmark":
+        failed_reasons.append("not_real_benchmark_evidence")
+    if case_regression_count:
+        failed_reasons.append("case_regression_entries")
+    if flag_regression_count:
+        failed_reasons.append("generation_quality_flag_regressions")
+    status = "pass" if not failed_reasons else "fail"
+    return {
+        "status": status,
+        "decision": "continue" if status == "pass" else "stop",
+        "exit_code": 0 if status == "pass" else 1,
+        "min_ready_entries": minimum_ready,
+        "ready_count": ready_count,
+        "entry_count": entry_count,
+        "evidence_kind": evidence_kind,
+        "require_real_benchmark": bool(require_real_benchmark),
+        "case_regression_entry_count": case_regression_count,
+        "generation_quality_flag_regression_entry_count": flag_regression_count,
+        "failed_reasons": failed_reasons,
     }
 
 
@@ -247,6 +295,7 @@ def first_present(*values: Any) -> Any:
 
 __all__ = [
     "build_benchmark_history",
+    "build_benchmark_history_readiness_requirement",
     "load_benchmark_comparison",
     "load_benchmark_decision",
     "render_benchmark_history_html",

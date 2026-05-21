@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt import build_benchmark_history as facade_build_benchmark_history
 from minigpt.benchmark_history import (
     build_benchmark_history,
+    build_benchmark_history_readiness_requirement,
     render_benchmark_history_html,
     render_benchmark_history_markdown,
     write_benchmark_history_outputs,
@@ -107,6 +108,8 @@ class BenchmarkHistoryTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ready_count"], 1)
             self.assertEqual(report["summary"]["best_candidate_name"], "candidate")
             self.assertEqual(report["summary"]["model_quality_claim"], "candidate_evidence")
+            self.assertEqual(report["readiness_requirement"]["status"], "pass")
+            self.assertEqual(report["readiness_requirement"]["exit_code"], 0)
             entry = report["entries"][0]
             self.assertEqual(entry["name"], "round 1")
             self.assertEqual(entry["baseline_name"], "baseline")
@@ -126,6 +129,8 @@ class BenchmarkHistoryTests(unittest.TestCase):
             self.assertEqual(report["summary"]["review_count"], 1)
             self.assertEqual(report["summary"]["generation_quality_flag_regression_entry_count"], 1)
             self.assertEqual(report["summary"]["model_quality_claim"], "not_claimed")
+            self.assertEqual(report["readiness_requirement"]["status"], "fail")
+            self.assertIn("not_real_benchmark_evidence", report["readiness_requirement"]["failed_reasons"])
             self.assertEqual(report["entries"][0]["promotion_readiness"], "review")
             self.assertEqual(report["entries"][0]["boundary"], "tiny-smoke-plumbing-evidence")
             self.assertIn("Tiny-smoke history is plumbing evidence", " ".join(report["recommendations"]))
@@ -145,8 +150,27 @@ class BenchmarkHistoryTests(unittest.TestCase):
             self.assertIn("benchmark_history", Path(outputs["json"]).name)
             self.assertIn("rubric_avg_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Ledger", markdown)
+            self.assertIn("Readiness requirement: `pass`", markdown)
             self.assertIn("&lt;History&gt;", html)
+            self.assertIn("Readiness Requirement", html)
             self.assertIn("standard-benchmark-candidate-evidence", html)
+
+    def test_readiness_requirement_can_require_more_ready_entries(self) -> None:
+        requirement = build_benchmark_history_readiness_requirement(
+            {
+                "entry_count": 1,
+                "ready_count": 1,
+                "case_regression_entry_count": 0,
+                "generation_quality_flag_regression_entry_count": 0,
+            },
+            evidence_kind="real-benchmark",
+            min_ready_entries=2,
+        )
+
+        self.assertEqual(requirement["status"], "fail")
+        self.assertEqual(requirement["decision"], "stop")
+        self.assertEqual(requirement["exit_code"], 1)
+        self.assertIn("insufficient_ready_entries", requirement["failed_reasons"])
 
     def test_cli_writes_history_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -175,7 +199,40 @@ class BenchmarkHistoryTests(unittest.TestCase):
 
             self.assertIn("entry_count=1", completed.stdout)
             self.assertIn("model_quality_claim=candidate_evidence", completed.stdout)
+            self.assertIn("readiness_requirement_status=pass", completed.stdout)
             self.assertTrue((out_dir / "benchmark_history.json").is_file())
+
+    def test_cli_can_fail_on_missing_real_ready_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            comparison, decision = make_comparison(root, "tiny", decision_status="review", rubric_delta=1.0, flags_delta=2)
+            out_dir = root / "history"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "build_benchmark_history.py"),
+                    str(comparison),
+                    "--decisions",
+                    str(decision),
+                    "--evidence-kind",
+                    "tiny-smoke",
+                    "--require-ready-history",
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("readiness_requirement_status=fail", completed.stdout)
+            self.assertIn("readiness_requirement_exit_code=1", completed.stdout)
+            self.assertIn("not_real_benchmark_evidence", completed.stdout)
+            payload = json.loads((out_dir / "benchmark_history.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["readiness_requirement"]["status"], "fail")
 
     def test_directory_resolution_accepts_smoke_style_subdirectories(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
