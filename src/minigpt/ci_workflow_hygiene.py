@@ -88,6 +88,9 @@ class CiWorkflowSummary(TypedDict):
     missing_step_count: int
     required_order_count: int
     order_violation_count: int
+    tiny_scorecard_plan_digest_gate_present: bool
+    tiny_scorecard_plan_digest_gate_order_ready: bool
+    tiny_scorecard_plan_digest_gate_ready: bool
     python_version: str
 
 
@@ -121,6 +124,11 @@ def build_ci_workflow_hygiene_report(
     forbidden_env_hits = _forbidden_env_hits(text)
     missing_steps = [check for check in checks if check.get("category") == "required_command" and check.get("status") != "pass"]
     order_violations = [check for check in checks if check.get("category") == "required_order" and check.get("status") != "pass"]
+    plan_digest_gate_present = _check_passed(checks, "command:ci_tiny_scorecard_plan_digest_check")
+    plan_digest_gate_order_ready = _check_passed(checks, "order:ci_tiny_scorecard_plan_check_after_smoke") and _check_passed(
+        checks,
+        "order:ci_tiny_scorecard_plan_check_before_coverage",
+    )
     summary: CiWorkflowSummary = {
         "status": "pass" if not failed_checks else "fail",
         "decision": "continue_with_node24_native_ci" if not failed_checks else "fix_ci_workflow_hygiene",
@@ -136,6 +144,9 @@ def build_ci_workflow_hygiene_report(
         "missing_step_count": len(missing_steps),
         "required_order_count": len(REQUIRED_COMMAND_ORDER),
         "order_violation_count": len(order_violations),
+        "tiny_scorecard_plan_digest_gate_present": plan_digest_gate_present,
+        "tiny_scorecard_plan_digest_gate_order_ready": plan_digest_gate_order_ready,
+        "tiny_scorecard_plan_digest_gate_ready": plan_digest_gate_present and plan_digest_gate_order_ready,
         "python_version": _python_version(text),
     }
     return {
@@ -279,6 +290,10 @@ def _python_version(text: str) -> str:
 
 def _forbidden_env_hits(text: str) -> list[str]:
     return [item for item in FORBIDDEN_ENV_VARS if item in text]
+
+
+def _check_passed(checks: list[CiWorkflowCheck], check_id: str) -> bool:
+    return any(item.get("id") == check_id and item.get("status") == "pass" for item in checks)
 
 
 def _first_line_number(text: str, fragment: str) -> int:

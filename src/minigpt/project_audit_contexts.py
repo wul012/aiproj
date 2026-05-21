@@ -90,12 +90,14 @@ def build_ci_workflow_hygiene_check(
     failed_checks = summary.get("failed_check_count")
     missing_steps = summary.get("missing_step_count")
     order_violations = summary.get("order_violation_count")
+    plan_digest_gate_ready = summary.get("tiny_scorecard_plan_digest_gate_ready")
     forbidden_env = summary.get("forbidden_env_count")
     audit_status = "pass" if status == "pass" else "warn"
     detail = (
         f"status={status}; actions={_fmt_any(action_count)}; node24_native={_fmt_any(node24_actions)}; "
         f"failed_checks={_fmt_any(failed_checks)}; forbidden_env={_fmt_any(forbidden_env)}; "
-        f"missing_steps={_fmt_any(missing_steps)}; order_violations={_fmt_any(order_violations)}."
+        f"missing_steps={_fmt_any(missing_steps)}; order_violations={_fmt_any(order_violations)}; "
+        f"tiny_scorecard_plan_digest_gate_ready={_fmt_any(plan_digest_gate_ready)}."
     )
     return _check(
         "ci_workflow_hygiene",
@@ -112,6 +114,9 @@ def build_ci_workflow_hygiene_check(
             "missing_step_count": missing_steps,
             "required_order_count": summary.get("required_order_count"),
             "order_violation_count": order_violations,
+            "tiny_scorecard_plan_digest_gate_present": summary.get("tiny_scorecard_plan_digest_gate_present"),
+            "tiny_scorecard_plan_digest_gate_order_ready": summary.get("tiny_scorecard_plan_digest_gate_order_ready"),
+            "tiny_scorecard_plan_digest_gate_ready": plan_digest_gate_ready,
             "python_version": summary.get("python_version"),
             "path": None if ci_workflow_hygiene_path is None else str(ci_workflow_hygiene_path),
         },
@@ -129,6 +134,9 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
             "failed_check_count": None,
             "required_order_count": None,
             "order_violation_count": None,
+            "tiny_scorecard_plan_digest_gate_present": None,
+            "tiny_scorecard_plan_digest_gate_order_ready": None,
+            "tiny_scorecard_plan_digest_gate_ready": None,
         }
     summary = _dict(ci_workflow_hygiene.get("summary"))
     return {
@@ -144,6 +152,9 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
         "missing_step_count": summary.get("missing_step_count"),
         "required_order_count": summary.get("required_order_count"),
         "order_violation_count": summary.get("order_violation_count"),
+        "tiny_scorecard_plan_digest_gate_present": summary.get("tiny_scorecard_plan_digest_gate_present"),
+        "tiny_scorecard_plan_digest_gate_order_ready": summary.get("tiny_scorecard_plan_digest_gate_order_ready"),
+        "tiny_scorecard_plan_digest_gate_ready": summary.get("tiny_scorecard_plan_digest_gate_ready"),
         "python_version": summary.get("python_version"),
     }
 

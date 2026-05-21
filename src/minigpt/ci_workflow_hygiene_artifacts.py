@@ -47,6 +47,9 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "forbidden_env_count",
         "missing_step_count",
         "order_violation_count",
+        "tiny_scorecard_plan_digest_gate_present",
+        "tiny_scorecard_plan_digest_gate_order_ready",
+        "tiny_scorecard_plan_digest_gate_ready",
         "python_version",
     ]:
         lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
@@ -94,6 +97,7 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Node 24 native", summary.get("node24_native_action_count")),
         ("Forbidden env", summary.get("forbidden_env_count")),
         ("Order violations", summary.get("order_violation_count")),
+        ("Plan digest gate", summary.get("tiny_scorecard_plan_digest_gate_ready")),
         ("Python", summary.get("python_version")),
     ]
     return "\n".join(

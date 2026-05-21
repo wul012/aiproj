@@ -41,6 +41,9 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertEqual(report["summary"]["forbidden_env_count"], 0)
         self.assertEqual(report["summary"]["missing_step_count"], 0)
         self.assertEqual(report["summary"]["order_violation_count"], 0)
+        self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
+        self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
+        self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
         self.assertEqual(report["summary"]["python_version"], "3.11")
         self.assertIn("actions/checkout", {item["repository"] for item in report["actions"]})
         self.assertTrue(all(item["status"] == "pass" for item in report["checks"]))
@@ -105,6 +108,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
             self.assertEqual(report["summary"]["missing_step_count"], 6)
             self.assertEqual(report["summary"]["required_step_count"], 8)
+            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
@@ -184,6 +188,9 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
             self.assertEqual(report["summary"]["order_violation_count"], 3)
+            self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
+            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
+            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             failed_order_ids = {item["id"] for item in report["checks"] if item["category"] == "required_order" and item["status"] == "fail"}
             self.assertIn("order:promoted_seed_handoff_assurance_smoke_before_coverage", failed_order_ids)
             self.assertIn("order:tiny_scorecard_inline_check_smoke_before_coverage", failed_order_ids)
@@ -226,6 +233,9 @@ class CIWorkflowTests(unittest.TestCase):
             failed_order_ids = {item["id"] for item in report["checks"] if item["category"] == "required_order" and item["status"] == "fail"}
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
+            self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
+            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
+            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
@@ -239,6 +249,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("actions/setup-python", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("CI &lt;workflow&gt;", render_ci_workflow_hygiene_html(report))
             self.assertIn("continue_with_node24_native_ci", render_ci_workflow_hygiene_markdown(report))
+            self.assertIn("tiny_scorecard_plan_digest_gate_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("order_violation_count", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 
     def test_ci_workflow_module_reexports_artifact_writers(self) -> None:

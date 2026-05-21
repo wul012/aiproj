@@ -117,6 +117,11 @@ def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
         "node24_native_action_count": 2 if status == "pass" else 0,
         "forbidden_env_count": 0 if status == "pass" else 1,
         "missing_step_count": 0 if status == "pass" else 1,
+        "required_order_count": 4,
+        "order_violation_count": 0 if status == "pass" else 1,
+        "tiny_scorecard_plan_digest_gate_present": status == "pass",
+        "tiny_scorecard_plan_digest_gate_order_ready": status == "pass",
+        "tiny_scorecard_plan_digest_gate_ready": status == "pass",
         "python_version": "3.11",
     }
     report = {
@@ -180,11 +185,13 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["request_history_records"], 4)
             self.assertEqual(audit["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(audit["summary"]["ci_workflow_failed_checks"], 0)
+            self.assertTrue(audit["summary"]["ci_tiny_scorecard_plan_digest_gate_ready"])
             self.assertEqual(audit["summary"]["test_coverage_status"], "pass")
             self.assertEqual(audit["summary"]["test_coverage_percent"], 90.16)
             self.assertEqual(audit["summary"]["test_coverage_fail_under"], 80.0)
             self.assertEqual(audit["request_history_context"]["status"], "pass")
             self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
+            self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
             self.assertIn("ci_workflow_hygiene", {check["id"] for check in audit["checks"]})
@@ -232,6 +239,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(check["status"], "warn")
             self.assertIn("status=fail", check["detail"])
             self.assertIn("failed_checks=3", check["detail"])
+            self.assertIn("tiny_scorecard_plan_digest_gate_ready=False", check["detail"])
             self.assertIn("Generate or review ci_workflow_hygiene.json", " ".join(audit["recommendations"]))
 
     def test_build_project_audit_warns_for_test_coverage_gate_fail_status(self) -> None:
@@ -328,6 +336,9 @@ class ProjectAuditTests(unittest.TestCase):
                 "missing_step_count": 1,
                 "required_order_count": 1,
                 "order_violation_count": 1,
+                "tiny_scorecard_plan_digest_gate_present": True,
+                "tiny_scorecard_plan_digest_gate_order_ready": False,
+                "tiny_scorecard_plan_digest_gate_ready": False,
                 "python_version": "3.11",
             },
         }
@@ -362,8 +373,10 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertIn("order_violations=1", ci_check["detail"])
         self.assertEqual(ci_check["evidence"]["decision"], "fix_ci_workflow_hygiene")
         self.assertEqual(ci_check["evidence"]["order_violation_count"], 1)
+        self.assertFalse(ci_check["evidence"]["tiny_scorecard_plan_digest_gate_ready"])
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["order_violation_count"], 1)
+        self.assertFalse(build_ci_workflow_context(ci_hygiene)["tiny_scorecard_plan_digest_gate_ready"])
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
         self.assertFalse(build_ci_workflow_context(None)["available"])
 

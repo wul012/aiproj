@@ -128,6 +128,9 @@
 355-v341-ci-tiny-scorecard-plan-digest-gate.md
  -> v341 code explanation: promote the CI tiny scorecard plan digest checker into GitHub Actions and CI workflow hygiene order rules.
 
+356-v342-ci-tiny-scorecard-plan-digest-summary.md
+ -> v342 code explanation: lift the CI tiny scorecard plan digest gate into CI workflow hygiene summary fields and project audit context.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
