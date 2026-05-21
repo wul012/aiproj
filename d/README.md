@@ -209,6 +209,9 @@ d/365/解释/说明.md
 d/366/图片
 d/366/解释/说明.md
  -> v366 project audit benchmark readiness 的运行截图和解释
+d/367/图片
+d/367/解释/说明.md
+ -> v367 release bundle benchmark readiness 的运行截图和解释
 ```
 
 写入规则：

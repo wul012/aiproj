@@ -51,6 +51,12 @@ def main() -> None:
     print(f"benchmark_history_entries={summary.get('benchmark_history_entries')}")
     print(f"benchmark_history_ready={summary.get('benchmark_history_ready')}")
     print(f"benchmark_history_boundary={summary.get('benchmark_history_latest_boundary')}")
+    print(f"benchmark_history_readiness_requirement_status={summary.get('benchmark_history_readiness_requirement_status')}")
+    print(f"benchmark_history_readiness_requirement_exit_code={summary.get('benchmark_history_readiness_requirement_exit_code')}")
+    print(
+        "benchmark_history_readiness_requirement_failed_reasons="
+        + json.dumps(summary.get("benchmark_history_readiness_requirement_failed_reasons") or [], ensure_ascii=False)
+    )
     print(f"ci_workflow_status={summary.get('ci_workflow_status')}")
     print(f"ci_workflow_failed_checks={summary.get('ci_workflow_failed_checks')}")
     print(f"ci_workflow_required_order_count={summary.get('ci_workflow_required_order_count')}")

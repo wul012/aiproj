@@ -83,6 +83,9 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "benchmark_history_blocked": 0,
             "benchmark_history_case_regressions": 0,
             "benchmark_history_generation_flag_regressions": 0,
+            "benchmark_history_readiness_requirement_status": "pass",
+            "benchmark_history_readiness_requirement_exit_code": 0,
+            "benchmark_history_readiness_requirement_failed_reasons": [],
             "benchmark_history_model_quality_claim": "candidate_evidence",
             "benchmark_history_latest_boundary": "standard-benchmark-candidate-evidence",
             "ci_workflow_status": "pass",
@@ -123,6 +126,10 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "generation_quality_flag_regression_entry_count": 0,
             "best_candidate_name": name,
             "best_entry_name": "round-1",
+            "readiness_requirement_status": "pass",
+            "readiness_requirement_decision": "continue",
+            "readiness_requirement_exit_code": 0,
+            "readiness_requirement_failed_reasons": [],
             "model_quality_claim": "candidate_evidence",
             "latest_boundary": "standard-benchmark-candidate-evidence",
             "latest_decision_status": "promote",
@@ -192,6 +199,17 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "best_candidate_name": name,
             "best_entry_name": "round-1",
             "model_quality_claim": "candidate_evidence",
+        },
+        "readiness_requirement": {
+            "status": "pass",
+            "decision": "continue",
+            "exit_code": 0,
+            "min_ready_entries": 1,
+            "ready_count": 1,
+            "entry_count": 1,
+            "evidence_kind": "real-benchmark",
+            "require_real_benchmark": True,
+            "failed_reasons": [],
         },
         "entries": [
             {
@@ -291,6 +309,9 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(bundle["summary"]["benchmark_history_entries"], 1)
             self.assertEqual(bundle["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_status"], "pass")
+            self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
+            self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_failed_reasons"], [])
             self.assertEqual(bundle["summary"]["benchmark_history_latest_boundary"], "standard-benchmark-candidate-evidence")
             self.assertEqual(bundle["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(bundle["summary"]["ci_workflow_failed_checks"], 0)
@@ -307,6 +328,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("test_coverage_report_json", {item["key"] for item in bundle["artifacts"]})
             self.assertEqual(bundle["ci_workflow_context"]["status"], "pass")
             self.assertEqual(bundle["benchmark_history_context"]["latest_decision_status"], "promote")
+            self.assertEqual(bundle["benchmark_history_context"]["readiness_requirement_status"], "pass")
             self.assertEqual(bundle["ci_workflow_context"]["order_violation_count"], 0)
             self.assertEqual(bundle["test_coverage_context"]["coverage_gap"], 0.0)
             self.assertGreaterEqual(bundle["summary"]["available_artifacts"], 10)
@@ -372,6 +394,42 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["benchmark_history_latest_boundary"], "tiny-smoke-plumbing-evidence")
             self.assertEqual(bundle["benchmark_history_context"]["model_quality_claim"], "not_claimed")
 
+    def test_build_release_bundle_warns_when_history_requirement_fails_even_if_audit_is_stale_pass(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path, model_path, audit_path, _request_summary_path, benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            history = json.loads(benchmark_history_path.read_text(encoding="utf-8"))
+            history["readiness_requirement"] = {
+                "status": "fail",
+                "decision": "stop",
+                "exit_code": 1,
+                "min_ready_entries": 2,
+                "ready_count": 1,
+                "entry_count": 1,
+                "evidence_kind": "real-benchmark",
+                "require_real_benchmark": True,
+                "failed_reasons": ["insufficient_ready_entries"],
+            }
+            write_json(benchmark_history_path, history)
+
+            bundle = build_release_bundle(
+                registry_path,
+                model_card_path=model_path,
+                audit_path=audit_path,
+                benchmark_history_path=benchmark_history_path,
+            )
+
+            self.assertEqual(bundle["summary"]["release_status"], "review-needed")
+            self.assertEqual(bundle["summary"]["audit_status"], "pass")
+            self.assertEqual(bundle["summary"]["benchmark_history_status"], "warn")
+            self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_status"], "fail")
+            self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_exit_code"], 1)
+            self.assertEqual(
+                bundle["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["insufficient_ready_entries"],
+            )
+            self.assertEqual(bundle["benchmark_history_context"]["readiness_requirement_status"], "fail")
+
     def test_build_release_bundle_marks_missing_audit(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -397,9 +455,13 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("## Evidence Artifacts", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("CI workflow status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history readiness", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT release bundle", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench history", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_release_bundle_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

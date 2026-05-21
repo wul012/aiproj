@@ -285,7 +285,13 @@ def _build_summary(
     audit_ci_context = _dict(audit.get("ci_workflow_context")) if isinstance(audit, dict) else {}
     coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
     audit_status = audit_summary.get("overall_status")
-    release_status = _release_status(audit_status, audit_summary.get("fail_count"), audit_summary.get("warn_count"))
+    benchmark_history_status = _benchmark_history_summary_status(audit_summary.get("benchmark_history_status"), benchmark_context)
+    release_status = _release_status(
+        audit_status,
+        audit_summary.get("fail_count"),
+        audit_summary.get("warn_count"),
+        benchmark_history_status,
+    )
     return {
         "release_status": release_status,
         "audit_status": audit_status or "missing",
@@ -296,7 +302,7 @@ def _build_summary(
         "ready_runs": audit_summary.get("ready_runs") or model_summary.get("ready_runs"),
         "request_history_status": audit_summary.get("request_history_status") or request_summary.get("status"),
         "request_history_records": audit_summary.get("request_history_records") or request_summary.get("total_log_records"),
-        "benchmark_history_status": audit_summary.get("benchmark_history_status") or _status_from_benchmark_context(benchmark_context),
+        "benchmark_history_status": benchmark_history_status,
         "benchmark_history_entries": first_present(audit_summary.get("benchmark_history_entries"), benchmark_context.get("entry_count")),
         "benchmark_history_ready": first_present(audit_summary.get("benchmark_history_ready"), benchmark_context.get("ready_count")),
         "benchmark_history_review": first_present(audit_summary.get("benchmark_history_review"), benchmark_context.get("review_count")),
@@ -308,6 +314,18 @@ def _build_summary(
         "benchmark_history_generation_flag_regressions": first_present(
             audit_summary.get("benchmark_history_generation_flag_regressions"),
             benchmark_context.get("generation_quality_flag_regression_entry_count"),
+        ),
+        "benchmark_history_readiness_requirement_status": first_present(
+            benchmark_context.get("readiness_requirement_status"),
+            audit_summary.get("benchmark_history_readiness_requirement_status"),
+        ),
+        "benchmark_history_readiness_requirement_exit_code": first_present(
+            benchmark_context.get("readiness_requirement_exit_code"),
+            audit_summary.get("benchmark_history_readiness_requirement_exit_code"),
+        ),
+        "benchmark_history_readiness_requirement_failed_reasons": first_present(
+            benchmark_context.get("readiness_requirement_failed_reasons"),
+            audit_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
         ),
         "benchmark_history_model_quality_claim": first_present(
             audit_summary.get("benchmark_history_model_quality_claim"),
@@ -332,14 +350,18 @@ def _build_summary(
     }
 
 
-def _release_status(audit_status: Any, fail_count: Any, warn_count: Any) -> str:
+def _release_status(audit_status: Any, fail_count: Any, warn_count: Any, benchmark_history_status: Any = None) -> str:
     if audit_status == "pass":
+        if benchmark_history_status == "warn":
+            return "review-needed"
         return "release-ready"
     if audit_status == "warn":
         return "review-needed"
     if audit_status == "fail" or fail_count:
         return "blocked"
     if warn_count:
+        return "review-needed"
+    if benchmark_history_status == "warn":
         return "review-needed"
     return "needs-audit"
 
@@ -510,6 +532,7 @@ def _benchmark_history_context(benchmark_history: dict[str, Any] | None, audit: 
     audit_context = _dict(audit.get("benchmark_history_context")) if isinstance(audit, dict) else {}
     if isinstance(benchmark_history, dict):
         summary = _dict(benchmark_history.get("summary"))
+        readiness = _dict(benchmark_history.get("readiness_requirement"))
         entries = _list_of_dicts(benchmark_history.get("entries"))
         latest = entries[-1] if entries else {}
         return {
@@ -525,6 +548,11 @@ def _benchmark_history_context(benchmark_history: dict[str, Any] | None, audit: 
             "best_candidate_name": summary.get("best_candidate_name"),
             "best_entry_name": summary.get("best_entry_name"),
             "model_quality_claim": summary.get("model_quality_claim"),
+            "readiness_requirement_status": first_present(readiness.get("status"), audit_context.get("readiness_requirement_status")),
+            "readiness_requirement_decision": first_present(readiness.get("decision"), audit_context.get("readiness_requirement_decision")),
+            "readiness_requirement_exit_code": first_present(readiness.get("exit_code"), audit_context.get("readiness_requirement_exit_code")),
+            "readiness_requirement_failed_reasons": _string_list(readiness.get("failed_reasons"))
+            or _string_list(audit_context.get("readiness_requirement_failed_reasons")),
             "latest_boundary": latest.get("boundary") or audit_context.get("latest_boundary"),
             "latest_decision_status": latest.get("decision_status") or audit_context.get("latest_decision_status"),
             "latest_promotion_readiness": latest.get("promotion_readiness") or audit_context.get("latest_promotion_readiness"),
@@ -535,6 +563,9 @@ def _benchmark_history_context(benchmark_history: dict[str, Any] | None, audit: 
         "available": False,
         "entry_count": None,
         "ready_count": None,
+        "readiness_requirement_status": None,
+        "readiness_requirement_exit_code": None,
+        "readiness_requirement_failed_reasons": [],
         "model_quality_claim": None,
         "latest_boundary": None,
     }
@@ -551,11 +582,20 @@ def _status_from_benchmark_context(context: dict[str, Any]) -> str | None:
     )
     if any(_int(context.get(key)) > 0 for key in regression_keys):
         return "warn"
+    if context.get("readiness_requirement_status") == "fail" or _int(context.get("readiness_requirement_exit_code")) > 0:
+        return "warn"
     if _int(context.get("entry_count")) == 0 or _int(context.get("ready_count")) == 0:
         return "warn"
     if context.get("model_quality_claim") == "not_claimed":
         return "warn"
     return "pass"
+
+
+def _benchmark_history_summary_status(audit_status: Any, context: dict[str, Any]) -> str | None:
+    context_status = _status_from_benchmark_context(context)
+    if audit_status == "warn" or context_status == "warn":
+        return "warn"
+    return audit_status or context_status
 
 
 def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict[str, Any] | None) -> dict[str, Any]:
