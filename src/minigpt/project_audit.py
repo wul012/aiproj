@@ -13,6 +13,8 @@ from minigpt.project_audit_artifacts import (
     write_project_audit_outputs,
 )
 from minigpt.project_audit_contexts import (
+    build_benchmark_history_check,
+    build_benchmark_history_context,
     build_ci_workflow_context,
     build_ci_workflow_hygiene_check,
     build_request_history_context,
@@ -38,6 +40,7 @@ def build_project_audit(
     *,
     model_card_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
+    benchmark_history_path: str | Path | None = None,
     ci_workflow_hygiene_path: str | Path | None = None,
     test_coverage_report_path: str | Path | None = None,
     title: str = "MiniGPT project audit",
@@ -48,12 +51,18 @@ def build_project_audit(
     registry = _read_required_json(registry_file)
     model_card_file = _resolve_model_card_path(registry_file, model_card_path)
     request_history_summary_file = _resolve_request_history_summary_path(registry_file, request_history_summary_path)
+    benchmark_history_file = _resolve_benchmark_history_path(registry_file, benchmark_history_path)
     ci_workflow_hygiene_file = _resolve_ci_workflow_hygiene_path(registry_file, ci_workflow_hygiene_path)
     test_coverage_report_file = _resolve_test_coverage_report_path(registry_file, test_coverage_report_path)
     model_card = _read_json(model_card_file, warnings, "model card") if model_card_file is not None else None
     request_history_summary = (
         _read_json(request_history_summary_file, warnings, "request history summary")
         if request_history_summary_file is not None
+        else None
+    )
+    benchmark_history = (
+        _read_json(benchmark_history_file, warnings, "benchmark history")
+        if benchmark_history_file is not None
         else None
     )
     ci_workflow_hygiene = (
@@ -72,6 +81,8 @@ def build_project_audit(
         model_card if isinstance(model_card, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
         request_history_summary_file,
+        benchmark_history if isinstance(benchmark_history, dict) else None,
+        benchmark_history_file,
         ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
         ci_workflow_hygiene_file,
         test_coverage_report if isinstance(test_coverage_report, dict) else None,
@@ -83,6 +94,7 @@ def build_project_audit(
         registry,
         model_card if isinstance(model_card, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
+        benchmark_history if isinstance(benchmark_history, dict) else None,
         ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
         test_coverage_report if isinstance(test_coverage_report, dict) else None,
         runs,
@@ -95,11 +107,13 @@ def build_project_audit(
         "registry_path": str(registry_file),
         "model_card_path": None if model_card_file is None else str(model_card_file),
         "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
+        "benchmark_history_path": None if benchmark_history_file is None else str(benchmark_history_file),
         "ci_workflow_hygiene_path": None if ci_workflow_hygiene_file is None else str(ci_workflow_hygiene_file),
         "test_coverage_report_path": None if test_coverage_report_file is None else str(test_coverage_report_file),
         "summary": summary,
         "checks": checks,
         "request_history_context": build_request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
+        "benchmark_history_context": build_benchmark_history_context(benchmark_history if isinstance(benchmark_history, dict) else None),
         "ci_workflow_context": build_ci_workflow_context(ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None),
         "test_coverage_context": build_test_coverage_context(test_coverage_report if isinstance(test_coverage_report, dict) else None),
         "runs": runs,
@@ -129,6 +143,20 @@ def _resolve_request_history_summary_path(registry_path: Path, request_history_s
         registry_path.parent / "request_history_summary.json",
         registry_path.parent / "request-history-summary" / "request_history_summary.json",
         registry_path.parent.parent / "request-history-summary" / "request_history_summary.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_benchmark_history_path(registry_path: Path, benchmark_history_path: str | Path | None) -> Path | None:
+    if benchmark_history_path is not None:
+        return Path(benchmark_history_path)
+    candidates = [
+        registry_path.parent / "benchmark_history.json",
+        registry_path.parent / "benchmark-history" / "benchmark_history.json",
+        registry_path.parent.parent / "benchmark-history" / "benchmark_history.json",
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -231,6 +259,8 @@ def _build_checks(
     model_card: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
     request_history_summary_path: Path | None,
+    benchmark_history: dict[str, Any] | None,
+    benchmark_history_path: Path | None,
     ci_workflow_hygiene: dict[str, Any] | None,
     ci_workflow_hygiene_path: Path | None,
     test_coverage_report: dict[str, Any] | None,
@@ -266,6 +296,7 @@ def _build_checks(
             f"{sum(1 for run in runs if run.get('status') == 'ready')} ready run(s).",
         ),
         build_request_history_summary_check(request_history_summary, request_history_summary_path),
+        build_benchmark_history_check(benchmark_history, benchmark_history_path),
         build_ci_workflow_hygiene_check(ci_workflow_hygiene, ci_workflow_hygiene_path),
         build_test_coverage_check(test_coverage_report, test_coverage_report_path),
     ]
@@ -321,6 +352,7 @@ def _summarize_checks(
     registry: dict[str, Any],
     model_card: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
+    benchmark_history: dict[str, Any] | None,
     ci_workflow_hygiene: dict[str, Any] | None,
     test_coverage_report: dict[str, Any] | None,
     runs: list[dict[str, Any]],
@@ -340,6 +372,7 @@ def _summarize_checks(
     ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
     coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
     best = _dict(registry.get("best_by_best_val_loss"))
+    history_context = build_benchmark_history_context(benchmark_history)
     return {
         "overall_status": overall,
         "score_percent": score,
@@ -356,6 +389,15 @@ def _summarize_checks(
         "request_history_records": request_summary.get("total_log_records"),
         "request_history_timeout_rate": request_summary.get("timeout_rate"),
         "request_history_error_rate": request_summary.get("error_rate"),
+        "benchmark_history_status": _benchmark_history_status(history_context),
+        "benchmark_history_entries": history_context.get("entry_count"),
+        "benchmark_history_ready": history_context.get("ready_count"),
+        "benchmark_history_review": history_context.get("review_count"),
+        "benchmark_history_blocked": history_context.get("blocked_count"),
+        "benchmark_history_case_regressions": history_context.get("case_regression_entry_count"),
+        "benchmark_history_generation_flag_regressions": history_context.get("generation_quality_flag_regression_entry_count"),
+        "benchmark_history_model_quality_claim": history_context.get("model_quality_claim"),
+        "benchmark_history_latest_boundary": history_context.get("latest_boundary"),
         "ci_workflow_status": ci_summary.get("status"),
         "ci_workflow_decision": ci_summary.get("decision"),
         "ci_workflow_failed_checks": ci_summary.get("failed_check_count"),
@@ -392,6 +434,8 @@ def _build_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]
             items.append("Promote at least one run to ready status by completing checkpoint, data quality, and eval artifacts.")
         elif check["id"] == "request_history_summary":
             items.append("Generate or review request_history_summary.json before using local playground activity as release evidence.")
+        elif check["id"] == "benchmark_history":
+            items.append("Generate or review benchmark_history.json before using repeated benchmark evidence as audit proof.")
         elif check["id"] == "ci_workflow_hygiene":
             items.append("Generate or review ci_workflow_hygiene.json before using CI workflow policy as release evidence.")
         elif check["id"] == "test_coverage_report":
@@ -405,6 +449,24 @@ def _build_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]
     elif summary.get("overall_status") == "fail":
         items.insert(0, "Fix failed audit checks before treating this MiniGPT state as release-ready.")
     return items
+
+
+def _benchmark_history_status(context: dict[str, Any]) -> str:
+    if not context.get("available"):
+        return "warn"
+    regression_keys = (
+        "review_count",
+        "blocked_count",
+        "case_regression_entry_count",
+        "generation_quality_flag_regression_entry_count",
+    )
+    if any(_int(context.get(key)) > 0 for key in regression_keys):
+        return "warn"
+    if _int(context.get("entry_count")) == 0 or _int(context.get("ready_count")) == 0:
+        return "warn"
+    if context.get("model_quality_claim") == "not_claimed":
+        return "warn"
+    return "pass"
 
 
 def _derive_status(run: dict[str, Any]) -> str:
@@ -443,3 +505,10 @@ def _rank_label(value: Any) -> str:
 
 def _pick(payload: dict[str, Any], key: str) -> Any:
     return payload.get(key) if isinstance(payload, dict) else None
+
+
+def _int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0

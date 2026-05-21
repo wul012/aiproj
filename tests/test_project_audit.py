@@ -11,6 +11,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt import project_audit, project_audit_artifacts
 from minigpt.project_audit_contexts import (
+    build_benchmark_history_check,
+    build_benchmark_history_context,
     build_ci_workflow_context,
     build_ci_workflow_hygiene_check,
     build_request_history_context,
@@ -106,6 +108,44 @@ def make_request_history_summary(root: Path, *, status: str = "pass") -> Path:
     return path
 
 
+def make_benchmark_history(root: Path, *, decision_status: str = "promote", evidence_kind: str = "real-benchmark") -> Path:
+    ready = decision_status == "promote" and evidence_kind != "tiny-smoke"
+    summary = {
+        "entry_count": 1,
+        "promote_count": 1 if decision_status == "promote" else 0,
+        "review_count": 1 if decision_status == "review" else 0,
+        "blocked_count": 1 if decision_status == "blocked" else 0,
+        "ready_count": 1 if ready else 0,
+        "case_regression_entry_count": 1 if decision_status == "review" else 0,
+        "generation_quality_flag_regression_entry_count": 0,
+        "best_candidate_name": "candidate",
+        "best_entry_name": "round-1",
+        "model_quality_claim": "not_claimed" if evidence_kind == "tiny-smoke" else "candidate_evidence",
+    }
+    report = {
+        "schema_version": 1,
+        "title": "MiniGPT benchmark history",
+        "evidence_kind": evidence_kind,
+        "summary": summary,
+        "entries": [
+            {
+                "name": "round-1",
+                "candidate_name": "candidate",
+                "decision_status": decision_status,
+                "promotion_readiness": "ready" if ready else "review",
+                "case_regression_count": summary["case_regression_entry_count"],
+                "generation_quality_total_flags_delta": 0,
+                "boundary": "tiny-smoke-plumbing-evidence"
+                if evidence_kind == "tiny-smoke"
+                else "standard-benchmark-candidate-evidence",
+            }
+        ],
+    }
+    path = root / "benchmark-history" / "benchmark_history.json"
+    write_json(path, report)
+    return path
+
+
 def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
     summary = {
         "status": status,
@@ -165,6 +205,7 @@ class ProjectAuditTests(unittest.TestCase):
             registry_path = make_registry(root)
             model_card_path = make_model_card(root, registry_path)
             request_history_summary_path = make_request_history_summary(root)
+            benchmark_history_path = make_benchmark_history(root)
             ci_workflow_hygiene_path = make_ci_workflow_hygiene(root)
             test_coverage_report_path = make_test_coverage_report(root)
 
@@ -172,6 +213,7 @@ class ProjectAuditTests(unittest.TestCase):
                 registry_path,
                 model_card_path=model_card_path,
                 request_history_summary_path=request_history_summary_path,
+                benchmark_history_path=benchmark_history_path,
                 ci_workflow_hygiene_path=ci_workflow_hygiene_path,
                 test_coverage_report_path=test_coverage_report_path,
                 generated_at="2026-05-12T00:00:00Z",
@@ -183,6 +225,10 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["ready_runs"], 1)
             self.assertEqual(audit["summary"]["request_history_status"], "pass")
             self.assertEqual(audit["summary"]["request_history_records"], 4)
+            self.assertEqual(audit["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(audit["summary"]["benchmark_history_entries"], 1)
+            self.assertEqual(audit["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(audit["summary"]["benchmark_history_latest_boundary"], "standard-benchmark-candidate-evidence")
             self.assertEqual(audit["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(audit["summary"]["ci_workflow_failed_checks"], 0)
             self.assertTrue(audit["summary"]["ci_tiny_scorecard_plan_digest_gate_ready"])
@@ -190,10 +236,12 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["test_coverage_percent"], 90.16)
             self.assertEqual(audit["summary"]["test_coverage_fail_under"], 80.0)
             self.assertEqual(audit["request_history_context"]["status"], "pass")
+            self.assertEqual(audit["benchmark_history_context"]["best_candidate_name"], "candidate")
             self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
             self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
+            self.assertIn("benchmark_history", {check["id"] for check in audit["checks"]})
             self.assertIn("ci_workflow_hygiene", {check["id"] for check in audit["checks"]})
             self.assertIn("test_coverage_report", {check["id"] for check in audit["checks"]})
             self.assertEqual(audit["runs"][0]["experiment_card_exists"], True)
@@ -217,6 +265,43 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(check["status"], "warn")
             self.assertIn("status=watch", check["detail"])
             self.assertIn("Generate or review request_history_summary.json", " ".join(audit["recommendations"]))
+
+    def test_build_project_audit_warns_for_benchmark_history_review_status(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_registry(root)
+            model_card_path = make_model_card(root, registry_path)
+            request_history_summary_path = make_request_history_summary(root)
+            benchmark_history_path = make_benchmark_history(root, decision_status="review")
+
+            audit = build_project_audit(
+                registry_path,
+                model_card_path=model_card_path,
+                request_history_summary_path=request_history_summary_path,
+                benchmark_history_path=benchmark_history_path,
+            )
+
+            self.assertEqual(audit["summary"]["overall_status"], "warn")
+            self.assertEqual(audit["summary"]["benchmark_history_status"], "warn")
+            self.assertEqual(audit["summary"]["benchmark_history_review"], 1)
+            self.assertEqual(audit["summary"]["benchmark_history_case_regressions"], 1)
+            check = next(item for item in audit["checks"] if item["id"] == "benchmark_history")
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("review=1", check["detail"])
+            self.assertIn("case_regressions=1", check["detail"])
+            self.assertIn("Generate or review benchmark_history.json", " ".join(audit["recommendations"]))
+
+    def test_build_project_audit_auto_discovers_benchmark_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_registry(root)
+            model_card_path = make_model_card(root, registry_path)
+            make_benchmark_history(root)
+
+            audit = build_project_audit(registry_path, model_card_path=model_card_path)
+
+            self.assertTrue(str(audit["benchmark_history_path"]).endswith("benchmark_history.json"))
+            self.assertEqual(audit["summary"]["benchmark_history_status"], "pass")
 
     def test_build_project_audit_warns_for_ci_workflow_hygiene_fail_status(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -293,7 +378,9 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("CI workflow hygiene", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage report", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT project audit", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench history", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_project_audit_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -360,6 +447,20 @@ class ProjectAuditTests(unittest.TestCase):
         request_check = build_request_history_summary_check(request_summary, Path("request_history_summary.json"))
         ci_check = build_ci_workflow_hygiene_check(ci_hygiene, Path("ci_workflow_hygiene.json"))
         coverage_check = build_test_coverage_check(coverage, Path("test_coverage_report.json"))
+        history = {
+            "evidence_kind": "tiny-smoke",
+            "summary": {
+                "entry_count": 1,
+                "ready_count": 0,
+                "review_count": 0,
+                "blocked_count": 0,
+                "case_regression_entry_count": 0,
+                "generation_quality_flag_regression_entry_count": 0,
+                "model_quality_claim": "not_claimed",
+            },
+            "entries": [{"boundary": "tiny-smoke-plumbing-evidence", "decision_status": "promote"}],
+        }
+        history_check = build_benchmark_history_check(history, Path("benchmark_history.json"))
 
         self.assertEqual(request_check["status"], "warn")
         self.assertIn("status=watch", request_check["detail"])
@@ -367,6 +468,13 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertEqual(build_request_history_context(request_summary)["request_log"], "runs/minigpt/inference_requests.jsonl")
         self.assertEqual(build_request_history_summary_check(None, None)["status"], "warn")
         self.assertFalse(build_request_history_context(None)["available"])
+
+        self.assertEqual(history_check["status"], "warn")
+        self.assertIn("model_quality_claim=not_claimed", history_check["detail"])
+        self.assertEqual(history_check["evidence"]["latest_boundary"], "tiny-smoke-plumbing-evidence")
+        self.assertEqual(build_benchmark_history_context(history)["latest_decision_status"], "promote")
+        self.assertEqual(build_benchmark_history_check(None, None)["status"], "warn")
+        self.assertFalse(build_benchmark_history_context(None)["available"])
 
         self.assertEqual(ci_check["status"], "warn")
         self.assertIn("failed_checks=3", ci_check["detail"])

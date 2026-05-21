@@ -137,6 +137,9 @@
 358-v344-benchmark-history-maturity-narrative.md
  -> v344 code explanation: let maturity narrative consume benchmark history ledgers and turn history regressions into portfolio review signals.
 
+359-v345-benchmark-history-project-audit.md
+ -> v345 code explanation: let project audit consume benchmark history ledgers and expose history readiness, regressions, quality-claim boundaries, and latest boundary in audit evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

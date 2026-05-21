@@ -16,6 +16,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--registry", type=Path, default=ROOT / "runs" / "registry" / "registry.json")
     parser.add_argument("--model-card", type=Path, default=None, help="Optional model_card.json path")
     parser.add_argument("--request-history-summary", type=Path, default=None, help="Optional request_history_summary.json path")
+    parser.add_argument("--benchmark-history", type=Path, default=None, help="Optional benchmark_history.json path")
     parser.add_argument("--ci-workflow-hygiene", type=Path, default=None, help="Optional ci_workflow_hygiene.json path")
     parser.add_argument("--test-coverage-report", type=Path, default=None, help="Optional test_coverage_report.json path")
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory, defaults to the registry directory")
@@ -31,6 +32,7 @@ def main() -> None:
         args.registry,
         model_card_path=args.model_card,
         request_history_summary_path=args.request_history_summary,
+        benchmark_history_path=args.benchmark_history,
         ci_workflow_hygiene_path=args.ci_workflow_hygiene,
         test_coverage_report_path=args.test_coverage_report,
         title=args.title,
@@ -43,6 +45,10 @@ def main() -> None:
     print(f"score_percent={summary['score_percent']}")
     print(f"request_history_status={summary.get('request_history_status')}")
     print(f"request_history_records={summary.get('request_history_records')}")
+    print(f"benchmark_history_status={summary.get('benchmark_history_status')}")
+    print(f"benchmark_history_entries={summary.get('benchmark_history_entries')}")
+    print(f"benchmark_history_ready={summary.get('benchmark_history_ready')}")
+    print(f"benchmark_history_boundary={summary.get('benchmark_history_latest_boundary')}")
     print(f"ci_workflow_status={summary.get('ci_workflow_status')}")
     print(f"ci_workflow_failed_checks={summary.get('ci_workflow_failed_checks')}")
     print(f"test_coverage_status={summary.get('test_coverage_status')}")

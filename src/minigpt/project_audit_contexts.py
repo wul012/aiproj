@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import as_dict as _dict
+from minigpt.report_utils import list_of_dicts as _list_of_dicts
 
 
 def build_request_history_summary_check(
@@ -231,6 +232,83 @@ def build_test_coverage_context(test_coverage_report: dict[str, Any] | None) -> 
     }
 
 
+def build_benchmark_history_check(
+    benchmark_history: dict[str, Any] | None,
+    benchmark_history_path: Path | None,
+) -> dict[str, Any]:
+    if not isinstance(benchmark_history, dict):
+        detail = (
+            f"benchmark_history.json missing at {benchmark_history_path}"
+            if benchmark_history_path is not None
+            else "benchmark_history.json missing; repeated benchmark evidence was not summarized."
+        )
+        return _check("benchmark_history", "Benchmark history is audit-ready", "warn", detail)
+    context = build_benchmark_history_context(benchmark_history)
+    entry_count = _int(context.get("entry_count"))
+    ready_count = _int(context.get("ready_count"))
+    review_count = _int(context.get("review_count"))
+    blocked_count = _int(context.get("blocked_count"))
+    case_regressions = _int(context.get("case_regression_entry_count"))
+    flag_regressions = _int(context.get("generation_quality_flag_regression_entry_count"))
+    model_claim = context.get("model_quality_claim")
+    status = "pass"
+    if (
+        entry_count <= 0
+        or ready_count <= 0
+        or review_count > 0
+        or blocked_count > 0
+        or case_regressions > 0
+        or flag_regressions > 0
+        or model_claim == "not_claimed"
+    ):
+        status = "warn"
+    detail = (
+        f"entries={entry_count}; ready={ready_count}; review={review_count}; blocked={blocked_count}; "
+        f"case_regressions={case_regressions}; generation_flag_regressions={flag_regressions}; "
+        f"model_quality_claim={_fmt_any(model_claim)}; latest_boundary={_fmt_any(context.get('latest_boundary'))}."
+    )
+    evidence = {
+        **context,
+        "path": None if benchmark_history_path is None else str(benchmark_history_path),
+    }
+    return _check("benchmark_history", "Benchmark history is audit-ready", status, detail, evidence)
+
+
+def build_benchmark_history_context(benchmark_history: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(benchmark_history, dict):
+        return {
+            "available": False,
+            "entry_count": None,
+            "ready_count": None,
+            "review_count": None,
+            "blocked_count": None,
+            "case_regression_entry_count": None,
+            "generation_quality_flag_regression_entry_count": None,
+            "model_quality_claim": None,
+            "latest_boundary": None,
+        }
+    summary = _dict(benchmark_history.get("summary"))
+    entries = _list_of_dicts(benchmark_history.get("entries"))
+    latest = entries[-1] if entries else {}
+    return {
+        "available": True,
+        "evidence_kind": benchmark_history.get("evidence_kind"),
+        "entry_count": summary.get("entry_count") if summary else len(entries),
+        "promote_count": summary.get("promote_count"),
+        "ready_count": summary.get("ready_count"),
+        "review_count": summary.get("review_count"),
+        "blocked_count": summary.get("blocked_count"),
+        "case_regression_entry_count": summary.get("case_regression_entry_count"),
+        "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
+        "best_candidate_name": summary.get("best_candidate_name"),
+        "best_entry_name": summary.get("best_entry_name"),
+        "model_quality_claim": summary.get("model_quality_claim"),
+        "latest_boundary": latest.get("boundary"),
+        "latest_decision_status": latest.get("decision_status"),
+        "latest_promotion_readiness": latest.get("promotion_readiness"),
+    }
+
+
 def _check(
     check_id: str,
     title: str,
@@ -253,7 +331,16 @@ def _fmt_any(value: Any) -> str:
     return "missing" if value is None else str(value)
 
 
+def _int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
 __all__ = [
+    "build_benchmark_history_check",
+    "build_benchmark_history_context",
     "build_ci_workflow_context",
     "build_ci_workflow_hygiene_check",
     "build_request_history_context",
