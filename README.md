@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 371 carries benchmark-history readiness requirements into the maturity summary and narrative layer, so multi-run review can see requirement changes without opening every registry or narrative artifact.
+Version 372 consolidates maintenance split boundaries for release bundle, governance stabilization, and promoted seed handoff artifacts, keeping public APIs stable while lowering high-pressure file ownership.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -626,6 +626,15 @@ Version 371 carries benchmark-history readiness requirements into the maturity s
 - Tests cover ready pass-through, requirement-failure readiness review, comparison regression, and output columns.
 - Archived release-readiness requirement evidence in `d/369`.
 
+## Latest v372 checkpoint
+
+- `release_bundle.py` is now a compact orchestration facade while `release_bundle_support.py` owns path, JSON, summary, release-status, and artifact collection helpers.
+- `release_bundle_contexts.py` owns request-history, benchmark-history, CI-workflow, coverage, audit-check, and recommendation context assembly for release bundles.
+- `maintenance_policy_artifacts.py` delegates governance stabilization artifact rendering and writing to `maintenance_policy_governance_artifacts.py`.
+- `promoted_training_scale_seed_handoff_artifacts.py` delegates Markdown/HTML section rendering to `promoted_training_scale_seed_handoff_sections.py`.
+- Public imports and output schemas stay unchanged; targeted tests cover release bundle, maintenance policy, and promoted seed handoff paths.
+- Archived maintenance split consolidation evidence in `d/372`.
+
 ## Latest v371 checkpoint
 
 - Maturity summary now carries benchmark-history readiness requirement status-change count and max exit-code delta from the registry and release-readiness context.
@@ -1186,6 +1195,7 @@ v368.0.0 MiniGPT v368 release gate benchmark readiness
 v369.0.0 MiniGPT v369 release readiness benchmark requirement
 v370.0.0 MiniGPT v370 registry benchmark requirement
 v371.0.0 MiniGPT v371 maturity benchmark requirement carryover
+v372.0.0 MiniGPT v372 maintenance split consolidation
 ```
 
 ## Project structure

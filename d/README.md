@@ -224,6 +224,9 @@ d/370/解释/说明.md
 d/371/图片
 d/371/解释/说明.md
  -> v371 maturity benchmark requirement carryover 的运行截图和解释
+d/372/图片
+d/372/解释/说明.md
+ -> v372 maintenance split consolidation 的运行截图和解释
 ```
 
 写入规则：
