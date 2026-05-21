@@ -242,6 +242,9 @@ d/376/解释/说明.md
 d/377/图片
 d/377/解释/说明.md
  -> v377 release readiness drift contract 的运行截图和解释
+d/378/图片
+d/378/解释/说明.md
+ -> v378 release readiness drift contract CI smoke 的运行截图和解释
 ```
 
 写入规则：

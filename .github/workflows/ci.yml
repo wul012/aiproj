@@ -35,5 +35,8 @@ jobs:
       - name: CI tiny scorecard plan digest check
         run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci
 
+      - name: Release readiness drift contract smoke
+        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci
+
       - name: Unit tests
         run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80

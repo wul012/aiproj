@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v378 release readiness drift contract CI smoke evidence</title>
+  <style>
+    :root { --ink:#17202a; --muted:#5c6776; --line:#d5dde7; --page:#f6f7f3; --panel:#fff; --green:#047857; --amber:#a16207; --red:#b91c1c; --blue:#1f5f74; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+    header { padding:30px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0 0 10px; color:var(--muted); }
+    main { padding:20px 34px 36px; }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:12px; margin-bottom:16px; }
+    .card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .card { padding:14px; min-height:88px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+    .panel { padding:18px; margin:16px 0; overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:850px; }
+    th, td { border-bottom:1px solid var(--line); padding:10px; text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f5; border:1px solid #d8e0e8; border-radius:6px; padding:2px 5px; }
+    .pill { display:inline-block; border-radius:999px; padding:4px 9px; font-weight:700; font-size:12px; }
+    .pass { background:#dcfce7; color:var(--green); }
+    .mixed { background:#fef3c7; color:var(--amber); }
+    .guard { background:#dbeafe; color:var(--blue); }
+    footer { color:var(--muted); padding:0 34px 24px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v378 release readiness drift contract CI smoke evidence</h1>
+    <p>v378 promotes the v377 drift contract checker into CI by giving it a deterministic mixed-drift fixture and a workflow hygiene guard.</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="card"><div class="label">Smoke status</div><div class="value"><span class="pill pass">pass</span></div></div>
+      <div class="card"><div class="label">Fixture delta</div><div class="value"><span class="pill mixed">mixed</span></div></div>
+      <div class="card"><div class="label">Checker delta failures</div><div class="value">0</div></div>
+      <div class="card"><div class="label">CI hygiene</div><div class="value"><span class="pill guard">before coverage</span></div></div>
+    </section>
+    <section class="panel">
+      <h2>CI Path</h2>
+      <table>
+        <thead>
+          <tr><th>Step</th><th>Artifact</th><th>Contract protected</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Smoke writes fixture</td><td><code>comparison/release_readiness_comparison.json</code></td><td>Stable mixed-drift baseline/compared reasons</td></tr>
+          <tr><td>Checker validates fixture</td><td><code>check/release_readiness_drift_contract_check.json</code></td><td>Delta and summary fields match recomputed contract</td></tr>
+          <tr><td>Smoke summarizes result</td><td><code>release_readiness_drift_contract_smoke_summary.json</code></td><td>CI-readable status, decision, returncode, and mixed-count fields</td></tr>
+          <tr><td>Workflow hygiene watches CI</td><td><code>ci_workflow_hygiene.json</code></td><td>Command exists and stays before coverage</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Key Diagnostics</h2>
+      <table>
+        <thead>
+          <tr><th>Diagnostic</th><th>Expected value</th><th>Reason</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>check_status</code></td><td><code>pass</code></td><td>The v377 checker accepts the generated fixture.</td></tr>
+          <tr><td><code>check_delta_count</code></td><td><code>1</code></td><td>The smoke remains small and deterministic.</td></tr>
+          <tr><td><code>check_expected_mixed_delta_count</code></td><td><code>1</code></td><td>The checker recomputes mixed drift from source reasons.</td></tr>
+          <tr><td><code>required_order_count</code></td><td><code>5</code></td><td>CI hygiene now includes the drift-contract smoke before coverage.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>python -m pytest tests/test_release_readiness_drift_contract.py tests/test_release_readiness_drift_contract_smoke.py tests/test_ci_workflow.py -q</code></p>
+      <p><span class="pill pass">14 passed</span></p>
+    </section>
+  </main>
+  <footer>Generated for d/378 evidence. This is CI contract evidence for governance fields, not model-quality proof.</footer>
+</body>
+</html>

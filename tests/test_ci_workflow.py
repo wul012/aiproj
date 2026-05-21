@@ -64,11 +64,19 @@ class CIWorkflowTests(unittest.TestCase):
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
+            "command:release_readiness_drift_contract_smoke",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
             "order:ci_tiny_scorecard_plan_check_after_smoke",
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
             "order:ci_tiny_scorecard_plan_check_before_coverage",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:release_readiness_drift_contract_smoke_before_coverage",
             {item["id"] for item in report["checks"]},
         )
         for order_check in (item for item in report["checks"] if item["category"] == "required_order"):
@@ -106,8 +114,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 6)
-            self.assertEqual(report["summary"]["required_step_count"], 8)
+            self.assertEqual(report["summary"]["missing_step_count"], 7)
+            self.assertEqual(report["summary"]["required_step_count"], 9)
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
@@ -135,6 +143,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
                         "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
+                        "      - name: Release readiness drift contract smoke",
+                        "        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
@@ -178,6 +188,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
                         "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
+                        "      - name: Release readiness drift contract smoke",
+                        "        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
                     ]
                 ),
                 encoding="utf-8",
@@ -187,7 +199,7 @@ class CIWorkflowTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertEqual(report["summary"]["order_violation_count"], 3)
+            self.assertEqual(report["summary"]["order_violation_count"], 4)
             self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
@@ -195,6 +207,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("order:promoted_seed_handoff_assurance_smoke_before_coverage", failed_order_ids)
             self.assertIn("order:tiny_scorecard_inline_check_smoke_before_coverage", failed_order_ids)
             self.assertIn("order:ci_tiny_scorecard_plan_check_before_coverage", failed_order_ids)
+            self.assertIn("order:release_readiness_drift_contract_smoke_before_coverage", failed_order_ids)
             self.assertNotIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
     def test_ci_workflow_hygiene_requires_plan_check_after_tiny_smoke(self) -> None:
@@ -221,6 +234,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
+                        "      - name: Release readiness drift contract smoke",
+                        "        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
