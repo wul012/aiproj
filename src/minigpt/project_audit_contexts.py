@@ -250,6 +250,9 @@ def build_benchmark_history_check(
     blocked_count = _int(context.get("blocked_count"))
     case_regressions = _int(context.get("case_regression_entry_count"))
     flag_regressions = _int(context.get("generation_quality_flag_regression_entry_count"))
+    readiness_status = context.get("readiness_requirement_status")
+    readiness_exit_code = _int(context.get("readiness_requirement_exit_code"))
+    readiness_failed_reasons = _string_list(context.get("readiness_requirement_failed_reasons"))
     model_claim = context.get("model_quality_claim")
     status = "pass"
     if (
@@ -259,12 +262,16 @@ def build_benchmark_history_check(
         or blocked_count > 0
         or case_regressions > 0
         or flag_regressions > 0
+        or readiness_status == "fail"
+        or readiness_exit_code > 0
         or model_claim == "not_claimed"
     ):
         status = "warn"
     detail = (
         f"entries={entry_count}; ready={ready_count}; review={review_count}; blocked={blocked_count}; "
         f"case_regressions={case_regressions}; generation_flag_regressions={flag_regressions}; "
+        f"readiness_requirement={_fmt_any(readiness_status)}; readiness_exit={_fmt_any(context.get('readiness_requirement_exit_code'))}; "
+        f"readiness_failed_reasons={_fmt_any(', '.join(readiness_failed_reasons) if readiness_failed_reasons else 'none')}; "
         f"model_quality_claim={_fmt_any(model_claim)}; latest_boundary={_fmt_any(context.get('latest_boundary'))}."
     )
     evidence = {
@@ -284,10 +291,15 @@ def build_benchmark_history_context(benchmark_history: dict[str, Any] | None) ->
             "blocked_count": None,
             "case_regression_entry_count": None,
             "generation_quality_flag_regression_entry_count": None,
+            "readiness_requirement_status": None,
+            "readiness_requirement_decision": None,
+            "readiness_requirement_exit_code": None,
+            "readiness_requirement_failed_reasons": [],
             "model_quality_claim": None,
             "latest_boundary": None,
         }
     summary = _dict(benchmark_history.get("summary"))
+    readiness = _dict(benchmark_history.get("readiness_requirement"))
     entries = _list_of_dicts(benchmark_history.get("entries"))
     latest = entries[-1] if entries else {}
     return {
@@ -303,6 +315,10 @@ def build_benchmark_history_context(benchmark_history: dict[str, Any] | None) ->
         "best_candidate_name": summary.get("best_candidate_name"),
         "best_entry_name": summary.get("best_entry_name"),
         "model_quality_claim": summary.get("model_quality_claim"),
+        "readiness_requirement_status": readiness.get("status"),
+        "readiness_requirement_decision": readiness.get("decision"),
+        "readiness_requirement_exit_code": readiness.get("exit_code"),
+        "readiness_requirement_failed_reasons": _string_list(readiness.get("failed_reasons")),
         "latest_boundary": latest.get("boundary"),
         "latest_decision_status": latest.get("decision_status"),
         "latest_promotion_readiness": latest.get("promotion_readiness"),
@@ -336,6 +352,10 @@ def _int(value: Any) -> int:
         return int(value)
     except (TypeError, ValueError):
         return 0
+
+
+def _string_list(value: Any) -> list[str]:
+    return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
 __all__ = [

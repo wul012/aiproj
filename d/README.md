@@ -206,6 +206,9 @@ d/364/解释/说明.md
 d/365/图片
 d/365/解释/说明.md
  -> v365 maturity benchmark readiness consumption 的运行截图和解释
+d/366/图片
+d/366/解释/说明.md
+ -> v366 project audit benchmark readiness 的运行截图和解释
 ```
 
 写入规则：
