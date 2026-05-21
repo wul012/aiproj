@@ -55,6 +55,14 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                     "Release benchmark failed reason removals",
                     ", ".join(_string_list(summary.get("release_readiness_benchmark_requirement_failed_reason_removed"))) or "none",
                 ),
+                (
+                    "Release benchmark failed reason recovery deltas",
+                    summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"),
+                ),
+                (
+                    "Release benchmark failed reason drift",
+                    _fmt_mapping(summary.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts")),
+                ),
                 ("Request history status", summary.get("request_history_status")),
                 ("Benchmark scorecards", summary.get("benchmark_scorecard_count")),
                 ("Benchmark average", summary.get("benchmark_avg_score")),
@@ -146,6 +154,7 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Benchmark req exit", summary.get("release_readiness_benchmark_requirement_exit_code_delta_max")),
         ("Benchmark reasons added", summary.get("release_readiness_benchmark_requirement_failed_reason_added_count")),
         ("Benchmark reasons removed", summary.get("release_readiness_benchmark_requirement_failed_reason_removed_count")),
+        ("Benchmark recoveries", summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count")),
         ("Requests", summary.get("request_history_status")),
         ("Benchmarks", summary.get("benchmark_scorecard_count")),
         ("Benchmark avg", summary.get("benchmark_avg_score")),
@@ -222,6 +231,12 @@ def _markdown_table(rows: list[tuple[Any, Any]]) -> list[str]:
     lines = ["| Key | Value |", "| --- | --- |"]
     lines.extend(f"| {_md(key)} | {_md(value)} |" for key, value in rows)
     return lines
+
+
+def _fmt_mapping(value: Any) -> str:
+    if not isinstance(value, dict) or not value:
+        return "missing"
+    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 def _section_cards(sections: list[dict[str, Any]]) -> str:

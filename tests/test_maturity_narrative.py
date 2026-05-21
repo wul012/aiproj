@@ -77,6 +77,12 @@ def make_project(
                 "release_readiness_benchmark_requirement_failed_reason_removed_count": len(benchmark_requirement_reason_removed or []),
                 "release_readiness_benchmark_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
                 "release_readiness_benchmark_requirement_failed_reason_removed": benchmark_requirement_reason_removed or [],
+                "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": 1
+                if benchmark_requirement_reason_removed
+                else 0,
+                "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": (
+                    {"recovered": 1} if benchmark_requirement_reason_removed else {"stable": 2}
+                ),
             },
             "release_readiness_context": {
                 "available": True,
@@ -105,6 +111,12 @@ def make_project(
                 "benchmark_history_readiness_requirement_failed_reason_removed_count": len(benchmark_requirement_reason_removed or []),
                 "benchmark_history_readiness_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
                 "benchmark_history_readiness_requirement_failed_reason_removed": benchmark_requirement_reason_removed or [],
+                "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": 1
+                if benchmark_requirement_reason_removed
+                else 0,
+                "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": (
+                    {"recovered": 1} if benchmark_requirement_reason_removed else {"stable": 2}
+                ),
             },
             "request_history_context": {
                 "status": "pass",
@@ -143,6 +155,12 @@ def make_project(
                 "benchmark_history_readiness_requirement_failed_reason_removed_count": len(benchmark_requirement_reason_removed or []),
                 "benchmark_history_readiness_requirement_failed_reason_added": benchmark_requirement_reason_added or [],
                 "benchmark_history_readiness_requirement_failed_reason_removed": benchmark_requirement_reason_removed or [],
+                "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": 1
+                if benchmark_requirement_reason_removed
+                else 0,
+                "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": (
+                    {"recovered": 1} if benchmark_requirement_reason_removed else {"stable": 2}
+                ),
             },
         },
     )
@@ -332,6 +350,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_exit_code_delta_max"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], [])
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"], {"stable": 2})
             self.assertEqual(narrative["summary"]["request_history_status"], "pass")
             self.assertEqual(narrative["summary"]["benchmark_scorecard_count"], 1)
             self.assertEqual(narrative["summary"]["benchmark_avg_score"], 88.5)
@@ -534,9 +554,16 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], ["tiny_smoke_only"])
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 1)
+            self.assertEqual(
+                narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"],
+                {"recovered": 1},
+            )
             self.assertEqual(release_section["status"], "stable")
             self.assertIn("removed=1", release_section["claim"])
+            self.assertIn("recovery deltas=1", release_section["claim"])
             self.assertIn("tiny_smoke_only", release_section["claim"])
+            self.assertIn("recovery evidence", " ".join(narrative["recommendations"]))
 
     def test_build_maturity_narrative_marks_review_for_non_comparison_ready_decision(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

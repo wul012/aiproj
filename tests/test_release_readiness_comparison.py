@@ -394,11 +394,18 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"], 0)
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"], 1)
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_removed"], ["tiny_smoke_only"])
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"], 1)
+            self.assertEqual(
+                report["summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"],
+                {"recovered": 1},
+            )
             delta = report["deltas"][0]
             self.assertFalse(delta["benchmark_history_readiness_requirement_status_changed"])
             self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_added"], [])
             self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_removed"], ["tiny_smoke_only"])
+            self.assertEqual(delta["benchmark_history_readiness_requirement_failed_reason_drift_status"], "recovered")
             self.assertIn("removed failed reason", delta["explanation"])
+            self.assertIn("recovery evidence", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_tracks_benchmark_history_improvement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -135,6 +135,14 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
     status_delta = int(compared.get("readiness_score") or 0) - int(baseline.get("readiness_score") or 0)
     baseline_panels = _dict(baseline.get("panel_statuses"))
     compared_panels = _dict(compared.get("panel_statuses"))
+    added_failed_reasons = _reason_additions(
+        baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
+        compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+    )
+    removed_failed_reasons = _reason_removals(
+        baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
+        compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+    )
     changed = []
     for key in sorted(set(baseline_panels) | set(compared_panels)):
         before = baseline_panels.get(key)
@@ -193,25 +201,13 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "compared_benchmark_history_readiness_requirement_failed_reasons": compared.get(
             "benchmark_history_readiness_requirement_failed_reasons"
         ),
-        "benchmark_history_readiness_requirement_failed_reason_added_count": len(
-            _reason_additions(
-                baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
-                compared.get("benchmark_history_readiness_requirement_failed_reasons"),
-            )
-        ),
-        "benchmark_history_readiness_requirement_failed_reason_removed_count": len(
-            _reason_removals(
-                baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
-                compared.get("benchmark_history_readiness_requirement_failed_reasons"),
-            )
-        ),
-        "benchmark_history_readiness_requirement_failed_reason_added": _reason_additions(
-            baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
-            compared.get("benchmark_history_readiness_requirement_failed_reasons"),
-        ),
-        "benchmark_history_readiness_requirement_failed_reason_removed": _reason_removals(
-            baseline.get("benchmark_history_readiness_requirement_failed_reasons"),
-            compared.get("benchmark_history_readiness_requirement_failed_reasons"),
+        "benchmark_history_readiness_requirement_failed_reason_added_count": len(added_failed_reasons),
+        "benchmark_history_readiness_requirement_failed_reason_removed_count": len(removed_failed_reasons),
+        "benchmark_history_readiness_requirement_failed_reason_added": added_failed_reasons,
+        "benchmark_history_readiness_requirement_failed_reason_removed": removed_failed_reasons,
+        "benchmark_history_readiness_requirement_failed_reason_drift_status": _reason_drift_status(
+            added_failed_reasons,
+            removed_failed_reasons,
         ),
         "benchmark_history_model_quality_claim_changed": compared.get("benchmark_history_model_quality_claim")
         != baseline.get("benchmark_history_model_quality_claim"),
@@ -338,6 +334,12 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
             for delta in deltas
             for reason in _string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_removed"))
         ),
+        "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": sum(
+            1 for delta in deltas if delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "recovered"
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _counts(
+            delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status") or "stable" for delta in deltas
+        ),
     }
 
 
@@ -354,6 +356,8 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
         return ["At least one readiness report regressed from the baseline; inspect delta explanations before release handoff."]
     if int(summary.get("improved_count") or 0):
         return ["Readiness improved against the baseline; keep the comparison report with release evidence."]
+    if int(summary.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count") or 0):
+        return ["Benchmark readiness failed reasons were removed; keep this recovery evidence with release handoff."]
     if int(summary.get("blocked_count") or 0):
         return ["At least one readiness report is blocked; fix failed panels before comparing release quality as improved."]
     if any(delta.get("changed_panels") for delta in deltas):
@@ -497,6 +501,16 @@ def _reason_removals(baseline: Any, compared: Any) -> list[str]:
     return [reason for reason in _string_list(baseline) if reason not in compared_reasons]
 
 
+def _reason_drift_status(added: list[str], removed: list[str]) -> str:
+    if added and removed:
+        return "mixed"
+    if added:
+        return "regressed"
+    if removed:
+        return "recovered"
+    return "stable"
+
+
 def _unique_strings(values: Any) -> list[str]:
     items: list[str] = []
     for value in values:
@@ -504,6 +518,14 @@ def _unique_strings(values: Any) -> list[str]:
         if text and text not in items:
             items.append(text)
     return items
+
+
+def _counts(values: Any) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for value in values:
+        key = str(value)
+        counts[key] = counts.get(key, 0) + 1
+    return counts
 
 
 __all__ = [

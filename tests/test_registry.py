@@ -444,6 +444,14 @@ class RegistryTests(unittest.TestCase):
                 registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed"],
                 ["tiny_smoke_only"],
             )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"],
+                1,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"],
+                {"recovered": 1},
+            )
 
     def test_summarize_registered_run_reads_test_coverage_readiness_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

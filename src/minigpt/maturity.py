@@ -259,6 +259,12 @@ def _summary(
         "release_readiness_benchmark_requirement_failed_reason_removed": release_readiness_context.get(
             "benchmark_history_readiness_requirement_failed_reason_removed"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"
+        ),
+        "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_drift_status_counts"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release_readiness_context.get(
             "max_abs_benchmark_history_case_regression_delta"
         ),
@@ -349,6 +355,8 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_readiness_requirement_failed_reason_removed_count": None,
             "benchmark_history_readiness_requirement_failed_reason_added": [],
             "benchmark_history_readiness_requirement_failed_reason_removed": [],
+            "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": None,
+            "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": {},
             "max_abs_benchmark_history_case_regression_delta": None,
             "max_abs_benchmark_history_generation_flag_regression_delta": None,
             "max_abs_benchmark_history_readiness_requirement_exit_code_delta": None,
@@ -392,6 +400,12 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         ),
         "benchmark_history_readiness_requirement_failed_reason_removed": _string_list(
             delta_summary.get("benchmark_history_readiness_requirement_failed_reason_removed")
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": delta_summary.get(
+            "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _dict(
+            delta_summary.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")
         ),
         "max_abs_benchmark_history_case_regression_delta": delta_summary.get("max_abs_benchmark_history_case_regression_delta"),
         "max_abs_benchmark_history_generation_flag_regression_delta": delta_summary.get(
@@ -503,6 +517,8 @@ def _recommendations(
         recs.append("Review CI workflow order regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("improved_count") or 0) > 0:
         recs.append("Keep release readiness comparison evidence in the registry so improvement history remains visible during maturity review.")
+    elif int(release_readiness_context.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count") or 0) > 0:
+        recs.append("Keep benchmark readiness failed-reason recovery evidence visible; it is a stability signal, not a model-quality proof.")
     if not isinstance(request_history_summary, dict):
         recs.append("Generate request_history_summary.json before local serving review so maturity context includes recent inference stability.")
     else:

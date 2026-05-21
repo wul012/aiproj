@@ -233,6 +233,9 @@ d/373/解释/说明.md
 d/374/图片
 d/374/解释/说明.md
  -> v374 registry release readiness split 的运行截图和解释
+d/375/图片
+d/375/解释/说明.md
+ -> v375 benchmark reason recovery signal 的运行截图和解释
 ```
 
 写入规则：

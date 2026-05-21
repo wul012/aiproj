@@ -26,6 +26,10 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                 added_failed_reasons = _reason_additions(baseline_failed_reasons, compared_failed_reasons)
             if not removed_failed_reasons:
                 removed_failed_reasons = _reason_removals(baseline_failed_reasons, compared_failed_reasons)
+            reason_drift_status = _as_str(delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status")) or _reason_drift_status(
+                added_failed_reasons,
+                removed_failed_reasons,
+            )
             rows.append(
                 {
                     "run_name": run_name,
@@ -84,6 +88,7 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     else len(removed_failed_reasons),
                     "benchmark_history_readiness_requirement_failed_reason_added": added_failed_reasons,
                     "benchmark_history_readiness_requirement_failed_reason_removed": removed_failed_reasons,
+                    "benchmark_history_readiness_requirement_failed_reason_drift_status": reason_drift_status,
                     "benchmark_history_model_quality_claim_changed": bool(delta.get("benchmark_history_model_quality_claim_changed")),
                     "benchmark_history_latest_boundary_changed": bool(delta.get("benchmark_history_latest_boundary_changed")),
                     "baseline_benchmark_history_boundary": _as_str(delta.get("baseline_benchmark_history_boundary")),
@@ -203,6 +208,12 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
             reason
             for row in rows
             for reason in _as_str_list(row.get("benchmark_history_readiness_requirement_failed_reason_removed"))
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": sum(
+            1 for row in rows if row.get("benchmark_history_readiness_requirement_failed_reason_drift_status") == "recovered"
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _counts(
+            row.get("benchmark_history_readiness_requirement_failed_reason_drift_status") or "stable" for row in rows
         ),
         "max_abs_benchmark_history_case_regression_delta": _int_if_whole(max(benchmark_case_regression_deltas))
         if benchmark_case_regression_deltas
@@ -357,6 +368,16 @@ def _reason_additions(baseline: Any, compared: Any) -> list[str]:
 def _reason_removals(baseline: Any, compared: Any) -> list[str]:
     compared_reasons = set(_as_str_list(compared))
     return [reason for reason in _as_str_list(baseline) if reason not in compared_reasons]
+
+
+def _reason_drift_status(added: list[str], removed: list[str]) -> str:
+    if added and removed:
+        return "mixed"
+    if added:
+        return "regressed"
+    if removed:
+        return "recovered"
+    return "stable"
 
 
 def _unique_strings(values: Any) -> list[str]:

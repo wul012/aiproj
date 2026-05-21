@@ -59,6 +59,8 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "benchmark_history_readiness_requirement_failed_reason_removed_count": 0,
                     "benchmark_history_readiness_requirement_failed_reason_added": [],
                     "benchmark_history_readiness_requirement_failed_reason_removed": [],
+                    "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": 0,
+                    "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": {"stable": 2},
                     "max_abs_benchmark_history_case_regression_delta": 0,
                     "max_abs_benchmark_history_generation_flag_regression_delta": 0,
                     "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 0,
@@ -129,6 +131,8 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], [])
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"], {"stable": 2})
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
             self.assertEqual(summary["summary"]["overall_status"], "pass")
@@ -385,6 +389,10 @@ class MaturitySummaryTests(unittest.TestCase):
             registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed"] = [
                 "tiny_smoke_only"
             ]
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_drift_status_counts"] = {
+                "recovered": 1
+            }
             registry_path.write_text(json.dumps(registry), encoding="utf-8")
 
             summary = build_maturity_summary(root, registry_path=registry_path)
@@ -393,6 +401,12 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["overall_status"], "pass")
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], ["tiny_smoke_only"])
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"], 1)
+            self.assertEqual(
+                summary["summary"]["release_readiness_benchmark_requirement_failed_reason_drift_status_counts"],
+                {"recovered": 1},
+            )
+            self.assertIn("recovery evidence", " ".join(summary["recommendations"]))
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

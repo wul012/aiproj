@@ -71,6 +71,12 @@ def build_maturity_narrative_summary(
         "release_readiness_benchmark_requirement_failed_reason_removed": release.get(
             "benchmark_history_readiness_requirement_failed_reason_removed"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": release.get(
+            "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"
+        ),
+        "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": release.get(
+            "benchmark_history_readiness_requirement_failed_reason_drift_status_counts"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release.get("max_abs_benchmark_history_case_regression_delta"),
         "release_readiness_max_benchmark_history_generation_flag_regression_delta": release.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
@@ -167,6 +173,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
         return ["Generate missing maturity, request-history, benchmark scorecard, or dataset-card evidence before presenting the narrative."]
     if int(summary.get("benchmark_history_count") or 0) == 0:
         recommendations.append("Add benchmark history ledgers so scorecard comparisons and decisions can be reviewed across repeated runs.")
+    if int(summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count") or 0) > 0:
+        recommendations.append(
+            "Preserve benchmark readiness failed-reason recovery evidence as a stability signal, but keep it separate from model-quality claims."
+        )
     return [
         *recommendations,
         "Use the narrative as the human-facing entry point, then link to maturity, registry, benchmark, dataset, and request-history artifacts for detail.",
@@ -269,6 +279,15 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_removed"),
         [],
     )
+    requirement_reason_recovery_delta_count = _coalesce(
+        release_context.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
+        maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"),
+    )
+    requirement_reason_drift_status_counts = _coalesce(
+        release_context.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts"),
+        maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts"),
+        {},
+    )
     if int(requirement_status_changed_count or 0) > 0 or int(requirement_reason_added_count or 0) > 0:
         trend_status = "benchmark-regressed"
     return {
@@ -330,6 +349,8 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "benchmark_history_readiness_requirement_failed_reason_removed_count": requirement_reason_removed_count,
         "benchmark_history_readiness_requirement_failed_reason_added": _string_list(requirement_reason_added),
         "benchmark_history_readiness_requirement_failed_reason_removed": _string_list(requirement_reason_removed),
+        "benchmark_history_readiness_requirement_failed_reason_recovery_delta_count": requirement_reason_recovery_delta_count,
+        "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": _dict(requirement_reason_drift_status_counts),
         "max_abs_benchmark_history_case_regression_delta": _coalesce(
             release_context.get("max_abs_benchmark_history_case_regression_delta"),
             maturity_summary.get("release_readiness_max_benchmark_history_case_regression_delta"),

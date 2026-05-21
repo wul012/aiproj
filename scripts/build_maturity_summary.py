@@ -58,6 +58,14 @@ def main() -> None:
         "release_readiness_benchmark_requirement_failed_reason_removed="
         + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_removed") or [], ensure_ascii=False)
     )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count="
+        + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"), ensure_ascii=False)
+    )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_drift_status_counts="
+        + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts") or {}, ensure_ascii=False)
+    )
     print(f"request_history_status={overview.get('request_history_status')}")
     print(f"request_history_records={overview.get('request_history_records')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

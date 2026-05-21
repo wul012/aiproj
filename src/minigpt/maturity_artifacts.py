@@ -76,6 +76,14 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     "Release readiness benchmark failed reason removals",
                     ", ".join(_string_list(overview.get("release_readiness_benchmark_requirement_failed_reason_removed"))) or "none",
                 ),
+                (
+                    "Release readiness benchmark failed reason recovery deltas",
+                    overview.get("release_readiness_benchmark_requirement_failed_reason_recovery_delta_count"),
+                ),
+                (
+                    "Release readiness benchmark failed reason drift",
+                    _fmt_mapping(overview.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts")),
+                ),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -163,6 +171,14 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                         "Benchmark failed reason removals",
                         ", ".join(_string_list(release_readiness.get("benchmark_history_readiness_requirement_failed_reason_removed"))) or "none",
                     ),
+                    (
+                        "Benchmark failed reason recovery deltas",
+                        release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
+                    ),
+                    (
+                        "Benchmark failed reason drift",
+                        _fmt_mapping(release_readiness.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")),
+                    ),
                     ("Max benchmark case-regression delta", release_readiness.get("max_abs_benchmark_history_case_regression_delta")),
                     (
                         "Max benchmark generation-flag regression delta",
@@ -207,6 +223,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("Benchmark req exit", release_readiness.get("max_abs_benchmark_history_readiness_requirement_exit_code_delta")),
         ("Benchmark reasons added", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_added_count")),
         ("Benchmark reasons removed", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_removed_count")),
+        ("Benchmark recoveries", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -344,6 +361,14 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         (
             "Benchmark failed reason removals",
             ", ".join(_string_list(release_readiness.get("benchmark_history_readiness_requirement_failed_reason_removed"))) or "none",
+        ),
+        (
+            "Benchmark failed reason recovery deltas",
+            release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
+        ),
+        (
+            "Benchmark failed reason drift",
+            _fmt_mapping(release_readiness.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")),
         ),
         ("Max benchmark case-regression delta", release_readiness.get("max_abs_benchmark_history_case_regression_delta")),
         ("Max benchmark generation-flag regression delta", release_readiness.get("max_abs_benchmark_history_generation_flag_regression_delta")),

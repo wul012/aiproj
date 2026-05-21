@@ -100,6 +100,7 @@ def write_release_readiness_delta_csv(report: dict[str, Any], path: str | Path) 
         "benchmark_history_readiness_requirement_failed_reason_removed_count",
         "benchmark_history_readiness_requirement_failed_reason_added",
         "benchmark_history_readiness_requirement_failed_reason_removed",
+        "benchmark_history_readiness_requirement_failed_reason_drift_status",
         "benchmark_history_model_quality_claim_changed",
         "benchmark_history_latest_boundary_changed",
         "missing_artifact_delta",
@@ -152,6 +153,14 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                     "Benchmark readiness failed reason removals",
                     ", ".join(_string_list(summary.get("benchmark_history_readiness_requirement_failed_reason_removed"))) or "none",
                 ),
+                (
+                    "Benchmark readiness failed reason recovery deltas",
+                    summary.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count"),
+                ),
+                (
+                    "Benchmark readiness failed reason drift",
+                    _fmt_mapping(summary.get("benchmark_history_readiness_requirement_failed_reason_drift_status_counts")),
+                ),
             ]
         ),
         "",
@@ -196,8 +205,8 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
             "",
             "## Deltas",
             "",
-            "| Compared | Status delta | CI order violation delta | Coverage % delta | Coverage gap delta | Benchmark status delta | Benchmark readiness changed | Benchmark readiness exit delta | Failed reasons added | Failed reasons removed | Benchmark case regression delta | Benchmark boundary changed | Panel changes | Explanation |",
-            "| --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | ---: | --- | --- | --- |",
+            "| Compared | Status delta | CI order violation delta | Coverage % delta | Coverage gap delta | Benchmark status delta | Benchmark readiness changed | Benchmark readiness exit delta | Failed reason drift | Failed reasons added | Failed reasons removed | Benchmark case regression delta | Benchmark boundary changed | Panel changes | Explanation |",
+            "| --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | ---: | --- | --- | --- |",
         ]
     )
     for delta in _list_of_dicts(report.get("deltas")):
@@ -213,6 +222,7 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                     _md(delta.get("benchmark_history_status_delta")),
                     _md(delta.get("benchmark_history_readiness_requirement_status_changed")),
                     _md(delta.get("benchmark_history_readiness_requirement_exit_code_delta")),
+                    _md(delta.get("benchmark_history_readiness_requirement_failed_reason_drift_status")),
                     _md(", ".join(_string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_added")))),
                     _md(", ".join(_string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_removed")))),
                     _md(delta.get("benchmark_history_case_regression_delta")),
@@ -251,6 +261,7 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
         ("Benchmark regressions", summary.get("benchmark_history_regression_count")),
         ("Benchmark reason additions", summary.get("benchmark_history_readiness_requirement_failed_reason_added_count")),
         ("Benchmark reason removals", summary.get("benchmark_history_readiness_requirement_failed_reason_removed_count")),
+        ("Benchmark reason recoveries", summary.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count")),
         ("Generated", report.get("generated_at")),
     ]
     rows = "".join(_html_row(row) for row in _list_of_dicts(report.get("rows")))
@@ -270,7 +281,7 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
             f"<header><h1>{_e(report.get('title', 'MiniGPT release readiness comparison'))}</h1><p>baseline: {_e(report.get('baseline_path'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
             '<section class="panel"><h2>Readiness Matrix</h2><table><thead><tr><th>Release</th><th>Status</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Score</th><th>CI workflow</th><th>CI failed</th><th>CI order violations</th><th>Request</th><th>Coverage</th><th>Coverage %</th><th>Gap</th><th>Benchmark history</th><th>Benchmark ready</th><th>Benchmark readiness</th><th>Benchmark readiness exit</th><th>Benchmark regressions</th><th>Benchmark boundary</th><th>Maturity</th><th>Panels</th></tr></thead><tbody>' + rows + "</tbody></table></section>",
-            '<section class="panel"><h2>Deltas</h2><table><thead><tr><th>Compared</th><th>Status delta</th><th>CI order violation delta</th><th>Coverage % delta</th><th>Coverage gap delta</th><th>Benchmark status delta</th><th>Benchmark readiness changed</th><th>Benchmark readiness exit delta</th><th>Failed reasons added</th><th>Failed reasons removed</th><th>Benchmark case regression delta</th><th>Benchmark boundary changed</th><th>Panel changes</th><th>Explanation</th></tr></thead><tbody>' + deltas + "</tbody></table></section>",
+            '<section class="panel"><h2>Deltas</h2><table><thead><tr><th>Compared</th><th>Status delta</th><th>CI order violation delta</th><th>Coverage % delta</th><th>Coverage gap delta</th><th>Benchmark status delta</th><th>Benchmark readiness changed</th><th>Benchmark readiness exit delta</th><th>Failed reason drift</th><th>Failed reasons added</th><th>Failed reasons removed</th><th>Benchmark case regression delta</th><th>Benchmark boundary changed</th><th>Panel changes</th><th>Explanation</th></tr></thead><tbody>' + deltas + "</tbody></table></section>",
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT release readiness comparison.</footer>",
             "</body>",
@@ -344,6 +355,7 @@ def _html_delta(delta: dict[str, Any]) -> str:
         f"<td>{_e(_fmt(delta.get('benchmark_history_status_delta')))}</td>"
         f"<td>{_e(delta.get('benchmark_history_readiness_requirement_status_changed'))}</td>"
         f"<td>{_e(_fmt(delta.get('benchmark_history_readiness_requirement_exit_code_delta')))}</td>"
+        f"<td>{_e(delta.get('benchmark_history_readiness_requirement_failed_reason_drift_status'))}</td>"
         f"<td>{_e(', '.join(_string_list(delta.get('benchmark_history_readiness_requirement_failed_reason_added'))))}</td>"
         f"<td>{_e(', '.join(_string_list(delta.get('benchmark_history_readiness_requirement_failed_reason_removed'))))}</td>"
         f"<td>{_e(_fmt(delta.get('benchmark_history_case_regression_delta')))}</td>"
@@ -419,6 +431,12 @@ def _fmt(value: Any) -> str:
     if isinstance(value, float):
         return f"{value:.5g}"
     return str(value)
+
+
+def _fmt_mapping(value: Any) -> str:
+    if not isinstance(value, dict) or not value:
+        return "missing"
+    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 def _md(value: Any) -> str:
