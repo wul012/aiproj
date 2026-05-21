@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -11,6 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 PLAN_JSON_FILENAME = "ci_tiny_scorecard_smoke_plan.json"
 PLAN_TEXT_FILENAME = "ci_tiny_scorecard_smoke_plan.txt"
+SUMMARY_JSON_FILENAME = "tiny_scorecard_comparison_smoke_summary.json"
+SUMMARY_TEXT_FILENAME = "tiny_scorecard_comparison_smoke_summary.txt"
+CHECK_JSON_FILENAME = "tiny_scorecard_comparison_smoke_check.json"
+CHECK_TEXT_FILENAME = "tiny_scorecard_comparison_smoke_check.txt"
 
 CI_TINY_SCORECARD_CONFIG = {
     "suite_name": "standard-zh",
@@ -95,7 +100,13 @@ def build_ci_smoke_command(args: argparse.Namespace) -> list[str]:
     return command
 
 
-def build_invocation_plan(args: argparse.Namespace, command: Sequence[str], *, returncode: int | None = None) -> dict[str, Any]:
+def build_invocation_plan(
+    args: argparse.Namespace,
+    command: Sequence[str],
+    *,
+    returncode: int | None = None,
+    summary_digest: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "wrapper": "run_ci_tiny_scorecard_comparison_smoke",
@@ -110,12 +121,14 @@ def build_invocation_plan(args: argparse.Namespace, command: Sequence[str], *, r
         "command": list(command),
         "command_text": " ".join(command),
         "returncode": returncode,
+        "summary_digest": summary_digest or build_summary_digest(args.out_dir, args.summary_check_out_dir),
     }
 
 
 def render_invocation_plan(plan: dict[str, Any]) -> str:
     config = plan["config"]
     flags = plan["flags"]
+    digest = plan.get("summary_digest", {})
     rows = [
         ("schema_version", plan["schema_version"]),
         ("wrapper", plan["wrapper"]),
@@ -136,9 +149,47 @@ def render_invocation_plan(plan: dict[str, Any]) -> str:
         ("summary_check_no_fail", flags["summary_check_no_fail"]),
         ("force", flags["force"]),
         ("returncode", plan.get("returncode")),
+        ("summary_json_sha256", _artifact_digest_value(digest, "summary_json", "sha256")),
+        ("summary_text_sha256", _artifact_digest_value(digest, "summary_text", "sha256")),
+        ("check_json_sha256", _artifact_digest_value(digest, "summary_check_json", "sha256")),
+        ("check_text_sha256", _artifact_digest_value(digest, "summary_check_text", "sha256")),
         ("command_text", plan["command_text"]),
     ]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
+
+
+def build_summary_digest(out_dir: Path, summary_check_out_dir: Path) -> dict[str, Any]:
+    return {
+        "artifacts": {
+            "summary_json": _file_digest(out_dir / SUMMARY_JSON_FILENAME),
+            "summary_text": _file_digest(out_dir / SUMMARY_TEXT_FILENAME),
+            "summary_check_json": _file_digest(summary_check_out_dir / CHECK_JSON_FILENAME),
+            "summary_check_text": _file_digest(summary_check_out_dir / CHECK_TEXT_FILENAME),
+        }
+    }
+
+
+def _file_digest(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        return {
+            "path": str(path),
+            "exists": False,
+            "size_bytes": 0,
+            "sha256": "",
+        }
+    data = path.read_bytes()
+    return {
+        "path": str(path),
+        "exists": True,
+        "size_bytes": len(data),
+        "sha256": hashlib.sha256(data).hexdigest(),
+    }
+
+
+def _artifact_digest_value(digest: dict[str, Any], name: str, key: str) -> Any:
+    artifacts = digest.get("artifacts", {})
+    artifact = artifacts.get(name, {})
+    return artifact.get(key)
 
 
 def write_invocation_plan(plan: dict[str, Any], out_dir: Path) -> dict[str, str]:
@@ -156,7 +207,8 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     command = build_ci_smoke_command(args)
     completed = subprocess.run(command, check=False)
-    plan = build_invocation_plan(args, command, returncode=completed.returncode)
+    digest = build_summary_digest(args.out_dir, args.summary_check_out_dir)
+    plan = build_invocation_plan(args, command, returncode=completed.returncode, summary_digest=digest)
     outputs = write_invocation_plan(plan, args.out_dir)
     print(f"ci_plan_json={outputs['json']}")
     print(f"ci_plan_text={outputs['text']}")

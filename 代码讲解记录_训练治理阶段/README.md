@@ -119,6 +119,9 @@
 352-v338-ci-tiny-scorecard-plan-artifacts.md
  -> v338 code explanation: persist CI tiny scorecard wrapper invocation plans as JSON/text artifacts with fixed budget, command, sidecar path, and return code.
 
+353-v339-ci-tiny-scorecard-plan-digests.md
+ -> v339 code explanation: add summary and summary-check artifact sha256 digests to CI tiny scorecard wrapper invocation plans.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

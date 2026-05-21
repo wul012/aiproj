@@ -125,6 +125,9 @@ d/337/解释/说明.md
 d/338/图片
 d/338/解释/说明.md
  -> v338 CI tiny scorecard plan artifacts 的运行截图和解释
+d/339/图片
+d/339/解释/说明.md
+ -> v339 CI tiny scorecard plan digests 的运行截图和解释
 ```
 
 写入规则：

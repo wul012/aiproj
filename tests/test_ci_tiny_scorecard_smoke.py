@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import subprocess
 import sys
 import tempfile
@@ -16,6 +17,7 @@ from scripts.run_ci_tiny_scorecard_comparison_smoke import (  # noqa: E402
     PLAN_TEXT_FILENAME,
     build_ci_smoke_command,
     build_invocation_plan,
+    build_summary_digest,
     parse_args,
     render_invocation_plan,
 )
@@ -85,12 +87,37 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
         self.assertFalse(plan["flags"]["summary_check_no_fail"])
         self.assertTrue(plan["flags"]["force"])
         self.assertEqual(plan["returncode"], 0)
+        self.assertIn("summary_digest", plan)
         self.assertIn("run_tiny_scorecard_comparison_smoke.py", plan["command_text"])
         self.assertIn("suite_name=standard-zh", text)
         self.assertIn("candidate_max_iters=2", text)
         self.assertIn("decision_min_rubric_score=60.0", text)
         self.assertIn("summary_check_allow_gate_stop=True", text)
         self.assertIn("returncode=0", text)
+
+    def test_build_summary_digest_records_artifact_hashes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out_dir = root / "smoke"
+            check_dir = root / "check"
+            out_dir.mkdir()
+            check_dir.mkdir()
+            summary_json = b'{"status":"pass"}\n'
+            check_json = b'{"status":"pass","decision":"continue"}\n'
+            (out_dir / "tiny_scorecard_comparison_smoke_summary.json").write_bytes(summary_json)
+            (out_dir / "tiny_scorecard_comparison_smoke_summary.txt").write_text("status=pass\n", encoding="utf-8")
+            (check_dir / "tiny_scorecard_comparison_smoke_check.json").write_bytes(check_json)
+
+            digest = build_summary_digest(out_dir, check_dir)
+            artifacts = digest["artifacts"]
+
+            self.assertTrue(artifacts["summary_json"]["exists"])
+            self.assertEqual(artifacts["summary_json"]["sha256"], hashlib.sha256(summary_json).hexdigest())
+            self.assertTrue(artifacts["summary_text"]["exists"])
+            self.assertTrue(artifacts["summary_check_json"]["exists"])
+            self.assertEqual(artifacts["summary_check_json"]["sha256"], hashlib.sha256(check_json).hexdigest())
+            self.assertFalse(artifacts["summary_check_text"]["exists"])
+            self.assertEqual(artifacts["summary_check_text"]["sha256"], "")
 
     def test_wrapper_writes_invocation_plan_after_running_smoke(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -123,6 +150,13 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             self.assertEqual(plan["config"]["candidate_max_iters"], 2)
             self.assertEqual(plan["config"]["decision_min_rubric_score"], 60.0)
             self.assertEqual(plan["summary_check_out_dir"], str(check_dir))
+            self.assertEqual(plan["returncode"], 0)
+            artifacts = plan["summary_digest"]["artifacts"]
+            self.assertTrue(artifacts["summary_json"]["exists"])
+            self.assertTrue(artifacts["summary_json"]["sha256"])
+            self.assertTrue(artifacts["summary_text"]["exists"])
+            self.assertTrue(artifacts["summary_check_json"]["exists"])
+            self.assertTrue(artifacts["summary_check_text"]["exists"])
             self.assertIn("ci_plan_json=", completed.stdout)
             self.assertIn("ci_plan_text=", completed.stdout)
             self.assertTrue((out_dir / "tiny_scorecard_comparison_smoke_summary.json").is_file())
