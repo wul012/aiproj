@@ -10,12 +10,14 @@ def build_maturity_narrative_summary(
     scorecards: list[dict[str, Any] | None],
     scorecard_decisions: list[dict[str, Any] | None],
     dataset_cards: list[dict[str, Any] | None],
+    benchmark_histories: list[dict[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     maturity_summary = _dict(_pick(maturity, "summary"))
     release = _release_summary(maturity_summary, _dict(_pick(maturity, "release_readiness_context")))
     request = _request_summary(maturity, request_history)
     benchmark_rows = [_scorecard_summary(item) for item in scorecards if isinstance(item, dict)]
     decision_rows = [_scorecard_decision_summary(item) for item in scorecard_decisions if isinstance(item, dict)]
+    history_rows = [_benchmark_history_summary(item) for item in (benchmark_histories or []) if isinstance(item, dict)]
     dataset_rows = [_dataset_summary(item) for item in dataset_cards if isinstance(item, dict)]
     benchmark_scores = [row["overall_score"] for row in benchmark_rows if row.get("overall_score") is not None]
     dataset_warnings = sum(int(row.get("warning_count") or 0) for row in dataset_rows)
@@ -26,6 +28,7 @@ def build_maturity_narrative_summary(
         request,
         benchmark_rows,
         decision_rows,
+        history_rows,
         dataset_rows,
         request_history_available=isinstance(request_history, dict),
     )
@@ -68,6 +71,22 @@ def build_maturity_narrative_summary(
         "benchmark_decision_eval_suite_comparison_status_counts": _merge_counts(
             row.get("eval_suite_comparison_status_counts") for row in decision_rows
         ),
+        "benchmark_history_count": len(history_rows),
+        "benchmark_history_entry_count": sum(int(row.get("entry_count") or 0) for row in history_rows),
+        "benchmark_history_ready_count": sum(int(row.get("ready_count") or 0) for row in history_rows),
+        "benchmark_history_promote_count": sum(int(row.get("promote_count") or 0) for row in history_rows),
+        "benchmark_history_review_count": sum(int(row.get("review_count") or 0) for row in history_rows),
+        "benchmark_history_blocked_count": sum(int(row.get("blocked_count") or 0) for row in history_rows),
+        "benchmark_history_case_regression_entry_count": sum(int(row.get("case_regression_entry_count") or 0) for row in history_rows),
+        "benchmark_history_generation_flag_regression_entry_count": sum(
+            int(row.get("generation_quality_flag_regression_entry_count") or 0) for row in history_rows
+        ),
+        "benchmark_history_model_quality_claim_counts": _counts(
+            row.get("model_quality_claim") or "missing" for row in history_rows
+        ),
+        "benchmark_history_boundary_counts": _merge_counts(row.get("boundary_counts") for row in history_rows),
+        "benchmark_history_best_candidate": _selected_history_best_candidate(history_rows),
+        "benchmark_history_latest_boundary": _latest_history_boundary(history_rows),
         "dataset_card_count": len(dataset_rows),
         "dataset_status_counts": _counts(row.get("quality_status") or "missing" for row in dataset_rows),
         "dataset_warning_count": dataset_warnings,
@@ -80,6 +99,14 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
         recommendations.append(
             "Treat scorecard promotion as review-only until non-comparison-ready eval suites are rerun with comparable benchmark evidence."
         )
+    if int(summary.get("benchmark_history_blocked_count") or 0) > 0:
+        recommendations.append("Inspect blocked benchmark history entries before using the portfolio as release-ready evidence.")
+    elif int(summary.get("benchmark_history_case_regression_entry_count") or 0) > 0:
+        recommendations.append("Review benchmark history entries with case regressions before treating score deltas as model improvement.")
+    elif int(summary.get("benchmark_history_generation_flag_regression_entry_count") or 0) > 0:
+        recommendations.append("Review benchmark history generation-quality flag regressions before promoting the selected candidate.")
+    elif int(summary.get("benchmark_history_review_count") or 0) > 0:
+        recommendations.append("Inspect benchmark history entries marked review before treating the portfolio as release-ready.")
     if summary.get("portfolio_status") == "review":
         recommendations.append(
             "Resolve review-level release, request-history, benchmark, or dataset concerns before using this as a release-ready portfolio summary."
@@ -87,7 +114,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
         return recommendations
     if summary.get("portfolio_status") == "incomplete":
         return ["Generate missing maturity, request-history, benchmark scorecard, or dataset-card evidence before presenting the narrative."]
+    if int(summary.get("benchmark_history_count") or 0) == 0:
+        recommendations.append("Add benchmark history ledgers so scorecard comparisons and decisions can be reviewed across repeated runs.")
     return [
+        *recommendations,
         "Use the narrative as the human-facing entry point, then link to maturity, registry, benchmark, dataset, and request-history artifacts for detail.",
         "Keep the next version focused on real model/data capability rather than another display-only report.",
     ]
@@ -120,6 +150,7 @@ def _portfolio_status(
     request: dict[str, Any],
     benchmark_rows: list[dict[str, Any]],
     decision_rows: list[dict[str, Any]],
+    history_rows: list[dict[str, Any]],
     dataset_rows: list[dict[str, Any]],
     *,
     request_history_available: bool,
@@ -139,6 +170,10 @@ def _portfolio_status(
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
         or any(row.get("decision_status") in {"review", "blocked"} for row in decision_rows)
         or any(int(row.get("non_comparison_ready_candidate_count") or 0) > 0 for row in decision_rows)
+        or any(int(row.get("blocked_count") or 0) > 0 for row in history_rows)
+        or any(int(row.get("review_count") or 0) > 0 for row in history_rows)
+        or any(int(row.get("case_regression_entry_count") or 0) > 0 for row in history_rows)
+        or any(int(row.get("generation_quality_flag_regression_entry_count") or 0) > 0 for row in history_rows)
         or any(row.get("quality_status") in {"warn", "fail"} for row in dataset_rows)
     ):
         return "review"
@@ -241,6 +276,24 @@ def _scorecard_decision_summary(decision: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _benchmark_history_summary(history: dict[str, Any]) -> dict[str, Any]:
+    summary = _dict(history.get("summary"))
+    entries = _list_of_dicts(history.get("entries"))
+    return {
+        "entry_count": summary.get("entry_count") if summary else len(entries),
+        "promote_count": summary.get("promote_count"),
+        "review_count": summary.get("review_count"),
+        "blocked_count": summary.get("blocked_count"),
+        "ready_count": summary.get("ready_count"),
+        "case_regression_entry_count": summary.get("case_regression_entry_count"),
+        "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
+        "best_candidate_name": summary.get("best_candidate_name"),
+        "model_quality_claim": summary.get("model_quality_claim"),
+        "boundary_counts": _counts(row.get("boundary") or "missing" for row in entries),
+        "latest_boundary": entries[-1].get("boundary") if entries else None,
+    }
+
+
 def _dataset_summary(card: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(card.get("summary"))
     quality = _dict(card.get("quality"))
@@ -289,6 +342,20 @@ def _decision_non_ready_candidates(rows: list[dict[str, Any]]) -> list[str]:
             if name not in names:
                 names.append(name)
     return names
+
+
+def _selected_history_best_candidate(rows: list[dict[str, Any]]) -> str | None:
+    selected = [row for row in rows if row.get("best_candidate_name")]
+    if not selected:
+        return None
+    return str(selected[-1].get("best_candidate_name"))
+
+
+def _latest_history_boundary(rows: list[dict[str, Any]]) -> str | None:
+    selected = [row for row in rows if row.get("latest_boundary")]
+    if not selected:
+        return None
+    return str(selected[-1].get("latest_boundary"))
 
 
 def _decision_row_non_ready_candidates(evaluations: list[dict[str, Any]], summary: dict[str, Any]) -> list[str]:

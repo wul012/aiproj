@@ -44,6 +44,11 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                     "Scorecard decision non-ready candidates",
                     summary.get("benchmark_decision_non_comparison_ready_candidate_count"),
                 ),
+                ("Benchmark histories", summary.get("benchmark_history_count")),
+                ("Benchmark history entries", summary.get("benchmark_history_entry_count")),
+                ("Benchmark history ready", summary.get("benchmark_history_ready_count")),
+                ("Benchmark history best", summary.get("benchmark_history_best_candidate")),
+                ("Benchmark history boundary", summary.get("benchmark_history_latest_boundary")),
                 ("Dataset cards", summary.get("dataset_card_count")),
                 ("Dataset warnings", summary.get("dataset_warning_count")),
             ]
@@ -114,6 +119,10 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Decision run", summary.get("benchmark_decision_selected_run")),
         ("Decision eval", summary.get("benchmark_decision_selected_eval_suite_comparison_status")),
         ("Decision non-ready", summary.get("benchmark_decision_non_comparison_ready_candidate_count")),
+        ("Histories", summary.get("benchmark_history_count")),
+        ("History entries", summary.get("benchmark_history_entry_count")),
+        ("History ready", summary.get("benchmark_history_ready_count")),
+        ("History boundary", summary.get("benchmark_history_latest_boundary")),
         ("Dataset cards", summary.get("dataset_card_count")),
     ]
     return "\n".join(

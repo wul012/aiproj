@@ -52,6 +52,15 @@ def build_maturity_narrative_sections(summary: dict[str, Any]) -> list[dict[str,
             "next_step": "Keep promoted scorecards tied to raw comparison, generation-quality, and eval-suite coverage evidence before claiming model improvement.",
         },
         {
+            "key": "benchmark_history",
+            "title": "Benchmark History",
+            "status": _benchmark_history_status(summary),
+            "claim": _benchmark_history_claim(summary),
+            "evidence": "Benchmark history ledgers connect scorecard comparison and decision artifacts across repeated runs, including readiness counts, best candidate, model-quality claim boundary, and regression hints.",
+            "boundary": "History entries explain benchmark evidence continuity; tiny-smoke entries remain plumbing evidence and do not prove broad model quality.",
+            "next_step": "Append real standard-suite benchmark histories before treating one-off score deltas as durable improvement.",
+        },
+        {
             "key": "data_governance",
             "title": "Data Governance",
             "status": _status_from_counts(summary.get("dataset_status_counts")),
@@ -78,6 +87,7 @@ def build_maturity_narrative_evidence_matrix(
     request_path: Path,
     scorecard_paths: list[Path],
     scorecard_decision_paths: list[Path],
+    benchmark_history_paths: list[Path],
     dataset_card_paths: list[Path],
     sections: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
@@ -90,8 +100,11 @@ def build_maturity_narrative_evidence_matrix(
         rows.append(_evidence("benchmark", "benchmark scorecard", path, sections[3]))
     for path in scorecard_decision_paths:
         rows.append(_evidence("benchmark", "scorecard promotion decision", path, sections[4]))
+    benchmark_history_section = next((section for section in sections if section.get("key") == "benchmark_history"), None)
+    for path in benchmark_history_paths:
+        rows.append(_evidence("benchmark", "benchmark history ledger", path, benchmark_history_section or sections[4]))
     for path in dataset_card_paths:
-        rows.append(_evidence("dataset", "dataset card", path, sections[5]))
+        rows.append(_evidence("dataset", "dataset card", path, next(section for section in sections if section.get("key") == "data_governance")))
     return rows
 
 
@@ -123,6 +136,22 @@ def _benchmark_decision_status(summary: dict[str, Any]) -> str:
     if int(summary.get("benchmark_decision_non_comparison_ready_candidate_count") or 0) > 0:
         return "warn"
     return _status_from_counts(summary.get("benchmark_decision_status_counts"))
+
+
+def _benchmark_history_status(summary: dict[str, Any]) -> str:
+    if int(summary.get("benchmark_history_count") or 0) == 0:
+        return "missing"
+    if int(summary.get("benchmark_history_blocked_count") or 0) > 0:
+        return "fail"
+    if (
+        int(summary.get("benchmark_history_review_count") or 0) > 0
+        or int(summary.get("benchmark_history_case_regression_entry_count") or 0) > 0
+        or int(summary.get("benchmark_history_generation_flag_regression_entry_count") or 0) > 0
+    ):
+        return "warn"
+    if int(summary.get("benchmark_history_ready_count") or 0) > 0:
+        return "pass"
+    return "missing"
 
 
 def _release_claim(summary: dict[str, Any]) -> str:
@@ -161,6 +190,18 @@ def _benchmark_decision_claim(summary: dict[str, Any]) -> str:
         f"and selected eval comparison status "
         f"{summary.get('benchmark_decision_selected_eval_suite_comparison_status') or 'missing'}; "
         f"{summary.get('benchmark_decision_non_comparison_ready_candidate_count') or 0} candidate(s) are not comparison-ready."
+    )
+
+
+def _benchmark_history_claim(summary: dict[str, Any]) -> str:
+    return (
+        f"{summary.get('benchmark_history_count') or 0} benchmark history ledger(s) cover "
+        f"{summary.get('benchmark_history_entry_count') or 0} entry(ies), with "
+        f"{summary.get('benchmark_history_ready_count') or 0} ready, "
+        f"{summary.get('benchmark_history_review_count') or 0} review, "
+        f"{summary.get('benchmark_history_blocked_count') or 0} blocked; "
+        f"best candidate is {summary.get('benchmark_history_best_candidate') or 'missing'} and latest boundary is "
+        f"{summary.get('benchmark_history_latest_boundary') or 'missing'}."
     )
 
 

@@ -32,6 +32,7 @@ def build_maturity_narrative(
     request_history_summary_path: str | Path | None = None,
     benchmark_scorecard_paths: list[str | Path] | None = None,
     benchmark_scorecard_decision_paths: list[str | Path] | None = None,
+    benchmark_history_paths: list[str | Path] | None = None,
     dataset_card_paths: list[str | Path] | None = None,
     title: str = "MiniGPT release-quality maturity narrative",
     generated_at: str | None = None,
@@ -46,6 +47,7 @@ def build_maturity_narrative(
     )
     scorecard_files = [Path(path) for path in (benchmark_scorecard_paths or _discover_scorecards(root))]
     scorecard_decision_files = [Path(path) for path in (benchmark_scorecard_decision_paths or _discover_scorecard_decisions(root))]
+    benchmark_history_files = [Path(path) for path in (benchmark_history_paths or _discover_benchmark_histories(root))]
     dataset_card_files = [Path(path) for path in (dataset_card_paths or _discover_dataset_cards(root))]
 
     maturity = _read_json(maturity_file)
@@ -53,9 +55,18 @@ def build_maturity_narrative(
     request_history = _read_json(request_file)
     scorecards = [_read_json(path) for path in scorecard_files]
     scorecard_decisions = [_read_json(path) for path in scorecard_decision_files]
+    benchmark_histories = [_read_json(path) for path in benchmark_history_files]
     dataset_cards = [_read_json(path) for path in dataset_card_files]
 
-    summary = build_maturity_narrative_summary(maturity, registry, request_history, scorecards, scorecard_decisions, dataset_cards)
+    summary = build_maturity_narrative_summary(
+        maturity,
+        registry,
+        request_history,
+        scorecards,
+        scorecard_decisions,
+        dataset_cards,
+        benchmark_histories,
+    )
     sections = build_maturity_narrative_sections(summary)
     evidence = build_maturity_narrative_evidence_matrix(
         maturity_file,
@@ -63,6 +74,7 @@ def build_maturity_narrative(
         request_file,
         scorecard_files,
         scorecard_decision_files,
+        benchmark_history_files,
         dataset_card_files,
         sections,
     )
@@ -77,6 +89,7 @@ def build_maturity_narrative(
             "request_history_summary_path": str(request_file),
             "benchmark_scorecard_paths": [str(path) for path in scorecard_files],
             "benchmark_scorecard_decision_paths": [str(path) for path in scorecard_decision_files],
+            "benchmark_history_paths": [str(path) for path in benchmark_history_files],
             "dataset_card_paths": [str(path) for path in dataset_card_files],
         },
         "summary": summary,
@@ -93,6 +106,15 @@ def _discover_scorecards(root: Path) -> list[Path]:
 
 def _discover_scorecard_decisions(root: Path) -> list[Path]:
     return sorted(root.glob("runs/**/benchmark-scorecard-decision/benchmark_scorecard_decision.json"))
+
+
+def _discover_benchmark_histories(root: Path) -> list[Path]:
+    return sorted(
+        {
+            *root.glob("runs/**/benchmark-history/benchmark_history.json"),
+            *root.glob("runs/**/benchmark_history.json"),
+        }
+    )
 
 
 def _discover_dataset_cards(root: Path) -> list[Path]:

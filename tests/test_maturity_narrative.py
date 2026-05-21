@@ -38,6 +38,7 @@ def make_project(
     request_path = project / "runs" / "request-history-summary" / "request_history_summary.json"
     scorecard_path = project / "runs" / "demo-run" / "benchmark-scorecard" / "benchmark_scorecard.json"
     decision_path = project / "runs" / "demo-run" / "benchmark-scorecard-decision" / "benchmark_scorecard_decision.json"
+    history_path = project / "runs" / "demo-run" / "benchmark-history" / "benchmark_history.json"
     dataset_card_path = project / "datasets" / "demo" / "v1" / "dataset_card.json"
 
     write_json(
@@ -167,6 +168,37 @@ def make_project(
         },
     )
     write_json(
+        history_path,
+        {
+            "schema_version": 1,
+            "evidence_kind": "real-benchmark",
+            "summary": {
+                "entry_count": 1,
+                "promote_count": 1,
+                "review_count": 0,
+                "blocked_count": 0,
+                "ready_count": 1,
+                "case_regression_entry_count": 0,
+                "generation_quality_flag_regression_entry_count": 0,
+                "best_candidate_name": "demo-run",
+                "model_quality_claim": "candidate_evidence",
+            },
+            "entries": [
+                {
+                    "name": "demo-history",
+                    "candidate_name": "demo-run",
+                    "decision_status": "promote",
+                    "promotion_readiness": "ready",
+                    "model_quality_claim": "candidate_evidence",
+                    "rubric_avg_score_delta": 5.0,
+                    "generation_quality_total_flags_delta": -2,
+                    "case_regression_count": 0,
+                    "boundary": "standard-benchmark-candidate-evidence",
+                }
+            ],
+        },
+    )
+    write_json(
         dataset_card_path,
         {
             "schema_version": 1,
@@ -186,6 +218,7 @@ def make_project(
         "request": request_path,
         "scorecard": scorecard_path,
         "scorecard_decision": decision_path,
+        "benchmark_history": history_path,
         "dataset_card": dataset_card_path,
     }
 
@@ -217,11 +250,13 @@ class MaturityNarrativeTests(unittest.TestCase):
             [{"summary": {"overall_status": "pass", "overall_score": 80}}],
             [{"decision_status": "promote", "selected_run": {"name": "demo"}}],
             [{"summary": {"quality_status": "pass", "warning_count": 0}}],
+            [{"summary": {"entry_count": 1, "ready_count": 1}, "entries": [{"boundary": "standard-benchmark-candidate-evidence"}]}],
         )
         sections = maturity_narrative_sections.build_maturity_narrative_sections(summary)
 
         self.assertEqual(summary["portfolio_status"], "ready")
         self.assertEqual(sections[4]["title"], "Benchmark Promotion Decision")
+        self.assertEqual(sections[5]["title"], "Benchmark History")
 
     def test_build_maturity_narrative_ready_portfolio(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -247,13 +282,36 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["benchmark_decision_selected_flag_delta"], -2)
             self.assertEqual(narrative["summary"]["benchmark_decision_selected_eval_suite_comparison_status"], "pass")
             self.assertEqual(narrative["summary"]["benchmark_decision_non_comparison_ready_candidate_count"], 0)
+            self.assertEqual(narrative["summary"]["benchmark_history_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_entry_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_ready_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_best_candidate"], "demo-run")
+            self.assertEqual(narrative["summary"]["benchmark_history_latest_boundary"], "standard-benchmark-candidate-evidence")
             self.assertEqual(narrative["summary"]["dataset_card_count"], 1)
             self.assertEqual(narrative["summary"]["dataset_warning_count"], 0)
             self.assertEqual(narrative["warnings"], [])
             self.assertIn("Release Quality Trend", {item["title"] for item in narrative["sections"]})
             self.assertIn("benchmark", {item["area"] for item in narrative["evidence_matrix"]})
             self.assertIn("scorecard promotion decision", {item["signal"] for item in narrative["evidence_matrix"]})
+            self.assertIn("benchmark history ledger", {item["signal"] for item in narrative["evidence_matrix"]})
             self.assertIn("dataset", {item["area"] for item in narrative["evidence_matrix"]})
+
+    def test_build_maturity_narrative_marks_review_for_history_flag_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp))
+            history = json.loads(paths["benchmark_history"].read_text(encoding="utf-8"))
+            history["summary"]["generation_quality_flag_regression_entry_count"] = 1
+            history["entries"][0]["generation_quality_total_flags_delta"] = 3
+            history["entries"][0]["generation_quality_flag_relation"] = "regressed"
+            write_json(paths["benchmark_history"], history)
+
+            narrative = build_maturity_narrative(paths["project"])
+            history_section = next(item for item in narrative["sections"] if item["key"] == "benchmark_history")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["benchmark_history_generation_flag_regression_entry_count"], 1)
+            self.assertEqual(history_section["status"], "warn")
+            self.assertIn("generation-quality flag regressions", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_marks_review_for_release_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -358,12 +416,16 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision eval compare", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark histories", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history boundary", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("CI regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("CI order regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Coverage regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Coverage gap delta", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark History", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("History boundary", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Decision eval", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Quality", Path(outputs["html"]).read_text(encoding="utf-8"))
 

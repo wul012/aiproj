@@ -37,6 +37,13 @@ def parse_args() -> argparse.Namespace:
         help="Optional benchmark_scorecard_decision.json path. Repeat for multiple decisions.",
     )
     parser.add_argument(
+        "--benchmark-history",
+        type=Path,
+        action="append",
+        default=[],
+        help="Optional benchmark_history.json path. Repeat for multiple benchmark history ledgers.",
+    )
+    parser.add_argument(
         "--dataset-card",
         type=Path,
         action="append",
@@ -57,6 +64,7 @@ def main() -> None:
         request_history_summary_path=args.request_history_summary,
         benchmark_scorecard_paths=args.benchmark_scorecard or None,
         benchmark_scorecard_decision_paths=args.benchmark_scorecard_decision or None,
+        benchmark_history_paths=args.benchmark_history or None,
         dataset_card_paths=args.dataset_card or None,
         title=args.title,
     )
@@ -76,6 +84,10 @@ def main() -> None:
     print(f"benchmark_scorecards={summary.get('benchmark_scorecard_count')}")
     print(f"benchmark_scorecard_decisions={summary.get('benchmark_decision_count')}")
     print(f"benchmark_decision_selected_run={summary.get('benchmark_decision_selected_run')}")
+    print(f"benchmark_histories={summary.get('benchmark_history_count')}")
+    print(f"benchmark_history_entries={summary.get('benchmark_history_entry_count')}")
+    print(f"benchmark_history_ready={summary.get('benchmark_history_ready_count')}")
+    print(f"benchmark_history_boundary={summary.get('benchmark_history_latest_boundary')}")
     print(f"dataset_cards={summary.get('dataset_card_count')}")
     print("warnings=" + json.dumps(narrative.get("warnings", []), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
