@@ -11,6 +11,10 @@ from minigpt.report_utils import (
     number_or_none,
     utc_now,
 )
+from minigpt.release_gate_benchmark import (
+    benchmark_history_gate_detail,
+    benchmark_history_gate_result,
+)
 from minigpt.release_gate_artifacts import (
     render_release_gate_html,
     render_release_gate_markdown,
@@ -29,6 +33,7 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": True,
         "require_request_history_summary": True,
+        "require_benchmark_history": True,
         "require_test_coverage": True,
     },
     "review": {
@@ -37,6 +42,7 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": True,
         "require_request_history_summary": True,
+        "require_benchmark_history": True,
         "require_test_coverage": True,
     },
     "strict": {
@@ -45,6 +51,7 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": True,
         "require_request_history_summary": True,
+        "require_benchmark_history": True,
         "require_test_coverage": True,
     },
     "legacy": {
@@ -53,6 +60,7 @@ RELEASE_GATE_POLICY_PROFILES: dict[str, dict[str, Any]] = {
         "minimum_ready_runs": 1,
         "require_generation_quality": False,
         "require_request_history_summary": False,
+        "require_benchmark_history": False,
         "require_test_coverage": False,
     },
 }
@@ -68,6 +76,7 @@ def resolve_release_gate_policy(
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
     require_request_history_summary: bool | None = None,
+    require_benchmark_history: bool | None = None,
     require_test_coverage: bool | None = None,
 ) -> dict[str, Any]:
     if policy_profile not in RELEASE_GATE_POLICY_PROFILES:
@@ -79,6 +88,7 @@ def resolve_release_gate_policy(
         "minimum_ready_runs": minimum_ready_runs is not None,
         "require_generation_quality": require_generation_quality is not None,
         "require_request_history_summary": require_request_history_summary is not None,
+        "require_benchmark_history": require_benchmark_history is not None,
         "require_test_coverage": require_test_coverage is not None,
     }
     if minimum_audit_score is not None:
@@ -89,6 +99,8 @@ def resolve_release_gate_policy(
         profile["require_generation_quality"] = bool(require_generation_quality)
     if require_request_history_summary is not None:
         profile["require_request_history_summary"] = bool(require_request_history_summary)
+    if require_benchmark_history is not None:
+        profile["require_benchmark_history"] = bool(require_benchmark_history)
     if require_test_coverage is not None:
         profile["require_test_coverage"] = bool(require_test_coverage)
     return {
@@ -98,6 +110,7 @@ def resolve_release_gate_policy(
         "minimum_ready_runs": int(profile["minimum_ready_runs"]),
         "require_generation_quality": bool(profile["require_generation_quality"]),
         "require_request_history_summary": bool(profile["require_request_history_summary"]),
+        "require_benchmark_history": bool(profile["require_benchmark_history"]),
         "require_test_coverage": bool(profile["require_test_coverage"]),
         "overrides": overrides,
     }
@@ -111,6 +124,7 @@ def build_release_gate(
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
     require_request_history_summary: bool | None = None,
+    require_benchmark_history: bool | None = None,
     require_test_coverage: bool | None = None,
     title: str = "MiniGPT release gate",
     generated_at: str | None = None,
@@ -123,6 +137,7 @@ def build_release_gate(
         minimum_ready_runs=minimum_ready_runs,
         require_generation_quality=require_generation_quality,
         require_request_history_summary=require_request_history_summary,
+        require_benchmark_history=require_benchmark_history,
         require_test_coverage=require_test_coverage,
     )
     checks = _build_checks(
@@ -131,6 +146,7 @@ def build_release_gate(
         minimum_ready_runs=policy["minimum_ready_runs"],
         require_generation_quality=policy["require_generation_quality"],
         require_request_history_summary=policy["require_request_history_summary"],
+        require_benchmark_history=policy["require_benchmark_history"],
         require_test_coverage=policy["require_test_coverage"],
     )
     summary = _build_summary(bundle, checks)
@@ -151,6 +167,7 @@ def build_release_gate(
             "require_all_evidence_artifacts": True,
             "require_generation_quality_audit_checks": policy["require_generation_quality"],
             "require_request_history_summary_audit_check": policy["require_request_history_summary"],
+            "require_benchmark_history_gate_check": policy["require_benchmark_history"],
             "require_test_coverage_audit_check": policy["require_test_coverage"],
             "overrides": policy["overrides"],
         },
@@ -187,6 +204,7 @@ def _build_checks(
     minimum_ready_runs: int,
     require_generation_quality: bool,
     require_request_history_summary: bool,
+    require_benchmark_history: bool,
     require_test_coverage: bool,
 ) -> list[dict[str, Any]]:
     summary = _dict(bundle.get("summary"))
@@ -268,6 +286,12 @@ def _build_checks(
             _request_history_summary_audit_detail(audit_checks, require_request_history_summary),
         ),
         _check(
+            "benchmark_history_gate_check",
+            "Benchmark history release evidence passed",
+            benchmark_history_gate_result(audit_checks, summary, require_benchmark_history),
+            benchmark_history_gate_detail(audit_checks, summary, require_benchmark_history),
+        ),
+        _check(
             "test_coverage_audit_check",
             "Test coverage audit check passed",
             _test_coverage_audit_result(audit_checks, require_test_coverage),
@@ -316,6 +340,15 @@ def _build_summary(bundle: dict[str, Any], checks: list[dict[str, Any]]) -> dict
         "test_coverage_percent": bundle_summary.get("test_coverage_percent"),
         "test_coverage_fail_under": bundle_summary.get("test_coverage_fail_under"),
         "test_coverage_gap": bundle_summary.get("test_coverage_gap"),
+        "benchmark_history_status": bundle_summary.get("benchmark_history_status"),
+        "benchmark_history_entries": bundle_summary.get("benchmark_history_entries"),
+        "benchmark_history_ready": bundle_summary.get("benchmark_history_ready"),
+        "benchmark_history_review": bundle_summary.get("benchmark_history_review"),
+        "benchmark_history_blocked": bundle_summary.get("benchmark_history_blocked"),
+        "benchmark_history_case_regressions": bundle_summary.get("benchmark_history_case_regressions"),
+        "benchmark_history_generation_flag_regressions": bundle_summary.get("benchmark_history_generation_flag_regressions"),
+        "benchmark_history_model_quality_claim": bundle_summary.get("benchmark_history_model_quality_claim"),
+        "benchmark_history_latest_boundary": bundle_summary.get("benchmark_history_latest_boundary"),
     }
 
 

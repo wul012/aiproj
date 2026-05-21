@@ -52,6 +52,11 @@ def parse_args() -> argparse.Namespace:
         help="Override every selected policy profile and do not require request history summary audit checks",
     )
     parser.add_argument(
+        "--allow-missing-benchmark-history",
+        action="store_true",
+        help="Override every selected policy profile and do not require benchmark history release evidence",
+    )
+    parser.add_argument(
         "--allow-missing-test-coverage",
         action="store_true",
         help="Override every selected policy profile and do not require test coverage audit checks",
@@ -67,6 +72,7 @@ def main() -> None:
     out_dir = args.out_dir or ROOT / "runs" / "release-gate-profiles"
     require_generation_quality = False if args.allow_missing_generation_quality else None
     require_request_history_summary = False if args.allow_missing_request_history_summary else None
+    require_benchmark_history = False if args.allow_missing_benchmark_history else None
     require_test_coverage = False if args.allow_missing_test_coverage else None
     profiles = args.profiles or list(DEFAULT_COMPARISON_PROFILES)
     report = build_release_gate_profile_comparison(
@@ -76,6 +82,7 @@ def main() -> None:
         minimum_ready_runs=args.min_ready_runs,
         require_generation_quality=require_generation_quality,
         require_request_history_summary=require_request_history_summary,
+        require_benchmark_history=require_benchmark_history,
         require_test_coverage=require_test_coverage,
         baseline_profile=args.baseline_profile,
         title=args.title,

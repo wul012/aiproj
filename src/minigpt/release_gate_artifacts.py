@@ -42,6 +42,11 @@ def render_release_gate_markdown(gate: dict[str, Any]) -> str:
                 ("Test coverage percent", summary.get("test_coverage_percent")),
                 ("Test coverage fail under", summary.get("test_coverage_fail_under")),
                 ("Test coverage gap", summary.get("test_coverage_gap")),
+                ("Benchmark history status", summary.get("benchmark_history_status")),
+                ("Benchmark history entries", summary.get("benchmark_history_entries")),
+                ("Benchmark history ready", summary.get("benchmark_history_ready")),
+                ("Benchmark history regressions", summary.get("benchmark_history_case_regressions")),
+                ("Benchmark history boundary", summary.get("benchmark_history_latest_boundary")),
                 ("Pass checks", summary.get("pass_count")),
                 ("Warn checks", summary.get("warn_count")),
                 ("Fail checks", summary.get("fail_count")),
@@ -90,6 +95,8 @@ def render_release_gate_html(gate: dict[str, Any]) -> str:
         ("Missing", summary.get("missing_artifacts")),
         ("Coverage", summary.get("test_coverage_status")),
         ("Coverage %", summary.get("test_coverage_percent")),
+        ("Bench history", summary.get("benchmark_history_status")),
+        ("Bench entries", summary.get("benchmark_history_entries")),
         ("Generated", gate.get("generated_at")),
     ]
     return "\n".join(

@@ -143,6 +143,9 @@
 360-v346-benchmark-history-release-bundle.md
  -> v346 code explanation: let release bundles carry benchmark history context from project audit and preserve history readiness, regression, quality-claim, and boundary evidence in release handoff.
 
+361-v347-benchmark-history-release-gate.md
+ -> v347 code explanation: let release gates and release gate profile comparisons consume benchmark history evidence so release decisions expose missing, warning, blocked, regression, and legacy-override boundaries.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

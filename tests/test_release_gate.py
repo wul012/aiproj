@@ -39,6 +39,16 @@ def make_bundle(
     generation_status: str = "pass",
     include_request_history_check: bool = True,
     request_history_status: str = "pass",
+    include_benchmark_history_check: bool = True,
+    benchmark_history_status: str = "pass",
+    benchmark_history_entries: int | None = 1,
+    benchmark_history_ready: int | None = 1,
+    benchmark_history_review: int | None = 0,
+    benchmark_history_blocked: int | None = 0,
+    benchmark_history_case_regressions: int | None = 0,
+    benchmark_history_generation_flag_regressions: int | None = 0,
+    benchmark_history_model_quality_claim: str | None = "candidate_evidence",
+    benchmark_history_latest_boundary: str | None = "standard-benchmark-candidate-evidence",
     include_test_coverage_check: bool = True,
     test_coverage_status: str = "pass",
 ) -> Path:
@@ -69,6 +79,20 @@ def make_bundle(
                 "detail": f"status={request_history_status}; records=4; invalid=0; timeout_rate=0; error_rate=0.",
             }
         )
+    if include_benchmark_history_check:
+        audit_checks.append(
+            {
+                "id": "benchmark_history",
+                "title": "Benchmark history is audit-ready",
+                "status": benchmark_history_status,
+                "detail": (
+                    f"entries={benchmark_history_entries}; ready={benchmark_history_ready}; "
+                    f"review={benchmark_history_review}; blocked={benchmark_history_blocked}; "
+                    f"case_regressions={benchmark_history_case_regressions}; "
+                    f"generation_flag_regressions={benchmark_history_generation_flag_regressions}."
+                ),
+            }
+        )
     if include_test_coverage_check:
         audit_checks.append(
             {
@@ -93,6 +117,17 @@ def make_bundle(
             "ready_runs": ready_runs,
             "available_artifacts": 9,
             "missing_artifacts": missing_artifacts,
+            "benchmark_history_status": benchmark_history_status if include_benchmark_history_check else None,
+            "benchmark_history_entries": benchmark_history_entries if include_benchmark_history_check else None,
+            "benchmark_history_ready": benchmark_history_ready if include_benchmark_history_check else None,
+            "benchmark_history_review": benchmark_history_review if include_benchmark_history_check else None,
+            "benchmark_history_blocked": benchmark_history_blocked if include_benchmark_history_check else None,
+            "benchmark_history_case_regressions": benchmark_history_case_regressions if include_benchmark_history_check else None,
+            "benchmark_history_generation_flag_regressions": (
+                benchmark_history_generation_flag_regressions if include_benchmark_history_check else None
+            ),
+            "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim if include_benchmark_history_check else None,
+            "benchmark_history_latest_boundary": benchmark_history_latest_boundary if include_benchmark_history_check else None,
             "test_coverage_status": test_coverage_status if include_test_coverage_check else None,
             "test_coverage_percent": 90.15 if include_test_coverage_check else None,
             "test_coverage_fail_under": 80.0 if include_test_coverage_check else None,
@@ -149,6 +184,8 @@ class ReleaseGateTests(unittest.TestCase):
         self.assertEqual(profiles["legacy"]["require_generation_quality"], False)
         self.assertEqual(profiles["standard"]["require_request_history_summary"], True)
         self.assertEqual(profiles["legacy"]["require_request_history_summary"], False)
+        self.assertEqual(profiles["standard"]["require_benchmark_history"], True)
+        self.assertEqual(profiles["legacy"]["require_benchmark_history"], False)
         self.assertEqual(profiles["standard"]["require_test_coverage"], True)
         self.assertEqual(profiles["legacy"]["require_test_coverage"], False)
 
@@ -172,10 +209,14 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], True)
             self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], True)
+            self.assertEqual(gate["policy"]["require_benchmark_history_gate_check"], True)
             self.assertEqual(gate["policy"]["require_test_coverage_audit_check"], True)
             self.assertIn("generation_quality_audit_checks", {check["id"] for check in gate["checks"]})
             self.assertIn("request_history_summary_audit_check", {check["id"] for check in gate["checks"]})
+            self.assertIn("benchmark_history_gate_check", {check["id"] for check in gate["checks"]})
             self.assertIn("test_coverage_audit_check", {check["id"] for check in gate["checks"]})
+            self.assertEqual(gate["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(gate["summary"]["benchmark_history_ready"], 1)
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertIn("Release gate passed", " ".join(gate["recommendations"]))
 
@@ -249,6 +290,7 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["minimum_audit_score"], 80.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
             self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], False)
+            self.assertEqual(gate["policy"]["require_benchmark_history_gate_check"], False)
             self.assertEqual(gate["summary"]["gate_status"], "pass")
 
     def test_explicit_overrides_take_precedence_over_policy_profile(self) -> None:
@@ -261,6 +303,7 @@ class ReleaseGateTests(unittest.TestCase):
                 minimum_audit_score=90.0,
                 require_generation_quality=False,
                 require_request_history_summary=False,
+                require_benchmark_history=False,
                 require_test_coverage=False,
             )
 
@@ -268,6 +311,7 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["policy"]["minimum_audit_score"], 90.0)
             self.assertEqual(gate["policy"]["require_generation_quality_audit_checks"], False)
             self.assertEqual(gate["policy"]["require_request_history_summary_audit_check"], False)
+            self.assertEqual(gate["policy"]["require_benchmark_history_gate_check"], False)
             self.assertEqual(gate["policy"]["require_test_coverage_audit_check"], False)
             self.assertEqual(
                 gate["policy"]["overrides"],
@@ -276,6 +320,7 @@ class ReleaseGateTests(unittest.TestCase):
                     "minimum_ready_runs": False,
                     "require_generation_quality": True,
                     "require_request_history_summary": True,
+                    "require_benchmark_history": True,
                     "require_test_coverage": True,
                 },
             )
@@ -322,6 +367,62 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(gate["summary"]["gate_status"], "warn")
             check = next(item for item in gate["checks"] if item["id"] == "request_history_summary_audit_check")
             self.assertEqual(check["status"], "warn")
+
+    def test_build_release_gate_fails_when_benchmark_history_is_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_benchmark_history_check=False)
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "fail")
+            check = next(item for item in gate["checks"] if item["id"] == "benchmark_history_gate_check")
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("missing required benchmark_history", check["detail"])
+
+    def test_legacy_profile_allows_missing_benchmark_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), include_benchmark_history_check=False, audit_score=84.0)
+
+            gate = build_release_gate(bundle_path, policy_profile="legacy")
+
+            self.assertEqual(gate["policy"]["require_benchmark_history_gate_check"], False)
+            self.assertEqual(gate["summary"]["gate_status"], "pass")
+
+    def test_build_release_gate_warns_for_benchmark_history_review_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(
+                Path(tmp),
+                benchmark_history_status="warn",
+                benchmark_history_ready=0,
+                benchmark_history_review=1,
+                benchmark_history_case_regressions=1,
+                benchmark_history_model_quality_claim="not_claimed",
+                benchmark_history_latest_boundary="tiny-smoke-plumbing-evidence",
+            )
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "warn")
+            check = next(item for item in gate["checks"] if item["id"] == "benchmark_history_gate_check")
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("case_regressions=1", check["detail"])
+            self.assertEqual(exit_code_for_gate(gate), 0)
+            self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
+
+    def test_build_release_gate_fails_for_blocked_benchmark_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(
+                Path(tmp),
+                benchmark_history_status="pass",
+                benchmark_history_blocked=1,
+            )
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "fail")
+            check = next(item for item in gate["checks"] if item["id"] == "benchmark_history_gate_check")
+            self.assertEqual(check["status"], "fail")
+            self.assertIn("blocked=1", check["detail"])
 
     def test_build_release_gate_fails_when_test_coverage_check_is_missing(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

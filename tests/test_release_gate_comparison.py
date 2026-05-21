@@ -31,6 +31,7 @@ def make_bundle(
     audit_score: float | None = 100.0,
     include_generation_checks: bool = True,
     include_request_history_check: bool = True,
+    include_benchmark_history_check: bool = True,
     include_test_coverage_check: bool = True,
     warnings: list[str] | None = None,
 ) -> Path:
@@ -61,6 +62,15 @@ def make_bundle(
                 "detail": "status=pass; records=4; invalid=0; timeout_rate=0; error_rate=0.",
             }
         )
+    if include_benchmark_history_check:
+        audit_checks.append(
+            {
+                "id": "benchmark_history",
+                "title": "Benchmark history is audit-ready",
+                "status": "pass",
+                "detail": "entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0.",
+            }
+        )
     if include_test_coverage_check:
         audit_checks.append(
             {
@@ -85,6 +95,17 @@ def make_bundle(
             "ready_runs": 1,
             "available_artifacts": 9,
             "missing_artifacts": 0,
+            "benchmark_history_status": "pass" if include_benchmark_history_check else None,
+            "benchmark_history_entries": 1 if include_benchmark_history_check else None,
+            "benchmark_history_ready": 1 if include_benchmark_history_check else None,
+            "benchmark_history_review": 0 if include_benchmark_history_check else None,
+            "benchmark_history_blocked": 0 if include_benchmark_history_check else None,
+            "benchmark_history_case_regressions": 0 if include_benchmark_history_check else None,
+            "benchmark_history_generation_flag_regressions": 0 if include_benchmark_history_check else None,
+            "benchmark_history_model_quality_claim": "candidate_evidence" if include_benchmark_history_check else None,
+            "benchmark_history_latest_boundary": (
+                "standard-benchmark-candidate-evidence" if include_benchmark_history_check else None
+            ),
             "test_coverage_status": "pass" if include_test_coverage_check else None,
             "test_coverage_percent": 90.15 if include_test_coverage_check else None,
             "test_coverage_fail_under": 80.0 if include_test_coverage_check else None,
@@ -178,6 +199,7 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             self.assertEqual(by_profile["legacy"]["decision"], "approved")
             self.assertEqual(by_profile["legacy"]["require_generation_quality_audit_checks"], False)
             self.assertEqual(by_profile["legacy"]["require_request_history_summary_audit_check"], False)
+            self.assertEqual(by_profile["legacy"]["require_benchmark_history_gate_check"], False)
             legacy_delta = next(delta for delta in report["deltas"] if delta["compared_profile"] == "legacy")
             self.assertEqual(legacy_delta["compared_decision"], "approved")
             self.assertIn("audit_score", legacy_delta["removed_failed_checks"])
@@ -197,6 +219,20 @@ class ReleaseGateProfileComparisonTests(unittest.TestCase):
             legacy_delta = next(delta for delta in report["deltas"] if delta["compared_profile"] == "legacy")
             self.assertIn("request_history_summary_audit_check", legacy_delta["removed_failed_checks"])
             self.assertIn("Request-history-summary requirement changes", legacy_delta["explanation"])
+
+    def test_legacy_profile_can_be_compared_against_missing_benchmark_history_bundle(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(Path(tmp), audit_score=84.0, include_benchmark_history_check=False)
+
+            report = build_release_gate_profile_comparison([bundle_path], policy_profiles=["standard", "legacy"])
+
+            by_profile = {row["policy_profile"]: row for row in report["rows"]}
+            self.assertEqual(by_profile["standard"]["decision"], "blocked")
+            self.assertIn("benchmark_history_gate_check", by_profile["standard"]["failed_checks"])
+            self.assertEqual(by_profile["legacy"]["decision"], "approved")
+            legacy_delta = next(delta for delta in report["deltas"] if delta["compared_profile"] == "legacy")
+            self.assertIn("benchmark_history_gate_check", legacy_delta["removed_failed_checks"])
+            self.assertIn("Benchmark-history requirement changes", legacy_delta["explanation"])
 
     def test_profile_comparison_supports_multiple_bundles(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

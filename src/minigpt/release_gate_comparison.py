@@ -31,6 +31,7 @@ def build_release_gate_profile_comparison(
     minimum_ready_runs: int | None = None,
     require_generation_quality: bool | None = None,
     require_request_history_summary: bool | None = None,
+    require_benchmark_history: bool | None = None,
     require_test_coverage: bool | None = None,
     baseline_profile: str | None = None,
     title: str = "MiniGPT release gate profile comparison",
@@ -55,6 +56,7 @@ def build_release_gate_profile_comparison(
                 minimum_ready_runs=minimum_ready_runs,
                 require_generation_quality=require_generation_quality,
                 require_request_history_summary=require_request_history_summary,
+                require_benchmark_history=require_benchmark_history,
                 require_test_coverage=require_test_coverage,
                 title=f"{title}: {profile}",
                 generated_at=timestamp,
@@ -115,6 +117,7 @@ def _row_from_gate(gate: dict[str, Any]) -> dict[str, Any]:
         "minimum_ready_runs": policy.get("minimum_ready_runs"),
         "require_generation_quality_audit_checks": policy.get("require_generation_quality_audit_checks"),
         "require_request_history_summary_audit_check": policy.get("require_request_history_summary_audit_check"),
+        "require_benchmark_history_gate_check": policy.get("require_benchmark_history_gate_check"),
         "require_test_coverage_audit_check": policy.get("require_test_coverage_audit_check"),
         "pass_count": summary.get("pass_count"),
         "warn_count": summary.get("warn_count"),
@@ -227,6 +230,8 @@ def _delta_between_rows(baseline: dict[str, Any], compared: dict[str, Any]) -> d
         "compared_require_generation_quality": compared.get("require_generation_quality_audit_checks"),
         "baseline_require_request_history_summary": baseline.get("require_request_history_summary_audit_check"),
         "compared_require_request_history_summary": compared.get("require_request_history_summary_audit_check"),
+        "baseline_require_benchmark_history": baseline.get("require_benchmark_history_gate_check"),
+        "compared_require_benchmark_history": compared.get("require_benchmark_history_gate_check"),
         "baseline_require_test_coverage": baseline.get("require_test_coverage_audit_check"),
         "compared_require_test_coverage": compared.get("require_test_coverage_audit_check"),
         "decision_changed": decision_changed,
@@ -277,6 +282,11 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append(
             "Request-history-summary requirement changes from "
             f"{delta.get('baseline_require_request_history_summary')} to {delta.get('compared_require_request_history_summary')}."
+        )
+    if delta.get("baseline_require_benchmark_history") != delta.get("compared_require_benchmark_history"):
+        parts.append(
+            "Benchmark-history requirement changes from "
+            f"{delta.get('baseline_require_benchmark_history')} to {delta.get('compared_require_benchmark_history')}."
         )
     if delta.get("baseline_require_test_coverage") != delta.get("compared_require_test_coverage"):
         parts.append(

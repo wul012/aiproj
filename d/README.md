@@ -149,6 +149,9 @@ d/345/解释/说明.md
 d/346/图片
 d/346/解释/说明.md
  -> v346 benchmark history release bundle 的运行截图和解释
+d/347/图片
+d/347/解释/说明.md
+ -> v347 benchmark history release gate 的运行截图和解释
 ```
 
 写入规则：
