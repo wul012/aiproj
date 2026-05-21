@@ -19,13 +19,14 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
-def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path, Path, Path, Path, Path]:
+def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path, Path, Path, Path, Path, Path]:
     run_dir = root / "run-a"
     run_dir.mkdir()
     registry_dir = root / "registry"
     model_dir = root / "model-card"
     audit_dir = root / "audit"
     request_dir = root / "request-history-summary"
+    history_dir = root / "benchmark-history"
     ci_dir = root / "ci-workflow-hygiene"
     coverage_dir = root / "test-coverage"
     registry = {
@@ -63,6 +64,7 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
     }
     audit = {
         "request_history_summary_path": str(request_dir / "request_history_summary.json"),
+        "benchmark_history_path": str(history_dir / "benchmark_history.json"),
         "ci_workflow_hygiene_path": str(ci_dir / "ci_workflow_hygiene.json"),
         "test_coverage_report_path": str(coverage_dir / "test_coverage_report.json"),
         "summary": {
@@ -74,6 +76,15 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "ready_runs": 1,
             "request_history_status": "pass",
             "request_history_records": 4,
+            "benchmark_history_status": "pass",
+            "benchmark_history_entries": 1,
+            "benchmark_history_ready": 1,
+            "benchmark_history_review": 0,
+            "benchmark_history_blocked": 0,
+            "benchmark_history_case_regressions": 0,
+            "benchmark_history_generation_flag_regressions": 0,
+            "benchmark_history_model_quality_claim": "candidate_evidence",
+            "benchmark_history_latest_boundary": "standard-benchmark-candidate-evidence",
             "ci_workflow_status": "pass",
             "ci_workflow_failed_checks": 0,
             "ci_workflow_node24_actions": 2,
@@ -99,6 +110,23 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "required_order_count": 1,
             "order_violation_count": 0,
             "python_version": "3.11",
+        },
+        "benchmark_history_context": {
+            "available": True,
+            "evidence_kind": "real-benchmark",
+            "entry_count": 1,
+            "promote_count": 1,
+            "ready_count": 1,
+            "review_count": 0,
+            "blocked_count": 0,
+            "case_regression_entry_count": 0,
+            "generation_quality_flag_regression_entry_count": 0,
+            "best_candidate_name": name,
+            "best_entry_name": "round-1",
+            "model_quality_claim": "candidate_evidence",
+            "latest_boundary": "standard-benchmark-candidate-evidence",
+            "latest_decision_status": "promote",
+            "latest_promotion_readiness": "ready",
         },
         "test_coverage_context": {
             "available": True,
@@ -148,6 +176,32 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "error_rate": 0.0,
             "latest_timestamp": "2026-05-14T00:00:00Z",
         },
+    }
+    benchmark_history = {
+        "schema_version": 1,
+        "title": "MiniGPT benchmark history",
+        "evidence_kind": "real-benchmark",
+        "summary": {
+            "entry_count": 1,
+            "promote_count": 1,
+            "review_count": 0,
+            "blocked_count": 0,
+            "ready_count": 1,
+            "case_regression_entry_count": 0,
+            "generation_quality_flag_regression_entry_count": 0,
+            "best_candidate_name": name,
+            "best_entry_name": "round-1",
+            "model_quality_claim": "candidate_evidence",
+        },
+        "entries": [
+            {
+                "name": "round-1",
+                "candidate_name": name,
+                "decision_status": "promote",
+                "promotion_readiness": "ready",
+                "boundary": "standard-benchmark-candidate-evidence",
+            }
+        ],
     }
     ci_workflow_hygiene = {
         "schema_version": 1,
@@ -199,6 +253,10 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
     write_json(request_summary_path, request_summary)
     (request_dir / "request_history_summary.md").write_text("# request history summary", encoding="utf-8")
     (request_dir / "request_history_summary.html").write_text("<html></html>", encoding="utf-8")
+    benchmark_history_path = history_dir / "benchmark_history.json"
+    write_json(benchmark_history_path, benchmark_history)
+    (history_dir / "benchmark_history.md").write_text("# benchmark history", encoding="utf-8")
+    (history_dir / "benchmark_history.html").write_text("<html></html>", encoding="utf-8")
     ci_workflow_hygiene_path = ci_dir / "ci_workflow_hygiene.json"
     write_json(ci_workflow_hygiene_path, ci_workflow_hygiene)
     (ci_dir / "ci_workflow_hygiene.md").write_text("# ci workflow hygiene", encoding="utf-8")
@@ -207,20 +265,21 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
     write_json(test_coverage_report_path, test_coverage_report)
     (coverage_dir / "test_coverage_report.md").write_text("# test coverage report", encoding="utf-8")
     (coverage_dir / "test_coverage_report.html").write_text("<html></html>", encoding="utf-8")
-    return registry_path, model_path, audit_path, request_summary_path, ci_workflow_hygiene_path, test_coverage_report_path
+    return registry_path, model_path, audit_path, request_summary_path, benchmark_history_path, ci_workflow_hygiene_path, test_coverage_report_path
 
 
 class ReleaseBundleTests(unittest.TestCase):
     def test_build_release_bundle_summarizes_ready_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, request_summary_path, _ci_workflow_hygiene_path, test_coverage_report_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, request_summary_path, benchmark_history_path, _ci_workflow_hygiene_path, test_coverage_report_path = make_release_inputs(root)
 
             bundle = build_release_bundle(
                 registry_path,
                 model_card_path=model_path,
                 audit_path=audit_path,
                 request_history_summary_path=request_summary_path,
+                benchmark_history_path=benchmark_history_path,
                 test_coverage_report_path=test_coverage_report_path,
                 release_name="v26-demo",
                 generated_at="2026-05-12T00:00:00Z",
@@ -229,6 +288,10 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["release_status"], "release-ready")
             self.assertEqual(bundle["summary"]["audit_status"], "pass")
             self.assertEqual(bundle["summary"]["request_history_status"], "pass")
+            self.assertEqual(bundle["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(bundle["summary"]["benchmark_history_entries"], 1)
+            self.assertEqual(bundle["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(bundle["summary"]["benchmark_history_latest_boundary"], "standard-benchmark-candidate-evidence")
             self.assertEqual(bundle["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(bundle["summary"]["ci_workflow_failed_checks"], 0)
             self.assertEqual(bundle["summary"]["ci_workflow_required_order_count"], 1)
@@ -239,9 +302,11 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["test_coverage_gap"], 0.0)
             self.assertEqual(bundle["summary"]["best_run_name"], "candidate")
             self.assertIn("request_history_summary_json", {item["key"] for item in bundle["artifacts"]})
+            self.assertIn("benchmark_history_json", {item["key"] for item in bundle["artifacts"]})
             self.assertIn("ci_workflow_hygiene_json", {item["key"] for item in bundle["artifacts"]})
             self.assertIn("test_coverage_report_json", {item["key"] for item in bundle["artifacts"]})
             self.assertEqual(bundle["ci_workflow_context"]["status"], "pass")
+            self.assertEqual(bundle["benchmark_history_context"]["latest_decision_status"], "promote")
             self.assertEqual(bundle["ci_workflow_context"]["order_violation_count"], 0)
             self.assertEqual(bundle["test_coverage_context"]["coverage_gap"], 0.0)
             self.assertGreaterEqual(bundle["summary"]["available_artifacts"], 10)
@@ -251,7 +316,7 @@ class ReleaseBundleTests(unittest.TestCase):
     def test_build_release_bundle_accepts_explicit_ci_workflow_hygiene_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, _benchmark_history_path, ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
 
             bundle = build_release_bundle(
                 registry_path,
@@ -268,7 +333,7 @@ class ReleaseBundleTests(unittest.TestCase):
     def test_build_release_bundle_accepts_explicit_test_coverage_report_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, test_coverage_report_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, _benchmark_history_path, _ci_workflow_hygiene_path, test_coverage_report_path = make_release_inputs(root)
 
             bundle = build_release_bundle(
                 registry_path,
@@ -282,10 +347,35 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["test_coverage_context"]["line_coverage_percent"], 90.17)
             self.assertIn("test_coverage_report_html", {item["key"] for item in bundle["artifacts"]})
 
+    def test_build_release_bundle_warns_from_audit_benchmark_history_context(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path, model_path, audit_path, _request_summary_path, benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            audit = json.loads(audit_path.read_text(encoding="utf-8"))
+            audit["summary"]["overall_status"] = "warn"
+            audit["summary"]["warn_count"] = 1
+            audit["summary"]["benchmark_history_status"] = "warn"
+            audit["summary"]["benchmark_history_ready"] = 0
+            audit["summary"]["benchmark_history_model_quality_claim"] = "not_claimed"
+            audit["summary"]["benchmark_history_latest_boundary"] = "tiny-smoke-plumbing-evidence"
+            audit["benchmark_history_context"]["ready_count"] = 0
+            audit["benchmark_history_context"]["model_quality_claim"] = "not_claimed"
+            audit["benchmark_history_context"]["latest_boundary"] = "tiny-smoke-plumbing-evidence"
+            write_json(audit_path, audit)
+            benchmark_history_path.unlink()
+
+            bundle = build_release_bundle(registry_path, model_card_path=model_path, audit_path=audit_path)
+
+            self.assertEqual(bundle["summary"]["release_status"], "review-needed")
+            self.assertEqual(bundle["summary"]["benchmark_history_status"], "warn")
+            self.assertEqual(bundle["summary"]["benchmark_history_ready"], 0)
+            self.assertEqual(bundle["summary"]["benchmark_history_latest_boundary"], "tiny-smoke-plumbing-evidence")
+            self.assertEqual(bundle["benchmark_history_context"]["model_quality_claim"], "not_claimed")
+
     def test_build_release_bundle_marks_missing_audit(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, _benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
             audit_path.unlink()
 
             bundle = build_release_bundle(registry_path, model_card_path=model_path)
@@ -296,7 +386,7 @@ class ReleaseBundleTests(unittest.TestCase):
     def test_write_release_bundle_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            registry_path, model_path, audit_path, _request_summary_path, _benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
             bundle = build_release_bundle(registry_path, model_card_path=model_path, audit_path=audit_path)
 
             outputs = write_release_bundle_outputs(bundle, root / "release-bundle")
@@ -306,13 +396,15 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Evidence Artifacts", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("CI workflow status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT release bundle", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench history", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_release_bundle_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry_path, model_path, audit_path, _request_summary_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root, name="<script>")
+            registry_path, model_path, audit_path, _request_summary_path, _benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root, name="<script>")
             bundle = build_release_bundle(registry_path, model_card_path=model_path, audit_path=audit_path, title="<Release>")
 
             html = render_release_bundle_html(bundle)

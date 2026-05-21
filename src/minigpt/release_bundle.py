@@ -26,6 +26,7 @@ def build_release_bundle(
     model_card_path: str | Path | None = None,
     audit_path: str | Path | None = None,
     request_history_summary_path: str | Path | None = None,
+    benchmark_history_path: str | Path | None = None,
     ci_workflow_hygiene_path: str | Path | None = None,
     test_coverage_report_path: str | Path | None = None,
     release_name: str | None = None,
@@ -38,6 +39,7 @@ def build_release_bundle(
     model_file = _resolve_model_card_path(registry_file, model_card_path)
     audit_file = _resolve_audit_path(registry_file, audit_path)
     request_history_summary_file = _resolve_request_history_summary_path(registry_file, audit_file, request_history_summary_path)
+    benchmark_history_file = _resolve_benchmark_history_path(registry_file, audit_file, benchmark_history_path)
     ci_workflow_hygiene_file = _resolve_ci_workflow_hygiene_path(registry_file, audit_file, ci_workflow_hygiene_path)
     test_coverage_report_file = _resolve_test_coverage_report_path(registry_file, audit_file, test_coverage_report_path)
     model_card = _read_json(model_file, warnings, "model card") if model_file is not None else None
@@ -45,6 +47,11 @@ def build_release_bundle(
     request_history_summary = (
         _read_json(request_history_summary_file, warnings, "request history summary")
         if request_history_summary_file is not None
+        else None
+    )
+    benchmark_history = (
+        _read_json(benchmark_history_file, warnings, "benchmark history")
+        if benchmark_history_file is not None
         else None
     )
     ci_workflow_hygiene = (
@@ -62,6 +69,7 @@ def build_release_bundle(
         model_file,
         audit_file,
         request_history_summary_file,
+        benchmark_history_file,
         ci_workflow_hygiene_file,
         test_coverage_report_file,
     )
@@ -71,6 +79,7 @@ def build_release_bundle(
         model_card if isinstance(model_card, dict) else None,
         audit if isinstance(audit, dict) else None,
         request_history_summary if isinstance(request_history_summary, dict) else None,
+        benchmark_history if isinstance(benchmark_history, dict) else None,
         ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None,
         test_coverage_report if isinstance(test_coverage_report, dict) else None,
         artifacts,
@@ -87,6 +96,7 @@ def build_release_bundle(
             "model_card_path": None if model_file is None else str(model_file),
             "project_audit_path": None if audit_file is None else str(audit_file),
             "request_history_summary_path": None if request_history_summary_file is None else str(request_history_summary_file),
+            "benchmark_history_path": None if benchmark_history_file is None else str(benchmark_history_file),
             "ci_workflow_hygiene_path": None if ci_workflow_hygiene_file is None else str(ci_workflow_hygiene_file),
             "test_coverage_report_path": None if test_coverage_report_file is None else str(test_coverage_report_file),
         },
@@ -94,6 +104,7 @@ def build_release_bundle(
         "top_runs": top_runs,
         "audit_checks": _audit_checks(audit if isinstance(audit, dict) else None),
         "request_history_context": _request_history_context(request_history_summary if isinstance(request_history_summary, dict) else None),
+        "benchmark_history_context": _benchmark_history_context(benchmark_history if isinstance(benchmark_history, dict) else None, audit if isinstance(audit, dict) else None),
         "ci_workflow_context": _ci_workflow_context(ci_workflow_hygiene if isinstance(ci_workflow_hygiene, dict) else None, audit if isinstance(audit, dict) else None),
         "test_coverage_context": _test_coverage_context(test_coverage_report if isinstance(test_coverage_report, dict) else None, audit if isinstance(audit, dict) else None),
         "recommendations": _recommendations(model_card if isinstance(model_card, dict) else None, audit if isinstance(audit, dict) else None, summary),
@@ -173,6 +184,32 @@ def _resolve_request_history_summary_path(
     return next((path for path in candidates if path.exists()), None)
 
 
+def _resolve_benchmark_history_path(
+    registry_path: Path,
+    audit_path: Path | None,
+    benchmark_history_path: str | Path | None,
+) -> Path | None:
+    if benchmark_history_path is not None:
+        return Path(benchmark_history_path)
+    candidates: list[Path] = []
+    if audit_path is not None:
+        try:
+            audit = _read_required_json(audit_path)
+        except (FileNotFoundError, json.JSONDecodeError, ValueError):
+            audit = {}
+        path = audit.get("benchmark_history_path") if isinstance(audit, dict) else None
+        if path:
+            candidates.append(Path(str(path)))
+    candidates.extend(
+        [
+            registry_path.parent / "benchmark_history.json",
+            registry_path.parent / "benchmark-history" / "benchmark_history.json",
+            registry_path.parent.parent / "benchmark-history" / "benchmark_history.json",
+        ]
+    )
+    return next((path for path in candidates if path.exists()), None)
+
+
 def _resolve_ci_workflow_hygiene_path(
     registry_path: Path,
     audit_path: Path | None,
@@ -234,6 +271,7 @@ def _build_summary(
     model_card: dict[str, Any] | None,
     audit: dict[str, Any] | None,
     request_history_summary: dict[str, Any] | None,
+    benchmark_history: dict[str, Any] | None,
     ci_workflow_hygiene: dict[str, Any] | None,
     test_coverage_report: dict[str, Any] | None,
     artifacts: list[dict[str, Any]],
@@ -242,6 +280,7 @@ def _build_summary(
     audit_summary = _dict(audit.get("summary")) if audit else {}
     model_summary = _dict(model_card.get("summary")) if model_card else {}
     request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
+    benchmark_context = _benchmark_history_context(benchmark_history, audit if isinstance(audit, dict) else None)
     ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
     audit_ci_context = _dict(audit.get("ci_workflow_context")) if isinstance(audit, dict) else {}
     coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
@@ -257,6 +296,27 @@ def _build_summary(
         "ready_runs": audit_summary.get("ready_runs") or model_summary.get("ready_runs"),
         "request_history_status": audit_summary.get("request_history_status") or request_summary.get("status"),
         "request_history_records": audit_summary.get("request_history_records") or request_summary.get("total_log_records"),
+        "benchmark_history_status": audit_summary.get("benchmark_history_status") or _status_from_benchmark_context(benchmark_context),
+        "benchmark_history_entries": first_present(audit_summary.get("benchmark_history_entries"), benchmark_context.get("entry_count")),
+        "benchmark_history_ready": first_present(audit_summary.get("benchmark_history_ready"), benchmark_context.get("ready_count")),
+        "benchmark_history_review": first_present(audit_summary.get("benchmark_history_review"), benchmark_context.get("review_count")),
+        "benchmark_history_blocked": first_present(audit_summary.get("benchmark_history_blocked"), benchmark_context.get("blocked_count")),
+        "benchmark_history_case_regressions": first_present(
+            audit_summary.get("benchmark_history_case_regressions"),
+            benchmark_context.get("case_regression_entry_count"),
+        ),
+        "benchmark_history_generation_flag_regressions": first_present(
+            audit_summary.get("benchmark_history_generation_flag_regressions"),
+            benchmark_context.get("generation_quality_flag_regression_entry_count"),
+        ),
+        "benchmark_history_model_quality_claim": first_present(
+            audit_summary.get("benchmark_history_model_quality_claim"),
+            benchmark_context.get("model_quality_claim"),
+        ),
+        "benchmark_history_latest_boundary": first_present(
+            audit_summary.get("benchmark_history_latest_boundary"),
+            benchmark_context.get("latest_boundary"),
+        ),
         "ci_workflow_status": audit_summary.get("ci_workflow_status") or ci_summary.get("status"),
         "ci_workflow_failed_checks": audit_summary.get("ci_workflow_failed_checks") if audit_summary.get("ci_workflow_failed_checks") is not None else ci_summary.get("failed_check_count"),
         "ci_workflow_node24_actions": audit_summary.get("ci_workflow_node24_actions") if audit_summary.get("ci_workflow_node24_actions") is not None else ci_summary.get("node24_native_action_count"),
@@ -289,6 +349,7 @@ def _collect_release_artifacts(
     model_card_path: Path | None,
     audit_path: Path | None,
     request_history_summary_path: Path | None,
+    benchmark_history_path: Path | None,
     ci_workflow_hygiene_path: Path | None,
     test_coverage_report_path: Path | None,
 ) -> list[dict[str, Any]]:
@@ -341,6 +402,33 @@ def _collect_release_artifacts(
                     request_dir / "request_history_summary.html",
                     "HTML",
                     "browser local inference request stability summary",
+                ),
+            ]
+        )
+    if benchmark_history_path is not None:
+        history_dir = benchmark_history_path.parent
+        specs.extend(
+            [
+                (
+                    "benchmark_history_json",
+                    "Benchmark history JSON",
+                    benchmark_history_path,
+                    "JSON",
+                    "machine-readable repeated benchmark comparison and decision history",
+                ),
+                (
+                    "benchmark_history_md",
+                    "Benchmark history Markdown",
+                    history_dir / "benchmark_history.md",
+                    "MD",
+                    "markdown repeated benchmark comparison and decision history",
+                ),
+                (
+                    "benchmark_history_html",
+                    "Benchmark history HTML",
+                    history_dir / "benchmark_history.html",
+                    "HTML",
+                    "browser repeated benchmark comparison and decision history",
                 ),
             ]
         )
@@ -416,6 +504,58 @@ def _request_history_context(request_history_summary: dict[str, Any] | None) -> 
         "error_rate": summary.get("error_rate"),
         "latest_timestamp": summary.get("latest_timestamp"),
     }
+
+
+def _benchmark_history_context(benchmark_history: dict[str, Any] | None, audit: dict[str, Any] | None) -> dict[str, Any]:
+    audit_context = _dict(audit.get("benchmark_history_context")) if isinstance(audit, dict) else {}
+    if isinstance(benchmark_history, dict):
+        summary = _dict(benchmark_history.get("summary"))
+        entries = _list_of_dicts(benchmark_history.get("entries"))
+        latest = entries[-1] if entries else {}
+        return {
+            "available": True,
+            "evidence_kind": benchmark_history.get("evidence_kind") or audit_context.get("evidence_kind"),
+            "entry_count": summary.get("entry_count") if summary else len(entries),
+            "promote_count": summary.get("promote_count"),
+            "ready_count": summary.get("ready_count"),
+            "review_count": summary.get("review_count"),
+            "blocked_count": summary.get("blocked_count"),
+            "case_regression_entry_count": summary.get("case_regression_entry_count"),
+            "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
+            "best_candidate_name": summary.get("best_candidate_name"),
+            "best_entry_name": summary.get("best_entry_name"),
+            "model_quality_claim": summary.get("model_quality_claim"),
+            "latest_boundary": latest.get("boundary") or audit_context.get("latest_boundary"),
+            "latest_decision_status": latest.get("decision_status") or audit_context.get("latest_decision_status"),
+            "latest_promotion_readiness": latest.get("promotion_readiness") or audit_context.get("latest_promotion_readiness"),
+        }
+    if audit_context:
+        return dict(audit_context)
+    return {
+        "available": False,
+        "entry_count": None,
+        "ready_count": None,
+        "model_quality_claim": None,
+        "latest_boundary": None,
+    }
+
+
+def _status_from_benchmark_context(context: dict[str, Any]) -> str | None:
+    if not context.get("available"):
+        return None
+    regression_keys = (
+        "review_count",
+        "blocked_count",
+        "case_regression_entry_count",
+        "generation_quality_flag_regression_entry_count",
+    )
+    if any(_int(context.get(key)) > 0 for key in regression_keys):
+        return "warn"
+    if _int(context.get("entry_count")) == 0 or _int(context.get("ready_count")) == 0:
+        return "warn"
+    if context.get("model_quality_claim") == "not_claimed":
+        return "warn"
+    return "pass"
 
 
 def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict[str, Any] | None) -> dict[str, Any]:
@@ -513,3 +653,10 @@ def _recommendations(model_card: dict[str, Any] | None, audit: dict[str, Any] | 
 
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
+
+
+def _int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0

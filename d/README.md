@@ -146,6 +146,9 @@ d/344/解释/说明.md
 d/345/图片
 d/345/解释/说明.md
  -> v345 benchmark history project audit 的运行截图和解释
+d/346/图片
+d/346/解释/说明.md
+ -> v346 benchmark history release bundle 的运行截图和解释
 ```
 
 写入规则：
