@@ -158,6 +158,9 @@ d/348/解释/说明.md
 d/349/图片
 d/349/解释/说明.md
  -> v349 benchmark history readiness comparison 的运行截图和解释
+d/350/图片
+d/350/解释/说明.md
+ -> v350 registry benchmark readiness tracking 的运行截图和解释
 ```
 
 写入规则：

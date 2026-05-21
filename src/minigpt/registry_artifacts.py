@@ -72,6 +72,8 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "release_readiness_ci_workflow_regression_count",
         "release_readiness_ci_workflow_order_regression_count",
         "release_readiness_test_coverage_regression_count",
+        "release_readiness_benchmark_history_delta_count",
+        "release_readiness_benchmark_history_regression_count",
         "release_readiness_html_exists",
         "artifact_count",
         "checkpoint_exists",

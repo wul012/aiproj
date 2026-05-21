@@ -129,6 +129,8 @@ class RegisteredRun:
     release_readiness_ci_workflow_regression_count: int | None
     release_readiness_ci_workflow_order_regression_count: int | None
     release_readiness_test_coverage_regression_count: int | None
+    release_readiness_benchmark_history_delta_count: int | None
+    release_readiness_benchmark_history_regression_count: int | None
     release_readiness_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
@@ -226,6 +228,8 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         release_readiness_ci_workflow_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_regression_count")),
         release_readiness_ci_workflow_order_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_order_regression_count")),
         release_readiness_test_coverage_regression_count=_as_int(_pick(release_readiness_summary, "test_coverage_regression_count")),
+        release_readiness_benchmark_history_delta_count=_as_int(_pick(release_readiness_summary, "benchmark_history_delta_count")),
+        release_readiness_benchmark_history_regression_count=_as_int(_pick(release_readiness_summary, "benchmark_history_regression_count")),
         release_readiness_html_exists=_release_readiness_html_exists(root),
         artifact_count=artifact_count,
         checkpoint_exists=(root / "checkpoint.pt").exists(),
@@ -344,6 +348,8 @@ def _release_readiness_comparison_status(summary: dict[str, Any]) -> str | None:
         return None
     if int(summary.get("test_coverage_regression_count") or 0) > 0:
         return "coverage-regressed"
+    if int(summary.get("benchmark_history_regression_count") or 0) > 0:
+        return "benchmark-regressed"
     if int(summary.get("ci_workflow_regression_count") or 0) > 0:
         return "ci-regressed"
     if int(summary.get("regressed_count") or 0) > 0:

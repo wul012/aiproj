@@ -234,6 +234,21 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     "test_coverage_percent_delta": _int_if_whole(_as_optional_float(delta.get("test_coverage_percent_delta"))),
                     "test_coverage_gap_delta": _int_if_whole(_as_optional_float(delta.get("test_coverage_gap_delta"))),
                     "test_coverage_status_changed": bool(delta.get("test_coverage_status_changed")),
+                    "baseline_benchmark_history_status": _as_str(delta.get("baseline_benchmark_history_status")),
+                    "compared_benchmark_history_status": _as_str(delta.get("compared_benchmark_history_status")),
+                    "benchmark_history_status_delta": _int_if_whole(_as_optional_float(delta.get("benchmark_history_status_delta"))),
+                    "benchmark_history_status_changed": bool(delta.get("benchmark_history_status_changed")),
+                    "benchmark_history_ready_delta": _int_if_whole(_as_optional_float(delta.get("benchmark_history_ready_delta"))),
+                    "benchmark_history_review_delta": _int_if_whole(_as_optional_float(delta.get("benchmark_history_review_delta"))),
+                    "benchmark_history_blocked_delta": _int_if_whole(_as_optional_float(delta.get("benchmark_history_blocked_delta"))),
+                    "benchmark_history_case_regression_delta": _int_if_whole(_as_optional_float(delta.get("benchmark_history_case_regression_delta"))),
+                    "benchmark_history_generation_flag_regression_delta": _int_if_whole(
+                        _as_optional_float(delta.get("benchmark_history_generation_flag_regression_delta"))
+                    ),
+                    "benchmark_history_model_quality_claim_changed": bool(delta.get("benchmark_history_model_quality_claim_changed")),
+                    "benchmark_history_latest_boundary_changed": bool(delta.get("benchmark_history_latest_boundary_changed")),
+                    "baseline_benchmark_history_boundary": _as_str(delta.get("baseline_benchmark_history_boundary")),
+                    "compared_benchmark_history_boundary": _as_str(delta.get("compared_benchmark_history_boundary")),
                     "audit_score_delta": _int_if_whole(_as_optional_float(delta.get("audit_score_delta"))),
                     "missing_artifact_delta": _int_if_whole(_as_optional_float(delta.get("missing_artifact_delta"))),
                     "fail_panel_delta": _int_if_whole(_as_optional_float(delta.get("fail_panel_delta"))),
@@ -257,6 +272,9 @@ def release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int =
             -abs(_as_optional_float(item.get("ci_workflow_order_violation_delta")) or 0.0),
             -abs(_as_optional_float(item.get("test_coverage_gap_delta")) or 0.0),
             -abs(_as_optional_float(item.get("test_coverage_percent_delta")) or 0.0),
+            -abs(_as_optional_float(item.get("benchmark_history_case_regression_delta")) or 0.0),
+            -abs(_as_optional_float(item.get("benchmark_history_generation_flag_regression_delta")) or 0.0),
+            -abs(_as_optional_float(item.get("benchmark_history_status_delta")) or 0.0),
             -abs(_as_optional_float(item.get("status_delta")) or 0.0),
             -int(item.get("changed_panel_count") or 0),
             str(item.get("run_name") or ""),
@@ -290,6 +308,16 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         for value in (_as_optional_float(row.get("test_coverage_gap_delta")) for row in rows)
         if value is not None
     ]
+    benchmark_case_regression_deltas = [
+        abs(value)
+        for value in (_as_optional_float(row.get("benchmark_history_case_regression_delta")) for row in rows)
+        if value is not None
+    ]
+    benchmark_flag_regression_deltas = [
+        abs(value)
+        for value in (_as_optional_float(row.get("benchmark_history_generation_flag_regression_delta")) for row in rows)
+        if value is not None
+    ]
     return {
         "delta_count": len(rows),
         "run_count": len(run_names),
@@ -307,6 +335,15 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         "test_coverage_status_changed_count": sum(1 for row in rows if bool(row.get("test_coverage_status_changed"))),
         "max_abs_test_coverage_percent_delta": _int_if_whole(max(coverage_percent_deltas)) if coverage_percent_deltas else None,
         "max_abs_test_coverage_gap_delta": _int_if_whole(max(coverage_gap_deltas)) if coverage_gap_deltas else None,
+        "benchmark_history_regression_count": sum(1 for row in rows if _is_benchmark_history_regression_row(row)),
+        "benchmark_history_status_changed_count": sum(1 for row in rows if bool(row.get("benchmark_history_status_changed"))),
+        "benchmark_history_boundary_changed_count": sum(1 for row in rows if bool(row.get("benchmark_history_latest_boundary_changed"))),
+        "max_abs_benchmark_history_case_regression_delta": _int_if_whole(max(benchmark_case_regression_deltas))
+        if benchmark_case_regression_deltas
+        else None,
+        "max_abs_benchmark_history_generation_flag_regression_delta": _int_if_whole(max(benchmark_flag_regression_deltas))
+        if benchmark_flag_regression_deltas
+        else None,
         "max_abs_status_delta": _int_if_whole(max(status_deltas)) if status_deltas else None,
     }
 
@@ -314,9 +351,11 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
 def _release_readiness_delta_priority(row: dict[str, Any]) -> int:
     if _is_test_coverage_regression_row(row):
         return 0
-    if _is_ci_workflow_regression_row(row):
+    if _is_benchmark_history_regression_row(row):
         return 1
-    status_priority = {"regressed": 2, "improved": 3, "panel-changed": 4, "same": 5}
+    if _is_ci_workflow_regression_row(row):
+        return 2
+    status_priority = {"regressed": 3, "improved": 4, "panel-changed": 5, "same": 6}
     return status_priority.get(str(row.get("delta_status") or ""), 6)
 
 
@@ -346,6 +385,25 @@ def _is_test_coverage_regression_row(row: dict[str, Any]) -> bool:
     if not row.get("test_coverage_status_changed"):
         return False
     return _coverage_status_score(row.get("compared_test_coverage_status")) < _coverage_status_score(row.get("baseline_test_coverage_status"))
+
+
+def _is_benchmark_history_regression_row(row: dict[str, Any]) -> bool:
+    status_delta = _as_optional_float(row.get("benchmark_history_status_delta"))
+    if status_delta is not None and status_delta < 0:
+        return True
+    ready_delta = _as_optional_float(row.get("benchmark_history_ready_delta"))
+    if ready_delta is not None and ready_delta < 0:
+        return True
+    for key in [
+        "benchmark_history_review_delta",
+        "benchmark_history_blocked_delta",
+        "benchmark_history_case_regression_delta",
+        "benchmark_history_generation_flag_regression_delta",
+    ]:
+        value = _as_optional_float(row.get(key))
+        if value is not None and value > 0:
+            return True
+    return False
 
 
 def _ci_status_score(value: Any) -> int:
