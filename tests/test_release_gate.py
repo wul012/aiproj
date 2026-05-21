@@ -47,6 +47,9 @@ def make_bundle(
     benchmark_history_blocked: int | None = 0,
     benchmark_history_case_regressions: int | None = 0,
     benchmark_history_generation_flag_regressions: int | None = 0,
+    benchmark_history_readiness_requirement_status: str | None = "pass",
+    benchmark_history_readiness_requirement_exit_code: int | None = 0,
+    benchmark_history_readiness_requirement_failed_reasons: list[str] | None = None,
     benchmark_history_model_quality_claim: str | None = "candidate_evidence",
     benchmark_history_latest_boundary: str | None = "standard-benchmark-candidate-evidence",
     include_test_coverage_check: bool = True,
@@ -89,7 +92,9 @@ def make_bundle(
                     f"entries={benchmark_history_entries}; ready={benchmark_history_ready}; "
                     f"review={benchmark_history_review}; blocked={benchmark_history_blocked}; "
                     f"case_regressions={benchmark_history_case_regressions}; "
-                    f"generation_flag_regressions={benchmark_history_generation_flag_regressions}."
+                    f"generation_flag_regressions={benchmark_history_generation_flag_regressions}; "
+                    f"readiness_requirement={benchmark_history_readiness_requirement_status}; "
+                    f"readiness_exit={benchmark_history_readiness_requirement_exit_code}."
                 ),
             }
         )
@@ -125,6 +130,15 @@ def make_bundle(
             "benchmark_history_case_regressions": benchmark_history_case_regressions if include_benchmark_history_check else None,
             "benchmark_history_generation_flag_regressions": (
                 benchmark_history_generation_flag_regressions if include_benchmark_history_check else None
+            ),
+            "benchmark_history_readiness_requirement_status": (
+                benchmark_history_readiness_requirement_status if include_benchmark_history_check else None
+            ),
+            "benchmark_history_readiness_requirement_exit_code": (
+                benchmark_history_readiness_requirement_exit_code if include_benchmark_history_check else None
+            ),
+            "benchmark_history_readiness_requirement_failed_reasons": (
+                benchmark_history_readiness_requirement_failed_reasons or [] if include_benchmark_history_check else None
             ),
             "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim if include_benchmark_history_check else None,
             "benchmark_history_latest_boundary": benchmark_history_latest_boundary if include_benchmark_history_check else None,
@@ -217,6 +231,8 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertIn("test_coverage_audit_check", {check["id"] for check in gate["checks"]})
             self.assertEqual(gate["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(gate["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(gate["summary"]["benchmark_history_readiness_requirement_status"], "pass")
+            self.assertEqual(gate["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertIn("Release gate passed", " ".join(gate["recommendations"]))
 
@@ -409,6 +425,33 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
 
+    def test_build_release_gate_warns_for_benchmark_history_readiness_requirement_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(
+                Path(tmp),
+                benchmark_history_status="pass",
+                benchmark_history_ready=1,
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=["insufficient_ready_entries"],
+            )
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "warn")
+            self.assertEqual(gate["summary"]["benchmark_history_readiness_requirement_status"], "fail")
+            self.assertEqual(gate["summary"]["benchmark_history_readiness_requirement_exit_code"], 1)
+            self.assertEqual(
+                gate["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["insufficient_ready_entries"],
+            )
+            check = next(item for item in gate["checks"] if item["id"] == "benchmark_history_gate_check")
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("readiness_requirement=fail", check["detail"])
+            self.assertIn("readiness_failed_reasons=insufficient_ready_entries", check["detail"])
+            self.assertEqual(exit_code_for_gate(gate), 0)
+            self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
+
     def test_build_release_gate_fails_for_blocked_benchmark_history(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             bundle_path = make_bundle(
@@ -485,7 +528,11 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertTrue(Path(outputs["markdown"]).exists())
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history readiness", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT release gate", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_render_release_gate_html_escapes_release_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

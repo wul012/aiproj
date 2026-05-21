@@ -206,6 +206,9 @@
 381-v367-release-bundle-benchmark-readiness.md
  -> v367 code explanation: consume benchmark-history readiness requirements inside release bundle handoff and stale-audit review decisions.
 
+382-v368-release-gate-benchmark-readiness.md
+ -> v368 code explanation: consume benchmark-history readiness requirements inside release gate checks, summaries, CLI output, and reports.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

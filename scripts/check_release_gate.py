@@ -89,6 +89,12 @@ def main() -> None:
     print(f"benchmark_history_entries={summary.get('benchmark_history_entries')}")
     print(f"benchmark_history_ready={summary.get('benchmark_history_ready')}")
     print(f"benchmark_history_boundary={summary.get('benchmark_history_latest_boundary')}")
+    print(f"benchmark_history_readiness_requirement_status={summary.get('benchmark_history_readiness_requirement_status')}")
+    print(f"benchmark_history_readiness_requirement_exit_code={summary.get('benchmark_history_readiness_requirement_exit_code')}")
+    print(
+        "benchmark_history_readiness_requirement_failed_reasons="
+        + json.dumps(summary.get("benchmark_history_readiness_requirement_failed_reasons") or [], ensure_ascii=False)
+    )
     print(f"policy_profile={gate['policy']['policy_profile']}")
     print(f"minimum_audit_score={gate['policy']['minimum_audit_score']}")
     print(f"minimum_ready_runs={gate['policy']['minimum_ready_runs']}")

@@ -47,6 +47,9 @@ def benchmark_history_gate_detail(
         f"blocked={_integer(summary.get('benchmark_history_blocked'))}; "
         f"case_regressions={_integer(summary.get('benchmark_history_case_regressions'))}; "
         f"generation_flag_regressions={_integer(summary.get('benchmark_history_generation_flag_regressions'))}; "
+        f"readiness_requirement={summary.get('benchmark_history_readiness_requirement_status') or 'missing'}; "
+        f"readiness_exit={_integer(summary.get('benchmark_history_readiness_requirement_exit_code'))}; "
+        f"readiness_failed_reasons={_failed_reasons(summary)}; "
         f"model_quality_claim={summary.get('benchmark_history_model_quality_claim') or 'missing'}; "
         f"latest_boundary={summary.get('benchmark_history_latest_boundary') or 'missing'}."
     )
@@ -74,6 +77,11 @@ def _benchmark_history_summary_result(summary: dict[str, Any]) -> str:
     )
     if status == "warn" or any(_integer(summary.get(key)) > 0 for key in warn_keys):
         return "warn"
+    if (
+        summary.get("benchmark_history_readiness_requirement_status") == "fail"
+        or _integer(summary.get("benchmark_history_readiness_requirement_exit_code")) > 0
+    ):
+        return "warn"
     if summary.get("benchmark_history_status") is not None:
         entries = _integer(summary.get("benchmark_history_entries"))
         ready = _integer(summary.get("benchmark_history_ready"))
@@ -82,6 +90,13 @@ def _benchmark_history_summary_result(summary: dict[str, Any]) -> str:
     if summary.get("benchmark_history_model_quality_claim") == "not_claimed":
         return "warn"
     return "pass"
+
+
+def _failed_reasons(summary: dict[str, Any]) -> str:
+    reasons = summary.get("benchmark_history_readiness_requirement_failed_reasons")
+    if not isinstance(reasons, list) or not reasons:
+        return "none"
+    return ",".join(str(item) for item in reasons if str(item).strip()) or "none"
 
 
 def _audit_checks_by_id(audit_checks: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
