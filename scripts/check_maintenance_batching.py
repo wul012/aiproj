@@ -134,8 +134,9 @@ def main() -> None:
         print(f"governance_routing_new_chain_candidate_count={governance_routing['new_chain_candidate_count']}")
         print(f"governance_routing_exact_match_count={governance_routing['exact_match_count']}")
         print(f"governance_routing_keyword_match_count={governance_routing['keyword_match_count']}")
-        keyword_hits = [str(item.get("matched_keyword") or "") for item in governance_routing.get("items", []) if item.get("matched_keyword")]
-        print("governance_routing_keyword_hits=" + ",".join(keyword_hits))
+        print(f"governance_routing_ambiguous_keyword_match_count={governance_routing['ambiguous_keyword_match_count']}")
+        print("governance_routing_keyword_hits=" + ",".join(str(item) for item in governance_routing.get("keyword_hits", [])))
+        print("governance_routing_ambiguous_keyword_hits=" + ",".join(str(item) for item in governance_routing.get("ambiguous_keyword_hits", [])))
         print("governance_outputs=" + json.dumps(governance_outputs, ensure_ascii=False))
 
 

@@ -167,6 +167,35 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(routing["items"][0]["match_basis"], "exact")
         self.assertIn("high-risk governance proposals", " ".join(report["recommendations"]))
 
+    def test_governance_stabilization_reviews_ambiguous_keyword_matches(self) -> None:
+        report = build_governance_stabilization_review(
+            proposed_items=[
+                {"title": "Dataset benchmark bridge", "description": "dataset snapshot should be reviewed beside benchmark history"},
+            ]
+        )
+        html = render_governance_stabilization_html(report)
+        markdown = render_governance_stabilization_markdown(report)
+
+        routing = report["proposal_routing"]
+        item = routing["items"][0]
+        self.assertEqual(routing["decision"], "review_before_merge")
+        self.assertEqual(routing["review_count"], 1)
+        self.assertEqual(routing["merge_existing_count"], 0)
+        self.assertEqual(routing["keyword_match_count"], 0)
+        self.assertEqual(routing["ambiguous_keyword_match_count"], 1)
+        self.assertEqual(routing["ambiguous_keyword_hits"], ["dataset", "data", "benchmark"])
+        self.assertEqual(item["route_decision"], "review")
+        self.assertEqual(item["match_basis"], "ambiguous_keyword")
+        self.assertEqual(item["matched_keyword"], "dataset")
+        self.assertEqual(item["matched_chains"], ["dataset-provenance", "benchmark-history"])
+        self.assertIn("dataset", item["matched_keywords"])
+        self.assertIn("benchmark", item["matched_keywords"])
+        self.assertIn("multiple governance chains", item["reason"])
+        self.assertIn("Ambiguous keyword matches", markdown)
+        self.assertIn("Matched chains", markdown)
+        self.assertIn("ambiguous-hits=dataset, data, benchmark", html)
+        self.assertIn("ambiguous_keyword", html)
+
     def test_governance_stabilization_rejects_unmatched_proposals_during_pause(self) -> None:
         report = build_governance_stabilization_review(
             proposed_items=[
@@ -295,7 +324,9 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("governance_routing_new_chain_candidate_count=0", completed.stdout)
             self.assertIn("governance_routing_exact_match_count=1", completed.stdout)
             self.assertIn("governance_routing_keyword_match_count=1", completed.stdout)
+            self.assertIn("governance_routing_ambiguous_keyword_match_count=0", completed.stdout)
             self.assertIn("governance_routing_keyword_hits=dataset", completed.stdout)
+            self.assertIn("governance_routing_ambiguous_keyword_hits=", completed.stdout)
 
     def test_module_pressure_report_flags_large_modules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -188,8 +188,8 @@
 375-v361-governance-routing-keyword-hit.md
  -> v361 code explanation: carry the specific keyword hit used by keyword-based governance routing into reports, CLI stdout, and evidence artifacts.
 
-375-v361-governance-routing-keyword-hit.md
- -> v361 code explanation: carry the specific keyword hit used by keyword-based governance routing into reports, CLI stdout, and evidence artifacts.
+376-v362-governance-ambiguous-keyword-review.md
+ -> v362 code explanation: review proposals whose keywords match multiple governance chains instead of auto-merging them into the first match.
 
 ## 一句话总览
 

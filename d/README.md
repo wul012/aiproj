@@ -194,6 +194,9 @@ d/360/解释/说明.md
 d/361/图片
 d/361/解释/说明.md
  -> v361 governance routing keyword hit 的运行截图和解释
+d/362/图片
+d/362/解释/说明.md
+ -> v362 governance ambiguous keyword review 的运行截图和解释
 ```
 
 写入规则：

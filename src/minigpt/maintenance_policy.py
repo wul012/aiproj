@@ -423,7 +423,9 @@ def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[s
             "new_chain_candidate_count": 0,
             "exact_match_count": 0,
             "keyword_match_count": 0,
+            "ambiguous_keyword_match_count": 0,
             "keyword_hits": [],
+            "ambiguous_keyword_hits": [],
             "items": [],
             "reasons": ["No governance expansion proposals were provided."],
         }
@@ -432,7 +434,14 @@ def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[s
     merge_existing_count = sum(1 for item in normalized if item.get("route_decision") == "merge_existing")
     exact_match_count = sum(1 for item in normalized if item.get("match_basis") == "exact")
     keyword_match_count = sum(1 for item in normalized if item.get("match_basis") == "keyword")
+    ambiguous_keyword_match_count = sum(1 for item in normalized if item.get("match_basis") == "ambiguous_keyword")
     keyword_hits = [str(item.get("matched_keyword") or "") for item in normalized if item.get("match_basis") == "keyword" and item.get("matched_keyword")]
+    ambiguous_keyword_hits = _unique_strings(
+        keyword
+        for item in normalized
+        if item.get("match_basis") == "ambiguous_keyword"
+        for keyword in _string_list(item.get("matched_keywords"))
+    )
     if new_chain_candidate_count:
         decision = "reject_new_chain_during_pause"
         reasons = ["At least one proposal cannot be routed to an existing chain during the pause window."]
@@ -450,7 +459,9 @@ def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[s
         "new_chain_candidate_count": new_chain_candidate_count,
         "exact_match_count": exact_match_count,
         "keyword_match_count": keyword_match_count,
+        "ambiguous_keyword_match_count": ambiguous_keyword_match_count,
         "keyword_hits": keyword_hits,
+        "ambiguous_keyword_hits": ambiguous_keyword_hits,
         "items": normalized,
         "reasons": reasons,
     }
@@ -471,7 +482,10 @@ def _normalize_governance_proposal(item: dict[str, Any], index: int, chains: lis
     high_risk = bool(set(risk_flags) & set(HIGH_RISK_FLAGS))
     match_basis = matched_chain.get("match_basis", "") if matched_chain else ""
     matched_keyword = matched_chain.get("matched_keyword", "") if matched_chain else ""
-    if matched_chain and not high_risk:
+    matched_chains = _string_list(matched_chain.get("matched_chains")) if matched_chain else []
+    matched_keywords = _string_list(matched_chain.get("matched_keywords")) if matched_chain else []
+    ambiguous_match = match_basis == "ambiguous_keyword"
+    if matched_chain and not high_risk and not ambiguous_match:
         route_decision = "merge_existing"
         if match_basis == "keyword" and matched_keyword:
             reason = f"Merge into existing chain {matched_chain.get('id')} because keyword '{matched_keyword}' matched its routing map."
@@ -479,7 +493,9 @@ def _normalize_governance_proposal(item: dict[str, Any], index: int, chains: lis
             reason = f"Merge into existing chain {matched_chain.get('id')} under its expansion rule."
     elif matched_chain:
         route_decision = "review"
-        if match_basis == "keyword" and matched_keyword:
+        if ambiguous_match:
+            reason = "Review before merging because keywords matched multiple governance chains: " + ", ".join(matched_chains) + "."
+        elif match_basis == "keyword" and matched_keyword:
             reason = f"Review before merging into {matched_chain.get('id')} because keyword '{matched_keyword}' matched and risk flags are present."
         else:
             reason = f"Review before merging into {matched_chain.get('id')} because risk flags are present."
@@ -496,6 +512,9 @@ def _normalize_governance_proposal(item: dict[str, Any], index: int, chains: lis
         "expansion_rule": matched_chain.get("expansion_rule") if matched_chain else "",
         "match_basis": match_basis,
         "matched_keyword": matched_keyword,
+        "matched_keywords": matched_keywords,
+        "matched_chains": matched_chains,
+        "matched_chain_count": len(matched_chains),
     }
 
 
@@ -506,6 +525,9 @@ def _match_governance_chain(target: str, text: str, chains: list[dict[str, Any]]
         if target_lower and target_lower == chain_id.lower():
             matched = dict(chain)
             matched["match_basis"] = "exact"
+            matched["matched_keyword"] = ""
+            matched["matched_keywords"] = []
+            matched["matched_chains"] = [chain_id]
             return matched
     keyword_map = [
         ("dataset-provenance", ["dataset", "data", "corpus", "dedupe", "source"]),
@@ -516,14 +538,21 @@ def _match_governance_chain(target: str, text: str, chains: list[dict[str, Any]]
         ("training-promotion", ["promotion", "promoted", "handoff", "seed"]),
         ("maturity-portfolio", ["maturity", "portfolio", "narrative"]),
     ]
+    keyword_matches: list[tuple[dict[str, Any], list[str]]] = []
     for chain_id, keywords in keyword_map:
-        if any(keyword in text for keyword in keywords):
+        matched_keywords = [keyword for keyword in keywords if keyword in text]
+        if matched_keywords:
             for chain in chains:
                 if str(chain.get("id")) == chain_id:
-                    matched = dict(chain)
-                    matched["match_basis"] = "keyword"
-                    matched["matched_keyword"] = next((keyword for keyword in keywords if keyword in text), "")
-                    return matched
+                    keyword_matches.append((dict(chain), matched_keywords))
+                    break
+    if keyword_matches:
+        matched = dict(keyword_matches[0][0])
+        matched["match_basis"] = "keyword" if len(keyword_matches) == 1 else "ambiguous_keyword"
+        matched["matched_keyword"] = keyword_matches[0][1][0]
+        matched["matched_keywords"] = [keyword for _, keywords in keyword_matches for keyword in keywords]
+        matched["matched_chains"] = [str(chain.get("id") or "") for chain, _ in keyword_matches]
+        return matched
     return None
 
 
@@ -585,6 +614,15 @@ def _modules(item: dict[str, Any]) -> list[str]:
 def _risk_flags(item: dict[str, Any]) -> list[str]:
     flags = [flag.strip().lower().replace("-", "_") for flag in _string_list(item.get("risk_flags")) if flag.strip()]
     return sorted(set(flags))
+
+
+def _unique_strings(values: Any) -> list[str]:
+    result: list[str] = []
+    for value in values:
+        text = str(value)
+        if text and text not in result:
+            result.append(text)
+    return result
 
 
 def _is_low_risk_utils(category: str, title: str) -> bool:
