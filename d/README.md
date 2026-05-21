@@ -131,6 +131,9 @@ d/339/解释/说明.md
 d/340/图片
 d/340/解释/说明.md
  -> v340 CI tiny scorecard plan checker 的运行截图和解释
+d/341/图片
+d/341/解释/说明.md
+ -> v341 CI tiny scorecard plan digest gate 的运行截图和解释
 ```
 
 写入规则：

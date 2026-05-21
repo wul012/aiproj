@@ -125,6 +125,9 @@
 354-v340-ci-tiny-scorecard-plan-checker.md
  -> v340 code explanation: add a reusable checker that revalidates CI tiny scorecard wrapper plan artifact digests without rerunning training.
 
+355-v341-ci-tiny-scorecard-plan-digest-gate.md
+ -> v341 code explanation: promote the CI tiny scorecard plan digest checker into GitHub Actions and CI workflow hygiene order rules.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

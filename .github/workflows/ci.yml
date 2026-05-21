@@ -32,5 +32,8 @@ jobs:
       - name: Tiny scorecard comparison inline check smoke
         run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci --force
 
+      - name: CI tiny scorecard plan digest check
+        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci
+
       - name: Unit tests
         run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80

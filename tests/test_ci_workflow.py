@@ -56,6 +56,18 @@ class CIWorkflowTests(unittest.TestCase):
             "command:tiny_scorecard_summary_check_sidecar",
             {item["id"] for item in report["checks"]},
         )
+        self.assertIn(
+            "command:ci_tiny_scorecard_plan_digest_check",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:ci_tiny_scorecard_plan_check_after_smoke",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:ci_tiny_scorecard_plan_check_before_coverage",
+            {item["id"] for item in report["checks"]},
+        )
         for order_check in (item for item in report["checks"] if item["category"] == "required_order"):
             self.assertIn("before_line=", order_check["actual"])
             self.assertIn("after_line=", order_check["actual"])
@@ -91,8 +103,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 5)
-            self.assertEqual(report["summary"]["required_step_count"], 7)
+            self.assertEqual(report["summary"]["missing_step_count"], 6)
+            self.assertEqual(report["summary"]["required_step_count"], 8)
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
@@ -117,6 +129,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
+                        "      - name: CI tiny scorecard plan digest check",
+                        "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
@@ -158,6 +172,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
+                        "      - name: CI tiny scorecard plan digest check",
+                        "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
                     ]
                 ),
                 encoding="utf-8",
@@ -167,12 +183,50 @@ class CIWorkflowTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertEqual(report["summary"]["order_violation_count"], 2)
-            order_checks = [item for item in report["checks"] if item["category"] == "required_order"]
-            self.assertTrue(all(item["status"] == "fail" for item in order_checks))
-            self.assertTrue(all("before coverage" in item["detail"] for item in order_checks))
-            self.assertTrue(all("smoke line" in item["detail"] for item in order_checks))
-            self.assertTrue(all("coverage line" in item["detail"] for item in order_checks))
+            self.assertEqual(report["summary"]["order_violation_count"], 3)
+            failed_order_ids = {item["id"] for item in report["checks"] if item["category"] == "required_order" and item["status"] == "fail"}
+            self.assertIn("order:promoted_seed_handoff_assurance_smoke_before_coverage", failed_order_ids)
+            self.assertIn("order:tiny_scorecard_inline_check_smoke_before_coverage", failed_order_ids)
+            self.assertIn("order:ci_tiny_scorecard_plan_check_before_coverage", failed_order_ids)
+            self.assertNotIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
+
+    def test_ci_workflow_hygiene_requires_plan_check_after_tiny_smoke(self) -> None:
+        with TemporaryDirectory() as tmp:
+            workflow = Path(tmp) / "ci.yml"
+            workflow.write_text(
+                "\n".join(
+                    [
+                        "name: ci",
+                        "jobs:",
+                        "  test:",
+                        "    steps:",
+                        "      - uses: actions/checkout@v6",
+                        "      - uses: actions/setup-python@v6",
+                        "        with:",
+                        '          python-version: "3.11"',
+                        "      - name: Source encoding and syntax check",
+                        "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+                        "      - name: CI workflow hygiene check",
+                        "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Promoted seed handoff assurance smoke",
+                        "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+                        "      - name: CI tiny scorecard plan digest check",
+                        "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
+                        "      - name: Tiny scorecard comparison inline check smoke",
+                        "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
+                        "      - name: Unit tests",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+
+            failed_order_ids = {item["id"] for item in report["checks"] if item["category"] == "required_order" and item["status"] == "fail"}
+            self.assertEqual(report["summary"]["status"], "fail")
+            self.assertEqual(report["summary"]["missing_step_count"], 0)
+            self.assertIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
         report = build_ci_workflow_hygiene_report(CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z")
