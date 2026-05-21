@@ -148,7 +148,9 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(routing["items"][0]["suggested_chain"], "dataset-provenance")
         self.assertEqual(routing["items"][1]["suggested_chain"], "training-promotion")
         self.assertEqual(routing["items"][0]["match_basis"], "keyword")
+        self.assertEqual(routing["items"][0]["matched_keyword"], "dataset")
         self.assertEqual(routing["items"][1]["match_basis"], "exact")
+        self.assertEqual(routing["items"][1]["matched_keyword"], "")
         self.assertIn("Route current proposals", " ".join(report["recommendations"]))
 
     def test_governance_stabilization_reviews_high_risk_proposals(self) -> None:
@@ -293,6 +295,7 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("governance_routing_new_chain_candidate_count=0", completed.stdout)
             self.assertIn("governance_routing_exact_match_count=1", completed.stdout)
             self.assertIn("governance_routing_keyword_match_count=1", completed.stdout)
+            self.assertIn("governance_routing_keyword_hits=dataset", completed.stdout)
 
     def test_module_pressure_report_flags_large_modules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

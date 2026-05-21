@@ -346,6 +346,7 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
     summary = _dict(report.get("summary"))
     policy = _dict(report.get("policy"))
     routing = _dict(report.get("proposal_routing"))
+    keyword_hits = _string_list(routing.get("keyword_hits"))
     lines = [
         f"# {report.get('title', 'MiniGPT governance stabilization review')}",
         "",
@@ -409,9 +410,10 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
             f"- New-chain candidates: `{routing.get('new_chain_candidate_count')}`",
             f"- Exact matches: `{routing.get('exact_match_count')}`",
             f"- Keyword matches: `{routing.get('keyword_match_count')}`",
+            f"- Keyword hits: `{', '.join(keyword_hits)}`" if keyword_hits else "- Keyword hits: ``",
             "",
-            "| Proposal | Target chain | Suggested chain | Match basis | Decision | Reason | Expansion rule |",
-            "| --- | --- | --- | --- | --- | --- | --- |",
+            "| Proposal | Target chain | Suggested chain | Match basis | Matched keyword | Decision | Reason | Expansion rule |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     rows = _list_of_dicts(routing.get("items"))
@@ -425,6 +427,7 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
                         _md(item.get("target_chain")),
                         _md(item.get("suggested_chain")),
                         _md(item.get("match_basis")),
+                        _md(item.get("matched_keyword")),
                         _md(item.get("route_decision")),
                         _md(item.get("reason")),
                         _md(item.get("expansion_rule")),
@@ -433,7 +436,7 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
                 + " |"
             )
     else:
-        lines.append("|  |  |  |  | not_applicable | No governance expansion proposals were provided. |  |")
+        lines.append("|  |  |  |  |  | not_applicable | No governance expansion proposals were provided. |  |")
     lines.extend(["", "## Recommendations", ""])
     lines.extend(f"- {item}" for item in _string_list(report.get("recommendations")))
     return "\n".join(lines).rstrip() + "\n"
@@ -534,12 +537,13 @@ def _proposal_routing_section(routing: dict[str, Any]) -> str:
     summary = (
         f"<p><strong>{_e(routing.get('decision'))}</strong> "
         f"items={_e(routing.get('item_count'))}, merge={_e(routing.get('merge_existing_count'))}, "
-        f"review={_e(routing.get('review_count'))}, new-chain={_e(routing.get('new_chain_candidate_count'))}</p>"
+        f"review={_e(routing.get('review_count'))}, new-chain={_e(routing.get('new_chain_candidate_count'))}, "
+        f"keywords={_e(routing.get('keyword_match_count'))}</p>"
     )
     return (
         "<section><h2>Proposal Routing</h2>"
         + summary
-        + "<table><tr><th>Proposal</th><th>Target Chain</th><th>Suggested Chain</th><th>Match Basis</th><th>Decision</th><th>Reason</th><th>Expansion Rule</th></tr>"
+        + "<table><tr><th>Proposal</th><th>Target Chain</th><th>Suggested Chain</th><th>Match Basis</th><th>Matched Keyword</th><th>Decision</th><th>Reason</th><th>Expansion Rule</th></tr>"
         + rows
         + "</table></section>"
     )
@@ -552,6 +556,7 @@ def _proposal_routing_html_row(item: dict[str, Any]) -> str:
         f"<td>{_e(item.get('target_chain'))}</td>"
         f"<td>{_e(item.get('suggested_chain'))}</td>"
         f"<td>{_e(item.get('match_basis'))}</td>"
+        f"<td>{_e(item.get('matched_keyword'))}</td>"
         f"<td>{_e(item.get('route_decision'))}</td>"
         f"<td>{_e(item.get('reason'))}</td>"
         f"<td>{_e(item.get('expansion_rule'))}</td>"

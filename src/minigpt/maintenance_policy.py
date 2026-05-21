@@ -423,6 +423,7 @@ def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[s
             "new_chain_candidate_count": 0,
             "exact_match_count": 0,
             "keyword_match_count": 0,
+            "keyword_hits": [],
             "items": [],
             "reasons": ["No governance expansion proposals were provided."],
         }
@@ -431,6 +432,7 @@ def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[s
     merge_existing_count = sum(1 for item in normalized if item.get("route_decision") == "merge_existing")
     exact_match_count = sum(1 for item in normalized if item.get("match_basis") == "exact")
     keyword_match_count = sum(1 for item in normalized if item.get("match_basis") == "keyword")
+    keyword_hits = [str(item.get("matched_keyword") or "") for item in normalized if item.get("match_basis") == "keyword" and item.get("matched_keyword")]
     if new_chain_candidate_count:
         decision = "reject_new_chain_during_pause"
         reasons = ["At least one proposal cannot be routed to an existing chain during the pause window."]
@@ -448,6 +450,7 @@ def _route_governance_proposals(items: list[dict[str, Any]], chains: list[dict[s
         "new_chain_candidate_count": new_chain_candidate_count,
         "exact_match_count": exact_match_count,
         "keyword_match_count": keyword_match_count,
+        "keyword_hits": keyword_hits,
         "items": normalized,
         "reasons": reasons,
     }
@@ -467,12 +470,19 @@ def _normalize_governance_proposal(item: dict[str, Any], index: int, chains: lis
     risk_flags = _risk_flags(item)
     high_risk = bool(set(risk_flags) & set(HIGH_RISK_FLAGS))
     match_basis = matched_chain.get("match_basis", "") if matched_chain else ""
+    matched_keyword = matched_chain.get("matched_keyword", "") if matched_chain else ""
     if matched_chain and not high_risk:
         route_decision = "merge_existing"
-        reason = f"Merge into existing chain {matched_chain.get('id')} under its expansion rule."
+        if match_basis == "keyword" and matched_keyword:
+            reason = f"Merge into existing chain {matched_chain.get('id')} because keyword '{matched_keyword}' matched its routing map."
+        else:
+            reason = f"Merge into existing chain {matched_chain.get('id')} under its expansion rule."
     elif matched_chain:
         route_decision = "review"
-        reason = f"Review before merging into {matched_chain.get('id')} because risk flags are present."
+        if match_basis == "keyword" and matched_keyword:
+            reason = f"Review before merging into {matched_chain.get('id')} because keyword '{matched_keyword}' matched and risk flags are present."
+        else:
+            reason = f"Review before merging into {matched_chain.get('id')} because risk flags are present."
     else:
         route_decision = "new_chain_candidate"
         reason = "No existing governance chain matched this proposal during the pause window."
@@ -485,6 +495,7 @@ def _normalize_governance_proposal(item: dict[str, Any], index: int, chains: lis
         "reason": reason,
         "expansion_rule": matched_chain.get("expansion_rule") if matched_chain else "",
         "match_basis": match_basis,
+        "matched_keyword": matched_keyword,
     }
 
 
@@ -511,7 +522,7 @@ def _match_governance_chain(target: str, text: str, chains: list[dict[str, Any]]
                 if str(chain.get("id")) == chain_id:
                     matched = dict(chain)
                     matched["match_basis"] = "keyword"
-                    matched["matched_keyword"] = chain_id
+                    matched["matched_keyword"] = next((keyword for keyword in keywords if keyword in text), "")
                     return matched
     return None
 
