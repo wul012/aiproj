@@ -61,6 +61,7 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Release readiness CI workflow regressions", overview.get("release_readiness_ci_workflow_regression_count")),
                 ("Release readiness CI order regressions", overview.get("release_readiness_ci_workflow_order_regression_count")),
                 ("Release readiness test coverage regressions", overview.get("release_readiness_test_coverage_regression_count")),
+                ("Release readiness benchmark-history regressions", overview.get("release_readiness_benchmark_history_regression_count")),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -137,6 +138,14 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     ("Test coverage status changes", release_readiness.get("test_coverage_status_changed_count")),
                     ("Max coverage percent delta", release_readiness.get("max_abs_test_coverage_percent_delta")),
                     ("Max coverage gap delta", release_readiness.get("max_abs_test_coverage_gap_delta")),
+                    ("Benchmark-history regressions", release_readiness.get("benchmark_history_regression_count")),
+                    ("Benchmark-history status changes", release_readiness.get("benchmark_history_status_changed_count")),
+                    ("Benchmark-history boundary changes", release_readiness.get("benchmark_history_boundary_changed_count")),
+                    ("Max benchmark case-regression delta", release_readiness.get("max_abs_benchmark_history_case_regression_delta")),
+                    (
+                        "Max benchmark generation-flag regression delta",
+                        release_readiness.get("max_abs_benchmark_history_generation_flag_regression_delta"),
+                    ),
                 ]
             ),
         ]
@@ -171,6 +180,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("CI regressions", release_readiness.get("ci_workflow_regression_count")),
         ("CI order regressions", release_readiness.get("ci_workflow_order_regression_count")),
         ("Coverage regressions", release_readiness.get("test_coverage_regression_count")),
+        ("Benchmark regressions", release_readiness.get("benchmark_history_regression_count")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -298,6 +308,11 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         ("Test coverage status changes", release_readiness.get("test_coverage_status_changed_count")),
         ("Max coverage percent delta", release_readiness.get("max_abs_test_coverage_percent_delta")),
         ("Max coverage gap delta", release_readiness.get("max_abs_test_coverage_gap_delta")),
+        ("Benchmark-history regressions", release_readiness.get("benchmark_history_regression_count")),
+        ("Benchmark-history status changes", release_readiness.get("benchmark_history_status_changed_count")),
+        ("Benchmark-history boundary changes", release_readiness.get("benchmark_history_boundary_changed_count")),
+        ("Max benchmark case-regression delta", release_readiness.get("max_abs_benchmark_history_case_regression_delta")),
+        ("Max benchmark generation-flag regression delta", release_readiness.get("max_abs_benchmark_history_generation_flag_regression_delta")),
     ]
     return '<section class="panel"><h2>Release Readiness Trend Context</h2><table>' + "".join(
         f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows

@@ -50,6 +50,13 @@ def build_maturity_narrative_summary(
         "release_readiness_test_coverage_status_changed_count": release.get("test_coverage_status_changed_count"),
         "release_readiness_max_test_coverage_percent_delta": release.get("max_abs_test_coverage_percent_delta"),
         "release_readiness_max_test_coverage_gap_delta": release.get("max_abs_test_coverage_gap_delta"),
+        "release_readiness_benchmark_history_regression_count": release.get("benchmark_history_regression_count"),
+        "release_readiness_benchmark_history_status_changed_count": release.get("benchmark_history_status_changed_count"),
+        "release_readiness_benchmark_history_boundary_changed_count": release.get("benchmark_history_boundary_changed_count"),
+        "release_readiness_max_benchmark_history_case_regression_delta": release.get("max_abs_benchmark_history_case_regression_delta"),
+        "release_readiness_max_benchmark_history_generation_flag_regression_delta": release.get(
+            "max_abs_benchmark_history_generation_flag_regression_delta"
+        ),
         "request_history_status": request.get("status"),
         "request_history_records": request.get("total_log_records"),
         "request_history_timeout_rate": request.get("timeout_rate"),
@@ -161,11 +168,12 @@ def _portfolio_status(
         return "incomplete"
     if (
         maturity.get("overall_status") in {"warn", "fail"}
-        or release.get("trend_status") in {"regressed", "ci-regressed", "coverage-regressed"}
+        or release.get("trend_status") in {"regressed", "ci-regressed", "coverage-regressed", "benchmark-regressed"}
         or int(release.get("regressed_count") or 0) > 0
         or int(release.get("ci_workflow_regression_count") or 0) > 0
         or int(release.get("ci_workflow_order_regression_count") or 0) > 0
         or int(release.get("test_coverage_regression_count") or 0) > 0
+        or int(release.get("benchmark_history_regression_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
         or any(row.get("decision_status") in {"review", "blocked"} for row in decision_rows)
@@ -227,6 +235,26 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "max_abs_test_coverage_gap_delta": _coalesce(
             release_context.get("max_abs_test_coverage_gap_delta"),
             maturity_summary.get("release_readiness_max_test_coverage_gap_delta"),
+        ),
+        "benchmark_history_regression_count": _coalesce(
+            release_context.get("benchmark_history_regression_count"),
+            maturity_summary.get("release_readiness_benchmark_history_regression_count"),
+        ),
+        "benchmark_history_status_changed_count": _coalesce(
+            release_context.get("benchmark_history_status_changed_count"),
+            maturity_summary.get("release_readiness_benchmark_history_status_changed_count"),
+        ),
+        "benchmark_history_boundary_changed_count": _coalesce(
+            release_context.get("benchmark_history_boundary_changed_count"),
+            maturity_summary.get("release_readiness_benchmark_history_boundary_changed_count"),
+        ),
+        "max_abs_benchmark_history_case_regression_delta": _coalesce(
+            release_context.get("max_abs_benchmark_history_case_regression_delta"),
+            maturity_summary.get("release_readiness_max_benchmark_history_case_regression_delta"),
+        ),
+        "max_abs_benchmark_history_generation_flag_regression_delta": _coalesce(
+            release_context.get("max_abs_benchmark_history_generation_flag_regression_delta"),
+            maturity_summary.get("release_readiness_max_benchmark_history_generation_flag_regression_delta"),
         ),
     }
 

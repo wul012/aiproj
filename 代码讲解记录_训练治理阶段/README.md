@@ -155,6 +155,9 @@
 364-v350-registry-benchmark-readiness-tracking.md
  -> v350 code explanation: carry release-readiness benchmark-history regression evidence into registry summaries, rows, leaderboards, CSV, HTML, and CLI output.
 
+365-v351-maturity-benchmark-readiness-carryover.md
+ -> v351 code explanation: carry registry benchmark-history readiness regressions into maturity summary, maturity narrative, CLI diagnostics, and review decisions.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

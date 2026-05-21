@@ -163,7 +163,11 @@ def _release_claim(summary: dict[str, Any]) -> str:
         f"CI order regressions={summary.get('release_readiness_ci_workflow_order_regression_count') or 0}, "
         f"max order violation delta={summary.get('release_readiness_max_ci_workflow_order_violation_delta') if summary.get('release_readiness_max_ci_workflow_order_violation_delta') is not None else 'missing'}, "
         f"test coverage regressions={summary.get('release_readiness_test_coverage_regression_count') or 0}, "
-        f"max coverage gap delta={summary.get('release_readiness_max_test_coverage_gap_delta') if summary.get('release_readiness_max_test_coverage_gap_delta') is not None else 'missing'}."
+        f"max coverage gap delta={summary.get('release_readiness_max_test_coverage_gap_delta') if summary.get('release_readiness_max_test_coverage_gap_delta') is not None else 'missing'}, "
+        f"benchmark-history regressions={summary.get('release_readiness_benchmark_history_regression_count') or 0}, "
+        f"max benchmark case-regression delta="
+        f"{summary.get('release_readiness_max_benchmark_history_case_regression_delta') if summary.get('release_readiness_max_benchmark_history_case_regression_delta') is not None else 'missing'}, "
+        f"benchmark boundary changes={summary.get('release_readiness_benchmark_history_boundary_changed_count') or 0}."
     )
 
 

@@ -80,6 +80,8 @@ def main() -> None:
     print(f"release_readiness_max_ci_workflow_order_violation_delta={summary.get('release_readiness_max_ci_workflow_order_violation_delta')}")
     print(f"release_readiness_test_coverage_regression_count={summary.get('release_readiness_test_coverage_regression_count')}")
     print(f"release_readiness_max_test_coverage_gap_delta={summary.get('release_readiness_max_test_coverage_gap_delta')}")
+    print(f"release_readiness_benchmark_history_regression_count={summary.get('release_readiness_benchmark_history_regression_count')}")
+    print(f"release_readiness_benchmark_history_boundary_changed_count={summary.get('release_readiness_benchmark_history_boundary_changed_count')}")
     print(f"request_history_status={summary.get('request_history_status')}")
     print(f"benchmark_scorecards={summary.get('benchmark_scorecard_count')}")
     print(f"benchmark_scorecard_decisions={summary.get('benchmark_decision_count')}")
