@@ -56,7 +56,10 @@ def build_model_card(
         "quality_counts": registry.get("quality_counts", {}),
         "generation_quality_counts": registry.get("generation_quality_counts", {}),
         "tag_counts": registry.get("tag_counts", {}),
+        "dataset_versions": registry.get("dataset_versions", []),
         "dataset_fingerprints": registry.get("dataset_fingerprints", []),
+        "dataset_dedupe_policy_counts": registry.get("dataset_dedupe_policy_counts", {}),
+        "dataset_snapshot_summary": registry.get("dataset_snapshot_summary", {}),
         "top_runs": _top_runs(registry, runs),
         "runs": runs,
         "recommendations": recommendations,
@@ -127,6 +130,13 @@ def _build_run_summaries(registry: dict[str, Any], cards: dict[str, dict[str, An
                 "best_val_loss_rank": run.get("best_val_loss_rank"),
                 "best_val_loss": run.get("best_val_loss"),
                 "best_val_loss_delta": run.get("best_val_loss_delta"),
+                "dataset_version": run.get("dataset_version"),
+                "dataset_fingerprint": run.get("dataset_fingerprint"),
+                "dataset_dedupe_policy": run.get("dataset_dedupe_policy"),
+                "dataset_source_order_digest": run.get("dataset_source_order_digest"),
+                "dataset_included_source_count": run.get("dataset_included_source_count"),
+                "dataset_skipped_source_count": run.get("dataset_skipped_source_count"),
+                "dataset_char_count": run.get("dataset_char_count"),
                 "dataset_quality": run.get("dataset_quality"),
                 "eval_suite_cases": run.get("eval_suite_cases"),
                 "generation_quality_status": run.get("generation_quality_status"),
@@ -162,6 +172,8 @@ def _build_summary(registry: dict[str, Any], runs: list[dict[str, Any]], cards: 
         "review_runs": review,
         "experiment_cards": len(cards),
         "comparable_runs": sum(1 for run in runs if run.get("best_val_loss") is not None),
+        "dataset_snapshot_runs": sum(1 for run in runs if _has_dataset_snapshot(run)),
+        "dataset_skipped_source_runs": sum(1 for run in runs if _as_int(run.get("dataset_skipped_source_count")) and _as_int(run.get("dataset_skipped_source_count")) > 0),
     }
 
 
@@ -178,6 +190,12 @@ def _build_coverage(registry: dict[str, Any], runs: list[dict[str, Any]], cards:
         "checkpoint_runs": sum(1 for run in runs if run.get("checkpoint_exists")),
         "dashboard_runs": sum(1 for run in runs if run.get("dashboard_exists")),
         "dataset_fingerprint_count": len(registry.get("dataset_fingerprints", [])),
+        "dataset_version_count": len(registry.get("dataset_versions", [])),
+        "dataset_snapshot_runs": sum(1 for run in runs if _has_dataset_snapshot(run)),
+        "dataset_snapshot_coverage": _ratio(sum(1 for run in runs if _has_dataset_snapshot(run)), total),
+        "dataset_skipped_source_runs": sum(
+            1 for run in runs if _as_int(run.get("dataset_skipped_source_count")) is not None and (_as_int(run.get("dataset_skipped_source_count")) or 0) > 0
+        ),
     }
 
 
@@ -211,6 +229,10 @@ def _build_recommendations(
         items.append("Use the best ready run as the current project reference and compare new runs against it.")
     if any(run.get("dataset_quality") not in {"pass", None, "missing"} for run in runs):
         items.append("Review non-pass dataset quality runs before using them as baselines.")
+    if coverage.get("dataset_snapshot_runs", 0) < coverage.get("run_count", 0):
+        items.append("Regenerate registry from dataset-versioned runs so every model-card row has dataset snapshot evidence.")
+    if coverage.get("dataset_skipped_source_runs", 0):
+        items.append("Review runs with skipped dataset sources before treating loss deltas as model-only evidence.")
     if coverage.get("eval_suite_runs", 0) < coverage.get("run_count", 0):
         items.append("Run the fixed prompt eval suite for every registered run.")
     if coverage.get("generation_quality_runs", 0) < coverage.get("run_count", 0):
@@ -255,3 +277,22 @@ def _ratio(count: int, total: int) -> float:
     if total == 0:
         return 0.0
     return round(count / total, 4)
+
+
+def _has_dataset_snapshot(run: dict[str, Any]) -> bool:
+    return any(
+        run.get(key) is not None
+        for key in [
+            "dataset_dedupe_policy",
+            "dataset_source_order_digest",
+            "dataset_included_source_count",
+            "dataset_skipped_source_count",
+            "dataset_char_count",
+        ]
+    )
+
+
+def _as_int(value: Any) -> int | None:
+    if value is None or value == "":
+        return None
+    return int(value)

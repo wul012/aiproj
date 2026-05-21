@@ -31,6 +31,9 @@ def main() -> None:
     print(f"best_run={card['summary']['best_run_name']}")
     print(f"ready_runs={card['summary']['ready_runs']}")
     print(f"experiment_cards={card['coverage']['experiment_cards_found']}")
+    print(f"dataset_snapshot_runs={card['coverage'].get('dataset_snapshot_runs')}")
+    print(f"dataset_snapshot_coverage={card['coverage'].get('dataset_snapshot_coverage')}")
+    print("dataset_snapshot_summary=" + json.dumps(card.get("dataset_snapshot_summary", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if card["warnings"]:
         print("warnings=" + json.dumps(card["warnings"], ensure_ascii=False))

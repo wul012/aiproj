@@ -176,6 +176,9 @@ d/354/解释/说明.md
 d/355/图片
 d/355/解释/说明.md
  -> v355 registry dataset snapshot carryover 的运行截图和解释
+d/356/图片
+d/356/解释/说明.md
+ -> v356 model card dataset snapshot carryover 的运行截图和解释
 ```
 
 写入规则：

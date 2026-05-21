@@ -36,6 +36,9 @@ def render_model_card_markdown(card: dict[str, Any]) -> str:
                 ("Ready runs", summary.get("ready_runs")),
                 ("Review runs", summary.get("review_runs")),
                 ("Experiment cards", coverage.get("experiment_cards_found")),
+                ("Dataset versions", coverage.get("dataset_version_count")),
+                ("Dataset snapshots", coverage.get("dataset_snapshot_runs")),
+                ("Skipped-source runs", coverage.get("dataset_skipped_source_runs")),
                 ("Quality checked", coverage.get("quality_checked_runs")),
                 ("Eval suite runs", coverage.get("eval_suite_runs")),
                 ("Generation quality", coverage.get("generation_quality_runs")),
@@ -57,6 +60,10 @@ def render_model_card_markdown(card: dict[str, Any]) -> str:
         "## Coverage",
         "",
         *_markdown_table([(key, value) for key, value in coverage.items()]),
+        "",
+        "## Dataset Snapshot Summary",
+        "",
+        *_markdown_table([(key, value) for key, value in _dict(card.get("dataset_snapshot_summary")).items()]),
         "",
         "## Recommendations",
         "",
@@ -88,6 +95,9 @@ def render_model_card_html(card: dict[str, Any], *, base_dir: str | Path | None 
         ("Ready", summary.get("ready_runs")),
         ("Review", summary.get("review_runs")),
         ("Cards", coverage.get("experiment_cards_found")),
+        ("Datasets", coverage.get("dataset_version_count")),
+        ("Snapshots", coverage.get("dataset_snapshot_runs")),
+        ("Skipped sources", coverage.get("dataset_skipped_source_runs")),
         ("Eval suite", coverage.get("eval_suite_runs")),
         ("Gen quality", coverage.get("generation_quality_runs")),
         ("Quality", coverage.get("quality_checked_runs")),
@@ -112,6 +122,8 @@ def render_model_card_html(card: dict[str, Any], *, base_dir: str | Path | None 
             _key_value_section("Coverage", coverage),
             _key_value_section("Quality Counts", _dict(card.get("quality_counts"))),
             _key_value_section("Generation Quality Counts", _dict(card.get("generation_quality_counts"))),
+            _key_value_section("Dataset Dedupe Policies", _dict(card.get("dataset_dedupe_policy_counts"))),
+            _key_value_section("Dataset Snapshot Summary", _dict(card.get("dataset_snapshot_summary"))),
             _key_value_section("Tag Counts", _dict(card.get("tag_counts"))),
             _list_section("Recommendations", card.get("recommendations")),
             _run_section("All Runs", _list_of_dicts(card.get("runs")), base_dir),
@@ -144,7 +156,10 @@ def write_model_card_outputs(card: dict[str, Any], out_dir: str | Path) -> dict[
 
 
 def _run_table(runs: list[dict[str, Any]]) -> list[str]:
-    lines = ["| Rank | Run | Status | Best Val | Delta | Quality | Eval | Gen Quality | Card |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    lines = [
+        "| Rank | Run | Status | Best Val | Delta | Data Snapshot | Quality | Eval | Gen Quality | Card |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
     for run in runs:
         lines.append(
             "| "
@@ -155,6 +170,7 @@ def _run_table(runs: list[dict[str, Any]]) -> list[str]:
                     _md(run.get("status")),
                     _md(_fmt(run.get("best_val_loss"))),
                     _md(_fmt_delta(run.get("best_val_loss_delta"))),
+                    _md(_dataset_snapshot_label(run)),
                     _md(run.get("dataset_quality")),
                     _md(run.get("eval_suite_cases")),
                     _md(_generation_quality_label(run)),
@@ -177,6 +193,7 @@ def _run_section(title: str, runs: list[dict[str, Any]], base_dir: str | Path | 
             f"<td><strong>{_e(run.get('name'))}</strong><br><span>{_e(run.get('path'))}</span></td>"
             f"<td>{_e(run.get('status'))}</td>"
             f"<td>{_e(_fmt(run.get('best_val_loss')))}<br><span>{_e(_fmt_delta(run.get('best_val_loss_delta')))}</span></td>"
+            f"<td>{_e(_dataset_snapshot_label(run))}</td>"
             f"<td>{_e(run.get('dataset_quality'))}</td>"
             f"<td>{_e(run.get('eval_suite_cases'))}</td>"
             f"<td>{_e(_generation_quality_label(run))}</td>"
@@ -186,7 +203,7 @@ def _run_section(title: str, runs: list[dict[str, Any]], base_dir: str | Path | 
         )
     return (
         f'<section class="panel"><h2>{_e(title)}</h2>'
-        '<table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Notes</th><th>Card</th></tr></thead><tbody>'
+        '<table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Data Snapshot</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Notes</th><th>Card</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table></section>"
     )
@@ -269,6 +286,28 @@ def _generation_quality_label(run: dict[str, Any]) -> str:
     return f"{status} ({cases} cases)"
 
 
+def _dataset_snapshot_label(run: dict[str, Any]) -> str:
+    parts = []
+    version = run.get("dataset_version")
+    if version:
+        parts.append(str(version))
+    policy = run.get("dataset_dedupe_policy")
+    if policy:
+        parts.append(f"dedupe={policy}")
+    included = run.get("dataset_included_source_count")
+    skipped = run.get("dataset_skipped_source_count")
+    if included is not None or skipped is not None:
+        parts.append(f"included={_fmt_int(included)}")
+        parts.append(f"skipped={_fmt_int(skipped)}")
+    char_count = run.get("dataset_char_count")
+    if char_count is not None:
+        parts.append(f"chars={_fmt_int(char_count)}")
+    digest = run.get("dataset_source_order_digest")
+    if digest:
+        parts.append(f"order={_clip(digest, 18)}")
+    return "; ".join(parts) if parts else "snapshot missing"
+
+
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
@@ -297,6 +336,12 @@ def _fmt_delta(value: Any) -> str:
     return f"{float(value):+.5g}"
 
 
+def _fmt_int(value: Any) -> str:
+    if value is None:
+        return "missing"
+    return f"{int(value):,}"
+
+
 def _fmt_any(value: Any) -> str:
     if isinstance(value, dict):
         return ", ".join(f"{key}:{val}" for key, val in value.items()) or "missing"
@@ -311,6 +356,13 @@ def _rank_label(value: Any) -> str:
     if value is None or value == "":
         return "unranked"
     return f"#{int(value)}"
+
+
+def _clip(value: Any, limit: int) -> str:
+    text = "" if value is None else str(value)
+    if len(text) <= limit:
+        return text
+    return text[: limit - 1] + "..."
 
 
 def _md(value: Any) -> str:
