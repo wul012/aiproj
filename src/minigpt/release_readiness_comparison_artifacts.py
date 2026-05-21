@@ -88,6 +88,7 @@ def write_release_readiness_delta_csv(report: dict[str, Any], path: str | Path) 
         "compared_ci_workflow_release_readiness_drift_contract_smoke_ready",
         "ci_workflow_release_readiness_drift_contract_smoke_ready_changed",
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed",
+        "ci_workflow_regression_reasons",
         "test_coverage_percent_delta",
         "test_coverage_gap_delta",
         "test_coverage_status_changed",
@@ -150,6 +151,7 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                     "CI drift-contract smoke ready regressions",
                     summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"),
                 ),
+                ("CI workflow regression reasons", _fmt_mapping(summary.get("ci_workflow_regression_reason_counts"))),
                 ("Max CI order violation delta", summary.get("max_abs_ci_workflow_order_violation_delta")),
                 ("Test coverage regressions", summary.get("test_coverage_regression_count")),
                 ("Benchmark history deltas", summary.get("benchmark_history_delta_count")),
@@ -223,8 +225,8 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
             "",
             "## Deltas",
             "",
-            "| Compared | Status delta | CI order violation delta | CI drift smoke changed | CI drift smoke regressed | Coverage % delta | Coverage gap delta | Benchmark status delta | Benchmark readiness changed | Benchmark readiness exit delta | Failed reason drift | Failed reasons added | Failed reasons removed | Benchmark case regression delta | Benchmark boundary changed | Panel changes | Explanation |",
-            "| --- | ---: | ---: | --- | --- | ---: | ---: | ---: | --- | ---: | --- | --- | --- | ---: | --- | --- | --- |",
+            "| Compared | Status delta | CI order violation delta | CI drift smoke changed | CI drift smoke regressed | CI regression reasons | Coverage % delta | Coverage gap delta | Benchmark status delta | Benchmark readiness changed | Benchmark readiness exit delta | Failed reason drift | Failed reasons added | Failed reasons removed | Benchmark case regression delta | Benchmark boundary changed | Panel changes | Explanation |",
+            "| --- | ---: | ---: | --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- | --- | --- | ---: | --- | --- | --- |",
         ]
     )
     for delta in _list_of_dicts(report.get("deltas")):
@@ -237,6 +239,7 @@ def render_release_readiness_comparison_markdown(report: dict[str, Any]) -> str:
                     _md(delta.get("ci_workflow_order_violation_delta")),
                     _md(delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_changed")),
                     _md(delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed")),
+                    _md(", ".join(_string_list(delta.get("ci_workflow_regression_reasons")))),
                     _md(delta.get("test_coverage_percent_delta")),
                     _md(delta.get("test_coverage_gap_delta")),
                     _md(delta.get("benchmark_history_status_delta")),
@@ -278,6 +281,7 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
         ("CI order regressions", summary.get("ci_workflow_order_regression_count")),
         ("CI drift smoke changes", summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready_changed_count")),
         ("CI drift smoke regressions", summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count")),
+        ("CI regression reasons", _fmt_mapping(summary.get("ci_workflow_regression_reason_counts"))),
         ("Coverage regressions", summary.get("test_coverage_regression_count")),
         ("Benchmark deltas", summary.get("benchmark_history_delta_count")),
         ("Benchmark regressions", summary.get("benchmark_history_regression_count")),
@@ -304,7 +308,7 @@ def render_release_readiness_comparison_html(report: dict[str, Any]) -> str:
             f"<header><h1>{_e(report.get('title', 'MiniGPT release readiness comparison'))}</h1><p>baseline: {_e(report.get('baseline_path'))}</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
             '<section class="panel"><h2>Readiness Matrix</h2><table><thead><tr><th>Release</th><th>Status</th><th>Decision</th><th>Gate</th><th>Audit</th><th>Score</th><th>CI workflow</th><th>CI failed</th><th>CI order violations</th><th>CI drift smoke ready</th><th>Request</th><th>Coverage</th><th>Coverage %</th><th>Gap</th><th>Benchmark history</th><th>Benchmark ready</th><th>Benchmark readiness</th><th>Benchmark readiness exit</th><th>Benchmark regressions</th><th>Benchmark boundary</th><th>Maturity</th><th>Panels</th></tr></thead><tbody>' + rows + "</tbody></table></section>",
-            '<section class="panel"><h2>Deltas</h2><table><thead><tr><th>Compared</th><th>Status delta</th><th>CI order violation delta</th><th>CI drift smoke changed</th><th>CI drift smoke regressed</th><th>Coverage % delta</th><th>Coverage gap delta</th><th>Benchmark status delta</th><th>Benchmark readiness changed</th><th>Benchmark readiness exit delta</th><th>Failed reason drift</th><th>Failed reasons added</th><th>Failed reasons removed</th><th>Benchmark case regression delta</th><th>Benchmark boundary changed</th><th>Panel changes</th><th>Explanation</th></tr></thead><tbody>' + deltas + "</tbody></table></section>",
+            '<section class="panel"><h2>Deltas</h2><table><thead><tr><th>Compared</th><th>Status delta</th><th>CI order violation delta</th><th>CI drift smoke changed</th><th>CI drift smoke regressed</th><th>CI regression reasons</th><th>Coverage % delta</th><th>Coverage gap delta</th><th>Benchmark status delta</th><th>Benchmark readiness changed</th><th>Benchmark readiness exit delta</th><th>Failed reason drift</th><th>Failed reasons added</th><th>Failed reasons removed</th><th>Benchmark case regression delta</th><th>Benchmark boundary changed</th><th>Panel changes</th><th>Explanation</th></tr></thead><tbody>' + deltas + "</tbody></table></section>",
             _list_section("Recommendations", report.get("recommendations")),
             "<footer>Generated by MiniGPT release readiness comparison.</footer>",
             "</body>",
@@ -376,6 +380,7 @@ def _html_delta(delta: dict[str, Any]) -> str:
         f"<td>{_e(_fmt(delta.get('ci_workflow_order_violation_delta')))}</td>"
         f"<td>{_e(delta.get('ci_workflow_release_readiness_drift_contract_smoke_ready_changed'))}</td>"
         f"<td>{_e(delta.get('ci_workflow_release_readiness_drift_contract_smoke_ready_regressed'))}</td>"
+        f"<td>{_e(', '.join(_string_list(delta.get('ci_workflow_regression_reasons'))))}</td>"
         f"<td>{_e(_fmt(delta.get('test_coverage_percent_delta')))}</td>"
         f"<td>{_e(_fmt(delta.get('test_coverage_gap_delta')))}</td>"
         f"<td>{_e(_fmt(delta.get('benchmark_history_status_delta')))}</td>"

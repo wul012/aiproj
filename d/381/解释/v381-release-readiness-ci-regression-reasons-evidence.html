@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>v381 release readiness CI regression reasons evidence</title>
+<style>
+:root { --ink:#17202a; --muted:#5d6672; --line:#d8dee7; --page:#f6f7f3; --panel:#fff; --green:#047857; --amber:#a16207; --red:#b91c1c; --blue:#1f5f74; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.5; }
+header { padding:28px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+p { margin:0 0 8px; }
+.muted { color:var(--muted); }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; padding:18px 34px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:92px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:22px; font-weight:700; overflow-wrap:anywhere; }
+.pass { color:var(--green); }
+.warn { color:var(--amber); }
+.panel { margin:18px 34px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:860px; }
+th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+code { background:#eef1f5; padding:2px 5px; border-radius:5px; }
+pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; background:#17202a; color:#f8fafc; padding:14px; border-radius:8px; }
+footer { padding:18px 34px 32px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .grid { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header>
+<h1>v381 release readiness CI regression reasons evidence</h1>
+<p class="muted">本页归档 v381 的关键证据：CI workflow regression 不再只是总数，而是带有 reason list 和 reason counts。</p>
+</header>
+<section class="grid">
+<div class="card"><div class="label">Targeted tests</div><div class="value pass">15 passed</div></div>
+<div class="card"><div class="label">Full regression</div><div class="value pass">679 passed</div></div>
+<div class="card"><div class="label">Encoding hygiene</div><div class="value pass">pass</div></div>
+<div class="card"><div class="label">Reason fields</div><div class="value warn">4 classes</div></div>
+</section>
+<section class="panel">
+<h2>Reason Classes</h2>
+<table>
+<thead><tr><th>Reason</th><th>When it appears</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td><code>failed_checks_increased</code></td><td>CI failed-check count increases from baseline.</td><td>Signals a direct workflow failure increase.</td></tr>
+<tr><td><code>order_violations_increased</code></td><td>Required CI order violations increase.</td><td>Signals evidence checks may be running after coverage or in the wrong order.</td></tr>
+<tr><td><code>drift_contract_smoke_not_ready</code></td><td>Drift-contract smoke ready goes from True to not True.</td><td>Signals the v378/v379 drift-contract gate lost readiness.</td></tr>
+<tr><td><code>workflow_status_downgraded</code></td><td>Compared CI workflow status scores below baseline.</td><td>Signals broad CI hygiene state worsened.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="panel">
+<h2>CLI and Recommendation Evidence</h2>
+<pre>ci_workflow_regression_reason_counts={"drift_contract_smoke_not_ready": 1}
+recommendation=At least one readiness comparison shows CI workflow hygiene regression (drift-contract smoke readiness=1); inspect CI status deltas, failed-check deltas, order-violation deltas, and drift-smoke readiness deltas before release handoff.</pre>
+</section>
+<section class="panel">
+<h2>Files</h2>
+<table>
+<thead><tr><th>Path</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>src/minigpt/release_readiness_comparison.py</code></td><td>Collects CI regression reasons and summary reason counts.</td></tr>
+<tr><td><code>src/minigpt/release_readiness_comparison_artifacts.py</code></td><td>Renders reasons into CSV, Markdown, and HTML evidence.</td></tr>
+<tr><td><code>scripts/compare_release_readiness.py</code></td><td>Prints reason counts for shell and CI log readers.</td></tr>
+<tr><td><code>tests/test_release_readiness_comparison.py</code></td><td>Protects failed-check, order-violation, and drift-smoke reason paths.</td></tr>
+</tbody>
+</table>
+</section>
+<footer>Generated for MiniGPT v381 evidence archive.</footer>
+</body>
+</html>

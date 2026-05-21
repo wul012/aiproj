@@ -245,6 +245,9 @@
 394-v380-release-readiness-drift-smoke-comparison.md
  -> v380 code explanation: compare release readiness drift-contract smoke readiness across baseline and candidate dashboards and treat ready-to-not-ready as CI workflow regression evidence.
 
+395-v381-release-readiness-ci-regression-reasons.md
+ -> v381 code explanation: classify CI workflow regressions in release readiness comparison with machine-readable reasons and reason-count recommendations.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

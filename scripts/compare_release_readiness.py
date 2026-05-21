@@ -56,6 +56,10 @@ def main() -> None:
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count="
         + json.dumps(summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count", 0), ensure_ascii=False)
     )
+    print(
+        "ci_workflow_regression_reason_counts="
+        + json.dumps(summary.get("ci_workflow_regression_reason_counts") or {}, ensure_ascii=False)
+    )
     print(f"max_abs_ci_workflow_order_violation_delta={summary.get('max_abs_ci_workflow_order_violation_delta')}")
     print(f"test_coverage_regressions={summary.get('test_coverage_regression_count')}")
     print(f"benchmark_history_deltas={summary.get('benchmark_history_delta_count')}")

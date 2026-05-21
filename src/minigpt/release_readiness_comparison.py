@@ -230,6 +230,7 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "warn_panel_delta": _number_delta(compared.get("warn_panel_count"), baseline.get("warn_panel_count")),
         "changed_panels": changed,
     }
+    delta["ci_workflow_regression_reasons"] = _ci_workflow_regression_reasons(delta)
     delta["explanation"] = _delta_explanation(delta)
     return delta
 
@@ -269,6 +270,9 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         )
     if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
         parts.append("CI workflow release readiness drift-contract smoke ready regressed.")
+    ci_reasons = _string_list(delta.get("ci_workflow_regression_reasons"))
+    if ci_reasons:
+        parts.append("CI workflow regression reason(s): " + ", ".join(_ci_workflow_reason_label(reason) for reason in ci_reasons) + ".")
     if delta.get("test_coverage_status_changed"):
         parts.append("Test coverage status changed.")
     if delta.get("test_coverage_percent_delta") not in {None, 0, 0.0}:
@@ -338,6 +342,12 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": sum(
             1 for delta in deltas if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed")
         ),
+        "ci_workflow_regression_reasons": _unique_strings(
+            reason for delta in deltas for reason in _string_list(delta.get("ci_workflow_regression_reasons"))
+        ),
+        "ci_workflow_regression_reason_counts": _counts(
+            reason for delta in deltas for reason in _string_list(delta.get("ci_workflow_regression_reasons"))
+        ),
         "max_abs_ci_workflow_order_violation_delta": _max_abs_delta(deltas, "ci_workflow_order_violation_delta"),
         "test_coverage_regression_count": sum(1 for delta in deltas if _is_test_coverage_regression(delta)),
         "benchmark_history_delta_count": sum(1 for delta in deltas if _has_benchmark_history_delta(delta)),
@@ -382,7 +392,12 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
             "At least one readiness comparison shows benchmark history regression; inspect benchmark status, readiness requirement, case-regression, and boundary deltas before release handoff."
         ]
     if int(summary.get("ci_workflow_regression_count") or 0):
-        return ["At least one readiness comparison shows CI workflow hygiene regression; inspect CI failed-check and order-violation deltas before release handoff."]
+        reason_text = _ci_workflow_reason_summary(summary.get("ci_workflow_regression_reason_counts"))
+        return [
+            "At least one readiness comparison shows CI workflow hygiene regression"
+            f" ({reason_text}); inspect CI status deltas, failed-check deltas, order-violation deltas, "
+            "and drift-smoke readiness deltas before release handoff."
+        ]
     if int(summary.get("regressed_count") or 0):
         return ["At least one readiness report regressed from the baseline; inspect delta explanations before release handoff."]
     if int(summary.get("improved_count") or 0):
@@ -413,16 +428,22 @@ def _number_delta(left: Any, right: Any) -> float | int | None:
 
 
 def _is_ci_workflow_regression(delta: dict[str, Any]) -> bool:
+    return bool(_ci_workflow_regression_reasons(delta))
+
+
+def _ci_workflow_regression_reasons(delta: dict[str, Any]) -> list[str]:
+    reasons: list[str] = []
     failed_delta = delta.get("ci_workflow_failed_check_delta")
     if isinstance(failed_delta, (int, float)) and failed_delta > 0:
-        return True
+        reasons.append("failed_checks_increased")
     if _is_ci_workflow_order_regression(delta):
-        return True
+        reasons.append("order_violations_increased")
     if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
-        return True
+        reasons.append("drift_contract_smoke_not_ready")
     if delta.get("ci_workflow_status_changed"):
-        return _ci_status_score(delta.get("compared_ci_workflow_status")) < _ci_status_score(delta.get("baseline_ci_workflow_status"))
-    return False
+        if _ci_status_score(delta.get("compared_ci_workflow_status")) < _ci_status_score(delta.get("baseline_ci_workflow_status")):
+            reasons.append("workflow_status_downgraded")
+    return reasons
 
 
 def _is_ci_workflow_order_regression(delta: dict[str, Any]) -> bool:
@@ -542,6 +563,22 @@ def _reason_drift_status(added: list[str], removed: list[str]) -> str:
     if removed:
         return "recovered"
     return "stable"
+
+
+def _ci_workflow_reason_summary(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return "reason unspecified"
+    return ", ".join(f"{_ci_workflow_reason_label(key)}={counts[key]}" for key in sorted(counts))
+
+
+def _ci_workflow_reason_label(value: Any) -> str:
+    return {
+        "drift_contract_smoke_not_ready": "drift-contract smoke readiness",
+        "failed_checks_increased": "failed checks increased",
+        "order_violations_increased": "order violations increased",
+        "workflow_status_downgraded": "workflow status downgraded",
+    }.get(str(value), str(value))
 
 
 def _unique_strings(values: Any) -> list[str]:

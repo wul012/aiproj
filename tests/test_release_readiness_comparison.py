@@ -191,8 +191,13 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertTrue(delta["ci_workflow_status_changed"])
             self.assertEqual(delta["ci_workflow_failed_check_delta"], 2)
             self.assertEqual(delta["ci_workflow_order_violation_delta"], 0)
+            self.assertEqual(delta["ci_workflow_regression_reasons"], ["failed_checks_increased", "workflow_status_downgraded"])
             self.assertIn("ci_workflow_hygiene:pass->warn", delta["changed_panels"])
-            self.assertIn("order-violation deltas", " ".join(report["recommendations"]))
+            self.assertEqual(
+                report["summary"]["ci_workflow_regression_reason_counts"],
+                {"failed_checks_increased": 1, "workflow_status_downgraded": 1},
+            )
+            self.assertIn("failed checks increased=1", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_flags_ci_order_regression_without_status_change(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -219,6 +224,7 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertFalse(delta["ci_workflow_status_changed"])
             self.assertEqual(delta["ci_workflow_failed_check_delta"], 0)
             self.assertEqual(delta["ci_workflow_order_violation_delta"], 1)
+            self.assertEqual(delta["ci_workflow_regression_reasons"], ["order_violations_increased"])
             self.assertIn("CI workflow order violation delta is 1", delta["explanation"])
             self.assertIn("order-violation deltas", " ".join(report["recommendations"]))
 
@@ -254,9 +260,16 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertFalse(delta["ci_workflow_status_changed"])
             self.assertTrue(delta["ci_workflow_release_readiness_drift_contract_smoke_ready_changed"])
             self.assertTrue(delta["ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"])
+            self.assertEqual(delta["ci_workflow_regression_reasons"], ["drift_contract_smoke_not_ready"])
+            self.assertEqual(
+                report["summary"]["ci_workflow_regression_reason_counts"],
+                {"drift_contract_smoke_not_ready": 1},
+            )
             self.assertIn("drift-contract smoke ready changed", delta["explanation"])
             self.assertIn("drift-contract smoke ready regressed", delta["explanation"])
+            self.assertIn("drift-contract smoke readiness", delta["explanation"])
             self.assertIn("CI workflow hygiene regression", " ".join(report["recommendations"]))
+            self.assertIn("drift-contract smoke readiness=1", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_flags_test_coverage_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -556,6 +569,7 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
                 "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed",
                 Path(outputs["delta_csv"]).read_text(encoding="utf-8"),
             )
+            self.assertIn("ci_workflow_regression_reasons", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("test_coverage_gap_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_case_regression_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_readiness_requirement_exit_code_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
@@ -563,7 +577,9 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("## Readiness Matrix", markdown)
             self.assertIn("CI drift smoke ready", markdown)
+            self.assertIn("CI regression reasons", markdown)
             self.assertIn("CI drift smoke ready", html)
+            self.assertIn("CI regression reasons", html)
 
     def test_renderers_escape_release_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
