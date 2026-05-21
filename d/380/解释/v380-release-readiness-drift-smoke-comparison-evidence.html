@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>v380 release readiness drift smoke comparison evidence</title>
+<style>
+:root { --ink:#17202a; --muted:#5d6672; --line:#d8dee7; --page:#f6f7f3; --panel:#fff; --green:#047857; --amber:#a16207; --red:#b91c1c; --blue:#1f5f74; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.5; }
+header { padding:28px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+p { margin:0 0 8px; }
+.muted { color:var(--muted); }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; padding:18px 34px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:92px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:22px; font-weight:700; overflow-wrap:anywhere; }
+.pass { color:var(--green); }
+.warn { color:var(--amber); }
+.fail { color:var(--red); }
+.panel { margin:18px 34px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:860px; }
+th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+code { background:#eef1f5; padding:2px 5px; border-radius:5px; }
+pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; background:#17202a; color:#f8fafc; padding:14px; border-radius:8px; }
+footer { padding:18px 34px 32px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .grid { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header>
+<h1>v380 release readiness drift smoke comparison evidence</h1>
+<p class="muted">本页归档 v380 的关键证据：release readiness comparison 能发现 drift-contract smoke ready 从 True 退化到 False。</p>
+</header>
+<section class="grid">
+<div class="card"><div class="label">Targeted tests</div><div class="value pass">15 passed</div></div>
+<div class="card"><div class="label">Full regression</div><div class="value pass">679 passed</div></div>
+<div class="card"><div class="label">Encoding hygiene</div><div class="value pass">pass</div></div>
+<div class="card"><div class="label">CI workflow regressions</div><div class="value warn">1</div></div>
+</section>
+<section class="panel">
+<h2>Comparison Contract</h2>
+<table>
+<thead><tr><th>Field</th><th>Value</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>baseline_ci_workflow_release_readiness_drift_contract_smoke_ready</code></td><td>True</td><td>baseline readiness dashboard 表示 drift-contract smoke ready。</td></tr>
+<tr><td><code>compared_ci_workflow_release_readiness_drift_contract_smoke_ready</code></td><td>False</td><td>candidate readiness dashboard 表示该 smoke 不再 ready。</td></tr>
+<tr><td><code>ci_workflow_release_readiness_drift_contract_smoke_ready_changed</code></td><td>True</td><td>comparison 能识别值变化。</td></tr>
+<tr><td><code>ci_workflow_release_readiness_drift_contract_smoke_ready_regressed</code></td><td>True</td><td>True -> False 被判为 CI workflow regression。</td></tr>
+</tbody>
+</table>
+</section>
+<section class="panel">
+<h2>CLI Smoke Output</h2>
+<pre>readiness=2
+baseline_status=ready
+ready=2
+blocked=0
+improved=0
+regressed=0
+changed_panel_deltas=0
+ci_workflow_regressions=1
+ci_workflow_order_regressions=0
+ci_workflow_release_readiness_drift_contract_smoke_ready_changed_count=1
+ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count=1
+max_abs_ci_workflow_order_violation_delta=0
+test_coverage_regressions=0
+benchmark_history_deltas=0
+benchmark_history_regressions=0</pre>
+</section>
+<section class="panel">
+<h2>Files</h2>
+<table>
+<thead><tr><th>Path</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>src/minigpt/release_readiness_comparison.py</code></td><td>读取 readiness summary、计算 changed/regressed delta，并纳入 CI workflow regression。</td></tr>
+<tr><td><code>src/minigpt/release_readiness_comparison_artifacts.py</code></td><td>把新字段输出到 CSV、Markdown 和 HTML。</td></tr>
+<tr><td><code>scripts/compare_release_readiness.py</code></td><td>在 stdout 中打印 drift smoke ready changed/regression count。</td></tr>
+<tr><td><code>tests/test_release_readiness_comparison.py</code></td><td>覆盖 status 稳定但 smoke ready 退化的关键回归场景。</td></tr>
+</tbody>
+</table>
+</section>
+<footer>Generated for MiniGPT v380 evidence archive.</footer>
+</body>
+</html>

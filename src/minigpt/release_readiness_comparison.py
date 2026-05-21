@@ -104,6 +104,9 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "ci_workflow_node24_actions": summary.get("ci_workflow_node24_actions"),
         "ci_workflow_required_order_count": summary.get("ci_workflow_required_order_count"),
         "ci_workflow_order_violation_count": summary.get("ci_workflow_order_violation_count"),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready": summary.get(
+            "ci_workflow_release_readiness_drift_contract_smoke_ready"
+        ),
         "request_history_status": summary.get("request_history_status"),
         "test_coverage_status": summary.get("test_coverage_status"),
         "test_coverage_percent": summary.get("test_coverage_percent"),
@@ -149,6 +152,8 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         after = compared_panels.get(key)
         if before != after:
             changed.append(f"{key}:{before}->{after}")
+    baseline_drift_smoke_ready = baseline.get("ci_workflow_release_readiness_drift_contract_smoke_ready")
+    compared_drift_smoke_ready = compared.get("ci_workflow_release_readiness_drift_contract_smoke_ready")
     delta = {
         "baseline_path": baseline.get("readiness_path"),
         "compared_path": compared.get("readiness_path"),
@@ -169,6 +174,11 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "ci_workflow_required_order_delta": _number_delta(compared.get("ci_workflow_required_order_count"), baseline.get("ci_workflow_required_order_count")),
         "ci_workflow_order_violation_delta": _number_delta(compared.get("ci_workflow_order_violation_count"), baseline.get("ci_workflow_order_violation_count")),
         "ci_workflow_status_changed": compared.get("ci_workflow_status") != baseline.get("ci_workflow_status"),
+        "baseline_ci_workflow_release_readiness_drift_contract_smoke_ready": baseline_drift_smoke_ready,
+        "compared_ci_workflow_release_readiness_drift_contract_smoke_ready": compared_drift_smoke_ready,
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_changed": compared_drift_smoke_ready != baseline_drift_smoke_ready,
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed": baseline_drift_smoke_ready is True
+        and compared_drift_smoke_ready is not True,
         "test_coverage_percent_delta": _number_delta(compared.get("test_coverage_percent"), baseline.get("test_coverage_percent")),
         "test_coverage_gap_delta": _number_delta(compared.get("test_coverage_gap"), baseline.get("test_coverage_gap")),
         "test_coverage_status_changed": compared.get("test_coverage_status") != baseline.get("test_coverage_status"),
@@ -251,6 +261,14 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append(f"CI workflow failed check delta is {delta.get('ci_workflow_failed_check_delta')}.")
     if delta.get("ci_workflow_order_violation_delta") not in {None, 0, 0.0}:
         parts.append(f"CI workflow order violation delta is {delta.get('ci_workflow_order_violation_delta')}.")
+    if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_changed"):
+        parts.append(
+            "CI workflow release readiness drift-contract smoke ready changed from "
+            f"{delta.get('baseline_ci_workflow_release_readiness_drift_contract_smoke_ready')} to "
+            f"{delta.get('compared_ci_workflow_release_readiness_drift_contract_smoke_ready')}."
+        )
+    if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
+        parts.append("CI workflow release readiness drift-contract smoke ready regressed.")
     if delta.get("test_coverage_status_changed"):
         parts.append("Test coverage status changed.")
     if delta.get("test_coverage_percent_delta") not in {None, 0, 0.0}:
@@ -314,6 +332,12 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "changed_panel_delta_count": sum(1 for delta in deltas if delta.get("changed_panels")),
         "ci_workflow_regression_count": sum(1 for delta in deltas if _is_ci_workflow_regression(delta)),
         "ci_workflow_order_regression_count": sum(1 for delta in deltas if _is_ci_workflow_order_regression(delta)),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_changed_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_changed")
+        ),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed")
+        ),
         "max_abs_ci_workflow_order_violation_delta": _max_abs_delta(deltas, "ci_workflow_order_violation_delta"),
         "test_coverage_regression_count": sum(1 for delta in deltas if _is_test_coverage_regression(delta)),
         "benchmark_history_delta_count": sum(1 for delta in deltas if _has_benchmark_history_delta(delta)),
@@ -393,6 +417,8 @@ def _is_ci_workflow_regression(delta: dict[str, Any]) -> bool:
     if isinstance(failed_delta, (int, float)) and failed_delta > 0:
         return True
     if _is_ci_workflow_order_regression(delta):
+        return True
+    if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
         return True
     if delta.get("ci_workflow_status_changed"):
         return _ci_status_score(delta.get("compared_ci_workflow_status")) < _ci_status_score(delta.get("baseline_ci_workflow_status"))

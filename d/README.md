@@ -248,6 +248,9 @@ d/378/解释/说明.md
 d/379/图片
 d/379/解释/说明.md
  -> v379 release readiness drift smoke readiness 的运行截图和解释
+d/380/图片
+d/380/解释/说明.md
+ -> v380 release readiness drift smoke comparison 的运行截图和解释
 ```
 
 写入规则：

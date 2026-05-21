@@ -36,6 +36,7 @@ def make_readiness(
     ci_workflow_status: str = "pass",
     ci_workflow_failed_checks: int = 0,
     ci_workflow_order_violations: int = 0,
+    ci_workflow_release_readiness_drift_contract_smoke_ready: bool | None = True,
     test_coverage_status: str = "pass",
     test_coverage_percent: float = 90.17,
     test_coverage_gap: float = 0.0,
@@ -81,6 +82,7 @@ def make_readiness(
             "ci_workflow_node24_actions": 2 if ci_workflow_status == "pass" else 1,
             "ci_workflow_required_order_count": 1,
             "ci_workflow_order_violation_count": ci_workflow_order_violations,
+            "ci_workflow_release_readiness_drift_contract_smoke_ready": ci_workflow_release_readiness_drift_contract_smoke_ready,
             "request_history_status": request_status,
             "test_coverage_status": test_coverage_status,
             "test_coverage_percent": test_coverage_percent,
@@ -219,6 +221,42 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertEqual(delta["ci_workflow_order_violation_delta"], 1)
             self.assertIn("CI workflow order violation delta is 1", delta["explanation"])
             self.assertIn("order-violation deltas", " ".join(report["recommendations"]))
+
+    def test_build_release_readiness_comparison_flags_drift_smoke_ready_regression_without_status_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(
+                root,
+                "baseline",
+                status="ready",
+                decision="ship",
+                gate_status="pass",
+                ci_workflow_release_readiness_drift_contract_smoke_ready=True,
+            )
+            current = make_readiness(
+                root,
+                "current",
+                status="ready",
+                decision="ship",
+                gate_status="pass",
+                ci_workflow_release_readiness_drift_contract_smoke_ready=False,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["ci_workflow_regression_count"], 1)
+            self.assertEqual(report["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready_changed_count"], 1)
+            self.assertEqual(report["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"], 1)
+            self.assertTrue(report["rows"][0]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
+            self.assertFalse(report["rows"][1]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
+            delta = report["deltas"][0]
+            self.assertEqual(delta["delta_status"], "same")
+            self.assertFalse(delta["ci_workflow_status_changed"])
+            self.assertTrue(delta["ci_workflow_release_readiness_drift_contract_smoke_ready_changed"])
+            self.assertTrue(delta["ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"])
+            self.assertIn("drift-contract smoke ready changed", delta["explanation"])
+            self.assertIn("drift-contract smoke ready regressed", delta["explanation"])
+            self.assertIn("CI workflow hygiene regression", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_flags_test_coverage_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -504,16 +542,28 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("readiness_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_order_violation_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn(
+                "ci_workflow_release_readiness_drift_contract_smoke_ready",
+                Path(outputs["csv"]).read_text(encoding="utf-8"),
+            )
             self.assertIn("test_coverage_percent", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_readiness_requirement_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("changed_panels", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_failed_check_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_order_violation_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
+            self.assertIn(
+                "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed",
+                Path(outputs["delta_csv"]).read_text(encoding="utf-8"),
+            )
             self.assertIn("test_coverage_gap_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_case_regression_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_readiness_requirement_exit_code_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
-            self.assertIn("## Readiness Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            self.assertIn("## Readiness Matrix", markdown)
+            self.assertIn("CI drift smoke ready", markdown)
+            self.assertIn("CI drift smoke ready", html)
 
     def test_renderers_escape_release_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -242,6 +242,9 @@
 393-v379-release-readiness-drift-smoke-readiness.md
  -> v379 code explanation: expose release readiness drift-contract smoke readiness through CI hygiene, project audit, release bundle, and release readiness evidence.
 
+394-v380-release-readiness-drift-smoke-comparison.md
+ -> v380 code explanation: compare release readiness drift-contract smoke readiness across baseline and candidate dashboards and treat ready-to-not-ready as CI workflow regression evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
