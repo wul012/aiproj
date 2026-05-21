@@ -66,6 +66,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "keep",
         "consumer": "dataset comparison, run comparison, registry, model card",
         "evidence": "dataset_version.json, dataset snapshot summary, dedupe/source-order fields",
+        "review_reason": "Data changes can invalidate model-quality comparisons, so this chain is a core boundary rather than decorative reporting.",
+        "expansion_rule": "Merge new dataset-only signals into this chain unless they require a new training or release decision.",
         "next_action": "Keep as the data-boundary spine; do not add more display-only projections during the pause.",
     },
     {
@@ -74,6 +76,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "keep",
         "consumer": "maturity narrative, project audit, release bundle, release gate, readiness dashboards",
         "evidence": "benchmark history ledger, comparison/decision artifacts, CI plan digest checks",
+        "review_reason": "Repeated benchmark evidence is the closest current proxy for model-capability movement.",
+        "expansion_rule": "Extend this chain only when a new benchmark signal changes promotion or release review.",
         "next_action": "Keep as model-capability review evidence while avoiding new threshold variants.",
     },
     {
@@ -82,6 +86,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "keep",
         "consumer": "project audit, release bundle, model-family review",
         "evidence": "registry rows, leaderboards, model_card.json/md/html",
+        "review_reason": "Reviewers need one project index and one project-level model summary before opening detailed artifacts.",
+        "expansion_rule": "Add new run-level facts here only after they exist in the source chain and have a clear review consumer.",
         "next_action": "Keep as the project-level index and summary surface.",
     },
     {
@@ -90,6 +96,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "keep",
         "consumer": "release review, readiness comparison, registry readiness tracking",
         "evidence": "release bundle, release gate, readiness dashboard, readiness comparison",
+        "review_reason": "Release-style decisions need a stable gate/readiness surface even when the model remains educational.",
+        "expansion_rule": "Repair broken release contracts here; avoid adding new panels unless they change ship/review/block decisions.",
         "next_action": "Keep as release-style review; only fix broken contracts during the pause.",
     },
     {
@@ -98,6 +106,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "keep",
         "consumer": "GitHub Actions, project audit, maturity review, training portfolio comparison",
         "evidence": "source encoding, CI workflow hygiene, coverage gate reports",
+        "review_reason": "This chain has already caught real CI and encoding regressions, so it protects the rest of the evidence system.",
+        "expansion_rule": "Add only checks that catch executable regressions; do not add narrative-only CI status fields.",
         "next_action": "Keep because it catches real regressions and CI drift.",
     },
     {
@@ -106,6 +116,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "watch",
         "consumer": "promoted comparison, promoted baseline, promoted seed handoff, automation receipts",
         "evidence": "promotion reports, clean-evidence gates, schema-v2 receipt checks",
+        "review_reason": "This chain is useful but has the highest overlap risk because many promotion artifacts repeat clean/review/block fields.",
+        "expansion_rule": "Prefer helper and artifact consolidation before adding another promotion-stage report.",
         "next_action": "Watch for overlap and repeated fields; consolidate helper/output duplication before adding new promotion variants.",
     },
     {
@@ -114,6 +126,8 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "action": "watch",
         "consumer": "portfolio comparison, project-level review, release context",
         "evidence": "maturity summary, maturity narrative, portfolio comparison review actions",
+        "review_reason": "This is the executive summary layer, so duplicate detail here can quickly become maintenance noise.",
+        "expansion_rule": "Merge narrative-only additions into existing summaries unless a new consumer needs separate machine-readable fields.",
         "next_action": "Watch as an executive summary layer; merge duplicate narrative-only fields into existing summaries.",
     },
 ]
@@ -333,6 +347,8 @@ def _normalize_governance_chain(item: dict[str, Any], index: int) -> dict[str, A
         action = "watch"
     consumer = str(item.get("consumer") or item.get("consumers") or "").strip()
     evidence = str(item.get("evidence") or "").strip()
+    review_reason = str(item.get("review_reason") or item.get("reason") or "").strip()
+    expansion_rule = str(item.get("expansion_rule") or item.get("rule") or "").strip()
     next_action = str(item.get("next_action") or item.get("recommendation") or "").strip()
     necessary = action in {"keep", "watch"}
     has_consumer = bool(consumer)
@@ -346,6 +362,8 @@ def _normalize_governance_chain(item: dict[str, Any], index: int) -> dict[str, A
         "has_evidence": has_evidence,
         "consumer": consumer,
         "evidence": evidence,
+        "review_reason": review_reason,
+        "expansion_rule": expansion_rule,
         "next_action": next_action,
     }
 
@@ -355,8 +373,19 @@ def _governance_summary(chains: list[dict[str, Any]], pause_days: int) -> dict[s
     action_counts = {action: sum(1 for item in chains if item.get("action") == action) for action in sorted(GOVERNANCE_STABILIZATION_ACTIONS)}
     missing_consumer = sum(1 for item in chains if not item.get("has_consumer"))
     missing_evidence = sum(1 for item in chains if not item.get("has_evidence"))
+    missing_review_reason = sum(1 for item in chains if not item.get("review_reason"))
+    missing_expansion_rule = sum(1 for item in chains if not item.get("expansion_rule"))
     consolidation_candidates = action_counts.get("merge", 0) + action_counts.get("cut", 0)
-    status = "review" if chain_count > 7 or missing_consumer or missing_evidence or consolidation_candidates else "pass"
+    status = (
+        "review"
+        if chain_count > 7
+        or missing_consumer
+        or missing_evidence
+        or missing_review_reason
+        or missing_expansion_rule
+        or consolidation_candidates
+        else "pass"
+    )
     decision = "pause_new_governance_chains" if int(pause_days) > 0 else "continue_with_guardrails"
     if status == "review" and consolidation_candidates:
         decision = "pause_and_consolidate_governance_chains"
@@ -374,6 +403,8 @@ def _governance_summary(chains: list[dict[str, Any]], pause_days: int) -> dict[s
         "necessary_count": sum(1 for item in chains if item.get("necessary")),
         "missing_consumer_count": missing_consumer,
         "missing_evidence_count": missing_evidence,
+        "missing_review_reason_count": missing_review_reason,
+        "missing_expansion_rule_count": missing_expansion_rule,
         "consolidation_candidate_count": consolidation_candidates,
     }
 
@@ -387,6 +418,8 @@ def _governance_recommendations(summary: dict[str, Any], chains: list[dict[str, 
         recommendations.append("Treat seven active chains as the current ceiling; new needs should first merge into an existing chain.")
     if summary.get("consolidation_candidate_count", 0):
         recommendations.append("Consolidate chains marked merge/cut before any new governance surface is added.")
+    if summary.get("missing_review_reason_count", 0) or summary.get("missing_expansion_rule_count", 0):
+        recommendations.append("Add review reasons and expansion rules before treating a governance chain as stable.")
     watch_names = [str(item.get("name")) for item in chains if item.get("action") == "watch"]
     if watch_names:
         recommendations.append("Watch for overlap in: " + ", ".join(watch_names) + ".")

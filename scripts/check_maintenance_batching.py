@@ -117,6 +117,8 @@ def main() -> None:
         print(f"governance_chain_count={governance_summary['chain_count']}")
         print(f"governance_keep_count={governance_summary['keep_count']}")
         print(f"governance_watch_count={governance_summary['watch_count']}")
+        print(f"governance_missing_review_reason_count={governance_summary['missing_review_reason_count']}")
+        print(f"governance_missing_expansion_rule_count={governance_summary['missing_expansion_rule_count']}")
         print(f"governance_consolidation_candidate_count={governance_summary['consolidation_candidate_count']}")
         print("governance_outputs=" + json.dumps(governance_outputs, ensure_ascii=False))
 

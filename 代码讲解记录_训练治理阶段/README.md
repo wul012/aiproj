@@ -176,6 +176,9 @@
 371-v357-governance-stabilization-review.md
  -> v357 code explanation: add a maintenance-policy governance stabilization review that pauses new chains and watches the current seven for overlap before expansion.
 
+372-v358-governance-stabilization-reasons.md
+ -> v358 code explanation: require review reasons and expansion rules for the seven governance chains before future expansion.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

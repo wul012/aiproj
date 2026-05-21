@@ -182,6 +182,9 @@ d/356/解释/说明.md
 d/357/图片
 d/357/解释/说明.md
  -> v357 governance stabilization review 的运行截图和解释
+d/358/图片
+d/358/解释/说明.md
+ -> v358 governance stabilization reasons 的运行截图和解释
 ```
 
 写入规则：

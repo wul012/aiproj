@@ -327,6 +327,8 @@ def write_governance_stabilization_csv(report: dict[str, Any], path: str | Path)
         "has_evidence",
         "consumer",
         "evidence",
+        "review_reason",
+        "expansion_rule",
         "next_action",
     ]
     rows = []
@@ -364,6 +366,8 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
         "cut_count",
         "missing_consumer_count",
         "missing_evidence_count",
+        "missing_review_reason_count",
+        "missing_expansion_rule_count",
         "consolidation_candidate_count",
     ]:
         lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
@@ -372,8 +376,8 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
             "",
             "## Governance Chains",
             "",
-            "| Chain | Action | Consumer | Evidence | Next action |",
-            "| --- | --- | --- | --- | --- |",
+            "| Chain | Action | Consumer | Evidence | Review reason | Expansion rule | Next action |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for item in _list_of_dicts(report.get("chains")):
@@ -385,6 +389,8 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
                     _md(item.get("action")),
                     _md(item.get("consumer")),
                     _md(item.get("evidence")),
+                    _md(item.get("review_reason")),
+                    _md(item.get("expansion_rule")),
                     _md(item.get("next_action")),
                 ]
             )
@@ -412,10 +418,11 @@ def render_governance_stabilization_html(report: dict[str, Any]) -> str:
         ("Keep", summary.get("keep_count")),
         ("Watch", summary.get("watch_count")),
         ("Merge/Cut", summary.get("consolidation_candidate_count")),
+        ("Missing rules", summary.get("missing_expansion_rule_count")),
     ]
     rows = "".join(_governance_chain_html_row(item) for item in _list_of_dicts(report.get("chains")))
     if not rows:
-        rows = '<tr><td colspan="5" class="muted">No governance chains were provided.</td></tr>'
+        rows = '<tr><td colspan="7" class="muted">No governance chains were provided.</td></tr>'
     return "\n".join(
         [
             "<!doctype html>",
@@ -430,7 +437,7 @@ def render_governance_stabilization_html(report: dict[str, Any]) -> str:
             "<body>",
             f"<header><h1>{_e(report.get('title', 'MiniGPT governance stabilization review'))}</h1><p>Stabilize existing governance chains before adding new report layers.</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
-            "<section><h2>Governance Chains</h2><table><tr><th>Chain</th><th>Action</th><th>Consumer</th><th>Evidence</th><th>Next Action</th></tr>"
+            "<section><h2>Governance Chains</h2><table><tr><th>Chain</th><th>Action</th><th>Consumer</th><th>Evidence</th><th>Review Reason</th><th>Expansion Rule</th><th>Next Action</th></tr>"
             + rows
             + "</table></section>",
             _list_section("Recommendations", report.get("recommendations")),
@@ -470,6 +477,8 @@ def _governance_chain_html_row(item: dict[str, Any]) -> str:
         f"<td>{_e(item.get('action'))}</td>"
         f"<td>{_e(item.get('consumer'))}</td>"
         f"<td>{_e(item.get('evidence'))}</td>"
+        f"<td>{_e(item.get('review_reason'))}</td>"
+        f"<td>{_e(item.get('expansion_rule'))}</td>"
         f"<td>{_e(item.get('next_action'))}</td>"
         "</tr>"
     )
