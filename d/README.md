@@ -122,6 +122,9 @@ d/336/解释/说明.md
 d/337/图片
 d/337/解释/说明.md
  -> v337 CI tiny scorecard wrapper 的运行截图和解释
+d/338/图片
+d/338/解释/说明.md
+ -> v338 CI tiny scorecard plan artifacts 的运行截图和解释
 ```
 
 写入规则：
