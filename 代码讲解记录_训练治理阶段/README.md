@@ -182,6 +182,9 @@
 373-v359-governance-proposal-routing.md
  -> v359 code explanation: route governance proposals into the existing seven chains first, with review and reject paths for unmatched or high-risk items.
 
+374-v360-governance-routing-basis.md
+ -> v360 code explanation: record whether proposal routing matched by exact chain id or keyword match and surface that basis in reports and CLI output.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

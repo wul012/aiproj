@@ -188,6 +188,9 @@ d/358/解释/说明.md
 d/359/图片
 d/359/解释/说明.md
  -> v359 governance proposal routing 的运行截图和解释
+d/360/图片
+d/360/解释/说明.md
+ -> v360 governance routing basis 的运行截图和解释
 ```
 
 写入规则：

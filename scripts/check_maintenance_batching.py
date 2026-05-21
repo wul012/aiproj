@@ -132,6 +132,8 @@ def main() -> None:
         print(f"governance_routing_merge_existing_count={governance_routing['merge_existing_count']}")
         print(f"governance_routing_review_count={governance_routing['review_count']}")
         print(f"governance_routing_new_chain_candidate_count={governance_routing['new_chain_candidate_count']}")
+        print(f"governance_routing_exact_match_count={governance_routing['exact_match_count']}")
+        print(f"governance_routing_keyword_match_count={governance_routing['keyword_match_count']}")
         print("governance_outputs=" + json.dumps(governance_outputs, ensure_ascii=False))
 
 

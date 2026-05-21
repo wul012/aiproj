@@ -143,8 +143,12 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(routing["merge_existing_count"], 2)
         self.assertEqual(routing["review_count"], 0)
         self.assertEqual(routing["new_chain_candidate_count"], 0)
+        self.assertEqual(routing["exact_match_count"], 1)
+        self.assertEqual(routing["keyword_match_count"], 1)
         self.assertEqual(routing["items"][0]["suggested_chain"], "dataset-provenance")
         self.assertEqual(routing["items"][1]["suggested_chain"], "training-promotion")
+        self.assertEqual(routing["items"][0]["match_basis"], "keyword")
+        self.assertEqual(routing["items"][1]["match_basis"], "exact")
         self.assertIn("Route current proposals", " ".join(report["recommendations"]))
 
     def test_governance_stabilization_reviews_high_risk_proposals(self) -> None:
@@ -158,6 +162,7 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(routing["decision"], "review_before_merge")
         self.assertEqual(routing["review_count"], 1)
         self.assertEqual(routing["items"][0]["route_decision"], "review")
+        self.assertEqual(routing["items"][0]["match_basis"], "exact")
         self.assertIn("high-risk governance proposals", " ".join(report["recommendations"]))
 
     def test_governance_stabilization_rejects_unmatched_proposals_during_pause(self) -> None:
@@ -257,6 +262,7 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("Proposal Routing", markdown)
             self.assertIn("Expansion rule", markdown)
             self.assertIn("Target chain", markdown)
+            self.assertIn("Match basis", markdown)
             self.assertIn("training-promotion", markdown)
 
             completed = subprocess.run(
@@ -285,6 +291,8 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("governance_routing_merge_existing_count=2", completed.stdout)
             self.assertIn("governance_routing_review_count=0", completed.stdout)
             self.assertIn("governance_routing_new_chain_candidate_count=0", completed.stdout)
+            self.assertIn("governance_routing_exact_match_count=1", completed.stdout)
+            self.assertIn("governance_routing_keyword_match_count=1", completed.stdout)
 
     def test_module_pressure_report_flags_large_modules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
