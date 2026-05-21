@@ -28,9 +28,17 @@ def make_run(
     readiness_benchmark_regression: bool = False,
     rubric_score: float | None = 92.0,
     rubric_status: str = "pass",
+    dataset_version: str | None = None,
+    dataset_dedupe_policy: str = "none",
+    dataset_source_order_digest: str | None = None,
+    dataset_included_source_count: int = 2,
+    dataset_skipped_source_count: int = 0,
+    dataset_char_count: int = 120,
 ) -> Path:
     run_dir = root / name
     run_dir.mkdir(parents=True)
+    fingerprint = f"{name}12345678"
+    version_id = dataset_version or f"demo-registry@{name}"
     (run_dir / "checkpoint.pt").write_bytes(b"fake")
     (run_dir / "train_config.json").write_text(json.dumps({"tokenizer": "char", "max_iters": 2}), encoding="utf-8")
     (run_dir / "history_summary.json").write_text(
@@ -38,7 +46,26 @@ def make_run(
         encoding="utf-8",
     )
     (run_dir / "dataset_quality.json").write_text(
-        json.dumps({"status": quality, "short_fingerprint": f"{name}12345678", "warning_count": 0}),
+        json.dumps({"status": quality, "short_fingerprint": fingerprint, "warning_count": 0}),
+        encoding="utf-8",
+    )
+    (run_dir / "dataset_version.json").write_text(
+        json.dumps(
+            {
+                "dataset": {"id": version_id},
+                "stats": {
+                    "short_fingerprint": fingerprint,
+                    "included_source_count": dataset_included_source_count,
+                    "skipped_source_count": dataset_skipped_source_count,
+                    "char_count": dataset_char_count,
+                },
+                "preparation": {"dedupe_exact_sources": dataset_dedupe_policy == "exact-source-content"},
+                "snapshot": {
+                    "dedupe_policy": dataset_dedupe_policy,
+                    "source_order_digest": dataset_source_order_digest or f"order-{name}",
+                },
+            }
+        ),
         encoding="utf-8",
     )
     if note is not None or tags is not None:
@@ -274,7 +301,8 @@ def make_run(
                 "training": {"tokenizer": "char", "args": {"max_iters": 2}},
                 "data": {
                     "source": {"kind": "data"},
-                    "dataset_quality": {"status": quality, "short_fingerprint": f"{name}12345678"},
+                    "dataset_quality": {"status": quality, "short_fingerprint": fingerprint},
+                    "dataset_version": {"id": version_id, "short_fingerprint": fingerprint},
                 },
                 "model": {"parameter_count": 1234},
                 "results": {"history_summary": {"best_val_loss": loss}},
@@ -308,6 +336,12 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.git_commit, "abc1234")
             self.assertEqual(run.best_val_loss, 1.0)
             self.assertEqual(run.dataset_quality, "warn")
+            self.assertEqual(run.dataset_version, "demo-registry@one")
+            self.assertEqual(run.dataset_dedupe_policy, "none")
+            self.assertEqual(run.dataset_source_order_digest, "order-one")
+            self.assertEqual(run.dataset_included_source_count, 2)
+            self.assertEqual(run.dataset_skipped_source_count, 0)
+            self.assertEqual(run.dataset_char_count, 120)
             self.assertEqual(run.eval_suite_cases, 3)
             self.assertEqual(run.generation_quality_status, "pass")
             self.assertEqual(run.generation_quality_cases, 3)
@@ -423,6 +457,13 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["run_count"], 2)
             self.assertEqual(registry["best_by_best_val_loss"]["name"], "B")
             self.assertEqual(registry["quality_counts"], {"pass": 1, "warn": 1})
+            self.assertEqual(registry["dataset_versions"], ["demo-registry@a", "demo-registry@b"])
+            self.assertEqual(registry["dataset_dedupe_policy_counts"], {"none": 2})
+            self.assertEqual(registry["dataset_snapshot_summary"]["snapshot_run_count"], 2)
+            self.assertEqual(registry["dataset_snapshot_summary"]["missing_snapshot_count"], 0)
+            self.assertEqual(registry["dataset_snapshot_summary"]["total_included_source_count"], 4)
+            self.assertEqual(registry["dataset_snapshot_summary"]["total_skipped_source_count"], 0)
+            self.assertEqual(registry["dataset_snapshot_summary"]["total_char_count"], 240)
             self.assertEqual(registry["generation_quality_counts"], {"pass": 2})
             self.assertEqual(registry["benchmark_rubric_counts"], {"pass": 1, "warn": 1})
             self.assertEqual(registry["benchmark_rubric_summary"]["best_run"], "A")
@@ -506,6 +547,8 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("release_readiness_ci_workflow_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_test_coverage_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_history_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("dataset_dedupe_policy", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("dataset_included_source_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("+0", Path(outputs["svg"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT run registry", html)
@@ -528,6 +571,12 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("coverage regressions=0", html)
             self.assertIn("benchmark regressions=1", html)
             self.assertIn("<div class=\"label\">Benchmark regressions</div>", html)
+            self.assertIn("<div class=\"label\">Dataset snapshots</div>", html)
+            self.assertIn("<div class=\"label\">Dedupe policies</div>", html)
+            self.assertIn("Dataset Snapshot Summary", html)
+            self.assertIn("dedupe=none", html)
+            self.assertIn("included=2", html)
+            self.assertIn("chars=120", html)
             self.assertIn("<th>Benchmark history</th>", html)
             self.assertIn("case=+2", html)
             self.assertIn("flags=+1", html)
@@ -558,6 +607,8 @@ class RegistryTests(unittest.TestCase):
             self.assertIn('id="export-visible-csv"', html)
             self.assertIn('id="registry-status"', html)
             self.assertIn("data-run-row", html)
+            self.assertIn("dedupe=none", html)
+            self.assertIn("snapshot_run_count", html)
             self.assertIn("data-rank", html)
             self.assertIn("data-best-val", html)
             self.assertIn("data-delta", html)

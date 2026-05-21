@@ -32,7 +32,13 @@ def write_registry_csv(registry: dict[str, Any], path: str | Path) -> None:
         "last_val_loss",
         "total_parameters",
         "data_source_kind",
+        "dataset_version",
         "dataset_fingerprint",
+        "dataset_dedupe_policy",
+        "dataset_source_order_digest",
+        "dataset_included_source_count",
+        "dataset_skipped_source_count",
+        "dataset_char_count",
         "dataset_quality",
         "eval_suite_cases",
         "eval_suite_avg_unique",
@@ -93,7 +99,7 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     runs = list(registry["runs"])
     width = 1040
-    row_h = 70
+    row_h = 84
     top = 94
     height = top + max(1, len(runs)) * row_h + 68
     loss_values = [run.get("best_val_loss") for run in runs if run.get("best_val_loss") is not None]
@@ -122,11 +128,12 @@ def write_registry_svg(registry: dict[str, Any], path: str | Path) -> None:
         rows.append(f'<text x="880" y="{y + 21}" font-family="Arial" font-size="12" fill="#374151">{artifacts} files</text>')
         rows.append(f'<circle cx="656" cy="{y + 38}" r="5" fill="{quality_color}"/>')
         rows.append(f'<text x="670" y="{y + 42}" font-family="Arial" font-size="12" fill="#374151">{_e(quality)} | eval={_e(run.get("eval_suite_cases"))} | gen={_e(generation_quality)} | data={_e(run.get("dataset_fingerprint"))}</text>')
-        rows.append(f'<text x="670" y="{y + 60}" font-family="Arial" font-size="12" fill="#4b5563">{_e(note_line)}</text>')
+        rows.append(f'<text x="670" y="{y + 56}" font-family="Arial" font-size="11" fill="#4b5563">{_e(_dataset_snapshot_label(run))}</text>')
+        rows.append(f'<text x="670" y="{y + 70}" font-family="Arial" font-size="11" fill="#4b5563">{_e(note_line)}</text>')
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
   <rect width="100%" height="100%" fill="#f7f7f2"/>
   <text x="28" y="34" font-family="Arial" font-size="22" fill="#111827">MiniGPT run registry</text>
-  <text x="28" y="58" font-family="Arial" font-size="13" fill="#4b5563">Runs: {registry.get('run_count')} | Dataset fingerprints: {len(registry.get('dataset_fingerprints', []))}</text>
+  <text x="28" y="58" font-family="Arial" font-size="13" fill="#4b5563">Runs: {registry.get('run_count')} | Dataset fingerprints: {len(registry.get('dataset_fingerprints', []))} | Snapshots: {_pick_dict(registry, 'dataset_snapshot_summary').get('snapshot_run_count')}</text>
   <text x="300" y="78" font-family="Arial" font-size="12" fill="#374151">best val loss</text>
   <text x="650" y="78" font-family="Arial" font-size="12" fill="#374151">artifact count / quality / eval suite</text>
   {''.join(rows)}
@@ -200,6 +207,25 @@ def _note_summary(run: dict[str, Any]) -> str:
     return tags or note or "no notes"
 
 
+def _dataset_snapshot_label(run: dict[str, Any]) -> str:
+    parts = []
+    policy = run.get("dataset_dedupe_policy")
+    if policy:
+        parts.append(f"dedupe={policy}")
+    included = run.get("dataset_included_source_count")
+    skipped = run.get("dataset_skipped_source_count")
+    if included is not None or skipped is not None:
+        parts.append(f"included={_fmt_int(included)}")
+        parts.append(f"skipped={_fmt_int(skipped)}")
+    char_count = run.get("dataset_char_count")
+    if char_count is not None:
+        parts.append(f"chars={_fmt_int(char_count)}")
+    digest = run.get("dataset_source_order_digest")
+    if digest:
+        parts.append(f"order={_clip(digest, 18)}")
+    return "; ".join(parts) if parts else "snapshot missing"
+
+
 def _clip(value: Any, limit: int) -> str:
     text = "" if value is None else str(value)
     if len(text) <= limit:
@@ -214,6 +240,13 @@ def _fmt_tags(value: Any) -> str:
 
 def _e(value: Any) -> str:
     return html.escape("" if value is None else str(value), quote=True)
+
+
+def _pick_dict(payload: Any, key: str) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        return {}
+    nested = payload.get(key)
+    return nested if isinstance(nested, dict) else {}
 
 
 __all__ = [

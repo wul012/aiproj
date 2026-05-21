@@ -173,6 +173,9 @@ d/353/解释/说明.md
 d/354/图片
 d/354/解释/说明.md
  -> v354 run comparison dataset snapshot carryover 的运行截图和解释
+d/355/图片
+d/355/解释/说明.md
+ -> v355 registry dataset snapshot carryover 的运行截图和解释
 ```
 
 写入规则：

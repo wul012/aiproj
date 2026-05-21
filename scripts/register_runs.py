@@ -41,6 +41,9 @@ def main() -> None:
     print("generation_quality_counts=" + json.dumps(registry.get("generation_quality_counts", {}), ensure_ascii=False))
     print("benchmark_rubric_counts=" + json.dumps(registry.get("benchmark_rubric_counts", {}), ensure_ascii=False))
     print("benchmark_rubric_summary=" + json.dumps(registry.get("benchmark_rubric_summary", {}), ensure_ascii=False))
+    print("dataset_versions=" + json.dumps(registry.get("dataset_versions", []), ensure_ascii=False))
+    print("dataset_dedupe_policy_counts=" + json.dumps(registry.get("dataset_dedupe_policy_counts", {}), ensure_ascii=False))
+    print("dataset_snapshot_summary=" + json.dumps(registry.get("dataset_snapshot_summary", {}), ensure_ascii=False))
     print("release_readiness_comparison_counts=" + json.dumps(registry.get("release_readiness_comparison_counts", {}), ensure_ascii=False))
     print("release_readiness_delta_summary=" + json.dumps(registry.get("release_readiness_delta_summary", {}), ensure_ascii=False))
     print(

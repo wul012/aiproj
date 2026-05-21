@@ -167,6 +167,9 @@
 368-v354-run-comparison-dataset-snapshot.md
  -> v354 code explanation: carry dataset snapshot deltas into run comparison so model/loss deltas can be reviewed beside data-boundary changes.
 
+369-v355-registry-dataset-snapshot.md
+ -> v355 code explanation: carry dataset snapshot evidence into registry rows, summaries, CSV/SVG/HTML, and CLI output for multi-run data-boundary review.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

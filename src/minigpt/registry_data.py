@@ -92,7 +92,13 @@ class RegisteredRun:
     last_val_loss: float | None
     total_parameters: int | None
     data_source_kind: str | None
+    dataset_version: str | None
     dataset_fingerprint: str | None
+    dataset_dedupe_policy: str | None
+    dataset_source_order_digest: str | None
+    dataset_included_source_count: int | None
+    dataset_skipped_source_count: int | None
+    dataset_char_count: int | None
     dataset_quality: str | None
     eval_suite_cases: int | None
     eval_suite_avg_unique: float | None
@@ -159,6 +165,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     train_config = _read_json(root / "train_config.json")
     history = _read_json(root / "history_summary.json")
     dataset_quality = _read_json(root / "dataset_quality.json")
+    dataset_version_report = _read_json(root / "dataset_version.json")
     eval_suite = _read_json(root / "eval_suite" / "eval_suite.json")
     generation_quality = _read_generation_quality(root)
     benchmark_scorecard = _read_benchmark_scorecard(root)
@@ -172,7 +179,11 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
     data = _pick_dict(manifest, "data")
     model = _pick_dict(manifest, "model")
     manifest_quality = _pick_dict(data, "dataset_quality")
+    manifest_dataset_version = _pick_dict(data, "dataset_version")
     source = _pick_dict(data, "source")
+    dataset_stats = _pick_dict(dataset_version_report, "stats")
+    dataset_snapshot = _pick_dict(dataset_version_report, "snapshot")
+    dataset_preparation = _pick_dict(dataset_version_report, "preparation")
     generation_summary = _pick_dict(generation_quality, "summary")
     benchmark_summary = _pick_dict(benchmark_scorecard, "summary")
     release_readiness_summary = _pick_dict(release_readiness_comparison, "summary")
@@ -191,7 +202,21 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         last_val_loss=_as_float(_pick(history, "last_val_loss") or _nested_pick(_pick_dict(manifest, "results"), "history_summary", "last_val_loss")),
         total_parameters=_as_int(_pick(model, "parameter_count")),
         data_source_kind=_as_str(_pick(source, "kind")),
-        dataset_fingerprint=_as_str(_pick(dataset_quality, "short_fingerprint") or _pick(manifest_quality, "short_fingerprint")),
+        dataset_version=_as_str(_pick(manifest_dataset_version, "id") or _nested_pick(dataset_version_report, "dataset", "id")),
+        dataset_fingerprint=_as_str(
+            _pick(manifest_dataset_version, "short_fingerprint")
+            or _pick(dataset_stats, "short_fingerprint")
+            or _pick(dataset_quality, "short_fingerprint")
+            or _pick(manifest_quality, "short_fingerprint")
+        ),
+        dataset_dedupe_policy=_as_str(
+            _pick(dataset_snapshot, "dedupe_policy")
+            or ("exact-source-content" if _pick(dataset_preparation, "dedupe_exact_sources") else None)
+        ),
+        dataset_source_order_digest=_as_str(_pick(dataset_snapshot, "source_order_digest")),
+        dataset_included_source_count=_as_int(_pick(dataset_stats, "included_source_count")),
+        dataset_skipped_source_count=_as_int(_pick(dataset_stats, "skipped_source_count")),
+        dataset_char_count=_as_int(_pick(dataset_stats, "char_count")),
         dataset_quality=_as_str(_pick(dataset_quality, "status") or _pick(manifest_quality, "status")),
         eval_suite_cases=_as_int(_pick(eval_suite, "case_count")),
         eval_suite_avg_unique=_as_float(_pick(eval_suite, "avg_unique_chars")),
@@ -267,7 +292,10 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
         "pair_delta_leaderboard": pair_delta_leaders,
         "release_readiness_delta_summary": release_readiness_delta_summary(release_readiness_delta_rows),
         "release_readiness_delta_leaderboard": release_readiness_delta_leaders,
+        "dataset_versions": sorted({run.dataset_version for run in runs if run.dataset_version}),
         "dataset_fingerprints": sorted({run.dataset_fingerprint for run in runs if run.dataset_fingerprint}),
+        "dataset_dedupe_policy_counts": counts(run.dataset_dedupe_policy or "missing" for run in runs),
+        "dataset_snapshot_summary": _dataset_snapshot_summary(run_rows),
         "quality_counts": counts(run.dataset_quality or "missing" for run in runs),
         "generation_quality_counts": counts(run.generation_quality_status or "missing" for run in runs),
         "benchmark_rubric_counts": counts(run.benchmark_rubric_status or "missing" for run in runs),
@@ -277,6 +305,44 @@ def build_run_registry(run_dirs: list[str | Path], names: list[str] | None = Non
             "pair_trend": sum(1 for run in run_rows if run.get("pair_trend_reports") is not None or run.get("pair_trend_html_exists")),
         },
         "tag_counts": counts(tag for run in runs for tag in run.tags),
+    }
+
+
+def _dataset_snapshot_summary(runs: list[dict[str, Any]]) -> dict[str, Any]:
+    included = [_as_int(run.get("dataset_included_source_count")) for run in runs]
+    skipped = [_as_int(run.get("dataset_skipped_source_count")) for run in runs]
+    chars = [_as_int(run.get("dataset_char_count")) for run in runs]
+    included_values = [value for value in included if value is not None]
+    skipped_values = [value for value in skipped if value is not None]
+    char_values = [value for value in chars if value is not None]
+    return {
+        "run_count": len(runs),
+        "snapshot_run_count": sum(
+            1
+            for run in runs
+            if run.get("dataset_dedupe_policy") is not None
+            or run.get("dataset_source_order_digest") is not None
+            or run.get("dataset_included_source_count") is not None
+            or run.get("dataset_skipped_source_count") is not None
+            or run.get("dataset_char_count") is not None
+        ),
+        "missing_snapshot_count": sum(
+            1
+            for run in runs
+            if run.get("dataset_dedupe_policy") is None
+            and run.get("dataset_source_order_digest") is None
+            and run.get("dataset_included_source_count") is None
+            and run.get("dataset_skipped_source_count") is None
+            and run.get("dataset_char_count") is None
+        ),
+        "dataset_version_count": len({run.get("dataset_version") for run in runs if run.get("dataset_version")}),
+        "dataset_fingerprint_count": len({run.get("dataset_fingerprint") for run in runs if run.get("dataset_fingerprint")}),
+        "dedupe_policy_count": len({run.get("dataset_dedupe_policy") for run in runs if run.get("dataset_dedupe_policy")}),
+        "source_order_digest_count": len({run.get("dataset_source_order_digest") for run in runs if run.get("dataset_source_order_digest")}),
+        "skipped_source_run_count": sum(1 for value in skipped_values if value > 0),
+        "total_included_source_count": sum(included_values) if included_values else None,
+        "total_skipped_source_count": sum(skipped_values) if skipped_values else None,
+        "total_char_count": sum(char_values) if char_values else None,
     }
 
 def _actual_artifact_count(root: Path) -> int:
