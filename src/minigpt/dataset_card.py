@@ -48,9 +48,10 @@ def build_dataset_card(
     dataset = _dataset_section(version, root)
     summary = _summary_section(root, version, report, quality)
     provenance = _provenance_section(version, report)
+    snapshot = _snapshot_section(version)
     quality_section = _quality_section(quality)
     artifacts = _artifact_section(root)
-    recommendations = _recommendations(summary, quality_section, artifacts, warnings)
+    recommendations = _recommendations(summary, quality_section, artifacts, warnings, snapshot)
 
     return {
         "schema_version": 1,
@@ -62,6 +63,7 @@ def build_dataset_card(
         "intended_use": intended_use or list(DEFAULT_INTENDED_USE),
         "limitations": limitations or list(DEFAULT_LIMITATIONS),
         "provenance": provenance,
+        "snapshot": snapshot,
         "quality": quality_section,
         "artifacts": artifacts,
         "recommendations": recommendations,
@@ -103,6 +105,8 @@ def _summary_section(root: Path, version: Any, report: Any, quality: Any) -> dic
         "readiness_status": _readiness_status(quality_status, warning_count, issue_count),
         "quality_status": quality_status,
         "source_count": _first_number(stats.get("source_count"), _pick(report, "source_count"), _pick(quality, "source_count")),
+        "included_source_count": _first_number(stats.get("included_source_count"), _pick(report, "included_source_count")),
+        "skipped_source_count": _first_number(stats.get("skipped_source_count"), _pick(report, "skipped_source_count")),
         "char_count": _first_number(stats.get("char_count"), _pick(report, "char_count"), _pick(quality, "char_count")),
         "line_count": _first_number(stats.get("line_count"), _pick(report, "line_count"), _pick(quality, "line_count")),
         "unique_char_count": _first_number(stats.get("unique_char_count"), _pick(report, "unique_char_count"), _pick(quality, "unique_char_count")),
@@ -133,6 +137,18 @@ def _provenance_section(version: Any, report: Any) -> dict[str, Any]:
         "output_name": preparation.get("output_name"),
         "output_text": outputs.get("text") or _pick(report, "output_text"),
         "sources": version_sources or report_sources,
+    }
+
+
+def _snapshot_section(version: Any) -> dict[str, Any]:
+    snapshot = _dict(_pick(version, "snapshot"))
+    preparation = _dict(_pick(version, "preparation"))
+    return {
+        "dedupe_policy": snapshot.get("dedupe_policy") or ("exact-source-content" if preparation.get("dedupe_exact_sources") else "none"),
+        "source_order_digest": snapshot.get("source_order_digest"),
+        "included_source_count": snapshot.get("included_source_count"),
+        "skipped_source_count": snapshot.get("skipped_source_count"),
+        "skipped_sources": _list_of_dicts(snapshot.get("skipped_sources")),
     }
 
 
@@ -184,6 +200,7 @@ def _recommendations(
     quality: dict[str, Any],
     artifacts: list[dict[str, Any]],
     warnings: list[str],
+    snapshot: dict[str, Any],
 ) -> list[str]:
     recs: list[str] = []
     if summary.get("readiness_status") == "ready":
@@ -196,6 +213,10 @@ def _recommendations(
         recs.append("Generate dataset_quality.json so warnings and duplicate-source checks are visible.")
     if _string_list(quality.get("issue_codes")):
         recs.append("Inspect quality issue codes: " + ", ".join(_string_list(quality.get("issue_codes"))) + ".")
+    if snapshot.get("dedupe_policy") == "none" and summary.get("skipped_source_count") in (0, None):
+        recs.append("For larger corpus snapshots, consider --dedupe-exact-sources so exact duplicate source files are skipped with evidence.")
+    if int(snapshot.get("skipped_source_count") or 0) > 0:
+        recs.append("Review skipped_sources in the dataset snapshot before treating this version as the clean training corpus.")
     if not any(item.get("exists") and item.get("key") == "corpus" for item in artifacts):
         recs.append("Keep the prepared corpus path in outputs so training scripts can trace the data source.")
     if warnings:

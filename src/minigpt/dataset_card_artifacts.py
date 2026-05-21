@@ -19,6 +19,7 @@ def render_dataset_card_markdown(card: dict[str, Any]) -> str:
     dataset = _dict(card.get("dataset"))
     summary = _dict(card.get("summary"))
     provenance = _dict(card.get("provenance"))
+    snapshot = _dict(card.get("snapshot"))
     quality = _dict(card.get("quality"))
     lines = [
         f"# {card.get('title', 'MiniGPT dataset card')}",
@@ -35,6 +36,8 @@ def render_dataset_card_markdown(card: dict[str, Any]) -> str:
                 ("Readiness", summary.get("readiness_status")),
                 ("Quality", summary.get("quality_status")),
                 ("Sources", summary.get("source_count")),
+                ("Included sources", summary.get("included_source_count")),
+                ("Skipped sources", summary.get("skipped_source_count")),
                 ("Characters", summary.get("char_count")),
                 ("Unique chars", summary.get("unique_char_count")),
                 ("Fingerprint", summary.get("short_fingerprint")),
@@ -61,9 +64,40 @@ def render_dataset_card_markdown(card: dict[str, Any]) -> str:
             ]
         ),
         "",
+        "## Snapshot",
+        "",
+        *_markdown_table(
+            [
+                ("Dedupe policy", snapshot.get("dedupe_policy")),
+                ("Source order digest", snapshot.get("source_order_digest")),
+                ("Included sources", snapshot.get("included_source_count")),
+                ("Skipped sources", snapshot.get("skipped_source_count")),
+            ]
+        ),
+        "",
+        "| Skipped Source | Reason | Duplicate Of | SHA-256 |",
+        "| --- | --- | --- | --- |",
+    ]
+    for source in _list_of_dicts(snapshot.get("skipped_sources")):
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    _md(source.get("path")),
+                    _md(source.get("skip_reason")),
+                    _md(source.get("duplicate_of")),
+                    _md(str(source.get("sha256") or "")[:12]),
+                ]
+            )
+            + " |"
+        )
+    lines.extend(
+        [
+        "",
         "| Source | Chars | Lines | SHA-256 |",
         "| --- | ---: | ---: | --- |",
-    ]
+        ]
+    )
     for source in _list_of_dicts(provenance.get("sources")):
         lines.append(
             "| "
@@ -150,11 +184,14 @@ def render_dataset_card_html(card: dict[str, Any]) -> str:
     dataset = _dict(card.get("dataset"))
     summary = _dict(card.get("summary"))
     quality = _dict(card.get("quality"))
+    snapshot = _dict(card.get("snapshot"))
     stats = [
         ("Dataset", dataset.get("id")),
         ("Readiness", summary.get("readiness_status")),
         ("Quality", summary.get("quality_status")),
         ("Sources", summary.get("source_count")),
+        ("Included", summary.get("included_source_count")),
+        ("Skipped", summary.get("skipped_source_count")),
         ("Characters", summary.get("char_count")),
         ("Fingerprint", summary.get("short_fingerprint")),
         ("Warnings", summary.get("warning_count")),
@@ -177,6 +214,7 @@ def render_dataset_card_html(card: dict[str, Any]) -> str:
             _list_section("Intended Use", card.get("intended_use")),
             _list_section("Limitations", card.get("limitations")),
             _key_value_section("Provenance", _dict(card.get("provenance"))),
+            _key_value_section("Snapshot", snapshot),
             _quality_section_html(quality),
             _artifact_section_html(card.get("artifacts")),
             _list_section("Recommendations", card.get("recommendations")),

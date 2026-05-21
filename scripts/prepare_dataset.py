@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset-version", type=str, default=None, help="Dataset version for versioned output")
     parser.add_argument("--dataset-description", type=str, default="", help="Short description stored in dataset_version.json")
     parser.add_argument("--dataset-root", type=Path, default=ROOT / "datasets", help="Root for datasets/<name>/<version> output")
+    parser.add_argument("--dedupe-exact-sources", action="store_true", help="Skip exact duplicate source files while preserving skip evidence")
     parser.add_argument("--no-recursive", action="store_true", help="Only read .txt files directly under source directories")
     return parser.parse_args()
 
@@ -37,7 +38,7 @@ def main() -> None:
             out_dir = ROOT / "runs" / "dataset"
     dataset_name = args.dataset_name or Path(out_dir).name
     dataset_version = args.dataset_version or "unversioned"
-    dataset = build_prepared_dataset(args.sources, recursive=recursive)
+    dataset = build_prepared_dataset(args.sources, recursive=recursive, dedupe_exact_sources=args.dedupe_exact_sources)
     outputs = write_prepared_dataset(
         dataset,
         out_dir,
@@ -47,9 +48,12 @@ def main() -> None:
         dataset_description=args.dataset_description,
         source_roots=args.sources,
         recursive=recursive,
+        dedupe_exact_sources=args.dedupe_exact_sources,
     )
     print(f"dataset_id={dataset_name}@{dataset_version}")
     print(f"sources={len(dataset.sources)}")
+    print(f"included_sources={dataset.included_source_count}")
+    print(f"skipped_sources={dataset.skipped_source_count}")
     print(f"chars={dataset.char_count}")
     print(f"lines={dataset.line_count}")
     print(f"unique_chars={dataset.unique_char_count}")

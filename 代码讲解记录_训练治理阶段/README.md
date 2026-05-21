@@ -158,6 +158,9 @@
 365-v351-maturity-benchmark-readiness-carryover.md
  -> v351 code explanation: carry registry benchmark-history readiness regressions into maturity summary, maturity narrative, CLI diagnostics, and review decisions.
 
+366-v352-dataset-dedupe-snapshots.md
+ -> v352 code explanation: add opt-in exact-source dedupe, reproducible dataset snapshots, and dataset card snapshot evidence for prepared corpora.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

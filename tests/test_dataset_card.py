@@ -66,7 +66,12 @@ class DatasetCardTests(unittest.TestCase):
             self.assertEqual(card["summary"]["source_count"], 1)
             self.assertEqual(len(card["summary"]["short_fingerprint"]), 12)
             self.assertTrue(card["summary"]["output_text_exists"])
+            self.assertEqual(card["summary"]["included_source_count"], 1)
+            self.assertEqual(card["summary"]["skipped_source_count"], 0)
             self.assertTrue(card["provenance"]["sources"])
+            self.assertEqual(card["snapshot"]["dedupe_policy"], "none")
+            self.assertIn("## Snapshot", render_dataset_card_markdown(card))
+            self.assertIn("Snapshot", render_dataset_card_html(card))
             self.assertEqual(card["quality"]["issue_codes"], [])
             self.assertTrue(any(item["key"] == "dataset_version" and item["exists"] for item in card["artifacts"]))
             self.assertTrue(card["recommendations"])
@@ -84,6 +89,33 @@ class DatasetCardTests(unittest.TestCase):
             self.assertIn("repeated_line", card["quality"]["issue_codes"])
             self.assertGreater(card["summary"]["warning_count"], 0)
             self.assertTrue(any("Inspect quality issue codes" in item for item in card["recommendations"]))
+
+    def test_build_dataset_card_surfaces_snapshot_and_dedupe_recommendation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "sources"
+            source.mkdir()
+            text = "重复的一整行文本用于检测质量\n重复的一整行文本用于检测质量\n"
+            (source / "a.txt").write_text(text, encoding="utf-8")
+            (source / "b.txt").write_text(text, encoding="utf-8")
+            dataset = build_prepared_dataset([source], dedupe_exact_sources=True)
+            out_dir = Path(tmp) / "datasets" / "demo-zh" / "v1"
+            write_prepared_dataset(
+                dataset,
+                out_dir,
+                dataset_name="demo-zh",
+                dataset_version="v1",
+                source_roots=[source],
+                dedupe_exact_sources=True,
+            )
+
+            card = build_dataset_card(out_dir)
+
+            self.assertEqual(card["snapshot"]["dedupe_policy"], "exact-source-content")
+            self.assertEqual(card["summary"]["included_source_count"], 1)
+            self.assertEqual(card["summary"]["skipped_source_count"], 1)
+            self.assertTrue(card["snapshot"]["skipped_sources"])
+            self.assertTrue(any("skipped_sources" in item or "skipped source" in item.lower() for item in card["recommendations"]))
+            self.assertIn("Snapshot", render_dataset_card_markdown(card))
 
     def test_write_dataset_card_outputs_and_renderers(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

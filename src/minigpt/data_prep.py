@@ -18,6 +18,9 @@ class SourceFileSummary:
     nonempty_line_count: int
     unique_char_count: int
     sha256: str
+    included: bool = True
+    duplicate_of: str | None = None
+    skip_reason: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -43,6 +46,18 @@ class PreparedDataset:
     @property
     def fingerprint(self) -> str:
         return _sha256_text(self.text)
+
+    @property
+    def included_sources(self) -> list[SourceFileSummary]:
+        return [source for source in self.sources if source.included]
+
+    @property
+    def included_source_count(self) -> int:
+        return len(self.included_sources)
+
+    @property
+    def skipped_source_count(self) -> int:
+        return len(self.sources) - self.included_source_count
 
 
 def discover_text_files(sources: list[str | Path], recursive: bool = True) -> list[Path]:
@@ -72,16 +87,40 @@ def normalize_text(text: str) -> str:
     return "\n".join(lines).strip("\n")
 
 
-def build_prepared_dataset(sources: list[str | Path], recursive: bool = True) -> PreparedDataset:
+def build_prepared_dataset(
+    sources: list[str | Path],
+    recursive: bool = True,
+    *,
+    dedupe_exact_sources: bool = False,
+) -> PreparedDataset:
     source_files = discover_text_files(sources, recursive=recursive)
     chunks: list[str] = []
     summaries: list[SourceFileSummary] = []
+    seen_sources: dict[str, str] = {}
     for path in source_files:
         raw = path.read_text(encoding="utf-8")
         normalized = normalize_text(raw)
-        summaries.append(_summarize_source(path, normalized))
-        if normalized:
+        source_sha = _sha256_text(normalized)
+        duplicate_of = seen_sources.get(source_sha)
+        included = bool(normalized)
+        skip_reason = None
+        if not normalized:
+            skip_reason = "empty_after_normalization"
+        elif dedupe_exact_sources and duplicate_of is not None:
+            included = False
+            skip_reason = "duplicate_source"
+        else:
             chunks.append(normalized)
+            seen_sources.setdefault(source_sha, str(path))
+        summaries.append(
+            _summarize_source(
+                path,
+                normalized,
+                included=included,
+                duplicate_of=duplicate_of,
+                skip_reason=skip_reason,
+            )
+        )
     if not chunks:
         raise ValueError("prepared dataset is empty after normalization")
     text = "\n\n".join(chunks) + "\n"
@@ -96,6 +135,8 @@ def build_dataset_report(dataset: PreparedDataset, output_text: str | Path | Non
     ][:12]
     return {
         "source_count": len(dataset.sources),
+        "included_source_count": dataset.included_source_count,
+        "skipped_source_count": dataset.skipped_source_count,
         "char_count": dataset.char_count,
         "line_count": dataset.line_count,
         "unique_char_count": dataset.unique_char_count,
@@ -117,6 +158,7 @@ def build_dataset_version_manifest(
     description: str = "",
     source_roots: list[str | Path] | None = None,
     recursive: bool = True,
+    dedupe_exact_sources: bool = False,
     output_name: str = "corpus.txt",
     outputs: dict[str, str] | None = None,
     created_at: str | None = None,
@@ -141,11 +183,14 @@ def build_dataset_version_manifest(
         "created_at": created_at or utc_now(),
         "preparation": {
             "recursive": bool(recursive),
+            "dedupe_exact_sources": bool(dedupe_exact_sources),
             "output_name": output_name,
             "source_roots": [str(path) for path in (source_roots or [])],
         },
         "stats": {
             "source_count": len(dataset.sources),
+            "included_source_count": dataset.included_source_count,
+            "skipped_source_count": dataset.skipped_source_count,
             "char_count": dataset.char_count,
             "line_count": dataset.line_count,
             "unique_char_count": dataset.unique_char_count,
@@ -160,6 +205,7 @@ def build_dataset_version_manifest(
             "duplicate_line_count": dataset_quality.get("duplicate_line_count"),
         },
         "outputs": dict(outputs or {}),
+        "snapshot": build_dataset_snapshot(dataset, dedupe_exact_sources=dedupe_exact_sources),
         "sources": [source.to_dict() for source in dataset.sources],
     }
 
@@ -174,6 +220,7 @@ def write_prepared_dataset(
     dataset_description: str = "",
     source_roots: list[str | Path] | None = None,
     recursive: bool = True,
+    dedupe_exact_sources: bool = False,
 ) -> dict[str, str]:
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
@@ -211,6 +258,7 @@ def write_prepared_dataset(
         description=dataset_description,
         source_roots=source_roots,
         recursive=recursive,
+        dedupe_exact_sources=dedupe_exact_sources,
         output_name=output_name,
         outputs=outputs,
     )
@@ -259,19 +307,48 @@ def write_dataset_version_json(manifest: dict[str, Any], path: str | Path) -> No
     write_json_payload(manifest, path)
 
 
+def build_dataset_snapshot(dataset: PreparedDataset, *, dedupe_exact_sources: bool = False) -> dict[str, Any]:
+    source_rows = [source.to_dict() for source in dataset.sources]
+    skipped_sources = [
+        {
+            "path": source.path,
+            "skip_reason": source.skip_reason,
+            "duplicate_of": source.duplicate_of,
+            "sha256": source.sha256,
+        }
+        for source in dataset.sources
+        if not source.included
+    ]
+    order_digest = _sha256_text(
+        "\n".join(f"{source.path}\t{source.sha256}\t{source.included}" for source in dataset.sources)
+    )
+    return {
+        "dedupe_policy": "exact-source-content" if dedupe_exact_sources else "none",
+        "source_order_digest": order_digest,
+        "included_source_count": dataset.included_source_count,
+        "skipped_source_count": dataset.skipped_source_count,
+        "skipped_sources": skipped_sources,
+        "sources": source_rows,
+    }
+
+
 def render_dataset_version_html(manifest: dict[str, Any]) -> str:
     dataset = _dict(manifest.get("dataset"))
     stats = _dict(manifest.get("stats"))
     quality = _dict(manifest.get("quality"))
     preparation = _dict(manifest.get("preparation"))
     outputs = _dict(manifest.get("outputs"))
+    snapshot = _dict(manifest.get("snapshot"))
     cards = [
         ("Dataset", dataset.get("id")),
         ("Fingerprint", stats.get("short_fingerprint")),
         ("Sources", stats.get("source_count")),
+        ("Included", stats.get("included_source_count")),
+        ("Skipped", stats.get("skipped_source_count")),
         ("Characters", stats.get("char_count")),
         ("Quality", quality.get("status")),
         ("Warnings", quality.get("warning_count")),
+        ("Dedupe", snapshot.get("dedupe_policy") or preparation.get("dedupe_exact_sources")),
         ("Recursive", preparation.get("recursive")),
         ("Created", manifest.get("created_at")),
     ]
@@ -285,11 +362,23 @@ def render_dataset_version_html(manifest: dict[str, Any]) -> str:
             source_rows.append(
                 "<tr>"
                 f"<td>{_e(Path(str(source.get('path'))).name)}</td>"
+                f"<td>{_e(source.get('included'))}</td>"
                 f"<td>{_e(source.get('char_count'))}</td>"
                 f"<td>{_e(source.get('line_count'))}</td>"
                 f"<td>{_e(str(source.get('sha256', ''))[:12])}</td>"
+                f"<td>{_e(source.get('duplicate_of'))}</td>"
+                f"<td>{_e(source.get('skip_reason'))}</td>"
                 "</tr>"
             )
+    snapshot_rows = "".join(
+        f"<tr><td>{_e(key)}</td><td>{_e(value)}</td></tr>"
+        for key, value in [
+            ("dedupe_policy", snapshot.get("dedupe_policy")),
+            ("source_order_digest", snapshot.get("source_order_digest")),
+            ("included_source_count", snapshot.get("included_source_count")),
+            ("skipped_source_count", snapshot.get("skipped_source_count")),
+        ]
+    )
     return "\n".join(
         [
             "<!doctype html>",
@@ -307,7 +396,10 @@ def render_dataset_version_html(manifest: dict[str, Any]) -> str:
             '<section class="panel"><h2>Outputs</h2><table><thead><tr><th>Key</th><th>Path</th></tr></thead><tbody>'
             + output_rows
             + "</tbody></table></section>",
-            '<section class="panel"><h2>Sources</h2><table><thead><tr><th>File</th><th>Chars</th><th>Lines</th><th>SHA-256</th></tr></thead><tbody>'
+            '<section class="panel"><h2>Snapshot</h2><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>'
+            + snapshot_rows
+            + "</tbody></table></section>",
+            '<section class="panel"><h2>Sources</h2><table><thead><tr><th>File</th><th>Included</th><th>Chars</th><th>Lines</th><th>SHA-256</th><th>Duplicate Of</th><th>Skip reason</th></tr></thead><tbody>'
             + "".join(source_rows)
             + "</tbody></table></section>",
             "<footer>Generated by MiniGPT dataset preparation.</footer>",
@@ -323,7 +415,14 @@ def write_dataset_version_html(manifest: dict[str, Any], path: str | Path) -> No
     out_path.write_text(render_dataset_version_html(manifest), encoding="utf-8")
 
 
-def _summarize_source(path: Path, text: str) -> SourceFileSummary:
+def _summarize_source(
+    path: Path,
+    text: str,
+    *,
+    included: bool = True,
+    duplicate_of: str | None = None,
+    skip_reason: str | None = None,
+) -> SourceFileSummary:
     lines = text.splitlines()
     return SourceFileSummary(
         path=str(path),
@@ -332,6 +431,9 @@ def _summarize_source(path: Path, text: str) -> SourceFileSummary:
         nonempty_line_count=sum(1 for line in lines if line.strip()),
         unique_char_count=len(set(text)),
         sha256=_sha256_text(text),
+        included=included,
+        duplicate_of=duplicate_of,
+        skip_reason=skip_reason,
     )
 
 

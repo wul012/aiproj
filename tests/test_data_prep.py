@@ -50,6 +50,25 @@ class DataPrepTests(unittest.TestCase):
             self.assertGreater(dataset.char_count, 0)
             self.assertEqual(len(dataset.fingerprint), 64)
             self.assertEqual(len(dataset.sources[0].sha256), 64)
+            self.assertEqual(dataset.included_source_count, 2)
+            self.assertEqual(dataset.skipped_source_count, 0)
+
+    def test_build_prepared_dataset_can_dedupe_exact_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            text = "hello\nworld\n"
+            (root / "one.txt").write_text(text, encoding="utf-8")
+            (root / "two.txt").write_text(text, encoding="utf-8")
+
+            dataset = build_prepared_dataset([root], dedupe_exact_sources=True)
+
+            self.assertEqual(len(dataset.sources), 2)
+            self.assertEqual(dataset.included_source_count, 1)
+            self.assertEqual(dataset.skipped_source_count, 1)
+            self.assertEqual(dataset.sources[1].included, False)
+            self.assertEqual(dataset.sources[1].skip_reason, "duplicate_source")
+            self.assertEqual(dataset.sources[1].duplicate_of, dataset.sources[0].path)
+            self.assertEqual(dataset.text, "hello\nworld\n")
 
     def test_build_dataset_report_contains_common_chars(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -60,6 +79,7 @@ class DataPrepTests(unittest.TestCase):
             report = build_dataset_report(dataset, output_text="corpus.txt")
 
             self.assertEqual(report["source_count"], 1)
+            self.assertEqual(report["included_source_count"], 1)
             self.assertEqual(report["output_text"], "corpus.txt")
             self.assertEqual(len(report["fingerprint"]), 64)
             self.assertEqual(report["most_common_chars"][0]["char"], "a")
@@ -87,8 +107,12 @@ class DataPrepTests(unittest.TestCase):
 
             self.assertEqual(manifest["dataset"]["id"], "demo-zh@v1")
             self.assertEqual(manifest["stats"]["short_fingerprint"], dataset.fingerprint[:12])
+            self.assertEqual(manifest["stats"]["included_source_count"], 1)
             self.assertEqual(manifest["quality"]["status"], "pass")
             self.assertEqual(manifest["outputs"]["text"], "corpus.txt")
+            self.assertIn("snapshot", manifest)
+            self.assertIn("Snapshot", html)
+            self.assertIn("Dedupe", html)
             self.assertIn("demo-zh@v1", html)
 
     def test_write_prepared_dataset_outputs_text_json_svg(self) -> None:
@@ -108,6 +132,8 @@ class DataPrepTests(unittest.TestCase):
             self.assertIn("<svg", Path(outputs["quality_svg"]).read_text(encoding="utf-8"))
             version = json.loads(Path(outputs["version_json"]).read_text(encoding="utf-8"))
             self.assertEqual(version["dataset"]["id"], "dataset@unversioned")
+            self.assertEqual(version["preparation"]["dedupe_exact_sources"], False)
+            self.assertEqual(version["snapshot"]["dedupe_policy"], "none")
             self.assertIn("dataset@unversioned", Path(outputs["version_html"]).read_text(encoding="utf-8"))
 
 
