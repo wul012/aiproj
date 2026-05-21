@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v374 Registry Release Readiness Split Evidence</title>
+  <style>
+    :root { --ink:#16202a; --muted:#526071; --line:#d7dde5; --page:#f6f7f3; --panel:#fff; --green:#047857; --blue:#1f5f74; --amber:#b45309; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.48; }
+    header { padding:28px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p, li, td { color:var(--muted); }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; padding:18px 34px 4px; }
+    .card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .card { padding:14px; min-height:86px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+    .panel { margin:18px 34px; padding:16px; overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:840px; }
+    th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f7; border-radius:5px; padding:2px 5px; color:#1f2937; }
+    .pill { display:inline-block; min-width:64px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; background:var(--blue); }
+    .pass { background:var(--green); }
+    .watch { background:var(--amber); }
+    footer { padding:20px 34px 34px; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v374 Registry Release Readiness Split</h1>
+    <p>本版把 registry 的 release-readiness delta 聚合拆到独立模块，并把 failed reason removed 作为恢复证据继续传到 registry、maturity 和 narrative。</p>
+  </header>
+  <section class="stats">
+    <div class="card"><div class="label">Version</div><div class="value">v374.0.0</div></div>
+    <div class="card"><div class="label">Boundary</div><div class="value">Registry split</div></div>
+    <div class="card"><div class="label">Tests</div><div class="value">59 passed</div></div>
+    <div class="card"><div class="label">File pressure</div><div class="value">243 / 383</div></div>
+  </section>
+  <section class="panel">
+    <h2>Changed Modules</h2>
+    <table>
+      <thead><tr><th>File</th><th>Role</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td><code>registry_release_readiness.py</code></td><td>New release-readiness delta collection, summary, and leaderboard boundary.</td><td><span class="pill pass">split</span></td></tr>
+        <tr><td><code>registry_rankings.py</code></td><td>Returns to ranking orchestration instead of carrying release-readiness internals.</td><td><span class="pill pass">243 lines</span></td></tr>
+        <tr><td><code>registry_data.py</code></td><td>Run rows now expose failed-reason added and removed counts.</td><td><span class="pill pass">visible</span></td></tr>
+        <tr><td><code>maturity*.py</code></td><td>Maturity summary and narrative keep removed reasons visible without downgrading to review.</td><td><span class="pill watch">recovery</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="panel">
+    <h2>Verification</h2>
+    <ul>
+      <li><code>python -m py_compile ...</code> completed successfully for the touched modules and scripts.</li>
+      <li><code>python -m pytest tests/test_release_readiness_comparison.py tests/test_registry.py tests/test_registry_rankings.py tests/test_maturity.py tests/test_maturity_narrative.py tests/test_maturity_artifacts.py -q</code> completed with <code>59 passed</code>.</li>
+      <li>Removed failed reasons are recovery/stability evidence; newly added failed reasons remain review-triggering regressions.</li>
+    </ul>
+  </section>
+  <footer>Generated for d/374 runtime evidence.</footer>
+</body>
+</html>

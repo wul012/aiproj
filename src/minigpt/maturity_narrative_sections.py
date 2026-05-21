@@ -174,7 +174,9 @@ def _release_claim(summary: dict[str, Any]) -> str:
         f"benchmark requirement exit delta="
         f"{summary.get('release_readiness_benchmark_requirement_exit_code_delta_max') if summary.get('release_readiness_benchmark_requirement_exit_code_delta_max') is not None else 'missing'}, "
         f"benchmark failed reasons added={summary.get('release_readiness_benchmark_requirement_failed_reason_added_count') or 0} "
-        f"({', '.join(summary.get('release_readiness_benchmark_requirement_failed_reason_added') or []) or 'none'})."
+        f"({', '.join(summary.get('release_readiness_benchmark_requirement_failed_reason_added') or []) or 'none'}), "
+        f"removed={summary.get('release_readiness_benchmark_requirement_failed_reason_removed_count') or 0} "
+        f"({', '.join(summary.get('release_readiness_benchmark_requirement_failed_reason_removed') or []) or 'none'})."
     )
 
 

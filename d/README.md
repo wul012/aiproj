@@ -230,6 +230,9 @@ d/372/解释/说明.md
 d/373/图片
 d/373/解释/说明.md
  -> v373 benchmark requirement reason drift 的运行截图和解释
+d/374/图片
+d/374/解释/说明.md
+ -> v374 registry release readiness split 的运行截图和解释
 ```
 
 写入规则：

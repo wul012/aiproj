@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 373 carries benchmark-history readiness failed-reason additions through release readiness comparison, registry, maturity summary, and maturity narrative, so status-stable requirement drift can still trigger review.
+Version 374 splits registry release-readiness delta aggregation into a dedicated module and carries benchmark-history readiness failed-reason removals through registry, maturity summary, and maturity narrative as visible recovery evidence.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -652,6 +652,14 @@ Version 373 carries benchmark-history readiness failed-reason additions through 
 - Tests cover release readiness comparison, registry aggregation, maturity summary, and maturity narrative review routing for reason-only regressions.
 - Archived benchmark requirement reason drift evidence in `d/373`.
 
+## Latest v374 checkpoint
+
+- `registry_rankings.py` now delegates release-readiness delta collection, summary, and leaderboard logic to `registry_release_readiness.py`.
+- Benchmark-history readiness failed-reason removals now remain visible in release readiness comparison summaries, registry rows/CSV/HTML/CLI output, maturity summary, and maturity narrative.
+- Removed failed reasons are treated as recovery/stability evidence, not as a benchmark regression unless a real status, exit-code, or added-reason regression is also present.
+- Targeted tests cover comparison removal, registry propagation, maturity visibility without downgrade, and narrative ready-state behavior.
+- Archived registry release-readiness split evidence in `d/374`.
+
 ## Latest v370 checkpoint
 
 - Registry run rows now expose benchmark readiness requirement status-change count and max exit-code delta from release readiness comparison deltas.
@@ -1206,6 +1214,7 @@ v370.0.0 MiniGPT v370 registry benchmark requirement
 v371.0.0 MiniGPT v371 maturity benchmark requirement carryover
 v372.0.0 MiniGPT v372 maintenance split consolidation
 v373.0.0 MiniGPT v373 benchmark requirement reason drift
+v374.0.0 MiniGPT v374 registry release readiness split
 ```
 
 ## Project structure

@@ -68,6 +68,9 @@ def build_maturity_narrative_summary(
         "release_readiness_benchmark_requirement_failed_reason_added": release.get(
             "benchmark_history_readiness_requirement_failed_reason_added"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_removed": release.get(
+            "benchmark_history_readiness_requirement_failed_reason_removed"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release.get("max_abs_benchmark_history_case_regression_delta"),
         "release_readiness_max_benchmark_history_generation_flag_regression_delta": release.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
@@ -261,6 +264,11 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_added"),
         [],
     )
+    requirement_reason_removed = _coalesce(
+        release_context.get("benchmark_history_readiness_requirement_failed_reason_removed"),
+        maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_removed"),
+        [],
+    )
     if int(requirement_status_changed_count or 0) > 0 or int(requirement_reason_added_count or 0) > 0:
         trend_status = "benchmark-regressed"
     return {
@@ -321,6 +329,7 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "benchmark_history_readiness_requirement_failed_reason_added_count": requirement_reason_added_count,
         "benchmark_history_readiness_requirement_failed_reason_removed_count": requirement_reason_removed_count,
         "benchmark_history_readiness_requirement_failed_reason_added": _string_list(requirement_reason_added),
+        "benchmark_history_readiness_requirement_failed_reason_removed": _string_list(requirement_reason_removed),
         "max_abs_benchmark_history_case_regression_delta": _coalesce(
             release_context.get("max_abs_benchmark_history_case_regression_delta"),
             maturity_summary.get("release_readiness_max_benchmark_history_case_regression_delta"),

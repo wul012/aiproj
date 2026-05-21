@@ -139,6 +139,8 @@ class RegisteredRun:
     release_readiness_benchmark_history_regression_count: int | None
     release_readiness_benchmark_requirement_status_change_count: int | None
     release_readiness_benchmark_requirement_exit_code_delta_max: int | float | None
+    release_readiness_benchmark_requirement_failed_reason_added_count: int | None
+    release_readiness_benchmark_requirement_failed_reason_removed_count: int | None
     release_readiness_html_exists: bool
     artifact_count: int
     checkpoint_exists: bool
@@ -262,6 +264,12 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
             release_readiness_deltas
         ),
         release_readiness_benchmark_requirement_exit_code_delta_max=_release_readiness_benchmark_requirement_exit_code_delta_max(
+            release_readiness_deltas
+        ),
+        release_readiness_benchmark_requirement_failed_reason_added_count=_release_readiness_benchmark_requirement_failed_reason_added_count(
+            release_readiness_deltas
+        ),
+        release_readiness_benchmark_requirement_failed_reason_removed_count=_release_readiness_benchmark_requirement_failed_reason_removed_count(
             release_readiness_deltas
         ),
         release_readiness_html_exists=_release_readiness_html_exists(root),
@@ -456,6 +464,40 @@ def _release_readiness_benchmark_requirement_exit_code_delta_max(deltas: list[di
         if value is not None
     ]
     return _int_if_whole(max(values)) if values else None
+
+
+def _release_readiness_benchmark_requirement_failed_reason_added_count(deltas: list[dict[str, Any]]) -> int | None:
+    if not deltas:
+        return None
+    return sum(_release_readiness_benchmark_requirement_reason_count(delta, "added") for delta in deltas)
+
+
+def _release_readiness_benchmark_requirement_failed_reason_removed_count(deltas: list[dict[str, Any]]) -> int | None:
+    if not deltas:
+        return None
+    return sum(_release_readiness_benchmark_requirement_reason_count(delta, "removed") for delta in deltas)
+
+
+def _release_readiness_benchmark_requirement_reason_count(delta: dict[str, Any], kind: str) -> int:
+    key = f"benchmark_history_readiness_requirement_failed_reason_{kind}_count"
+    direct = _as_int(delta.get(key))
+    if direct is not None:
+        return direct
+    baseline = delta.get("baseline_benchmark_history_readiness_requirement_failed_reasons")
+    compared = delta.get("compared_benchmark_history_readiness_requirement_failed_reasons")
+    if kind == "added":
+        return len(_reason_additions(baseline, compared))
+    return len(_reason_removals(baseline, compared))
+
+
+def _reason_additions(baseline: Any, compared: Any) -> list[str]:
+    baseline_reasons = set(_as_str_list(baseline))
+    return [reason for reason in _as_str_list(compared) if reason not in baseline_reasons]
+
+
+def _reason_removals(baseline: Any, compared: Any) -> list[str]:
+    compared_reasons = set(_as_str_list(compared))
+    return [reason for reason in _as_str_list(baseline) if reason not in compared_reasons]
 
 
 def _pick(payload: Any, key: str) -> Any:

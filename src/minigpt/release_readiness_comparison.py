@@ -333,6 +333,11 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
             for delta in deltas
             for reason in _string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_added"))
         ),
+        "benchmark_history_readiness_requirement_failed_reason_removed": _unique_strings(
+            reason
+            for delta in deltas
+            for reason in _string_list(delta.get("benchmark_history_readiness_requirement_failed_reason_removed"))
+        ),
     }
 
 
@@ -426,7 +431,10 @@ def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
 def _is_benchmark_history_regression(delta: dict[str, Any]) -> bool:
     if int(delta.get("benchmark_history_status_delta") or 0) < 0:
         return True
-    if delta.get("compared_benchmark_history_readiness_requirement_status") == "fail":
+    if (
+        delta.get("compared_benchmark_history_readiness_requirement_status") == "fail"
+        and delta.get("baseline_benchmark_history_readiness_requirement_status") != "fail"
+    ):
         return True
     if int(delta.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
         return True

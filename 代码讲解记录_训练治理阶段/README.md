@@ -224,6 +224,9 @@
 387-v373-benchmark-requirement-reason-drift.md
  -> v373 code explanation: carry benchmark-history readiness failed-reason additions through release readiness comparison, registry, maturity summary, and maturity narrative review.
 
+388-v374-registry-release-readiness-split.md
+ -> v374 code explanation: split registry release-readiness delta aggregation into a dedicated module and carry failed-reason removals as visible recovery evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

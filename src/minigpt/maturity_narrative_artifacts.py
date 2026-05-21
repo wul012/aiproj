@@ -43,6 +43,18 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                     "Release benchmark requirement exit delta",
                     summary.get("release_readiness_benchmark_requirement_exit_code_delta_max"),
                 ),
+                (
+                    "Release benchmark failed reasons added",
+                    summary.get("release_readiness_benchmark_requirement_failed_reason_added_count"),
+                ),
+                (
+                    "Release benchmark failed reasons removed",
+                    summary.get("release_readiness_benchmark_requirement_failed_reason_removed_count"),
+                ),
+                (
+                    "Release benchmark failed reason removals",
+                    ", ".join(_string_list(summary.get("release_readiness_benchmark_requirement_failed_reason_removed"))) or "none",
+                ),
                 ("Request history status", summary.get("request_history_status")),
                 ("Benchmark scorecards", summary.get("benchmark_scorecard_count")),
                 ("Benchmark average", summary.get("benchmark_avg_score")),
@@ -132,6 +144,8 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("Benchmark boundary changes", summary.get("release_readiness_benchmark_history_boundary_changed_count")),
         ("Benchmark req changes", summary.get("release_readiness_benchmark_requirement_status_changed_count")),
         ("Benchmark req exit", summary.get("release_readiness_benchmark_requirement_exit_code_delta_max")),
+        ("Benchmark reasons added", summary.get("release_readiness_benchmark_requirement_failed_reason_added_count")),
+        ("Benchmark reasons removed", summary.get("release_readiness_benchmark_requirement_failed_reason_removed_count")),
         ("Requests", summary.get("request_history_status")),
         ("Benchmarks", summary.get("benchmark_scorecard_count")),
         ("Benchmark avg", summary.get("benchmark_avg_score")),

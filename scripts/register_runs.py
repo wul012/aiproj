@@ -72,6 +72,27 @@ def main() -> None:
             ensure_ascii=False,
         )
     )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_added_count="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get("benchmark_history_readiness_requirement_failed_reason_added_count", 0),
+            ensure_ascii=False,
+        )
+    )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_removed_count="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get("benchmark_history_readiness_requirement_failed_reason_removed_count", 0),
+            ensure_ascii=False,
+        )
+    )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_removed="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get("benchmark_history_readiness_requirement_failed_reason_removed", []),
+            ensure_ascii=False,
+        )
+    )
     print("tag_counts=" + json.dumps(registry.get("tag_counts", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

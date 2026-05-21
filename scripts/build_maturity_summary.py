@@ -49,9 +49,14 @@ def main() -> None:
     print(f"release_readiness_benchmark_requirement_status_changed_count={overview.get('release_readiness_benchmark_requirement_status_changed_count')}")
     print(f"release_readiness_max_benchmark_requirement_exit_code_delta={overview.get('release_readiness_max_benchmark_requirement_exit_code_delta')}")
     print(f"release_readiness_benchmark_requirement_failed_reason_added_count={overview.get('release_readiness_benchmark_requirement_failed_reason_added_count')}")
+    print(f"release_readiness_benchmark_requirement_failed_reason_removed_count={overview.get('release_readiness_benchmark_requirement_failed_reason_removed_count')}")
     print(
         "release_readiness_benchmark_requirement_failed_reason_added="
         + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_added") or [], ensure_ascii=False)
+    )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_removed="
+        + json.dumps(overview.get("release_readiness_benchmark_requirement_failed_reason_removed") or [], ensure_ascii=False)
     )
     print(f"request_history_status={overview.get('request_history_status')}")
     print(f"request_history_records={overview.get('request_history_records')}")

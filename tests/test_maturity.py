@@ -58,6 +58,7 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "benchmark_history_readiness_requirement_failed_reason_added_count": 0,
                     "benchmark_history_readiness_requirement_failed_reason_removed_count": 0,
                     "benchmark_history_readiness_requirement_failed_reason_added": [],
+                    "benchmark_history_readiness_requirement_failed_reason_removed": [],
                     "max_abs_benchmark_history_case_regression_delta": 0,
                     "max_abs_benchmark_history_generation_flag_regression_delta": 0,
                     "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 0,
@@ -126,6 +127,8 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_max_benchmark_requirement_exit_code_delta"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], [])
             self.assertEqual(summary["summary"]["request_history_status"], "watch")
             self.assertEqual(summary["summary"]["request_history_records"], 4)
             self.assertEqual(summary["summary"]["overall_status"], "pass")
@@ -367,6 +370,29 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_added"], ["tiny_smoke_only"])
             self.assertIn("newly added benchmark-history readiness failed reasons", " ".join(summary["recommendations"]))
+
+    def test_benchmark_requirement_reason_removal_stays_visible_without_review_downgrade(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"stable": 1}
+            registry["release_readiness_delta_summary"]["delta_count"] = 1
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["changed_panel_delta_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_added_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_readiness_requirement_failed_reason_removed"] = [
+                "tiny_smoke_only"
+            ]
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "stable")
+            self.assertEqual(summary["summary"]["overall_status"], "pass")
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_removed"], ["tiny_smoke_only"])
 
     def test_render_maturity_summary_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

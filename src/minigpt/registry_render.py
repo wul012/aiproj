@@ -249,6 +249,8 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "release_readiness_benchmark_history_regression_count",
         "release_readiness_benchmark_requirement_status_change_count",
         "release_readiness_benchmark_requirement_exit_code_delta_max",
+        "release_readiness_benchmark_requirement_failed_reason_added_count",
+        "release_readiness_benchmark_requirement_failed_reason_removed_count",
         "note",
         "tags",
     ]
@@ -515,6 +517,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         f"<br><span>coverage regressions={_e(_fmt(run.get('release_readiness_test_coverage_regression_count')))}</span>"
         f"<br><span>benchmark regressions={_e(_fmt(run.get('release_readiness_benchmark_history_regression_count')))} deltas={_e(_fmt(run.get('release_readiness_benchmark_history_delta_count')))}</span>"
         f"<br><span>benchmark req changes={_e(_fmt(run.get('release_readiness_benchmark_requirement_status_change_count')))} exit max={_e(_fmt(run.get('release_readiness_benchmark_requirement_exit_code_delta_max')))}</span>"
+        f"<br><span>benchmark reasons +={_e(_fmt(run.get('release_readiness_benchmark_requirement_failed_reason_added_count')))} -={_e(_fmt(run.get('release_readiness_benchmark_requirement_failed_reason_removed_count')))}</span>"
     )
 
 

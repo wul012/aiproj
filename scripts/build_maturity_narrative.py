@@ -89,8 +89,16 @@ def main() -> None:
         f"{summary.get('release_readiness_benchmark_requirement_failed_reason_added_count')}"
     )
     print(
+        f"release_readiness_benchmark_requirement_failed_reason_removed_count="
+        f"{summary.get('release_readiness_benchmark_requirement_failed_reason_removed_count')}"
+    )
+    print(
         "release_readiness_benchmark_requirement_failed_reason_added="
         + json.dumps(summary.get("release_readiness_benchmark_requirement_failed_reason_added") or [], ensure_ascii=False)
+    )
+    print(
+        "release_readiness_benchmark_requirement_failed_reason_removed="
+        + json.dumps(summary.get("release_readiness_benchmark_requirement_failed_reason_removed") or [], ensure_ascii=False)
     )
     print(f"request_history_status={summary.get('request_history_status')}")
     print(f"benchmark_scorecards={summary.get('benchmark_scorecard_count')}")

@@ -256,6 +256,9 @@ def _summary(
         "release_readiness_benchmark_requirement_failed_reason_added": release_readiness_context.get(
             "benchmark_history_readiness_requirement_failed_reason_added"
         ),
+        "release_readiness_benchmark_requirement_failed_reason_removed": release_readiness_context.get(
+            "benchmark_history_readiness_requirement_failed_reason_removed"
+        ),
         "release_readiness_max_benchmark_history_case_regression_delta": release_readiness_context.get(
             "max_abs_benchmark_history_case_regression_delta"
         ),
@@ -345,6 +348,7 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_readiness_requirement_failed_reason_added_count": None,
             "benchmark_history_readiness_requirement_failed_reason_removed_count": None,
             "benchmark_history_readiness_requirement_failed_reason_added": [],
+            "benchmark_history_readiness_requirement_failed_reason_removed": [],
             "max_abs_benchmark_history_case_regression_delta": None,
             "max_abs_benchmark_history_generation_flag_regression_delta": None,
             "max_abs_benchmark_history_readiness_requirement_exit_code_delta": None,
@@ -385,6 +389,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         ),
         "benchmark_history_readiness_requirement_failed_reason_added": _string_list(
             delta_summary.get("benchmark_history_readiness_requirement_failed_reason_added")
+        ),
+        "benchmark_history_readiness_requirement_failed_reason_removed": _string_list(
+            delta_summary.get("benchmark_history_readiness_requirement_failed_reason_removed")
         ),
         "max_abs_benchmark_history_case_regression_delta": delta_summary.get("max_abs_benchmark_history_case_regression_delta"),
         "max_abs_benchmark_history_generation_flag_regression_delta": delta_summary.get(
