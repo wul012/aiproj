@@ -167,6 +167,9 @@ d/351/解释/说明.md
 d/352/图片
 d/352/解释/说明.md
  -> v352 dataset dedupe snapshots 的运行截图和解释
+d/353/图片
+d/353/解释/说明.md
+ -> v353 dataset version comparison 的运行截图和解释
 ```
 
 写入规则：
