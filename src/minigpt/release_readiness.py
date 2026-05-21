@@ -289,6 +289,14 @@ def _benchmark_history_panel(bundle: dict[str, Any], gate: dict[str, Any] | None
     status = first_present(check.get("status"), gate_summary.get("benchmark_history_status"), bundle_summary.get("benchmark_history_status"))
     if status is None:
         return _panel("benchmark_history", "Benchmark History", "warn", "benchmark history release evidence missing", None)
+    requirement_status = first_present(
+        gate_summary.get("benchmark_history_readiness_requirement_status"),
+        bundle_summary.get("benchmark_history_readiness_requirement_status"),
+    )
+    requirement_exit = first_present(
+        gate_summary.get("benchmark_history_readiness_requirement_exit_code"),
+        bundle_summary.get("benchmark_history_readiness_requirement_exit_code"),
+    )
     detail = (
         f"status={status}; entries={_fmt(first_present(gate_summary.get('benchmark_history_entries'), bundle_summary.get('benchmark_history_entries')))}; "
         f"ready={_fmt(first_present(gate_summary.get('benchmark_history_ready'), bundle_summary.get('benchmark_history_ready')))}; "
@@ -296,12 +304,22 @@ def _benchmark_history_panel(bundle: dict[str, Any], gate: dict[str, Any] | None
         f"blocked={_fmt(first_present(gate_summary.get('benchmark_history_blocked'), bundle_summary.get('benchmark_history_blocked')))}; "
         f"case_regressions={_fmt(first_present(gate_summary.get('benchmark_history_case_regressions'), bundle_summary.get('benchmark_history_case_regressions')))}; "
         f"generation_flag_regressions={_fmt(first_present(gate_summary.get('benchmark_history_generation_flag_regressions'), bundle_summary.get('benchmark_history_generation_flag_regressions')))}; "
+        f"readiness_requirement={_fmt(requirement_status)}; "
+        f"readiness_exit={_fmt(requirement_exit)}; "
+        "readiness_failed_reasons="
+        + _fmt_reasons(
+            first_present(
+                gate_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
+                bundle_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
+            )
+        )
+        + "; "
         f"model_quality_claim={_fmt(first_present(gate_summary.get('benchmark_history_model_quality_claim'), bundle_summary.get('benchmark_history_model_quality_claim')))}; "
         f"boundary={_fmt(first_present(gate_summary.get('benchmark_history_latest_boundary'), bundle_summary.get('benchmark_history_latest_boundary')))}"
     )
     if check:
         detail += f"; gate_check={check.get('status') or 'missing'}"
-    return _panel("benchmark_history", "Benchmark History", _status_from_check_status(str(status)), detail, None)
+    return _panel("benchmark_history", "Benchmark History", _benchmark_history_panel_status(status, requirement_status, requirement_exit), detail, None)
 
 
 def _maturity_panel(path: Path | None, maturity: dict[str, Any] | None) -> dict[str, Any]:
@@ -449,6 +467,18 @@ def _benchmark_history_summary(bundle_summary: dict[str, Any], gate_summary: dic
             gate_summary.get("benchmark_history_generation_flag_regressions"),
             bundle_summary.get("benchmark_history_generation_flag_regressions"),
         ),
+        "benchmark_history_readiness_requirement_status": first_present(
+            gate_summary.get("benchmark_history_readiness_requirement_status"),
+            bundle_summary.get("benchmark_history_readiness_requirement_status"),
+        ),
+        "benchmark_history_readiness_requirement_exit_code": first_present(
+            gate_summary.get("benchmark_history_readiness_requirement_exit_code"),
+            bundle_summary.get("benchmark_history_readiness_requirement_exit_code"),
+        ),
+        "benchmark_history_readiness_requirement_failed_reasons": first_present(
+            gate_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
+            bundle_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
+        ),
         "benchmark_history_model_quality_claim": first_present(
             gate_summary.get("benchmark_history_model_quality_claim"),
             bundle_summary.get("benchmark_history_model_quality_claim"),
@@ -491,6 +521,20 @@ def _status_from_check_status(value: str) -> str:
     if value == "fail" or value == "blocked":
         return "fail"
     return "warn"
+
+
+def _benchmark_history_panel_status(status: Any, requirement_status: Any, requirement_exit: Any) -> str:
+    if str(requirement_status or "") == "fail" or _int(requirement_exit) > 0:
+        return "warn"
+    return _status_from_check_status(str(status))
+
+
+def _int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
 
 def _resolve_optional_path(explicit: str | Path | None, hinted: Any, candidate: Path) -> Path | None:
     if explicit is not None:
@@ -541,6 +585,12 @@ def _fmt(value: Any) -> str:
     if isinstance(value, float):
         return f"{value:.5g}"
     return str(value)
+
+
+def _fmt_reasons(value: Any) -> str:
+    if not isinstance(value, list) or not value:
+        return "none"
+    return ",".join(str(item) for item in value if str(item).strip()) or "none"
 
 
 def _string_list(value: Any) -> list[str]:

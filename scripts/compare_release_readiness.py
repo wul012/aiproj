@@ -52,6 +52,13 @@ def main() -> None:
     print(f"test_coverage_regressions={summary.get('test_coverage_regression_count')}")
     print(f"benchmark_history_deltas={summary.get('benchmark_history_delta_count')}")
     print(f"benchmark_history_regressions={summary.get('benchmark_history_regression_count')}")
+    for row in report.get("rows", []):
+        if isinstance(row, dict):
+            print(
+                "benchmark_history_readiness_requirement="
+                + f"{row.get('release_name')}:{row.get('benchmark_history_readiness_requirement_status')}:"
+                + f"{row.get('benchmark_history_readiness_requirement_exit_code')}"
+            )
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 
 

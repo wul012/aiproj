@@ -46,6 +46,9 @@ def make_readiness(
     benchmark_history_blocked: int = 0,
     benchmark_history_case_regressions: int = 0,
     benchmark_history_generation_flag_regressions: int = 0,
+    benchmark_history_readiness_requirement_status: str = "pass",
+    benchmark_history_readiness_requirement_exit_code: int = 0,
+    benchmark_history_readiness_requirement_failed_reasons: list[str] | None = None,
     benchmark_history_model_quality_claim: str = "candidate_evidence",
     benchmark_history_latest_boundary: str = "standard-benchmark-candidate-evidence",
     fail_panels: int = 0,
@@ -90,6 +93,9 @@ def make_readiness(
             "benchmark_history_blocked": benchmark_history_blocked,
             "benchmark_history_case_regressions": benchmark_history_case_regressions,
             "benchmark_history_generation_flag_regressions": benchmark_history_generation_flag_regressions,
+            "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
+            "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
+            "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
             "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
             "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
             "maturity_status": "pass",
@@ -276,6 +282,37 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("Benchmark history status changed", delta["explanation"])
             self.assertIn("benchmark history regression", " ".join(report["recommendations"]))
 
+    def test_build_release_readiness_comparison_flags_benchmark_requirement_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(root, "baseline", status="ready", decision="ship", gate_status="pass")
+            current = make_readiness(
+                root,
+                "current",
+                status="review",
+                decision="review",
+                gate_status="warn",
+                benchmark_history_status="pass",
+                benchmark_history_ready=1,
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=["insufficient_ready_entries"],
+                warn_panels=1,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["benchmark_history_delta_count"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_regression_count"], 1)
+            self.assertEqual(report["rows"][1]["benchmark_history_status"], "pass")
+            self.assertEqual(report["rows"][1]["benchmark_history_readiness_requirement_status"], "fail")
+            delta = report["deltas"][0]
+            self.assertFalse(delta["benchmark_history_status_changed"])
+            self.assertTrue(delta["benchmark_history_readiness_requirement_status_changed"])
+            self.assertEqual(delta["benchmark_history_readiness_requirement_exit_code_delta"], 1)
+            self.assertIn("Benchmark history readiness requirement changed", delta["explanation"])
+            self.assertIn("benchmark history regression", " ".join(report["recommendations"]))
+
     def test_build_release_readiness_comparison_tracks_benchmark_history_improvement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -322,11 +359,13 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("ci_workflow_order_violation_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("test_coverage_percent", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("benchmark_history_readiness_requirement_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("changed_panels", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_failed_check_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("ci_workflow_order_violation_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("test_coverage_gap_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_case_regression_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
+            self.assertIn("benchmark_history_readiness_requirement_exit_code_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Readiness Matrix", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 
     def test_renderers_escape_release_text(self) -> None:

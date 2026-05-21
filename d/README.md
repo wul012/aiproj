@@ -215,6 +215,9 @@ d/367/解释/说明.md
 d/368/图片
 d/368/解释/说明.md
  -> v368 release gate benchmark readiness 的运行截图和解释
+d/369/图片
+d/369/解释/说明.md
+ -> v369 release readiness benchmark requirement 的运行截图和解释
 ```
 
 写入规则：

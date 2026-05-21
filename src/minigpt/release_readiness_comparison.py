@@ -116,6 +116,9 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "benchmark_history_blocked": summary.get("benchmark_history_blocked"),
         "benchmark_history_case_regressions": summary.get("benchmark_history_case_regressions"),
         "benchmark_history_generation_flag_regressions": summary.get("benchmark_history_generation_flag_regressions"),
+        "benchmark_history_readiness_requirement_status": summary.get("benchmark_history_readiness_requirement_status"),
+        "benchmark_history_readiness_requirement_exit_code": summary.get("benchmark_history_readiness_requirement_exit_code"),
+        "benchmark_history_readiness_requirement_failed_reasons": summary.get("benchmark_history_readiness_requirement_failed_reasons"),
         "benchmark_history_model_quality_claim": summary.get("benchmark_history_model_quality_claim"),
         "benchmark_history_latest_boundary": summary.get("benchmark_history_latest_boundary"),
         "maturity_status": summary.get("maturity_status"),
@@ -176,6 +179,20 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
             compared.get("benchmark_history_generation_flag_regressions"),
             baseline.get("benchmark_history_generation_flag_regressions"),
         ),
+        "benchmark_history_readiness_requirement_status_changed": compared.get("benchmark_history_readiness_requirement_status")
+        != baseline.get("benchmark_history_readiness_requirement_status"),
+        "baseline_benchmark_history_readiness_requirement_status": baseline.get("benchmark_history_readiness_requirement_status"),
+        "compared_benchmark_history_readiness_requirement_status": compared.get("benchmark_history_readiness_requirement_status"),
+        "benchmark_history_readiness_requirement_exit_code_delta": _number_delta(
+            compared.get("benchmark_history_readiness_requirement_exit_code"),
+            baseline.get("benchmark_history_readiness_requirement_exit_code"),
+        ),
+        "baseline_benchmark_history_readiness_requirement_failed_reasons": baseline.get(
+            "benchmark_history_readiness_requirement_failed_reasons"
+        ),
+        "compared_benchmark_history_readiness_requirement_failed_reasons": compared.get(
+            "benchmark_history_readiness_requirement_failed_reasons"
+        ),
         "benchmark_history_model_quality_claim_changed": compared.get("benchmark_history_model_quality_claim")
         != baseline.get("benchmark_history_model_quality_claim"),
         "benchmark_history_latest_boundary_changed": compared.get("benchmark_history_latest_boundary")
@@ -234,6 +251,17 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append(
             f"Benchmark history generation-flag regression delta is {delta.get('benchmark_history_generation_flag_regression_delta')}."
         )
+    if delta.get("benchmark_history_readiness_requirement_status_changed"):
+        parts.append(
+            "Benchmark history readiness requirement changed from "
+            f"{delta.get('baseline_benchmark_history_readiness_requirement_status')} to "
+            f"{delta.get('compared_benchmark_history_readiness_requirement_status')}."
+        )
+    if delta.get("benchmark_history_readiness_requirement_exit_code_delta") not in {None, 0, 0.0}:
+        parts.append(
+            "Benchmark history readiness requirement exit-code delta is "
+            f"{delta.get('benchmark_history_readiness_requirement_exit_code_delta')}."
+        )
     if delta.get("benchmark_history_latest_boundary_changed"):
         parts.append(
             f"Benchmark history boundary changed from {delta.get('baseline_benchmark_history_boundary')} to {delta.get('compared_benchmark_history_boundary')}."
@@ -275,7 +303,9 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
     if int(summary.get("test_coverage_regression_count") or 0):
         return ["At least one readiness comparison shows test coverage regression; inspect coverage percent and gap deltas before release handoff."]
     if int(summary.get("benchmark_history_regression_count") or 0):
-        return ["At least one readiness comparison shows benchmark history regression; inspect benchmark status, case-regression, and boundary deltas before release handoff."]
+        return [
+            "At least one readiness comparison shows benchmark history regression; inspect benchmark status, readiness requirement, case-regression, and boundary deltas before release handoff."
+        ]
     if int(summary.get("ci_workflow_regression_count") or 0):
         return ["At least one readiness comparison shows CI workflow hygiene regression; inspect CI failed-check and order-violation deltas before release handoff."]
     if int(summary.get("regressed_count") or 0):
@@ -338,6 +368,8 @@ def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
         return True
     if delta.get("benchmark_history_model_quality_claim_changed") or delta.get("benchmark_history_latest_boundary_changed"):
         return True
+    if delta.get("benchmark_history_readiness_requirement_status_changed"):
+        return True
     keys = [
         "benchmark_history_entry_delta",
         "benchmark_history_ready_delta",
@@ -345,6 +377,7 @@ def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
         "benchmark_history_blocked_delta",
         "benchmark_history_case_regression_delta",
         "benchmark_history_generation_flag_regression_delta",
+        "benchmark_history_readiness_requirement_exit_code_delta",
     ]
     return any(delta.get(key) not in {None, 0, 0.0} for key in keys)
 
@@ -352,15 +385,25 @@ def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
 def _is_benchmark_history_regression(delta: dict[str, Any]) -> bool:
     if int(delta.get("benchmark_history_status_delta") or 0) < 0:
         return True
+    if delta.get("compared_benchmark_history_readiness_requirement_status") == "fail":
+        return True
+    compared_requirement_exit = delta.get("benchmark_history_readiness_requirement_exit_code_delta")
+    if isinstance(compared_requirement_exit, (int, float)) and compared_requirement_exit > 0:
+        return True
     for key in [
         "benchmark_history_review_delta",
         "benchmark_history_blocked_delta",
         "benchmark_history_case_regression_delta",
         "benchmark_history_generation_flag_regression_delta",
+        "benchmark_history_readiness_requirement_exit_code_delta",
     ]:
         value = delta.get(key)
         if isinstance(value, (int, float)) and value > 0:
             return True
+    if delta.get("benchmark_history_readiness_requirement_status_changed"):
+        return _requirement_status_score(delta.get("compared_benchmark_history_readiness_requirement_status")) < _requirement_status_score(
+            delta.get("baseline_benchmark_history_readiness_requirement_status")
+        )
     ready_delta = delta.get("benchmark_history_ready_delta")
     return isinstance(ready_delta, (int, float)) and ready_delta < 0
 
@@ -375,6 +418,10 @@ def _coverage_status_score(value: Any) -> int:
 
 def _benchmark_history_status_score(value: Any) -> int:
     return BENCHMARK_HISTORY_STATUS_ORDER.get(str(value or "missing"), 0)
+
+
+def _requirement_status_score(value: Any) -> int:
+    return {"pass": 2, "warn": 1, "review": 1, "fail": 0, "missing": 0}.get(str(value or "missing"), 0)
 
 
 def _max_abs_delta(deltas: list[dict[str, Any]], key: str) -> float | int | None:

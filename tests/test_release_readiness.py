@@ -35,6 +35,9 @@ def make_readiness_inputs(
     benchmark_history_review: int = 0,
     benchmark_history_blocked: int = 0,
     benchmark_history_case_regressions: int = 0,
+    benchmark_history_readiness_requirement_status: str = "pass",
+    benchmark_history_readiness_requirement_exit_code: int = 0,
+    benchmark_history_readiness_requirement_failed_reasons: list[str] | None = None,
     benchmark_history_model_quality_claim: str = "candidate_evidence",
     benchmark_history_latest_boundary: str = "standard-benchmark-candidate-evidence",
     include_request_history: bool = True,
@@ -123,6 +126,9 @@ def make_readiness_inputs(
                 "benchmark_history_blocked": benchmark_history_blocked,
                 "benchmark_history_case_regressions": benchmark_history_case_regressions,
                 "benchmark_history_generation_flag_regressions": 0,
+                "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
+                "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
+                "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
                 "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
                 "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
@@ -227,6 +233,9 @@ def make_readiness_inputs(
                     "benchmark_history_blocked": benchmark_history_blocked,
                     "benchmark_history_case_regressions": benchmark_history_case_regressions,
                     "benchmark_history_generation_flag_regressions": 0,
+                    "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
+                    "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
+                    "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
                     "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
                     "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
                 },
@@ -243,7 +252,13 @@ def make_readiness_inputs(
                         "id": "benchmark_history_gate_check",
                         "status": benchmark_history_status,
                         "title": "Benchmark history release evidence passed",
-                        "detail": f"benchmark_history={benchmark_history_status}; case_regressions={benchmark_history_case_regressions}; latest_boundary={benchmark_history_latest_boundary}.",
+                        "detail": (
+                            f"benchmark_history={benchmark_history_status}; "
+                            f"case_regressions={benchmark_history_case_regressions}; "
+                            f"readiness_requirement={benchmark_history_readiness_requirement_status}; "
+                            f"readiness_exit={benchmark_history_readiness_requirement_exit_code}; "
+                            f"latest_boundary={benchmark_history_latest_boundary}."
+                        ),
                     },
                 ],
             },
@@ -277,6 +292,9 @@ def make_readiness_inputs(
                 "benchmark_history_blocked": benchmark_history_blocked,
                 "benchmark_history_case_regressions": benchmark_history_case_regressions,
                 "benchmark_history_generation_flag_regressions": 0,
+                "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
+                "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
+                "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
                 "benchmark_history_model_quality_claim": benchmark_history_model_quality_claim,
                 "benchmark_history_latest_boundary": benchmark_history_latest_boundary,
                 "ci_workflow_status": ci_workflow_status if include_ci_workflow else None,
@@ -341,6 +359,8 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual(report["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(report["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_status"], "pass")
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
             self.assertIn("ci_workflow_hygiene", {panel["key"] for panel in report["panels"]})
             self.assertIn("test_coverage", {panel["key"] for panel in report["panels"]})
@@ -404,6 +424,34 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertIn("case_regressions=1", panel["detail"])
             self.assertIn("gate_check=warn", panel["detail"])
             self.assertIn("Gate warn: benchmark_history_gate_check", " ".join(report["actions"]))
+
+    def test_build_release_readiness_reviews_benchmark_requirement_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_readiness_inputs(
+                Path(tmp),
+                gate_status="warn",
+                gate_decision="needs-review",
+                benchmark_history_status="pass",
+                benchmark_history_ready=1,
+                benchmark_history_readiness_requirement_status="fail",
+                benchmark_history_readiness_requirement_exit_code=1,
+                benchmark_history_readiness_requirement_failed_reasons=["insufficient_ready_entries"],
+            )
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "review")
+            self.assertEqual(report["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_status"], "fail")
+            self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_exit_code"], 1)
+            self.assertEqual(
+                report["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["insufficient_ready_entries"],
+            )
+            panel = next(panel for panel in report["panels"] if panel["key"] == "benchmark_history")
+            self.assertEqual(panel["status"], "warn")
+            self.assertIn("readiness_requirement=fail", panel["detail"])
+            self.assertIn("readiness_failed_reasons=insufficient_ready_entries", panel["detail"])
 
     def test_build_release_readiness_uses_bundle_benchmark_history_when_gate_summary_missing(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
