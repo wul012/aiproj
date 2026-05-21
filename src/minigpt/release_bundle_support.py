@@ -236,6 +236,10 @@ def _build_summary(
         "ci_workflow_node24_actions": audit_summary.get("ci_workflow_node24_actions") if audit_summary.get("ci_workflow_node24_actions") is not None else ci_summary.get("node24_native_action_count"),
         "ci_workflow_required_order_count": first_present(ci_summary.get("required_order_count"), audit_ci_context.get("required_order_count")),
         "ci_workflow_order_violation_count": first_present(ci_summary.get("order_violation_count"), audit_ci_context.get("order_violation_count")),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready": first_present(
+            ci_summary.get("release_readiness_drift_contract_smoke_ready"),
+            audit_ci_context.get("release_readiness_drift_contract_smoke_ready"),
+        ),
         "test_coverage_status": audit_summary.get("test_coverage_status") or coverage_summary.get("status"),
         "test_coverage_decision": audit_summary.get("test_coverage_decision") or coverage_summary.get("decision"),
         "test_coverage_percent": audit_summary.get("test_coverage_percent") if audit_summary.get("test_coverage_percent") is not None else coverage_summary.get("line_coverage_percent"),
@@ -418,4 +422,3 @@ def _artifact(key: str, title: str, path: Path, kind: str, description: str) -> 
         "exists": exists,
         "size_bytes": path.stat().st_size if exists and path.is_file() else None,
     }
-

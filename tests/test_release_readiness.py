@@ -136,6 +136,7 @@ def make_readiness_inputs(
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
                 "ci_workflow_required_order_count": 1 if include_ci_workflow else None,
                 "ci_workflow_order_violation_count": (0 if ci_workflow_status == "pass" else 1) if include_ci_workflow else None,
+                "ci_workflow_release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "test_coverage_status": test_coverage_status if include_test_coverage else None,
                 "test_coverage_percent": 90.17 if include_test_coverage else None,
                 "test_coverage_fail_under": 80.0 if include_test_coverage else None,
@@ -182,6 +183,9 @@ def make_readiness_inputs(
                     "node24_native_action_count": 2,
                     "required_order_count": 1,
                     "order_violation_count": 0 if ci_workflow_status == "pass" else 1,
+                    "release_readiness_drift_contract_smoke_present": ci_workflow_status == "pass",
+                    "release_readiness_drift_contract_smoke_order_ready": ci_workflow_status == "pass",
+                    "release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass",
                     "legacy_node_actions": 0 if ci_workflow_status == "pass" else 1,
                 },
                 "checks": [
@@ -302,6 +306,7 @@ def make_readiness_inputs(
                 "ci_workflow_node24_actions": 2 if include_ci_workflow else None,
                 "ci_workflow_required_order_count": 1 if include_ci_workflow else None,
                 "ci_workflow_order_violation_count": (0 if ci_workflow_status == "pass" else 1) if include_ci_workflow else None,
+                "ci_workflow_release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "test_coverage_status": test_coverage_status if include_test_coverage else None,
                 "test_coverage_percent": 90.17 if include_test_coverage else None,
                 "test_coverage_fail_under": 80.0 if include_test_coverage else None,
@@ -323,6 +328,7 @@ def make_readiness_inputs(
                 "node24_native_action_count": 2 if include_ci_workflow else None,
                 "required_order_count": 1 if include_ci_workflow else None,
                 "order_violation_count": (0 if ci_workflow_status == "pass" else 1) if include_ci_workflow else None,
+                "release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "path": str(ci_workflow_path) if include_ci_workflow else None,
             },
             "test_coverage_context": {
@@ -355,6 +361,7 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
             self.assertEqual(report["summary"]["ci_workflow_required_order_count"], 1)
             self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 0)
+            self.assertTrue(report["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(report["summary"]["test_coverage_status"], "pass")
             self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual(report["summary"]["benchmark_history_status"], "pass")
@@ -363,6 +370,8 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
             self.assertIn("ci_workflow_hygiene", {panel["key"] for panel in report["panels"]})
+            ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
+            self.assertIn("drift_contract_smoke_ready=True", ci_panel["detail"])
             self.assertIn("test_coverage", {panel["key"] for panel in report["panels"]})
             self.assertIn("benchmark_history", {panel["key"] for panel in report["panels"]})
             self.assertIn("All readiness panels are clean", " ".join(report["actions"]))
@@ -379,9 +388,11 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
             self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 0)
+            self.assertTrue(report["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
             self.assertEqual(ci_panel["status"], "pass")
             self.assertIn("order_violations=0", ci_panel["detail"])
+            self.assertIn("drift_contract_smoke_ready=True", ci_panel["detail"])
             self.assertIn("source=bundle summary/context", ci_panel["detail"])
 
     def test_build_release_readiness_uses_bundle_coverage_context_when_report_missing(self) -> None:

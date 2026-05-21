@@ -96,6 +96,9 @@ class CiWorkflowSummary(TypedDict):
     tiny_scorecard_plan_digest_gate_present: bool
     tiny_scorecard_plan_digest_gate_order_ready: bool
     tiny_scorecard_plan_digest_gate_ready: bool
+    release_readiness_drift_contract_smoke_present: bool
+    release_readiness_drift_contract_smoke_order_ready: bool
+    release_readiness_drift_contract_smoke_ready: bool
     python_version: str
 
 
@@ -134,6 +137,8 @@ def build_ci_workflow_hygiene_report(
         checks,
         "order:ci_tiny_scorecard_plan_check_before_coverage",
     )
+    drift_contract_smoke_present = _check_passed(checks, "command:release_readiness_drift_contract_smoke")
+    drift_contract_smoke_order_ready = _check_passed(checks, "order:release_readiness_drift_contract_smoke_before_coverage")
     summary: CiWorkflowSummary = {
         "status": "pass" if not failed_checks else "fail",
         "decision": "continue_with_node24_native_ci" if not failed_checks else "fix_ci_workflow_hygiene",
@@ -152,6 +157,9 @@ def build_ci_workflow_hygiene_report(
         "tiny_scorecard_plan_digest_gate_present": plan_digest_gate_present,
         "tiny_scorecard_plan_digest_gate_order_ready": plan_digest_gate_order_ready,
         "tiny_scorecard_plan_digest_gate_ready": plan_digest_gate_present and plan_digest_gate_order_ready,
+        "release_readiness_drift_contract_smoke_present": drift_contract_smoke_present,
+        "release_readiness_drift_contract_smoke_order_ready": drift_contract_smoke_order_ready,
+        "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_present and drift_contract_smoke_order_ready,
         "python_version": _python_version(text),
     }
     return {

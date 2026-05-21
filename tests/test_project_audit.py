@@ -179,6 +179,9 @@ def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
         "tiny_scorecard_plan_digest_gate_present": status == "pass",
         "tiny_scorecard_plan_digest_gate_order_ready": status == "pass",
         "tiny_scorecard_plan_digest_gate_ready": status == "pass",
+        "release_readiness_drift_contract_smoke_present": status == "pass",
+        "release_readiness_drift_contract_smoke_order_ready": status == "pass",
+        "release_readiness_drift_contract_smoke_ready": status == "pass",
         "python_version": "3.11",
     }
     report = {
@@ -252,6 +255,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(audit["summary"]["ci_workflow_failed_checks"], 0)
             self.assertTrue(audit["summary"]["ci_tiny_scorecard_plan_digest_gate_ready"])
+            self.assertTrue(audit["summary"]["ci_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["summary"]["test_coverage_status"], "pass")
             self.assertEqual(audit["summary"]["test_coverage_percent"], 90.16)
             self.assertEqual(audit["summary"]["test_coverage_fail_under"], 80.0)
@@ -259,6 +263,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["benchmark_history_context"]["best_candidate_name"], "candidate")
             self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
             self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
+            self.assertTrue(audit["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
             self.assertIn("benchmark_history", {check["id"] for check in audit["checks"]})
@@ -540,6 +545,7 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["order_violation_count"], 1)
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["tiny_scorecard_plan_digest_gate_ready"])
+        self.assertFalse(build_ci_workflow_context(ci_hygiene)["release_readiness_drift_contract_smoke_ready"])
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
         self.assertFalse(build_ci_workflow_context(None)["available"])
 

@@ -50,6 +50,9 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "tiny_scorecard_plan_digest_gate_present",
         "tiny_scorecard_plan_digest_gate_order_ready",
         "tiny_scorecard_plan_digest_gate_ready",
+        "release_readiness_drift_contract_smoke_present",
+        "release_readiness_drift_contract_smoke_order_ready",
+        "release_readiness_drift_contract_smoke_ready",
         "python_version",
     ]:
         lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
@@ -98,6 +101,7 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Forbidden env", summary.get("forbidden_env_count")),
         ("Order violations", summary.get("order_violation_count")),
         ("Plan digest gate", summary.get("tiny_scorecard_plan_digest_gate_ready")),
+        ("Drift smoke gate", summary.get("release_readiness_drift_contract_smoke_ready")),
         ("Python", summary.get("python_version")),
     ]
     return "\n".join(

@@ -109,11 +109,26 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
             "missing_step_count": summary.get("missing_step_count"),
             "required_order_count": summary.get("required_order_count"),
             "order_violation_count": summary.get("order_violation_count"),
+            "release_readiness_drift_contract_smoke_present": summary.get("release_readiness_drift_contract_smoke_present")
+            or audit_context.get("release_readiness_drift_contract_smoke_present"),
+            "release_readiness_drift_contract_smoke_order_ready": summary.get("release_readiness_drift_contract_smoke_order_ready")
+            or audit_context.get("release_readiness_drift_contract_smoke_order_ready"),
+            "release_readiness_drift_contract_smoke_ready": summary.get("release_readiness_drift_contract_smoke_ready")
+            or audit_context.get("release_readiness_drift_contract_smoke_ready"),
             "python_version": summary.get("python_version"),
         }
     if audit_context:
         return dict(audit_context)
-    return {"available": False, "status": None, "failed_check_count": None, "required_order_count": None, "order_violation_count": None}
+    return {
+        "available": False,
+        "status": None,
+        "failed_check_count": None,
+        "required_order_count": None,
+        "order_violation_count": None,
+        "release_readiness_drift_contract_smoke_present": None,
+        "release_readiness_drift_contract_smoke_order_ready": None,
+        "release_readiness_drift_contract_smoke_ready": None,
+    }
 
 
 def _test_coverage_context(test_coverage_report: dict[str, Any] | None, audit: dict[str, Any] | None) -> dict[str, Any]:

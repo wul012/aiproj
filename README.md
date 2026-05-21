@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 378 promotes the release readiness drift contract into CI by adding a stable mixed-drift smoke fixture, GitHub Actions step, and CI workflow hygiene guard.
+Version 379 exposes release readiness drift-contract smoke readiness as first-class CI, audit, release bundle, and release readiness evidence instead of leaving it buried inside CI workflow checks.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -695,6 +695,15 @@ Version 378 promotes the release readiness drift contract into CI by adding a st
 - Smoke and CI-workflow tests cover summary/check sidecar output, mixed-drift count propagation, required command presence, and order protection.
 - Archived release readiness drift contract CI smoke evidence in `d/378`.
 
+## Latest v379 checkpoint
+
+- CI workflow hygiene summaries now expose `release_readiness_drift_contract_smoke_present`, `release_readiness_drift_contract_smoke_order_ready`, and `release_readiness_drift_contract_smoke_ready`.
+- `scripts/check_ci_workflow_hygiene.py` prints the drift-contract smoke readiness fields for shell and CI log readers.
+- Project audit checks, audit context, and audit summary now carry the drift-contract smoke readiness signal.
+- Release bundle and release readiness summaries/contexts preserve the same signal, including bundle-context fallback when the CI workflow report is not passed directly.
+- Targeted tests cover CI hygiene artifacts, project audit context, release bundle propagation, and release readiness panels.
+- Archived release readiness drift smoke readiness evidence in `d/379`.
+
 ## Latest v370 checkpoint
 
 - Registry run rows now expose benchmark readiness requirement status-change count and max exit-code delta from release readiness comparison deltas.
@@ -1254,6 +1263,7 @@ v375.0.0 MiniGPT v375 benchmark reason recovery signal
 v376.0.0 MiniGPT v376 benchmark reason mixed drift
 v377.0.0 MiniGPT v377 release readiness drift contract
 v378.0.0 MiniGPT v378 release readiness drift contract CI smoke
+v379.0.0 MiniGPT v379 release readiness drift smoke readiness
 ```
 
 ## Project structure

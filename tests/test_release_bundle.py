@@ -93,6 +93,7 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "ci_workflow_node24_actions": 2,
             "ci_workflow_required_order_count": 1,
             "ci_workflow_order_violation_count": 0,
+            "ci_release_readiness_drift_contract_smoke_ready": True,
             "test_coverage_status": "pass",
             "test_coverage_decision": "continue_with_coverage_gate",
             "test_coverage_percent": 90.17,
@@ -112,6 +113,9 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "missing_step_count": 0,
             "required_order_count": 1,
             "order_violation_count": 0,
+            "release_readiness_drift_contract_smoke_present": True,
+            "release_readiness_drift_contract_smoke_order_ready": True,
+            "release_readiness_drift_contract_smoke_ready": True,
             "python_version": "3.11",
         },
         "benchmark_history_context": {
@@ -236,6 +240,9 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "missing_step_count": 0,
             "required_order_count": 1,
             "order_violation_count": 0,
+            "release_readiness_drift_contract_smoke_present": True,
+            "release_readiness_drift_contract_smoke_order_ready": True,
+            "release_readiness_drift_contract_smoke_ready": True,
             "python_version": "3.11",
         },
     }
@@ -317,6 +324,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["ci_workflow_failed_checks"], 0)
             self.assertEqual(bundle["summary"]["ci_workflow_required_order_count"], 1)
             self.assertEqual(bundle["summary"]["ci_workflow_order_violation_count"], 0)
+            self.assertTrue(bundle["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["summary"]["test_coverage_status"], "pass")
             self.assertEqual(bundle["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual(bundle["summary"]["test_coverage_fail_under"], 80.0)
@@ -327,6 +335,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("ci_workflow_hygiene_json", {item["key"] for item in bundle["artifacts"]})
             self.assertIn("test_coverage_report_json", {item["key"] for item in bundle["artifacts"]})
             self.assertEqual(bundle["ci_workflow_context"]["status"], "pass")
+            self.assertTrue(bundle["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["benchmark_history_context"]["latest_decision_status"], "promote")
             self.assertEqual(bundle["benchmark_history_context"]["readiness_requirement_status"], "pass")
             self.assertEqual(bundle["ci_workflow_context"]["order_violation_count"], 0)

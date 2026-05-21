@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v379 release readiness drift smoke readiness evidence</title>
+  <style>
+    :root { --ink:#17202a; --muted:#5c6776; --line:#d5dde7; --page:#f6f7f3; --panel:#fff; --green:#047857; --blue:#1f5f74; --amber:#a16207; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+    header { padding:30px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0 0 10px; color:var(--muted); }
+    main { padding:20px 34px 36px; }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:12px; margin-bottom:16px; }
+    .card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .card { padding:14px; min-height:88px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+    .panel { padding:18px; margin:16px 0; overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:850px; }
+    th, td { border-bottom:1px solid var(--line); padding:10px; text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f5; border:1px solid #d8e0e8; border-radius:6px; padding:2px 5px; }
+    .pill { display:inline-block; border-radius:999px; padding:4px 9px; font-weight:700; font-size:12px; }
+    .pass { background:#dcfce7; color:var(--green); }
+    .signal { background:#dbeafe; color:var(--blue); }
+    .watch { background:#fef3c7; color:var(--amber); }
+    footer { color:var(--muted); padding:0 34px 24px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v379 release readiness drift smoke readiness evidence</h1>
+    <p>v379 promotes the drift-contract smoke result into first-class CI, audit, release bundle, and release readiness evidence fields.</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="card"><div class="label">CI summary</div><div class="value"><span class="pill pass">ready</span></div></div>
+      <div class="card"><div class="label">Audit context</div><div class="value"><span class="pill signal">visible</span></div></div>
+      <div class="card"><div class="label">Bundle summary</div><div class="value"><span class="pill signal">preserved</span></div></div>
+      <div class="card"><div class="label">Readiness panel</div><div class="value"><span class="pill watch">shown</span></div></div>
+    </section>
+    <section class="panel">
+      <h2>Readiness Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>Field</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CI workflow hygiene</td><td><code>release_readiness_drift_contract_smoke_ready</code></td><td>Command exists and appears before coverage.</td></tr>
+          <tr><td>Project audit summary</td><td><code>ci_release_readiness_drift_contract_smoke_ready</code></td><td>Audit can read the CI smoke gate without parsing checks.</td></tr>
+          <tr><td>Release bundle summary</td><td><code>ci_workflow_release_readiness_drift_contract_smoke_ready</code></td><td>Bundle preserves the signal for release handoff.</td></tr>
+          <tr><td>Release readiness summary</td><td><code>ci_workflow_release_readiness_drift_contract_smoke_ready</code></td><td>Readiness dashboard exposes whether the drift-contract CI smoke is ready.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Why This Matters</h2>
+      <table>
+        <thead>
+          <tr><th>Before v379</th><th>After v379</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Reviewer could see a CI command exists only by scanning CI checks.</td><td>Reviewer reads a stable ready boolean in summary/context outputs.</td></tr>
+          <tr><td>Release bundle could lose the signal if direct CI workflow JSON was not passed later.</td><td>Bundle summary and context preserve the ready state for fallback consumption.</td></tr>
+          <tr><td>Readiness panel showed order violations but not the specific drift-contract smoke readiness.</td><td>CI Workflow Hygiene panel now includes <code>drift_contract_smoke_ready=True</code>.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>python -m pytest tests/test_ci_workflow.py tests/test_project_audit.py tests/test_release_bundle.py tests/test_release_readiness.py -q</code></p>
+      <p><span class="pill pass">41 passed</span></p>
+    </section>
+  </main>
+  <footer>Generated for d/379 evidence. This is governance-readiness evidence, not model-quality proof.</footer>
+</body>
+</html>

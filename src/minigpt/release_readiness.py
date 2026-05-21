@@ -170,6 +170,11 @@ def _summary(
             bundle_summary.get("ci_workflow_order_violation_count"),
             ci_context.get("order_violation_count"),
         ),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready": first_present(
+            ci_summary.get("release_readiness_drift_contract_smoke_ready"),
+            bundle_summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready"),
+            ci_context.get("release_readiness_drift_contract_smoke_ready"),
+        ),
         "test_coverage_status": coverage_summary.get("status") or bundle_summary.get("test_coverage_status") or coverage_context.get("status"),
         "test_coverage_percent": first_present(
             coverage_summary.get("line_coverage_percent"),
@@ -347,7 +352,8 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             "status="
             + ci_status
             + f"; failed_checks={_fmt(summary.get('failed_check_count'))}; node24_native={_fmt(first_present(summary.get('node24_native_actions'), summary.get('node24_native_action_count')))}"
-            + f"; required_order={_fmt(summary.get('required_order_count'))}; order_violations={_fmt(summary.get('order_violation_count'))}",
+            + f"; required_order={_fmt(summary.get('required_order_count'))}; order_violations={_fmt(summary.get('order_violation_count'))}"
+            + f"; drift_contract_smoke_ready={_fmt(summary.get('release_readiness_drift_contract_smoke_ready'))}",
             path,
         )
     bundle_summary = _dict(bundle.get("summary"))
@@ -374,6 +380,13 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             + _fmt(first_present(bundle_summary.get("ci_workflow_required_order_count"), bundle_context.get("required_order_count")))
             + "; order_violations="
             + _fmt(first_present(bundle_summary.get("ci_workflow_order_violation_count"), bundle_context.get("order_violation_count")))
+            + "; drift_contract_smoke_ready="
+            + _fmt(
+                first_present(
+                    bundle_summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready"),
+                    bundle_context.get("release_readiness_drift_contract_smoke_ready"),
+                )
+            )
             + "; source=bundle summary/context",
             path,
         )
