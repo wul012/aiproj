@@ -55,6 +55,13 @@ def main() -> None:
         + json.dumps(registry.get("release_readiness_delta_summary", {}).get("ci_workflow_order_regression_count", 0), ensure_ascii=False)
     )
     print(
+        "release_readiness_ci_regression_reason_counts="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get("ci_workflow_regression_reason_counts", {}),
+            ensure_ascii=False,
+        )
+    )
+    print(
         "release_readiness_benchmark_history_regressions="
         + json.dumps(registry.get("release_readiness_delta_summary", {}).get("benchmark_history_regression_count", 0), ensure_ascii=False)
     )

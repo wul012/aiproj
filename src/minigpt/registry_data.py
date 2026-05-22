@@ -134,6 +134,7 @@ class RegisteredRun:
     release_readiness_changed_panel_delta_count: int | None
     release_readiness_ci_workflow_regression_count: int | None
     release_readiness_ci_workflow_order_regression_count: int | None
+    release_readiness_ci_workflow_regression_reasons: list[str]
     release_readiness_test_coverage_regression_count: int | None
     release_readiness_benchmark_history_delta_count: int | None
     release_readiness_benchmark_history_regression_count: int | None
@@ -258,6 +259,7 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         release_readiness_changed_panel_delta_count=_as_int(_pick(release_readiness_summary, "changed_panel_delta_count")),
         release_readiness_ci_workflow_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_regression_count")),
         release_readiness_ci_workflow_order_regression_count=_as_int(_pick(release_readiness_summary, "ci_workflow_order_regression_count")),
+        release_readiness_ci_workflow_regression_reasons=_as_str_list(_pick(release_readiness_summary, "ci_workflow_regression_reasons")),
         release_readiness_test_coverage_regression_count=_as_int(_pick(release_readiness_summary, "test_coverage_regression_count")),
         release_readiness_benchmark_history_delta_count=_as_int(_pick(release_readiness_summary, "benchmark_history_delta_count")),
         release_readiness_benchmark_history_regression_count=_as_int(_pick(release_readiness_summary, "benchmark_history_regression_count")),

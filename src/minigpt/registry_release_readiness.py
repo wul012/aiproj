@@ -30,6 +30,7 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                 added_failed_reasons,
                 removed_failed_reasons,
             )
+            ci_regression_reasons = _ci_workflow_regression_reasons(delta)
             rows.append(
                 {
                     "run_name": run_name,
@@ -46,6 +47,7 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     "ci_workflow_required_order_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_required_order_delta"))),
                     "ci_workflow_order_violation_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_order_violation_delta"))),
                     "ci_workflow_status_changed": bool(delta.get("ci_workflow_status_changed")),
+                    "ci_workflow_regression_reasons": ci_regression_reasons,
                     "baseline_test_coverage_status": _as_str(delta.get("baseline_test_coverage_status")),
                     "compared_test_coverage_status": _as_str(delta.get("compared_test_coverage_status")),
                     "test_coverage_percent_delta": _int_if_whole(_as_optional_float(delta.get("test_coverage_percent_delta"))),
@@ -112,6 +114,7 @@ def release_readiness_delta_leaderboard(rows: list[dict[str, Any]], limit: int =
         key=lambda item: (
             _release_readiness_delta_priority(item),
             -int(bool(item.get("ci_workflow_status_changed"))),
+            -int(bool(item.get("ci_workflow_regression_reasons"))),
             -abs(_as_optional_float(item.get("ci_workflow_failed_check_delta")) or 0.0),
             -abs(_as_optional_float(item.get("ci_workflow_order_violation_delta")) or 0.0),
             -abs(_as_optional_float(item.get("test_coverage_gap_delta")) or 0.0),
@@ -182,6 +185,12 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         "ci_workflow_regression_count": sum(1 for row in rows if _is_ci_workflow_regression_row(row)),
         "ci_workflow_order_regression_count": sum(1 for row in rows if _is_ci_workflow_order_regression_row(row)),
         "ci_workflow_status_changed_count": sum(1 for row in rows if bool(row.get("ci_workflow_status_changed"))),
+        "ci_workflow_regression_reasons": _unique_strings(
+            reason for row in rows for reason in _as_str_list(row.get("ci_workflow_regression_reasons"))
+        ),
+        "ci_workflow_regression_reason_counts": _counts(
+            reason for row in rows for reason in _as_str_list(row.get("ci_workflow_regression_reasons"))
+        ),
         "max_abs_ci_workflow_failed_check_delta": _int_if_whole(max(ci_failed_deltas)) if ci_failed_deltas else None,
         "max_abs_ci_workflow_order_violation_delta": _int_if_whole(max(ci_order_deltas)) if ci_order_deltas else None,
         "test_coverage_regression_count": sum(1 for row in rows if _is_test_coverage_regression_row(row)),
@@ -244,6 +253,8 @@ def _release_readiness_delta_priority(row: dict[str, Any]) -> int:
 
 
 def _is_ci_workflow_regression_row(row: dict[str, Any]) -> bool:
+    if _as_str_list(row.get("ci_workflow_regression_reasons")):
+        return True
     failed_delta = _as_optional_float(row.get("ci_workflow_failed_check_delta"))
     if failed_delta is not None and failed_delta > 0:
         return True
@@ -252,6 +263,25 @@ def _is_ci_workflow_regression_row(row: dict[str, Any]) -> bool:
     if not row.get("ci_workflow_status_changed"):
         return False
     return _ci_status_score(row.get("compared_ci_workflow_status")) < _ci_status_score(row.get("baseline_ci_workflow_status"))
+
+
+def _ci_workflow_regression_reasons(delta: dict[str, Any]) -> list[str]:
+    direct = _as_str_list(delta.get("ci_workflow_regression_reasons"))
+    if direct:
+        return direct
+    reasons: list[str] = []
+    failed_delta = _as_optional_float(delta.get("ci_workflow_failed_check_delta"))
+    if failed_delta is not None and failed_delta > 0:
+        reasons.append("failed_checks_increased")
+    order_delta = _as_optional_float(delta.get("ci_workflow_order_violation_delta"))
+    if order_delta is not None and order_delta > 0:
+        reasons.append("order_violations_increased")
+    if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
+        reasons.append("drift_contract_smoke_not_ready")
+    if delta.get("ci_workflow_status_changed"):
+        if _ci_status_score(delta.get("compared_ci_workflow_status")) < _ci_status_score(delta.get("baseline_ci_workflow_status")):
+            reasons.append("workflow_status_downgraded")
+    return reasons
 
 
 def _is_ci_workflow_order_regression_row(row: dict[str, Any]) -> bool:

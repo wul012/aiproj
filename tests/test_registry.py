@@ -24,6 +24,7 @@ def make_run(
     readiness_trend: str | None = None,
     readiness_ci_regression: bool = False,
     readiness_ci_order_regression: bool = False,
+    readiness_ci_regression_reasons: list[str] | None = None,
     readiness_coverage_regression: bool = False,
     readiness_benchmark_regression: bool = False,
     rubric_score: float | None = 92.0,
@@ -205,6 +206,9 @@ def make_run(
             changed_panels = ["release_gate:fail->pass"]
         ci_regression_count = 1 if readiness_ci_regression else 0
         ci_order_regression_count = 1 if readiness_ci_order_regression else 0
+        ci_regression_reasons = readiness_ci_regression_reasons or (
+            ["failed_checks_increased", "workflow_status_downgraded"] if readiness_ci_regression else []
+        )
         baseline_ci_status = "pass"
         compared_ci_status = "fail" if readiness_ci_regression else "pass"
         ci_failed_delta = 2 if readiness_ci_regression else 0
@@ -249,6 +253,8 @@ def make_run(
                 "changed_panel_delta_count": 1 if changed_panels else 0,
                 "ci_workflow_regression_count": ci_regression_count,
                 "ci_workflow_order_regression_count": ci_order_regression_count,
+                "ci_workflow_regression_reasons": ci_regression_reasons,
+                "ci_workflow_regression_reason_counts": {reason: ci_regression_reasons.count(reason) for reason in ci_regression_reasons},
                 "test_coverage_regression_count": coverage_regression_count,
                 "benchmark_history_delta_count": benchmark_history_delta_count,
                 "benchmark_history_regression_count": benchmark_history_regression_count,
@@ -267,6 +273,7 @@ def make_run(
                     "ci_workflow_required_order_delta": 0,
                     "ci_workflow_order_violation_delta": ci_order_delta,
                     "ci_workflow_status_changed": readiness_ci_regression,
+                    "ci_workflow_regression_reasons": ci_regression_reasons,
                     "baseline_test_coverage_status": baseline_coverage_status,
                     "compared_test_coverage_status": compared_coverage_status,
                     "test_coverage_percent_delta": coverage_percent_delta,
@@ -381,6 +388,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.release_readiness_changed_panel_delta_count, 1)
             self.assertEqual(run.release_readiness_ci_workflow_regression_count, 0)
             self.assertEqual(run.release_readiness_ci_workflow_order_regression_count, 0)
+            self.assertEqual(run.release_readiness_ci_workflow_regression_reasons, [])
             self.assertEqual(run.release_readiness_test_coverage_regression_count, 0)
             self.assertTrue(run.release_readiness_html_exists)
             self.assertIn("release-readiness-comparison/release_readiness_comparison.html", REGISTRY_ARTIFACT_PATHS)
@@ -401,6 +409,7 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.release_readiness_comparison_status, "ci-regressed")
             self.assertEqual(run.release_readiness_ci_workflow_regression_count, 1)
             self.assertEqual(run.release_readiness_ci_workflow_order_regression_count, 1)
+            self.assertEqual(run.release_readiness_ci_workflow_regression_reasons, ["failed_checks_increased", "workflow_status_downgraded"])
 
     def test_summarize_registered_run_reads_benchmark_history_readiness_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -510,6 +519,38 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.release_readiness_comparison_status, "coverage-regressed")
             self.assertEqual(run.release_readiness_test_coverage_regression_count, 1)
 
+    def test_registry_derives_ci_reason_from_drift_smoke_regression_for_legacy_deltas(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(
+                Path(tmp),
+                "one",
+                1.0,
+                readiness_trend="panel-changed",
+                readiness_ci_regression=True,
+                readiness_ci_regression_reasons=[],
+            )
+            path = run_dir / "release-readiness-comparison" / "release_readiness_comparison.json"
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            payload["summary"]["ci_workflow_regression_reasons"] = []
+            payload["summary"]["ci_workflow_regression_reason_counts"] = {}
+            delta = payload["deltas"][0]
+            delta["ci_workflow_failed_check_delta"] = 0
+            delta["ci_workflow_status_changed"] = False
+            delta["ci_workflow_regression_reasons"] = []
+            delta["ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"] = True
+            path.write_text(json.dumps(payload), encoding="utf-8")
+
+            registry = build_run_registry([run_dir])
+
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["ci_workflow_regression_reason_counts"],
+                {"drift_contract_smoke_not_ready": 1},
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_leaderboard"][0]["ci_workflow_regression_reasons"],
+                ["drift_contract_smoke_not_ready"],
+            )
+
     def test_summarize_registered_run_reads_pair_reports(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = make_run(Path(tmp), "one", 1.0, pair_reports=True)
@@ -578,6 +619,14 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["release_readiness_delta_summary"]["improved_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["ci_workflow_regression_count"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["ci_workflow_order_regression_count"], 1)
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["ci_workflow_regression_reason_counts"],
+                {"failed_checks_increased": 1, "workflow_status_downgraded": 1},
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["ci_workflow_regression_reasons"],
+                ["failed_checks_increased", "workflow_status_downgraded"],
+            )
             self.assertEqual(registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(registry["release_readiness_delta_summary"]["max_abs_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(registry["release_readiness_delta_summary"]["test_coverage_regression_count"], 1)
@@ -601,6 +650,10 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["delta_status"], "regressed")
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["ci_workflow_failed_check_delta"], 2)
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["ci_workflow_order_violation_delta"], 1)
+            self.assertEqual(
+                registry["release_readiness_delta_leaderboard"][0]["ci_workflow_regression_reasons"],
+                ["failed_checks_increased", "workflow_status_downgraded"],
+            )
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["test_coverage_gap_delta"], 3)
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["benchmark_history_case_regression_delta"], 2)
             self.assertEqual(registry["release_readiness_delta_leaderboard"][0]["compared_benchmark_history_readiness_requirement_status"], "fail")
@@ -659,6 +712,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("pair_batch_cases", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_ci_workflow_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_ci_workflow_regression_reasons", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_test_coverage_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_history_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_requirement_status_change_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
@@ -687,6 +741,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("readiness cmp", html)
             self.assertIn("improved=1 regressed=0", html)
             self.assertIn("ci regressions=0", html)
+            self.assertIn("ci reasons=", html)
             self.assertIn("coverage regressions=0", html)
             self.assertIn("benchmark regressions=1", html)
             self.assertIn("benchmark req changes=1 exit max=1", html)

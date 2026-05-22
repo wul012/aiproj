@@ -254,6 +254,9 @@ d/380/解释/说明.md
 d/381/图片
 d/381/解释/说明.md
  -> v381 release readiness CI regression reasons 的运行截图和解释
+d/382/图片
+d/382/解释/说明.md
+ -> v382 registry release readiness CI reasons 的运行截图和解释
 ```
 
 写入规则：

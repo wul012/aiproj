@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>v382 registry release readiness CI reasons evidence</title>
+<style>
+:root { --ink:#17202a; --muted:#5d6672; --line:#d8dee7; --page:#f6f7f3; --panel:#fff; --green:#047857; --amber:#a16207; --blue:#1f5f74; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.5; }
+header { padding:28px 34px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+p { margin:0 0 8px; }
+.muted { color:var(--muted); }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; padding:18px 34px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:92px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:22px; font-weight:700; overflow-wrap:anywhere; }
+.pass { color:var(--green); }
+.warn { color:var(--amber); }
+.panel { margin:18px 34px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:900px; }
+th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+code { background:#eef1f5; padding:2px 5px; border-radius:5px; }
+pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; background:#17202a; color:#f8fafc; padding:14px; border-radius:8px; }
+footer { padding:18px 34px 32px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .grid { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header>
+<h1>v382 registry release readiness CI reasons evidence</h1>
+<p class="muted">本页归档 v382 的关键证据：registry 汇总 release readiness delta 时保留 CI regression reason list/count。</p>
+</header>
+<section class="grid">
+<div class="card"><div class="label">Registry tests</div><div class="value pass">16 passed</div></div>
+<div class="card"><div class="label">Full regression</div><div class="value pass">680 passed</div></div>
+<div class="card"><div class="label">Encoding hygiene</div><div class="value pass">pass</div></div>
+<div class="card"><div class="label">Registry reason counts</div><div class="value warn">visible</div></div>
+</section>
+<section class="panel">
+<h2>Registry Fields</h2>
+<table>
+<thead><tr><th>Layer</th><th>Field</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>Delta row</td><td><code>ci_workflow_regression_reasons</code></td><td>Preserves reason list from release readiness comparison or derives it from legacy delta fields.</td></tr>
+<tr><td>Registry summary</td><td><code>ci_workflow_regression_reason_counts</code></td><td>Aggregates reason counts across registered runs.</td></tr>
+<tr><td>Run row</td><td><code>release_readiness_ci_workflow_regression_reasons</code></td><td>Exposes run-level summary reasons for CSV and registry HTML.</td></tr>
+<tr><td>CLI</td><td><code>release_readiness_ci_regression_reason_counts</code></td><td>Makes reason counts visible in shell logs.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="panel">
+<h2>Example Output</h2>
+<pre>release_readiness_ci_regression_reason_counts={"failed_checks_increased": 1, "workflow_status_downgraded": 1}
+registry_html=CI regression reasons stat card + Release Readiness cell ci reasons + leaderboard CI workflow reasons
+legacy_fallback=drift_contract_smoke_not_ready derived from ci_workflow_release_readiness_drift_contract_smoke_ready_regressed</pre>
+</section>
+<section class="panel">
+<h2>Files</h2>
+<table>
+<thead><tr><th>Path</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>src/minigpt/registry_release_readiness.py</code></td><td>Collects, derives, and summarizes reason rows.</td></tr>
+<tr><td><code>src/minigpt/registry_data.py</code></td><td>Adds run-level reason field.</td></tr>
+<tr><td><code>src/minigpt/registry_render.py</code></td><td>Renders summary card and release-readiness cell reason text.</td></tr>
+<tr><td><code>src/minigpt/registry_leaderboards.py</code></td><td>Renders leaderboard reason text inside CI workflow column.</td></tr>
+<tr><td><code>scripts/register_runs.py</code></td><td>Prints registry-level reason counts.</td></tr>
+</tbody>
+</table>
+</section>
+<footer>Generated for MiniGPT v382 evidence archive.</footer>
+</body>
+</html>
