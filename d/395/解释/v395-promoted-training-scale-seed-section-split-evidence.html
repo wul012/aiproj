@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v395 Promoted Seed Section Split</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f6f8f4;
+      color: #162126;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+    }
+    header, section, footer {
+      max-width: 1120px;
+      margin: 0 auto 18px;
+    }
+    header {
+      border-bottom: 1px solid #d6ddd6;
+      padding-bottom: 18px;
+    }
+    h1 {
+      font-size: 30px;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    p {
+      color: #52635a;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .card, section {
+      background: #ffffff;
+      border: 1px solid #d9e1da;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(22, 33, 38, 0.05);
+    }
+    .card span {
+      display: block;
+      color: #64756c;
+      font-size: 12px;
+    }
+    .card strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+    }
+    .flow div {
+      border: 1px solid #dfe5dd;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfcf8;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid #e4e9e4;
+      padding: 9px;
+      vertical-align: top;
+    }
+    th {
+      color: #435249;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    code {
+      background: #edf2ed;
+      border-radius: 6px;
+      padding: 2px 5px;
+    }
+    footer {
+      color: #69786e;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v395 Promoted Seed Section Split</h1>
+    <p>Split promoted seed HTML rendering and section helpers out of the artifact writer while preserving public render/write/export behavior.</p>
+  </header>
+
+  <section class="grid">
+    <div class="card"><span>Version</span><strong>v395.0.0</strong></div>
+    <div class="card"><span>Artifact Writer</span><strong>553 -> 311 lines</strong></div>
+    <div class="card"><span>New Section Module</span><strong>256 lines</strong></div>
+    <div class="card"><span>Behavior</span><strong>public API unchanged</strong></div>
+  </section>
+
+  <section>
+    <h2>Split Boundary</h2>
+    <div class="flow">
+      <div>Seed report</div>
+      <div>Artifact writer</div>
+      <div>HTML section module</div>
+      <div>Rendered HTML</div>
+      <div>Output bundle</div>
+    </div>
+    <p>The artifact layer still writes all files; the section module owns the HTML view structure.</p>
+  </section>
+
+  <section>
+    <h2>Files</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>File</th><th>Role</th><th>Boundary</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>promoted_training_scale_seed_artifacts.py</code></td>
+            <td>JSON, CSV, Markdown, HTML writing and output path orchestration.</td>
+            <td>Artifact writer</td>
+          </tr>
+          <tr>
+            <td><code>promoted_training_scale_seed_sections.py</code></td>
+            <td>HTML stat cards, baseline seed section, command section, source table, blockers, recommendations, and styles.</td>
+            <td>View sections</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Verification</h2>
+    <p><code>python -m py_compile src/minigpt/promoted_training_scale_seed_artifacts.py src/minigpt/promoted_training_scale_seed_sections.py tests/test_promoted_training_scale_seed.py</code></p>
+    <p><code>python -m pytest tests/test_promoted_training_scale_seed.py -q</code></p>
+    <p><code>python -m pytest -q</code></p>
+    <p><code>python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v395</code></p>
+    <p><code>git diff --check</code></p>
+  </section>
+
+  <footer>Archived in d/395 for the MiniGPT training governance stage.</footer>
+</body>
+</html>

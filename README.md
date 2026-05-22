@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 394 carries promoted-decision maturity CI reason counts into next-cycle seed evidence, keeping selected, aggregate, comparison-ready, and rejected-input CI regression reasons visible before the next plan command.
+Version 395 splits promoted seed HTML sections out of the seed artifact writer, keeping the next-cycle seed evidence layer maintainable before more seed-handoff reason context is added.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -731,6 +731,15 @@ Version 394 carries promoted-decision maturity CI reason counts into next-cycle 
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
 
+## Latest v395 checkpoint
+
+- `promoted_training_scale_seed_artifacts.py` now delegates HTML rendering and section helpers to `promoted_training_scale_seed_sections.py`.
+- The artifact writer remains responsible for JSON, CSV, Markdown, HTML file writing, and output path orchestration.
+- The new section module owns seed HTML stat cards, baseline section, command section, source table, list sections, and style helpers.
+- Public imports remain unchanged through `promoted_training_scale_seed.py` and `promoted_training_scale_seed_artifacts.py`.
+- Targeted promoted-seed tests cover the unchanged render/write/export behavior.
+- Archived promoted-seed section split evidence in `d/395`.
+
 ## Latest v394 checkpoint
 
 - Promoted next-cycle seed clean-batch review evidence now carries selected, aggregate, and comparison-ready handoff maturity CI regression reason counts from the promoted decision.
@@ -1407,6 +1416,7 @@ v391.0.0 MiniGPT v391 promotion index maturity CI reasons
 v392.0.0 MiniGPT v392 promoted comparison maturity CI reasons
 v393.0.0 MiniGPT v393 promoted decision maturity CI reasons
 v394.0.0 MiniGPT v394 promoted seed maturity CI reasons
+v395.0.0 MiniGPT v395 promoted seed section split
 ```
 
 ## Project structure
