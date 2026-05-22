@@ -138,6 +138,12 @@ def _portfolio_summary(report: dict[str, Any], name: str, index: int) -> dict[st
     manifest_results = _dict(_pick(manifest, "results"))
     manifest_history = _dict(_pick(manifest_results, "history_summary"))
     generation_summary = _dict(_pick(generation_quality, "summary"))
+    maturity_ci_reason_list = _string_list(
+        maturity_summary.get("release_readiness_ci_workflow_regression_reasons")
+    )
+    maturity_ci_reason_counts = _int_mapping(
+        maturity_summary.get("release_readiness_ci_workflow_regression_reason_counts")
+    ) or _count_strings(maturity_ci_reason_list)
 
     artifact_count = _as_int(execution.get("artifact_count")) or len(rows)
     available_artifact_count = sum(1 for row in rows if row["exists"])
@@ -216,6 +222,8 @@ def _portfolio_summary(report: dict[str, Any], name: str, index: int) -> dict[st
             maturity_summary.get("release_readiness_max_ci_workflow_order_violation_delta")
         )
         or 0,
+        "maturity_release_readiness_ci_workflow_regression_reasons": maturity_ci_reason_list,
+        "maturity_release_readiness_ci_workflow_regression_reason_counts": maturity_ci_reason_counts,
         "maturity_release_readiness_test_coverage_regression_count": _as_int(
             maturity_summary.get("release_readiness_test_coverage_regression_count")
         )
@@ -343,6 +351,7 @@ def _comparison_summary(
         "maturity_review_names": [name for item in maturity_review_rows if (name := _as_str(item.get("name")))],
         "maturity_ci_regression_count": len(maturity_ci_rows),
         "maturity_ci_regression_names": [name for item in maturity_ci_rows if (name := _as_str(item.get("name")))],
+        "maturity_ci_regression_reason_counts": _merge_reason_counts(maturity_ci_rows),
         "maturity_coverage_regression_count": len(maturity_coverage_rows),
         "maturity_coverage_regression_names": [name for item in maturity_coverage_rows if (name := _as_str(item.get("name")))],
         "best_score_name": _pick(best_score, "name"),
@@ -355,6 +364,14 @@ def _comparison_summary(
         "best_score_maturity_release_readiness_ci_workflow_order_regression_count": _pick(
             best_score,
             "maturity_release_readiness_ci_workflow_order_regression_count",
+        ),
+        "best_score_maturity_release_readiness_ci_workflow_regression_reasons": _pick(
+            best_score,
+            "maturity_release_readiness_ci_workflow_regression_reasons",
+        ),
+        "best_score_maturity_release_readiness_ci_workflow_regression_reason_counts": _pick(
+            best_score,
+            "maturity_release_readiness_ci_workflow_regression_reason_counts",
         ),
         "best_score_maturity_release_readiness_test_coverage_regression_count": _pick(
             best_score,
@@ -408,7 +425,13 @@ def _delta_explanation(
     if portfolio.get("maturity_portfolio_status") != baseline.get("maturity_portfolio_status"):
         parts.append("maturity status changed")
     if has_maturity_ci_regression(portfolio):
-        parts.append("release-readiness CI regressed")
+        reason_detail = _reason_count_detail(
+            portfolio.get("maturity_release_readiness_ci_workflow_regression_reason_counts")
+        )
+        parts.append(
+            "release-readiness CI regressed"
+            + (f" ({reason_detail})" if reason_detail else "")
+        )
     if has_maturity_coverage_regression(portfolio):
         parts.append("release-readiness coverage regressed")
     return "; ".join(parts) if parts else "Comparable to baseline."
@@ -464,6 +487,44 @@ def _missing_artifact(key: str) -> dict[str, Any]:
 
 def _dict(value: Any) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
+
+
+def _int_mapping(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    result = {}
+    for key, raw_count in value.items():
+        reason = _as_str(key)
+        count = _as_int(raw_count)
+        if reason and count is not None and count > 0:
+            result[reason] = count
+    return result
+
+
+def _count_strings(values: list[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for value in values:
+        counts[value] = counts.get(value, 0) + 1
+    return counts
+
+
+def _merge_reason_counts(portfolios: list[dict[str, Any]]) -> dict[str, int]:
+    merged: dict[str, int] = {}
+    for portfolio in portfolios:
+        for reason, count in _int_mapping(
+            portfolio.get("maturity_release_readiness_ci_workflow_regression_reason_counts")
+        ).items():
+            merged[reason] = merged.get(reason, 0) + count
+    return dict(sorted(merged.items()))
+
+
+def _reason_count_detail(value: Any) -> str:
+    counts = _int_mapping(value)
+    return ", ".join(f"{reason}:{count}" for reason, count in counts.items())
+
+
+def _string_list(value: Any) -> list[str]:
+    return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
 def _pick(mapping: Any, key: str) -> Any:

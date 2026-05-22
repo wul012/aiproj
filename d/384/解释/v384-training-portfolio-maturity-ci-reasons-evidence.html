@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v384 portfolio maturity CI reasons evidence</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5a6575;
+      --line: #d7ddd2;
+      --page: #f6f7f2;
+      --panel: #ffffff;
+      --accent: #1f6b66;
+      --soft: #eaf2ed;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+    header {
+      padding: 30px 34px 18px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 19px; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    main { padding: 18px 34px 34px; }
+    section {
+      margin: 0 0 16px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      min-height: 96px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    .table-wrap { overflow-x: auto; }
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #eef1e9;
+      color: #123c39;
+    }
+    ul { margin: 0; padding-left: 22px; }
+    li { margin: 7px 0; }
+    footer {
+      padding: 0 34px 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 760px) {
+      header, main, footer { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v384 Portfolio Maturity CI Reasons</h1>
+    <p>Training portfolio comparison now keeps maturity CI regression reason counts beside promotion review evidence.</p>
+  </header>
+  <main>
+    <section class="grid">
+      <div class="card">
+        <div class="label">Input evidence</div>
+        <div class="value">maturity_narrative.summary</div>
+      </div>
+      <div class="card">
+        <div class="label">New summary field</div>
+        <div class="value">maturity_ci_regression_reason_counts</div>
+      </div>
+      <div class="card">
+        <div class="label">Review impact</div>
+        <div class="value">best-score blocker carries reasons</div>
+      </div>
+      <div class="card">
+        <div class="label">Archive</div>
+        <div class="value">d/384</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence Chain</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Field</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Maturity narrative</td>
+              <td><code>release_readiness_ci_workflow_regression_reason_counts</code></td>
+              <td>Source reason counts produced by the maturity narrative summary.</td>
+            </tr>
+            <tr>
+              <td>Portfolio summary</td>
+              <td><code>maturity_release_readiness_ci_workflow_regression_reason_counts</code></td>
+              <td>Per-portfolio machine-readable reason evidence.</td>
+            </tr>
+            <tr>
+              <td>Comparison summary</td>
+              <td><code>maturity_ci_regression_reason_counts</code></td>
+              <td>Aggregated reason counts across CI-regressed portfolios.</td>
+            </tr>
+            <tr>
+              <td>Review action</td>
+              <td><code>ci_workflow_regression_reason_counts</code></td>
+              <td>Evidence attached to blocker or review actions.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li><code>python -m py_compile ...</code> checks touched modules and CLI syntax.</li>
+        <li><code>python -m pytest tests/test_training_portfolio_comparison.py -q</code> covers reason propagation and renderers.</li>
+        <li><code>python -m pytest -q</code> covers the full MiniGPT regression suite.</li>
+        <li><code>python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v384</code> keeps CI encoding hygiene clean.</li>
+        <li><code>git diff --check</code> checks whitespace before commit.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>This version does not change the maturity scoring algorithm, the portfolio ranking rule, or CLI arguments. It only carries existing maturity reason evidence into portfolio comparison outputs.</p>
+    </section>
+  </main>
+  <footer>Generated for MiniGPT v384 release evidence.</footer>
+</body>
+</html>

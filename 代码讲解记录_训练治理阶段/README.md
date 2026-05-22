@@ -254,6 +254,9 @@
 397-v383-maturity-release-readiness-ci-reasons.md
  -> v383 code explanation: carry registry release readiness CI regression reasons into maturity summary, maturity narrative, rendered outputs, CLI fields, and review recommendations.
 
+398-v384-training-portfolio-maturity-ci-reasons.md
+ -> v384 code explanation: carry maturity narrative CI regression reasons into training portfolio comparison summaries, review actions, recommendations, CSV, Markdown, and HTML evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

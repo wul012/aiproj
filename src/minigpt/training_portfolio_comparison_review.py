@@ -15,6 +15,7 @@ def build_training_portfolio_recommendations(
     deltas: list[dict[str, Any]] | None = None,
 ) -> list[str]:
     recs = []
+    ci_reason_detail = _reason_count_detail(summary.get("maturity_ci_regression_reason_counts"))
     if summary.get("failed_count"):
         recs.append("Inspect failed portfolio steps before treating downstream benchmark or maturity evidence as comparable.")
     if summary.get("planned_count"):
@@ -44,9 +45,15 @@ def build_training_portfolio_recommendations(
             or (_as_int(summary.get("best_score_maturity_release_readiness_ci_workflow_regression_count")) or 0) > 0
             or (_as_int(summary.get("best_score_maturity_release_readiness_ci_workflow_order_regression_count")) or 0) > 0
         ):
-            recs.append("Block best-score promotion until release-readiness CI workflow regressions are explained or fixed.")
+            recs.append(
+                "Block best-score promotion until release-readiness CI workflow regressions are explained or fixed"
+                + (f" ({ci_reason_detail})." if ci_reason_detail else ".")
+            )
         else:
-            recs.append("Review CI-regressed maturity narratives before using non-leading portfolios as future baselines.")
+            recs.append(
+                "Review CI-regressed maturity narratives before using non-leading portfolios as future baselines"
+                + (f" ({ci_reason_detail})." if ci_reason_detail else ".")
+            )
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs
@@ -173,6 +180,9 @@ def build_training_portfolio_review_actions(
         ci_regressed = has_maturity_ci_regression(portfolio)
         if ci_regressed:
             is_best_score = name == best_score_name
+            ci_reason_detail = _reason_count_detail(
+                portfolio.get("maturity_release_readiness_ci_workflow_regression_reason_counts")
+            )
             actions.append(
                 _review_action(
                     actions,
@@ -181,10 +191,11 @@ def build_training_portfolio_review_actions(
                     "blocker" if is_best_score else "review",
                     "best_score_ci_regressed" if is_best_score else "portfolio_ci_regressed",
                     (
-                        "Explain or fix release-readiness CI workflow regressions before promoting this best-scoring portfolio."
+                        "Explain or fix release-readiness CI workflow regressions before promoting this best-scoring portfolio"
                         if is_best_score
-                        else "Review release-readiness CI workflow regressions before archiving this portfolio as a future baseline."
-                    ),
+                        else "Review release-readiness CI workflow regressions before archiving this portfolio as a future baseline"
+                    )
+                    + (f" ({ci_reason_detail})." if ci_reason_detail else "."),
                     {
                         "maturity_release_readiness_trend": portfolio.get("maturity_release_readiness_trend"),
                         "ci_workflow_regression_count": portfolio.get("maturity_release_readiness_ci_workflow_regression_count"),
@@ -192,6 +203,8 @@ def build_training_portfolio_review_actions(
                         "ci_workflow_status_changed_count": portfolio.get("maturity_release_readiness_ci_workflow_status_changed_count"),
                         "max_ci_workflow_failed_check_delta": portfolio.get("maturity_release_readiness_max_ci_workflow_failed_check_delta"),
                         "max_ci_workflow_order_violation_delta": portfolio.get("maturity_release_readiness_max_ci_workflow_order_violation_delta"),
+                        "ci_workflow_regression_reasons": portfolio.get("maturity_release_readiness_ci_workflow_regression_reasons"),
+                        "ci_workflow_regression_reason_counts": portfolio.get("maturity_release_readiness_ci_workflow_regression_reason_counts"),
                         "best_score_name": best_score_name,
                     },
                 )
@@ -275,6 +288,23 @@ def _as_str(value: Any) -> str | None:
         return None
     text = str(value).strip()
     return text or None
+
+
+def _int_mapping(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    result = {}
+    for key, raw_count in value.items():
+        reason = _as_str(key)
+        count = _as_int(raw_count)
+        if reason and count is not None and count > 0:
+            result[reason] = count
+    return result
+
+
+def _reason_count_detail(value: Any) -> str:
+    counts = _int_mapping(value)
+    return ", ".join(f"{reason}:{count}" for reason, count in counts.items())
 
 
 __all__ = [

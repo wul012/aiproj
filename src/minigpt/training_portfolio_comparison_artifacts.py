@@ -44,6 +44,8 @@ def write_training_portfolio_comparison_csv(report: dict[str, Any], path: str | 
         "maturity_release_readiness_ci_workflow_status_changed_count",
         "maturity_release_readiness_max_ci_workflow_failed_check_delta",
         "maturity_release_readiness_max_ci_workflow_order_violation_delta",
+        "maturity_release_readiness_ci_workflow_regression_reasons",
+        "maturity_release_readiness_ci_workflow_regression_reason_counts",
         "maturity_release_readiness_test_coverage_regression_count",
         "maturity_release_readiness_test_coverage_status_changed_count",
         "maturity_release_readiness_max_test_coverage_percent_delta",
@@ -100,6 +102,7 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
         f"| Maturity review portfolios | {_md(', '.join(_string_list(summary.get('maturity_review_names'))) or 'none')} |",
         f"| Maturity CI regressions | {_md(summary.get('maturity_ci_regression_count'))} |",
         f"| Maturity CI portfolios | {_md(', '.join(_string_list(summary.get('maturity_ci_regression_names'))) or 'none')} |",
+        f"| Maturity CI regression reasons | {_md(_fmt_mapping(summary.get('maturity_ci_regression_reason_counts')))} |",
         f"| Maturity coverage regressions | {_md(summary.get('maturity_coverage_regression_count'))} |",
         f"| Maturity coverage portfolios | {_md(', '.join(_string_list(summary.get('maturity_coverage_regression_names'))) or 'none')} |",
         f"| Best score maturity | {_md(summary.get('best_score_maturity_status'))} |",
@@ -131,6 +134,7 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
                         f"{portfolio.get('maturity_release_readiness_trend') or 'missing'} / "
                         f"ci={portfolio.get('maturity_release_readiness_ci_workflow_regression_count') or 0} / "
                         f"ci_order={portfolio.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0} / "
+                        f"ci_reasons={_fmt_mapping(portfolio.get('maturity_release_readiness_ci_workflow_regression_reason_counts'))} / "
                         f"coverage={portfolio.get('maturity_release_readiness_test_coverage_regression_count') or 0}"
                     ),
                     _md(delta.get("explanation")),
@@ -199,6 +203,7 @@ def render_training_portfolio_comparison_html(report: dict[str, Any]) -> str:
         ("Maturity reviews", ", ".join(_string_list(summary.get("maturity_review_names"))) or "none"),
         ("CI regressions", summary.get("maturity_ci_regression_count")),
         ("CI regression portfolios", ", ".join(_string_list(summary.get("maturity_ci_regression_names"))) or "none"),
+        ("CI regression reasons", _fmt_mapping(summary.get("maturity_ci_regression_reason_counts"))),
         ("Coverage regressions", summary.get("maturity_coverage_regression_count")),
         ("Coverage regression portfolios", ", ".join(_string_list(summary.get("maturity_coverage_regression_names"))) or "none"),
         ("Review actions", summary.get("review_action_count")),
@@ -290,7 +295,7 @@ def _portfolio_table(report: dict[str, Any]) -> str:
             f"<td>{_e(_fmt(item.get('rubric_avg_score')))}<br><span>{_e(_fmt_signed(delta.get('rubric_avg_score_delta')))}</span></td>"
             f"<td>{_e(_fmt(item.get('final_val_loss')))}<br><span>{_e(delta.get('final_val_loss_relation'))}</span></td>"
             f"<td>{_e(item.get('dataset_readiness_status'))}<br><span>warnings={_e(item.get('dataset_warning_count'))}</span></td>"
-            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / ci={_e(item.get('maturity_release_readiness_ci_workflow_regression_count') or 0)} / ci_order={_e(item.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0)} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)}</span></td>"
+            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / ci={_e(item.get('maturity_release_readiness_ci_workflow_regression_count') or 0)} / ci_order={_e(item.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0)} / ci_reasons={_e(_fmt_mapping(item.get('maturity_release_readiness_ci_workflow_regression_reason_counts')))} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)}</span></td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )
@@ -408,6 +413,12 @@ def _fmt_signed(value: Any) -> str:
     if number is None:
         return "missing"
     return f"{float(number):+.4g}"
+
+
+def _fmt_mapping(value: Any) -> str:
+    if not isinstance(value, dict) or not value:
+        return "none"
+    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 def _md(value: Any) -> str:
