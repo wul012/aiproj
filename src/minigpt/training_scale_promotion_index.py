@@ -7,6 +7,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    format_mapping as _fmt_mapping,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     markdown_cell as _md,
@@ -83,11 +84,13 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
         "handoff_require_clean_batch_review",
         "handoff_clean_batch_review_status",
         "handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_regression_reason_counts",
         "handoff_batch_maturity_ci_regression_names",
         "handoff_selected_batch_review_status",
         "handoff_selected_batch_comparison_review_action_count",
         "handoff_selected_batch_comparison_blocker_action_count",
         "handoff_selected_batch_maturity_ci_regression_count",
+        "handoff_selected_batch_maturity_ci_regression_reason_counts",
         "handoff_batch_comparison_review_action_count",
         "handoff_batch_comparison_blocker_action_count",
         "variant_count",
@@ -118,6 +121,9 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
                     "handoff_require_clean_batch_review": row.get("handoff_require_clean_batch_review"),
                     "handoff_clean_batch_review_status": row.get("handoff_clean_batch_review_status"),
                     "handoff_batch_maturity_ci_regression_count": row.get("handoff_batch_maturity_ci_regression_count"),
+                    "handoff_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                        row.get("handoff_batch_maturity_ci_regression_reason_counts")
+                    ),
                     "handoff_batch_maturity_ci_regression_names": ";".join(
                         _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
                     ),
@@ -130,6 +136,9 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
                     ),
                     "handoff_selected_batch_maturity_ci_regression_count": row.get(
                         "handoff_selected_batch_maturity_ci_regression_count"
+                    ),
+                    "handoff_selected_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                        row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
                     ),
                     "handoff_batch_comparison_review_action_count": row.get(
                         "handoff_batch_comparison_review_action_count"
@@ -169,7 +178,9 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         f"- Handoff clean batch review: `{summary.get('handoff_clean_batch_review_count')}`",
         f"- Handoff unclean batch review: `{summary.get('handoff_unclean_batch_review_count')}`",
         f"- Handoff batch CI regressions: `{summary.get('handoff_batch_maturity_ci_regression_count')}`",
+        f"- Handoff batch CI regression reasons: `{_fmt_mapping(summary.get('handoff_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Handoff selected batch CI regressions: `{summary.get('handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Handoff selected batch CI regression reasons: `{_fmt_mapping(summary.get('handoff_selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_ci_regression_names')))}`",
         f"- Selected batch reviews: `{summary.get('handoff_selected_batch_review_count')}`",
         f"- Selected batch blockers: `{summary.get('handoff_selected_batch_blocker_count')}`",
@@ -243,7 +254,9 @@ def render_training_scale_promotion_index_html(report: dict[str, Any]) -> str:
         ("Handoff clean", summary.get("handoff_clean_batch_review_count")),
         ("Handoff unclean", summary.get("handoff_unclean_batch_review_count")),
         ("Handoff CI regressions", summary.get("handoff_batch_maturity_ci_regression_count")),
+        ("Handoff CI reasons", _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))),
         ("Selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
+        ("Selected CI reasons", _fmt_mapping(summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"))),
         ("Batch reviews", summary.get("handoff_selected_batch_review_count")),
         ("Batch blockers", summary.get("handoff_selected_batch_blocker_count")),
         ("Batch review actions", summary.get("handoff_batch_comparison_review_action_total")),

@@ -211,6 +211,8 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
                 clean_batch_review_status="clean",
                 batch_ci_regression_count=2,
                 batch_ci_regression_names=["review", "standard"],
+                batch_ci_regression_reason_counts={"missing-ci-step": 1, "workflow-order-regressed": 1},
+                selected_batch_ci_regression_reason_counts={"workflow-order-regressed": 1},
             )
 
             report = build_training_scale_promotion_index([clean, ci_regressed], names=["clean-run", "ci-run"])
@@ -226,23 +228,54 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertEqual(report["summary"]["handoff_unclean_batch_review_count"], 1)
             self.assertEqual(report["summary"]["handoff_batch_maturity_ci_regression_count"], 2)
             self.assertEqual(report["summary"]["handoff_selected_batch_maturity_ci_regression_total"], 2)
+            self.assertEqual(
+                report["summary"]["handoff_batch_maturity_ci_regression_reason_counts"],
+                {"missing-ci-step": 1, "workflow-order-regressed": 1},
+            )
+            self.assertEqual(
+                report["summary"]["handoff_selected_batch_maturity_ci_regression_reason_counts"],
+                {"workflow-order-regressed": 1},
+            )
             self.assertEqual(report["summary"]["handoff_batch_maturity_ci_regression_names"], ["review", "standard"])
             self.assertTrue(report["promotions"][0]["promoted_for_comparison"])
             self.assertFalse(report["promotions"][1]["promoted_for_comparison"])
             self.assertEqual(report["promotions"][1]["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(
+                report["promotions"][1]["handoff_batch_maturity_ci_regression_reason_counts"],
+                {"missing-ci-step": 1, "workflow-order-regressed": 1},
+            )
+            self.assertEqual(
+                report["promotions"][1]["handoff_selected_batch_maturity_ci_regression_reason_counts"],
+                {"workflow-order-regressed": 1},
+            )
             self.assertEqual(report["comparison_inputs"]["names"], ["clean-run"])
             self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("handoff_batch_maturity_ci_regression_reason_counts", csv_text)
+            self.assertIn("missing-ci-step:1, workflow-order-regressed:1", csv_text)
             self.assertIn("review;standard", csv_text)
             self.assertIn("Handoff batch CI regressions", markdown)
+            self.assertIn("Handoff batch CI regression reasons", markdown)
+            self.assertIn("Handoff selected batch CI regression reasons", markdown)
+            self.assertIn("workflow-order-regressed:1", markdown)
             self.assertIn("CI Regressions", markdown)
             self.assertIn("Handoff CI regressions", html)
-            self.assertIn("Resolve handoff batch CI regression evidence", " ".join(report["recommendations"]))
+            self.assertIn("Handoff CI reasons", html)
+            self.assertIn("Selected CI reasons", html)
+            self.assertIn("missing-ci-step:1, workflow-order-regressed:1", " ".join(report["recommendations"]))
 
-    def test_index_script_reports_suite_guard_counts(self) -> None:
+    def test_index_script_reports_suite_guard_counts_and_reason_counts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             alpha = make_promotion(root, "alpha", "promoted", include_suite_guard=True)
-            beta = make_promotion(root, "beta", "promoted", include_suite_guard=True)
+            beta = make_promotion(
+                root,
+                "beta",
+                "promoted",
+                include_suite_guard=True,
+                require_clean_batch_review=True,
+                batch_ci_regression_count=1,
+                batch_ci_regression_reason_counts={"workflow-status-regressed": 1},
+            )
 
             out_dir = root / "index"
             command = [
@@ -266,9 +299,11 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("handoff_suite_consistent_count=2", completed.stdout)
             self.assertIn("handoff_suite_mismatch_total=0", completed.stdout)
             self.assertIn("handoff_selected_suite_path_count=2", completed.stdout)
-            self.assertIn("handoff_require_clean_batch_review_count=0", completed.stdout)
-            self.assertIn("handoff_unclean_batch_review_count=0", completed.stdout)
-            self.assertIn("handoff_batch_maturity_ci_regression_count=0", completed.stdout)
+            self.assertIn("handoff_require_clean_batch_review_count=1", completed.stdout)
+            self.assertIn("handoff_unclean_batch_review_count=1", completed.stdout)
+            self.assertIn("handoff_batch_maturity_ci_regression_count=1", completed.stdout)
+            self.assertIn('handoff_batch_maturity_ci_regression_reason_counts={"workflow-status-regressed": 1}', completed.stdout)
+            self.assertIn('handoff_selected_batch_maturity_ci_regression_reason_counts={"workflow-status-regressed": 1}', completed.stdout)
             self.assertIn("handoff_selected_batch_review_count=0", completed.stdout)
             self.assertIn("handoff_batch_comparison_blocker_action_total=0", completed.stdout)
             self.assertTrue((out_dir / "training_scale_promotion_index.json").exists())
@@ -299,6 +334,8 @@ def make_promotion(
     selected_batch_review_status: str = "clean",
     batch_ci_regression_count: int = 0,
     batch_ci_regression_names: list[str] | None = None,
+    batch_ci_regression_reason_counts: dict[str, int] | None = None,
+    selected_batch_ci_regression_reason_counts: dict[str, int] | None = None,
 ) -> Path:
     promotion_root = root / name / "promotion"
     run_root = root / name / "scale-run"
@@ -360,12 +397,16 @@ def make_promotion(
                 1 if selected_batch_review_status in {"review", "blocker"} else 0
             ),
             "handoff_selected_batch_maturity_ci_regression_count": batch_ci_regression_count,
+            "handoff_selected_batch_maturity_ci_regression_reason_counts": selected_batch_ci_regression_reason_counts
+            or batch_ci_regression_reason_counts
+            or {},
             "handoff_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
             "handoff_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
             "handoff_batch_comparison_blocker_reasons": (
                 ["coverage-regressed"] if selected_batch_review_status == "blocker" else []
             ),
             "handoff_batch_maturity_ci_regression_count": batch_ci_regression_count,
+            "handoff_batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             "handoff_batch_maturity_ci_regression_names": batch_ci_regression_names or [],
             **summary_suite_fields,
         },
@@ -374,6 +415,7 @@ def make_promotion(
             "handoff_require_clean_batch_review": require_clean_batch_review,
             "handoff_clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
             "handoff_batch_maturity_ci_regression_count": batch_ci_regression_count,
+            "handoff_batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             "handoff_batch_maturity_ci_regression_names": batch_ci_regression_names or [],
         }
         if require_clean_batch_review

@@ -281,6 +281,9 @@ d/389/解释/说明.md
 d/390/图片
 d/390/解释/说明.md
  -> v390 promotion maturity CI reasons 的运行截图和解释
+d/391/图片
+d/391/解释/说明.md
+ -> v391 promotion index maturity CI reasons 的运行截图和解释
 ```
 
 写入规则：

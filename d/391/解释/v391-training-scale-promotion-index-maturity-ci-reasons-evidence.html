@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v391 Promotion Index CI Reasons</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f6f8f6;
+      color: #162126;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+    }
+    header, section, footer {
+      max-width: 1120px;
+      margin: 0 auto 18px;
+    }
+    header {
+      border-bottom: 1px solid #d6ddd6;
+      padding-bottom: 18px;
+    }
+    h1 {
+      font-size: 30px;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    p {
+      color: #52635a;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .card, section {
+      background: #ffffff;
+      border: 1px solid #d9e1da;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(22, 33, 38, 0.05);
+    }
+    .card span {
+      display: block;
+      color: #64756c;
+      font-size: 12px;
+    }
+    .card strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+    }
+    .flow div {
+      border: 1px solid #dfe5dd;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfcf8;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid #e4e9e4;
+      padding: 9px;
+      vertical-align: top;
+    }
+    th {
+      color: #435249;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    code {
+      background: #edf2ed;
+      border-radius: 6px;
+      padding: 2px 5px;
+    }
+    footer {
+      color: #69786e;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v391 Promotion Index CI Reasons</h1>
+    <p>Carry promotion maturity CI regression reason counts into promotion-index rows, summary aggregation, rendered outputs, CLI logs, and recommendations.</p>
+  </header>
+
+  <section class="grid">
+    <div class="card"><span>Version</span><strong>v391.0.0</strong></div>
+    <div class="card"><span>Layer</span><strong>training scale promotion index</strong></div>
+    <div class="card"><span>Selected Reasons</span><strong>workflow-order-regressed:1</strong></div>
+    <div class="card"><span>Aggregate Reasons</span><strong>missing-ci-step:1, workflow-order-regressed:1</strong></div>
+  </section>
+
+  <section>
+    <h2>Evidence Chain</h2>
+    <div class="flow">
+      <div>Workflow handoff</div>
+      <div>Promotion summary</div>
+      <div>Promotion index row</div>
+      <div>Index summary</div>
+      <div>Compare readiness</div>
+    </div>
+    <p>v391 only aggregates promotion reason counts. It does not change clean-required exclusion or promoted comparison behavior.</p>
+  </section>
+
+  <section>
+    <h2>Fields Added To Promotion Index</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Meaning</th><th>Consumer</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>handoff_selected_batch_maturity_ci_regression_reason_counts</code></td>
+            <td>Row-level and summary-level selected handoff reason-count map.</td>
+            <td>JSON summary, CSV, Markdown, HTML, CLI stdout</td>
+          </tr>
+          <tr>
+            <td><code>handoff_batch_maturity_ci_regression_reason_counts</code></td>
+            <td>Row-level and summary-level aggregate handoff reason-count map.</td>
+            <td>JSON summary, CSV, Markdown, HTML, CLI stdout, recommendations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Verification</h2>
+    <p><code>python -m py_compile src/minigpt/training_scale_promotion_index.py src/minigpt/training_scale_promotion_index_helpers.py scripts/index_training_scale_promotions.py tests/test_training_scale_promotion_index.py</code></p>
+    <p><code>python -m pytest tests/test_training_scale_promotion_index.py -q</code></p>
+    <p><code>python -m pytest -q</code></p>
+    <p><code>python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v391</code></p>
+    <p><code>git diff --check</code></p>
+  </section>
+
+  <footer>Archived in d/391 for the MiniGPT training governance stage.</footer>
+</body>
+</html>

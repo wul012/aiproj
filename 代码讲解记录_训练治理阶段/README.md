@@ -275,6 +275,9 @@
 404-v390-training-scale-promotion-maturity-ci-reasons.md
  -> v390 code explanation: carry workflow/handoff maturity CI regression reason counts into training scale promotion summaries, rendered outputs, CLI logs, and promotion review recommendations.
 
+405-v391-training-scale-promotion-index-maturity-ci-reasons.md
+ -> v391 code explanation: carry promotion maturity CI regression reason counts into promotion-index rows, summary aggregation, rendered outputs, CLI logs, and comparison-readiness recommendations.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
