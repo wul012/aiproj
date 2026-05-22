@@ -278,6 +278,9 @@ d/388/解释/说明.md
 d/389/图片
 d/389/解释/说明.md
  -> v389 workflow handoff maturity CI reasons 的运行截图和解释
+d/390/图片
+d/390/解释/说明.md
+ -> v390 promotion maturity CI reasons 的运行截图和解释
 ```
 
 写入规则：
