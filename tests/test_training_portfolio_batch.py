@@ -184,6 +184,10 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
                 "maturity_review_names": ["candidate"],
                 "maturity_ci_regression_count": 1,
                 "maturity_ci_regression_names": ["candidate"],
+                "maturity_ci_regression_reason_counts": {
+                    "ci_failed_checks_increased": 2,
+                    "ci_order_violations_increased": 1,
+                },
                 "maturity_coverage_regression_count": 1,
                 "maturity_coverage_regression_names": ["candidate"],
             },
@@ -199,6 +203,10 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
         self.assertEqual(summary["blocker_action_count"], 1)
         self.assertEqual(summary["maturity_ci_regression_count"], 1)
         self.assertEqual(summary["maturity_ci_regression_names"], ["candidate"])
+        self.assertEqual(
+            summary["maturity_ci_regression_reason_counts"],
+            {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+        )
         self.assertEqual(summary["maturity_coverage_regression_names"], ["candidate"])
         self.assertEqual(summary["blocker_reasons"], ["best_score_ci_regressed"])
         self.assertEqual(summary["blocker_portfolios"], ["candidate"])
@@ -240,6 +248,18 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
                 variants=[{"name": "<base>", "description": "<script>"}],
             )
             report = run_training_portfolio_batch_plan(plan, execute=False)
+            report["comparison_review_summary"] = {
+                "review_action_count": 1,
+                "blocker_action_count": 1,
+                "maturity_review_names": [],
+                "maturity_ci_regression_count": 1,
+                "maturity_ci_regression_names": ["<base>"],
+                "maturity_ci_regression_reason_counts": {"ci_failed_checks_increased": 1},
+                "maturity_coverage_regression_count": 0,
+                "maturity_coverage_regression_names": [],
+                "blocker_reasons": ["best_score_ci_regressed"],
+                "blocker_portfolios": ["<base>"],
+            }
 
             markdown = render_training_portfolio_batch_markdown(report)
             html = render_training_portfolio_batch_html(report)
@@ -248,7 +268,11 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertIn("Pair modes: `same_checkpoint_baseline=1`", markdown)
             self.assertIn("Comparison review actions", markdown)
             self.assertIn("CI-regressed portfolios", markdown)
+            self.assertIn("CI regression reasons", markdown)
+            self.assertIn("ci_failed_checks_increased:1", markdown)
             self.assertIn("CI regressions", html)
+            self.assertIn("CI regression reasons", html)
+            self.assertIn("ci_failed_checks_increased:1", html)
             self.assertIn("&lt;base&gt;", html)
             self.assertIn("same_checkpoint_baseline", html)
             self.assertIn("Review actions", html)

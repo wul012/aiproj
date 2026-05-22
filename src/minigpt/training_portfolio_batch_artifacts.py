@@ -85,6 +85,7 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
         f"- Comparison review actions: `{review.get('review_action_count', 0)}`",
         f"- Comparison blocker actions: `{review.get('blocker_action_count', 0)}`",
         f"- CI-regressed portfolios: `{', '.join(_string_list(review.get('maturity_ci_regression_names'))) or 'none'}`",
+        f"- CI regression reasons: `{_fmt_mapping(review.get('maturity_ci_regression_reason_counts'))}`",
         f"- Coverage-regressed portfolios: `{', '.join(_string_list(review.get('maturity_coverage_regression_names'))) or 'none'}`",
         "",
         "## Variants",
@@ -123,6 +124,7 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
                     ("Blocker actions", review.get("blocker_action_count", 0)),
                     ("Maturity reviews", ", ".join(_string_list(review.get("maturity_review_names"))) or "none"),
                     ("CI regressions", ", ".join(_string_list(review.get("maturity_ci_regression_names"))) or "none"),
+                    ("CI regression reasons", _fmt_mapping(review.get("maturity_ci_regression_reason_counts"))),
                     ("Coverage regressions", ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none"),
                     ("Blocker reasons", ", ".join(_string_list(review.get("blocker_reasons"))) or "none"),
                     ("Command", _display_command(comparison.get("command"))),
@@ -163,6 +165,7 @@ def render_training_portfolio_batch_html(report: dict[str, Any]) -> str:
         ("Review actions", review.get("review_action_count", 0)),
         ("Blocker actions", review.get("blocker_action_count", 0)),
         ("CI regressions", review.get("maturity_ci_regression_count", 0)),
+        ("CI regression reasons", _fmt_mapping(review.get("maturity_ci_regression_reason_counts"))),
         ("Coverage regressions", review.get("maturity_coverage_regression_count", 0)),
         ("Generated", report.get("generated_at")),
     ]
@@ -273,6 +276,7 @@ def _comparison_panel(report: dict[str, Any]) -> str:
         ("Blocker actions", review.get("blocker_action_count", 0)),
         ("Maturity reviews", ", ".join(_string_list(review.get("maturity_review_names"))) or "none"),
         ("CI regressions", ", ".join(_string_list(review.get("maturity_ci_regression_names"))) or "none"),
+        ("CI regression reasons", _fmt_mapping(review.get("maturity_ci_regression_reason_counts"))),
         ("Coverage regressions", ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none"),
         ("Blocker reasons", ", ".join(_string_list(review.get("blocker_reasons"))) or "none"),
         ("Out dir", comparison.get("out_dir")),
@@ -346,6 +350,13 @@ def _pair_mode_label(value: Any) -> str:
     if not counts:
         return "missing"
     return ", ".join(f"{key}={counts[key]}" for key in sorted(counts))
+
+
+def _fmt_mapping(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return "none"
+    return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))
 
 
 def _quote(value: str) -> str:

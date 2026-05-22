@@ -439,6 +439,7 @@ def _comparison_review_summary(comparison_report: dict[str, Any]) -> dict[str, A
         "maturity_review_names": _string_list(summary.get("maturity_review_names")),
         "maturity_ci_regression_count": _as_int(summary.get("maturity_ci_regression_count")) or 0,
         "maturity_ci_regression_names": _string_list(summary.get("maturity_ci_regression_names")),
+        "maturity_ci_regression_reason_counts": _int_mapping(summary.get("maturity_ci_regression_reason_counts")),
         "maturity_coverage_regression_count": _as_int(summary.get("maturity_coverage_regression_count")) or 0,
         "maturity_coverage_regression_names": _string_list(summary.get("maturity_coverage_regression_names")),
         "blocker_reasons": _string_list([action.get("reason") for action in blockers]),
@@ -476,6 +477,18 @@ def _as_int(value: Any) -> int | None:
         return int(value)
     except (TypeError, ValueError):
         return None
+
+
+def _int_mapping(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    result = {}
+    for key, raw_count in value.items():
+        name = _optional_str(key)
+        count = _as_int(raw_count)
+        if name and count is not None and count > 0:
+            result[name] = count
+    return dict(sorted(result.items()))
 
 
 def _string_list(value: Any) -> list[str]:
