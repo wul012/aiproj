@@ -232,6 +232,8 @@ def _summary(
         "release_readiness_ci_workflow_regression_count": release_readiness_context.get("ci_workflow_regression_count"),
         "release_readiness_ci_workflow_order_regression_count": release_readiness_context.get("ci_workflow_order_regression_count"),
         "release_readiness_ci_workflow_status_changed_count": release_readiness_context.get("ci_workflow_status_changed_count"),
+        "release_readiness_ci_workflow_regression_reasons": release_readiness_context.get("ci_workflow_regression_reasons"),
+        "release_readiness_ci_workflow_regression_reason_counts": release_readiness_context.get("ci_workflow_regression_reason_counts"),
         "release_readiness_max_ci_workflow_failed_check_delta": release_readiness_context.get("max_abs_ci_workflow_failed_check_delta"),
         "release_readiness_max_ci_workflow_order_violation_delta": release_readiness_context.get("max_abs_ci_workflow_order_violation_delta"),
         "release_readiness_test_coverage_regression_count": release_readiness_context.get("test_coverage_regression_count"),
@@ -344,6 +346,8 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "ci_workflow_regression_count": None,
             "ci_workflow_order_regression_count": None,
             "ci_workflow_status_changed_count": None,
+            "ci_workflow_regression_reasons": [],
+            "ci_workflow_regression_reason_counts": {},
             "max_abs_ci_workflow_failed_check_delta": None,
             "max_abs_ci_workflow_order_violation_delta": None,
             "test_coverage_regression_count": None,
@@ -381,6 +385,8 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "ci_workflow_regression_count": delta_summary.get("ci_workflow_regression_count"),
         "ci_workflow_order_regression_count": delta_summary.get("ci_workflow_order_regression_count"),
         "ci_workflow_status_changed_count": delta_summary.get("ci_workflow_status_changed_count"),
+        "ci_workflow_regression_reasons": _string_list(delta_summary.get("ci_workflow_regression_reasons")),
+        "ci_workflow_regression_reason_counts": _dict(delta_summary.get("ci_workflow_regression_reason_counts")),
         "max_abs_ci_workflow_failed_check_delta": delta_summary.get("max_abs_ci_workflow_failed_check_delta"),
         "max_abs_ci_workflow_order_violation_delta": delta_summary.get("max_abs_ci_workflow_order_violation_delta"),
         "test_coverage_regression_count": delta_summary.get("test_coverage_regression_count"),
@@ -525,9 +531,17 @@ def _recommendations(
     elif int(release_readiness_context.get("regressed_count") or 0) > 0:
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")
     elif int(release_readiness_context.get("ci_workflow_regression_count") or 0) > 0:
-        recs.append("Review CI workflow hygiene regressions before presenting the project as release-stable; maturity status is downgraded to review.")
+        recs.append(
+            "Review CI workflow hygiene regressions"
+            + _reason_count_detail(release_readiness_context.get("ci_workflow_regression_reason_counts"))
+            + " before presenting the project as release-stable; maturity status is downgraded to review."
+        )
     elif int(release_readiness_context.get("ci_workflow_order_regression_count") or 0) > 0:
-        recs.append("Review CI workflow order regressions before presenting the project as release-stable; maturity status is downgraded to review.")
+        recs.append(
+            "Review CI workflow order regressions"
+            + _reason_count_detail(release_readiness_context.get("ci_workflow_regression_reason_counts"))
+            + " before presenting the project as release-stable; maturity status is downgraded to review."
+        )
     elif int(release_readiness_context.get("improved_count") or 0) > 0:
         recs.append("Keep release readiness comparison evidence in the registry so improvement history remains visible during maturity review.")
     elif int(release_readiness_context.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count") or 0) > 0:
@@ -554,6 +568,13 @@ def _dict(value: Any) -> dict[str, Any]:
 
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
+
+
+def _reason_count_detail(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return ""
+    return " (" + ", ".join(f"{key}:{counts[key]}" for key in sorted(counts)) + ")"
 
 
 def _pick(value: Any, key: str) -> Any:

@@ -44,6 +44,8 @@ def build_maturity_narrative_summary(
         "release_readiness_ci_workflow_regression_count": release.get("ci_workflow_regression_count"),
         "release_readiness_ci_workflow_order_regression_count": release.get("ci_workflow_order_regression_count"),
         "release_readiness_ci_workflow_status_changed_count": release.get("ci_workflow_status_changed_count"),
+        "release_readiness_ci_workflow_regression_reasons": release.get("ci_workflow_regression_reasons"),
+        "release_readiness_ci_workflow_regression_reason_counts": release.get("ci_workflow_regression_reason_counts"),
         "release_readiness_max_ci_workflow_failed_check_delta": release.get("max_abs_ci_workflow_failed_check_delta"),
         "release_readiness_max_ci_workflow_order_violation_delta": release.get("max_abs_ci_workflow_order_violation_delta"),
         "release_readiness_test_coverage_regression_count": release.get("test_coverage_regression_count"),
@@ -162,6 +164,12 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
     if int(summary.get("release_readiness_benchmark_requirement_failed_reason_added_count") or 0) > 0:
         recommendations.append(
             "Review newly added benchmark-history readiness failed reasons before treating the portfolio as release-stable."
+        )
+    if int(summary.get("release_readiness_ci_workflow_regression_count") or 0) > 0:
+        recommendations.append(
+            "Review release readiness CI workflow regression reasons"
+            + _reason_count_detail(summary.get("release_readiness_ci_workflow_regression_reason_counts"))
+            + " before treating the portfolio as release-stable."
         )
     if int(summary.get("benchmark_history_blocked_count") or 0) > 0:
         recommendations.append("Inspect blocked benchmark history entries before using the portfolio as release-ready evidence.")
@@ -300,6 +308,16 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         maturity_summary.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts"),
         {},
     )
+    ci_regression_reasons = _coalesce(
+        release_context.get("ci_workflow_regression_reasons"),
+        maturity_summary.get("release_readiness_ci_workflow_regression_reasons"),
+        [],
+    )
+    ci_regression_reason_counts = _coalesce(
+        release_context.get("ci_workflow_regression_reason_counts"),
+        maturity_summary.get("release_readiness_ci_workflow_regression_reason_counts"),
+        {},
+    )
     if (
         int(requirement_status_changed_count or 0) > 0
         or int(requirement_reason_mixed_delta_count or 0) > 0
@@ -323,6 +341,8 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
             release_context.get("ci_workflow_status_changed_count"),
             maturity_summary.get("release_readiness_ci_workflow_status_changed_count"),
         ),
+        "ci_workflow_regression_reasons": _string_list(ci_regression_reasons),
+        "ci_workflow_regression_reason_counts": _dict(ci_regression_reason_counts),
         "max_abs_ci_workflow_failed_check_delta": _coalesce(
             release_context.get("max_abs_ci_workflow_failed_check_delta"),
             maturity_summary.get("release_readiness_max_ci_workflow_failed_check_delta"),
@@ -576,6 +596,13 @@ def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
 
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
+
+
+def _reason_count_detail(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return ""
+    return " (" + ", ".join(f"{key}:{counts[key]}" for key in sorted(counts)) + ")"
 
 
 def _counts(values: Any) -> dict[str, int]:

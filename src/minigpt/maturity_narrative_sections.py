@@ -163,6 +163,7 @@ def _release_claim(summary: dict[str, Any]) -> str:
         f"{summary.get('release_readiness_improved_count') or 0} improvement(s); "
         f"CI workflow regressions={summary.get('release_readiness_ci_workflow_regression_count') or 0}, "
         f"CI order regressions={summary.get('release_readiness_ci_workflow_order_regression_count') or 0}, "
+        f"CI regression reasons={_fmt_mapping(summary.get('release_readiness_ci_workflow_regression_reason_counts'))}, "
         f"max order violation delta={summary.get('release_readiness_max_ci_workflow_order_violation_delta') if summary.get('release_readiness_max_ci_workflow_order_violation_delta') is not None else 'missing'}, "
         f"test coverage regressions={summary.get('release_readiness_test_coverage_regression_count') or 0}, "
         f"max coverage gap delta={summary.get('release_readiness_max_test_coverage_gap_delta') if summary.get('release_readiness_max_test_coverage_gap_delta') is not None else 'missing'}, "
@@ -232,6 +233,12 @@ def _dataset_claim(summary: dict[str, Any]) -> str:
 
 def _portfolio_claim(summary: dict[str, Any]) -> str:
     return f"Portfolio status is {summary.get('portfolio_status')} after combining release, serving, benchmark, data, and maturity evidence."
+
+
+def _fmt_mapping(value: Any) -> str:
+    if not isinstance(value, dict) or not value:
+        return "missing"
+    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 __all__ = [

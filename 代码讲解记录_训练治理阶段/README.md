@@ -251,6 +251,9 @@
 396-v382-registry-release-readiness-ci-reasons.md
  -> v382 code explanation: carry release readiness CI regression reasons into registry rows, summaries, CLI output, CSV, HTML, and leaderboard evidence.
 
+397-v383-maturity-release-readiness-ci-reasons.md
+ -> v383 code explanation: carry registry release readiness CI regression reasons into maturity summary, maturity narrative, rendered outputs, CLI fields, and review recommendations.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

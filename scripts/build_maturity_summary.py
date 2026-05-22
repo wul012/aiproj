@@ -41,6 +41,14 @@ def main() -> None:
     print(f"release_readiness_ci_workflow_regression_count={overview.get('release_readiness_ci_workflow_regression_count')}")
     print(f"release_readiness_ci_workflow_order_regression_count={overview.get('release_readiness_ci_workflow_order_regression_count')}")
     print(f"release_readiness_ci_workflow_status_changed_count={overview.get('release_readiness_ci_workflow_status_changed_count')}")
+    print(
+        "release_readiness_ci_workflow_regression_reasons="
+        + json.dumps(overview.get("release_readiness_ci_workflow_regression_reasons") or [], ensure_ascii=False)
+    )
+    print(
+        "release_readiness_ci_workflow_regression_reason_counts="
+        + json.dumps(overview.get("release_readiness_ci_workflow_regression_reason_counts") or {}, ensure_ascii=False)
+    )
     print(f"release_readiness_test_coverage_regression_count={overview.get('release_readiness_test_coverage_regression_count')}")
     print(f"release_readiness_test_coverage_status_changed_count={overview.get('release_readiness_test_coverage_status_changed_count')}")
     print(f"release_readiness_benchmark_history_regression_count={overview.get('release_readiness_benchmark_history_regression_count')}")

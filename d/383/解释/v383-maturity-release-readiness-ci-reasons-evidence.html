@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>v383 maturity release readiness CI reasons evidence</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5a6475;
+      --line: #d9e0ea;
+      --page: #f7f8f4;
+      --panel: #ffffff;
+      --accent: #246b72;
+      --warn: #b45309;
+      --ok: #047857;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+    header {
+      padding: 28px 32px 18px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p { color: var(--muted); margin: 6px 0 0; }
+    main { padding: 18px 32px 34px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .card, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .card { padding: 14px; min-height: 92px; }
+    .label { color: var(--muted); font-size: 12px; text-transform: uppercase; }
+    .value { margin-top: 8px; font-size: 19px; font-weight: 700; overflow-wrap: anywhere; }
+    section { padding: 16px; margin-top: 16px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; }
+    code {
+      background: #eef3f5;
+      color: #14343a;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ok { background: var(--ok); }
+    .warn { background: var(--warn); }
+    ul { margin: 0; padding-left: 22px; }
+    li { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>v383 maturity release readiness CI reasons</h1>
+    <p>Registry CI regression reasons now reach maturity summary and maturity narrative review without creating a new report chain.</p>
+  </header>
+  <main>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Version</div>
+        <div class="value">v383.0.0</div>
+      </div>
+      <div class="card">
+        <div class="label">Targeted Tests</div>
+        <div class="value">30 passed</div>
+      </div>
+      <div class="card">
+        <div class="label">Full Regression</div>
+        <div class="value">680 passed</div>
+      </div>
+      <div class="card">
+        <div class="label">Source Encoding</div>
+        <div class="value">312 clean / 0 BOM / 0 syntax</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Propagated Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>Field</th><th>Evidence Role</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>maturity release context</td>
+            <td><code>ci_workflow_regression_reasons</code><br><code>ci_workflow_regression_reason_counts</code></td>
+            <td>Reads registry release-readiness delta summary and keeps empty list/dict when reason evidence is absent.</td>
+          </tr>
+          <tr>
+            <td>maturity overview</td>
+            <td><code>release_readiness_ci_workflow_regression_reasons</code><br><code>release_readiness_ci_workflow_regression_reason_counts</code></td>
+            <td>Lets JSON, Markdown, HTML, and CLI users see the CI cause summary beside regression counts.</td>
+          </tr>
+          <tr>
+            <td>maturity narrative</td>
+            <td><code>release_readiness_ci_workflow_regression_reason_counts</code></td>
+            <td>Feeds the human-facing release quality claim and review recommendation.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Representative Review Signal</h2>
+      <table>
+        <thead>
+          <tr><th>Input Reasons</th><th>Maturity Recommendation</th><th>Narrative Claim</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ci_failed_checks_increased:1</code><br><code>drift_contract_smoke_ready_to_not_ready:1</code></td>
+            <td>Review CI workflow hygiene regressions with the reason-count detail before presenting the project as release-stable.</td>
+            <td>Release quality claim includes <code>CI regression reasons=ci_failed_checks_increased:1, drift_contract_smoke_ready_to_not_ready:1</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pill ok">pass</span> <code>python -m py_compile ...</code></li>
+        <li><span class="pill ok">pass</span> <code>python -m pytest tests/test_maturity.py tests/test_maturity_narrative.py -q</code> -> 30 passed</li>
+        <li><span class="pill ok">pass</span> <code>python -m pytest -q</code> -> 680 passed</li>
+        <li><span class="pill ok">pass</span> <code>python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v383</code></li>
+        <li><span class="pill ok">pass</span> <code>git diff --check</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

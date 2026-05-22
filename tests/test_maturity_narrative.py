@@ -30,6 +30,7 @@ def make_project(
     regressed_count: int = 0,
     ci_regression_count: int = 0,
     ci_order_regression_count: int = 0,
+    ci_regression_reasons: list[str] | None = None,
     coverage_regression_count: int = 0,
     benchmark_history_regression_count: int = 0,
     benchmark_requirement_change_count: int = 0,
@@ -46,6 +47,8 @@ def make_project(
     dataset_card_path = project / "datasets" / "demo" / "v1" / "dataset_card.json"
     reason_added = benchmark_requirement_reason_added or []
     reason_removed = benchmark_requirement_reason_removed or []
+    ci_reasons = ci_regression_reasons or []
+    ci_reason_counts = {reason: ci_reasons.count(reason) for reason in sorted(set(ci_reasons))}
     reason_mixed_delta_count = 1 if reason_added and reason_removed else 0
     reason_recovery_delta_count = 1 if reason_removed and not reason_added else 0
     if reason_mixed_delta_count:
@@ -72,6 +75,8 @@ def make_project(
                 "release_readiness_ci_workflow_regression_count": ci_regression_count,
                 "release_readiness_ci_workflow_order_regression_count": ci_order_regression_count,
                 "release_readiness_ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                "release_readiness_ci_workflow_regression_reasons": ci_reasons,
+                "release_readiness_ci_workflow_regression_reason_counts": ci_reason_counts,
                 "release_readiness_max_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
                 "release_readiness_max_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "release_readiness_test_coverage_regression_count": coverage_regression_count,
@@ -103,6 +108,8 @@ def make_project(
                 "ci_workflow_regression_count": ci_regression_count,
                 "ci_workflow_order_regression_count": ci_order_regression_count,
                 "ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                "ci_workflow_regression_reasons": ci_reasons,
+                "ci_workflow_regression_reason_counts": ci_reason_counts,
                 "max_abs_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
                 "max_abs_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "test_coverage_regression_count": coverage_regression_count,
@@ -144,6 +151,8 @@ def make_project(
                 "ci_workflow_regression_count": ci_regression_count,
                 "ci_workflow_order_regression_count": ci_order_regression_count,
                 "ci_workflow_status_changed_count": 1 if ci_regression_count or ci_order_regression_count else 0,
+                "ci_workflow_regression_reasons": ci_reasons,
+                "ci_workflow_regression_reason_counts": ci_reason_counts,
                 "max_abs_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
                 "max_abs_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "test_coverage_regression_count": coverage_regression_count,
@@ -347,6 +356,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["current_version"], 66)
             self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "improved")
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_regression_reasons"], [])
+            self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_regression_reason_counts"], {})
             self.assertEqual(narrative["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_history_regression_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
@@ -443,19 +454,40 @@ class MaturityNarrativeTests(unittest.TestCase):
 
     def test_build_maturity_narrative_marks_review_for_ci_order_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            paths = make_project(Path(tmp), release_trend="ci-regressed", ci_order_regression_count=1)
+            paths = make_project(
+                Path(tmp),
+                release_trend="ci-regressed",
+                ci_regression_count=1,
+                ci_order_regression_count=1,
+                ci_regression_reasons=["drift_contract_smoke_ready_to_not_ready", "ci_failed_checks_increased"],
+            )
 
             narrative = build_maturity_narrative(paths["project"])
             release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
 
             self.assertEqual(narrative["summary"]["portfolio_status"], "review")
             self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "ci-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_regression_count"], 1)
             self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_order_regression_count"], 1)
+            self.assertEqual(
+                narrative["summary"]["release_readiness_ci_workflow_regression_reasons"],
+                ["drift_contract_smoke_ready_to_not_ready", "ci_failed_checks_increased"],
+            )
+            self.assertEqual(
+                narrative["summary"]["release_readiness_ci_workflow_regression_reason_counts"],
+                {
+                    "ci_failed_checks_increased": 1,
+                    "drift_contract_smoke_ready_to_not_ready": 1,
+                },
+            )
             self.assertEqual(narrative["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(release_section["status"], "ci-regressed")
+            self.assertIn("CI workflow regressions=1", release_section["claim"])
             self.assertIn("CI order regressions=1", release_section["claim"])
+            self.assertIn("CI regression reasons=ci_failed_checks_increased:1, drift_contract_smoke_ready_to_not_ready:1", release_section["claim"])
             self.assertIn("max order violation delta=1", release_section["claim"])
-            self.assertIn("Resolve review-level release", narrative["recommendations"][0])
+            self.assertIn("release readiness CI workflow regression reasons", narrative["recommendations"][0])
+            self.assertIn("drift_contract_smoke_ready_to_not_ready:1", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_marks_review_for_coverage_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -651,6 +683,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Release Quality Trend", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release CI workflow regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release CI order regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release CI regression reasons", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release coverage regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release coverage gap delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark-history regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
@@ -667,6 +700,7 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("CI regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("CI order regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("CI reasons", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Coverage regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Coverage gap delta", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark regressions", Path(outputs["html"]).read_text(encoding="utf-8"))

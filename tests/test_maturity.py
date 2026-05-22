@@ -45,6 +45,8 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "ci_workflow_regression_count": 0,
                     "ci_workflow_order_regression_count": 0,
                     "ci_workflow_status_changed_count": 0,
+                    "ci_workflow_regression_reasons": [],
+                    "ci_workflow_regression_reason_counts": {},
                     "max_abs_ci_workflow_failed_check_delta": 0,
                     "max_abs_ci_workflow_order_violation_delta": 0,
                     "test_coverage_regression_count": 0,
@@ -125,6 +127,8 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_regressed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_order_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_reasons"], [])
+            self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_reason_counts"], {})
             self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_history_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
@@ -144,6 +148,8 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["max_abs_status_delta"], 3)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 0)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 0)
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_reasons"], [])
+            self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_reason_counts"], {})
             self.assertEqual(summary["release_readiness_context"]["test_coverage_regression_count"], 0)
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_regression_count"], 0)
             self.assertEqual(
@@ -184,12 +190,14 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertIn("Capability Matrix", markdown)
             self.assertIn("Request History Context", markdown)
             self.assertIn("Release Readiness Trend Context", markdown)
+            self.assertIn("Release readiness CI regression reasons", markdown)
             self.assertIn("Release readiness benchmark-history regressions", markdown)
             self.assertIn("Project Synthesis", Path(outputs["csv"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT project maturity summary", html)
             self.assertIn("Request History Context", html)
             self.assertIn("Release Readiness Trend Context", html)
+            self.assertIn("CI workflow regression reasons", html)
             self.assertIn("Benchmark-history regressions", html)
 
     def test_release_readiness_regression_marks_maturity_for_review(self) -> None:
@@ -219,6 +227,14 @@ class MaturitySummaryTests(unittest.TestCase):
             registry["release_readiness_delta_summary"]["ci_workflow_regression_count"] = 1
             registry["release_readiness_delta_summary"]["ci_workflow_order_regression_count"] = 1
             registry["release_readiness_delta_summary"]["ci_workflow_status_changed_count"] = 1
+            registry["release_readiness_delta_summary"]["ci_workflow_regression_reasons"] = [
+                "drift_contract_smoke_ready_to_not_ready",
+                "ci_failed_checks_increased",
+            ]
+            registry["release_readiness_delta_summary"]["ci_workflow_regression_reason_counts"] = {
+                "ci_failed_checks_increased": 1,
+                "drift_contract_smoke_ready_to_not_ready": 1,
+            }
             registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"] = 2
             registry["release_readiness_delta_summary"]["max_abs_ci_workflow_order_violation_delta"] = 1
             registry_path.write_text(json.dumps(registry), encoding="utf-8")
@@ -230,11 +246,30 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_order_regression_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_status_changed_count"], 1)
+            self.assertEqual(
+                summary["summary"]["release_readiness_ci_workflow_regression_reasons"],
+                ["drift_contract_smoke_ready_to_not_ready", "ci_failed_checks_increased"],
+            )
+            self.assertEqual(
+                summary["summary"]["release_readiness_ci_workflow_regression_reason_counts"],
+                {
+                    "ci_failed_checks_increased": 1,
+                    "drift_contract_smoke_ready_to_not_ready": 1,
+                },
+            )
             self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 1)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_order_regression_count"], 1)
+            self.assertEqual(
+                summary["release_readiness_context"]["ci_workflow_regression_reason_counts"],
+                {
+                    "ci_failed_checks_increased": 1,
+                    "drift_contract_smoke_ready_to_not_ready": 1,
+                },
+            )
             self.assertIn("CI workflow hygiene regressions", " ".join(summary["recommendations"]))
+            self.assertIn("drift_contract_smoke_ready_to_not_ready:1", " ".join(summary["recommendations"]))
 
     def test_ci_workflow_order_regression_marks_maturity_for_review(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
