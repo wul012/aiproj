@@ -15,12 +15,37 @@ from scripts.run_ci_tiny_scorecard_comparison_smoke import (  # noqa: E402
     CI_TINY_SCORECARD_CONFIG,
     PLAN_JSON_FILENAME,
     PLAN_TEXT_FILENAME,
+    build_benchmark_history_summary,
     build_ci_smoke_command,
     build_invocation_plan,
     build_summary_digest,
     parse_args,
     render_invocation_plan,
 )
+
+
+def write_history_artifacts(history_dir: Path) -> None:
+    history_dir.mkdir(parents=True)
+    payload = {
+        "schema_version": 1,
+        "evidence_kind": "tiny-smoke",
+        "summary": {
+            "entry_count": 1,
+            "ready_count": 0,
+            "model_quality_claim": "not_claimed",
+        },
+        "readiness_requirement": {
+            "status": "fail",
+            "decision": "stop",
+            "exit_code": 1,
+            "failed_reasons": ["insufficient_ready_entries", "not_real_benchmark_evidence"],
+        },
+        "entries": [{"name": "round", "boundary": "tiny-smoke-plumbing-evidence"}],
+    }
+    (history_dir / "benchmark_history.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    (history_dir / "benchmark_history.csv").write_text("name,status\nround,blocked\n", encoding="utf-8")
+    (history_dir / "benchmark_history.md").write_text("# Benchmark History\n", encoding="utf-8")
+    (history_dir / "benchmark_history.html").write_text("<!doctype html><title>History</title>\n", encoding="utf-8")
 
 
 class CITinyScorecardSmokeTests(unittest.TestCase):
@@ -96,6 +121,8 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
         self.assertIn("returncode=0", text)
         self.assertIn("benchmark_history_json_sha256=", text)
         self.assertIn("benchmark_history_html_sha256=", text)
+        self.assertEqual(plan["benchmark_history_summary"]["parse_status"], "missing")
+        self.assertIn("benchmark_history_parse_status=missing", text)
 
     def test_build_summary_digest_records_artifact_hashes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -109,12 +136,7 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             (out_dir / "tiny_scorecard_comparison_smoke_summary.json").write_bytes(summary_json)
             (out_dir / "tiny_scorecard_comparison_smoke_summary.txt").write_text("status=pass\n", encoding="utf-8")
             (check_dir / "tiny_scorecard_comparison_smoke_check.json").write_bytes(check_json)
-            history_dir = out_dir / "benchmark-history"
-            history_dir.mkdir()
-            (history_dir / "benchmark_history.json").write_text('{"schema_version":1}\n', encoding="utf-8")
-            (history_dir / "benchmark_history.csv").write_text("name,status\nround,blocked\n", encoding="utf-8")
-            (history_dir / "benchmark_history.md").write_text("# Benchmark History\n", encoding="utf-8")
-            (history_dir / "benchmark_history.html").write_text("<!doctype html><title>History</title>\n", encoding="utf-8")
+            write_history_artifacts(out_dir / "benchmark-history")
 
             digest = build_summary_digest(out_dir, check_dir)
             artifacts = digest["artifacts"]
@@ -131,6 +153,47 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             self.assertTrue(artifacts["benchmark_history_markdown"]["exists"])
             self.assertTrue(artifacts["benchmark_history_html"]["exists"])
             self.assertTrue(artifacts["benchmark_history_html"]["sha256"])
+
+    def test_build_benchmark_history_summary_reads_tiny_smoke_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out_dir = Path(tmp) / "smoke"
+            write_history_artifacts(out_dir / "benchmark-history")
+
+            summary = build_benchmark_history_summary(out_dir)
+
+            self.assertTrue(summary["available"])
+            self.assertEqual(summary["parse_status"], "pass")
+            self.assertEqual(summary["evidence_kind"], "tiny-smoke")
+            self.assertEqual(summary["entry_count"], 1)
+            self.assertEqual(summary["ready_count"], 0)
+            self.assertEqual(summary["model_quality_claim"], "not_claimed")
+            self.assertEqual(summary["readiness_requirement_status"], "fail")
+            self.assertIn("not_real_benchmark_evidence", summary["readiness_requirement_failed_reasons"])
+            self.assertEqual(summary["latest_boundary"], "tiny-smoke-plumbing-evidence")
+
+    def test_invocation_plan_renders_history_boundary_after_artifacts_exist(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out_dir = root / "smoke"
+            check_dir = root / "check"
+            out_dir.mkdir()
+            check_dir.mkdir()
+            write_history_artifacts(out_dir / "benchmark-history")
+            args = parse_args(["--out-dir", str(out_dir), "--summary-check-out-dir", str(check_dir)])
+            command = build_ci_smoke_command(args)
+
+            plan = build_invocation_plan(args, command, returncode=0)
+            text = render_invocation_plan(plan)
+
+            self.assertEqual(plan["benchmark_history_summary"]["evidence_kind"], "tiny-smoke")
+            self.assertEqual(plan["benchmark_history_summary"]["model_quality_claim"], "not_claimed")
+            self.assertIn("benchmark_history_evidence_kind=tiny-smoke", text)
+            self.assertIn("benchmark_history_model_quality_claim=not_claimed", text)
+            self.assertIn(
+                "benchmark_history_readiness_requirement_failed_reasons=insufficient_ready_entries,not_real_benchmark_evidence",
+                text,
+            )
+            self.assertIn("benchmark_history_latest_boundary=tiny-smoke-plumbing-evidence", text)
 
     def test_wrapper_writes_invocation_plan_after_running_smoke(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -164,6 +227,12 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             self.assertEqual(plan["config"]["decision_min_rubric_score"], 60.0)
             self.assertEqual(plan["summary_check_out_dir"], str(check_dir))
             self.assertEqual(plan["returncode"], 0)
+            self.assertEqual(plan["benchmark_history_summary"]["evidence_kind"], "tiny-smoke")
+            self.assertEqual(plan["benchmark_history_summary"]["model_quality_claim"], "not_claimed")
+            self.assertEqual(plan["benchmark_history_summary"]["readiness_requirement_status"], "fail")
+            self.assertIn("not_real_benchmark_evidence", plan["benchmark_history_summary"]["readiness_requirement_failed_reasons"])
+            self.assertIn("benchmark_history_evidence_kind=tiny-smoke", plan_text_path.read_text(encoding="utf-8"))
+            self.assertIn("benchmark_history_model_quality_claim=not_claimed", plan_text_path.read_text(encoding="utf-8"))
             artifacts = plan["summary_digest"]["artifacts"]
             self.assertTrue(artifacts["summary_json"]["exists"])
             self.assertTrue(artifacts["summary_json"]["sha256"])

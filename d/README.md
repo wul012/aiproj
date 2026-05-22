@@ -311,6 +311,9 @@ d/399/解释/说明.md
 d/400/图片
 d/400/解释/说明.md
  -> v400 CI benchmark-history semantic boundary 的运行截图和解释
+d/401/图片
+d/401/解释/说明.md
+ -> v401 CI wrapper benchmark-history summary 的运行截图和解释
 ```
 
 写入规则：

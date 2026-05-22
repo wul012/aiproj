@@ -126,6 +126,7 @@ def build_invocation_plan(
         "command_text": " ".join(command),
         "returncode": returncode,
         "summary_digest": summary_digest or build_summary_digest(args.out_dir, args.summary_check_out_dir),
+        "benchmark_history_summary": build_benchmark_history_summary(args.out_dir),
     }
 
 
@@ -161,6 +162,20 @@ def render_invocation_plan(plan: dict[str, Any]) -> str:
         ("benchmark_history_csv_sha256", _artifact_digest_value(digest, "benchmark_history_csv", "sha256")),
         ("benchmark_history_markdown_sha256", _artifact_digest_value(digest, "benchmark_history_markdown", "sha256")),
         ("benchmark_history_html_sha256", _artifact_digest_value(digest, "benchmark_history_html", "sha256")),
+        ("benchmark_history_available", _benchmark_history_value(plan, "available")),
+        ("benchmark_history_parse_status", _benchmark_history_value(plan, "parse_status")),
+        ("benchmark_history_evidence_kind", _benchmark_history_value(plan, "evidence_kind")),
+        ("benchmark_history_entry_count", _benchmark_history_value(plan, "entry_count")),
+        ("benchmark_history_ready_count", _benchmark_history_value(plan, "ready_count")),
+        ("benchmark_history_model_quality_claim", _benchmark_history_value(plan, "model_quality_claim")),
+        ("benchmark_history_readiness_requirement_status", _benchmark_history_value(plan, "readiness_requirement_status")),
+        ("benchmark_history_readiness_requirement_decision", _benchmark_history_value(plan, "readiness_requirement_decision")),
+        ("benchmark_history_readiness_requirement_exit_code", _benchmark_history_value(plan, "readiness_requirement_exit_code")),
+        (
+            "benchmark_history_readiness_requirement_failed_reasons",
+            ",".join(_string_list(_benchmark_history_value(plan, "readiness_requirement_failed_reasons"))),
+        ),
+        ("benchmark_history_latest_boundary", _benchmark_history_value(plan, "latest_boundary")),
         ("command_text", plan["command_text"]),
     ]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
@@ -178,6 +193,49 @@ def build_summary_digest(out_dir: Path, summary_check_out_dir: Path) -> dict[str
             "benchmark_history_markdown": _file_digest(out_dir / "benchmark-history" / BENCHMARK_HISTORY_MARKDOWN_FILENAME),
             "benchmark_history_html": _file_digest(out_dir / "benchmark-history" / BENCHMARK_HISTORY_HTML_FILENAME),
         }
+    }
+
+
+def build_benchmark_history_summary(out_dir: Path) -> dict[str, Any]:
+    path = out_dir / "benchmark-history" / BENCHMARK_HISTORY_JSON_FILENAME
+    if not path.is_file():
+        return {
+            "available": False,
+            "parse_status": "missing",
+            "path": str(path),
+        }
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return {
+            "available": False,
+            "parse_status": "invalid_json",
+            "path": str(path),
+            "error": str(exc),
+        }
+    if not isinstance(payload, dict):
+        return {
+            "available": False,
+            "parse_status": "invalid_payload",
+            "path": str(path),
+        }
+    summary = _as_dict(payload.get("summary"))
+    requirement = _as_dict(payload.get("readiness_requirement"))
+    entries = [dict(item) for item in payload.get("entries", []) if isinstance(item, dict)] if isinstance(payload.get("entries"), list) else []
+    return {
+        "available": True,
+        "parse_status": "pass",
+        "path": str(path),
+        "evidence_kind": payload.get("evidence_kind"),
+        "entry_count": summary.get("entry_count"),
+        "ready_count": summary.get("ready_count"),
+        "model_quality_claim": summary.get("model_quality_claim"),
+        "readiness_requirement_status": requirement.get("status"),
+        "readiness_requirement_decision": requirement.get("decision"),
+        "readiness_requirement_exit_code": requirement.get("exit_code"),
+        "readiness_requirement_failed_reasons": _string_list(requirement.get("failed_reasons")),
+        "latest_boundary": entries[-1].get("boundary") if entries else None,
+        "boundary_values": sorted({str(item.get("boundary")) for item in entries if item.get("boundary")}),
     }
 
 
@@ -202,6 +260,20 @@ def _artifact_digest_value(digest: dict[str, Any], name: str, key: str) -> Any:
     artifacts = digest.get("artifacts", {})
     artifact = artifacts.get(name, {})
     return artifact.get(key)
+
+
+def _benchmark_history_value(plan: dict[str, Any], key: str) -> Any:
+    return _as_dict(plan.get("benchmark_history_summary")).get(key)
+
+
+def _as_dict(value: Any) -> dict[str, Any]:
+    return dict(value) if isinstance(value, dict) else {}
+
+
+def _string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(item) for item in value if item is not None and str(item) != ""]
 
 
 def write_invocation_plan(plan: dict[str, Any], out_dir: Path) -> dict[str, str]:
