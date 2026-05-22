@@ -44,6 +44,7 @@ def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | 
         "batch_comparison_blocker_action_count",
         "batch_maturity_coverage_regression_count",
         "batch_maturity_ci_regression_count",
+        "batch_maturity_ci_regression_reason_counts",
         "execute",
         "blocked_reason",
         "readiness_score",
@@ -83,13 +84,14 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
         f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
         f"- Batch coverage regressions: `{summary.get('batch_maturity_coverage_regression_count')}`",
         f"- Batch CI regressions: `{summary.get('batch_maturity_ci_regression_count')}`",
+        f"- Batch CI regression reasons: `{_fmt_mapping(summary.get('batch_maturity_ci_regression_reason_counts'))}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
         f"- Baseline suite: `{summary.get('baseline_suite_path')}`",
         "",
         "## Runs",
         "",
-        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | CI | Score | Relation |",
-        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | ---: | --- |",
+        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | CI | CI Reasons | Score | Relation |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | --- | ---: | --- |",
     ]
     deltas = {row.get("name"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     for run in _list_of_dicts(report.get("runs")):
@@ -110,6 +112,7 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
                     _md(run.get("batch_comparison_review_action_count")),
                     _md(run.get("batch_comparison_blocker_action_count")),
                     _md(run.get("batch_maturity_ci_regression_count")),
+                    _md(_fmt_mapping(run.get("batch_maturity_ci_regression_reason_counts"))),
                     _md(run.get("readiness_score")),
                     _md(delta.get("explanation")),
                 ]
@@ -141,6 +144,7 @@ def render_training_scale_run_comparison_html(report: dict[str, Any]) -> str:
         ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
         ("Coverage regressions", summary.get("batch_maturity_coverage_regression_count")),
         ("CI regressions", summary.get("batch_maturity_ci_regression_count")),
+        ("CI regression reasons", _fmt_mapping(summary.get("batch_maturity_ci_regression_reason_counts"))),
         ("Gate warn", summary.get("gate_warn_count")),
         ("Gate fail", summary.get("gate_fail_count")),
         ("Suite", summary.get("suite_consistency")),
@@ -210,13 +214,14 @@ def _runs_table(report: dict[str, Any]) -> str:
             f"<td>{_e(run.get('batch_comparison_review_action_count'))}</td>"
             f"<td>{_e(run.get('batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e(run.get('batch_maturity_ci_regression_count'))}</td>"
+            f"<td>{_e(_fmt_mapping(run.get('batch_maturity_ci_regression_reason_counts')))}</td>"
             f"<td>{_e(run.get('readiness_score'))}</td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )
     return (
         '<section><h2>Runs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>CI</th><th>Score</th><th>Relation</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>CI</th><th>CI Reasons</th><th>Score</th><th>Relation</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 
@@ -252,3 +257,10 @@ footer { color: #69756a; font-size: 12px; }
 
 def _card(label: str, value: Any) -> str:
     return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
+
+
+def _fmt_mapping(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return "none"
+    return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))

@@ -127,6 +127,7 @@ def _run_summary(report: dict[str, Any], name: str, index: int) -> dict[str, Any
         "batch_maturity_review_names": _string_list(batch.get("maturity_review_names")),
         "batch_maturity_coverage_regression_names": _string_list(batch.get("maturity_coverage_regression_names")),
         "batch_maturity_ci_regression_names": _string_list(batch.get("maturity_ci_regression_names")),
+        "batch_maturity_ci_regression_reason_counts": _int_mapping(batch.get("maturity_ci_regression_reason_counts")),
         "batch_comparison_blocker_reasons": _string_list(batch.get("comparison_blocker_reasons")),
         "batch_comparison_blocker_portfolios": _string_list(batch.get("comparison_blocker_portfolios")),
         "completed_variant_count": batch.get("completed_variant_count"),
@@ -205,6 +206,7 @@ def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], de
         "batch_maturity_review_count": sum(_int(row.get("batch_maturity_review_count")) for row in runs),
         "batch_maturity_coverage_regression_count": sum(_int(row.get("batch_maturity_coverage_regression_count")) for row in runs),
         "batch_maturity_ci_regression_count": sum(_int(row.get("batch_maturity_ci_regression_count")) for row in runs),
+        "batch_maturity_ci_regression_reason_counts": _merge_reason_counts(runs),
         "batch_maturity_coverage_regression_names": sorted(
             {
                 name
@@ -317,6 +319,26 @@ def _delta_explanation(run: dict[str, Any], baseline: dict[str, Any], readiness_
 
 def _int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
+
+
+def _int_mapping(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    result = {}
+    for key, raw_count in value.items():
+        reason = str(key).strip()
+        count = _int(raw_count)
+        if reason and count > 0:
+            result[reason] = count
+    return dict(sorted(result.items()))
+
+
+def _merge_reason_counts(runs: list[dict[str, Any]]) -> dict[str, int]:
+    merged: dict[str, int] = {}
+    for run in runs:
+        for reason, count in _int_mapping(run.get("batch_maturity_ci_regression_reason_counts")).items():
+            merged[reason] = merged.get(reason, 0) + count
+    return dict(sorted(merged.items()))
 
 
 def _signed(value: int) -> str:

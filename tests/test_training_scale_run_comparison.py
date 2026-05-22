@@ -194,6 +194,10 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
                 "maturity_coverage_regression_names": ["coverage-risk"],
                 "maturity_ci_regression_count": 1,
                 "maturity_ci_regression_names": ["ci-risk"],
+                "maturity_ci_regression_reason_counts": {
+                    "ci_failed_checks_increased": 2,
+                    "ci_order_violations_increased": 1,
+                },
                 "comparison_blocker_reasons": ["best_score_ci_regressed"],
                 "comparison_blocker_portfolios": ["ci-risk"],
                 "completed_variant_count": 2,
@@ -221,12 +225,26 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
 
         self.assertEqual(run["batch_maturity_ci_regression_count"], 1)
         self.assertEqual(run["batch_maturity_ci_regression_names"], ["ci-risk"])
+        self.assertEqual(
+            run["batch_maturity_ci_regression_reason_counts"],
+            {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+        )
         self.assertEqual(summary["batch_maturity_ci_regression_count"], 1)
         self.assertEqual(summary["batch_maturity_ci_regression_names"], ["ci-risk"])
+        self.assertEqual(
+            summary["batch_maturity_ci_regression_reason_counts"],
+            {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+        )
         self.assertIn("batch_maturity_ci_regression_count", csv_text)
+        self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
+        self.assertIn("ci_failed_checks_increased", csv_text)
         self.assertIn("Batch CI regressions", markdown)
+        self.assertIn("Batch CI regression reasons", markdown)
+        self.assertIn("ci_failed_checks_increased:2", markdown)
         self.assertIn("| ci-risk |", markdown)
         self.assertIn("CI regressions", html)
+        self.assertIn("CI regression reasons", html)
+        self.assertIn("ci_failed_checks_increased:2", html)
 
     def _make_allowed_and_blocked_runs(self, root: Path) -> tuple[Path, Path]:
         source = root / "corpus.txt"
