@@ -16,6 +16,7 @@ from minigpt.training_scale_run_comparison_artifacts import (
 from minigpt.report_utils import (
     as_dict as _dict,
     number_or_default,
+    positive_int_mapping as _int_mapping,
     string_list as _string_list,
     utc_now,
 )
@@ -319,18 +320,6 @@ def _delta_explanation(run: dict[str, Any], baseline: dict[str, Any], readiness_
 
 def _int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
-
-
-def _int_mapping(value: Any) -> dict[str, int]:
-    if not isinstance(value, dict):
-        return {}
-    result = {}
-    for key, raw_count in value.items():
-        reason = str(key).strip()
-        count = _int(raw_count)
-        if reason and count > 0:
-            result[reason] = count
-    return dict(sorted(result.items()))
 
 
 def _merge_reason_counts(runs: list[dict[str, Any]]) -> dict[str, int]:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from minigpt.report_utils import as_dict, number_or_none
+from minigpt.report_utils import as_dict, format_mapping, number_or_none, positive_int_mapping
 
 
 REVIEW_STATUSES = frozenset({"review", "warn", "fail", "incomplete"})
@@ -290,21 +290,9 @@ def _as_str(value: Any) -> str | None:
     return text or None
 
 
-def _int_mapping(value: Any) -> dict[str, int]:
-    if not isinstance(value, dict):
-        return {}
-    result = {}
-    for key, raw_count in value.items():
-        reason = _as_str(key)
-        count = _as_int(raw_count)
-        if reason and count is not None and count > 0:
-            result[reason] = count
-    return result
-
-
 def _reason_count_detail(value: Any) -> str:
-    counts = _int_mapping(value)
-    return ", ".join(f"{reason}:{count}" for reason, count in counts.items())
+    detail = format_mapping(positive_int_mapping(value))
+    return "" if detail == "none" else detail
 
 
 __all__ = [

@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from minigpt.report_utils import format_mapping as _format_mapping
+from minigpt.report_utils import positive_int_mapping as _int_mapping
 from minigpt.report_utils import utc_now
 from minigpt.training_portfolio_comparison_artifacts import (
     render_training_portfolio_comparison_html,
@@ -489,18 +491,6 @@ def _dict(value: Any) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
-def _int_mapping(value: Any) -> dict[str, int]:
-    if not isinstance(value, dict):
-        return {}
-    result = {}
-    for key, raw_count in value.items():
-        reason = _as_str(key)
-        count = _as_int(raw_count)
-        if reason and count is not None and count > 0:
-            result[reason] = count
-    return result
-
-
 def _count_strings(values: list[str]) -> dict[str, int]:
     counts: dict[str, int] = {}
     for value in values:
@@ -519,8 +509,8 @@ def _merge_reason_counts(portfolios: list[dict[str, Any]]) -> dict[str, int]:
 
 
 def _reason_count_detail(value: Any) -> str:
-    counts = _int_mapping(value)
-    return ", ".join(f"{reason}:{count}" for reason, count in counts.items())
+    detail = _format_mapping(_int_mapping(value))
+    return "" if detail == "none" else detail
 
 
 def _string_list(value: Any) -> list[str]:

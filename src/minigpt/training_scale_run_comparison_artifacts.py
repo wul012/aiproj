@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     csv_cell as _csv_value,
+    format_mapping as _fmt_mapping,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     markdown_cell as _md,
@@ -257,10 +258,3 @@ footer { color: #69756a; font-size: 12px; }
 
 def _card(label: str, value: Any) -> str:
     return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
-
-
-def _fmt_mapping(value: Any) -> str:
-    counts = _dict(value)
-    if not counts:
-        return "none"
-    return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))

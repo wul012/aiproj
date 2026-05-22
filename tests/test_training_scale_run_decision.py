@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -213,11 +214,19 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             allowed["batch_maturity_coverage_regression_count"] = 0
             allowed["batch_maturity_ci_regression_count"] = 1
             allowed["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            allowed["batch_maturity_ci_regression_reason_counts"] = {
+                "ci_failed_checks_increased": 2,
+                "ci_order_violations_increased": 1,
+            }
             payload["summary"]["batch_comparison_review_action_count"] = 0
             payload["summary"]["batch_comparison_blocker_action_count"] = 0
             payload["summary"]["batch_maturity_coverage_regression_count"] = 0
             payload["summary"]["batch_maturity_ci_regression_count"] = 1
             payload["summary"]["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            payload["summary"]["batch_maturity_ci_regression_reason_counts"] = {
+                "ci_failed_checks_increased": 2,
+                "ci_order_violations_increased": 1,
+            }
             comparison.write_text(json.dumps(payload), encoding="utf-8")
 
             default_report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
@@ -229,8 +238,16 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
 
             self.assertEqual(default_report["summary"]["selected_batch_review_status"], "review")
             self.assertEqual(default_report["summary"]["selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(
+                default_report["summary"]["selected_batch_maturity_ci_regression_reason_counts"],
+                {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+            )
             self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_count"], 1)
             self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_names"], ["ci-risk"])
+            self.assertEqual(
+                default_report["summary"]["batch_maturity_ci_regression_reason_counts"],
+                {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+            )
             self.assertEqual(default_report["summary"]["clean_batch_review_status"], "review")
             self.assertTrue(any("CI regression context" in item for item in default_report["recommendations"]))
             self.assertEqual(strict_report["decision_status"], "blocked")
@@ -268,8 +285,16 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             allowed = payload["runs"][0]
             allowed["batch_maturity_ci_regression_count"] = 1
             allowed["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            allowed["batch_maturity_ci_regression_reason_counts"] = {
+                "ci_failed_checks_increased": 2,
+                "ci_order_violations_increased": 1,
+            }
             payload["summary"]["batch_maturity_ci_regression_count"] = 1
             payload["summary"]["batch_maturity_ci_regression_names"] = ["ci-risk"]
+            payload["summary"]["batch_maturity_ci_regression_reason_counts"] = {
+                "ci_failed_checks_increased": 2,
+                "ci_order_violations_increased": 1,
+            }
             comparison.write_text(json.dumps(payload), encoding="utf-8")
 
             report = build_training_scale_run_decision(comparison, generated_at="2026-05-14T00:00:00Z")
@@ -277,13 +302,38 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
             markdown = render_training_scale_run_decision_markdown(report)
             html = render_training_scale_run_decision_html(report)
+            cli = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "decide_training_scale_run.py"),
+                    str(comparison),
+                    "--out-dir",
+                    str(root / "cli-decision"),
+                ],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
 
             self.assertIn("selected_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("selected_batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
+            self.assertIn("ci_failed_checks_increased", csv_text)
             self.assertIn("Selected batch CI regressions", markdown)
+            self.assertIn("Selected batch CI regression reasons", markdown)
             self.assertIn("Batch CI regressions", markdown)
+            self.assertIn("Batch CI regression reasons", markdown)
+            self.assertIn("ci_failed_checks_increased:2", markdown)
             self.assertIn("Selected CI regressions", html)
+            self.assertIn("Selected CI reasons", html)
             self.assertIn("CI regressions", html)
+            self.assertIn("CI regression reasons", html)
+            self.assertIn("ci_failed_checks_increased:2", html)
+            self.assertIn("batch_maturity_ci_regression_reason_counts=", cli.stdout)
+            self.assertIn("selected_batch_maturity_ci_regression_reason_counts=", cli.stdout)
+            self.assertIn("ci_failed_checks_increased", cli.stdout)
 
     def test_rejects_comparison_without_runs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

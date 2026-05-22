@@ -61,6 +61,25 @@ def as_dict(value: Any) -> dict[str, Any]:
     return dict(value) if isinstance(value, dict) else {}
 
 
+def positive_int_mapping(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    result: dict[str, int] = {}
+    for key, raw_count in value.items():
+        name = str(key).strip()
+        count = int(number_or_default(raw_count, 0, int))
+        if name and count > 0:
+            result[name] = count
+    return dict(sorted(result.items()))
+
+
+def format_mapping(value: Any) -> str:
+    counts = as_dict(value)
+    if not counts:
+        return "none"
+    return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))
+
+
 def list_of_dicts(value: Any) -> list[dict[str, Any]]:
     if not isinstance(value, list):
         return []

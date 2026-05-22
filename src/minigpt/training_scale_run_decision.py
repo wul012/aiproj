@@ -9,6 +9,7 @@ from minigpt.report_utils import (
     display_command as _display_command,
     list_of_dicts as _list_of_dicts,
     number_or_default,
+    positive_int_mapping as _int_mapping,
     string_list as _string_list,
     utc_now,
 )
@@ -81,6 +82,7 @@ def build_training_scale_run_decision(
             "batch_comparison_blocker_action_count": _int(run.get("batch_comparison_blocker_action_count")),
             "batch_maturity_coverage_regression_count": _int(run.get("batch_maturity_coverage_regression_count")),
             "batch_maturity_ci_regression_count": _int(run.get("batch_maturity_ci_regression_count")),
+            "batch_maturity_ci_regression_reason_counts": _int_mapping(run.get("batch_maturity_ci_regression_reason_counts")),
             "reasons": reasons,
         }
         if reasons:
@@ -346,6 +348,10 @@ def _decision_summary(
         "selected_batch_comparison_blocker_action_count": _selected_int(selected, "batch_comparison_blocker_action_count"),
         "selected_batch_maturity_coverage_regression_count": _selected_int(selected, "batch_maturity_coverage_regression_count"),
         "selected_batch_maturity_ci_regression_count": _selected_int(selected, "batch_maturity_ci_regression_count"),
+        "selected_batch_maturity_ci_regression_reason_counts": _selected_mapping(
+            selected,
+            "batch_maturity_ci_regression_reason_counts",
+        ),
         "selected_batch_review_status": _batch_review_status(selected),
         "selected_suite_path": selected_suite_path,
         "require_suite_consistency": bool(require_suite_consistency),
@@ -361,6 +367,9 @@ def _decision_summary(
         "batch_maturity_coverage_regression_names": _string_list(comparison_summary.get("batch_maturity_coverage_regression_names")),
         "batch_maturity_ci_regression_count": _int(comparison_summary.get("batch_maturity_ci_regression_count")),
         "batch_maturity_ci_regression_names": _string_list(comparison_summary.get("batch_maturity_ci_regression_names")),
+        "batch_maturity_ci_regression_reason_counts": _int_mapping(
+            comparison_summary.get("batch_maturity_ci_regression_reason_counts")
+        ),
         "batch_comparison_blocker_reasons": _string_list(comparison_summary.get("batch_comparison_blocker_reasons")),
     }
 
@@ -422,6 +431,10 @@ def _int(value: Any) -> int:
 
 def _selected_int(selected: dict[str, Any] | None, key: str) -> int:
     return 0 if selected is None else _int(selected.get(key))
+
+
+def _selected_mapping(selected: dict[str, Any] | None, key: str) -> dict[str, int]:
+    return {} if selected is None else _int_mapping(selected.get(key))
 
 
 def _batch_review_status(selected: dict[str, Any] | None) -> str:

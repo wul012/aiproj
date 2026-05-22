@@ -53,7 +53,15 @@ def main() -> None:
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
     summary = report.get("summary", {})
     print(f"batch_maturity_ci_regression_count={summary.get('batch_maturity_ci_regression_count')}")
+    print(
+        "batch_maturity_ci_regression_reason_counts="
+        + json.dumps(summary.get("batch_maturity_ci_regression_reason_counts", {}), ensure_ascii=False)
+    )
     print(f"selected_batch_maturity_ci_regression_count={summary.get('selected_batch_maturity_ci_regression_count')}")
+    print(
+        "selected_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(summary.get("selected_batch_maturity_ci_regression_reason_counts", {}), ensure_ascii=False)
+    )
     print(f"clean_batch_review_status={summary.get('clean_batch_review_status')}")
     print(f"execute_command={report.get('execute_command_text')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

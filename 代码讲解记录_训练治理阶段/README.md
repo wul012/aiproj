@@ -266,6 +266,9 @@
 401-v387-training-scale-run-comparison-maturity-ci-reasons.md
  -> v387 code explanation: carry gated scale-run maturity CI regression reason counts into multi-run comparison summaries, rendered outputs, and CLI evidence.
 
+402-v388-training-scale-run-decision-maturity-ci-reasons.md
+ -> v388 code explanation: carry scale-run comparison maturity CI regression reason counts into run decisions and consolidate reason-count helper parsing/formatting.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

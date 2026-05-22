@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.report_utils import as_dict as _dict
 from minigpt.report_utils import list_of_dicts as _list_of_dicts
+from minigpt.report_utils import positive_int_mapping as _int_mapping
 from minigpt.report_utils import utc_now
 from minigpt.training_portfolio import (
     build_training_portfolio_plan,
@@ -477,18 +478,6 @@ def _as_int(value: Any) -> int | None:
         return int(value)
     except (TypeError, ValueError):
         return None
-
-
-def _int_mapping(value: Any) -> dict[str, int]:
-    if not isinstance(value, dict):
-        return {}
-    result = {}
-    for key, raw_count in value.items():
-        name = _optional_str(key)
-        count = _as_int(raw_count)
-        if name and count is not None and count > 0:
-            result[name] = count
-    return dict(sorted(result.items()))
 
 
 def _string_list(value: Any) -> list[str]:

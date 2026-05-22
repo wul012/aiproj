@@ -6,11 +6,13 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     first_present as _first_present,
+    format_mapping as _fmt_mapping,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     list_of_strs as _list_of_strings,
     markdown_cell as _md,
     number_or_default,
+    positive_int_mapping as _int_mapping,
     string_list as _string_list,
     utc_now,
     write_csv_row,
@@ -419,25 +421,6 @@ def _summary_section(title: str, rows: list[tuple[str, Any]]) -> str:
 
 def _as_int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
-
-
-def _int_mapping(value: Any) -> dict[str, int]:
-    if not isinstance(value, dict):
-        return {}
-    result = {}
-    for key, raw_count in value.items():
-        name = str(key).strip()
-        count = _as_int(raw_count)
-        if name and count > 0:
-            result[name] = count
-    return dict(sorted(result.items()))
-
-
-def _fmt_mapping(value: Any) -> str:
-    counts = _dict(value)
-    if not counts:
-        return "none"
-    return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))
 
 
 def _list_section(title: str, items: Any) -> str:

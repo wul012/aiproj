@@ -13,6 +13,7 @@ from minigpt.report_utils import (  # noqa: E402
     count_available_artifacts,
     display_command,
     first_present,
+    format_mapping,
     html_escape,
     list_of_dicts,
     make_artifact_row,
@@ -20,6 +21,7 @@ from minigpt.report_utils import (  # noqa: E402
     markdown_cell,
     number_or_default,
     number_or_none,
+    positive_int_mapping,
     write_csv_row,
     write_json_payload,
 )
@@ -87,6 +89,14 @@ class ReportUtilsTests(unittest.TestCase):
         self.assertIsNone(number_or_none(True, int))
         self.assertEqual(number_or_default("bad", 7, int), 7)
         self.assertEqual(number_or_default("4.5", 0.0), 4.5)
+
+    def test_positive_int_mapping_filters_and_formats_reason_counts(self) -> None:
+        counts = positive_int_mapping({" b ": "2", "a": 1, "zero": 0, "bad": "x", "": 4})
+
+        self.assertEqual(counts, {"a": 1, "b": 2})
+        self.assertEqual(format_mapping(counts), "a:1, b:2")
+        self.assertEqual(format_mapping({}), "none")
+        self.assertEqual(positive_int_mapping(["bad"]), {})
 
 
 if __name__ == "__main__":
