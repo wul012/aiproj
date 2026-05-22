@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiniGPT v400 CI Benchmark History Semantic Boundary</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #202a33;
+      --muted: #5d6772;
+      --panel: #ffffff;
+      --line: #d8dcd2;
+      --accent: #1d4ed8;
+      --ok: #166534;
+      --warn: #9a3412;
+      --code: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 "Segoe UI", Arial, sans-serif;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 32px 56px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); margin: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .stat, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .stat strong {
+      display: block;
+      color: var(--code);
+      font-size: 24px;
+      margin-top: 4px;
+    }
+    section { margin-top: 16px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th { background: #e8ece6; }
+    code {
+      color: var(--code);
+      background: #edf0ed;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    pre {
+      margin: 0;
+      overflow: auto;
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      main { padding: 24px 18px 40px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">MiniGPT v400 evidence</div>
+      <h1>CI plan checks now read benchmark-history semantics</h1>
+      <p>
+        v400 keeps the v399 digest protection and adds semantic review. The plan checker reads
+        <code>benchmark_history.json</code>, reports the tiny-smoke boundary, and fails if CI
+        smoke evidence starts claiming real model-quality status.
+      </p>
+    </header>
+
+    <div class="grid">
+      <div class="stat"><span>evidence kind</span><strong>tiny-smoke</strong></div>
+      <div class="stat"><span>model claim</span><strong>not_claimed</strong></div>
+      <div class="stat"><span>readiness</span><strong class="warn">fail</strong></div>
+      <div class="stat"><span>boundary guard</span><strong class="ok">on</strong></div>
+    </div>
+
+    <section>
+      <h2>Semantic Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Expected CI value</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>evidence_kind</code></td><td><code>tiny-smoke</code></td><td>Confirms this is small plumbing evidence, not a full benchmark.</td></tr>
+          <tr><td><code>model_quality_claim</code></td><td><code>not_claimed</code></td><td>Prevents CI smoke from being described as quality proof.</td></tr>
+          <tr><td><code>readiness_requirement_status</code></td><td><code>fail</code></td><td>Signals that promotion readiness is intentionally not satisfied.</td></tr>
+          <tr><td><code>failed_reasons</code></td><td><code>not_real_benchmark_evidence</code></td><td>Preserves the boundary reason in machine-readable form.</td></tr>
+          <tr><td><code>latest_boundary</code></td><td><code>tiny-smoke-plumbing-evidence</code></td><td>Makes the current ledger role visible in CI logs.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Checker Output</h2>
+      <pre>benchmark_history_available=True
+benchmark_history_parse_status=pass
+benchmark_history_evidence_kind=tiny-smoke
+benchmark_history_entry_count=1
+benchmark_history_ready_count=0
+benchmark_history_model_quality_claim=not_claimed
+benchmark_history_readiness_requirement_status=fail
+benchmark_history_readiness_requirement_failed_reasons=insufficient_ready_entries,not_real_benchmark_evidence
+benchmark_history_latest_boundary=tiny-smoke-plumbing-evidence</pre>
+    </section>
+
+    <section>
+      <h2>Failure Conditions</h2>
+      <p>
+        For <code>run_ci_tiny_scorecard_comparison_smoke</code>, the checker fails on
+        <code>benchmark_history_kind_mismatch</code>,
+        <code>benchmark_history_model_claim_unexpected</code>, or
+        <code>benchmark_history_boundary_reason_missing</code>.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

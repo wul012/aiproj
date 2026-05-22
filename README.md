@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 399 closes the CI evidence loop for the tiny scorecard benchmark history by recording the new history artifacts in the wrapper plan digest and validating them in the plan checker.
+Version 400 makes the CI tiny scorecard plan checker read benchmark-history semantics, so the wrapper evidence exposes and protects the tiny-smoke boundary instead of only validating file digests.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 399 closes the CI evidence loop for the tiny scorecard benchmark history
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v400 checkpoint
+
+- `scripts/check_ci_tiny_scorecard_plan.py` now parses `benchmark_history.json` from the wrapper plan digest.
+- Plan-check JSON/text expose benchmark-history availability, parse status, evidence kind, entry/ready counts, model-quality claim, readiness requirement status, failed reasons, and latest boundary.
+- The CI tiny scorecard wrapper path now fails if benchmark history stops being `tiny-smoke`, claims model quality, or loses the `not_real_benchmark_evidence` boundary reason.
+- Tests cover passing tiny-smoke history, tampered artifact digests, unexpected real-benchmark claims, and the real wrapper-smoke-to-plan-check chain.
+- Archived CI benchmark-history semantic boundary evidence in `d/400`.
 
 ## Latest v399 checkpoint
 

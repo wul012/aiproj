@@ -104,6 +104,12 @@ def check_plan(plan: dict[str, Any], *, plan_path: Path | None = None) -> dict[s
         issues.append(_issue("summary_digest_artifacts_missing", "summary_digest.artifacts", "plan has no artifact digest map"))
     if plan.get("returncode") != 0:
         issues.append(_issue("returncode_not_zero", "returncode", f"plan returncode is {plan.get('returncode')!r}"))
+    benchmark_history, benchmark_history_issues = _benchmark_history_review(
+        as_dict(artifacts.get("benchmark_history_json")),
+        wrapper=str(plan.get("wrapper") or ""),
+        returncode=plan.get("returncode"),
+    )
+    issues.extend(benchmark_history_issues)
 
     status = "pass" if not issues else "fail"
     return {
@@ -116,6 +122,7 @@ def check_plan(plan: dict[str, Any], *, plan_path: Path | None = None) -> dict[s
         "artifact_count": len(rows),
         "artifact_failure_count": sum(1 for row in rows if row.get("status") != "pass"),
         "artifacts": rows,
+        "benchmark_history": benchmark_history,
         "issue_count": len(issues),
         "issues": issues,
     }
@@ -132,6 +139,25 @@ def render_check(report: dict[str, Any]) -> str:
         ("artifact_failure_count", report.get("artifact_failure_count")),
         ("issue_count", report.get("issue_count")),
     ]
+    history = as_dict(report.get("benchmark_history"))
+    rows.extend(
+        [
+            ("benchmark_history_available", history.get("available")),
+            ("benchmark_history_parse_status", history.get("parse_status")),
+            ("benchmark_history_evidence_kind", history.get("evidence_kind")),
+            ("benchmark_history_entry_count", history.get("entry_count")),
+            ("benchmark_history_ready_count", history.get("ready_count")),
+            ("benchmark_history_model_quality_claim", history.get("model_quality_claim")),
+            ("benchmark_history_readiness_requirement_status", history.get("readiness_requirement_status")),
+            ("benchmark_history_readiness_requirement_decision", history.get("readiness_requirement_decision")),
+            ("benchmark_history_readiness_requirement_exit_code", history.get("readiness_requirement_exit_code")),
+            (
+                "benchmark_history_readiness_requirement_failed_reasons",
+                ",".join(_string_list(history.get("readiness_requirement_failed_reasons"))),
+            ),
+            ("benchmark_history_latest_boundary", history.get("latest_boundary")),
+        ]
+    )
     for artifact in report.get("artifacts", []):
         if not isinstance(artifact, dict):
             continue
@@ -165,6 +191,94 @@ def _actual_digest(path: Path) -> dict[str, Any]:
     return {"exists": True, "size_bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
 
 
+def _benchmark_history_review(
+    artifact: dict[str, Any],
+    *,
+    wrapper: str,
+    returncode: Any,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    path_text = str(artifact.get("path") or "")
+    expected_exists = bool(artifact.get("exists"))
+    if not path_text:
+        return {"available": False, "parse_status": "missing_path"}, []
+    if not expected_exists:
+        issues = []
+        if returncode == 0:
+            issues.append(
+                _issue(
+                    "benchmark_history_json_missing",
+                    "benchmark_history_json",
+                    "successful CI tiny scorecard wrapper plan did not record benchmark history JSON",
+                )
+            )
+        return {"available": False, "parse_status": "not_recorded", "path": path_text}, issues
+    path = Path(path_text)
+    if not path.is_file():
+        return {"available": False, "parse_status": "missing_current_file", "path": path_text}, []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return {"available": False, "parse_status": "invalid_json", "path": path_text}, [
+            _issue("benchmark_history_json_unreadable", "benchmark_history_json", f"benchmark history JSON cannot be parsed: {exc}")
+        ]
+    if not isinstance(payload, dict):
+        return {"available": False, "parse_status": "invalid_payload", "path": path_text}, [
+            _issue("benchmark_history_json_invalid", "benchmark_history_json", "benchmark history JSON must contain an object")
+        ]
+    summary = as_dict(payload.get("summary"))
+    requirement = as_dict(payload.get("readiness_requirement"))
+    entries = [dict(item) for item in payload.get("entries", []) if isinstance(item, dict)] if isinstance(payload.get("entries"), list) else []
+    boundaries = _unique_strings(item.get("boundary") for item in entries)
+    review = {
+        "available": True,
+        "parse_status": "pass",
+        "path": path_text,
+        "evidence_kind": payload.get("evidence_kind"),
+        "entry_count": summary.get("entry_count"),
+        "ready_count": summary.get("ready_count"),
+        "model_quality_claim": summary.get("model_quality_claim"),
+        "readiness_requirement_status": requirement.get("status"),
+        "readiness_requirement_decision": requirement.get("decision"),
+        "readiness_requirement_exit_code": requirement.get("exit_code"),
+        "readiness_requirement_failed_reasons": _string_list(requirement.get("failed_reasons")),
+        "latest_boundary": entries[-1].get("boundary") if entries else None,
+        "boundary_values": boundaries,
+    }
+    issues = _benchmark_history_boundary_issues(review, wrapper=wrapper)
+    return review, issues
+
+
+def _benchmark_history_boundary_issues(review: dict[str, Any], *, wrapper: str) -> list[dict[str, Any]]:
+    if wrapper != "run_ci_tiny_scorecard_comparison_smoke":
+        return []
+    issues: list[dict[str, Any]] = []
+    if review.get("evidence_kind") != "tiny-smoke":
+        issues.append(
+            _issue(
+                "benchmark_history_kind_mismatch",
+                "benchmark_history.evidence_kind",
+                "CI tiny scorecard wrapper history must remain tiny-smoke evidence",
+            )
+        )
+    if review.get("model_quality_claim") != "not_claimed":
+        issues.append(
+            _issue(
+                "benchmark_history_model_claim_unexpected",
+                "benchmark_history.model_quality_claim",
+                "CI tiny scorecard wrapper history must not claim model-quality evidence",
+            )
+        )
+    if "not_real_benchmark_evidence" not in _string_list(review.get("readiness_requirement_failed_reasons")):
+        issues.append(
+            _issue(
+                "benchmark_history_boundary_reason_missing",
+                "benchmark_history.readiness_requirement_failed_reasons",
+                "CI tiny scorecard wrapper history must preserve the not-real-benchmark boundary reason",
+            )
+        )
+    return issues
+
+
 def _missing_actual() -> dict[str, Any]:
     return {"exists": False, "size_bytes": 0, "sha256": ""}
 
@@ -188,6 +302,16 @@ def _int_or_zero(value: Any) -> int:
         return int(value)
     except (TypeError, ValueError):
         return 0
+
+
+def _string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(item) for item in value if item is not None and str(item) != ""]
+
+
+def _unique_strings(values: Any) -> list[str]:
+    return sorted({str(value) for value in values if value is not None and str(value) != ""})
 
 
 if __name__ == "__main__":

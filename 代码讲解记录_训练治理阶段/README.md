@@ -302,6 +302,9 @@
 413-v399-ci-benchmark-history-plan-digest.md
  -> v399 code explanation: include benchmark-history artifacts in the CI tiny scorecard wrapper plan digest and plan checker.
 
+414-v400-ci-benchmark-history-semantic-boundary.md
+ -> v400 code explanation: parse benchmark-history semantics in the CI plan checker and protect the tiny-smoke boundary.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
