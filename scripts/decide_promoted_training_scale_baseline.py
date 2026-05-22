@@ -52,8 +52,18 @@ def main() -> None:
         f"{summary.get('selected_handoff_batch_maturity_ci_regression_count')}"
     )
     print(
+        "selected_handoff_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(summary.get("selected_handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False)
+    )
+    print(
         "selected_handoff_selected_batch_maturity_ci_regression_count="
         f"{summary.get('selected_handoff_selected_batch_maturity_ci_regression_count')}"
+    )
+    print(
+        "selected_handoff_selected_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(
+            summary.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False
+        )
     )
     print(
         "selected_comparison_exclusion_reasons="
@@ -64,8 +74,16 @@ def main() -> None:
     print(f"handoff_unclean_batch_review_count={summary.get('handoff_unclean_batch_review_count')}")
     print(f"handoff_batch_maturity_ci_regression_count={summary.get('handoff_batch_maturity_ci_regression_count')}")
     print(
+        "handoff_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(summary.get("handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False)
+    )
+    print(
         "handoff_selected_batch_maturity_ci_regression_total="
         f"{summary.get('handoff_selected_batch_maturity_ci_regression_total')}"
+    )
+    print(
+        "handoff_selected_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False)
     )
     print(
         "handoff_batch_maturity_ci_regression_names="
@@ -92,8 +110,21 @@ def main() -> None:
         f"{summary.get('comparison_ready_handoff_batch_maturity_ci_regression_count')}"
     )
     print(
+        "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(
+            summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False
+        )
+    )
+    print(
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_total="
         f"{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_total')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(
+            summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+            ensure_ascii=False,
+        )
     )
     print(
         "comparison_ready_handoff_batch_maturity_ci_regression_names="

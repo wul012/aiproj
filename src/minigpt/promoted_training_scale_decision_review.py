@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from typing import Any
 
-from minigpt.report_utils import string_list as _string_list
+from minigpt.report_utils import (
+    format_mapping as _fmt_mapping,
+    positive_int_mapping as _int_mapping,
+    string_list as _string_list,
+)
 
 
 def append_decision_handoff_batch_recommendations(
@@ -41,12 +45,16 @@ def append_decision_handoff_clean_batch_recommendations(
             "Comparison-ready promoted inputs still include unclean clean-required handoffs; keep the decision in review."
         )
     elif _int(comparison_summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")):
+        detail = _fmt_mapping(comparison_summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"))
         recommendations.append(
-            "Comparison-ready promoted inputs still include handoff batch CI regressions; keep the decision in review."
+            "Comparison-ready promoted inputs still include handoff batch CI regressions; "
+            f"keep the decision in review. Observed reasons: {detail}."
         )
     elif _int(comparison_summary.get("handoff_batch_maturity_ci_regression_count")):
+        detail = _fmt_mapping(comparison_summary.get("handoff_batch_maturity_ci_regression_reason_counts"))
         recommendations.append(
-            "Rejected promoted inputs include handoff batch CI regressions; keep them out of baseline selection until CI evidence is clean."
+            "Rejected promoted inputs include handoff batch CI regressions; "
+            f"keep them out of baseline selection until CI evidence is clean. Observed reasons: {detail}."
         )
     elif _int(comparison_summary.get("handoff_unclean_batch_review_count")):
         recommendations.append(
@@ -79,12 +87,18 @@ def build_decision_handoff_review_summary(
         "selected_handoff_batch_maturity_ci_regression_count": None
         if selected is None
         else selected.get("handoff_batch_maturity_ci_regression_count"),
+        "selected_handoff_batch_maturity_ci_regression_reason_counts": {}
+        if selected is None
+        else _int_mapping(selected.get("handoff_batch_maturity_ci_regression_reason_counts")),
         "selected_handoff_batch_maturity_ci_regression_names": []
         if selected is None
         else _string_list(selected.get("handoff_batch_maturity_ci_regression_names")),
         "selected_handoff_selected_batch_maturity_ci_regression_count": None
         if selected is None
         else selected.get("handoff_selected_batch_maturity_ci_regression_count"),
+        "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {}
+        if selected is None
+        else _int_mapping(selected.get("handoff_selected_batch_maturity_ci_regression_reason_counts")),
         "selected_comparison_exclusion_reasons": []
         if selected is None
         else _string_list(selected.get("comparison_exclusion_reasons")),
@@ -153,10 +167,22 @@ def build_decision_handoff_review_summary(
             "handoff_batch_maturity_ci_regression_count",
             sum(_int(row.get("handoff_batch_maturity_ci_regression_count")) for row in promotions),
         ),
+        "handoff_batch_maturity_ci_regression_reason_counts": _summary_mapping(
+            comparison_summary,
+            "handoff_batch_maturity_ci_regression_reason_counts",
+            _sum_reason_counts(row.get("handoff_batch_maturity_ci_regression_reason_counts") for row in promotions),
+        ),
         "handoff_selected_batch_maturity_ci_regression_total": _summary_number(
             comparison_summary,
             "handoff_selected_batch_maturity_ci_regression_total",
             sum(_int(row.get("handoff_selected_batch_maturity_ci_regression_count")) for row in promotions),
+        ),
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": _summary_mapping(
+            comparison_summary,
+            "handoff_selected_batch_maturity_ci_regression_reason_counts",
+            _sum_reason_counts(
+                row.get("handoff_selected_batch_maturity_ci_regression_reason_counts") for row in promotions
+            ),
         ),
         "handoff_batch_maturity_ci_regression_names": _string_list(
             comparison_summary.get("handoff_batch_maturity_ci_regression_names")
@@ -216,11 +242,29 @@ def build_decision_handoff_review_summary(
                 if row.get("promoted_for_comparison")
             ),
         ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": _summary_mapping(
+            comparison_summary,
+            "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+            _sum_reason_counts(
+                row.get("handoff_batch_maturity_ci_regression_reason_counts")
+                for row in promotions
+                if row.get("promoted_for_comparison")
+            ),
+        ),
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": _summary_number(
             comparison_summary,
             "comparison_ready_handoff_selected_batch_maturity_ci_regression_total",
             sum(
                 _int(row.get("handoff_selected_batch_maturity_ci_regression_count"))
+                for row in promotions
+                if row.get("promoted_for_comparison")
+            ),
+        ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": _summary_mapping(
+            comparison_summary,
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            _sum_reason_counts(
+                row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
                 for row in promotions
                 if row.get("promoted_for_comparison")
             ),
@@ -306,6 +350,19 @@ def build_decision_handoff_review_summary(
 
 def _summary_number(summary: dict[str, Any], key: str, fallback: int) -> Any:
     return summary.get(key) if summary.get(key) is not None else fallback
+
+
+def _summary_mapping(summary: dict[str, Any], key: str, fallback: dict[str, int]) -> dict[str, int]:
+    value = _int_mapping(summary.get(key))
+    return value if value else fallback
+
+
+def _sum_reason_counts(values: Any) -> dict[str, int]:
+    totals: dict[str, int] = {}
+    for value in values:
+        for reason, count in _int_mapping(value).items():
+            totals[reason] = totals.get(reason, 0) + count
+    return dict(sorted(totals.items()))
 
 
 def _int(value: Any) -> int:

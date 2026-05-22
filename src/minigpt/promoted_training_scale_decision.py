@@ -22,6 +22,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
     number_or_default,
+    positive_int_mapping as _int_mapping,
     string_list as _string_list,
     utc_now,
 )
@@ -142,11 +143,17 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 "handoff_batch_maturity_ci_regression_count": _int(
                     row.get("handoff_batch_maturity_ci_regression_count")
                 ),
+                "handoff_batch_maturity_ci_regression_reason_counts": _int_mapping(
+                    row.get("handoff_batch_maturity_ci_regression_reason_counts")
+                ),
                 "handoff_batch_maturity_ci_regression_names": _string_list(
                     row.get("handoff_batch_maturity_ci_regression_names")
                 ),
                 "handoff_selected_batch_maturity_ci_regression_count": _int(
                     row.get("handoff_selected_batch_maturity_ci_regression_count")
+                ),
+                "handoff_selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
+                    row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
                 ),
                 "comparison_exclusion_reasons": _string_list(row.get("comparison_exclusion_reasons")),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),

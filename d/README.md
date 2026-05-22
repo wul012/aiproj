@@ -287,6 +287,9 @@ d/391/解释/说明.md
 d/392/图片
 d/392/解释/说明.md
  -> v392 promoted comparison maturity CI reasons 的运行截图和解释
+d/393/图片
+d/393/解释/说明.md
+ -> v393 promoted decision maturity CI reasons 的运行截图和解释
 ```
 
 写入规则：
