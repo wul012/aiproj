@@ -299,6 +299,9 @@ d/395/解释/说明.md
 d/396/图片
 d/396/解释/说明.md
  -> v396 promoted seed handoff maturity CI reasons 的运行截图和解释
+d/397/图片
+d/397/解释/说明.md
+ -> v397 governance chain value review 的运行截图和解释
 ```
 
 写入规则：

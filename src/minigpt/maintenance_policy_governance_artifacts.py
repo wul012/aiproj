@@ -32,6 +32,11 @@ def write_governance_stabilization_csv(report: dict[str, Any], path: str | Path)
         "review_reason",
         "expansion_rule",
         "next_action",
+        "value_status",
+        "duplicate_risk",
+        "recent_expansion",
+        "current_guardrail",
+        "guardrail_detail",
     ]
     rows = []
     for item in _list_of_dicts(report.get("chains")):
@@ -75,6 +80,14 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
         "missing_review_reason_count",
         "missing_expansion_rule_count",
         "consolidation_candidate_count",
+        "core_value_count",
+        "supporting_value_count",
+        "watch_value_count",
+        "low_duplicate_risk_count",
+        "medium_duplicate_risk_count",
+        "high_duplicate_risk_count",
+        "heavy_recent_expansion_count",
+        "freeze_new_fields_count",
     ]:
         lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
     lines.extend(
@@ -82,8 +95,8 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
             "",
             "## Governance Chains",
             "",
-            "| Chain | Action | Consumer | Evidence | Review reason | Expansion rule | Next action |",
-            "| --- | --- | --- | --- | --- | --- | --- |",
+            "| Chain | Action | Consumer | Evidence | Review reason | Expansion rule | Next action | Value status | Duplicate risk | Recent expansion | Guardrail | Guardrail detail |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for item in _list_of_dicts(report.get("chains")):
@@ -98,6 +111,11 @@ def render_governance_stabilization_markdown(report: dict[str, Any]) -> str:
                     _md(item.get("review_reason")),
                     _md(item.get("expansion_rule")),
                     _md(item.get("next_action")),
+                    _md(item.get("value_status")),
+                    _md(item.get("duplicate_risk")),
+                    _md(item.get("recent_expansion")),
+                    _md(item.get("current_guardrail")),
+                    _md(item.get("guardrail_detail")),
                 ]
             )
             + " |"
@@ -173,6 +191,14 @@ def render_governance_stabilization_html(report: dict[str, Any]) -> str:
         ("Keep", summary.get("keep_count")),
         ("Watch", summary.get("watch_count")),
         ("Merge/Cut", summary.get("consolidation_candidate_count")),
+        ("Core value", summary.get("core_value_count")),
+        ("Supporting value", summary.get("supporting_value_count")),
+        ("Watch value", summary.get("watch_value_count")),
+        ("Low duplicate risk", summary.get("low_duplicate_risk_count")),
+        ("Medium duplicate risk", summary.get("medium_duplicate_risk_count")),
+        ("High duplicate risk", summary.get("high_duplicate_risk_count")),
+        ("Heavy recent expansion", summary.get("heavy_recent_expansion_count")),
+        ("Freeze new fields", summary.get("freeze_new_fields_count")),
         ("Missing rules", summary.get("missing_expansion_rule_count")),
         ("Routing", routing.get("decision")),
         ("Exact match", routing.get("exact_match_count")),
@@ -183,7 +209,7 @@ def render_governance_stabilization_html(report: dict[str, Any]) -> str:
     ]
     rows = "".join(_governance_chain_html_row(item) for item in _list_of_dicts(report.get("chains")))
     if not rows:
-        rows = '<tr><td colspan="7" class="muted">No governance chains were provided.</td></tr>'
+            rows = '<tr><td colspan="12" class="muted">No governance chains were provided.</td></tr>'
     return "\n".join(
         [
             "<!doctype html>",
@@ -198,7 +224,7 @@ def render_governance_stabilization_html(report: dict[str, Any]) -> str:
             "<body>",
             f"<header><h1>{_e(report.get('title', 'MiniGPT governance stabilization review'))}</h1><p>Stabilize existing governance chains before adding new report layers.</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
-            "<section><h2>Governance Chains</h2><table><tr><th>Chain</th><th>Action</th><th>Consumer</th><th>Evidence</th><th>Review Reason</th><th>Expansion Rule</th><th>Next Action</th></tr>"
+            "<section><h2>Governance Chains</h2><table><tr><th>Chain</th><th>Action</th><th>Consumer</th><th>Evidence</th><th>Review Reason</th><th>Expansion Rule</th><th>Next Action</th><th>Value Status</th><th>Duplicate Risk</th><th>Recent Expansion</th><th>Guardrail</th><th>Guardrail Detail</th></tr>"
             + rows
             + "</table></section>",
             _proposal_routing_section(routing),
@@ -243,6 +269,11 @@ def _governance_chain_html_row(item: dict[str, Any]) -> str:
         f"<td>{_e(item.get('review_reason'))}</td>"
         f"<td>{_e(item.get('expansion_rule'))}</td>"
         f"<td>{_e(item.get('next_action'))}</td>"
+        f"<td>{_e(item.get('value_status'))}</td>"
+        f"<td>{_e(item.get('duplicate_risk'))}</td>"
+        f"<td>{_e(item.get('recent_expansion'))}</td>"
+        f"<td>{_e(item.get('current_guardrail'))}</td>"
+        f"<td>{_e(item.get('guardrail_detail'))}</td>"
         "</tr>"
     )
 

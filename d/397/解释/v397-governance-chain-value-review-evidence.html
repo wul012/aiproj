@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v397 governance chain value review</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f6f8f4; color: #172026; }
+    body { margin: 0; padding: 32px; }
+    main { max-width: 1180px; margin: 0 auto; }
+    header { border-bottom: 1px solid #d8dfd2; padding-bottom: 18px; margin-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: 0; }
+    p { color: #4d5b52; line-height: 1.65; }
+    section { background: #fff; border: 1px solid #d9dfd5; border-radius: 8px; padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(20, 30, 20, 0.05); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    .card { border: 1px solid #e1e6dc; border-radius: 8px; padding: 14px; background: #fbfcf8; }
+    .card span { display: block; color: #637167; font-size: 12px; }
+    .card strong { display: block; margin-top: 8px; font-size: 18px; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .table-wrap { overflow-x: auto; }
+    th, td { border-bottom: 1px solid #e2e7de; padding: 10px; text-align: left; vertical-align: top; }
+    th { color: #435047; font-size: 12px; text-transform: uppercase; }
+    code { background: #eef2e8; border-radius: 4px; padding: 2px 5px; }
+    pre { background: #172026; color: #f8fbf4; border-radius: 8px; padding: 14px; overflow-wrap: anywhere; white-space: pre-wrap; }
+    footer { color: #667267; font-size: 12px; margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>MiniGPT v397 governance chain value review</h1>
+      <p>本版不再继续扩展 CI reason 字段链，而是在现有七条 governance chains 上加入 value、duplicate-risk 和 freeze-new-fields guardrails。</p>
+    </header>
+
+    <section class="grid">
+      <div class="card"><span>Version</span><strong>v397.0.0</strong></div>
+      <div class="card"><span>Governance Chains</span><strong>7</strong></div>
+      <div class="card"><span>High Duplicate Risk</span><strong>2</strong></div>
+      <div class="card"><span>Freeze New Fields</span><strong>2</strong></div>
+      <div class="card"><span>Status</span><strong>pass</strong></div>
+      <div class="card"><span>Decision</span><strong>pause_new_governance_chains</strong></div>
+    </section>
+
+    <section>
+      <h2>Why This Version</h2>
+      <p>v382-v396 连续推进 CI regression reason counts 是有价值的，但继续下去会变成“治理链重复重走”。v397 把这个判断固化成维护策略：核心链保留，高重叠链冻结新增字段，下一步优先整合或真实 benchmark。</p>
+    </section>
+
+    <section>
+      <h2>Default Watch Targets</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Chain</th><th>Value</th><th>Duplicate Risk</th><th>Recent Expansion</th><th>Guardrail</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>training-promotion</td><td>watch</td><td>high</td><td>heavy</td><td>freeze-new-fields</td><td>v382-v396 reason carryover 已经补齐到 seed handoff，继续投影收益下降。</td></tr>
+            <tr><td>maturity-portfolio</td><td>watch</td><td>high</td><td>heavy</td><td>freeze-new-fields</td><td>执行摘要层容易把下游细节重复变成维护噪声。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Representative CLI Output</h2>
+      <pre>governance_high_duplicate_risk_count=2
+governance_heavy_recent_expansion_count=3
+governance_freeze_new_fields_count=2
+governance_decision=pause_new_governance_chains</pre>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <pre>python -m pytest tests/test_maintenance_policy.py -q
+python -B scripts/check_maintenance_batching.py --skip-module-pressure --out-dir runs/governance-value-review-v397
+python -m pytest -q
+python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v397
+git diff --check</pre>
+    </section>
+
+    <footer>Generated as static runtime evidence for MiniGPT v397.</footer>
+  </main>
+</body>
+</html>

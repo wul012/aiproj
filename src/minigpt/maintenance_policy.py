@@ -58,6 +58,9 @@ DEFAULT_MIN_BATCH_ITEMS = 2
 DEFAULT_GOVERNANCE_PAUSE_DAYS = 3
 
 GOVERNANCE_STABILIZATION_ACTIONS = {"keep", "watch", "merge", "cut"}
+GOVERNANCE_VALUE_STATUSES = {"core", "supporting", "watch"}
+GOVERNANCE_DUPLICATE_RISKS = {"low", "medium", "high"}
+GOVERNANCE_GUARDRAILS = {"keep-core", "route-to-existing", "freeze-new-fields", "consolidate-first"}
 
 DEFAULT_GOVERNANCE_CHAINS = [
     {
@@ -69,6 +72,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "Data changes can invalidate model-quality comparisons, so this chain is a core boundary rather than decorative reporting.",
         "expansion_rule": "Merge new dataset-only signals into this chain unless they require a new training or release decision.",
         "next_action": "Keep as the data-boundary spine; do not add more display-only projections during the pause.",
+        "value_status": "core",
+        "duplicate_risk": "low",
+        "recent_expansion": "stable",
+        "current_guardrail": "route-to-existing",
+        "guardrail_detail": "Only add dataset fields when they change comparison, registry, or model-card decisions.",
     },
     {
         "id": "benchmark-history",
@@ -79,6 +87,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "Repeated benchmark evidence is the closest current proxy for model-capability movement.",
         "expansion_rule": "Extend this chain only when a new benchmark signal changes promotion or release review.",
         "next_action": "Keep as model-capability review evidence while avoiding new threshold variants.",
+        "value_status": "core",
+        "duplicate_risk": "medium",
+        "recent_expansion": "moderate",
+        "current_guardrail": "keep-core",
+        "guardrail_detail": "Prefer real checkpoint deltas over more scorecard display variants.",
     },
     {
         "id": "registry-model-card",
@@ -89,6 +102,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "Reviewers need one project index and one project-level model summary before opening detailed artifacts.",
         "expansion_rule": "Add new run-level facts here only after they exist in the source chain and have a clear review consumer.",
         "next_action": "Keep as the project-level index and summary surface.",
+        "value_status": "supporting",
+        "duplicate_risk": "medium",
+        "recent_expansion": "moderate",
+        "current_guardrail": "route-to-existing",
+        "guardrail_detail": "Keep registry/model-card facts as projections of source evidence, not new source chains.",
     },
     {
         "id": "release-readiness",
@@ -99,6 +117,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "Release-style decisions need a stable gate/readiness surface even when the model remains educational.",
         "expansion_rule": "Repair broken release contracts here; avoid adding new panels unless they change ship/review/block decisions.",
         "next_action": "Keep as release-style review; only fix broken contracts during the pause.",
+        "value_status": "core",
+        "duplicate_risk": "medium",
+        "recent_expansion": "heavy",
+        "current_guardrail": "route-to-existing",
+        "guardrail_detail": "Route release-readiness drift into existing gate/readiness outputs before adding dashboards.",
     },
     {
         "id": "ci-coverage-hygiene",
@@ -109,6 +132,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "This chain has already caught real CI and encoding regressions, so it protects the rest of the evidence system.",
         "expansion_rule": "Add only checks that catch executable regressions; do not add narrative-only CI status fields.",
         "next_action": "Keep because it catches real regressions and CI drift.",
+        "value_status": "core",
+        "duplicate_risk": "low",
+        "recent_expansion": "moderate",
+        "current_guardrail": "keep-core",
+        "guardrail_detail": "Executable CI checks remain valuable; narrative-only projections should merge elsewhere.",
     },
     {
         "id": "training-promotion",
@@ -119,6 +147,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "This chain is useful but has the highest overlap risk because many promotion artifacts repeat clean/review/block fields.",
         "expansion_rule": "Prefer helper and artifact consolidation before adding another promotion-stage report.",
         "next_action": "Watch for overlap and repeated fields; consolidate helper/output duplication before adding new promotion variants.",
+        "value_status": "watch",
+        "duplicate_risk": "high",
+        "recent_expansion": "heavy",
+        "current_guardrail": "freeze-new-fields",
+        "guardrail_detail": "After v382-v396 CI-reason carryover, avoid new reason projections unless they change automation decisions.",
     },
     {
         "id": "maturity-portfolio",
@@ -129,6 +162,11 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "review_reason": "This is the executive summary layer, so duplicate detail here can quickly become maintenance noise.",
         "expansion_rule": "Merge narrative-only additions into existing summaries unless a new consumer needs separate machine-readable fields.",
         "next_action": "Watch as an executive summary layer; merge duplicate narrative-only fields into existing summaries.",
+        "value_status": "watch",
+        "duplicate_risk": "high",
+        "recent_expansion": "heavy",
+        "current_guardrail": "freeze-new-fields",
+        "guardrail_detail": "Do not add more narrative projections until existing maturity/portfolio chains are summarized.",
     },
 ]
 
@@ -353,6 +391,11 @@ def _normalize_governance_chain(item: dict[str, Any], index: int) -> dict[str, A
     review_reason = str(item.get("review_reason") or item.get("reason") or "").strip()
     expansion_rule = str(item.get("expansion_rule") or item.get("rule") or "").strip()
     next_action = str(item.get("next_action") or item.get("recommendation") or "").strip()
+    value_status = _allowed_text(item.get("value_status"), GOVERNANCE_VALUE_STATUSES, "watch" if action == "watch" else "core")
+    duplicate_risk = _allowed_text(item.get("duplicate_risk"), GOVERNANCE_DUPLICATE_RISKS, "medium" if action == "watch" else "low")
+    recent_expansion = str(item.get("recent_expansion") or "").strip()
+    current_guardrail = _allowed_text(item.get("current_guardrail"), GOVERNANCE_GUARDRAILS, "consolidate-first" if action in {"merge", "cut"} else "route-to-existing")
+    guardrail_detail = str(item.get("guardrail_detail") or "").strip()
     necessary = action in {"keep", "watch"}
     has_consumer = bool(consumer)
     has_evidence = bool(evidence)
@@ -368,6 +411,11 @@ def _normalize_governance_chain(item: dict[str, Any], index: int) -> dict[str, A
         "review_reason": review_reason,
         "expansion_rule": expansion_rule,
         "next_action": next_action,
+        "value_status": value_status,
+        "duplicate_risk": duplicate_risk,
+        "recent_expansion": recent_expansion,
+        "current_guardrail": current_guardrail,
+        "guardrail_detail": guardrail_detail,
     }
 
 
@@ -378,6 +426,10 @@ def _governance_summary(chains: list[dict[str, Any]], pause_days: int) -> dict[s
     missing_evidence = sum(1 for item in chains if not item.get("has_evidence"))
     missing_review_reason = sum(1 for item in chains if not item.get("review_reason"))
     missing_expansion_rule = sum(1 for item in chains if not item.get("expansion_rule"))
+    value_counts = {status: sum(1 for item in chains if item.get("value_status") == status) for status in sorted(GOVERNANCE_VALUE_STATUSES)}
+    risk_counts = {risk: sum(1 for item in chains if item.get("duplicate_risk") == risk) for risk in sorted(GOVERNANCE_DUPLICATE_RISKS)}
+    freeze_new_fields = sum(1 for item in chains if item.get("current_guardrail") == "freeze-new-fields")
+    heavy_recent_expansion = sum(1 for item in chains if str(item.get("recent_expansion")).lower() == "heavy")
     consolidation_candidates = action_counts.get("merge", 0) + action_counts.get("cut", 0)
     status = (
         "review"
@@ -409,6 +461,14 @@ def _governance_summary(chains: list[dict[str, Any]], pause_days: int) -> dict[s
         "missing_review_reason_count": missing_review_reason,
         "missing_expansion_rule_count": missing_expansion_rule,
         "consolidation_candidate_count": consolidation_candidates,
+        "core_value_count": value_counts.get("core", 0),
+        "supporting_value_count": value_counts.get("supporting", 0),
+        "watch_value_count": value_counts.get("watch", 0),
+        "low_duplicate_risk_count": risk_counts.get("low", 0),
+        "medium_duplicate_risk_count": risk_counts.get("medium", 0),
+        "high_duplicate_risk_count": risk_counts.get("high", 0),
+        "heavy_recent_expansion_count": heavy_recent_expansion,
+        "freeze_new_fields_count": freeze_new_fields,
     }
 
 
@@ -567,6 +627,10 @@ def _governance_recommendations(summary: dict[str, Any], chains: list[dict[str, 
         recommendations.append("Consolidate chains marked merge/cut before any new governance surface is added.")
     if summary.get("missing_review_reason_count", 0) or summary.get("missing_expansion_rule_count", 0):
         recommendations.append("Add review reasons and expansion rules before treating a governance chain as stable.")
+    if summary.get("freeze_new_fields_count", 0):
+        recommendations.append("Freeze new fields for chains marked freeze-new-fields; prefer consolidation, summaries, or real benchmark work.")
+    if summary.get("high_duplicate_risk_count", 0):
+        recommendations.append("Treat high duplicate-risk governance chains as monitoring targets before adding more downstream projections.")
     if routing.get("decision") == "merge_existing":
         recommendations.append("Route current proposals into existing governance chains instead of adding a new chain.")
     elif routing.get("decision") == "review_before_merge":
@@ -623,6 +687,11 @@ def _unique_strings(values: Any) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _allowed_text(value: Any, allowed: set[str], fallback: str) -> str:
+    normalized = str(value or "").strip().lower().replace("_", "-")
+    return normalized if normalized in allowed else fallback
 
 
 def _is_low_risk_utils(category: str, title: str) -> bool:

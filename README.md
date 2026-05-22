@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 396 carries promoted seed maturity CI regression reason counts into the final seed handoff, keeping clean-batch automation failures explainable without tracing back to the seed artifact.
+Version 397 turns the recent governance-chain repetition concern into a maintenance-policy value review, marking high-overlap chains with duplicate-risk and freeze-new-fields guardrails before any new report layer is added.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,15 @@ Version 396 carries promoted seed maturity CI regression reason counts into the 
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v397 checkpoint
+
+- Governance stabilization chains now carry `value_status`, `duplicate_risk`, `recent_expansion`, `current_guardrail`, and `guardrail_detail`.
+- The default seven-chain review marks training-promotion and maturity-portfolio as high duplicate-risk, heavy-expansion, freeze-new-fields watch targets.
+- Summary, CSV, Markdown, HTML, and `scripts/check_maintenance_batching.py` stdout expose value counts, duplicate-risk counts, heavy-expansion count, and freeze-new-fields count.
+- Recommendations now explicitly freeze new fields on high-overlap chains and steer work toward consolidation, summaries, or real benchmark evidence.
+- Targeted maintenance-policy tests cover default counts, high-overlap freeze recommendations, rendered outputs, and CLI stdout.
+- Archived governance value review evidence in `d/397`.
 
 ## Latest v396 checkpoint
 

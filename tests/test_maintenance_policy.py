@@ -121,11 +121,22 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(report["summary"]["chain_count"], 7)
         self.assertEqual(report["summary"]["keep_count"], 5)
         self.assertEqual(report["summary"]["watch_count"], 2)
+        self.assertEqual(report["summary"]["core_value_count"], 4)
+        self.assertEqual(report["summary"]["supporting_value_count"], 1)
+        self.assertEqual(report["summary"]["watch_value_count"], 2)
+        self.assertEqual(report["summary"]["low_duplicate_risk_count"], 2)
+        self.assertEqual(report["summary"]["medium_duplicate_risk_count"], 3)
+        self.assertEqual(report["summary"]["high_duplicate_risk_count"], 2)
+        self.assertEqual(report["summary"]["heavy_recent_expansion_count"], 3)
+        self.assertEqual(report["summary"]["freeze_new_fields_count"], 2)
         self.assertEqual(report["summary"]["missing_review_reason_count"], 0)
         self.assertEqual(report["summary"]["missing_expansion_rule_count"], 0)
         self.assertEqual(report["policy"]["new_chain_pause"], "active")
         self.assertIn("review_reason", report["chains"][0])
         self.assertIn("expansion_rule", report["chains"][0])
+        self.assertIn("value_status", report["chains"][0])
+        self.assertIn("duplicate_risk", report["chains"][0])
+        self.assertIn("current_guardrail", report["chains"][0])
         self.assertIn("Treat seven active chains", " ".join(report["recommendations"]))
         self.assertEqual(report["proposal_routing"]["decision"], "not_applicable")
         self.assertEqual(report["proposal_routing"]["item_count"], 0)
@@ -248,6 +259,7 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(report["summary"]["merge_count"], 1)
         self.assertEqual(report["summary"]["cut_count"], 1)
         self.assertEqual(report["summary"]["consolidation_candidate_count"], 2)
+        self.assertEqual(report["summary"]["freeze_new_fields_count"], 0)
         self.assertIn("Consolidate chains marked merge/cut", " ".join(report["recommendations"]))
 
     def test_governance_stabilization_requires_reasons_and_expansion_rules(self) -> None:
@@ -260,6 +272,33 @@ class MaintenancePolicyTests(unittest.TestCase):
         self.assertEqual(report["summary"]["missing_review_reason_count"], 1)
         self.assertEqual(report["summary"]["missing_expansion_rule_count"], 1)
         self.assertIn("Add review reasons and expansion rules", " ".join(report["recommendations"]))
+
+    def test_governance_stabilization_recommends_freezing_high_overlap_chains(self) -> None:
+        report = build_governance_stabilization_review(
+            [
+                {
+                    "id": "training-promotion",
+                    "name": "Training-scale promotion and handoff flow",
+                    "action": "watch",
+                    "consumer": "promoted comparison, promoted baseline",
+                    "evidence": "promotion reports",
+                    "review_reason": "overlap risk",
+                    "expansion_rule": "consolidate before new projections",
+                    "next_action": "watch overlap",
+                    "value_status": "watch",
+                    "duplicate_risk": "high",
+                    "recent_expansion": "heavy",
+                    "current_guardrail": "freeze-new-fields",
+                    "guardrail_detail": "freeze new reason projections",
+                }
+            ]
+        )
+
+        summary = report["summary"]
+        self.assertEqual(summary["status"], "pass")
+        self.assertEqual(summary["freeze_new_fields_count"], 1)
+        self.assertEqual(summary["high_duplicate_risk_count"], 1)
+        self.assertIn("Freeze new fields", " ".join(report["recommendations"]))
 
     def test_governance_stabilization_outputs_and_script_stdout(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -315,6 +354,9 @@ class MaintenancePolicyTests(unittest.TestCase):
             self.assertIn("governance_status=pass", completed.stdout)
             self.assertIn("governance_decision=pause_new_governance_chains", completed.stdout)
             self.assertIn("governance_chain_count=7", completed.stdout)
+            self.assertIn("governance_core_value_count=4", completed.stdout)
+            self.assertIn("governance_high_duplicate_risk_count=2", completed.stdout)
+            self.assertIn("governance_freeze_new_fields_count=2", completed.stdout)
             self.assertIn("governance_missing_review_reason_count=0", completed.stdout)
             self.assertIn("governance_missing_expansion_rule_count=0", completed.stdout)
             self.assertIn("governance_routing_decision=merge_existing", completed.stdout)
