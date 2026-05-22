@@ -7,7 +7,7 @@ from minigpt.promoted_training_scale_seed_handoff_sections import (
     render_promoted_training_scale_seed_handoff_html,
     render_promoted_training_scale_seed_handoff_markdown,
 )
-from minigpt.report_utils import as_dict as _dict, markdown_cell as _md, string_list as _string_list, write_csv_row, write_json_payload
+from minigpt.report_utils import as_dict as _dict, format_mapping as _fmt_mapping, markdown_cell as _md, string_list as _string_list, write_csv_row, write_json_payload
 from minigpt.promoted_training_scale_seed_handoff_receipt_artifacts import (
     _embedded_receipt_check,
     _embedded_receipt_check_fields,
@@ -59,7 +59,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "selected_handoff_clean_batch_review_status",
         "selected_handoff_batch_maturity_ci_regression_count",
         "selected_handoff_batch_maturity_ci_regression_names",
+        "selected_handoff_batch_maturity_ci_regression_reason_counts",
         "selected_handoff_selected_batch_maturity_ci_regression_count",
+        "selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
         "selected_comparison_exclusion_reasons",
         "handoff_require_clean_batch_review_count",
         "handoff_clean_batch_review_count",
@@ -67,6 +69,8 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "handoff_batch_maturity_ci_regression_count",
         "handoff_selected_batch_maturity_ci_regression_total",
         "handoff_batch_maturity_ci_regression_names",
+        "handoff_batch_maturity_ci_regression_reason_counts",
+        "handoff_selected_batch_maturity_ci_regression_reason_counts",
         "comparison_exclusion_reasons",
         "comparison_ready_handoff_require_clean_batch_review_count",
         "comparison_ready_handoff_clean_batch_review_count",
@@ -74,6 +78,8 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "comparison_ready_handoff_batch_maturity_ci_regression_count",
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_total",
         "comparison_ready_handoff_batch_maturity_ci_regression_names",
+        "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
         "selected_handoff_selected_batch_review_status",
         "selected_handoff_selected_batch_comparison_review_action_count",
         "selected_handoff_selected_batch_comparison_blocker_action_count",
@@ -102,6 +108,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "clean_batch_review_requirement_selected_required",
         "clean_batch_review_requirement_selected_status",
         "clean_batch_review_requirement_selected_ci_regression_count",
+        "clean_batch_review_requirement_selected_ci_regression_reason_counts",
         "clean_batch_review_requirement_status_domain",
         "automation_gate_required",
         "automation_gate_status",
@@ -195,8 +202,14 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "selected_handoff_batch_maturity_ci_regression_names": "; ".join(
                 _string_list(summary.get("selected_handoff_batch_maturity_ci_regression_names"))
             ),
+            "selected_handoff_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                summary.get("selected_handoff_batch_maturity_ci_regression_reason_counts")
+            ),
             "selected_handoff_selected_batch_maturity_ci_regression_count": summary.get(
                 "selected_handoff_selected_batch_maturity_ci_regression_count"
+            ),
+            "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                summary.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts")
             ),
             "selected_comparison_exclusion_reasons": "; ".join(
                 _string_list(summary.get("selected_comparison_exclusion_reasons"))
@@ -210,6 +223,12 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             ),
             "handoff_batch_maturity_ci_regression_names": "; ".join(
                 _string_list(summary.get("handoff_batch_maturity_ci_regression_names"))
+            ),
+            "handoff_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                summary.get("handoff_batch_maturity_ci_regression_reason_counts")
+            ),
+            "handoff_selected_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
             ),
             "comparison_exclusion_reasons": "; ".join(_string_list(summary.get("comparison_exclusion_reasons"))),
             "comparison_ready_handoff_require_clean_batch_review_count": summary.get(
@@ -229,6 +248,12 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             ),
             "comparison_ready_handoff_batch_maturity_ci_regression_names": "; ".join(
                 _string_list(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_names"))
+            ),
+            "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts")
+            ),
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts")
             ),
             "selected_handoff_selected_batch_review_status": summary.get("selected_handoff_selected_batch_review_status"),
             "selected_handoff_selected_batch_comparison_review_action_count": summary.get(
@@ -275,6 +300,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "clean_batch_review_requirement_selected_status": clean_batch_requirement.get("selected_status"),
             "clean_batch_review_requirement_selected_ci_regression_count": clean_batch_requirement.get(
                 "selected_ci_regression_count"
+            ),
+            "clean_batch_review_requirement_selected_ci_regression_reason_counts": _fmt_mapping(
+                clean_batch_requirement.get("selected_ci_regression_reason_counts")
             ),
             "clean_batch_review_requirement_status_domain": clean_batch_requirement.get("status_domain"),
             "automation_gate_required": automation_gate.get("required"),

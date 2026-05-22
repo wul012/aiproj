@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v396 promoted seed handoff maturity CI reasons</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f6f7f2; color: #182026; }
+    body { margin: 0; padding: 32px; }
+    main { max-width: 1180px; margin: 0 auto; }
+    header { border-bottom: 1px solid #d8ddd2; padding-bottom: 18px; margin-bottom: 20px; }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: 0; }
+    p { color: #4f5b52; line-height: 1.65; }
+    section { background: #fff; border: 1px solid #d9ded5; border-radius: 8px; padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(20, 30, 20, 0.05); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .card { border: 1px solid #e1e5dc; border-radius: 8px; padding: 14px; background: #fbfcf8; }
+    .card span { display: block; color: #637067; font-size: 12px; }
+    .card strong { display: block; margin-top: 8px; font-size: 17px; overflow-wrap: anywhere; }
+    code { background: #eef2e8; border-radius: 4px; padding: 2px 5px; }
+    pre { background: #172026; color: #f8fbf4; border-radius: 8px; padding: 14px; overflow-wrap: anywhere; white-space: pre-wrap; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .table-wrap { overflow-x: auto; }
+    th, td { border-bottom: 1px solid #e2e6de; padding: 10px; text-align: left; vertical-align: top; }
+    th { color: #415047; font-size: 12px; text-transform: uppercase; }
+    footer { color: #667267; font-size: 12px; margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>MiniGPT v396 promoted seed handoff maturity CI reasons</h1>
+      <p>本版把 promoted seed 里的 maturity CI regression reason counts 带到最终 seed handoff，让 strict clean-batch stop 能直接解释失败原因。</p>
+    </header>
+
+    <section class="grid">
+      <div class="card"><span>Version</span><strong>v396.0.0</strong></div>
+      <div class="card"><span>Mode</span><strong>功能补强</strong></div>
+      <div class="card"><span>Primary Test</span><strong>28 seed-handoff tests</strong></div>
+      <div class="card"><span>Evidence Folder</span><strong>d/396</strong></div>
+    </section>
+
+    <section>
+      <h2>Reason Flow</h2>
+      <pre>promoted seed handoff_clean_batch_review
+  -> build_seed_handoff_clean_batch_review_summary()
+  -> clean_batch_review_requirement.selected_ci_regression_reason_counts
+  -> JSON / CSV / Markdown / HTML / CLI stdout</pre>
+      <p>reason-count 字段只解释原因，不改变 clean-batch gate 的 pass/fail 规则。</p>
+    </section>
+
+    <section>
+      <h2>New Evidence Fields</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Layer</th><th>Field</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Selected</td><td><code>selected_handoff_batch_maturity_ci_regression_reason_counts</code></td><td>selected handoff 的 CI regression 原因分布。</td></tr>
+            <tr><td>Aggregate</td><td><code>handoff_batch_maturity_ci_regression_reason_counts</code></td><td>全部 handoff inputs 中 CI-regressed 输入的原因分布。</td></tr>
+            <tr><td>Comparison-ready</td><td><code>comparison_ready_handoff_batch_maturity_ci_regression_reason_counts</code></td><td>可用于比较的 handoff 输入里的原因分布。</td></tr>
+            <tr><td>Requirement</td><td><code>selected_ci_regression_reason_counts</code></td><td>strict clean-batch gate 失败时随 requirement 一起输出的原因。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Representative Output</h2>
+      <pre>selected_handoff_batch_maturity_ci_regression_reason_counts={"missing-ci-step": 1}
+handoff_batch_maturity_ci_regression_reason_counts={"workflow-order-regressed": 2}
+clean_batch_review_required_selected_ci_regression_reason_counts={"missing-ci-step": 1}</pre>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <pre>python -m py_compile src/minigpt/promoted_training_scale_seed_handoff_review.py src/minigpt/promoted_training_scale_seed_handoff_artifacts.py src/minigpt/promoted_training_scale_seed_handoff_sections.py scripts/execute_promoted_training_scale_seed.py
+python -m pytest tests/test_promoted_training_scale_seed_handoff.py -q
+python -m pytest -q
+python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v396
+git diff --check</pre>
+    </section>
+
+    <footer>Generated as static runtime evidence for MiniGPT v396.</footer>
+  </main>
+</body>
+</html>
