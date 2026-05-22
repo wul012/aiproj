@@ -16,7 +16,16 @@ from scripts.run_ci_tiny_scorecard_comparison_smoke import PLAN_JSON_FILENAME  #
 
 CHECK_JSON_FILENAME = "ci_tiny_scorecard_smoke_plan_check.json"
 CHECK_TEXT_FILENAME = "ci_tiny_scorecard_smoke_plan_check.txt"
-REQUIRED_ARTIFACTS = ("summary_json", "summary_text", "summary_check_json", "summary_check_text")
+REQUIRED_ARTIFACTS = (
+    "summary_json",
+    "summary_text",
+    "summary_check_json",
+    "summary_check_text",
+    "benchmark_history_json",
+    "benchmark_history_csv",
+    "benchmark_history_markdown",
+    "benchmark_history_html",
+)
 
 
 def parse_args() -> argparse.Namespace:

@@ -34,6 +34,12 @@ class CITinyScorecardPlanCheckTests(unittest.TestCase):
             (out_dir / "tiny_scorecard_comparison_smoke_summary.txt").write_text("status=pass\n", encoding="utf-8")
             (check_dir / "tiny_scorecard_comparison_smoke_check.json").write_text('{"status":"pass"}\n', encoding="utf-8")
             (check_dir / "tiny_scorecard_comparison_smoke_check.txt").write_text("status=pass\n", encoding="utf-8")
+            history_dir = out_dir / "benchmark-history"
+            history_dir.mkdir()
+            (history_dir / "benchmark_history.json").write_text('{"schema_version":1}\n', encoding="utf-8")
+            (history_dir / "benchmark_history.csv").write_text("name,status\nround,blocked\n", encoding="utf-8")
+            (history_dir / "benchmark_history.md").write_text("# Benchmark History\n", encoding="utf-8")
+            (history_dir / "benchmark_history.html").write_text("<!doctype html><title>History</title>\n", encoding="utf-8")
             plan = {
                 "wrapper": "run_ci_tiny_scorecard_comparison_smoke",
                 "returncode": 0,
@@ -45,10 +51,12 @@ class CITinyScorecardPlanCheckTests(unittest.TestCase):
 
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["decision"], "continue")
-            self.assertEqual(report["artifact_count"], 4)
+            self.assertEqual(report["artifact_count"], 8)
             self.assertEqual(report["artifact_failure_count"], 0)
             self.assertIn("summary_json_status=pass", text)
             self.assertIn("summary_check_text_status=pass", text)
+            self.assertIn("benchmark_history_json_status=pass", text)
+            self.assertIn("benchmark_history_html_status=pass", text)
 
     def test_check_plan_fails_when_artifact_digest_changes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -62,6 +70,12 @@ class CITinyScorecardPlanCheckTests(unittest.TestCase):
             (out_dir / "tiny_scorecard_comparison_smoke_summary.txt").write_text("status=pass\n", encoding="utf-8")
             (check_dir / "tiny_scorecard_comparison_smoke_check.json").write_text('{"status":"pass"}\n', encoding="utf-8")
             (check_dir / "tiny_scorecard_comparison_smoke_check.txt").write_text("status=pass\n", encoding="utf-8")
+            history_dir = out_dir / "benchmark-history"
+            history_dir.mkdir()
+            (history_dir / "benchmark_history.json").write_text('{"schema_version":1}\n', encoding="utf-8")
+            (history_dir / "benchmark_history.csv").write_text("name,status\nround,blocked\n", encoding="utf-8")
+            (history_dir / "benchmark_history.md").write_text("# Benchmark History\n", encoding="utf-8")
+            (history_dir / "benchmark_history.html").write_text("<!doctype html><title>History</title>\n", encoding="utf-8")
             plan = {
                 "wrapper": "run_ci_tiny_scorecard_comparison_smoke",
                 "returncode": 0,
@@ -128,8 +142,10 @@ class CITinyScorecardPlanCheckTests(unittest.TestCase):
             report = json.loads((plan_check_dir / "ci_tiny_scorecard_smoke_plan_check.json").read_text(encoding="utf-8"))
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["artifact_failure_count"], 0)
+            self.assertEqual(report["artifact_count"], 8)
             self.assertIn("status=pass", completed.stdout)
             self.assertIn("summary_json_status=pass", completed.stdout)
+            self.assertIn("benchmark_history_json_status=pass", completed.stdout)
 
 
 if __name__ == "__main__":

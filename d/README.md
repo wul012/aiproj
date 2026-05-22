@@ -305,6 +305,9 @@ d/397/解释/说明.md
 d/398/图片
 d/398/解释/说明.md
  -> v398 tiny scorecard benchmark history 的运行截图和解释
+d/399/图片
+d/399/解释/说明.md
+ -> v399 CI benchmark-history plan digest 的运行截图和解释
 ```
 
 写入规则：

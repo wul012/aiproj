@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiniGPT v399 CI Benchmark History Plan Digest</title>
+  <style>
+    :root {
+      --bg: #f6f7f5;
+      --ink: #1f2933;
+      --muted: #5b6570;
+      --panel: #ffffff;
+      --line: #d7dcd2;
+      --accent: #0f766e;
+      --warn: #92400e;
+      --code: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 "Segoe UI", Arial, sans-serif;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 32px 56px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); margin: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .stat, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .stat strong {
+      display: block;
+      color: var(--code);
+      font-size: 24px;
+      margin-top: 4px;
+    }
+    section { margin-top: 16px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th { background: #e9ede8; }
+    code {
+      color: var(--code);
+      background: #edf0ed;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    pre {
+      margin: 0;
+      overflow: auto;
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .ok { color: var(--accent); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      main { padding: 24px 18px 40px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">MiniGPT v399 evidence</div>
+      <h1>CI wrapper plans now protect benchmark-history artifacts</h1>
+      <p>
+        v399 extends the CI tiny scorecard plan digest from the original summary/check artifacts
+        to the benchmark-history ledger introduced in v398. The plan checker now validates all
+        eight artifacts before the CI evidence chain can continue.
+      </p>
+    </header>
+
+    <div class="grid">
+      <div class="stat"><span>digest artifacts</span><strong>8</strong></div>
+      <div class="stat"><span>new history artifacts</span><strong>4</strong></div>
+      <div class="stat"><span>plan-check status</span><strong class="ok">pass</strong></div>
+      <div class="stat"><span>scope</span><strong>CI evidence</strong></div>
+    </div>
+
+    <section>
+      <h2>Protected Artifacts</h2>
+      <table>
+        <thead>
+          <tr><th>Artifact key</th><th>Path pattern</th><th>v399 role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>summary_json</code></td><td><code>tiny_scorecard_comparison_smoke_summary.json</code></td><td>Existing smoke summary digest.</td></tr>
+          <tr><td><code>summary_text</code></td><td><code>tiny_scorecard_comparison_smoke_summary.txt</code></td><td>Existing shell-readable smoke summary digest.</td></tr>
+          <tr><td><code>summary_check_json</code></td><td><code>tiny_scorecard_comparison_smoke_check.json</code></td><td>Existing checker sidecar digest.</td></tr>
+          <tr><td><code>summary_check_text</code></td><td><code>tiny_scorecard_comparison_smoke_check.txt</code></td><td>Existing checker text digest.</td></tr>
+          <tr><td><code>benchmark_history_json</code></td><td><code>benchmark-history/benchmark_history.json</code></td><td class="ok">New machine-readable history digest.</td></tr>
+          <tr><td><code>benchmark_history_csv</code></td><td><code>benchmark-history/benchmark_history.csv</code></td><td class="ok">New table review digest.</td></tr>
+          <tr><td><code>benchmark_history_markdown</code></td><td><code>benchmark-history/benchmark_history.md</code></td><td class="ok">New human review digest.</td></tr>
+          <tr><td><code>benchmark_history_html</code></td><td><code>benchmark-history/benchmark_history.html</code></td><td class="ok">New visual evidence digest.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Plan Text Additions</h2>
+      <pre>benchmark_history_json_sha256=&lt;sha256&gt;
+benchmark_history_csv_sha256=&lt;sha256&gt;
+benchmark_history_markdown_sha256=&lt;sha256&gt;
+benchmark_history_html_sha256=&lt;sha256&gt;</pre>
+    </section>
+
+    <section>
+      <h2>Checker Contract</h2>
+      <p>
+        <code>scripts/check_ci_tiny_scorecard_plan.py</code> recomputes existence, size, and sha256
+        for all eight artifact keys. Any missing or changed benchmark-history file produces
+        <code>artifact_digest_mismatch</code> and <code>decision=fix-ci-tiny-scorecard-plan</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>
+        This is CI evidence hardening. It does not change tiny-smoke readiness, training budget,
+        or model-quality claims. The benchmark history remains a plumbing ledger until stronger
+        benchmark runs provide real quality evidence.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

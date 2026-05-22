@@ -16,6 +16,10 @@ SUMMARY_JSON_FILENAME = "tiny_scorecard_comparison_smoke_summary.json"
 SUMMARY_TEXT_FILENAME = "tiny_scorecard_comparison_smoke_summary.txt"
 CHECK_JSON_FILENAME = "tiny_scorecard_comparison_smoke_check.json"
 CHECK_TEXT_FILENAME = "tiny_scorecard_comparison_smoke_check.txt"
+BENCHMARK_HISTORY_JSON_FILENAME = "benchmark_history.json"
+BENCHMARK_HISTORY_CSV_FILENAME = "benchmark_history.csv"
+BENCHMARK_HISTORY_MARKDOWN_FILENAME = "benchmark_history.md"
+BENCHMARK_HISTORY_HTML_FILENAME = "benchmark_history.html"
 
 CI_TINY_SCORECARD_CONFIG = {
     "suite_name": "standard-zh",
@@ -153,6 +157,10 @@ def render_invocation_plan(plan: dict[str, Any]) -> str:
         ("summary_text_sha256", _artifact_digest_value(digest, "summary_text", "sha256")),
         ("check_json_sha256", _artifact_digest_value(digest, "summary_check_json", "sha256")),
         ("check_text_sha256", _artifact_digest_value(digest, "summary_check_text", "sha256")),
+        ("benchmark_history_json_sha256", _artifact_digest_value(digest, "benchmark_history_json", "sha256")),
+        ("benchmark_history_csv_sha256", _artifact_digest_value(digest, "benchmark_history_csv", "sha256")),
+        ("benchmark_history_markdown_sha256", _artifact_digest_value(digest, "benchmark_history_markdown", "sha256")),
+        ("benchmark_history_html_sha256", _artifact_digest_value(digest, "benchmark_history_html", "sha256")),
         ("command_text", plan["command_text"]),
     ]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
@@ -165,6 +173,10 @@ def build_summary_digest(out_dir: Path, summary_check_out_dir: Path) -> dict[str
             "summary_text": _file_digest(out_dir / SUMMARY_TEXT_FILENAME),
             "summary_check_json": _file_digest(summary_check_out_dir / CHECK_JSON_FILENAME),
             "summary_check_text": _file_digest(summary_check_out_dir / CHECK_TEXT_FILENAME),
+            "benchmark_history_json": _file_digest(out_dir / "benchmark-history" / BENCHMARK_HISTORY_JSON_FILENAME),
+            "benchmark_history_csv": _file_digest(out_dir / "benchmark-history" / BENCHMARK_HISTORY_CSV_FILENAME),
+            "benchmark_history_markdown": _file_digest(out_dir / "benchmark-history" / BENCHMARK_HISTORY_MARKDOWN_FILENAME),
+            "benchmark_history_html": _file_digest(out_dir / "benchmark-history" / BENCHMARK_HISTORY_HTML_FILENAME),
         }
     }
 

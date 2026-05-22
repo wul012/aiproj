@@ -94,6 +94,8 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
         self.assertIn("decision_min_rubric_score=60.0", text)
         self.assertIn("summary_check_allow_gate_stop=True", text)
         self.assertIn("returncode=0", text)
+        self.assertIn("benchmark_history_json_sha256=", text)
+        self.assertIn("benchmark_history_html_sha256=", text)
 
     def test_build_summary_digest_records_artifact_hashes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -107,6 +109,12 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             (out_dir / "tiny_scorecard_comparison_smoke_summary.json").write_bytes(summary_json)
             (out_dir / "tiny_scorecard_comparison_smoke_summary.txt").write_text("status=pass\n", encoding="utf-8")
             (check_dir / "tiny_scorecard_comparison_smoke_check.json").write_bytes(check_json)
+            history_dir = out_dir / "benchmark-history"
+            history_dir.mkdir()
+            (history_dir / "benchmark_history.json").write_text('{"schema_version":1}\n', encoding="utf-8")
+            (history_dir / "benchmark_history.csv").write_text("name,status\nround,blocked\n", encoding="utf-8")
+            (history_dir / "benchmark_history.md").write_text("# Benchmark History\n", encoding="utf-8")
+            (history_dir / "benchmark_history.html").write_text("<!doctype html><title>History</title>\n", encoding="utf-8")
 
             digest = build_summary_digest(out_dir, check_dir)
             artifacts = digest["artifacts"]
@@ -118,6 +126,11 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             self.assertEqual(artifacts["summary_check_json"]["sha256"], hashlib.sha256(check_json).hexdigest())
             self.assertFalse(artifacts["summary_check_text"]["exists"])
             self.assertEqual(artifacts["summary_check_text"]["sha256"], "")
+            self.assertTrue(artifacts["benchmark_history_json"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_csv"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_markdown"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_html"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_html"]["sha256"])
 
     def test_wrapper_writes_invocation_plan_after_running_smoke(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -157,9 +170,14 @@ class CITinyScorecardSmokeTests(unittest.TestCase):
             self.assertTrue(artifacts["summary_text"]["exists"])
             self.assertTrue(artifacts["summary_check_json"]["exists"])
             self.assertTrue(artifacts["summary_check_text"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_json"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_csv"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_markdown"]["exists"])
+            self.assertTrue(artifacts["benchmark_history_html"]["exists"])
             self.assertIn("ci_plan_json=", completed.stdout)
             self.assertIn("ci_plan_text=", completed.stdout)
             self.assertTrue((out_dir / "tiny_scorecard_comparison_smoke_summary.json").is_file())
+            self.assertTrue((out_dir / "benchmark-history" / "benchmark_history.json").is_file())
             self.assertTrue((check_dir / "tiny_scorecard_comparison_smoke_check.json").is_file())
 
 
