@@ -204,6 +204,10 @@ class TrainingScaleRunTests(unittest.TestCase):
                 "maturity_coverage_regression_names": ["coverage"],
                 "maturity_ci_regression_count": 1,
                 "maturity_ci_regression_names": ["ci-risk"],
+                "maturity_ci_regression_reason_counts": {
+                    "ci_failed_checks_increased": 2,
+                    "ci_order_violations_increased": 1,
+                },
                 "blocker_reasons": ["best_score_ci_regressed"],
                 "blocker_portfolios": ["ci-risk"],
             },
@@ -231,12 +235,20 @@ class TrainingScaleRunTests(unittest.TestCase):
 
         self.assertEqual(summary["maturity_ci_regression_count"], 1)
         self.assertEqual(summary["maturity_ci_regression_names"], ["ci-risk"])
+        self.assertEqual(
+            summary["maturity_ci_regression_reason_counts"],
+            {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+        )
         markdown = render_training_scale_run_markdown(report)
         html = render_training_scale_run_html(report)
         self.assertIn("CI regressions", markdown)
         self.assertIn("ci-risk", markdown)
+        self.assertIn("CI regression reasons", markdown)
+        self.assertIn("ci_failed_checks_increased:2", markdown)
         self.assertIn("CI regressions", html)
         self.assertIn("ci-risk", html)
+        self.assertIn("CI regression reasons", html)
+        self.assertIn("ci_failed_checks_increased:2", html)
 
     def test_run_outputs_are_machine_readable(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

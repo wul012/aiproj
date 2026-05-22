@@ -260,6 +260,9 @@
 399-v385-training-portfolio-batch-maturity-ci-reasons.md
  -> v385 code explanation: carry training portfolio comparison maturity CI regression reason counts into batch review summaries, rendered outputs, and CLI evidence.
 
+400-v386-training-scale-run-maturity-ci-reasons.md
+ -> v386 code explanation: carry batch maturity CI regression reason counts into gated training scale run summaries, rendered outputs, and CLI evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

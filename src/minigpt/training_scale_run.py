@@ -127,6 +127,7 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
         "comparison_blocker_action_count",
         "maturity_coverage_regression_count",
         "maturity_ci_regression_count",
+        "maturity_ci_regression_reason_counts",
         "blocked_reason",
     ]
     gate = _dict(report.get("gate"))
@@ -145,6 +146,7 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
             "comparison_blocker_action_count": batch.get("comparison_blocker_action_count"),
             "maturity_coverage_regression_count": batch.get("maturity_coverage_regression_count"),
             "maturity_ci_regression_count": batch.get("maturity_ci_regression_count"),
+            "maturity_ci_regression_reason_counts": batch.get("maturity_ci_regression_reason_counts"),
             "blocked_reason": report.get("blocked_reason"),
         },
         out_path,
@@ -191,6 +193,7 @@ def render_training_scale_run_markdown(report: dict[str, Any]) -> str:
                 ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
                 ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
                 ("CI regressions", ", ".join(_string_list(batch.get("maturity_ci_regression_names"))) or "none"),
+                ("CI regression reasons", _fmt_mapping(batch.get("maturity_ci_regression_reason_counts"))),
                 ("Blocker reasons", ", ".join(_string_list(batch.get("comparison_blocker_reasons"))) or "none"),
                 ("Outputs", _display_dict(report.get("batch_outputs"))),
                 ("Blocked reason", report.get("blocked_reason")),
@@ -228,6 +231,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
         ("Batch review", batch.get("comparison_review_action_count")),
         ("Batch blockers", batch.get("comparison_blocker_action_count")),
         ("CI regressions", batch.get("maturity_ci_regression_count")),
+        ("CI regression reasons", _fmt_mapping(batch.get("maturity_ci_regression_reason_counts"))),
     ]
     return "\n".join(
         [
@@ -254,6 +258,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
                     ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
                     ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
                     ("CI regressions", ", ".join(_string_list(batch.get("maturity_ci_regression_names"))) or "none"),
+                    ("CI regression reasons", _fmt_mapping(batch.get("maturity_ci_regression_reason_counts"))),
                     ("Blocker reasons", ", ".join(_string_list(batch.get("comparison_blocker_reasons"))) or "none"),
                     ("Outputs", _display_dict(report.get("batch_outputs"))),
                     ("Blocked reason", report.get("blocked_reason")),
@@ -351,6 +356,7 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
             "maturity_review_names": [],
             "maturity_coverage_regression_names": [],
             "maturity_ci_regression_names": [],
+            "maturity_ci_regression_reason_counts": {},
             "comparison_blocker_reasons": [],
             "comparison_blocker_portfolios": [],
         }
@@ -372,6 +378,7 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
         "maturity_review_names": _string_list(review.get("maturity_review_names")),
         "maturity_coverage_regression_names": _string_list(review.get("maturity_coverage_regression_names")),
         "maturity_ci_regression_names": _string_list(review.get("maturity_ci_regression_names")),
+        "maturity_ci_regression_reason_counts": _int_mapping(review.get("maturity_ci_regression_reason_counts")),
         "comparison_blocker_reasons": _string_list(review.get("blocker_reasons")),
         "comparison_blocker_portfolios": _string_list(review.get("blocker_portfolios")),
         "suite_path": first_plan.get("suite_path"),
@@ -412,6 +419,25 @@ def _summary_section(title: str, rows: list[tuple[str, Any]]) -> str:
 
 def _as_int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
+
+
+def _int_mapping(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    result = {}
+    for key, raw_count in value.items():
+        name = str(key).strip()
+        count = _as_int(raw_count)
+        if name and count > 0:
+            result[name] = count
+    return dict(sorted(result.items()))
+
+
+def _fmt_mapping(value: Any) -> str:
+    counts = _dict(value)
+    if not counts:
+        return "none"
+    return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))
 
 
 def _list_section(title: str, items: Any) -> str:
