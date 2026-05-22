@@ -312,7 +312,9 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
                         clean_batch_review_status="clean",
                         batch_ci_regression_count=2,
                         batch_ci_regression_names=["beta-old-ci"],
+                        batch_ci_regression_reason_counts={"missing-ci-step": 1, "workflow-order-regressed": 1},
                         selected_batch_ci_regression_count=1,
+                        selected_batch_ci_regression_reason_counts={"workflow-order-regressed": 1},
                     ),
                     entry(
                         "gamma",
@@ -354,6 +356,14 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertEqual(rows["beta"]["handoff_batch_maturity_ci_regression_count"], 2)
             self.assertEqual(rows["beta"]["handoff_batch_maturity_ci_regression_names"], ["beta-old-ci"])
             self.assertEqual(rows["beta"]["handoff_selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(
+                rows["beta"]["handoff_batch_maturity_ci_regression_reason_counts"],
+                {"missing-ci-step": 1, "workflow-order-regressed": 1},
+            )
+            self.assertEqual(
+                rows["beta"]["handoff_selected_batch_maturity_ci_regression_reason_counts"],
+                {"workflow-order-regressed": 1},
+            )
             self.assertIn("handoff batch CI regression count is 2", rows["beta"]["comparison_exclusion_reasons"])
             self.assertEqual([row["name"] for row in report["comparison"]["runs"]], ["alpha", "gamma"])
             self.assertEqual(summary["comparison_ready_count"], 2)
@@ -362,16 +372,43 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertEqual(summary["handoff_unclean_batch_review_count"], 1)
             self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
             self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 1)
+            self.assertEqual(
+                summary["handoff_batch_maturity_ci_regression_reason_counts"],
+                {"missing-ci-step": 1, "workflow-order-regressed": 1},
+            )
+            self.assertEqual(
+                summary["handoff_selected_batch_maturity_ci_regression_reason_counts"],
+                {"workflow-order-regressed": 1},
+            )
             self.assertEqual(summary["handoff_batch_maturity_ci_regression_names"], ["beta-old-ci"])
             self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(summary["comparison_ready_handoff_selected_batch_maturity_ci_regression_total"], 0)
+            self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"], {})
+            self.assertEqual(summary["comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts"], {})
             self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("handoff_batch_maturity_ci_regression_reason_counts", csv_text)
+            self.assertIn("missing-ci-step:1, workflow-order-regressed:1", csv_text)
             self.assertIn("comparison_exclusion_reasons", csv_text)
             self.assertIn("Handoff batch CI regressions", markdown)
+            self.assertIn("Handoff batch CI regression reasons", markdown)
+            self.assertIn("Comparison-ready handoff batch CI regression reasons", markdown)
+            self.assertIn("workflow-order-regressed:1", markdown)
             self.assertIn("CI Regressions", markdown)
             self.assertIn("Handoff CI regressions", html)
+            self.assertIn("Handoff CI reasons", html)
+            self.assertIn("Ready CI reasons", html)
+            self.assertIn("missing-ci-step:1, workflow-order-regressed:1", " ".join(report["recommendations"]))
             self.assertIn("handoff_batch_maturity_ci_regression_count=2", completed.stdout)
+            self.assertIn(
+                'handoff_batch_maturity_ci_regression_reason_counts={"missing-ci-step": 1, "workflow-order-regressed": 1}',
+                completed.stdout,
+            )
+            self.assertIn(
+                'handoff_selected_batch_maturity_ci_regression_reason_counts={"workflow-order-regressed": 1}',
+                completed.stdout,
+            )
             self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
+            self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts={}", completed.stdout)
             self.assertTrue((script_out / "promoted_training_scale_comparison.json").exists())
 
     def test_comparison_layer_blocks_stale_ci_regressed_clean_required_input(self) -> None:
@@ -397,6 +434,7 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
                         clean_batch_review_status="clean",
                         batch_ci_regression_count=1,
                         batch_ci_regression_names=["stale-ci"],
+                        batch_ci_regression_reason_counts={"workflow-status-regressed": 1},
                         force_compare_ready=True,
                     ),
                 ],
@@ -411,10 +449,11 @@ class PromotedTrainingScaleComparisonTests(unittest.TestCase):
             self.assertEqual(report["comparison_status"], "blocked")
             self.assertEqual(report["summary"]["comparison_ready_count"], 1)
             self.assertEqual(report["summary"]["handoff_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(report["summary"]["handoff_batch_maturity_ci_regression_reason_counts"], {"workflow-status-regressed": 1})
             self.assertEqual(report["summary"]["handoff_unclean_batch_review_count"], 1)
             self.assertIn("handoff batch CI regression count is 1", rows["beta"]["comparison_exclusion_reasons"])
             self.assertTrue(
-                any("CI-regressed handoff batch evidence remains visible" in item for item in report["recommendations"])
+                any("workflow-status-regressed:1" in item for item in report["recommendations"])
             )
 
     def test_blocks_when_promoted_input_is_insufficient(self) -> None:
@@ -491,7 +530,9 @@ def entry(
     clean_batch_review_status: str | None = None,
     batch_ci_regression_count: int = 0,
     batch_ci_regression_names: list[str] | None = None,
+    batch_ci_regression_reason_counts: dict[str, int] | None = None,
     selected_batch_ci_regression_count: int = 0,
+    selected_batch_ci_regression_reason_counts: dict[str, int] | None = None,
     force_compare_ready: bool = False,
 ) -> dict:
     return {
@@ -506,7 +547,11 @@ def entry(
         "clean_batch_review_status": clean_batch_review_status,
         "batch_ci_regression_count": batch_ci_regression_count,
         "batch_ci_regression_names": batch_ci_regression_names or [],
+        "batch_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
         "selected_batch_ci_regression_count": selected_batch_ci_regression_count,
+        "selected_batch_ci_regression_reason_counts": selected_batch_ci_regression_reason_counts
+        or batch_ci_regression_reason_counts
+        or {},
         "force_compare_ready": force_compare_ready,
     }
 
@@ -566,9 +611,13 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
             promotion.update(
                 {
                     "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+                    "handoff_batch_maturity_ci_regression_reason_counts": item.get("batch_ci_regression_reason_counts"),
                     "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
                     "handoff_selected_batch_maturity_ci_regression_count": item.get(
                         "selected_batch_ci_regression_count"
+                    ),
+                    "handoff_selected_batch_maturity_ci_regression_reason_counts": item.get(
+                        "selected_batch_ci_regression_reason_counts"
                     ),
                 }
             )
@@ -576,9 +625,13 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
             promotion["summary"].update(
                 {
                     "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+                    "handoff_batch_maturity_ci_regression_reason_counts": item.get("batch_ci_regression_reason_counts"),
                     "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
                     "handoff_selected_batch_maturity_ci_regression_count": item.get(
                         "selected_batch_ci_regression_count"
+                    ),
+                    "handoff_selected_batch_maturity_ci_regression_reason_counts": item.get(
+                        "selected_batch_ci_regression_reason_counts"
                     ),
                 }
             )
@@ -586,9 +639,13 @@ def make_index_tree(root: Path, entries: list[dict], baseline_name: str | None =
                 promotion["clean_batch_review_guard"].update(
                     {
                         "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+                        "handoff_batch_maturity_ci_regression_reason_counts": item.get("batch_ci_regression_reason_counts"),
                         "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
                         "handoff_selected_batch_maturity_ci_regression_count": item.get(
                             "selected_batch_ci_regression_count"
+                        ),
+                        "handoff_selected_batch_maturity_ci_regression_reason_counts": item.get(
+                            "selected_batch_ci_regression_reason_counts"
                         ),
                     }
                 )

@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    format_mapping as _fmt_mapping,
     html_escape as _e,
     list_of_dicts as _list_of_dicts,
     markdown_cell as _md,
@@ -50,8 +51,10 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
         "handoff_require_clean_batch_review",
         "handoff_clean_batch_review_status",
         "handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_regression_reason_counts",
         "handoff_batch_maturity_ci_regression_names",
         "handoff_selected_batch_maturity_ci_regression_count",
+        "handoff_selected_batch_maturity_ci_regression_reason_counts",
         "comparison_exclusion_reasons",
         "handoff_selected_batch_review_status",
         "handoff_selected_batch_comparison_review_action_count",
@@ -91,11 +94,17 @@ def write_promoted_training_scale_comparison_csv(report: dict[str, Any], path: s
                     "handoff_batch_maturity_ci_regression_count": row.get(
                         "handoff_batch_maturity_ci_regression_count"
                     ),
+                    "handoff_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                        row.get("handoff_batch_maturity_ci_regression_reason_counts")
+                    ),
                     "handoff_batch_maturity_ci_regression_names": ";".join(
                         _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
                     ),
                     "handoff_selected_batch_maturity_ci_regression_count": row.get(
                         "handoff_selected_batch_maturity_ci_regression_count"
+                    ),
+                    "handoff_selected_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
+                        row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
                     ),
                     "comparison_exclusion_reasons": ";".join(_string_list(row.get("comparison_exclusion_reasons"))),
                     "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
@@ -141,14 +150,18 @@ def render_promoted_training_scale_comparison_markdown(report: dict[str, Any]) -
         f"- Handoff clean batch review: `{summary.get('handoff_clean_batch_review_count')}`",
         f"- Handoff unclean batch review: `{summary.get('handoff_unclean_batch_review_count')}`",
         f"- Handoff batch CI regressions: `{summary.get('handoff_batch_maturity_ci_regression_count')}`",
+        f"- Handoff batch CI regression reasons: `{_fmt_mapping(summary.get('handoff_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Handoff selected batch CI regressions: `{summary.get('handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Handoff selected batch CI regression reasons: `{_fmt_mapping(summary.get('handoff_selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_ci_regression_names')))}`",
         f"- Comparison-ready handoff suite mismatches: `{summary.get('comparison_ready_handoff_suite_mismatch_total')}`",
         f"- Comparison-ready clean-required handoffs: `{summary.get('comparison_ready_handoff_require_clean_batch_review_count')}`",
         f"- Comparison-ready clean handoffs: `{summary.get('comparison_ready_handoff_clean_batch_review_count')}`",
         f"- Comparison-ready unclean handoffs: `{summary.get('comparison_ready_handoff_unclean_batch_review_count')}`",
         f"- Comparison-ready handoff batch CI regressions: `{summary.get('comparison_ready_handoff_batch_maturity_ci_regression_count')}`",
+        f"- Comparison-ready handoff batch CI regression reasons: `{_fmt_mapping(summary.get('comparison_ready_handoff_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Comparison-ready selected batch CI regressions: `{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_total')}`",
+        f"- Comparison-ready selected batch CI regression reasons: `{_fmt_mapping(summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Comparison-ready handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('comparison_ready_handoff_batch_maturity_ci_regression_names')))}`",
         f"- Comparison-ready selected batch reviews: `{summary.get('comparison_ready_handoff_selected_batch_review_count')}`",
         f"- Comparison-ready selected batch blockers: `{summary.get('comparison_ready_handoff_selected_batch_blocker_count')}`",
@@ -248,15 +261,22 @@ def render_promoted_training_scale_comparison_html(report: dict[str, Any]) -> st
         ("Handoff clean batch review", summary.get("handoff_clean_batch_review_count")),
         ("Handoff unclean batch review", summary.get("handoff_unclean_batch_review_count")),
         ("Handoff CI regressions", summary.get("handoff_batch_maturity_ci_regression_count")),
+        ("Handoff CI reasons", _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))),
         ("Handoff selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
+        ("Handoff selected CI reasons", _fmt_mapping(summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"))),
         ("Ready suite mismatches", summary.get("comparison_ready_handoff_suite_mismatch_total")),
         ("Ready clean-required", summary.get("comparison_ready_handoff_require_clean_batch_review_count")),
         ("Ready clean batch review", summary.get("comparison_ready_handoff_clean_batch_review_count")),
         ("Ready unclean batch review", summary.get("comparison_ready_handoff_unclean_batch_review_count")),
         ("Ready CI regressions", summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")),
+        ("Ready CI reasons", _fmt_mapping(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"))),
         (
             "Ready selected CI regressions",
             summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_total"),
+        ),
+        (
+            "Ready selected CI reasons",
+            _fmt_mapping(summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts")),
         ),
         ("Ready batch reviews", summary.get("comparison_ready_handoff_selected_batch_review_count")),
         ("Ready batch blockers", summary.get("comparison_ready_handoff_selected_batch_blocker_count")),

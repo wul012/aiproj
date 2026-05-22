@@ -6,9 +6,11 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    format_mapping as _fmt_mapping,
     first_present,
     list_of_dicts as _list_of_dicts,
     number_or_default,
+    positive_int_mapping as _int_mapping,
     string_list as _string_list,
     utc_now,
 )
@@ -136,11 +138,17 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 "handoff_batch_maturity_ci_regression_count": clean_guard.get(
                     "handoff_batch_maturity_ci_regression_count"
                 ),
+                "handoff_batch_maturity_ci_regression_reason_counts": clean_guard.get(
+                    "handoff_batch_maturity_ci_regression_reason_counts"
+                ),
                 "handoff_batch_maturity_ci_regression_names": clean_guard.get(
                     "handoff_batch_maturity_ci_regression_names"
                 ),
                 "handoff_selected_batch_maturity_ci_regression_count": clean_guard.get(
                     "handoff_selected_batch_maturity_ci_regression_count"
+                ),
+                "handoff_selected_batch_maturity_ci_regression_reason_counts": clean_guard.get(
+                    "handoff_selected_batch_maturity_ci_regression_reason_counts"
                 ),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                 "handoff_selected_batch_comparison_review_action_count": row.get(
@@ -253,6 +261,12 @@ def _summary(
         "handoff_selected_batch_maturity_ci_regression_total": sum(
             _int(row.get("handoff_selected_batch_maturity_ci_regression_count")) for row in promotions
         ),
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
+            row.get("handoff_selected_batch_maturity_ci_regression_reason_counts") for row in promotions
+        ),
+        "handoff_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
+            row.get("handoff_batch_maturity_ci_regression_reason_counts") for row in promotions
+        ),
         "handoff_batch_maturity_ci_regression_names": sorted(
             {
                 name
@@ -329,6 +343,16 @@ def _summary(
             for row in promotions
             if row.get("promoted_for_comparison")
         ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
+            row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
+            row.get("handoff_batch_maturity_ci_regression_reason_counts")
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
         "comparison_ready_handoff_batch_maturity_ci_regression_names": sorted(
             {
                 name
@@ -380,16 +404,31 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
                 "Comparison-ready promoted inputs still include unclean clean-required handoffs; resolve them before treating this comparison as clean model-quality evidence."
             )
         elif _int(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")):
+            detail = _fmt_mapping(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"))
+            suffix = f" Observed reasons: {detail}." if detail != "none" else ""
             recommendations.append(
                 "Comparison-ready promoted inputs still include handoff batch CI regressions; resolve them before treating this comparison as clean model-quality evidence."
+                + suffix
             )
         elif _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
             recommendations.append(
                 "Comparison-ready promoted inputs still carry selected handoff batch blocker actions; resolve them before treating this comparison as clean model-quality evidence."
             )
         elif _int(summary.get("handoff_batch_maturity_ci_regression_count")):
+            detail = _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))
+            suffix = f" Observed reasons: {detail}." if detail != "none" else ""
             recommendations.append(
                 "CI-regressed handoff batch evidence remains visible in the promotion list but is kept out of clean-required promoted comparisons."
+                + suffix
+            )
+        if _int(summary.get("handoff_batch_maturity_ci_regression_count")) and not any(
+            "CI-regressed handoff batch evidence remains visible" in item for item in recommendations
+        ):
+            detail = _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))
+            suffix = f" Observed reasons: {detail}." if detail != "none" else ""
+            recommendations.append(
+                "CI-regressed handoff batch evidence remains visible in the promotion list but is kept out of clean-required promoted comparisons."
+                + suffix
             )
         reasons = _string_list(summary.get("comparison_ready_handoff_batch_comparison_blocker_reasons"))
         if reasons:
@@ -410,8 +449,11 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
             "Comparison-ready promoted inputs still include unclean clean-required handoffs; clean them before treating later comparisons as baseline evidence."
         )
     elif _int(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")):
+        detail = _fmt_mapping(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"))
+        suffix = f" Observed reasons: {detail}." if detail != "none" else ""
         recommendations.append(
             "Comparison-ready promoted inputs still include handoff batch CI regressions; clean them before treating later comparisons as baseline evidence."
+            + suffix
         )
     elif _int(summary.get("comparison_ready_handoff_selected_batch_blocker_count")):
         recommendations.append(
@@ -422,8 +464,11 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
             "Comparison-ready promoted inputs still carry selected handoff batch review actions; review them before treating later comparisons as baseline evidence."
         )
     elif _int(summary.get("handoff_batch_maturity_ci_regression_count")):
+        detail = _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))
+        suffix = f" Observed reasons: {detail}." if detail != "none" else ""
         recommendations.append(
             "CI-regressed handoff batch evidence remains visible in the promotion list but is kept out of clean-required promoted comparisons."
+            + suffix
         )
     return recommendations
 
@@ -470,6 +515,14 @@ def _int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
 
 
+def _sum_reason_counts(values: Any) -> dict[str, int]:
+    result: dict[str, int] = {}
+    for value in values:
+        for reason, count in _int_mapping(value).items():
+            result[reason] = result.get(reason, 0) + count
+    return dict(sorted(result.items()))
+
+
 def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
     summary = _dict(row.get("summary"))
     guard = _dict(row.get("clean_batch_review_guard"))
@@ -500,6 +553,15 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
             summary.get("handoff_batch_maturity_ci_regression_count"),
             summary.get("batch_maturity_ci_regression_count"),
         ),
+        "handoff_batch_maturity_ci_regression_reason_counts": _int_mapping(
+            first_present(
+                row.get("handoff_batch_maturity_ci_regression_reason_counts"),
+                guard.get("handoff_batch_maturity_ci_regression_reason_counts"),
+                guard.get("batch_maturity_ci_regression_reason_counts"),
+                summary.get("handoff_batch_maturity_ci_regression_reason_counts"),
+                summary.get("batch_maturity_ci_regression_reason_counts"),
+            )
+        ),
         "handoff_batch_maturity_ci_regression_names": _string_list(
             first_present(
                 row.get("handoff_batch_maturity_ci_regression_names"),
@@ -515,5 +577,14 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
             guard.get("selected_batch_maturity_ci_regression_count"),
             summary.get("handoff_selected_batch_maturity_ci_regression_count"),
             summary.get("selected_batch_maturity_ci_regression_count"),
+        ),
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
+            first_present(
+                row.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                guard.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                guard.get("selected_batch_maturity_ci_regression_reason_counts"),
+                summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                summary.get("selected_batch_maturity_ci_regression_reason_counts"),
+            )
         ),
     }
