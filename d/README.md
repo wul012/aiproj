@@ -290,6 +290,9 @@ d/392/解释/说明.md
 d/393/图片
 d/393/解释/说明.md
  -> v393 promoted decision maturity CI reasons 的运行截图和解释
+d/394/图片
+d/394/解释/说明.md
+ -> v394 promoted seed maturity CI reasons 的运行截图和解释
 ```
 
 写入规则：

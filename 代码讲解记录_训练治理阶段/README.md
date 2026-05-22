@@ -284,6 +284,9 @@
 407-v393-promoted-training-scale-decision-maturity-ci-reasons.md
  -> v393 code explanation: carry promoted-comparison maturity CI regression reason counts into baseline decision summaries, rendered outputs, CLI logs, and review recommendations.
 
+408-v394-promoted-training-scale-seed-maturity-ci-reasons.md
+ -> v394 code explanation: carry promoted-decision maturity CI regression reason counts into next-cycle seed summaries, rendered outputs, CLI logs, and seed recommendations.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
