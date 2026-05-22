@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiniGPT v398 Tiny Scorecard Benchmark History</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #1f2933;
+      --muted: #5f6b76;
+      --panel: #ffffff;
+      --line: #d7d7cf;
+      --accent: #166534;
+      --warn: #9a3412;
+      --code: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 "Segoe UI", Arial, sans-serif;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 32px 56px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); margin: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .stat, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .stat strong {
+      display: block;
+      color: var(--code);
+      font-size: 24px;
+      margin-top: 4px;
+    }
+    .stat span { color: var(--muted); font-size: 13px; }
+    section { margin-top: 16px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      background: #fbfbf8;
+      min-height: 86px;
+    }
+    .step b { display: block; margin-bottom: 6px; }
+    code {
+      color: var(--code);
+      background: #eef0ec;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    pre {
+      margin: 0;
+      overflow: auto;
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th { background: #ecece6; }
+    .warn { color: var(--warn); font-weight: 700; }
+    .ok { color: var(--accent); font-weight: 700; }
+    @media (max-width: 860px) {
+      .grid, .flow { grid-template-columns: 1fr; }
+      main { padding: 24px 18px 40px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">MiniGPT v398 evidence</div>
+      <h1>Tiny scorecard smoke now writes benchmark history</h1>
+      <p>
+        v398 connects the tiny comparison and decision smoke to the existing benchmark-history ledger.
+        The new artifacts prove the evaluation plumbing is wired, while <code>tiny-smoke</code>
+        keeps model-quality claims out of scope.
+      </p>
+    </header>
+
+    <div class="grid">
+      <div class="stat"><span>history entries</span><strong>1</strong></div>
+      <div class="stat"><span>model quality claim</span><strong>not_claimed</strong></div>
+      <div class="stat"><span>readiness requirement</span><strong class="warn">fail</strong></div>
+      <div class="stat"><span>new final artifacts</span><strong>4</strong></div>
+    </div>
+
+    <section>
+      <h2>Run Chain</h2>
+      <div class="flow">
+        <div class="step"><b>Baseline</b><span>tiny standard benchmark smoke</span></div>
+        <div class="step"><b>Candidate</b><span>tiny standard benchmark smoke</span></div>
+        <div class="step"><b>Comparison</b><span>scorecard deltas and readiness fields</span></div>
+        <div class="step"><b>Decision</b><span>rubric threshold and remediation gate</span></div>
+        <div class="step"><b>History</b><span>benchmark ledger with tiny-smoke boundary</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <table>
+        <thead>
+          <tr><th>Artifact</th><th>Role</th><th>Boundary</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>benchmark_history.json</code></td>
+            <td>Machine-readable history ledger for later audit, maturity, and release consumers.</td>
+            <td class="warn">Contains <code>evidence_kind=tiny-smoke</code>.</td>
+          </tr>
+          <tr>
+            <td><code>benchmark_history.csv</code></td>
+            <td>Flat review table for one smoke history entry.</td>
+            <td>Human-readable, not a promotion gate by itself.</td>
+          </tr>
+          <tr>
+            <td><code>benchmark_history.md</code></td>
+            <td>Review note that explains status, readiness, and failed reasons.</td>
+            <td>Documents why readiness is not satisfied.</td>
+          </tr>
+          <tr>
+            <td><code>benchmark_history.html</code></td>
+            <td>Visual evidence for screenshot archive and release review.</td>
+            <td>Evidence page, not a training result.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Summary Output</h2>
+      <pre>history_entry_count=1
+history_ready_count=0
+history_model_quality_claim=not_claimed
+history_readiness_requirement_status=fail
+history_readiness_requirement_decision=stop
+history_readiness_requirement_exit_code=1
+history_readiness_requirement_failed_reasons=insufficient_ready_entries,not_real_benchmark_evidence
+history_json=&lt;out-dir&gt;/benchmark-history/benchmark_history.json</pre>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p>
+        Targeted tests cover the new history files, JSON summary fields, text summary fields,
+        and CLI diagnostics. Full project verification remains <code>python -m pytest -q</code>,
+        source-encoding hygiene, and <code>git diff --check</code>.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

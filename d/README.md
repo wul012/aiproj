@@ -302,6 +302,9 @@ d/396/解释/说明.md
 d/397/图片
 d/397/解释/说明.md
  -> v397 governance chain value review 的运行截图和解释
+d/398/图片
+d/398/解释/说明.md
+ -> v398 tiny scorecard benchmark history 的运行截图和解释
 ```
 
 写入规则：

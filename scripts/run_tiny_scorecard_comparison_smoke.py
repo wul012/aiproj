@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.report_utils import as_dict, list_of_dicts  # noqa: E402
+from minigpt.benchmark_history import build_benchmark_history, write_benchmark_history_outputs  # noqa: E402
 from scripts.check_tiny_scorecard_comparison_smoke import (  # noqa: E402
     check_summary as check_smoke_summary,
     write_check_outputs as write_smoke_check_outputs,
@@ -106,6 +107,7 @@ def main() -> None:
     candidate_dir = out_dir / "candidate"
     comparison_dir = out_dir / "scorecard-comparison"
     decision_dir = out_dir / "scorecard-decision"
+    history_dir = out_dir / "benchmark-history"
     commands = [
         ("baseline_smoke", tiny_smoke_command(args, baseline_dir, args.baseline_seed, int(run_config["baseline_max_iters"]))),
         ("candidate_smoke", tiny_smoke_command(args, candidate_dir, args.candidate_seed, int(run_config["candidate_max_iters"]))),
@@ -157,6 +159,7 @@ def main() -> None:
                 candidate_dir=candidate_dir,
                 comparison_dir=comparison_dir,
                 decision_dir=decision_dir,
+                history_dir=history_dir,
                 run_config=run_config,
                 command_results=command_results,
                 issues=[f"{name} command returned {result['returncode']}"],
@@ -176,6 +179,7 @@ def main() -> None:
         candidate_dir=candidate_dir,
         comparison_dir=comparison_dir,
         decision_dir=decision_dir,
+        history_dir=history_dir,
         run_config=run_config,
         command_results=command_results,
         issues=[],
@@ -285,11 +289,13 @@ def build_summary(
     candidate_dir: Path,
     comparison_dir: Path,
     decision_dir: Path,
+    history_dir: Path,
     run_config: dict[str, Any],
     command_results: list[dict[str, Any]],
     issues: list[str],
 ) -> dict[str, Any]:
-    artifacts = artifact_status(baseline_dir, candidate_dir, comparison_dir, decision_dir)
+    history_report, history_outputs = build_tiny_benchmark_history(comparison_dir, decision_dir, history_dir)
+    artifacts = artifact_status(baseline_dir, candidate_dir, comparison_dir, decision_dir, history_dir)
     issue_list = list(issues)
     for key, value in artifacts.items():
         if key.endswith("_exists") and not value:
@@ -315,6 +321,7 @@ def build_summary(
         "candidate_dir": str(candidate_dir),
         "comparison_dir": str(comparison_dir),
         "decision_dir": str(decision_dir),
+        "benchmark_history_dir": str(history_dir),
         "run_config": run_config,
         "commands": command_results,
         "artifacts": artifacts,
@@ -322,6 +329,7 @@ def build_summary(
         "candidate_smoke": smoke_summary(candidate_smoke),
         "scorecard_comparison": comparison_summary(comparison),
         "scorecard_decision": decision_view,
+        "benchmark_history": history_summary(history_report, history_outputs),
         "remediation_gate": remediation_gate,
         "interpretation": {
             "comparison_is_smoke_only": True,
@@ -335,7 +343,33 @@ def build_summary(
     }
 
 
-def artifact_status(baseline_dir: Path, candidate_dir: Path, comparison_dir: Path, decision_dir: Path) -> dict[str, Any]:
+def build_tiny_benchmark_history(
+    comparison_dir: Path,
+    decision_dir: Path,
+    history_dir: Path,
+) -> tuple[dict[str, Any], dict[str, str]]:
+    comparison_json = comparison_dir / "benchmark_scorecard_comparison.json"
+    decision_json = decision_dir / "benchmark_scorecard_decision.json"
+    if not comparison_json.is_file() or not decision_json.is_file():
+        return {}, {}
+    report = build_benchmark_history(
+        [comparison_json],
+        decision_paths=[decision_json],
+        names=["tiny-scorecard-smoke"],
+        evidence_kind="tiny-smoke",
+        title="MiniGPT tiny scorecard smoke benchmark history",
+    )
+    outputs = write_benchmark_history_outputs(report, history_dir)
+    return report, outputs
+
+
+def artifact_status(
+    baseline_dir: Path,
+    candidate_dir: Path,
+    comparison_dir: Path,
+    decision_dir: Path,
+    history_dir: Path,
+) -> dict[str, Any]:
     paths = {
         "baseline_smoke_summary": baseline_dir / "tiny_standard_benchmark_smoke_summary.json",
         "baseline_scorecard": baseline_dir / "run" / "benchmark-scorecard" / "benchmark_scorecard.json",
@@ -353,6 +387,10 @@ def artifact_status(baseline_dir: Path, candidate_dir: Path, comparison_dir: Pat
         "decision_remediation_csv": decision_dir / "benchmark_scorecard_decision_remediation.csv",
         "decision_markdown": decision_dir / "benchmark_scorecard_decision.md",
         "decision_html": decision_dir / "benchmark_scorecard_decision.html",
+        "benchmark_history_json": history_dir / "benchmark_history.json",
+        "benchmark_history_csv": history_dir / "benchmark_history.csv",
+        "benchmark_history_markdown": history_dir / "benchmark_history.md",
+        "benchmark_history_html": history_dir / "benchmark_history.html",
     }
     return {f"{key}_path": str(path) for key, path in paths.items()} | {
         f"{key}_exists": path.is_file() for key, path in paths.items()
@@ -396,6 +434,25 @@ def comparison_summary(payload: dict[str, Any]) -> dict[str, Any]:
         "generation_quality_flag_regression_count": summary.get("generation_quality_flag_regression_count"),
         "non_comparison_ready_count": summary.get("non_comparison_ready_count"),
         "recommendation_count": len(payload.get("recommendations")) if isinstance(payload.get("recommendations"), list) else 0,
+    }
+
+
+def history_summary(report: dict[str, Any], outputs: dict[str, str]) -> dict[str, Any]:
+    summary = as_dict(report.get("summary"))
+    requirement = as_dict(report.get("readiness_requirement"))
+    return {
+        "available": bool(report),
+        "entry_count": summary.get("entry_count"),
+        "ready_count": summary.get("ready_count"),
+        "review_count": summary.get("review_count"),
+        "blocked_count": summary.get("blocked_count"),
+        "best_candidate_name": summary.get("best_candidate_name"),
+        "model_quality_claim": summary.get("model_quality_claim"),
+        "readiness_requirement_status": requirement.get("status"),
+        "readiness_requirement_decision": requirement.get("decision"),
+        "readiness_requirement_exit_code": requirement.get("exit_code"),
+        "readiness_requirement_failed_reasons": requirement.get("failed_reasons", []),
+        "outputs": outputs,
     }
 
 
@@ -505,6 +562,7 @@ def render_summary(summary: dict[str, Any]) -> str:
     candidate = as_dict(summary.get("candidate_smoke"))
     comparison = as_dict(summary.get("scorecard_comparison"))
     decision = as_dict(summary.get("scorecard_decision"))
+    history = as_dict(summary.get("benchmark_history"))
     remediation_gate = as_dict(summary.get("remediation_gate"))
     remediation_gate_issues = list_of_dicts(remediation_gate.get("issues"))
     first_remediation_gate_issue = remediation_gate_issues[0] if remediation_gate_issues else {}
@@ -538,6 +596,17 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("comparison_regressed_overall_count", comparison.get("regressed_overall_count")),
         ("comparison_case_delta_count", comparison.get("case_delta_count")),
         ("comparison_non_ready_count", comparison.get("non_comparison_ready_count")),
+        ("history_entry_count", history.get("entry_count")),
+        ("history_ready_count", history.get("ready_count")),
+        ("history_model_quality_claim", history.get("model_quality_claim")),
+        ("history_readiness_requirement_status", history.get("readiness_requirement_status")),
+        ("history_readiness_requirement_decision", history.get("readiness_requirement_decision")),
+        ("history_readiness_requirement_exit_code", history.get("readiness_requirement_exit_code")),
+        (
+            "history_readiness_requirement_failed_reasons",
+            ",".join(str(item) for item in history.get("readiness_requirement_failed_reasons", [])),
+        ),
+        ("history_json", as_dict(history.get("outputs")).get("json")),
         ("decision_status", decision.get("decision_status")),
         ("decision_action", decision.get("recommended_action")),
         ("decision_selected_name", decision.get("selected_name")),

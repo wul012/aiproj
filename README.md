@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 397 turns the recent governance-chain repetition concern into a maintenance-policy value review, marking high-overlap chains with duplicate-risk and freeze-new-fields guardrails before any new report layer is added.
+Version 398 returns from governance stabilization to model-evaluation plumbing by making the tiny scorecard comparison smoke write a benchmark history ledger with an explicit tiny-smoke readiness boundary.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,15 @@ Version 397 turns the recent governance-chain repetition concern into a maintena
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v398 checkpoint
+
+- Tiny scorecard comparison smoke now writes `benchmark-history/benchmark_history.json/csv/md/html`.
+- The smoke summary embeds benchmark-history entry counts, model-quality-claim boundary, readiness requirement status, decision, exit code, failed reasons, and output paths.
+- Text summary and CLI stdout expose `history_entry_count`, `history_model_quality_claim`, and readiness-requirement diagnostics.
+- The generated history uses `evidence_kind=tiny-smoke`, so readiness fails on `not_real_benchmark_evidence` and may also fail on insufficient ready entries; this keeps tiny smoke framed as plumbing evidence.
+- Targeted tiny-scorecard smoke tests cover the new history artifacts and boundary fields.
+- Archived tiny scorecard benchmark-history evidence in `d/398`.
 
 ## Latest v397 checkpoint
 

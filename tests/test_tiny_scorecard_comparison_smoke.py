@@ -59,6 +59,16 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                     "case_delta_count": 20,
                     "non_comparison_ready_count": 0,
                 },
+                "benchmark_history": {
+                    "entry_count": 1,
+                    "ready_count": 0,
+                    "model_quality_claim": "not_claimed",
+                    "readiness_requirement_status": "fail",
+                    "readiness_requirement_decision": "stop",
+                    "readiness_requirement_exit_code": 1,
+                    "readiness_requirement_failed_reasons": ["not_real_benchmark_evidence"],
+                    "outputs": {"json": "history/benchmark_history.json"},
+                },
                 "scorecard_decision": {
                     "decision_status": "promote",
                     "recommended_action": "promote_selected_scorecard",
@@ -128,6 +138,11 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
         self.assertIn("config_summary_check_no_fail=False", text)
         self.assertIn("comparison_scorecard_count=2", text)
         self.assertIn("comparison_case_delta_count=20", text)
+        self.assertIn("history_entry_count=1", text)
+        self.assertIn("history_model_quality_claim=not_claimed", text)
+        self.assertIn("history_readiness_requirement_status=fail", text)
+        self.assertIn("history_readiness_requirement_failed_reasons=not_real_benchmark_evidence", text)
+        self.assertIn("history_json=history/benchmark_history.json", text)
         self.assertIn("decision_status=promote", text)
         self.assertIn("decision_candidate_evaluation_count=2", text)
         self.assertIn("decision_review_candidates=", text)
@@ -271,11 +286,19 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertTrue(summary["artifacts"]["decision_json_exists"])
             self.assertTrue(summary["artifacts"]["decision_remediation_csv_exists"])
             self.assertTrue(summary["artifacts"]["decision_html_exists"])
+            self.assertTrue(summary["artifacts"]["benchmark_history_json_exists"])
+            self.assertTrue(summary["artifacts"]["benchmark_history_html_exists"])
+            self.assertEqual(summary["benchmark_history"]["entry_count"], 1)
+            self.assertEqual(summary["benchmark_history"]["model_quality_claim"], "not_claimed")
+            self.assertEqual(summary["benchmark_history"]["readiness_requirement_status"], "fail")
+            self.assertIn("not_real_benchmark_evidence", summary["benchmark_history"]["readiness_requirement_failed_reasons"])
             self.assertTrue((out_dir / "baseline" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "candidate" / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertTrue((out_dir / "scorecard-comparison" / "benchmark_scorecard_comparison.json").is_file())
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision.json").is_file())
             self.assertTrue((out_dir / "scorecard-decision" / "benchmark_scorecard_decision_remediation.csv").is_file())
+            self.assertTrue((out_dir / "benchmark-history" / "benchmark_history.json").is_file())
+            self.assertTrue((out_dir / "benchmark-history" / "benchmark_history.html").is_file())
             self.assertTrue(summary_check_path.is_file())
             self.assertTrue(summary_check_text_path.is_file())
             self.assertEqual(json.loads(summary_check_path.read_text(encoding="utf-8"))["status"], "pass")
@@ -286,6 +309,12 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             self.assertIn("decision_first_recommendation=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("decision_review_candidates=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_budget_mode=candidate_more_iters", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("history_entry_count=1", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("history_readiness_requirement_status=fail", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn(
+                "history_readiness_requirement_failed_reasons=insufficient_ready_entries,not_real_benchmark_evidence",
+                summary_text_path.read_text(encoding="utf-8"),
+            )
             self.assertIn("config_decision_min_rubric_score=60.0", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_require_clean_remediation=False", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("config_summary_check_requested=True", summary_text_path.read_text(encoding="utf-8"))
@@ -313,6 +342,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
             decision_command = next(item for item in summary["commands"] if item["name"] == "scorecard_decision")
             self.assertIn("--min-rubric-score 60.0", decision_command["command_text"])
             self.assertIn("model_quality_claim=not_claimed", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("history_readiness_requirement_status=fail", completed.stdout)
             self.assertIn("command_scorecard_comparison=pass", completed.stdout)
             self.assertIn("command_scorecard_decision=pass", completed.stdout)
             self.assertIn("summary_check_status=pass", completed.stdout)
@@ -535,6 +565,7 @@ class TinyScorecardComparisonSmokeTests(unittest.TestCase):
                 candidate_dir=candidate_dir,
                 comparison_dir=comparison_dir,
                 decision_dir=decision_dir,
+                history_dir=root / "benchmark-history",
                 run_config={"require_clean_remediation": True},
                 command_results=[],
                 issues=[],
