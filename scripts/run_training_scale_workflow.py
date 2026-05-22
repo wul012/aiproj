@@ -80,7 +80,18 @@ def main() -> None:
     print(f"selected_profile={report.get('summary', {}).get('selected_profile')}")
     print(f"clean_batch_review_status={report.get('summary', {}).get('clean_batch_review_status')}")
     print(f"batch_maturity_ci_regression_count={report.get('summary', {}).get('batch_maturity_ci_regression_count')}")
+    print(
+        "batch_maturity_ci_regression_reason_counts="
+        + json.dumps(report.get("summary", {}).get("batch_maturity_ci_regression_reason_counts", {}), ensure_ascii=False)
+    )
     print(f"selected_batch_maturity_ci_regression_count={report.get('summary', {}).get('selected_batch_maturity_ci_regression_count')}")
+    print(
+        "selected_batch_maturity_ci_regression_reason_counts="
+        + json.dumps(
+            report.get("summary", {}).get("selected_batch_maturity_ci_regression_reason_counts", {}),
+            ensure_ascii=False,
+        )
+    )
     print(f"scale_tier={report.get('summary', {}).get('scale_tier')}")
     print(f"profiles={','.join(report.get('profiles', []))}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))

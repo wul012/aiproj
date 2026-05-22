@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -170,8 +171,16 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
                 payload = real_builder(*args, **kwargs)
                 summary = dict(payload["summary"])
                 summary["selected_batch_maturity_ci_regression_count"] = 1
+                summary["selected_batch_maturity_ci_regression_reason_counts"] = {
+                    "ci_failed_checks_increased": 2,
+                    "ci_order_violations_increased": 1,
+                }
                 summary["batch_maturity_ci_regression_count"] = 2
                 summary["batch_maturity_ci_regression_names"] = ["review", "standard"]
+                summary["batch_maturity_ci_regression_reason_counts"] = {
+                    "ci_failed_checks_increased": 3,
+                    "ci_order_violations_increased": 1,
+                }
                 payload["summary"] = summary
                 return payload
 
@@ -192,13 +201,60 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
 
             summary = report["summary"]
             self.assertEqual(summary["selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(
+                summary["selected_batch_maturity_ci_regression_reason_counts"],
+                {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+            )
             self.assertEqual(summary["batch_maturity_ci_regression_count"], 2)
             self.assertEqual(summary["batch_maturity_ci_regression_names"], ["review", "standard"])
+            self.assertEqual(
+                summary["batch_maturity_ci_regression_reason_counts"],
+                {"ci_failed_checks_increased": 3, "ci_order_violations_increased": 1},
+            )
+            self.assertTrue(any("ci_failed_checks_increased:3" in item for item in report["recommendations"]))
             self.assertIn("Batch CI regressions", markdown)
             self.assertIn("Batch CI-regressed names", markdown)
+            self.assertIn("Batch CI regression reasons", markdown)
+            self.assertIn("ci_failed_checks_increased:3", markdown)
             self.assertIn("Batch CI regressions", html)
+            self.assertIn("CI regression reasons", html)
+            self.assertIn("ci_failed_checks_increased:3", html)
+            self.assertIn("selected_batch_maturity_ci_regression_reason_counts", csv_text)
+            self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("batch_maturity_ci_regression_count", csv_text)
             self.assertIn("review;standard", csv_text)
+            self.assertIn("ci_failed_checks_increased", csv_text)
+
+    def test_workflow_cli_prints_batch_ci_reason_counts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._write_source(root)
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "run_training_scale_workflow.py"),
+                    str(source),
+                    "--project-root",
+                    str(root),
+                    "--out-root",
+                    str(root / "workflow"),
+                    "--profile",
+                    "review",
+                    "--profile",
+                    "standard",
+                    "--baseline-profile",
+                    "review",
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(completed.returncode, 0)
+            self.assertIn("batch_maturity_ci_regression_reason_counts=", completed.stdout)
+            self.assertIn("selected_batch_maturity_ci_regression_reason_counts=", completed.stdout)
 
     def test_workflow_clean_batch_fields_are_rendered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

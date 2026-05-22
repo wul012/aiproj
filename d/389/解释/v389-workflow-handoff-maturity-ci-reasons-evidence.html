@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v389 workflow handoff maturity CI reasons evidence</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f6f8f4; color: #172026; }
+    body { margin: 0; }
+    header { background: #172026; color: #f8fbf3; padding: 30px 34px; }
+    h1 { font-size: 31px; margin: 0 0 8px; letter-spacing: 0; }
+    header p { color: #d8e0d4; margin: 0; font-size: 16px; }
+    main { padding: 18px 34px 32px; }
+    section { max-width: 1080px; margin: 0 auto 16px; background: #fff; border: 1px solid #d9dfd5; border-radius: 8px; padding: 18px; }
+    h2 { margin: 0 0 12px; font-size: 19px; letter-spacing: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .card { border: 1px solid #e1e6dc; border-radius: 8px; padding: 13px; background: #fbfcf8; }
+    .card span { display: block; color: #5e6b61; font-size: 12px; }
+    .card strong { display: block; margin-top: 7px; font-size: 17px; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .table-wrap { overflow-x: auto; }
+    th, td { border-bottom: 1px solid #e4e9df; padding: 10px; text-align: left; vertical-align: top; }
+    th { font-size: 12px; color: #4b594d; text-transform: uppercase; }
+    code { background: #eef2ea; padding: 2px 5px; border-radius: 5px; }
+    li { margin: 8px 0; }
+    footer { padding: 14px 34px; color: #667366; font-size: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v389 Workflow Handoff CI Reasons</h1>
+    <p>Workflow and handoff evidence now preserve selected and aggregate batch maturity CI reason counts.</p>
+  </header>
+  <main>
+    <section class="grid" aria-label="summary cards">
+      <div class="card"><span>Input layer</span><strong>training_scale_run_decision.summary</strong></div>
+      <div class="card"><span>Workflow fields</span><strong>selected/global reason counts</strong></div>
+      <div class="card"><span>Handoff fields</span><strong>guard + summary reason counts</strong></div>
+      <div class="card"><span>Outputs</span><strong>JSON, CSV, Markdown, HTML, CLI</strong></div>
+    </section>
+
+    <section>
+      <h2>Evidence Chain</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>Field</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Run decision</td>
+              <td><code>selected_batch_maturity_ci_regression_reason_counts</code></td>
+              <td>Explains the selected candidate's CI regression reasons.</td>
+            </tr>
+            <tr>
+              <td>Run decision</td>
+              <td><code>batch_maturity_ci_regression_reason_counts</code></td>
+              <td>Explains aggregate comparison-level CI regression reasons.</td>
+            </tr>
+            <tr>
+              <td>Workflow</td>
+              <td>summary selected/global reason counts</td>
+              <td>Keeps one-command workflow review aligned with decision evidence.</td>
+            </tr>
+            <tr>
+              <td>Handoff</td>
+              <td>guard + summary selected/global reason counts</td>
+              <td>Keeps execute handoff review aligned before running the command.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li><code>python -m pytest tests/test_training_scale_workflow.py tests/test_training_scale_handoff.py -q</code></li>
+        <li><code>python -m pytest -q</code></li>
+        <li><code>python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-v389</code></li>
+        <li><code>git diff --check</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>This version does not change profile execution, run selection, readiness scoring, handoff command execution, or clean batch-review blocking semantics. It carries explanatory CI reason evidence into workflow and handoff review surfaces.</p>
+    </section>
+  </main>
+  <footer>Generated for MiniGPT v389 release evidence.</footer>
+</body>
+</html>

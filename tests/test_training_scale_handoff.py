@@ -203,6 +203,10 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 selected_batch_review_status="clean",
                 batch_ci_regression_count=2,
                 batch_ci_regression_names=["review", "standard"],
+                batch_ci_regression_reason_counts={
+                    "ci_failed_checks_increased": 2,
+                    "ci_order_violations_increased": 1,
+                },
             )
 
             report = build_training_scale_handoff(workflow, generated_at="2026-05-14T00:00:00Z")
@@ -225,14 +229,29 @@ class TrainingScaleHandoffTests(unittest.TestCase):
             )
 
             self.assertEqual(report["summary"]["selected_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(
+                report["summary"]["selected_batch_maturity_ci_regression_reason_counts"],
+                {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+            )
             self.assertEqual(report["summary"]["batch_maturity_ci_regression_count"], 2)
             self.assertEqual(report["summary"]["batch_maturity_ci_regression_names"], ["review", "standard"])
-            self.assertTrue(any("CI-regressed batch evidence" in item for item in report["recommendations"]))
+            self.assertEqual(
+                report["summary"]["batch_maturity_ci_regression_reason_counts"],
+                {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
+            )
+            self.assertTrue(any("ci_failed_checks_increased:2" in item for item in report["recommendations"]))
             self.assertIn("selected_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("selected_batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("review;standard", csv_text)
+            self.assertIn("ci_failed_checks_increased", csv_text)
             self.assertIn("Batch CI regressions", markdown)
+            self.assertIn("Batch CI regression reasons", markdown)
+            self.assertIn("ci_failed_checks_increased:2", markdown)
             self.assertIn("Batch CI regressions", html)
+            self.assertIn("CI regression reasons", html)
+            self.assertIn("ci_failed_checks_increased:2", html)
             self.assertIn("batch_maturity_ci_regression_count=2", completed.stdout)
 
     def test_strict_clean_batch_review_blocks_ci_regression_even_if_status_is_clean(self) -> None:
@@ -302,6 +321,7 @@ class TrainingScaleHandoffTests(unittest.TestCase):
         selected_batch_review_status: str = "review",
         batch_ci_regression_count: int = 0,
         batch_ci_regression_names: list[str] | None = None,
+        batch_ci_regression_reason_counts: dict[str, int] | None = None,
     ) -> Path:
         workflow_dir = root / "workflow"
         decision_dir = workflow_dir / "decision"
@@ -336,11 +356,13 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
                 "selected_batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
                 "selected_batch_maturity_ci_regression_count": batch_ci_regression_count,
+                "selected_batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
                 "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
                 "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
                 "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
                 "batch_maturity_ci_regression_count": batch_ci_regression_count,
                 "batch_maturity_ci_regression_names": batch_ci_regression_names or [],
+                "batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
                 "batch_comparison_blocker_reasons": ["coverage-regressed"] if selected_batch_review_status == "blocker" else [],
             },
         }
@@ -364,6 +386,8 @@ class TrainingScaleHandoffTests(unittest.TestCase):
                 "clean_batch_review_status": clean_batch_review_status or selected_batch_review_status,
                 "batch_maturity_ci_regression_count": batch_ci_regression_count,
                 "batch_maturity_ci_regression_names": batch_ci_regression_names or [],
+                "batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
+                "selected_batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             },
             "decision_outputs": {"json": str(decision_path)},
         }

@@ -21,6 +21,7 @@ from minigpt.report_utils import (
     display_command as _display_command,
     first_present,
     make_artifact_row,
+    positive_int_mapping as _int_mapping,
     string_list as _string_list,
     utc_now,
 )
@@ -264,12 +265,24 @@ def _summary(
             decision_summary.get("selected_batch_maturity_ci_regression_count"),
             clean_batch_review_guard.get("batch_maturity_ci_regression_count"),
         ),
+        "selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
+            first_present(
+                decision_summary.get("selected_batch_maturity_ci_regression_reason_counts"),
+                clean_batch_review_guard.get("selected_batch_maturity_ci_regression_reason_counts"),
+            )
+        ),
         "batch_comparison_review_action_count": decision_summary.get("batch_comparison_review_action_count"),
         "batch_comparison_blocker_action_count": decision_summary.get("batch_comparison_blocker_action_count"),
         "batch_maturity_coverage_regression_count": decision_summary.get("batch_maturity_coverage_regression_count"),
         "batch_maturity_ci_regression_count": first_present(
             decision_summary.get("batch_maturity_ci_regression_count"),
             clean_batch_review_guard.get("batch_maturity_ci_regression_count"),
+        ),
+        "batch_maturity_ci_regression_reason_counts": _int_mapping(
+            first_present(
+                decision_summary.get("batch_maturity_ci_regression_reason_counts"),
+                clean_batch_review_guard.get("batch_maturity_ci_regression_reason_counts"),
+            )
         ),
         "batch_maturity_ci_regression_names": _string_list(
             first_present(
@@ -295,7 +308,9 @@ def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifac
     if summary.get("selected_batch_review_status") == "blocker":
         return ["Resolve selected batch comparison blocker actions before executing this handoff as clean evidence."]
     if int(summary.get("batch_maturity_ci_regression_count") or 0):
-        return ["Resolve CI-regressed batch evidence before executing this handoff as clean evidence."]
+        detail = _reason_detail(summary.get("batch_maturity_ci_regression_reason_counts"))
+        suffix = f" Observed reasons: {detail}." if detail else ""
+        return ["Resolve CI-regressed batch evidence before executing this handoff as clean evidence." + suffix]
     status = str(summary.get("handoff_status") or "")
     if status == "planned":
         if summary.get("selected_batch_review_status") == "review":
@@ -364,6 +379,18 @@ def _clean_batch_review_guard(workflow: dict[str, Any], decision: dict[str, Any]
             decision_summary.get("batch_maturity_ci_regression_count"),
             workflow_summary.get("batch_maturity_ci_regression_count"),
         ),
+        "batch_maturity_ci_regression_reason_counts": _int_mapping(
+            first_present(
+                decision_summary.get("batch_maturity_ci_regression_reason_counts"),
+                workflow_summary.get("batch_maturity_ci_regression_reason_counts"),
+            )
+        ),
+        "selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
+            first_present(
+                decision_summary.get("selected_batch_maturity_ci_regression_reason_counts"),
+                workflow_summary.get("selected_batch_maturity_ci_regression_reason_counts"),
+            )
+        ),
         "batch_maturity_ci_regression_names": _string_list(
             first_present(
                 decision_summary.get("batch_maturity_ci_regression_names"),
@@ -377,6 +404,11 @@ def _clean_batch_review_guard(workflow: dict[str, Any], decision: dict[str, Any]
             )
         ),
     }
+
+
+def _reason_detail(value: Any) -> str:
+    counts = _int_mapping(value)
+    return ", ".join(f"{reason}:{count}" for reason, count in counts.items())
 
 
 def _option_value(command: list[str], option: str) -> str | None:
