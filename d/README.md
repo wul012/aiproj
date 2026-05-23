@@ -350,6 +350,9 @@ d/412/解释/说明.md
 d/413/图片
 d/413/解释/说明.md
  -> v413 release readiness benchmark-history suite-design carryover 的运行截图和解释
+d/414/图片
+d/414/解释/说明.md
+ -> v414 release readiness comparison benchmark-history suite-design deltas 的运行截图和解释
 ```
 
 写入规则：

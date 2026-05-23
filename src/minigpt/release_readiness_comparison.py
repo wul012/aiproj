@@ -119,6 +119,12 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "benchmark_history_blocked": summary.get("benchmark_history_blocked"),
         "benchmark_history_case_regressions": summary.get("benchmark_history_case_regressions"),
         "benchmark_history_generation_flag_regressions": summary.get("benchmark_history_generation_flag_regressions"),
+        "benchmark_history_suite_design_non_comparison_ready_entries": summary.get(
+            "benchmark_history_suite_design_non_comparison_ready_entries"
+        ),
+        "benchmark_history_design_comparison_changed_entries": summary.get(
+            "benchmark_history_design_comparison_changed_entries"
+        ),
         "benchmark_history_readiness_requirement_status": summary.get("benchmark_history_readiness_requirement_status"),
         "benchmark_history_readiness_requirement_exit_code": summary.get("benchmark_history_readiness_requirement_exit_code"),
         "benchmark_history_readiness_requirement_failed_reasons": summary.get("benchmark_history_readiness_requirement_failed_reasons"),
@@ -196,6 +202,14 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "benchmark_history_generation_flag_regression_delta": _number_delta(
             compared.get("benchmark_history_generation_flag_regressions"),
             baseline.get("benchmark_history_generation_flag_regressions"),
+        ),
+        "benchmark_history_suite_design_non_comparison_ready_entries_delta": _number_delta(
+            compared.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+            baseline.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+        ),
+        "benchmark_history_design_comparison_changed_entries_delta": _number_delta(
+            compared.get("benchmark_history_design_comparison_changed_entries"),
+            baseline.get("benchmark_history_design_comparison_changed_entries"),
         ),
         "benchmark_history_readiness_requirement_status_changed": compared.get("benchmark_history_readiness_requirement_status")
         != baseline.get("benchmark_history_readiness_requirement_status"),
@@ -289,6 +303,16 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         parts.append(
             f"Benchmark history generation-flag regression delta is {delta.get('benchmark_history_generation_flag_regression_delta')}."
         )
+    if delta.get("benchmark_history_suite_design_non_comparison_ready_entries_delta") not in {None, 0, 0.0}:
+        parts.append(
+            "Benchmark history suite-design not-ready delta is "
+            f"{delta.get('benchmark_history_suite_design_non_comparison_ready_entries_delta')}."
+        )
+    if delta.get("benchmark_history_design_comparison_changed_entries_delta") not in {None, 0, 0.0}:
+        parts.append(
+            "Benchmark history design-comparison changed delta is "
+            f"{delta.get('benchmark_history_design_comparison_changed_entries_delta')}."
+        )
     if delta.get("benchmark_history_readiness_requirement_status_changed"):
         parts.append(
             "Benchmark history readiness requirement changed from "
@@ -352,6 +376,17 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         "test_coverage_regression_count": sum(1 for delta in deltas if _is_test_coverage_regression(delta)),
         "benchmark_history_delta_count": sum(1 for delta in deltas if _has_benchmark_history_delta(delta)),
         "benchmark_history_regression_count": sum(1 for delta in deltas if _is_benchmark_history_regression(delta)),
+        "benchmark_history_suite_design_non_comparison_ready_delta_count": sum(
+            1 for delta in deltas if delta.get("benchmark_history_suite_design_non_comparison_ready_entries_delta") not in {None, 0, 0.0}
+        ),
+        "benchmark_history_suite_design_non_comparison_ready_regression_count": sum(
+            1
+            for delta in deltas
+            if _positive_number(delta.get("benchmark_history_suite_design_non_comparison_ready_entries_delta"))
+        ),
+        "benchmark_history_design_comparison_changed_delta_count": sum(
+            1 for delta in deltas if delta.get("benchmark_history_design_comparison_changed_entries_delta") not in {None, 0, 0.0}
+        ),
         "benchmark_history_readiness_requirement_failed_reason_added_count": sum(
             int(delta.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) for delta in deltas
         ),
@@ -386,6 +421,10 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
     if int(summary.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0):
         return [
             "At least one readiness comparison shows mixed benchmark readiness failed-reason drift; inspect newly added reasons even when some reasons were removed."
+        ]
+    if int(summary.get("benchmark_history_suite_design_non_comparison_ready_regression_count") or 0):
+        return [
+            "At least one readiness comparison shows benchmark suite-design not-ready regression; inspect prompt-suite design evidence before release handoff."
         ]
     if int(summary.get("benchmark_history_regression_count") or 0):
         return [
@@ -481,6 +520,8 @@ def _has_benchmark_history_delta(delta: dict[str, Any]) -> bool:
         "benchmark_history_blocked_delta",
         "benchmark_history_case_regression_delta",
         "benchmark_history_generation_flag_regression_delta",
+        "benchmark_history_suite_design_non_comparison_ready_entries_delta",
+        "benchmark_history_design_comparison_changed_entries_delta",
         "benchmark_history_readiness_requirement_exit_code_delta",
     ]
     return any(delta.get(key) not in {None, 0, 0.0} for key in keys)
@@ -504,6 +545,7 @@ def _is_benchmark_history_regression(delta: dict[str, Any]) -> bool:
         "benchmark_history_blocked_delta",
         "benchmark_history_case_regression_delta",
         "benchmark_history_generation_flag_regression_delta",
+        "benchmark_history_suite_design_non_comparison_ready_entries_delta",
         "benchmark_history_readiness_requirement_exit_code_delta",
     ]:
         value = delta.get(key)
@@ -515,6 +557,10 @@ def _is_benchmark_history_regression(delta: dict[str, Any]) -> bool:
         )
     ready_delta = delta.get("benchmark_history_ready_delta")
     return isinstance(ready_delta, (int, float)) and ready_delta < 0
+
+
+def _positive_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and value > 0
 
 
 def _ci_status_score(value: Any) -> int:

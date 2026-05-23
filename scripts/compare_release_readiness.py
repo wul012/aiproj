@@ -65,6 +65,18 @@ def main() -> None:
     print(f"benchmark_history_deltas={summary.get('benchmark_history_delta_count')}")
     print(f"benchmark_history_regressions={summary.get('benchmark_history_regression_count')}")
     print(
+        "benchmark_history_suite_design_non_comparison_ready_delta_count="
+        + json.dumps(summary.get("benchmark_history_suite_design_non_comparison_ready_delta_count", 0), ensure_ascii=False)
+    )
+    print(
+        "benchmark_history_suite_design_non_comparison_ready_regression_count="
+        + json.dumps(summary.get("benchmark_history_suite_design_non_comparison_ready_regression_count", 0), ensure_ascii=False)
+    )
+    print(
+        "benchmark_history_design_comparison_changed_delta_count="
+        + json.dumps(summary.get("benchmark_history_design_comparison_changed_delta_count", 0), ensure_ascii=False)
+    )
+    print(
         "benchmark_readiness_failed_reason_mixed_delta_count="
         + json.dumps(summary.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count", 0), ensure_ascii=False)
     )
@@ -78,6 +90,12 @@ def main() -> None:
                 "benchmark_history_readiness_requirement="
                 + f"{row.get('release_name')}:{row.get('benchmark_history_readiness_requirement_status')}:"
                 + f"{row.get('benchmark_history_readiness_requirement_exit_code')}"
+            )
+            print(
+                "benchmark_history_suite_design="
+                + f"{row.get('release_name')}:"
+                + f"{row.get('benchmark_history_suite_design_non_comparison_ready_entries')}:"
+                + f"{row.get('benchmark_history_design_comparison_changed_entries')}"
             )
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>v414 release readiness comparison suite design evidence</title>
+  <style>
+    :root { --ink:#172033; --muted:#5b6475; --line:#d8dee9; --panel:#fff; --page:#f5f5f0; --accent:#0f766e; --warn:#b45309; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.55; }
+    header { padding:28px 36px 20px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0; color:var(--muted); }
+    main { padding:20px 36px 32px; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; margin:0 0 16px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:14px; background:#fbfcfd; min-height:96px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-weight:700; overflow-wrap:anywhere; }
+    table { width:100%; border-collapse:collapse; min-width:760px; }
+    th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f7; padding:2px 5px; border-radius:5px; }
+    .pass { color:var(--accent); font-weight:700; }
+    .warn { color:var(--warn); font-weight:700; }
+    footer { padding:0 36px 28px; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>v414 Release Readiness Comparison Suite Design</h1>
+    <p>Suite-design readiness deltas are now preserved in release readiness comparison summary, delta tables, rendered outputs, and CLI stdout.</p>
+  </header>
+  <main>
+    <section class="grid">
+      <div class="card"><div class="label">Comparison summary</div><div class="value"><code>benchmark_history_suite_design_non_comparison_ready_delta_count</code></div></div>
+      <div class="card"><div class="label">Regression trigger</div><div class="value">suite-design not-ready increase counts as regression</div></div>
+      <div class="card"><div class="label">Comparison delta</div><div class="value"><code>benchmark_history_suite_design_non_comparison_ready_entries_delta</code></div></div>
+      <div class="card"><div class="label">Design change delta</div><div class="value"><code>benchmark_history_design_comparison_changed_entries_delta</code></div></div>
+    </section>
+
+    <section>
+      <h2>Evidence Flow</h2>
+      <table>
+        <thead><tr><th>Layer</th><th>v414 behavior</th><th>Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td>Rows</td><td><code>_row_from_report()</code> preserves suite-design counters from readiness summaries.</td><td>Comparison reports can show the exact values seen by readiness.</td></tr>
+          <tr><td>Deltas</td><td><code>_delta_from_baseline()</code> adds suite-design not-ready delta and design-change delta.</td><td>Reviewers can see whether a release moved toward or away from prompt-suite readiness.</td></tr>
+          <tr><td>Status</td><td><code>_is_benchmark_history_regression()</code> treats positive suite-design not-ready delta as regression.</td><td>A release with more suite-design not-ready evidence is not treated as clean comparison history.</td></tr>
+          <tr><td>Reports</td><td>CSV, Markdown, HTML, and CLI stdout show the new fields.</td><td>Human and automated comparison output stay aligned.</td></tr>
+          <tr><td>Recommendation</td><td>The comparison recommendation points to suite-design not-ready regression before the generic benchmark regression message.</td><td>Release handoff guidance names the design boundary first.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <table>
+        <thead><tr><th>Command</th><th>Status</th><th>Coverage</th></tr></thead>
+        <tbody>
+          <tr><td><code>python -m pytest tests\test_release_readiness_comparison.py -q</code></td><td class="pass">17 passed</td><td>Suite-design regression path, rendered fields, CLI stdout.</td></tr>
+          <tr><td><code>python -m py_compile ...</code></td><td class="pass">passed</td><td>Modified code, script, and tests compile cleanly.</td></tr>
+          <tr><td><code>python -m pytest -q</code></td><td class="pass">703 passed</td><td>Full repository regression gate.</td></tr>
+          <tr><td><code>scripts\check_source_encoding.py</code></td><td class="pass">status=pass</td><td>Encoding and syntax hygiene gate, 319 clean sources.</td></tr>
+          <tr><td><code>git diff --check</code></td><td class="pass">passed</td><td>No whitespace errors in the working diff.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>This release does not invent a new comparison policy or extend into new governance layers. It only keeps the existing suite-design carryover visible inside comparison evidence.</p>
+    </section>
+  </main>
+  <footer>Archive: d/414. Screenshot target: 图片/01-release-readiness-comparison-suite-design-evidence.png.</footer>
+</body>
+</html>
