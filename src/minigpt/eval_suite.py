@@ -259,6 +259,13 @@ def build_eval_suite_report(
     task_type_counts = _count_by(result.task_type for result in results)
     difficulty_counts = _count_by(result.difficulty for result in results)
     coverage = _coverage_summary(results, task_type_counts, difficulty_counts)
+    design_summary = _design_summary(
+        results,
+        suite_name=suite_name,
+        suite_version=suite_version,
+        suite_description=suite_description,
+        suite_language=suite_language,
+    )
     return {
         "schema_version": 1,
         "checkpoint": checkpoint,
@@ -274,8 +281,10 @@ def build_eval_suite_report(
             "task_type_summary": _summary_by(results, "task_type"),
             "difficulty_summary": _summary_by(results, "difficulty"),
             "coverage": coverage,
+            "design_summary": design_summary,
         },
         "coverage": coverage,
+        "design_summary": design_summary,
         "case_count": len(results),
         "avg_continuation_chars": round(sum(result.char_count for result in results) / len(results), 4),
         "avg_unique_chars": round(sum(result.unique_char_count for result in results) / len(results), 4),
@@ -385,6 +394,41 @@ def _coverage_summary(
         "blockers": blockers,
         "comparison_blockers": comparison_blockers,
     }
+
+
+def _design_summary(
+    results: list[PromptResult],
+    *,
+    suite_name: str | None,
+    suite_version: str | None,
+    suite_description: str | None,
+    suite_language: str | None,
+) -> dict[str, Any]:
+    from minigpt.eval_suite_design import summarize_prompt_suite_design
+
+    return summarize_prompt_suite_design(
+        {
+            "suite_name": suite_name,
+            "suite_version": suite_version,
+            "description": suite_description,
+            "language": suite_language,
+            "cases": [
+                {
+                    "name": result.name,
+                    "prompt": result.prompt,
+                    "max_new_tokens": result.max_new_tokens,
+                    "temperature": result.temperature,
+                    "top_k": result.top_k,
+                    "seed": result.seed,
+                    "task_type": result.task_type,
+                    "difficulty": result.difficulty,
+                    "expected_behavior": result.expected_behavior,
+                    "tags": list(result.tags),
+                }
+                for result in results
+            ],
+        }
+    )
 
 
 def _summary_by(results: list[PromptResult], attribute: str) -> list[dict[str, Any]]:

@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 404 splits the maintenance policy engine into common, batching, and governance modules while keeping the public `maintenance_policy.py` facade stable, and hardens local server tests so proxy environment variables do not hijack `127.0.0.1` requests.
+Version 405 carries prompt-suite design summaries into general eval suite reports and renders a `Suite Design` panel in eval suite HTML, so standard-suite readiness can be reviewed outside the tiny smoke chain.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 404 splits the maintenance policy engine into common, batching, and gove
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v405 checkpoint
+
+- `build_eval_suite_report()` now writes `design_summary` at the top level and inside `benchmark`.
+- The design summary reuses the prompt-suite design checker so eval reports expose task type, difficulty, tag, token-budget, seed uniqueness, expected-behavior completeness, and comparison-readiness evidence.
+- Eval suite HTML now includes a `Suite Design` panel and dashboard stats for design coverage and design comparison status.
+- Tests cover narrow-suite warnings, standard-suite pass status, nested/top-level summary equality, and rendered HTML fields.
+- Archived eval suite design report evidence in `d/405`.
 
 ## Latest v402 checkpoint
 
@@ -4799,7 +4807,7 @@ The run manifest makes each training run easier to reproduce by saving code vers
 
 The dataset quality layer adds a stable corpus fingerprint plus lightweight checks for duplicate files, tiny sources, and repeated lines.
 
-The eval suite layer runs a fixed benchmark prompt set against a checkpoint and saves comparable JSON/CSV/SVG/HTML outputs with suite metadata, task types, difficulty, tags, and expected behavior.
+The eval suite layer runs a fixed benchmark prompt set against a checkpoint and saves comparable JSON/CSV/SVG/HTML outputs with suite metadata, task types, difficulty, tags, expected behavior, coverage readiness, and suite-design readiness.
 
 The generation quality layer reads eval suite or sampling outputs and flags short, repetitive, low-diversity, or prompt-echo generations.
 

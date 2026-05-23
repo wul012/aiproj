@@ -317,6 +317,9 @@
 418-v404-maintenance-policy-engine-split.md
  -> v404 code explanation: split the maintenance policy engine into common helpers, batching policy, and governance review modules while preserving the public facade.
 
+419-v405-eval-suite-design-report.md
+ -> v405 code explanation: carry prompt-suite design summaries into general eval suite JSON and HTML reports.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v405 Eval Suite Design Report Evidence</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #5d6d7e;
+      --line: #d5dde5;
+      --panel: #ffffff;
+      --band: #edf4f7;
+      --accent: #146c7c;
+      --ok: #1f7a4d;
+      --warn: #986700;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f7fafb;
+      color: var(--ink);
+    }
+    header {
+      padding: 34px 42px 24px;
+      background: var(--band);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 30px 42px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(28, 44, 54, 0.06);
+    }
+    .stat {
+      padding: 15px 16px;
+      min-height: 88px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+    .panel {
+      margin-top: 18px;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 11px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f1f5f7;
+      color: #273746;
+      font-weight: 700;
+    }
+    code {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      background: #edf2f5;
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.75;
+    }
+    @media (max-width: 760px) {
+      header { padding: 26px 22px 18px; }
+      main { padding: 20px 16px 30px; }
+      .stats { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v405 Eval Suite Design Report</h1>
+    <p>把 prompt-suite design summary 接入通用 eval suite JSON/HTML，让每次固定 prompt 评估都能同时说明套件设计是否足够支撑比较。</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="stat"><div class="label">Version</div><div class="value">v405</div></div>
+      <div class="stat"><div class="label">Design summary</div><div class="value">carried</div></div>
+      <div class="stat"><div class="label">HTML panel</div><div class="value">Suite Design</div></div>
+      <div class="stat"><div class="label">Boundary</div><div class="value">eval input evidence</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <table>
+        <thead><tr><th>File</th><th>Role</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>src/minigpt/eval_suite.py</code></td>
+            <td>从 <code>PromptResult</code> 重建 suite case 元数据，并调用 design checker。</td>
+            <td><code>report["design_summary"]</code> 与 <code>report["benchmark"]["design_summary"]</code> 同步写入。</td>
+          </tr>
+          <tr>
+            <td><code>src/minigpt/eval_suite_artifacts.py</code></td>
+            <td>把 design coverage、comparison、token budget、seed、tag 与 blockers 渲染到 HTML。</td>
+            <td>新增 <code>Suite Design</code> 面板和顶部 design 状态卡。</td>
+          </tr>
+          <tr>
+            <td><code>tests/test_eval_suite.py</code></td>
+            <td>保护窄套件、标准中文套件和 HTML 输出契约。</td>
+            <td>断言 warning/pass 状态、duplicate seed、token budget 和 HTML 文本。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Report Contract</h2>
+      <table>
+        <thead><tr><th>Field</th><th>Meaning</th><th>Consumer Value</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>design_summary.coverage_status</code></td>
+            <td>判断 prompt 套件是否覆盖推荐任务类型、难度和标签。</td>
+            <td>避免在题集过窄时把生成表现包装成模型质量结论。</td>
+          </tr>
+          <tr>
+            <td><code>design_summary.comparison_status</code></td>
+            <td>判断套件是否足够支撑重复 checkpoint 比较。</td>
+            <td>让 benchmark、训练治理和人工复核先检查输入质量。</td>
+          </tr>
+          <tr>
+            <td><code>duplicate_seed_count</code></td>
+            <td>暴露重复 seed 数量。</td>
+            <td>帮助判断比较样本是否存在过度同质化。</td>
+          </tr>
+          <tr>
+            <td><code>all_cases_have_expected_behavior</code></td>
+            <td>确认每个 case 都有期望行为说明。</td>
+            <td>方便后续 rubric 或人工审阅理解每题目标。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <ul>
+        <li><span class="ok">pass</span> targeted py_compile for modified eval suite files.</li>
+        <li><span class="ok">pass</span> targeted pytest for eval suite, benchmark scorecard, and tiny standard benchmark smoke.</li>
+        <li><span class="warn">boundary</span> v405 does not train a new model and does not claim model-quality improvement.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

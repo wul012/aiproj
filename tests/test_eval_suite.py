@@ -143,6 +143,11 @@ class EvalSuiteTests(unittest.TestCase):
         self.assertEqual(report["coverage"]["comparison_status"], "warn")
         self.assertIn("continuation", report["coverage"]["missing_recommended_task_types"])
         self.assertEqual(report["benchmark"]["coverage"], report["coverage"])
+        self.assertEqual(report["design_summary"], report["benchmark"]["design_summary"])
+        self.assertEqual(report["design_summary"]["coverage_status"], "warn")
+        self.assertEqual(report["design_summary"]["min_new_tokens"], 60)
+        self.assertEqual(report["design_summary"]["max_new_tokens"], 60)
+        self.assertEqual(report["design_summary"]["duplicate_seed_count"], 1)
 
     def test_standard_zh_report_is_comparison_ready(self) -> None:
         suite = load_builtin_prompt_suite("standard-zh")
@@ -166,6 +171,11 @@ class EvalSuiteTests(unittest.TestCase):
         self.assertEqual(coverage["missing_comparison_difficulties"], [])
         self.assertGreaterEqual(coverage["task_type_count"], 8)
         self.assertIn("safety-boundary", coverage["observed_task_types"])
+        self.assertEqual(report["design_summary"]["coverage_status"], "pass")
+        self.assertEqual(report["design_summary"]["comparison_status"], "pass")
+        self.assertEqual(report["design_summary"]["case_count"], 10)
+        self.assertEqual(report["design_summary"]["duplicate_seed_count"], 0)
+        self.assertTrue(report["design_summary"]["all_cases_have_expected_behavior"])
 
     def test_prompt_suite_design_summary_tracks_standard_coverage(self) -> None:
         suite = load_builtin_prompt_suite("standard-zh")
@@ -212,8 +222,11 @@ class EvalSuiteTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("task_type,difficulty", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("<svg", Path(outputs["svg"]).read_text(encoding="utf-8"))
-            self.assertIn("Prompt Results", Path(outputs["html"]).read_text(encoding="utf-8"))
-            self.assertIn("Coverage Readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            self.assertIn("Prompt Results", html)
+            self.assertIn("Coverage Readiness", html)
+            self.assertIn("Suite Design", html)
+            self.assertIn("Design comparison", html)
 
     def test_eval_suite_reexports_artifact_writers(self) -> None:
         self.assertIs(eval_suite.write_eval_suite_outputs, eval_suite_artifacts.write_eval_suite_outputs)

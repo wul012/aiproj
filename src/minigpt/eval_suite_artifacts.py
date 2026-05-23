@@ -84,6 +84,8 @@ def render_eval_suite_html(report: dict[str, Any]) -> str:
     difficulty_counts = benchmark.get("difficulty_counts") or report.get("difficulty_counts") or {}
     coverage = benchmark.get("coverage") if isinstance(benchmark.get("coverage"), dict) else report.get("coverage")
     coverage = coverage if isinstance(coverage, dict) else {}
+    design = benchmark.get("design_summary") if isinstance(benchmark.get("design_summary"), dict) else report.get("design_summary")
+    design = design if isinstance(design, dict) else {}
     stats = [
         ("Suite", benchmark.get("suite_name") or report.get("suite")),
         ("Version", benchmark.get("suite_version")),
@@ -94,6 +96,8 @@ def render_eval_suite_html(report: dict[str, Any]) -> str:
         ("Difficulty", _join_counts(difficulty_counts)),
         ("Coverage", coverage.get("status") or "missing"),
         ("Comparison", coverage.get("comparison_status") or "missing"),
+        ("Design coverage", design.get("coverage_status") or "missing"),
+        ("Design comparison", design.get("comparison_status") or "missing"),
     ]
     result_rows = []
     for result in report.get("results", []):
@@ -154,6 +158,23 @@ def render_eval_suite_html(report: dict[str, Any]) -> str:
                 ]
             )
             + "</section>",
+            '<section class="panel"><h2>Suite Design</h2>'
+            + _key_value_table(
+                [
+                    ("Design coverage", design.get("coverage_status")),
+                    ("Design comparison", design.get("comparison_status")),
+                    ("Task types", design.get("task_type_count")),
+                    ("Difficulties", design.get("difficulty_count")),
+                    ("Tags", design.get("tag_count")),
+                    ("Token budget", _range_text(design.get("min_new_tokens"), design.get("max_new_tokens"))),
+                    ("Duplicate seeds", design.get("duplicate_seed_count")),
+                    ("Expected behavior complete", design.get("all_cases_have_expected_behavior")),
+                    ("Tags complete", design.get("all_cases_have_tags")),
+                    ("Design blockers", "; ".join(design.get("blockers") or [])),
+                    ("Design comparison blockers", "; ".join(design.get("comparison_blockers") or [])),
+                ]
+            )
+            + "</section>",
             '<section class="panel"><h2>Task Summary</h2><table><thead><tr><th>Task</th><th>Cases</th><th>Avg Chars</th><th>Avg Unique</th></tr></thead><tbody>'
             + "".join(summary_rows)
             + "</tbody></table></section>",
@@ -200,6 +221,12 @@ def _join_counts(value: Any) -> str:
     if not isinstance(value, dict) or not value:
         return ""
     return ", ".join(f"{key}={count}" for key, count in value.items())
+
+
+def _range_text(min_value: Any, max_value: Any) -> str:
+    if min_value is None and max_value is None:
+        return ""
+    return f"{min_value} / {max_value}"
 
 
 def _e(value: Any) -> str:
