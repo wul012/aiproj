@@ -317,6 +317,9 @@ d/401/解释/说明.md
 d/402/图片
 d/402/解释/说明.md
  -> v402 eval suite design coverage 的运行截图和解释
+d/403/图片
+d/403/解释/说明.md
+ -> v403 tiny scorecard comparison smoke summary/output split 的运行截图和解释
 ```
 
 写入规则：
