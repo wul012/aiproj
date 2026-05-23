@@ -344,6 +344,9 @@ d/410/解释/说明.md
 d/411/图片
 d/411/解释/说明.md
  -> v411 release bundle benchmark-history suite-design carryover 的运行截图和解释
+d/412/图片
+d/412/解释/说明.md
+ -> v412 release gate benchmark-history suite-design carryover 的运行截图和解释
 ```
 
 写入规则：

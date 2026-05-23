@@ -47,6 +47,8 @@ def benchmark_history_gate_detail(
         f"blocked={_integer(summary.get('benchmark_history_blocked'))}; "
         f"case_regressions={_integer(summary.get('benchmark_history_case_regressions'))}; "
         f"generation_flag_regressions={_integer(summary.get('benchmark_history_generation_flag_regressions'))}; "
+        f"suite_design_not_ready={_integer(summary.get('benchmark_history_suite_design_non_comparison_ready_entries'))}; "
+        f"design_comparison_changed={_integer(summary.get('benchmark_history_design_comparison_changed_entries'))}; "
         f"readiness_requirement={summary.get('benchmark_history_readiness_requirement_status') or 'missing'}; "
         f"readiness_exit={_integer(summary.get('benchmark_history_readiness_requirement_exit_code'))}; "
         f"readiness_failed_reasons={_failed_reasons(summary)}; "
@@ -74,6 +76,7 @@ def _benchmark_history_summary_result(summary: dict[str, Any]) -> str:
         "benchmark_history_review",
         "benchmark_history_case_regressions",
         "benchmark_history_generation_flag_regressions",
+        "benchmark_history_suite_design_non_comparison_ready_entries",
     )
     if status == "warn" or any(_integer(summary.get(key)) > 0 for key in warn_keys):
         return "warn"

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -47,6 +48,8 @@ def make_bundle(
     benchmark_history_blocked: int | None = 0,
     benchmark_history_case_regressions: int | None = 0,
     benchmark_history_generation_flag_regressions: int | None = 0,
+    benchmark_history_suite_design_non_comparison_ready_entries: int | None = 0,
+    benchmark_history_design_comparison_changed_entries: int | None = 0,
     benchmark_history_readiness_requirement_status: str | None = "pass",
     benchmark_history_readiness_requirement_exit_code: int | None = 0,
     benchmark_history_readiness_requirement_failed_reasons: list[str] | None = None,
@@ -93,6 +96,8 @@ def make_bundle(
                     f"review={benchmark_history_review}; blocked={benchmark_history_blocked}; "
                     f"case_regressions={benchmark_history_case_regressions}; "
                     f"generation_flag_regressions={benchmark_history_generation_flag_regressions}; "
+                    f"suite_design_not_ready={benchmark_history_suite_design_non_comparison_ready_entries}; "
+                    f"design_comparison_changed={benchmark_history_design_comparison_changed_entries}; "
                     f"readiness_requirement={benchmark_history_readiness_requirement_status}; "
                     f"readiness_exit={benchmark_history_readiness_requirement_exit_code}."
                 ),
@@ -130,6 +135,12 @@ def make_bundle(
             "benchmark_history_case_regressions": benchmark_history_case_regressions if include_benchmark_history_check else None,
             "benchmark_history_generation_flag_regressions": (
                 benchmark_history_generation_flag_regressions if include_benchmark_history_check else None
+            ),
+            "benchmark_history_suite_design_non_comparison_ready_entries": (
+                benchmark_history_suite_design_non_comparison_ready_entries if include_benchmark_history_check else None
+            ),
+            "benchmark_history_design_comparison_changed_entries": (
+                benchmark_history_design_comparison_changed_entries if include_benchmark_history_check else None
             ),
             "benchmark_history_readiness_requirement_status": (
                 benchmark_history_readiness_requirement_status if include_benchmark_history_check else None
@@ -231,6 +242,8 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertIn("test_coverage_audit_check", {check["id"] for check in gate["checks"]})
             self.assertEqual(gate["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(gate["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(gate["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 0)
+            self.assertEqual(gate["summary"]["benchmark_history_design_comparison_changed_entries"], 0)
             self.assertEqual(gate["summary"]["benchmark_history_readiness_requirement_status"], "pass")
             self.assertEqual(gate["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual(exit_code_for_gate(gate), 0)
@@ -425,6 +438,29 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertEqual(exit_code_for_gate(gate), 0)
             self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
 
+    def test_build_release_gate_warns_for_benchmark_history_suite_design_not_ready(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_bundle(
+                Path(tmp),
+                benchmark_history_status="pass",
+                benchmark_history_suite_design_non_comparison_ready_entries=1,
+                benchmark_history_design_comparison_changed_entries=1,
+            )
+
+            gate = build_release_gate(bundle_path)
+
+            self.assertEqual(gate["summary"]["gate_status"], "warn")
+            self.assertEqual(gate["summary"]["decision"], "needs-review")
+            self.assertEqual(gate["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(gate["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 1)
+            self.assertEqual(gate["summary"]["benchmark_history_design_comparison_changed_entries"], 1)
+            check = next(item for item in gate["checks"] if item["id"] == "benchmark_history_gate_check")
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("suite_design_not_ready=1", check["detail"])
+            self.assertIn("design_comparison_changed=1", check["detail"])
+            self.assertEqual(exit_code_for_gate(gate), 0)
+            self.assertEqual(exit_code_for_gate(gate, fail_on_warn=True), 1)
+
     def test_build_release_gate_warns_for_benchmark_history_readiness_requirement_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             bundle_path = make_bundle(
@@ -530,9 +566,36 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history suite-design not-ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history design changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT release gate", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench design review", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench design changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
+
+    def test_cli_prints_release_gate_benchmark_history_suite_design_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle_path = make_bundle(root)
+            out_dir = root / "release-gate"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "check_release_gate.py"),
+                    "--bundle",
+                    str(bundle_path),
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
+            self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
 
     def test_render_release_gate_html_escapes_release_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

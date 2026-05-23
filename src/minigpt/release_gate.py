@@ -347,6 +347,12 @@ def _build_summary(bundle: dict[str, Any], checks: list[dict[str, Any]]) -> dict
         "benchmark_history_blocked": bundle_summary.get("benchmark_history_blocked"),
         "benchmark_history_case_regressions": bundle_summary.get("benchmark_history_case_regressions"),
         "benchmark_history_generation_flag_regressions": bundle_summary.get("benchmark_history_generation_flag_regressions"),
+        "benchmark_history_suite_design_non_comparison_ready_entries": bundle_summary.get(
+            "benchmark_history_suite_design_non_comparison_ready_entries"
+        ),
+        "benchmark_history_design_comparison_changed_entries": bundle_summary.get(
+            "benchmark_history_design_comparison_changed_entries"
+        ),
         "benchmark_history_readiness_requirement_status": bundle_summary.get("benchmark_history_readiness_requirement_status"),
         "benchmark_history_readiness_requirement_exit_code": bundle_summary.get("benchmark_history_readiness_requirement_exit_code"),
         "benchmark_history_readiness_requirement_failed_reasons": bundle_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
