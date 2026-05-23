@@ -341,6 +341,9 @@
 426-v412-release-gate-history-suite-design.md
  -> v412 code explanation: carry benchmark-history suite-design readiness into release gate checks, summary, rendered outputs, and CLI stdout.
 
+427-v413-release-readiness-history-suite-design.md
+ -> v413 code explanation: carry benchmark-history suite-design readiness into release readiness summary, panel status, rendered outputs, and CLI stdout.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -302,6 +302,14 @@ def _benchmark_history_panel(bundle: dict[str, Any], gate: dict[str, Any] | None
         gate_summary.get("benchmark_history_readiness_requirement_exit_code"),
         bundle_summary.get("benchmark_history_readiness_requirement_exit_code"),
     )
+    suite_design_not_ready = first_present(
+        gate_summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+        bundle_summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+    )
+    design_comparison_changed = first_present(
+        gate_summary.get("benchmark_history_design_comparison_changed_entries"),
+        bundle_summary.get("benchmark_history_design_comparison_changed_entries"),
+    )
     detail = (
         f"status={status}; entries={_fmt(first_present(gate_summary.get('benchmark_history_entries'), bundle_summary.get('benchmark_history_entries')))}; "
         f"ready={_fmt(first_present(gate_summary.get('benchmark_history_ready'), bundle_summary.get('benchmark_history_ready')))}; "
@@ -309,6 +317,8 @@ def _benchmark_history_panel(bundle: dict[str, Any], gate: dict[str, Any] | None
         f"blocked={_fmt(first_present(gate_summary.get('benchmark_history_blocked'), bundle_summary.get('benchmark_history_blocked')))}; "
         f"case_regressions={_fmt(first_present(gate_summary.get('benchmark_history_case_regressions'), bundle_summary.get('benchmark_history_case_regressions')))}; "
         f"generation_flag_regressions={_fmt(first_present(gate_summary.get('benchmark_history_generation_flag_regressions'), bundle_summary.get('benchmark_history_generation_flag_regressions')))}; "
+        f"suite_design_not_ready={_fmt(suite_design_not_ready)}; "
+        f"design_comparison_changed={_fmt(design_comparison_changed)}; "
         f"readiness_requirement={_fmt(requirement_status)}; "
         f"readiness_exit={_fmt(requirement_exit)}; "
         "readiness_failed_reasons="
@@ -324,7 +334,13 @@ def _benchmark_history_panel(bundle: dict[str, Any], gate: dict[str, Any] | None
     )
     if check:
         detail += f"; gate_check={check.get('status') or 'missing'}"
-    return _panel("benchmark_history", "Benchmark History", _benchmark_history_panel_status(status, requirement_status, requirement_exit), detail, None)
+    return _panel(
+        "benchmark_history",
+        "Benchmark History",
+        _benchmark_history_panel_status(status, requirement_status, requirement_exit, suite_design_not_ready),
+        detail,
+        None,
+    )
 
 
 def _maturity_panel(path: Path | None, maturity: dict[str, Any] | None) -> dict[str, Any]:
@@ -480,6 +496,14 @@ def _benchmark_history_summary(bundle_summary: dict[str, Any], gate_summary: dic
             gate_summary.get("benchmark_history_generation_flag_regressions"),
             bundle_summary.get("benchmark_history_generation_flag_regressions"),
         ),
+        "benchmark_history_suite_design_non_comparison_ready_entries": first_present(
+            gate_summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+            bundle_summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+        ),
+        "benchmark_history_design_comparison_changed_entries": first_present(
+            gate_summary.get("benchmark_history_design_comparison_changed_entries"),
+            bundle_summary.get("benchmark_history_design_comparison_changed_entries"),
+        ),
         "benchmark_history_readiness_requirement_status": first_present(
             gate_summary.get("benchmark_history_readiness_requirement_status"),
             bundle_summary.get("benchmark_history_readiness_requirement_status"),
@@ -536,8 +560,10 @@ def _status_from_check_status(value: str) -> str:
     return "warn"
 
 
-def _benchmark_history_panel_status(status: Any, requirement_status: Any, requirement_exit: Any) -> str:
+def _benchmark_history_panel_status(status: Any, requirement_status: Any, requirement_exit: Any, suite_design_not_ready: Any) -> str:
     if str(requirement_status or "") == "fail" or _int(requirement_exit) > 0:
+        return "warn"
+    if _int(suite_design_not_ready) > 0:
         return "warn"
     return _status_from_check_status(str(status))
 

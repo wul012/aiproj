@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -35,6 +36,8 @@ def make_readiness_inputs(
     benchmark_history_review: int = 0,
     benchmark_history_blocked: int = 0,
     benchmark_history_case_regressions: int = 0,
+    benchmark_history_suite_design_non_comparison_ready_entries: int = 0,
+    benchmark_history_design_comparison_changed_entries: int = 0,
     benchmark_history_readiness_requirement_status: str = "pass",
     benchmark_history_readiness_requirement_exit_code: int = 0,
     benchmark_history_readiness_requirement_failed_reasons: list[str] | None = None,
@@ -64,6 +67,11 @@ def make_readiness_inputs(
     ci_artifact_path.write_text("<html></html>", encoding="utf-8")
     coverage_artifact_path.parent.mkdir(parents=True, exist_ok=True)
     coverage_artifact_path.write_text("<html></html>", encoding="utf-8")
+    benchmark_gate_check_status = (
+        "warn"
+        if benchmark_history_status == "pass" and benchmark_history_suite_design_non_comparison_ready_entries > 0
+        else benchmark_history_status
+    )
     artifact_rows = []
     if include_request_history:
         artifact_rows.append(
@@ -126,6 +134,8 @@ def make_readiness_inputs(
                 "benchmark_history_blocked": benchmark_history_blocked,
                 "benchmark_history_case_regressions": benchmark_history_case_regressions,
                 "benchmark_history_generation_flag_regressions": 0,
+                "benchmark_history_suite_design_non_comparison_ready_entries": benchmark_history_suite_design_non_comparison_ready_entries,
+                "benchmark_history_design_comparison_changed_entries": benchmark_history_design_comparison_changed_entries,
                 "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
                 "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
                 "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
@@ -147,9 +157,13 @@ def make_readiness_inputs(
                 {"id": "request_history_summary", "status": "pass", "title": "Request history summary is clean", "detail": "status=pass."},
                 {
                     "id": "benchmark_history",
-                    "status": benchmark_history_status,
+                    "status": benchmark_gate_check_status,
                     "title": "Benchmark history is audit-ready",
-                    "detail": f"status={benchmark_history_status}.",
+                    "detail": (
+                        f"status={benchmark_history_status}; "
+                        f"suite_design_not_ready={benchmark_history_suite_design_non_comparison_ready_entries}; "
+                        f"design_comparison_changed={benchmark_history_design_comparison_changed_entries}."
+                    ),
                 },
                 {"id": "ci_workflow_hygiene", "status": ci_workflow_status, "title": "CI workflow hygiene is clean", "detail": f"status={ci_workflow_status}."},
                 {"id": "test_coverage_report", "status": test_coverage_status, "title": "Test coverage gate is clean", "detail": f"status={test_coverage_status}."},
@@ -237,6 +251,8 @@ def make_readiness_inputs(
                     "benchmark_history_blocked": benchmark_history_blocked,
                     "benchmark_history_case_regressions": benchmark_history_case_regressions,
                     "benchmark_history_generation_flag_regressions": 0,
+                    "benchmark_history_suite_design_non_comparison_ready_entries": benchmark_history_suite_design_non_comparison_ready_entries,
+                    "benchmark_history_design_comparison_changed_entries": benchmark_history_design_comparison_changed_entries,
                     "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
                     "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
                     "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
@@ -254,11 +270,13 @@ def make_readiness_inputs(
                     },
                     {
                         "id": "benchmark_history_gate_check",
-                        "status": benchmark_history_status,
+                        "status": benchmark_gate_check_status,
                         "title": "Benchmark history release evidence passed",
                         "detail": (
                             f"benchmark_history={benchmark_history_status}; "
                             f"case_regressions={benchmark_history_case_regressions}; "
+                            f"suite_design_not_ready={benchmark_history_suite_design_non_comparison_ready_entries}; "
+                            f"design_comparison_changed={benchmark_history_design_comparison_changed_entries}; "
                             f"readiness_requirement={benchmark_history_readiness_requirement_status}; "
                             f"readiness_exit={benchmark_history_readiness_requirement_exit_code}; "
                             f"latest_boundary={benchmark_history_latest_boundary}."
@@ -296,6 +314,8 @@ def make_readiness_inputs(
                 "benchmark_history_blocked": benchmark_history_blocked,
                 "benchmark_history_case_regressions": benchmark_history_case_regressions,
                 "benchmark_history_generation_flag_regressions": 0,
+                "benchmark_history_suite_design_non_comparison_ready_entries": benchmark_history_suite_design_non_comparison_ready_entries,
+                "benchmark_history_design_comparison_changed_entries": benchmark_history_design_comparison_changed_entries,
                 "benchmark_history_readiness_requirement_status": benchmark_history_readiness_requirement_status,
                 "benchmark_history_readiness_requirement_exit_code": benchmark_history_readiness_requirement_exit_code,
                 "benchmark_history_readiness_requirement_failed_reasons": benchmark_history_readiness_requirement_failed_reasons or [],
@@ -366,6 +386,8 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
             self.assertEqual(report["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(report["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 0)
+            self.assertEqual(report["summary"]["benchmark_history_design_comparison_changed_entries"], 0)
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_status"], "pass")
             self.assertEqual(report["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual({panel["status"] for panel in report["panels"]}, {"pass"})
@@ -464,6 +486,29 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertIn("readiness_requirement=fail", panel["detail"])
             self.assertIn("readiness_failed_reasons=insufficient_ready_entries", panel["detail"])
 
+    def test_build_release_readiness_reviews_suite_design_history_warning(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_path = make_readiness_inputs(
+                Path(tmp),
+                gate_status="warn",
+                gate_decision="needs-review",
+                benchmark_history_status="pass",
+                benchmark_history_suite_design_non_comparison_ready_entries=1,
+                benchmark_history_design_comparison_changed_entries=2,
+            )
+
+            report = build_release_readiness_dashboard(bundle_path)
+
+            self.assertEqual(report["summary"]["readiness_status"], "review")
+            self.assertEqual(report["summary"]["benchmark_history_status"], "pass")
+            self.assertEqual(report["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 1)
+            self.assertEqual(report["summary"]["benchmark_history_design_comparison_changed_entries"], 2)
+            panel = next(panel for panel in report["panels"] if panel["key"] == "benchmark_history")
+            self.assertEqual(panel["status"], "warn")
+            self.assertIn("suite_design_not_ready=1", panel["detail"])
+            self.assertIn("design_comparison_changed=2", panel["detail"])
+            self.assertIn("Gate warn: benchmark_history_gate_check", " ".join(report["actions"]))
+
     def test_build_release_readiness_uses_bundle_benchmark_history_when_gate_summary_missing(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -547,8 +592,39 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Panels", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history suite-design not-ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Readiness&gt;", html)
+            self.assertIn("Bench design review", html)
             self.assertNotIn("<h1><Readiness>", html)
+
+    def test_build_release_readiness_cli_prints_suite_design_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle_path = make_readiness_inputs(
+                root,
+                gate_status="warn",
+                gate_decision="needs-review",
+                benchmark_history_suite_design_non_comparison_ready_entries=3,
+                benchmark_history_design_comparison_changed_entries=4,
+            )
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "build_release_readiness.py"),
+                    "--bundle",
+                    str(bundle_path),
+                    "--out-dir",
+                    str(root / "readiness"),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=3", completed.stdout)
+            self.assertIn("benchmark_history_design_comparison_changed_entries=4", completed.stdout)
+            self.assertIn("readiness_status=review", completed.stdout)
 
     def test_release_readiness_keeps_legacy_artifact_exports(self) -> None:
         self.assertIs(release_readiness_facade.render_release_readiness_html, release_readiness_artifacts.render_release_readiness_html)

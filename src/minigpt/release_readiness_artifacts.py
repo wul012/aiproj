@@ -41,6 +41,11 @@ def render_release_readiness_markdown(report: dict[str, Any]) -> str:
                 ("Benchmark entries", summary.get("benchmark_history_entries")),
                 ("Benchmark ready", summary.get("benchmark_history_ready")),
                 ("Benchmark regressions", summary.get("benchmark_history_case_regressions")),
+                (
+                    "Benchmark history suite-design not-ready",
+                    summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+                ),
+                ("Benchmark history design changes", summary.get("benchmark_history_design_comparison_changed_entries")),
                 ("Benchmark readiness", summary.get("benchmark_history_readiness_requirement_status")),
                 ("Benchmark readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code")),
                 (
@@ -95,6 +100,8 @@ def render_release_readiness_html(report: dict[str, Any]) -> str:
         ("CI order violations", summary.get("ci_workflow_order_violation_count")),
         ("Requests", summary.get("request_history_status")),
         ("Bench history", summary.get("benchmark_history_status")),
+        ("Bench design review", summary.get("benchmark_history_suite_design_non_comparison_ready_entries")),
+        ("Bench design changes", summary.get("benchmark_history_design_comparison_changed_entries")),
         ("Bench readiness", summary.get("benchmark_history_readiness_requirement_status")),
         ("Bench readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code")),
         ("Bench boundary", summary.get("benchmark_history_latest_boundary")),
