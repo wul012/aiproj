@@ -314,6 +314,9 @@
 417-v403-tiny-scorecard-comparison-smoke-summary-output-split.md
  -> v403 code explanation: split the 766-line tiny scorecard comparison smoke into summary computation and output rendering modules while keeping the CLI wrapper and test contract unchanged.
 
+418-v404-maintenance-policy-engine-split.md
+ -> v404 code explanation: split the maintenance policy engine into common helpers, batching policy, and governance review modules while preserving the public facade.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -320,6 +320,9 @@ d/402/解释/说明.md
 d/403/图片
 d/403/解释/说明.md
  -> v403 tiny scorecard comparison smoke summary/output split 的运行截图和解释
+d/404/图片
+d/404/解释/说明.md
+ -> v404 maintenance policy common/batching/governance split 的运行截图和解释
 ```
 
 写入规则：

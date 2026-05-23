@@ -8,7 +8,7 @@ import time
 import unittest
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.request import Request, urlopen
+from urllib.request import ProxyHandler, Request, build_opener
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -33,6 +33,9 @@ from minigpt.server import (
     stream_timeout_payload,
 )
 from http.server import ThreadingHTTPServer
+
+
+LOCAL_HTTP_OPENER = build_opener(ProxyHandler({}))
 
 
 class StubGenerator:
@@ -748,26 +751,26 @@ class ServerTests(unittest.TestCase):
 
 
 def _get_json(url: str) -> dict:
-    with urlopen(url, timeout=5) as response:
+    with LOCAL_HTTP_OPENER.open(url, timeout=5) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
 def _get_raw(url: str) -> tuple[str, str]:
-    with urlopen(url, timeout=5) as response:
+    with LOCAL_HTTP_OPENER.open(url, timeout=5) as response:
         return response.read().decode("utf-8"), response.headers.get("Content-Type", "")
 
 
 def _post_json(url: str, payload: dict) -> dict:
     body = json.dumps(payload).encode("utf-8")
     request = Request(url, data=body, method="POST", headers={"Content-Type": "application/json"})
-    with urlopen(request, timeout=5) as response:
+    with LOCAL_HTTP_OPENER.open(request, timeout=5) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
 def _post_raw(url: str, payload: dict) -> tuple[str, str]:
     body = json.dumps(payload).encode("utf-8")
     request = Request(url, data=body, method="POST", headers={"Content-Type": "application/json"})
-    with urlopen(request, timeout=5) as response:
+    with LOCAL_HTTP_OPENER.open(request, timeout=5) as response:
         return response.read().decode("utf-8"), response.headers.get("Content-Type", "")
 
 

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MiniGPT v404 Maintenance Policy Engine Split</title>
+  <style>
+    :root {
+      --bg: #f5f3ed;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #606b7d;
+      --line: #d8d2c7;
+      --green: #0d8f7c;
+      --blue: #234b82;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 42px 46px 54px;
+    }
+    .eyebrow {
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .lead {
+      margin: 16px 0 28px;
+      max-width: 1040px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 18px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .metric,
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    .metric {
+      padding: 18px;
+      min-height: 104px;
+    }
+    .metric .label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+    .metric .value {
+      font-size: 30px;
+      font-weight: 750;
+    }
+    .section {
+      padding: 18px;
+      margin-top: 18px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    th, td {
+      border-top: 1px solid #ece6dc;
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      border-top: none;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 13px;
+    }
+    code,
+    pre {
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 13px;
+    }
+    pre {
+      margin: 0;
+      padding: 16px;
+      border-radius: 12px;
+      background: #121a2d;
+      color: #f6f7fb;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+    .note {
+      margin-top: 18px;
+      border-left: 4px solid var(--green);
+      background: #f2fbf8;
+      padding: 14px 16px;
+      border-radius: 10px;
+      color: #243f38;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">MiniGPT v404 evidence</div>
+    <h1>Maintenance policy engine split with stable facade</h1>
+    <p class="lead">
+      v404 splits the 648-line maintenance policy module into common helpers, batching policy, and governance review modules.
+      The public facade remains at <code>src/minigpt/maintenance_policy.py</code>, so existing scripts and tests keep using the same import path.
+    </p>
+
+    <section class="metrics" aria-label="line count evidence">
+      <div class="metric"><div class="label">old module lines</div><div class="value">648</div></div>
+      <div class="metric"><div class="label">facade lines</div><div class="value">86</div></div>
+      <div class="metric"><div class="label">largest split module</div><div class="value">401</div></div>
+      <div class="metric"><div class="label">targeted tests</div><div class="value">42</div></div>
+    </section>
+
+    <section class="section">
+      <h2>Split Roles</h2>
+      <table>
+        <thead>
+          <tr><th>File</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>maintenance_policy.py</code></td><td>Compatibility facade that re-exports the public policy, pressure, and artifact functions.</td></tr>
+          <tr><td><code>maintenance_policy_common.py</code></td><td>Shared low-risk categories, high-risk flags, and normalization helpers.</td></tr>
+          <tr><td><code>maintenance_policy_batching.py</code></td><td>Maintenance batching report and proposal decision logic.</td></tr>
+          <tr><td><code>maintenance_policy_governance.py</code></td><td>Default governance chains, stabilization review, proposal routing, and governance recommendations.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Verification</h2>
+      <pre>python -m py_compile src\minigpt\maintenance_policy.py src\minigpt\maintenance_policy_common.py src\minigpt\maintenance_policy_batching.py src\minigpt\maintenance_policy_governance.py
+python -m pytest tests\test_maintenance_policy.py tests\test_maintenance_policy_artifacts.py -q
+22 passed
+python -m pytest tests\test_server.py -q
+20 passed</pre>
+    </section>
+
+    <div class="note">
+      This is maintenance evidence: it lowers module pressure, preserves the public contract, and keeps local HTTP tests from being hijacked by proxy environment variables.
+    </div>
+  </main>
+</body>
+</html>
