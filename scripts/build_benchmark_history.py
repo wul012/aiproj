@@ -43,6 +43,8 @@ def main() -> None:
     print(f"review_count={summary['review_count']}")
     print(f"blocked_count={summary['blocked_count']}")
     print(f"ready_count={summary['ready_count']}")
+    print(f"suite_design_non_comparison_ready_entry_count={summary.get('suite_design_non_comparison_ready_entry_count', 0)}")
+    print(f"design_comparison_changed_entry_count={summary.get('design_comparison_changed_entry_count', 0)}")
     print(f"model_quality_claim={summary['model_quality_claim']}")
     print(f"best_candidate_name={summary['best_candidate_name']}")
     requirement = report["readiness_requirement"]

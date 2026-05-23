@@ -39,6 +39,9 @@ def write_benchmark_history_csv(report: dict[str, Any], path: str | Path) -> Non
         "generation_quality_flag_relation",
         "eval_suite_comparison_status",
         "non_comparison_ready_count",
+        "eval_suite_design_comparison_status",
+        "non_design_comparison_ready_count",
+        "design_comparison_changed_count",
         "remediation_plan_count",
         "boundary",
     ]
@@ -62,6 +65,7 @@ def render_benchmark_history_markdown(report: dict[str, Any]) -> str:
         f"- Blocked decisions: `{summary.get('blocked_count')}`",
         f"- Model quality claim: `{summary.get('model_quality_claim')}`",
         f"- Best candidate: `{summary.get('best_candidate_name')}`",
+        f"- Suite design not-ready entries: `{summary.get('suite_design_non_comparison_ready_entry_count', 0)}`",
         f"- Readiness requirement: `{requirement.get('status', 'not-evaluated')}`",
         f"- Readiness decision: `{requirement.get('decision', 'not-evaluated')}`",
         f"- Readiness exit code: `{requirement.get('exit_code', 0)}`",
@@ -69,8 +73,8 @@ def render_benchmark_history_markdown(report: dict[str, Any]) -> str:
         "",
         "## Ledger",
         "",
-        "| Name | Baseline | Candidate | Decision | Readiness | Rubric Delta | Case Regressions | Gen Flag Delta | Boundary |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Name | Baseline | Candidate | Decision | Readiness | Eval Compare | Design Compare | Rubric Delta | Case Regressions | Gen Flag Delta | Boundary |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for item in _ledger_entries(report):
         lines.append(
@@ -82,6 +86,8 @@ def render_benchmark_history_markdown(report: dict[str, Any]) -> str:
                     _md(item.get("candidate_name")),
                     _md(item.get("decision_status")),
                     _md(item.get("promotion_readiness")),
+                    _md(item.get("eval_suite_comparison_status")),
+                    _md(item.get("eval_suite_design_comparison_status")),
                     _md(item.get("rubric_avg_score_delta")),
                     _md(item.get("case_regression_count")),
                     _md(item.get("generation_quality_total_flags_delta")),
@@ -109,6 +115,7 @@ def render_benchmark_history_html(report: dict[str, Any]) -> str:
         ("Promote", summary.get("promote_count")),
         ("Review", summary.get("review_count")),
         ("Blocked", summary.get("blocked_count")),
+        ("Design review", summary.get("suite_design_non_comparison_ready_entry_count", 0)),
         ("Model claim", summary.get("model_quality_claim")),
         ("Best candidate", summary.get("best_candidate_name")),
         ("Readiness", requirement.get("status", "not-evaluated")),
@@ -130,7 +137,7 @@ def render_benchmark_history_html(report: dict[str, Any]) -> str:
             f"<header><h1>{_e(report.get('title', 'MiniGPT benchmark history'))}</h1><p>Tracks scorecard comparison and promotion-decision history without claiming broad model quality from tiny smoke evidence.</p></header>",
             '<section class="stats">' + "".join(_stat(label, value) for label, value in stats) + "</section>",
             _readiness_requirement_section(requirement),
-            "<section><h2>Ledger</h2><table><tr><th>Name</th><th>Baseline</th><th>Candidate</th><th>Decision</th><th>Readiness</th><th>Rubric Delta</th><th>Cases</th><th>Gen Flags</th><th>Boundary</th></tr>"
+            "<section><h2>Ledger</h2><table><tr><th>Name</th><th>Baseline</th><th>Candidate</th><th>Decision</th><th>Readiness</th><th>Eval Compare</th><th>Design Compare</th><th>Rubric Delta</th><th>Cases</th><th>Gen Flags</th><th>Boundary</th></tr>"
             + rows
             + "</table></section>",
             _list_section("Recommendations", report.get("recommendations")),
@@ -186,6 +193,8 @@ def _entry_row(item: dict[str, Any]) -> str:
         f"<td>{_e(item.get('candidate_name'))}</td>"
         f"<td>{_e(item.get('decision_status'))}</td>"
         f"<td>{_e(item.get('promotion_readiness'))}</td>"
+        f"<td>{_e(item.get('eval_suite_comparison_status'))}</td>"
+        f"<td>{_e(item.get('eval_suite_design_comparison_status'))}</td>"
         f"<td>{_e(item.get('rubric_avg_score_delta'))}</td>"
         f"<td>{_e(item.get('case_regression_count'))}</td>"
         f"<td>{_e(item.get('generation_quality_total_flags_delta'))}</td>"
@@ -212,6 +221,7 @@ def _readiness_requirement_section(requirement: dict[str, Any]) -> str:
         ("Min ready entries", requirement.get("min_ready_entries")),
         ("Evidence kind", requirement.get("evidence_kind")),
         ("Require real benchmark", requirement.get("require_real_benchmark")),
+        ("Design not-ready entries", requirement.get("suite_design_non_comparison_ready_entry_count", 0)),
         ("Failed reasons", ", ".join(_string_list(requirement.get("failed_reasons")))),
     ]
     return (

@@ -25,7 +25,15 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
-def make_comparison(root: Path, name: str, *, decision_status: str = "promote", rubric_delta: float = 5.0, flags_delta: int = -2) -> tuple[Path, Path]:
+def make_comparison(
+    root: Path,
+    name: str,
+    *,
+    decision_status: str = "promote",
+    rubric_delta: float = 5.0,
+    flags_delta: int = -2,
+    candidate_design_status: str | None = "pass",
+) -> tuple[Path, Path]:
     comparison_path = root / name / "benchmark_scorecard_comparison.json"
     decision_path = root / name / "decision" / "benchmark_scorecard_decision.json"
     comparison = {
@@ -39,6 +47,9 @@ def make_comparison(root: Path, name: str, *, decision_status: str = "promote", 
             "case_regression_count": 0 if decision_status == "promote" else 1,
             "case_improvement_count": 2,
             "non_comparison_ready_count": 0 if decision_status != "review" else 1,
+            "non_design_comparison_ready_count": 0 if candidate_design_status in {None, "pass"} else 1,
+            "non_design_comparison_ready_runs": [] if candidate_design_status in {None, "pass"} else ["candidate"],
+            "design_comparison_changed_count": 0 if candidate_design_status in {None, "pass"} else 1,
         },
         "runs": [
             {
@@ -47,6 +58,7 @@ def make_comparison(root: Path, name: str, *, decision_status: str = "promote", 
                 "rubric_avg_score": 80.0,
                 "generation_quality_total_flags": 4,
                 "eval_suite_comparison_status": "pass",
+                "eval_suite_design_comparison_status": "pass",
             },
             {
                 "name": "candidate",
@@ -54,6 +66,7 @@ def make_comparison(root: Path, name: str, *, decision_status: str = "promote", 
                 "rubric_avg_score": 80.0 + rubric_delta,
                 "generation_quality_total_flags": 4 + flags_delta,
                 "eval_suite_comparison_status": "pass" if decision_status != "review" else "warn",
+                "eval_suite_design_comparison_status": candidate_design_status,
             },
         ],
         "baseline_deltas": [
@@ -77,6 +90,7 @@ def make_comparison(root: Path, name: str, *, decision_status: str = "promote", 
         "overall_score": 84.0,
         "rubric_avg_score": 80.0 + rubric_delta,
         "eval_suite_comparison_status": "pass" if decision_status != "review" else "warn",
+        "eval_suite_design_comparison_status": candidate_design_status,
         "case_regression_count": 0 if decision_status == "promote" else 1,
         "case_improvement_count": 2,
     }
@@ -88,6 +102,8 @@ def make_comparison(root: Path, name: str, *, decision_status: str = "promote", 
         "summary": {
             "decision_status": decision_status,
             "remediation_plan_count": 0 if decision_status == "promote" else 1,
+            "comparison_non_design_comparison_ready_count": 0 if candidate_design_status in {None, "pass"} else 1,
+            "comparison_design_comparison_changed_count": 0 if candidate_design_status in {None, "pass"} else 1,
         },
     }
     write_json(comparison_path, comparison)
@@ -106,6 +122,7 @@ class BenchmarkHistoryTests(unittest.TestCase):
             self.assertEqual(report["summary"]["entry_count"], 1)
             self.assertEqual(report["summary"]["promote_count"], 1)
             self.assertEqual(report["summary"]["ready_count"], 1)
+            self.assertEqual(report["summary"]["suite_design_non_comparison_ready_entry_count"], 0)
             self.assertEqual(report["summary"]["best_candidate_name"], "candidate")
             self.assertEqual(report["summary"]["model_quality_claim"], "candidate_evidence")
             self.assertEqual(report["readiness_requirement"]["status"], "pass")
@@ -117,8 +134,35 @@ class BenchmarkHistoryTests(unittest.TestCase):
             self.assertEqual(entry["promotion_readiness"], "ready")
             self.assertEqual(entry["rubric_avg_score_delta"], 5.0)
             self.assertEqual(entry["generation_quality_total_flags_delta"], -2)
+            self.assertEqual(entry["eval_suite_design_comparison_status"], "pass")
             self.assertEqual(entry["boundary"], "standard-benchmark-candidate-evidence")
             self.assertIn("real benchmark comparisons", " ".join(report["recommendations"]))
+
+    def test_history_carries_suite_design_readiness_from_decision_chain(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            comparison, decision = make_comparison(
+                Path(tmp),
+                "round-design-review",
+                decision_status="promote",
+                rubric_delta=4.0,
+                flags_delta=-1,
+                candidate_design_status="warn",
+            )
+
+            report = build_benchmark_history([comparison], decision_paths=[decision], names=["design review"], generated_at="2026-05-21T00:00:00Z")
+
+            self.assertEqual(report["summary"]["promote_count"], 1)
+            self.assertEqual(report["summary"]["ready_count"], 0)
+            self.assertEqual(report["summary"]["suite_design_non_comparison_ready_entry_count"], 1)
+            self.assertEqual(report["summary"]["design_comparison_changed_entry_count"], 1)
+            self.assertIn("suite_design_non_comparison_ready_entries", report["readiness_requirement"]["failed_reasons"])
+            entry = report["entries"][0]
+            self.assertEqual(entry["eval_suite_design_comparison_status"], "warn")
+            self.assertEqual(entry["non_design_comparison_ready_count"], 1)
+            self.assertEqual(entry["design_comparison_changed_count"], 1)
+            self.assertEqual(entry["promotion_readiness"], "review")
+            self.assertEqual(entry["boundary"], "suite-design-not-comparison-ready")
+            self.assertIn("suite-design comparison readiness", " ".join(report["recommendations"]))
 
     def test_history_keeps_tiny_smoke_boundary_and_review_entries(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -149,10 +193,13 @@ class BenchmarkHistoryTests(unittest.TestCase):
             self.assertEqual(set(outputs), {"json", "csv", "markdown", "html"})
             self.assertIn("benchmark_history", Path(outputs["json"]).name)
             self.assertIn("rubric_avg_score_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("eval_suite_design_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Ledger", markdown)
             self.assertIn("Readiness requirement: `pass`", markdown)
+            self.assertIn("Design Compare", markdown)
             self.assertIn("&lt;History&gt;", html)
             self.assertIn("Readiness Requirement", html)
+            self.assertIn("Design Compare", html)
             self.assertIn("standard-benchmark-candidate-evidence", html)
 
     def test_readiness_requirement_can_require_more_ready_entries(self) -> None:
@@ -198,6 +245,8 @@ class BenchmarkHistoryTests(unittest.TestCase):
             )
 
             self.assertIn("entry_count=1", completed.stdout)
+            self.assertIn("suite_design_non_comparison_ready_entry_count=0", completed.stdout)
+            self.assertIn("design_comparison_changed_entry_count=0", completed.stdout)
             self.assertIn("model_quality_claim=candidate_evidence", completed.stdout)
             self.assertIn("readiness_requirement_status=pass", completed.stdout)
             self.assertTrue((out_dir / "benchmark_history.json").is_file())

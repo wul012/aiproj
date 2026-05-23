@@ -13,7 +13,7 @@ from minigpt.benchmark_history_artifacts import (
     write_benchmark_history_markdown,
     write_benchmark_history_outputs,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, number_or_default, number_or_none, utc_now
+from minigpt.report_utils import as_dict, first_present, list_of_dicts, number_or_default, number_or_none, utc_now
 
 
 def load_benchmark_comparison(path: str | Path) -> dict[str, Any]:
@@ -89,6 +89,7 @@ def build_benchmark_history_readiness_requirement(
     entry_count = _int(summary.get("entry_count"))
     case_regression_count = _int(summary.get("case_regression_entry_count"))
     flag_regression_count = _int(summary.get("generation_quality_flag_regression_entry_count"))
+    suite_design_non_ready_count = _int(summary.get("suite_design_non_comparison_ready_entry_count"))
     minimum_ready = max(0, int(min_ready_entries))
     failed_reasons: list[str] = []
     if entry_count == 0:
@@ -101,6 +102,8 @@ def build_benchmark_history_readiness_requirement(
         failed_reasons.append("case_regression_entries")
     if flag_regression_count:
         failed_reasons.append("generation_quality_flag_regressions")
+    if suite_design_non_ready_count:
+        failed_reasons.append("suite_design_non_comparison_ready_entries")
     status = "pass" if not failed_reasons else "fail"
     return {
         "status": status,
@@ -113,6 +116,7 @@ def build_benchmark_history_readiness_requirement(
         "require_real_benchmark": bool(require_real_benchmark),
         "case_regression_entry_count": case_regression_count,
         "generation_quality_flag_regression_entry_count": flag_regression_count,
+        "suite_design_non_comparison_ready_entry_count": suite_design_non_ready_count,
         "failed_reasons": failed_reasons,
     }
 
@@ -131,6 +135,7 @@ def _entry(
     baseline = as_dict(comparison.get("baseline"))
     decision_status = str(decision.get("decision_status") or decision_summary.get("decision_status") or "not-provided") if isinstance(decision, dict) else "not-provided"
     model_quality_claim = "not_claimed" if evidence_kind == "tiny-smoke" else "candidate_evidence"
+    non_design_ready_count = _non_design_comparison_ready_count(comparison_summary, decision_summary)
     return {
         "index": index,
         "name": name,
@@ -140,7 +145,7 @@ def _entry(
         "candidate_name": selected.get("name"),
         "decision_status": decision_status,
         "recommended_action": None if not isinstance(decision, dict) else decision.get("recommended_action"),
-        "promotion_readiness": _promotion_readiness(decision_status, selected, comparison_summary),
+        "promotion_readiness": _promotion_readiness(decision_status, selected, comparison_summary, decision_summary),
         "model_quality_claim": model_quality_claim,
         "overall_score": selected.get("overall_score"),
         "rubric_avg_score": selected.get("rubric_avg_score"),
@@ -156,8 +161,16 @@ def _entry(
         "generation_quality_worst_case_changed": bool(delta.get("generation_quality_worst_case_changed")),
         "eval_suite_comparison_status": selected.get("eval_suite_comparison_status"),
         "non_comparison_ready_count": _int(comparison_summary.get("non_comparison_ready_count")),
+        "eval_suite_design_comparison_status": selected.get("eval_suite_design_comparison_status"),
+        "non_design_comparison_ready_count": non_design_ready_count,
+        "design_comparison_changed_count": _int(
+            first_present(
+                comparison_summary.get("design_comparison_changed_count"),
+                decision_summary.get("comparison_design_comparison_changed_count"),
+            )
+        ),
         "remediation_plan_count": _int(decision_summary.get("remediation_plan_count")),
-        "boundary": _boundary(evidence_kind, selected, comparison_summary),
+        "boundary": _boundary(evidence_kind, selected, comparison_summary, decision_summary),
     }
 
 
@@ -191,6 +204,8 @@ def _summary(entries: list[dict[str, Any]]) -> dict[str, Any]:
     ready = [item for item in entries if item.get("promotion_readiness") == "ready"]
     regressions = [item for item in entries if _int(item.get("case_regression_count")) > 0]
     flag_regressions = [item for item in entries if _int_or_none(item.get("generation_quality_total_flags_delta")) is not None and int(item.get("generation_quality_total_flags_delta") or 0) > 0]
+    eval_non_ready = [item for item in entries if _entry_eval_suite_non_ready(item)]
+    suite_design_non_ready = [item for item in entries if _entry_suite_design_non_ready(item)]
     best = max(entries, key=lambda item: (_number(item.get("rubric_avg_score_delta")) or -9999.0, _number(item.get("rubric_avg_score")) or -9999.0, str(item.get("name"))), default={})
     model_claims = sorted({str(item.get("model_quality_claim")) for item in entries if item.get("model_quality_claim")})
     return {
@@ -201,6 +216,9 @@ def _summary(entries: list[dict[str, Any]]) -> dict[str, Any]:
         "ready_count": len(ready),
         "case_regression_entry_count": len(regressions),
         "generation_quality_flag_regression_entry_count": len(flag_regressions),
+        "eval_suite_non_comparison_ready_entry_count": len(eval_non_ready),
+        "suite_design_non_comparison_ready_entry_count": len(suite_design_non_ready),
+        "design_comparison_changed_entry_count": sum(1 for item in entries if _int(item.get("design_comparison_changed_count")) > 0),
         "best_candidate_name": best.get("candidate_name"),
         "best_entry_name": best.get("name"),
         "best_rubric_avg_score_delta": best.get("rubric_avg_score_delta"),
@@ -218,6 +236,8 @@ def _recommendations(summary: dict[str, Any], entries: list[dict[str, Any]]) -> 
         items.append("Inspect entries with case regressions before promoting any checkpoint as improved.")
     if _int(summary.get("generation_quality_flag_regression_entry_count")):
         items.append("Review generation-quality flag regressions before treating score deltas as clean improvement.")
+    if _int(summary.get("suite_design_non_comparison_ready_entry_count")):
+        items.append("Fix suite-design comparison readiness before using history entries as clean benchmark promotion evidence.")
     if summary.get("model_quality_claim") == "not_claimed":
         items.append("Tiny-smoke history is plumbing evidence; run real benchmark candidates before claiming model quality.")
     else:
@@ -232,8 +252,13 @@ def _entry_name(comparison: dict[str, Any], names: list[str] | None, index: int)
     return Path(source).parent.name or f"benchmark-history-{index + 1}"
 
 
-def _promotion_readiness(decision_status: str, selected: dict[str, Any], comparison_summary: dict[str, Any]) -> str:
-    if decision_status == "promote" and _int(comparison_summary.get("non_comparison_ready_count")) == 0:
+def _promotion_readiness(
+    decision_status: str,
+    selected: dict[str, Any],
+    comparison_summary: dict[str, Any],
+    decision_summary: dict[str, Any],
+) -> str:
+    if decision_status == "promote" and _entry_eval_suite_ready(selected, comparison_summary) and _entry_suite_design_ready(selected, comparison_summary, decision_summary):
         return "ready"
     if decision_status == "blocked":
         return "blocked"
@@ -242,14 +267,49 @@ def _promotion_readiness(decision_status: str, selected: dict[str, Any], compari
     return "missing-decision"
 
 
-def _boundary(evidence_kind: str, selected: dict[str, Any], comparison_summary: dict[str, Any]) -> str:
+def _boundary(
+    evidence_kind: str,
+    selected: dict[str, Any],
+    comparison_summary: dict[str, Any],
+    decision_summary: dict[str, Any],
+) -> str:
     if evidence_kind == "tiny-smoke":
         return "tiny-smoke-plumbing-evidence"
     if selected.get("eval_suite_comparison_status") not in {None, "pass"}:
         return "eval-suite-not-comparison-ready"
     if _int(comparison_summary.get("non_comparison_ready_count")):
         return "mixed-comparison-readiness"
+    if selected.get("eval_suite_design_comparison_status") not in {None, "pass"}:
+        return "suite-design-not-comparison-ready"
+    if _non_design_comparison_ready_count(comparison_summary, decision_summary):
+        return "mixed-suite-design-comparison-readiness"
     return "standard-benchmark-candidate-evidence"
+
+
+def _entry_eval_suite_ready(selected: dict[str, Any], comparison_summary: dict[str, Any]) -> bool:
+    return selected.get("eval_suite_comparison_status") in {None, "pass"} and _int(comparison_summary.get("non_comparison_ready_count")) == 0
+
+
+def _entry_suite_design_ready(selected: dict[str, Any], comparison_summary: dict[str, Any], decision_summary: dict[str, Any]) -> bool:
+    return selected.get("eval_suite_design_comparison_status") in {None, "pass"} and _non_design_comparison_ready_count(comparison_summary, decision_summary) == 0
+
+
+def _entry_eval_suite_non_ready(item: dict[str, Any]) -> bool:
+    return item.get("eval_suite_comparison_status") not in {None, "pass"} or _int(item.get("non_comparison_ready_count")) > 0
+
+
+def _entry_suite_design_non_ready(item: dict[str, Any]) -> bool:
+    return item.get("eval_suite_design_comparison_status") not in {None, "pass"} or _int(item.get("non_design_comparison_ready_count")) > 0
+
+
+def _non_design_comparison_ready_count(comparison_summary: dict[str, Any], decision_summary: dict[str, Any]) -> int:
+    return _int(
+        first_present(
+            comparison_summary.get("non_design_comparison_ready_count"),
+            decision_summary.get("comparison_non_design_comparison_ready_count"),
+            decision_summary.get("non_design_comparison_ready_candidate_count"),
+        )
+    )
 
 
 def _resolve_json_path(path: Path, filename: str) -> Path:
@@ -284,13 +344,6 @@ def _int(value: Any) -> int:
 def _int_or_none(value: Any) -> int | None:
     number = number_or_none(value, int)
     return int(number) if number is not None else None
-
-
-def first_present(*values: Any) -> Any:
-    for value in values:
-        if value is not None:
-            return value
-    return None
 
 
 __all__ = [

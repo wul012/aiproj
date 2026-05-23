@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>v408 benchmark history suite design evidence</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f5f7fb;
+      color: #1d2730;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: linear-gradient(180deg, #f5f7fb 0%, #eef3f8 100%);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 8px 0 18px;
+      border-bottom: 3px solid #2b6b57;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 6px 0 0;
+      color: #5c6a73;
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 760px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #dff0ea;
+      color: #1d5e48;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #d8e0e8;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 0 rgba(14, 23, 33, 0.03);
+      min-height: 168px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 10px;
+      padding: 8px 0;
+      border-top: 1px solid #edf1f5;
+    }
+    .row:first-of-type { border-top: 0; }
+    .label {
+      color: #61707b;
+      font-size: 13px;
+    }
+    .value {
+      font-size: 13px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .mono {
+      font-family: Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      background: #f3f6f9;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .wide {
+      background: #fff;
+      border: 1px solid #d8e0e8;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      border-bottom: 1px solid #edf1f5;
+      text-align: left;
+      padding: 10px 8px;
+      font-size: 13px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      background: #f4f7fa;
+      color: #54636f;
+    }
+    .muted {
+      color: #64737e;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .note {
+      margin-top: 10px;
+      color: #60707b;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>v408 benchmark history suite design evidence</h1>
+        <p class="subtitle">本页用于截图证据：history ledger 已经承接 decision 层的 suite-design readiness，并在 ready/review 边界上同时显示 eval comparison 与 design comparison 两层状态。</p>
+      </div>
+      <div class="pill">MiniGPT v408</div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2>目标</h2>
+        <div class="row">
+          <div class="label">本版要做什么</div>
+          <div class="value">把 suite-design readiness 从 v407 的 promotion decision 继续推进到 benchmark history ledger。</div>
+        </div>
+        <div class="row">
+          <div class="label">不做什么</div>
+          <div class="value">不训练新模型，不新增题集，不改变 scorecard 打分规则。</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>关键字段</h2>
+        <div class="row">
+          <div class="label">entry 字段</div>
+          <div class="value"><span class="mono">eval_suite_design_comparison_status</span>、<span class="mono">non_design_comparison_ready_count</span>、<span class="mono">design_comparison_changed_count</span></div>
+        </div>
+        <div class="row">
+          <div class="label">boundary</div>
+          <div class="value"><span class="mono">suite-design-not-comparison-ready</span>、<span class="mono">mixed-suite-design-comparison-readiness</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>输出层</h2>
+        <div class="row">
+          <div class="label">CSV/Markdown/HTML</div>
+          <div class="value">新增 design compare 列，并与 eval compare 并排显示。</div>
+        </div>
+        <div class="row">
+          <div class="label">readiness reason</div>
+          <div class="value">新增 <span class="mono">suite_design_non_comparison_ready_entries</span>。</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="wide">
+      <h2>Ledger Preview</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%">Name</th>
+            <th style="width: 15%">Decision</th>
+            <th style="width: 13%">Eval Compare</th>
+            <th style="width: 13%">Design Compare</th>
+            <th style="width: 12%">Readiness</th>
+            <th style="width: 22%">Boundary</th>
+            <th style="width: 10%">Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>design review</td>
+            <td>promote</td>
+            <td>pass</td>
+            <td>warn</td>
+            <td>review</td>
+            <td>suite-design-not-comparison-ready</td>
+            <td>suite_design_non_comparison_ready_entries</td>
+          </tr>
+          <tr>
+            <td>clean history</td>
+            <td>promote</td>
+            <td>pass</td>
+            <td>pass</td>
+            <td>ready</td>
+            <td>standard-benchmark-candidate-evidence</td>
+            <td>none</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">这块是为了截图时能一眼看出 v408 的核心边界：decision 可以写 promote，但 history 仍然会因为 suite design warn 而降级为 review。</p>
+    </section>
+
+    <section class="wide">
+      <h2>验证摘要</h2>
+      <p class="muted">已验证 <span class="mono">tests/test_benchmark_history.py</span> 的 suite-design carryover 场景、CSV/Markdown/HTML 输出字段和 readiness reason 传播；本轮同时回归 scorecard decision、comparison deltas、全量 pytest、source encoding 与 git diff --check。</p>
+    </section>
+  </div>
+</body>
+</html>
