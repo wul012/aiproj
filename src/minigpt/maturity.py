@@ -243,6 +243,15 @@ def _summary(
         "release_readiness_benchmark_history_regression_count": release_readiness_context.get("benchmark_history_regression_count"),
         "release_readiness_benchmark_history_status_changed_count": release_readiness_context.get("benchmark_history_status_changed_count"),
         "release_readiness_benchmark_history_boundary_changed_count": release_readiness_context.get("benchmark_history_boundary_changed_count"),
+        "release_readiness_benchmark_suite_design_delta_count": release_readiness_context.get(
+            "benchmark_history_suite_design_non_comparison_ready_delta_count"
+        ),
+        "release_readiness_benchmark_suite_design_regression_count": release_readiness_context.get(
+            "benchmark_history_suite_design_non_comparison_ready_regression_count"
+        ),
+        "release_readiness_benchmark_design_change_delta_count": release_readiness_context.get(
+            "benchmark_history_design_comparison_changed_delta_count"
+        ),
         "release_readiness_benchmark_requirement_status_changed_count": release_readiness_context.get(
             "benchmark_history_readiness_requirement_status_changed_count"
         ),
@@ -275,6 +284,12 @@ def _summary(
         ),
         "release_readiness_max_benchmark_history_generation_flag_regression_delta": release_readiness_context.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
+        ),
+        "release_readiness_max_benchmark_suite_design_delta": release_readiness_context.get(
+            "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"
+        ),
+        "release_readiness_max_benchmark_design_change_delta": release_readiness_context.get(
+            "max_abs_benchmark_history_design_comparison_changed_entries_delta"
         ),
         "request_history_status": _nested_pick(request_history_summary, "summary", "status"),
         "request_history_records": _nested_pick(request_history_summary, "summary", "total_log_records"),
@@ -357,6 +372,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_regression_count": None,
             "benchmark_history_status_changed_count": None,
             "benchmark_history_boundary_changed_count": None,
+            "benchmark_history_suite_design_non_comparison_ready_delta_count": None,
+            "benchmark_history_suite_design_non_comparison_ready_regression_count": None,
+            "benchmark_history_design_comparison_changed_delta_count": None,
             "benchmark_history_readiness_requirement_status_changed_count": None,
             "benchmark_history_readiness_requirement_failed_reason_added_count": None,
             "benchmark_history_readiness_requirement_failed_reason_removed_count": None,
@@ -367,6 +385,8 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": {},
             "max_abs_benchmark_history_case_regression_delta": None,
             "max_abs_benchmark_history_generation_flag_regression_delta": None,
+            "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": None,
+            "max_abs_benchmark_history_design_comparison_changed_entries_delta": None,
             "max_abs_benchmark_history_readiness_requirement_exit_code_delta": None,
         }
     counts = registry.get("release_readiness_comparison_counts")
@@ -396,6 +416,13 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "benchmark_history_regression_count": delta_summary.get("benchmark_history_regression_count"),
         "benchmark_history_status_changed_count": delta_summary.get("benchmark_history_status_changed_count"),
         "benchmark_history_boundary_changed_count": delta_summary.get("benchmark_history_boundary_changed_count"),
+        "benchmark_history_suite_design_non_comparison_ready_delta_count": delta_summary.get(
+            "benchmark_history_suite_design_non_comparison_ready_delta_count"
+        ),
+        "benchmark_history_suite_design_non_comparison_ready_regression_count": delta_summary.get(
+            "benchmark_history_suite_design_non_comparison_ready_regression_count"
+        ),
+        "benchmark_history_design_comparison_changed_delta_count": delta_summary.get("benchmark_history_design_comparison_changed_delta_count"),
         "benchmark_history_readiness_requirement_status_changed_count": delta_summary.get(
             "benchmark_history_readiness_requirement_status_changed_count"
         ),
@@ -424,6 +451,12 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "max_abs_benchmark_history_generation_flag_regression_delta": delta_summary.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
         ),
+        "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": delta_summary.get(
+            "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"
+        ),
+        "max_abs_benchmark_history_design_comparison_changed_entries_delta": delta_summary.get(
+            "max_abs_benchmark_history_design_comparison_changed_entries_delta"
+        ),
         "max_abs_benchmark_history_readiness_requirement_exit_code_delta": delta_summary.get(
             "max_abs_benchmark_history_readiness_requirement_exit_code_delta"
         ),
@@ -442,6 +475,8 @@ def _release_readiness_trend_status(context: dict[str, Any]) -> str | None:
     if int(context.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0) > 0:
         return "benchmark-regressed"
     if int(context.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
+        return "benchmark-regressed"
+    if int(context.get("benchmark_history_suite_design_non_comparison_ready_regression_count") or 0) > 0:
         return "benchmark-regressed"
     if int(context.get("benchmark_history_regression_count") or 0) > 0:
         return "benchmark-regressed"
@@ -516,10 +551,6 @@ def _recommendations(
         recs.append(
             "Review mixed benchmark-history readiness failed-reason drift before presenting the project as release-stable; new reasons can hide behind removals."
         )
-    elif int(release_readiness_context.get("benchmark_history_regression_count") or 0) > 0:
-        recs.append(
-            "Review benchmark-history readiness regressions before presenting the project as release-stable; maturity status is downgraded to review."
-        )
     elif int(release_readiness_context.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0:
         recs.append(
             "Review benchmark-history readiness requirement changes before presenting the project as release-stable; maturity status is downgraded to review."
@@ -527,6 +558,14 @@ def _recommendations(
     elif int(release_readiness_context.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0:
         recs.append(
             "Review newly added benchmark-history readiness failed reasons before presenting the project as release-stable; maturity status is downgraded to review."
+        )
+    elif int(release_readiness_context.get("benchmark_history_suite_design_non_comparison_ready_regression_count") or 0) > 0:
+        recs.append(
+            "Review benchmark-history suite-design readiness regressions before presenting the project as release-stable; maturity status is downgraded to review."
+        )
+    elif int(release_readiness_context.get("benchmark_history_regression_count") or 0) > 0:
+        recs.append(
+            "Review benchmark-history readiness regressions before presenting the project as release-stable; maturity status is downgraded to review."
         )
     elif int(release_readiness_context.get("regressed_count") or 0) > 0:
         recs.append("Review release readiness regressions before presenting the project as release-stable; maturity status is downgraded to review.")

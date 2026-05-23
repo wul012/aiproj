@@ -63,6 +63,18 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                 ("Release readiness CI regression reasons", _fmt_mapping(overview.get("release_readiness_ci_workflow_regression_reason_counts"))),
                 ("Release readiness test coverage regressions", overview.get("release_readiness_test_coverage_regression_count")),
                 ("Release readiness benchmark-history regressions", overview.get("release_readiness_benchmark_history_regression_count")),
+                (
+                    "Release readiness benchmark suite-design deltas",
+                    overview.get("release_readiness_benchmark_suite_design_delta_count"),
+                ),
+                (
+                    "Release readiness benchmark suite-design regressions",
+                    overview.get("release_readiness_benchmark_suite_design_regression_count"),
+                ),
+                (
+                    "Release readiness benchmark design changes",
+                    overview.get("release_readiness_benchmark_design_change_delta_count"),
+                ),
                 ("Release readiness benchmark requirement changes", overview.get("release_readiness_benchmark_requirement_status_changed_count")),
                 ("Release readiness benchmark requirement exit delta", overview.get("release_readiness_max_benchmark_requirement_exit_code_delta")),
                 (
@@ -89,6 +101,8 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     "Release readiness benchmark failed reason drift",
                     _fmt_mapping(overview.get("release_readiness_benchmark_requirement_failed_reason_drift_status_counts")),
                 ),
+                ("Release readiness max benchmark suite-design delta", overview.get("release_readiness_max_benchmark_suite_design_delta")),
+                ("Release readiness max benchmark design-change delta", overview.get("release_readiness_max_benchmark_design_change_delta")),
                 ("Request history status", overview.get("request_history_status")),
                 ("Request history records", overview.get("request_history_records")),
             ]
@@ -167,6 +181,15 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     ("Max coverage percent delta", release_readiness.get("max_abs_test_coverage_percent_delta")),
                     ("Max coverage gap delta", release_readiness.get("max_abs_test_coverage_gap_delta")),
                     ("Benchmark-history regressions", release_readiness.get("benchmark_history_regression_count")),
+                    (
+                        "Benchmark suite-design deltas",
+                        release_readiness.get("benchmark_history_suite_design_non_comparison_ready_delta_count"),
+                    ),
+                    (
+                        "Benchmark suite-design regressions",
+                        release_readiness.get("benchmark_history_suite_design_non_comparison_ready_regression_count"),
+                    ),
+                    ("Benchmark design changes", release_readiness.get("benchmark_history_design_comparison_changed_delta_count")),
                     ("Benchmark-history status changes", release_readiness.get("benchmark_history_status_changed_count")),
                     ("Benchmark-history boundary changes", release_readiness.get("benchmark_history_boundary_changed_count")),
                     ("Benchmark requirement changes", release_readiness.get("benchmark_history_readiness_requirement_status_changed_count")),
@@ -193,6 +216,14 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     (
                         "Max benchmark generation-flag regression delta",
                         release_readiness.get("max_abs_benchmark_history_generation_flag_regression_delta"),
+                    ),
+                    (
+                        "Max benchmark suite-design delta",
+                        release_readiness.get("max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"),
+                    ),
+                    (
+                        "Max benchmark design-change delta",
+                        release_readiness.get("max_abs_benchmark_history_design_comparison_changed_entries_delta"),
                     ),
                 ]
             ),
@@ -230,12 +261,17 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("CI reasons", _fmt_mapping(release_readiness.get("ci_workflow_regression_reason_counts"))),
         ("Coverage regressions", release_readiness.get("test_coverage_regression_count")),
         ("Benchmark regressions", release_readiness.get("benchmark_history_regression_count")),
+        ("Benchmark suite deltas", release_readiness.get("benchmark_history_suite_design_non_comparison_ready_delta_count")),
+        ("Benchmark suite regressions", release_readiness.get("benchmark_history_suite_design_non_comparison_ready_regression_count")),
+        ("Benchmark design changes", release_readiness.get("benchmark_history_design_comparison_changed_delta_count")),
         ("Benchmark req changes", release_readiness.get("benchmark_history_readiness_requirement_status_changed_count")),
         ("Benchmark req exit", release_readiness.get("max_abs_benchmark_history_readiness_requirement_exit_code_delta")),
         ("Benchmark reasons added", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_added_count")),
         ("Benchmark reasons removed", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_removed_count")),
         ("Benchmark recoveries", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_recovery_delta_count")),
         ("Benchmark mixed", release_readiness.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count")),
+        ("Benchmark suite max", release_readiness.get("max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta")),
+        ("Benchmark design max", release_readiness.get("max_abs_benchmark_history_design_comparison_changed_entries_delta")),
         ("Requests", request_history.get("total_log_records")),
     ]
     return "\n".join(
@@ -365,6 +401,9 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         ("Max coverage percent delta", release_readiness.get("max_abs_test_coverage_percent_delta")),
         ("Max coverage gap delta", release_readiness.get("max_abs_test_coverage_gap_delta")),
         ("Benchmark-history regressions", release_readiness.get("benchmark_history_regression_count")),
+        ("Benchmark suite-design deltas", release_readiness.get("benchmark_history_suite_design_non_comparison_ready_delta_count")),
+        ("Benchmark suite-design regressions", release_readiness.get("benchmark_history_suite_design_non_comparison_ready_regression_count")),
+        ("Benchmark design changes", release_readiness.get("benchmark_history_design_comparison_changed_delta_count")),
         ("Benchmark-history status changes", release_readiness.get("benchmark_history_status_changed_count")),
         ("Benchmark-history boundary changes", release_readiness.get("benchmark_history_boundary_changed_count")),
         ("Benchmark requirement changes", release_readiness.get("benchmark_history_readiness_requirement_status_changed_count")),
@@ -389,6 +428,11 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
         ),
         ("Max benchmark case-regression delta", release_readiness.get("max_abs_benchmark_history_case_regression_delta")),
         ("Max benchmark generation-flag regression delta", release_readiness.get("max_abs_benchmark_history_generation_flag_regression_delta")),
+        (
+            "Max benchmark suite-design delta",
+            release_readiness.get("max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"),
+        ),
+        ("Max benchmark design-change delta", release_readiness.get("max_abs_benchmark_history_design_comparison_changed_entries_delta")),
     ]
     return '<section class="panel"><h2>Release Readiness Trend Context</h2><table>' + "".join(
         f"<tr><th>{_e(label)}</th><td>{_e(value)}</td></tr>" for label, value in rows

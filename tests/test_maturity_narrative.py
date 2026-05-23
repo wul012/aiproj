@@ -34,6 +34,8 @@ def make_project(
     ci_regression_reasons: list[str] | None = None,
     coverage_regression_count: int = 0,
     benchmark_history_regression_count: int = 0,
+    benchmark_suite_design_regression_count: int = 0,
+    benchmark_design_change_delta_count: int = 0,
     benchmark_requirement_change_count: int = 0,
     benchmark_requirement_reason_added: list[str] | None = None,
     benchmark_requirement_reason_removed: list[str] | None = None,
@@ -89,6 +91,11 @@ def make_project(
                 "release_readiness_benchmark_history_boundary_changed_count": 1 if benchmark_history_regression_count else 0,
                 "release_readiness_max_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "release_readiness_max_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
+                "release_readiness_benchmark_suite_design_delta_count": 1 if benchmark_suite_design_regression_count else 0,
+                "release_readiness_benchmark_suite_design_regression_count": benchmark_suite_design_regression_count,
+                "release_readiness_benchmark_design_change_delta_count": benchmark_design_change_delta_count,
+                "release_readiness_max_benchmark_suite_design_delta": 2 if benchmark_suite_design_regression_count else 0,
+                "release_readiness_max_benchmark_design_change_delta": 3 if benchmark_design_change_delta_count else 0,
                 "release_readiness_benchmark_requirement_status_changed_count": benchmark_requirement_change_count,
                 "release_readiness_max_benchmark_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
                 "release_readiness_benchmark_requirement_failed_reason_added_count": len(reason_added),
@@ -120,9 +127,14 @@ def make_project(
                 "benchmark_history_regression_count": benchmark_history_regression_count,
                 "benchmark_history_status_changed_count": 1 if benchmark_history_regression_count else 0,
                 "benchmark_history_boundary_changed_count": 1 if benchmark_history_regression_count else 0,
+                "benchmark_history_suite_design_non_comparison_ready_delta_count": 1 if benchmark_suite_design_regression_count else 0,
+                "benchmark_history_suite_design_non_comparison_ready_regression_count": benchmark_suite_design_regression_count,
+                "benchmark_history_design_comparison_changed_delta_count": benchmark_design_change_delta_count,
                 "benchmark_history_readiness_requirement_status_changed_count": benchmark_requirement_change_count,
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
+                "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": 2 if benchmark_suite_design_regression_count else 0,
+                "max_abs_benchmark_history_design_comparison_changed_entries_delta": 3 if benchmark_design_change_delta_count else 0,
                 "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
                 "benchmark_history_readiness_requirement_failed_reason_added_count": len(reason_added),
                 "benchmark_history_readiness_requirement_failed_reason_removed_count": len(reason_removed),
@@ -163,9 +175,14 @@ def make_project(
                 "benchmark_history_regression_count": benchmark_history_regression_count,
                 "benchmark_history_status_changed_count": 1 if benchmark_history_regression_count else 0,
                 "benchmark_history_boundary_changed_count": 1 if benchmark_history_regression_count else 0,
+                "benchmark_history_suite_design_non_comparison_ready_delta_count": 1 if benchmark_suite_design_regression_count else 0,
+                "benchmark_history_suite_design_non_comparison_ready_regression_count": benchmark_suite_design_regression_count,
+                "benchmark_history_design_comparison_changed_delta_count": benchmark_design_change_delta_count,
                 "benchmark_history_readiness_requirement_status_changed_count": benchmark_requirement_change_count,
                 "max_abs_benchmark_history_case_regression_delta": 2 if benchmark_history_regression_count else 0,
                 "max_abs_benchmark_history_generation_flag_regression_delta": 1 if benchmark_history_regression_count else 0,
+                "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": 2 if benchmark_suite_design_regression_count else 0,
+                "max_abs_benchmark_history_design_comparison_changed_entries_delta": 3 if benchmark_design_change_delta_count else 0,
                 "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 1 if benchmark_requirement_change_count else 0,
                 "benchmark_history_readiness_requirement_failed_reason_added_count": len(reason_added),
                 "benchmark_history_readiness_requirement_failed_reason_removed_count": len(reason_removed),
@@ -366,6 +383,9 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_regression_reason_counts"], {})
             self.assertEqual(narrative["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_history_regression_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_suite_design_delta_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_suite_design_regression_count"], 0)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_design_change_delta_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_exit_code_delta_max"], 0)
             self.assertEqual(narrative["summary"]["release_readiness_benchmark_requirement_failed_reason_removed_count"], 0)
@@ -503,6 +523,31 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "regressed")
             self.assertEqual(narrative["summary"]["release_readiness_regressed_count"], 1)
             self.assertIn("Resolve review-level release", narrative["recommendations"][0])
+
+    def test_build_maturity_narrative_marks_review_for_release_suite_design_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(
+                Path(tmp),
+                release_trend="stable",
+                benchmark_suite_design_regression_count=1,
+                benchmark_design_change_delta_count=1,
+            )
+
+            narrative = build_maturity_narrative(paths["project"])
+            release_section = next(item for item in narrative["sections"] if item["key"] == "release_quality")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_suite_design_delta_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_suite_design_regression_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_benchmark_design_change_delta_count"], 1)
+            self.assertEqual(narrative["summary"]["release_readiness_max_benchmark_suite_design_delta"], 2)
+            self.assertEqual(narrative["summary"]["release_readiness_max_benchmark_design_change_delta"], 3)
+            self.assertEqual(release_section["status"], "benchmark-regressed")
+            self.assertIn("benchmark suite-design deltas=1", release_section["claim"])
+            self.assertIn("suite-design regressions=1", release_section["claim"])
+            self.assertIn("max suite-design delta=2", release_section["claim"])
+            self.assertIn("release-readiness benchmark suite-design regressions", " ".join(narrative["recommendations"]))
 
     def test_build_maturity_narrative_marks_review_for_ci_order_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -740,6 +785,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Release coverage gap delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark-history regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark-history boundary changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release benchmark suite-design regressions", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Release benchmark design changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark requirement changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Release benchmark requirement exit delta", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Scorecard decision run", Path(outputs["markdown"]).read_text(encoding="utf-8"))
@@ -759,6 +806,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Coverage gap delta", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark boundary changes", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark suite regressions", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark design changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark req changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark req exit", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
@@ -794,6 +843,8 @@ class MaturityNarrativeTests(unittest.TestCase):
 
             self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
             self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
+            self.assertIn("release_readiness_benchmark_suite_design_delta_count=0", completed.stdout)
+            self.assertIn("release_readiness_benchmark_suite_design_regression_count=0", completed.stdout)
             self.assertTrue((out_dir / "maturity_narrative.json").is_file())
 
     def test_render_maturity_narrative_html_escapes_text(self) -> None:

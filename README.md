@@ -731,6 +731,14 @@ Version 412 carries benchmark-history suite-design readiness from release bundle
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
 
+## Latest v416 checkpoint
+
+- Maturity summary now consumes registry release-readiness benchmark suite-design delta, suite-design regression, design-change, and max-delta fields.
+- Maturity trend now marks positive suite-design readiness regressions as `benchmark-regressed`, with a specific recommendation before generic release regression advice.
+- Maturity narrative summary, release-quality claim, Markdown/HTML renderers, and CLI stdout expose the suite-design readiness delta context.
+- Tests cover maturity summary review behavior, maturity artifacts, narrative review behavior, rendered outputs, and CLI stdout.
+- Archived maturity suite-design readiness evidence in `d/416`; tag: `v416.0.0`.
+
 ## Latest v415 checkpoint
 
 - Registry release-readiness delta rows now preserve suite-design not-ready delta and design-comparison changed delta.

@@ -56,6 +56,9 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "benchmark_history_regression_count": 0,
                     "benchmark_history_status_changed_count": 0,
                     "benchmark_history_boundary_changed_count": 0,
+                    "benchmark_history_suite_design_non_comparison_ready_delta_count": 0,
+                    "benchmark_history_suite_design_non_comparison_ready_regression_count": 0,
+                    "benchmark_history_design_comparison_changed_delta_count": 0,
                     "benchmark_history_readiness_requirement_status_changed_count": 0,
                     "benchmark_history_readiness_requirement_failed_reason_added_count": 0,
                     "benchmark_history_readiness_requirement_failed_reason_removed_count": 0,
@@ -66,6 +69,8 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "benchmark_history_readiness_requirement_failed_reason_drift_status_counts": {"stable": 2},
                     "max_abs_benchmark_history_case_regression_delta": 0,
                     "max_abs_benchmark_history_generation_flag_regression_delta": 0,
+                    "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": 0,
+                    "max_abs_benchmark_history_design_comparison_changed_entries_delta": 0,
                     "max_abs_benchmark_history_readiness_requirement_exit_code_delta": 0,
                 },
             },
@@ -131,6 +136,9 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_reason_counts"], {})
             self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_history_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_suite_design_delta_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_suite_design_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_design_change_delta_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_status_changed_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_max_benchmark_requirement_exit_code_delta"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_requirement_failed_reason_added_count"], 0)
@@ -154,6 +162,11 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_regression_count"], 0)
             self.assertEqual(
                 summary["release_readiness_context"]["benchmark_history_readiness_requirement_status_changed_count"],
+                0,
+            )
+            self.assertEqual(summary["release_readiness_context"]["benchmark_history_suite_design_non_comparison_ready_delta_count"], 0)
+            self.assertEqual(
+                summary["release_readiness_context"]["benchmark_history_suite_design_non_comparison_ready_regression_count"],
                 0,
             )
             self.assertEqual(summary["request_history_context"]["timeout_rate"], 0.25)
@@ -192,6 +205,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertIn("Release Readiness Trend Context", markdown)
             self.assertIn("Release readiness CI regression reasons", markdown)
             self.assertIn("Release readiness benchmark-history regressions", markdown)
+            self.assertIn("Release readiness benchmark suite-design regressions", markdown)
             self.assertIn("Project Synthesis", Path(outputs["csv"]).read_text(encoding="utf-8"))
             html = Path(outputs["html"]).read_text(encoding="utf-8")
             self.assertIn("MiniGPT project maturity summary", html)
@@ -199,6 +213,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertIn("Release Readiness Trend Context", html)
             self.assertIn("CI workflow regression reasons", html)
             self.assertIn("Benchmark-history regressions", html)
+            self.assertIn("Benchmark suite-design regressions", html)
 
     def test_release_readiness_regression_marks_maturity_for_review(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -351,6 +366,39 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_regression_count"], 1)
             self.assertEqual(summary["release_readiness_context"]["benchmark_history_boundary_changed_count"], 1)
             self.assertIn("benchmark-history readiness regressions", " ".join(summary["recommendations"]))
+
+    def test_benchmark_suite_design_regression_marks_maturity_for_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_project(root, version_count=65)
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["release_readiness_comparison_counts"] = {"benchmark-regressed": 1}
+            registry["release_readiness_delta_summary"]["regressed_count"] = 0
+            registry["release_readiness_delta_summary"]["improved_count"] = 0
+            registry["release_readiness_delta_summary"]["ci_workflow_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["test_coverage_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_regression_count"] = 0
+            registry["release_readiness_delta_summary"]["benchmark_history_suite_design_non_comparison_ready_delta_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_suite_design_non_comparison_ready_regression_count"] = 1
+            registry["release_readiness_delta_summary"]["benchmark_history_design_comparison_changed_delta_count"] = 1
+            registry["release_readiness_delta_summary"]["max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"] = 2
+            registry["release_readiness_delta_summary"]["max_abs_benchmark_history_design_comparison_changed_entries_delta"] = 3
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+            summary = build_maturity_summary(root, registry_path=registry_path)
+
+            self.assertEqual(summary["summary"]["release_readiness_trend_status"], "benchmark-regressed")
+            self.assertEqual(summary["summary"]["overall_status"], "warn")
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_suite_design_delta_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_suite_design_regression_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_benchmark_design_change_delta_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_max_benchmark_suite_design_delta"], 2)
+            self.assertEqual(summary["summary"]["release_readiness_max_benchmark_design_change_delta"], 3)
+            self.assertEqual(
+                summary["release_readiness_context"]["benchmark_history_suite_design_non_comparison_ready_regression_count"],
+                1,
+            )
+            self.assertIn("benchmark-history suite-design readiness regressions", " ".join(summary["recommendations"]))
 
     def test_benchmark_requirement_change_marks_maturity_for_review(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

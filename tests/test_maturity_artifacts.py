@@ -32,8 +32,13 @@ class MaturityArtifactSplitTests(unittest.TestCase):
                 "release_readiness_regressed_count": 0,
                 "release_readiness_ci_workflow_regression_count": 1,
                 "release_readiness_test_coverage_regression_count": 1,
+                "release_readiness_benchmark_suite_design_delta_count": 1,
+                "release_readiness_benchmark_suite_design_regression_count": 1,
+                "release_readiness_benchmark_design_change_delta_count": 1,
                 "release_readiness_benchmark_requirement_status_changed_count": 1,
                 "release_readiness_max_benchmark_requirement_exit_code_delta": 1,
+                "release_readiness_max_benchmark_suite_design_delta": 2,
+                "release_readiness_max_benchmark_design_change_delta": 3,
                 "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count": 1,
                 "request_history_status": "watch",
                 "request_history_records": 4,
@@ -56,7 +61,7 @@ class MaturityArtifactSplitTests(unittest.TestCase):
             ],
             "phase_timeline": [{"versions": "v1-v12", "title": "MiniGPT learning core", "covered_count": 12, "target_count": 12, "status": "pass"}],
             "registry_context": {"available": True, "run_count": 2, "pair_report_counts": {"pair_batch": 1}, "pair_delta_cases": 6, "pair_delta_max_generated": 11, "quality_counts": {"pass": 1}, "generation_quality_counts": {"pass": 2}},
-            "release_readiness_context": {"available": True, "trend_status": "improved", "comparison_counts": {"improved": 1}, "delta_count": 2, "run_count": 2, "regressed_count": 0, "improved_count": 1, "panel_changed_count": 0, "changed_panel_delta_count": 1, "max_abs_status_delta": 3, "ci_workflow_regression_count": 1, "ci_workflow_status_changed_count": 1, "max_abs_ci_workflow_failed_check_delta": 2, "test_coverage_regression_count": 1, "test_coverage_status_changed_count": 1, "max_abs_test_coverage_percent_delta": 7.5, "max_abs_test_coverage_gap_delta": 3, "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": 1},
+            "release_readiness_context": {"available": True, "trend_status": "improved", "comparison_counts": {"improved": 1}, "delta_count": 2, "run_count": 2, "regressed_count": 0, "improved_count": 1, "panel_changed_count": 0, "changed_panel_delta_count": 1, "max_abs_status_delta": 3, "ci_workflow_regression_count": 1, "ci_workflow_status_changed_count": 1, "max_abs_ci_workflow_failed_check_delta": 2, "test_coverage_regression_count": 1, "test_coverage_status_changed_count": 1, "max_abs_test_coverage_percent_delta": 7.5, "max_abs_test_coverage_gap_delta": 3, "benchmark_history_suite_design_non_comparison_ready_delta_count": 1, "benchmark_history_suite_design_non_comparison_ready_regression_count": 1, "benchmark_history_design_comparison_changed_delta_count": 1, "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": 2, "max_abs_benchmark_history_design_comparison_changed_entries_delta": 3, "benchmark_history_readiness_requirement_failed_reason_mixed_delta_count": 1},
             "request_history_context": {"available": True, "status": "watch", "total_log_records": 4, "invalid_record_count": 0, "ok_count": 3, "timeout_count": 1, "bad_request_count": 0, "error_count": 0, "timeout_rate": 0.25, "error_rate": 0.0, "unique_checkpoint_count": 2, "latest_timestamp": "2026-05-15T00:00:00Z"},
             "recommendations": ["Keep maturity evidence current."],
         }
@@ -76,8 +81,10 @@ class MaturityArtifactSplitTests(unittest.TestCase):
             self.assertIn("Test coverage regressions", markdown)
             self.assertIn("Test coverage regressions", html)
             self.assertIn("Release readiness benchmark requirement changes", markdown)
+            self.assertIn("Release readiness benchmark suite-design regressions", markdown)
             self.assertIn("Release readiness benchmark failed reason mixed deltas", markdown)
             self.assertIn("Benchmark req changes", html)
+            self.assertIn("Benchmark suite regressions", html)
             self.assertIn("Benchmark mixed", html)
             self.assertIn("Coverage regressions", html)
             self.assertIn("## Request History Context", markdown)

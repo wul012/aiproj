@@ -55,6 +55,13 @@ def build_maturity_narrative_summary(
         "release_readiness_benchmark_history_regression_count": release.get("benchmark_history_regression_count"),
         "release_readiness_benchmark_history_status_changed_count": release.get("benchmark_history_status_changed_count"),
         "release_readiness_benchmark_history_boundary_changed_count": release.get("benchmark_history_boundary_changed_count"),
+        "release_readiness_benchmark_suite_design_delta_count": release.get(
+            "benchmark_history_suite_design_non_comparison_ready_delta_count"
+        ),
+        "release_readiness_benchmark_suite_design_regression_count": release.get(
+            "benchmark_history_suite_design_non_comparison_ready_regression_count"
+        ),
+        "release_readiness_benchmark_design_change_delta_count": release.get("benchmark_history_design_comparison_changed_delta_count"),
         "release_readiness_benchmark_requirement_status_changed_count": release.get(
             "benchmark_history_readiness_requirement_status_changed_count"
         ),
@@ -86,6 +93,10 @@ def build_maturity_narrative_summary(
         "release_readiness_max_benchmark_history_generation_flag_regression_delta": release.get(
             "max_abs_benchmark_history_generation_flag_regression_delta"
         ),
+        "release_readiness_max_benchmark_suite_design_delta": release.get(
+            "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"
+        ),
+        "release_readiness_max_benchmark_design_change_delta": release.get("max_abs_benchmark_history_design_comparison_changed_entries_delta"),
         "request_history_status": request.get("status"),
         "request_history_records": request.get("total_log_records"),
         "request_history_timeout_rate": request.get("timeout_rate"),
@@ -175,6 +186,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
         recommendations.append(
             "Review newly added benchmark-history readiness failed reasons before treating the portfolio as release-stable."
         )
+    if int(summary.get("release_readiness_benchmark_suite_design_regression_count") or 0) > 0:
+        recommendations.append(
+            "Review release-readiness benchmark suite-design regressions before treating the portfolio as release-stable."
+        )
     if int(summary.get("release_readiness_ci_workflow_regression_count") or 0) > 0:
         recommendations.append(
             "Review release readiness CI workflow regression reasons"
@@ -256,6 +271,7 @@ def _portfolio_status(
         or int(release.get("benchmark_history_readiness_requirement_status_changed_count") or 0) > 0
         or int(release.get("benchmark_history_readiness_requirement_failed_reason_mixed_delta_count") or 0) > 0
         or int(release.get("benchmark_history_readiness_requirement_failed_reason_added_count") or 0) > 0
+        or int(release.get("benchmark_history_suite_design_non_comparison_ready_regression_count") or 0) > 0
         or request.get("status") in {"watch", "warn", "fail"}
         or any(row.get("overall_status") in {"warn", "fail"} for row in benchmark_rows)
         or any(row.get("decision_status") in {"review", "blocked"} for row in decision_rows)
@@ -329,10 +345,31 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         maturity_summary.get("release_readiness_ci_workflow_regression_reason_counts"),
         {},
     )
+    suite_design_delta_count = _coalesce(
+        release_context.get("benchmark_history_suite_design_non_comparison_ready_delta_count"),
+        maturity_summary.get("release_readiness_benchmark_suite_design_delta_count"),
+    )
+    suite_design_regression_count = _coalesce(
+        release_context.get("benchmark_history_suite_design_non_comparison_ready_regression_count"),
+        maturity_summary.get("release_readiness_benchmark_suite_design_regression_count"),
+    )
+    design_change_delta_count = _coalesce(
+        release_context.get("benchmark_history_design_comparison_changed_delta_count"),
+        maturity_summary.get("release_readiness_benchmark_design_change_delta_count"),
+    )
+    max_suite_design_delta = _coalesce(
+        release_context.get("max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"),
+        maturity_summary.get("release_readiness_max_benchmark_suite_design_delta"),
+    )
+    max_design_change_delta = _coalesce(
+        release_context.get("max_abs_benchmark_history_design_comparison_changed_entries_delta"),
+        maturity_summary.get("release_readiness_max_benchmark_design_change_delta"),
+    )
     if (
         int(requirement_status_changed_count or 0) > 0
         or int(requirement_reason_mixed_delta_count or 0) > 0
         or int(requirement_reason_added_count or 0) > 0
+        or int(suite_design_regression_count or 0) > 0
     ):
         trend_status = "benchmark-regressed"
     return {
@@ -390,6 +427,9 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
             release_context.get("benchmark_history_boundary_changed_count"),
             maturity_summary.get("release_readiness_benchmark_history_boundary_changed_count"),
         ),
+        "benchmark_history_suite_design_non_comparison_ready_delta_count": suite_design_delta_count,
+        "benchmark_history_suite_design_non_comparison_ready_regression_count": suite_design_regression_count,
+        "benchmark_history_design_comparison_changed_delta_count": design_change_delta_count,
         "benchmark_history_readiness_requirement_status_changed_count": requirement_status_changed_count,
         "max_abs_benchmark_history_readiness_requirement_exit_code_delta": requirement_exit_code_delta,
         "benchmark_history_readiness_requirement_failed_reason_added_count": requirement_reason_added_count,
@@ -407,6 +447,8 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
             release_context.get("max_abs_benchmark_history_generation_flag_regression_delta"),
             maturity_summary.get("release_readiness_max_benchmark_history_generation_flag_regression_delta"),
         ),
+        "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": max_suite_design_delta,
+        "max_abs_benchmark_history_design_comparison_changed_entries_delta": max_design_change_delta,
     }
 
 
