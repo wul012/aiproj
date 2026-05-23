@@ -353,6 +353,9 @@ d/413/解释/说明.md
 d/414/图片
 d/414/解释/说明.md
  -> v414 release readiness comparison benchmark-history suite-design deltas 的运行截图和解释
+d/415/图片
+d/415/解释/说明.md
+ -> v415 registry release-readiness suite-design deltas 的运行截图和解释
 ```
 
 写入规则：

@@ -66,6 +66,36 @@ def main() -> None:
         + json.dumps(registry.get("release_readiness_delta_summary", {}).get("benchmark_history_regression_count", 0), ensure_ascii=False)
     )
     print(
+        "release_readiness_benchmark_suite_design_delta_count="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get(
+                "benchmark_history_suite_design_non_comparison_ready_delta_count",
+                0,
+            ),
+            ensure_ascii=False,
+        )
+    )
+    print(
+        "release_readiness_benchmark_suite_design_regression_count="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get(
+                "benchmark_history_suite_design_non_comparison_ready_regression_count",
+                0,
+            ),
+            ensure_ascii=False,
+        )
+    )
+    print(
+        "release_readiness_benchmark_design_change_delta_count="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get(
+                "benchmark_history_design_comparison_changed_delta_count",
+                0,
+            ),
+            ensure_ascii=False,
+        )
+    )
+    print(
         "release_readiness_benchmark_requirement_status_changes="
         + json.dumps(
             registry.get("release_readiness_delta_summary", {}).get("benchmark_history_readiness_requirement_status_changed_count", 0),

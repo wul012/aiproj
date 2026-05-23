@@ -138,6 +138,9 @@ class RegisteredRun:
     release_readiness_test_coverage_regression_count: int | None
     release_readiness_benchmark_history_delta_count: int | None
     release_readiness_benchmark_history_regression_count: int | None
+    release_readiness_benchmark_suite_design_delta_count: int | None
+    release_readiness_benchmark_suite_design_regression_count: int | None
+    release_readiness_benchmark_design_change_delta_count: int | None
     release_readiness_benchmark_requirement_status_change_count: int | None
     release_readiness_benchmark_requirement_exit_code_delta_max: int | float | None
     release_readiness_benchmark_requirement_failed_reason_added_count: int | None
@@ -263,6 +266,30 @@ def summarize_registered_run(run_dir: str | Path, name: str | None = None) -> Re
         release_readiness_test_coverage_regression_count=_as_int(_pick(release_readiness_summary, "test_coverage_regression_count")),
         release_readiness_benchmark_history_delta_count=_as_int(_pick(release_readiness_summary, "benchmark_history_delta_count")),
         release_readiness_benchmark_history_regression_count=_as_int(_pick(release_readiness_summary, "benchmark_history_regression_count")),
+        release_readiness_benchmark_suite_design_delta_count=_summary_int_or_delta(
+            release_readiness_summary,
+            "benchmark_history_suite_design_non_comparison_ready_delta_count",
+            _release_readiness_numeric_delta_count(
+                release_readiness_deltas,
+                "benchmark_history_suite_design_non_comparison_ready_entries_delta",
+            ),
+        ),
+        release_readiness_benchmark_suite_design_regression_count=_summary_int_or_delta(
+            release_readiness_summary,
+            "benchmark_history_suite_design_non_comparison_ready_regression_count",
+            _release_readiness_positive_delta_count(
+                release_readiness_deltas,
+                "benchmark_history_suite_design_non_comparison_ready_entries_delta",
+            ),
+        ),
+        release_readiness_benchmark_design_change_delta_count=_summary_int_or_delta(
+            release_readiness_summary,
+            "benchmark_history_design_comparison_changed_delta_count",
+            _release_readiness_numeric_delta_count(
+                release_readiness_deltas,
+                "benchmark_history_design_comparison_changed_entries_delta",
+            ),
+        ),
         release_readiness_benchmark_requirement_status_change_count=_release_readiness_benchmark_requirement_status_change_count(
             release_readiness_deltas
         ),
@@ -461,6 +488,23 @@ def _release_readiness_benchmark_requirement_status_change_count(deltas: list[di
     if not deltas:
         return None
     return sum(1 for delta in deltas if bool(delta.get("benchmark_history_readiness_requirement_status_changed")))
+
+
+def _summary_int_or_delta(summary: dict[str, Any], key: str, fallback: int | None) -> int | None:
+    direct = _as_int(_pick(summary, key))
+    return direct if direct is not None else fallback
+
+
+def _release_readiness_numeric_delta_count(deltas: list[dict[str, Any]], key: str) -> int | None:
+    if not deltas:
+        return None
+    return sum(1 for delta in deltas if _as_optional_float(delta.get(key)) not in {None, 0.0})
+
+
+def _release_readiness_positive_delta_count(deltas: list[dict[str, Any]], key: str) -> int | None:
+    if not deltas:
+        return None
+    return sum(1 for delta in deltas if (_as_optional_float(delta.get(key)) or 0.0) > 0)
 
 
 def _release_readiness_benchmark_requirement_exit_code_delta_max(deltas: list[dict[str, Any]]) -> int | float | None:

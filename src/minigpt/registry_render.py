@@ -55,6 +55,7 @@ def render_registry_html(
         ("CI order regressions", _release_readiness_ci_order_summary_label(release_readiness_delta_summary)),
         ("Coverage regressions", _release_readiness_coverage_summary_label(release_readiness_delta_summary)),
         ("Benchmark regressions", _release_readiness_benchmark_summary_label(release_readiness_delta_summary)),
+        ("Benchmark suite-design", _release_readiness_benchmark_suite_summary_label(release_readiness_delta_summary)),
         ("Tags", len(tag_counts) if isinstance(tag_counts, dict) else 0),
     ]
     rows = []
@@ -249,6 +250,9 @@ def _row_search_text(run: dict[str, Any]) -> str:
         "release_readiness_ci_workflow_regression_reasons",
         "release_readiness_test_coverage_regression_count",
         "release_readiness_benchmark_history_regression_count",
+        "release_readiness_benchmark_suite_design_delta_count",
+        "release_readiness_benchmark_suite_design_regression_count",
+        "release_readiness_benchmark_design_change_delta_count",
         "release_readiness_benchmark_requirement_status_change_count",
         "release_readiness_benchmark_requirement_exit_code_delta_max",
         "release_readiness_benchmark_requirement_failed_reason_added_count",
@@ -372,6 +376,7 @@ def _release_readiness_delta_summary_label(value: Any) -> str:
         f"panels:{value.get('changed_panel_delta_count')}, "
         f"coverage:{value.get('test_coverage_regression_count', 0)}"
         f", benchmark:{value.get('benchmark_history_regression_count', 0)}"
+        f", suite:{value.get('benchmark_history_suite_design_non_comparison_ready_regression_count', 0)}"
         f", req:{value.get('benchmark_history_readiness_requirement_status_changed_count', 0)}"
     )
 
@@ -411,9 +416,20 @@ def _release_readiness_benchmark_summary_label(value: Any) -> str:
         f"regressions:{value.get('benchmark_history_regression_count', 0)}, "
         f"case:{_fmt(value.get('max_abs_benchmark_history_case_regression_delta'))}, "
         f"flags:{_fmt(value.get('max_abs_benchmark_history_generation_flag_regression_delta'))}, "
+        f"suite:{_fmt(value.get('max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta'))}, "
         f"req:{value.get('benchmark_history_readiness_requirement_status_changed_count', 0)}, "
         f"exit:{_fmt(value.get('max_abs_benchmark_history_readiness_requirement_exit_code_delta'))}, "
         f"boundary:{value.get('benchmark_history_boundary_changed_count', 0)}"
+    )
+
+
+def _release_readiness_benchmark_suite_summary_label(value: Any) -> str:
+    if not isinstance(value, dict) or not value.get("delta_count"):
+        return "missing"
+    return (
+        f"deltas:{value.get('benchmark_history_suite_design_non_comparison_ready_delta_count', 0)}, "
+        f"regressions:{value.get('benchmark_history_suite_design_non_comparison_ready_regression_count', 0)}, "
+        f"design changes:{value.get('benchmark_history_design_comparison_changed_delta_count', 0)}"
     )
 
 
@@ -529,6 +545,7 @@ def _release_readiness_cell(run: dict[str, Any]) -> str:
         f"<br><span>ci order regressions={_e(_fmt(run.get('release_readiness_ci_workflow_order_regression_count')))}</span>"
         f"<br><span>coverage regressions={_e(_fmt(run.get('release_readiness_test_coverage_regression_count')))}</span>"
         f"<br><span>benchmark regressions={_e(_fmt(run.get('release_readiness_benchmark_history_regression_count')))} deltas={_e(_fmt(run.get('release_readiness_benchmark_history_delta_count')))}</span>"
+        f"<br><span>suite design deltas={_e(_fmt(run.get('release_readiness_benchmark_suite_design_delta_count')))} regressions={_e(_fmt(run.get('release_readiness_benchmark_suite_design_regression_count')))} changes={_e(_fmt(run.get('release_readiness_benchmark_design_change_delta_count')))}</span>"
         f"<br><span>benchmark req changes={_e(_fmt(run.get('release_readiness_benchmark_requirement_status_change_count')))} exit max={_e(_fmt(run.get('release_readiness_benchmark_requirement_exit_code_delta_max')))}</span>"
         f"<br><span>benchmark reasons +={_e(_fmt(run.get('release_readiness_benchmark_requirement_failed_reason_added_count')))} -={_e(_fmt(run.get('release_readiness_benchmark_requirement_failed_reason_removed_count')))} mixed={_e(_fmt(run.get('release_readiness_benchmark_requirement_failed_reason_mixed_delta_count')))}</span>"
     )

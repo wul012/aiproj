@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -27,6 +28,7 @@ def make_run(
     readiness_ci_regression_reasons: list[str] | None = None,
     readiness_coverage_regression: bool = False,
     readiness_benchmark_regression: bool = False,
+    readiness_suite_design_regression: bool = False,
     rubric_score: float | None = 92.0,
     rubric_status: str = "pass",
     dataset_version: str | None = None,
@@ -218,8 +220,8 @@ def make_run(
         compared_coverage_status = "fail" if readiness_coverage_regression else "pass"
         coverage_percent_delta = -7.5 if readiness_coverage_regression else 0
         coverage_gap_delta = 3.0 if readiness_coverage_regression else 0
-        benchmark_history_delta_count = 1 if readiness_benchmark_regression else 0
-        benchmark_history_regression_count = 1 if readiness_benchmark_regression else 0
+        benchmark_history_delta_count = 1 if readiness_benchmark_regression or readiness_suite_design_regression else 0
+        benchmark_history_regression_count = 1 if readiness_benchmark_regression or readiness_suite_design_regression else 0
         baseline_benchmark_status = "pass"
         compared_benchmark_status = "warn" if readiness_benchmark_regression else "pass"
         benchmark_status_delta = -1 if readiness_benchmark_regression else 0
@@ -227,6 +229,8 @@ def make_run(
         benchmark_review_delta = 1 if readiness_benchmark_regression else 0
         benchmark_case_regression_delta = 2 if readiness_benchmark_regression else 0
         benchmark_flag_regression_delta = 1 if readiness_benchmark_regression else 0
+        benchmark_suite_design_delta = 2 if readiness_suite_design_regression else 0
+        benchmark_design_change_delta = 3 if readiness_suite_design_regression else 0
         benchmark_boundary_changed = readiness_benchmark_regression
         baseline_benchmark_requirement_status = "pass"
         compared_benchmark_requirement_status = "fail" if readiness_benchmark_regression else "pass"
@@ -237,6 +241,8 @@ def make_run(
         if readiness_coverage_regression and "test_coverage:pass->fail" not in changed_panels:
             changed_panels = [*changed_panels, "test_coverage:pass->fail"]
         if readiness_benchmark_regression and "benchmark_history:pass->warn" not in changed_panels:
+            changed_panels = [*changed_panels, "benchmark_history:pass->warn"]
+        if readiness_suite_design_regression and "benchmark_history:pass->warn" not in changed_panels:
             changed_panels = [*changed_panels, "benchmark_history:pass->warn"]
         report = {
             "schema_version": 1,
@@ -258,6 +264,9 @@ def make_run(
                 "test_coverage_regression_count": coverage_regression_count,
                 "benchmark_history_delta_count": benchmark_history_delta_count,
                 "benchmark_history_regression_count": benchmark_history_regression_count,
+                "benchmark_history_suite_design_non_comparison_ready_delta_count": 1 if readiness_suite_design_regression else 0,
+                "benchmark_history_suite_design_non_comparison_ready_regression_count": 1 if readiness_suite_design_regression else 0,
+                "benchmark_history_design_comparison_changed_delta_count": 1 if readiness_suite_design_regression else 0,
             },
             "deltas": [
                 {
@@ -288,6 +297,8 @@ def make_run(
                     "benchmark_history_blocked_delta": 0,
                     "benchmark_history_case_regression_delta": benchmark_case_regression_delta,
                     "benchmark_history_generation_flag_regression_delta": benchmark_flag_regression_delta,
+                    "benchmark_history_suite_design_non_comparison_ready_entries_delta": benchmark_suite_design_delta,
+                    "benchmark_history_design_comparison_changed_entries_delta": benchmark_design_change_delta,
                     "baseline_benchmark_history_readiness_requirement_status": baseline_benchmark_requirement_status,
                     "compared_benchmark_history_readiness_requirement_status": compared_benchmark_requirement_status,
                     "benchmark_history_readiness_requirement_status_changed": readiness_benchmark_regression,
@@ -425,6 +436,43 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_added_count, 1)
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_removed_count, 0)
             self.assertEqual(run.release_readiness_benchmark_requirement_failed_reason_mixed_delta_count, 0)
+
+    def test_summarize_registered_run_reads_suite_design_readiness_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = make_run(Path(tmp), "one", 1.0, readiness_trend="panel-changed", readiness_suite_design_regression=True)
+
+            run = summarize_registered_run(run_dir)
+            registry = build_run_registry([run_dir])
+
+            self.assertEqual(run.release_readiness_comparison_status, "benchmark-regressed")
+            self.assertEqual(run.release_readiness_benchmark_history_delta_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_history_regression_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_suite_design_delta_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_suite_design_regression_count, 1)
+            self.assertEqual(run.release_readiness_benchmark_design_change_delta_count, 1)
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_suite_design_non_comparison_ready_delta_count"],
+                1,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_suite_design_non_comparison_ready_regression_count"],
+                1,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["benchmark_history_design_comparison_changed_delta_count"],
+                1,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta"],
+                2,
+            )
+            self.assertEqual(
+                registry["release_readiness_delta_summary"]["max_abs_benchmark_history_design_comparison_changed_entries_delta"],
+                3,
+            )
+            leader = registry["release_readiness_delta_leaderboard"][0]
+            self.assertEqual(leader["benchmark_history_suite_design_non_comparison_ready_entries_delta"], 2)
+            self.assertEqual(leader["benchmark_history_design_comparison_changed_entries_delta"], 3)
 
     def test_summarize_registered_run_reads_benchmark_reason_removal(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -697,7 +745,15 @@ class RegistryTests(unittest.TestCase):
     def test_write_registry_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            run_dir = make_run(root, "one", 1.0, pair_reports=True, readiness_trend="improved", readiness_benchmark_regression=True)
+            run_dir = make_run(
+                root,
+                "one",
+                1.0,
+                pair_reports=True,
+                readiness_trend="improved",
+                readiness_benchmark_regression=True,
+                readiness_suite_design_regression=True,
+            )
             (run_dir / "experiment_card.html").write_text("<html></html>", encoding="utf-8")
             registry = build_run_registry([run_dir])
 
@@ -715,6 +771,9 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("release_readiness_ci_workflow_regression_reasons", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_test_coverage_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_history_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_benchmark_suite_design_delta_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_benchmark_suite_design_regression_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("release_readiness_benchmark_design_change_delta_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_requirement_status_change_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_requirement_exit_code_delta_max", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_benchmark_requirement_failed_reason_added_count", Path(outputs["csv"]).read_text(encoding="utf-8"))
@@ -744,9 +803,11 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("ci reasons=", html)
             self.assertIn("coverage regressions=0", html)
             self.assertIn("benchmark regressions=1", html)
+            self.assertIn("suite design deltas=1 regressions=1 changes=1", html)
             self.assertIn("benchmark req changes=1 exit max=1", html)
             self.assertIn("benchmark reasons +=1 -=0", html)
             self.assertIn("<div class=\"label\">Benchmark regressions</div>", html)
+            self.assertIn("<div class=\"label\">Benchmark suite-design</div>", html)
             self.assertIn("<div class=\"label\">Dataset snapshots</div>", html)
             self.assertIn("<div class=\"label\">Dedupe policies</div>", html)
             self.assertIn("Dataset Snapshot Summary", html)
@@ -756,6 +817,8 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<th>Benchmark history</th>", html)
             self.assertIn("case=+2", html)
             self.assertIn("flags=+1", html)
+            self.assertIn("suite=+2", html)
+            self.assertIn("design=+3", html)
             self.assertIn("req=pass -> fail exit=+1", html)
             self.assertIn("<th>Coverage</th>", html)
             self.assertIn("<div class=\"label\">Coverage regressions</div>", html)
@@ -765,6 +828,28 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("<div class=\"label\">Pair deltas</div>", html)
             self.assertIn("<div class=\"label\">Release readiness</div>", html)
             self.assertIn("../one/pair_batch/pair_generation_batch.json", html)
+
+    def test_register_runs_cli_prints_suite_design_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run_dir = make_run(root, "one", 1.0, readiness_trend="panel-changed", readiness_suite_design_regression=True)
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "register_runs.py"),
+                    str(run_dir),
+                    "--out-dir",
+                    str(root / "registry"),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertIn("release_readiness_benchmark_suite_design_delta_count=1", completed.stdout)
+            self.assertIn("release_readiness_benchmark_suite_design_regression_count=1", completed.stdout)
+            self.assertIn("release_readiness_benchmark_design_change_delta_count=1", completed.stdout)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

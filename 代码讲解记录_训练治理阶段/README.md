@@ -347,6 +347,9 @@
 428-v414-release-readiness-comparison-suite-design.md
  -> v414 code explanation: compare benchmark-history suite-design readiness across release readiness reports and expose deltas in artifacts and CLI stdout.
 
+429-v415-registry-suite-design-readiness-deltas.md
+ -> v415 code explanation: carry release-readiness comparison suite-design deltas into registry summaries, leaderboards, rendered outputs, and CLI stdout.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>v415 registry suite design readiness deltas evidence</title>
+  <style>
+    :root { --ink:#172033; --muted:#5b6475; --line:#d8dee9; --panel:#fff; --page:#f5f5f0; --accent:#0f766e; --warn:#b45309; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.55; }
+    header { padding:28px 36px 20px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0; color:var(--muted); }
+    main { padding:20px 36px 32px; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; margin:0 0 16px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:14px; background:#fbfcfd; min-height:96px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-weight:700; overflow-wrap:anywhere; }
+    table { width:100%; border-collapse:collapse; min-width:760px; }
+    th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f7; padding:2px 5px; border-radius:5px; }
+    .pass { color:var(--accent); font-weight:700; }
+    .warn { color:var(--warn); font-weight:700; }
+    footer { padding:0 36px 28px; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>v415 Registry Suite Design Readiness Deltas</h1>
+    <p>Release-readiness comparison suite-design deltas are now indexed by registry rows, summaries, leaderboards, rendered outputs, and CLI stdout.</p>
+  </header>
+  <main>
+    <section class="grid">
+      <div class="card"><div class="label">Registry summary</div><div class="value"><code>benchmark_history_suite_design_non_comparison_ready_regression_count</code></div></div>
+      <div class="card"><div class="label">Run summary</div><div class="value"><code>release_readiness_benchmark_suite_design_regression_count</code></div></div>
+      <div class="card"><div class="label">Leaderboard delta</div><div class="value"><code>benchmark_history_suite_design_non_comparison_ready_entries_delta</code></div></div>
+      <div class="card"><div class="label">Design change</div><div class="value"><code>benchmark_history_design_comparison_changed_entries_delta</code></div></div>
+    </section>
+
+    <section>
+      <h2>Evidence Flow</h2>
+      <table>
+        <thead><tr><th>Layer</th><th>v415 behavior</th><th>Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td>Delta rows</td><td><code>collect_release_readiness_delta_rows()</code> copies suite-design delta fields from comparison reports.</td><td>Registry rows keep the same prompt-suite boundary as release readiness comparison.</td></tr>
+          <tr><td>Summary</td><td><code>release_readiness_delta_summary()</code> counts suite-design deltas, regressions, design changes, and max absolute deltas.</td><td>Portfolio-level registry cards can tell whether comparison history has suite-design drift.</td></tr>
+          <tr><td>Run record</td><td><code>RegisteredRun</code> carries short suite-design counters for CSV/search/rendering.</td><td>The registry does not need to embed the full comparison JSON to remain useful.</td></tr>
+          <tr><td>HTML</td><td>Registry stat cards, run cells, and readiness delta leaderboard show suite/design values.</td><td>Human review can find suite-design risk from the registry page.</td></tr>
+          <tr><td>CLI</td><td><code>scripts/register_runs.py</code> prints suite-design summary counters.</td><td>Automation logs expose the carryover without opening registry JSON.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <table>
+        <thead><tr><th>Command</th><th>Status</th><th>Coverage</th></tr></thead>
+        <tbody>
+          <tr><td><code>python -m pytest tests\test_registry.py -q</code></td><td class="pass">18 passed</td><td>Run summary, aggregation, leaderboard, rendered fields, CLI stdout.</td></tr>
+          <tr><td><code>python -m py_compile ...</code></td><td class="pass">passed</td><td>Modified registry modules, script, and tests compile cleanly.</td></tr>
+          <tr><td><code>python -m pytest -q</code></td><td class="pass">705 passed</td><td>Full repository regression gate.</td></tr>
+          <tr><td><code>scripts\check_source_encoding.py</code></td><td class="pass">status=pass</td><td>Encoding and syntax hygiene gate, 319 clean sources.</td></tr>
+          <tr><td><code>git diff --check</code></td><td class="pass">passed</td><td>No whitespace errors in the working diff.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>This release does not change model behavior or define a new suite-design policy. It indexes existing comparison evidence in the registry so follow-up maturity layers can consume it later.</p>
+    </section>
+  </main>
+  <footer>Archive: d/415. Screenshot target: 图片/01-registry-suite-design-readiness-deltas-evidence.png.</footer>
+</body>
+</html>
