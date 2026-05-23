@@ -45,6 +45,10 @@ def write_benchmark_scorecard_decision_csv(report: dict[str, Any], path: str | P
         "generation_quality_flag_relation",
         "eval_suite_coverage_status",
         "eval_suite_comparison_status",
+        "eval_suite_design_coverage_status",
+        "eval_suite_design_comparison_status",
+        "eval_suite_design_duplicate_seed_count",
+        "eval_suite_design_expected_behavior_complete",
         "case_regression_count",
         "case_improvement_count",
         "blockers",
@@ -98,6 +102,7 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
         f"- Review candidates: `{summary.get('review_candidate_count')}`",
         f"- Blocked candidates: `{summary.get('blocked_candidate_count')}`",
         f"- Non comparison-ready candidates: `{summary.get('non_comparison_ready_candidate_count')}`",
+        f"- Non design-ready candidates: `{summary.get('non_design_comparison_ready_candidate_count')}`",
         f"- Dominant blocker category: `{summary.get('dominant_blocker_category')}`",
         f"- Dominant review category: `{summary.get('dominant_review_category')}`",
         f"- Remediation plan count: `{summary.get('remediation_plan_count')}`",
@@ -113,8 +118,8 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
         "",
         "## Candidate Evaluations",
         "",
-        "| Run | Relation | Rubric | Eval Compare | Overall Delta | Flag Delta | Case Regressions | Blockers | Blocker Categories | Review Items | Review Categories |",
-        "| --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- | --- | --- |",
+        "| Run | Relation | Rubric | Eval Compare | Design Compare | Overall Delta | Flag Delta | Case Regressions | Blockers | Blocker Categories | Review Items | Review Categories |",
+        "| --- | --- | ---: | --- | --- | ---: | ---: | ---: | --- | --- | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("candidate_evaluations")):
         lines.append(
@@ -125,6 +130,7 @@ def render_benchmark_scorecard_decision_markdown(report: dict[str, Any]) -> str:
                     _md(row.get("decision_relation")),
                     _md(row.get("rubric_avg_score")),
                     _md(row.get("eval_suite_comparison_status")),
+                    _md(row.get("eval_suite_design_comparison_status")),
                     _md(_fmt_signed(row.get("overall_score_delta"))),
                     _md(_fmt_signed(row.get("generation_quality_total_flags_delta"))),
                     _md(row.get("case_regression_count")),
@@ -190,6 +196,7 @@ def render_benchmark_scorecard_decision_html(report: dict[str, Any]) -> str:
         ("Review", summary.get("review_candidate_count")),
         ("Blocked", summary.get("blocked_candidate_count")),
         ("Eval compare review", summary.get("non_comparison_ready_candidate_count")),
+        ("Design compare review", summary.get("non_design_comparison_ready_candidate_count")),
         ("Top blocker", summary.get("dominant_blocker_category")),
         ("Top review", summary.get("dominant_review_category")),
         ("Threshold blocked", summary.get("threshold_blocked_candidate_count")),
@@ -254,6 +261,7 @@ def _candidate_table(report: dict[str, Any]) -> str:
             f"<td>{_e(_fmt(row.get('rubric_avg_score')))}<br><span>{_e(_fmt_signed(row.get('rubric_avg_score_delta')))}</span></td>"
             f"<td>{_e(_fmt(row.get('overall_score')))}<br><span>{_e(_fmt_signed(row.get('overall_score_delta')))}</span></td>"
             f"<td>{_e(row.get('eval_suite_comparison_status') or 'missing')}<br><span>{_e(row.get('eval_suite_coverage_status') or 'missing')}</span></td>"
+            f"<td>{_e(row.get('eval_suite_design_comparison_status') or 'missing')}<br><span>{_e(row.get('eval_suite_design_coverage_status') or 'missing')}</span></td>"
             f"<td>{_e(_fmt(row.get('generation_quality_total_flags')))}<br><span>{_e(_fmt_signed(row.get('generation_quality_total_flags_delta')))}</span></td>"
             f"<td>{_e(row.get('case_regression_count'))} regressed / {_e(row.get('case_improvement_count'))} improved</td>"
             f"<td>{_e('; '.join(_string_list(row.get('blockers'))))}</td>"
@@ -264,7 +272,7 @@ def _candidate_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section class="panel"><h2>Candidate Evaluations</h2><table><thead><tr>'
-        "<th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Eval Compare</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Blocker Categories</th><th>Review Items</th><th>Review Categories</th>"
+        "<th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Eval Compare</th><th>Design Compare</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Blocker Categories</th><th>Review Items</th><th>Review Categories</th>"
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></section>"

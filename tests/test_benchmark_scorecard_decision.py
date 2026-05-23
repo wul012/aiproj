@@ -30,6 +30,7 @@ def make_comparison(
     *,
     clean_candidate: bool = False,
     candidate_eval_status: str | None = "pass",
+    candidate_design_status: str | None = "pass",
     extra_threshold_candidate: bool = False,
 ) -> Path:
     comparison_path = root / "comparison" / "benchmark_scorecard_comparison.json"
@@ -49,6 +50,10 @@ def make_comparison(
             "generation_quality_worst_case": "summary-short",
             "eval_suite_coverage_status": "pass",
             "eval_suite_comparison_status": "pass",
+            "eval_suite_design_coverage_status": "pass",
+            "eval_suite_design_comparison_status": "pass",
+            "eval_suite_design_duplicate_seed_count": 0,
+            "eval_suite_design_expected_behavior_complete": True,
         },
         {
             "name": "candidate",
@@ -61,6 +66,10 @@ def make_comparison(
             "generation_quality_worst_case": "summary-short" if clean_candidate else "qa-basic",
             "eval_suite_coverage_status": "pass" if candidate_eval_status else None,
             "eval_suite_comparison_status": candidate_eval_status,
+            "eval_suite_design_coverage_status": "pass" if candidate_design_status else None,
+            "eval_suite_design_comparison_status": candidate_design_status,
+            "eval_suite_design_duplicate_seed_count": 0 if candidate_design_status in {None, "pass"} else 1,
+            "eval_suite_design_expected_behavior_complete": True,
         },
     ]
     deltas = [
@@ -102,6 +111,10 @@ def make_comparison(
                 "generation_quality_worst_case": "qa-basic",
                 "eval_suite_coverage_status": "pass",
                 "eval_suite_comparison_status": "pass",
+                "eval_suite_design_coverage_status": "pass",
+                "eval_suite_design_comparison_status": "pass",
+                "eval_suite_design_duplicate_seed_count": 0,
+                "eval_suite_design_expected_behavior_complete": True,
             }
         )
         deltas.append(
@@ -143,8 +156,12 @@ def make_comparison(
             "generation_quality_dominant_flag_change_count": 0 if clean_candidate else 1,
             "case_regression_count": 0 if clean_candidate else 1,
             "baseline_eval_suite_comparison_status": "pass",
+            "baseline_eval_suite_design_comparison_status": "pass",
             "non_comparison_ready_count": 0 if candidate_eval_status in {None, "pass"} else 1,
             "non_comparison_ready_runs": [] if candidate_eval_status in {None, "pass"} else ["candidate"],
+            "non_design_comparison_ready_count": 0 if candidate_design_status in {None, "pass"} else 1,
+            "non_design_comparison_ready_runs": [] if candidate_design_status in {None, "pass"} else ["candidate"],
+            "design_comparison_changed_count": 0 if candidate_design_status in {None, "pass"} else 1,
         },
     }
     write_json(comparison_path, payload)
@@ -230,6 +247,30 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertEqual(report["summary"]["comparison_non_comparison_ready_runs"], ["candidate"])
             self.assertIn("not treat the selected scorecard as clean model-quality evidence", " ".join(report["recommendations"]))
 
+    def test_suite_design_non_ready_candidate_requires_review_without_blocking(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            comparison = make_comparison(Path(tmp), clean_candidate=True, candidate_design_status="warn")
+
+            report = build_benchmark_scorecard_decision(comparison, generated_at="2026-05-16T00:00:00Z")
+
+            self.assertEqual(report["decision_status"], "review")
+            self.assertEqual(report["recommended_action"], "review_generation_flags_and_case_deltas")
+            self.assertEqual(report["selected_run"]["name"], "candidate")
+            self.assertIn("suite-design comparison readiness is warn", report["selected_run"]["review_items"])
+            self.assertEqual(report["selected_run"]["eval_suite_design_comparison_status"], "warn")
+            self.assertEqual(report["selected_run"]["eval_suite_design_duplicate_seed_count"], 1)
+            self.assertEqual(report["summary"]["non_design_comparison_ready_candidate_count"], 1)
+            self.assertEqual(report["summary"]["non_design_comparison_ready_candidates"], ["candidate"])
+            self.assertEqual(report["summary"]["comparison_non_design_comparison_ready_runs"], ["candidate"])
+            self.assertEqual(report["summary"]["comparison_design_comparison_changed_count"], 1)
+            self.assertIn("suite_design_not_ready", report["summary"]["review_category_counts"])
+            self.assertEqual(report["summary"]["dominant_review_category"], "suite_design_not_ready")
+            self.assertEqual(report["remediation_plan"][0]["category"], "suite_design_not_ready")
+            self.assertEqual(report["remediation_plan"][0]["action_code"], "make_suite_design_comparison_ready")
+            recommendations = " ".join(report["recommendations"])
+            self.assertIn("prompt suite design is comparison-ready", recommendations)
+            self.assertIn("non-suite-design-ready runs", recommendations)
+
     def test_load_directory_and_write_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -246,6 +287,7 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertIn("benchmark_scorecard_decision", Path(outputs["json"]).name)
             self.assertIn("generation_quality_total_flags_delta", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("eval_suite_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
+            self.assertIn("eval_suite_design_comparison_status", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("blocker_categories", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("review_categories", Path(outputs["csv"]).read_text(encoding="utf-8"))
             remediation_csv = Path(outputs["remediation_csv"]).read_text(encoding="utf-8")
@@ -253,10 +295,12 @@ class BenchmarkScorecardDecisionTests(unittest.TestCase):
             self.assertIn("target_artifacts", remediation_csv)
             self.assertIn("## Candidate Evaluations", markdown)
             self.assertIn("Eval Compare", markdown)
+            self.assertIn("Design Compare", markdown)
             self.assertIn("Dominant blocker category", markdown)
             self.assertIn("Blocker Categories", markdown)
             self.assertIn("Remediation plan count", markdown)
             self.assertIn("Eval compare review", html)
+            self.assertIn("Design compare review", html)
             self.assertIn("Top blocker", html)
             self.assertIn("Blocker Categories", html)
             self.assertIn("Threshold blocked", html)

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v407 Benchmark Decision Suite Design Evidence</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5a6572;
+      --line: #d6dee6;
+      --panel: #ffffff;
+      --page: #f7f8f6;
+      --band: #edf3f7;
+      --accent: #145f8a;
+      --warn: #9b6500;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      padding: 34px 42px 24px;
+      background: var(--band);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p { margin: 0; color: var(--muted); }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 30px 42px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(28, 44, 54, 0.06);
+    }
+    .stat { padding: 15px 16px; min-height: 88px; }
+    .label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .value { font-weight: 700; font-size: 21px; color: var(--accent); overflow-wrap: anywhere; }
+    .panel { margin-top: 18px; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 11px 10px; text-align: left; vertical-align: top; }
+    th { background: #f0f4f7; color: #273640; font-weight: 700; }
+    code { font-family: Consolas, "Cascadia Mono", monospace; background: #edf2f4; border-radius: 4px; padding: 2px 5px; }
+    .ok { color: var(--accent); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    ul { margin: 0; padding-left: 20px; line-height: 1.75; }
+    @media (max-width: 760px) {
+      header { padding: 26px 22px 18px; }
+      main { padding: 20px 16px 30px; }
+      .stats { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v407 Benchmark Decision Suite Design</h1>
+    <p>把 scorecard comparison 的 suite-design readiness 传入 promotion decision，让题集设计不比较就绪的候选进入 review 和 remediation。</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="stat"><div class="label">Version</div><div class="value">v407</div></div>
+      <div class="stat"><div class="label">Decision signal</div><div class="value">suite design review</div></div>
+      <div class="stat"><div class="label">Remediation</div><div class="value">make_suite_design...</div></div>
+      <div class="stat"><div class="label">Targeted tests</div><div class="value">21 passed</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>Decision Contract</h2>
+      <table>
+        <thead><tr><th>Decision Field</th><th>New Role</th><th>Boundary</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>eval_suite_design_comparison_status</code></td>
+            <td>Candidate evaluation records the prompt-suite design comparison readiness.</td>
+            <td>If it is not <code>pass</code>, selected candidate requires review.</td>
+          </tr>
+          <tr>
+            <td><code>suite_design_not_ready</code></td>
+            <td>Dedicated review category for prompt-design readiness.</td>
+            <td>Separate from generic eval-suite comparison readiness.</td>
+          </tr>
+          <tr>
+            <td><code>non_design_comparison_ready_candidates</code></td>
+            <td>Summary-level list of candidates blocked from clean promotion evidence.</td>
+            <td>Decision remains review, not model-quality proof.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Remediation Contract</h2>
+      <table>
+        <thead><tr><th>Category</th><th>Action Code</th><th>Targets</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>suite_design_not_ready</code></td>
+            <td><code>make_suite_design_comparison_ready</code></td>
+            <td><code>eval_suite</code>, <code>benchmark_scorecard</code>, <code>benchmark_scorecard_comparison</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <ul>
+        <li><span class="ok">pass</span> py_compile for benchmark decision modules and tests.</li>
+        <li><span class="ok">pass</span> 21 targeted pytest cases covering decision, comparison, and scorecard handoff.</li>
+        <li><span class="warn">boundary</span> v407 adds promotion-decision review evidence, not model training or model-quality proof.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

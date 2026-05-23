@@ -34,6 +34,7 @@ BLOCKER_CATEGORY_PRIORITY = {
 }
 
 REVIEW_CATEGORY_PRIORITY = {
+    "suite_design_not_ready": 65,
     "eval_suite_not_ready": 60,
     "rubric_fail_regression": 50,
     "generation_quality_flag_regression": 40,
@@ -53,6 +54,7 @@ BLOCKER_REMEDIATION_ACTIONS = {
 }
 
 REVIEW_REMEDIATION_ACTIONS = {
+    "suite_design_not_ready": "Make the prompt-suite design comparison-ready before treating this decision as clean promotion evidence.",
     "eval_suite_not_ready": "Make the eval suite comparison-ready before treating this decision as clean promotion evidence.",
     "rubric_fail_regression": "Inspect newly failing rubric cases and decide whether the run needs retraining or prompt/data fixes.",
     "generation_quality_flag_regression": "Open the generation-quality report and inspect the prompts that increased flags.",
@@ -72,6 +74,7 @@ BLOCKER_REMEDIATION_METADATA = {
 }
 
 REVIEW_REMEDIATION_METADATA = {
+    "suite_design_not_ready": ("make_suite_design_comparison_ready", "review", "eval-artifact", ["eval_suite", "benchmark_scorecard", "benchmark_scorecard_comparison"]),
     "eval_suite_not_ready": ("make_eval_suite_comparison_ready", "review", "eval-artifact", ["eval_suite", "benchmark_scorecard_comparison"]),
     "rubric_fail_regression": ("inspect_rubric_failures", "review", "model-eval", ["benchmark_scorecard", "eval_suite"]),
     "generation_quality_flag_regression": ("inspect_generation_quality_flags", "review", "generation-quality", ["generation_quality"]),
@@ -195,6 +198,9 @@ def _evaluate_run(
     eval_comparison_status = run.get("eval_suite_comparison_status")
     if eval_comparison_status not in {None, "pass"}:
         review_items.append(f"eval-suite comparison readiness is {eval_comparison_status}")
+    suite_design_comparison_status = run.get("eval_suite_design_comparison_status")
+    if suite_design_comparison_status not in {None, "pass"}:
+        review_items.append(f"suite-design comparison readiness is {suite_design_comparison_status}")
     counts = case_counts.get(str(name), {"regressed": 0, "improved": 0})
     if counts.get("regressed"):
         review_items.append(f"{counts.get('regressed')} case regression(s)")
@@ -218,6 +224,10 @@ def _evaluate_run(
         "generation_quality_worst_case": run.get("generation_quality_worst_case"),
         "eval_suite_coverage_status": run.get("eval_suite_coverage_status"),
         "eval_suite_comparison_status": eval_comparison_status,
+        "eval_suite_design_coverage_status": run.get("eval_suite_design_coverage_status"),
+        "eval_suite_design_comparison_status": suite_design_comparison_status,
+        "eval_suite_design_duplicate_seed_count": _int_or_none(run.get("eval_suite_design_duplicate_seed_count")),
+        "eval_suite_design_expected_behavior_complete": run.get("eval_suite_design_expected_behavior_complete"),
         "case_regression_count": int(counts.get("regressed") or 0),
         "case_improvement_count": int(counts.get("improved") or 0),
         "blockers": blockers,
@@ -271,6 +281,7 @@ def _summary(
     nonbaseline = [row for row in evaluations if not row.get("is_baseline")]
     comparison_summary = _dict(comparison.get("summary"))
     non_ready = [row for row in nonbaseline if row.get("eval_suite_comparison_status") not in {None, "pass"}]
+    non_design_ready = [row for row in nonbaseline if row.get("eval_suite_design_comparison_status") not in {None, "pass"}]
     threshold_blocks = _threshold_blocks(nonbaseline, min_rubric_score)
     threshold_profile = _threshold_profile(threshold_blocks)
     blocker_category_counts = _category_counts(nonbaseline, "blocker_categories")
@@ -284,6 +295,8 @@ def _summary(
         "blocked_candidate_count": sum(1 for row in nonbaseline if row.get("blockers")),
         "non_comparison_ready_candidate_count": len(non_ready),
         "non_comparison_ready_candidates": [row.get("name") for row in non_ready],
+        "non_design_comparison_ready_candidate_count": len(non_design_ready),
+        "non_design_comparison_ready_candidates": [row.get("name") for row in non_design_ready],
         "selected_name": None if selected is None else selected.get("name"),
         "selected_relation": None if selected is None else selected.get("decision_relation"),
         "selected_rubric_avg_score": None if selected is None else selected.get("rubric_avg_score"),
@@ -293,7 +306,15 @@ def _summary(
         "comparison_non_comparison_ready_runs": comparison_summary.get("non_comparison_ready_runs")
         if isinstance(comparison_summary.get("non_comparison_ready_runs"), list)
         else [],
+        "comparison_non_design_comparison_ready_count": comparison_summary.get("non_design_comparison_ready_count"),
+        "comparison_non_design_comparison_ready_runs": comparison_summary.get("non_design_comparison_ready_runs")
+        if isinstance(comparison_summary.get("non_design_comparison_ready_runs"), list)
+        else [],
         "comparison_baseline_eval_suite_comparison_status": comparison_summary.get("baseline_eval_suite_comparison_status"),
+        "comparison_baseline_eval_suite_design_comparison_status": comparison_summary.get(
+            "baseline_eval_suite_design_comparison_status"
+        ),
+        "comparison_design_comparison_changed_count": comparison_summary.get("design_comparison_changed_count"),
         "comparison_generation_quality_flag_regression_count": comparison_summary.get("generation_quality_flag_regression_count"),
         "comparison_generation_quality_dominant_flag_change_count": comparison_summary.get("generation_quality_dominant_flag_change_count"),
         "blocker_category_counts": blocker_category_counts,
@@ -347,6 +368,8 @@ def _categorize_review_items(review_items: list[str]) -> list[str]:
             categories.append("generation_quality_case_shift")
         elif text.startswith("eval-suite comparison readiness is"):
             categories.append("eval_suite_not_ready")
+        elif text.startswith("suite-design comparison readiness is"):
+            categories.append("suite_design_not_ready")
         elif text.endswith("case regression(s)"):
             categories.append("case_regression")
         else:
@@ -507,6 +530,8 @@ def _recommendations(
         recommendations.append("Selected review item(s): " + "; ".join(_string_list(selected.get("review_items"))) + ".")
     if selected and selected.get("eval_suite_comparison_status") not in {None, "pass"}:
         recommendations.append("Do not treat the selected scorecard as clean model-quality evidence until its eval suite is comparison-ready.")
+    if selected and selected.get("eval_suite_design_comparison_status") not in {None, "pass"}:
+        recommendations.append("Do not treat the selected scorecard as clean model-quality evidence until its prompt suite design is comparison-ready.")
     if any(row.get("blockers") for row in evaluations if not row.get("is_baseline")):
         recommendations.append("Blocked candidates should stay in the comparison as evidence for why they were not promoted.")
     summary = _dict(comparison.get("summary"))
@@ -515,6 +540,11 @@ def _recommendations(
         recommendations.append("Scorecard comparison includes non-comparison-ready eval suites: " + ", ".join(non_ready) + ".")
     if summary.get("baseline_eval_suite_comparison_status") not in {None, "pass"}:
         recommendations.append("Baseline eval suite is not comparison-ready; choose a cleaner baseline before promotion decisions.")
+    non_design_ready = _string_list(summary.get("non_design_comparison_ready_runs"))
+    if non_design_ready:
+        recommendations.append("Scorecard comparison includes non-suite-design-ready runs: " + ", ".join(non_design_ready) + ".")
+    if summary.get("baseline_eval_suite_design_comparison_status") not in {None, "pass"}:
+        recommendations.append("Baseline prompt-suite design is not comparison-ready; choose a cleaner baseline before promotion decisions.")
     if _int(summary.get("generation_quality_flag_regression_count")):
         recommendations.append("At least one compared scorecard increased generation-quality flags; inspect raw generation-quality reports.")
     if _int(summary.get("case_regression_count")):

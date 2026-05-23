@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 406 carries eval suite design readiness into benchmark scorecards and scorecard comparisons, so checkpoint score deltas are marked provisional when the prompt suite itself is not design-comparison-ready.
+Version 407 carries scorecard suite-design readiness into benchmark scorecard promotion decisions, so non-design-ready candidates require review and get a dedicated remediation action before promotion.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -739,6 +739,16 @@ Version 406 carries eval suite design readiness into benchmark scorecards and sc
 - Scorecard comparison rows, CSV, Markdown, HTML, deltas, and recommendations carry suite-design readiness so cross-run deltas become provisional when prompt design is not comparison-ready.
 - Tests cover design-readiness score caps, summary/render fields, comparison changed flags, non-design-ready run summaries, and artifact CSV contracts.
 - Archived benchmark suite-design scorecard evidence in `d/406`.
+
+## Latest v407 checkpoint
+
+- Benchmark scorecard decisions now read `eval_suite_design_*` fields from scorecard comparison runs.
+- Candidates with `eval_suite_design_comparison_status != pass` enter review with a `suite-design comparison readiness is ...` item rather than being treated as clean promotion evidence.
+- Decision summaries expose non-design-ready candidate counts, comparison-level non-design-ready runs, baseline design readiness, and design comparison changed counts.
+- Remediation taxonomy adds `suite_design_not_ready` with action code `make_suite_design_comparison_ready`.
+- Decision CSV, Markdown, and HTML now render design comparison status beside eval comparison status.
+- Tests cover non-design-ready candidate review, remediation priority, CSV columns, and Markdown/HTML output.
+- Archived benchmark decision suite-design evidence in `d/407`.
 
 ## Latest v405 checkpoint
 
@@ -4800,7 +4810,7 @@ The registry pair delta leader layer aggregates pair batch case deltas across ru
 
 The maturity summary layer summarizes v1-v48 into capability areas, phase coverage, registry context, and recommendations so future work can move by project maturity instead of tiny report-link increments.
 
-The benchmark scorecard layer consolidates eval suite coverage, suite-design readiness, generation quality, pair consistency, pair delta stability, evidence completeness, and registry context into one run-level scorecard.
+The benchmark scorecard layer consolidates eval suite coverage, suite-design readiness, generation quality, pair consistency, pair delta stability, evidence completeness, registry context, comparison readiness, and promotion-decision remediation into one run-level review chain.
 
 The benchmark scorecard drilldown layer groups case-level evidence by task type and difficulty, exports those group scores, and points reviewers at the weakest benchmark slices.
 

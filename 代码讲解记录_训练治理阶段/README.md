@@ -323,6 +323,9 @@
 420-v406-benchmark-scorecard-suite-design-readiness.md
  -> v406 code explanation: carry eval suite design readiness into benchmark scorecards and scorecard comparisons.
 
+421-v407-benchmark-decision-suite-design-remediation.md
+ -> v407 code explanation: carry suite-design readiness into benchmark scorecard promotion decisions and remediation.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
