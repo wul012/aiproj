@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiniGPT v402 Eval Suite Design Coverage</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #202a33;
+      --muted: #5d6772;
+      --panel: #ffffff;
+      --line: #d9dcd4;
+      --accent: #0f766e;
+      --ok: #166534;
+      --warn: #9a3412;
+      --code: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 "Segoe UI", Arial, sans-serif;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 32px 56px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); margin: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .stat, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .stat strong {
+      display: block;
+      color: var(--code);
+      font-size: 24px;
+      margin-top: 4px;
+    }
+    section { margin-top: 16px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th { background: #e8eeeb; }
+    code {
+      color: var(--code);
+      background: #edf0ed;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    pre {
+      margin: 0;
+      overflow: auto;
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      main { padding: 24px 18px 40px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">MiniGPT v402 evidence</div>
+      <h1>Benchmark smoke now carries suite-design coverage</h1>
+      <p>
+        v402 summarizes the prompt suite before generation begins. The tiny standard benchmark smoke
+        now records task-type, difficulty, tag, token-budget, and seed coverage beside model output evidence.
+      </p>
+    </header>
+
+    <div class="grid">
+      <div class="stat"><span>standard cases</span><strong>10</strong></div>
+      <div class="stat"><span>task types</span><strong>10</strong></div>
+      <div class="stat"><span>difficulties</span><strong>3</strong></div>
+      <div class="stat"><span>comparison status</span><strong class="ok">pass</strong></div>
+    </div>
+
+    <section>
+      <h2>Design Summary Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Example</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>task_type_counts</code></td><td><code>continuation=1, qa=1, ...</code></td><td>Shows task diversity before scorecard interpretation.</td></tr>
+          <tr><td><code>difficulty_counts</code></td><td><code>easy=2, medium=5, hard=3</code></td><td>Confirms repeated comparison includes hard cases.</td></tr>
+          <tr><td><code>tag_count</code></td><td><code>18+</code></td><td>Checks that prompts cover multiple evaluation concepts.</td></tr>
+          <tr><td><code>min/max_new_tokens</code></td><td><code>4 / 4</code></td><td>Records the CPU-smoke cap applied to the suite.</td></tr>
+          <tr><td><code>duplicate_seed_count</code></td><td><code>0</code></td><td>Protects deterministic case diversity.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Smoke Summary Lines</h2>
+      <pre>suite_design_case_count=10
+suite_design_task_type_count=10
+suite_design_difficulty_count=3
+suite_design_tag_count=18
+suite_design_coverage_status=pass
+suite_design_comparison_status=pass
+suite_design_min_new_tokens=4
+suite_design_max_new_tokens=4</pre>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>
+        This is benchmark-input evidence. It does not claim model quality by itself; it says the suite
+        is representative enough for later repeated checkpoint comparison.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

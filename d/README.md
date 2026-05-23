@@ -314,6 +314,9 @@ d/400/解释/说明.md
 d/401/图片
 d/401/解释/说明.md
  -> v401 CI wrapper benchmark-history summary 的运行截图和解释
+d/402/图片
+d/402/解释/说明.md
+ -> v402 eval suite design coverage 的运行截图和解释
 ```
 
 写入规则：

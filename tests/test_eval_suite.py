@@ -20,6 +20,7 @@ from minigpt.eval_suite import (
     load_prompt_cases,
     write_eval_suite_outputs,
 )
+from minigpt.eval_suite_design import summarize_prompt_suite_design
 from minigpt import eval_suite
 from minigpt import standard_zh_prompt_suite
 from minigpt import eval_suite_artifacts
@@ -165,6 +166,39 @@ class EvalSuiteTests(unittest.TestCase):
         self.assertEqual(coverage["missing_comparison_difficulties"], [])
         self.assertGreaterEqual(coverage["task_type_count"], 8)
         self.assertIn("safety-boundary", coverage["observed_task_types"])
+
+    def test_prompt_suite_design_summary_tracks_standard_coverage(self) -> None:
+        suite = load_builtin_prompt_suite("standard-zh")
+
+        summary = summarize_prompt_suite_design(suite)
+
+        self.assertEqual(summary["suite_name"], "minigpt-standard-zh-benchmark")
+        self.assertEqual(summary["case_count"], 10)
+        self.assertEqual(summary["coverage_status"], "pass")
+        self.assertEqual(summary["comparison_status"], "pass")
+        self.assertEqual(summary["task_type_count"], 10)
+        self.assertEqual(summary["difficulty_count"], 3)
+        self.assertGreaterEqual(summary["tag_count"], 8)
+        self.assertEqual(summary["duplicate_seed_count"], 0)
+        self.assertTrue(summary["all_cases_have_expected_behavior"])
+        self.assertTrue(summary["all_cases_have_tags"])
+        self.assertIn("safety-boundary", summary["observed_task_types"])
+        self.assertEqual(summary["missing_recommended_task_types"], [])
+        self.assertEqual(summary["missing_comparison_difficulties"], [])
+
+    def test_prompt_suite_design_summary_warns_for_narrow_suite(self) -> None:
+        suite = PromptSuite(
+            name="narrow",
+            cases=(PromptCase("one", "hi", task_type="qa", difficulty="easy", tags=("qa",)),),
+        )
+
+        summary = summarize_prompt_suite_design(suite)
+
+        self.assertEqual(summary["coverage_status"], "warn")
+        self.assertEqual(summary["comparison_status"], "warn")
+        self.assertIn("continuation", summary["missing_recommended_task_types"])
+        self.assertIn("hard", summary["missing_comparison_difficulties"])
+        self.assertTrue(summary["blockers"])
 
     def test_write_eval_suite_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

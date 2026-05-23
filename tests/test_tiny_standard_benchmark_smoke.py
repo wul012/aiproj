@@ -25,6 +25,9 @@ class TinyStandardBenchmarkSmokeTests(unittest.TestCase):
         self.assertEqual(payload["suite_version"], "2-cap7")
         self.assertEqual(len(payload["cases"]), 10)
         self.assertTrue(all(case["max_new_tokens"] == 7 for case in payload["cases"]))
+        self.assertEqual(payload["design_summary"]["coverage_status"], "pass")
+        self.assertEqual(payload["design_summary"]["comparison_status"], "pass")
+        self.assertEqual(payload["design_summary"]["max_new_tokens"], 7)
         corpus = build_tiny_corpus(payload)
         self.assertIn("Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.", corpus)
         self.assertIn(payload["cases"][0]["prompt"], corpus)
@@ -37,6 +40,16 @@ class TinyStandardBenchmarkSmokeTests(unittest.TestCase):
                 "issue_count": 0,
                 "run_dir": "runs/demo",
                 "suite_path": "runs/demo-suite.json",
+                "suite_design": {
+                    "case_count": 10,
+                    "task_type_count": 10,
+                    "difficulty_count": 3,
+                    "tag_count": 18,
+                    "coverage_status": "pass",
+                    "comparison_status": "pass",
+                    "min_new_tokens": 4,
+                    "max_new_tokens": 4,
+                },
                 "artifacts": {"checkpoint_exists": True},
                 "training": {"best_val_loss": 1.2, "final_val_loss": 1.4},
                 "eval_suite": {
@@ -63,6 +76,9 @@ class TinyStandardBenchmarkSmokeTests(unittest.TestCase):
         )
 
         self.assertIn("status=pass", text)
+        self.assertIn("suite_design_case_count=10", text)
+        self.assertIn("suite_design_comparison_status=pass", text)
+        self.assertIn("suite_design_max_new_tokens=4", text)
         self.assertIn("eval_suite_case_count=10", text)
         self.assertIn("generation_quality_total_flags=3", text)
         self.assertIn("pair_batch_case_count=10", text)
@@ -111,6 +127,10 @@ class TinyStandardBenchmarkSmokeTests(unittest.TestCase):
             self.assertEqual(summary["status"], "pass")
             self.assertEqual(summary["decision"], "evidence-ready")
             self.assertEqual(summary["eval_suite"]["case_count"], 10)
+            self.assertEqual(summary["suite_design"]["case_count"], 10)
+            self.assertEqual(summary["suite_design"]["coverage_status"], "pass")
+            self.assertEqual(summary["suite_design"]["comparison_status"], "pass")
+            self.assertEqual(summary["suite_design"]["max_new_tokens"], 4)
             self.assertEqual(summary["eval_suite"]["coverage_status"], "pass")
             self.assertEqual(summary["eval_suite"]["comparison_status"], "pass")
             self.assertTrue(summary["artifacts"]["checkpoint_exists"])
@@ -133,6 +153,7 @@ class TinyStandardBenchmarkSmokeTests(unittest.TestCase):
             self.assertTrue((out_dir / "run" / "pair_batch" / "pair_generation_batch.html").is_file())
             self.assertTrue((out_dir / "run" / "benchmark-scorecard" / "benchmark_scorecard.json").is_file())
             self.assertIn("pair_same_checkpoint_baseline=True", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("suite_design_comparison_status=pass", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("scorecard_overall_status=", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("summary_json=", completed.stdout)
             self.assertIn("command_pair_batch=pass", completed.stdout)

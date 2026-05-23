@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.eval_suite import load_builtin_prompt_suite  # noqa: E402
+from minigpt.eval_suite_design import summarize_prompt_suite_design  # noqa: E402
 from minigpt.report_utils import as_dict, list_of_dicts  # noqa: E402
 
 
@@ -205,13 +206,15 @@ def build_capped_prompt_suite_payload(suite_name: str, case_token_cap: int) -> d
         payload = case.to_dict()
         payload["max_new_tokens"] = min(int(payload["max_new_tokens"]), case_token_cap)
         cases.append(payload)
-    return {
+    payload = {
         "suite_name": suite.name,
         "suite_version": f"{suite.version}-cap{case_token_cap}",
         "description": f"{suite.description} Token-capped for CPU smoke verification.",
         "language": suite.language,
         "cases": cases,
     }
+    payload["design_summary"] = summarize_prompt_suite_design(payload)
+    return payload
 
 
 def build_tiny_corpus(suite_payload: dict[str, Any]) -> str:
@@ -273,6 +276,7 @@ def build_summary(
         "run_dir": str(run_dir),
         "suite_path": str(suite_path),
         "corpus_path": str(corpus_path),
+        "suite_design": as_dict(read_json(suite_path).get("design_summary")),
         "commands": command_results,
         "artifacts": artifacts,
         "training": training_summary(train_history),
@@ -386,6 +390,7 @@ def read_json(path: Path) -> dict[str, Any]:
 def render_summary(summary: dict[str, Any]) -> str:
     training = as_dict(summary.get("training"))
     eval_suite = as_dict(summary.get("eval_suite"))
+    suite_design = as_dict(summary.get("suite_design"))
     quality = as_dict(summary.get("generation_quality"))
     pair_batch = as_dict(summary.get("pair_batch"))
     scorecard = as_dict(summary.get("benchmark_scorecard"))
@@ -395,6 +400,14 @@ def render_summary(summary: dict[str, Any]) -> str:
         ("issue_count", summary.get("issue_count")),
         ("run_dir", summary.get("run_dir")),
         ("suite_path", summary.get("suite_path")),
+        ("suite_design_case_count", suite_design.get("case_count")),
+        ("suite_design_task_type_count", suite_design.get("task_type_count")),
+        ("suite_design_difficulty_count", suite_design.get("difficulty_count")),
+        ("suite_design_tag_count", suite_design.get("tag_count")),
+        ("suite_design_coverage_status", suite_design.get("coverage_status")),
+        ("suite_design_comparison_status", suite_design.get("comparison_status")),
+        ("suite_design_min_new_tokens", suite_design.get("min_new_tokens")),
+        ("suite_design_max_new_tokens", suite_design.get("max_new_tokens")),
         ("checkpoint_exists", as_dict(summary.get("artifacts")).get("checkpoint_exists")),
         ("eval_suite_case_count", eval_suite.get("case_count")),
         ("eval_suite_coverage_status", eval_suite.get("coverage_status")),
