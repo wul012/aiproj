@@ -40,6 +40,9 @@ def make_portfolio(
     ci_order_regression_count: int = 0,
     ci_regression_reasons: list[str] | None = None,
     coverage_regression_count: int = 0,
+    suite_design_regression_count: int = 0,
+    suite_design_delta_count: int = 0,
+    design_change_delta_count: int = 0,
     relative_artifacts: bool = False,
     missing_artifacts: set[str] | None = None,
 ) -> Path:
@@ -105,6 +108,11 @@ def make_portfolio(
                     "release_readiness_test_coverage_status_changed_count": 1 if coverage_regression_count else 0,
                     "release_readiness_max_test_coverage_percent_delta": 8.5 if coverage_regression_count else 0,
                     "release_readiness_max_test_coverage_gap_delta": 3 if coverage_regression_count else 0,
+                    "release_readiness_benchmark_suite_design_delta_count": suite_design_delta_count,
+                    "release_readiness_benchmark_suite_design_regression_count": suite_design_regression_count,
+                    "release_readiness_benchmark_design_change_delta_count": design_change_delta_count,
+                    "release_readiness_max_benchmark_suite_design_delta": 2 if suite_design_regression_count else 0,
+                    "release_readiness_max_benchmark_design_change_delta": 3 if design_change_delta_count else 0,
                     "request_history_status": "pass",
                 },
             },
@@ -216,6 +224,8 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertEqual(report["summary"]["maturity_ci_regression_names"], [])
             self.assertEqual(report["summary"]["maturity_coverage_regression_count"], 0)
             self.assertEqual(report["summary"]["maturity_coverage_regression_names"], [])
+            self.assertEqual(report["summary"]["maturity_suite_design_regression_count"], 0)
+            self.assertEqual(report["summary"]["maturity_suite_design_regression_names"], [])
             self.assertEqual(report["summary"]["review_action_count"], 4)
             self.assertEqual(report["summary"]["blocker_action_count"], 0)
             self.assertEqual(report["summary"]["best_score_name"], "candidate")
@@ -347,6 +357,45 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("CI workflow regressions", " ".join(report["recommendations"]))
             self.assertIn("ci_failed_checks_increased:1", " ".join(report["recommendations"]))
 
+    def test_best_scoring_suite_design_regressed_portfolio_blocks_promotion(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_portfolio(root, "baseline", overall_score=82, rubric_score=80, final_val_loss=1.2, best_val_loss=1.1)
+            candidate = make_portfolio(
+                root,
+                "candidate",
+                overall_score=92,
+                rubric_score=88,
+                final_val_loss=0.9,
+                best_val_loss=0.88,
+                maturity_status="review",
+                maturity_release_trend="benchmark-regressed",
+                suite_design_delta_count=1,
+                suite_design_regression_count=1,
+                design_change_delta_count=1,
+            )
+
+            report = build_training_portfolio_comparison([baseline, candidate], names=["base", "candidate"], baseline="base")
+
+            self.assertEqual(report["summary"]["best_score_name"], "candidate")
+            self.assertEqual(report["summary"]["best_score_maturity_status"], "review")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_trend"], "benchmark-regressed")
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_benchmark_suite_design_regression_count"], 1)
+            self.assertEqual(report["summary"]["best_score_maturity_release_readiness_benchmark_design_change_delta_count"], 1)
+            self.assertEqual(report["summary"]["maturity_suite_design_regression_count"], 1)
+            self.assertEqual(report["summary"]["maturity_suite_design_regression_names"], ["candidate"])
+            self.assertEqual(report["summary"]["review_action_count"], 1)
+            self.assertEqual(report["summary"]["blocker_action_count"], 1)
+            self.assertEqual(report["review_actions"][0]["reason"], "best_score_suite_design_regressed")
+            self.assertEqual(report["review_actions"][0]["severity"], "blocker")
+            self.assertEqual(report["review_actions"][0]["evidence"]["suite_design_regression_count"], 1)
+            self.assertEqual(report["review_actions"][0]["evidence"]["design_change_delta_count"], 1)
+            candidate_delta = next(row for row in report["baseline_deltas"] if row["name"] == "candidate")
+            self.assertEqual(candidate_delta["maturity_release_readiness_benchmark_suite_design_regression_delta"], 1)
+            self.assertEqual(candidate_delta["maturity_release_readiness_benchmark_design_change_delta"], 1)
+            self.assertIn("release-readiness suite-design regressed", candidate_delta["explanation"])
+            self.assertIn("suite-design regressions", " ".join(report["recommendations"]))
+
     def test_build_comparison_resolves_relative_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -385,12 +434,17 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
                 "maturity_release_readiness_ci_workflow_regression_reason_counts",
                 Path(outputs["csv"]).read_text(encoding="utf-8"),
             )
+            self.assertIn(
+                "maturity_release_readiness_benchmark_suite_design_regression_count",
+                Path(outputs["csv"]).read_text(encoding="utf-8"),
+            )
             self.assertIn("## Artifact Coverage", markdown)
             self.assertIn("Maturity review portfolios", markdown)
             self.assertIn("Maturity CI regressions", markdown)
             self.assertIn("Maturity CI regression reasons", markdown)
             self.assertIn("ci_failed_checks_increased:1", markdown)
             self.assertIn("Maturity coverage regressions", markdown)
+            self.assertIn("Maturity suite-design regressions", markdown)
             self.assertIn("Best score release readiness trend", markdown)
             self.assertIn("## Review Actions", markdown)
             self.assertIn("Best score maturity", markdown)
@@ -400,6 +454,7 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
             self.assertIn("CI regression reasons", html)
             self.assertIn("ci_failed_checks_increased:1", html)
             self.assertIn("Coverage regressions", html)
+            self.assertIn("Suite-design regressions", html)
             self.assertIn("Best score release trend", html)
             self.assertIn("Review Actions", html)
             self.assertIn("Best score maturity", html)
@@ -440,6 +495,7 @@ class TrainingPortfolioComparisonTests(unittest.TestCase):
 
             self.assertEqual(default_result.returncode, 0)
             self.assertIn("blocker_action_count=1", default_result.stdout)
+            self.assertIn("maturity_suite_design_regression_count=0", default_result.stdout)
             self.assertIn("decision=continue_with_portfolio_comparison", default_result.stdout)
             self.assertEqual(gated_result.returncode, 1)
             self.assertIn("blocker_action_count=1", gated_result.stdout)

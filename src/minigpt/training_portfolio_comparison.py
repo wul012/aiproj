@@ -21,6 +21,7 @@ from minigpt.training_portfolio_comparison_review import (
     build_training_portfolio_review_actions,
     has_maturity_ci_regression,
     has_maturity_coverage_regression,
+    has_maturity_suite_design_regression,
     is_review_status,
 )
 
@@ -242,6 +243,26 @@ def _portfolio_summary(report: dict[str, Any], name: str, index: int) -> dict[st
             maturity_summary.get("release_readiness_max_test_coverage_gap_delta")
         )
         or 0,
+        "maturity_release_readiness_benchmark_suite_design_delta_count": _as_int(
+            maturity_summary.get("release_readiness_benchmark_suite_design_delta_count")
+        )
+        or 0,
+        "maturity_release_readiness_benchmark_suite_design_regression_count": _as_int(
+            maturity_summary.get("release_readiness_benchmark_suite_design_regression_count")
+        )
+        or 0,
+        "maturity_release_readiness_benchmark_design_change_delta_count": _as_int(
+            maturity_summary.get("release_readiness_benchmark_design_change_delta_count")
+        )
+        or 0,
+        "maturity_release_readiness_max_benchmark_suite_design_delta": _as_int(
+            maturity_summary.get("release_readiness_max_benchmark_suite_design_delta")
+        )
+        or 0,
+        "maturity_release_readiness_max_benchmark_design_change_delta": _as_int(
+            maturity_summary.get("release_readiness_max_benchmark_design_change_delta")
+        )
+        or 0,
         "maturity_request_history_status": maturity_summary.get("request_history_status"),
     }
 
@@ -301,6 +322,18 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
         portfolio.get("maturity_release_readiness_test_coverage_regression_count"),
         baseline.get("maturity_release_readiness_test_coverage_regression_count"),
     )
+    suite_design_regression_delta = _int_delta(
+        portfolio.get("maturity_release_readiness_benchmark_suite_design_regression_count"),
+        baseline.get("maturity_release_readiness_benchmark_suite_design_regression_count"),
+    )
+    suite_design_delta_count_delta = _int_delta(
+        portfolio.get("maturity_release_readiness_benchmark_suite_design_delta_count"),
+        baseline.get("maturity_release_readiness_benchmark_suite_design_delta_count"),
+    )
+    design_change_delta = _int_delta(
+        portfolio.get("maturity_release_readiness_benchmark_design_change_delta_count"),
+        baseline.get("maturity_release_readiness_benchmark_design_change_delta_count"),
+    )
     return {
         "name": portfolio.get("name"),
         "baseline_name": baseline.get("name"),
@@ -317,6 +350,9 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
         "maturity_release_readiness_ci_workflow_regression_delta": ci_regression_delta,
         "maturity_release_readiness_ci_workflow_order_regression_delta": ci_order_regression_delta,
         "maturity_release_readiness_test_coverage_regression_delta": coverage_regression_delta,
+        "maturity_release_readiness_benchmark_suite_design_delta_count_delta": suite_design_delta_count_delta,
+        "maturity_release_readiness_benchmark_suite_design_regression_delta": suite_design_regression_delta,
+        "maturity_release_readiness_benchmark_design_change_delta": design_change_delta,
         "overall_relation": "baseline" if is_baseline else _score_relation(overall_delta),
         "rubric_relation": "baseline" if is_baseline else _score_relation(rubric_delta),
         "artifact_relation": "baseline" if is_baseline else _score_relation(artifact_delta),
@@ -337,6 +373,7 @@ def _comparison_summary(
     maturity_review_rows = [item for item in portfolios if is_review_status(item.get("maturity_portfolio_status"))]
     maturity_ci_rows = [item for item in portfolios if has_maturity_ci_regression(item)]
     maturity_coverage_rows = [item for item in portfolios if has_maturity_coverage_regression(item)]
+    maturity_suite_design_rows = [item for item in portfolios if has_maturity_suite_design_regression(item)]
     return {
         "portfolio_count": len(portfolios),
         "baseline_name": baseline.get("name"),
@@ -356,6 +393,8 @@ def _comparison_summary(
         "maturity_ci_regression_reason_counts": _merge_reason_counts(maturity_ci_rows),
         "maturity_coverage_regression_count": len(maturity_coverage_rows),
         "maturity_coverage_regression_names": [name for item in maturity_coverage_rows if (name := _as_str(item.get("name")))],
+        "maturity_suite_design_regression_count": len(maturity_suite_design_rows),
+        "maturity_suite_design_regression_names": [name for item in maturity_suite_design_rows if (name := _as_str(item.get("name")))],
         "best_score_name": _pick(best_score, "name"),
         "best_score_maturity_status": _pick(best_score, "maturity_portfolio_status"),
         "best_score_maturity_release_readiness_trend": _pick(best_score, "maturity_release_readiness_trend"),
@@ -378,6 +417,18 @@ def _comparison_summary(
         "best_score_maturity_release_readiness_test_coverage_regression_count": _pick(
             best_score,
             "maturity_release_readiness_test_coverage_regression_count",
+        ),
+        "best_score_maturity_release_readiness_benchmark_suite_design_delta_count": _pick(
+            best_score,
+            "maturity_release_readiness_benchmark_suite_design_delta_count",
+        ),
+        "best_score_maturity_release_readiness_benchmark_suite_design_regression_count": _pick(
+            best_score,
+            "maturity_release_readiness_benchmark_suite_design_regression_count",
+        ),
+        "best_score_maturity_release_readiness_benchmark_design_change_delta_count": _pick(
+            best_score,
+            "maturity_release_readiness_benchmark_design_change_delta_count",
         ),
         "best_artifact_name": _pick(best_artifact, "name"),
         "lowest_val_loss_name": _pick(lowest_val_loss, "name"),
@@ -436,6 +487,8 @@ def _delta_explanation(
         )
     if has_maturity_coverage_regression(portfolio):
         parts.append("release-readiness coverage regressed")
+    if has_maturity_suite_design_regression(portfolio):
+        parts.append("release-readiness suite-design regressed")
     return "; ".join(parts) if parts else "Comparable to baseline."
 
 

@@ -359,6 +359,9 @@ d/415/解释/说明.md
 d/416/图片
 d/416/解释/说明.md
  -> v416 maturity suite-design readiness regression carryover 的运行截图和解释
+d/417/图片
+d/417/解释/说明.md
+ -> v417 training portfolio suite-design review action 的运行截图和解释
 ```
 
 写入规则：

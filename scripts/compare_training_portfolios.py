@@ -50,6 +50,11 @@ def main() -> None:
     print("summary=" + json.dumps(report["summary"], ensure_ascii=False))
     print(f"review_action_count={report['summary'].get('review_action_count', 0)}")
     print(f"blocker_action_count={report['summary'].get('blocker_action_count', 0)}")
+    print(f"maturity_suite_design_regression_count={report['summary'].get('maturity_suite_design_regression_count', 0)}")
+    print(
+        "maturity_suite_design_regression_names="
+        + json.dumps(report["summary"].get("maturity_suite_design_regression_names", []), ensure_ascii=False)
+    )
     for key, path in outputs.items():
         print(f"saved_{key}={path}")
     if args.fail_on_blocker_action and report["summary"].get("blocker_action_count", 0):

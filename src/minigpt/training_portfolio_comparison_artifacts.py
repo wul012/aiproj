@@ -50,6 +50,11 @@ def write_training_portfolio_comparison_csv(report: dict[str, Any], path: str | 
         "maturity_release_readiness_test_coverage_status_changed_count",
         "maturity_release_readiness_max_test_coverage_percent_delta",
         "maturity_release_readiness_max_test_coverage_gap_delta",
+        "maturity_release_readiness_benchmark_suite_design_delta_count",
+        "maturity_release_readiness_benchmark_suite_design_regression_count",
+        "maturity_release_readiness_benchmark_design_change_delta_count",
+        "maturity_release_readiness_max_benchmark_suite_design_delta",
+        "maturity_release_readiness_max_benchmark_design_change_delta",
         "baseline_name",
         "is_baseline",
         "artifact_coverage_delta",
@@ -63,6 +68,9 @@ def write_training_portfolio_comparison_csv(report: dict[str, Any], path: str | 
         "maturity_release_readiness_ci_workflow_regression_delta",
         "maturity_release_readiness_ci_workflow_order_regression_delta",
         "maturity_release_readiness_test_coverage_regression_delta",
+        "maturity_release_readiness_benchmark_suite_design_delta_count_delta",
+        "maturity_release_readiness_benchmark_suite_design_regression_delta",
+        "maturity_release_readiness_benchmark_design_change_delta",
         "overall_relation",
         "explanation",
     ]
@@ -105,8 +113,14 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
         f"| Maturity CI regression reasons | {_md(_fmt_mapping(summary.get('maturity_ci_regression_reason_counts')))} |",
         f"| Maturity coverage regressions | {_md(summary.get('maturity_coverage_regression_count'))} |",
         f"| Maturity coverage portfolios | {_md(', '.join(_string_list(summary.get('maturity_coverage_regression_names'))) or 'none')} |",
+        f"| Maturity suite-design regressions | {_md(summary.get('maturity_suite_design_regression_count'))} |",
+        f"| Maturity suite-design portfolios | {_md(', '.join(_string_list(summary.get('maturity_suite_design_regression_names'))) or 'none')} |",
         f"| Best score maturity | {_md(summary.get('best_score_maturity_status'))} |",
         f"| Best score release readiness trend | {_md(summary.get('best_score_maturity_release_readiness_trend'))} |",
+        (
+            f"| Best score suite-design regressions | "
+            f"{_md(summary.get('best_score_maturity_release_readiness_benchmark_suite_design_regression_count'))} |"
+        ),
         f"| Review actions | {_md(summary.get('review_action_count'))} |",
         f"| Blocker actions | {_md(summary.get('blocker_action_count'))} |",
         "",
@@ -135,7 +149,8 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
                         f"ci={portfolio.get('maturity_release_readiness_ci_workflow_regression_count') or 0} / "
                         f"ci_order={portfolio.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0} / "
                         f"ci_reasons={_fmt_mapping(portfolio.get('maturity_release_readiness_ci_workflow_regression_reason_counts'))} / "
-                        f"coverage={portfolio.get('maturity_release_readiness_test_coverage_regression_count') or 0}"
+                        f"coverage={portfolio.get('maturity_release_readiness_test_coverage_regression_count') or 0} / "
+                        f"suite={portfolio.get('maturity_release_readiness_benchmark_suite_design_regression_count') or 0}"
                     ),
                     _md(delta.get("explanation")),
                 ]
@@ -206,6 +221,8 @@ def render_training_portfolio_comparison_html(report: dict[str, Any]) -> str:
         ("CI regression reasons", _fmt_mapping(summary.get("maturity_ci_regression_reason_counts"))),
         ("Coverage regressions", summary.get("maturity_coverage_regression_count")),
         ("Coverage regression portfolios", ", ".join(_string_list(summary.get("maturity_coverage_regression_names"))) or "none"),
+        ("Suite-design regressions", summary.get("maturity_suite_design_regression_count")),
+        ("Suite-design portfolios", ", ".join(_string_list(summary.get("maturity_suite_design_regression_names"))) or "none"),
         ("Review actions", summary.get("review_action_count")),
         ("Blocker actions", summary.get("blocker_action_count")),
         ("Best val loss", _pick(_dict(report.get("best_by_final_val_loss")), "name")),
@@ -295,7 +312,7 @@ def _portfolio_table(report: dict[str, Any]) -> str:
             f"<td>{_e(_fmt(item.get('rubric_avg_score')))}<br><span>{_e(_fmt_signed(delta.get('rubric_avg_score_delta')))}</span></td>"
             f"<td>{_e(_fmt(item.get('final_val_loss')))}<br><span>{_e(delta.get('final_val_loss_relation'))}</span></td>"
             f"<td>{_e(item.get('dataset_readiness_status'))}<br><span>warnings={_e(item.get('dataset_warning_count'))}</span></td>"
-            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / ci={_e(item.get('maturity_release_readiness_ci_workflow_regression_count') or 0)} / ci_order={_e(item.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0)} / ci_reasons={_e(_fmt_mapping(item.get('maturity_release_readiness_ci_workflow_regression_reason_counts')))} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)}</span></td>"
+            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / ci={_e(item.get('maturity_release_readiness_ci_workflow_regression_count') or 0)} / ci_order={_e(item.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0)} / ci_reasons={_e(_fmt_mapping(item.get('maturity_release_readiness_ci_workflow_regression_reason_counts')))} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)} / suite={_e(item.get('maturity_release_readiness_benchmark_suite_design_regression_count') or 0)}</span></td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )

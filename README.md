@@ -731,6 +731,14 @@ Version 412 carries benchmark-history suite-design readiness from release bundle
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
 
+## Latest v417 checkpoint
+
+- Training portfolio comparison now reads maturity narrative release-readiness benchmark suite-design delta/regression/design-change fields.
+- Best-scoring portfolios with suite-design readiness regression now receive a dedicated blocker action instead of only generic maturity review.
+- Comparison summary, deltas, CSV, Markdown, HTML, and `scripts/compare_training_portfolios.py` stdout expose suite-design regression context.
+- Tests cover best-score suite-design blocking, rendered outputs, CSV fields, CLI stdout, and comparison explanations.
+- Archived training portfolio suite-design review evidence in `d/417`; tag: `v417.0.0`.
+
 ## Latest v416 checkpoint
 
 - Maturity summary now consumes registry release-readiness benchmark suite-design delta, suite-design regression, design-change, and max-delta fields.

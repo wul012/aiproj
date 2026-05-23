@@ -8,6 +8,7 @@ from minigpt.report_utils import as_dict, format_mapping, number_or_none, positi
 REVIEW_STATUSES = frozenset({"review", "warn", "fail", "incomplete"})
 COVERAGE_REGRESSED_TREND = "coverage-regressed"
 CI_REGRESSED_TREND = "ci-regressed"
+BENCHMARK_REGRESSED_TREND = "benchmark-regressed"
 
 
 def build_training_portfolio_recommendations(
@@ -16,6 +17,10 @@ def build_training_portfolio_recommendations(
 ) -> list[str]:
     recs = []
     ci_reason_detail = _reason_count_detail(summary.get("maturity_ci_regression_reason_counts"))
+    best_score_suite_design_regressed = (
+        summary.get("best_score_maturity_release_readiness_trend") == BENCHMARK_REGRESSED_TREND
+        and (_as_int(summary.get("best_score_maturity_release_readiness_benchmark_suite_design_regression_count")) or 0) > 0
+    )
     if summary.get("failed_count"):
         recs.append("Inspect failed portfolio steps before treating downstream benchmark or maturity evidence as comparable.")
     if summary.get("planned_count"):
@@ -28,7 +33,8 @@ def build_training_portfolio_recommendations(
         recs.append("Resolve dataset-card warnings before using the best-scoring run as a maturity baseline.")
     if summary.get("maturity_review_count"):
         if is_review_status(summary.get("best_score_maturity_status")):
-            recs.append("Review the best-scoring portfolio's maturity narrative before promoting it as a clean baseline.")
+            if not best_score_suite_design_regressed:
+                recs.append("Review the best-scoring portfolio's maturity narrative before promoting it as a clean baseline.")
         else:
             recs.append("Review maturity-narrative findings for non-leading portfolios before archiving the comparison.")
     if summary.get("maturity_coverage_regression_count"):
@@ -54,6 +60,11 @@ def build_training_portfolio_recommendations(
                 "Review CI-regressed maturity narratives before using non-leading portfolios as future baselines"
                 + (f" ({ci_reason_detail})." if ci_reason_detail else ".")
             )
+    if summary.get("maturity_suite_design_regression_count"):
+        if best_score_suite_design_regressed:
+            recs.append("Block best-score promotion until release-readiness benchmark suite-design regressions are explained or fixed.")
+        else:
+            recs.append("Review suite-design-regressed maturity narratives before using non-leading portfolios as future baselines.")
     if not recs:
         recs.append("Use the best-scoring portfolio as the next baseline, then repeat the comparison after larger-corpus training.")
     return recs
@@ -210,8 +221,35 @@ def build_training_portfolio_review_actions(
                 )
             )
 
+        suite_design_regressed = has_maturity_suite_design_regression(portfolio)
+        if suite_design_regressed:
+            is_best_score = name == best_score_name
+            actions.append(
+                _review_action(
+                    actions,
+                    name,
+                    "maturity",
+                    "blocker" if is_best_score else "review",
+                    "best_score_suite_design_regressed" if is_best_score else "portfolio_suite_design_regressed",
+                    (
+                        "Explain or fix release-readiness benchmark suite-design regressions before promoting this best-scoring portfolio."
+                        if is_best_score
+                        else "Review release-readiness benchmark suite-design regressions before archiving this portfolio as a future baseline."
+                    ),
+                    {
+                        "maturity_release_readiness_trend": portfolio.get("maturity_release_readiness_trend"),
+                        "suite_design_delta_count": portfolio.get("maturity_release_readiness_benchmark_suite_design_delta_count"),
+                        "suite_design_regression_count": portfolio.get("maturity_release_readiness_benchmark_suite_design_regression_count"),
+                        "design_change_delta_count": portfolio.get("maturity_release_readiness_benchmark_design_change_delta_count"),
+                        "max_suite_design_delta": portfolio.get("maturity_release_readiness_max_benchmark_suite_design_delta"),
+                        "max_design_change_delta": portfolio.get("maturity_release_readiness_max_benchmark_design_change_delta"),
+                        "best_score_name": best_score_name,
+                    },
+                )
+            )
+
         maturity_status = _as_str(portfolio.get("maturity_portfolio_status"))
-        if is_review_status(maturity_status) and not coverage_regressed and not ci_regressed:
+        if is_review_status(maturity_status) and not coverage_regressed and not ci_regressed and not suite_design_regressed:
             is_best_score = name == best_score_name
             actions.append(
                 _review_action(
@@ -251,6 +289,14 @@ def has_maturity_ci_regression(portfolio: dict[str, Any]) -> bool:
         portfolio.get("maturity_release_readiness_trend") == CI_REGRESSED_TREND
         or regression_count > 0
         or order_regression_count > 0
+    )
+
+
+def has_maturity_suite_design_regression(portfolio: dict[str, Any]) -> bool:
+    regression_count = _as_int(portfolio.get("maturity_release_readiness_benchmark_suite_design_regression_count")) or 0
+    return (
+        portfolio.get("maturity_release_readiness_trend") == BENCHMARK_REGRESSED_TREND
+        and regression_count > 0
     )
 
 
@@ -297,11 +343,13 @@ def _reason_count_detail(value: Any) -> str:
 
 __all__ = [
     "CI_REGRESSED_TREND",
+    "BENCHMARK_REGRESSED_TREND",
     "COVERAGE_REGRESSED_TREND",
     "REVIEW_STATUSES",
     "build_training_portfolio_recommendations",
     "build_training_portfolio_review_actions",
     "has_maturity_ci_regression",
     "has_maturity_coverage_regression",
+    "has_maturity_suite_design_regression",
     "is_review_status",
 ]
