@@ -42,6 +42,10 @@ def summarize_benchmark_scorecard_run(scorecard: dict[str, Any], name: str, inde
         "case_count": len(_list_of_dicts(scorecard.get("case_scores"))) or _as_int(rubric_summary.get("case_count")),
         "eval_suite_coverage_status": summary.get("eval_suite_coverage_status"),
         "eval_suite_comparison_status": summary.get("eval_suite_comparison_status"),
+        "eval_suite_design_coverage_status": summary.get("eval_suite_design_coverage_status"),
+        "eval_suite_design_comparison_status": summary.get("eval_suite_design_comparison_status"),
+        "eval_suite_design_duplicate_seed_count": _as_int(summary.get("eval_suite_design_duplicate_seed_count")),
+        "eval_suite_design_expected_behavior_complete": summary.get("eval_suite_design_expected_behavior_complete"),
         "task_type_count": len(_list_of_dicts(drilldowns.get("task_type"))),
         "difficulty_count": len(_list_of_dicts(drilldowns.get("difficulty"))),
         "rubric_status": summary.get("rubric_status") or rubric_summary.get("overall_status"),
@@ -82,6 +86,8 @@ def build_benchmark_scorecard_run_delta(run: dict[str, Any], baseline: dict[str,
         "generation_quality_flag_relation": _flag_relation(flag_delta, is_baseline=is_baseline),
         "generation_quality_dominant_flag_changed": _changed(run.get("generation_quality_dominant_flag"), baseline.get("generation_quality_dominant_flag")),
         "generation_quality_worst_case_changed": _changed(run.get("generation_quality_worst_case"), baseline.get("generation_quality_worst_case")),
+        "eval_suite_design_coverage_changed": _changed(run.get("eval_suite_design_coverage_status"), baseline.get("eval_suite_design_coverage_status")),
+        "eval_suite_design_comparison_changed": _changed(run.get("eval_suite_design_comparison_status"), baseline.get("eval_suite_design_comparison_status")),
         "overall_relation": _score_relation(overall_delta, is_baseline=is_baseline),
         "rubric_relation": _score_relation(rubric_delta, is_baseline=is_baseline),
     }
@@ -163,11 +169,17 @@ def build_benchmark_scorecard_summary(
     coverage_known = [row for row in runs if row.get("eval_suite_comparison_status") is not None]
     not_comparison_ready = [row for row in coverage_known if row.get("eval_suite_comparison_status") != "pass"]
     baseline_comparison_status = baseline.get("eval_suite_comparison_status")
+    design_known = [row for row in runs if row.get("eval_suite_design_comparison_status") is not None]
+    not_design_ready = [row for row in design_known if row.get("eval_suite_design_comparison_status") != "pass"]
+    baseline_design_comparison_status = baseline.get("eval_suite_design_comparison_status")
     return {
         "baseline_name": baseline.get("name"),
         "baseline_source_path": baseline.get("source_path"),
         "baseline_eval_suite_coverage_status": baseline.get("eval_suite_coverage_status"),
         "baseline_eval_suite_comparison_status": baseline_comparison_status,
+        "baseline_eval_suite_design_coverage_status": baseline.get("eval_suite_design_coverage_status"),
+        "baseline_eval_suite_design_comparison_status": baseline_design_comparison_status,
+        "baseline_eval_suite_design_duplicate_seed_count": baseline.get("eval_suite_design_duplicate_seed_count"),
         "baseline_generation_quality_total_flags": baseline.get("generation_quality_total_flags"),
         "baseline_generation_quality_dominant_flag": baseline.get("generation_quality_dominant_flag"),
         "baseline_generation_quality_worst_case": baseline.get("generation_quality_worst_case"),
@@ -175,6 +187,12 @@ def build_benchmark_scorecard_summary(
         "eval_suite_readiness_known_count": len(coverage_known),
         "non_comparison_ready_count": len(not_comparison_ready),
         "non_comparison_ready_runs": [row.get("name") for row in not_comparison_ready],
+        "eval_suite_design_readiness_known_count": len(design_known),
+        "non_design_comparison_ready_count": len(not_design_ready),
+        "non_design_comparison_ready_runs": [row.get("name") for row in not_design_ready],
+        "design_comparison_changed_count": sum(
+            1 for row in deltas if not row.get("is_baseline") and row.get("eval_suite_design_comparison_changed")
+        ),
         "improved_overall_count": sum(1 for row in deltas if row.get("overall_relation") == "improved"),
         "regressed_overall_count": sum(1 for row in deltas if row.get("overall_relation") == "regressed"),
         "improved_rubric_count": sum(1 for row in deltas if row.get("rubric_relation") == "improved"),
@@ -220,6 +238,15 @@ def build_benchmark_scorecard_recommendations(
         )
     if summary.get("baseline_eval_suite_comparison_status") not in {None, "pass"}:
         recs.append("Baseline scorecard is not eval-suite comparison-ready; choose a comparison-ready baseline before claiming model-quality gains.")
+    non_design_ready = _string_list(summary.get("non_design_comparison_ready_runs"))
+    if non_design_ready:
+        recs.append(
+            "Treat scorecard deltas as provisional because these runs are not suite-design comparison-ready: "
+            + ", ".join(non_design_ready)
+            + "."
+        )
+    if summary.get("baseline_eval_suite_design_comparison_status") not in {None, "pass"}:
+        recs.append("Baseline scorecard is not suite-design comparison-ready; choose a design-ready baseline before claiming model-quality gains.")
     weakest_case = summary.get("weakest_case_regression")
     if weakest_case:
         recs.append(

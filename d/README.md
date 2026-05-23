@@ -326,6 +326,9 @@ d/404/解释/说明.md
 d/405/图片
 d/405/解释/说明.md
  -> v405 eval suite design summary in general reports 的运行截图和解释
+d/406/图片
+d/406/解释/说明.md
+ -> v406 benchmark scorecard suite-design readiness carryover 的运行截图和解释
 ```
 
 写入规则：

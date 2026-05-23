@@ -139,6 +139,8 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["summary"]["component_count"], 6)
             self.assertIsNone(scorecard["summary"]["eval_suite_coverage_status"])
             self.assertIsNone(scorecard["summary"]["eval_suite_comparison_status"])
+            self.assertIsNone(scorecard["summary"]["eval_suite_design_coverage_status"])
+            self.assertIsNone(scorecard["summary"]["eval_suite_design_comparison_status"])
             self.assertEqual(scorecard["summary"]["rubric_status"], "pass")
             self.assertEqual(scorecard["summary"]["rubric_avg_score"], 92.0)
             self.assertEqual(scorecard["summary"]["weakest_rubric_case"], "fact-check")
@@ -208,6 +210,58 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertEqual(scorecard["summary"]["eval_suite_comparison_status"], "warn")
             self.assertIn("comparison-ready suite", " ".join(scorecard["recommendations"]))
             self.assertIn("missing comparison difficulties: hard", " ".join(scorecard["recommendations"]))
+
+    def test_eval_coverage_component_uses_suite_design_readiness_when_available(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir, registry_path = make_run(Path(tmp))
+            eval_path = run_dir / "eval_suite" / "eval_suite.json"
+            payload = json.loads(eval_path.read_text(encoding="utf-8"))
+            payload["coverage"] = {
+                "status": "pass",
+                "comparison_status": "pass",
+                "decision": "suite_has_representative_prompt_coverage",
+                "comparison_decision": "suite_ready_for_repeated_checkpoint_comparison",
+                "case_count": payload["case_count"],
+                "task_type_count": 5,
+                "difficulty_count": 3,
+                "tag_count": 5,
+                "blockers": [],
+                "comparison_blockers": [],
+            }
+            payload["design_summary"] = {
+                "coverage_status": "pass",
+                "comparison_status": "warn",
+                "decision": "suite_design_ready",
+                "comparison_decision": "prefer_standard_suite_before_checkpoint_quality_claims",
+                "case_count": payload["case_count"],
+                "task_type_count": 5,
+                "difficulty_count": 3,
+                "tag_count": 5,
+                "min_new_tokens": 24,
+                "max_new_tokens": 60,
+                "duplicate_seed_count": 1,
+                "all_cases_have_expected_behavior": True,
+                "all_cases_have_tags": True,
+                "blockers": [],
+                "comparison_blockers": ["duplicate seeds reduce comparison independence"],
+            }
+            eval_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            scorecard = build_benchmark_scorecard(run_dir, registry_path=registry_path)
+
+            eval_component = next(item for item in scorecard["components"] if item["key"] == "eval_coverage")
+            self.assertEqual(eval_component["status"], "warn")
+            self.assertEqual(eval_component["score"], 75.0)
+            self.assertEqual(eval_component["metrics"]["design_coverage_status"], "pass")
+            self.assertEqual(eval_component["metrics"]["design_comparison_status"], "warn")
+            self.assertEqual(eval_component["metrics"]["design_duplicate_seed_count"], 1)
+            self.assertEqual(scorecard["summary"]["eval_suite_design_coverage_status"], "pass")
+            self.assertEqual(scorecard["summary"]["eval_suite_design_comparison_status"], "warn")
+            self.assertEqual(scorecard["summary"]["eval_suite_design_duplicate_seed_count"], 1)
+            self.assertTrue(scorecard["summary"]["eval_suite_design_expected_behavior_complete"])
+            recommendations = " ".join(scorecard["recommendations"])
+            self.assertIn("suite-design-complete", recommendations)
+            self.assertIn("duplicate seeds reduce comparison independence", recommendations)
 
     def test_same_checkpoint_pair_baseline_is_marked_without_overstating_improvement(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -288,11 +342,13 @@ class BenchmarkScorecardTests(unittest.TestCase):
             self.assertIn("name,task_type,difficulty,status,score", Path(outputs["rubric_csv"]).read_text(encoding="utf-8"))
             self.assertIn("## Components", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Dominant generation flag", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Suite design comparison", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Pair comparison mode", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Rubric Scores", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Task Type Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("## Difficulty Drilldown", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Components", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Design comparison", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Rubric Scores", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Task Type Drilldown", Path(outputs["html"]).read_text(encoding="utf-8"))
 

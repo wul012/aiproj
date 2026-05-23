@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>MiniGPT v406 Benchmark Scorecard Suite Design Evidence</title>
+  <style>
+    :root {
+      --ink: #14212b;
+      --muted: #5b6673;
+      --line: #d6dee6;
+      --panel: #ffffff;
+      --page: #f6f8f7;
+      --band: #eaf3f0;
+      --accent: #0f6b5f;
+      --warn: #9a6500;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      padding: 34px 42px 24px;
+      background: var(--band);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 30px 42px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(28, 44, 54, 0.06);
+    }
+    .stat {
+      padding: 15px 16px;
+      min-height: 88px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .value {
+      font-weight: 700;
+      font-size: 21px;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+    .panel {
+      margin-top: 18px;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 11px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f0f5f3;
+      color: #263640;
+      font-weight: 700;
+    }
+    code {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      background: #edf2f4;
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    .ok { color: var(--accent); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.75;
+    }
+    @media (max-width: 760px) {
+      header { padding: 26px 22px 18px; }
+      main { padding: 20px 16px 30px; }
+      .stats { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v406 Benchmark Scorecard Suite Design</h1>
+    <p>把 eval suite design readiness 带入 benchmark scorecard 和 cross-run scorecard comparison，避免 prompt 设计不完整时过度解释分数变化。</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="stat"><div class="label">Version</div><div class="value">v406</div></div>
+      <div class="stat"><div class="label">Scorecard field</div><div class="value">design readiness</div></div>
+      <div class="stat"><div class="label">Comparison signal</div><div class="value">provisional deltas</div></div>
+      <div class="stat"><div class="label">Targeted tests</div><div class="value">34 passed</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>Scorecard Contract</h2>
+      <table>
+        <thead><tr><th>Layer</th><th>New Evidence</th><th>Why It Matters</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>eval_coverage</code> component</td>
+            <td>Reads <code>design_summary.coverage_status</code> and <code>design_summary.comparison_status</code>.</td>
+            <td>Coverage can pass while suite design is still not comparison-ready; scorecard now caps that case.</td>
+          </tr>
+          <tr>
+            <td><code>summary</code></td>
+            <td>Stores design coverage, design comparison, duplicate seed count, and expected-behavior completeness.</td>
+            <td>Downstream tools can read prompt-design status without reopening eval suite JSON.</td>
+          </tr>
+          <tr>
+            <td><code>recommendations</code></td>
+            <td>Warns when suite-design-complete prompt sets are needed before checkpoint claims.</td>
+            <td>Turns benchmark caveats into machine-readable and human-readable review guidance.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Comparison Contract</h2>
+      <table>
+        <thead><tr><th>Output</th><th>Added Fields</th><th>Boundary</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Run summary</td>
+            <td><code>eval_suite_design_coverage_status</code>, <code>eval_suite_design_comparison_status</code>, <code>eval_suite_design_duplicate_seed_count</code></td>
+            <td>Each run carries its prompt-design readiness into cross-run review.</td>
+          </tr>
+          <tr>
+            <td>Baseline deltas</td>
+            <td><code>eval_suite_design_coverage_changed</code>, <code>eval_suite_design_comparison_changed</code></td>
+            <td>Comparison can tell when readiness changed, not just when scores changed.</td>
+          </tr>
+          <tr>
+            <td>Summary and reports</td>
+            <td><code>non_design_comparison_ready_runs</code>, <code>design_comparison_changed_count</code>, <code>Design Compare</code></td>
+            <td>Reviewers see provisional scorecard deltas directly in CSV, Markdown, and HTML.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <ul>
+        <li><span class="ok">pass</span> py_compile for scorecard and scorecard-comparison modules/tests.</li>
+        <li><span class="ok">pass</span> 34 targeted pytest cases for scorecard, comparison, artifacts, and eval suite.</li>
+        <li><span class="warn">boundary</span> v406 changes benchmark evidence interpretation, not model training quality.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

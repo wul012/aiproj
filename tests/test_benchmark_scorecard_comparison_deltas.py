@@ -19,7 +19,15 @@ from minigpt.benchmark_scorecard_comparison_deltas import (
 from minigpt import benchmark_scorecard_comparison as comparison_facade
 
 
-def make_scorecard(name: str, *, overall: float, qa_score: float, flags: int, missing: list[str]) -> dict:
+def make_scorecard(
+    name: str,
+    *,
+    overall: float,
+    qa_score: float,
+    flags: int,
+    missing: list[str],
+    design_comparison: str = "pass",
+) -> dict:
     status = "pass" if qa_score >= 80 else "warn"
     return {
         "_source_path": f"runs/{name}/benchmark-scorecard/benchmark_scorecard.json",
@@ -29,6 +37,12 @@ def make_scorecard(name: str, *, overall: float, qa_score: float, flags: int, mi
             "overall_status": "pass" if overall >= 80 else "warn",
             "overall_score": overall,
             "component_count": 6,
+            "eval_suite_coverage_status": "pass",
+            "eval_suite_comparison_status": "pass",
+            "eval_suite_design_coverage_status": "pass",
+            "eval_suite_design_comparison_status": design_comparison,
+            "eval_suite_design_duplicate_seed_count": 0 if design_comparison == "pass" else 1,
+            "eval_suite_design_expected_behavior_complete": True,
             "rubric_status": status,
             "rubric_avg_score": qa_score,
             "rubric_pass_count": 1 if status == "pass" else 0,
@@ -66,7 +80,7 @@ class BenchmarkScorecardComparisonDeltaTests(unittest.TestCase):
     def test_delta_module_builds_summary_recommendations_and_best_run(self) -> None:
         scorecards = [
             make_scorecard("base", overall=88, qa_score=86, flags=2, missing=[]),
-            make_scorecard("candidate", overall=82, qa_score=62, flags=5, missing=["fact"]),
+            make_scorecard("candidate", overall=82, qa_score=62, flags=5, missing=["fact"], design_comparison="warn"),
         ]
         names = ["base", "candidate"]
         runs = [summarize_benchmark_scorecard_run(scorecard, names[index], index) for index, scorecard in enumerate(scorecards)]
@@ -86,13 +100,18 @@ class BenchmarkScorecardComparisonDeltaTests(unittest.TestCase):
         self.assertEqual(candidate_delta["rubric_relation"], "regressed")
         self.assertEqual(candidate_delta["generation_quality_flag_relation"], "regressed")
         self.assertTrue(candidate_delta["generation_quality_dominant_flag_changed"])
+        self.assertTrue(candidate_delta["eval_suite_design_comparison_changed"])
         self.assertEqual(qa_delta["added_missing_terms"], ["fact"])
         self.assertEqual(qa_delta["relation"], "regressed")
         self.assertEqual(qa_group["relation"], "regressed")
         self.assertEqual(summary["regressed_rubric_count"], 1)
         self.assertEqual(summary["case_regression_count"], 1)
+        self.assertEqual(summary["non_design_comparison_ready_count"], 1)
+        self.assertEqual(summary["non_design_comparison_ready_runs"], ["candidate"])
+        self.assertEqual(summary["design_comparison_changed_count"], 1)
         self.assertEqual(summary["worst_generation_quality_flag_regression_run"], "candidate")
         self.assertEqual(select_best_benchmark_scorecard_run(runs, "rubric_avg_score")["name"], "base")
+        self.assertTrue(any("suite-design comparison-ready" in item for item in recommendations))
         self.assertTrue(any("Generation-quality flags increased" in item for item in recommendations))
         self.assertTrue(any("missing terms" in item.lower() for item in recommendations))
 

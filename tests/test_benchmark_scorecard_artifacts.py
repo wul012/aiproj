@@ -33,6 +33,11 @@ def make_scorecard() -> dict:
             "overall_status": "pass",
             "overall_score": 91.25,
             "eval_suite_cases": 2,
+            "eval_suite_coverage_status": "pass",
+            "eval_suite_comparison_status": "pass",
+            "eval_suite_design_coverage_status": "pass",
+            "eval_suite_design_comparison_status": "warn",
+            "eval_suite_design_duplicate_seed_count": 1,
             "generation_quality_status": "pass",
             "generation_quality_total_flags": 3,
             "generation_quality_dominant_flag": "low_diversity",
@@ -117,6 +122,7 @@ class BenchmarkScorecardArtifactTests(unittest.TestCase):
         self.assertIn("Task Type Drilldown", html)
         self.assertIn("## Components", markdown)
         self.assertIn("Dominant generation flag", markdown)
+        self.assertIn("Suite design comparison", markdown)
         self.assertIn("Pair comparison mode", markdown)
         self.assertIn("## Rubric Scores", markdown)
         self.assertIn("## Difficulty Drilldown", markdown)
@@ -134,6 +140,7 @@ class BenchmarkScorecardArtifactTests(unittest.TestCase):
             self.assertIn("name,task_type,difficulty,status,score", Path(outputs["rubric_csv"]).read_text(encoding="utf-8"))
             self.assertIn("Review weakest rubric case.", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Components", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Design comparison", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_artifacts_filter_non_dict_rows_after_helper_consolidation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
