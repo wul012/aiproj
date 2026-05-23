@@ -39,6 +39,14 @@ def _benchmark_history_context(benchmark_history: dict[str, Any] | None, audit: 
             "blocked_count": summary.get("blocked_count"),
             "case_regression_entry_count": summary.get("case_regression_entry_count"),
             "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
+            "suite_design_non_comparison_ready_entry_count": first_present(
+                summary.get("suite_design_non_comparison_ready_entry_count"),
+                audit_context.get("suite_design_non_comparison_ready_entry_count"),
+            ),
+            "design_comparison_changed_entry_count": first_present(
+                summary.get("design_comparison_changed_entry_count"),
+                audit_context.get("design_comparison_changed_entry_count"),
+            ),
             "best_candidate_name": summary.get("best_candidate_name"),
             "best_entry_name": summary.get("best_entry_name"),
             "model_quality_claim": summary.get("model_quality_claim"),
@@ -57,6 +65,8 @@ def _benchmark_history_context(benchmark_history: dict[str, Any] | None, audit: 
         "available": False,
         "entry_count": None,
         "ready_count": None,
+        "suite_design_non_comparison_ready_entry_count": None,
+        "design_comparison_changed_entry_count": None,
         "readiness_requirement_status": None,
         "readiness_requirement_exit_code": None,
         "readiness_requirement_failed_reasons": [],
@@ -73,6 +83,7 @@ def _status_from_benchmark_context(context: dict[str, Any]) -> str | None:
         "blocked_count",
         "case_regression_entry_count",
         "generation_quality_flag_regression_entry_count",
+        "suite_design_non_comparison_ready_entry_count",
     )
     if any(_int(context.get(key)) > 0 for key in regression_keys):
         return "warn"

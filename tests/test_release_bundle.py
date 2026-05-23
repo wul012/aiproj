@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -83,6 +84,8 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "benchmark_history_blocked": 0,
             "benchmark_history_case_regressions": 0,
             "benchmark_history_generation_flag_regressions": 0,
+            "benchmark_history_suite_design_non_comparison_ready_entries": 0,
+            "benchmark_history_design_comparison_changed_entries": 0,
             "benchmark_history_readiness_requirement_status": "pass",
             "benchmark_history_readiness_requirement_exit_code": 0,
             "benchmark_history_readiness_requirement_failed_reasons": [],
@@ -128,6 +131,8 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "blocked_count": 0,
             "case_regression_entry_count": 0,
             "generation_quality_flag_regression_entry_count": 0,
+            "suite_design_non_comparison_ready_entry_count": 0,
+            "design_comparison_changed_entry_count": 0,
             "best_candidate_name": name,
             "best_entry_name": "round-1",
             "readiness_requirement_status": "pass",
@@ -200,6 +205,8 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "ready_count": 1,
             "case_regression_entry_count": 0,
             "generation_quality_flag_regression_entry_count": 0,
+            "suite_design_non_comparison_ready_entry_count": 0,
+            "design_comparison_changed_entry_count": 0,
             "best_candidate_name": name,
             "best_entry_name": "round-1",
             "model_quality_claim": "candidate_evidence",
@@ -221,6 +228,9 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
                 "candidate_name": name,
                 "decision_status": "promote",
                 "promotion_readiness": "ready",
+                "eval_suite_design_comparison_status": "pass",
+                "non_design_comparison_ready_count": 0,
+                "design_comparison_changed_count": 0,
                 "boundary": "standard-benchmark-candidate-evidence",
             }
         ],
@@ -316,6 +326,8 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(bundle["summary"]["benchmark_history_entries"], 1)
             self.assertEqual(bundle["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(bundle["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 0)
+            self.assertEqual(bundle["summary"]["benchmark_history_design_comparison_changed_entries"], 0)
             self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_status"], "pass")
             self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual(bundle["summary"]["benchmark_history_readiness_requirement_failed_reasons"], [])
@@ -338,6 +350,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertTrue(bundle["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["benchmark_history_context"]["latest_decision_status"], "promote")
             self.assertEqual(bundle["benchmark_history_context"]["readiness_requirement_status"], "pass")
+            self.assertEqual(bundle["benchmark_history_context"]["suite_design_non_comparison_ready_entry_count"], 0)
             self.assertEqual(bundle["ci_workflow_context"]["order_violation_count"], 0)
             self.assertEqual(bundle["test_coverage_context"]["coverage_gap"], 0.0)
             self.assertGreaterEqual(bundle["summary"]["available_artifacts"], 10)
@@ -439,6 +452,53 @@ class ReleaseBundleTests(unittest.TestCase):
             )
             self.assertEqual(bundle["benchmark_history_context"]["readiness_requirement_status"], "fail")
 
+    def test_build_release_bundle_warns_when_history_suite_design_not_ready_even_if_audit_is_stale_pass(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path, model_path, audit_path, _request_summary_path, benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            history = json.loads(benchmark_history_path.read_text(encoding="utf-8"))
+            history["summary"]["ready_count"] = 0
+            history["summary"]["suite_design_non_comparison_ready_entry_count"] = 1
+            history["summary"]["design_comparison_changed_entry_count"] = 1
+            history["readiness_requirement"] = {
+                "status": "fail",
+                "decision": "stop",
+                "exit_code": 1,
+                "min_ready_entries": 1,
+                "ready_count": 0,
+                "entry_count": 1,
+                "evidence_kind": "real-benchmark",
+                "require_real_benchmark": True,
+                "failed_reasons": ["suite_design_non_comparison_ready_entries"],
+            }
+            history["entries"][0]["promotion_readiness"] = "review"
+            history["entries"][0]["eval_suite_design_comparison_status"] = "warn"
+            history["entries"][0]["non_design_comparison_ready_count"] = 1
+            history["entries"][0]["design_comparison_changed_count"] = 1
+            history["entries"][0]["boundary"] = "suite-design-not-comparison-ready"
+            write_json(benchmark_history_path, history)
+
+            bundle = build_release_bundle(
+                registry_path,
+                model_card_path=model_path,
+                audit_path=audit_path,
+                benchmark_history_path=benchmark_history_path,
+            )
+
+            self.assertEqual(bundle["summary"]["release_status"], "review-needed")
+            self.assertEqual(bundle["summary"]["audit_status"], "pass")
+            self.assertEqual(bundle["summary"]["benchmark_history_status"], "warn")
+            self.assertEqual(bundle["summary"]["benchmark_history_ready"], 0)
+            self.assertEqual(bundle["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 1)
+            self.assertEqual(bundle["summary"]["benchmark_history_design_comparison_changed_entries"], 1)
+            self.assertEqual(
+                bundle["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["suite_design_non_comparison_ready_entries"],
+            )
+            self.assertEqual(bundle["summary"]["benchmark_history_latest_boundary"], "suite-design-not-comparison-ready")
+            self.assertEqual(bundle["benchmark_history_context"]["suite_design_non_comparison_ready_entry_count"], 1)
+            self.assertEqual(bundle["benchmark_history_context"]["design_comparison_changed_entry_count"], 1)
+
     def test_build_release_bundle_marks_missing_audit(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -466,11 +526,44 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("Benchmark history status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history suite-design not-ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history design changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage status", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT release bundle", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench history", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench design review", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench design changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
+
+    def test_cli_prints_release_bundle_benchmark_history_suite_design_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path, model_path, audit_path, _request_summary_path, benchmark_history_path, _ci_workflow_hygiene_path, _test_coverage_report_path = make_release_inputs(root)
+            out_dir = root / "release-bundle"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "build_release_bundle.py"),
+                    "--registry",
+                    str(registry_path),
+                    "--model-card",
+                    str(model_path),
+                    "--audit",
+                    str(audit_path),
+                    "--benchmark-history",
+                    str(benchmark_history_path),
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
+            self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
 
     def test_render_release_bundle_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

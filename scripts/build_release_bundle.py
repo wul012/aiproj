@@ -51,6 +51,14 @@ def main() -> None:
     print(f"benchmark_history_entries={summary.get('benchmark_history_entries')}")
     print(f"benchmark_history_ready={summary.get('benchmark_history_ready')}")
     print(f"benchmark_history_boundary={summary.get('benchmark_history_latest_boundary')}")
+    print(
+        "benchmark_history_suite_design_non_comparison_ready_entries="
+        f"{summary.get('benchmark_history_suite_design_non_comparison_ready_entries')}"
+    )
+    print(
+        "benchmark_history_design_comparison_changed_entries="
+        f"{summary.get('benchmark_history_design_comparison_changed_entries')}"
+    )
     print(f"benchmark_history_readiness_requirement_status={summary.get('benchmark_history_readiness_requirement_status')}")
     print(f"benchmark_history_readiness_requirement_exit_code={summary.get('benchmark_history_readiness_requirement_exit_code')}")
     print(

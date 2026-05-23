@@ -199,17 +199,25 @@ def _build_summary(
         "request_history_status": audit_summary.get("request_history_status") or request_summary.get("status"),
         "request_history_records": audit_summary.get("request_history_records") or request_summary.get("total_log_records"),
         "benchmark_history_status": benchmark_history_status,
-        "benchmark_history_entries": first_present(audit_summary.get("benchmark_history_entries"), benchmark_context.get("entry_count")),
-        "benchmark_history_ready": first_present(audit_summary.get("benchmark_history_ready"), benchmark_context.get("ready_count")),
-        "benchmark_history_review": first_present(audit_summary.get("benchmark_history_review"), benchmark_context.get("review_count")),
-        "benchmark_history_blocked": first_present(audit_summary.get("benchmark_history_blocked"), benchmark_context.get("blocked_count")),
+        "benchmark_history_entries": first_present(benchmark_context.get("entry_count"), audit_summary.get("benchmark_history_entries")),
+        "benchmark_history_ready": first_present(benchmark_context.get("ready_count"), audit_summary.get("benchmark_history_ready")),
+        "benchmark_history_review": first_present(benchmark_context.get("review_count"), audit_summary.get("benchmark_history_review")),
+        "benchmark_history_blocked": first_present(benchmark_context.get("blocked_count"), audit_summary.get("benchmark_history_blocked")),
         "benchmark_history_case_regressions": first_present(
-            audit_summary.get("benchmark_history_case_regressions"),
             benchmark_context.get("case_regression_entry_count"),
+            audit_summary.get("benchmark_history_case_regressions"),
         ),
         "benchmark_history_generation_flag_regressions": first_present(
-            audit_summary.get("benchmark_history_generation_flag_regressions"),
             benchmark_context.get("generation_quality_flag_regression_entry_count"),
+            audit_summary.get("benchmark_history_generation_flag_regressions"),
+        ),
+        "benchmark_history_suite_design_non_comparison_ready_entries": first_present(
+            benchmark_context.get("suite_design_non_comparison_ready_entry_count"),
+            audit_summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+        ),
+        "benchmark_history_design_comparison_changed_entries": first_present(
+            benchmark_context.get("design_comparison_changed_entry_count"),
+            audit_summary.get("benchmark_history_design_comparison_changed_entries"),
         ),
         "benchmark_history_readiness_requirement_status": first_present(
             benchmark_context.get("readiness_requirement_status"),
@@ -224,12 +232,12 @@ def _build_summary(
             audit_summary.get("benchmark_history_readiness_requirement_failed_reasons"),
         ),
         "benchmark_history_model_quality_claim": first_present(
-            audit_summary.get("benchmark_history_model_quality_claim"),
             benchmark_context.get("model_quality_claim"),
+            audit_summary.get("benchmark_history_model_quality_claim"),
         ),
         "benchmark_history_latest_boundary": first_present(
-            audit_summary.get("benchmark_history_latest_boundary"),
             benchmark_context.get("latest_boundary"),
+            audit_summary.get("benchmark_history_latest_boundary"),
         ),
         "ci_workflow_status": audit_summary.get("ci_workflow_status") or ci_summary.get("status"),
         "ci_workflow_failed_checks": audit_summary.get("ci_workflow_failed_checks") if audit_summary.get("ci_workflow_failed_checks") is not None else ci_summary.get("failed_check_count"),
