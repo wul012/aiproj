@@ -261,6 +261,8 @@ def build_benchmark_history_check(
     blocked_count = _int(context.get("blocked_count"))
     case_regressions = _int(context.get("case_regression_entry_count"))
     flag_regressions = _int(context.get("generation_quality_flag_regression_entry_count"))
+    suite_design_not_ready = _int(context.get("suite_design_non_comparison_ready_entry_count"))
+    design_changes = _int(context.get("design_comparison_changed_entry_count"))
     readiness_status = context.get("readiness_requirement_status")
     readiness_exit_code = _int(context.get("readiness_requirement_exit_code"))
     readiness_failed_reasons = _string_list(context.get("readiness_requirement_failed_reasons"))
@@ -273,6 +275,7 @@ def build_benchmark_history_check(
         or blocked_count > 0
         or case_regressions > 0
         or flag_regressions > 0
+        or suite_design_not_ready > 0
         or readiness_status == "fail"
         or readiness_exit_code > 0
         or model_claim == "not_claimed"
@@ -281,6 +284,7 @@ def build_benchmark_history_check(
     detail = (
         f"entries={entry_count}; ready={ready_count}; review={review_count}; blocked={blocked_count}; "
         f"case_regressions={case_regressions}; generation_flag_regressions={flag_regressions}; "
+        f"suite_design_not_ready={suite_design_not_ready}; design_comparison_changed={design_changes}; "
         f"readiness_requirement={_fmt_any(readiness_status)}; readiness_exit={_fmt_any(context.get('readiness_requirement_exit_code'))}; "
         f"readiness_failed_reasons={_fmt_any(', '.join(readiness_failed_reasons) if readiness_failed_reasons else 'none')}; "
         f"model_quality_claim={_fmt_any(model_claim)}; latest_boundary={_fmt_any(context.get('latest_boundary'))}."
@@ -302,6 +306,8 @@ def build_benchmark_history_context(benchmark_history: dict[str, Any] | None) ->
             "blocked_count": None,
             "case_regression_entry_count": None,
             "generation_quality_flag_regression_entry_count": None,
+            "suite_design_non_comparison_ready_entry_count": None,
+            "design_comparison_changed_entry_count": None,
             "readiness_requirement_status": None,
             "readiness_requirement_decision": None,
             "readiness_requirement_exit_code": None,
@@ -323,6 +329,8 @@ def build_benchmark_history_context(benchmark_history: dict[str, Any] | None) ->
         "blocked_count": summary.get("blocked_count"),
         "case_regression_entry_count": summary.get("case_regression_entry_count"),
         "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
+        "suite_design_non_comparison_ready_entry_count": summary.get("suite_design_non_comparison_ready_entry_count"),
+        "design_comparison_changed_entry_count": summary.get("design_comparison_changed_entry_count"),
         "best_candidate_name": summary.get("best_candidate_name"),
         "best_entry_name": summary.get("best_entry_name"),
         "model_quality_claim": summary.get("model_quality_claim"),

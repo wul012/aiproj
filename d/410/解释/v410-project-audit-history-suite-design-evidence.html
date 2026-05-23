@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>v410 project audit history suite design evidence</title>
+  <style>
+    :root { --ink:#172033; --muted:#5b6475; --line:#d8dee9; --panel:#fff; --page:#f5f5f0; --accent:#0f766e; --warn:#b45309; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.55; }
+    header { padding:28px 36px 20px; background:#fff; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:18px; }
+    p { margin:0; color:var(--muted); }
+    main { padding:20px 36px 32px; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; margin:0 0 16px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:14px; background:#fbfcfd; min-height:96px; }
+    .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    .value { margin-top:8px; font-weight:700; overflow-wrap:anywhere; }
+    table { width:100%; border-collapse:collapse; min-width:760px; }
+    th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+    code { background:#eef2f7; padding:2px 5px; border-radius:5px; }
+    .pass { color:var(--accent); font-weight:700; }
+    .warn { color:var(--warn); font-weight:700; }
+    footer { padding:0 36px 28px; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>v410 Project Audit History Suite Design</h1>
+    <p>Benchmark-history suite-design readiness is now visible in project audit context, checks, summary, rendered outputs, and CLI stdout.</p>
+  </header>
+  <main>
+    <section class="grid">
+      <div class="card"><div class="label">Primary field</div><div class="value"><code>suite_design_non_comparison_ready_entry_count</code></div></div>
+      <div class="card"><div class="label">Audit summary</div><div class="value"><code>benchmark_history_suite_design_non_comparison_ready_entries</code></div></div>
+      <div class="card"><div class="label">Warning rule</div><div class="value">count &gt; 0 makes benchmark history audit status <span class="warn">warn</span></div></div>
+      <div class="card"><div class="label">Design delta</div><div class="value"><code>design_comparison_changed_entry_count</code></div></div>
+    </section>
+
+    <section>
+      <h2>Evidence Flow</h2>
+      <table>
+        <thead><tr><th>Layer</th><th>v410 behavior</th><th>Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td>Context</td><td><code>build_benchmark_history_context()</code> reads suite-design not-ready and design-change counts.</td><td>Project audit can consume the v408 ledger fields directly.</td></tr>
+          <tr><td>Check</td><td><code>build_benchmark_history_check()</code> includes <code>suite_design_not_ready</code> and <code>design_comparison_changed</code> in detail.</td><td>Audit warnings explain whether the issue is prompt-suite design readiness.</td></tr>
+          <tr><td>Summary</td><td>Project audit summary exposes both counters under benchmark-history names.</td><td>Downstream release-style evidence can read one summary object.</td></tr>
+          <tr><td>Reports</td><td>Markdown and HTML render <code>Benchmark history suite-design not-ready</code> and <code>Bench design review</code>.</td><td>Human review and screenshots keep the design boundary visible.</td></tr>
+          <tr><td>CLI</td><td><code>scripts/audit_project.py</code> prints both counters.</td><td>CI logs can verify the carryover without opening JSON.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <table>
+        <thead><tr><th>Command</th><th>Status</th><th>Coverage</th></tr></thead>
+        <tbody>
+          <tr><td><code>python -m pytest tests\test_project_audit.py -q</code></td><td class="pass">14 passed</td><td>Ready defaults, suite-design warn path, rendered fields, CLI stdout, context/check helper.</td></tr>
+          <tr><td><code>python -m py_compile ...</code></td><td class="pass">passed</td><td>Modified code, script, and tests compile cleanly.</td></tr>
+          <tr><td><code>python -m pytest -q</code></td><td class="pass">695 passed</td><td>Full repository regression gate.</td></tr>
+          <tr><td><code>scripts\check_source_encoding.py</code></td><td class="pass">status=pass</td><td>Encoding and syntax hygiene gate, 319 clean sources.</td></tr>
+          <tr><td><code>git diff --check</code></td><td class="pass">passed</td><td>No whitespace errors in the working diff.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Boundary</h2>
+      <p>This release does not train a checkpoint, add benchmark prompts, or change release gate policy. It closes a carryover gap so benchmark-history suite-design readiness survives into project audit evidence.</p>
+    </section>
+  </main>
+  <footer>Archive: d/410. Screenshot target: 图片/01-project-audit-history-suite-design-evidence.png.</footer>
+</body>
+</html>

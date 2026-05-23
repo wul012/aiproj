@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -114,8 +115,20 @@ def make_benchmark_history(
     decision_status: str = "promote",
     evidence_kind: str = "real-benchmark",
     readiness_requirement_status: str = "pass",
+    suite_design_status: str | None = "pass",
 ) -> Path:
-    ready = decision_status == "promote" and evidence_kind != "tiny-smoke"
+    suite_design_ready = suite_design_status in {None, "pass"}
+    suite_design_not_ready = 0 if suite_design_ready else 1
+    design_changed = 0 if suite_design_ready else 1
+    effective_readiness_status = (
+        "fail" if not suite_design_ready and readiness_requirement_status == "pass" else readiness_requirement_status
+    )
+    ready = decision_status == "promote" and evidence_kind != "tiny-smoke" and suite_design_ready
+    failed_reasons: list[str] = []
+    if effective_readiness_status != "pass":
+        failed_reasons = (
+            ["suite_design_non_comparison_ready_entries"] if not suite_design_ready else ["insufficient_ready_entries"]
+        )
     summary = {
         "entry_count": 1,
         "promote_count": 1 if decision_status == "promote" else 0,
@@ -124,6 +137,8 @@ def make_benchmark_history(
         "ready_count": 1 if ready else 0,
         "case_regression_entry_count": 1 if decision_status == "review" else 0,
         "generation_quality_flag_regression_entry_count": 0,
+        "suite_design_non_comparison_ready_entry_count": suite_design_not_ready,
+        "design_comparison_changed_entry_count": design_changed,
         "best_candidate_name": "candidate",
         "best_entry_name": "round-1",
         "model_quality_claim": "not_claimed" if evidence_kind == "tiny-smoke" else "candidate_evidence",
@@ -134,15 +149,15 @@ def make_benchmark_history(
         "evidence_kind": evidence_kind,
         "summary": summary,
         "readiness_requirement": {
-            "status": readiness_requirement_status,
-            "decision": "continue" if readiness_requirement_status == "pass" else "stop",
-            "exit_code": 0 if readiness_requirement_status == "pass" else 1,
-            "min_ready_entries": 1 if readiness_requirement_status == "pass" else 2,
+            "status": effective_readiness_status,
+            "decision": "continue" if effective_readiness_status == "pass" else "stop",
+            "exit_code": 0 if effective_readiness_status == "pass" else 1,
+            "min_ready_entries": 1 if effective_readiness_status == "pass" else 2,
             "ready_count": summary["ready_count"],
             "entry_count": summary["entry_count"],
             "evidence_kind": evidence_kind,
             "require_real_benchmark": True,
-            "failed_reasons": [] if readiness_requirement_status == "pass" else ["insufficient_ready_entries"],
+            "failed_reasons": failed_reasons,
         },
         "entries": [
             {
@@ -152,9 +167,16 @@ def make_benchmark_history(
                 "promotion_readiness": "ready" if ready else "review",
                 "case_regression_count": summary["case_regression_entry_count"],
                 "generation_quality_total_flags_delta": 0,
-                "boundary": "tiny-smoke-plumbing-evidence"
-                if evidence_kind == "tiny-smoke"
-                else "standard-benchmark-candidate-evidence",
+                "eval_suite_design_comparison_status": suite_design_status,
+                "non_design_comparison_ready_count": suite_design_not_ready,
+                "design_comparison_changed_count": design_changed,
+                "boundary": (
+                    "suite-design-not-comparison-ready"
+                    if not suite_design_ready
+                    else "tiny-smoke-plumbing-evidence"
+                    if evidence_kind == "tiny-smoke"
+                    else "standard-benchmark-candidate-evidence"
+                ),
             }
         ],
     }
@@ -248,6 +270,8 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["benchmark_history_status"], "pass")
             self.assertEqual(audit["summary"]["benchmark_history_entries"], 1)
             self.assertEqual(audit["summary"]["benchmark_history_ready"], 1)
+            self.assertEqual(audit["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 0)
+            self.assertEqual(audit["summary"]["benchmark_history_design_comparison_changed_entries"], 0)
             self.assertEqual(audit["summary"]["benchmark_history_readiness_requirement_status"], "pass")
             self.assertEqual(audit["summary"]["benchmark_history_readiness_requirement_exit_code"], 0)
             self.assertEqual(audit["summary"]["benchmark_history_readiness_requirement_failed_reasons"], [])
@@ -261,6 +285,8 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["test_coverage_fail_under"], 80.0)
             self.assertEqual(audit["request_history_context"]["status"], "pass")
             self.assertEqual(audit["benchmark_history_context"]["best_candidate_name"], "candidate")
+            self.assertEqual(audit["benchmark_history_context"]["suite_design_non_comparison_ready_entry_count"], 0)
+            self.assertEqual(audit["benchmark_history_context"]["design_comparison_changed_entry_count"], 0)
             self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
             self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(audit["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
@@ -338,6 +364,36 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["benchmark_history_context"]["readiness_requirement_status"], "fail")
             self.assertEqual(check["status"], "warn")
             self.assertIn("readiness_requirement=fail", check["detail"])
+
+    def test_build_project_audit_warns_for_benchmark_history_suite_design_not_ready(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_registry(root)
+            model_card_path = make_model_card(root, registry_path)
+            benchmark_history_path = make_benchmark_history(root, suite_design_status="warn")
+
+            audit = build_project_audit(
+                registry_path,
+                model_card_path=model_card_path,
+                benchmark_history_path=benchmark_history_path,
+            )
+            check = next(item for item in audit["checks"] if item["id"] == "benchmark_history")
+
+            self.assertEqual(audit["summary"]["overall_status"], "warn")
+            self.assertEqual(audit["summary"]["benchmark_history_status"], "warn")
+            self.assertEqual(audit["summary"]["benchmark_history_ready"], 0)
+            self.assertEqual(audit["summary"]["benchmark_history_suite_design_non_comparison_ready_entries"], 1)
+            self.assertEqual(audit["summary"]["benchmark_history_design_comparison_changed_entries"], 1)
+            self.assertEqual(
+                audit["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["suite_design_non_comparison_ready_entries"],
+            )
+            self.assertEqual(audit["summary"]["benchmark_history_latest_boundary"], "suite-design-not-comparison-ready")
+            self.assertEqual(audit["benchmark_history_context"]["suite_design_non_comparison_ready_entry_count"], 1)
+            self.assertEqual(audit["benchmark_history_context"]["design_comparison_changed_entry_count"], 1)
+            self.assertEqual(check["status"], "warn")
+            self.assertIn("suite_design_not_ready=1", check["detail"])
+            self.assertIn("design_comparison_changed=1", check["detail"])
 
     def test_build_project_audit_auto_discovers_benchmark_history(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -429,10 +485,43 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("Benchmark history", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history suite-design not-ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history design changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("MiniGPT project audit", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench history", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench design review", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("Bench design changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
+
+    def test_cli_prints_project_audit_benchmark_history_suite_design_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry_path = make_registry(root)
+            model_card_path = make_model_card(root, registry_path)
+            benchmark_history_path = make_benchmark_history(root)
+            out_dir = root / "audit"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "audit_project.py"),
+                    "--registry",
+                    str(registry_path),
+                    "--model-card",
+                    str(model_card_path),
+                    "--benchmark-history",
+                    str(benchmark_history_path),
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
+            self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
 
     def test_render_project_audit_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -508,6 +597,8 @@ class ProjectAuditTests(unittest.TestCase):
                 "blocked_count": 0,
                 "case_regression_entry_count": 0,
                 "generation_quality_flag_regression_entry_count": 0,
+                "suite_design_non_comparison_ready_entry_count": 0,
+                "design_comparison_changed_entry_count": 0,
                 "model_quality_claim": "not_claimed",
             },
             "readiness_requirement": {
@@ -530,11 +621,16 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertEqual(history_check["status"], "warn")
         self.assertIn("model_quality_claim=not_claimed", history_check["detail"])
         self.assertIn("readiness_requirement=fail", history_check["detail"])
+        self.assertIn("suite_design_not_ready=0", history_check["detail"])
+        self.assertEqual(history_check["evidence"]["suite_design_non_comparison_ready_entry_count"], 0)
+        self.assertEqual(history_check["evidence"]["design_comparison_changed_entry_count"], 0)
         self.assertEqual(history_check["evidence"]["latest_boundary"], "tiny-smoke-plumbing-evidence")
         self.assertEqual(build_benchmark_history_context(history)["latest_decision_status"], "promote")
         self.assertEqual(build_benchmark_history_context(history)["readiness_requirement_status"], "fail")
+        self.assertEqual(build_benchmark_history_context(history)["suite_design_non_comparison_ready_entry_count"], 0)
         self.assertEqual(build_benchmark_history_check(None, None)["status"], "warn")
         self.assertFalse(build_benchmark_history_context(None)["available"])
+        self.assertIsNone(build_benchmark_history_context(None)["suite_design_non_comparison_ready_entry_count"])
 
         self.assertEqual(ci_check["status"], "warn")
         self.assertIn("failed_checks=3", ci_check["detail"])

@@ -43,6 +43,11 @@ def render_project_audit_markdown(audit: dict[str, Any]) -> str:
                 ("Benchmark history entries", summary.get("benchmark_history_entries")),
                 ("Benchmark history ready", summary.get("benchmark_history_ready")),
                 ("Benchmark history regressions", summary.get("benchmark_history_case_regressions")),
+                (
+                    "Benchmark history suite-design not-ready",
+                    summary.get("benchmark_history_suite_design_non_comparison_ready_entries"),
+                ),
+                ("Benchmark history design changes", summary.get("benchmark_history_design_comparison_changed_entries")),
                 ("Benchmark history readiness", summary.get("benchmark_history_readiness_requirement_status")),
                 ("Benchmark history readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code")),
                 (
@@ -97,6 +102,8 @@ def render_project_audit_html(audit: dict[str, Any]) -> str:
         ("Req history", summary.get("request_history_status")),
         ("Bench history", summary.get("benchmark_history_status")),
         ("Bench entries", summary.get("benchmark_history_entries")),
+        ("Bench design review", summary.get("benchmark_history_suite_design_non_comparison_ready_entries")),
+        ("Bench design changes", summary.get("benchmark_history_design_comparison_changed_entries")),
         ("Bench readiness", summary.get("benchmark_history_readiness_requirement_status")),
         ("Bench readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code")),
         ("CI workflow", summary.get("ci_workflow_status")),

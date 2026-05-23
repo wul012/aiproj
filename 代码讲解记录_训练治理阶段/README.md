@@ -332,6 +332,9 @@
 423-v409-maturity-narrative-history-suite-design.md
  -> v409 code explanation: carry benchmark-history suite-design readiness into maturity narrative summary, sections, rendered outputs, and CLI stdout.
 
+424-v410-project-audit-history-suite-design.md
+ -> v410 code explanation: carry benchmark-history suite-design readiness into project audit context, checks, rendered outputs, and CLI stdout.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

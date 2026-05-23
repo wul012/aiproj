@@ -396,6 +396,8 @@ def _summarize_checks(
         "benchmark_history_blocked": history_context.get("blocked_count"),
         "benchmark_history_case_regressions": history_context.get("case_regression_entry_count"),
         "benchmark_history_generation_flag_regressions": history_context.get("generation_quality_flag_regression_entry_count"),
+        "benchmark_history_suite_design_non_comparison_ready_entries": history_context.get("suite_design_non_comparison_ready_entry_count"),
+        "benchmark_history_design_comparison_changed_entries": history_context.get("design_comparison_changed_entry_count"),
         "benchmark_history_readiness_requirement_status": history_context.get("readiness_requirement_status"),
         "benchmark_history_readiness_requirement_exit_code": history_context.get("readiness_requirement_exit_code"),
         "benchmark_history_readiness_requirement_failed_reasons": history_context.get("readiness_requirement_failed_reasons"),
@@ -463,6 +465,7 @@ def _benchmark_history_status(context: dict[str, Any]) -> str:
         "blocked_count",
         "case_regression_entry_count",
         "generation_quality_flag_regression_entry_count",
+        "suite_design_non_comparison_ready_entry_count",
     )
     if any(_int(context.get(key)) > 0 for key in regression_keys):
         return "warn"
