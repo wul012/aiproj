@@ -117,6 +117,12 @@ def build_maturity_narrative_summary(
         "benchmark_history_generation_flag_regression_entry_count": sum(
             int(row.get("generation_quality_flag_regression_entry_count") or 0) for row in history_rows
         ),
+        "benchmark_history_suite_design_non_comparison_ready_entry_count": sum(
+            int(row.get("suite_design_non_comparison_ready_entry_count") or 0) for row in history_rows
+        ),
+        "benchmark_history_design_comparison_changed_entry_count": sum(
+            int(row.get("design_comparison_changed_entry_count") or 0) for row in history_rows
+        ),
         "benchmark_history_readiness_requirement_status_counts": _counts(
             row.get("readiness_requirement_status") or "missing" for row in history_rows
         ),
@@ -148,6 +154,10 @@ def build_maturity_narrative_recommendations(summary: dict[str, Any], sections: 
     if int(summary.get("benchmark_decision_non_comparison_ready_candidate_count") or 0) > 0:
         recommendations.append(
             "Treat scorecard promotion as review-only until non-comparison-ready eval suites are rerun with comparable benchmark evidence."
+        )
+    if int(summary.get("benchmark_history_suite_design_non_comparison_ready_entry_count") or 0) > 0:
+        recommendations.append(
+            "Fix benchmark history suite-design comparison readiness before treating repeated scorecard evidence as clean benchmark evidence."
         )
     if int(summary.get("benchmark_history_readiness_requirement_failed_count") or 0) > 0:
         recommendations.append(
@@ -254,6 +264,7 @@ def _portfolio_status(
         or any(int(row.get("review_count") or 0) > 0 for row in history_rows)
         or any(int(row.get("case_regression_entry_count") or 0) > 0 for row in history_rows)
         or any(int(row.get("generation_quality_flag_regression_entry_count") or 0) > 0 for row in history_rows)
+        or any(int(row.get("suite_design_non_comparison_ready_entry_count") or 0) > 0 for row in history_rows)
         or any(row.get("readiness_requirement_status") == "fail" for row in history_rows)
         or any(row.get("quality_status") in {"warn", "fail"} for row in dataset_rows)
     ):
@@ -456,6 +467,8 @@ def _benchmark_history_summary(history: dict[str, Any]) -> dict[str, Any]:
         "ready_count": summary.get("ready_count"),
         "case_regression_entry_count": summary.get("case_regression_entry_count"),
         "generation_quality_flag_regression_entry_count": summary.get("generation_quality_flag_regression_entry_count"),
+        "suite_design_non_comparison_ready_entry_count": summary.get("suite_design_non_comparison_ready_entry_count"),
+        "design_comparison_changed_entry_count": summary.get("design_comparison_changed_entry_count"),
         "best_candidate_name": summary.get("best_candidate_name"),
         "model_quality_claim": summary.get("model_quality_claim"),
         "readiness_requirement_status": readiness.get("status"),

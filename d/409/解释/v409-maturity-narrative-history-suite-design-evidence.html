@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>v409 maturity narrative history suite design evidence</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f7f8fb;
+      color: #202a33;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #f7f8fb;
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      border-bottom: 3px solid #355f8f;
+      padding: 10px 0 18px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0;
+      line-height: 1.55;
+    }
+    .subtitle {
+      margin-top: 8px;
+      color: #60717f;
+      max-width: 780px;
+      font-size: 14px;
+    }
+    .pill {
+      background: #e1ecfb;
+      color: #244d7f;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .card, .panel {
+      background: #fff;
+      border: 1px solid #d9e1ea;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 0 rgba(18, 27, 36, 0.03);
+    }
+    .metric-label {
+      color: #627280;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .metric-value {
+      font-size: 24px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+    .panel {
+      margin-bottom: 16px;
+    }
+    .rows {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 0;
+      border-top: 1px solid #edf1f5;
+    }
+    .rows div {
+      padding: 10px 0;
+      border-bottom: 1px solid #edf1f5;
+      font-size: 13px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .rows div:nth-child(odd) {
+      color: #5e6e7a;
+      padding-right: 12px;
+    }
+    .mono {
+      font-family: Consolas, "Liberation Mono", monospace;
+      background: #f3f6fa;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #edf1f5;
+      padding: 10px 8px;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    th {
+      background: #f2f5f8;
+      color: #556674;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>v409 maturity narrative history suite design evidence</h1>
+        <p class="subtitle">本页用于截图：v409 把 benchmark history 的 suite-design readiness 推进到 maturity narrative，让 portfolio summary 直接解释 history 为什么需要 review。</p>
+      </div>
+      <div class="pill">MiniGPT v409</div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <div class="metric-label">Portfolio status</div>
+        <div class="metric-value">review</div>
+      </article>
+      <article class="card">
+        <div class="metric-label">History design review</div>
+        <div class="metric-value">1</div>
+      </article>
+      <article class="card">
+        <div class="metric-label">History design changes</div>
+        <div class="metric-value">1</div>
+      </article>
+      <article class="card">
+        <div class="metric-label">Failed reason</div>
+        <div class="metric-value" style="font-size:18px">suite_design</div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Maturity Carryover</h2>
+      <div class="rows">
+        <div>新增 summary 字段</div>
+        <div><span class="mono">benchmark_history_suite_design_non_comparison_ready_entry_count</span> 与 <span class="mono">benchmark_history_design_comparison_changed_entry_count</span></div>
+        <div>状态影响</div>
+        <div>history 中存在 suite-design not-ready entry 时，portfolio 进入 review，Benchmark History section 也显示对应 claim。</div>
+        <div>CLI 输出</div>
+        <div><span class="mono">benchmark_history_suite_design_non_comparison_ready_entries=1</span> 与 <span class="mono">benchmark_history_design_comparison_changed_entries=1</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Rendered Evidence Preview</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%">Surface</th>
+            <th style="width: 26%">Field</th>
+            <th style="width: 12%">Value</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>maturity_narrative.json</td>
+            <td>benchmark_history_suite_design_non_comparison_ready_entry_count</td>
+            <td>1</td>
+            <td>history ledger 保存了 suite-design 不比较就绪的 entry。</td>
+          </tr>
+          <tr>
+            <td>Markdown / HTML</td>
+            <td>History design review</td>
+            <td>1</td>
+            <td>成熟度报告直接展示这条边界。</td>
+          </tr>
+          <tr>
+            <td>CLI stdout</td>
+            <td>benchmark_history_design_comparison_changed_entries</td>
+            <td>1</td>
+            <td>自动化日志无需打开 JSON 也能发现设计比较状态变化。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <p>已通过 <span class="mono">tests/test_maturity_narrative.py</span> 定向测试；本轮同时完成 benchmark history 回归、source encoding、全量 pytest 和 git diff --check。</p>
+    </section>
+  </div>
+</body>
+</html>

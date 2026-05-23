@@ -84,6 +84,14 @@ def render_maturity_narrative_markdown(narrative: dict[str, Any]) -> str:
                 ("Benchmark history ready", summary.get("benchmark_history_ready_count")),
                 ("Benchmark history best", summary.get("benchmark_history_best_candidate")),
                 ("Benchmark history boundary", summary.get("benchmark_history_latest_boundary")),
+                (
+                    "Benchmark history suite-design not-ready",
+                    summary.get("benchmark_history_suite_design_non_comparison_ready_entry_count"),
+                ),
+                (
+                    "Benchmark history design changes",
+                    summary.get("benchmark_history_design_comparison_changed_entry_count"),
+                ),
                 ("Benchmark history readiness failures", summary.get("benchmark_history_readiness_requirement_failed_count")),
                 ("Benchmark history readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code_max")),
                 (
@@ -173,6 +181,8 @@ def render_maturity_narrative_html(narrative: dict[str, Any]) -> str:
         ("History entries", summary.get("benchmark_history_entry_count")),
         ("History ready", summary.get("benchmark_history_ready_count")),
         ("History boundary", summary.get("benchmark_history_latest_boundary")),
+        ("History design review", summary.get("benchmark_history_suite_design_non_comparison_ready_entry_count")),
+        ("History design changes", summary.get("benchmark_history_design_comparison_changed_entry_count")),
         ("History readiness failures", summary.get("benchmark_history_readiness_requirement_failed_count")),
         ("History readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code_max")),
         ("Dataset cards", summary.get("dataset_card_count")),

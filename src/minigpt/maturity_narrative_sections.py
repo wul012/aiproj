@@ -149,6 +149,7 @@ def _benchmark_history_status(summary: dict[str, Any]) -> str:
         int(summary.get("benchmark_history_review_count") or 0) > 0
         or int(summary.get("benchmark_history_case_regression_entry_count") or 0) > 0
         or int(summary.get("benchmark_history_generation_flag_regression_entry_count") or 0) > 0
+        or int(summary.get("benchmark_history_suite_design_non_comparison_ready_entry_count") or 0) > 0
     ):
         return "warn"
     if int(summary.get("benchmark_history_ready_count") or 0) > 0:
@@ -220,7 +221,9 @@ def _benchmark_history_claim(summary: dict[str, Any]) -> str:
         f"{summary.get('benchmark_history_latest_boundary') or 'missing'}; "
         f"readiness requirement failures={summary.get('benchmark_history_readiness_requirement_failed_count') or 0}, "
         f"max exit={summary.get('benchmark_history_readiness_requirement_exit_code_max') if summary.get('benchmark_history_readiness_requirement_exit_code_max') is not None else 'missing'}, "
-        f"failed reasons={', '.join(summary.get('benchmark_history_readiness_requirement_failed_reasons') or []) or 'none'}."
+        f"failed reasons={', '.join(summary.get('benchmark_history_readiness_requirement_failed_reasons') or []) or 'none'}; "
+        f"suite-design not-ready entries={summary.get('benchmark_history_suite_design_non_comparison_ready_entry_count') or 0}, "
+        f"design comparison changes={summary.get('benchmark_history_design_comparison_changed_entry_count') or 0}."
     )
 
 

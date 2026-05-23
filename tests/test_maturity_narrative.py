@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -247,6 +248,8 @@ def make_project(
                 "ready_count": 1,
                 "case_regression_entry_count": 0,
                 "generation_quality_flag_regression_entry_count": 0,
+                "suite_design_non_comparison_ready_entry_count": 0,
+                "design_comparison_changed_entry_count": 0,
                 "best_candidate_name": "demo-run",
                 "model_quality_claim": "candidate_evidence",
             },
@@ -271,6 +274,9 @@ def make_project(
                     "rubric_avg_score_delta": 5.0,
                     "generation_quality_total_flags_delta": -2,
                     "case_regression_count": 0,
+                    "eval_suite_design_comparison_status": "pass",
+                    "non_design_comparison_ready_count": 0,
+                    "design_comparison_changed_count": 0,
                     "boundary": "standard-benchmark-candidate-evidence",
                 }
             ],
@@ -382,6 +388,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_failed_count"], 0)
             self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_exit_code_max"], 0)
             self.assertEqual(narrative["summary"]["benchmark_history_readiness_requirement_failed_reasons"], [])
+            self.assertEqual(narrative["summary"]["benchmark_history_suite_design_non_comparison_ready_entry_count"], 0)
+            self.assertEqual(narrative["summary"]["benchmark_history_design_comparison_changed_entry_count"], 0)
             self.assertEqual(narrative["summary"]["benchmark_history_best_candidate"], "demo-run")
             self.assertEqual(narrative["summary"]["benchmark_history_latest_boundary"], "standard-benchmark-candidate-evidence")
             self.assertEqual(narrative["summary"]["dataset_card_count"], 1)
@@ -440,6 +448,50 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(history_section["status"], "fail")
             self.assertIn("readiness requirement failures=1", history_section["claim"])
             self.assertIn("Fix benchmark history readiness requirement failures", narrative["recommendations"][0])
+
+    def test_build_maturity_narrative_marks_review_for_history_suite_design_not_ready(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp))
+            history = json.loads(paths["benchmark_history"].read_text(encoding="utf-8"))
+            history["summary"]["ready_count"] = 0
+            history["summary"]["review_count"] = 1
+            history["summary"]["suite_design_non_comparison_ready_entry_count"] = 1
+            history["summary"]["design_comparison_changed_entry_count"] = 1
+            history["readiness_requirement"] = {
+                "status": "fail",
+                "decision": "stop",
+                "exit_code": 1,
+                "min_ready_entries": 1,
+                "ready_count": 0,
+                "entry_count": 1,
+                "evidence_kind": "real-benchmark",
+                "require_real_benchmark": True,
+                "failed_reasons": ["suite_design_non_comparison_ready_entries"],
+            }
+            history["entries"][0]["promotion_readiness"] = "review"
+            history["entries"][0]["eval_suite_design_comparison_status"] = "warn"
+            history["entries"][0]["non_design_comparison_ready_count"] = 1
+            history["entries"][0]["design_comparison_changed_count"] = 1
+            history["entries"][0]["boundary"] = "suite-design-not-comparison-ready"
+            write_json(paths["benchmark_history"], history)
+
+            narrative = build_maturity_narrative(paths["project"])
+            history_section = next(item for item in narrative["sections"] if item["key"] == "benchmark_history")
+
+            self.assertEqual(narrative["summary"]["portfolio_status"], "review")
+            self.assertEqual(narrative["summary"]["benchmark_history_ready_count"], 0)
+            self.assertEqual(narrative["summary"]["benchmark_history_review_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_suite_design_non_comparison_ready_entry_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_design_comparison_changed_entry_count"], 1)
+            self.assertEqual(narrative["summary"]["benchmark_history_latest_boundary"], "suite-design-not-comparison-ready")
+            self.assertEqual(
+                narrative["summary"]["benchmark_history_readiness_requirement_failed_reasons"],
+                ["suite_design_non_comparison_ready_entries"],
+            )
+            self.assertEqual(history_section["status"], "fail")
+            self.assertIn("suite-design not-ready entries=1", history_section["claim"])
+            self.assertIn("design comparison changes=1", history_section["claim"])
+            self.assertIn("suite-design comparison readiness", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_marks_review_for_release_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -695,6 +747,8 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Scorecard decision non-ready candidates", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark histories", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history boundary", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history suite-design not-ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("Benchmark history design changes", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness failures", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness exit", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Evidence Matrix", Path(outputs["html"]).read_text(encoding="utf-8"))
@@ -710,10 +764,37 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertIn("Benchmark Promotion Decision", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark History", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("History boundary", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("History design review", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("History design changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("History readiness failures", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("History readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Decision eval", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark Quality", Path(outputs["html"]).read_text(encoding="utf-8"))
+
+    def test_cli_prints_benchmark_history_suite_design_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_project(Path(tmp))
+            out_dir = Path(tmp) / "cli-narrative"
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "build_maturity_narrative.py"),
+                    "--project-root",
+                    str(paths["project"]),
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+
+            self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
+            self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
+            self.assertTrue((out_dir / "maturity_narrative.json").is_file())
 
     def test_render_maturity_narrative_html_escapes_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
