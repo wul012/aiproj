@@ -44,6 +44,7 @@ def write_training_scale_run_comparison_csv(report: dict[str, Any], path: str | 
         "batch_comparison_review_action_count",
         "batch_comparison_blocker_action_count",
         "batch_maturity_coverage_regression_count",
+        "batch_maturity_suite_design_regression_count",
         "batch_maturity_ci_regression_count",
         "batch_maturity_ci_regression_reason_counts",
         "execute",
@@ -84,6 +85,7 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
         f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
         f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
         f"- Batch coverage regressions: `{summary.get('batch_maturity_coverage_regression_count')}`",
+        f"- Batch suite-design regressions: `{summary.get('batch_maturity_suite_design_regression_count')}`",
         f"- Batch CI regressions: `{summary.get('batch_maturity_ci_regression_count')}`",
         f"- Batch CI regression reasons: `{_fmt_mapping(summary.get('batch_maturity_ci_regression_reason_counts'))}`",
         f"- Suite consistency: `{summary.get('suite_consistency')}`",
@@ -91,8 +93,8 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
         "",
         "## Runs",
         "",
-        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | CI | CI Reasons | Score | Relation |",
-        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | --- | ---: | --- |",
+        "| Run | Status | Allowed | Gate | Profile | Scale | Suite | Variants | Batch | Review | Blockers | Suite Design | CI | CI Reasons | Score | Relation |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | ---: | --- | ---: | --- |",
     ]
     deltas = {row.get("name"): row for row in _list_of_dicts(report.get("baseline_deltas"))}
     for run in _list_of_dicts(report.get("runs")):
@@ -112,6 +114,7 @@ def render_training_scale_run_comparison_markdown(report: dict[str, Any]) -> str
                     _md(run.get("batch_status")),
                     _md(run.get("batch_comparison_review_action_count")),
                     _md(run.get("batch_comparison_blocker_action_count")),
+                    _md(run.get("batch_maturity_suite_design_regression_count")),
                     _md(run.get("batch_maturity_ci_regression_count")),
                     _md(_fmt_mapping(run.get("batch_maturity_ci_regression_reason_counts"))),
                     _md(run.get("readiness_score")),
@@ -144,6 +147,7 @@ def render_training_scale_run_comparison_html(report: dict[str, Any]) -> str:
         ("Batch reviews", summary.get("batch_comparison_review_action_count")),
         ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
         ("Coverage regressions", summary.get("batch_maturity_coverage_regression_count")),
+        ("Suite-design regressions", summary.get("batch_maturity_suite_design_regression_count")),
         ("CI regressions", summary.get("batch_maturity_ci_regression_count")),
         ("CI regression reasons", _fmt_mapping(summary.get("batch_maturity_ci_regression_reason_counts"))),
         ("Gate warn", summary.get("gate_warn_count")),
@@ -214,6 +218,7 @@ def _runs_table(report: dict[str, Any]) -> str:
             f"<td>{_e(run.get('batch_status'))}</td>"
             f"<td>{_e(run.get('batch_comparison_review_action_count'))}</td>"
             f"<td>{_e(run.get('batch_comparison_blocker_action_count'))}</td>"
+            f"<td>{_e(run.get('batch_maturity_suite_design_regression_count'))}</td>"
             f"<td>{_e(run.get('batch_maturity_ci_regression_count'))}</td>"
             f"<td>{_e(_fmt_mapping(run.get('batch_maturity_ci_regression_reason_counts')))}</td>"
             f"<td>{_e(run.get('readiness_score'))}</td>"
@@ -222,7 +227,7 @@ def _runs_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Runs</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>CI</th><th>CI Reasons</th><th>Score</th><th>Relation</th></tr></thead>"
+        "<thead><tr><th>Run</th><th>Status</th><th>Allowed</th><th>Gate</th><th>Profile</th><th>Scale</th><th>Suite</th><th>Variants</th><th>Batch</th><th>Review</th><th>Blockers</th><th>Suite Design</th><th>CI</th><th>CI Reasons</th><th>Score</th><th>Relation</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

@@ -192,6 +192,8 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
                 "maturity_review_count": 2,
                 "maturity_coverage_regression_count": 1,
                 "maturity_coverage_regression_names": ["coverage-risk"],
+                "maturity_suite_design_regression_count": 1,
+                "maturity_suite_design_regression_names": ["suite-risk"],
                 "maturity_ci_regression_count": 1,
                 "maturity_ci_regression_names": ["ci-risk"],
                 "maturity_ci_regression_reason_counts": {
@@ -224,25 +226,32 @@ class TrainingScaleRunComparisonTests(unittest.TestCase):
             html = render_training_scale_run_comparison_html(report)
 
         self.assertEqual(run["batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(run["batch_maturity_suite_design_regression_count"], 1)
+        self.assertEqual(run["batch_maturity_suite_design_regression_names"], ["suite-risk"])
         self.assertEqual(run["batch_maturity_ci_regression_names"], ["ci-risk"])
         self.assertEqual(
             run["batch_maturity_ci_regression_reason_counts"],
             {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
         )
         self.assertEqual(summary["batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["batch_maturity_suite_design_regression_count"], 1)
+        self.assertEqual(summary["batch_maturity_suite_design_regression_names"], ["suite-risk"])
         self.assertEqual(summary["batch_maturity_ci_regression_names"], ["ci-risk"])
         self.assertEqual(
             summary["batch_maturity_ci_regression_reason_counts"],
             {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
         )
         self.assertIn("batch_maturity_ci_regression_count", csv_text)
+        self.assertIn("batch_maturity_suite_design_regression_count", csv_text)
         self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
         self.assertIn("ci_failed_checks_increased", csv_text)
+        self.assertIn("Batch suite-design regressions", markdown)
         self.assertIn("Batch CI regressions", markdown)
         self.assertIn("Batch CI regression reasons", markdown)
         self.assertIn("ci_failed_checks_increased:2", markdown)
         self.assertIn("| ci-risk |", markdown)
         self.assertIn("CI regressions", html)
+        self.assertIn("Suite-design regressions", html)
         self.assertIn("CI regression reasons", html)
         self.assertIn("ci_failed_checks_increased:2", html)
 

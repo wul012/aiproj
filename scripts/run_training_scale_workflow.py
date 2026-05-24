@@ -38,7 +38,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--decision-require-clean-batch-review",
         action="store_true",
-        help="Block workflow decisions when batch review actions, blockers, or maturity coverage regressions are present.",
+        help="Block workflow decisions when batch review actions, blockers, or maturity regressions are present.",
     )
     parser.add_argument("--decision-execute-out-root", type=Path, default=None)
     parser.add_argument("--title", type=str, default="MiniGPT training scale workflow")
@@ -81,10 +81,29 @@ def main() -> None:
     print(f"clean_batch_review_status={report.get('summary', {}).get('clean_batch_review_status')}")
     print(f"batch_maturity_ci_regression_count={report.get('summary', {}).get('batch_maturity_ci_regression_count')}")
     print(
+        "batch_maturity_suite_design_regression_count="
+        f"{report.get('summary', {}).get('batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "batch_maturity_suite_design_regression_names="
+        + json.dumps(report.get("summary", {}).get("batch_maturity_suite_design_regression_names", []), ensure_ascii=False)
+    )
+    print(
         "batch_maturity_ci_regression_reason_counts="
         + json.dumps(report.get("summary", {}).get("batch_maturity_ci_regression_reason_counts", {}), ensure_ascii=False)
     )
     print(f"selected_batch_maturity_ci_regression_count={report.get('summary', {}).get('selected_batch_maturity_ci_regression_count')}")
+    print(
+        "selected_batch_maturity_suite_design_regression_count="
+        f"{report.get('summary', {}).get('selected_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(
+            report.get("summary", {}).get("selected_batch_maturity_suite_design_regression_names", []),
+            ensure_ascii=False,
+        )
+    )
     print(
         "selected_batch_maturity_ci_regression_reason_counts="
         + json.dumps(

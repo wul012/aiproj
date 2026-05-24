@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 412 carries benchmark-history suite-design readiness from release bundles into release gates, so gate checks and reports can warn on prompt-suite design boundaries before approval.
+Version 418 carries suite-design regression context from training portfolio batch reviews into scale-run, decision, workflow, rendered output, and CLI evidence so execution handoffs can explain benchmark-suite blockers instead of only showing aggregate blocker counts.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 412 carries benchmark-history suite-design readiness from release bundle
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v418 checkpoint
+
+- Training portfolio batch summaries now preserve maturity suite-design regression counts and affected portfolio names from comparison review summaries.
+- Training scale run, scale-run comparison, decision, workflow, rendered artifacts, and CLI stdout now expose batch suite-design regression context.
+- Clean batch-review gating treats suite-design regressions as maturity-regression evidence, while default decisions still keep the selected run visible for review.
+- Tests cover batch carryover, scale-run rendering, comparison aggregation, decision/CLI output, and workflow propagation.
+- Archived training scale suite-design decision evidence in `d/418`; tag: `v418.0.0`.
 
 ## Latest v417 checkpoint
 

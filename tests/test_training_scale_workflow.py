@@ -171,11 +171,15 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
                 payload = real_builder(*args, **kwargs)
                 summary = dict(payload["summary"])
                 summary["selected_batch_maturity_ci_regression_count"] = 1
+                summary["selected_batch_maturity_suite_design_regression_count"] = 1
+                summary["selected_batch_maturity_suite_design_regression_names"] = ["review"]
                 summary["selected_batch_maturity_ci_regression_reason_counts"] = {
                     "ci_failed_checks_increased": 2,
                     "ci_order_violations_increased": 1,
                 }
                 summary["batch_maturity_ci_regression_count"] = 2
+                summary["batch_maturity_suite_design_regression_count"] = 1
+                summary["batch_maturity_suite_design_regression_names"] = ["review"]
                 summary["batch_maturity_ci_regression_names"] = ["review", "standard"]
                 summary["batch_maturity_ci_regression_reason_counts"] = {
                     "ci_failed_checks_increased": 3,
@@ -201,24 +205,35 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
 
             summary = report["summary"]
             self.assertEqual(summary["selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(summary["selected_batch_maturity_suite_design_regression_count"], 1)
+            self.assertEqual(summary["selected_batch_maturity_suite_design_regression_names"], ["review"])
             self.assertEqual(
                 summary["selected_batch_maturity_ci_regression_reason_counts"],
                 {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
             )
             self.assertEqual(summary["batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(summary["batch_maturity_suite_design_regression_count"], 1)
+            self.assertEqual(summary["batch_maturity_suite_design_regression_names"], ["review"])
             self.assertEqual(summary["batch_maturity_ci_regression_names"], ["review", "standard"])
             self.assertEqual(
                 summary["batch_maturity_ci_regression_reason_counts"],
                 {"ci_failed_checks_increased": 3, "ci_order_violations_increased": 1},
             )
             self.assertTrue(any("ci_failed_checks_increased:3" in item for item in report["recommendations"]))
+            self.assertTrue(any("suite-design regressed" in item for item in report["recommendations"]))
+            self.assertIn("Selected batch suite-design regressions", markdown)
+            self.assertIn("Batch suite-design regressions", markdown)
             self.assertIn("Batch CI regressions", markdown)
             self.assertIn("Batch CI-regressed names", markdown)
             self.assertIn("Batch CI regression reasons", markdown)
             self.assertIn("ci_failed_checks_increased:3", markdown)
+            self.assertIn("Selected suite-design regressions", html)
+            self.assertIn("Batch suite-design regressions", html)
             self.assertIn("Batch CI regressions", html)
             self.assertIn("CI regression reasons", html)
             self.assertIn("ci_failed_checks_increased:3", html)
+            self.assertIn("selected_batch_maturity_suite_design_regression_count", csv_text)
+            self.assertIn("batch_maturity_suite_design_regression_count", csv_text)
             self.assertIn("selected_batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("batch_maturity_ci_regression_count", csv_text)
@@ -254,7 +269,9 @@ class TrainingScaleWorkflowTests(unittest.TestCase):
 
             self.assertEqual(completed.returncode, 0)
             self.assertIn("batch_maturity_ci_regression_reason_counts=", completed.stdout)
+            self.assertIn("batch_maturity_suite_design_regression_count=", completed.stdout)
             self.assertIn("selected_batch_maturity_ci_regression_reason_counts=", completed.stdout)
+            self.assertIn("selected_batch_maturity_suite_design_regression_count=", completed.stdout)
 
     def test_workflow_clean_batch_fields_are_rendered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

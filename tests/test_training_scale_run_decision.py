@@ -212,6 +212,8 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             allowed["batch_comparison_review_action_count"] = 0
             allowed["batch_comparison_blocker_action_count"] = 0
             allowed["batch_maturity_coverage_regression_count"] = 0
+            allowed["batch_maturity_suite_design_regression_count"] = 1
+            allowed["batch_maturity_suite_design_regression_names"] = ["suite-risk"]
             allowed["batch_maturity_ci_regression_count"] = 1
             allowed["batch_maturity_ci_regression_names"] = ["ci-risk"]
             allowed["batch_maturity_ci_regression_reason_counts"] = {
@@ -221,6 +223,8 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             payload["summary"]["batch_comparison_review_action_count"] = 0
             payload["summary"]["batch_comparison_blocker_action_count"] = 0
             payload["summary"]["batch_maturity_coverage_regression_count"] = 0
+            payload["summary"]["batch_maturity_suite_design_regression_count"] = 1
+            payload["summary"]["batch_maturity_suite_design_regression_names"] = ["suite-risk"]
             payload["summary"]["batch_maturity_ci_regression_count"] = 1
             payload["summary"]["batch_maturity_ci_regression_names"] = ["ci-risk"]
             payload["summary"]["batch_maturity_ci_regression_reason_counts"] = {
@@ -238,11 +242,15 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
 
             self.assertEqual(default_report["summary"]["selected_batch_review_status"], "review")
             self.assertEqual(default_report["summary"]["selected_batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(default_report["summary"]["selected_batch_maturity_suite_design_regression_count"], 1)
+            self.assertEqual(default_report["summary"]["selected_batch_maturity_suite_design_regression_names"], ["suite-risk"])
             self.assertEqual(
                 default_report["summary"]["selected_batch_maturity_ci_regression_reason_counts"],
                 {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
             )
             self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_count"], 1)
+            self.assertEqual(default_report["summary"]["batch_maturity_suite_design_regression_count"], 1)
+            self.assertEqual(default_report["summary"]["batch_maturity_suite_design_regression_names"], ["suite-risk"])
             self.assertEqual(default_report["summary"]["batch_maturity_ci_regression_names"], ["ci-risk"])
             self.assertEqual(
                 default_report["summary"]["batch_maturity_ci_regression_reason_counts"],
@@ -254,6 +262,7 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             self.assertIsNone(strict_report["selected_run"])
             reasons = [reason for row in strict_report["rejected_runs"] for reason in row["reasons"]]
             self.assertIn("batch maturity CI regressions are present", reasons)
+            self.assertIn("batch maturity suite-design regressions are present", reasons)
 
     def test_clean_batch_review_fields_are_rendered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -284,12 +293,16 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             payload = json.loads(comparison.read_text(encoding="utf-8"))
             allowed = payload["runs"][0]
             allowed["batch_maturity_ci_regression_count"] = 1
+            allowed["batch_maturity_suite_design_regression_count"] = 1
+            allowed["batch_maturity_suite_design_regression_names"] = ["suite-risk"]
             allowed["batch_maturity_ci_regression_names"] = ["ci-risk"]
             allowed["batch_maturity_ci_regression_reason_counts"] = {
                 "ci_failed_checks_increased": 2,
                 "ci_order_violations_increased": 1,
             }
             payload["summary"]["batch_maturity_ci_regression_count"] = 1
+            payload["summary"]["batch_maturity_suite_design_regression_count"] = 1
+            payload["summary"]["batch_maturity_suite_design_regression_names"] = ["suite-risk"]
             payload["summary"]["batch_maturity_ci_regression_names"] = ["ci-risk"]
             payload["summary"]["batch_maturity_ci_regression_reason_counts"] = {
                 "ci_failed_checks_increased": 2,
@@ -317,22 +330,31 @@ class TrainingScaleRunDecisionTests(unittest.TestCase):
             )
 
             self.assertIn("selected_batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("selected_batch_maturity_suite_design_regression_count", csv_text)
             self.assertIn("selected_batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("batch_maturity_ci_regression_count", csv_text)
+            self.assertIn("batch_maturity_suite_design_regression_count", csv_text)
             self.assertIn("batch_maturity_ci_regression_reason_counts", csv_text)
             self.assertIn("ci_failed_checks_increased", csv_text)
+            self.assertIn("Selected batch suite-design regressions", markdown)
             self.assertIn("Selected batch CI regressions", markdown)
             self.assertIn("Selected batch CI regression reasons", markdown)
+            self.assertIn("Batch suite-design regressions", markdown)
             self.assertIn("Batch CI regressions", markdown)
             self.assertIn("Batch CI regression reasons", markdown)
             self.assertIn("ci_failed_checks_increased:2", markdown)
+            self.assertIn("Selected suite-design regressions", html)
             self.assertIn("Selected CI regressions", html)
             self.assertIn("Selected CI reasons", html)
+            self.assertIn("Suite-design regressions", html)
             self.assertIn("CI regressions", html)
             self.assertIn("CI regression reasons", html)
             self.assertIn("ci_failed_checks_increased:2", html)
             self.assertIn("batch_maturity_ci_regression_reason_counts=", cli.stdout)
+            self.assertIn("batch_maturity_suite_design_regression_count=1", cli.stdout)
+            self.assertIn('batch_maturity_suite_design_regression_names=["suite-risk"]', cli.stdout)
             self.assertIn("selected_batch_maturity_ci_regression_reason_counts=", cli.stdout)
+            self.assertIn("selected_batch_maturity_suite_design_regression_count=1", cli.stdout)
             self.assertIn("ci_failed_checks_increased", cli.stdout)
 
     def test_rejects_comparison_without_runs(self) -> None:

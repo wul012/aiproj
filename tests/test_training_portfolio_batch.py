@@ -188,6 +188,8 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
                     "ci_failed_checks_increased": 2,
                     "ci_order_violations_increased": 1,
                 },
+                "maturity_suite_design_regression_count": 1,
+                "maturity_suite_design_regression_names": ["candidate"],
                 "maturity_coverage_regression_count": 1,
                 "maturity_coverage_regression_names": ["candidate"],
             },
@@ -207,6 +209,8 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             summary["maturity_ci_regression_reason_counts"],
             {"ci_failed_checks_increased": 2, "ci_order_violations_increased": 1},
         )
+        self.assertEqual(summary["maturity_suite_design_regression_count"], 1)
+        self.assertEqual(summary["maturity_suite_design_regression_names"], ["candidate"])
         self.assertEqual(summary["maturity_coverage_regression_names"], ["candidate"])
         self.assertEqual(summary["blocker_reasons"], ["best_score_ci_regressed"])
         self.assertEqual(summary["blocker_portfolios"], ["candidate"])
@@ -255,6 +259,8 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
                 "maturity_ci_regression_count": 1,
                 "maturity_ci_regression_names": ["<base>"],
                 "maturity_ci_regression_reason_counts": {"ci_failed_checks_increased": 1},
+                "maturity_suite_design_regression_count": 1,
+                "maturity_suite_design_regression_names": ["<base>"],
                 "maturity_coverage_regression_count": 0,
                 "maturity_coverage_regression_names": [],
                 "blocker_reasons": ["best_score_ci_regressed"],
@@ -268,8 +274,10 @@ class TrainingPortfolioBatchTests(unittest.TestCase):
             self.assertIn("Pair modes: `same_checkpoint_baseline=1`", markdown)
             self.assertIn("Comparison review actions", markdown)
             self.assertIn("CI-regressed portfolios", markdown)
+            self.assertIn("Suite-design regressed portfolios", markdown)
             self.assertIn("CI regression reasons", markdown)
             self.assertIn("ci_failed_checks_increased:1", markdown)
+            self.assertIn("Suite-design regressions", html)
             self.assertIn("CI regressions", html)
             self.assertIn("CI regression reasons", html)
             self.assertIn("ci_failed_checks_increased:1", html)

@@ -250,6 +250,12 @@ def _workflow_summary(
         "selected_batch_comparison_review_action_count": decision_summary.get("selected_batch_comparison_review_action_count"),
         "selected_batch_comparison_blocker_action_count": decision_summary.get("selected_batch_comparison_blocker_action_count"),
         "selected_batch_maturity_coverage_regression_count": decision_summary.get("selected_batch_maturity_coverage_regression_count"),
+        "selected_batch_maturity_suite_design_regression_count": decision_summary.get(
+            "selected_batch_maturity_suite_design_regression_count"
+        ),
+        "selected_batch_maturity_suite_design_regression_names": _string_list(
+            decision_summary.get("selected_batch_maturity_suite_design_regression_names")
+        ),
         "selected_batch_maturity_ci_regression_count": decision_summary.get("selected_batch_maturity_ci_regression_count"),
         "selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
             decision_summary.get("selected_batch_maturity_ci_regression_reason_counts")
@@ -261,6 +267,10 @@ def _workflow_summary(
         "batch_comparison_blocker_action_count": decision_summary.get("batch_comparison_blocker_action_count"),
         "batch_maturity_coverage_regression_count": decision_summary.get("batch_maturity_coverage_regression_count"),
         "batch_maturity_coverage_regression_names": _string_list(decision_summary.get("batch_maturity_coverage_regression_names")),
+        "batch_maturity_suite_design_regression_count": decision_summary.get("batch_maturity_suite_design_regression_count"),
+        "batch_maturity_suite_design_regression_names": _string_list(
+            decision_summary.get("batch_maturity_suite_design_regression_names")
+        ),
         "batch_maturity_ci_regression_count": decision_summary.get("batch_maturity_ci_regression_count"),
         "batch_maturity_ci_regression_names": _string_list(decision_summary.get("batch_maturity_ci_regression_names")),
         "batch_maturity_ci_regression_reason_counts": _int_mapping(
@@ -289,12 +299,19 @@ def _workflow_recommendations(summary: dict[str, Any], decision: dict[str, Any])
     if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
         recommendations.append("Fix workflow benchmark suite consistency before using the decision as clean model-quality evidence.")
     if summary.get("decision_require_clean_batch_review") and summary.get("clean_batch_review_status") != "clean":
-        recommendations.append("Resolve workflow batch review, blocker, and coverage-regression evidence before using this as clean execute automation.")
+        recommendations.append("Resolve workflow batch review, blocker, and maturity-regression evidence before using this as clean execute automation.")
     if int(summary.get("batch_maturity_ci_regression_count") or 0):
         detail = _reason_detail(summary.get("batch_maturity_ci_regression_reason_counts"))
         suffix = f" Observed reasons: {detail}." if detail else ""
         recommendations.append(
             "Inspect CI-regressed batch portfolio evidence before treating this workflow as a clean scale-run handoff."
+            + suffix
+        )
+    if int(summary.get("batch_maturity_suite_design_regression_count") or 0):
+        names = ", ".join(_string_list(summary.get("batch_maturity_suite_design_regression_names")))
+        suffix = f" Affected portfolios: {names}." if names else ""
+        recommendations.append(
+            "Inspect suite-design regressed batch portfolio evidence before treating this workflow as clean benchmark evidence."
             + suffix
         )
     command = str(decision.get("execute_command_text") or "")

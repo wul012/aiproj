@@ -362,6 +362,9 @@ d/416/解释/说明.md
 d/417/图片
 d/417/解释/说明.md
  -> v417 training portfolio suite-design review action 的运行截图和解释
+d/418/图片
+d/418/解释/说明.md
+ -> v418 training scale suite-design decision carryover 的运行截图和解释
 ```
 
 写入规则：

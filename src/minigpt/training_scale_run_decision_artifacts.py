@@ -35,11 +35,13 @@ def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Pa
         "selected_batch_comparison_review_action_count",
         "selected_batch_comparison_blocker_action_count",
         "selected_batch_maturity_coverage_regression_count",
+        "selected_batch_maturity_suite_design_regression_count",
         "selected_batch_maturity_ci_regression_count",
         "selected_batch_maturity_ci_regression_reason_counts",
         "batch_comparison_review_action_count",
         "batch_comparison_blocker_action_count",
         "batch_maturity_coverage_regression_count",
+        "batch_maturity_suite_design_regression_count",
         "batch_maturity_ci_regression_count",
         "batch_maturity_ci_regression_reason_counts",
         "selected_suite_path",
@@ -63,6 +65,9 @@ def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Pa
             "selected_batch_comparison_review_action_count": summary.get("selected_batch_comparison_review_action_count"),
             "selected_batch_comparison_blocker_action_count": summary.get("selected_batch_comparison_blocker_action_count"),
             "selected_batch_maturity_coverage_regression_count": summary.get("selected_batch_maturity_coverage_regression_count"),
+            "selected_batch_maturity_suite_design_regression_count": summary.get(
+                "selected_batch_maturity_suite_design_regression_count"
+            ),
             "selected_batch_maturity_ci_regression_count": summary.get("selected_batch_maturity_ci_regression_count"),
             "selected_batch_maturity_ci_regression_reason_counts": summary.get(
                 "selected_batch_maturity_ci_regression_reason_counts"
@@ -70,6 +75,7 @@ def write_training_scale_run_decision_csv(report: dict[str, Any], path: str | Pa
             "batch_comparison_review_action_count": summary.get("batch_comparison_review_action_count"),
             "batch_comparison_blocker_action_count": summary.get("batch_comparison_blocker_action_count"),
             "batch_maturity_coverage_regression_count": summary.get("batch_maturity_coverage_regression_count"),
+            "batch_maturity_suite_design_regression_count": summary.get("batch_maturity_suite_design_regression_count"),
             "batch_maturity_ci_regression_count": summary.get("batch_maturity_ci_regression_count"),
             "batch_maturity_ci_regression_reason_counts": summary.get("batch_maturity_ci_regression_reason_counts"),
             "selected_suite_path": summary.get("selected_suite_path"),
@@ -102,11 +108,13 @@ def render_training_scale_run_decision_markdown(report: dict[str, Any]) -> str:
         f"- Selected batch review status: `{summary.get('selected_batch_review_status')}`",
         f"- Selected batch reviews: `{summary.get('selected_batch_comparison_review_action_count')}`",
         f"- Selected batch blockers: `{summary.get('selected_batch_comparison_blocker_action_count')}`",
+        f"- Selected batch suite-design regressions: `{summary.get('selected_batch_maturity_suite_design_regression_count')}`",
         f"- Selected batch CI regressions: `{summary.get('selected_batch_maturity_ci_regression_count')}`",
         f"- Selected batch CI regression reasons: `{_fmt_mapping(summary.get('selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
         f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
         f"- Batch coverage regressions: `{summary.get('batch_maturity_coverage_regression_count')}`",
+        f"- Batch suite-design regressions: `{summary.get('batch_maturity_suite_design_regression_count')}`",
         f"- Batch CI regressions: `{summary.get('batch_maturity_ci_regression_count')}`",
         f"- Batch CI regression reasons: `{_fmt_mapping(summary.get('batch_maturity_ci_regression_reason_counts'))}`",
         f"- Selected suite: `{summary.get('selected_suite_path')}`",
@@ -168,11 +176,13 @@ def render_training_scale_run_decision_html(report: dict[str, Any]) -> str:
         ("Batch review status", summary.get("selected_batch_review_status")),
         ("Selected reviews", summary.get("selected_batch_comparison_review_action_count")),
         ("Selected blockers", summary.get("selected_batch_comparison_blocker_action_count")),
+        ("Selected suite-design regressions", summary.get("selected_batch_maturity_suite_design_regression_count")),
         ("Selected CI regressions", summary.get("selected_batch_maturity_ci_regression_count")),
         ("Selected CI reasons", _fmt_mapping(summary.get("selected_batch_maturity_ci_regression_reason_counts"))),
         ("Batch reviews", summary.get("batch_comparison_review_action_count")),
         ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
         ("Coverage regressions", summary.get("batch_maturity_coverage_regression_count")),
+        ("Suite-design regressions", summary.get("batch_maturity_suite_design_regression_count")),
         ("CI regressions", summary.get("batch_maturity_ci_regression_count")),
         ("CI regression reasons", _fmt_mapping(summary.get("batch_maturity_ci_regression_reason_counts"))),
         ("Suite", summary.get("selected_suite_path")),
@@ -232,7 +242,10 @@ def write_training_scale_run_decision_outputs(report: dict[str, Any], out_dir: s
 def _command_section(report: dict[str, Any]) -> str:
     text = str(report.get("execute_command_text") or "")
     if not text:
-        text = "No execute command because no eligible run was selected."
+        if _dict(report.get("selected_run")):
+            text = "No execute command because the selected run origin could not be resolved."
+        else:
+            text = "No execute command because no eligible run was selected."
     return f"<section><h2>Execute Command</h2><pre>{_e(text)}</pre></section>"
 
 

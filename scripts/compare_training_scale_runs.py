@@ -39,6 +39,12 @@ def main() -> None:
     print(f"run_count={report.get('run_count')}")
     print(f"baseline={report.get('baseline', {}).get('name')}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
+    summary = report.get("summary", {})
+    print(f"batch_maturity_suite_design_regression_count={summary.get('batch_maturity_suite_design_regression_count')}")
+    print(
+        "batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("batch_maturity_suite_design_regression_names", []), ensure_ascii=False)
+    )
     print("best_by_readiness=" + json.dumps(report.get("best_by_readiness", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
 

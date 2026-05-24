@@ -441,6 +441,8 @@ def _comparison_review_summary(comparison_report: dict[str, Any]) -> dict[str, A
         "maturity_ci_regression_count": _as_int(summary.get("maturity_ci_regression_count")) or 0,
         "maturity_ci_regression_names": _string_list(summary.get("maturity_ci_regression_names")),
         "maturity_ci_regression_reason_counts": _int_mapping(summary.get("maturity_ci_regression_reason_counts")),
+        "maturity_suite_design_regression_count": _as_int(summary.get("maturity_suite_design_regression_count")) or 0,
+        "maturity_suite_design_regression_names": _string_list(summary.get("maturity_suite_design_regression_names")),
         "maturity_coverage_regression_count": _as_int(summary.get("maturity_coverage_regression_count")) or 0,
         "maturity_coverage_regression_names": _string_list(summary.get("maturity_coverage_regression_names")),
         "blocker_reasons": _string_list([action.get("reason") for action in blockers]),

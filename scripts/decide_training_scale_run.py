@@ -25,7 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--require-clean-batch-review",
         action="store_true",
-        help="Reject comparisons with batch review actions, blockers, or maturity coverage regressions.",
+        help="Reject comparisons with batch review actions, blockers, or maturity regressions.",
     )
     parser.add_argument("--execute-out-root", type=Path, default=None, help="Output directory for the generated --execute command.")
     parser.add_argument("--python", type=str, default=sys.executable)
@@ -53,11 +53,24 @@ def main() -> None:
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))
     summary = report.get("summary", {})
     print(f"batch_maturity_ci_regression_count={summary.get('batch_maturity_ci_regression_count')}")
+    print(f"batch_maturity_suite_design_regression_count={summary.get('batch_maturity_suite_design_regression_count')}")
+    print(
+        "batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("batch_maturity_suite_design_regression_names", []), ensure_ascii=False)
+    )
     print(
         "batch_maturity_ci_regression_reason_counts="
         + json.dumps(summary.get("batch_maturity_ci_regression_reason_counts", {}), ensure_ascii=False)
     )
     print(f"selected_batch_maturity_ci_regression_count={summary.get('selected_batch_maturity_ci_regression_count')}")
+    print(
+        "selected_batch_maturity_suite_design_regression_count="
+        f"{summary.get('selected_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("selected_batch_maturity_suite_design_regression_names", []), ensure_ascii=False)
+    )
     print(
         "selected_batch_maturity_ci_regression_reason_counts="
         + json.dumps(summary.get("selected_batch_maturity_ci_regression_reason_counts", {}), ensure_ascii=False)

@@ -81,6 +81,10 @@ def build_training_scale_run_decision(
             "batch_comparison_review_action_count": _int(run.get("batch_comparison_review_action_count")),
             "batch_comparison_blocker_action_count": _int(run.get("batch_comparison_blocker_action_count")),
             "batch_maturity_coverage_regression_count": _int(run.get("batch_maturity_coverage_regression_count")),
+            "batch_maturity_suite_design_regression_count": _int(run.get("batch_maturity_suite_design_regression_count")),
+            "batch_maturity_suite_design_regression_names": _string_list(
+                run.get("batch_maturity_suite_design_regression_names")
+            ),
             "batch_maturity_ci_regression_count": _int(run.get("batch_maturity_ci_regression_count")),
             "batch_maturity_ci_regression_reason_counts": _int_mapping(run.get("batch_maturity_ci_regression_reason_counts")),
             "reasons": reasons,
@@ -197,6 +201,8 @@ def _clean_batch_review_reasons(comparison_summary: dict[str, Any], require_clea
         reasons.append("batch comparison review actions are present")
     if _int(comparison_summary.get("batch_maturity_coverage_regression_count")):
         reasons.append("batch maturity coverage regressions are present")
+    if _int(comparison_summary.get("batch_maturity_suite_design_regression_count")):
+        reasons.append("batch maturity suite-design regressions are present")
     if _int(comparison_summary.get("batch_maturity_ci_regression_count")):
         reasons.append("batch maturity CI regressions are present")
     return reasons
@@ -347,6 +353,14 @@ def _decision_summary(
         "selected_batch_comparison_review_action_count": _selected_int(selected, "batch_comparison_review_action_count"),
         "selected_batch_comparison_blocker_action_count": _selected_int(selected, "batch_comparison_blocker_action_count"),
         "selected_batch_maturity_coverage_regression_count": _selected_int(selected, "batch_maturity_coverage_regression_count"),
+        "selected_batch_maturity_suite_design_regression_count": _selected_int(
+            selected,
+            "batch_maturity_suite_design_regression_count",
+        ),
+        "selected_batch_maturity_suite_design_regression_names": _selected_list(
+            selected,
+            "batch_maturity_suite_design_regression_names",
+        ),
         "selected_batch_maturity_ci_regression_count": _selected_int(selected, "batch_maturity_ci_regression_count"),
         "selected_batch_maturity_ci_regression_reason_counts": _selected_mapping(
             selected,
@@ -365,6 +379,12 @@ def _decision_summary(
         "batch_maturity_review_count": _int(comparison_summary.get("batch_maturity_review_count")),
         "batch_maturity_coverage_regression_count": _int(comparison_summary.get("batch_maturity_coverage_regression_count")),
         "batch_maturity_coverage_regression_names": _string_list(comparison_summary.get("batch_maturity_coverage_regression_names")),
+        "batch_maturity_suite_design_regression_count": _int(
+            comparison_summary.get("batch_maturity_suite_design_regression_count")
+        ),
+        "batch_maturity_suite_design_regression_names": _string_list(
+            comparison_summary.get("batch_maturity_suite_design_regression_names")
+        ),
         "batch_maturity_ci_regression_count": _int(comparison_summary.get("batch_maturity_ci_regression_count")),
         "batch_maturity_ci_regression_names": _string_list(comparison_summary.get("batch_maturity_ci_regression_names")),
         "batch_maturity_ci_regression_reason_counts": _int_mapping(
@@ -399,9 +419,11 @@ def _recommendations(
         recommendations.append("Review selected batch comparison actions before treating this decision as clean execute evidence.")
     if _int(comparison_summary.get("batch_comparison_blocker_action_count")):
         recommendations.append("Keep batch comparison blocker reasons with the decision record for downstream promotion review.")
-    elif _int(comparison_summary.get("batch_maturity_ci_regression_count")):
+    if _int(comparison_summary.get("batch_maturity_ci_regression_count")):
         recommendations.append("Carry batch CI regression context into follow-up promotion and automation review.")
-    elif _int(comparison_summary.get("batch_maturity_coverage_regression_count")):
+    if _int(comparison_summary.get("batch_maturity_suite_design_regression_count")):
+        recommendations.append("Carry batch suite-design regression context into follow-up benchmark-suite review.")
+    if _int(comparison_summary.get("batch_maturity_coverage_regression_count")):
         recommendations.append("Carry batch coverage regression context into follow-up promotion and maturity review.")
     if rejected:
         recommendations.append("Keep rejected runs as comparison evidence; they explain why the selected run is safer.")
@@ -411,7 +433,7 @@ def _recommendations(
     if require_suite_consistency and suite_consistency != "consistent":
         recommendations.append("Fix benchmark suite consistency before selecting an executable run for clean model-quality comparison.")
     if require_clean_batch_review and _clean_batch_review_status(comparison_summary) != "clean":
-        recommendations.append("Resolve batch review, blocker, coverage-regression, and CI-regression evidence before allowing clean execution automation.")
+        recommendations.append("Resolve batch review, blocker, and maturity-regression evidence before allowing clean execution automation.")
     if suite_consistency == "mixed":
         recommendations.append(
             "Compared runs use different benchmark suites; treat the selected run as execution triage, not a clean model-quality delta."
@@ -437,6 +459,10 @@ def _selected_mapping(selected: dict[str, Any] | None, key: str) -> dict[str, in
     return {} if selected is None else _int_mapping(selected.get(key))
 
 
+def _selected_list(selected: dict[str, Any] | None, key: str) -> list[str]:
+    return [] if selected is None else _string_list(selected.get(key))
+
+
 def _batch_review_status(selected: dict[str, Any] | None) -> str:
     if selected is None:
         return "missing"
@@ -445,6 +471,7 @@ def _batch_review_status(selected: dict[str, Any] | None) -> str:
     if (
         _int(selected.get("batch_comparison_review_action_count"))
         or _int(selected.get("batch_maturity_coverage_regression_count"))
+        or _int(selected.get("batch_maturity_suite_design_regression_count"))
         or _int(selected.get("batch_maturity_ci_regression_count"))
     ):
         return "review"
@@ -456,6 +483,8 @@ def _clean_batch_review_status(comparison_summary: dict[str, Any]) -> str:
         return "blocker"
     if _int(comparison_summary.get("batch_comparison_review_action_count")) or _int(
         comparison_summary.get("batch_maturity_coverage_regression_count")
+    ) or _int(
+        comparison_summary.get("batch_maturity_suite_design_regression_count")
     ) or _int(
         comparison_summary.get("batch_maturity_ci_regression_count")
     ):

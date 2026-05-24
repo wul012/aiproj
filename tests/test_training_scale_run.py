@@ -202,6 +202,8 @@ class TrainingScaleRunTests(unittest.TestCase):
                 "maturity_review_count": 2,
                 "maturity_coverage_regression_count": 1,
                 "maturity_coverage_regression_names": ["coverage"],
+                "maturity_suite_design_regression_count": 1,
+                "maturity_suite_design_regression_names": ["suite-risk"],
                 "maturity_ci_regression_count": 1,
                 "maturity_ci_regression_names": ["ci-risk"],
                 "maturity_ci_regression_reason_counts": {
@@ -234,6 +236,8 @@ class TrainingScaleRunTests(unittest.TestCase):
         }
 
         self.assertEqual(summary["maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["maturity_suite_design_regression_count"], 1)
+        self.assertEqual(summary["maturity_suite_design_regression_names"], ["suite-risk"])
         self.assertEqual(summary["maturity_ci_regression_names"], ["ci-risk"])
         self.assertEqual(
             summary["maturity_ci_regression_reason_counts"],
@@ -242,10 +246,14 @@ class TrainingScaleRunTests(unittest.TestCase):
         markdown = render_training_scale_run_markdown(report)
         html = render_training_scale_run_html(report)
         self.assertIn("CI regressions", markdown)
+        self.assertIn("Suite-design regressions", markdown)
+        self.assertIn("suite-risk", markdown)
         self.assertIn("ci-risk", markdown)
         self.assertIn("CI regression reasons", markdown)
         self.assertIn("ci_failed_checks_increased:2", markdown)
         self.assertIn("CI regressions", html)
+        self.assertIn("Suite-design regressions", html)
+        self.assertIn("suite-risk", html)
         self.assertIn("ci-risk", html)
         self.assertIn("CI regression reasons", html)
         self.assertIn("ci_failed_checks_increased:2", html)

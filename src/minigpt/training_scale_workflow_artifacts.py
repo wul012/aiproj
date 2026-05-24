@@ -36,8 +36,12 @@ def write_training_scale_workflow_csv(report: dict[str, Any], path: str | Path) 
         "decision_require_clean_batch_review",
         "clean_batch_review_status",
         "selected_batch_review_status",
+        "selected_batch_maturity_suite_design_regression_count",
+        "selected_batch_maturity_suite_design_regression_names",
         "selected_batch_maturity_ci_regression_count",
         "selected_batch_maturity_ci_regression_reason_counts",
+        "batch_maturity_suite_design_regression_count",
+        "batch_maturity_suite_design_regression_names",
         "batch_maturity_ci_regression_count",
         "batch_maturity_ci_regression_names",
         "batch_maturity_ci_regression_reason_counts",
@@ -63,11 +67,23 @@ def write_training_scale_workflow_csv(report: dict[str, Any], path: str | Path) 
                     "decision_require_clean_batch_review": summary.get("decision_require_clean_batch_review"),
                     "clean_batch_review_status": summary.get("clean_batch_review_status"),
                     "selected_batch_review_status": summary.get("selected_batch_review_status"),
+                    "selected_batch_maturity_suite_design_regression_count": summary.get(
+                        "selected_batch_maturity_suite_design_regression_count"
+                    ),
+                    "selected_batch_maturity_suite_design_regression_names": ";".join(
+                        _string_list(summary.get("selected_batch_maturity_suite_design_regression_names"))
+                    ),
                     "selected_batch_maturity_ci_regression_count": summary.get("selected_batch_maturity_ci_regression_count"),
                     "selected_batch_maturity_ci_regression_reason_counts": summary.get(
                         "selected_batch_maturity_ci_regression_reason_counts"
                     ),
                     "batch_maturity_ci_regression_count": summary.get("batch_maturity_ci_regression_count"),
+                    "batch_maturity_suite_design_regression_count": summary.get(
+                        "batch_maturity_suite_design_regression_count"
+                    ),
+                    "batch_maturity_suite_design_regression_names": ";".join(
+                        _string_list(summary.get("batch_maturity_suite_design_regression_names"))
+                    ),
                     "batch_maturity_ci_regression_names": ";".join(_string_list(summary.get("batch_maturity_ci_regression_names"))),
                     "batch_maturity_ci_regression_reason_counts": summary.get("batch_maturity_ci_regression_reason_counts"),
                     "suite_consistency": summary.get("suite_consistency"),
@@ -92,9 +108,13 @@ def render_training_scale_workflow_markdown(report: dict[str, Any]) -> str:
         f"- Require clean batch review: `{summary.get('decision_require_clean_batch_review')}`",
         f"- Clean batch review status: `{summary.get('clean_batch_review_status')}`",
         f"- Selected batch review status: `{summary.get('selected_batch_review_status')}`",
+        f"- Selected batch suite-design regressions: `{summary.get('selected_batch_maturity_suite_design_regression_count')}`",
+        f"- Selected batch suite-design names: `{', '.join(_string_list(summary.get('selected_batch_maturity_suite_design_regression_names')))}`",
         f"- Selected batch CI regressions: `{summary.get('selected_batch_maturity_ci_regression_count')}`",
         f"- Selected batch CI regression reasons: `{_fmt_mapping(summary.get('selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Batch CI regressions: `{summary.get('batch_maturity_ci_regression_count')}`",
+        f"- Batch suite-design regressions: `{summary.get('batch_maturity_suite_design_regression_count')}`",
+        f"- Batch suite-design names: `{', '.join(_string_list(summary.get('batch_maturity_suite_design_regression_names')))}`",
         f"- Batch CI-regressed names: `{', '.join(_string_list(summary.get('batch_maturity_ci_regression_names')))}`",
         f"- Batch CI regression reasons: `{_fmt_mapping(summary.get('batch_maturity_ci_regression_reason_counts'))}`",
         f"- Profiles: `{', '.join(_string_list(report.get('profiles')))}`",
@@ -163,9 +183,13 @@ def render_training_scale_workflow_html(report: dict[str, Any]) -> str:
         ("Require clean batch review", summary.get("decision_require_clean_batch_review")),
         ("Clean batch review", summary.get("clean_batch_review_status")),
         ("Selected batch review", summary.get("selected_batch_review_status")),
+        ("Selected suite-design regressions", summary.get("selected_batch_maturity_suite_design_regression_count")),
+        ("Selected suite-design names", ", ".join(_string_list(summary.get("selected_batch_maturity_suite_design_regression_names")))),
         ("Selected CI regressions", summary.get("selected_batch_maturity_ci_regression_count")),
         ("Selected CI reasons", _fmt_mapping(summary.get("selected_batch_maturity_ci_regression_reason_counts"))),
         ("Batch CI regressions", summary.get("batch_maturity_ci_regression_count")),
+        ("Batch suite-design regressions", summary.get("batch_maturity_suite_design_regression_count")),
+        ("Suite-design names", ", ".join(_string_list(summary.get("batch_maturity_suite_design_regression_names")))),
         ("CI regression reasons", _fmt_mapping(summary.get("batch_maturity_ci_regression_reason_counts"))),
         ("Profiles", summary.get("profile_count")),
         ("Allowed", summary.get("allowed_count")),

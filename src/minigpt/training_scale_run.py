@@ -128,6 +128,7 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
         "comparison_review_action_count",
         "comparison_blocker_action_count",
         "maturity_coverage_regression_count",
+        "maturity_suite_design_regression_count",
         "maturity_ci_regression_count",
         "maturity_ci_regression_reason_counts",
         "blocked_reason",
@@ -147,6 +148,7 @@ def write_training_scale_run_csv(report: dict[str, Any], path: str | Path) -> No
             "comparison_review_action_count": batch.get("comparison_review_action_count"),
             "comparison_blocker_action_count": batch.get("comparison_blocker_action_count"),
             "maturity_coverage_regression_count": batch.get("maturity_coverage_regression_count"),
+            "maturity_suite_design_regression_count": batch.get("maturity_suite_design_regression_count"),
             "maturity_ci_regression_count": batch.get("maturity_ci_regression_count"),
             "maturity_ci_regression_reason_counts": batch.get("maturity_ci_regression_reason_counts"),
             "blocked_reason": report.get("blocked_reason"),
@@ -193,6 +195,7 @@ def render_training_scale_run_markdown(report: dict[str, Any]) -> str:
                 ("Comparison", batch.get("comparison_status")),
                 ("Comparison review actions", batch.get("comparison_review_action_count")),
                 ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
+                ("Suite-design regressions", ", ".join(_string_list(batch.get("maturity_suite_design_regression_names"))) or "none"),
                 ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
                 ("CI regressions", ", ".join(_string_list(batch.get("maturity_ci_regression_names"))) or "none"),
                 ("CI regression reasons", _fmt_mapping(batch.get("maturity_ci_regression_reason_counts"))),
@@ -232,6 +235,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
         ("Batch", batch.get("status")),
         ("Batch review", batch.get("comparison_review_action_count")),
         ("Batch blockers", batch.get("comparison_blocker_action_count")),
+        ("Suite-design regressions", batch.get("maturity_suite_design_regression_count")),
         ("CI regressions", batch.get("maturity_ci_regression_count")),
         ("CI regression reasons", _fmt_mapping(batch.get("maturity_ci_regression_reason_counts"))),
     ]
@@ -258,6 +262,7 @@ def render_training_scale_run_html(report: dict[str, Any]) -> str:
                     ("Comparison", batch.get("comparison_status")),
                     ("Comparison review actions", batch.get("comparison_review_action_count")),
                     ("Comparison blocker actions", batch.get("comparison_blocker_action_count")),
+                    ("Suite-design regressions", ", ".join(_string_list(batch.get("maturity_suite_design_regression_names"))) or "none"),
                     ("Coverage regressions", ", ".join(_string_list(batch.get("maturity_coverage_regression_names"))) or "none"),
                     ("CI regressions", ", ".join(_string_list(batch.get("maturity_ci_regression_names"))) or "none"),
                     ("CI regression reasons", _fmt_mapping(batch.get("maturity_ci_regression_reason_counts"))),
@@ -354,9 +359,11 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
             "comparison_blocker_action_count": 0,
             "maturity_review_count": 0,
             "maturity_coverage_regression_count": 0,
+            "maturity_suite_design_regression_count": 0,
             "maturity_ci_regression_count": 0,
             "maturity_review_names": [],
             "maturity_coverage_regression_names": [],
+            "maturity_suite_design_regression_names": [],
             "maturity_ci_regression_names": [],
             "maturity_ci_regression_reason_counts": {},
             "comparison_blocker_reasons": [],
@@ -376,9 +383,11 @@ def _batch_summary(batch_report: dict[str, Any] | None) -> dict[str, Any]:
         "comparison_blocker_action_count": _as_int(_first_present(review.get("blocker_action_count"), execution.get("comparison_blocker_action_count"))),
         "maturity_review_count": _as_int(review.get("maturity_review_count")),
         "maturity_coverage_regression_count": _as_int(review.get("maturity_coverage_regression_count")),
+        "maturity_suite_design_regression_count": _as_int(review.get("maturity_suite_design_regression_count")),
         "maturity_ci_regression_count": _as_int(review.get("maturity_ci_regression_count")),
         "maturity_review_names": _string_list(review.get("maturity_review_names")),
         "maturity_coverage_regression_names": _string_list(review.get("maturity_coverage_regression_names")),
+        "maturity_suite_design_regression_names": _string_list(review.get("maturity_suite_design_regression_names")),
         "maturity_ci_regression_names": _string_list(review.get("maturity_ci_regression_names")),
         "maturity_ci_regression_reason_counts": _int_mapping(review.get("maturity_ci_regression_reason_counts")),
         "comparison_blocker_reasons": _string_list(review.get("blocker_reasons")),
@@ -409,6 +418,8 @@ def _recommendations(
             recommendations.append("Review batch comparison actions before treating this scale run as clean baseline evidence.")
         if _as_int(batch.get("maturity_ci_regression_count")):
             recommendations.append("Review CI-regressed portfolios before using this scale run as clean automation evidence.")
+        if _as_int(batch.get("maturity_suite_design_regression_count")):
+            recommendations.append("Review suite-design regressed portfolios before using this scale run as clean benchmark evidence.")
     if status == "completed":
         recommendations.append("Executed batch outputs are available under the batch directory.")
     return recommendations
