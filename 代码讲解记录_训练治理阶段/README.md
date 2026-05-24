@@ -362,6 +362,9 @@
 433-v419-training-scale-handoff-suite-design-carryover.md
  -> v419 code explanation: carry suite-design regression context into training scale handoff validation, outputs, CLI diagnostics, and strict clean-batch guard checks.
 
+434-v420-training-scale-promotion-suite-design-carryover.md
+ -> v420 code explanation: carry suite-design regression context into training scale promotion acceptance, outputs, CLI diagnostics, and strict clean-batch promotion guard checks.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

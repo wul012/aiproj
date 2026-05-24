@@ -39,6 +39,22 @@ def main() -> None:
     print(f"promotion_status={summary['promotion_status']}")
     print(f"handoff_status={summary.get('handoff_status')}")
     print(f"handoff_clean_batch_review_status={summary.get('handoff_clean_batch_review_status')}")
+    print(
+        "handoff_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("handoff_batch_maturity_suite_design_regression_names") or [], ensure_ascii=False, sort_keys=True)
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("handoff_selected_batch_maturity_suite_design_regression_names") or [], ensure_ascii=False, sort_keys=True)
+    )
+    print(
+        "handoff_batch_maturity_suite_design_regression_count="
+        + str(summary.get("handoff_batch_maturity_suite_design_regression_count"))
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_count="
+        + str(summary.get("handoff_selected_batch_maturity_suite_design_regression_count"))
+    )
     print(f"handoff_batch_maturity_ci_regression_count={summary.get('handoff_batch_maturity_ci_regression_count')}")
     print(
         "handoff_batch_maturity_ci_regression_reason_counts="

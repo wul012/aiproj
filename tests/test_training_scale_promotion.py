@@ -192,6 +192,55 @@ class TrainingScalePromotionTests(unittest.TestCase):
                 completed.stdout,
             )
 
+    def test_carries_handoff_batch_suite_design_regression_into_promotion_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(
+                root,
+                selected_batch_review_status="clean",
+                batch_suite_design_regression_count=2,
+                batch_suite_design_regression_names=["review", "standard"],
+                selected_batch_suite_design_regression_count=1,
+                selected_batch_suite_design_regression_names=["review"],
+            )
+
+            report = build_training_scale_promotion(handoff_dir)
+            outputs = write_training_scale_promotion_outputs(report, root / "promotion")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = render_training_scale_promotion_markdown(report)
+            html = render_training_scale_promotion_html(report)
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/build_training_scale_promotion.py",
+                    str(handoff_dir),
+                    "--out-dir",
+                    str(root / "script-promotion"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(report["summary"]["promotion_status"], "promoted")
+            self.assertEqual(report["summary"]["handoff_selected_batch_maturity_suite_design_regression_count"], 1)
+            self.assertEqual(report["summary"]["handoff_selected_batch_maturity_suite_design_regression_names"], ["review"])
+            self.assertEqual(report["summary"]["handoff_batch_maturity_suite_design_regression_count"], 2)
+            self.assertEqual(report["summary"]["handoff_batch_maturity_suite_design_regression_names"], ["review", "standard"])
+            self.assertTrue(any("suite-design regressed handoff batch evidence" in item for item in report["recommendations"]))
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count", csv_text)
+            self.assertIn("review;standard", csv_text)
+            self.assertIn("Handoff selected batch suite-design regressions", markdown)
+            self.assertIn("Handoff batch suite-design names", markdown)
+            self.assertIn("Selected suite-design regressions", html)
+            self.assertIn("Batch suite-design regressions", html)
+            self.assertEqual(completed.returncode, 0)
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count=2", completed.stdout)
+            self.assertIn("handoff_selected_batch_maturity_suite_design_regression_count=1", completed.stdout)
+            self.assertIn('handoff_batch_maturity_suite_design_regression_names=["review", "standard"]', completed.stdout)
+            self.assertIn('handoff_selected_batch_maturity_suite_design_regression_names=["review"]', completed.stdout)
+
     def test_handoff_batch_blocker_changes_promotion_recommendation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -300,6 +349,44 @@ class TrainingScalePromotionTests(unittest.TestCase):
             self.assertIn("handoff_batch_maturity_ci_regression_count=1", completed.stdout)
             self.assertIn('handoff_batch_maturity_ci_regression_reason_counts={"workflow-status-regressed": 1}', completed.stdout)
 
+    def test_blocks_promotion_when_clean_required_handoff_has_suite_design_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_dir = make_completed_handoff_tree(
+                root,
+                require_clean_batch_review=True,
+                clean_batch_review_status="clean",
+                selected_batch_review_status="clean",
+                batch_suite_design_regression_count=1,
+                batch_suite_design_regression_names=["suite-risk"],
+            )
+
+            report = build_training_scale_promotion(handoff_dir)
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/build_training_scale_promotion.py",
+                    str(handoff_dir),
+                    "--out-dir",
+                    str(root / "script-promotion"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(report["summary"]["promotion_status"], "blocked")
+            self.assertEqual(report["summary"]["handoff_clean_batch_review_status"], "clean")
+            self.assertEqual(report["summary"]["handoff_batch_maturity_suite_design_regression_count"], 1)
+            self.assertEqual(report["summary"]["handoff_batch_maturity_suite_design_regression_names"], ["suite-risk"])
+            self.assertTrue(any("requires clean batch-review" in item for item in report["blockers"]))
+            self.assertTrue(any("suite-risk" in item for item in report["recommendations"]))
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("handoff_clean_batch_review_status=clean", completed.stdout)
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count=1", completed.stdout)
+            self.assertIn('handoff_batch_maturity_suite_design_regression_names=["suite-risk"]', completed.stdout)
+
     def test_facade_keeps_legacy_artifact_exports(self) -> None:
         self.assertIs(
             training_scale_promotion_facade.write_training_scale_promotion_outputs,
@@ -323,6 +410,10 @@ def make_completed_handoff_tree(
     require_clean_batch_review: bool = False,
     clean_batch_review_status: str | None = None,
     selected_batch_review_status: str = "clean",
+    batch_suite_design_regression_count: int = 0,
+    batch_suite_design_regression_names: list[str] | None = None,
+    selected_batch_suite_design_regression_count: int | None = None,
+    selected_batch_suite_design_regression_names: list[str] | None = None,
     batch_ci_regression_count: int = 0,
     batch_ci_regression_names: list[str] | None = None,
     batch_ci_regression_reason_counts: dict[str, int] | None = None,
@@ -334,6 +425,16 @@ def make_completed_handoff_tree(
     variant_root = batch_root / "variants" / "scale-smoke"
     run_dir = variant_root / "runs" / "scale-smoke"
     handoff_dir = root / "handoff"
+    selected_suite_design_count = (
+        batch_suite_design_regression_count
+        if selected_batch_suite_design_regression_count is None
+        else selected_batch_suite_design_regression_count
+    )
+    selected_suite_design_names = (
+        batch_suite_design_regression_names
+        if selected_batch_suite_design_regression_names is None
+        else selected_batch_suite_design_regression_names
+    )
 
     artifact_paths = {
         "run_dir": run_dir,
@@ -406,6 +507,8 @@ def make_completed_handoff_tree(
             "selected_batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
             "selected_batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
             "selected_batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "selected_batch_maturity_suite_design_regression_count": selected_suite_design_count,
+            "selected_batch_maturity_suite_design_regression_names": selected_suite_design_names or [],
             "selected_batch_maturity_ci_regression_count": batch_ci_regression_count,
             "selected_batch_maturity_ci_regression_reason_counts": selected_batch_ci_regression_reason_counts
             or batch_ci_regression_reason_counts
@@ -413,6 +516,8 @@ def make_completed_handoff_tree(
             "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
             "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
             "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "batch_maturity_suite_design_regression_count": batch_suite_design_regression_count,
+            "batch_maturity_suite_design_regression_names": batch_suite_design_regression_names or [],
             "batch_maturity_ci_regression_count": batch_ci_regression_count,
             "batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             "batch_maturity_ci_regression_names": batch_ci_regression_names or [],
@@ -445,6 +550,10 @@ def make_completed_handoff_tree(
             "batch_comparison_review_action_count": 2 if selected_batch_review_status in {"review", "blocker"} else 0,
             "batch_comparison_blocker_action_count": 1 if selected_batch_review_status == "blocker" else 0,
             "batch_maturity_coverage_regression_count": 1 if selected_batch_review_status in {"review", "blocker"} else 0,
+            "selected_batch_maturity_suite_design_regression_count": selected_suite_design_count,
+            "selected_batch_maturity_suite_design_regression_names": selected_suite_design_names or [],
+            "batch_maturity_suite_design_regression_count": batch_suite_design_regression_count,
+            "batch_maturity_suite_design_regression_names": batch_suite_design_regression_names or [],
             "batch_maturity_ci_regression_count": batch_ci_regression_count,
             "batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             "selected_batch_maturity_ci_regression_reason_counts": selected_batch_ci_regression_reason_counts

@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v420 promotion suite-design guard",
+  "generated_at": "2026-05-24T00:00:00Z",
+  "handoff_path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\handoff\\training_scale_handoff.json",
+  "project_root": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design",
+  "out_root": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale",
+  "suite_guard": {
+    "handoff_require_suite_consistency": false,
+    "handoff_suite_consistency": null,
+    "handoff_suite_mismatch_count": null,
+    "handoff_selected_suite_path": null,
+    "handoff_selected_batch_review_status": "clean",
+    "handoff_selected_batch_comparison_review_action_count": 0,
+    "handoff_selected_batch_comparison_blocker_action_count": 0,
+    "handoff_selected_batch_maturity_coverage_regression_count": 0,
+    "handoff_selected_batch_maturity_suite_design_regression_count": 1,
+    "handoff_selected_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "handoff_selected_batch_maturity_ci_regression_count": 0,
+    "handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "handoff_batch_comparison_review_action_count": 0,
+    "handoff_batch_comparison_blocker_action_count": 0,
+    "handoff_batch_maturity_coverage_regression_count": 0,
+    "handoff_batch_maturity_suite_design_regression_count": 1,
+    "handoff_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "handoff_batch_maturity_ci_regression_count": 0,
+    "handoff_batch_maturity_ci_regression_reason_counts": {},
+    "handoff_batch_maturity_ci_regression_names": [],
+    "handoff_batch_comparison_blocker_reasons": [],
+    "workflow_suite_path": null,
+    "workflow_suite_name": null
+  },
+  "clean_batch_review_guard": {
+    "handoff_require_clean_batch_review": true,
+    "handoff_clean_batch_review_status": "clean",
+    "handoff_batch_comparison_review_action_count": 0,
+    "handoff_batch_comparison_blocker_action_count": 0,
+    "handoff_batch_maturity_coverage_regression_count": 0,
+    "handoff_selected_batch_maturity_suite_design_regression_count": 1,
+    "handoff_selected_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "handoff_batch_maturity_suite_design_regression_count": 1,
+    "handoff_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "handoff_batch_maturity_ci_regression_count": 0,
+    "handoff_batch_maturity_ci_regression_reason_counts": {},
+    "handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "handoff_batch_maturity_ci_regression_names": [],
+    "handoff_batch_comparison_blocker_reasons": []
+  },
+  "handoff_summary": {
+    "handoff_status": "completed",
+    "artifact_count": 6,
+    "available_artifact_count": 6,
+    "decision_require_clean_batch_review": true,
+    "require_clean_batch_review": true,
+    "clean_batch_review_status": "clean",
+    "selected_batch_review_status": "clean",
+    "selected_batch_comparison_review_action_count": 0,
+    "selected_batch_comparison_blocker_action_count": 0,
+    "selected_batch_maturity_coverage_regression_count": 0,
+    "selected_batch_maturity_suite_design_regression_count": 1,
+    "selected_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "selected_batch_maturity_ci_regression_count": 0,
+    "selected_batch_maturity_ci_regression_reason_counts": {},
+    "batch_comparison_review_action_count": 0,
+    "batch_comparison_blocker_action_count": 0,
+    "batch_maturity_coverage_regression_count": 0,
+    "batch_maturity_suite_design_regression_count": 1,
+    "batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "batch_maturity_ci_regression_count": 0,
+    "batch_maturity_ci_regression_reason_counts": {},
+    "batch_maturity_ci_regression_names": [],
+    "batch_comparison_blocker_reasons": []
+  },
+  "training_scale_run_path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\training_scale_run.json",
+  "training_scale_run": {
+    "status": "completed",
+    "allowed": true,
+    "gate_profile": "review",
+    "gate_status": "warn",
+    "batch_status": "completed",
+    "completed_variant_count": 1,
+    "variant_count": 1
+  },
+  "batch_path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\training_portfolio_batch.json",
+  "batch": {
+    "status": "completed",
+    "variant_count": 1,
+    "completed_variant_count": 1,
+    "comparison_status": "skipped",
+    "failed_variant": null
+  },
+  "variants": [
+    {
+      "name": "scale-smoke",
+      "description": null,
+      "promotion_status": "ready",
+      "status": "completed",
+      "run_name": "scale-smoke",
+      "dataset_name": "sample-zh",
+      "dataset_version": "v77-smoke",
+      "portfolio_json": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\training_portfolio.json",
+      "portfolio_html": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\training_portfolio.html",
+      "run_dir": "runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke",
+      "step_count": 9,
+      "completed_steps": 9,
+      "failed_step": null,
+      "required_artifact_count": 9,
+      "available_required_artifact_count": 9,
+      "missing_required": [],
+      "checkpoint_exists": true,
+      "run_manifest_exists": true,
+      "registry_exists": true,
+      "maturity_narrative_exists": true,
+      "artifact_rows": [
+        {
+          "key": "benchmark_scorecard",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\benchmark-scorecard\\benchmark_scorecard.json",
+          "exists": true
+        },
+        {
+          "key": "checkpoint",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\checkpoint.pt",
+          "exists": true
+        },
+        {
+          "key": "dataset_card",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\datasets\\sample-zh\\v77-smoke\\dataset_card.json",
+          "exists": true
+        },
+        {
+          "key": "eval_suite",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\eval_suite\\eval_suite.json",
+          "exists": true
+        },
+        {
+          "key": "generation_quality",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\eval_suite\\generation-quality\\generation_quality.json",
+          "exists": true
+        },
+        {
+          "key": "maturity_narrative",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\maturity-narrative\\maturity_narrative.json",
+          "exists": true
+        },
+        {
+          "key": "maturity_summary",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\maturity-summary\\maturity_summary.json",
+          "exists": true
+        },
+        {
+          "key": "registry",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\registry\\registry.json",
+          "exists": true
+        },
+        {
+          "key": "run_dir",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke",
+          "exists": true
+        },
+        {
+          "key": "run_manifest",
+          "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\run_manifest.json",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "evidence_rows": [
+    {
+      "key": "handoff_json",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\handoff\\training_scale_handoff.json",
+      "exists": true
+    },
+    {
+      "key": "training_scale_run_json",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\training_scale_run.json",
+      "exists": true
+    },
+    {
+      "key": "batch_json",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\training_portfolio_batch.json",
+      "exists": true
+    },
+    {
+      "key": "handoff:training_scale_run_json",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\training_scale_run.json",
+      "exists": true
+    },
+    {
+      "key": "handoff:training_scale_run_html",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\training_scale_run.html",
+      "exists": true
+    },
+    {
+      "key": "handoff:batch_json",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\training_portfolio_batch.json",
+      "exists": true
+    },
+    {
+      "key": "handoff:batch_html",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\training_portfolio_batch.html",
+      "exists": true
+    },
+    {
+      "key": "handoff:variant_portfolio_reports",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants",
+      "exists": true
+    },
+    {
+      "key": "handoff:variant_checkpoints",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:benchmark_scorecard",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\benchmark-scorecard\\benchmark_scorecard.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:checkpoint",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\checkpoint.pt",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:dataset_card",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\datasets\\sample-zh\\v77-smoke\\dataset_card.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:eval_suite",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\eval_suite\\eval_suite.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:generation_quality",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\eval_suite\\generation-quality\\generation_quality.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:maturity_narrative",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\maturity-narrative\\maturity_narrative.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:maturity_summary",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\maturity-summary\\maturity_summary.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:registry",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\registry\\registry.json",
+      "exists": true
+    },
+    {
+      "key": "variant:scale-smoke:run_manifest",
+      "path": "D:\\aiproj\\runs\\v420-training-scale-promotion-suite-design\\runs\\scale\\batch\\variants\\scale-smoke\\runs\\scale-smoke\\run_manifest.json",
+      "exists": true
+    }
+  ],
+  "summary": {
+    "promotion_status": "blocked",
+    "handoff_status": "completed",
+    "handoff_require_suite_consistency": false,
+    "handoff_suite_consistency": null,
+    "handoff_suite_mismatch_count": null,
+    "handoff_selected_suite_path": null,
+    "handoff_require_clean_batch_review": true,
+    "handoff_clean_batch_review_status": "clean",
+    "handoff_selected_batch_review_status": "clean",
+    "handoff_selected_batch_comparison_review_action_count": 0,
+    "handoff_selected_batch_comparison_blocker_action_count": 0,
+    "handoff_selected_batch_maturity_coverage_regression_count": 0,
+    "handoff_selected_batch_maturity_suite_design_regression_count": 1,
+    "handoff_selected_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "handoff_selected_batch_maturity_ci_regression_count": 0,
+    "handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "handoff_batch_comparison_review_action_count": 0,
+    "handoff_batch_comparison_blocker_action_count": 0,
+    "handoff_batch_maturity_coverage_regression_count": 0,
+    "handoff_batch_maturity_suite_design_regression_count": 1,
+    "handoff_batch_maturity_suite_design_regression_names": [
+      "suite-design-risk"
+    ],
+    "handoff_batch_maturity_ci_regression_count": 0,
+    "handoff_batch_maturity_ci_regression_reason_counts": {},
+    "handoff_batch_maturity_ci_regression_names": [],
+    "handoff_batch_comparison_blocker_reasons": [],
+    "scale_run_status": "completed",
+    "batch_status": "completed",
+    "variant_count": 1,
+    "ready_variant_count": 1,
+    "checkpoint_count": 1,
+    "registry_count": 1,
+    "maturity_narrative_count": 1,
+    "required_artifact_count": 9,
+    "available_required_artifact_count": 9,
+    "evidence_count": 18,
+    "available_evidence_count": 18,
+    "blocker_count": 1,
+    "review_item_count": 0
+  },
+  "blockers": [
+    "handoff requires clean batch-review evidence but status is not clean or regressions are present"
+  ],
+  "review_items": [],
+  "recommendations": [
+    "Resolve handoff clean batch-review requirement before accepting this run as promotion-ready evidence. Suite-design portfolios: suite-design-risk."
+  ]
+}
