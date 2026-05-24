@@ -56,6 +56,14 @@ def main() -> None:
         + json.dumps(summary.get("selected_handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False)
     )
     print(
+        "selected_handoff_batch_maturity_suite_design_regression_count="
+        f"{summary.get('selected_handoff_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "selected_handoff_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("selected_handoff_batch_maturity_suite_design_regression_names"), ensure_ascii=False)
+    )
+    print(
         "selected_handoff_selected_batch_maturity_ci_regression_count="
         f"{summary.get('selected_handoff_selected_batch_maturity_ci_regression_count')}"
     )
@@ -63,6 +71,16 @@ def main() -> None:
         "selected_handoff_selected_batch_maturity_ci_regression_reason_counts="
         + json.dumps(
             summary.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False
+        )
+    )
+    print(
+        "selected_handoff_selected_batch_maturity_suite_design_regression_count="
+        f"{summary.get('selected_handoff_selected_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "selected_handoff_selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(
+            summary.get("selected_handoff_selected_batch_maturity_suite_design_regression_names"), ensure_ascii=False
         )
     )
     print(
@@ -88,6 +106,22 @@ def main() -> None:
     print(
         "handoff_batch_maturity_ci_regression_names="
         + json.dumps(summary.get("handoff_batch_maturity_ci_regression_names"), ensure_ascii=False)
+    )
+    print(
+        "handoff_batch_maturity_suite_design_regression_count="
+        f"{summary.get('handoff_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_total="
+        f"{summary.get('handoff_selected_batch_maturity_suite_design_regression_total')}"
+    )
+    print(
+        "handoff_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("handoff_batch_maturity_suite_design_regression_names"), ensure_ascii=False)
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("handoff_selected_batch_maturity_suite_design_regression_names"), ensure_ascii=False)
     )
     print(
         "comparison_exclusion_reasons="
@@ -129,6 +163,27 @@ def main() -> None:
     print(
         "comparison_ready_handoff_batch_maturity_ci_regression_names="
         + json.dumps(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_names"), ensure_ascii=False)
+    )
+    print(
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_count="
+        f"{summary.get('comparison_ready_handoff_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total="
+        f"{summary.get('comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total')}"
+    )
+    print(
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_names="
+        + json.dumps(
+            summary.get("comparison_ready_handoff_batch_maturity_suite_design_regression_names"), ensure_ascii=False
+        )
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(
+            summary.get("comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names"),
+            ensure_ascii=False,
+        )
     )
     print(f"selected_handoff_selected_batch_review_status={summary.get('selected_handoff_selected_batch_review_status')}")
     print(

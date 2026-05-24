@@ -149,11 +149,23 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 "handoff_batch_maturity_ci_regression_names": _string_list(
                     row.get("handoff_batch_maturity_ci_regression_names")
                 ),
+                "handoff_batch_maturity_suite_design_regression_count": _int(
+                    row.get("handoff_batch_maturity_suite_design_regression_count")
+                ),
+                "handoff_batch_maturity_suite_design_regression_names": _string_list(
+                    row.get("handoff_batch_maturity_suite_design_regression_names")
+                ),
                 "handoff_selected_batch_maturity_ci_regression_count": _int(
                     row.get("handoff_selected_batch_maturity_ci_regression_count")
                 ),
                 "handoff_selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
                     row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
+                ),
+                "handoff_selected_batch_maturity_suite_design_regression_count": _int(
+                    row.get("handoff_selected_batch_maturity_suite_design_regression_count")
+                ),
+                "handoff_selected_batch_maturity_suite_design_regression_names": _string_list(
+                    row.get("handoff_selected_batch_maturity_suite_design_regression_names")
                 ),
                 "comparison_exclusion_reasons": _string_list(row.get("comparison_exclusion_reasons")),
                 "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
@@ -195,6 +207,16 @@ def _rejection_reasons(
         reasons.append("clean batch-review requirement is not clean")
     if row.get("handoff_require_clean_batch_review") and _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0:
         reason = "handoff batch CI regression count is " f"{row.get('handoff_batch_maturity_ci_regression_count')}"
+        if reason not in reasons:
+            reasons.append(reason)
+    if (
+        row.get("handoff_require_clean_batch_review")
+        and _int(row.get("handoff_batch_maturity_suite_design_regression_count")) > 0
+    ):
+        reason = (
+            "handoff batch suite-design regression count is "
+            f"{row.get('handoff_batch_maturity_suite_design_regression_count')}"
+        )
         if reason not in reasons:
             reasons.append(reason)
     if row.get("gate_status") == "fail":
