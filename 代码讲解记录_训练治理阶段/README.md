@@ -377,6 +377,9 @@
 438-v424-promoted-training-scale-seed-suite-design-carryover.md
  -> v424 code explanation: carry suite-design regression context into promoted training scale next-cycle seeds, outputs, recommendations, and CLI diagnostics.
 
+439-v425-promoted-training-scale-seed-handoff-suite-design-carryover.md
+ -> v425 code explanation: carry suite-design regression context into final promoted seed handoff reports, strict clean-batch gating, outputs, recommendations, and CLI diagnostics.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

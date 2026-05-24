@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 424 carries suite-design regression context into promoted training scale next-cycle seeds, so the next plan seed preserves rejected suite-design evidence while inheriting a clean selected baseline.
+Version 425 carries suite-design regression context into the promoted training scale seed handoff, so the final automation handoff preserves rejected suite-design evidence while strict clean-batch gating still validates the selected baseline.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 424 carries suite-design regression context into promoted training scale
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v425 checkpoint
+
+- Promoted training scale seed handoff reports now carry selected/global/comparison-ready suite-design regression counts and names from promoted next-cycle seeds.
+- Strict clean-batch handoff gating treats selected suite-design regressions as dirty while allowing global rejected evidence to remain visible as context.
+- Handoff CSV, Markdown, HTML, recommendations, and `scripts/execute_promoted_training_scale_seed.py` stdout expose suite-design context.
+- Tests cover handoff carryover, rendered artifacts, CLI output, recommendations, and strict clean-batch pass/fail semantics for selected suite-design evidence.
+- Archived promoted seed handoff suite-design evidence in `d/425`; tag: `v425.0.0`.
 
 ## Latest v424 checkpoint
 
