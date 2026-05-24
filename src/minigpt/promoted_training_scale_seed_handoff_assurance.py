@@ -30,6 +30,12 @@ EMBEDDED_ASSURANCE_COMPARE_KEYS = (
     "receipt_schema_version",
     "receipt_selected_handoff_batch_maturity_ci_regression_count",
     "receipt_handoff_batch_maturity_ci_regression_count",
+    "receipt_selected_handoff_batch_maturity_suite_design_regression_count",
+    "receipt_selected_handoff_batch_maturity_suite_design_regression_names",
+    "receipt_handoff_batch_maturity_suite_design_regression_count",
+    "receipt_handoff_batch_maturity_suite_design_regression_names",
+    "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+    "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names",
     "receipt_comparison_exclusion_reasons",
     "issue_count",
     "issues",
@@ -102,6 +108,24 @@ def check_promoted_training_scale_seed_handoff_assurance(path: str | Path) -> di
         "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": expected.get(
             "receipt_handoff_batch_maturity_ci_regression_count"
         ),
+        "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count": expected.get(
+            "receipt_selected_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names": expected.get(
+            "receipt_selected_handoff_batch_maturity_suite_design_regression_names"
+        ),
+        "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count": expected.get(
+            "receipt_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names": expected.get(
+            "receipt_handoff_batch_maturity_suite_design_regression_names"
+        ),
+        "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": expected.get(
+            "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": expected.get(
+            "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names"
+        ),
         "embedded_receipt_check_receipt_comparison_exclusion_reasons": expected.get(
             "receipt_comparison_exclusion_reasons"
         ),
@@ -140,6 +164,47 @@ def render_promoted_training_scale_seed_handoff_assurance_check(check: dict[str,
         (
             "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count",
             check.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count",
+            check.get(
+                "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"
+            ),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names",
+            json.dumps(
+                check.get(
+                    "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names"
+                ),
+                ensure_ascii=False,
+            ),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count",
+            check.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names",
+            json.dumps(
+                check.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names"),
+                ensure_ascii=False,
+            ),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+            check.get(
+                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+            ),
+        ),
+        (
+            "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names",
+            json.dumps(
+                check.get(
+                    "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names"
+                ),
+                ensure_ascii=False,
+            ),
         ),
         (
             "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons",
@@ -241,9 +306,19 @@ def _normalized_assurance_value(key: str, value: Any) -> Any:
         "receipt_schema_version",
         "receipt_selected_handoff_batch_maturity_ci_regression_count",
         "receipt_handoff_batch_maturity_ci_regression_count",
+        "receipt_selected_handoff_batch_maturity_suite_design_regression_count",
+        "receipt_handoff_batch_maturity_suite_design_regression_count",
+        "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count",
     }:
         return _int(value)
-    if key in {"issues", "sidecar_issues", "receipt_comparison_exclusion_reasons"}:
+    if key in {
+        "issues",
+        "sidecar_issues",
+        "receipt_selected_handoff_batch_maturity_suite_design_regression_names",
+        "receipt_handoff_batch_maturity_suite_design_regression_names",
+        "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names",
+        "receipt_comparison_exclusion_reasons",
+    }:
         return string_list(value)
     if key in {"receipt_path_exists", "receipt_check_json_exists", "receipt_check_text_exists"}:
         return bool(value)

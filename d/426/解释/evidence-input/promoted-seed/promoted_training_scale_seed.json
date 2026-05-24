@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "title": "suite design seed",
+  "generated_at": "2026-05-24T00:00:00Z",
+  "seed_status": "ready",
+  "baseline_seed": {
+    "selected_name": "beta",
+    "decision_status": "accepted",
+    "gate_status": "pass",
+    "batch_status": "completed",
+    "readiness_score": 112,
+    "suite": {
+      "mode": "builtin",
+      "name": "standard-zh",
+      "path": "builtin:standard-zh",
+      "source": "inherited"
+    },
+    "suite_path": "builtin:standard-zh",
+    "handoff_suite_guard": {
+      "selected_handoff_require_suite_consistency": true,
+      "selected_handoff_suite_consistency": "consistent",
+      "selected_handoff_suite_mismatch_count": 0,
+      "selected_handoff_selected_suite_path": "builtin:standard-zh",
+      "handoff_suite_consistent_count": 2,
+      "handoff_suite_mismatch_total": 0,
+      "comparison_ready_handoff_suite_mismatch_total": 0
+    },
+    "handoff_clean_batch_review": {
+      "selected_handoff_require_clean_batch_review": true,
+      "selected_handoff_clean_batch_review_status": "clean",
+      "selected_handoff_batch_maturity_ci_regression_count": 0,
+      "selected_handoff_batch_maturity_ci_regression_names": [],
+      "selected_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+      "selected_handoff_batch_maturity_suite_design_regression_names": [],
+      "selected_handoff_selected_batch_maturity_ci_regression_count": 0,
+      "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "selected_handoff_selected_batch_maturity_suite_design_regression_count": 0,
+      "selected_handoff_selected_batch_maturity_suite_design_regression_names": [],
+      "selected_comparison_exclusion_reasons": [],
+      "handoff_require_clean_batch_review_count": 3,
+      "handoff_clean_batch_review_count": 2,
+      "handoff_unclean_batch_review_count": 1,
+      "handoff_batch_maturity_ci_regression_count": 0,
+      "handoff_selected_batch_maturity_ci_regression_total": 0,
+      "handoff_batch_maturity_ci_regression_names": [],
+      "handoff_batch_maturity_ci_regression_reason_counts": {},
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "handoff_batch_maturity_suite_design_regression_count": 2,
+      "handoff_selected_batch_maturity_suite_design_regression_total": 1,
+      "handoff_batch_maturity_suite_design_regression_names": [
+        "beta-suite",
+        "standard"
+      ],
+      "handoff_selected_batch_maturity_suite_design_regression_names": [
+        "beta-suite"
+      ],
+      "comparison_exclusion_reasons": [
+        "handoff batch suite-design regression count is 2"
+      ],
+      "comparison_ready_handoff_require_clean_batch_review_count": 1,
+      "comparison_ready_handoff_clean_batch_review_count": 1,
+      "comparison_ready_handoff_unclean_batch_review_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_names": [],
+      "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total": 0,
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names": []
+    }
+  },
+  "next_plan": {
+    "project_root": "D:\\aiproj",
+    "dataset_name": "next-zh",
+    "dataset_version_prefix": "v425-test",
+    "suite": {
+      "mode": "builtin",
+      "name": "standard-zh",
+      "path": "builtin:standard-zh",
+      "source": "inherited"
+    },
+    "suite_path": "builtin:standard-zh",
+    "suite_source": "inherited",
+    "plan_out_dir": "D:\\aiproj\\d\\426\\解释\\evidence-input\\next-plan",
+    "batch_out_root": "D:\\aiproj\\d\\426\\解释\\evidence-input\\batch",
+    "sources": [
+      {
+        "path": "D:\\aiproj\\d\\426\\解释\\evidence-input\\corpus.txt",
+        "resolved_path": "D:\\aiproj\\d\\426\\解释\\evidence-input\\corpus.txt",
+        "exists": true,
+        "kind": "file"
+      }
+    ],
+    "command": [
+      "D:\\python\\python.exe",
+      "-c",
+      "print('planned v425 seed handoff')"
+    ],
+    "command_text": "D:\\python\\python.exe -c print('planned v425 seed handoff')",
+    "command_available": true,
+    "execution_ready": true
+  },
+  "summary": {
+    "seed_status": "ready",
+    "selected_name": "beta",
+    "command_available": true
+  }
+}

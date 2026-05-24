@@ -177,7 +177,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
 
             loaded = load_promoted_training_scale_seed_handoff_automation_receipt(outputs["automation_receipt_json"])
             check = check_promoted_training_scale_seed_handoff_automation_receipt(loaded)
-            self.assertEqual(loaded["schema_version"], 2)
+            self.assertEqual(loaded["schema_version"], 3)
             self.assertEqual(loaded["automation_decision"], "continue")
             self.assertEqual(check["selected_handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(check["handoff_batch_maturity_ci_regression_count"], 0)
@@ -376,7 +376,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(assurance_payload["status"], "pass")
             self.assertEqual(assurance_payload["embedded_receipt_check_status"], "pass")
             self.assertEqual(assurance_payload["embedded_receipt_check_sidecar_status"], "pass")
-            self.assertEqual(assurance_payload["embedded_receipt_check_receipt_schema_version"], 2)
+            self.assertEqual(assurance_payload["embedded_receipt_check_receipt_schema_version"], 3)
             self.assertEqual(
                 assurance_payload["embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"],
                 0,
@@ -399,7 +399,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("Assurance receipt schema", html)
             self.assertIn("Handoff Assurance", html)
             self.assertIn("handoff_assurance_status=pass", completed.stdout)
-            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=2", completed.stdout)
+            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=3", completed.stdout)
             self.assertIn("handoff_assurance_output_json=", completed.stdout)
             self.assertIn(
                 "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count=0",
@@ -443,13 +443,13 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             rendered = render_promoted_training_scale_seed_handoff_assurance_check(check)
 
             self.assertEqual(check["status"], "pass")
-            self.assertEqual(check["embedded_receipt_check_receipt_schema_version"], 2)
+            self.assertEqual(check["embedded_receipt_check_receipt_schema_version"], 3)
             self.assertEqual(check["embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"], 2)
             self.assertEqual(
                 check["embedded_receipt_check_receipt_comparison_exclusion_reasons"],
                 ["handoff batch CI regression count is 2"],
             )
-            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=2", rendered)
+            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=3", rendered)
             self.assertIn(
                 "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count=2",
                 rendered,
@@ -1061,14 +1061,14 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(check["decision"], "continue")
             self.assertEqual(check["embedded_receipt_check_status"], "pass")
             self.assertEqual(check["embedded_receipt_check_sidecar_status"], "pass")
-            self.assertEqual(check["embedded_receipt_check_receipt_schema_version"], 2)
+            self.assertEqual(check["embedded_receipt_check_receipt_schema_version"], 3)
             self.assertEqual(check["embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(check["embedded_receipt_check_receipt_comparison_exclusion_reasons"], [])
             self.assertTrue(check["embedded_receipt_check_output_json_exists"])
             self.assertTrue(check["embedded_receipt_check_output_text_exists"])
             self.assertIn("handoff_assurance_status=pass", completed.stdout)
             self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
-            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=2", completed.stdout)
+            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=3", completed.stdout)
             self.assertIn("handoff_assurance_json=", completed.stdout)
             self.assertIn("handoff_assurance_status=pass", render_promoted_training_scale_seed_handoff_assurance_check(check))
             self.assertIn("handoff_assurance_status=pass", Path(outputs["text"]).read_text(encoding="utf-8"))
@@ -1102,7 +1102,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(summary["status"], "pass")
             self.assertEqual(summary["decision"], "continue")
             self.assertEqual(summary["checks"]["handoff_assurance_status"], "pass")
-            self.assertEqual(summary["checks"]["handoff_assurance_embedded_receipt_check_receipt_schema_version"], 2)
+            self.assertEqual(summary["checks"]["handoff_assurance_embedded_receipt_check_receipt_schema_version"], 3)
             self.assertEqual(
                 summary["checks"][
                     "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"
@@ -1116,7 +1116,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertTrue(summary_path.is_file())
             self.assertIn("smoke_status=pass", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn(
-                "handoff_assurance_embedded_receipt_check_receipt_schema_version=2",
+                "handoff_assurance_embedded_receipt_check_receipt_schema_version=3",
                 summary_text_path.read_text(encoding="utf-8"),
             )
             self.assertIn("summary_json=", completed.stdout)
@@ -1124,7 +1124,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("status=pass", completed.stdout)
             self.assertIn("handoff_assurance_status=pass", completed.stdout)
             self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
-            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=2", completed.stdout)
+            self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=3", completed.stdout)
 
     def test_handoff_assurance_rejects_tampered_main_embedded_check(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -6,6 +6,7 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     html_escape as _e,
+    number_or_default as _number,
     string_list as _string_list,
     write_json_payload,
 )
@@ -19,7 +20,7 @@ def build_promoted_training_scale_seed_handoff_automation_receipt(report: dict[s
     automation_gate = _dict(report.get("automation_gate"))
     automation_summary = _dict(report.get("automation_summary"))
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "receipt_type": "promoted_training_scale_seed_handoff_automation",
         "generated_at": report.get("generated_at"),
         "seed_path": report.get("seed_path"),
@@ -46,6 +47,30 @@ def build_promoted_training_scale_seed_handoff_automation_receipt(report: dict[s
             "selected_handoff_batch_maturity_ci_regression_count"
         ),
         "handoff_batch_maturity_ci_regression_count": summary.get("handoff_batch_maturity_ci_regression_count"),
+        "selected_handoff_batch_maturity_suite_design_regression_count": _number(
+            summary.get("selected_handoff_batch_maturity_suite_design_regression_count"),
+            0,
+            int,
+        ),
+        "selected_handoff_batch_maturity_suite_design_regression_names": _string_list(
+            summary.get("selected_handoff_batch_maturity_suite_design_regression_names")
+        ),
+        "handoff_batch_maturity_suite_design_regression_count": _number(
+            summary.get("handoff_batch_maturity_suite_design_regression_count"),
+            0,
+            int,
+        ),
+        "handoff_batch_maturity_suite_design_regression_names": _string_list(
+            summary.get("handoff_batch_maturity_suite_design_regression_names")
+        ),
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_count": _number(
+            summary.get("comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
+            0,
+            int,
+        ),
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_names": _string_list(
+            summary.get("comparison_ready_handoff_batch_maturity_suite_design_regression_names")
+        ),
         "comparison_exclusion_reasons": summary.get("comparison_exclusion_reasons"),
     }
 
@@ -135,6 +160,32 @@ def _handoff_assurance_fields(report: dict[str, Any]) -> dict[str, Any]:
         "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": assurance.get(
             "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"
         ),
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names": "; ".join(
+            _string_list(
+                assurance.get(
+                    "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names"
+                )
+            )
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names": "; ".join(
+            _string_list(assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names"))
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": assurance.get(
+            "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": "; ".join(
+            _string_list(
+                assurance.get(
+                    "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names"
+                )
+            )
+        ),
         "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons": "; ".join(
             _string_list(assurance.get("embedded_receipt_check_receipt_comparison_exclusion_reasons"))
         ),
@@ -166,6 +217,12 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_text(report: 
         "clean_batch_review_requirement_status",
         "selected_handoff_batch_maturity_ci_regression_count",
         "handoff_batch_maturity_ci_regression_count",
+        "selected_handoff_batch_maturity_suite_design_regression_count",
+        "selected_handoff_batch_maturity_suite_design_regression_names",
+        "handoff_batch_maturity_suite_design_regression_count",
+        "handoff_batch_maturity_suite_design_regression_names",
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_names",
         "comparison_exclusion_reasons",
     ]
     return "\n".join(f"{key}={receipt.get(key)}" for key in keys) + "\n"
@@ -258,6 +315,22 @@ def _handoff_assurance_section(report: dict[str, Any]) -> str:
         (
             "Receipt CI regressions",
             assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "Receipt selected suite-design regressions",
+            assurance.get(
+                "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"
+            ),
+        ),
+        (
+            "Receipt suite-design regressions",
+            assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "Receipt ready suite-design regressions",
+            assurance.get(
+                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+            ),
         ),
         (
             "Receipt comparison exclusions",

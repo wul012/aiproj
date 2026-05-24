@@ -94,7 +94,7 @@ DEFAULT_GOVERNANCE_CHAINS = [
         "name": "Training-scale promotion and handoff flow",
         "action": "watch",
         "consumer": "promoted comparison, promoted baseline, promoted seed handoff, automation receipts",
-        "evidence": "promotion reports, clean-evidence gates, schema-v2 receipt checks",
+        "evidence": "promotion reports, clean-evidence gates, schema-v3 receipt checks",
         "review_reason": "This chain is useful but has the highest overlap risk because many promotion artifacts repeat clean/review/block fields.",
         "expansion_rule": "Prefer helper and artifact consolidation before adding another promotion-stage report.",
         "next_action": "Watch for overlap and repeated fields; consolidate helper/output duplication before adding new promotion variants.",

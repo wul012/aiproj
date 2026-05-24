@@ -162,6 +162,30 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
             f"`{handoff_assurance.get('embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count')}`"
         ),
         (
+            "- Handoff assurance receipt selected suite-design regressions: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt selected suite-design names: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names')}`"
+        ),
+        (
+            "- Handoff assurance receipt suite-design regressions: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt suite-design names: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names')}`"
+        ),
+        (
+            "- Handoff assurance receipt ready suite-design regressions: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt ready suite-design names: "
+            f"`{handoff_assurance.get('embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names')}`"
+        ),
+        (
             "- Handoff assurance receipt comparison exclusions: "
             f"`{handoff_assurance.get('embedded_receipt_check_receipt_comparison_exclusion_reasons')}`"
         ),
@@ -376,6 +400,22 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         (
             "Assurance CI regressions",
             handoff_assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "Assurance selected suite-design regressions",
+            handoff_assurance.get(
+                "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"
+            ),
+        ),
+        (
+            "Assurance suite-design regressions",
+            handoff_assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "Assurance ready suite-design regressions",
+            handoff_assurance.get(
+                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+            ),
         ),
         (
             "Assurance comparison exclusions",

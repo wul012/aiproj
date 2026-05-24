@@ -386,6 +386,9 @@ d/424/解释/说明.md
 d/425/图片
 d/425/解释/说明.md
  -> v425 promoted training scale seed handoff suite-design carryover 的运行截图和解释
+d/426/图片
+d/426/解释/说明.md
+ -> v426 promoted seed handoff receipt suite-design contract 的运行截图和解释
 ```
 
 写入规则：
