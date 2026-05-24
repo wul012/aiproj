@@ -368,6 +368,9 @@
 435-v421-training-scale-promotion-index-suite-design-carryover.md
  -> v421 code explanation: carry suite-design regression context into training scale promotion indexes, compare-input filtering, outputs, and CLI diagnostics.
 
+436-v422-promoted-training-scale-comparison-suite-design-carryover.md
+ -> v422 code explanation: carry suite-design regression context into promoted training scale comparisons, stale-index filtering, outputs, and CLI diagnostics.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

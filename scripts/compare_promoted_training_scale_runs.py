@@ -69,6 +69,22 @@ def main() -> None:
         "handoff_batch_maturity_ci_regression_names="
         f"{json.dumps(summary.get('handoff_batch_maturity_ci_regression_names', []), ensure_ascii=False)}"
     )
+    print(
+        "handoff_batch_maturity_suite_design_regression_count="
+        f"{summary.get('handoff_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "handoff_batch_maturity_suite_design_regression_names="
+        f"{json.dumps(summary.get('handoff_batch_maturity_suite_design_regression_names', []), ensure_ascii=False)}"
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_total="
+        f"{summary.get('handoff_selected_batch_maturity_suite_design_regression_total')}"
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_names="
+        f"{json.dumps(summary.get('handoff_selected_batch_maturity_suite_design_regression_names', []), ensure_ascii=False)}"
+    )
     print(f"comparison_ready_handoff_suite_mismatch_total={summary.get('comparison_ready_handoff_suite_mismatch_total')}")
     print(
         "comparison_ready_handoff_require_clean_batch_review_count="
@@ -109,6 +125,22 @@ def main() -> None:
     print(
         "comparison_ready_handoff_batch_maturity_ci_regression_names="
         f"{json.dumps(summary.get('comparison_ready_handoff_batch_maturity_ci_regression_names', []), ensure_ascii=False)}"
+    )
+    print(
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_count="
+        f"{summary.get('comparison_ready_handoff_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "comparison_ready_handoff_batch_maturity_suite_design_regression_names="
+        f"{json.dumps(summary.get('comparison_ready_handoff_batch_maturity_suite_design_regression_names', []), ensure_ascii=False)}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total="
+        f"{summary.get('comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names="
+        f"{json.dumps(summary.get('comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names', []), ensure_ascii=False)}"
     )
     print(f"comparison_ready_handoff_selected_batch_review_count={summary.get('comparison_ready_handoff_selected_batch_review_count')}")
     print(f"comparison_ready_handoff_selected_batch_blocker_count={summary.get('comparison_ready_handoff_selected_batch_blocker_count')}")

@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 421 carries suite-design regression context into training scale promotion indexes, so compare-input filtering excludes clean-required promotions that still contain benchmark-suite blocker causes.
+Version 422 carries suite-design regression context into promoted training scale comparisons, so stale-index rechecks keep clean-required suite-design-regressed promotions out of baseline comparison inputs.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 421 carries suite-design regression context into training scale promotio
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v422 checkpoint
+
+- Promoted training scale comparisons now carry selected/global handoff suite-design regression counts and names from promotion index rows.
+- Stale-index rechecks exclude clean-required promoted inputs with suite-design regressions before building comparison runs.
+- Comparison CSV, Markdown, HTML, recommendations, and `scripts/compare_promoted_training_scale_runs.py` stdout expose all-promotion and comparison-ready suite-design context.
+- Tests cover promoted comparison carryover, clean-required exclusion, stale-index blocking, rendered artifacts, CLI output, and fixture helper split.
+- Archived promoted comparison suite-design evidence in `d/422`; tag: `v422.0.0`.
 
 ## Latest v421 checkpoint
 
