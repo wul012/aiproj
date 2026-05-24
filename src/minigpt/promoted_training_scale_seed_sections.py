@@ -30,10 +30,28 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Selected clean batch", summary.get("selected_handoff_clean_batch_review_status")),
         ("Selected CI regressions", summary.get("selected_handoff_batch_maturity_ci_regression_count")),
         ("Selected CI reasons", _fmt_mapping(summary.get("selected_handoff_batch_maturity_ci_regression_reason_counts"))),
+        (
+            "Selected suite-design regressions",
+            summary.get("selected_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "Selected suite-design names",
+            ", ".join(_string_list(summary.get("selected_handoff_batch_maturity_suite_design_regression_names"))),
+        ),
         ("Selected selected CI regressions", summary.get("selected_handoff_selected_batch_maturity_ci_regression_count")),
         (
             "Selected selected CI reasons",
             _fmt_mapping(summary.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts")),
+        ),
+        (
+            "Selected selected suite-design regressions",
+            summary.get("selected_handoff_selected_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "Selected selected suite-design names",
+            ", ".join(
+                _string_list(summary.get("selected_handoff_selected_batch_maturity_suite_design_regression_names"))
+            ),
         ),
         ("Handoff clean required", summary.get("handoff_require_clean_batch_review_count")),
         ("Handoff clean", summary.get("handoff_clean_batch_review_count")),
@@ -44,6 +62,19 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         (
             "Handoff selected CI reasons",
             _fmt_mapping(summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts")),
+        ),
+        ("Handoff suite-design regressions", summary.get("handoff_batch_maturity_suite_design_regression_count")),
+        (
+            "Handoff selected suite-design regressions",
+            summary.get("handoff_selected_batch_maturity_suite_design_regression_total"),
+        ),
+        (
+            "Suite-design names",
+            ", ".join(_string_list(summary.get("handoff_batch_maturity_suite_design_regression_names"))),
+        ),
+        (
+            "Selected suite-design names",
+            ", ".join(_string_list(summary.get("handoff_selected_batch_maturity_suite_design_regression_names"))),
         ),
         ("Ready clean-required", summary.get("comparison_ready_handoff_require_clean_batch_review_count")),
         ("Ready clean batch", summary.get("comparison_ready_handoff_clean_batch_review_count")),
@@ -60,6 +91,24 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         (
             "Ready selected CI reasons",
             _fmt_mapping(summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts")),
+        ),
+        (
+            "Ready suite-design regressions",
+            summary.get("comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "Ready selected suite-design regressions",
+            summary.get("comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total"),
+        ),
+        (
+            "Ready suite-design names",
+            ", ".join(_string_list(summary.get("comparison_ready_handoff_batch_maturity_suite_design_regression_names"))),
+        ),
+        (
+            "Ready selected suite-design names",
+            ", ".join(
+                _string_list(summary.get("comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names"))
+            ),
         ),
         ("Selected handoff batch", summary.get("selected_handoff_selected_batch_review_status")),
         ("Selected batch blockers", summary.get("selected_handoff_selected_batch_comparison_blocker_action_count")),
@@ -122,12 +171,30 @@ def _baseline_section(seed: dict[str, Any]) -> str:
                 _fmt_mapping(clean_review.get("selected_handoff_batch_maturity_ci_regression_reason_counts")),
             ),
             (
+                "Selected suite-design regressions",
+                clean_review.get("selected_handoff_batch_maturity_suite_design_regression_count"),
+            ),
+            (
+                "Selected suite-design names",
+                ", ".join(_string_list(clean_review.get("selected_handoff_batch_maturity_suite_design_regression_names"))),
+            ),
+            (
                 "Selected selected CI regressions",
                 clean_review.get("selected_handoff_selected_batch_maturity_ci_regression_count"),
             ),
             (
                 "Selected selected CI reasons",
                 _fmt_mapping(clean_review.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts")),
+            ),
+            (
+                "Selected selected suite-design regressions",
+                clean_review.get("selected_handoff_selected_batch_maturity_suite_design_regression_count"),
+            ),
+            (
+                "Selected selected suite-design names",
+                ", ".join(
+                    _string_list(clean_review.get("selected_handoff_selected_batch_maturity_suite_design_regression_names"))
+                ),
             ),
             (
                 "Selected comparison exclusions",
@@ -143,6 +210,22 @@ def _baseline_section(seed: dict[str, Any]) -> str:
                 ", ".join(_string_list(clean_review.get("handoff_batch_maturity_ci_regression_names"))),
             ),
             (
+                "Handoff suite-design regressions",
+                clean_review.get("handoff_batch_maturity_suite_design_regression_count"),
+            ),
+            (
+                "Handoff selected suite-design regressions",
+                clean_review.get("handoff_selected_batch_maturity_suite_design_regression_total"),
+            ),
+            (
+                "Handoff suite-design names",
+                ", ".join(_string_list(clean_review.get("handoff_batch_maturity_suite_design_regression_names"))),
+            ),
+            (
+                "Handoff selected suite-design names",
+                ", ".join(_string_list(clean_review.get("handoff_selected_batch_maturity_suite_design_regression_names"))),
+            ),
+            (
                 "Comparison exclusions",
                 ", ".join(_string_list(clean_review.get("comparison_exclusion_reasons"))),
             ),
@@ -155,6 +238,20 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             (
                 "Comparison-ready CI regressions",
                 clean_review.get("comparison_ready_handoff_batch_maturity_ci_regression_count"),
+            ),
+            (
+                "Comparison-ready suite-design regressions",
+                clean_review.get("comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
+            ),
+            (
+                "Comparison-ready selected suite-design regressions",
+                clean_review.get("comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total"),
+            ),
+            (
+                "Comparison-ready suite-design names",
+                ", ".join(
+                    _string_list(clean_review.get("comparison_ready_handoff_batch_maturity_suite_design_regression_names"))
+                ),
             ),
         ]
     )

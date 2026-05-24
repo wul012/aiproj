@@ -380,6 +380,9 @@ d/422/解释/说明.md
 d/423/图片
 d/423/解释/说明.md
  -> v423 promoted training scale decision suite-design carryover 的运行截图和解释
+d/424/图片
+d/424/解释/说明.md
+ -> v424 promoted training scale seed suite-design carryover 的运行截图和解释
 ```
 
 写入规则：

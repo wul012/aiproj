@@ -1,0 +1,23 @@
+{
+  "name": "beta",
+  "status": "completed",
+  "allowed": true,
+  "gate_profile": "review",
+  "gate": {
+    "overall_status": "pass"
+  },
+  "scale_plan_summary": {
+    "dataset_name": "sample-zh",
+    "version_prefix": "v80",
+    "scale_tier": "tiny",
+    "char_count": 2048,
+    "variant_count": 1,
+    "suite_mode": "builtin",
+    "suite_name": "standard-zh",
+    "suite_path": "builtin:standard-zh"
+  },
+  "batch_summary": {
+    "status": "completed",
+    "variant_count": 1
+  }
+}

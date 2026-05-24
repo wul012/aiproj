@@ -406,6 +406,107 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
                 any("missing-ci-step:1, workflow-order-regressed:1" in item for item in report["recommendations"])
             )
 
+    def test_carries_decision_suite_design_exclusions_into_seed_outputs_and_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decision = write_decision_tree(
+                root,
+                decision_status="accepted",
+                suite_name="standard-zh",
+                include_handoff_suite_guard=True,
+                include_clean_batch_review=True,
+                include_suite_design_regression_context=True,
+            )
+            source = write_source(root)
+
+            report = build_promoted_training_scale_seed(
+                decision,
+                [source],
+                project_root=root,
+                plan_out_dir=root / "plan",
+                batch_out_root=root / "batch",
+                dataset_version_prefix="v424-smoke",
+            )
+            outputs = write_promoted_training_scale_seed_outputs(report, root / "seed")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            script_out = root / "script-out"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "build_promoted_training_scale_seed.py"),
+                    str(decision),
+                    str(source),
+                    "--project-root",
+                    str(root),
+                    "--out-dir",
+                    str(script_out),
+                    "--plan-out-dir",
+                    str(root / "script-plan"),
+                    "--batch-out-root",
+                    str(root / "script-batch"),
+                    "--dataset-version-prefix",
+                    "v424-smoke",
+                    "--require-ready",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            clean_review = report["baseline_seed"]["handoff_clean_batch_review"]
+            summary = report["summary"]
+            self.assertEqual(report["seed_status"], "ready")
+            self.assertEqual(clean_review["selected_handoff_batch_maturity_suite_design_regression_count"], 0)
+            self.assertEqual(clean_review["selected_handoff_batch_maturity_suite_design_regression_names"], [])
+            self.assertEqual(clean_review["selected_handoff_selected_batch_maturity_suite_design_regression_count"], 0)
+            self.assertEqual(clean_review["selected_handoff_selected_batch_maturity_suite_design_regression_names"], [])
+            self.assertEqual(clean_review["handoff_batch_maturity_suite_design_regression_count"], 2)
+            self.assertEqual(clean_review["handoff_selected_batch_maturity_suite_design_regression_total"], 1)
+            self.assertEqual(
+                clean_review["handoff_batch_maturity_suite_design_regression_names"],
+                ["beta-suite", "standard"],
+            )
+            self.assertEqual(clean_review["handoff_selected_batch_maturity_suite_design_regression_names"], ["beta-suite"])
+            self.assertEqual(clean_review["comparison_ready_handoff_batch_maturity_suite_design_regression_count"], 0)
+            self.assertEqual(
+                clean_review["comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total"],
+                0,
+            )
+            self.assertEqual(clean_review["comparison_ready_handoff_batch_maturity_suite_design_regression_names"], [])
+            self.assertEqual(
+                clean_review["comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names"],
+                [],
+            )
+            self.assertEqual(summary["selected_handoff_batch_maturity_suite_design_regression_count"], 0)
+            self.assertEqual(summary["handoff_batch_maturity_suite_design_regression_count"], 2)
+            self.assertEqual(summary["handoff_selected_batch_maturity_suite_design_regression_total"], 1)
+            self.assertEqual(
+                summary["handoff_batch_maturity_suite_design_regression_names"],
+                ["beta-suite", "standard"],
+            )
+            self.assertEqual(
+                summary["comparison_ready_handoff_batch_maturity_suite_design_regression_count"],
+                0,
+            )
+            self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch suite-design regression count is 2"])
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count", csv_text)
+            self.assertIn("handoff_batch_maturity_suite_design_regression_names", csv_text)
+            self.assertIn("beta-suite; standard", csv_text)
+            self.assertIn("Handoff batch suite-design regressions", markdown)
+            self.assertIn("Comparison-ready handoff batch suite-design regressions", markdown)
+            self.assertIn("Handoff suite-design regressions", html)
+            self.assertIn("Ready suite-design regressions", html)
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count=2", completed.stdout)
+            self.assertIn(
+                'handoff_batch_maturity_suite_design_regression_names=["beta-suite", "standard"]',
+                completed.stdout,
+            )
+            self.assertIn("comparison_ready_handoff_batch_maturity_suite_design_regression_count=0", completed.stdout)
+            self.assertTrue(any("handoff batch suite-design regressions" in item for item in report["recommendations"]))
+
     def test_default_suite_override_does_not_emit_fake_builtin_default(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -488,6 +589,7 @@ def write_decision_tree(
     include_handoff_batch_review: bool = False,
     include_clean_batch_review: bool = False,
     include_ci_regression_context: bool = False,
+    include_suite_design_regression_context: bool = False,
 ) -> Path:
     scale_summary = {
         "dataset_name": "sample-zh",
@@ -586,6 +688,10 @@ def write_decision_tree(
                 "handoff_batch_maturity_ci_regression_names": [],
                 "handoff_selected_batch_maturity_ci_regression_count": 0,
                 "comparison_exclusion_reasons": [],
+                "handoff_batch_maturity_suite_design_regression_count": 0,
+                "handoff_batch_maturity_suite_design_regression_names": [],
+                "handoff_selected_batch_maturity_suite_design_regression_count": 0,
+                "handoff_selected_batch_maturity_suite_design_regression_names": [],
             }
         )
         summary_fields.update(
@@ -597,6 +703,10 @@ def write_decision_tree(
                 "selected_handoff_batch_maturity_ci_regression_names": [],
                 "selected_handoff_selected_batch_maturity_ci_regression_count": 0,
                 "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+                "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+                "selected_handoff_batch_maturity_suite_design_regression_names": [],
+                "selected_handoff_selected_batch_maturity_suite_design_regression_count": 0,
+                "selected_handoff_selected_batch_maturity_suite_design_regression_names": [],
                 "selected_comparison_exclusion_reasons": [],
                 "handoff_require_clean_batch_review_count": 3,
                 "handoff_clean_batch_review_count": 2,
@@ -625,6 +735,20 @@ def write_decision_tree(
                 "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
                 "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
                 "comparison_ready_handoff_batch_maturity_ci_regression_names": [],
+            }
+        )
+    if include_suite_design_regression_context:
+        summary_fields.update(
+            {
+                "handoff_batch_maturity_suite_design_regression_count": 2,
+                "handoff_selected_batch_maturity_suite_design_regression_total": 1,
+                "handoff_batch_maturity_suite_design_regression_names": ["beta-suite", "standard"],
+                "handoff_selected_batch_maturity_suite_design_regression_names": ["beta-suite"],
+                "comparison_exclusion_reasons": ["handoff batch suite-design regression count is 2"],
+                "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+                "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total": 0,
+                "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+                "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names": [],
             }
         )
     payload = {
