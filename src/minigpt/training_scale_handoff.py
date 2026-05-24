@@ -147,6 +147,7 @@ def _handoff_allowed(
     if clean_batch_review_guard.get("decision_require_clean_batch_review") and (
         clean_batch_review_guard.get("clean_batch_review_status") != "clean"
         or int(clean_batch_review_guard.get("batch_maturity_ci_regression_count") or 0)
+        or int(clean_batch_review_guard.get("batch_maturity_suite_design_regression_count") or 0)
     ):
         return False, "workflow requires clean batch-review evidence but status is not clean"
     if decision_status == "ready":
@@ -261,6 +262,16 @@ def _summary(
         "selected_batch_comparison_review_action_count": decision_summary.get("selected_batch_comparison_review_action_count"),
         "selected_batch_comparison_blocker_action_count": decision_summary.get("selected_batch_comparison_blocker_action_count"),
         "selected_batch_maturity_coverage_regression_count": decision_summary.get("selected_batch_maturity_coverage_regression_count"),
+        "selected_batch_maturity_suite_design_regression_count": first_present(
+            decision_summary.get("selected_batch_maturity_suite_design_regression_count"),
+            clean_batch_review_guard.get("selected_batch_maturity_suite_design_regression_count"),
+        ),
+        "selected_batch_maturity_suite_design_regression_names": _string_list(
+            first_present(
+                decision_summary.get("selected_batch_maturity_suite_design_regression_names"),
+                clean_batch_review_guard.get("selected_batch_maturity_suite_design_regression_names"),
+            )
+        ),
         "selected_batch_maturity_ci_regression_count": first_present(
             decision_summary.get("selected_batch_maturity_ci_regression_count"),
             clean_batch_review_guard.get("batch_maturity_ci_regression_count"),
@@ -274,6 +285,16 @@ def _summary(
         "batch_comparison_review_action_count": decision_summary.get("batch_comparison_review_action_count"),
         "batch_comparison_blocker_action_count": decision_summary.get("batch_comparison_blocker_action_count"),
         "batch_maturity_coverage_regression_count": decision_summary.get("batch_maturity_coverage_regression_count"),
+        "batch_maturity_suite_design_regression_count": first_present(
+            decision_summary.get("batch_maturity_suite_design_regression_count"),
+            clean_batch_review_guard.get("batch_maturity_suite_design_regression_count"),
+        ),
+        "batch_maturity_suite_design_regression_names": _string_list(
+            first_present(
+                decision_summary.get("batch_maturity_suite_design_regression_names"),
+                clean_batch_review_guard.get("batch_maturity_suite_design_regression_names"),
+            )
+        ),
         "batch_maturity_ci_regression_count": first_present(
             decision_summary.get("batch_maturity_ci_regression_count"),
             clean_batch_review_guard.get("batch_maturity_ci_regression_count"),
@@ -303,6 +324,7 @@ def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifac
     if summary.get("decision_require_clean_batch_review") and (
         summary.get("clean_batch_review_status") != "clean"
         or int(summary.get("batch_maturity_ci_regression_count") or 0)
+        or int(summary.get("batch_maturity_suite_design_regression_count") or 0)
     ):
         return ["Resolve workflow clean batch-review requirement before executing this handoff as clean automation."]
     if summary.get("selected_batch_review_status") == "blocker":
@@ -311,6 +333,10 @@ def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifac
         detail = _reason_detail(summary.get("batch_maturity_ci_regression_reason_counts"))
         suffix = f" Observed reasons: {detail}." if detail else ""
         return ["Resolve CI-regressed batch evidence before executing this handoff as clean evidence." + suffix]
+    if int(summary.get("batch_maturity_suite_design_regression_count") or 0):
+        names = ", ".join(_string_list(summary.get("batch_maturity_suite_design_regression_names")))
+        suffix = f" Affected portfolios: {names}." if names else ""
+        return ["Resolve suite-design regressed batch evidence before executing this handoff as clean benchmark evidence." + suffix]
     status = str(summary.get("handoff_status") or "")
     if status == "planned":
         if summary.get("selected_batch_review_status") == "review":
@@ -374,6 +400,26 @@ def _clean_batch_review_guard(workflow: dict[str, Any], decision: dict[str, Any]
         "batch_maturity_coverage_regression_count": first_present(
             decision_summary.get("batch_maturity_coverage_regression_count"),
             workflow_summary.get("batch_maturity_coverage_regression_count"),
+        ),
+        "selected_batch_maturity_suite_design_regression_count": first_present(
+            decision_summary.get("selected_batch_maturity_suite_design_regression_count"),
+            workflow_summary.get("selected_batch_maturity_suite_design_regression_count"),
+        ),
+        "selected_batch_maturity_suite_design_regression_names": _string_list(
+            first_present(
+                decision_summary.get("selected_batch_maturity_suite_design_regression_names"),
+                workflow_summary.get("selected_batch_maturity_suite_design_regression_names"),
+            )
+        ),
+        "batch_maturity_suite_design_regression_count": first_present(
+            decision_summary.get("batch_maturity_suite_design_regression_count"),
+            workflow_summary.get("batch_maturity_suite_design_regression_count"),
+        ),
+        "batch_maturity_suite_design_regression_names": _string_list(
+            first_present(
+                decision_summary.get("batch_maturity_suite_design_regression_names"),
+                workflow_summary.get("batch_maturity_suite_design_regression_names"),
+            )
         ),
         "batch_maturity_ci_regression_count": first_present(
             decision_summary.get("batch_maturity_ci_regression_count"),

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>v419 training scale handoff suite-design evidence</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f7f8f3; color: #172026; }
+body { margin: 0; padding: 28px; }
+header, section, footer { max-width: 1180px; margin: 0 auto 18px; }
+header { border-bottom: 1px solid #d7dccf; padding-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #4f5d52; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 10px; }
+.card, section { background: #ffffff; border: 1px solid #d9ded7; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #667366; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { text-align: left; border-bottom: 1px solid #e3e7df; padding: 9px; vertical-align: top; }
+th { color: #435047; font-size: 12px; text-transform: uppercase; width: 160px; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172026; color: #f7faf2; border-radius: 8px; padding: 12px; }
+li { margin: 7px 0; }
+footer { color: #69756a; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>v419 training scale handoff suite-design evidence</h1><p>D:\aiproj\runs\v419-training-scale-handoff-suite-design\workflow\training_scale_workflow.json</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>planned</strong></div><div class="card"><span>Decision</span><strong>review</strong></div><div class="card"><span>Execute</span><strong>False</strong></div><div class="card"><span>Return</span><strong></strong></div><div class="card"><span>Elapsed</span><strong>0.0</strong></div><div class="card"><span>Artifacts</span><strong>0/6</strong></div><div class="card"><span>Require suite consistency</span><strong>False</strong></div><div class="card"><span>Suite</span><strong>consistent</strong></div><div class="card"><span>Require clean batch review</span><strong>False</strong></div><div class="card"><span>Clean batch review</span><strong>review</strong></div><div class="card"><span>Batch review status</span><strong>clean</strong></div><div class="card"><span>Selected reviews</span><strong>0</strong></div><div class="card"><span>Selected blockers</span><strong>0</strong></div><div class="card"><span>Selected suite-design regressions</span><strong>1</strong></div><div class="card"><span>Selected suite-design names</span><strong>suite-risk</strong></div><div class="card"><span>Selected CI regressions</span><strong>0</strong></div><div class="card"><span>Selected CI reasons</span><strong>none</strong></div><div class="card"><span>Batch reviews</span><strong>0</strong></div><div class="card"><span>Batch blockers</span><strong>0</strong></div><div class="card"><span>Batch suite-design regressions</span><strong>1</strong></div><div class="card"><span>Suite-design names</span><strong>suite-risk</strong></div><div class="card"><span>Batch CI regressions</span><strong>0</strong></div><div class="card"><span>CI regression reasons</span><strong>none</strong></div></section>
+<section><h2>Command</h2><pre>python scripts/run_training_scale_plan.py --plan runs/v419/plan.json --out-root runs/v419-execute --gate-profile review --execute</pre></section>
+<section><h2>Execution</h2><table><tr><th>Status</th><td>planned</td></tr><tr><th>Return code</th><td></td></tr><tr><th>Elapsed seconds</th><td>0.0</td></tr><tr><th>Blocked reason</th><td></td></tr><tr><th>Stdout tail</th><td></td></tr><tr><th>Stderr tail</th><td></td></tr></table></section>
+<section><h2>Artifacts</h2><div class="table-wrap"><table><thead><tr><th>Key</th><th>Exists</th><th>Count</th><th>Path</th></tr></thead><tbody><tr><td>training_scale_run_json</td><td>False</td><td>0</td><td>runs\v419-execute\training_scale_run.json</td></tr><tr><td>training_scale_run_html</td><td>False</td><td>0</td><td>runs\v419-execute\training_scale_run.html</td></tr><tr><td>batch_json</td><td>False</td><td>0</td><td>runs\v419-execute\batch\training_portfolio_batch.json</td></tr><tr><td>batch_html</td><td>False</td><td>0</td><td>runs\v419-execute\batch\training_portfolio_batch.html</td></tr><tr><td>variant_portfolio_reports</td><td>False</td><td>0</td><td>runs\v419-execute\batch\variants</td></tr><tr><td>variant_checkpoints</td><td>False</td><td>0</td><td>runs\v419-execute\batch\variants</td></tr></tbody></table></div></section>
+<section><h2>Recommendations</h2><ul><li>Resolve suite-design regressed batch evidence before executing this handoff as clean benchmark evidence. Affected portfolios: suite-risk.</li></ul></section>
+<footer>Generated by MiniGPT training scale execution handoff.</footer>
+</body>
+</html>

@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 418 carries suite-design regression context from training portfolio batch reviews into scale-run, decision, workflow, rendered output, and CLI evidence so execution handoffs can explain benchmark-suite blockers instead of only showing aggregate blocker counts.
+Version 419 carries suite-design regression context into training scale execution handoffs, so handoff validation, strict clean-batch guards, rendered evidence, and CLI logs keep benchmark-suite blocker causes visible before execution.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 418 carries suite-design regression context from training portfolio batc
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v419 checkpoint
+
+- Training scale handoff now carries selected/global batch suite-design regression counts and affected portfolio names from workflow/decision evidence.
+- Strict clean-batch handoff validation blocks suite-design-regressed evidence even when legacy clean status is present.
+- Handoff CSV, Markdown, HTML, recommendations, and `scripts/execute_training_scale_handoff.py` stdout expose suite-design regression context.
+- Tests cover handoff carryover, rendered artifacts, CLI output, and strict clean-batch blocking for suite-design regressions.
+- Archived training scale handoff suite-design evidence in `d/419`; tag: `v419.0.0`.
 
 ## Latest v418 checkpoint
 

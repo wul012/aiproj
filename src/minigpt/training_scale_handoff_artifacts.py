@@ -42,11 +42,15 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
         "selected_batch_comparison_review_action_count",
         "selected_batch_comparison_blocker_action_count",
         "selected_batch_maturity_coverage_regression_count",
+        "selected_batch_maturity_suite_design_regression_count",
+        "selected_batch_maturity_suite_design_regression_names",
         "selected_batch_maturity_ci_regression_count",
         "selected_batch_maturity_ci_regression_reason_counts",
         "batch_comparison_review_action_count",
         "batch_comparison_blocker_action_count",
         "batch_maturity_coverage_regression_count",
+        "batch_maturity_suite_design_regression_count",
+        "batch_maturity_suite_design_regression_names",
         "batch_maturity_ci_regression_count",
         "batch_maturity_ci_regression_names",
         "batch_maturity_ci_regression_reason_counts",
@@ -72,6 +76,12 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
             "selected_batch_comparison_review_action_count": summary.get("selected_batch_comparison_review_action_count"),
             "selected_batch_comparison_blocker_action_count": summary.get("selected_batch_comparison_blocker_action_count"),
             "selected_batch_maturity_coverage_regression_count": summary.get("selected_batch_maturity_coverage_regression_count"),
+            "selected_batch_maturity_suite_design_regression_count": summary.get(
+                "selected_batch_maturity_suite_design_regression_count"
+            ),
+            "selected_batch_maturity_suite_design_regression_names": ";".join(
+                _string_list(summary.get("selected_batch_maturity_suite_design_regression_names"))
+            ),
             "selected_batch_maturity_ci_regression_count": summary.get("selected_batch_maturity_ci_regression_count"),
             "selected_batch_maturity_ci_regression_reason_counts": summary.get(
                 "selected_batch_maturity_ci_regression_reason_counts"
@@ -79,6 +89,10 @@ def write_training_scale_handoff_csv(report: dict[str, Any], path: str | Path) -
             "batch_comparison_review_action_count": summary.get("batch_comparison_review_action_count"),
             "batch_comparison_blocker_action_count": summary.get("batch_comparison_blocker_action_count"),
             "batch_maturity_coverage_regression_count": summary.get("batch_maturity_coverage_regression_count"),
+            "batch_maturity_suite_design_regression_count": summary.get("batch_maturity_suite_design_regression_count"),
+            "batch_maturity_suite_design_regression_names": ";".join(
+                _string_list(summary.get("batch_maturity_suite_design_regression_names"))
+            ),
             "batch_maturity_ci_regression_count": summary.get("batch_maturity_ci_regression_count"),
             "batch_maturity_ci_regression_names": ";".join(_string_list(summary.get("batch_maturity_ci_regression_names"))),
             "batch_maturity_ci_regression_reason_counts": summary.get("batch_maturity_ci_regression_reason_counts"),
@@ -110,10 +124,14 @@ def render_training_scale_handoff_markdown(report: dict[str, Any]) -> str:
         f"- Selected batch review status: `{summary.get('selected_batch_review_status')}`",
         f"- Selected batch reviews: `{summary.get('selected_batch_comparison_review_action_count')}`",
         f"- Selected batch blockers: `{summary.get('selected_batch_comparison_blocker_action_count')}`",
+        f"- Selected batch suite-design regressions: `{summary.get('selected_batch_maturity_suite_design_regression_count')}`",
+        f"- Selected batch suite-design names: `{', '.join(_string_list(summary.get('selected_batch_maturity_suite_design_regression_names')))}`",
         f"- Selected batch CI regressions: `{summary.get('selected_batch_maturity_ci_regression_count')}`",
         f"- Selected batch CI regression reasons: `{_fmt_mapping(summary.get('selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Batch comparison reviews: `{summary.get('batch_comparison_review_action_count')}`",
         f"- Batch comparison blockers: `{summary.get('batch_comparison_blocker_action_count')}`",
+        f"- Batch suite-design regressions: `{summary.get('batch_maturity_suite_design_regression_count')}`",
+        f"- Batch suite-design names: `{', '.join(_string_list(summary.get('batch_maturity_suite_design_regression_names')))}`",
         f"- Batch CI regressions: `{summary.get('batch_maturity_ci_regression_count')}`",
         f"- Batch CI-regressed names: `{', '.join(_string_list(summary.get('batch_maturity_ci_regression_names')))}`",
         f"- Batch CI regression reasons: `{_fmt_mapping(summary.get('batch_maturity_ci_regression_reason_counts'))}`",
@@ -168,10 +186,14 @@ def render_training_scale_handoff_html(report: dict[str, Any]) -> str:
         ("Batch review status", summary.get("selected_batch_review_status")),
         ("Selected reviews", summary.get("selected_batch_comparison_review_action_count")),
         ("Selected blockers", summary.get("selected_batch_comparison_blocker_action_count")),
+        ("Selected suite-design regressions", summary.get("selected_batch_maturity_suite_design_regression_count")),
+        ("Selected suite-design names", ", ".join(_string_list(summary.get("selected_batch_maturity_suite_design_regression_names")))),
         ("Selected CI regressions", summary.get("selected_batch_maturity_ci_regression_count")),
         ("Selected CI reasons", _fmt_mapping(summary.get("selected_batch_maturity_ci_regression_reason_counts"))),
         ("Batch reviews", summary.get("batch_comparison_review_action_count")),
         ("Batch blockers", summary.get("batch_comparison_blocker_action_count")),
+        ("Batch suite-design regressions", summary.get("batch_maturity_suite_design_regression_count")),
+        ("Suite-design names", ", ".join(_string_list(summary.get("batch_maturity_suite_design_regression_names")))),
         ("Batch CI regressions", summary.get("batch_maturity_ci_regression_count")),
         ("CI regression reasons", _fmt_mapping(summary.get("batch_maturity_ci_regression_reason_counts"))),
     ]

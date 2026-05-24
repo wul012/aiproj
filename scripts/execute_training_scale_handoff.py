@@ -42,7 +42,26 @@ def main() -> None:
     print(f"handoff_allowed={report.get('handoff_allowed')}")
     print(f"clean_batch_review_status={report.get('summary', {}).get('clean_batch_review_status')}")
     print(f"batch_maturity_ci_regression_count={report.get('summary', {}).get('batch_maturity_ci_regression_count')}")
+    print(
+        "batch_maturity_suite_design_regression_count="
+        f"{report.get('summary', {}).get('batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "batch_maturity_suite_design_regression_names="
+        + json.dumps(report.get("summary", {}).get("batch_maturity_suite_design_regression_names", []), ensure_ascii=False)
+    )
     print(f"selected_batch_maturity_ci_regression_count={report.get('summary', {}).get('selected_batch_maturity_ci_regression_count')}")
+    print(
+        "selected_batch_maturity_suite_design_regression_count="
+        f"{report.get('summary', {}).get('selected_batch_maturity_suite_design_regression_count')}"
+    )
+    print(
+        "selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(
+            report.get("summary", {}).get("selected_batch_maturity_suite_design_regression_names", []),
+            ensure_ascii=False,
+        )
+    )
     print(f"execute={report.get('execute')}")
     print(f"returncode={report.get('execution', {}).get('returncode')}")
     print("summary=" + json.dumps(report.get("summary", {}), ensure_ascii=False))

@@ -365,6 +365,9 @@ d/417/解释/说明.md
 d/418/图片
 d/418/解释/说明.md
  -> v418 training scale suite-design decision carryover 的运行截图和解释
+d/419/图片
+d/419/解释/说明.md
+ -> v419 training scale handoff suite-design carryover 的运行截图和解释
 ```
 
 写入规则：
