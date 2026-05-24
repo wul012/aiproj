@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 420 carries suite-design regression context into training scale promotion acceptance, so strict clean-batch promotion blocks handoffs that still contain benchmark-suite blocker causes.
+Version 421 carries suite-design regression context into training scale promotion indexes, so compare-input filtering excludes clean-required promotions that still contain benchmark-suite blocker causes.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -731,10 +731,18 @@ Version 420 carries suite-design regression context into training scale promotio
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
 
+## Latest v421 checkpoint
+
+- Training scale promotion index rows now carry selected/global handoff suite-design regression counts and affected promotion names.
+- Clean-required promotions with suite-design regressions are excluded from compare inputs even when their clean-batch status is `clean`.
+- Index CSV, Markdown, HTML, recommendations, and `scripts/index_training_scale_promotions.py` stdout expose suite-design regression context.
+- Tests cover index carryover, compare-input exclusion, rendered artifacts, CLI output, and summary aggregation for suite-design regressions.
+- Archived training scale promotion index suite-design evidence in `d/421`; tag: `v421.0.0`.
+
 ## Latest v420 checkpoint
 
 - Training scale promotion now carries selected/global handoff suite-design regression counts and affected portfolio names.
-- Strict clean-batch promotion acceptance blocks suite-design-regressed handoffs even when legacy clean status is present.
+- Strict clean-batch promotion acceptance blocks suite-design-regressed evidence even when legacy clean status is present.
 - Promotion CSV, Markdown, HTML, recommendations, and `scripts/build_training_scale_promotion.py` stdout expose suite-design regression context.
 - Tests cover promotion carryover, rendered artifacts, CLI output, and strict clean-batch blocking for suite-design regressions.
 - Archived training scale promotion suite-design evidence in `d/420`; tag: `v420.0.0`.

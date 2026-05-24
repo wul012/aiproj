@@ -86,9 +86,13 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
         "handoff_batch_maturity_ci_regression_count",
         "handoff_batch_maturity_ci_regression_reason_counts",
         "handoff_batch_maturity_ci_regression_names",
+        "handoff_batch_maturity_suite_design_regression_count",
+        "handoff_batch_maturity_suite_design_regression_names",
         "handoff_selected_batch_review_status",
         "handoff_selected_batch_comparison_review_action_count",
         "handoff_selected_batch_comparison_blocker_action_count",
+        "handoff_selected_batch_maturity_suite_design_regression_count",
+        "handoff_selected_batch_maturity_suite_design_regression_names",
         "handoff_selected_batch_maturity_ci_regression_count",
         "handoff_selected_batch_maturity_ci_regression_reason_counts",
         "handoff_batch_comparison_review_action_count",
@@ -127,12 +131,24 @@ def write_training_scale_promotion_index_csv(report: dict[str, Any], path: str |
                     "handoff_batch_maturity_ci_regression_names": ";".join(
                         _string_list(row.get("handoff_batch_maturity_ci_regression_names"))
                     ),
+                    "handoff_batch_maturity_suite_design_regression_count": row.get(
+                        "handoff_batch_maturity_suite_design_regression_count"
+                    ),
+                    "handoff_batch_maturity_suite_design_regression_names": ";".join(
+                        _string_list(row.get("handoff_batch_maturity_suite_design_regression_names"))
+                    ),
                     "handoff_selected_batch_review_status": row.get("handoff_selected_batch_review_status"),
                     "handoff_selected_batch_comparison_review_action_count": row.get(
                         "handoff_selected_batch_comparison_review_action_count"
                     ),
                     "handoff_selected_batch_comparison_blocker_action_count": row.get(
                         "handoff_selected_batch_comparison_blocker_action_count"
+                    ),
+                    "handoff_selected_batch_maturity_suite_design_regression_count": row.get(
+                        "handoff_selected_batch_maturity_suite_design_regression_count"
+                    ),
+                    "handoff_selected_batch_maturity_suite_design_regression_names": ";".join(
+                        _string_list(row.get("handoff_selected_batch_maturity_suite_design_regression_names"))
                     ),
                     "handoff_selected_batch_maturity_ci_regression_count": row.get(
                         "handoff_selected_batch_maturity_ci_regression_count"
@@ -182,6 +198,10 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         f"- Handoff selected batch CI regressions: `{summary.get('handoff_selected_batch_maturity_ci_regression_total')}`",
         f"- Handoff selected batch CI regression reasons: `{_fmt_mapping(summary.get('handoff_selected_batch_maturity_ci_regression_reason_counts'))}`",
         f"- Handoff batch CI-regressed names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_ci_regression_names')))}`",
+        f"- Handoff batch suite-design regressions: `{summary.get('handoff_batch_maturity_suite_design_regression_count')}`",
+        f"- Handoff batch suite-design names: `{', '.join(_string_list(summary.get('handoff_batch_maturity_suite_design_regression_names')))}`",
+        f"- Handoff selected batch suite-design regressions: `{summary.get('handoff_selected_batch_maturity_suite_design_regression_total')}`",
+        f"- Handoff selected batch suite-design names: `{', '.join(_string_list(summary.get('handoff_selected_batch_maturity_suite_design_regression_names')))}`",
         f"- Selected batch reviews: `{summary.get('handoff_selected_batch_review_count')}`",
         f"- Selected batch blockers: `{summary.get('handoff_selected_batch_blocker_count')}`",
         f"- Batch comparison reviews: `{summary.get('handoff_batch_comparison_review_action_total')}`",
@@ -191,8 +211,8 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
         "",
         "## Promotions",
         "",
-        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Selected Suite | Clean Required | Clean Status | CI Regressions | Batch Review | Batch Blockers | Variants | Required Artifacts | Primary Variant | Scale Run |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- |",
+        "| Name | Status | Compare | Handoff Suite | Suite Consistency | Selected Suite | Clean Required | Clean Status | CI Regressions | Suite-Design Regressions | Batch Review | Batch Blockers | Variants | Required Artifacts | Primary Variant | Scale Run |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | --- | ---: | ---: | ---: | --- | --- |",
     ]
     for row in _list_of_dicts(report.get("promotions")):
         lines.append(
@@ -208,6 +228,7 @@ def render_training_scale_promotion_index_markdown(report: dict[str, Any]) -> st
                     _md(row.get("handoff_require_clean_batch_review")),
                     _md(row.get("handoff_clean_batch_review_status")),
                     _md(row.get("handoff_batch_maturity_ci_regression_count")),
+                    _md(row.get("handoff_batch_maturity_suite_design_regression_count")),
                     _md(row.get("handoff_selected_batch_review_status")),
                     _md(row.get("handoff_selected_batch_comparison_blocker_action_count")),
                     _md(row.get("variant_count")),
@@ -257,6 +278,13 @@ def render_training_scale_promotion_index_html(report: dict[str, Any]) -> str:
         ("Handoff CI reasons", _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))),
         ("Selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
         ("Selected CI reasons", _fmt_mapping(summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"))),
+        ("Handoff suite-design regressions", summary.get("handoff_batch_maturity_suite_design_regression_count")),
+        ("Suite-design names", ", ".join(_string_list(summary.get("handoff_batch_maturity_suite_design_regression_names")))),
+        ("Selected suite-design regressions", summary.get("handoff_selected_batch_maturity_suite_design_regression_total")),
+        (
+            "Selected suite-design names",
+            ", ".join(_string_list(summary.get("handoff_selected_batch_maturity_suite_design_regression_names"))),
+        ),
         ("Batch reviews", summary.get("handoff_selected_batch_review_count")),
         ("Batch blockers", summary.get("handoff_selected_batch_blocker_count")),
         ("Batch review actions", summary.get("handoff_batch_comparison_review_action_total")),
@@ -341,6 +369,7 @@ def _promotions_table(report: dict[str, Any]) -> str:
             f"<td>{_e(row.get('handoff_require_clean_batch_review'))}</td>"
             f"<td>{_e(row.get('handoff_clean_batch_review_status'))}</td>"
             f"<td>{_e(row.get('handoff_batch_maturity_ci_regression_count'))}</td>"
+            f"<td>{_e(row.get('handoff_batch_maturity_suite_design_regression_count'))}</td>"
             f"<td>{_e(row.get('handoff_selected_batch_review_status'))}</td>"
             f"<td>{_e(row.get('handoff_selected_batch_comparison_blocker_action_count'))}</td>"
             f"<td>{_e(row.get('ready_variant_count'))}/{_e(row.get('variant_count'))}</td>"
@@ -351,7 +380,7 @@ def _promotions_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section><h2>Promotions</h2><div class="table-wrap"><table>'
-        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Clean Required</th><th>Clean Status</th><th>CI Regressions</th><th>Batch Review</th><th>Batch Blockers</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
+        "<thead><tr><th>Name</th><th>Status</th><th>Compare</th><th>Handoff Suite</th><th>Suite Consistency</th><th>Suite Mismatches</th><th>Selected Suite</th><th>Clean Required</th><th>Clean Status</th><th>CI Regressions</th><th>Suite-Design Regressions</th><th>Batch Review</th><th>Batch Blockers</th><th>Variants</th><th>Artifacts</th><th>Primary</th><th>Scale Run</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table></div></section>"
     )
 

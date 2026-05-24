@@ -371,6 +371,9 @@ d/419/解释/说明.md
 d/420/图片
 d/420/解释/说明.md
  -> v420 training scale promotion suite-design carryover 的运行截图和解释
+d/421/图片
+d/421/解释/说明.md
+ -> v421 training scale promotion index suite-design carryover 的运行截图和解释
 ```
 
 写入规则：

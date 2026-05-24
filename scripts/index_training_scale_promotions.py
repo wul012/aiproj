@@ -65,6 +65,23 @@ def main() -> None:
             sort_keys=True,
         )
     )
+    print(f"handoff_batch_maturity_suite_design_regression_count={summary['handoff_batch_maturity_suite_design_regression_count']}")
+    print(
+        "handoff_batch_maturity_suite_design_regression_names="
+        + json.dumps(summary.get("handoff_batch_maturity_suite_design_regression_names") or [], ensure_ascii=False, sort_keys=True)
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_total="
+        + str(summary["handoff_selected_batch_maturity_suite_design_regression_total"])
+    )
+    print(
+        "handoff_selected_batch_maturity_suite_design_regression_names="
+        + json.dumps(
+            summary.get("handoff_selected_batch_maturity_suite_design_regression_names") or [],
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
     print(f"handoff_selected_batch_review_count={summary['handoff_selected_batch_review_count']}")
     print(f"handoff_selected_batch_blocker_count={summary['handoff_selected_batch_blocker_count']}")
     print(f"handoff_batch_comparison_review_action_total={summary['handoff_batch_comparison_review_action_total']}")

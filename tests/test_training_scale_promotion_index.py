@@ -263,6 +263,73 @@ class TrainingScalePromotionIndexTests(unittest.TestCase):
             self.assertIn("Selected CI reasons", html)
             self.assertIn("missing-ci-step:1, workflow-order-regressed:1", " ".join(report["recommendations"]))
 
+    def test_handoff_batch_suite_design_regression_is_carried_and_excluded_when_clean_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            clean = make_promotion(root, "clean", "promoted", require_clean_batch_review=True, clean_batch_review_status="clean")
+            suite_regressed = make_promotion(
+                root,
+                "suite-regressed",
+                "promoted",
+                require_clean_batch_review=True,
+                clean_batch_review_status="clean",
+                batch_suite_design_regression_count=2,
+                batch_suite_design_regression_names=["review", "standard"],
+                selected_batch_suite_design_regression_count=1,
+                selected_batch_suite_design_regression_names=["review"],
+            )
+
+            report = build_training_scale_promotion_index([clean, suite_regressed], names=["clean-run", "suite-run"])
+            outputs = write_training_scale_promotion_index_outputs(report, root / "index")
+            csv_text = Path(outputs["csv"]).read_text(encoding="utf-8")
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            html = Path(outputs["html"]).read_text(encoding="utf-8")
+            completed = __import__("subprocess").run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "scripts" / "index_training_scale_promotions.py"),
+                    "--out-dir",
+                    str(root / "script-index"),
+                    str(clean),
+                    str(suite_regressed),
+                    "--name",
+                    "clean-run",
+                    "--name",
+                    "suite-run",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(report["summary"]["promoted_count"], 2)
+            self.assertEqual(report["summary"]["comparison_ready_count"], 1)
+            self.assertEqual(report["summary"]["handoff_require_clean_batch_review_count"], 2)
+            self.assertEqual(report["summary"]["handoff_clean_batch_review_count"], 1)
+            self.assertEqual(report["summary"]["handoff_unclean_batch_review_count"], 1)
+            self.assertEqual(report["summary"]["handoff_batch_maturity_suite_design_regression_count"], 2)
+            self.assertEqual(report["summary"]["handoff_selected_batch_maturity_suite_design_regression_total"], 1)
+            self.assertEqual(report["summary"]["handoff_batch_maturity_suite_design_regression_names"], ["review", "standard"])
+            self.assertEqual(report["summary"]["handoff_selected_batch_maturity_suite_design_regression_names"], ["review"])
+            self.assertTrue(report["promotions"][0]["promoted_for_comparison"])
+            self.assertFalse(report["promotions"][1]["promoted_for_comparison"])
+            self.assertEqual(report["promotions"][1]["handoff_batch_maturity_suite_design_regression_count"], 2)
+            self.assertEqual(report["promotions"][1]["handoff_batch_maturity_suite_design_regression_names"], ["review", "standard"])
+            self.assertEqual(report["comparison_inputs"]["names"], ["clean-run"])
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count", csv_text)
+            self.assertIn("review;standard", csv_text)
+            self.assertIn("Handoff batch suite-design regressions", markdown)
+            self.assertIn("Handoff selected batch suite-design names", markdown)
+            self.assertIn("Suite-Design Regressions", markdown)
+            self.assertIn("Handoff suite-design regressions", html)
+            self.assertIn("Selected suite-design names", html)
+            self.assertIn("suite-design regression evidence", " ".join(report["recommendations"]))
+            self.assertIn("handoff_batch_maturity_suite_design_regression_count=2", completed.stdout)
+            self.assertIn("handoff_selected_batch_maturity_suite_design_regression_total=1", completed.stdout)
+            self.assertIn('handoff_batch_maturity_suite_design_regression_names=["review", "standard"]', completed.stdout)
+            self.assertIn('handoff_selected_batch_maturity_suite_design_regression_names=["review"]', completed.stdout)
+
     def test_index_script_reports_suite_guard_counts_and_reason_counts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -332,6 +399,10 @@ def make_promotion(
     require_clean_batch_review: bool = False,
     clean_batch_review_status: str | None = None,
     selected_batch_review_status: str = "clean",
+    batch_suite_design_regression_count: int = 0,
+    batch_suite_design_regression_names: list[str] | None = None,
+    selected_batch_suite_design_regression_count: int | None = None,
+    selected_batch_suite_design_regression_names: list[str] | None = None,
     batch_ci_regression_count: int = 0,
     batch_ci_regression_names: list[str] | None = None,
     batch_ci_regression_reason_counts: dict[str, int] | None = None,
@@ -345,6 +416,16 @@ def make_promotion(
     checkpoint = run_root / "batch" / "variants" / name / "runs" / name / "checkpoint.pt"
     registry = run_root / "batch" / "variants" / name / "registry" / "registry.json"
     narrative = run_root / "batch" / "variants" / name / "maturity-narrative" / "maturity_narrative.json"
+    selected_suite_design_count = (
+        batch_suite_design_regression_count
+        if selected_batch_suite_design_regression_count is None
+        else selected_batch_suite_design_regression_count
+    )
+    selected_suite_design_names = (
+        batch_suite_design_regression_names
+        if selected_batch_suite_design_regression_names is None
+        else selected_batch_suite_design_regression_names
+    )
     for path in [run_json, batch_json, portfolio_json, checkpoint, registry, narrative]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("{}" if path.suffix == ".json" else "checkpoint", encoding="utf-8")
@@ -396,6 +477,8 @@ def make_promotion(
             "handoff_selected_batch_maturity_coverage_regression_count": (
                 1 if selected_batch_review_status in {"review", "blocker"} else 0
             ),
+            "handoff_selected_batch_maturity_suite_design_regression_count": selected_suite_design_count,
+            "handoff_selected_batch_maturity_suite_design_regression_names": selected_suite_design_names or [],
             "handoff_selected_batch_maturity_ci_regression_count": batch_ci_regression_count,
             "handoff_selected_batch_maturity_ci_regression_reason_counts": selected_batch_ci_regression_reason_counts
             or batch_ci_regression_reason_counts
@@ -408,6 +491,8 @@ def make_promotion(
             "handoff_batch_maturity_ci_regression_count": batch_ci_regression_count,
             "handoff_batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             "handoff_batch_maturity_ci_regression_names": batch_ci_regression_names or [],
+            "handoff_batch_maturity_suite_design_regression_count": batch_suite_design_regression_count,
+            "handoff_batch_maturity_suite_design_regression_names": batch_suite_design_regression_names or [],
             **summary_suite_fields,
         },
         "suite_guard": suite_guard,
@@ -417,6 +502,8 @@ def make_promotion(
             "handoff_batch_maturity_ci_regression_count": batch_ci_regression_count,
             "handoff_batch_maturity_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
             "handoff_batch_maturity_ci_regression_names": batch_ci_regression_names or [],
+            "handoff_batch_maturity_suite_design_regression_count": batch_suite_design_regression_count,
+            "handoff_batch_maturity_suite_design_regression_names": batch_suite_design_regression_names or [],
         }
         if require_clean_batch_review
         else {},
