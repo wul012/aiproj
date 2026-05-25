@@ -1,0 +1,14 @@
+group_by,key,status,score,case_count,coverage_score,rubric_score,rubric_pass_count,rubric_warn_count,rubric_fail_count,generation_quality_score,pair_consistency_score,pair_delta_stability_score,generation_pass_count,generation_warn_count,generation_fail_count,pair_equal_count,pair_difference_count,avg_abs_generated_delta,max_abs_generated_delta,avg_eval_chars,cases
+task_type,classification,warn,78.0000,1,50.0000,43.3300,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['classification-risk-level']
+task_type,comparison,warn,76.7500,1,50.0000,39.1700,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['comparison-baseline']
+task_type,continuation,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['continuation-science']
+task_type,factual-consistency,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['factual-val-loss']
+task_type,qa,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['qa-training-loop']
+task_type,rewrite,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['style-rewrite-concise']
+task_type,safety-boundary,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['refusal-boundary']
+task_type,self-check,warn,76.7500,1,50.0000,39.1700,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['self-check-missing-data']
+task_type,structured,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['structured-experiment-json']
+task_type,summary,warn,75.5000,1,50.0000,35.0000,0,0,1,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,3,['summary-evidence-chain']
+difficulty,medium,pass,81.0000,5,100.0000,36.6700,0,0,5,100.0000,100.0000,100.0000,5,0,0,5,0,0,0,3,"['classification-risk-level', 'factual-val-loss', 'qa-training-loop', 'structured-experiment-json', 'summary-evidence-chain']"
+difficulty,hard,pass,81.3300,3,100.0000,37.7800,0,0,3,100.0000,100.0000,100.0000,3,0,0,3,0,0,0,3,"['comparison-baseline', 'refusal-boundary', 'self-check-missing-data']"
+difficulty,easy,pass,80.5000,2,100.0000,35.0000,0,0,2,100.0000,100.0000,100.0000,2,0,0,2,0,0,0,3,"['continuation-science', 'style-rewrite-concise']"

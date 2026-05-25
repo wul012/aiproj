@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 431 extracts promoted seed handoff assurance smoke receipt-contract handling into a focused helper module, keeping the v430 smoke contract stable while reducing the orchestration script from 526 lines to 466 lines.
+Version 432 adds a focused baseline-candidate eval loop around the existing tiny scorecard comparison smoke, turning fixed baseline/candidate runs into structured control checks, acceptance criteria, strict gate exit codes, reusable summary mode, and compact JSON/text/Markdown/HTML evidence.
+
+## Latest v432 checkpoint
+
+- Added `src/minigpt/baseline_candidate_eval_loop.py` to turn a completed tiny scorecard comparison smoke summary into a baseline/candidate decision report.
+- Added `scripts/run_baseline_candidate_eval_loop.py` as the direct entrypoint for rerunning the tiny smoke or reusing an existing smoke summary.
+- The report now records control checks, acceptance criteria, minimum score-delta requirements, exploratory vs strict gate mode, source mode, and expected exit code.
+- `--fail-on-reject` lets the same loop return `2` when the candidate is rejected, while the default exploratory mode still exits successfully after producing evidence.
+- Archived strict-gate runtime evidence and Playwright MCP screenshot in `d/432`.
 
 ## Latest v431 checkpoint
 

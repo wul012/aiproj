@@ -404,6 +404,9 @@ d/430/解释/说明.md
 d/431/图片
 d/431/解释/说明.md
  -> v431 promoted seed handoff assurance smoke contract helper split 的运行截图和解释
+d/432/图片
+d/432/解释/说明.md
+ -> v432 baseline-candidate eval loop 的运行截图和解释
 ```
 
 写入规则：

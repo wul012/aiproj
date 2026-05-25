@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT tiny scorecard decision smoke</title>
+<style>
+:root { --ink:#111827; --muted:#4b5563; --line:#d8dee8; --page:#f7f7f2; --panel:#fff; --green:#047857; --amber:#b45309; --red:#b91c1c; --blue:#2563eb; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+span, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:82px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:18px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:1120px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.pill { display:inline-block; min-width:74px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
+.pill.pass { background:var(--green); }
+.pill.warn { background:var(--amber); }
+.pill.fail { background:var(--red); }
+.pill.base { background:var(--blue); }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT tiny scorecard decision smoke</h1><p>MiniGPT tiny scorecard comparison smoke · d\432\解释\baseline-candidate-eval-loop\tiny-scorecard-comparison-smoke\scorecard-comparison\benchmark_scorecard_comparison.json</p></header>
+<section class="stats"><div class="card"><div class="label">Decision</div><div class="value">promote</div></div><div class="card"><div class="label">Action</div><div class="value">promote_selected_scorecard</div></div><div class="card"><div class="label">Baseline</div><div class="value">tiny-baseline</div></div><div class="card"><div class="label">Selected</div><div class="value">tiny-candidate</div></div><div class="card"><div class="label">Selected rubric</div><div class="value">36.67</div></div><div class="card"><div class="label">Flag delta</div><div class="value">+0</div></div><div class="card"><div class="label">Clean</div><div class="value">1</div></div><div class="card"><div class="label">Review</div><div class="value">0</div></div><div class="card"><div class="label">Blocked</div><div class="value">0</div></div><div class="card"><div class="label">Eval compare review</div><div class="value">0</div></div><div class="card"><div class="label">Design compare review</div><div class="value">0</div></div><div class="card"><div class="label">Top blocker</div><div class="value">missing</div></div><div class="card"><div class="label">Top review</div><div class="value">missing</div></div><div class="card"><div class="label">Threshold blocked</div><div class="value">0</div></div><div class="card"><div class="label">Threshold closest</div><div class="value">missing</div></div><div class="card"><div class="label">Threshold largest gap</div><div class="value">missing</div></div></section>
+<section class="panel"><h2>Candidate Evaluations</h2><table><thead><tr><th>Run</th><th>Relation</th><th>Rubric</th><th>Overall</th><th>Eval Compare</th><th>Design Compare</th><th>Gen Flags</th><th>Cases</th><th>Blockers</th><th>Blocker Categories</th><th>Review Items</th><th>Review Categories</th></tr></thead><tbody><tr><td><strong>tiny-baseline</strong><br><span>d\432\解释\baseline-candidate-eval-loop\tiny-scorecard-comparison-smoke\baseline\run</span></td><td><span class="pill base">baseline</span></td><td>36.67<br><span>+0</span></td><td>81.17<br><span>+0</span></td><td>pass<br><span>pass</span></td><td>pass<br><span>pass</span></td><td>0<br><span>+0</span></td><td>0 regressed / 0 improved</td><td>baseline run is not a promotion candidate</td><td>baseline_candidate</td><td></td><td></td></tr><tr><td><strong>tiny-candidate</strong><br><span>d\432\解释\baseline-candidate-eval-loop\tiny-scorecard-comparison-smoke\candidate\run</span></td><td><span class="pill pass">promote</span></td><td>36.67<br><span>+0</span></td><td>81.17<br><span>+0</span></td><td>pass<br><span>pass</span></td><td>pass<br><span>pass</span></td><td>0<br><span>+0</span></td><td>0 regressed / 0 improved</td><td></td><td></td><td></td><td></td></tr></tbody></table></section>
+
+<section class="panel"><h2>Recommendations</h2><ul><li>Promote the selected scorecard only as benchmark evidence, not as proof of broad model quality.</li></ul></section>
+<footer>Generated by MiniGPT benchmark scorecard promotion decision.</footer>
+</body>
+</html>

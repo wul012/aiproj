@@ -1,0 +1,53 @@
+- main [ref=e2]:
+  - heading "MiniGPT baseline-candidate eval loop" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Decision" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: reject_candidate
+      - generic [ref=e13]:
+        - generic [ref=e14]: Source
+        - strong [ref=e15]: rerun_smoke
+      - generic [ref=e16]:
+        - generic [ref=e17]: Gate
+        - strong [ref=e18]: strict
+      - generic [ref=e19]:
+        - generic [ref=e20]: Exit
+        - strong [ref=e21]: "2"
+      - generic [ref=e22]:
+        - generic [ref=e23]: Promotion
+        - strong [ref=e24]: promote
+      - generic [ref=e25]:
+        - generic [ref=e26]: Control
+        - strong [ref=e27]: pass
+      - generic [ref=e28]:
+        - generic [ref=e29]: Acceptance
+        - strong [ref=e30]: fail
+      - generic [ref=e31]:
+        - generic [ref=e32]: Accepted
+        - strong [ref=e33]: "False"
+      - generic [ref=e34]:
+        - generic [ref=e35]: Selected
+        - strong [ref=e36]: tiny-candidate
+      - generic [ref=e37]:
+        - generic [ref=e38]: Min Delta
+        - strong [ref=e39]: "1.0"
+      - generic [ref=e40]:
+        - generic [ref=e41]: Next
+        - strong [ref=e42]: keep_baseline_and_fix_candidate
+  - generic [ref=e43]:
+    - heading "Rejected Reasons" [level=2] [ref=e44]
+    - list [ref=e45]:
+      - listitem [ref=e46]: min_overall_score_delta expected >= 1.0, got 0.0
+  - generic [ref=e47]:
+    - heading "Control Checks" [level=2] [ref=e48]
+    - list [ref=e49]:
+      - listitem [ref=e50]: none
+  - generic [ref=e51]:
+    - heading "Acceptance Criteria" [level=2] [ref=e52]
+    - list [ref=e53]:
+      - listitem [ref=e54]: min_overall_score_delta expected >= 1.0, got 0.0
