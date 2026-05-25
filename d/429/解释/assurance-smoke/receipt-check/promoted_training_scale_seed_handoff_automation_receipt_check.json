@@ -1,0 +1,22 @@
+{
+  "schema_version": 3,
+  "receipt_type": "promoted_training_scale_seed_handoff_automation",
+  "status": "pass",
+  "decision": "continue",
+  "exit_code": 0,
+  "checker_exit_code": 0,
+  "blocking_source": null,
+  "failed_requirements": [],
+  "selected_handoff_batch_maturity_ci_regression_count": 0,
+  "handoff_batch_maturity_ci_regression_count": 0,
+  "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+  "selected_handoff_batch_maturity_suite_design_regression_names": [],
+  "handoff_batch_maturity_suite_design_regression_count": 0,
+  "handoff_batch_maturity_suite_design_regression_names": [],
+  "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+  "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+  "comparison_exclusion_reasons": [],
+  "issue_count": 0,
+  "issues": [],
+  "receipt_path": "d\\429\\解释\\assurance-smoke\\handoff\\promoted_training_scale_seed_handoff_automation_receipt.json"
+}

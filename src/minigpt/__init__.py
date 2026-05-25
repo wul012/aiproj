@@ -102,6 +102,8 @@ __all__ = [
     "write_benchmark_history_outputs",
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
+    "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
+    "write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_outputs",
 ]
 
 _EXPORTS = {
@@ -206,6 +208,14 @@ _EXPORTS = {
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs": (
         "promoted_training_scale_seed_handoff_receipt_contract",
         "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
+    ),
+    "check_promoted_training_scale_seed_handoff_receipt_contract_summary": (
+        "promoted_training_scale_seed_handoff_receipt_contract_check",
+        "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
+    ),
+    "write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_outputs": (
+        "promoted_training_scale_seed_handoff_receipt_contract_check",
+        "write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_outputs",
     ),
 }
 

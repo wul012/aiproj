@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-25T08:21:51Z",
+  "source": "training_scale_plan",
+  "dataset": {
+    "name": "assurance-smoke",
+    "version_prefix": "v292-smoke",
+    "description": "MiniGPT corpus planned for scale-aware training.",
+    "source_count": 1,
+    "char_count": 5760,
+    "line_count": 180,
+    "unique_char_count": 19,
+    "unique_char_ratio": 0.003299,
+    "fingerprint": "5d700234208efddcdc78a5ca70b1721bcf39e0bb6ca968bd89c8f13916b270de",
+    "short_fingerprint": "5d700234208e",
+    "scale_tier": "small",
+    "quality_status": "warn",
+    "warning_count": 1,
+    "issue_count": 2,
+    "duplicate_line_count": 1
+  },
+  "variants": [
+    {
+      "name": "scale-smoke",
+      "description": "Fast smoke run for checking the corpus and pipeline before spending time on training.",
+      "run_name": "scale-smoke",
+      "dataset_name": "assurance-smoke",
+      "dataset_version": "v292-smoke-smoke",
+      "dataset_description": "MiniGPT corpus planned for scale-aware training.",
+      "device": "cpu",
+      "title": "MiniGPT training portfolio pipeline (scale-smoke)",
+      "learning_rate": 0.0003,
+      "max_iters": 50,
+      "eval_interval": 25,
+      "eval_iters": 5,
+      "batch_size": 8,
+      "block_size": 64,
+      "n_layer": 2,
+      "n_head": 2,
+      "n_embd": 64,
+      "seed": 1337,
+      "sample_prompt": "MiniGPT",
+      "sample_tokens": 40
+    }
+  ]
+}

@@ -395,6 +395,9 @@ d/427/解释/说明.md
 d/428/图片
 d/428/解释/说明.md
  -> v428 promoted seed handoff receipt contract summary 的运行截图和解释
+d/429/图片
+d/429/解释/说明.md
+ -> v429 promoted seed handoff receipt contract summary check 的运行截图和解释
 ```
 
 写入规则：
