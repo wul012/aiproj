@@ -407,6 +407,9 @@ d/431/解释/说明.md
 d/432/图片
 d/432/解释/说明.md
  -> v432 baseline-candidate eval loop 的运行截图和解释
+d/433/图片
+d/433/解释/说明.md
+ -> v433 baseline-candidate handoff 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 432 adds a focused baseline-candidate eval loop around the existing tiny scorecard comparison smoke, turning fixed baseline/candidate runs into structured control checks, acceptance criteria, strict gate exit codes, reusable summary mode, and compact JSON/text/Markdown/HTML evidence.
+Version 433 adds a baseline-candidate handoff layer on top of the v432 eval loop, turning loop acceptance into a next-baseline decision artifact with checkpoint evidence, guardrail reasons, strict `--require-accepted` exit behavior, and compact JSON/text/Markdown/HTML outputs.
+
+## Latest v433 checkpoint
+
+- Added `src/minigpt/baseline_candidate_handoff.py` to load a v432 baseline-candidate eval loop report and decide whether the candidate can become the next baseline.
+- Added `scripts/build_baseline_candidate_handoff.py` as the command entrypoint for producing handoff JSON/text/Markdown/HTML artifacts from an existing loop report.
+- The handoff records current baseline vs candidate checkpoints, selected next-baseline source, control/acceptance/promotion guardrails, rejected reasons, source evidence, and follow-up actions.
+- `--require-accepted` lets CI or local release flow return `2` when the loop is valid but the candidate is not ready for handoff.
+- Archived handoff runtime evidence and Playwright MCP screenshot in `d/433`.
 
 ## Latest v432 checkpoint
 

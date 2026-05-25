@@ -401,6 +401,9 @@
 446-v432-baseline-candidate-eval-loop.md
  -> v432 code explanation: turn tiny scorecard comparison smoke into a reusable baseline-candidate eval loop with control checks, acceptance criteria, strict gate exits, summary reuse, and execution metadata.
 
+447-v433-baseline-candidate-handoff.md
+ -> v433 code explanation: convert a baseline-candidate eval loop report into a next-baseline handoff with checkpoint evidence, guardrail reasons, strict require-accepted exits, and compact review artifacts.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -1,0 +1,39 @@
+- main [ref=e2]:
+  - heading "MiniGPT baseline-candidate handoff" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Decision" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: keep_current_baseline
+      - generic [ref=e13]:
+        - generic [ref=e14]: Ready
+        - strong [ref=e15]: "False"
+      - generic [ref=e16]:
+        - generic [ref=e17]: Next baseline
+        - strong [ref=e18]: tiny-baseline
+      - generic [ref=e19]:
+        - generic [ref=e20]: Source
+        - strong [ref=e21]: current_baseline
+      - generic [ref=e22]:
+        - generic [ref=e23]: Candidate
+        - strong [ref=e24]: tiny-candidate
+      - generic [ref=e25]:
+        - generic [ref=e26]: Candidate accepted
+        - strong [ref=e27]: "False"
+      - generic [ref=e28]:
+        - generic [ref=e29]: Delta
+        - strong [ref=e30]: "0.0"
+      - generic [ref=e31]:
+        - generic [ref=e32]: Min Delta
+        - strong [ref=e33]: "1.0"
+      - generic [ref=e34]:
+        - generic [ref=e35]: Acceptance
+        - strong [ref=e36]: fail
+  - generic [ref=e37]:
+    - heading "Rejected Reasons" [level=2] [ref=e38]
+    - list [ref=e39]:
+      - listitem [ref=e40]: min_overall_score_delta expected >= 1.0, got 0.0
