@@ -88,11 +88,20 @@ def main() -> None:
         "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count": assurance.get(
             "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"
         ),
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names": assurance.get(
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names"
+        ),
         "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count": assurance.get(
             "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"
         ),
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names": assurance.get(
+            "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names"
+        ),
         "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": assurance.get(
             "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": assurance.get(
+            "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names"
         ),
         "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons": assurance.get(
             "embedded_receipt_check_receipt_comparison_exclusion_reasons"
@@ -140,6 +149,14 @@ def main() -> None:
     )
     _check(
         checks[
+            "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names"
+        ]
+        == [],
+        "handoff assurance must expose selected receipt suite-design regression names",
+        issues,
+    )
+    _check(
+        checks[
             "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"
         ]
         == 0,
@@ -148,10 +165,26 @@ def main() -> None:
     )
     _check(
         checks[
+            "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names"
+        ]
+        == [],
+        "handoff assurance must expose aggregate receipt suite-design regression names",
+        issues,
+    )
+    _check(
+        checks[
             "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
         ]
         == 0,
         "handoff assurance must expose ready receipt suite-design regression count",
+        issues,
+    )
+    _check(
+        checks[
+            "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names"
+        ]
+        == [],
+        "handoff assurance must expose ready receipt suite-design regression names",
         issues,
     )
     _check(

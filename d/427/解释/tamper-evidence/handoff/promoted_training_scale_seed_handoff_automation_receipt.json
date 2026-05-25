@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "receipt_type": "promoted_training_scale_seed_handoff_automation",
+  "generated_at": "2026-05-25T06:16:09Z",
+  "seed_path": "D:\\aiproj\\d\\427\\解释\\tamper-evidence\\promoted-seed\\promoted_training_scale_seed.json",
+  "seed_status": "ready",
+  "handoff_status": "planned",
+  "execute": false,
+  "returncode": null,
+  "plan_status": "missing",
+  "plan_report_path": "D:\\aiproj\\d\\427\\解释\\tamper-evidence\\next-plan\\training_scale_plan.json",
+  "next_batch_command_available": false,
+  "automation_decision": "continue",
+  "automation_exit_code": 0,
+  "automation_blocking_source": null,
+  "automation_detail": "seed handoff automation can continue",
+  "gate_status": "pass",
+  "gate_decision": "continue",
+  "gate_required": true,
+  "gate_blocking_requirement_count": 0,
+  "failed_requirements": [],
+  "passed_requirements": [
+    "clean_batch_review"
+  ],
+  "clean_evidence_requirement_status": "not-required",
+  "clean_batch_review_requirement_status": "pass",
+  "selected_handoff_batch_maturity_ci_regression_count": 0,
+  "handoff_batch_maturity_ci_regression_count": 0,
+  "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+  "selected_handoff_batch_maturity_suite_design_regression_names": [],
+  "handoff_batch_maturity_suite_design_regression_count": 0,
+  "handoff_batch_maturity_suite_design_regression_names": [
+    "beta-suite",
+    "standard"
+  ],
+  "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+  "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+  "comparison_exclusion_reasons": [
+    "handoff batch suite-design regression count is 2"
+  ]
+}

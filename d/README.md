@@ -389,6 +389,9 @@ d/425/解释/说明.md
 d/426/图片
 d/426/解释/说明.md
  -> v426 promoted seed handoff receipt suite-design contract 的运行截图和解释
+d/427/图片
+d/427/解释/说明.md
+ -> v427 promoted seed handoff receipt contract hardening 的运行截图和解释
 ```
 
 写入规则：

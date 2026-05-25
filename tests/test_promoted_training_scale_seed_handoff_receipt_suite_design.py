@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from typing import TypedDict
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -13,10 +14,19 @@ sys.path.insert(0, str(ROOT / "tests"))
 
 from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
     RECEIPT_TYPE,
+    check_promoted_training_scale_seed_handoff_embedded_receipt_check,
     check_promoted_training_scale_seed_handoff_automation_receipt,
     render_promoted_training_scale_seed_handoff_automation_receipt_check,
 )
 from test_promoted_training_scale_seed_handoff_suite_design import write_suite_design_seed_tree  # noqa: E402
+
+
+class SuiteDesignHandoffSidecars(TypedDict):
+    handoff: Path
+    receipt_check: Path
+    embedded_check: Path
+    assurance: Path
+    stdout: str
 
 
 class PromotedTrainingScaleSeedHandoffReceiptSuiteDesignTests(unittest.TestCase):
@@ -63,57 +73,31 @@ class PromotedTrainingScaleSeedHandoffReceiptSuiteDesignTests(unittest.TestCase)
     def test_script_embeds_suite_design_receipt_contract_through_assurance(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            seed = write_suite_design_seed_tree(root)
-            handoff_dir = root / "handoff"
-            receipt_check_dir = root / "receipt-check"
-            embedded_check_dir = root / "embedded-check"
-            assurance_dir = root / "assurance"
-
-            completed = subprocess.run(
-                [
-                    sys.executable,
-                    "-B",
-                    str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
-                    str(seed),
-                    "--out-dir",
-                    str(handoff_dir),
-                    "--require-clean-batch-review",
-                    "--receipt-check-out-dir",
-                    str(receipt_check_dir),
-                    "--embedded-receipt-check-out-dir",
-                    str(embedded_check_dir),
-                    "--assurance-out-dir",
-                    str(assurance_dir),
-                ],
-                cwd=ROOT,
-                capture_output=True,
-                text=True,
-                check=True,
-            )
+            paths = write_suite_design_handoff_with_sidecars(root)
 
             receipt = json.loads(
-                (handoff_dir / "promoted_training_scale_seed_handoff_automation_receipt.json").read_text(
+                (paths["handoff"] / "promoted_training_scale_seed_handoff_automation_receipt.json").read_text(
                     encoding="utf-8"
                 )
             )
             receipt_check = json.loads(
-                (receipt_check_dir / "promoted_training_scale_seed_handoff_automation_receipt_check.json").read_text(
+                (paths["receipt_check"] / "promoted_training_scale_seed_handoff_automation_receipt_check.json").read_text(
                     encoding="utf-8"
                 )
             )
             embedded_check = json.loads(
-                (embedded_check_dir / "promoted_training_scale_seed_handoff_embedded_receipt_check.json").read_text(
+                (paths["embedded_check"] / "promoted_training_scale_seed_handoff_embedded_receipt_check.json").read_text(
                     encoding="utf-8"
                 )
             )
             assurance = json.loads(
-                (assurance_dir / "promoted_training_scale_seed_handoff_assurance.json").read_text(encoding="utf-8")
+                (paths["assurance"] / "promoted_training_scale_seed_handoff_assurance.json").read_text(encoding="utf-8")
             )
             report = json.loads(
-                (handoff_dir / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8")
+                (paths["handoff"] / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8")
             )
-            csv_text = (handoff_dir / "promoted_training_scale_seed_handoff.csv").read_text(encoding="utf-8")
-            markdown = (handoff_dir / "promoted_training_scale_seed_handoff.md").read_text(encoding="utf-8")
+            csv_text = (paths["handoff"] / "promoted_training_scale_seed_handoff.csv").read_text(encoding="utf-8")
+            markdown = (paths["handoff"] / "promoted_training_scale_seed_handoff.md").read_text(encoding="utf-8")
 
             self.assertEqual(receipt["schema_version"], 3)
             self.assertEqual(receipt["selected_handoff_batch_maturity_suite_design_regression_count"], 0)
@@ -140,15 +124,105 @@ class PromotedTrainingScaleSeedHandoffReceiptSuiteDesignTests(unittest.TestCase)
                 csv_text,
             )
             self.assertIn("Handoff assurance receipt suite-design regressions", markdown)
-            self.assertIn("receipt_handoff_batch_maturity_suite_design_regression_count=2", completed.stdout)
+            self.assertIn("receipt_handoff_batch_maturity_suite_design_regression_count=2", paths["stdout"])
             self.assertIn(
                 "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count=2",
-                completed.stdout,
+                paths["stdout"],
             )
             self.assertIn(
                 "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count=2",
-                completed.stdout,
+                paths["stdout"],
             )
+
+    def test_embedded_receipt_check_rejects_tampered_suite_design_receipt_sidecar(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = write_suite_design_handoff_with_sidecars(root)
+            receipt_path = paths["handoff"] / "promoted_training_scale_seed_handoff_automation_receipt.json"
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["handoff_batch_maturity_suite_design_regression_count"] = 0
+            receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")
+            report = json.loads((paths["handoff"] / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=paths["handoff"],
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertTrue(
+                any(
+                    "receipt_check.receipt_path.handoff_batch_maturity_suite_design_regression_count"
+                    in issue
+                    and "expected 2"
+                    in issue
+                    and "got 0"
+                    in issue
+                    for issue in check["issues"]
+                )
+            )
+
+    def test_embedded_receipt_check_rejects_tampered_suite_design_check_names(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = write_suite_design_handoff_with_sidecars(root)
+            check_path = paths["receipt_check"] / "promoted_training_scale_seed_handoff_automation_receipt_check.json"
+            payload = json.loads(check_path.read_text(encoding="utf-8"))
+            payload["handoff_batch_maturity_suite_design_regression_names"] = ["beta-suite"]
+            check_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+            report = json.loads((paths["handoff"] / "promoted_training_scale_seed_handoff.json").read_text(encoding="utf-8"))
+
+            check = check_promoted_training_scale_seed_handoff_embedded_receipt_check(
+                report,
+                base_dir=paths["handoff"],
+            )
+
+            self.assertEqual(check["status"], "fail")
+            self.assertTrue(
+                any(
+                    "receipt_check_outputs.json.handoff_batch_maturity_suite_design_regression_names"
+                    in issue
+                    and "standard"
+                    in issue
+                    for issue in check["issues"]
+                )
+            )
+
+
+def write_suite_design_handoff_with_sidecars(root: Path) -> SuiteDesignHandoffSidecars:
+    seed = write_suite_design_seed_tree(root)
+    handoff_dir = root / "handoff"
+    receipt_check_dir = root / "receipt-check"
+    embedded_check_dir = root / "embedded-check"
+    assurance_dir = root / "assurance"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+            str(seed),
+            "--out-dir",
+            str(handoff_dir),
+            "--require-clean-batch-review",
+            "--receipt-check-out-dir",
+            str(receipt_check_dir),
+            "--embedded-receipt-check-out-dir",
+            str(embedded_check_dir),
+            "--assurance-out-dir",
+            str(assurance_dir),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return {
+        "handoff": handoff_dir,
+        "receipt_check": receipt_check_dir,
+        "embedded_check": embedded_check_dir,
+        "assurance": assurance_dir,
+        "stdout": completed.stdout,
+    }
 
 
 if __name__ == "__main__":

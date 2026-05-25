@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT v427 seed handoff receipt contract hardening</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f5f7f6; color: #16201c; }
+body { margin: 0; padding: 28px; }
+header, section { max-width: 1120px; margin: 0 auto 18px; }
+header { border-bottom: 1px solid #cfd8d4; padding-bottom: 16px; }
+h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.card, section { background: #fff; border: 1px solid #d8dfdc; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.card span { display: block; color: #5f6f68; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #17211d; color: #f7fbf9; border-radius: 8px; padding: 12px; }
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>MiniGPT v427 seed handoff receipt contract hardening</h1>
+<p>Assurance smoke now checks suite-design names, and tampered schema-v3 suite-design sidecars are rejected.</p>
+</header>
+<section class="grid">
+<div class="card"><span>Smoke status</span><strong>pass</strong></div>
+<div class="card"><span>Receipt schema</span><strong>3</strong></div>
+<div class="card"><span>Selected suite-design names</span><strong>[]</strong></div>
+<div class="card"><span>Aggregate suite-design names</span><strong>[]</strong></div>
+<div class="card"><span>Ready suite-design names</span><strong>[]</strong></div>
+<div class="card"><span>Tamper status</span><strong>fail</strong></div>
+</section>
+<section>
+<h2>Tamper Evidence</h2>
+<pre>[
+  &quot;receipt_check.receipt_path.handoff_batch_maturity_suite_design_regression_count expected 2 but got 0&quot;
+]</pre>
+</section>
+<section>
+<h2>Smoke Output</h2>
+<pre>status=pass
+decision=continue
+seed=D:\aiproj\d\427\解释\assurance-smoke\seed-source\promoted-seed\promoted_training_scale_seed.json
+handoff_report=D:\aiproj\d\427\解释\assurance-smoke\handoff\promoted_training_scale_seed_handoff.json
+command=D:\python\python.exe -B D:\aiproj\scripts\execute_promoted_training_scale_seed.py D:\aiproj\d\427\解释\assurance-smoke\seed-source\promoted-seed\promoted_training_scale_seed.json --out-dir D:\aiproj\d\427\解释\assurance-smoke\handoff --execute --require-clean-evidence --receipt-check-out-dir D:\aiproj\d\427\解释\assurance-smoke\receipt-check --embedded-receipt-check-out-dir D:\aiproj\d\427\解释\assurance-smoke\embedded-receipt-check --assurance-out-dir D:\aiproj\d\427\解释\assurance-smoke\assurance
+summary_json=D:\aiproj\d\427\解释\assurance-smoke\promoted_seed_handoff_assurance_smoke_summary.json
+summary_text=D:\aiproj\d\427\解释\assurance-smoke\promoted_seed_handoff_assurance_smoke_summary.txt
+handoff_assurance_status=pass
+handoff_assurance_decision=continue
+handoff_assurance_embedded_receipt_check_status=pass
+handoff_assurance_embedded_receipt_check_sidecar_status=pass
+handoff_assurance_embedded_receipt_check_receipt_schema_version=3
+handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count=0
+handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count=0
+handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count=0
+handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names=[]
+handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count=0
+handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names=[]
+handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count=0
+handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names=[]
+handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons=[]
+handoff_assurance_output_json_exists=True
+handoff_assurance_output_text_exists=True
+handoff_assurance_output_json=D:\aiproj\d\427\解释\assurance-smoke\assurance\promoted_training_scale_seed_handoff_assurance.json
+handoff_assurance_output_text=D:\aiproj\d\427\解释\assurance-smoke\assurance\promoted_training_scale_seed_handoff_assurance.txt
+</pre>
+</section>
+</body>
+</html>

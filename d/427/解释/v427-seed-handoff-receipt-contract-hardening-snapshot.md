@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MiniGPT v427 seed handoff receipt contract hardening" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Assurance smoke now checks suite-design names, and tampered schema-v3 suite-design sidecars are rejected.
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Smoke status
+      - strong [ref=e8]: pass
+    - generic [ref=e9]:
+      - generic [ref=e10]: Receipt schema
+      - strong [ref=e11]: "3"
+    - generic [ref=e12]:
+      - generic [ref=e13]: Selected suite-design names
+      - strong [ref=e14]: "[]"
+    - generic [ref=e15]:
+      - generic [ref=e16]: Aggregate suite-design names
+      - strong [ref=e17]: "[]"
+    - generic [ref=e18]:
+      - generic [ref=e19]: Ready suite-design names
+      - strong [ref=e20]: "[]"
+    - generic [ref=e21]:
+      - generic [ref=e22]: Tamper status
+      - strong [ref=e23]: fail
+  - generic [ref=e24]:
+    - heading "Tamper Evidence" [level=2] [ref=e25]
+    - generic [ref=e26]: "[ \"receipt_check.receipt_path.handoff_batch_maturity_suite_design_regression_count expected 2 but got 0\" ]"
+  - generic [ref=e27]:
+    - heading "Smoke Output" [level=2] [ref=e28]
+    - generic [ref=e29]: status=pass decision=continue seed=D:\aiproj\d\427\解释\assurance-smoke\seed-source\promoted-seed\promoted_training_scale_seed.json handoff_report=D:\aiproj\d\427\解释\assurance-smoke\handoff\promoted_training_scale_seed_handoff.json command=D:\python\python.exe -B D:\aiproj\scripts\execute_promoted_training_scale_seed.py D:\aiproj\d\427\解释\assurance-smoke\seed-source\promoted-seed\promoted_training_scale_seed.json --out-dir D:\aiproj\d\427\解释\assurance-smoke\handoff --execute --require-clean-evidence --receipt-check-out-dir D:\aiproj\d\427\解释\assurance-smoke\receipt-check --embedded-receipt-check-out-dir D:\aiproj\d\427\解释\assurance-smoke\embedded-receipt-check --assurance-out-dir D:\aiproj\d\427\解释\assurance-smoke\assurance summary_json=D:\aiproj\d\427\解释\assurance-smoke\promoted_seed_handoff_assurance_smoke_summary.json summary_text=D:\aiproj\d\427\解释\assurance-smoke\promoted_seed_handoff_assurance_smoke_summary.txt handoff_assurance_status=pass handoff_assurance_decision=continue handoff_assurance_embedded_receipt_check_status=pass handoff_assurance_embedded_receipt_check_sidecar_status=pass handoff_assurance_embedded_receipt_check_receipt_schema_version=3 handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count=0 handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count=0 handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count=0 handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names=[] handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count=0 handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names=[] handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count=0 handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names=[] handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons=[] handoff_assurance_output_json_exists=True handoff_assurance_output_text_exists=True handoff_assurance_output_json=D:\aiproj\d\427\解释\assurance-smoke\assurance\promoted_training_scale_seed_handoff_assurance.json handoff_assurance_output_text=D:\aiproj\d\427\解释\assurance-smoke\assurance\promoted_training_scale_seed_handoff_assurance.txt

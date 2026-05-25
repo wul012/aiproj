@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 426 upgrades promoted seed handoff automation receipts to schema v3, so receipt checks, embedded receipt checks, and assurance sidecars validate suite-design regression context as part of the final handoff contract.
+Version 427 hardens the promoted seed handoff schema-v3 receipt contract by checking suite-design regression names in assurance smoke evidence and rejecting tampered receipt/check sidecars when suite-design counts or names drift.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,13 @@ Version 426 upgrades promoted seed handoff automation receipts to schema v3, so 
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v427 checkpoint
+
+- Promoted seed handoff assurance smoke now validates selected/global/comparison-ready suite-design regression names, not just counts.
+- Focused tamper tests prove embedded receipt checks reject stale schema-v3 receipt sidecars when suite-design counts or check-sidecar names drift.
+- `tests/test_promoted_training_scale_seed_handoff_receipt_suite_design.py` now shares a typed sidecar fixture helper so generated handoff, receipt-check, embedded-check, assurance, and stdout evidence stay together.
+- Archived receipt-contract hardening evidence, tamper proof, Playwright snapshot, and screenshot in `d/427`; tag: `v427.0.0`.
 
 ## Latest v426 checkpoint
 
