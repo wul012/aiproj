@@ -1103,6 +1103,13 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(summary["decision"], "continue")
             self.assertEqual(summary["checks"]["handoff_assurance_status"], "pass")
             self.assertEqual(summary["checks"]["handoff_assurance_embedded_receipt_check_receipt_schema_version"], 3)
+            self.assertEqual(summary["checks"]["receipt_contract_status"], "pass")
+            self.assertEqual(summary["checks"]["receipt_contract_schema_version"], 3)
+            self.assertEqual(summary["checks"]["receipt_contract_sidecar_status"], "pass")
+            self.assertEqual(summary["checks"]["receipt_contract_issue_count"], 0)
+            self.assertEqual(summary["checks"]["receipt_contract_summary_check_status"], "pass")
+            self.assertEqual(summary["checks"]["receipt_contract_summary_check_sidecar_status"], "pass")
+            self.assertEqual(summary["checks"]["receipt_contract_summary_check_issue_count"], 0)
             self.assertEqual(
                 summary["checks"][
                     "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"
@@ -1114,17 +1121,29 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
                 [],
             )
             self.assertTrue(summary_path.is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_json"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_text"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_markdown"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_html"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_check_json"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_check_text"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_check_markdown"]).is_file())
+            self.assertTrue(Path(summary["outputs"]["receipt_contract_summary_check_html"]).is_file())
             self.assertIn("smoke_status=pass", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn(
                 "handoff_assurance_embedded_receipt_check_receipt_schema_version=3",
                 summary_text_path.read_text(encoding="utf-8"),
             )
+            self.assertIn("receipt_contract_status=pass", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn("receipt_contract_summary_check_status=pass", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("summary_json=", completed.stdout)
             self.assertIn("summary_text=", completed.stdout)
             self.assertIn("status=pass", completed.stdout)
             self.assertIn("handoff_assurance_status=pass", completed.stdout)
             self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
             self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=3", completed.stdout)
+            self.assertIn("receipt_contract_status=pass", completed.stdout)
+            self.assertIn("receipt_contract_summary_check_status=pass", completed.stdout)
 
     def test_handoff_assurance_rejects_tampered_main_embedded_check(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

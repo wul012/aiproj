@@ -398,6 +398,9 @@ d/428/解释/说明.md
 d/429/图片
 d/429/解释/说明.md
  -> v429 promoted seed handoff receipt contract summary check 的运行截图和解释
+d/430/图片
+d/430/解释/说明.md
+ -> v430 promoted seed handoff assurance smoke contract summary check integration 的运行截图和解释
 ```
 
 写入规则：

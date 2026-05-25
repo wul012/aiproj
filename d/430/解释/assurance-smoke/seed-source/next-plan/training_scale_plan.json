@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT training scale plan",
+  "generated_at": "2026-05-25T11:22:14Z",
+  "project_root": "D:\\aiproj",
+  "out_root": "d\\430\\解释\\assurance-smoke\\seed-source\\next-plan",
+  "sources": [
+    "d\\430\\解释\\assurance-smoke\\seed-source\\corpus.txt"
+  ],
+  "recursive": true,
+  "dataset": {
+    "name": "assurance-smoke",
+    "version_prefix": "v292-smoke",
+    "description": "MiniGPT corpus planned for scale-aware training.",
+    "source_count": 1,
+    "char_count": 5760,
+    "line_count": 180,
+    "unique_char_count": 19,
+    "unique_char_ratio": 0.003299,
+    "fingerprint": "5d700234208efddcdc78a5ca70b1721bcf39e0bb6ca968bd89c8f13916b270de",
+    "short_fingerprint": "5d700234208e",
+    "scale_tier": "small",
+    "quality_status": "warn",
+    "warning_count": 1,
+    "issue_count": 2,
+    "duplicate_line_count": 1
+  },
+  "sources_detail": [
+    {
+      "path": "d\\430\\解释\\assurance-smoke\\seed-source\\corpus.txt",
+      "char_count": 5759,
+      "line_count": 180,
+      "nonempty_line_count": 180,
+      "unique_char_count": 19,
+      "sha256": "2c0fe2997d418523ee2c91c76ff142e4e648b847138889f27b9bcfce27bffd66",
+      "included": true,
+      "duplicate_of": null,
+      "skip_reason": null
+    }
+  ],
+  "quality_issues": [
+    {
+      "severity": "warning",
+      "code": "low_unique_ratio",
+      "message": "Unique-character ratio is low; the corpus may contain too much repetition.",
+      "path": null,
+      "details": {
+        "unique_ratio": 0.003299,
+        "threshold": 0.08
+      }
+    },
+    {
+      "severity": "info",
+      "code": "repeated_line",
+      "message": "A normalized line appears multiple times.",
+      "path": null,
+      "details": {
+        "count": 180,
+        "line": "MiniGPT assurance smoke corpus."
+      }
+    }
+  ],
+  "suite": {
+    "mode": "builtin",
+    "name": "standard-zh",
+    "path": "builtin:standard-zh"
+  },
+  "suite_path": "builtin:standard-zh",
+  "variants": [
+    {
+      "name": "scale-smoke",
+      "description": "Fast smoke run for checking the corpus and pipeline before spending time on training.",
+      "run_name": "scale-smoke",
+      "dataset_name": "assurance-smoke",
+      "dataset_version": "v292-smoke-smoke",
+      "dataset_description": "MiniGPT corpus planned for scale-aware training.",
+      "device": "cpu",
+      "title": "MiniGPT training portfolio pipeline (scale-smoke)",
+      "learning_rate": 0.0003,
+      "max_iters": 50,
+      "eval_interval": 25,
+      "eval_iters": 5,
+      "batch_size": 8,
+      "block_size": 64,
+      "n_layer": 2,
+      "n_head": 2,
+      "n_embd": 64,
+      "seed": 1337,
+      "sample_prompt": "MiniGPT",
+      "sample_tokens": 40
+    }
+  ],
+  "variant_matrix": [
+    {
+      "name": "scale-smoke",
+      "description": "Fast smoke run for checking the corpus and pipeline before spending time on training.",
+      "scale_tier": "small",
+      "dataset_version": "v292-smoke-smoke",
+      "max_iters": 50,
+      "eval_interval": 25,
+      "batch_size": 8,
+      "block_size": 64,
+      "context_adjustment": null,
+      "n_layer": 2,
+      "n_head": 2,
+      "n_embd": 64,
+      "seed": 1337,
+      "token_budget": 25600,
+      "corpus_pass_estimate": 4.444
+    }
+  ],
+  "batch": {
+    "variants_path": "d\\430\\解释\\assurance-smoke\\seed-source\\next-plan\\training_scale_variants.json",
+    "out_root": "d\\430\\解释\\assurance-smoke\\seed-source\\batch",
+    "baseline": "scale-smoke",
+    "command": [
+      "D:\\python\\python.exe",
+      "D:\\aiproj\\scripts\\run_training_portfolio_batch.py",
+      "d\\430\\解释\\assurance-smoke\\seed-source\\corpus.txt",
+      "--variants",
+      "d\\430\\解释\\assurance-smoke\\seed-source\\next-plan\\training_scale_variants.json",
+      "--out-root",
+      "d\\430\\解释\\assurance-smoke\\seed-source\\batch",
+      "--dataset-name",
+      "assurance-smoke",
+      "--baseline",
+      "scale-smoke",
+      "--suite-name",
+      "standard-zh"
+    ]
+  },
+  "recommendations": [
+    "Run the smoke variant first, then hand the generated training_scale_variants.json to the v69 batch runner.",
+    "The corpus is small; compare baseline runs, but collect more Chinese text before trusting capability changes.",
+    "Inspect dataset quality warnings before executing the extended training variant.",
+    "The largest planned token budget is 25600 tokens in `scale-smoke`."
+  ]
+}

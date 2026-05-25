@@ -392,6 +392,9 @@
 443-v429-promoted-seed-handoff-receipt-contract-summary-check.md
  -> v429 code explanation: add a self-check layer that rebuilds receipt contract summaries and validates JSON/text/Markdown/HTML sidecars against the source handoff.
 
+444-v430-promoted-seed-handoff-assurance-smoke-contract-summary-check.md
+ -> v430 code explanation: wire receipt contract summary generation and summary-check sidecars into the promoted seed handoff assurance smoke command.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
