@@ -386,6 +386,9 @@
 441-v427-promoted-seed-handoff-receipt-contract-hardening.md
  -> v427 code explanation: harden schema-v3 suite-design receipt sidecars by checking regression names in assurance smoke evidence and rejecting tampered count/name sidecars.
 
+442-v428-promoted-seed-handoff-receipt-contract-summary.md
+ -> v428 code explanation: add a compact schema-v3 receipt contract summary over handoff assurance, sidecar status, and suite-design count/name consistency.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

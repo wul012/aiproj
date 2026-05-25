@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 427 hardens the promoted seed handoff schema-v3 receipt contract by checking suite-design regression names in assurance smoke evidence and rejecting tampered receipt/check sidecars when suite-design counts or names drift.
+Version 428 adds a promoted seed handoff receipt contract summary, so schema-v3 receipt, assurance, sidecar, and suite-design count/name readiness can be consumed from one compact JSON/text/Markdown/HTML artifact.
 
 | Area | Current state | Evidence | Next pressure point |
 | --- | --- | --- | --- |
@@ -730,6 +730,14 @@ Version 427 hardens the promoted seed handoff schema-v3 receipt contract by chec
 - Registry CSV, HTML, release-readiness leaderboard, and `scripts/register_runs.py` stdout expose the reason context.
 - Targeted registry tests cover reason carryover and legacy drift-smoke fallback.
 - Archived registry CI regression reason evidence in `d/382`.
+
+## Latest v428 checkpoint
+
+- Added `promoted_training_scale_seed_handoff_receipt_contract.py` as a small contract-summary layer over existing handoff assurance output.
+- Added `scripts/check_promoted_seed_handoff_receipt_contract.py` to write JSON/text/Markdown/HTML contract summaries for CI or handoff review.
+- Contract summaries flatten schema version, assurance status, embedded sidecar status, and selected/global/comparison-ready suite-design count/name consistency.
+- Tests cover pass summaries, tampered sidecar rejection, CLI output paths, and rendered text/Markdown/HTML.
+- Archived receipt contract summary evidence, Playwright snapshot, and screenshot in `d/428`; tag: `v428.0.0`.
 
 ## Latest v427 checkpoint
 

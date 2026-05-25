@@ -1,0 +1,52 @@
+- main [ref=e2]:
+  - heading "MiniGPT promoted seed handoff receipt contract summary" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Contract" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: continue
+      - generic [ref=e13]:
+        - generic [ref=e14]: Schema
+        - strong [ref=e15]: "3"
+      - generic [ref=e16]:
+        - generic [ref=e17]: Assurance
+        - strong [ref=e18]: pass
+      - generic [ref=e19]:
+        - generic [ref=e20]: Sidecar
+        - strong [ref=e21]: pass
+      - generic [ref=e22]:
+        - generic [ref=e23]: Issues
+        - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Suite-Design Scopes" [level=2] [ref=e26]
+    - table [ref=e27]:
+      - rowgroup [ref=e28]:
+        - row "Scope Count Names Count matches names" [ref=e29]:
+          - columnheader "Scope" [ref=e30]
+          - columnheader "Count" [ref=e31]
+          - columnheader "Names" [ref=e32]
+          - columnheader "Count matches names" [ref=e33]
+      - rowgroup [ref=e34]:
+        - row "selected 0 none True" [ref=e35]:
+          - cell "selected" [ref=e36]
+          - cell "0" [ref=e37]
+          - cell "none" [ref=e38]
+          - cell "True" [ref=e39]
+        - row "handoff 0 none True" [ref=e40]:
+          - cell "handoff" [ref=e41]
+          - cell "0" [ref=e42]
+          - cell "none" [ref=e43]
+          - cell "True" [ref=e44]
+        - row "comparison_ready 0 none True" [ref=e45]:
+          - cell "comparison_ready" [ref=e46]
+          - cell "0" [ref=e47]
+          - cell "none" [ref=e48]
+          - cell "True" [ref=e49]
+  - generic [ref=e50]:
+    - heading "Issues" [level=2] [ref=e51]
+    - list [ref=e52]:
+      - listitem [ref=e53]: none

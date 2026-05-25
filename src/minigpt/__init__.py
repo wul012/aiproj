@@ -100,6 +100,8 @@ __all__ = [
     "write_benchmark_scorecard_decision_outputs",
     "build_benchmark_history",
     "write_benchmark_history_outputs",
+    "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
+    "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
 ]
 
 _EXPORTS = {
@@ -197,6 +199,14 @@ _EXPORTS = {
     "write_benchmark_scorecard_decision_outputs": ("benchmark_scorecard_decision", "write_benchmark_scorecard_decision_outputs"),
     "build_benchmark_history": ("benchmark_history", "build_benchmark_history"),
     "write_benchmark_history_outputs": ("benchmark_history", "write_benchmark_history_outputs"),
+    "build_promoted_training_scale_seed_handoff_receipt_contract_summary": (
+        "promoted_training_scale_seed_handoff_receipt_contract",
+        "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
+    ),
+    "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs": (
+        "promoted_training_scale_seed_handoff_receipt_contract",
+        "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
+    ),
 }
 
 
