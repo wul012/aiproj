@@ -1,0 +1,33 @@
+- main [ref=e2]:
+  - heading "MiniGPT receipt contract summary check" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Check" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: continue
+      - generic [ref=e13]:
+        - generic [ref=e14]: Actual
+        - strong [ref=e15]: pass
+      - generic [ref=e16]:
+        - generic [ref=e17]: Expected
+        - strong [ref=e18]: pass
+      - generic [ref=e19]:
+        - generic [ref=e20]: Sidecar
+        - strong [ref=e21]: pass
+      - generic [ref=e22]:
+        - generic [ref=e23]: Issues
+        - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Sidecars" [level=2] [ref=e26]
+    - list [ref=e27]:
+      - listitem [ref=e28]: "Text exists: True"
+      - listitem [ref=e29]: "Markdown exists: True"
+      - listitem [ref=e30]: "HTML exists: True"
+  - generic [ref=e31]:
+    - heading "Issues" [level=2] [ref=e32]
+    - list [ref=e33]:
+      - listitem [ref=e34]: none

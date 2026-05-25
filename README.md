@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 430 wires the promoted seed handoff receipt contract summary and summary-check sidecars into the assurance smoke command, so one smoke run now proves handoff execution, embedded receipt checks, compact contract summary generation, and compact-summary sidecar self-checking together.
+Version 431 extracts promoted seed handoff assurance smoke receipt-contract handling into a focused helper module, keeping the v430 smoke contract stable while reducing the orchestration script from 526 lines to 466 lines.
+
+## Latest v431 checkpoint
+
+- Added `src/minigpt/promoted_training_scale_seed_handoff_assurance_smoke_contract.py` for contract-summary generation, summary-check generation, output-path checks, and contract issue collection.
+- `scripts/check_promoted_seed_handoff_assurance_smoke.py` now stays focused on seed setup, command execution, assurance checks, summary writing, and printing.
+- The integrated smoke output remains contract-compatible with v430: `receipt_contract_*` and `receipt_contract_summary_check_*` fields are still emitted by the same command.
+- Archived refactor smoke evidence and Playwright MCP screenshot in `d/431`.
 
 ## Latest v430 checkpoint
 

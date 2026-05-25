@@ -395,6 +395,9 @@
 444-v430-promoted-seed-handoff-assurance-smoke-contract-summary-check.md
  -> v430 code explanation: wire receipt contract summary generation and summary-check sidecars into the promoted seed handoff assurance smoke command.
 
+445-v431-promoted-seed-handoff-assurance-smoke-contract-helper.md
+ -> v431 code explanation: split receipt contract summary/check handling out of the assurance smoke orchestration script while preserving v430 outputs.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
