@@ -1,0 +1,66 @@
+- main [ref=e2] [box=120,28,1040,762]:
+  - heading "MiniGPT baseline-candidate threshold boundary smoke" [level=1] [ref=e3] [box=120,28,1040,37]
+  - generic [ref=e4] [box=120,77,1040,358]:
+    - heading "Summary" [level=2] [ref=e5] [box=137,94,1007,24]
+    - generic [ref=e6] [box=137,128,1007,291]:
+      - generic [ref=e7] [box=137,128,244,65]:
+        - generic [ref=e8] [box=147,139,223,16]: Status
+        - strong [ref=e9] [box=147,161,223,22]: pass
+      - generic [ref=e10] [box=391,128,244,65]:
+        - generic [ref=e11] [box=401,139,223,16]: Decision
+        - strong [ref=e12] [box=401,161,223,22]: review
+      - generic [ref=e13] [box=645,128,244,65]:
+        - generic [ref=e14] [box=656,139,223,16]: Source mode
+        - strong [ref=e15] [box=656,161,223,22]: reuse_summary
+      - generic [ref=e16] [box=899,128,244,65]:
+        - generic [ref=e17] [box=910,139,223,16]: Smoke
+        - strong [ref=e18] [box=910,161,223,22]: pass
+      - generic [ref=e19] [box=137,203,244,65]:
+        - generic [ref=e20] [box=147,214,223,16]: Matrix
+        - strong [ref=e21] [box=147,236,223,22]: pass
+      - generic [ref=e22] [box=391,203,244,65]:
+        - generic [ref=e23] [box=401,214,223,16]: Thresholds
+        - strong [ref=e24] [box=401,236,223,22]: "3"
+      - generic [ref=e25] [box=645,203,244,65]:
+        - generic [ref=e26] [box=656,214,223,16]: Accept count
+        - strong [ref=e27] [box=656,236,223,22]: "0"
+      - generic [ref=e28] [box=899,203,244,65]:
+        - generic [ref=e29] [box=910,214,223,16]: Reject count
+        - strong [ref=e30] [box=910,236,223,22]: "3"
+      - generic [ref=e31] [box=137,278,244,65]:
+        - generic [ref=e32] [box=147,289,223,16]: Boundary
+        - strong [ref=e33] [box=147,311,223,22]: review
+      - generic [ref=e34] [box=391,278,244,65]:
+        - generic [ref=e35] [box=401,289,223,16]: Diagnosis
+        - strong [ref=e36] [box=401,311,223,22]: candidate_not_accepted
+      - generic [ref=e37] [box=645,278,244,65]:
+        - generic [ref=e38] [box=656,289,223,16]: Strictest accept
+        - strong [ref=e39] [box=656,311,223,22]: none
+      - generic [ref=e40] [box=899,278,244,65]:
+        - generic [ref=e41] [box=910,289,223,16]: First reject
+        - strong [ref=e42] [box=910,311,223,22]: "0.0"
+      - generic [ref=e43] [box=137,353,244,65]:
+        - generic [ref=e44] [box=147,364,223,16]: Monotonic
+        - strong [ref=e45] [box=147,386,223,22]: "True"
+  - generic [ref=e46] [box=120,451,1040,339]:
+    - heading "Diagnosis" [level=2] [ref=e47] [box=137,468,1007,24]
+    - generic [ref=e48] [box=137,502,1007,65]:
+      - generic [ref=e49] [box=137,502,498,65]:
+        - generic [ref=e50] [box=147,513,477,16]: Issue count
+        - strong [ref=e51] [box=147,535,477,22]: "1"
+      - generic [ref=e52] [box=645,502,498,65]:
+        - generic [ref=e53] [box=656,513,477,16]: Action count
+        - strong [ref=e54] [box=656,535,477,22]: "2"
+    - heading "Issues" [level=3] [ref=e55] [box=137,586,1007,25]
+    - list [ref=e56] [box=137,630,1007,22]:
+      - listitem [ref=e57] [box=177,630,967,22]:
+        - strong [ref=e58] [box=177,630,176,22]: no_accepting_threshold
+        - text: "- Every tested threshold rejected the candidate."
+    - heading "Actions" [level=3] [ref=e59] [box=137,670,1007,25]
+    - list [ref=e60] [box=137,714,1007,44]:
+      - listitem [ref=e61] [box=177,714,967,22]:
+        - strong [ref=e62] [box=177,714,192,22]: increase_candidate_signal
+        - text: "- Try a stronger candidate run or broader data before promoting this candidate."
+      - listitem [ref=e63] [box=177,736,967,22]:
+        - strong [ref=e64] [box=177,736,165,22]: keep_current_baseline
+        - text: "- Keep the current baseline until a candidate has an accepting threshold."

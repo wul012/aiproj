@@ -1,0 +1,16 @@
+status=pass
+decision=threshold_matrix_ready
+source_smoke_summary=d\438\解释\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\tiny_scorecard_comparison_smoke_summary.json
+threshold_count=3
+accept_count=0
+reject_count=3
+handoff_check_failure_count=0
+threshold_boundary_status=review
+threshold_boundary_decision=no_accepting_threshold
+strictest_accepting_threshold=None
+first_rejecting_threshold=0.0
+is_monotonic_acceptance=True
+transition_count=0
+row=threshold=0.0,loop_decision=reject_candidate,handoff_ready=False,next_baseline_source=current_baseline,expected_exit_code=2,handoff_check_status=pass
+row=threshold=0.5,loop_decision=reject_candidate,handoff_ready=False,next_baseline_source=current_baseline,expected_exit_code=2,handoff_check_status=pass
+row=threshold=1.0,loop_decision=reject_candidate,handoff_ready=False,next_baseline_source=current_baseline,expected_exit_code=2,handoff_check_status=pass

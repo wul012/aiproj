@@ -425,6 +425,9 @@ d/437/解释/说明.md
 d/438/图片
 d/438/解释/说明.md
  -> v438 live baseline-candidate threshold boundary smoke 的运行截图和解释
+d/439/图片
+d/439/解释/说明.md
+ -> v439 baseline-candidate threshold boundary reuse diagnosis 的运行截图和解释
 ```
 
 写入规则：

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT baseline-candidate threshold boundary smoke</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f8f9f7; color: #17211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d8ded7; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d8ded7; border-radius: 8px; padding: 10px; background: #fbfcfa; }
+.metric span { display: block; color: #607066; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: break-word; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT baseline-candidate threshold boundary smoke</h1>
+<section>
+<h2>Summary</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>review</strong></div>
+<div class="metric"><span>Source mode</span><strong>reuse_summary</strong></div>
+<div class="metric"><span>Smoke</span><strong>pass</strong></div>
+<div class="metric"><span>Matrix</span><strong>pass</strong></div>
+<div class="metric"><span>Thresholds</span><strong>3</strong></div>
+<div class="metric"><span>Accept count</span><strong>0</strong></div>
+<div class="metric"><span>Reject count</span><strong>3</strong></div>
+<div class="metric"><span>Boundary</span><strong>review</strong></div>
+<div class="metric"><span>Diagnosis</span><strong>candidate_not_accepted</strong></div>
+<div class="metric"><span>Strictest accept</span><strong>none</strong></div>
+<div class="metric"><span>First reject</span><strong>0.0</strong></div>
+<div class="metric"><span>Monotonic</span><strong>True</strong></div>
+</div>
+</section>
+<section>
+<h2>Diagnosis</h2>
+<div class="grid">
+<div class="metric"><span>Issue count</span><strong>1</strong></div>
+<div class="metric"><span>Action count</span><strong>2</strong></div>
+</div>
+<h3>Issues</h3>
+<ul><li><strong>no_accepting_threshold</strong> - <span>Every tested threshold rejected the candidate.</span></li></ul>
+<h3>Actions</h3>
+<ul><li><strong>increase_candidate_signal</strong> - <span>Try a stronger candidate run or broader data before promoting this candidate.</span></li>
+<li><strong>keep_current_baseline</strong> - <span>Keep the current baseline until a candidate has an accepting threshold.</span></li></ul>
+</section>
+</main>
+</body>
+</html>

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 438 adds a live baseline-candidate threshold boundary smoke that first runs a fresh tiny scorecard comparison, then rebuilds the threshold matrix from that live smoke summary, so reviewers can distinguish pipeline health from a candidate that still fails every promotion threshold.
+Version 439 makes the baseline-candidate threshold boundary smoke reusable and diagnostic: it can rebuild the matrix from an existing smoke summary without rerunning training, and it records why a passing pipeline still leaves the candidate rejected.
+
+## Latest v439 checkpoint
+
+- `scripts/run_baseline_candidate_threshold_boundary_smoke.py` now supports `--smoke-summary` to reuse an existing `tiny_scorecard_comparison_smoke_summary.json`.
+- `src/minigpt/baseline_candidate_threshold_boundary_smoke.py` now records `source_mode` and `review_diagnosis` with issue/action counts and machine-readable issue/action codes.
+- The v439 reuse evidence consumes the v438 live smoke summary, avoids rerunning training, and still rebuilds threshold matrix/handoff-check outputs.
+- The candidate remains rejected at every tested threshold, so the new diagnosis reports `candidate_not_accepted`, issue `no_accepting_threshold`, and actions to strengthen the candidate or keep the current baseline.
+- Archived reuse-diagnosis runtime evidence and Playwright MCP screenshot in `d/439`.
 
 ## Latest v438 checkpoint
 

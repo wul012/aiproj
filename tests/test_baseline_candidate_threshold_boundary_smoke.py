@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from minigpt.baseline_candidate_threshold_boundary_smoke import (
     build_baseline_candidate_threshold_boundary_smoke_summary,
+    build_threshold_boundary_smoke_diagnosis,
     render_baseline_candidate_threshold_boundary_smoke_text,
     write_baseline_candidate_threshold_boundary_smoke_outputs,
 )
@@ -35,10 +36,13 @@ class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
 
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["decision"], "live_threshold_boundary_ready")
+            self.assertEqual(report["source_mode"], "rerun_smoke")
             self.assertEqual(report["matrix"]["accept_count"], 1)
             self.assertEqual(report["matrix"]["reject_count"], 2)
             self.assertEqual(report["threshold_boundary"]["decision"], "accept_reject_boundary_observed")
+            self.assertEqual(report["review_diagnosis"]["decision"], "threshold_boundary_ready")
             self.assertIn("first_rejecting_threshold=0.5", text)
+            self.assertIn("review_diagnosis_status=pass", text)
             self.assertTrue(Path(outputs["json"]).is_file())
 
     def test_resolve_exit_code_can_require_boundary_pass(self) -> None:
@@ -57,6 +61,20 @@ class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
 
         self.assertEqual(report["status"], "pass")
         self.assertEqual(report["decision"], "live_threshold_boundary_review")
+        self.assertEqual(report["review_diagnosis"]["status"], "review")
+        self.assertEqual(report["review_diagnosis"]["decision"], "candidate_not_accepted")
+        self.assertEqual(report["review_diagnosis"]["issues"][0]["code"], "no_accepting_threshold")
+
+    def test_diagnosis_flags_handoff_check_failures_as_blockers(self) -> None:
+        diagnosis = build_threshold_boundary_smoke_diagnosis(
+            smoke_status="pass",
+            matrix={"status": "pass", "handoff_check_failure_count": 1, "accept_count": 0, "reject_count": 1},
+            boundary={"status": "review", "decision": "no_accepting_threshold"},
+        )
+
+        self.assertEqual(diagnosis["status"], "fail")
+        self.assertEqual(diagnosis["decision"], "fix_live_threshold_boundary")
+        self.assertEqual(diagnosis["issues"][0]["code"], "handoff_check_failures")
 
     def test_cli_builds_matrix_from_mocked_live_smoke(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -75,6 +93,22 @@ class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
             self.assertEqual(payload["status"], "pass")
             self.assertEqual(payload["threshold_boundary"]["first_rejecting_threshold"], 0.5)
             self.assertEqual(matrix["threshold_count"], 3)
+            self.assertEqual(payload["source_mode"], "rerun_smoke")
+
+    def test_cli_can_reuse_existing_smoke_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            summary_path = _write_smoke_summary(root / "source")
+            out_dir = root / "reuse"
+
+            with patch("scripts.run_baseline_candidate_threshold_boundary_smoke.run_live_smoke", side_effect=AssertionError("should not rerun smoke")):
+                main(["--smoke-summary", str(summary_path), "--out-dir", str(out_dir), "--thresholds", "0:1:0.5", "--force"])
+
+            payload = json.loads((out_dir / "live-boundary-summary" / "baseline_candidate_threshold_boundary_smoke.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["status"], "pass")
+            self.assertEqual(payload["source_mode"], "reuse_summary")
+            self.assertEqual(payload["smoke"]["source_mode"], "reuse_summary")
+            self.assertEqual(payload["review_diagnosis"]["decision"], "threshold_boundary_ready")
 
 
 def _write_smoke_summary(root: Path) -> Path:
