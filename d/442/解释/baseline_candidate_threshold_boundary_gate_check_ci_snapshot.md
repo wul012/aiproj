@@ -1,0 +1,69 @@
+- main [ref=e2] [box=50,28,1040,637]:
+  - heading "MiniGPT threshold boundary gate check" [level=1] [ref=e3] [box=50,28,1040,37]
+  - generic [ref=e4] [box=50,77,1040,208]:
+    - heading "Summary" [level=2] [ref=e5] [box=66,94,1007,24]
+    - generic [ref=e6] [box=66,128,1007,140]:
+      - generic [ref=e7] [box=66,128,244,65]:
+        - generic [ref=e8] [box=77,139,223,16]: Status
+        - strong [ref=e9] [box=77,161,223,22]: pass
+      - generic [ref=e10] [box=320,128,244,65]:
+        - generic [ref=e11] [box=331,139,223,16]: Decision
+        - strong [ref=e12] [box=331,161,223,22]: expected_exit_verified
+      - generic [ref=e13] [box=575,128,244,65]:
+        - generic [ref=e14] [box=585,139,223,16]: Gate mode
+        - strong [ref=e15] [box=585,161,223,22]: diagnosis_strict
+      - generic [ref=e16] [box=829,128,244,65]:
+        - generic [ref=e17] [box=839,139,223,16]: Actual exit
+        - strong [ref=e18] [box=839,161,223,22]: "2"
+      - generic [ref=e19] [box=66,203,244,65]:
+        - generic [ref=e20] [box=77,214,223,16]: Expected exit
+        - strong [ref=e21] [box=77,236,223,22]: "2"
+      - generic [ref=e22] [box=320,203,244,65]:
+        - generic [ref=e23] [box=331,214,223,16]: Diagnosis
+        - strong [ref=e24] [box=331,236,223,22]: candidate_not_accepted
+      - generic [ref=e25] [box=575,203,244,65]:
+        - generic [ref=e26] [box=585,214,223,16]: Boundary
+        - strong [ref=e27] [box=585,236,223,22]: no_accepting_threshold
+      - generic [ref=e28] [box=829,203,244,65]:
+        - generic [ref=e29] [box=839,214,223,16]: Failed checks
+        - strong [ref=e30] [box=839,236,223,22]: "0"
+  - generic [ref=e31] [box=50,301,1040,364]:
+    - heading "Checks" [level=2] [ref=e32] [box=66,317,1007,24]
+    - table [ref=e33] [box=66,352,1007,296]:
+      - rowgroup [ref=e34] [box=66,352,1007,42]:
+        - row "Check Status Expected Actual" [ref=e35] [box=66,352,1007,42]:
+          - columnheader "Check" [ref=e36] [box=66,352,363,42]
+          - columnheader "Status" [ref=e37] [box=429,352,96,42]
+          - columnheader "Expected" [ref=e38] [box=525,352,274,42]
+          - columnheader "Actual" [ref=e39] [box=799,352,274,42]
+      - rowgroup [ref=e40] [box=66,394,1007,254]:
+        - row "summary_exists pass True True" [ref=e41] [box=66,394,1007,42]:
+          - cell "summary_exists" [ref=e42] [box=66,394,363,42]
+          - cell "pass" [ref=e43] [box=429,394,96,42]
+          - cell "True" [ref=e44] [box=525,394,274,42]
+          - cell "True" [ref=e45] [box=799,394,274,42]
+        - row "summary_loads pass loadable JSON object loaded" [ref=e46] [box=66,436,1007,42]:
+          - cell "summary_loads" [ref=e47] [box=66,436,363,42]
+          - cell "pass" [ref=e48] [box=429,436,96,42]
+          - cell "loadable JSON object" [ref=e49] [box=525,436,274,42]
+          - cell "loaded" [ref=e50] [box=799,436,274,42]
+        - row "summary_status_pass pass True pass" [ref=e51] [box=66,479,1007,42]:
+          - cell "summary_status_pass" [ref=e52] [box=66,479,363,42]
+          - cell "pass" [ref=e53] [box=429,479,96,42]
+          - cell "True" [ref=e54] [box=525,479,274,42]
+          - cell "pass" [ref=e55] [box=799,479,274,42]
+        - row "summary_expected_exit_matches pass 2 2" [ref=e56] [box=66,521,1007,42]:
+          - cell "summary_expected_exit_matches" [ref=e57] [box=66,521,363,42]
+          - cell "pass" [ref=e58] [box=429,521,96,42]
+          - cell "2" [ref=e59] [box=525,521,274,42]
+          - cell "2" [ref=e60] [box=799,521,274,42]
+        - row "actual_exit_matches_expected pass 2 2" [ref=e61] [box=66,563,1007,42]:
+          - cell "actual_exit_matches_expected" [ref=e62] [box=66,563,363,42]
+          - cell "pass" [ref=e63] [box=429,563,96,42]
+          - cell "2" [ref=e64] [box=525,563,274,42]
+          - cell "2" [ref=e65] [box=799,563,274,42]
+        - row "diagnosis_decision_matches pass candidate_not_accepted candidate_not_accepted" [ref=e66] [box=66,605,1007,42]:
+          - cell "diagnosis_decision_matches" [ref=e67] [box=66,605,363,42]
+          - cell "pass" [ref=e68] [box=429,605,96,42]
+          - cell "candidate_not_accepted" [ref=e69] [box=525,605,274,42]
+          - cell "candidate_not_accepted" [ref=e70] [box=799,605,274,42]

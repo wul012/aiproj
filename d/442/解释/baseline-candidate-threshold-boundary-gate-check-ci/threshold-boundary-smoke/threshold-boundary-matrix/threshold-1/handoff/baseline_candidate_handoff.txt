@@ -1,0 +1,19 @@
+status=pass
+decision=keep_current_baseline
+handoff_ready=False
+next_baseline_name=tiny-baseline
+next_baseline_source=current_baseline
+next_baseline_checkpoint_exists=True
+candidate_name=tiny-candidate
+candidate_accepted=False
+overall_score_delta=0.0
+min_overall_score_delta=1.0
+control_status=pass
+acceptance_status=fail
+promotion_status=blocked
+execution_source_mode=reuse_summary
+execution_gate_mode=strict
+execution_expected_exit_code=2
+handoff_check_status=pass
+handoff_check_failed_count=0
+rejected_reasons=rubric_avg_score below 60.0,Keep the baseline or fix candidate scorecard regressions before promotion.,scorecard_decision_promote expected promote, got blocked,selected_candidate expected tiny-candidate, got None,min_overall_score_delta expected >= 1.0, got 0.0

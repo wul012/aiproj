@@ -428,6 +428,9 @@
 455-v441-baseline-candidate-threshold-boundary-gate-check.md
  -> v441 code explanation: wrap the strict threshold-boundary diagnosis gate in an expected-exit contract check so intentional candidate rejection can be archived as pass evidence.
 
+456-v442-ci-baseline-candidate-threshold-boundary-gate-check.md
+ -> v442 code explanation: promote the v441 expected-exit gate check into GitHub Actions and CI workflow hygiene order checks.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

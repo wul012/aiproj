@@ -1,0 +1,245 @@
+- generic [active] [ref=e1] [box=0,0,1265,3475]:
+  - banner [ref=e2] [box=82,24,1100,104]:
+    - heading "MiniGPT CI workflow hygiene" [level=1] [ref=e3] [box=82,42,1100,34]
+    - paragraph [ref=e4] [box=82,84,1100,24]: Checks the CI workflow action versions, runtime policy, Python version, and required quality gates.
+  - generic [ref=e5] [box=66,146,1133,243]:
+    - article [ref=e6] [box=82,163,149,111]:
+      - generic [ref=e7] [box=95,176,123,14]: Status
+      - strong [ref=e8] [box=95,198,123,21]: pass
+    - article [ref=e9] [box=241,163,149,111]:
+      - generic [ref=e10] [box=253,176,123,14]: Decision
+      - strong [ref=e11] [box=253,198,123,64]: continue_with_node24_native_ci
+    - article [ref=e12] [box=400,163,149,111]:
+      - generic [ref=e13] [box=412,176,123,14]: Checks
+      - strong [ref=e14] [box=412,198,123,21]: "21"
+    - article [ref=e15] [box=558,163,149,111]:
+      - generic [ref=e16] [box=571,176,123,14]: Failures
+      - strong [ref=e17] [box=571,198,123,21]: "0"
+    - article [ref=e18] [box=717,163,149,111]:
+      - generic [ref=e19] [box=729,176,123,14]: Actions
+      - strong [ref=e20] [box=729,198,123,21]: "2"
+    - article [ref=e21] [box=875,163,149,111]:
+      - generic [ref=e22] [box=888,176,123,14]: Node 24 native
+      - strong [ref=e23] [box=888,198,123,21]: "2"
+    - article [ref=e24] [box=1034,163,149,111]:
+      - generic [ref=e25] [box=1046,176,123,14]: Forbidden env
+      - strong [ref=e26] [box=1046,198,123,21]: "0"
+    - article [ref=e27] [box=82,284,149,89]:
+      - generic [ref=e28] [box=95,296,123,14]: Order violations
+      - strong [ref=e29] [box=95,319,123,21]: "0"
+    - article [ref=e30] [box=241,284,149,89]:
+      - generic [ref=e31] [box=253,296,123,14]: Plan digest gate
+      - strong [ref=e32] [box=253,319,123,21]: "True"
+    - article [ref=e33] [box=400,284,149,89]:
+      - generic [ref=e34] [box=412,296,123,14]: Boundary gate check
+      - strong [ref=e35] [box=412,319,123,21]: "True"
+    - article [ref=e36] [box=558,284,149,89]:
+      - generic [ref=e37] [box=571,296,123,14]: Drift smoke gate
+      - strong [ref=e38] [box=571,319,123,21]: "True"
+    - article [ref=e39] [box=717,284,149,89]:
+      - generic [ref=e40] [box=729,296,123,14]: Python
+      - strong [ref=e41] [box=729,319,123,21]: "3.11"
+  - generic [ref=e42] [box=66,407,1133,2693]:
+    - heading "Checks" [level=2] [ref=e43] [box=82,424,1100,21]
+    - table [ref=e44] [box=82,455,2093,2629]:
+      - rowgroup [ref=e45] [box=82,455,2093,2629]:
+        - row "ID Category Target Expected Actual Status Detail" [ref=e46] [box=82,455,2093,37]:
+          - columnheader "ID" [ref=e47] [box=82,455,563,37]
+          - columnheader "Category" [ref=e48] [box=645,455,155,37]
+          - columnheader "Target" [ref=e49] [box=800,455,521,37]
+          - columnheader "Expected" [ref=e50] [box=1322,455,463,37]
+          - columnheader "Actual" [ref=e51] [box=1784,455,219,37]
+          - columnheader "Status" [ref=e52] [box=2004,455,66,37]
+          - columnheader "Detail" [ref=e53] [box=2070,455,106,37]
+        - row "action:actions/checkout action_version actions/checkout v6 v6 pass Action uses the expected Node 24 native major." [ref=e54] [box=82,493,2093,130]:
+          - cell "action:actions/checkout" [ref=e55] [box=82,493,563,130]
+          - cell "action_version" [ref=e56] [box=645,493,155,130]
+          - cell "actions/checkout" [ref=e57] [box=800,493,521,130]
+          - cell "v6" [ref=e58] [box=1322,493,463,130]
+          - cell "v6" [ref=e59] [box=1784,493,219,130]
+          - cell "pass" [ref=e60] [box=2004,493,66,130]
+          - cell "Action uses the expected Node 24 native major." [ref=e61] [box=2070,493,106,130]
+        - row "action:actions/setup-python action_version actions/setup-python v6 v6 pass Action uses the expected Node 24 native major." [ref=e62] [box=82,622,2093,130]:
+          - cell "action:actions/setup-python" [ref=e63] [box=82,622,563,130]
+          - cell "action_version" [ref=e64] [box=645,622,155,130]
+          - cell "actions/setup-python" [ref=e65] [box=800,622,521,130]
+          - cell "v6" [ref=e66] [box=1322,622,463,130]
+          - cell "v6" [ref=e67] [box=1784,622,219,130]
+          - cell "pass" [ref=e68] [box=2004,622,66,130]
+          - cell "Action uses the expected Node 24 native major." [ref=e69] [box=2070,622,106,130]
+        - row "env:FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 forbidden_env FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 absent absent pass Native action versions should not rely on force-runtime environment variables." [ref=e70] [box=82,752,2093,185]:
+          - cell "env:FORCE_JAVASCRIPT_ACTIONS_TO_NODE24" [ref=e71] [box=82,752,563,185]
+          - cell "forbidden_env" [ref=e72] [box=645,752,155,185]
+          - cell "FORCE_JAVASCRIPT_ACTIONS_TO_NODE24" [ref=e73] [box=800,752,521,185]
+          - cell "absent" [ref=e74] [box=1322,752,463,185]
+          - cell "absent" [ref=e75] [box=1784,752,219,185]
+          - cell "pass" [ref=e76] [box=2004,752,66,185]
+          - cell "Native action versions should not rely on force-runtime environment variables." [ref=e77] [box=2070,752,106,185]
+        - row "command:source_encoding_gate required_command source_encoding_gate scripts/check_source_encoding.py present pass Required CI quality command is present." [ref=e78] [box=82,937,2093,93]:
+          - cell "command:source_encoding_gate" [ref=e79] [box=82,937,563,93]
+          - cell "required_command" [ref=e80] [box=645,937,155,93]
+          - cell "source_encoding_gate" [ref=e81] [box=800,937,521,93]
+          - cell "scripts/check_source_encoding.py" [ref=e82] [box=1322,937,463,93]
+          - cell "present" [ref=e83] [box=1784,937,219,93]
+          - cell "pass" [ref=e84] [box=2004,937,66,93]
+          - cell "Required CI quality command is present." [ref=e85] [box=2070,937,106,93]
+        - row "command:ci_workflow_hygiene_gate required_command ci_workflow_hygiene_gate scripts/check_ci_workflow_hygiene.py present pass Required CI quality command is present." [ref=e86] [box=82,1029,2093,93]:
+          - cell "command:ci_workflow_hygiene_gate" [ref=e87] [box=82,1029,563,93]
+          - cell "required_command" [ref=e88] [box=645,1029,155,93]
+          - cell "ci_workflow_hygiene_gate" [ref=e89] [box=800,1029,521,93]
+          - cell "scripts/check_ci_workflow_hygiene.py" [ref=e90] [box=1322,1029,463,93]
+          - cell "present" [ref=e91] [box=1784,1029,219,93]
+          - cell "pass" [ref=e92] [box=2004,1029,66,93]
+          - cell "Required CI quality command is present." [ref=e93] [box=2070,1029,106,93]
+        - row "command:promoted_seed_handoff_assurance_smoke required_command promoted_seed_handoff_assurance_smoke scripts/check_promoted_seed_handoff_assurance_smoke.py present pass Required CI quality command is present." [ref=e94] [box=82,1122,2093,93]:
+          - cell "command:promoted_seed_handoff_assurance_smoke" [ref=e95] [box=82,1122,563,93]
+          - cell "required_command" [ref=e96] [box=645,1122,155,93]
+          - cell "promoted_seed_handoff_assurance_smoke" [ref=e97] [box=800,1122,521,93]
+          - cell "scripts/check_promoted_seed_handoff_assurance_smoke.py" [ref=e98] [box=1322,1122,463,93]
+          - cell "present" [ref=e99] [box=1784,1122,219,93]
+          - cell "pass" [ref=e100] [box=2004,1122,66,93]
+          - cell "Required CI quality command is present." [ref=e101] [box=2070,1122,106,93]
+        - row "command:tiny_scorecard_comparison_inline_check_smoke required_command tiny_scorecard_comparison_inline_check_smoke scripts/run_ci_tiny_scorecard_comparison_smoke.py present pass Required CI quality command is present." [ref=e102] [box=82,1214,2093,93]:
+          - cell "command:tiny_scorecard_comparison_inline_check_smoke" [ref=e103] [box=82,1214,563,93]
+          - cell "required_command" [ref=e104] [box=645,1214,155,93]
+          - cell "tiny_scorecard_comparison_inline_check_smoke" [ref=e105] [box=800,1214,521,93]
+          - cell "scripts/run_ci_tiny_scorecard_comparison_smoke.py" [ref=e106] [box=1322,1214,463,93]
+          - cell "present" [ref=e107] [box=1784,1214,219,93]
+          - cell "pass" [ref=e108] [box=2004,1214,66,93]
+          - cell "Required CI quality command is present." [ref=e109] [box=2070,1214,106,93]
+        - row "command:tiny_scorecard_summary_check_sidecar required_command tiny_scorecard_summary_check_sidecar --summary-check-out-dir present pass Required CI quality command is present." [ref=e110] [box=82,1307,2093,93]:
+          - cell "command:tiny_scorecard_summary_check_sidecar" [ref=e111] [box=82,1307,563,93]
+          - cell "required_command" [ref=e112] [box=645,1307,155,93]
+          - cell "tiny_scorecard_summary_check_sidecar" [ref=e113] [box=800,1307,521,93]
+          - cell "--summary-check-out-dir" [ref=e114] [box=1322,1307,463,93]
+          - cell "present" [ref=e115] [box=1784,1307,219,93]
+          - cell "pass" [ref=e116] [box=2004,1307,66,93]
+          - cell "Required CI quality command is present." [ref=e117] [box=2070,1307,106,93]
+        - row "command:ci_tiny_scorecard_plan_digest_check required_command ci_tiny_scorecard_plan_digest_check scripts/check_ci_tiny_scorecard_plan.py present pass Required CI quality command is present." [ref=e118] [box=82,1399,2093,93]:
+          - cell "command:ci_tiny_scorecard_plan_digest_check" [ref=e119] [box=82,1399,563,93]
+          - cell "required_command" [ref=e120] [box=645,1399,155,93]
+          - cell "ci_tiny_scorecard_plan_digest_check" [ref=e121] [box=800,1399,521,93]
+          - cell "scripts/check_ci_tiny_scorecard_plan.py" [ref=e122] [box=1322,1399,463,93]
+          - cell "present" [ref=e123] [box=1784,1399,219,93]
+          - cell "pass" [ref=e124] [box=2004,1399,66,93]
+          - cell "Required CI quality command is present." [ref=e125] [box=2070,1399,106,93]
+        - row "command:baseline_candidate_threshold_boundary_gate_check required_command baseline_candidate_threshold_boundary_gate_check scripts/check_baseline_candidate_threshold_boundary_gate.py present pass Required CI quality command is present." [ref=e126] [box=82,1492,2093,93]:
+          - cell "command:baseline_candidate_threshold_boundary_gate_check" [ref=e127] [box=82,1492,563,93]
+          - cell "required_command" [ref=e128] [box=645,1492,155,93]
+          - cell "baseline_candidate_threshold_boundary_gate_check" [ref=e129] [box=800,1492,521,93]
+          - cell "scripts/check_baseline_candidate_threshold_boundary_gate.py" [ref=e130] [box=1322,1492,463,93]
+          - cell "present" [ref=e131] [box=1784,1492,219,93]
+          - cell "pass" [ref=e132] [box=2004,1492,66,93]
+          - cell "Required CI quality command is present." [ref=e133] [box=2070,1492,106,93]
+        - row "command:release_readiness_drift_contract_smoke required_command release_readiness_drift_contract_smoke scripts/check_release_readiness_drift_contract_smoke.py present pass Required CI quality command is present." [ref=e134] [box=82,1585,2093,93]:
+          - cell "command:release_readiness_drift_contract_smoke" [ref=e135] [box=82,1585,563,93]
+          - cell "required_command" [ref=e136] [box=645,1585,155,93]
+          - cell "release_readiness_drift_contract_smoke" [ref=e137] [box=800,1585,521,93]
+          - cell "scripts/check_release_readiness_drift_contract_smoke.py" [ref=e138] [box=1322,1585,463,93]
+          - cell "present" [ref=e139] [box=1784,1585,219,93]
+          - cell "pass" [ref=e140] [box=2004,1585,66,93]
+          - cell "Required CI quality command is present." [ref=e141] [box=2070,1585,106,93]
+        - row "command:test_coverage_report required_command test_coverage_report scripts/run_test_coverage.py present pass Required CI quality command is present." [ref=e142] [box=82,1677,2093,93]:
+          - cell "command:test_coverage_report" [ref=e143] [box=82,1677,563,93]
+          - cell "required_command" [ref=e144] [box=645,1677,155,93]
+          - cell "test_coverage_report" [ref=e145] [box=800,1677,521,93]
+          - cell "scripts/run_test_coverage.py" [ref=e146] [box=1322,1677,463,93]
+          - cell "present" [ref=e147] [box=1784,1677,219,93]
+          - cell "pass" [ref=e148] [box=2004,1677,66,93]
+          - cell "Required CI quality command is present." [ref=e149] [box=2070,1677,106,93]
+        - row "command:coverage_fail_under_gate required_command coverage_fail_under_gate --fail-under 80 present pass Required CI quality command is present." [ref=e150] [box=82,1770,2093,93]:
+          - cell "command:coverage_fail_under_gate" [ref=e151] [box=82,1770,563,93]
+          - cell "required_command" [ref=e152] [box=645,1770,155,93]
+          - cell "coverage_fail_under_gate" [ref=e153] [box=800,1770,521,93]
+          - cell "--fail-under 80" [ref=e154] [box=1322,1770,463,93]
+          - cell "present" [ref=e155] [box=1784,1770,219,93]
+          - cell "pass" [ref=e156] [box=2004,1770,66,93]
+          - cell "Required CI quality command is present." [ref=e157] [box=2070,1770,106,93]
+        - 'row "order:promoted_seed_handoff_assurance_smoke_before_coverage required_order promoted_seed_handoff_assurance_smoke_before_coverage before before_line=30;after_line=45 pass Required CI command order is preserved: before line 30, after line 45." [ref=e158] [box=82,1862,2093,148]':
+          - cell "order:promoted_seed_handoff_assurance_smoke_before_coverage" [ref=e159] [box=82,1862,563,148]
+          - cell "required_order" [ref=e160] [box=645,1862,155,148]
+          - cell "promoted_seed_handoff_assurance_smoke_before_coverage" [ref=e161] [box=800,1862,521,148]
+          - cell "before" [ref=e162] [box=1322,1862,463,148]
+          - cell "before_line=30;after_line=45" [ref=e163] [box=1784,1862,219,148]
+          - cell "pass" [ref=e164] [box=2004,1862,66,148]
+          - 'cell "Required CI command order is preserved: before line 30, after line 45." [ref=e165] [box=2070,1862,106,148]'
+        - 'row "order:tiny_scorecard_inline_check_smoke_before_coverage required_order tiny_scorecard_inline_check_smoke_before_coverage before before_line=33;after_line=45 pass Required CI command order is preserved: before line 33, after line 45." [ref=e166] [box=82,2010,2093,148]':
+          - cell "order:tiny_scorecard_inline_check_smoke_before_coverage" [ref=e167] [box=82,2010,563,148]
+          - cell "required_order" [ref=e168] [box=645,2010,155,148]
+          - cell "tiny_scorecard_inline_check_smoke_before_coverage" [ref=e169] [box=800,2010,521,148]
+          - cell "before" [ref=e170] [box=1322,2010,463,148]
+          - cell "before_line=33;after_line=45" [ref=e171] [box=1784,2010,219,148]
+          - cell "pass" [ref=e172] [box=2004,2010,66,148]
+          - 'cell "Required CI command order is preserved: before line 33, after line 45." [ref=e173] [box=2070,2010,106,148]'
+        - 'row "order:ci_tiny_scorecard_plan_check_after_smoke required_order ci_tiny_scorecard_plan_check_after_smoke before before_line=33;after_line=36 pass Required CI command order is preserved: before line 33, after line 36." [ref=e174] [box=82,2158,2093,148]':
+          - cell "order:ci_tiny_scorecard_plan_check_after_smoke" [ref=e175] [box=82,2158,563,148]
+          - cell "required_order" [ref=e176] [box=645,2158,155,148]
+          - cell "ci_tiny_scorecard_plan_check_after_smoke" [ref=e177] [box=800,2158,521,148]
+          - cell "before" [ref=e178] [box=1322,2158,463,148]
+          - cell "before_line=33;after_line=36" [ref=e179] [box=1784,2158,219,148]
+          - cell "pass" [ref=e180] [box=2004,2158,66,148]
+          - 'cell "Required CI command order is preserved: before line 33, after line 36." [ref=e181] [box=2070,2158,106,148]'
+        - 'row "order:ci_tiny_scorecard_plan_check_before_coverage required_order ci_tiny_scorecard_plan_check_before_coverage before before_line=36;after_line=45 pass Required CI command order is preserved: before line 36, after line 45." [ref=e182] [box=82,2306,2093,148]':
+          - cell "order:ci_tiny_scorecard_plan_check_before_coverage" [ref=e183] [box=82,2306,563,148]
+          - cell "required_order" [ref=e184] [box=645,2306,155,148]
+          - cell "ci_tiny_scorecard_plan_check_before_coverage" [ref=e185] [box=800,2306,521,148]
+          - cell "before" [ref=e186] [box=1322,2306,463,148]
+          - cell "before_line=36;after_line=45" [ref=e187] [box=1784,2306,219,148]
+          - cell "pass" [ref=e188] [box=2004,2306,66,148]
+          - 'cell "Required CI command order is preserved: before line 36, after line 45." [ref=e189] [box=2070,2306,106,148]'
+        - 'row "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest required_order baseline_candidate_threshold_boundary_gate_check_after_plan_digest before before_line=36;after_line=39 pass Required CI command order is preserved: before line 36, after line 39." [ref=e190] [box=82,2454,2093,148]':
+          - cell "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest" [ref=e191] [box=82,2454,563,148]
+          - cell "required_order" [ref=e192] [box=645,2454,155,148]
+          - cell "baseline_candidate_threshold_boundary_gate_check_after_plan_digest" [ref=e193] [box=800,2454,521,148]
+          - cell "before" [ref=e194] [box=1322,2454,463,148]
+          - cell "before_line=36;after_line=39" [ref=e195] [box=1784,2454,219,148]
+          - cell "pass" [ref=e196] [box=2004,2454,66,148]
+          - 'cell "Required CI command order is preserved: before line 36, after line 39." [ref=e197] [box=2070,2454,106,148]'
+        - 'row "order:baseline_candidate_threshold_boundary_gate_check_before_coverage required_order baseline_candidate_threshold_boundary_gate_check_before_coverage before before_line=39;after_line=45 pass Required CI command order is preserved: before line 39, after line 45." [ref=e198] [box=82,2603,2093,148]':
+          - cell "order:baseline_candidate_threshold_boundary_gate_check_before_coverage" [ref=e199] [box=82,2603,563,148]
+          - cell "required_order" [ref=e200] [box=645,2603,155,148]
+          - cell "baseline_candidate_threshold_boundary_gate_check_before_coverage" [ref=e201] [box=800,2603,521,148]
+          - cell "before" [ref=e202] [box=1322,2603,463,148]
+          - cell "before_line=39;after_line=45" [ref=e203] [box=1784,2603,219,148]
+          - cell "pass" [ref=e204] [box=2004,2603,66,148]
+          - 'cell "Required CI command order is preserved: before line 39, after line 45." [ref=e205] [box=2070,2603,106,148]'
+        - 'row "order:release_readiness_drift_contract_smoke_before_coverage required_order release_readiness_drift_contract_smoke_before_coverage before before_line=42;after_line=45 pass Required CI command order is preserved: before line 42, after line 45." [ref=e206] [box=82,2751,2093,148]':
+          - cell "order:release_readiness_drift_contract_smoke_before_coverage" [ref=e207] [box=82,2751,563,148]
+          - cell "required_order" [ref=e208] [box=645,2751,155,148]
+          - cell "release_readiness_drift_contract_smoke_before_coverage" [ref=e209] [box=800,2751,521,148]
+          - cell "before" [ref=e210] [box=1322,2751,463,148]
+          - cell "before_line=42;after_line=45" [ref=e211] [box=1784,2751,219,148]
+          - cell "pass" [ref=e212] [box=2004,2751,66,148]
+          - 'cell "Required CI command order is preserved: before line 42, after line 45." [ref=e213] [box=2070,2751,106,148]'
+        - row "python:setup-version python_version actions/setup-python 3.11 3.11 pass CI parser target should remain aligned with source encoding compatibility checks." [ref=e214] [box=82,2899,2093,185]:
+          - cell "python:setup-version" [ref=e215] [box=82,2899,563,185]
+          - cell "python_version" [ref=e216] [box=645,2899,155,185]
+          - cell "actions/setup-python" [ref=e217] [box=800,2899,521,185]
+          - cell "3.11" [ref=e218] [box=1322,2899,463,185]
+          - cell "3.11" [ref=e219] [box=1784,2899,219,185]
+          - cell "pass" [ref=e220] [box=2004,2899,66,185]
+          - cell "CI parser target should remain aligned with source encoding compatibility checks." [ref=e221] [box=2070,2899,106,185]
+  - generic [ref=e222] [box=66,3119,1133,176]:
+    - heading "Actions" [level=2] [ref=e223] [box=82,3135,1100,21]
+    - table [ref=e224] [box=82,3166,1100,112]:
+      - rowgroup [ref=e225] [box=82,3166,1100,111]:
+        - row "Repository Version Line Node 24 Native" [ref=e226] [box=82,3166,1100,37]:
+          - columnheader "Repository" [ref=e227] [box=82,3166,427,37]
+          - columnheader "Version" [ref=e228] [box=510,3166,195,37]
+          - columnheader "Line" [ref=e229] [box=705,3166,133,37]
+          - columnheader "Node 24 Native" [ref=e230] [box=838,3166,345,37]
+        - row "actions/checkout v6 12 True" [ref=e231] [box=82,3204,1100,37]:
+          - cell "actions/checkout" [ref=e232] [box=82,3204,427,37]
+          - cell "v6" [ref=e233] [box=510,3204,195,37]
+          - cell "12" [ref=e234] [box=705,3204,133,37]
+          - cell "True" [ref=e235] [box=838,3204,345,37]
+        - row "actions/setup-python v6 14 True" [ref=e236] [box=82,3241,1100,37]:
+          - cell "actions/setup-python" [ref=e237] [box=82,3241,427,37]
+          - cell "v6" [ref=e238] [box=510,3241,195,37]
+          - cell "14" [ref=e239] [box=705,3241,133,37]
+          - cell "True" [ref=e240] [box=838,3241,345,37]
+  - generic [ref=e241] [box=66,3312,1133,89]:
+    - heading "Recommendations" [level=2] [ref=e242] [box=82,3329,1100,21]
+    - list [ref=e243] [box=82,3360,1100,19]:
+      - listitem [ref=e244] [box=102,3360,1080,19]: Keep CI workflow action versions and quality gates aligned with the Node 24 native policy.
+  - contentinfo [ref=e245] [box=82,3419,1100,14]: Generated by MiniGPT CI workflow hygiene.

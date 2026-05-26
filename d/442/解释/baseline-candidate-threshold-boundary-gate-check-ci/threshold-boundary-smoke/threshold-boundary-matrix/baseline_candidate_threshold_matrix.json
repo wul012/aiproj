@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate threshold matrix",
+  "generated_at": "2026-05-26T10:00:50Z",
+  "status": "pass",
+  "decision": "threshold_matrix_ready",
+  "source_smoke_summary": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+  "threshold_count": 3,
+  "accept_count": 0,
+  "reject_count": 3,
+  "handoff_check_failure_count": 0,
+  "threshold_boundary": {
+    "status": "review",
+    "decision": "no_accepting_threshold",
+    "has_accept": false,
+    "has_reject": true,
+    "is_monotonic_acceptance": true,
+    "transition_count": 0,
+    "strictest_accepting_threshold": null,
+    "first_rejecting_threshold": 0.0,
+    "accepting_thresholds": [],
+    "rejecting_thresholds": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "transitions": []
+  },
+  "rows": [
+    {
+      "threshold": 0.0,
+      "variant_dir": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0",
+      "loop_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\loop\\baseline_candidate_eval_loop.json",
+      "handoff_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff\\baseline_candidate_handoff.json",
+      "handoff_check_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff-check\\baseline_candidate_handoff_check.json",
+      "loop_decision": "reject_candidate",
+      "handoff_decision": "keep_current_baseline",
+      "handoff_ready": false,
+      "next_baseline_name": "tiny-baseline",
+      "next_baseline_source": "current_baseline",
+      "overall_score_delta": 0.0,
+      "min_overall_score_delta": 0.0,
+      "expected_exit_code": 2,
+      "handoff_check_status": "pass",
+      "handoff_check_failed_count": 0,
+      "rejected_reasons": [
+        "rubric_avg_score below 60.0",
+        "Keep the baseline or fix candidate scorecard regressions before promotion.",
+        "scorecard_decision_promote expected promote, got blocked",
+        "selected_candidate expected tiny-candidate, got None"
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "variant_dir": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0p5",
+      "loop_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0p5\\loop\\baseline_candidate_eval_loop.json",
+      "handoff_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0p5\\handoff\\baseline_candidate_handoff.json",
+      "handoff_check_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0p5\\handoff-check\\baseline_candidate_handoff_check.json",
+      "loop_decision": "reject_candidate",
+      "handoff_decision": "keep_current_baseline",
+      "handoff_ready": false,
+      "next_baseline_name": "tiny-baseline",
+      "next_baseline_source": "current_baseline",
+      "overall_score_delta": 0.0,
+      "min_overall_score_delta": 0.5,
+      "expected_exit_code": 2,
+      "handoff_check_status": "pass",
+      "handoff_check_failed_count": 0,
+      "rejected_reasons": [
+        "rubric_avg_score below 60.0",
+        "Keep the baseline or fix candidate scorecard regressions before promotion.",
+        "scorecard_decision_promote expected promote, got blocked",
+        "selected_candidate expected tiny-candidate, got None",
+        "min_overall_score_delta expected >= 0.5, got 0.0"
+      ]
+    },
+    {
+      "threshold": 1.0,
+      "variant_dir": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-1",
+      "loop_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-1\\loop\\baseline_candidate_eval_loop.json",
+      "handoff_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-1\\handoff\\baseline_candidate_handoff.json",
+      "handoff_check_report": "d\\442\\解释\\baseline-candidate-threshold-boundary-gate-check-ci\\threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-1\\handoff-check\\baseline_candidate_handoff_check.json",
+      "loop_decision": "reject_candidate",
+      "handoff_decision": "keep_current_baseline",
+      "handoff_ready": false,
+      "next_baseline_name": "tiny-baseline",
+      "next_baseline_source": "current_baseline",
+      "overall_score_delta": 0.0,
+      "min_overall_score_delta": 1.0,
+      "expected_exit_code": 2,
+      "handoff_check_status": "pass",
+      "handoff_check_failed_count": 0,
+      "rejected_reasons": [
+        "rubric_avg_score below 60.0",
+        "Keep the baseline or fix candidate scorecard regressions before promotion.",
+        "scorecard_decision_promote expected promote, got blocked",
+        "selected_candidate expected tiny-candidate, got None",
+        "min_overall_score_delta expected >= 1.0, got 0.0"
+      ]
+    }
+  ],
+  "boundary": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Threshold matrix evidence reuses tiny CPU smoke output to cover acceptance/rejection gates; it is not robust model improvement evidence."
+  }
+}

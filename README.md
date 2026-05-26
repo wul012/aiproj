@@ -4,9 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 441 adds a threshold-boundary gate check wrapper that reruns the strict diagnosis gate, verifies the expected nonzero exit code, and turns an intentional candidate rejection into a passing contract-check artifact.
+Version 442 promotes the baseline-candidate threshold boundary expected-exit check into the GitHub Actions CI workflow and the CI workflow hygiene policy, so the v441 strict-gate wrapper is no longer only local evidence.
+
+## Latest v442 checkpoint
+
+- `.github/workflows/ci.yml` now runs `scripts/check_baseline_candidate_threshold_boundary_gate.py` before coverage.
+- `src/minigpt/ci_workflow_hygiene.py` now requires the baseline-candidate threshold boundary gate-check command and validates it runs after the tiny-scorecard plan digest check and before coverage.
+- CI hygiene summaries and rendered artifacts expose `baseline_candidate_threshold_boundary_gate_check_present`, `baseline_candidate_threshold_boundary_gate_check_order_ready`, and `baseline_candidate_threshold_boundary_gate_check_ready`.
+- The v442 evidence shows CI hygiene `status=pass`, `check_count=21`, `required_step_count=10`, `required_order_count=7`, and `baseline_candidate_threshold_boundary_gate_check_ready=True`.
+- Archived CI hygiene and gate-check runtime evidence plus Playwright MCP screenshots in `d/442`.
 
 ## Latest v441 checkpoint
+
+Version 441 adds a threshold-boundary gate check wrapper that reruns the strict diagnosis gate, verifies the expected nonzero exit code, and turns an intentional candidate rejection into a passing contract-check artifact.
+
 
 - Added `src/minigpt/baseline_candidate_threshold_boundary_gate_check.py` to write JSON/text/Markdown/HTML reports for threshold-boundary strict-gate verification.
 - Added `scripts/check_baseline_candidate_threshold_boundary_gate.py` to run `run_baseline_candidate_threshold_boundary_smoke.py`, capture stdout/stderr, and compare actual vs expected exit code.
