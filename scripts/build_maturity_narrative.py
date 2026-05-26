@@ -85,6 +85,22 @@ def main() -> None:
         "release_readiness_ci_workflow_regression_reason_counts="
         + json.dumps(summary.get("release_readiness_ci_workflow_regression_reason_counts") or {}, ensure_ascii=False)
     )
+    print(
+        "release_readiness_ci_tiny_plan_digest_gate_ready_regression_count="
+        + json.dumps(summary.get("release_readiness_ci_tiny_plan_digest_gate_ready_regression_count"), ensure_ascii=False)
+    )
+    print(
+        "release_readiness_ci_boundary_gate_check_ready_regression_count="
+        + json.dumps(summary.get("release_readiness_ci_boundary_gate_check_ready_regression_count"), ensure_ascii=False)
+    )
+    print(
+        "release_readiness_ci_boundary_plan_check_ready_regression_count="
+        + json.dumps(summary.get("release_readiness_ci_boundary_plan_check_ready_regression_count"), ensure_ascii=False)
+    )
+    print(
+        "release_readiness_ci_drift_smoke_ready_regression_count="
+        + json.dumps(summary.get("release_readiness_ci_drift_smoke_ready_regression_count"), ensure_ascii=False)
+    )
     print(f"release_readiness_max_ci_workflow_order_violation_delta={summary.get('release_readiness_max_ci_workflow_order_violation_delta')}")
     print(f"release_readiness_test_coverage_regression_count={summary.get('release_readiness_test_coverage_regression_count')}")
     print(f"release_readiness_max_test_coverage_gap_delta={summary.get('release_readiness_max_test_coverage_gap_delta')}")

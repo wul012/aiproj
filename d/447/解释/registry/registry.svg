@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="246" viewBox="0 0 1040 246">
+  <rect width="100%" height="100%" fill="#f7f7f2"/>
+  <text x="28" y="34" font-family="Arial" font-size="22" fill="#111827">MiniGPT run registry</text>
+  <text x="28" y="58" font-family="Arial" font-size="13" fill="#4b5563">Runs: 1 | Dataset fingerprints: 1 | Snapshots: 1</text>
+  <text x="300" y="78" font-family="Arial" font-size="12" fill="#374151">best val loss</text>
+  <text x="650" y="78" font-family="Arial" font-size="12" fill="#374151">artifact count / quality / eval suite</text>
+  <text x="28" y="114" font-family="Arial" font-size="14" fill="#111827">v447-boundary-plan</text><text x="28" y="134" font-family="Arial" font-size="12" fill="#4b5563">d\447\解释\registry-fixture\boundary-pl...</text><text x="242" y="115" font-family="Arial" font-size="13" fill="#111827">#1</text><rect x="300" y="103" width="260" height="14" rx="3" fill="#dc2626"/><text x="568" y="115" font-family="Arial" font-size="12" fill="#374151">1 (+0)</text><rect x="650" y="103" width="220" height="14" rx="3" fill="#2563eb"/><text x="880" y="115" font-family="Arial" font-size="12" fill="#374151">13 files</text><circle cx="656" cy="132" r="5" fill="#047857"/><text x="670" y="136" font-family="Arial" font-size="12" fill="#374151">pass | eval=3 | gen=pass | data=v447boundary</text><text x="670" y="150" font-family="Arial" font-size="11" fill="#4b5563">dedupe=none; included=2; skipped=0; chars=447; order=order-v447-bounda...</text><text x="670" y="164" font-family="Arial" font-size="11" fill="#4b5563">no notes</text>
+</svg>

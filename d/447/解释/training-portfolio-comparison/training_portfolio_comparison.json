@@ -1,0 +1,903 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT training portfolio comparison",
+  "generated_at": "2026-05-26T13:42:51Z",
+  "portfolio_count": 2,
+  "baseline": {
+    "name": "baseline",
+    "index": 1,
+    "source_path": "d\\447\\解释\\portfolio-fixture\\baseline\\training_portfolio.json",
+    "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+    "run_name": "baseline",
+    "dataset_name": "baseline-dataset",
+    "dataset_version": "v1",
+    "dataset": "baseline-dataset@v1",
+    "status": "completed",
+    "execute": true,
+    "step_count": 2,
+    "completed_steps": 2,
+    "failed_step": null,
+    "artifact_count": 8,
+    "available_artifact_count": 8,
+    "artifact_coverage": 1.0,
+    "core_artifacts": [
+      {
+        "key": "run_manifest",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\run_manifest.json",
+        "exists": true
+      },
+      {
+        "key": "eval_suite",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\eval_suite.json",
+        "exists": true
+      },
+      {
+        "key": "generation_quality",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\generation-quality\\generation_quality.json",
+        "exists": true
+      },
+      {
+        "key": "benchmark_scorecard",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+        "exists": true
+      },
+      {
+        "key": "dataset_card",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\dataset\\dataset_card.json",
+        "exists": true
+      },
+      {
+        "key": "registry",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\registry\\registry.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_summary",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-summary\\maturity_summary.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_narrative",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-narrative\\maturity_narrative.json",
+        "exists": true
+      }
+    ],
+    "overall_status": "pass",
+    "overall_score": 82.0,
+    "rubric_status": "pass",
+    "rubric_avg_score": 81.0,
+    "weakest_rubric_case": "baseline",
+    "weakest_rubric_score": 78.0,
+    "best_val_loss": 1.15,
+    "final_val_loss": 1.2,
+    "last_loss": 1.2,
+    "parameter_count": 123456,
+    "token_count": 1200,
+    "train_token_count": null,
+    "val_token_count": null,
+    "eval_suite_name": "v447-boundary-plan",
+    "eval_suite_version": null,
+    "eval_case_count": 5,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_warn_count": 0,
+    "generation_quality_fail_count": 0,
+    "generation_quality_avg_unique_ratio": 0.72,
+    "dataset_readiness_status": "ready",
+    "dataset_quality_status": "pass",
+    "dataset_warning_count": 0,
+    "maturity_portfolio_status": "ready",
+    "maturity_release_readiness_trend": "stable",
+    "maturity_release_readiness_ci_workflow_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+    "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+    "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+    "maturity_release_readiness_ci_workflow_regression_reasons": [],
+    "maturity_release_readiness_ci_workflow_regression_reason_counts": {},
+    "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+    "maturity_release_readiness_test_coverage_regression_count": 0,
+    "maturity_release_readiness_test_coverage_status_changed_count": 0,
+    "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+    "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+    "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+    "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+    "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+    "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+    "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+    "maturity_request_history_status": "pass"
+  },
+  "portfolios": [
+    {
+      "name": "baseline",
+      "index": 1,
+      "source_path": "d\\447\\解释\\portfolio-fixture\\baseline\\training_portfolio.json",
+      "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+      "run_name": "baseline",
+      "dataset_name": "baseline-dataset",
+      "dataset_version": "v1",
+      "dataset": "baseline-dataset@v1",
+      "status": "completed",
+      "execute": true,
+      "step_count": 2,
+      "completed_steps": 2,
+      "failed_step": null,
+      "artifact_count": 8,
+      "available_artifact_count": 8,
+      "artifact_coverage": 1.0,
+      "core_artifacts": [
+        {
+          "key": "run_manifest",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\run_manifest.json",
+          "exists": true
+        },
+        {
+          "key": "eval_suite",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\eval_suite.json",
+          "exists": true
+        },
+        {
+          "key": "generation_quality",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\generation-quality\\generation_quality.json",
+          "exists": true
+        },
+        {
+          "key": "benchmark_scorecard",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+          "exists": true
+        },
+        {
+          "key": "dataset_card",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\dataset\\dataset_card.json",
+          "exists": true
+        },
+        {
+          "key": "registry",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\registry\\registry.json",
+          "exists": true
+        },
+        {
+          "key": "maturity_summary",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-summary\\maturity_summary.json",
+          "exists": true
+        },
+        {
+          "key": "maturity_narrative",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-narrative\\maturity_narrative.json",
+          "exists": true
+        }
+      ],
+      "overall_status": "pass",
+      "overall_score": 82.0,
+      "rubric_status": "pass",
+      "rubric_avg_score": 81.0,
+      "weakest_rubric_case": "baseline",
+      "weakest_rubric_score": 78.0,
+      "best_val_loss": 1.15,
+      "final_val_loss": 1.2,
+      "last_loss": 1.2,
+      "parameter_count": 123456,
+      "token_count": 1200,
+      "train_token_count": null,
+      "val_token_count": null,
+      "eval_suite_name": "v447-boundary-plan",
+      "eval_suite_version": null,
+      "eval_case_count": 5,
+      "generation_quality_status": "pass",
+      "generation_quality_cases": 5,
+      "generation_quality_warn_count": 0,
+      "generation_quality_fail_count": 0,
+      "generation_quality_avg_unique_ratio": 0.72,
+      "dataset_readiness_status": "ready",
+      "dataset_quality_status": "pass",
+      "dataset_warning_count": 0,
+      "maturity_portfolio_status": "ready",
+      "maturity_release_readiness_trend": "stable",
+      "maturity_release_readiness_ci_workflow_regression_count": 0,
+      "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+      "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+      "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+      "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+      "maturity_release_readiness_ci_workflow_regression_reasons": [],
+      "maturity_release_readiness_ci_workflow_regression_reason_counts": {},
+      "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+      "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+      "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 0,
+      "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+      "maturity_release_readiness_test_coverage_regression_count": 0,
+      "maturity_release_readiness_test_coverage_status_changed_count": 0,
+      "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+      "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+      "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+      "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+      "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+      "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+      "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+      "maturity_request_history_status": "pass"
+    },
+    {
+      "name": "candidate",
+      "index": 2,
+      "source_path": "d\\447\\解释\\portfolio-fixture\\candidate\\training_portfolio.json",
+      "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+      "run_name": "candidate",
+      "dataset_name": "candidate-dataset",
+      "dataset_version": "v1",
+      "dataset": "candidate-dataset@v1",
+      "status": "completed",
+      "execute": true,
+      "step_count": 2,
+      "completed_steps": 2,
+      "failed_step": null,
+      "artifact_count": 8,
+      "available_artifact_count": 8,
+      "artifact_coverage": 1.0,
+      "core_artifacts": [
+        {
+          "key": "run_manifest",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\run_manifest.json",
+          "exists": true
+        },
+        {
+          "key": "eval_suite",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\eval_suite.json",
+          "exists": true
+        },
+        {
+          "key": "generation_quality",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\generation-quality\\generation_quality.json",
+          "exists": true
+        },
+        {
+          "key": "benchmark_scorecard",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+          "exists": true
+        },
+        {
+          "key": "dataset_card",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\dataset\\dataset_card.json",
+          "exists": true
+        },
+        {
+          "key": "registry",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\registry\\registry.json",
+          "exists": true
+        },
+        {
+          "key": "maturity_summary",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-summary\\maturity_summary.json",
+          "exists": true
+        },
+        {
+          "key": "maturity_narrative",
+          "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-narrative\\maturity_narrative.json",
+          "exists": true
+        }
+      ],
+      "overall_status": "pass",
+      "overall_score": 91.0,
+      "rubric_status": "pass",
+      "rubric_avg_score": 90.0,
+      "weakest_rubric_case": "candidate",
+      "weakest_rubric_score": 87.0,
+      "best_val_loss": 0.85,
+      "final_val_loss": 0.9,
+      "last_loss": 0.9,
+      "parameter_count": 123456,
+      "token_count": 1200,
+      "train_token_count": null,
+      "val_token_count": null,
+      "eval_suite_name": "v447-boundary-plan",
+      "eval_suite_version": null,
+      "eval_case_count": 5,
+      "generation_quality_status": "pass",
+      "generation_quality_cases": 5,
+      "generation_quality_warn_count": 0,
+      "generation_quality_fail_count": 0,
+      "generation_quality_avg_unique_ratio": 0.72,
+      "dataset_readiness_status": "ready",
+      "dataset_quality_status": "pass",
+      "dataset_warning_count": 0,
+      "maturity_portfolio_status": "ready",
+      "maturity_release_readiness_trend": "ci-regressed",
+      "maturity_release_readiness_ci_workflow_regression_count": 1,
+      "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+      "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+      "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+      "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+      "maturity_release_readiness_ci_workflow_regression_reasons": [
+        "boundary_gate_plan_check_not_ready"
+      ],
+      "maturity_release_readiness_ci_workflow_regression_reason_counts": {
+        "boundary_gate_plan_check_not_ready": 1
+      },
+      "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+      "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+      "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+      "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+      "maturity_release_readiness_test_coverage_regression_count": 0,
+      "maturity_release_readiness_test_coverage_status_changed_count": 0,
+      "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+      "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+      "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+      "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+      "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+      "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+      "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+      "maturity_request_history_status": "pass"
+    }
+  ],
+  "baseline_deltas": [
+    {
+      "name": "baseline",
+      "baseline_name": "baseline",
+      "is_baseline": true,
+      "status_changed": false,
+      "artifact_coverage_delta": 0.0,
+      "available_artifact_delta": 0,
+      "overall_score_delta": 0.0,
+      "rubric_avg_score_delta": 0.0,
+      "final_val_loss_delta": 0.0,
+      "dataset_warning_delta": 0,
+      "maturity_status_changed": false,
+      "maturity_release_readiness_trend_changed": false,
+      "maturity_release_readiness_ci_workflow_regression_delta": 0,
+      "maturity_release_readiness_ci_workflow_order_regression_delta": 0,
+      "maturity_release_readiness_test_coverage_regression_delta": 0,
+      "maturity_release_readiness_benchmark_suite_design_delta_count_delta": 0,
+      "maturity_release_readiness_benchmark_suite_design_regression_delta": 0,
+      "maturity_release_readiness_benchmark_design_change_delta": 0,
+      "overall_relation": "baseline",
+      "rubric_relation": "baseline",
+      "artifact_relation": "baseline",
+      "final_val_loss_relation": "baseline",
+      "explanation": "Baseline portfolio."
+    },
+    {
+      "name": "candidate",
+      "baseline_name": "baseline",
+      "is_baseline": false,
+      "status_changed": false,
+      "artifact_coverage_delta": 0.0,
+      "available_artifact_delta": 0,
+      "overall_score_delta": 9.0,
+      "rubric_avg_score_delta": 9.0,
+      "final_val_loss_delta": -0.3,
+      "dataset_warning_delta": 0,
+      "maturity_status_changed": false,
+      "maturity_release_readiness_trend_changed": true,
+      "maturity_release_readiness_ci_workflow_regression_delta": 1,
+      "maturity_release_readiness_ci_workflow_order_regression_delta": 0,
+      "maturity_release_readiness_test_coverage_regression_delta": 0,
+      "maturity_release_readiness_benchmark_suite_design_delta_count_delta": 0,
+      "maturity_release_readiness_benchmark_suite_design_regression_delta": 0,
+      "maturity_release_readiness_benchmark_design_change_delta": 0,
+      "overall_relation": "improved",
+      "rubric_relation": "improved",
+      "artifact_relation": "stable",
+      "final_val_loss_relation": "improved",
+      "explanation": "overall +9; final val loss -0.3; release-readiness CI regressed (boundary_gate_plan_check_not_ready:1)"
+    }
+  ],
+  "summary": {
+    "portfolio_count": 2,
+    "baseline_name": "baseline",
+    "completed_count": 2,
+    "failed_count": 0,
+    "planned_count": 0,
+    "artifact_regression_count": 0,
+    "score_improvement_count": 1,
+    "score_regression_count": 0,
+    "loss_improvement_count": 1,
+    "loss_regression_count": 0,
+    "dataset_warning_count": 0,
+    "maturity_review_count": 0,
+    "maturity_review_names": [],
+    "maturity_ci_regression_count": 1,
+    "maturity_ci_regression_names": [
+      "candidate"
+    ],
+    "maturity_ci_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "maturity_coverage_regression_count": 0,
+    "maturity_coverage_regression_names": [],
+    "maturity_suite_design_regression_count": 0,
+    "maturity_suite_design_regression_names": [],
+    "best_score_name": "candidate",
+    "best_score_maturity_status": "ready",
+    "best_score_maturity_release_readiness_trend": "ci-regressed",
+    "best_score_maturity_release_readiness_ci_workflow_regression_count": 1,
+    "best_score_maturity_release_readiness_ci_workflow_order_regression_count": 0,
+    "best_score_maturity_release_readiness_ci_workflow_regression_reasons": [
+      "boundary_gate_plan_check_not_ready"
+    ],
+    "best_score_maturity_release_readiness_ci_workflow_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+    "best_score_maturity_release_readiness_test_coverage_regression_count": 0,
+    "best_score_maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+    "best_score_maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+    "best_score_maturity_release_readiness_benchmark_design_change_delta_count": 0,
+    "best_artifact_name": "baseline",
+    "lowest_val_loss_name": "candidate",
+    "review_action_count": 1,
+    "blocker_action_count": 1
+  },
+  "best_by_overall_score": {
+    "name": "candidate",
+    "index": 2,
+    "source_path": "d\\447\\解释\\portfolio-fixture\\candidate\\training_portfolio.json",
+    "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+    "run_name": "candidate",
+    "dataset_name": "candidate-dataset",
+    "dataset_version": "v1",
+    "dataset": "candidate-dataset@v1",
+    "status": "completed",
+    "execute": true,
+    "step_count": 2,
+    "completed_steps": 2,
+    "failed_step": null,
+    "artifact_count": 8,
+    "available_artifact_count": 8,
+    "artifact_coverage": 1.0,
+    "core_artifacts": [
+      {
+        "key": "run_manifest",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\run_manifest.json",
+        "exists": true
+      },
+      {
+        "key": "eval_suite",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\eval_suite.json",
+        "exists": true
+      },
+      {
+        "key": "generation_quality",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\generation-quality\\generation_quality.json",
+        "exists": true
+      },
+      {
+        "key": "benchmark_scorecard",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+        "exists": true
+      },
+      {
+        "key": "dataset_card",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\dataset\\dataset_card.json",
+        "exists": true
+      },
+      {
+        "key": "registry",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\registry\\registry.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_summary",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-summary\\maturity_summary.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_narrative",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-narrative\\maturity_narrative.json",
+        "exists": true
+      }
+    ],
+    "overall_status": "pass",
+    "overall_score": 91.0,
+    "rubric_status": "pass",
+    "rubric_avg_score": 90.0,
+    "weakest_rubric_case": "candidate",
+    "weakest_rubric_score": 87.0,
+    "best_val_loss": 0.85,
+    "final_val_loss": 0.9,
+    "last_loss": 0.9,
+    "parameter_count": 123456,
+    "token_count": 1200,
+    "train_token_count": null,
+    "val_token_count": null,
+    "eval_suite_name": "v447-boundary-plan",
+    "eval_suite_version": null,
+    "eval_case_count": 5,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_warn_count": 0,
+    "generation_quality_fail_count": 0,
+    "generation_quality_avg_unique_ratio": 0.72,
+    "dataset_readiness_status": "ready",
+    "dataset_quality_status": "pass",
+    "dataset_warning_count": 0,
+    "maturity_portfolio_status": "ready",
+    "maturity_release_readiness_trend": "ci-regressed",
+    "maturity_release_readiness_ci_workflow_regression_count": 1,
+    "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+    "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+    "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+    "maturity_release_readiness_ci_workflow_regression_reasons": [
+      "boundary_gate_plan_check_not_ready"
+    ],
+    "maturity_release_readiness_ci_workflow_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+    "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+    "maturity_release_readiness_test_coverage_regression_count": 0,
+    "maturity_release_readiness_test_coverage_status_changed_count": 0,
+    "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+    "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+    "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+    "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+    "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+    "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+    "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+    "maturity_request_history_status": "pass"
+  },
+  "best_by_rubric_avg_score": {
+    "name": "candidate",
+    "index": 2,
+    "source_path": "d\\447\\解释\\portfolio-fixture\\candidate\\training_portfolio.json",
+    "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+    "run_name": "candidate",
+    "dataset_name": "candidate-dataset",
+    "dataset_version": "v1",
+    "dataset": "candidate-dataset@v1",
+    "status": "completed",
+    "execute": true,
+    "step_count": 2,
+    "completed_steps": 2,
+    "failed_step": null,
+    "artifact_count": 8,
+    "available_artifact_count": 8,
+    "artifact_coverage": 1.0,
+    "core_artifacts": [
+      {
+        "key": "run_manifest",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\run_manifest.json",
+        "exists": true
+      },
+      {
+        "key": "eval_suite",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\eval_suite.json",
+        "exists": true
+      },
+      {
+        "key": "generation_quality",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\generation-quality\\generation_quality.json",
+        "exists": true
+      },
+      {
+        "key": "benchmark_scorecard",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+        "exists": true
+      },
+      {
+        "key": "dataset_card",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\dataset\\dataset_card.json",
+        "exists": true
+      },
+      {
+        "key": "registry",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\registry\\registry.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_summary",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-summary\\maturity_summary.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_narrative",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-narrative\\maturity_narrative.json",
+        "exists": true
+      }
+    ],
+    "overall_status": "pass",
+    "overall_score": 91.0,
+    "rubric_status": "pass",
+    "rubric_avg_score": 90.0,
+    "weakest_rubric_case": "candidate",
+    "weakest_rubric_score": 87.0,
+    "best_val_loss": 0.85,
+    "final_val_loss": 0.9,
+    "last_loss": 0.9,
+    "parameter_count": 123456,
+    "token_count": 1200,
+    "train_token_count": null,
+    "val_token_count": null,
+    "eval_suite_name": "v447-boundary-plan",
+    "eval_suite_version": null,
+    "eval_case_count": 5,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_warn_count": 0,
+    "generation_quality_fail_count": 0,
+    "generation_quality_avg_unique_ratio": 0.72,
+    "dataset_readiness_status": "ready",
+    "dataset_quality_status": "pass",
+    "dataset_warning_count": 0,
+    "maturity_portfolio_status": "ready",
+    "maturity_release_readiness_trend": "ci-regressed",
+    "maturity_release_readiness_ci_workflow_regression_count": 1,
+    "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+    "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+    "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+    "maturity_release_readiness_ci_workflow_regression_reasons": [
+      "boundary_gate_plan_check_not_ready"
+    ],
+    "maturity_release_readiness_ci_workflow_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+    "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+    "maturity_release_readiness_test_coverage_regression_count": 0,
+    "maturity_release_readiness_test_coverage_status_changed_count": 0,
+    "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+    "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+    "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+    "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+    "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+    "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+    "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+    "maturity_request_history_status": "pass"
+  },
+  "best_by_artifact_coverage": {
+    "name": "baseline",
+    "index": 1,
+    "source_path": "d\\447\\解释\\portfolio-fixture\\baseline\\training_portfolio.json",
+    "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+    "run_name": "baseline",
+    "dataset_name": "baseline-dataset",
+    "dataset_version": "v1",
+    "dataset": "baseline-dataset@v1",
+    "status": "completed",
+    "execute": true,
+    "step_count": 2,
+    "completed_steps": 2,
+    "failed_step": null,
+    "artifact_count": 8,
+    "available_artifact_count": 8,
+    "artifact_coverage": 1.0,
+    "core_artifacts": [
+      {
+        "key": "run_manifest",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\run_manifest.json",
+        "exists": true
+      },
+      {
+        "key": "eval_suite",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\eval_suite.json",
+        "exists": true
+      },
+      {
+        "key": "generation_quality",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\generation-quality\\generation_quality.json",
+        "exists": true
+      },
+      {
+        "key": "benchmark_scorecard",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+        "exists": true
+      },
+      {
+        "key": "dataset_card",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\dataset\\dataset_card.json",
+        "exists": true
+      },
+      {
+        "key": "registry",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\registry\\registry.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_summary",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-summary\\maturity_summary.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_narrative",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-narrative\\maturity_narrative.json",
+        "exists": true
+      }
+    ],
+    "overall_status": "pass",
+    "overall_score": 82.0,
+    "rubric_status": "pass",
+    "rubric_avg_score": 81.0,
+    "weakest_rubric_case": "baseline",
+    "weakest_rubric_score": 78.0,
+    "best_val_loss": 1.15,
+    "final_val_loss": 1.2,
+    "last_loss": 1.2,
+    "parameter_count": 123456,
+    "token_count": 1200,
+    "train_token_count": null,
+    "val_token_count": null,
+    "eval_suite_name": "v447-boundary-plan",
+    "eval_suite_version": null,
+    "eval_case_count": 5,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_warn_count": 0,
+    "generation_quality_fail_count": 0,
+    "generation_quality_avg_unique_ratio": 0.72,
+    "dataset_readiness_status": "ready",
+    "dataset_quality_status": "pass",
+    "dataset_warning_count": 0,
+    "maturity_portfolio_status": "ready",
+    "maturity_release_readiness_trend": "stable",
+    "maturity_release_readiness_ci_workflow_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+    "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+    "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+    "maturity_release_readiness_ci_workflow_regression_reasons": [],
+    "maturity_release_readiness_ci_workflow_regression_reason_counts": {},
+    "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+    "maturity_release_readiness_test_coverage_regression_count": 0,
+    "maturity_release_readiness_test_coverage_status_changed_count": 0,
+    "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+    "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+    "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+    "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+    "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+    "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+    "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+    "maturity_request_history_status": "pass"
+  },
+  "best_by_final_val_loss": {
+    "name": "candidate",
+    "index": 2,
+    "source_path": "d\\447\\解释\\portfolio-fixture\\candidate\\training_portfolio.json",
+    "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+    "run_name": "candidate",
+    "dataset_name": "candidate-dataset",
+    "dataset_version": "v1",
+    "dataset": "candidate-dataset@v1",
+    "status": "completed",
+    "execute": true,
+    "step_count": 2,
+    "completed_steps": 2,
+    "failed_step": null,
+    "artifact_count": 8,
+    "available_artifact_count": 8,
+    "artifact_coverage": 1.0,
+    "core_artifacts": [
+      {
+        "key": "run_manifest",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\run_manifest.json",
+        "exists": true
+      },
+      {
+        "key": "eval_suite",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\eval_suite.json",
+        "exists": true
+      },
+      {
+        "key": "generation_quality",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\eval_suite\\generation-quality\\generation_quality.json",
+        "exists": true
+      },
+      {
+        "key": "benchmark_scorecard",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+        "exists": true
+      },
+      {
+        "key": "dataset_card",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\dataset\\dataset_card.json",
+        "exists": true
+      },
+      {
+        "key": "registry",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\registry\\registry.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_summary",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-summary\\maturity_summary.json",
+        "exists": true
+      },
+      {
+        "key": "maturity_narrative",
+        "path": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\candidate\\maturity-narrative\\maturity_narrative.json",
+        "exists": true
+      }
+    ],
+    "overall_status": "pass",
+    "overall_score": 91.0,
+    "rubric_status": "pass",
+    "rubric_avg_score": 90.0,
+    "weakest_rubric_case": "candidate",
+    "weakest_rubric_score": 87.0,
+    "best_val_loss": 0.85,
+    "final_val_loss": 0.9,
+    "last_loss": 0.9,
+    "parameter_count": 123456,
+    "token_count": 1200,
+    "train_token_count": null,
+    "val_token_count": null,
+    "eval_suite_name": "v447-boundary-plan",
+    "eval_suite_version": null,
+    "eval_case_count": 5,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_warn_count": 0,
+    "generation_quality_fail_count": 0,
+    "generation_quality_avg_unique_ratio": 0.72,
+    "dataset_readiness_status": "ready",
+    "dataset_quality_status": "pass",
+    "dataset_warning_count": 0,
+    "maturity_portfolio_status": "ready",
+    "maturity_release_readiness_trend": "ci-regressed",
+    "maturity_release_readiness_ci_workflow_regression_count": 1,
+    "maturity_release_readiness_ci_workflow_order_regression_count": 0,
+    "maturity_release_readiness_ci_workflow_status_changed_count": 0,
+    "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
+    "maturity_release_readiness_max_ci_workflow_order_violation_delta": 0,
+    "maturity_release_readiness_ci_workflow_regression_reasons": [
+      "boundary_gate_plan_check_not_ready"
+    ],
+    "maturity_release_readiness_ci_workflow_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+    "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+    "maturity_release_readiness_ci_drift_smoke_ready_regression_count": 0,
+    "maturity_release_readiness_test_coverage_regression_count": 0,
+    "maturity_release_readiness_test_coverage_status_changed_count": 0,
+    "maturity_release_readiness_max_test_coverage_percent_delta": 0.0,
+    "maturity_release_readiness_max_test_coverage_gap_delta": 0,
+    "maturity_release_readiness_benchmark_suite_design_delta_count": 0,
+    "maturity_release_readiness_benchmark_suite_design_regression_count": 0,
+    "maturity_release_readiness_benchmark_design_change_delta_count": 0,
+    "maturity_release_readiness_max_benchmark_suite_design_delta": 0,
+    "maturity_release_readiness_max_benchmark_design_change_delta": 0,
+    "maturity_request_history_status": "pass"
+  },
+  "review_actions": [
+    {
+      "id": "maturity-1",
+      "portfolio": "candidate",
+      "category": "maturity",
+      "severity": "blocker",
+      "reason": "best_score_ci_regressed",
+      "action": "Explain or fix release-readiness CI workflow regressions before promoting this best-scoring portfolio (boundary_gate_plan_check_not_ready:1).",
+      "evidence": {
+        "maturity_release_readiness_trend": "ci-regressed",
+        "ci_workflow_regression_count": 1,
+        "ci_workflow_order_regression_count": 0,
+        "ci_workflow_status_changed_count": 0,
+        "max_ci_workflow_failed_check_delta": 0,
+        "max_ci_workflow_order_violation_delta": 0,
+        "ci_workflow_regression_reasons": [
+          "boundary_gate_plan_check_not_ready"
+        ],
+        "ci_workflow_regression_reason_counts": {
+          "boundary_gate_plan_check_not_ready": 1
+        },
+        "ci_tiny_plan_digest_gate_ready_regression_count": 0,
+        "ci_boundary_gate_check_ready_regression_count": 0,
+        "ci_boundary_plan_check_ready_regression_count": 1,
+        "ci_drift_smoke_ready_regression_count": 0,
+        "best_score_name": "candidate"
+      }
+    }
+  ],
+  "recommendations": [
+    "Block best-score promotion until release-readiness CI workflow regressions are explained or fixed (boundary_gate_plan_check_not_ready:1)."
+  ]
+}

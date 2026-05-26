@@ -50,6 +50,7 @@ def build_training_portfolio_recommendations(
             summary.get("best_score_maturity_release_readiness_trend") == CI_REGRESSED_TREND
             or (_as_int(summary.get("best_score_maturity_release_readiness_ci_workflow_regression_count")) or 0) > 0
             or (_as_int(summary.get("best_score_maturity_release_readiness_ci_workflow_order_regression_count")) or 0) > 0
+            or (_as_int(summary.get("best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count")) or 0) > 0
         ):
             recs.append(
                 "Block best-score promotion until release-readiness CI workflow regressions are explained or fixed"
@@ -216,6 +217,18 @@ def build_training_portfolio_review_actions(
                         "max_ci_workflow_order_violation_delta": portfolio.get("maturity_release_readiness_max_ci_workflow_order_violation_delta"),
                         "ci_workflow_regression_reasons": portfolio.get("maturity_release_readiness_ci_workflow_regression_reasons"),
                         "ci_workflow_regression_reason_counts": portfolio.get("maturity_release_readiness_ci_workflow_regression_reason_counts"),
+                        "ci_tiny_plan_digest_gate_ready_regression_count": portfolio.get(
+                            "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count"
+                        ),
+                        "ci_boundary_gate_check_ready_regression_count": portfolio.get(
+                            "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count"
+                        ),
+                        "ci_boundary_plan_check_ready_regression_count": portfolio.get(
+                            "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count"
+                        ),
+                        "ci_drift_smoke_ready_regression_count": portfolio.get(
+                            "maturity_release_readiness_ci_drift_smoke_ready_regression_count"
+                        ),
                         "best_score_name": best_score_name,
                     },
                 )
@@ -285,10 +298,20 @@ def has_maturity_coverage_regression(portfolio: dict[str, Any]) -> bool:
 def has_maturity_ci_regression(portfolio: dict[str, Any]) -> bool:
     regression_count = _as_int(portfolio.get("maturity_release_readiness_ci_workflow_regression_count")) or 0
     order_regression_count = _as_int(portfolio.get("maturity_release_readiness_ci_workflow_order_regression_count")) or 0
+    ready_regression_count = sum(
+        _as_int(portfolio.get(key)) or 0
+        for key in [
+            "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count",
+            "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count",
+            "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count",
+            "maturity_release_readiness_ci_drift_smoke_ready_regression_count",
+        ]
+    )
     return (
         portfolio.get("maturity_release_readiness_trend") == CI_REGRESSED_TREND
         or regression_count > 0
         or order_regression_count > 0
+        or ready_regression_count > 0
     )
 
 

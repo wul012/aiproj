@@ -46,6 +46,18 @@ def build_maturity_narrative_summary(
         "release_readiness_ci_workflow_status_changed_count": release.get("ci_workflow_status_changed_count"),
         "release_readiness_ci_workflow_regression_reasons": release.get("ci_workflow_regression_reasons"),
         "release_readiness_ci_workflow_regression_reason_counts": release.get("ci_workflow_regression_reason_counts"),
+        "release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": release.get(
+            "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count"
+        ),
+        "release_readiness_ci_boundary_gate_check_ready_regression_count": release.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count"
+        ),
+        "release_readiness_ci_boundary_plan_check_ready_regression_count": release.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"
+        ),
+        "release_readiness_ci_drift_smoke_ready_regression_count": release.get(
+            "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"
+        ),
         "release_readiness_max_ci_workflow_failed_check_delta": release.get("max_abs_ci_workflow_failed_check_delta"),
         "release_readiness_max_ci_workflow_order_violation_delta": release.get("max_abs_ci_workflow_order_violation_delta"),
         "release_readiness_test_coverage_regression_count": release.get("test_coverage_regression_count"),
@@ -345,6 +357,22 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         maturity_summary.get("release_readiness_ci_workflow_regression_reason_counts"),
         {},
     )
+    ci_tiny_plan_regression_count = _coalesce(
+        release_context.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count"),
+        maturity_summary.get("release_readiness_ci_tiny_plan_digest_gate_ready_regression_count"),
+    )
+    ci_boundary_gate_regression_count = _coalesce(
+        release_context.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count"),
+        maturity_summary.get("release_readiness_ci_boundary_gate_check_ready_regression_count"),
+    )
+    ci_boundary_plan_regression_count = _coalesce(
+        release_context.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"),
+        maturity_summary.get("release_readiness_ci_boundary_plan_check_ready_regression_count"),
+    )
+    ci_drift_smoke_regression_count = _coalesce(
+        release_context.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"),
+        maturity_summary.get("release_readiness_ci_drift_smoke_ready_regression_count"),
+    )
     suite_design_delta_count = _coalesce(
         release_context.get("benchmark_history_suite_design_non_comparison_ready_delta_count"),
         maturity_summary.get("release_readiness_benchmark_suite_design_delta_count"),
@@ -391,6 +419,10 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         ),
         "ci_workflow_regression_reasons": _string_list(ci_regression_reasons),
         "ci_workflow_regression_reason_counts": _dict(ci_regression_reason_counts),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": ci_tiny_plan_regression_count,
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": ci_boundary_gate_regression_count,
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": ci_boundary_plan_regression_count,
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": ci_drift_smoke_regression_count,
         "max_abs_ci_workflow_failed_check_delta": _coalesce(
             release_context.get("max_abs_ci_workflow_failed_check_delta"),
             maturity_summary.get("release_readiness_max_ci_workflow_failed_check_delta"),

@@ -1,0 +1,44 @@
+{
+  "git": {
+    "short_commit": "v447demo",
+    "dirty": false
+  },
+  "training": {
+    "tokenizer": "char",
+    "args": {
+      "max_iters": 2
+    }
+  },
+  "data": {
+    "source": {
+      "kind": "fixture"
+    },
+    "dataset_quality": {
+      "status": "pass",
+      "short_fingerprint": "v447boundary"
+    },
+    "dataset_version": {
+      "id": "v447-boundary-plan-dataset",
+      "short_fingerprint": "v447boundary"
+    }
+  },
+  "model": {
+    "parameter_count": 1234
+  },
+  "results": {
+    "history_summary": {
+      "best_val_loss": 1.0,
+      "last_val_loss": 1.1
+    }
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "exists": true
+    },
+    {
+      "key": "release_readiness_comparison",
+      "exists": true
+    }
+  ]
+}

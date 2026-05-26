@@ -56,6 +56,7 @@ class RegistryRankingsTests(unittest.TestCase):
                 readiness_trend="regressed",
                 readiness_ci_regression=True,
                 readiness_ci_order_regression=True,
+                readiness_ci_boundary_plan_regression=True,
             )
 
             pair_rows = collect_pair_delta_rows([run_a, run_b], ["A", "B"])
@@ -73,12 +74,18 @@ class RegistryRankingsTests(unittest.TestCase):
             self.assertEqual(readiness_summary["improved_count"], 1)
             self.assertEqual(readiness_summary["ci_workflow_regression_count"], 1)
             self.assertEqual(readiness_summary["ci_workflow_order_regression_count"], 1)
+            self.assertEqual(readiness_summary["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"], 1)
+            self.assertEqual(
+                readiness_summary["ci_workflow_regression_reason_counts"]["boundary_gate_plan_check_not_ready"],
+                1,
+            )
             self.assertEqual(readiness_summary["max_abs_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(readiness_summary["max_abs_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(readiness_leader["run_name"], "B")
             self.assertEqual(readiness_leader["delta_status"], "regressed")
             self.assertEqual(readiness_leader["ci_workflow_failed_check_delta"], 2)
             self.assertEqual(readiness_leader["ci_workflow_order_violation_delta"], 1)
+            self.assertTrue(readiness_leader["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed"])
             self.assertEqual(counts(["pass", "warn", "pass"]), {"pass": 2, "warn": 1})
 
 

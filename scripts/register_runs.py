@@ -62,6 +62,16 @@ def main() -> None:
         )
     )
     print(
+        "release_readiness_ci_boundary_plan_check_ready_regression_count="
+        + json.dumps(
+            registry.get("release_readiness_delta_summary", {}).get(
+                "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count",
+                0,
+            ),
+            ensure_ascii=False,
+        )
+    )
+    print(
         "release_readiness_benchmark_history_regressions="
         + json.dumps(registry.get("release_readiness_delta_summary", {}).get("benchmark_history_regression_count", 0), ensure_ascii=False)
     )

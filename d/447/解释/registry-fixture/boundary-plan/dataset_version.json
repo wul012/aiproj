@@ -1,0 +1,18 @@
+{
+  "dataset": {
+    "id": "v447-boundary-plan-dataset"
+  },
+  "stats": {
+    "short_fingerprint": "v447boundary",
+    "included_source_count": 2,
+    "skipped_source_count": 0,
+    "char_count": 447
+  },
+  "preparation": {
+    "dedupe_exact_sources": false
+  },
+  "snapshot": {
+    "dedupe_policy": "none",
+    "source_order_digest": "order-v447-boundary-plan"
+  }
+}

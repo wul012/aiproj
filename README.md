@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 446 makes release readiness comparison treat CI boundary plan-check readiness as a first-class regression signal, even when the compared release status stays ready.
+Version `v447.0.0` carries release readiness CI boundary plan-check regression counts from registry summaries into maturity summaries, maturity narratives, and training portfolio comparison review actions.
+
+## Latest v447 checkpoint
+
+- Registry release-readiness delta summaries now count tiny plan digest, boundary gate check, boundary plan check, and drift-contract smoke readiness regressions as named CI boundary counters.
+- Maturity summary and maturity narrative outputs expose the same counters, so the boundary plan-check regression is visible beyond the raw release readiness comparison artifact.
+- Training portfolio comparison rows, summaries, Markdown, HTML, CSV, CLI output, and review actions now preserve `ci_boundary_plan_check_ready_regression_count`.
+- Best-score portfolio promotion is blocked when the selected candidate carries release-readiness CI boundary plan-check regression evidence.
+- Archived registry, maturity, portfolio comparison, and Playwright MCP screenshot evidence in `d/447`.
 
 ## Latest v446 checkpoint
 

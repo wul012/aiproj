@@ -234,6 +234,18 @@ def _summary(
         "release_readiness_ci_workflow_status_changed_count": release_readiness_context.get("ci_workflow_status_changed_count"),
         "release_readiness_ci_workflow_regression_reasons": release_readiness_context.get("ci_workflow_regression_reasons"),
         "release_readiness_ci_workflow_regression_reason_counts": release_readiness_context.get("ci_workflow_regression_reason_counts"),
+        "release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": release_readiness_context.get(
+            "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count"
+        ),
+        "release_readiness_ci_boundary_gate_check_ready_regression_count": release_readiness_context.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count"
+        ),
+        "release_readiness_ci_boundary_plan_check_ready_regression_count": release_readiness_context.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"
+        ),
+        "release_readiness_ci_drift_smoke_ready_regression_count": release_readiness_context.get(
+            "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"
+        ),
         "release_readiness_max_ci_workflow_failed_check_delta": release_readiness_context.get("max_abs_ci_workflow_failed_check_delta"),
         "release_readiness_max_ci_workflow_order_violation_delta": release_readiness_context.get("max_abs_ci_workflow_order_violation_delta"),
         "release_readiness_test_coverage_regression_count": release_readiness_context.get("test_coverage_regression_count"),
@@ -363,6 +375,10 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "ci_workflow_status_changed_count": None,
             "ci_workflow_regression_reasons": [],
             "ci_workflow_regression_reason_counts": {},
+            "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": None,
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": None,
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": None,
+            "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": None,
             "max_abs_ci_workflow_failed_check_delta": None,
             "max_abs_ci_workflow_order_violation_delta": None,
             "test_coverage_regression_count": None,
@@ -407,6 +423,18 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         "ci_workflow_status_changed_count": delta_summary.get("ci_workflow_status_changed_count"),
         "ci_workflow_regression_reasons": _string_list(delta_summary.get("ci_workflow_regression_reasons")),
         "ci_workflow_regression_reason_counts": _dict(delta_summary.get("ci_workflow_regression_reason_counts")),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": delta_summary.get(
+            "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count"
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": delta_summary.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count"
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": delta_summary.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"
+        ),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": delta_summary.get(
+            "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"
+        ),
         "max_abs_ci_workflow_failed_check_delta": delta_summary.get("max_abs_ci_workflow_failed_check_delta"),
         "max_abs_ci_workflow_order_violation_delta": delta_summary.get("max_abs_ci_workflow_order_violation_delta"),
         "test_coverage_regression_count": delta_summary.get("test_coverage_regression_count"),

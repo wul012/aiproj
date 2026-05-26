@@ -46,6 +46,10 @@ def write_training_portfolio_comparison_csv(report: dict[str, Any], path: str | 
         "maturity_release_readiness_max_ci_workflow_order_violation_delta",
         "maturity_release_readiness_ci_workflow_regression_reasons",
         "maturity_release_readiness_ci_workflow_regression_reason_counts",
+        "maturity_release_readiness_ci_tiny_plan_digest_gate_ready_regression_count",
+        "maturity_release_readiness_ci_boundary_gate_check_ready_regression_count",
+        "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count",
+        "maturity_release_readiness_ci_drift_smoke_ready_regression_count",
         "maturity_release_readiness_test_coverage_regression_count",
         "maturity_release_readiness_test_coverage_status_changed_count",
         "maturity_release_readiness_max_test_coverage_percent_delta",
@@ -111,6 +115,10 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
         f"| Maturity CI regressions | {_md(summary.get('maturity_ci_regression_count'))} |",
         f"| Maturity CI portfolios | {_md(', '.join(_string_list(summary.get('maturity_ci_regression_names'))) or 'none')} |",
         f"| Maturity CI regression reasons | {_md(_fmt_mapping(summary.get('maturity_ci_regression_reason_counts')))} |",
+        (
+            f"| Best score CI boundary plan regressions | "
+            f"{_md(summary.get('best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count'))} |"
+        ),
         f"| Maturity coverage regressions | {_md(summary.get('maturity_coverage_regression_count'))} |",
         f"| Maturity coverage portfolios | {_md(', '.join(_string_list(summary.get('maturity_coverage_regression_names'))) or 'none')} |",
         f"| Maturity suite-design regressions | {_md(summary.get('maturity_suite_design_regression_count'))} |",
@@ -148,6 +156,7 @@ def render_training_portfolio_comparison_markdown(report: dict[str, Any]) -> str
                         f"{portfolio.get('maturity_release_readiness_trend') or 'missing'} / "
                         f"ci={portfolio.get('maturity_release_readiness_ci_workflow_regression_count') or 0} / "
                         f"ci_order={portfolio.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0} / "
+                        f"ci_boundary_plan={portfolio.get('maturity_release_readiness_ci_boundary_plan_check_ready_regression_count') or 0} / "
                         f"ci_reasons={_fmt_mapping(portfolio.get('maturity_release_readiness_ci_workflow_regression_reason_counts'))} / "
                         f"coverage={portfolio.get('maturity_release_readiness_test_coverage_regression_count') or 0} / "
                         f"suite={portfolio.get('maturity_release_readiness_benchmark_suite_design_regression_count') or 0}"
@@ -219,6 +228,7 @@ def render_training_portfolio_comparison_html(report: dict[str, Any]) -> str:
         ("CI regressions", summary.get("maturity_ci_regression_count")),
         ("CI regression portfolios", ", ".join(_string_list(summary.get("maturity_ci_regression_names"))) or "none"),
         ("CI regression reasons", _fmt_mapping(summary.get("maturity_ci_regression_reason_counts"))),
+        ("Best score CI boundary plan", summary.get("best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count")),
         ("Coverage regressions", summary.get("maturity_coverage_regression_count")),
         ("Coverage regression portfolios", ", ".join(_string_list(summary.get("maturity_coverage_regression_names"))) or "none"),
         ("Suite-design regressions", summary.get("maturity_suite_design_regression_count")),
@@ -312,7 +322,7 @@ def _portfolio_table(report: dict[str, Any]) -> str:
             f"<td>{_e(_fmt(item.get('rubric_avg_score')))}<br><span>{_e(_fmt_signed(delta.get('rubric_avg_score_delta')))}</span></td>"
             f"<td>{_e(_fmt(item.get('final_val_loss')))}<br><span>{_e(delta.get('final_val_loss_relation'))}</span></td>"
             f"<td>{_e(item.get('dataset_readiness_status'))}<br><span>warnings={_e(item.get('dataset_warning_count'))}</span></td>"
-            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / ci={_e(item.get('maturity_release_readiness_ci_workflow_regression_count') or 0)} / ci_order={_e(item.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0)} / ci_reasons={_e(_fmt_mapping(item.get('maturity_release_readiness_ci_workflow_regression_reason_counts')))} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)} / suite={_e(item.get('maturity_release_readiness_benchmark_suite_design_regression_count') or 0)}</span></td>"
+            f"<td>{_e(item.get('maturity_portfolio_status'))}<br><span>{_e(item.get('maturity_release_readiness_trend') or 'missing')} / ci={_e(item.get('maturity_release_readiness_ci_workflow_regression_count') or 0)} / ci_order={_e(item.get('maturity_release_readiness_ci_workflow_order_regression_count') or 0)} / ci_boundary_plan={_e(item.get('maturity_release_readiness_ci_boundary_plan_check_ready_regression_count') or 0)} / ci_reasons={_e(_fmt_mapping(item.get('maturity_release_readiness_ci_workflow_regression_reason_counts')))} / coverage={_e(item.get('maturity_release_readiness_test_coverage_regression_count') or 0)} / suite={_e(item.get('maturity_release_readiness_benchmark_suite_design_regression_count') or 0)}</span></td>"
             f"<td>{_e(delta.get('explanation'))}</td>"
             "</tr>"
         )

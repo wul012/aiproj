@@ -25,6 +25,7 @@ def make_run(
     readiness_trend: str | None = None,
     readiness_ci_regression: bool = False,
     readiness_ci_order_regression: bool = False,
+    readiness_ci_boundary_plan_regression: bool = False,
     readiness_ci_regression_reasons: list[str] | None = None,
     readiness_coverage_regression: bool = False,
     readiness_benchmark_regression: bool = False,
@@ -206,11 +207,13 @@ def make_run(
             improved_count = 1
             regressed_count = 0
             changed_panels = ["release_gate:fail->pass"]
-        ci_regression_count = 1 if readiness_ci_regression else 0
+        ci_regression_count = 1 if readiness_ci_regression or readiness_ci_boundary_plan_regression else 0
         ci_order_regression_count = 1 if readiness_ci_order_regression else 0
         ci_regression_reasons = readiness_ci_regression_reasons or (
             ["failed_checks_increased", "workflow_status_downgraded"] if readiness_ci_regression else []
         )
+        if readiness_ci_boundary_plan_regression and "boundary_gate_plan_check_not_ready" not in ci_regression_reasons:
+            ci_regression_reasons = [*ci_regression_reasons, "boundary_gate_plan_check_not_ready"]
         baseline_ci_status = "pass"
         compared_ci_status = "fail" if readiness_ci_regression else "pass"
         ci_failed_delta = 2 if readiness_ci_regression else 0
@@ -261,6 +264,9 @@ def make_run(
                 "ci_workflow_order_regression_count": ci_order_regression_count,
                 "ci_workflow_regression_reasons": ci_regression_reasons,
                 "ci_workflow_regression_reason_counts": {reason: ci_regression_reasons.count(reason) for reason in ci_regression_reasons},
+                "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": (
+                    1 if readiness_ci_boundary_plan_regression else 0
+                ),
                 "test_coverage_regression_count": coverage_regression_count,
                 "benchmark_history_delta_count": benchmark_history_delta_count,
                 "benchmark_history_regression_count": benchmark_history_regression_count,
@@ -283,6 +289,7 @@ def make_run(
                     "ci_workflow_order_violation_delta": ci_order_delta,
                     "ci_workflow_status_changed": readiness_ci_regression,
                     "ci_workflow_regression_reasons": ci_regression_reasons,
+                    "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed": readiness_ci_boundary_plan_regression,
                     "baseline_test_coverage_status": baseline_coverage_status,
                     "compared_test_coverage_status": compared_coverage_status,
                     "test_coverage_percent_delta": coverage_percent_delta,

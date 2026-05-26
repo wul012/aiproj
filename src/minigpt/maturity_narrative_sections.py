@@ -165,6 +165,7 @@ def _release_claim(summary: dict[str, Any]) -> str:
         f"CI workflow regressions={summary.get('release_readiness_ci_workflow_regression_count') or 0}, "
         f"CI order regressions={summary.get('release_readiness_ci_workflow_order_regression_count') or 0}, "
         f"CI regression reasons={_fmt_mapping(summary.get('release_readiness_ci_workflow_regression_reason_counts'))}, "
+        f"CI boundary plan regressions={summary.get('release_readiness_ci_boundary_plan_check_ready_regression_count') or 0}, "
         f"max order violation delta={summary.get('release_readiness_max_ci_workflow_order_violation_delta') if summary.get('release_readiness_max_ci_workflow_order_violation_delta') is not None else 'missing'}, "
         f"test coverage regressions={summary.get('release_readiness_test_coverage_regression_count') or 0}, "
         f"max coverage gap delta={summary.get('release_readiness_max_test_coverage_gap_delta') if summary.get('release_readiness_max_test_coverage_gap_delta') is not None else 'missing'}, "

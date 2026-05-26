@@ -1,0 +1,9 @@
+key,title,status,maturity_level,target_level,score_percent,covered_count,target_count,covered_versions,missing_versions,next_step
+model_core,Model Core,pass,4,4,100.0,8,8,1; 2; 3; 4; 5; 6; 7; 10,,Train larger baselines and compare scale/quality changes on fixed benchmark prompts.
+data_reproducibility,Data And Reproducibility,pass,4,4,100.0,6,6,13; 14; 15; 16; 35; 36,,Add dataset cards and stable train/validation/test split policies for larger corpora.
+evaluation_benchmarks,Evaluation Benchmarks,pass,4,4,100.0,9,9,16; 28; 35; 37; 43; 44; 45; 46; 47,,Consolidate eval and pair outputs into one benchmark suite with task-level pass/fail scoring.
+local_inference,Local Inference And Playground,pass,5,5,100.0,13,13,11; 12; 38; 39; 40; 41; 42; 55; 56; 57; 58; 59; 60,,Connect request history stability summaries to audit/release handoff when local serving evidence becomes release-relevant.
+registry_reporting,Registry And Reporting,pass,5,5,100.0,13,13,8; 9; 17; 18; 19; 20; 21; 22; 23; 24; 46; 47; 64,,Feed release readiness trend context into maturity review and release summaries.
+release_governance,Release Governance,pass,5,5,100.0,13,13,25; 26; 27; 28; 29; 30; 31; 32; 33; 34; 61; 62; 63,,Use release readiness trend context to guide maturity and release review instead of adding more gate variants.
+documentation_evidence,Documentation And Evidence,pass,5,5,100.0,12,12,1; 8; 13; 23; 32; 35; 45; 46; 47; 48; 64; 65,,Keep future code explanations tied to concrete evidence and summarize phases instead of expanding every small link change.
+project_synthesis,Project Synthesis,pass,4,4,100.0,15,15,23; 24; 25; 26; 27; 37; 46; 47; 48; 60; 61; 62; 63; 64; 65,,"Use maturity trend context to choose the next real capability: larger data, benchmark hardening, or serving review."

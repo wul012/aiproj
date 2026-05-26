@@ -5,6 +5,14 @@ from pathlib import Path
 from typing import Any
 
 
+CI_READY_REGRESSION_REASON_FIELDS = {
+    "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed": "tiny_scorecard_plan_digest_gate_not_ready",
+    "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed": "boundary_gate_check_not_ready",
+    "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed": "boundary_gate_plan_check_not_ready",
+    "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed": "drift_contract_smoke_not_ready",
+}
+
+
 def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list[str] | None) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for index, run_dir in enumerate(run_dirs):
@@ -31,6 +39,10 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                 removed_failed_reasons,
             )
             ci_regression_reasons = _ci_workflow_regression_reasons(delta)
+            ci_ready_regression_flags = {
+                key: bool(delta.get(key))
+                for key in CI_READY_REGRESSION_REASON_FIELDS
+            }
             rows.append(
                 {
                     "run_name": run_name,
@@ -48,6 +60,7 @@ def collect_release_readiness_delta_rows(run_dirs: list[str | Path], names: list
                     "ci_workflow_order_violation_delta": _int_if_whole(_as_optional_float(delta.get("ci_workflow_order_violation_delta"))),
                     "ci_workflow_status_changed": bool(delta.get("ci_workflow_status_changed")),
                     "ci_workflow_regression_reasons": ci_regression_reasons,
+                    **ci_ready_regression_flags,
                     "baseline_test_coverage_status": _as_str(delta.get("baseline_test_coverage_status")),
                     "compared_test_coverage_status": _as_str(delta.get("compared_test_coverage_status")),
                     "test_coverage_percent_delta": _int_if_whole(_as_optional_float(delta.get("test_coverage_percent_delta"))),
@@ -209,6 +222,22 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
         "ci_workflow_regression_reason_counts": _counts(
             reason for row in rows for reason in _as_str_list(row.get("ci_workflow_regression_reasons"))
         ),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": _true_count(
+            rows,
+            "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed",
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": _true_count(
+            rows,
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed",
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": _true_count(
+            rows,
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed",
+        ),
+        "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": _true_count(
+            rows,
+            "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed",
+        ),
         "max_abs_ci_workflow_failed_check_delta": _int_if_whole(max(ci_failed_deltas)) if ci_failed_deltas else None,
         "max_abs_ci_workflow_order_violation_delta": _int_if_whole(max(ci_order_deltas)) if ci_order_deltas else None,
         "test_coverage_regression_count": sum(1 for row in rows if _is_test_coverage_regression_row(row)),
@@ -313,8 +342,9 @@ def _ci_workflow_regression_reasons(delta: dict[str, Any]) -> list[str]:
     order_delta = _as_optional_float(delta.get("ci_workflow_order_violation_delta"))
     if order_delta is not None and order_delta > 0:
         reasons.append("order_violations_increased")
-    if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
-        reasons.append("drift_contract_smoke_not_ready")
+    for field, reason in CI_READY_REGRESSION_REASON_FIELDS.items():
+        if delta.get(field):
+            reasons.append(reason)
     if delta.get("ci_workflow_status_changed"):
         if _ci_status_score(delta.get("compared_ci_workflow_status")) < _ci_status_score(delta.get("baseline_ci_workflow_status")):
             reasons.append("workflow_status_downgraded")
@@ -472,6 +502,10 @@ def _counts(values: Any) -> dict[str, int]:
         key = str(value)
         result[key] = result.get(key, 0) + 1
     return result
+
+
+def _true_count(rows: list[dict[str, Any]], key: str) -> int:
+    return sum(1 for row in rows if bool(row.get(key)))
 
 
 __all__ = [

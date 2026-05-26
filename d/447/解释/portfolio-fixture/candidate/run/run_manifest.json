@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "data": {
+    "token_count": 1200
+  },
+  "model": {
+    "parameter_count": 123456
+  },
+  "results": {
+    "last_loss": 0.9,
+    "history_summary": {
+      "best_val_loss": 0.85,
+      "last_val_loss": 0.9
+    }
+  }
+}

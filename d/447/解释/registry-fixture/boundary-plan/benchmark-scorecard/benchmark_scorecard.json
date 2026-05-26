@@ -1,0 +1,14 @@
+{
+  "schema_version": 3,
+  "summary": {
+    "overall_status": "pass",
+    "overall_score": 88,
+    "rubric_status": "pass",
+    "rubric_avg_score": 86,
+    "rubric_pass_count": 2,
+    "rubric_warn_count": 0,
+    "rubric_fail_count": 0,
+    "weakest_rubric_case": "v447-boundary-plan",
+    "weakest_rubric_score": 82
+  }
+}

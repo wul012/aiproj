@@ -1,0 +1,11 @@
+{
+  "schema_version": 3,
+  "summary": {
+    "overall_status": "pass",
+    "overall_score": 82.0,
+    "rubric_status": "pass",
+    "rubric_avg_score": 81.0,
+    "weakest_rubric_case": "baseline",
+    "weakest_rubric_score": 78.0
+  }
+}

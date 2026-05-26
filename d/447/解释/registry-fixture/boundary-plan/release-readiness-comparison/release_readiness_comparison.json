@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "status": "ci-regressed",
+    "readiness_count": 2,
+    "baseline_release": "v446",
+    "baseline_status": "ready",
+    "ready_count": 2,
+    "review_count": 0,
+    "blocked_count": 0,
+    "improved_count": 0,
+    "regressed_count": 0,
+    "changed_panel_delta_count": 1,
+    "ci_workflow_regression_count": 1,
+    "ci_workflow_order_regression_count": 0,
+    "ci_workflow_regression_reasons": [
+      "boundary_gate_plan_check_not_ready"
+    ],
+    "ci_workflow_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": 0,
+    "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": 0,
+    "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": 1,
+    "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": 0,
+    "test_coverage_regression_count": 0,
+    "benchmark_history_delta_count": 0,
+    "benchmark_history_regression_count": 0,
+    "benchmark_history_suite_design_non_comparison_ready_delta_count": 0,
+    "benchmark_history_suite_design_non_comparison_ready_regression_count": 0,
+    "benchmark_history_design_comparison_changed_delta_count": 0
+  },
+  "deltas": [
+    {
+      "baseline_release": "v446",
+      "compared_release": "v447-boundary-plan",
+      "baseline_status": "ready",
+      "compared_status": "ready",
+      "status_delta": 0,
+      "delta_status": "ci-regressed",
+      "baseline_ci_workflow_status": "pass",
+      "compared_ci_workflow_status": "pass",
+      "ci_workflow_failed_check_delta": 0,
+      "ci_workflow_required_order_delta": 0,
+      "ci_workflow_order_violation_delta": 0,
+      "ci_workflow_status_changed": false,
+      "ci_workflow_regression_reasons": [],
+      "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed": false,
+      "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed": false,
+      "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed": true,
+      "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed": false,
+      "baseline_test_coverage_status": "pass",
+      "compared_test_coverage_status": "pass",
+      "test_coverage_percent_delta": 0,
+      "test_coverage_gap_delta": 0,
+      "test_coverage_status_changed": false,
+      "baseline_benchmark_history_status": "pass",
+      "compared_benchmark_history_status": "pass",
+      "benchmark_history_status_delta": 0,
+      "benchmark_history_status_changed": false,
+      "benchmark_history_suite_design_non_comparison_ready_entries_delta": 0,
+      "benchmark_history_design_comparison_changed_entries_delta": 0,
+      "baseline_benchmark_history_readiness_requirement_status": "pass",
+      "compared_benchmark_history_readiness_requirement_status": "pass",
+      "benchmark_history_readiness_requirement_status_changed": false,
+      "benchmark_history_readiness_requirement_exit_code_delta": 0,
+      "baseline_benchmark_history_readiness_requirement_failed_reasons": [],
+      "compared_benchmark_history_readiness_requirement_failed_reasons": [],
+      "explanation": "ready-to-ready comparison regresses only boundary gate plan-check readiness"
+    }
+  ]
+}

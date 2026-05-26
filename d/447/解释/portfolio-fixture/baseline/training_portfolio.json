@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "title": "baseline training portfolio",
+  "project_root": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture",
+  "run_name": "baseline",
+  "dataset_name": "baseline-dataset",
+  "dataset_version": "v1",
+  "artifacts": {
+    "benchmark_scorecard": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+    "dataset_card": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\dataset\\dataset_card.json",
+    "maturity_narrative": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-narrative\\maturity_narrative.json",
+    "run_manifest": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\run_manifest.json",
+    "eval_suite": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\eval_suite.json",
+    "generation_quality": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\run\\eval_suite\\generation-quality\\generation_quality.json",
+    "registry": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\registry\\registry.json",
+    "maturity_summary": "D:\\aiproj\\d\\447\\解释\\portfolio-fixture\\baseline\\maturity-summary\\maturity_summary.json"
+  },
+  "steps": [
+    {
+      "key": "train"
+    },
+    {
+      "key": "eval_suite"
+    }
+  ],
+  "execution": {
+    "status": "completed",
+    "execute": true,
+    "step_count": 2,
+    "completed_steps": 2,
+    "failed_step": null,
+    "artifact_count": 8,
+    "available_artifact_count": 8
+  }
+}

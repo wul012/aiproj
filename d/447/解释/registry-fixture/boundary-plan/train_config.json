@@ -1,0 +1,4 @@
+{
+  "tokenizer": "char",
+  "max_iters": 2
+}

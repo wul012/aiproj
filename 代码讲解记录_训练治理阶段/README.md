@@ -443,6 +443,9 @@
 460-v446-release-readiness-boundary-plan-regression.md
  -> v446 code explanation: let release readiness comparison detect CI boundary gate and boundary wrapper plan-check readiness regressions even when overall release readiness remains ready.
 
+461-v447-ci-boundary-plan-downstream-carryover.md
+ -> v447 code explanation: carry release-readiness CI boundary plan-check regression counts through registry, maturity summaries, maturity narratives, and training portfolio comparison review actions.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

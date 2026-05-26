@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT release-quality maturity narrative",
+  "generated_at": "2026-05-26T13:42:19Z",
+  "project_root": "D:\\aiproj",
+  "inputs": {
+    "maturity_path": "d\\447\\解释\\maturity-summary\\maturity_summary.json",
+    "registry_path": "d\\447\\解释\\registry\\registry.json",
+    "request_history_summary_path": "D:\\aiproj\\runs\\request-history-summary\\request_history_summary.json",
+    "benchmark_scorecard_paths": [],
+    "benchmark_scorecard_decision_paths": [],
+    "benchmark_history_paths": [],
+    "dataset_card_paths": []
+  },
+  "summary": {
+    "portfolio_status": "incomplete",
+    "current_version": 447,
+    "maturity_status": "warn",
+    "average_maturity_level": 4.5,
+    "registry_runs": 1,
+    "release_readiness_trend_status": "ci-regressed",
+    "release_readiness_regressed_count": 0,
+    "release_readiness_improved_count": 0,
+    "release_readiness_ci_workflow_regression_count": 1,
+    "release_readiness_ci_workflow_order_regression_count": 0,
+    "release_readiness_ci_workflow_status_changed_count": 0,
+    "release_readiness_ci_workflow_regression_reasons": [
+      "boundary_gate_plan_check_not_ready"
+    ],
+    "release_readiness_ci_workflow_regression_reason_counts": {
+      "boundary_gate_plan_check_not_ready": 1
+    },
+    "release_readiness_ci_tiny_plan_digest_gate_ready_regression_count": 0,
+    "release_readiness_ci_boundary_gate_check_ready_regression_count": 0,
+    "release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+    "release_readiness_ci_drift_smoke_ready_regression_count": 0,
+    "release_readiness_max_ci_workflow_failed_check_delta": 0,
+    "release_readiness_max_ci_workflow_order_violation_delta": 0,
+    "release_readiness_test_coverage_regression_count": 0,
+    "release_readiness_test_coverage_status_changed_count": 0,
+    "release_readiness_max_test_coverage_percent_delta": 0,
+    "release_readiness_max_test_coverage_gap_delta": 0,
+    "release_readiness_benchmark_history_regression_count": 0,
+    "release_readiness_benchmark_history_status_changed_count": 0,
+    "release_readiness_benchmark_history_boundary_changed_count": 0,
+    "release_readiness_benchmark_suite_design_delta_count": 0,
+    "release_readiness_benchmark_suite_design_regression_count": 0,
+    "release_readiness_benchmark_design_change_delta_count": 0,
+    "release_readiness_benchmark_requirement_status_changed_count": 0,
+    "release_readiness_benchmark_requirement_exit_code_delta_max": 0,
+    "release_readiness_benchmark_requirement_failed_reason_added_count": 0,
+    "release_readiness_benchmark_requirement_failed_reason_removed_count": 0,
+    "release_readiness_benchmark_requirement_failed_reason_added": [],
+    "release_readiness_benchmark_requirement_failed_reason_removed": [],
+    "release_readiness_benchmark_requirement_failed_reason_recovery_delta_count": 0,
+    "release_readiness_benchmark_requirement_failed_reason_mixed_delta_count": 0,
+    "release_readiness_benchmark_requirement_failed_reason_drift_status_counts": {
+      "stable": 1
+    },
+    "release_readiness_max_benchmark_history_case_regression_delta": null,
+    "release_readiness_max_benchmark_history_generation_flag_regression_delta": null,
+    "release_readiness_max_benchmark_suite_design_delta": 0,
+    "release_readiness_max_benchmark_design_change_delta": 0,
+    "request_history_status": null,
+    "request_history_records": null,
+    "request_history_timeout_rate": null,
+    "benchmark_scorecard_count": 0,
+    "benchmark_status_counts": {},
+    "benchmark_avg_score": null,
+    "benchmark_weakest_case": null,
+    "benchmark_decision_count": 0,
+    "benchmark_decision_status_counts": {},
+    "benchmark_decision_selected_run": null,
+    "benchmark_decision_review_item_count": 0,
+    "benchmark_decision_blocker_count": 0,
+    "benchmark_decision_selected_flag_delta": null,
+    "benchmark_decision_selected_eval_suite_comparison_status": null,
+    "benchmark_decision_non_comparison_ready_candidate_count": 0,
+    "benchmark_decision_non_comparison_ready_candidates": [],
+    "benchmark_decision_eval_suite_comparison_status_counts": {},
+    "benchmark_history_count": 0,
+    "benchmark_history_entry_count": 0,
+    "benchmark_history_ready_count": 0,
+    "benchmark_history_promote_count": 0,
+    "benchmark_history_review_count": 0,
+    "benchmark_history_blocked_count": 0,
+    "benchmark_history_case_regression_entry_count": 0,
+    "benchmark_history_generation_flag_regression_entry_count": 0,
+    "benchmark_history_suite_design_non_comparison_ready_entry_count": 0,
+    "benchmark_history_design_comparison_changed_entry_count": 0,
+    "benchmark_history_readiness_requirement_status_counts": {},
+    "benchmark_history_readiness_requirement_failed_count": 0,
+    "benchmark_history_readiness_requirement_exit_code_max": null,
+    "benchmark_history_readiness_requirement_failed_reasons": [],
+    "benchmark_history_model_quality_claim_counts": {},
+    "benchmark_history_boundary_counts": {},
+    "benchmark_history_best_candidate": null,
+    "benchmark_history_latest_boundary": null,
+    "dataset_card_count": 0,
+    "dataset_status_counts": {},
+    "dataset_warning_count": 0
+  },
+  "sections": [
+    {
+      "key": "maturity",
+      "title": "Project Maturity",
+      "status": "warn",
+      "claim": "MiniGPT is at v447 with maturity level 4.5.",
+      "evidence": "maturity_summary.json captures version coverage, archives, capability matrix, registry context, request history, and release readiness trend.",
+      "boundary": "This is a learning-engineering maturity view, not a claim of production model capability.",
+      "next_step": "Turn the strongest evidence into a shorter release portfolio narrative."
+    },
+    {
+      "key": "release_quality",
+      "title": "Release Quality Trend",
+      "status": "ci-regressed",
+      "claim": "Release readiness trend is ci-regressed with 0 regression(s) and 0 improvement(s); CI workflow regressions=1, CI order regressions=0, CI regression reasons=boundary_gate_plan_check_not_ready:1, CI boundary plan regressions=1, max order violation delta=0, test coverage regressions=0, max coverage gap delta=0, benchmark-history regressions=0, max benchmark case-regression delta=missing, benchmark boundary changes=0, benchmark suite-design deltas=0, suite-design regressions=0, design changes=0, max suite-design delta=0, max design-change delta=0, benchmark requirement changes=0, benchmark requirement exit delta=0, benchmark failed reasons added=0 (none), removed=0 (none), recovery deltas=0, mixed deltas=0.",
+      "evidence": "Registry-level release readiness comparison deltas are carried into maturity summary and then into this narrative.",
+      "boundary": "The trend explains release evidence quality; it does not prove generated text quality.",
+      "next_step": "Review regressions before release handoff; preserve improvement evidence when the trend is positive."
+    },
+    {
+      "key": "serving_stability",
+      "title": "Local Serving Stability",
+      "status": "missing",
+      "claim": "Request history status is missing across 0 local inference records.",
+      "evidence": "request_history_summary.json records request counts, timeout/bad-request/error rates, endpoints, checkpoints, and recent requests.",
+      "boundary": "Request history is local playground evidence and may not represent external traffic.",
+      "next_step": "Keep request logs small, reproducible, and tied to checkpoint/model-info evidence."
+    },
+    {
+      "key": "benchmark_quality",
+      "title": "Benchmark Quality",
+      "status": "missing",
+      "claim": "0 benchmark scorecard(s) are available; average score is missing and weakest case is missing.",
+      "evidence": "Benchmark scorecards combine eval coverage, generation quality, rubric correctness, pair consistency, and evidence completeness.",
+      "boundary": "Scorecards are deterministic review aids, not a substitute for larger benchmark suites.",
+      "next_step": "Expand fixed prompts and compare larger or fine-tuned models when data size grows."
+    },
+    {
+      "key": "benchmark_promotion",
+      "title": "Benchmark Promotion Decision",
+      "status": "missing",
+      "claim": "0 scorecard decision report(s) are available; selected run is missing with generation flag delta missing and selected eval comparison status missing; 0 candidate(s) are not comparison-ready.",
+      "evidence": "Benchmark scorecard decisions consume cross-run scorecard comparison deltas, case regressions, generation-quality flag taxonomy shifts, and eval-suite comparison readiness.",
+      "boundary": "A promote decision means benchmark evidence can advance; it is not a production release approval or clean model-quality claim when eval suites are not comparison-ready.",
+      "next_step": "Keep promoted scorecards tied to raw comparison, generation-quality, and eval-suite coverage evidence before claiming model improvement."
+    },
+    {
+      "key": "benchmark_history",
+      "title": "Benchmark History",
+      "status": "missing",
+      "claim": "0 benchmark history ledger(s) cover 0 entry(ies), with 0 ready, 0 review, 0 blocked; best candidate is missing and latest boundary is missing; readiness requirement failures=0, max exit=missing, failed reasons=none; suite-design not-ready entries=0, design comparison changes=0.",
+      "evidence": "Benchmark history ledgers connect scorecard comparison and decision artifacts across repeated runs, including readiness counts, explicit readiness requirements, best candidate, model-quality claim boundary, and regression hints.",
+      "boundary": "History entries explain benchmark evidence continuity; tiny-smoke entries remain plumbing evidence and do not prove broad model quality.",
+      "next_step": "Append real standard-suite benchmark histories before treating one-off score deltas as durable improvement."
+    },
+    {
+      "key": "data_governance",
+      "title": "Data Governance",
+      "status": "missing",
+      "claim": "0 dataset card(s) are available with 0 warning(s).",
+      "evidence": "Dataset cards summarize dataset identity, provenance, quality status, warnings, artifacts, intended use, and limitations.",
+      "boundary": "Dataset cards still require human review for licenses, consent, and domain fit.",
+      "next_step": "Attach dataset cards to every meaningful training corpus before larger experiments."
+    },
+    {
+      "key": "portfolio_boundary",
+      "title": "Portfolio Boundary",
+      "status": "incomplete",
+      "claim": "Portfolio status is incomplete after combining release, serving, benchmark, data, and maturity evidence.",
+      "evidence": "The narrative combines maturity, release trend, serving stability, benchmark scorecards, and dataset cards into one review surface.",
+      "boundary": "The project remains a MiniGPT-from-scratch learning artifact, not a production LLM.",
+      "next_step": "Use this narrative as the front door for demos, then link to detailed JSON/HTML evidence."
+    }
+  ],
+  "evidence_matrix": [
+    {
+      "area": "maturity",
+      "status": "warn",
+      "path": "d\\447\\解释\\maturity-summary\\maturity_summary.json",
+      "exists": true,
+      "signal": "project maturity",
+      "note": "MiniGPT is at v447 with maturity level 4.5."
+    },
+    {
+      "area": "release quality",
+      "status": "ci-regressed",
+      "path": "d\\447\\解释\\registry\\registry.json",
+      "exists": true,
+      "signal": "release readiness trend",
+      "note": "Release readiness trend is ci-regressed with 0 regression(s) and 0 improvement(s); CI workflow regressions=1, CI order regressions=0, CI regression reasons=boundary_gate_plan_check_not_ready:1, CI boundary plan regressions=1, max order violation delta=0, test coverage regressions=0, max coverage gap delta=0, benchmark-history regressions=0, max benchmark case-regression delta=missing, benchmark boundary changes=0, benchmark suite-design deltas=0, suite-design regressions=0, design changes=0, max suite-design delta=0, max design-change delta=0, benchmark requirement changes=0, benchmark requirement exit delta=0, benchmark failed reasons added=0 (none), removed=0 (none), recovery deltas=0, mixed deltas=0."
+    },
+    {
+      "area": "serving",
+      "status": "missing",
+      "path": "D:\\aiproj\\runs\\request-history-summary\\request_history_summary.json",
+      "exists": false,
+      "signal": "request history stability",
+      "note": "Request history status is missing across 0 local inference records."
+    }
+  ],
+  "recommendations": [
+    "Generate missing maturity, request-history, benchmark scorecard, or dataset-card evidence before presenting the narrative."
+  ],
+  "warnings": [
+    "request history summary is missing",
+    "benchmark scorecards are missing",
+    "dataset cards are missing"
+  ]
+}

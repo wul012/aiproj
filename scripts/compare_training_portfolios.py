@@ -50,6 +50,13 @@ def main() -> None:
     print("summary=" + json.dumps(report["summary"], ensure_ascii=False))
     print(f"review_action_count={report['summary'].get('review_action_count', 0)}")
     print(f"blocker_action_count={report['summary'].get('blocker_action_count', 0)}")
+    print(
+        "best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count="
+        + json.dumps(
+            report["summary"].get("best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count"),
+            ensure_ascii=False,
+        )
+    )
     print(f"maturity_suite_design_regression_count={report['summary'].get('maturity_suite_design_regression_count', 0)}")
     print(
         "maturity_suite_design_regression_names="
