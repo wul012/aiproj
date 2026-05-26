@@ -8,6 +8,7 @@ from pathlib import Path
 from minigpt.baseline_candidate_handoff import build_baseline_candidate_handoff, write_baseline_candidate_handoff_outputs
 from minigpt.baseline_candidate_handoff_check import (
     build_baseline_candidate_handoff_check,
+    embed_baseline_candidate_handoff_check,
     render_baseline_candidate_handoff_check_text,
 )
 from scripts.build_baseline_candidate_handoff import main as build_main
@@ -80,6 +81,47 @@ class BaselineCandidateHandoffCheckTests(unittest.TestCase):
             check_payload = json.loads((check_dir / "baseline_candidate_handoff_check.json").read_text(encoding="utf-8"))
             self.assertEqual(check_payload["status"], "pass")
             self.assertEqual(check_payload["failed_count"], 0)
+
+    def test_builder_check_out_dir_embeds_check_summary_in_handoff(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            loop_path = _write_loop_bundle(root, accepted=False)
+            out_dir = root / "handoff"
+            check_dir = root / "handoff-check"
+
+            with self.assertRaises(SystemExit) as raised:
+                build_main(
+                    [
+                        str(loop_path),
+                        "--out-dir",
+                        str(out_dir),
+                        "--check-out-dir",
+                        str(check_dir),
+                        "--require-accepted",
+                        "--force",
+                    ]
+                )
+
+            self.assertEqual(raised.exception.code, 2)
+            payload = json.loads((out_dir / "baseline_candidate_handoff.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["handoff_check"]["status"], "pass")
+            self.assertEqual(payload["handoff_check"]["failed_count"], 0)
+            self.assertIn("json", payload["handoff_check_outputs"])
+            self.assertIn("handoff_check_status=pass", (out_dir / "baseline_candidate_handoff.txt").read_text(encoding="utf-8"))
+
+    def test_embed_check_summary_keeps_contract_fields_unchanged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            handoff_path = _write_handoff_bundle(root, accepted=False)
+            handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
+            check = build_baseline_candidate_handoff_check(handoff_path, generated_at="2026-05-26T00:00:00Z")
+
+            embedded = embed_baseline_candidate_handoff_check(handoff, check, {"json": "check.json"})
+
+            self.assertEqual(embedded["decision"], handoff["decision"])
+            self.assertEqual(embedded["next_baseline"], handoff["next_baseline"])
+            self.assertEqual(embedded["handoff_check"]["decision"], "continue_with_valid_handoff")
+            self.assertEqual(embedded["handoff_check_outputs"], {"json": "check.json"})
 
 
 def _write_handoff_bundle(root: Path, *, accepted: bool) -> Path:

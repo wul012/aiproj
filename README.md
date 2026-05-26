@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 434 adds a contract check for baseline-candidate handoff artifacts, rebuilding the expected handoff from the source eval loop and validating the recorded next-baseline decision, guardrail reasons, checkpoint existence flags, and strict gate metadata.
+Version 435 embeds baseline-candidate handoff check results back into the main handoff artifact, so a generated handoff can carry its own contract-check status and sidecar paths while preserving the existing strict acceptance exit behavior.
+
+## Latest v435 checkpoint
+
+- `scripts/build_baseline_candidate_handoff.py --check-out-dir` now rewrites the handoff outputs after a passing check, embedding `handoff_check` and `handoff_check_outputs` into the main JSON.
+- `src/minigpt/baseline_candidate_handoff.py` renders embedded handoff-check status and failure count in text, Markdown, and HTML outputs.
+- `src/minigpt/baseline_candidate_handoff_check.py` exposes `embed_baseline_candidate_handoff_check()` for library callers that want the same embedded summary without duplicating script logic.
+- The embedded check does not change candidate acceptance: rejected candidates still return `2` under `--require-accepted`, but the handoff now records that its contract check passed.
+- Archived embedded-check runtime evidence and Playwright MCP screenshot in `d/435`.
 
 ## Latest v434 checkpoint
 

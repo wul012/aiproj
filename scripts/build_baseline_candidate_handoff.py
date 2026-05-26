@@ -16,6 +16,7 @@ from minigpt.baseline_candidate_handoff import (  # noqa: E402
 )
 from minigpt.baseline_candidate_handoff_check import (  # noqa: E402
     build_baseline_candidate_handoff_check,
+    embed_baseline_candidate_handoff_check,
     write_baseline_candidate_handoff_check_outputs,
 )
 
@@ -48,6 +49,10 @@ def main(argv: Sequence[str] | None = None) -> None:
             print(f"saved_check_{key}={path}")
         if check.get("status") != "pass":
             raise SystemExit(1)
+        handoff = embed_baseline_candidate_handoff_check(handoff, check, check_outputs)
+        outputs = write_baseline_candidate_handoff_outputs(handoff, args.out_dir)
+        for key, path in outputs.items():
+            print(f"saved_embedded_{key}={path}")
     exit_code = resolve_exit_code(handoff, require_accepted=args.require_accepted)
     if exit_code:
         raise SystemExit(exit_code)

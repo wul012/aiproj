@@ -232,6 +232,28 @@ def write_baseline_candidate_handoff_check_outputs(report: dict[str, Any], out_d
     return {key: str(value) for key, value in paths.items()}
 
 
+def embed_baseline_candidate_handoff_check(
+    handoff: dict[str, Any],
+    check: dict[str, Any],
+    outputs: dict[str, str],
+) -> dict[str, Any]:
+    embedded = dict(handoff)
+    embedded["handoff_check"] = {
+        "schema_version": check.get("schema_version"),
+        "status": check.get("status"),
+        "decision": check.get("decision"),
+        "failed_count": check.get("failed_count"),
+        "source_handoff": check.get("source_handoff"),
+        "source_loop_report": check.get("source_loop_report"),
+        "handoff_decision": check.get("handoff_decision"),
+        "expected_decision": check.get("expected_decision"),
+        "handoff_ready": check.get("handoff_ready"),
+        "expected_handoff_ready": check.get("expected_handoff_ready"),
+    }
+    embedded["handoff_check_outputs"] = dict(outputs)
+    return embedded
+
+
 def _issue(issue_id: str, field: str, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
     return {
         "id": issue_id,
@@ -273,6 +295,7 @@ __all__ = [
     "HANDOFF_CHECK_MARKDOWN_FILENAME",
     "HANDOFF_CHECK_TEXT_FILENAME",
     "build_baseline_candidate_handoff_check",
+    "embed_baseline_candidate_handoff_check",
     "load_baseline_candidate_handoff",
     "render_baseline_candidate_handoff_check_html",
     "render_baseline_candidate_handoff_check_markdown",

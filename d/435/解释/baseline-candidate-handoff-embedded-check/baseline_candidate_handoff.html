@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT baseline-candidate handoff</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f7f8f5; color: #17211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d8ded7; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d8ded7; border-radius: 8px; padding: 10px; background: #fbfcfa; }
+.metric span { display: block; color: #607066; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: anywhere; }
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT baseline-candidate handoff</h1>
+<section>
+<h2>Decision</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>keep_current_baseline</strong></div>
+<div class="metric"><span>Ready</span><strong>False</strong></div>
+<div class="metric"><span>Next baseline</span><strong>tiny-baseline</strong></div>
+<div class="metric"><span>Source</span><strong>current_baseline</strong></div>
+<div class="metric"><span>Candidate</span><strong>tiny-candidate</strong></div>
+<div class="metric"><span>Candidate accepted</span><strong>False</strong></div>
+<div class="metric"><span>Delta</span><strong>0.0</strong></div>
+<div class="metric"><span>Min Delta</span><strong>1.0</strong></div>
+<div class="metric"><span>Acceptance</span><strong>fail</strong></div>
+<div class="metric"><span>Handoff check</span><strong>pass</strong></div>
+<div class="metric"><span>Check failures</span><strong>0</strong></div>
+</div>
+</section>
+<section>
+<h2>Rejected Reasons</h2>
+<ul>
+<li>min_overall_score_delta expected &gt;= 1.0, got 0.0</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

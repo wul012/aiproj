@@ -130,6 +130,7 @@ def render_baseline_candidate_handoff_text(handoff: dict[str, Any]) -> str:
     delta = as_dict(handoff.get("delta"))
     guardrails = as_dict(handoff.get("guardrails"))
     execution = as_dict(handoff.get("execution"))
+    handoff_check = as_dict(handoff.get("handoff_check"))
     rows = [
         ("status", handoff.get("status")),
         ("decision", handoff.get("decision")),
@@ -147,6 +148,8 @@ def render_baseline_candidate_handoff_text(handoff: dict[str, Any]) -> str:
         ("execution_source_mode", execution.get("source_mode")),
         ("execution_gate_mode", execution.get("gate_mode")),
         ("execution_expected_exit_code", execution.get("expected_exit_code")),
+        ("handoff_check_status", handoff_check.get("status")),
+        ("handoff_check_failed_count", handoff_check.get("failed_count")),
         ("rejected_reasons", ",".join(string_list(guardrails.get("rejected_reasons")))),
     ]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
@@ -156,8 +159,17 @@ def render_baseline_candidate_handoff_markdown(handoff: dict[str, Any]) -> str:
     next_baseline = as_dict(handoff.get("next_baseline"))
     delta = as_dict(handoff.get("delta"))
     guardrails = as_dict(handoff.get("guardrails"))
+    handoff_check = as_dict(handoff.get("handoff_check"))
     reasons = string_list(guardrails.get("rejected_reasons"))
     reason_lines = ["- none"] if not reasons else [f"- {reason}" for reason in reasons]
+    check_lines = (
+        ["- none"]
+        if not handoff_check
+        else [
+            f"- Status: `{handoff_check.get('status')}`",
+            f"- Failed count: `{handoff_check.get('failed_count')}`",
+        ]
+    )
     return "\n".join(
         [
             "# MiniGPT Baseline-Candidate Handoff",
@@ -170,6 +182,10 @@ def render_baseline_candidate_handoff_markdown(handoff: dict[str, Any]) -> str:
             f"- Overall score delta: `{delta.get('overall_score_delta')}`",
             f"- Min overall score delta: `{delta.get('min_overall_score_delta')}`",
             f"- Acceptance status: `{guardrails.get('acceptance_status')}`",
+            "",
+            "## Embedded Handoff Check",
+            "",
+            *check_lines,
             "",
             "## Rejected Reasons",
             "",
@@ -184,8 +200,11 @@ def render_baseline_candidate_handoff_html(handoff: dict[str, Any]) -> str:
     candidate = as_dict(handoff.get("candidate"))
     delta = as_dict(handoff.get("delta"))
     guardrails = as_dict(handoff.get("guardrails"))
+    handoff_check = as_dict(handoff.get("handoff_check"))
     reasons = string_list(guardrails.get("rejected_reasons"))
     reason_items = "\n".join(f"<li>{html_escape(reason)}</li>" for reason in reasons) or "<li>none</li>"
+    check_status = handoff_check.get("status") if handoff_check else "not-run"
+    check_failed_count = handoff_check.get("failed_count") if handoff_check else ""
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -223,6 +242,8 @@ li {{ margin: 6px 0; }}
 <div class="metric"><span>Delta</span><strong>{html_escape(delta.get('overall_score_delta'))}</strong></div>
 <div class="metric"><span>Min Delta</span><strong>{html_escape(delta.get('min_overall_score_delta'))}</strong></div>
 <div class="metric"><span>Acceptance</span><strong>{html_escape(guardrails.get('acceptance_status'))}</strong></div>
+<div class="metric"><span>Handoff check</span><strong>{html_escape(check_status)}</strong></div>
+<div class="metric"><span>Check failures</span><strong>{html_escape(check_failed_count)}</strong></div>
 </div>
 </section>
 <section>
