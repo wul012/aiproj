@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT generation quality report</title>
+<style>
+:root { --ink:#111827; --muted:#475569; --line:#d7dee8; --page:#f8fafc; --panel:#fff; --green:#047857; --amber:#b45309; --red:#b91c1c; --blue:#1d4ed8; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+span, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:82px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:900px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.pill { display:inline-block; min-width:54px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
+.pill.pass { background:var(--green); }
+.pill.warn { background:var(--amber); }
+.pill.fail { background:var(--red); }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+.split { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:14px; }
+.split table { min-width:0; }
+caption { text-align:left; color:var(--muted); font-size:12px; font-weight:700; padding:0 0 6px; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT generation quality report</h1><p>d\438\解释\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\baseline\run\eval_suite\eval_suite.json</p></header>
+<section class="stats"><div class="card"><div class="label">Status</div><div class="value">pass</div></div><div class="card"><div class="label">Cases</div><div class="value">10</div></div><div class="card"><div class="label">Pass</div><div class="value">10</div></div><div class="card"><div class="label">Warn</div><div class="value">0</div></div><div class="card"><div class="label">Fail</div><div class="value">0</div></div><div class="card"><div class="label">Avg chars</div><div class="value">3</div></div><div class="card"><div class="label">Avg unique</div><div class="value">85.0%</div></div><div class="card"><div class="label">Max repeat</div><div class="value">2</div></div></section>
+<section class="panel"><h2>Flag Breakdown</h2><p class="muted">Total flags: 0</p><div class="split"><table><caption>By level</caption><tr><th>fail</th><td>0</td></tr><tr><th>warn</th><td>0</td></tr></table><table><caption>By flag id</caption><tr><th>none</th><td>0</td></tr></table></div><table><caption>Worst cases</caption><thead><tr><th>Status</th><th>Case</th><th>Flags</th><th>Flag ids</th></tr></thead><tbody><tr><td colspan="4">No flagged cases.</td></tr></tbody></table></section>
+<section class="panel"><h2>Policy</h2><table><tr><th>min_continuation_chars</th><td>1</td></tr><tr><th>min_unique_ratio</th><td>0.25</td></tr><tr><th>max_repeat_run</th><td>8</td></tr><tr><th>max_repeated_ngram_ratio</th><td>0.65</td></tr><tr><th>ngram_size</th><td>2</td></tr></table></section>
+<section class="panel"><h2>Cases</h2><table><thead><tr><th>Status</th><th>Case</th><th>Chars</th><th>Unique</th><th>Repeated Ngram</th><th>Repeat Run</th><th>Flags</th></tr></thead><tbody><tr><td><span class="pill pass">pass</span></td><td><strong>continuation-science</strong><br><span>人工智能正在改变科学研究的方式，因为</span></td><td>3</td><td>100.0%</td><td>0.0%</td><td>1</td><td>none<br><span>e四研</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>qa-training-loop</strong><br><span>问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：</span></td><td>3</td><td>100.0%</td><td>0.0%</td><td>1</td><td>none<br><span>数泛人</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>summary-evidence-chain</strong><br><span>请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：</span></td><td>3</td><td>66.7%</td><td>0.0%</td><td>2</td><td>none<br><span>评评化</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>structured-experiment-json</strong><br><span>请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+</span></td><td>3</td><td>100.0%</td><td>0.0%</td><td>1</td><td>none<br><span>Mfs</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>factual-val-loss</strong><br><span>判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+</span></td><td>3</td><td>66.7%</td><td>0.0%</td><td>1</td><td>none<br><span>u成u</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>classification-risk-level</strong><br><span>把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：</span></td><td>3</td><td>50.0%</td><td>0.0%</td><td>2</td><td>none<br><span>每\n每</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>style-rewrite-concise</strong><br><span>请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：</span></td><td>3</td><td>66.7%</td><td>0.0%</td><td>2</td><td>none<br><span>一指指</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>refusal-boundary</strong><br><span>用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：</span></td><td>3</td><td>100.0%</td><td>0.0%</td><td>1</td><td>none<br><span>好是链</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>self-check-missing-data</strong><br><span>如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+</span></td><td>3</td><td>100.0%</td><td>0.0%</td><td>1</td><td>none<br><span>s研少</span></td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>comparison-baseline</strong><br><span>比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：</span></td><td>3</td><td>100.0%</td><td>0.0%</td><td>1</td><td>none<br><span>方少s</span></td></tr></tbody></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>Generation quality checks passed; keep this report with eval artifacts.</li></ul></section>
+
+<footer>Generated by MiniGPT generation quality analyzer.</footer>
+</body>
+</html>

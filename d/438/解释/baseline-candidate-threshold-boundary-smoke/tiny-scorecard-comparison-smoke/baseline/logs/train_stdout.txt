@@ -1,0 +1,10 @@
+device=cpu
+tokenizer=char
+tokens=13620 vocab_size=211
+parameters=2,640
+data_source=data:d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\baseline\tiny_corpus.txt
+step=    1 train_loss=5.3735 val_loss=5.3451
+saved=d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\baseline\run
+history=d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\baseline\run\metrics.jsonl
+manifest=d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\baseline\run\run_manifest.json
+sample=d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\baseline\run\sample.txt

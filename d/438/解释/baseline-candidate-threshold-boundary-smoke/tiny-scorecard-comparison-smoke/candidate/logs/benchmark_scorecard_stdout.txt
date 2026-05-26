@@ -1,0 +1,16 @@
+run_dir=d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\candidate\run
+overall_status=pass
+overall_score=81.17
+component_count=6
+case_score_count=10
+rubric_status=fail
+rubric_avg_score=36.67
+generation_quality_total_flags=0
+generation_quality_dominant_flag=None
+generation_quality_worst_case=None
+weakest_rubric_case=continuation-science
+task_type_group_count=10
+weakest_task_type=continuation
+difficulty_group_count=3
+weakest_difficulty=easy
+outputs={"json": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json", "csv": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.csv", "drilldowns_csv": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard_drilldowns.csv", "rubric_csv": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard_rubric.csv", "markdown": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.md", "html": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.html"}

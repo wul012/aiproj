@@ -422,6 +422,9 @@ d/436/解释/说明.md
 d/437/图片
 d/437/解释/说明.md
  -> v437 baseline-candidate threshold boundary summary 的运行截图和解释
+d/438/图片
+d/438/解释/说明.md
+ -> v438 live baseline-candidate threshold boundary smoke 的运行截图和解释
 ```
 
 写入规则：

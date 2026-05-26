@@ -416,6 +416,9 @@
 451-v437-baseline-candidate-threshold-boundary.md
  -> v437 code explanation: add inclusive threshold ranges and boundary summaries that expose strictest accept, first reject, transitions, and monotonic acceptance checks.
 
+452-v438-baseline-candidate-threshold-boundary-smoke.md
+ -> v438 code explanation: run a fresh tiny scorecard comparison before rebuilding the threshold boundary matrix, proving the live pipeline passes while the candidate remains a review outcome.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

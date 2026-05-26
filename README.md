@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 437 strengthens the baseline-candidate threshold matrix with inclusive range thresholds and an explicit threshold-boundary summary, so reviewers can see the strictest accepting threshold, first rejecting threshold, transition count, and monotonic acceptance check.
+Version 438 adds a live baseline-candidate threshold boundary smoke that first runs a fresh tiny scorecard comparison, then rebuilds the threshold matrix from that live smoke summary, so reviewers can distinguish pipeline health from a candidate that still fails every promotion threshold.
+
+## Latest v438 checkpoint
+
+- Added `src/minigpt/baseline_candidate_threshold_boundary_smoke.py` to combine live smoke status, threshold matrix status, and boundary review status into JSON/text/Markdown/HTML evidence.
+- Added `scripts/run_baseline_candidate_threshold_boundary_smoke.py` to run the real tiny comparison smoke before creating the threshold boundary matrix.
+- The v438 evidence passes the smoke and matrix checks, but records `live_threshold_boundary_review` because all tested thresholds reject the candidate (`accept_count=0`, `reject_count=3`).
+- `--require-boundary-pass` can turn that review boundary into exit code `2` for stricter CI use without treating the default exploratory smoke as failed.
+- Archived live smoke, matrix, screenshot, and explanation evidence in `d/438`.
 
 ## Latest v437 checkpoint
 

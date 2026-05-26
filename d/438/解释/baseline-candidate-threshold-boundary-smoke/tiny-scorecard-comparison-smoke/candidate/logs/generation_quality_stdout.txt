@@ -1,0 +1,8 @@
+input=d\438\瑙ｉ噴\baseline-candidate-threshold-boundary-smoke\tiny-scorecard-comparison-smoke\candidate\run\eval_suite\eval_suite.json
+source_type=eval_suite
+overall_status=pass
+cases=10
+checks=10 pass/0 warn/0 fail
+avg_unique_ratio=1.0
+flags=0
+outputs={"json": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\generation-quality\\generation_quality.json", "csv": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\generation-quality\\generation_quality.csv", "markdown": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\generation-quality\\generation_quality.md", "svg": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\generation-quality\\generation_quality.svg", "html": "d\\438\\瑙ｉ噴\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\generation-quality\\generation_quality.html"}

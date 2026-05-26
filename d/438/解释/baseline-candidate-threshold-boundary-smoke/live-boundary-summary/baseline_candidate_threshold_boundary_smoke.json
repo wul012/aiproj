@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate threshold boundary smoke",
+  "generated_at": "2026-05-26T04:02:51Z",
+  "status": "pass",
+  "decision": "live_threshold_boundary_review",
+  "source_smoke_summary": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+  "smoke": {
+    "status": "pass",
+    "returncode": 0,
+    "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\run_tiny_scorecard_comparison_smoke.py --out-dir d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke --suite-name standard-zh --case-token-cap 3 --max-iters 1 --baseline-max-iters 1 --candidate-max-iters 2 --decision-min-rubric-score 60.0 --eval-iters 1 --batch-size 2 --block-size 8 --n-layer 1 --n-head 1 --n-embd 8 --baseline-seed 1337 --candidate-seed 2026 --summary-check-out-dir d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke-check --force",
+    "stdout": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\logs\\tiny_scorecard_comparison_smoke_stdout.txt",
+    "stderr": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\logs\\tiny_scorecard_comparison_smoke_stderr.txt"
+  },
+  "matrix": {
+    "status": "pass",
+    "decision": "threshold_matrix_ready",
+    "threshold_count": 3,
+    "accept_count": 0,
+    "reject_count": 3,
+    "handoff_check_failure_count": 0,
+    "outputs": {
+      "json": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.json",
+      "text": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.txt",
+      "markdown": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.md",
+      "html": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.html"
+    }
+  },
+  "threshold_boundary": {
+    "status": "review",
+    "decision": "no_accepting_threshold",
+    "has_accept": false,
+    "has_reject": true,
+    "is_monotonic_acceptance": true,
+    "transition_count": 0,
+    "strictest_accepting_threshold": null,
+    "first_rejecting_threshold": 0.0,
+    "accepting_thresholds": [],
+    "rejecting_thresholds": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "transitions": []
+  },
+  "boundary": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Live boundary smoke runs a tiny CPU comparison and threshold sweep to verify the pipeline; it is not robust model quality evidence."
+  }
+}

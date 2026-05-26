@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate handoff",
+  "generated_at": "2026-05-26T04:02:50Z",
+  "status": "pass",
+  "decision": "keep_current_baseline",
+  "handoff_ready": false,
+  "source_loop_report": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\loop\\baseline_candidate_eval_loop.json",
+  "source_smoke_summary": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+  "next_baseline": {
+    "name": "tiny-baseline",
+    "source": "current_baseline",
+    "ready": false,
+    "checkpoint": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\baseline\\run\\checkpoint.pt",
+    "checkpoint_exists": true,
+    "reason": "candidate rejected; keep current baseline"
+  },
+  "baseline": {
+    "name": "tiny-baseline",
+    "status": "pass",
+    "scorecard_status": "pass",
+    "overall_score": 81.17,
+    "checkpoint": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\baseline\\run\\checkpoint.pt",
+    "checkpoint_exists": true
+  },
+  "candidate": {
+    "name": "tiny-candidate",
+    "selected_name": null,
+    "status": "pass",
+    "scorecard_status": "pass",
+    "overall_score": 81.17,
+    "accepted": false,
+    "checkpoint": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\checkpoint.pt",
+    "checkpoint_exists": true,
+    "scorecard": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+    "pair_batch": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\pair_batch\\pair_generation_batch.json"
+  },
+  "delta": {
+    "overall_score_delta": 0.0,
+    "min_overall_score_delta": 0.0,
+    "case_delta_count": 20,
+    "case_regression_count": 0
+  },
+  "guardrails": {
+    "control_status": "pass",
+    "acceptance_status": "fail",
+    "promotion_status": "blocked",
+    "promotion_accepted": false,
+    "rejected_reasons": [
+      "rubric_avg_score below 60.0",
+      "Keep the baseline or fix candidate scorecard regressions before promotion.",
+      "scorecard_decision_promote expected promote, got blocked",
+      "selected_candidate expected tiny-candidate, got None"
+    ],
+    "acceptance_failed_reasons": [
+      "scorecard_decision_promote expected promote, got blocked",
+      "selected_candidate expected tiny-candidate, got None"
+    ],
+    "model_quality_claim": "not_claimed"
+  },
+  "execution": {
+    "source_mode": "reuse_summary",
+    "gate_mode": "strict",
+    "expected_exit_code": 2,
+    "loop_decision": "reject_candidate"
+  },
+  "source_evidence": {
+    "source_smoke_summary": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+    "source_smoke_summary_exists": true,
+    "baseline_dir": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\baseline",
+    "candidate_dir": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate",
+    "baseline_checkpoint": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\baseline\\run\\checkpoint.pt",
+    "baseline_checkpoint_exists": true,
+    "candidate_checkpoint": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\checkpoint.pt",
+    "candidate_checkpoint_exists": true,
+    "candidate_scorecard": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+    "candidate_pair_batch": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\pair_batch\\pair_generation_batch.json",
+    "benchmark_history_json": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\benchmark-history\\benchmark_history.json"
+  },
+  "actions": [
+    "keep_current_baseline",
+    "fix_candidate_before_next_loop"
+  ],
+  "boundary": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Tiny CPU scorecard deltas and decisions verify benchmark plumbing and configuration routing, not robust model improvement."
+  },
+  "handoff_check": {
+    "schema_version": 1,
+    "status": "pass",
+    "decision": "continue_with_valid_handoff",
+    "failed_count": 0,
+    "source_handoff": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff\\baseline_candidate_handoff.json",
+    "source_loop_report": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\loop\\baseline_candidate_eval_loop.json",
+    "handoff_decision": "keep_current_baseline",
+    "expected_decision": "keep_current_baseline",
+    "handoff_ready": false,
+    "expected_handoff_ready": false
+  },
+  "handoff_check_outputs": {
+    "json": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff-check\\baseline_candidate_handoff_check.json",
+    "text": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff-check\\baseline_candidate_handoff_check.txt",
+    "markdown": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff-check\\baseline_candidate_handoff_check.md",
+    "html": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\threshold-boundary-matrix\\threshold-0\\handoff-check\\baseline_candidate_handoff_check.html"
+  }
+}

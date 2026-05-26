@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT tiny scorecard decision smoke",
+  "generated_at": "2026-05-26T04:02:50Z",
+  "comparison_path": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\scorecard-comparison\\benchmark_scorecard_comparison.json",
+  "comparison_title": "MiniGPT tiny scorecard comparison smoke",
+  "baseline_name": "tiny-baseline",
+  "min_rubric_score": 60.0,
+  "decision_status": "blocked",
+  "recommended_action": "keep_baseline_or_fix_candidate",
+  "selected_run": null,
+  "candidate_evaluations": [
+    {
+      "name": "tiny-baseline",
+      "source_path": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\baseline\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+      "run_dir": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\baseline\\run",
+      "is_baseline": true,
+      "decision_relation": "baseline",
+      "overall_score": 81.17,
+      "rubric_avg_score": 36.67,
+      "overall_score_delta": 0.0,
+      "rubric_avg_score_delta": 0.0,
+      "generation_quality_total_flags": 0,
+      "generation_quality_total_flags_delta": 0,
+      "generation_quality_flag_relation": "baseline",
+      "generation_quality_dominant_flag": null,
+      "generation_quality_worst_case": null,
+      "eval_suite_coverage_status": "pass",
+      "eval_suite_comparison_status": "pass",
+      "eval_suite_design_coverage_status": "pass",
+      "eval_suite_design_comparison_status": "pass",
+      "eval_suite_design_duplicate_seed_count": 0,
+      "eval_suite_design_expected_behavior_complete": true,
+      "case_regression_count": 0,
+      "case_improvement_count": 0,
+      "blockers": [
+        "baseline run is not a promotion candidate",
+        "rubric_avg_score below 60.0"
+      ],
+      "review_items": [],
+      "blocker_categories": [
+        "baseline_candidate",
+        "threshold"
+      ],
+      "review_categories": []
+    },
+    {
+      "name": "tiny-candidate",
+      "source_path": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run\\benchmark-scorecard\\benchmark_scorecard.json",
+      "run_dir": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\candidate\\run",
+      "is_baseline": false,
+      "decision_relation": "blocked",
+      "overall_score": 81.17,
+      "rubric_avg_score": 36.67,
+      "overall_score_delta": 0.0,
+      "rubric_avg_score_delta": 0.0,
+      "generation_quality_total_flags": 0,
+      "generation_quality_total_flags_delta": 0,
+      "generation_quality_flag_relation": "tied",
+      "generation_quality_dominant_flag": null,
+      "generation_quality_worst_case": null,
+      "eval_suite_coverage_status": "pass",
+      "eval_suite_comparison_status": "pass",
+      "eval_suite_design_coverage_status": "pass",
+      "eval_suite_design_comparison_status": "pass",
+      "eval_suite_design_duplicate_seed_count": 0,
+      "eval_suite_design_expected_behavior_complete": true,
+      "case_regression_count": 0,
+      "case_improvement_count": 0,
+      "blockers": [
+        "rubric_avg_score below 60.0"
+      ],
+      "review_items": [],
+      "blocker_categories": [
+        "threshold"
+      ],
+      "review_categories": []
+    }
+  ],
+  "summary": {
+    "decision_status": "blocked",
+    "comparison_scorecard_count": 2,
+    "candidate_count": 0,
+    "clean_candidate_count": 0,
+    "review_candidate_count": 0,
+    "blocked_candidate_count": 1,
+    "non_comparison_ready_candidate_count": 0,
+    "non_comparison_ready_candidates": [],
+    "non_design_comparison_ready_candidate_count": 0,
+    "non_design_comparison_ready_candidates": [],
+    "selected_name": null,
+    "selected_relation": null,
+    "selected_rubric_avg_score": null,
+    "selected_generation_quality_total_flags_delta": null,
+    "comparison_case_regression_count": 0,
+    "comparison_non_comparison_ready_count": 0,
+    "comparison_non_comparison_ready_runs": [],
+    "comparison_non_design_comparison_ready_count": 0,
+    "comparison_non_design_comparison_ready_runs": [],
+    "comparison_baseline_eval_suite_comparison_status": "pass",
+    "comparison_baseline_eval_suite_design_comparison_status": "pass",
+    "comparison_design_comparison_changed_count": 0,
+    "comparison_generation_quality_flag_regression_count": 0,
+    "comparison_generation_quality_dominant_flag_change_count": 0,
+    "blocker_category_counts": {
+      "threshold": 1
+    },
+    "dominant_blocker_category": "threshold",
+    "review_category_counts": {},
+    "dominant_review_category": null,
+    "first_threshold_blocked_candidate": "tiny-candidate",
+    "first_threshold_blocker": "rubric_avg_score below 60.0",
+    "first_threshold_rubric_score": 36.67,
+    "first_threshold_min_rubric_score": 60.0,
+    "first_threshold_margin": -23.33,
+    "threshold_blocked_candidate_count": 1,
+    "threshold_blocked_candidate_names": [
+      "tiny-candidate"
+    ],
+    "threshold_closest_candidate": "tiny-candidate",
+    "threshold_closest_margin": -23.33,
+    "threshold_largest_gap_candidate": "tiny-candidate",
+    "threshold_largest_gap_margin": -23.33,
+    "remediation_plan_count": 1,
+    "remediation_blocker_count": 1,
+    "remediation_review_count": 0,
+    "dominant_remediation_kind": "blocker",
+    "dominant_remediation_category": "threshold",
+    "dominant_remediation_action": "Improve the candidate rubric score before promotion, or lower the threshold only with an explicit policy change."
+  },
+  "remediation_plan": [
+    {
+      "kind": "blocker",
+      "category": "threshold",
+      "count": 1,
+      "priority": 60,
+      "action_code": "raise_candidate_rubric_or_change_policy",
+      "severity": "blocker",
+      "owner_scope": "model-eval",
+      "target_artifacts": [
+        "benchmark_scorecard_decision",
+        "benchmark_scorecard"
+      ],
+      "action": "Improve the candidate rubric score before promotion, or lower the threshold only with an explicit policy change."
+    }
+  ],
+  "recommendations": [
+    "Keep the baseline or fix candidate scorecard regressions before promotion.",
+    "Blocked candidates should stay in the comparison as evidence for why they were not promoted.",
+    "Top remediation: threshold -> Improve the candidate rubric score before promotion, or lower the threshold only with an explicit policy change."
+  ]
+}

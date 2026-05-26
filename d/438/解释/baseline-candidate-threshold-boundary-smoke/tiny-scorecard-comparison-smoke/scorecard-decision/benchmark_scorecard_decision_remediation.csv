@@ -1,0 +1,2 @@
+kind,category,count,priority,severity,owner_scope,action_code,target_artifacts,action
+blocker,threshold,1,60,blocker,model-eval,raise_candidate_rubric_or_change_policy,benchmark_scorecard_decision; benchmark_scorecard,"Improve the candidate rubric score before promotion, or lower the threshold only with an explicit policy change."
