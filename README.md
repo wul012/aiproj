@@ -4,9 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 442 promotes the baseline-candidate threshold boundary expected-exit check into the GitHub Actions CI workflow and the CI workflow hygiene policy, so the v441 strict-gate wrapper is no longer only local evidence.
+Version 443 wraps the baseline-candidate threshold boundary expected-exit CI step in a stable script entrypoint with invocation-plan and artifact-digest evidence, keeping GitHub Actions shorter and the gate contract easier to audit.
+
+## Latest v443 checkpoint
+
+- Added `scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py` as the stable CI entrypoint for the v441 expected-exit gate check.
+- `.github/workflows/ci.yml` now calls the wrapper instead of spelling out the long smoke-summary, threshold, expected-exit, and diagnosis parameters inline.
+- The wrapper writes `ci_baseline_candidate_threshold_boundary_gate_check_plan.json/txt` with fixed config, command text, return code, gate-check summary, and SHA-256 digests for gate-check and boundary-smoke artifacts.
+- CI workflow hygiene now requires `scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py` while preserving the same after-plan-digest and before-coverage order checks.
+- Archived wrapper plan, CI hygiene evidence, and Playwright MCP screenshots in `d/443`.
 
 ## Latest v442 checkpoint
+
+Version 442 promotes the baseline-candidate threshold boundary expected-exit check into the GitHub Actions CI workflow and the CI workflow hygiene policy, so the v441 strict-gate wrapper is no longer only local evidence.
+
 
 - `.github/workflows/ci.yml` now runs `scripts/check_baseline_candidate_threshold_boundary_gate.py` before coverage.
 - `src/minigpt/ci_workflow_hygiene.py` now requires the baseline-candidate threshold boundary gate-check command and validates it runs after the tiny-scorecard plan digest check and before coverage.

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT threshold boundary gate check</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f8f9f7; color: #17211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d8ded7; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d8ded7; border-radius: 8px; padding: 10px; background: #fbfcfa; }
+.metric span { display: block; color: #607066; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: break-word; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid #d8ded7; padding: 10px; text-align: left; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT threshold boundary gate check</h1>
+<section>
+<h2>Summary</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>expected_exit_verified</strong></div>
+<div class="metric"><span>Gate mode</span><strong>diagnosis_strict</strong></div>
+<div class="metric"><span>Actual exit</span><strong>2</strong></div>
+<div class="metric"><span>Expected exit</span><strong>2</strong></div>
+<div class="metric"><span>Diagnosis</span><strong>candidate_not_accepted</strong></div>
+<div class="metric"><span>Boundary</span><strong>no_accepting_threshold</strong></div>
+<div class="metric"><span>Failed checks</span><strong>0</strong></div>
+</div>
+</section>
+<section>
+<h2>Checks</h2>
+<table>
+<thead><tr><th>Check</th><th>Status</th><th>Expected</th><th>Actual</th></tr></thead>
+<tbody>
+<tr><td>summary_exists</td><td>pass</td><td>True</td><td>True</td></tr>
+<tr><td>summary_loads</td><td>pass</td><td>loadable JSON object</td><td>loaded</td></tr>
+<tr><td>summary_status_pass</td><td>pass</td><td>True</td><td>pass</td></tr>
+<tr><td>summary_expected_exit_matches</td><td>pass</td><td>2</td><td>2</td></tr>
+<tr><td>actual_exit_matches_expected</td><td>pass</td><td>2</td><td>2</td></tr>
+<tr><td>diagnosis_decision_matches</td><td>pass</td><td>candidate_not_accepted</td><td>candidate_not_accepted</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+</body>
+</html>

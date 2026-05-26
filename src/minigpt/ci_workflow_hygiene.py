@@ -25,7 +25,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "tiny_scorecard_comparison_inline_check_smoke": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
     "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
     "ci_tiny_scorecard_plan_digest_check": "scripts/check_ci_tiny_scorecard_plan.py",
-    "baseline_candidate_threshold_boundary_gate_check": "scripts/check_baseline_candidate_threshold_boundary_gate.py",
+    "baseline_candidate_threshold_boundary_gate_check": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
     "release_readiness_drift_contract_smoke": "scripts/check_release_readiness_drift_contract_smoke.py",
     "test_coverage_report": "scripts/run_test_coverage.py",
     "coverage_fail_under_gate": "--fail-under 80",
@@ -49,10 +49,10 @@ REQUIRED_COMMAND_ORDER = {
     ),
     "baseline_candidate_threshold_boundary_gate_check_after_plan_digest": (
         "scripts/check_ci_tiny_scorecard_plan.py",
-        "scripts/check_baseline_candidate_threshold_boundary_gate.py",
+        "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
     ),
     "baseline_candidate_threshold_boundary_gate_check_before_coverage": (
-        "scripts/check_baseline_candidate_threshold_boundary_gate.py",
+        "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
         "scripts/run_test_coverage.py",
     ),
     "release_readiness_drift_contract_smoke_before_coverage": (

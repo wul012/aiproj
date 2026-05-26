@@ -431,6 +431,9 @@
 456-v442-ci-baseline-candidate-threshold-boundary-gate-check.md
  -> v442 code explanation: promote the v441 expected-exit gate check into GitHub Actions and CI workflow hygiene order checks.
 
+457-v443-ci-baseline-candidate-threshold-boundary-wrapper-plan.md
+ -> v443 code explanation: replace the long CI boundary-gate command with a stable wrapper that records invocation plan and artifact digests.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

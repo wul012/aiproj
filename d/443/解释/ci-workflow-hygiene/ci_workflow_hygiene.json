@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT CI workflow hygiene",
+  "generated_at": "2026-05-26T10:32:28Z",
+  "workflow_path": ".github\\workflows\\ci.yml",
+  "policy": {
+    "required_actions": {
+      "actions/checkout": "v6",
+      "actions/setup-python": "v6"
+    },
+    "forbidden_env_vars": [
+      "FORCE_JAVASCRIPT_ACTIONS_TO_NODE24"
+    ],
+    "required_command_fragments": {
+      "source_encoding_gate": "scripts/check_source_encoding.py",
+      "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
+      "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
+      "tiny_scorecard_comparison_inline_check_smoke": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
+      "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
+      "ci_tiny_scorecard_plan_digest_check": "scripts/check_ci_tiny_scorecard_plan.py",
+      "baseline_candidate_threshold_boundary_gate_check": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
+      "release_readiness_drift_contract_smoke": "scripts/check_release_readiness_drift_contract_smoke.py",
+      "test_coverage_report": "scripts/run_test_coverage.py",
+      "coverage_fail_under_gate": "--fail-under 80"
+    },
+    "required_command_order": {
+      "promoted_seed_handoff_assurance_smoke_before_coverage": {
+        "before": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
+        "after": "scripts/run_test_coverage.py"
+      },
+      "tiny_scorecard_inline_check_smoke_before_coverage": {
+        "before": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
+        "after": "scripts/run_test_coverage.py"
+      },
+      "ci_tiny_scorecard_plan_check_after_smoke": {
+        "before": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
+        "after": "scripts/check_ci_tiny_scorecard_plan.py"
+      },
+      "ci_tiny_scorecard_plan_check_before_coverage": {
+        "before": "scripts/check_ci_tiny_scorecard_plan.py",
+        "after": "scripts/run_test_coverage.py"
+      },
+      "baseline_candidate_threshold_boundary_gate_check_after_plan_digest": {
+        "before": "scripts/check_ci_tiny_scorecard_plan.py",
+        "after": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py"
+      },
+      "baseline_candidate_threshold_boundary_gate_check_before_coverage": {
+        "before": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
+        "after": "scripts/run_test_coverage.py"
+      },
+      "release_readiness_drift_contract_smoke_before_coverage": {
+        "before": "scripts/check_release_readiness_drift_contract_smoke.py",
+        "after": "scripts/run_test_coverage.py"
+      }
+    },
+    "required_python_version": "3.11"
+  },
+  "summary": {
+    "status": "pass",
+    "decision": "continue_with_node24_native_ci",
+    "check_count": 21,
+    "passed_check_count": 21,
+    "failed_check_count": 0,
+    "action_count": 2,
+    "required_action_count": 2,
+    "found_required_action_count": 2,
+    "node24_native_action_count": 2,
+    "forbidden_env_count": 0,
+    "required_step_count": 10,
+    "missing_step_count": 0,
+    "required_order_count": 7,
+    "order_violation_count": 0,
+    "tiny_scorecard_plan_digest_gate_present": true,
+    "tiny_scorecard_plan_digest_gate_order_ready": true,
+    "tiny_scorecard_plan_digest_gate_ready": true,
+    "baseline_candidate_threshold_boundary_gate_check_present": true,
+    "baseline_candidate_threshold_boundary_gate_check_order_ready": true,
+    "baseline_candidate_threshold_boundary_gate_check_ready": true,
+    "release_readiness_drift_contract_smoke_present": true,
+    "release_readiness_drift_contract_smoke_order_ready": true,
+    "release_readiness_drift_contract_smoke_ready": true,
+    "python_version": "3.11"
+  },
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "version": "v6",
+      "raw": "actions/checkout@v6",
+      "line": 12,
+      "node24_native": true
+    },
+    {
+      "repository": "actions/setup-python",
+      "version": "v6",
+      "raw": "actions/setup-python@v6",
+      "line": 14,
+      "node24_native": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "action:actions/checkout",
+      "category": "action_version",
+      "target": "actions/checkout",
+      "expected": "v6",
+      "actual": "v6",
+      "status": "pass",
+      "detail": "Action uses the expected Node 24 native major."
+    },
+    {
+      "id": "action:actions/setup-python",
+      "category": "action_version",
+      "target": "actions/setup-python",
+      "expected": "v6",
+      "actual": "v6",
+      "status": "pass",
+      "detail": "Action uses the expected Node 24 native major."
+    },
+    {
+      "id": "env:FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",
+      "category": "forbidden_env",
+      "target": "FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",
+      "expected": "absent",
+      "actual": "absent",
+      "status": "pass",
+      "detail": "Native action versions should not rely on force-runtime environment variables."
+    },
+    {
+      "id": "command:source_encoding_gate",
+      "category": "required_command",
+      "target": "source_encoding_gate",
+      "expected": "scripts/check_source_encoding.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:ci_workflow_hygiene_gate",
+      "category": "required_command",
+      "target": "ci_workflow_hygiene_gate",
+      "expected": "scripts/check_ci_workflow_hygiene.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:promoted_seed_handoff_assurance_smoke",
+      "category": "required_command",
+      "target": "promoted_seed_handoff_assurance_smoke",
+      "expected": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:tiny_scorecard_comparison_inline_check_smoke",
+      "category": "required_command",
+      "target": "tiny_scorecard_comparison_inline_check_smoke",
+      "expected": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:tiny_scorecard_summary_check_sidecar",
+      "category": "required_command",
+      "target": "tiny_scorecard_summary_check_sidecar",
+      "expected": "--summary-check-out-dir",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:ci_tiny_scorecard_plan_digest_check",
+      "category": "required_command",
+      "target": "ci_tiny_scorecard_plan_digest_check",
+      "expected": "scripts/check_ci_tiny_scorecard_plan.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:baseline_candidate_threshold_boundary_gate_check",
+      "category": "required_command",
+      "target": "baseline_candidate_threshold_boundary_gate_check",
+      "expected": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:release_readiness_drift_contract_smoke",
+      "category": "required_command",
+      "target": "release_readiness_drift_contract_smoke",
+      "expected": "scripts/check_release_readiness_drift_contract_smoke.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:test_coverage_report",
+      "category": "required_command",
+      "target": "test_coverage_report",
+      "expected": "scripts/run_test_coverage.py",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "command:coverage_fail_under_gate",
+      "category": "required_command",
+      "target": "coverage_fail_under_gate",
+      "expected": "--fail-under 80",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Required CI quality command is present."
+    },
+    {
+      "id": "order:promoted_seed_handoff_assurance_smoke_before_coverage",
+      "category": "required_order",
+      "target": "promoted_seed_handoff_assurance_smoke_before_coverage",
+      "expected": "before",
+      "actual": "before_line=30;after_line=45",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 30, after line 45."
+    },
+    {
+      "id": "order:tiny_scorecard_inline_check_smoke_before_coverage",
+      "category": "required_order",
+      "target": "tiny_scorecard_inline_check_smoke_before_coverage",
+      "expected": "before",
+      "actual": "before_line=33;after_line=45",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 33, after line 45."
+    },
+    {
+      "id": "order:ci_tiny_scorecard_plan_check_after_smoke",
+      "category": "required_order",
+      "target": "ci_tiny_scorecard_plan_check_after_smoke",
+      "expected": "before",
+      "actual": "before_line=33;after_line=36",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 33, after line 36."
+    },
+    {
+      "id": "order:ci_tiny_scorecard_plan_check_before_coverage",
+      "category": "required_order",
+      "target": "ci_tiny_scorecard_plan_check_before_coverage",
+      "expected": "before",
+      "actual": "before_line=36;after_line=45",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 36, after line 45."
+    },
+    {
+      "id": "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest",
+      "category": "required_order",
+      "target": "baseline_candidate_threshold_boundary_gate_check_after_plan_digest",
+      "expected": "before",
+      "actual": "before_line=36;after_line=39",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 36, after line 39."
+    },
+    {
+      "id": "order:baseline_candidate_threshold_boundary_gate_check_before_coverage",
+      "category": "required_order",
+      "target": "baseline_candidate_threshold_boundary_gate_check_before_coverage",
+      "expected": "before",
+      "actual": "before_line=39;after_line=45",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 39, after line 45."
+    },
+    {
+      "id": "order:release_readiness_drift_contract_smoke_before_coverage",
+      "category": "required_order",
+      "target": "release_readiness_drift_contract_smoke_before_coverage",
+      "expected": "before",
+      "actual": "before_line=42;after_line=45",
+      "status": "pass",
+      "detail": "Required CI command order is preserved: before line 42, after line 45."
+    },
+    {
+      "id": "python:setup-version",
+      "category": "python_version",
+      "target": "actions/setup-python",
+      "expected": "3.11",
+      "actual": "3.11",
+      "status": "pass",
+      "detail": "CI parser target should remain aligned with source encoding compatibility checks."
+    }
+  ],
+  "recommendations": [
+    "Keep CI workflow action versions and quality gates aligned with the Node 24 native policy."
+  ]
+}
