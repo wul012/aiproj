@@ -13,7 +13,7 @@ from minigpt.baseline_candidate_threshold_boundary_smoke import (
     write_baseline_candidate_threshold_boundary_smoke_outputs,
 )
 from minigpt.baseline_candidate_threshold_matrix import build_baseline_candidate_threshold_matrix, write_baseline_candidate_threshold_matrix_outputs
-from scripts.run_baseline_candidate_threshold_boundary_smoke import main, resolve_exit_code
+from scripts.run_baseline_candidate_threshold_boundary_smoke import annotate_execution_summary, main, resolve_exit_code
 
 
 class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
@@ -49,6 +49,34 @@ class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
         self.assertEqual(resolve_exit_code({"status": "pass", "threshold_boundary": {"status": "pass"}}, require_boundary_pass=True), 0)
         self.assertEqual(resolve_exit_code({"status": "pass", "threshold_boundary": {"status": "review"}}, require_boundary_pass=True), 2)
         self.assertEqual(resolve_exit_code({"status": "fail", "threshold_boundary": {"status": "pass"}}, require_boundary_pass=False), 1)
+
+    def test_resolve_exit_code_can_require_diagnosis_pass(self) -> None:
+        self.assertEqual(
+            resolve_exit_code({"status": "pass", "review_diagnosis": {"status": "pass"}}, require_boundary_pass=False, require_diagnosis_pass=True),
+            0,
+        )
+        self.assertEqual(
+            resolve_exit_code({"status": "pass", "review_diagnosis": {"status": "review"}}, require_boundary_pass=False, require_diagnosis_pass=True),
+            2,
+        )
+        self.assertEqual(
+            resolve_exit_code({"status": "pass", "review_diagnosis": {"status": "fail"}}, require_boundary_pass=False, require_diagnosis_pass=True),
+            1,
+        )
+
+    def test_execution_annotation_records_strict_gate_mode(self) -> None:
+        report: dict[str, object] = {}
+
+        annotate_execution_summary(
+            report,
+            require_boundary_pass=False,
+            require_diagnosis_pass=True,
+            expected_exit_code=2,
+        )
+
+        self.assertEqual(report["execution"]["gate_mode"], "diagnosis_strict")
+        self.assertTrue(report["execution"]["require_diagnosis_pass"])
+        self.assertEqual(report["execution"]["expected_exit_code"], 2)
 
     def test_summary_can_pass_with_review_boundary_when_smoke_and_matrix_pass(self) -> None:
         report = build_baseline_candidate_threshold_boundary_smoke_summary(
@@ -94,6 +122,8 @@ class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
             self.assertEqual(payload["threshold_boundary"]["first_rejecting_threshold"], 0.5)
             self.assertEqual(matrix["threshold_count"], 3)
             self.assertEqual(payload["source_mode"], "rerun_smoke")
+            self.assertEqual(payload["execution"]["gate_mode"], "boundary_strict")
+            self.assertEqual(payload["execution"]["expected_exit_code"], 0)
 
     def test_cli_can_reuse_existing_smoke_summary(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -109,6 +139,22 @@ class BaselineCandidateThresholdBoundarySmokeTests(unittest.TestCase):
             self.assertEqual(payload["source_mode"], "reuse_summary")
             self.assertEqual(payload["smoke"]["source_mode"], "reuse_summary")
             self.assertEqual(payload["review_diagnosis"]["decision"], "threshold_boundary_ready")
+            self.assertEqual(payload["execution"]["gate_mode"], "exploratory")
+
+    def test_cli_diagnosis_gate_exits_two_for_review_diagnosis(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            summary_path = _write_rejected_smoke_summary(root / "source")
+            out_dir = root / "strict"
+
+            with self.assertRaises(SystemExit) as raised:
+                main(["--smoke-summary", str(summary_path), "--out-dir", str(out_dir), "--thresholds", "0:1:0.5", "--require-diagnosis-pass", "--force"])
+
+            self.assertEqual(raised.exception.code, 2)
+            payload = json.loads((out_dir / "live-boundary-summary" / "baseline_candidate_threshold_boundary_smoke.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["review_diagnosis"]["decision"], "candidate_not_accepted")
+            self.assertEqual(payload["execution"]["gate_mode"], "diagnosis_strict")
+            self.assertEqual(payload["execution"]["expected_exit_code"], 2)
 
 
 def _write_smoke_summary(root: Path) -> Path:
@@ -132,6 +178,22 @@ def _write_smoke_summary(root: Path) -> Path:
             },
         }
     )
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False), encoding="utf-8")
+    return summary_path
+
+
+def _write_rejected_smoke_summary(root: Path) -> Path:
+    summary_path = _write_smoke_summary(root)
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["scorecard_decision"] = {
+        "decision_status": "blocked",
+        "recommended_action": "keep_current_baseline",
+        "selected_name": "tiny-baseline",
+        "remediation_count": 1,
+    }
+    summary["candidate_smoke"]["scorecard_overall_score"] = 80.0
+    summary["scorecard_comparison"]["best_by_overall_score"] = "tiny-baseline"
+    summary["scorecard_comparison"]["best_by_rubric_avg_score"] = "tiny-baseline"
     summary_path.write_text(json.dumps(summary, ensure_ascii=False), encoding="utf-8")
     return summary_path
 

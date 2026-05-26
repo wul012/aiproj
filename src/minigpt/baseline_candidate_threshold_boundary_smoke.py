@@ -138,10 +138,15 @@ def render_baseline_candidate_threshold_boundary_smoke_text(report: dict[str, An
     matrix = as_dict(report.get("matrix"))
     boundary = as_dict(report.get("threshold_boundary"))
     diagnosis = as_dict(report.get("review_diagnosis"))
+    execution = as_dict(report.get("execution"))
     rows = [
         ("status", report.get("status")),
         ("decision", report.get("decision")),
         ("source_mode", report.get("source_mode")),
+        ("execution_gate_mode", execution.get("gate_mode")),
+        ("execution_require_boundary_pass", execution.get("require_boundary_pass")),
+        ("execution_require_diagnosis_pass", execution.get("require_diagnosis_pass")),
+        ("execution_expected_exit_code", execution.get("expected_exit_code")),
         ("source_smoke_summary", report.get("source_smoke_summary")),
         ("smoke_status", smoke.get("status")),
         ("smoke_returncode", smoke.get("returncode")),
@@ -169,6 +174,7 @@ def render_baseline_candidate_threshold_boundary_smoke_markdown(report: dict[str
     matrix = as_dict(report.get("matrix"))
     boundary = as_dict(report.get("threshold_boundary"))
     diagnosis = as_dict(report.get("review_diagnosis"))
+    execution = as_dict(report.get("execution"))
     return "\n".join(
         [
             "# MiniGPT Baseline-Candidate Threshold Boundary Smoke",
@@ -176,6 +182,9 @@ def render_baseline_candidate_threshold_boundary_smoke_markdown(report: dict[str
             f"- Status: `{report.get('status')}`",
             f"- Decision: `{report.get('decision')}`",
             f"- Source mode: `{report.get('source_mode')}`",
+            f"- Gate mode: `{execution.get('gate_mode')}`",
+            f"- Require diagnosis pass: `{execution.get('require_diagnosis_pass')}`",
+            f"- Expected exit code: `{execution.get('expected_exit_code')}`",
             f"- Smoke status: `{as_dict(report.get('smoke')).get('status')}`",
             f"- Matrix status: `{matrix.get('status')}`",
             f"- Accept count: `{matrix.get('accept_count')}`",
@@ -197,6 +206,7 @@ def render_baseline_candidate_threshold_boundary_smoke_html(report: dict[str, An
     matrix = as_dict(report.get("matrix"))
     boundary = as_dict(report.get("threshold_boundary"))
     diagnosis = as_dict(report.get("review_diagnosis"))
+    execution = as_dict(report.get("execution"))
     issue_html = _diagnosis_items_html(diagnosis.get("issues"), "No review issues.")
     action_html = _diagnosis_items_html(diagnosis.get("actions"), "No follow-up actions.")
     return f"""<!doctype html>
@@ -228,6 +238,8 @@ h2 {{ font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }}
 <div class="metric"><span>Status</span><strong>{html_escape(report.get('status'))}</strong></div>
 <div class="metric"><span>Decision</span><strong>{html_escape(_compact_decision(report.get('decision')))}</strong></div>
 <div class="metric"><span>Source mode</span><strong>{html_escape(report.get('source_mode'))}</strong></div>
+<div class="metric"><span>Gate mode</span><strong>{html_escape(_display_value(execution.get('gate_mode')))}</strong></div>
+<div class="metric"><span>Expected exit</span><strong>{html_escape(_display_value(execution.get('expected_exit_code')))}</strong></div>
 <div class="metric"><span>Smoke</span><strong>{html_escape(smoke.get('status'))}</strong></div>
 <div class="metric"><span>Matrix</span><strong>{html_escape(matrix.get('status'))}</strong></div>
 <div class="metric"><span>Thresholds</span><strong>{html_escape(matrix.get('threshold_count'))}</strong></div>

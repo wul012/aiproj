@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 439 makes the baseline-candidate threshold boundary smoke reusable and diagnostic: it can rebuild the matrix from an existing smoke summary without rerunning training, and it records why a passing pipeline still leaves the candidate rejected.
+Version 440 turns the reusable baseline-candidate threshold boundary diagnosis into an optional strict gate: exploratory runs can still pass, while `--require-diagnosis-pass` exits `2` when the candidate remains rejected.
+
+## Latest v440 checkpoint
+
+- `scripts/run_baseline_candidate_threshold_boundary_smoke.py` now accepts `--require-diagnosis-pass`.
+- Boundary smoke outputs now include `execution.gate_mode`, `execution.require_diagnosis_pass`, and `execution.expected_exit_code`.
+- `resolve_exit_code()` distinguishes pipeline failure (`1`) from strict diagnosis review rejection (`2`).
+- The v440 evidence reuses the v438 smoke summary, records `gate_mode=diagnosis_strict`, and exits `2` because diagnosis is `candidate_not_accepted`.
+- Archived diagnosis-gate runtime evidence and Playwright screenshot in `d/440`.
 
 ## Latest v439 checkpoint
 

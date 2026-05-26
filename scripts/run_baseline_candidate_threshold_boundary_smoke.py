@@ -49,6 +49,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--baseline-seed", type=int, default=1337)
     parser.add_argument("--candidate-seed", type=int, default=2026)
     parser.add_argument("--require-boundary-pass", action="store_true", help="Exit with 2 unless the threshold boundary summary passes.")
+    parser.add_argument("--require-diagnosis-pass", action="store_true", help="Exit with 2 unless review_diagnosis.status is pass.")
     parser.add_argument("--force", action="store_true", help="Delete an existing non-empty output directory first.")
     return parser.parse_args(argv)
 
@@ -87,10 +88,20 @@ def main(argv: Sequence[str] | None = None) -> None:
         matrix_outputs=matrix_outputs,
         source_mode=source_mode,
     )
+    exit_code = resolve_exit_code(
+        summary,
+        require_boundary_pass=args.require_boundary_pass,
+        require_diagnosis_pass=args.require_diagnosis_pass,
+    )
+    annotate_execution_summary(
+        summary,
+        require_boundary_pass=args.require_boundary_pass,
+        require_diagnosis_pass=args.require_diagnosis_pass,
+        expected_exit_code=exit_code,
+    )
     outputs = write_baseline_candidate_threshold_boundary_smoke_outputs(summary, summary_dir)
     print(render_baseline_candidate_threshold_boundary_smoke_text(summary), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
-    exit_code = resolve_exit_code(summary, require_boundary_pass=args.require_boundary_pass)
     if exit_code:
         raise SystemExit(exit_code)
 
@@ -136,13 +147,39 @@ def reuse_smoke_summary(summary_path: Path) -> tuple[Path, dict[str, Any]]:
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_boundary_pass: bool) -> int:
+def resolve_exit_code(report: dict[str, Any], *, require_boundary_pass: bool, require_diagnosis_pass: bool = False) -> int:
     if report.get("status") != "pass":
         return 1
     boundary = report.get("threshold_boundary")
+    diagnosis = report.get("review_diagnosis")
+    if require_diagnosis_pass and (not isinstance(diagnosis, dict) or diagnosis.get("status") != "pass"):
+        return 1 if isinstance(diagnosis, dict) and diagnosis.get("status") == "fail" else 2
     if require_boundary_pass and (not isinstance(boundary, dict) or boundary.get("status") != "pass"):
         return 2
     return 0
+
+
+def annotate_execution_summary(
+    report: dict[str, Any],
+    *,
+    require_boundary_pass: bool,
+    require_diagnosis_pass: bool,
+    expected_exit_code: int,
+) -> dict[str, Any]:
+    if require_diagnosis_pass:
+        gate_mode = "diagnosis_strict"
+    elif require_boundary_pass:
+        gate_mode = "boundary_strict"
+    else:
+        gate_mode = "exploratory"
+    report["execution"] = {
+        "gate_mode": gate_mode,
+        "require_boundary_pass": bool(require_boundary_pass),
+        "require_diagnosis_pass": bool(require_diagnosis_pass),
+        "expected_exit_code": int(expected_exit_code),
+        "strict_gate_active": bool(require_boundary_pass or require_diagnosis_pass),
+    }
+    return report
 
 
 def _is_relative_to(path: Path, parent: Path) -> bool:

@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate eval loop",
+  "generated_at": "2026-05-26T06:31:01Z",
+  "status": "pass",
+  "decision": "reject_candidate",
+  "source_smoke_summary": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+  "experiment": {
+    "loop_type": "baseline_candidate_eval_loop",
+    "baseline_name": "tiny-baseline",
+    "candidate_name": "tiny-candidate",
+    "suite_name": "standard-zh",
+    "case_token_cap": 3,
+    "controlled_variable": "max_iters",
+    "baseline_max_iters": 1,
+    "candidate_max_iters": 2,
+    "max_iters_delta": 1,
+    "budget_mode": "candidate_more_iters",
+    "baseline_seed": 1337,
+    "candidate_seed": 2026,
+    "min_overall_score_delta": 0.5
+  },
+  "baseline_metrics": {
+    "status": "pass",
+    "scorecard_status": "pass",
+    "overall_score": 81.17,
+    "eval_suite_case_count": 10,
+    "pair_same_checkpoint_baseline": true
+  },
+  "candidate_metrics": {
+    "status": "pass",
+    "scorecard_status": "pass",
+    "overall_score": 81.17,
+    "eval_suite_case_count": 10,
+    "pair_same_checkpoint_baseline": true
+  },
+  "delta_report": {
+    "overall_score_delta": 0.0,
+    "best_by_overall_score": "tiny-candidate",
+    "best_by_rubric_avg_score": "tiny-candidate",
+    "improved_overall_count": 0,
+    "regressed_overall_count": 0,
+    "case_delta_count": 20,
+    "case_regression_count": 0,
+    "generation_quality_flag_improvement_count": 0,
+    "generation_quality_flag_regression_count": 0,
+    "non_comparison_ready_count": 0
+  },
+  "benchmark_history": {
+    "entry_count": 1,
+    "ready_count": 0,
+    "model_quality_claim": "not_claimed",
+    "readiness_requirement_status": "fail",
+    "readiness_requirement_decision": "stop",
+    "readiness_requirement_failed_reasons": [
+      "insufficient_ready_entries",
+      "not_real_benchmark_evidence"
+    ],
+    "outputs": {
+      "json": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\benchmark-history\\benchmark_history.json",
+      "csv": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\benchmark-history\\benchmark_history.csv",
+      "markdown": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\benchmark-history\\benchmark_history.md",
+      "html": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\benchmark-history\\benchmark_history.html"
+    }
+  },
+  "control_summary": {
+    "status": "pass",
+    "check_count": 7,
+    "failed_count": 0,
+    "failed_reasons": []
+  },
+  "control_checks": [
+    {
+      "id": "smoke_status",
+      "status": "pass",
+      "expected": "pass",
+      "actual": "pass",
+      "reason": ""
+    },
+    {
+      "id": "controlled_variable",
+      "status": "pass",
+      "expected": "max_iters or seed",
+      "actual": "max_iters",
+      "reason": ""
+    },
+    {
+      "id": "baseline_score_present",
+      "status": "pass",
+      "expected": "numeric score",
+      "actual": 81.17,
+      "reason": ""
+    },
+    {
+      "id": "candidate_score_present",
+      "status": "pass",
+      "expected": "numeric score",
+      "actual": 81.17,
+      "reason": ""
+    },
+    {
+      "id": "case_count_match",
+      "status": "pass",
+      "expected": "same positive case count",
+      "actual": "baseline=10, candidate=10",
+      "reason": ""
+    },
+    {
+      "id": "comparison_ready",
+      "status": "pass",
+      "expected": "0",
+      "actual": 0,
+      "reason": ""
+    },
+    {
+      "id": "candidate_not_lower_overall_score",
+      "status": "pass",
+      "expected": "candidate >= baseline",
+      "actual": "baseline=81.17, candidate=81.17",
+      "reason": ""
+    }
+  ],
+  "acceptance_criteria": {
+    "mode": "strict_tiny_candidate_promotion",
+    "status": "fail",
+    "min_overall_score_delta": 0.5,
+    "criteria_count": 5,
+    "failed_count": 3,
+    "failed_reasons": [
+      "scorecard_decision_promote expected promote, got blocked",
+      "selected_candidate expected tiny-candidate, got None",
+      "min_overall_score_delta expected >= 0.5, got 0.0"
+    ],
+    "criteria": [
+      {
+        "id": "smoke_status_pass",
+        "status": "pass",
+        "expected": "pass",
+        "actual": "pass",
+        "reason": ""
+      },
+      {
+        "id": "scorecard_decision_promote",
+        "status": "fail",
+        "expected": "promote",
+        "actual": "blocked",
+        "reason": "scorecard_decision_promote expected promote, got blocked"
+      },
+      {
+        "id": "selected_candidate",
+        "status": "fail",
+        "expected": "tiny-candidate",
+        "actual": null,
+        "reason": "selected_candidate expected tiny-candidate, got None"
+      },
+      {
+        "id": "control_checks_pass",
+        "status": "pass",
+        "expected": "no failed control checks",
+        "actual": [],
+        "reason": ""
+      },
+      {
+        "id": "min_overall_score_delta",
+        "status": "fail",
+        "expected": ">= 0.5",
+        "actual": 0.0,
+        "reason": "min_overall_score_delta expected >= 0.5, got 0.0"
+      }
+    ]
+  },
+  "promotion_decision": {
+    "status": "blocked",
+    "action": "keep_baseline_or_fix_candidate",
+    "selected_name": null,
+    "accepted": false,
+    "rejected_reasons": [
+      "rubric_avg_score below 60.0",
+      "Keep the baseline or fix candidate scorecard regressions before promotion.",
+      "scorecard_decision_promote expected promote, got blocked",
+      "selected_candidate expected tiny-candidate, got None",
+      "min_overall_score_delta expected >= 0.5, got 0.0"
+    ],
+    "threshold_margin": -23.33,
+    "remediation_count": 1
+  },
+  "next_action": "keep_baseline_and_fix_candidate",
+  "command_result": {
+    "name": "existing_tiny_scorecard_comparison_smoke_summary",
+    "status": "pass",
+    "returncode": 0,
+    "source_summary": "d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+    "command": [],
+    "command_text": "",
+    "stdout": "",
+    "stderr": ""
+  },
+  "boundary": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Tiny CPU scorecard deltas and decisions verify benchmark plumbing and configuration routing, not robust model improvement."
+  },
+  "execution": {
+    "source_mode": "reuse_summary",
+    "fail_on_reject": true,
+    "expected_exit_code": 2,
+    "gate_mode": "strict"
+  }
+}
