@@ -446,6 +446,9 @@ d/444/解释/说明.md
 d/445/图片
 d/445/解释/说明.md
  -> v445 CI boundary plan-check context carryover 的运行截图和解释
+d/446/图片
+d/446/解释/说明.md
+ -> v446 release readiness comparison CI boundary plan-check regression 的运行截图和解释
 ```
 
 写入规则：

@@ -104,6 +104,13 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "ci_workflow_node24_actions": summary.get("ci_workflow_node24_actions"),
         "ci_workflow_required_order_count": summary.get("ci_workflow_required_order_count"),
         "ci_workflow_order_violation_count": summary.get("ci_workflow_order_violation_count"),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready": summary.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready"),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": summary.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": summary.get(
+            "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"
+        ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready": summary.get(
             "ci_workflow_release_readiness_drift_contract_smoke_ready"
         ),
@@ -158,6 +165,12 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         after = compared_panels.get(key)
         if before != after:
             changed.append(f"{key}:{before}->{after}")
+    baseline_plan_digest_ready = baseline.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready")
+    compared_plan_digest_ready = compared.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready")
+    baseline_boundary_gate_ready = baseline.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready")
+    compared_boundary_gate_ready = compared.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready")
+    baseline_boundary_plan_ready = baseline.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")
+    compared_boundary_plan_ready = compared.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")
     baseline_drift_smoke_ready = baseline.get("ci_workflow_release_readiness_drift_contract_smoke_ready")
     compared_drift_smoke_ready = compared.get("ci_workflow_release_readiness_drift_contract_smoke_ready")
     delta = {
@@ -180,6 +193,21 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "ci_workflow_required_order_delta": _number_delta(compared.get("ci_workflow_required_order_count"), baseline.get("ci_workflow_required_order_count")),
         "ci_workflow_order_violation_delta": _number_delta(compared.get("ci_workflow_order_violation_count"), baseline.get("ci_workflow_order_violation_count")),
         "ci_workflow_status_changed": compared.get("ci_workflow_status") != baseline.get("ci_workflow_status"),
+        "baseline_ci_workflow_tiny_scorecard_plan_digest_gate_ready": baseline_plan_digest_ready,
+        "compared_ci_workflow_tiny_scorecard_plan_digest_gate_ready": compared_plan_digest_ready,
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_changed": compared_plan_digest_ready != baseline_plan_digest_ready,
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed": baseline_plan_digest_ready is True
+        and compared_plan_digest_ready is not True,
+        "baseline_ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": baseline_boundary_gate_ready,
+        "compared_ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": compared_boundary_gate_ready,
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_changed": compared_boundary_gate_ready != baseline_boundary_gate_ready,
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed": baseline_boundary_gate_ready is True
+        and compared_boundary_gate_ready is not True,
+        "baseline_ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": baseline_boundary_plan_ready,
+        "compared_ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": compared_boundary_plan_ready,
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_changed": compared_boundary_plan_ready != baseline_boundary_plan_ready,
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed": baseline_boundary_plan_ready is True
+        and compared_boundary_plan_ready is not True,
         "baseline_ci_workflow_release_readiness_drift_contract_smoke_ready": baseline_drift_smoke_ready,
         "compared_ci_workflow_release_readiness_drift_contract_smoke_ready": compared_drift_smoke_ready,
         "ci_workflow_release_readiness_drift_contract_smoke_ready_changed": compared_drift_smoke_ready != baseline_drift_smoke_ready,
@@ -284,6 +312,18 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
         )
     if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
         parts.append("CI workflow release readiness drift-contract smoke ready regressed.")
+    if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_changed"):
+        parts.append(
+            "CI workflow baseline-candidate threshold boundary gate check ready changed from "
+            f"{delta.get('baseline_ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready')} to "
+            f"{delta.get('compared_ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready')}."
+        )
+    if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_changed"):
+        parts.append(
+            "CI workflow baseline-candidate threshold boundary gate plan check ready changed from "
+            f"{delta.get('baseline_ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready')} to "
+            f"{delta.get('compared_ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready')}."
+        )
     ci_reasons = _string_list(delta.get("ci_workflow_regression_reasons"))
     if ci_reasons:
         parts.append("CI workflow regression reason(s): " + ", ".join(_ci_workflow_reason_label(reason) for reason in ci_reasons) + ".")
@@ -365,6 +405,15 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": sum(
             1 for delta in deltas if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed")
+        ),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed")
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed")
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed")
         ),
         "ci_workflow_regression_reasons": _unique_strings(
             reason for delta in deltas for reason in _string_list(delta.get("ci_workflow_regression_reasons"))
@@ -477,6 +526,12 @@ def _ci_workflow_regression_reasons(delta: dict[str, Any]) -> list[str]:
         reasons.append("failed_checks_increased")
     if _is_ci_workflow_order_regression(delta):
         reasons.append("order_violations_increased")
+    if delta.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed"):
+        reasons.append("tiny_scorecard_plan_digest_gate_not_ready")
+    if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed"):
+        reasons.append("boundary_gate_check_not_ready")
+    if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed"):
+        reasons.append("boundary_gate_plan_check_not_ready")
     if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
         reasons.append("drift_contract_smoke_not_ready")
     if delta.get("ci_workflow_status_changed"):
@@ -621,6 +676,9 @@ def _ci_workflow_reason_summary(value: Any) -> str:
 def _ci_workflow_reason_label(value: Any) -> str:
     return {
         "drift_contract_smoke_not_ready": "drift-contract smoke readiness",
+        "tiny_scorecard_plan_digest_gate_not_ready": "tiny scorecard plan digest gate readiness",
+        "boundary_gate_check_not_ready": "baseline-candidate boundary gate check readiness",
+        "boundary_gate_plan_check_not_ready": "baseline-candidate boundary plan check readiness",
         "failed_checks_increased": "failed checks increased",
         "order_violations_increased": "order violations increased",
         "workflow_status_downgraded": "workflow status downgraded",

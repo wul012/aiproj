@@ -57,6 +57,18 @@ def main() -> None:
         + json.dumps(summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count", 0), ensure_ascii=False)
     )
     print(
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count="
+        + json.dumps(summary.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count", 0), ensure_ascii=False)
+    )
+    print(
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count="
+        + json.dumps(summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count", 0), ensure_ascii=False)
+    )
+    print(
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count="
+        + json.dumps(summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count", 0), ensure_ascii=False)
+    )
+    print(
         "ci_workflow_regression_reason_counts="
         + json.dumps(summary.get("ci_workflow_regression_reason_counts") or {}, ensure_ascii=False)
     )

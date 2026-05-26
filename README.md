@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 445 carries the baseline-candidate threshold boundary gate and wrapper plan-check readiness from CI workflow hygiene into project audit, release bundle, and release readiness evidence.
+Version 446 makes release readiness comparison treat CI boundary plan-check readiness as a first-class regression signal, even when the compared release status stays ready.
+
+## Latest v446 checkpoint
+
+- Release readiness comparison rows now include tiny plan digest, boundary gate check, boundary plan check, and drift-contract smoke readiness fields from release readiness summaries.
+- Deltas now flag CI workflow regressions when a baseline-ready boundary gate/check field becomes not ready, without requiring the overall readiness status to fall.
+- CSV, Markdown, and HTML comparison outputs expose CI plan digest, boundary gate, and boundary plan readiness plus their regressed delta columns.
+- `scripts/compare_release_readiness.py` prints the three new CI readiness regression counters for shell-only review.
+- Archived a controlled ready-vs-ready comparison where `boundary_gate_plan_check_not_ready` is the only regression in `d/446`.
 
 ## Latest v445 checkpoint
 
