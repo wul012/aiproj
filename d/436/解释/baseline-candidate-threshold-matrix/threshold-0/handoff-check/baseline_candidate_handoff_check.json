@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate handoff check",
+  "generated_at": "2026-05-26T01:55:55Z",
+  "status": "pass",
+  "decision": "continue_with_valid_handoff",
+  "failed_count": 0,
+  "issues": [],
+  "checked_fields": [
+    "status",
+    "decision",
+    "handoff_ready",
+    "next_baseline",
+    "baseline.checkpoint_exists",
+    "candidate.checkpoint_exists",
+    "guardrails.rejected_reasons",
+    "execution.expected_exit_code"
+  ],
+  "source_handoff": "d\\436\\解释\\baseline-candidate-threshold-matrix\\threshold-0\\handoff\\baseline_candidate_handoff.json",
+  "source_loop_report": "d\\436\\解释\\baseline-candidate-threshold-matrix\\threshold-0\\loop\\baseline_candidate_eval_loop.json",
+  "handoff_decision": "promote_candidate_to_next_baseline",
+  "expected_decision": "promote_candidate_to_next_baseline",
+  "handoff_ready": true,
+  "expected_handoff_ready": true
+}

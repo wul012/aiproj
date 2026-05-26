@@ -416,6 +416,9 @@ d/434/解释/说明.md
 d/435/图片
 d/435/解释/说明.md
  -> v435 baseline-candidate handoff embedded check 的运行截图和解释
+d/436/图片
+d/436/解释/说明.md
+ -> v436 baseline-candidate threshold matrix 的运行截图和解释
 ```
 
 写入规则：

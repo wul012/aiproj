@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT baseline-candidate threshold matrix</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f8f9f7; color: #17211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d8ded7; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d8ded7; border-radius: 8px; padding: 10px; background: #fbfcfa; }
+.metric span { display: block; color: #607066; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: break-word; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid #d8ded7; padding: 10px; text-align: left; }
+th { color: #44534b; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT baseline-candidate threshold matrix</h1>
+<section>
+<h2>Summary</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>threshold_matrix_ready</strong></div>
+<div class="metric"><span>Thresholds</span><strong>2</strong></div>
+<div class="metric"><span>Accept count</span><strong>1</strong></div>
+<div class="metric"><span>Reject count</span><strong>1</strong></div>
+<div class="metric"><span>Check failures</span><strong>0</strong></div>
+</div>
+</section>
+<section>
+<h2>Rows</h2>
+<table>
+<thead><tr><th>Threshold</th><th>Loop decision</th><th>Ready</th><th>Next source</th><th>Exit</th><th>Check</th></tr></thead>
+<tbody>
+<tr><td>0.0</td><td>accept_candidate</td><td>True</td><td>candidate</td><td>0</td><td>pass</td></tr>
+<tr><td>1.0</td><td>reject_candidate</td><td>False</td><td>current_baseline</td><td>2</td><td>pass</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+</body>
+</html>

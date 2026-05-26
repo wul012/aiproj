@@ -1,0 +1,49 @@
+- main [ref=e2] [box=120,28,1040,467]:
+  - heading "MiniGPT baseline-candidate threshold matrix" [level=1] [ref=e3] [box=120,28,1040,37]
+  - generic [ref=e4] [box=120,77,1040,208]:
+    - heading "Summary" [level=2] [ref=e5] [box=137,94,1007,24]
+    - generic [ref=e6] [box=137,128,1007,140]:
+      - generic [ref=e7] [box=137,128,244,65]:
+        - generic [ref=e8] [box=147,139,223,16]: Status
+        - strong [ref=e9] [box=147,161,223,22]: pass
+      - generic [ref=e10] [box=391,128,244,65]:
+        - generic [ref=e11] [box=401,139,223,16]: Decision
+        - strong [ref=e12] [box=401,161,223,22]: threshold_matrix_ready
+      - generic [ref=e13] [box=645,128,244,65]:
+        - generic [ref=e14] [box=656,139,223,16]: Thresholds
+        - strong [ref=e15] [box=656,161,223,22]: "2"
+      - generic [ref=e16] [box=899,128,244,65]:
+        - generic [ref=e17] [box=910,139,223,16]: Accept count
+        - strong [ref=e18] [box=910,161,223,22]: "1"
+      - generic [ref=e19] [box=137,203,244,65]:
+        - generic [ref=e20] [box=147,214,223,16]: Reject count
+        - strong [ref=e21] [box=147,236,223,22]: "1"
+      - generic [ref=e22] [box=391,203,244,65]:
+        - generic [ref=e23] [box=401,214,223,16]: Check failures
+        - strong [ref=e24] [box=401,236,223,22]: "0"
+  - generic [ref=e25] [box=120,301,1040,194]:
+    - heading "Rows" [level=2] [ref=e26] [box=137,317,1007,24]
+    - table [ref=e27] [box=137,352,1007,127]:
+      - rowgroup [ref=e28] [box=137,352,1007,42]:
+        - row "Threshold Loop decision Ready Next source Exit Check" [ref=e29] [box=137,352,1007,42]:
+          - columnheader "Threshold" [ref=e30] [box=137,352,174,42]
+          - columnheader "Loop decision" [ref=e31] [box=311,352,259,42]
+          - columnheader "Ready" [ref=e32] [box=570,352,122,42]
+          - columnheader "Next source" [ref=e33] [box=692,352,245,42]
+          - columnheader "Exit" [ref=e34] [box=937,352,88,42]
+          - columnheader "Check" [ref=e35] [box=1025,352,119,42]
+      - rowgroup [ref=e36] [box=137,394,1007,85]:
+        - row "0.0 accept_candidate True candidate 0 pass" [ref=e37] [box=137,394,1007,42]:
+          - cell "0.0" [ref=e38] [box=137,394,174,42]
+          - cell "accept_candidate" [ref=e39] [box=311,394,259,42]
+          - cell "True" [ref=e40] [box=570,394,122,42]
+          - cell "candidate" [ref=e41] [box=692,394,245,42]
+          - cell "0" [ref=e42] [box=937,394,88,42]
+          - cell "pass" [ref=e43] [box=1025,394,119,42]
+        - row "1.0 reject_candidate False current_baseline 2 pass" [ref=e44] [box=137,436,1007,42]:
+          - cell "1.0" [ref=e45] [box=137,436,174,42]
+          - cell "reject_candidate" [ref=e46] [box=311,436,259,42]
+          - cell "False" [ref=e47] [box=570,436,122,42]
+          - cell "current_baseline" [ref=e48] [box=692,436,245,42]
+          - cell "2" [ref=e49] [box=937,436,88,42]
+          - cell "pass" [ref=e50] [box=1025,436,119,42]

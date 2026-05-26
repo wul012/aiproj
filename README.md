@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 435 embeds baseline-candidate handoff check results back into the main handoff artifact, so a generated handoff can carry its own contract-check status and sidecar paths while preserving the existing strict acceptance exit behavior.
+Version 436 adds a baseline-candidate threshold matrix that reuses one v432 tiny smoke summary across multiple minimum score-delta thresholds, proving that the same candidate can produce both accepted and rejected handoff paths while each embedded handoff check still passes.
+
+## Latest v436 checkpoint
+
+- Added `src/minigpt/baseline_candidate_threshold_matrix.py` to rebuild eval-loop, handoff, and handoff-check artifacts for each configured `min_overall_score_delta`.
+- Added `scripts/run_baseline_candidate_threshold_matrix.py` with `--thresholds`, `--require-both-outcomes`, and `--force` so CI or local review can require both accept and reject rows.
+- The real v436 matrix uses v432 tiny smoke evidence with thresholds `0` and `1`, producing one `accept_candidate` row and one `reject_candidate` row.
+- Each threshold row embeds a passing handoff contract check, so the matrix checks behavior around the threshold without claiming model quality improvement.
+- Archived matrix runtime evidence and Playwright MCP screenshot in `d/436`.
 
 ## Latest v435 checkpoint
 
