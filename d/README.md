@@ -410,6 +410,9 @@ d/432/解释/说明.md
 d/433/图片
 d/433/解释/说明.md
  -> v433 baseline-candidate handoff 的运行截图和解释
+d/434/图片
+d/434/解释/说明.md
+ -> v434 baseline-candidate handoff contract check 的运行截图和解释
 ```
 
 写入规则：

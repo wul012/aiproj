@@ -1,0 +1,11 @@
+﻿status=pass
+decision=continue_with_valid_handoff
+failed_count=0
+source_handoff=d\433\解释\baseline-candidate-handoff\baseline_candidate_handoff.json
+source_loop_report=d\432\解释\baseline-candidate-eval-loop\baseline_candidate_eval_loop.json
+handoff_decision=keep_current_baseline
+expected_decision=keep_current_baseline
+handoff_ready=False
+expected_handoff_ready=False
+issues=
+outputs={"json": "d\\434\\解释\\baseline-candidate-handoff-check\\baseline_candidate_handoff_check.json", "text": "d\\434\\解释\\baseline-candidate-handoff-check\\baseline_candidate_handoff_check.txt", "markdown": "d\\434\\解释\\baseline-candidate-handoff-check\\baseline_candidate_handoff_check.md", "html": "d\\434\\解释\\baseline-candidate-handoff-check\\baseline_candidate_handoff_check.html"}

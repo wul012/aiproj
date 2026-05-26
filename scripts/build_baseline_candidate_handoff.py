@@ -14,12 +14,17 @@ from minigpt.baseline_candidate_handoff import (  # noqa: E402
     render_baseline_candidate_handoff_text,
     write_baseline_candidate_handoff_outputs,
 )
+from minigpt.baseline_candidate_handoff_check import (  # noqa: E402
+    build_baseline_candidate_handoff_check,
+    write_baseline_candidate_handoff_check_outputs,
+)
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a MiniGPT baseline-candidate handoff from a loop report.")
     parser.add_argument("loop_report", type=Path, help="Path to baseline_candidate_eval_loop.json or its directory.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "baseline-candidate-handoff")
+    parser.add_argument("--check-out-dir", type=Path, help="Optional directory for a rebuilt handoff contract check.")
     parser.add_argument("--require-accepted", action="store_true", help="Exit with 2 when the candidate is not ready for handoff.")
     parser.add_argument("--force", action="store_true", help="Delete an existing non-empty output directory first.")
     return parser.parse_args(argv)
@@ -33,6 +38,16 @@ def main(argv: Sequence[str] | None = None) -> None:
     print(render_baseline_candidate_handoff_text(handoff), end="")
     for key, path in outputs.items():
         print(f"saved_{key}={path}")
+    if args.check_out_dir is not None:
+        prepare_output_dir(args.check_out_dir, force=args.force)
+        check = build_baseline_candidate_handoff_check(outputs["json"])
+        check_outputs = write_baseline_candidate_handoff_check_outputs(check, args.check_out_dir)
+        print(f"check_status={check.get('status')}")
+        print(f"check_failed_count={check.get('failed_count')}")
+        for key, path in check_outputs.items():
+            print(f"saved_check_{key}={path}")
+        if check.get("status") != "pass":
+            raise SystemExit(1)
     exit_code = resolve_exit_code(handoff, require_accepted=args.require_accepted)
     if exit_code:
         raise SystemExit(exit_code)

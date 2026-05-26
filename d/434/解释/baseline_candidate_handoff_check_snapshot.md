@@ -1,0 +1,36 @@
+- main [ref=e2]:
+  - heading "MiniGPT baseline-candidate handoff check" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Contract Status" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: continue_with_valid_handoff
+      - generic [ref=e13]:
+        - generic [ref=e14]: Failed count
+        - strong [ref=e15]: "0"
+      - generic [ref=e16]:
+        - generic [ref=e17]: Handoff decision
+        - strong [ref=e18]: keep_current_baseline
+      - generic [ref=e19]:
+        - generic [ref=e20]: Expected decision
+        - strong [ref=e21]: keep_current_baseline
+      - generic [ref=e22]:
+        - generic [ref=e23]: Handoff ready
+        - strong [ref=e24]: "False"
+      - generic [ref=e25]:
+        - generic [ref=e26]: Expected ready
+        - strong [ref=e27]: "False"
+      - generic [ref=e28]:
+        - generic [ref=e29]: Source handoff
+        - strong [ref=e30]: d\433\解释\baseline-candidate-handoff\baseline_candidate_handoff.json
+      - generic [ref=e31]:
+        - generic [ref=e32]: Source loop report
+        - strong [ref=e33]: d\432\解释\baseline-candidate-eval-loop\baseline_candidate_eval_loop.json
+  - generic [ref=e34]:
+    - heading "Issues" [level=2] [ref=e35]
+    - list [ref=e36]:
+      - listitem [ref=e37]: none

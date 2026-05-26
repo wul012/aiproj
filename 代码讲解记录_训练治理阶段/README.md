@@ -404,6 +404,9 @@
 447-v433-baseline-candidate-handoff.md
  -> v433 code explanation: convert a baseline-candidate eval loop report into a next-baseline handoff with checkpoint evidence, guardrail reasons, strict require-accepted exits, and compact review artifacts.
 
+448-v434-baseline-candidate-handoff-check.md
+ -> v434 code explanation: rebuild baseline-candidate handoff artifacts from their source loop report and validate next-baseline, guardrail, checkpoint, and gate metadata contracts.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

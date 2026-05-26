@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 433 adds a baseline-candidate handoff layer on top of the v432 eval loop, turning loop acceptance into a next-baseline decision artifact with checkpoint evidence, guardrail reasons, strict `--require-accepted` exit behavior, and compact JSON/text/Markdown/HTML outputs.
+Version 434 adds a contract check for baseline-candidate handoff artifacts, rebuilding the expected handoff from the source eval loop and validating the recorded next-baseline decision, guardrail reasons, checkpoint existence flags, and strict gate metadata.
+
+## Latest v434 checkpoint
+
+- Added `src/minigpt/baseline_candidate_handoff_check.py` to validate a v433 handoff against its recorded `source_loop_report`.
+- Added `scripts/check_baseline_candidate_handoff.py` as the direct check entrypoint for handoff JSON files or handoff output directories.
+- `scripts/build_baseline_candidate_handoff.py` now accepts optional `--check-out-dir` to write a contract-check sidecar immediately after generating the handoff.
+- The check treats a rejected candidate as valid when the handoff matches the rebuilt loop result; only missing/tampered handoff contract fields fail the check.
+- Archived contract-check runtime evidence and Playwright MCP screenshot in `d/434`.
 
 ## Latest v433 checkpoint
 
