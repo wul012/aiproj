@@ -1,0 +1,17 @@
+﻿status=pass
+decision=threshold_matrix_ready
+source_smoke_summary=d\432\解释\baseline-candidate-eval-loop\tiny-scorecard-comparison-smoke\tiny_scorecard_comparison_smoke_summary.json
+threshold_count=3
+accept_count=1
+reject_count=2
+handoff_check_failure_count=0
+threshold_boundary_status=pass
+threshold_boundary_decision=accept_reject_boundary_observed
+strictest_accepting_threshold=0.0
+first_rejecting_threshold=0.5
+is_monotonic_acceptance=True
+transition_count=1
+row=threshold=0.0,loop_decision=accept_candidate,handoff_ready=True,next_baseline_source=candidate,expected_exit_code=0,handoff_check_status=pass
+row=threshold=0.5,loop_decision=reject_candidate,handoff_ready=False,next_baseline_source=current_baseline,expected_exit_code=2,handoff_check_status=pass
+row=threshold=1.0,loop_decision=reject_candidate,handoff_ready=False,next_baseline_source=current_baseline,expected_exit_code=2,handoff_check_status=pass
+outputs={"json": "d\\437\\解释\\baseline-candidate-threshold-boundary\\baseline_candidate_threshold_matrix.json", "text": "d\\437\\解释\\baseline-candidate-threshold-boundary\\baseline_candidate_threshold_matrix.txt", "markdown": "d\\437\\解释\\baseline-candidate-threshold-boundary\\baseline_candidate_threshold_matrix.md", "html": "d\\437\\解释\\baseline-candidate-threshold-boundary\\baseline_candidate_threshold_matrix.html"}

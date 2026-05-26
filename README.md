@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 436 adds a baseline-candidate threshold matrix that reuses one v432 tiny smoke summary across multiple minimum score-delta thresholds, proving that the same candidate can produce both accepted and rejected handoff paths while each embedded handoff check still passes.
+Version 437 strengthens the baseline-candidate threshold matrix with inclusive range thresholds and an explicit threshold-boundary summary, so reviewers can see the strictest accepting threshold, first rejecting threshold, transition count, and monotonic acceptance check.
+
+## Latest v437 checkpoint
+
+- `scripts/run_baseline_candidate_threshold_matrix.py` now defaults to the inclusive range `0:1:0.5`, while still accepting comma-separated thresholds.
+- `src/minigpt/baseline_candidate_threshold_matrix.py` now records `threshold_boundary` with `accept_reject_boundary_observed`, strictest accepting threshold, first rejecting threshold, transitions, and monotonicity.
+- Text, Markdown, and HTML reports now surface boundary status and threshold transition fields instead of only aggregate accept/reject counts.
+- Added tests for range parsing, boundary summaries, non-monotonic review detection, and the real accept/reject threshold sweep.
+- Archived boundary runtime evidence and Playwright MCP screenshot in `d/437`.
 
 ## Latest v436 checkpoint
 

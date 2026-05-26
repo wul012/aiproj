@@ -1,0 +1,10 @@
+status=pass
+decision=continue_with_valid_handoff
+failed_count=0
+source_handoff=d\437\解释\baseline-candidate-threshold-boundary\threshold-0\handoff\baseline_candidate_handoff.json
+source_loop_report=d\437\解释\baseline-candidate-threshold-boundary\threshold-0\loop\baseline_candidate_eval_loop.json
+handoff_decision=promote_candidate_to_next_baseline
+expected_decision=promote_candidate_to_next_baseline
+handoff_ready=True
+expected_handoff_ready=True
+issues=

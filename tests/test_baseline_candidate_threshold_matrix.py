@@ -9,6 +9,7 @@ from minigpt.baseline_candidate_threshold_matrix import (
     build_baseline_candidate_threshold_matrix,
     parse_thresholds,
     render_baseline_candidate_threshold_matrix_text,
+    summarize_threshold_boundary,
     write_baseline_candidate_threshold_matrix_outputs,
 )
 from scripts.run_baseline_candidate_threshold_matrix import main, resolve_exit_code
@@ -23,20 +24,29 @@ class BaselineCandidateThresholdMatrixTests(unittest.TestCase):
             report = build_baseline_candidate_threshold_matrix(
                 summary_path,
                 root / "matrix",
-                thresholds=[0.0, 1.0],
+                thresholds=[0.0, 0.5, 1.0],
                 generated_at="2026-05-26T00:00:00Z",
             )
             text = render_baseline_candidate_threshold_matrix_text(report)
+            boundary = report["threshold_boundary"]
 
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["accept_count"], 1)
-            self.assertEqual(report["reject_count"], 1)
+            self.assertEqual(report["reject_count"], 2)
             self.assertEqual(report["handoff_check_failure_count"], 0)
             self.assertEqual(report["rows"][0]["loop_decision"], "accept_candidate")
             self.assertEqual(report["rows"][0]["next_baseline_source"], "candidate")
             self.assertEqual(report["rows"][1]["loop_decision"], "reject_candidate")
             self.assertEqual(report["rows"][1]["next_baseline_source"], "current_baseline")
+            self.assertEqual(boundary["status"], "pass")
+            self.assertEqual(boundary["decision"], "accept_reject_boundary_observed")
+            self.assertEqual(boundary["strictest_accepting_threshold"], 0.0)
+            self.assertEqual(boundary["first_rejecting_threshold"], 0.5)
+            self.assertTrue(boundary["is_monotonic_acceptance"])
+            self.assertEqual(boundary["transition_count"], 1)
             self.assertIn("accept_count=1", text)
+            self.assertIn("threshold_boundary_decision=accept_reject_boundary_observed", text)
+            self.assertIn("first_rejecting_threshold=0.5", text)
             self.assertEqual(resolve_exit_code(report, require_both_outcomes=True), 0)
 
     def test_matrix_writes_outputs_and_embedded_handoff_checks(self) -> None:
@@ -57,8 +67,25 @@ class BaselineCandidateThresholdMatrixTests(unittest.TestCase):
 
     def test_parse_thresholds_rejects_empty_values(self) -> None:
         self.assertEqual(parse_thresholds("0, 1.5"), [0.0, 1.5])
+        self.assertEqual(parse_thresholds("0:1:0.5"), [0.0, 0.5, 1.0])
         with self.assertRaises(ValueError):
             parse_thresholds("")
+        with self.assertRaises(ValueError):
+            parse_thresholds("0:1:0")
+
+    def test_boundary_summary_marks_non_monotonic_rows_for_review(self) -> None:
+        summary = summarize_threshold_boundary(
+            [
+                {"threshold": 0.0, "loop_decision": "accept_candidate"},
+                {"threshold": 0.5, "loop_decision": "reject_candidate"},
+                {"threshold": 1.0, "loop_decision": "accept_candidate"},
+            ]
+        )
+
+        self.assertEqual(summary["status"], "review")
+        self.assertEqual(summary["decision"], "non_monotonic_threshold_outcomes")
+        self.assertFalse(summary["is_monotonic_acceptance"])
+        self.assertEqual(summary["transition_count"], 2)
 
     def test_cli_require_both_outcomes_returns_two_when_only_accepts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

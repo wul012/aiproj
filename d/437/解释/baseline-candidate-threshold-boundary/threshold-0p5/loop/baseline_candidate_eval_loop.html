@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT baseline-candidate eval loop</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f6f8f7; color: #17211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d7dfdb; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d7dfdb; border-radius: 8px; padding: 10px; background: #fbfcfb; }
+.metric span { display: block; color: #5c6c65; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: anywhere; }
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT baseline-candidate eval loop</h1>
+<section>
+<h2>Decision</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>reject_candidate</strong></div>
+<div class="metric"><span>Source</span><strong>reuse_summary</strong></div>
+<div class="metric"><span>Gate</span><strong>strict</strong></div>
+<div class="metric"><span>Exit</span><strong>2</strong></div>
+<div class="metric"><span>Promotion</span><strong>promote</strong></div>
+<div class="metric"><span>Control</span><strong>pass</strong></div>
+<div class="metric"><span>Acceptance</span><strong>fail</strong></div>
+<div class="metric"><span>Accepted</span><strong>False</strong></div>
+<div class="metric"><span>Selected</span><strong>tiny-candidate</strong></div>
+<div class="metric"><span>Min Delta</span><strong>0.5</strong></div>
+<div class="metric"><span>Next</span><strong>keep_baseline_and_fix_candidate</strong></div>
+</div>
+</section>
+<section>
+<h2>Rejected Reasons</h2>
+<ul>
+<li>min_overall_score_delta expected &gt;= 0.5, got 0.0</li>
+</ul>
+</section>
+<section>
+<h2>Control Checks</h2>
+<ul>
+<li>none</li>
+</ul>
+</section>
+<section>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li>min_overall_score_delta expected &gt;= 0.5, got 0.0</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

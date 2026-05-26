@@ -22,7 +22,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run a MiniGPT baseline-candidate threshold matrix from one smoke summary.")
     parser.add_argument("smoke_summary", type=Path, help="Path to tiny_scorecard_comparison_smoke_summary.json or its directory.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "baseline-candidate-threshold-matrix")
-    parser.add_argument("--thresholds", default="0,1", help="Comma-separated min overall score deltas.")
+    parser.add_argument("--thresholds", default="0:1:0.5", help="Comma-separated deltas or inclusive start:stop:step range.")
     parser.add_argument("--require-both-outcomes", action="store_true", help="Exit with 2 unless the matrix has accept and reject rows.")
     parser.add_argument("--force", action="store_true", help="Delete an existing non-empty output directory first.")
     return parser.parse_args(argv)

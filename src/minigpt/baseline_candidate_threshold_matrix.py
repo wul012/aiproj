@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -22,13 +23,17 @@ MATRIX_JSON_FILENAME = "baseline_candidate_threshold_matrix.json"
 MATRIX_TEXT_FILENAME = "baseline_candidate_threshold_matrix.txt"
 MATRIX_MARKDOWN_FILENAME = "baseline_candidate_threshold_matrix.md"
 MATRIX_HTML_FILENAME = "baseline_candidate_threshold_matrix.html"
-DEFAULT_THRESHOLDS = (0.0, 1.0)
+DEFAULT_THRESHOLDS = (0.0, 0.5, 1.0)
 
 
 def parse_thresholds(value: str | Iterable[float]) -> list[float]:
     if isinstance(value, str):
-        parts = [part.strip() for part in value.split(",")]
-        thresholds = [float(part) for part in parts if part]
+        stripped = value.strip()
+        if ":" in stripped and "," not in stripped:
+            thresholds = _parse_threshold_range(stripped)
+        else:
+            parts = [part.strip() for part in stripped.split(",")]
+            thresholds = [float(part) for part in parts if part]
     else:
         thresholds = [float(item) for item in value]
     if not thresholds:
@@ -40,12 +45,13 @@ def build_baseline_candidate_threshold_matrix(
     smoke_summary_path: str | Path,
     out_dir: str | Path,
     *,
-    thresholds: Iterable[float] = DEFAULT_THRESHOLDS,
+    thresholds: str | Iterable[float] = DEFAULT_THRESHOLDS,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     summary_path = resolve_baseline_candidate_eval_loop_smoke_summary(smoke_summary_path)
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
+    threshold_values = parse_thresholds(thresholds)
     rows = [
         _build_threshold_row(
             summary_path,
@@ -53,11 +59,12 @@ def build_baseline_candidate_threshold_matrix(
             threshold=float(threshold),
             generated_at=generated_at,
         )
-        for threshold in thresholds
+        for threshold in threshold_values
     ]
     accept_count = sum(1 for row in rows if row.get("loop_decision") == "accept_candidate")
     reject_count = sum(1 for row in rows if row.get("loop_decision") == "reject_candidate")
     check_failure_count = sum(1 for row in rows if row.get("handoff_check_status") != "pass")
+    threshold_boundary = summarize_threshold_boundary(rows)
     status = "pass" if rows and check_failure_count == 0 else "fail"
     return {
         "schema_version": 1,
@@ -70,6 +77,7 @@ def build_baseline_candidate_threshold_matrix(
         "accept_count": accept_count,
         "reject_count": reject_count,
         "handoff_check_failure_count": check_failure_count,
+        "threshold_boundary": threshold_boundary,
         "rows": rows,
         "boundary": {
             "model_quality_claim": "not_claimed",
@@ -79,6 +87,7 @@ def build_baseline_candidate_threshold_matrix(
 
 
 def render_baseline_candidate_threshold_matrix_text(report: dict[str, Any]) -> str:
+    threshold_boundary = as_dict(report.get("threshold_boundary"))
     rows = [
         ("status", report.get("status")),
         ("decision", report.get("decision")),
@@ -87,6 +96,12 @@ def render_baseline_candidate_threshold_matrix_text(report: dict[str, Any]) -> s
         ("accept_count", report.get("accept_count")),
         ("reject_count", report.get("reject_count")),
         ("handoff_check_failure_count", report.get("handoff_check_failure_count")),
+        ("threshold_boundary_status", threshold_boundary.get("status")),
+        ("threshold_boundary_decision", threshold_boundary.get("decision")),
+        ("strictest_accepting_threshold", threshold_boundary.get("strictest_accepting_threshold")),
+        ("first_rejecting_threshold", threshold_boundary.get("first_rejecting_threshold")),
+        ("is_monotonic_acceptance", threshold_boundary.get("is_monotonic_acceptance")),
+        ("transition_count", threshold_boundary.get("transition_count")),
     ]
     lines = [f"{key}={value}" for key, value in rows]
     for row in _rows(report):
@@ -107,6 +122,7 @@ def render_baseline_candidate_threshold_matrix_text(report: dict[str, Any]) -> s
 
 
 def render_baseline_candidate_threshold_matrix_markdown(report: dict[str, Any]) -> str:
+    threshold_boundary = as_dict(report.get("threshold_boundary"))
     table = [
         "| Threshold | Loop decision | Handoff ready | Next source | Exit | Check |",
         "| --- | --- | --- | --- | --- | --- |",
@@ -134,6 +150,9 @@ def render_baseline_candidate_threshold_matrix_markdown(report: dict[str, Any]) 
             f"- Decision: `{report.get('decision')}`",
             f"- Accept count: `{report.get('accept_count')}`",
             f"- Reject count: `{report.get('reject_count')}`",
+            f"- Threshold boundary: `{threshold_boundary.get('decision')}`",
+            f"- Strictest accepting threshold: `{threshold_boundary.get('strictest_accepting_threshold')}`",
+            f"- First rejecting threshold: `{threshold_boundary.get('first_rejecting_threshold')}`",
             "",
             *table,
             "",
@@ -142,6 +161,7 @@ def render_baseline_candidate_threshold_matrix_markdown(report: dict[str, Any]) 
 
 
 def render_baseline_candidate_threshold_matrix_html(report: dict[str, Any]) -> str:
+    threshold_boundary = as_dict(report.get("threshold_boundary"))
     row_html = "\n".join(
         "<tr>"
         f"<td>{html_escape(row.get('threshold'))}</td>"
@@ -188,6 +208,10 @@ th {{ color: #44534b; }}
 <div class="metric"><span>Accept count</span><strong>{html_escape(report.get('accept_count'))}</strong></div>
 <div class="metric"><span>Reject count</span><strong>{html_escape(report.get('reject_count'))}</strong></div>
 <div class="metric"><span>Check failures</span><strong>{html_escape(report.get('handoff_check_failure_count'))}</strong></div>
+<div class="metric"><span>Boundary status</span><strong>{html_escape(threshold_boundary.get('status'))}</strong></div>
+<div class="metric"><span>Strictest accept</span><strong>{html_escape(threshold_boundary.get('strictest_accepting_threshold'))}</strong></div>
+<div class="metric"><span>First reject</span><strong>{html_escape(threshold_boundary.get('first_rejecting_threshold'))}</strong></div>
+<div class="metric"><span>Monotonic</span><strong>{html_escape(threshold_boundary.get('is_monotonic_acceptance'))}</strong></div>
 </div>
 </section>
 <section>
@@ -284,6 +308,93 @@ def _build_threshold_row(
     }
 
 
+def summarize_threshold_boundary(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
+    sorted_rows = sorted([dict(row) for row in rows], key=lambda row: float(row.get("threshold") or 0.0))
+    accepting = [float(row.get("threshold") or 0.0) for row in sorted_rows if row.get("loop_decision") == "accept_candidate"]
+    rejecting = [float(row.get("threshold") or 0.0) for row in sorted_rows if row.get("loop_decision") == "reject_candidate"]
+    transitions = _threshold_transitions(sorted_rows)
+    monotonic = _is_monotonic_acceptance(sorted_rows)
+    has_accept = bool(accepting)
+    has_reject = bool(rejecting)
+    status = "pass" if has_accept and has_reject and monotonic else "review"
+    strictest_accepting = max(accepting) if accepting else None
+    first_rejecting = min(rejecting) if rejecting else None
+    if status == "pass":
+        decision = "accept_reject_boundary_observed"
+    elif not has_accept:
+        decision = "no_accepting_threshold"
+    elif not has_reject:
+        decision = "no_rejecting_threshold"
+    else:
+        decision = "non_monotonic_threshold_outcomes"
+    return {
+        "status": status,
+        "decision": decision,
+        "has_accept": has_accept,
+        "has_reject": has_reject,
+        "is_monotonic_acceptance": monotonic,
+        "transition_count": len(transitions),
+        "strictest_accepting_threshold": strictest_accepting,
+        "first_rejecting_threshold": first_rejecting,
+        "accepting_thresholds": accepting,
+        "rejecting_thresholds": rejecting,
+        "transitions": transitions,
+    }
+
+
+def _parse_threshold_range(value: str) -> list[float]:
+    parts = [part.strip() for part in value.split(":")]
+    if len(parts) != 3 or any(not part for part in parts):
+        raise ValueError("threshold range must use start:stop:step")
+    try:
+        start, stop, step = (Decimal(part) for part in parts)
+    except InvalidOperation as exc:
+        raise ValueError("threshold range values must be numeric") from exc
+    if step <= 0:
+        raise ValueError("threshold range step must be positive")
+    if stop < start:
+        raise ValueError("threshold range stop must be greater than or equal to start")
+    thresholds: list[float] = []
+    current = start
+    max_iterations = 1000
+    while current <= stop:
+        thresholds.append(float(current))
+        current += step
+        if len(thresholds) > max_iterations:
+            raise ValueError("threshold range is too large")
+    if thresholds and thresholds[-1] != float(stop):
+        thresholds.append(float(stop))
+    return thresholds
+
+
+def _threshold_transitions(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    transitions: list[dict[str, Any]] = []
+    previous: dict[str, Any] | None = None
+    for row in rows:
+        if previous is not None and previous.get("loop_decision") != row.get("loop_decision"):
+            transitions.append(
+                {
+                    "from_threshold": previous.get("threshold"),
+                    "from_decision": previous.get("loop_decision"),
+                    "to_threshold": row.get("threshold"),
+                    "to_decision": row.get("loop_decision"),
+                }
+            )
+        previous = row
+    return transitions
+
+
+def _is_monotonic_acceptance(rows: list[dict[str, Any]]) -> bool:
+    seen_reject = False
+    for row in rows:
+        decision = row.get("loop_decision")
+        if decision == "reject_candidate":
+            seen_reject = True
+        if decision == "accept_candidate" and seen_reject:
+            return False
+    return True
+
+
 def _threshold_slug(threshold: float) -> str:
     text = f"{threshold:g}".replace("-", "neg").replace(".", "p")
     return f"threshold-{text}"
@@ -307,5 +418,6 @@ __all__ = [
     "render_baseline_candidate_threshold_matrix_html",
     "render_baseline_candidate_threshold_matrix_markdown",
     "render_baseline_candidate_threshold_matrix_text",
+    "summarize_threshold_boundary",
     "write_baseline_candidate_threshold_matrix_outputs",
 ]

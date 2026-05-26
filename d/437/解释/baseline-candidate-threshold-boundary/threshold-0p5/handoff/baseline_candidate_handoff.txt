@@ -1,0 +1,19 @@
+status=pass
+decision=keep_current_baseline
+handoff_ready=False
+next_baseline_name=tiny-baseline
+next_baseline_source=current_baseline
+next_baseline_checkpoint_exists=True
+candidate_name=tiny-candidate
+candidate_accepted=False
+overall_score_delta=0.0
+min_overall_score_delta=0.5
+control_status=pass
+acceptance_status=fail
+promotion_status=promote
+execution_source_mode=reuse_summary
+execution_gate_mode=strict
+execution_expected_exit_code=2
+handoff_check_status=pass
+handoff_check_failed_count=0
+rejected_reasons=min_overall_score_delta expected >= 0.5, got 0.0

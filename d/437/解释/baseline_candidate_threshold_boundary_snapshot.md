@@ -1,0 +1,68 @@
+- main [ref=e2] [box=120,28,1040,585]:
+  - heading "MiniGPT baseline-candidate threshold matrix" [level=1] [ref=e3] [box=120,28,1040,37]
+  - generic [ref=e4] [box=120,77,1040,283]:
+    - heading "Summary" [level=2] [ref=e5] [box=137,94,1007,24]
+    - generic [ref=e6] [box=137,128,1007,215]:
+      - generic [ref=e7] [box=137,128,244,65]:
+        - generic [ref=e8] [box=147,139,223,16]: Status
+        - strong [ref=e9] [box=147,161,223,22]: pass
+      - generic [ref=e10] [box=391,128,244,65]:
+        - generic [ref=e11] [box=401,139,223,16]: Decision
+        - strong [ref=e12] [box=401,161,223,22]: threshold_matrix_ready
+      - generic [ref=e13] [box=645,128,244,65]:
+        - generic [ref=e14] [box=656,139,223,16]: Thresholds
+        - strong [ref=e15] [box=656,161,223,22]: "3"
+      - generic [ref=e16] [box=899,128,244,65]:
+        - generic [ref=e17] [box=910,139,223,16]: Accept count
+        - strong [ref=e18] [box=910,161,223,22]: "1"
+      - generic [ref=e19] [box=137,203,244,65]:
+        - generic [ref=e20] [box=147,214,223,16]: Reject count
+        - strong [ref=e21] [box=147,236,223,22]: "2"
+      - generic [ref=e22] [box=391,203,244,65]:
+        - generic [ref=e23] [box=401,214,223,16]: Check failures
+        - strong [ref=e24] [box=401,236,223,22]: "0"
+      - generic [ref=e25] [box=645,203,244,65]:
+        - generic [ref=e26] [box=656,214,223,16]: Boundary status
+        - strong [ref=e27] [box=656,236,223,22]: pass
+      - generic [ref=e28] [box=899,203,244,65]:
+        - generic [ref=e29] [box=910,214,223,16]: Strictest accept
+        - strong [ref=e30] [box=910,236,223,22]: "0.0"
+      - generic [ref=e31] [box=137,278,244,65]:
+        - generic [ref=e32] [box=147,289,223,16]: First reject
+        - strong [ref=e33] [box=147,311,223,22]: "0.5"
+      - generic [ref=e34] [box=391,278,244,65]:
+        - generic [ref=e35] [box=401,289,223,16]: Monotonic
+        - strong [ref=e36] [box=401,311,223,22]: "True"
+  - generic [ref=e37] [box=120,376,1040,237]:
+    - heading "Rows" [level=2] [ref=e38] [box=137,393,1007,24]
+    - table [ref=e39] [box=137,427,1007,169]:
+      - rowgroup [ref=e40] [box=137,427,1007,42]:
+        - row "Threshold Loop decision Ready Next source Exit Check" [ref=e41] [box=137,427,1007,42]:
+          - columnheader "Threshold" [ref=e42] [box=137,427,174,42]
+          - columnheader "Loop decision" [ref=e43] [box=311,427,259,42]
+          - columnheader "Ready" [ref=e44] [box=570,427,122,42]
+          - columnheader "Next source" [ref=e45] [box=692,427,245,42]
+          - columnheader "Exit" [ref=e46] [box=937,427,88,42]
+          - columnheader "Check" [ref=e47] [box=1025,427,119,42]
+      - rowgroup [ref=e48] [box=137,469,1007,127]:
+        - row "0.0 accept_candidate True candidate 0 pass" [ref=e49] [box=137,469,1007,42]:
+          - cell "0.0" [ref=e50] [box=137,469,174,42]
+          - cell "accept_candidate" [ref=e51] [box=311,469,259,42]
+          - cell "True" [ref=e52] [box=570,469,122,42]
+          - cell "candidate" [ref=e53] [box=692,469,245,42]
+          - cell "0" [ref=e54] [box=937,469,88,42]
+          - cell "pass" [ref=e55] [box=1025,469,119,42]
+        - row "0.5 reject_candidate False current_baseline 2 pass" [ref=e56] [box=137,511,1007,42]:
+          - cell "0.5" [ref=e57] [box=137,511,174,42]
+          - cell "reject_candidate" [ref=e58] [box=311,511,259,42]
+          - cell "False" [ref=e59] [box=570,511,122,42]
+          - cell "current_baseline" [ref=e60] [box=692,511,245,42]
+          - cell "2" [ref=e61] [box=937,511,88,42]
+          - cell "pass" [ref=e62] [box=1025,511,119,42]
+        - row "1.0 reject_candidate False current_baseline 2 pass" [ref=e63] [box=137,554,1007,42]:
+          - cell "1.0" [ref=e64] [box=137,554,174,42]
+          - cell "reject_candidate" [ref=e65] [box=311,554,259,42]
+          - cell "False" [ref=e66] [box=570,554,122,42]
+          - cell "current_baseline" [ref=e67] [box=692,554,245,42]
+          - cell "2" [ref=e68] [box=937,554,88,42]
+          - cell "pass" [ref=e69] [box=1025,554,119,42]
