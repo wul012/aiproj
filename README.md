@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 440 turns the reusable baseline-candidate threshold boundary diagnosis into an optional strict gate: exploratory runs can still pass, while `--require-diagnosis-pass` exits `2` when the candidate remains rejected.
+Version 441 adds a threshold-boundary gate check wrapper that reruns the strict diagnosis gate, verifies the expected nonzero exit code, and turns an intentional candidate rejection into a passing contract-check artifact.
+
+## Latest v441 checkpoint
+
+- Added `src/minigpt/baseline_candidate_threshold_boundary_gate_check.py` to write JSON/text/Markdown/HTML reports for threshold-boundary strict-gate verification.
+- Added `scripts/check_baseline_candidate_threshold_boundary_gate.py` to run `run_baseline_candidate_threshold_boundary_smoke.py`, capture stdout/stderr, and compare actual vs expected exit code.
+- The v441 check treats inner exit `2` as pass when `execution.expected_exit_code=2` and `review_diagnosis.decision=candidate_not_accepted`.
+- Missing or unreadable boundary summaries now become reportable failed checks instead of unstructured exceptions.
+- Archived gate-check evidence, Playwright MCP snapshot, and browser screenshots in `d/441`.
 
 ## Latest v440 checkpoint
+
+Version 440 turns the reusable baseline-candidate threshold boundary diagnosis into an optional strict gate: exploratory runs can still pass, while `--require-diagnosis-pass` exits `2` when the candidate remains rejected.
 
 - `scripts/run_baseline_candidate_threshold_boundary_smoke.py` now accepts `--require-diagnosis-pass`.
 - Boundary smoke outputs now include `execution.gate_mode`, `execution.require_diagnosis_pass`, and `execution.expected_exit_code`.

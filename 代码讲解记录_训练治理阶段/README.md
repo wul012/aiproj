@@ -425,6 +425,9 @@
 454-v440-baseline-candidate-threshold-boundary-diagnosis-gate.md
  -> v440 code explanation: add a strict diagnosis gate that returns exit code 2 when review diagnosis is not pass while keeping exploratory runs usable.
 
+455-v441-baseline-candidate-threshold-boundary-gate-check.md
+ -> v441 code explanation: wrap the strict threshold-boundary diagnosis gate in an expected-exit contract check so intentional candidate rejection can be archived as pass evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

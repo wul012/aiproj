@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate threshold boundary gate check",
+  "generated_at": "2026-05-26T09:06:24Z",
+  "status": "pass",
+  "decision": "expected_exit_verified",
+  "source_summary": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\live-boundary-summary\\baseline_candidate_threshold_boundary_smoke.json",
+  "load_error": "",
+  "actual_exit_code": 2,
+  "expected_exit_code": 2,
+  "summary_expected_exit_code": 2,
+  "summary_status": "pass",
+  "summary_decision": "live_threshold_boundary_review",
+  "gate_mode": "diagnosis_strict",
+  "diagnosis_status": "review",
+  "diagnosis_decision": "candidate_not_accepted",
+  "boundary_status": "review",
+  "boundary_decision": "no_accepting_threshold",
+  "check_count": 6,
+  "failed_count": 0,
+  "checks": [
+    {
+      "id": "summary_exists",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "detail": "summary=d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\live-boundary-summary\\baseline_candidate_threshold_boundary_smoke.json"
+    },
+    {
+      "id": "summary_loads",
+      "status": "pass",
+      "expected": "loadable JSON object",
+      "actual": "loaded",
+      "detail": "Boundary smoke summary must be readable before checking the gate contract."
+    },
+    {
+      "id": "summary_status_pass",
+      "status": "pass",
+      "expected": true,
+      "actual": "pass",
+      "detail": "Boundary smoke summary must be structurally pass."
+    },
+    {
+      "id": "summary_expected_exit_matches",
+      "status": "pass",
+      "expected": 2,
+      "actual": 2,
+      "detail": "execution.expected_exit_code must match the gate expectation."
+    },
+    {
+      "id": "actual_exit_matches_expected",
+      "status": "pass",
+      "expected": 2,
+      "actual": 2,
+      "detail": "Runner exit code must match the expected strict-gate result."
+    },
+    {
+      "id": "diagnosis_decision_matches",
+      "status": "pass",
+      "expected": "candidate_not_accepted",
+      "actual": "candidate_not_accepted",
+      "detail": "review_diagnosis.decision must match the expected outcome."
+    }
+  ],
+  "command": {
+    "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\run_baseline_candidate_threshold_boundary_smoke.py --smoke-summary d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json --out-dir d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke --thresholds 0:1:0.5 --force --require-diagnosis-pass",
+    "stdout": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\logs\\threshold_boundary_gate_stdout.txt",
+    "stderr": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\logs\\threshold_boundary_gate_stderr.txt"
+  }
+}

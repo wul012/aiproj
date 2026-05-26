@@ -1,0 +1,20 @@
+status=pass
+decision=expected_exit_verified
+source_summary=d\441\解释\baseline-candidate-threshold-boundary-gate-check\threshold-boundary-smoke\live-boundary-summary\baseline_candidate_threshold_boundary_smoke.json
+actual_exit_code=2
+expected_exit_code=2
+summary_expected_exit_code=2
+gate_mode=diagnosis_strict
+diagnosis_status=review
+diagnosis_decision=candidate_not_accepted
+boundary_status=review
+boundary_decision=no_accepting_threshold
+check_count=6
+failed_count=0
+check=id=summary_exists,status=pass,expected=True,actual=True
+check=id=summary_loads,status=pass,expected=loadable JSON object,actual=loaded
+check=id=summary_status_pass,status=pass,expected=True,actual=pass
+check=id=summary_expected_exit_matches,status=pass,expected=2,actual=2
+check=id=actual_exit_matches_expected,status=pass,expected=2,actual=2
+check=id=diagnosis_decision_matches,status=pass,expected=candidate_not_accepted,actual=candidate_not_accepted
+outputs={"json": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.json", "text": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.txt", "markdown": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.md", "html": "d\\441\\解释\\baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.html"}
