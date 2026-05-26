@@ -437,6 +437,9 @@
 458-v444-ci-baseline-candidate-boundary-gate-plan-check.md
  -> v444 code explanation: validate the v443 CI boundary-gate wrapper plan by checking recorded artifact digests, expected-exit summary fields, and CI workflow hygiene order rules.
 
+459-v445-ci-boundary-plan-context-carryover.md
+ -> v445 code explanation: carry CI boundary gate and boundary wrapper plan-check readiness from CI workflow hygiene into project audit, release bundle, release readiness summaries, CLI output, and rendered evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

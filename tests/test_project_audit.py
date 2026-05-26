@@ -201,6 +201,12 @@ def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
         "tiny_scorecard_plan_digest_gate_present": status == "pass",
         "tiny_scorecard_plan_digest_gate_order_ready": status == "pass",
         "tiny_scorecard_plan_digest_gate_ready": status == "pass",
+        "baseline_candidate_threshold_boundary_gate_check_present": status == "pass",
+        "baseline_candidate_threshold_boundary_gate_check_order_ready": status == "pass",
+        "baseline_candidate_threshold_boundary_gate_check_ready": status == "pass",
+        "baseline_candidate_threshold_boundary_gate_plan_check_present": status == "pass",
+        "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": status == "pass",
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready": status == "pass",
         "release_readiness_drift_contract_smoke_present": status == "pass",
         "release_readiness_drift_contract_smoke_order_ready": status == "pass",
         "release_readiness_drift_contract_smoke_ready": status == "pass",
@@ -279,6 +285,8 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["summary"]["ci_workflow_status"], "pass")
             self.assertEqual(audit["summary"]["ci_workflow_failed_checks"], 0)
             self.assertTrue(audit["summary"]["ci_tiny_scorecard_plan_digest_gate_ready"])
+            self.assertTrue(audit["summary"]["ci_baseline_candidate_threshold_boundary_gate_check_ready"])
+            self.assertTrue(audit["summary"]["ci_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
             self.assertTrue(audit["summary"]["ci_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["summary"]["test_coverage_status"], "pass")
             self.assertEqual(audit["summary"]["test_coverage_percent"], 90.16)
@@ -289,6 +297,8 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertEqual(audit["benchmark_history_context"]["design_comparison_changed_entry_count"], 0)
             self.assertEqual(audit["ci_workflow_context"]["status"], "pass")
             self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
+            self.assertTrue(audit["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_check_ready"])
+            self.assertTrue(audit["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
             self.assertTrue(audit["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
@@ -429,6 +439,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("status=fail", check["detail"])
             self.assertIn("failed_checks=3", check["detail"])
             self.assertIn("tiny_scorecard_plan_digest_gate_ready=False", check["detail"])
+            self.assertIn("baseline_candidate_threshold_boundary_gate_plan_check_ready=False", check["detail"])
             self.assertIn("Generate or review ci_workflow_hygiene.json", " ".join(audit["recommendations"]))
 
     def test_build_project_audit_warns_for_test_coverage_gate_fail_status(self) -> None:
@@ -567,6 +578,12 @@ class ProjectAuditTests(unittest.TestCase):
                 "tiny_scorecard_plan_digest_gate_present": True,
                 "tiny_scorecard_plan_digest_gate_order_ready": False,
                 "tiny_scorecard_plan_digest_gate_ready": False,
+                "baseline_candidate_threshold_boundary_gate_check_present": True,
+                "baseline_candidate_threshold_boundary_gate_check_order_ready": False,
+                "baseline_candidate_threshold_boundary_gate_check_ready": False,
+                "baseline_candidate_threshold_boundary_gate_plan_check_present": True,
+                "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": False,
+                "baseline_candidate_threshold_boundary_gate_plan_check_ready": False,
                 "python_version": "3.11",
             },
         }
@@ -638,9 +655,13 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertEqual(ci_check["evidence"]["decision"], "fix_ci_workflow_hygiene")
         self.assertEqual(ci_check["evidence"]["order_violation_count"], 1)
         self.assertFalse(ci_check["evidence"]["tiny_scorecard_plan_digest_gate_ready"])
+        self.assertFalse(ci_check["evidence"]["baseline_candidate_threshold_boundary_gate_check_ready"])
+        self.assertFalse(ci_check["evidence"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["order_violation_count"], 1)
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["tiny_scorecard_plan_digest_gate_ready"])
+        self.assertFalse(build_ci_workflow_context(ci_hygiene)["baseline_candidate_threshold_boundary_gate_check_ready"])
+        self.assertFalse(build_ci_workflow_context(ci_hygiene)["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["release_readiness_drift_contract_smoke_ready"])
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
         self.assertFalse(build_ci_workflow_context(None)["available"])

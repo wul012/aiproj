@@ -116,6 +116,15 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "missing_step_count": 0,
             "required_order_count": 1,
             "order_violation_count": 0,
+            "tiny_scorecard_plan_digest_gate_present": True,
+            "tiny_scorecard_plan_digest_gate_order_ready": True,
+            "tiny_scorecard_plan_digest_gate_ready": True,
+            "baseline_candidate_threshold_boundary_gate_check_present": True,
+            "baseline_candidate_threshold_boundary_gate_check_order_ready": True,
+            "baseline_candidate_threshold_boundary_gate_check_ready": True,
+            "baseline_candidate_threshold_boundary_gate_plan_check_present": True,
+            "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": True,
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready": True,
             "release_readiness_drift_contract_smoke_present": True,
             "release_readiness_drift_contract_smoke_order_ready": True,
             "release_readiness_drift_contract_smoke_ready": True,
@@ -336,6 +345,9 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["ci_workflow_failed_checks"], 0)
             self.assertEqual(bundle["summary"]["ci_workflow_required_order_count"], 1)
             self.assertEqual(bundle["summary"]["ci_workflow_order_violation_count"], 0)
+            self.assertTrue(bundle["summary"]["ci_workflow_tiny_scorecard_plan_digest_gate_ready"])
+            self.assertTrue(bundle["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"])
+            self.assertTrue(bundle["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
             self.assertTrue(bundle["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["summary"]["test_coverage_status"], "pass")
             self.assertEqual(bundle["summary"]["test_coverage_percent"], 90.17)
@@ -347,6 +359,9 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertIn("ci_workflow_hygiene_json", {item["key"] for item in bundle["artifacts"]})
             self.assertIn("test_coverage_report_json", {item["key"] for item in bundle["artifacts"]})
             self.assertEqual(bundle["ci_workflow_context"]["status"], "pass")
+            self.assertTrue(bundle["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
+            self.assertTrue(bundle["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_check_ready"])
+            self.assertTrue(bundle["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
             self.assertTrue(bundle["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["benchmark_history_context"]["latest_decision_status"], "promote")
             self.assertEqual(bundle["benchmark_history_context"]["readiness_requirement_status"], "pass")
@@ -372,6 +387,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["inputs"]["ci_workflow_hygiene_path"], str(ci_workflow_hygiene_path))
             self.assertEqual(bundle["summary"]["ci_workflow_node24_actions"], 2)
             self.assertEqual(bundle["summary"]["ci_workflow_order_violation_count"], 0)
+            self.assertTrue(bundle["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
             self.assertIn("ci_workflow_hygiene_html", {item["key"] for item in bundle["artifacts"]})
 
     def test_build_release_bundle_accepts_explicit_test_coverage_report_path(self) -> None:

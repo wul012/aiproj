@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT release gate</title>
+<style>
+:root { --ink:#101828; --muted:#4b5563; --line:#d7dce5; --page:#f6f8fb; --panel:#fff; --blue:#1d4ed8; --green:#047857; --amber:#b45309; --red:#b91c1c; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+span, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:82px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:820px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.pill { display:inline-block; min-width:54px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
+.pill.pass { background:var(--green); }
+.pill.warn { background:var(--amber); }
+.pill.fail { background:var(--red); }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT release gate</h1><p>v445-context-carryover</p></header>
+<section class="stats"><div class="card"><div class="label">Gate</div><div class="value">pass</div></div><div class="card"><div class="label">Decision</div><div class="value">approved</div></div><div class="card"><div class="label">Release</div><div class="value">release-ready</div></div><div class="card"><div class="label">Audit</div><div class="value">pass</div></div><div class="card"><div class="label">Score</div><div class="value">100%</div></div><div class="card"><div class="label">Ready</div><div class="value">1</div></div><div class="card"><div class="label">Missing</div><div class="value">0</div></div><div class="card"><div class="label">Coverage</div><div class="value">pass</div></div><div class="card"><div class="label">Coverage %</div><div class="value">90.17</div></div><div class="card"><div class="label">Bench history</div><div class="value">pass</div></div><div class="card"><div class="label">Bench entries</div><div class="value">1</div></div><div class="card"><div class="label">Bench design review</div><div class="value">0</div></div><div class="card"><div class="label">Bench design changes</div><div class="value">0</div></div><div class="card"><div class="label">Bench readiness</div><div class="value">pass</div></div><div class="card"><div class="label">Bench readiness exit</div><div class="value">0</div></div><div class="card"><div class="label">Generated</div><div class="value">2026-05-26T11:42:32Z</div></div></section>
+<section class="panel"><h2>Policy</h2><table><tr><th>policy_profile</th><td>standard</td></tr><tr><th>profile_description</th><td>Default tagged-release policy that preserves the v30 gate behavior.</td></tr><tr><th>required_release_status</th><td>release-ready</td></tr><tr><th>required_audit_status</th><td>pass</td></tr><tr><th>minimum_audit_score</th><td>90</td></tr><tr><th>minimum_ready_runs</th><td>1</td></tr><tr><th>require_all_evidence_artifacts</th><td>True</td></tr><tr><th>require_generation_quality_audit_checks</th><td>True</td></tr><tr><th>require_request_history_summary_audit_check</th><td>True</td></tr><tr><th>require_benchmark_history_gate_check</th><td>True</td></tr><tr><th>require_test_coverage_audit_check</th><td>True</td></tr><tr><th>overrides</th><td>{&quot;minimum_audit_score&quot;: false, &quot;minimum_ready_runs&quot;: false, &quot;require_benchmark_history&quot;: false, &quot;require_generation_quality&quot;: false, &quot;require_request_history_summary&quot;: false, &quot;require_test_coverage&quot;: false}</td></tr></table></section>
+<section class="panel"><h2>Checks</h2><table><thead><tr><th>Status</th><th>Check</th><th>Detail</th></tr></thead><tbody><tr><td><span class="pill pass">pass</span></td><td><strong>Release bundle schema is present</strong><br><span>bundle_schema</span></td><td>schema_version=1</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Release status is ready</strong><br><span>release_status</span></td><td>release_status=release-ready; required=release-ready.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Audit status passed</strong><br><span>audit_status</span></td><td>audit_status=pass; required=pass.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Audit score meets threshold</strong><br><span>audit_score</span></td><td>audit_score=100%; minimum=90%.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Ready run count meets threshold</strong><br><span>ready_runs</span></td><td>ready_runs=1; minimum=1.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Best run is identified</strong><br><span>best_run</span></td><td>best_run=v445-context-candidate.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Evidence artifacts are complete</strong><br><span>evidence_artifacts</span></td><td>missing_artifacts=0; all evidence artifacts should exist.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Top runs are listed</strong><br><span>top_runs</span></td><td>top_runs=1.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Audit checks are clean</strong><br><span>audit_checks</span></td><td>pass=17.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Generation quality audit checks passed</strong><br><span>generation_quality_audit_checks</span></td><td>generation_quality=pass, non_pass_generation_quality=pass.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Request history summary audit check passed</strong><br><span>request_history_summary_audit_check</span></td><td>request_history_summary=pass.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Benchmark history release evidence passed</strong><br><span>benchmark_history_gate_check</span></td><td>benchmark_history=pass; summary_status=pass; entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; latest_boundary=standard-benchmark-candidate-evidence.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Test coverage audit check passed</strong><br><span>test_coverage_audit_check</span></td><td>test_coverage_report=pass.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Bundle has no warnings</strong><br><span>bundle_warnings</span></td><td>warnings=0.</td></tr></tbody></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>Release gate passed; keep gate_report outputs with the tagged version.</li></ul></section>
+<section class="panel"><h2>Bundle Recommendations</h2><ul><li>Release evidence is complete; keep this bundle with the tagged version.</li><li>All audit checks passed; keep the audit with the model card as release evidence.</li><li>Keep v445 context carryover evidence with the tagged version.</li></ul></section>
+
+<footer>Generated by MiniGPT release gate.</footer>
+</body>
+</html>

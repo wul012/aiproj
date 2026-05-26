@@ -170,6 +170,21 @@ def _summary(
             bundle_summary.get("ci_workflow_order_violation_count"),
             ci_context.get("order_violation_count"),
         ),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready": first_present(
+            ci_summary.get("tiny_scorecard_plan_digest_gate_ready"),
+            bundle_summary.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready"),
+            ci_context.get("tiny_scorecard_plan_digest_gate_ready"),
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": first_present(
+            ci_summary.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+            bundle_summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"),
+            ci_context.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": first_present(
+            ci_summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+            bundle_summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+            ci_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+        ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready": first_present(
             ci_summary.get("release_readiness_drift_contract_smoke_ready"),
             bundle_summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready"),
@@ -369,6 +384,9 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             + ci_status
             + f"; failed_checks={_fmt(summary.get('failed_check_count'))}; node24_native={_fmt(first_present(summary.get('node24_native_actions'), summary.get('node24_native_action_count')))}"
             + f"; required_order={_fmt(summary.get('required_order_count'))}; order_violations={_fmt(summary.get('order_violation_count'))}"
+            + f"; plan_digest_gate_ready={_fmt(summary.get('tiny_scorecard_plan_digest_gate_ready'))}"
+            + f"; boundary_gate_check_ready={_fmt(summary.get('baseline_candidate_threshold_boundary_gate_check_ready'))}"
+            + f"; boundary_gate_plan_check_ready={_fmt(summary.get('baseline_candidate_threshold_boundary_gate_plan_check_ready'))}"
             + f"; drift_contract_smoke_ready={_fmt(summary.get('release_readiness_drift_contract_smoke_ready'))}",
             path,
         )
@@ -396,6 +414,27 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             + _fmt(first_present(bundle_summary.get("ci_workflow_required_order_count"), bundle_context.get("required_order_count")))
             + "; order_violations="
             + _fmt(first_present(bundle_summary.get("ci_workflow_order_violation_count"), bundle_context.get("order_violation_count")))
+            + "; plan_digest_gate_ready="
+            + _fmt(
+                first_present(
+                    bundle_summary.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready"),
+                    bundle_context.get("tiny_scorecard_plan_digest_gate_ready"),
+                )
+            )
+            + "; boundary_gate_check_ready="
+            + _fmt(
+                first_present(
+                    bundle_summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"),
+                    bundle_context.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+                )
+            )
+            + "; boundary_gate_plan_check_ready="
+            + _fmt(
+                first_present(
+                    bundle_summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+                    bundle_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+                )
+            )
             + "; drift_contract_smoke_ready="
             + _fmt(
                 first_present(

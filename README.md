@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 444 adds a lightweight contract check for the baseline-candidate threshold boundary wrapper plan, so CI can verify the wrapper artifact digests and expected-exit summary before coverage runs.
+Version 445 carries the baseline-candidate threshold boundary gate and wrapper plan-check readiness from CI workflow hygiene into project audit, release bundle, and release readiness evidence.
+
+## Latest v445 checkpoint
+
+- Project audit CI workflow checks now include `baseline_candidate_threshold_boundary_gate_check_ready` and `baseline_candidate_threshold_boundary_gate_plan_check_ready` in detail, evidence, context, and summary fields.
+- Release bundle summaries and contexts now preserve tiny plan digest, boundary gate check, boundary plan check, and drift-contract smoke readiness from CI workflow hygiene.
+- Release readiness summaries, Markdown, HTML, and CI panel details now expose the same boundary plan-check readiness instead of hiding it inside raw CI hygiene JSON.
+- CLI outputs for `audit_project.py`, `build_release_bundle.py`, and `build_release_readiness.py` print the boundary gate/check readiness fields for shell readers.
+- Archived context-carryover fixture evidence, project audit, release bundle, release gate, release readiness outputs, and Playwright MCP screenshots in `d/445`.
 
 ## Latest v444 checkpoint
 

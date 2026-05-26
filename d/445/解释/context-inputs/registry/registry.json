@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "run_count": 1,
+  "best_by_best_val_loss": {
+    "name": "v445-context-candidate",
+    "path": "d\\445\\解释\\context-inputs\\run-a",
+    "best_val_loss": 0.8
+  },
+  "runs": [
+    {
+      "name": "v445-context-candidate",
+      "path": "d\\445\\解释\\context-inputs\\run-a",
+      "best_val_loss_rank": 1,
+      "best_val_loss": 0.8,
+      "best_val_loss_delta": 0.0,
+      "dataset_quality": "pass",
+      "eval_suite_cases": 3,
+      "generation_quality_status": "pass",
+      "generation_quality_cases": 3,
+      "generation_quality_pass_count": 3,
+      "generation_quality_warn_count": 0,
+      "generation_quality_fail_count": 0,
+      "artifact_count": 12,
+      "checkpoint_exists": true,
+      "dashboard_exists": true,
+      "tags": [
+        "v445",
+        "context-carryover"
+      ],
+      "note": "controlled v445 context carryover fixture"
+    }
+  ]
+}

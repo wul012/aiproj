@@ -69,6 +69,8 @@ def main() -> None:
     print(f"ci_workflow_failed_checks={summary.get('ci_workflow_failed_checks')}")
     print(f"ci_workflow_required_order_count={summary.get('ci_workflow_required_order_count')}")
     print(f"ci_workflow_order_violation_count={summary.get('ci_workflow_order_violation_count')}")
+    print(f"ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready={summary.get('ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready')}")
+    print(f"ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready={summary.get('ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready')}")
     print(f"test_coverage_status={summary.get('test_coverage_status')}")
     print(f"test_coverage_percent={summary.get('test_coverage_percent')}")
     print(f"test_coverage_fail_under={summary.get('test_coverage_fail_under')}")

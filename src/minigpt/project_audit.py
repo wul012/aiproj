@@ -408,6 +408,12 @@ def _summarize_checks(
         "ci_workflow_failed_checks": ci_summary.get("failed_check_count"),
         "ci_workflow_node24_actions": ci_summary.get("node24_native_action_count"),
         "ci_tiny_scorecard_plan_digest_gate_ready": ci_summary.get("tiny_scorecard_plan_digest_gate_ready"),
+        "ci_baseline_candidate_threshold_boundary_gate_check_ready": ci_summary.get(
+            "baseline_candidate_threshold_boundary_gate_check_ready"
+        ),
+        "ci_baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_summary.get(
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready"
+        ),
         "ci_release_readiness_drift_contract_smoke_ready": ci_summary.get("release_readiness_drift_contract_smoke_ready"),
         "test_coverage_status": coverage_summary.get("status"),
         "test_coverage_decision": coverage_summary.get("decision"),

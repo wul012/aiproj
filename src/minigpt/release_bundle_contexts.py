@@ -120,12 +120,54 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
             "missing_step_count": summary.get("missing_step_count"),
             "required_order_count": summary.get("required_order_count"),
             "order_violation_count": summary.get("order_violation_count"),
-            "release_readiness_drift_contract_smoke_present": summary.get("release_readiness_drift_contract_smoke_present")
-            or audit_context.get("release_readiness_drift_contract_smoke_present"),
-            "release_readiness_drift_contract_smoke_order_ready": summary.get("release_readiness_drift_contract_smoke_order_ready")
-            or audit_context.get("release_readiness_drift_contract_smoke_order_ready"),
-            "release_readiness_drift_contract_smoke_ready": summary.get("release_readiness_drift_contract_smoke_ready")
-            or audit_context.get("release_readiness_drift_contract_smoke_ready"),
+            "tiny_scorecard_plan_digest_gate_present": first_present(
+                summary.get("tiny_scorecard_plan_digest_gate_present"),
+                audit_context.get("tiny_scorecard_plan_digest_gate_present"),
+            ),
+            "tiny_scorecard_plan_digest_gate_order_ready": first_present(
+                summary.get("tiny_scorecard_plan_digest_gate_order_ready"),
+                audit_context.get("tiny_scorecard_plan_digest_gate_order_ready"),
+            ),
+            "tiny_scorecard_plan_digest_gate_ready": first_present(
+                summary.get("tiny_scorecard_plan_digest_gate_ready"),
+                audit_context.get("tiny_scorecard_plan_digest_gate_ready"),
+            ),
+            "baseline_candidate_threshold_boundary_gate_check_present": first_present(
+                summary.get("baseline_candidate_threshold_boundary_gate_check_present"),
+                audit_context.get("baseline_candidate_threshold_boundary_gate_check_present"),
+            ),
+            "baseline_candidate_threshold_boundary_gate_check_order_ready": first_present(
+                summary.get("baseline_candidate_threshold_boundary_gate_check_order_ready"),
+                audit_context.get("baseline_candidate_threshold_boundary_gate_check_order_ready"),
+            ),
+            "baseline_candidate_threshold_boundary_gate_check_ready": first_present(
+                summary.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+                audit_context.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+            ),
+            "baseline_candidate_threshold_boundary_gate_plan_check_present": first_present(
+                summary.get("baseline_candidate_threshold_boundary_gate_plan_check_present"),
+                audit_context.get("baseline_candidate_threshold_boundary_gate_plan_check_present"),
+            ),
+            "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": first_present(
+                summary.get("baseline_candidate_threshold_boundary_gate_plan_check_order_ready"),
+                audit_context.get("baseline_candidate_threshold_boundary_gate_plan_check_order_ready"),
+            ),
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready": first_present(
+                summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+                audit_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+            ),
+            "release_readiness_drift_contract_smoke_present": first_present(
+                summary.get("release_readiness_drift_contract_smoke_present"),
+                audit_context.get("release_readiness_drift_contract_smoke_present"),
+            ),
+            "release_readiness_drift_contract_smoke_order_ready": first_present(
+                summary.get("release_readiness_drift_contract_smoke_order_ready"),
+                audit_context.get("release_readiness_drift_contract_smoke_order_ready"),
+            ),
+            "release_readiness_drift_contract_smoke_ready": first_present(
+                summary.get("release_readiness_drift_contract_smoke_ready"),
+                audit_context.get("release_readiness_drift_contract_smoke_ready"),
+            ),
             "python_version": summary.get("python_version"),
         }
     if audit_context:
@@ -136,6 +178,15 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
         "failed_check_count": None,
         "required_order_count": None,
         "order_violation_count": None,
+        "tiny_scorecard_plan_digest_gate_present": None,
+        "tiny_scorecard_plan_digest_gate_order_ready": None,
+        "tiny_scorecard_plan_digest_gate_ready": None,
+        "baseline_candidate_threshold_boundary_gate_check_present": None,
+        "baseline_candidate_threshold_boundary_gate_check_order_ready": None,
+        "baseline_candidate_threshold_boundary_gate_check_ready": None,
+        "baseline_candidate_threshold_boundary_gate_plan_check_present": None,
+        "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": None,
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready": None,
         "release_readiness_drift_contract_smoke_present": None,
         "release_readiness_drift_contract_smoke_order_ready": None,
         "release_readiness_drift_contract_smoke_ready": None,

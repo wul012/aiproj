@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "request_log": "d\\445\\解释\\context-inputs\\requests.jsonl",
+  "summary": {
+    "status": "pass",
+    "total_log_records": 4,
+    "invalid_record_count": 0,
+    "timeout_count": 0,
+    "bad_request_count": 0,
+    "error_count": 0,
+    "timeout_rate": 0.0,
+    "bad_request_rate": 0.0,
+    "error_rate": 0.0,
+    "unique_checkpoint_count": 1,
+    "latest_timestamp": "2026-05-26T00:00:00Z"
+  }
+}

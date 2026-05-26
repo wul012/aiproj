@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "registry_path": "d\\445\\解释\\context-inputs\\registry\\registry.json",
+  "summary": {
+    "ready_runs": 1,
+    "review_runs": 0,
+    "run_count": 1,
+    "best_run_name": "v445-context-candidate",
+    "best_val_loss": 0.8
+  },
+  "runs": [
+    {
+      "name": "v445-context-candidate",
+      "path": "d\\445\\解释\\context-inputs\\run-a",
+      "status": "ready",
+      "experiment_card_exists": true,
+      "generation_quality_status": "pass",
+      "generation_quality_cases": 3,
+      "tags": [
+        "v445",
+        "context-carryover"
+      ],
+      "note": "ready card"
+    }
+  ],
+  "top_runs": [
+    {
+      "name": "v445-context-candidate",
+      "path": "d\\445\\解释\\context-inputs\\run-a",
+      "status": "ready",
+      "best_val_loss": 0.8
+    }
+  ],
+  "recommendations": [
+    "Keep v445 context carryover evidence with the tagged version."
+  ]
+}

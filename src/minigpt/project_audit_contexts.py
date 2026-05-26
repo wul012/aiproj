@@ -92,6 +92,8 @@ def build_ci_workflow_hygiene_check(
     missing_steps = summary.get("missing_step_count")
     order_violations = summary.get("order_violation_count")
     plan_digest_gate_ready = summary.get("tiny_scorecard_plan_digest_gate_ready")
+    boundary_gate_check_ready = summary.get("baseline_candidate_threshold_boundary_gate_check_ready")
+    boundary_gate_plan_check_ready = summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready")
     drift_contract_smoke_ready = summary.get("release_readiness_drift_contract_smoke_ready")
     forbidden_env = summary.get("forbidden_env_count")
     audit_status = "pass" if status == "pass" else "warn"
@@ -100,6 +102,8 @@ def build_ci_workflow_hygiene_check(
         f"failed_checks={_fmt_any(failed_checks)}; forbidden_env={_fmt_any(forbidden_env)}; "
         f"missing_steps={_fmt_any(missing_steps)}; order_violations={_fmt_any(order_violations)}; "
         f"tiny_scorecard_plan_digest_gate_ready={_fmt_any(plan_digest_gate_ready)}; "
+        f"baseline_candidate_threshold_boundary_gate_check_ready={_fmt_any(boundary_gate_check_ready)}; "
+        f"baseline_candidate_threshold_boundary_gate_plan_check_ready={_fmt_any(boundary_gate_plan_check_ready)}; "
         f"release_readiness_drift_contract_smoke_ready={_fmt_any(drift_contract_smoke_ready)}."
     )
     return _check(
@@ -120,6 +124,20 @@ def build_ci_workflow_hygiene_check(
             "tiny_scorecard_plan_digest_gate_present": summary.get("tiny_scorecard_plan_digest_gate_present"),
             "tiny_scorecard_plan_digest_gate_order_ready": summary.get("tiny_scorecard_plan_digest_gate_order_ready"),
             "tiny_scorecard_plan_digest_gate_ready": plan_digest_gate_ready,
+            "baseline_candidate_threshold_boundary_gate_check_present": summary.get(
+                "baseline_candidate_threshold_boundary_gate_check_present"
+            ),
+            "baseline_candidate_threshold_boundary_gate_check_order_ready": summary.get(
+                "baseline_candidate_threshold_boundary_gate_check_order_ready"
+            ),
+            "baseline_candidate_threshold_boundary_gate_check_ready": boundary_gate_check_ready,
+            "baseline_candidate_threshold_boundary_gate_plan_check_present": summary.get(
+                "baseline_candidate_threshold_boundary_gate_plan_check_present"
+            ),
+            "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": summary.get(
+                "baseline_candidate_threshold_boundary_gate_plan_check_order_ready"
+            ),
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready": boundary_gate_plan_check_ready,
             "release_readiness_drift_contract_smoke_present": summary.get("release_readiness_drift_contract_smoke_present"),
             "release_readiness_drift_contract_smoke_order_ready": summary.get("release_readiness_drift_contract_smoke_order_ready"),
             "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_ready,
@@ -143,6 +161,12 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
             "tiny_scorecard_plan_digest_gate_present": None,
             "tiny_scorecard_plan_digest_gate_order_ready": None,
             "tiny_scorecard_plan_digest_gate_ready": None,
+            "baseline_candidate_threshold_boundary_gate_check_present": None,
+            "baseline_candidate_threshold_boundary_gate_check_order_ready": None,
+            "baseline_candidate_threshold_boundary_gate_check_ready": None,
+            "baseline_candidate_threshold_boundary_gate_plan_check_present": None,
+            "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": None,
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready": None,
             "release_readiness_drift_contract_smoke_present": None,
             "release_readiness_drift_contract_smoke_order_ready": None,
             "release_readiness_drift_contract_smoke_ready": None,
@@ -164,6 +188,22 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
         "tiny_scorecard_plan_digest_gate_present": summary.get("tiny_scorecard_plan_digest_gate_present"),
         "tiny_scorecard_plan_digest_gate_order_ready": summary.get("tiny_scorecard_plan_digest_gate_order_ready"),
         "tiny_scorecard_plan_digest_gate_ready": summary.get("tiny_scorecard_plan_digest_gate_ready"),
+        "baseline_candidate_threshold_boundary_gate_check_present": summary.get(
+            "baseline_candidate_threshold_boundary_gate_check_present"
+        ),
+        "baseline_candidate_threshold_boundary_gate_check_order_ready": summary.get(
+            "baseline_candidate_threshold_boundary_gate_check_order_ready"
+        ),
+        "baseline_candidate_threshold_boundary_gate_check_ready": summary.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+        "baseline_candidate_threshold_boundary_gate_plan_check_present": summary.get(
+            "baseline_candidate_threshold_boundary_gate_plan_check_present"
+        ),
+        "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": summary.get(
+            "baseline_candidate_threshold_boundary_gate_plan_check_order_ready"
+        ),
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready": summary.get(
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready"
+        ),
         "release_readiness_drift_contract_smoke_present": summary.get("release_readiness_drift_contract_smoke_present"),
         "release_readiness_drift_contract_smoke_order_ready": summary.get("release_readiness_drift_contract_smoke_order_ready"),
         "release_readiness_drift_contract_smoke_ready": summary.get("release_readiness_drift_contract_smoke_ready"),

@@ -56,6 +56,19 @@ def render_release_bundle_markdown(bundle: dict[str, Any]) -> str:
                 ("CI workflow failed checks", summary.get("ci_workflow_failed_checks")),
                 ("CI workflow required order", summary.get("ci_workflow_required_order_count")),
                 ("CI workflow order violations", summary.get("ci_workflow_order_violation_count")),
+                ("CI tiny plan digest gate", summary.get("ci_workflow_tiny_scorecard_plan_digest_gate_ready")),
+                (
+                    "CI boundary gate check",
+                    summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"),
+                ),
+                (
+                    "CI boundary plan check",
+                    summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+                ),
+                (
+                    "CI drift contract smoke",
+                    summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready"),
+                ),
                 ("Test coverage status", summary.get("test_coverage_status")),
                 ("Test coverage percent", summary.get("test_coverage_percent")),
                 ("Test coverage fail under", summary.get("test_coverage_fail_under")),
@@ -114,6 +127,7 @@ def render_release_bundle_html(bundle: dict[str, Any], *, base_dir: str | Path |
         ("Bench readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code")),
         ("CI workflow", summary.get("ci_workflow_status")),
         ("CI order violations", summary.get("ci_workflow_order_violation_count")),
+        ("CI boundary plan", summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")),
         ("Coverage", summary.get("test_coverage_status")),
         ("Coverage %", summary.get("test_coverage_percent")),
         ("Artifacts", summary.get("available_artifacts")),

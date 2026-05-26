@@ -244,6 +244,21 @@ def _build_summary(
         "ci_workflow_node24_actions": audit_summary.get("ci_workflow_node24_actions") if audit_summary.get("ci_workflow_node24_actions") is not None else ci_summary.get("node24_native_action_count"),
         "ci_workflow_required_order_count": first_present(ci_summary.get("required_order_count"), audit_ci_context.get("required_order_count")),
         "ci_workflow_order_violation_count": first_present(ci_summary.get("order_violation_count"), audit_ci_context.get("order_violation_count")),
+        "ci_workflow_tiny_scorecard_plan_digest_gate_ready": first_present(
+            ci_summary.get("tiny_scorecard_plan_digest_gate_ready"),
+            audit_ci_context.get("tiny_scorecard_plan_digest_gate_ready"),
+            audit_summary.get("ci_tiny_scorecard_plan_digest_gate_ready"),
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": first_present(
+            ci_summary.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+            audit_ci_context.get("baseline_candidate_threshold_boundary_gate_check_ready"),
+            audit_summary.get("ci_baseline_candidate_threshold_boundary_gate_check_ready"),
+        ),
+        "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": first_present(
+            ci_summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+            audit_ci_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+            audit_summary.get("ci_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+        ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready": first_present(
             ci_summary.get("release_readiness_drift_contract_smoke_ready"),
             audit_ci_context.get("release_readiness_drift_contract_smoke_ready"),

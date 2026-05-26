@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v445 context benchmark history fixture",
+  "evidence_kind": "real-benchmark",
+  "summary": {
+    "entry_count": 1,
+    "promote_count": 1,
+    "ready_count": 1,
+    "review_count": 0,
+    "blocked_count": 0,
+    "case_regression_entry_count": 0,
+    "generation_quality_flag_regression_entry_count": 0,
+    "suite_design_non_comparison_ready_entry_count": 0,
+    "design_comparison_changed_entry_count": 0,
+    "best_candidate_name": "v445-context-candidate",
+    "best_entry_name": "v445-context-round",
+    "model_quality_claim": "candidate_evidence"
+  },
+  "readiness_requirement": {
+    "status": "pass",
+    "decision": "continue",
+    "exit_code": 0,
+    "min_ready_entries": 1,
+    "ready_count": 1,
+    "entry_count": 1,
+    "evidence_kind": "real-benchmark",
+    "require_real_benchmark": true,
+    "failed_reasons": []
+  },
+  "entries": [
+    {
+      "name": "v445-context-round",
+      "candidate_name": "v445-context-candidate",
+      "decision_status": "promote",
+      "promotion_readiness": "ready",
+      "case_regression_count": 0,
+      "generation_quality_total_flags_delta": 0,
+      "eval_suite_design_comparison_status": "pass",
+      "non_design_comparison_ready_count": 0,
+      "design_comparison_changed_count": 0,
+      "boundary": "standard-benchmark-candidate-evidence"
+    }
+  ]
+}

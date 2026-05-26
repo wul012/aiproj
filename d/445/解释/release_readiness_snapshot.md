@@ -1,0 +1,144 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MiniGPT release readiness dashboard" [level=1] [ref=e3]
+    - paragraph [ref=e4]: d\445\解释\release-bundle\release_bundle.json
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Readiness
+      - generic [ref=e8]: ready
+    - generic [ref=e9]:
+      - generic [ref=e10]: Decision
+      - generic [ref=e11]: ship
+    - generic [ref=e12]:
+      - generic [ref=e13]: Release
+      - generic [ref=e14]: release-ready
+    - generic [ref=e15]:
+      - generic [ref=e16]: Gate
+      - generic [ref=e17]: pass
+    - generic [ref=e18]:
+      - generic [ref=e19]: Audit
+      - generic [ref=e20]: pass
+    - generic [ref=e21]:
+      - generic [ref=e22]: Score
+      - generic [ref=e23]: "100"
+    - generic [ref=e24]:
+      - generic [ref=e25]: CI workflow
+      - generic [ref=e26]: pass
+    - generic [ref=e27]:
+      - generic [ref=e28]: CI order violations
+      - generic [ref=e29]: "0"
+    - generic [ref=e30]:
+      - generic [ref=e31]: CI boundary plan
+      - generic [ref=e32]: "True"
+    - generic [ref=e33]:
+      - generic [ref=e34]: Requests
+      - generic [ref=e35]: pass
+    - generic [ref=e36]:
+      - generic [ref=e37]: Bench history
+      - generic [ref=e38]: pass
+    - generic [ref=e39]:
+      - generic [ref=e40]: Bench design review
+      - generic [ref=e41]: "0"
+    - generic [ref=e42]:
+      - generic [ref=e43]: Bench design changes
+      - generic [ref=e44]: "0"
+    - generic [ref=e45]:
+      - generic [ref=e46]: Bench readiness
+      - generic [ref=e47]: pass
+    - generic [ref=e48]:
+      - generic [ref=e49]: Bench readiness exit
+      - generic [ref=e50]: "0"
+    - generic [ref=e51]:
+      - generic [ref=e52]: Bench boundary
+      - generic [ref=e53]: standard-benchmark-candidate-evidence
+    - generic [ref=e54]:
+      - generic [ref=e55]: Coverage
+      - generic [ref=e56]: pass
+    - generic [ref=e57]:
+      - generic [ref=e58]: Coverage %
+      - generic [ref=e59]: "90.17"
+    - generic [ref=e60]:
+      - generic [ref=e61]: Maturity
+      - generic [ref=e62]: pass
+  - generic [ref=e63]:
+    - article [ref=e64]:
+      - generic [ref=e65]: pass
+      - heading "Registry" [level=2] [ref=e66]
+      - paragraph [ref=e67]: runs=1; best=v445-context-candidate; best_val_loss=0.8
+      - code [ref=e68]: d\445\解释\context-inputs\registry\registry.json
+    - article [ref=e69]:
+      - generic [ref=e70]: pass
+      - heading "Release Bundle" [level=2] [ref=e71]
+      - paragraph [ref=e72]: release_status=release-ready; artifacts=22 available/0 missing
+      - code [ref=e73]: d\445\解释\release-bundle\release_bundle.json
+    - article [ref=e74]:
+      - generic [ref=e75]: pass
+      - heading "Project Audit" [level=2] [ref=e76]
+      - paragraph [ref=e77]: overall=pass; score=100; checks=17 pass/0 warn/0 fail
+      - code [ref=e78]: d\445\解释\project-audit\project_audit.json
+    - article [ref=e79]:
+      - generic [ref=e80]: pass
+      - heading "Release Gate" [level=2] [ref=e81]
+      - paragraph [ref=e82]: gate=pass; decision=approved; checks=14 pass/0 warn/0 fail
+      - code [ref=e83]: d\445\解释\release-gate\gate_report.json
+    - article [ref=e84]:
+      - generic [ref=e85]: pass
+      - heading "Request History Summary" [level=2] [ref=e86]
+      - paragraph [ref=e87]: status=pass; records=4; invalid=0; timeout_rate=0
+      - code [ref=e88]: d\445\解释\context-inputs\request-history-summary\request_history_summary.json
+    - article [ref=e89]:
+      - generic [ref=e90]: pass
+      - heading "Benchmark History" [level=2] [ref=e91]
+      - paragraph [ref=e92]: status=pass; entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; boundary=standard-benchmark-candidate-evidence; gate_check=pass
+      - code [ref=e93]: missing
+    - article [ref=e94]:
+      - generic [ref=e95]: pass
+      - heading "Maturity Summary" [level=2] [ref=e96]
+      - paragraph [ref=e97]: overall=pass; current_version=445; average_level=4.6
+      - code [ref=e98]: d\445\解释\context-inputs\maturity-summary\maturity_summary.json
+    - article [ref=e99]:
+      - generic [ref=e100]: pass
+      - heading "CI Workflow Hygiene" [level=2] [ref=e101]
+      - paragraph [ref=e102]: status=pass; failed_checks=0; node24_native=2; required_order=9; order_violations=0; plan_digest_gate_ready=True; boundary_gate_check_ready=True; boundary_gate_plan_check_ready=True; drift_contract_smoke_ready=True
+      - code [ref=e103]: d\445\解释\ci-workflow-hygiene\ci_workflow_hygiene.json
+    - article [ref=e104]:
+      - generic [ref=e105]: pass
+      - heading "Test Coverage Gate" [level=2] [ref=e106]
+      - paragraph [ref=e107]: status=pass; coverage=90.17; fail_under=80; gap=0
+      - code [ref=e108]: d\445\解释\context-inputs\test-coverage\test_coverage_report.json
+  - generic [ref=e109]:
+    - heading "Actions" [level=2] [ref=e110]
+    - list [ref=e111]:
+      - listitem [ref=e112]: All readiness panels are clean; keep this dashboard with the release evidence.
+      - listitem [ref=e113]: All audit checks passed; keep the audit with the model card as release evidence.
+      - listitem [ref=e114]: Release evidence is complete; keep this bundle with the tagged version.
+      - listitem [ref=e115]: Keep v445 context carryover evidence with the tagged version.
+  - generic [ref=e116]:
+    - heading "Evidence" [level=2] [ref=e117]
+    - table [ref=e118]:
+      - rowgroup [ref=e119]:
+        - row "Key Artifact Exists Kind Size" [ref=e120]
+      - rowgroup [ref=e126]:
+        - row "registry_json Registry JSON d\\445\\解释\\context-inputs\\registry\\registry.json yes JSON 930 B" [ref=e127]
+        - row "registry_csv Registry CSV d\\445\\解释\\context-inputs\\registry\\registry.csv yes CSV 48 B" [ref=e134]
+        - row "registry_svg Registry SVG d\\445\\解释\\context-inputs\\registry\\registry.svg yes SVG 78 B" [ref=e141]
+        - row "registry_html Registry HTML d\\445\\解释\\context-inputs\\registry\\registry.html yes HTML 41 B" [ref=e148]
+        - row "model_card_json Model card JSON d\\445\\解释\\context-inputs\\model-card\\model_card.json yes JSON 933 B" [ref=e155]
+        - row "model_card_md Model card Markdown d\\445\\解释\\context-inputs\\model-card\\model_card.md yes MD 19 B" [ref=e162]
+        - row "model_card_html Model card HTML d\\445\\解释\\context-inputs\\model-card\\model_card.html yes HTML 43 B" [ref=e169]
+        - row "project_audit_json Project audit JSON d\\445\\解释\\project-audit\\project_audit.json yes JSON 13.5 KB" [ref=e176]
+        - row "project_audit_md Project audit Markdown d\\445\\解释\\project-audit\\project_audit.md yes MD 3.6 KB" [ref=e183]
+        - row "project_audit_html Project audit HTML d\\445\\解释\\project-audit\\project_audit.html yes HTML 7.8 KB" [ref=e190]
+        - row "request_history_summary_json Request history summary JSON d\\445\\解释\\context-inputs\\request-history-summary\\request_history_summary.json yes JSON 441 B" [ref=e197]
+        - row "request_history_summary_md Request history summary Markdown d\\445\\解释\\context-inputs\\request-history-summary\\request_history_summary.md yes MD 24 B" [ref=e204]
+        - row "request_history_summary_html Request history summary HTML d\\445\\解释\\context-inputs\\request-history-summary\\request_history_summary.html yes HTML 48 B" [ref=e211]
+        - row "benchmark_history_json Benchmark history JSON d\\445\\解释\\context-inputs\\benchmark-history\\benchmark_history.json yes JSON 1.4 KB" [ref=e218]
+        - row "benchmark_history_md Benchmark history Markdown d\\445\\解释\\context-inputs\\benchmark-history\\benchmark_history.md yes MD 26 B" [ref=e225]
+        - row "benchmark_history_html Benchmark history HTML d\\445\\解释\\context-inputs\\benchmark-history\\benchmark_history.html yes HTML 50 B" [ref=e232]
+        - row "ci_workflow_hygiene_json CI workflow hygiene JSON d\\445\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.json yes JSON 13.5 KB" [ref=e239]
+        - row "ci_workflow_hygiene_md CI workflow hygiene Markdown d\\445\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.md yes MD 6.9 KB" [ref=e246]
+        - row "ci_workflow_hygiene_html CI workflow hygiene HTML d\\445\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.html yes HTML 9.6 KB" [ref=e253]
+        - row "test_coverage_report_json Test coverage report JSON d\\445\\解释\\context-inputs\\test-coverage\\test_coverage_report.json yes JSON 400 B" [ref=e260]
+        - row "test_coverage_report_md Test coverage report Markdown d\\445\\解释\\context-inputs\\test-coverage\\test_coverage_report.md yes MD 22 B" [ref=e267]
+        - row "test_coverage_report_html Test coverage report HTML d\\445\\解释\\context-inputs\\test-coverage\\test_coverage_report.html yes HTML 46 B" [ref=e274]
+  - contentinfo [ref=e281]: Generated by MiniGPT release readiness dashboard.

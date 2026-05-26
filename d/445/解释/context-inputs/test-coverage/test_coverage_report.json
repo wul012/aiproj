@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v445 test coverage fixture",
+  "summary": {
+    "status": "pass",
+    "decision": "continue_with_coverage_gate",
+    "line_coverage_percent": 90.17,
+    "covered_lines": 12367,
+    "num_statements": 13715,
+    "missing_lines": 1348,
+    "file_count": 122,
+    "threshold_enabled": true,
+    "fail_under": 80.0,
+    "coverage_gap": 0.0
+  }
+}

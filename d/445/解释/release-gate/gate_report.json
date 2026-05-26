@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT release gate",
+  "generated_at": "2026-05-26T11:42:32Z",
+  "bundle_path": "d\\445\\解释\\release-bundle\\release_bundle.json",
+  "release_name": "v445-context-carryover",
+  "policy": {
+    "policy_profile": "standard",
+    "profile_description": "Default tagged-release policy that preserves the v30 gate behavior.",
+    "required_release_status": "release-ready",
+    "required_audit_status": "pass",
+    "minimum_audit_score": 90.0,
+    "minimum_ready_runs": 1,
+    "require_all_evidence_artifacts": true,
+    "require_generation_quality_audit_checks": true,
+    "require_request_history_summary_audit_check": true,
+    "require_benchmark_history_gate_check": true,
+    "require_test_coverage_audit_check": true,
+    "overrides": {
+      "minimum_audit_score": false,
+      "minimum_ready_runs": false,
+      "require_generation_quality": false,
+      "require_request_history_summary": false,
+      "require_benchmark_history": false,
+      "require_test_coverage": false
+    }
+  },
+  "summary": {
+    "gate_status": "pass",
+    "decision": "approved",
+    "pass_count": 14,
+    "warn_count": 0,
+    "fail_count": 0,
+    "release_status": "release-ready",
+    "audit_status": "pass",
+    "audit_score_percent": 100.0,
+    "run_count": 1,
+    "best_run_name": "v445-context-candidate",
+    "best_val_loss": 0.8,
+    "ready_runs": 1,
+    "available_artifacts": 22,
+    "missing_artifacts": 0,
+    "test_coverage_status": "pass",
+    "test_coverage_percent": 90.17,
+    "test_coverage_fail_under": 80.0,
+    "test_coverage_gap": 0.0,
+    "benchmark_history_status": "pass",
+    "benchmark_history_entries": 1,
+    "benchmark_history_ready": 1,
+    "benchmark_history_review": 0,
+    "benchmark_history_blocked": 0,
+    "benchmark_history_case_regressions": 0,
+    "benchmark_history_generation_flag_regressions": 0,
+    "benchmark_history_suite_design_non_comparison_ready_entries": 0,
+    "benchmark_history_design_comparison_changed_entries": 0,
+    "benchmark_history_readiness_requirement_status": "pass",
+    "benchmark_history_readiness_requirement_exit_code": 0,
+    "benchmark_history_readiness_requirement_failed_reasons": [],
+    "benchmark_history_model_quality_claim": "candidate_evidence",
+    "benchmark_history_latest_boundary": "standard-benchmark-candidate-evidence"
+  },
+  "checks": [
+    {
+      "id": "bundle_schema",
+      "title": "Release bundle schema is present",
+      "status": "pass",
+      "detail": "schema_version=1"
+    },
+    {
+      "id": "release_status",
+      "title": "Release status is ready",
+      "status": "pass",
+      "detail": "release_status=release-ready; required=release-ready."
+    },
+    {
+      "id": "audit_status",
+      "title": "Audit status passed",
+      "status": "pass",
+      "detail": "audit_status=pass; required=pass."
+    },
+    {
+      "id": "audit_score",
+      "title": "Audit score meets threshold",
+      "status": "pass",
+      "detail": "audit_score=100%; minimum=90%."
+    },
+    {
+      "id": "ready_runs",
+      "title": "Ready run count meets threshold",
+      "status": "pass",
+      "detail": "ready_runs=1; minimum=1."
+    },
+    {
+      "id": "best_run",
+      "title": "Best run is identified",
+      "status": "pass",
+      "detail": "best_run=v445-context-candidate."
+    },
+    {
+      "id": "evidence_artifacts",
+      "title": "Evidence artifacts are complete",
+      "status": "pass",
+      "detail": "missing_artifacts=0; all evidence artifacts should exist."
+    },
+    {
+      "id": "top_runs",
+      "title": "Top runs are listed",
+      "status": "pass",
+      "detail": "top_runs=1."
+    },
+    {
+      "id": "audit_checks",
+      "title": "Audit checks are clean",
+      "status": "pass",
+      "detail": "pass=17."
+    },
+    {
+      "id": "generation_quality_audit_checks",
+      "title": "Generation quality audit checks passed",
+      "status": "pass",
+      "detail": "generation_quality=pass, non_pass_generation_quality=pass."
+    },
+    {
+      "id": "request_history_summary_audit_check",
+      "title": "Request history summary audit check passed",
+      "status": "pass",
+      "detail": "request_history_summary=pass."
+    },
+    {
+      "id": "benchmark_history_gate_check",
+      "title": "Benchmark history release evidence passed",
+      "status": "pass",
+      "detail": "benchmark_history=pass; summary_status=pass; entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; latest_boundary=standard-benchmark-candidate-evidence."
+    },
+    {
+      "id": "test_coverage_audit_check",
+      "title": "Test coverage audit check passed",
+      "status": "pass",
+      "detail": "test_coverage_report=pass."
+    },
+    {
+      "id": "bundle_warnings",
+      "title": "Bundle has no warnings",
+      "status": "pass",
+      "detail": "warnings=0."
+    }
+  ],
+  "recommendations": [
+    "Release gate passed; keep gate_report outputs with the tagged version."
+  ],
+  "bundle_recommendations": [
+    "Release evidence is complete; keep this bundle with the tagged version.",
+    "All audit checks passed; keep the audit with the model card as release evidence.",
+    "Keep v445 context carryover evidence with the tagged version."
+  ],
+  "warnings": []
+}
