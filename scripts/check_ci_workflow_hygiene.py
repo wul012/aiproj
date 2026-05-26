@@ -42,6 +42,9 @@ def main() -> None:
     print(f"baseline_candidate_threshold_boundary_gate_check_present={summary['baseline_candidate_threshold_boundary_gate_check_present']}")
     print(f"baseline_candidate_threshold_boundary_gate_check_order_ready={summary['baseline_candidate_threshold_boundary_gate_check_order_ready']}")
     print(f"baseline_candidate_threshold_boundary_gate_check_ready={summary['baseline_candidate_threshold_boundary_gate_check_ready']}")
+    print(f"baseline_candidate_threshold_boundary_gate_plan_check_present={summary['baseline_candidate_threshold_boundary_gate_plan_check_present']}")
+    print(f"baseline_candidate_threshold_boundary_gate_plan_check_order_ready={summary['baseline_candidate_threshold_boundary_gate_plan_check_order_ready']}")
+    print(f"baseline_candidate_threshold_boundary_gate_plan_check_ready={summary['baseline_candidate_threshold_boundary_gate_plan_check_ready']}")
     print(f"python_version={summary['python_version']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if summary["status"] != "pass" and not args.no_fail:

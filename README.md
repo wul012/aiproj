@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version 443 wraps the baseline-candidate threshold boundary expected-exit CI step in a stable script entrypoint with invocation-plan and artifact-digest evidence, keeping GitHub Actions shorter and the gate contract easier to audit.
+Version 444 adds a lightweight contract check for the baseline-candidate threshold boundary wrapper plan, so CI can verify the wrapper artifact digests and expected-exit summary before coverage runs.
+
+## Latest v444 checkpoint
+
+- Added `scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py` to validate the v443 wrapper plan without rerunning training.
+- The checker accepts the wrapper output directory or plan JSON, verifies five recorded artifact digests, and checks the expected-exit gate summary still says `status=pass`, `decision=expected_exit_verified`, `actual_exit_code=2`, and `diagnosis_decision=candidate_not_accepted`.
+- `.github/workflows/ci.yml` now runs the plan checker after `scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py` and before release-readiness drift smoke and coverage.
+- CI workflow hygiene now requires the plan-check command and order, exposing `baseline_candidate_threshold_boundary_gate_plan_check_*` summary fields.
+- Archived wrapper output, plan-check output, CI hygiene evidence, and Playwright MCP screenshots in `d/444`.
 
 ## Latest v443 checkpoint
 

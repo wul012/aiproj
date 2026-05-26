@@ -53,6 +53,9 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "baseline_candidate_threshold_boundary_gate_check_present",
         "baseline_candidate_threshold_boundary_gate_check_order_ready",
         "baseline_candidate_threshold_boundary_gate_check_ready",
+        "baseline_candidate_threshold_boundary_gate_plan_check_present",
+        "baseline_candidate_threshold_boundary_gate_plan_check_order_ready",
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready",
         "release_readiness_drift_contract_smoke_present",
         "release_readiness_drift_contract_smoke_order_ready",
         "release_readiness_drift_contract_smoke_ready",
@@ -105,6 +108,7 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Order violations", summary.get("order_violation_count")),
         ("Plan digest gate", summary.get("tiny_scorecard_plan_digest_gate_ready")),
         ("Boundary gate check", summary.get("baseline_candidate_threshold_boundary_gate_check_ready")),
+        ("Boundary plan check", summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready")),
         ("Drift smoke gate", summary.get("release_readiness_drift_contract_smoke_ready")),
         ("Python", summary.get("python_version")),
     ]

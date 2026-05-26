@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MiniGPT CI workflow hygiene" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Checks the CI workflow action versions, runtime policy, Python version, and required quality gates.
+  - generic [ref=e5]:
+    - article [ref=e6]:
+      - generic [ref=e7]: Status
+      - strong [ref=e8]: pass
+    - article [ref=e9]:
+      - generic [ref=e10]: Decision
+      - strong [ref=e11]: continue_with_node24_native_ci
+    - article [ref=e12]:
+      - generic [ref=e13]: Checks
+      - strong [ref=e14]: "24"
+    - article [ref=e15]:
+      - generic [ref=e16]: Failures
+      - strong [ref=e17]: "0"
+    - article [ref=e18]:
+      - generic [ref=e19]: Actions
+      - strong [ref=e20]: "2"
+    - article [ref=e21]:
+      - generic [ref=e22]: Node 24 native
+      - strong [ref=e23]: "2"
+    - article [ref=e24]:
+      - generic [ref=e25]: Forbidden env
+      - strong [ref=e26]: "0"
+    - article [ref=e27]:
+      - generic [ref=e28]: Order violations
+      - strong [ref=e29]: "0"
+    - article [ref=e30]:
+      - generic [ref=e31]: Plan digest gate
+      - strong [ref=e32]: "True"
+    - article [ref=e33]:
+      - generic [ref=e34]: Boundary gate check
+      - strong [ref=e35]: "True"
+    - article [ref=e36]:
+      - generic [ref=e37]: Boundary plan check
+      - strong [ref=e38]: "True"
+    - article [ref=e39]:
+      - generic [ref=e40]: Drift smoke gate
+      - strong [ref=e41]: "True"
+    - article [ref=e42]:
+      - generic [ref=e43]: Python
+      - strong [ref=e44]: "3.11"
+  - generic [ref=e45]:
+    - heading "Checks" [level=2] [ref=e46]
+    - table [ref=e47]:
+      - rowgroup [ref=e48]:
+        - row "ID Category Target Expected Actual Status Detail" [ref=e49]
+        - row "action:actions/checkout action_version actions/checkout v6 v6 pass Action uses the expected Node 24 native major." [ref=e57]
+        - row "action:actions/setup-python action_version actions/setup-python v6 v6 pass Action uses the expected Node 24 native major." [ref=e65]
+        - row "env:FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 forbidden_env FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 absent absent pass Native action versions should not rely on force-runtime environment variables." [ref=e73]
+        - row "command:source_encoding_gate required_command source_encoding_gate scripts/check_source_encoding.py present pass Required CI quality command is present." [ref=e81]
+        - row "command:ci_workflow_hygiene_gate required_command ci_workflow_hygiene_gate scripts/check_ci_workflow_hygiene.py present pass Required CI quality command is present." [ref=e89]
+        - row "command:promoted_seed_handoff_assurance_smoke required_command promoted_seed_handoff_assurance_smoke scripts/check_promoted_seed_handoff_assurance_smoke.py present pass Required CI quality command is present." [ref=e97]
+        - row "command:tiny_scorecard_comparison_inline_check_smoke required_command tiny_scorecard_comparison_inline_check_smoke scripts/run_ci_tiny_scorecard_comparison_smoke.py present pass Required CI quality command is present." [ref=e105]
+        - row "command:tiny_scorecard_summary_check_sidecar required_command tiny_scorecard_summary_check_sidecar --summary-check-out-dir present pass Required CI quality command is present." [ref=e113]
+        - row "command:ci_tiny_scorecard_plan_digest_check required_command ci_tiny_scorecard_plan_digest_check scripts/check_ci_tiny_scorecard_plan.py present pass Required CI quality command is present." [ref=e121]
+        - row "command:baseline_candidate_threshold_boundary_gate_check required_command baseline_candidate_threshold_boundary_gate_check scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py present pass Required CI quality command is present." [ref=e129]
+        - row "command:baseline_candidate_threshold_boundary_gate_plan_check required_command baseline_candidate_threshold_boundary_gate_plan_check scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py present pass Required CI quality command is present." [ref=e137]
+        - row "command:release_readiness_drift_contract_smoke required_command release_readiness_drift_contract_smoke scripts/check_release_readiness_drift_contract_smoke.py present pass Required CI quality command is present." [ref=e145]
+        - row "command:test_coverage_report required_command test_coverage_report scripts/run_test_coverage.py present pass Required CI quality command is present." [ref=e153]
+        - row "command:coverage_fail_under_gate required_command coverage_fail_under_gate --fail-under 80 present pass Required CI quality command is present." [ref=e161]
+        - 'row "order:promoted_seed_handoff_assurance_smoke_before_coverage required_order promoted_seed_handoff_assurance_smoke_before_coverage before before_line=30;after_line=48 pass Required CI command order is preserved: before line 30, after line 48." [ref=e169]'
+        - 'row "order:tiny_scorecard_inline_check_smoke_before_coverage required_order tiny_scorecard_inline_check_smoke_before_coverage before before_line=33;after_line=48 pass Required CI command order is preserved: before line 33, after line 48." [ref=e177]'
+        - 'row "order:ci_tiny_scorecard_plan_check_after_smoke required_order ci_tiny_scorecard_plan_check_after_smoke before before_line=33;after_line=36 pass Required CI command order is preserved: before line 33, after line 36." [ref=e185]'
+        - 'row "order:ci_tiny_scorecard_plan_check_before_coverage required_order ci_tiny_scorecard_plan_check_before_coverage before before_line=36;after_line=48 pass Required CI command order is preserved: before line 36, after line 48." [ref=e193]'
+        - 'row "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest required_order baseline_candidate_threshold_boundary_gate_check_after_plan_digest before before_line=36;after_line=39 pass Required CI command order is preserved: before line 36, after line 39." [ref=e201]'
+        - 'row "order:baseline_candidate_threshold_boundary_gate_check_before_coverage required_order baseline_candidate_threshold_boundary_gate_check_before_coverage before before_line=39;after_line=48 pass Required CI command order is preserved: before line 39, after line 48." [ref=e209]'
+        - 'row "order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check required_order baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check before before_line=39;after_line=42 pass Required CI command order is preserved: before line 39, after line 42." [ref=e217]'
+        - 'row "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage required_order baseline_candidate_threshold_boundary_gate_plan_check_before_coverage before before_line=42;after_line=48 pass Required CI command order is preserved: before line 42, after line 48." [ref=e225]'
+        - 'row "order:release_readiness_drift_contract_smoke_before_coverage required_order release_readiness_drift_contract_smoke_before_coverage before before_line=45;after_line=48 pass Required CI command order is preserved: before line 45, after line 48." [ref=e233]'
+        - row "python:setup-version python_version actions/setup-python 3.11 3.11 pass CI parser target should remain aligned with source encoding compatibility checks." [ref=e241]
+  - generic [ref=e249]:
+    - heading "Actions" [level=2] [ref=e250]
+    - table [ref=e251]:
+      - rowgroup [ref=e252]:
+        - row "Repository Version Line Node 24 Native" [ref=e253]
+        - row "actions/checkout v6 12 True" [ref=e258]
+        - row "actions/setup-python v6 14 True" [ref=e263]
+  - generic [ref=e268]:
+    - heading "Recommendations" [level=2] [ref=e269]
+    - list [ref=e270]:
+      - listitem [ref=e271]: Keep CI workflow action versions and quality gates aligned with the Node 24 native policy.
+  - contentinfo [ref=e272]: Generated by MiniGPT CI workflow hygiene.

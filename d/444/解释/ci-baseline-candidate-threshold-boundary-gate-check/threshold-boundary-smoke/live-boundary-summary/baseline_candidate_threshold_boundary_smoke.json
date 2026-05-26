@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT baseline-candidate threshold boundary smoke",
+  "generated_at": "2026-05-26T11:03:00Z",
+  "status": "pass",
+  "decision": "live_threshold_boundary_review",
+  "source_mode": "reuse_summary",
+  "source_smoke_summary": "D:\\aiproj\\d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+  "smoke": {
+    "status": "pass",
+    "returncode": 0,
+    "source_mode": "reuse_summary",
+    "command_text": "",
+    "stdout": "",
+    "stderr": ""
+  },
+  "matrix": {
+    "status": "pass",
+    "decision": "threshold_matrix_ready",
+    "threshold_count": 3,
+    "accept_count": 0,
+    "reject_count": 3,
+    "handoff_check_failure_count": 0,
+    "outputs": {
+      "json": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.json",
+      "text": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.txt",
+      "markdown": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.md",
+      "html": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\threshold-boundary-matrix\\baseline_candidate_threshold_matrix.html"
+    }
+  },
+  "threshold_boundary": {
+    "status": "review",
+    "decision": "no_accepting_threshold",
+    "has_accept": false,
+    "has_reject": true,
+    "is_monotonic_acceptance": true,
+    "transition_count": 0,
+    "strictest_accepting_threshold": null,
+    "first_rejecting_threshold": 0.0,
+    "accepting_thresholds": [],
+    "rejecting_thresholds": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "transitions": []
+  },
+  "review_diagnosis": {
+    "status": "review",
+    "decision": "candidate_not_accepted",
+    "issue_count": 1,
+    "action_count": 2,
+    "issues": [
+      {
+        "code": "no_accepting_threshold",
+        "severity": "review",
+        "message": "Every tested threshold rejected the candidate."
+      }
+    ],
+    "actions": [
+      {
+        "code": "increase_candidate_signal",
+        "message": "Try a stronger candidate run or broader data before promoting this candidate."
+      },
+      {
+        "code": "keep_current_baseline",
+        "message": "Keep the current baseline until a candidate has an accepting threshold."
+      }
+    ]
+  },
+  "boundary": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Live boundary smoke runs a tiny CPU comparison and threshold sweep to verify the pipeline; it is not robust model quality evidence."
+  },
+  "execution": {
+    "gate_mode": "diagnosis_strict",
+    "require_boundary_pass": false,
+    "require_diagnosis_pass": true,
+    "expected_exit_code": 2,
+    "strict_gate_active": true
+  }
+}

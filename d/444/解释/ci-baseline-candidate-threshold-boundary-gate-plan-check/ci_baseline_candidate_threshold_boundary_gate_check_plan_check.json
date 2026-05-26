@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "decision": "continue",
+  "plan_path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\ci_baseline_candidate_threshold_boundary_gate_check_plan.json",
+  "wrapper": "run_ci_baseline_candidate_threshold_boundary_gate_check",
+  "returncode": 0,
+  "artifact_count": 5,
+  "artifact_failure_count": 0,
+  "artifacts": [
+    {
+      "name": "gate_check_json",
+      "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.json",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 2990,
+      "actual_size_bytes": 2990,
+      "expected_sha256": "3c89a37a70901cdce7edc8e2023d5cc1a96db80ef002b37e598d536630358efb",
+      "actual_sha256": "3c89a37a70901cdce7edc8e2023d5cc1a96db80ef002b37e598d536630358efb",
+      "status": "pass"
+    },
+    {
+      "name": "gate_check_text",
+      "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.txt",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 953,
+      "actual_size_bytes": 953,
+      "expected_sha256": "d7546af601ae64b7ef7717f61a642d4caa04dbaf277010b8c60604a56defd895",
+      "actual_sha256": "d7546af601ae64b7ef7717f61a642d4caa04dbaf277010b8c60604a56defd895",
+      "status": "pass"
+    },
+    {
+      "name": "gate_check_markdown",
+      "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.md",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 666,
+      "actual_size_bytes": 666,
+      "expected_sha256": "cc6677f8e77b64a507fbcc107d980e969ba7618a7221a90993ddec8191a57b90",
+      "actual_sha256": "cc6677f8e77b64a507fbcc107d980e969ba7618a7221a90993ddec8191a57b90",
+      "status": "pass"
+    },
+    {
+      "name": "gate_check_html",
+      "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.html",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 2612,
+      "actual_size_bytes": 2612,
+      "expected_sha256": "d40d6f2ad0e6b2024f6b81ad4bbc9efa7d2b3fe76cedfa5e65f18f37ddb2e553",
+      "actual_sha256": "d40d6f2ad0e6b2024f6b81ad4bbc9efa7d2b3fe76cedfa5e65f18f37ddb2e553",
+      "status": "pass"
+    },
+    {
+      "name": "boundary_smoke_json",
+      "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\live-boundary-summary\\baseline_candidate_threshold_boundary_smoke.json",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 3059,
+      "actual_size_bytes": 3059,
+      "expected_sha256": "701d3023fac7561e58626a7838b893f242bf6bcbe1cf4bcc41beeb3403a21da5",
+      "actual_sha256": "701d3023fac7561e58626a7838b893f242bf6bcbe1cf4bcc41beeb3403a21da5",
+      "status": "pass"
+    }
+  ],
+  "gate_check": {
+    "available": true,
+    "parse_status": "pass",
+    "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.json",
+    "status": "pass",
+    "decision": "expected_exit_verified",
+    "failed_count": 0,
+    "actual_exit_code": 2,
+    "expected_exit_code": 2,
+    "diagnosis_decision": "candidate_not_accepted",
+    "boundary_decision": "no_accepting_threshold"
+  },
+  "issue_count": 0,
+  "issues": []
+}

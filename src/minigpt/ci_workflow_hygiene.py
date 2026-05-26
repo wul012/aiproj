@@ -26,6 +26,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
     "ci_tiny_scorecard_plan_digest_check": "scripts/check_ci_tiny_scorecard_plan.py",
     "baseline_candidate_threshold_boundary_gate_check": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
+    "baseline_candidate_threshold_boundary_gate_plan_check": "scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py",
     "release_readiness_drift_contract_smoke": "scripts/check_release_readiness_drift_contract_smoke.py",
     "test_coverage_report": "scripts/run_test_coverage.py",
     "coverage_fail_under_gate": "--fail-under 80",
@@ -53,6 +54,14 @@ REQUIRED_COMMAND_ORDER = {
     ),
     "baseline_candidate_threshold_boundary_gate_check_before_coverage": (
         "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
+        "scripts/run_test_coverage.py",
+    ),
+    "baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check": (
+        "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
+        "scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py",
+    ),
+    "baseline_candidate_threshold_boundary_gate_plan_check_before_coverage": (
+        "scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py",
         "scripts/run_test_coverage.py",
     ),
     "release_readiness_drift_contract_smoke_before_coverage": (
@@ -108,6 +117,9 @@ class CiWorkflowSummary(TypedDict):
     baseline_candidate_threshold_boundary_gate_check_present: bool
     baseline_candidate_threshold_boundary_gate_check_order_ready: bool
     baseline_candidate_threshold_boundary_gate_check_ready: bool
+    baseline_candidate_threshold_boundary_gate_plan_check_present: bool
+    baseline_candidate_threshold_boundary_gate_plan_check_order_ready: bool
+    baseline_candidate_threshold_boundary_gate_plan_check_ready: bool
     release_readiness_drift_contract_smoke_present: bool
     release_readiness_drift_contract_smoke_order_ready: bool
     release_readiness_drift_contract_smoke_ready: bool
@@ -154,6 +166,11 @@ def build_ci_workflow_hygiene_report(
         checks,
         "order:baseline_candidate_threshold_boundary_gate_check_before_coverage",
     )
+    boundary_gate_plan_check_present = _check_passed(checks, "command:baseline_candidate_threshold_boundary_gate_plan_check")
+    boundary_gate_plan_check_order_ready = _check_passed(checks, "order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check") and _check_passed(
+        checks,
+        "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
+    )
     drift_contract_smoke_present = _check_passed(checks, "command:release_readiness_drift_contract_smoke")
     drift_contract_smoke_order_ready = _check_passed(checks, "order:release_readiness_drift_contract_smoke_before_coverage")
     summary: CiWorkflowSummary = {
@@ -177,6 +194,9 @@ def build_ci_workflow_hygiene_report(
         "baseline_candidate_threshold_boundary_gate_check_present": boundary_gate_check_present,
         "baseline_candidate_threshold_boundary_gate_check_order_ready": boundary_gate_check_order_ready,
         "baseline_candidate_threshold_boundary_gate_check_ready": boundary_gate_check_present and boundary_gate_check_order_ready,
+        "baseline_candidate_threshold_boundary_gate_plan_check_present": boundary_gate_plan_check_present,
+        "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": boundary_gate_plan_check_order_ready,
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready": boundary_gate_plan_check_present and boundary_gate_plan_check_order_ready,
         "release_readiness_drift_contract_smoke_present": drift_contract_smoke_present,
         "release_readiness_drift_contract_smoke_order_ready": drift_contract_smoke_order_ready,
         "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_present and drift_contract_smoke_order_ready,

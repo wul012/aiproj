@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "wrapper": "run_ci_baseline_candidate_threshold_boundary_gate_check",
+  "out_dir": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check",
+  "smoke_summary": "D:\\aiproj\\d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+  "config": {
+    "thresholds": "0:1:0.5",
+    "require_diagnosis_pass": true,
+    "expected_exit_code": 2,
+    "expected_diagnosis_decision": "candidate_not_accepted",
+    "require_pass": true
+  },
+  "flags": {
+    "force": true
+  },
+  "command": [
+    "D:\\python\\python.exe",
+    "-B",
+    "D:\\aiproj\\scripts\\check_baseline_candidate_threshold_boundary_gate.py",
+    "--smoke-summary",
+    "D:\\aiproj\\d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json",
+    "--out-dir",
+    "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check",
+    "--thresholds",
+    "0:1:0.5",
+    "--require-diagnosis-pass",
+    "--expected-exit-code",
+    "2",
+    "--expected-diagnosis-decision",
+    "candidate_not_accepted",
+    "--require-pass",
+    "--force"
+  ],
+  "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\check_baseline_candidate_threshold_boundary_gate.py --smoke-summary D:\\aiproj\\d\\438\\解释\\baseline-candidate-threshold-boundary-smoke\\tiny-scorecard-comparison-smoke\\tiny_scorecard_comparison_smoke_summary.json --out-dir d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check --thresholds 0:1:0.5 --require-diagnosis-pass --expected-exit-code 2 --expected-diagnosis-decision candidate_not_accepted --require-pass --force",
+  "returncode": 0,
+  "gate_check_summary": {
+    "available": true,
+    "parse_status": "pass",
+    "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.json",
+    "status": "pass",
+    "decision": "expected_exit_verified",
+    "failed_count": 0,
+    "actual_exit_code": 2,
+    "expected_exit_code": 2,
+    "diagnosis_decision": "candidate_not_accepted",
+    "boundary_decision": "no_accepting_threshold"
+  },
+  "artifact_digest": {
+    "artifacts": {
+      "gate_check_json": {
+        "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.json",
+        "exists": true,
+        "size_bytes": 2990,
+        "sha256": "3c89a37a70901cdce7edc8e2023d5cc1a96db80ef002b37e598d536630358efb"
+      },
+      "gate_check_text": {
+        "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.txt",
+        "exists": true,
+        "size_bytes": 953,
+        "sha256": "d7546af601ae64b7ef7717f61a642d4caa04dbaf277010b8c60604a56defd895"
+      },
+      "gate_check_markdown": {
+        "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.md",
+        "exists": true,
+        "size_bytes": 666,
+        "sha256": "cc6677f8e77b64a507fbcc107d980e969ba7618a7221a90993ddec8191a57b90"
+      },
+      "gate_check_html": {
+        "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\gate-check\\baseline_candidate_threshold_boundary_gate_check.html",
+        "exists": true,
+        "size_bytes": 2612,
+        "sha256": "d40d6f2ad0e6b2024f6b81ad4bbc9efa7d2b3fe76cedfa5e65f18f37ddb2e553"
+      },
+      "boundary_smoke_json": {
+        "path": "d\\444\\解释\\ci-baseline-candidate-threshold-boundary-gate-check\\threshold-boundary-smoke\\live-boundary-summary\\baseline_candidate_threshold_boundary_smoke.json",
+        "exists": true,
+        "size_bytes": 3059,
+        "sha256": "701d3023fac7561e58626a7838b893f242bf6bcbe1cf4bcc41beeb3403a21da5"
+      }
+    }
+  }
+}
