@@ -111,6 +111,9 @@ def _row_from_report(path: Path, report: dict[str, Any]) -> dict[str, Any]:
         "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": summary.get(
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"
         ),
+        "ci_workflow_archived_path_portability_check_ready": summary.get(
+            "ci_workflow_archived_path_portability_check_ready"
+        ),
         "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": summary.get(
             "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"
         ),
@@ -174,6 +177,8 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
     compared_boundary_gate_ready = compared.get("ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready")
     baseline_boundary_plan_ready = baseline.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")
     compared_boundary_plan_ready = compared.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")
+    baseline_archived_path_ready = baseline.get("ci_workflow_archived_path_portability_check_ready")
+    compared_archived_path_ready = compared.get("ci_workflow_archived_path_portability_check_ready")
     baseline_receipt_plan_ready = baseline.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready")
     compared_receipt_plan_ready = compared.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready")
     baseline_drift_smoke_ready = baseline.get("ci_workflow_release_readiness_drift_contract_smoke_ready")
@@ -213,6 +218,11 @@ def _delta_from_baseline(baseline: dict[str, Any], compared: dict[str, Any]) -> 
         "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_changed": compared_boundary_plan_ready != baseline_boundary_plan_ready,
         "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed": baseline_boundary_plan_ready is True
         and compared_boundary_plan_ready is not True,
+        "baseline_ci_workflow_archived_path_portability_check_ready": baseline_archived_path_ready,
+        "compared_ci_workflow_archived_path_portability_check_ready": compared_archived_path_ready,
+        "ci_workflow_archived_path_portability_check_ready_changed": compared_archived_path_ready != baseline_archived_path_ready,
+        "ci_workflow_archived_path_portability_check_ready_regressed": baseline_archived_path_ready is True
+        and compared_archived_path_ready is not True,
         "baseline_ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": baseline_receipt_plan_ready,
         "compared_ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": compared_receipt_plan_ready,
         "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed": compared_receipt_plan_ready != baseline_receipt_plan_ready,
@@ -334,6 +344,12 @@ def _delta_explanation(delta: dict[str, Any]) -> str:
             f"{delta.get('baseline_ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready')} to "
             f"{delta.get('compared_ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready')}."
         )
+    if delta.get("ci_workflow_archived_path_portability_check_ready_changed"):
+        parts.append(
+            "CI workflow archived path portability check ready changed from "
+            f"{delta.get('baseline_ci_workflow_archived_path_portability_check_ready')} to "
+            f"{delta.get('compared_ci_workflow_archived_path_portability_check_ready')}."
+        )
     if delta.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed"):
         parts.append(
             "CI workflow promoted seed receipt failure-smoke plan check ready changed from "
@@ -430,6 +446,12 @@ def _summary(rows: list[dict[str, Any]], deltas: list[dict[str, Any]], baseline:
         ),
         "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": sum(
             1 for delta in deltas if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed")
+        ),
+        "ci_workflow_archived_path_portability_check_ready_changed_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_archived_path_portability_check_ready_changed")
+        ),
+        "ci_workflow_archived_path_portability_check_ready_regression_count": sum(
+            1 for delta in deltas if delta.get("ci_workflow_archived_path_portability_check_ready_regressed")
         ),
         "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed_count": sum(
             1 for delta in deltas if delta.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed")
@@ -554,6 +576,8 @@ def _ci_workflow_regression_reasons(delta: dict[str, Any]) -> list[str]:
         reasons.append("boundary_gate_check_not_ready")
     if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed"):
         reasons.append("boundary_gate_plan_check_not_ready")
+    if delta.get("ci_workflow_archived_path_portability_check_ready_regressed"):
+        reasons.append("archived_path_portability_check_not_ready")
     if delta.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regressed"):
         reasons.append("receipt_failure_smoke_plan_check_not_ready")
     if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
@@ -703,6 +727,7 @@ def _ci_workflow_reason_label(value: Any) -> str:
         "tiny_scorecard_plan_digest_gate_not_ready": "tiny scorecard plan digest gate readiness",
         "boundary_gate_check_not_ready": "baseline-candidate boundary gate check readiness",
         "boundary_gate_plan_check_not_ready": "baseline-candidate boundary plan check readiness",
+        "archived_path_portability_check_not_ready": "archived path portability check readiness",
         "receipt_failure_smoke_plan_check_not_ready": "receipt failure-smoke plan check readiness",
         "failed_checks_increased": "failed checks increased",
         "order_violations_increased": "order violations increased",

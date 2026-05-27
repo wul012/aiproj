@@ -1,0 +1,265 @@
+- generic [active] [ref=e1] [box=0,0,1350,2305]:
+  - banner [ref=e2] [box=0,0,1350,142]:
+    - heading "MiniGPT v465 archived path readiness comparison" [level=1] [ref=e3] [box=32,28,1286,41]
+    - paragraph [ref=e4] [box=32,85,1286,23]: "baseline: d\\465\\解释\\source-inputs\\v464-baseline-archived-ready\\release_readiness.json"
+  - generic [ref=e5] [box=0,142,1350,564]:
+    - generic [ref=e6] [box=32,160,150,82]:
+      - generic [ref=e7] [box=47,175,121,17]: Reports
+      - generic [ref=e8] [box=47,198,121,29]: "2"
+    - generic [ref=e9] [box=194,160,150,82]:
+      - generic [ref=e10] [box=209,175,121,17]: Baseline
+      - generic [ref=e11] [box=209,198,121,29]: ready
+    - generic [ref=e12] [box=357,160,150,82]:
+      - generic [ref=e13] [box=371,175,121,17]: Ready
+      - generic [ref=e14] [box=371,198,121,29]: "2"
+    - generic [ref=e15] [box=519,160,150,82]:
+      - generic [ref=e16] [box=533,175,121,17]: Blocked
+      - generic [ref=e17] [box=533,198,121,29]: "0"
+    - generic [ref=e18] [box=681,160,150,82]:
+      - generic [ref=e19] [box=696,175,121,17]: Improved
+      - generic [ref=e20] [box=696,198,121,29]: "0"
+    - generic [ref=e21] [box=843,160,150,82]:
+      - generic [ref=e22] [box=858,175,121,17]: Regressed
+      - generic [ref=e23] [box=858,198,121,29]: "0"
+    - generic [ref=e24] [box=1006,160,150,82]:
+      - generic [ref=e25] [box=1020,175,121,17]: Panel deltas
+      - generic [ref=e26] [box=1020,198,121,29]: "0"
+    - generic [ref=e27] [box=1168,160,150,82]:
+      - generic [ref=e28] [box=1182,175,121,17]: CI regressions
+      - generic [ref=e29] [box=1182,198,121,29]: "1"
+    - generic [ref=e30] [box=32,254,150,99]:
+      - generic [ref=e31] [box=47,269,121,35]: CI order regressions
+      - generic [ref=e32] [box=47,310,121,29]: "0"
+    - generic [ref=e33] [box=194,254,150,99]:
+      - generic [ref=e34] [box=209,269,121,35]: CI drift smoke changes
+      - generic [ref=e35] [box=209,310,121,29]: "0"
+    - generic [ref=e36] [box=357,254,150,99]:
+      - generic [ref=e37] [box=371,269,121,35]: CI drift smoke regressions
+      - generic [ref=e38] [box=371,310,121,29]: "0"
+    - generic [ref=e39] [box=519,254,150,99]:
+      - generic [ref=e40] [box=533,269,121,35]: CI tiny plan regressions
+      - generic [ref=e41] [box=533,310,121,29]: "0"
+    - generic [ref=e42] [box=681,254,150,99]:
+      - generic [ref=e43] [box=696,269,121,35]: CI boundary gate regressions
+      - generic [ref=e44] [box=696,310,121,29]: "0"
+    - generic [ref=e45] [box=843,254,150,99]:
+      - generic [ref=e46] [box=858,269,121,35]: CI boundary plan regressions
+      - generic [ref=e47] [box=858,310,121,29]: "0"
+    - generic [ref=e48] [box=1006,254,150,99]:
+      - generic [ref=e49] [box=1020,269,121,35]: CI archived path changes
+      - generic [ref=e50] [box=1020,310,121,29]: "1"
+    - generic [ref=e51] [box=1168,254,150,99]:
+      - generic [ref=e52] [box=1182,269,121,35]: CI archived path regressions
+      - generic [ref=e53] [box=1182,310,121,29]: "1"
+    - generic [ref=e54] [box=32,365,150,186]:
+      - generic [ref=e55] [box=47,380,121,35]: CI receipt plan changes
+      - generic [ref=e56] [box=47,420,121,29]: "0"
+    - generic [ref=e57] [box=194,365,150,186]:
+      - generic [ref=e58] [box=209,380,121,35]: CI receipt plan regressions
+      - generic [ref=e59] [box=209,420,121,29]: "0"
+    - generic [ref=e60] [box=357,365,150,186]:
+      - generic [ref=e61] [box=371,380,121,35]: CI regression reasons
+      - generic [ref=e62] [box=371,420,121,116]: archived_path_portability_check_not_ready:1
+    - generic [ref=e63] [box=519,365,150,186]:
+      - generic [ref=e64] [box=533,380,121,35]: Coverage regressions
+      - generic [ref=e65] [box=533,420,121,29]: "0"
+    - generic [ref=e66] [box=681,365,150,186]:
+      - generic [ref=e67] [box=696,380,121,35]: Benchmark deltas
+      - generic [ref=e68] [box=696,420,121,29]: "0"
+    - generic [ref=e69] [box=843,365,150,186]:
+      - generic [ref=e70] [box=858,380,121,35]: Benchmark regressions
+      - generic [ref=e71] [box=858,420,121,29]: "0"
+    - generic [ref=e72] [box=1006,365,150,186]:
+      - generic [ref=e73] [box=1020,380,121,35]: Bench design deltas
+      - generic [ref=e74] [box=1020,420,121,29]: "0"
+    - generic [ref=e75] [box=1168,365,150,186]:
+      - generic [ref=e76] [box=1182,380,121,35]: Bench design regressions
+      - generic [ref=e77] [box=1182,420,121,29]: "0"
+    - generic [ref=e78] [box=32,563,150,139]:
+      - generic [ref=e79] [box=47,578,121,35]: Bench design changes
+      - generic [ref=e80] [box=47,618,121,29]: "0"
+    - generic [ref=e81] [box=194,563,150,139]:
+      - generic [ref=e82] [box=209,578,121,35]: Benchmark reason additions
+      - generic [ref=e83] [box=209,618,121,29]: "0"
+    - generic [ref=e84] [box=357,563,150,139]:
+      - generic [ref=e85] [box=371,578,121,35]: Benchmark reason removals
+      - generic [ref=e86] [box=371,618,121,29]: "0"
+    - generic [ref=e87] [box=519,563,150,139]:
+      - generic [ref=e88] [box=533,578,121,52]: Benchmark reason recoveries
+      - generic [ref=e89] [box=533,636,121,29]: "0"
+    - generic [ref=e90] [box=681,563,150,139]:
+      - generic [ref=e91] [box=696,578,121,35]: Benchmark reason mixed
+      - generic [ref=e92] [box=696,618,121,29]: "0"
+    - generic [ref=e93] [box=843,563,150,139]:
+      - generic [ref=e94] [box=858,578,121,17]: Generated
+      - generic [ref=e95] [box=858,601,121,87]: 2026-05-27T12:50:58Z
+  - generic [ref=e96] [box=32,724,1286,438]:
+    - heading "Readiness Matrix" [level=2] [ref=e97] [box=49,741,1253,26]
+    - table [ref=e98] [box=49,779,2372,351]:
+      - rowgroup [ref=e99] [box=49,779,2372,86]:
+        - row "Release Status Decision Gate Audit Score CI workflow CI failed CI order violations CI plan digest CI boundary gate CI boundary plan CI archived paths CI receipt plan CI drift smoke ready Request Coverage Coverage % Gap Benchmark history Benchmark ready Suite-design not-ready Design changes Benchmark readiness Benchmark readiness exit Benchmark regressions Benchmark boundary Maturity Panels" [ref=e100] [box=49,779,2372,86]:
+          - columnheader "Release" [ref=e101] [box=49,779,255,86]
+          - columnheader "Status" [ref=e102] [box=303,779,70,86]
+          - columnheader "Decision" [ref=e103] [box=373,779,73,86]
+          - columnheader "Gate" [ref=e104] [box=447,779,50,86]
+          - columnheader "Audit" [ref=e105] [box=496,779,52,86]
+          - columnheader "Score" [ref=e106] [box=549,779,59,86]
+          - columnheader "CI workflow" [ref=e107] [box=608,779,89,86]
+          - columnheader "CI failed" [ref=e108] [box=697,779,57,86]
+          - columnheader "CI order violations" [ref=e109] [box=754,779,87,86]
+          - columnheader "CI plan digest" [ref=e110] [box=841,779,61,86]
+          - columnheader "CI boundary gate" [ref=e111] [box=902,779,85,86]
+          - columnheader "CI boundary plan" [ref=e112] [box=987,779,85,86]
+          - columnheader "CI archived paths" [ref=e113] [box=1072,779,78,86]
+          - columnheader "CI receipt plan" [ref=e114] [box=1150,779,69,86]
+          - columnheader "CI drift smoke ready" [ref=e115] [box=1218,779,60,86]
+          - columnheader "Request" [ref=e116] [box=1278,779,75,86]
+          - columnheader "Coverage" [ref=e117] [box=1353,779,85,86]
+          - columnheader "Coverage %" [ref=e118] [box=1438,779,85,86]
+          - columnheader "Gap" [ref=e119] [box=1522,779,42,86]
+          - columnheader "Benchmark history" [ref=e120] [box=1564,779,94,86]
+          - columnheader "Benchmark ready" [ref=e121] [box=1658,779,94,86]
+          - columnheader "Suite-design not-ready" [ref=e122] [box=1751,779,62,86]
+          - columnheader "Design changes" [ref=e123] [box=1813,779,76,86]
+          - columnheader "Benchmark readiness" [ref=e124] [box=1889,779,94,86]
+          - columnheader "Benchmark readiness exit" [ref=e125] [box=1983,779,94,86]
+          - columnheader "Benchmark regressions" [ref=e126] [box=2077,779,104,86]
+          - columnheader "Benchmark boundary" [ref=e127] [box=2181,779,100,86]
+          - columnheader "Maturity" [ref=e128] [box=2281,779,77,86]
+          - columnheader "Panels" [ref=e129] [box=2358,779,63,86]
+      - rowgroup [ref=e130] [box=49,865,2372,265]:
+        - row "v464-archived-path-portability-carryover d\\465\\解释\\source-inputs\\v464-baseline-archived-ready\\release_readiness.json ready ship pass pass 100 pass 0 0 True True True True True True pass pass 90.16 0 pass 1 0 0 pass 0 0 standard-benchmark-candidate-evidence pass 0 fail / 0 warn" [ref=e131] [box=49,865,2372,133]:
+          - cell "v464-archived-path-portability-carryover d\\465\\解释\\source-inputs\\v464-baseline-archived-ready\\release_readiness.json" [ref=e132] [box=49,865,255,133]:
+            - text: v464-archived-path-portability-carryover
+            - text: d\465\解释\source-inputs\v464-baseline-archived-ready\release_readiness.json
+          - cell "ready" [ref=e133] [box=303,865,70,133]:
+            - generic [ref=e134] [box=311,875,54,23]: ready
+          - cell "ship" [ref=e135] [box=373,865,73,133]
+          - cell "pass" [ref=e136] [box=447,865,50,133]
+          - cell "pass" [ref=e137] [box=496,865,52,133]
+          - cell "100" [ref=e138] [box=549,865,59,133]
+          - cell "pass" [ref=e139] [box=608,865,89,133]
+          - cell "0" [ref=e140] [box=697,865,57,133]
+          - cell "0" [ref=e141] [box=754,865,87,133]
+          - cell "True" [ref=e142] [box=841,865,61,133]
+          - cell "True" [ref=e143] [box=902,865,85,133]
+          - cell "True" [ref=e144] [box=987,865,85,133]
+          - cell "True" [ref=e145] [box=1072,865,78,133]
+          - cell "True" [ref=e146] [box=1150,865,69,133]
+          - cell "True" [ref=e147] [box=1218,865,60,133]
+          - cell "pass" [ref=e148] [box=1278,865,75,133]
+          - cell "pass" [ref=e149] [box=1353,865,85,133]
+          - cell "90.16" [ref=e150] [box=1438,865,85,133]
+          - cell "0" [ref=e151] [box=1522,865,42,133]
+          - cell "pass" [ref=e152] [box=1564,865,94,133]
+          - cell "1" [ref=e153] [box=1658,865,94,133]
+          - cell "0" [ref=e154] [box=1751,865,62,133]
+          - cell "0" [ref=e155] [box=1813,865,76,133]
+          - cell "pass" [ref=e156] [box=1889,865,94,133]
+          - cell "0" [ref=e157] [box=1983,865,94,133]
+          - cell "0" [ref=e158] [box=2077,865,104,133]
+          - cell "standard-benchmark-candidate-evidence" [ref=e159] [box=2181,865,100,133]
+          - cell "pass" [ref=e160] [box=2281,865,77,133]
+          - cell "0 fail / 0 warn" [ref=e161] [box=2358,865,63,133]
+        - row "v465-current-archived-path-regressed d\\465\\解释\\source-inputs\\v465-current-archived-regressed\\release_readiness.json ready ship pass pass 100 pass 0 0 True True True False True True pass pass 90.16 0 pass 1 0 0 pass 0 0 standard-benchmark-candidate-evidence pass 0 fail / 0 warn" [ref=e162] [box=49,997,2372,133]:
+          - cell "v465-current-archived-path-regressed d\\465\\解释\\source-inputs\\v465-current-archived-regressed\\release_readiness.json" [ref=e163] [box=49,997,255,133]:
+            - text: v465-current-archived-path-regressed
+            - text: d\465\解释\source-inputs\v465-current-archived-regressed\release_readiness.json
+          - cell "ready" [ref=e164] [box=303,997,70,133]:
+            - generic [ref=e165] [box=311,1007,54,23]: ready
+          - cell "ship" [ref=e166] [box=373,997,73,133]
+          - cell "pass" [ref=e167] [box=447,997,50,133]
+          - cell "pass" [ref=e168] [box=496,997,52,133]
+          - cell "100" [ref=e169] [box=549,997,59,133]
+          - cell "pass" [ref=e170] [box=608,997,89,133]
+          - cell "0" [ref=e171] [box=697,997,57,133]
+          - cell "0" [ref=e172] [box=754,997,87,133]
+          - cell "True" [ref=e173] [box=841,997,61,133]
+          - cell "True" [ref=e174] [box=902,997,85,133]
+          - cell "True" [ref=e175] [box=987,997,85,133]
+          - cell "False" [ref=e176] [box=1072,997,78,133]
+          - cell "True" [ref=e177] [box=1150,997,69,133]
+          - cell "True" [ref=e178] [box=1218,997,60,133]
+          - cell "pass" [ref=e179] [box=1278,997,75,133]
+          - cell "pass" [ref=e180] [box=1353,997,85,133]
+          - cell "90.16" [ref=e181] [box=1438,997,85,133]
+          - cell "0" [ref=e182] [box=1522,997,42,133]
+          - cell "pass" [ref=e183] [box=1564,997,94,133]
+          - cell "1" [ref=e184] [box=1658,997,94,133]
+          - cell "0" [ref=e185] [box=1751,997,62,133]
+          - cell "0" [ref=e186] [box=1813,997,76,133]
+          - cell "pass" [ref=e187] [box=1889,997,94,133]
+          - cell "0" [ref=e188] [box=1983,997,94,133]
+          - cell "0" [ref=e189] [box=2077,997,104,133]
+          - cell "standard-benchmark-candidate-evidence" [ref=e190] [box=2181,997,100,133]
+          - cell "pass" [ref=e191] [box=2281,997,77,133]
+          - cell "0 fail / 0 warn" [ref=e192] [box=2358,997,63,133]
+  - generic [ref=e193] [box=32,1180,1286,879]:
+    - heading "Deltas" [level=2] [ref=e194] [box=49,1197,1253,26]
+    - table [ref=e195] [box=49,1235,2679,793]:
+      - rowgroup [ref=e196] [box=49,1235,2679,103]:
+        - row "Compared Status delta CI order violation delta CI plan digest regressed CI boundary gate regressed CI boundary plan regressed CI archived paths changed CI archived paths regressed CI receipt plan changed CI receipt plan regressed CI drift smoke changed CI drift smoke regressed CI regression reasons Coverage % delta Coverage gap delta Benchmark status delta Suite-design not-ready delta Design changes delta Benchmark readiness changed Benchmark readiness exit delta Failed reason drift Failed reasons added Failed reasons removed Benchmark case regression delta Benchmark boundary changed Panel changes Explanation" [ref=e197] [box=49,1235,2679,103]:
+          - columnheader "Compared" [ref=e198] [box=49,1235,255,103]
+          - columnheader "Status delta" [ref=e199] [box=303,1235,70,103]
+          - columnheader "CI order violation delta" [ref=e200] [box=373,1235,79,103]
+          - columnheader "CI plan digest regressed" [ref=e201] [box=453,1235,92,103]
+          - columnheader "CI boundary gate regressed" [ref=e202] [box=545,1235,92,103]
+          - columnheader "CI boundary plan regressed" [ref=e203] [box=637,1235,92,103]
+          - columnheader "CI archived paths changed" [ref=e204] [box=729,1235,78,103]
+          - columnheader "CI archived paths regressed" [ref=e205] [box=807,1235,92,103]
+          - columnheader "CI receipt plan changed" [ref=e206] [box=899,1235,76,103]
+          - columnheader "CI receipt plan regressed" [ref=e207] [box=976,1235,92,103]
+          - columnheader "CI drift smoke changed" [ref=e208] [box=1068,1235,76,103]
+          - columnheader "CI drift smoke regressed" [ref=e209] [box=1144,1235,92,103]
+          - columnheader "CI regression reasons" [ref=e210] [box=1236,1235,319,103]
+          - columnheader "Coverage % delta" [ref=e211] [box=1555,1235,85,103]
+          - columnheader "Coverage gap delta" [ref=e212] [box=1640,1235,85,103]
+          - columnheader "Benchmark status delta" [ref=e213] [box=1724,1235,94,103]
+          - columnheader "Suite-design not-ready delta" [ref=e214] [box=1818,1235,62,103]
+          - columnheader "Design changes delta" [ref=e215] [box=1880,1235,76,103]
+          - columnheader "Benchmark readiness changed" [ref=e216] [box=1955,1235,94,103]
+          - columnheader "Benchmark readiness exit delta" [ref=e217] [box=2049,1235,94,103]
+          - columnheader "Failed reason drift" [ref=e218] [box=2143,1235,67,103]
+          - columnheader "Failed reasons added" [ref=e219] [box=2210,1235,75,103]
+          - columnheader "Failed reasons removed" [ref=e220] [box=2286,1235,76,103]
+          - columnheader "Benchmark case regression delta" [ref=e221] [box=2362,1235,96,103]
+          - columnheader "Benchmark boundary changed" [ref=e222] [box=2458,1235,94,103]
+          - columnheader "Panel changes" [ref=e223] [box=2552,1235,76,103]
+          - columnheader "Explanation" [ref=e224] [box=2628,1235,100,103]
+      - rowgroup [ref=e225] [box=49,1338,2679,689]:
+        - 'row "v465-current-archived-path-regressed d\\465\\解释\\source-inputs\\v465-current-archived-regressed\\release_readiness.json 0 0 False False False True True False False False False archived_path_portability_check_not_ready 0 0 0 0 0 False 0 stable 0 False v465-current-archived-path-regressed moves from ready to ready (0). CI workflow archived path portability check ready changed from True to False. CI workflow regression reason(s): archived path portability check readiness. No readiness status or panel delta is present." [ref=e226] [box=49,1338,2679,689]':
+          - cell "v465-current-archived-path-regressed d\\465\\解释\\source-inputs\\v465-current-archived-regressed\\release_readiness.json" [ref=e227] [box=49,1338,255,689]:
+            - text: v465-current-archived-path-regressed
+            - text: d\465\解释\source-inputs\v465-current-archived-regressed\release_readiness.json
+          - cell "0" [ref=e228] [box=303,1338,70,689]:
+            - generic [ref=e229] [box=311,1347,54,23]: "0"
+          - cell "0" [ref=e230] [box=373,1338,79,689]
+          - cell "False" [ref=e231] [box=453,1338,92,689]
+          - cell "False" [ref=e232] [box=545,1338,92,689]
+          - cell "False" [ref=e233] [box=637,1338,92,689]
+          - cell "True" [ref=e234] [box=729,1338,78,689]
+          - cell "True" [ref=e235] [box=807,1338,92,689]
+          - cell "False" [ref=e236] [box=899,1338,76,689]
+          - cell "False" [ref=e237] [box=976,1338,92,689]
+          - cell "False" [ref=e238] [box=1068,1338,76,689]
+          - cell "False" [ref=e239] [box=1144,1338,92,689]
+          - cell "archived_path_portability_check_not_ready" [ref=e240] [box=1236,1338,319,689]
+          - cell "0" [ref=e241] [box=1555,1338,85,689]
+          - cell "0" [ref=e242] [box=1640,1338,85,689]
+          - cell "0" [ref=e243] [box=1724,1338,94,689]
+          - cell "0" [ref=e244] [box=1818,1338,62,689]
+          - cell "0" [ref=e245] [box=1880,1338,76,689]
+          - cell "False" [ref=e246] [box=1955,1338,94,689]
+          - cell "0" [ref=e247] [box=2049,1338,94,689]
+          - cell "stable" [ref=e248] [box=2143,1338,67,689]
+          - cell [ref=e249] [box=2210,1338,75,689]
+          - cell [ref=e250] [box=2286,1338,76,689]
+          - cell "0" [ref=e251] [box=2362,1338,96,689]
+          - cell "False" [ref=e252] [box=2458,1338,94,689]
+          - cell [ref=e253] [box=2552,1338,76,689]
+          - 'cell "v465-current-archived-path-regressed moves from ready to ready (0). CI workflow archived path portability check ready changed from True to False. CI workflow regression reason(s): archived path portability check readiness. No readiness status or panel delta is present." [ref=e254] [box=2628,1338,100,689]'
+  - generic [ref=e255] [box=32,2077,1286,138]:
+    - heading "Recommendations" [level=2] [ref=e256] [box=49,2094,1253,26]
+    - list [ref=e257] [box=49,2136,1253,46]:
+      - listitem [ref=e258] [box=89,2136,1213,46]: At least one readiness comparison shows CI workflow hygiene regression (archived path portability check readiness=1); inspect CI status deltas, failed-check deltas, order-violation deltas, and drift-smoke readiness deltas before release handoff.
+  - contentinfo [ref=e259] [box=0,2233,1350,73]: Generated by MiniGPT release readiness comparison.

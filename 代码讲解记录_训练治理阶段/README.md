@@ -497,6 +497,9 @@
 478-v464-archived-path-portability-readiness-carryover.md
  -> v464 code explanation: carry archived path portability readiness from CI hygiene into audit, release bundle, and release readiness evidence.
 
+479-v465-release-readiness-archived-path-regression.md
+ -> v465 code explanation: compare archived path portability readiness across release readiness reports and classify ready-to-not-ready changes as CI workflow regression reasons.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

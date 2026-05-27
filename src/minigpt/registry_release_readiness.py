@@ -9,6 +9,7 @@ CI_READY_REGRESSION_REASON_FIELDS = {
     "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regressed": "tiny_scorecard_plan_digest_gate_not_ready",
     "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regressed": "boundary_gate_check_not_ready",
     "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed": "boundary_gate_plan_check_not_ready",
+    "ci_workflow_archived_path_portability_check_ready_regressed": "archived_path_portability_check_not_ready",
     "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed": "drift_contract_smoke_not_ready",
 }
 

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v464.0.0` carries the archived path portability readiness signal into audit, bundle, and release readiness reports.
+Version `v465.0.0` compares archived path portability readiness across release readiness reports.
+
+## Latest v465 checkpoint
+
+- Release readiness comparison rows now carry `ci_workflow_archived_path_portability_check_ready`.
+- Deltas now detect ready-to-not-ready archived path portability regressions even when both compared readiness reports remain `ready`.
+- Summary, CLI, CSV, Markdown, and HTML outputs expose archived path portability changed/regressed counts and the `archived_path_portability_check_not_ready` CI regression reason.
+- Registry release-readiness delta collection now maps archived path readiness regressions into the same CI regression reason summary used by maturity and registry views.
+- Archived a baseline/current comparison where overall readiness stays ready but archived path portability readiness regresses in `d/465`.
 
 ## Latest v464 checkpoint
 
