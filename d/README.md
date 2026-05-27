@@ -479,6 +479,9 @@ d/455/解释/说明.md
 d/456/图片
 d/456/解释/说明.md
  -> v456 promoted seed handoff receipt summary-check failure family summary 的运行截图和解释
+d/457/图片
+d/457/解释/说明.md
+ -> v457 promoted seed handoff receipt summary-check failure smoke matrix 的运行截图和解释
 ```
 
 写入规则：

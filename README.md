@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v456.0.0` adds check-family failure summaries to promoted seed handoff receipt contract summary-checks.
+Version `v457.0.0` adds a controlled failure smoke matrix for promoted seed handoff receipt contract summary-checks.
+
+## Latest v457 checkpoint
+
+- Added a failure-smoke module and CLI that copy a valid receipt contract summary into controlled scenarios.
+- The matrix verifies baseline pass plus three intentional failure cases: summary-field tamper, contract-profile tamper, and sidecar tamper.
+- Each scenario checks expected status, failed family names, and failed targets from the v456 `check_family_summary` and `failed_check_targets`.
+- Outputs include JSON, CSV, text, Markdown, HTML, and per-scenario summary-check sidecars under `d/457`.
+- Playwright MCP evidence confirms the HTML smoke matrix shows all four scenarios with `verification=pass`.
 
 ## Latest v456 checkpoint
 

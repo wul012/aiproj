@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT receipt contract summary-check failure smoke</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f5f7f8; color: #172029; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d7dee3; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d7dee3; border-radius: 8px; padding: 10px; background: #fbfcfd; }
+.metric span { display: block; color: #5a6871; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: anywhere; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #d7dee3; padding: 8px; text-align: left; vertical-align: top; }
+th { background: #eef3f6; }
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT receipt contract summary-check failure smoke</h1>
+<section>
+<h2>Summary</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>failure_matrix_verified</strong></div>
+<div class="metric"><span>Scenarios</span><strong>4</strong></div>
+<div class="metric"><span>Failed verifications</span><strong>0</strong></div>
+</div>
+</section>
+<section>
+<h2>Scenarios</h2>
+<table>
+<thead>
+<tr><th>Scenario</th><th>Tamper</th><th>Check status</th><th>Verification</th><th>Failed families</th><th>Failed targets</th></tr>
+</thead>
+<tbody>
+<tr><td>baseline</td><td>none</td><td>pass</td><td>pass</td><td>[]</td><td>[]</td></tr>
+<tr><td>tamper_summary_field</td><td>receipt_schema_version</td><td>fail</td><td>pass</td><td>[&quot;summary_field&quot;]</td><td>[&quot;summary.receipt_schema_version&quot;]</td></tr>
+<tr><td>tamper_contract_profile</td><td>contract_check_type_summary</td><td>fail</td><td>pass</td><td>[&quot;contract_profile&quot;, &quot;summary_field&quot;]</td><td>[&quot;summary.contract_check_type_summary&quot;]</td></tr>
+<tr><td>tamper_sidecar</td><td>html_sidecar</td><td>fail</td><td>pass</td><td>[&quot;sidecar&quot;]</td><td>[&quot;d\\457\\解释\\failure-smoke\\scenarios\\tamper_sidecar\\summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.html&quot;]</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Issues</h2>
+<ul>
+<li>none</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

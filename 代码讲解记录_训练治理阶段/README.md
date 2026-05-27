@@ -473,6 +473,9 @@
 470-v456-promoted-receipt-summary-check-family-summary.md
  -> v456 code explanation: add compact summary-check family rollups and failed-target rows for summary field, contract profile, and sidecar failures.
 
+471-v457-promoted-receipt-summary-check-failure-smoke.md
+ -> v457 code explanation: run controlled summary-field, contract-profile, and sidecar tamper scenarios to prove failure-family attribution.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
