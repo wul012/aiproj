@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v457.0.0` adds a controlled failure smoke matrix for promoted seed handoff receipt contract summary-checks.
+Version `v458.0.0` promotes the receipt contract summary-check failure smoke into CI workflow hygiene.
+
+## Latest v458 checkpoint
+
+- GitHub Actions now runs the receipt contract failure smoke after promoted seed handoff assurance smoke and before coverage.
+- The CI step first rebuilds a receipt contract summary, then runs `smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py` against it.
+- CI workflow hygiene now requires the receipt contract summary command and failure-smoke command.
+- Hygiene order checks verify assurance -> receipt contract summary -> failure smoke -> coverage.
+- CI hygiene JSON/Markdown/HTML now expose `promoted_seed_receipt_contract_failure_smoke_*` readiness fields.
+- Archived CI-style receipt contract summary, failure smoke, hygiene report, Playwright MCP snapshot, and screenshot evidence in `d/458`.
 
 ## Latest v457 checkpoint
 

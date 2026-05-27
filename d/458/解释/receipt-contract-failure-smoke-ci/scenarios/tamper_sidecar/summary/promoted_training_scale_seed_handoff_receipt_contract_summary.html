@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT promoted seed handoff receipt contract summary</title>
+<style>
+:root { font-family: Segoe UI, Arial, sans-serif; background: #f6f8f7; color: #17211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1040px; margin: 0 auto; }
+section { background: #fff; border: 1px solid #d7dfdb; border-radius: 8px; padding: 16px; margin: 0 0 16px; }
+h1 { font-size: 28px; margin: 0 0 12px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.metric { border: 1px solid #d7dfdb; border-radius: 8px; padding: 10px; background: #fbfcfb; }
+.metric span { display: block; color: #5c6c65; font-size: 12px; }
+.metric strong { display: block; margin-top: 6px; overflow-wrap: anywhere; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #d7dfdb; padding: 8px; text-align: left; vertical-align: top; }
+th { background: #eef3f1; }
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT promoted seed handoff receipt contract summary</h1>
+<section>
+<h2>Contract</h2>
+<div class="grid">
+<div class="metric"><span>Status</span><strong>pass</strong></div>
+<div class="metric"><span>Decision</span><strong>continue</strong></div>
+<div class="metric"><span>Schema</span><strong>4</strong></div>
+<div class="metric"><span>Assurance</span><strong>pass</strong></div>
+<div class="metric"><span>Sidecar</span>
+<strong>pass</strong></div>
+<div class="metric"><span>Issues</span><strong>0</strong></div>
+</div>
+</section>
+<section>
+<h2>Suite-Design Scopes</h2>
+<table>
+<thead><tr><th>Scope</th><th>Count</th><th>Names</th><th>Count matches names</th></tr></thead>
+<tbody>
+<tr><td>selected</td><td>0</td><td>none</td><td>True</td></tr>
+<tr><td>handoff</td><td>0</td><td>none</td><td>True</td></tr>
+<tr><td>comparison_ready</td><td>0</td><td>none</td><td>True</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>CI Boundary Plan-Check Scopes</h2>
+<table>
+<thead><tr><th>Scope</th><th>Handoff count</th><th>Selected count</th><th>Selected within handoff</th></tr></thead>
+<tbody>
+<tr><td>selected</td><td>0</td><td>0</td><td>True</td></tr>
+<tr><td>handoff</td><td>1</td><td>1</td><td>True</td></tr>
+<tr><td>comparison_ready</td><td>0</td><td>0</td><td>True</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Issues</h2>
+<ul>
+<li>none</li>
+</ul>
+</section>
+<section>
+<h2>Contract Checks</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th><th>Type</th><th>Target</th><th>Scope</th><th>Status</th>
+<th>Expected</th><th>Actual</th><th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>assurance_status_pass</td><td>status_equals</td><td>assurance.status</td><td>assurance</td><td>pass</td><td>pass</td><td>pass</td><td>handoff assurance must pass</td></tr>
+<tr><td>schema_v3_ready</td><td>schema_readiness</td><td>receipt.schema_v3_ready</td><td>receipt</td><td>pass</td><td>True</td><td>True</td><td>receipt schema must support suite-design name contract</td></tr>
+<tr><td>schema_v4_ready</td><td>schema_readiness</td><td>receipt.schema_v4_ready</td><td>receipt</td><td>pass</td><td>True</td><td>True</td><td>receipt schema must support CI boundary plan-check contract</td></tr>
+<tr><td>embedded_receipt_check_sidecar_pass</td><td>status_equals</td><td>embedded_receipt_check.sidecar_status</td><td>embedded_receipt_check</td><td>pass</td><td>pass</td><td>pass</td><td>embedded receipt-check sidecar must pass</td></tr>
+<tr><td>suite_design_selected_count_matches_names</td><td>count_consistency</td><td>suite_design.selected.count_matches_names</td><td>selected</td><td>pass</td><td>True</td><td>True</td><td>suite-design regression count must match name count</td></tr>
+<tr><td>suite_design_handoff_count_matches_names</td><td>count_consistency</td><td>suite_design.handoff.count_matches_names</td><td>handoff</td><td>pass</td><td>True</td><td>True</td><td>suite-design regression count must match name count</td></tr>
+<tr><td>suite_design_comparison_ready_count_matches_names</td><td>count_consistency</td><td>suite_design.comparison_ready.count_matches_names</td><td>comparison_ready</td><td>pass</td><td>True</td><td>True</td><td>suite-design regression count must match name count</td></tr>
+<tr><td>ci_boundary_plan_check_selected_selected_within_handoff</td><td>selected_within_handoff</td><td>ci_boundary_plan_check.selected.selected_within_handoff</td><td>selected</td><td>pass</td><td>True</td><td>True</td><td>selected CI boundary plan-check count must not exceed handoff count</td></tr>
+<tr><td>ci_boundary_plan_check_handoff_selected_within_handoff</td><td>selected_within_handoff</td><td>ci_boundary_plan_check.handoff.selected_within_handoff</td><td>handoff</td><td>pass</td><td>True</td><td>True</td><td>selected CI boundary plan-check count must not exceed handoff count</td></tr>
+<tr><td>ci_boundary_plan_check_comparison_ready_selected_within_handoff</td><td>selected_within_handoff</td><td>ci_boundary_plan_check.comparison_ready.selected_within_handoff</td><td>comparison_ready</td><td>pass</td><td>True</td><td>True</td><td>selected CI boundary plan-check count must not exceed handoff count</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Contract Check Type Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th><th>Status</th><th>Count</th><th>Passed</th><th>Failed</th><th>Required</th><th>Targets</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>count_consistency</td><td>pass</td><td>3</td><td>3</td><td>0</td><td>3</td><td>suite_design.comparison_ready.count_matches_names, suite_design.handoff.count_matches_names, suite_design.selected.count_matches_names</td></tr>
+<tr><td>schema_readiness</td><td>pass</td><td>2</td><td>2</td><td>0</td><td>2</td><td>receipt.schema_v3_ready, receipt.schema_v4_ready</td></tr>
+<tr><td>selected_within_handoff</td><td>pass</td><td>3</td><td>3</td><td>0</td><td>3</td><td>ci_boundary_plan_check.comparison_ready.selected_within_handoff, ci_boundary_plan_check.handoff.selected_within_handoff, ci_boundary_plan_check.selected.selected_within_handoff</td></tr>
+<tr><td>status_equals</td><td>pass</td><td>2</td><td>2</td><td>0</td><td>2</td><td>assurance.status, embedded_receipt_check.sidecar_status</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+</body>
+</html>
+
+<!-- v457 stale sidecar -->
