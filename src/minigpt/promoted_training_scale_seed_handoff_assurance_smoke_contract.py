@@ -46,6 +46,17 @@ def build_receipt_contract_smoke_checks(
         "receipt_contract_status": contract_summary.get("status"),
         "receipt_contract_decision": contract_summary.get("decision"),
         "receipt_contract_schema_version": contract_summary.get("receipt_schema_version"),
+        "receipt_contract_schema_v4_ready": contract_summary.get("schema_v4_ready"),
+        "receipt_contract_handoff_ci_boundary_plan_check_handoff_count": _boundary_scope_field(
+            contract_summary,
+            "handoff",
+            "handoff_count",
+        ),
+        "receipt_contract_handoff_ci_boundary_plan_check_selected_count": _boundary_scope_field(
+            contract_summary,
+            "handoff",
+            "selected_count",
+        ),
         "receipt_contract_sidecar_status": contract_summary.get("embedded_receipt_check_sidecar_status"),
         "receipt_contract_issue_count": contract_summary.get("issue_count"),
         "receipt_contract_summary_json": contract_summary_outputs.get("json"),
@@ -65,6 +76,13 @@ def build_receipt_contract_smoke_checks(
     _check(checks["receipt_contract_status"] == "pass", "receipt contract summary status must pass", issues)
     _check(checks["receipt_contract_decision"] == "continue", "receipt contract summary decision must continue", issues)
     _check(checks["receipt_contract_schema_version"] == 4, "receipt contract summary schema must be v4", issues)
+    _check(checks["receipt_contract_schema_v4_ready"] is True, "receipt contract summary must be schema-v4 ready", issues)
+    _check(
+        checks["receipt_contract_handoff_ci_boundary_plan_check_selected_count"]
+        <= checks["receipt_contract_handoff_ci_boundary_plan_check_handoff_count"],
+        "receipt contract selected boundary plan-check count must not exceed handoff count",
+        issues,
+    )
     _check(checks["receipt_contract_sidecar_status"] == "pass", "receipt contract sidecar status must pass", issues)
     _check(checks["receipt_contract_issue_count"] == 0, "receipt contract summary must have no issues", issues)
     _check(
@@ -95,6 +113,23 @@ def build_receipt_contract_smoke_checks(
 def _check(condition: bool, message: str, issues: list[str]) -> None:
     if not condition:
         issues.append(message)
+
+
+def _boundary_scope_field(summary: dict[str, Any], scope_name: str, field: str) -> int:
+    scopes = summary.get("ci_boundary_plan_check_scopes")
+    if not isinstance(scopes, list):
+        return 0
+    for scope in scopes:
+        if isinstance(scope, dict) and scope.get("scope") == scope_name:
+            return _int(scope.get(field))
+    return 0
+
+
+def _int(value: object) -> int:
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return 0
 
 
 def _is_file_reference(value: object, base_dir: Path) -> bool:

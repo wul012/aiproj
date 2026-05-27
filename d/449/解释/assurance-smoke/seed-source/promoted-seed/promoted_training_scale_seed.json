@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "title": "promoted seed handoff assurance smoke",
+  "generated_at": "2026-05-20T00:00:00Z",
+  "seed_status": "ready",
+  "baseline_seed": {
+    "selected_name": "beta",
+    "decision_status": "accepted",
+    "gate_status": "pass",
+    "batch_status": "completed",
+    "readiness_score": 107,
+    "training_scale_run_path": "d\\449\\解释\\assurance-smoke\\seed-source\\beta\\training_scale_run.json",
+    "training_scale_run_exists": true,
+    "suite": {
+      "mode": "builtin",
+      "name": "standard-zh",
+      "path": "builtin:standard-zh",
+      "source": "inherited"
+    },
+    "suite_path": "builtin:standard-zh",
+    "handoff_suite_guard": {
+      "selected_handoff_require_suite_consistency": true,
+      "selected_handoff_suite_consistency": "consistent",
+      "selected_handoff_suite_mismatch_count": 0,
+      "selected_handoff_selected_suite_path": "builtin:standard-zh",
+      "handoff_require_suite_consistency_count": 1,
+      "handoff_suite_consistent_count": 1,
+      "handoff_suite_mismatch_total": 0,
+      "comparison_ready_handoff_suite_mismatch_total": 0
+    }
+  },
+  "next_plan": {
+    "project_root": "D:\\aiproj",
+    "dataset_name": "assurance-smoke",
+    "dataset_version_prefix": "v292-smoke",
+    "suite": {
+      "mode": "builtin",
+      "name": "standard-zh",
+      "path": "builtin:standard-zh",
+      "source": "inherited"
+    },
+    "suite_path": "builtin:standard-zh",
+    "suite_source": "inherited",
+    "plan_out_dir": "d\\449\\解释\\assurance-smoke\\seed-source\\next-plan",
+    "batch_out_root": "d\\449\\解释\\assurance-smoke\\seed-source\\batch",
+    "sources": [
+      {
+        "path": "d\\449\\解释\\assurance-smoke\\seed-source\\corpus.txt",
+        "resolved_path": "D:\\aiproj\\d\\449\\解释\\assurance-smoke\\seed-source\\corpus.txt",
+        "exists": true,
+        "kind": "file"
+      }
+    ],
+    "command": [
+      "D:\\python\\python.exe",
+      "scripts/plan_training_scale.py",
+      "d\\449\\解释\\assurance-smoke\\seed-source\\corpus.txt",
+      "--project-root",
+      "D:\\aiproj",
+      "--out-dir",
+      "d\\449\\解释\\assurance-smoke\\seed-source\\next-plan",
+      "--batch-out-root",
+      "d\\449\\解释\\assurance-smoke\\seed-source\\batch",
+      "--dataset-name",
+      "assurance-smoke",
+      "--dataset-version-prefix",
+      "v292-smoke",
+      "--suite-name",
+      "standard-zh",
+      "--max-variants",
+      "1"
+    ],
+    "command_text": "D:\\python\\python.exe scripts/plan_training_scale.py d\\449\\解释\\assurance-smoke\\seed-source\\corpus.txt --project-root D:\\aiproj --out-dir d\\449\\解释\\assurance-smoke\\seed-source\\next-plan --batch-out-root d\\449\\解释\\assurance-smoke\\seed-source\\batch --dataset-name assurance-smoke --dataset-version-prefix v292-smoke --suite-name standard-zh --max-variants 1",
+    "command_available": true,
+    "execution_ready": true
+  },
+  "summary": {
+    "seed_status": "ready",
+    "selected_name": "beta",
+    "command_available": true
+  }
+}

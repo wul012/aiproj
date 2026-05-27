@@ -455,6 +455,9 @@ d/447/解释/说明.md
 d/448/图片
 d/448/解释/说明.md
  -> v448 promoted training scale boundary plan-check clean-batch carryover 的运行截图和解释
+d/449/图片
+d/449/解释/说明.md
+ -> v449 promoted seed handoff receipt v4 contract summary 的运行截图和解释
 ```
 
 写入规则：

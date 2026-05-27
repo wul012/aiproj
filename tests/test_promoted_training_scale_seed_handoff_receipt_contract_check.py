@@ -61,6 +61,23 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["status"], "fail")
             self.assertTrue(any("summary.receipt_schema_version expected 4 but got 2" in issue for issue in check["issues"]))
 
+    def test_contract_summary_check_rejects_tampered_boundary_scope(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = write_suite_design_handoff_with_sidecars(root)
+            summary_dir = write_summary(paths["handoff"], root)
+            summary_path = summary_dir / "promoted_training_scale_seed_handoff_receipt_contract_summary.json"
+            payload = json.loads(summary_path.read_text(encoding="utf-8"))
+            payload["ci_boundary_plan_check_scopes"][1]["handoff_count"] = 9
+            summary_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_receipt_contract_summary(summary_dir)
+
+            self.assertEqual(check["status"], "fail")
+            self.assertTrue(
+                any("summary.ci_boundary_plan_check_scopes" in issue for issue in check["issues"])
+            )
+
     def test_contract_summary_check_rejects_tampered_html_sidecar(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -1105,6 +1105,9 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertEqual(summary["checks"]["handoff_assurance_embedded_receipt_check_receipt_schema_version"], 4)
             self.assertEqual(summary["checks"]["receipt_contract_status"], "pass")
             self.assertEqual(summary["checks"]["receipt_contract_schema_version"], 4)
+            self.assertTrue(summary["checks"]["receipt_contract_schema_v4_ready"])
+            self.assertEqual(summary["checks"]["receipt_contract_handoff_ci_boundary_plan_check_handoff_count"], 0)
+            self.assertEqual(summary["checks"]["receipt_contract_handoff_ci_boundary_plan_check_selected_count"], 0)
             self.assertEqual(summary["checks"]["receipt_contract_sidecar_status"], "pass")
             self.assertEqual(summary["checks"]["receipt_contract_issue_count"], 0)
             self.assertEqual(summary["checks"]["receipt_contract_summary_check_status"], "pass")
@@ -1135,6 +1138,10 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
                 summary_text_path.read_text(encoding="utf-8"),
             )
             self.assertIn("receipt_contract_status=pass", summary_text_path.read_text(encoding="utf-8"))
+            self.assertIn(
+                "receipt_contract_schema_v4_ready=True",
+                summary_text_path.read_text(encoding="utf-8"),
+            )
             self.assertIn("receipt_contract_summary_check_status=pass", summary_text_path.read_text(encoding="utf-8"))
             self.assertIn("summary_json=", completed.stdout)
             self.assertIn("summary_text=", completed.stdout)
@@ -1143,6 +1150,7 @@ class PromotedTrainingScaleSeedHandoffReceiptTests(unittest.TestCase):
             self.assertIn("handoff_assurance_embedded_receipt_check_sidecar_status=pass", completed.stdout)
             self.assertIn("handoff_assurance_embedded_receipt_check_receipt_schema_version=4", completed.stdout)
             self.assertIn("receipt_contract_status=pass", completed.stdout)
+            self.assertIn("receipt_contract_schema_v4_ready=True", completed.stdout)
             self.assertIn("receipt_contract_summary_check_status=pass", completed.stdout)
 
     def test_handoff_assurance_rejects_tampered_main_embedded_check(self) -> None:

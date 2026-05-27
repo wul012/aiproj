@@ -30,6 +30,7 @@ SUMMARY_COMPARE_KEYS = (
     "handoff_report_path",
     "receipt_schema_version",
     "schema_v3_ready",
+    "schema_v4_ready",
     "assurance_status",
     "embedded_receipt_check_status",
     "embedded_receipt_check_sidecar_status",
@@ -37,6 +38,7 @@ SUMMARY_COMPARE_KEYS = (
     "receipt_check_output_json_exists",
     "receipt_check_output_text_exists",
     "suite_design_scopes",
+    "ci_boundary_plan_check_scopes",
     "issue_count",
     "issues",
 )

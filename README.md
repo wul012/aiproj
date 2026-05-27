@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v448.0.0` carries promoted training scale CI boundary plan-check regression counts from comparison into decision, seed, handoff, receipt, embedded-check, and assurance evidence.
+Version `v449.0.0` flattens promoted seed handoff receipt schema-v4 CI boundary plan-check counts into receipt contract summaries, summary checks, and assurance smoke output.
+
+## Latest v449 checkpoint
+
+- Promoted seed handoff receipt contract summaries now expose `schema_v4_ready` alongside the existing schema-v3 suite-design readiness.
+- Contract summaries now include `ci_boundary_plan_check_scopes` for selected, handoff, and comparison-ready receipt fields.
+- Text, Markdown, and HTML contract outputs show the v4 boundary plan-check scope table, making receipt schema-v4 evidence reviewable without opening raw assurance JSON.
+- Receipt contract summary checks now compare the v4 boundary scope payload and reject stale or tampered summaries.
+- Assurance smoke output now reports receipt contract schema-v4 readiness and handoff boundary plan-check counts.
+- Archived contract summary, summary-check, assurance smoke, and Playwright MCP screenshot evidence in `d/449`.
 
 ## Latest v448 checkpoint
 

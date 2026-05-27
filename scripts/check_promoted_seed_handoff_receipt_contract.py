@@ -16,7 +16,7 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (  # n
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Summarize MiniGPT promoted seed handoff schema-v3 receipt contract readiness."
+        description="Summarize MiniGPT promoted seed handoff receipt contract readiness."
     )
     parser.add_argument(
         "handoff_report",
