@@ -10,7 +10,7 @@ from minigpt.promoted_training_scale_seed_handoff_receipt import (
     render_promoted_training_scale_seed_handoff_embedded_receipt_check,
     resolve_promoted_training_scale_seed_handoff_report_path,
 )
-from minigpt.report_utils import as_dict, resolve_archived_reference_path, string_list
+from minigpt.report_utils import as_dict, archived_reference_path, resolve_archived_reference_path, string_list
 
 
 HANDOFF_ASSURANCE_JSON_FILENAME = "promoted_training_scale_seed_handoff_assurance.json"
@@ -382,6 +382,8 @@ def _normalized_assurance_value(key: str, value: Any) -> Any:
         return string_list(value)
     if key in {"receipt_path_exists", "receipt_check_json_exists", "receipt_check_text_exists"}:
         return bool(value)
+    if key in {"handoff_report_path", "receipt_path", "receipt_check_json", "receipt_check_text"}:
+        return str(archived_reference_path(value)) if value else ""
     return str(value or "")
 
 
