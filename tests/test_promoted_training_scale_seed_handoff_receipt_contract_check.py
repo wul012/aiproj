@@ -42,9 +42,18 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["actual_summary_status"], "pass")
             self.assertEqual(check["expected_summary_status"], "pass")
             self.assertEqual(check["sidecar_status"], "pass")
+            self.assertGreater(check["summary_field_check_count"], 0)
+            self.assertEqual(check["failed_summary_field_check_count"], 0)
+            self.assertEqual(check["sidecar_check_count"], 3)
+            self.assertEqual(check["failed_sidecar_check_count"], 0)
+            self.assertTrue(any(row["key"] == "contract_checks" for row in check["summary_field_checks"]))
+            self.assertTrue(all(row["status"] == "pass" for row in check["sidecar_checks"]))
             self.assertIn("receipt_contract_summary_check_status=pass", text)
+            self.assertIn("receipt_contract_summary_check_failed_summary_field_check_count=0", text)
             self.assertIn("- Sidecar status: `pass`", markdown)
+            self.assertIn("| contract_checks | pass |", markdown)
             self.assertIn("<strong>pass</strong>", html)
+            self.assertIn("<td>contract_checks</td>", html)
 
     def test_contract_summary_check_rejects_tampered_json(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -59,6 +68,10 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             check = check_promoted_training_scale_seed_handoff_receipt_contract_summary(summary_dir)
 
             self.assertEqual(check["status"], "fail")
+            self.assertGreaterEqual(check["failed_summary_field_check_count"], 1)
+            self.assertTrue(
+                any(row["key"] == "receipt_schema_version" and row["status"] == "fail" for row in check["summary_field_checks"])
+            )
             self.assertTrue(any("summary.receipt_schema_version expected 4 but got 2" in issue for issue in check["issues"]))
 
     def test_contract_summary_check_rejects_tampered_boundary_scope(self) -> None:
@@ -74,6 +87,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             check = check_promoted_training_scale_seed_handoff_receipt_contract_summary(summary_dir)
 
             self.assertEqual(check["status"], "fail")
+            self.assertGreaterEqual(check["failed_summary_field_check_count"], 1)
             self.assertTrue(
                 any("summary.ci_boundary_plan_check_scopes" in issue for issue in check["issues"])
             )
@@ -92,6 +106,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             check = check_promoted_training_scale_seed_handoff_receipt_contract_summary(summary_dir)
 
             self.assertEqual(check["status"], "fail")
+            self.assertGreaterEqual(check["failed_summary_field_check_count"], 1)
             self.assertTrue(any("summary.contract_checks" in issue for issue in check["issues"]))
 
     def test_contract_summary_check_rejects_tampered_html_sidecar(self) -> None:
@@ -106,6 +121,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
 
             self.assertEqual(check["status"], "fail")
             self.assertEqual(check["sidecar_status"], "fail")
+            self.assertEqual(check["failed_summary_field_check_count"], 0)
+            self.assertEqual(check["failed_sidecar_check_count"], 1)
+            self.assertTrue(any(row["id"] == "html" and row["status"] == "fail" for row in check["sidecar_checks"]))
             self.assertTrue(any("contract_summary.html content does not match" in issue for issue in check["issues"]))
 
     def test_cli_writes_contract_summary_check_artifacts(self) -> None:

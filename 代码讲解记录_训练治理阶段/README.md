@@ -455,6 +455,9 @@
 464-v450-promoted-receipt-contract-checks.md
  -> v450 code explanation: add machine-readable receipt contract checks for promoted seed handoff contract summaries and summary-check sidecar validation.
 
+465-v451-promoted-receipt-summary-check-structured-comparisons.md
+ -> v451 code explanation: add structured summary-field and sidecar comparisons to promoted seed handoff receipt contract summary-check outputs.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

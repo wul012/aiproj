@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v450.0.0` adds machine-readable receipt contract checks so promoted seed handoff contract summaries no longer require parsing free-form issue text.
+Version `v451.0.0` adds structured summary-field and sidecar checks to promoted seed handoff receipt contract summary-check outputs.
+
+## Latest v451 checkpoint
+
+- Receipt contract summary-check outputs now include `summary_field_checks`, `summary_field_check_count`, and `failed_summary_field_check_count`.
+- Summary-check sidecar validation now emits `sidecar_checks`, `sidecar_check_count`, and `failed_sidecar_check_count`.
+- Sidecar checks include expected and actual SHA-256 digests for text, Markdown, and HTML files.
+- Text, Markdown, and HTML summary-check outputs now show the structured field/sidecar check tables.
+- Tampered summary fields, `contract_checks`, boundary scopes, and HTML sidecars are all covered by tests.
+- Archived contract summary, structured summary-check, Playwright MCP snapshot, and screenshot evidence in `d/451`.
 
 ## Latest v450 checkpoint
 

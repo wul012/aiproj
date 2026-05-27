@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,7 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
     source_path = Path(handoff_path) if handoff_path is not None else _handoff_path_from_summary(actual)
     issues: list[str] = []
     expected: dict[str, Any] = {}
+    summary_field_checks: list[dict[str, Any]] = []
     if source_path is None:
         issues.append("handoff report path is required for receipt contract summary check")
     else:
@@ -65,10 +67,12 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             issues.append(f"could not rebuild receipt contract summary from handoff path: {exc}")
     if expected:
-        issues.extend(_compare_summary_fields(expected, actual))
+        summary_field_checks = _summary_field_checks(expected, actual)
+        issues.extend(_summary_field_issues(summary_field_checks))
         sidecars = _check_summary_sidecars(resolved_summary_path.parent, expected)
     else:
         sidecars = _missing_sidecars(resolved_summary_path.parent)
+    sidecar_checks = _check_rows(sidecars.get("checks"))
     issues.extend(string_list(sidecars.get("issues")))
     status = "pass" if not issues else "fail"
     decision = str((expected or actual).get("decision") or "")
@@ -83,7 +87,13 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         "expected_summary_status": expected.get("status") if expected else None,
         "actual_schema_version": actual.get("receipt_schema_version"),
         "expected_schema_version": expected.get("receipt_schema_version") if expected else None,
+        "summary_field_check_count": len(summary_field_checks),
+        "failed_summary_field_check_count": _failed_check_count(summary_field_checks),
+        "summary_field_checks": summary_field_checks,
         "sidecar_status": sidecars.get("status"),
+        "sidecar_check_count": len(sidecar_checks),
+        "failed_sidecar_check_count": _failed_check_count(sidecar_checks),
+        "sidecar_checks": sidecar_checks,
         "sidecar_issue_count": sidecars.get("issue_count"),
         "sidecar_issues": sidecars.get("issues"),
         "text_path": sidecars.get("text_path"),
@@ -128,9 +138,24 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_t
         ("receipt_contract_summary_check_expected_status", check.get("expected_summary_status")),
         ("receipt_contract_summary_check_actual_schema_version", check.get("actual_schema_version")),
         ("receipt_contract_summary_check_expected_schema_version", check.get("expected_schema_version")),
+        ("receipt_contract_summary_check_summary_field_check_count", check.get("summary_field_check_count")),
+        (
+            "receipt_contract_summary_check_failed_summary_field_check_count",
+            check.get("failed_summary_field_check_count"),
+        ),
         ("receipt_contract_summary_check_sidecar_status", check.get("sidecar_status")),
+        ("receipt_contract_summary_check_sidecar_check_count", check.get("sidecar_check_count")),
+        ("receipt_contract_summary_check_failed_sidecar_check_count", check.get("failed_sidecar_check_count")),
         ("receipt_contract_summary_check_issue_count", check.get("issue_count")),
         ("receipt_contract_summary_check_issues", json.dumps(check.get("issues"), ensure_ascii=False)),
+        (
+            "receipt_contract_summary_check_summary_field_checks",
+            json.dumps(check.get("summary_field_checks"), ensure_ascii=False),
+        ),
+        (
+            "receipt_contract_summary_check_sidecar_checks",
+            json.dumps(check.get("sidecar_checks"), ensure_ascii=False),
+        ),
     ]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
@@ -144,17 +169,41 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
         f"- Actual summary status: `{check.get('actual_summary_status')}`",
         f"- Expected summary status: `{check.get('expected_summary_status')}`",
         f"- Sidecar status: `{check.get('sidecar_status')}`",
+        f"- Failed summary field checks: `{check.get('failed_summary_field_check_count')}`",
+        f"- Failed sidecar checks: `{check.get('failed_sidecar_check_count')}`",
         f"- Issue count: `{check.get('issue_count')}`",
         "",
-        "## Sidecars",
+        "## Summary Field Checks",
         "",
-        f"- Text exists: `{check.get('text_exists')}`",
-        f"- Markdown exists: `{check.get('markdown_exists')}`",
-        f"- HTML exists: `{check.get('html_exists')}`",
-        "",
-        "## Issues",
-        "",
+        "| Field | Status |",
+        "| --- | --- |",
     ]
+    for row in _check_rows(check.get("summary_field_checks")):
+        lines.append(f"| {row.get('key')} | {row.get('status')} |")
+    lines.extend(
+        [
+            "",
+            "## Sidecar Checks",
+            "",
+            "| Sidecar | Status | Exists |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for row in _check_rows(check.get("sidecar_checks")):
+        lines.append(f"| {row.get('id')} | {row.get('status')} | {row.get('exists')} |")
+    lines.extend(
+        [
+            "",
+            "## Sidecars",
+            "",
+            f"- Text exists: `{check.get('text_exists')}`",
+            f"- Markdown exists: `{check.get('markdown_exists')}`",
+            f"- HTML exists: `{check.get('html_exists')}`",
+            "",
+            "## Issues",
+            "",
+        ]
+    )
     issues = string_list(check.get("issues"))
     if not issues:
         lines.append("- none")
@@ -166,6 +215,25 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
 def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_html(check: dict[str, Any]) -> str:
     issues = string_list(check.get("issues"))
     issue_items = "\n".join(f"<li>{html_escape(issue)}</li>" for issue in issues) or "<li>none</li>"
+    summary_rows = "\n".join(
+        "<tr>"
+        f"<td>{html_escape(row.get('key'))}</td>"
+        f"<td>{html_escape(row.get('status'))}</td>"
+        f"<td>{html_escape(_json_text(row.get('expected')))}</td>"
+        f"<td>{html_escape(_json_text(row.get('actual')))}</td>"
+        "</tr>"
+        for row in _check_rows(check.get("summary_field_checks"))
+    )
+    sidecar_rows = "\n".join(
+        "<tr>"
+        f"<td>{html_escape(row.get('id'))}</td>"
+        f"<td>{html_escape(row.get('status'))}</td>"
+        f"<td>{html_escape(row.get('exists'))}</td>"
+        f"<td>{html_escape(row.get('expected_sha256'))}</td>"
+        f"<td>{html_escape(row.get('actual_sha256'))}</td>"
+        "</tr>"
+        for row in _check_rows(check.get("sidecar_checks"))
+    )
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -184,6 +252,9 @@ h2 {{ font-size: 18px; margin: 0 0 10px; letter-spacing: 0; }}
 .metric {{ border: 1px solid #d7dee3; border-radius: 8px; padding: 10px; background: #fbfcfd; }}
 .metric span {{ display: block; color: #5a6871; font-size: 12px; }}
 .metric strong {{ display: block; margin-top: 6px; overflow-wrap: anywhere; }}
+table {{ width: 100%; border-collapse: collapse; }}
+th, td {{ border: 1px solid #d7dee3; padding: 8px; text-align: left; vertical-align: top; }}
+th {{ background: #eef3f6; }}
 li {{ margin: 6px 0; }}
 </style>
 </head>
@@ -200,6 +271,24 @@ li {{ margin: 6px 0; }}
 <div class="metric"><span>Sidecar</span><strong>{html_escape(check.get('sidecar_status'))}</strong></div>
 <div class="metric"><span>Issues</span><strong>{html_escape(check.get('issue_count'))}</strong></div>
 </div>
+</section>
+<section>
+<h2>Summary Field Checks</h2>
+<table>
+<thead><tr><th>Field</th><th>Status</th><th>Expected</th><th>Actual</th></tr></thead>
+<tbody>
+{summary_rows}
+</tbody>
+</table>
+</section>
+<section>
+<h2>Sidecar Checks</h2>
+<table>
+<thead><tr><th>Sidecar</th><th>Status</th><th>Exists</th><th>Expected SHA-256</th><th>Actual SHA-256</th></tr></thead>
+<tbody>
+{sidecar_rows}
+</tbody>
+</table>
 </section>
 <section>
 <h2>Sidecars</h2>
@@ -254,13 +343,30 @@ def _handoff_path_from_summary(summary: dict[str, Any]) -> Path | None:
     return Path(str(value)) if value else None
 
 
-def _compare_summary_fields(expected: dict[str, Any], actual: dict[str, Any]) -> list[str]:
-    issues: list[str] = []
+def _summary_field_checks(expected: dict[str, Any], actual: dict[str, Any]) -> list[dict[str, Any]]:
+    checks: list[dict[str, Any]] = []
     for key in SUMMARY_COMPARE_KEYS:
         expected_value = _stable_value(expected.get(key))
         actual_value = _stable_value(actual.get(key))
-        if expected_value != actual_value:
-            issues.append(f"summary.{key} expected {expected_value!r} but got {actual_value!r}")
+        checks.append(
+            {
+                "key": key,
+                "status": "pass" if expected_value == actual_value else "fail",
+                "expected": expected_value,
+                "actual": actual_value,
+            }
+        )
+    return checks
+
+
+def _summary_field_issues(checks: list[dict[str, Any]]) -> list[str]:
+    issues: list[str] = []
+    for check in checks:
+        if check.get("status") != "pass":
+            issues.append(
+                f"summary.{check.get('key')} expected {check.get('expected')!r} "
+                f"but got {check.get('actual')!r}"
+            )
     return issues
 
 
@@ -268,42 +374,87 @@ def _check_summary_sidecars(summary_dir: Path, expected: dict[str, Any]) -> dict
     text_path = summary_dir / CONTRACT_SUMMARY_TEXT_FILENAME
     markdown_path = summary_dir / CONTRACT_SUMMARY_MARKDOWN_FILENAME
     html_path = summary_dir / CONTRACT_SUMMARY_HTML_FILENAME
-    issues: list[str] = []
-    _compare_file(text_path, render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(expected), issues)
-    _compare_file(
-        markdown_path,
-        render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown(expected),
-        issues,
-    )
-    _compare_file(html_path, render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(expected), issues)
-    return _sidecar_payload(text_path, markdown_path, html_path, issues)
+    checks = [
+        _sidecar_check(
+            "text",
+            text_path,
+            render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(expected),
+        ),
+        _sidecar_check(
+            "markdown",
+            markdown_path,
+            render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown(expected),
+        ),
+        _sidecar_check(
+            "html",
+            html_path,
+            render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(expected),
+        ),
+    ]
+    issues = [str(check.get("detail")) for check in checks if check.get("status") != "pass"]
+    return _sidecar_payload(text_path, markdown_path, html_path, issues, checks)
 
 
 def _missing_sidecars(summary_dir: Path) -> dict[str, Any]:
     text_path = summary_dir / CONTRACT_SUMMARY_TEXT_FILENAME
     markdown_path = summary_dir / CONTRACT_SUMMARY_MARKDOWN_FILENAME
     html_path = summary_dir / CONTRACT_SUMMARY_HTML_FILENAME
-    return _sidecar_payload(text_path, markdown_path, html_path, ["expected summary could not be rebuilt"])
+    return _sidecar_payload(text_path, markdown_path, html_path, ["expected summary could not be rebuilt"], [])
 
 
-def _compare_file(path: Path, expected_text: str, issues: list[str]) -> None:
+def _sidecar_check(check_id: str, path: Path, expected_text: str) -> dict[str, Any]:
+    expected_sha256 = _sha256_text(expected_text)
     if not path.is_file():
-        issues.append(f"{path.name} is missing")
-        return
+        return {
+            "id": check_id,
+            "status": "fail",
+            "path": str(path),
+            "exists": False,
+            "expected_sha256": expected_sha256,
+            "actual_sha256": None,
+            "detail": f"{path.name} is missing",
+        }
     try:
         actual = path.read_text(encoding="utf-8-sig")
     except OSError as exc:
-        issues.append(f"{path.name} could not be read: {exc}")
-        return
-    if actual != expected_text:
-        issues.append(f"{path.name} content does not match rebuilt contract summary")
+        return {
+            "id": check_id,
+            "status": "fail",
+            "path": str(path),
+            "exists": True,
+            "expected_sha256": expected_sha256,
+            "actual_sha256": None,
+            "detail": f"{path.name} could not be read: {exc}",
+        }
+    actual_sha256 = _sha256_text(actual)
+    status = "pass" if actual == expected_text else "fail"
+    return {
+        "id": check_id,
+        "status": status,
+        "path": str(path),
+        "exists": True,
+        "expected_sha256": expected_sha256,
+        "actual_sha256": actual_sha256,
+        "detail": (
+            "content matches rebuilt contract summary"
+            if status == "pass"
+            else f"{path.name} content does not match rebuilt contract summary"
+        ),
+    }
 
 
-def _sidecar_payload(text_path: Path, markdown_path: Path, html_path: Path, issues: list[str]) -> dict[str, Any]:
+def _sidecar_payload(
+    text_path: Path,
+    markdown_path: Path,
+    html_path: Path,
+    issues: list[str],
+    checks: list[dict[str, Any]],
+) -> dict[str, Any]:
     return {
         "status": "pass" if not issues else "fail",
         "issue_count": len(issues),
         "issues": issues,
+        "checks": checks,
         "text_path": str(text_path),
         "text_exists": text_path.is_file(),
         "markdown_path": str(markdown_path),
@@ -317,6 +468,24 @@ def _stable_value(value: Any) -> Any:
     if isinstance(value, (dict, list)):
         return json.loads(json.dumps(value, ensure_ascii=False, sort_keys=True))
     return value
+
+
+def _check_rows(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    return [dict(item) for item in value if isinstance(item, dict)]
+
+
+def _failed_check_count(checks: list[dict[str, Any]]) -> int:
+    return sum(1 for check in checks if check.get("status") != "pass")
+
+
+def _sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _json_text(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=False, sort_keys=True)
 
 
 __all__ = [
