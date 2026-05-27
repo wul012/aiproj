@@ -64,7 +64,7 @@ def build_receipt_contract_smoke_checks(
     issues: list[str] = []
     _check(checks["receipt_contract_status"] == "pass", "receipt contract summary status must pass", issues)
     _check(checks["receipt_contract_decision"] == "continue", "receipt contract summary decision must continue", issues)
-    _check(checks["receipt_contract_schema_version"] == 3, "receipt contract summary schema must be v3", issues)
+    _check(checks["receipt_contract_schema_version"] == 4, "receipt contract summary schema must be v4", issues)
     _check(checks["receipt_contract_sidecar_status"] == "pass", "receipt contract sidecar status must pass", issues)
     _check(checks["receipt_contract_issue_count"] == 0, "receipt contract summary must have no issues", issues)
     _check(

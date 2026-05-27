@@ -149,6 +149,9 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 "handoff_batch_maturity_ci_regression_names": _string_list(
                     row.get("handoff_batch_maturity_ci_regression_names")
                 ),
+                "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": _int(
+                    row.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
+                ),
                 "handoff_batch_maturity_suite_design_regression_count": _int(
                     row.get("handoff_batch_maturity_suite_design_regression_count")
                 ),
@@ -160,6 +163,9 @@ def _promotion_rows(comparison: dict[str, Any], comparison_dir: Path) -> list[di
                 ),
                 "handoff_selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
                     row.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
+                ),
+                "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": _int(
+                    row.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count")
                 ),
                 "handoff_selected_batch_maturity_suite_design_regression_count": _int(
                     row.get("handoff_selected_batch_maturity_suite_design_regression_count")

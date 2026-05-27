@@ -58,11 +58,13 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "selected_handoff_require_clean_batch_review",
         "selected_handoff_clean_batch_review_status",
         "selected_handoff_batch_maturity_ci_regression_count",
+        "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
         "selected_handoff_batch_maturity_ci_regression_names",
         "selected_handoff_batch_maturity_ci_regression_reason_counts",
         "selected_handoff_batch_maturity_suite_design_regression_count",
         "selected_handoff_batch_maturity_suite_design_regression_names",
         "selected_handoff_selected_batch_maturity_ci_regression_count",
+        "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
         "selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
         "selected_handoff_selected_batch_maturity_suite_design_regression_count",
         "selected_handoff_selected_batch_maturity_suite_design_regression_names",
@@ -71,7 +73,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "handoff_clean_batch_review_count",
         "handoff_unclean_batch_review_count",
         "handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
         "handoff_selected_batch_maturity_ci_regression_total",
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
         "handoff_batch_maturity_ci_regression_names",
         "handoff_batch_maturity_ci_regression_reason_counts",
         "handoff_selected_batch_maturity_ci_regression_reason_counts",
@@ -84,7 +88,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "comparison_ready_handoff_clean_batch_review_count",
         "comparison_ready_handoff_unclean_batch_review_count",
         "comparison_ready_handoff_batch_maturity_ci_regression_count",
+        "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_total",
+        "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
         "comparison_ready_handoff_batch_maturity_ci_regression_names",
         "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
@@ -120,6 +126,7 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "clean_batch_review_requirement_selected_required",
         "clean_batch_review_requirement_selected_status",
         "clean_batch_review_requirement_selected_ci_regression_count",
+        "clean_batch_review_requirement_selected_ci_boundary_plan_check_ready_regression_count",
         "clean_batch_review_requirement_selected_ci_regression_reason_counts",
         "clean_batch_review_requirement_selected_suite_design_regression_count",
         "clean_batch_review_requirement_selected_suite_design_regression_names",
@@ -177,12 +184,18 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
         "handoff_assurance_embedded_receipt_check_sidecar_status",
         "handoff_assurance_embedded_receipt_check_receipt_schema_version",
         "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
         "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
         "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count",
         "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names",
         "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count",
         "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names",
         "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+        "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
         "handoff_assurance_embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names",
         "handoff_assurance_embedded_receipt_check_receipt_comparison_exclusion_reasons",
         "handoff_assurance_output_json_exists",
@@ -219,6 +232,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "selected_handoff_batch_maturity_ci_regression_count": summary.get(
                 "selected_handoff_batch_maturity_ci_regression_count"
             ),
+            "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": summary.get(
+                "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+            ),
             "selected_handoff_batch_maturity_ci_regression_names": "; ".join(
                 _string_list(summary.get("selected_handoff_batch_maturity_ci_regression_names"))
             ),
@@ -233,6 +249,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             ),
             "selected_handoff_selected_batch_maturity_ci_regression_count": summary.get(
                 "selected_handoff_selected_batch_maturity_ci_regression_count"
+            ),
+            "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": summary.get(
+                "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"
             ),
             "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": _fmt_mapping(
                 summary.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts")
@@ -250,8 +269,14 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "handoff_clean_batch_review_count": summary.get("handoff_clean_batch_review_count"),
             "handoff_unclean_batch_review_count": summary.get("handoff_unclean_batch_review_count"),
             "handoff_batch_maturity_ci_regression_count": summary.get("handoff_batch_maturity_ci_regression_count"),
+            "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": summary.get(
+                "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+            ),
             "handoff_selected_batch_maturity_ci_regression_total": summary.get(
                 "handoff_selected_batch_maturity_ci_regression_total"
+            ),
+            "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": summary.get(
+                "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
             ),
             "handoff_batch_maturity_ci_regression_names": "; ".join(
                 _string_list(summary.get("handoff_batch_maturity_ci_regression_names"))
@@ -287,8 +312,14 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "comparison_ready_handoff_batch_maturity_ci_regression_count": summary.get(
                 "comparison_ready_handoff_batch_maturity_ci_regression_count"
             ),
+            "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": summary.get(
+                "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+            ),
             "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": summary.get(
                 "comparison_ready_handoff_selected_batch_maturity_ci_regression_total"
+            ),
+            "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": summary.get(
+                "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
             ),
             "comparison_ready_handoff_batch_maturity_ci_regression_names": "; ".join(
                 _string_list(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_names"))
@@ -356,6 +387,9 @@ def write_promoted_training_scale_seed_handoff_csv(report: dict[str, Any], path:
             "clean_batch_review_requirement_selected_status": clean_batch_requirement.get("selected_status"),
             "clean_batch_review_requirement_selected_ci_regression_count": clean_batch_requirement.get(
                 "selected_ci_regression_count"
+            ),
+            "clean_batch_review_requirement_selected_ci_boundary_plan_check_ready_regression_count": (
+                clean_batch_requirement.get("selected_ci_boundary_plan_check_ready_regression_count")
             ),
             "clean_batch_review_requirement_selected_ci_regression_reason_counts": _fmt_mapping(
                 clean_batch_requirement.get("selected_ci_regression_reason_counts")

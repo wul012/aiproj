@@ -1,0 +1,6 @@
+{
+  "version": "v448",
+  "index_dir": "D:\\aiproj\\d\\448\\解释\\fixture\\promotion-index",
+  "corpus": "D:\\aiproj\\d\\448\\解释\\corpus.txt",
+  "scenario": "dirty promoted input carries explicit CI boundary plan-check regression count while clean comparison inputs continue downstream"
+}

@@ -24,12 +24,18 @@ EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS = (
     "blocking_source",
     "failed_requirements",
     "selected_handoff_batch_maturity_ci_regression_count",
+    "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
     "handoff_batch_maturity_ci_regression_count",
+    "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
     "selected_handoff_batch_maturity_suite_design_regression_count",
     "selected_handoff_batch_maturity_suite_design_regression_names",
     "handoff_batch_maturity_suite_design_regression_count",
     "handoff_batch_maturity_suite_design_regression_names",
     "comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+    "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
     "comparison_ready_handoff_batch_maturity_suite_design_regression_names",
     "comparison_exclusion_reasons",
     "issue_count",
@@ -48,6 +54,14 @@ RECEIPT_SCHEMA_V3_REQUIRED_FIELDS = (
     "handoff_batch_maturity_suite_design_regression_names",
     "comparison_ready_handoff_batch_maturity_suite_design_regression_count",
     "comparison_ready_handoff_batch_maturity_suite_design_regression_names",
+)
+RECEIPT_SCHEMA_V4_REQUIRED_FIELDS = (
+    "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+    "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
 )
 
 
@@ -92,7 +106,19 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
     schema_version = _int(payload.get("schema_version"))
     exit_code = _int(payload.get("automation_exit_code"))
     selected_ci_regressions = _int(payload.get("selected_handoff_batch_maturity_ci_regression_count"))
+    selected_boundary_plan_regressions = _int(
+        payload.get("selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
+    )
+    selected_selected_boundary_plan_regressions = _int(
+        payload.get("selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count")
+    )
     handoff_ci_regressions = _int(payload.get("handoff_batch_maturity_ci_regression_count"))
+    handoff_boundary_plan_regressions = _int(
+        payload.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
+    )
+    handoff_selected_boundary_plan_regressions = _int(
+        payload.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total")
+    )
     selected_suite_design_regressions = _int(
         payload.get("selected_handoff_batch_maturity_suite_design_regression_count")
     )
@@ -103,6 +129,12 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
     handoff_suite_design_names = string_list(payload.get("handoff_batch_maturity_suite_design_regression_names"))
     ready_suite_design_regressions = _int(
         payload.get("comparison_ready_handoff_batch_maturity_suite_design_regression_count")
+    )
+    ready_boundary_plan_regressions = _int(
+        payload.get("comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
+    )
+    ready_selected_boundary_plan_regressions = _int(
+        payload.get("comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total")
     )
     ready_suite_design_names = string_list(
         payload.get("comparison_ready_handoff_batch_maturity_suite_design_regression_names")
@@ -129,6 +161,8 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         issues.extend(_v2_receipt_field_issues(payload))
     if schema_version >= 3:
         issues.extend(_v3_receipt_field_issues(payload))
+    if schema_version >= 4:
+        issues.extend(_v4_receipt_field_issues(payload))
     status = "pass" if not issues else "fail"
     checker_exit_code = 0 if status == "pass" and decision == "continue" else 1
     return {
@@ -141,12 +175,24 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         "blocking_source": str(blocking_source) if blocking_source is not None else None,
         "failed_requirements": failed_requirements,
         "selected_handoff_batch_maturity_ci_regression_count": selected_ci_regressions,
+        "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": selected_boundary_plan_regressions,
+        "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": (
+            selected_selected_boundary_plan_regressions
+        ),
         "handoff_batch_maturity_ci_regression_count": handoff_ci_regressions,
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": handoff_boundary_plan_regressions,
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": (
+            handoff_selected_boundary_plan_regressions
+        ),
         "selected_handoff_batch_maturity_suite_design_regression_count": selected_suite_design_regressions,
         "selected_handoff_batch_maturity_suite_design_regression_names": selected_suite_design_names,
         "handoff_batch_maturity_suite_design_regression_count": handoff_suite_design_regressions,
         "handoff_batch_maturity_suite_design_regression_names": handoff_suite_design_names,
         "comparison_ready_handoff_batch_maturity_suite_design_regression_count": ready_suite_design_regressions,
+        "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": ready_boundary_plan_regressions,
+        "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": (
+            ready_selected_boundary_plan_regressions
+        ),
         "comparison_ready_handoff_batch_maturity_suite_design_regression_names": ready_suite_design_names,
         "comparison_exclusion_reasons": comparison_exclusion_reasons,
         "issue_count": len(issues),
@@ -167,8 +213,24 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
             check.get("selected_handoff_batch_maturity_ci_regression_count"),
         ),
         (
+            "receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
             "receipt_handoff_batch_maturity_ci_regression_count",
             check.get("handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+            check.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
         ),
         (
             "receipt_selected_handoff_batch_maturity_suite_design_regression_count",
@@ -189,6 +251,14 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
         (
             "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count",
             check.get("comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+            check.get("comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
         ),
         (
             "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names",
@@ -268,8 +338,20 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         "receipt_selected_handoff_batch_maturity_ci_regression_count": expected_check.get(
             "selected_handoff_batch_maturity_ci_regression_count"
         ),
+        "receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
+            "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
+        "receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
+            "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
         "receipt_handoff_batch_maturity_ci_regression_count": expected_check.get(
             "handoff_batch_maturity_ci_regression_count"
+        ),
+        "receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
+            "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
+        "receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": expected_check.get(
+            "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
         ),
         "receipt_selected_handoff_batch_maturity_suite_design_regression_count": expected_check.get(
             "selected_handoff_batch_maturity_suite_design_regression_count"
@@ -285,6 +367,12 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         ),
         "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": expected_check.get(
             "comparison_ready_handoff_batch_maturity_suite_design_regression_count"
+        ),
+        "receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
+            "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
+        "receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": expected_check.get(
+            "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
         ),
         "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": expected_check.get(
             "comparison_ready_handoff_batch_maturity_suite_design_regression_names"
@@ -326,8 +414,24 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
             check.get("receipt_selected_handoff_batch_maturity_ci_regression_count"),
         ),
         (
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
             "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count",
             check.get("receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+            check.get("receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
         ),
         (
             "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count",
@@ -348,6 +452,14 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
         (
             "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count",
             check.get("receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+            check.get("receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+            check.get("receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
         ),
         (
             "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names",
@@ -404,10 +516,16 @@ def _normalized_check_value(key: str, value: Any) -> Any:
         "checker_exit_code",
         "issue_count",
         "selected_handoff_batch_maturity_ci_regression_count",
+        "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+        "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
         "handoff_batch_maturity_ci_regression_count",
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
         "selected_handoff_batch_maturity_suite_design_regression_count",
         "handoff_batch_maturity_suite_design_regression_count",
         "comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+        "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+        "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
     }:
         return _int(value)
     if key in {
@@ -457,6 +575,16 @@ def _v3_receipt_field_issues(payload: dict[str, Any]) -> list[str]:
     ):
         if key in payload and not isinstance(payload.get(key), list):
             issues.append(f"{key} must be a list")
+    return issues
+
+
+def _v4_receipt_field_issues(payload: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    for key in RECEIPT_SCHEMA_V4_REQUIRED_FIELDS:
+        if key not in payload:
+            issues.append(f"schema_version >= 4 receipt must include {key}")
+        elif _int(payload.get(key)) < 0:
+            issues.append(f"{key} must be >= 0")
     return issues
 
 

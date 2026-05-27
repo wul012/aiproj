@@ -59,7 +59,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             check = check_promoted_training_scale_seed_handoff_receipt_contract_summary(summary_dir)
 
             self.assertEqual(check["status"], "fail")
-            self.assertTrue(any("summary.receipt_schema_version expected 3 but got 2" in issue for issue in check["issues"]))
+            self.assertTrue(any("summary.receipt_schema_version expected 4 but got 2" in issue for issue in check["issues"]))
 
     def test_contract_summary_check_rejects_tampered_html_sidecar(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

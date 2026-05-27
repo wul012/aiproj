@@ -29,6 +29,10 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Selected clean required", summary.get("selected_handoff_require_clean_batch_review")),
         ("Selected clean batch", summary.get("selected_handoff_clean_batch_review_status")),
         ("Selected CI regressions", summary.get("selected_handoff_batch_maturity_ci_regression_count")),
+        (
+            "Selected CI boundary plan",
+            summary.get("selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
         ("Selected CI reasons", _fmt_mapping(summary.get("selected_handoff_batch_maturity_ci_regression_reason_counts"))),
         (
             "Selected suite-design regressions",
@@ -39,6 +43,10 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
             ", ".join(_string_list(summary.get("selected_handoff_batch_maturity_suite_design_regression_names"))),
         ),
         ("Selected selected CI regressions", summary.get("selected_handoff_selected_batch_maturity_ci_regression_count")),
+        (
+            "Selected selected CI boundary plan",
+            summary.get("selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
         (
             "Selected selected CI reasons",
             _fmt_mapping(summary.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts")),
@@ -57,8 +65,16 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Handoff clean", summary.get("handoff_clean_batch_review_count")),
         ("Handoff unclean", summary.get("handoff_unclean_batch_review_count")),
         ("Handoff CI regressions", summary.get("handoff_batch_maturity_ci_regression_count")),
+        (
+            "Handoff CI boundary plan",
+            summary.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
         ("Handoff CI reasons", _fmt_mapping(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))),
         ("Handoff selected CI regressions", summary.get("handoff_selected_batch_maturity_ci_regression_total")),
+        (
+            "Handoff selected CI boundary plan",
+            summary.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
+        ),
         (
             "Handoff selected CI reasons",
             _fmt_mapping(summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts")),
@@ -81,12 +97,20 @@ def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
         ("Ready unclean batch", summary.get("comparison_ready_handoff_unclean_batch_review_count")),
         ("Ready CI regressions", summary.get("comparison_ready_handoff_batch_maturity_ci_regression_count")),
         (
+            "Ready CI boundary plan",
+            summary.get("comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
             "Ready CI reasons",
             _fmt_mapping(summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts")),
         ),
         (
             "Ready selected CI regressions",
             summary.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_total"),
+        ),
+        (
+            "Ready selected CI boundary plan",
+            summary.get("comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
         ),
         (
             "Ready selected CI reasons",
@@ -167,6 +191,10 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             ("Selected clean batch", clean_review.get("selected_handoff_clean_batch_review_status")),
             ("Selected CI regressions", clean_review.get("selected_handoff_batch_maturity_ci_regression_count")),
             (
+                "Selected CI boundary plan",
+                clean_review.get("selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+            ),
+            (
                 "Selected CI reasons",
                 _fmt_mapping(clean_review.get("selected_handoff_batch_maturity_ci_regression_reason_counts")),
             ),
@@ -181,6 +209,12 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             (
                 "Selected selected CI regressions",
                 clean_review.get("selected_handoff_selected_batch_maturity_ci_regression_count"),
+            ),
+            (
+                "Selected selected CI boundary plan",
+                clean_review.get(
+                    "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+                ),
             ),
             (
                 "Selected selected CI reasons",
@@ -204,6 +238,10 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             ("Handoff clean", clean_review.get("handoff_clean_batch_review_count")),
             ("Handoff unclean", clean_review.get("handoff_unclean_batch_review_count")),
             ("Handoff CI regressions", clean_review.get("handoff_batch_maturity_ci_regression_count")),
+            (
+                "Handoff CI boundary plan",
+                clean_review.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+            ),
             ("Handoff CI reasons", _fmt_mapping(clean_review.get("handoff_batch_maturity_ci_regression_reason_counts"))),
             (
                 "Handoff CI-regressed names",
@@ -216,6 +254,10 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             (
                 "Handoff selected suite-design regressions",
                 clean_review.get("handoff_selected_batch_maturity_suite_design_regression_total"),
+            ),
+            (
+                "Handoff selected CI boundary plan",
+                clean_review.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"),
             ),
             (
                 "Handoff suite-design names",
@@ -238,6 +280,18 @@ def _baseline_section(seed: dict[str, Any]) -> str:
             (
                 "Comparison-ready CI regressions",
                 clean_review.get("comparison_ready_handoff_batch_maturity_ci_regression_count"),
+            ),
+            (
+                "Comparison-ready CI boundary plan",
+                clean_review.get(
+                    "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+                ),
+            ),
+            (
+                "Comparison-ready selected CI boundary plan",
+                clean_review.get(
+                    "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
+                ),
             ),
             (
                 "Comparison-ready suite-design regressions",

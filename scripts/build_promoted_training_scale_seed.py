@@ -72,6 +72,10 @@ def main() -> None:
         f"{summary.get('selected_handoff_batch_maturity_ci_regression_count')}"
     )
     print(
+        "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count="
+        f"{summary.get('selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count')}"
+    )
+    print(
         "selected_handoff_batch_maturity_ci_regression_reason_counts="
         + json.dumps(summary.get("selected_handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False)
     )
@@ -86,6 +90,10 @@ def main() -> None:
     print(
         "selected_handoff_selected_batch_maturity_ci_regression_count="
         f"{summary.get('selected_handoff_selected_batch_maturity_ci_regression_count')}"
+    )
+    print(
+        "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count="
+        f"{summary.get('selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count')}"
     )
     print(
         "selected_handoff_selected_batch_maturity_ci_regression_reason_counts="
@@ -112,12 +120,20 @@ def main() -> None:
     print(f"handoff_unclean_batch_review_count={summary.get('handoff_unclean_batch_review_count')}")
     print(f"handoff_batch_maturity_ci_regression_count={summary.get('handoff_batch_maturity_ci_regression_count')}")
     print(
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count="
+        f"{summary.get('handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count')}"
+    )
+    print(
         "handoff_batch_maturity_ci_regression_reason_counts="
         + json.dumps(summary.get("handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False)
     )
     print(
         "handoff_selected_batch_maturity_ci_regression_total="
         f"{summary.get('handoff_selected_batch_maturity_ci_regression_total')}"
+    )
+    print(
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total="
+        f"{summary.get('handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total')}"
     )
     print(
         "handoff_selected_batch_maturity_ci_regression_reason_counts="
@@ -164,6 +180,10 @@ def main() -> None:
         f"{summary.get('comparison_ready_handoff_batch_maturity_ci_regression_count')}"
     )
     print(
+        "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count="
+        f"{summary.get('comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count')}"
+    )
+    print(
         "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts="
         + json.dumps(
             summary.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"), ensure_ascii=False
@@ -172,6 +192,10 @@ def main() -> None:
     print(
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_total="
         f"{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_regression_total')}"
+    )
+    print(
+        "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total="
+        f"{summary.get('comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total')}"
     )
     print(
         "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts="

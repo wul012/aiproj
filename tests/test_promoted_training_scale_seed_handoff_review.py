@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.promoted_training_scale_seed_handoff_review import (  # noqa: E402
     build_seed_handoff_batch_review_summary,
+    build_seed_handoff_clean_batch_review_requirement,
     build_seed_handoff_review_recommendations,
     build_seed_handoff_suite_alignment,
 )
@@ -50,29 +51,64 @@ class PromotedTrainingScaleSeedHandoffReviewTests(unittest.TestCase):
                     "selected_handoff_require_clean_batch_review": True,
                     "selected_handoff_clean_batch_review_status": "clean",
                     "selected_handoff_batch_maturity_ci_regression_count": 1,
+                    "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
                     "selected_handoff_batch_maturity_ci_regression_names": ["dirty-selected", 7],
                     "selected_handoff_selected_batch_maturity_ci_regression_count": 1,
+                    "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
                     "selected_comparison_exclusion_reasons": ["selected stale"],
                     "handoff_batch_maturity_ci_regression_count": 2,
+                    "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
                     "handoff_selected_batch_maturity_ci_regression_total": 1,
+                    "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
                     "handoff_batch_maturity_ci_regression_names": ["dirty-old"],
                     "comparison_exclusion_reasons": ["handoff batch CI regression count is 2"],
                     "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
+                    "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
                     "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
+                    "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
                     "comparison_ready_handoff_batch_maturity_ci_regression_names": [],
                 }
             }
         )
 
         self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(summary["selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"], 1)
         self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_names"], ["dirty-selected", "7"])
         self.assertEqual(summary["selected_handoff_selected_batch_maturity_ci_regression_count"], 1)
+        self.assertEqual(
+            summary["selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"],
+            1,
+        )
         self.assertEqual(summary["selected_comparison_exclusion_reasons"], ["selected stale"])
         self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
+        self.assertEqual(summary["handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"], 1)
         self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 1)
+        self.assertEqual(summary["handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"], 1)
         self.assertEqual(summary["handoff_batch_maturity_ci_regression_names"], ["dirty-old"])
         self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
         self.assertEqual(summary["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
+        self.assertEqual(
+            summary["comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"],
+            0,
+        )
+
+    def test_clean_batch_review_requirement_prefers_boundary_plan_detail(self) -> None:
+        summary = {
+            "selected_handoff_require_clean_batch_review": True,
+            "selected_handoff_clean_batch_review_status": "clean",
+            "selected_handoff_batch_maturity_ci_regression_count": 1,
+            "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+            "selected_handoff_batch_maturity_ci_regression_reason_counts": {"boundary_gate_plan_check_not_ready": 1},
+        }
+
+        requirement = build_seed_handoff_clean_batch_review_requirement(summary, required=True)
+        recommendations = build_seed_handoff_review_recommendations(summary, None, requirement)
+
+        self.assertEqual(requirement["status"], "fail")
+        self.assertFalse(requirement["clean"])
+        self.assertEqual(requirement["selected_ci_boundary_plan_check_ready_regression_count"], 1)
+        self.assertIn("CI boundary plan-check regression", requirement["detail"])
+        self.assertTrue(any("batch CI regressions caused by boundary plan-check" in item for item in recommendations))
 
     def test_builds_suite_alignment_without_requiring_generated_plan(self) -> None:
         alignment = build_seed_handoff_suite_alignment("suites/standard-zh.json", "suites/standard-zh.json", None)

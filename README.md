@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v447.0.0` carries release readiness CI boundary plan-check regression counts from registry summaries into maturity summaries, maturity narratives, and training portfolio comparison review actions.
+Version `v448.0.0` carries promoted training scale CI boundary plan-check regression counts from comparison into decision, seed, handoff, receipt, embedded-check, and assurance evidence.
+
+## Latest v448 checkpoint
+
+- Promoted training scale comparison rows and summaries now expose explicit handoff CI boundary plan-check regression counts in addition to generic CI regression totals and reason maps.
+- Promoted decision and seed review layers preserve selected, rejected, and comparison-ready boundary plan-check counts through JSON, CSV, Markdown, HTML, and CLI diagnostics.
+- Promoted seed handoff clean-batch requirements now treat selected boundary plan-check regressions as dirty evidence and explain them as boundary-specific batch CI regressions.
+- Automation receipt schema is now v4 and validates boundary plan-check fields through receipt check, embedded receipt check, and handoff assurance sidecars.
+- Archived comparison, decision, seed, handoff, receipt, assurance, and Playwright MCP screenshot evidence in `d/448`.
 
 ## Latest v447 checkpoint
 

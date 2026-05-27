@@ -8,6 +8,9 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
+CI_BOUNDARY_PLAN_CHECK_READY_REGRESSION_REASON = "boundary_gate_plan_check_not_ready"
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -73,6 +76,18 @@ def positive_int_mapping(value: Any) -> dict[str, int]:
     return dict(sorted(result.items()))
 
 
+def ci_boundary_plan_check_ready_regression_count(*values: Any) -> int:
+    for value in values:
+        count = _int_count_or_none(value)
+        if count is not None:
+            return max(0, count)
+    for value in values:
+        count = positive_int_mapping(value).get(CI_BOUNDARY_PLAN_CHECK_READY_REGRESSION_REASON)
+        if count is not None:
+            return count
+    return 0
+
+
 def format_mapping(value: Any) -> str:
     counts = as_dict(value)
     if not counts:
@@ -133,3 +148,12 @@ def _quote_command_part(part: str) -> str:
     if any(char.isspace() for char in part) or '"' in part:
         return '"' + part.replace('"', '\\"') + '"'
     return part
+
+
+def _int_count_or_none(value: Any) -> int | None:
+    if isinstance(value, bool) or isinstance(value, (dict, list, tuple)) or value is None or value == "":
+        return None
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return None

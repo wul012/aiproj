@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
+    ci_boundary_plan_check_ready_regression_count,
     format_mapping as _fmt_mapping,
     first_present,
     list_of_dicts as _list_of_dicts,
@@ -148,6 +149,9 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 "handoff_batch_maturity_ci_regression_names": clean_guard.get(
                     "handoff_batch_maturity_ci_regression_names"
                 ),
+                "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": clean_guard.get(
+                    "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+                ),
                 "handoff_batch_maturity_suite_design_regression_count": clean_guard.get(
                     "handoff_batch_maturity_suite_design_regression_count"
                 ),
@@ -159,6 +163,9 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                 ),
                 "handoff_selected_batch_maturity_ci_regression_reason_counts": clean_guard.get(
                     "handoff_selected_batch_maturity_ci_regression_reason_counts"
+                ),
+                "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": clean_guard.get(
+                    "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"
                 ),
                 "handoff_selected_batch_maturity_suite_design_regression_count": clean_guard.get(
                     "handoff_selected_batch_maturity_suite_design_regression_count"
@@ -282,8 +289,16 @@ def _summary(
         "handoff_selected_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
             row.get("handoff_selected_batch_maturity_ci_regression_reason_counts") for row in promotions
         ),
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": sum(
+            _int(row.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"))
+            for row in promotions
+        ),
         "handoff_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
             row.get("handoff_batch_maturity_ci_regression_reason_counts") for row in promotions
+        ),
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": sum(
+            _int(row.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"))
+            for row in promotions
         ),
         "handoff_batch_maturity_ci_regression_names": sorted(
             {
@@ -388,8 +403,18 @@ def _summary(
             for row in promotions
             if row.get("promoted_for_comparison")
         ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": sum(
+            _int(row.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"))
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
         "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": _sum_reason_counts(
             row.get("handoff_batch_maturity_ci_regression_reason_counts")
+            for row in promotions
+            if row.get("promoted_for_comparison")
+        ),
+        "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": sum(
+            _int(row.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"))
             for row in promotions
             if row.get("promoted_for_comparison")
         ),
@@ -645,6 +670,24 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
         summary.get("decision_require_clean_batch_review"),
         summary.get("require_clean_batch_review"),
     )
+    ci_reason_counts = _int_mapping(
+        first_present(
+            row.get("handoff_batch_maturity_ci_regression_reason_counts"),
+            guard.get("handoff_batch_maturity_ci_regression_reason_counts"),
+            guard.get("batch_maturity_ci_regression_reason_counts"),
+            summary.get("handoff_batch_maturity_ci_regression_reason_counts"),
+            summary.get("batch_maturity_ci_regression_reason_counts"),
+        )
+    )
+    selected_ci_reason_counts = _int_mapping(
+        first_present(
+            row.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+            guard.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+            guard.get("selected_batch_maturity_ci_regression_reason_counts"),
+            summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+            summary.get("selected_batch_maturity_ci_regression_reason_counts"),
+        )
+    )
     return {
         "handoff_require_clean_batch_review": bool(required),
         "handoff_clean_batch_review_status": first_present(
@@ -661,14 +704,16 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
             summary.get("handoff_batch_maturity_ci_regression_count"),
             summary.get("batch_maturity_ci_regression_count"),
         ),
-        "handoff_batch_maturity_ci_regression_reason_counts": _int_mapping(
+        "handoff_batch_maturity_ci_regression_reason_counts": ci_reason_counts,
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": ci_boundary_plan_check_ready_regression_count(
             first_present(
-                row.get("handoff_batch_maturity_ci_regression_reason_counts"),
-                guard.get("handoff_batch_maturity_ci_regression_reason_counts"),
-                guard.get("batch_maturity_ci_regression_reason_counts"),
-                summary.get("handoff_batch_maturity_ci_regression_reason_counts"),
-                summary.get("batch_maturity_ci_regression_reason_counts"),
-            )
+                row.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                guard.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                guard.get("batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                summary.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                summary.get("batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+            ),
+            ci_reason_counts,
         ),
         "handoff_batch_maturity_ci_regression_names": _string_list(
             first_present(
@@ -702,14 +747,16 @@ def _clean_batch_review_guard(row: dict[str, Any]) -> dict[str, Any]:
             summary.get("handoff_selected_batch_maturity_ci_regression_count"),
             summary.get("selected_batch_maturity_ci_regression_count"),
         ),
-        "handoff_selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": selected_ci_reason_counts,
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": ci_boundary_plan_check_ready_regression_count(
             first_present(
-                row.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
-                guard.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
-                guard.get("selected_batch_maturity_ci_regression_reason_counts"),
-                summary.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
-                summary.get("selected_batch_maturity_ci_regression_reason_counts"),
-            )
+                row.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                guard.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                guard.get("selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                summary.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+                summary.get("selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+            ),
+            selected_ci_reason_counts,
         ),
         "handoff_selected_batch_maturity_suite_design_regression_count": first_present(
             row.get("handoff_selected_batch_maturity_suite_design_regression_count"),

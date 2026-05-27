@@ -142,8 +142,8 @@ def main() -> None:
         issues,
     )
     _check(
-        checks["handoff_assurance_embedded_receipt_check_receipt_schema_version"] == 3,
-        "handoff assurance must expose receipt schema_version=3",
+        checks["handoff_assurance_embedded_receipt_check_receipt_schema_version"] == 4,
+        "handoff assurance must expose receipt schema_version=4",
         issues,
     )
     _check(

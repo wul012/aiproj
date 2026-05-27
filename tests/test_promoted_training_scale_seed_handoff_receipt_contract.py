@@ -23,7 +23,7 @@ from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # 
 
 
 class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
-    def test_contract_summary_flattens_schema_v3_suite_design_scopes(self) -> None:
+    def test_contract_summary_flattens_current_schema_suite_design_scopes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             paths = write_suite_design_handoff_with_sidecars(Path(tmp))
 
@@ -33,7 +33,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             html = render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(summary)
 
             self.assertEqual(summary["status"], "pass")
-            self.assertEqual(summary["receipt_schema_version"], 3)
+            self.assertEqual(summary["receipt_schema_version"], 4)
             self.assertTrue(summary["schema_v3_ready"])
             self.assertEqual(summary["embedded_receipt_check_sidecar_status"], "pass")
             self.assertEqual(

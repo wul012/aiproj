@@ -20,9 +20,11 @@ def entry(
     require_clean_batch_review: bool = False,
     clean_batch_review_status: str | None = None,
     batch_ci_regression_count: int = 0,
+    batch_boundary_plan_regression_count: int = 0,
     batch_ci_regression_names: list[str] | None = None,
     batch_ci_regression_reason_counts: dict[str, int] | None = None,
     selected_batch_ci_regression_count: int = 0,
+    selected_batch_boundary_plan_regression_count: int = 0,
     selected_batch_ci_regression_reason_counts: dict[str, int] | None = None,
     batch_suite_design_regression_count: int = 0,
     batch_suite_design_regression_names: list[str] | None = None,
@@ -41,9 +43,11 @@ def entry(
         "require_clean_batch_review": require_clean_batch_review,
         "clean_batch_review_status": clean_batch_review_status,
         "batch_ci_regression_count": batch_ci_regression_count,
+        "batch_boundary_plan_regression_count": batch_boundary_plan_regression_count,
         "batch_ci_regression_names": batch_ci_regression_names or [],
         "batch_ci_regression_reason_counts": batch_ci_regression_reason_counts or {},
         "selected_batch_ci_regression_count": selected_batch_ci_regression_count,
+        "selected_batch_boundary_plan_regression_count": selected_batch_boundary_plan_regression_count,
         "selected_batch_ci_regression_reason_counts": selected_batch_ci_regression_reason_counts
         or batch_ci_regression_reason_counts
         or {},
@@ -169,9 +173,15 @@ def _apply_ci_regression(promotion: dict, item: dict) -> None:
         return
     fields = {
         "handoff_batch_maturity_ci_regression_count": item.get("batch_ci_regression_count"),
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": item.get(
+            "batch_boundary_plan_regression_count"
+        ),
         "handoff_batch_maturity_ci_regression_reason_counts": item.get("batch_ci_regression_reason_counts"),
         "handoff_batch_maturity_ci_regression_names": item.get("batch_ci_regression_names"),
         "handoff_selected_batch_maturity_ci_regression_count": item.get("selected_batch_ci_regression_count"),
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": item.get(
+            "selected_batch_boundary_plan_regression_count"
+        ),
         "handoff_selected_batch_maturity_ci_regression_reason_counts": item.get("selected_batch_ci_regression_reason_counts"),
     }
     promotion.update(fields)

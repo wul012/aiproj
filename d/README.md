@@ -452,6 +452,9 @@ d/446/解释/说明.md
 d/447/图片
 d/447/解释/说明.md
  -> v447 CI boundary plan-check regression downstream carryover 的运行截图和解释
+d/448/图片
+d/448/解释/说明.md
+ -> v448 promoted training scale boundary plan-check clean-batch carryover 的运行截图和解释
 ```
 
 写入规则：
