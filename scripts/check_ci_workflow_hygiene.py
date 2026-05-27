@@ -48,6 +48,9 @@ def main() -> None:
     print(f"promoted_seed_receipt_contract_failure_smoke_present={summary['promoted_seed_receipt_contract_failure_smoke_present']}")
     print(f"promoted_seed_receipt_contract_failure_smoke_order_ready={summary['promoted_seed_receipt_contract_failure_smoke_order_ready']}")
     print(f"promoted_seed_receipt_contract_failure_smoke_ready={summary['promoted_seed_receipt_contract_failure_smoke_ready']}")
+    print(f"promoted_seed_receipt_contract_failure_smoke_plan_check_present={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_present']}")
+    print(f"promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready']}")
+    print(f"promoted_seed_receipt_contract_failure_smoke_plan_check_ready={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_ready']}")
     print(f"python_version={summary['python_version']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if summary["status"] != "pass" and not args.no_fail:

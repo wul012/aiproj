@@ -23,6 +23,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
     "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
     "promoted_seed_receipt_contract_failure_smoke": "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
+    "promoted_seed_receipt_contract_failure_smoke_plan_check": "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
     "tiny_scorecard_comparison_inline_check_smoke": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
     "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
     "ci_tiny_scorecard_plan_digest_check": "scripts/check_ci_tiny_scorecard_plan.py",
@@ -47,6 +48,14 @@ REQUIRED_COMMAND_ORDER = {
     ),
     "promoted_seed_receipt_contract_failure_smoke_before_coverage": (
         "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
+        "scripts/run_test_coverage.py",
+    ),
+    "promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke": (
+        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
+        "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
+    ),
+    "promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage": (
+        "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
         "scripts/run_test_coverage.py",
     ),
     "ci_tiny_scorecard_plan_check_after_smoke": (
@@ -132,6 +141,9 @@ class CiWorkflowSummary(TypedDict):
     promoted_seed_receipt_contract_failure_smoke_present: bool
     promoted_seed_receipt_contract_failure_smoke_order_ready: bool
     promoted_seed_receipt_contract_failure_smoke_ready: bool
+    promoted_seed_receipt_contract_failure_smoke_plan_check_present: bool
+    promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready: bool
+    promoted_seed_receipt_contract_failure_smoke_plan_check_ready: bool
     release_readiness_drift_contract_smoke_present: bool
     release_readiness_drift_contract_smoke_order_ready: bool
     release_readiness_drift_contract_smoke_ready: bool
@@ -188,6 +200,11 @@ def build_ci_workflow_hygiene_report(
         _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_after_assurance")
         and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_before_coverage")
     )
+    receipt_failure_smoke_plan_check_present = _check_passed(checks, "command:promoted_seed_receipt_contract_failure_smoke_plan_check")
+    receipt_failure_smoke_plan_check_order_ready = (
+        _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke")
+        and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage")
+    )
     drift_contract_smoke_present = _check_passed(checks, "command:release_readiness_drift_contract_smoke")
     drift_contract_smoke_order_ready = _check_passed(checks, "order:release_readiness_drift_contract_smoke_before_coverage")
     summary: CiWorkflowSummary = {
@@ -217,6 +234,11 @@ def build_ci_workflow_hygiene_report(
         "promoted_seed_receipt_contract_failure_smoke_present": receipt_failure_smoke_present,
         "promoted_seed_receipt_contract_failure_smoke_order_ready": receipt_failure_smoke_order_ready,
         "promoted_seed_receipt_contract_failure_smoke_ready": receipt_failure_smoke_present and receipt_failure_smoke_order_ready,
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_present": receipt_failure_smoke_plan_check_present,
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": receipt_failure_smoke_plan_check_order_ready,
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": (
+            receipt_failure_smoke_plan_check_present and receipt_failure_smoke_plan_check_order_ready
+        ),
         "release_readiness_drift_contract_smoke_present": drift_contract_smoke_present,
         "release_readiness_drift_contract_smoke_order_ready": drift_contract_smoke_order_ready,
         "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_present and drift_contract_smoke_order_ready,
@@ -399,6 +421,8 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append("Keep assurance and tiny-scorecard evidence checks before coverage so CI fails fast on evidence drift.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
+    if not summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready"):
+        recommendations.append("Restore the receipt contract failure smoke plan check after the wrapper and before coverage.")
     if summary.get("python_version") != REQUIRED_PYTHON_VERSION:
         recommendations.append("Align actions/setup-python with the source compatibility target.")
     return recommendations

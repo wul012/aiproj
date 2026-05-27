@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "tests"))
 
 from scripts.run_ci_promoted_seed_receipt_contract_failure_smoke import (  # noqa: E402
+    DEFAULT_SOURCE_HANDOFF,
     PLAN_JSON_FILENAME,
     PLAN_TEXT_FILENAME,
     build_failure_smoke_summary,
@@ -24,6 +25,12 @@ from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # 
 
 
 class CiPromotedSeedReceiptContractFailureSmokeTests(unittest.TestCase):
+    def test_default_source_handoff_stays_repository_relative(self) -> None:
+        self.assertEqual(
+            DEFAULT_SOURCE_HANDOFF,
+            Path("d") / "448" / "解释" / "promoted-handoff",
+        )
+
     def test_wrapper_runs_summary_and_failure_smoke_with_plan(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

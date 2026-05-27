@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v459.0.0` wraps the CI receipt contract failure smoke in a stable invocation plan.
+Version `v460.0.0` adds a contract check for the CI receipt failure-smoke wrapper plan.
+
+## Latest v460 checkpoint
+
+- Added `scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py` to validate the v459 wrapper plan without rerunning the smoke.
+- The checker verifies wrapper identity, decision/status, child command return codes, failure-smoke summary fields, and four recorded artifact digests.
+- GitHub Actions now runs the new plan check immediately after the receipt failure-smoke wrapper and before downstream gates.
+- CI workflow hygiene now requires wrapper -> plan-check -> coverage ordering and exposes `promoted_seed_receipt_contract_failure_smoke_plan_check_*` readiness fields.
+- Fixed the wrapper default handoff path to stay repository-relative, matching the archived v448 sidecar contract used by CI.
+- Archived wrapper output, plan-check JSON/text/Markdown/HTML, CI hygiene report, Playwright MCP snapshot, and screenshot evidence in `d/460`.
 
 ## Latest v459 checkpoint
 

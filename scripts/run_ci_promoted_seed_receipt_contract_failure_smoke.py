@@ -18,7 +18,7 @@ FAILURE_SMOKE_JSON_FILENAME = "promoted_training_scale_seed_handoff_receipt_cont
 FAILURE_SMOKE_CSV_FILENAME = "promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.csv"
 FAILURE_SMOKE_HTML_FILENAME = "promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.html"
 
-DEFAULT_SOURCE_HANDOFF = ROOT / "d" / "448" / "解释" / "promoted-handoff"
+DEFAULT_SOURCE_HANDOFF = Path("d") / "448" / "解释" / "promoted-handoff"
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

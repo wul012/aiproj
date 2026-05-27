@@ -53,6 +53,9 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_present"])
         self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_order_ready"])
         self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
+        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_present"])
+        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready"])
+        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
         self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_present"])
         self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_order_ready"])
         self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_ready"])
@@ -85,6 +88,10 @@ class CIWorkflowTests(unittest.TestCase):
         )
         self.assertIn(
             "command:promoted_seed_receipt_contract_failure_smoke",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "command:promoted_seed_receipt_contract_failure_smoke_plan_check",
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
@@ -121,6 +128,14 @@ class CIWorkflowTests(unittest.TestCase):
         )
         self.assertIn(
             "order:promoted_seed_receipt_contract_failure_smoke_before_coverage",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage",
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
@@ -162,12 +177,13 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 10)
-            self.assertEqual(report["summary"]["required_step_count"], 12)
+            self.assertEqual(report["summary"]["missing_step_count"], 11)
+            self.assertEqual(report["summary"]["required_step_count"], 13)
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
+            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_ready"])
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
@@ -193,6 +209,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
                         "        run: python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
+                        "      - name: Promoted seed receipt contract failure smoke plan check",
+                        "        run: python -B scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py runs/promoted-seed-receipt-contract-failure-smoke-ci --out-dir runs/ci-promoted-seed-receipt-contract-failure-smoke-plan-check-ci",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
@@ -244,6 +262,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
                         "        run: python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
+                        "      - name: Promoted seed receipt contract failure smoke plan check",
+                        "        run: python -B scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py runs/promoted-seed-receipt-contract-failure-smoke-ci --out-dir runs/ci-promoted-seed-receipt-contract-failure-smoke-plan-check-ci",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
@@ -263,7 +283,7 @@ class CIWorkflowTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertEqual(report["summary"]["order_violation_count"], 7)
+            self.assertEqual(report["summary"]["order_violation_count"], 8)
             self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
@@ -276,6 +296,9 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_present"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_order_ready"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
+            self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_present"])
+            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready"])
+            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_present"])
             self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_order_ready"])
             self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_ready"])
@@ -286,6 +309,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("order:baseline_candidate_threshold_boundary_gate_check_before_coverage", failed_order_ids)
             self.assertIn("order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage", failed_order_ids)
             self.assertIn("order:promoted_seed_receipt_contract_failure_smoke_before_coverage", failed_order_ids)
+            self.assertIn("order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage", failed_order_ids)
             self.assertIn("order:release_readiness_drift_contract_smoke_before_coverage", failed_order_ids)
             self.assertNotIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
@@ -311,6 +335,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
                         "        run: python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
+                        "      - name: Promoted seed receipt contract failure smoke plan check",
+                        "        run: python -B scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py runs/promoted-seed-receipt-contract-failure-smoke-ci --out-dir runs/ci-promoted-seed-receipt-contract-failure-smoke-plan-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
                         "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
                         "      - name: Baseline candidate threshold boundary gate check",
@@ -338,6 +364,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
@@ -355,6 +382,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("baseline_candidate_threshold_boundary_gate_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("baseline_candidate_threshold_boundary_gate_plan_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("promoted_seed_receipt_contract_failure_smoke_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("promoted_seed_receipt_contract_failure_smoke_plan_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_drift_contract_smoke_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("order_violation_count", Path(outputs["markdown"]).read_text(encoding="utf-8"))
 

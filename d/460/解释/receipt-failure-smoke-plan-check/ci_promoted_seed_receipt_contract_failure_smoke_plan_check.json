@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "decision": "continue",
+  "source_plan": "d\\460\\解释\\receipt-failure-smoke-wrapper\\ci_promoted_seed_receipt_contract_failure_smoke_plan.json",
+  "source_handoff": "d\\448\\解释\\promoted-handoff",
+  "wrapper": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+  "check_count": 33,
+  "failed_count": 0,
+  "artifact_count": 4,
+  "artifact_failure_count": 0,
+  "failure_smoke_summary": {
+    "available": true,
+    "parse_status": "pass",
+    "path": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.json",
+    "status": "pass",
+    "decision": "failure_matrix_verified",
+    "scenario_count": 4,
+    "verified_scenario_count": 4,
+    "failed_verification_count": 0,
+    "issue_count": 0
+  },
+  "artifacts": [
+    {
+      "name": "contract_summary_json",
+      "path": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.json",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 25354,
+      "actual_size_bytes": 25354,
+      "expected_sha256": "73db95c749effdc39d98b4d41c4dcb583c61d9585f786e7e810a503775128a3f",
+      "actual_sha256": "73db95c749effdc39d98b4d41c4dcb583c61d9585f786e7e810a503775128a3f",
+      "status": "pass"
+    },
+    {
+      "name": "failure_smoke_json",
+      "path": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.json",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 6738,
+      "actual_size_bytes": 6738,
+      "expected_sha256": "162e95e66de9c048110ad244e1ae1fc18148ef33a5d5d40b54742d9c57fafa4e",
+      "actual_sha256": "162e95e66de9c048110ad244e1ae1fc18148ef33a5d5d40b54742d9c57fafa4e",
+      "status": "pass"
+    },
+    {
+      "name": "failure_smoke_csv",
+      "path": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.csv",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 983,
+      "actual_size_bytes": 983,
+      "expected_sha256": "6493e84d30e86eea781840622cb662b6b695a8531810bc843da54f270906560e",
+      "actual_sha256": "6493e84d30e86eea781840622cb662b6b695a8531810bc843da54f270906560e",
+      "status": "pass"
+    },
+    {
+      "name": "failure_smoke_html",
+      "path": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.html",
+      "expected_exists": true,
+      "actual_exists": true,
+      "expected_size_bytes": 2808,
+      "actual_size_bytes": 2808,
+      "expected_sha256": "e44014a8417c123cf4c157764bab9b4e863af8ff66e4b793e52ddb439872eb26",
+      "actual_sha256": "e44014a8417c123cf4c157764bab9b4e863af8ff66e4b793e52ddb439872eb26",
+      "status": "pass"
+    }
+  ],
+  "checks": [
+    {
+      "id": "plan:wrapper",
+      "target": "wrapper",
+      "expected": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+      "actual": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+      "status": "pass",
+      "detail": "Wrapper identity must remain stable."
+    },
+    {
+      "id": "plan:status",
+      "target": "status",
+      "expected": "pass",
+      "actual": "pass",
+      "status": "pass",
+      "detail": "Wrapper plan must record a successful run."
+    },
+    {
+      "id": "plan:decision",
+      "target": "decision",
+      "expected": "receipt_contract_failure_smoke_verified",
+      "actual": "receipt_contract_failure_smoke_verified",
+      "status": "pass",
+      "detail": "Wrapper decision must preserve the verified smoke outcome."
+    },
+    {
+      "id": "command:receipt_contract_summary:present",
+      "target": "commands.receipt_contract_summary",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Required child command must be recorded in the wrapper plan."
+    },
+    {
+      "id": "command:receipt_contract_summary:returncode",
+      "target": "commands.receipt_contract_summary.returncode",
+      "expected": 0,
+      "actual": 0,
+      "status": "pass",
+      "detail": "Required child command must complete successfully."
+    },
+    {
+      "id": "command:receipt_contract_failure_smoke:present",
+      "target": "commands.receipt_contract_failure_smoke",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Required child command must be recorded in the wrapper plan."
+    },
+    {
+      "id": "command:receipt_contract_failure_smoke:returncode",
+      "target": "commands.receipt_contract_failure_smoke.returncode",
+      "expected": 0,
+      "actual": 0,
+      "status": "pass",
+      "detail": "Required child command must complete successfully."
+    },
+    {
+      "id": "failure_smoke_summary:available",
+      "target": "failure_smoke_summary.available",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Failure-smoke summary must keep the expected verified matrix result."
+    },
+    {
+      "id": "failure_smoke_summary:parse_status",
+      "target": "failure_smoke_summary.parse_status",
+      "expected": "pass",
+      "actual": "pass",
+      "status": "pass",
+      "detail": "Failure-smoke summary must keep the expected verified matrix result."
+    },
+    {
+      "id": "failure_smoke_summary:status",
+      "target": "failure_smoke_summary.status",
+      "expected": "pass",
+      "actual": "pass",
+      "status": "pass",
+      "detail": "Failure-smoke summary must keep the expected verified matrix result."
+    },
+    {
+      "id": "failure_smoke_summary:scenario_count",
+      "target": "failure_smoke_summary.scenario_count",
+      "expected": 4,
+      "actual": 4,
+      "status": "pass",
+      "detail": "Failure-smoke summary must keep the expected verified matrix result."
+    },
+    {
+      "id": "failure_smoke_summary:verified_scenario_count",
+      "target": "failure_smoke_summary.verified_scenario_count",
+      "expected": 4,
+      "actual": 4,
+      "status": "pass",
+      "detail": "Failure-smoke summary must keep the expected verified matrix result."
+    },
+    {
+      "id": "failure_smoke_summary:failed_verification_count",
+      "target": "failure_smoke_summary.failed_verification_count",
+      "expected": 0,
+      "actual": 0,
+      "status": "pass",
+      "detail": "Failure-smoke summary must keep the expected verified matrix result."
+    },
+    {
+      "id": "artifact:contract_summary_json:recorded_exists",
+      "target": "artifact_digest.contract_summary_json.exists",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Artifact must be recorded as present."
+    },
+    {
+      "id": "artifact:contract_summary_json:current_exists",
+      "target": "artifact_digest.contract_summary_json.path",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Recorded artifact path must still exist."
+    },
+    {
+      "id": "artifact:contract_summary_json:size",
+      "target": "artifact_digest.contract_summary_json.size_bytes",
+      "expected": 25354,
+      "actual": 25354,
+      "status": "pass",
+      "detail": "Recorded artifact size must match the current file."
+    },
+    {
+      "id": "artifact:contract_summary_json:sha256_shape",
+      "target": "artifact_digest.contract_summary_json.sha256",
+      "expected": "64 lowercase hex",
+      "actual": "64 lowercase hex",
+      "status": "pass",
+      "detail": "Recorded SHA-256 must be a stable 64-character lowercase hex digest."
+    },
+    {
+      "id": "artifact:contract_summary_json:sha256",
+      "target": "artifact_digest.contract_summary_json.sha256",
+      "expected": "73db95c749effdc39d98b4d41c4dcb583c61d9585f786e7e810a503775128a3f",
+      "actual": "73db95c749effdc39d98b4d41c4dcb583c61d9585f786e7e810a503775128a3f",
+      "status": "pass",
+      "detail": "Recorded artifact digest must match the current file."
+    },
+    {
+      "id": "artifact:failure_smoke_json:recorded_exists",
+      "target": "artifact_digest.failure_smoke_json.exists",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Artifact must be recorded as present."
+    },
+    {
+      "id": "artifact:failure_smoke_json:current_exists",
+      "target": "artifact_digest.failure_smoke_json.path",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Recorded artifact path must still exist."
+    },
+    {
+      "id": "artifact:failure_smoke_json:size",
+      "target": "artifact_digest.failure_smoke_json.size_bytes",
+      "expected": 6738,
+      "actual": 6738,
+      "status": "pass",
+      "detail": "Recorded artifact size must match the current file."
+    },
+    {
+      "id": "artifact:failure_smoke_json:sha256_shape",
+      "target": "artifact_digest.failure_smoke_json.sha256",
+      "expected": "64 lowercase hex",
+      "actual": "64 lowercase hex",
+      "status": "pass",
+      "detail": "Recorded SHA-256 must be a stable 64-character lowercase hex digest."
+    },
+    {
+      "id": "artifact:failure_smoke_json:sha256",
+      "target": "artifact_digest.failure_smoke_json.sha256",
+      "expected": "162e95e66de9c048110ad244e1ae1fc18148ef33a5d5d40b54742d9c57fafa4e",
+      "actual": "162e95e66de9c048110ad244e1ae1fc18148ef33a5d5d40b54742d9c57fafa4e",
+      "status": "pass",
+      "detail": "Recorded artifact digest must match the current file."
+    },
+    {
+      "id": "artifact:failure_smoke_csv:recorded_exists",
+      "target": "artifact_digest.failure_smoke_csv.exists",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Artifact must be recorded as present."
+    },
+    {
+      "id": "artifact:failure_smoke_csv:current_exists",
+      "target": "artifact_digest.failure_smoke_csv.path",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Recorded artifact path must still exist."
+    },
+    {
+      "id": "artifact:failure_smoke_csv:size",
+      "target": "artifact_digest.failure_smoke_csv.size_bytes",
+      "expected": 983,
+      "actual": 983,
+      "status": "pass",
+      "detail": "Recorded artifact size must match the current file."
+    },
+    {
+      "id": "artifact:failure_smoke_csv:sha256_shape",
+      "target": "artifact_digest.failure_smoke_csv.sha256",
+      "expected": "64 lowercase hex",
+      "actual": "64 lowercase hex",
+      "status": "pass",
+      "detail": "Recorded SHA-256 must be a stable 64-character lowercase hex digest."
+    },
+    {
+      "id": "artifact:failure_smoke_csv:sha256",
+      "target": "artifact_digest.failure_smoke_csv.sha256",
+      "expected": "6493e84d30e86eea781840622cb662b6b695a8531810bc843da54f270906560e",
+      "actual": "6493e84d30e86eea781840622cb662b6b695a8531810bc843da54f270906560e",
+      "status": "pass",
+      "detail": "Recorded artifact digest must match the current file."
+    },
+    {
+      "id": "artifact:failure_smoke_html:recorded_exists",
+      "target": "artifact_digest.failure_smoke_html.exists",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Artifact must be recorded as present."
+    },
+    {
+      "id": "artifact:failure_smoke_html:current_exists",
+      "target": "artifact_digest.failure_smoke_html.path",
+      "expected": true,
+      "actual": true,
+      "status": "pass",
+      "detail": "Recorded artifact path must still exist."
+    },
+    {
+      "id": "artifact:failure_smoke_html:size",
+      "target": "artifact_digest.failure_smoke_html.size_bytes",
+      "expected": 2808,
+      "actual": 2808,
+      "status": "pass",
+      "detail": "Recorded artifact size must match the current file."
+    },
+    {
+      "id": "artifact:failure_smoke_html:sha256_shape",
+      "target": "artifact_digest.failure_smoke_html.sha256",
+      "expected": "64 lowercase hex",
+      "actual": "64 lowercase hex",
+      "status": "pass",
+      "detail": "Recorded SHA-256 must be a stable 64-character lowercase hex digest."
+    },
+    {
+      "id": "artifact:failure_smoke_html:sha256",
+      "target": "artifact_digest.failure_smoke_html.sha256",
+      "expected": "e44014a8417c123cf4c157764bab9b4e863af8ff66e4b793e52ddb439872eb26",
+      "actual": "e44014a8417c123cf4c157764bab9b4e863af8ff66e4b793e52ddb439872eb26",
+      "status": "pass",
+      "detail": "Recorded artifact digest must match the current file."
+    }
+  ],
+  "issues": []
+}

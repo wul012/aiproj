@@ -1,0 +1,130 @@
+{
+  "failure_smoke_version": 1,
+  "status": "pass",
+  "decision": "failure_matrix_verified",
+  "source_summary_path": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.json",
+  "source_summary_dir": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary",
+  "scenario_count": 4,
+  "passed_scenario_count": 1,
+  "failed_scenario_count": 3,
+  "verified_scenario_count": 4,
+  "failed_verification_count": 0,
+  "scenario_rows": [
+    {
+      "scenario": "baseline",
+      "tamper": "none",
+      "status": "pass",
+      "expected_status": "pass",
+      "status_matches": true,
+      "verification_status": "pass",
+      "failed_families": [],
+      "expected_failed_families": [],
+      "family_matches": true,
+      "failed_targets": [],
+      "expected_failed_targets": [],
+      "target_matches": true,
+      "failed_check_target_count": 0,
+      "summary_field_failed_count": 0,
+      "contract_profile_failed_count": 0,
+      "sidecar_failed_count": 0,
+      "summary_dir": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\baseline\\summary",
+      "check_json": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\baseline\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.json",
+      "check_markdown": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\baseline\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.md",
+      "check_html": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\baseline\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.html"
+    },
+    {
+      "scenario": "tamper_summary_field",
+      "tamper": "receipt_schema_version",
+      "status": "fail",
+      "expected_status": "fail",
+      "status_matches": true,
+      "verification_status": "pass",
+      "failed_families": [
+        "summary_field"
+      ],
+      "expected_failed_families": [
+        "summary_field"
+      ],
+      "family_matches": true,
+      "failed_targets": [
+        "summary.receipt_schema_version"
+      ],
+      "expected_failed_targets": [
+        "summary.receipt_schema_version"
+      ],
+      "target_matches": true,
+      "failed_check_target_count": 1,
+      "summary_field_failed_count": 1,
+      "contract_profile_failed_count": 0,
+      "sidecar_failed_count": 0,
+      "summary_dir": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_summary_field\\summary",
+      "check_json": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_summary_field\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.json",
+      "check_markdown": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_summary_field\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.md",
+      "check_html": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_summary_field\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.html"
+    },
+    {
+      "scenario": "tamper_contract_profile",
+      "tamper": "contract_check_type_summary",
+      "status": "fail",
+      "expected_status": "fail",
+      "status_matches": true,
+      "verification_status": "pass",
+      "failed_families": [
+        "contract_profile",
+        "summary_field"
+      ],
+      "expected_failed_families": [
+        "contract_profile",
+        "summary_field"
+      ],
+      "family_matches": true,
+      "failed_targets": [
+        "summary.contract_check_type_summary"
+      ],
+      "expected_failed_targets": [
+        "summary.contract_check_type_summary"
+      ],
+      "target_matches": true,
+      "failed_check_target_count": 2,
+      "summary_field_failed_count": 1,
+      "contract_profile_failed_count": 1,
+      "sidecar_failed_count": 0,
+      "summary_dir": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_contract_profile\\summary",
+      "check_json": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_contract_profile\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.json",
+      "check_markdown": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_contract_profile\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.md",
+      "check_html": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_contract_profile\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.html"
+    },
+    {
+      "scenario": "tamper_sidecar",
+      "tamper": "html_sidecar",
+      "status": "fail",
+      "expected_status": "fail",
+      "status_matches": true,
+      "verification_status": "pass",
+      "failed_families": [
+        "sidecar"
+      ],
+      "expected_failed_families": [
+        "sidecar"
+      ],
+      "family_matches": true,
+      "failed_targets": [
+        "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_sidecar\\summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.html"
+      ],
+      "expected_failed_targets": [
+        "promoted_training_scale_seed_handoff_receipt_contract_summary.html"
+      ],
+      "target_matches": true,
+      "failed_check_target_count": 1,
+      "summary_field_failed_count": 0,
+      "contract_profile_failed_count": 0,
+      "sidecar_failed_count": 1,
+      "summary_dir": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_sidecar\\summary",
+      "check_json": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_sidecar\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.json",
+      "check_markdown": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_sidecar\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.md",
+      "check_html": "d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_sidecar\\check\\promoted_training_scale_seed_handoff_receipt_contract_summary_check.html"
+    }
+  ],
+  "issue_count": 0,
+  "issues": []
+}

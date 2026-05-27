@@ -59,6 +59,9 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "promoted_seed_receipt_contract_failure_smoke_present",
         "promoted_seed_receipt_contract_failure_smoke_order_ready",
         "promoted_seed_receipt_contract_failure_smoke_ready",
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_present",
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready",
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_ready",
         "release_readiness_drift_contract_smoke_present",
         "release_readiness_drift_contract_smoke_order_ready",
         "release_readiness_drift_contract_smoke_ready",
@@ -113,6 +116,7 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Boundary gate check", summary.get("baseline_candidate_threshold_boundary_gate_check_ready")),
         ("Boundary plan check", summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready")),
         ("Receipt failure smoke", summary.get("promoted_seed_receipt_contract_failure_smoke_ready")),
+        ("Receipt plan check", summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready")),
         ("Drift smoke gate", summary.get("release_readiness_drift_contract_smoke_ready")),
         ("Python", summary.get("python_version")),
     ]

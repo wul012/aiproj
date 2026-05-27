@@ -1,0 +1,5 @@
+scenario,tamper,status,expected_status,verification_status,failed_families,expected_failed_families,failed_targets,expected_failed_targets,failed_check_target_count
+baseline,none,pass,pass,pass,[],[],[],[],0
+tamper_summary_field,receipt_schema_version,fail,fail,pass,"[""summary_field""]","[""summary_field""]","[""summary.receipt_schema_version""]","[""summary.receipt_schema_version""]",1
+tamper_contract_profile,contract_check_type_summary,fail,fail,pass,"[""contract_profile"", ""summary_field""]","[""contract_profile"", ""summary_field""]","[""summary.contract_check_type_summary""]","[""summary.contract_check_type_summary""]",2
+tamper_sidecar,html_sidecar,fail,fail,pass,"[""sidecar""]","[""sidecar""]","[""d\\460\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\scenarios\\tamper_sidecar\\summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.html""]","[""promoted_training_scale_seed_handoff_receipt_contract_summary.html""]",1
