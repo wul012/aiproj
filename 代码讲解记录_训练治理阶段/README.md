@@ -452,6 +452,9 @@
 463-v449-promoted-receipt-v4-contract-summary.md
  -> v449 code explanation: flatten promoted seed handoff receipt schema-v4 CI boundary plan-check counts into contract summaries, summary checks, and assurance smoke output.
 
+464-v450-promoted-receipt-contract-checks.md
+ -> v450 code explanation: add machine-readable receipt contract checks for promoted seed handoff contract summaries and summary-check sidecar validation.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

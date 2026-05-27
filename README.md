@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v449.0.0` flattens promoted seed handoff receipt schema-v4 CI boundary plan-check counts into receipt contract summaries, summary checks, and assurance smoke output.
+Version `v450.0.0` adds machine-readable receipt contract checks so promoted seed handoff contract summaries no longer require parsing free-form issue text.
+
+## Latest v450 checkpoint
+
+- Promoted seed handoff receipt contract summaries now include `contract_checks`, `contract_check_count`, and `failed_contract_check_count`.
+- Contract checks cover assurance status, schema-v3 readiness, schema-v4 readiness, embedded receipt-check sidecar status, suite-design count/name consistency, and CI boundary plan-check selected-vs-handoff consistency.
+- Text, Markdown, and HTML contract outputs now expose the same machine-readable check table.
+- Contract summary checks now compare the `contract_checks` payload and reject stale or tampered check rows.
+- Archived contract summary, summary-check, Playwright MCP snapshot, and screenshot evidence in `d/450`.
 
 ## Latest v449 checkpoint
 

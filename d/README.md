@@ -458,6 +458,9 @@ d/448/解释/说明.md
 d/449/图片
 d/449/解释/说明.md
  -> v449 promoted seed handoff receipt v4 contract summary 的运行截图和解释
+d/450/图片
+d/450/解释/说明.md
+ -> v450 promoted seed handoff receipt machine-readable contract checks 的运行截图和解释
 ```
 
 写入规则：

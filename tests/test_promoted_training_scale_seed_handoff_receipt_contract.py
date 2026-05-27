@@ -52,8 +52,13 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             )
             self.assertIn("receipt_contract_handoff_suite_design_count=2", text)
             self.assertIn("receipt_contract_schema_v4_ready=True", text)
+            self.assertEqual(summary["failed_contract_check_count"], 0)
+            self.assertIn("receipt_contract_failed_check_count=0", text)
+            self.assertIn("schema_v4_ready", {item["id"] for item in summary["contract_checks"]})
             self.assertIn("| handoff | 2 | beta-suite, standard | True |", markdown)
+            self.assertIn("| schema_v4_ready | receipt | pass | True | True |", markdown)
             self.assertIn("<td>handoff</td>", html)
+            self.assertIn("<td>schema_v4_ready</td>", html)
 
     def test_contract_summary_flattens_schema_v4_boundary_plan_check_scopes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -83,6 +88,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
                 },
             )
             self.assertIn("receipt_contract_handoff_ci_boundary_plan_check_handoff_count=1", text)
+            self.assertIn("ci_boundary_plan_check_handoff_selected_within_handoff", text)
             self.assertIn("| handoff | 1 | 0 | True |", markdown)
             self.assertIn("CI Boundary Plan-Check Scopes", html)
 
@@ -98,6 +104,8 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
 
             self.assertEqual(summary["status"], "fail")
             self.assertEqual(summary["assurance_status"], "fail")
+            self.assertGreaterEqual(summary["failed_contract_check_count"], 1)
+            self.assertTrue(any(item["status"] == "fail" for item in summary["contract_checks"]))
             self.assertTrue(any("handoff assurance must pass" in issue for issue in summary["issues"]))
             self.assertTrue(
                 any(
@@ -139,6 +147,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertTrue((out_dir / "promoted_training_scale_seed_handoff_receipt_contract_summary.txt").is_file())
             self.assertTrue((out_dir / "promoted_training_scale_seed_handoff_receipt_contract_summary.md").is_file())
             self.assertTrue((out_dir / "promoted_training_scale_seed_handoff_receipt_contract_summary.html").is_file())
+
 
 def write_boundary_plan_handoff_with_sidecars(root: Path) -> SuiteDesignHandoffSidecars:
     seed = write_seed_tree(
