@@ -1,0 +1,109 @@
+- generic [active] [ref=e1] [box=0,0,1350,2329]:
+  - banner [ref=e2] [box=0,0,1350,142]:
+    - heading "MiniGPT release readiness comparison" [level=1] [ref=e3] [box=32,28,1286,41]
+    - paragraph [ref=e4] [box=32,85,1286,23]: "baseline: D:\\aiproj\\d\\462\\解释\\source-inputs\\v461-baseline-receipt-ready\\release_readiness.json"
+  - generic [ref=e5] [box=0,142,1350,564]:
+    - generic [ref=e6] [box=32,160,150,82]:
+      - generic [ref=e7] [box=47,175,121,17]: Reports
+      - generic [ref=e8] [box=47,198,121,29]: "2"
+    - generic [ref=e9] [box=194,160,150,82]:
+      - generic [ref=e10] [box=209,175,121,17]: Baseline
+      - generic [ref=e11] [box=209,198,121,29]: ready
+    - generic [ref=e12] [box=357,160,150,82]:
+      - generic [ref=e13] [box=371,175,121,17]: Ready
+      - generic [ref=e14] [box=371,198,121,29]: "2"
+    - generic [ref=e15] [box=519,160,150,82]:
+      - generic [ref=e16] [box=533,175,121,17]: Blocked
+      - generic [ref=e17] [box=533,198,121,29]: "0"
+    - generic [ref=e18] [box=681,160,150,82]:
+      - generic [ref=e19] [box=696,175,121,17]: Improved
+      - generic [ref=e20] [box=696,198,121,29]: "0"
+    - generic [ref=e21] [box=843,160,150,82]:
+      - generic [ref=e22] [box=858,175,121,17]: Regressed
+      - generic [ref=e23] [box=858,198,121,29]: "0"
+    - generic [ref=e24] [box=1006,160,150,82]:
+      - generic [ref=e25] [box=1020,175,121,17]: Panel deltas
+      - generic [ref=e26] [box=1020,198,121,29]: "0"
+    - generic [ref=e27] [box=1168,160,150,82]:
+      - generic [ref=e28] [box=1182,175,121,17]: CI regressions
+      - generic [ref=e29] [box=1182,198,121,29]: "1"
+    - generic [ref=e30] [box=32,254,150,99]:
+      - generic [ref=e31] [box=47,269,121,35]: CI order regressions
+      - generic [ref=e32] [box=47,310,121,29]: "0"
+    - generic [ref=e33] [box=194,254,150,99]:
+      - generic [ref=e34] [box=209,269,121,35]: CI drift smoke changes
+      - generic [ref=e35] [box=209,310,121,29]: "0"
+    - generic [ref=e36] [box=357,254,150,99]:
+      - generic [ref=e37] [box=371,269,121,35]: CI drift smoke regressions
+      - generic [ref=e38] [box=371,310,121,29]: "0"
+    - generic [ref=e39] [box=519,254,150,99]:
+      - generic [ref=e40] [box=533,269,121,35]: CI tiny plan regressions
+      - generic [ref=e41] [box=533,310,121,29]: "0"
+    - generic [ref=e42] [box=681,254,150,99]:
+      - generic [ref=e43] [box=696,269,121,35]: CI boundary gate regressions
+      - generic [ref=e44] [box=696,310,121,29]: "0"
+    - generic [ref=e45] [box=843,254,150,99]:
+      - generic [ref=e46] [box=858,269,121,35]: CI boundary plan regressions
+      - generic [ref=e47] [box=858,310,121,29]: "0"
+    - generic [ref=e48] [box=1006,254,150,99]:
+      - generic [ref=e49] [box=1020,269,121,35]: CI receipt plan changes
+      - generic [ref=e50] [box=1020,310,121,29]: "1"
+    - generic [ref=e51] [box=1168,254,150,99]:
+      - generic [ref=e52] [box=1182,269,121,35]: CI receipt plan regressions
+      - generic [ref=e53] [box=1182,310,121,29]: "1"
+    - generic [ref=e54] [box=32,365,150,186]:
+      - generic [ref=e55] [box=47,380,121,35]: CI regression reasons
+      - generic [ref=e56] [box=47,420,121,116]: receipt_failure_smoke_plan_check_not_ready:1
+    - generic [ref=e57] [box=194,365,150,186]:
+      - generic [ref=e58] [box=209,380,121,35]: Coverage regressions
+      - generic [ref=e59] [box=209,420,121,29]: "0"
+    - generic [ref=e60] [box=357,365,150,186]:
+      - generic [ref=e61] [box=371,380,121,35]: Benchmark deltas
+      - generic [ref=e62] [box=371,420,121,29]: "0"
+    - generic [ref=e63] [box=519,365,150,186]:
+      - generic [ref=e64] [box=533,380,121,35]: Benchmark regressions
+      - generic [ref=e65] [box=533,420,121,29]: "0"
+    - generic [ref=e66] [box=681,365,150,186]:
+      - generic [ref=e67] [box=696,380,121,35]: Bench design deltas
+      - generic [ref=e68] [box=696,420,121,29]: "0"
+    - generic [ref=e69] [box=843,365,150,186]:
+      - generic [ref=e70] [box=858,380,121,35]: Bench design regressions
+      - generic [ref=e71] [box=858,420,121,29]: "0"
+    - generic [ref=e72] [box=1006,365,150,186]:
+      - generic [ref=e73] [box=1020,380,121,35]: Bench design changes
+      - generic [ref=e74] [box=1020,420,121,29]: "0"
+    - generic [ref=e75] [box=1168,365,150,186]:
+      - generic [ref=e76] [box=1182,380,121,35]: Benchmark reason additions
+      - generic [ref=e77] [box=1182,420,121,29]: "0"
+    - generic [ref=e78] [box=32,563,150,139]:
+      - generic [ref=e79] [box=47,578,121,35]: Benchmark reason removals
+      - generic [ref=e80] [box=47,618,121,29]: "0"
+    - generic [ref=e81] [box=194,563,150,139]:
+      - generic [ref=e82] [box=209,578,121,52]: Benchmark reason recoveries
+      - generic [ref=e83] [box=209,636,121,29]: "0"
+    - generic [ref=e84] [box=357,563,150,139]:
+      - generic [ref=e85] [box=371,578,121,35]: Benchmark reason mixed
+      - generic [ref=e86] [box=371,618,121,29]: "0"
+    - generic [ref=e87] [box=519,563,150,139]:
+      - generic [ref=e88] [box=533,578,121,17]: Generated
+      - generic [ref=e89] [box=533,601,121,87]: 2026-05-27T09:13:29Z
+  - generic [ref=e90] [box=32,724,1286,414]:
+    - heading "Readiness Matrix" [level=2] [ref=e91] [box=49,741,1253,26]
+    - table [ref=e92] [box=49,779,2294,328]:
+      - rowgroup [ref=e93] [box=49,779,2294,86]:
+        - row "Release Status Decision Gate Audit Score CI workflow CI failed CI order violations CI plan digest CI boundary gate CI boundary plan CI receipt plan CI drift smoke ready Request Coverage Coverage % Gap Benchmark history Benchmark ready Suite-design not-ready Design changes Benchmark readiness Benchmark readiness exit Benchmark regressions Benchmark boundary Maturity Panels" [ref=e94] [box=49,779,2294,86]
+      - rowgroup [ref=e123] [box=49,865,2294,242]:
+        - row "v461-baseline-receipt-ready D:\\aiproj\\d\\462\\解释\\source-inputs\\v461-baseline-receipt-ready\\release_readiness.json ready ship pass pass 100 pass 0 0 True True True True True pass pass 90.17 0 pass 1 0 0 pass 0 0 standard-benchmark-candidate-evidence pass 0 fail / 0 warn" [ref=e124] [box=49,865,2294,109]
+        - row "v462-current-receipt-plan-regressed D:\\aiproj\\d\\462\\解释\\source-inputs\\v462-current-receipt-plan-regressed\\release_readiness.json ready ship pass pass 100 pass 0 0 True True True False True pass pass 90.17 0 pass 1 0 0 pass 0 0 standard-benchmark-candidate-evidence pass 0 fail / 0 warn" [ref=e154] [box=49,974,2294,133]
+  - generic [ref=e184] [box=32,1157,1286,926]:
+    - heading "Deltas" [level=2] [ref=e185] [box=49,1173,1253,26]
+    - table [ref=e186] [box=49,1211,2529,839]:
+      - rowgroup [ref=e187] [box=49,1211,2529,103]:
+        - row "Compared Status delta CI order violation delta CI plan digest regressed CI boundary gate regressed CI boundary plan regressed CI receipt plan changed CI receipt plan regressed CI drift smoke changed CI drift smoke regressed CI regression reasons Coverage % delta Coverage gap delta Benchmark status delta Suite-design not-ready delta Design changes delta Benchmark readiness changed Benchmark readiness exit delta Failed reason drift Failed reasons added Failed reasons removed Benchmark case regression delta Benchmark boundary changed Panel changes Explanation" [ref=e188] [box=49,1211,2529,103]
+      - rowgroup [ref=e214] [box=49,1315,2529,736]:
+        - 'row "v462-current-receipt-plan-regressed D:\\aiproj\\d\\462\\解释\\source-inputs\\v462-current-receipt-plan-regressed\\release_readiness.json 0 0 False False False True True False False receipt_failure_smoke_plan_check_not_ready 0 0 0 0 0 False 0 stable 0 False v462-current-receipt-plan-regressed moves from ready to ready (0). CI workflow promoted seed receipt failure-smoke plan check ready changed from True to False. CI workflow regression reason(s): receipt failure-smoke plan check readiness. No readiness status or panel delta is present." [ref=e215] [box=49,1315,2529,736]'
+  - generic [ref=e242] [box=32,2100,1286,138]:
+    - heading "Recommendations" [level=2] [ref=e243] [box=49,2117,1253,26]
+    - list [ref=e244] [box=49,2159,1253,46]:
+      - listitem [ref=e245] [box=89,2159,1213,46]: At least one readiness comparison shows CI workflow hygiene regression (receipt failure-smoke plan check readiness=1); inspect CI status deltas, failed-check deltas, order-violation deltas, and drift-smoke readiness deltas before release handoff.
+  - contentinfo [ref=e246] [box=0,2256,1350,73]: Generated by MiniGPT release readiness comparison.

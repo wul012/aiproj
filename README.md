@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v461.0.0` carries the CI receipt failure-smoke plan-check readiness field into audit, release bundle, and release readiness evidence.
+Version `v462.0.0` compares receipt failure-smoke plan-check readiness in release readiness comparison evidence.
+
+## Latest v462 checkpoint
+
+- Release readiness comparison rows now carry `ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready`.
+- Deltas now detect ready-to-not-ready receipt plan-check regressions even when both compared readiness reports still say `ready`.
+- Summary, CLI, CSV, Markdown, and HTML outputs expose receipt plan-check changed/regressed counts and the `receipt_failure_smoke_plan_check_not_ready` CI regression reason.
+- Added a focused regression test proving the new receipt plan-check signal is treated like the existing boundary-plan and drift-smoke CI readiness signals.
+- Archived a baseline/current comparison where overall readiness stays ready but receipt plan-check readiness regresses in `d/462`.
 
 ## Latest v461 checkpoint
 

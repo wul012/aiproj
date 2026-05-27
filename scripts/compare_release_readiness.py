@@ -69,6 +69,20 @@ def main() -> None:
         + json.dumps(summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count", 0), ensure_ascii=False)
     )
     print(
+        "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed_count="
+        + json.dumps(
+            summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed_count", 0),
+            ensure_ascii=False,
+        )
+    )
+    print(
+        "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regression_count="
+        + json.dumps(
+            summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regression_count", 0),
+            ensure_ascii=False,
+        )
+    )
+    print(
         "ci_workflow_regression_reason_counts="
         + json.dumps(summary.get("ci_workflow_regression_reason_counts") or {}, ensure_ascii=False)
     )

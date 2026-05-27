@@ -40,6 +40,7 @@ def make_readiness(
     ci_workflow_tiny_scorecard_plan_digest_gate_ready: bool | None = True,
     ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready: bool | None = True,
     ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready: bool | None = True,
+    ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready: bool | None = True,
     ci_workflow_release_readiness_drift_contract_smoke_ready: bool | None = True,
     test_coverage_status: str = "pass",
     test_coverage_percent: float = 90.17,
@@ -96,6 +97,9 @@ def make_readiness(
             "ci_workflow_tiny_scorecard_plan_digest_gate_ready": ci_workflow_tiny_scorecard_plan_digest_gate_ready,
             "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready,
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready,
+            "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": (
+                ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready
+            ),
             "ci_workflow_release_readiness_drift_contract_smoke_ready": ci_workflow_release_readiness_drift_contract_smoke_ready,
             "request_history_status": request_status,
             "test_coverage_status": test_coverage_status,
@@ -328,6 +332,51 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertEqual(delta["ci_workflow_regression_reasons"], ["boundary_gate_plan_check_not_ready"])
             self.assertIn("boundary gate plan check ready changed", delta["explanation"])
             self.assertIn("boundary plan check readiness=1", " ".join(report["recommendations"]))
+
+    def test_build_release_readiness_comparison_flags_receipt_plan_check_regression_without_status_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            baseline = make_readiness(
+                root,
+                "baseline",
+                status="ready",
+                decision="ship",
+                gate_status="pass",
+                ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready=True,
+            )
+            current = make_readiness(
+                root,
+                "current",
+                status="ready",
+                decision="ship",
+                gate_status="pass",
+                ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready=False,
+            )
+
+            report = build_release_readiness_comparison([baseline, current])
+
+            self.assertEqual(report["summary"]["ci_workflow_regression_count"], 1)
+            self.assertEqual(
+                report["summary"]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed_count"],
+                1,
+            )
+            self.assertEqual(
+                report["summary"]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regression_count"],
+                1,
+            )
+            self.assertEqual(
+                report["summary"]["ci_workflow_regression_reason_counts"],
+                {"receipt_failure_smoke_plan_check_not_ready": 1},
+            )
+            self.assertTrue(report["rows"][0]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
+            self.assertFalse(report["rows"][1]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
+            delta = report["deltas"][0]
+            self.assertEqual(delta["delta_status"], "same")
+            self.assertTrue(delta["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_changed"])
+            self.assertTrue(delta["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regressed"])
+            self.assertEqual(delta["ci_workflow_regression_reasons"], ["receipt_failure_smoke_plan_check_not_ready"])
+            self.assertIn("receipt failure-smoke plan check ready changed", delta["explanation"])
+            self.assertIn("receipt failure-smoke plan check readiness=1", " ".join(report["recommendations"]))
 
     def test_build_release_readiness_comparison_flags_test_coverage_regression(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -659,6 +708,10 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
                 Path(outputs["csv"]).read_text(encoding="utf-8"),
             )
             self.assertIn(
+                "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready",
+                Path(outputs["csv"]).read_text(encoding="utf-8"),
+            )
+            self.assertIn(
                 "ci_workflow_release_readiness_drift_contract_smoke_ready",
                 Path(outputs["csv"]).read_text(encoding="utf-8"),
             )
@@ -680,6 +733,10 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed",
                 Path(outputs["delta_csv"]).read_text(encoding="utf-8"),
             )
+            self.assertIn(
+                "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regressed",
+                Path(outputs["delta_csv"]).read_text(encoding="utf-8"),
+            )
             self.assertIn("ci_workflow_regression_reasons", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("test_coverage_gap_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
             self.assertIn("benchmark_history_case_regression_delta", Path(outputs["delta_csv"]).read_text(encoding="utf-8"))
@@ -693,11 +750,15 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("## Readiness Matrix", markdown)
             self.assertIn("CI boundary plan", markdown)
             self.assertIn("CI boundary plan regressed", markdown)
+            self.assertIn("CI receipt plan", markdown)
+            self.assertIn("CI receipt plan regressed", markdown)
             self.assertIn("CI drift smoke ready", markdown)
             self.assertIn("CI regression reasons", markdown)
             self.assertIn("Suite-design not-ready", markdown)
             self.assertIn("CI boundary plan", html)
             self.assertIn("CI boundary plan regressed", html)
+            self.assertIn("CI receipt plan", html)
+            self.assertIn("CI receipt plan regressed", html)
             self.assertIn("CI drift smoke ready", html)
             self.assertIn("CI regression reasons", html)
             self.assertIn("Suite-design not-ready", html)
@@ -737,6 +798,7 @@ class ReleaseReadinessComparisonTests(unittest.TestCase):
             self.assertIn("benchmark_history_suite_design_non_comparison_ready_regression_count=1", completed.stdout)
             self.assertIn("benchmark_history_design_comparison_changed_delta_count=1", completed.stdout)
             self.assertIn("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count=0", completed.stdout)
+            self.assertIn("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regression_count=0", completed.stdout)
             self.assertIn("benchmark_history_suite_design=current:4:5", completed.stdout)
 
     def test_renderers_escape_release_text(self) -> None:

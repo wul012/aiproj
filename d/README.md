@@ -494,6 +494,9 @@ d/460/解释/说明.md
 d/461/图片
 d/461/解释/说明.md
  -> v461 promoted seed receipt plan-check readiness carryover 的运行截图和解释
+d/462/图片
+d/462/解释/说明.md
+ -> v462 release readiness comparison receipt plan-check regression 的运行截图和解释
 ```
 
 写入规则：
