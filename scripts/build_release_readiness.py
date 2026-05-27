@@ -51,6 +51,7 @@ def main() -> None:
     print(f"ci_workflow_order_violation_count={summary.get('ci_workflow_order_violation_count')}")
     print(f"ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready={summary.get('ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready')}")
     print(f"ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready={summary.get('ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready')}")
+    print(f"ci_workflow_archived_path_portability_check_ready={summary.get('ci_workflow_archived_path_portability_check_ready')}")
     print(
         "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready="
         f"{summary.get('ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready')}"

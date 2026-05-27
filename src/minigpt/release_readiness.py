@@ -185,6 +185,11 @@ def _summary(
             bundle_summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
             ci_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
         ),
+        "ci_workflow_archived_path_portability_check_ready": first_present(
+            ci_summary.get("archived_path_portability_check_ready"),
+            bundle_summary.get("ci_workflow_archived_path_portability_check_ready"),
+            ci_context.get("archived_path_portability_check_ready"),
+        ),
         "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": first_present(
             ci_summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
             bundle_summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
@@ -392,6 +397,7 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
             + f"; plan_digest_gate_ready={_fmt(summary.get('tiny_scorecard_plan_digest_gate_ready'))}"
             + f"; boundary_gate_check_ready={_fmt(summary.get('baseline_candidate_threshold_boundary_gate_check_ready'))}"
             + f"; boundary_gate_plan_check_ready={_fmt(summary.get('baseline_candidate_threshold_boundary_gate_plan_check_ready'))}"
+            + f"; archived_path_portability_check_ready={_fmt(summary.get('archived_path_portability_check_ready'))}"
             + f"; receipt_failure_smoke_plan_check_ready={_fmt(summary.get('promoted_seed_receipt_contract_failure_smoke_plan_check_ready'))}"
             + f"; drift_contract_smoke_ready={_fmt(summary.get('release_readiness_drift_contract_smoke_ready'))}",
             path,
@@ -439,6 +445,13 @@ def _ci_workflow_panel(path: Path | None, ci_workflow: dict[str, Any] | None, bu
                 first_present(
                     bundle_summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
                     bundle_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
+                )
+            )
+            + "; archived_path_portability_check_ready="
+            + _fmt(
+                first_present(
+                    bundle_summary.get("ci_workflow_archived_path_portability_check_ready"),
+                    bundle_context.get("archived_path_portability_check_ready"),
                 )
             )
             + "; receipt_failure_smoke_plan_check_ready="

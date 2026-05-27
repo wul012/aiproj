@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT project audit</title>
+<style>
+:root { --ink:#111827; --muted:#4b5563; --line:#d8dee9; --page:#f7f7f2; --panel:#fff; --blue:#2563eb; --green:#047857; --amber:#b45309; --red:#b91c1c; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+span, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:82px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:860px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.pill { display:inline-block; min-width:54px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
+.pill.pass { background:var(--green); }
+.pill.warn { background:var(--amber); }
+.pill.fail { background:var(--red); }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT project audit</h1><p>d\461\解释\source-inputs\registry\registry.json</p></header>
+<section class="stats"><div class="card"><div class="label">Status</div><div class="value">pass</div></div><div class="card"><div class="label">Score</div><div class="value">100.0%</div></div><div class="card"><div class="label">Runs</div><div class="value">1</div></div><div class="card"><div class="label">Best run</div><div class="value">v461-receipt-plan-carryover</div></div><div class="card"><div class="label">Ready</div><div class="value">1</div></div><div class="card"><div class="label">Req history</div><div class="value">pass</div></div><div class="card"><div class="label">Bench history</div><div class="value">pass</div></div><div class="card"><div class="label">Bench entries</div><div class="value">1</div></div><div class="card"><div class="label">Bench design review</div><div class="value">0</div></div><div class="card"><div class="label">Bench design changes</div><div class="value">0</div></div><div class="card"><div class="label">Bench readiness</div><div class="value">pass</div></div><div class="card"><div class="label">Bench readiness exit</div><div class="value">0</div></div><div class="card"><div class="label">CI workflow</div><div class="value">pass</div></div><div class="card"><div class="label">CI receipt plan</div><div class="value">True</div></div><div class="card"><div class="label">CI archived paths</div><div class="value">True</div></div><div class="card"><div class="label">Coverage</div><div class="value">pass</div></div><div class="card"><div class="label">Coverage %</div><div class="value">90.16</div></div><div class="card"><div class="label">Pass</div><div class="value">17</div></div><div class="card"><div class="label">Warn</div><div class="value">0</div></div><div class="card"><div class="label">Fail</div><div class="value">0</div></div></section>
+<section class="panel"><h2>Checks</h2><table><thead><tr><th>Status</th><th>Check</th><th>Detail</th></tr></thead><tbody><tr><td><span class="pill pass">pass</span></td><td><strong>Registry has runs</strong><br><span>registry_runs</span></td><td>1 registered run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Best run is identified</strong><br><span>best_run</span></td><td>best=v461-receipt-plan-carryover</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Comparable loss coverage</strong><br><span>comparable_loss</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Experiment card coverage</strong><br><span>experiment_cards</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Dataset quality coverage</strong><br><span>dataset_quality</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Eval suite coverage</strong><br><span>eval_suite</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Generation quality coverage</strong><br><span>generation_quality</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Checkpoint coverage</strong><br><span>checkpoints</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Dashboard coverage</strong><br><span>dashboards</span></td><td>1/1 run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Model card is available</strong><br><span>model_card</span></td><td>model_card.json loaded</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>At least one ready run</strong><br><span>ready_run</span></td><td>1 ready run(s).</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Request history summary is clean</strong><br><span>request_history_summary</span></td><td>status=pass; records=4; invalid=0; timeout_rate=0; error_rate=0.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Benchmark history is audit-ready</strong><br><span>benchmark_history</span></td><td>entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; latest_boundary=standard-benchmark-candidate-evidence.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>CI workflow hygiene is clean</strong><br><span>ci_workflow_hygiene</span></td><td>status=pass; actions=2; node24_native=2; failed_checks=0; forbidden_env=0; missing_steps=0; order_violations=0; tiny_scorecard_plan_digest_gate_ready=True; baseline_candidate_threshold_boundary_gate_check_ready=True; baseline_candidate_threshold_boundary_gate_plan_check_ready=True; archived_path_portability_check_ready=True; promoted_seed_receipt_contract_failure_smoke_plan_check_ready=True; release_readiness_drift_contract_smoke_ready=True.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>Test coverage gate is clean</strong><br><span>test_coverage_report</span></td><td>status=pass; decision=continue_with_coverage_gate; line_coverage=90.16; fail_under=80; coverage_gap=0; threshold_enabled=True.</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>No non-pass dataset quality runs</strong><br><span>non_pass_quality</span></td><td>all checked runs pass</td></tr><tr><td><span class="pill pass">pass</span></td><td><strong>No non-pass generation quality runs</strong><br><span>non_pass_generation_quality</span></td><td>all analyzed runs pass</td></tr></tbody></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>All audit checks passed; keep the audit with the model card as release evidence.</li></ul></section>
+<section class="panel"><h2>Runs</h2><table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Card</th></tr></thead><tbody><tr><td>#1</td><td><strong>v461-receipt-plan-carryover</strong><br><span>D:\aiproj\d\461\解释\carryover-pass-fixture\run-a</span></td><td>ready</td><td>0.8<br><span>+0</span></td><td>pass</td><td>3</td><td>pass (3 cases)</td><td>yes</td></tr></tbody></table></section>
+
+<footer>Generated by MiniGPT project audit exporter.</footer>
+</body>
+</html>

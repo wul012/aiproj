@@ -494,6 +494,9 @@
 477-v463-archived-path-portability-ci-gate.md
  -> v463 code explanation: add a CI-enforced archived path portability check so Windows-authored receipt handoff sidecar paths remain resolvable on Linux runners.
 
+478-v464-archived-path-portability-readiness-carryover.md
+ -> v464 code explanation: carry archived path portability readiness from CI hygiene into audit, release bundle, and release readiness evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

@@ -156,6 +156,18 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
                 summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
                 audit_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
             ),
+            "archived_path_portability_check_present": first_present(
+                summary.get("archived_path_portability_check_present"),
+                audit_context.get("archived_path_portability_check_present"),
+            ),
+            "archived_path_portability_check_order_ready": first_present(
+                summary.get("archived_path_portability_check_order_ready"),
+                audit_context.get("archived_path_portability_check_order_ready"),
+            ),
+            "archived_path_portability_check_ready": first_present(
+                summary.get("archived_path_portability_check_ready"),
+                audit_context.get("archived_path_portability_check_ready"),
+            ),
             "promoted_seed_receipt_contract_failure_smoke_plan_check_present": first_present(
                 summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_present"),
                 audit_context.get("promoted_seed_receipt_contract_failure_smoke_plan_check_present"),
@@ -199,6 +211,9 @@ def _ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None, audit: dict
         "baseline_candidate_threshold_boundary_gate_plan_check_present": None,
         "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": None,
         "baseline_candidate_threshold_boundary_gate_plan_check_ready": None,
+        "archived_path_portability_check_present": None,
+        "archived_path_portability_check_order_ready": None,
+        "archived_path_portability_check_ready": None,
         "promoted_seed_receipt_contract_failure_smoke_plan_check_present": None,
         "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": None,
         "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": None,

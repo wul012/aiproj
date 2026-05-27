@@ -207,6 +207,9 @@ def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
         "baseline_candidate_threshold_boundary_gate_plan_check_present": status == "pass",
         "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": status == "pass",
         "baseline_candidate_threshold_boundary_gate_plan_check_ready": status == "pass",
+        "archived_path_portability_check_present": status == "pass",
+        "archived_path_portability_check_order_ready": status == "pass",
+        "archived_path_portability_check_ready": status == "pass",
         "promoted_seed_receipt_contract_failure_smoke_plan_check_present": status == "pass",
         "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": status == "pass",
         "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": status == "pass",
@@ -290,6 +293,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(audit["summary"]["ci_tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(audit["summary"]["ci_baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(audit["summary"]["ci_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(audit["summary"]["ci_archived_path_portability_check_ready"])
             self.assertTrue(audit["summary"]["ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(audit["summary"]["ci_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["summary"]["test_coverage_status"], "pass")
@@ -303,6 +307,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(audit["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(audit["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(audit["ci_workflow_context"]["archived_path_portability_check_ready"])
             self.assertTrue(audit["ci_workflow_context"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(audit["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
@@ -541,6 +546,7 @@ class ProjectAuditTests(unittest.TestCase):
 
             self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
             self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
+            self.assertIn("ci_archived_path_portability_check_ready=None", completed.stdout)
             self.assertIn("ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready=None", completed.stdout)
 
     def test_render_project_audit_html_escapes_run_text(self) -> None:
@@ -669,12 +675,14 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertFalse(ci_check["evidence"]["tiny_scorecard_plan_digest_gate_ready"])
         self.assertFalse(ci_check["evidence"]["baseline_candidate_threshold_boundary_gate_check_ready"])
         self.assertFalse(ci_check["evidence"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+        self.assertFalse(ci_check["evidence"]["archived_path_portability_check_ready"])
         self.assertFalse(ci_check["evidence"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["order_violation_count"], 1)
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["tiny_scorecard_plan_digest_gate_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["baseline_candidate_threshold_boundary_gate_check_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+        self.assertFalse(build_ci_workflow_context(ci_hygiene)["archived_path_portability_check_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["release_readiness_drift_contract_smoke_ready"])
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")

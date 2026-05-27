@@ -500,6 +500,9 @@ d/462/解释/说明.md
 d/463/图片
 d/463/解释/说明.md
  -> v463 archived path portability CI gate 的运行截图和解释
+d/464/图片
+d/464/解释/说明.md
+ -> v464 archived path portability readiness carryover 的运行截图和解释
 ```
 
 写入规则：

@@ -67,6 +67,7 @@ def main() -> None:
     print(f"ci_workflow_failed_checks={summary.get('ci_workflow_failed_checks')}")
     print(f"ci_baseline_candidate_threshold_boundary_gate_check_ready={summary.get('ci_baseline_candidate_threshold_boundary_gate_check_ready')}")
     print(f"ci_baseline_candidate_threshold_boundary_gate_plan_check_ready={summary.get('ci_baseline_candidate_threshold_boundary_gate_plan_check_ready')}")
+    print(f"ci_archived_path_portability_check_ready={summary.get('ci_archived_path_portability_check_ready')}")
     print(
         "ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready="
         f"{summary.get('ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready')}"

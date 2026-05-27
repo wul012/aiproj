@@ -1,0 +1,308 @@
+- generic [active] [ref=e1] [box=0,0,1350,3238]:
+  - banner [ref=e2] [box=0,0,1350,142]:
+    - heading "MiniGPT release readiness dashboard" [level=1] [ref=e3] [box=32,28,1286,41]
+    - paragraph [ref=e4] [box=32,85,1286,23]: d\464\解释\release-bundle-archived-path-carryover\release_bundle.json
+  - generic [ref=e5] [box=0,142,1350,424]:
+    - generic [ref=e6] [box=32,160,150,110]:
+      - generic [ref=e7] [box=47,175,121,17]: Readiness
+      - generic [ref=e8] [box=47,198,121,29]: ready
+    - generic [ref=e9] [box=194,160,150,110]:
+      - generic [ref=e10] [box=209,175,121,17]: Decision
+      - generic [ref=e11] [box=209,198,121,29]: ship
+    - generic [ref=e12] [box=357,160,150,110]:
+      - generic [ref=e13] [box=371,175,121,17]: Release
+      - generic [ref=e14] [box=371,198,121,58]: release-ready
+    - generic [ref=e15] [box=519,160,150,110]:
+      - generic [ref=e16] [box=533,175,121,17]: Gate
+      - generic [ref=e17] [box=533,198,121,29]: pass
+    - generic [ref=e18] [box=681,160,150,110]:
+      - generic [ref=e19] [box=696,175,121,17]: Audit
+      - generic [ref=e20] [box=696,198,121,29]: pass
+    - generic [ref=e21] [box=843,160,150,110]:
+      - generic [ref=e22] [box=858,175,121,17]: Score
+      - generic [ref=e23] [box=858,198,121,29]: "100"
+    - generic [ref=e24] [box=1006,160,150,110]:
+      - generic [ref=e25] [box=1020,175,121,17]: CI workflow
+      - generic [ref=e26] [box=1020,198,121,29]: pass
+    - generic [ref=e27] [box=1168,160,150,110]:
+      - generic [ref=e28] [box=1182,175,121,35]: CI order violations
+      - generic [ref=e29] [box=1182,216,121,29]: "0"
+    - generic [ref=e30] [box=32,283,150,99]:
+      - generic [ref=e31] [box=47,297,121,17]: CI boundary plan
+      - generic [ref=e32] [box=47,321,121,29]: "True"
+    - generic [ref=e33] [box=194,283,150,99]:
+      - generic [ref=e34] [box=209,297,121,17]: CI archived paths
+      - generic [ref=e35] [box=209,321,121,29]: "True"
+    - generic [ref=e36] [box=357,283,150,99]:
+      - generic [ref=e37] [box=371,297,121,17]: CI receipt plan
+      - generic [ref=e38] [box=371,321,121,29]: "True"
+    - generic [ref=e39] [box=519,283,150,99]:
+      - generic [ref=e40] [box=533,297,121,17]: Requests
+      - generic [ref=e41] [box=533,321,121,29]: pass
+    - generic [ref=e42] [box=681,283,150,99]:
+      - generic [ref=e43] [box=696,297,121,17]: Bench history
+      - generic [ref=e44] [box=696,321,121,29]: pass
+    - generic [ref=e45] [box=843,283,150,99]:
+      - generic [ref=e46] [box=858,297,121,35]: Bench design review
+      - generic [ref=e47] [box=858,338,121,29]: "0"
+    - generic [ref=e48] [box=1006,283,150,99]:
+      - generic [ref=e49] [box=1020,297,121,35]: Bench design changes
+      - generic [ref=e50] [box=1020,338,121,29]: "0"
+    - generic [ref=e51] [box=1168,283,150,99]:
+      - generic [ref=e52] [box=1182,297,121,17]: Bench readiness
+      - generic [ref=e53] [box=1182,321,121,29]: pass
+    - generic [ref=e54] [box=32,394,150,168]:
+      - generic [ref=e55] [box=47,408,121,35]: Bench readiness exit
+      - generic [ref=e56] [box=47,449,121,29]: "0"
+    - generic [ref=e57] [box=194,394,150,168]:
+      - generic [ref=e58] [box=209,408,121,17]: Bench boundary
+      - generic [ref=e59] [box=209,432,121,116]: standard-benchmark-candidate-evidence
+    - generic [ref=e60] [box=357,394,150,168]:
+      - generic [ref=e61] [box=371,408,121,17]: Coverage
+      - generic [ref=e62] [box=371,432,121,29]: pass
+    - generic [ref=e63] [box=519,394,150,168]:
+      - generic [ref=e64] [box=533,408,121,17]: Coverage %
+      - generic [ref=e65] [box=533,432,121,29]: "90.16"
+    - generic [ref=e66] [box=681,394,150,168]:
+      - generic [ref=e67] [box=696,408,121,17]: Maturity
+      - generic [ref=e68] [box=696,432,121,29]: pass
+  - generic [ref=e69] [box=0,566,1350,883]:
+    - article [ref=e70] [box=32,584,313,208]:
+      - generic [ref=e71] [box=49,602,54,23]: pass
+      - heading "Registry" [level=2] [ref=e72] [box=49,633,279,26]
+      - paragraph [ref=e73] [box=49,675,279,46]: runs=1; best=v461-receipt-plan-carryover; best_val_loss=0.8
+      - code [ref=e74] [box=49,738,279,38]: d\461\解释\source-inputs\registry\registry.json
+    - article [ref=e75] [box=357,584,313,208]:
+      - generic [ref=e76] [box=373,602,54,23]: pass
+      - heading "Release Bundle" [level=2] [ref=e77] [box=373,633,279,26]
+      - paragraph [ref=e78] [box=373,675,279,46]: release_status=release-ready; artifacts=15 available/7 missing
+      - code [ref=e79] [box=373,738,279,38]: d\464\解释\release-bundle-archived-path-carryover\release_bundle.json
+    - article [ref=e80] [box=681,584,313,208]:
+      - generic [ref=e81] [box=698,602,54,23]: pass
+      - heading "Project Audit" [level=2] [ref=e82] [box=698,633,279,26]
+      - paragraph [ref=e83] [box=698,675,279,46]: overall=pass; score=100; checks=17 pass/0 warn/0 fail
+      - code [ref=e84] [box=698,738,279,38]: d\464\解释\project-audit-archived-path-carryover\project_audit.json
+    - article [ref=e85] [box=1006,584,313,208]:
+      - generic [ref=e86] [box=1022,602,54,23]: pass
+      - heading "Release Gate" [level=2] [ref=e87] [box=1022,633,279,26]
+      - paragraph [ref=e88] [box=1022,675,279,46]: gate=pass; decision=approved; checks=12 pass/0 warn/0 fail
+      - code [ref=e89] [box=1022,738,279,38]: d\461\解释\source-inputs\release-gate\gate_report.json
+    - article [ref=e90] [box=32,804,313,421]:
+      - generic [ref=e91] [box=49,822,54,23]: pass
+      - heading "Request History Summary" [level=2] [ref=e92] [box=49,853,279,26]
+      - paragraph [ref=e93] [box=49,895,279,46]: status=pass; records=4; invalid=0; timeout_rate=0
+      - code [ref=e94] [box=49,958,279,38]: d\461\解释\source-inputs\request-history-summary\request_history_summary.json
+    - article [ref=e95] [box=357,804,313,421]:
+      - generic [ref=e96] [box=373,822,54,23]: pass
+      - heading "Benchmark History" [level=2] [ref=e97] [box=373,853,279,26]
+      - paragraph [ref=e98] [box=373,895,279,278]: status=pass; entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; boundary=standard-benchmark-candidate-evidence; gate_check=pass
+      - code [ref=e99] [box=373,1190,279,19]: missing
+    - article [ref=e100] [box=681,804,313,421]:
+      - generic [ref=e101] [box=698,822,54,23]: pass
+      - heading "Maturity Summary" [level=2] [ref=e102] [box=698,853,279,26]
+      - paragraph [ref=e103] [box=698,895,279,46]: overall=pass; current_version=461; average_level=4.6
+      - code [ref=e104] [box=698,958,279,38]: d\461\解释\source-inputs\maturity-summary\maturity_summary.json
+    - article [ref=e105] [box=1006,804,313,421]:
+      - generic [ref=e106] [box=1022,822,54,23]: pass
+      - heading "CI Workflow Hygiene" [level=2] [ref=e107] [box=1022,853,279,26]
+      - paragraph [ref=e108] [box=1022,895,279,209]: status=pass; failed_checks=0; node24_native=2; required_order=15; order_violations=0; plan_digest_gate_ready=True; boundary_gate_check_ready=True; boundary_gate_plan_check_ready=True; archived_path_portability_check_ready=True; receipt_failure_smoke_plan_check_ready=True; drift_contract_smoke_ready=True
+      - code [ref=e109] [box=1022,1120,279,38]: d\464\解释\ci-workflow-hygiene\ci_workflow_hygiene.json
+    - article [ref=e110] [box=32,1237,313,208]:
+      - generic [ref=e111] [box=49,1255,54,23]: pass
+      - heading "Test Coverage Gate" [level=2] [ref=e112] [box=49,1286,279,26]
+      - paragraph [ref=e113] [box=49,1329,279,46]: status=pass; coverage=90.16; fail_under=80; gap=0
+      - code [ref=e114] [box=49,1391,279,38]: d\461\解释\source-inputs\test-coverage\test_coverage_report.json
+  - generic [ref=e115] [box=32,1467,1286,169]:
+    - heading "Actions" [level=2] [ref=e116] [box=49,1492,1253,26]
+    - list [ref=e117] [box=49,1534,1253,70]:
+      - listitem [ref=e118] [box=89,1534,1213,23]: All readiness panels are clean; keep this dashboard with the release evidence.
+      - listitem [ref=e119] [box=89,1557,1213,23]: All audit checks passed; keep the audit with the model card as release evidence.
+      - listitem [ref=e120] [box=89,1580,1213,23]: Release evidence is complete; keep this bundle with the tagged version.
+  - generic [ref=e121] [box=32,1654,1286,1493]:
+    - heading "Evidence" [level=2] [ref=e122] [box=49,1678,1253,26]
+    - table [ref=e123] [box=49,1713,1253,1418]:
+      - rowgroup [ref=e124] [box=49,1713,1253,34]:
+        - row "Key Artifact Exists Kind Size" [ref=e125] [box=49,1713,1253,34]:
+          - columnheader "Key" [ref=e126] [box=49,1713,292,34]
+          - columnheader "Artifact" [ref=e127] [box=340,1713,727,34]
+          - columnheader "Exists" [ref=e128] [box=1068,1713,73,34]
+          - columnheader "Kind" [ref=e129] [box=1141,1713,73,34]
+          - columnheader "Size" [ref=e130] [box=1214,1713,88,34]
+      - rowgroup [ref=e131] [box=49,1746,1253,1384]:
+        - row "registry_json Registry JSON d\\461\\解释\\source-inputs\\registry\\registry.json yes JSON 730 B" [ref=e132] [box=49,1746,1253,63]:
+          - cell "registry_json" [ref=e133] [box=49,1746,292,63]
+          - cell "Registry JSON d\\461\\解释\\source-inputs\\registry\\registry.json" [ref=e134] [box=340,1746,727,63]:
+            - strong [ref=e135] [box=348,1757,110,19]: Registry JSON
+            - text: d\461\解释\source-inputs\registry\registry.json
+          - cell "yes" [ref=e136] [box=1068,1746,73,63]
+          - cell "JSON" [ref=e137] [box=1141,1746,73,63]
+          - cell "730 B" [ref=e138] [box=1214,1746,88,63]
+        - row "registry_csv Registry CSV d\\461\\解释\\source-inputs\\registry\\registry.csv yes CSV 35 B" [ref=e139] [box=49,1809,1253,63]:
+          - cell "registry_csv" [ref=e140] [box=49,1809,292,63]
+          - cell "Registry CSV d\\461\\解释\\source-inputs\\registry\\registry.csv" [ref=e141] [box=340,1809,727,63]:
+            - strong [ref=e142] [box=348,1820,100,19]: Registry CSV
+            - text: d\461\解释\source-inputs\registry\registry.csv
+          - cell "yes" [ref=e143] [box=1068,1809,73,63]
+          - cell "CSV" [ref=e144] [box=1141,1809,73,63]
+          - cell "35 B" [ref=e145] [box=1214,1809,88,63]
+        - row "registry_svg Registry SVG d\\461\\解释\\source-inputs\\registry\\registry.svg no SVG missing" [ref=e146] [box=49,1872,1253,63]:
+          - cell "registry_svg" [ref=e147] [box=49,1872,292,63]
+          - cell "Registry SVG d\\461\\解释\\source-inputs\\registry\\registry.svg" [ref=e148] [box=340,1872,727,63]:
+            - strong [ref=e149] [box=348,1882,101,19]: Registry SVG
+            - text: d\461\解释\source-inputs\registry\registry.svg
+          - cell "no" [ref=e150] [box=1068,1872,73,63]
+          - cell "SVG" [ref=e151] [box=1141,1872,73,63]
+          - cell "missing" [ref=e152] [box=1214,1872,88,63]
+        - row "registry_html Registry HTML d\\461\\解释\\source-inputs\\registry\\registry.html yes HTML 13 B" [ref=e153] [box=49,1935,1253,63]:
+          - cell "registry_html" [ref=e154] [box=49,1935,292,63]
+          - cell "Registry HTML d\\461\\解释\\source-inputs\\registry\\registry.html" [ref=e155] [box=340,1935,727,63]:
+            - strong [ref=e156] [box=348,1945,112,19]: Registry HTML
+            - text: d\461\解释\source-inputs\registry\registry.html
+          - cell "yes" [ref=e157] [box=1068,1935,73,63]
+          - cell "HTML" [ref=e158] [box=1141,1935,73,63]
+          - cell "13 B" [ref=e159] [box=1214,1935,88,63]
+        - row "model_card_json Model card JSON d\\461\\解释\\source-inputs\\model-card\\model_card.json yes JSON 418 B" [ref=e160] [box=49,1998,1253,63]:
+          - cell "model_card_json" [ref=e161] [box=49,1998,292,63]
+          - cell "Model card JSON d\\461\\解释\\source-inputs\\model-card\\model_card.json" [ref=e162] [box=340,1998,727,63]:
+            - strong [ref=e163] [box=348,2008,131,19]: Model card JSON
+            - text: d\461\解释\source-inputs\model-card\model_card.json
+          - cell "yes" [ref=e164] [box=1068,1998,73,63]
+          - cell "JSON" [ref=e165] [box=1141,1998,73,63]
+          - cell "418 B" [ref=e166] [box=1214,1998,88,63]
+        - row "model_card_md Model card Markdown d\\461\\解释\\source-inputs\\model-card\\model_card.md yes MD 12 B" [ref=e167] [box=49,2061,1253,63]:
+          - cell "model_card_md" [ref=e168] [box=49,2061,292,63]
+          - cell "Model card Markdown d\\461\\解释\\source-inputs\\model-card\\model_card.md" [ref=e169] [box=340,2061,727,63]:
+            - strong [ref=e170] [box=348,2071,167,19]: Model card Markdown
+            - text: d\461\解释\source-inputs\model-card\model_card.md
+          - cell "yes" [ref=e171] [box=1068,2061,73,63]
+          - cell "MD" [ref=e172] [box=1141,2061,73,63]
+          - cell "12 B" [ref=e173] [box=1214,2061,88,63]
+        - row "model_card_html Model card HTML d\\461\\解释\\source-inputs\\model-card\\model_card.html yes HTML 13 B" [ref=e174] [box=49,2124,1253,63]:
+          - cell "model_card_html" [ref=e175] [box=49,2124,292,63]
+          - cell "Model card HTML d\\461\\解释\\source-inputs\\model-card\\model_card.html" [ref=e176] [box=340,2124,727,63]:
+            - strong [ref=e177] [box=348,2134,133,19]: Model card HTML
+            - text: d\461\解释\source-inputs\model-card\model_card.html
+          - cell "yes" [ref=e178] [box=1068,2124,73,63]
+          - cell "HTML" [ref=e179] [box=1141,2124,73,63]
+          - cell "13 B" [ref=e180] [box=1214,2124,88,63]
+        - row "project_audit_json Project audit JSON d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.json yes JSON 14.6 KB" [ref=e181] [box=49,2187,1253,63]:
+          - cell "project_audit_json" [ref=e182] [box=49,2187,292,63]
+          - cell "Project audit JSON d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.json" [ref=e183] [box=340,2187,727,63]:
+            - strong [ref=e184] [box=348,2197,143,19]: Project audit JSON
+            - text: d\464\解释\project-audit-archived-path-carryover\project_audit.json
+          - cell "yes" [ref=e185] [box=1068,2187,73,63]
+          - cell "JSON" [ref=e186] [box=1141,2187,73,63]
+          - cell "14.6 KB" [ref=e187] [box=1214,2187,88,63]
+        - row "project_audit_md Project audit Markdown d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.md yes MD 3.8 KB" [ref=e188] [box=49,2250,1253,63]:
+          - cell "project_audit_md" [ref=e189] [box=49,2250,292,63]
+          - cell "Project audit Markdown d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.md" [ref=e190] [box=340,2250,727,63]:
+            - strong [ref=e191] [box=348,2260,179,19]: Project audit Markdown
+            - text: d\464\解释\project-audit-archived-path-carryover\project_audit.md
+          - cell "yes" [ref=e192] [box=1068,2250,73,63]
+          - cell "MD" [ref=e193] [box=1141,2250,73,63]
+          - cell "3.8 KB" [ref=e194] [box=1214,2250,88,63]
+        - row "project_audit_html Project audit HTML d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.html yes HTML 8.2 KB" [ref=e195] [box=49,2312,1253,63]:
+          - cell "project_audit_html" [ref=e196] [box=49,2312,292,63]
+          - cell "Project audit HTML d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.html" [ref=e197] [box=340,2312,727,63]:
+            - strong [ref=e198] [box=348,2323,145,19]: Project audit HTML
+            - text: d\464\解释\project-audit-archived-path-carryover\project_audit.html
+          - cell "yes" [ref=e199] [box=1068,2312,73,63]
+          - cell "HTML" [ref=e200] [box=1141,2312,73,63]
+          - cell "8.2 KB" [ref=e201] [box=1214,2312,88,63]
+        - row "request_history_summary_json Request history summary JSON d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.json yes JSON 414 B" [ref=e202] [box=49,2375,1253,63]:
+          - cell "request_history_summary_json" [ref=e203] [box=49,2375,292,63]
+          - cell "Request history summary JSON d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.json" [ref=e204] [box=340,2375,727,63]:
+            - strong [ref=e205] [box=348,2386,241,19]: Request history summary JSON
+            - text: d\461\解释\source-inputs\request-history-summary\request_history_summary.json
+          - cell "yes" [ref=e206] [box=1068,2375,73,63]
+          - cell "JSON" [ref=e207] [box=1141,2375,73,63]
+          - cell "414 B" [ref=e208] [box=1214,2375,88,63]
+        - row "request_history_summary_md Request history summary Markdown d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.md no MD missing" [ref=e209] [box=49,2438,1253,63]:
+          - cell "request_history_summary_md" [ref=e210] [box=49,2438,292,63]
+          - cell "Request history summary Markdown d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.md" [ref=e211] [box=340,2438,727,63]:
+            - strong [ref=e212] [box=348,2449,278,19]: Request history summary Markdown
+            - text: d\461\解释\source-inputs\request-history-summary\request_history_summary.md
+          - cell "no" [ref=e213] [box=1068,2438,73,63]
+          - cell "MD" [ref=e214] [box=1141,2438,73,63]
+          - cell "missing" [ref=e215] [box=1214,2438,88,63]
+        - row "request_history_summary_html Request history summary HTML d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.html no HTML missing" [ref=e216] [box=49,2501,1253,63]:
+          - cell "request_history_summary_html" [ref=e217] [box=49,2501,292,63]
+          - cell "Request history summary HTML d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.html" [ref=e218] [box=340,2501,727,63]:
+            - strong [ref=e219] [box=348,2512,243,19]: Request history summary HTML
+            - text: d\461\解释\source-inputs\request-history-summary\request_history_summary.html
+          - cell "no" [ref=e220] [box=1068,2501,73,63]
+          - cell "HTML" [ref=e221] [box=1141,2501,73,63]
+          - cell "missing" [ref=e222] [box=1214,2501,88,63]
+        - row "benchmark_history_json Benchmark history JSON d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.json yes JSON 1.1 KB" [ref=e223] [box=49,2564,1253,63]:
+          - cell "benchmark_history_json" [ref=e224] [box=49,2564,292,63]
+          - cell "Benchmark history JSON d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.json" [ref=e225] [box=340,2564,727,63]:
+            - strong [ref=e226] [box=348,2575,189,19]: Benchmark history JSON
+            - text: d\461\解释\source-inputs\benchmark-history\benchmark_history.json
+          - cell "yes" [ref=e227] [box=1068,2564,73,63]
+          - cell "JSON" [ref=e228] [box=1141,2564,73,63]
+          - cell "1.1 KB" [ref=e229] [box=1214,2564,88,63]
+        - row "benchmark_history_md Benchmark history Markdown d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.md no MD missing" [ref=e230] [box=49,2627,1253,63]:
+          - cell "benchmark_history_md" [ref=e231] [box=49,2627,292,63]
+          - cell "Benchmark history Markdown d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.md" [ref=e232] [box=340,2627,727,63]:
+            - strong [ref=e233] [box=348,2638,226,19]: Benchmark history Markdown
+            - text: d\461\解释\source-inputs\benchmark-history\benchmark_history.md
+          - cell "no" [ref=e234] [box=1068,2627,73,63]
+          - cell "MD" [ref=e235] [box=1141,2627,73,63]
+          - cell "missing" [ref=e236] [box=1214,2627,88,63]
+        - row "benchmark_history_html Benchmark history HTML d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.html no HTML missing" [ref=e237] [box=49,2690,1253,63]:
+          - cell "benchmark_history_html" [ref=e238] [box=49,2690,292,63]
+          - cell "Benchmark history HTML d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.html" [ref=e239] [box=340,2690,727,63]:
+            - strong [ref=e240] [box=348,2700,192,19]: Benchmark history HTML
+            - text: d\461\解释\source-inputs\benchmark-history\benchmark_history.html
+          - cell "no" [ref=e241] [box=1068,2690,73,63]
+          - cell "HTML" [ref=e242] [box=1141,2690,73,63]
+          - cell "missing" [ref=e243] [box=1214,2690,88,63]
+        - row "ci_workflow_hygiene_json CI workflow hygiene JSON d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.json yes JSON 19.3 KB" [ref=e244] [box=49,2753,1253,63]:
+          - cell "ci_workflow_hygiene_json" [ref=e245] [box=49,2753,292,63]
+          - cell "CI workflow hygiene JSON d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.json" [ref=e246] [box=340,2753,727,63]:
+            - strong [ref=e247] [box=348,2763,200,19]: CI workflow hygiene JSON
+            - text: d\464\解释\ci-workflow-hygiene\ci_workflow_hygiene.json
+          - cell "yes" [ref=e248] [box=1068,2753,73,63]
+          - cell "JSON" [ref=e249] [box=1141,2753,73,63]
+          - cell "19.3 KB" [ref=e250] [box=1214,2753,88,63]
+        - row "ci_workflow_hygiene_md CI workflow hygiene Markdown d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.md yes MD 9.7 KB" [ref=e251] [box=49,2816,1253,63]:
+          - cell "ci_workflow_hygiene_md" [ref=e252] [box=49,2816,292,63]
+          - cell "CI workflow hygiene Markdown d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.md" [ref=e253] [box=340,2816,727,63]:
+            - strong [ref=e254] [box=348,2826,237,19]: CI workflow hygiene Markdown
+            - text: d\464\解释\ci-workflow-hygiene\ci_workflow_hygiene.md
+          - cell "yes" [ref=e255] [box=1068,2816,73,63]
+          - cell "MD" [ref=e256] [box=1141,2816,73,63]
+          - cell "9.7 KB" [ref=e257] [box=1214,2816,88,63]
+        - row "ci_workflow_hygiene_html CI workflow hygiene HTML d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.html yes HTML 12.6 KB" [ref=e258] [box=49,2879,1253,63]:
+          - cell "ci_workflow_hygiene_html" [ref=e259] [box=49,2879,292,63]
+          - cell "CI workflow hygiene HTML d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.html" [ref=e260] [box=340,2879,727,63]:
+            - strong [ref=e261] [box=348,2889,202,19]: CI workflow hygiene HTML
+            - text: d\464\解释\ci-workflow-hygiene\ci_workflow_hygiene.html
+          - cell "yes" [ref=e262] [box=1068,2879,73,63]
+          - cell "HTML" [ref=e263] [box=1141,2879,73,63]
+          - cell "12.6 KB" [ref=e264] [box=1214,2879,88,63]
+        - row "test_coverage_report_json Test coverage report JSON d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.json yes JSON 327 B" [ref=e265] [box=49,2942,1253,63]:
+          - cell "test_coverage_report_json" [ref=e266] [box=49,2942,292,63]
+          - cell "Test coverage report JSON d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.json" [ref=e267] [box=340,2942,727,63]:
+            - strong [ref=e268] [box=348,2952,202,19]: Test coverage report JSON
+            - text: d\461\解释\source-inputs\test-coverage\test_coverage_report.json
+          - cell "yes" [ref=e269] [box=1068,2942,73,63]
+          - cell "JSON" [ref=e270] [box=1141,2942,73,63]
+          - cell "327 B" [ref=e271] [box=1214,2942,88,63]
+        - row "test_coverage_report_md Test coverage report Markdown d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.md no MD missing" [ref=e272] [box=49,3005,1253,63]:
+          - cell "test_coverage_report_md" [ref=e273] [box=49,3005,292,63]
+          - cell "Test coverage report Markdown d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.md" [ref=e274] [box=340,3005,727,63]:
+            - strong [ref=e275] [box=348,3015,239,19]: Test coverage report Markdown
+            - text: d\461\解释\source-inputs\test-coverage\test_coverage_report.md
+          - cell "no" [ref=e276] [box=1068,3005,73,63]
+          - cell "MD" [ref=e277] [box=1141,3005,73,63]
+          - cell "missing" [ref=e278] [box=1214,3005,88,63]
+        - row "test_coverage_report_html Test coverage report HTML d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.html no HTML missing" [ref=e279] [box=49,3068,1253,63]:
+          - cell "test_coverage_report_html" [ref=e280] [box=49,3068,292,63]
+          - cell "Test coverage report HTML d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.html" [ref=e281] [box=340,3068,727,63]:
+            - strong [ref=e282] [box=348,3078,205,19]: Test coverage report HTML
+            - text: d\461\解释\source-inputs\test-coverage\test_coverage_report.html
+          - cell "no" [ref=e283] [box=1068,3068,73,63]
+          - cell "HTML" [ref=e284] [box=1141,3068,73,63]
+          - cell "missing" [ref=e285] [box=1214,3068,88,63]
+  - contentinfo [ref=e286] [box=0,3165,1350,73]: Generated by MiniGPT release readiness dashboard.

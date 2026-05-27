@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v463.0.0` adds an archived path portability CI gate for Windows-authored receipt handoff sidecars.
+Version `v464.0.0` carries the archived path portability readiness signal into audit, bundle, and release readiness reports.
+
+## Latest v464 checkpoint
+
+- Project audit now summarizes `archived_path_portability_check_ready` as `ci_archived_path_portability_check_ready`.
+- Release bundle and release readiness now expose the same signal as `ci_workflow_archived_path_portability_check_ready`.
+- Markdown, HTML, and CLI outputs show the archived path portability readiness alongside the existing boundary-plan and receipt-plan CI readiness fields.
+- Focused tests cover direct CI report input, audit fallback, bundle-context fallback, and CLI diagnostics.
+- Archived audit, bundle, readiness, Playwright MCP snapshot, and screenshot evidence in `d/464`.
 
 ## Latest v463 checkpoint
 

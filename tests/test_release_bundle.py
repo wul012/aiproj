@@ -96,6 +96,7 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "ci_workflow_node24_actions": 2,
             "ci_workflow_required_order_count": 1,
             "ci_workflow_order_violation_count": 0,
+            "ci_archived_path_portability_check_ready": True,
             "ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": True,
             "ci_release_readiness_drift_contract_smoke_ready": True,
             "test_coverage_status": "pass",
@@ -126,6 +127,9 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "baseline_candidate_threshold_boundary_gate_plan_check_present": True,
             "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": True,
             "baseline_candidate_threshold_boundary_gate_plan_check_ready": True,
+            "archived_path_portability_check_present": True,
+            "archived_path_portability_check_order_ready": True,
+            "archived_path_portability_check_ready": True,
             "promoted_seed_receipt_contract_failure_smoke_plan_check_present": True,
             "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": True,
             "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": True,
@@ -263,6 +267,9 @@ def make_release_inputs(root: Path, name: str = "candidate") -> tuple[Path, Path
             "missing_step_count": 0,
             "required_order_count": 1,
             "order_violation_count": 0,
+            "archived_path_portability_check_present": True,
+            "archived_path_portability_check_order_ready": True,
+            "archived_path_portability_check_ready": True,
             "promoted_seed_receipt_contract_failure_smoke_plan_check_present": True,
             "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": True,
             "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": True,
@@ -355,6 +362,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertTrue(bundle["summary"]["ci_workflow_tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(bundle["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(bundle["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(bundle["summary"]["ci_workflow_archived_path_portability_check_ready"])
             self.assertTrue(bundle["summary"]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(bundle["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["summary"]["test_coverage_status"], "pass")
@@ -370,6 +378,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertTrue(bundle["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(bundle["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(bundle["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(bundle["ci_workflow_context"]["archived_path_portability_check_ready"])
             self.assertTrue(bundle["ci_workflow_context"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(bundle["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(bundle["benchmark_history_context"]["latest_decision_status"], "promote")
@@ -397,6 +406,7 @@ class ReleaseBundleTests(unittest.TestCase):
             self.assertEqual(bundle["summary"]["ci_workflow_node24_actions"], 2)
             self.assertEqual(bundle["summary"]["ci_workflow_order_violation_count"], 0)
             self.assertTrue(bundle["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(bundle["summary"]["ci_workflow_archived_path_portability_check_ready"])
             self.assertTrue(bundle["summary"]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertIn("ci_workflow_hygiene_html", {item["key"] for item in bundle["artifacts"]})
 
@@ -592,6 +602,7 @@ class ReleaseBundleTests(unittest.TestCase):
 
             self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
             self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
+            self.assertIn("ci_workflow_archived_path_portability_check_ready=True", completed.stdout)
             self.assertIn("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready=True", completed.stdout)
 
     def test_render_release_bundle_html_escapes_run_text(self) -> None:

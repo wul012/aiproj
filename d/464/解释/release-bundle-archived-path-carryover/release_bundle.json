@@ -1,0 +1,588 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT release bundle",
+  "release_name": "v464-archived-path-portability-carryover",
+  "generated_at": "2026-05-27T11:38:30Z",
+  "summary": {
+    "release_status": "release-ready",
+    "audit_status": "pass",
+    "audit_score_percent": 100.0,
+    "run_count": 1,
+    "best_run_name": "v461-receipt-plan-carryover",
+    "best_val_loss": 0.8,
+    "ready_runs": 1,
+    "request_history_status": "pass",
+    "request_history_records": 4,
+    "benchmark_history_status": "pass",
+    "benchmark_history_entries": 1,
+    "benchmark_history_ready": 1,
+    "benchmark_history_review": 0,
+    "benchmark_history_blocked": 0,
+    "benchmark_history_case_regressions": 0,
+    "benchmark_history_generation_flag_regressions": 0,
+    "benchmark_history_suite_design_non_comparison_ready_entries": 0,
+    "benchmark_history_design_comparison_changed_entries": 0,
+    "benchmark_history_readiness_requirement_status": "pass",
+    "benchmark_history_readiness_requirement_exit_code": 0,
+    "benchmark_history_readiness_requirement_failed_reasons": [],
+    "benchmark_history_model_quality_claim": "candidate_evidence",
+    "benchmark_history_latest_boundary": "standard-benchmark-candidate-evidence",
+    "ci_workflow_status": "pass",
+    "ci_workflow_failed_checks": 0,
+    "ci_workflow_node24_actions": 2,
+    "ci_workflow_required_order_count": 15,
+    "ci_workflow_order_violation_count": 0,
+    "ci_workflow_tiny_scorecard_plan_digest_gate_ready": true,
+    "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": true,
+    "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": true,
+    "ci_workflow_archived_path_portability_check_ready": true,
+    "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": true,
+    "ci_workflow_release_readiness_drift_contract_smoke_ready": true,
+    "test_coverage_status": "pass",
+    "test_coverage_decision": "continue_with_coverage_gate",
+    "test_coverage_percent": 90.16,
+    "test_coverage_fail_under": 80.0,
+    "test_coverage_gap": 0.0,
+    "available_artifacts": 15,
+    "missing_artifacts": 7
+  },
+  "inputs": {
+    "registry_path": "d\\461\\解释\\source-inputs\\registry\\registry.json",
+    "model_card_path": "d\\461\\解释\\source-inputs\\model-card\\model_card.json",
+    "project_audit_path": "d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.json",
+    "request_history_summary_path": "d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.json",
+    "benchmark_history_path": "d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.json",
+    "ci_workflow_hygiene_path": "d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.json",
+    "test_coverage_report_path": "d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.json"
+  },
+  "artifacts": [
+    {
+      "key": "registry_json",
+      "title": "Registry JSON",
+      "path": "d\\461\\解释\\source-inputs\\registry\\registry.json",
+      "kind": "JSON",
+      "description": "machine-readable run registry",
+      "exists": true,
+      "size_bytes": 730
+    },
+    {
+      "key": "registry_csv",
+      "title": "Registry CSV",
+      "path": "d\\461\\解释\\source-inputs\\registry\\registry.csv",
+      "kind": "CSV",
+      "description": "tabular run registry",
+      "exists": true,
+      "size_bytes": 35
+    },
+    {
+      "key": "registry_svg",
+      "title": "Registry SVG",
+      "path": "d\\461\\解释\\source-inputs\\registry\\registry.svg",
+      "kind": "SVG",
+      "description": "static run registry chart",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "registry_html",
+      "title": "Registry HTML",
+      "path": "d\\461\\解释\\source-inputs\\registry\\registry.html",
+      "kind": "HTML",
+      "description": "interactive run registry",
+      "exists": true,
+      "size_bytes": 13
+    },
+    {
+      "key": "model_card_json",
+      "title": "Model card JSON",
+      "path": "d\\461\\解释\\source-inputs\\model-card\\model_card.json",
+      "kind": "JSON",
+      "description": "project model card",
+      "exists": true,
+      "size_bytes": 418
+    },
+    {
+      "key": "model_card_md",
+      "title": "Model card Markdown",
+      "path": "d\\461\\解释\\source-inputs\\model-card\\model_card.md",
+      "kind": "MD",
+      "description": "markdown model card",
+      "exists": true,
+      "size_bytes": 12
+    },
+    {
+      "key": "model_card_html",
+      "title": "Model card HTML",
+      "path": "d\\461\\解释\\source-inputs\\model-card\\model_card.html",
+      "kind": "HTML",
+      "description": "browser model card",
+      "exists": true,
+      "size_bytes": 13
+    },
+    {
+      "key": "project_audit_json",
+      "title": "Project audit JSON",
+      "path": "d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.json",
+      "kind": "JSON",
+      "description": "machine-readable project audit",
+      "exists": true,
+      "size_bytes": 14943
+    },
+    {
+      "key": "project_audit_md",
+      "title": "Project audit Markdown",
+      "path": "d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.md",
+      "kind": "MD",
+      "description": "markdown project audit",
+      "exists": true,
+      "size_bytes": 3863
+    },
+    {
+      "key": "project_audit_html",
+      "title": "Project audit HTML",
+      "path": "d\\464\\解释\\project-audit-archived-path-carryover\\project_audit.html",
+      "kind": "HTML",
+      "description": "browser project audit",
+      "exists": true,
+      "size_bytes": 8369
+    },
+    {
+      "key": "request_history_summary_json",
+      "title": "Request history summary JSON",
+      "path": "d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.json",
+      "kind": "JSON",
+      "description": "machine-readable local inference request stability summary",
+      "exists": true,
+      "size_bytes": 414
+    },
+    {
+      "key": "request_history_summary_md",
+      "title": "Request history summary Markdown",
+      "path": "d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.md",
+      "kind": "MD",
+      "description": "markdown local inference request stability summary",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "request_history_summary_html",
+      "title": "Request history summary HTML",
+      "path": "d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.html",
+      "kind": "HTML",
+      "description": "browser local inference request stability summary",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "benchmark_history_json",
+      "title": "Benchmark history JSON",
+      "path": "d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.json",
+      "kind": "JSON",
+      "description": "machine-readable repeated benchmark comparison and decision history",
+      "exists": true,
+      "size_bytes": 1106
+    },
+    {
+      "key": "benchmark_history_md",
+      "title": "Benchmark history Markdown",
+      "path": "d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.md",
+      "kind": "MD",
+      "description": "markdown repeated benchmark comparison and decision history",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "benchmark_history_html",
+      "title": "Benchmark history HTML",
+      "path": "d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.html",
+      "kind": "HTML",
+      "description": "browser repeated benchmark comparison and decision history",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "ci_workflow_hygiene_json",
+      "title": "CI workflow hygiene JSON",
+      "path": "d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.json",
+      "kind": "JSON",
+      "description": "machine-readable CI workflow action/runtime policy hygiene report",
+      "exists": true,
+      "size_bytes": 19763
+    },
+    {
+      "key": "ci_workflow_hygiene_md",
+      "title": "CI workflow hygiene Markdown",
+      "path": "d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.md",
+      "kind": "MD",
+      "description": "markdown CI workflow action/runtime policy hygiene report",
+      "exists": true,
+      "size_bytes": 9971
+    },
+    {
+      "key": "ci_workflow_hygiene_html",
+      "title": "CI workflow hygiene HTML",
+      "path": "d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.html",
+      "kind": "HTML",
+      "description": "browser CI workflow action/runtime policy hygiene report",
+      "exists": true,
+      "size_bytes": 12890
+    },
+    {
+      "key": "test_coverage_report_json",
+      "title": "Test coverage report JSON",
+      "path": "d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.json",
+      "kind": "JSON",
+      "description": "machine-readable coverage gate report",
+      "exists": true,
+      "size_bytes": 327
+    },
+    {
+      "key": "test_coverage_report_md",
+      "title": "Test coverage report Markdown",
+      "path": "d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.md",
+      "kind": "MD",
+      "description": "markdown coverage gate report",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "test_coverage_report_html",
+      "title": "Test coverage report HTML",
+      "path": "d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.html",
+      "kind": "HTML",
+      "description": "browser coverage gate report",
+      "exists": false,
+      "size_bytes": null
+    }
+  ],
+  "top_runs": [
+    {
+      "name": "v461-receipt-plan-carryover",
+      "path": "D:\\aiproj\\d\\461\\解释\\carryover-pass-fixture\\run-a",
+      "best_val_loss_rank": 1,
+      "best_val_loss": 0.8,
+      "best_val_loss_delta": 0.0,
+      "dataset_quality": "pass",
+      "eval_suite_cases": 3,
+      "generation_quality_status": "pass",
+      "generation_quality_cases": 3,
+      "generation_quality_pass_count": 3,
+      "generation_quality_warn_count": 0,
+      "generation_quality_fail_count": 0,
+      "artifact_count": 12,
+      "checkpoint_exists": true,
+      "dashboard_exists": true,
+      "tags": [
+        "candidate"
+      ],
+      "note": "ready"
+    }
+  ],
+  "audit_checks": [
+    {
+      "id": "registry_runs",
+      "title": "Registry has runs",
+      "status": "pass",
+      "detail": "1 registered run(s).",
+      "evidence": {}
+    },
+    {
+      "id": "best_run",
+      "title": "Best run is identified",
+      "status": "pass",
+      "detail": "best=v461-receipt-plan-carryover",
+      "evidence": {}
+    },
+    {
+      "id": "comparable_loss",
+      "title": "Comparable loss coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "experiment_cards",
+      "title": "Experiment card coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "dataset_quality",
+      "title": "Dataset quality coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "eval_suite",
+      "title": "Eval suite coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "generation_quality",
+      "title": "Generation quality coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "checkpoints",
+      "title": "Checkpoint coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "dashboards",
+      "title": "Dashboard coverage",
+      "status": "pass",
+      "detail": "1/1 run(s).",
+      "evidence": {
+        "count": 1,
+        "total": 1,
+        "ratio": 1.0
+      }
+    },
+    {
+      "id": "model_card",
+      "title": "Model card is available",
+      "status": "pass",
+      "detail": "model_card.json loaded",
+      "evidence": {}
+    },
+    {
+      "id": "ready_run",
+      "title": "At least one ready run",
+      "status": "pass",
+      "detail": "1 ready run(s).",
+      "evidence": {}
+    },
+    {
+      "id": "request_history_summary",
+      "title": "Request history summary is clean",
+      "status": "pass",
+      "detail": "status=pass; records=4; invalid=0; timeout_rate=0; error_rate=0.",
+      "evidence": {
+        "status": "pass",
+        "total_log_records": 4,
+        "invalid_record_count": 0,
+        "timeout_rate": 0.0,
+        "bad_request_rate": 0.0,
+        "error_rate": 0.0,
+        "path": "d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.json"
+      }
+    },
+    {
+      "id": "benchmark_history",
+      "title": "Benchmark history is audit-ready",
+      "status": "pass",
+      "detail": "entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; latest_boundary=standard-benchmark-candidate-evidence.",
+      "evidence": {
+        "available": true,
+        "evidence_kind": "real-benchmark",
+        "entry_count": 1,
+        "promote_count": 1,
+        "ready_count": 1,
+        "review_count": 0,
+        "blocked_count": 0,
+        "case_regression_entry_count": 0,
+        "generation_quality_flag_regression_entry_count": 0,
+        "suite_design_non_comparison_ready_entry_count": 0,
+        "design_comparison_changed_entry_count": 0,
+        "best_candidate_name": "candidate",
+        "best_entry_name": "round-1",
+        "model_quality_claim": "candidate_evidence",
+        "readiness_requirement_status": "pass",
+        "readiness_requirement_decision": "continue",
+        "readiness_requirement_exit_code": 0,
+        "readiness_requirement_failed_reasons": [],
+        "latest_boundary": "standard-benchmark-candidate-evidence",
+        "latest_decision_status": "promote",
+        "latest_promotion_readiness": "ready",
+        "path": "d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.json"
+      }
+    },
+    {
+      "id": "ci_workflow_hygiene",
+      "title": "CI workflow hygiene is clean",
+      "status": "pass",
+      "detail": "status=pass; actions=2; node24_native=2; failed_checks=0; forbidden_env=0; missing_steps=0; order_violations=0; tiny_scorecard_plan_digest_gate_ready=True; baseline_candidate_threshold_boundary_gate_check_ready=True; baseline_candidate_threshold_boundary_gate_plan_check_ready=True; archived_path_portability_check_ready=True; promoted_seed_receipt_contract_failure_smoke_plan_check_ready=True; release_readiness_drift_contract_smoke_ready=True.",
+      "evidence": {
+        "status": "pass",
+        "decision": "continue_with_node24_native_ci",
+        "action_count": 2,
+        "node24_native_action_count": 2,
+        "failed_check_count": 0,
+        "forbidden_env_count": 0,
+        "missing_step_count": 0,
+        "required_order_count": 15,
+        "order_violation_count": 0,
+        "tiny_scorecard_plan_digest_gate_present": true,
+        "tiny_scorecard_plan_digest_gate_order_ready": true,
+        "tiny_scorecard_plan_digest_gate_ready": true,
+        "baseline_candidate_threshold_boundary_gate_check_present": true,
+        "baseline_candidate_threshold_boundary_gate_check_order_ready": true,
+        "baseline_candidate_threshold_boundary_gate_check_ready": true,
+        "baseline_candidate_threshold_boundary_gate_plan_check_present": true,
+        "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": true,
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready": true,
+        "archived_path_portability_check_present": true,
+        "archived_path_portability_check_order_ready": true,
+        "archived_path_portability_check_ready": true,
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_present": true,
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": true,
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": true,
+        "release_readiness_drift_contract_smoke_present": true,
+        "release_readiness_drift_contract_smoke_order_ready": true,
+        "release_readiness_drift_contract_smoke_ready": true,
+        "python_version": "3.11",
+        "path": "d\\464\\解释\\ci-workflow-hygiene\\ci_workflow_hygiene.json"
+      }
+    },
+    {
+      "id": "test_coverage_report",
+      "title": "Test coverage gate is clean",
+      "status": "pass",
+      "detail": "status=pass; decision=continue_with_coverage_gate; line_coverage=90.16; fail_under=80; coverage_gap=0; threshold_enabled=True.",
+      "evidence": {
+        "status": "pass",
+        "decision": "continue_with_coverage_gate",
+        "line_coverage_percent": 90.16,
+        "covered_lines": 12336,
+        "num_statements": 13683,
+        "missing_lines": 1347,
+        "file_count": 122,
+        "threshold_enabled": true,
+        "fail_under": 80.0,
+        "coverage_gap": 0.0,
+        "path": "d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.json"
+      }
+    },
+    {
+      "id": "non_pass_quality",
+      "title": "No non-pass dataset quality runs",
+      "status": "pass",
+      "detail": "all checked runs pass",
+      "evidence": {}
+    },
+    {
+      "id": "non_pass_generation_quality",
+      "title": "No non-pass generation quality runs",
+      "status": "pass",
+      "detail": "all analyzed runs pass",
+      "evidence": {}
+    }
+  ],
+  "request_history_context": {
+    "available": true,
+    "request_log": "D:\\aiproj\\d\\461\\解释\\carryover-pass-fixture\\runs\\minigpt\\inference_requests.jsonl",
+    "status": "pass",
+    "total_log_records": 4,
+    "invalid_record_count": 0,
+    "timeout_rate": 0.0,
+    "bad_request_rate": 0.0,
+    "error_rate": 0.0,
+    "latest_timestamp": "2026-05-14T00:00:00Z"
+  },
+  "benchmark_history_context": {
+    "available": true,
+    "evidence_kind": "real-benchmark",
+    "entry_count": 1,
+    "promote_count": 1,
+    "ready_count": 1,
+    "review_count": 0,
+    "blocked_count": 0,
+    "case_regression_entry_count": 0,
+    "generation_quality_flag_regression_entry_count": 0,
+    "suite_design_non_comparison_ready_entry_count": 0,
+    "design_comparison_changed_entry_count": 0,
+    "best_candidate_name": "candidate",
+    "best_entry_name": "round-1",
+    "model_quality_claim": "candidate_evidence",
+    "readiness_requirement_status": "pass",
+    "readiness_requirement_decision": "continue",
+    "readiness_requirement_exit_code": 0,
+    "readiness_requirement_failed_reasons": [],
+    "latest_boundary": "standard-benchmark-candidate-evidence",
+    "latest_decision_status": "promote",
+    "latest_promotion_readiness": "ready"
+  },
+  "ci_workflow_context": {
+    "available": true,
+    "workflow_path": ".github\\workflows\\ci.yml",
+    "status": "pass",
+    "decision": "continue_with_node24_native_ci",
+    "check_count": 33,
+    "failed_check_count": 0,
+    "action_count": 2,
+    "node24_native_action_count": 2,
+    "forbidden_env_count": 0,
+    "missing_step_count": 0,
+    "required_order_count": 15,
+    "order_violation_count": 0,
+    "tiny_scorecard_plan_digest_gate_present": true,
+    "tiny_scorecard_plan_digest_gate_order_ready": true,
+    "tiny_scorecard_plan_digest_gate_ready": true,
+    "baseline_candidate_threshold_boundary_gate_check_present": true,
+    "baseline_candidate_threshold_boundary_gate_check_order_ready": true,
+    "baseline_candidate_threshold_boundary_gate_check_ready": true,
+    "baseline_candidate_threshold_boundary_gate_plan_check_present": true,
+    "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": true,
+    "baseline_candidate_threshold_boundary_gate_plan_check_ready": true,
+    "archived_path_portability_check_present": true,
+    "archived_path_portability_check_order_ready": true,
+    "archived_path_portability_check_ready": true,
+    "promoted_seed_receipt_contract_failure_smoke_plan_check_present": true,
+    "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": true,
+    "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": true,
+    "release_readiness_drift_contract_smoke_present": true,
+    "release_readiness_drift_contract_smoke_order_ready": true,
+    "release_readiness_drift_contract_smoke_ready": true,
+    "python_version": "3.11"
+  },
+  "test_coverage_context": {
+    "available": true,
+    "status": "pass",
+    "decision": "continue_with_coverage_gate",
+    "line_coverage_percent": 90.16,
+    "covered_lines": 12336,
+    "num_statements": 13683,
+    "missing_lines": 1347,
+    "file_count": 122,
+    "threshold_enabled": true,
+    "fail_under": 80.0,
+    "coverage_gap": 0.0
+  },
+  "recommendations": [
+    "Release evidence is complete; keep this bundle with the tagged version.",
+    "All audit checks passed; keep the audit with the model card as release evidence."
+  ],
+  "warnings": []
+}
