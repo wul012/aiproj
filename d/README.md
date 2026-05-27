@@ -467,6 +467,9 @@ d/451/解释/说明.md
 d/452/图片
 d/452/解释/说明.md
  -> v452 promoted seed handoff receipt summary-check row metadata 的运行截图和解释
+d/453/图片
+d/453/解释/说明.md
+ -> v453 promoted seed handoff receipt contract check row metadata 的运行截图和解释
 ```
 
 写入规则：

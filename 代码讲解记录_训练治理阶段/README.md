@@ -461,6 +461,9 @@
 466-v452-promoted-receipt-summary-check-row-metadata.md
  -> v452 code explanation: extract receipt summary-check row helpers and add row-level metadata for field and sidecar comparisons.
 
+467-v453-promoted-receipt-contract-check-row-metadata.md
+ -> v453 code explanation: extract receipt contract check-row helpers and add row-level metadata to contract summary checks.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

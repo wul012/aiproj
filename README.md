@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v452.0.0` adds row-level metadata to promoted seed handoff receipt contract summary-check comparisons.
+Version `v453.0.0` adds row-level metadata to promoted seed handoff receipt contract summary contract checks.
+
+## Latest v453 checkpoint
+
+- Extracted receipt contract summary check-row construction into `promoted_training_scale_seed_handoff_receipt_contract_rows.py`.
+- `contract_checks` now include `check_type`, `target`, `status_domain`, `required`, `expected_kind`, and `actual_kind`.
+- Contract checks now distinguish `status_equals`, `schema_readiness`, `count_consistency`, and `selected_within_handoff` rows.
+- Markdown and HTML contract summary reports now display check type, target, and detail columns for contract checks.
+- The main contract summary module dropped from 517 lines to 450 lines while preserving existing CLI output and summary-check compatibility.
+- Archived contract summary, summary-check, Playwright MCP snapshot, and screenshot evidence in `d/453`.
 
 ## Latest v452 checkpoint
 
