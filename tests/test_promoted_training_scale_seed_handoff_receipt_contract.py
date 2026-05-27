@@ -53,7 +53,17 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertIn("receipt_contract_handoff_suite_design_count=2", text)
             self.assertIn("receipt_contract_schema_v4_ready=True", text)
             self.assertEqual(summary["failed_contract_check_count"], 0)
+            self.assertEqual(summary["contract_check_status_counts"], {"pass": 10, "fail": 0})
+            type_summary = {item["check_type"]: item for item in summary["contract_check_type_summary"]}
+            self.assertEqual(type_summary["schema_readiness"]["count"], 2)
+            self.assertEqual(type_summary["schema_readiness"]["failed_count"], 0)
+            self.assertEqual(type_summary["schema_readiness"]["required_count"], 2)
+            self.assertIn("receipt.schema_v4_ready", type_summary["schema_readiness"]["targets"])
+            self.assertEqual(type_summary["status_equals"]["count"], 2)
+            self.assertEqual(type_summary["count_consistency"]["count"], 3)
+            self.assertEqual(type_summary["selected_within_handoff"]["count"], 3)
             self.assertIn("receipt_contract_failed_check_count=0", text)
+            self.assertIn("receipt_contract_check_type_summary=", text)
             self.assertIn("schema_v4_ready", {item["id"] for item in summary["contract_checks"]})
             schema_check = next(item for item in summary["contract_checks"] if item["id"] == "schema_v4_ready")
             self.assertEqual(schema_check["check_type"], "schema_readiness")
@@ -67,8 +77,10 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
                 "| schema_v4_ready | schema_readiness | receipt.schema_v4_ready | receipt | pass | True | True |",
                 markdown,
             )
+            self.assertIn("| schema_readiness | pass | 2 | 2 | 0 | 2 |", markdown)
             self.assertIn("<td>handoff</td>", html)
             self.assertIn("<td>schema_readiness</td>", html)
+            self.assertIn("Contract Check Type Summary", html)
             self.assertIn("<td>schema_v4_ready</td>", html)
 
     def test_contract_summary_flattens_schema_v4_boundary_plan_check_scopes(self) -> None:
@@ -118,6 +130,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertEqual(summary["assurance_status"], "fail")
             self.assertGreaterEqual(summary["failed_contract_check_count"], 1)
             self.assertTrue(any(item["status"] == "fail" for item in summary["contract_checks"]))
+            type_summary = {item["check_type"]: item for item in summary["contract_check_type_summary"]}
+            self.assertEqual(type_summary["status_equals"]["status"], "fail")
+            self.assertGreaterEqual(type_summary["status_equals"]["failed_count"], 1)
             failed = next(item for item in summary["contract_checks"] if item["status"] == "fail")
             self.assertIn(failed["check_type"], {"status_equals", "count_consistency"})
             self.assertEqual(failed["status_domain"], ["pass", "fail"])

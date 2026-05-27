@@ -106,6 +106,36 @@ def failed_contract_check_count(checks: list[dict[str, Any]]) -> int:
     return sum(1 for check in checks if check.get("status") != "pass")
 
 
+def contract_check_status_counts(checks: list[dict[str, Any]]) -> dict[str, int]:
+    counts = {status: 0 for status in CONTRACT_CHECK_STATUS_DOMAIN}
+    for check in checks:
+        status = str(check.get("status") or "fail")
+        counts[status] = counts.get(status, 0) + 1
+    return counts
+
+
+def contract_check_type_summary(checks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for check_type in sorted({str(check.get("check_type") or "unknown") for check in checks}):
+        typed_checks = [check for check in checks if str(check.get("check_type") or "unknown") == check_type]
+        failed_count = failed_contract_check_count(typed_checks)
+        targets = sorted({str(check.get("target")) for check in typed_checks if check.get("target")})
+        rows.append(
+            {
+                "check_type": check_type,
+                "status": "pass" if failed_count == 0 else "fail",
+                "status_domain": CONTRACT_CHECK_STATUS_DOMAIN,
+                "count": len(typed_checks),
+                "passed_count": len(typed_checks) - failed_count,
+                "failed_count": failed_count,
+                "required_count": sum(1 for check in typed_checks if check.get("required")),
+                "targets": targets,
+                "target_count": len(targets),
+            }
+        )
+    return rows
+
+
 def contract_check_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
     value = summary.get("contract_checks")
     if not isinstance(value, list):
@@ -142,5 +172,7 @@ __all__ = [
     "build_contract_checks",
     "contract_check",
     "contract_check_rows",
+    "contract_check_status_counts",
+    "contract_check_type_summary",
     "failed_contract_check_count",
 ]

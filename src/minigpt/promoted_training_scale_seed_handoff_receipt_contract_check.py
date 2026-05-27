@@ -45,6 +45,8 @@ SUMMARY_COMPARE_KEYS = (
     "contract_checks",
     "contract_check_count",
     "failed_contract_check_count",
+    "contract_check_status_counts",
+    "contract_check_type_summary",
     "issue_count",
     "issues",
 )

@@ -61,6 +61,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(html_sidecar["expected_kind"], "sha256")
             self.assertEqual(html_sidecar["actual_kind"], "sha256")
             self.assertTrue(all(row["status"] == "pass" for row in check["sidecar_checks"]))
+            self.assertTrue(
+                any(row["key"] == "contract_check_type_summary" for row in check["summary_field_checks"])
+            )
             self.assertIn("receipt_contract_summary_check_status=pass", text)
             self.assertIn("receipt_contract_summary_check_failed_summary_field_check_count=0", text)
             self.assertIn("- Sidecar status: `pass`", markdown)

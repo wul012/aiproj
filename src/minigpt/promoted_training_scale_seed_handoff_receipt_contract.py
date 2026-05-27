@@ -7,9 +7,18 @@ from typing import Any
 from minigpt.promoted_training_scale_seed_handoff_assurance import (
     check_promoted_training_scale_seed_handoff_assurance,
 )
+from minigpt.promoted_training_scale_seed_handoff_receipt_contract_context import (
+    ci_boundary_plan_check_scopes,
+    contract_issues,
+    int_value,
+    row_list,
+    suite_design_scopes,
+)
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract_rows import (
     build_contract_checks,
     contract_check_rows,
+    contract_check_status_counts,
+    contract_check_type_summary,
     failed_contract_check_count,
 )
 from minigpt.report_utils import html_escape, string_list
@@ -23,13 +32,13 @@ CONTRACT_SUMMARY_HTML_FILENAME = "promoted_training_scale_seed_handoff_receipt_c
 
 def build_promoted_training_scale_seed_handoff_receipt_contract_summary(path: str | Path) -> dict[str, Any]:
     assurance = check_promoted_training_scale_seed_handoff_assurance(path)
-    scopes = _suite_design_scopes(assurance)
-    boundary_scopes = _ci_boundary_plan_check_scopes(assurance)
+    scopes = suite_design_scopes(assurance)
+    boundary_scopes = ci_boundary_plan_check_scopes(assurance)
     contract_checks = build_contract_checks(assurance, scopes, boundary_scopes)
-    issues = _contract_issues(assurance, scopes, boundary_scopes)
+    issues = contract_issues(assurance, scopes, boundary_scopes)
     status = "pass" if not issues else "fail"
     decision = str(assurance.get("decision") or "")
-    receipt_schema_version = _int(assurance.get("embedded_receipt_check_receipt_schema_version"))
+    receipt_schema_version = int_value(assurance.get("embedded_receipt_check_receipt_schema_version"))
     return {
         "contract_summary_version": 1,
         "status": status,
@@ -50,6 +59,8 @@ def build_promoted_training_scale_seed_handoff_receipt_contract_summary(path: st
         "contract_checks": contract_checks,
         "contract_check_count": len(contract_checks),
         "failed_contract_check_count": failed_contract_check_count(contract_checks),
+        "contract_check_status_counts": contract_check_status_counts(contract_checks),
+        "contract_check_type_summary": contract_check_type_summary(contract_checks),
         "issue_count": len(issues),
         "issues": issues,
         "assurance": assurance,
@@ -69,6 +80,14 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(su
         ("receipt_contract_sidecar_status", summary.get("embedded_receipt_check_sidecar_status")),
         ("receipt_contract_check_count", summary.get("contract_check_count")),
         ("receipt_contract_failed_check_count", summary.get("failed_contract_check_count")),
+        (
+            "receipt_contract_check_status_counts",
+            json.dumps(summary.get("contract_check_status_counts"), ensure_ascii=False),
+        ),
+        (
+            "receipt_contract_check_type_summary",
+            json.dumps(summary.get("contract_check_type_summary"), ensure_ascii=False),
+        ),
         ("receipt_contract_issue_count", summary.get("issue_count")),
         ("receipt_contract_issues", json.dumps(summary.get("issues"), ensure_ascii=False)),
         ("receipt_contract_checks", json.dumps(summary.get("contract_checks"), ensure_ascii=False)),
@@ -162,6 +181,21 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdow
             f"| {check.get('id')} | {check.get('check_type')} | {check.get('target')} | "
             f"{check.get('scope')} | {check.get('status')} | {check.get('expected')} | {check.get('actual')} |"
         )
+    lines.extend(
+        [
+            "",
+            "## Contract Check Type Summary",
+            "",
+            "| Type | Status | Count | Passed | Failed | Required | Targets |",
+            "| --- | --- | ---: | ---: | ---: | ---: | --- |",
+        ]
+    )
+    for row in _contract_check_type_summary_rows(summary):
+        targets = ", ".join(string_list(row.get("targets"))) or "none"
+        lines.append(
+            f"| {row.get('check_type')} | {row.get('status')} | {row.get('count')} | "
+            f"{row.get('passed_count')} | {row.get('failed_count')} | {row.get('required_count')} | {targets} |"
+        )
     return "\n".join(lines) + "\n"
 
 
@@ -196,6 +230,18 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(su
         f"<td>{html_escape(check.get('detail'))}</td>"
         "</tr>"
         for check in contract_check_rows(summary)
+    )
+    type_summary_rows = "\n".join(
+        "<tr>"
+        f"<td>{html_escape(row.get('check_type'))}</td>"
+        f"<td>{html_escape(row.get('status'))}</td>"
+        f"<td>{html_escape(row.get('count'))}</td>"
+        f"<td>{html_escape(row.get('passed_count'))}</td>"
+        f"<td>{html_escape(row.get('failed_count'))}</td>"
+        f"<td>{html_escape(row.get('required_count'))}</td>"
+        f"<td>{html_escape(', '.join(string_list(row.get('targets'))) or 'none')}</td>"
+        "</tr>"
+        for row in _contract_check_type_summary_rows(summary)
     )
     issues = string_list(summary.get("issues"))
     issue_items = "\n".join(f"<li>{html_escape(issue)}</li>" for issue in issues) or "<li>none</li>"
@@ -276,6 +322,19 @@ li {{ margin: 6px 0; }}
 </tbody>
 </table>
 </section>
+<section>
+<h2>Contract Check Type Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th><th>Status</th><th>Count</th><th>Passed</th><th>Failed</th><th>Required</th><th>Targets</th>
+</tr>
+</thead>
+<tbody>
+{type_summary_rows}
+</tbody>
+</table>
+</section>
 </main>
 </body>
 </html>
@@ -310,135 +369,16 @@ def write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs(
     return {key: str(value) for key, value in paths.items()}
 
 
-def _suite_design_scopes(assurance: dict[str, Any]) -> list[dict[str, Any]]:
-    return [
-        _suite_design_scope(
-            "selected",
-            assurance.get("embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"),
-            assurance.get("embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names"),
-        ),
-        _suite_design_scope(
-            "handoff",
-            assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count"),
-            assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names"),
-        ),
-        _suite_design_scope(
-            "comparison_ready",
-            assurance.get(
-                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"
-            ),
-            assurance.get(
-                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names"
-            ),
-        ),
-    ]
-
-
-def _suite_design_scope(scope: str, count: Any, names: Any) -> dict[str, Any]:
-    resolved_count = _int(count)
-    resolved_names = string_list(names)
-    return {
-        "scope": scope,
-        "count": resolved_count,
-        "names": resolved_names,
-        "name_count": len(resolved_names),
-        "count_matches_names": resolved_count == len(resolved_names),
-    }
-
-
-def _ci_boundary_plan_check_scopes(assurance: dict[str, Any]) -> list[dict[str, Any]]:
-    return [
-        _ci_boundary_plan_check_scope(
-            "selected",
-            assurance.get(
-                "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
-            ),
-            assurance.get(
-                "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"
-            ),
-        ),
-        _ci_boundary_plan_check_scope(
-            "handoff",
-            assurance.get(
-                "embedded_receipt_check_receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
-            ),
-            assurance.get(
-                "embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
-            ),
-        ),
-        _ci_boundary_plan_check_scope(
-            "comparison_ready",
-            assurance.get(
-                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
-            ),
-            assurance.get(
-                "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
-            ),
-        ),
-    ]
-
-
-def _ci_boundary_plan_check_scope(scope: str, handoff_count: Any, selected_count: Any) -> dict[str, Any]:
-    resolved_handoff_count = _int(handoff_count)
-    resolved_selected_count = _int(selected_count)
-    return {
-        "scope": scope,
-        "handoff_count": resolved_handoff_count,
-        "selected_count": resolved_selected_count,
-        "selected_within_handoff": 0 <= resolved_selected_count <= resolved_handoff_count,
-    }
-
-
-def _contract_issues(
-    assurance: dict[str, Any],
-    scopes: list[dict[str, Any]],
-    boundary_scopes: list[dict[str, Any]],
-) -> list[str]:
-    issues: list[str] = []
-    receipt_schema_version = _int(assurance.get("embedded_receipt_check_receipt_schema_version"))
-    if assurance.get("status") != "pass":
-        issues.append("handoff assurance must pass")
-        issues.extend(f"assurance.{issue}" for issue in string_list(assurance.get("issues")))
-    if receipt_schema_version < 3:
-        issues.append("receipt schema version must be >= 3 for suite-design name contract")
-    if receipt_schema_version < 4:
-        issues.append("receipt schema version must be >= 4 for CI boundary plan-check contract")
-    if assurance.get("embedded_receipt_check_sidecar_status") != "pass":
-        issues.append("embedded receipt-check sidecar status must pass")
-    for scope in scopes:
-        if not scope.get("count_matches_names"):
-            issues.append(
-                f"{scope.get('scope')} suite-design regression count {scope.get('count')} "
-                f"does not match name count {scope.get('name_count')}"
-            )
-    for scope in boundary_scopes:
-        if not scope.get("selected_within_handoff"):
-            issues.append(
-                f"{scope.get('scope')} CI boundary plan-check selected count {scope.get('selected_count')} "
-                f"exceeds handoff count {scope.get('handoff_count')}"
-            )
-    return issues
-
-
 def _scope_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
-    value = summary.get("suite_design_scopes")
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
+    return row_list(summary.get("suite_design_scopes"))
 
 
 def _boundary_scope_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
-    value = summary.get("ci_boundary_plan_check_scopes")
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
+    return row_list(summary.get("ci_boundary_plan_check_scopes"))
 
 
-def _int(value: Any) -> int:
-    try:
-        return int(float(value))
-    except (TypeError, ValueError):
-        return 0
+def _contract_check_type_summary_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
+    return row_list(summary.get("contract_check_type_summary"))
 
 
 __all__ = [
