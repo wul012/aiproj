@@ -485,6 +485,9 @@ d/457/解释/说明.md
 d/458/图片
 d/458/解释/说明.md
  -> v458 promoted seed receipt contract failure smoke CI hygiene gate 的运行截图和解释
+d/459/图片
+d/459/解释/说明.md
+ -> v459 promoted seed receipt contract failure smoke CI wrapper plan 的运行截图和解释
 ```
 
 写入规则：

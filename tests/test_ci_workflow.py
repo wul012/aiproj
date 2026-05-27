@@ -84,11 +84,7 @@ class CIWorkflowTests(unittest.TestCase):
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
-            "command:promoted_seed_receipt_contract_summary",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:promoted_seed_receipt_contract_summary_check_failure_smoke",
+            "command:promoted_seed_receipt_contract_failure_smoke",
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
@@ -120,11 +116,7 @@ class CIWorkflowTests(unittest.TestCase):
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
-            "order:promoted_seed_receipt_contract_summary_after_assurance",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:promoted_seed_receipt_contract_failure_smoke_after_summary",
+            "order:promoted_seed_receipt_contract_failure_smoke_after_assurance",
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
@@ -170,8 +162,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 11)
-            self.assertEqual(report["summary"]["required_step_count"], 13)
+            self.assertEqual(report["summary"]["missing_step_count"], 10)
+            self.assertEqual(report["summary"]["required_step_count"], 12)
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
@@ -200,9 +192,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
-                        "        run: |",
-                        "          python -B scripts/check_promoted_seed_handoff_receipt_contract.py d/448/解释/promoted-handoff --out-dir runs/promoted-seed-receipt-contract-summary-ci --allow-stop",
-                        "          python -B scripts/smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py runs/promoted-seed-receipt-contract-summary-ci --out-dir runs/promoted-seed-receipt-contract-summary-check-failure-smoke-ci --force",
+                        "        run: python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
@@ -253,9 +243,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
-                        "        run: |",
-                        "          python -B scripts/check_promoted_seed_handoff_receipt_contract.py d/448/解释/promoted-handoff --out-dir runs/promoted-seed-receipt-contract-summary-ci --allow-stop",
-                        "          python -B scripts/smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py runs/promoted-seed-receipt-contract-summary-ci --out-dir runs/promoted-seed-receipt-contract-summary-check-failure-smoke-ci --force",
+                        "        run: python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
                         "      - name: Tiny scorecard comparison inline check smoke",
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: CI tiny scorecard plan digest check",
@@ -322,9 +310,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
-                        "        run: |",
-                        "          python -B scripts/check_promoted_seed_handoff_receipt_contract.py d/448/解释/promoted-handoff --out-dir runs/promoted-seed-receipt-contract-summary-ci --allow-stop",
-                        "          python -B scripts/smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py runs/promoted-seed-receipt-contract-summary-ci --out-dir runs/promoted-seed-receipt-contract-summary-check-failure-smoke-ci --force",
+                        "        run: python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
                         "      - name: CI tiny scorecard plan digest check",
                         "        run: python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
                         "      - name: Baseline candidate threshold boundary gate check",

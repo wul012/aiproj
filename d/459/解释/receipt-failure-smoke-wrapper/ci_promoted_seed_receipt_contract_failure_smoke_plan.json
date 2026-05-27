@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "wrapper": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+  "status": "pass",
+  "decision": "receipt_contract_failure_smoke_verified",
+  "out_dir": "d\\459\\解释\\receipt-failure-smoke-wrapper",
+  "source_handoff": "d\\448\\解释\\promoted-handoff",
+  "summary_out_dir": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary",
+  "failure_smoke_out_dir": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke",
+  "flags": {
+    "force": true
+  },
+  "commands": [
+    {
+      "name": "receipt_contract_summary",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "D:\\aiproj\\scripts\\check_promoted_seed_handoff_receipt_contract.py",
+        "d\\448\\解释\\promoted-handoff",
+        "--out-dir",
+        "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary",
+        "--allow-stop"
+      ],
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\check_promoted_seed_handoff_receipt_contract.py d\\448\\解释\\promoted-handoff --out-dir d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary --allow-stop",
+      "returncode": 0
+    },
+    {
+      "name": "receipt_contract_failure_smoke",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "D:\\aiproj\\scripts\\smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py",
+        "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary",
+        "--out-dir",
+        "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke",
+        "--force"
+      ],
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary --out-dir d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke --force",
+      "returncode": 0
+    }
+  ],
+  "failure_smoke_summary": {
+    "available": true,
+    "parse_status": "pass",
+    "path": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.json",
+    "status": "pass",
+    "decision": "failure_matrix_verified",
+    "scenario_count": 4,
+    "verified_scenario_count": 4,
+    "failed_verification_count": 0,
+    "issue_count": 0
+  },
+  "artifact_digest": {
+    "artifacts": {
+      "contract_summary_json": {
+        "path": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.json",
+        "exists": true,
+        "size_bytes": 25354,
+        "sha256": "73db95c749effdc39d98b4d41c4dcb583c61d9585f786e7e810a503775128a3f"
+      },
+      "failure_smoke_json": {
+        "path": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.json",
+        "exists": true,
+        "size_bytes": 6738,
+        "sha256": "f0a01f1e782cf77978c245dcc90db92926800e7248149c9f69cc418c18612856"
+      },
+      "failure_smoke_csv": {
+        "path": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.csv",
+        "exists": true,
+        "size_bytes": 983,
+        "sha256": "bd906850dae370d5a86dcac49ba3edb425f6bf1c3bf32ca96bcc4340dfeda302"
+      },
+      "failure_smoke_html": {
+        "path": "d\\459\\解释\\receipt-failure-smoke-wrapper\\receipt-contract-failure-smoke\\promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.html",
+        "exists": true,
+        "size_bytes": 2808,
+        "sha256": "f9e8f6d24905625e071253234acbfbf1abad49195d7ab24faa22df30e3eee854"
+      }
+    }
+  }
+}

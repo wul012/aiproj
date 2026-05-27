@@ -22,8 +22,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
     "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
-    "promoted_seed_receipt_contract_summary": "scripts/check_promoted_seed_handoff_receipt_contract.py",
-    "promoted_seed_receipt_contract_summary_check_failure_smoke": "scripts/smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py",
+    "promoted_seed_receipt_contract_failure_smoke": "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
     "tiny_scorecard_comparison_inline_check_smoke": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
     "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
     "ci_tiny_scorecard_plan_digest_check": "scripts/check_ci_tiny_scorecard_plan.py",
@@ -42,16 +41,12 @@ REQUIRED_COMMAND_ORDER = {
         "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
         "scripts/run_test_coverage.py",
     ),
-    "promoted_seed_receipt_contract_summary_after_assurance": (
+    "promoted_seed_receipt_contract_failure_smoke_after_assurance": (
         "scripts/check_promoted_seed_handoff_assurance_smoke.py",
-        "scripts/check_promoted_seed_handoff_receipt_contract.py",
-    ),
-    "promoted_seed_receipt_contract_failure_smoke_after_summary": (
-        "scripts/check_promoted_seed_handoff_receipt_contract.py",
-        "scripts/smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py",
+        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
     ),
     "promoted_seed_receipt_contract_failure_smoke_before_coverage": (
-        "scripts/smoke_promoted_seed_handoff_receipt_contract_summary_check_failures.py",
+        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
         "scripts/run_test_coverage.py",
     ),
     "ci_tiny_scorecard_plan_check_after_smoke": (
@@ -188,10 +183,9 @@ def build_ci_workflow_hygiene_report(
         checks,
         "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
     )
-    receipt_failure_smoke_present = _check_passed(checks, "command:promoted_seed_receipt_contract_summary_check_failure_smoke")
+    receipt_failure_smoke_present = _check_passed(checks, "command:promoted_seed_receipt_contract_failure_smoke")
     receipt_failure_smoke_order_ready = (
-        _check_passed(checks, "order:promoted_seed_receipt_contract_summary_after_assurance")
-        and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_after_summary")
+        _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_after_assurance")
         and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_before_coverage")
     )
     drift_contract_smoke_present = _check_passed(checks, "command:release_readiness_drift_contract_smoke")
