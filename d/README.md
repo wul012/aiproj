@@ -473,6 +473,9 @@ d/453/解释/说明.md
 d/454/图片
 d/454/解释/说明.md
  -> v454 promoted seed handoff receipt contract check type summary 的运行截图和解释
+d/455/图片
+d/455/解释/说明.md
+ -> v455 promoted seed handoff receipt contract profile consistency checks 的运行截图和解释
 ```
 
 写入规则：

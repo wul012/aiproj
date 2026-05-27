@@ -44,6 +44,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["sidecar_status"], "pass")
             self.assertGreater(check["summary_field_check_count"], 0)
             self.assertEqual(check["failed_summary_field_check_count"], 0)
+            self.assertEqual(check["contract_profile_status"], "pass")
+            self.assertEqual(check["contract_profile_check_count"], 4)
+            self.assertEqual(check["failed_contract_profile_check_count"], 0)
             self.assertEqual(check["sidecar_check_count"], 3)
             self.assertEqual(check["failed_sidecar_check_count"], 0)
             contract_checks_row = next(row for row in check["summary_field_checks"] if row["key"] == "contract_checks")
@@ -64,13 +67,31 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertTrue(
                 any(row["key"] == "contract_check_type_summary" for row in check["summary_field_checks"])
             )
+            type_profile_row = next(
+                row for row in check["contract_profile_checks"] if row["key"] == "contract_check_type_summary"
+            )
+            self.assertEqual(type_profile_row["id"], "contract_profile.contract_check_type_summary")
+            self.assertEqual(type_profile_row["check_type"], "contract_profile_consistency")
+            self.assertEqual(type_profile_row["target"], "summary.contract_check_type_summary")
+            self.assertEqual(type_profile_row["status"], "pass")
+            self.assertEqual(type_profile_row["status_domain"], ["pass", "fail"])
+            self.assertTrue(type_profile_row["required"])
             self.assertIn("receipt_contract_summary_check_status=pass", text)
             self.assertIn("receipt_contract_summary_check_failed_summary_field_check_count=0", text)
+            self.assertIn("receipt_contract_summary_check_failed_contract_profile_check_count=0", text)
             self.assertIn("- Sidecar status: `pass`", markdown)
+            self.assertIn("- Failed contract profile checks: `0`", markdown)
             self.assertIn("| contract_checks | summary_field | summary.contract_checks | pass |", markdown)
+            self.assertIn(
+                "| contract_check_type_summary | contract_profile_consistency | "
+                "summary.contract_check_type_summary | pass |",
+                markdown,
+            )
             self.assertIn("<strong>pass</strong>", html)
             self.assertIn("<td>summary_field</td>", html)
             self.assertIn("<td>contract_checks</td>", html)
+            self.assertIn("<h2>Contract Profile Checks</h2>", html)
+            self.assertIn("<td>contract_profile_consistency</td>", html)
 
     def test_contract_summary_check_rejects_tampered_json(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -132,6 +153,33 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["status"], "fail")
             self.assertGreaterEqual(check["failed_summary_field_check_count"], 1)
             self.assertTrue(any("summary.contract_checks" in issue for issue in check["issues"]))
+
+    def test_contract_summary_check_rejects_tampered_contract_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = write_suite_design_handoff_with_sidecars(root)
+            summary_dir = write_summary(paths["handoff"], root)
+            summary_path = summary_dir / "promoted_training_scale_seed_handoff_receipt_contract_summary.json"
+            payload = json.loads(summary_path.read_text(encoding="utf-8"))
+            payload["contract_check_type_summary"][0]["failed_count"] = 7
+            summary_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+            check = check_promoted_training_scale_seed_handoff_receipt_contract_summary(summary_dir)
+
+            self.assertEqual(check["status"], "fail")
+            self.assertEqual(check["contract_profile_status"], "fail")
+            self.assertGreaterEqual(check["failed_contract_profile_check_count"], 1)
+            self.assertTrue(
+                any(
+                    row["target"] == "summary.contract_check_type_summary"
+                    and row["status"] == "fail"
+                    and row["check_type"] == "contract_profile_consistency"
+                    for row in check["contract_profile_checks"]
+                )
+            )
+            self.assertTrue(
+                any("contract profile summary.contract_check_type_summary" in issue for issue in check["issues"])
+            )
 
     def test_contract_summary_check_rejects_tampered_html_sidecar(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

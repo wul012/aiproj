@@ -13,6 +13,12 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (
     render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown,
     render_promoted_training_scale_seed_handoff_receipt_contract_summary_text,
 )
+from minigpt.promoted_training_scale_seed_handoff_receipt_contract_rows import (
+    contract_check_rows,
+    contract_check_status_counts,
+    contract_check_type_summary,
+    failed_contract_check_count,
+)
 
 
 CHECK_STATUS_DOMAIN = ["pass", "fail"]
@@ -53,6 +59,77 @@ def summary_field_issues(checks: list[dict[str, Any]]) -> list[str]:
         if check.get("status") != "pass":
             issues.append(
                 f"summary.{check.get('key')} expected {check.get('expected')!r} "
+                f"but got {check.get('actual')!r}"
+            )
+    return issues
+
+
+def contract_profile_checks(summary: dict[str, Any]) -> list[dict[str, Any]]:
+    rows = contract_check_rows(summary)
+    return [
+        contract_profile_check(
+            "contract_check_count",
+            "summary.contract_check_count",
+            len(rows),
+            summary.get("contract_check_count"),
+            "contract check count must match the embedded contract check rows",
+        ),
+        contract_profile_check(
+            "failed_contract_check_count",
+            "summary.failed_contract_check_count",
+            failed_contract_check_count(rows),
+            summary.get("failed_contract_check_count"),
+            "failed contract check count must match the embedded contract check rows",
+        ),
+        contract_profile_check(
+            "contract_check_status_counts",
+            "summary.contract_check_status_counts",
+            contract_check_status_counts(rows),
+            summary.get("contract_check_status_counts"),
+            "contract check status counts must be derived from the embedded contract check rows",
+        ),
+        contract_profile_check(
+            "contract_check_type_summary",
+            "summary.contract_check_type_summary",
+            contract_check_type_summary(rows),
+            summary.get("contract_check_type_summary"),
+            "contract check type summary must be derived from the embedded contract check rows",
+        ),
+    ]
+
+
+def contract_profile_check(
+    check_id: str,
+    target: str,
+    expected: Any,
+    actual: Any,
+    detail: str,
+) -> dict[str, Any]:
+    expected_value = stable_value(expected)
+    actual_value = stable_value(actual)
+    status = "pass" if expected_value == actual_value else "fail"
+    return {
+        "id": f"contract_profile.{check_id}",
+        "check_type": "contract_profile_consistency",
+        "target": target,
+        "key": check_id,
+        "status": status,
+        "status_domain": CHECK_STATUS_DOMAIN,
+        "required": True,
+        "expected": expected_value,
+        "actual": actual_value,
+        "expected_kind": value_kind(expected_value),
+        "actual_kind": value_kind(actual_value),
+        "detail": detail if status == "pass" else f"{detail}; aggregate differs from rows",
+    }
+
+
+def contract_profile_issues(checks: list[dict[str, Any]]) -> list[str]:
+    issues: list[str] = []
+    for check in checks:
+        if check.get("status") != "pass":
+            issues.append(
+                f"contract profile {check.get('target')} expected {check.get('expected')!r} "
                 f"but got {check.get('actual')!r}"
             )
     return issues
@@ -204,6 +281,8 @@ def value_kind(value: Any) -> str:
 __all__ = [
     "check_rows",
     "check_summary_sidecars",
+    "contract_profile_checks",
+    "contract_profile_issues",
     "failed_check_count",
     "json_text",
     "missing_sidecars",

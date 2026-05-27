@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v454.0.0` adds contract-check type and status profiles to promoted seed handoff receipt contract summaries.
+Version `v455.0.0` adds contract profile consistency checks to promoted seed handoff receipt contract summary-checks.
+
+## Latest v455 checkpoint
+
+- Receipt contract summary-checks now recompute `contract_check_count`, `failed_contract_check_count`, `contract_check_status_counts`, and `contract_check_type_summary` from embedded `contract_checks`.
+- New `contract_profile_consistency` rows expose whether each aggregate profile still matches the detailed contract check rows.
+- Summary-check text, Markdown, and HTML outputs now include contract profile status, counts, failed counts, and a dedicated `Contract Profile Checks` table.
+- Tampering `contract_check_type_summary` now fails the summary-check even before relying on sidecar digest comparison.
+- Archived contract summary, profile-aware summary-check, Playwright MCP snapshot, and screenshot evidence in `d/455`.
 
 ## Latest v454 checkpoint
 

@@ -11,6 +11,8 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_rows import (
     check_rows,
     check_summary_sidecars,
+    contract_profile_checks as build_contract_profile_checks,
+    contract_profile_issues,
     failed_check_count,
     json_text,
     missing_sidecars,
@@ -63,6 +65,8 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
     issues: list[str] = []
     expected: dict[str, Any] = {}
     summary_field_checks: list[dict[str, Any]] = []
+    contract_profile_checks = build_contract_profile_checks(actual)
+    issues.extend(contract_profile_issues(contract_profile_checks))
     if source_path is None:
         issues.append("handoff report path is required for receipt contract summary check")
     else:
@@ -94,6 +98,10 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         "summary_field_check_count": len(summary_field_checks),
         "failed_summary_field_check_count": failed_check_count(summary_field_checks),
         "summary_field_checks": summary_field_checks,
+        "contract_profile_status": "pass" if failed_check_count(contract_profile_checks) == 0 else "fail",
+        "contract_profile_check_count": len(contract_profile_checks),
+        "failed_contract_profile_check_count": failed_check_count(contract_profile_checks),
+        "contract_profile_checks": contract_profile_checks,
         "sidecar_status": sidecars.get("status"),
         "sidecar_check_count": len(sidecar_checks),
         "failed_sidecar_check_count": failed_check_count(sidecar_checks),
@@ -147,6 +155,12 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_t
             "receipt_contract_summary_check_failed_summary_field_check_count",
             check.get("failed_summary_field_check_count"),
         ),
+        ("receipt_contract_summary_check_contract_profile_status", check.get("contract_profile_status")),
+        ("receipt_contract_summary_check_contract_profile_check_count", check.get("contract_profile_check_count")),
+        (
+            "receipt_contract_summary_check_failed_contract_profile_check_count",
+            check.get("failed_contract_profile_check_count"),
+        ),
         ("receipt_contract_summary_check_sidecar_status", check.get("sidecar_status")),
         ("receipt_contract_summary_check_sidecar_check_count", check.get("sidecar_check_count")),
         ("receipt_contract_summary_check_failed_sidecar_check_count", check.get("failed_sidecar_check_count")),
@@ -155,6 +169,10 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_t
         (
             "receipt_contract_summary_check_summary_field_checks",
             json.dumps(check.get("summary_field_checks"), ensure_ascii=False),
+        ),
+        (
+            "receipt_contract_summary_check_contract_profile_checks",
+            json.dumps(check.get("contract_profile_checks"), ensure_ascii=False),
         ),
         (
             "receipt_contract_summary_check_sidecar_checks",
@@ -174,6 +192,7 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
         f"- Expected summary status: `{check.get('expected_summary_status')}`",
         f"- Sidecar status: `{check.get('sidecar_status')}`",
         f"- Failed summary field checks: `{check.get('failed_summary_field_check_count')}`",
+        f"- Failed contract profile checks: `{check.get('failed_contract_profile_check_count')}`",
         f"- Failed sidecar checks: `{check.get('failed_sidecar_check_count')}`",
         f"- Issue count: `{check.get('issue_count')}`",
         "",
@@ -183,6 +202,20 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
         "| --- | --- | --- | --- |",
     ]
     for row in check_rows(check.get("summary_field_checks")):
+        lines.append(
+            f"| {row.get('key')} | {row.get('check_type')} | "
+            f"{row.get('target')} | {row.get('status')} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Contract Profile Checks",
+            "",
+            "| Field | Type | Target | Status |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    for row in check_rows(check.get("contract_profile_checks")):
         lines.append(
             f"| {row.get('key')} | {row.get('check_type')} | "
             f"{row.get('target')} | {row.get('status')} |"
@@ -237,6 +270,18 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_h
         "</tr>"
         for row in check_rows(check.get("summary_field_checks"))
     )
+    contract_profile_rows = "\n".join(
+        "<tr>"
+        f"<td>{html_escape(row.get('key'))}</td>"
+        f"<td>{html_escape(row.get('check_type'))}</td>"
+        f"<td>{html_escape(row.get('target'))}</td>"
+        f"<td>{html_escape(row.get('status'))}</td>"
+        f"<td>{html_escape(json_text(row.get('expected')))}</td>"
+        f"<td>{html_escape(json_text(row.get('actual')))}</td>"
+        f"<td>{html_escape(row.get('detail'))}</td>"
+        "</tr>"
+        for row in check_rows(check.get("contract_profile_checks"))
+    )
     sidecar_rows = "\n".join(
         "<tr>"
         f"<td>{html_escape(row.get('id'))}</td>"
@@ -284,6 +329,7 @@ li {{ margin: 6px 0; }}
 <div class="metric"><span>Decision</span><strong>{html_escape(check.get('decision'))}</strong></div>
 <div class="metric"><span>Actual</span><strong>{html_escape(check.get('actual_summary_status'))}</strong></div>
 <div class="metric"><span>Expected</span><strong>{html_escape(check.get('expected_summary_status'))}</strong></div>
+<div class="metric"><span>Profile</span><strong>{html_escape(check.get('contract_profile_status'))}</strong></div>
 <div class="metric"><span>Sidecar</span><strong>{html_escape(check.get('sidecar_status'))}</strong></div>
 <div class="metric"><span>Issues</span><strong>{html_escape(check.get('issue_count'))}</strong></div>
 </div>
@@ -296,6 +342,17 @@ li {{ margin: 6px 0; }}
 </thead>
 <tbody>
 {summary_rows}
+</tbody>
+</table>
+</section>
+<section>
+<h2>Contract Profile Checks</h2>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Target</th><th>Status</th><th>Expected</th><th>Actual</th><th>Detail</th></tr>
+</thead>
+<tbody>
+{contract_profile_rows}
 </tbody>
 </table>
 </section>
