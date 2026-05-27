@@ -207,6 +207,9 @@ def make_ci_workflow_hygiene(root: Path, *, status: str = "pass") -> Path:
         "baseline_candidate_threshold_boundary_gate_plan_check_present": status == "pass",
         "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": status == "pass",
         "baseline_candidate_threshold_boundary_gate_plan_check_ready": status == "pass",
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_present": status == "pass",
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": status == "pass",
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": status == "pass",
         "release_readiness_drift_contract_smoke_present": status == "pass",
         "release_readiness_drift_contract_smoke_order_ready": status == "pass",
         "release_readiness_drift_contract_smoke_ready": status == "pass",
@@ -287,6 +290,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(audit["summary"]["ci_tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(audit["summary"]["ci_baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(audit["summary"]["ci_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(audit["summary"]["ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(audit["summary"]["ci_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["summary"]["test_coverage_status"], "pass")
             self.assertEqual(audit["summary"]["test_coverage_percent"], 90.16)
@@ -299,6 +303,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(audit["ci_workflow_context"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(audit["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(audit["ci_workflow_context"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(audit["ci_workflow_context"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(audit["ci_workflow_context"]["release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(audit["test_coverage_context"]["decision"], "continue_with_coverage_gate")
             self.assertIn("request_history_summary", {check["id"] for check in audit["checks"]})
@@ -440,6 +445,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("failed_checks=3", check["detail"])
             self.assertIn("tiny_scorecard_plan_digest_gate_ready=False", check["detail"])
             self.assertIn("baseline_candidate_threshold_boundary_gate_plan_check_ready=False", check["detail"])
+            self.assertIn("promoted_seed_receipt_contract_failure_smoke_plan_check_ready=False", check["detail"])
             self.assertIn("Generate or review ci_workflow_hygiene.json", " ".join(audit["recommendations"]))
 
     def test_build_project_audit_warns_for_test_coverage_gate_fail_status(self) -> None:
@@ -492,6 +498,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Checks", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("CI workflow hygiene", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("CI receipt failure-smoke plan check", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage report", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history readiness", Path(outputs["markdown"]).read_text(encoding="utf-8"))
@@ -504,6 +511,7 @@ class ProjectAuditTests(unittest.TestCase):
             self.assertIn("Bench design changes", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness", Path(outputs["html"]).read_text(encoding="utf-8"))
             self.assertIn("Bench readiness exit", Path(outputs["html"]).read_text(encoding="utf-8"))
+            self.assertIn("CI receipt plan", Path(outputs["html"]).read_text(encoding="utf-8"))
 
     def test_cli_prints_project_audit_benchmark_history_suite_design_summary(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -533,6 +541,7 @@ class ProjectAuditTests(unittest.TestCase):
 
             self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=0", completed.stdout)
             self.assertIn("benchmark_history_design_comparison_changed_entries=0", completed.stdout)
+            self.assertIn("ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready=None", completed.stdout)
 
     def test_render_project_audit_html_escapes_run_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -584,6 +593,9 @@ class ProjectAuditTests(unittest.TestCase):
                 "baseline_candidate_threshold_boundary_gate_plan_check_present": True,
                 "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": False,
                 "baseline_candidate_threshold_boundary_gate_plan_check_ready": False,
+                "promoted_seed_receipt_contract_failure_smoke_plan_check_present": True,
+                "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": False,
+                "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": False,
                 "python_version": "3.11",
             },
         }
@@ -657,11 +669,13 @@ class ProjectAuditTests(unittest.TestCase):
         self.assertFalse(ci_check["evidence"]["tiny_scorecard_plan_digest_gate_ready"])
         self.assertFalse(ci_check["evidence"]["baseline_candidate_threshold_boundary_gate_check_ready"])
         self.assertFalse(ci_check["evidence"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+        self.assertFalse(ci_check["evidence"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["python_version"], "3.11")
         self.assertEqual(build_ci_workflow_context(ci_hygiene)["order_violation_count"], 1)
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["tiny_scorecard_plan_digest_gate_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["baseline_candidate_threshold_boundary_gate_check_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+        self.assertFalse(build_ci_workflow_context(ci_hygiene)["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
         self.assertFalse(build_ci_workflow_context(ci_hygiene)["release_readiness_drift_contract_smoke_ready"])
         self.assertEqual(build_ci_workflow_hygiene_check(None, None)["status"], "warn")
         self.assertFalse(build_ci_workflow_context(None)["available"])

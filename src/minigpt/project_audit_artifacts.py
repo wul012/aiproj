@@ -57,6 +57,10 @@ def render_project_audit_markdown(audit: dict[str, Any]) -> str:
                 ("Benchmark history boundary", summary.get("benchmark_history_latest_boundary")),
                 ("CI workflow status", summary.get("ci_workflow_status")),
                 ("CI workflow failed checks", summary.get("ci_workflow_failed_checks")),
+                (
+                    "CI receipt failure-smoke plan check",
+                    summary.get("ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
+                ),
                 ("Test coverage status", summary.get("test_coverage_status")),
                 ("Test coverage percent", summary.get("test_coverage_percent")),
                 ("Test coverage fail under", summary.get("test_coverage_fail_under")),
@@ -107,6 +111,7 @@ def render_project_audit_html(audit: dict[str, Any]) -> str:
         ("Bench readiness", summary.get("benchmark_history_readiness_requirement_status")),
         ("Bench readiness exit", summary.get("benchmark_history_readiness_requirement_exit_code")),
         ("CI workflow", summary.get("ci_workflow_status")),
+        ("CI receipt plan", summary.get("ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready")),
         ("Coverage", summary.get("test_coverage_status")),
         ("Coverage %", summary.get("test_coverage_percent")),
         ("Pass", summary.get("pass_count")),

@@ -259,6 +259,11 @@ def _build_summary(
             audit_ci_context.get("baseline_candidate_threshold_boundary_gate_plan_check_ready"),
             audit_summary.get("ci_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
         ),
+        "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": first_present(
+            ci_summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
+            audit_ci_context.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
+            audit_summary.get("ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
+        ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready": first_present(
             ci_summary.get("release_readiness_drift_contract_smoke_ready"),
             audit_ci_context.get("release_readiness_drift_contract_smoke_ready"),

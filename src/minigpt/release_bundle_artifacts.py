@@ -66,6 +66,10 @@ def render_release_bundle_markdown(bundle: dict[str, Any]) -> str:
                     summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
                 ),
                 (
+                    "CI receipt failure-smoke plan check",
+                    summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
+                ),
+                (
                     "CI drift contract smoke",
                     summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready"),
                 ),
@@ -128,6 +132,7 @@ def render_release_bundle_html(bundle: dict[str, Any], *, base_dir: str | Path |
         ("CI workflow", summary.get("ci_workflow_status")),
         ("CI order violations", summary.get("ci_workflow_order_violation_count")),
         ("CI boundary plan", summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")),
+        ("CI receipt plan", summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready")),
         ("Coverage", summary.get("test_coverage_status")),
         ("Coverage %", summary.get("test_coverage_percent")),
         ("Artifacts", summary.get("available_artifacts")),

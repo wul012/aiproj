@@ -45,6 +45,10 @@ def render_release_readiness_markdown(report: dict[str, Any]) -> str:
                     "CI boundary plan check",
                     summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"),
                 ),
+                (
+                    "CI receipt failure-smoke plan check",
+                    summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"),
+                ),
                 ("CI drift contract smoke", summary.get("ci_workflow_release_readiness_drift_contract_smoke_ready")),
                 ("Request history", summary.get("request_history_status")),
                 ("Benchmark history", summary.get("benchmark_history_status")),
@@ -109,6 +113,7 @@ def render_release_readiness_html(report: dict[str, Any]) -> str:
         ("CI workflow", summary.get("ci_workflow_status")),
         ("CI order violations", summary.get("ci_workflow_order_violation_count")),
         ("CI boundary plan", summary.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready")),
+        ("CI receipt plan", summary.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready")),
         ("Requests", summary.get("request_history_status")),
         ("Bench history", summary.get("benchmark_history_status")),
         ("Bench design review", summary.get("benchmark_history_suite_design_non_comparison_ready_entries")),

@@ -491,6 +491,9 @@ d/459/解释/说明.md
 d/460/图片
 d/460/解释/说明.md
  -> v460 promoted seed receipt contract failure smoke CI wrapper plan check 的运行截图和解释
+d/461/图片
+d/461/解释/说明.md
+ -> v461 promoted seed receipt plan-check readiness carryover 的运行截图和解释
 ```
 
 写入规则：

@@ -94,6 +94,7 @@ def build_ci_workflow_hygiene_check(
     plan_digest_gate_ready = summary.get("tiny_scorecard_plan_digest_gate_ready")
     boundary_gate_check_ready = summary.get("baseline_candidate_threshold_boundary_gate_check_ready")
     boundary_gate_plan_check_ready = summary.get("baseline_candidate_threshold_boundary_gate_plan_check_ready")
+    receipt_failure_smoke_plan_check_ready = summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready")
     drift_contract_smoke_ready = summary.get("release_readiness_drift_contract_smoke_ready")
     forbidden_env = summary.get("forbidden_env_count")
     audit_status = "pass" if status == "pass" else "warn"
@@ -104,6 +105,7 @@ def build_ci_workflow_hygiene_check(
         f"tiny_scorecard_plan_digest_gate_ready={_fmt_any(plan_digest_gate_ready)}; "
         f"baseline_candidate_threshold_boundary_gate_check_ready={_fmt_any(boundary_gate_check_ready)}; "
         f"baseline_candidate_threshold_boundary_gate_plan_check_ready={_fmt_any(boundary_gate_plan_check_ready)}; "
+        f"promoted_seed_receipt_contract_failure_smoke_plan_check_ready={_fmt_any(receipt_failure_smoke_plan_check_ready)}; "
         f"release_readiness_drift_contract_smoke_ready={_fmt_any(drift_contract_smoke_ready)}."
     )
     return _check(
@@ -138,6 +140,13 @@ def build_ci_workflow_hygiene_check(
                 "baseline_candidate_threshold_boundary_gate_plan_check_order_ready"
             ),
             "baseline_candidate_threshold_boundary_gate_plan_check_ready": boundary_gate_plan_check_ready,
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_present": summary.get(
+                "promoted_seed_receipt_contract_failure_smoke_plan_check_present"
+            ),
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": summary.get(
+                "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready"
+            ),
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": receipt_failure_smoke_plan_check_ready,
             "release_readiness_drift_contract_smoke_present": summary.get("release_readiness_drift_contract_smoke_present"),
             "release_readiness_drift_contract_smoke_order_ready": summary.get("release_readiness_drift_contract_smoke_order_ready"),
             "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_ready,
@@ -167,6 +176,9 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
             "baseline_candidate_threshold_boundary_gate_plan_check_present": None,
             "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": None,
             "baseline_candidate_threshold_boundary_gate_plan_check_ready": None,
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_present": None,
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": None,
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": None,
             "release_readiness_drift_contract_smoke_present": None,
             "release_readiness_drift_contract_smoke_order_ready": None,
             "release_readiness_drift_contract_smoke_ready": None,
@@ -203,6 +215,15 @@ def build_ci_workflow_context(ci_workflow_hygiene: dict[str, Any] | None) -> dic
         ),
         "baseline_candidate_threshold_boundary_gate_plan_check_ready": summary.get(
             "baseline_candidate_threshold_boundary_gate_plan_check_ready"
+        ),
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_present": summary.get(
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_present"
+        ),
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": summary.get(
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready"
+        ),
+        "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": summary.get(
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_ready"
         ),
         "release_readiness_drift_contract_smoke_present": summary.get("release_readiness_drift_contract_smoke_present"),
         "release_readiness_drift_contract_smoke_order_ready": summary.get("release_readiness_drift_contract_smoke_order_ready"),

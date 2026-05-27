@@ -485,6 +485,9 @@
 474-v460-promoted-receipt-failure-smoke-plan-check.md
  -> v460 code explanation: validate the receipt failure-smoke wrapper plan through command return codes, failure-smoke summary fields, artifact digests, and CI workflow hygiene order checks.
 
+475-v461-promoted-receipt-plan-check-carryover.md
+ -> v461 code explanation: carry the receipt failure-smoke plan-check readiness field from CI hygiene into audit, release bundle, and release readiness evidence.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

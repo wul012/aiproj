@@ -149,6 +149,9 @@ def make_readiness_inputs(
                 "ci_workflow_tiny_scorecard_plan_digest_gate_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
+                "ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": (
+                    ci_workflow_status == "pass" if include_ci_workflow else None
+                ),
                 "ci_workflow_release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "test_coverage_status": test_coverage_status if include_test_coverage else None,
                 "test_coverage_percent": 90.17 if include_test_coverage else None,
@@ -209,6 +212,9 @@ def make_readiness_inputs(
                     "baseline_candidate_threshold_boundary_gate_plan_check_present": ci_workflow_status == "pass",
                     "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": ci_workflow_status == "pass",
                     "baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_workflow_status == "pass",
+                    "promoted_seed_receipt_contract_failure_smoke_plan_check_present": ci_workflow_status == "pass",
+                    "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": ci_workflow_status == "pass",
+                    "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": ci_workflow_status == "pass",
                     "release_readiness_drift_contract_smoke_present": ci_workflow_status == "pass",
                     "release_readiness_drift_contract_smoke_order_ready": ci_workflow_status == "pass",
                     "release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass",
@@ -341,6 +347,9 @@ def make_readiness_inputs(
                 "ci_workflow_tiny_scorecard_plan_digest_gate_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
+                "ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": (
+                    ci_workflow_status == "pass" if include_ci_workflow else None
+                ),
                 "ci_workflow_release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "test_coverage_status": test_coverage_status if include_test_coverage else None,
                 "test_coverage_percent": 90.17 if include_test_coverage else None,
@@ -366,6 +375,7 @@ def make_readiness_inputs(
                 "tiny_scorecard_plan_digest_gate_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "baseline_candidate_threshold_boundary_gate_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
+                "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "release_readiness_drift_contract_smoke_ready": ci_workflow_status == "pass" if include_ci_workflow else None,
                 "path": str(ci_workflow_path) if include_ci_workflow else None,
             },
@@ -402,6 +412,7 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertTrue(report["summary"]["ci_workflow_tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(report["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(report["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(report["summary"]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(report["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             self.assertEqual(report["summary"]["test_coverage_status"], "pass")
             self.assertEqual(report["summary"]["test_coverage_percent"], 90.17)
@@ -415,6 +426,7 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertIn("ci_workflow_hygiene", {panel["key"] for panel in report["panels"]})
             ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
             self.assertIn("boundary_gate_plan_check_ready=True", ci_panel["detail"])
+            self.assertIn("receipt_failure_smoke_plan_check_ready=True", ci_panel["detail"])
             self.assertIn("drift_contract_smoke_ready=True", ci_panel["detail"])
             self.assertIn("test_coverage", {panel["key"] for panel in report["panels"]})
             self.assertIn("benchmark_history", {panel["key"] for panel in report["panels"]})
@@ -433,11 +445,13 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertEqual(report["summary"]["ci_workflow_node24_actions"], 2)
             self.assertEqual(report["summary"]["ci_workflow_order_violation_count"], 0)
             self.assertTrue(report["summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(report["summary"]["ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertTrue(report["summary"]["ci_workflow_release_readiness_drift_contract_smoke_ready"])
             ci_panel = next(panel for panel in report["panels"] if panel["key"] == "ci_workflow_hygiene")
             self.assertEqual(ci_panel["status"], "pass")
             self.assertIn("order_violations=0", ci_panel["detail"])
             self.assertIn("boundary_gate_plan_check_ready=True", ci_panel["detail"])
+            self.assertIn("receipt_failure_smoke_plan_check_ready=True", ci_panel["detail"])
             self.assertIn("drift_contract_smoke_ready=True", ci_panel["detail"])
             self.assertIn("source=bundle summary/context", ci_panel["detail"])
 
@@ -616,9 +630,11 @@ class ReleaseReadinessTests(unittest.TestCase):
             self.assertTrue(Path(outputs["html"]).exists())
             self.assertIn("## Panels", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Test coverage", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("CI receipt failure-smoke plan check", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("Benchmark history suite-design not-ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("&lt;Readiness&gt;", html)
             self.assertIn("Bench design review", html)
+            self.assertIn("CI receipt plan", html)
             self.assertNotIn("<h1><Readiness>", html)
 
     def test_build_release_readiness_cli_prints_suite_design_fields(self) -> None:
@@ -648,6 +664,7 @@ class ReleaseReadinessTests(unittest.TestCase):
 
             self.assertIn("benchmark_history_suite_design_non_comparison_ready_entries=3", completed.stdout)
             self.assertIn("benchmark_history_design_comparison_changed_entries=4", completed.stdout)
+            self.assertIn("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready=True", completed.stdout)
             self.assertIn("readiness_status=review", completed.stdout)
 
     def test_release_readiness_keeps_legacy_artifact_exports(self) -> None:

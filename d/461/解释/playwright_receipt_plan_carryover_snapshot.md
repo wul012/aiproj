@@ -1,0 +1,146 @@
+- generic [active] [ref=e1] [box=0,0,1350,3238]:
+  - banner [ref=e2] [box=0,0,1350,142]:
+    - heading "MiniGPT release readiness dashboard" [level=1] [ref=e3] [box=32,28,1286,41]
+    - paragraph [ref=e4] [box=32,85,1286,23]: D:\aiproj\d\461\解释\release-bundle-carryover\release_bundle.json
+  - generic [ref=e5] [box=0,142,1350,424]:
+    - generic [ref=e6] [box=32,160,150,110]:
+      - generic [ref=e7] [box=47,175,121,17]: Readiness
+      - generic [ref=e8] [box=47,198,121,29]: ready
+    - generic [ref=e9] [box=194,160,150,110]:
+      - generic [ref=e10] [box=209,175,121,17]: Decision
+      - generic [ref=e11] [box=209,198,121,29]: ship
+    - generic [ref=e12] [box=357,160,150,110]:
+      - generic [ref=e13] [box=371,175,121,17]: Release
+      - generic [ref=e14] [box=371,198,121,58]: release-ready
+    - generic [ref=e15] [box=519,160,150,110]:
+      - generic [ref=e16] [box=533,175,121,17]: Gate
+      - generic [ref=e17] [box=533,198,121,29]: pass
+    - generic [ref=e18] [box=681,160,150,110]:
+      - generic [ref=e19] [box=696,175,121,17]: Audit
+      - generic [ref=e20] [box=696,198,121,29]: pass
+    - generic [ref=e21] [box=843,160,150,110]:
+      - generic [ref=e22] [box=858,175,121,17]: Score
+      - generic [ref=e23] [box=858,198,121,29]: "100"
+    - generic [ref=e24] [box=1006,160,150,110]:
+      - generic [ref=e25] [box=1020,175,121,17]: CI workflow
+      - generic [ref=e26] [box=1020,198,121,29]: pass
+    - generic [ref=e27] [box=1168,160,150,110]:
+      - generic [ref=e28] [box=1182,175,121,35]: CI order violations
+      - generic [ref=e29] [box=1182,216,121,29]: "0"
+    - generic [ref=e30] [box=32,283,150,99]:
+      - generic [ref=e31] [box=47,297,121,17]: CI boundary plan
+      - generic [ref=e32] [box=47,321,121,29]: "True"
+    - generic [ref=e33] [box=194,283,150,99]:
+      - generic [ref=e34] [box=209,297,121,17]: CI receipt plan
+      - generic [ref=e35] [box=209,321,121,29]: "True"
+    - generic [ref=e36] [box=357,283,150,99]:
+      - generic [ref=e37] [box=371,297,121,17]: Requests
+      - generic [ref=e38] [box=371,321,121,29]: pass
+    - generic [ref=e39] [box=519,283,150,99]:
+      - generic [ref=e40] [box=533,297,121,17]: Bench history
+      - generic [ref=e41] [box=533,321,121,29]: pass
+    - generic [ref=e42] [box=681,283,150,99]:
+      - generic [ref=e43] [box=696,297,121,35]: Bench design review
+      - generic [ref=e44] [box=696,338,121,29]: "0"
+    - generic [ref=e45] [box=843,283,150,99]:
+      - generic [ref=e46] [box=858,297,121,35]: Bench design changes
+      - generic [ref=e47] [box=858,338,121,29]: "0"
+    - generic [ref=e48] [box=1006,283,150,99]:
+      - generic [ref=e49] [box=1020,297,121,17]: Bench readiness
+      - generic [ref=e50] [box=1020,321,121,29]: pass
+    - generic [ref=e51] [box=1168,283,150,99]:
+      - generic [ref=e52] [box=1182,297,121,35]: Bench readiness exit
+      - generic [ref=e53] [box=1182,338,121,29]: "0"
+    - generic [ref=e54] [box=32,394,150,168]:
+      - generic [ref=e55] [box=47,408,121,17]: Bench boundary
+      - generic [ref=e56] [box=47,432,121,116]: standard-benchmark-candidate-evidence
+    - generic [ref=e57] [box=194,394,150,168]:
+      - generic [ref=e58] [box=209,408,121,17]: Coverage
+      - generic [ref=e59] [box=209,432,121,29]: pass
+    - generic [ref=e60] [box=357,394,150,168]:
+      - generic [ref=e61] [box=371,408,121,17]: Coverage %
+      - generic [ref=e62] [box=371,432,121,29]: "90.16"
+    - generic [ref=e63] [box=519,394,150,168]:
+      - generic [ref=e64] [box=533,408,121,17]: Maturity
+      - generic [ref=e65] [box=533,432,121,29]: pass
+  - generic [ref=e66] [box=0,566,1350,883]:
+    - article [ref=e67] [box=32,584,313,208]:
+      - generic [ref=e68] [box=49,602,54,23]: pass
+      - heading "Registry" [level=2] [ref=e69] [box=49,633,279,26]
+      - paragraph [ref=e70] [box=49,675,279,46]: runs=1; best=v461-receipt-plan-carryover; best_val_loss=0.8
+      - code [ref=e71] [box=49,738,279,38]: D:\aiproj\d\461\解释\source-inputs\registry\registry.json
+    - article [ref=e72] [box=357,584,313,208]:
+      - generic [ref=e73] [box=373,602,54,23]: pass
+      - heading "Release Bundle" [level=2] [ref=e74] [box=373,633,279,26]
+      - paragraph [ref=e75] [box=373,675,279,46]: release_status=release-ready; artifacts=13 available/9 missing
+      - code [ref=e76] [box=373,738,279,38]: D:\aiproj\d\461\解释\release-bundle-carryover\release_bundle.json
+    - article [ref=e77] [box=681,584,313,208]:
+      - generic [ref=e78] [box=698,602,54,23]: pass
+      - heading "Project Audit" [level=2] [ref=e79] [box=698,633,279,26]
+      - paragraph [ref=e80] [box=698,675,279,46]: overall=pass; score=100; checks=17 pass/0 warn/0 fail
+      - code [ref=e81] [box=698,738,279,38]: D:\aiproj\d\461\解释\project-audit-carryover\project_audit.json
+    - article [ref=e82] [box=1006,584,313,208]:
+      - generic [ref=e83] [box=1022,602,54,23]: pass
+      - heading "Release Gate" [level=2] [ref=e84] [box=1022,633,279,26]
+      - paragraph [ref=e85] [box=1022,675,279,46]: gate=pass; decision=approved; checks=12 pass/0 warn/0 fail
+      - code [ref=e86] [box=1022,738,279,38]: D:\aiproj\d\461\解释\source-inputs\release-gate\gate_report.json
+    - article [ref=e87] [box=32,804,313,421]:
+      - generic [ref=e88] [box=49,822,54,23]: pass
+      - heading "Request History Summary" [level=2] [ref=e89] [box=49,853,279,26]
+      - paragraph [ref=e90] [box=49,895,279,46]: status=pass; records=4; invalid=0; timeout_rate=0
+      - code [ref=e91] [box=49,958,279,57]: D:\aiproj\d\461\解释\source-inputs\request-history-summary\request_history_summary.json
+    - article [ref=e92] [box=357,804,313,421]:
+      - generic [ref=e93] [box=373,822,54,23]: pass
+      - heading "Benchmark History" [level=2] [ref=e94] [box=373,853,279,26]
+      - paragraph [ref=e95] [box=373,895,279,278]: status=pass; entries=1; ready=1; review=0; blocked=0; case_regressions=0; generation_flag_regressions=0; suite_design_not_ready=0; design_comparison_changed=0; readiness_requirement=pass; readiness_exit=0; readiness_failed_reasons=none; model_quality_claim=candidate_evidence; boundary=standard-benchmark-candidate-evidence; gate_check=pass
+      - code [ref=e96] [box=373,1190,279,19]: missing
+    - article [ref=e97] [box=681,804,313,421]:
+      - generic [ref=e98] [box=698,822,54,23]: pass
+      - heading "Maturity Summary" [level=2] [ref=e99] [box=698,853,279,26]
+      - paragraph [ref=e100] [box=698,895,279,46]: overall=pass; current_version=461; average_level=4.6
+      - code [ref=e101] [box=698,958,279,57]: D:\aiproj\d\461\解释\source-inputs\maturity-summary\maturity_summary.json
+    - article [ref=e102] [box=1006,804,313,421]:
+      - generic [ref=e103] [box=1022,822,54,23]: pass
+      - heading "CI Workflow Hygiene" [level=2] [ref=e104] [box=1022,853,279,26]
+      - paragraph [ref=e105] [box=1022,895,279,186]: status=pass; failed_checks=0; node24_native=2; required_order=4; order_violations=0; plan_digest_gate_ready=True; boundary_gate_check_ready=True; boundary_gate_plan_check_ready=True; receipt_failure_smoke_plan_check_ready=True; drift_contract_smoke_ready=True
+      - code [ref=e106] [box=1022,1097,279,38]: D:\aiproj\d\461\解释\source-inputs\ci-workflow-hygiene\ci_workflow_hygiene.json
+    - article [ref=e107] [box=32,1237,313,208]:
+      - generic [ref=e108] [box=49,1255,54,23]: pass
+      - heading "Test Coverage Gate" [level=2] [ref=e109] [box=49,1286,279,26]
+      - paragraph [ref=e110] [box=49,1329,279,46]: status=pass; coverage=90.16; fail_under=80; gap=0
+      - code [ref=e111] [box=49,1391,279,38]: D:\aiproj\d\461\解释\source-inputs\test-coverage\test_coverage_report.json
+  - generic [ref=e112] [box=32,1467,1286,169]:
+    - heading "Actions" [level=2] [ref=e113] [box=49,1492,1253,26]
+    - list [ref=e114] [box=49,1534,1253,70]:
+      - listitem [ref=e115] [box=89,1534,1213,23]: All readiness panels are clean; keep this dashboard with the release evidence.
+      - listitem [ref=e116] [box=89,1557,1213,23]: All audit checks passed; keep the audit with the model card as release evidence.
+      - listitem [ref=e117] [box=89,1580,1213,23]: Release evidence is complete; keep this bundle with the tagged version.
+  - generic [ref=e118] [box=32,1654,1286,1493]:
+    - heading "Evidence" [level=2] [ref=e119] [box=49,1678,1253,26]
+    - table [ref=e120] [box=49,1713,1253,1418]:
+      - rowgroup [ref=e121] [box=49,1713,1253,34]:
+        - row "Key Artifact Exists Kind Size" [ref=e122] [box=49,1713,1253,34]
+      - rowgroup [ref=e128] [box=49,1746,1253,1384]:
+        - row "registry_json Registry JSON D:\\aiproj\\d\\461\\解释\\source-inputs\\registry\\registry.json yes JSON 730 B" [ref=e129] [box=49,1746,1253,63]
+        - row "registry_csv Registry CSV D:\\aiproj\\d\\461\\解释\\source-inputs\\registry\\registry.csv yes CSV 35 B" [ref=e136] [box=49,1809,1253,63]
+        - row "registry_svg Registry SVG D:\\aiproj\\d\\461\\解释\\source-inputs\\registry\\registry.svg no SVG missing" [ref=e143] [box=49,1872,1253,63]
+        - row "registry_html Registry HTML D:\\aiproj\\d\\461\\解释\\source-inputs\\registry\\registry.html yes HTML 13 B" [ref=e150] [box=49,1935,1253,63]
+        - row "model_card_json Model card JSON D:\\aiproj\\d\\461\\解释\\source-inputs\\model-card\\model_card.json yes JSON 418 B" [ref=e157] [box=49,1998,1253,63]
+        - row "model_card_md Model card Markdown D:\\aiproj\\d\\461\\解释\\source-inputs\\model-card\\model_card.md yes MD 12 B" [ref=e164] [box=49,2061,1253,63]
+        - row "model_card_html Model card HTML D:\\aiproj\\d\\461\\解释\\source-inputs\\model-card\\model_card.html yes HTML 13 B" [ref=e171] [box=49,2124,1253,63]
+        - row "project_audit_json Project audit JSON D:\\aiproj\\d\\461\\解释\\project-audit-carryover\\project_audit.json yes JSON 14.3 KB" [ref=e178] [box=49,2187,1253,63]
+        - row "project_audit_md Project audit Markdown D:\\aiproj\\d\\461\\解释\\project-audit-carryover\\project_audit.md yes MD 3.8 KB" [ref=e185] [box=49,2250,1253,63]
+        - row "project_audit_html Project audit HTML D:\\aiproj\\d\\461\\解释\\project-audit-carryover\\project_audit.html yes HTML 8.0 KB" [ref=e192] [box=49,2312,1253,63]
+        - row "request_history_summary_json Request history summary JSON D:\\aiproj\\d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.json yes JSON 414 B" [ref=e199] [box=49,2375,1253,63]
+        - row "request_history_summary_md Request history summary Markdown D:\\aiproj\\d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.md no MD missing" [ref=e206] [box=49,2438,1253,63]
+        - row "request_history_summary_html Request history summary HTML D:\\aiproj\\d\\461\\解释\\source-inputs\\request-history-summary\\request_history_summary.html no HTML missing" [ref=e213] [box=49,2501,1253,63]
+        - row "benchmark_history_json Benchmark history JSON D:\\aiproj\\d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.json yes JSON 1.1 KB" [ref=e220] [box=49,2564,1253,63]
+        - row "benchmark_history_md Benchmark history Markdown D:\\aiproj\\d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.md no MD missing" [ref=e227] [box=49,2627,1253,63]
+        - row "benchmark_history_html Benchmark history HTML D:\\aiproj\\d\\461\\解释\\source-inputs\\benchmark-history\\benchmark_history.html no HTML missing" [ref=e234] [box=49,2690,1253,63]
+        - row "ci_workflow_hygiene_json CI workflow hygiene JSON D:\\aiproj\\d\\461\\解释\\source-inputs\\ci-workflow-hygiene\\ci_workflow_hygiene.json yes JSON 1.3 KB" [ref=e241] [box=49,2753,1253,63]
+        - row "ci_workflow_hygiene_md CI workflow hygiene Markdown D:\\aiproj\\d\\461\\解释\\source-inputs\\ci-workflow-hygiene\\ci_workflow_hygiene.md no MD missing" [ref=e248] [box=49,2816,1253,63]
+        - row "ci_workflow_hygiene_html CI workflow hygiene HTML D:\\aiproj\\d\\461\\解释\\source-inputs\\ci-workflow-hygiene\\ci_workflow_hygiene.html no HTML missing" [ref=e255] [box=49,2879,1253,63]
+        - row "test_coverage_report_json Test coverage report JSON D:\\aiproj\\d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.json yes JSON 327 B" [ref=e262] [box=49,2942,1253,63]
+        - row "test_coverage_report_md Test coverage report Markdown D:\\aiproj\\d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.md no MD missing" [ref=e269] [box=49,3005,1253,63]
+        - row "test_coverage_report_html Test coverage report HTML D:\\aiproj\\d\\461\\解释\\source-inputs\\test-coverage\\test_coverage_report.html no HTML missing" [ref=e276] [box=49,3068,1253,63]
+  - contentinfo [ref=e283] [box=0,3165,1350,73]: Generated by MiniGPT release readiness dashboard.

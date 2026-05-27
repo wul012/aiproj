@@ -1,0 +1,46 @@
+{
+  "release_name": "v461-receipt-plan-carryover",
+  "summary": {
+    "gate_status": "pass",
+    "decision": "approved",
+    "pass_count": 12,
+    "warn_count": 0,
+    "fail_count": 0,
+    "release_status": "release-ready",
+    "audit_status": "pass",
+    "audit_score_percent": 100.0,
+    "ready_runs": 1,
+    "test_coverage_status": "pass",
+    "test_coverage_percent": 90.16,
+    "test_coverage_fail_under": 80.0,
+    "test_coverage_gap": 0.0,
+    "benchmark_history_status": "pass",
+    "benchmark_history_entries": 1,
+    "benchmark_history_ready": 1,
+    "benchmark_history_review": 0,
+    "benchmark_history_blocked": 0,
+    "benchmark_history_case_regressions": 0,
+    "benchmark_history_generation_flag_regressions": 0,
+    "benchmark_history_suite_design_non_comparison_ready_entries": 0,
+    "benchmark_history_design_comparison_changed_entries": 0,
+    "benchmark_history_readiness_requirement_status": "pass",
+    "benchmark_history_readiness_requirement_exit_code": 0,
+    "benchmark_history_readiness_requirement_failed_reasons": [],
+    "benchmark_history_model_quality_claim": "candidate_evidence",
+    "benchmark_history_latest_boundary": "standard-benchmark-candidate-evidence"
+  },
+  "checks": [
+    {
+      "id": "request_history_summary_audit_check",
+      "status": "pass",
+      "title": "Request history summary audit check passed",
+      "detail": "request_history_summary=pass."
+    },
+    {
+      "id": "benchmark_history_gate_check",
+      "status": "pass",
+      "title": "Benchmark history release evidence passed",
+      "detail": "benchmark_history=pass; readiness_requirement=pass; latest_boundary=standard-benchmark-candidate-evidence."
+    }
+  ]
+}

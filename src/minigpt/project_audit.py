@@ -414,6 +414,9 @@ def _summarize_checks(
         "ci_baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_summary.get(
             "baseline_candidate_threshold_boundary_gate_plan_check_ready"
         ),
+        "ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": ci_summary.get(
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_ready"
+        ),
         "ci_release_readiness_drift_contract_smoke_ready": ci_summary.get("release_readiness_drift_contract_smoke_ready"),
         "test_coverage_status": coverage_summary.get("status"),
         "test_coverage_decision": coverage_summary.get("decision"),

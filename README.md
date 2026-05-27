@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v460.0.0` adds a contract check for the CI receipt failure-smoke wrapper plan.
+Version `v461.0.0` carries the CI receipt failure-smoke plan-check readiness field into audit, release bundle, and release readiness evidence.
+
+## Latest v461 checkpoint
+
+- Carried `promoted_seed_receipt_contract_failure_smoke_plan_check_ready` from CI workflow hygiene into project audit as `ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready`.
+- Carried the same value into release bundle and release readiness summaries as `ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready`.
+- Project audit, release bundle, and release readiness Markdown/HTML outputs now show a `CI receipt failure-smoke plan check` / `CI receipt plan` row.
+- CLI scripts now print the receipt plan-check readiness field, making shell logs enough to verify the carryover.
+- Focused tests cover direct CI report input and bundle-context fallback paths.
+- Archived audit, bundle, readiness, Playwright MCP snapshot, and screenshot evidence in `d/461`.
 
 ## Latest v460 checkpoint
 
