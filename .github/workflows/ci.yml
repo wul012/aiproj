@@ -26,6 +26,9 @@ jobs:
       - name: CI workflow hygiene check
         run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci
 
+      - name: Archived path portability check
+        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci
+
       - name: Promoted seed handoff assurance smoke
         run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci
 

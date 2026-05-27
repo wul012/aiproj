@@ -50,6 +50,9 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_present"])
         self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_order_ready"])
         self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+        self.assertTrue(report["summary"]["archived_path_portability_check_present"])
+        self.assertTrue(report["summary"]["archived_path_portability_check_order_ready"])
+        self.assertTrue(report["summary"]["archived_path_portability_check_ready"])
         self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_present"])
         self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_order_ready"])
         self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
@@ -87,6 +90,10 @@ class CIWorkflowTests(unittest.TestCase):
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
+            "command:archived_path_portability_check",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
             "command:promoted_seed_receipt_contract_failure_smoke",
             {item["id"] for item in report["checks"]},
         )
@@ -120,6 +127,14 @@ class CIWorkflowTests(unittest.TestCase):
         )
         self.assertIn(
             "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:archived_path_portability_check_before_receipt_smoke",
+            {item["id"] for item in report["checks"]},
+        )
+        self.assertIn(
+            "order:archived_path_portability_check_before_coverage",
             {item["id"] for item in report["checks"]},
         )
         self.assertIn(
@@ -177,11 +192,12 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 11)
-            self.assertEqual(report["summary"]["required_step_count"], 13)
+            self.assertEqual(report["summary"]["missing_step_count"], 12)
+            self.assertEqual(report["summary"]["required_step_count"], 14)
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertFalse(report["summary"]["archived_path_portability_check_ready"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_ready"])
@@ -205,6 +221,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Archived path portability check",
+                        "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
@@ -258,6 +276,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                        "      - name: Archived path portability check",
+                        "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
@@ -283,7 +303,7 @@ class CIWorkflowTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertEqual(report["summary"]["order_violation_count"], 8)
+            self.assertEqual(report["summary"]["order_violation_count"], 9)
             self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
@@ -293,6 +313,9 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_present"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_order_ready"])
             self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(report["summary"]["archived_path_portability_check_present"])
+            self.assertFalse(report["summary"]["archived_path_portability_check_order_ready"])
+            self.assertFalse(report["summary"]["archived_path_portability_check_ready"])
             self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_present"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_order_ready"])
             self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
@@ -308,6 +331,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("order:ci_tiny_scorecard_plan_check_before_coverage", failed_order_ids)
             self.assertIn("order:baseline_candidate_threshold_boundary_gate_check_before_coverage", failed_order_ids)
             self.assertIn("order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage", failed_order_ids)
+            self.assertIn("order:archived_path_portability_check_before_coverage", failed_order_ids)
             self.assertIn("order:promoted_seed_receipt_contract_failure_smoke_before_coverage", failed_order_ids)
             self.assertIn("order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage", failed_order_ids)
             self.assertIn("order:release_readiness_drift_contract_smoke_before_coverage", failed_order_ids)
@@ -331,6 +355,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Archived path portability check",
+                        "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
                         "        run: python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
                         "      - name: Promoted seed receipt contract failure smoke",
@@ -364,6 +390,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
             self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
             self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
+            self.assertTrue(report["summary"]["archived_path_portability_check_ready"])
             self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
             self.assertIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
@@ -381,6 +408,7 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("tiny_scorecard_plan_digest_gate_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("baseline_candidate_threshold_boundary_gate_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("baseline_candidate_threshold_boundary_gate_plan_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            self.assertIn("archived_path_portability_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("promoted_seed_receipt_contract_failure_smoke_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("promoted_seed_receipt_contract_failure_smoke_plan_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
             self.assertIn("release_readiness_drift_contract_smoke_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))

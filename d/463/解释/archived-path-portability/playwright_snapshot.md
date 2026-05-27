@@ -1,0 +1,20 @@
+- main [ref=e2]:
+  - heading "MiniGPT archived path portability" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Summary" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]
+      - generic [ref=e10]
+      - generic [ref=e13]
+      - generic [ref=e16]
+      - generic [ref=e19]
+      - generic [ref=e22]
+  - generic [ref=e25]:
+    - heading "References" [level=2] [ref=e26]
+    - table [ref=e27]:
+      - rowgroup [ref=e28]
+      - rowgroup [ref=e37]
+  - generic [ref=e726]:
+    - heading "Issues" [level=2] [ref=e727]
+    - list [ref=e728]:
+      - listitem [ref=e729]: none

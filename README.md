@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v462.0.0` compares receipt failure-smoke plan-check readiness in release readiness comparison evidence.
+Version `v463.0.0` adds an archived path portability CI gate for Windows-authored receipt handoff sidecars.
+
+## Latest v463 checkpoint
+
+- Added `scripts/check_archived_path_portability.py` to scan archived receipt/assurance JSON references and verify they resolve after Windows-to-POSIX separator normalization.
+- The default check covers the v448 promoted seed receipt handoff sidecars that previously exposed a Linux CI failure.
+- GitHub Actions now runs the archived path portability check before promoted seed handoff assurance and receipt failure-smoke gates.
+- CI workflow hygiene now requires the new gate, checks its order before receipt smoke and coverage, and exposes `archived_path_portability_check_*` readiness fields.
+- Focused tests cover passing Windows separator references, missing normalized references, default v448 archive portability, CLI outputs, and CI workflow hygiene integration.
+- Archived path portability and CI hygiene evidence in `d/463`.
 
 ## Latest v462 checkpoint
 

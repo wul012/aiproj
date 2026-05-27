@@ -21,6 +21,7 @@ FORBIDDEN_ENV_VARS = ("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",)
 REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
+    "archived_path_portability_check": "scripts/check_archived_path_portability.py",
     "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
     "promoted_seed_receipt_contract_failure_smoke": "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
     "promoted_seed_receipt_contract_failure_smoke_plan_check": "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
@@ -40,6 +41,14 @@ REQUIRED_COMMAND_ORDER = {
     ),
     "tiny_scorecard_inline_check_smoke_before_coverage": (
         "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
+        "scripts/run_test_coverage.py",
+    ),
+    "archived_path_portability_check_before_receipt_smoke": (
+        "scripts/check_archived_path_portability.py",
+        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
+    ),
+    "archived_path_portability_check_before_coverage": (
+        "scripts/check_archived_path_portability.py",
         "scripts/run_test_coverage.py",
     ),
     "promoted_seed_receipt_contract_failure_smoke_after_assurance": (
@@ -138,6 +147,9 @@ class CiWorkflowSummary(TypedDict):
     baseline_candidate_threshold_boundary_gate_plan_check_present: bool
     baseline_candidate_threshold_boundary_gate_plan_check_order_ready: bool
     baseline_candidate_threshold_boundary_gate_plan_check_ready: bool
+    archived_path_portability_check_present: bool
+    archived_path_portability_check_order_ready: bool
+    archived_path_portability_check_ready: bool
     promoted_seed_receipt_contract_failure_smoke_present: bool
     promoted_seed_receipt_contract_failure_smoke_order_ready: bool
     promoted_seed_receipt_contract_failure_smoke_ready: bool
@@ -195,6 +207,11 @@ def build_ci_workflow_hygiene_report(
         checks,
         "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
     )
+    archived_path_portability_check_present = _check_passed(checks, "command:archived_path_portability_check")
+    archived_path_portability_check_order_ready = (
+        _check_passed(checks, "order:archived_path_portability_check_before_receipt_smoke")
+        and _check_passed(checks, "order:archived_path_portability_check_before_coverage")
+    )
     receipt_failure_smoke_present = _check_passed(checks, "command:promoted_seed_receipt_contract_failure_smoke")
     receipt_failure_smoke_order_ready = (
         _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_after_assurance")
@@ -231,6 +248,11 @@ def build_ci_workflow_hygiene_report(
         "baseline_candidate_threshold_boundary_gate_plan_check_present": boundary_gate_plan_check_present,
         "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": boundary_gate_plan_check_order_ready,
         "baseline_candidate_threshold_boundary_gate_plan_check_ready": boundary_gate_plan_check_present and boundary_gate_plan_check_order_ready,
+        "archived_path_portability_check_present": archived_path_portability_check_present,
+        "archived_path_portability_check_order_ready": archived_path_portability_check_order_ready,
+        "archived_path_portability_check_ready": (
+            archived_path_portability_check_present and archived_path_portability_check_order_ready
+        ),
         "promoted_seed_receipt_contract_failure_smoke_present": receipt_failure_smoke_present,
         "promoted_seed_receipt_contract_failure_smoke_order_ready": receipt_failure_smoke_order_ready,
         "promoted_seed_receipt_contract_failure_smoke_ready": receipt_failure_smoke_present and receipt_failure_smoke_order_ready,
@@ -421,6 +443,8 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append("Keep assurance and tiny-scorecard evidence checks before coverage so CI fails fast on evidence drift.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
+    if not summary.get("archived_path_portability_check_ready"):
+        recommendations.append("Restore archived path portability before receipt contract smoke and coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready"):
         recommendations.append("Restore the receipt contract failure smoke plan check after the wrapper and before coverage.")
     if summary.get("python_version") != REQUIRED_PYTHON_VERSION:

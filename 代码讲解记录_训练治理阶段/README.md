@@ -491,6 +491,9 @@
 476-v462-release-readiness-receipt-plan-regression.md
  -> v462 code explanation: compare receipt failure-smoke plan-check readiness across release readiness reports and classify ready-to-not-ready changes as CI workflow regression reasons.
 
+477-v463-archived-path-portability-ci-gate.md
+ -> v463 code explanation: add a CI-enforced archived path portability check so Windows-authored receipt handoff sidecar paths remain resolvable on Linux runners.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
