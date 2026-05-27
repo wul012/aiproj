@@ -56,6 +56,25 @@ def make_artifact_rows(items: Iterable[tuple[str, str | Path]]) -> list[dict[str
     return [make_artifact_row(key, path) for key, path in items]
 
 
+def archived_reference_path(value: Any) -> Path:
+    """Resolve archived artifact refs written on Windows or POSIX runners."""
+    return Path(str(value).replace("\\", "/"))
+
+
+def resolve_archived_reference_path(value: Any, base_dir: str | Path | None = None) -> Path | None:
+    if not value:
+        return None
+    candidate = archived_reference_path(value)
+    if candidate.is_file() or candidate.is_absolute() or base_dir is None:
+        return candidate
+    base = Path(base_dir)
+    for anchor in (base, *base.parents):
+        based = anchor / candidate
+        if based.is_file():
+            return based
+    return candidate
+
+
 def count_available_artifacts(rows: Iterable[dict[str, Any]]) -> int:
     return sum(1 for row in rows if row.get("exists"))
 

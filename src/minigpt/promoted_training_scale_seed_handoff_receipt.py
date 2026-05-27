@@ -8,6 +8,7 @@ from minigpt.promoted_training_scale_seed_handoff_artifacts import (
     build_promoted_training_scale_seed_handoff_automation_receipt,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_utils import resolve_archived_reference_path
 from minigpt.report_utils import string_list
 
 
@@ -680,13 +681,7 @@ def _compare_check_fields(prefix: str, expected: dict[str, Any], actual: dict[st
 
 
 def _resolve_reference_path(value: Any, base_dir: Path | None) -> Path | None:
-    if not value:
-        return None
-    candidate = Path(str(value))
-    if candidate.is_file() or candidate.is_absolute() or base_dir is None:
-        return candidate
-    based = base_dir / candidate
-    return based if based.is_file() else candidate
+    return resolve_archived_reference_path(value, base_dir)
 
 
 def _is_file(path: Path | None) -> bool:

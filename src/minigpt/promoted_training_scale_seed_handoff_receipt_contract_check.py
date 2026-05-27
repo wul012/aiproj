@@ -26,7 +26,7 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_render_
     check_family_markdown_lines,
     check_family_text_rows,
 )
-from minigpt.report_utils import html_escape, string_list
+from minigpt.report_utils import archived_reference_path, html_escape, string_list
 
 
 CONTRACT_SUMMARY_CHECK_JSON_FILENAME = "promoted_training_scale_seed_handoff_receipt_contract_summary_check.json"
@@ -438,7 +438,7 @@ def write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_ou
 
 def _handoff_path_from_summary(summary: dict[str, Any]) -> Path | None:
     value = summary.get("handoff_report_path")
-    return Path(str(value)) if value else None
+    return archived_reference_path(value) if value else None
 
 
 __all__ = [

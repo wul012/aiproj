@@ -19,6 +19,9 @@ from scripts.run_ci_promoted_seed_receipt_contract_failure_smoke import (  # noq
     build_failure_smoke_summary,
     render_invocation_plan,
 )
+from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (  # noqa: E402
+    build_promoted_training_scale_seed_handoff_receipt_contract_summary,
+)
 from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # noqa: E402
     write_suite_design_handoff_with_sidecars,
 )
@@ -30,6 +33,20 @@ class CiPromotedSeedReceiptContractFailureSmokeTests(unittest.TestCase):
             DEFAULT_SOURCE_HANDOFF,
             Path("d") / "448" / "解释" / "promoted-handoff",
         )
+
+    def test_default_archived_source_handoff_contract_summary_accepts_windows_path_sidecars(self) -> None:
+        source_handoff = DEFAULT_SOURCE_HANDOFF
+        if not (ROOT / source_handoff).is_dir():
+            self.skipTest(f"archived source handoff fixture is unavailable: {ROOT / source_handoff}")
+
+        summary = build_promoted_training_scale_seed_handoff_receipt_contract_summary(source_handoff)
+
+        self.assertEqual(summary["status"], "pass")
+        self.assertEqual(summary["assurance_status"], "pass")
+        self.assertEqual(summary["embedded_receipt_check_status"], "pass")
+        self.assertEqual(summary["embedded_receipt_check_sidecar_status"], "pass")
+        self.assertTrue(summary["receipt_check_output_json_exists"])
+        self.assertTrue(summary["receipt_check_output_text_exists"])
 
     def test_wrapper_runs_summary_and_failure_smoke_with_plan(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

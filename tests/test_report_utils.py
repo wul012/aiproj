@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.report_utils import (  # noqa: E402
+    archived_reference_path,
     count_available_artifacts,
     display_command,
     first_present,
@@ -22,6 +23,7 @@ from minigpt.report_utils import (  # noqa: E402
     number_or_default,
     number_or_none,
     positive_int_mapping,
+    resolve_archived_reference_path,
     write_csv_row,
     write_json_payload,
 )
@@ -49,6 +51,21 @@ class ReportUtilsTests(unittest.TestCase):
         self.assertEqual(row["path"], "runs\\variants" if sys.platform == "win32" else "runs/variants")
         self.assertTrue(row["exists"])
         self.assertEqual(row["count"], 3)
+
+    def test_archived_reference_path_accepts_windows_separators(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            target = root / "d" / "448" / "解释" / "promoted-handoff" / "receipt.json"
+            target.parent.mkdir(parents=True)
+            target.write_text("{}", encoding="utf-8")
+
+            archived = "d\\448\\解释\\promoted-handoff\\receipt.json"
+
+            self.assertEqual(
+                archived_reference_path(archived),
+                Path("d") / "448" / "解释" / "promoted-handoff" / "receipt.json",
+            )
+            self.assertEqual(resolve_archived_reference_path(archived, target.parent), target)
 
     def test_text_helpers_escape_markdown_html_and_command_parts(self) -> None:
         command = display_command(["python", "script name.py", 'say"hi'])

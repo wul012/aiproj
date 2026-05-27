@@ -10,7 +10,7 @@ from minigpt.promoted_training_scale_seed_handoff_receipt import (
     render_promoted_training_scale_seed_handoff_embedded_receipt_check,
     resolve_promoted_training_scale_seed_handoff_report_path,
 )
-from minigpt.report_utils import as_dict, string_list
+from minigpt.report_utils import as_dict, resolve_archived_reference_path, string_list
 
 
 HANDOFF_ASSURANCE_JSON_FILENAME = "promoted_training_scale_seed_handoff_assurance.json"
@@ -344,13 +344,7 @@ def _check_embedded_assurance_text_matches_expected(path: Path, expected: dict[s
 
 
 def _resolve_reference_path(value: Any, base_dir: Path | None) -> Path | None:
-    if not value:
-        return None
-    candidate = Path(str(value))
-    if candidate.is_file() or candidate.is_absolute() or base_dir is None:
-        return candidate
-    based = base_dir / candidate
-    return based if based.is_file() else candidate
+    return resolve_archived_reference_path(value, base_dir)
 
 
 def _is_file(path: Path | None) -> bool:
