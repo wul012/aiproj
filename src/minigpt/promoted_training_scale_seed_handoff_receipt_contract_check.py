@@ -1,19 +1,21 @@
 from __future__ import annotations
 
-import hashlib
 import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (
-    CONTRACT_SUMMARY_HTML_FILENAME,
     CONTRACT_SUMMARY_JSON_FILENAME,
-    CONTRACT_SUMMARY_MARKDOWN_FILENAME,
-    CONTRACT_SUMMARY_TEXT_FILENAME,
     build_promoted_training_scale_seed_handoff_receipt_contract_summary,
-    render_promoted_training_scale_seed_handoff_receipt_contract_summary_html,
-    render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown,
-    render_promoted_training_scale_seed_handoff_receipt_contract_summary_text,
+)
+from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_rows import (
+    check_rows,
+    check_summary_sidecars,
+    failed_check_count,
+    json_text,
+    missing_sidecars,
+    summary_field_checks as build_summary_field_checks,
+    summary_field_issues,
 )
 from minigpt.report_utils import html_escape, string_list
 
@@ -67,12 +69,12 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             issues.append(f"could not rebuild receipt contract summary from handoff path: {exc}")
     if expected:
-        summary_field_checks = _summary_field_checks(expected, actual)
-        issues.extend(_summary_field_issues(summary_field_checks))
-        sidecars = _check_summary_sidecars(resolved_summary_path.parent, expected)
+        summary_field_checks = build_summary_field_checks(expected, actual, SUMMARY_COMPARE_KEYS)
+        issues.extend(summary_field_issues(summary_field_checks))
+        sidecars = check_summary_sidecars(resolved_summary_path.parent, expected)
     else:
-        sidecars = _missing_sidecars(resolved_summary_path.parent)
-    sidecar_checks = _check_rows(sidecars.get("checks"))
+        sidecars = missing_sidecars(resolved_summary_path.parent)
+    sidecar_checks = check_rows(sidecars.get("checks"))
     issues.extend(string_list(sidecars.get("issues")))
     status = "pass" if not issues else "fail"
     decision = str((expected or actual).get("decision") or "")
@@ -88,11 +90,11 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         "actual_schema_version": actual.get("receipt_schema_version"),
         "expected_schema_version": expected.get("receipt_schema_version") if expected else None,
         "summary_field_check_count": len(summary_field_checks),
-        "failed_summary_field_check_count": _failed_check_count(summary_field_checks),
+        "failed_summary_field_check_count": failed_check_count(summary_field_checks),
         "summary_field_checks": summary_field_checks,
         "sidecar_status": sidecars.get("status"),
         "sidecar_check_count": len(sidecar_checks),
-        "failed_sidecar_check_count": _failed_check_count(sidecar_checks),
+        "failed_sidecar_check_count": failed_check_count(sidecar_checks),
         "sidecar_checks": sidecar_checks,
         "sidecar_issue_count": sidecars.get("issue_count"),
         "sidecar_issues": sidecars.get("issues"),
@@ -175,22 +177,28 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
         "",
         "## Summary Field Checks",
         "",
-        "| Field | Status |",
-        "| --- | --- |",
+        "| Field | Type | Target | Status |",
+        "| --- | --- | --- | --- |",
     ]
-    for row in _check_rows(check.get("summary_field_checks")):
-        lines.append(f"| {row.get('key')} | {row.get('status')} |")
+    for row in check_rows(check.get("summary_field_checks")):
+        lines.append(
+            f"| {row.get('key')} | {row.get('check_type')} | "
+            f"{row.get('target')} | {row.get('status')} |"
+        )
     lines.extend(
         [
             "",
             "## Sidecar Checks",
             "",
-            "| Sidecar | Status | Exists |",
-            "| --- | --- | --- |",
+            "| Sidecar | Type | Target | Status | Exists |",
+            "| --- | --- | --- | --- | --- |",
         ]
     )
-    for row in _check_rows(check.get("sidecar_checks")):
-        lines.append(f"| {row.get('id')} | {row.get('status')} | {row.get('exists')} |")
+    for row in check_rows(check.get("sidecar_checks")):
+        lines.append(
+            f"| {row.get('id')} | {row.get('check_type')} | {row.get('target')} | "
+            f"{row.get('status')} | {row.get('exists')} |"
+        )
     lines.extend(
         [
             "",
@@ -218,21 +226,27 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_h
     summary_rows = "\n".join(
         "<tr>"
         f"<td>{html_escape(row.get('key'))}</td>"
+        f"<td>{html_escape(row.get('check_type'))}</td>"
+        f"<td>{html_escape(row.get('target'))}</td>"
         f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(_json_text(row.get('expected')))}</td>"
-        f"<td>{html_escape(_json_text(row.get('actual')))}</td>"
+        f"<td>{html_escape(json_text(row.get('expected')))}</td>"
+        f"<td>{html_escape(json_text(row.get('actual')))}</td>"
+        f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
-        for row in _check_rows(check.get("summary_field_checks"))
+        for row in check_rows(check.get("summary_field_checks"))
     )
     sidecar_rows = "\n".join(
         "<tr>"
         f"<td>{html_escape(row.get('id'))}</td>"
+        f"<td>{html_escape(row.get('check_type'))}</td>"
+        f"<td>{html_escape(row.get('target'))}</td>"
         f"<td>{html_escape(row.get('status'))}</td>"
         f"<td>{html_escape(row.get('exists'))}</td>"
         f"<td>{html_escape(row.get('expected_sha256'))}</td>"
         f"<td>{html_escape(row.get('actual_sha256'))}</td>"
+        f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
-        for row in _check_rows(check.get("sidecar_checks"))
+        for row in check_rows(check.get("sidecar_checks"))
     )
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -275,7 +289,9 @@ li {{ margin: 6px 0; }}
 <section>
 <h2>Summary Field Checks</h2>
 <table>
-<thead><tr><th>Field</th><th>Status</th><th>Expected</th><th>Actual</th></tr></thead>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Target</th><th>Status</th><th>Expected</th><th>Actual</th><th>Detail</th></tr>
+</thead>
 <tbody>
 {summary_rows}
 </tbody>
@@ -284,7 +300,12 @@ li {{ margin: 6px 0; }}
 <section>
 <h2>Sidecar Checks</h2>
 <table>
-<thead><tr><th>Sidecar</th><th>Status</th><th>Exists</th><th>Expected SHA-256</th><th>Actual SHA-256</th></tr></thead>
+<thead>
+<tr>
+<th>Sidecar</th><th>Type</th><th>Target</th><th>Status</th><th>Exists</th>
+<th>Expected SHA-256</th><th>Actual SHA-256</th><th>Detail</th>
+</tr>
+</thead>
 <tbody>
 {sidecar_rows}
 </tbody>
@@ -341,151 +362,6 @@ def write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_ou
 def _handoff_path_from_summary(summary: dict[str, Any]) -> Path | None:
     value = summary.get("handoff_report_path")
     return Path(str(value)) if value else None
-
-
-def _summary_field_checks(expected: dict[str, Any], actual: dict[str, Any]) -> list[dict[str, Any]]:
-    checks: list[dict[str, Any]] = []
-    for key in SUMMARY_COMPARE_KEYS:
-        expected_value = _stable_value(expected.get(key))
-        actual_value = _stable_value(actual.get(key))
-        checks.append(
-            {
-                "key": key,
-                "status": "pass" if expected_value == actual_value else "fail",
-                "expected": expected_value,
-                "actual": actual_value,
-            }
-        )
-    return checks
-
-
-def _summary_field_issues(checks: list[dict[str, Any]]) -> list[str]:
-    issues: list[str] = []
-    for check in checks:
-        if check.get("status") != "pass":
-            issues.append(
-                f"summary.{check.get('key')} expected {check.get('expected')!r} "
-                f"but got {check.get('actual')!r}"
-            )
-    return issues
-
-
-def _check_summary_sidecars(summary_dir: Path, expected: dict[str, Any]) -> dict[str, Any]:
-    text_path = summary_dir / CONTRACT_SUMMARY_TEXT_FILENAME
-    markdown_path = summary_dir / CONTRACT_SUMMARY_MARKDOWN_FILENAME
-    html_path = summary_dir / CONTRACT_SUMMARY_HTML_FILENAME
-    checks = [
-        _sidecar_check(
-            "text",
-            text_path,
-            render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(expected),
-        ),
-        _sidecar_check(
-            "markdown",
-            markdown_path,
-            render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown(expected),
-        ),
-        _sidecar_check(
-            "html",
-            html_path,
-            render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(expected),
-        ),
-    ]
-    issues = [str(check.get("detail")) for check in checks if check.get("status") != "pass"]
-    return _sidecar_payload(text_path, markdown_path, html_path, issues, checks)
-
-
-def _missing_sidecars(summary_dir: Path) -> dict[str, Any]:
-    text_path = summary_dir / CONTRACT_SUMMARY_TEXT_FILENAME
-    markdown_path = summary_dir / CONTRACT_SUMMARY_MARKDOWN_FILENAME
-    html_path = summary_dir / CONTRACT_SUMMARY_HTML_FILENAME
-    return _sidecar_payload(text_path, markdown_path, html_path, ["expected summary could not be rebuilt"], [])
-
-
-def _sidecar_check(check_id: str, path: Path, expected_text: str) -> dict[str, Any]:
-    expected_sha256 = _sha256_text(expected_text)
-    if not path.is_file():
-        return {
-            "id": check_id,
-            "status": "fail",
-            "path": str(path),
-            "exists": False,
-            "expected_sha256": expected_sha256,
-            "actual_sha256": None,
-            "detail": f"{path.name} is missing",
-        }
-    try:
-        actual = path.read_text(encoding="utf-8-sig")
-    except OSError as exc:
-        return {
-            "id": check_id,
-            "status": "fail",
-            "path": str(path),
-            "exists": True,
-            "expected_sha256": expected_sha256,
-            "actual_sha256": None,
-            "detail": f"{path.name} could not be read: {exc}",
-        }
-    actual_sha256 = _sha256_text(actual)
-    status = "pass" if actual == expected_text else "fail"
-    return {
-        "id": check_id,
-        "status": status,
-        "path": str(path),
-        "exists": True,
-        "expected_sha256": expected_sha256,
-        "actual_sha256": actual_sha256,
-        "detail": (
-            "content matches rebuilt contract summary"
-            if status == "pass"
-            else f"{path.name} content does not match rebuilt contract summary"
-        ),
-    }
-
-
-def _sidecar_payload(
-    text_path: Path,
-    markdown_path: Path,
-    html_path: Path,
-    issues: list[str],
-    checks: list[dict[str, Any]],
-) -> dict[str, Any]:
-    return {
-        "status": "pass" if not issues else "fail",
-        "issue_count": len(issues),
-        "issues": issues,
-        "checks": checks,
-        "text_path": str(text_path),
-        "text_exists": text_path.is_file(),
-        "markdown_path": str(markdown_path),
-        "markdown_exists": markdown_path.is_file(),
-        "html_path": str(html_path),
-        "html_exists": html_path.is_file(),
-    }
-
-
-def _stable_value(value: Any) -> Any:
-    if isinstance(value, (dict, list)):
-        return json.loads(json.dumps(value, ensure_ascii=False, sort_keys=True))
-    return value
-
-
-def _check_rows(value: Any) -> list[dict[str, Any]]:
-    if not isinstance(value, list):
-        return []
-    return [dict(item) for item in value if isinstance(item, dict)]
-
-
-def _failed_check_count(checks: list[dict[str, Any]]) -> int:
-    return sum(1 for check in checks if check.get("status") != "pass")
-
-
-def _sha256_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
-
-def _json_text(value: Any) -> str:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True)
 
 
 __all__ = [

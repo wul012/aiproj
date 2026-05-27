@@ -46,13 +46,27 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["failed_summary_field_check_count"], 0)
             self.assertEqual(check["sidecar_check_count"], 3)
             self.assertEqual(check["failed_sidecar_check_count"], 0)
-            self.assertTrue(any(row["key"] == "contract_checks" for row in check["summary_field_checks"]))
+            contract_checks_row = next(row for row in check["summary_field_checks"] if row["key"] == "contract_checks")
+            self.assertEqual(contract_checks_row["id"], "summary_field.contract_checks")
+            self.assertEqual(contract_checks_row["check_type"], "summary_field")
+            self.assertEqual(contract_checks_row["target"], "summary.contract_checks")
+            self.assertEqual(contract_checks_row["status_domain"], ["pass", "fail"])
+            self.assertTrue(contract_checks_row["required"])
+            self.assertEqual(contract_checks_row["expected_kind"], "list")
+            self.assertEqual(contract_checks_row["actual_kind"], "list")
+            html_sidecar = next(row for row in check["sidecar_checks"] if row["id"] == "html")
+            self.assertEqual(html_sidecar["check_type"], "sidecar_digest")
+            self.assertEqual(html_sidecar["status_domain"], ["pass", "fail"])
+            self.assertTrue(html_sidecar["required"])
+            self.assertEqual(html_sidecar["expected_kind"], "sha256")
+            self.assertEqual(html_sidecar["actual_kind"], "sha256")
             self.assertTrue(all(row["status"] == "pass" for row in check["sidecar_checks"]))
             self.assertIn("receipt_contract_summary_check_status=pass", text)
             self.assertIn("receipt_contract_summary_check_failed_summary_field_check_count=0", text)
             self.assertIn("- Sidecar status: `pass`", markdown)
-            self.assertIn("| contract_checks | pass |", markdown)
+            self.assertIn("| contract_checks | summary_field | summary.contract_checks | pass |", markdown)
             self.assertIn("<strong>pass</strong>", html)
+            self.assertIn("<td>summary_field</td>", html)
             self.assertIn("<td>contract_checks</td>", html)
 
     def test_contract_summary_check_rejects_tampered_json(self) -> None:
@@ -70,9 +84,16 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["status"], "fail")
             self.assertGreaterEqual(check["failed_summary_field_check_count"], 1)
             self.assertTrue(
-                any(row["key"] == "receipt_schema_version" and row["status"] == "fail" for row in check["summary_field_checks"])
+                any(
+                    row["key"] == "receipt_schema_version"
+                    and row["status"] == "fail"
+                    and row["detail"] == "field differs from rebuilt summary"
+                    for row in check["summary_field_checks"]
+                )
             )
-            self.assertTrue(any("summary.receipt_schema_version expected 4 but got 2" in issue for issue in check["issues"]))
+            self.assertTrue(
+                any("summary.receipt_schema_version expected 4 but got 2" in issue for issue in check["issues"])
+            )
 
     def test_contract_summary_check_rejects_tampered_boundary_scope(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -123,7 +144,14 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["sidecar_status"], "fail")
             self.assertEqual(check["failed_summary_field_check_count"], 0)
             self.assertEqual(check["failed_sidecar_check_count"], 1)
-            self.assertTrue(any(row["id"] == "html" and row["status"] == "fail" for row in check["sidecar_checks"]))
+            self.assertTrue(
+                any(
+                    row["id"] == "html"
+                    and row["status"] == "fail"
+                    and row["check_type"] == "sidecar_digest"
+                    for row in check["sidecar_checks"]
+                )
+            )
             self.assertTrue(any("contract_summary.html content does not match" in issue for issue in check["issues"]))
 
     def test_cli_writes_contract_summary_check_artifacts(self) -> None:

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v451.0.0` adds structured summary-field and sidecar checks to promoted seed handoff receipt contract summary-check outputs.
+Version `v452.0.0` adds row-level metadata to promoted seed handoff receipt contract summary-check comparisons.
+
+## Latest v452 checkpoint
+
+- Extracted summary-check row construction and sidecar digest comparison into `promoted_training_scale_seed_handoff_receipt_contract_check_rows.py`.
+- `summary_field_checks` now include `id`, `check_type`, `target`, `status_domain`, `required`, `expected_kind`, `actual_kind`, and `detail`.
+- `sidecar_checks` now include the same machine-readable row metadata alongside expected/actual SHA-256 digests.
+- Markdown and HTML summary-check reports now display check type and target columns for field and sidecar rows.
+- The main summary-check module dropped from 503 lines to 369 lines while preserving the existing CLI and artifact contract.
+- Archived contract summary, row-metadata summary-check, Playwright MCP snapshot, and screenshot evidence in `d/452`.
 
 ## Latest v451 checkpoint
 
