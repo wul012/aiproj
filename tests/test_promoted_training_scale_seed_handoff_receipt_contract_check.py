@@ -47,8 +47,16 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["contract_profile_status"], "pass")
             self.assertEqual(check["contract_profile_check_count"], 4)
             self.assertEqual(check["failed_contract_profile_check_count"], 0)
+            self.assertEqual(check["failed_check_target_count"], 0)
             self.assertEqual(check["sidecar_check_count"], 3)
             self.assertEqual(check["failed_sidecar_check_count"], 0)
+            family_by_name = {row["family"]: row for row in check["check_family_summary"]}
+            self.assertEqual(family_by_name["summary_field"]["status"], "pass")
+            self.assertEqual(family_by_name["summary_field"]["failed_count"], 0)
+            self.assertEqual(family_by_name["contract_profile"]["status"], "pass")
+            self.assertEqual(family_by_name["contract_profile"]["check_count"], 4)
+            self.assertEqual(family_by_name["sidecar"]["status"], "pass")
+            self.assertEqual(family_by_name["sidecar"]["check_count"], 3)
             contract_checks_row = next(row for row in check["summary_field_checks"] if row["key"] == "contract_checks")
             self.assertEqual(contract_checks_row["id"], "summary_field.contract_checks")
             self.assertEqual(contract_checks_row["check_type"], "summary_field")
@@ -79,8 +87,13 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertIn("receipt_contract_summary_check_status=pass", text)
             self.assertIn("receipt_contract_summary_check_failed_summary_field_check_count=0", text)
             self.assertIn("receipt_contract_summary_check_failed_contract_profile_check_count=0", text)
+            self.assertIn("receipt_contract_summary_check_failed_check_target_count=0", text)
             self.assertIn("- Sidecar status: `pass`", markdown)
             self.assertIn("- Failed contract profile checks: `0`", markdown)
+            self.assertIn("- Failed check targets: `0`", markdown)
+            self.assertIn("## Check Family Summary", markdown)
+            self.assertIn("| contract_profile | pass | 4 | 0 | 0 | [] |", markdown)
+            self.assertIn("## Failed Check Targets", markdown)
             self.assertIn("| contract_checks | summary_field | summary.contract_checks | pass |", markdown)
             self.assertIn(
                 "| contract_check_type_summary | contract_profile_consistency | "
@@ -90,6 +103,8 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertIn("<strong>pass</strong>", html)
             self.assertIn("<td>summary_field</td>", html)
             self.assertIn("<td>contract_checks</td>", html)
+            self.assertIn("<h2>Check Family Summary</h2>", html)
+            self.assertIn("<h2>Failed Check Targets</h2>", html)
             self.assertIn("<h2>Contract Profile Checks</h2>", html)
             self.assertIn("<td>contract_profile_consistency</td>", html)
 
@@ -107,6 +122,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
 
             self.assertEqual(check["status"], "fail")
             self.assertGreaterEqual(check["failed_summary_field_check_count"], 1)
+            summary_family = next(row for row in check["check_family_summary"] if row["family"] == "summary_field")
+            self.assertEqual(summary_family["status"], "fail")
+            self.assertIn("summary.receipt_schema_version", summary_family["failed_targets"])
             self.assertTrue(
                 any(
                     row["key"] == "receipt_schema_version"
@@ -169,12 +187,22 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["status"], "fail")
             self.assertEqual(check["contract_profile_status"], "fail")
             self.assertGreaterEqual(check["failed_contract_profile_check_count"], 1)
+            profile_family = next(row for row in check["check_family_summary"] if row["family"] == "contract_profile")
+            self.assertEqual(profile_family["status"], "fail")
+            self.assertIn("summary.contract_check_type_summary", profile_family["failed_targets"])
             self.assertTrue(
                 any(
                     row["target"] == "summary.contract_check_type_summary"
                     and row["status"] == "fail"
                     and row["check_type"] == "contract_profile_consistency"
                     for row in check["contract_profile_checks"]
+                )
+            )
+            self.assertTrue(
+                any(
+                    row["family"] == "contract_profile"
+                    and row["target"] == "summary.contract_check_type_summary"
+                    for row in check["failed_check_targets"]
                 )
             )
             self.assertTrue(
@@ -195,6 +223,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
             self.assertEqual(check["sidecar_status"], "fail")
             self.assertEqual(check["failed_summary_field_check_count"], 0)
             self.assertEqual(check["failed_sidecar_check_count"], 1)
+            sidecar_family = next(row for row in check["check_family_summary"] if row["family"] == "sidecar")
+            self.assertEqual(sidecar_family["status"], "fail")
+            self.assertTrue(any(target.endswith("receipt_contract_summary.html") for target in sidecar_family["failed_targets"]))
             self.assertTrue(
                 any(
                     row["id"] == "html"

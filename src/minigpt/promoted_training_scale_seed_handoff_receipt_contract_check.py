@@ -16,8 +16,15 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_rows im
     failed_check_count,
     json_text,
     missing_sidecars,
+    summary_check_failed_targets,
+    summary_check_family_summary,
     summary_field_checks as build_summary_field_checks,
     summary_field_issues,
+)
+from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_render_sections import (
+    check_family_html_sections,
+    check_family_markdown_lines,
+    check_family_text_rows,
 )
 from minigpt.report_utils import html_escape, string_list
 
@@ -82,6 +89,8 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         sidecars = missing_sidecars(resolved_summary_path.parent)
     sidecar_checks = check_rows(sidecars.get("checks"))
     issues.extend(string_list(sidecars.get("issues")))
+    family_summary = summary_check_family_summary(summary_field_checks, contract_profile_checks, sidecar_checks)
+    failed_targets = summary_check_failed_targets(summary_field_checks, contract_profile_checks, sidecar_checks)
     status = "pass" if not issues else "fail"
     decision = str((expected or actual).get("decision") or "")
     return {
@@ -106,6 +115,9 @@ def check_promoted_training_scale_seed_handoff_receipt_contract_summary(
         "sidecar_check_count": len(sidecar_checks),
         "failed_sidecar_check_count": failed_check_count(sidecar_checks),
         "sidecar_checks": sidecar_checks,
+        "check_family_summary": family_summary,
+        "failed_check_target_count": len(failed_targets),
+        "failed_check_targets": failed_targets,
         "sidecar_issue_count": sidecars.get("issue_count"),
         "sidecar_issues": sidecars.get("issues"),
         "text_path": sidecars.get("text_path"),
@@ -161,6 +173,7 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_t
             "receipt_contract_summary_check_failed_contract_profile_check_count",
             check.get("failed_contract_profile_check_count"),
         ),
+        *check_family_text_rows(check),
         ("receipt_contract_summary_check_sidecar_status", check.get("sidecar_status")),
         ("receipt_contract_summary_check_sidecar_check_count", check.get("sidecar_check_count")),
         ("receipt_contract_summary_check_failed_sidecar_check_count", check.get("failed_sidecar_check_count")),
@@ -192,10 +205,11 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
         f"- Expected summary status: `{check.get('expected_summary_status')}`",
         f"- Sidecar status: `{check.get('sidecar_status')}`",
         f"- Failed summary field checks: `{check.get('failed_summary_field_check_count')}`",
-        f"- Failed contract profile checks: `{check.get('failed_contract_profile_check_count')}`",
-        f"- Failed sidecar checks: `{check.get('failed_sidecar_check_count')}`",
-        f"- Issue count: `{check.get('issue_count')}`",
-        "",
+            f"- Failed contract profile checks: `{check.get('failed_contract_profile_check_count')}`",
+            f"- Failed check targets: `{check.get('failed_check_target_count')}`",
+            f"- Failed sidecar checks: `{check.get('failed_sidecar_check_count')}`",
+            f"- Issue count: `{check.get('issue_count')}`",
+            "",
         "## Summary Field Checks",
         "",
         "| Field | Type | Target | Status |",
@@ -206,6 +220,7 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_m
             f"| {row.get('key')} | {row.get('check_type')} | "
             f"{row.get('target')} | {row.get('status')} |"
         )
+    lines.extend(check_family_markdown_lines(check))
     lines.extend(
         [
             "",
@@ -295,6 +310,7 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_check_h
         "</tr>"
         for row in check_rows(check.get("sidecar_checks"))
     )
+    family_sections = check_family_html_sections(check)
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -330,10 +346,12 @@ li {{ margin: 6px 0; }}
 <div class="metric"><span>Actual</span><strong>{html_escape(check.get('actual_summary_status'))}</strong></div>
 <div class="metric"><span>Expected</span><strong>{html_escape(check.get('expected_summary_status'))}</strong></div>
 <div class="metric"><span>Profile</span><strong>{html_escape(check.get('contract_profile_status'))}</strong></div>
+<div class="metric"><span>Failed Targets</span><strong>{html_escape(check.get('failed_check_target_count'))}</strong></div>
 <div class="metric"><span>Sidecar</span><strong>{html_escape(check.get('sidecar_status'))}</strong></div>
 <div class="metric"><span>Issues</span><strong>{html_escape(check.get('issue_count'))}</strong></div>
 </div>
 </section>
+{family_sections}
 <section>
 <h2>Summary Field Checks</h2>
 <table>

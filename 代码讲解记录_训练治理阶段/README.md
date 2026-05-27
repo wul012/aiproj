@@ -470,6 +470,9 @@
 469-v455-promoted-receipt-contract-profile-checks.md
  -> v455 code explanation: add summary-check consistency rows that recompute receipt contract aggregate profiles from embedded contract check rows.
 
+470-v456-promoted-receipt-summary-check-family-summary.md
+ -> v456 code explanation: add compact summary-check family rollups and failed-target rows for summary field, contract profile, and sidecar failures.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。

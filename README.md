@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v455.0.0` adds contract profile consistency checks to promoted seed handoff receipt contract summary-checks.
+Version `v456.0.0` adds check-family failure summaries to promoted seed handoff receipt contract summary-checks.
+
+## Latest v456 checkpoint
+
+- Receipt contract summary-check outputs now include `check_family_summary` for summary-field, contract-profile, and sidecar checks.
+- New `failed_check_targets` rows list the failed family, check type, target, required flag, and detail for quick triage.
+- Text, Markdown, and HTML reports now show `Failed check targets`, `Check Family Summary`, and `Failed Check Targets` sections.
+- Tampered summary fields, contract profiles, and sidecar files now each surface in the correct family summary.
+- Added a small render-section helper so the main summary-check module stays at 456 lines instead of growing into a bulky renderer.
+- Archived contract summary, family-aware summary-check, Playwright MCP snapshot, and screenshot evidence in `d/456`.
 
 ## Latest v455 checkpoint
 

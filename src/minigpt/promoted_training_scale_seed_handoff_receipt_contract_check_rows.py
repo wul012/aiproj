@@ -135,6 +135,72 @@ def contract_profile_issues(checks: list[dict[str, Any]]) -> list[str]:
     return issues
 
 
+def summary_check_family_summary(
+    summary_field_checks: list[dict[str, Any]],
+    contract_profile_checks: list[dict[str, Any]],
+    sidecar_checks: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    return [
+        check_family_row("summary_field", "summary.summary_field_checks", summary_field_checks),
+        check_family_row("contract_profile", "summary.contract_profile_checks", contract_profile_checks),
+        check_family_row("sidecar", "summary.sidecar_checks", sidecar_checks),
+    ]
+
+
+def check_family_row(family: str, target: str, checks: list[dict[str, Any]]) -> dict[str, Any]:
+    rows = check_rows(checks)
+    failed_rows = [row for row in rows if row.get("status") != "pass"]
+    failed_targets = sorted({check_target(row) for row in failed_rows if check_target(row)})
+    failed_ids = sorted({str(row.get("id")) for row in failed_rows if row.get("id")})
+    return {
+        "family": family,
+        "check_type": "summary_check_family",
+        "target": target,
+        "status": "pass" if not failed_rows else "fail",
+        "status_domain": CHECK_STATUS_DOMAIN,
+        "check_count": len(rows),
+        "passed_count": len(rows) - len(failed_rows),
+        "failed_count": len(failed_rows),
+        "required_failed_count": sum(1 for row in failed_rows if row.get("required")),
+        "failed_targets": failed_targets,
+        "failed_target_count": len(failed_targets),
+        "failed_ids": failed_ids,
+        "failed_id_count": len(failed_ids),
+    }
+
+
+def summary_check_failed_targets(
+    summary_field_checks: list[dict[str, Any]],
+    contract_profile_checks: list[dict[str, Any]],
+    sidecar_checks: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for family, checks in (
+        ("summary_field", summary_field_checks),
+        ("contract_profile", contract_profile_checks),
+        ("sidecar", sidecar_checks),
+    ):
+        rows.extend(failed_target_row(family, row) for row in check_rows(checks) if row.get("status") != "pass")
+    return rows
+
+
+def failed_target_row(family: str, row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "family": family,
+        "id": row.get("id"),
+        "check_type": row.get("check_type"),
+        "target": check_target(row),
+        "status": row.get("status"),
+        "required": row.get("required"),
+        "detail": row.get("detail"),
+    }
+
+
+def check_target(row: dict[str, Any]) -> str:
+    value = row.get("target") or row.get("path") or row.get("id") or ""
+    return str(value)
+
+
 def check_summary_sidecars(summary_dir: Path, expected: dict[str, Any]) -> dict[str, Any]:
     text_path = summary_dir / CONTRACT_SUMMARY_TEXT_FILENAME
     markdown_path = summary_dir / CONTRACT_SUMMARY_MARKDOWN_FILENAME
@@ -286,6 +352,8 @@ __all__ = [
     "failed_check_count",
     "json_text",
     "missing_sidecars",
+    "summary_check_failed_targets",
+    "summary_check_family_summary",
     "summary_field_checks",
     "summary_field_issues",
 ]
