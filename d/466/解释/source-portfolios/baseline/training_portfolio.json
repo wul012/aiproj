@@ -1,0 +1,24 @@
+{
+    "run_name":  "baseline",
+    "schema_version":  1,
+    "project_root":  "D:\\aiproj",
+    "title":  "MiniGPT v466 baseline portfolio",
+    "dataset_version":  "v1",
+    "dataset_name":  "baseline-zh",
+    "artifacts":  {
+                      "benchmark_scorecard":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\baseline\\benchmark_scorecard.json",
+                      "generation_quality":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\baseline\\generation_quality.json",
+                      "maturity_narrative":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\baseline\\maturity_narrative.json",
+                      "dataset_card":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\baseline\\dataset_card.json",
+                      "run_manifest":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\baseline\\run_manifest.json",
+                      "eval_suite":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\baseline\\eval_suite.json"
+                  },
+    "execution":  {
+                      "execute":  false,
+                      "step_count":  6,
+                      "completed_steps":  6,
+                      "artifact_count":  6,
+                      "status":  "completed",
+                      "failed_step":  null
+                  }
+}

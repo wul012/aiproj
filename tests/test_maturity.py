@@ -50,6 +50,7 @@ def make_project(root: Path, version_count: int = 48) -> Path:
                     "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": 0,
                     "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": 0,
                     "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": 0,
+                    "ci_workflow_archived_path_portability_check_ready_regression_count": 0,
                     "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": 0,
                     "max_abs_ci_workflow_failed_check_delta": 0,
                     "max_abs_ci_workflow_order_violation_delta": 0,
@@ -139,6 +140,7 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_reasons"], [])
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_regression_reason_counts"], {})
             self.assertEqual(summary["summary"]["release_readiness_ci_boundary_plan_check_ready_regression_count"], 0)
+            self.assertEqual(summary["summary"]["release_readiness_ci_archived_path_portability_check_ready_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_test_coverage_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_history_regression_count"], 0)
             self.assertEqual(summary["summary"]["release_readiness_benchmark_suite_design_delta_count"], 0)
@@ -257,13 +259,16 @@ class MaturitySummaryTests(unittest.TestCase):
                 "drift_contract_smoke_ready_to_not_ready",
                 "ci_failed_checks_increased",
                 "boundary_gate_plan_check_not_ready",
+                "archived_path_portability_check_not_ready",
             ]
             registry["release_readiness_delta_summary"]["ci_workflow_regression_reason_counts"] = {
                 "ci_failed_checks_increased": 1,
                 "drift_contract_smoke_ready_to_not_ready": 1,
                 "boundary_gate_plan_check_not_ready": 1,
+                "archived_path_portability_check_not_ready": 1,
             }
             registry["release_readiness_delta_summary"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"] = 1
+            registry["release_readiness_delta_summary"]["ci_workflow_archived_path_portability_check_ready_regression_count"] = 1
             registry["release_readiness_delta_summary"]["max_abs_ci_workflow_failed_check_delta"] = 2
             registry["release_readiness_delta_summary"]["max_abs_ci_workflow_order_violation_delta"] = 1
             registry_path.write_text(json.dumps(registry), encoding="utf-8")
@@ -277,7 +282,12 @@ class MaturitySummaryTests(unittest.TestCase):
             self.assertEqual(summary["summary"]["release_readiness_ci_workflow_status_changed_count"], 1)
             self.assertEqual(
                 summary["summary"]["release_readiness_ci_workflow_regression_reasons"],
-                ["drift_contract_smoke_ready_to_not_ready", "ci_failed_checks_increased", "boundary_gate_plan_check_not_ready"],
+                [
+                    "drift_contract_smoke_ready_to_not_ready",
+                    "ci_failed_checks_increased",
+                    "boundary_gate_plan_check_not_ready",
+                    "archived_path_portability_check_not_ready",
+                ],
             )
             self.assertEqual(
                 summary["summary"]["release_readiness_ci_workflow_regression_reason_counts"],
@@ -285,9 +295,11 @@ class MaturitySummaryTests(unittest.TestCase):
                     "ci_failed_checks_increased": 1,
                     "drift_contract_smoke_ready_to_not_ready": 1,
                     "boundary_gate_plan_check_not_ready": 1,
+                    "archived_path_portability_check_not_ready": 1,
                 },
             )
             self.assertEqual(summary["summary"]["release_readiness_ci_boundary_plan_check_ready_regression_count"], 1)
+            self.assertEqual(summary["summary"]["release_readiness_ci_archived_path_portability_check_ready_regression_count"], 1)
             self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_failed_check_delta"], 2)
             self.assertEqual(summary["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(summary["release_readiness_context"]["ci_workflow_regression_count"], 1)
@@ -298,14 +310,20 @@ class MaturitySummaryTests(unittest.TestCase):
                     "ci_failed_checks_increased": 1,
                     "drift_contract_smoke_ready_to_not_ready": 1,
                     "boundary_gate_plan_check_not_ready": 1,
+                    "archived_path_portability_check_not_ready": 1,
                 },
             )
             self.assertEqual(
                 summary["release_readiness_context"]["ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"],
                 1,
             )
+            self.assertEqual(
+                summary["release_readiness_context"]["ci_workflow_archived_path_portability_check_ready_regression_count"],
+                1,
+            )
             self.assertIn("CI workflow hygiene regressions", " ".join(summary["recommendations"]))
             self.assertIn("boundary_gate_plan_check_not_ready:1", " ".join(summary["recommendations"]))
+            self.assertIn("archived_path_portability_check_not_ready:1", " ".join(summary["recommendations"]))
             self.assertIn("drift_contract_smoke_ready_to_not_ready:1", " ".join(summary["recommendations"]))
 
     def test_ci_workflow_order_regression_marks_maturity_for_review(self) -> None:

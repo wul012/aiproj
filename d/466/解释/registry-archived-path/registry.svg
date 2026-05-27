@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="246" viewBox="0 0 1040 246">
+  <rect width="100%" height="100%" fill="#f7f7f2"/>
+  <text x="28" y="34" font-family="Arial" font-size="22" fill="#111827">MiniGPT run registry</text>
+  <text x="28" y="58" font-family="Arial" font-size="13" fill="#4b5563">Runs: 1 | Dataset fingerprints: 0 | Snapshots: 0</text>
+  <text x="300" y="78" font-family="Arial" font-size="12" fill="#374151">best val loss</text>
+  <text x="650" y="78" font-family="Arial" font-size="12" fill="#374151">artifact count / quality / eval suite</text>
+  <text x="28" y="114" font-family="Arial" font-size="14" fill="#111827">v465-archived-path-regression</text><text x="28" y="134" font-family="Arial" font-size="12" fill="#4b5563">d\465\解释\release-readiness-comparison...</text><text x="242" y="115" font-family="Arial" font-size="13" fill="#111827">unranked</text><rect x="300" y="103" width="0" height="14" rx="3" fill="#dc2626"/><text x="568" y="115" font-family="Arial" font-size="12" fill="#374151">missing (delta missing)</text><rect x="650" y="103" width="0" height="14" rx="3" fill="#2563eb"/><text x="880" y="115" font-family="Arial" font-size="12" fill="#374151">0 files</text><circle cx="656" cy="132" r="5" fill="#6b7280"/><text x="670" y="136" font-family="Arial" font-size="12" fill="#374151">missing | eval= | gen=missing | data=</text><text x="670" y="150" font-family="Arial" font-size="11" fill="#4b5563">snapshot missing</text><text x="670" y="164" font-family="Arial" font-size="11" fill="#4b5563">no notes</text>
+</svg>

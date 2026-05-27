@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "summary":  {
+                    "readiness_status":  "ready",
+                    "quality_status":  "pass",
+                    "warning_count":  0
+                },
+    "dataset":  {
+                    "name":  "candidate-zh",
+                    "id":  "candidate-zh-v1",
+                    "version":  "v1"
+                }
+}

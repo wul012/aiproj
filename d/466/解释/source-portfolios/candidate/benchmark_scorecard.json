@@ -1,0 +1,11 @@
+{
+    "summary":  {
+                    "rubric_status":  "pass",
+                    "overall_score":  92,
+                    "rubric_avg_score":  88,
+                    "weakest_rubric_case":  "qa-basic",
+                    "overall_status":  "pass",
+                    "weakest_rubric_score":  84
+                },
+    "schema_version":  3
+}

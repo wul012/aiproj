@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v465.0.0` compares archived path portability readiness across release readiness reports.
+Version `v466.0.0` carries archived path portability regression evidence into maturity and portfolio review.
+
+## Latest v466 checkpoint
+
+- Registry release-readiness delta summaries now count `ci_workflow_archived_path_portability_check_ready_regression_count`.
+- Maturity summary and maturity narrative now expose `release_readiness_ci_archived_path_portability_check_ready_regression_count` beside the existing CI boundary, receipt, and drift-smoke regression counters.
+- Training portfolio comparison now carries the same archived-path CI regression signal into portfolio rows, CSV/Markdown/HTML, blocker review evidence, and CLI output.
+- Added focused tests proving archived-path readiness regressions propagate from registry -> maturity -> narrative -> portfolio review without creating a new governance chain.
+- Archived registry, maturity summary, maturity narrative, portfolio comparison, Playwright MCP snapshot, and screenshot evidence in `d/466`.
 
 ## Latest v465 checkpoint
 

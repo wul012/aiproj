@@ -239,6 +239,10 @@ def _portfolio_summary(report: dict[str, Any], name: str, index: int) -> dict[st
             maturity_summary.get("release_readiness_ci_boundary_plan_check_ready_regression_count")
         )
         or 0,
+        "maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count": _as_int(
+            maturity_summary.get("release_readiness_ci_archived_path_portability_check_ready_regression_count")
+        )
+        or 0,
         "maturity_release_readiness_ci_drift_smoke_ready_regression_count": _as_int(
             maturity_summary.get("release_readiness_ci_drift_smoke_ready_regression_count")
         )
@@ -433,6 +437,10 @@ def _comparison_summary(
         "best_score_maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": _pick(
             best_score,
             "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count",
+        ),
+        "best_score_maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count": _pick(
+            best_score,
+            "maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count",
         ),
         "best_score_maturity_release_readiness_test_coverage_regression_count": _pick(
             best_score,

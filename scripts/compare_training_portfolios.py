@@ -57,6 +57,15 @@ def main() -> None:
             ensure_ascii=False,
         )
     )
+    print(
+        "best_score_maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count="
+        + json.dumps(
+            report["summary"].get(
+                "best_score_maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count"
+            ),
+            ensure_ascii=False,
+        )
+    )
     print(f"maturity_suite_design_regression_count={report['summary'].get('maturity_suite_design_regression_count', 0)}")
     print(
         "maturity_suite_design_regression_names="

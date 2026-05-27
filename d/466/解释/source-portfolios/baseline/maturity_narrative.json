@@ -1,0 +1,20 @@
+{
+    "summary":  {
+                    "release_readiness_test_coverage_regression_count":  0,
+                    "release_readiness_ci_workflow_status_changed_count":  0,
+                    "release_readiness_benchmark_suite_design_regression_count":  0,
+                    "release_readiness_ci_workflow_regression_count":  0,
+                    "release_readiness_ci_boundary_plan_check_ready_regression_count":  0,
+                    "release_readiness_ci_workflow_regression_reason_counts":  {
+
+                                                                               },
+                    "release_readiness_ci_workflow_regression_reasons":  [
+
+                                                                         ],
+                    "release_readiness_trend_status":  "stable",
+                    "portfolio_status":  "ready",
+                    "release_readiness_ci_workflow_order_regression_count":  0,
+                    "release_readiness_ci_archived_path_portability_check_ready_regression_count":  0
+                },
+    "schema_version":  1
+}

@@ -73,6 +73,10 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                     "Release readiness CI boundary plan regressions",
                     overview.get("release_readiness_ci_boundary_plan_check_ready_regression_count"),
                 ),
+                (
+                    "Release readiness CI archived path regressions",
+                    overview.get("release_readiness_ci_archived_path_portability_check_ready_regression_count"),
+                ),
                 ("Release readiness CI drift smoke regressions", overview.get("release_readiness_ci_drift_smoke_ready_regression_count")),
                 ("Release readiness test coverage regressions", overview.get("release_readiness_test_coverage_regression_count")),
                 ("Release readiness benchmark-history regressions", overview.get("release_readiness_benchmark_history_regression_count")),
@@ -200,6 +204,10 @@ def render_maturity_summary_markdown(summary: dict[str, Any]) -> str:
                         release_readiness.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"),
                     ),
                     (
+                        "CI archived path regressions",
+                        release_readiness.get("ci_workflow_archived_path_portability_check_ready_regression_count"),
+                    ),
+                    (
                         "CI drift smoke regressions",
                         release_readiness.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"),
                     ),
@@ -289,6 +297,7 @@ def render_maturity_summary_html(summary: dict[str, Any]) -> str:
         ("CI order regressions", release_readiness.get("ci_workflow_order_regression_count")),
         ("CI reasons", _fmt_mapping(release_readiness.get("ci_workflow_regression_reason_counts"))),
         ("CI boundary plan", release_readiness.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count")),
+        ("CI archived paths", release_readiness.get("ci_workflow_archived_path_portability_check_ready_regression_count")),
         ("Coverage regressions", release_readiness.get("test_coverage_regression_count")),
         ("Benchmark regressions", release_readiness.get("benchmark_history_regression_count")),
         ("Benchmark suite deltas", release_readiness.get("benchmark_history_suite_design_non_comparison_ready_delta_count")),
@@ -433,6 +442,7 @@ def _release_readiness_section(release_readiness: dict[str, Any]) -> str:
             "CI boundary plan regressions",
             release_readiness.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"),
         ),
+        ("CI archived path regressions", release_readiness.get("ci_workflow_archived_path_portability_check_ready_regression_count")),
         ("CI drift smoke regressions", release_readiness.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count")),
         ("Max CI workflow failed-check delta", release_readiness.get("max_abs_ci_workflow_failed_check_delta")),
         ("Max CI workflow order-violation delta", release_readiness.get("max_abs_ci_workflow_order_violation_delta")),

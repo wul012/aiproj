@@ -32,6 +32,7 @@ def make_project(
     ci_regression_count: int = 0,
     ci_order_regression_count: int = 0,
     ci_boundary_plan_regression_count: int = 0,
+    ci_archived_path_regression_count: int = 0,
     ci_regression_reasons: list[str] | None = None,
     coverage_regression_count: int = 0,
     benchmark_history_regression_count: int = 0,
@@ -82,6 +83,7 @@ def make_project(
                 "release_readiness_ci_workflow_regression_reasons": ci_reasons,
                 "release_readiness_ci_workflow_regression_reason_counts": ci_reason_counts,
                 "release_readiness_ci_boundary_plan_check_ready_regression_count": ci_boundary_plan_regression_count,
+                "release_readiness_ci_archived_path_portability_check_ready_regression_count": ci_archived_path_regression_count,
                 "release_readiness_max_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
                 "release_readiness_max_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "release_readiness_test_coverage_regression_count": coverage_regression_count,
@@ -121,6 +123,7 @@ def make_project(
                 "ci_workflow_regression_reasons": ci_reasons,
                 "ci_workflow_regression_reason_counts": ci_reason_counts,
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": ci_boundary_plan_regression_count,
+                "ci_workflow_archived_path_portability_check_ready_regression_count": ci_archived_path_regression_count,
                 "max_abs_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
                 "max_abs_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "test_coverage_regression_count": coverage_regression_count,
@@ -170,6 +173,7 @@ def make_project(
                 "ci_workflow_regression_reasons": ci_reasons,
                 "ci_workflow_regression_reason_counts": ci_reason_counts,
                 "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": ci_boundary_plan_regression_count,
+                "ci_workflow_archived_path_portability_check_ready_regression_count": ci_archived_path_regression_count,
                 "max_abs_ci_workflow_failed_check_delta": 2 if ci_regression_count or ci_order_regression_count else 0,
                 "max_abs_ci_workflow_order_violation_delta": 1 if ci_order_regression_count else 0,
                 "test_coverage_regression_count": coverage_regression_count,
@@ -561,10 +565,12 @@ class MaturityNarrativeTests(unittest.TestCase):
                 ci_regression_count=1,
                 ci_order_regression_count=1,
                 ci_boundary_plan_regression_count=1,
+                ci_archived_path_regression_count=1,
                 ci_regression_reasons=[
                     "drift_contract_smoke_ready_to_not_ready",
                     "ci_failed_checks_increased",
                     "boundary_gate_plan_check_not_ready",
+                    "archived_path_portability_check_not_ready",
                 ],
             )
 
@@ -577,7 +583,12 @@ class MaturityNarrativeTests(unittest.TestCase):
             self.assertEqual(narrative["summary"]["release_readiness_ci_workflow_order_regression_count"], 1)
             self.assertEqual(
                 narrative["summary"]["release_readiness_ci_workflow_regression_reasons"],
-                ["drift_contract_smoke_ready_to_not_ready", "ci_failed_checks_increased", "boundary_gate_plan_check_not_ready"],
+                [
+                    "drift_contract_smoke_ready_to_not_ready",
+                    "ci_failed_checks_increased",
+                    "boundary_gate_plan_check_not_ready",
+                    "archived_path_portability_check_not_ready",
+                ],
             )
             self.assertEqual(
                 narrative["summary"]["release_readiness_ci_workflow_regression_reason_counts"],
@@ -585,18 +596,25 @@ class MaturityNarrativeTests(unittest.TestCase):
                     "ci_failed_checks_increased": 1,
                     "drift_contract_smoke_ready_to_not_ready": 1,
                     "boundary_gate_plan_check_not_ready": 1,
+                    "archived_path_portability_check_not_ready": 1,
                 },
             )
             self.assertEqual(narrative["summary"]["release_readiness_ci_boundary_plan_check_ready_regression_count"], 1)
+            self.assertEqual(
+                narrative["summary"]["release_readiness_ci_archived_path_portability_check_ready_regression_count"],
+                1,
+            )
             self.assertEqual(narrative["summary"]["release_readiness_max_ci_workflow_order_violation_delta"], 1)
             self.assertEqual(release_section["status"], "ci-regressed")
             self.assertIn("CI workflow regressions=1", release_section["claim"])
             self.assertIn("CI order regressions=1", release_section["claim"])
-            self.assertIn("CI regression reasons=boundary_gate_plan_check_not_ready:1, ci_failed_checks_increased:1, drift_contract_smoke_ready_to_not_ready:1", release_section["claim"])
+            self.assertIn("archived_path_portability_check_not_ready:1", release_section["claim"])
             self.assertIn("CI boundary plan regressions=1", release_section["claim"])
+            self.assertIn("CI archived path regressions=1", release_section["claim"])
             self.assertIn("max order violation delta=1", release_section["claim"])
             self.assertIn("release readiness CI workflow regression reasons", narrative["recommendations"][0])
             self.assertIn("boundary_gate_plan_check_not_ready:1", narrative["recommendations"][0])
+            self.assertIn("archived_path_portability_check_not_ready:1", narrative["recommendations"][0])
             self.assertIn("drift_contract_smoke_ready_to_not_ready:1", narrative["recommendations"][0])
 
     def test_build_maturity_narrative_marks_review_for_coverage_regression(self) -> None:

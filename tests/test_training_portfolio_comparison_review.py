@@ -79,6 +79,14 @@ class TrainingPortfolioComparisonReviewTests(unittest.TestCase):
                 }
             )
         )
+        self.assertTrue(
+            has_maturity_ci_regression(
+                {
+                    "maturity_release_readiness_trend": "stable",
+                    "maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count": "1",
+                }
+            )
+        )
 
     def test_best_score_coverage_regression_becomes_blocker_action(self) -> None:
         summary = {
@@ -127,6 +135,7 @@ class TrainingPortfolioComparisonReviewTests(unittest.TestCase):
             "maturity_ci_regression_count": 1,
             "best_score_maturity_release_readiness_trend": "ci-regressed",
             "best_score_maturity_release_readiness_ci_workflow_order_regression_count": 1,
+            "best_score_maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count": 1,
         }
         portfolios = [
             {
@@ -144,6 +153,7 @@ class TrainingPortfolioComparisonReviewTests(unittest.TestCase):
                 "maturity_release_readiness_max_ci_workflow_failed_check_delta": 0,
                 "maturity_release_readiness_max_ci_workflow_order_violation_delta": 1,
                 "maturity_release_readiness_ci_boundary_plan_check_ready_regression_count": 1,
+                "maturity_release_readiness_ci_archived_path_portability_check_ready_regression_count": 1,
             }
         ]
         deltas = [
@@ -163,6 +173,7 @@ class TrainingPortfolioComparisonReviewTests(unittest.TestCase):
         self.assertEqual(actions[0]["severity"], "blocker")
         self.assertEqual(actions[0]["evidence"]["ci_workflow_order_regression_count"], 1)
         self.assertEqual(actions[0]["evidence"]["ci_boundary_plan_check_ready_regression_count"], 1)
+        self.assertEqual(actions[0]["evidence"]["ci_archived_path_portability_check_ready_regression_count"], 1)
         self.assertIn("CI workflow regressions", " ".join(recommendations))
 
 

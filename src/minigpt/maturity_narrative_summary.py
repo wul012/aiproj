@@ -55,6 +55,9 @@ def build_maturity_narrative_summary(
         "release_readiness_ci_boundary_plan_check_ready_regression_count": release.get(
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"
         ),
+        "release_readiness_ci_archived_path_portability_check_ready_regression_count": release.get(
+            "ci_workflow_archived_path_portability_check_ready_regression_count"
+        ),
         "release_readiness_ci_drift_smoke_ready_regression_count": release.get(
             "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"
         ),
@@ -369,6 +372,10 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         release_context.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"),
         maturity_summary.get("release_readiness_ci_boundary_plan_check_ready_regression_count"),
     )
+    ci_archived_path_regression_count = _coalesce(
+        release_context.get("ci_workflow_archived_path_portability_check_ready_regression_count"),
+        maturity_summary.get("release_readiness_ci_archived_path_portability_check_ready_regression_count"),
+    )
     ci_drift_smoke_regression_count = _coalesce(
         release_context.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"),
         maturity_summary.get("release_readiness_ci_drift_smoke_ready_regression_count"),
@@ -422,6 +429,7 @@ def _release_summary(maturity_summary: dict[str, Any], release_context: dict[str
         "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": ci_tiny_plan_regression_count,
         "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": ci_boundary_gate_regression_count,
         "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": ci_boundary_plan_regression_count,
+        "ci_workflow_archived_path_portability_check_ready_regression_count": ci_archived_path_regression_count,
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": ci_drift_smoke_regression_count,
         "max_abs_ci_workflow_failed_check_delta": _coalesce(
             release_context.get("max_abs_ci_workflow_failed_check_delta"),

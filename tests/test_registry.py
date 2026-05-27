@@ -857,6 +857,7 @@ class RegistryTests(unittest.TestCase):
             self.assertIn("release_readiness_benchmark_suite_design_delta_count=1", completed.stdout)
             self.assertIn("release_readiness_benchmark_suite_design_regression_count=1", completed.stdout)
             self.assertIn("release_readiness_benchmark_design_change_delta_count=1", completed.stdout)
+            self.assertIn("release_readiness_ci_archived_path_portability_check_ready_regression_count=0", completed.stdout)
 
     def test_render_registry_html_has_interactive_controls(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

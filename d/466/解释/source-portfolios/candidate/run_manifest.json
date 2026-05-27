@@ -1,0 +1,21 @@
+{
+    "schema_version":  1,
+    "data":  {
+                 "token_count":  1000,
+                 "train_token_count":  800,
+                 "val_token_count":  200
+             },
+    "model":  {
+                  "parameter_count":  12000
+              },
+    "results":  {
+                    "last_loss":  0.9,
+                    "best_val_loss":  0.88,
+                    "history_summary":  {
+                                            "last_val_loss":  0.9,
+                                            "best_val_loss":  0.88,
+                                            "final_val_loss":  0.9
+                                        },
+                    "final_val_loss":  0.9
+                }
+}

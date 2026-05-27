@@ -243,6 +243,9 @@ def _summary(
         "release_readiness_ci_boundary_plan_check_ready_regression_count": release_readiness_context.get(
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"
         ),
+        "release_readiness_ci_archived_path_portability_check_ready_regression_count": release_readiness_context.get(
+            "ci_workflow_archived_path_portability_check_ready_regression_count"
+        ),
         "release_readiness_ci_drift_smoke_ready_regression_count": release_readiness_context.get(
             "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"
         ),
@@ -378,6 +381,7 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
             "ci_workflow_tiny_scorecard_plan_digest_gate_ready_regression_count": None,
             "ci_workflow_baseline_candidate_threshold_boundary_gate_check_ready_regression_count": None,
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": None,
+            "ci_workflow_archived_path_portability_check_ready_regression_count": None,
             "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": None,
             "max_abs_ci_workflow_failed_check_delta": None,
             "max_abs_ci_workflow_order_violation_delta": None,
@@ -431,6 +435,9 @@ def _release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any
         ),
         "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count": delta_summary.get(
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regression_count"
+        ),
+        "ci_workflow_archived_path_portability_check_ready_regression_count": delta_summary.get(
+            "ci_workflow_archived_path_portability_check_ready_regression_count"
         ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": delta_summary.get(
             "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count"

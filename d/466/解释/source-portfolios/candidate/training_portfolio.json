@@ -1,0 +1,24 @@
+{
+    "run_name":  "candidate",
+    "schema_version":  1,
+    "project_root":  "D:\\aiproj",
+    "title":  "MiniGPT v466 candidate portfolio",
+    "dataset_version":  "v1",
+    "dataset_name":  "candidate-zh",
+    "artifacts":  {
+                      "benchmark_scorecard":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\candidate\\benchmark_scorecard.json",
+                      "generation_quality":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\candidate\\generation_quality.json",
+                      "maturity_narrative":  "D:\\aiproj\\d\\466\\解释\\maturity-narrative-archived-path\\maturity_narrative.json",
+                      "dataset_card":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\candidate\\dataset_card.json",
+                      "run_manifest":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\candidate\\run_manifest.json",
+                      "eval_suite":  "D:\\aiproj\\d\\466\\解释\\source-portfolios\\candidate\\eval_suite.json"
+                  },
+    "execution":  {
+                      "execute":  false,
+                      "step_count":  6,
+                      "completed_steps":  6,
+                      "artifact_count":  6,
+                      "status":  "completed",
+                      "failed_step":  null
+                  }
+}

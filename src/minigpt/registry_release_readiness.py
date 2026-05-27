@@ -235,6 +235,10 @@ def release_readiness_delta_summary(rows: list[dict[str, Any]]) -> dict[str, Any
             rows,
             "ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed",
         ),
+        "ci_workflow_archived_path_portability_check_ready_regression_count": _true_count(
+            rows,
+            "ci_workflow_archived_path_portability_check_ready_regressed",
+        ),
         "ci_workflow_release_readiness_drift_contract_smoke_ready_regression_count": _true_count(
             rows,
             "ci_workflow_release_readiness_drift_contract_smoke_ready_regressed",

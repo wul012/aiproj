@@ -98,6 +98,13 @@ def main() -> None:
         + json.dumps(summary.get("release_readiness_ci_boundary_plan_check_ready_regression_count"), ensure_ascii=False)
     )
     print(
+        "release_readiness_ci_archived_path_portability_check_ready_regression_count="
+        + json.dumps(
+            summary.get("release_readiness_ci_archived_path_portability_check_ready_regression_count"),
+            ensure_ascii=False,
+        )
+    )
+    print(
         "release_readiness_ci_drift_smoke_ready_regression_count="
         + json.dumps(summary.get("release_readiness_ci_drift_smoke_ready_regression_count"), ensure_ascii=False)
     )

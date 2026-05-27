@@ -1,0 +1,10 @@
+{
+    "summary":  {
+                    "overall_status":  "pass",
+                    "avg_unique_ratio":  0.91,
+                    "case_count":  2,
+                    "fail_count":  0,
+                    "warn_count":  0
+                },
+    "schema_version":  1
+}
