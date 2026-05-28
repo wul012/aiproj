@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "title": "seed",
+  "generated_at": "2026-05-14T00:00:00Z",
+  "seed_status": "ready",
+  "baseline_seed": {
+    "selected_name": "beta",
+    "decision_status": "accepted",
+    "gate_status": "pass",
+    "batch_status": "completed",
+    "readiness_score": 107,
+    "training_scale_run_path": "D:\\aiproj\\d\\470\\解释\\source\\beta\\training_scale_run.json",
+    "training_scale_run_exists": true,
+    "suite": {
+      "mode": "builtin",
+      "name": "standard-zh",
+      "path": "builtin:standard-zh",
+      "source": "inherited"
+    },
+    "suite_path": "builtin:standard-zh",
+    "handoff_suite_guard": {
+      "selected_handoff_require_suite_consistency": true,
+      "selected_handoff_suite_consistency": "consistent",
+      "selected_handoff_suite_mismatch_count": 0,
+      "selected_handoff_selected_suite_path": "builtin:standard-zh",
+      "handoff_require_suite_consistency_count": 2,
+      "handoff_suite_consistent_count": 2,
+      "handoff_suite_mismatch_total": 0,
+      "comparison_ready_handoff_suite_mismatch_total": 0
+    },
+    "handoff_clean_batch_review": {
+      "selected_handoff_require_clean_batch_review": true,
+      "selected_handoff_clean_batch_review_status": "clean",
+      "selected_handoff_batch_maturity_ci_regression_count": 1,
+      "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "selected_handoff_batch_maturity_ci_regression_names": [
+        "dirty-ci-selected"
+      ],
+      "selected_handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_selected_batch_maturity_ci_regression_count": 1,
+      "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_comparison_exclusion_reasons": [
+        "selected handoff batch CI regression count is 1"
+      ],
+      "handoff_require_clean_batch_review_count": 3,
+      "handoff_clean_batch_review_count": 2,
+      "handoff_unclean_batch_review_count": 1,
+      "handoff_batch_maturity_ci_regression_count": 2,
+      "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_selected_batch_maturity_ci_regression_total": 1,
+      "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+      "handoff_batch_maturity_ci_regression_names": [
+        "dirty-ci-old"
+      ],
+      "handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "workflow-order-regressed": 1
+      },
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "comparison_exclusion_reasons": [
+        "handoff batch CI regression count is 2"
+      ],
+      "comparison_ready_handoff_require_clean_batch_review_count": 2,
+      "comparison_ready_handoff_clean_batch_review_count": 2,
+      "comparison_ready_handoff_unclean_batch_review_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_names": [],
+      "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {}
+    }
+  },
+  "next_plan": {
+    "project_root": "D:\\aiproj",
+    "dataset_name": "next-zh",
+    "dataset_version_prefix": "v82-test",
+    "suite": {
+      "mode": "builtin",
+      "name": "standard-zh",
+      "path": "builtin:standard-zh",
+      "source": "inherited"
+    },
+    "suite_path": "builtin:standard-zh",
+    "suite_source": "inherited",
+    "plan_out_dir": "D:\\aiproj\\d\\470\\解释\\source\\next-plan",
+    "batch_out_root": "D:\\aiproj\\d\\470\\解释\\source\\batch",
+    "sources": [
+      {
+        "path": "D:\\aiproj\\d\\470\\解释\\source\\corpus.txt",
+        "resolved_path": "D:\\aiproj\\d\\470\\解释\\source\\corpus.txt",
+        "exists": true,
+        "kind": "file"
+      }
+    ],
+    "command": [
+      "D:\\python\\python.exe",
+      "scripts/plan_training_scale.py",
+      "D:\\aiproj\\d\\470\\解释\\source\\corpus.txt",
+      "--project-root",
+      "D:\\aiproj",
+      "--out-dir",
+      "D:\\aiproj\\d\\470\\解释\\source\\next-plan",
+      "--batch-out-root",
+      "D:\\aiproj\\d\\470\\解释\\source\\batch",
+      "--dataset-name",
+      "next-zh",
+      "--dataset-version-prefix",
+      "v82-test",
+      "--suite-name",
+      "standard-zh",
+      "--max-variants",
+      "1"
+    ],
+    "command_text": "D:\\python\\python.exe scripts/plan_training_scale.py D:\\aiproj\\d\\470\\解释\\source\\corpus.txt --project-root D:\\aiproj --out-dir D:\\aiproj\\d\\470\\解释\\source\\next-plan --batch-out-root D:\\aiproj\\d\\470\\解释\\source\\batch --dataset-name next-zh --dataset-version-prefix v82-test --suite-name standard-zh --max-variants 1",
+    "command_available": true,
+    "execution_ready": true
+  },
+  "summary": {
+    "seed_status": "ready",
+    "selected_name": "beta",
+    "command_available": true
+  }
+}

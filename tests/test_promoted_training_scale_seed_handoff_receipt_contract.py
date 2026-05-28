@@ -35,9 +35,10 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             html = render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(summary)
 
             self.assertEqual(summary["status"], "pass")
-            self.assertEqual(summary["receipt_schema_version"], 4)
+            self.assertEqual(summary["receipt_schema_version"], 5)
             self.assertTrue(summary["schema_v3_ready"])
             self.assertTrue(summary["schema_v4_ready"])
+            self.assertTrue(summary["schema_v5_ready"])
             self.assertEqual(summary["embedded_receipt_check_sidecar_status"], "pass")
             self.assertEqual(
                 {
@@ -52,19 +53,22 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             )
             self.assertIn("receipt_contract_handoff_suite_design_count=2", text)
             self.assertIn("receipt_contract_schema_v4_ready=True", text)
+            self.assertIn("receipt_contract_schema_v5_ready=True", text)
             self.assertEqual(summary["failed_contract_check_count"], 0)
-            self.assertEqual(summary["contract_check_status_counts"], {"pass": 10, "fail": 0})
+            self.assertEqual(summary["contract_check_status_counts"], {"pass": 11, "fail": 0})
             type_summary = {item["check_type"]: item for item in summary["contract_check_type_summary"]}
-            self.assertEqual(type_summary["schema_readiness"]["count"], 2)
+            self.assertEqual(type_summary["schema_readiness"]["count"], 3)
             self.assertEqual(type_summary["schema_readiness"]["failed_count"], 0)
-            self.assertEqual(type_summary["schema_readiness"]["required_count"], 2)
+            self.assertEqual(type_summary["schema_readiness"]["required_count"], 3)
             self.assertIn("receipt.schema_v4_ready", type_summary["schema_readiness"]["targets"])
+            self.assertIn("receipt.schema_v5_ready", type_summary["schema_readiness"]["targets"])
             self.assertEqual(type_summary["status_equals"]["count"], 2)
             self.assertEqual(type_summary["count_consistency"]["count"], 3)
             self.assertEqual(type_summary["selected_within_handoff"]["count"], 3)
             self.assertIn("receipt_contract_failed_check_count=0", text)
             self.assertIn("receipt_contract_check_type_summary=", text)
             self.assertIn("schema_v4_ready", {item["id"] for item in summary["contract_checks"]})
+            self.assertIn("schema_v5_ready", {item["id"] for item in summary["contract_checks"]})
             schema_check = next(item for item in summary["contract_checks"] if item["id"] == "schema_v4_ready")
             self.assertEqual(schema_check["check_type"], "schema_readiness")
             self.assertEqual(schema_check["target"], "receipt.schema_v4_ready")
@@ -77,11 +81,16 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
                 "| schema_v4_ready | schema_readiness | receipt.schema_v4_ready | receipt | pass | True | True |",
                 markdown,
             )
-            self.assertIn("| schema_readiness | pass | 2 | 2 | 0 | 2 |", markdown)
+            self.assertIn(
+                "| schema_v5_ready | schema_readiness | receipt.schema_v5_ready | receipt | pass | True | True |",
+                markdown,
+            )
+            self.assertIn("| schema_readiness | pass | 3 | 3 | 0 | 3 |", markdown)
             self.assertIn("<td>handoff</td>", html)
             self.assertIn("<td>schema_readiness</td>", html)
             self.assertIn("Contract Check Type Summary", html)
             self.assertIn("<td>schema_v4_ready</td>", html)
+            self.assertIn("<td>schema_v5_ready</td>", html)
 
     def test_contract_summary_flattens_schema_v4_boundary_plan_check_scopes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -93,8 +102,9 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             html = render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(summary)
 
             self.assertEqual(summary["status"], "pass")
-            self.assertEqual(summary["receipt_schema_version"], 4)
+            self.assertEqual(summary["receipt_schema_version"], 5)
             self.assertTrue(summary["schema_v4_ready"])
+            self.assertTrue(summary["schema_v5_ready"])
             self.assertEqual(
                 {
                     item["scope"]: (

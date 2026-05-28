@@ -134,7 +134,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractCheckTests(unittest.TestCas
                 )
             )
             self.assertTrue(
-                any("summary.receipt_schema_version expected 4 but got 2" in issue for issue in check["issues"])
+                any("summary.receipt_schema_version expected 5 but got 2" in issue for issue in check["issues"])
             )
 
     def test_contract_summary_check_rejects_tampered_boundary_scope(self) -> None:

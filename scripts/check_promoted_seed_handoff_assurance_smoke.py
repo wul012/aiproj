@@ -98,8 +98,14 @@ def main() -> None:
         "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count": assurance.get(
             "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count"
         ),
+        "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts": assurance.get(
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts"
+        ),
         "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": assurance.get(
             "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"
+        ),
+        "handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts": assurance.get(
+            "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts"
         ),
         "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count": assurance.get(
             "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count"
@@ -142,8 +148,8 @@ def main() -> None:
         issues,
     )
     _check(
-        checks["handoff_assurance_embedded_receipt_check_receipt_schema_version"] == 4,
-        "handoff assurance must expose receipt schema_version=4",
+        checks["handoff_assurance_embedded_receipt_check_receipt_schema_version"] == 5,
+        "handoff assurance must expose receipt schema_version=5",
         issues,
     )
     _check(
@@ -152,8 +158,22 @@ def main() -> None:
         issues,
     )
     _check(
+        checks[
+            "handoff_assurance_embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts"
+        ]
+        == {},
+        "handoff assurance must expose selected receipt CI regression reason counts",
+        issues,
+    )
+    _check(
         checks["handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"] == 0,
         "handoff assurance must expose aggregate receipt CI regression count",
+        issues,
+    )
+    _check(
+        checks["handoff_assurance_embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts"]
+        == {},
+        "handoff assurance must expose aggregate receipt CI regression reason counts",
         issues,
     )
     _check(

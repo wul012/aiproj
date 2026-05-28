@@ -43,6 +43,7 @@ SUMMARY_COMPARE_KEYS = (
     "receipt_schema_version",
     "schema_v3_ready",
     "schema_v4_ready",
+    "schema_v5_ready",
     "assurance_status",
     "embedded_receipt_check_status",
     "embedded_receipt_check_sidecar_status",

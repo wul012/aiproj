@@ -165,12 +165,20 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
             f"`{handoff_assurance.get('embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count')}`"
         ),
         (
+            "- Handoff assurance receipt selected CI reasons: "
+            f"`{_fmt_mapping(handoff_assurance.get('embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts'))}`"
+        ),
+        (
             "- Handoff assurance receipt selected CI boundary plan-check regressions: "
             f"`{handoff_assurance.get('embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count')}`"
         ),
         (
             "- Handoff assurance receipt CI regressions: "
             f"`{handoff_assurance.get('embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt CI reasons: "
+            f"`{_fmt_mapping(handoff_assurance.get('embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts'))}`"
         ),
         (
             "- Handoff assurance receipt CI boundary plan-check regressions: "
@@ -199,6 +207,10 @@ def render_promoted_training_scale_seed_handoff_markdown(report: dict[str, Any])
         (
             "- Handoff assurance receipt ready CI boundary plan-check regressions: "
             f"`{handoff_assurance.get('embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count')}`"
+        ),
+        (
+            "- Handoff assurance receipt ready CI reasons: "
+            f"`{_fmt_mapping(handoff_assurance.get('embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts'))}`"
         ),
         (
             "- Handoff assurance receipt ready suite-design names: "
@@ -445,6 +457,14 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
             ),
         ),
         (
+            "Assurance selected CI reasons",
+            _fmt_mapping(
+                handoff_assurance.get(
+                    "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts"
+                )
+            ),
+        ),
+        (
             "Assurance selected CI boundary plan",
             handoff_assurance.get(
                 "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
@@ -453,6 +473,12 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
         (
             "Assurance CI regressions",
             handoff_assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count"),
+        ),
+        (
+            "Assurance CI reasons",
+            _fmt_mapping(
+                handoff_assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts")
+            ),
         ),
         (
             "Assurance CI boundary plan",
@@ -480,6 +506,14 @@ def render_promoted_training_scale_seed_handoff_html(report: dict[str, Any]) -> 
             "Assurance ready CI boundary plan",
             handoff_assurance.get(
                 "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+            ),
+        ),
+        (
+            "Assurance ready CI reasons",
+            _fmt_mapping(
+                handoff_assurance.get(
+                    "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"
+                )
             ),
         ),
         (

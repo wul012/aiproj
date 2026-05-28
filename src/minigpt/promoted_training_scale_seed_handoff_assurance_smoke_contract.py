@@ -47,6 +47,7 @@ def build_receipt_contract_smoke_checks(
         "receipt_contract_decision": contract_summary.get("decision"),
         "receipt_contract_schema_version": contract_summary.get("receipt_schema_version"),
         "receipt_contract_schema_v4_ready": contract_summary.get("schema_v4_ready"),
+        "receipt_contract_schema_v5_ready": contract_summary.get("schema_v5_ready"),
         "receipt_contract_handoff_ci_boundary_plan_check_handoff_count": _boundary_scope_field(
             contract_summary,
             "handoff",
@@ -75,8 +76,9 @@ def build_receipt_contract_smoke_checks(
     issues: list[str] = []
     _check(checks["receipt_contract_status"] == "pass", "receipt contract summary status must pass", issues)
     _check(checks["receipt_contract_decision"] == "continue", "receipt contract summary decision must continue", issues)
-    _check(checks["receipt_contract_schema_version"] == 4, "receipt contract summary schema must be v4", issues)
+    _check(checks["receipt_contract_schema_version"] == 5, "receipt contract summary schema must be v5", issues)
     _check(checks["receipt_contract_schema_v4_ready"] is True, "receipt contract summary must be schema-v4 ready", issues)
+    _check(checks["receipt_contract_schema_v5_ready"] is True, "receipt contract summary must be schema-v5 ready", issues)
     _check(
         checks["receipt_contract_handoff_ci_boundary_plan_check_selected_count"]
         <= checks["receipt_contract_handoff_ci_boundary_plan_check_handoff_count"],

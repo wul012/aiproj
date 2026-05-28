@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v469.0.0` carries archived path portability regression reason-counts through final promoted seed handoff and clean-batch automation gating.
+Version `v470.0.0` upgrades promoted seed handoff automation receipts to schema v5 so CI regression reason-count maps are contract-checkable from receipt through assurance.
+
+## Latest v470 checkpoint
+
+- Raised promoted seed handoff automation receipts from schema v4 to schema v5 and added selected, handoff, clean-batch, and comparison-ready CI regression reason-count maps.
+- Extended receipt checks, embedded receipt checks, handoff assurance, contract summaries, contract summary checks, smoke checks, and CSV/Markdown/HTML sections so `archived_path_portability_check_not_ready` remains machine-readable at the final handoff layer.
+- Preserved compatibility for archived schema-v4 handoff sidecars by versioning receipt-check comparisons and text rendering instead of forcing old evidence through new v5 fields.
+- Archived schema-v5 receipt, receipt-check, embedded-check, assurance, contract summary, summary-check, Playwright MCP snapshots, and screenshots in `d/470`.
 
 ## Latest v469 checkpoint
 

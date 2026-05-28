@@ -48,6 +48,7 @@ def build_promoted_training_scale_seed_handoff_receipt_contract_summary(path: st
         "receipt_schema_version": receipt_schema_version,
         "schema_v3_ready": receipt_schema_version >= 3,
         "schema_v4_ready": receipt_schema_version >= 4,
+        "schema_v5_ready": receipt_schema_version >= 5,
         "assurance_status": assurance.get("status"),
         "embedded_receipt_check_status": assurance.get("embedded_receipt_check_status"),
         "embedded_receipt_check_sidecar_status": assurance.get("embedded_receipt_check_sidecar_status"),
@@ -75,6 +76,7 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(su
         ("receipt_contract_schema_version", summary.get("receipt_schema_version")),
         ("receipt_contract_schema_v3_ready", summary.get("schema_v3_ready")),
         ("receipt_contract_schema_v4_ready", summary.get("schema_v4_ready")),
+        ("receipt_contract_schema_v5_ready", summary.get("schema_v5_ready")),
         ("receipt_contract_assurance_status", summary.get("assurance_status")),
         ("receipt_contract_embedded_status", summary.get("embedded_receipt_check_status")),
         ("receipt_contract_sidecar_status", summary.get("embedded_receipt_check_sidecar_status")),
@@ -134,6 +136,7 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdow
         f"- Receipt schema version: `{summary.get('receipt_schema_version')}`",
         f"- Schema v3 ready: `{summary.get('schema_v3_ready')}`",
         f"- Schema v4 ready: `{summary.get('schema_v4_ready')}`",
+        f"- Schema v5 ready: `{summary.get('schema_v5_ready')}`",
         f"- Assurance status: `{summary.get('assurance_status')}`",
         f"- Embedded sidecar status: `{summary.get('embedded_receipt_check_sidecar_status')}`",
         "",
@@ -278,6 +281,7 @@ li {{ margin: 6px 0; }}
 <div class="metric"><span>Status</span><strong>{html_escape(summary.get('status'))}</strong></div>
 <div class="metric"><span>Decision</span><strong>{html_escape(summary.get('decision'))}</strong></div>
 <div class="metric"><span>Schema</span><strong>{html_escape(summary.get('receipt_schema_version'))}</strong></div>
+<div class="metric"><span>Schema v5</span><strong>{html_escape(summary.get('schema_v5_ready'))}</strong></div>
 <div class="metric"><span>Assurance</span><strong>{html_escape(summary.get('assurance_status'))}</strong></div>
 <div class="metric"><span>Sidecar</span>
 <strong>{html_escape(summary.get('embedded_receipt_check_sidecar_status'))}</strong></div>

@@ -41,6 +41,15 @@ def build_contract_checks(
             "receipt schema must support CI boundary plan-check contract",
         ),
         contract_check(
+            "schema_v5_ready",
+            "schema_readiness",
+            "receipt.schema_v5_ready",
+            "receipt",
+            True,
+            receipt_schema_version >= 5,
+            "receipt schema must support CI regression reason-count contract",
+        ),
+        contract_check(
             "embedded_receipt_check_sidecar_pass",
             "status_equals",
             "embedded_receipt_check.sidecar_status",

@@ -1,0 +1,48 @@
+- main [ref=e2]:
+  - heading "MiniGPT receipt contract summary check" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Check" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]
+      - generic [ref=e10]
+      - generic [ref=e13]
+      - generic [ref=e16]
+      - generic [ref=e19]
+      - generic [ref=e22]
+      - generic [ref=e25]
+      - generic [ref=e28]
+  - generic [ref=e31]:
+    - heading "Check Family Summary" [level=2] [ref=e32]
+    - table [ref=e33]:
+      - rowgroup [ref=e34]
+      - rowgroup [ref=e42]
+  - generic [ref=e64]:
+    - heading "Failed Check Targets" [level=2] [ref=e65]
+    - table [ref=e66]:
+      - rowgroup [ref=e67]
+      - rowgroup [ref=e74]
+  - generic [ref=e81]:
+    - heading "Summary Field Checks" [level=2] [ref=e82]
+    - table [ref=e83]:
+      - rowgroup [ref=e84]
+      - rowgroup [ref=e93]
+  - generic [ref=e286]:
+    - heading "Contract Profile Checks" [level=2] [ref=e287]
+    - table [ref=e288]:
+      - rowgroup [ref=e289]
+      - rowgroup [ref=e298]
+  - generic [ref=e331]:
+    - heading "Sidecar Checks" [level=2] [ref=e332]
+    - table [ref=e333]:
+      - rowgroup [ref=e334]
+      - rowgroup [ref=e344]
+  - generic [ref=e372]:
+    - heading "Sidecars" [level=2] [ref=e373]
+    - list [ref=e374]:
+      - listitem [ref=e375]: "Text exists: True"
+      - listitem [ref=e376]: "Markdown exists: True"
+      - listitem [ref=e377]: "HTML exists: True"
+  - generic [ref=e378]:
+    - heading "Issues" [level=2] [ref=e379]
+    - list [ref=e380]:
+      - listitem [ref=e381]: none

@@ -8,6 +8,7 @@ from minigpt.promoted_training_scale_seed_handoff_artifacts import (
     build_promoted_training_scale_seed_handoff_automation_receipt,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_utils import positive_int_mapping
 from minigpt.report_utils import resolve_archived_reference_path
 from minigpt.report_utils import string_list
 
@@ -25,17 +26,23 @@ EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS = (
     "blocking_source",
     "failed_requirements",
     "selected_handoff_batch_maturity_ci_regression_count",
+    "selected_handoff_batch_maturity_ci_regression_reason_counts",
     "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
     "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
     "handoff_batch_maturity_ci_regression_count",
+    "handoff_batch_maturity_ci_regression_reason_counts",
     "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "handoff_selected_batch_maturity_ci_regression_reason_counts",
     "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
     "selected_handoff_batch_maturity_suite_design_regression_count",
     "selected_handoff_batch_maturity_suite_design_regression_names",
     "handoff_batch_maturity_suite_design_regression_count",
     "handoff_batch_maturity_suite_design_regression_names",
     "comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+    "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
     "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
     "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
     "comparison_ready_handoff_batch_maturity_suite_design_regression_names",
     "comparison_exclusion_reasons",
@@ -63,6 +70,19 @@ RECEIPT_SCHEMA_V4_REQUIRED_FIELDS = (
     "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
     "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
     "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+)
+RECEIPT_SCHEMA_V5_REQUIRED_FIELDS = (
+    "clean_batch_review_requirement_selected_ci_regression_reason_counts",
+    "selected_handoff_batch_maturity_ci_regression_reason_counts",
+    "selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
+    "handoff_batch_maturity_ci_regression_reason_counts",
+    "handoff_selected_batch_maturity_ci_regression_reason_counts",
+    "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+    "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
+)
+RECEIPT_SCHEMA_V5_TEXT_FIELDS = tuple(f"receipt_{field}" for field in RECEIPT_SCHEMA_V5_REQUIRED_FIELDS)
+EMBEDDED_RECEIPT_SCHEMA_V5_TEXT_FIELDS = tuple(
+    f"embedded_receipt_check_receipt_{field}" for field in RECEIPT_SCHEMA_V5_REQUIRED_FIELDS
 )
 
 
@@ -107,18 +127,31 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
     schema_version = _int(payload.get("schema_version"))
     exit_code = _int(payload.get("automation_exit_code"))
     selected_ci_regressions = _int(payload.get("selected_handoff_batch_maturity_ci_regression_count"))
+    selected_ci_reason_counts = positive_int_mapping(
+        payload.get("selected_handoff_batch_maturity_ci_regression_reason_counts")
+    )
     selected_boundary_plan_regressions = _int(
         payload.get("selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
+    )
+    selected_selected_ci_reason_counts = positive_int_mapping(
+        payload.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts")
     )
     selected_selected_boundary_plan_regressions = _int(
         payload.get("selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count")
     )
     handoff_ci_regressions = _int(payload.get("handoff_batch_maturity_ci_regression_count"))
+    handoff_ci_reason_counts = positive_int_mapping(payload.get("handoff_batch_maturity_ci_regression_reason_counts"))
     handoff_boundary_plan_regressions = _int(
         payload.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
     )
+    handoff_selected_ci_reason_counts = positive_int_mapping(
+        payload.get("handoff_selected_batch_maturity_ci_regression_reason_counts")
+    )
     handoff_selected_boundary_plan_regressions = _int(
         payload.get("handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total")
+    )
+    clean_batch_selected_ci_reason_counts = positive_int_mapping(
+        payload.get("clean_batch_review_requirement_selected_ci_regression_reason_counts")
     )
     selected_suite_design_regressions = _int(
         payload.get("selected_handoff_batch_maturity_suite_design_regression_count")
@@ -134,8 +167,14 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
     ready_boundary_plan_regressions = _int(
         payload.get("comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count")
     )
+    ready_ci_reason_counts = positive_int_mapping(
+        payload.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts")
+    )
     ready_selected_boundary_plan_regressions = _int(
         payload.get("comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total")
+    )
+    ready_selected_ci_reason_counts = positive_int_mapping(
+        payload.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts")
     )
     ready_suite_design_names = string_list(
         payload.get("comparison_ready_handoff_batch_maturity_suite_design_regression_names")
@@ -164,6 +203,8 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         issues.extend(_v3_receipt_field_issues(payload))
     if schema_version >= 4:
         issues.extend(_v4_receipt_field_issues(payload))
+    if schema_version >= 5:
+        issues.extend(_v5_receipt_field_issues(payload))
     status = "pass" if not issues else "fail"
     checker_exit_code = 0 if status == "pass" and decision == "continue" else 1
     return {
@@ -175,13 +216,18 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         "checker_exit_code": checker_exit_code,
         "blocking_source": str(blocking_source) if blocking_source is not None else None,
         "failed_requirements": failed_requirements,
+        "clean_batch_review_requirement_selected_ci_regression_reason_counts": clean_batch_selected_ci_reason_counts,
         "selected_handoff_batch_maturity_ci_regression_count": selected_ci_regressions,
+        "selected_handoff_batch_maturity_ci_regression_reason_counts": selected_ci_reason_counts,
         "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": selected_boundary_plan_regressions,
+        "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": selected_selected_ci_reason_counts,
         "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": (
             selected_selected_boundary_plan_regressions
         ),
         "handoff_batch_maturity_ci_regression_count": handoff_ci_regressions,
+        "handoff_batch_maturity_ci_regression_reason_counts": handoff_ci_reason_counts,
         "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": handoff_boundary_plan_regressions,
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": handoff_selected_ci_reason_counts,
         "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": (
             handoff_selected_boundary_plan_regressions
         ),
@@ -190,10 +236,12 @@ def check_promoted_training_scale_seed_handoff_automation_receipt(receipt: dict[
         "handoff_batch_maturity_suite_design_regression_count": handoff_suite_design_regressions,
         "handoff_batch_maturity_suite_design_regression_names": handoff_suite_design_names,
         "comparison_ready_handoff_batch_maturity_suite_design_regression_count": ready_suite_design_regressions,
+        "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": ready_ci_reason_counts,
         "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": ready_boundary_plan_regressions,
         "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": (
             ready_selected_boundary_plan_regressions
         ),
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": ready_selected_ci_reason_counts,
         "comparison_ready_handoff_batch_maturity_suite_design_regression_names": ready_suite_design_names,
         "comparison_exclusion_reasons": comparison_exclusion_reasons,
         "issue_count": len(issues),
@@ -210,12 +258,36 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
         ("receipt_blocking_source", check.get("blocking_source")),
         ("receipt_failed_requirements", json.dumps(check.get("failed_requirements"), ensure_ascii=False)),
         (
+            "receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts",
+            json.dumps(
+                check.get("clean_batch_review_requirement_selected_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "receipt_selected_handoff_batch_maturity_ci_regression_count",
             check.get("selected_handoff_batch_maturity_ci_regression_count"),
         ),
         (
+            "receipt_selected_handoff_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("selected_handoff_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
             check.get("selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("selected_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         ),
         (
             "receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
@@ -226,8 +298,24 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
             check.get("handoff_batch_maturity_ci_regression_count"),
         ),
         (
+            "receipt_handoff_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("handoff_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
             check.get("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "receipt_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         ),
         (
             "receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
@@ -254,8 +342,24 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
             check.get("comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
         ),
         (
+            "receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
             check.get("comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         ),
         (
             "receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
@@ -272,6 +376,8 @@ def render_promoted_training_scale_seed_handoff_automation_receipt_check(check: 
         ("receipt_issue_count", check.get("issue_count")),
         ("receipt_issues", json.dumps(check.get("issues"), ensure_ascii=False)),
     ]
+    if _int(check.get("schema_version")) < 5:
+        rows = [row for row in rows if row[0] not in RECEIPT_SCHEMA_V5_TEXT_FIELDS]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
@@ -302,7 +408,12 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
     embedded = as_dict(payload.get("receipt_check"))
     embedded_outputs = as_dict(payload.get("receipt_check_outputs"))
     expected_receipt = build_promoted_training_scale_seed_handoff_automation_receipt(payload)
+    embedded_schema_version = _int(embedded.get("schema_version"))
+    if 0 < embedded_schema_version < _int(expected_receipt.get("schema_version")):
+        expected_receipt = dict(expected_receipt)
+        expected_receipt["schema_version"] = embedded_schema_version
     expected_check = check_promoted_training_scale_seed_handoff_automation_receipt(expected_receipt)
+    compare_keys = _receipt_check_compare_keys(_int(expected_check.get("schema_version")))
     issues: list[str] = []
     if not embedded:
         issues.append("receipt_check must be embedded in the promoted seed handoff report")
@@ -314,7 +425,7 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         issues.append("receipt_check_outputs.json is required")
     if embedded_outputs and not embedded_outputs.get("text"):
         issues.append("receipt_check_outputs.text is required")
-    for key in EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS:
+    for key in compare_keys:
         expected_value = _normalized_check_value(key, expected_check.get(key))
         actual_value = _normalized_check_value(key, embedded.get(key))
         if expected_value != actual_value:
@@ -323,6 +434,7 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         embedded,
         embedded_outputs,
         expected_check,
+        compare_keys=compare_keys,
         base_dir=Path(base_dir) if base_dir is not None else None,
     )
     issues.extend(string_list(sidecars.get("issues")))
@@ -336,11 +448,20 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         "exit_code": _int(expected_check.get("exit_code")),
         "checker_exit_code": checker_exit_code,
         "receipt_schema_version": expected_check.get("schema_version"),
+        "receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts": expected_check.get(
+            "clean_batch_review_requirement_selected_ci_regression_reason_counts"
+        ),
         "receipt_selected_handoff_batch_maturity_ci_regression_count": expected_check.get(
             "selected_handoff_batch_maturity_ci_regression_count"
         ),
+        "receipt_selected_handoff_batch_maturity_ci_regression_reason_counts": expected_check.get(
+            "selected_handoff_batch_maturity_ci_regression_reason_counts"
+        ),
         "receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
             "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
+        "receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts": expected_check.get(
+            "selected_handoff_selected_batch_maturity_ci_regression_reason_counts"
         ),
         "receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
             "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count"
@@ -348,8 +469,14 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         "receipt_handoff_batch_maturity_ci_regression_count": expected_check.get(
             "handoff_batch_maturity_ci_regression_count"
         ),
+        "receipt_handoff_batch_maturity_ci_regression_reason_counts": expected_check.get(
+            "handoff_batch_maturity_ci_regression_reason_counts"
+        ),
         "receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
             "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
+        "receipt_handoff_selected_batch_maturity_ci_regression_reason_counts": expected_check.get(
+            "handoff_selected_batch_maturity_ci_regression_reason_counts"
         ),
         "receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": expected_check.get(
             "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
@@ -369,8 +496,14 @@ def check_promoted_training_scale_seed_handoff_embedded_receipt_check(
         "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": expected_check.get(
             "comparison_ready_handoff_batch_maturity_suite_design_regression_count"
         ),
+        "receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": expected_check.get(
+            "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"
+        ),
         "receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": expected_check.get(
             "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"
+        ),
+        "receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": expected_check.get(
+            "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts"
         ),
         "receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": expected_check.get(
             "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"
@@ -411,12 +544,36 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
         ("embedded_receipt_check_checker_exit_code", check.get("checker_exit_code")),
         ("embedded_receipt_check_receipt_schema_version", check.get("receipt_schema_version")),
         (
+            "embedded_receipt_check_receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count",
             check.get("receipt_selected_handoff_batch_maturity_ci_regression_count"),
         ),
         (
+            "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_selected_handoff_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
             check.get("receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         ),
         (
             "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
@@ -427,8 +584,24 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
             check.get("receipt_handoff_batch_maturity_ci_regression_count"),
         ),
         (
+            "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_handoff_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "embedded_receipt_check_receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
             check.get("receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         ),
         (
             "embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
@@ -455,8 +628,24 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
             check.get("receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count"),
         ),
         (
+            "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+        ),
+        (
             "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
             check.get("receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"),
+        ),
+        (
+            "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
+            json.dumps(
+                check.get("receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         ),
         (
             "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
@@ -483,6 +672,8 @@ def render_promoted_training_scale_seed_handoff_embedded_receipt_check(check: di
         ("embedded_receipt_check_issue_count", check.get("issue_count")),
         ("embedded_receipt_check_issues", json.dumps(check.get("issues"), ensure_ascii=False)),
     ]
+    if _int(check.get("receipt_schema_version")) < 5:
+        rows = [row for row in rows if row[0] not in EMBEDDED_RECEIPT_SCHEMA_V5_TEXT_FIELDS]
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
@@ -538,6 +729,16 @@ def _normalized_check_value(key: str, value: Any) -> Any:
         "issues",
     }:
         return string_list(value)
+    if key in {
+        "clean_batch_review_requirement_selected_ci_regression_reason_counts",
+        "selected_handoff_batch_maturity_ci_regression_reason_counts",
+        "selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
+        "handoff_batch_maturity_ci_regression_reason_counts",
+        "handoff_selected_batch_maturity_ci_regression_reason_counts",
+        "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+        "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
+    }:
+        return positive_int_mapping(value)
     if key == "blocking_source":
         return str(value) if value is not None else None
     return str(value or "")
@@ -589,11 +790,28 @@ def _v4_receipt_field_issues(payload: dict[str, Any]) -> list[str]:
     return issues
 
 
+def _v5_receipt_field_issues(payload: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    for key in RECEIPT_SCHEMA_V5_REQUIRED_FIELDS:
+        if key not in payload:
+            issues.append(f"schema_version >= 5 receipt must include {key}")
+        elif not isinstance(payload.get(key), dict):
+            issues.append(f"{key} must be an object")
+        else:
+            for reason, count in payload[key].items():
+                if not str(reason).strip():
+                    issues.append(f"{key} must not include blank reason names")
+                if _int(count) < 0:
+                    issues.append(f"{key}.{reason} must be >= 0")
+    return issues
+
+
 def _check_embedded_receipt_sidecars(
     embedded: dict[str, Any],
     embedded_outputs: dict[str, Any],
     expected_check: dict[str, Any],
     *,
+    compare_keys: tuple[str, ...],
     base_dir: Path | None,
 ) -> dict[str, Any]:
     issues: list[str] = []
@@ -610,9 +828,9 @@ def _check_embedded_receipt_sidecars(
     if embedded_outputs.get("text") and not check_text_exists:
         issues.append(f"receipt_check_outputs.text does not exist: {embedded_outputs.get('text')}")
     if receipt_exists and receipt_path is not None:
-        issues.extend(_check_receipt_file_matches_expected(receipt_path, expected_check))
+        issues.extend(_check_receipt_file_matches_expected(receipt_path, expected_check, compare_keys))
     if check_json_exists and check_json_path is not None:
-        issues.extend(_check_receipt_check_json_matches_expected(check_json_path, expected_check, embedded))
+        issues.extend(_check_receipt_check_json_matches_expected(check_json_path, expected_check, embedded, compare_keys))
     if check_text_exists and check_text_path is not None:
         issues.extend(_check_receipt_check_text_matches_expected(check_text_path, expected_check))
     return {
@@ -628,19 +846,24 @@ def _check_embedded_receipt_sidecars(
     }
 
 
-def _check_receipt_file_matches_expected(path: Path, expected_check: dict[str, Any]) -> list[str]:
+def _check_receipt_file_matches_expected(
+    path: Path,
+    expected_check: dict[str, Any],
+    compare_keys: tuple[str, ...],
+) -> list[str]:
     try:
         receipt = load_promoted_training_scale_seed_handoff_automation_receipt(path)
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         return [f"receipt_check.receipt_path could not be read: {exc}"]
     actual_check = check_promoted_training_scale_seed_handoff_automation_receipt(receipt)
-    return _compare_check_fields("receipt_check.receipt_path", expected_check, actual_check)
+    return _compare_check_fields("receipt_check.receipt_path", expected_check, actual_check, compare_keys)
 
 
 def _check_receipt_check_json_matches_expected(
     path: Path,
     expected_check: dict[str, Any],
     embedded: dict[str, Any],
+    compare_keys: tuple[str, ...],
 ) -> list[str]:
     try:
         payload = json.loads(path.read_text(encoding="utf-8-sig"))
@@ -648,7 +871,7 @@ def _check_receipt_check_json_matches_expected(
         return [f"receipt_check_outputs.json could not be read: {exc}"]
     if not isinstance(payload, dict):
         return ["receipt_check_outputs.json must contain a JSON object"]
-    issues = _compare_check_fields("receipt_check_outputs.json", expected_check, payload)
+    issues = _compare_check_fields("receipt_check_outputs.json", expected_check, payload, compare_keys)
     expected_receipt_path = str(embedded.get("receipt_path") or "")
     actual_receipt_path = str(payload.get("receipt_path") or "")
     if expected_receipt_path != actual_receipt_path:
@@ -670,14 +893,25 @@ def _check_receipt_check_text_matches_expected(path: Path, expected_check: dict[
     return []
 
 
-def _compare_check_fields(prefix: str, expected: dict[str, Any], actual: dict[str, Any]) -> list[str]:
+def _compare_check_fields(
+    prefix: str,
+    expected: dict[str, Any],
+    actual: dict[str, Any],
+    compare_keys: tuple[str, ...],
+) -> list[str]:
     issues: list[str] = []
-    for key in EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS:
+    for key in compare_keys:
         expected_value = _normalized_check_value(key, expected.get(key))
         actual_value = _normalized_check_value(key, actual.get(key))
         if expected_value != actual_value:
             issues.append(f"{prefix}.{key} expected {expected_value!r} but got {actual_value!r}")
     return issues
+
+
+def _receipt_check_compare_keys(schema_version: int) -> tuple[str, ...]:
+    if schema_version >= 5:
+        return EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS
+    return tuple(key for key in EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS if key not in RECEIPT_SCHEMA_V5_REQUIRED_FIELDS)
 
 
 def _resolve_reference_path(value: Any, base_dir: Path | None) -> Path | None:

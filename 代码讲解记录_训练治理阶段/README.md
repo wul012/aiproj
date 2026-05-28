@@ -512,6 +512,9 @@
 483-v469-promoted-seed-handoff-archived-reason-gate.md
  -> v469 code explanation: carry archived path portability reason-counts through final promoted seed handoff outputs and clean-batch automation gate evidence.
 
+484-v470-promoted-seed-handoff-receipt-ci-reason-schema-v5.md
+ -> v470 code explanation: upgrade promoted seed handoff receipts to schema v5 so CI regression reason-count maps are validated through receipt checks, embedded checks, assurance, and contract summaries.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
