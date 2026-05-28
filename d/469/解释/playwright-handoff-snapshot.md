@@ -1,0 +1,415 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MiniGPT promoted training scale seed handoff" [level=1] [ref=e3]
+    - paragraph [ref=e4]: d\469\解释\source\promoted-seed\promoted_training_scale_seed.json
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Status
+      - strong [ref=e8]: planned
+    - generic [ref=e9]:
+      - generic [ref=e10]: Seed
+      - strong [ref=e11]: ready
+    - generic [ref=e12]:
+      - generic [ref=e13]: Decision
+      - strong [ref=e14]: accepted
+    - generic [ref=e15]:
+      - generic [ref=e16]: Execute
+      - strong [ref=e17]: "False"
+    - generic [ref=e18]:
+      - generic [ref=e19]: Return
+      - strong
+    - generic [ref=e20]:
+      - generic [ref=e21]: Artifacts
+      - strong [ref=e22]: 0/5
+    - generic [ref=e23]:
+      - generic [ref=e24]: Plan
+      - strong [ref=e25]: missing
+    - generic [ref=e26]:
+      - generic [ref=e27]: Seed suite
+      - strong [ref=e28]: builtin:standard-zh
+    - generic [ref=e29]:
+      - generic [ref=e30]: Selected handoff suite
+      - strong [ref=e31]: consistent
+    - generic [ref=e32]:
+      - generic [ref=e33]: Selected handoff mismatch
+      - strong [ref=e34]: "0"
+    - generic [ref=e35]:
+      - generic [ref=e36]: Selected clean required
+      - strong [ref=e37]: "True"
+    - generic [ref=e38]:
+      - generic [ref=e39]: Selected clean batch
+      - strong [ref=e40]: clean
+    - generic [ref=e41]:
+      - generic [ref=e42]: Selected CI regressions
+      - strong [ref=e43]: "1"
+    - generic [ref=e44]:
+      - generic [ref=e45]: Selected CI boundary plan
+      - strong [ref=e46]: "1"
+    - generic [ref=e47]:
+      - generic [ref=e48]: Selected CI reasons
+      - strong [ref=e49]: archived_path_portability_check_not_ready:1
+    - generic [ref=e50]:
+      - generic [ref=e51]: Selected suite-design regressions
+      - strong
+    - generic [ref=e52]:
+      - generic [ref=e53]: Selected selected CI regressions
+      - strong [ref=e54]: "1"
+    - generic [ref=e55]:
+      - generic [ref=e56]: Selected selected CI boundary plan
+      - strong [ref=e57]: "1"
+    - generic [ref=e58]:
+      - generic [ref=e59]: Selected selected CI reasons
+      - strong [ref=e60]: archived_path_portability_check_not_ready:1
+    - generic [ref=e61]:
+      - generic [ref=e62]: Selected selected suite-design regressions
+      - strong
+    - generic [ref=e63]:
+      - generic [ref=e64]: Handoff clean required
+      - strong [ref=e65]: "3"
+    - generic [ref=e66]:
+      - generic [ref=e67]: Handoff clean
+      - strong [ref=e68]: "2"
+    - generic [ref=e69]:
+      - generic [ref=e70]: Handoff unclean
+      - strong [ref=e71]: "1"
+    - generic [ref=e72]:
+      - generic [ref=e73]: Handoff CI regressions
+      - strong [ref=e74]: "2"
+    - generic [ref=e75]:
+      - generic [ref=e76]: Handoff CI boundary plan
+      - strong [ref=e77]: "1"
+    - generic [ref=e78]:
+      - generic [ref=e79]: Handoff selected CI regressions
+      - strong [ref=e80]: "1"
+    - generic [ref=e81]:
+      - generic [ref=e82]: Handoff selected CI boundary plan
+      - strong [ref=e83]: "1"
+    - generic [ref=e84]:
+      - generic [ref=e85]: Handoff CI reasons
+      - strong [ref=e86]: archived_path_portability_check_not_ready:1, workflow-order-regressed:1
+    - generic [ref=e87]:
+      - generic [ref=e88]: Handoff selected CI reasons
+      - strong [ref=e89]: archived_path_portability_check_not_ready:1
+    - generic [ref=e90]:
+      - generic [ref=e91]: Handoff suite-design regressions
+      - strong
+    - generic [ref=e92]:
+      - generic [ref=e93]: Handoff selected suite-design regressions
+      - strong
+    - generic [ref=e94]:
+      - generic [ref=e95]: Ready clean-required
+      - strong [ref=e96]: "2"
+    - generic [ref=e97]:
+      - generic [ref=e98]: Ready clean batch
+      - strong [ref=e99]: "2"
+    - generic [ref=e100]:
+      - generic [ref=e101]: Ready unclean batch
+      - strong [ref=e102]: "0"
+    - generic [ref=e103]:
+      - generic [ref=e104]: Ready CI regressions
+      - strong [ref=e105]: "0"
+    - generic [ref=e106]:
+      - generic [ref=e107]: Ready CI boundary plan
+      - strong [ref=e108]: "0"
+    - generic [ref=e109]:
+      - generic [ref=e110]: Ready selected CI regressions
+      - strong [ref=e111]: "0"
+    - generic [ref=e112]:
+      - generic [ref=e113]: Ready selected CI boundary plan
+      - strong [ref=e114]: "0"
+    - generic [ref=e115]:
+      - generic [ref=e116]: Ready CI reasons
+      - strong [ref=e117]: none
+    - generic [ref=e118]:
+      - generic [ref=e119]: Ready selected CI reasons
+      - strong [ref=e120]: none
+    - generic [ref=e121]:
+      - generic [ref=e122]: Ready suite-design regressions
+      - strong
+    - generic [ref=e123]:
+      - generic [ref=e124]: Ready selected suite-design regressions
+      - strong
+    - generic [ref=e125]:
+      - generic [ref=e126]: Selected handoff batch
+      - strong
+    - generic [ref=e127]:
+      - generic [ref=e128]: Selected batch blockers
+      - strong
+    - generic [ref=e129]:
+      - generic [ref=e130]: Ready batch reviews
+      - strong
+    - generic [ref=e131]:
+      - generic [ref=e132]: Ready batch blockers
+      - strong
+    - generic [ref=e133]:
+      - generic [ref=e134]: Handoff suite mismatches
+      - strong [ref=e135]: "0"
+    - generic [ref=e136]:
+      - generic [ref=e137]: Plan suite
+      - strong
+    - generic [ref=e138]:
+      - generic [ref=e139]: Suite alignment
+      - strong [ref=e140]: pending-plan
+    - generic [ref=e141]:
+      - generic [ref=e142]: Clean evidence
+      - strong [ref=e143]: pending-plan
+    - generic [ref=e144]:
+      - generic [ref=e145]: Clean evidence domain
+      - strong [ref=e146]: ready, pending-plan, review, incomplete
+    - generic [ref=e147]:
+      - generic [ref=e148]: Clean evidence gate
+      - strong [ref=e149]: not-required
+    - generic [ref=e150]:
+      - generic [ref=e151]: Clean evidence gate domain
+      - strong [ref=e152]: not-required, pass, fail
+    - generic [ref=e153]:
+      - generic [ref=e154]: Clean batch gate
+      - strong [ref=e155]: fail
+    - generic [ref=e156]:
+      - generic [ref=e157]: Clean batch gate selected CI
+      - strong [ref=e158]: "1"
+    - generic [ref=e159]:
+      - generic [ref=e160]: Clean batch gate selected CI boundary plan
+      - strong [ref=e161]: "1"
+    - generic [ref=e162]:
+      - generic [ref=e163]: Clean batch gate selected CI reasons
+      - strong [ref=e164]: archived_path_portability_check_not_ready:1
+    - generic [ref=e165]:
+      - generic [ref=e166]: Clean batch gate selected suite-design
+      - strong [ref=e167]: "0"
+    - generic [ref=e168]:
+      - generic [ref=e169]: Clean batch gate domain
+      - strong [ref=e170]: not-required, pass, fail
+    - generic [ref=e171]:
+      - generic [ref=e172]: Automation gate
+      - strong [ref=e173]: fail
+    - generic [ref=e174]:
+      - generic [ref=e175]: Automation decision
+      - strong [ref=e176]: stop
+    - generic [ref=e177]:
+      - generic [ref=e178]: Automation exit
+      - strong [ref=e179]: "1"
+    - generic [ref=e180]:
+      - generic [ref=e181]: Automation required
+      - strong [ref=e182]: "1"
+    - generic [ref=e183]:
+      - generic [ref=e184]: Automation blocking
+      - strong [ref=e185]: "1"
+    - generic [ref=e186]:
+      - generic [ref=e187]: Automation gate domain
+      - strong [ref=e188]: not-required, pass, fail
+    - generic [ref=e189]:
+      - generic [ref=e190]: Automation decision domain
+      - strong [ref=e191]: not-requested, continue, stop
+    - generic [ref=e192]:
+      - generic [ref=e193]: Automation summary
+      - strong [ref=e194]: stop
+    - generic [ref=e195]:
+      - generic [ref=e196]: Automation summary exit
+      - strong [ref=e197]: "1"
+    - generic [ref=e198]:
+      - generic [ref=e199]: Automation blocking source
+      - strong [ref=e200]: automation_gate
+    - generic [ref=e201]:
+      - generic [ref=e202]: Automation summary domain
+      - strong [ref=e203]: continue, stop
+    - generic [ref=e204]:
+      - generic [ref=e205]: Receipt check
+      - strong
+    - generic [ref=e206]:
+      - generic [ref=e207]: Receipt decision
+      - strong
+    - generic [ref=e208]:
+      - generic [ref=e209]: Receipt exit
+      - strong
+    - generic [ref=e210]:
+      - generic [ref=e211]: Receipt checker exit
+      - strong
+    - generic [ref=e212]:
+      - generic [ref=e213]: Receipt blocking source
+      - strong
+    - generic [ref=e214]:
+      - generic [ref=e215]: Receipt failed requirements
+      - strong
+    - generic [ref=e216]:
+      - generic [ref=e217]: Receipt issue count
+      - strong
+    - generic [ref=e218]:
+      - generic [ref=e219]: Receipt receipt path
+      - strong
+    - generic [ref=e220]:
+      - generic [ref=e221]: Receipt json
+      - strong
+    - generic [ref=e222]:
+      - generic [ref=e223]: Receipt text
+      - strong
+    - generic [ref=e224]:
+      - generic [ref=e225]: Embedded receipt check
+      - strong
+    - generic [ref=e226]:
+      - generic [ref=e227]: Embedded receipt decision
+      - strong
+    - generic [ref=e228]:
+      - generic [ref=e229]: Embedded receipt exit
+      - strong
+    - generic [ref=e230]:
+      - generic [ref=e231]: Embedded receipt checker exit
+      - strong
+    - generic [ref=e232]:
+      - generic [ref=e233]: Embedded receipt sidecars
+      - strong
+    - generic [ref=e234]:
+      - generic [ref=e235]: Embedded receipt issue count
+      - strong
+    - generic [ref=e236]:
+      - generic [ref=e237]: Embedded receipt path exists
+      - strong
+    - generic [ref=e238]:
+      - generic [ref=e239]: Embedded receipt json exists
+      - strong
+    - generic [ref=e240]:
+      - generic [ref=e241]: Embedded receipt text exists
+      - strong
+    - generic [ref=e242]:
+      - generic [ref=e243]: Embedded receipt output json
+      - strong
+    - generic [ref=e244]:
+      - generic [ref=e245]: Embedded receipt output text
+      - strong
+    - generic [ref=e246]:
+      - generic [ref=e247]: Handoff assurance
+      - strong
+    - generic [ref=e248]:
+      - generic [ref=e249]: Assurance decision
+      - strong
+    - generic [ref=e250]:
+      - generic [ref=e251]: Assurance exit
+      - strong
+    - generic [ref=e252]:
+      - generic [ref=e253]: Assurance checker exit
+      - strong
+    - generic [ref=e254]:
+      - generic [ref=e255]: Assurance embedded check
+      - strong
+    - generic [ref=e256]:
+      - generic [ref=e257]: Assurance sidecars
+      - strong
+    - generic [ref=e258]:
+      - generic [ref=e259]: Assurance receipt schema
+      - strong
+    - generic [ref=e260]:
+      - generic [ref=e261]: Assurance selected CI regressions
+      - strong
+    - generic [ref=e262]:
+      - generic [ref=e263]: Assurance selected CI boundary plan
+      - strong
+    - generic [ref=e264]:
+      - generic [ref=e265]: Assurance CI regressions
+      - strong
+    - generic [ref=e266]:
+      - generic [ref=e267]: Assurance CI boundary plan
+      - strong
+    - generic [ref=e268]:
+      - generic [ref=e269]: Assurance selected suite-design regressions
+      - strong
+    - generic [ref=e270]:
+      - generic [ref=e271]: Assurance suite-design regressions
+      - strong
+    - generic [ref=e272]:
+      - generic [ref=e273]: Assurance ready suite-design regressions
+      - strong
+    - generic [ref=e274]:
+      - generic [ref=e275]: Assurance ready CI boundary plan
+      - strong
+    - generic [ref=e276]:
+      - generic [ref=e277]: Assurance comparison exclusions
+      - strong
+    - generic [ref=e278]:
+      - generic [ref=e279]: Assurance output json exists
+      - strong
+    - generic [ref=e280]:
+      - generic [ref=e281]: Assurance output text exists
+      - strong
+    - generic [ref=e282]:
+      - generic [ref=e283]: Assurance issue count
+      - strong
+    - generic [ref=e284]:
+      - generic [ref=e285]: Assurance json
+      - strong
+    - generic [ref=e286]:
+      - generic [ref=e287]: Assurance text
+      - strong
+    - generic [ref=e288]:
+      - generic [ref=e289]: Batch
+      - strong [ref=e290]: "False"
+  - generic [ref=e291]:
+    - heading "Seed Command" [level=2] [ref=e292]
+    - generic [ref=e293]: D:\python\python.exe scripts/plan_training_scale.py D:\aiproj\d\469\解释\source\corpus.txt --project-root D:\aiproj --out-dir D:\aiproj\d\469\解释\source\next-plan --batch-out-root D:\aiproj\d\469\解释\source\batch --dataset-name next-zh --dataset-version-prefix v82-test --suite-name standard-zh --max-variants 1
+  - generic [ref=e294]:
+    - heading "Execution" [level=2] [ref=e295]
+    - table [ref=e296]:
+      - rowgroup [ref=e297]:
+        - row "Status planned" [ref=e298]:
+          - rowheader "Status" [ref=e299]
+          - cell "planned" [ref=e300]
+        - row "Return code" [ref=e301]:
+          - columnheader "Return code" [ref=e302]
+          - cell [ref=e303]
+        - row "Elapsed seconds 0.0" [ref=e304]:
+          - rowheader "Elapsed seconds" [ref=e305]
+          - cell "0.0" [ref=e306]
+        - row "Blocked reason" [ref=e307]:
+          - columnheader "Blocked reason" [ref=e308]
+          - cell [ref=e309]
+        - row "Stdout tail" [ref=e310]:
+          - columnheader "Stdout tail" [ref=e311]
+          - cell [ref=e312]
+        - row "Stderr tail" [ref=e313]:
+          - columnheader "Stderr tail" [ref=e314]
+          - cell [ref=e315]
+  - generic [ref=e316]:
+    - heading "Plan Artifacts" [level=2] [ref=e317]
+    - table [ref=e319]:
+      - rowgroup [ref=e320]:
+        - row "Key Exists Count Path" [ref=e321]:
+          - columnheader "Key" [ref=e322]
+          - columnheader "Exists" [ref=e323]
+          - columnheader "Count" [ref=e324]
+          - columnheader "Path" [ref=e325]
+      - rowgroup [ref=e326]:
+        - row "training_scale_plan_json False 0 D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.json" [ref=e327]:
+          - cell "training_scale_plan_json" [ref=e328]
+          - cell "False" [ref=e329]
+          - cell "0" [ref=e330]
+          - cell "D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.json" [ref=e331]
+        - row "training_scale_variants_json False 0 D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_variants.json" [ref=e332]:
+          - cell "training_scale_variants_json" [ref=e333]
+          - cell "False" [ref=e334]
+          - cell "0" [ref=e335]
+          - cell "D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_variants.json" [ref=e336]
+        - row "training_scale_plan_csv False 0 D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.csv" [ref=e337]:
+          - cell "training_scale_plan_csv" [ref=e338]
+          - cell "False" [ref=e339]
+          - cell "0" [ref=e340]
+          - cell "D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.csv" [ref=e341]
+        - row "training_scale_plan_markdown False 0 D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.md" [ref=e342]:
+          - cell "training_scale_plan_markdown" [ref=e343]
+          - cell "False" [ref=e344]
+          - cell "0" [ref=e345]
+          - cell "D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.md" [ref=e346]
+        - row "training_scale_plan_html False 0 D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.html" [ref=e347]:
+          - cell "training_scale_plan_html" [ref=e348]
+          - cell "False" [ref=e349]
+          - cell "0" [ref=e350]
+          - cell "D:\\aiproj\\d\\469\\解释\\source\\next-plan\\training_scale_plan.html" [ref=e351]
+  - generic [ref=e352]:
+    - heading "Plan Report" [level=2] [ref=e353]
+    - paragraph [ref=e354]: No plan report was loaded.
+  - generic [ref=e355]:
+    - heading "Recommendations" [level=2] [ref=e356]
+    - list [ref=e357]:
+      - listitem [ref=e358]: Suite alignment is pending plan generation; execute the seed handoff before treating the plan suite as confirmed.
+      - listitem [ref=e359]: "Clean batch-review requirement failed; resolve selected handoff evidence before seed handoff automation: selected handoff requires clean batch-review evidence but carries 1 CI boundary plan-check regression(s)"
+      - listitem [ref=e360]: "Resolve selected handoff batch CI regressions caused by boundary plan-check readiness before treating this seed handoff as clean model-quality evidence. Boundary plan regressions: 1."
+      - listitem [ref=e361]: Review the generated seed command, then rerun with --execute to materialize the next training scale plan.
+  - contentinfo [ref=e362]: Generated by MiniGPT promoted training scale seed handoff.

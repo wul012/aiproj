@@ -515,6 +515,9 @@ d/467/解释/说明.md
 d/468/图片
 d/468/解释/说明.md
  -> v468 promoted training scale decision / seed archived reason carryover 的运行截图和解释
+d/469/图片
+d/469/解释/说明.md
+ -> v469 promoted seed handoff archived reason clean-batch gate 的运行截图和解释
 ```
 
 写入规则：

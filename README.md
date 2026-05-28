@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v468.0.0` carries archived path portability regression reason-counts through promoted training scale decision and seed outputs.
+Version `v469.0.0` carries archived path portability regression reason-counts through final promoted seed handoff and clean-batch automation gating.
+
+## Latest v469 checkpoint
+
+- Extended promoted seed handoff tests so `archived_path_portability_check_not_ready` is preserved in handoff summaries, Markdown/HTML/CSV output, CLI diagnostics, and clean-batch requirement evidence.
+- Added optional reason-count injection to the seed handoff test fixture without changing its default legacy reason behavior.
+- Verified `--require-clean-batch-review` stops the automation gate when the selected handoff carries archived-path CI regression evidence.
+- Archived seed handoff JSON/CSV/Markdown/HTML, automation receipt, CLI output with `exit_code=1`, Playwright MCP snapshot, and screenshot evidence in `d/469`.
 
 ## Latest v468 checkpoint
 
