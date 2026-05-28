@@ -17,3 +17,5 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+addopts = ["-p", "no:faker"]
+asyncio_default_fixture_loop_scope = "function"

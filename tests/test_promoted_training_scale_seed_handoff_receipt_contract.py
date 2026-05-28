@@ -17,6 +17,9 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (  # n
     render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown,
     render_promoted_training_scale_seed_handoff_receipt_contract_summary_text,
 )
+from minigpt.promoted_training_scale_seed_handoff_receipt_contract_context import (  # noqa: E402
+    contract_issues,
+)
 from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # noqa: E402
     SuiteDesignHandoffSidecars,
     write_suite_design_handoff_with_sidecars,
@@ -183,6 +186,50 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertTrue(
                 any("handoff CI regression selected reasons exceed handoff reasons" in issue for issue in summary["issues"])
             )
+
+    def test_contract_issues_keep_legacy_schema_v4_reason_counts_compatible_when_consistent(self) -> None:
+        assurance = {
+            "status": "pass",
+            "decision": "continue",
+            "embedded_receipt_check_receipt_schema_version": 4,
+            "embedded_receipt_check_sidecar_status": "pass",
+        }
+        reason_scopes = [
+            {
+                "scope": "handoff",
+                "selected_reasons_within_handoff": True,
+            }
+        ]
+
+        issues = contract_issues(assurance, [], [], reason_scopes)
+
+        self.assertFalse(
+            any("receipt schema version must be >= 5 for CI reason-count contract" in issue for issue in issues)
+        )
+
+    def test_contract_issues_require_schema_v5_when_legacy_reason_count_contract_fails(self) -> None:
+        assurance = {
+            "status": "pass",
+            "decision": "continue",
+            "embedded_receipt_check_receipt_schema_version": 4,
+            "embedded_receipt_check_sidecar_status": "pass",
+        }
+        reason_scopes = [
+            {
+                "scope": "handoff",
+                "missing_reasons": ["missing-ci-step"],
+                "selected_reasons_within_handoff": False,
+            }
+        ]
+
+        issues = contract_issues(assurance, [], [], reason_scopes)
+
+        self.assertTrue(
+            any("receipt schema version must be >= 5 for CI reason-count contract" in issue for issue in issues)
+        )
+        self.assertTrue(
+            any("handoff CI regression selected reasons exceed handoff reasons" in issue for issue in issues)
+        )
 
     def test_contract_summary_rejects_tampered_suite_design_sidecar(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

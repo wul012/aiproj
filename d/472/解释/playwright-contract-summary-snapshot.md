@@ -1,0 +1,88 @@
+- main [ref=e2]:
+  - heading "MiniGPT promoted seed handoff receipt contract summary" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Contract" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: continue
+      - generic [ref=e13]:
+        - generic [ref=e14]: Schema
+        - strong [ref=e15]: "5"
+      - generic [ref=e16]:
+        - generic [ref=e17]: Schema v5
+        - strong [ref=e18]: "True"
+      - generic [ref=e19]:
+        - generic [ref=e20]: Assurance
+        - strong [ref=e21]: pass
+      - generic [ref=e22]:
+        - generic [ref=e23]: Sidecar
+        - strong [ref=e24]: pass
+      - generic [ref=e25]:
+        - generic [ref=e26]: Issues
+        - strong [ref=e27]: "0"
+  - generic [ref=e28]:
+    - heading "Suite-Design Scopes" [level=2] [ref=e29]
+    - table [ref=e30]:
+      - rowgroup [ref=e31]:
+        - row "Scope Count Names Count matches names" [ref=e32]
+      - rowgroup [ref=e37]:
+        - row "selected 0 none True" [ref=e38]
+        - row "handoff 0 none True" [ref=e43]
+        - row "comparison_ready 0 none True" [ref=e48]
+  - generic [ref=e53]:
+    - heading "CI Boundary Plan-Check Scopes" [level=2] [ref=e54]
+    - table [ref=e55]:
+      - rowgroup [ref=e56]:
+        - row "Scope Handoff count Selected count Selected within handoff" [ref=e57]
+      - rowgroup [ref=e62]:
+        - row "selected 1 1 True" [ref=e63]
+        - row "handoff 1 1 True" [ref=e68]
+        - row "comparison_ready 0 0 True" [ref=e73]
+  - generic [ref=e78]:
+    - heading "CI Reason-Count Scopes" [level=2] [ref=e79]
+    - table [ref=e80]:
+      - rowgroup [ref=e81]:
+        - row "Scope Handoff reasons Selected reasons Selected within handoff Missing reasons" [ref=e82]
+      - rowgroup [ref=e88]:
+        - 'row "selected {\"archived_path_portability_check_not_ready\": 1} {\"archived_path_portability_check_not_ready\": 1} True none" [ref=e89]'
+        - 'row "handoff {\"archived_path_portability_check_not_ready\": 1, \"workflow-order-regressed\": 1} {\"archived_path_portability_check_not_ready\": 1} True none" [ref=e95]'
+        - 'row "comparison_ready {} {} True none" [ref=e101]'
+  - generic [ref=e107]:
+    - heading "Issues" [level=2] [ref=e108]
+    - list [ref=e109]:
+      - listitem [ref=e110]: none
+  - generic [ref=e111]:
+    - heading "Contract Checks" [level=2] [ref=e112]
+    - table [ref=e113]:
+      - rowgroup [ref=e114]:
+        - row "Check Type Target Scope Status Expected Actual Detail" [ref=e115]
+      - rowgroup [ref=e124]:
+        - row "assurance_status_pass status_equals assurance.status assurance pass pass pass handoff assurance must pass" [ref=e125]
+        - row "schema_v3_ready schema_readiness receipt.schema_v3_ready receipt pass True True receipt schema must support suite-design name contract" [ref=e134]
+        - row "schema_v4_ready schema_readiness receipt.schema_v4_ready receipt pass True True receipt schema must support CI boundary plan-check contract" [ref=e143]
+        - row "schema_v5_ready schema_readiness receipt.schema_v5_ready receipt pass True True receipt schema must support CI regression reason-count contract" [ref=e152]
+        - row "embedded_receipt_check_sidecar_pass status_equals embedded_receipt_check.sidecar_status embedded_receipt_check pass pass pass embedded receipt-check sidecar must pass" [ref=e161]
+        - row "suite_design_selected_count_matches_names count_consistency suite_design.selected.count_matches_names selected pass True True suite-design regression count must match name count" [ref=e170]
+        - row "suite_design_handoff_count_matches_names count_consistency suite_design.handoff.count_matches_names handoff pass True True suite-design regression count must match name count" [ref=e179]
+        - row "suite_design_comparison_ready_count_matches_names count_consistency suite_design.comparison_ready.count_matches_names comparison_ready pass True True suite-design regression count must match name count" [ref=e188]
+        - row "ci_boundary_plan_check_selected_selected_within_handoff selected_within_handoff ci_boundary_plan_check.selected.selected_within_handoff selected pass True True selected CI boundary plan-check count must not exceed handoff count" [ref=e197]
+        - row "ci_boundary_plan_check_handoff_selected_within_handoff selected_within_handoff ci_boundary_plan_check.handoff.selected_within_handoff handoff pass True True selected CI boundary plan-check count must not exceed handoff count" [ref=e206]
+        - row "ci_boundary_plan_check_comparison_ready_selected_within_handoff selected_within_handoff ci_boundary_plan_check.comparison_ready.selected_within_handoff comparison_ready pass True True selected CI boundary plan-check count must not exceed handoff count" [ref=e215]
+        - row "ci_reason_counts_selected_selected_within_handoff reason_counts_within_handoff ci_reason_counts.selected.selected_reasons_within_handoff selected pass True True selected CI regression reason counts must not exceed handoff reason counts" [ref=e224]
+        - row "ci_reason_counts_handoff_selected_within_handoff reason_counts_within_handoff ci_reason_counts.handoff.selected_reasons_within_handoff handoff pass True True selected CI regression reason counts must not exceed handoff reason counts" [ref=e233]
+        - row "ci_reason_counts_comparison_ready_selected_within_handoff reason_counts_within_handoff ci_reason_counts.comparison_ready.selected_reasons_within_handoff comparison_ready pass True True selected CI regression reason counts must not exceed handoff reason counts" [ref=e242]
+  - generic [ref=e251]:
+    - heading "Contract Check Type Summary" [level=2] [ref=e252]
+    - table [ref=e253]:
+      - rowgroup [ref=e254]:
+        - row "Type Status Count Passed Failed Required Targets" [ref=e255]
+      - rowgroup [ref=e263]:
+        - row "count_consistency pass 3 3 0 3 suite_design.comparison_ready.count_matches_names, suite_design.handoff.count_matches_names, suite_design.selected.count_matches_names" [ref=e264]
+        - row "reason_counts_within_handoff pass 3 3 0 3 ci_reason_counts.comparison_ready.selected_reasons_within_handoff, ci_reason_counts.handoff.selected_reasons_within_handoff, ci_reason_counts.selected.selected_reasons_within_handoff" [ref=e272]
+        - row "schema_readiness pass 3 3 0 3 receipt.schema_v3_ready, receipt.schema_v4_ready, receipt.schema_v5_ready" [ref=e280]
+        - row "selected_within_handoff pass 3 3 0 3 ci_boundary_plan_check.comparison_ready.selected_within_handoff, ci_boundary_plan_check.handoff.selected_within_handoff, ci_boundary_plan_check.selected.selected_within_handoff" [ref=e288]
+        - row "status_equals pass 2 2 0 2 assurance.status, embedded_receipt_check.sidecar_status" [ref=e296]

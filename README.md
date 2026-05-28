@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v471.0.0` adds receipt contract checks that verify selected CI regression reason-count maps stay within their corresponding handoff aggregate reason-count maps.
+Version `v472.0.0` makes failed legacy CI reason-count contracts report the missing schema-v5 gate explicitly, while keeping compatible archived schema-v4 handoffs readable.
+
+## Latest v472 checkpoint
+
+- Added a schema-v5 issue gate to `contract_issues()` when a legacy schema-v4 reason-count scope is inconsistent.
+- Added focused regression tests for both boundaries: compatible archived schema-v4 reason maps stay pass, but inconsistent legacy reason maps report the schema-v5 requirement.
+- Updated pytest config to disable the unused `faker` plugin that caused local collection hangs, and set the asyncio fixture loop scope explicitly.
+- Rebuilt contract summary/check evidence from the v471 handoff and archived Playwright MCP snapshots and screenshots in `d/472`.
 
 ## Latest v471 checkpoint
 

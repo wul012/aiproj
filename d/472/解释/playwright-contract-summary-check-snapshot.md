@@ -1,0 +1,105 @@
+- main [ref=e2]:
+  - heading "MiniGPT receipt contract summary check" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Check" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: continue
+      - generic [ref=e13]:
+        - generic [ref=e14]: Actual
+        - strong [ref=e15]: pass
+      - generic [ref=e16]:
+        - generic [ref=e17]: Expected
+        - strong [ref=e18]: pass
+      - generic [ref=e19]:
+        - generic [ref=e20]: Profile
+        - strong [ref=e21]: pass
+      - generic [ref=e22]:
+        - generic [ref=e23]: Failed Targets
+        - strong [ref=e24]: "0"
+      - generic [ref=e25]:
+        - generic [ref=e26]: Sidecar
+        - strong [ref=e27]: pass
+      - generic [ref=e28]:
+        - generic [ref=e29]: Issues
+        - strong [ref=e30]: "0"
+  - generic [ref=e31]:
+    - heading "Check Family Summary" [level=2] [ref=e32]
+    - table [ref=e33]:
+      - rowgroup [ref=e34]:
+        - row "Family Status Checks Failed Required failed Failed targets" [ref=e35]
+      - rowgroup [ref=e42]:
+        - row "summary_field pass 25 0 0 []" [ref=e43]
+        - row "contract_profile pass 4 0 0 []" [ref=e50]
+        - row "sidecar pass 3 0 0 []" [ref=e57]
+  - generic [ref=e64]:
+    - heading "Failed Check Targets" [level=2] [ref=e65]
+    - table [ref=e66]:
+      - rowgroup [ref=e67]:
+        - row "Family Type Target Required Detail" [ref=e68]
+      - rowgroup [ref=e74]:
+        - row "none none none none none" [ref=e75]
+  - generic [ref=e81]:
+    - heading "Summary Field Checks" [level=2] [ref=e82]
+    - table [ref=e83]:
+      - rowgroup [ref=e84]:
+        - row "Field Type Target Status Expected Actual Detail" [ref=e85]
+      - rowgroup [ref=e93]:
+        - row "contract_summary_version summary_field summary.contract_summary_version pass 1 1 field matches rebuilt summary" [ref=e94]
+        - row "status summary_field summary.status pass \"pass\" \"pass\" field matches rebuilt summary" [ref=e102]
+        - row "decision summary_field summary.decision pass \"continue\" \"continue\" field matches rebuilt summary" [ref=e110]
+        - row "checker_exit_code summary_field summary.checker_exit_code pass 0 0 field matches rebuilt summary" [ref=e118]
+        - row "handoff_report_path summary_field summary.handoff_report_path pass \"d\\\\471\\\\解释\\\\promoted-seed-handoff\\\\promoted_training_scale_seed_handoff.json\" \"d\\\\471\\\\解释\\\\promoted-seed-handoff\\\\promoted_training_scale_seed_handoff.json\" field matches rebuilt summary" [ref=e126]
+        - row "receipt_schema_version summary_field summary.receipt_schema_version pass 5 5 field matches rebuilt summary" [ref=e134]
+        - row "schema_v3_ready summary_field summary.schema_v3_ready pass true true field matches rebuilt summary" [ref=e142]
+        - row "schema_v4_ready summary_field summary.schema_v4_ready pass true true field matches rebuilt summary" [ref=e150]
+        - row "schema_v5_ready summary_field summary.schema_v5_ready pass true true field matches rebuilt summary" [ref=e158]
+        - row "assurance_status summary_field summary.assurance_status pass \"pass\" \"pass\" field matches rebuilt summary" [ref=e166]
+        - row "embedded_receipt_check_status summary_field summary.embedded_receipt_check_status pass \"pass\" \"pass\" field matches rebuilt summary" [ref=e174]
+        - row "embedded_receipt_check_sidecar_status summary_field summary.embedded_receipt_check_sidecar_status pass \"pass\" \"pass\" field matches rebuilt summary" [ref=e182]
+        - row "main_embedded_receipt_check_status summary_field summary.main_embedded_receipt_check_status pass \"pass\" \"pass\" field matches rebuilt summary" [ref=e190]
+        - row "receipt_check_output_json_exists summary_field summary.receipt_check_output_json_exists pass true true field matches rebuilt summary" [ref=e198]
+        - row "receipt_check_output_text_exists summary_field summary.receipt_check_output_text_exists pass true true field matches rebuilt summary" [ref=e206]
+        - 'row "suite_design_scopes summary_field summary.suite_design_scopes pass [{\"count\": 0, \"count_matches_names\": true, \"name_count\": 0, \"names\": [], \"scope\": \"selected\"}, {\"count\": 0, \"count_matches_names\": true, \"name_count\": 0, \"names\": [], \"scope\": \"handoff\"}, {\"count\": 0, \"count_matches_names\": true, \"name_count\": 0, \"names\": [], \"scope\": \"comparison_ready\"}] [{\"count\": 0, \"count_matches_names\": true, \"name_count\": 0, \"names\": [], \"scope\": \"selected\"}, {\"count\": 0, \"count_matches_names\": true, \"name_count\": 0, \"names\": [], \"scope\": \"handoff\"}, {\"count\": 0, \"count_matches_names\": true, \"name_count\": 0, \"names\": [], \"scope\": \"comparison_ready\"}] field matches rebuilt summary" [ref=e214]'
+        - 'row "ci_boundary_plan_check_scopes summary_field summary.ci_boundary_plan_check_scopes pass [{\"handoff_count\": 1, \"scope\": \"selected\", \"selected_count\": 1, \"selected_within_handoff\": true}, {\"handoff_count\": 1, \"scope\": \"handoff\", \"selected_count\": 1, \"selected_within_handoff\": true}, {\"handoff_count\": 0, \"scope\": \"comparison_ready\", \"selected_count\": 0, \"selected_within_handoff\": true}] [{\"handoff_count\": 1, \"scope\": \"selected\", \"selected_count\": 1, \"selected_within_handoff\": true}, {\"handoff_count\": 1, \"scope\": \"handoff\", \"selected_count\": 1, \"selected_within_handoff\": true}, {\"handoff_count\": 0, \"scope\": \"comparison_ready\", \"selected_count\": 0, \"selected_within_handoff\": true}] field matches rebuilt summary" [ref=e222]'
+        - row [ref=e230]
+        - row [ref=e238]
+        - row "contract_check_count summary_field summary.contract_check_count pass 14 14 field matches rebuilt summary" [ref=e246]
+        - row "failed_contract_check_count summary_field summary.failed_contract_check_count pass 0 0 field matches rebuilt summary" [ref=e254]
+        - 'row "contract_check_status_counts summary_field summary.contract_check_status_counts pass {\"fail\": 0, \"pass\": 14} {\"fail\": 0, \"pass\": 14} field matches rebuilt summary" [ref=e262]'
+        - row [ref=e270]
+        - row "issue_count summary_field summary.issue_count pass 0 0 field matches rebuilt summary" [ref=e278]
+        - row "issues summary_field summary.issues pass [] [] field matches rebuilt summary" [ref=e286]
+  - generic [ref=e294]:
+    - heading "Contract Profile Checks" [level=2] [ref=e295]
+    - table [ref=e296]:
+      - rowgroup [ref=e297]:
+        - row "Field Type Target Status Expected Actual Detail" [ref=e298]
+      - rowgroup [ref=e306]:
+        - row "contract_check_count contract_profile_consistency summary.contract_check_count pass 14 14 contract check count must match the embedded contract check rows" [ref=e307]
+        - row "failed_contract_check_count contract_profile_consistency summary.failed_contract_check_count pass 0 0 failed contract check count must match the embedded contract check rows" [ref=e315]
+        - 'row "contract_check_status_counts contract_profile_consistency summary.contract_check_status_counts pass {\"fail\": 0, \"pass\": 14} {\"fail\": 0, \"pass\": 14} contract check status counts must be derived from the embedded contract check rows" [ref=e323]'
+        - row [ref=e331]
+  - generic [ref=e339]:
+    - heading "Sidecar Checks" [level=2] [ref=e340]
+    - table [ref=e341]:
+      - rowgroup [ref=e342]:
+        - row "Sidecar Type Target Status Exists Expected SHA-256 Actual SHA-256 Detail" [ref=e343]
+      - rowgroup [ref=e352]:
+        - row "text sidecar_digest d\\472\\解释\\contract-summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.txt pass True 4dcb923f6e1e15935f2ebe0e631f32a36a930df90aa52a47c79b289ce6a1488f 4dcb923f6e1e15935f2ebe0e631f32a36a930df90aa52a47c79b289ce6a1488f content matches rebuilt contract summary" [ref=e353]
+        - row "markdown sidecar_digest d\\472\\解释\\contract-summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.md pass True 7e5d9eaa57f1c18d894e217b523f752183a589c08eb1584d3abd62c5e731c3e1 7e5d9eaa57f1c18d894e217b523f752183a589c08eb1584d3abd62c5e731c3e1 content matches rebuilt contract summary" [ref=e362]
+        - row "html sidecar_digest d\\472\\解释\\contract-summary\\promoted_training_scale_seed_handoff_receipt_contract_summary.html pass True e55a3cafb88b74502ea4febe95ff296091a5f0276728b2d463d0c20954ca2646 e55a3cafb88b74502ea4febe95ff296091a5f0276728b2d463d0c20954ca2646 content matches rebuilt contract summary" [ref=e371]
+  - generic [ref=e380]:
+    - heading "Sidecars" [level=2] [ref=e381]
+    - list [ref=e382]:
+      - listitem [ref=e383]: "Text exists: True"
+      - listitem [ref=e384]: "Markdown exists: True"
+      - listitem [ref=e385]: "HTML exists: True"
+  - generic [ref=e386]:
+    - heading "Issues" [level=2] [ref=e387]
+    - list [ref=e388]:
+      - listitem [ref=e389]: none

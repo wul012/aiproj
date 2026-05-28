@@ -161,6 +161,8 @@ def contract_issues(
         issues.append("receipt schema version must be >= 3 for suite-design name contract")
     if receipt_schema_version < 4:
         issues.append("receipt schema version must be >= 4 for CI boundary plan-check contract")
+    if receipt_schema_version < 5 and reason_count_contract_requires_schema_v5(reason_scopes):
+        issues.append("receipt schema version must be >= 5 for CI reason-count contract")
     if assurance.get("embedded_receipt_check_sidecar_status") != "pass":
         issues.append("embedded receipt-check sidecar status must pass")
     for scope in scopes:
@@ -190,6 +192,10 @@ def row_list(value: Any) -> list[dict[str, Any]]:
     return [dict(item) for item in value if isinstance(item, dict)]
 
 
+def reason_count_contract_requires_schema_v5(reason_scopes: list[dict[str, Any]]) -> bool:
+    return any(not bool(scope.get("selected_reasons_within_handoff")) for scope in reason_scopes)
+
+
 def int_value(value: Any) -> int:
     try:
         return int(float(value))
@@ -202,6 +208,7 @@ __all__ = [
     "ci_reason_count_scopes",
     "contract_issues",
     "int_value",
+    "reason_count_contract_requires_schema_v5",
     "row_list",
     "suite_design_scopes",
 ]
