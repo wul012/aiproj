@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v472.0.0` makes failed legacy CI reason-count contracts report the missing schema-v5 gate explicitly, while keeping compatible archived schema-v4 handoffs readable.
+Version `v473.0.0` starts the model-capability stage by carrying real tiny baseline/candidate training loss and generation-quality deltas into the eval loop report.
+
+## Latest v473 checkpoint
+
+- Added training best/final validation loss and generation-quality flag metrics to tiny scorecard comparison smoke summaries.
+- Extended baseline-candidate eval loop reports with score, loss, and generation-flag deltas so model capability claims are backed by actual tiny training evidence.
+- Ran a real CPU tiny comparison with same seed, baseline `max_iters=1`, candidate `max_iters=4`; candidate best validation loss improved slightly from `5.3451` to `5.3420`, while scorecard and generation flags stayed flat.
+- Started the model-capability documentation stage in `代码讲解记录_模型能力阶段/` and runtime archive stage in `e/473`.
 
 ## Latest v472 checkpoint
 

@@ -1,0 +1,6 @@
+cases=10
+suite_name=minigpt-standard-zh-benchmark
+suite_version=2-cap4
+task_types=classification,comparison,continuation,factual-consistency,qa,rewrite,safety-boundary,self-check,structured,summary
+out_dir=e\473\解释\baseline-candidate-eval-loop\tiny-scorecard-comparison-smoke\candidate\run\eval_suite
+outputs={"json": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\candidate\\run\\eval_suite\\eval_suite.json", "csv": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\candidate\\run\\eval_suite\\eval_suite.csv", "svg": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\candidate\\run\\eval_suite\\eval_suite.svg", "html": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\candidate\\run\\eval_suite\\eval_suite.html"}

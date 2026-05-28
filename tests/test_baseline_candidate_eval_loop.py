@@ -40,6 +40,11 @@ class BaselineCandidateEvalLoopTests(unittest.TestCase):
             self.assertEqual(report["acceptance_criteria"]["status"], "pass")
             self.assertEqual(report["acceptance_criteria"]["failed_count"], 0)
             self.assertEqual(report["acceptance_criteria"]["min_overall_score_delta"], 0.0)
+            self.assertEqual(report["baseline_metrics"]["training_best_val_loss"], 4.2)
+            self.assertEqual(report["candidate_metrics"]["training_best_val_loss"], 3.9)
+            self.assertEqual(report["delta_report"]["training_best_val_loss_delta"], -0.3)
+            self.assertEqual(report["delta_report"]["training_final_val_loss_delta"], -0.4)
+            self.assertEqual(report["delta_report"]["generation_quality_total_flags_delta"], -2.0)
             self.assertTrue(report["promotion_decision"]["accepted"])
             self.assertEqual(report["promotion_decision"]["rejected_reasons"], [])
             self.assertEqual(report["next_action"], "accept_candidate_as_next_experiment_baseline")
@@ -49,6 +54,8 @@ class BaselineCandidateEvalLoopTests(unittest.TestCase):
             self.assertIn("acceptance_status=pass", text)
             self.assertIn("min_overall_score_delta=0.0", text)
             self.assertIn("overall_score_delta=3.5", text)
+            self.assertIn("best_val_loss_delta=-0.3", text)
+            self.assertIn("generation_flags_delta=-2.0", text)
 
     def test_report_rejects_blocked_candidate_with_reason(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -237,6 +244,12 @@ def _summary(
     first_recommendation: str | None = None,
     baseline_score: float = 72.0,
     candidate_score: float = 75.5,
+    baseline_best_loss: float = 4.2,
+    candidate_best_loss: float = 3.9,
+    baseline_final_loss: float = 4.3,
+    candidate_final_loss: float = 3.9,
+    baseline_generation_flags: int = 3,
+    candidate_generation_flags: int = 1,
 ) -> dict[str, object]:
     return {
         "status": "pass",
@@ -255,6 +268,10 @@ def _summary(
             "status": "pass",
             "scorecard_overall_status": "pass",
             "scorecard_overall_score": baseline_score,
+            "training_best_val_loss": baseline_best_loss,
+            "training_final_val_loss": baseline_final_loss,
+            "generation_quality_status": "warn",
+            "generation_quality_total_flags": baseline_generation_flags,
             "eval_suite_case_count": 10,
             "pair_same_checkpoint_baseline": True,
         },
@@ -262,6 +279,10 @@ def _summary(
             "status": "pass",
             "scorecard_overall_status": "pass",
             "scorecard_overall_score": candidate_score,
+            "training_best_val_loss": candidate_best_loss,
+            "training_final_val_loss": candidate_final_loss,
+            "generation_quality_status": "pass",
+            "generation_quality_total_flags": candidate_generation_flags,
             "eval_suite_case_count": 10,
             "pair_same_checkpoint_baseline": True,
         },

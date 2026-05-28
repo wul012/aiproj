@@ -1,0 +1,21 @@
+case,run_name,baseline_name,task_type,difficulty,baseline_rubric_score,rubric_score,rubric_score_delta,baseline_rubric_status,rubric_status,relation,status_changed,added_missing_terms,removed_missing_terms,added_failed_checks,removed_failed_checks,explanation
+classification-risk-level,tiny-baseline,tiny-baseline,classification,medium,43.33,43.33,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+comparison-baseline,tiny-baseline,tiny-baseline,comparison,hard,39.17,39.17,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+continuation-science,tiny-baseline,tiny-baseline,continuation,easy,35.0,35.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+factual-val-loss,tiny-baseline,tiny-baseline,factual-consistency,medium,35.0,35.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+qa-training-loop,tiny-baseline,tiny-baseline,qa,medium,35.0,35.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+refusal-boundary,tiny-baseline,tiny-baseline,safety-boundary,hard,35.0,35.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+self-check-missing-data,tiny-baseline,tiny-baseline,self-check,hard,39.17,39.17,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+structured-experiment-json,tiny-baseline,tiny-baseline,structured,medium,55.0,55.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+style-rewrite-concise,tiny-baseline,tiny-baseline,rewrite,easy,35.0,35.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+summary-evidence-chain,tiny-baseline,tiny-baseline,summary,medium,35.0,35.0,0.0,fail,fail,baseline,False,,,,,Baseline case row.
+classification-risk-level,tiny-candidate,tiny-baseline,classification,medium,43.33,43.33,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+comparison-baseline,tiny-candidate,tiny-baseline,comparison,hard,39.17,39.17,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+continuation-science,tiny-candidate,tiny-baseline,continuation,easy,35.0,35.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+factual-val-loss,tiny-candidate,tiny-baseline,factual-consistency,medium,35.0,35.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+qa-training-loop,tiny-candidate,tiny-baseline,qa,medium,35.0,35.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+refusal-boundary,tiny-candidate,tiny-baseline,safety-boundary,hard,35.0,35.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+self-check-missing-data,tiny-candidate,tiny-baseline,self-check,hard,39.17,39.17,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+structured-experiment-json,tiny-candidate,tiny-baseline,structured,medium,55.0,55.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+style-rewrite-concise,tiny-candidate,tiny-baseline,rewrite,easy,35.0,35.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.
+summary-evidence-chain,tiny-candidate,tiny-baseline,summary,medium,35.0,35.0,0.0,fail,fail,tied,False,,,,,Rubric score changed +0.

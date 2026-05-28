@@ -52,7 +52,16 @@ def build_baseline_candidate_eval_loop_report(
     status = "pass" if smoke.get("status") == "pass" else "fail"
     baseline_score = number_or_none(baseline.get("scorecard_overall_score"))
     candidate_score = number_or_none(candidate.get("scorecard_overall_score"))
+    baseline_best_loss = number_or_none(baseline.get("training_best_val_loss"))
+    candidate_best_loss = number_or_none(candidate.get("training_best_val_loss"))
+    baseline_final_loss = number_or_none(baseline.get("training_final_val_loss"))
+    candidate_final_loss = number_or_none(candidate.get("training_final_val_loss"))
+    baseline_quality_flags = number_or_none(baseline.get("generation_quality_total_flags"), int)
+    candidate_quality_flags = number_or_none(candidate.get("generation_quality_total_flags"), int)
     score_delta = None if baseline_score is None or candidate_score is None else round(float(candidate_score) - float(baseline_score), 4)
+    best_loss_delta = _metric_delta(candidate_best_loss, baseline_best_loss)
+    final_loss_delta = _metric_delta(candidate_final_loss, baseline_final_loss)
+    quality_flag_delta = _metric_delta(candidate_quality_flags, baseline_quality_flags)
     control_checks = _control_checks(
         status=status,
         run_config=run_config,
@@ -98,6 +107,10 @@ def build_baseline_candidate_eval_loop_report(
             "status": baseline.get("status"),
             "scorecard_status": baseline.get("scorecard_overall_status"),
             "overall_score": baseline_score,
+            "training_best_val_loss": baseline_best_loss,
+            "training_final_val_loss": baseline_final_loss,
+            "generation_quality_status": baseline.get("generation_quality_status"),
+            "generation_quality_total_flags": baseline_quality_flags,
             "eval_suite_case_count": baseline.get("eval_suite_case_count"),
             "pair_same_checkpoint_baseline": baseline.get("pair_same_checkpoint_baseline"),
         },
@@ -105,11 +118,20 @@ def build_baseline_candidate_eval_loop_report(
             "status": candidate.get("status"),
             "scorecard_status": candidate.get("scorecard_overall_status"),
             "overall_score": candidate_score,
+            "training_best_val_loss": candidate_best_loss,
+            "training_final_val_loss": candidate_final_loss,
+            "generation_quality_status": candidate.get("generation_quality_status"),
+            "generation_quality_total_flags": candidate_quality_flags,
             "eval_suite_case_count": candidate.get("eval_suite_case_count"),
             "pair_same_checkpoint_baseline": candidate.get("pair_same_checkpoint_baseline"),
         },
         "delta_report": {
             "overall_score_delta": score_delta,
+            "training_best_val_loss_delta": best_loss_delta,
+            "training_final_val_loss_delta": final_loss_delta,
+            "generation_quality_total_flags_delta": quality_flag_delta,
+            "loss_delta_interpretation": "negative_is_better",
+            "generation_flag_delta_interpretation": "negative_is_better",
             "best_by_overall_score": comparison.get("best_by_overall_score"),
             "best_by_rubric_avg_score": comparison.get("best_by_rubric_avg_score"),
             "improved_overall_count": comparison.get("improved_overall_count"),
@@ -174,6 +196,15 @@ def render_baseline_candidate_eval_loop_text(report: dict[str, Any]) -> str:
         ("baseline_score", baseline.get("overall_score")),
         ("candidate_score", candidate.get("overall_score")),
         ("overall_score_delta", delta.get("overall_score_delta")),
+        ("baseline_best_val_loss", baseline.get("training_best_val_loss")),
+        ("candidate_best_val_loss", candidate.get("training_best_val_loss")),
+        ("best_val_loss_delta", delta.get("training_best_val_loss_delta")),
+        ("baseline_final_val_loss", baseline.get("training_final_val_loss")),
+        ("candidate_final_val_loss", candidate.get("training_final_val_loss")),
+        ("final_val_loss_delta", delta.get("training_final_val_loss_delta")),
+        ("baseline_generation_flags", baseline.get("generation_quality_total_flags")),
+        ("candidate_generation_flags", candidate.get("generation_quality_total_flags")),
+        ("generation_flags_delta", delta.get("generation_quality_total_flags_delta")),
         ("case_delta_count", delta.get("case_delta_count")),
         ("case_regression_count", delta.get("case_regression_count")),
         ("benchmark_history_entry_count", history.get("entry_count")),
@@ -201,6 +232,8 @@ def render_baseline_candidate_eval_loop_markdown(report: dict[str, Any]) -> str:
     control = as_dict(report.get("control_summary"))
     acceptance = as_dict(report.get("acceptance_criteria"))
     execution = as_dict(report.get("execution"))
+    baseline = as_dict(report.get("baseline_metrics"))
+    candidate = as_dict(report.get("candidate_metrics"))
     rejected_reasons = string_list(promotion.get("rejected_reasons"))
     control_failed_reasons = string_list(control.get("failed_reasons"))
     acceptance_failed_reasons = string_list(acceptance.get("failed_reasons"))
@@ -220,6 +253,9 @@ def render_baseline_candidate_eval_loop_markdown(report: dict[str, Any]) -> str:
             f"- Controlled variable: `{experiment.get('controlled_variable')}`",
             f"- Min overall score delta: `{experiment.get('min_overall_score_delta')}`",
             f"- Overall score delta: `{delta.get('overall_score_delta')}`",
+            f"- Best val loss delta: `{delta.get('training_best_val_loss_delta')}`",
+            f"- Final val loss delta: `{delta.get('training_final_val_loss_delta')}`",
+            f"- Generation flags delta: `{delta.get('generation_quality_total_flags_delta')}`",
             f"- Control status: `{control.get('status')}`",
             f"- Acceptance status: `{acceptance.get('status')}`",
             f"- Promotion status: `{promotion.get('status')}`",
@@ -229,6 +265,15 @@ def render_baseline_candidate_eval_loop_markdown(report: dict[str, Any]) -> str:
             "## Rejected Reasons",
             "",
             *reason_lines,
+            "",
+            "## Capability Metrics",
+            "",
+            "| Metric | Baseline | Candidate | Delta | Direction |",
+            "| --- | ---: | ---: | ---: | --- |",
+            f"| Overall score | {baseline.get('overall_score')} | {candidate.get('overall_score')} | {delta.get('overall_score_delta')} | higher is better |",
+            f"| Best val loss | {baseline.get('training_best_val_loss')} | {candidate.get('training_best_val_loss')} | {delta.get('training_best_val_loss_delta')} | lower is better |",
+            f"| Final val loss | {baseline.get('training_final_val_loss')} | {candidate.get('training_final_val_loss')} | {delta.get('training_final_val_loss_delta')} | lower is better |",
+            f"| Generation flags | {baseline.get('generation_quality_total_flags')} | {candidate.get('generation_quality_total_flags')} | {delta.get('generation_quality_total_flags_delta')} | lower is better |",
             "",
             "## Control Checks",
             "",
@@ -247,6 +292,7 @@ def render_baseline_candidate_eval_loop_html(report: dict[str, Any]) -> str:
     control = as_dict(report.get("control_summary"))
     acceptance = as_dict(report.get("acceptance_criteria"))
     execution = as_dict(report.get("execution"))
+    delta = as_dict(report.get("delta_report"))
     reasons = string_list(promotion.get("rejected_reasons"))
     control_reasons = string_list(control.get("failed_reasons"))
     acceptance_reasons = string_list(acceptance.get("failed_reasons"))
@@ -286,6 +332,10 @@ li {{ margin: 6px 0; }}
 <div class="metric"><span>Gate</span><strong>{html_escape(execution.get('gate_mode'))}</strong></div>
 <div class="metric"><span>Exit</span><strong>{html_escape(execution.get('expected_exit_code'))}</strong></div>
 <div class="metric"><span>Promotion</span><strong>{html_escape(promotion.get('status'))}</strong></div>
+<div class="metric"><span>Score Delta</span><strong>{html_escape(delta.get('overall_score_delta'))}</strong></div>
+<div class="metric"><span>Best Loss Delta</span><strong>{html_escape(delta.get('training_best_val_loss_delta'))}</strong></div>
+<div class="metric"><span>Final Loss Delta</span><strong>{html_escape(delta.get('training_final_val_loss_delta'))}</strong></div>
+<div class="metric"><span>Gen Flags Delta</span><strong>{html_escape(delta.get('generation_quality_total_flags_delta'))}</strong></div>
 <div class="metric"><span>Control</span><strong>{html_escape(control.get('status'))}</strong></div>
 <div class="metric"><span>Acceptance</span><strong>{html_escape(acceptance.get('status'))}</strong></div>
 <div class="metric"><span>Accepted</span><strong>{html_escape(promotion.get('accepted'))}</strong></div>
@@ -463,6 +513,12 @@ def _controlled_variable(run_config: dict[str, Any]) -> str:
     if run_config.get("baseline_seed") != run_config.get("candidate_seed"):
         return "seed"
     return "fixed_config"
+
+
+def _metric_delta(candidate: int | float | None, baseline: int | float | None) -> float | None:
+    if candidate is None or baseline is None:
+        return None
+    return round(float(candidate) - float(baseline), 4)
 
 
 def _next_action(status: str, promotion: dict[str, Any]) -> str:

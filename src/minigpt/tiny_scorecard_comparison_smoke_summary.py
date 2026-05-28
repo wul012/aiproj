@@ -127,11 +127,17 @@ def smoke_summary(payload: dict[str, Any]) -> dict[str, Any]:
     scorecard = as_dict(payload.get("benchmark_scorecard"))
     pair_batch = as_dict(payload.get("pair_batch"))
     eval_suite = as_dict(payload.get("eval_suite"))
+    training = as_dict(payload.get("training"))
+    quality = as_dict(payload.get("generation_quality"))
     return {
         "available": bool(payload),
         "status": payload.get("status"),
         "decision": payload.get("decision"),
         "eval_suite_case_count": eval_suite.get("case_count"),
+        "training_best_val_loss": training.get("best_val_loss"),
+        "training_final_val_loss": training.get("final_val_loss"),
+        "generation_quality_status": quality.get("overall_status"),
+        "generation_quality_total_flags": quality.get("total_flags"),
         "scorecard_overall_status": scorecard.get("overall_status"),
         "scorecard_overall_score": scorecard.get("overall_score"),
         "pair_same_checkpoint_baseline": pair_batch.get("same_checkpoint_baseline"),

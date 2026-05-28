@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT tiny scorecard smoke benchmark history",
+  "generated_at": "2026-05-28T11:52:14Z",
+  "evidence_kind": "tiny-smoke",
+  "summary": {
+    "entry_count": 1,
+    "promote_count": 0,
+    "review_count": 0,
+    "blocked_count": 1,
+    "ready_count": 0,
+    "case_regression_entry_count": 0,
+    "generation_quality_flag_regression_entry_count": 0,
+    "eval_suite_non_comparison_ready_entry_count": 0,
+    "suite_design_non_comparison_ready_entry_count": 0,
+    "design_comparison_changed_entry_count": 0,
+    "best_candidate_name": "tiny-candidate",
+    "best_entry_name": "tiny-scorecard-smoke",
+    "best_rubric_avg_score_delta": 0.0,
+    "model_quality_claim": "not_claimed"
+  },
+  "readiness_requirement": {
+    "status": "fail",
+    "decision": "stop",
+    "exit_code": 1,
+    "min_ready_entries": 1,
+    "ready_count": 0,
+    "entry_count": 1,
+    "evidence_kind": "tiny-smoke",
+    "require_real_benchmark": true,
+    "case_regression_entry_count": 0,
+    "generation_quality_flag_regression_entry_count": 0,
+    "suite_design_non_comparison_ready_entry_count": 0,
+    "failed_reasons": [
+      "insufficient_ready_entries",
+      "not_real_benchmark_evidence"
+    ]
+  },
+  "entries": [
+    {
+      "index": 0,
+      "name": "tiny-scorecard-smoke",
+      "comparison_path": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\scorecard-comparison\\benchmark_scorecard_comparison.json",
+      "decision_path": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\scorecard-decision\\benchmark_scorecard_decision.json",
+      "baseline_name": "tiny-baseline",
+      "candidate_name": "tiny-candidate",
+      "decision_status": "blocked",
+      "recommended_action": "keep_baseline_or_fix_candidate",
+      "promotion_readiness": "blocked",
+      "model_quality_claim": "not_claimed",
+      "overall_score": 81.67,
+      "rubric_avg_score": 38.67,
+      "overall_score_delta": 0.0,
+      "rubric_avg_score_delta": 0.0,
+      "overall_relation": "tied",
+      "rubric_relation": "tied",
+      "case_regression_count": 0,
+      "case_improvement_count": 0,
+      "generation_quality_total_flags_delta": 0,
+      "generation_quality_flag_relation": "tied",
+      "generation_quality_dominant_flag_changed": false,
+      "generation_quality_worst_case_changed": false,
+      "eval_suite_comparison_status": "pass",
+      "non_comparison_ready_count": 0,
+      "eval_suite_design_comparison_status": "pass",
+      "non_design_comparison_ready_count": 0,
+      "design_comparison_changed_count": 0,
+      "remediation_plan_count": 1,
+      "boundary": "tiny-smoke-plumbing-evidence"
+    }
+  ],
+  "recommendations": [
+    "Tiny-smoke history is plumbing evidence; run real benchmark candidates before claiming model quality."
+  ]
+}

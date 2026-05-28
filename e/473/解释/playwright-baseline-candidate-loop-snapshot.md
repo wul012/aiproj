@@ -1,0 +1,69 @@
+- main [ref=e2]:
+  - heading "MiniGPT baseline-candidate eval loop" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Decision" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Status
+        - strong [ref=e9]: pass
+      - generic [ref=e10]:
+        - generic [ref=e11]: Decision
+        - strong [ref=e12]: reject_candidate
+      - generic [ref=e13]:
+        - generic [ref=e14]: Source
+        - strong [ref=e15]: rerun_smoke
+      - generic [ref=e16]:
+        - generic [ref=e17]: Gate
+        - strong [ref=e18]: exploratory
+      - generic [ref=e19]:
+        - generic [ref=e20]: Exit
+        - strong [ref=e21]: "0"
+      - generic [ref=e22]:
+        - generic [ref=e23]: Promotion
+        - strong [ref=e24]: blocked
+      - generic [ref=e25]:
+        - generic [ref=e26]: Score Delta
+        - strong [ref=e27]: "0.0"
+      - generic [ref=e28]:
+        - generic [ref=e29]: Best Loss Delta
+        - strong [ref=e30]: "-0.0031"
+      - generic [ref=e31]:
+        - generic [ref=e32]: Final Loss Delta
+        - strong
+      - generic [ref=e33]:
+        - generic [ref=e34]: Gen Flags Delta
+        - strong [ref=e35]: "0.0"
+      - generic [ref=e36]:
+        - generic [ref=e37]: Control
+        - strong [ref=e38]: pass
+      - generic [ref=e39]:
+        - generic [ref=e40]: Acceptance
+        - strong [ref=e41]: fail
+      - generic [ref=e42]:
+        - generic [ref=e43]: Accepted
+        - strong [ref=e44]: "False"
+      - generic [ref=e45]:
+        - generic [ref=e46]: Selected
+        - strong
+      - generic [ref=e47]:
+        - generic [ref=e48]: Min Delta
+        - strong [ref=e49]: "0.0"
+      - generic [ref=e50]:
+        - generic [ref=e51]: Next
+        - strong [ref=e52]: keep_baseline_and_fix_candidate
+  - generic [ref=e53]:
+    - heading "Rejected Reasons" [level=2] [ref=e54]
+    - list [ref=e55]:
+      - listitem [ref=e56]: rubric_avg_score below 60.0
+      - listitem [ref=e57]: Keep the baseline or fix candidate scorecard regressions before promotion.
+      - listitem [ref=e58]: scorecard_decision_promote expected promote, got blocked
+      - listitem [ref=e59]: selected_candidate expected tiny-candidate, got None
+  - generic [ref=e60]:
+    - heading "Control Checks" [level=2] [ref=e61]
+    - list [ref=e62]:
+      - listitem [ref=e63]: none
+  - generic [ref=e64]:
+    - heading "Acceptance Criteria" [level=2] [ref=e65]
+    - list [ref=e66]:
+      - listitem [ref=e67]: scorecard_decision_promote expected promote, got blocked
+      - listitem [ref=e68]: selected_candidate expected tiny-candidate, got None

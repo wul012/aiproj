@@ -1,0 +1,8 @@
+input=e\473\解释\baseline-candidate-eval-loop\tiny-scorecard-comparison-smoke\baseline\run\eval_suite\eval_suite.json
+source_type=eval_suite
+overall_status=pass
+cases=10
+checks=10 pass/0 warn/0 fail
+avg_unique_ratio=0.8917
+flags=0
+outputs={"json": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\baseline\\run\\generation-quality\\generation_quality.json", "csv": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\baseline\\run\\generation-quality\\generation_quality.csv", "markdown": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\baseline\\run\\generation-quality\\generation_quality.md", "svg": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\baseline\\run\\generation-quality\\generation_quality.svg", "html": "e\\473\\解释\\baseline-candidate-eval-loop\\tiny-scorecard-comparison-smoke\\baseline\\run\\generation-quality\\generation_quality.html"}
