@@ -1,0 +1,33 @@
+{
+  "data": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-4\\tiny_corpus.txt",
+  "data_dir": null,
+  "prepared_data": null,
+  "out_dir": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-4\\run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 2,
+  "block_size": 8,
+  "max_iters": 4,
+  "eval_interval": 1,
+  "eval_iters": 1,
+  "learning_rate": 0.0003,
+  "train_ratio": 0.9,
+  "n_layer": 1,
+  "n_head": 1,
+  "n_embd": 8,
+  "dropout": 0.1,
+  "seed": 1337,
+  "device": "cpu",
+  "sample_prompt": "人工智能正在改变科学研究的方式，因为",
+  "sample_tokens": 4,
+  "sample_temperature": 0.8,
+  "sample_top_k": 30,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "data",
+    "path": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-4\\tiny_corpus.txt"
+  }
+}

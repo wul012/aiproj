@@ -21,6 +21,10 @@ e/<version>/解释/说明.md
 e/473/图片
 e/473/解释/说明.md
  -> v473 baseline-candidate tiny model capability delta 的运行截图和解释
+
+e/474/图片
+e/474/解释/说明.md
+ -> v474 model capability ladder 的运行截图和解释
 ```
 
 写入规则：

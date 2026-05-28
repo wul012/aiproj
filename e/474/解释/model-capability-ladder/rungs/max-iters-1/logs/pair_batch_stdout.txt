@@ -1,0 +1,10 @@
+cases=10
+suite_name=minigpt-standard-zh-benchmark
+suite_version=2-cap4
+left_checkpoint_id=tiny-baseline
+right_checkpoint_id=tiny-repeat
+generated_equal_count=10
+generated_difference_count=0
+avg_abs_generated_char_delta=0.0
+out_dir=e\474\解释\model-capability-ladder\rungs\max-iters-1\run\pair_batch
+outputs={"json": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-1\\run\\pair_batch\\pair_generation_batch.json", "csv": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-1\\run\\pair_batch\\pair_generation_batch.csv", "md": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-1\\run\\pair_batch\\pair_generation_batch.md", "html": "e\\474\\解释\\model-capability-ladder\\rungs\\max-iters-1\\run\\pair_batch\\pair_generation_batch.html"}

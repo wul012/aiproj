@@ -4,9 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v473.0.0` starts the model-capability stage by carrying real tiny baseline/candidate training loss and generation-quality deltas into the eval loop report.
+Version `v474.0.0` adds a real tiny training scale ladder so model capability changes can be observed across multiple training budgets instead of one baseline/candidate pair.
+
+## Latest v474 checkpoint
+
+- Added `model_capability_ladder` report building and artifact rendering for JSON/CSV/text/Markdown/HTML outputs.
+- Added `scripts/run_model_capability_ladder.py` to run the same tiny CPU benchmark chain at multiple `max_iters` values and summarize loss, scorecard, and generation-quality flag trends.
+- Ran a real same-seed ladder for `max_iters=1,2,4`; best validation loss moved from `5.3451` to `5.3420`, while scorecard stayed `81.67` and generation flags stayed `0`.
+- Archived the v474 model-capability ladder evidence in `e/474` and added the code explanation in `代码讲解记录_模型能力阶段/488-v474-model-capability-ladder.md`.
 
 ## Latest v473 checkpoint
+
+Version `v473.0.0` starts the model-capability stage by carrying real tiny baseline/candidate training loss and generation-quality deltas into the eval loop report.
 
 - Added training best/final validation loss and generation-quality flag metrics to tiny scorecard comparison smoke summaries.
 - Extended baseline-candidate eval loop reports with score, loss, and generation-flag deltas so model capability claims are backed by actual tiny training evidence.
