@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "decision": "single_seed_ladder_ready",
+  "rows": [
+    {
+      "seed": 1337,
+      "status": "pass",
+      "decision": "capability_ladder_ready",
+      "report_path": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-4\\ladder\\model_capability_ladder.json",
+      "rung_count": 2,
+      "successful_rung_count": 2,
+      "max_iters_values": [
+        1,
+        4
+      ],
+      "trend_decision": "loss_improved_without_eval_improvement",
+      "first_max_iters": 1,
+      "last_max_iters": 4,
+      "best_loss_max_iters": 4,
+      "best_score_max_iters": 1,
+      "best_val_loss_delta": -0.0031,
+      "score_delta": 0.0,
+      "generation_flags_delta": 0.0
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+run_dir=e\477\解释\model-capability-token-budget-probe\token-cap-12\ladder\rungs\max-iters-4\run
+overall_status=pass
+overall_score=90.67
+component_count=6
+case_score_count=10
+rubric_status=warn
+rubric_avg_score=74.67
+generation_quality_total_flags=0
+generation_quality_dominant_flag=None
+generation_quality_worst_case=None
+weakest_rubric_case=structured-experiment-json
+task_type_group_count=10
+weakest_task_type=structured
+difficulty_group_count=3
+weakest_difficulty=medium
+outputs={"json": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\benchmark-scorecard\\benchmark_scorecard.json", "csv": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\benchmark-scorecard\\benchmark_scorecard.csv", "drilldowns_csv": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\benchmark-scorecard\\benchmark_scorecard_drilldowns.csv", "rubric_csv": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\benchmark-scorecard\\benchmark_scorecard_rubric.csv", "markdown": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\benchmark-scorecard\\benchmark_scorecard.md", "html": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\benchmark-scorecard\\benchmark_scorecard.html"}

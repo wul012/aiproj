@@ -23,6 +23,9 @@
 490-v476-model-capability-stall-diagnostic.md
  -> v476 code explanation: compare first/last ladder prompt cases and explain why eval scores stayed flat.
 
+491-v477-model-capability-token-budget-probe.md
+ -> v477 code explanation: run longer-token tiny ladders and compare prompt-level stall deltas.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

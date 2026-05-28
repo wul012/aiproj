@@ -33,6 +33,10 @@ e/475/解释/说明.md
 e/476/图片
 e/476/解释/说明.md
  -> v476 model capability stall diagnostic 的运行截图和解释
+
+e/477/图片
+e/477/解释/说明.md
+ -> v477 model capability token budget probe 的运行截图和解释
 ```
 
 写入规则：

@@ -1,0 +1,13 @@
+device=cpu
+tokenizer=char
+tokens=13620 vocab_size=211
+parameters=2,640
+data_source=data:e\477\解释\model-capability-token-budget-probe\token-cap-4\ladder\rungs\max-iters-4\tiny_corpus.txt
+step=    1 train_loss=5.3735 val_loss=5.3451
+step=    2 train_loss=5.3526 val_loss=5.3750
+step=    3 train_loss=5.3505 val_loss=5.3420
+step=    4 train_loss=5.3656 val_loss=5.3516
+saved=e\477\解释\model-capability-token-budget-probe\token-cap-4\ladder\rungs\max-iters-4\run
+history=e\477\解释\model-capability-token-budget-probe\token-cap-4\ladder\rungs\max-iters-4\run\metrics.jsonl
+manifest=e\477\解释\model-capability-token-budget-probe\token-cap-4\ladder\rungs\max-iters-4\run\run_manifest.json
+sample=e\477\解释\model-capability-token-budget-probe\token-cap-4\ladder\rungs\max-iters-4\run\sample.txt

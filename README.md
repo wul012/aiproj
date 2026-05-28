@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v476.0.0` diagnoses why the multi-seed tiny capability ladder still has flat eval scores even when validation loss improves.
+Version `v477.0.0` runs a token-budget probe to test whether longer tiny generations reduce the prompt-level evaluation stall found in v476.
+
+## Latest v477 checkpoint
+
+- Added `model_capability_token_budget_probe` reporting for comparing tiny capability ladders across case token caps.
+- Added `scripts/run_model_capability_token_budget_probe.py`, which runs existing model capability ladders per token cap, builds stall diagnostics, and summarizes token-stall deltas across JSON/CSV/text/Markdown/HTML outputs.
+- Ran a real same-seed probe with `case-token-cap=4,12` and `max_iters=1,4`; token/shape stall count dropped from `10` to `1`, persistent fail count dropped from `10` to `1`, but score-improved and pass-transition counts stayed `0`.
+- Archived the v477 token-budget probe evidence in `e/477` and added the code explanation in `代码讲解记录_模型能力阶段/491-v477-model-capability-token-budget-probe.md`.
 
 ## Latest v476 checkpoint
+
+Version `v476.0.0` diagnoses why the multi-seed tiny capability ladder still has flat eval scores even when validation loss improves.
+
 
 - Added `model_capability_stall_diagnostic` reporting for prompt-level first/last rung comparison across JSON/CSV/text/Markdown/HTML outputs.
 - Added `scripts/diagnose_model_capability_stall.py` to read the v475 stability report, resolve archived seed ladder artifacts, and compare rubric failures plus generation previews case by case.

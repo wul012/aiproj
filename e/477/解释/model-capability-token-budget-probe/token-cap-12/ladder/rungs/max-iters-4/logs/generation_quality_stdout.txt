@@ -1,0 +1,8 @@
+input=e\477\解释\model-capability-token-budget-probe\token-cap-12\ladder\rungs\max-iters-4\run\eval_suite\eval_suite.json
+source_type=eval_suite
+overall_status=pass
+cases=10
+checks=10 pass/0 warn/0 fail
+avg_unique_ratio=0.8985
+flags=0
+outputs={"json": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\generation-quality\\generation_quality.json", "csv": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\generation-quality\\generation_quality.csv", "markdown": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\generation-quality\\generation_quality.md", "svg": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\generation-quality\\generation_quality.svg", "html": "e\\477\\解释\\model-capability-token-budget-probe\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\generation-quality\\generation_quality.html"}
