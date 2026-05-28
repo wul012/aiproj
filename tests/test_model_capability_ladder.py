@@ -15,7 +15,7 @@ from minigpt.model_capability_ladder_artifacts import (
     render_model_capability_ladder_text,
     write_model_capability_ladder_outputs,
 )
-from scripts.run_model_capability_ladder import resolve_exit_code
+from scripts.run_model_capability_ladder import resolve_exit_code, single_thread_env
 
 
 class ModelCapabilityLadderTests(unittest.TestCase):
@@ -106,6 +106,14 @@ class ModelCapabilityLadderTests(unittest.TestCase):
         self.assertEqual(trend["decision"], "loss_improved_without_eval_improvement")
         self.assertEqual(trend["best_val_loss_delta_first_to_last"], -0.2)
         self.assertEqual(trend["score_delta_first_to_last"], 0.0)
+
+    def test_ladder_runner_caps_cpu_thread_env(self) -> None:
+        env = single_thread_env()
+
+        self.assertEqual(env["OMP_NUM_THREADS"], "1")
+        self.assertEqual(env["MKL_NUM_THREADS"], "1")
+        self.assertEqual(env["OPENBLAS_NUM_THREADS"], "1")
+        self.assertEqual(env["NUMEXPR_NUM_THREADS"], "1")
 
 
 def _summary(

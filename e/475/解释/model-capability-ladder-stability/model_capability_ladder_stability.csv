@@ -1,0 +1,3 @@
+index,seed,status,decision,rung_count,successful_rung_count,trend_decision,first_max_iters,last_max_iters,best_loss_max_iters,best_score_max_iters,best_val_loss_delta,score_delta,generation_flags_delta,report_path
+1,1337,pass,capability_ladder_ready,3,3,loss_improved_without_eval_improvement,1,4,4,1,-0.0031,0.0,0.0,e\475\解释\model-capability-ladder-stability\seeds\seed-1337\model_capability_ladder.json
+2,2026,pass,capability_ladder_ready,3,3,loss_improved_without_eval_improvement,1,4,4,1,-0.0286,0.0,0.0,e\475\解释\model-capability-ladder-stability\seeds\seed-2026\model_capability_ladder.json

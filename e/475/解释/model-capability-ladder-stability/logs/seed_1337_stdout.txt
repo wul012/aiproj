@@ -1,0 +1,18 @@
+status=pass
+decision=capability_ladder_ready
+rung_count=3
+successful_rung_count=3
+first_max_iters=1
+last_max_iters=4
+best_loss_max_iters=4
+best_score_max_iters=1
+best_val_loss_delta=-0.0031
+final_val_loss_delta=None
+score_delta=0.0
+generation_flags_delta=0.0
+trend_decision=loss_improved_without_eval_improvement
+model_quality_claim=not_claimed
+rung=max_iters=1,status=pass,best_val_loss=5.345132350921631,score=81.67,generation_flags=0
+rung=max_iters=2,status=pass,best_val_loss=5.345132350921631,score=81.67,generation_flags=0
+rung=max_iters=4,status=pass,best_val_loss=5.3419880867004395,score=81.67,generation_flags=0
+outputs={"json": "e\\475\\\u89e3\u91ca\\model-capability-ladder-stability\\seeds\\seed-1337\\model_capability_ladder.json", "csv": "e\\475\\\u89e3\u91ca\\model-capability-ladder-stability\\seeds\\seed-1337\\model_capability_ladder.csv", "text": "e\\475\\\u89e3\u91ca\\model-capability-ladder-stability\\seeds\\seed-1337\\model_capability_ladder.txt", "markdown": "e\\475\\\u89e3\u91ca\\model-capability-ladder-stability\\seeds\\seed-1337\\model_capability_ladder.md", "html": "e\\475\\\u89e3\u91ca\\model-capability-ladder-stability\\seeds\\seed-1337\\model_capability_ladder.html"}

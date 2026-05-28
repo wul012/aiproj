@@ -1,0 +1,17 @@
+status=pass
+decision=capability_ladder_ready
+rung_count=3
+successful_rung_count=3
+first_max_iters=1
+last_max_iters=4
+best_loss_max_iters=4
+best_score_max_iters=1
+best_val_loss_delta=-0.0286
+final_val_loss_delta=None
+score_delta=0.0
+generation_flags_delta=0.0
+trend_decision=loss_improved_without_eval_improvement
+model_quality_claim=not_claimed
+rung=max_iters=1,status=pass,best_val_loss=5.359805583953857,score=81.67,generation_flags=0
+rung=max_iters=2,status=pass,best_val_loss=5.3416595458984375,score=81.67,generation_flags=0
+rung=max_iters=4,status=pass,best_val_loss=5.331198692321777,score=81.67,generation_flags=0

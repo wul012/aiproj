@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v474.0.0` adds a real tiny training scale ladder so model capability changes can be observed across multiple training budgets instead of one baseline/candidate pair.
+Version `v475.0.0` replays the model capability ladder across multiple seeds so tiny training-signal changes are checked for basic stability.
+
+## Latest v475 checkpoint
+
+- Added `model_capability_ladder_stability` reporting for multi-seed ladder replay across JSON/CSV/text/Markdown/HTML outputs.
+- Added `scripts/run_model_capability_ladder_stability.py` to run the v474 ladder for multiple seeds with CPU thread caps, avoiding OpenMP/BLAS oversubscription during tiny PyTorch smoke runs.
+- Ran real same-config ladders for seeds `1337` and `2026` at `max_iters=1,2,4`; both seeds showed loss improvement, but neither showed scorecard or generation-flag improvement.
+- Archived the v475 stability evidence in `e/475` and added the code explanation in `代码讲解记录_模型能力阶段/489-v475-model-capability-ladder-stability.md`.
 
 ## Latest v474 checkpoint
+
+Version `v474.0.0` adds a real tiny training scale ladder so model capability changes can be observed across multiple training budgets instead of one baseline/candidate pair.
+
 
 - Added `model_capability_ladder` report building and artifact rendering for JSON/CSV/text/Markdown/HTML outputs.
 - Added `scripts/run_model_capability_ladder.py` to run the same tiny CPU benchmark chain at multiple `max_iters` values and summarize loss, scorecard, and generation-quality flag trends.

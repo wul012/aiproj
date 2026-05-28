@@ -17,6 +17,9 @@
 488-v474-model-capability-ladder.md
  -> v474 code explanation: run a same-seed tiny training scale ladder and report loss/score/flag trends.
 
+489-v475-model-capability-ladder-stability.md
+ -> v475 code explanation: replay the tiny ladder across seeds and summarize stability of loss/score/flag deltas.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

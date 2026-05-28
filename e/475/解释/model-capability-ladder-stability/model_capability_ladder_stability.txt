@@ -1,0 +1,13 @@
+status=pass
+decision=capability_stability_ready
+seed_count=2
+successful_seed_count=2
+stability_decision=repeated_loss_improvement_without_eval_improvement
+loss_improvement_seed_count=2
+eval_improvement_seed_count=0
+mean_best_val_loss_delta=-0.0158
+mean_score_delta=0.0
+mean_generation_flags_delta=0.0
+model_quality_claim=not_claimed
+seed=value=1337,status=pass,trend=loss_improved_without_eval_improvement,best_val_loss_delta=-0.0031,score_delta=0.0,generation_flags_delta=0.0
+seed=value=2026,status=pass,trend=loss_improved_without_eval_improvement,best_val_loss_delta=-0.0286,score_delta=0.0,generation_flags_delta=0.0

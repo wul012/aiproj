@@ -1,0 +1,8 @@
+input=e\475\解释\model-capability-ladder-stability\seeds\seed-2026\rungs\max-iters-2\run\eval_suite\eval_suite.json
+source_type=eval_suite
+overall_status=pass
+cases=10
+checks=10 pass/0 warn/0 fail
+avg_unique_ratio=1.0
+flags=0
+outputs={"json": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-2026\\rungs\\max-iters-2\\run\\generation-quality\\generation_quality.json", "csv": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-2026\\rungs\\max-iters-2\\run\\generation-quality\\generation_quality.csv", "markdown": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-2026\\rungs\\max-iters-2\\run\\generation-quality\\generation_quality.md", "svg": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-2026\\rungs\\max-iters-2\\run\\generation-quality\\generation_quality.svg", "html": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-2026\\rungs\\max-iters-2\\run\\generation-quality\\generation_quality.html"}

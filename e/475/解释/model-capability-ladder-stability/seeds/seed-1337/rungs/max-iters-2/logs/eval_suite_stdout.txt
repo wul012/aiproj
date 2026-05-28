@@ -1,0 +1,6 @@
+cases=10
+suite_name=minigpt-standard-zh-benchmark
+suite_version=2-cap4
+task_types=classification,comparison,continuation,factual-consistency,qa,rewrite,safety-boundary,self-check,structured,summary
+out_dir=e\475\解释\model-capability-ladder-stability\seeds\seed-1337\rungs\max-iters-2\run\eval_suite
+outputs={"json": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-1337\\rungs\\max-iters-2\\run\\eval_suite\\eval_suite.json", "csv": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-1337\\rungs\\max-iters-2\\run\\eval_suite\\eval_suite.csv", "svg": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-1337\\rungs\\max-iters-2\\run\\eval_suite\\eval_suite.svg", "html": "e\\475\\解释\\model-capability-ladder-stability\\seeds\\seed-1337\\rungs\\max-iters-2\\run\\eval_suite\\eval_suite.html"}

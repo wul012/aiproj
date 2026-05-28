@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -121,7 +122,7 @@ def tiny_smoke_command(args: argparse.Namespace, out_dir: Path, max_iters: int) 
 
 
 def run_command(name: str, command: list[str], logs_dir: Path) -> dict[str, Any]:
-    completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True, text=True)
+    completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True, text=True, env=single_thread_env())
     stdout_path = logs_dir / f"{name}_stdout.txt"
     stderr_path = logs_dir / f"{name}_stderr.txt"
     stdout_path.write_text(completed.stdout, encoding="utf-8")
@@ -135,6 +136,15 @@ def run_command(name: str, command: list[str], logs_dir: Path) -> dict[str, Any]
         "stdout": str(stdout_path),
         "stderr": str(stderr_path),
     }
+
+
+def single_thread_env() -> dict[str, str]:
+    env = os.environ.copy()
+    env.setdefault("OMP_NUM_THREADS", "1")
+    env.setdefault("MKL_NUM_THREADS", "1")
+    env.setdefault("OPENBLAS_NUM_THREADS", "1")
+    env.setdefault("NUMEXPR_NUM_THREADS", "1")
+    return env
 
 
 def prepare_output_dir(out_dir: Path, *, force: bool) -> None:
