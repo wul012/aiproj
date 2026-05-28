@@ -29,6 +29,10 @@ e/474/解释/说明.md
 e/475/图片
 e/475/解释/说明.md
  -> v475 model capability ladder stability 的运行截图和解释
+
+e/476/图片
+e/476/解释/说明.md
+ -> v476 model capability stall diagnostic 的运行截图和解释
 ```
 
 写入规则：

@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v475.0.0` replays the model capability ladder across multiple seeds so tiny training-signal changes are checked for basic stability.
+Version `v476.0.0` diagnoses why the multi-seed tiny capability ladder still has flat eval scores even when validation loss improves.
+
+## Latest v476 checkpoint
+
+- Added `model_capability_stall_diagnostic` reporting for prompt-level first/last rung comparison across JSON/CSV/text/Markdown/HTML outputs.
+- Added `scripts/diagnose_model_capability_stall.py` to read the v475 stability report, resolve archived seed ladder artifacts, and compare rubric failures plus generation previews case by case.
+- Diagnosed the real v475 evidence: `20` prompt cases stayed score-flat, `20` stayed fail, and all `20` are blocked by token-budget or task-shape limits; the report keeps `model_quality_claim=not_claimed`.
+- Archived the v476 stall diagnostic evidence in `e/476` and added the code explanation in `代码讲解记录_模型能力阶段/490-v476-model-capability-stall-diagnostic.md`.
 
 ## Latest v475 checkpoint
+
+Version `v475.0.0` replays the model capability ladder across multiple seeds so tiny training-signal changes are checked for basic stability.
+
 
 - Added `model_capability_ladder_stability` reporting for multi-seed ladder replay across JSON/CSV/text/Markdown/HTML outputs.
 - Added `scripts/run_model_capability_ladder_stability.py` to run the v474 ladder for multiple seeds with CPU thread caps, avoiding OpenMP/BLAS oversubscription during tiny PyTorch smoke runs.

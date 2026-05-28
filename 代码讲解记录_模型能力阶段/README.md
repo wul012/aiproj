@@ -20,6 +20,9 @@
 489-v475-model-capability-ladder-stability.md
  -> v475 code explanation: replay the tiny ladder across seeds and summarize stability of loss/score/flag deltas.
 
+490-v476-model-capability-stall-diagnostic.md
+ -> v476 code explanation: compare first/last ladder prompt cases and explain why eval scores stayed flat.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
