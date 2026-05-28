@@ -1,0 +1,41 @@
+- main [ref=e2]:
+  - heading "MiniGPT promoted seed handoff receipt contract summary" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - heading "Contract" [level=2] [ref=e5]
+    - generic [ref=e6]:
+      - generic [ref=e7]
+      - generic [ref=e10]
+      - generic [ref=e13]
+      - generic [ref=e16]
+      - generic [ref=e19]
+      - generic [ref=e22]
+      - generic [ref=e25]
+  - generic [ref=e28]:
+    - heading "Suite-Design Scopes" [level=2] [ref=e29]
+    - table [ref=e30]:
+      - rowgroup [ref=e31]
+      - rowgroup [ref=e37]
+  - generic [ref=e53]:
+    - heading "CI Boundary Plan-Check Scopes" [level=2] [ref=e54]
+    - table [ref=e55]:
+      - rowgroup [ref=e56]
+      - rowgroup [ref=e62]
+  - generic [ref=e78]:
+    - heading "CI Reason-Count Scopes" [level=2] [ref=e79]
+    - table [ref=e80]:
+      - rowgroup [ref=e81]
+      - rowgroup [ref=e88]
+  - generic [ref=e107]:
+    - heading "Issues" [level=2] [ref=e108]
+    - list [ref=e109]:
+      - listitem [ref=e110]: none
+  - generic [ref=e111]:
+    - heading "Contract Checks" [level=2] [ref=e112]
+    - table [ref=e113]:
+      - rowgroup [ref=e114]
+      - rowgroup [ref=e124]
+  - generic [ref=e251]:
+    - heading "Contract Check Type Summary" [level=2] [ref=e252]
+    - table [ref=e253]:
+      - rowgroup [ref=e254]
+      - rowgroup [ref=e263]

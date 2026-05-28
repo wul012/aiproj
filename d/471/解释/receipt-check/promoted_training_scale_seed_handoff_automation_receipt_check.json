@@ -1,0 +1,48 @@
+{
+  "schema_version": 5,
+  "receipt_type": "promoted_training_scale_seed_handoff_automation",
+  "status": "pass",
+  "decision": "continue",
+  "exit_code": 0,
+  "checker_exit_code": 0,
+  "blocking_source": null,
+  "failed_requirements": [],
+  "clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "selected_handoff_batch_maturity_ci_regression_count": 1,
+  "selected_handoff_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+  "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+  "handoff_batch_maturity_ci_regression_count": 2,
+  "handoff_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1,
+    "workflow-order-regressed": 1
+  },
+  "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+  "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+  "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+  "selected_handoff_batch_maturity_suite_design_regression_names": [],
+  "handoff_batch_maturity_suite_design_regression_count": 0,
+  "handoff_batch_maturity_suite_design_regression_names": [],
+  "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+  "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+  "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+  "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+  "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+  "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+  "comparison_exclusion_reasons": [
+    "handoff batch CI regression count is 2"
+  ],
+  "issue_count": 0,
+  "issues": [],
+  "receipt_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json"
+}

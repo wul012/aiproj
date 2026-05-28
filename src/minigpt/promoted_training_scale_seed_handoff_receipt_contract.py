@@ -9,6 +9,7 @@ from minigpt.promoted_training_scale_seed_handoff_assurance import (
 )
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract_context import (
     ci_boundary_plan_check_scopes,
+    ci_reason_count_scopes,
     contract_issues,
     int_value,
     row_list,
@@ -34,8 +35,9 @@ def build_promoted_training_scale_seed_handoff_receipt_contract_summary(path: st
     assurance = check_promoted_training_scale_seed_handoff_assurance(path)
     scopes = suite_design_scopes(assurance)
     boundary_scopes = ci_boundary_plan_check_scopes(assurance)
-    contract_checks = build_contract_checks(assurance, scopes, boundary_scopes)
-    issues = contract_issues(assurance, scopes, boundary_scopes)
+    reason_scopes = ci_reason_count_scopes(assurance)
+    contract_checks = build_contract_checks(assurance, scopes, boundary_scopes, reason_scopes)
+    issues = contract_issues(assurance, scopes, boundary_scopes, reason_scopes)
     status = "pass" if not issues else "fail"
     decision = str(assurance.get("decision") or "")
     receipt_schema_version = int_value(assurance.get("embedded_receipt_check_receipt_schema_version"))
@@ -57,6 +59,7 @@ def build_promoted_training_scale_seed_handoff_receipt_contract_summary(path: st
         "receipt_check_output_text_exists": bool(assurance.get("embedded_receipt_check_output_text_exists")),
         "suite_design_scopes": scopes,
         "ci_boundary_plan_check_scopes": boundary_scopes,
+        "ci_reason_count_scopes": reason_scopes,
         "contract_checks": contract_checks,
         "contract_check_count": len(contract_checks),
         "failed_contract_check_count": failed_contract_check_count(contract_checks),
@@ -124,6 +127,28 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(su
                 ),
             ]
         )
+    for scope in _reason_scope_rows(summary):
+        name = scope["scope"]
+        rows.extend(
+            [
+                (
+                    f"receipt_contract_{name}_ci_reason_handoff_counts",
+                    json.dumps(scope.get("handoff_reason_counts"), ensure_ascii=False, sort_keys=True),
+                ),
+                (
+                    f"receipt_contract_{name}_ci_reason_selected_counts",
+                    json.dumps(scope.get("selected_reason_counts"), ensure_ascii=False, sort_keys=True),
+                ),
+                (
+                    f"receipt_contract_{name}_ci_reason_selected_within_handoff",
+                    scope.get("selected_reasons_within_handoff"),
+                ),
+                (
+                    f"receipt_contract_{name}_ci_reason_missing_reasons",
+                    json.dumps(scope.get("missing_reasons"), ensure_ascii=False),
+                ),
+            ]
+        )
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
@@ -163,6 +188,23 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdow
         lines.append(
             f"| {scope.get('scope')} | {scope.get('handoff_count')} | "
             f"{scope.get('selected_count')} | {scope.get('selected_within_handoff')} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## CI Reason-Count Scopes",
+            "",
+            "| Scope | Handoff reasons | Selected reasons | Selected within handoff | Missing reasons |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+    )
+    for scope in _reason_scope_rows(summary):
+        handoff_counts = json.dumps(scope.get("handoff_reason_counts"), ensure_ascii=False, sort_keys=True)
+        selected_counts = json.dumps(scope.get("selected_reason_counts"), ensure_ascii=False, sort_keys=True)
+        missing = ", ".join(string_list(scope.get("missing_reasons"))) or "none"
+        lines.append(
+            f"| {scope.get('scope')} | {handoff_counts} | {selected_counts} | "
+            f"{scope.get('selected_reasons_within_handoff')} | {missing} |"
         )
     lines.extend(["", "## Issues", ""])
     issues = string_list(summary.get("issues"))
@@ -220,6 +262,16 @@ def render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(su
         f"<td>{html_escape(scope.get('selected_within_handoff'))}</td>"
         "</tr>"
         for scope in _boundary_scope_rows(summary)
+    )
+    reason_rows = "\n".join(
+        "<tr>"
+        f"<td>{html_escape(scope.get('scope'))}</td>"
+        f"<td>{html_escape(json.dumps(scope.get('handoff_reason_counts'), ensure_ascii=False, sort_keys=True))}</td>"
+        f"<td>{html_escape(json.dumps(scope.get('selected_reason_counts'), ensure_ascii=False, sort_keys=True))}</td>"
+        f"<td>{html_escape(scope.get('selected_reasons_within_handoff'))}</td>"
+        f"<td>{html_escape(', '.join(string_list(scope.get('missing_reasons'))) or 'none')}</td>"
+        "</tr>"
+        for scope in _reason_scope_rows(summary)
     )
     check_rows = "\n".join(
         "<tr>"
@@ -307,6 +359,17 @@ li {{ margin: 6px 0; }}
 </table>
 </section>
 <section>
+<h2>CI Reason-Count Scopes</h2>
+<table>
+<thead>
+<tr><th>Scope</th><th>Handoff reasons</th><th>Selected reasons</th><th>Selected within handoff</th><th>Missing reasons</th></tr>
+</thead>
+<tbody>
+{reason_rows}
+</tbody>
+</table>
+</section>
+<section>
 <h2>Issues</h2>
 <ul>
 {issue_items}
@@ -379,6 +442,10 @@ def _scope_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
 
 def _boundary_scope_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
     return row_list(summary.get("ci_boundary_plan_check_scopes"))
+
+
+def _reason_scope_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:
+    return row_list(summary.get("ci_reason_count_scopes"))
 
 
 def _contract_check_type_summary_rows(summary: dict[str, Any]) -> list[dict[str, Any]]:

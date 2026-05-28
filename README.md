@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v470.0.0` upgrades promoted seed handoff automation receipts to schema v5 so CI regression reason-count maps are contract-checkable from receipt through assurance.
+Version `v471.0.0` adds receipt contract checks that verify selected CI regression reason-count maps stay within their corresponding handoff aggregate reason-count maps.
+
+## Latest v471 checkpoint
+
+- Added `ci_reason_count_scopes` to promoted seed handoff receipt contract summaries for selected, handoff, and comparison-ready scopes.
+- Added three `reason_counts_within_handoff` contract checks so selected CI regression reasons cannot exceed or introduce reasons absent from the aggregate handoff reason map.
+- Extended contract summary-check comparison and assurance smoke contract checks to include the new reason-count scope contract.
+- Archived schema-v5 reason-scope JSON/text/Markdown/HTML, summary-check sidecars, Playwright MCP snapshots, and screenshots in `d/471`.
 
 ## Latest v470 checkpoint
 

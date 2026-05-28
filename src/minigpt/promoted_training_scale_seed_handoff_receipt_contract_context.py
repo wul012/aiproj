@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from minigpt.report_utils import string_list
+from minigpt.report_utils import positive_int_mapping, string_list
 
 
 def suite_design_scopes(assurance: dict[str, Any]) -> list[dict[str, Any]]:
@@ -96,10 +96,61 @@ def ci_boundary_plan_check_scope(scope: str, handoff_count: Any, selected_count:
     }
 
 
+def ci_reason_count_scopes(assurance: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        ci_reason_count_scope(
+            "selected",
+            assurance.get(
+                "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts"
+            ),
+            assurance.get(
+                "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts"
+            ),
+        ),
+        ci_reason_count_scope(
+            "handoff",
+            assurance.get("embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts"),
+            assurance.get("embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_regression_reason_counts"),
+        ),
+        ci_reason_count_scope(
+            "comparison_ready",
+            assurance.get(
+                "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts"
+            ),
+            assurance.get(
+                "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts"
+            ),
+        ),
+    ]
+
+
+def ci_reason_count_scope(scope: str, handoff_counts: Any, selected_counts: Any) -> dict[str, Any]:
+    resolved_handoff_counts = positive_int_mapping(handoff_counts)
+    resolved_selected_counts = positive_int_mapping(selected_counts)
+    excess_reasons = {
+        reason: count
+        for reason, count in resolved_selected_counts.items()
+        if count > resolved_handoff_counts.get(reason, 0)
+    }
+    missing_reasons = sorted(excess_reasons)
+    return {
+        "scope": scope,
+        "handoff_reason_counts": resolved_handoff_counts,
+        "selected_reason_counts": resolved_selected_counts,
+        "handoff_reason_total": sum(resolved_handoff_counts.values()),
+        "selected_reason_total": sum(resolved_selected_counts.values()),
+        "missing_reasons": missing_reasons,
+        "missing_reason_count": len(missing_reasons),
+        "excess_reason_counts": excess_reasons,
+        "selected_reasons_within_handoff": not excess_reasons,
+    }
+
+
 def contract_issues(
     assurance: dict[str, Any],
     scopes: list[dict[str, Any]],
     boundary_scopes: list[dict[str, Any]],
+    reason_scopes: list[dict[str, Any]],
 ) -> list[str]:
     issues: list[str] = []
     receipt_schema_version = int_value(assurance.get("embedded_receipt_check_receipt_schema_version"))
@@ -124,6 +175,12 @@ def contract_issues(
                 f"{scope.get('scope')} CI boundary plan-check selected count {scope.get('selected_count')} "
                 f"exceeds handoff count {scope.get('handoff_count')}"
             )
+    for scope in reason_scopes:
+        if not scope.get("selected_reasons_within_handoff"):
+            issues.append(
+                f"{scope.get('scope')} CI regression selected reasons exceed handoff reasons: "
+                f"{', '.join(string_list(scope.get('missing_reasons'))) or 'unknown'}"
+            )
     return issues
 
 
@@ -142,6 +199,7 @@ def int_value(value: Any) -> int:
 
 __all__ = [
     "ci_boundary_plan_check_scopes",
+    "ci_reason_count_scopes",
     "contract_issues",
     "int_value",
     "row_list",

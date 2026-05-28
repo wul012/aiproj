@@ -10,6 +10,7 @@ def build_contract_checks(
     assurance: dict[str, Any],
     scopes: list[dict[str, Any]],
     boundary_scopes: list[dict[str, Any]],
+    reason_scopes: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     receipt_schema_version = _int(assurance.get("embedded_receipt_check_receipt_schema_version"))
     checks = [
@@ -82,6 +83,18 @@ def build_contract_checks(
             "selected CI boundary plan-check count must not exceed handoff count",
         )
         for scope in boundary_scopes
+    )
+    checks.extend(
+        contract_check(
+            f"ci_reason_counts_{scope.get('scope')}_selected_within_handoff",
+            "reason_counts_within_handoff",
+            f"ci_reason_counts.{scope.get('scope')}.selected_reasons_within_handoff",
+            str(scope.get("scope")),
+            True,
+            bool(scope.get("selected_reasons_within_handoff")),
+            "selected CI regression reason counts must not exceed handoff reason counts",
+        )
+        for scope in reason_scopes
     )
     return checks
 

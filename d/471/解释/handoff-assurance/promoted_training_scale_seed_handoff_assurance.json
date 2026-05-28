@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "decision": "continue",
+  "exit_code": 0,
+  "checker_exit_code": 0,
+  "handoff_report_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff.json",
+  "embedded_receipt_check_status": "pass",
+  "embedded_receipt_check_sidecar_status": "pass",
+  "embedded_receipt_check_issue_count": 0,
+  "embedded_receipt_check_receipt_schema_version": 5,
+  "embedded_receipt_check_receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_count": 1,
+  "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "embedded_receipt_check_receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+  "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "embedded_receipt_check_receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+  "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_count": 2,
+  "embedded_receipt_check_receipt_handoff_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1,
+    "workflow-order-regressed": 1
+  },
+  "embedded_receipt_check_receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+  "embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+    "archived_path_portability_check_not_ready": 1
+  },
+  "embedded_receipt_check_receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+  "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_count": 0,
+  "embedded_receipt_check_receipt_selected_handoff_batch_maturity_suite_design_regression_names": [],
+  "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_count": 0,
+  "embedded_receipt_check_receipt_handoff_batch_maturity_suite_design_regression_names": [],
+  "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+  "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+  "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+  "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+  "embedded_receipt_check_receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+  "embedded_receipt_check_receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+  "embedded_receipt_check_receipt_comparison_exclusion_reasons": [
+    "handoff batch CI regression count is 2"
+  ],
+  "main_embedded_receipt_check_status": "pass",
+  "embedded_receipt_check_output_json": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.json",
+  "embedded_receipt_check_output_json_resolved": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.json",
+  "embedded_receipt_check_output_json_exists": true,
+  "embedded_receipt_check_output_text": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.txt",
+  "embedded_receipt_check_output_text_resolved": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.txt",
+  "embedded_receipt_check_output_text_exists": true,
+  "issue_count": 0,
+  "issues": [],
+  "expected_embedded_receipt_check": {
+    "schema_version": 1,
+    "status": "pass",
+    "decision": "continue",
+    "exit_code": 0,
+    "checker_exit_code": 0,
+    "receipt_schema_version": 5,
+    "receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_selected_handoff_batch_maturity_ci_regression_count": 1,
+    "receipt_selected_handoff_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "receipt_handoff_batch_maturity_ci_regression_count": 2,
+    "receipt_handoff_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1,
+      "workflow-order-regressed": 1
+    },
+    "receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "receipt_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+    "receipt_selected_handoff_batch_maturity_suite_design_regression_count": 0,
+    "receipt_selected_handoff_batch_maturity_suite_design_regression_names": [],
+    "receipt_handoff_batch_maturity_suite_design_regression_count": 0,
+    "receipt_handoff_batch_maturity_suite_design_regression_names": [],
+    "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+    "receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+    "receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+    "receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+    "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+    "receipt_comparison_exclusion_reasons": [
+      "handoff batch CI regression count is 2"
+    ],
+    "receipt_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json",
+    "receipt_check_json": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.json",
+    "receipt_check_text": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.txt",
+    "embedded_status": "pass",
+    "embedded_decision": "continue",
+    "expected_status": "pass",
+    "expected_decision": "continue",
+    "issue_count": 0,
+    "issues": [],
+    "expected_check": {
+      "schema_version": 5,
+      "receipt_type": "promoted_training_scale_seed_handoff_automation",
+      "status": "pass",
+      "decision": "continue",
+      "exit_code": 0,
+      "checker_exit_code": 0,
+      "blocking_source": null,
+      "failed_requirements": [],
+      "clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_regression_count": 1,
+      "selected_handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_batch_maturity_ci_regression_count": 2,
+      "handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "workflow-order-regressed": 1
+      },
+      "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+      "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+      "selected_handoff_batch_maturity_suite_design_regression_names": [],
+      "handoff_batch_maturity_suite_design_regression_count": 0,
+      "handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_exclusion_reasons": [
+        "handoff batch CI regression count is 2"
+      ],
+      "issue_count": 0,
+      "issues": []
+    },
+    "embedded_check": {
+      "schema_version": 5,
+      "receipt_type": "promoted_training_scale_seed_handoff_automation",
+      "status": "pass",
+      "decision": "continue",
+      "exit_code": 0,
+      "checker_exit_code": 0,
+      "blocking_source": null,
+      "failed_requirements": [],
+      "clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_regression_count": 1,
+      "selected_handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_batch_maturity_ci_regression_count": 2,
+      "handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "workflow-order-regressed": 1
+      },
+      "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+      "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+      "selected_handoff_batch_maturity_suite_design_regression_names": [],
+      "handoff_batch_maturity_suite_design_regression_count": 0,
+      "handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_exclusion_reasons": [
+        "handoff batch CI regression count is 2"
+      ],
+      "issue_count": 0,
+      "issues": [],
+      "receipt_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json"
+    },
+    "embedded_check_outputs": {
+      "json": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.json",
+      "text": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+    },
+    "sidecar_status": "pass",
+    "sidecar_issue_count": 0,
+    "sidecar_issues": [],
+    "receipt_path_resolved": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json",
+    "receipt_path_exists": true,
+    "receipt_check_json_resolved": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.json",
+    "receipt_check_json_exists": true,
+    "receipt_check_text_resolved": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.txt",
+    "receipt_check_text_exists": true,
+    "handoff_report_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff.json"
+  },
+  "main_embedded_receipt_check": {
+    "schema_version": 1,
+    "status": "pass",
+    "decision": "continue",
+    "exit_code": 0,
+    "checker_exit_code": 0,
+    "receipt_schema_version": 5,
+    "receipt_clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_selected_handoff_batch_maturity_ci_regression_count": 1,
+    "receipt_selected_handoff_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "receipt_selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "receipt_handoff_batch_maturity_ci_regression_count": 2,
+    "receipt_handoff_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1,
+      "workflow-order-regressed": 1
+    },
+    "receipt_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "receipt_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1
+    },
+    "receipt_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+    "receipt_selected_handoff_batch_maturity_suite_design_regression_count": 0,
+    "receipt_selected_handoff_batch_maturity_suite_design_regression_names": [],
+    "receipt_handoff_batch_maturity_suite_design_regression_count": 0,
+    "receipt_handoff_batch_maturity_suite_design_regression_names": [],
+    "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+    "receipt_comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+    "receipt_comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+    "receipt_comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "receipt_comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+    "receipt_comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+    "receipt_comparison_exclusion_reasons": [
+      "handoff batch CI regression count is 2"
+    ],
+    "receipt_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json",
+    "receipt_check_json": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.json",
+    "receipt_check_text": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.txt",
+    "embedded_status": "pass",
+    "embedded_decision": "continue",
+    "expected_status": "pass",
+    "expected_decision": "continue",
+    "issue_count": 0,
+    "issues": [],
+    "expected_check": {
+      "schema_version": 5,
+      "receipt_type": "promoted_training_scale_seed_handoff_automation",
+      "status": "pass",
+      "decision": "continue",
+      "exit_code": 0,
+      "checker_exit_code": 0,
+      "blocking_source": null,
+      "failed_requirements": [],
+      "clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_regression_count": 1,
+      "selected_handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_batch_maturity_ci_regression_count": 2,
+      "handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "workflow-order-regressed": 1
+      },
+      "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+      "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+      "selected_handoff_batch_maturity_suite_design_regression_names": [],
+      "handoff_batch_maturity_suite_design_regression_count": 0,
+      "handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_exclusion_reasons": [
+        "handoff batch CI regression count is 2"
+      ],
+      "issue_count": 0,
+      "issues": []
+    },
+    "embedded_check": {
+      "schema_version": 5,
+      "receipt_type": "promoted_training_scale_seed_handoff_automation",
+      "status": "pass",
+      "decision": "continue",
+      "exit_code": 0,
+      "checker_exit_code": 0,
+      "blocking_source": null,
+      "failed_requirements": [],
+      "clean_batch_review_requirement_selected_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_regression_count": 1,
+      "selected_handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_batch_maturity_ci_regression_count": 2,
+      "handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "workflow-order-regressed": 1
+      },
+      "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1
+      },
+      "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+      "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+      "selected_handoff_batch_maturity_suite_design_regression_names": [],
+      "handoff_batch_maturity_suite_design_regression_count": 0,
+      "handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_count": 0,
+      "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+      "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+      "comparison_ready_handoff_batch_maturity_suite_design_regression_names": [],
+      "comparison_exclusion_reasons": [
+        "handoff batch CI regression count is 2"
+      ],
+      "issue_count": 0,
+      "issues": [],
+      "receipt_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json"
+    },
+    "embedded_check_outputs": {
+      "json": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.json",
+      "text": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.txt"
+    },
+    "sidecar_status": "pass",
+    "sidecar_issue_count": 0,
+    "sidecar_issues": [],
+    "receipt_path_resolved": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff_automation_receipt.json",
+    "receipt_path_exists": true,
+    "receipt_check_json_resolved": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.json",
+    "receipt_check_json_exists": true,
+    "receipt_check_text_resolved": "d\\471\\解释\\receipt-check\\promoted_training_scale_seed_handoff_automation_receipt_check.txt",
+    "receipt_check_text_exists": true,
+    "handoff_report_path": "d\\471\\解释\\promoted-seed-handoff\\promoted_training_scale_seed_handoff.json",
+    "embedded_receipt_check_outputs": {
+      "json": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.json",
+      "text": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.txt"
+    }
+  },
+  "main_embedded_receipt_check_outputs": {
+    "json": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.json",
+    "text": "d\\471\\解释\\embedded-receipt-check\\promoted_training_scale_seed_handoff_embedded_receipt_check.txt"
+  }
+}

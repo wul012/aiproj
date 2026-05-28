@@ -52,6 +52,7 @@ SUMMARY_COMPARE_KEYS = (
     "receipt_check_output_text_exists",
     "suite_design_scopes",
     "ci_boundary_plan_check_scopes",
+    "ci_reason_count_scopes",
     "contract_checks",
     "contract_check_count",
     "failed_contract_check_count",

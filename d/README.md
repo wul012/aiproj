@@ -521,6 +521,9 @@ d/469/解释/说明.md
 d/470/图片
 d/470/解释/说明.md
  -> v470 promoted seed handoff receipt schema-v5 CI reason contract 的运行截图和解释
+d/471/图片
+d/471/解释/说明.md
+ -> v471 promoted seed handoff receipt CI reason-count scope contract 的运行截图和解释
 ```
 
 写入规则：

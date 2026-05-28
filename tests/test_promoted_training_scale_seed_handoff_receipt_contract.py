@@ -21,7 +21,11 @@ from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # 
     SuiteDesignHandoffSidecars,
     write_suite_design_handoff_with_sidecars,
 )
-from test_promoted_training_scale_seed_handoff import write_seed_tree  # noqa: E402
+from test_promoted_training_scale_seed_handoff import (  # noqa: E402
+    HANDOFF_CI_REASON_COUNTS,
+    SELECTED_CI_REASON_COUNTS,
+    write_seed_tree,
+)
 
 
 class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
@@ -55,7 +59,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertIn("receipt_contract_schema_v4_ready=True", text)
             self.assertIn("receipt_contract_schema_v5_ready=True", text)
             self.assertEqual(summary["failed_contract_check_count"], 0)
-            self.assertEqual(summary["contract_check_status_counts"], {"pass": 11, "fail": 0})
+            self.assertEqual(summary["contract_check_status_counts"], {"pass": 14, "fail": 0})
             type_summary = {item["check_type"]: item for item in summary["contract_check_type_summary"]}
             self.assertEqual(type_summary["schema_readiness"]["count"], 3)
             self.assertEqual(type_summary["schema_readiness"]["failed_count"], 0)
@@ -65,6 +69,7 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertEqual(type_summary["status_equals"]["count"], 2)
             self.assertEqual(type_summary["count_consistency"]["count"], 3)
             self.assertEqual(type_summary["selected_within_handoff"]["count"], 3)
+            self.assertEqual(type_summary["reason_counts_within_handoff"]["count"], 3)
             self.assertIn("receipt_contract_failed_check_count=0", text)
             self.assertIn("receipt_contract_check_type_summary=", text)
             self.assertIn("schema_v4_ready", {item["id"] for item in summary["contract_checks"]})
@@ -86,8 +91,10 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
                 markdown,
             )
             self.assertIn("| schema_readiness | pass | 3 | 3 | 0 | 3 |", markdown)
+            self.assertIn("| reason_counts_within_handoff | pass | 3 | 3 | 0 | 3 |", markdown)
             self.assertIn("<td>handoff</td>", html)
             self.assertIn("<td>schema_readiness</td>", html)
+            self.assertIn("CI Reason-Count Scopes", html)
             self.assertIn("Contract Check Type Summary", html)
             self.assertIn("<td>schema_v4_ready</td>", html)
             self.assertIn("<td>schema_v5_ready</td>", html)
@@ -125,6 +132,57 @@ class PromotedTrainingScaleSeedHandoffReceiptContractTests(unittest.TestCase):
             self.assertIn("| handoff | 1 | 0 | True |", markdown)
             self.assertIn("ci_boundary_plan_check.handoff.selected_within_handoff", markdown)
             self.assertIn("CI Boundary Plan-Check Scopes", html)
+
+    def test_contract_summary_checks_ci_reason_counts_within_handoff(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = write_reason_count_handoff_with_sidecars(Path(tmp))
+
+            summary = build_promoted_training_scale_seed_handoff_receipt_contract_summary(paths["handoff"])
+            text = render_promoted_training_scale_seed_handoff_receipt_contract_summary_text(summary)
+            markdown = render_promoted_training_scale_seed_handoff_receipt_contract_summary_markdown(summary)
+            html = render_promoted_training_scale_seed_handoff_receipt_contract_summary_html(summary)
+
+            self.assertEqual(summary["status"], "pass")
+            by_scope = {item["scope"]: item for item in summary["ci_reason_count_scopes"]}
+            self.assertEqual(by_scope["handoff"]["handoff_reason_counts"], HANDOFF_CI_REASON_COUNTS)
+            self.assertEqual(by_scope["handoff"]["selected_reason_counts"], SELECTED_CI_REASON_COUNTS)
+            self.assertTrue(by_scope["handoff"]["selected_reasons_within_handoff"])
+            self.assertEqual(by_scope["handoff"]["missing_reasons"], [])
+            self.assertIn(
+                'receipt_contract_handoff_ci_reason_selected_counts={"archived_path_portability_check_not_ready": 1}',
+                text,
+            )
+            self.assertIn(
+                "| handoff | {\"archived_path_portability_check_not_ready\": 1, "
+                "\"workflow-order-regressed\": 1} | {\"archived_path_portability_check_not_ready\": 1} | "
+                "True | none |",
+                markdown,
+            )
+            self.assertIn("ci_reason_counts.handoff.selected_reasons_within_handoff", markdown)
+            self.assertIn("CI Reason-Count Scopes", html)
+
+    def test_contract_summary_rejects_selected_reason_missing_from_handoff(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = write_reason_count_handoff_with_sidecars(
+                Path(tmp),
+                handoff_ci_reason_counts={"workflow-order-regressed": 2},
+                selected_ci_reason_counts={"missing-ci-step": 1},
+            )
+
+            summary = build_promoted_training_scale_seed_handoff_receipt_contract_summary(paths["handoff"])
+
+            self.assertEqual(summary["status"], "fail")
+            by_scope = {item["scope"]: item for item in summary["ci_reason_count_scopes"]}
+            self.assertFalse(by_scope["handoff"]["selected_reasons_within_handoff"])
+            self.assertEqual(by_scope["handoff"]["missing_reasons"], ["missing-ci-step"])
+            failed = [
+                item for item in summary["contract_checks"]
+                if item["id"] == "ci_reason_counts_handoff_selected_within_handoff"
+            ][0]
+            self.assertEqual(failed["status"], "fail")
+            self.assertTrue(
+                any("handoff CI regression selected reasons exceed handoff reasons" in issue for issue in summary["issues"])
+            )
 
     def test_contract_summary_rejects_tampered_suite_design_sidecar(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -210,6 +268,55 @@ def write_boundary_plan_handoff_with_sidecars(root: Path) -> SuiteDesignHandoffS
             "--out-dir",
             str(handoff_dir),
             "--require-clean-batch-review",
+            "--receipt-check-out-dir",
+            str(receipt_check_dir),
+            "--embedded-receipt-check-out-dir",
+            str(embedded_check_dir),
+            "--assurance-out-dir",
+            str(assurance_dir),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return {
+        "handoff": handoff_dir,
+        "receipt_check": receipt_check_dir,
+        "embedded_check": embedded_check_dir,
+        "assurance": assurance_dir,
+        "stdout": completed.stdout,
+    }
+
+
+def write_reason_count_handoff_with_sidecars(
+    root: Path,
+    *,
+    handoff_ci_reason_counts: dict[str, int] | None = None,
+    selected_ci_reason_counts: dict[str, int] | None = None,
+) -> SuiteDesignHandoffSidecars:
+    seed = write_seed_tree(
+        root,
+        suite_name="standard-zh",
+        include_handoff_suite_guard=True,
+        include_handoff_clean_batch_review=True,
+        handoff_ci_regression_count=2,
+        selected_handoff_ci_regression_count=1,
+        handoff_ci_reason_counts=handoff_ci_reason_counts or HANDOFF_CI_REASON_COUNTS,
+        selected_ci_reason_counts=selected_ci_reason_counts or SELECTED_CI_REASON_COUNTS,
+    )
+    handoff_dir = root / "handoff"
+    receipt_check_dir = root / "receipt-check"
+    embedded_check_dir = root / "embedded-check"
+    assurance_dir = root / "assurance"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            str(ROOT / "scripts" / "execute_promoted_training_scale_seed.py"),
+            str(seed),
+            "--out-dir",
+            str(handoff_dir),
             "--receipt-check-out-dir",
             str(receipt_check_dir),
             "--embedded-receipt-check-out-dir",

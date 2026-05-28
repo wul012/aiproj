@@ -515,6 +515,9 @@
 484-v470-promoted-seed-handoff-receipt-ci-reason-schema-v5.md
  -> v470 code explanation: upgrade promoted seed handoff receipts to schema v5 so CI regression reason-count maps are validated through receipt checks, embedded checks, assurance, and contract summaries.
 
+485-v471-promoted-seed-handoff-receipt-ci-reason-scope-contract.md
+ -> v471 code explanation: add contract summary CI reason-count scopes and checks that selected reason maps stay within aggregate handoff reason maps.
+
 ## 一句话总览
 
 本目录让 MiniGPT 的文档治理从“继续向一个成熟度目录堆版本”转为“阶段化同级承接”，后续训练治理文档可以继续增长而不压垮旧阶段索引。
