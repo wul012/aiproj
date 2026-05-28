@@ -1,0 +1,150 @@
+{
+  "title": "test promotion index",
+  "generated_at": "2026-05-14T00:00:00Z",
+  "summary": {
+    "promotion_count": 3,
+    "promoted_count": 2,
+    "review_count": 0,
+    "blocked_count": 0,
+    "comparison_ready_count": 2,
+    "handoff_require_clean_batch_review_count": 2,
+    "handoff_clean_batch_review_count": 2,
+    "handoff_unclean_batch_review_count": 0,
+    "compare_command_ready": true
+  },
+  "promotions": [
+    {
+      "name": "alpha",
+      "promotion_status": "promoted",
+      "promoted_for_comparison": true,
+      "training_scale_run_path": "..\\runs\\alpha\\training_scale_run.json",
+      "training_scale_run_exists": true,
+      "handoff_require_suite_consistency": true,
+      "handoff_suite_consistency": "consistent",
+      "handoff_suite_mismatch_count": 0,
+      "handoff_selected_suite_path": "builtin:standard-zh",
+      "handoff_selected_batch_review_status": "blocker",
+      "handoff_selected_batch_comparison_review_action_count": 2,
+      "handoff_selected_batch_comparison_blocker_action_count": 1,
+      "handoff_selected_batch_maturity_coverage_regression_count": 1,
+      "handoff_batch_comparison_review_action_count": 2,
+      "handoff_batch_comparison_blocker_action_count": 1,
+      "handoff_batch_comparison_blocker_reasons": [
+        "coverage-regressed"
+      ],
+      "clean_batch_review_guard": {
+        "handoff_require_clean_batch_review": true,
+        "handoff_clean_batch_review_status": "clean"
+      },
+      "summary": {
+        "handoff_require_clean_batch_review": true,
+        "handoff_clean_batch_review_status": "clean"
+      }
+    },
+    {
+      "name": "beta",
+      "promotion_status": "promoted",
+      "promoted_for_comparison": false,
+      "training_scale_run_path": "..\\runs\\beta\\training_scale_run.json",
+      "training_scale_run_exists": true,
+      "handoff_require_suite_consistency": true,
+      "handoff_suite_consistency": "consistent",
+      "handoff_suite_mismatch_count": 0,
+      "handoff_selected_suite_path": "builtin:standard-zh",
+      "handoff_selected_batch_review_status": "review",
+      "handoff_selected_batch_comparison_review_action_count": 2,
+      "handoff_selected_batch_comparison_blocker_action_count": 0,
+      "handoff_selected_batch_maturity_coverage_regression_count": 1,
+      "handoff_batch_comparison_review_action_count": 2,
+      "handoff_batch_comparison_blocker_action_count": 0,
+      "handoff_batch_comparison_blocker_reasons": [],
+      "clean_batch_review_guard": {
+        "handoff_require_clean_batch_review": true,
+        "handoff_clean_batch_review_status": "clean",
+        "handoff_batch_maturity_ci_regression_count": 3,
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+        "handoff_batch_maturity_ci_regression_reason_counts": {
+          "archived_path_portability_check_not_ready": 1,
+          "missing-ci-step": 1,
+          "workflow-order-regressed": 1
+        },
+        "handoff_batch_maturity_ci_regression_names": [
+          "beta-old-ci"
+        ],
+        "handoff_selected_batch_maturity_ci_regression_count": 2,
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+          "archived_path_portability_check_not_ready": 1,
+          "workflow-order-regressed": 1
+        }
+      },
+      "summary": {
+        "handoff_require_clean_batch_review": true,
+        "handoff_clean_batch_review_status": "clean",
+        "handoff_batch_maturity_ci_regression_count": 3,
+        "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+        "handoff_batch_maturity_ci_regression_reason_counts": {
+          "archived_path_portability_check_not_ready": 1,
+          "missing-ci-step": 1,
+          "workflow-order-regressed": 1
+        },
+        "handoff_batch_maturity_ci_regression_names": [
+          "beta-old-ci"
+        ],
+        "handoff_selected_batch_maturity_ci_regression_count": 2,
+        "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+        "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+          "archived_path_portability_check_not_ready": 1,
+          "workflow-order-regressed": 1
+        }
+      },
+      "handoff_batch_maturity_ci_regression_count": 3,
+      "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "missing-ci-step": 1,
+        "workflow-order-regressed": 1
+      },
+      "handoff_batch_maturity_ci_regression_names": [
+        "beta-old-ci"
+      ],
+      "handoff_selected_batch_maturity_ci_regression_count": 2,
+      "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+      "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+        "archived_path_portability_check_not_ready": 1,
+        "workflow-order-regressed": 1
+      }
+    },
+    {
+      "name": "gamma",
+      "promotion_status": "promoted",
+      "promoted_for_comparison": true,
+      "training_scale_run_path": "..\\runs\\gamma\\training_scale_run.json",
+      "training_scale_run_exists": true,
+      "handoff_require_suite_consistency": true,
+      "handoff_suite_consistency": "consistent",
+      "handoff_suite_mismatch_count": 0,
+      "handoff_selected_suite_path": "builtin:standard-zh",
+      "handoff_selected_batch_review_status": "review",
+      "handoff_selected_batch_comparison_review_action_count": 2,
+      "handoff_selected_batch_comparison_blocker_action_count": 0,
+      "handoff_selected_batch_maturity_coverage_regression_count": 1,
+      "handoff_batch_comparison_review_action_count": 2,
+      "handoff_batch_comparison_blocker_action_count": 0,
+      "handoff_batch_comparison_blocker_reasons": []
+    }
+  ],
+  "comparison_inputs": {
+    "run_count": 2,
+    "names": [
+      "alpha",
+      "gamma"
+    ],
+    "training_scale_run_paths": [
+      "..\\runs\\alpha\\training_scale_run.json",
+      "..\\runs\\gamma\\training_scale_run.json"
+    ],
+    "baseline_name": "alpha",
+    "compare_command_ready": true
+  }
+}

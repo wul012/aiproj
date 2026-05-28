@@ -95,16 +95,23 @@ def positive_int_mapping(value: Any) -> dict[str, int]:
     return dict(sorted(result.items()))
 
 
+def ci_regression_reason_count(reason: str, *values: Any) -> int:
+    reason_name = str(reason).strip()
+    if not reason_name:
+        return 0
+    for value in values:
+        count = positive_int_mapping(value).get(reason_name)
+        if count is not None:
+            return count
+    return 0
+
+
 def ci_boundary_plan_check_ready_regression_count(*values: Any) -> int:
     for value in values:
         count = _int_count_or_none(value)
         if count is not None:
             return max(0, count)
-    for value in values:
-        count = positive_int_mapping(value).get(CI_BOUNDARY_PLAN_CHECK_READY_REGRESSION_REASON)
-        if count is not None:
-            return count
-    return 0
+    return ci_regression_reason_count(CI_BOUNDARY_PLAN_CHECK_READY_REGRESSION_REASON, *values)
 
 
 def format_mapping(value: Any) -> str:

@@ -11,6 +11,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.report_utils import (  # noqa: E402
     archived_reference_path,
+    ci_boundary_plan_check_ready_regression_count,
+    ci_regression_reason_count,
     count_available_artifacts,
     display_command,
     first_present,
@@ -114,6 +116,19 @@ class ReportUtilsTests(unittest.TestCase):
         self.assertEqual(format_mapping(counts), "a:1, b:2")
         self.assertEqual(format_mapping({}), "none")
         self.assertEqual(positive_int_mapping(["bad"]), {})
+
+    def test_ci_regression_reason_count_reads_generic_reason_maps(self) -> None:
+        counts = {
+            "boundary_gate_plan_check_not_ready": "2",
+            "archived_path_portability_check_not_ready": 1,
+            "ignored-zero": 0,
+        }
+
+        self.assertEqual(ci_regression_reason_count("archived_path_portability_check_not_ready", counts), 1)
+        self.assertEqual(ci_regression_reason_count("missing", counts), 0)
+        self.assertEqual(ci_regression_reason_count("", counts), 0)
+        self.assertEqual(ci_boundary_plan_check_ready_regression_count(counts), 2)
+        self.assertEqual(ci_boundary_plan_check_ready_regression_count("3", counts), 3)
 
 
 if __name__ == "__main__":

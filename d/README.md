@@ -509,6 +509,9 @@ d/465/解释/说明.md
 d/466/图片
 d/466/解释/说明.md
  -> v466 archived path maturity / portfolio carryover 的运行截图和解释
+d/467/图片
+d/467/解释/说明.md
+ -> v467 promoted training scale archived path generic reason-count 的运行截图和解释
 ```
 
 写入规则：

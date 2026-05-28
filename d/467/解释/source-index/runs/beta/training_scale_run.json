@@ -1,0 +1,31 @@
+{
+  "name": "beta",
+  "status": "completed",
+  "allowed": true,
+  "execute": true,
+  "gate_profile": "review",
+  "gate": {
+    "overall_status": "pass",
+    "pass_count": 2,
+    "warn_count": 0,
+    "fail_count": 0
+  },
+  "scale_plan_summary": {
+    "dataset_name": "sample-zh",
+    "version_prefix": "v79-test",
+    "scale_tier": "tiny",
+    "char_count": 1024,
+    "warning_count": 0,
+    "variant_count": 1,
+    "baseline": "beta",
+    "suite_mode": "builtin",
+    "suite_name": "standard-zh",
+    "suite_path": "builtin:standard-zh"
+  },
+  "batch_summary": {
+    "status": "completed",
+    "comparison_status": "written",
+    "variant_count": 1,
+    "completed_variant_count": 1
+  }
+}
