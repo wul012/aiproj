@@ -17,8 +17,26 @@ from minigpt.promoted_training_scale_seed import (  # noqa: E402
     render_promoted_training_scale_seed_markdown,
     write_promoted_training_scale_seed_outputs,
 )
+from minigpt.report_utils import CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON  # noqa: E402
 from minigpt import promoted_training_scale_seed as seed_module  # noqa: E402
 from minigpt import promoted_training_scale_seed_artifacts as artifact_module  # noqa: E402
+
+
+ARCHIVED_PATH_REASON = CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON
+BATCH_CI_REASON_COUNTS = {
+    ARCHIVED_PATH_REASON: 1,
+    "missing-ci-step": 1,
+    "workflow-order-regressed": 1,
+}
+SELECTED_CI_REASON_COUNTS = {
+    ARCHIVED_PATH_REASON: 1,
+    "workflow-order-regressed": 1,
+}
+BATCH_CI_REASON_TEXT = "archived_path_portability_check_not_ready:1, missing-ci-step:1, workflow-order-regressed:1"
+BATCH_CI_REASON_JSON = (
+    'handoff_batch_maturity_ci_regression_reason_counts={"archived_path_portability_check_not_ready": 1, '
+    '"missing-ci-step": 1, "workflow-order-regressed": 1}'
+)
 
 
 class PromotedTrainingScaleSeedTests(unittest.TestCase):
@@ -366,23 +384,23 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
                 0,
             )
             self.assertEqual(clean_review["selected_handoff_selected_batch_maturity_ci_regression_reason_counts"], {})
-            self.assertEqual(clean_review["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(clean_review["handoff_batch_maturity_ci_regression_count"], 3)
             self.assertEqual(clean_review["handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"], 1)
             self.assertEqual(
                 clean_review["handoff_batch_maturity_ci_regression_reason_counts"],
-                {"missing-ci-step": 1, "workflow-order-regressed": 1},
+                BATCH_CI_REASON_COUNTS,
             )
-            self.assertEqual(clean_review["handoff_selected_batch_maturity_ci_regression_total"], 1)
+            self.assertEqual(clean_review["handoff_selected_batch_maturity_ci_regression_total"], 2)
             self.assertEqual(
                 clean_review["handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"],
                 1,
             )
             self.assertEqual(
                 clean_review["handoff_selected_batch_maturity_ci_regression_reason_counts"],
-                {"workflow-order-regressed": 1},
+                SELECTED_CI_REASON_COUNTS,
             )
             self.assertEqual(clean_review["handoff_batch_maturity_ci_regression_names"], ["dirty-ci-old"])
-            self.assertEqual(clean_review["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+            self.assertEqual(clean_review["comparison_exclusion_reasons"], ["handoff batch CI regression count is 3"])
             self.assertEqual(clean_review["comparison_ready_handoff_batch_maturity_ci_regression_count"], 0)
             self.assertEqual(
                 clean_review["comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"],
@@ -395,26 +413,26 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
                 0,
             )
             self.assertEqual(summary["selected_handoff_batch_maturity_ci_regression_reason_counts"], {})
-            self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 2)
+            self.assertEqual(summary["handoff_batch_maturity_ci_regression_count"], 3)
             self.assertEqual(summary["handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count"], 1)
             self.assertEqual(
                 summary["handoff_batch_maturity_ci_regression_reason_counts"],
-                {"missing-ci-step": 1, "workflow-order-regressed": 1},
+                BATCH_CI_REASON_COUNTS,
             )
-            self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 1)
+            self.assertEqual(summary["handoff_selected_batch_maturity_ci_regression_total"], 2)
             self.assertEqual(
                 summary["handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total"],
                 1,
             )
             self.assertEqual(
                 summary["handoff_selected_batch_maturity_ci_regression_reason_counts"],
-                {"workflow-order-regressed": 1},
+                SELECTED_CI_REASON_COUNTS,
             )
-            self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch CI regression count is 2"])
+            self.assertEqual(summary["comparison_exclusion_reasons"], ["handoff batch CI regression count is 3"])
             self.assertIn("handoff_batch_maturity_ci_regression_count", csv_text)
             self.assertIn("handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count", csv_text)
             self.assertIn("handoff_batch_maturity_ci_regression_reason_counts", csv_text)
-            self.assertIn("missing-ci-step:1, workflow-order-regressed:1", csv_text)
+            self.assertIn(BATCH_CI_REASON_TEXT, csv_text)
             self.assertIn("comparison_exclusion_reasons", csv_text)
             self.assertIn("Handoff batch CI regressions", markdown)
             self.assertIn("Handoff batch CI boundary plan-check regressions", markdown)
@@ -423,13 +441,13 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
             self.assertIn("Handoff CI regressions", html)
             self.assertIn("Handoff CI boundary plan", html)
             self.assertIn("Handoff CI reasons", html)
-            self.assertIn("handoff_batch_maturity_ci_regression_count=2", completed.stdout)
+            self.assertIn("handoff_batch_maturity_ci_regression_count=3", completed.stdout)
             self.assertIn(
                 "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count=1",
                 completed.stdout,
             )
             self.assertIn(
-                'handoff_batch_maturity_ci_regression_reason_counts={"missing-ci-step": 1, "workflow-order-regressed": 1}',
+                BATCH_CI_REASON_JSON,
                 completed.stdout,
             )
             self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_count=0", completed.stdout)
@@ -440,7 +458,7 @@ class PromotedTrainingScaleSeedTests(unittest.TestCase):
             self.assertIn("comparison_ready_handoff_batch_maturity_ci_regression_reason_counts={}", completed.stdout)
             self.assertTrue(any("handoff batch CI regressions" in item for item in report["recommendations"]))
             self.assertTrue(
-                any("missing-ci-step:1, workflow-order-regressed:1" in item for item in report["recommendations"])
+                any(BATCH_CI_REASON_TEXT in item for item in report["recommendations"])
             )
 
     def test_carries_decision_suite_design_exclusions_into_seed_outputs_and_script(self) -> None:
@@ -756,19 +774,18 @@ def write_decision_tree(
     if include_ci_regression_context:
         summary_fields.update(
             {
-                "handoff_batch_maturity_ci_regression_count": 2,
+                "handoff_batch_maturity_ci_regression_count": 3,
                 "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
                 "handoff_batch_maturity_ci_regression_reason_counts": {
-                    "missing-ci-step": 1,
-                    "workflow-order-regressed": 1,
+                    **BATCH_CI_REASON_COUNTS,
                 },
-                "handoff_selected_batch_maturity_ci_regression_total": 1,
+                "handoff_selected_batch_maturity_ci_regression_total": 2,
                 "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
                 "handoff_selected_batch_maturity_ci_regression_reason_counts": {
-                    "workflow-order-regressed": 1,
+                    **SELECTED_CI_REASON_COUNTS,
                 },
                 "handoff_batch_maturity_ci_regression_names": ["dirty-ci-old"],
-                "comparison_exclusion_reasons": ["handoff batch CI regression count is 2"],
+                "comparison_exclusion_reasons": ["handoff batch CI regression count is 3"],
                 "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
                 "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
                 "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},

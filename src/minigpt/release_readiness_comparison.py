@@ -15,6 +15,7 @@ from minigpt.release_readiness_comparison_artifacts import (
     write_release_readiness_delta_csv,
 )
 from minigpt.report_utils import (
+    CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON,
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
     utc_now,
@@ -577,7 +578,7 @@ def _ci_workflow_regression_reasons(delta: dict[str, Any]) -> list[str]:
     if delta.get("ci_workflow_baseline_candidate_threshold_boundary_gate_plan_check_ready_regressed"):
         reasons.append("boundary_gate_plan_check_not_ready")
     if delta.get("ci_workflow_archived_path_portability_check_ready_regressed"):
-        reasons.append("archived_path_portability_check_not_ready")
+        reasons.append(CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON)
     if delta.get("ci_workflow_promoted_seed_receipt_contract_failure_smoke_plan_check_ready_regressed"):
         reasons.append("receipt_failure_smoke_plan_check_not_ready")
     if delta.get("ci_workflow_release_readiness_drift_contract_smoke_ready_regressed"):
@@ -727,7 +728,7 @@ def _ci_workflow_reason_label(value: Any) -> str:
         "tiny_scorecard_plan_digest_gate_not_ready": "tiny scorecard plan digest gate readiness",
         "boundary_gate_check_not_ready": "baseline-candidate boundary gate check readiness",
         "boundary_gate_plan_check_not_ready": "baseline-candidate boundary plan check readiness",
-        "archived_path_portability_check_not_ready": "archived path portability check readiness",
+        CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON: "archived path portability check readiness",
         "receipt_failure_smoke_plan_check_not_ready": "receipt failure-smoke plan check readiness",
         "failed_checks_increased": "failed checks increased",
         "order_violations_increased": "order violations increased",

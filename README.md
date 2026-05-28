@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v467.0.0` keeps archived path portability regression evidence on the generic CI reason-count path for promoted training scale comparison and seed handoff review.
+Version `v468.0.0` carries archived path portability regression reason-counts through promoted training scale decision and seed outputs.
+
+## Latest v468 checkpoint
+
+- Added `CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON` to `report_utils` and reused it in release readiness comparison / registry release-readiness delta mapping.
+- Extended promoted training scale decision tests so rejected clean-batch CI evidence preserves `archived_path_portability_check_not_ready` in rejected rows, summaries, reports, recommendations, and CLI output.
+- Extended promoted training scale seed tests so next-cycle seed clean-batch review summaries preserve the same archived-path reason from decision context.
+- Archived decision and seed CLI output, JSON/CSV/Markdown/HTML reports, Playwright MCP snapshot, and screenshot evidence in `d/468`.
 
 ## Latest v467 checkpoint
 

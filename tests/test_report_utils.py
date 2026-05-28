@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.report_utils import (  # noqa: E402
+    CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON,
     archived_reference_path,
     ci_boundary_plan_check_ready_regression_count,
     ci_regression_reason_count,
@@ -120,11 +121,14 @@ class ReportUtilsTests(unittest.TestCase):
     def test_ci_regression_reason_count_reads_generic_reason_maps(self) -> None:
         counts = {
             "boundary_gate_plan_check_not_ready": "2",
-            "archived_path_portability_check_not_ready": 1,
+            CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON: 1,
             "ignored-zero": 0,
         }
 
-        self.assertEqual(ci_regression_reason_count("archived_path_portability_check_not_ready", counts), 1)
+        self.assertEqual(
+            ci_regression_reason_count(CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON, counts),
+            1,
+        )
         self.assertEqual(ci_regression_reason_count("missing", counts), 0)
         self.assertEqual(ci_regression_reason_count("", counts), 0)
         self.assertEqual(ci_boundary_plan_check_ready_regression_count(counts), 2)

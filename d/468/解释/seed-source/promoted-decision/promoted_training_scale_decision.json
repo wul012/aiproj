@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "title": "decision",
+  "decision_status": "accepted",
+  "comparison_path": "D:\\aiproj\\d\\468\\解释\\seed-source\\comparison\\promoted_training_scale_comparison.json",
+  "selected_baseline": {
+    "name": "beta",
+    "gate_status": "pass",
+    "batch_status": "completed",
+    "readiness_score": 107,
+    "training_scale_run_path": "D:\\aiproj\\d\\468\\解释\\seed-source\\beta\\scale-run\\training_scale_run.json",
+    "promotion_status": "promoted",
+    "handoff_require_suite_consistency": true,
+    "handoff_suite_consistency": "consistent",
+    "handoff_suite_mismatch_count": 0,
+    "handoff_selected_suite_path": "builtin:standard-zh",
+    "handoff_selected_batch_review_status": "blocker",
+    "handoff_selected_batch_comparison_review_action_count": 2,
+    "handoff_selected_batch_comparison_blocker_action_count": 1,
+    "handoff_selected_batch_maturity_coverage_regression_count": 1,
+    "handoff_batch_comparison_review_action_count": 2,
+    "handoff_batch_comparison_blocker_action_count": 1,
+    "handoff_batch_comparison_blocker_reasons": [
+      "coverage-regressed"
+    ],
+    "handoff_require_clean_batch_review": true,
+    "handoff_clean_batch_review_status": "clean",
+    "handoff_batch_maturity_ci_regression_count": 0,
+    "handoff_batch_maturity_ci_regression_names": [],
+    "handoff_selected_batch_maturity_ci_regression_count": 0,
+    "comparison_exclusion_reasons": [],
+    "handoff_batch_maturity_suite_design_regression_count": 0,
+    "handoff_batch_maturity_suite_design_regression_names": [],
+    "handoff_selected_batch_maturity_suite_design_regression_count": 0,
+    "handoff_selected_batch_maturity_suite_design_regression_names": []
+  },
+  "summary": {
+    "decision_status": "accepted",
+    "selected_name": "beta",
+    "selected_handoff_require_suite_consistency": true,
+    "selected_handoff_suite_consistency": "consistent",
+    "selected_handoff_suite_mismatch_count": 0,
+    "selected_handoff_selected_suite_path": "builtin:standard-zh",
+    "handoff_require_suite_consistency_count": 2,
+    "handoff_suite_consistent_count": 2,
+    "handoff_suite_mismatch_total": 0,
+    "comparison_ready_handoff_suite_mismatch_total": 0,
+    "selected_handoff_selected_batch_review_status": "blocker",
+    "selected_handoff_selected_batch_comparison_review_action_count": 2,
+    "selected_handoff_selected_batch_comparison_blocker_action_count": 1,
+    "selected_handoff_selected_batch_maturity_coverage_regression_count": 1,
+    "selected_handoff_batch_comparison_review_action_count": 2,
+    "selected_handoff_batch_comparison_blocker_action_count": 1,
+    "selected_handoff_batch_comparison_blocker_reasons": [
+      "coverage-regressed"
+    ],
+    "comparison_ready_handoff_selected_batch_review_count": 1,
+    "comparison_ready_handoff_selected_batch_blocker_count": 1,
+    "comparison_ready_handoff_selected_batch_comparison_review_action_total": 4,
+    "comparison_ready_handoff_selected_batch_comparison_blocker_action_total": 1,
+    "comparison_ready_handoff_batch_comparison_review_action_total": 4,
+    "comparison_ready_handoff_batch_comparison_blocker_action_total": 1,
+    "comparison_ready_handoff_batch_comparison_blocker_reasons": [
+      "coverage-regressed"
+    ],
+    "selected_handoff_require_clean_batch_review": true,
+    "selected_handoff_clean_batch_review_status": "clean",
+    "selected_handoff_batch_maturity_ci_regression_count": 0,
+    "selected_handoff_batch_maturity_ci_regression_reason_counts": {},
+    "selected_handoff_batch_maturity_ci_regression_names": [],
+    "selected_handoff_selected_batch_maturity_ci_regression_count": 0,
+    "selected_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "selected_handoff_batch_maturity_suite_design_regression_count": 0,
+    "selected_handoff_batch_maturity_suite_design_regression_names": [],
+    "selected_handoff_selected_batch_maturity_suite_design_regression_count": 0,
+    "selected_handoff_selected_batch_maturity_suite_design_regression_names": [],
+    "selected_comparison_exclusion_reasons": [],
+    "handoff_require_clean_batch_review_count": 3,
+    "handoff_clean_batch_review_count": 2,
+    "handoff_unclean_batch_review_count": 1,
+    "comparison_ready_handoff_require_clean_batch_review_count": 2,
+    "comparison_ready_handoff_clean_batch_review_count": 2,
+    "comparison_ready_handoff_unclean_batch_review_count": 0,
+    "handoff_batch_maturity_ci_regression_count": 3,
+    "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 1,
+    "handoff_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1,
+      "missing-ci-step": 1,
+      "workflow-order-regressed": 1
+    },
+    "handoff_selected_batch_maturity_ci_regression_total": 2,
+    "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 1,
+    "handoff_selected_batch_maturity_ci_regression_reason_counts": {
+      "archived_path_portability_check_not_ready": 1,
+      "workflow-order-regressed": 1
+    },
+    "handoff_batch_maturity_ci_regression_names": [
+      "dirty-ci-old"
+    ],
+    "comparison_exclusion_reasons": [
+      "handoff batch CI regression count is 3"
+    ],
+    "comparison_ready_handoff_batch_maturity_ci_regression_count": 0,
+    "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count": 0,
+    "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts": {},
+    "comparison_ready_handoff_selected_batch_maturity_ci_regression_total": 0,
+    "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total": 0,
+    "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts": {},
+    "comparison_ready_handoff_batch_maturity_ci_regression_names": []
+  }
+}

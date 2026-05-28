@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
+CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON = "archived_path_portability_check_not_ready"
 CI_BOUNDARY_PLAN_CHECK_READY_REGRESSION_REASON = "boundary_gate_plan_check_not_ready"
 
 
