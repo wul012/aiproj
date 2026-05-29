@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT one-term seed stability</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f1; color: #17211e; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1220px; margin: 0 auto; }
+header { border-bottom: 1px solid #dce1d5; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #59665f; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dce1d5; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 33, 30, 0.05); }
+.card span { display: block; color: #657269; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 920px; }
+th, td { text-align: left; border-bottom: 1px solid #e5eadf; padding: 10px; vertical-align: top; }
+th { color: #52605a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term one-term seed stability</h1><p>At least one v492 successful one-term case reproduced continuation uptake across all configured seeds.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>some_successful_terms_seed_stable</strong></div><div class="card"><span>Terms</span><strong>5</strong></div><div class="card"><span>Seeds</span><strong>3</strong></div><div class="card"><span>Runs</span><strong>15</strong></div><div class="card"><span>Training pass</span><strong>15</strong></div><div class="card"><span>Checkpoints</span><strong>15</strong></div><div class="card"><span>Term-seed hits</span><strong>14</strong></div><div class="card"><span>Stable terms</span><strong>4</strong></div><div class="card"><span>Stable capacity</span><strong>True</strong></div></section>
+<section class="panel"><h2>Stability Boundary</h2><p>Only v492 terms that already produced a one-term continuation hit are selected by default. This report does not claim general language ability; it checks whether isolated prompt-to-term uptake survives seed changes.</p><p>use stable one-term cases as a small curriculum before reintroducing multiple terms</p></section>
+<section class="panel">
+<h2>Term Stability</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Term</th><th>Source hit</th><th>Hit seeds</th><th>Missed seeds</th><th>Hit rate</th><th>Stable</th></tr></thead>
+<tbody><tr><td>fixed</td><td>1</td><td>493, 1493, 2493</td><td></td><td>1.0</td><td>True</td></tr>
+<tr><td>text</td><td>1</td><td>493, 2493</td><td>1493</td><td>0.6667</td><td>False</td></tr>
+<tr><td>loss</td><td>1</td><td>493, 1493, 2493</td><td></td><td>1.0</td><td>True</td></tr>
+<tr><td>four</td><td>1</td><td>493, 1493, 2493</td><td></td><td>1.0</td><td>True</td></tr>
+<tr><td>chain</td><td>1</td><td>493, 1493, 2493</td><td></td><td>1.0</td><td>True</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Seed Runs</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Run</th><th>Term</th><th>Seed</th><th>Training</th><th>Checkpoint</th><th>Continuation hit</th><th>Preview</th></tr></thead>
+<tbody><tr><td>01-fixed-seed-493</td><td>fixed</td><td>493</td><td>pass</td><td>True</td><td>1</td><td>fixed:fixed:</td></tr>
+<tr><td>01-fixed-seed-1493</td><td>fixed</td><td>1493</td><td>pass</td><td>True</td><td>1</td><td>fixed\nfixed\n</td></tr>
+<tr><td>01-fixed-seed-2493</td><td>fixed</td><td>2493</td><td>pass</td><td>True</td><td>1</td><td>fixed:fixed:</td></tr>
+<tr><td>02-text-seed-493</td><td>text</td><td>493</td><td>pass</td><td>True</td><td>1</td><td>text\ntext\nte</td></tr>
+<tr><td>02-text-seed-1493</td><td>text</td><td>1493</td><td>pass</td><td>True</td><td>0</td><td>tetetetexxte</td></tr>
+<tr><td>02-text-seed-2493</td><td>text</td><td>2493</td><td>pass</td><td>True</td><td>1</td><td>textextextex</td></tr>
+<tr><td>03-loss-seed-493</td><td>loss</td><td>493</td><td>pass</td><td>True</td><td>1</td><td>loss\nloss\nlo</td></tr>
+<tr><td>03-loss-seed-1493</td><td>loss</td><td>1493</td><td>pass</td><td>True</td><td>1</td><td>losss\nlololo</td></tr>
+<tr><td>03-loss-seed-2493</td><td>loss</td><td>2493</td><td>pass</td><td>True</td><td>1</td><td>lossss\nlolol</td></tr>
+<tr><td>04-four-seed-493</td><td>four</td><td>493</td><td>pass</td><td>True</td><td>1</td><td>four\nfour\nfo</td></tr>
+<tr><td>04-four-seed-1493</td><td>four</td><td>1493</td><td>pass</td><td>True</td><td>1</td><td>four\nfour\nfo</td></tr>
+<tr><td>04-four-seed-2493</td><td>four</td><td>2493</td><td>pass</td><td>True</td><td>1</td><td> four:four:f</td></tr>
+<tr><td>05-chain-seed-493</td><td>chain</td><td>493</td><td>pass</td><td>True</td><td>1</td><td>chain\nchain\n</td></tr>
+<tr><td>05-chain-seed-1493</td><td>chain</td><td>1493</td><td>pass</td><td>True</td><td>1</td><td>chain:chain:</td></tr>
+<tr><td>05-chain-seed-2493</td><td>chain</td><td>2493</td><td>pass</td><td>True</td><td>1</td><td> chain:chain</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

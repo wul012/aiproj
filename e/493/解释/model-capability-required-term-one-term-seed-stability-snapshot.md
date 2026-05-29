@@ -1,0 +1,49 @@
+- main [ref=e2] [box=28,28,1144,1612]:
+  - generic [ref=e3] [box=28,28,1144,114]:
+    - heading "MiniGPT required-term one-term seed stability" [level=1] [ref=e4] [box=28,28,1144,40]
+    - paragraph [ref=e5] [box=28,84,1144,25]: At least one v492 successful one-term case reproduced continuation uptake across all configured seeds.
+  - generic [ref=e6] [box=28,160,1144,200]:
+    - generic [ref=e7] [box=28,160,155,117]:
+      - generic [ref=e8] [box=43,174,126,16]: Status
+      - strong [ref=e9] [box=43,196,126,22]: pass
+    - generic [ref=e10] [box=193,160,155,117]:
+      - generic [ref=e11] [box=207,174,126,16]: Decision
+      - strong [ref=e12] [box=207,196,126,65]: some_successful_terms_seed_stable
+    - generic [ref=e13] [box=358,160,155,117]:
+      - generic [ref=e14] [box=372,174,126,16]: Terms
+      - strong [ref=e15] [box=372,196,126,22]: "5"
+    - generic [ref=e16] [box=523,160,155,117]:
+      - generic [ref=e17] [box=537,174,126,16]: Seeds
+      - strong [ref=e18] [box=537,196,126,22]: "3"
+    - generic [ref=e19] [box=687,160,155,117]:
+      - generic [ref=e20] [box=702,174,126,16]: Runs
+      - strong [ref=e21] [box=702,196,126,22]: "15"
+    - generic [ref=e22] [box=852,160,155,117]:
+      - generic [ref=e23] [box=867,174,126,16]: Training pass
+      - strong [ref=e24] [box=867,196,126,22]: "15"
+    - generic [ref=e25] [box=1017,160,155,117]:
+      - generic [ref=e26] [box=1032,174,126,16]: Checkpoints
+      - strong [ref=e27] [box=1032,196,126,22]: "15"
+    - generic [ref=e28] [box=28,286,155,73]:
+      - generic [ref=e29] [box=43,301,126,16]: Term-seed hits
+      - strong [ref=e30] [box=43,323,126,22]: "14"
+    - generic [ref=e31] [box=193,286,155,73]:
+      - generic [ref=e32] [box=207,301,126,16]: Stable terms
+      - strong [ref=e33] [box=207,323,126,22]: "4"
+    - generic [ref=e34] [box=358,286,155,73]:
+      - generic [ref=e35] [box=372,301,126,16]: Stable capacity
+      - strong [ref=e36] [box=372,323,126,22]: "True"
+  - generic [ref=e37] [box=28,377,1144,176]:
+    - heading "Stability Boundary" [level=2] [ref=e38] [box=43,392,1115,24]
+    - paragraph [ref=e39] [box=43,432,1115,50]: Only v492 terms that already produced a one-term continuation hit are selected by default. This report does not claim general language ability; it checks whether isolated prompt-to-term uptake survives seed changes.
+    - paragraph [ref=e40] [box=43,498,1115,25]: use stable one-term cases as a small curriculum before reintroducing multiple terms
+  - generic [ref=e41] [box=28,571,1144,314]:
+    - heading "Term Stability" [level=2] [ref=e42] [box=43,586,1115,24]
+    - table [ref=e44] [box=43,622,1115,248]:
+      - rowgroup [ref=e45] [box=43,622,1115,37]
+      - rowgroup [ref=e53] [box=43,659,1115,211]
+  - generic [ref=e89] [box=28,903,1144,737]:
+    - heading "Seed Runs" [level=2] [ref=e90] [box=43,918,1115,24]
+    - table [ref=e92] [box=43,954,1115,671]:
+      - rowgroup [ref=e93] [box=43,954,1115,37]
+      - rowgroup [ref=e102] [box=43,991,1115,634]

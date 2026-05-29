@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v492.0.0` trains one tiny checkpoint per required term to isolate whether the model has single-target prompt-to-term capacity.
+Version `v493.0.0` repeats the v492 successful one-term required-term cases across seeds to check whether the isolated capacity signal is reproducible.
+
+## Latest v493 checkpoint
+
+- Added `model_capability_required_term_one_term_seed_stability` reporting for replaying v492 successful one-term cases across multiple seeds.
+- Added `scripts/run_model_capability_required_term_one_term_seed_stability.py`, which writes per-term/per-seed corpora, tiny checkpoints, generation rows, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real seed-stability check against v492 hit terms with seeds `493`, `1493`, and `2493`: all `15` checkpoints trained, `14/15` term-seed runs produced continuation hits, and `4/5` selected terms were stable across every seed.
+- Interpreted v493 as a seed-stable single-target capacity signal only: `fixed`, `loss`, `four`, and `chain` are reusable candidates for a future small-group curriculum, while `text` remains partial.
+- Archived the v493 seed-stability evidence in `e/493` and added the code explanation in `代码讲解记录_模型能力阶段/507-v493-model-capability-required-term-one-term-seed-stability.md`.
 
 ## Latest v492 checkpoint
 

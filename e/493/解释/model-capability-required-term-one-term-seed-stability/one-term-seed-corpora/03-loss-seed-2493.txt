@@ -1,0 +1,402 @@
+MiniGPT required-term one-term isolation corpus.
+Only one target term is present in this training file.
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss
+loss:loss
+loss: loss

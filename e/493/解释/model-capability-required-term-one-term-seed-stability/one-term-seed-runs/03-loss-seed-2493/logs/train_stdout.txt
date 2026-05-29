@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=4304 vocab_size=30
+parameters=52,544
+data_source=data:e\493\解释\model-capability-required-term-one-term-seed-stability\one-term-seed-corpora\03-loss-seed-2493.txt
+step=    1 train_loss=2.1583 val_loss=2.1438
+step=  300 train_loss=1.1216 val_loss=1.0201
+step=  600 train_loss=1.2461 val_loss=1.2013
+step=  900 train_loss=1.3306 val_loss=1.2591
+step= 1200 train_loss=0.6981 val_loss=0.6583
+saved=e\493\解释\model-capability-required-term-one-term-seed-stability\one-term-seed-runs\03-loss-seed-2493
+history=e\493\解释\model-capability-required-term-one-term-seed-stability\one-term-seed-runs\03-loss-seed-2493\metrics.jsonl
+manifest=e\493\解释\model-capability-required-term-one-term-seed-stability\one-term-seed-runs\03-loss-seed-2493\run_manifest.json
+sample=e\493\解释\model-capability-required-term-one-term-seed-stability\one-term-seed-runs\03-loss-seed-2493\sample.txt

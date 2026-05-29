@@ -97,6 +97,10 @@ e/491/解释/说明.md
 e/492/图片
 e/492/解释/说明.md
  -> v492 model capability required-term one-term isolation 的运行截图和解释
+
+e/493/图片
+e/493/解释/说明.md
+ -> v493 model capability required-term one-term seed stability 的运行截图和解释
 ```
 
 写入规则：

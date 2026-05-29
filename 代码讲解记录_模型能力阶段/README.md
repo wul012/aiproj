@@ -71,6 +71,9 @@
 506-v492-model-capability-required-term-one-term-isolation.md
  -> v492 code explanation: train one checkpoint per required term and show single-target capacity appears before multi-term prompt-conditioned training works.
 
+507-v493-model-capability-required-term-one-term-seed-stability.md
+ -> v493 code explanation: repeat v492 successful one-term cases across seeds and identify stable single-target capacity signals.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
