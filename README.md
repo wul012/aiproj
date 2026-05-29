@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v487.0.0` builds a balanced required-term corpus candidate from the v486 seed-stability evidence before the next real tiny-training rerun.
+Version `v488.0.0` trains a tiny checkpoint from the v487 balanced corpus and diagnoses why continuation uptake still does not appear.
+
+## Latest v488 checkpoint
+
+- Added `model_capability_required_term_balanced_training` reporting for training directly on the v487 balanced corpus and probing required-term continuations.
+- Added `scripts/run_model_capability_required_term_balanced_training.py`, which writes training evidence, generation rows, prompt-alignment diagnostics, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real balanced-corpus training with `max_iters=600`, `n_embd=64`, and `generation_seed=488`: checkpoint creation passed, but continuation hits stayed `0/9`.
+- Diagnosed the failure mode: `prompt_alignment_ready=False` and `prompt_leading_line_count=0`, meaning the balanced corpus put scaffold prompts inside prefixed pattern rows rather than at line starts.
+- Archived the v488 balanced-training evidence in `e/488` and added the code explanation in `代码讲解记录_模型能力阶段/502-v488-model-capability-required-term-balanced-training.md`.
 
 ## Latest v487 checkpoint
 

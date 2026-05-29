@@ -1,0 +1,10 @@
+generation_seed,case,term,scaffold_prompt,balanced_line_count,balanced_pattern_count,prompt_hit_count,generated_hit_count,continuation_hit_count,prompt_truncated,generated_preview,continuation_preview
+488,classification-risk-level,because,because:,48,6,1,1,0,False,because:|pate=07|pat,|pate=07|pat
+489,comparison-baseline,fixed,fixed:,48,6,1,1,0,False,fixed:|pate=07|pat,|pate=07|pat
+490,continuation-science,text,text:,48,6,1,1,0,False,text:|pate=07|pat,|pate=07|pat
+491,factual-val-loss,loss,loss:,48,6,1,1,0,False,loss:|pate=07|pat,|pate=07|pat
+492,qa-training-loop,data,data:,48,6,1,1,0,False,data:|pate=07|pat,|pate=07|pat
+493,refusal-boundary,real,real:,48,6,1,1,0,False,real:|pate=07|pat,|pate=07|pat
+494,structured-experiment-json,four,four:,48,6,1,1,0,False,four:|pate=07|pat,|pate=07|pat
+495,style-rewrite-concise,while,while:,48,6,1,1,0,False,while:|pate=07|pat,|pate=07|pat
+496,summary-evidence-chain,chain,chain:,48,6,1,1,0,False,chain:|pate=07|pat,|pate=07|pat

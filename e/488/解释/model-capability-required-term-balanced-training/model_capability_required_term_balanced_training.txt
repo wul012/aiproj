@@ -1,0 +1,15 @@
+status=pass
+decision=required_term_balanced_training_completed_without_uptake
+balanced_training_decision=balanced_training_completed_without_uptake
+term_count=9
+generation_count=9
+continuation_hit_count=0
+generated_hit_count=9
+case_with_continuation_hit_count=0
+continuation_hit_rate=0.0
+training_status=pass
+checkpoint_exists=True
+prompt_alignment_ready=False
+prompt_leading_line_count=0
+model_quality_claim=not_claimed
+next_action=rebuild the balanced corpus with prompt-leading scaffold-to-term rows before increasing training budget

@@ -1,0 +1,118 @@
+- main [ref=e2] [box=28,28,1134,1245]:
+  - generic [ref=e3] [box=28,28,1134,114]:
+    - heading "MiniGPT required-term balanced training" [level=1] [ref=e4] [box=28,28,1134,40]
+    - paragraph [ref=e5] [box=28,84,1134,25]: The balanced-corpus training run completed, but short continuations still did not include required terms.
+  - generic [ref=e6] [box=28,160,1134,200]:
+    - generic [ref=e7] [box=28,160,181,117]:
+      - generic [ref=e8] [box=43,174,152,16]: Status
+      - strong [ref=e9] [box=43,196,152,22]: pass
+    - generic [ref=e10] [box=219,160,181,117]:
+      - generic [ref=e11] [box=233,174,152,16]: Decision
+      - strong [ref=e12] [box=233,196,152,65]: balanced_training_completed_without_uptake
+    - generic [ref=e13] [box=409,160,181,117]:
+      - generic [ref=e14] [box=424,174,152,16]: Terms
+      - strong [ref=e15] [box=424,196,152,22]: "9"
+    - generic [ref=e16] [box=600,160,181,117]:
+      - generic [ref=e17] [box=615,174,152,16]: Generations
+      - strong [ref=e18] [box=615,196,152,22]: "9"
+    - generic [ref=e19] [box=791,160,181,117]:
+      - generic [ref=e20] [box=805,174,152,16]: Continuation hits
+      - strong [ref=e21] [box=805,196,152,22]: "0"
+    - generic [ref=e22] [box=981,160,181,117]:
+      - generic [ref=e23] [box=996,174,152,16]: Case hits
+      - strong [ref=e24] [box=996,196,152,22]: "0"
+    - generic [ref=e25] [box=28,286,181,73]:
+      - generic [ref=e26] [box=43,301,152,16]: Hit rate
+      - strong [ref=e27] [box=43,323,152,22]: "0.0"
+    - generic [ref=e28] [box=219,286,181,73]:
+      - generic [ref=e29] [box=233,301,152,16]: Prompt aligned
+      - strong [ref=e30] [box=233,323,152,22]: "False"
+    - generic [ref=e31] [box=409,286,181,73]:
+      - generic [ref=e32] [box=424,301,152,16]: Prompt-leading lines
+      - strong [ref=e33] [box=424,323,152,22]: "0"
+    - generic [ref=e34] [box=600,286,181,73]:
+      - generic [ref=e35] [box=615,301,152,16]: Checkpoint
+      - strong [ref=e36] [box=615,323,152,22]: "True"
+  - generic [ref=e37] [box=28,377,1134,266]:
+    - heading "Training Evidence" [level=2] [ref=e38] [box=43,392,1105,24]
+    - paragraph [ref=e39] [box=43,432,1105,25]: "Corpus: e\\487\\解释\\model-capability-required-term-balanced-corpus\\required_term_balanced_corpus.txt"
+    - paragraph [ref=e40] [box=43,473,1105,25]: "Checkpoint: e\\488\\解释\\model-capability-required-term-balanced-training\\balanced-run\\checkpoint.pt"
+    - paragraph [ref=e41] [box=43,514,1105,99]: "Command: D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\487\\解释\\model-capability-required-term-balanced-corpus\\required_term_balanced_corpus.txt --out-dir e\\488\\解释\\model-capability-required-term-balanced-training\\balanced-run --device cpu --tokenizer char --max-iters 600 --eval-interval 150 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 488 --sample-prompt because: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+  - generic [ref=e42] [box=28,662,1134,110]:
+    - heading "Next Action" [level=2] [ref=e43] [box=43,676,1105,24]
+    - paragraph [ref=e44] [box=43,717,1105,25]: rebuild the balanced corpus with prompt-leading scaffold-to-term rows before increasing training budget
+  - generic [ref=e45] [box=28,790,1134,483]:
+    - heading "Required-Term Generations" [level=2] [ref=e46] [box=43,805,1105,24]
+    - table [ref=e48] [box=43,841,1105,418]:
+      - rowgroup [ref=e49] [box=43,841,1105,37]:
+        - row "Case Term Prompt Generated hit Continuation hit Continuation preview" [ref=e50] [box=43,841,1105,37]:
+          - columnheader "Case" [ref=e51] [box=43,841,297,37]
+          - columnheader "Term" [ref=e52] [box=340,841,108,37]
+          - columnheader "Prompt" [ref=e53] [box=448,841,113,37]
+          - columnheader "Generated hit" [ref=e54] [box=561,841,158,37]
+          - columnheader "Continuation hit" [ref=e55] [box=719,841,192,37]
+          - columnheader "Continuation preview" [ref=e56] [box=910,841,237,37]
+      - rowgroup [ref=e57] [box=43,878,1105,381]:
+        - 'row "classification-risk-level because because: 1 0 |pate=07|pat" [ref=e58] [box=43,878,1105,42]':
+          - cell "classification-risk-level" [ref=e59] [box=43,878,297,42]
+          - cell "because" [ref=e60] [box=340,878,108,42]
+          - cell "because:" [ref=e61] [box=448,878,113,42]
+          - cell "1" [ref=e62] [box=561,878,158,42]
+          - cell "0" [ref=e63] [box=719,878,192,42]
+          - cell "|pate=07|pat" [ref=e64] [box=910,878,237,42]
+        - 'row "comparison-baseline fixed fixed: 1 0 |pate=07|pat" [ref=e65] [box=43,920,1105,42]':
+          - cell "comparison-baseline" [ref=e66] [box=43,920,297,42]
+          - cell "fixed" [ref=e67] [box=340,920,108,42]
+          - cell "fixed:" [ref=e68] [box=448,920,113,42]
+          - cell "1" [ref=e69] [box=561,920,158,42]
+          - cell "0" [ref=e70] [box=719,920,192,42]
+          - cell "|pate=07|pat" [ref=e71] [box=910,920,237,42]
+        - 'row "continuation-science text text: 1 0 |pate=07|pat" [ref=e72] [box=43,962,1105,42]':
+          - cell "continuation-science" [ref=e73] [box=43,962,297,42]
+          - cell "text" [ref=e74] [box=340,962,108,42]
+          - cell "text:" [ref=e75] [box=448,962,113,42]
+          - cell "1" [ref=e76] [box=561,962,158,42]
+          - cell "0" [ref=e77] [box=719,962,192,42]
+          - cell "|pate=07|pat" [ref=e78] [box=910,962,237,42]
+        - 'row "factual-val-loss loss loss: 1 0 |pate=07|pat" [ref=e79] [box=43,1005,1105,42]':
+          - cell "factual-val-loss" [ref=e80] [box=43,1005,297,42]
+          - cell "loss" [ref=e81] [box=340,1005,108,42]
+          - cell "loss:" [ref=e82] [box=448,1005,113,42]
+          - cell "1" [ref=e83] [box=561,1005,158,42]
+          - cell "0" [ref=e84] [box=719,1005,192,42]
+          - cell "|pate=07|pat" [ref=e85] [box=910,1005,237,42]
+        - 'row "qa-training-loop data data: 1 0 |pate=07|pat" [ref=e86] [box=43,1047,1105,42]':
+          - cell "qa-training-loop" [ref=e87] [box=43,1047,297,42]
+          - cell "data" [ref=e88] [box=340,1047,108,42]
+          - cell "data:" [ref=e89] [box=448,1047,113,42]
+          - cell "1" [ref=e90] [box=561,1047,158,42]
+          - cell "0" [ref=e91] [box=719,1047,192,42]
+          - cell "|pate=07|pat" [ref=e92] [box=910,1047,237,42]
+        - 'row "refusal-boundary real real: 1 0 |pate=07|pat" [ref=e93] [box=43,1089,1105,42]':
+          - cell "refusal-boundary" [ref=e94] [box=43,1089,297,42]
+          - cell "real" [ref=e95] [box=340,1089,108,42]
+          - cell "real:" [ref=e96] [box=448,1089,113,42]
+          - cell "1" [ref=e97] [box=561,1089,158,42]
+          - cell "0" [ref=e98] [box=719,1089,192,42]
+          - cell "|pate=07|pat" [ref=e99] [box=910,1089,237,42]
+        - 'row "structured-experiment-json four four: 1 0 |pate=07|pat" [ref=e100] [box=43,1132,1105,42]':
+          - cell "structured-experiment-json" [ref=e101] [box=43,1132,297,42]
+          - cell "four" [ref=e102] [box=340,1132,108,42]
+          - cell "four:" [ref=e103] [box=448,1132,113,42]
+          - cell "1" [ref=e104] [box=561,1132,158,42]
+          - cell "0" [ref=e105] [box=719,1132,192,42]
+          - cell "|pate=07|pat" [ref=e106] [box=910,1132,237,42]
+        - 'row "style-rewrite-concise while while: 1 0 |pate=07|pat" [ref=e107] [box=43,1174,1105,42]':
+          - cell "style-rewrite-concise" [ref=e108] [box=43,1174,297,42]
+          - cell "while" [ref=e109] [box=340,1174,108,42]
+          - cell "while:" [ref=e110] [box=448,1174,113,42]
+          - cell "1" [ref=e111] [box=561,1174,158,42]
+          - cell "0" [ref=e112] [box=719,1174,192,42]
+          - cell "|pate=07|pat" [ref=e113] [box=910,1174,237,42]
+        - 'row "summary-evidence-chain chain chain: 1 0 |pate=07|pat" [ref=e114] [box=43,1216,1105,42]':
+          - cell "summary-evidence-chain" [ref=e115] [box=43,1216,297,42]
+          - cell "chain" [ref=e116] [box=340,1216,108,42]
+          - cell "chain:" [ref=e117] [box=448,1216,113,42]
+          - cell "1" [ref=e118] [box=561,1216,158,42]
+          - cell "0" [ref=e119] [box=719,1216,192,42]
+          - cell "|pate=07|pat" [ref=e120] [box=910,1216,237,42]

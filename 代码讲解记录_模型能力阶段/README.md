@@ -56,6 +56,9 @@
 501-v487-model-capability-required-term-balanced-corpus.md
  -> v487 code explanation: build a balanced required-term corpus candidate from v486 evidence before the next tiny-training rerun.
 
+502-v488-model-capability-required-term-balanced-training.md
+ -> v488 code explanation: train from the balanced corpus and diagnose missing prompt-leading alignment when continuation uptake stays zero.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

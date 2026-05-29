@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term balanced training</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f4f7f6; color: #17212b; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dae4e3; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5a6668; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dae4e3; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 33, 43, 0.05); }
+.card span { display: block; color: #607072; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 900px; }
+th, td { text-align: left; border-bottom: 1px solid #e2ebe9; padding: 10px; vertical-align: top; }
+th { color: #4e5c5f; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term balanced training</h1><p>The balanced-corpus training run completed, but short continuations still did not include required terms.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>balanced_training_completed_without_uptake</strong></div><div class="card"><span>Terms</span><strong>9</strong></div><div class="card"><span>Generations</span><strong>9</strong></div><div class="card"><span>Continuation hits</span><strong>0</strong></div><div class="card"><span>Case hits</span><strong>0</strong></div><div class="card"><span>Hit rate</span><strong>0.0</strong></div><div class="card"><span>Prompt aligned</span><strong>False</strong></div><div class="card"><span>Prompt-leading lines</span><strong>0</strong></div><div class="card"><span>Checkpoint</span><strong>True</strong></div></section>
+<section class="panel"><h2>Training Evidence</h2><p>Corpus: e\487\解释\model-capability-required-term-balanced-corpus\required_term_balanced_corpus.txt</p><p>Checkpoint: e\488\解释\model-capability-required-term-balanced-training\balanced-run\checkpoint.pt</p><p>Command: D:\python\python.exe -B D:\aiproj\scripts\train.py --data e\487\解释\model-capability-required-term-balanced-corpus\required_term_balanced_corpus.txt --out-dir e\488\解释\model-capability-required-term-balanced-training\balanced-run --device cpu --tokenizer char --max-iters 600 --eval-interval 150 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 488 --sample-prompt because: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1</p></section>
+<section class="panel"><h2>Next Action</h2><p>rebuild the balanced corpus with prompt-leading scaffold-to-term rows before increasing training budget</p></section>
+<section class="panel">
+<h2>Required-Term Generations</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Term</th><th>Prompt</th><th>Generated hit</th><th>Continuation hit</th><th>Continuation preview</th></tr></thead>
+<tbody><tr><td>classification-risk-level</td><td>because</td><td>because:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>continuation-science</td><td>text</td><td>text:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>qa-training-loop</td><td>data</td><td>data:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>refusal-boundary</td><td>real</td><td>real:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>structured-experiment-json</td><td>four</td><td>four:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr>
+<tr><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>1</td><td>0</td><td>|pate=07|pat</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

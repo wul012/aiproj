@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=39958 vocab_size=50
+parameters=53,824
+data_source=data:e\487\解释\model-capability-required-term-balanced-corpus\required_term_balanced_corpus.txt
+step=    1 train_loss=3.5945 val_loss=3.5737
+step=  150 train_loss=2.7388 val_loss=2.9886
+step=  300 train_loss=2.6210 val_loss=2.8336
+step=  450 train_loss=2.3801 val_loss=2.8168
+step=  600 train_loss=2.3339 val_loss=2.5644
+saved=e\488\解释\model-capability-required-term-balanced-training\balanced-run
+history=e\488\解释\model-capability-required-term-balanced-training\balanced-run\metrics.jsonl
+manifest=e\488\解释\model-capability-required-term-balanced-training\balanced-run\run_manifest.json
+sample=e\488\解释\model-capability-required-term-balanced-training\balanced-run\sample.txt

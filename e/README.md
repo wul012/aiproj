@@ -77,6 +77,10 @@ e/486/解释/说明.md
 e/487/图片
 e/487/解释/说明.md
  -> v487 model capability required-term balanced corpus 的运行截图和解释
+
+e/488/图片
+e/488/解释/说明.md
+ -> v488 model capability required-term balanced training 的运行截图和解释
 ```
 
 写入规则：
