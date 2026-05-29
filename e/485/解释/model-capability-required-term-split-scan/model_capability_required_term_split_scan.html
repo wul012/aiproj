@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term split scan</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f7f4; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dde4da; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5e685e; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dee6dc; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #637061; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 940px; }
+th, td { text-align: left; border-bottom: 1px solid #e4ebe2; padding: 10px; vertical-align: top; }
+th { color: #4b574a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term split scan</h1><p>At least one split reproduced train-slice uptake, but no split produced held-out required-term uptake.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>train_slice_uptake_reproduced_without_holdout</strong></div><div class="card"><span>Splits</span><strong>4</strong></div><div class="card"><span>Train repro</span><strong>2</strong></div><div class="card"><span>Holdout hits</span><strong>0</strong></div><div class="card"><span>Best train hits</span><strong>4</strong></div><div class="card"><span>Best holdout hits</span><strong>0</strong></div><div class="card"><span>Best split</span><strong>split-4</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>stabilize the best train-slice split across seeds, then reintroduce a stricter holdout</p></section>
+<section class="panel">
+<h2>Split Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Split</th><th>Holdout terms</th><th>Train hits</th><th>Holdout hits</th><th>Decision</th><th>Report</th></tr></thead>
+<tbody><tr><td>split-1</td><td>because, fixed, real</td><td>0</td><td>0</td><td>heldout_micro_training_no_required_term_uptake</td><td>e\485\解释\model-capability-required-term-split-scan\splits\split-1\model_capability_required_term_holdout.json</td></tr>
+<tr><td>split-2</td><td>chain, four, text</td><td>4</td><td>0</td><td>training_slice_only_without_holdout_uptake</td><td>e\485\解释\model-capability-required-term-split-scan\splits\split-2\model_capability_required_term_holdout.json</td></tr>
+<tr><td>split-3</td><td>data, loss, while</td><td>0</td><td>0</td><td>heldout_micro_training_no_required_term_uptake</td><td>e\485\解释\model-capability-required-term-split-scan\splits\split-3\model_capability_required_term_holdout.json</td></tr>
+<tr><td>split-4</td><td>four, while</td><td>4</td><td>0</td><td>training_slice_only_without_holdout_uptake</td><td>e\485\解释\model-capability-required-term-split-scan\splits\split-4\model_capability_required_term_holdout.json</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

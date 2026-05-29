@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v484.0.0` runs a held-out required-term micro-training check to see whether the v483 targeted signal survives a term-level split.
+Version `v485.0.0` scans multiple required-term train/holdout splits to see whether train-slice uptake can be reproduced before claiming held-out generalization.
+
+## Latest v485 checkpoint
+
+- Added `model_capability_required_term_split_scan` reporting for running several v484-style train/holdout splits from the v483 micro-training examples.
+- Added `scripts/run_model_capability_required_term_split_scan.py`, which trains one tiny checkpoint per split and summarizes train/holdout continuation hits.
+- Ran the real split scan across `4` splits with stronger micro-training settings: `2` splits reproduced train-slice uptake, `0` splits produced held-out uptake, and the best split reached `4` train continuation hits.
+- Archived the v485 split-scan evidence in `e/485` and added the code explanation in `代码讲解记录_模型能力阶段/499-v485-model-capability-required-term-split-scan.md`.
 
 ## Latest v484 checkpoint
 

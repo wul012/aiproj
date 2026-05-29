@@ -47,6 +47,9 @@
 498-v484-model-capability-required-term-holdout.md
  -> v484 code explanation: split required terms into train/holdout slices and show v483's targeted signal does not yet reproduce under the stricter split.
 
+499-v485-model-capability-required-term-split-scan.md
+ -> v485 code explanation: scan multiple required-term splits and find train-slice uptake without held-out generalization.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

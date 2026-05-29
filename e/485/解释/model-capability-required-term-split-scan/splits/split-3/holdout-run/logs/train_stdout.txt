@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=56574 vocab_size=37
+parameters=52,992
+data_source=data:e\485\解释\model-capability-required-term-split-scan\splits\split-3\required_term_holdout_corpus.txt
+step=    1 train_loss=3.3191 val_loss=3.3103
+step=  200 train_loss=2.6383 val_loss=3.0997
+step=  400 train_loss=2.5181 val_loss=2.4738
+step=  600 train_loss=2.6113 val_loss=2.3678
+step=  800 train_loss=2.4016 val_loss=2.4876
+saved=e\485\解释\model-capability-required-term-split-scan\splits\split-3\holdout-run
+history=e\485\解释\model-capability-required-term-split-scan\splits\split-3\holdout-run\metrics.jsonl
+manifest=e\485\解释\model-capability-required-term-split-scan\splits\split-3\holdout-run\run_manifest.json
+sample=e\485\解释\model-capability-required-term-split-scan\splits\split-3\holdout-run\sample.txt

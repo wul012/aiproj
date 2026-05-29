@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term split scan",
+  "generated_at": "2026-05-29T06:09:20Z",
+  "status": "pass",
+  "decision": "required_term_split_scan_train_slice_only",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_micro_training": "e\\483\\解释\\model-capability-required-term-micro-training\\model_capability_required_term_micro_training.json",
+  "out_dir": "e\\485\\解释\\model-capability-required-term-split-scan",
+  "settings": {
+    "max_iters": 800,
+    "eval_iters": 1,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 64,
+    "learning_rate": 0.02,
+    "term_repeat": 80,
+    "max_new_tokens": 16,
+    "temperature": 0.2,
+    "top_k": 1,
+    "generation_seed": 485,
+    "device": "cpu"
+  },
+  "split_spec_count": 4,
+  "split_specs": [
+    {
+      "id": "split-1",
+      "holdout_terms": [
+        "because",
+        "fixed",
+        "real"
+      ]
+    },
+    {
+      "id": "split-2",
+      "holdout_terms": [
+        "chain",
+        "four",
+        "text"
+      ]
+    },
+    {
+      "id": "split-3",
+      "holdout_terms": [
+        "data",
+        "loss",
+        "while"
+      ]
+    },
+    {
+      "id": "split-4",
+      "holdout_terms": [
+        "four",
+        "while"
+      ]
+    }
+  ],
+  "summary": {
+    "split_scan_decision": "train_slice_uptake_reproduced_without_holdout",
+    "split_count": 4,
+    "complete_split_count": 4,
+    "train_repro_split_count": 2,
+    "holdout_hit_split_count": 0,
+    "best_train_continuation_hit_count": 4,
+    "best_holdout_continuation_hit_count": 0,
+    "total_train_continuation_hit_count": 8,
+    "total_holdout_continuation_hit_count": 0,
+    "best_split_id": "split-4"
+  },
+  "scan_rows": [
+    {
+      "id": "split-1",
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "heldout_micro_training_no_required_term_uptake",
+      "holdout_terms": [
+        "because",
+        "fixed",
+        "real"
+      ],
+      "train_example_count": 14,
+      "holdout_example_count": 6,
+      "train_continuation_hit_count": 0,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.0,
+      "holdout_hit_rate": 0.0,
+      "report_json": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-1\\model_capability_required_term_holdout.json",
+      "report_dir": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-1"
+    },
+    {
+      "id": "split-2",
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "training_slice_only_without_holdout_uptake",
+      "holdout_terms": [
+        "chain",
+        "four",
+        "text"
+      ],
+      "train_example_count": 14,
+      "holdout_example_count": 6,
+      "train_continuation_hit_count": 4,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.2857,
+      "holdout_hit_rate": 0.0,
+      "report_json": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-2\\model_capability_required_term_holdout.json",
+      "report_dir": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-2"
+    },
+    {
+      "id": "split-3",
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "heldout_micro_training_no_required_term_uptake",
+      "holdout_terms": [
+        "data",
+        "loss",
+        "while"
+      ],
+      "train_example_count": 12,
+      "holdout_example_count": 8,
+      "train_continuation_hit_count": 0,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.0,
+      "holdout_hit_rate": 0.0,
+      "report_json": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-3\\model_capability_required_term_holdout.json",
+      "report_dir": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-3"
+    },
+    {
+      "id": "split-4",
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "training_slice_only_without_holdout_uptake",
+      "holdout_terms": [
+        "four",
+        "while"
+      ],
+      "train_example_count": 16,
+      "holdout_example_count": 4,
+      "train_continuation_hit_count": 4,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.25,
+      "holdout_hit_rate": 0.0,
+      "report_json": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-4\\model_capability_required_term_holdout.json",
+      "report_dir": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-4"
+    }
+  ],
+  "child_report_count": 4,
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "At least one split reproduced train-slice uptake, but no split produced held-out required-term uptake.",
+    "next_action": "stabilize the best train-slice split across seeds, then reintroduce a stricter holdout"
+  }
+}

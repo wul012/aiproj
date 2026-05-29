@@ -1,0 +1,5 @@
+id,status,holdout_decision,holdout_terms,train_example_count,holdout_example_count,train_continuation_hit_count,holdout_continuation_hit_count,train_hit_rate,holdout_hit_rate,report_json
+split-1,pass,heldout_micro_training_no_required_term_uptake,"[""because"", ""fixed"", ""real""]",14,6,0,0,0.0,0.0,e\485\解释\model-capability-required-term-split-scan\splits\split-1\model_capability_required_term_holdout.json
+split-2,pass,training_slice_only_without_holdout_uptake,"[""chain"", ""four"", ""text""]",14,6,4,0,0.2857,0.0,e\485\解释\model-capability-required-term-split-scan\splits\split-2\model_capability_required_term_holdout.json
+split-3,pass,heldout_micro_training_no_required_term_uptake,"[""data"", ""loss"", ""while""]",12,8,0,0,0.0,0.0,e\485\解释\model-capability-required-term-split-scan\splits\split-3\model_capability_required_term_holdout.json
+split-4,pass,training_slice_only_without_holdout_uptake,"[""four"", ""while""]",16,4,4,0,0.25,0.0,e\485\解释\model-capability-required-term-split-scan\splits\split-4\model_capability_required_term_holdout.json

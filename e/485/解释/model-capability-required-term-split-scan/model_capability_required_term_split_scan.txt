@@ -1,0 +1,11 @@
+status=pass
+decision=required_term_split_scan_train_slice_only
+split_scan_decision=train_slice_uptake_reproduced_without_holdout
+split_count=4
+train_repro_split_count=2
+holdout_hit_split_count=0
+best_train_continuation_hit_count=4
+best_holdout_continuation_hit_count=0
+best_split_id=split-4
+model_quality_claim=not_claimed
+next_action=stabilize the best train-slice split across seeds, then reintroduce a stricter holdout

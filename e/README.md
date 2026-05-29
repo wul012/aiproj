@@ -65,6 +65,10 @@ e/483/解释/说明.md
 e/484/图片
 e/484/解释/说明.md
  -> v484 model capability required-term holdout 的运行截图和解释
+
+e/485/图片
+e/485/解释/说明.md
+ -> v485 model capability required-term split scan 的运行截图和解释
 ```
 
 写入规则：
