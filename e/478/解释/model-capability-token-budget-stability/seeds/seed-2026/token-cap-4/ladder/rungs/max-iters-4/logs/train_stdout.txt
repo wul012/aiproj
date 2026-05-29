@@ -1,0 +1,13 @@
+device=cpu
+tokenizer=char
+tokens=13620 vocab_size=211
+parameters=2,640
+data_source=data:e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-4\ladder\rungs\max-iters-4\tiny_corpus.txt
+step=    1 train_loss=5.3608 val_loss=5.3598
+step=    2 train_loss=5.3545 val_loss=5.3417
+step=    3 train_loss=5.3392 val_loss=5.3579
+step=    4 train_loss=5.3496 val_loss=5.3312
+saved=e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-4\ladder\rungs\max-iters-4\run
+history=e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-4\ladder\rungs\max-iters-4\run\metrics.jsonl
+manifest=e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-4\ladder\rungs\max-iters-4\run\run_manifest.json
+sample=e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-4\ladder\rungs\max-iters-4\run\sample.txt

@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "run_dir": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run",
+  "created_at": "2026-05-28T23:46:15Z",
+  "started_at": "2026-05-28T23:46:14Z",
+  "finished_at": "2026-05-28T23:46:15Z",
+  "duration_seconds": 1.0,
+  "command": [
+    "python.exe",
+    "D:\\aiproj\\scripts\\train.py",
+    "--data",
+    "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\tiny_corpus.txt",
+    "--out-dir",
+    "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run",
+    "--device",
+    "cpu",
+    "--tokenizer",
+    "char",
+    "--max-iters",
+    "4",
+    "--eval-interval",
+    "1",
+    "--eval-iters",
+    "1",
+    "--batch-size",
+    "2",
+    "--block-size",
+    "8",
+    "--n-layer",
+    "1",
+    "--n-head",
+    "1",
+    "--n-embd",
+    "8",
+    "--seed",
+    "2026",
+    "--sample-prompt",
+    "人工智能正在改变科学研究的方式，因为",
+    "--sample-tokens",
+    "12"
+  ],
+  "git": {
+    "commit": "74388299306a4876eb7a50bf072d52cd979a899b",
+    "short_commit": "7438829",
+    "branch": "main",
+    "tag": "v477.0.0",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.13.3",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "executable": "D:\\python\\python.exe",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.2.1"
+  },
+  "data": {
+    "source": {
+      "kind": "data",
+      "path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\tiny_corpus.txt"
+    },
+    "token_count": 13620,
+    "train_token_count": 12258,
+    "val_token_count": 1362,
+    "dataset_report": null,
+    "dataset_quality": null,
+    "dataset_version": null
+  },
+  "model": {
+    "config": {
+      "vocab_size": 211,
+      "block_size": 8,
+      "n_layer": 1,
+      "n_head": 1,
+      "n_embd": 8,
+      "dropout": 0.1,
+      "bias": true
+    },
+    "parameter_count": 2640
+  },
+  "training": {
+    "args": {
+      "data": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\tiny_corpus.txt",
+      "data_dir": null,
+      "prepared_data": null,
+      "out_dir": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run",
+      "resume": null,
+      "tokenizer": "char",
+      "bpe_vocab_size": 256,
+      "bpe_min_frequency": 2,
+      "batch_size": 2,
+      "block_size": 8,
+      "max_iters": 4,
+      "eval_interval": 1,
+      "eval_iters": 1,
+      "learning_rate": 0.0003,
+      "train_ratio": 0.9,
+      "n_layer": 1,
+      "n_head": 1,
+      "n_embd": 8,
+      "dropout": 0.1,
+      "seed": 2026,
+      "device": "cpu",
+      "sample_prompt": "人工智能正在改变科学研究的方式，因为",
+      "sample_tokens": 12,
+      "sample_temperature": 0.8,
+      "sample_top_k": 30,
+      "no_sample": false,
+      "device_used": "cpu",
+      "data_source": {
+        "kind": "data",
+        "path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\tiny_corpus.txt"
+      }
+    },
+    "tokenizer": "char",
+    "device_used": "cpu",
+    "start_step": 1,
+    "end_step": 4
+  },
+  "results": {
+    "last_loss": 5.332557201385498,
+    "history_summary": {
+      "record_count": 4,
+      "first_step": 1,
+      "last_step": 4,
+      "best_val_step": 4,
+      "best_val_loss": 5.331198692321777,
+      "last_train_loss": 5.349565505981445,
+      "last_val_loss": 5.331198692321777
+    }
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "checkpoint.pt",
+      "description": "model and optimizer state",
+      "exists": true,
+      "size_bytes": 50451,
+      "sha256": "eccc94f8b82742d5e37544eed18873203f2a8adcf5c4e29200f4c1d80515c586"
+    },
+    {
+      "key": "tokenizer",
+      "path": "tokenizer.json",
+      "description": "tokenizer vocabulary and metadata",
+      "exists": true,
+      "size_bytes": 2510,
+      "sha256": "5d9d23ed95ed15e7f3755dbf8f7637a47f301573539aa9d7c6211709f5615b94"
+    },
+    {
+      "key": "train_config",
+      "path": "train_config.json",
+      "description": "training command configuration",
+      "exists": true,
+      "size_bytes": 1087,
+      "sha256": "e9f418c89e66b646cfe183dc3847ddd21ca1cbeb2e20687576654a3a863975ac"
+    },
+    {
+      "key": "metrics",
+      "path": "metrics.jsonl",
+      "description": "step-by-step training metrics",
+      "exists": true,
+      "size_bytes": 438,
+      "sha256": "9bebbf6a380c45214536cec7aad710e5c1c95c824647ae5f65f3422f36bb87dd"
+    },
+    {
+      "key": "history_summary",
+      "path": "history_summary.json",
+      "description": "best/latest loss summary",
+      "exists": true,
+      "size_bytes": 206,
+      "sha256": "fd55b879f51fa7cc36e108747105934790ad823a811b866d77848ea08afb5f0d"
+    },
+    {
+      "key": "loss_curve",
+      "path": "loss_curve.svg",
+      "description": "loss curve chart",
+      "exists": true,
+      "size_bytes": 1374,
+      "sha256": "a4285010791bc03834dd5fa27fcdf2b8fa5eddedd901895cf367591f738d61ff"
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "prepared_corpus.txt",
+      "description": "merged training corpus",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_report",
+      "path": "dataset_report.json",
+      "description": "dataset source statistics",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_chart",
+      "path": "dataset_report.svg",
+      "description": "dataset source chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_quality",
+      "path": "dataset_quality.json",
+      "description": "dataset quality report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_quality_chart",
+      "path": "dataset_quality.svg",
+      "description": "dataset quality chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_version",
+      "path": "dataset_version.json",
+      "description": "dataset version manifest",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_version_html",
+      "path": "dataset_version.html",
+      "description": "browser dataset version report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "sample",
+      "path": "sample.txt",
+      "description": "post-training sample",
+      "exists": true,
+      "size_bytes": 199,
+      "sha256": "28932b8898decaf3d914827228f8e0bea5a767972b25113a8b663f871f9df6f5"
+    },
+    {
+      "key": "eval_report",
+      "path": "eval_report.json",
+      "description": "checkpoint evaluation report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite",
+      "path": "eval_suite/eval_suite.json",
+      "description": "fixed prompt evaluation suite",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_csv",
+      "path": "eval_suite/eval_suite.csv",
+      "description": "fixed prompt evaluation table",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_chart",
+      "path": "eval_suite/eval_suite.svg",
+      "description": "fixed prompt evaluation chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_html",
+      "path": "eval_suite/eval_suite.html",
+      "description": "browser benchmark evaluation report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "model_report",
+      "path": "model_report/model_report.json",
+      "description": "model architecture report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "model_chart",
+      "path": "model_report/model_architecture.svg",
+      "description": "model architecture chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "prediction_report",
+      "path": "predictions/predictions.json",
+      "description": "next-token prediction report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "prediction_chart",
+      "path": "predictions/predictions.svg",
+      "description": "next-token prediction chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "attention_report",
+      "path": "attention/attention.json",
+      "description": "attention inspection report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "attention_chart",
+      "path": "attention/attention.svg",
+      "description": "attention heatmap",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "transcript",
+      "path": "transcript.json",
+      "description": "chat transcript",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "generated",
+      "path": "generated.txt",
+      "description": "standalone generation output",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_json",
+      "path": "experiment_card.json",
+      "description": "machine-readable experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_md",
+      "path": "experiment_card.md",
+      "description": "markdown experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_html",
+      "path": "experiment_card.html",
+      "description": "browser experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dashboard",
+      "path": "dashboard.html",
+      "description": "static dashboard",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "playground",
+      "path": "playground.html",
+      "description": "static playground",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    }
+  ]
+}

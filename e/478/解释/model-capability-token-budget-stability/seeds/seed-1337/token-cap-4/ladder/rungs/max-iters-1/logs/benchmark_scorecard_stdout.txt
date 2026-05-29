@@ -1,0 +1,16 @@
+run_dir=e\478\解释\model-capability-token-budget-stability\seeds\seed-1337\token-cap-4\ladder\rungs\max-iters-1\run
+overall_status=pass
+overall_score=81.67
+component_count=6
+case_score_count=10
+rubric_status=fail
+rubric_avg_score=38.67
+generation_quality_total_flags=0
+generation_quality_dominant_flag=None
+generation_quality_worst_case=None
+weakest_rubric_case=continuation-science
+task_type_group_count=10
+weakest_task_type=continuation
+difficulty_group_count=3
+weakest_difficulty=easy
+outputs={"json": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\benchmark-scorecard\\benchmark_scorecard.json", "csv": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\benchmark-scorecard\\benchmark_scorecard.csv", "drilldowns_csv": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\benchmark-scorecard\\benchmark_scorecard_drilldowns.csv", "rubric_csv": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\benchmark-scorecard\\benchmark_scorecard_rubric.csv", "markdown": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\benchmark-scorecard\\benchmark_scorecard.md", "html": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\benchmark-scorecard\\benchmark_scorecard.html"}

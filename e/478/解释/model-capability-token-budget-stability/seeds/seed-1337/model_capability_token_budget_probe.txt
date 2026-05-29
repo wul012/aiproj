@@ -1,0 +1,15 @@
+status=pass
+decision=token_budget_probe_ready
+token_budget_count=2
+summary_decision=longer_token_budget_reduces_eval_stall
+baseline_token_cap=4
+largest_token_cap=12
+token_budget_or_shape_limit_delta=-9.0
+score_improved_count_delta=0.0
+pass_transition_count_delta=0.0
+persistent_fail_count_delta=-9.0
+avg_score_delta_change=0.0
+model_quality_claim=not_claimed
+next_action=repeat the longer-token probe across seeds before increasing model size
+token_cap=value=4,status=pass,token_stalls=10,score_improved=0,decision=token_budget_or_shape_limits_block_eval_signal
+token_cap=value=12,status=pass,token_stalls=1,score_improved=0,decision=token_budget_or_shape_limits_block_eval_signal

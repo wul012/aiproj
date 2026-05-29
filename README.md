@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v477.0.0` runs a token-budget probe to test whether longer tiny generations reduce the prompt-level evaluation stall found in v476.
+Version `v478.0.0` repeats the v477 token-budget probe across seeds to check whether cap-12 stall relief is stable before changing model size.
+
+## Latest v478 checkpoint
+
+- Added `model_capability_token_budget_stability` reporting for comparing v477-style token-budget probes across seeds.
+- Added `scripts/run_model_capability_token_budget_stability.py`, which runs the existing token-budget probe per seed and summarizes token-stall relief across JSON/CSV/text/Markdown/HTML outputs.
+- Ran real probes for seeds `1337` and `2026` with `case-token-cap=4,12` and `max_iters=1,4`; both seeds repeated `token_budget_or_shape_limit_delta=-9.0` and `persistent_fail_count_delta=-9.0`, while score-improved and pass-transition deltas stayed `0`.
+- Archived the v478 stability evidence in `e/478` and added the code explanation in `代码讲解记录_模型能力阶段/492-v478-model-capability-token-budget-stability.md`.
 
 ## Latest v477 checkpoint
+
+Version `v477.0.0` runs a token-budget probe to test whether longer tiny generations reduce the prompt-level evaluation stall found in v476.
+
 
 - Added `model_capability_token_budget_probe` reporting for comparing tiny capability ladders across case token caps.
 - Added `scripts/run_model_capability_token_budget_probe.py`, which runs existing model capability ladders per token cap, builds stall diagnostics, and summarizes token-stall deltas across JSON/CSV/text/Markdown/HTML outputs.

@@ -1,0 +1,16 @@
+status=pass
+decision=token_budget_stability_ready
+seed_count=2
+successful_seed_count=2
+stability_decision=repeated_token_budget_relief_without_score_progress
+token_relief_seed_count=2
+persistent_fail_relief_seed_count=2
+score_or_pass_progress_seed_count=0
+mean_token_budget_or_shape_limit_delta=-9.0
+mean_persistent_fail_count_delta=-9.0
+mean_score_improved_count_delta=0.0
+mean_pass_transition_count_delta=0.0
+model_quality_claim=not_claimed
+next_action=keep cap 12 as the evaluation budget and probe data/rubric changes before increasing model size
+seed=value=1337,status=pass,token_stall_delta=-9.0,persistent_fail_delta=-9.0,score_improved_delta=0.0,pass_transition_delta=0.0,decision=longer_token_budget_reduces_eval_stall
+seed=value=2026,status=pass,token_stall_delta=-9.0,persistent_fail_delta=-9.0,score_improved_delta=0.0,pass_transition_delta=0.0,decision=longer_token_budget_reduces_eval_stall

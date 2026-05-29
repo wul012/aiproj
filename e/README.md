@@ -37,6 +37,10 @@ e/476/解释/说明.md
 e/477/图片
 e/477/解释/说明.md
  -> v477 model capability token budget probe 的运行截图和解释
+
+e/478/图片
+e/478/解释/说明.md
+ -> v478 model capability token budget stability 的运行截图和解释
 ```
 
 写入规则：

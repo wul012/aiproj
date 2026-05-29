@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability stall diagnostic</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f8; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #d9dde2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #55616d; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dce2e8; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #61707c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 880px; }
+th, td { text-align: left; border-bottom: 1px solid #e2e7ec; padding: 10px; vertical-align: top; }
+th { color: #43505a; font-size: 12px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability stall diagnostic</h1><p>The tiny ladder lowers loss, but the prompt-level rubric remains blocked by short outputs and task-shape failures.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>token_budget_or_shape_limits_block_eval_signal</strong></div><div class="card"><span>Cases</span><strong>10</strong></div><div class="card"><span>Improved</span><strong>0</strong></div><div class="card"><span>Degraded</span><strong>0</strong></div><div class="card"><span>Unchanged</span><strong>10</strong></div><div class="card"><span>Persistent fail</span><strong>10</strong></div><div class="card"><span>Token/shape limits</span><strong>10</strong></div><div class="card"><span>Avg score delta</span><strong>0.0</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>run a longer-token capability ladder before interpreting rubric scores as model ability</p></section>
+<section class="panel">
+<h2>Prompt-Level Cases</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Scores</th><th>Delta</th><th>Reason</th><th>Failed checks</th><th>Preview</th></tr></thead>
+<tbody><tr><td>2026</td><td>classification-risk-level</td><td>43.33 / 43.33</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>：共时. -&gt; ：共时.</td></tr>
+<tr><td>2026</td><td>comparison-baseline</td><td>39.17 / 39.17</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>准备化归 -&gt; 准备化该</td></tr>
+<tr><td>2026</td><td>continuation-science</td><td>35.0 / 35.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>.s以很 -&gt; .s以很</td></tr>
+<tr><td>2026</td><td>factual-val-loss</td><td>35.0 / 35.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>变成T指 -&gt; 变成T指</td></tr>
+<tr><td>2026</td><td>qa-training-loop</td><td>35.0 / 35.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>：成类少 -&gt; ：成类少</td></tr>
+<tr><td>2026</td><td>refusal-boundary</td><td>35.0 / 35.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>c要准字 -&gt; c要准字</td></tr>
+<tr><td>2026</td><td>self-check-missing-data</td><td>39.17 / 39.17</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>四型少通 -&gt; 四型少通</td></tr>
+<tr><td>2026</td><td>structured-experiment-json</td><td>55.0 / 55.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>must_include, task_shape</td><td>变类时y -&gt; 变类时y</td></tr>
+<tr><td>2026</td><td>style-rewrite-concise</td><td>35.0 / 35.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>字Ty指 -&gt; 字Ty指</td></tr>
+<tr><td>2026</td><td>summary-evidence-chain</td><td>35.0 / 35.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>length_bounds, must_include, task_shape</td><td>种有r通 -&gt; 种有r通</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

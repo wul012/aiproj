@@ -1,0 +1,6 @@
+prompt: 人工智能正在改变科学研究的方式，因为
+max_new_tokens: 12
+temperature: 0.8
+top_k: 30
+
+人工智能正在改变科学研究的方式，因为常以路以和你径路该cRR

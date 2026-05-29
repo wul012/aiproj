@@ -1,0 +1,6 @@
+cases=10
+suite_name=minigpt-standard-zh-benchmark
+suite_version=2-cap4
+task_types=classification,comparison,continuation,factual-consistency,qa,rewrite,safety-boundary,self-check,structured,summary
+out_dir=e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-4\ladder\rungs\max-iters-1\run\eval_suite
+outputs={"json": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\eval_suite\\eval_suite.json", "csv": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\eval_suite\\eval_suite.csv", "svg": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\eval_suite\\eval_suite.svg", "html": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-4\\ladder\\rungs\\max-iters-1\\run\\eval_suite\\eval_suite.html"}

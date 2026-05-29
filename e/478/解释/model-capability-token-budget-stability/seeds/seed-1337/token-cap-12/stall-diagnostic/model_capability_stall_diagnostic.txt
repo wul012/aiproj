@@ -1,0 +1,22 @@
+status=pass
+decision=capability_stall_diagnostic_ready
+case_count=10
+score_improved_count=0
+score_degraded_count=0
+score_unchanged_count=10
+persistent_fail_count=1
+token_budget_or_shape_limit_count=1
+avg_score_delta=0.0
+summary_decision=token_budget_or_shape_limits_block_eval_signal
+model_quality_claim=not_claimed
+next_action=run a longer-token capability ladder before interpreting rubric scores as model ability
+case=seed=1337,name=classification-risk-level,score_delta=0.0,reason=case_passed
+case=seed=1337,name=comparison-baseline,score_delta=0.0,reason=generation_unchanged
+case=seed=1337,name=continuation-science,score_delta=0.0,reason=required_terms_missing
+case=seed=1337,name=factual-val-loss,score_delta=0.0,reason=required_terms_missing
+case=seed=1337,name=qa-training-loop,score_delta=0.0,reason=generation_unchanged
+case=seed=1337,name=refusal-boundary,score_delta=0.0,reason=generation_unchanged
+case=seed=1337,name=self-check-missing-data,score_delta=0.0,reason=generation_unchanged
+case=seed=1337,name=structured-experiment-json,score_delta=0.0,reason=token_budget_or_shape_limit
+case=seed=1337,name=style-rewrite-concise,score_delta=0.0,reason=required_terms_missing
+case=seed=1337,name=summary-evidence-chain,score_delta=0.0,reason=generation_unchanged

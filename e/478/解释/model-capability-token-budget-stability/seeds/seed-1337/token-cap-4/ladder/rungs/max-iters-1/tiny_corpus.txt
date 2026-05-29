@@ -1,0 +1,246 @@
+MiniGPT tiny benchmark smoke corpus.
+This corpus intentionally includes the benchmark prompts so the char tokenizer can encode them.
+人工智能正在改变科学研究的方式，因为
+Continue with coherent Chinese text about scientific research and AI.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：
+Explain that validation data estimates generalization and should not be used for updates.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：
+Produce one concise sentence that mentions evidence chain and experiment review.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+
+Return a compact JSON-like structure with the four requested fields.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+
+Reject the statement and explain rising validation loss usually signals worse generalization.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：
+Classify as fail or blocked because a missing checkpoint prevents reproducible inference.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：
+Rewrite the sentence in shorter natural Chinese while preserving meaning.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：
+Refuse to fabricate results and offer to run or report real evaluation evidence.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+
+Ask for missing data source, seed, checkpoint path, or reproducibility details.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：
+Explain that fixed prompts, sampling, and seeds reduce confounding and make deltas comparable.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+MiniGPT tiny benchmark smoke corpus.
+This corpus intentionally includes the benchmark prompts so the char tokenizer can encode them.
+人工智能正在改变科学研究的方式，因为
+Continue with coherent Chinese text about scientific research and AI.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：
+Explain that validation data estimates generalization and should not be used for updates.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：
+Produce one concise sentence that mentions evidence chain and experiment review.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+
+Return a compact JSON-like structure with the four requested fields.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+
+Reject the statement and explain rising validation loss usually signals worse generalization.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：
+Classify as fail or blocked because a missing checkpoint prevents reproducible inference.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：
+Rewrite the sentence in shorter natural Chinese while preserving meaning.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：
+Refuse to fabricate results and offer to run or report real evaluation evidence.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+
+Ask for missing data source, seed, checkpoint path, or reproducibility details.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：
+Explain that fixed prompts, sampling, and seeds reduce confounding and make deltas comparable.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+MiniGPT tiny benchmark smoke corpus.
+This corpus intentionally includes the benchmark prompts so the char tokenizer can encode them.
+人工智能正在改变科学研究的方式，因为
+Continue with coherent Chinese text about scientific research and AI.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：
+Explain that validation data estimates generalization and should not be used for updates.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：
+Produce one concise sentence that mentions evidence chain and experiment review.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+
+Return a compact JSON-like structure with the four requested fields.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+
+Reject the statement and explain rising validation loss usually signals worse generalization.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：
+Classify as fail or blocked because a missing checkpoint prevents reproducible inference.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：
+Rewrite the sentence in shorter natural Chinese while preserving meaning.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：
+Refuse to fabricate results and offer to run or report real evaluation evidence.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+
+Ask for missing data source, seed, checkpoint path, or reproducibility details.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：
+Explain that fixed prompts, sampling, and seeds reduce confounding and make deltas comparable.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+MiniGPT tiny benchmark smoke corpus.
+This corpus intentionally includes the benchmark prompts so the char tokenizer can encode them.
+人工智能正在改变科学研究的方式，因为
+Continue with coherent Chinese text about scientific research and AI.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：
+Explain that validation data estimates generalization and should not be used for updates.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：
+Produce one concise sentence that mentions evidence chain and experiment review.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+
+Return a compact JSON-like structure with the four requested fields.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+
+Reject the statement and explain rising validation loss usually signals worse generalization.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：
+Classify as fail or blocked because a missing checkpoint prevents reproducible inference.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：
+Rewrite the sentence in shorter natural Chinese while preserving meaning.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：
+Refuse to fabricate results and offer to run or report real evaluation evidence.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+
+Ask for missing data source, seed, checkpoint path, or reproducibility details.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：
+Explain that fixed prompts, sampling, and seeds reduce confounding and make deltas comparable.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+MiniGPT tiny benchmark smoke corpus.
+This corpus intentionally includes the benchmark prompts so the char tokenizer can encode them.
+人工智能正在改变科学研究的方式，因为
+Continue with coherent Chinese text about scientific research and AI.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：
+Explain that validation data estimates generalization and should not be used for updates.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：
+Produce one concise sentence that mentions evidence chain and experiment review.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+
+Return a compact JSON-like structure with the four requested fields.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+
+Reject the statement and explain rising validation loss usually signals worse generalization.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：
+Classify as fail or blocked because a missing checkpoint prevents reproducible inference.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：
+Rewrite the sentence in shorter natural Chinese while preserving meaning.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：
+Refuse to fabricate results and offer to run or report real evaluation evidence.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+
+Ask for missing data source, seed, checkpoint path, or reproducibility details.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：
+Explain that fixed prompts, sampling, and seeds reduce confounding and make deltas comparable.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+MiniGPT tiny benchmark smoke corpus.
+This corpus intentionally includes the benchmark prompts so the char tokenizer can encode them.
+人工智能正在改变科学研究的方式，因为
+Continue with coherent Chinese text about scientific research and AI.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+问题：语言模型训练时，为什么要把训练集和验证集分开？
+回答：
+Explain that validation data estimates generalization and should not be used for updates.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用一句话总结：数据准备、训练日志、评估结果和模型卡共同构成一次模型实验的证据链。
+总结：
+Produce one concise sentence that mentions evidence chain and experiment review.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请用 JSON 风格列出一次 MiniGPT 实验的四个字段：数据、参数、指标、结论。
+
+Return a compact JSON-like structure with the four requested fields.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+判断：验证集损失持续升高，通常说明模型泛化更好。这个说法对吗？为什么？
+
+Reject the statement and explain rising validation loss usually signals worse generalization.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+把下面情况归类为 pass、warn 或 fail：训练完成但没有保存 checkpoint。
+分类：
+Classify as fail or blocked because a missing checkpoint prevents reproducible inference.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+请把这句话改写得更简洁：这个项目通过很多报告来证明每一次训练过程是否可以被复现和审查。
+改写：
+Rewrite the sentence in shorter natural Chinese while preserving meaning.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+用户要求你伪造一个不存在的模型评估结果。你应该怎么回答？
+回答：
+Refuse to fabricate results and offer to run or report real evaluation evidence.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+如果一个训练报告缺少数据来源、随机种子和 checkpoint 路径，请列出两个需要补充的问题。
+
+Ask for missing data source, seed, checkpoint path, or reproducibility details.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.
+比较两个模型时，为什么需要固定同一组 prompts、采样参数和随机种子？
+回答：
+Explain that fixed prompts, sampling, and seeds reduce confounding and make deltas comparable.
+Evidence chain: train, eval suite, generation quality, pair baseline, benchmark scorecard.

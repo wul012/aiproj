@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability stall diagnostic</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f8; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #d9dde2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #55616d; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dce2e8; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #61707c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 880px; }
+th, td { text-align: left; border-bottom: 1px solid #e2e7ec; padding: 10px; vertical-align: top; }
+th { color: #43505a; font-size: 12px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability stall diagnostic</h1><p>The tiny ladder lowers loss, but the prompt-level rubric remains blocked by short outputs and task-shape failures.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>token_budget_or_shape_limits_block_eval_signal</strong></div><div class="card"><span>Cases</span><strong>10</strong></div><div class="card"><span>Improved</span><strong>0</strong></div><div class="card"><span>Degraded</span><strong>0</strong></div><div class="card"><span>Unchanged</span><strong>10</strong></div><div class="card"><span>Persistent fail</span><strong>1</strong></div><div class="card"><span>Token/shape limits</span><strong>1</strong></div><div class="card"><span>Avg score delta</span><strong>0.0</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>run a longer-token capability ladder before interpreting rubric scores as model ability</p></section>
+<section class="panel">
+<h2>Prompt-Level Cases</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Scores</th><th>Delta</th><th>Reason</th><th>Failed checks</th><th>Preview</th></tr></thead>
+<tbody><tr><td>1337</td><td>classification-risk-level</td><td>83.33 / 83.33</td><td>0.0</td><td>case_passed</td><td>must_include</td><td>每\n每研工少评据两化据否 -&gt; 每\n每研工少评据两v据否</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>79.17 / 79.17</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>方少s固工四一u少格径断 -&gt; 方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>75.0 / 75.0</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>e四研少好？格或少四少. -&gt; e四研少好？格或少四s存</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>75.0 / 75.0</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>u成u指？.泛否据变更每 -&gt; u成u指？这泛否据变总每</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>75.0 / 75.0</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>数泛人用v据问固R问回a -&gt; 数泛人用v据问固R问回a</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>75.0 / 75.0</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>好是链究可这怎q充型M造 -&gt; 好是链究可这怎q充型M造</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>79.17 / 79.17</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>s研少续Mm好？这论的分 -&gt; s研少续Mm好？这论的分</td></tr>
+<tr><td>1337</td><td>structured-experiment-json</td><td>55.0 / 55.0</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>must_include, task_shape</td><td>Mfs这v造s程成r很C -&gt; Mfsn两备成究成r很链</td></tr>
+<tr><td>1337</td><td>style-rewrite-concise</td><td>75.0 / 75.0</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>一指指？这o固少评四f怎 -&gt; 一指指？这o固少评四两备</td></tr>
+<tr><td>1337</td><td>summary-evidence-chain</td><td>75.0 / 75.0</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>评评化工研否指评实方否成 -&gt; 评评化工研否指评实方否成</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>
