@@ -89,6 +89,10 @@ e/489/解释/说明.md
 e/490/图片
 e/490/解释/说明.md
  -> v490 model capability required-term prompt-leading training 的运行截图和解释
+
+e/491/图片
+e/491/解释/说明.md
+ -> v491 model capability required-term direct prompt training 的运行截图和解释
 ```
 
 写入规则：

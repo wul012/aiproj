@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=34200 vocab_size=33
+parameters=52,736
+data_source=data:e\491\解释\model-capability-required-term-direct-prompt-training\required_term_direct_prompt_corpus.txt
+step=    1 train_loss=3.1571 val_loss=3.3969
+step=  375 train_loss=1.3507 val_loss=2.8216
+step=  750 train_loss=1.6736 val_loss=3.1692
+step= 1125 train_loss=1.4658 val_loss=3.2333
+step= 1500 train_loss=1.4096 val_loss=2.3524
+saved=e\491\解释\model-capability-required-term-direct-prompt-training\direct-prompt-run
+history=e\491\解释\model-capability-required-term-direct-prompt-training\direct-prompt-run\metrics.jsonl
+manifest=e\491\解释\model-capability-required-term-direct-prompt-training\direct-prompt-run\run_manifest.json
+sample=e\491\解释\model-capability-required-term-direct-prompt-training\direct-prompt-run\sample.txt

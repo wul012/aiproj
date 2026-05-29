@@ -1,0 +1,33 @@
+{
+  "data": "e\\491\\解释\\model-capability-required-term-direct-prompt-training\\required_term_direct_prompt_corpus.txt",
+  "data_dir": null,
+  "prepared_data": null,
+  "out_dir": "e\\491\\解释\\model-capability-required-term-direct-prompt-training\\direct-prompt-run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 16,
+  "block_size": 8,
+  "max_iters": 1500,
+  "eval_interval": 375,
+  "eval_iters": 2,
+  "learning_rate": 0.02,
+  "train_ratio": 0.9,
+  "n_layer": 1,
+  "n_head": 1,
+  "n_embd": 64,
+  "dropout": 0.1,
+  "seed": 491,
+  "device": "cpu",
+  "sample_prompt": "because:",
+  "sample_tokens": 8,
+  "sample_temperature": 0.2,
+  "sample_top_k": 1,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "data",
+    "path": "e\\491\\解释\\model-capability-required-term-direct-prompt-training\\required_term_direct_prompt_corpus.txt"
+  }
+}

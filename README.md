@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v490.0.0` trains a tiny checkpoint from the v489 prompt-leading corpus and compares required-term continuation uptake against the v488 baseline.
+Version `v491.0.0` simplifies the required-term corpus to direct prompt-to-term rows and reruns tiny training against the v490 no-uptake baseline.
+
+## Latest v491 checkpoint
+
+- Added `model_capability_required_term_direct_prompt_training` reporting for generating a direct prompt-to-term corpus, training a tiny checkpoint, and comparing continuation uptake against v490.
+- Added `scripts/run_model_capability_required_term_direct_prompt_training.py`, which writes the simplified corpus, training evidence, generation rows, deltas, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real direct-prompt training with `repeat=160`, `max_iters=1500`, `n_embd=64`, and `generation_seed=491`: checkpoint creation passed and direct prompt rows reached `2880`, but continuation hits stayed `0/9`.
+- Interpreted v491 as another negative capability result: removing metadata and reducing variants was not enough; the generated continuations moved toward repeated partial fragments such as `fixecauseca`, but did not emit the requested full terms.
+- Archived the v491 direct-prompt training evidence in `e/491` and added the code explanation in `代码讲解记录_模型能力阶段/505-v491-model-capability-required-term-direct-prompt-training.md`.
 
 ## Latest v490 checkpoint
 

@@ -1,0 +1,16 @@
+status=pass
+decision=required_term_direct_prompt_training_completed_without_uptake
+direct_prompt_training_decision=direct_prompt_training_completed_without_uptake
+term_count=9
+generation_count=9
+continuation_hit_count=0
+previous_continuation_hit_count=0
+continuation_hit_delta=0
+case_with_continuation_hit_count=0
+continuation_hit_rate=0.0
+training_status=pass
+checkpoint_exists=True
+direct_prompt_ready=True
+direct_prompt_line_count=2880
+model_quality_claim=not_claimed
+next_action=increase repeat or max_iters further, or train one term at a time to isolate capacity limits

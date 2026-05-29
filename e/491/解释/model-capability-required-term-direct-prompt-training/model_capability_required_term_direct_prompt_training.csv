@@ -1,0 +1,10 @@
+generation_seed,case,term,scaffold_prompt,direct_prompt_line_count,direct_prompt_pattern_count,direct_prompt_repeat,prompt_hit_count,generated_hit_count,continuation_hit_count,prompt_truncated,generated_preview,continuation_preview
+491,classification-risk-level,because,because:,320,2,160,1,1,0,False,because: fixecauseca, fixecauseca
+492,comparison-baseline,fixed,fixed:,320,2,160,1,1,0,False,fixed: fixecauseca, fixecauseca
+493,continuation-science,text,text:,320,2,160,1,1,0,False,text: fixecauseca, fixecauseca
+494,factual-val-loss,loss,loss:,320,2,160,1,1,0,False,loss: fixecauseca, fixecauseca
+495,qa-training-loop,data,data:,320,2,160,1,1,0,False,data: fixecauseca, fixecauseca
+496,refusal-boundary,real,real:,320,2,160,1,1,0,False,real: fixecauseca, fixecauseca
+497,structured-experiment-json,four,four:,320,2,160,1,1,0,False,four: fixecauseca, fixecauseca
+498,style-rewrite-concise,while,while:,320,2,160,1,1,0,False,while: fixecauseca, fixecauseca
+499,summary-evidence-chain,chain,chain:,320,2,160,1,1,0,False,chain: fixecauseca, fixecauseca

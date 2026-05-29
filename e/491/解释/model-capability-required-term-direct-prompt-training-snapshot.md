@@ -1,0 +1,49 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT required-term direct prompt training" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The direct prompt training run completed, but short continuations still did not include required terms.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: direct_prompt_training_completed_without_uptake
+    - generic [ref=e13]:
+      - generic [ref=e14]: Terms
+      - strong [ref=e15]: "9"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Generations
+      - strong [ref=e18]: "9"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Continuation hits
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Previous hits
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Hit delta
+      - strong [ref=e27]: "0"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Hit rate
+      - strong [ref=e30]: "0.0"
+    - generic [ref=e31]:
+      - generic [ref=e32]: Direct prompt ready
+      - strong [ref=e33]: "True"
+    - generic [ref=e34]:
+      - generic [ref=e35]: Checkpoint
+      - strong [ref=e36]: "True"
+  - generic [ref=e37]:
+    - heading "Training Evidence" [level=2] [ref=e38]
+    - paragraph [ref=e39]: "Corpus: e\\491\\解释\\model-capability-required-term-direct-prompt-training\\required_term_direct_prompt_corpus.txt"
+    - paragraph [ref=e40]: "Checkpoint: e\\491\\解释\\model-capability-required-term-direct-prompt-training\\direct-prompt-run\\checkpoint.pt"
+    - paragraph [ref=e41]: "Command: D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\491\\解释\\model-capability-required-term-direct-prompt-training\\required_term_direct_prompt_corpus.txt --out-dir e\\491\\解释\\model-capability-required-term-direct-prompt-training\\direct-prompt-run --device cpu --tokenizer char --max-iters 1500 --eval-interval 375 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 491 --sample-prompt because: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+  - generic [ref=e42]:
+    - heading "Direct Prompt Boundary" [level=2] [ref=e43]
+    - paragraph [ref=e44]: "Direct prompt lines: 2880; previous continuation hits: 0; current continuation hits: 0; delta: 0."
+    - paragraph [ref=e45]: increase repeat or max_iters further, or train one term at a time to isolate capacity limits
+  - generic [ref=e46]:
+    - heading "Required-Term Generations" [level=2] [ref=e47]
+    - table [ref=e49]:
+      - rowgroup [ref=e50]
+      - rowgroup [ref=e58]
