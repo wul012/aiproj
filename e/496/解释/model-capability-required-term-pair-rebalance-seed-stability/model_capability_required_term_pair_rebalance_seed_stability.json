@@ -1,0 +1,554 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair rebalance seed stability",
+  "generated_at": "2026-05-29T23:30:15Z",
+  "status": "pass",
+  "decision": "required_term_pair_rebalance_seed_stability_not_reproduced",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_rebalance": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\model_capability_required_term_pair_rebalance.json",
+  "out_dir": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability",
+  "settings": {
+    "seeds": [
+      496,
+      1496,
+      2496
+    ],
+    "seed_count": 3,
+    "pair_limit": null,
+    "repeat": 240,
+    "isolated_repeat": 2,
+    "max_iters": 1600,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 64,
+    "learning_rate": 0.02,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "repeat v495 full-hit rebalance pairs across seeds before expanding curriculum size"
+  },
+  "previous_baseline": {
+    "pair_rebalance_decision": "pair_rebalance_full_hit_gain",
+    "source_pair_full_hit_count": 0,
+    "pair_full_hit_count": 1,
+    "pair_full_hit_delta": 1,
+    "probe_hit_count": 5,
+    "probe_hit_delta": -1,
+    "rebalance_improved": true
+  },
+  "summary": {
+    "pair_rebalance_seed_stability_decision": "rebalance_full_pairs_not_reproduced_across_seeds",
+    "source_pair_rebalance_decision": "pair_rebalance_full_hit_gain",
+    "source_pair_full_hit_count": 1,
+    "source_pair_full_hit_delta": 1,
+    "selected_pair_count": 1,
+    "seed_count": 3,
+    "pair_seed_run_count": 3,
+    "probe_count": 6,
+    "training_pass_count": 3,
+    "checkpoint_exists_count": 3,
+    "continuation_hit_count": 3,
+    "probe_hit_count": 3,
+    "probe_success_rate": 0.5,
+    "pair_seed_full_hit_count": 0,
+    "pair_seed_partial_hit_count": 3,
+    "pair_seed_zero_hit_count": 0,
+    "pair_seed_full_hit_rate": 0.0,
+    "stable_pair_count": 0,
+    "partial_stable_pair_count": 0,
+    "no_full_hit_pair_count": 1,
+    "stable_pair_rate": 0.0,
+    "pair_rebalance_seed_stable": false,
+    "all_selected_pairs_seed_stable": false,
+    "seed_success_rates": {
+      "496": 0.0,
+      "1496": 0.0,
+      "2496": 0.0
+    }
+  },
+  "selected_pair_count": 1,
+  "pairs": [
+    {
+      "pair_id": "01-fixed-loss",
+      "pair_index": 0,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "v494_hit_terms": [
+        "fixed"
+      ],
+      "v494_missed_terms": [
+        "loss"
+      ],
+      "v495_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "v495_missed_terms": [],
+      "v495_hit_count_delta": 1,
+      "v495_rebalance_pair_full_hit": true
+    }
+  ],
+  "pair_seed_run_count": 3,
+  "pair_seed_rows": [
+    {
+      "pair_seed_run_id": "01-fixed-loss-seed-496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "seed": 496,
+      "seed_index": 0,
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-496.txt",
+      "pair_seed_corpus_exists": true,
+      "pair_seed_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496\\tokenizer.json",
+      "metrics_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496\\metrics.jsonl",
+      "train_config_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-496.txt --out-dir e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_seed_run_id": "01-fixed-loss-seed-1496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "seed": 1496,
+      "seed_index": 1,
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-1496.txt",
+      "pair_seed_corpus_exists": true,
+      "pair_seed_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496\\checkpoint.pt",
+      "tokenizer_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496\\tokenizer.json",
+      "metrics_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496\\metrics.jsonl",
+      "train_config_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-1496.txt --out-dir e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 1496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_seed_run_id": "01-fixed-loss-seed-2496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "seed": 2496,
+      "seed_index": 2,
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-2496.txt",
+      "pair_seed_corpus_exists": true,
+      "pair_seed_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496\\checkpoint.pt",
+      "tokenizer_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496\\tokenizer.json",
+      "metrics_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496\\metrics.jsonl",
+      "train_config_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-2496.txt --out-dir e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 2496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    }
+  ],
+  "seed_pair_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "seed": 496,
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "seed": 1496,
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "seed": 2496,
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    }
+  ],
+  "pair_seed_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "v495_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "seed_count": 3,
+      "run_count": 3,
+      "full_hit_seed_count": 0,
+      "full_hit_seeds": [],
+      "missed_full_hit_seeds": [
+        496,
+        1496,
+        2496
+      ],
+      "full_hit_rate": 0.0,
+      "stable_full_hit_across_seeds": false,
+      "partial_full_hit_across_seeds": false
+    }
+  ],
+  "probe_count": 6,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_seed_run_id": "01-fixed-loss-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-496.txt",
+      "pair_seed": 496,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 496,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_seed_run_id": "01-fixed-loss-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-496.txt",
+      "pair_seed": 496,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_seed_run_id": "01-fixed-loss-seed-1496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-1496.txt",
+      "pair_seed": 1496,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 1496,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:lossssssssss",
+      "continuation": "lossssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed:lossssssssss",
+      "continuation_preview": "lossssssssss",
+      "seed": 1496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_seed_run_id": "01-fixed-loss-seed-1496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-1496.txt",
+      "pair_seed": 1496,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 1498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 1496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-1496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_seed_run_id": "01-fixed-loss-seed-2496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-2496.txt",
+      "pair_seed": 2496,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 2496,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 2496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_seed_run_id": "01-fixed-loss-seed-2496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_seed_corpus_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-corpora\\01-fixed-loss-seed-2496.txt",
+      "pair_seed": 2496,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 2498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 2496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\seed-runs\\01-fixed-loss-seed-2496\\checkpoint.pt",
+      "checkpoint_exists": true
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The v495 full-hit pair did not reproduce full-hit behavior under the configured seed repeat.",
+    "next_action": "treat v495 full-hit as fragile and inspect corpus/model capacity before expanding target groups"
+  }
+}

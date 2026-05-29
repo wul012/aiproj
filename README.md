@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v495.0.0` rebalances the v494 partial two-term curricula and observes the first full-hit pair, while keeping the model-quality claim limited to a local capacity signal.
+Version `v496.0.0` repeats the v495 full-hit rebalance pair across seeds and finds that the local pair-capacity signal is not yet stable.
+
+## Latest v496 checkpoint
+
+- Added `model_capability_required_term_pair_rebalance_seed_stability` reporting for selecting v495 improved full-hit pairs and retraining them across seeds.
+- Added `scripts/run_model_capability_required_term_pair_rebalance_seed_stability.py`, which writes seed corpora, seed checkpoints, generation rows, seed-level summaries, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real seed-stability check for the only improved v495 pair, `fixed/loss`, over seeds `496`, `1496`, and `2496`: all `3` checkpoints trained, but `0/3` seed runs reproduced full-hit behavior.
+- Interpreted v496 as a useful negative result: v495's full-hit was a fragile single-seed signal, not a stable pair-level capability.
+- Archived the v496 seed-stability evidence in `e/496` and added the code explanation in `代码讲解记录_模型能力阶段/510-v496-model-capability-required-term-pair-rebalance-seed-stability.md`.
 
 ## Latest v495 checkpoint
 

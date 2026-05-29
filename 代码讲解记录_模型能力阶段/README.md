@@ -80,6 +80,9 @@
 509-v495-model-capability-required-term-pair-rebalance.md
  -> v495 code explanation: rebalance v494 partial two-term curricula and observe the first full-hit pair-capacity signal.
 
+510-v496-model-capability-required-term-pair-rebalance-seed-stability.md
+ -> v496 code explanation: repeat the v495 full-hit pair across seeds and show the signal is not yet stable.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

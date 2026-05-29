@@ -1,0 +1,43 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT required-term pair rebalance seed stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The v495 full-hit pair did not reproduce full-hit behavior under the configured seed repeat.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: rebalance_full_pairs_not_reproduced_across_seeds
+    - generic [ref=e13]:
+      - generic [ref=e14]: Pairs
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Seeds
+      - strong [ref=e18]: "3"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Runs
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Full seed hits
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Stable pairs
+      - strong [ref=e27]: "0"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Stable signal
+      - strong [ref=e30]: "False"
+  - generic [ref=e31]:
+    - heading "Stability Boundary" [level=2] [ref=e32]
+    - paragraph [ref=e33]: This run repeats only v495 full-hit gain pairs across seeds. It tests whether the pair-level signal is stable before any three-term curriculum expansion.
+    - paragraph [ref=e34]: treat v495 full-hit as fragile and inspect corpus/model capacity before expanding target groups
+  - generic [ref=e35]:
+    - heading "Pair Stability" [level=2] [ref=e36]
+    - table [ref=e38]:
+      - rowgroup [ref=e39]
+      - rowgroup [ref=e47]
+  - generic [ref=e55]:
+    - heading "Seed Pair Rows" [level=2] [ref=e56]
+    - table [ref=e58]:
+      - rowgroup [ref=e59]
+      - rowgroup [ref=e66]

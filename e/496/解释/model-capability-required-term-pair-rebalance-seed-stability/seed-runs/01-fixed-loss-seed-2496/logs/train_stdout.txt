@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=80526 vocab_size=34
+parameters=52,800
+data_source=data:e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-corpora\01-fixed-loss-seed-2496.txt
+step=    1 train_loss=3.0791 val_loss=3.1270
+step=  400 train_loss=0.9939 val_loss=1.0056
+step=  800 train_loss=0.9556 val_loss=1.0332
+step= 1200 train_loss=0.8144 val_loss=0.8761
+step= 1600 train_loss=0.9100 val_loss=0.8309
+saved=e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-2496
+history=e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-2496\metrics.jsonl
+manifest=e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-2496\run_manifest.json
+sample=e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-2496\sample.txt

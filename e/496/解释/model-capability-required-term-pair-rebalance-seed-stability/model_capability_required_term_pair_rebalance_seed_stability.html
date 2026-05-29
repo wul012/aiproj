@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair rebalance seed stability</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f2; color: #17211f; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1220px; margin: 0 auto; }
+header { border-bottom: 1px solid #dce1d5; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5a675f; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dce1d5; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 33, 31, 0.05); }
+.card span { display: block; color: #657269; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 880px; }
+th, td { text-align: left; border-bottom: 1px solid #e5eadf; padding: 10px; vertical-align: top; }
+th { color: #52605a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term pair rebalance seed stability</h1><p>The v495 full-hit pair did not reproduce full-hit behavior under the configured seed repeat.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>rebalance_full_pairs_not_reproduced_across_seeds</strong></div><div class="card"><span>Pairs</span><strong>1</strong></div><div class="card"><span>Seeds</span><strong>3</strong></div><div class="card"><span>Runs</span><strong>3</strong></div><div class="card"><span>Full seed hits</span><strong>0</strong></div><div class="card"><span>Stable pairs</span><strong>0</strong></div><div class="card"><span>Stable signal</span><strong>False</strong></div></section>
+<section class="panel"><h2>Stability Boundary</h2><p>This run repeats only v495 full-hit gain pairs across seeds. It tests whether the pair-level signal is stable before any three-term curriculum expansion.</p><p>treat v495 full-hit as fragile and inspect corpus/model capacity before expanding target groups</p></section>
+<section class="panel">
+<h2>Pair Stability</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>v495 hits</th><th>Full-hit seeds</th><th>Missed seeds</th><th>Rate</th><th>Stable</th></tr></thead>
+<tbody><tr><td>fixed, loss</td><td>fixed, loss</td><td></td><td>496, 1496, 2496</td><td>0.0</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Seed Pair Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Seed</th><th>Hit terms</th><th>Missed terms</th><th>Full hit</th></tr></thead>
+<tbody><tr><td>01-fixed-loss</td><td>496</td><td>loss</td><td>fixed</td><td>False</td></tr>
+<tr><td>01-fixed-loss</td><td>1496</td><td>loss</td><td>fixed</td><td>False</td></tr>
+<tr><td>01-fixed-loss</td><td>2496</td><td>loss</td><td>fixed</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

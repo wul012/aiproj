@@ -1,0 +1,7 @@
+pair_seed_run_id,pair_id,seed,term,generation_seed,training_status,checkpoint_exists,prompt_hit_count,generated_hit_count,continuation_hit_count,prompt_truncated,generated_preview,continuation_preview,checkpoint_path
+01-fixed-loss-seed-496,01-fixed-loss,496,fixed,496,pass,True,1,1,0,False,fixed: losssssssss, losssssssss,e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-496\checkpoint.pt
+01-fixed-loss-seed-496,01-fixed-loss,496,loss,498,pass,True,1,1,1,False,loss: losssssssss, losssssssss,e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-496\checkpoint.pt
+01-fixed-loss-seed-1496,01-fixed-loss,1496,fixed,1496,pass,True,1,1,0,False,fixed:lossssssssss,lossssssssss,e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-1496\checkpoint.pt
+01-fixed-loss-seed-1496,01-fixed-loss,1496,loss,1498,pass,True,1,1,1,False,loss: losssssssss, losssssssss,e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-1496\checkpoint.pt
+01-fixed-loss-seed-2496,01-fixed-loss,2496,fixed,2496,pass,True,1,1,0,False,fixed: losssssssss, losssssssss,e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-2496\checkpoint.pt
+01-fixed-loss-seed-2496,01-fixed-loss,2496,loss,2498,pass,True,1,1,1,False,loss: losssssssss, losssssssss,e\496\解释\model-capability-required-term-pair-rebalance-seed-stability\seed-runs\01-fixed-loss-seed-2496\checkpoint.pt
