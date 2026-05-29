@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term uptake audit</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f2; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dedbd2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #635f57; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e2ded6; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #6b655c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 980px; }
+th, td { text-align: left; border-bottom: 1px solid #e7e2dc; padding: 10px; vertical-align: top; }
+th { color: #4d4942; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term uptake audit</h1><p>Archived suite outputs never place the required terms into continuations, even though those terms are present in expected behavior and corpus material.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Uptake decision</span><strong>required_terms_never_generated</strong></div><div class="card"><span>Observations</span><strong>212</strong></div><div class="card"><span>Continuation hits</span><strong>0</strong></div><div class="card"><span>Last rung hits</span><strong>0</strong></div><div class="card"><span>Expected hits</span><strong>212</strong></div><div class="card"><span>Prompt hits</span><strong>0</strong></div><div class="card"><span>Sources ready</span><strong>2</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>run a targeted decoding/training probe with explicit required-term scaffolds before increasing benchmark scope</p></section>
+<section class="panel">
+<h2>Generation Sources</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Status</th><th>Token cap root</th><th>Eval suites</th><th>Max iters</th><th>Results</th></tr></thead>
+<tbody><tr><td>pass</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-1337\token-cap-12</td><td>2</td><td>1, 4</td><td>20</td></tr>
+<tr><td>pass</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-12</td><td>2</td><td>1, 4</td><td>20</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Required-Term Uptake Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Term</th><th>Max iters</th><th>Continuation</th><th>Generated</th><th>Prompt</th><th>Expected</th><th>Preview</th></tr></thead>
+<tbody><tr><td>1337</td><td>classification-risk-level</td><td>classify</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两化据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>classify</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两v据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>blocked</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两化据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>blocked</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两v据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>because</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两化据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>because</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两v据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>missing</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两化据否</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>missing</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>每\n每研工少评据两v据否</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>fixed</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>fixed</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>sampling</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>sampling</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>seeds</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>seeds</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>reduce</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>reduce</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>confounding</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>confounding</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>方少s固工四一u少格径断</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>chinese</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四少.</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>chinese</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四s存</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>text</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四少.</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>text</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四s存</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>about</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四少.</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>about</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四s存</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>scientific</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四少.</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>scientific</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四s存</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>research</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四少.</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>research</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>e四研少好？格或少四s存</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>statement</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？.泛否据变更每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>statement</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？这泛否据变总每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>rising</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？.泛否据变更每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>rising</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？这泛否据变总每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>validation</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？.泛否据变更每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>validation</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？这泛否据变总每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>loss</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？.泛否据变更每</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>loss</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>u成u指？这泛否据变总每</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

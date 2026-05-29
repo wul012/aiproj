@@ -35,6 +35,9 @@
 494-v480-model-capability-required-term-coverage.md
  -> v480 code explanation: trace required-term failures back to archived suite/corpus coverage and separate data absence from present-but-not-generated behavior.
 
+495-v481-model-capability-required-term-uptake.md
+ -> v481 code explanation: trace covered required terms into archived tiny generated/continuation text and show they were never generated.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

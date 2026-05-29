@@ -1,0 +1,15 @@
+﻿status=pass
+decision=required_term_uptake_audit_ready
+uptake_decision=required_terms_never_generated
+required_term_row_count=106
+generation_observation_count=212
+continuation_hit_count=0
+generated_hit_count=0
+prompt_hit_count=0
+expected_hit_count=212
+last_rung_continuation_hit_count=0
+expected_only_unique_term_count=49
+source_ready_count=2
+model_quality_claim=not_claimed
+next_action=run a targeted decoding/training probe with explicit required-term scaffolds before increasing benchmark scope
+outputs={"json": "e\\481\\\u89e3\u91ca\\model-capability-required-term-uptake\\model_capability_required_term_uptake.json", "csv": "e\\481\\\u89e3\u91ca\\model-capability-required-term-uptake\\model_capability_required_term_uptake.csv", "text": "e\\481\\\u89e3\u91ca\\model-capability-required-term-uptake\\model_capability_required_term_uptake.txt", "markdown": "e\\481\\\u89e3\u91ca\\model-capability-required-term-uptake\\model_capability_required_term_uptake.md", "html": "e\\481\\\u89e3\u91ca\\model-capability-required-term-uptake\\model_capability_required_term_uptake.html"}

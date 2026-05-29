@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v480.0.0` audits whether the v479 required-term failures are absent from the tiny corpus or present-but-not-generated.
+Version `v481.0.0` audits whether the required terms that are present in the tiny corpus are actually absorbed into archived tiny generations.
+
+## Latest v481 checkpoint
+
+- Added `model_capability_required_term_uptake` reporting for tracing v480 required-term rows into archived v478 eval-suite `generated` and `continuation` text.
+- Added `scripts/audit_model_capability_required_term_uptake.py`, which accepts the v480 coverage report directory or JSON file and outputs JSON/CSV/text/Markdown/HTML uptake reports.
+- Audited the real v478-v480 evidence: `212` generation observations, `0` continuation hits, `0` generated hits, `0` prompt hits, and `212` expected-behavior hits, so the decision is `required_terms_never_generated`.
+- Archived the v481 required-term uptake evidence in `e/481` and added the code explanation in `代码讲解记录_模型能力阶段/495-v481-model-capability-required-term-uptake.md`.
 
 ## Latest v480 checkpoint
 
