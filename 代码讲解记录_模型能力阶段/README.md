@@ -32,6 +32,9 @@
 493-v479-model-capability-rubric-signal-audit.md
  -> v479 code explanation: audit remaining cap-12 rubric signals and identify required-term/data coverage blockers.
 
+494-v480-model-capability-required-term-coverage.md
+ -> v480 code explanation: trace required-term failures back to archived suite/corpus coverage and separate data absence from present-but-not-generated behavior.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

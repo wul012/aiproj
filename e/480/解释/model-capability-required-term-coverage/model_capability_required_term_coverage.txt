@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_coverage_audit_ready
+coverage_decision=required_terms_present_but_not_generated
+missing_term_row_count=106
+unique_missing_term_count=49
+corpus_missing_term_row_count=0
+corpus_missing_unique_terms=
+suite_missing_unique_terms=
+source_ready_count=2
+source_missing_count=0
+top_missing_terms=chinese:4, data:4, missing:4, validation:4
+model_quality_claim=not_claimed
+next_action=inspect training scale, sampling, and prompt-to-generation behavior before enlarging the benchmark or model

@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v479.0.0` audits the remaining cap-12 rubric signals from v478, separating required-term/data coverage blockers from model-quality claims.
+Version `v480.0.0` audits whether the v479 required-term failures are absent from the tiny corpus or present-but-not-generated.
+
+## Latest v480 checkpoint
+
+- Added `model_capability_required_term_coverage` reporting for tracing v479 `last_missing_terms` back to the archived v478 cap-12 suite and tiny corpus.
+- Added `scripts/audit_model_capability_required_term_coverage.py`, which accepts the v479 rubric signal audit directory or JSON file and outputs JSON/CSV/text/Markdown/HTML coverage reports.
+- Audited the real v479 evidence: `106` case-term missing rows and `49` unique missing terms were all present in both suite and tiny corpus material, so the decision is `required_terms_present_but_not_generated`.
+- Archived the v480 required-term coverage evidence in `e/480` and added the code explanation in `代码讲解记录_模型能力阶段/494-v480-model-capability-required-term-coverage.md`.
 
 ## Latest v479 checkpoint
 

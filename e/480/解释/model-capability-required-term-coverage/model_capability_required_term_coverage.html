@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term coverage audit</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f7f6f2; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dedbd2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #635f57; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e2ded6; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #6b655c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 960px; }
+th, td { text-align: left; border-bottom: 1px solid #e7e2dc; padding: 10px; vertical-align: top; }
+th { color: #4d4942; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term coverage audit</h1><p>The required terms missing from generations are present in the archived tiny corpus, so data presence alone does not explain the rubric gap.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Coverage decision</span><strong>required_terms_present_but_not_generated</strong></div><div class="card"><span>Term rows</span><strong>106</strong></div><div class="card"><span>Unique terms</span><strong>49</strong></div><div class="card"><span>Corpus covered rows</span><strong>106</strong></div><div class="card"><span>Corpus missing rows</span><strong>0</strong></div><div class="card"><span>Sources ready</span><strong>2</strong></div><div class="card"><span>Top terms</span><strong>chinese:4, data:4, missing:4, validation:4</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>inspect training scale, sampling, and prompt-to-generation behavior before enlarging the benchmark or model</p></section>
+<section class="panel">
+<h2>Source Material</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Status</th><th>Source diagnostic</th><th>Suites</th><th>Corpora</th><th>Suite cases</th><th>Corpus chars</th></tr></thead>
+<tbody><tr><td>pass</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-1337\token-cap-12\stall-diagnostic\model_capability_stall_diagnostic.json</td><td>2</td><td>2</td><td>20</td><td>27241</td></tr>
+<tr><td>pass</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-12\stall-diagnostic\model_capability_stall_diagnostic.json</td><td>2</td><td>2</td><td>20</td><td>27241</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Required-Term Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Term</th><th>Corpus</th><th>Suite</th><th>Prompt</th><th>Expected</th><th>Reason</th></tr></thead>
+<tbody><tr><td>1337</td><td>classification-risk-level</td><td>classify</td><td>12</td><td>2</td><td>0</td><td>2</td><td>case_passed</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>blocked</td><td>12</td><td>2</td><td>0</td><td>2</td><td>case_passed</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>because</td><td>12</td><td>2</td><td>0</td><td>2</td><td>case_passed</td></tr>
+<tr><td>1337</td><td>classification-risk-level</td><td>missing</td><td>24</td><td>12</td><td>0</td><td>4</td><td>case_passed</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>fixed</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>sampling</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>seeds</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>reduce</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>confounding</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>chinese</td><td>24</td><td>6</td><td>0</td><td>4</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>text</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>about</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>scientific</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>research</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>statement</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>rising</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>validation</td><td>24</td><td>4</td><td>0</td><td>4</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>loss</td><td>12</td><td>4</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>signals</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>worse</td><td>12</td><td>2</td><td>0</td><td>2</td><td>required_terms_missing</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>validation</td><td>24</td><td>4</td><td>0</td><td>4</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>data</td><td>24</td><td>6</td><td>0</td><td>4</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>estimates</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>generalization</td><td>24</td><td>4</td><td>0</td><td>4</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>should</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>used</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>refuse</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>fabricate</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>results</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>offer</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>report</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>real</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>missing</td><td>24</td><td>12</td><td>0</td><td>4</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>data</td><td>24</td><td>6</td><td>0</td><td>4</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>source</td><td>12</td><td>2</td><td>0</td><td>2</td><td>generation_unchanged</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>seed</td><td>24</td><td>28</td><td>0</td><td>4</td><td>generation_unchanged</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

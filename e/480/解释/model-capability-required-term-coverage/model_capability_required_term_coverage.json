@@ -1,0 +1,2111 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term coverage audit",
+  "generated_at": "2026-05-29T01:17:57Z",
+  "status": "pass",
+  "decision": "required_term_coverage_audit_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_rubric_signal_audit": "e\\479\\解释\\model-capability-rubric-signal-audit\\model_capability_rubric_signal_audit.json",
+  "out_dir": "e\\480\\解释\\model-capability-required-term-coverage",
+  "summary": {
+    "coverage_decision": "required_terms_present_but_not_generated",
+    "missing_term_row_count": 106,
+    "unique_missing_term_count": 49,
+    "corpus_covered_term_row_count": 106,
+    "corpus_missing_term_row_count": 0,
+    "corpus_fully_covered_unique_term_count": 49,
+    "corpus_missing_unique_terms": [],
+    "suite_covered_term_row_count": 106,
+    "suite_missing_term_row_count": 0,
+    "suite_missing_unique_terms": [],
+    "dominant_missing_terms": {
+      "chinese": 4,
+      "data": 4,
+      "missing": 4,
+      "validation": 4,
+      "about": 2,
+      "because": 2,
+      "blocked": 2,
+      "chain": 2,
+      "classify": 2,
+      "concise": 2,
+      "confounding": 2,
+      "estimates": 2
+    },
+    "source_count": 2,
+    "source_ready_count": 2,
+    "source_missing_count": 0
+  },
+  "source_count": 2,
+  "source_rows": [
+    {
+      "status": "pass",
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "suite_count": 2,
+      "corpus_count": 2,
+      "suite_case_count": 20,
+      "suite_char_count": 11369,
+      "corpus_char_count": 27241,
+      "suite_paths": [
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-1\\standard-zh-capped-suite.json",
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\standard-zh-capped-suite.json"
+      ],
+      "corpus_paths": [
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-1\\tiny_corpus.txt",
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\tiny_corpus.txt"
+      ]
+    },
+    {
+      "status": "pass",
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "suite_count": 2,
+      "corpus_count": 2,
+      "suite_case_count": 20,
+      "suite_char_count": 11369,
+      "corpus_char_count": 27241,
+      "suite_paths": [
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-1\\standard-zh-capped-suite.json",
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\standard-zh-capped-suite.json"
+      ],
+      "corpus_paths": [
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-1\\tiny_corpus.txt",
+        "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\tiny_corpus.txt"
+      ]
+    }
+  ],
+  "term_row_count": 106,
+  "term_rows": [
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "classify",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "blocked",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "because",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "missing",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 12,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "fixed",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "sampling",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "seeds",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "reduce",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "confounding",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "chinese",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "text",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "about",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "scientific",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "research",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "statement",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "rising",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "validation",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "loss",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "signals",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "worse",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "validation",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "data",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "estimates",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "generalization",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "should",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "used",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "refuse",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "fabricate",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "results",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "offer",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "report",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "real",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "missing",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 12,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "data",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "source",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "seed",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 28,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "path",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "return",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "json-like",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "structure",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 18,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "four",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "requested",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "rewrite",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 16,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "shorter",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "natural",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "chinese",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "while",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "preserving",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "concise",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "evidence",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 144,
+      "suite_occurrences": 12,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "chain",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 132,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "experiment",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 10,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "review",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "classify",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "blocked",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "because",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "stall_reason": "case_passed",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "missing",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 12,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "fixed",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "sampling",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "seeds",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "reduce",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "confounding",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "chinese",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "text",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "about",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "scientific",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "research",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "statement",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "rising",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "validation",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "loss",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "signals",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "worse",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "validation",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "data",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "estimates",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "generalization",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "should",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "used",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "refuse",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "fabricate",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "results",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "offer",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "report",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "real",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "missing",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 12,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "data",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "source",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "seed",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 28,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "path",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "return",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "json-like",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "structure",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 18,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "four",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "stall_reason": "token_budget_or_shape_limit",
+      "failed_checks": [
+        "must_include",
+        "task_shape"
+      ],
+      "term": "requested",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "rewrite",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 16,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "shorter",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "natural",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "chinese",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 24,
+      "suite_occurrences": 6,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "while",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "stall_reason": "generation_unchanged",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "preserving",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "concise",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "evidence",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 144,
+      "suite_occurrences": 12,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 4,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "chain",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 132,
+      "suite_occurrences": 4,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "experiment",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 10,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "stall_reason": "required_terms_missing",
+      "failed_checks": [
+        "must_include"
+      ],
+      "term": "review",
+      "covered_in_corpus": true,
+      "covered_in_suite": true,
+      "corpus_occurrences": 12,
+      "suite_occurrences": 2,
+      "suite_prompt_occurrences": 0,
+      "suite_expected_occurrences": 2,
+      "source_diagnostic": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\stall-diagnostic\\model_capability_stall_diagnostic.json",
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The required terms missing from generations are present in the archived tiny corpus, so data presence alone does not explain the rubric gap.",
+    "next_action": "inspect training scale, sampling, and prompt-to-generation behavior before enlarging the benchmark or model"
+  }
+}

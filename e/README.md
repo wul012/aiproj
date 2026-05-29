@@ -45,6 +45,10 @@ e/478/解释/说明.md
 e/479/图片
 e/479/解释/说明.md
  -> v479 model capability rubric signal audit 的运行截图和解释
+
+e/480/图片
+e/480/解释/说明.md
+ -> v480 model capability required-term coverage audit 的运行截图和解释
 ```
 
 写入规则：
