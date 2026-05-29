@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair rebalance</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f2; color: #17211f; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1220px; margin: 0 auto; }
+header { border-bottom: 1px solid #dce1d5; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5a675f; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dce1d5; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 33, 31, 0.05); }
+.card span { display: block; color: #657269; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 940px; }
+th, td { text-align: left; border-bottom: 1px solid #e5eadf; padding: 10px; vertical-align: top; }
+th { color: #52605a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term pair rebalance</h1><p>At least one previously partial pair emitted both required terms after rebalance training.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_rebalance_full_hit_gain</strong></div><div class="card"><span>Source hits</span><strong>6</strong></div><div class="card"><span>Rebalance hits</span><strong>5</strong></div><div class="card"><span>Hit delta</span><strong>-1</strong></div><div class="card"><span>Full pairs</span><strong>1</strong></div><div class="card"><span>Full delta</span><strong>1</strong></div><div class="card"><span>Improved</span><strong>True</strong></div></section>
+<section class="panel"><h2>Experiment Boundary</h2><p>This run keeps the v494 pair set fixed and changes only the two-term corpus organization. It is a capacity probe, not a production-quality language benchmark.</p><p>repeat the improved pairs across seeds before attempting three-term curricula</p></section>
+<section class="panel">
+<h2>Pair Comparison</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Before hits</th><th>After hits</th><th>Delta</th><th>Full after</th></tr></thead>
+<tbody><tr><td>fixed, loss</td><td>fixed</td><td>fixed, loss</td><td>1</td><td>True</td></tr>
+<tr><td>fixed, four</td><td>four</td><td>four</td><td>0</td><td>False</td></tr>
+<tr><td>fixed, chain</td><td>fixed</td><td>chain</td><td>0</td><td>False</td></tr>
+<tr><td>loss, four</td><td>loss</td><td>four</td><td>0</td><td>False</td></tr>
+<tr><td>loss, chain</td><td>chain</td><td></td><td>-1</td><td>False</td></tr>
+<tr><td>four, chain</td><td>chain</td><td></td><td>-1</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Probe Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Term</th><th>Seed</th><th>Hit</th><th>Preview</th><th>Checkpoint</th></tr></thead>
+<tbody><tr><td>01-fixed-loss</td><td>fixed</td><td>495</td><td>1</td><td>fixed\nlossss</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\01-fixed-loss\checkpoint.pt</td></tr>
+<tr><td>01-fixed-loss</td><td>loss</td><td>496</td><td>1</td><td>fixed\nlossss</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\01-fixed-loss\checkpoint.pt</td></tr>
+<tr><td>02-fixed-four</td><td>fixed</td><td>496</td><td>0</td><td>four: four: </td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\02-fixed-four\checkpoint.pt</td></tr>
+<tr><td>02-fixed-four</td><td>four</td><td>497</td><td>1</td><td> four: four:</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\02-fixed-four\checkpoint.pt</td></tr>
+<tr><td>03-fixed-chain</td><td>fixed</td><td>497</td><td>0</td><td> chain\nchain</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\03-fixed-chain\checkpoint.pt</td></tr>
+<tr><td>03-fixed-chain</td><td>chain</td><td>498</td><td>1</td><td> chain\nchain</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\03-fixed-chain\checkpoint.pt</td></tr>
+<tr><td>04-loss-four</td><td>loss</td><td>498</td><td>0</td><td> oour four f</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\04-loss-four\checkpoint.pt</td></tr>
+<tr><td>04-loss-four</td><td>four</td><td>499</td><td>1</td><td> oour four f</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\04-loss-four\checkpoint.pt</td></tr>
+<tr><td>05-loss-chain</td><td>loss</td><td>499</td><td>0</td><td> cssssssssss</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\05-loss-chain\checkpoint.pt</td></tr>
+<tr><td>05-loss-chain</td><td>chain</td><td>500</td><td>0</td><td>lloin:llosss</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\05-loss-chain\checkpoint.pt</td></tr>
+<tr><td>06-four-chain</td><td>four</td><td>500</td><td>0</td><td> chain\nchain</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\06-four-chain\checkpoint.pt</td></tr>
+<tr><td>06-four-chain</td><td>chain</td><td>501</td><td>0</td><td> four\nur\ncha</td><td>e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\06-four-chain\checkpoint.pt</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

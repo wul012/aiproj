@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=80526 vocab_size=34
+parameters=52,800
+data_source=data:e\495\解释\model-capability-required-term-pair-rebalance\rebalance-corpora\01-fixed-loss.txt
+step=    1 train_loss=3.0784 val_loss=3.1369
+step=  400 train_loss=0.7795 val_loss=0.9505
+step=  800 train_loss=0.8322 val_loss=1.0134
+step= 1200 train_loss=0.9896 val_loss=0.8429
+step= 1600 train_loss=0.8427 val_loss=0.9216
+saved=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\01-fixed-loss
+history=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\01-fixed-loss\metrics.jsonl
+manifest=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\01-fixed-loss\run_manifest.json
+sample=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\01-fixed-loss\sample.txt

@@ -105,6 +105,10 @@ e/493/解释/说明.md
 e/494/图片
 e/494/解释/说明.md
  -> v494 model capability required-term pair curriculum 的运行截图和解释
+
+e/495/图片
+e/495/解释/说明.md
+ -> v495 model capability required-term pair rebalance 的运行截图和解释
 ```
 
 写入规则：

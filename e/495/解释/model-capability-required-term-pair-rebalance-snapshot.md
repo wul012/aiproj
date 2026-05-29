@@ -1,0 +1,43 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT required-term pair rebalance" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one previously partial pair emitted both required terms after rebalance training.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: pair_rebalance_full_hit_gain
+    - generic [ref=e13]:
+      - generic [ref=e14]: Source hits
+      - strong [ref=e15]: "6"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Rebalance hits
+      - strong [ref=e18]: "5"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Hit delta
+      - strong [ref=e21]: "-1"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Full pairs
+      - strong [ref=e24]: "1"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Full delta
+      - strong [ref=e27]: "1"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Improved
+      - strong [ref=e30]: "True"
+  - generic [ref=e31]:
+    - heading "Experiment Boundary" [level=2] [ref=e32]
+    - paragraph [ref=e33]: This run keeps the v494 pair set fixed and changes only the two-term corpus organization. It is a capacity probe, not a production-quality language benchmark.
+    - paragraph [ref=e34]: repeat the improved pairs across seeds before attempting three-term curricula
+  - generic [ref=e35]:
+    - heading "Pair Comparison" [level=2] [ref=e36]
+    - table [ref=e38]:
+      - rowgroup [ref=e39]
+      - rowgroup [ref=e46]
+  - generic [ref=e83]:
+    - heading "Probe Rows" [level=2] [ref=e84]
+    - table [ref=e86]:
+      - rowgroup [ref=e87]
+      - rowgroup [ref=e95]

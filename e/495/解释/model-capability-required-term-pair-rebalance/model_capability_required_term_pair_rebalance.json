@@ -1,0 +1,1275 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair rebalance",
+  "generated_at": "2026-05-29T23:00:09Z",
+  "status": "pass",
+  "decision": "required_term_pair_rebalance_capacity_gain",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_curriculum": "e\\494\\解释\\model-capability-required-term-pair-curriculum\\model_capability_required_term_pair_curriculum.json",
+  "out_dir": "e\\495\\解释\\model-capability-required-term-pair-rebalance",
+  "settings": {
+    "pair_limit": null,
+    "repeat": 240,
+    "isolated_repeat": 2,
+    "max_iters": 1600,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 64,
+    "learning_rate": 0.02,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "generation_seed": 495,
+    "device": "cpu",
+    "experiment_boundary": "rebalance partial two-term curricula before expanding to larger target groups"
+  },
+  "previous_baseline": {
+    "pair_curriculum_decision": "pair_curriculum_partial_only",
+    "pair_count": 6,
+    "probe_hit_count": 6,
+    "pair_full_hit_count": 0,
+    "pair_partial_hit_count": 6,
+    "pair_full_success_rate": 0.0,
+    "multi_target_pair_capacity_observed": false
+  },
+  "summary": {
+    "pair_rebalance_decision": "pair_rebalance_full_hit_gain",
+    "source_pair_curriculum_decision": "pair_curriculum_partial_only",
+    "source_pair_count": 6,
+    "source_probe_hit_count": 6,
+    "source_pair_full_hit_count": 0,
+    "selected_pair_count": 6,
+    "pair_run_count": 6,
+    "probe_count": 12,
+    "training_pass_count": 6,
+    "checkpoint_exists_count": 6,
+    "continuation_hit_count": 5,
+    "probe_hit_count": 5,
+    "probe_hit_delta": -1,
+    "probe_success_rate": 0.4167,
+    "pair_full_hit_count": 1,
+    "pair_full_hit_delta": 1,
+    "pair_partial_hit_count": 3,
+    "pair_zero_hit_count": 2,
+    "pair_full_success_rate": 0.1667,
+    "pair_improved_count": 1,
+    "pair_regressed_count": 2,
+    "multi_target_pair_capacity_observed": true,
+    "rebalance_improved": true
+  },
+  "selected_pair_count": 6,
+  "pairs": [
+    {
+      "pair_id": "01-fixed-loss",
+      "pair_index": 0,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "source_hit_rate": 0.5,
+      "source_pair_full_hit": false,
+      "source_pair_partial_hit": true
+    },
+    {
+      "pair_id": "02-fixed-four",
+      "pair_index": 1,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "structured-experiment-json",
+          "term": "four",
+          "scaffold_prompt": "four:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "fixed",
+        "four"
+      ],
+      "source_hit_terms": [
+        "four"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "source_hit_rate": 0.5,
+      "source_pair_full_hit": false,
+      "source_pair_partial_hit": true
+    },
+    {
+      "pair_id": "03-fixed-chain",
+      "pair_index": 2,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "summary-evidence-chain",
+          "term": "chain",
+          "scaffold_prompt": "chain:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "fixed",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "chain"
+      ],
+      "source_hit_rate": 0.5,
+      "source_pair_full_hit": false,
+      "source_pair_partial_hit": true
+    },
+    {
+      "pair_id": "04-loss-four",
+      "pair_index": 3,
+      "terms": [
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "structured-experiment-json",
+          "term": "four",
+          "scaffold_prompt": "four:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "loss",
+        "four"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "four"
+      ],
+      "source_hit_rate": 0.5,
+      "source_pair_full_hit": false,
+      "source_pair_partial_hit": true
+    },
+    {
+      "pair_id": "05-loss-chain",
+      "pair_index": 4,
+      "terms": [
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "summary-evidence-chain",
+          "term": "chain",
+          "scaffold_prompt": "chain:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "loss",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "chain"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "source_hit_rate": 0.5,
+      "source_pair_full_hit": false,
+      "source_pair_partial_hit": true
+    },
+    {
+      "pair_id": "06-four-chain",
+      "pair_index": 5,
+      "terms": [
+        {
+          "case": "structured-experiment-json",
+          "term": "four",
+          "scaffold_prompt": "four:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "summary-evidence-chain",
+          "term": "chain",
+          "scaffold_prompt": "chain:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "four",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "chain"
+      ],
+      "source_missed_terms": [
+        "four"
+      ],
+      "source_hit_rate": 0.5,
+      "source_pair_full_hit": false,
+      "source_pair_partial_hit": true
+    }
+  ],
+  "pair_rows": [
+    {
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\01-fixed-loss.txt",
+      "rebalance_corpus_exists": true,
+      "rebalance_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_seed": 495,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss\\checkpoint.pt",
+      "tokenizer_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss\\tokenizer.json",
+      "metrics_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss\\metrics.jsonl",
+      "train_config_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\01-fixed-loss.txt --out-dir e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 495 --sample-prompt loss: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_id": "02-fixed-four",
+      "pair_terms": [
+        "fixed",
+        "four"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\02-fixed-four.txt",
+      "rebalance_corpus_exists": true,
+      "rebalance_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_seed": 496,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four\\checkpoint.pt",
+      "tokenizer_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four\\tokenizer.json",
+      "metrics_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four\\metrics.jsonl",
+      "train_config_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\02-fixed-four.txt --out-dir e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_id": "03-fixed-chain",
+      "pair_terms": [
+        "fixed",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\03-fixed-chain.txt",
+      "rebalance_corpus_exists": true,
+      "rebalance_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_seed": 497,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain\\checkpoint.pt",
+      "tokenizer_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain\\tokenizer.json",
+      "metrics_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain\\metrics.jsonl",
+      "train_config_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\03-fixed-chain.txt --out-dir e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 497 --sample-prompt chain: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_id": "04-loss-four",
+      "pair_terms": [
+        "loss",
+        "four"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\04-loss-four.txt",
+      "rebalance_corpus_exists": true,
+      "rebalance_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_seed": 498,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four\\checkpoint.pt",
+      "tokenizer_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four\\tokenizer.json",
+      "metrics_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four\\metrics.jsonl",
+      "train_config_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\04-loss-four.txt --out-dir e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 498 --sample-prompt four: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_id": "05-loss-chain",
+      "pair_terms": [
+        "loss",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\05-loss-chain.txt",
+      "rebalance_corpus_exists": true,
+      "rebalance_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_seed": 499,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain\\checkpoint.pt",
+      "tokenizer_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain\\tokenizer.json",
+      "metrics_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain\\metrics.jsonl",
+      "train_config_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\05-loss-chain.txt --out-dir e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 499 --sample-prompt loss: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "pair_id": "06-four-chain",
+      "pair_terms": [
+        "four",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\06-four-chain.txt",
+      "rebalance_corpus_exists": true,
+      "rebalance_line_count": 4320,
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "training_seed": 500,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain\\checkpoint.pt",
+      "tokenizer_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain\\tokenizer.json",
+      "metrics_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain\\metrics.jsonl",
+      "train_config_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\06-four-chain.txt --out-dir e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 500 --sample-prompt four: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    }
+  ],
+  "pair_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "hit_count": 2,
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "hit_rate": 1.0,
+      "pair_full_hit": true,
+      "pair_partial_hit": false
+    },
+    {
+      "pair_id": "02-fixed-four",
+      "term_names": [
+        "fixed",
+        "four"
+      ],
+      "source_hit_terms": [
+        "four"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_terms": [
+        "four"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "03-fixed-chain",
+      "term_names": [
+        "fixed",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "chain"
+      ],
+      "hit_count": 1,
+      "hit_terms": [
+        "chain"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "04-loss-four",
+      "term_names": [
+        "loss",
+        "four"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "four"
+      ],
+      "hit_count": 1,
+      "hit_terms": [
+        "four"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "05-loss-chain",
+      "term_names": [
+        "loss",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "chain"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "hit_count": 0,
+      "hit_terms": [],
+      "missed_terms": [
+        "loss",
+        "chain"
+      ],
+      "hit_rate": 0.0,
+      "pair_full_hit": false,
+      "pair_partial_hit": false
+    },
+    {
+      "pair_id": "06-four-chain",
+      "term_names": [
+        "four",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "chain"
+      ],
+      "source_missed_terms": [
+        "four"
+      ],
+      "hit_count": 0,
+      "hit_terms": [],
+      "missed_terms": [
+        "four",
+        "chain"
+      ],
+      "hit_rate": 0.0,
+      "pair_full_hit": false,
+      "pair_partial_hit": false
+    }
+  ],
+  "compare_rows": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "rebalance_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "rebalance_missed_terms": [],
+      "source_hit_count": 1,
+      "rebalance_hit_count": 2,
+      "hit_count_delta": 1,
+      "source_pair_full_hit": false,
+      "rebalance_pair_full_hit": true
+    },
+    {
+      "pair_id": "02-fixed-four",
+      "term_names": [
+        "fixed",
+        "four"
+      ],
+      "source_hit_terms": [
+        "four"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "rebalance_hit_terms": [
+        "four"
+      ],
+      "rebalance_missed_terms": [
+        "fixed"
+      ],
+      "source_hit_count": 1,
+      "rebalance_hit_count": 1,
+      "hit_count_delta": 0,
+      "source_pair_full_hit": false,
+      "rebalance_pair_full_hit": false
+    },
+    {
+      "pair_id": "03-fixed-chain",
+      "term_names": [
+        "fixed",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "chain"
+      ],
+      "rebalance_hit_terms": [
+        "chain"
+      ],
+      "rebalance_missed_terms": [
+        "fixed"
+      ],
+      "source_hit_count": 1,
+      "rebalance_hit_count": 1,
+      "hit_count_delta": 0,
+      "source_pair_full_hit": false,
+      "rebalance_pair_full_hit": false
+    },
+    {
+      "pair_id": "04-loss-four",
+      "term_names": [
+        "loss",
+        "four"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "four"
+      ],
+      "rebalance_hit_terms": [
+        "four"
+      ],
+      "rebalance_missed_terms": [
+        "loss"
+      ],
+      "source_hit_count": 1,
+      "rebalance_hit_count": 1,
+      "hit_count_delta": 0,
+      "source_pair_full_hit": false,
+      "rebalance_pair_full_hit": false
+    },
+    {
+      "pair_id": "05-loss-chain",
+      "term_names": [
+        "loss",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "chain"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "rebalance_hit_terms": [],
+      "rebalance_missed_terms": [
+        "loss",
+        "chain"
+      ],
+      "source_hit_count": 1,
+      "rebalance_hit_count": 0,
+      "hit_count_delta": -1,
+      "source_pair_full_hit": false,
+      "rebalance_pair_full_hit": false
+    },
+    {
+      "pair_id": "06-four-chain",
+      "term_names": [
+        "four",
+        "chain"
+      ],
+      "source_hit_terms": [
+        "chain"
+      ],
+      "source_missed_terms": [
+        "four"
+      ],
+      "rebalance_hit_terms": [],
+      "rebalance_missed_terms": [
+        "four",
+        "chain"
+      ],
+      "source_hit_count": 1,
+      "rebalance_hit_count": 0,
+      "hit_count_delta": -1,
+      "source_pair_full_hit": false,
+      "rebalance_pair_full_hit": false
+    }
+  ],
+  "probe_count": 12,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\01-fixed-loss.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 495,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:fixed\nlossss",
+      "continuation": "fixed\nlossss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed:fixed\\nlossss",
+      "continuation_preview": "fixed\\nlossss",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\01-fixed-loss.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 496,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:fixed\nlossss",
+      "continuation": "fixed\nlossss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss:fixed\\nlossss",
+      "continuation_preview": "fixed\\nlossss",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\01-fixed-loss\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "02-fixed-four",
+      "pair_terms": [
+        "fixed",
+        "four"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\02-fixed-four.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 496,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:four: four: ",
+      "continuation": "four: four: ",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed:four: four: ",
+      "continuation_preview": "four: four: ",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "structured-experiment-json",
+      "term": "four",
+      "scaffold_prompt": "four:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "02-fixed-four",
+      "pair_terms": [
+        "fixed",
+        "four"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\02-fixed-four.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 497,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "four: four: four:",
+      "continuation": " four: four:",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "four: four: four:",
+      "continuation_preview": " four: four:",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\02-fixed-four\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "03-fixed-chain",
+      "pair_terms": [
+        "fixed",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\03-fixed-chain.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 497,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: chain\nchain",
+      "continuation": " chain\nchain",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: chain\\nchain",
+      "continuation_preview": " chain\\nchain",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "summary-evidence-chain",
+      "term": "chain",
+      "scaffold_prompt": "chain:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "03-fixed-chain",
+      "pair_terms": [
+        "fixed",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\03-fixed-chain.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "chain: chain\nchain",
+      "continuation": " chain\nchain",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "chain: chain\\nchain",
+      "continuation_preview": " chain\\nchain",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\03-fixed-chain\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "04-loss-four",
+      "pair_terms": [
+        "loss",
+        "four"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\04-loss-four.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: oour four f",
+      "continuation": " oour four f",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss: oour four f",
+      "continuation_preview": " oour four f",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "structured-experiment-json",
+      "term": "four",
+      "scaffold_prompt": "four:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "04-loss-four",
+      "pair_terms": [
+        "loss",
+        "four"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\04-loss-four.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 499,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "four: oour four f",
+      "continuation": " oour four f",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "four: oour four f",
+      "continuation_preview": " oour four f",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\04-loss-four\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "05-loss-chain",
+      "pair_terms": [
+        "loss",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\05-loss-chain.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 499,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: cssssssssss",
+      "continuation": " cssssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss: cssssssssss",
+      "continuation_preview": " cssssssssss",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "summary-evidence-chain",
+      "term": "chain",
+      "scaffold_prompt": "chain:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "05-loss-chain",
+      "pair_terms": [
+        "loss",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\05-loss-chain.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 500,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "chain:lloin:llosss",
+      "continuation": "lloin:llosss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "chain:lloin:llosss",
+      "continuation_preview": "lloin:llosss",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\05-loss-chain\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "structured-experiment-json",
+      "term": "four",
+      "scaffold_prompt": "four:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "06-four-chain",
+      "pair_terms": [
+        "four",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\06-four-chain.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 500,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "four: chain\nchain",
+      "continuation": " chain\nchain",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "four: chain\\nchain",
+      "continuation_preview": " chain\\nchain",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "summary-evidence-chain",
+      "term": "chain",
+      "scaffold_prompt": "chain:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "06-four-chain",
+      "pair_terms": [
+        "four",
+        "chain"
+      ],
+      "rebalance_corpus_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-corpora\\06-four-chain.txt",
+      "rebalance_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 501,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "chain: four\nur\ncha",
+      "continuation": " four\nur\ncha",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "chain: four\\nur\\ncha",
+      "continuation_preview": " four\\nur\\ncha",
+      "training_status": "pass",
+      "checkpoint_path": "e\\495\\解释\\model-capability-required-term-pair-rebalance\\rebalance-runs\\06-four-chain\\checkpoint.pt",
+      "checkpoint_exists": true
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "pair_rebalance_capacity_signal_only",
+    "reason": "At least one previously partial pair emitted both required terms after rebalance training.",
+    "next_action": "repeat the improved pairs across seeds before attempting three-term curricula"
+  }
+}

@@ -1,0 +1,7 @@
+pair_id,term_names,source_hit_terms,source_missed_terms,rebalance_hit_terms,rebalance_missed_terms,source_hit_count,rebalance_hit_count,hit_count_delta,source_pair_full_hit,rebalance_pair_full_hit
+01-fixed-loss,"fixed, loss",fixed,loss,"fixed, loss",,1,2,1,False,True
+02-fixed-four,"fixed, four",four,fixed,four,fixed,1,1,0,False,False
+03-fixed-chain,"fixed, chain",fixed,chain,chain,fixed,1,1,0,False,False
+04-loss-four,"loss, four",loss,four,four,loss,1,1,0,False,False
+05-loss-chain,"loss, chain",chain,loss,,"loss, chain",1,0,-1,False,False
+06-four-chain,"four, chain",chain,four,,"four, chain",1,0,-1,False,False

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v494.0.1` trains two seed-stable required terms per checkpoint to test whether the v493 single-target signal survives pair-level interference, with CI-discovered coverage aligned to the repository coverage gate.
+Version `v495.0.0` rebalances the v494 partial two-term curricula and observes the first full-hit pair, while keeping the model-quality claim limited to a local capacity signal.
+
+## Latest v495 checkpoint
+
+- Added `model_capability_required_term_pair_rebalance` reporting for selecting v494 partial pairs, rebuilding pair corpora with stronger prompt-to-term separation, and comparing before/after pair hits.
+- Added `scripts/run_model_capability_required_term_pair_rebalance.py`, which writes rebalance corpora, pair checkpoints, generation rows, before/after CSV, and JSON/text/Markdown/HTML reports.
+- Ran the real rebalance over all `6` v494 partial pairs: all `6` checkpoints trained, `12` probes ran, and `fixed/loss` became the first full-hit pair.
+- Interpreted v495 conservatively: `pair_full_hit_count` improved from `0` to `1`, but total probe hits moved from `6` to `5`, so this is a local pair-capacity signal rather than broad model-quality progress.
+- Archived the v495 rebalance evidence in `e/495` and added the code explanation in `代码讲解记录_模型能力阶段/509-v495-model-capability-required-term-pair-rebalance.md`.
 
 ## Latest v494 checkpoint
 

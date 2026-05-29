@@ -1,0 +1,4322 @@
+MiniGPT required-term pair rebalance corpus.
+Each prompt must keep its own target even when two targets share one checkpoint.
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+fixed:fixed
+fixed: fixed
+fixed prompt keeps fixed
+four:four
+four: four
+four prompt keeps four
+four:four
+four: four
+four prompt keeps four
+fixed:fixed
+pair fixed four prompt fixed: target fixed
+fixed:fixed not four
+four:four
+pair fixed four prompt four: target four
+four:four not fixed

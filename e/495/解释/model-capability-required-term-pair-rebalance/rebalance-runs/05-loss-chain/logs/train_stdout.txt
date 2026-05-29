@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=80526 vocab_size=32
+parameters=52,672
+data_source=data:e\495\解释\model-capability-required-term-pair-rebalance\rebalance-corpora\05-loss-chain.txt
+step=    1 train_loss=2.7920 val_loss=2.7962
+step=  400 train_loss=0.8080 val_loss=0.9568
+step=  800 train_loss=1.0163 val_loss=0.9153
+step= 1200 train_loss=1.2452 val_loss=1.1314
+step= 1600 train_loss=1.4007 val_loss=1.3592
+saved=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\05-loss-chain
+history=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\05-loss-chain\metrics.jsonl
+manifest=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\05-loss-chain\run_manifest.json
+sample=e\495\解释\model-capability-required-term-pair-rebalance\rebalance-runs\05-loss-chain\sample.txt
