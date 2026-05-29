@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v488.0.0` trains a tiny checkpoint from the v487 balanced corpus and diagnoses why continuation uptake still does not appear.
+Version `v489.0.0` rebuilds the required-term corpus so every training row starts with the scaffold prompt that v488 probes use.
+
+## Latest v489 checkpoint
+
+- Added `model_capability_required_term_prompt_leading_corpus` reporting for rebuilding the v487 balanced corpus after v488 found `prompt_alignment_ready=False`.
+- Added `scripts/run_model_capability_required_term_prompt_leading_corpus.py`, which resolves v488 back to v487, generates prompt-leading rows, and writes JSON/CSV/text/Markdown/HTML evidence.
+- Ran the real v489 corpus rebuild from `e/488`: prompt-leading lines improved from `0` to `360`, `prompt_alignment_ready=True`, `unique_line_rate=1.0`, and `term_line_spread=0`.
+- Archived the v489 prompt-leading corpus evidence in `e/489` and added the code explanation in `代码讲解记录_模型能力阶段/503-v489-model-capability-required-term-prompt-leading-corpus.md`.
 
 ## Latest v488 checkpoint
 

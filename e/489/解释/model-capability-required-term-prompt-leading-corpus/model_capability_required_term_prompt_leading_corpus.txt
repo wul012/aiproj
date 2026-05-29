@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_prompt_leading_corpus_candidate_ready
+prompt_leading_corpus_decision=prompt_leading_corpus_candidate_ready
+term_count=9
+line_count=363
+unique_line_rate=1.0
+term_line_spread=0
+prompt_alignment_ready=True
+prompt_leading_line_count=360
+previous_prompt_alignment_ready=False
+previous_prompt_leading_line_count=0
+model_quality_claim=not_claimed
+next_action=train a tiny checkpoint on this prompt-leading corpus and compare continuation uptake

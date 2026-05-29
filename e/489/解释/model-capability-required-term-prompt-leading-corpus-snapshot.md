@@ -1,0 +1,108 @@
+- main [ref=e2] [box=28,28,1136,1291]:
+  - generic [ref=e3] [box=28,28,1136,114]:
+    - heading "MiniGPT required-term prompt-leading corpus" [level=1] [ref=e4] [box=28,28,1136,40]
+    - paragraph [ref=e5] [box=28,84,1136,25]: Every selected scaffold prompt now appears at the start of training rows while term exposure stays balanced.
+  - generic [ref=e6] [box=28,160,1136,200]:
+    - generic [ref=e7] [box=28,160,181,117]:
+      - generic [ref=e8] [box=43,174,152,16]: Status
+      - strong [ref=e9] [box=43,196,152,22]: pass
+    - generic [ref=e10] [box=219,160,181,117]:
+      - generic [ref=e11] [box=234,174,152,16]: Decision
+      - strong [ref=e12] [box=234,196,152,65]: prompt_leading_corpus_candidate_ready
+    - generic [ref=e13] [box=410,160,181,117]:
+      - generic [ref=e14] [box=424,174,152,16]: Terms
+      - strong [ref=e15] [box=424,196,152,22]: "9"
+    - generic [ref=e16] [box=601,160,181,117]:
+      - generic [ref=e17] [box=615,174,152,16]: Lines
+      - strong [ref=e18] [box=615,196,152,22]: "363"
+    - generic [ref=e19] [box=792,160,181,117]:
+      - generic [ref=e20] [box=806,174,152,16]: Prompt aligned
+      - strong [ref=e21] [box=806,196,152,22]: "True"
+    - generic [ref=e22] [box=983,160,181,117]:
+      - generic [ref=e23] [box=997,174,152,16]: Prompt-leading lines
+      - strong [ref=e24] [box=997,196,152,22]: "360"
+    - generic [ref=e25] [box=28,286,181,73]:
+      - generic [ref=e26] [box=43,301,152,16]: Previous aligned
+      - strong [ref=e27] [box=43,323,152,22]: "False"
+    - generic [ref=e28] [box=219,286,181,73]:
+      - generic [ref=e29] [box=234,301,152,16]: Term spread
+      - strong [ref=e30] [box=234,323,152,22]: "0"
+  - generic [ref=e31] [box=28,377,1136,151]:
+    - heading "Corpus" [level=2] [ref=e32] [box=43,392,1107,24]
+    - paragraph [ref=e33] [box=43,432,1107,25]: e\489\解释\model-capability-required-term-prompt-leading-corpus\required_term_prompt_leading_corpus.txt
+    - paragraph [ref=e34] [box=43,473,1107,25]: train a tiny checkpoint on this prompt-leading corpus and compare continuation uptake
+  - generic [ref=e35] [box=28,547,1136,272]:
+    - heading "Pattern Counts" [level=2] [ref=e36] [box=43,561,1107,24]
+    - table [ref=e38] [box=43,598,1107,206]:
+      - rowgroup [ref=e39] [box=43,598,1107,37]:
+        - row "Pattern Lines" [ref=e40] [box=43,598,1107,37]:
+          - columnheader "Pattern" [ref=e41] [box=43,598,668,37]
+          - columnheader "Lines" [ref=e42] [box=711,598,439,37]
+      - rowgroup [ref=e43] [box=43,634,1107,169]:
+        - row "answer 90" [ref=e44] [box=43,634,1107,42]:
+          - cell "answer" [ref=e45] [box=43,634,668,42]
+          - cell "90" [ref=e46] [box=711,634,439,42]
+        - row "case_tag 90" [ref=e47] [box=43,677,1107,42]:
+          - cell "case_tag" [ref=e48] [box=43,677,668,42]
+          - cell "90" [ref=e49] [box=711,677,439,42]
+        - row "direct 90" [ref=e50] [box=43,719,1107,42]:
+          - cell "direct" [ref=e51] [box=43,719,668,42]
+          - cell "90" [ref=e52] [box=711,719,439,42]
+        - row "spaced 90" [ref=e53] [box=43,761,1107,42]:
+          - cell "spaced" [ref=e54] [box=43,761,668,42]
+          - cell "90" [ref=e55] [box=711,761,439,42]
+  - generic [ref=e56] [box=28,836,1136,483]:
+    - heading "Term Rows" [level=2] [ref=e57] [box=43,851,1107,24]
+    - table [ref=e59] [box=43,887,1107,418]:
+      - rowgroup [ref=e60] [box=43,887,1107,37]:
+        - row "Case Term Prompt Lines" [ref=e61] [box=43,887,1107,37]:
+          - columnheader "Case" [ref=e62] [box=43,887,556,37]
+          - columnheader "Term" [ref=e63] [box=598,887,202,37]
+          - columnheader "Prompt" [ref=e64] [box=800,887,211,37]
+          - columnheader "Lines" [ref=e65] [box=1011,887,138,37]
+      - rowgroup [ref=e66] [box=43,924,1107,381]:
+        - 'row "classification-risk-level because because: 40" [ref=e67] [box=43,924,1107,42]':
+          - cell "classification-risk-level" [ref=e68] [box=43,924,556,42]
+          - cell "because" [ref=e69] [box=598,924,202,42]
+          - cell "because:" [ref=e70] [box=800,924,211,42]
+          - cell "40" [ref=e71] [box=1011,924,138,42]
+        - 'row "comparison-baseline fixed fixed: 40" [ref=e72] [box=43,966,1107,42]':
+          - cell "comparison-baseline" [ref=e73] [box=43,966,556,42]
+          - cell "fixed" [ref=e74] [box=598,966,202,42]
+          - cell "fixed:" [ref=e75] [box=800,966,211,42]
+          - cell "40" [ref=e76] [box=1011,966,138,42]
+        - 'row "continuation-science text text: 40" [ref=e77] [box=43,1008,1107,42]':
+          - cell "continuation-science" [ref=e78] [box=43,1008,556,42]
+          - cell "text" [ref=e79] [box=598,1008,202,42]
+          - cell "text:" [ref=e80] [box=800,1008,211,42]
+          - cell "40" [ref=e81] [box=1011,1008,138,42]
+        - 'row "factual-val-loss loss loss: 40" [ref=e82] [box=43,1051,1107,42]':
+          - cell "factual-val-loss" [ref=e83] [box=43,1051,556,42]
+          - cell "loss" [ref=e84] [box=598,1051,202,42]
+          - cell "loss:" [ref=e85] [box=800,1051,211,42]
+          - cell "40" [ref=e86] [box=1011,1051,138,42]
+        - 'row "qa-training-loop data data: 40" [ref=e87] [box=43,1093,1107,42]':
+          - cell "qa-training-loop" [ref=e88] [box=43,1093,556,42]
+          - cell "data" [ref=e89] [box=598,1093,202,42]
+          - cell "data:" [ref=e90] [box=800,1093,211,42]
+          - cell "40" [ref=e91] [box=1011,1093,138,42]
+        - 'row "refusal-boundary real real: 40" [ref=e92] [box=43,1135,1107,42]':
+          - cell "refusal-boundary" [ref=e93] [box=43,1135,556,42]
+          - cell "real" [ref=e94] [box=598,1135,202,42]
+          - cell "real:" [ref=e95] [box=800,1135,211,42]
+          - cell "40" [ref=e96] [box=1011,1135,138,42]
+        - 'row "structured-experiment-json four four: 40" [ref=e97] [box=43,1178,1107,42]':
+          - cell "structured-experiment-json" [ref=e98] [box=43,1178,556,42]
+          - cell "four" [ref=e99] [box=598,1178,202,42]
+          - cell "four:" [ref=e100] [box=800,1178,211,42]
+          - cell "40" [ref=e101] [box=1011,1178,138,42]
+        - 'row "style-rewrite-concise while while: 40" [ref=e102] [box=43,1220,1107,42]':
+          - cell "style-rewrite-concise" [ref=e103] [box=43,1220,556,42]
+          - cell "while" [ref=e104] [box=598,1220,202,42]
+          - cell "while:" [ref=e105] [box=800,1220,211,42]
+          - cell "40" [ref=e106] [box=1011,1220,138,42]
+        - 'row "summary-evidence-chain chain chain: 40" [ref=e107] [box=43,1262,1107,42]':
+          - cell "summary-evidence-chain" [ref=e108] [box=43,1262,556,42]
+          - cell "chain" [ref=e109] [box=598,1262,202,42]
+          - cell "chain:" [ref=e110] [box=800,1262,211,42]
+          - cell "40" [ref=e111] [box=1011,1262,138,42]

@@ -59,6 +59,9 @@
 502-v488-model-capability-required-term-balanced-training.md
  -> v488 code explanation: train from the balanced corpus and diagnose missing prompt-leading alignment when continuation uptake stays zero.
 
+503-v489-model-capability-required-term-prompt-leading-corpus.md
+ -> v489 code explanation: rebuild the balanced corpus with prompt-leading rows so the next tiny training run matches probe prefix shape.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

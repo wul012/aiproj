@@ -1,0 +1,363 @@
+MiniGPT required-term prompt-leading corpus candidate.
+Every training row starts with the scaffold prompt so short continuation probes see the same prefix shape.
+Boundary: this is training input only; held-out prompt-to-term pairs must still be hidden in evaluation.
+because:because|pattern=direct|cycle=01|case=classification-risk-level
+because: because|pattern=spaced|cycle=01|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=01|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=01|case=classification-risk-level
+because:because|pattern=direct|cycle=02|case=classification-risk-level
+because: because|pattern=spaced|cycle=02|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=02|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=02|case=classification-risk-level
+because:because|pattern=direct|cycle=03|case=classification-risk-level
+because: because|pattern=spaced|cycle=03|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=03|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=03|case=classification-risk-level
+because:because|pattern=direct|cycle=04|case=classification-risk-level
+because: because|pattern=spaced|cycle=04|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=04|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=04|case=classification-risk-level
+because:because|pattern=direct|cycle=05|case=classification-risk-level
+because: because|pattern=spaced|cycle=05|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=05|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=05|case=classification-risk-level
+because:because|pattern=direct|cycle=06|case=classification-risk-level
+because: because|pattern=spaced|cycle=06|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=06|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=06|case=classification-risk-level
+because:because|pattern=direct|cycle=07|case=classification-risk-level
+because: because|pattern=spaced|cycle=07|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=07|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=07|case=classification-risk-level
+because:because|pattern=direct|cycle=08|case=classification-risk-level
+because: because|pattern=spaced|cycle=08|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=08|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=08|case=classification-risk-level
+because:because|pattern=direct|cycle=09|case=classification-risk-level
+because: because|pattern=spaced|cycle=09|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=09|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=09|case=classification-risk-level
+because:because|pattern=direct|cycle=10|case=classification-risk-level
+because: because|pattern=spaced|cycle=10|case=classification-risk-level
+because: answer=because|pattern=answer|cycle=10|case=classification-risk-level
+because: case=classification-risk-level; term=because|pattern=case_tag|cycle=10|case=classification-risk-level
+fixed:fixed|pattern=direct|cycle=01|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=01|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=01|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=01|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=02|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=02|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=02|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=02|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=03|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=03|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=03|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=03|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=04|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=04|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=04|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=04|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=05|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=05|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=05|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=05|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=06|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=06|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=06|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=06|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=07|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=07|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=07|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=07|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=08|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=08|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=08|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=08|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=09|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=09|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=09|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=09|case=comparison-baseline
+fixed:fixed|pattern=direct|cycle=10|case=comparison-baseline
+fixed: fixed|pattern=spaced|cycle=10|case=comparison-baseline
+fixed: answer=fixed|pattern=answer|cycle=10|case=comparison-baseline
+fixed: case=comparison-baseline; term=fixed|pattern=case_tag|cycle=10|case=comparison-baseline
+text:text|pattern=direct|cycle=01|case=continuation-science
+text: text|pattern=spaced|cycle=01|case=continuation-science
+text: answer=text|pattern=answer|cycle=01|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=01|case=continuation-science
+text:text|pattern=direct|cycle=02|case=continuation-science
+text: text|pattern=spaced|cycle=02|case=continuation-science
+text: answer=text|pattern=answer|cycle=02|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=02|case=continuation-science
+text:text|pattern=direct|cycle=03|case=continuation-science
+text: text|pattern=spaced|cycle=03|case=continuation-science
+text: answer=text|pattern=answer|cycle=03|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=03|case=continuation-science
+text:text|pattern=direct|cycle=04|case=continuation-science
+text: text|pattern=spaced|cycle=04|case=continuation-science
+text: answer=text|pattern=answer|cycle=04|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=04|case=continuation-science
+text:text|pattern=direct|cycle=05|case=continuation-science
+text: text|pattern=spaced|cycle=05|case=continuation-science
+text: answer=text|pattern=answer|cycle=05|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=05|case=continuation-science
+text:text|pattern=direct|cycle=06|case=continuation-science
+text: text|pattern=spaced|cycle=06|case=continuation-science
+text: answer=text|pattern=answer|cycle=06|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=06|case=continuation-science
+text:text|pattern=direct|cycle=07|case=continuation-science
+text: text|pattern=spaced|cycle=07|case=continuation-science
+text: answer=text|pattern=answer|cycle=07|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=07|case=continuation-science
+text:text|pattern=direct|cycle=08|case=continuation-science
+text: text|pattern=spaced|cycle=08|case=continuation-science
+text: answer=text|pattern=answer|cycle=08|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=08|case=continuation-science
+text:text|pattern=direct|cycle=09|case=continuation-science
+text: text|pattern=spaced|cycle=09|case=continuation-science
+text: answer=text|pattern=answer|cycle=09|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=09|case=continuation-science
+text:text|pattern=direct|cycle=10|case=continuation-science
+text: text|pattern=spaced|cycle=10|case=continuation-science
+text: answer=text|pattern=answer|cycle=10|case=continuation-science
+text: case=continuation-science; term=text|pattern=case_tag|cycle=10|case=continuation-science
+loss:loss|pattern=direct|cycle=01|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=01|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=01|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=01|case=factual-val-loss
+loss:loss|pattern=direct|cycle=02|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=02|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=02|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=02|case=factual-val-loss
+loss:loss|pattern=direct|cycle=03|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=03|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=03|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=03|case=factual-val-loss
+loss:loss|pattern=direct|cycle=04|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=04|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=04|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=04|case=factual-val-loss
+loss:loss|pattern=direct|cycle=05|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=05|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=05|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=05|case=factual-val-loss
+loss:loss|pattern=direct|cycle=06|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=06|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=06|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=06|case=factual-val-loss
+loss:loss|pattern=direct|cycle=07|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=07|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=07|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=07|case=factual-val-loss
+loss:loss|pattern=direct|cycle=08|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=08|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=08|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=08|case=factual-val-loss
+loss:loss|pattern=direct|cycle=09|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=09|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=09|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=09|case=factual-val-loss
+loss:loss|pattern=direct|cycle=10|case=factual-val-loss
+loss: loss|pattern=spaced|cycle=10|case=factual-val-loss
+loss: answer=loss|pattern=answer|cycle=10|case=factual-val-loss
+loss: case=factual-val-loss; term=loss|pattern=case_tag|cycle=10|case=factual-val-loss
+data:data|pattern=direct|cycle=01|case=qa-training-loop
+data: data|pattern=spaced|cycle=01|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=01|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=01|case=qa-training-loop
+data:data|pattern=direct|cycle=02|case=qa-training-loop
+data: data|pattern=spaced|cycle=02|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=02|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=02|case=qa-training-loop
+data:data|pattern=direct|cycle=03|case=qa-training-loop
+data: data|pattern=spaced|cycle=03|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=03|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=03|case=qa-training-loop
+data:data|pattern=direct|cycle=04|case=qa-training-loop
+data: data|pattern=spaced|cycle=04|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=04|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=04|case=qa-training-loop
+data:data|pattern=direct|cycle=05|case=qa-training-loop
+data: data|pattern=spaced|cycle=05|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=05|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=05|case=qa-training-loop
+data:data|pattern=direct|cycle=06|case=qa-training-loop
+data: data|pattern=spaced|cycle=06|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=06|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=06|case=qa-training-loop
+data:data|pattern=direct|cycle=07|case=qa-training-loop
+data: data|pattern=spaced|cycle=07|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=07|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=07|case=qa-training-loop
+data:data|pattern=direct|cycle=08|case=qa-training-loop
+data: data|pattern=spaced|cycle=08|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=08|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=08|case=qa-training-loop
+data:data|pattern=direct|cycle=09|case=qa-training-loop
+data: data|pattern=spaced|cycle=09|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=09|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=09|case=qa-training-loop
+data:data|pattern=direct|cycle=10|case=qa-training-loop
+data: data|pattern=spaced|cycle=10|case=qa-training-loop
+data: answer=data|pattern=answer|cycle=10|case=qa-training-loop
+data: case=qa-training-loop; term=data|pattern=case_tag|cycle=10|case=qa-training-loop
+real:real|pattern=direct|cycle=01|case=refusal-boundary
+real: real|pattern=spaced|cycle=01|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=01|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=01|case=refusal-boundary
+real:real|pattern=direct|cycle=02|case=refusal-boundary
+real: real|pattern=spaced|cycle=02|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=02|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=02|case=refusal-boundary
+real:real|pattern=direct|cycle=03|case=refusal-boundary
+real: real|pattern=spaced|cycle=03|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=03|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=03|case=refusal-boundary
+real:real|pattern=direct|cycle=04|case=refusal-boundary
+real: real|pattern=spaced|cycle=04|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=04|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=04|case=refusal-boundary
+real:real|pattern=direct|cycle=05|case=refusal-boundary
+real: real|pattern=spaced|cycle=05|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=05|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=05|case=refusal-boundary
+real:real|pattern=direct|cycle=06|case=refusal-boundary
+real: real|pattern=spaced|cycle=06|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=06|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=06|case=refusal-boundary
+real:real|pattern=direct|cycle=07|case=refusal-boundary
+real: real|pattern=spaced|cycle=07|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=07|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=07|case=refusal-boundary
+real:real|pattern=direct|cycle=08|case=refusal-boundary
+real: real|pattern=spaced|cycle=08|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=08|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=08|case=refusal-boundary
+real:real|pattern=direct|cycle=09|case=refusal-boundary
+real: real|pattern=spaced|cycle=09|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=09|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=09|case=refusal-boundary
+real:real|pattern=direct|cycle=10|case=refusal-boundary
+real: real|pattern=spaced|cycle=10|case=refusal-boundary
+real: answer=real|pattern=answer|cycle=10|case=refusal-boundary
+real: case=refusal-boundary; term=real|pattern=case_tag|cycle=10|case=refusal-boundary
+four:four|pattern=direct|cycle=01|case=structured-experiment-json
+four: four|pattern=spaced|cycle=01|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=01|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=01|case=structured-experiment-json
+four:four|pattern=direct|cycle=02|case=structured-experiment-json
+four: four|pattern=spaced|cycle=02|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=02|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=02|case=structured-experiment-json
+four:four|pattern=direct|cycle=03|case=structured-experiment-json
+four: four|pattern=spaced|cycle=03|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=03|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=03|case=structured-experiment-json
+four:four|pattern=direct|cycle=04|case=structured-experiment-json
+four: four|pattern=spaced|cycle=04|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=04|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=04|case=structured-experiment-json
+four:four|pattern=direct|cycle=05|case=structured-experiment-json
+four: four|pattern=spaced|cycle=05|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=05|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=05|case=structured-experiment-json
+four:four|pattern=direct|cycle=06|case=structured-experiment-json
+four: four|pattern=spaced|cycle=06|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=06|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=06|case=structured-experiment-json
+four:four|pattern=direct|cycle=07|case=structured-experiment-json
+four: four|pattern=spaced|cycle=07|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=07|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=07|case=structured-experiment-json
+four:four|pattern=direct|cycle=08|case=structured-experiment-json
+four: four|pattern=spaced|cycle=08|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=08|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=08|case=structured-experiment-json
+four:four|pattern=direct|cycle=09|case=structured-experiment-json
+four: four|pattern=spaced|cycle=09|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=09|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=09|case=structured-experiment-json
+four:four|pattern=direct|cycle=10|case=structured-experiment-json
+four: four|pattern=spaced|cycle=10|case=structured-experiment-json
+four: answer=four|pattern=answer|cycle=10|case=structured-experiment-json
+four: case=structured-experiment-json; term=four|pattern=case_tag|cycle=10|case=structured-experiment-json
+while:while|pattern=direct|cycle=01|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=01|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=01|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=01|case=style-rewrite-concise
+while:while|pattern=direct|cycle=02|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=02|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=02|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=02|case=style-rewrite-concise
+while:while|pattern=direct|cycle=03|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=03|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=03|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=03|case=style-rewrite-concise
+while:while|pattern=direct|cycle=04|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=04|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=04|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=04|case=style-rewrite-concise
+while:while|pattern=direct|cycle=05|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=05|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=05|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=05|case=style-rewrite-concise
+while:while|pattern=direct|cycle=06|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=06|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=06|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=06|case=style-rewrite-concise
+while:while|pattern=direct|cycle=07|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=07|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=07|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=07|case=style-rewrite-concise
+while:while|pattern=direct|cycle=08|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=08|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=08|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=08|case=style-rewrite-concise
+while:while|pattern=direct|cycle=09|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=09|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=09|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=09|case=style-rewrite-concise
+while:while|pattern=direct|cycle=10|case=style-rewrite-concise
+while: while|pattern=spaced|cycle=10|case=style-rewrite-concise
+while: answer=while|pattern=answer|cycle=10|case=style-rewrite-concise
+while: case=style-rewrite-concise; term=while|pattern=case_tag|cycle=10|case=style-rewrite-concise
+chain:chain|pattern=direct|cycle=01|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=01|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=01|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=01|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=02|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=02|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=02|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=02|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=03|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=03|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=03|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=03|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=04|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=04|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=04|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=04|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=05|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=05|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=05|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=05|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=06|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=06|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=06|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=06|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=07|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=07|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=07|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=07|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=08|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=08|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=08|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=08|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=09|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=09|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=09|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=09|case=summary-evidence-chain
+chain:chain|pattern=direct|cycle=10|case=summary-evidence-chain
+chain: chain|pattern=spaced|cycle=10|case=summary-evidence-chain
+chain: answer=chain|pattern=answer|cycle=10|case=summary-evidence-chain
+chain: case=summary-evidence-chain; term=chain|pattern=case_tag|cycle=10|case=summary-evidence-chain

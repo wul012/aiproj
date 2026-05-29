@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term prompt-leading corpus</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f7f7f2; color: #20251c; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #e0e5da; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #62695c; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e0e5da; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(32, 37, 28, 0.05); }
+.card span { display: block; color: #697160; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { text-align: left; border-bottom: 1px solid #e7ebdf; padding: 10px; vertical-align: top; }
+th { color: #555d50; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term prompt-leading corpus</h1><p>Every selected scaffold prompt now appears at the start of training rows while term exposure stays balanced.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>prompt_leading_corpus_candidate_ready</strong></div><div class="card"><span>Terms</span><strong>9</strong></div><div class="card"><span>Lines</span><strong>363</strong></div><div class="card"><span>Prompt aligned</span><strong>True</strong></div><div class="card"><span>Prompt-leading lines</span><strong>360</strong></div><div class="card"><span>Previous aligned</span><strong>False</strong></div><div class="card"><span>Term spread</span><strong>0</strong></div></section>
+<section class="panel"><h2>Corpus</h2><p>e\489\解释\model-capability-required-term-prompt-leading-corpus\required_term_prompt_leading_corpus.txt</p><p>train a tiny checkpoint on this prompt-leading corpus and compare continuation uptake</p></section>
+<section class="panel"><h2>Pattern Counts</h2><div class="table-wrap"><table><thead><tr><th>Pattern</th><th>Lines</th></tr></thead><tbody><tr><td>answer</td><td>90</td></tr>
+<tr><td>case_tag</td><td>90</td></tr>
+<tr><td>direct</td><td>90</td></tr>
+<tr><td>spaced</td><td>90</td></tr></tbody></table></div></section>
+<section class="panel">
+<h2>Term Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Term</th><th>Prompt</th><th>Lines</th></tr></thead>
+<tbody><tr><td>classification-risk-level</td><td>because</td><td>because:</td><td>40</td></tr>
+<tr><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>40</td></tr>
+<tr><td>continuation-science</td><td>text</td><td>text:</td><td>40</td></tr>
+<tr><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>40</td></tr>
+<tr><td>qa-training-loop</td><td>data</td><td>data:</td><td>40</td></tr>
+<tr><td>refusal-boundary</td><td>real</td><td>real:</td><td>40</td></tr>
+<tr><td>structured-experiment-json</td><td>four</td><td>four:</td><td>40</td></tr>
+<tr><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>40</td></tr>
+<tr><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>40</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

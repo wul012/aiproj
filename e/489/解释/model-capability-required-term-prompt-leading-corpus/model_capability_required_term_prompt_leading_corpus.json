@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term prompt-leading corpus",
+  "generated_at": "2026-05-29T11:52:27Z",
+  "status": "pass",
+  "decision": "required_term_prompt_leading_corpus_candidate_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_report": "e\\488\\解释\\model-capability-required-term-balanced-training\\model_capability_required_term_balanced_training.json",
+  "out_dir": "e\\489\\解释\\model-capability-required-term-prompt-leading-corpus",
+  "settings": {
+    "repeat": 10,
+    "patterns": [
+      "direct",
+      "spaced",
+      "answer",
+      "case_tag"
+    ],
+    "pattern_count": 4,
+    "selection_strategy": "reuse v487 unique required-term rows and force every training row to start with the scaffold prompt",
+    "training_boundary": "candidate corpus only; downstream training and holdout checks must still be rerun"
+  },
+  "corpus": {
+    "path": "e\\489\\解释\\model-capability-required-term-prompt-leading-corpus\\required_term_prompt_leading_corpus.txt",
+    "char_count": 26357,
+    "line_count": 363,
+    "repeat": 10,
+    "vocab_boundary": "all selected terms are visible because this is a training candidate, not a held-out evaluation corpus"
+  },
+  "summary": {
+    "prompt_leading_corpus_decision": "prompt_leading_corpus_candidate_ready",
+    "term_count": 9,
+    "unique_term_count": 9,
+    "repeat": 10,
+    "pattern_count": 4,
+    "line_count": 363,
+    "unique_line_count": 363,
+    "duplicate_line_count": 0,
+    "unique_line_rate": 1.0,
+    "term_line_min": 40,
+    "term_line_max": 40,
+    "term_line_spread": 0,
+    "term_line_balance_ready": true,
+    "prompt_leading_line_count": 360,
+    "prompt_aligned_term_count": 9,
+    "prompt_alignment_ready": true,
+    "previous_prompt_alignment_ready": false,
+    "previous_prompt_leading_line_count": 0,
+    "pattern_counts": {
+      "answer": 90,
+      "case_tag": 90,
+      "direct": 90,
+      "spaced": 90
+    },
+    "term_prompt_leading_counts": {
+      "because": 40,
+      "chain": 40,
+      "data": 40,
+      "fixed": 40,
+      "four": 40,
+      "loss": 40,
+      "real": 40,
+      "text": 40,
+      "while": 40
+    }
+  },
+  "term_rows": [
+    {
+      "case": "classification-risk-level",
+      "term": "because",
+      "scaffold_prompt": "because:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "continuation-science",
+      "term": "text",
+      "scaffold_prompt": "text:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "qa-training-loop",
+      "term": "data",
+      "scaffold_prompt": "data:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "refusal-boundary",
+      "term": "real",
+      "scaffold_prompt": "real:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "structured-experiment-json",
+      "term": "four",
+      "scaffold_prompt": "four:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "style-rewrite-concise",
+      "term": "while",
+      "scaffold_prompt": "while:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    },
+    {
+      "case": "summary-evidence-chain",
+      "term": "chain",
+      "scaffold_prompt": "chain:",
+      "line_count": 40,
+      "expected_line_count": 40,
+      "pattern_count": 4,
+      "repeat": 10
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Every selected scaffold prompt now appears at the start of training rows while term exposure stays balanced.",
+    "next_action": "train a tiny checkpoint on this prompt-leading corpus and compare continuation uptake"
+  }
+}
