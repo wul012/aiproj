@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v491.0.0` simplifies the required-term corpus to direct prompt-to-term rows and reruns tiny training against the v490 no-uptake baseline.
+Version `v492.0.0` trains one tiny checkpoint per required term to isolate whether the model has single-target prompt-to-term capacity.
+
+## Latest v492 checkpoint
+
+- Added `model_capability_required_term_one_term_isolation` reporting for training one checkpoint per required term and comparing against the v491 multi-term direct-prompt baseline.
+- Added `scripts/run_model_capability_required_term_one_term_isolation.py`, which writes one-term corpora, per-term training evidence, generation rows, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real one-term isolation with `repeat=200`, `max_iters=1200`, `n_embd=64`, and `generation_seed=492`: all `9` checkpoints trained, and `5/9` isolated terms produced continuation hits.
+- Interpreted v492 as a single-target capacity signal only: tiny GPT can learn some isolated `prompt -> term` mappings, while v491 showed the same model still fails when all terms compete in one training corpus.
+- Archived the v492 one-term isolation evidence in `e/492` and added the code explanation in `代码讲解记录_模型能力阶段/506-v492-model-capability-required-term-one-term-isolation.md`.
 
 ## Latest v491 checkpoint
 

@@ -93,6 +93,10 @@ e/490/解释/说明.md
 e/491/图片
 e/491/解释/说明.md
  -> v491 model capability required-term direct prompt training 的运行截图和解释
+
+e/492/图片
+e/492/解释/说明.md
+ -> v492 model capability required-term one-term isolation 的运行截图和解释
 ```
 
 写入规则：

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term one-term isolation</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f2; color: #182220; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dde1d5; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5b675f; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dde1d5; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(24, 34, 32, 0.05); }
+.card span { display: block; color: #68736c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 900px; }
+th, td { text-align: left; border-bottom: 1px solid #e6eadf; padding: 10px; vertical-align: top; }
+th { color: #52605a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term one-term isolation</h1><p>At least one one-term checkpoint emitted its required term in continuation, isolating single-target capacity.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>one_term_isolation_capacity_observed</strong></div><div class="card"><span>Terms</span><strong>9</strong></div><div class="card"><span>Runs</span><strong>9</strong></div><div class="card"><span>Training pass</span><strong>9</strong></div><div class="card"><span>Checkpoints</span><strong>9</strong></div><div class="card"><span>Continuation hits</span><strong>5</strong></div><div class="card"><span>Terms with hits</span><strong>5</strong></div><div class="card"><span>Hit delta</span><strong>5</strong></div><div class="card"><span>Capacity observed</span><strong>True</strong></div></section>
+<section class="panel"><h2>Isolation Boundary</h2><p>Each row below used a separate one-term corpus and checkpoint. Previous continuation hits: 0; current continuation hits: 5; delta: 5.</p><p>repeat successful one-term cases across seeds before returning to multi-term training</p></section>
+<section class="panel">
+<h2>One-Term Runs</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Run</th><th>Term</th><th>Prompt</th><th>Training</th><th>Checkpoint</th><th>Continuation hit</th><th>Preview</th></tr></thead>
+<tbody><tr><td>01-because</td><td>because</td><td>because:</td><td>pass</td><td>True</td><td>0</td><td>  b ecauseca</td></tr>
+<tr><td>02-fixed</td><td>fixed</td><td>fixed:</td><td>pass</td><td>True</td><td>1</td><td>fixed:fixed:</td></tr>
+<tr><td>03-text</td><td>text</td><td>text:</td><td>pass</td><td>True</td><td>1</td><td>textetextext</td></tr>
+<tr><td>04-loss</td><td>loss</td><td>loss:</td><td>pass</td><td>True</td><td>1</td><td> ss\nlossss\nl</td></tr>
+<tr><td>05-data</td><td>data</td><td>data:</td><td>pass</td><td>True</td><td>0</td><td> a: a: da: a</td></tr>
+<tr><td>06-real</td><td>real</td><td>real:</td><td>pass</td><td>True</td><td>0</td><td>ral\nreaalrea</td></tr>
+<tr><td>07-four</td><td>four</td><td>four:</td><td>pass</td><td>True</td><td>1</td><td>four:four:fo</td></tr>
+<tr><td>08-while</td><td>while</td><td>while:</td><td>pass</td><td>True</td><td>0</td><td>wwwile::wwwh</td></tr>
+<tr><td>09-chain</td><td>chain</td><td>chain:</td><td>pass</td><td>True</td><td>1</td><td> chn: chain:</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

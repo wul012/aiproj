@@ -1,0 +1,6 @@
+prompt: data:
+max_new_tokens: 8
+temperature: 0.2
+top_k: 1
+
+data: a: a: d

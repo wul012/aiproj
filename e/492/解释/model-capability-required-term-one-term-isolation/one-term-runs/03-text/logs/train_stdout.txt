@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=4304 vocab_size=31
+parameters=52,608
+data_source=data:e\492\解释\model-capability-required-term-one-term-isolation\one-term-corpora\03-text.txt
+step=    1 train_loss=2.5465 val_loss=2.5672
+step=  300 train_loss=1.0390 val_loss=1.0474
+step=  600 train_loss=0.9122 val_loss=0.9133
+step=  900 train_loss=0.6349 val_loss=0.6901
+step= 1200 train_loss=0.7882 val_loss=0.7889
+saved=e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\03-text
+history=e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\03-text\metrics.jsonl
+manifest=e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\03-text\run_manifest.json
+sample=e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\03-text\sample.txt

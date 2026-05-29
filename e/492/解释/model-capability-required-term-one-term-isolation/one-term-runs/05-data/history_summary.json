@@ -1,0 +1,9 @@
+{
+  "record_count": 5,
+  "first_step": 1,
+  "last_step": 1200,
+  "best_val_step": 600,
+  "best_val_loss": 0.47574475407600403,
+  "last_train_loss": 0.6366928219795227,
+  "last_val_loss": 0.6425634622573853
+}

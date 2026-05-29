@@ -68,6 +68,9 @@
 505-v491-model-capability-required-term-direct-prompt-training.md
  -> v491 code explanation: remove metadata and extra variants, then show direct prompt-to-term training still does not produce target-specific continuation uptake.
 
+506-v492-model-capability-required-term-one-term-isolation.md
+ -> v492 code explanation: train one checkpoint per required term and show single-target capacity appears before multi-term prompt-conditioned training works.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

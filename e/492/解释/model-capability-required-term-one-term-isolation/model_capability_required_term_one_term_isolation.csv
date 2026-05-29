@@ -1,0 +1,10 @@
+one_term_run_id,case,term,scaffold_prompt,training_status,checkpoint_exists,one_term_line_count,one_term_repeat,generation_seed,prompt_hit_count,generated_hit_count,continuation_hit_count,prompt_truncated,generated_preview,continuation_preview,checkpoint_path
+01-because,classification-risk-level,because,because:,pass,True,400,200,492,1,1,0,False,because:  b ecauseca,  b ecauseca,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\01-because\checkpoint.pt
+02-fixed,comparison-baseline,fixed,fixed:,pass,True,400,200,493,1,1,1,False,fixed:fixed:fixed:,fixed:fixed:,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\02-fixed\checkpoint.pt
+03-text,continuation-science,text,text:,pass,True,400,200,494,1,1,1,False,text:textetextext,textetextext,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\03-text\checkpoint.pt
+04-loss,factual-val-loss,loss,loss:,pass,True,400,200,495,1,1,1,False,loss: ss\nlossss\nl, ss\nlossss\nl,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\04-loss\checkpoint.pt
+05-data,qa-training-loop,data,data:,pass,True,400,200,496,1,1,0,False,data: a: a: da: a, a: a: da: a,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\05-data\checkpoint.pt
+06-real,refusal-boundary,real,real:,pass,True,400,200,497,1,1,0,False,real:ral\nreaalrea,ral\nreaalrea,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\06-real\checkpoint.pt
+07-four,structured-experiment-json,four,four:,pass,True,400,200,498,1,1,1,False,four:four:four:fo,four:four:fo,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\07-four\checkpoint.pt
+08-while,style-rewrite-concise,while,while:,pass,True,400,200,499,1,1,0,False,while:wwwile::wwwh,wwwile::wwwh,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\08-while\checkpoint.pt
+09-chain,summary-evidence-chain,chain,chain:,pass,True,400,200,500,1,1,1,False,chain: chn: chain:, chn: chain:,e\492\解释\model-capability-required-term-one-term-isolation\one-term-runs\09-chain\checkpoint.pt

@@ -1,0 +1,15 @@
+status=pass
+decision=required_term_one_term_capacity_observed
+one_term_isolation_decision=one_term_isolation_capacity_observed
+term_count=9
+isolation_count=9
+training_pass_count=9
+checkpoint_exists_count=9
+continuation_hit_count=5
+term_with_continuation_hit_count=5
+term_success_rate=0.5556
+previous_continuation_hit_count=0
+continuation_hit_delta=5
+single_term_capacity_observed=True
+model_quality_claim=one_term_capacity_signal_only
+next_action=repeat successful one-term cases across seeds before returning to multi-term training

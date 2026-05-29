@@ -1,0 +1,44 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT required-term one-term isolation" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one one-term checkpoint emitted its required term in continuation, isolating single-target capacity.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: one_term_isolation_capacity_observed
+    - generic [ref=e13]:
+      - generic [ref=e14]: Terms
+      - strong [ref=e15]: "9"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Runs
+      - strong [ref=e18]: "9"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Training pass
+      - strong [ref=e21]: "9"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Checkpoints
+      - strong [ref=e24]: "9"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Continuation hits
+      - strong [ref=e27]: "5"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Terms with hits
+      - strong [ref=e30]: "5"
+    - generic [ref=e31]:
+      - generic [ref=e32]: Hit delta
+      - strong [ref=e33]: "5"
+    - generic [ref=e34]:
+      - generic [ref=e35]: Capacity observed
+      - strong [ref=e36]: "True"
+  - generic [ref=e37]:
+    - heading "Isolation Boundary" [level=2] [ref=e38]
+    - paragraph [ref=e39]: "Each row below used a separate one-term corpus and checkpoint. Previous continuation hits: 0; current continuation hits: 5; delta: 5."
+    - paragraph [ref=e40]: repeat successful one-term cases across seeds before returning to multi-term training
+  - generic [ref=e41]:
+    - heading "One-Term Runs" [level=2] [ref=e42]
+    - table [ref=e44]:
+      - rowgroup [ref=e45]
+      - rowgroup [ref=e54]
