@@ -1,0 +1,14 @@
+status=pass
+decision=required_term_micro_training_uptake_observed
+micro_training_decision=targeted_micro_training_partially_learned_required_terms
+example_count=20
+generation_count=20
+continuation_hit_count=4
+generated_hit_count=20
+case_with_continuation_hit_count=4
+continuation_hit_rate=0.2
+training_status=pass
+checkpoint_exists=True
+tokenizer_exists=True
+model_quality_claim=targeted_micro_training_signal_only
+next_action=repeat with a held-out required-term slice and compare whether the signal survives beyond copied scaffolds

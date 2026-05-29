@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=27022 vocab_size=37
+parameters=14,208
+data_source=data:e\483\解释\model-capability-required-term-micro-training\required_term_micro_corpus.txt
+step=    1 train_loss=3.4345 val_loss=3.4781
+step=   75 train_loss=2.5830 val_loss=2.8358
+step=  150 train_loss=2.2640 val_loss=2.6276
+step=  225 train_loss=2.0011 val_loss=2.5067
+step=  300 train_loss=2.0334 val_loss=2.6516
+saved=e\483\解释\model-capability-required-term-micro-training\micro-run
+history=e\483\解释\model-capability-required-term-micro-training\micro-run\metrics.jsonl
+manifest=e\483\解释\model-capability-required-term-micro-training\micro-run\run_manifest.json
+sample=e\483\解释\model-capability-required-term-micro-training\micro-run\sample.txt

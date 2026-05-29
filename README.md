@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v482.0.0` runs a real scaffolded generation probe against archived tiny checkpoints to test whether explicit required-term prompts improve uptake.
+Version `v483.0.0` runs a targeted required-term micro-training repeat and checks whether a new tiny checkpoint begins emitting required terms in continuation.
+
+## Latest v483 checkpoint
+
+- Added `model_capability_required_term_micro_training` reporting for constructing a tiny scaffold-to-term corpus from v482 probe rows, training a new tiny checkpoint, and re-running required-term scaffold generations.
+- Added `scripts/run_model_capability_required_term_micro_training.py`, which records the micro corpus, training command, checkpoint/tokenizer presence, generation rows, and JSON/CSV/text/Markdown/HTML evidence.
+- Ran the real micro-training repeat with `max_iters=300`, `block_size=8`, `n_embd=32`, `learning_rate=0.02`, and `term_repeat=24`: `20` generations, `4` continuation hits, `20` full generated hits, and `0.2` continuation hit rate.
+- Archived the v483 micro-training evidence in `e/483` and added the code explanation in `代码讲解记录_模型能力阶段/497-v483-model-capability-required-term-micro-training.md`.
 
 ## Latest v482 checkpoint
 

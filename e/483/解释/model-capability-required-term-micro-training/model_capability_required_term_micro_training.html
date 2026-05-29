@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term micro-training</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f7f4; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dfe2d8; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5f665b; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e0e4da; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #65705f; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 940px; }
+th, td { text-align: left; border-bottom: 1px solid #e5e9df; padding: 10px; vertical-align: top; }
+th { color: #4f584a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term micro-training</h1><p>A tiny model trained on explicit scaffold-to-term examples emitted required terms in continuation for at least one probe.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>targeted_micro_training_partially_learned_required_terms</strong></div><div class="card"><span>Examples</span><strong>20</strong></div><div class="card"><span>Generations</span><strong>20</strong></div><div class="card"><span>Continuation hits</span><strong>4</strong></div><div class="card"><span>Case hits</span><strong>4</strong></div><div class="card"><span>Hit rate</span><strong>0.2</strong></div><div class="card"><span>Training</span><strong>pass</strong></div></section>
+<section class="panel"><h2>Training Evidence</h2><p>Corpus: e\483\解释\model-capability-required-term-micro-training\required_term_micro_corpus.txt</p><p>Checkpoint: e\483\解释\model-capability-required-term-micro-training\micro-run\checkpoint.pt</p><p>Command: D:\python\python.exe -B D:\aiproj\scripts\train.py --data e\483\解释\model-capability-required-term-micro-training\required_term_micro_corpus.txt --out-dir e\483\解释\model-capability-required-term-micro-training\micro-run --device cpu --tokenizer char --max-iters 300 --eval-interval 75 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 32 --learning-rate 0.02 --seed 483 --sample-prompt because: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1</p></section>
+<section class="panel"><h2>Next Action</h2><p>repeat with a held-out required-term slice and compare whether the signal survives beyond copied scaffolds</p></section>
+<section class="panel">
+<h2>Required-Term Generations</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Term</th><th>Prompt</th><th>Generated hit</th><th>Continuation hit</th><th>Continuation preview</th></tr></thead>
+<tbody><tr><td>1337</td><td>classification-risk-level</td><td>because</td><td>because:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>text</td><td>text:</td><td>1</td><td>0</td><td> dtadata</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>data</td><td>data:</td><td>1</td><td>1</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>real</td><td>real:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>data</td><td>data:</td><td>1</td><td>1</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>structured-experiment-json</td><td>four</td><td>four:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>1337</td><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>1</td><td>0</td><td> dhadata</td></tr>
+<tr><td>1337</td><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>classification-risk-level</td><td>because</td><td>because:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>continuation-science</td><td>text</td><td>text:</td><td>1</td><td>0</td><td> dtadata</td></tr>
+<tr><td>2026</td><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>qa-training-loop</td><td>data</td><td>data:</td><td>1</td><td>1</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>refusal-boundary</td><td>real</td><td>real:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>self-check-missing-data</td><td>data</td><td>data:</td><td>1</td><td>1</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>structured-experiment-json</td><td>four</td><td>four:</td><td>1</td><td>0</td><td> dadatat</td></tr>
+<tr><td>2026</td><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>1</td><td>0</td><td> dhadata</td></tr>
+<tr><td>2026</td><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>1</td><td>0</td><td> dadatat</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

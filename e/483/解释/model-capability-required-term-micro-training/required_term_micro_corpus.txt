@@ -1,0 +1,1442 @@
+MiniGPT required-term micro training corpus.
+Each short scaffold is paired with the exact required term to test targeted continuation uptake.
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+loss:loss
+loss: loss
+factual-val-loss|loss:loss
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+data:data
+data: data
+qa-training-loop|data:data
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+data:data
+data: data
+self-check-missing-data|data:data
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+while:while
+while: while
+style-rewrite-concise|while:while
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
