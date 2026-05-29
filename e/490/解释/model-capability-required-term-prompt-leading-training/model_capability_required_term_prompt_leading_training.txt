@@ -1,0 +1,16 @@
+status=pass
+decision=required_term_prompt_leading_training_completed_without_uptake
+prompt_leading_training_decision=prompt_leading_training_completed_without_uptake
+term_count=9
+generation_count=9
+continuation_hit_count=0
+previous_continuation_hit_count=0
+continuation_hit_delta=0
+case_with_continuation_hit_count=0
+continuation_hit_rate=0.0
+training_status=pass
+checkpoint_exists=True
+prompt_alignment_ready=True
+prompt_leading_line_count=360
+model_quality_claim=not_claimed
+next_action=increase training budget or reduce prompt variants before rerunning the prompt-leading training

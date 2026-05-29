@@ -1,0 +1,49 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT required-term prompt-leading training" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The prompt-leading training run completed, but short continuations still did not include required terms.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: prompt_leading_training_completed_without_uptake
+    - generic [ref=e13]:
+      - generic [ref=e14]: Terms
+      - strong [ref=e15]: "9"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Generations
+      - strong [ref=e18]: "9"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Continuation hits
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Previous hits
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Hit delta
+      - strong [ref=e27]: "0"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Hit rate
+      - strong [ref=e30]: "0.0"
+    - generic [ref=e31]:
+      - generic [ref=e32]: Prompt aligned
+      - strong [ref=e33]: "True"
+    - generic [ref=e34]:
+      - generic [ref=e35]: Checkpoint
+      - strong [ref=e36]: "True"
+  - generic [ref=e37]:
+    - heading "Training Evidence" [level=2] [ref=e38]
+    - paragraph [ref=e39]: "Corpus: e\\489\\解释\\model-capability-required-term-prompt-leading-corpus\\required_term_prompt_leading_corpus.txt"
+    - paragraph [ref=e40]: "Checkpoint: e\\490\\解释\\model-capability-required-term-prompt-leading-training\\prompt-leading-run\\checkpoint.pt"
+    - paragraph [ref=e41]: "Command: D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\489\\解释\\model-capability-required-term-prompt-leading-corpus\\required_term_prompt_leading_corpus.txt --out-dir e\\490\\解释\\model-capability-required-term-prompt-leading-training\\prompt-leading-run --device cpu --tokenizer char --max-iters 600 --eval-interval 150 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 490 --sample-prompt because: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+  - generic [ref=e42]:
+    - heading "Comparison Boundary" [level=2] [ref=e43]
+    - paragraph [ref=e44]: "Previous continuation hits: 0; current continuation hits: 0; delta: 0."
+    - paragraph [ref=e45]: increase training budget or reduce prompt variants before rerunning the prompt-leading training
+  - generic [ref=e46]:
+    - heading "Required-Term Generations" [level=2] [ref=e47]
+    - table [ref=e49]:
+      - rowgroup [ref=e50]
+      - rowgroup [ref=e58]

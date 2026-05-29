@@ -62,6 +62,9 @@
 503-v489-model-capability-required-term-prompt-leading-corpus.md
  -> v489 code explanation: rebuild the balanced corpus with prompt-leading rows so the next tiny training run matches probe prefix shape.
 
+504-v490-model-capability-required-term-prompt-leading-training.md
+ -> v490 code explanation: train from the prompt-leading corpus and show prefix alignment alone still does not produce required-term continuation uptake.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

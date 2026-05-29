@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term prompt-leading training</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f7f5f0; color: #162225; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #ddd7cb; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #596466; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #ddd7cb; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(22, 34, 37, 0.05); }
+.card span { display: block; color: #66716f; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 900px; }
+th, td { text-align: left; border-bottom: 1px solid #e8e2d7; padding: 10px; vertical-align: top; }
+th { color: #52605f; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term prompt-leading training</h1><p>The prompt-leading training run completed, but short continuations still did not include required terms.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>prompt_leading_training_completed_without_uptake</strong></div><div class="card"><span>Terms</span><strong>9</strong></div><div class="card"><span>Generations</span><strong>9</strong></div><div class="card"><span>Continuation hits</span><strong>0</strong></div><div class="card"><span>Previous hits</span><strong>0</strong></div><div class="card"><span>Hit delta</span><strong>0</strong></div><div class="card"><span>Hit rate</span><strong>0.0</strong></div><div class="card"><span>Prompt aligned</span><strong>True</strong></div><div class="card"><span>Checkpoint</span><strong>True</strong></div></section>
+<section class="panel"><h2>Training Evidence</h2><p>Corpus: e\489\解释\model-capability-required-term-prompt-leading-corpus\required_term_prompt_leading_corpus.txt</p><p>Checkpoint: e\490\解释\model-capability-required-term-prompt-leading-training\prompt-leading-run\checkpoint.pt</p><p>Command: D:\python\python.exe -B D:\aiproj\scripts\train.py --data e\489\解释\model-capability-required-term-prompt-leading-corpus\required_term_prompt_leading_corpus.txt --out-dir e\490\解释\model-capability-required-term-prompt-leading-training\prompt-leading-run --device cpu --tokenizer char --max-iters 600 --eval-interval 150 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 490 --sample-prompt because: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1</p></section>
+<section class="panel"><h2>Comparison Boundary</h2><p>Previous continuation hits: 0; current continuation hits: 0; delta: 0.</p><p>increase training budget or reduce prompt variants before rerunning the prompt-leading training</p></section>
+<section class="panel">
+<h2>Required-Term Generations</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Term</th><th>Prompt</th><th>Generated hit</th><th>Continuation hit</th><th>Continuation preview</th></tr></thead>
+<tbody><tr><td>classification-risk-level</td><td>because</td><td>because:</td><td>1</td><td>0</td><td>sae|saeeeaea</td></tr>
+<tr><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>1</td><td>0</td><td>cssaessae|ea</td></tr>
+<tr><td>continuation-science</td><td>text</td><td>text:</td><td>1</td><td>0</td><td>aeeaeasassss</td></tr>
+<tr><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>1</td><td>0</td><td>sce|saeeeaea</td></tr>
+<tr><td>qa-training-loop</td><td>data</td><td>data:</td><td>1</td><td>0</td><td>sce|eaeeeaea</td></tr>
+<tr><td>refusal-boundary</td><td>real</td><td>real:</td><td>1</td><td>0</td><td>asssessaseae</td></tr>
+<tr><td>structured-experiment-json</td><td>four</td><td>four:</td><td>1</td><td>0</td><td>ssse|saeeeae</td></tr>
+<tr><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>1</td><td>0</td><td>cssassse|eae</td></tr>
+<tr><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>1</td><td>0</td><td>esssssae|eae</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

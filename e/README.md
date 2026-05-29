@@ -85,6 +85,10 @@ e/488/解释/说明.md
 e/489/图片
 e/489/解释/说明.md
  -> v489 model capability required-term prompt-leading corpus 的运行截图和解释
+
+e/490/图片
+e/490/解释/说明.md
+ -> v490 model capability required-term prompt-leading training 的运行截图和解释
 ```
 
 写入规则：

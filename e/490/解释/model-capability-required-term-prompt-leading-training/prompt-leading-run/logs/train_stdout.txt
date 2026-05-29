@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=26357 vocab_size=51
+parameters=53,888
+data_source=data:e\489\解释\model-capability-required-term-prompt-leading-corpus\required_term_prompt_leading_corpus.txt
+step=    1 train_loss=3.6202 val_loss=3.6514
+step=  150 train_loss=3.0158 val_loss=3.2380
+step=  300 train_loss=2.9560 val_loss=3.2979
+step=  450 train_loss=3.0734 val_loss=3.1538
+step=  600 train_loss=2.9469 val_loss=3.0656
+saved=e\490\解释\model-capability-required-term-prompt-leading-training\prompt-leading-run
+history=e\490\解释\model-capability-required-term-prompt-leading-training\prompt-leading-run\metrics.jsonl
+manifest=e\490\解释\model-capability-required-term-prompt-leading-training\prompt-leading-run\run_manifest.json
+sample=e\490\解释\model-capability-required-term-prompt-leading-training\prompt-leading-run\sample.txt

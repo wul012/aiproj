@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v489.0.0` rebuilds the required-term corpus so every training row starts with the scaffold prompt that v488 probes use.
+Version `v490.0.0` trains a tiny checkpoint from the v489 prompt-leading corpus and compares required-term continuation uptake against the v488 baseline.
+
+## Latest v490 checkpoint
+
+- Added `model_capability_required_term_prompt_leading_training` reporting for training directly on the v489 prompt-leading corpus and comparing against v488 no-uptake evidence.
+- Added `scripts/run_model_capability_required_term_prompt_leading_training.py`, which writes training evidence, generation rows, previous-baseline deltas, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real prompt-leading training with `max_iters=600`, `n_embd=64`, and `generation_seed=490`: checkpoint creation passed, `prompt_alignment_ready=True`, but continuation hits stayed `0/9`.
+- Interpreted v490 as a negative capability result: v489 fixed prefix alignment, but the tiny model still did not emit required terms in short continuations; the next experiment should increase budget or simplify prompt variants.
+- Archived the v490 prompt-leading training evidence in `e/490` and added the code explanation in `代码讲解记录_模型能力阶段/504-v490-model-capability-required-term-prompt-leading-training.md`.
 
 ## Latest v489 checkpoint
 
