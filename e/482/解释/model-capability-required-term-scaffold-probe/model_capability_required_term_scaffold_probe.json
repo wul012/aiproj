@@ -1,0 +1,888 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term scaffold probe",
+  "generated_at": "2026-05-29T03:36:20Z",
+  "status": "pass",
+  "decision": "required_term_scaffold_probe_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_uptake": "e\\481\\解释\\model-capability-required-term-uptake\\model_capability_required_term_uptake.json",
+  "out_dir": "e\\482\\解释\\model-capability-required-term-scaffold-probe",
+  "settings": {
+    "max_new_tokens": 24,
+    "temperature": 0.7,
+    "top_k": 30,
+    "generation_seed": 482,
+    "term_limit": 1,
+    "case_limit": null,
+    "device": "cpu"
+  },
+  "summary": {
+    "probe_decision": "explicit_scaffold_still_no_required_term_uptake",
+    "case_group_count": 20,
+    "probe_count": 20,
+    "required_term_count": 20,
+    "baseline_continuation_hit_count": 0,
+    "scaffold_continuation_hit_count": 0,
+    "scaffold_generated_hit_count": 20,
+    "scaffold_prompt_hit_count": 20,
+    "case_with_scaffold_hit_count": 0,
+    "prompt_truncated_count": 0,
+    "prompt_over_block_count": 0,
+    "source_count": 2,
+    "source_ready_count": 2,
+    "source_missing_count": 0
+  },
+  "source_count": 2,
+  "source_rows": [
+    {
+      "status": "pass",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "checkpoint_block_size": 8
+    },
+    {
+      "status": "pass",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "checkpoint_block_size": 8
+    }
+  ],
+  "case_group_count": 20,
+  "case_groups": [
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "because"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "fixed"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "text"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "loss"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "data"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "real"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "data"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "four"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "while"
+      ]
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12",
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "chain"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "because"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "fixed"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "text"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "loss"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "data"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "real"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "data"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "four"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "while"
+      ]
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "token_cap_root": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12",
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "max_iters": 4,
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json",
+      "terms": [
+        "chain"
+      ]
+    }
+  ],
+  "probe_count": 20,
+  "probe_rows": [
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "max_iters": 4,
+      "terms": [
+        "because"
+      ],
+      "term_count": 1,
+      "generation_seed": 482,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 8,
+      "scaffold_prompt": "because:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "判v泛数研据\\n能少好保r目rv泛？求方v评少或链",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "max_iters": 4,
+      "terms": [
+        "fixed"
+      ],
+      "term_count": 1,
+      "generation_seed": 483,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 6,
+      "scaffold_prompt": "fixed:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "复请什R研指g每M研四方化据一两否s研指M方ss",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "max_iters": 4,
+      "terms": [
+        "text"
+      ],
+      "term_count": 1,
+      "generation_seed": 484,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "text:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "续开持P洁e四实过变每m是需需有好求的\\n问一评两",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "max_iters": 4,
+      "terms": [
+        "loss"
+      ],
+      "term_count": 1,
+      "generation_seed": 485,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "loss:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "但但j格数M据否方每问据更工,E和格？评存化一四",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "max_iters": 4,
+      "terms": [
+        "data"
+      ],
+      "term_count": 1,
+      "generation_seed": 486,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "data:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "式风。卡指型研s评少伪？成好否v需少指求泛指链造",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "max_iters": 4,
+      "terms": [
+        "real"
+      ],
+      "term_count": 1,
+      "generation_seed": 487,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "real:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "归l复什同每四s否断两存vmr需需s或是明.工据",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "max_iters": 4,
+      "terms": [
+        "data"
+      ],
+      "term_count": 1,
+      "generation_seed": 488,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "data:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "现写次s的-采项论研少hg需mv造造MG问a据\\n",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "max_iters": 4,
+      "terms": [
+        "four"
+      ],
+      "term_count": 1,
+      "generation_seed": 489,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "four:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "目种y能果损吗vr需目字或链造MM方少好准日准链",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "max_iters": 4,
+      "terms": [
+        "while"
+      ],
+      "term_count": 1,
+      "generation_seed": 490,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 6,
+      "scaffold_prompt": "while:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "复什能hM该型损？径究研据否的评的seA评否指评",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 1337,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "max_iters": 4,
+      "terms": [
+        "chain"
+      ],
+      "term_count": 1,
+      "generation_seed": 491,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 6,
+      "scaffold_prompt": "chain:",
+      "baseline_continuation_preview": "每\\n每研工少评据两v据否",
+      "scaffold_continuation_preview": "简简高G的shh一分好成m或洁e备存指M科v评指",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-1337\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "classification-risk-level",
+      "task_type": "classification",
+      "max_iters": 4,
+      "terms": [
+        "because"
+      ],
+      "term_count": 1,
+      "generation_seed": 492,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 8,
+      "scaffold_prompt": "because:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "ii但被型该但路型r现以该准练共成A是很但准路o",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "comparison-baseline",
+      "task_type": "comparison",
+      "max_iters": 4,
+      "terms": [
+        "fixed"
+      ],
+      "term_count": 1,
+      "generation_seed": 493,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 6,
+      "scaffold_prompt": "fixed:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "类四s共来路少共c该类通否型r高存总要通过过研该",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "continuation-science",
+      "task_type": "continuation",
+      "max_iters": 4,
+      "terms": [
+        "text"
+      ],
+      "term_count": 1,
+      "generation_seed": 494,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "text:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "的不论时少补r成g少否时时时练少你时y.路时练少",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "factual-val-loss",
+      "task_type": "factual-consistency",
+      "max_iters": 4,
+      "terms": [
+        "loss"
+      ],
+      "term_count": 1,
+      "generation_seed": 495,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "loss:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "m改常现型否G归构.字存共、种练种时种开实归和该",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "qa-training-loop",
+      "task_type": "qa",
+      "max_iters": 4,
+      "terms": [
+        "data"
+      ],
+      "term_count": 1,
+      "generation_seed": 496,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "data:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "一你常定现定路你y现写你.成g型种路i以wi字、",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "refusal-boundary",
+      "task_type": "safety-boundary",
+      "max_iters": 4,
+      "terms": [
+        "real"
+      ],
+      "term_count": 1,
+      "generation_seed": 497,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "real:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "究有查练否时高是很y构被归研归归iT常.字型y以",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "self-check-missing-data",
+      "task_type": "self-check",
+      "max_iters": 4,
+      "terms": [
+        "data"
+      ],
+      "term_count": 1,
+      "generation_seed": 498,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "data:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "保类Es是y是c型路准归路路少归固型成r共rr言",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "structured-experiment-json",
+      "task_type": "structured",
+      "max_iters": 4,
+      "terms": [
+        "four"
+      ],
+      "term_count": 1,
+      "generation_seed": 499,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 5,
+      "scaffold_prompt": "four:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "你通审样c存s准少时路成T型该是.时否字准y时该",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "style-rewrite-concise",
+      "task_type": "rewrite",
+      "max_iters": 4,
+      "terms": [
+        "while"
+      ],
+      "term_count": 1,
+      "generation_seed": 500,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 6,
+      "scaffold_prompt": "while:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "同伪求y径指共归归实开现以现存高写子备备准Ti类",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    },
+    {
+      "seed": 2026,
+      "token_cap": 12,
+      "case": "summary-evidence-chain",
+      "task_type": "summary",
+      "max_iters": 4,
+      "terms": [
+        "chain"
+      ],
+      "term_count": 1,
+      "generation_seed": 501,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 30,
+      "baseline_continuation_hit_count": 0,
+      "scaffold_prompt_hit_count": 1,
+      "scaffold_generated_hit_count": 1,
+      "scaffold_continuation_hit_count": 0,
+      "prompt_truncated": false,
+      "prompt_over_block": false,
+      "checkpoint_block_size": 8,
+      "scaffold_prompt_char_count": 6,
+      "scaffold_prompt": "chain:",
+      "baseline_continuation_preview": "：共时.T少练r种有实总",
+      "scaffold_continuation_preview": "少否G能r实查开有样c存通c准高构s、字、日该r",
+      "checkpoint_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\checkpoint.pt",
+      "tokenizer_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\tokenizer.json",
+      "eval_suite_path": "e\\478\\解释\\model-capability-token-budget-stability\\seeds\\seed-2026\\token-cap-12\\ladder\\rungs\\max-iters-4\\run\\eval_suite\\eval_suite.json"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Even short prompts that list the required terms did not make the archived tiny checkpoint emit those terms in continuation.",
+    "next_action": "run a targeted micro-training repeat with required-term examples before increasing benchmark scope"
+  }
+}

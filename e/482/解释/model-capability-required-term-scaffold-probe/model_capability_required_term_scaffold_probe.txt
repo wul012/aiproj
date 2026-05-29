@@ -1,0 +1,15 @@
+status=pass
+decision=required_term_scaffold_probe_ready
+probe_decision=explicit_scaffold_still_no_required_term_uptake
+case_group_count=20
+probe_count=20
+required_term_count=20
+baseline_continuation_hit_count=0
+scaffold_continuation_hit_count=0
+scaffold_generated_hit_count=20
+case_with_scaffold_hit_count=0
+prompt_truncated_count=0
+prompt_over_block_count=0
+source_ready_count=2
+model_quality_claim=not_claimed
+next_action=run a targeted micro-training repeat with required-term examples before increasing benchmark scope

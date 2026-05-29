@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v481.0.0` audits whether the required terms that are present in the tiny corpus are actually absorbed into archived tiny generations.
+Version `v482.0.0` runs a real scaffolded generation probe against archived tiny checkpoints to test whether explicit required-term prompts improve uptake.
+
+## Latest v482 checkpoint
+
+- Added `model_capability_required_term_scaffold_probe` reporting for loading archived v478 cap-12 checkpoints and running short required-term scaffold prompts.
+- Added `scripts/run_model_capability_required_term_scaffold_probe.py`, which reads the v481 uptake report, selects one short required term per case, and records JSON/CSV/text/Markdown/HTML probe evidence.
+- Ran the real probe against two `max-iters-4` tiny checkpoints: `20` probes, `20` selected required terms, `0` baseline continuation hits, `0` scaffold continuation hits, `20` prompt/full-text hits, and no prompt truncation or block overflow.
+- Archived the v482 scaffold probe evidence in `e/482` and added the code explanation in `代码讲解记录_模型能力阶段/496-v482-model-capability-required-term-scaffold-probe.md`.
 
 ## Latest v481 checkpoint
 

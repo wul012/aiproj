@@ -38,6 +38,9 @@
 495-v481-model-capability-required-term-uptake.md
  -> v481 code explanation: trace covered required terms into archived tiny generated/continuation text and show they were never generated.
 
+496-v482-model-capability-required-term-scaffold-probe.md
+ -> v482 code explanation: run real short required-term scaffold generations against archived tiny checkpoints and confirm no continuation uptake.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

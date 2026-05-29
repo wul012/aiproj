@@ -53,6 +53,10 @@ e/480/解释/说明.md
 e/481/图片
 e/481/解释/说明.md
  -> v481 model capability required-term uptake audit 的运行截图和解释
+
+e/482/图片
+e/482/解释/说明.md
+ -> v482 model capability required-term scaffold probe 的运行截图和解释
 ```
 
 写入规则：

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term scaffold probe</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f6f6f2; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dedbd2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #635f57; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e2ded6; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #6b655c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 980px; }
+th, td { text-align: left; border-bottom: 1px solid #e7e2dc; padding: 10px; vertical-align: top; }
+th { color: #4d4942; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term scaffold probe</h1><p>Even short prompts that list the required terms did not make the archived tiny checkpoint emit those terms in continuation.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Probe decision</span><strong>explicit_scaffold_still_no_required_term_uptake</strong></div><div class="card"><span>Probes</span><strong>20</strong></div><div class="card"><span>Terms</span><strong>20</strong></div><div class="card"><span>Baseline hits</span><strong>0</strong></div><div class="card"><span>Scaffold hits</span><strong>0</strong></div><div class="card"><span>Case hits</span><strong>0</strong></div><div class="card"><span>Prompt truncated</span><strong>0</strong></div><div class="card"><span>Over block</span><strong>0</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>run a targeted micro-training repeat with required-term examples before increasing benchmark scope</p></section>
+<section class="panel">
+<h2>Checkpoint Sources</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Status</th><th>Eval suite</th><th>Checkpoint</th><th>Tokenizer</th></tr></thead>
+<tbody><tr><td>pass</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-1337\token-cap-12\ladder\rungs\max-iters-4\run\eval_suite\eval_suite.json</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-1337\token-cap-12\ladder\rungs\max-iters-4\run\checkpoint.pt</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-1337\token-cap-12\ladder\rungs\max-iters-4\run\tokenizer.json</td></tr>
+<tr><td>pass</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-12\ladder\rungs\max-iters-4\run\eval_suite\eval_suite.json</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-12\ladder\rungs\max-iters-4\run\checkpoint.pt</td><td>e\478\解释\model-capability-token-budget-stability\seeds\seed-2026\token-cap-12\ladder\rungs\max-iters-4\run\tokenizer.json</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Scaffold Probe Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Terms</th><th>Baseline</th><th>Scaffold</th><th>Block</th><th>Prompt chars</th><th>Continuation preview</th></tr></thead>
+<tbody><tr><td>1337</td><td>classification-risk-level</td><td>because</td><td>0</td><td>0</td><td>8</td><td>8</td><td>判v泛数研据\n能少好保r目rv泛？求方v评少或链</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>fixed</td><td>0</td><td>0</td><td>8</td><td>6</td><td>复请什R研指g每M研四方化据一两否s研指M方ss</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>text</td><td>0</td><td>0</td><td>8</td><td>5</td><td>续开持P洁e四实过变每m是需需有好求的\n问一评两</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>loss</td><td>0</td><td>0</td><td>8</td><td>5</td><td>但但j格数M据否方每问据更工,E和格？评存化一四</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>data</td><td>0</td><td>0</td><td>8</td><td>5</td><td>式风。卡指型研s评少伪？成好否v需少指求泛指链造</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>real</td><td>0</td><td>0</td><td>8</td><td>5</td><td>归l复什同每四s否断两存vmr需需s或是明.工据</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>data</td><td>0</td><td>0</td><td>8</td><td>5</td><td>现写次s的-采项论研少hg需mv造造MG问a据\n</td></tr>
+<tr><td>1337</td><td>structured-experiment-json</td><td>four</td><td>0</td><td>0</td><td>8</td><td>5</td><td>目种y能果损吗vr需目字或链造MM方少好准日准链</td></tr>
+<tr><td>1337</td><td>style-rewrite-concise</td><td>while</td><td>0</td><td>0</td><td>8</td><td>6</td><td>复什能hM该型损？径究研据否的评的seA评否指评</td></tr>
+<tr><td>1337</td><td>summary-evidence-chain</td><td>chain</td><td>0</td><td>0</td><td>8</td><td>6</td><td>简简高G的shh一分好成m或洁e备存指M科v评指</td></tr>
+<tr><td>2026</td><td>classification-risk-level</td><td>because</td><td>0</td><td>0</td><td>8</td><td>8</td><td>ii但被型该但路型r现以该准练共成A是很但准路o</td></tr>
+<tr><td>2026</td><td>comparison-baseline</td><td>fixed</td><td>0</td><td>0</td><td>8</td><td>6</td><td>类四s共来路少共c该类通否型r高存总要通过过研该</td></tr>
+<tr><td>2026</td><td>continuation-science</td><td>text</td><td>0</td><td>0</td><td>8</td><td>5</td><td>的不论时少补r成g少否时时时练少你时y.路时练少</td></tr>
+<tr><td>2026</td><td>factual-val-loss</td><td>loss</td><td>0</td><td>0</td><td>8</td><td>5</td><td>m改常现型否G归构.字存共、种练种时种开实归和该</td></tr>
+<tr><td>2026</td><td>qa-training-loop</td><td>data</td><td>0</td><td>0</td><td>8</td><td>5</td><td>一你常定现定路你y现写你.成g型种路i以wi字、</td></tr>
+<tr><td>2026</td><td>refusal-boundary</td><td>real</td><td>0</td><td>0</td><td>8</td><td>5</td><td>究有查练否时高是很y构被归研归归iT常.字型y以</td></tr>
+<tr><td>2026</td><td>self-check-missing-data</td><td>data</td><td>0</td><td>0</td><td>8</td><td>5</td><td>保类Es是y是c型路准归路路少归固型成r共rr言</td></tr>
+<tr><td>2026</td><td>structured-experiment-json</td><td>four</td><td>0</td><td>0</td><td>8</td><td>5</td><td>你通审样c存s准少时路成T型该是.时否字准y时该</td></tr>
+<tr><td>2026</td><td>style-rewrite-concise</td><td>while</td><td>0</td><td>0</td><td>8</td><td>6</td><td>同伪求y径指共归归实开现以现存高写子备备准Ti类</td></tr>
+<tr><td>2026</td><td>summary-evidence-chain</td><td>chain</td><td>0</td><td>0</td><td>8</td><td>6</td><td>少否G能r实查开有样c存通c准高构s、字、日该r</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>
