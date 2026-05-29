@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=9333 vocab_size=30
+parameters=52,544
+data_source=data:e\494\解释\model-capability-required-term-pair-curriculum\pair-corpora\05-loss-chain.txt
+step=    1 train_loss=2.7294 val_loss=2.6502
+step=  300 train_loss=0.6423 val_loss=0.5635
+step=  600 train_loss=0.4151 val_loss=0.4831
+step=  900 train_loss=0.4539 val_loss=0.4498
+step= 1200 train_loss=0.4819 val_loss=0.4160
+saved=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\05-loss-chain
+history=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\05-loss-chain\metrics.jsonl
+manifest=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\05-loss-chain\run_manifest.json
+sample=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\05-loss-chain\sample.txt

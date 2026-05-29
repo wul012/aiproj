@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=8533 vocab_size=30
+parameters=52,544
+data_source=data:e\494\解释\model-capability-required-term-pair-curriculum\pair-corpora\04-loss-four.txt
+step=    1 train_loss=2.5667 val_loss=2.5890
+step=  300 train_loss=0.7922 val_loss=0.9100
+step=  600 train_loss=0.7071 val_loss=0.6496
+step=  900 train_loss=0.6241 val_loss=0.7032
+step= 1200 train_loss=0.9015 val_loss=0.6568
+saved=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\04-loss-four
+history=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\04-loss-four\metrics.jsonl
+manifest=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\04-loss-four\run_manifest.json
+sample=e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\04-loss-four\sample.txt

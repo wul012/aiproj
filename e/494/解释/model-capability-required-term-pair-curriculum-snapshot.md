@@ -1,0 +1,49 @@
+- main [ref=e2] [box=28,28,1148,1519]:
+  - generic [ref=e3] [box=28,28,1148,114]:
+    - heading "MiniGPT required-term pair curriculum" [level=1] [ref=e4] [box=28,28,1148,40]
+    - paragraph [ref=e5] [box=28,84,1148,25]: Some probes hit their required term, but no pair preserved both targets together.
+  - generic [ref=e6] [box=28,160,1148,178]:
+    - generic [ref=e7] [box=28,160,155,95]:
+      - generic [ref=e8] [box=43,174,126,16]: Status
+      - strong [ref=e9] [box=43,196,126,22]: pass
+    - generic [ref=e10] [box=193,160,155,95]:
+      - generic [ref=e11] [box=208,174,126,16]: Decision
+      - strong [ref=e12] [box=208,196,126,44]: pair_curriculum_partial_only
+    - generic [ref=e13] [box=359,160,155,95]:
+      - generic [ref=e14] [box=373,174,126,16]: Stable source terms
+      - strong [ref=e15] [box=373,196,126,22]: "4"
+    - generic [ref=e16] [box=524,160,155,95]:
+      - generic [ref=e17] [box=539,174,126,16]: Selected terms
+      - strong [ref=e18] [box=539,196,126,22]: "4"
+    - generic [ref=e19] [box=690,160,155,95]:
+      - generic [ref=e20] [box=704,174,126,16]: Pairs
+      - strong [ref=e21] [box=704,196,126,22]: "6"
+    - generic [ref=e22] [box=855,160,155,95]:
+      - generic [ref=e23] [box=870,174,126,16]: Training pass
+      - strong [ref=e24] [box=870,196,126,22]: "6"
+    - generic [ref=e25] [box=1020,160,155,95]:
+      - generic [ref=e26] [box=1035,174,126,16]: Checkpoints
+      - strong [ref=e27] [box=1035,196,126,22]: "6"
+    - generic [ref=e28] [box=28,265,155,73]:
+      - generic [ref=e29] [box=43,279,126,16]: Probe hits
+      - strong [ref=e30] [box=43,301,126,22]: "6"
+    - generic [ref=e31] [box=193,265,155,73]:
+      - generic [ref=e32] [box=208,279,126,16]: Full-hit pairs
+      - strong [ref=e33] [box=208,301,126,22]: "0"
+    - generic [ref=e34] [box=359,265,155,73]:
+      - generic [ref=e35] [box=373,279,126,16]: Pair capacity
+      - strong [ref=e36] [box=373,301,126,22]: "False"
+  - generic [ref=e37] [box=28,356,1148,176]:
+    - heading "Curriculum Boundary" [level=2] [ref=e38] [box=43,370,1119,24]
+    - paragraph [ref=e39] [box=43,411,1119,50]: Only v493 terms that were stable across every configured seed are selected by default. Each row below trains two targets in one checkpoint; it is a controlled interference probe, not a broad language-quality benchmark.
+    - paragraph [ref=e40] [box=43,476,1119,25]: inspect partially successful pairs and rebalance pair corpus before adding more targets
+  - generic [ref=e41] [box=28,550,1148,356]:
+    - heading "Pair Summary" [level=2] [ref=e42] [box=43,564,1119,24]
+    - table [ref=e44] [box=43,601,1119,291]:
+      - rowgroup [ref=e45] [box=43,601,1119,37]
+      - rowgroup [ref=e52] [box=43,637,1119,254]
+  - generic [ref=e89] [box=28,924,1148,623]:
+    - heading "Probe Rows" [level=2] [ref=e90] [box=43,938,1119,24]
+    - table [ref=e92] [box=43,975,1119,557]:
+      - rowgroup [ref=e93] [box=43,975,1119,37]
+      - rowgroup [ref=e101] [box=43,1011,1119,521]

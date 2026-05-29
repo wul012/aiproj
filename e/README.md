@@ -101,6 +101,10 @@ e/492/解释/说明.md
 e/493/图片
 e/493/解释/说明.md
  -> v493 model capability required-term one-term seed stability 的运行截图和解释
+
+e/494/图片
+e/494/解释/说明.md
+ -> v494 model capability required-term pair curriculum 的运行截图和解释
 ```
 
 写入规则：

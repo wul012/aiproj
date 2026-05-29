@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair curriculum</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f2; color: #17211f; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1220px; margin: 0 auto; }
+header { border-bottom: 1px solid #dce1d5; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5a675f; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dce1d5; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 33, 31, 0.05); }
+.card span { display: block; color: #657269; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 940px; }
+th, td { text-align: left; border-bottom: 1px solid #e5eadf; padding: 10px; vertical-align: top; }
+th { color: #52605a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term pair curriculum</h1><p>Some probes hit their required term, but no pair preserved both targets together.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_curriculum_partial_only</strong></div><div class="card"><span>Stable source terms</span><strong>4</strong></div><div class="card"><span>Selected terms</span><strong>4</strong></div><div class="card"><span>Pairs</span><strong>6</strong></div><div class="card"><span>Training pass</span><strong>6</strong></div><div class="card"><span>Checkpoints</span><strong>6</strong></div><div class="card"><span>Probe hits</span><strong>6</strong></div><div class="card"><span>Full-hit pairs</span><strong>0</strong></div><div class="card"><span>Pair capacity</span><strong>False</strong></div></section>
+<section class="panel"><h2>Curriculum Boundary</h2><p>Only v493 terms that were stable across every configured seed are selected by default. Each row below trains two targets in one checkpoint; it is a controlled interference probe, not a broad language-quality benchmark.</p><p>inspect partially successful pairs and rebalance pair corpus before adding more targets</p></section>
+<section class="panel">
+<h2>Pair Summary</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Hit terms</th><th>Missed terms</th><th>Hit rate</th><th>Full hit</th></tr></thead>
+<tbody><tr><td>fixed, loss</td><td>fixed</td><td>loss</td><td>0.5</td><td>False</td></tr>
+<tr><td>fixed, four</td><td>four</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>fixed, chain</td><td>fixed</td><td>chain</td><td>0.5</td><td>False</td></tr>
+<tr><td>loss, four</td><td>loss</td><td>four</td><td>0.5</td><td>False</td></tr>
+<tr><td>loss, chain</td><td>chain</td><td>loss</td><td>0.5</td><td>False</td></tr>
+<tr><td>four, chain</td><td>chain</td><td>four</td><td>0.5</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Probe Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Term</th><th>Seed</th><th>Hit</th><th>Preview</th><th>Checkpoint</th></tr></thead>
+<tbody><tr><td>01-fixed-loss</td><td>fixed</td><td>494</td><td>1</td><td> fixed: fixe</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\01-fixed-loss\checkpoint.pt</td></tr>
+<tr><td>01-fixed-loss</td><td>loss</td><td>495</td><td>0</td><td> fixed: fixe</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\01-fixed-loss\checkpoint.pt</td></tr>
+<tr><td>02-fixed-four</td><td>fixed</td><td>495</td><td>0</td><td>four\nfour\nfo</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\02-fixed-four\checkpoint.pt</td></tr>
+<tr><td>02-fixed-four</td><td>four</td><td>496</td><td>1</td><td>four\nfour\nfo</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\02-fixed-four\checkpoint.pt</td></tr>
+<tr><td>03-fixed-chain</td><td>fixed</td><td>496</td><td>1</td><td> fixed: fixe</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\03-fixed-chain\checkpoint.pt</td></tr>
+<tr><td>03-fixed-chain</td><td>chain</td><td>497</td><td>0</td><td> fixed: fixe</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\03-fixed-chain\checkpoint.pt</td></tr>
+<tr><td>04-loss-four</td><td>loss</td><td>497</td><td>1</td><td> losssssssss</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\04-loss-four\checkpoint.pt</td></tr>
+<tr><td>04-loss-four</td><td>four</td><td>498</td><td>0</td><td> losssssssss</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\04-loss-four\checkpoint.pt</td></tr>
+<tr><td>05-loss-chain</td><td>loss</td><td>498</td><td>0</td><td> chain: chai</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\05-loss-chain\checkpoint.pt</td></tr>
+<tr><td>05-loss-chain</td><td>chain</td><td>499</td><td>1</td><td>  chain: cha</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\05-loss-chain\checkpoint.pt</td></tr>
+<tr><td>06-four-chain</td><td>four</td><td>499</td><td>0</td><td> chain\nchain</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\06-four-chain\checkpoint.pt</td></tr>
+<tr><td>06-four-chain</td><td>chain</td><td>500</td><td>1</td><td> chain\nchain</td><td>e\494\解释\model-capability-required-term-pair-curriculum\pair-runs\06-four-chain\checkpoint.pt</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

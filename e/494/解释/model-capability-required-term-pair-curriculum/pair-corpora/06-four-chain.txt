@@ -1,0 +1,802 @@
+MiniGPT required-term pair curriculum corpus.
+Two seed-stable one-term targets are trained in the same file to inspect interference.
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain
+four:four
+four: four
+chain:chain
+chain: chain

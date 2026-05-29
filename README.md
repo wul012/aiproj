@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v493.0.0` repeats the v492 successful one-term required-term cases across seeds to check whether the isolated capacity signal is reproducible.
+Version `v494.0.0` trains two seed-stable required terms per checkpoint to test whether the v493 single-target signal survives pair-level interference.
+
+## Latest v494 checkpoint
+
+- Added `model_capability_required_term_pair_curriculum` reporting for selecting v493 seed-stable one-term targets, training every two-term pair, and probing both prompts per pair.
+- Added `scripts/run_model_capability_required_term_pair_curriculum.py`, which writes pair corpora, pair checkpoints, generation rows, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real pair curriculum over `fixed/loss/four/chain`: all `6` pair checkpoints trained and all `12` probes ran, but every pair was partial (`6/12` probe hits, `0/6` full-hit pairs).
+- Interpreted v494 as a controlled negative result for pair-level conditional selection: the tiny model has stable one-term memory, but two stable targets in one checkpoint still interfere.
+- Archived the v494 pair-curriculum evidence in `e/494` and added the code explanation in `代码讲解记录_模型能力阶段/508-v494-model-capability-required-term-pair-curriculum.md`.
 
 ## Latest v493 checkpoint
 

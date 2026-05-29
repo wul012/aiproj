@@ -74,6 +74,9 @@
 507-v493-model-capability-required-term-one-term-seed-stability.md
  -> v493 code explanation: repeat v492 successful one-term cases across seeds and identify stable single-target capacity signals.
 
+508-v494-model-capability-required-term-pair-curriculum.md
+ -> v494 code explanation: train two stable one-term targets per checkpoint and expose the current pair-level interference boundary.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
