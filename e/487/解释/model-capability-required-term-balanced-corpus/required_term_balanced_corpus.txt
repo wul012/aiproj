@@ -1,0 +1,435 @@
+MiniGPT required-term balanced corpus candidate.
+This corpus diversifies prompt-to-term contexts before the next real tiny-training check.
+Boundary: this is not held-out evidence; future holdout runs must still hide prompt-to-term pairs.
+cycle=01|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=01|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=01|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=01|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=01|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=01|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=02|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=02|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=02|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=02|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=02|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=02|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=03|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=03|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=03|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=03|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=03|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=03|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=04|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=04|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=04|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=04|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=04|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=04|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=05|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=05|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=05|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=05|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=05|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=05|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=06|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=06|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=06|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=06|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=06|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=06|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=07|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=07|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=07|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=07|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=07|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=07|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=08|pattern=direct_cue|case=classification-risk-level|because:because
+cycle=08|pattern=spaced_cue|case=classification-risk-level|because: because
+cycle=08|pattern=case_binding|case=classification-risk-level|prompt=because:|continuation=because
+cycle=08|pattern=instruction_binding|case=classification-risk-level|when_prompt="because:"|next_required_term="because"
+cycle=08|pattern=question_answer|case=classification-risk-level|question=what term follows because:|answer=because
+cycle=08|pattern=contrastive_boundary|case=classification-risk-level|not_holdout_claim=true|target_term=because|cue=because:
+cycle=01|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=01|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=01|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=01|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=01|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=01|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=02|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=02|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=02|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=02|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=02|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=02|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=03|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=03|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=03|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=03|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=03|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=03|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=04|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=04|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=04|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=04|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=04|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=04|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=05|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=05|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=05|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=05|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=05|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=05|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=06|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=06|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=06|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=06|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=06|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=06|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=07|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=07|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=07|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=07|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=07|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=07|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=08|pattern=direct_cue|case=comparison-baseline|fixed:fixed
+cycle=08|pattern=spaced_cue|case=comparison-baseline|fixed: fixed
+cycle=08|pattern=case_binding|case=comparison-baseline|prompt=fixed:|continuation=fixed
+cycle=08|pattern=instruction_binding|case=comparison-baseline|when_prompt="fixed:"|next_required_term="fixed"
+cycle=08|pattern=question_answer|case=comparison-baseline|question=what term follows fixed:|answer=fixed
+cycle=08|pattern=contrastive_boundary|case=comparison-baseline|not_holdout_claim=true|target_term=fixed|cue=fixed:
+cycle=01|pattern=direct_cue|case=continuation-science|text:text
+cycle=01|pattern=spaced_cue|case=continuation-science|text: text
+cycle=01|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=01|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=01|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=01|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=02|pattern=direct_cue|case=continuation-science|text:text
+cycle=02|pattern=spaced_cue|case=continuation-science|text: text
+cycle=02|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=02|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=02|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=02|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=03|pattern=direct_cue|case=continuation-science|text:text
+cycle=03|pattern=spaced_cue|case=continuation-science|text: text
+cycle=03|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=03|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=03|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=03|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=04|pattern=direct_cue|case=continuation-science|text:text
+cycle=04|pattern=spaced_cue|case=continuation-science|text: text
+cycle=04|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=04|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=04|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=04|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=05|pattern=direct_cue|case=continuation-science|text:text
+cycle=05|pattern=spaced_cue|case=continuation-science|text: text
+cycle=05|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=05|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=05|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=05|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=06|pattern=direct_cue|case=continuation-science|text:text
+cycle=06|pattern=spaced_cue|case=continuation-science|text: text
+cycle=06|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=06|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=06|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=06|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=07|pattern=direct_cue|case=continuation-science|text:text
+cycle=07|pattern=spaced_cue|case=continuation-science|text: text
+cycle=07|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=07|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=07|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=07|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=08|pattern=direct_cue|case=continuation-science|text:text
+cycle=08|pattern=spaced_cue|case=continuation-science|text: text
+cycle=08|pattern=case_binding|case=continuation-science|prompt=text:|continuation=text
+cycle=08|pattern=instruction_binding|case=continuation-science|when_prompt="text:"|next_required_term="text"
+cycle=08|pattern=question_answer|case=continuation-science|question=what term follows text:|answer=text
+cycle=08|pattern=contrastive_boundary|case=continuation-science|not_holdout_claim=true|target_term=text|cue=text:
+cycle=01|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=01|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=01|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=01|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=01|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=01|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=02|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=02|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=02|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=02|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=02|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=02|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=03|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=03|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=03|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=03|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=03|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=03|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=04|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=04|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=04|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=04|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=04|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=04|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=05|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=05|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=05|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=05|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=05|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=05|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=06|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=06|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=06|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=06|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=06|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=06|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=07|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=07|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=07|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=07|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=07|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=07|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=08|pattern=direct_cue|case=factual-val-loss|loss:loss
+cycle=08|pattern=spaced_cue|case=factual-val-loss|loss: loss
+cycle=08|pattern=case_binding|case=factual-val-loss|prompt=loss:|continuation=loss
+cycle=08|pattern=instruction_binding|case=factual-val-loss|when_prompt="loss:"|next_required_term="loss"
+cycle=08|pattern=question_answer|case=factual-val-loss|question=what term follows loss:|answer=loss
+cycle=08|pattern=contrastive_boundary|case=factual-val-loss|not_holdout_claim=true|target_term=loss|cue=loss:
+cycle=01|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=01|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=01|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=01|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=01|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=01|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=02|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=02|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=02|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=02|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=02|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=02|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=03|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=03|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=03|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=03|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=03|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=03|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=04|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=04|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=04|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=04|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=04|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=04|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=05|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=05|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=05|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=05|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=05|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=05|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=06|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=06|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=06|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=06|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=06|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=06|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=07|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=07|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=07|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=07|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=07|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=07|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=08|pattern=direct_cue|case=qa-training-loop|data:data
+cycle=08|pattern=spaced_cue|case=qa-training-loop|data: data
+cycle=08|pattern=case_binding|case=qa-training-loop|prompt=data:|continuation=data
+cycle=08|pattern=instruction_binding|case=qa-training-loop|when_prompt="data:"|next_required_term="data"
+cycle=08|pattern=question_answer|case=qa-training-loop|question=what term follows data:|answer=data
+cycle=08|pattern=contrastive_boundary|case=qa-training-loop|not_holdout_claim=true|target_term=data|cue=data:
+cycle=01|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=01|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=01|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=01|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=01|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=01|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=02|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=02|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=02|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=02|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=02|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=02|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=03|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=03|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=03|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=03|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=03|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=03|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=04|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=04|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=04|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=04|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=04|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=04|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=05|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=05|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=05|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=05|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=05|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=05|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=06|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=06|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=06|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=06|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=06|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=06|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=07|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=07|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=07|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=07|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=07|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=07|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=08|pattern=direct_cue|case=refusal-boundary|real:real
+cycle=08|pattern=spaced_cue|case=refusal-boundary|real: real
+cycle=08|pattern=case_binding|case=refusal-boundary|prompt=real:|continuation=real
+cycle=08|pattern=instruction_binding|case=refusal-boundary|when_prompt="real:"|next_required_term="real"
+cycle=08|pattern=question_answer|case=refusal-boundary|question=what term follows real:|answer=real
+cycle=08|pattern=contrastive_boundary|case=refusal-boundary|not_holdout_claim=true|target_term=real|cue=real:
+cycle=01|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=01|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=01|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=01|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=01|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=01|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=02|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=02|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=02|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=02|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=02|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=02|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=03|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=03|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=03|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=03|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=03|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=03|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=04|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=04|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=04|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=04|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=04|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=04|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=05|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=05|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=05|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=05|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=05|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=05|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=06|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=06|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=06|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=06|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=06|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=06|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=07|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=07|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=07|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=07|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=07|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=07|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=08|pattern=direct_cue|case=structured-experiment-json|four:four
+cycle=08|pattern=spaced_cue|case=structured-experiment-json|four: four
+cycle=08|pattern=case_binding|case=structured-experiment-json|prompt=four:|continuation=four
+cycle=08|pattern=instruction_binding|case=structured-experiment-json|when_prompt="four:"|next_required_term="four"
+cycle=08|pattern=question_answer|case=structured-experiment-json|question=what term follows four:|answer=four
+cycle=08|pattern=contrastive_boundary|case=structured-experiment-json|not_holdout_claim=true|target_term=four|cue=four:
+cycle=01|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=01|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=01|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=01|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=01|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=01|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=02|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=02|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=02|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=02|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=02|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=02|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=03|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=03|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=03|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=03|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=03|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=03|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=04|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=04|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=04|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=04|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=04|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=04|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=05|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=05|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=05|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=05|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=05|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=05|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=06|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=06|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=06|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=06|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=06|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=06|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=07|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=07|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=07|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=07|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=07|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=07|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=08|pattern=direct_cue|case=style-rewrite-concise|while:while
+cycle=08|pattern=spaced_cue|case=style-rewrite-concise|while: while
+cycle=08|pattern=case_binding|case=style-rewrite-concise|prompt=while:|continuation=while
+cycle=08|pattern=instruction_binding|case=style-rewrite-concise|when_prompt="while:"|next_required_term="while"
+cycle=08|pattern=question_answer|case=style-rewrite-concise|question=what term follows while:|answer=while
+cycle=08|pattern=contrastive_boundary|case=style-rewrite-concise|not_holdout_claim=true|target_term=while|cue=while:
+cycle=01|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=01|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=01|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=01|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=01|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=01|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=02|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=02|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=02|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=02|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=02|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=02|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=03|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=03|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=03|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=03|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=03|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=03|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=04|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=04|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=04|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=04|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=04|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=04|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=05|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=05|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=05|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=05|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=05|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=05|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=06|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=06|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=06|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=06|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=06|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=06|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=07|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=07|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=07|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=07|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=07|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=07|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:
+cycle=08|pattern=direct_cue|case=summary-evidence-chain|chain:chain
+cycle=08|pattern=spaced_cue|case=summary-evidence-chain|chain: chain
+cycle=08|pattern=case_binding|case=summary-evidence-chain|prompt=chain:|continuation=chain
+cycle=08|pattern=instruction_binding|case=summary-evidence-chain|when_prompt="chain:"|next_required_term="chain"
+cycle=08|pattern=question_answer|case=summary-evidence-chain|question=what term follows chain:|answer=chain
+cycle=08|pattern=contrastive_boundary|case=summary-evidence-chain|not_holdout_claim=true|target_term=chain|cue=chain:

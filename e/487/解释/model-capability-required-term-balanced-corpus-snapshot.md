@@ -1,0 +1,114 @@
+- main [ref=e2] [box=28,28,1132,1354]:
+  - generic [ref=e3] [box=28,28,1132,114]:
+    - heading "MiniGPT required-term balanced corpus" [level=1] [ref=e4] [box=28,28,1132,40]
+    - paragraph [ref=e5] [box=28,84,1132,25]: The candidate corpus keeps term exposure balanced while increasing line uniqueness versus the legacy repeated corpus.
+  - generic [ref=e6] [box=28,160,1132,178]:
+    - generic [ref=e7] [box=28,160,180,95]:
+      - generic [ref=e8] [box=43,174,151,16]: Status
+      - strong [ref=e9] [box=43,196,151,22]: pass
+    - generic [ref=e10] [box=218,160,180,95]:
+      - generic [ref=e11] [box=233,174,151,16]: Decision
+      - strong [ref=e12] [box=233,196,151,44]: balanced_corpus_candidate_ready
+    - generic [ref=e13] [box=409,160,180,95]:
+      - generic [ref=e14] [box=423,174,151,16]: Examples
+      - strong [ref=e15] [box=423,196,151,22]: "9"
+    - generic [ref=e16] [box=599,160,180,95]:
+      - generic [ref=e17] [box=614,174,151,16]: Lines
+      - strong [ref=e18] [box=614,196,151,22]: "435"
+    - generic [ref=e19] [box=789,160,180,95]:
+      - generic [ref=e20] [box=804,174,151,16]: Unique line rate
+      - strong [ref=e21] [box=804,196,151,22]: "1.0"
+    - generic [ref=e22] [box=980,160,180,95]:
+      - generic [ref=e23] [box=994,174,151,16]: Legacy unique rate
+      - strong [ref=e24] [box=994,196,151,22]: "0.133"
+    - generic [ref=e25] [box=28,265,180,73]:
+      - generic [ref=e26] [box=43,279,151,16]: Term spread
+      - strong [ref=e27] [box=43,301,151,22]: "0"
+    - generic [ref=e28] [box=218,265,180,73]:
+      - generic [ref=e29] [box=233,279,151,16]: Patterns
+      - strong [ref=e30] [box=233,301,151,22]: "6"
+  - generic [ref=e31] [box=28,356,1132,151]:
+    - heading "Corpus" [level=2] [ref=e32] [box=43,370,1103,24]
+    - paragraph [ref=e33] [box=43,411,1103,25]: e\487\解释\model-capability-required-term-balanced-corpus\required_term_balanced_corpus.txt
+    - paragraph [ref=e34] [box=43,452,1103,25]: train a tiny checkpoint on this balanced corpus and rerun split/seed stability
+  - generic [ref=e35] [box=28,525,1132,356]:
+    - heading "Pattern Counts" [level=2] [ref=e36] [box=43,539,1103,24]
+    - table [ref=e38] [box=43,576,1103,291]:
+      - rowgroup [ref=e39] [box=43,576,1103,37]:
+        - row "Pattern Lines" [ref=e40] [box=43,576,1103,37]:
+          - columnheader "Pattern" [ref=e41] [box=43,576,843,37]
+          - columnheader "Lines" [ref=e42] [box=885,576,260,37]
+      - rowgroup [ref=e43] [box=43,612,1103,254]:
+        - row "case_binding 72" [ref=e44] [box=43,612,1103,42]:
+          - cell "case_binding" [ref=e45] [box=43,612,843,42]
+          - cell "72" [ref=e46] [box=885,612,260,42]
+        - row "contrastive_boundary 72" [ref=e47] [box=43,655,1103,42]:
+          - cell "contrastive_boundary" [ref=e48] [box=43,655,843,42]
+          - cell "72" [ref=e49] [box=885,655,260,42]
+        - row "direct_cue 72" [ref=e50] [box=43,697,1103,42]:
+          - cell "direct_cue" [ref=e51] [box=43,697,843,42]
+          - cell "72" [ref=e52] [box=885,697,260,42]
+        - row "instruction_binding 72" [ref=e53] [box=43,739,1103,42]:
+          - cell "instruction_binding" [ref=e54] [box=43,739,843,42]
+          - cell "72" [ref=e55] [box=885,739,260,42]
+        - row "question_answer 72" [ref=e56] [box=43,782,1103,42]:
+          - cell "question_answer" [ref=e57] [box=43,782,843,42]
+          - cell "72" [ref=e58] [box=885,782,260,42]
+        - row "spaced_cue 72" [ref=e59] [box=43,824,1103,42]:
+          - cell "spaced_cue" [ref=e60] [box=43,824,843,42]
+          - cell "72" [ref=e61] [box=885,824,260,42]
+  - generic [ref=e62] [box=28,899,1132,483]:
+    - heading "Term Rows" [level=2] [ref=e63] [box=43,914,1103,24]
+    - table [ref=e65] [box=43,950,1103,418]:
+      - rowgroup [ref=e66] [box=43,950,1103,37]:
+        - row "Case Term Lines Prompt" [ref=e67] [box=43,950,1103,37]:
+          - columnheader "Case" [ref=e68] [box=43,950,554,37]
+          - columnheader "Term" [ref=e69] [box=597,950,201,37]
+          - columnheader "Lines" [ref=e70] [box=798,950,138,37]
+          - columnheader "Prompt" [ref=e71] [box=936,950,210,37]
+      - rowgroup [ref=e72] [box=43,987,1103,381]:
+        - row "classification-risk-level because 48 because:" [ref=e73] [box=43,987,1103,42]:
+          - cell "classification-risk-level" [ref=e74] [box=43,987,554,42]
+          - cell "because" [ref=e75] [box=597,987,201,42]
+          - cell "48" [ref=e76] [box=798,987,138,42]
+          - cell "because:" [ref=e77] [box=936,987,210,42]
+        - row "comparison-baseline fixed 48 fixed:" [ref=e78] [box=43,1029,1103,42]:
+          - cell "comparison-baseline" [ref=e79] [box=43,1029,554,42]
+          - cell "fixed" [ref=e80] [box=597,1029,201,42]
+          - cell "48" [ref=e81] [box=798,1029,138,42]
+          - cell "fixed:" [ref=e82] [box=936,1029,210,42]
+        - row "continuation-science text 48 text:" [ref=e83] [box=43,1071,1103,42]:
+          - cell "continuation-science" [ref=e84] [box=43,1071,554,42]
+          - cell "text" [ref=e85] [box=597,1071,201,42]
+          - cell "48" [ref=e86] [box=798,1071,138,42]
+          - cell "text:" [ref=e87] [box=936,1071,210,42]
+        - row "factual-val-loss loss 48 loss:" [ref=e88] [box=43,1114,1103,42]:
+          - cell "factual-val-loss" [ref=e89] [box=43,1114,554,42]
+          - cell "loss" [ref=e90] [box=597,1114,201,42]
+          - cell "48" [ref=e91] [box=798,1114,138,42]
+          - cell "loss:" [ref=e92] [box=936,1114,210,42]
+        - row "qa-training-loop data 48 data:" [ref=e93] [box=43,1156,1103,42]:
+          - cell "qa-training-loop" [ref=e94] [box=43,1156,554,42]
+          - cell "data" [ref=e95] [box=597,1156,201,42]
+          - cell "48" [ref=e96] [box=798,1156,138,42]
+          - cell "data:" [ref=e97] [box=936,1156,210,42]
+        - row "refusal-boundary real 48 real:" [ref=e98] [box=43,1198,1103,42]:
+          - cell "refusal-boundary" [ref=e99] [box=43,1198,554,42]
+          - cell "real" [ref=e100] [box=597,1198,201,42]
+          - cell "48" [ref=e101] [box=798,1198,138,42]
+          - cell "real:" [ref=e102] [box=936,1198,210,42]
+        - row "structured-experiment-json four 48 four:" [ref=e103] [box=43,1240,1103,42]:
+          - cell "structured-experiment-json" [ref=e104] [box=43,1240,554,42]
+          - cell "four" [ref=e105] [box=597,1240,201,42]
+          - cell "48" [ref=e106] [box=798,1240,138,42]
+          - cell "four:" [ref=e107] [box=936,1240,210,42]
+        - row "style-rewrite-concise while 48 while:" [ref=e108] [box=43,1283,1103,42]:
+          - cell "style-rewrite-concise" [ref=e109] [box=43,1283,554,42]
+          - cell "while" [ref=e110] [box=597,1283,201,42]
+          - cell "48" [ref=e111] [box=798,1283,138,42]
+          - cell "while:" [ref=e112] [box=936,1283,210,42]
+        - row "summary-evidence-chain chain 48 chain:" [ref=e113] [box=43,1325,1103,42]:
+          - cell "summary-evidence-chain" [ref=e114] [box=43,1325,554,42]
+          - cell "chain" [ref=e115] [box=597,1325,201,42]
+          - cell "48" [ref=e116] [box=798,1325,138,42]
+          - cell "chain:" [ref=e117] [box=936,1325,210,42]

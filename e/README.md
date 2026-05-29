@@ -73,6 +73,10 @@ e/485/解释/说明.md
 e/486/图片
 e/486/解释/说明.md
  -> v486 model capability required-term split seed stability 的运行截图和解释
+
+e/487/图片
+e/487/解释/说明.md
+ -> v487 model capability required-term balanced corpus 的运行截图和解释
 ```
 
 写入规则：

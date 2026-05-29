@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_balanced_corpus_candidate_ready
+balanced_corpus_decision=balanced_corpus_candidate_ready
+source_example_count=20
+example_count=9
+unique_term_count=9
+line_count=435
+unique_line_count=435
+unique_line_rate=1.0
+legacy_unique_line_rate=0.133
+term_line_spread=0
+model_quality_claim=not_claimed
+next_action=train a tiny checkpoint on this balanced corpus and rerun split/seed stability

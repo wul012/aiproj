@@ -1,4 +1,4 @@
-# MiniGPT 代码讲解记录_模型能力阶段
+﻿# MiniGPT 代码讲解记录_模型能力阶段
 
 本目录从 v473 开始承接 MiniGPT 的模型能力、真实 tiny 训练对比、baseline/candidate 能力评估和后续能力提升讲解。前一阶段 `代码讲解记录_训练治理阶段/` 保留 v303-v472 的训练治理、promoted seed、receipt contract 和 CI 回归治理讲解。
 
@@ -52,6 +52,9 @@
 
 500-v486-model-capability-required-term-split-seed-stability.md
  -> v486 code explanation: repeat the best required-term split across seeds and show train-slice uptake is only partial.
+
+501-v487-model-capability-required-term-balanced-corpus.md
+ -> v487 code explanation: build a balanced required-term corpus candidate from v486 evidence before the next tiny-training rerun.
 
 ## 一句话总览
 

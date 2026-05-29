@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v486.0.0` repeats the best required-term split across seeds to check whether v485's train-slice uptake is stable.
+Version `v487.0.0` builds a balanced required-term corpus candidate from the v486 seed-stability evidence before the next real tiny-training rerun.
+
+## Latest v487 checkpoint
+
+- Added `model_capability_required_term_balanced_corpus` reporting for resolving the v486 seed-stability source back to v483 micro-training examples and constructing a balanced corpus candidate.
+- Added `scripts/run_model_capability_required_term_balanced_corpus.py`, which writes the candidate corpus plus JSON/CSV/text/Markdown/HTML quality evidence.
+- Ran the real corpus construction from `e/486`: selected `9` unique required-term rows from `20` source examples, generated `435` corpus lines, improved unique-line rate from legacy `0.133` to `1.0`, and kept term-line spread at `0`.
+- Archived the v487 balanced-corpus evidence in `e/487` and added the code explanation in `代码讲解记录_模型能力阶段/501-v487-model-capability-required-term-balanced-corpus.md`.
 
 ## Latest v486 checkpoint
 

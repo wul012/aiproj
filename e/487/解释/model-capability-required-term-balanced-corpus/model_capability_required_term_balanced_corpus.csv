@@ -1,0 +1,10 @@
+case,term,scaffold_prompt,line_count,expected_line_count,pattern_count,repeat
+classification-risk-level,because,because:,48,48,6,8
+comparison-baseline,fixed,fixed:,48,48,6,8
+continuation-science,text,text:,48,48,6,8
+factual-val-loss,loss,loss:,48,48,6,8
+qa-training-loop,data,data:,48,48,6,8
+refusal-boundary,real,real:,48,48,6,8
+structured-experiment-json,four,four:,48,48,6,8
+style-rewrite-concise,while,while:,48,48,6,8
+summary-evidence-chain,chain,chain:,48,48,6,8

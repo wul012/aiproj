@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term balanced corpus",
+  "generated_at": "2026-05-29T09:00:02Z",
+  "status": "pass",
+  "decision": "required_term_balanced_corpus_candidate_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_report": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\model_capability_required_term_split_seed_stability.json",
+  "source_required_term_micro_training": "e\\483\\解释\\model-capability-required-term-micro-training\\model_capability_required_term_micro_training.json",
+  "out_dir": "e\\487\\解释\\model-capability-required-term-balanced-corpus",
+  "settings": {
+    "repeat": 8,
+    "patterns": [
+      "direct_cue",
+      "spaced_cue",
+      "case_binding",
+      "instruction_binding",
+      "question_answer",
+      "contrastive_boundary"
+    ],
+    "pattern_count": 6,
+    "selection_strategy": "one representative row per unique required term",
+    "training_boundary": "candidate corpus only; downstream holdout checks must still exclude held-out prompt-to-term pairs"
+  },
+  "corpus": {
+    "path": "e\\487\\解释\\model-capability-required-term-balanced-corpus\\required_term_balanced_corpus.txt",
+    "char_count": 39958,
+    "line_count": 435,
+    "repeat": 8,
+    "vocab_boundary": "all terms may appear because this is a construction candidate, not a held-out evaluation corpus"
+  },
+  "summary": {
+    "balanced_corpus_decision": "balanced_corpus_candidate_ready",
+    "example_count": 9,
+    "selected_example_count": 9,
+    "unique_term_count": 9,
+    "repeat": 8,
+    "pattern_count": 6,
+    "line_count": 435,
+    "unique_line_count": 435,
+    "duplicate_line_count": 0,
+    "unique_line_rate": 1.0,
+    "legacy_line_count": 218,
+    "legacy_unique_line_count": 29,
+    "legacy_unique_line_rate": 0.133,
+    "unique_line_rate_delta": 0.867,
+    "term_line_min": 48,
+    "term_line_max": 48,
+    "term_line_spread": 0,
+    "term_line_balance_ready": true,
+    "pattern_counts": {
+      "case_binding": 72,
+      "contrastive_boundary": 72,
+      "direct_cue": 72,
+      "instruction_binding": 72,
+      "question_answer": 72,
+      "spaced_cue": 72
+    }
+  },
+  "source_example_count": 20,
+  "term_rows": [
+    {
+      "case": "classification-risk-level",
+      "term": "because",
+      "scaffold_prompt": "because:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "continuation-science",
+      "term": "text",
+      "scaffold_prompt": "text:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "qa-training-loop",
+      "term": "data",
+      "scaffold_prompt": "data:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "refusal-boundary",
+      "term": "real",
+      "scaffold_prompt": "real:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "structured-experiment-json",
+      "term": "four",
+      "scaffold_prompt": "four:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "style-rewrite-concise",
+      "term": "while",
+      "scaffold_prompt": "while:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    },
+    {
+      "case": "summary-evidence-chain",
+      "term": "chain",
+      "scaffold_prompt": "chain:",
+      "line_count": 48,
+      "expected_line_count": 48,
+      "pattern_count": 6,
+      "repeat": 8
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The candidate corpus keeps term exposure balanced while increasing line uniqueness versus the legacy repeated corpus.",
+    "next_action": "train a tiny checkpoint on this balanced corpus and rerun split/seed stability"
+  }
+}
