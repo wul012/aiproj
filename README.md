@@ -4,7 +4,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v494.0.0` trains two seed-stable required terms per checkpoint to test whether the v493 single-target signal survives pair-level interference.
+Version `v494.0.1` trains two seed-stable required terms per checkpoint to test whether the v493 single-target signal survives pair-level interference, with CI-discovered coverage aligned to the repository coverage gate.
 
 ## Latest v494 checkpoint
 
@@ -13,6 +13,7 @@ Version `v494.0.0` trains two seed-stable required terms per checkpoint to test 
 - Ran the real pair curriculum over `fixed/loss/four/chain`: all `6` pair checkpoints trained and all `12` probes ran, but every pair was partial (`6/12` probe hits, `0/6` full-hit pairs).
 - Interpreted v494 as a controlled negative result for pair-level conditional selection: the tiny model has stable one-term memory, but two stable targets in one checkpoint still interfere.
 - Archived the v494 pair-curriculum evidence in `e/494` and added the code explanation in `代码讲解记录_模型能力阶段/508-v494-model-capability-required-term-pair-curriculum.md`.
+- Follow-up `v494.0.1` adds unittest-discover coverage for the v494 builder, renderers, input guards, and training-failure branch so GitHub's `--fail-under 80` coverage gate passes.
 
 ## Latest v493 checkpoint
 

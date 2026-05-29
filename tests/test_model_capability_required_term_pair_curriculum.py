@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import tempfile
+import unittest
 
 from minigpt.model_capability_required_term_pair_curriculum import (
     build_model_capability_required_term_pair_curriculum,
@@ -15,10 +17,139 @@ from minigpt.model_capability_required_term_pair_curriculum import (
     summarize_pair_probe_rows,
 )
 from minigpt.model_capability_required_term_pair_curriculum_artifacts import (
+    render_model_capability_required_term_pair_curriculum_html,
     render_model_capability_required_term_pair_curriculum_markdown,
     render_model_capability_required_term_pair_curriculum_text,
     write_model_capability_required_term_pair_curriculum_outputs,
 )
+
+
+class ModelCapabilityRequiredTermPairCurriculumCoverageTests(unittest.TestCase):
+    def test_unittest_discover_covers_full_partial_and_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            source = write_seed_stability_fixture(tmp_path)
+
+            report = build_model_capability_required_term_pair_curriculum(
+                read_json_report(source),
+                out_dir=tmp_path / "pair-curriculum",
+                source_path=source.parent,
+                pair_limit=3,
+                repeat=2,
+                generated_at="2026-05-30T00:00:00Z",
+                train_func=fake_train,
+                generate_func=fake_generate(
+                    {
+                        ("01-data-fixed", "data"),
+                        ("01-data-fixed", "fixed"),
+                        ("02-data-model", "data"),
+                    }
+                ),
+            )
+            outputs = write_model_capability_required_term_pair_curriculum_outputs(report, tmp_path / "outputs")
+            text = render_model_capability_required_term_pair_curriculum_text(report)
+            markdown = render_model_capability_required_term_pair_curriculum_markdown(report)
+            html = render_model_capability_required_term_pair_curriculum_html(report)
+
+            self.assertEqual(report["status"], "pass")
+            self.assertEqual(report["decision"], "required_term_pair_curriculum_capacity_observed")
+            self.assertEqual(report["summary"]["pair_full_hit_count"], 1)
+            self.assertEqual(report["summary"]["pair_partial_hit_count"], 1)
+            self.assertEqual(report["summary"]["pair_zero_hit_count"], 1)
+            self.assertTrue(report["summary"]["multi_target_pair_capacity_observed"])
+            self.assertIn("pair_curriculum_decision=some_pairs_preserve_required_terms", text)
+            self.assertIn("MiniGPT Model Capability Required-Term Pair Curriculum", markdown)
+            self.assertIn("Curriculum Boundary", html)
+            self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
+            self.assertEqual(
+                locate_model_capability_required_term_pair_curriculum_source(source.parent),
+                source,
+            )
+            self.assertEqual(resolve_exit_code(report, require_pass=True), 0)
+
+    def test_unittest_discover_covers_all_full_no_uptake_and_training_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            source = write_seed_stability_fixture(tmp_path)
+            source_report = read_json_report(source)
+
+            all_full = build_model_capability_required_term_pair_curriculum(
+                source_report,
+                out_dir=tmp_path / "all-full",
+                pair_limit=1,
+                repeat=1,
+                train_func=fake_train,
+                generate_func=fake_generate({("01-data-fixed", "data"), ("01-data-fixed", "fixed")}),
+            )
+            no_uptake = build_model_capability_required_term_pair_curriculum(
+                source_report,
+                out_dir=tmp_path / "no-uptake",
+                pair_limit=1,
+                repeat=1,
+                train_func=fake_train,
+                generate_func=fake_generate(set()),
+            )
+            failed = build_model_capability_required_term_pair_curriculum(
+                source_report,
+                out_dir=tmp_path / "training-failed",
+                pair_limit=1,
+                repeat=1,
+                train_func=fake_train_failure,
+                generate_func=fake_generate(set()),
+            )
+
+            self.assertEqual(all_full["summary"]["pair_curriculum_decision"], "all_pairs_preserve_required_terms")
+            self.assertTrue(all_full["summary"]["all_pairs_full_hit"])
+            self.assertIn("Every selected two-term curriculum", all_full["interpretation"]["reason"])
+            self.assertEqual(no_uptake["decision"], "required_term_pair_curriculum_not_reproduced")
+            self.assertEqual(no_uptake["interpretation"]["model_quality_claim"], "not_claimed")
+            self.assertEqual(failed["status"], "fail")
+            self.assertEqual(failed["decision"], "fix_required_term_pair_curriculum")
+            self.assertEqual(failed["summary"]["pair_curriculum_decision"], "pair_curriculum_training_failed")
+            self.assertEqual(resolve_exit_code(failed, require_pass=True), 1)
+
+    def test_unittest_discover_covers_selection_and_input_issues(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            source = write_seed_stability_fixture(tmp_path)
+            source_report = read_json_report(source)
+
+            stable_terms = select_pair_curriculum_terms(source_report)
+            partial_terms = select_pair_curriculum_terms(source_report, include_partial_terms=True, term_limit=4)
+            limited = select_pair_curriculum_terms(source_report, term_limit=1)
+            pair = build_pair_curriculum_pairs(stable_terms, pair_limit=1)[0]
+            corpus = build_required_term_pair_curriculum_corpus(pair, repeat=0)
+            not_enough = build_model_capability_required_term_pair_curriculum(
+                source_report,
+                out_dir=tmp_path / "not-enough",
+                term_limit=1,
+                train_func=fake_train,
+                generate_func=fake_generate(set()),
+            )
+            bad_source_path = write_seed_stability_fixture(tmp_path / "bad", status="fail", single_term_capacity_stable=False)
+            bad_source = build_model_capability_required_term_pair_curriculum(
+                read_json_report(bad_source_path),
+                out_dir=tmp_path / "bad-source",
+                pair_limit=1,
+                train_func=fake_train,
+                generate_func=fake_generate(set()),
+            )
+            empty_source = build_model_capability_required_term_pair_curriculum(
+                {},
+                out_dir=tmp_path / "empty-source",
+                train_func=fake_train,
+                generate_func=fake_generate(set()),
+            )
+
+            self.assertEqual([row["term"] for row in stable_terms], ["data", "fixed", "model"])
+            self.assertEqual([row["term"] for row in partial_terms], ["data", "fixed", "loss", "model"])
+            self.assertEqual([row["term"] for row in limited], ["data"])
+            self.assertIn("data:data", corpus)
+            self.assertEqual(not_enough["summary"]["pair_curriculum_decision"], "not_enough_stable_terms")
+            self.assertIn("at least two stable terms are required for pair curriculum", not_enough["issues"])
+            self.assertIn("source one-term seed stability report is not pass", bad_source["issues"])
+            self.assertIn("source one-term seed stability did not observe stable single-target capacity", bad_source["issues"])
+            self.assertIn("source one-term seed stability report is missing or invalid", empty_source["issues"])
 
 
 def test_pair_curriculum_detects_full_and_partial_pair_capacity(tmp_path: Path) -> None:
@@ -158,7 +289,7 @@ def test_summarize_pair_curriculum_handles_empty_rows() -> None:
     assert summary["selected_term_count"] == 0
 
 
-def write_seed_stability_fixture(root: Path, *, status: str = "pass") -> Path:
+def write_seed_stability_fixture(root: Path, *, status: str = "pass", single_term_capacity_stable: bool = True) -> Path:
     source = root / "model_capability_required_term_one_term_seed_stability.json"
     write_json(
         source,
@@ -170,7 +301,7 @@ def write_seed_stability_fixture(root: Path, *, status: str = "pass") -> Path:
                 "partial_stable_term_count": 1,
                 "term_seed_hit_count": 10,
                 "term_seed_success_rate": 0.8333,
-                "single_term_capacity_stable": True,
+                "single_term_capacity_stable": single_term_capacity_stable,
             },
             "term_rows": [
                 {"case": "alpha", "term": "data", "scaffold_prompt": "data:"},
@@ -213,6 +344,25 @@ def fake_train(context: dict[str, object]) -> dict[str, object]:
         "metrics_exists": True,
         "train_config_exists": True,
         "command_text": "fake train",
+    }
+
+
+def fake_train_failure(context: dict[str, object]) -> dict[str, object]:
+    run_dir = Path(str(context["train_dir"]))
+    run_dir.mkdir(parents=True, exist_ok=True)
+    return {
+        "status": "fail",
+        "returncode": 2,
+        "run_dir": str(run_dir),
+        "checkpoint_path": str(run_dir / "checkpoint.pt"),
+        "tokenizer_path": str(run_dir / "tokenizer.json"),
+        "metrics_path": str(run_dir / "metrics.jsonl"),
+        "train_config_path": str(run_dir / "train_config.json"),
+        "checkpoint_exists": False,
+        "tokenizer_exists": False,
+        "metrics_exists": False,
+        "train_config_exists": False,
+        "command_text": "fake failed train",
     }
 
 
