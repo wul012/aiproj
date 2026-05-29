@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=17374 vocab_size=37
+parameters=14,208
+data_source=data:e\484\解释\model-capability-required-term-holdout\required_term_holdout_corpus.txt
+step=    1 train_loss=3.3729 val_loss=3.4874
+step=  105 train_loss=2.8667 val_loss=3.0349
+step=  210 train_loss=2.4355 val_loss=2.1258
+step=  315 train_loss=2.0819 val_loss=1.7241
+step=  420 train_loss=2.0194 val_loss=1.8189
+saved=e\484\解释\model-capability-required-term-holdout\holdout-run
+history=e\484\解释\model-capability-required-term-holdout\holdout-run\metrics.jsonl
+manifest=e\484\解释\model-capability-required-term-holdout\holdout-run\run_manifest.json
+sample=e\484\解释\model-capability-required-term-holdout\holdout-run\sample.txt

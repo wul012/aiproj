@@ -61,6 +61,10 @@ e/482/解释/说明.md
 e/483/图片
 e/483/解释/说明.md
  -> v483 model capability required-term micro-training 的运行截图和解释
+
+e/484/图片
+e/484/解释/说明.md
+ -> v484 model capability required-term holdout 的运行截图和解释
 ```
 
 写入规则：

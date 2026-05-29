@@ -1,0 +1,875 @@
+MiniGPT required-term holdout corpus.
+Train rows contain scaffold-to-term pairs; holdout rows expose prompt vocabulary only.
+Prompt vocabulary: because: chain: data: fixed: four: loss: real: text: while:
+holdout-prompt-only|factual-val-loss|loss:
+holdout-prompt-only|qa-training-loop|data:
+holdout-prompt-only|self-check-missing-data|data:
+holdout-prompt-only|style-rewrite-concise|while:
+holdout-prompt-only|factual-val-loss|loss:
+holdout-prompt-only|qa-training-loop|data:
+holdout-prompt-only|self-check-missing-data|data:
+holdout-prompt-only|style-rewrite-concise|while:
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+because:because
+because: because
+classification-risk-level|because:because
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+fixed:fixed
+fixed: fixed
+comparison-baseline|fixed:fixed
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+text:text
+text: text
+continuation-science|text:text
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+real:real
+real: real
+refusal-boundary|real:real
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+four:four
+four: four
+structured-experiment-json|four:four
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain
+chain:chain
+chain: chain
+summary-evidence-chain|chain:chain

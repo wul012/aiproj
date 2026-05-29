@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v483.0.0` runs a targeted required-term micro-training repeat and checks whether a new tiny checkpoint begins emitting required terms in continuation.
+Version `v484.0.0` runs a held-out required-term micro-training check to see whether the v483 targeted signal survives a term-level split.
+
+## Latest v484 checkpoint
+
+- Added `model_capability_required_term_holdout` reporting for splitting v483 required-term scaffold examples into train and holdout term sets.
+- Added `scripts/run_model_capability_required_term_holdout.py`, which trains a new tiny checkpoint from train-only scaffold-to-term pairs while exposing holdout prompts only for tokenizer/vocabulary coverage.
+- Ran the real held-out repeat with `train_terms=because, chain, fixed, four, real, text` and `holdout_terms=data, loss, while`: `12` train examples, `8` holdout examples, `0` train continuation hits, `0` holdout continuation hits.
+- Archived the v484 held-out evidence in `e/484` and added the code explanation in `代码讲解记录_模型能力阶段/498-v484-model-capability-required-term-holdout.md`.
 
 ## Latest v483 checkpoint
 

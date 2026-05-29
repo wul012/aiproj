@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_holdout_no_uptake
+holdout_decision=heldout_micro_training_no_required_term_uptake
+train_example_count=12
+holdout_example_count=8
+train_continuation_hit_count=0
+holdout_continuation_hit_count=0
+train_hit_rate=0.0
+holdout_hit_rate=0.0
+training_status=pass
+checkpoint_exists=True
+model_quality_claim=not_claimed
+next_action=first reproduce train-slice uptake under a split before expanding benchmark scope

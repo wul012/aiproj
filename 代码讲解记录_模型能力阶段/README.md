@@ -44,6 +44,9 @@
 497-v483-model-capability-required-term-micro-training.md
  -> v483 code explanation: train a tiny scaffold-to-term checkpoint and observe targeted required-term continuation uptake.
 
+498-v484-model-capability-required-term-holdout.md
+ -> v484 code explanation: split required terms into train/holdout slices and show v483's targeted signal does not yet reproduce under the stricter split.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

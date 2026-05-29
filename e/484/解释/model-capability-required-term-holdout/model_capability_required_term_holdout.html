@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term holdout</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f7f6f1; color: #162128; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #e1ded4; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #605e55; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e4dfd5; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(22, 33, 40, 0.05); }
+.card span { display: block; color: #6a665d; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 940px; }
+th, td { text-align: left; border-bottom: 1px solid #e8e3db; padding: 10px; vertical-align: top; }
+th { color: #504c44; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term holdout</h1><p>Neither train nor held-out prompts produced required terms in continuation under this split.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>heldout_micro_training_no_required_term_uptake</strong></div><div class="card"><span>Train examples</span><strong>12</strong></div><div class="card"><span>Holdout examples</span><strong>8</strong></div><div class="card"><span>Train hits</span><strong>0</strong></div><div class="card"><span>Holdout hits</span><strong>0</strong></div><div class="card"><span>Train rate</span><strong>0.0</strong></div><div class="card"><span>Holdout rate</span><strong>0.0</strong></div></section>
+<section class="panel"><h2>Split</h2><p>Train terms: because, chain, fixed, four, real, text</p><p>Holdout terms: data, loss, while</p></section>
+<section class="panel"><h2>Training Evidence</h2><p>Corpus: e\484\解释\model-capability-required-term-holdout\required_term_holdout_corpus.txt</p><p>Checkpoint: e\484\解释\model-capability-required-term-holdout\holdout-run\checkpoint.pt</p><p>Boundary: holdout prompts are exposed for tokenizer/vocabulary coverage, but holdout prompt-to-term pairs are not repeated</p></section>
+<section class="panel"><h2>Next Action</h2><p>first reproduce train-slice uptake under a split before expanding benchmark scope</p></section>
+<section class="panel">
+<h2>Train vs Holdout Generations</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Split</th><th>Case</th><th>Term</th><th>Prompt</th><th>Generated hit</th><th>Continuation hit</th><th>Continuation preview</th></tr></thead>
+<tbody><tr><td>train</td><td>classification-risk-level</td><td>because</td><td>because:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>continuation-science</td><td>text</td><td>text:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>refusal-boundary</td><td>real</td><td>real:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>structured-experiment-json</td><td>four</td><td>four:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>classification-risk-level</td><td>because</td><td>because:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>comparison-baseline</td><td>fixed</td><td>fixed:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>continuation-science</td><td>text</td><td>text:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>refusal-boundary</td><td>real</td><td>real:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>structured-experiment-json</td><td>four</td><td>four:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>train</td><td>summary-evidence-chain</td><td>chain</td><td>chain:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>qa-training-loop</td><td>data</td><td>data:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>self-check-missing-data</td><td>data</td><td>data:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>factual-val-loss</td><td>loss</td><td>loss:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>qa-training-loop</td><td>data</td><td>data:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>self-check-missing-data</td><td>data</td><td>data:</td><td>1</td><td>0</td><td>fousextt</td></tr>
+<tr><td>holdout</td><td>style-rewrite-concise</td><td>while</td><td>while:</td><td>1</td><td>0</td><td>fousextt</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>
