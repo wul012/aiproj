@@ -4,7 +4,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v485.0.0` scans multiple required-term train/holdout splits to see whether train-slice uptake can be reproduced before claiming held-out generalization.
+Version `v486.0.0` repeats the best required-term split across seeds to check whether v485's train-slice uptake is stable.
+
+## Latest v486 checkpoint
+
+- Added `model_capability_required_term_split_seed_stability` reporting for selecting the v485 best split and repeating it across multiple seeds.
+- Added `scripts/run_model_capability_required_term_split_seed_stability.py`, which reuses the v484 holdout builder and summarizes train/holdout continuation hits per seed.
+- Ran the real best-split seed stability check for seeds `785`, `1785`, and `2785`: only `1/3` seeds reproduced train-slice uptake, all `3/3` kept held-out hits at `0`.
+- Archived the v486 seed-stability evidence in `e/486` and added the code explanation in `代码讲解记录_模型能力阶段/500-v486-model-capability-required-term-split-seed-stability.md`.
 
 ## Latest v485 checkpoint
 

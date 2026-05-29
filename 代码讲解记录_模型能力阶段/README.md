@@ -50,6 +50,9 @@
 499-v485-model-capability-required-term-split-scan.md
  -> v485 code explanation: scan multiple required-term splits and find train-slice uptake without held-out generalization.
 
+500-v486-model-capability-required-term-split-seed-stability.md
+ -> v486 code explanation: repeat the best required-term split across seeds and show train-slice uptake is only partial.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

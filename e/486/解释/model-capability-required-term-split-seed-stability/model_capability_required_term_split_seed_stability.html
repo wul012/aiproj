@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT required-term split seed stability</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f4; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dde2d9; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #5e655d; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dfe5dc; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #646d62; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 920px; }
+th, td { text-align: left; border-bottom: 1px solid #e4e9e1; padding: 10px; vertical-align: top; }
+th { color: #4c544a; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term split seed stability</h1><p>Only some repeated seeds reproduced train-slice uptake, and held-out uptake stayed at zero.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>train_slice_uptake_partial_without_holdout</strong></div><div class="card"><span>Seeds</span><strong>3</strong></div><div class="card"><span>Train repro</span><strong>1</strong></div><div class="card"><span>Holdout hits</span><strong>0</strong></div><div class="card"><span>Min train hits</span><strong>0</strong></div><div class="card"><span>Max train hits</span><strong>4</strong></div><div class="card"><span>Stable holdout zero</span><strong>True</strong></div></section>
+<section class="panel"><h2>Best Split</h2><p>Split: split-4</p><p>Holdout terms: four, while</p></section>
+<section class="panel"><h2>Next Action</h2><p>improve corpus construction before further held-out checks</p></section>
+<section class="panel">
+<h2>Seed Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Train hits</th><th>Holdout hits</th><th>Train rate</th><th>Holdout rate</th><th>Report</th></tr></thead>
+<tbody><tr><td>785</td><td>4</td><td>0</td><td>0.25</td><td>0.0</td><td>e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-785\model_capability_required_term_holdout.json</td></tr>
+<tr><td>1785</td><td>0</td><td>0</td><td>0.0</td><td>0.0</td><td>e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-1785\model_capability_required_term_holdout.json</td></tr>
+<tr><td>2785</td><td>0</td><td>0</td><td>0.0</td><td>0.0</td><td>e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\model_capability_required_term_holdout.json</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

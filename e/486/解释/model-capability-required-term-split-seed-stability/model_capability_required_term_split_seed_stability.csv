@@ -1,0 +1,4 @@
+seed,status,holdout_decision,train_example_count,holdout_example_count,train_continuation_hit_count,holdout_continuation_hit_count,train_hit_rate,holdout_hit_rate,report_json
+785,pass,training_slice_only_without_holdout_uptake,16,4,4,0,0.25,0.0,e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-785\model_capability_required_term_holdout.json
+1785,pass,heldout_micro_training_no_required_term_uptake,16,4,0,0,0.0,0.0,e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-1785\model_capability_required_term_holdout.json
+2785,pass,heldout_micro_training_no_required_term_uptake,16,4,0,0,0.0,0.0,e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\model_capability_required_term_holdout.json

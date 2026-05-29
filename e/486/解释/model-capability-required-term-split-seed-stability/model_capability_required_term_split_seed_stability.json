@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term split seed stability",
+  "generated_at": "2026-05-29T06:38:39Z",
+  "status": "pass",
+  "decision": "required_term_seed_stability_train_slice_partial",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_split_scan": "e\\485\\解释\\model-capability-required-term-split-scan\\model_capability_required_term_split_scan.json",
+  "source_required_term_micro_training": "e\\483\\解释\\model-capability-required-term-micro-training\\model_capability_required_term_micro_training.json",
+  "out_dir": "e\\486\\解释\\model-capability-required-term-split-seed-stability",
+  "best_split": {
+    "id": "split-4",
+    "status": "pass",
+    "decision": "required_term_holdout_no_uptake",
+    "holdout_decision": "training_slice_only_without_holdout_uptake",
+    "holdout_terms": [
+      "four",
+      "while"
+    ],
+    "train_example_count": 16,
+    "holdout_example_count": 4,
+    "train_continuation_hit_count": 4,
+    "holdout_continuation_hit_count": 0,
+    "train_hit_rate": 0.25,
+    "holdout_hit_rate": 0.0,
+    "report_json": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-4\\model_capability_required_term_holdout.json",
+    "report_dir": "e\\485\\解释\\model-capability-required-term-split-scan\\splits\\split-4"
+  },
+  "settings": {
+    "max_iters": 800,
+    "eval_iters": 1,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 64,
+    "learning_rate": 0.02,
+    "term_repeat": 80,
+    "max_new_tokens": 16,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "seeds": [
+      785,
+      1785,
+      2785
+    ]
+  },
+  "summary": {
+    "seed_stability_decision": "train_slice_uptake_partial_without_holdout",
+    "seed_count": 3,
+    "complete_seed_count": 3,
+    "train_repro_seed_count": 1,
+    "holdout_hit_seed_count": 0,
+    "min_train_continuation_hit_count": 0,
+    "max_train_continuation_hit_count": 4,
+    "total_train_continuation_hit_count": 4,
+    "min_holdout_continuation_hit_count": 0,
+    "max_holdout_continuation_hit_count": 0,
+    "total_holdout_continuation_hit_count": 0,
+    "stable_train_repro": false,
+    "stable_holdout_zero": true
+  },
+  "seed_rows": [
+    {
+      "seed": 785,
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "training_slice_only_without_holdout_uptake",
+      "train_example_count": 16,
+      "holdout_example_count": 4,
+      "train_continuation_hit_count": 4,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.25,
+      "holdout_hit_rate": 0.0,
+      "report_dir": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\seeds\\seed-785",
+      "report_json": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\seeds\\seed-785\\model_capability_required_term_holdout.json"
+    },
+    {
+      "seed": 1785,
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "heldout_micro_training_no_required_term_uptake",
+      "train_example_count": 16,
+      "holdout_example_count": 4,
+      "train_continuation_hit_count": 0,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.0,
+      "holdout_hit_rate": 0.0,
+      "report_dir": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\seeds\\seed-1785",
+      "report_json": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\seeds\\seed-1785\\model_capability_required_term_holdout.json"
+    },
+    {
+      "seed": 2785,
+      "status": "pass",
+      "decision": "required_term_holdout_no_uptake",
+      "holdout_decision": "heldout_micro_training_no_required_term_uptake",
+      "train_example_count": 16,
+      "holdout_example_count": 4,
+      "train_continuation_hit_count": 0,
+      "holdout_continuation_hit_count": 0,
+      "train_hit_rate": 0.0,
+      "holdout_hit_rate": 0.0,
+      "report_dir": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\seeds\\seed-2785",
+      "report_json": "e\\486\\解释\\model-capability-required-term-split-seed-stability\\seeds\\seed-2785\\model_capability_required_term_holdout.json"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Only some repeated seeds reproduced train-slice uptake, and held-out uptake stayed at zero.",
+    "next_action": "improve corpus construction before further held-out checks"
+  }
+}

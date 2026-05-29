@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=71288 vocab_size=37
+parameters=52,992
+data_source=data:e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\required_term_holdout_corpus.txt
+step=    1 train_loss=3.2087 val_loss=3.4323
+step=  200 train_loss=2.6125 val_loss=2.9629
+step=  400 train_loss=2.4882 val_loss=2.6153
+step=  600 train_loss=2.5887 val_loss=2.3392
+step=  800 train_loss=2.2689 val_loss=2.6535
+saved=e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\holdout-run
+history=e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\holdout-run\metrics.jsonl
+manifest=e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\holdout-run\run_manifest.json
+sample=e\486\解释\model-capability-required-term-split-seed-stability\seeds\seed-2785\holdout-run\sample.txt

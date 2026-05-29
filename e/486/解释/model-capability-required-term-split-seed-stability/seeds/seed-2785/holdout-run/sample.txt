@@ -1,0 +1,6 @@
+prompt: because:
+max_new_tokens: 8
+temperature: 0.2
+top_k: 1
+
+because:rteeatee

@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_seed_stability_train_slice_partial
+seed_stability_decision=train_slice_uptake_partial_without_holdout
+seed_count=3
+train_repro_seed_count=1
+holdout_hit_seed_count=0
+min_train_continuation_hit_count=0
+max_train_continuation_hit_count=4
+max_holdout_continuation_hit_count=0
+stable_train_repro=False
+stable_holdout_zero=True
+model_quality_claim=not_claimed
+next_action=improve corpus construction before further held-out checks
