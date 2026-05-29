@@ -1,0 +1,18 @@
+﻿status=pass
+decision=rubric_signal_audit_ready
+audit_decision=rubric_required_terms_dominate_flat_scores
+target_token_cap=12
+seed_count=2
+case_count=20
+score_improved_count=0
+pass_transition_count=0
+persistent_fail_count=2
+preview_changed_count=8
+top_failed_checks=must_include:20, task_shape:2
+top_stall_reasons=generation_unchanged:11, required_terms_missing:5, case_passed:2, token_budget_or_shape_limit:2
+cross_seed_failed_checks=must_include,task_shape
+model_quality_claim=not_claimed
+next_action=inspect required terms and tiny corpus coverage before increasing model size
+seed=value=1337,token_cap=12,status=pass,case_count=10,persistent_fail=1,preview_changed=5
+seed=value=2026,token_cap=12,status=pass,case_count=10,persistent_fail=1,preview_changed=3
+outputs={"json": "e\\479\\\u89e3\u91ca\\model-capability-rubric-signal-audit\\model_capability_rubric_signal_audit.json", "csv": "e\\479\\\u89e3\u91ca\\model-capability-rubric-signal-audit\\model_capability_rubric_signal_audit.csv", "text": "e\\479\\\u89e3\u91ca\\model-capability-rubric-signal-audit\\model_capability_rubric_signal_audit.txt", "markdown": "e\\479\\\u89e3\u91ca\\model-capability-rubric-signal-audit\\model_capability_rubric_signal_audit.md", "html": "e\\479\\\u89e3\u91ca\\model-capability-rubric-signal-audit\\model_capability_rubric_signal_audit.html"}

@@ -29,6 +29,9 @@
 492-v478-model-capability-token-budget-stability.md
  -> v478 code explanation: replay the token-budget probe across seeds and separate stable budget relief from model-quality progress.
 
+493-v479-model-capability-rubric-signal-audit.md
+ -> v479 code explanation: audit remaining cap-12 rubric signals and identify required-term/data coverage blockers.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

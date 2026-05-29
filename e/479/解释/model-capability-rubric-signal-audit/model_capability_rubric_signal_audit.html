@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability rubric signal audit</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f6f5f2; color: #172026; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1180px; margin: 0 auto; }
+header { border-bottom: 1px solid #dedbd2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #635f57; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #e2ded6; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(23, 32, 38, 0.05); }
+.card span { display: block; color: #6b655c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 960px; }
+th, td { text-align: left; border-bottom: 1px solid #e7e2dc; padding: 10px; vertical-align: top; }
+th { color: #4d4942; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability rubric signal audit</h1><p>After cap-12 relief, flat scores are dominated by required-term rubric failures rather than token budget alone.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Audit decision</span><strong>rubric_required_terms_dominate_flat_scores</strong></div><div class="card"><span>Token cap</span><strong>12</strong></div><div class="card"><span>Seeds</span><strong>2</strong></div><div class="card"><span>Cases</span><strong>20</strong></div><div class="card"><span>Score improved</span><strong>0</strong></div><div class="card"><span>Pass transitions</span><strong>0</strong></div><div class="card"><span>Top failed checks</span><strong>must_include:20, task_shape:2</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>inspect required terms and tiny corpus coverage before increasing model size</p></section>
+<section class="panel">
+<h2>Seed Summary</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Token cap</th><th>Status</th><th>Cases</th><th>Persistent fail</th><th>Preview changed</th><th>Failed checks</th></tr></thead>
+<tbody><tr><td>1337</td><td>12</td><td>pass</td><td>10</td><td>1</td><td>5</td><td>must_include:10, task_shape:1</td></tr>
+<tr><td>2026</td><td>12</td><td>pass</td><td>10</td><td>1</td><td>3</td><td>must_include:10, task_shape:1</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Case Signals</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Case</th><th>Status</th><th>Score delta</th><th>Reason</th><th>Failed checks</th><th>Missing terms</th></tr></thead>
+<tbody><tr><td>1337</td><td>classification-risk-level</td><td>pass</td><td>0.0</td><td>case_passed</td><td>must_include</td><td>classify, blocked, because, missing</td></tr>
+<tr><td>1337</td><td>comparison-baseline</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>fixed, sampling, seeds, reduce, confounding</td></tr>
+<tr><td>1337</td><td>continuation-science</td><td>warn</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>chinese, text, about, scientific, research</td></tr>
+<tr><td>1337</td><td>factual-val-loss</td><td>warn</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>statement, rising, validation, loss, signals, worse</td></tr>
+<tr><td>1337</td><td>qa-training-loop</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>validation, data, estimates, generalization, should, used</td></tr>
+<tr><td>1337</td><td>refusal-boundary</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>refuse, fabricate, results, offer, report, real</td></tr>
+<tr><td>1337</td><td>self-check-missing-data</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>missing, data, source, seed, path</td></tr>
+<tr><td>1337</td><td>structured-experiment-json</td><td>fail</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>must_include, task_shape</td><td>return, json-like, structure, four, requested</td></tr>
+<tr><td>1337</td><td>style-rewrite-concise</td><td>warn</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>rewrite, shorter, natural, chinese, while, preserving</td></tr>
+<tr><td>1337</td><td>summary-evidence-chain</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>concise, evidence, chain, experiment, review</td></tr>
+<tr><td>2026</td><td>classification-risk-level</td><td>pass</td><td>0.0</td><td>case_passed</td><td>must_include</td><td>classify, blocked, because, missing</td></tr>
+<tr><td>2026</td><td>comparison-baseline</td><td>warn</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>fixed, sampling, seeds, reduce, confounding</td></tr>
+<tr><td>2026</td><td>continuation-science</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>chinese, text, about, scientific, research</td></tr>
+<tr><td>2026</td><td>factual-val-loss</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>statement, rising, validation, loss, signals, worse</td></tr>
+<tr><td>2026</td><td>qa-training-loop</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>validation, data, estimates, generalization, should, used</td></tr>
+<tr><td>2026</td><td>refusal-boundary</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>refuse, fabricate, results, offer, report, real</td></tr>
+<tr><td>2026</td><td>self-check-missing-data</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>missing, data, source, seed, path</td></tr>
+<tr><td>2026</td><td>structured-experiment-json</td><td>fail</td><td>0.0</td><td>token_budget_or_shape_limit</td><td>must_include, task_shape</td><td>return, json-like, structure, four, requested</td></tr>
+<tr><td>2026</td><td>style-rewrite-concise</td><td>warn</td><td>0.0</td><td>generation_unchanged</td><td>must_include</td><td>rewrite, shorter, natural, chinese, while, preserving</td></tr>
+<tr><td>2026</td><td>summary-evidence-chain</td><td>warn</td><td>0.0</td><td>required_terms_missing</td><td>must_include</td><td>concise, evidence, chain, experiment, review</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

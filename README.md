@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v478.0.0` repeats the v477 token-budget probe across seeds to check whether cap-12 stall relief is stable before changing model size.
+Version `v479.0.0` audits the remaining cap-12 rubric signals from v478, separating required-term/data coverage blockers from model-quality claims.
+
+## Latest v479 checkpoint
+
+- Added `model_capability_rubric_signal_audit` reporting for reading token-budget stability outputs and cap-12 stall diagnostics without rerunning training.
+- Added `scripts/audit_model_capability_rubric_signal.py`, which resolves each seed probe, selects the target token cap, loads stall diagnostics, and summarizes dominant failed checks, missing terms, and stall reasons.
+- Audited the real v478 cap-12 evidence: `must_include` appeared in `20` case rows, `generation_unchanged` appeared in `11`, `required_terms_missing` in `5`, while score-improved and pass-transition counts stayed `0`.
+- Archived the v479 rubric signal audit in `e/479` and added the code explanation in `代码讲解记录_模型能力阶段/493-v479-model-capability-rubric-signal-audit.md`.
 
 ## Latest v478 checkpoint
+
+Version `v478.0.0` repeats the v477 token-budget probe across seeds to check whether cap-12 stall relief is stable before changing model size.
+
 
 - Added `model_capability_token_budget_stability` reporting for comparing v477-style token-budget probes across seeds.
 - Added `scripts/run_model_capability_token_budget_stability.py`, which runs the existing token-budget probe per seed and summarizes token-stall relief across JSON/CSV/text/Markdown/HTML outputs.
