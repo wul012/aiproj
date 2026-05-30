@@ -12,6 +12,7 @@ from minigpt.server_contracts import (
     InferenceSafetyProfile,
     build_checkpoint_compare_payload,
     build_checkpoints_payload,
+    build_generation_profiles_payload,
     build_health_payload,
     build_model_info_payload,
     metadata_run_dir,
@@ -53,6 +54,9 @@ def handle_get_request(
         return
     if parsed.path == "/api/checkpoint-compare":
         handler._send_json(build_checkpoint_compare_payload(root_path, checkpoint, tokenizer_path, checkpoint_candidates))
+        return
+    if parsed.path == "/api/generation-profiles":
+        handler._send_json(build_generation_profiles_payload())
         return
     if parsed.path == "/api/request-history":
         handle_request_history_endpoint(handler, request_log, parsed.query)

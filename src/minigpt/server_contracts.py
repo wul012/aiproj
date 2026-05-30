@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.generation_profiles import (
     DEFAULT_GENERATION_PROFILE_ID,
+    build_generation_profiles_payload,
     generation_profile_options,
     merge_blocked_token_texts,
     normalize_generation_profile,
@@ -173,13 +174,16 @@ def build_health_payload(
     request_log_path: str | Any | None = None,
     checkpoint_candidates: list[str | Any] | None = None,
 ) -> dict[str, Any]:
-    return _build_checkpoint_health_payload(
+    payload = _build_checkpoint_health_payload(
         run_dir,
         checkpoint_path,
         safety_profile=safety_profile or InferenceSafetyProfile(),
         request_log_path=request_log_path,
         checkpoint_candidates=checkpoint_candidates,
     )
+    payload["generation_profiles_endpoint"] = "/api/generation-profiles"
+    payload["generation_profiles"] = generation_profile_options()
+    return payload
 
 
 def sse_message(event: str, data: dict[str, Any]) -> bytes:
@@ -307,6 +311,7 @@ __all__ = [
     "InferenceSafetyProfile",
     "build_checkpoint_compare_payload",
     "build_checkpoints_payload",
+    "build_generation_profiles_payload",
     "generation_profile_options",
     "build_health_payload",
     "build_model_info_payload",

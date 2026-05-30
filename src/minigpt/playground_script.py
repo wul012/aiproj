@@ -32,6 +32,20 @@ function generationProfileCommandArg(profile) {{
   if (!profile || !profile.id || profile.id === 'default') return '';
   return ` --generation-profile ${{quoteArg(profile.id)}}`;
 }}
+function populateGenerationProfileSelect(defaultId = 'default') {{
+  const select = document.getElementById('generationProfileSelect');
+  if (!select) return;
+  const previous = select.value;
+  const profiles = MiniGPTPlayground.generationProfiles || [];
+  select.innerHTML = '';
+  for (const profile of profiles) {{
+    const option = document.createElement('option');
+    option.value = profile.id;
+    option.textContent = profile.label || profile.id;
+    select.appendChild(option);
+  }}
+  select.value = previous && profiles.some((profile) => profile.id === previous) ? previous : defaultId;
+}}
 function formatValue(value) {{
   if (value === null || value === undefined || value === '') return 'missing';
   if (typeof value === 'boolean') return value ? 'yes' : 'no';
@@ -119,6 +133,18 @@ async function loadCheckpoints() {{
     MiniGPTPlayground.checkpoints = [];
     status.textContent = 'Start scripts/serve_playground.py for checkpoint selection.';
     select.disabled = true;
+  }}
+}}
+async function loadGenerationProfiles() {{
+  try {{
+    const response = await fetch('/api/generation-profiles');
+    if (!response.ok) throw new Error('generation profiles endpoint unavailable');
+    const data = await response.json();
+    MiniGPTPlayground.generationProfiles = Array.isArray(data.profiles) ? data.profiles : MiniGPTPlayground.generationProfiles || [];
+    populateGenerationProfileSelect(data.default_generation_profile_id || MiniGPTPlayground.defaults.generation_profile || 'default');
+    buildCommands();
+  }} catch (error) {{
+    populateGenerationProfileSelect(MiniGPTPlayground.defaults.generation_profile || 'default');
   }}
 }}
 function populateCheckpointSelect(select, defaultId, preferredIndex) {{
@@ -396,6 +422,7 @@ window.addEventListener('DOMContentLoaded', () => {{
     }});
   }}
   buildCommands();
+  loadGenerationProfiles();
   loadCheckpoints();
   loadCheckpointComparison();
   updateRequestHistoryExportLink();

@@ -184,6 +184,8 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(health["model_info_endpoint"], "/api/model-info")
             self.assertEqual(health["generate_pair_endpoint"], "/api/generate-pair")
             self.assertEqual(health["generate_pair_artifact_endpoint"], "/api/generate-pair-artifact")
+            self.assertEqual(health["generation_profiles_endpoint"], "/api/generation-profiles")
+            self.assertTrue(any(profile["id"] == "suppress_newline_tokens" for profile in health["generation_profiles"]))
             self.assertEqual(health["request_history_endpoint"], "/api/request-history")
             self.assertEqual(Path(health["request_log"]).name, "requests.jsonl")
             self.assertEqual(health["checkpoints_endpoint"], "/api/checkpoints")

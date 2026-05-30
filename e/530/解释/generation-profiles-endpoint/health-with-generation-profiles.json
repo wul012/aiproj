@@ -1,0 +1,52 @@
+﻿{
+    "status":  "ok",
+    "run_dir":  "D:\\aiproj\\e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\loss-alias-focus-run",
+    "checkpoint":  "D:\\aiproj\\e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\loss-alias-focus-run\\checkpoint.pt",
+    "checkpoint_exists":  true,
+    "tokenizer_exists":  true,
+    "playground_exists":  false,
+    "sample_lab_exists":  false,
+    "model_info_endpoint":  "/api/model-info",
+    "generate_endpoint":  "/api/generate",
+    "generate_stream_endpoint":  "/api/generate-stream",
+    "generate_pair_endpoint":  "/api/generate-pair",
+    "generate_pair_artifact_endpoint":  "/api/generate-pair-artifact",
+    "checkpoints_endpoint":  "/api/checkpoints",
+    "checkpoint_compare_endpoint":  "/api/checkpoint-compare",
+    "request_history_endpoint":  "/api/request-history",
+    "request_history_detail_endpoint":  "/api/request-history-detail",
+    "checkpoint_count":  1,
+    "default_checkpoint_id":  "default",
+    "safety":  {
+                   "max_prompt_chars":  2000,
+                   "max_new_tokens":  512,
+                   "min_temperature":  0.05,
+                   "max_temperature":  2.0,
+                   "max_top_k":  200,
+                   "max_blocked_token_texts":  16,
+                   "max_body_bytes":  16384,
+                   "max_stream_seconds":  30.0
+               },
+    "request_log":  "D:\\aiproj\\e\\530\\解释\\generation-profiles-endpoint\\inference_requests.jsonl",
+    "request_log_exists":  false,
+    "generation_profiles_endpoint":  "/api/generation-profiles",
+    "generation_profiles":  [
+                                {
+                                    "id":  "default",
+                                    "label":  "Default",
+                                    "description":  "Use the model\u0027s normal decoding path.",
+                                    "blocked_token_texts":  [
+
+                                                            ]
+                                },
+                                {
+                                    "id":  "suppress_newline_tokens",
+                                    "label":  "Suppress newline tokens",
+                                    "description":  "Block tokenizer entries containing newline separators during decoding.",
+                                    "blocked_token_texts":  [
+                                                                "\n",
+                                                                "\r"
+                                                            ]
+                                }
+                            ]
+}

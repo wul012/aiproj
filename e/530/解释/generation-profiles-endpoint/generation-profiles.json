@@ -1,0 +1,24 @@
+﻿{
+    "status":  "ok",
+    "default_generation_profile_id":  "default",
+    "profile_count":  2,
+    "profiles":  [
+                     {
+                         "id":  "default",
+                         "label":  "Default",
+                         "description":  "Use the model\u0027s normal decoding path.",
+                         "blocked_token_texts":  [
+
+                                                 ]
+                     },
+                     {
+                         "id":  "suppress_newline_tokens",
+                         "label":  "Suppress newline tokens",
+                         "description":  "Block tokenizer entries containing newline separators during decoding.",
+                         "blocked_token_texts":  [
+                                                     "\n",
+                                                     "\r"
+                                                 ]
+                     }
+                 ]
+}

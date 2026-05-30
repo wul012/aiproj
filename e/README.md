@@ -245,6 +245,10 @@ e/528/解释/说明.md
 e/529/图片
 e/529/解释/说明.md
  -> v529 generation profile playground/API/CLI surface 的运行截图和解释
+
+e/530/图片
+e/530/解释/说明.md
+ -> v530 generation profiles endpoint and runtime playground registry 的运行截图和解释
 ```
 
 写入规则：

@@ -25,6 +25,7 @@ from minigpt.server_contracts import (
     InferenceSafetyProfile,
     build_checkpoint_compare_payload,
     build_checkpoints_payload,
+    build_generation_profiles_payload,
     build_health_payload,
     build_model_info_payload,
     discover_checkpoint_options,

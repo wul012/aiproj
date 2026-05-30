@@ -39,6 +39,8 @@ class ServerContractsSplitTests(unittest.TestCase):
             compare = server_contracts.build_checkpoint_compare_payload(run_dir)
 
             self.assertEqual(health["default_checkpoint_id"], "default")
+            self.assertEqual(health["generation_profiles_endpoint"], "/api/generation-profiles")
+            self.assertTrue(any(profile["id"] == "suppress_newline_tokens" for profile in health["generation_profiles"]))
             self.assertEqual(checkpoints["checkpoint_count"], 2)
             rows = {row["id"]: row for row in compare["checkpoints"]}
             self.assertEqual(rows["candidate"]["parameter_count"], 7)
@@ -102,6 +104,7 @@ class ServerContractsSplitTests(unittest.TestCase):
         self.assertIs(server.build_model_info_payload, server_contracts.build_model_info_payload)
         self.assertIs(server.build_checkpoint_compare_payload, server_contracts.build_checkpoint_compare_payload)
         self.assertIs(server.discover_checkpoint_options, server_contracts.discover_checkpoint_options)
+        self.assertIs(server.build_generation_profiles_payload, server_contracts.build_generation_profiles_payload)
         self.assertIs(server.generation_profile_options, server_contracts.generation_profile_options)
         self.assertIs(server.sse_message, server_contracts.sse_message)
         self.assertIs(server.stream_timeout_payload, server_contracts.stream_timeout_payload)

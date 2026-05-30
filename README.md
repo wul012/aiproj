@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v529.0.0` exposes the newline-suppression decoding behavior as an explicit generation profile.
+Version `v530.0.0` adds a runtime generation profile registry endpoint for the playground/server contract.
+
+## Latest v530 checkpoint
+
+- Added `build_generation_profiles_payload()` and GET `/api/generation-profiles` so the server can publish supported generation profiles.
+- Extended health payloads with `generation_profiles_endpoint` and the current profile list.
+- Updated playground JavaScript to load `/api/generation-profiles` at runtime and repopulate the Profile select, while retaining the static HTML fallback.
+- Ran the real endpoint against the v528 seed `528` checkpoint server: `profile_count=2` with `default` and `suppress_newline_tokens`.
+- Archived the v530 generation profile endpoint evidence in `e/530` and added the code explanation in `代码讲解记录_模型能力阶段/544-v530-generation-profiles-endpoint.md`.
 
 ## Latest v529 checkpoint
 

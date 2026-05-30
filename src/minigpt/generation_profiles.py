@@ -38,6 +38,15 @@ def generation_profile_options() -> list[dict[str, Any]]:
     return [profile.to_dict() for profile in GENERATION_PROFILES]
 
 
+def build_generation_profiles_payload() -> dict[str, Any]:
+    return {
+        "status": "ok",
+        "default_generation_profile_id": DEFAULT_GENERATION_PROFILE_ID,
+        "profile_count": len(GENERATION_PROFILES),
+        "profiles": generation_profile_options(),
+    }
+
+
 def generation_profile_ids() -> tuple[str, ...]:
     return tuple(profile.id for profile in GENERATION_PROFILES)
 
