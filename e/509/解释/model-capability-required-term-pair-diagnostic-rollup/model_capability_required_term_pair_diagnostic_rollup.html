@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair diagnostic rollup</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#4f46e5}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px}
+h2{font-size:18px;margin:0 0 12px}
+h3{font-size:14px;margin:8px 0;color:#334155}
+p{color:var(--muted);line-height:1.55}
+ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+.path{font-family:Consolas,"Courier New",monospace;font-size:12px;overflow-wrap:anywhere;color:#475569}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair diagnostic rollup</h1><p>Diagnostics show internal signal and partial generation, but prefix completion still has span gaps.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>rollup_continue_with_span_objective</strong></div><div class="card"><span>Stages</span><strong>6</strong></div><div class="card"><span>Full profiles</span><strong>0</strong></div><div class="card"><span>Late hits</span><strong>2</strong></div><div class="card"><span>Improved</span><strong>2</strong></div><div class="card"><span>Span gaps</span><strong>3</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>build the smallest continuation-span training objective for fixed/loss instead of more decoding tweaks</p></section>
+<section class="panel">
+<h2>Next Experiment Plan</h2>
+<p><strong>continuation_span_objective_fixed_loss</strong> · recommended=True</p>
+<p>internal signal exists, decoding does not recover full profiles, and prefix completion still has span gaps</p>
+<div class="cols">
+<div><h3>Steps</h3><ul><li>build a tiny continuation-span corpus where prompts stop immediately before fixed/loss</li><li>train a candidate from the current best symmetric-anchor checkpoint with a small repeatable budget</li><li>evaluate free generation, first-token rank, and prefix-completion minimum-hit length with the same prompts</li><li>accept only if full-profile hits improve without losing the existing loss one-token completion signal</li></ul></div>
+<div><h3>Success Criteria</h3><ul><li>decoding_profile_full_hit_count increases above 0</li><li>fixed minimum_hit_prefix_token_count drops below 4</li><li>loss one-token prefix completion is retained</li><li>all generated artifacts link back to the v509 source rollup</li></ul></div>
+<div><h3>Excluded</h3><ul><li>adding more decoding profiles before changing the span objective</li><li>claiming production model quality from forced-prefix evidence</li><li>training on unrelated larger data without preserving the fixed/loss prompt set</li></ul></div>
+</div>
+</section>
+<section class="panel">
+<h2>Stages</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Stage</th><th>Status</th><th>Decision</th><th>Key metric</th><th>Source</th></tr></thead>
+<tbody><tr><td>internal forced-choice signal</td><td>pass</td><td>required_term_pair_forced_choice_internal_match</td><td>full_match_variants=1</td><td class="path">e\503\解释\model-capability-required-term-pair-forced-choice-diagnostic\model_capability_required_term_pair_forced_choice_diagnostic.json</td></tr>
+<tr><td>internal/free-generation gap</td><td>pass</td><td>required_term_pair_generation_gap_observed</td><td>internal_only_prompts=2</td><td class="path">e\504\解释\model-capability-required-term-pair-generation-gap\model_capability_required_term_pair_generation_gap.json</td></tr>
+<tr><td>decoding profile partial expression</td><td>pass</td><td>required_term_pair_decoding_gap_partial_only</td><td>continuation_hits=2; full_profiles=0</td><td class="path">e\505\解释\model-capability-required-term-pair-decoding-gap-probe\model_capability_required_term_pair_decoding_gap_probe.json</td></tr>
+<tr><td>first-token path trace</td><td>pass</td><td>required_term_pair_decoding_path_late_expression</td><td>first_sample_matches=0; late_hits=2</td><td class="path">e\506\解释\model-capability-required-term-pair-decoding-path-trace\model_capability_required_term_pair_decoding_path_trace.json</td></tr>
+<tr><td>constrained first-token repair</td><td>pass</td><td>required_term_pair_first_token_repair_improved_partial</td><td>improved_prompts=2; full_profiles=0</td><td class="path">e\507\解释\model-capability-required-term-pair-first-token-repair\model_capability_required_term_pair_first_token_repair.json</td></tr>
+<tr><td>prefix completion span check</td><td>pass</td><td>required_term_pair_prefix_completion_long_prefix</td><td>one_token_hits=3; span_gaps=3</td><td class="path">e\508\解释\model-capability-required-term-pair-prefix-completion-sweep\model_capability_required_term_pair_prefix_completion_sweep.json</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

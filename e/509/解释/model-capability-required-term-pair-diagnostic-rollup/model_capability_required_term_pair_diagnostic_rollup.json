@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair diagnostic rollup",
+  "generated_at": "2026-05-30T05:38:07Z",
+  "status": "pass",
+  "decision": "required_term_pair_next_span_objective",
+  "failed_count": 0,
+  "issues": [],
+  "out_dir": "e\\509\\解释\\model-capability-required-term-pair-diagnostic-rollup",
+  "stage_rows": [
+    {
+      "stage": "forced_choice",
+      "label": "internal forced-choice signal",
+      "status": "pass",
+      "decision": "required_term_pair_forced_choice_internal_match",
+      "source_path": "e\\503\\解释\\model-capability-required-term-pair-forced-choice-diagnostic\\model_capability_required_term_pair_forced_choice_diagnostic.json",
+      "summary": {
+        "forced_choice_diagnostic_decision": "forced_choice_full_match_observed",
+        "source_branch_retention_sweep_decision": "branch_retention_sweep_tradeoff_remains",
+        "source_pair_full_hit_variant_count": 0,
+        "target_count": 1,
+        "run_count": 3,
+        "score_row_count": 12,
+        "prompt_summary_count": 6,
+        "expected_best_count": 4,
+        "expected_best_rate": 0.6667,
+        "forced_choice_full_match_variant_count": 1,
+        "collapse_candidate_counts": {
+          "fixed": 2
+        },
+        "best_variant_id": "symmetric-anchor",
+        "best_variant_expected_best_count": 2,
+        "best_variant_forced_choice_full_match": true
+      }
+    },
+    {
+      "stage": "generation_gap",
+      "label": "internal/free-generation gap",
+      "status": "pass",
+      "decision": "required_term_pair_generation_gap_observed",
+      "source_path": "e\\504\\解释\\model-capability-required-term-pair-generation-gap\\model_capability_required_term_pair_generation_gap.json",
+      "summary": {
+        "generation_gap_decision": "generation_gap_internal_signal_not_expressed",
+        "source_forced_choice_decision": "forced_choice_full_match_observed",
+        "source_branch_retention_sweep_decision": "branch_retention_sweep_tradeoff_remains",
+        "prompt_count": 6,
+        "variant_count": 3,
+        "forced_choice_full_match_variant_count": 1,
+        "generation_full_match_variant_count": 0,
+        "forced_generation_gap_variant_count": 1,
+        "aligned_hit_prompt_count": 2,
+        "internal_only_prompt_count": 2,
+        "generation_only_prompt_count": 0,
+        "aligned_miss_prompt_count": 2,
+        "best_gap_variant_id": "symmetric-anchor",
+        "best_gap_variant_internal_only_count": 2
+      }
+    },
+    {
+      "stage": "decoding_gap",
+      "label": "decoding profile partial expression",
+      "status": "pass",
+      "decision": "required_term_pair_decoding_gap_partial_only",
+      "source_path": "e\\505\\解释\\model-capability-required-term-pair-decoding-gap-probe\\model_capability_required_term_pair_decoding_gap_probe.json",
+      "summary": {
+        "decoding_gap_probe_decision": "decoding_gap_probe_partial_expression_only",
+        "target_count": 1,
+        "profile_count": 3,
+        "probe_count": 6,
+        "continuation_hit_count": 2,
+        "profile_full_hit_count": 0,
+        "best_variant_id": "symmetric-anchor",
+        "best_profile_id": "top2-24",
+        "best_profile_hit_count": 1
+      }
+    },
+    {
+      "stage": "path_trace",
+      "label": "first-token path trace",
+      "status": "pass",
+      "decision": "required_term_pair_decoding_path_late_expression",
+      "source_path": "e\\506\\解释\\model-capability-required-term-pair-decoding-path-trace\\model_capability_required_term_pair_decoding_path_trace.json",
+      "summary": {
+        "decoding_path_trace_decision": "decoding_path_trace_late_expression_after_first_miss",
+        "target_count": 1,
+        "probe_count": 6,
+        "trace_step_count": 120,
+        "continuation_hit_count": 2,
+        "first_sample_match_count": 0,
+        "late_hit_after_first_miss_count": 2,
+        "first_expected_rank_le_5_count": 6,
+        "first_sample_miss_count": 6
+      }
+    },
+    {
+      "stage": "first_token_repair",
+      "label": "constrained first-token repair",
+      "status": "pass",
+      "decision": "required_term_pair_first_token_repair_improved_partial",
+      "source_path": "e\\507\\解释\\model-capability-required-term-pair-first-token-repair\\model_capability_required_term_pair_first_token_repair.json",
+      "summary": {
+        "first_token_repair_decision": "first_token_repair_improved_partial_expression",
+        "target_count": 1,
+        "repair_count": 6,
+        "source_continuation_hit_count": 2,
+        "repaired_continuation_hit_count": 3,
+        "improved_prompt_count": 2,
+        "repaired_profile_full_hit_count": 0,
+        "best_variant_id": "symmetric-anchor",
+        "best_profile_id": "top2-24",
+        "best_profile_repaired_hit_count": 1
+      }
+    },
+    {
+      "stage": "prefix_completion",
+      "label": "prefix completion span check",
+      "status": "pass",
+      "decision": "required_term_pair_prefix_completion_long_prefix",
+      "source_path": "e\\508\\解释\\model-capability-required-term-pair-prefix-completion-sweep\\model_capability_required_term_pair_prefix_completion_sweep.json",
+      "summary": {
+        "prefix_completion_sweep_decision": "prefix_completion_requires_longer_prefix",
+        "target_count": 1,
+        "prefix_row_count": 27,
+        "probe_summary_count": 6,
+        "any_prefix_hit_probe_count": 6,
+        "one_token_prefix_hit_probe_count": 3,
+        "full_prefix_hit_probe_count": 6,
+        "span_completion_gap_probe_count": 3
+      }
+    }
+  ],
+  "summary": {
+    "rollup_decision": "rollup_continue_with_span_objective",
+    "stage_count": 6,
+    "passing_stage_count": 6,
+    "forced_choice_full_match_variant_count": 1,
+    "forced_generation_gap_variant_count": 1,
+    "decoding_profile_full_hit_count": 0,
+    "decoding_continuation_hit_count": 2,
+    "path_first_sample_match_count": 0,
+    "path_late_hit_count": 2,
+    "first_token_repair_improved_prompt_count": 2,
+    "first_token_repair_full_hit_count": 0,
+    "prefix_one_token_hit_probe_count": 3,
+    "prefix_full_hit_probe_count": 6,
+    "span_completion_gap_probe_count": 3
+  },
+  "next_experiment_plan": {
+    "plan_id": "continuation_span_objective_fixed_loss",
+    "recommended": true,
+    "reason": "internal signal exists, decoding does not recover full profiles, and prefix completion still has span gaps",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "source_metrics": {
+      "forced_choice_full_match_variant_count": 1,
+      "decoding_profile_full_hit_count": 0,
+      "first_token_repair_improved_prompt_count": 2,
+      "prefix_one_token_hit_probe_count": 3,
+      "span_completion_gap_probe_count": 3
+    },
+    "steps": [
+      "build a tiny continuation-span corpus where prompts stop immediately before fixed/loss",
+      "train a candidate from the current best symmetric-anchor checkpoint with a small repeatable budget",
+      "evaluate free generation, first-token rank, and prefix-completion minimum-hit length with the same prompts",
+      "accept only if full-profile hits improve without losing the existing loss one-token completion signal"
+    ],
+    "minimum_success_criteria": [
+      "decoding_profile_full_hit_count increases above 0",
+      "fixed minimum_hit_prefix_token_count drops below 4",
+      "loss one-token prefix completion is retained",
+      "all generated artifacts link back to the v509 source rollup"
+    ],
+    "excluded_options": [
+      "adding more decoding profiles before changing the span objective",
+      "claiming production model quality from forced-prefix evidence",
+      "training on unrelated larger data without preserving the fixed/loss prompt set"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "diagnostic_rollup_only",
+    "reason": "Diagnostics show internal signal and partial generation, but prefix completion still has span gaps.",
+    "next_action": "build the smallest continuation-span training objective for fixed/loss instead of more decoding tweaks"
+  }
+}

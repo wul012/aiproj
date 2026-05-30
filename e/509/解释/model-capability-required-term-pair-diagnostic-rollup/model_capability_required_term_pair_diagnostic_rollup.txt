@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_next_span_objective
+rollup_decision=rollup_continue_with_span_objective
+next_plan_id=continuation_span_objective_fixed_loss
+next_plan_recommended=True
+stage_count=6
+passing_stage_count=6
+decoding_profile_full_hit_count=0
+span_completion_gap_probe_count=3
+next_action=build the smallest continuation-span training objective for fixed/loss instead of more decoding tweaks

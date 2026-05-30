@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v508.0.0` sweeps forced required-term prefix lengths and shows `loss` completes from a one-token prefix while `fixed` needs a longer forced span.
+Version `v509.0.0` rolls up v503-v508 required-term pair diagnostics and selects the next continuation-span objective experiment.
+
+## Latest v509 checkpoint
+
+- Added `model_capability_required_term_pair_diagnostic_rollup`, which collects the v503-v508 required-term pair reports into one source-linked stage summary.
+- Added `scripts/run_model_capability_required_term_pair_diagnostic_rollup.py`; it scans `e/` for the six source diagnostics and writes JSON/CSV/text/Markdown/HTML outputs.
+- Ran the real rollup with `stage_count=6`, `passing_stage_count=6`, `decoding_profile_full_hit_count=0`, and `span_completion_gap_probe_count=3`.
+- Interpreted v509 as a phase decision: continue with a smallest `continuation_span_objective_fixed_loss` experiment instead of adding more decoding tweaks.
+- Archived the v509 diagnostic rollup evidence in `e/509` and added the code explanation in `代码讲解记录_模型能力阶段/523-v509-model-capability-required-term-pair-diagnostic-rollup.md`.
 
 ## Latest v508 checkpoint
 

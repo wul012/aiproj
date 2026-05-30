@@ -161,6 +161,10 @@ e/507/解释/说明.md
 e/508/图片
 e/508/解释/说明.md
  -> v508 model capability required-term pair prefix-completion sweep 的运行截图和解释
+
+e/509/图片
+e/509/解释/说明.md
+ -> v509 model capability required-term pair diagnostic rollup 的运行截图和解释
 ```
 
 写入规则：

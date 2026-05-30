@@ -1,0 +1,57 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair diagnostic rollup" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Diagnostics show internal signal and partial generation, but prefix completion still has span gaps.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: rollup_continue_with_span_objective
+    - generic [ref=e13]:
+      - generic [ref=e14]: Stages
+      - strong [ref=e15]: "6"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Full profiles
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Late hits
+      - strong [ref=e21]: "2"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Improved
+      - strong [ref=e24]: "2"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Span gaps
+      - strong [ref=e27]: "3"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: build the smallest continuation-span training objective for fixed/loss instead of more decoding tweaks
+  - generic [ref=e31]:
+    - heading "Next Experiment Plan" [level=2] [ref=e32]
+    - paragraph [ref=e33]:
+      - strong [ref=e34]: continuation_span_objective_fixed_loss
+      - text: · recommended=True
+    - paragraph [ref=e35]: internal signal exists, decoding does not recover full profiles, and prefix completion still has span gaps
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - heading "Steps" [level=3] [ref=e38]
+        - list [ref=e39]
+      - generic [ref=e44]:
+        - heading "Success Criteria" [level=3] [ref=e45]
+        - list [ref=e46]
+      - generic [ref=e51]:
+        - heading "Excluded" [level=3] [ref=e52]
+        - list [ref=e53]
+  - generic [ref=e57]:
+    - heading "Stages" [level=2] [ref=e58]
+    - table [ref=e60]:
+      - rowgroup [ref=e61]:
+        - row "Stage Status Decision Key metric Source" [ref=e62]
+      - rowgroup [ref=e68]:
+        - row "internal forced-choice signal pass required_term_pair_forced_choice_internal_match full_match_variants=1 e\\503\\解释\\model-capability-required-term-pair-forced-choice-diagnostic\\model_capability_required_term_pair_forced_choice_diagnostic.json" [ref=e69]
+        - row "internal/free-generation gap pass required_term_pair_generation_gap_observed internal_only_prompts=2 e\\504\\解释\\model-capability-required-term-pair-generation-gap\\model_capability_required_term_pair_generation_gap.json" [ref=e75]
+        - row "decoding profile partial expression pass required_term_pair_decoding_gap_partial_only continuation_hits=2; full_profiles=0 e\\505\\解释\\model-capability-required-term-pair-decoding-gap-probe\\model_capability_required_term_pair_decoding_gap_probe.json" [ref=e81]
+        - row "first-token path trace pass required_term_pair_decoding_path_late_expression first_sample_matches=0; late_hits=2 e\\506\\解释\\model-capability-required-term-pair-decoding-path-trace\\model_capability_required_term_pair_decoding_path_trace.json" [ref=e87]
+        - row "constrained first-token repair pass required_term_pair_first_token_repair_improved_partial improved_prompts=2; full_profiles=0 e\\507\\解释\\model-capability-required-term-pair-first-token-repair\\model_capability_required_term_pair_first_token_repair.json" [ref=e93]
+        - row "prefix completion span check pass required_term_pair_prefix_completion_long_prefix one_token_hits=3; span_gaps=3 e\\508\\解释\\model-capability-required-term-pair-prefix-completion-sweep\\model_capability_required_term_pair_prefix_completion_sweep.json" [ref=e99]

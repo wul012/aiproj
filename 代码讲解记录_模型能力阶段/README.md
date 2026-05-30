@@ -119,6 +119,9 @@
 522-v508-model-capability-required-term-pair-prefix-completion-sweep.md
  -> v508 code explanation: sweep forced required-term prefix lengths and show fixed needs a longer forced span than loss.
 
+523-v509-model-capability-required-term-pair-diagnostic-rollup.md
+ -> v509 code explanation: roll up v503-v508 diagnostics and choose continuation-span objective as the next experiment.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
