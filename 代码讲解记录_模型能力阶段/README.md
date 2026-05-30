@@ -116,6 +116,9 @@
 521-v507-model-capability-required-term-pair-first-token-repair.md
  -> v507 code explanation: force expected first tokens after v506 and show constrained repair improves partial expression but not full pair recovery.
 
+522-v508-model-capability-required-term-pair-prefix-completion-sweep.md
+ -> v508 code explanation: sweep forced required-term prefix lengths and show fixed needs a longer forced span than loss.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

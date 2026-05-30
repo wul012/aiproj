@@ -1,0 +1,5332 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair prefix completion sweep",
+  "generated_at": "2026-05-30T05:17:57Z",
+  "status": "pass",
+  "decision": "required_term_pair_prefix_completion_long_prefix",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_decoding_path_trace": "D:\\aiproj\\e\\506\\解释\\model-capability-required-term-pair-decoding-path-trace\\model_capability_required_term_pair_decoding_path_trace.json",
+  "out_dir": "e\\508\\解释\\model-capability-required-term-pair-prefix-completion-sweep",
+  "settings": {
+    "variant_limit": 1,
+    "device": "cpu",
+    "experiment_boundary": "forced-prefix completion only; no checkpoint training"
+  },
+  "targets": [
+    {
+      "variant_id": "symmetric-anchor",
+      "probe_count": 6,
+      "probes": [
+        {
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+          "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+          "device": "cpu",
+          "profile_id": "greedy-12",
+          "prompt": "fixed:",
+          "prompt_term": "fixed",
+          "expected_term": "fixed",
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "seed": 505,
+          "generated": "fixed:didddf\nf\nfix",
+          "continuation": "didddf\nf\nfix",
+          "continuation_preview": "didddf\nf\nfix",
+          "generated_preview": "fixed:didddf\nf\nfix",
+          "continuation_hit": false,
+          "generated_hit": true,
+          "first_expected_token_id": 15,
+          "first_expected_token_text": "f",
+          "first_expected_token_rank": 2,
+          "first_expected_token_logprob": -Infinity,
+          "first_sample_token_id": 13,
+          "first_sample_text": "d",
+          "first_sample_matches_expected_first_token": false,
+          "expected_first_token_seen_step": 5,
+          "steps": [
+            {
+              "step": 0,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "d"
+            },
+            {
+              "step": 1,
+              "sampled_token_id": 17,
+              "sampled_text": "i",
+              "continuation_preview": "di"
+            },
+            {
+              "step": 2,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "did"
+            },
+            {
+              "step": 3,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didd"
+            },
+            {
+              "step": 4,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "diddd"
+            },
+            {
+              "step": 5,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf"
+            },
+            {
+              "step": 6,
+              "sampled_token_id": 1,
+              "sampled_text": "\n",
+              "continuation_preview": "didddf\n"
+            },
+            {
+              "step": 7,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf\nf"
+            },
+            {
+              "step": 8,
+              "sampled_token_id": 1,
+              "sampled_text": "\n",
+              "continuation_preview": "didddf\nf\n"
+            },
+            {
+              "step": 9,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf\nf\nf"
+            },
+            {
+              "step": 10,
+              "sampled_token_id": 17,
+              "sampled_text": "i",
+              "continuation_preview": "didddf\nf\nfi"
+            },
+            {
+              "step": 11,
+              "sampled_token_id": 31,
+              "sampled_text": "x",
+              "continuation_preview": "didddf\nf\nfix"
+            }
+          ]
+        },
+        {
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+          "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+          "device": "cpu",
+          "profile_id": "greedy-12",
+          "prompt": "loss:",
+          "prompt_term": "loss",
+          "expected_term": "loss",
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "seed": 505,
+          "generated": "loss:ssssssssssss",
+          "continuation": "ssssssssssss",
+          "continuation_preview": "ssssssssssss",
+          "generated_preview": "loss:ssssssssssss",
+          "continuation_hit": false,
+          "generated_hit": true,
+          "first_expected_token_id": 19,
+          "first_expected_token_text": "l",
+          "first_expected_token_rank": 2,
+          "first_expected_token_logprob": -Infinity,
+          "first_sample_token_id": 26,
+          "first_sample_text": "s",
+          "first_sample_matches_expected_first_token": false,
+          "expected_first_token_seen_step": null,
+          "steps": [
+            {
+              "step": 0,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "s"
+            },
+            {
+              "step": 1,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ss"
+            },
+            {
+              "step": 2,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sss"
+            },
+            {
+              "step": 3,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssss"
+            },
+            {
+              "step": 4,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssss"
+            },
+            {
+              "step": 5,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssss"
+            },
+            {
+              "step": 6,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss"
+            },
+            {
+              "step": 7,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssss"
+            },
+            {
+              "step": 8,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssss"
+            },
+            {
+              "step": 9,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssss"
+            },
+            {
+              "step": 10,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssss"
+            },
+            {
+              "step": 11,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssss"
+            }
+          ]
+        },
+        {
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+          "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+          "device": "cpu",
+          "profile_id": "greedy-24",
+          "prompt": "fixed:",
+          "prompt_term": "fixed",
+          "expected_term": "fixed",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 1,
+          "seed": 505,
+          "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+          "continuation": "didddf\nf\nfixedddddddd:lo",
+          "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+          "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+          "continuation_hit": true,
+          "generated_hit": true,
+          "first_expected_token_id": 15,
+          "first_expected_token_text": "f",
+          "first_expected_token_rank": 2,
+          "first_expected_token_logprob": -Infinity,
+          "first_sample_token_id": 13,
+          "first_sample_text": "d",
+          "first_sample_matches_expected_first_token": false,
+          "expected_first_token_seen_step": 5,
+          "steps": [
+            {
+              "step": 0,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "d"
+            },
+            {
+              "step": 1,
+              "sampled_token_id": 17,
+              "sampled_text": "i",
+              "continuation_preview": "di"
+            },
+            {
+              "step": 2,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "did"
+            },
+            {
+              "step": 3,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didd"
+            },
+            {
+              "step": 4,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "diddd"
+            },
+            {
+              "step": 5,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf"
+            },
+            {
+              "step": 6,
+              "sampled_token_id": 1,
+              "sampled_text": "\n",
+              "continuation_preview": "didddf\n"
+            },
+            {
+              "step": 7,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf\nf"
+            },
+            {
+              "step": 8,
+              "sampled_token_id": 1,
+              "sampled_text": "\n",
+              "continuation_preview": "didddf\nf\n"
+            },
+            {
+              "step": 9,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf\nf\nf"
+            },
+            {
+              "step": 10,
+              "sampled_token_id": 17,
+              "sampled_text": "i",
+              "continuation_preview": "didddf\nf\nfi"
+            },
+            {
+              "step": 11,
+              "sampled_token_id": 31,
+              "sampled_text": "x",
+              "continuation_preview": "didddf\nf\nfix"
+            },
+            {
+              "step": 12,
+              "sampled_token_id": 14,
+              "sampled_text": "e",
+              "continuation_preview": "didddf\nf\nfixe"
+            },
+            {
+              "step": 13,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixed"
+            },
+            {
+              "step": 14,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixedd"
+            },
+            {
+              "step": 15,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixeddd"
+            },
+            {
+              "step": 16,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixedddd"
+            },
+            {
+              "step": 17,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixeddddd"
+            },
+            {
+              "step": 18,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixedddddd"
+            },
+            {
+              "step": 19,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixeddddddd"
+            },
+            {
+              "step": 20,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didddf\nf\nfixedddddddd"
+            },
+            {
+              "step": 21,
+              "sampled_token_id": 5,
+              "sampled_text": ":",
+              "continuation_preview": "didddf\nf\nfixedddddddd:"
+            },
+            {
+              "step": 22,
+              "sampled_token_id": 19,
+              "sampled_text": "l",
+              "continuation_preview": "didddf\nf\nfixedddddddd:l"
+            },
+            {
+              "step": 23,
+              "sampled_token_id": 22,
+              "sampled_text": "o",
+              "continuation_preview": "didddf\nf\nfixedddddddd:lo"
+            }
+          ]
+        },
+        {
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+          "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+          "device": "cpu",
+          "profile_id": "greedy-24",
+          "prompt": "loss:",
+          "prompt_term": "loss",
+          "expected_term": "loss",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 1,
+          "seed": 505,
+          "generated": "loss:ssssssssssssssssssssssss",
+          "continuation": "ssssssssssssssssssssssss",
+          "continuation_preview": "ssssssssssssssssssssssss",
+          "generated_preview": "loss:ssssssssssssssssssssssss",
+          "continuation_hit": false,
+          "generated_hit": true,
+          "first_expected_token_id": 19,
+          "first_expected_token_text": "l",
+          "first_expected_token_rank": 2,
+          "first_expected_token_logprob": -Infinity,
+          "first_sample_token_id": 26,
+          "first_sample_text": "s",
+          "first_sample_matches_expected_first_token": false,
+          "expected_first_token_seen_step": null,
+          "steps": [
+            {
+              "step": 0,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "s"
+            },
+            {
+              "step": 1,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ss"
+            },
+            {
+              "step": 2,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sss"
+            },
+            {
+              "step": 3,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssss"
+            },
+            {
+              "step": 4,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssss"
+            },
+            {
+              "step": 5,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssss"
+            },
+            {
+              "step": 6,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss"
+            },
+            {
+              "step": 7,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssss"
+            },
+            {
+              "step": 8,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssss"
+            },
+            {
+              "step": 9,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssss"
+            },
+            {
+              "step": 10,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssss"
+            },
+            {
+              "step": 11,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssss"
+            },
+            {
+              "step": 12,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssssss"
+            },
+            {
+              "step": 13,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssssss"
+            },
+            {
+              "step": 14,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssssssss"
+            },
+            {
+              "step": 15,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssssssss"
+            },
+            {
+              "step": 16,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssssssssss"
+            },
+            {
+              "step": 17,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssssssssss"
+            },
+            {
+              "step": 18,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssssssssssss"
+            },
+            {
+              "step": 19,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssssssssssss"
+            },
+            {
+              "step": 20,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssssssssssssss"
+            },
+            {
+              "step": 21,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssssssssssssss"
+            },
+            {
+              "step": 22,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssssssssssssssssssss"
+            },
+            {
+              "step": 23,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssssssssssssssssssssss"
+            }
+          ]
+        },
+        {
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+          "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+          "device": "cpu",
+          "profile_id": "top2-24",
+          "prompt": "fixed:",
+          "prompt_term": "fixed",
+          "expected_term": "fixed",
+          "max_new_tokens": 24,
+          "temperature": 0.35,
+          "top_k": 2,
+          "seed": 1505,
+          "generated": "fixed:didddf:losssssssssssssss",
+          "continuation": "didddf:losssssssssssssss",
+          "continuation_preview": "didddf:losssssssssssssss",
+          "generated_preview": "fixed:didddf:losssssssssssssss",
+          "continuation_hit": false,
+          "generated_hit": true,
+          "first_expected_token_id": 15,
+          "first_expected_token_text": "f",
+          "first_expected_token_rank": 3,
+          "first_expected_token_logprob": -Infinity,
+          "first_sample_token_id": 13,
+          "first_sample_text": "d",
+          "first_sample_matches_expected_first_token": false,
+          "expected_first_token_seen_step": 5,
+          "steps": [
+            {
+              "step": 0,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "d"
+            },
+            {
+              "step": 1,
+              "sampled_token_id": 17,
+              "sampled_text": "i",
+              "continuation_preview": "di"
+            },
+            {
+              "step": 2,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "did"
+            },
+            {
+              "step": 3,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "didd"
+            },
+            {
+              "step": 4,
+              "sampled_token_id": 13,
+              "sampled_text": "d",
+              "continuation_preview": "diddd"
+            },
+            {
+              "step": 5,
+              "sampled_token_id": 15,
+              "sampled_text": "f",
+              "continuation_preview": "didddf"
+            },
+            {
+              "step": 6,
+              "sampled_token_id": 5,
+              "sampled_text": ":",
+              "continuation_preview": "didddf:"
+            },
+            {
+              "step": 7,
+              "sampled_token_id": 19,
+              "sampled_text": "l",
+              "continuation_preview": "didddf:l"
+            },
+            {
+              "step": 8,
+              "sampled_token_id": 22,
+              "sampled_text": "o",
+              "continuation_preview": "didddf:lo"
+            },
+            {
+              "step": 9,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:los"
+            },
+            {
+              "step": 10,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:loss"
+            },
+            {
+              "step": 11,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losss"
+            },
+            {
+              "step": 12,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:lossss"
+            },
+            {
+              "step": 13,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losssss"
+            },
+            {
+              "step": 14,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:lossssss"
+            },
+            {
+              "step": 15,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losssssss"
+            },
+            {
+              "step": 16,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:lossssssss"
+            },
+            {
+              "step": 17,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losssssssss"
+            },
+            {
+              "step": 18,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:lossssssssss"
+            },
+            {
+              "step": 19,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losssssssssss"
+            },
+            {
+              "step": 20,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:lossssssssssss"
+            },
+            {
+              "step": 21,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losssssssssssss"
+            },
+            {
+              "step": 22,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:lossssssssssssss"
+            },
+            {
+              "step": 23,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "didddf:losssssssssssssss"
+            }
+          ]
+        },
+        {
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+          "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+          "device": "cpu",
+          "profile_id": "top2-24",
+          "prompt": "loss:",
+          "prompt_term": "loss",
+          "expected_term": "loss",
+          "max_new_tokens": 24,
+          "temperature": 0.35,
+          "top_k": 2,
+          "seed": 1505,
+          "generated": "loss:sssssss\nlossssssssssssss",
+          "continuation": "sssssss\nlossssssssssssss",
+          "continuation_preview": "sssssss\nlossssssssssssss",
+          "generated_preview": "loss:sssssss\nlossssssssssssss",
+          "continuation_hit": true,
+          "generated_hit": true,
+          "first_expected_token_id": 19,
+          "first_expected_token_text": "l",
+          "first_expected_token_rank": 3,
+          "first_expected_token_logprob": -Infinity,
+          "first_sample_token_id": 26,
+          "first_sample_text": "s",
+          "first_sample_matches_expected_first_token": false,
+          "expected_first_token_seen_step": 8,
+          "steps": [
+            {
+              "step": 0,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "s"
+            },
+            {
+              "step": 1,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ss"
+            },
+            {
+              "step": 2,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sss"
+            },
+            {
+              "step": 3,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssss"
+            },
+            {
+              "step": 4,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssss"
+            },
+            {
+              "step": 5,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "ssssss"
+            },
+            {
+              "step": 6,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss"
+            },
+            {
+              "step": 7,
+              "sampled_token_id": 1,
+              "sampled_text": "\n",
+              "continuation_preview": "sssssss\n"
+            },
+            {
+              "step": 8,
+              "sampled_token_id": 19,
+              "sampled_text": "l",
+              "continuation_preview": "sssssss\nl"
+            },
+            {
+              "step": 9,
+              "sampled_token_id": 22,
+              "sampled_text": "o",
+              "continuation_preview": "sssssss\nlo"
+            },
+            {
+              "step": 10,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlos"
+            },
+            {
+              "step": 11,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nloss"
+            },
+            {
+              "step": 12,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlosss"
+            },
+            {
+              "step": 13,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlossss"
+            },
+            {
+              "step": 14,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlosssss"
+            },
+            {
+              "step": 15,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlossssss"
+            },
+            {
+              "step": 16,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlosssssss"
+            },
+            {
+              "step": 17,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlossssssss"
+            },
+            {
+              "step": 18,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlosssssssss"
+            },
+            {
+              "step": 19,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlossssssssss"
+            },
+            {
+              "step": 20,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlosssssssssss"
+            },
+            {
+              "step": 21,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlossssssssssss"
+            },
+            {
+              "step": 22,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlosssssssssssss"
+            },
+            {
+              "step": 23,
+              "sampled_token_id": 26,
+              "sampled_text": "s",
+              "continuation_preview": "sssssss\nlossssssssssssss"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "prefix_rows": [
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "continuation_preview": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\nf\nfix",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 1,
+      "forced_prefix_text": "f",
+      "completion": "fidddfix\nfix",
+      "completion_preview": "fidddfix\nfix",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "continuation_preview": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\nf\nfix",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 2,
+      "forced_prefix_text": "fi",
+      "completion": "fidddfix\nfix",
+      "completion_preview": "fidddfix\nfix",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "continuation_preview": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\nf\nfix",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 3,
+      "forced_prefix_text": "fix",
+      "completion": "fixddfeddddd",
+      "completion_preview": "fixddfeddddd",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "continuation_preview": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\nf\nfix",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 4,
+      "forced_prefix_text": "fixe",
+      "completion": "fixedfeddddd",
+      "completion_preview": "fixedfeddddd",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "continuation_preview": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\nf\nfix",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 5,
+      "forced_prefix_text": "fixed",
+      "completion": "fixedfeddddd",
+      "completion_preview": "fixedfeddddd",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 1,
+      "forced_prefix_text": "l",
+      "completion": "lossssssssss",
+      "completion_preview": "lossssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 2,
+      "forced_prefix_text": "lo",
+      "completion": "lossssssssss",
+      "completion_preview": "lossssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 3,
+      "forced_prefix_text": "los",
+      "completion": "lossssssssss",
+      "completion_preview": "lossssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 4,
+      "forced_prefix_text": "loss",
+      "completion": "lossssssssss",
+      "completion_preview": "lossssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation": "didddf\nf\nfixedddddddd:lo",
+      "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+      "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 14,
+          "sampled_text": "e",
+          "continuation_preview": "didddf\nf\nfixe"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixed"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedd"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddd"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddd"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddd"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddd"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddddd"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddddd"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf\nf\nfixedddddddd:"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf\nf\nfixedddddddd:l"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf\nf\nfixedddddddd:lo"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 1,
+      "forced_prefix_text": "f",
+      "completion": "fidddfix\nfixxedddddddd:l",
+      "completion_preview": "fidddfix\nfixxedddddddd:l",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation": "didddf\nf\nfixedddddddd:lo",
+      "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+      "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 14,
+          "sampled_text": "e",
+          "continuation_preview": "didddf\nf\nfixe"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixed"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedd"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddd"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddd"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddd"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddd"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddddd"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddddd"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf\nf\nfixedddddddd:"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf\nf\nfixedddddddd:l"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf\nf\nfixedddddddd:lo"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 2,
+      "forced_prefix_text": "fi",
+      "completion": "fidddfix\nfixxedddddddd:l",
+      "completion_preview": "fidddfix\nfixxedddddddd:l",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation": "didddf\nf\nfixedddddddd:lo",
+      "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+      "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 14,
+          "sampled_text": "e",
+          "continuation_preview": "didddf\nf\nfixe"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixed"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedd"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddd"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddd"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddd"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddd"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddddd"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddddd"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf\nf\nfixedddddddd:"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf\nf\nfixedddddddd:l"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf\nf\nfixedddddddd:lo"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 3,
+      "forced_prefix_text": "fix",
+      "completion": "fixddfedddddddd:lossssss",
+      "completion_preview": "fixddfedddddddd:lossssss",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation": "didddf\nf\nfixedddddddd:lo",
+      "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+      "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 14,
+          "sampled_text": "e",
+          "continuation_preview": "didddf\nf\nfixe"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixed"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedd"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddd"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddd"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddd"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddd"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddddd"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddddd"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf\nf\nfixedddddddd:"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf\nf\nfixedddddddd:l"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf\nf\nfixedddddddd:lo"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 4,
+      "forced_prefix_text": "fixe",
+      "completion": "fixedfedddddddd:lossssss",
+      "completion_preview": "fixedfedddddddd:lossssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation": "didddf\nf\nfixedddddddd:lo",
+      "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+      "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\n"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "didddf\nf\n"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf\nf\nf"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "didddf\nf\nfi"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 31,
+          "sampled_text": "x",
+          "continuation_preview": "didddf\nf\nfix"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 14,
+          "sampled_text": "e",
+          "continuation_preview": "didddf\nf\nfixe"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixed"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedd"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddd"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddd"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddd"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddd"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixeddddddd"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didddf\nf\nfixedddddddd"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf\nf\nfixedddddddd:"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf\nf\nfixedddddddd:l"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf\nf\nfixedddddddd:lo"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 5,
+      "forced_prefix_text": "fixed",
+      "completion": "fixedfedddddddd:lossssss",
+      "completion_preview": "fixedfedddddddd:lossssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssssssssssssssss",
+      "continuation": "ssssssssssssssssssssssss",
+      "continuation_preview": "ssssssssssssssssssssssss",
+      "generated_preview": "loss:ssssssssssssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 1,
+      "forced_prefix_text": "l",
+      "completion": "lossssssssssssssssssssss",
+      "completion_preview": "lossssssssssssssssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssssssssssssssss",
+      "continuation": "ssssssssssssssssssssssss",
+      "continuation_preview": "ssssssssssssssssssssssss",
+      "generated_preview": "loss:ssssssssssssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 2,
+      "forced_prefix_text": "lo",
+      "completion": "lossssssssssssssssssssss",
+      "completion_preview": "lossssssssssssssssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssssssssssssssss",
+      "continuation": "ssssssssssssssssssssssss",
+      "continuation_preview": "ssssssssssssssssssssssss",
+      "generated_preview": "loss:ssssssssssssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 3,
+      "forced_prefix_text": "los",
+      "completion": "lossssssssssssssssssssss",
+      "completion_preview": "lossssssssssssssssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssssssssssssssss",
+      "continuation": "ssssssssssssssssssssssss",
+      "continuation_preview": "ssssssssssssssssssssssss",
+      "generated_preview": "loss:ssssssssssssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 2,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": null,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssss"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssss"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssss"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssssssssssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssssssssssssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 4,
+      "forced_prefix_text": "loss",
+      "completion": "lossssssssssssssssssssss",
+      "completion_preview": "lossssssssssssssssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "fixed:didddf:losssssssssssssss",
+      "continuation": "didddf:losssssssssssssss",
+      "continuation_preview": "didddf:losssssssssssssss",
+      "generated_preview": "fixed:didddf:losssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf:"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf:l"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf:lo"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:los"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:loss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssssss"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 1,
+      "forced_prefix_text": "f",
+      "completion": "fidddfix\nfixxedddddddd:l",
+      "completion_preview": "fidddfix\nfixxedddddddd:l",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "fixed:didddf:losssssssssssssss",
+      "continuation": "didddf:losssssssssssssss",
+      "continuation_preview": "didddf:losssssssssssssss",
+      "generated_preview": "fixed:didddf:losssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf:"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf:l"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf:lo"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:los"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:loss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssssss"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 2,
+      "forced_prefix_text": "fi",
+      "completion": "fidddlosssssssssssssssss",
+      "completion_preview": "fidddlosssssssssssssssss",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "fixed:didddf:losssssssssssssss",
+      "continuation": "didddf:losssssssssssssss",
+      "continuation_preview": "didddf:losssssssssssssss",
+      "generated_preview": "fixed:didddf:losssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf:"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf:l"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf:lo"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:los"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:loss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssssss"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 3,
+      "forced_prefix_text": "fix",
+      "completion": "fixddfedddddddd:lossssss",
+      "completion_preview": "fixddfedddddddd:lossssss",
+      "prefix_completion_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "fixed:didddf:losssssssssssssss",
+      "continuation": "didddf:losssssssssssssss",
+      "continuation_preview": "didddf:losssssssssssssss",
+      "generated_preview": "fixed:didddf:losssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf:"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf:l"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf:lo"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:los"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:loss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssssss"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 4,
+      "forced_prefix_text": "fixe",
+      "completion": "fixedloddddd\nlossss\nf-ss",
+      "completion_preview": "fixedloddddd\nlossss\nf-ss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "fixed:didddf:losssssssssssssss",
+      "continuation": "didddf:losssssssssssssss",
+      "continuation_preview": "didddf:losssssssssssssss",
+      "generated_preview": "fixed:didddf:losssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true,
+      "first_expected_token_id": 15,
+      "first_expected_token_text": "f",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 13,
+      "first_sample_text": "d",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 5,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "d"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 17,
+          "sampled_text": "i",
+          "continuation_preview": "di"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "did"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "didd"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 13,
+          "sampled_text": "d",
+          "continuation_preview": "diddd"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 15,
+          "sampled_text": "f",
+          "continuation_preview": "didddf"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 5,
+          "sampled_text": ":",
+          "continuation_preview": "didddf:"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "didddf:l"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "didddf:lo"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:los"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:loss"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:lossssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "didddf:losssssssssssssss"
+        }
+      ],
+      "expected_token_count": 5,
+      "forced_prefix_token_count": 5,
+      "forced_prefix_text": "fixed",
+      "completion": "fixedfed\ndddddd\nlossssss",
+      "completion_preview": "fixedfed\ndddddd\nlossssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "loss:sssssss\nlossssssssssssss",
+      "continuation": "sssssss\nlossssssssssssss",
+      "continuation_preview": "sssssss\nlossssssssssssss",
+      "generated_preview": "loss:sssssss\nlossssssssssssss",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 8,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "sssssss\n"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "sssssss\nl"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "sssssss\nlo"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlos"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nloss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 1,
+      "forced_prefix_text": "l",
+      "completion": "losssssss\nfixssss\nlossss",
+      "completion_preview": "losssssss\nfixssss\nlossss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "loss:sssssss\nlossssssssssssss",
+      "continuation": "sssssss\nlossssssssssssss",
+      "continuation_preview": "sssssss\nlossssssssssssss",
+      "generated_preview": "loss:sssssss\nlossssssssssssss",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 8,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "sssssss\n"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "sssssss\nl"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "sssssss\nlo"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlos"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nloss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 2,
+      "forced_prefix_text": "lo",
+      "completion": "lossssssssssssssssssssss",
+      "completion_preview": "lossssssssssssssssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "loss:sssssss\nlossssssssssssss",
+      "continuation": "sssssss\nlossssssssssssss",
+      "continuation_preview": "sssssss\nlossssssssssssss",
+      "generated_preview": "loss:sssssss\nlossssssssssssss",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 8,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "sssssss\n"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "sssssss\nl"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "sssssss\nlo"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlos"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nloss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 3,
+      "forced_prefix_text": "los",
+      "completion": "lossssssssssssssssssssss",
+      "completion_preview": "lossssssssssssssssssssss",
+      "prefix_completion_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "loss:sssssss\nlossssssssssssss",
+      "continuation": "sssssss\nlossssssssssssss",
+      "continuation_preview": "sssssss\nlossssssssssssss",
+      "generated_preview": "loss:sssssss\nlossssssssssssss",
+      "continuation_hit": true,
+      "generated_hit": true,
+      "first_expected_token_id": 19,
+      "first_expected_token_text": "l",
+      "first_expected_token_rank": 3,
+      "first_expected_token_logprob": -Infinity,
+      "first_sample_token_id": 26,
+      "first_sample_text": "s",
+      "first_sample_matches_expected_first_token": false,
+      "expected_first_token_seen_step": 8,
+      "steps": [
+        {
+          "step": 0,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "s"
+        },
+        {
+          "step": 1,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ss"
+        },
+        {
+          "step": 2,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sss"
+        },
+        {
+          "step": 3,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssss"
+        },
+        {
+          "step": 4,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssss"
+        },
+        {
+          "step": 5,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "ssssss"
+        },
+        {
+          "step": 6,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss"
+        },
+        {
+          "step": 7,
+          "sampled_token_id": 1,
+          "sampled_text": "\n",
+          "continuation_preview": "sssssss\n"
+        },
+        {
+          "step": 8,
+          "sampled_token_id": 19,
+          "sampled_text": "l",
+          "continuation_preview": "sssssss\nl"
+        },
+        {
+          "step": 9,
+          "sampled_token_id": 22,
+          "sampled_text": "o",
+          "continuation_preview": "sssssss\nlo"
+        },
+        {
+          "step": 10,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlos"
+        },
+        {
+          "step": 11,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nloss"
+        },
+        {
+          "step": 12,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosss"
+        },
+        {
+          "step": 13,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossss"
+        },
+        {
+          "step": 14,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssss"
+        },
+        {
+          "step": 15,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssss"
+        },
+        {
+          "step": 16,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssss"
+        },
+        {
+          "step": 17,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssss"
+        },
+        {
+          "step": 18,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssss"
+        },
+        {
+          "step": 19,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssss"
+        },
+        {
+          "step": 20,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssss"
+        },
+        {
+          "step": 21,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssss"
+        },
+        {
+          "step": 22,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlosssssssssssss"
+        },
+        {
+          "step": 23,
+          "sampled_token_id": 26,
+          "sampled_text": "s",
+          "continuation_preview": "sssssss\nlossssssssssssss"
+        }
+      ],
+      "expected_token_count": 4,
+      "forced_prefix_token_count": 4,
+      "forced_prefix_text": "loss",
+      "completion": "lossss\nfosssss\nfixs\nfeds",
+      "completion_preview": "lossss\nfosssss\nfixs\nfeds",
+      "prefix_completion_hit": true
+    }
+  ],
+  "probe_summaries": [
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "greedy-12",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "expected_token_count": 5,
+      "tested_prefix_count": 5,
+      "hit_prefix_count": 2,
+      "minimum_hit_prefix_token_count": 4,
+      "full_prefix_hit": true,
+      "one_token_prefix_hit": false,
+      "best_completion_preview": "fixedfeddddd"
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "greedy-12",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "expected_token_count": 4,
+      "tested_prefix_count": 4,
+      "hit_prefix_count": 4,
+      "minimum_hit_prefix_token_count": 1,
+      "full_prefix_hit": true,
+      "one_token_prefix_hit": true,
+      "best_completion_preview": "lossssssssss"
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "greedy-24",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "expected_token_count": 5,
+      "tested_prefix_count": 5,
+      "hit_prefix_count": 2,
+      "minimum_hit_prefix_token_count": 4,
+      "full_prefix_hit": true,
+      "one_token_prefix_hit": false,
+      "best_completion_preview": "fixedfedddddddd:lossssss"
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "greedy-24",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "expected_token_count": 4,
+      "tested_prefix_count": 4,
+      "hit_prefix_count": 4,
+      "minimum_hit_prefix_token_count": 1,
+      "full_prefix_hit": true,
+      "one_token_prefix_hit": true,
+      "best_completion_preview": "lossssssssssssssssssssss"
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "top2-24",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "expected_token_count": 5,
+      "tested_prefix_count": 5,
+      "hit_prefix_count": 2,
+      "minimum_hit_prefix_token_count": 4,
+      "full_prefix_hit": true,
+      "one_token_prefix_hit": false,
+      "best_completion_preview": "fixedloddddd\nlossss\nf-ss"
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "top2-24",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "expected_token_count": 4,
+      "tested_prefix_count": 4,
+      "hit_prefix_count": 4,
+      "minimum_hit_prefix_token_count": 1,
+      "full_prefix_hit": true,
+      "one_token_prefix_hit": true,
+      "best_completion_preview": "losssssss\nfixssss\nlossss"
+    }
+  ],
+  "summary": {
+    "prefix_completion_sweep_decision": "prefix_completion_requires_longer_prefix",
+    "target_count": 1,
+    "prefix_row_count": 27,
+    "probe_summary_count": 6,
+    "any_prefix_hit_probe_count": 6,
+    "one_token_prefix_hit_probe_count": 3,
+    "full_prefix_hit_probe_count": 6,
+    "span_completion_gap_probe_count": 3
+  },
+  "interpretation": {
+    "model_quality_claim": "forced_prefix_completion_signal",
+    "reason": "All probes retain the expected term with a full prefix, but some require longer forced prefixes.",
+    "next_action": "compare prefix completion with a tiny continuation-span objective before more decoding tweaks"
+  }
+}

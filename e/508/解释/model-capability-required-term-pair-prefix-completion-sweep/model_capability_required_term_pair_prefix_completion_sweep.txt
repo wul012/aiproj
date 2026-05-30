@@ -1,0 +1,11 @@
+status=pass
+decision=required_term_pair_prefix_completion_long_prefix
+prefix_completion_sweep_decision=prefix_completion_requires_longer_prefix
+prefix_row_count=27
+probe_summary_count=6
+any_prefix_hit_probe_count=6
+one_token_prefix_hit_probe_count=3
+full_prefix_hit_probe_count=6
+span_completion_gap_probe_count=3
+model_quality_claim=forced_prefix_completion_signal
+next_action=compare prefix completion with a tiny continuation-span objective before more decoding tweaks

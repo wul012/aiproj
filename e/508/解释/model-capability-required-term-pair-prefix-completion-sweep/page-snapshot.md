@@ -1,0 +1,41 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair prefix completion sweep" [level=1] [ref=e4]
+    - paragraph [ref=e5]: All probes retain the expected term with a full prefix, but some require longer forced prefixes.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: prefix_completion_requires_longer_prefix
+    - generic [ref=e13]:
+      - generic [ref=e14]: Rows
+      - strong [ref=e15]: "27"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Summaries
+      - strong [ref=e18]: "6"
+    - generic [ref=e19]:
+      - generic [ref=e20]: One-token hits
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Full-prefix hits
+      - strong [ref=e24]: "6"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Span gaps
+      - strong [ref=e27]: "3"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: compare prefix completion with a tiny continuation-span objective before more decoding tweaks
+  - generic [ref=e31]:
+    - heading "Probe Summaries" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Profile Prompt Tokens Min hit prefix One-token hit Full-prefix hit Preview" [ref=e36]
+      - rowgroup [ref=e44]:
+        - row "greedy-12 fixed 5 4 False True fixedfeddddd" [ref=e45]
+        - row "greedy-12 loss 4 1 True True lossssssssss" [ref=e53]
+        - row "greedy-24 fixed 5 4 False True fixedfedddddddd:lossssss" [ref=e61]
+        - row "greedy-24 loss 4 1 True True lossssssssssssssssssssss" [ref=e69]
+        - row "top2-24 fixed 5 4 False True fixedloddddd lossss f-ss" [ref=e77]
+        - row "top2-24 loss 4 1 True True losssssss fixssss lossss" [ref=e85]

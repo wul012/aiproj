@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v507.0.0` tests constrained first-token repair after v506 and shows forcing the expected first token improves partial expression but still does not recover a full `fixed/loss` profile.
+Version `v508.0.0` sweeps forced required-term prefix lengths and shows `loss` completes from a one-token prefix while `fixed` needs a longer forced span.
+
+## Latest v508 checkpoint
+
+- Added `model_capability_required_term_pair_prefix_completion_sweep`, which reads v506 path traces and forces progressively longer prefixes of each expected term before continuing generation.
+- Added `scripts/run_model_capability_required_term_pair_prefix_completion_sweep.py`; it performs forced-prefix generation only and does not train checkpoints.
+- Ran the real sweep over `6` probes and `27` prefix rows. Every probe retains the expected term when the full prefix is forced, but only `3/6` probes complete from a one-token prefix.
+- Interpreted v508 as an asymmetric span-completion finding: `loss` completes from one token, while `fixed` requires `4/5` forced tokens across all tested profiles.
+- Archived the v508 prefix-completion evidence in `e/508` and added the code explanation in `代码讲解记录_模型能力阶段/522-v508-model-capability-required-term-pair-prefix-completion-sweep.md`.
 
 ## Latest v507 checkpoint
 

@@ -157,6 +157,10 @@ e/506/解释/说明.md
 e/507/图片
 e/507/解释/说明.md
  -> v507 model capability required-term pair first-token repair 的运行截图和解释
+
+e/508/图片
+e/508/解释/说明.md
+ -> v508 model capability required-term pair prefix-completion sweep 的运行截图和解释
 ```
 
 写入规则：
