@@ -188,6 +188,9 @@
 545-v531-generation-profile-contract-check.md
  -> v531 code explanation: verify endpoint, health, API, CLI, and playground artifacts for the generation profile contract.
 
+546-v532-required-term-pair-generation-profile-replay.md
+ -> v532 code explanation: replay default and newline-suppression profiles over archived fixed/loss pair checkpoints.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

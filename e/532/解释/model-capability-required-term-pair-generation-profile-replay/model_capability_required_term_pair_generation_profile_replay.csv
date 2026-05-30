@@ -1,0 +1,13 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+alternating-balanced,default,fixed,fixed:,502,True,True,0, fixed\nfixed
+alternating-balanced,suppress_newline_tokens,fixed,fixed:,502,True,True,1, fixed: fixe
+alternating-balanced,default,loss,loss:,503,False,False,0, fixed\nfixed
+alternating-balanced,suppress_newline_tokens,loss,loss:,503,False,False,1, fixed: fixe
+symmetric-boost,default,fixed,fixed:,602,True,True,0, fixed\nfixed
+symmetric-boost,suppress_newline_tokens,fixed,fixed:,602,True,True,1, fixed: fixe
+symmetric-boost,default,loss,loss:,603,False,False,0, fixed\nfixed
+symmetric-boost,suppress_newline_tokens,loss,loss:,603,False,False,1, fixed: fixe
+symmetric-anchor,default,fixed,fixed:,702,False,False,0,didddf\nf\nfix
+symmetric-anchor,suppress_newline_tokens,fixed,fixed:,702,False,False,1,didddf:losss
+symmetric-anchor,default,loss,loss:,703,False,False,0,ssssssssssss
+symmetric-anchor,suppress_newline_tokens,loss,loss:,703,False,False,1,ssssssssssss

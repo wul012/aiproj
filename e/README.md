@@ -253,6 +253,10 @@ e/530/解释/说明.md
 e/531/图片
 e/531/解释/说明.md
  -> v531 generation profile contract check 的运行截图和解释
+
+e/532/图片
+e/532/解释/说明.md
+ -> v532 required-term pair generation profile replay 的运行截图和解释
 ```
 
 写入规则：

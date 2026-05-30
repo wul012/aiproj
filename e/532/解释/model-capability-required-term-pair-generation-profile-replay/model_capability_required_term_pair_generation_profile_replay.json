@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation profile replay",
+  "generated_at": "2026-05-30T14:56:50Z",
+  "status": "pass",
+  "decision": "generation_profile_no_pair_coexistence_gain",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_branch_retention_sweep": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\model_capability_required_term_pair_branch_retention_sweep.json",
+  "out_dir": "e\\532\\解释\\model-capability-required-term-pair-generation-profile-replay",
+  "settings": {
+    "profiles": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "variant_limit": 3,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+  },
+  "terms": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_rate": 1.0
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_rate": 1.0
+    }
+  ],
+  "case_rows": [
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 502,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "generated_preview": "fixed: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 502,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed: fixed: fixe",
+      "continuation": " fixed: fixe",
+      "generated_preview": "fixed: fixed: fixe",
+      "continuation_preview": " fixed: fixe",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 503,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "generated_preview": "loss: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 503,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss: fixed: fixe",
+      "continuation": " fixed: fixe",
+      "generated_preview": "loss: fixed: fixe",
+      "continuation_preview": " fixed: fixe",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 602,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "generated_preview": "fixed: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 602,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed: fixed: fixe",
+      "continuation": " fixed: fixe",
+      "generated_preview": "fixed: fixed: fixe",
+      "continuation_preview": " fixed: fixe",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 603,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "generated_preview": "loss: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 603,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss: fixed: fixe",
+      "continuation": " fixed: fixe",
+      "generated_preview": "loss: fixed: fixe",
+      "continuation_preview": " fixed: fixe",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 702,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\\nf\\nfix",
+      "continuation_preview": "didddf\\nf\\nfix",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 702,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed:didddf:losss",
+      "continuation": "didddf:losss",
+      "generated_preview": "fixed:didddf:losss",
+      "continuation_preview": "didddf:losss",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 703,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 703,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    }
+  ],
+  "variant_rows": [
+    {
+      "variant_id": "alternating-balanced",
+      "profile_id": "default",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "alternating-balanced",
+      "profile_id": "suppress_newline_tokens",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "symmetric-boost",
+      "profile_id": "default",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "symmetric-boost",
+      "profile_id": "suppress_newline_tokens",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "default",
+      "term_count": 2,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "suppress_newline_tokens",
+      "term_count": 2,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "pair_full_hit": false
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "default",
+      "case_count": 6,
+      "continuation_hit_count": 2,
+      "newline_cleanup_hit_count": 2,
+      "pair_full_variant_count": 0,
+      "variant_count": 3,
+      "blocked_token_count_total": 0
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "case_count": 6,
+      "continuation_hit_count": 2,
+      "newline_cleanup_hit_count": 2,
+      "pair_full_variant_count": 0,
+      "variant_count": 3,
+      "blocked_token_count_total": 6
+    }
+  ],
+  "summary": {
+    "variant_count": 3,
+    "term_count": 2,
+    "profile_count": 2,
+    "default_pair_full_variant_count": 0,
+    "suppression_pair_full_variant_count": 0,
+    "default_continuation_hit_count": 2,
+    "suppression_continuation_hit_count": 2,
+    "suppression_hit_delta": 0,
+    "suppression_pair_full_delta": 0,
+    "pair_full_rows": []
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+    "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+    "summary": {
+      "variant_count": 3,
+      "term_count": 2,
+      "profile_count": 2,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "suppression_hit_delta": 0,
+      "suppression_pair_full_delta": 0,
+      "pair_full_rows": []
+    }
+  }
+}

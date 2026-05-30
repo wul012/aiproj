@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v531.0.0` adds a generation profile contract check across endpoint, health, API, CLI, and playground artifacts.
+Version `v532.0.0` replays generation profiles over archived fixed/loss pair checkpoints and confirms newline suppression does not solve pair coexistence.
+
+## Latest v532 checkpoint
+
+- Added `model_capability_required_term_pair_generation_profile_replay`, which replays `default` and `suppress_newline_tokens` over archived v502 fixed/loss branch-retention checkpoints.
+- Added `scripts/run_model_capability_required_term_pair_generation_profile_replay.py`; it consumes the v502 branch-retention sweep report and runs real `MiniGPTGenerator` calls.
+- Ran the real replay over 3 fixed/loss variants: default pair-full variants stayed `0`, suppression pair-full variants stayed `0`, and suppression hit delta was `0`.
+- Interpreted v532 as a boundary result: newline suppression remains useful loss-alias decode cleanup, but it does not replace pair coexistence training.
+- Archived the v532 replay evidence in `e/532` and added the code explanation in `代码讲解记录_模型能力阶段/546-v532-required-term-pair-generation-profile-replay.md`.
 
 ## Latest v531 checkpoint
 
