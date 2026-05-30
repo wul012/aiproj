@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v536.0.0` repeats the colon-immediate fixed/loss refresh across three seeds and classifies the signal as partial stability.
+Version `v537.0.0` diagnoses the v536 colon-immediate missed seeds with first-token logits and identifies a first-token preference gap.
+
+## Latest v537 checkpoint
+
+- Added `model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic`, a read-only diagnostic over the v536 stability report.
+- Added `scripts/run_model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic.py`; it accepts the v536 JSON or output directory and writes first-token sidecars per seed.
+- Ran the real v536 seeds: seed `535` still ranks `fixed/loss` first, while missed seeds `1535` and `2535` do not rank all expected first tokens first.
+- Classified the result as `required_term_pair_colon_immediate_first_token_gap`, so the next repair should strengthen first-token preference before extending continuation training.
+- Archived the v537 diagnostic evidence in `e/537` and added the code explanation in `代码讲解记录_模型能力阶段/551-v537-required-term-pair-colon-immediate-missed-seed-diagnostic.md`.
 
 ## Latest v536 checkpoint
 

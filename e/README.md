@@ -273,6 +273,10 @@ e/535/解释/说明.md
 e/536/图片
 e/536/解释/说明.md
  -> v536 required-term pair colon-immediate stability 的运行截图和解释
+
+e/537/图片
+e/537/解释/说明.md
+ -> v537 required-term pair colon-immediate missed-seed diagnostic 的运行截图和解释
 ```
 
 写入规则：

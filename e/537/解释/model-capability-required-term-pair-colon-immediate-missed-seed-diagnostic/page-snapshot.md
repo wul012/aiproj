@@ -1,0 +1,31 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT colon-immediate missed-seed diagnostic" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one missed seed does not rank all expected first tokens on top.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_colon_immediate_first_token_gap
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Missed seeds
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Missed expected top
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: First-token gaps
+      - strong [ref=e24]: "2"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: strengthen first-token preference before extending continuation training
+  - generic [ref=e28]:
+    - heading "Seeds" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]
+      - rowgroup [ref=e41]

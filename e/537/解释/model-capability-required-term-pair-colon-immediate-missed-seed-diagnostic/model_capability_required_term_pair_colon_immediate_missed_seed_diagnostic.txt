@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_colon_immediate_first_token_gap
+failed_count=0
+seed_count=3
+missed_seed_count=2
+missed_expected_top_count=0
+missed_first_token_gap_count=2
+model_quality_claim=targeted_pair_refresh_missed_seed_diagnostic_only
+next_action=strengthen first-token preference before extending continuation training
