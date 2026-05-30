@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v497.0.0` sweeps capacity variants for the fragile v496 `fixed/loss` pair and finds that bigger budget/width/density still only recovers partial hits.
+Version `v498.0.0` reuses the v497 partial checkpoints and sweeps decoding profiles, confirming that longer or sampled continuations still do not recover a stable `fixed/loss` full hit.
+
+## Latest v498 checkpoint
+
+- Added `model_capability_required_term_pair_decoding_sweep` reporting for selecting partial v497 capacity variants and probing existing checkpoints under several decoding profiles.
+- Added `scripts/run_model_capability_required_term_pair_decoding_sweep.py`, which changes generation length, temperature, and top-k only; it does not retrain checkpoints.
+- Ran the real decoding sweep over the two partial v497 variants, `baseline-repeat` and `longer-iters`, with `4` profiles and `16` total probes. Every profile-target remained partial and `0` profiles recovered full-hit behavior.
+- Interpreted v498 as a decoding negative result: sampling can flip which term appears, but it does not keep both `fixed` and `loss` in the correct continuations. The next step should inspect prompt target separation and corpus row design.
+- Archived the v498 decoding-sweep evidence in `e/498` and added the code explanation in `代码讲解记录_模型能力阶段/512-v498-model-capability-required-term-pair-decoding-sweep.md`.
 
 ## Latest v497 checkpoint
 

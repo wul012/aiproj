@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair decoding sweep</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f6f5f2; color: #1a211d; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1220px; margin: 0 auto; }
+header { border-bottom: 1px solid #dedbd2; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #605e55; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #dedbd2; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(26, 33, 29, 0.05); }
+.card span { display: block; color: #6f6c62; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 880px; }
+th, td { text-align: left; border-bottom: 1px solid #e7e3da; padding: 10px; vertical-align: top; }
+th { color: #5f5b52; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term pair decoding sweep</h1><p>Decoding changes still produced only partial pair hits from the existing v497 checkpoints.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_decoding_sweep_partial_only</strong></div><div class="card"><span>Targets</span><strong>2</strong></div><div class="card"><span>Profiles</span><strong>4</strong></div><div class="card"><span>Probe hits</span><strong>8</strong></div><div class="card"><span>Full profile targets</span><strong>0</strong></div><div class="card"><span>Recovered</span><strong>False</strong></div><div class="card"><span>Best profile</span><strong>sample-top5-24</strong></div></section>
+<section class="panel"><h2>Experiment Boundary</h2><p>This report reuses existing v497 capacity checkpoints. It changes decoding length, temperature, and top-k only; it does not retrain the model.</p><p>inspect prompt target separation and corpus row design before training larger pair checkpoints</p></section>
+<section class="panel">
+<h2>Profile Results</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Target</th><th>Profile</th><th>Hit terms</th><th>Missed terms</th><th>Rate</th><th>Full hit</th></tr></thead>
+<tbody><tr><td>01-fixed-loss-baseline-repeat</td><td>deterministic-12</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-baseline-repeat</td><td>deterministic-24</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-baseline-repeat</td><td>sample-top5-24</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-baseline-repeat</td><td>sample-open-24</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>deterministic-12</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>deterministic-24</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>sample-top5-24</td><td>fixed</td><td>loss</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>sample-open-24</td><td>fixed</td><td>loss</td><td>0.5</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Target Summary</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Target</th><th>Variant</th><th>Full-hit profiles</th><th>Partial profiles</th><th>Best profile</th><th>Best hits</th></tr></thead>
+<tbody><tr><td>01-fixed-loss-baseline-repeat</td><td>baseline-repeat</td><td></td><td>deterministic-12, deterministic-24, sample-top5-24, sample-open-24</td><td>sample-top5-24</td><td>1</td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>longer-iters</td><td></td><td>deterministic-12, deterministic-24, sample-top5-24, sample-open-24</td><td>sample-top5-24</td><td>1</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

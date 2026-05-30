@@ -1,0 +1,17 @@
+target_id,pair_id,variant_id,profile_id,term,generation_seed,max_new_tokens,temperature,top_k,checkpoint_exists,tokenizer_exists,prompt_hit_count,generated_hit_count,continuation_hit_count,prompt_truncated,generated_preview,continuation_preview
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,deterministic-12,fixed,498,12,0.2,1,True,True,1,1,0,False,fixed: losssssssss, losssssssss
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,deterministic-12,loss,499,12,0.2,1,True,True,1,1,1,False,loss: losssssssss, losssssssss
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,deterministic-24,fixed,599,24,0.2,1,True,True,1,1,0,False,fixed: losssssssssssssssssssss, losssssssssssssssssssss
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,deterministic-24,loss,600,24,0.2,1,True,True,1,1,1,False,loss: losssssssssssssssssssss, losssssssssssssssssssss
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,sample-top5-24,fixed,700,24,0.7,5,True,True,1,1,0,False,fixed: losss: lossssssprrtrpro, losss: lossssssprrtrpro
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,sample-top5-24,loss,701,24,0.7,5,True,True,1,1,1,False,loss: loss\nfixxxexpt ks fixxx, loss\nfixxxexpt ks fixxx
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,sample-open-24,fixed,801,24,0.8,,True,True,1,1,0,False,fixed: keptrosmprtt fixxxexpra, keptrosmprtt fixxxexpra
+01-fixed-loss-baseline-repeat,01-fixed-loss,baseline-repeat,sample-open-24,loss,802,24,0.8,,True,True,1,1,1,False,loss:loss ked:loss\nlosmprsos:,loss ked:loss\nlosmprsos:
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,deterministic-12,fixed,1498,12,0.2,1,True,True,1,1,0,False,fixed: prossssssss, prossssssss
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,deterministic-12,loss,1499,12,0.2,1,True,True,1,1,1,False,loss: losssssssss, losssssssss
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,deterministic-24,fixed,1599,24,0.2,1,True,True,1,1,0,False,fixed: prossssssssssssssssssss, prossssssssssssssssssss
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,deterministic-24,loss,1600,24,0.2,1,True,True,1,1,1,False,loss: losssssssssssssssssssss, losssssssssssssssssssss
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,sample-top5-24,fixed,1700,24,0.7,5,True,True,1,1,1,False,fixed:fixed:losss\nlos: pros: f,fixed:losss\nlos: pros: f
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,sample-top5-24,loss,1701,24,0.7,5,True,True,1,1,0,False,loss:fixed\nfixed\nfixed\nfpaiix,fixed\nfixed\nfixed\nfpaiix
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,sample-open-24,fixed,1801,24,0.8,,True,True,1,1,1,False,fixed:fixed\nlo mked fi pr ross,fixed\nlo mked fi pr ross
+01-fixed-loss-longer-iters,01-fixed-loss,longer-iters,sample-open-24,loss,1802,24,0.8,,True,True,1,1,0,False,loss:oss:os fixed\nfixed: pts,oss:os fixed\nfixed: pts

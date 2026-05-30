@@ -1,0 +1,1208 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair decoding sweep",
+  "generated_at": "2026-05-30T00:48:13Z",
+  "status": "pass",
+  "decision": "required_term_pair_decoding_sweep_partial",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_capacity_sweep": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\model_capability_required_term_pair_capacity_sweep.json",
+  "out_dir": "e\\498\\解释\\model-capability-required-term-pair-decoding-sweep",
+  "settings": {
+    "seed": 498,
+    "target_limit": 2,
+    "profile_count": 4,
+    "device": "cpu",
+    "experiment_boundary": "reuse v497 capacity checkpoints and sweep decoding before adding more training"
+  },
+  "source_baseline": {
+    "pair_capacity_sweep_decision": "pair_capacity_sweep_partial_only",
+    "variant_pair_full_hit_count": 0,
+    "variant_pair_partial_hit_count": 2,
+    "capacity_full_hit_observed": false,
+    "best_variant_id": "longer-iters",
+    "best_variant_hit_count": 1
+  },
+  "summary": {
+    "pair_decoding_sweep_decision": "pair_decoding_sweep_partial_only",
+    "source_pair_capacity_sweep_decision": "pair_capacity_sweep_partial_only",
+    "source_capacity_full_hit_observed": false,
+    "source_variant_pair_partial_hit_count": 2,
+    "target_count": 2,
+    "profile_count": 4,
+    "profile_target_count": 8,
+    "probe_count": 16,
+    "continuation_hit_count": 8,
+    "probe_hit_count": 8,
+    "probe_success_rate": 0.5,
+    "profile_target_full_hit_count": 0,
+    "profile_target_partial_hit_count": 8,
+    "profile_target_zero_hit_count": 0,
+    "profile_target_full_hit_rate": 0.0,
+    "decoding_full_hit_target_count": 0,
+    "decoding_full_hit_observed": false,
+    "best_target_id": "01-fixed-loss-baseline-repeat",
+    "best_profile_id": "sample-top5-24",
+    "best_profile_hit_count": 1,
+    "best_profile_pair_full_hit": false
+  },
+  "target_count": 2,
+  "targets": [
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "variant_label": "v496 baseline repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "source_hit_count": 1,
+      "source_hit_rate": 0.5,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "capacity_max_iters": 1600,
+      "capacity_n_embd": 64,
+      "capacity_repeat": 240
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "variant_label": "longer training budget",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "source_hit_count": 1,
+      "source_hit_rate": 0.5,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "capacity_max_iters": 2400,
+      "capacity_n_embd": 64,
+      "capacity_repeat": 240
+    }
+  ],
+  "decoding_profiles": [
+    {
+      "profile_id": "deterministic-12",
+      "label": "v497 deterministic short continuation",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed_offset": 0
+    },
+    {
+      "profile_id": "deterministic-24",
+      "label": "longer deterministic continuation",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed_offset": 100
+    },
+    {
+      "profile_id": "sample-top5-24",
+      "label": "moderate top-k sampling",
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 5,
+      "seed_offset": 200
+    },
+    {
+      "profile_id": "sample-open-24",
+      "label": "open sampling",
+      "max_new_tokens": 24,
+      "temperature": 0.8,
+      "top_k": null,
+      "seed_offset": 300
+    }
+  ],
+  "profile_target_summaries": [
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "deterministic-12",
+      "profile_label": "v497 deterministic short continuation",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "deterministic-24",
+      "profile_label": "longer deterministic continuation",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "sample-top5-24",
+      "profile_label": "moderate top-k sampling",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "sample-open-24",
+      "profile_label": "open sampling",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "deterministic-12",
+      "profile_label": "v497 deterministic short continuation",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "deterministic-24",
+      "profile_label": "longer deterministic continuation",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "sample-top5-24",
+      "profile_label": "moderate top-k sampling",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "sample-open-24",
+      "profile_label": "open sampling",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    }
+  ],
+  "target_summaries": [
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "profile_count": 4,
+      "full_hit_profiles": [],
+      "partial_hit_profiles": [
+        "deterministic-12",
+        "deterministic-24",
+        "sample-top5-24",
+        "sample-open-24"
+      ],
+      "decoding_full_hit_observed": false,
+      "best_profile_id": "sample-top5-24",
+      "best_profile_hit_count": 1,
+      "best_profile_pair_full_hit": false
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "profile_count": 4,
+      "full_hit_profiles": [],
+      "partial_hit_profiles": [
+        "deterministic-12",
+        "deterministic-24",
+        "sample-top5-24",
+        "sample-open-24"
+      ],
+      "decoding_full_hit_observed": false,
+      "best_profile_id": "sample-top5-24",
+      "best_profile_hit_count": 1,
+      "best_profile_pair_full_hit": false
+    }
+  ],
+  "probe_count": 16,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "deterministic-12",
+      "profile_label": "v497 deterministic short continuation",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losssssssss",
+      "continuation_preview": " losssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "deterministic-12",
+      "profile_label": "v497 deterministic short continuation",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 499,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "deterministic-24",
+      "profile_label": "longer deterministic continuation",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 599,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: losssssssssssssssssssss",
+      "continuation": " losssssssssssssssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losssssssssssssssssssss",
+      "continuation_preview": " losssssssssssssssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "deterministic-24",
+      "profile_label": "longer deterministic continuation",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 600,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssssssssssssssss",
+      "continuation": " losssssssssssssssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssssssssssssssss",
+      "continuation_preview": " losssssssssssssssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "sample-top5-24",
+      "profile_label": "moderate top-k sampling",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 700,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 5,
+      "generated": "fixed: losss: lossssssprrtrpro",
+      "continuation": " losss: lossssssprrtrpro",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losss: lossssssprrtrpro",
+      "continuation_preview": " losss: lossssssprrtrpro",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "sample-top5-24",
+      "profile_label": "moderate top-k sampling",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 701,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 5,
+      "generated": "loss: loss\nfixxxexpt ks fixxx",
+      "continuation": " loss\nfixxxexpt ks fixxx",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: loss\\nfixxxexpt ks fixxx",
+      "continuation_preview": " loss\\nfixxxexpt ks fixxx",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "sample-open-24",
+      "profile_label": "open sampling",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 801,
+      "max_new_tokens": 24,
+      "temperature": 0.8,
+      "top_k": null,
+      "generated": "fixed: keptrosmprtt fixxxexpra",
+      "continuation": " keptrosmprtt fixxxexpra",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: keptrosmprtt fixxxexpra",
+      "continuation_preview": " keptrosmprtt fixxxexpra",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "profile_id": "sample-open-24",
+      "profile_label": "open sampling",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 802,
+      "max_new_tokens": 24,
+      "temperature": 0.8,
+      "top_k": null,
+      "generated": "loss:loss ked:loss\nlosmprsos:",
+      "continuation": "loss ked:loss\nlosmprsos:",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss:loss ked:loss\\nlosmprsos:",
+      "continuation_preview": "loss ked:loss\\nlosmprsos:",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "deterministic-12",
+      "profile_label": "v497 deterministic short continuation",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1498,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: prossssssss",
+      "continuation": " prossssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: prossssssss",
+      "continuation_preview": " prossssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "deterministic-12",
+      "profile_label": "v497 deterministic short continuation",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1499,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "deterministic-24",
+      "profile_label": "longer deterministic continuation",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1599,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: prossssssssssssssssssss",
+      "continuation": " prossssssssssssssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: prossssssssssssssssssss",
+      "continuation_preview": " prossssssssssssssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "deterministic-24",
+      "profile_label": "longer deterministic continuation",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1600,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssssssssssssssss",
+      "continuation": " losssssssssssssssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssssssssssssssss",
+      "continuation_preview": " losssssssssssssssssssss",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "sample-top5-24",
+      "profile_label": "moderate top-k sampling",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1700,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 5,
+      "generated": "fixed:fixed:losss\nlos: pros: f",
+      "continuation": "fixed:losss\nlos: pros: f",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed:fixed:losss\\nlos: pros: f",
+      "continuation_preview": "fixed:losss\\nlos: pros: f",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "sample-top5-24",
+      "profile_label": "moderate top-k sampling",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1701,
+      "max_new_tokens": 24,
+      "temperature": 0.7,
+      "top_k": 5,
+      "generated": "loss:fixed\nfixed\nfixed\nfpaiix",
+      "continuation": "fixed\nfixed\nfixed\nfpaiix",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:fixed\\nfixed\\nfixed\\nfpaiix",
+      "continuation_preview": "fixed\\nfixed\\nfixed\\nfpaiix",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "sample-open-24",
+      "profile_label": "open sampling",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1801,
+      "max_new_tokens": 24,
+      "temperature": 0.8,
+      "top_k": null,
+      "generated": "fixed:fixed\nlo mked fi pr ross",
+      "continuation": "fixed\nlo mked fi pr ross",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed:fixed\\nlo mked fi pr ross",
+      "continuation_preview": "fixed\\nlo mked fi pr ross",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "profile_id": "sample-open-24",
+      "profile_label": "open sampling",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "loss"
+      ],
+      "source_missed_terms": [
+        "fixed"
+      ],
+      "generation_seed": 1802,
+      "max_new_tokens": 24,
+      "temperature": 0.8,
+      "top_k": null,
+      "generated": "loss:oss:os fixed\nfixed: pts ",
+      "continuation": "oss:os fixed\nfixed: pts ",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:oss:os fixed\\nfixed: pts ",
+      "continuation_preview": "oss:os fixed\\nfixed: pts ",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Decoding changes still produced only partial pair hits from the existing v497 checkpoints.",
+    "next_action": "inspect prompt target separation and corpus row design before training larger pair checkpoints"
+  }
+}

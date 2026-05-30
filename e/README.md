@@ -117,6 +117,10 @@ e/496/解释/说明.md
 e/497/图片
 e/497/解释/说明.md
  -> v497 model capability required-term pair capacity sweep 的运行截图和解释
+
+e/498/图片
+e/498/解释/说明.md
+ -> v498 model capability required-term pair decoding sweep 的运行截图和解释
 ```
 
 写入规则：

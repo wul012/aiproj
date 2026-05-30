@@ -1,0 +1,127 @@
+- main [ref=e2] [box=28,28,1154,1224]:
+  - generic [ref=e3] [box=28,28,1154,114]:
+    - heading "MiniGPT required-term pair decoding sweep" [level=1] [ref=e4] [box=28,28,1154,40]
+    - paragraph [ref=e5] [box=28,84,1154,25]: Decoding changes still produced only partial pair hits from the existing v497 checkpoints.
+  - generic [ref=e6] [box=28,160,1154,200]:
+    - generic [ref=e7] [box=28,160,156,117]:
+      - generic [ref=e8] [box=43,174,127,16]: Status
+      - strong [ref=e9] [box=43,196,127,22]: pass
+    - generic [ref=e10] [box=194,160,156,117]:
+      - generic [ref=e11] [box=209,174,127,16]: Decision
+      - strong [ref=e12] [box=209,196,127,65]: pair_decoding_sweep_partial_only
+    - generic [ref=e13] [box=361,160,156,117]:
+      - generic [ref=e14] [box=375,174,127,16]: Targets
+      - strong [ref=e15] [box=375,196,127,22]: "2"
+    - generic [ref=e16] [box=527,160,156,117]:
+      - generic [ref=e17] [box=541,174,127,16]: Profiles
+      - strong [ref=e18] [box=541,196,127,22]: "4"
+    - generic [ref=e19] [box=693,160,156,117]:
+      - generic [ref=e20] [box=708,174,127,16]: Probe hits
+      - strong [ref=e21] [box=708,196,127,22]: "8"
+    - generic [ref=e22] [box=859,160,156,117]:
+      - generic [ref=e23] [box=874,174,127,16]: Full profile targets
+      - strong [ref=e24] [box=874,196,127,22]: "0"
+    - generic [ref=e25] [box=1026,160,156,117]:
+      - generic [ref=e26] [box=1040,174,127,16]: Recovered
+      - strong [ref=e27] [box=1040,196,127,22]: "False"
+    - generic [ref=e28] [box=28,286,156,73]:
+      - generic [ref=e29] [box=43,301,127,16]: Best profile
+      - strong [ref=e30] [box=43,323,127,22]: sample-top5-24
+  - generic [ref=e31] [box=28,377,1154,151]:
+    - heading "Experiment Boundary" [level=2] [ref=e32] [box=43,392,1125,24]
+    - paragraph [ref=e33] [box=43,432,1125,25]: This report reuses existing v497 capacity checkpoints. It changes decoding length, temperature, and top-k only; it does not retrain the model.
+    - paragraph [ref=e34] [box=43,473,1125,25]: inspect prompt target separation and corpus row design before training larger pair checkpoints
+  - generic [ref=e35] [box=28,547,1154,441]:
+    - heading "Profile Results" [level=2] [ref=e36] [box=43,561,1125,24]
+    - table [ref=e38] [box=43,598,1125,375]:
+      - rowgroup [ref=e39] [box=43,598,1125,37]:
+        - row "Target Profile Hit terms Missed terms Rate Full hit" [ref=e40] [box=43,598,1125,37]:
+          - columnheader "Target" [ref=e41] [box=43,598,378,37]
+          - columnheader "Profile" [ref=e42] [box=421,598,228,37]
+          - columnheader "Hit terms" [ref=e43] [box=649,598,139,37]
+          - columnheader "Missed terms" [ref=e44] [box=789,598,179,37]
+          - columnheader "Rate" [ref=e45] [box=967,598,81,37]
+          - columnheader "Full hit" [ref=e46] [box=1049,598,118,37]
+      - rowgroup [ref=e47] [box=43,634,1125,338]:
+        - row "01-fixed-loss-baseline-repeat deterministic-12 loss fixed 0.5 False" [ref=e48] [box=43,634,1125,42]:
+          - cell "01-fixed-loss-baseline-repeat" [ref=e49] [box=43,634,378,42]
+          - cell "deterministic-12" [ref=e50] [box=421,634,228,42]
+          - cell "loss" [ref=e51] [box=649,634,139,42]
+          - cell "fixed" [ref=e52] [box=789,634,179,42]
+          - cell "0.5" [ref=e53] [box=967,634,81,42]
+          - cell "False" [ref=e54] [box=1049,634,118,42]
+        - row "01-fixed-loss-baseline-repeat deterministic-24 loss fixed 0.5 False" [ref=e55] [box=43,677,1125,42]:
+          - cell "01-fixed-loss-baseline-repeat" [ref=e56] [box=43,677,378,42]
+          - cell "deterministic-24" [ref=e57] [box=421,677,228,42]
+          - cell "loss" [ref=e58] [box=649,677,139,42]
+          - cell "fixed" [ref=e59] [box=789,677,179,42]
+          - cell "0.5" [ref=e60] [box=967,677,81,42]
+          - cell "False" [ref=e61] [box=1049,677,118,42]
+        - row "01-fixed-loss-baseline-repeat sample-top5-24 loss fixed 0.5 False" [ref=e62] [box=43,719,1125,42]:
+          - cell "01-fixed-loss-baseline-repeat" [ref=e63] [box=43,719,378,42]
+          - cell "sample-top5-24" [ref=e64] [box=421,719,228,42]
+          - cell "loss" [ref=e65] [box=649,719,139,42]
+          - cell "fixed" [ref=e66] [box=789,719,179,42]
+          - cell "0.5" [ref=e67] [box=967,719,81,42]
+          - cell "False" [ref=e68] [box=1049,719,118,42]
+        - row "01-fixed-loss-baseline-repeat sample-open-24 loss fixed 0.5 False" [ref=e69] [box=43,761,1125,42]:
+          - cell "01-fixed-loss-baseline-repeat" [ref=e70] [box=43,761,378,42]
+          - cell "sample-open-24" [ref=e71] [box=421,761,228,42]
+          - cell "loss" [ref=e72] [box=649,761,139,42]
+          - cell "fixed" [ref=e73] [box=789,761,179,42]
+          - cell "0.5" [ref=e74] [box=967,761,81,42]
+          - cell "False" [ref=e75] [box=1049,761,118,42]
+        - row "01-fixed-loss-longer-iters deterministic-12 loss fixed 0.5 False" [ref=e76] [box=43,803,1125,42]:
+          - cell "01-fixed-loss-longer-iters" [ref=e77] [box=43,803,378,42]
+          - cell "deterministic-12" [ref=e78] [box=421,803,228,42]
+          - cell "loss" [ref=e79] [box=649,803,139,42]
+          - cell "fixed" [ref=e80] [box=789,803,179,42]
+          - cell "0.5" [ref=e81] [box=967,803,81,42]
+          - cell "False" [ref=e82] [box=1049,803,118,42]
+        - row "01-fixed-loss-longer-iters deterministic-24 loss fixed 0.5 False" [ref=e83] [box=43,846,1125,42]:
+          - cell "01-fixed-loss-longer-iters" [ref=e84] [box=43,846,378,42]
+          - cell "deterministic-24" [ref=e85] [box=421,846,228,42]
+          - cell "loss" [ref=e86] [box=649,846,139,42]
+          - cell "fixed" [ref=e87] [box=789,846,179,42]
+          - cell "0.5" [ref=e88] [box=967,846,81,42]
+          - cell "False" [ref=e89] [box=1049,846,118,42]
+        - row "01-fixed-loss-longer-iters sample-top5-24 fixed loss 0.5 False" [ref=e90] [box=43,888,1125,42]:
+          - cell "01-fixed-loss-longer-iters" [ref=e91] [box=43,888,378,42]
+          - cell "sample-top5-24" [ref=e92] [box=421,888,228,42]
+          - cell "fixed" [ref=e93] [box=649,888,139,42]
+          - cell "loss" [ref=e94] [box=789,888,179,42]
+          - cell "0.5" [ref=e95] [box=967,888,81,42]
+          - cell "False" [ref=e96] [box=1049,888,118,42]
+        - row "01-fixed-loss-longer-iters sample-open-24 fixed loss 0.5 False" [ref=e97] [box=43,930,1125,42]:
+          - cell "01-fixed-loss-longer-iters" [ref=e98] [box=43,930,378,42]
+          - cell "sample-open-24" [ref=e99] [box=421,930,228,42]
+          - cell "fixed" [ref=e100] [box=649,930,139,42]
+          - cell "loss" [ref=e101] [box=789,930,179,42]
+          - cell "0.5" [ref=e102] [box=967,930,81,42]
+          - cell "False" [ref=e103] [box=1049,930,118,42]
+  - generic [ref=e104] [box=28,1005,1154,247]:
+    - heading "Target Summary" [level=2] [ref=e105] [box=43,1020,1125,24]
+    - table [ref=e107] [box=43,1056,1125,181]:
+      - rowgroup [ref=e108] [box=43,1056,1125,53]:
+        - row "Target Variant Full-hit profiles Partial profiles Best profile Best hits" [ref=e109] [box=43,1056,1125,53]:
+          - columnheader "Target" [ref=e110] [box=43,1056,211,53]
+          - columnheader "Variant" [ref=e111] [box=254,1056,123,53]
+          - columnheader "Full-hit profiles" [ref=e112] [box=377,1056,124,53]
+          - columnheader "Partial profiles" [ref=e113] [box=501,1056,464,53]
+          - columnheader "Best profile" [ref=e114] [box=965,1056,127,53]
+          - columnheader "Best hits" [ref=e115] [box=1092,1056,75,53]
+      - rowgroup [ref=e116] [box=43,1109,1125,128]:
+        - row "01-fixed-loss-baseline-repeat baseline-repeat deterministic-12, deterministic-24, sample-top5-24, sample-open-24 sample-top5-24 1" [ref=e117] [box=43,1109,1125,64]:
+          - cell "01-fixed-loss-baseline-repeat" [ref=e118] [box=43,1109,211,64]
+          - cell "baseline-repeat" [ref=e119] [box=254,1109,123,64]
+          - cell [ref=e120] [box=377,1109,124,64]
+          - cell "deterministic-12, deterministic-24, sample-top5-24, sample-open-24" [ref=e121] [box=501,1109,464,64]
+          - cell "sample-top5-24" [ref=e122] [box=965,1109,127,64]
+          - cell "1" [ref=e123] [box=1092,1109,75,64]
+        - row "01-fixed-loss-longer-iters longer-iters deterministic-12, deterministic-24, sample-top5-24, sample-open-24 sample-top5-24 1" [ref=e124] [box=43,1173,1125,64]:
+          - cell "01-fixed-loss-longer-iters" [ref=e125] [box=43,1173,211,64]
+          - cell "longer-iters" [ref=e126] [box=254,1173,123,64]
+          - cell [ref=e127] [box=377,1173,124,64]
+          - cell "deterministic-12, deterministic-24, sample-top5-24, sample-open-24" [ref=e128] [box=501,1173,464,64]
+          - cell "sample-top5-24" [ref=e129] [box=965,1173,127,64]
+          - cell "1" [ref=e130] [box=1092,1173,75,64]
