@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v533.0.0` trains a tiny fixed/loss pair coexistence refresh checkpoint and records the remaining no-pair-full boundary.
+Version `v534.0.0` diagnoses the v533 fixed/loss refresh checkpoint and finds a first-token whitespace preference blocking expected `f`/`l` continuations.
+
+## Latest v534 checkpoint
+
+- Added `model_capability_required_term_pair_first_token_preference`, a read-only logits diagnostic for the v533 refresh checkpoint.
+- Added `scripts/run_model_capability_required_term_pair_first_token_preference.py`; it accepts the v533 JSON or output directory.
+- Ran the real diagnostic: expected `f` and `l` were not top-ranked; whitespace was top-ranked for both `fixed:` and `loss:`.
+- Recorded `fixed:` expected `f` rank `6` and `loss:` expected `l` rank `8`, with whitespace probabilities above `0.997`.
+- Archived the v534 first-token evidence in `e/534` and added the code explanation in `代码讲解记录_模型能力阶段/548-v534-required-term-pair-first-token-preference.md`.
 
 ## Latest v533 checkpoint
 

@@ -261,6 +261,10 @@ e/532/解释/说明.md
 e/533/图片
 e/533/解释/说明.md
  -> v533 required-term pair coexistence refresh 的运行截图和解释
+
+e/534/图片
+e/534/解释/说明.md
+ -> v534 required-term pair first-token preference 的运行截图和解释
 ```
 
 写入规则：

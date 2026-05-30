@@ -1,0 +1,10 @@
+status=pass
+decision=pair_first_token_whitespace_prefix_drift_confirmed
+failed_count=0
+term_count=2
+expected_top_count=0
+whitespace_prefix_top_count=2
+answer_prefix_top_count=0
+max_expected_rank=8
+model_quality_claim=not_claimed
+next_action=remove leading-space answer rows or add colon-immediate fixed/loss rows before retraining
