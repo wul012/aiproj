@@ -1,0 +1,49 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias objective" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The tiny loss-alias run emitted loss for every held-out loss alias prompt.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: loss_alias_heldout_full_hit
+    - generic [ref=e13]:
+      - generic [ref=e14]: Training
+      - strong [ref=e15]: pass
+    - generic [ref=e16]:
+      - generic [ref=e17]: Checkpoint
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Cases
+      - strong [ref=e21]: "4"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Hits
+      - strong [ref=e24]: "4"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Heldout hits
+      - strong [ref=e27]: 3/3
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: repeat the loss-alias objective across seeds before promoting the recovery
+  - generic [ref=e31]:
+    - heading "Case Summary" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Case Type Prompt Source hits Candidate hits Hit rate" [ref=e36]
+      - rowgroup [ref=e43]:
+        - 'row "source-loss source loss: 0 1 1.0" [ref=e44]'
+        - 'row "heldout-beta-loss heldout beta: 0 1 1.0" [ref=e51]'
+        - 'row "heldout-omega-loss heldout omega: 0 1 1.0" [ref=e58]'
+        - 'row "heldout-theta-loss heldout theta: 0 1 1.0" [ref=e65]'
+  - generic [ref=e72]:
+    - heading "Generation Rows" [level=2] [ref=e73]
+    - table [ref=e75]:
+      - rowgroup [ref=e76]:
+        - row "Case Seed Hit Continuation" [ref=e77]
+      - rowgroup [ref=e82]:
+        - row "source-loss 514 True lossssssssss" [ref=e83]
+        - row "heldout-beta-loss 515 True lossssssssss" [ref=e88]
+        - row "heldout-omega-loss 516 True lossssssssss" [ref=e93]
+        - row "heldout-theta-loss 517 True lossssssssss" [ref=e98]

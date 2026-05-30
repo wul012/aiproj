@@ -134,6 +134,9 @@
 527-v513-model-capability-required-term-pair-continuation-span-alias-matrix.md
  -> v513 code explanation: expand held-out aliases into a matrix and show fixed-only coverage while loss remains missing.
 
+528-v514-model-capability-required-term-pair-loss-alias-objective.md
+ -> v514 code explanation: train a tiny loss-alias objective from v513's missing loss prompts and recover all loss aliases in one seed.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

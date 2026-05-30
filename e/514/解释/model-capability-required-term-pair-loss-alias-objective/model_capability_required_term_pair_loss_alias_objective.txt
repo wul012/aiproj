@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_pair_loss_alias_continuation_full_hit
+loss_alias_decision=loss_alias_heldout_full_hit
+training_status=pass
+checkpoint_exists=True
+case_count=4
+generation_count=4
+generation_hit_case_count=4
+source_loss_hit=True
+heldout_loss_alias_hit_case_count=3
+heldout_loss_alias_full_coverage=True
+model_quality_claim=tiny_loss_alias_heldout_full_signal
+next_action=repeat the loss-alias objective across seeds before promoting the recovery

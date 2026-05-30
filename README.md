@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v513.0.0` expands the v512 held-out check into an alias matrix and confirms the signal is fixed-only.
+Version `v514.0.0` trains a tiny loss-alias objective from the v513 missing `loss` aliases and recovers them in a single seed.
+
+## Latest v514 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_objective`, which reads the v513 alias matrix, selects only `loss` source/held-out cases, trains a tiny alias-to-loss checkpoint, and probes the same prompts.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_objective.py`; it exposes repeat/training/generation controls while treating no-gain as evidence, not a structural failure.
+- Ran the real tiny training with `max_iters=900`, `block_size=16`, and `n_embd=64`; training passed and produced a checkpoint.
+- Interpreted v514 as a single-seed recovery signal: `source-loss`, `beta`, `omega`, and `theta` all emitted `loss`, with `heldout_loss_alias_full_coverage=True`.
+- Archived the v514 loss-alias evidence in `e/514` and added the code explanation in `代码讲解记录_模型能力阶段/528-v514-model-capability-required-term-pair-loss-alias-objective.md`.
 
 ## Latest v513 checkpoint
 

@@ -181,6 +181,10 @@ e/512/解释/说明.md
 e/513/图片
 e/513/解释/说明.md
  -> v513 model capability required-term pair continuation-span alias matrix 的运行截图和解释
+
+e/514/图片
+e/514/解释/说明.md
+ -> v514 model capability required-term pair loss-alias objective 的运行截图和解释
 ```
 
 写入规则：
