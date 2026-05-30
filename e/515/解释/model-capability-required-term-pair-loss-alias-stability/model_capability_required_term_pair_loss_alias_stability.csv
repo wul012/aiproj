@@ -1,0 +1,3 @@
+seed,status,decision,loss_alias_decision,checkpoint_exists,generation_hit_case_count,source_loss_hit,heldout_loss_alias_hit_case_count,heldout_loss_alias_full_coverage,training_status,out_dir
+514,pass,required_term_pair_loss_alias_continuation_full_hit,loss_alias_heldout_full_hit,True,4,True,3,True,pass,e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-514
+515,pass,required_term_pair_loss_alias_continuation_partial_hit,loss_alias_heldout_partial_hit,True,2,False,2,False,pass,e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-515

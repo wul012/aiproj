@@ -1,0 +1,34 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every tested seed recovered at least one held-out loss alias prompt.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: loss_alias_stable_partial_hit
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: 2/2
+    - generic [ref=e16]:
+      - generic [ref=e17]: Checkpoints
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Full seeds
+      - strong [ref=e21]: "1"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Stable full
+      - strong [ref=e24]: "False"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: inspect missed loss alias rows before adding fixed branch back
+  - generic [ref=e28]:
+    - heading "Seed Rows" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Seed Status Decision Hit cases Heldout hits Full coverage" [ref=e33]
+      - rowgroup [ref=e40]:
+        - row "514 pass loss_alias_heldout_full_hit 4 3 True" [ref=e41]
+        - row "515 pass loss_alias_heldout_partial_hit 2 2 False" [ref=e48]

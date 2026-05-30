@@ -185,6 +185,10 @@ e/513/解释/说明.md
 e/514/图片
 e/514/解释/说明.md
  -> v514 model capability required-term pair loss-alias objective 的运行截图和解释
+
+e/515/图片
+e/515/解释/说明.md
+ -> v515 model capability required-term pair loss-alias stability 的运行截图和解释
 ```
 
 写入规则：

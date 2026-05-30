@@ -137,6 +137,9 @@
 528-v514-model-capability-required-term-pair-loss-alias-objective.md
  -> v514 code explanation: train a tiny loss-alias objective from v513's missing loss prompts and recover all loss aliases in one seed.
 
+529-v515-model-capability-required-term-pair-loss-alias-stability.md
+ -> v515 code explanation: repeat the loss-alias objective across seeds and classify the recovery as stable partial rather than stable full.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v514.0.0` trains a tiny loss-alias objective from the v513 missing `loss` aliases and recovers them in a single seed.
+Version `v515.0.0` repeats the v514 loss-alias objective across seeds and finds stable partial, not stable full, recovery.
+
+## Latest v515 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_stability`, which repeats the v514 objective across seeds and summarizes seed-level full/partial coverage.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_stability.py`; it accepts `--seeds` and keeps structural pass/fail separate from model-capability outcomes.
+- Ran real seeds `514,515`; both trained checkpoints and both recovered at least some held-out loss aliases.
+- Interpreted v515 conservatively: seed `514` had full coverage, seed `515` had partial coverage, so `stable_loss_alias_full_coverage=False`.
+- Archived the v515 stability evidence in `e/515` and added the code explanation in `代码讲解记录_模型能力阶段/529-v515-model-capability-required-term-pair-loss-alias-stability.md`.
 
 ## Latest v514 checkpoint
 

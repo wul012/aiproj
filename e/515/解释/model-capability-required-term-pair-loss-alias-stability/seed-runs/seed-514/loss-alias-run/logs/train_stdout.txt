@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=119792 vocab_size=32
+parameters=53,184
+data_source=data:e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-514\required_term_pair_loss_alias_objective_corpus.txt
+step=    1 train_loss=2.8777 val_loss=2.8711
+step=  225 train_loss=1.1378 val_loss=1.2954
+step=  450 train_loss=1.1049 val_loss=1.1020
+step=  675 train_loss=1.0547 val_loss=1.0919
+step=  900 train_loss=1.1354 val_loss=1.0801
+saved=e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-514\loss-alias-run
+history=e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-514\loss-alias-run\metrics.jsonl
+manifest=e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-514\loss-alias-run\run_manifest.json
+sample=e\515\解释\model-capability-required-term-pair-loss-alias-stability\seed-runs\seed-514\loss-alias-run\sample.txt
