@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v532.0.0` replays generation profiles over archived fixed/loss pair checkpoints and confirms newline suppression does not solve pair coexistence.
+Version `v533.0.0` trains a tiny fixed/loss pair coexistence refresh checkpoint and records the remaining no-pair-full boundary.
+
+## Latest v533 checkpoint
+
+- Added `model_capability_required_term_pair_coexistence_refresh`, which builds a small fixed/loss coexistence corpus, trains a fresh checkpoint, and reuses the v532 replay evaluator.
+- Added `scripts/run_model_capability_required_term_pair_coexistence_refresh.py` with repeat/bridge/training controls.
+- Ran a real seed `533` refresh: training passed and the checkpoint exists, but both default and suppression profiles kept pair-full variants at `0`.
+- Observed both `fixed:` and `loss:` continuations collapsing toward `ansssssssss`, pointing the next step at first-token preference/corpus answer-shape diagnostics.
+- Archived the v533 refresh evidence in `e/533` and added the code explanation in `代码讲解记录_模型能力阶段/547-v533-required-term-pair-coexistence-refresh.md`.
 
 ## Latest v532 checkpoint
 

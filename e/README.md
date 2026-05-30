@@ -257,6 +257,10 @@ e/531/解释/说明.md
 e/532/图片
 e/532/解释/说明.md
  -> v532 required-term pair generation profile replay 的运行截图和解释
+
+e/533/图片
+e/533/解释/说明.md
+ -> v533 required-term pair coexistence refresh 的运行截图和解释
 ```
 
 写入规则：

@@ -191,6 +191,9 @@
 546-v532-required-term-pair-generation-profile-replay.md
  -> v532 code explanation: replay default and newline-suppression profiles over archived fixed/loss pair checkpoints.
 
+547-v533-required-term-pair-coexistence-refresh.md
+ -> v533 code explanation: train a tiny fixed/loss coexistence refresh checkpoint and replay generation profiles.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

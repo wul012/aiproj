@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=44157 vocab_size=36
+parameters=53,440
+data_source=data:e\533\解释\model-capability-required-term-pair-coexistence-refresh\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1775 val_loss=3.2217
+step=  350 train_loss=1.1077 val_loss=3.1662
+step=  700 train_loss=0.9919 val_loss=2.5007
+step= 1050 train_loss=0.9906 val_loss=2.6145
+step= 1400 train_loss=1.0698 val_loss=2.6560
+saved=e\533\解释\model-capability-required-term-pair-coexistence-refresh\pair-coexistence-refresh-run
+history=e\533\解释\model-capability-required-term-pair-coexistence-refresh\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\533\解释\model-capability-required-term-pair-coexistence-refresh\pair-coexistence-refresh-run\run_manifest.json
+sample=e\533\解释\model-capability-required-term-pair-coexistence-refresh\pair-coexistence-refresh-run\sample.txt

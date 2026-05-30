@@ -1,0 +1,34 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair coexistence refresh" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The refresh run completed but still did not produce full fixed/loss continuation coverage.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_coexistence_refresh_no_pair_full
+    - generic [ref=e13]:
+      - generic [ref=e14]: Training
+      - strong [ref=e15]: pass
+    - generic [ref=e16]:
+      - generic [ref=e17]: Checkpoint
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Default pair full
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Suppression pair full
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Pair full observed
+      - strong [ref=e27]: "False"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: increase pair objective diversity or inspect first-token preference before more training
+  - generic [ref=e31]:
+    - heading "Replay Variants" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]
+      - rowgroup [ref=e42]
