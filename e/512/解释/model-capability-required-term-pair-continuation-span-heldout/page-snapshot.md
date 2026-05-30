@@ -1,0 +1,40 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT continuation-span heldout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one held-out alias prompt emitted its expected required term.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: heldout_prompt_generalization_observed
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Generations
+      - strong [ref=e18]: "8"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Source hits
+      - strong [ref=e21]: "1"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Heldout hits
+      - strong [ref=e24]: "1"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: repeat held-out prompts across more aliases before promoting the signal
+  - generic [ref=e28]:
+    - heading "Generation Rows" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Seed Case Type Expected Hit Continuation" [ref=e33]
+      - rowgroup [ref=e40]:
+        - row "510 source-fixed source fixed True \\npan fixed:\\n" [ref=e41]
+        - row "510 source-loss source loss False \\npan fixed:\\n" [ref=e48]
+        - row "510 heldout-alpha-fixed heldout fixed True \\npan fixed:\\n" [ref=e55]
+        - row "510 heldout-beta-loss heldout loss False \\npan fixed:\\n" [ref=e62]
+        - row "511 source-fixed source fixed True \\npafin fixed" [ref=e69]
+        - row "511 source-loss source loss False \\npafixed fix" [ref=e76]
+        - row "511 heldout-alpha-fixed heldout fixed True \\npafin fixed" [ref=e83]
+        - row "511 heldout-beta-loss heldout loss False \\npafixed fix" [ref=e90]

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v511.0.0` repeats the fixed/loss continuation-span objective across seeds and records a stable prefix-gain signal.
+Version `v512.0.0` probes held-out alias prompts against the v511 continuation-span checkpoints and records a fixed-only alias signal.
+
+## Latest v512 checkpoint
+
+- Added `model_capability_required_term_pair_continuation_span_heldout`, which reads v511 seed reports and runs source/heldout prompt probes against the trained checkpoints.
+- Added `scripts/run_model_capability_required_term_pair_continuation_span_heldout.py`; it performs generation-only evaluation with no new training.
+- Ran real source cases `fixed:`/`loss:` and held-out alias cases `alpha:`/`beta:` across seeds `510,511`.
+- Interpreted v512 conservatively: `fixed` hit on both source and held-out `alpha:` prompts, while `loss` missed on both source and held-out `beta:` prompts.
+- Archived the v512 held-out evidence in `e/512` and added the code explanation in `代码讲解记录_模型能力阶段/526-v512-model-capability-required-term-pair-continuation-span-heldout.md`.
 
 ## Latest v511 checkpoint
 

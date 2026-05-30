@@ -173,6 +173,10 @@ e/510/解释/说明.md
 e/511/图片
 e/511/解释/说明.md
  -> v511 model capability required-term pair continuation-span stability 的运行截图和解释
+
+e/512/图片
+e/512/解释/说明.md
+ -> v512 model capability required-term pair continuation-span heldout 的运行截图和解释
 ```
 
 写入规则：

@@ -128,6 +128,9 @@
 525-v511-model-capability-required-term-pair-continuation-span-stability.md
  -> v511 code explanation: repeat the continuation-span objective across seeds and confirm stable prefix gain without full generation recovery.
 
+526-v512-model-capability-required-term-pair-continuation-span-heldout.md
+ -> v512 code explanation: probe source and held-out alias prompts against v511 seed checkpoints and record fixed-only alias signal.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
