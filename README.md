@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v504.0.0` compares v503 forced-choice winners with v502 free-generation probes and isolates the current gap as internal preference not expressed by generation.
+Version `v505.0.0` probes the v504 generation gap with deterministic decoding profiles and shows the internal `fixed/loss` signal can be expressed partially, but not by one stable profile.
+
+## Latest v505 checkpoint
+
+- Added `model_capability_required_term_pair_decoding_gap_probe`, which reads v504, selects the best forced-generation gap variant, and reuses the linked v503 checkpoint metadata for generation-only probing.
+- Added `scripts/run_model_capability_required_term_pair_decoding_gap_probe.py`; it runs decoding profiles only and does not retrain checkpoints.
+- Ran the real probe against `symmetric-anchor` using `greedy-12`, `greedy-24`, and `top2-24`. The run produced `6` probe rows, `2` continuation hits, and `0` full-hit profiles.
+- Interpreted v505 as partial expression evidence: `greedy-24` recovered `fixed`, while `top2-24` recovered `loss`, but no single profile expressed both pair branches.
+- Archived the v505 decoding-gap evidence in `e/505` and added the code explanation in `代码讲解记录_模型能力阶段/519-v505-model-capability-required-term-pair-decoding-gap-probe.md`.
 
 ## Latest v504 checkpoint
 

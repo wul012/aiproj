@@ -1,0 +1,12 @@
+variant_id,profile_id,prompt_term,expected_term,continuation_hit,generated_hit,continuation_preview,max_new_tokens,temperature,top_k,seed
+symmetric-anchor,greedy-12,fixed,fixed,False,True,"didddf
+f
+fix",12,0.2,1,505
+symmetric-anchor,greedy-12,loss,loss,False,True,ssssssssssss,12,0.2,1,505
+symmetric-anchor,greedy-24,fixed,fixed,True,True,"didddf
+f
+fixedddddddd:lo",24,0.2,1,505
+symmetric-anchor,greedy-24,loss,loss,False,True,ssssssssssssssssssssssss,24,0.2,1,505
+symmetric-anchor,top2-24,fixed,fixed,False,True,didddf:losssssssssssssss,24,0.35,2,1505
+symmetric-anchor,top2-24,loss,loss,True,True,"sssssss
+lossssssssssssss",24,0.35,2,1505

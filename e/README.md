@@ -145,6 +145,10 @@ e/503/解释/说明.md
 e/504/图片
 e/504/解释/说明.md
  -> v504 model capability required-term pair generation-gap audit 的运行截图和解释
+
+e/505/图片
+e/505/解释/说明.md
+ -> v505 model capability required-term pair decoding-gap probe 的运行截图和解释
 ```
 
 写入规则：

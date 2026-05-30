@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_pair_decoding_gap_partial_only
+decoding_gap_probe_decision=decoding_gap_probe_partial_expression_only
+target_count=1
+profile_count=3
+probe_count=6
+continuation_hit_count=2
+profile_full_hit_count=0
+best_variant_id=symmetric-anchor
+best_profile_id=top2-24
+best_profile_hit_count=1
+model_quality_claim=not_claimed
+next_action=inspect first-token rank and sampled path before adding more training variants

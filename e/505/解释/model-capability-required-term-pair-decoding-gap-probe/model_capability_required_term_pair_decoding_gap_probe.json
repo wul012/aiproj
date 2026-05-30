@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair decoding gap probe",
+  "generated_at": "2026-05-30T04:33:23Z",
+  "status": "pass",
+  "decision": "required_term_pair_decoding_gap_partial_only",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_generation_gap": "D:\\aiproj\\e\\504\\解释\\model-capability-required-term-pair-generation-gap\\model_capability_required_term_pair_generation_gap.json",
+  "source_required_term_pair_forced_choice_diagnostic": "D:\\aiproj\\e\\503\\解释\\model-capability-required-term-pair-forced-choice-diagnostic\\model_capability_required_term_pair_forced_choice_diagnostic.json",
+  "out_dir": "e\\505\\解释\\model-capability-required-term-pair-decoding-gap-probe",
+  "settings": {
+    "variant_limit": 1,
+    "device": "cpu",
+    "experiment_boundary": "generation-side probing only; no checkpoint training"
+  },
+  "profiles": [
+    {
+      "profile_id": "greedy-12",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505
+    },
+    {
+      "profile_id": "greedy-24",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505
+    },
+    {
+      "profile_id": "top2-24",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505
+    }
+  ],
+  "targets": [
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "prompts": [
+        {
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "prompt_term": "fixed",
+          "expected_term": "fixed",
+          "forced_best_candidate_term": "fixed",
+          "forced_expected_is_best": true,
+          "forced_expected_rank": 1,
+          "forced_expected_avg_nll": 1.824791,
+          "forced_expected_margin_vs_best": 0.0,
+          "generation_continuation_hit": false,
+          "generation_continuation_hit_count": 0,
+          "generation_generated_hit_count": 1,
+          "generation_continuation_preview": "didddf\\nf\\nfix",
+          "generation_generated_preview": "fixed:didddf\\nf\\nfix",
+          "gap_class": "internal_only"
+        },
+        {
+          "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+          "pair_id": "01-fixed-loss",
+          "variant_id": "symmetric-anchor",
+          "variant_label": "alternating cycles plus symmetric terminal anchors",
+          "prompt_term": "loss",
+          "expected_term": "loss",
+          "forced_best_candidate_term": "loss",
+          "forced_expected_is_best": true,
+          "forced_expected_rank": 1,
+          "forced_expected_avg_nll": 1.20319,
+          "forced_expected_margin_vs_best": 0.0,
+          "generation_continuation_hit": false,
+          "generation_continuation_hit_count": 0,
+          "generation_generated_hit_count": 1,
+          "generation_continuation_preview": "ssssssssssss",
+          "generation_generated_preview": "loss:ssssssssssss",
+          "gap_class": "internal_only"
+        }
+      ]
+    }
+  ],
+  "probe_rows": [
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "continuation_preview": "didddf\nf\nfix",
+      "generated_preview": "fixed:didddf\nf\nfix",
+      "continuation_hit": false,
+      "generated_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-12",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation": "didddf\nf\nfixedddddddd:lo",
+      "continuation_preview": "didddf\nf\nfixedddddddd:lo",
+      "generated_preview": "fixed:didddf\nf\nfixedddddddd:lo",
+      "continuation_hit": true,
+      "generated_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "greedy-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 1,
+      "seed": 505,
+      "generated": "loss:ssssssssssssssssssssssss",
+      "continuation": "ssssssssssssssssssssssss",
+      "continuation_preview": "ssssssssssssssssssssssss",
+      "generated_preview": "loss:ssssssssssssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "fixed:",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "fixed:didddf:losssssssssssssss",
+      "continuation": "didddf:losssssssssssssss",
+      "continuation_preview": "didddf:losssssssssssssss",
+      "generated_preview": "fixed:didddf:losssssssssssssss",
+      "continuation_hit": false,
+      "generated_hit": true
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "device": "cpu",
+      "profile_id": "top2-24",
+      "prompt": "loss:",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "max_new_tokens": 24,
+      "temperature": 0.35,
+      "top_k": 2,
+      "seed": 1505,
+      "generated": "loss:sssssss\nlossssssssssssss",
+      "continuation": "sssssss\nlossssssssssssss",
+      "continuation_preview": "sssssss\nlossssssssssssss",
+      "generated_preview": "loss:sssssss\nlossssssssssssss",
+      "continuation_hit": true,
+      "generated_hit": true
+    }
+  ],
+  "profile_summaries": [
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "greedy-12",
+      "prompt_count": 2,
+      "probe_count": 2,
+      "continuation_hit_count": 0,
+      "profile_full_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "greedy-24",
+      "prompt_count": 2,
+      "probe_count": 2,
+      "continuation_hit_count": 1,
+      "profile_full_hit": false,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "profile_id": "top2-24",
+      "prompt_count": 2,
+      "probe_count": 2,
+      "continuation_hit_count": 1,
+      "profile_full_hit": false,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ]
+    }
+  ],
+  "summary": {
+    "decoding_gap_probe_decision": "decoding_gap_probe_partial_expression_only",
+    "target_count": 1,
+    "profile_count": 3,
+    "probe_count": 6,
+    "continuation_hit_count": 2,
+    "profile_full_hit_count": 0,
+    "best_variant_id": "symmetric-anchor",
+    "best_profile_id": "top2-24",
+    "best_profile_hit_count": 1
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Some decoding probes expressed expected terms, but no profile expressed the full pair.",
+    "next_action": "inspect first-token rank and sampled path before adding more training variants"
+  }
+}

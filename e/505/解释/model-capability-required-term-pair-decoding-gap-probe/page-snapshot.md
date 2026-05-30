@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair decoding gap probe" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Some decoding probes expressed expected terms, but no profile expressed the full pair.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: decoding_gap_probe_partial_expression_only
+    - generic [ref=e13]:
+      - generic [ref=e14]: Targets
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Profiles
+      - strong [ref=e18]: "3"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Hits
+      - strong [ref=e21]: "2"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Full profiles
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Best profile
+      - strong [ref=e27]: top2-24
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: inspect first-token rank and sampled path before adding more training variants
+  - generic [ref=e31]:
+    - heading "Probe Rows" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Variant Profile Prompt Hit Continuation" [ref=e36]
+      - rowgroup [ref=e42]:
+        - row "symmetric-anchor greedy-12 fixed False didddf f fix" [ref=e43]
+        - row "symmetric-anchor greedy-12 loss False ssssssssssss" [ref=e49]
+        - row "symmetric-anchor greedy-24 fixed True didddf f fixedddddddd:lo" [ref=e55]
+        - row "symmetric-anchor greedy-24 loss False ssssssssssssssssssssssss" [ref=e61]
+        - row "symmetric-anchor top2-24 fixed False didddf:losssssssssssssss" [ref=e67]
+        - row "symmetric-anchor top2-24 loss True sssssss lossssssssssssss" [ref=e73]
+  - generic [ref=e79]:
+    - heading "Profile Summary" [level=2] [ref=e80]
+    - table [ref=e82]:
+      - rowgroup [ref=e83]:
+        - row "Variant Profile Hits Prompts Full hit Missed" [ref=e84]
+      - rowgroup [ref=e91]:
+        - row "symmetric-anchor greedy-12 0 2 False ['fixed', 'loss']" [ref=e92]
+        - row "symmetric-anchor greedy-24 1 2 False ['loss']" [ref=e99]
+        - row "symmetric-anchor top2-24 1 2 False ['fixed']" [ref=e106]
