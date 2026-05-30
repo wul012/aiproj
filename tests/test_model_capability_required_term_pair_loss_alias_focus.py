@@ -45,9 +45,13 @@ class ModelCapabilityRequiredTermPairLossAliasFocusTests(unittest.TestCase):
             self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_support_full_hit")
             self.assertTrue(report["summary"]["stable_focus_full_coverage"])
             self.assertTrue(report["summary"]["stable_support_full_coverage"])
+            self.assertTrue(report["summary"]["stable_focus_newline_cleanup_full_coverage"])
+            self.assertTrue(report["summary"]["stable_support_newline_cleanup_full_coverage"])
             self.assertTrue(report["summary"]["stable_focus_normalized_full_coverage"])
+            self.assertEqual(report["summary"]["newline_cleanup_gain_count"], 0)
             self.assertEqual(report["summary"]["normalization_gain_count"], 0)
             self.assertIn("loss_alias_focus_decision=loss_alias_focus_support_full_hit", text)
+            self.assertIn("loss_alias_focus_surface_decision=loss_alias_focus_support_full_hit", text)
             self.assertIn("loss_alias_focus_metric_decision=loss_alias_focus_support_full_hit", text)
             self.assertIn("Loss-Alias Focus", markdown)
             self.assertIn("MiniGPT loss-alias focus", html)
@@ -77,6 +81,7 @@ class ModelCapabilityRequiredTermPairLossAliasFocusTests(unittest.TestCase):
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_no_repair")
             self.assertFalse(report["summary"]["stable_focus_full_coverage"])
+            self.assertFalse(report["summary"]["stable_focus_newline_cleanup_full_coverage"])
             self.assertFalse(report["summary"]["stable_focus_normalized_full_coverage"])
 
     def test_focus_reports_normalized_signal_separately_from_strict_hits(self) -> None:
@@ -91,13 +96,19 @@ class ModelCapabilityRequiredTermPairLossAliasFocusTests(unittest.TestCase):
             )
 
             self.assertEqual(report["status"], "pass")
-            self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_normalized_support_signal")
+            self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_newline_cleanup_support_signal")
             self.assertEqual(report["summary"]["loss_alias_focus_decision"], "loss_alias_focus_no_repair")
+            self.assertEqual(
+                report["summary"]["loss_alias_focus_surface_decision"],
+                "loss_alias_focus_strict_miss_newline_cleanup_support_full_signal",
+            )
             self.assertEqual(
                 report["summary"]["loss_alias_focus_metric_decision"],
                 "loss_alias_focus_strict_miss_normalized_support_full_signal",
             )
+            self.assertEqual(report["summary"]["newline_cleanup_gain_count"], 4)
             self.assertEqual(report["summary"]["normalization_gain_count"], 4)
+            self.assertTrue(report["summary"]["stable_support_newline_cleanup_full_coverage"])
             self.assertTrue(report["summary"]["stable_support_normalized_full_coverage"])
 
     def test_focus_fails_without_missed_rows(self) -> None:

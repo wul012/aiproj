@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=85718 vocab_size=37
+parameters=53,504
+data_source=data:e\523\解释\model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics\seed-runs\seed-515\required_term_pair_loss_alias_focus_corpus.txt
+step=    1 train_loss=3.2512 val_loss=3.1702
+step=  225 train_loss=1.3771 val_loss=1.3746
+step=  450 train_loss=1.4291 val_loss=1.3355
+step=  675 train_loss=1.2210 val_loss=1.3912
+step=  900 train_loss=1.1255 val_loss=1.3125
+saved=e\523\解释\model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics\seed-runs\seed-515\loss-alias-focus-run
+history=e\523\解释\model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics\seed-runs\seed-515\loss-alias-focus-run\metrics.jsonl
+manifest=e\523\解释\model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics\seed-runs\seed-515\loss-alias-focus-run\run_manifest.json
+sample=e\523\解释\model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics\seed-runs\seed-515\loss-alias-focus-run\sample.txt

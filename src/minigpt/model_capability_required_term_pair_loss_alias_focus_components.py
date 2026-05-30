@@ -74,3 +74,21 @@ def focus_metric_decision(
     if normalization_gain_count > 0:
         return "loss_alias_focus_strict_miss_normalized_partial_signal"
     return strict_decision
+
+
+def focus_surface_decision(
+    strict_decision: str,
+    seed_count: int,
+    focus_newline_cleanup_full_count: int,
+    support_newline_cleanup_full_count: int,
+    newline_cleanup_gain_count: int,
+) -> str:
+    if strict_decision != "loss_alias_focus_no_repair":
+        return strict_decision
+    if seed_count > 0 and support_newline_cleanup_full_count == seed_count and newline_cleanup_gain_count > 0:
+        return "loss_alias_focus_strict_miss_newline_cleanup_support_full_signal"
+    if seed_count > 0 and focus_newline_cleanup_full_count == seed_count and newline_cleanup_gain_count > 0:
+        return "loss_alias_focus_strict_miss_newline_cleanup_focus_signal"
+    if newline_cleanup_gain_count > 0:
+        return "loss_alias_focus_strict_miss_newline_cleanup_partial_signal"
+    return strict_decision

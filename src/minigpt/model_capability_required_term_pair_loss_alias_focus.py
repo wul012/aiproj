@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_focus_components imp
     clean_seeds as _clean_seeds,
     focus_decision as _focus_decision,
     focus_metric_decision as _focus_metric_decision,
+    focus_surface_decision as _focus_surface_decision,
     preview as _preview,
     sorted_cases as _sorted_cases,
 )
@@ -211,6 +212,11 @@ def summarize_loss_alias_focus_seed_rows(seeds: list[int], reports: list[dict[st
                 "support_normalized_hit_case_count": summary.get("support_normalized_hit_case_count"),
                 "focus_normalized_full_coverage": summary.get("focus_normalized_full_coverage"),
                 "support_normalized_full_coverage": summary.get("support_normalized_full_coverage"),
+                "focus_newline_cleanup_hit_case_count": summary.get("focus_newline_cleanup_hit_case_count"),
+                "support_newline_cleanup_hit_case_count": summary.get("support_newline_cleanup_hit_case_count"),
+                "focus_newline_cleanup_full_coverage": summary.get("focus_newline_cleanup_full_coverage"),
+                "support_newline_cleanup_full_coverage": summary.get("support_newline_cleanup_full_coverage"),
+                "newline_cleanup_gain_count": summary.get("newline_cleanup_gain_count"),
                 "normalization_gain_count": summary.get("normalization_gain_count"),
                 "checkpoint_exists": summary.get("checkpoint_exists"),
                 "out_dir": report.get("out_dir"),
@@ -230,10 +236,20 @@ def summarize_loss_alias_focus(
     support_full_count = sum(1 for row in seed_rows if row.get("support_full_coverage"))
     focus_normalized_full_count = sum(1 for row in seed_rows if row.get("focus_normalized_full_coverage"))
     support_normalized_full_count = sum(1 for row in seed_rows if row.get("support_normalized_full_coverage"))
+    focus_newline_cleanup_full_count = sum(1 for row in seed_rows if row.get("focus_newline_cleanup_full_coverage"))
+    support_newline_cleanup_full_count = sum(1 for row in seed_rows if row.get("support_newline_cleanup_full_coverage"))
+    newline_cleanup_gain_count = sum(int(row.get("newline_cleanup_gain_count") or 0) for row in seed_rows)
     normalization_gain_count = sum(int(row.get("normalization_gain_count") or 0) for row in seed_rows)
     strict_decision = _focus_decision(seed_count, pass_count, focus_full_count, support_full_count)
     return {
         "loss_alias_focus_decision": strict_decision,
+        "loss_alias_focus_surface_decision": _focus_surface_decision(
+            strict_decision,
+            seed_count,
+            focus_newline_cleanup_full_count,
+            support_newline_cleanup_full_count,
+            newline_cleanup_gain_count,
+        ),
         "loss_alias_focus_metric_decision": _focus_metric_decision(
             strict_decision,
             seed_count,
@@ -253,6 +269,11 @@ def summarize_loss_alias_focus(
         "support_normalized_full_seed_count": support_normalized_full_count,
         "stable_focus_normalized_full_coverage": seed_count > 0 and focus_normalized_full_count == seed_count,
         "stable_support_normalized_full_coverage": seed_count > 0 and support_normalized_full_count == seed_count,
+        "focus_newline_cleanup_full_seed_count": focus_newline_cleanup_full_count,
+        "support_newline_cleanup_full_seed_count": support_newline_cleanup_full_count,
+        "stable_focus_newline_cleanup_full_coverage": seed_count > 0 and focus_newline_cleanup_full_count == seed_count,
+        "stable_support_newline_cleanup_full_coverage": seed_count > 0 and support_newline_cleanup_full_count == seed_count,
+        "newline_cleanup_gain_count": newline_cleanup_gain_count,
         "normalization_gain_count": normalization_gain_count,
         "checkpoint_seed_count": sum(1 for row in seed_rows if row.get("checkpoint_exists")),
     }
@@ -377,6 +398,9 @@ def _generation_rows(
                 "continuation": continuation,
                 "continuation_hit": strict_hit,
                 "strict_hit": hit_metrics["strict_hit"],
+                "newline_cleanup_hit": hit_metrics["newline_cleanup_hit"],
+                "newline_cleanup_gain": hit_metrics["newline_cleanup_gain"],
+                "newline_cleanup_continuation_preview": _preview(hit_metrics["newline_cleanup_continuation"]),
                 "normalized_hit": hit_metrics["normalized_hit"],
                 "normalization_gain": hit_metrics["normalization_gain"],
                 "normalized_continuation_preview": _preview(hit_metrics["normalized_continuation"]),
@@ -394,6 +418,8 @@ def _seed_summary(
 ) -> dict[str, Any]:
     support_hits = sum(1 for row in generation_rows if row.get("continuation_hit"))
     focus_hits = sum(1 for row in generation_rows if row.get("is_focus_case") and row.get("continuation_hit"))
+    support_newline_cleanup_hits = sum(1 for row in generation_rows if row.get("newline_cleanup_hit"))
+    focus_newline_cleanup_hits = sum(1 for row in generation_rows if row.get("is_focus_case") and row.get("newline_cleanup_hit"))
     support_normalized_hits = sum(1 for row in generation_rows if row.get("normalized_hit"))
     focus_normalized_hits = sum(1 for row in generation_rows if row.get("is_focus_case") and row.get("normalized_hit"))
     return {
@@ -403,6 +429,11 @@ def _seed_summary(
         "focus_hit_case_count": focus_hits,
         "support_full_coverage": bool(support_cases) and support_hits == len(support_cases),
         "focus_full_coverage": bool(focus_cases) and focus_hits == len(focus_cases),
+        "support_newline_cleanup_hit_case_count": support_newline_cleanup_hits,
+        "focus_newline_cleanup_hit_case_count": focus_newline_cleanup_hits,
+        "support_newline_cleanup_full_coverage": bool(support_cases) and support_newline_cleanup_hits == len(support_cases),
+        "focus_newline_cleanup_full_coverage": bool(focus_cases) and focus_newline_cleanup_hits == len(focus_cases),
+        "newline_cleanup_gain_count": sum(1 for row in generation_rows if row.get("newline_cleanup_gain")),
         "support_normalized_hit_case_count": support_normalized_hits,
         "focus_normalized_hit_case_count": focus_normalized_hits,
         "support_normalized_full_coverage": bool(support_cases) and support_normalized_hits == len(support_cases),
@@ -459,6 +490,12 @@ def _decision(status: str, summary: dict[str, Any]) -> str:
         return "required_term_pair_loss_alias_focus_repaired"
     if int(summary.get("focus_full_seed_count") or 0) > 0:
         return "required_term_pair_loss_alias_focus_seed_dependent"
+    if summary.get("stable_support_newline_cleanup_full_coverage"):
+        return "required_term_pair_loss_alias_focus_newline_cleanup_support_signal"
+    if summary.get("stable_focus_newline_cleanup_full_coverage"):
+        return "required_term_pair_loss_alias_focus_newline_cleanup_focus_signal"
+    if int(summary.get("newline_cleanup_gain_count") or 0) > 0:
+        return "required_term_pair_loss_alias_focus_newline_cleanup_partial_signal"
     if summary.get("stable_support_normalized_full_coverage"):
         return "required_term_pair_loss_alias_focus_normalized_support_signal"
     if summary.get("stable_focus_normalized_full_coverage"):
@@ -475,6 +512,12 @@ def _model_quality_claim(summary: dict[str, Any]) -> str:
         return "tiny_loss_alias_focused_repair_signal"
     if int(summary.get("focus_full_seed_count") or 0) > 0:
         return "tiny_loss_alias_focused_seed_dependent_signal"
+    if summary.get("stable_support_newline_cleanup_full_coverage"):
+        return "tiny_loss_alias_focused_newline_cleanup_support_signal"
+    if summary.get("stable_focus_newline_cleanup_full_coverage"):
+        return "tiny_loss_alias_focused_newline_cleanup_repair_signal"
+    if int(summary.get("newline_cleanup_gain_count") or 0) > 0:
+        return "tiny_loss_alias_focused_newline_cleanup_partial_signal"
     if summary.get("stable_support_normalized_full_coverage"):
         return "tiny_loss_alias_focused_normalized_support_signal"
     if summary.get("stable_focus_normalized_full_coverage"):
@@ -493,6 +536,12 @@ def _reason(status: str, summary: dict[str, Any]) -> str:
         return "The focused corpus repaired every previously missed loss alias row for every tested seed."
     if int(summary.get("focus_full_seed_count") or 0) > 0:
         return "The focused corpus repaired missed rows for at least one seed, but not stably."
+    if summary.get("stable_support_newline_cleanup_full_coverage"):
+        return "Strict hits still failed, but every support loss alias appears after removing only newline separators."
+    if summary.get("stable_focus_newline_cleanup_full_coverage"):
+        return "Strict hits still failed, but every focused missed row appears after removing only newline separators."
+    if int(summary.get("newline_cleanup_gain_count") or 0) > 0:
+        return "Strict hits still failed, but newline cleanup reveals at least one line-broken required term."
     if summary.get("stable_support_normalized_full_coverage"):
         return "Strict hits still failed, but every support loss alias contains the required term after normalization."
     if summary.get("stable_focus_normalized_full_coverage"):
@@ -509,6 +558,8 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
         return "add fixed aliases back and test pair coexistence"
     if summary.get("stable_focus_full_coverage"):
         return "repeat focused repair with another seed before pair recombination"
+    if summary.get("stable_support_newline_cleanup_full_coverage") or summary.get("stable_focus_newline_cleanup_full_coverage"):
+        return "treat line-broken required-term output as a decode-surface issue before changing training again"
     if summary.get("stable_support_normalized_full_coverage") or summary.get("stable_focus_normalized_full_coverage"):
         return "carry strict and normalized hit metrics together before another training change"
     return "inspect focused corpus ordering and generation previews before adding capacity"

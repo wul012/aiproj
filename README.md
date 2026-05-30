@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v522.0.0` audits bounded decode cleanup for focused loss-alias newline splits.
+Version `v523.0.0` carries bounded newline-cleanup metrics into the main focused loss-alias report.
+
+## Latest v523 checkpoint
+
+- Extended shared required-term hit metrics with `newline_cleanup_hit`, which removes only newline separators before matching.
+- Updated `model_capability_required_term_pair_loss_alias_focus` so seed rows and summaries now show strict, newline-cleanup, and normalized loss hits together.
+- Re-ran seed `515`: strict support stayed `0/4`, newline-cleanup support became `4/4`, and normalized support stayed `4/4`.
+- Interpreted v523 as a bounded decode-surface signal: the hidden loss term is line-broken, so the next change should treat it as evaluation/decode-surface behavior before changing training again.
+- Archived the v523 focus newline-cleanup evidence in `e/523` and added the code explanation in `代码讲解记录_模型能力阶段/537-v523-model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics.md`.
 
 ## Latest v522 checkpoint
 
