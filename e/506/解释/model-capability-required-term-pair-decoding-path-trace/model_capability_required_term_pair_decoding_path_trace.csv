@@ -1,0 +1,12 @@
+variant_id,profile_id,prompt_term,continuation_hit,first_expected_token_rank,first_sample_text,first_sample_matches_expected_first_token,late_hit_after_first_miss,expected_first_token_seen_step,continuation_preview
+symmetric-anchor,greedy-12,fixed,False,2,d,False,False,5,"didddf
+f
+fix"
+symmetric-anchor,greedy-12,loss,False,2,s,False,False,,ssssssssssss
+symmetric-anchor,greedy-24,fixed,True,2,d,False,True,5,"didddf
+f
+fixedddddddd:lo"
+symmetric-anchor,greedy-24,loss,False,2,s,False,False,,ssssssssssssssssssssssss
+symmetric-anchor,top2-24,fixed,False,3,d,False,False,5,didddf:losssssssssssssss
+symmetric-anchor,top2-24,loss,True,3,s,False,True,8,"sssssss
+lossssssssssssss"

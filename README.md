@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v505.0.0` probes the v504 generation gap with deterministic decoding profiles and shows the internal `fixed/loss` signal can be expressed partially, but not by one stable profile.
+Version `v506.0.0` traces v505 sampling paths and shows expected first tokens are ranked near the top but never sampled first; the observed hits are late recovery after first-token misses.
+
+## Latest v506 checkpoint
+
+- Added `model_capability_required_term_pair_decoding_path_trace`, which replays v505 decoding-gap probe rows with the same checkpoint/profile/seed and records first-token rank, first sampled token, seen step, and continuation previews.
+- Added `scripts/run_model_capability_required_term_pair_decoding_path_trace.py`; it performs path tracing only and does not train or alter checkpoints.
+- Ran the real trace over `6` probe rows and `120` sampled steps. Expected first tokens ranked within top 5 for all `6` probes, but `first_sample_match_count=0`.
+- Interpreted v506 as a first-token sampling/expression problem: the two successful continuations were `late_hit_after_first_miss`, not immediate prompt-conditioned starts.
+- Archived the v506 decoding-path trace evidence in `e/506` and added the code explanation in `代码讲解记录_模型能力阶段/520-v506-model-capability-required-term-pair-decoding-path-trace.md`.
 
 ## Latest v505 checkpoint
 

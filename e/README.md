@@ -149,6 +149,10 @@ e/504/解释/说明.md
 e/505/图片
 e/505/解释/说明.md
  -> v505 model capability required-term pair decoding-gap probe 的运行截图和解释
+
+e/506/图片
+e/506/解释/说明.md
+ -> v506 model capability required-term pair decoding-path trace 的运行截图和解释
 ```
 
 写入规则：

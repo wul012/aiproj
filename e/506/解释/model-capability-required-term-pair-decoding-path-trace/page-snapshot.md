@@ -1,0 +1,41 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair decoding path trace" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Some expected terms appear only after the first sampled token already missed the expected first token.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: decoding_path_trace_late_expression_after_first_miss
+    - generic [ref=e13]:
+      - generic [ref=e14]: Probes
+      - strong [ref=e15]: "6"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Steps
+      - strong [ref=e18]: "120"
+    - generic [ref=e19]:
+      - generic [ref=e20]: First matches
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Late hits
+      - strong [ref=e24]: "2"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Rank<=5
+      - strong [ref=e27]: "6"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: test constrained first-token repair before changing training data
+  - generic [ref=e31]:
+    - heading "Probe Summaries" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Profile Prompt Hit First rank First sample Late hit Seen step Continuation" [ref=e36]
+      - rowgroup [ref=e45]:
+        - row "greedy-12 fixed False 2 d False 5 didddf f fix" [ref=e46]
+        - row "greedy-12 loss False 2 s False ssssssssssss" [ref=e55]
+        - row "greedy-24 fixed True 2 d True 5 didddf f fixedddddddd:lo" [ref=e64]
+        - row "greedy-24 loss False 2 s False ssssssssssssssssssssssss" [ref=e73]
+        - row "top2-24 fixed False 3 d False 5 didddf:losssssssssssssss" [ref=e82]
+        - row "top2-24 loss True 3 s True 8 sssssss lossssssssssssss" [ref=e91]

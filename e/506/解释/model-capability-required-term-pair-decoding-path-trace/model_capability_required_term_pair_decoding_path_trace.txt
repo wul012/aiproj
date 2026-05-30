@@ -1,0 +1,11 @@
+status=pass
+decision=required_term_pair_decoding_path_late_expression
+decoding_path_trace_decision=decoding_path_trace_late_expression_after_first_miss
+probe_count=6
+trace_step_count=120
+continuation_hit_count=2
+first_sample_match_count=0
+late_hit_after_first_miss_count=2
+first_expected_rank_le_5_count=6
+model_quality_claim=late_generation_expression_only
+next_action=test constrained first-token repair before changing training data
