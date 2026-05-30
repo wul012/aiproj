@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair prompt separation audit</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e;--warn:#b45309}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+header{margin-bottom:18px}
+h1{font-size:30px;margin:0 0 8px}
+h2{font-size:18px;margin:0 0 12px}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+code{white-space:pre-wrap;color:var(--warn)}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair prompt separation audit</h1><p>The same scaffold prompt is followed by the other required term in corpus rows, so the pair corpus mixes target separation with contrast examples.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>prompt_separation_corpus_revision_needed</strong></div><div class="card"><span>Targets</span><strong>2</strong></div><div class="card"><span>Ready</span><strong>False</strong></div><div class="card"><span>Direct leaks</span><strong>960</strong></div><div class="card"><span>Negative leaks</span><strong>960</strong></div><div class="card"><span>Pair contexts</span><strong>960</strong></div><div class="card"><span>Revise corpus</span><strong>True</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>build a contrast-free pair corpus variant before running another capacity or decoding sweep</p></section>
+<section class="panel">
+<h2>Target Summary</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Target</th><th>Variant</th><th>Corpus</th><th>Direct leak</th><th>Negative leak</th><th>Pair context</th><th>Ready</th></tr></thead>
+<tbody><tr><td>01-fixed-loss-baseline-repeat</td><td>baseline-repeat</td><td>4322</td><td>480</td><td>480</td><td>480</td><td>False</td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>longer-iters</td><td>4322</td><td>480</td><td>480</td><td>480</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Term Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Target</th><th>Term</th><th>Prompt</th><th>Target rows</th><th>Other leak</th><th>Example</th></tr></thead>
+<tbody><tr><td>01-fixed-loss-baseline-repeat</td><td>fixed</td><td><code>fixed:</code></td><td>1440</td><td>240</td><td><code>fixed:fixed not loss</code></td></tr>
+<tr><td>01-fixed-loss-baseline-repeat</td><td>loss</td><td><code>loss:</code></td><td>1440</td><td>240</td><td><code>loss:loss not fixed</code></td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>fixed</td><td><code>fixed:</code></td><td>1440</td><td>240</td><td><code>fixed:fixed not loss</code></td></tr>
+<tr><td>01-fixed-loss-longer-iters</td><td>loss</td><td><code>loss:</code></td><td>1440</td><td>240</td><td><code>loss:loss not fixed</code></td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

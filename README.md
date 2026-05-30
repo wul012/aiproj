@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v498.0.0` reuses the v497 partial checkpoints and sweeps decoding profiles, confirming that longer or sampled continuations still do not recover a stable `fixed/loss` full hit.
+Version `v499.0.0` audits the v497 pair-capacity corpus behind the v498 decoding failure and finds direct prompt-target leakage in the `fixed/loss` training rows.
+
+## Latest v499 checkpoint
+
+- Added `model_capability_required_term_pair_prompt_separation_audit`, a read-only audit that starts from v498 decoding output and follows `source_required_term_pair_capacity_sweep` back to the real v497 capacity corpora.
+- Added `scripts/run_model_capability_required_term_pair_prompt_separation_audit.py`, which writes JSON/CSV/text/Markdown/HTML evidence without retraining or changing historical artifacts.
+- Ran the real audit over the two v497 partial targets. Both corpora were readable, but `prompt_separation_ready=False`: direct other-term leaks, negative contrast leaks, and shared pair-context rows were all counted at `960`.
+- Interpreted v499 as a corpus-row design finding: rows such as `fixed:fixed not loss` and `loss:loss not fixed` put the other required term directly after the same scaffold prompt, so the next step should build a contrast-free pair corpus before more capacity or decoding sweeps.
+- Archived the v499 prompt-separation audit evidence in `e/499` and added the code explanation in `代码讲解记录_模型能力阶段/513-v499-model-capability-required-term-pair-prompt-separation-audit.md`.
 
 ## Latest v498 checkpoint
 

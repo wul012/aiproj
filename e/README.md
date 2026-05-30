@@ -121,6 +121,10 @@ e/497/解释/说明.md
 e/498/图片
 e/498/解释/说明.md
  -> v498 model capability required-term pair decoding sweep 的运行截图和解释
+
+e/499/图片
+e/499/解释/说明.md
+ -> v499 model capability required-term pair prompt separation audit 的运行截图和解释
 ```
 
 写入规则：

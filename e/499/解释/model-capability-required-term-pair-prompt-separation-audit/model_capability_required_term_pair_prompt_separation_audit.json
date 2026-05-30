@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair prompt separation audit",
+  "generated_at": "2026-05-30T01:09:15Z",
+  "status": "pass",
+  "decision": "required_term_pair_prompt_separation_revision_needed",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_decoding_sweep": "e\\498\\解释\\model-capability-required-term-pair-decoding-sweep\\model_capability_required_term_pair_decoding_sweep.json",
+  "source_required_term_pair_capacity_sweep": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\model_capability_required_term_pair_capacity_sweep.json",
+  "out_dir": "e\\499\\解释\\model-capability-required-term-pair-prompt-separation-audit",
+  "settings": {
+    "experiment_boundary": "inspect prompt-target corpus rows after v498 decoding failed to recover pair full-hit",
+    "model_quality_claim": "not_claimed"
+  },
+  "summary": {
+    "prompt_separation_audit_decision": "prompt_separation_corpus_revision_needed",
+    "source_pair_decoding_sweep_decision": "pair_decoding_sweep_partial_only",
+    "source_decoding_full_hit_observed": false,
+    "target_count": 2,
+    "corpus_readable_target_count": 2,
+    "term_row_count": 4,
+    "prompt_separation_ready_target_count": 0,
+    "prompt_separation_ready": false,
+    "direct_prompt_other_term_leak_count": 960,
+    "negative_contrast_leak_count": 960,
+    "pair_header_shared_context_count": 960,
+    "target_with_direct_leak_count": 2,
+    "target_with_negative_leak_count": 2,
+    "target_with_shared_pair_context_count": 2,
+    "corpus_revision_recommended": true
+  },
+  "targets": [
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "variant_label": "v496 baseline repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "source_hit_count": 1,
+      "source_hit_rate": 0.5,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "capacity_max_iters": 1600,
+      "capacity_n_embd": 64,
+      "capacity_repeat": 240,
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-baseline-repeat-seed-496.txt",
+      "capacity_corpus_exists": true,
+      "capacity_line_count": 4320,
+      "isolated_repeat": 2
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "variant_label": "longer training budget",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "source_hit_count": 1,
+      "source_hit_rate": 0.5,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "capacity_max_iters": 2400,
+      "capacity_n_embd": 64,
+      "capacity_repeat": 240,
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-longer-iters-seed-496.txt",
+      "capacity_corpus_exists": true,
+      "capacity_line_count": 4320,
+      "isolated_repeat": 2
+    }
+  ],
+  "target_rows": [
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-baseline-repeat-seed-496.txt",
+      "corpus_exists": true,
+      "line_count": 4322,
+      "term_count": 2,
+      "direct_prompt_other_term_leak_count": 480,
+      "negative_contrast_leak_count": 480,
+      "pair_header_shared_context_count": 480,
+      "direct_prompt_leak_observed": true,
+      "negative_contrast_leak_observed": true,
+      "shared_pair_context_observed": true,
+      "prompt_separation_ready": false
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-longer-iters-seed-496.txt",
+      "corpus_exists": true,
+      "line_count": 4322,
+      "term_count": 2,
+      "direct_prompt_other_term_leak_count": 480,
+      "negative_contrast_leak_count": 480,
+      "pair_header_shared_context_count": 480,
+      "direct_prompt_leak_observed": true,
+      "negative_contrast_leak_observed": true,
+      "shared_pair_context_observed": true,
+      "prompt_separation_ready": false
+    }
+  ],
+  "term_rows": [
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "other_terms": [
+        "loss"
+      ],
+      "prompt_prefix_line_count": 1440,
+      "exact_target_line_count": 720,
+      "spaced_target_line_count": 480,
+      "target_after_prompt_line_count": 1440,
+      "other_after_prompt_line_count": 240,
+      "negative_contrast_leak_count": 240,
+      "pair_header_shared_context_count": 240,
+      "prompt_separation_ready": false,
+      "example_leak_line": "fixed:fixed not loss",
+      "example_pair_header_line": "pair fixed loss prompt fixed: target fixed"
+    },
+    {
+      "target_id": "01-fixed-loss-baseline-repeat",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "other_terms": [
+        "fixed"
+      ],
+      "prompt_prefix_line_count": 1440,
+      "exact_target_line_count": 720,
+      "spaced_target_line_count": 480,
+      "target_after_prompt_line_count": 1440,
+      "other_after_prompt_line_count": 240,
+      "negative_contrast_leak_count": 240,
+      "pair_header_shared_context_count": 240,
+      "prompt_separation_ready": false,
+      "example_leak_line": "loss:loss not fixed",
+      "example_pair_header_line": "pair fixed loss prompt loss: target loss"
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "other_terms": [
+        "loss"
+      ],
+      "prompt_prefix_line_count": 1440,
+      "exact_target_line_count": 720,
+      "spaced_target_line_count": 480,
+      "target_after_prompt_line_count": 1440,
+      "other_after_prompt_line_count": 240,
+      "negative_contrast_leak_count": 240,
+      "pair_header_shared_context_count": 240,
+      "prompt_separation_ready": false,
+      "example_leak_line": "fixed:fixed not loss",
+      "example_pair_header_line": "pair fixed loss prompt fixed: target fixed"
+    },
+    {
+      "target_id": "01-fixed-loss-longer-iters",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "other_terms": [
+        "fixed"
+      ],
+      "prompt_prefix_line_count": 1440,
+      "exact_target_line_count": 720,
+      "spaced_target_line_count": 480,
+      "target_after_prompt_line_count": 1440,
+      "other_after_prompt_line_count": 240,
+      "negative_contrast_leak_count": 240,
+      "pair_header_shared_context_count": 240,
+      "prompt_separation_ready": false,
+      "example_leak_line": "loss:loss not fixed",
+      "example_pair_header_line": "pair fixed loss prompt loss: target loss"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The same scaffold prompt is followed by the other required term in corpus rows, so the pair corpus mixes target separation with contrast examples.",
+    "next_action": "build a contrast-free pair corpus variant before running another capacity or decoding sweep"
+  }
+}

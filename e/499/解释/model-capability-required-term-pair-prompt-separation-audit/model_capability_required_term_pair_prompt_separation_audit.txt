@@ -1,0 +1,14 @@
+status=pass
+decision=required_term_pair_prompt_separation_revision_needed
+prompt_separation_audit_decision=prompt_separation_corpus_revision_needed
+source_pair_decoding_sweep_decision=pair_decoding_sweep_partial_only
+target_count=2
+corpus_readable_target_count=2
+term_row_count=4
+prompt_separation_ready=False
+direct_prompt_other_term_leak_count=960
+negative_contrast_leak_count=960
+pair_header_shared_context_count=960
+corpus_revision_recommended=True
+model_quality_claim=not_claimed
+next_action=build a contrast-free pair corpus variant before running another capacity or decoding sweep

@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair prompt separation audit" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The same scaffold prompt is followed by the other required term in corpus rows, so the pair corpus mixes target separation with contrast examples.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: prompt_separation_corpus_revision_needed
+    - generic [ref=e13]:
+      - generic [ref=e14]: Targets
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Ready
+      - strong [ref=e18]: "False"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Direct leaks
+      - strong [ref=e21]: "960"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Negative leaks
+      - strong [ref=e24]: "960"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Pair contexts
+      - strong [ref=e27]: "960"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Revise corpus
+      - strong [ref=e30]: "True"
+  - generic [ref=e31]:
+    - heading "Next Action" [level=2] [ref=e32]
+    - paragraph [ref=e33]: build a contrast-free pair corpus variant before running another capacity or decoding sweep
+  - generic [ref=e34]:
+    - heading "Target Summary" [level=2] [ref=e35]
+    - table [ref=e37]:
+      - rowgroup [ref=e38]:
+        - row "Target Variant Corpus Direct leak Negative leak Pair context Ready" [ref=e39]
+      - rowgroup [ref=e47]:
+        - row "01-fixed-loss-baseline-repeat baseline-repeat 4322 480 480 480 False" [ref=e48]
+        - row "01-fixed-loss-longer-iters longer-iters 4322 480 480 480 False" [ref=e56]
+  - generic [ref=e64]:
+    - heading "Term Rows" [level=2] [ref=e65]
+    - table [ref=e67]:
+      - rowgroup [ref=e68]:
+        - row "Target Term Prompt Target rows Other leak Example" [ref=e69]
+      - rowgroup [ref=e76]:
+        - 'row "01-fixed-loss-baseline-repeat fixed fixed: 1440 240 fixed:fixed not loss" [ref=e77]'
+        - 'row "01-fixed-loss-baseline-repeat loss loss: 1440 240 loss:loss not fixed" [ref=e86]'
+        - 'row "01-fixed-loss-longer-iters fixed fixed: 1440 240 fixed:fixed not loss" [ref=e95]'
+        - 'row "01-fixed-loss-longer-iters loss loss: 1440 240 loss:loss not fixed" [ref=e104]'

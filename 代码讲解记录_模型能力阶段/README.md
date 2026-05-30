@@ -89,6 +89,9 @@
 512-v498-model-capability-required-term-pair-decoding-sweep.md
  -> v498 code explanation: reuse v497 partial checkpoints and sweep decoding profiles before changing corpus or model capacity again.
 
+513-v499-model-capability-required-term-pair-prompt-separation-audit.md
+ -> v499 code explanation: audit v497 pair-capacity corpora after v498 decoding failed and identify prompt-target leakage in contrast rows.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
