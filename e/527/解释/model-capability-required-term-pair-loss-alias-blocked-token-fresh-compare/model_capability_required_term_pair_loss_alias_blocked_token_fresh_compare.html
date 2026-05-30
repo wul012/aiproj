@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT loss-alias blocked-token fresh compare</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px}
+h2{font-size:18px;margin:0 0 12px}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT loss-alias blocked-token fresh compare</h1><p>The fresh focused checkpoint already emits strict loss hits without blocked-token decoding.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>required_term_pair_loss_alias_blocked_token_fresh_baseline_already_strict</strong></div><div class="card"><span>Cases</span><strong>4</strong></div><div class="card"><span>Baseline strict</span><strong>4</strong></div><div class="card"><span>Blocked strict</span><strong>4</strong></div><div class="card"><span>Strict gains</span><strong>0</strong></div></section>
+<section class="panel"><h2>Fresh Focus</h2><p>decision=required_term_pair_loss_alias_focus_support_full_hit; surface=loss_alias_focus_support_full_hit</p></section>
+<section class="panel"><h2>Next Action</h2><p>compare this stronger fresh seed against earlier checkpoints before claiming a general training improvement</p></section>
+<section class="panel">
+<h2>Cases</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Profile</th><th>Case</th><th>Source strict</th><th>Probe strict</th><th>Gain</th><th>Preview</th></tr></thead>
+<tbody><tr><td>baseline_rerun</td><td>source-loss</td><td>True</td><td>True</td><td>False</td><td>lossssssssss</td></tr>
+<tr><td>suppress_newline_tokens</td><td>source-loss</td><td>True</td><td>True</td><td>False</td><td>lossssssssss</td></tr>
+<tr><td>baseline_rerun</td><td>heldout-beta-loss</td><td>True</td><td>True</td><td>False</td><td>lossssssssss</td></tr>
+<tr><td>suppress_newline_tokens</td><td>heldout-beta-loss</td><td>True</td><td>True</td><td>False</td><td>lossssssssss</td></tr>
+<tr><td>baseline_rerun</td><td>heldout-omega-loss</td><td>True</td><td>True</td><td>False</td><td>lossssssssss</td></tr>
+<tr><td>suppress_newline_tokens</td><td>heldout-omega-loss</td><td>True</td><td>True</td><td>False</td><td>lossssssssss</td></tr>
+<tr><td>baseline_rerun</td><td>heldout-theta-loss</td><td>True</td><td>True</td><td>False</td><td>lossss losss</td></tr>
+<tr><td>suppress_newline_tokens</td><td>heldout-theta-loss</td><td>True</td><td>True</td><td>False</td><td>lossss losss</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

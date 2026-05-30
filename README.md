@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v526.0.0` promotes blocked-token decoding into the core generator as an optional request field.
+Version `v527.0.0` compares blocked-token decoding against a freshly trained loss-alias focus checkpoint.
+
+## Latest v527 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_blocked_token_fresh_compare`, which trains a fresh loss-alias focus checkpoint and immediately compares default decoding with the v526 blocked-token profile.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_blocked_token_fresh_compare.py`; it preserves fresh focus and blocked-token probe sidecar reports under one evidence directory.
+- Ran the real seed `527` comparison: default baseline strict reached `4/4`, blocked-token strict also reached `4/4`, and strict gains were `0`.
+- Interpreted v527 as evidence that this fresh seed is already strict under default decoding, so blocked-token should remain an optional profile rather than a default claim.
+- Archived the v527 fresh compare evidence in `e/527` and added the code explanation in `代码讲解记录_模型能力阶段/541-v527-model-capability-required-term-pair-loss-alias-blocked-token-fresh-compare.md`.
 
 ## Latest v526 checkpoint
 

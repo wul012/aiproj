@@ -1,0 +1,34 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias blocked-token fresh compare" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The fresh focused checkpoint already emits strict loss hits without blocked-token decoding.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_loss_alias_blocked_token_fresh_baseline_already_strict
+    - generic [ref=e13]:
+      - generic [ref=e14]: Cases
+      - strong [ref=e15]: "4"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Baseline strict
+      - strong [ref=e18]: "4"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Blocked strict
+      - strong [ref=e21]: "4"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Strict gains
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Fresh Focus" [level=2] [ref=e26]
+    - paragraph [ref=e27]: decision=required_term_pair_loss_alias_focus_support_full_hit; surface=loss_alias_focus_support_full_hit
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: compare this stronger fresh seed against earlier checkpoints before claiming a general training improvement
+  - generic [ref=e31]:
+    - heading "Cases" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]
+      - rowgroup [ref=e43]

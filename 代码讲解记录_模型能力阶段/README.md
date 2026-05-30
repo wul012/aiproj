@@ -173,6 +173,9 @@
 540-v526-generator-blocked-token-profile.md
  -> v526 code explanation: promote newline suppression into the core generator as an optional blocked-token profile.
 
+541-v527-model-capability-required-term-pair-loss-alias-blocked-token-fresh-compare.md
+ -> v527 code explanation: compare blocked-token decoding against a freshly trained loss-alias focus checkpoint.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

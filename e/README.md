@@ -233,6 +233,10 @@ e/525/解释/说明.md
 e/526/图片
 e/526/解释/说明.md
  -> v526 generator blocked-token profile 的运行截图和解释
+
+e/527/图片
+e/527/解释/说明.md
+ -> v527 model capability required-term pair loss-alias blocked-token fresh compare 的运行截图和解释
 ```
 
 写入规则：

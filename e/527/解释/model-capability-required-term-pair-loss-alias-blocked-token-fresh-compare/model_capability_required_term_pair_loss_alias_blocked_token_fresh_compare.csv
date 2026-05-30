@@ -1,0 +1,9 @@
+profile_id,seed,case_id,is_focus_case,source_strict_hit,strict_hit,newline_cleanup_hit,normalized_hit,strict_gain,excluded_token_count,continuation_preview
+baseline_rerun,527,source-loss,True,True,True,True,True,False,0,lossssssssss
+suppress_newline_tokens,527,source-loss,True,True,True,True,True,False,1,lossssssssss
+baseline_rerun,527,heldout-beta-loss,True,True,True,True,True,False,0,lossssssssss
+suppress_newline_tokens,527,heldout-beta-loss,True,True,True,True,True,False,1,lossssssssss
+baseline_rerun,527,heldout-omega-loss,False,True,True,True,True,False,0,lossssssssss
+suppress_newline_tokens,527,heldout-omega-loss,False,True,True,True,True,False,1,lossssssssss
+baseline_rerun,527,heldout-theta-loss,False,True,True,True,True,False,0,lossss losss
+suppress_newline_tokens,527,heldout-theta-loss,False,True,True,True,True,False,1,lossss losss
