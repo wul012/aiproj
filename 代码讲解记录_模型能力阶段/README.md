@@ -125,6 +125,9 @@
 524-v510-model-capability-required-term-pair-continuation-span-objective.md
  -> v510 code explanation: train a fixed/loss continuation-span candidate and compare source vs candidate prefix boundaries.
 
+525-v511-model-capability-required-term-pair-continuation-span-stability.md
+ -> v511 code explanation: repeat the continuation-span objective across seeds and confirm stable prefix gain without full generation recovery.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

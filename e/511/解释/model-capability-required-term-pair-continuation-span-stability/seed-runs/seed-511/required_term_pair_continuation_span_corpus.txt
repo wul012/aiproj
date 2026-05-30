@@ -1,0 +1,2562 @@
+MiniGPT required-term pair continuation-span objective corpus.
+Each prompt stops immediately before the target span so the model must complete the full term.
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+fixed:fixed
+fixed: fixed
+continue span fixed:fixed
+target span fixed after fixed:
+loss:loss
+loss: loss
+continue span loss:loss
+target span loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:
+pair span fixed loss keeps fixed after fixed:
+pair span fixed loss keeps loss after loss:

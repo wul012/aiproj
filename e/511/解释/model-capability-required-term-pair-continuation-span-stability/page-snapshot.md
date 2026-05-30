@@ -1,0 +1,34 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT continuation-span stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every seed improved the source prefix-completion minimum for at least one target.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: continuation_span_prefix_gain_stable
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: 2/2
+    - generic [ref=e16]:
+      - generic [ref=e17]: Prefix gain seeds
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Full generation seeds
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Stable prefix
+      - strong [ref=e24]: "True"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: add held-out prompt variants to test whether the stable prefix gain generalizes beyond copied scaffolds
+  - generic [ref=e28]:
+    - heading "Seed Rows" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Seed Status Decision Prefix gains One-token hits Full generation" [ref=e33]
+      - rowgroup [ref=e40]:
+        - row "510 pass required_term_pair_continuation_span_prefix_gain 1 2 False" [ref=e41]
+        - row "511 pass required_term_pair_continuation_span_prefix_gain 1 2 False" [ref=e48]

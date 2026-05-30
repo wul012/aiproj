@@ -94,6 +94,8 @@ def build_model_capability_required_term_pair_continuation_span_objective(
             train_func,
         )
         if training.get("status") != "pass":
+            training = refresh_training_artifact_status(training)
+        if training.get("status") != "pass":
             issues.append("continuation-span training command did not complete successfully")
 
     generation_rows = _generation_rows(
@@ -328,6 +330,25 @@ def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
     return 0
 
 
+def refresh_training_artifact_status(training: dict[str, Any]) -> dict[str, Any]:
+    refreshed = dict(training)
+    checkpoint_exists = _path_exists(refreshed.get("checkpoint_path"))
+    tokenizer_exists = _path_exists(refreshed.get("tokenizer_path"))
+    metrics_exists = _path_exists(refreshed.get("metrics_path"))
+    train_config_exists = _path_exists(refreshed.get("train_config_path"))
+    refreshed.update(
+        {
+            "checkpoint_exists": checkpoint_exists,
+            "tokenizer_exists": tokenizer_exists,
+            "metrics_exists": metrics_exists,
+            "train_config_exists": train_config_exists,
+        }
+    )
+    if int(refreshed.get("returncode") or 0) == 0 and checkpoint_exists and tokenizer_exists:
+        refreshed["status"] = "pass"
+    return refreshed
+
+
 def _source_prefix_completion_path(rollup_report: dict[str, Any], source_path: str | Path | None) -> Path | None:
     for row in list_of_dicts(rollup_report.get("stage_rows")):
         if row.get("stage") != "prefix_completion":
@@ -488,3 +509,7 @@ def _delta(candidate: Any, source: Any) -> int | None:
     if candidate is None or source is None:
         return None
     return int(candidate) - int(source)
+
+
+def _path_exists(value: Any) -> bool:
+    return bool(value) and Path(str(value)).is_file()

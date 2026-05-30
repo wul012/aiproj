@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=82718 vocab_size=35
+parameters=53,376
+data_source=data:e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-510\required_term_pair_continuation_span_corpus.txt
+step=    1 train_loss=3.0488 val_loss=3.0650
+step=  200 train_loss=1.0492 val_loss=1.0601
+step=  400 train_loss=1.0899 val_loss=1.0532
+step=  600 train_loss=1.0289 val_loss=1.0645
+step=  800 train_loss=1.1369 val_loss=1.0551
+saved=e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-510\continuation-span-run
+history=e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-510\continuation-span-run\metrics.jsonl
+manifest=e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-510\continuation-span-run\run_manifest.json
+sample=e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-510\continuation-span-run\sample.txt

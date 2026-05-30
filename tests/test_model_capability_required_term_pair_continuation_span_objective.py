@@ -8,6 +8,7 @@ import unittest
 from minigpt.model_capability_required_term_pair_continuation_span_objective import (
     build_continuation_span_corpus,
     build_model_capability_required_term_pair_continuation_span_objective,
+    refresh_training_artifact_status,
     resolve_exit_code,
     select_continuation_span_examples,
 )
@@ -79,6 +80,29 @@ class ModelCapabilityRequiredTermPairContinuationSpanObjectiveTests(unittest.Tes
         self.assertIn("fixed:fixed", corpus)
         self.assertIn("loss:loss", corpus)
         self.assertIn("pair span fixed loss keeps fixed after fixed:", corpus)
+
+    def test_refresh_training_artifact_status_repairs_stale_failed_flags(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            checkpoint = root / "checkpoint.pt"
+            tokenizer = root / "tokenizer.json"
+            checkpoint.write_bytes(b"fake")
+            tokenizer.write_text("{}", encoding="utf-8")
+
+            refreshed = refresh_training_artifact_status(
+                {
+                    "status": "fail",
+                    "returncode": 0,
+                    "checkpoint_path": str(checkpoint),
+                    "tokenizer_path": str(tokenizer),
+                    "checkpoint_exists": False,
+                    "tokenizer_exists": False,
+                }
+            )
+
+            self.assertEqual(refreshed["status"], "pass")
+            self.assertTrue(refreshed["checkpoint_exists"])
+            self.assertTrue(refreshed["tokenizer_exists"])
 
 
 def write_rollup_fixture(root: Path) -> dict[str, object]:

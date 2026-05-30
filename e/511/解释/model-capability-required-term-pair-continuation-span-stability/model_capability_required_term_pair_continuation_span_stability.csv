@@ -1,0 +1,3 @@
+seed,status,decision,continuation_span_decision,checkpoint_exists,generation_hit_count,candidate_pair_full_generation_hit,candidate_one_token_prefix_hit_count,prefix_minimum_improved_count,out_dir
+510,pass,required_term_pair_continuation_span_prefix_gain,continuation_span_prefix_minimum_improved,True,1,False,2,1,e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-510
+511,pass,required_term_pair_continuation_span_prefix_gain,continuation_span_prefix_minimum_improved,True,1,False,2,1,e\511\解释\model-capability-required-term-pair-continuation-span-stability\seed-runs\seed-511

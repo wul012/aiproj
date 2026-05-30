@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v510.0.0` runs the fixed/loss continuation-span objective selected by v509 and records a real tiny-training prefix gain.
+Version `v511.0.0` repeats the fixed/loss continuation-span objective across seeds and records a stable prefix-gain signal.
+
+## Latest v511 checkpoint
+
+- Added `model_capability_required_term_pair_continuation_span_stability`, which reruns the v510 continuation-span objective across seeds and summarizes seed-level stability.
+- Added `scripts/run_model_capability_required_term_pair_continuation_span_stability.py`; it supports seed lists and reuses the v510 objective builder.
+- Fixed stale artifact status handling in the v510 objective builder by refreshing checkpoint/tokenizer/metrics/config flags from disk after training.
+- Ran real seeds `510,511`; both produced checkpoints, both reproduced prefix gain, and neither produced stable full-pair free generation.
+- Archived the v511 stability evidence in `e/511` and added the code explanation in `代码讲解记录_模型能力阶段/525-v511-model-capability-required-term-pair-continuation-span-stability.md`.
 
 ## Latest v510 checkpoint
 

@@ -1,0 +1,11 @@
+status=pass
+decision=required_term_pair_continuation_span_prefix_gain_stable
+continuation_span_stability_decision=continuation_span_prefix_gain_stable
+seed_count=2
+pass_count=2
+prefix_gain_seed_count=2
+full_pair_generation_seed_count=0
+stable_prefix_gain=True
+stable_full_pair_generation=False
+model_quality_claim=tiny_continuation_span_prefix_stability_signal
+next_action=add held-out prompt variants to test whether the stable prefix gain generalizes beyond copied scaffolds
