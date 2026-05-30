@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=85718 vocab_size=37
+parameters=53,504
+data_source=data:e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-527\required_term_pair_loss_alias_focus_corpus.txt
+step=    1 train_loss=3.0737 val_loss=3.0032
+step=  225 train_loss=1.2457 val_loss=1.3413
+step=  450 train_loss=1.1103 val_loss=1.2756
+step=  675 train_loss=1.3421 val_loss=1.3852
+step=  900 train_loss=1.2796 val_loss=1.3286
+saved=e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-527\loss-alias-focus-run
+history=e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-527\loss-alias-focus-run\metrics.jsonl
+manifest=e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-527\loss-alias-focus-run\run_manifest.json
+sample=e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-527\loss-alias-focus-run\sample.txt

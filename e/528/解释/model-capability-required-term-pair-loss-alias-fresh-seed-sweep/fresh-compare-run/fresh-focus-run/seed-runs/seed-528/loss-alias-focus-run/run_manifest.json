@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "run_dir": "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\loss-alias-focus-run",
+  "created_at": "2026-05-30T13:42:41Z",
+  "started_at": "2026-05-30T13:42:28Z",
+  "finished_at": "2026-05-30T13:42:41Z",
+  "duration_seconds": 13.0,
+  "command": [
+    "python.exe",
+    "D:\\aiproj\\scripts\\train.py",
+    "--data",
+    "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\required_term_pair_loss_alias_focus_corpus.txt",
+    "--out-dir",
+    "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\loss-alias-focus-run",
+    "--device",
+    "cpu",
+    "--tokenizer",
+    "char",
+    "--max-iters",
+    "900",
+    "--eval-interval",
+    "225",
+    "--eval-iters",
+    "2",
+    "--batch-size",
+    "16",
+    "--block-size",
+    "16",
+    "--n-layer",
+    "1",
+    "--n-head",
+    "1",
+    "--n-embd",
+    "64",
+    "--learning-rate",
+    "0.02",
+    "--seed",
+    "528",
+    "--sample-prompt",
+    "loss:",
+    "--sample-tokens",
+    "8",
+    "--sample-temperature",
+    "0.2",
+    "--sample-top-k",
+    "1"
+  ],
+  "git": {
+    "commit": "3f154495213c5bab71e6498978fb42d26312aab7",
+    "short_commit": "3f15449",
+    "branch": "main",
+    "tag": "v527.0.0",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.13.3",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "executable": "D:\\python\\python.exe",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.2.1"
+  },
+  "data": {
+    "source": {
+      "kind": "data",
+      "path": "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\required_term_pair_loss_alias_focus_corpus.txt"
+    },
+    "token_count": 85718,
+    "train_token_count": 77146,
+    "val_token_count": 8572,
+    "dataset_report": null,
+    "dataset_quality": null,
+    "dataset_version": null
+  },
+  "model": {
+    "config": {
+      "vocab_size": 37,
+      "block_size": 16,
+      "n_layer": 1,
+      "n_head": 1,
+      "n_embd": 64,
+      "dropout": 0.1,
+      "bias": true
+    },
+    "parameter_count": 53504
+  },
+  "training": {
+    "args": {
+      "data": "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\required_term_pair_loss_alias_focus_corpus.txt",
+      "data_dir": null,
+      "prepared_data": null,
+      "out_dir": "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\loss-alias-focus-run",
+      "resume": null,
+      "tokenizer": "char",
+      "bpe_vocab_size": 256,
+      "bpe_min_frequency": 2,
+      "batch_size": 16,
+      "block_size": 16,
+      "max_iters": 900,
+      "eval_interval": 225,
+      "eval_iters": 2,
+      "learning_rate": 0.02,
+      "train_ratio": 0.9,
+      "n_layer": 1,
+      "n_head": 1,
+      "n_embd": 64,
+      "dropout": 0.1,
+      "seed": 528,
+      "device": "cpu",
+      "sample_prompt": "loss:",
+      "sample_tokens": 8,
+      "sample_temperature": 0.2,
+      "sample_top_k": 1,
+      "no_sample": false,
+      "device_used": "cpu",
+      "data_source": {
+        "kind": "data",
+        "path": "e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\required_term_pair_loss_alias_focus_corpus.txt"
+      }
+    },
+    "tokenizer": "char",
+    "device_used": "cpu",
+    "start_step": 1,
+    "end_step": 900
+  },
+  "results": {
+    "last_loss": 1.1055296659469604,
+    "history_summary": {
+      "record_count": 5,
+      "first_step": 1,
+      "last_step": 900,
+      "best_val_step": 900,
+      "best_val_loss": 1.288139820098877,
+      "last_train_loss": 1.057438611984253,
+      "last_val_loss": 1.288139820098877
+    }
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "checkpoint.pt",
+      "description": "model and optimizer state",
+      "exists": true,
+      "size_bytes": 662291,
+      "sha256": "006b236d20426cabad0994bee3423d81eb442b4309f8a5ca7aeac583f104dc76"
+    },
+    {
+      "key": "tokenizer",
+      "path": "tokenizer.json",
+      "description": "tokenizer vocabulary and metadata",
+      "exists": true,
+      "size_bytes": 440,
+      "sha256": "d5be6d055794d7bc05d5912d008ce4a5b2e2f5cfbcc7a2ddac0e3430baa6b5ad"
+    },
+    {
+      "key": "train_config",
+      "path": "train_config.json",
+      "description": "training command configuration",
+      "exists": true,
+      "size_bytes": 1182,
+      "sha256": "a28eaa4ac2e427162799e9562d343e41e66a577dd42ca10111053ad6c925ce06"
+    },
+    {
+      "key": "metrics",
+      "path": "metrics.jsonl",
+      "description": "step-by-step training metrics",
+      "exists": true,
+      "size_bytes": 561,
+      "sha256": "ba1d516905f92946c12c9f6c92a495a078f824fe101d0f81ba8eda67e982e3e7"
+    },
+    {
+      "key": "history_summary",
+      "path": "history_summary.json",
+      "description": "best/latest loss summary",
+      "exists": true,
+      "size_bytes": 210,
+      "sha256": "1a3f828b9385b6f83be9acfdd1208f2f0eeed54615e256c397af24ebca826500"
+    },
+    {
+      "key": "loss_curve",
+      "path": "loss_curve.svg",
+      "description": "loss curve chart",
+      "exists": true,
+      "size_bytes": 1403,
+      "sha256": "17f5229fa5127b4883c448adce3541df9bb0d3d3e3738ad415c552cd112ab2cc"
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "prepared_corpus.txt",
+      "description": "merged training corpus",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_report",
+      "path": "dataset_report.json",
+      "description": "dataset source statistics",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_chart",
+      "path": "dataset_report.svg",
+      "description": "dataset source chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_quality",
+      "path": "dataset_quality.json",
+      "description": "dataset quality report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_quality_chart",
+      "path": "dataset_quality.svg",
+      "description": "dataset quality chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_version",
+      "path": "dataset_version.json",
+      "description": "dataset version manifest",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_version_html",
+      "path": "dataset_version.html",
+      "description": "browser dataset version report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "sample",
+      "path": "sample.txt",
+      "description": "post-training sample",
+      "exists": true,
+      "size_bytes": 78,
+      "sha256": "7b2c9737a4c3d1dfdb1bb2d310dc9b17af5f21dc68b2750d6499922a1c4d80ef"
+    },
+    {
+      "key": "eval_report",
+      "path": "eval_report.json",
+      "description": "checkpoint evaluation report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite",
+      "path": "eval_suite/eval_suite.json",
+      "description": "fixed prompt evaluation suite",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_csv",
+      "path": "eval_suite/eval_suite.csv",
+      "description": "fixed prompt evaluation table",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_chart",
+      "path": "eval_suite/eval_suite.svg",
+      "description": "fixed prompt evaluation chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_html",
+      "path": "eval_suite/eval_suite.html",
+      "description": "browser benchmark evaluation report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "model_report",
+      "path": "model_report/model_report.json",
+      "description": "model architecture report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "model_chart",
+      "path": "model_report/model_architecture.svg",
+      "description": "model architecture chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "prediction_report",
+      "path": "predictions/predictions.json",
+      "description": "next-token prediction report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "prediction_chart",
+      "path": "predictions/predictions.svg",
+      "description": "next-token prediction chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "attention_report",
+      "path": "attention/attention.json",
+      "description": "attention inspection report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "attention_chart",
+      "path": "attention/attention.svg",
+      "description": "attention heatmap",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "transcript",
+      "path": "transcript.json",
+      "description": "chat transcript",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "generated",
+      "path": "generated.txt",
+      "description": "standalone generation output",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_json",
+      "path": "experiment_card.json",
+      "description": "machine-readable experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_md",
+      "path": "experiment_card.md",
+      "description": "markdown experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_html",
+      "path": "experiment_card.html",
+      "description": "browser experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dashboard",
+      "path": "dashboard.html",
+      "description": "static dashboard",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "playground",
+      "path": "playground.html",
+      "description": "static playground",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_loss_alias_fresh_seed_sweep_blocked_token_stably_recovers
+seed_count=3
+baseline_strict_full_seed_count=2
+blocked_token_strict_full_seed_count=3
+blocked_token_gain_seed_count=1
+total_blocked_token_strict_gain_count=2
+model_quality_claim=fresh_tiny_loss_alias_blocked_token_decode_stably_recovers
+next_action=keep blocked-token as an explicit profile and test it in the playground/API surface

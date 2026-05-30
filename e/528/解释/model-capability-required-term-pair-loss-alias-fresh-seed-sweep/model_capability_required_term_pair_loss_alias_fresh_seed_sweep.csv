@@ -1,0 +1,4 @@
+seed,status,checkpoint_exists,case_count,baseline_strict_hit_count,baseline_strict_full_coverage,blocked_token_strict_hit_count,blocked_token_strict_full_coverage,blocked_token_strict_gain_count,fresh_focus_strict_full_coverage,fresh_focus_newline_cleanup_full_coverage,out_dir
+527,pass,True,4,4,True,4,True,0,True,True,e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-527
+528,pass,True,4,2,False,4,True,2,False,True,e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-528
+529,pass,True,4,4,True,4,True,0,True,True,e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-529

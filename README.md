@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v527.0.0` compares blocked-token decoding against a freshly trained loss-alias focus checkpoint.
+Version `v528.0.0` expands the fresh loss-alias comparison into a three-seed sweep.
+
+## Latest v528 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_fresh_seed_sweep`, which reuses the v527 fresh compare builder and summarizes default vs blocked-token strict coverage per seed.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_fresh_seed_sweep.py`; the default sweep uses seeds `527,528,529`.
+- Ran the real sweep: baseline strict full coverage held for `2/3` seeds, blocked-token strict full coverage held for `3/3`, and seed `528` gained `2` strict hits from the explicit profile.
+- Interpreted v528 as evidence that fresh training is stronger, but blocked-token remains valuable as an explicit, auditable generation profile.
+- Archived the v528 fresh seed sweep evidence in `e/528` and added the code explanation in `代码讲解记录_模型能力阶段/542-v528-model-capability-required-term-pair-loss-alias-fresh-seed-sweep.md`.
 
 ## Latest v527 checkpoint
 

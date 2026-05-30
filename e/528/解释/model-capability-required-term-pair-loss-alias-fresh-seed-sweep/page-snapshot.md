@@ -1,0 +1,31 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias fresh seed sweep" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Default decoding was not stably strict, but blocked-token decoding recovered every seed.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_loss_alias_fresh_seed_sweep_blocked_token_stably_recovers
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Baseline full
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Blocked full
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Blocked gains
+      - strong [ref=e24]: "2"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: keep blocked-token as an explicit profile and test it in the playground/API surface
+  - generic [ref=e28]:
+    - heading "Seeds" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]
+      - rowgroup [ref=e39]

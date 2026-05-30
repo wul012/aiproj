@@ -176,6 +176,9 @@
 541-v527-model-capability-required-term-pair-loss-alias-blocked-token-fresh-compare.md
  -> v527 code explanation: compare blocked-token decoding against a freshly trained loss-alias focus checkpoint.
 
+542-v528-model-capability-required-term-pair-loss-alias-fresh-seed-sweep.md
+ -> v528 code explanation: run a three-seed fresh sweep and compare baseline strict coverage against blocked-token coverage.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
