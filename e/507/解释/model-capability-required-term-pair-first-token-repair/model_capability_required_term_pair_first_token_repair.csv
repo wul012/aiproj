@@ -1,0 +1,11 @@
+variant_id,profile_id,prompt_term,expected_term,source_continuation_hit,repaired_continuation_hit,forced_first_token_text,repaired_continuation_preview
+symmetric-anchor,greedy-12,fixed,fixed,False,False,f,"fidddfix
+fix"
+symmetric-anchor,greedy-12,loss,loss,False,True,l,lossssssssss
+symmetric-anchor,greedy-24,fixed,fixed,True,False,f,"fidddfix
+fixxedddddddd:l"
+symmetric-anchor,greedy-24,loss,loss,False,True,l,lossssssssssssssssssssss
+symmetric-anchor,top2-24,fixed,fixed,False,False,f,"fidddfix
+losssssssssssss"
+symmetric-anchor,top2-24,loss,loss,True,True,l,"l-lossss
+losssssssssssss"

@@ -153,6 +153,10 @@ e/505/解释/说明.md
 e/506/图片
 e/506/解释/说明.md
  -> v506 model capability required-term pair decoding-path trace 的运行截图和解释
+
+e/507/图片
+e/507/解释/说明.md
+ -> v507 model capability required-term pair first-token repair 的运行截图和解释
 ```
 
 写入规则：

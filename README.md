@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v506.0.0` traces v505 sampling paths and shows expected first tokens are ranked near the top but never sampled first; the observed hits are late recovery after first-token misses.
+Version `v507.0.0` tests constrained first-token repair after v506 and shows forcing the expected first token improves partial expression but still does not recover a full `fixed/loss` profile.
+
+## Latest v507 checkpoint
+
+- Added `model_capability_required_term_pair_first_token_repair`, which reads v506 path traces, forces the expected first token for first-token miss rows, and continues generation with the original profile settings.
+- Added `scripts/run_model_capability_required_term_pair_first_token_repair.py`; it performs constrained generation only and does not train checkpoints.
+- Ran the real repair over `6` rows. Continuation hits increased from `2` source hits to `3` repaired hits, and `2` previously missed prompts improved.
+- Interpreted v507 as partial constrained-generation evidence: first-token repair helps `loss`, but no profile becomes full-hit and `fixed` remains unstable.
+- Archived the v507 first-token repair evidence in `e/507` and added the code explanation in `代码讲解记录_模型能力阶段/521-v507-model-capability-required-term-pair-first-token-repair.md`.
 
 ## Latest v506 checkpoint
 

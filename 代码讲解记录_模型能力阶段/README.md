@@ -113,6 +113,9 @@
 520-v506-model-capability-required-term-pair-decoding-path-trace.md
  -> v506 code explanation: replay v505 decoding probes and show late expression after first-token sampling misses.
 
+521-v507-model-capability-required-term-pair-first-token-repair.md
+ -> v507 code explanation: force expected first tokens after v506 and show constrained repair improves partial expression but not full pair recovery.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

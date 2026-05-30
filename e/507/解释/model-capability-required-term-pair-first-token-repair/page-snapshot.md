@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair first-token repair" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Forcing the expected first token improves at least one previously missed prompt.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: first_token_repair_improved_partial_expression
+    - generic [ref=e13]:
+      - generic [ref=e14]: Repairs
+      - strong [ref=e15]: "6"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Source hits
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Repaired hits
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Improved
+      - strong [ref=e24]: "2"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Full profiles
+      - strong [ref=e27]: "0"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: treat the issue as deeper continuation modeling rather than only first-token sampling
+  - generic [ref=e31]:
+    - heading "Repair Rows" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Profile Prompt Source hit Repaired hit Forced first Continuation" [ref=e36]
+      - rowgroup [ref=e43]:
+        - row "greedy-12 fixed False False f fidddfix fix" [ref=e44]
+        - row "greedy-12 loss False True l lossssssssss" [ref=e51]
+        - row "greedy-24 fixed True False f fidddfix fixxedddddddd:l" [ref=e58]
+        - row "greedy-24 loss False True l lossssssssssssssssssssss" [ref=e65]
+        - row "top2-24 fixed False False f fidddfix losssssssssssss" [ref=e72]
+        - row "top2-24 loss True True l l-lossss losssssssssssss" [ref=e79]
+  - generic [ref=e86]:
+    - heading "Profile Summary" [level=2] [ref=e87]
+    - table [ref=e89]:
+      - rowgroup [ref=e90]:
+        - row "Profile Hits Prompts Full hit Missed" [ref=e91]
+      - rowgroup [ref=e97]:
+        - row "greedy-12 1 2 False ['fixed']" [ref=e98]
+        - row "greedy-24 1 2 False ['fixed']" [ref=e104]
+        - row "top2-24 1 2 False ['fixed']" [ref=e110]

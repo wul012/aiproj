@@ -1,0 +1,12 @@
+status=pass
+decision=required_term_pair_first_token_repair_improved_partial
+first_token_repair_decision=first_token_repair_improved_partial_expression
+repair_count=6
+source_continuation_hit_count=2
+repaired_continuation_hit_count=3
+improved_prompt_count=2
+repaired_profile_full_hit_count=0
+best_variant_id=symmetric-anchor
+best_profile_id=top2-24
+model_quality_claim=constrained_generation_partial_signal
+next_action=treat the issue as deeper continuation modeling rather than only first-token sampling
