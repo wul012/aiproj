@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v516.0.0` boosts the v515 missed loss-alias rows and shows density alone does not repair the seed-515 misses.
+Version `v517.0.0` audits v516 strict misses with normalization and finds hidden full `loss` signal behind formatting splits.
+
+## Latest v517 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_normalized_audit`, a read-only strict-vs-normalized hit audit for v516 generation rows.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_normalized_audit.py`; it writes JSON/CSV/text/Markdown/HTML without retraining.
+- Ran the audit on v516: strict hits stayed `0/4`, but normalized hits became `4/4`, with `normalization_gain_count=4`.
+- Interpreted v517 as a metric-shape finding: the model generated `loss` characters split by formatting separators, so the next layer should report strict and normalized metrics separately before more training.
+- Archived the v517 normalized-audit evidence in `e/517` and added the code explanation in `代码讲解记录_模型能力阶段/531-v517-model-capability-required-term-pair-loss-alias-normalized-audit.md`.
 
 ## Latest v516 checkpoint
 

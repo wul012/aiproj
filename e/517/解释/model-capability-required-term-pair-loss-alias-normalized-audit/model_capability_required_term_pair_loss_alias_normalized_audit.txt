@@ -1,0 +1,12 @@
+status=pass
+decision=required_term_pair_loss_alias_normalized_full_signal
+normalized_audit_decision=normalized_hidden_full_signal
+generation_count=4
+strict_hit_count=0
+normalized_hit_count=4
+normalization_gain_count=4
+focus_normalized_hit_count=2
+normalized_full_coverage=True
+focus_normalized_full_coverage=True
+model_quality_claim=tiny_loss_alias_normalized_full_signal
+next_action=add a separate strict-vs-normalized metric before deciding whether to train again

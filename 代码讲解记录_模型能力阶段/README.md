@@ -143,6 +143,9 @@
 530-v516-model-capability-required-term-pair-loss-alias-focus.md
  -> v516 code explanation: boost v515 missed loss-alias rows and show row density alone does not repair seed-515 misses.
 
+531-v517-model-capability-required-term-pair-loss-alias-normalized-audit.md
+ -> v517 code explanation: audit v516 strict misses with normalized required-term matching and reveal hidden full loss signal.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

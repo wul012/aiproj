@@ -1,0 +1,36 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias normalized audit" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every strict miss becomes a required-term hit after removing formatting separators.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: normalized_hidden_full_signal
+    - generic [ref=e13]:
+      - generic [ref=e14]: Strict hits
+      - strong [ref=e15]: 0/4
+    - generic [ref=e16]:
+      - generic [ref=e17]: Normalized hits
+      - strong [ref=e18]: 4/4
+    - generic [ref=e19]:
+      - generic [ref=e20]: Gains
+      - strong [ref=e21]: "4"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Focus normalized
+      - strong [ref=e24]: 2/2
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: add a separate strict-vs-normalized metric before deciding whether to train again
+  - generic [ref=e28]:
+    - heading "Normalized Rows" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Case Focus Strict Normalized Gain Continuation Normalized" [ref=e33]
+      - rowgroup [ref=e41]:
+        - row "source-loss True False True True los\\ns\\ns\\ns\\ns losssss" [ref=e42]
+        - row "heldout-beta-loss True False True True los\\ns\\ns\\ns\\ns losssss" [ref=e50]
+        - row "heldout-omega-loss False False True True los\\nss\\ns\\ns\\n losssss" [ref=e58]
+        - row "heldout-theta-loss False False True True los\\nss\\ns\\ns\\n losssss" [ref=e66]

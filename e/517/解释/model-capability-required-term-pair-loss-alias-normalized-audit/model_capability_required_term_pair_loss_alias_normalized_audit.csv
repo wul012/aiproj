@@ -1,0 +1,5 @@
+seed,case_id,prompt,is_focus_case,strict_hit,normalized_hit,normalization_gain,continuation_preview,normalized_continuation_preview
+515,source-loss,loss:,True,False,True,True, los\ns\ns\ns\ns,losssss
+515,heldout-beta-loss,beta:,True,False,True,True, los\ns\ns\ns\ns,losssss
+515,heldout-omega-loss,omega:,False,False,True,True, los\nss\ns\ns\n,losssss
+515,heldout-theta-loss,theta:,False,False,True,True, los\nss\ns\ns\n,losssss

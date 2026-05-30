@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair loss-alias normalized audit",
+  "generated_at": "2026-05-30T07:58:10Z",
+  "status": "pass",
+  "decision": "required_term_pair_loss_alias_normalized_full_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_loss_alias_focus": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\model_capability_required_term_pair_loss_alias_focus.json",
+  "out_dir": "e\\517\\解释\\model-capability-required-term-pair-loss-alias-normalized-audit",
+  "settings": {
+    "normalization": "casefold and remove non-alphanumeric characters before required-term containment check",
+    "experiment_boundary": "read-only audit of v516 outputs; no retraining and no relaxed promotion gate"
+  },
+  "normalized_rows": [
+    {
+      "seed": 515,
+      "case_id": "source-loss",
+      "case_type": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "is_focus_case": true,
+      "strict_hit": false,
+      "normalized_hit": true,
+      "normalization_gain": true,
+      "continuation_preview": " los\\ns\\ns\\ns\\ns",
+      "normalized_continuation_preview": "losssss"
+    },
+    {
+      "seed": 515,
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "is_focus_case": true,
+      "strict_hit": false,
+      "normalized_hit": true,
+      "normalization_gain": true,
+      "continuation_preview": " los\\ns\\ns\\ns\\ns",
+      "normalized_continuation_preview": "losssss"
+    },
+    {
+      "seed": 515,
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "prompt": "omega:",
+      "expected_term": "loss",
+      "is_focus_case": false,
+      "strict_hit": false,
+      "normalized_hit": true,
+      "normalization_gain": true,
+      "continuation_preview": " los\\nss\\ns\\ns\\n",
+      "normalized_continuation_preview": "losssss"
+    },
+    {
+      "seed": 515,
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "prompt": "theta:",
+      "expected_term": "loss",
+      "is_focus_case": false,
+      "strict_hit": false,
+      "normalized_hit": true,
+      "normalization_gain": true,
+      "continuation_preview": " los\\nss\\ns\\ns\\n",
+      "normalized_continuation_preview": "losssss"
+    }
+  ],
+  "summary": {
+    "normalized_audit_decision": "normalized_hidden_full_signal",
+    "generation_count": 4,
+    "focus_generation_count": 2,
+    "strict_hit_count": 0,
+    "normalized_hit_count": 4,
+    "normalization_gain_count": 4,
+    "focus_normalized_hit_count": 2,
+    "strict_full_coverage": false,
+    "normalized_full_coverage": true,
+    "focus_normalized_full_coverage": true
+  },
+  "interpretation": {
+    "model_quality_claim": "tiny_loss_alias_normalized_full_signal",
+    "reason": "Every strict miss becomes a required-term hit after removing formatting separators.",
+    "next_action": "add a separate strict-vs-normalized metric before deciding whether to train again"
+  }
+}
