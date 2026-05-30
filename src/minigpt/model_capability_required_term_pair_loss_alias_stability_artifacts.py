@@ -20,13 +20,18 @@ def render_model_capability_required_term_pair_loss_alias_stability_text(report:
         ("status", report.get("status")),
         ("decision", report.get("decision")),
         ("loss_alias_stability_decision", summary.get("loss_alias_stability_decision")),
+        ("loss_alias_stability_metric_decision", summary.get("loss_alias_stability_metric_decision")),
         ("seed_count", summary.get("seed_count")),
         ("pass_count", summary.get("pass_count")),
         ("checkpoint_seed_count", summary.get("checkpoint_seed_count")),
         ("source_loss_hit_seed_count", summary.get("source_loss_hit_seed_count")),
         ("heldout_loss_alias_partial_seed_count", summary.get("heldout_loss_alias_partial_seed_count")),
         ("heldout_loss_alias_full_seed_count", summary.get("heldout_loss_alias_full_seed_count")),
+        ("heldout_loss_alias_normalized_partial_seed_count", summary.get("heldout_loss_alias_normalized_partial_seed_count")),
+        ("heldout_loss_alias_normalized_full_seed_count", summary.get("heldout_loss_alias_normalized_full_seed_count")),
         ("stable_loss_alias_full_coverage", summary.get("stable_loss_alias_full_coverage")),
+        ("stable_loss_alias_normalized_full_coverage", summary.get("stable_loss_alias_normalized_full_coverage")),
+        ("normalization_gain_count", summary.get("normalization_gain_count")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
         ("next_action", interpretation.get("next_action")),
     ]
@@ -44,6 +49,10 @@ def write_model_capability_required_term_pair_loss_alias_stability_csv(report: d
         "source_loss_hit",
         "heldout_loss_alias_hit_case_count",
         "heldout_loss_alias_full_coverage",
+        "source_loss_normalized_hit",
+        "heldout_loss_alias_normalized_hit_case_count",
+        "heldout_loss_alias_normalized_full_coverage",
+        "normalization_gain_count",
         "training_status",
         "out_dir",
     ]
@@ -58,7 +67,10 @@ def write_model_capability_required_term_pair_loss_alias_stability_csv(report: d
 
 def render_model_capability_required_term_pair_loss_alias_stability_markdown(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
-    table = ["| Seed | Status | Decision | Hit cases | Heldout hits | Full coverage |", "| ---: | --- | --- | ---: | ---: | --- |"]
+    table = [
+        "| Seed | Status | Decision | Strict heldout | Strict full | Norm heldout | Norm full | Gains |",
+        "| ---: | --- | --- | ---: | --- | ---: | --- | ---: |",
+    ]
     for row in list_of_dicts(report.get("seed_rows")):
         table.append(
             "| "
@@ -67,9 +79,11 @@ def render_model_capability_required_term_pair_loss_alias_stability_markdown(rep
                     markdown_cell(row.get("seed")),
                     markdown_cell(row.get("status")),
                     markdown_cell(row.get("loss_alias_decision")),
-                    markdown_cell(row.get("generation_hit_case_count")),
                     markdown_cell(row.get("heldout_loss_alias_hit_case_count")),
                     markdown_cell(row.get("heldout_loss_alias_full_coverage")),
+                    markdown_cell(row.get("heldout_loss_alias_normalized_hit_case_count")),
+                    markdown_cell(row.get("heldout_loss_alias_normalized_full_coverage")),
+                    markdown_cell(row.get("normalization_gain_count")),
                 ]
             )
             + " |"
@@ -81,9 +95,12 @@ def render_model_capability_required_term_pair_loss_alias_stability_markdown(rep
             f"- Status: `{report.get('status')}`",
             f"- Decision: `{report.get('decision')}`",
             f"- Stability decision: `{summary.get('loss_alias_stability_decision')}`",
+            f"- Metric decision: `{summary.get('loss_alias_stability_metric_decision')}`",
             f"- Seeds: `{summary.get('pass_count')}/{summary.get('seed_count')}`",
             f"- Full coverage seeds: `{summary.get('heldout_loss_alias_full_seed_count')}`",
             f"- Stable full coverage: `{summary.get('stable_loss_alias_full_coverage')}`",
+            f"- Normalized full coverage seeds: `{summary.get('heldout_loss_alias_normalized_full_seed_count')}`",
+            f"- Normalization gains: `{summary.get('normalization_gain_count')}`",
             "",
             *table,
             "",
@@ -102,11 +119,12 @@ def render_model_capability_required_term_pair_loss_alias_stability_html(report:
     interpretation = as_dict(report.get("interpretation"))
     stats = [
         ("Status", report.get("status")),
-        ("Decision", summary.get("loss_alias_stability_decision")),
+        ("Decision", summary.get("loss_alias_stability_metric_decision")),
         ("Seeds", f"{summary.get('pass_count')}/{summary.get('seed_count')}"),
         ("Checkpoints", summary.get("checkpoint_seed_count")),
-        ("Full seeds", summary.get("heldout_loss_alias_full_seed_count")),
-        ("Stable full", summary.get("stable_loss_alias_full_coverage")),
+        ("Strict full seeds", summary.get("heldout_loss_alias_full_seed_count")),
+        ("Norm full seeds", summary.get("heldout_loss_alias_normalized_full_seed_count")),
+        ("Norm gains", summary.get("normalization_gain_count")),
     ]
     rows = "\n".join(_seed_html(row) for row in list_of_dicts(report.get("seed_rows")))
     return f"""<!doctype html>
@@ -126,7 +144,7 @@ def render_model_capability_required_term_pair_loss_alias_stability_html(report:
 <section class="panel">
 <h2>Seed Rows</h2>
 <div class="table-wrap"><table>
-<thead><tr><th>Seed</th><th>Status</th><th>Decision</th><th>Hit cases</th><th>Heldout hits</th><th>Full coverage</th></tr></thead>
+<thead><tr><th>Seed</th><th>Status</th><th>Decision</th><th>Strict heldout</th><th>Strict full</th><th>Norm heldout</th><th>Norm full</th><th>Gains</th></tr></thead>
 <tbody>{rows}</tbody>
 </table></div>
 </section>
@@ -163,9 +181,11 @@ def _seed_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('seed'))}</td>"
         f"<td>{html_escape(row.get('status'))}</td>"
         f"<td>{html_escape(row.get('loss_alias_decision'))}</td>"
-        f"<td>{html_escape(row.get('generation_hit_case_count'))}</td>"
         f"<td>{html_escape(row.get('heldout_loss_alias_hit_case_count'))}</td>"
         f"<td>{html_escape(row.get('heldout_loss_alias_full_coverage'))}</td>"
+        f"<td>{html_escape(row.get('heldout_loss_alias_normalized_hit_case_count'))}</td>"
+        f"<td>{html_escape(row.get('heldout_loss_alias_normalized_full_coverage'))}</td>"
+        f"<td>{html_escape(row.get('normalization_gain_count'))}</td>"
         "</tr>"
     )
 

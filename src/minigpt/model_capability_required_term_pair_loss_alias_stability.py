@@ -10,7 +10,8 @@ from minigpt.model_capability_required_term_pair_loss_alias_objective import (
     locate_model_capability_required_term_pair_loss_alias_objective_source,
     read_json_report,
 )
-from minigpt.report_utils import as_dict, utc_now
+from minigpt.model_capability_required_term_pair_loss_alias_metrics import required_term_hit_metrics
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_STABILITY_JSON_FILENAME = "model_capability_required_term_pair_loss_alias_stability.json"
@@ -135,6 +136,7 @@ def summarize_loss_alias_seed_rows(seeds: list[int], reports: list[dict[str, Any
     for seed, report in zip(seeds, reports):
         summary = as_dict(report.get("summary"))
         training = as_dict(report.get("training"))
+        normalized = _normalized_seed_metrics(report)
         rows.append(
             {
                 "seed": seed,
@@ -146,6 +148,12 @@ def summarize_loss_alias_seed_rows(seeds: list[int], reports: list[dict[str, Any
                 "source_loss_hit": summary.get("source_loss_hit"),
                 "heldout_loss_alias_hit_case_count": summary.get("heldout_loss_alias_hit_case_count"),
                 "heldout_loss_alias_full_coverage": summary.get("heldout_loss_alias_full_coverage"),
+                "generation_normalized_hit_case_count": normalized["generation_normalized_hit_case_count"],
+                "source_loss_normalized_hit": normalized["source_loss_normalized_hit"],
+                "heldout_loss_alias_normalized_hit_case_count": normalized["heldout_loss_alias_normalized_hit_case_count"],
+                "heldout_loss_alias_normalized_full_coverage": normalized["heldout_loss_alias_normalized_full_coverage"],
+                "all_loss_alias_normalized_full_coverage": normalized["all_loss_alias_normalized_full_coverage"],
+                "normalization_gain_count": normalized["normalization_gain_count"],
                 "training_status": summary.get("training_status"),
                 "checkpoint_path": training.get("checkpoint_path"),
                 "out_dir": report.get("out_dir"),
@@ -161,17 +169,38 @@ def summarize_loss_alias_stability(seed_rows: list[dict[str, Any]]) -> dict[str,
     full_coverage_count = sum(1 for row in seed_rows if row.get("heldout_loss_alias_full_coverage"))
     partial_hit_count = sum(1 for row in seed_rows if int(row.get("heldout_loss_alias_hit_case_count") or 0) > 0)
     source_hit_count = sum(1 for row in seed_rows if row.get("source_loss_hit"))
+    normalized_full_count = sum(1 for row in seed_rows if row.get("heldout_loss_alias_normalized_full_coverage"))
+    normalized_partial_count = sum(1 for row in seed_rows if int(row.get("heldout_loss_alias_normalized_hit_case_count") or 0) > 0)
+    normalized_source_count = sum(1 for row in seed_rows if row.get("source_loss_normalized_hit"))
+    normalization_gain_count = sum(int(row.get("normalization_gain_count") or 0) for row in seed_rows)
+    strict_decision = _stability_decision(seed_count, pass_count, full_coverage_count, partial_hit_count)
     return {
-        "loss_alias_stability_decision": _stability_decision(seed_count, pass_count, full_coverage_count, partial_hit_count),
+        "loss_alias_stability_decision": strict_decision,
+        "loss_alias_stability_metric_decision": _stability_metric_decision(
+            strict_decision,
+            seed_count,
+            normalized_full_count,
+            normalized_partial_count,
+            normalization_gain_count,
+        ),
         "seed_count": seed_count,
         "pass_count": pass_count,
         "checkpoint_seed_count": checkpoint_count,
         "source_loss_hit_seed_count": source_hit_count,
         "heldout_loss_alias_partial_seed_count": partial_hit_count,
         "heldout_loss_alias_full_seed_count": full_coverage_count,
+        "source_loss_normalized_hit_seed_count": normalized_source_count,
+        "heldout_loss_alias_normalized_partial_seed_count": normalized_partial_count,
+        "heldout_loss_alias_normalized_full_seed_count": normalized_full_count,
         "stable_loss_alias_full_coverage": seed_count > 0 and full_coverage_count == seed_count,
         "stable_loss_alias_partial_coverage": seed_count > 0 and partial_hit_count == seed_count,
+        "stable_loss_alias_normalized_full_coverage": seed_count > 0 and normalized_full_count == seed_count,
+        "stable_loss_alias_normalized_partial_coverage": seed_count > 0 and normalized_partial_count == seed_count,
         "all_seed_generation_hit_case_count": sum(int(row.get("generation_hit_case_count") or 0) for row in seed_rows),
+        "all_seed_generation_normalized_hit_case_count": sum(
+            int(row.get("generation_normalized_hit_case_count") or 0) for row in seed_rows
+        ),
+        "normalization_gain_count": normalization_gain_count,
     }
 
 
@@ -215,13 +244,35 @@ def _stability_decision(seed_count: int, pass_count: int, full_coverage_count: i
     return "loss_alias_no_stable_generation_signal"
 
 
+def _stability_metric_decision(
+    strict_decision: str,
+    seed_count: int,
+    normalized_full_count: int,
+    normalized_partial_count: int,
+    normalization_gain_count: int,
+) -> str:
+    if strict_decision == "loss_alias_stable_full_hit":
+        return strict_decision
+    if seed_count > 0 and normalized_full_count == seed_count and normalization_gain_count > 0:
+        return "loss_alias_stability_strict_limited_normalized_full_signal"
+    if seed_count > 0 and normalized_partial_count == seed_count and normalization_gain_count > 0:
+        return "loss_alias_stability_strict_limited_normalized_partial_signal"
+    if normalization_gain_count > 0:
+        return "loss_alias_stability_normalization_gain_observed"
+    return strict_decision
+
+
 def _decision(status: str, summary: dict[str, Any]) -> str:
     if status != "pass":
         return "fix_required_term_pair_loss_alias_stability"
     if summary.get("stable_loss_alias_full_coverage"):
         return "required_term_pair_loss_alias_stable_full_hit"
+    if summary.get("stable_loss_alias_normalized_full_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "required_term_pair_loss_alias_normalized_stable_full_hit"
     if summary.get("stable_loss_alias_partial_coverage"):
         return "required_term_pair_loss_alias_stable_partial_hit"
+    if summary.get("stable_loss_alias_normalized_partial_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "required_term_pair_loss_alias_normalized_stable_partial_hit"
     if int(summary.get("heldout_loss_alias_full_seed_count") or 0) > 0:
         return "required_term_pair_loss_alias_seed_dependent"
     return "required_term_pair_loss_alias_not_stable"
@@ -230,8 +281,12 @@ def _decision(status: str, summary: dict[str, Any]) -> str:
 def _model_quality_claim(summary: dict[str, Any]) -> str:
     if summary.get("stable_loss_alias_full_coverage"):
         return "tiny_loss_alias_seed_stable_full_signal"
+    if summary.get("stable_loss_alias_normalized_full_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "tiny_loss_alias_seed_stable_normalized_full_signal"
     if summary.get("stable_loss_alias_partial_coverage"):
         return "tiny_loss_alias_seed_stable_partial_signal"
+    if summary.get("stable_loss_alias_normalized_partial_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "tiny_loss_alias_seed_stable_normalized_partial_signal"
     if int(summary.get("heldout_loss_alias_full_seed_count") or 0) > 0:
         return "tiny_loss_alias_seed_dependent_signal"
     return "not_claimed"
@@ -242,8 +297,12 @@ def _reason(status: str, summary: dict[str, Any]) -> str:
         return "The loss-alias stability run had structural failures."
     if summary.get("stable_loss_alias_full_coverage"):
         return "Every tested seed recovered all held-out loss alias prompts."
+    if summary.get("stable_loss_alias_normalized_full_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "Every tested seed contains the loss term after normalization, but strict continuations still split or format the term."
     if summary.get("stable_loss_alias_partial_coverage"):
         return "Every tested seed recovered at least one held-out loss alias prompt."
+    if summary.get("stable_loss_alias_normalized_partial_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "Every tested seed has some normalized loss signal, but strict continuation coverage is still limited."
     if int(summary.get("heldout_loss_alias_full_seed_count") or 0) > 0:
         return "At least one seed recovered the loss aliases, but the signal is seed-dependent."
     return "No tested seed recovered a stable held-out loss alias signal."
@@ -254,6 +313,42 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
         return "repair stability inputs or failed seed runs before promoting the loss-alias objective"
     if summary.get("stable_loss_alias_full_coverage"):
         return "recombine fixed and loss alias objectives and check whether both branches survive together"
+    if summary.get("stable_loss_alias_normalized_full_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "carry strict and normalized loss-alias metrics together before claiming strict recovery"
     if summary.get("stable_loss_alias_partial_coverage"):
         return "inspect missed loss alias rows before adding fixed branch back"
+    if summary.get("stable_loss_alias_normalized_partial_coverage") and int(summary.get("normalization_gain_count") or 0) > 0:
+        return "inspect formatting-sensitive continuations before changing the corpus again"
     return "change corpus shape before adding more seeds"
+
+
+def _normalized_seed_metrics(report: dict[str, Any]) -> dict[str, Any]:
+    case_rows = list_of_dicts(report.get("case_rows"))
+    generation_rows = list_of_dicts(report.get("generation_rows"))
+    normalized_by_case: dict[str, bool] = {}
+    gain_count = 0
+    for row in generation_rows:
+        case_id = str(row.get("case_id") or "")
+        if not case_id:
+            continue
+        metrics = required_term_hit_metrics(
+            str(row.get("continuation") or ""),
+            str(row.get("expected_term") or "loss"),
+            strict_hit=bool(row.get("continuation_hit")),
+        )
+        normalized_by_case[case_id] = bool(normalized_by_case.get(case_id)) or bool(metrics["normalized_hit"])
+        gain_count += 1 if metrics["normalization_gain"] else 0
+
+    source_rows = [row for row in case_rows if row.get("case_type") == "source"]
+    heldout_rows = [row for row in case_rows if row.get("case_type") == "heldout"]
+    normalized_hit_case_count = sum(1 for row in case_rows if normalized_by_case.get(str(row.get("case_id") or "")))
+    heldout_hit_count = sum(1 for row in heldout_rows if normalized_by_case.get(str(row.get("case_id") or "")))
+    source_hit = any(normalized_by_case.get(str(row.get("case_id") or "")) for row in source_rows)
+    return {
+        "generation_normalized_hit_case_count": normalized_hit_case_count,
+        "source_loss_normalized_hit": source_hit,
+        "heldout_loss_alias_normalized_hit_case_count": heldout_hit_count,
+        "heldout_loss_alias_normalized_full_coverage": bool(heldout_rows) and heldout_hit_count == len(heldout_rows),
+        "all_loss_alias_normalized_full_coverage": bool(case_rows) and normalized_hit_case_count == len(case_rows),
+        "normalization_gain_count": gain_count,
+    }

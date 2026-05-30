@@ -201,6 +201,10 @@ e/517/解释/说明.md
 e/518/图片
 e/518/解释/说明.md
  -> v518 model capability required-term pair loss-alias focus metrics 的运行截图和解释
+
+e/519/图片
+e/519/解释/说明.md
+ -> v519 model capability required-term pair loss-alias stability metrics 的运行截图和解释
 ```
 
 写入规则：

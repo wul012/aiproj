@@ -149,6 +149,9 @@
 532-v518-model-capability-required-term-pair-loss-alias-focus-metrics.md
  -> v518 code explanation: carry strict and normalized loss-alias metrics directly in the focused repair report.
 
+533-v519-model-capability-required-term-pair-loss-alias-stability-metrics.md
+ -> v519 code explanation: carry strict and normalized loss-alias metrics into the seed stability report.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,34 @@
+- main [ref=e2] [box=36,0,1180,569]:
+  - generic [ref=e3] [box=64,28,1124,77]:
+    - heading "MiniGPT loss-alias stability" [level=1] [ref=e4] [box=64,28,1124,36]
+    - paragraph [ref=e5] [box=64,80,1124,25]: Every tested seed recovered at least one held-out loss alias prompt.
+  - generic [ref=e6] [box=64,123,1124,92]:
+    - generic [ref=e7] [box=64,123,152,92]:
+      - generic [ref=e8] [box=78,137,123,14]: Status
+      - strong [ref=e9] [box=78,157,123,22]: pass
+    - generic [ref=e10] [box=226,123,152,92]:
+      - generic [ref=e11] [box=240,137,123,14]: Decision
+      - strong [ref=e12] [box=240,157,123,43]: loss_alias_stable_partial_hit
+    - generic [ref=e13] [box=388,123,152,92]:
+      - generic [ref=e14] [box=402,137,123,14]: Seeds
+      - strong [ref=e15] [box=402,157,123,22]: 2/2
+    - generic [ref=e16] [box=550,123,152,92]:
+      - generic [ref=e17] [box=564,137,123,14]: Checkpoints
+      - strong [ref=e18] [box=564,157,123,22]: "2"
+    - generic [ref=e19] [box=712,123,152,92]:
+      - generic [ref=e20] [box=726,137,123,14]: Strict full seeds
+      - strong [ref=e21] [box=726,157,123,22]: "1"
+    - generic [ref=e22] [box=874,123,152,92]:
+      - generic [ref=e23] [box=888,137,123,14]: Norm full seeds
+      - strong [ref=e24] [box=888,157,123,22]: "1"
+    - generic [ref=e25] [box=1036,123,152,92]:
+      - generic [ref=e26] [box=1050,137,123,14]: Norm gains
+      - strong [ref=e27] [box=1050,157,123,22]: "0"
+  - generic [ref=e28] [box=64,233,1124,111]:
+    - heading "Next Action" [level=2] [ref=e29] [box=80,250,1091,21]
+    - paragraph [ref=e30] [box=80,287,1091,25]: inspect missed loss alias rows before adding fixed branch back
+  - generic [ref=e31] [box=64,358,1124,169]:
+    - heading "Seed Rows" [level=2] [ref=e32] [box=80,375,1091,21]
+    - table [ref=e34] [box=80,408,1091,102]:
+      - rowgroup [ref=e35] [box=80,408,1091,35]
+      - rowgroup [ref=e45] [box=80,443,1091,68]

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v518.0.0` carries strict and normalized loss-alias metrics directly in the focused repair report.
+Version `v519.0.0` carries strict and normalized loss-alias metrics into the seed stability report.
+
+## Latest v519 checkpoint
+
+- Extended `model_capability_required_term_pair_loss_alias_stability` so seed rows and summary fields include normalized loss hits and normalization gains.
+- Updated stability text/CSV/Markdown/HTML reports to show strict full seeds beside normalized full seeds.
+- Added test coverage for a split-loss seed where strict hits fail but normalized full coverage is visible.
+- Re-ran seeds `514,515`: strict and normalized conclusions both stayed stable partial, with `normalization_gain_count=0`.
+- Archived the v519 stability-metrics evidence in `e/519` and added the code explanation in `代码讲解记录_模型能力阶段/533-v519-model-capability-required-term-pair-loss-alias-stability-metrics.md`.
 
 ## Latest v518 checkpoint
 

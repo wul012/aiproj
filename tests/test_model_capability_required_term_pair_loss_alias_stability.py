@@ -41,8 +41,12 @@ class ModelCapabilityRequiredTermPairLossAliasStabilityTests(unittest.TestCase):
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["decision"], "required_term_pair_loss_alias_stable_full_hit")
             self.assertTrue(report["summary"]["stable_loss_alias_full_coverage"])
+            self.assertTrue(report["summary"]["stable_loss_alias_normalized_full_coverage"])
             self.assertEqual(report["summary"]["heldout_loss_alias_full_seed_count"], 2)
+            self.assertEqual(report["summary"]["heldout_loss_alias_normalized_full_seed_count"], 2)
+            self.assertEqual(report["summary"]["normalization_gain_count"], 0)
             self.assertIn("loss_alias_stability_decision=loss_alias_stable_full_hit", text)
+            self.assertIn("loss_alias_stability_metric_decision=loss_alias_stable_full_hit", text)
             self.assertIn("Loss-Alias Stability", markdown)
             self.assertIn("MiniGPT loss-alias stability", html)
             self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
@@ -63,6 +67,31 @@ class ModelCapabilityRequiredTermPairLossAliasStabilityTests(unittest.TestCase):
             self.assertEqual(report["decision"], "required_term_pair_loss_alias_seed_dependent")
             self.assertFalse(report["summary"]["stable_loss_alias_full_coverage"])
             self.assertEqual(report["summary"]["heldout_loss_alias_full_seed_count"], 1)
+            self.assertEqual(report["summary"]["heldout_loss_alias_normalized_full_seed_count"], 1)
+            self.assertEqual(report["summary"]["normalization_gain_count"], 0)
+
+    def test_loss_alias_stability_reports_normalized_full_signal(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            report = build_model_capability_required_term_pair_loss_alias_stability(
+                heldout_fixture(),
+                out_dir=root / "stability",
+                seeds=[514, 515],
+                train_func=fake_train,
+                generate_func=fake_generate_seed_514_strict_seed_515_split,
+            )
+
+            self.assertEqual(report["status"], "pass")
+            self.assertEqual(report["decision"], "required_term_pair_loss_alias_normalized_stable_full_hit")
+            self.assertEqual(
+                report["summary"]["loss_alias_stability_metric_decision"],
+                "loss_alias_stability_strict_limited_normalized_full_signal",
+            )
+            self.assertFalse(report["summary"]["stable_loss_alias_full_coverage"])
+            self.assertTrue(report["summary"]["stable_loss_alias_normalized_full_coverage"])
+            self.assertEqual(report["summary"]["heldout_loss_alias_full_seed_count"], 1)
+            self.assertEqual(report["summary"]["heldout_loss_alias_normalized_full_seed_count"], 2)
+            self.assertEqual(report["summary"]["normalization_gain_count"], 4)
 
     def test_loss_alias_stability_fails_without_seeds(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -88,6 +117,7 @@ class ModelCapabilityRequiredTermPairLossAliasStabilityTests(unittest.TestCase):
         )
 
         self.assertEqual(summary["loss_alias_stability_decision"], "loss_alias_no_stable_generation_signal")
+        self.assertEqual(summary["loss_alias_stability_metric_decision"], "loss_alias_no_stable_generation_signal")
         self.assertFalse(summary["stable_loss_alias_full_coverage"])
 
 
@@ -159,4 +189,11 @@ def fake_generate_seed_514_only(request: dict[str, object]) -> dict[str, object]
     prompt = str(request["prompt"])
     checkpoint_path = str(request.get("checkpoint_path") or "")
     continuation = "loss" if "seed-514" in checkpoint_path else "----"
+    return {"generated": prompt + continuation, "continuation": continuation}
+
+
+def fake_generate_seed_514_strict_seed_515_split(request: dict[str, object]) -> dict[str, object]:
+    prompt = str(request["prompt"])
+    checkpoint_path = str(request.get("checkpoint_path") or "")
+    continuation = "loss" if "seed-514" in checkpoint_path else "lo\ns\ns"
     return {"generated": prompt + continuation, "continuation": continuation}
