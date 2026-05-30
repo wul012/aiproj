@@ -1,0 +1,13 @@
+run_id,variant_id,prompt_term,candidate_term,is_expected_candidate,avg_nll,total_nll,first_token_rank,first_token_logprob,token_count,status
+01-fixed-loss-alternating-balanced-seed-502,alternating-balanced,fixed,fixed,True,0.512444,2.56222,2,-1.57623,5,pass
+01-fixed-loss-alternating-balanced-seed-502,alternating-balanced,fixed,loss,False,1.034239,4.136957,3,-2.070174,4,pass
+01-fixed-loss-alternating-balanced-seed-502,alternating-balanced,loss,fixed,False,0.537805,2.689024,2,-1.677034,5,pass
+01-fixed-loss-alternating-balanced-seed-502,alternating-balanced,loss,loss,True,1.084487,4.337949,3,-2.228869,4,pass
+01-fixed-loss-symmetric-boost-seed-502,symmetric-boost,fixed,fixed,True,0.360496,1.802478,2,-1.286029,5,pass
+01-fixed-loss-symmetric-boost-seed-502,symmetric-boost,fixed,loss,False,0.763335,3.053339,3,-1.429605,4,pass
+01-fixed-loss-symmetric-boost-seed-502,symmetric-boost,loss,fixed,False,0.354145,1.770724,2,-1.278388,5,pass
+01-fixed-loss-symmetric-boost-seed-502,symmetric-boost,loss,loss,True,0.765863,3.063453,3,-1.407213,4,pass
+01-fixed-loss-symmetric-anchor-seed-502,symmetric-anchor,fixed,fixed,True,1.824791,9.123957,4,-2.507684,5,pass
+01-fixed-loss-symmetric-anchor-seed-502,symmetric-anchor,fixed,loss,False,2.912717,11.650868,5,-2.764709,4,pass
+01-fixed-loss-symmetric-anchor-seed-502,symmetric-anchor,loss,fixed,False,1.781687,8.908437,10,-5.010526,5,pass
+01-fixed-loss-symmetric-anchor-seed-502,symmetric-anchor,loss,loss,True,1.20319,4.81276,7,-3.155275,4,pass

@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair forced-choice diagnostic" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one checkpoint internally preferred the expected term for every pair prompt.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: forced_choice_full_match_observed
+    - generic [ref=e13]:
+      - generic [ref=e14]: Runs
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Scores
+      - strong [ref=e18]: "12"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Expected best
+      - strong [ref=e21]: "4"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Full variants
+      - strong [ref=e24]: "1"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Best variant
+      - strong [ref=e27]: symmetric-anchor
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: compare forced-choice winners with generation decoding to isolate sampling/decoding loss
+  - generic [ref=e31]:
+    - heading "Prompt Choices" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Variant Prompt Expected Best Expected best Margin" [ref=e36]
+      - rowgroup [ref=e43]:
+        - row "alternating-balanced fixed fixed fixed True 0.0" [ref=e44]
+        - row "alternating-balanced loss loss fixed False 0.546682" [ref=e51]
+        - row "symmetric-anchor fixed fixed fixed True 0.0" [ref=e58]
+        - row "symmetric-anchor loss loss loss True 0.0" [ref=e65]
+        - row "symmetric-boost fixed fixed fixed True 0.0" [ref=e72]
+        - row "symmetric-boost loss loss fixed False 0.411718" [ref=e79]
+  - generic [ref=e86]:
+    - heading "Variant Summary" [level=2] [ref=e87]
+    - table [ref=e89]:
+      - rowgroup [ref=e90]:
+        - row "Variant Expected best Prompt count Full match Collapse" [ref=e91]
+      - rowgroup [ref=e97]:
+        - row "alternating-balanced 1 2 False fixed" [ref=e98]
+        - row "symmetric-boost 1 2 False fixed" [ref=e104]
+        - row "symmetric-anchor 2 2 True" [ref=e110]

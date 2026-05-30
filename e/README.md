@@ -137,6 +137,10 @@ e/501/解释/说明.md
 e/502/图片
 e/502/解释/说明.md
  -> v502 model capability required-term pair branch-retention sweep 的运行截图和解释
+
+e/503/图片
+e/503/解释/说明.md
+ -> v503 model capability required-term pair forced-choice diagnostic 的运行截图和解释
 ```
 
 写入规则：

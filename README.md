@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v502.0.0` trains balanced branch-retention variants after the v501 tradeoff and shows symmetric clean corpora still do not recover full `fixed/loss` prompt-conditioned behavior.
+Version `v503.0.0` adds a teacher-forced forced-choice diagnostic for the v502 checkpoints and shows the best retained branch has an internal `fixed/loss` preference even though free generation still collapsed.
+
+## Latest v503 checkpoint
+
+- Added `model_capability_required_term_pair_forced_choice_diagnostic`, which reads the v502 branch-retention sweep, reuses its real checkpoints, and scores each expected term against its competing term with teacher-forced negative log likelihood.
+- Added `scripts/run_model_capability_required_term_pair_forced_choice_diagnostic.py` for read-only checkpoint diagnostics; it does not retrain or mutate the v502 evidence.
+- Ran the real diagnostic over `3` v502 checkpoints and `12` candidate scores. `symmetric-anchor` became the first full-match forced-choice variant: `fixed` chose `fixed`, and `loss` chose `loss`.
+- Interpreted v503 conservatively: this is an internal scoring signal, not a free-generation quality claim. The next useful step is to compare forced-choice winners with decoding/generation behavior before changing corpus weights again.
+- Archived the v503 forced-choice diagnostic evidence in `e/503` and added the code explanation in `代码讲解记录_模型能力阶段/517-v503-model-capability-required-term-pair-forced-choice-diagnostic.md`.
 
 ## Latest v502 checkpoint
 

@@ -101,6 +101,9 @@
 516-v502-model-capability-required-term-pair-branch-retention-sweep.md
  -> v502 code explanation: train balanced clean variants after the v501 tradeoff and show branch retention is still not solved.
 
+517-v503-model-capability-required-term-pair-forced-choice-diagnostic.md
+ -> v503 code explanation: score v502 checkpoints with teacher-forced fixed/loss choices and separate internal preference from free-generation collapse.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

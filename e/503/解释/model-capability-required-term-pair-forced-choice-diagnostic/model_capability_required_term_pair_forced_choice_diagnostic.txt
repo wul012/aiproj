@@ -1,0 +1,16 @@
+status=pass
+decision=required_term_pair_forced_choice_internal_match
+forced_choice_diagnostic_decision=forced_choice_full_match_observed
+source_branch_retention_sweep_decision=branch_retention_sweep_tradeoff_remains
+target_count=1
+run_count=3
+score_row_count=12
+prompt_summary_count=6
+expected_best_count=4
+expected_best_rate=0.6667
+forced_choice_full_match_variant_count=1
+collapse_candidate_counts={'fixed': 2}
+best_variant_id=symmetric-anchor
+best_variant_expected_best_count=2
+model_quality_claim=forced_choice_internal_signal_only
+next_action=compare forced-choice winners with generation decoding to isolate sampling/decoding loss
