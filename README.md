@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v500.0.0` trains new contrast-free `fixed/loss` pair checkpoints after the v499 corpus audit and shows the leakage fix is necessary but still only yields partial pair behavior.
+Version `v501.0.0` trains clean loss-branch rescue variants after the v500 contrast-free run and shows the tiny pair checkpoint can flip from `fixed` to `loss`, but still cannot retain both branches at once.
+
+## Latest v501 checkpoint
+
+- Added `model_capability_required_term_pair_loss_branch_sweep`, which reads the v500 contrast-free report, identifies the stable missed branch, builds clean rescue corpora, trains real tiny checkpoints, and reports focus-hit/full-hit/tradeoff outcomes.
+- Added `scripts/run_model_capability_required_term_pair_loss_branch_sweep.py` with default and fast presets.
+- Ran the real v501 sweep over `3` variants: `missed-first-order`, `missed-boosted`, and `missed-anchored`. All `3` checkpoints trained and all `3` variants recovered `loss`, but every variant dropped `fixed`, so `pair_full_hit_variant_count=0`.
+- Interpreted v501 as a sharper capability boundary: `loss` is learnable in isolation or when emphasized, but the current tiny pair setup still lacks stable prompt-conditioned branch selection.
+- Archived the v501 loss-branch sweep evidence in `e/501` and added the code explanation in `代码讲解记录_模型能力阶段/515-v501-model-capability-required-term-pair-loss-branch-sweep.md`.
 
 ## Latest v500 checkpoint
 

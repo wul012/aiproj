@@ -1,0 +1,683 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair loss-branch sweep",
+  "generated_at": "2026-05-30T02:17:02Z",
+  "status": "pass",
+  "decision": "required_term_pair_loss_branch_tradeoff",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_contrast_free_training": "D:\\aiproj\\e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\model_capability_required_term_pair_contrast_free_training.json",
+  "out_dir": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep",
+  "settings": {
+    "seed": 501,
+    "pair_limit": 1,
+    "variant_count": 3,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "rescue a missed contrast-free pair branch without restoring negative contrast leakage"
+  },
+  "source_baseline": {
+    "contrast_free_training_decision": "contrast_free_training_partial_only",
+    "variant_pair_partial_hit_count": 3,
+    "variant_pair_full_hit_count": 0,
+    "best_variant_id": "contrast-longer"
+  },
+  "target_count": 1,
+  "targets": [
+    {
+      "pair_id": "01-fixed-loss",
+      "source_target_id": "01-fixed-loss-baseline-repeat",
+      "source_variant_id": "baseline-repeat",
+      "source_capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "focus_missed_term": "loss",
+      "missed_term_names": [
+        "loss"
+      ],
+      "hit_term_names": [
+        "fixed"
+      ],
+      "stable_missed_terms": [
+        "loss"
+      ],
+      "source_variant_count": 3,
+      "source_missed_counts": {
+        "loss": 3
+      },
+      "source_hit_counts": {
+        "fixed": 3
+      },
+      "source_variant_ids": [
+        "contrast-baseline",
+        "contrast-longer",
+        "contrast-denser"
+      ]
+    }
+  ],
+  "loss_branch_variants": [
+    {
+      "variant_id": "missed-first-order",
+      "label": "missed branch first in every clean cycle",
+      "term_order": "missed-first",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "missed_weight": 1,
+      "missed_anchor_repeat": 0,
+      "max_iters": 1800,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "missed-boosted",
+      "label": "missed branch receives a second clean row copy",
+      "term_order": "source-order",
+      "repeat": 220,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 0,
+      "max_iters": 1800,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "missed-anchored",
+      "label": "missed branch first plus extra terminal anchors",
+      "term_order": "missed-first",
+      "repeat": 180,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 120,
+      "max_iters": 2200,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    }
+  ],
+  "training_rows": [
+    {
+      "loss_branch_run_id": "01-fixed-loss-missed-first-order-seed-501",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "variant_id": "missed-first-order",
+      "variant_label": "missed branch first in every clean cycle",
+      "seed": 501,
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-first-order-seed-501.txt",
+      "loss_branch_corpus_exists": true,
+      "loss_branch_line_count": 2880,
+      "term_order": "missed-first",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "missed_weight": 1,
+      "missed_anchor_repeat": 0,
+      "max_iters": 1800,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501\\checkpoint.pt",
+      "tokenizer_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501\\tokenizer.json",
+      "metrics_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501\\metrics.jsonl",
+      "train_config_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-first-order-seed-501.txt --out-dir e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501 --device cpu --tokenizer char --max-iters 1800 --eval-interval 450 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 501 --sample-prompt loss: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "loss_branch_run_id": "01-fixed-loss-missed-boosted-seed-501",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "variant_id": "missed-boosted",
+      "variant_label": "missed branch receives a second clean row copy",
+      "seed": 501,
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-boosted-seed-501.txt",
+      "loss_branch_corpus_exists": true,
+      "loss_branch_line_count": 3960,
+      "term_order": "source-order",
+      "repeat": 220,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 0,
+      "max_iters": 1800,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501\\checkpoint.pt",
+      "tokenizer_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501\\tokenizer.json",
+      "metrics_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501\\metrics.jsonl",
+      "train_config_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-boosted-seed-501.txt --out-dir e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501 --device cpu --tokenizer char --max-iters 1800 --eval-interval 450 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 501 --sample-prompt loss: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "loss_branch_run_id": "01-fixed-loss-missed-anchored-seed-501",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "variant_id": "missed-anchored",
+      "variant_label": "missed branch first plus extra terminal anchors",
+      "seed": 501,
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-anchored-seed-501.txt",
+      "loss_branch_corpus_exists": true,
+      "loss_branch_line_count": 3960,
+      "term_order": "missed-first",
+      "repeat": 180,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 120,
+      "max_iters": 2200,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501\\checkpoint.pt",
+      "tokenizer_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501\\tokenizer.json",
+      "metrics_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501\\metrics.jsonl",
+      "train_config_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-anchored-seed-501.txt --out-dir e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501 --device cpu --tokenizer char --max-iters 2200 --eval-interval 550 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 501 --sample-prompt loss: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    }
+  ],
+  "variant_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-first-order",
+      "variant_label": "missed branch first in every clean cycle",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "focus_missed_term": "loss",
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "dropped_source_hit_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "focus_missed_term_hit": true,
+      "source_hit_terms_retained": false,
+      "pair_full_hit": false,
+      "branch_tradeoff": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-boosted",
+      "variant_label": "missed branch receives a second clean row copy",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "focus_missed_term": "loss",
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "dropped_source_hit_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "focus_missed_term_hit": true,
+      "source_hit_terms_retained": false,
+      "pair_full_hit": false,
+      "branch_tradeoff": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-anchored",
+      "variant_label": "missed branch first plus extra terminal anchors",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "focus_missed_term": "loss",
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "dropped_source_hit_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "focus_missed_term_hit": true,
+      "source_hit_terms_retained": false,
+      "pair_full_hit": false,
+      "branch_tradeoff": true
+    }
+  ],
+  "target_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_counts": {
+        "loss": 3
+      },
+      "variant_count": 3,
+      "focus_term_hit_variant_count": 3,
+      "pair_full_hit_variant_count": 0,
+      "branch_tradeoff_variant_count": 3,
+      "best_variant_id": "missed-first-order",
+      "best_variant_hit_count": 1,
+      "best_variant_focus_hit": true,
+      "best_variant_pair_full_hit": false
+    }
+  ],
+  "probe_count": 6,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-first-order",
+      "variant_label": "missed branch first in every clean cycle",
+      "loss_branch_run_id": "01-fixed-loss-missed-first-order-seed-501",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-first-order-seed-501.txt",
+      "loss_branch_seed": 501,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "missed_weight": 1,
+      "missed_anchor_repeat": 0,
+      "generation_seed": 501,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 501,
+      "training_status": "pass",
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-first-order",
+      "variant_label": "missed branch first in every clean cycle",
+      "loss_branch_run_id": "01-fixed-loss-missed-first-order-seed-501",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-first-order-seed-501.txt",
+      "loss_branch_seed": 501,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "missed_weight": 1,
+      "missed_anchor_repeat": 0,
+      "generation_seed": 502,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 501,
+      "training_status": "pass",
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-first-order-seed-501\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-boosted",
+      "variant_label": "missed branch receives a second clean row copy",
+      "loss_branch_run_id": "01-fixed-loss-missed-boosted-seed-501",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-boosted-seed-501.txt",
+      "loss_branch_seed": 501,
+      "repeat": 220,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 0,
+      "generation_seed": 601,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:lossssssssss",
+      "continuation": "lossssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed:lossssssssss",
+      "continuation_preview": "lossssssssss",
+      "seed": 501,
+      "training_status": "pass",
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-boosted",
+      "variant_label": "missed branch receives a second clean row copy",
+      "loss_branch_run_id": "01-fixed-loss-missed-boosted-seed-501",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-boosted-seed-501.txt",
+      "loss_branch_seed": 501,
+      "repeat": 220,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 0,
+      "generation_seed": 602,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:lossssssssss",
+      "continuation": "lossssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss:lossssssssss",
+      "continuation_preview": "lossssssssss",
+      "seed": 501,
+      "training_status": "pass",
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-boosted-seed-501\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-anchored",
+      "variant_label": "missed branch first plus extra terminal anchors",
+      "loss_branch_run_id": "01-fixed-loss-missed-anchored-seed-501",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-anchored-seed-501.txt",
+      "loss_branch_seed": 501,
+      "repeat": 180,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 120,
+      "generation_seed": 701,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:lossssssssss",
+      "continuation": "lossssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed:lossssssssss",
+      "continuation_preview": "lossssssssss",
+      "seed": 501,
+      "training_status": "pass",
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "missed-anchored",
+      "variant_label": "missed branch first plus extra terminal anchors",
+      "loss_branch_run_id": "01-fixed-loss-missed-anchored-seed-501",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "loss_branch_corpus_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-corpora\\01-fixed-loss-missed-anchored-seed-501.txt",
+      "loss_branch_seed": 501,
+      "repeat": 180,
+      "isolated_repeat": 2,
+      "missed_weight": 2,
+      "missed_anchor_repeat": 120,
+      "generation_seed": 702,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:lossssssssss",
+      "continuation": "lossssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss:lossssssssss",
+      "continuation_preview": "lossssssssss",
+      "seed": 501,
+      "training_status": "pass",
+      "checkpoint_path": "e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\loss-branch-runs\\01-fixed-loss-missed-anchored-seed-501\\checkpoint.pt",
+      "checkpoint_exists": true
+    }
+  ],
+  "summary": {
+    "loss_branch_sweep_decision": "loss_branch_sweep_tradeoff_only",
+    "source_contrast_free_training_decision": "contrast_free_training_partial_only",
+    "source_variant_pair_partial_hit_count": 3,
+    "source_variant_pair_full_hit_count": 0,
+    "source_best_variant_id": "contrast-longer",
+    "target_count": 1,
+    "variant_count": 3,
+    "training_run_count": 3,
+    "training_pass_count": 3,
+    "checkpoint_exists_count": 3,
+    "probe_count": 6,
+    "probe_hit_count": 3,
+    "continuation_hit_count": 3,
+    "focus_term_hit_variant_count": 3,
+    "pair_full_hit_variant_count": 0,
+    "branch_tradeoff_variant_count": 3,
+    "best_variant_id": "missed-first-order",
+    "best_variant_hit_count": 1,
+    "best_variant_focus_hit": true,
+    "best_variant_pair_full_hit": false
+  },
+  "interpretation": {
+    "model_quality_claim": "loss_branch_tradeoff_signal_only",
+    "reason": "The previously missed branch can be made to appear, but the sweep did not preserve a full pair hit.",
+    "next_action": "compare the tradeoff variant against source-order probes and tune for retaining both branches"
+  }
+}

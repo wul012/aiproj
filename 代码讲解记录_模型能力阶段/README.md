@@ -95,6 +95,9 @@
 514-v500-model-capability-required-term-pair-contrast-free-training.md
  -> v500 code explanation: train real contrast-free fixed/loss pair checkpoints after the v499 audit and report the remaining partial-only boundary.
 
+515-v501-model-capability-required-term-pair-loss-branch-sweep.md
+ -> v501 code explanation: train clean rescue variants for the missed loss branch and show the resulting fixed/loss tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

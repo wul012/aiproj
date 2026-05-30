@@ -1,0 +1,42 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair loss-branch sweep" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The previously missed branch can be made to appear, but the sweep did not preserve a full pair hit.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: loss_branch_sweep_tradeoff_only
+    - generic [ref=e13]:
+      - generic [ref=e14]: Targets
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Variants
+      - strong [ref=e18]: "3"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Probe hits
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Focus hits
+      - strong [ref=e24]: "3"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Full variants
+      - strong [ref=e27]: "0"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Best variant
+      - strong [ref=e30]: missed-first-order
+  - generic [ref=e31]:
+    - heading "Next Action" [level=2] [ref=e32]
+    - paragraph [ref=e33]: compare the tradeoff variant against source-order probes and tune for retaining both branches
+  - generic [ref=e34]:
+    - heading "Variant Results" [level=2] [ref=e35]
+    - table [ref=e37]:
+      - rowgroup [ref=e38]
+      - rowgroup [ref=e47]
+  - generic [ref=e72]:
+    - heading "Training Runs" [level=2] [ref=e73]
+    - table [ref=e75]:
+      - rowgroup [ref=e76]
+      - rowgroup [ref=e84]

@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=50552 vocab_size=36
+parameters=52,928
+data_source=data:e\501\解释\model-capability-required-term-pair-loss-branch-sweep\loss-branch-corpora\01-fixed-loss-missed-first-order-seed-501.txt
+step=    1 train_loss=3.2717 val_loss=3.1869
+step=  450 train_loss=0.8039 val_loss=0.8615
+step=  900 train_loss=0.8514 val_loss=1.1215
+step= 1350 train_loss=1.0595 val_loss=0.9236
+step= 1800 train_loss=1.0023 val_loss=1.0279
+saved=e\501\解释\model-capability-required-term-pair-loss-branch-sweep\loss-branch-runs\01-fixed-loss-missed-first-order-seed-501
+history=e\501\解释\model-capability-required-term-pair-loss-branch-sweep\loss-branch-runs\01-fixed-loss-missed-first-order-seed-501\metrics.jsonl
+manifest=e\501\解释\model-capability-required-term-pair-loss-branch-sweep\loss-branch-runs\01-fixed-loss-missed-first-order-seed-501\run_manifest.json
+sample=e\501\解释\model-capability-required-term-pair-loss-branch-sweep\loss-branch-runs\01-fixed-loss-missed-first-order-seed-501\sample.txt
