@@ -177,6 +177,10 @@ e/511/解释/说明.md
 e/512/图片
 e/512/解释/说明.md
  -> v512 model capability required-term pair continuation-span heldout 的运行截图和解释
+
+e/513/图片
+e/513/解释/说明.md
+ -> v513 model capability required-term pair continuation-span alias matrix 的运行截图和解释
 ```
 
 写入规则：

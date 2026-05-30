@@ -93,10 +93,14 @@ def build_model_capability_required_term_pair_continuation_span_heldout(
 
 def build_heldout_prompt_cases() -> list[dict[str, Any]]:
     return [
-        {"case_id": "source-fixed", "case_type": "source", "prompt": "fixed:", "expected_term": "fixed"},
-        {"case_id": "source-loss", "case_type": "source", "prompt": "loss:", "expected_term": "loss"},
-        {"case_id": "heldout-alpha-fixed", "case_type": "heldout", "prompt": "alpha:", "expected_term": "fixed"},
-        {"case_id": "heldout-beta-loss", "case_type": "heldout", "prompt": "beta:", "expected_term": "loss"},
+        {"case_id": "source-fixed", "case_type": "source", "alias_group": "source", "prompt": "fixed:", "expected_term": "fixed"},
+        {"case_id": "source-loss", "case_type": "source", "alias_group": "source", "prompt": "loss:", "expected_term": "loss"},
+        {"case_id": "heldout-alpha-fixed", "case_type": "heldout", "alias_group": "greek", "prompt": "alpha:", "expected_term": "fixed"},
+        {"case_id": "heldout-gamma-fixed", "case_type": "heldout", "alias_group": "greek", "prompt": "gamma:", "expected_term": "fixed"},
+        {"case_id": "heldout-delta-fixed", "case_type": "heldout", "alias_group": "greek", "prompt": "delta:", "expected_term": "fixed"},
+        {"case_id": "heldout-beta-loss", "case_type": "heldout", "alias_group": "greek", "prompt": "beta:", "expected_term": "loss"},
+        {"case_id": "heldout-theta-loss", "case_type": "heldout", "alias_group": "greek", "prompt": "theta:", "expected_term": "loss"},
+        {"case_id": "heldout-omega-loss", "case_type": "heldout", "alias_group": "greek", "prompt": "omega:", "expected_term": "loss"},
     ]
 
 
@@ -171,6 +175,11 @@ def summarize_continuation_span_heldout(
     heldout_cases = [case for case in case_rows if case.get("case_type") == "heldout"]
     source_hit_cases = sum(1 for case in source_cases if int(case.get("hit_count") or 0) > 0)
     heldout_hit_cases = sum(1 for case in heldout_cases if int(case.get("hit_count") or 0) > 0)
+    heldout_terms = sorted({str(case.get("expected_term") or "") for case in heldout_cases if case.get("expected_term")})
+    heldout_hit_terms = sorted(
+        {str(case.get("expected_term") or "") for case in heldout_cases if int(case.get("hit_count") or 0) > 0}
+    )
+    alias_group_rows = summarize_alias_group_rows(case_rows)
     return {
         "heldout_decision": _heldout_decision(seeds, source_hit_cases, heldout_hit_cases, seed_rows),
         "seed_count": len(seeds),
@@ -180,10 +189,34 @@ def summarize_continuation_span_heldout(
         "heldout_case_count": len(heldout_cases),
         "source_hit_case_count": source_hit_cases,
         "heldout_hit_case_count": heldout_hit_cases,
+        "heldout_term_count": len(heldout_terms),
+        "heldout_hit_term_count": len(heldout_hit_terms),
+        "heldout_hit_terms": heldout_hit_terms,
         "heldout_full_hit_seed_count": sum(1 for row in seed_rows if row.get("heldout_full_hit")),
+        "heldout_full_term_coverage": bool(heldout_terms) and len(heldout_hit_terms) == len(heldout_terms),
+        "alias_group_rows": alias_group_rows,
         "source_signal_observed": source_hit_cases > 0,
         "heldout_generalization_observed": heldout_hit_cases > 0,
     }
+
+
+def summarize_alias_group_rows(case_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for row in case_rows:
+        groups.setdefault(str(row.get("alias_group") or "unknown"), []).append(row)
+    rows: list[dict[str, Any]] = []
+    for group_name, group in sorted(groups.items()):
+        hit_count = sum(1 for row in group if int(row.get("hit_count") or 0) > 0)
+        rows.append(
+            {
+                "alias_group": group_name,
+                "case_count": len(group),
+                "hit_case_count": hit_count,
+                "hit_rate": round(hit_count / len(group), 4) if group else 0.0,
+                "hit_terms": sorted({str(row.get("expected_term") or "") for row in group if int(row.get("hit_count") or 0) > 0}),
+            }
+        )
+    return rows
 
 
 def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:

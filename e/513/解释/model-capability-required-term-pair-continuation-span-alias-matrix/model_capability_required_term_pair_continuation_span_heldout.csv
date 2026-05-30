@@ -1,0 +1,17 @@
+seed,case_id,case_type,alias_group,prompt,expected_term,continuation_hit,continuation_preview
+510,source-fixed,source,source,fixed:,fixed,True,\npan fixed:\n
+510,source-loss,source,source,loss:,loss,False,\npan fixed:\n
+510,heldout-alpha-fixed,heldout,greek,alpha:,fixed,True,\npan fixed:\n
+510,heldout-gamma-fixed,heldout,greek,gamma:,fixed,True,\npan fixed:\n
+510,heldout-delta-fixed,heldout,greek,delta:,fixed,True,\npan fixed:\n
+510,heldout-beta-loss,heldout,greek,beta:,loss,False,\npan fixed:\n
+510,heldout-theta-loss,heldout,greek,theta:,loss,False,\npan fixed:\n
+510,heldout-omega-loss,heldout,greek,omega:,loss,False,\npan fixed:\n
+511,source-fixed,source,source,fixed:,fixed,True,\npafin fixed
+511,source-loss,source,source,loss:,loss,False,\npafixed fix
+511,heldout-alpha-fixed,heldout,greek,alpha:,fixed,True,\npafin fixed
+511,heldout-gamma-fixed,heldout,greek,gamma:,fixed,True,\npafin fixed
+511,heldout-delta-fixed,heldout,greek,delta:,fixed,True,\npafin fixed
+511,heldout-beta-loss,heldout,greek,beta:,loss,False,\npafixed fix
+511,heldout-theta-loss,heldout,greek,theta:,loss,False,\npafin fixed
+511,heldout-omega-loss,heldout,greek,omega:,loss,False,\npafin fixed

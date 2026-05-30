@@ -1,0 +1,12 @@
+status=pass
+decision=required_term_pair_continuation_span_heldout_signal
+heldout_decision=heldout_prompt_generalization_observed
+seed_count=2
+generation_count=16
+source_hit_case_count=1
+heldout_hit_case_count=3
+heldout_hit_term_count=1
+heldout_full_term_coverage=False
+heldout_generalization_observed=True
+model_quality_claim=tiny_continuation_span_heldout_signal
+next_action=repeat held-out prompts across more aliases before promoting the signal

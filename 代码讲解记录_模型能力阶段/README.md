@@ -131,6 +131,9 @@
 526-v512-model-capability-required-term-pair-continuation-span-heldout.md
  -> v512 code explanation: probe source and held-out alias prompts against v511 seed checkpoints and record fixed-only alias signal.
 
+527-v513-model-capability-required-term-pair-continuation-span-alias-matrix.md
+ -> v513 code explanation: expand held-out aliases into a matrix and show fixed-only coverage while loss remains missing.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

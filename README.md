@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v512.0.0` probes held-out alias prompts against the v511 continuation-span checkpoints and records a fixed-only alias signal.
+Version `v513.0.0` expands the v512 held-out check into an alias matrix and confirms the signal is fixed-only.
+
+## Latest v513 checkpoint
+
+- Expanded `model_capability_required_term_pair_continuation_span_heldout` from two held-out aliases to a source/greek alias matrix.
+- Added held-out term coverage metrics: `heldout_hit_term_count`, `heldout_full_term_coverage`, and `alias_group_rows`.
+- Ran the real matrix over seeds `510,511`: `generation_count=16`, `heldout_hit_case_count=3`, `heldout_hit_term_count=1`, and `heldout_full_term_coverage=False`.
+- Interpreted v513 as a clear fixed-only signal: `alpha/gamma/delta -> fixed` all hit, while `beta/theta/omega -> loss` all miss.
+- Archived the v513 alias-matrix evidence in `e/513` and added the code explanation in `代码讲解记录_模型能力阶段/527-v513-model-capability-required-term-pair-continuation-span-alias-matrix.md`.
 
 ## Latest v512 checkpoint
 

@@ -1,0 +1,483 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair continuation-span heldout",
+  "generated_at": "2026-05-30T07:00:35Z",
+  "status": "pass",
+  "decision": "required_term_pair_continuation_span_heldout_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_continuation_span_stability": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\model_capability_required_term_pair_continuation_span_stability.json",
+  "out_dir": "e\\513\\解释\\model-capability-required-term-pair-continuation-span-alias-matrix",
+  "settings": {
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "seed_offset": 1200,
+    "device": "cpu",
+    "experiment_boundary": "held-out prompt generation only; no additional training"
+  },
+  "cases": [
+    {
+      "case_id": "source-fixed",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "fixed:",
+      "expected_term": "fixed"
+    },
+    {
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss"
+    },
+    {
+      "case_id": "heldout-alpha-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "alpha:",
+      "expected_term": "fixed"
+    },
+    {
+      "case_id": "heldout-gamma-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "gamma:",
+      "expected_term": "fixed"
+    },
+    {
+      "case_id": "heldout-delta-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "delta:",
+      "expected_term": "fixed"
+    },
+    {
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss"
+    },
+    {
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss"
+    },
+    {
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss"
+    }
+  ],
+  "seed_sources": [
+    {
+      "seed": 510,
+      "source_decision": "required_term_pair_continuation_span_prefix_gain",
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "tokenizer_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\tokenizer.json",
+      "source_prefix_minimum_improved_count": 1,
+      "source_pair_full_generation_hit": false
+    },
+    {
+      "seed": 511,
+      "source_decision": "required_term_pair_continuation_span_prefix_gain",
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "tokenizer_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\tokenizer.json",
+      "source_prefix_minimum_improved_count": 1,
+      "source_pair_full_generation_hit": false
+    }
+  ],
+  "generation_rows": [
+    {
+      "case_id": "source-fixed",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "fixed:",
+      "expected_term": "fixed",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1710,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "fixed:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": true,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1711,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "loss:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": false,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "heldout-alpha-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "alpha:",
+      "expected_term": "fixed",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1712,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "alpha:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": true,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "heldout-gamma-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "gamma:",
+      "expected_term": "fixed",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1713,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "gamma:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": true,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "heldout-delta-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "delta:",
+      "expected_term": "fixed",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1714,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "delta:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": true,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1715,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "beta:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": false,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1716,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "theta:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": false,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss",
+      "seed": 510,
+      "seed_index": 0,
+      "generation_seed": 1717,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-510\\continuation-span-run\\checkpoint.pt",
+      "generated": "omega:\npan fixed:\n",
+      "continuation": "\npan fixed:\n",
+      "continuation_hit": false,
+      "continuation_preview": "\\npan fixed:\\n"
+    },
+    {
+      "case_id": "source-fixed",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "fixed:",
+      "expected_term": "fixed",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1711,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "fixed:\npafin fixed",
+      "continuation": "\npafin fixed",
+      "continuation_hit": true,
+      "continuation_preview": "\\npafin fixed"
+    },
+    {
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1712,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "loss:\npafixed fix",
+      "continuation": "\npafixed fix",
+      "continuation_hit": false,
+      "continuation_preview": "\\npafixed fix"
+    },
+    {
+      "case_id": "heldout-alpha-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "alpha:",
+      "expected_term": "fixed",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1713,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "alpha:\npafin fixed",
+      "continuation": "\npafin fixed",
+      "continuation_hit": true,
+      "continuation_preview": "\\npafin fixed"
+    },
+    {
+      "case_id": "heldout-gamma-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "gamma:",
+      "expected_term": "fixed",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1714,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "gamma:\npafin fixed",
+      "continuation": "\npafin fixed",
+      "continuation_hit": true,
+      "continuation_preview": "\\npafin fixed"
+    },
+    {
+      "case_id": "heldout-delta-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "delta:",
+      "expected_term": "fixed",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1715,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "delta:\npafin fixed",
+      "continuation": "\npafin fixed",
+      "continuation_hit": true,
+      "continuation_preview": "\\npafin fixed"
+    },
+    {
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1716,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "beta:\npafixed fix",
+      "continuation": "\npafixed fix",
+      "continuation_hit": false,
+      "continuation_preview": "\\npafixed fix"
+    },
+    {
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1717,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "theta:\npafin fixed",
+      "continuation": "\npafin fixed",
+      "continuation_hit": false,
+      "continuation_preview": "\\npafin fixed"
+    },
+    {
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss",
+      "seed": 511,
+      "seed_index": 1,
+      "generation_seed": 1718,
+      "checkpoint_path": "e\\511\\解释\\model-capability-required-term-pair-continuation-span-stability\\seed-runs\\seed-511\\continuation-span-run\\checkpoint.pt",
+      "generated": "omega:\npafin fixed",
+      "continuation": "\npafin fixed",
+      "continuation_hit": false,
+      "continuation_preview": "\\npafin fixed"
+    }
+  ],
+  "seed_rows": [
+    {
+      "seed": 510,
+      "case_count": 8,
+      "source_hit_count": 1,
+      "heldout_hit_count": 3,
+      "source_case_count": 2,
+      "heldout_case_count": 6,
+      "heldout_full_hit": false
+    },
+    {
+      "seed": 511,
+      "case_count": 8,
+      "source_hit_count": 1,
+      "heldout_hit_count": 3,
+      "source_case_count": 2,
+      "heldout_case_count": 6,
+      "heldout_full_hit": false
+    }
+  ],
+  "case_rows": [
+    {
+      "case_id": "source-fixed",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "fixed:",
+      "expected_term": "fixed",
+      "run_count": 2,
+      "hit_count": 2,
+      "hit_rate": 1.0
+    },
+    {
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "run_count": 2,
+      "hit_count": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "case_id": "heldout-alpha-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "alpha:",
+      "expected_term": "fixed",
+      "run_count": 2,
+      "hit_count": 2,
+      "hit_rate": 1.0
+    },
+    {
+      "case_id": "heldout-gamma-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "gamma:",
+      "expected_term": "fixed",
+      "run_count": 2,
+      "hit_count": 2,
+      "hit_rate": 1.0
+    },
+    {
+      "case_id": "heldout-delta-fixed",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "delta:",
+      "expected_term": "fixed",
+      "run_count": 2,
+      "hit_count": 2,
+      "hit_rate": 1.0
+    },
+    {
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "run_count": 2,
+      "hit_count": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss",
+      "run_count": 2,
+      "hit_count": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss",
+      "run_count": 2,
+      "hit_count": 0,
+      "hit_rate": 0.0
+    }
+  ],
+  "summary": {
+    "heldout_decision": "heldout_prompt_generalization_observed",
+    "seed_count": 2,
+    "case_count": 8,
+    "generation_count": 16,
+    "source_case_count": 2,
+    "heldout_case_count": 6,
+    "source_hit_case_count": 1,
+    "heldout_hit_case_count": 3,
+    "heldout_term_count": 2,
+    "heldout_hit_term_count": 1,
+    "heldout_hit_terms": [
+      "fixed"
+    ],
+    "heldout_full_hit_seed_count": 0,
+    "heldout_full_term_coverage": false,
+    "alias_group_rows": [
+      {
+        "alias_group": "greek",
+        "case_count": 6,
+        "hit_case_count": 3,
+        "hit_rate": 0.5,
+        "hit_terms": [
+          "fixed"
+        ]
+      },
+      {
+        "alias_group": "source",
+        "case_count": 2,
+        "hit_case_count": 1,
+        "hit_rate": 0.5,
+        "hit_terms": [
+          "fixed"
+        ]
+      }
+    ],
+    "source_signal_observed": true,
+    "heldout_generalization_observed": true
+  },
+  "interpretation": {
+    "model_quality_claim": "tiny_continuation_span_heldout_signal",
+    "reason": "At least one held-out alias prompt emitted its expected required term.",
+    "next_action": "repeat held-out prompts across more aliases before promoting the signal"
+  }
+}

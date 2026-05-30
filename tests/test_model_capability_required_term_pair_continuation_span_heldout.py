@@ -40,6 +40,7 @@ class ModelCapabilityRequiredTermPairContinuationSpanHeldoutTests(unittest.TestC
             self.assertEqual(report["decision"], "required_term_pair_continuation_span_source_only")
             self.assertGreater(report["summary"]["source_hit_case_count"], 0)
             self.assertEqual(report["summary"]["heldout_hit_case_count"], 0)
+            self.assertEqual(report["summary"]["heldout_hit_term_count"], 0)
             self.assertIn("heldout_generalization_observed=False", text)
             self.assertIn("Continuation-Span Heldout", markdown)
             self.assertIn("MiniGPT continuation-span heldout", html)
@@ -69,7 +70,9 @@ class ModelCapabilityRequiredTermPairContinuationSpanHeldoutTests(unittest.TestC
             cases = build_heldout_prompt_cases()
 
             self.assertEqual([row["seed"] for row in seeds], [510, 511])
-            self.assertEqual([row["case_type"] for row in cases].count("heldout"), 2)
+            self.assertEqual([row["case_type"] for row in cases].count("heldout"), 6)
+            self.assertEqual([row["expected_term"] for row in cases].count("fixed"), 4)
+            self.assertEqual([row["expected_term"] for row in cases].count("loss"), 4)
 
 
 def stability_fixture(root: Path) -> dict[str, object]:

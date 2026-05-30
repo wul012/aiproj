@@ -24,6 +24,8 @@ def render_model_capability_required_term_pair_continuation_span_heldout_text(re
         ("generation_count", summary.get("generation_count")),
         ("source_hit_case_count", summary.get("source_hit_case_count")),
         ("heldout_hit_case_count", summary.get("heldout_hit_case_count")),
+        ("heldout_hit_term_count", summary.get("heldout_hit_term_count")),
+        ("heldout_full_term_coverage", summary.get("heldout_full_term_coverage")),
         ("heldout_generalization_observed", summary.get("heldout_generalization_observed")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
         ("next_action", interpretation.get("next_action")),
@@ -32,7 +34,7 @@ def render_model_capability_required_term_pair_continuation_span_heldout_text(re
 
 
 def write_model_capability_required_term_pair_continuation_span_heldout_csv(report: dict[str, Any], path: str | Path) -> None:
-    fieldnames = ["seed", "case_id", "case_type", "prompt", "expected_term", "continuation_hit", "continuation_preview"]
+    fieldnames = ["seed", "case_id", "case_type", "alias_group", "prompt", "expected_term", "continuation_hit", "continuation_preview"]
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8", newline="") as handle:
@@ -69,6 +71,8 @@ def render_model_capability_required_term_pair_continuation_span_heldout_markdow
             f"- Heldout decision: `{summary.get('heldout_decision')}`",
             f"- Source hit cases: `{summary.get('source_hit_case_count')}/{summary.get('source_case_count')}`",
             f"- Heldout hit cases: `{summary.get('heldout_hit_case_count')}/{summary.get('heldout_case_count')}`",
+            f"- Heldout hit terms: `{summary.get('heldout_hit_term_count')}/{summary.get('heldout_term_count')}`",
+            f"- Heldout full term coverage: `{summary.get('heldout_full_term_coverage')}`",
             "",
             *table,
             "",
@@ -92,6 +96,7 @@ def render_model_capability_required_term_pair_continuation_span_heldout_html(re
         ("Generations", summary.get("generation_count")),
         ("Source hits", summary.get("source_hit_case_count")),
         ("Heldout hits", summary.get("heldout_hit_case_count")),
+        ("Heldout terms", f"{summary.get('heldout_hit_term_count')}/{summary.get('heldout_term_count')}"),
     ]
     rows = "\n".join(_generation_html(row) for row in list_of_dicts(report.get("generation_rows")))
     return f"""<!doctype html>
@@ -111,7 +116,7 @@ def render_model_capability_required_term_pair_continuation_span_heldout_html(re
 <section class="panel">
 <h2>Generation Rows</h2>
 <div class="table-wrap"><table>
-<thead><tr><th>Seed</th><th>Case</th><th>Type</th><th>Expected</th><th>Hit</th><th>Continuation</th></tr></thead>
+<thead><tr><th>Seed</th><th>Case</th><th>Type</th><th>Group</th><th>Expected</th><th>Hit</th><th>Continuation</th></tr></thead>
 <tbody>{rows}</tbody>
 </table></div>
 </section>
@@ -148,6 +153,7 @@ def _generation_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('seed'))}</td>"
         f"<td>{html_escape(row.get('case_id'))}</td>"
         f"<td>{html_escape(row.get('case_type'))}</td>"
+        f"<td>{html_escape(row.get('alias_group'))}</td>"
         f"<td>{html_escape(row.get('expected_term'))}</td>"
         f"<td>{html_escape(row.get('continuation_hit'))}</td>"
         f"<td>{html_escape(row.get('continuation_preview'))}</td>"
