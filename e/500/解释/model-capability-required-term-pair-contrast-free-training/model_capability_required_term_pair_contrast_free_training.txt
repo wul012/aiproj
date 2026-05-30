@@ -1,0 +1,17 @@
+status=pass
+decision=required_term_pair_contrast_free_training_partial
+contrast_free_training_decision=contrast_free_training_partial_only
+source_prompt_separation_audit_decision=prompt_separation_corpus_revision_needed
+selected_pair_count=1
+variant_count=3
+training_run_count=3
+training_pass_count=3
+probe_count=6
+probe_hit_count=3
+variant_pair_full_hit_count=0
+variant_pair_partial_hit_count=3
+contrast_free_full_hit_observed=False
+best_variant_id=contrast-longer
+best_variant_hit_count=1
+model_quality_claim=contrast_free_pair_partial_signal_only
+next_action=inspect contrast-free generations and consider seed stability before adding more corpus templates

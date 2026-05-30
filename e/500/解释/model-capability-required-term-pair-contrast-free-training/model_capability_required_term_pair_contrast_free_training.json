@@ -1,0 +1,578 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair contrast-free training",
+  "generated_at": "2026-05-30T01:41:09Z",
+  "status": "pass",
+  "decision": "required_term_pair_contrast_free_training_partial",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_prompt_separation_audit": "e\\499\\解释\\model-capability-required-term-pair-prompt-separation-audit\\model_capability_required_term_pair_prompt_separation_audit.json",
+  "out_dir": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training",
+  "settings": {
+    "seed": 500,
+    "pair_limit": 1,
+    "variant_count": 3,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "remove prompt-target leakage before adding new target groups"
+  },
+  "source_baseline": {
+    "prompt_separation_audit_decision": "prompt_separation_corpus_revision_needed",
+    "corpus_revision_recommended": true,
+    "direct_prompt_other_term_leak_count": 960,
+    "negative_contrast_leak_count": 960,
+    "pair_header_shared_context_count": 960
+  },
+  "selected_pair_count": 1,
+  "pairs": [
+    {
+      "pair_id": "01-fixed-loss",
+      "source_target_id": "01-fixed-loss-baseline-repeat",
+      "source_variant_id": "baseline-repeat",
+      "source_capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ]
+    }
+  ],
+  "contrast_free_variants": [
+    {
+      "variant_id": "contrast-baseline",
+      "label": "contrast-free baseline",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "contrast-longer",
+      "label": "contrast-free longer training",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 2400,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "contrast-denser",
+      "label": "contrast-free denser corpus",
+      "repeat": 360,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    }
+  ],
+  "training_rows": [
+    {
+      "contrast_free_run_id": "01-fixed-loss-contrast-baseline-seed-500",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "contrast-baseline",
+      "variant_label": "contrast-free baseline",
+      "seed": 500,
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-baseline-seed-500.txt",
+      "contrast_free_corpus_exists": true,
+      "contrast_free_line_count": 2880,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500\\checkpoint.pt",
+      "tokenizer_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500\\tokenizer.json",
+      "metrics_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500\\metrics.jsonl",
+      "train_config_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-baseline-seed-500.txt --out-dir e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 500 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "contrast_free_run_id": "01-fixed-loss-contrast-longer-seed-500",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "contrast-longer",
+      "variant_label": "contrast-free longer training",
+      "seed": 500,
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-longer-seed-500.txt",
+      "contrast_free_corpus_exists": true,
+      "contrast_free_line_count": 2880,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 2400,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500\\checkpoint.pt",
+      "tokenizer_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500\\tokenizer.json",
+      "metrics_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500\\metrics.jsonl",
+      "train_config_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-longer-seed-500.txt --out-dir e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500 --device cpu --tokenizer char --max-iters 2400 --eval-interval 600 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 500 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "contrast_free_run_id": "01-fixed-loss-contrast-denser-seed-500",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "contrast-denser",
+      "variant_label": "contrast-free denser corpus",
+      "seed": 500,
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-denser-seed-500.txt",
+      "contrast_free_corpus_exists": true,
+      "contrast_free_line_count": 4320,
+      "repeat": 360,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500\\checkpoint.pt",
+      "tokenizer_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500\\tokenizer.json",
+      "metrics_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500\\metrics.jsonl",
+      "train_config_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-denser-seed-500.txt --out-dir e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 500 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    }
+  ],
+  "variant_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-baseline",
+      "variant_label": "contrast-free baseline",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-longer",
+      "variant_label": "contrast-free longer training",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-denser",
+      "variant_label": "contrast-free denser corpus",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    }
+  ],
+  "pair_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "variant_count": 3,
+      "full_hit_variant_count": 0,
+      "partial_hit_variant_count": 3,
+      "full_hit_variants": [],
+      "partial_hit_variants": [
+        "contrast-baseline",
+        "contrast-longer",
+        "contrast-denser"
+      ],
+      "contrast_free_full_hit_observed": false,
+      "best_variant_id": "contrast-longer",
+      "best_variant_hit_count": 1,
+      "best_variant_pair_full_hit": false
+    }
+  ],
+  "probe_count": 6,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-baseline",
+      "variant_label": "contrast-free baseline",
+      "contrast_free_run_id": "01-fixed-loss-contrast-baseline-seed-500",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-baseline-seed-500.txt",
+      "contrast_free_seed": 500,
+      "contrast_free_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 500,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "seed": 500,
+      "training_status": "pass",
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-baseline",
+      "variant_label": "contrast-free baseline",
+      "contrast_free_run_id": "01-fixed-loss-contrast-baseline-seed-500",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-baseline-seed-500.txt",
+      "contrast_free_seed": 500,
+      "contrast_free_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 501,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "seed": 500,
+      "training_status": "pass",
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-baseline-seed-500\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-longer",
+      "variant_label": "contrast-free longer training",
+      "contrast_free_run_id": "01-fixed-loss-contrast-longer-seed-500",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-longer-seed-500.txt",
+      "contrast_free_seed": 500,
+      "contrast_free_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 600,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:fixed:d: fix",
+      "continuation": "fixed:d: fix",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed:fixed:d: fix",
+      "continuation_preview": "fixed:d: fix",
+      "seed": 500,
+      "training_status": "pass",
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-longer",
+      "variant_label": "contrast-free longer training",
+      "contrast_free_run_id": "01-fixed-loss-contrast-longer-seed-500",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-longer-seed-500.txt",
+      "contrast_free_seed": 500,
+      "contrast_free_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 601,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:fissssssssss",
+      "continuation": "fissssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:fissssssssss",
+      "continuation_preview": "fissssssssss",
+      "seed": 500,
+      "training_status": "pass",
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-longer-seed-500\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-denser",
+      "variant_label": "contrast-free denser corpus",
+      "contrast_free_run_id": "01-fixed-loss-contrast-denser-seed-500",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-denser-seed-500.txt",
+      "contrast_free_seed": 500,
+      "contrast_free_repeat": 360,
+      "isolated_repeat": 2,
+      "generation_seed": 700,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:fixed\nfixed\n",
+      "continuation": "fixed\nfixed\n",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed:fixed\\nfixed\\n",
+      "continuation_preview": "fixed\\nfixed\\n",
+      "seed": 500,
+      "training_status": "pass",
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "contrast-denser",
+      "variant_label": "contrast-free denser corpus",
+      "contrast_free_run_id": "01-fixed-loss-contrast-denser-seed-500",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "contrast_free_corpus_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-corpora\\01-fixed-loss-contrast-denser-seed-500.txt",
+      "contrast_free_seed": 500,
+      "contrast_free_repeat": 360,
+      "isolated_repeat": 2,
+      "generation_seed": 701,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:fixed\nfixed\n",
+      "continuation": "fixed\nfixed\n",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:fixed\\nfixed\\n",
+      "continuation_preview": "fixed\\nfixed\\n",
+      "seed": 500,
+      "training_status": "pass",
+      "checkpoint_path": "e\\500\\解释\\model-capability-required-term-pair-contrast-free-training\\contrast-free-runs\\01-fixed-loss-contrast-denser-seed-500\\checkpoint.pt",
+      "checkpoint_exists": true
+    }
+  ],
+  "summary": {
+    "contrast_free_training_decision": "contrast_free_training_partial_only",
+    "source_prompt_separation_audit_decision": "prompt_separation_corpus_revision_needed",
+    "source_corpus_revision_recommended": true,
+    "source_direct_prompt_other_term_leak_count": 960,
+    "selected_pair_count": 1,
+    "variant_count": 3,
+    "training_run_count": 3,
+    "training_pass_count": 3,
+    "checkpoint_exists_count": 3,
+    "probe_count": 6,
+    "probe_hit_count": 3,
+    "continuation_hit_count": 3,
+    "probe_success_rate": 0.5,
+    "variant_pair_full_hit_count": 0,
+    "variant_pair_partial_hit_count": 3,
+    "variant_pair_zero_hit_count": 0,
+    "variant_pair_full_hit_rate": 0.0,
+    "contrast_free_full_hit_pair_count": 0,
+    "contrast_free_full_hit_observed": false,
+    "best_variant_id": "contrast-longer",
+    "best_variant_hit_count": 1,
+    "best_variant_pair_full_hit": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contrast_free_pair_partial_signal_only",
+    "reason": "The contrast-free corpus removed direct leakage, but the tiny pair checkpoint still only preserved part of the pair.",
+    "next_action": "inspect contrast-free generations and consider seed stability before adding more corpus templates"
+  }
+}

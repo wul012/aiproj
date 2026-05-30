@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=75711 vocab_size=35
+parameters=52,864
+data_source=data:e\500\解释\model-capability-required-term-pair-contrast-free-training\contrast-free-corpora\01-fixed-loss-contrast-denser-seed-500.txt
+step=    1 train_loss=3.1540 val_loss=3.2281
+step=  400 train_loss=1.0893 val_loss=0.8643
+step=  800 train_loss=0.9311 val_loss=0.8608
+step= 1200 train_loss=0.8680 val_loss=1.1190
+step= 1600 train_loss=0.8471 val_loss=0.8559
+saved=e\500\解释\model-capability-required-term-pair-contrast-free-training\contrast-free-runs\01-fixed-loss-contrast-denser-seed-500
+history=e\500\解释\model-capability-required-term-pair-contrast-free-training\contrast-free-runs\01-fixed-loss-contrast-denser-seed-500\metrics.jsonl
+manifest=e\500\解释\model-capability-required-term-pair-contrast-free-training\contrast-free-runs\01-fixed-loss-contrast-denser-seed-500\run_manifest.json
+sample=e\500\解释\model-capability-required-term-pair-contrast-free-training\contrast-free-runs\01-fixed-loss-contrast-denser-seed-500\sample.txt

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v499.0.0` audits the v497 pair-capacity corpus behind the v498 decoding failure and finds direct prompt-target leakage in the `fixed/loss` training rows.
+Version `v500.0.0` trains new contrast-free `fixed/loss` pair checkpoints after the v499 corpus audit and shows the leakage fix is necessary but still only yields partial pair behavior.
+
+## Latest v500 checkpoint
+
+- Added `model_capability_required_term_pair_contrast_free_training`, which reads the v499 prompt-separation audit, deduplicates the `fixed/loss` pair, builds contrast-free corpora, trains real tiny checkpoints, and probes both required terms.
+- Split the v500 implementation into orchestration, components, and artifact modules so the feature does not create another hard-to-maintain large file.
+- Added `scripts/run_model_capability_required_term_pair_contrast_free_training.py` with default and fast variant presets.
+- Ran the real v500 training over `3` variants: `contrast-baseline`, `contrast-longer`, and `contrast-denser`. All `3` checkpoints trained, but every variant remained partial: hit `fixed`, missed `loss`, and recovered `0` full-hit variants.
+- Interpreted v500 as a useful capability boundary: removing v499's prompt-target leakage changes the bias but does not yet make the tiny pair checkpoint reliably prompt-conditioned. The next step should inspect contrast-free generations or repeat this clean setup across seeds before adding more corpus templates.
+- Archived the v500 contrast-free training evidence in `e/500` and added the code explanation in `代码讲解记录_模型能力阶段/514-v500-model-capability-required-term-pair-contrast-free-training.md`.
 
 ## Latest v499 checkpoint
 

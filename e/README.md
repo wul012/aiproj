@@ -125,6 +125,10 @@ e/498/解释/说明.md
 e/499/图片
 e/499/解释/说明.md
  -> v499 model capability required-term pair prompt separation audit 的运行截图和解释
+
+e/500/图片
+e/500/解释/说明.md
+ -> v500 model capability required-term pair contrast-free training 的运行截图和解释
 ```
 
 写入规则：

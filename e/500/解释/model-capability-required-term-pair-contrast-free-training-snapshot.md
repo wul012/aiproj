@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair contrast-free training" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The contrast-free corpus removed direct leakage, but the tiny pair checkpoint still only preserved part of the pair.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: contrast_free_training_partial_only
+    - generic [ref=e13]:
+      - generic [ref=e14]: Variants
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Runs
+      - strong [ref=e18]: "3"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Probe hits
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Full variants
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Recovered
+      - strong [ref=e27]: "False"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Best variant
+      - strong [ref=e30]: contrast-longer
+  - generic [ref=e31]:
+    - heading "Next Action" [level=2] [ref=e32]
+    - paragraph [ref=e33]: inspect contrast-free generations and consider seed stability before adding more corpus templates
+  - generic [ref=e34]:
+    - heading "Variant Results" [level=2] [ref=e35]
+    - table [ref=e37]:
+      - rowgroup [ref=e38]:
+        - row "Pair Variant Hit terms Missed terms Rate Full hit" [ref=e39]
+      - rowgroup [ref=e46]:
+        - row "01-fixed-loss contrast-baseline fixed loss 0.5 False" [ref=e47]
+        - row "01-fixed-loss contrast-longer fixed loss 0.5 False" [ref=e54]
+        - row "01-fixed-loss contrast-denser fixed loss 0.5 False" [ref=e61]
+  - generic [ref=e68]:
+    - heading "Training Runs" [level=2] [ref=e69]
+    - table [ref=e71]:
+      - rowgroup [ref=e72]:
+        - row "Run Lines Iters Repeat Checkpoint" [ref=e73]
+      - rowgroup [ref=e79]:
+        - row "01-fixed-loss-contrast-baseline-seed-500 2880 1600 240 True" [ref=e80]
+        - row "01-fixed-loss-contrast-longer-seed-500 2880 2400 240 True" [ref=e86]
+        - row "01-fixed-loss-contrast-denser-seed-500 4320 1600 360 True" [ref=e92]
