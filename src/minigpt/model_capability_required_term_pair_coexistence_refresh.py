@@ -28,6 +28,7 @@ def build_model_capability_required_term_pair_coexistence_refresh(
     *,
     out_dir: str | Path,
     seed: int = 533,
+    corpus_mode: str = "spaced_answer",
     repeat: int = 260,
     bridge_repeat: int = 20,
     max_iters: int = 1400,
@@ -47,7 +48,7 @@ def build_model_capability_required_term_pair_coexistence_refresh(
     generate_func: GenerateFunc | None = None,
 ) -> dict[str, Any]:
     root = Path(out_dir)
-    corpus_text = build_pair_coexistence_refresh_corpus(repeat=repeat, bridge_repeat=bridge_repeat)
+    corpus_text = build_pair_coexistence_refresh_corpus(repeat=repeat, bridge_repeat=bridge_repeat, corpus_mode=corpus_mode)
     corpus_path = root / PAIR_COEXISTENCE_REFRESH_CORPUS_FILENAME
     corpus_path.parent.mkdir(parents=True, exist_ok=True)
     corpus_path.write_text(corpus_text, encoding="utf-8")
@@ -100,6 +101,7 @@ def build_model_capability_required_term_pair_coexistence_refresh(
         "out_dir": str(root),
         "settings": {
             "seed": seed,
+            "corpus_mode": corpus_mode,
             "repeat": repeat,
             "bridge_repeat": bridge_repeat,
             "max_iters": max_iters,
@@ -130,31 +132,57 @@ def build_model_capability_required_term_pair_coexistence_refresh(
     }
 
 
-def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int) -> str:
+def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, corpus_mode: str = "spaced_answer") -> str:
     lines = [
         "MiniGPT fixed/loss pair coexistence refresh corpus.",
         "The prompt before the colon selects the exact continuation term.",
     ]
-    for _ in range(max(1, repeat)):
-        lines.extend(
-            [
-                "fixed: fixed",
-                "loss: loss",
-                "comparison-baseline|fixed: fixed",
-                "factual-val-loss|loss: loss",
-                "term=fixed prompt=fixed: answer=fixed",
-                "term=loss prompt=loss: answer=loss",
-            ]
-        )
-    for _ in range(max(0, bridge_repeat)):
-        lines.extend(
-            [
-                "fixed and loss are separate branches.",
-                "fixed: fixed ; loss: loss",
-                "When the prefix is fixed:, continue fixed.",
-                "When the prefix is loss:, continue loss.",
-            ]
-        )
+    if corpus_mode == "spaced_answer":
+        for _ in range(max(1, repeat)):
+            lines.extend(
+                [
+                    "fixed: fixed",
+                    "loss: loss",
+                    "comparison-baseline|fixed: fixed",
+                    "factual-val-loss|loss: loss",
+                    "term=fixed prompt=fixed: answer=fixed",
+                    "term=loss prompt=loss: answer=loss",
+                ]
+            )
+        for _ in range(max(0, bridge_repeat)):
+            lines.extend(
+                [
+                    "fixed and loss are separate branches.",
+                    "fixed: fixed ; loss: loss",
+                    "When the prefix is fixed:, continue fixed.",
+                    "When the prefix is loss:, continue loss.",
+                ]
+            )
+    elif corpus_mode == "colon_immediate":
+        for _ in range(max(1, repeat)):
+            lines.extend(
+                [
+                    "fixed:fixed",
+                    "loss:loss",
+                    "comparison-baseline|fixed:fixed",
+                    "factual-val-loss|loss:loss",
+                    "prompt=fixed:target=fixed",
+                    "prompt=loss:target=loss",
+                    "select fixed:fixed",
+                    "select loss:loss",
+                ]
+            )
+        for _ in range(max(0, bridge_repeat)):
+            lines.extend(
+                [
+                    "fixed/loss are separate branches.",
+                    "fixed:fixed;loss:loss",
+                    "prefix fixed:fixed",
+                    "prefix loss:loss",
+                ]
+            )
+    else:
+        raise ValueError(f"unknown corpus_mode: {corpus_mode}")
     return "\n".join(lines) + "\n"
 
 

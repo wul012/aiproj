@@ -197,6 +197,9 @@
 548-v534-required-term-pair-first-token-preference.md
  -> v534 code explanation: diagnose first-token logits for the v533 fixed/loss refresh checkpoint.
 
+549-v535-required-term-pair-colon-immediate-refresh.md
+ -> v535 code explanation: train colon-immediate fixed/loss rows and confirm the first-token whitespace drift disappears.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

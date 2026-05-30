@@ -24,6 +24,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train and evaluate a tiny fixed/loss pair coexistence refresh checkpoint.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "model-capability-required-term-pair-coexistence-refresh")
     parser.add_argument("--seed", type=int, default=533)
+    parser.add_argument("--corpus-mode", choices=["spaced_answer", "colon_immediate"], default="spaced_answer")
     parser.add_argument("--repeat", type=int, default=260)
     parser.add_argument("--bridge-repeat", type=int, default=20)
     parser.add_argument("--max-iters", type=int, default=1400)
@@ -49,6 +50,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     report = build_model_capability_required_term_pair_coexistence_refresh(
         out_dir=args.out_dir,
         seed=args.seed,
+        corpus_mode=args.corpus_mode,
         repeat=args.repeat,
         bridge_repeat=args.bridge_repeat,
         max_iters=args.max_iters,

@@ -1,0 +1,34 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT first-token preference" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The expected first tokens are already top ranked, so the failure is likely later in generation.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: pair_first_token_expected_terms_top_ranked
+    - generic [ref=e13]:
+      - generic [ref=e14]: Terms
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Expected top
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Whitespace top
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Answer-prefix top
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Max expected rank
+      - strong [ref=e27]: "1"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: inspect second-token and continuation dynamics
+  - generic [ref=e31]:
+    - heading "Token Ranks" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]
+      - rowgroup [ref=e44]

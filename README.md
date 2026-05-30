@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v534.0.0` diagnoses the v533 fixed/loss refresh checkpoint and finds a first-token whitespace preference blocking expected `f`/`l` continuations.
+Version `v535.0.0` adds colon-immediate fixed/loss refresh training and observes a single-seed targeted pair-full signal.
+
+## Latest v535 checkpoint
+
+- Updated the pair coexistence refresh runner with `--corpus-mode`, preserving `spaced_answer` while adding `colon_immediate`.
+- `colon_immediate` trains rows such as `fixed:fixed` and `loss:loss`, directly addressing the v534 whitespace first-token drift.
+- Ran a real seed `535` refresh: training passed, `pair_full_observed=True`, and default/suppression pair-full variant counts both reached `1`.
+- Re-ran the first-token diagnostic: expected `f/l` were both rank `1`, `whitespace_prefix_top_count=0`, and `max_expected_rank=1`.
+- Archived the v535 training and first-token evidence in `e/535`, updated the continuous-work rule in `AGENTS.md`, and added the code explanation in `代码讲解记录_模型能力阶段/549-v535-required-term-pair-colon-immediate-refresh.md`.
 
 ## Latest v534 checkpoint
 

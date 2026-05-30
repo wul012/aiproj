@@ -1,0 +1,3 @@
+term,prompt,expected_first_text,expected_rank,expected_probability,top_token_text,top_probability,answer_prefix_is_top,observed_replay_continuation
+fixed,fixed:,f,1,0.42091259,f,0.42091259,False,fixed:loss:f
+loss,loss:,l,1,0.48450997,l,0.48450997,False,losssss:fixe

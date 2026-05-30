@@ -50,6 +50,14 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertGreaterEqual(corpus.count("loss: loss"), 2)
         self.assertIn("fixed: fixed ; loss: loss", corpus)
 
+    def test_colon_immediate_corpus_removes_leading_space_after_prompt(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(repeat=2, bridge_repeat=1, corpus_mode="colon_immediate")
+
+        self.assertGreaterEqual(corpus.count("fixed:fixed"), 2)
+        self.assertGreaterEqual(corpus.count("loss:loss"), 2)
+        self.assertNotIn("fixed: fixed", corpus)
+        self.assertNotIn("loss: loss", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

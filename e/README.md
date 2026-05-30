@@ -265,6 +265,10 @@ e/533/解释/说明.md
 e/534/图片
 e/534/解释/说明.md
  -> v534 required-term pair first-token preference 的运行截图和解释
+
+e/535/图片
+e/535/解释/说明.md
+ -> v535 required-term pair colon-immediate refresh 的运行截图和解释
 ```
 
 写入规则：
