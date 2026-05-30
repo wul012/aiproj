@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v519.0.0` carries strict and normalized loss-alias metrics into the seed stability report.
+Version `v520.0.0` contrasts source stability metrics with focused loss-alias metrics.
+
+## Latest v520 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_metric_contrast`, a read-only source-vs-focus comparison report.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_metric_contrast.py`; it reads v519 stability metrics and v518 focus metrics without retraining.
+- Generated the real contrast: source normalization gains stayed `0`, focus normalization gains were `4`, and `normalization_gain_delta=4`.
+- Interpreted v520 as a formatting-sensitive signal, not strict recovery: source normalized full was `False`, focus normalized full was `True`, and focus strict full remained `False`.
+- Archived the v520 contrast evidence in `e/520` and added the code explanation in `代码讲解记录_模型能力阶段/534-v520-model-capability-required-term-pair-loss-alias-metric-contrast.md`.
 
 ## Latest v519 checkpoint
 

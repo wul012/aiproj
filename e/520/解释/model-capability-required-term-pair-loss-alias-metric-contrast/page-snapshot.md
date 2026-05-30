@@ -1,0 +1,31 @@
+- main [ref=e2] [box=37,0,1180,705]:
+  - generic [ref=e3] [box=65,28,1124,77]:
+    - heading "MiniGPT loss-alias metric contrast" [level=1] [ref=e4] [box=65,28,1124,36]
+    - paragraph [ref=e5] [box=65,80,1124,25]: The stability source had no normalized full delta, while focus produced a normalized full signal.
+  - generic [ref=e6] [box=65,123,1124,136]:
+    - generic [ref=e7] [box=65,123,179,136]:
+      - generic [ref=e8] [box=79,137,150,14]: Status
+      - strong [ref=e9] [box=79,157,150,22]: pass
+    - generic [ref=e10] [box=254,123,179,136]:
+      - generic [ref=e11] [box=268,137,150,14]: Decision
+      - strong [ref=e12] [box=268,157,150,86]: loss_alias_focus_introduced_normalized_full_signal
+    - generic [ref=e13] [box=443,123,179,136]:
+      - generic [ref=e14] [box=457,137,150,14]: Gain delta
+      - strong [ref=e15] [box=457,157,150,22]: "4"
+    - generic [ref=e16] [box=632,123,179,136]:
+      - generic [ref=e17] [box=646,137,150,14]: Source norm full
+      - strong [ref=e18] [box=646,157,150,22]: "False"
+    - generic [ref=e19] [box=821,123,179,136]:
+      - generic [ref=e20] [box=835,137,150,14]: Focus norm full
+      - strong [ref=e21] [box=835,157,150,22]: "True"
+    - generic [ref=e22] [box=1010,123,179,136]:
+      - generic [ref=e23] [box=1024,137,150,14]: Focus strict full
+      - strong [ref=e24] [box=1024,157,150,22]: "False"
+  - generic [ref=e25] [box=65,276,1124,111]:
+    - heading "Next Action" [level=2] [ref=e26] [box=81,293,1091,21]
+    - paragraph [ref=e27] [box=81,330,1091,25]: inspect decoding or tokenization shape before treating normalized full signal as strict recovery
+  - generic [ref=e28] [box=65,401,1124,261]:
+    - heading "Stage Contrast" [level=2] [ref=e29] [box=81,418,1091,21]
+    - table [ref=e31] [box=81,451,1198,180]:
+      - rowgroup [ref=e32] [box=81,451,1198,51]
+      - rowgroup [ref=e41] [box=81,502,1198,129]

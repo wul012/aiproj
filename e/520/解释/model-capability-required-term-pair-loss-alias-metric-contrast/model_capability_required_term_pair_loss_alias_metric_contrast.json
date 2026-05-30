@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair loss-alias metric contrast",
+  "generated_at": "2026-05-30T08:49:14Z",
+  "status": "pass",
+  "decision": "required_term_pair_loss_alias_focus_normalized_delta_observed",
+  "failed_count": 0,
+  "issues": [],
+  "out_dir": "e\\520\\解释\\model-capability-required-term-pair-loss-alias-metric-contrast",
+  "stage_rows": [
+    {
+      "stage": "stability-source",
+      "label": "seed stability source",
+      "status": "pass",
+      "decision": "required_term_pair_loss_alias_stable_partial_hit",
+      "strict_decision": "loss_alias_stable_partial_hit",
+      "metric_decision": "loss_alias_stable_partial_hit",
+      "seed_count": 2,
+      "strict_full_seed_count": 1,
+      "normalized_full_seed_count": 1,
+      "stable_strict_full": false,
+      "stable_normalized_full": false,
+      "normalization_gain_count": 0,
+      "source_path": "e\\519\\解释\\model-capability-required-term-pair-loss-alias-stability-metrics\\model_capability_required_term_pair_loss_alias_stability.json"
+    },
+    {
+      "stage": "focused-repair",
+      "label": "focused repair metrics",
+      "status": "pass",
+      "decision": "required_term_pair_loss_alias_focus_normalized_support_signal",
+      "strict_decision": "loss_alias_focus_no_repair",
+      "metric_decision": "loss_alias_focus_strict_miss_normalized_support_full_signal",
+      "seed_count": 1,
+      "strict_full_seed_count": 0,
+      "normalized_full_seed_count": 1,
+      "stable_strict_full": false,
+      "stable_normalized_full": true,
+      "normalization_gain_count": 4,
+      "source_path": "e\\518\\解释\\model-capability-required-term-pair-loss-alias-focus-metrics\\model_capability_required_term_pair_loss_alias_focus.json"
+    }
+  ],
+  "summary": {
+    "metric_contrast_decision": "loss_alias_focus_introduced_normalized_full_signal",
+    "stage_count": 2,
+    "passing_stage_count": 2,
+    "source_strict_decision": "loss_alias_stable_partial_hit",
+    "source_metric_decision": "loss_alias_stable_partial_hit",
+    "focus_strict_decision": "loss_alias_focus_no_repair",
+    "focus_metric_decision": "loss_alias_focus_strict_miss_normalized_support_full_signal",
+    "source_normalization_gain_count": 0,
+    "focus_normalization_gain_count": 4,
+    "normalization_gain_delta": 4,
+    "source_stable_normalized_full": false,
+    "focus_stable_normalized_full": true,
+    "source_stable_strict_full": false,
+    "focus_stable_strict_full": false
+  },
+  "interpretation": {
+    "model_quality_claim": "tiny_loss_alias_focus_formatting_sensitive_signal",
+    "reason": "The stability source had no normalized full delta, while focus produced a normalized full signal.",
+    "next_action": "inspect decoding or tokenization shape before treating normalized full signal as strict recovery"
+  }
+}
