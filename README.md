@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v501.0.0` trains clean loss-branch rescue variants after the v500 contrast-free run and shows the tiny pair checkpoint can flip from `fixed` to `loss`, but still cannot retain both branches at once.
+Version `v502.0.0` trains balanced branch-retention variants after the v501 tradeoff and shows symmetric clean corpora still do not recover full `fixed/loss` prompt-conditioned behavior.
+
+## Latest v502 checkpoint
+
+- Added `model_capability_required_term_pair_branch_retention_sweep`, which reads the v501 loss-branch sweep, selects tradeoff pairs, builds balanced clean corpora, trains real tiny checkpoints, and reports branch retention outcomes.
+- Added `scripts/run_model_capability_required_term_pair_branch_retention_sweep.py` with default and fast presets.
+- Ran the real v502 sweep over `3` variants: `alternating-balanced`, `symmetric-boost`, and `symmetric-anchor`. All `3` checkpoints trained, but none recovered full-hit behavior: `alternating-balanced` and `symmetric-boost` returned to `fixed` only, while `symmetric-anchor` missed both terms.
+- Interpreted v502 as a useful stopping point for corpus-weight tinkering: clean ordering, symmetric boost, and symmetric anchors still leave the pair-level branch selection problem unsolved.
+- Archived the v502 branch-retention evidence in `e/502` and added the code explanation in `代码讲解记录_模型能力阶段/516-v502-model-capability-required-term-pair-branch-retention-sweep.md`.
 
 ## Latest v501 checkpoint
 

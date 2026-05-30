@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=54748 vocab_size=34
+parameters=52,800
+data_source=data:e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-corpora\01-fixed-loss-symmetric-anchor-seed-502.txt
+step=    1 train_loss=3.1572 val_loss=3.1686
+step=  650 train_loss=1.1353 val_loss=0.8921
+step= 1300 train_loss=0.9596 val_loss=0.8354
+step= 1950 train_loss=0.8599 val_loss=0.8481
+step= 2600 train_loss=1.4409 val_loss=1.4546
+saved=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-symmetric-anchor-seed-502
+history=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-symmetric-anchor-seed-502\metrics.jsonl
+manifest=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-symmetric-anchor-seed-502\run_manifest.json
+sample=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-symmetric-anchor-seed-502\sample.txt

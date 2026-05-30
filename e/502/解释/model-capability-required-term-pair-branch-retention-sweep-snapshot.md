@@ -1,0 +1,42 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair branch-retention sweep" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Balanced clean variants still produced a branch tradeoff instead of retaining both branches.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: branch_retention_sweep_tradeoff_remains
+    - generic [ref=e13]:
+      - generic [ref=e14]: Targets
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Variants
+      - strong [ref=e18]: "3"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Probe hits
+      - strong [ref=e21]: "2"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Balanced
+      - strong [ref=e24]: "0"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Full variants
+      - strong [ref=e27]: "0"
+    - generic [ref=e28]:
+      - generic [ref=e29]: Best variant
+      - strong [ref=e30]: symmetric-boost
+  - generic [ref=e31]:
+    - heading "Next Action" [level=2] [ref=e32]
+    - paragraph [ref=e33]: try a smaller supervised decoding/evaluation diagnostic before more corpus weighting
+  - generic [ref=e34]:
+    - heading "Variant Results" [level=2] [ref=e35]
+    - table [ref=e37]:
+      - rowgroup [ref=e38]
+      - rowgroup [ref=e47]
+  - generic [ref=e72]:
+    - heading "Training Runs" [level=2] [ref=e73]
+    - table [ref=e75]:
+      - rowgroup [ref=e76]
+      - rowgroup [ref=e84]

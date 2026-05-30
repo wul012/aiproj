@@ -40,6 +40,8 @@ Refactoring rhythm:
 
 能完成的自己做；不能做的、权限不足的、或有疑惑需要用户确认的事项，明确说明原因并让用户配合。
 
+完成一个版本后，如果测试、CI、清理和工作区状态都已经收口，且下一步方向能从现有证据中明确推导出来，就自动继续推进下一个最有价值版本；不要等待用户反复发送“推进”。持续推进时要同时兼顾功能增量、必要拆分、去重、测试硬化和证据归档，以资深工程师的判断选择当前最优路线。遇到 CI 失败、需求不清、风险过高、上下文接近失控或需要用户取舍时，停止新增修改并说明原因。
+
 Before sending the final response for any task, perform a cleanup pass for files and processes created during that task.
 
 ## Code Explanation Rule

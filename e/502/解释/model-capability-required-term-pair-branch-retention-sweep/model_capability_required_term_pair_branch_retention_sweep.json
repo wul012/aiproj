@@ -1,0 +1,652 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair branch-retention sweep",
+  "generated_at": "2026-05-30T03:34:21Z",
+  "status": "pass",
+  "decision": "required_term_pair_branch_retention_partial",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_loss_branch_sweep": "D:\\aiproj\\e\\501\\解释\\model-capability-required-term-pair-loss-branch-sweep\\model_capability_required_term_pair_loss_branch_sweep.json",
+  "out_dir": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep",
+  "settings": {
+    "seed": 502,
+    "pair_limit": 1,
+    "variant_count": 3,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "restore branch retention after v501 tradeoff without adding negative contrast leakage"
+  },
+  "source_baseline": {
+    "loss_branch_sweep_decision": "loss_branch_sweep_tradeoff_only",
+    "branch_tradeoff_variant_count": 3,
+    "pair_full_hit_variant_count": 0,
+    "best_variant_id": "missed-first-order"
+  },
+  "target_count": 1,
+  "targets": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_missed_terms": [
+        "loss"
+      ],
+      "source_tradeoff_variant_count": 3,
+      "source_focus_hit_variant_count": 3,
+      "source_pair_full_hit_variant_count": 0,
+      "source_best_variant_id": "missed-first-order"
+    }
+  ],
+  "branch_retention_variants": [
+    {
+      "variant_id": "alternating-balanced",
+      "label": "alternate fixed/loss order without asymmetric boost",
+      "cycle_strategy": "alternating",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "term_weight": 1,
+      "symmetric_anchor_repeat": 0,
+      "max_iters": 2200,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "symmetric-boost",
+      "label": "equal double copies for both pair branches",
+      "cycle_strategy": "alternating",
+      "repeat": 180,
+      "isolated_repeat": 2,
+      "term_weight": 2,
+      "symmetric_anchor_repeat": 0,
+      "max_iters": 2400,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "label": "alternating cycles plus symmetric terminal anchors",
+      "cycle_strategy": "alternating",
+      "repeat": 160,
+      "isolated_repeat": 2,
+      "term_weight": 1,
+      "symmetric_anchor_repeat": 100,
+      "max_iters": 2600,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    }
+  ],
+  "training_rows": [
+    {
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "seed": 502,
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-alternating-balanced-seed-502.txt",
+      "branch_retention_corpus_exists": true,
+      "branch_retention_line_count": 2880,
+      "cycle_strategy": "alternating",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "term_weight": 1,
+      "symmetric_anchor_repeat": 0,
+      "max_iters": 2200,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\tokenizer.json",
+      "metrics_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\metrics.jsonl",
+      "train_config_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-alternating-balanced-seed-502.txt --out-dir e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502 --device cpu --tokenizer char --max-iters 2200 --eval-interval 550 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 502 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "seed": 502,
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-boost-seed-502.txt",
+      "branch_retention_corpus_exists": true,
+      "branch_retention_line_count": 4320,
+      "cycle_strategy": "alternating",
+      "repeat": 180,
+      "isolated_repeat": 2,
+      "term_weight": 2,
+      "symmetric_anchor_repeat": 0,
+      "max_iters": 2400,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\tokenizer.json",
+      "metrics_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\metrics.jsonl",
+      "train_config_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-boost-seed-502.txt --out-dir e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502 --device cpu --tokenizer char --max-iters 2400 --eval-interval 600 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 502 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "seed": 502,
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-anchor-seed-502.txt",
+      "branch_retention_corpus_exists": true,
+      "branch_retention_line_count": 3120,
+      "cycle_strategy": "alternating",
+      "repeat": 160,
+      "isolated_repeat": 2,
+      "term_weight": 1,
+      "symmetric_anchor_repeat": 100,
+      "max_iters": 2600,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "tokenizer_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\tokenizer.json",
+      "metrics_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\metrics.jsonl",
+      "train_config_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-anchor-seed-502.txt --out-dir e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502 --device cpu --tokenizer char --max-iters 2600 --eval-interval 650 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 502 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    }
+  ],
+  "variant_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "retained_source_hit_terms": [
+        "fixed"
+      ],
+      "dropped_source_hit_terms": [],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "focus_missed_term_hit": false,
+      "source_hit_terms_retained": true,
+      "pair_full_hit": false,
+      "balanced_retention": false,
+      "retention_tradeoff": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "retained_source_hit_terms": [
+        "fixed"
+      ],
+      "dropped_source_hit_terms": [],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "focus_missed_term_hit": false,
+      "source_hit_terms_retained": true,
+      "pair_full_hit": false,
+      "balanced_retention": false,
+      "retention_tradeoff": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "retained_source_hit_terms": [],
+      "dropped_source_hit_terms": [
+        "fixed"
+      ],
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "focus_missed_term_hit": false,
+      "source_hit_terms_retained": false,
+      "pair_full_hit": false,
+      "balanced_retention": false,
+      "retention_tradeoff": false
+    }
+  ],
+  "target_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "source_tradeoff_variant_count": 3,
+      "variant_count": 3,
+      "balanced_retention_variant_count": 0,
+      "pair_full_hit_variant_count": 0,
+      "retention_tradeoff_variant_count": 2,
+      "focus_term_hit_variant_count": 0,
+      "source_retained_variant_count": 2,
+      "best_variant_id": "symmetric-boost",
+      "best_variant_hit_count": 1,
+      "best_variant_balanced_retention": false,
+      "best_variant_pair_full_hit": false
+    }
+  ],
+  "probe_count": 6,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-alternating-balanced-seed-502.txt",
+      "branch_retention_seed": 502,
+      "generation_seed": 502,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "seed": 502,
+      "training_status": "pass",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "branch_retention_run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-alternating-balanced-seed-502.txt",
+      "branch_retention_seed": 502,
+      "generation_seed": 503,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "seed": 502,
+      "training_status": "pass",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-alternating-balanced-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-boost-seed-502.txt",
+      "branch_retention_seed": 502,
+      "generation_seed": 602,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "fixed: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "seed": 502,
+      "training_status": "pass",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-boost-seed-502.txt",
+      "branch_retention_seed": 502,
+      "generation_seed": 603,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: fixed\nfixed",
+      "continuation": " fixed\nfixed",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss: fixed\\nfixed",
+      "continuation_preview": " fixed\\nfixed",
+      "seed": 502,
+      "training_status": "pass",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-boost-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-anchor-seed-502.txt",
+      "branch_retention_seed": 502,
+      "generation_seed": 702,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:didddf\nf\nfix",
+      "continuation": "didddf\nf\nfix",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed:didddf\\nf\\nfix",
+      "continuation_preview": "didddf\\nf\\nfix",
+      "seed": 502,
+      "training_status": "pass",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "branch_retention_run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "focus_missed_term": "loss",
+      "source_hit_terms": [
+        "fixed"
+      ],
+      "branch_retention_corpus_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-corpora\\01-fixed-loss-symmetric-anchor-seed-502.txt",
+      "branch_retention_seed": 502,
+      "generation_seed": 703,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:ssssssssssss",
+      "continuation": "ssssssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:ssssssssssss",
+      "continuation_preview": "ssssssssssss",
+      "seed": 502,
+      "training_status": "pass",
+      "checkpoint_path": "e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\branch-retention-runs\\01-fixed-loss-symmetric-anchor-seed-502\\checkpoint.pt",
+      "checkpoint_exists": true
+    }
+  ],
+  "summary": {
+    "branch_retention_sweep_decision": "branch_retention_sweep_tradeoff_remains",
+    "source_loss_branch_sweep_decision": "loss_branch_sweep_tradeoff_only",
+    "source_branch_tradeoff_variant_count": 3,
+    "source_pair_full_hit_variant_count": 0,
+    "source_best_variant_id": "missed-first-order",
+    "target_count": 1,
+    "variant_count": 3,
+    "training_run_count": 3,
+    "training_pass_count": 3,
+    "checkpoint_exists_count": 3,
+    "probe_count": 6,
+    "probe_hit_count": 2,
+    "continuation_hit_count": 2,
+    "focus_term_hit_variant_count": 0,
+    "source_retained_variant_count": 2,
+    "balanced_retention_variant_count": 0,
+    "pair_full_hit_variant_count": 0,
+    "retention_tradeoff_variant_count": 2,
+    "best_variant_id": "symmetric-boost",
+    "best_variant_hit_count": 1,
+    "best_variant_balanced_retention": false,
+    "best_variant_pair_full_hit": false
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Balanced clean variants still produced a branch tradeoff instead of retaining both branches.",
+    "next_action": "try a smaller supervised decoding/evaluation diagnostic before more corpus weighting"
+  }
+}

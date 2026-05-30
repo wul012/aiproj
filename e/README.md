@@ -133,6 +133,10 @@ e/500/解释/说明.md
 e/501/图片
 e/501/解释/说明.md
  -> v501 model capability required-term pair loss-branch sweep 的运行截图和解释
+
+e/502/图片
+e/502/解释/说明.md
+ -> v502 model capability required-term pair branch-retention sweep 的运行截图和解释
 ```
 
 写入规则：

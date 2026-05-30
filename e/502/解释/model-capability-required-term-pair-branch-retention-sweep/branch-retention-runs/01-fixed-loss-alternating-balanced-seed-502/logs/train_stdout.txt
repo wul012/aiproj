@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=50548 vocab_size=34
+parameters=52,800
+data_source=data:e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-corpora\01-fixed-loss-alternating-balanced-seed-502.txt
+step=    1 train_loss=3.1748 val_loss=3.0917
+step=  550 train_loss=1.3244 val_loss=1.2485
+step= 1100 train_loss=0.8427 val_loss=0.9124
+step= 1650 train_loss=0.9076 val_loss=0.8714
+step= 2200 train_loss=0.8845 val_loss=0.8548
+saved=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-alternating-balanced-seed-502
+history=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-alternating-balanced-seed-502\metrics.jsonl
+manifest=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-alternating-balanced-seed-502\run_manifest.json
+sample=e\502\解释\model-capability-required-term-pair-branch-retention-sweep\branch-retention-runs\01-fixed-loss-alternating-balanced-seed-502\sample.txt

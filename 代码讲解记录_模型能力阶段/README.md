@@ -98,6 +98,9 @@
 515-v501-model-capability-required-term-pair-loss-branch-sweep.md
  -> v501 code explanation: train clean rescue variants for the missed loss branch and show the resulting fixed/loss tradeoff.
 
+516-v502-model-capability-required-term-pair-branch-retention-sweep.md
+ -> v502 code explanation: train balanced clean variants after the v501 tradeoff and show branch retention is still not solved.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
