@@ -23,6 +23,7 @@ class InferenceSafetyProfile:
     min_temperature: float = 0.05
     max_temperature: float = 2.0
     max_top_k: int = 200
+    max_blocked_token_texts: int = 16
     max_body_bytes: int = 16 * 1024
     max_stream_seconds: float = 30.0
 
@@ -38,6 +39,7 @@ class GenerationRequest:
     top_k: int | None
     seed: int | None
     checkpoint: str | None = None
+    blocked_token_texts: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -67,6 +69,8 @@ class GenerationResponse:
     checkpoint: str
     tokenizer: str
     checkpoint_id: str | None = None
+    blocked_token_texts: tuple[str, ...] = ()
+    blocked_token_count: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -81,6 +85,8 @@ class GenerationStreamChunk:
     continuation: str
     checkpoint: str
     tokenizer: str
+    blocked_token_texts: tuple[str, ...] = ()
+    blocked_token_count: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -114,6 +120,9 @@ def parse_generation_request(
     checkpoint = None if checkpoint_raw in {None, ""} else str(checkpoint_raw).strip()
     if checkpoint == "":
         checkpoint = None
+    blocked_token_texts = _blocked_token_texts(payload.get("blocked_token_texts"))
+    if len(blocked_token_texts) > safety.max_blocked_token_texts:
+        raise ValueError(f"blocked_token_texts must contain at most {safety.max_blocked_token_texts} entries")
     return GenerationRequest(
         prompt=prompt,
         max_new_tokens=max_new_tokens,
@@ -121,6 +130,7 @@ def parse_generation_request(
         top_k=top_k,
         seed=seed,
         checkpoint=checkpoint,
+        blocked_token_texts=blocked_token_texts,
     )
 
 
@@ -186,6 +196,7 @@ def stream_timeout_payload(
         checkpoint=checkpoint,
         tokenizer=tokenizer,
         checkpoint_id=checkpoint_id,
+        blocked_token_texts=request.blocked_token_texts,
     )
     return {
         "done": False,
@@ -251,6 +262,23 @@ def _empty_top_k(value: Any) -> bool:
     if isinstance(value, str):
         return value.strip() in {"", "0", "none", "None"}
     return value == 0
+
+
+def _blocked_token_texts(value: Any) -> tuple[str, ...]:
+    if value is None or value == "":
+        return ()
+    if isinstance(value, str):
+        candidates = [value]
+    elif isinstance(value, (list, tuple)):
+        candidates = list(value)
+    else:
+        raise ValueError("blocked_token_texts must be a string or list of strings")
+    blocked: list[str] = []
+    for candidate in candidates:
+        text = str(candidate)
+        if text and text not in blocked:
+            blocked.append(text)
+    return tuple(blocked)
 
 
 __all__ = [

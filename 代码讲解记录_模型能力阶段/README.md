@@ -170,6 +170,9 @@
 539-v525-model-capability-required-term-pair-loss-alias-newline-suppression-repeat.md
  -> v525 code explanation: repeat newline-suppressed decoding across v518 and v523 focus checkpoints.
 
+540-v526-generator-blocked-token-profile.md
+ -> v526 code explanation: promote newline suppression into the core generator as an optional blocked-token profile.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

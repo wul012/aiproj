@@ -76,6 +76,7 @@ class ServerContractsSplitTests(unittest.TestCase):
 
         self.assertEqual(request.seed, 9)
         self.assertIsNone(request.top_k)
+        self.assertEqual(request.blocked_token_texts, ())
         self.assertEqual(timeout["elapsed_seconds"], 1.234568)
         self.assertEqual(payload["right"]["checkpoint_id"], "candidate")
         self.assertEqual(payload["comparison"]["generated_char_delta"], 1)

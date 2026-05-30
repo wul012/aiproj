@@ -134,6 +134,7 @@ class MiniGPT(nn.Module):
         idx: torch.Tensor,
         temperature: float = 1.0,
         top_k: int | None = None,
+        blocked_token_ids: list[int] | None = None,
     ) -> torch.Tensor:
         if temperature <= 0:
             raise ValueError("temperature must be greater than 0")
@@ -141,6 +142,11 @@ class MiniGPT(nn.Module):
         idx_cond = idx[:, -self.config.block_size :]
         logits, _ = self(idx_cond)
         logits = logits[:, -1, :] / temperature
+        if blocked_token_ids:
+            blocked = sorted({int(token_id) for token_id in blocked_token_ids if 0 <= int(token_id) < logits.size(-1)})
+            if len(blocked) >= logits.size(-1):
+                raise ValueError("blocked_token_ids cannot block every token")
+            logits[:, blocked] = -float("inf")
 
         if top_k is not None:
             top_values, _ = torch.topk(logits, min(top_k, logits.size(-1)))
@@ -156,12 +162,13 @@ class MiniGPT(nn.Module):
         max_new_tokens: int,
         temperature: float = 1.0,
         top_k: int | None = None,
+        blocked_token_ids: list[int] | None = None,
     ) -> torch.Tensor:
         if temperature <= 0:
             raise ValueError("temperature must be greater than 0")
 
         for _ in range(max_new_tokens):
-            next_idx = self.sample_next(idx, temperature=temperature, top_k=top_k)
+            next_idx = self.sample_next(idx, temperature=temperature, top_k=top_k, blocked_token_ids=blocked_token_ids)
             idx = torch.cat((idx, next_idx), dim=1)
         return idx
 

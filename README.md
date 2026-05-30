@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v525.0.0` repeats newline-suppressed decoding across v518 and v523 focus checkpoints.
+Version `v526.0.0` promotes blocked-token decoding into the core generator as an optional request field.
+
+## Latest v526 checkpoint
+
+- Added optional `blocked_token_texts` to `GenerationRequest`, defaulting to empty so existing generation behavior is unchanged.
+- Extended `MiniGPT.sample_next()` / `MiniGPT.generate()` and `MiniGPTGenerator` to mask tokenizer entries whose text contains a requested blocked substring.
+- Refactored the newline-suppression probe to use core `GenerationRequest.blocked_token_texts` instead of its own local sampling loop.
+- Re-ran the real v523 loss-alias probe through the core generator path: baseline strict stayed `0/4`, blocked-newline strict recovered to `4/4`, and suppressed rows reported `excluded_token_count=1`.
+- Archived the v526 core blocked-token evidence in `e/526` and added the code explanation in `代码讲解记录_模型能力阶段/540-v526-generator-blocked-token-profile.md`.
 
 ## Latest v525 checkpoint
 

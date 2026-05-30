@@ -103,6 +103,8 @@ class ServerTests(unittest.TestCase):
         self.assertIsNone(request.top_k)
         self.assertEqual(request.seed, 5)
         self.assertIsNone(request.checkpoint)
+        blocked = parse_generation_request({"prompt": "x", "blocked_token_texts": ["\n", "\r", "\n"]})
+        self.assertEqual(blocked.blocked_token_texts, ("\n", "\r"))
 
     def test_parse_generation_pair_request(self) -> None:
         request = parse_generation_pair_request(
@@ -146,6 +148,11 @@ class ServerTests(unittest.TestCase):
             parse_generation_request({"prompt": "x", "max_new_tokens": 8, "temperature": 1.5}, safety)
         with self.assertRaisesRegex(ValueError, "top_k"):
             parse_generation_request({"prompt": "x", "max_new_tokens": 8, "top_k": 21}, safety)
+        with self.assertRaisesRegex(ValueError, "blocked_token_texts"):
+            parse_generation_request(
+                {"prompt": "x", "blocked_token_texts": ["a", "b"]},
+                InferenceSafetyProfile(max_blocked_token_texts=1),
+            )
 
     def test_health_payload_marks_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

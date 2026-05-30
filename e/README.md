@@ -229,6 +229,10 @@ e/524/解释/说明.md
 e/525/图片
 e/525/解释/说明.md
  -> v525 model capability required-term pair loss-alias newline suppression repeat 的运行截图和解释
+
+e/526/图片
+e/526/解释/说明.md
+ -> v526 generator blocked-token profile 的运行截图和解释
 ```
 
 写入规则：

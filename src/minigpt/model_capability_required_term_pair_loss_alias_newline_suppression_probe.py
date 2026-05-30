@@ -165,8 +165,6 @@ def _request(
 def _generate(request: dict[str, Any], generate_func: GenerateFunc | None) -> dict[str, Any]:
     if generate_func is not None:
         return generate_func(request)
-    if request.get("exclude_token_texts"):
-        return _generate_with_exclusions(request)
     from minigpt.server_contracts import GenerationRequest
     from minigpt.server_generator import MiniGPTGenerator
 
@@ -177,73 +175,13 @@ def _generate(request: dict[str, Any], generate_func: GenerateFunc | None) -> di
             temperature=float(request["temperature"]),
             top_k=request.get("top_k"),
             seed=int(request["seed"]),
+            blocked_token_texts=tuple(str(text) for text in list(request.get("exclude_token_texts") or [])),
         )
     )
     payload = response.to_dict()
-    payload["excluded_token_count"] = 0
-    payload["excluded_token_texts"] = []
+    payload["excluded_token_count"] = payload.get("blocked_token_count", 0)
+    payload["excluded_token_texts"] = payload.get("blocked_token_texts", [])
     return payload
-
-
-def _generate_with_exclusions(request: dict[str, Any]) -> dict[str, Any]:
-    import torch
-    from torch.nn import functional as F
-
-    from minigpt.model import GPTConfig, MiniGPT
-    from minigpt.tokenizer import load_tokenizer
-
-    device = torch.device(str(request.get("device") or "cpu"))
-    checkpoint_path = Path(str(request["checkpoint_path"]))
-    tokenizer_path = Path(str(request["tokenizer_path"]))
-    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
-    tokenizer = load_tokenizer(tokenizer_path)
-    model = MiniGPT(GPTConfig(**checkpoint["config"])).to(device)
-    model.load_state_dict(checkpoint["model"])
-    model.eval()
-    prompt = str(request["prompt"])
-    prompt_ids = tokenizer.encode(prompt)
-    if not prompt_ids:
-        raise ValueError("prompt produced no token ids")
-    if len(prompt_ids) > model.config.block_size:
-        prompt_ids = prompt_ids[-model.config.block_size :]
-    seed = int(request["seed"])
-    torch.manual_seed(seed)
-    if device.type == "cuda":
-        torch.cuda.manual_seed_all(seed)
-    excluded_ids = _excluded_token_ids(tokenizer, request.get("exclude_token_texts"))
-    idx = torch.tensor([prompt_ids], dtype=torch.long, device=device)
-    with torch.no_grad():
-        for _ in range(int(request["max_new_tokens"])):
-            idx_cond = idx[:, -model.config.block_size :]
-            logits, _ = model(idx_cond)
-            logits = logits[:, -1, :] / float(request["temperature"])
-            if excluded_ids:
-                logits[:, excluded_ids] = -float("inf")
-            top_k = request.get("top_k")
-            if top_k is not None:
-                top_values, _ = torch.topk(logits, min(int(top_k), logits.size(-1)))
-                logits[logits < top_values[:, [-1]]] = -float("inf")
-            probs = F.softmax(logits, dim=-1)
-            next_idx = torch.multinomial(probs, num_samples=1)
-            idx = torch.cat((idx, next_idx), dim=1)
-    generated = tokenizer.decode(idx[0].tolist())
-    return {
-        "prompt": prompt,
-        "generated": generated,
-        "continuation": generated[len(prompt) :] if generated.startswith(prompt) else generated,
-        "excluded_token_count": len(excluded_ids),
-        "excluded_token_texts": list(request.get("exclude_token_texts") or []),
-    }
-
-
-def _excluded_token_ids(tokenizer: Any, token_texts: Any) -> list[int]:
-    texts = [str(text) for text in list(token_texts or [])]
-    ids: list[int] = []
-    for index, token in enumerate(getattr(tokenizer, "itos", [])):
-        token_text = str(token)
-        if any(text and text in token_text for text in texts):
-            ids.append(index)
-    return ids
 
 
 def _continuation(prompt: str, response: dict[str, Any]) -> str:

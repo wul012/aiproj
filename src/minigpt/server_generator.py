@@ -30,6 +30,7 @@ class MiniGPTGenerator:
             if self._device(torch).type == "cuda":
                 torch.cuda.manual_seed_all(request.seed)
 
+        blocked_token_ids = _blocked_token_ids(tokenizer, request.blocked_token_texts)
         idx = torch.tensor([prompt_ids], dtype=torch.long, device=self._device(torch))
         with torch.no_grad():
             out = model.generate(
@@ -37,6 +38,7 @@ class MiniGPTGenerator:
                 max_new_tokens=request.max_new_tokens,
                 temperature=request.temperature,
                 top_k=request.top_k,
+                blocked_token_ids=blocked_token_ids,
             )
         generated = tokenizer.decode(out[0].tolist())
         continuation = generated[len(request.prompt) :] if generated.startswith(request.prompt) else generated
@@ -50,6 +52,8 @@ class MiniGPTGenerator:
             seed=request.seed,
             checkpoint=str(self.checkpoint_path),
             tokenizer=getattr(tokenizer, "name", "unknown"),
+            blocked_token_texts=request.blocked_token_texts,
+            blocked_token_count=len(blocked_token_ids),
         )
 
     def stream(self, request: GenerationRequest) -> Iterator[GenerationStreamChunk]:
@@ -64,9 +68,15 @@ class MiniGPTGenerator:
             if self._device(torch).type == "cuda":
                 torch.cuda.manual_seed_all(request.seed)
 
+        blocked_token_ids = _blocked_token_ids(tokenizer, request.blocked_token_texts)
         idx = torch.tensor([prompt_ids], dtype=torch.long, device=self._device(torch))
         for index in range(request.max_new_tokens):
-            next_idx = model.sample_next(idx, temperature=request.temperature, top_k=request.top_k)
+            next_idx = model.sample_next(
+                idx,
+                temperature=request.temperature,
+                top_k=request.top_k,
+                blocked_token_ids=blocked_token_ids,
+            )
             idx = torch.cat((idx, next_idx), dim=1)
             token_id = int(next_idx[0, 0].item())
             generated = tokenizer.decode(idx[0].tolist())
@@ -79,6 +89,8 @@ class MiniGPTGenerator:
                 continuation=continuation,
                 checkpoint=str(self.checkpoint_path),
                 tokenizer=getattr(tokenizer, "name", "unknown"),
+                blocked_token_texts=request.blocked_token_texts,
+                blocked_token_count=len(blocked_token_ids),
             )
 
     def _load(self) -> tuple[Any, Any, Any]:
@@ -106,3 +118,14 @@ class MiniGPTGenerator:
         if self.device_name == "cuda" and not torch.cuda.is_available():
             raise RuntimeError("CUDA was requested, but torch.cuda.is_available() is False")
         return torch.device(self.device_name)
+
+
+def _blocked_token_ids(tokenizer: Any, blocked_token_texts: tuple[str, ...]) -> list[int]:
+    if not blocked_token_texts:
+        return []
+    ids: list[int] = []
+    for index, token in enumerate(getattr(tokenizer, "itos", [])):
+        token_text = str(token)
+        if any(text and text in token_text for text in blocked_token_texts):
+            ids.append(index)
+    return ids
