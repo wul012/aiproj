@@ -53,6 +53,9 @@ class StubGenerator:
             seed=request.seed,
             checkpoint=self.checkpoint,
             tokenizer="stub",
+            generation_profile=request.generation_profile,
+            blocked_token_texts=request.blocked_token_texts,
+            blocked_token_count=len(request.blocked_token_texts),
         )
 
     def stream(self, request):
@@ -69,6 +72,9 @@ class StubGenerator:
                 continuation=continuation,
                 checkpoint=self.checkpoint,
                 tokenizer="stub",
+                generation_profile=request.generation_profile,
+                blocked_token_texts=request.blocked_token_texts,
+                blocked_token_count=len(request.blocked_token_texts),
             )
 
 
@@ -88,6 +94,9 @@ class SlowStreamGenerator(StubGenerator):
                 continuation=continuation,
                 checkpoint=self.checkpoint,
                 tokenizer="stub",
+                generation_profile=request.generation_profile,
+                blocked_token_texts=request.blocked_token_texts,
+                blocked_token_count=len(request.blocked_token_texts),
             )
 
 
@@ -105,6 +114,9 @@ class ServerTests(unittest.TestCase):
         self.assertIsNone(request.checkpoint)
         blocked = parse_generation_request({"prompt": "x", "blocked_token_texts": ["\n", "\r", "\n"]})
         self.assertEqual(blocked.blocked_token_texts, ("\n", "\r"))
+        profile = parse_generation_request({"prompt": "x", "generation_profile": "suppress_newline_tokens"})
+        self.assertEqual(profile.generation_profile, "suppress_newline_tokens")
+        self.assertEqual(profile.blocked_token_texts, ("\n", "\r"))
 
     def test_parse_generation_pair_request(self) -> None:
         request = parse_generation_pair_request(
@@ -153,6 +165,8 @@ class ServerTests(unittest.TestCase):
                 {"prompt": "x", "blocked_token_texts": ["a", "b"]},
                 InferenceSafetyProfile(max_blocked_token_texts=1),
             )
+        with self.assertRaisesRegex(ValueError, "unknown generation_profile"):
+            parse_generation_request({"prompt": "x", "generation_profile": "bad-profile"})
 
     def test_health_payload_marks_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

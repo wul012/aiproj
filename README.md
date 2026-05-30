@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v528.0.0` expands the fresh loss-alias comparison into a three-seed sweep.
+Version `v529.0.0` exposes the newline-suppression decoding behavior as an explicit generation profile.
+
+## Latest v529 checkpoint
+
+- Added `generation_profiles.py` with a `default` profile and `suppress_newline_tokens` profile.
+- Extended `GenerationRequest`, `GenerationResponse`, streaming chunks, request logs, CLI generation, and playground controls to carry `generation_profile`.
+- Updated `scripts/generate.py` to use the same `MiniGPTGenerator` path as the server and to accept `--generation-profile`, `--blocked-token-text`, and `--seed`.
+- Ran a real v528 seed `528` checkpoint check: default `omega:` output split `loss` across a newline, while `--generation-profile suppress_newline_tokens` produced `omega: losssssssss`.
+- Archived the v529 generation profile evidence in `e/529` and added the code explanation in `代码讲解记录_模型能力阶段/543-v529-generation-profile-surface.md`.
 
 ## Latest v528 checkpoint
 

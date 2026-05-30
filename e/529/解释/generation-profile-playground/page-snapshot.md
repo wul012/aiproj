@@ -1,0 +1,231 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MiniGPT playground" [level=1] [ref=e3]
+    - paragraph [ref=e4]: D:\aiproj\e\528\解释\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\fresh-compare-run\fresh-focus-run\seed-runs\seed-528\loss-alias-focus-run
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: Artifacts
+      - generic [ref=e8]: "9"
+    - generic [ref=e9]:
+      - generic [ref=e10]: Links
+      - generic [ref=e11]: "9"
+    - generic [ref=e12]:
+      - generic [ref=e13]: Metrics
+      - generic [ref=e14]: "5"
+    - generic [ref=e15]:
+      - generic [ref=e16]: Tokenizer
+      - generic [ref=e17]: char
+    - generic [ref=e18]:
+      - generic [ref=e19]: Best val
+      - generic [ref=e20]: "1.28814"
+    - generic [ref=e21]:
+      - generic [ref=e22]: Sampling
+      - generic [ref=e23]: "0"
+  - heading "Playground" [level=2] [ref=e24]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - text: Prompt
+      - textbox "Prompt" [ref=e27]: "omega:"
+      - generic [ref=e28]
+    - generic [ref=e39]:
+      - generic [ref=e40]
+      - generic [ref=e43]
+      - generic [ref=e46]
+  - heading "Live Generate" [level=2] [ref=e49]
+  - generic [ref=e51]:
+    - generic [ref=e52]:
+      - text: Checkpoint
+      - combobox "Checkpoint" [ref=e53]
+    - button "Stream Generate" [ref=e54] [cursor=pointer]
+    - button "Stop" [disabled] [ref=e55] [cursor=pointer]
+    - status [ref=e56]: 1 checkpoint option(s)
+  - heading "Request History" [level=2] [ref=e58]
+  - generic [ref=e59]:
+    - generic [ref=e60]:
+      - generic [ref=e61]
+      - generic [ref=e63]
+      - generic [ref=e65]
+      - generic [ref=e67]
+      - button "Refresh" [ref=e69] [cursor=pointer]
+      - link "Export CSV" [ref=e70] [cursor=pointer]:
+        - /url: /api/request-history?limit=12&format=csv
+      - status [ref=e71]: No inference requests recorded yet.
+    - table [ref=e72]:
+      - rowgroup [ref=e73]
+      - rowgroup
+    - status [ref=e86]: Select a request row to inspect normalized and raw JSON.
+  - heading "Checkpoint Compare" [level=2] [ref=e88]
+  - generic [ref=e89]:
+    - generic [ref=e90]:
+      - button "Refresh" [ref=e91] [cursor=pointer]
+      - status [ref=e92]: 1 ready / 1 checkpoint option(s)
+    - table [ref=e93]:
+      - rowgroup [ref=e94]
+      - rowgroup [ref=e104]
+  - heading "Side-by-Side Generate" [level=2] [ref=e117]
+  - generic [ref=e118]:
+    - generic [ref=e119]:
+      - generic [ref=e120]
+      - generic [ref=e122]
+      - button "Generate Pair" [ref=e124] [cursor=pointer]
+      - button "Generate & Save Pair" [ref=e125] [cursor=pointer]
+      - status [ref=e126]: Pair generation uses /api/generate-pair.
+      - status
+    - generic [ref=e127]:
+      - article [ref=e128]
+      - article [ref=e131]
+  - heading "Run Files" [level=2] [ref=e134]
+  - generic [ref=e135]:
+    - article [ref=e136]:
+      - generic [ref=e137]: HTML
+      - heading "Playground UI" [level=3] [ref=e138]
+      - paragraph [ref=e140]: missing
+    - article [ref=e141]:
+      - generic [ref=e142]: HTML
+      - heading "Dashboard" [level=3] [ref=e143]
+      - paragraph [ref=e145]: missing
+    - article [ref=e146]:
+      - generic [ref=e147]: PT
+      - heading "Checkpoint" [level=3] [ref=e148]
+      - paragraph [ref=e150]: 662,291
+    - article [ref=e151]:
+      - generic [ref=e152]: JSON
+      - heading "Train config" [level=3] [ref=e153]
+      - paragraph [ref=e155]: 1,182
+    - article [ref=e156]:
+      - generic [ref=e157]: JSONL
+      - heading "Metrics" [level=3] [ref=e158]
+      - paragraph [ref=e160]: "561"
+    - article [ref=e161]:
+      - generic [ref=e162]: JSON
+      - heading "History summary" [level=3] [ref=e163]
+      - paragraph [ref=e165]: "210"
+    - article [ref=e166]:
+      - generic [ref=e167]: SVG
+      - heading "Loss curve" [level=3] [ref=e168]
+      - paragraph [ref=e170]: 1,403
+    - article [ref=e171]:
+      - generic [ref=e172]: JSON
+      - heading "Run manifest" [level=3] [ref=e173]
+      - paragraph [ref=e175]: 11,301
+    - article [ref=e176]:
+      - generic [ref=e177]: SVG
+      - heading "Manifest chart" [level=3] [ref=e178]
+      - paragraph [ref=e180]: 3,263
+    - article [ref=e181]:
+      - generic [ref=e182]: TXT
+      - heading "Prepared corpus" [level=3] [ref=e183]
+      - paragraph [ref=e185]: missing
+    - article [ref=e186]:
+      - generic [ref=e187]: JSON
+      - heading "Dataset report" [level=3] [ref=e188]
+      - paragraph [ref=e190]: missing
+    - article [ref=e191]:
+      - generic [ref=e192]: SVG
+      - heading "Dataset chart" [level=3] [ref=e193]
+      - paragraph [ref=e195]: missing
+    - article [ref=e196]:
+      - generic [ref=e197]: JSON
+      - heading "Dataset quality" [level=3] [ref=e198]
+      - paragraph [ref=e200]: missing
+    - article [ref=e201]:
+      - generic [ref=e202]: SVG
+      - heading "Dataset quality chart" [level=3] [ref=e203]
+      - paragraph [ref=e205]: missing
+    - article [ref=e206]:
+      - generic [ref=e207]: JSON
+      - heading "Dataset version" [level=3] [ref=e208]
+      - paragraph [ref=e210]: missing
+    - article [ref=e211]:
+      - generic [ref=e212]: HTML
+      - heading "Dataset version report" [level=3] [ref=e213]
+      - paragraph [ref=e215]: missing
+    - article [ref=e216]:
+      - generic [ref=e217]: TXT
+      - heading "Sample text" [level=3] [ref=e218]
+      - paragraph [ref=e220]: "78"
+    - article [ref=e221]:
+      - generic [ref=e222]: JSON
+      - heading "Eval suite" [level=3] [ref=e223]
+      - paragraph [ref=e225]: missing
+    - article [ref=e226]:
+      - generic [ref=e227]: CSV
+      - heading "Eval suite CSV" [level=3] [ref=e228]
+      - paragraph [ref=e230]: missing
+    - article [ref=e231]:
+      - generic [ref=e232]: SVG
+      - heading "Eval suite chart" [level=3] [ref=e233]
+      - paragraph [ref=e235]: missing
+    - article [ref=e236]:
+      - generic [ref=e237]: HTML
+      - heading "Eval suite report" [level=3] [ref=e238]
+      - paragraph [ref=e240]: missing
+    - article [ref=e241]:
+      - generic [ref=e242]: JSON
+      - heading "Pair batch JSON" [level=3] [ref=e243]
+      - paragraph [ref=e245]: missing
+    - article [ref=e246]:
+      - generic [ref=e247]: CSV
+      - heading "Pair batch CSV" [level=3] [ref=e248]
+      - paragraph [ref=e250]: missing
+    - article [ref=e251]:
+      - generic [ref=e252]: MD
+      - heading "Pair batch Markdown" [level=3] [ref=e253]
+      - paragraph [ref=e255]: missing
+    - article [ref=e256]:
+      - generic [ref=e257]: HTML
+      - heading "Pair batch HTML" [level=3] [ref=e258]
+      - paragraph [ref=e260]: missing
+    - article [ref=e261]:
+      - generic [ref=e262]: JSON
+      - heading "Pair trend JSON" [level=3] [ref=e263]
+      - paragraph [ref=e265]: missing
+    - article [ref=e266]:
+      - generic [ref=e267]: CSV
+      - heading "Pair trend CSV" [level=3] [ref=e268]
+      - paragraph [ref=e270]: missing
+    - article [ref=e271]:
+      - generic [ref=e272]: MD
+      - heading "Pair trend Markdown" [level=3] [ref=e273]
+      - paragraph [ref=e275]: missing
+    - article [ref=e276]:
+      - generic [ref=e277]: HTML
+      - heading "Pair trend HTML" [level=3] [ref=e278]
+      - paragraph [ref=e280]: missing
+    - article [ref=e281]:
+      - generic [ref=e282]: JSON
+      - heading "Sampling JSON" [level=3] [ref=e283]
+      - paragraph [ref=e285]: missing
+    - article [ref=e286]:
+      - generic [ref=e287]: CSV
+      - heading "Sampling CSV" [level=3] [ref=e288]
+      - paragraph [ref=e290]: missing
+    - article [ref=e291]:
+      - generic [ref=e292]: SVG
+      - heading "Sampling SVG" [level=3] [ref=e293]
+      - paragraph [ref=e295]: missing
+    - article [ref=e296]:
+      - generic [ref=e297]: JSON
+      - heading "Model report" [level=3] [ref=e298]
+      - paragraph [ref=e300]: missing
+    - article [ref=e301]:
+      - generic [ref=e302]: JSON
+      - heading "Prediction report" [level=3] [ref=e303]
+      - paragraph [ref=e305]: missing
+    - article [ref=e306]:
+      - generic [ref=e307]: JSON
+      - heading "Attention report" [level=3] [ref=e308]
+      - paragraph [ref=e310]: missing
+    - article [ref=e311]:
+      - generic [ref=e312]: JSON
+      - heading "Experiment card JSON" [level=3] [ref=e313]
+      - paragraph [ref=e315]: missing
+    - article [ref=e316]:
+      - generic [ref=e317]: MD
+      - heading "Experiment card Markdown" [level=3] [ref=e318]
+      - paragraph [ref=e320]: missing
+    - article [ref=e321]:
+      - generic [ref=e322]: HTML
+      - heading "Experiment card HTML" [level=3] [ref=e323]
+      - paragraph [ref=e325]: missing
+  - contentinfo [ref=e326]: Generated by MiniGPT playground exporter.

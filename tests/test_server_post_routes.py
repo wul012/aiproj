@@ -28,6 +28,9 @@ class StubGenerator:
             seed=request.seed,
             checkpoint="checkpoint.pt",
             tokenizer="stub",
+            generation_profile=request.generation_profile,
+            blocked_token_texts=request.blocked_token_texts,
+            blocked_token_count=len(request.blocked_token_texts),
         )
 
 
@@ -77,6 +80,27 @@ class ServerPostRoutesSplitTests(unittest.TestCase):
         self.assertEqual(payload["generated"], "hi::ok")
         self.assertEqual(payload["checkpoint_id"], "default")
         self.assertEqual(handler.generation_logs[-1]["status"], "ok")
+
+    def test_generate_route_accepts_named_generation_profile(self) -> None:
+        option = CheckpointOption("default", "default", "checkpoint.pt", True, True, None, False, "default")
+        handler = FakeHandler({"prompt": "hi", "generation_profile": "suppress_newline_tokens"})
+
+        server_post_routes.handle_post_request(
+            handler,
+            "/api/generate",
+            root=Path("."),
+            checkpoint="checkpoint.pt",
+            safety=InferenceSafetyProfile(),
+            checkpoint_options=[option],
+            generator_for=lambda _option: StubGenerator(),
+        )
+
+        self.assertIsNotNone(handler.sent)
+        payload, status = handler.sent
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertEqual(payload["generation_profile"], "suppress_newline_tokens")
+        self.assertEqual(tuple(payload["blocked_token_texts"]), ("\n", "\r"))
+        self.assertEqual(payload["blocked_token_count"], 2)
 
     def test_pair_artifact_route_writes_artifact_through_helper(self) -> None:
         default = CheckpointOption("default", "default", "checkpoint.pt", True, True, None, False, "default")

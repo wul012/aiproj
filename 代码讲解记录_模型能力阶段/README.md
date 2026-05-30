@@ -179,6 +179,9 @@
 542-v528-model-capability-required-term-pair-loss-alias-fresh-seed-sweep.md
  -> v528 code explanation: run a three-seed fresh sweep and compare baseline strict coverage against blocked-token coverage.
 
+543-v529-generation-profile-surface.md
+ -> v529 code explanation: expose newline-suppression decoding as a named CLI/API/playground generation profile.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -4,6 +4,13 @@ from dataclasses import asdict, dataclass
 import json
 from typing import Any
 
+from minigpt.generation_profiles import (
+    DEFAULT_GENERATION_PROFILE_ID,
+    generation_profile_options,
+    merge_blocked_token_texts,
+    normalize_generation_profile,
+    resolve_generation_profile,
+)
 from minigpt.server_checkpoints import (
     CheckpointOption,
     build_checkpoint_compare_payload,
@@ -39,6 +46,7 @@ class GenerationRequest:
     top_k: int | None
     seed: int | None
     checkpoint: str | None = None
+    generation_profile: str = DEFAULT_GENERATION_PROFILE_ID
     blocked_token_texts: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
@@ -69,6 +77,7 @@ class GenerationResponse:
     checkpoint: str
     tokenizer: str
     checkpoint_id: str | None = None
+    generation_profile: str = DEFAULT_GENERATION_PROFILE_ID
     blocked_token_texts: tuple[str, ...] = ()
     blocked_token_count: int = 0
 
@@ -85,6 +94,7 @@ class GenerationStreamChunk:
     continuation: str
     checkpoint: str
     tokenizer: str
+    generation_profile: str = DEFAULT_GENERATION_PROFILE_ID
     blocked_token_texts: tuple[str, ...] = ()
     blocked_token_count: int = 0
 
@@ -120,7 +130,9 @@ def parse_generation_request(
     checkpoint = None if checkpoint_raw in {None, ""} else str(checkpoint_raw).strip()
     if checkpoint == "":
         checkpoint = None
-    blocked_token_texts = _blocked_token_texts(payload.get("blocked_token_texts"))
+    generation_profile = normalize_generation_profile(payload.get("generation_profile"))
+    resolve_generation_profile(generation_profile)
+    blocked_token_texts = merge_blocked_token_texts(generation_profile, _blocked_token_texts(payload.get("blocked_token_texts")))
     if len(blocked_token_texts) > safety.max_blocked_token_texts:
         raise ValueError(f"blocked_token_texts must contain at most {safety.max_blocked_token_texts} entries")
     return GenerationRequest(
@@ -130,6 +142,7 @@ def parse_generation_request(
         top_k=top_k,
         seed=seed,
         checkpoint=checkpoint,
+        generation_profile=generation_profile,
         blocked_token_texts=blocked_token_texts,
     )
 
@@ -184,6 +197,7 @@ def stream_timeout_payload(
     checkpoint: str,
     tokenizer: str,
     checkpoint_id: str | None = None,
+    blocked_token_count: int = 0,
 ) -> dict[str, Any]:
     response = GenerationResponse(
         prompt=request.prompt,
@@ -196,7 +210,9 @@ def stream_timeout_payload(
         checkpoint=checkpoint,
         tokenizer=tokenizer,
         checkpoint_id=checkpoint_id,
+        generation_profile=request.generation_profile,
         blocked_token_texts=request.blocked_token_texts,
+        blocked_token_count=blocked_token_count,
     )
     return {
         "done": False,
@@ -226,6 +242,7 @@ def pair_generation_payload(
         "temperature": pair_request.left.temperature,
         "top_k": pair_request.left.top_k,
         "seed": pair_request.left.seed,
+        "generation_profile": pair_request.left.generation_profile,
         "left": left_payload,
         "right": right_payload,
         "comparison": {
@@ -290,6 +307,7 @@ __all__ = [
     "InferenceSafetyProfile",
     "build_checkpoint_compare_payload",
     "build_checkpoints_payload",
+    "generation_profile_options",
     "build_health_payload",
     "build_model_info_payload",
     "discover_checkpoint_options",

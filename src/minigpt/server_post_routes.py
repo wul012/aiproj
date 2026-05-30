@@ -123,6 +123,7 @@ def handle_generate_stream_request(
     continuation = ""
     tokenizer = "unknown"
     checkpoint_path = str(checkpoint)
+    blocked_token_count = 0
     try:
         payload = handler._read_json_body()
         request = parse_generation_request(payload, safety)
@@ -139,6 +140,8 @@ def handle_generate_stream_request(
                 "temperature": request.temperature,
                 "top_k": request.top_k,
                 "seed": request.seed,
+                "generation_profile": request.generation_profile,
+                "blocked_token_texts": request.blocked_token_texts,
                 "checkpoint_id": option.id,
                 "checkpoint": option.path,
                 "max_stream_seconds": safety.max_stream_seconds,
@@ -155,6 +158,7 @@ def handle_generate_stream_request(
             continuation = chunk.continuation
             tokenizer = chunk.tokenizer
             checkpoint_path = chunk.checkpoint
+            blocked_token_count = chunk.blocked_token_count
             handler._write_sse("token", chunk_payload)
             elapsed_seconds = monotonic() - started_at
             if elapsed_seconds >= safety.max_stream_seconds:
@@ -171,6 +175,7 @@ def handle_generate_stream_request(
                         checkpoint=checkpoint_path,
                         tokenizer=tokenizer,
                         checkpoint_id=option.id,
+                        blocked_token_count=blocked_token_count,
                     ),
                 )
                 break
@@ -185,6 +190,9 @@ def handle_generate_stream_request(
             checkpoint=checkpoint_path,
             tokenizer=tokenizer,
             checkpoint_id=option.id,
+            generation_profile=request.generation_profile,
+            blocked_token_texts=request.blocked_token_texts,
+            blocked_token_count=blocked_token_count,
         )
         if not timed_out:
             elapsed_seconds = monotonic() - started_at
@@ -224,6 +232,9 @@ def handle_generate_stream_request(
                 checkpoint=checkpoint_path,
                 tokenizer=tokenizer,
                 checkpoint_id=option.id if option is not None else None,
+                generation_profile=request.generation_profile,
+                blocked_token_texts=request.blocked_token_texts,
+                blocked_token_count=blocked_token_count,
             )
         handler._log_generation(
             "cancelled",

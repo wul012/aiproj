@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .dashboard import build_dashboard_payload
+from .generation_profiles import DEFAULT_GENERATION_PROFILE_ID, generation_profile_options
 from .playground_assets import playground_script, playground_style
 
 
@@ -70,7 +71,9 @@ def build_playground_payload(
             "temperature": 0.8,
             "top_k": 30,
             "seed": 42,
+            "generation_profile": DEFAULT_GENERATION_PROFILE_ID,
         },
+        "generation_profiles": generation_profile_options(),
     }
 
 
@@ -123,6 +126,7 @@ def render_playground_html(payload: dict[str, Any]) -> str:
     page_data = {
         "runDir": payload["run_dir"],
         "defaults": defaults,
+        "generationProfiles": payload.get("generation_profiles", []),
         "commands": payload["commands"],
         "checkpoints": [],
         "checkpointComparison": [],
@@ -282,6 +286,7 @@ def _command_builder(defaults: dict[str, Any]) -> str:
       <label><span class="label">Temperature</span><input id="temperatureInput" type="number" min="0.1" max="2" step="0.1" value="{_e(defaults["temperature"])}"></label>
       <label><span class="label">Top-k</span><input id="topKInput" type="number" min="0" max="200" value="{_e(defaults["top_k"])}"></label>
       <label><span class="label">Seed</span><input id="seedInput" type="number" value="{_e(defaults["seed"])}"></label>
+      <label><span class="label">Profile</span><select id="generationProfileSelect">{_generation_profile_options(defaults.get("generation_profile"))}</select></label>
     </div>
   </div>
   <div class="commands">
@@ -303,6 +308,17 @@ def _live_section() -> str:
   </div>
   <pre id="liveOutput" class="output"></pre>
 </section>"""
+
+
+def _generation_profile_options(selected: Any) -> str:
+    selected_id = str(selected or DEFAULT_GENERATION_PROFILE_ID)
+    options = []
+    for profile in generation_profile_options():
+        value = str(profile.get("id"))
+        label = str(profile.get("label") or value)
+        selected_attr = " selected" if value == selected_id else ""
+        options.append(f'<option value="{_e(value)}"{selected_attr}>{_e(label)}</option>')
+    return "".join(options)
 
 
 def _request_history_section() -> str:

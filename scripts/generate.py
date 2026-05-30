@@ -4,13 +4,12 @@ import argparse
 import sys
 from pathlib import Path
 
-import torch
-
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.model import GPTConfig, MiniGPT
-from minigpt.tokenizer import load_tokenizer
+from minigpt.generation_profiles import generation_profile_ids
+from minigpt.server_contracts import GenerationRequest, parse_generation_request
+from minigpt.server_generator import MiniGPTGenerator
 
 
 def parse_args() -> argparse.Namespace:
@@ -21,46 +20,39 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-new-tokens", type=int, default=120)
     parser.add_argument("--temperature", type=float, default=0.8)
     parser.add_argument("--top-k", type=int, default=30)
+    parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
+    parser.add_argument("--generation-profile", choices=generation_profile_ids(), default="default")
+    parser.add_argument("--blocked-token-text", action="append", default=[], help="Additional token text substring to block during decoding.")
     parser.add_argument("--out", type=Path, default=None, help="Optional file path for generated text")
     return parser.parse_args()
 
 
-def choose_device(name: str) -> torch.device:
-    if name == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    if name == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("CUDA was requested, but torch.cuda.is_available() is False")
-    return torch.device(name)
-
-
 def main() -> None:
     args = parse_args()
-    device = choose_device(args.device)
     tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
-
-    checkpoint = torch.load(args.checkpoint, map_location=device, weights_only=False)
-    tokenizer = load_tokenizer(tokenizer_path)
-    config = GPTConfig(**checkpoint["config"])
-    model = MiniGPT(config).to(device)
-    model.load_state_dict(checkpoint["model"])
-    model.eval()
-
-    prompt_ids = tokenizer.encode(args.prompt)
-    idx = torch.tensor([prompt_ids], dtype=torch.long, device=device)
-    out = model.generate(
-        idx,
-        max_new_tokens=args.max_new_tokens,
-        temperature=args.temperature,
-        top_k=args.top_k,
+    request = parse_generation_request(
+        {
+            "prompt": args.prompt,
+            "max_new_tokens": args.max_new_tokens,
+            "temperature": args.temperature,
+            "top_k": args.top_k,
+            "seed": args.seed,
+            "generation_profile": args.generation_profile,
+            "blocked_token_texts": args.blocked_token_text,
+        }
     )
-    generated = tokenizer.decode(out[0].tolist())
+    generated = _generate(args.checkpoint, tokenizer_path, args.device, request)
     if args.out is not None:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(generated, encoding="utf-8")
         print(f"saved={args.out}")
     else:
         print(generated)
+
+
+def _generate(checkpoint: Path, tokenizer: Path, device: str, request: GenerationRequest) -> str:
+    return MiniGPTGenerator(checkpoint, tokenizer, device=device).generate(request).generated
 
 
 if __name__ == "__main__":

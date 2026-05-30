@@ -241,6 +241,10 @@ e/527/解释/说明.md
 e/528/图片
 e/528/解释/说明.md
  -> v528 model capability required-term pair loss-alias fresh seed sweep 的运行截图和解释
+
+e/529/图片
+e/529/解释/说明.md
+ -> v529 generation profile playground/API/CLI surface 的运行截图和解释
 ```
 
 写入规则：

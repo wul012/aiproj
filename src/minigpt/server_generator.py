@@ -52,6 +52,7 @@ class MiniGPTGenerator:
             seed=request.seed,
             checkpoint=str(self.checkpoint_path),
             tokenizer=getattr(tokenizer, "name", "unknown"),
+            generation_profile=request.generation_profile,
             blocked_token_texts=request.blocked_token_texts,
             blocked_token_count=len(blocked_token_ids),
         )
@@ -89,6 +90,7 @@ class MiniGPTGenerator:
                 continuation=continuation,
                 checkpoint=str(self.checkpoint_path),
                 tokenizer=getattr(tokenizer, "name", "unknown"),
+                generation_profile=request.generation_profile,
                 blocked_token_texts=request.blocked_token_texts,
                 blocked_token_count=len(blocked_token_ids),
             )

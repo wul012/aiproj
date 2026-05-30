@@ -1,0 +1,18 @@
+﻿{
+    "prompt":  "omega:",
+    "generated":  "omega: losssssssss",
+    "continuation":  " losssssssss",
+    "max_new_tokens":  12,
+    "temperature":  0.2,
+    "top_k":  1,
+    "seed":  528,
+    "checkpoint":  "D:\\aiproj\\e\\528\\解释\\model-capability-required-term-pair-loss-alias-fresh-seed-sweep\\fresh-compare-run\\fresh-focus-run\\seed-runs\\seed-528\\loss-alias-focus-run\\checkpoint.pt",
+    "tokenizer":  "char",
+    "checkpoint_id":  "default",
+    "generation_profile":  "suppress_newline_tokens",
+    "blocked_token_texts":  [
+                                "\n",
+                                "\r"
+                            ],
+    "blocked_token_count":  1
+}

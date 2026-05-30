@@ -28,6 +28,7 @@ from minigpt.server_contracts import (
     build_health_payload,
     build_model_info_payload,
     discover_checkpoint_options,
+    generation_profile_options,
     pair_generation_payload,
     parse_generation_pair_request,
     parse_generation_request,

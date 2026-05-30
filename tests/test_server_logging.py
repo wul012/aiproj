@@ -19,8 +19,31 @@ from minigpt.server_contracts import (
 
 class ServerLoggingSplitTests(unittest.TestCase):
     def test_generation_log_event_records_request_response_and_stream_fields(self) -> None:
-        request = GenerationRequest("hello", 5, 0.7, None, 42, "candidate")
-        response = GenerationResponse("hello", "hello world", " world", 5, 0.7, None, 42, "candidate.pt", "char", "candidate")
+        request = GenerationRequest(
+            "hello",
+            5,
+            0.7,
+            None,
+            42,
+            "candidate",
+            generation_profile="suppress_newline_tokens",
+            blocked_token_texts=("\n", "\r"),
+        )
+        response = GenerationResponse(
+            "hello",
+            "hello world",
+            " world",
+            5,
+            0.7,
+            None,
+            42,
+            "candidate.pt",
+            "char",
+            "candidate",
+            generation_profile="suppress_newline_tokens",
+            blocked_token_texts=("\n", "\r"),
+            blocked_token_count=1,
+        )
         option = CheckpointOption("candidate", "Candidate", "candidate.pt", True, False, "tokenizer.json", True, "candidate")
 
         event = server_logging.build_generation_log_event(
@@ -42,6 +65,9 @@ class ServerLoggingSplitTests(unittest.TestCase):
         self.assertEqual(event["requested_checkpoint"], "candidate")
         self.assertEqual(event["generated_chars"], len("hello world"))
         self.assertEqual(event["continuation_chars"], len(" world"))
+        self.assertEqual(event["generation_profile"], "suppress_newline_tokens")
+        self.assertEqual(event["blocked_token_texts"], ["\n", "\r"])
+        self.assertEqual(event["blocked_token_count"], 1)
         self.assertEqual(event["stream_chunks"], 3)
         self.assertEqual(event["stream_elapsed_seconds"], 0.123457)
 
@@ -58,8 +84,8 @@ class ServerLoggingSplitTests(unittest.TestCase):
         self.assertEqual(event["error"], "prompt cannot be empty")
 
     def test_pair_generation_log_event_records_comparison_and_artifact_paths(self) -> None:
-        left_request = GenerationRequest("hello", 4, 0.8, 30, 9, "left")
-        right_request = GenerationRequest("hello", 4, 0.8, 30, 9, "right")
+        left_request = GenerationRequest("hello", 4, 0.8, 30, 9, "left", generation_profile="suppress_newline_tokens", blocked_token_texts=("\n", "\r"))
+        right_request = GenerationRequest("hello", 4, 0.8, 30, 9, "right", generation_profile="suppress_newline_tokens", blocked_token_texts=("\n", "\r"))
         pair_request = GenerationPairRequest(left_request, right_request)
         left_option = CheckpointOption("left", "Left", "left.pt", True, False, None, False, "candidate")
         right_option = CheckpointOption("right", "Right", "right.pt", True, False, None, False, "candidate")
@@ -81,6 +107,8 @@ class ServerLoggingSplitTests(unittest.TestCase):
         self.assertEqual(event["endpoint"], "/api/generate-pair-artifact")
         self.assertEqual(event["left_checkpoint_id"], "left")
         self.assertEqual(event["right_checkpoint_id"], "right")
+        self.assertEqual(event["generation_profile"], "suppress_newline_tokens")
+        self.assertEqual(event["blocked_token_texts"], ["\n", "\r"])
         self.assertFalse(event["generated_equal"])
         self.assertFalse(event["continuation_equal"])
         self.assertEqual(event["artifact_json"], "pairs/item.json")

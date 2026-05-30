@@ -23,6 +23,15 @@ function selectedCheckpointOption(selectId = 'checkpointSelect') {{
   if (!select || !select.value) return null;
   return checkpointOptionById(select.value);
 }}
+function selectedGenerationProfile() {{
+  const select = document.getElementById('generationProfileSelect');
+  const profileId = select && select.value ? select.value : (MiniGPTPlayground.defaults.generation_profile || 'default');
+  return (MiniGPTPlayground.generationProfiles || []).find((item) => item.id === profileId) || {{id: 'default', blocked_token_texts: []}};
+}}
+function generationProfileCommandArg(profile) {{
+  if (!profile || !profile.id || profile.id === 'default') return '';
+  return ` --generation-profile ${{quoteArg(profile.id)}}`;
+}}
 function formatValue(value) {{
   if (value === null || value === undefined || value === '') return 'missing';
   if (typeof value === 'boolean') return value ? 'yes' : 'no';
@@ -78,9 +87,11 @@ function buildCommands() {{
   const temperature = document.getElementById('temperatureInput').value || MiniGPTPlayground.defaults.temperature;
   const topK = document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k;
   const seed = document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed;
+  const profile = selectedGenerationProfile();
   const option = selectedCheckpointOption();
   const checkpoint = option ? option.path : MiniGPTPlayground.runDir + '/checkpoint.pt';
-  const generate = `python scripts/generate.py --checkpoint ${{quoteArg(checkpoint)}} --prompt ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --temperature ${{temperature}} --top-k ${{topK}}`;
+  const profileArg = generationProfileCommandArg(profile);
+  const generate = `python scripts/generate.py --checkpoint ${{quoteArg(checkpoint)}} --prompt ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --temperature ${{temperature}} --top-k ${{topK}} --seed ${{seed}}${{profileArg}}`;
   const chat = `python scripts/chat.py --checkpoint ${{quoteArg(checkpoint)}} --message ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --temperature ${{temperature}} --top-k ${{topK}}`;
   const sample = `python scripts/sample_lab.py --checkpoint ${{quoteArg(checkpoint)}} --prompt ${{quoteArg(prompt)}} --max-new-tokens ${{maxTokens}} --case conservative:0.6:10:${{seed}} --case balanced:${{temperature}}:${{topK}}:${{Number(seed) + 1}} --case creative:1.1:0:${{Number(seed) + 2}}`;
   document.getElementById('generateCommand').textContent = generate;
@@ -187,12 +198,14 @@ async function generateLive() {{
   const generateButton = document.getElementById('liveGenerateButton');
   const stopButton = document.getElementById('liveStopButton');
   const checkpoint = selectedCheckpointOption();
+  const profile = selectedGenerationProfile();
   const payload = {{
     prompt: document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt,
     max_new_tokens: Number(document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens),
     temperature: Number(document.getElementById('temperatureInput').value || MiniGPTPlayground.defaults.temperature),
     top_k: Number(document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k),
     seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
+    generation_profile: profile.id || 'default',
   }};
   if (checkpoint) payload.checkpoint = checkpoint.id;
   if (MiniGPTPlayground.streamController) {{
@@ -313,12 +326,14 @@ async function generatePairLive(saveArtifact = false) {{
   const artifactStatus = document.getElementById('pairArtifactStatus');
   const left = selectedCheckpointOption('pairLeftCheckpointSelect');
   const right = selectedCheckpointOption('pairRightCheckpointSelect');
+  const profile = selectedGenerationProfile();
   const payload = {{
     prompt: document.getElementById('promptInput').value || MiniGPTPlayground.defaults.prompt,
     max_new_tokens: Number(document.getElementById('maxTokensInput').value || MiniGPTPlayground.defaults.max_new_tokens),
     temperature: Number(document.getElementById('temperatureInput').value || MiniGPTPlayground.defaults.temperature),
     top_k: Number(document.getElementById('topKInput').value || MiniGPTPlayground.defaults.top_k),
     seed: Number(document.getElementById('seedInput').value || MiniGPTPlayground.defaults.seed),
+    generation_profile: profile.id || 'default',
     left_checkpoint: left ? left.id : undefined,
     right_checkpoint: right ? right.id : undefined,
   }};
@@ -357,7 +372,7 @@ function copyCommand(id) {{
   navigator.clipboard.writeText(document.getElementById(id).textContent);
 }}
 window.addEventListener('DOMContentLoaded', () => {{
-  for (const id of ['promptInput', 'maxTokensInput', 'temperatureInput', 'topKInput', 'seedInput']) {{
+  for (const id of ['promptInput', 'maxTokensInput', 'temperatureInput', 'topKInput', 'seedInput', 'generationProfileSelect']) {{
     document.getElementById(id).addEventListener('input', buildCommands);
   }}
   document.getElementById('checkpointSelect').addEventListener('change', () => {{

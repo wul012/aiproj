@@ -41,12 +41,15 @@ def build_generation_log_event(
                 "temperature": request.temperature,
                 "top_k": request.top_k,
                 "seed": request.seed,
+                "generation_profile": request.generation_profile,
+                "blocked_token_texts": list(request.blocked_token_texts),
             }
         )
     if response is not None:
         event["generated_chars"] = len(response.generated)
         event["continuation_chars"] = len(response.continuation)
         event["tokenizer"] = response.tokenizer
+        event["blocked_token_count"] = response.blocked_token_count
     if stream_chunks is not None:
         event["stream_chunks"] = stream_chunks
     if stream_timed_out is not None:
@@ -92,6 +95,8 @@ def build_pair_generation_log_event(
                 "temperature": pair_request.left.temperature,
                 "top_k": pair_request.left.top_k,
                 "seed": pair_request.left.seed,
+                "generation_profile": pair_request.left.generation_profile,
+                "blocked_token_texts": list(pair_request.left.blocked_token_texts),
             }
         )
     if left_response is not None:
