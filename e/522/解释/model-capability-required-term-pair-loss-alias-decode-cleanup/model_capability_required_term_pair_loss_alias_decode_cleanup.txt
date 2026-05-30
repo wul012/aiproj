@@ -1,0 +1,12 @@
+status=pass
+decision=required_term_pair_loss_alias_remove_newlines_cleanup_recovers_full
+decode_cleanup_decision=loss_alias_decode_cleanup_remove_newlines_full
+case_count=4
+raw_hit_count=0
+remove_newlines_hit_count=4
+collapse_whitespace_hit_count=0
+remove_all_whitespace_hit_count=4
+alnum_only_hit_count=4
+minimal_recovery_strategy=remove_newlines
+model_quality_claim=tiny_loss_alias_newline_cleanup_recovers_strict_surface
+next_action=test a bounded newline cleanup evaluation before changing the training objective

@@ -1,0 +1,34 @@
+- main [ref=e2] [box=39,0,1180,680]:
+  - generic [ref=e3] [box=67,28,1124,77]:
+    - heading "MiniGPT loss-alias decode cleanup" [level=1] [ref=e4] [box=67,28,1124,36]
+    - paragraph [ref=e5] [box=67,80,1124,25]: Removing newline separators would recover strict loss hits for every focused row.
+  - generic [ref=e6] [box=67,123,1124,136]:
+    - generic [ref=e7] [box=67,123,152,136]:
+      - generic [ref=e8] [box=81,137,123,14]: Status
+      - strong [ref=e9] [box=81,157,123,22]: pass
+    - generic [ref=e10] [box=229,123,152,136]:
+      - generic [ref=e11] [box=243,137,123,14]: Decision
+      - strong [ref=e12] [box=243,157,123,86]: loss_alias_decode_cleanup_remove_newlines_full
+    - generic [ref=e13] [box=391,123,152,136]:
+      - generic [ref=e14] [box=405,137,123,14]: Cases
+      - strong [ref=e15] [box=405,157,123,22]: "4"
+    - generic [ref=e16] [box=553,123,152,136]:
+      - generic [ref=e17] [box=567,137,123,14]: Raw hits
+      - strong [ref=e18] [box=567,157,123,22]: "0"
+    - generic [ref=e19] [box=715,123,152,136]:
+      - generic [ref=e20] [box=729,137,123,14]: Remove newlines
+      - strong [ref=e21] [box=729,157,123,22]: "4"
+    - generic [ref=e22] [box=877,123,152,136]:
+      - generic [ref=e23] [box=891,137,123,14]: All whitespace
+      - strong [ref=e24] [box=891,157,123,22]: "4"
+    - generic [ref=e25] [box=1039,123,152,136]:
+      - generic [ref=e26] [box=1053,137,123,14]: Minimal
+      - strong [ref=e27] [box=1053,157,123,43]: remove_newlines
+  - generic [ref=e28] [box=67,276,1124,111]:
+    - heading "Next Action" [level=2] [ref=e29] [box=83,293,1091,21]
+    - paragraph [ref=e30] [box=83,330,1091,25]: test a bounded newline cleanup evaluation before changing the training objective
+  - generic [ref=e31] [box=67,401,1124,236]:
+    - heading "Cleanup Rows" [level=2] [ref=e32] [box=83,418,1091,21]
+    - table [ref=e34] [box=83,451,1091,170]:
+      - rowgroup [ref=e35] [box=83,451,1091,35]
+      - rowgroup [ref=e44] [box=83,486,1091,135]

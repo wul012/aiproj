@@ -1,0 +1,5 @@
+seed,case_id,case_type,alias_group,raw_hit,normalized_hit,normalization_gain,remove_newlines_hit,collapse_whitespace_hit,remove_all_whitespace_hit,alnum_only_hit,minimal_recovery_strategy,continuation_preview,remove_newlines_preview
+515,source-loss,source,source,False,True,True,True,False,True,True,remove_newlines, los\ns\ns\ns\ns, losssss
+515,heldout-beta-loss,heldout,greek,False,True,True,True,False,True,True,remove_newlines, los\ns\ns\ns\ns, losssss
+515,heldout-omega-loss,heldout,greek,False,True,True,True,False,True,True,remove_newlines, los\nss\ns\ns\n, losssss
+515,heldout-theta-loss,heldout,greek,False,True,True,True,False,True,True,remove_newlines, los\nss\ns\ns\n, losssss

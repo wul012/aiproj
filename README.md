@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v521.0.0` audits the segment shape behind focused loss-alias normalized hits.
+Version `v522.0.0` audits bounded decode cleanup for focused loss-alias newline splits.
+
+## Latest v522 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_decode_cleanup`, a read-only cleanup strategy audit over v518 focus rows.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_decode_cleanup.py`; it compares raw, strip, remove-newlines, collapse-whitespace, remove-all-whitespace, and alnum-only strategies.
+- Ran the real audit: raw hits stayed `0/4`, remove-newlines recovered `4/4`, collapse-whitespace stayed `0/4`, and the minimal recovery strategy was `remove_newlines`.
+- Interpreted v522 as a bounded cleanup finding: the loss-alias issue is newline-surface formatting, not evidence for strict model recovery.
+- Archived the v522 decode-cleanup evidence in `e/522` and added the code explanation in `代码讲解记录_模型能力阶段/536-v522-model-capability-required-term-pair-loss-alias-decode-cleanup.md`.
 
 ## Latest v521 checkpoint
 
