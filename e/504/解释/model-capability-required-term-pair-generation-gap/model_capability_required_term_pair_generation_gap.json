@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair generation gap",
+  "generated_at": "2026-05-30T04:17:31Z",
+  "status": "pass",
+  "decision": "required_term_pair_generation_gap_observed",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_forced_choice_diagnostic": "D:\\aiproj\\e\\503\\解释\\model-capability-required-term-pair-forced-choice-diagnostic\\model_capability_required_term_pair_forced_choice_diagnostic.json",
+  "source_required_term_pair_branch_retention_sweep": "D:\\aiproj\\e\\502\\解释\\model-capability-required-term-pair-branch-retention-sweep\\model_capability_required_term_pair_branch_retention_sweep.json",
+  "out_dir": "e\\504\\解释\\model-capability-required-term-pair-generation-gap",
+  "settings": {
+    "experiment_boundary": "read-only comparison of teacher-forced choices and archived free-generation probes"
+  },
+  "source_baseline": {
+    "forced_choice_diagnostic_decision": "forced_choice_full_match_observed",
+    "forced_choice_full_match_variant_count": 1,
+    "branch_retention_sweep_decision": "branch_retention_sweep_tradeoff_remains",
+    "generation_pair_full_hit_variant_count": 0
+  },
+  "gap_rows": [
+    {
+      "run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "forced_best_candidate_term": "fixed",
+      "forced_expected_is_best": true,
+      "forced_expected_rank": 1,
+      "forced_expected_avg_nll": 0.512444,
+      "forced_expected_margin_vs_best": 0.0,
+      "generation_continuation_hit": true,
+      "generation_continuation_hit_count": 1,
+      "generation_generated_hit_count": 1,
+      "generation_continuation_preview": " fixed\\nfixed",
+      "generation_generated_preview": "fixed: fixed\\nfixed",
+      "gap_class": "aligned_hit"
+    },
+    {
+      "run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "forced_best_candidate_term": "fixed",
+      "forced_expected_is_best": false,
+      "forced_expected_rank": 2,
+      "forced_expected_avg_nll": 1.084487,
+      "forced_expected_margin_vs_best": 0.546682,
+      "generation_continuation_hit": false,
+      "generation_continuation_hit_count": 0,
+      "generation_generated_hit_count": 1,
+      "generation_continuation_preview": " fixed\\nfixed",
+      "generation_generated_preview": "loss: fixed\\nfixed",
+      "gap_class": "aligned_miss"
+    },
+    {
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "forced_best_candidate_term": "fixed",
+      "forced_expected_is_best": true,
+      "forced_expected_rank": 1,
+      "forced_expected_avg_nll": 1.824791,
+      "forced_expected_margin_vs_best": 0.0,
+      "generation_continuation_hit": false,
+      "generation_continuation_hit_count": 0,
+      "generation_generated_hit_count": 1,
+      "generation_continuation_preview": "didddf\\nf\\nfix",
+      "generation_generated_preview": "fixed:didddf\\nf\\nfix",
+      "gap_class": "internal_only"
+    },
+    {
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "forced_best_candidate_term": "loss",
+      "forced_expected_is_best": true,
+      "forced_expected_rank": 1,
+      "forced_expected_avg_nll": 1.20319,
+      "forced_expected_margin_vs_best": 0.0,
+      "generation_continuation_hit": false,
+      "generation_continuation_hit_count": 0,
+      "generation_generated_hit_count": 1,
+      "generation_continuation_preview": "ssssssssssss",
+      "generation_generated_preview": "loss:ssssssssssss",
+      "gap_class": "internal_only"
+    },
+    {
+      "run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "prompt_term": "fixed",
+      "expected_term": "fixed",
+      "forced_best_candidate_term": "fixed",
+      "forced_expected_is_best": true,
+      "forced_expected_rank": 1,
+      "forced_expected_avg_nll": 0.360496,
+      "forced_expected_margin_vs_best": 0.0,
+      "generation_continuation_hit": true,
+      "generation_continuation_hit_count": 1,
+      "generation_generated_hit_count": 1,
+      "generation_continuation_preview": " fixed\\nfixed",
+      "generation_generated_preview": "fixed: fixed\\nfixed",
+      "gap_class": "aligned_hit"
+    },
+    {
+      "run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "prompt_term": "loss",
+      "expected_term": "loss",
+      "forced_best_candidate_term": "fixed",
+      "forced_expected_is_best": false,
+      "forced_expected_rank": 2,
+      "forced_expected_avg_nll": 0.765863,
+      "forced_expected_margin_vs_best": 0.411718,
+      "generation_continuation_hit": false,
+      "generation_continuation_hit_count": 0,
+      "generation_generated_hit_count": 1,
+      "generation_continuation_preview": " fixed\\nfixed",
+      "generation_generated_preview": "loss: fixed\\nfixed",
+      "gap_class": "aligned_miss"
+    }
+  ],
+  "variant_summaries": [
+    {
+      "variant_id": "alternating-balanced",
+      "variant_label": "alternate fixed/loss order without asymmetric boost",
+      "run_id": "01-fixed-loss-alternating-balanced-seed-502",
+      "prompt_count": 2,
+      "forced_expected_best_count": 1,
+      "forced_choice_full_match": false,
+      "generation_hit_count": 1,
+      "generation_pair_full_hit": false,
+      "generation_hit_terms": [
+        "fixed"
+      ],
+      "generation_missed_terms": [
+        "loss"
+      ],
+      "gap_counts": {
+        "aligned_hit": 1,
+        "aligned_miss": 1
+      },
+      "forced_generation_gap": false
+    },
+    {
+      "variant_id": "symmetric-anchor",
+      "variant_label": "alternating cycles plus symmetric terminal anchors",
+      "run_id": "01-fixed-loss-symmetric-anchor-seed-502",
+      "prompt_count": 2,
+      "forced_expected_best_count": 2,
+      "forced_choice_full_match": true,
+      "generation_hit_count": 0,
+      "generation_pair_full_hit": false,
+      "generation_hit_terms": [],
+      "generation_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "gap_counts": {
+        "internal_only": 2
+      },
+      "forced_generation_gap": true
+    },
+    {
+      "variant_id": "symmetric-boost",
+      "variant_label": "equal double copies for both pair branches",
+      "run_id": "01-fixed-loss-symmetric-boost-seed-502",
+      "prompt_count": 2,
+      "forced_expected_best_count": 1,
+      "forced_choice_full_match": false,
+      "generation_hit_count": 1,
+      "generation_pair_full_hit": false,
+      "generation_hit_terms": [
+        "fixed"
+      ],
+      "generation_missed_terms": [
+        "loss"
+      ],
+      "gap_counts": {
+        "aligned_hit": 1,
+        "aligned_miss": 1
+      },
+      "forced_generation_gap": false
+    }
+  ],
+  "summary": {
+    "generation_gap_decision": "generation_gap_internal_signal_not_expressed",
+    "source_forced_choice_decision": "forced_choice_full_match_observed",
+    "source_branch_retention_sweep_decision": "branch_retention_sweep_tradeoff_remains",
+    "prompt_count": 6,
+    "variant_count": 3,
+    "forced_choice_full_match_variant_count": 1,
+    "generation_full_match_variant_count": 0,
+    "forced_generation_gap_variant_count": 1,
+    "aligned_hit_prompt_count": 2,
+    "internal_only_prompt_count": 2,
+    "generation_only_prompt_count": 0,
+    "aligned_miss_prompt_count": 2,
+    "best_gap_variant_id": "symmetric-anchor",
+    "best_gap_variant_internal_only_count": 2
+  },
+  "interpretation": {
+    "model_quality_claim": "internal_signal_not_free_generation_quality",
+    "reason": "At least one checkpoint has a forced-choice full match that is not expressed by archived free generation.",
+    "next_action": "probe deterministic decoding around the best gap variant before changing corpus weights again"
+  }
+}

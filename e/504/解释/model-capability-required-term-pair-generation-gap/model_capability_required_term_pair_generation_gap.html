@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair generation gap</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#7c3aed}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px}
+h2{font-size:18px;margin:0 0 12px}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair generation gap</h1><p>At least one checkpoint has a forced-choice full match that is not expressed by archived free generation.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>generation_gap_internal_signal_not_expressed</strong></div><div class="card"><span>Prompts</span><strong>6</strong></div><div class="card"><span>Internal only</span><strong>2</strong></div><div class="card"><span>Aligned hits</span><strong>2</strong></div><div class="card"><span>Gap variants</span><strong>1</strong></div><div class="card"><span>Best gap</span><strong>symmetric-anchor</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>probe deterministic decoding around the best gap variant before changing corpus weights again</p></section>
+<section class="panel">
+<h2>Gap Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Variant</th><th>Prompt</th><th>Forced best</th><th>Generation hit</th><th>Gap class</th><th>Continuation</th></tr></thead>
+<tbody><tr><td>alternating-balanced</td><td>fixed</td><td>fixed</td><td>True</td><td>aligned_hit</td><td> fixed\nfixed</td></tr>
+<tr><td>alternating-balanced</td><td>loss</td><td>fixed</td><td>False</td><td>aligned_miss</td><td> fixed\nfixed</td></tr>
+<tr><td>symmetric-anchor</td><td>fixed</td><td>fixed</td><td>False</td><td>internal_only</td><td>didddf\nf\nfix</td></tr>
+<tr><td>symmetric-anchor</td><td>loss</td><td>loss</td><td>False</td><td>internal_only</td><td>ssssssssssss</td></tr>
+<tr><td>symmetric-boost</td><td>fixed</td><td>fixed</td><td>True</td><td>aligned_hit</td><td> fixed\nfixed</td></tr>
+<tr><td>symmetric-boost</td><td>loss</td><td>fixed</td><td>False</td><td>aligned_miss</td><td> fixed\nfixed</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Variant Summary</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Variant</th><th>Forced full</th><th>Generation full</th><th>Gap</th><th>Counts</th></tr></thead>
+<tbody><tr><td>alternating-balanced</td><td>False</td><td>False</td><td>False</td><td>{&#x27;aligned_hit&#x27;: 1, &#x27;aligned_miss&#x27;: 1}</td></tr>
+<tr><td>symmetric-anchor</td><td>True</td><td>False</td><td>True</td><td>{&#x27;internal_only&#x27;: 2}</td></tr>
+<tr><td>symmetric-boost</td><td>False</td><td>False</td><td>False</td><td>{&#x27;aligned_hit&#x27;: 1, &#x27;aligned_miss&#x27;: 1}</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

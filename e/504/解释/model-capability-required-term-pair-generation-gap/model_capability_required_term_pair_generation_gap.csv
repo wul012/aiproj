@@ -1,0 +1,7 @@
+variant_id,run_id,prompt_term,expected_term,forced_best_candidate_term,forced_expected_is_best,generation_continuation_hit,gap_class,generation_continuation_preview
+alternating-balanced,01-fixed-loss-alternating-balanced-seed-502,fixed,fixed,fixed,True,True,aligned_hit, fixed\nfixed
+alternating-balanced,01-fixed-loss-alternating-balanced-seed-502,loss,loss,fixed,False,False,aligned_miss, fixed\nfixed
+symmetric-anchor,01-fixed-loss-symmetric-anchor-seed-502,fixed,fixed,fixed,True,False,internal_only,didddf\nf\nfix
+symmetric-anchor,01-fixed-loss-symmetric-anchor-seed-502,loss,loss,loss,True,False,internal_only,ssssssssssss
+symmetric-boost,01-fixed-loss-symmetric-boost-seed-502,fixed,fixed,fixed,True,True,aligned_hit, fixed\nfixed
+symmetric-boost,01-fixed-loss-symmetric-boost-seed-502,loss,loss,fixed,False,False,aligned_miss, fixed\nfixed

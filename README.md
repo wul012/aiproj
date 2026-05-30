@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v503.0.0` adds a teacher-forced forced-choice diagnostic for the v502 checkpoints and shows the best retained branch has an internal `fixed/loss` preference even though free generation still collapsed.
+Version `v504.0.0` compares v503 forced-choice winners with v502 free-generation probes and isolates the current gap as internal preference not expressed by generation.
+
+## Latest v504 checkpoint
+
+- Added `model_capability_required_term_pair_generation_gap`, which reads the v503 forced-choice diagnostic and its linked v502 branch-retention sweep, then compares every prompt's internal best candidate with archived free-generation hits.
+- Added `scripts/run_model_capability_required_term_pair_generation_gap.py` as a read-only report builder; it does not retrain and does not modify prior checkpoints.
+- Ran the real gap audit over `3` variants and `6` prompt rows. `symmetric-anchor` is the only forced-choice full-match variant, but it still has no free-generation full match.
+- Classified the prompt rows as `2` aligned hits, `2` internal-only prompts, `0` generation-only prompts, and `2` aligned misses. The key finding is `generation_gap_internal_signal_not_expressed`.
+- Archived the v504 generation-gap evidence in `e/504` and added the code explanation in `代码讲解记录_模型能力阶段/518-v504-model-capability-required-term-pair-generation-gap.md`.
 
 ## Latest v503 checkpoint
 

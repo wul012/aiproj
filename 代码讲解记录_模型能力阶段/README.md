@@ -104,6 +104,9 @@
 517-v503-model-capability-required-term-pair-forced-choice-diagnostic.md
  -> v503 code explanation: score v502 checkpoints with teacher-forced fixed/loss choices and separate internal preference from free-generation collapse.
 
+518-v504-model-capability-required-term-pair-generation-gap.md
+ -> v504 code explanation: compare v503 forced-choice winners with v502 free-generation probes and classify internal-only generation gaps.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

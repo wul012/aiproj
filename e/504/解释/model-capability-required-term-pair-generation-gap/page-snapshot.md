@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair generation gap" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one checkpoint has a forced-choice full match that is not expressed by archived free generation.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: generation_gap_internal_signal_not_expressed
+    - generic [ref=e13]:
+      - generic [ref=e14]: Prompts
+      - strong [ref=e15]: "6"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Internal only
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Aligned hits
+      - strong [ref=e21]: "2"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Gap variants
+      - strong [ref=e24]: "1"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Best gap
+      - strong [ref=e27]: symmetric-anchor
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: probe deterministic decoding around the best gap variant before changing corpus weights again
+  - generic [ref=e31]:
+    - heading "Gap Rows" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Variant Prompt Forced best Generation hit Gap class Continuation" [ref=e36]
+      - rowgroup [ref=e43]:
+        - row "alternating-balanced fixed fixed True aligned_hit fixed\\nfixed" [ref=e44]
+        - row "alternating-balanced loss fixed False aligned_miss fixed\\nfixed" [ref=e51]
+        - row "symmetric-anchor fixed fixed False internal_only didddf\\nf\\nfix" [ref=e58]
+        - row "symmetric-anchor loss loss False internal_only ssssssssssss" [ref=e65]
+        - row "symmetric-boost fixed fixed True aligned_hit fixed\\nfixed" [ref=e72]
+        - row "symmetric-boost loss fixed False aligned_miss fixed\\nfixed" [ref=e79]
+  - generic [ref=e86]:
+    - heading "Variant Summary" [level=2] [ref=e87]
+    - table [ref=e89]:
+      - rowgroup [ref=e90]:
+        - row "Variant Forced full Generation full Gap Counts" [ref=e91]
+      - rowgroup [ref=e97]:
+        - 'row "alternating-balanced False False False {''aligned_hit'': 1, ''aligned_miss'': 1}" [ref=e98]'
+        - 'row "symmetric-anchor True False True {''internal_only'': 2}" [ref=e104]'
+        - 'row "symmetric-boost False False False {''aligned_hit'': 1, ''aligned_miss'': 1}" [ref=e110]'
