@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=80526 vocab_size=34
+parameters=52,800
+data_source=data:e\497\解释\model-capability-required-term-pair-capacity-sweep\capacity-corpora\01-fixed-loss-longer-iters-seed-496.txt
+step=    1 train_loss=3.0230 val_loss=3.1034
+step=  600 train_loss=0.9452 val_loss=0.9580
+step= 1200 train_loss=1.2208 val_loss=1.2095
+step= 1800 train_loss=1.0375 val_loss=0.8880
+step= 2400 train_loss=1.5189 val_loss=1.3186
+saved=e\497\解释\model-capability-required-term-pair-capacity-sweep\capacity-runs\01-fixed-loss-longer-iters-seed-496
+history=e\497\解释\model-capability-required-term-pair-capacity-sweep\capacity-runs\01-fixed-loss-longer-iters-seed-496\metrics.jsonl
+manifest=e\497\解释\model-capability-required-term-pair-capacity-sweep\capacity-runs\01-fixed-loss-longer-iters-seed-496\run_manifest.json
+sample=e\497\解释\model-capability-required-term-pair-capacity-sweep\capacity-runs\01-fixed-loss-longer-iters-seed-496\sample.txt

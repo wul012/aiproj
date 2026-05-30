@@ -1,0 +1,739 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair capacity sweep",
+  "generated_at": "2026-05-30T00:00:01Z",
+  "status": "pass",
+  "decision": "required_term_pair_capacity_sweep_partial",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_rebalance_seed_stability": "e\\496\\解释\\model-capability-required-term-pair-rebalance-seed-stability\\model_capability_required_term_pair_rebalance_seed_stability.json",
+  "out_dir": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep",
+  "settings": {
+    "seed": 496,
+    "pair_limit": 1,
+    "variant_count": 4,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 1,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "sweep capacity for fragile v496 pair before expanding to three-term curricula"
+  },
+  "source_baseline": {
+    "pair_rebalance_seed_stability_decision": "rebalance_full_pairs_not_reproduced_across_seeds",
+    "source_pair_rebalance_decision": "pair_rebalance_full_hit_gain",
+    "selected_pair_count": 1,
+    "seed_count": 3,
+    "pair_seed_full_hit_count": 0,
+    "stable_pair_count": 0,
+    "pair_rebalance_seed_stable": false
+  },
+  "summary": {
+    "pair_capacity_sweep_decision": "pair_capacity_sweep_partial_only",
+    "source_pair_rebalance_seed_stability_decision": "rebalance_full_pairs_not_reproduced_across_seeds",
+    "source_stable_pair_count": 0,
+    "source_pair_seed_full_hit_count": 0,
+    "source_pair_seed_full_hit_rate": 0.0,
+    "selected_pair_count": 1,
+    "variant_count": 4,
+    "variant_run_count": 4,
+    "probe_count": 8,
+    "training_pass_count": 4,
+    "checkpoint_exists_count": 4,
+    "continuation_hit_count": 2,
+    "probe_hit_count": 2,
+    "probe_success_rate": 0.25,
+    "variant_pair_full_hit_count": 0,
+    "variant_pair_partial_hit_count": 2,
+    "variant_pair_zero_hit_count": 2,
+    "variant_pair_full_hit_rate": 0.0,
+    "capacity_full_hit_pair_count": 0,
+    "capacity_full_hit_observed": false,
+    "best_variant_id": "longer-iters",
+    "best_variant_label": "longer training budget",
+    "best_variant_hit_count": 1,
+    "best_variant_pair_full_hit": false,
+    "capacity_sweep_improved": false
+  },
+  "selected_pair_count": 1,
+  "pairs": [
+    {
+      "pair_id": "01-fixed-loss",
+      "pair_index": 0,
+      "terms": [
+        {
+          "case": "comparison-baseline",
+          "term": "fixed",
+          "scaffold_prompt": "fixed:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        },
+        {
+          "case": "factual-val-loss",
+          "term": "loss",
+          "scaffold_prompt": "loss:",
+          "source_hit_seed_count": 3,
+          "source_seed_count": 3,
+          "source_hit_rate": 1.0,
+          "source_hit_seeds": [
+            493,
+            1493,
+            2493
+          ],
+          "source_missed_seeds": [],
+          "source_stable_across_seeds": true,
+          "source_partial_across_seeds": false
+        }
+      ],
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "v495_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "v496_seed_count": 3,
+      "v496_full_hit_seed_count": 0,
+      "v496_full_hit_rate": 0.0,
+      "v496_full_hit_seeds": [],
+      "v496_missed_full_hit_seeds": [
+        496,
+        1496,
+        2496
+      ],
+      "v496_stable_full_hit_across_seeds": false,
+      "v496_fragile_pair": true
+    }
+  ],
+  "capacity_variants": [
+    {
+      "variant_id": "baseline-repeat",
+      "label": "v496 baseline repeat",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "longer-iters",
+      "label": "longer training budget",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 2400,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "wider-embd",
+      "label": "wider embedding",
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 96,
+      "learning_rate": 0.02
+    },
+    {
+      "variant_id": "denser-corpus",
+      "label": "denser pair corpus",
+      "repeat": 360,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02
+    }
+  ],
+  "capacity_rows": [
+    {
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "baseline-repeat",
+      "variant_label": "v496 baseline repeat",
+      "seed": 496,
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-baseline-repeat-seed-496.txt",
+      "capacity_corpus_exists": true,
+      "capacity_line_count": 4320,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\tokenizer.json",
+      "metrics_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\metrics.jsonl",
+      "train_config_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-baseline-repeat-seed-496.txt --out-dir e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "longer-iters",
+      "variant_label": "longer training budget",
+      "seed": 496,
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-longer-iters-seed-496.txt",
+      "capacity_corpus_exists": true,
+      "capacity_line_count": 4320,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 2400,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\tokenizer.json",
+      "metrics_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\metrics.jsonl",
+      "train_config_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-longer-iters-seed-496.txt --out-dir e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496 --device cpu --tokenizer char --max-iters 2400 --eval-interval 600 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "capacity_run_id": "01-fixed-loss-wider-embd-seed-496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "wider-embd",
+      "variant_label": "wider embedding",
+      "seed": 496,
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-wider-embd-seed-496.txt",
+      "capacity_corpus_exists": true,
+      "capacity_line_count": 4320,
+      "repeat": 240,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 96,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496\\tokenizer.json",
+      "metrics_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496\\metrics.jsonl",
+      "train_config_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-wider-embd-seed-496.txt --out-dir e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 96 --learning-rate 0.02 --seed 496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    },
+    {
+      "capacity_run_id": "01-fixed-loss-denser-corpus-seed-496",
+      "pair_id": "01-fixed-loss",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "variant_id": "denser-corpus",
+      "variant_label": "denser pair corpus",
+      "seed": 496,
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-denser-corpus-seed-496.txt",
+      "capacity_corpus_exists": true,
+      "capacity_line_count": 6480,
+      "repeat": 360,
+      "isolated_repeat": 2,
+      "max_iters": 1600,
+      "n_embd": 64,
+      "learning_rate": 0.02,
+      "training_status": "pass",
+      "training_returncode": 0,
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496\\checkpoint.pt",
+      "tokenizer_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496\\tokenizer.json",
+      "metrics_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496\\metrics.jsonl",
+      "train_config_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496\\train_config.json",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "metrics_exists": true,
+      "train_config_exists": true,
+      "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-denser-corpus-seed-496.txt --out-dir e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496 --device cpu --tokenizer char --max-iters 1600 --eval-interval 400 --eval-iters 2 --batch-size 16 --block-size 8 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 496 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1"
+    }
+  ],
+  "variant_pair_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "variant_label": "v496 baseline repeat",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "variant_label": "longer training budget",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "hit_rate": 0.5,
+      "pair_full_hit": false,
+      "pair_partial_hit": true
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "wider-embd",
+      "variant_label": "wider embedding",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "pair_full_hit": false,
+      "pair_partial_hit": false
+    },
+    {
+      "pair_id": "01-fixed-loss",
+      "variant_id": "denser-corpus",
+      "variant_label": "denser pair corpus",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "pair_full_hit": false,
+      "pair_partial_hit": false
+    }
+  ],
+  "pair_capacity_summaries": [
+    {
+      "pair_id": "01-fixed-loss",
+      "term_names": [
+        "fixed",
+        "loss"
+      ],
+      "variant_count": 4,
+      "full_hit_variant_count": 0,
+      "full_hit_variants": [],
+      "partial_hit_variants": [
+        "baseline-repeat",
+        "longer-iters"
+      ],
+      "capacity_full_hit_observed": false,
+      "best_variant_id": "longer-iters",
+      "best_variant_label": "longer training budget",
+      "best_variant_hit_count": 1,
+      "best_variant_pair_full_hit": false
+    }
+  ],
+  "probe_count": 8,
+  "probe_rows": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "variant_label": "v496 baseline repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-baseline-repeat-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 496,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "baseline-repeat",
+      "variant_label": "v496 baseline repeat",
+      "capacity_run_id": "01-fixed-loss-baseline-repeat-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-baseline-repeat-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 497,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-baseline-repeat-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "variant_label": "longer training budget",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-longer-iters-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 596,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: prossssssss",
+      "continuation": " prossssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: prossssssss",
+      "continuation_preview": " prossssssss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "longer-iters",
+      "variant_label": "longer training budget",
+      "capacity_run_id": "01-fixed-loss-longer-iters-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-longer-iters-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 597,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss: losssssssss",
+      "continuation": " losssssssss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 1,
+      "generated_preview": "loss: losssssssss",
+      "continuation_preview": " losssssssss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-longer-iters-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "wider-embd",
+      "variant_label": "wider embedding",
+      "capacity_run_id": "01-fixed-loss-wider-embd-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-wider-embd-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 696,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed:dddfiixeedid",
+      "continuation": "dddfiixeedid",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed:dddfiixeedid",
+      "continuation_preview": "dddfiixeedid",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "wider-embd",
+      "variant_label": "wider embedding",
+      "capacity_run_id": "01-fixed-loss-wider-embd-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-wider-embd-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 240,
+      "isolated_repeat": 2,
+      "generation_seed": 697,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:ssssssslooss",
+      "continuation": "ssssssslooss",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:ssssssslooss",
+      "continuation_preview": "ssssssslooss",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-wider-embd-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "denser-corpus",
+      "variant_label": "denser pair corpus",
+      "capacity_run_id": "01-fixed-loss-denser-corpus-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-denser-corpus-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 360,
+      "isolated_repeat": 2,
+      "generation_seed": 796,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "fixed: los\nlos\nlos",
+      "continuation": " los\nlos\nlos",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "fixed: los\\nlos\\nlos",
+      "continuation_preview": " los\\nlos\\nlos",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_seed_count": 3,
+      "source_seed_count": 3,
+      "source_hit_rate": 1.0,
+      "source_hit_seeds": [
+        493,
+        1493,
+        2493
+      ],
+      "source_missed_seeds": [],
+      "source_stable_across_seeds": true,
+      "source_partial_across_seeds": false,
+      "pair_id": "01-fixed-loss",
+      "variant_id": "denser-corpus",
+      "variant_label": "denser pair corpus",
+      "capacity_run_id": "01-fixed-loss-denser-corpus-seed-496",
+      "pair_terms": [
+        "fixed",
+        "loss"
+      ],
+      "capacity_corpus_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-corpora\\01-fixed-loss-denser-corpus-seed-496.txt",
+      "capacity_seed": 496,
+      "capacity_repeat": 360,
+      "isolated_repeat": 2,
+      "generation_seed": 797,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generated": "loss:sss\nlos\nlos\n",
+      "continuation": "sss\nlos\nlos\n",
+      "prompt_truncated": false,
+      "prompt_hit_count": 1,
+      "generated_hit_count": 1,
+      "continuation_hit_count": 0,
+      "generated_preview": "loss:sss\\nlos\\nlos\\n",
+      "continuation_preview": "sss\\nlos\\nlos\\n",
+      "seed": 496,
+      "training_status": "pass",
+      "checkpoint_path": "e\\497\\解释\\model-capability-required-term-pair-capacity-sweep\\capacity-runs\\01-fixed-loss-denser-corpus-seed-496\\checkpoint.pt",
+      "checkpoint_exists": true
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The sweep still produced only partial pair hits; capacity changes did not recover the v495 full-hit.",
+    "next_action": "inspect corpus prompts and generation decoding before adding more terms to the checkpoint"
+  }
+}

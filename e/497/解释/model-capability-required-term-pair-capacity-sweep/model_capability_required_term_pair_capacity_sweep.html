@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair capacity sweep</title>
+<style>
+:root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f7; color: #142126; }
+body { margin: 0; padding: 28px; }
+main { max-width: 1220px; margin: 0 auto; }
+header { border-bottom: 1px solid #d8e0e3; padding-bottom: 16px; margin-bottom: 18px; }
+h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: 0; }
+p { color: #53646b; line-height: 1.55; overflow-wrap: anywhere; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.card, .panel { background: #fff; border: 1px solid #d8e0e3; border-radius: 8px; padding: 14px; box-shadow: 0 1px 2px rgba(20, 33, 38, 0.05); }
+.card span { display: block; color: #64757c; font-size: 12px; }
+.card strong { display: block; margin-top: 6px; font-size: 16px; overflow-wrap: anywhere; }
+.panel { margin-bottom: 18px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 880px; }
+th, td { text-align: left; border-bottom: 1px solid #e2e9eb; padding: 10px; vertical-align: top; }
+th { color: #52656c; font-size: 12px; text-transform: uppercase; }
+td { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT required-term pair capacity sweep</h1><p>The sweep still produced only partial pair hits; capacity changes did not recover the v495 full-hit.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_capacity_sweep_partial_only</strong></div><div class="card"><span>Variants</span><strong>4</strong></div><div class="card"><span>Runs</span><strong>4</strong></div><div class="card"><span>Probe hits</span><strong>2</strong></div><div class="card"><span>Full variant pairs</span><strong>0</strong></div><div class="card"><span>Recovered</span><strong>False</strong></div><div class="card"><span>Best variant</span><strong>longer-iters</strong></div></section>
+<section class="panel"><h2>Experiment Boundary</h2><p>This run keeps the fragile v496 pair fixed and varies only training budget, embedding width, or corpus density. A recovered full hit is still a tiny-model signal, not a production quality claim.</p><p>inspect corpus prompts and generation decoding before adding more terms to the checkpoint</p></section>
+<section class="panel">
+<h2>Variant Results</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Variant</th><th>Hit terms</th><th>Missed terms</th><th>Rate</th><th>Full hit</th></tr></thead>
+<tbody><tr><td>01-fixed-loss</td><td>baseline-repeat</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss</td><td>longer-iters</td><td>loss</td><td>fixed</td><td>0.5</td><td>False</td></tr>
+<tr><td>01-fixed-loss</td><td>wider-embd</td><td></td><td>fixed, loss</td><td>0.0</td><td>False</td></tr>
+<tr><td>01-fixed-loss</td><td>denser-corpus</td><td></td><td>fixed, loss</td><td>0.0</td><td>False</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Pair Summary</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pair</th><th>Full-hit variants</th><th>Partial variants</th><th>Best variant</th><th>Best hits</th></tr></thead>
+<tbody><tr><td>01-fixed-loss</td><td></td><td>baseline-repeat, longer-iters</td><td>longer-iters</td><td>1</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

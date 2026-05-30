@@ -83,6 +83,9 @@
 510-v496-model-capability-required-term-pair-rebalance-seed-stability.md
  -> v496 code explanation: repeat the v495 full-hit pair across seeds and show the signal is not yet stable.
 
+511-v497-model-capability-required-term-pair-capacity-sweep.md
+ -> v497 code explanation: sweep training budget, embedding width, and corpus density for the fragile v496 pair before expanding target groups.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

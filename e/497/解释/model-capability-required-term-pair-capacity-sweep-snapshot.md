@@ -1,0 +1,90 @@
+- main [ref=e2] [box=28,28,1152,956]:
+  - generic [ref=e3] [box=28,28,1152,114]:
+    - heading "MiniGPT required-term pair capacity sweep" [level=1] [ref=e4] [box=28,28,1152,40]
+    - paragraph [ref=e5] [box=28,84,1152,25]: The sweep still produced only partial pair hits; capacity changes did not recover the v495 full-hit.
+  - generic [ref=e6] [box=28,160,1152,178]:
+    - generic [ref=e7] [box=28,160,156,95]:
+      - generic [ref=e8] [box=43,174,127,16]: Status
+      - strong [ref=e9] [box=43,196,127,22]: pass
+    - generic [ref=e10] [box=194,160,156,95]:
+      - generic [ref=e11] [box=209,174,127,16]: Decision
+      - strong [ref=e12] [box=209,196,127,44]: pair_capacity_sweep_partial_only
+    - generic [ref=e13] [box=360,160,156,95]:
+      - generic [ref=e14] [box=375,174,127,16]: Variants
+      - strong [ref=e15] [box=375,196,127,22]: "4"
+    - generic [ref=e16] [box=526,160,156,95]:
+      - generic [ref=e17] [box=541,174,127,16]: Runs
+      - strong [ref=e18] [box=541,196,127,22]: "4"
+    - generic [ref=e19] [box=692,160,156,95]:
+      - generic [ref=e20] [box=707,174,127,16]: Probe hits
+      - strong [ref=e21] [box=707,196,127,22]: "2"
+    - generic [ref=e22] [box=858,160,156,95]:
+      - generic [ref=e23] [box=873,174,127,16]: Full variant pairs
+      - strong [ref=e24] [box=873,196,127,22]: "0"
+    - generic [ref=e25] [box=1024,160,156,95]:
+      - generic [ref=e26] [box=1039,174,127,16]: Recovered
+      - strong [ref=e27] [box=1039,196,127,22]: "False"
+    - generic [ref=e28] [box=28,265,156,73]:
+      - generic [ref=e29] [box=43,279,127,16]: Best variant
+      - strong [ref=e30] [box=43,301,127,22]: longer-iters
+  - generic [ref=e31] [box=28,356,1152,176]:
+    - heading "Experiment Boundary" [level=2] [ref=e32] [box=43,370,1123,24]
+    - paragraph [ref=e33] [box=43,411,1123,50]: This run keeps the fragile v496 pair fixed and varies only training budget, embedding width, or corpus density. A recovered full hit is still a tiny-model signal, not a production quality claim.
+    - paragraph [ref=e34] [box=43,476,1123,25]: inspect corpus prompts and generation decoding before adding more terms to the checkpoint
+  - generic [ref=e35] [box=28,550,1152,272]:
+    - heading "Variant Results" [level=2] [ref=e36] [box=43,564,1123,24]
+    - table [ref=e38] [box=43,601,1123,206]:
+      - rowgroup [ref=e39] [box=43,601,1123,37]:
+        - row "Pair Variant Hit terms Missed terms Rate Full hit" [ref=e40] [box=43,601,1123,37]:
+          - columnheader "Pair" [ref=e41] [box=43,601,226,37]
+          - columnheader "Variant" [ref=e42] [box=269,601,264,37]
+          - columnheader "Hit terms" [ref=e43] [box=533,601,170,37]
+          - columnheader "Missed terms" [ref=e44] [box=703,601,219,37]
+          - columnheader "Rate" [ref=e45] [box=921,601,100,37]
+          - columnheader "Full hit" [ref=e46] [box=1021,601,145,37]
+      - rowgroup [ref=e47] [box=43,637,1123,169]:
+        - row "01-fixed-loss baseline-repeat loss fixed 0.5 False" [ref=e48] [box=43,637,1123,42]:
+          - cell "01-fixed-loss" [ref=e49] [box=43,637,226,42]
+          - cell "baseline-repeat" [ref=e50] [box=269,637,264,42]
+          - cell "loss" [ref=e51] [box=533,637,170,42]
+          - cell "fixed" [ref=e52] [box=703,637,219,42]
+          - cell "0.5" [ref=e53] [box=921,637,100,42]
+          - cell "False" [ref=e54] [box=1021,637,145,42]
+        - row "01-fixed-loss longer-iters loss fixed 0.5 False" [ref=e55] [box=43,680,1123,42]:
+          - cell "01-fixed-loss" [ref=e56] [box=43,680,226,42]
+          - cell "longer-iters" [ref=e57] [box=269,680,264,42]
+          - cell "loss" [ref=e58] [box=533,680,170,42]
+          - cell "fixed" [ref=e59] [box=703,680,219,42]
+          - cell "0.5" [ref=e60] [box=921,680,100,42]
+          - cell "False" [ref=e61] [box=1021,680,145,42]
+        - row "01-fixed-loss wider-embd fixed, loss 0.0 False" [ref=e62] [box=43,722,1123,42]:
+          - cell "01-fixed-loss" [ref=e63] [box=43,722,226,42]
+          - cell "wider-embd" [ref=e64] [box=269,722,264,42]
+          - cell [ref=e65] [box=533,722,170,42]
+          - cell "fixed, loss" [ref=e66] [box=703,722,219,42]
+          - cell "0.0" [ref=e67] [box=921,722,100,42]
+          - cell "False" [ref=e68] [box=1021,722,145,42]
+        - row "01-fixed-loss denser-corpus fixed, loss 0.0 False" [ref=e69] [box=43,764,1123,42]:
+          - cell "01-fixed-loss" [ref=e70] [box=43,764,226,42]
+          - cell "denser-corpus" [ref=e71] [box=269,764,264,42]
+          - cell [ref=e72] [box=533,764,170,42]
+          - cell "fixed, loss" [ref=e73] [box=703,764,219,42]
+          - cell "0.0" [ref=e74] [box=921,764,100,42]
+          - cell "False" [ref=e75] [box=1021,764,145,42]
+  - generic [ref=e76] [box=28,839,1152,145]:
+    - heading "Pair Summary" [level=2] [ref=e77] [box=43,854,1123,24]
+    - table [ref=e79] [box=43,890,1123,79]:
+      - rowgroup [ref=e80] [box=43,890,1123,37]:
+        - row "Pair Full-hit variants Partial variants Best variant Best hits" [ref=e81] [box=43,890,1123,37]:
+          - columnheader "Pair" [ref=e82] [box=43,890,193,37]
+          - columnheader "Full-hit variants" [ref=e83] [box=235,890,234,37]
+          - columnheader "Partial variants" [ref=e84] [box=469,890,379,37]
+          - columnheader "Best variant" [ref=e85] [box=849,890,180,37]
+          - columnheader "Best hits" [ref=e86] [box=1029,890,136,37]
+      - rowgroup [ref=e87] [box=43,927,1123,42]:
+        - row "01-fixed-loss baseline-repeat, longer-iters longer-iters 1" [ref=e88] [box=43,927,1123,42]:
+          - cell "01-fixed-loss" [ref=e89] [box=43,927,193,42]
+          - cell [ref=e90] [box=235,927,234,42]
+          - cell "baseline-repeat, longer-iters" [ref=e91] [box=469,927,379,42]
+          - cell "longer-iters" [ref=e92] [box=849,927,180,42]
+          - cell "1" [ref=e93] [box=1029,927,136,42]

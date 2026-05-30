@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v496.0.0` repeats the v495 full-hit rebalance pair across seeds and finds that the local pair-capacity signal is not yet stable.
+Version `v497.0.0` sweeps capacity variants for the fragile v496 `fixed/loss` pair and finds that bigger budget/width/density still only recovers partial hits.
+
+## Latest v497 checkpoint
+
+- Added `model_capability_required_term_pair_capacity_sweep` reporting for selecting fragile v496 pair-rebalance targets and testing capacity variants without expanding to three-term curricula.
+- Added `scripts/run_model_capability_required_term_pair_capacity_sweep.py`, which writes capacity corpora, capacity checkpoints, generation rows, variant summaries, and JSON/CSV/text/Markdown/HTML reports.
+- Ran the real capacity sweep for `fixed/loss` over `4` variants: `baseline-repeat`, `longer-iters`, `wider-embd`, and `denser-corpus`. All `4` checkpoints trained, but no variant recovered full-hit behavior.
+- Interpreted v497 as another useful negative capability result: baseline and longer-iters stayed partial on `loss`, while wider/dense variants missed both short continuations. The next step should inspect prompt shape and decoding before adding more terms.
+- Archived the v497 capacity-sweep evidence in `e/497` and added the code explanation in `代码讲解记录_模型能力阶段/511-v497-model-capability-required-term-pair-capacity-sweep.md`.
 
 ## Latest v496 checkpoint
 

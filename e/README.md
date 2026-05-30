@@ -113,6 +113,10 @@ e/495/解释/说明.md
 e/496/图片
 e/496/解释/说明.md
  -> v496 model capability required-term pair rebalance seed stability 的运行截图和解释
+
+e/497/图片
+e/497/解释/说明.md
+ -> v497 model capability required-term pair capacity sweep 的运行截图和解释
 ```
 
 写入规则：
