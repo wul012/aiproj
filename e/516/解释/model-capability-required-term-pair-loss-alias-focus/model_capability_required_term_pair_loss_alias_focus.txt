@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_pair_loss_alias_focus_no_repair
+loss_alias_focus_decision=loss_alias_focus_no_repair
+seed_count=1
+pass_count=1
+support_case_count=4
+focus_case_count=2
+focus_full_seed_count=0
+support_full_seed_count=0
+stable_focus_full_coverage=False
+stable_support_full_coverage=False
+model_quality_claim=not_claimed
+next_action=inspect focused corpus ordering and generation previews before adding capacity

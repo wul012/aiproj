@@ -1,0 +1,41 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias focus" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The focused corpus completed but did not repair the missed loss alias rows.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: loss_alias_focus_no_repair
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: 1/1
+    - generic [ref=e16]:
+      - generic [ref=e17]: Focus cases
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Focus full seeds
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Support full seeds
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: inspect focused corpus ordering and generation previews before adding capacity
+  - generic [ref=e28]:
+    - heading "Focus Cases" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Case Prompt Missed seeds" [ref=e33]
+      - rowgroup [ref=e37]:
+        - 'row "source-loss loss: [515]" [ref=e38]'
+        - 'row "heldout-beta-loss beta: [515]" [ref=e42]'
+  - generic [ref=e46]:
+    - heading "Seed Rows" [level=2] [ref=e47]
+    - table [ref=e49]:
+      - rowgroup [ref=e50]:
+        - row "Seed Focus hits Support hits Focus full Support full" [ref=e51]
+      - rowgroup [ref=e57]:
+        - row "515 0/2 0/4 False False" [ref=e58]

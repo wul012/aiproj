@@ -140,6 +140,9 @@
 529-v515-model-capability-required-term-pair-loss-alias-stability.md
  -> v515 code explanation: repeat the loss-alias objective across seeds and classify the recovery as stable partial rather than stable full.
 
+530-v516-model-capability-required-term-pair-loss-alias-focus.md
+ -> v516 code explanation: boost v515 missed loss-alias rows and show row density alone does not repair seed-515 misses.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

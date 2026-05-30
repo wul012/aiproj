@@ -1,0 +1,2 @@
+seed,status,focus_hit_case_count,focus_case_count,support_hit_case_count,support_case_count,focus_full_coverage,support_full_coverage,checkpoint_exists,out_dir
+515,pass,0,2,0,4,False,False,True,e\516\解释\model-capability-required-term-pair-loss-alias-focus\seed-runs\seed-515

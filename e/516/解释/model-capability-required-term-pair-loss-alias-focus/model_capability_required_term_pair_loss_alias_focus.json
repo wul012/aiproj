@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair loss-alias focus",
+  "generated_at": "2026-05-30T07:45:04Z",
+  "status": "pass",
+  "decision": "required_term_pair_loss_alias_focus_no_repair",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_loss_alias_stability": "e\\515\\解释\\model-capability-required-term-pair-loss-alias-stability\\model_capability_required_term_pair_loss_alias_stability.json",
+  "out_dir": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus",
+  "settings": {
+    "seeds": [
+      515
+    ],
+    "base_repeat": 180,
+    "focus_repeat": 180,
+    "bridge_repeat": 4,
+    "max_iters": 900,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 16,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 64,
+    "learning_rate": 0.02,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "boost only the loss alias rows missed by v515 before recombining fixed and loss"
+  },
+  "support_cases": [
+    {
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss"
+    },
+    {
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss"
+    },
+    {
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss"
+    },
+    {
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss"
+    }
+  ],
+  "focus_cases": [
+    {
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "missed_seed_count": 1,
+      "missed_seeds": [
+        515
+      ]
+    },
+    {
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "missed_seed_count": 1,
+      "missed_seeds": [
+        515
+      ]
+    }
+  ],
+  "seed_rows": [
+    {
+      "seed": 515,
+      "status": "pass",
+      "focus_hit_case_count": 0,
+      "focus_case_count": 2,
+      "support_hit_case_count": 0,
+      "support_case_count": 4,
+      "focus_full_coverage": false,
+      "support_full_coverage": false,
+      "checkpoint_exists": true,
+      "out_dir": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515"
+    }
+  ],
+  "seed_reports": [
+    {
+      "schema_version": 1,
+      "status": "pass",
+      "out_dir": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515",
+      "settings": {
+        "generation_seed": 515
+      },
+      "corpus": {
+        "path": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\required_term_pair_loss_alias_focus_corpus.txt",
+        "char_count": 85718,
+        "line_count": 4326
+      },
+      "training": {
+        "status": "pass",
+        "returncode": 0,
+        "command": [
+          "D:\\python\\python.exe",
+          "-B",
+          "D:\\aiproj\\scripts\\train.py",
+          "--data",
+          "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\required_term_pair_loss_alias_focus_corpus.txt",
+          "--out-dir",
+          "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run",
+          "--device",
+          "cpu",
+          "--tokenizer",
+          "char",
+          "--max-iters",
+          "900",
+          "--eval-interval",
+          "225",
+          "--eval-iters",
+          "2",
+          "--batch-size",
+          "16",
+          "--block-size",
+          "16",
+          "--n-layer",
+          "1",
+          "--n-head",
+          "1",
+          "--n-embd",
+          "64",
+          "--learning-rate",
+          "0.02",
+          "--seed",
+          "515",
+          "--sample-prompt",
+          "loss:",
+          "--sample-tokens",
+          "8",
+          "--sample-temperature",
+          "0.2",
+          "--sample-top-k",
+          "1"
+        ],
+        "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\required_term_pair_loss_alias_focus_corpus.txt --out-dir e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run --device cpu --tokenizer char --max-iters 900 --eval-interval 225 --eval-iters 2 --batch-size 16 --block-size 16 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 515 --sample-prompt loss: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1",
+        "stdout": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run\\logs\\train_stdout.txt",
+        "stderr": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run\\logs\\train_stderr.txt",
+        "run_dir": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run",
+        "checkpoint_path": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run\\checkpoint.pt",
+        "tokenizer_path": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run\\tokenizer.json",
+        "metrics_path": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run\\metrics.jsonl",
+        "train_config_path": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run\\train_config.json",
+        "checkpoint_exists": true,
+        "tokenizer_exists": true,
+        "metrics_exists": true,
+        "train_config_exists": true,
+        "train_config": {
+          "data": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\required_term_pair_loss_alias_focus_corpus.txt",
+          "data_dir": null,
+          "prepared_data": null,
+          "out_dir": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\loss-alias-focus-run",
+          "resume": null,
+          "tokenizer": "char",
+          "bpe_vocab_size": 256,
+          "bpe_min_frequency": 2,
+          "batch_size": 16,
+          "block_size": 16,
+          "max_iters": 900,
+          "eval_interval": 225,
+          "eval_iters": 2,
+          "learning_rate": 0.02,
+          "train_ratio": 0.9,
+          "n_layer": 1,
+          "n_head": 1,
+          "n_embd": 64,
+          "dropout": 0.1,
+          "seed": 515,
+          "device": "cpu",
+          "sample_prompt": "loss:",
+          "sample_tokens": 8,
+          "sample_temperature": 0.2,
+          "sample_top_k": 1,
+          "no_sample": false,
+          "device_used": "cpu",
+          "data_source": {
+            "kind": "data",
+            "path": "e\\516\\解释\\model-capability-required-term-pair-loss-alias-focus\\seed-runs\\seed-515\\required_term_pair_loss_alias_focus_corpus.txt"
+          }
+        }
+      },
+      "generation_rows": [
+        {
+          "case_id": "source-loss",
+          "case_type": "source",
+          "alias_group": "source",
+          "prompt": "loss:",
+          "expected_term": "loss",
+          "is_focus_case": true,
+          "generation_seed": 515,
+          "generated": "loss: los\ns\ns\ns\ns",
+          "continuation": " los\ns\ns\ns\ns",
+          "continuation_hit": false,
+          "continuation_preview": " los\\ns\\ns\\ns\\ns"
+        },
+        {
+          "case_id": "heldout-beta-loss",
+          "case_type": "heldout",
+          "alias_group": "greek",
+          "prompt": "beta:",
+          "expected_term": "loss",
+          "is_focus_case": true,
+          "generation_seed": 516,
+          "generated": "beta: los\ns\ns\ns\ns",
+          "continuation": " los\ns\ns\ns\ns",
+          "continuation_hit": false,
+          "continuation_preview": " los\\ns\\ns\\ns\\ns"
+        },
+        {
+          "case_id": "heldout-omega-loss",
+          "case_type": "heldout",
+          "alias_group": "greek",
+          "prompt": "omega:",
+          "expected_term": "loss",
+          "is_focus_case": false,
+          "generation_seed": 517,
+          "generated": "omega: los\nss\ns\ns\n",
+          "continuation": " los\nss\ns\ns\n",
+          "continuation_hit": false,
+          "continuation_preview": " los\\nss\\ns\\ns\\n"
+        },
+        {
+          "case_id": "heldout-theta-loss",
+          "case_type": "heldout",
+          "alias_group": "greek",
+          "prompt": "theta:",
+          "expected_term": "loss",
+          "is_focus_case": false,
+          "generation_seed": 518,
+          "generated": "theta: los\nss\ns\ns\n",
+          "continuation": " los\nss\ns\ns\n",
+          "continuation_hit": false,
+          "continuation_preview": " los\\nss\\ns\\ns\\n"
+        }
+      ],
+      "summary": {
+        "support_case_count": 4,
+        "focus_case_count": 2,
+        "support_hit_case_count": 0,
+        "focus_hit_case_count": 0,
+        "support_full_coverage": false,
+        "focus_full_coverage": false,
+        "training_status": "pass",
+        "checkpoint_exists": true
+      }
+    }
+  ],
+  "summary": {
+    "loss_alias_focus_decision": "loss_alias_focus_no_repair",
+    "seed_count": 1,
+    "pass_count": 1,
+    "support_case_count": 4,
+    "focus_case_count": 2,
+    "focus_full_seed_count": 0,
+    "support_full_seed_count": 0,
+    "stable_focus_full_coverage": false,
+    "stable_support_full_coverage": false,
+    "checkpoint_seed_count": 1
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The focused corpus completed but did not repair the missed loss alias rows.",
+    "next_action": "inspect focused corpus ordering and generation previews before adding capacity"
+  }
+}

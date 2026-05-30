@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v515.0.0` repeats the v514 loss-alias objective across seeds and finds stable partial, not stable full, recovery.
+Version `v516.0.0` boosts the v515 missed loss-alias rows and shows density alone does not repair the seed-515 misses.
+
+## Latest v516 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_focus`, which reads v515 seed reports, selects missed loss rows, builds a focused corpus, and reruns the target seed.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_focus.py`; it supports base/focus repeat controls and keeps no-repair as evidence rather than structural failure.
+- Ran seed `515` against focused rows `source-loss` and `heldout-beta-loss`; training passed, but focus hits remained `0/2`.
+- Interpreted v516 as a useful negative result: previews resemble split `loss` text such as `los\ns`, so the next step should inspect normalization/path shape rather than simply raising repeat again.
+- Archived the v516 focused repair evidence in `e/516` and added the code explanation in `代码讲解记录_模型能力阶段/530-v516-model-capability-required-term-pair-loss-alias-focus.md`.
 
 ## Latest v515 checkpoint
 
