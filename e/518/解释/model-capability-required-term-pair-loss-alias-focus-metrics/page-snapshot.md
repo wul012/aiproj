@@ -1,0 +1,44 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-alias focus" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Strict hits still failed, but every support loss alias contains the required term after normalization.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: loss_alias_focus_strict_miss_normalized_support_full_signal
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: 1/1
+    - generic [ref=e16]:
+      - generic [ref=e17]: Focus cases
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Strict focus full
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Norm support full
+      - strong [ref=e24]: "1"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Gains
+      - strong [ref=e27]: "4"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: carry strict and normalized hit metrics together before another training change
+  - generic [ref=e31]:
+    - heading "Focus Cases" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Case Prompt Missed seeds" [ref=e36]
+      - rowgroup [ref=e40]:
+        - 'row "source-loss loss: [515]" [ref=e41]'
+        - 'row "heldout-beta-loss beta: [515]" [ref=e45]'
+  - generic [ref=e49]:
+    - heading "Seed Rows" [level=2] [ref=e50]
+    - table [ref=e52]:
+      - rowgroup [ref=e53]:
+        - row "Seed Strict focus Strict support Normalized focus Normalized support Gains" [ref=e54]
+      - rowgroup [ref=e61]:
+        - row "515 0/2 0/4 2/2 4/4 4" [ref=e62]

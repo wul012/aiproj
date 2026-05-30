@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v517.0.0` audits v516 strict misses with normalization and finds hidden full `loss` signal behind formatting splits.
+Version `v518.0.0` carries strict and normalized loss-alias metrics directly in the focused repair report.
+
+## Latest v518 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_metrics.py` so focus and audit reports share one normalization rule.
+- Extended `model_capability_required_term_pair_loss_alias_focus` with strict hit, normalized hit, normalization gain, and metric decision fields.
+- Re-ran seed `515` focused repair: strict focus remained `0/2`, strict support remained `0/4`, but normalized focus became `2/2` and normalized support became `4/4`.
+- Interpreted v518 as a metric correction, not a strict success: future work should carry strict and normalized metrics together before changing training again.
+- Archived the v518 focus-metrics evidence in `e/518` and added the code explanation in `代码讲解记录_模型能力阶段/532-v518-model-capability-required-term-pair-loss-alias-focus-metrics.md`.
 
 ## Latest v517 checkpoint
 

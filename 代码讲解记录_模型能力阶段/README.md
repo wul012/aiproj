@@ -146,6 +146,9 @@
 531-v517-model-capability-required-term-pair-loss-alias-normalized-audit.md
  -> v517 code explanation: audit v516 strict misses with normalized required-term matching and reveal hidden full loss signal.
 
+532-v518-model-capability-required-term-pair-loss-alias-focus-metrics.md
+ -> v518 code explanation: carry strict and normalized loss-alias metrics directly in the focused repair report.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -20,6 +20,7 @@ def render_model_capability_required_term_pair_loss_alias_focus_text(report: dic
         ("status", report.get("status")),
         ("decision", report.get("decision")),
         ("loss_alias_focus_decision", summary.get("loss_alias_focus_decision")),
+        ("loss_alias_focus_metric_decision", summary.get("loss_alias_focus_metric_decision")),
         ("seed_count", summary.get("seed_count")),
         ("pass_count", summary.get("pass_count")),
         ("support_case_count", summary.get("support_case_count")),
@@ -28,6 +29,9 @@ def render_model_capability_required_term_pair_loss_alias_focus_text(report: dic
         ("support_full_seed_count", summary.get("support_full_seed_count")),
         ("stable_focus_full_coverage", summary.get("stable_focus_full_coverage")),
         ("stable_support_full_coverage", summary.get("stable_support_full_coverage")),
+        ("focus_normalized_full_seed_count", summary.get("focus_normalized_full_seed_count")),
+        ("support_normalized_full_seed_count", summary.get("support_normalized_full_seed_count")),
+        ("normalization_gain_count", summary.get("normalization_gain_count")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
         ("next_action", interpretation.get("next_action")),
     ]
@@ -44,6 +48,11 @@ def write_model_capability_required_term_pair_loss_alias_focus_csv(report: dict[
         "support_case_count",
         "focus_full_coverage",
         "support_full_coverage",
+        "focus_normalized_hit_case_count",
+        "support_normalized_hit_case_count",
+        "focus_normalized_full_coverage",
+        "support_normalized_full_coverage",
+        "normalization_gain_count",
         "checkpoint_exists",
         "out_dir",
     ]
@@ -65,7 +74,10 @@ def render_model_capability_required_term_pair_loss_alias_focus_markdown(report:
             + " | ".join([markdown_cell(row.get("case_id")), markdown_cell(row.get("prompt")), markdown_cell(row.get("missed_seeds"))])
             + " |"
         )
-    seed_rows = ["| Seed | Focus hits | Support hits | Focus full | Support full |", "| ---: | ---: | ---: | --- | --- |"]
+    seed_rows = [
+        "| Seed | Strict focus | Strict support | Normalized focus | Normalized support | Gains |",
+        "| ---: | ---: | ---: | ---: | ---: | ---: |",
+    ]
     for row in list_of_dicts(report.get("seed_rows")):
         seed_rows.append(
             "| "
@@ -74,8 +86,9 @@ def render_model_capability_required_term_pair_loss_alias_focus_markdown(report:
                     markdown_cell(row.get("seed")),
                     markdown_cell(row.get("focus_hit_case_count")),
                     markdown_cell(row.get("support_hit_case_count")),
-                    markdown_cell(row.get("focus_full_coverage")),
-                    markdown_cell(row.get("support_full_coverage")),
+                    markdown_cell(row.get("focus_normalized_hit_case_count")),
+                    markdown_cell(row.get("support_normalized_hit_case_count")),
+                    markdown_cell(row.get("normalization_gain_count")),
                 ]
             )
             + " |"
@@ -87,9 +100,11 @@ def render_model_capability_required_term_pair_loss_alias_focus_markdown(report:
             f"- Status: `{report.get('status')}`",
             f"- Decision: `{report.get('decision')}`",
             f"- Focus decision: `{summary.get('loss_alias_focus_decision')}`",
+            f"- Metric decision: `{summary.get('loss_alias_focus_metric_decision')}`",
             f"- Focus cases: `{summary.get('focus_case_count')}`",
             f"- Stable focus full coverage: `{summary.get('stable_focus_full_coverage')}`",
             f"- Stable support full coverage: `{summary.get('stable_support_full_coverage')}`",
+            f"- Normalization gains: `{summary.get('normalization_gain_count')}`",
             "",
             "## Focus Cases",
             "",
@@ -114,11 +129,12 @@ def render_model_capability_required_term_pair_loss_alias_focus_html(report: dic
     interpretation = as_dict(report.get("interpretation"))
     stats = [
         ("Status", report.get("status")),
-        ("Decision", summary.get("loss_alias_focus_decision")),
+        ("Decision", summary.get("loss_alias_focus_metric_decision")),
         ("Seeds", f"{summary.get('pass_count')}/{summary.get('seed_count')}"),
         ("Focus cases", summary.get("focus_case_count")),
-        ("Focus full seeds", summary.get("focus_full_seed_count")),
-        ("Support full seeds", summary.get("support_full_seed_count")),
+        ("Strict focus full", summary.get("focus_full_seed_count")),
+        ("Norm support full", summary.get("support_normalized_full_seed_count")),
+        ("Gains", summary.get("normalization_gain_count")),
     ]
     focus_rows = "\n".join(_focus_html(row) for row in list_of_dicts(report.get("focus_cases")))
     seed_rows = "\n".join(_seed_html(row) for row in list_of_dicts(report.get("seed_rows")))
@@ -146,7 +162,7 @@ def render_model_capability_required_term_pair_loss_alias_focus_html(report: dic
 <section class="panel">
 <h2>Seed Rows</h2>
 <div class="table-wrap"><table>
-<thead><tr><th>Seed</th><th>Focus hits</th><th>Support hits</th><th>Focus full</th><th>Support full</th></tr></thead>
+<thead><tr><th>Seed</th><th>Strict focus</th><th>Strict support</th><th>Normalized focus</th><th>Normalized support</th><th>Gains</th></tr></thead>
 <tbody>{seed_rows}</tbody>
 </table></div>
 </section>
@@ -193,8 +209,9 @@ def _seed_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('seed'))}</td>"
         f"<td>{html_escape(row.get('focus_hit_case_count'))}/{html_escape(row.get('focus_case_count'))}</td>"
         f"<td>{html_escape(row.get('support_hit_case_count'))}/{html_escape(row.get('support_case_count'))}</td>"
-        f"<td>{html_escape(row.get('focus_full_coverage'))}</td>"
-        f"<td>{html_escape(row.get('support_full_coverage'))}</td>"
+        f"<td>{html_escape(row.get('focus_normalized_hit_case_count'))}/{html_escape(row.get('focus_case_count'))}</td>"
+        f"<td>{html_escape(row.get('support_normalized_hit_case_count'))}/{html_escape(row.get('support_case_count'))}</td>"
+        f"<td>{html_escape(row.get('normalization_gain_count'))}</td>"
         "</tr>"
     )
 

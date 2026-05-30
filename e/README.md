@@ -197,6 +197,10 @@ e/516/解释/说明.md
 e/517/图片
 e/517/解释/说明.md
  -> v517 model capability required-term pair loss-alias normalized audit 的运行截图和解释
+
+e/518/图片
+e/518/解释/说明.md
+ -> v518 model capability required-term pair loss-alias focus metrics 的运行截图和解释
 ```
 
 写入规则：

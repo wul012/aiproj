@@ -45,7 +45,10 @@ class ModelCapabilityRequiredTermPairLossAliasFocusTests(unittest.TestCase):
             self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_support_full_hit")
             self.assertTrue(report["summary"]["stable_focus_full_coverage"])
             self.assertTrue(report["summary"]["stable_support_full_coverage"])
+            self.assertTrue(report["summary"]["stable_focus_normalized_full_coverage"])
+            self.assertEqual(report["summary"]["normalization_gain_count"], 0)
             self.assertIn("loss_alias_focus_decision=loss_alias_focus_support_full_hit", text)
+            self.assertIn("loss_alias_focus_metric_decision=loss_alias_focus_support_full_hit", text)
             self.assertIn("Loss-Alias Focus", markdown)
             self.assertIn("MiniGPT loss-alias focus", html)
             self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
@@ -74,6 +77,28 @@ class ModelCapabilityRequiredTermPairLossAliasFocusTests(unittest.TestCase):
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_no_repair")
             self.assertFalse(report["summary"]["stable_focus_full_coverage"])
+            self.assertFalse(report["summary"]["stable_focus_normalized_full_coverage"])
+
+    def test_focus_reports_normalized_signal_separately_from_strict_hits(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            report = build_model_capability_required_term_pair_loss_alias_focus(
+                stability_fixture(),
+                out_dir=root / "focus",
+                seeds=[515],
+                train_func=fake_train,
+                generate_func=fake_generate_split_loss,
+            )
+
+            self.assertEqual(report["status"], "pass")
+            self.assertEqual(report["decision"], "required_term_pair_loss_alias_focus_normalized_support_signal")
+            self.assertEqual(report["summary"]["loss_alias_focus_decision"], "loss_alias_focus_no_repair")
+            self.assertEqual(
+                report["summary"]["loss_alias_focus_metric_decision"],
+                "loss_alias_focus_strict_miss_normalized_support_full_signal",
+            )
+            self.assertEqual(report["summary"]["normalization_gain_count"], 4)
+            self.assertTrue(report["summary"]["stable_support_normalized_full_coverage"])
 
     def test_focus_fails_without_missed_rows(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -153,3 +178,8 @@ def fake_generate_loss(request: dict[str, object]) -> dict[str, object]:
 def fake_generate_empty(request: dict[str, object]) -> dict[str, object]:
     prompt = str(request["prompt"])
     return {"generated": prompt + "----", "continuation": "----"}
+
+
+def fake_generate_split_loss(request: dict[str, object]) -> dict[str, object]:
+    prompt = str(request["prompt"])
+    return {"generated": prompt + "lo\ns\ns", "continuation": "lo\ns\ns"}

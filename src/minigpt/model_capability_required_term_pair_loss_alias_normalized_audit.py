@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.model_capability_required_term_pair_loss_alias_focus import REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME, read_json_report
+from minigpt.model_capability_required_term_pair_loss_alias_metrics import normalize_for_required_term, required_term_hit_metrics
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 
@@ -62,10 +63,8 @@ def build_normalized_rows(focus_report: dict[str, Any]) -> list[dict[str, Any]]:
         for row in list_of_dicts(seed_report.get("generation_rows")):
             expected = str(row.get("expected_term") or "loss")
             continuation = str(row.get("continuation") or "")
-            normalized_continuation = normalize_for_required_term(continuation)
-            normalized_expected = normalize_for_required_term(expected)
             strict_hit = bool(row.get("continuation_hit"))
-            normalized_hit = bool(normalized_expected and normalized_expected in normalized_continuation)
+            metrics = required_term_hit_metrics(continuation, expected, strict_hit=strict_hit)
             rows.append(
                 {
                     "seed": seed,
@@ -75,17 +74,13 @@ def build_normalized_rows(focus_report: dict[str, Any]) -> list[dict[str, Any]]:
                     "expected_term": expected,
                     "is_focus_case": bool(row.get("is_focus_case")),
                     "strict_hit": strict_hit,
-                    "normalized_hit": normalized_hit,
-                    "normalization_gain": normalized_hit and not strict_hit,
+                    "normalized_hit": metrics["normalized_hit"],
+                    "normalization_gain": metrics["normalization_gain"],
                     "continuation_preview": row.get("continuation_preview"),
-                    "normalized_continuation_preview": _preview(normalized_continuation),
+                    "normalized_continuation_preview": _preview(metrics["normalized_continuation"]),
                 }
             )
     return rows
-
-
-def normalize_for_required_term(value: Any) -> str:
-    return "".join(ch for ch in str(value or "").casefold() if ch.isalnum())
 
 
 def summarize_normalized_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
