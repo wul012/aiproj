@@ -1,0 +1,3 @@
+term,source_minimum_hit_prefix_token_count,candidate_minimum_hit_prefix_token_count,minimum_hit_prefix_delta,source_one_token_prefix_hit,candidate_one_token_prefix_hit,candidate_full_prefix_hit
+fixed,4,1,-3,False,True,True
+loss,1,1,0,True,True,True

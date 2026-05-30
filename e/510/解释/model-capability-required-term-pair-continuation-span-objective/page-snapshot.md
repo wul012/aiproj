@@ -1,0 +1,45 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT continuation-span objective" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The tiny continuation-span run reduced the forced-prefix length needed for at least one target term.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: continuation_span_prefix_minimum_improved
+    - generic [ref=e13]:
+      - generic [ref=e14]: Training
+      - strong [ref=e15]: pass
+    - generic [ref=e16]:
+      - generic [ref=e17]: Generation hits
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Full pair
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: One-token hits
+      - strong [ref=e24]: "2"
+    - generic [ref=e25]:
+      - generic [ref=e26]: Prefix gains
+      - strong [ref=e27]: "1"
+  - generic [ref=e28]:
+    - heading "Next Action" [level=2] [ref=e29]
+    - paragraph [ref=e30]: evaluate whether the prefix gain survives a second seed and a held-out prompt
+  - generic [ref=e31]:
+    - heading "Prefix Comparison" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Term Source min Candidate min Delta One-token Preview" [ref=e36]
+      - rowgroup [ref=e43]:
+        - 'row "fixed 4 1 -3 True fixed: pan l" [ref=e44]'
+        - row "loss 1 1 0 True lossssssssss" [ref=e51]
+  - generic [ref=e58]:
+    - heading "Free Generation" [level=2] [ref=e59]
+    - table [ref=e61]:
+      - rowgroup [ref=e62]:
+        - row "Term Hit Continuation" [ref=e63]
+      - rowgroup [ref=e67]:
+        - row "fixed False \\npan losssss" [ref=e68]
+        - row "loss False \\nsssssssssss" [ref=e72]

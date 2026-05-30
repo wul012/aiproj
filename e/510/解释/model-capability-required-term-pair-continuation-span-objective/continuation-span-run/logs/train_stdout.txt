@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=82718 vocab_size=35
+parameters=53,376
+data_source=data:e\510\解释\model-capability-required-term-pair-continuation-span-objective\required_term_pair_continuation_span_corpus.txt
+step=    1 train_loss=3.0488 val_loss=3.0650
+step=  200 train_loss=1.0523 val_loss=1.0630
+step=  400 train_loss=1.0246 val_loss=1.0140
+step=  600 train_loss=1.1698 val_loss=1.0915
+step=  800 train_loss=1.1127 val_loss=1.0600
+saved=e\510\解释\model-capability-required-term-pair-continuation-span-objective\continuation-span-run
+history=e\510\解释\model-capability-required-term-pair-continuation-span-objective\continuation-span-run\metrics.jsonl
+manifest=e\510\解释\model-capability-required-term-pair-continuation-span-objective\continuation-span-run\run_manifest.json
+sample=e\510\解释\model-capability-required-term-pair-continuation-span-objective\continuation-span-run\sample.txt

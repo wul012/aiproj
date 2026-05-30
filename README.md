@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v509.0.0` rolls up v503-v508 required-term pair diagnostics and selects the next continuation-span objective experiment.
+Version `v510.0.0` runs the fixed/loss continuation-span objective selected by v509 and records a real tiny-training prefix gain.
+
+## Latest v510 checkpoint
+
+- Added `model_capability_required_term_pair_continuation_span_objective`, which reads v509, resolves the v508 prefix-completion source, builds a fixed/loss continuation-span corpus, trains a tiny checkpoint, and compares source vs candidate prefix boundaries.
+- Added `scripts/run_model_capability_required_term_pair_continuation_span_objective.py`; it exposes repeat, training, generation, and require-pass controls.
+- Ran the real tiny training with `max_iters=800`, `block_size=16`, and `n_embd=64`; training passed and produced a checkpoint.
+- Interpreted v510 as a prefix-boundary gain, not free-generation recovery: `fixed` improved from source min prefix `4` to candidate min prefix `1`, while `loss` retained min prefix `1`; free generation still had `generation_hit_count=0`.
+- Archived the v510 continuation-span evidence in `e/510` and added the code explanation in `代码讲解记录_模型能力阶段/524-v510-model-capability-required-term-pair-continuation-span-objective.md`.
 
 ## Latest v509 checkpoint
 

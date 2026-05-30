@@ -122,6 +122,9 @@
 523-v509-model-capability-required-term-pair-diagnostic-rollup.md
  -> v509 code explanation: roll up v503-v508 diagnostics and choose continuation-span objective as the next experiment.
 
+524-v510-model-capability-required-term-pair-continuation-span-objective.md
+ -> v510 code explanation: train a fixed/loss continuation-span candidate and compare source vs candidate prefix boundaries.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

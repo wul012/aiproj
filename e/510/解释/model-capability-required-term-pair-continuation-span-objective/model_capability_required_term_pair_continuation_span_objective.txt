@@ -1,0 +1,11 @@
+status=pass
+decision=required_term_pair_continuation_span_prefix_gain
+continuation_span_decision=continuation_span_prefix_minimum_improved
+training_status=pass
+checkpoint_exists=True
+generation_hit_count=0
+candidate_pair_full_generation_hit=False
+candidate_one_token_prefix_hit_count=2
+prefix_minimum_improved_count=1
+model_quality_claim=tiny_continuation_span_prefix_signal
+next_action=evaluate whether the prefix gain survives a second seed and a held-out prompt

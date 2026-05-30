@@ -165,6 +165,10 @@ e/508/解释/说明.md
 e/509/图片
 e/509/解释/说明.md
  -> v509 model capability required-term pair diagnostic rollup 的运行截图和解释
+
+e/510/图片
+e/510/解释/说明.md
+ -> v510 model capability required-term pair continuation-span objective 的运行截图和解释
 ```
 
 写入规则：
