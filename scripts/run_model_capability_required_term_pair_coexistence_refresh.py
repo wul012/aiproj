@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.model_capability_required_term_pair_coexistence_refresh import (  # noqa: E402
+    PAIR_COEXISTENCE_CORPUS_MODES,
     build_model_capability_required_term_pair_coexistence_refresh,
     resolve_exit_code,
 )
@@ -24,7 +25,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train and evaluate a tiny fixed/loss pair coexistence refresh checkpoint.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "model-capability-required-term-pair-coexistence-refresh")
     parser.add_argument("--seed", type=int, default=533)
-    parser.add_argument("--corpus-mode", choices=["spaced_answer", "colon_immediate"], default="spaced_answer")
+    parser.add_argument("--corpus-mode", choices=PAIR_COEXISTENCE_CORPUS_MODES, default="spaced_answer")
     parser.add_argument("--repeat", type=int, default=260)
     parser.add_argument("--bridge-repeat", type=int, default=20)
     parser.add_argument("--max-iters", type=int, default=1400)

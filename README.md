@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v537.0.0` diagnoses the v536 colon-immediate missed seeds with first-token logits and identifies a first-token preference gap.
+Version `v538.0.0` tests a first-token boost corpus for the colon-immediate fixed/loss objective and keeps the result as a useful negative signal.
+
+## Latest v538 checkpoint
+
+- Added `colon_immediate_first_token_boost` to the pair coexistence refresh corpus modes.
+- Parameterized the colon-immediate stability runner with `--corpus-mode`, so the same three-seed stability harness can test corpus variants.
+- Ran real seeds `535, 1535, 2535` with the boost corpus: pair-full stayed at `1/3`, shifting the successful seed to `2535`.
+- Re-ran the missed-seed diagnostic on v538 outputs; missed seeds still showed first-token gaps, so short prefix boost is insufficient.
+- Archived the v538 stability and diagnostic evidence in `e/538` and added the code explanation in `代码讲解记录_模型能力阶段/552-v538-required-term-pair-first-token-boost-stability.md`.
 
 ## Latest v537 checkpoint
 

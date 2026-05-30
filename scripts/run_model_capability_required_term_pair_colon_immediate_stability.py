@@ -14,6 +14,7 @@ from minigpt.model_capability_required_term_pair_colon_immediate_stability impor
     build_model_capability_required_term_pair_colon_immediate_stability,
     resolve_exit_code,
 )
+from minigpt.model_capability_required_term_pair_coexistence_refresh import PAIR_COEXISTENCE_CORPUS_MODES  # noqa: E402
 from minigpt.model_capability_required_term_pair_colon_immediate_stability_artifacts import (  # noqa: E402
     render_model_capability_required_term_pair_colon_immediate_stability_text,
     write_model_capability_required_term_pair_colon_immediate_stability_outputs,
@@ -24,6 +25,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Repeat colon-immediate fixed/loss pair refresh across seeds.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "model-capability-required-term-pair-colon-immediate-stability")
     parser.add_argument("--seeds", type=int, nargs="+", default=[535, 1535, 2535])
+    parser.add_argument("--corpus-mode", choices=PAIR_COEXISTENCE_CORPUS_MODES, default="colon_immediate")
     parser.add_argument("--repeat", type=int, default=260)
     parser.add_argument("--bridge-repeat", type=int, default=20)
     parser.add_argument("--max-iters", type=int, default=1400)
@@ -49,6 +51,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     report = build_model_capability_required_term_pair_colon_immediate_stability(
         out_dir=args.out_dir,
         seeds=tuple(args.seeds),
+        corpus_mode=args.corpus_mode,
         repeat=args.repeat,
         bridge_repeat=args.bridge_repeat,
         max_iters=args.max_iters,

@@ -1,0 +1,4 @@
+seed,status,decision,pair_full_observed,default_pair_full_variant_count,suppression_pair_full_variant_count,training_status,checkpoint_exists,continuation_hit_count,out_dir
+535,pass,required_term_pair_coexistence_refresh_no_pair_full,False,0,0,pass,True,1,e\538\解释\model-capability-required-term-pair-colon-immediate-first-token-boost-stability\seed-runs\seed-535
+1535,pass,required_term_pair_coexistence_refresh_no_pair_full,False,0,0,pass,True,1,e\538\解释\model-capability-required-term-pair-colon-immediate-first-token-boost-stability\seed-runs\seed-1535
+2535,pass,required_term_pair_coexistence_refresh_pair_full_observed,True,1,1,pass,True,2,e\538\解释\model-capability-required-term-pair-colon-immediate-first-token-boost-stability\seed-runs\seed-2535

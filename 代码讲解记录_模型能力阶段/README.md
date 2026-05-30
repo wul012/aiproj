@@ -206,6 +206,9 @@
 551-v537-required-term-pair-colon-immediate-missed-seed-diagnostic.md
  -> v537 code explanation: diagnose v536 missed seeds with first-token logits and identify the preference gap.
 
+552-v538-required-term-pair-first-token-boost-stability.md
+ -> v538 code explanation: test a first-token boost corpus and preserve the negative stability result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

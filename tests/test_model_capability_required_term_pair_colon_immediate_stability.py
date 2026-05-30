@@ -23,6 +23,7 @@ class ModelCapabilityRequiredTermPairColonImmediateStabilityTests(unittest.TestC
             report = build_model_capability_required_term_pair_colon_immediate_stability(
                 out_dir=root / "stability",
                 seeds=(535, 1535),
+                corpus_mode="colon_immediate_first_token_boost",
                 repeat=2,
                 bridge_repeat=1,
                 max_iters=4,
@@ -33,6 +34,7 @@ class ModelCapabilityRequiredTermPairColonImmediateStabilityTests(unittest.TestC
 
             self.assertEqual(report["status"], "pass")
             self.assertEqual(report["decision"], "required_term_pair_colon_immediate_stably_pair_full")
+            self.assertEqual(report["settings"]["corpus_mode"], "colon_immediate_first_token_boost")
             self.assertEqual(report["summary"]["pair_full_seed_count"], 2)
             self.assertEqual(resolve_exit_code(report, require_pass=True), 0)
 

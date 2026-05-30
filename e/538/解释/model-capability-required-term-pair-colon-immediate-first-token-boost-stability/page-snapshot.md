@@ -1,0 +1,31 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT colon-immediate stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Some but not all colon-immediate seeds produced pair-full coverage.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_colon_immediate_partial_stability
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Pair-full seeds
+      - strong [ref=e18]: "1"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Pair-full rate
+      - strong [ref=e21]: "0.3333"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Stable
+      - strong [ref=e24]: "False"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: inspect missed seeds before increasing corpus or model size
+  - generic [ref=e28]:
+    - heading "Seeds" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]
+      - rowgroup [ref=e40]

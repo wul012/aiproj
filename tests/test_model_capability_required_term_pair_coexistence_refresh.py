@@ -58,6 +58,19 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertNotIn("fixed: fixed", corpus)
         self.assertNotIn("loss: loss", corpus)
 
+    def test_first_token_boost_corpus_adds_short_prefix_targets(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="colon_immediate_first_token_boost",
+        )
+
+        self.assertIn("fixed:f", corpus)
+        self.assertIn("loss:l", corpus)
+        self.assertIn("fixed:fi", corpus)
+        self.assertIn("loss:lo", corpus)
+        self.assertNotIn("fixed: fixed", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
