@@ -1,0 +1,30 @@
+id,category,target,expected,actual,status,detail
+profiles_readable,source,e\530\解释\generation-profiles-endpoint\generation-profiles.json,ok,ok,pass,profiles source must be readable
+health_readable,source,e\530\解释\generation-profiles-endpoint\health-with-generation-profiles.json,ok,ok,pass,health source must be readable
+api_response_readable,source,e\529\解释\generation-profile-playground\api-generate-suppress-newline.json,ok,ok,pass,api_response source must be readable
+playground_html_readable,source,e\531\解释\generation-profile-current-playground\playground.html,ok,ok,pass,playground_html source must be readable
+default_output_readable,source,e\529\解释\generation-profile-playground\default-omega.txt,ok,ok,pass,default_output source must be readable
+profile_output_readable,source,e\529\解释\generation-profile-playground\suppress-newline-omega.txt,ok,ok,pass,profile_output source must be readable
+profiles_status_ok,endpoint,profiles.status,ok,ok,pass,generation profile endpoint status must be ok
+profiles_default_id,endpoint,profiles.default_generation_profile_id,default,default,pass,endpoint default profile must stay stable
+profiles_expected_ids,endpoint,profiles[].id,"[""default"", ""suppress_newline_tokens""]","[""default"", ""suppress_newline_tokens""]",pass,endpoint must publish default and newline-suppression profiles
+profiles_count_matches,endpoint,profiles.profile_count,2,2,pass,profile_count must match the profile list length
+suppression_profile_blocks_newline,endpoint,blocked_token_texts,contains \n,"[""\n"", ""\r""]",pass,blocked token texts must include \n
+suppression_profile_blocks_carriage_return,endpoint,blocked_token_texts,contains \r,"[""\n"", ""\r""]",pass,blocked token texts must include \r
+health_profiles_endpoint,health,health.generation_profiles_endpoint,/api/generation-profiles,/api/generation-profiles,pass,health payload must advertise the runtime profile endpoint
+health_profile_ids_match_endpoint,health,health.generation_profiles[].id,"[""default"", ""suppress_newline_tokens""]","[""default"", ""suppress_newline_tokens""]",pass,health profile ids must match endpoint profile ids
+api_generation_profile,api,api.generation_profile,suppress_newline_tokens,suppress_newline_tokens,pass,API response must echo the selected suppression profile
+api_blocks_newline,api,blocked_token_texts,contains \n,"[""\n"", ""\r""]",pass,blocked token texts must include \n
+api_blocks_carriage_return,api,blocked_token_texts,contains \r,"[""\n"", ""\r""]",pass,blocked token texts must include \r
+api_blocked_token_count_positive,api,api.blocked_token_count,>0,1,pass,API response must show that at least one token was masked
+api_generated_contains_loss,api,api.generated,contains loss,omega: losssssssss,pass,suppression-profile API sample must preserve the target loss surface
+api_continuation_has_no_newline,api,api.continuation,no newline, losssssssss,pass,suppression-profile API continuation should not contain newline separators
+playground_has_profile_select,playground,playground_html,contains generationProfileSelect,generationProfileSelect,pass,playground HTML must include generationProfileSelect
+playground_fetches_profile_endpoint,playground,playground_html,contains /api/generation-profiles,/api/generation-profiles,pass,playground HTML must include /api/generation-profiles
+playground_has_profile_loader,playground,playground_html,contains loadGenerationProfiles,loadGenerationProfiles,pass,playground HTML must include loadGenerationProfiles
+playground_has_cli_profile_flag,playground,playground_html,contains --generation-profile,--generation-profile,pass,playground HTML must include --generation-profile
+cli_outputs_differ,cli,default_output vs profile_output,different,"{""default"": ""omega: los\nsssssss"", ""profile"": ""omega: losssssssss""}",pass,default and suppression-profile samples should be distinguishable
+cli_default_has_newline_split,cli,default_output,contains newline,"omega: los
+sssssss",pass,archived default sample demonstrates the pre-profile newline split
+cli_profile_has_no_newline,cli,profile_output,no newline,omega: losssssssss,pass,archived suppression-profile sample should remove newline separators
+cli_profile_contains_loss,cli,profile_output,contains loss,omega: losssssssss,pass,archived suppression-profile sample should keep the loss term readable

@@ -1,0 +1,35 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT generation profile contract check" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Verifies the endpoint, health payload, API response, playground HTML, and CLI samples for the generation profile contract.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: generation_profile_contract_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Failed count
+      - strong [ref=e15]: "0"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Endpoint ids
+      - strong [ref=e18]: "['default', 'suppress_newline_tokens']"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Health ids
+      - strong [ref=e21]: "['default', 'suppress_newline_tokens']"
+    - generic [ref=e22]:
+      - generic [ref=e23]: API profile
+      - strong [ref=e24]: suppress_newline_tokens
+    - generic [ref=e25]:
+      - generic [ref=e26]: Blocked tokens
+      - strong [ref=e27]: "1"
+  - generic [ref=e28]:
+    - heading "Checks" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]
+      - rowgroup [ref=e39]
+  - generic [ref=e208]:
+    - heading "Issues" [level=2] [ref=e209]
+    - list [ref=e210]:
+      - listitem [ref=e211]: none

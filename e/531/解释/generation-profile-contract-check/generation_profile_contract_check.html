@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT generation profile contract check</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#667085;--line:#d7dee6;--panel:#f7f9fb;--pass:#0f766e;--fail:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:#edf1f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+tr.pass td:nth-child(3){color:var(--pass);font-weight:700}
+tr.fail td:nth-child(3){color:var(--fail);font-weight:700}
+li{margin:6px 0}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>MiniGPT generation profile contract check</h1>
+<p>Verifies the endpoint, health payload, API response, playground HTML, and CLI samples for the generation profile contract.</p>
+</header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>generation_profile_contract_ready</strong></div><div class="card"><span>Failed count</span><strong>0</strong></div><div class="card"><span>Endpoint ids</span><strong>[&#x27;default&#x27;, &#x27;suppress_newline_tokens&#x27;]</strong></div><div class="card"><span>Health ids</span><strong>[&#x27;default&#x27;, &#x27;suppress_newline_tokens&#x27;]</strong></div><div class="card"><span>API profile</span><strong>suppress_newline_tokens</strong></div><div class="card"><span>Blocked tokens</span><strong>1</strong></div></section>
+<section class="panel">
+<h2>Checks</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Category</th><th>Status</th><th>Target</th><th>Detail</th></tr></thead>
+<tbody><tr class="pass"><td>profiles_readable</td><td>source</td><td>pass</td><td>e\530\解释\generation-profiles-endpoint\generation-profiles.json</td><td>profiles source must be readable</td></tr>
+<tr class="pass"><td>health_readable</td><td>source</td><td>pass</td><td>e\530\解释\generation-profiles-endpoint\health-with-generation-profiles.json</td><td>health source must be readable</td></tr>
+<tr class="pass"><td>api_response_readable</td><td>source</td><td>pass</td><td>e\529\解释\generation-profile-playground\api-generate-suppress-newline.json</td><td>api_response source must be readable</td></tr>
+<tr class="pass"><td>playground_html_readable</td><td>source</td><td>pass</td><td>e\531\解释\generation-profile-current-playground\playground.html</td><td>playground_html source must be readable</td></tr>
+<tr class="pass"><td>default_output_readable</td><td>source</td><td>pass</td><td>e\529\解释\generation-profile-playground\default-omega.txt</td><td>default_output source must be readable</td></tr>
+<tr class="pass"><td>profile_output_readable</td><td>source</td><td>pass</td><td>e\529\解释\generation-profile-playground\suppress-newline-omega.txt</td><td>profile_output source must be readable</td></tr>
+<tr class="pass"><td>profiles_status_ok</td><td>endpoint</td><td>pass</td><td>profiles.status</td><td>generation profile endpoint status must be ok</td></tr>
+<tr class="pass"><td>profiles_default_id</td><td>endpoint</td><td>pass</td><td>profiles.default_generation_profile_id</td><td>endpoint default profile must stay stable</td></tr>
+<tr class="pass"><td>profiles_expected_ids</td><td>endpoint</td><td>pass</td><td>profiles[].id</td><td>endpoint must publish default and newline-suppression profiles</td></tr>
+<tr class="pass"><td>profiles_count_matches</td><td>endpoint</td><td>pass</td><td>profiles.profile_count</td><td>profile_count must match the profile list length</td></tr>
+<tr class="pass"><td>suppression_profile_blocks_newline</td><td>endpoint</td><td>pass</td><td>blocked_token_texts</td><td>blocked token texts must include \n</td></tr>
+<tr class="pass"><td>suppression_profile_blocks_carriage_return</td><td>endpoint</td><td>pass</td><td>blocked_token_texts</td><td>blocked token texts must include \r</td></tr>
+<tr class="pass"><td>health_profiles_endpoint</td><td>health</td><td>pass</td><td>health.generation_profiles_endpoint</td><td>health payload must advertise the runtime profile endpoint</td></tr>
+<tr class="pass"><td>health_profile_ids_match_endpoint</td><td>health</td><td>pass</td><td>health.generation_profiles[].id</td><td>health profile ids must match endpoint profile ids</td></tr>
+<tr class="pass"><td>api_generation_profile</td><td>api</td><td>pass</td><td>api.generation_profile</td><td>API response must echo the selected suppression profile</td></tr>
+<tr class="pass"><td>api_blocks_newline</td><td>api</td><td>pass</td><td>blocked_token_texts</td><td>blocked token texts must include \n</td></tr>
+<tr class="pass"><td>api_blocks_carriage_return</td><td>api</td><td>pass</td><td>blocked_token_texts</td><td>blocked token texts must include \r</td></tr>
+<tr class="pass"><td>api_blocked_token_count_positive</td><td>api</td><td>pass</td><td>api.blocked_token_count</td><td>API response must show that at least one token was masked</td></tr>
+<tr class="pass"><td>api_generated_contains_loss</td><td>api</td><td>pass</td><td>api.generated</td><td>suppression-profile API sample must preserve the target loss surface</td></tr>
+<tr class="pass"><td>api_continuation_has_no_newline</td><td>api</td><td>pass</td><td>api.continuation</td><td>suppression-profile API continuation should not contain newline separators</td></tr>
+<tr class="pass"><td>playground_has_profile_select</td><td>playground</td><td>pass</td><td>playground_html</td><td>playground HTML must include generationProfileSelect</td></tr>
+<tr class="pass"><td>playground_fetches_profile_endpoint</td><td>playground</td><td>pass</td><td>playground_html</td><td>playground HTML must include /api/generation-profiles</td></tr>
+<tr class="pass"><td>playground_has_profile_loader</td><td>playground</td><td>pass</td><td>playground_html</td><td>playground HTML must include loadGenerationProfiles</td></tr>
+<tr class="pass"><td>playground_has_cli_profile_flag</td><td>playground</td><td>pass</td><td>playground_html</td><td>playground HTML must include --generation-profile</td></tr>
+<tr class="pass"><td>cli_outputs_differ</td><td>cli</td><td>pass</td><td>default_output vs profile_output</td><td>default and suppression-profile samples should be distinguishable</td></tr>
+<tr class="pass"><td>cli_default_has_newline_split</td><td>cli</td><td>pass</td><td>default_output</td><td>archived default sample demonstrates the pre-profile newline split</td></tr>
+<tr class="pass"><td>cli_profile_has_no_newline</td><td>cli</td><td>pass</td><td>profile_output</td><td>archived suppression-profile sample should remove newline separators</td></tr>
+<tr class="pass"><td>cli_profile_contains_loss</td><td>cli</td><td>pass</td><td>profile_output</td><td>archived suppression-profile sample should keep the loss term readable</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Issues</h2>
+<ul><li>none</li></ul>
+</section>
+</main>
+</body>
+</html>

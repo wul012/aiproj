@@ -249,6 +249,10 @@ e/529/解释/说明.md
 e/530/图片
 e/530/解释/说明.md
  -> v530 generation profiles endpoint and runtime playground registry 的运行截图和解释
+
+e/531/图片
+e/531/解释/说明.md
+ -> v531 generation profile contract check 的运行截图和解释
 ```
 
 写入规则：

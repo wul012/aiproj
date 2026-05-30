@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v530.0.0` adds a runtime generation profile registry endpoint for the playground/server contract.
+Version `v531.0.0` adds a generation profile contract check across endpoint, health, API, CLI, and playground artifacts.
+
+## Latest v531 checkpoint
+
+- Added `generation_profile_contract_check`, which validates the v530 profile endpoint, health payload, v529 suppression-profile API response, CLI samples, and current playground HTML.
+- Added `scripts/check_generation_profile_contract.py` with `--require-pass` so profile drift can fail CI-style runs.
+- Regenerated the current playground HTML for the v531 check; the old v529 HTML correctly failed because it did not contain the v530 runtime profile loader.
+- Ran the real contract check: `status=pass`, `failed_count=0`, `endpoint_profile_ids=default,suppress_newline_tokens`, and `api_blocked_token_count=1`.
+- Archived the v531 contract evidence in `e/531` and added the code explanation in `代码讲解记录_模型能力阶段/545-v531-generation-profile-contract-check.md`.
 
 ## Latest v530 checkpoint
 

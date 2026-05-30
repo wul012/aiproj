@@ -185,6 +185,9 @@
 544-v530-generation-profiles-endpoint.md
  -> v530 code explanation: publish generation profiles through a runtime server endpoint and reload them in playground.
 
+545-v531-generation-profile-contract-check.md
+ -> v531 code explanation: verify endpoint, health, API, CLI, and playground artifacts for the generation profile contract.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

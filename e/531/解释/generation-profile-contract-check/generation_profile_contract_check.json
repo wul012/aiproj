@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT generation profile contract check",
+  "generated_at": "2026-05-30T14:41:26Z",
+  "status": "pass",
+  "decision": "generation_profile_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "checks": [
+    {
+      "id": "profiles_readable",
+      "category": "source",
+      "target": "e\\530\\解释\\generation-profiles-endpoint\\generation-profiles.json",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "profiles source must be readable"
+    },
+    {
+      "id": "health_readable",
+      "category": "source",
+      "target": "e\\530\\解释\\generation-profiles-endpoint\\health-with-generation-profiles.json",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "health source must be readable"
+    },
+    {
+      "id": "api_response_readable",
+      "category": "source",
+      "target": "e\\529\\解释\\generation-profile-playground\\api-generate-suppress-newline.json",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "api_response source must be readable"
+    },
+    {
+      "id": "playground_html_readable",
+      "category": "source",
+      "target": "e\\531\\解释\\generation-profile-current-playground\\playground.html",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "playground_html source must be readable"
+    },
+    {
+      "id": "default_output_readable",
+      "category": "source",
+      "target": "e\\529\\解释\\generation-profile-playground\\default-omega.txt",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "default_output source must be readable"
+    },
+    {
+      "id": "profile_output_readable",
+      "category": "source",
+      "target": "e\\529\\解释\\generation-profile-playground\\suppress-newline-omega.txt",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "profile_output source must be readable"
+    },
+    {
+      "id": "profiles_status_ok",
+      "category": "endpoint",
+      "target": "profiles.status",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "pass",
+      "detail": "generation profile endpoint status must be ok"
+    },
+    {
+      "id": "profiles_default_id",
+      "category": "endpoint",
+      "target": "profiles.default_generation_profile_id",
+      "expected": "default",
+      "actual": "default",
+      "status": "pass",
+      "detail": "endpoint default profile must stay stable"
+    },
+    {
+      "id": "profiles_expected_ids",
+      "category": "endpoint",
+      "target": "profiles[].id",
+      "expected": [
+        "default",
+        "suppress_newline_tokens"
+      ],
+      "actual": [
+        "default",
+        "suppress_newline_tokens"
+      ],
+      "status": "pass",
+      "detail": "endpoint must publish default and newline-suppression profiles"
+    },
+    {
+      "id": "profiles_count_matches",
+      "category": "endpoint",
+      "target": "profiles.profile_count",
+      "expected": 2,
+      "actual": 2,
+      "status": "pass",
+      "detail": "profile_count must match the profile list length"
+    },
+    {
+      "id": "suppression_profile_blocks_newline",
+      "category": "endpoint",
+      "target": "blocked_token_texts",
+      "expected": "contains \\n",
+      "actual": [
+        "\n",
+        "\r"
+      ],
+      "status": "pass",
+      "detail": "blocked token texts must include \\n"
+    },
+    {
+      "id": "suppression_profile_blocks_carriage_return",
+      "category": "endpoint",
+      "target": "blocked_token_texts",
+      "expected": "contains \\r",
+      "actual": [
+        "\n",
+        "\r"
+      ],
+      "status": "pass",
+      "detail": "blocked token texts must include \\r"
+    },
+    {
+      "id": "health_profiles_endpoint",
+      "category": "health",
+      "target": "health.generation_profiles_endpoint",
+      "expected": "/api/generation-profiles",
+      "actual": "/api/generation-profiles",
+      "status": "pass",
+      "detail": "health payload must advertise the runtime profile endpoint"
+    },
+    {
+      "id": "health_profile_ids_match_endpoint",
+      "category": "health",
+      "target": "health.generation_profiles[].id",
+      "expected": [
+        "default",
+        "suppress_newline_tokens"
+      ],
+      "actual": [
+        "default",
+        "suppress_newline_tokens"
+      ],
+      "status": "pass",
+      "detail": "health profile ids must match endpoint profile ids"
+    },
+    {
+      "id": "api_generation_profile",
+      "category": "api",
+      "target": "api.generation_profile",
+      "expected": "suppress_newline_tokens",
+      "actual": "suppress_newline_tokens",
+      "status": "pass",
+      "detail": "API response must echo the selected suppression profile"
+    },
+    {
+      "id": "api_blocks_newline",
+      "category": "api",
+      "target": "blocked_token_texts",
+      "expected": "contains \\n",
+      "actual": [
+        "\n",
+        "\r"
+      ],
+      "status": "pass",
+      "detail": "blocked token texts must include \\n"
+    },
+    {
+      "id": "api_blocks_carriage_return",
+      "category": "api",
+      "target": "blocked_token_texts",
+      "expected": "contains \\r",
+      "actual": [
+        "\n",
+        "\r"
+      ],
+      "status": "pass",
+      "detail": "blocked token texts must include \\r"
+    },
+    {
+      "id": "api_blocked_token_count_positive",
+      "category": "api",
+      "target": "api.blocked_token_count",
+      "expected": ">0",
+      "actual": 1,
+      "status": "pass",
+      "detail": "API response must show that at least one token was masked"
+    },
+    {
+      "id": "api_generated_contains_loss",
+      "category": "api",
+      "target": "api.generated",
+      "expected": "contains loss",
+      "actual": "omega: losssssssss",
+      "status": "pass",
+      "detail": "suppression-profile API sample must preserve the target loss surface"
+    },
+    {
+      "id": "api_continuation_has_no_newline",
+      "category": "api",
+      "target": "api.continuation",
+      "expected": "no newline",
+      "actual": " losssssssss",
+      "status": "pass",
+      "detail": "suppression-profile API continuation should not contain newline separators"
+    },
+    {
+      "id": "playground_has_profile_select",
+      "category": "playground",
+      "target": "playground_html",
+      "expected": "contains generationProfileSelect",
+      "actual": "generationProfileSelect",
+      "status": "pass",
+      "detail": "playground HTML must include generationProfileSelect"
+    },
+    {
+      "id": "playground_fetches_profile_endpoint",
+      "category": "playground",
+      "target": "playground_html",
+      "expected": "contains /api/generation-profiles",
+      "actual": "/api/generation-profiles",
+      "status": "pass",
+      "detail": "playground HTML must include /api/generation-profiles"
+    },
+    {
+      "id": "playground_has_profile_loader",
+      "category": "playground",
+      "target": "playground_html",
+      "expected": "contains loadGenerationProfiles",
+      "actual": "loadGenerationProfiles",
+      "status": "pass",
+      "detail": "playground HTML must include loadGenerationProfiles"
+    },
+    {
+      "id": "playground_has_cli_profile_flag",
+      "category": "playground",
+      "target": "playground_html",
+      "expected": "contains --generation-profile",
+      "actual": "--generation-profile",
+      "status": "pass",
+      "detail": "playground HTML must include --generation-profile"
+    },
+    {
+      "id": "cli_outputs_differ",
+      "category": "cli",
+      "target": "default_output vs profile_output",
+      "expected": "different",
+      "actual": {
+        "default": "omega: los\nsssssss",
+        "profile": "omega: losssssssss"
+      },
+      "status": "pass",
+      "detail": "default and suppression-profile samples should be distinguishable"
+    },
+    {
+      "id": "cli_default_has_newline_split",
+      "category": "cli",
+      "target": "default_output",
+      "expected": "contains newline",
+      "actual": "omega: los\nsssssss",
+      "status": "pass",
+      "detail": "archived default sample demonstrates the pre-profile newline split"
+    },
+    {
+      "id": "cli_profile_has_no_newline",
+      "category": "cli",
+      "target": "profile_output",
+      "expected": "no newline",
+      "actual": "omega: losssssssss",
+      "status": "pass",
+      "detail": "archived suppression-profile sample should remove newline separators"
+    },
+    {
+      "id": "cli_profile_contains_loss",
+      "category": "cli",
+      "target": "profile_output",
+      "expected": "contains loss",
+      "actual": "omega: losssssssss",
+      "status": "pass",
+      "detail": "archived suppression-profile sample should keep the loss term readable"
+    }
+  ],
+  "sources": {
+    "profiles": {
+      "id": "profiles",
+      "path": "e\\530\\解释\\generation-profiles-endpoint\\generation-profiles.json",
+      "exists": true,
+      "size_bytes": 991,
+      "read_status": "ok"
+    },
+    "health": {
+      "id": "health",
+      "path": "e\\530\\解释\\generation-profiles-endpoint\\health-with-generation-profiles.json",
+      "exists": true,
+      "size_bytes": 2849,
+      "read_status": "ok"
+    },
+    "api_response": {
+      "id": "api_response",
+      "path": "e\\529\\解释\\generation-profile-playground\\api-generate-suppress-newline.json",
+      "exists": true,
+      "size_bytes": 701,
+      "read_status": "ok"
+    },
+    "playground_html": {
+      "id": "playground_html",
+      "path": "e\\531\\解释\\generation-profile-current-playground\\playground.html",
+      "exists": true,
+      "size_bytes": 48124,
+      "read_status": "ok"
+    },
+    "default_output": {
+      "id": "default_output",
+      "path": "e\\529\\解释\\generation-profile-playground\\default-omega.txt",
+      "exists": true,
+      "size_bytes": 19,
+      "read_status": "ok"
+    },
+    "profile_output": {
+      "id": "profile_output",
+      "path": "e\\529\\解释\\generation-profile-playground\\suppress-newline-omega.txt",
+      "exists": true,
+      "size_bytes": 18,
+      "read_status": "ok"
+    }
+  },
+  "summary": {
+    "endpoint_profile_ids": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "health_profile_ids": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "expected_profile_ids": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "api_generation_profile": "suppress_newline_tokens",
+    "api_blocked_token_count": 1,
+    "default_output_has_newline": true,
+    "profile_output_has_newline": false
+  }
+}

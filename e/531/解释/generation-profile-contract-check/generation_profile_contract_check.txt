@@ -1,0 +1,10 @@
+status=pass
+decision=generation_profile_contract_ready
+failed_count=0
+endpoint_profile_ids=default,suppress_newline_tokens
+health_profile_ids=default,suppress_newline_tokens
+api_generation_profile=suppress_newline_tokens
+api_blocked_token_count=1
+default_output_has_newline=True
+profile_output_has_newline=False
+issues=
