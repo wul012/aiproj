@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=73937 vocab_size=34
+parameters=53,312
+data_source=data:e\540\解释\model-capability-required-term-pair-colon-immediate-direct-budget-stability\seed-runs\seed-1535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.0759 val_loss=3.0691
+step=  550 train_loss=1.0657 val_loss=1.7630
+step= 1100 train_loss=1.1090 val_loss=2.1927
+step= 1650 train_loss=0.9895 val_loss=1.8246
+step= 2200 train_loss=1.4311 val_loss=2.0885
+saved=e\540\解释\model-capability-required-term-pair-colon-immediate-direct-budget-stability\seed-runs\seed-1535\pair-coexistence-refresh-run
+history=e\540\解释\model-capability-required-term-pair-colon-immediate-direct-budget-stability\seed-runs\seed-1535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\540\解释\model-capability-required-term-pair-colon-immediate-direct-budget-stability\seed-runs\seed-1535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\540\解释\model-capability-required-term-pair-colon-immediate-direct-budget-stability\seed-runs\seed-1535\pair-coexistence-refresh-run\sample.txt

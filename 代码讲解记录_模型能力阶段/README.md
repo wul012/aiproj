@@ -212,6 +212,9 @@
 553-v539-required-term-pair-isolated-prompt-stability.md
  -> v539 code explanation: test isolated prompt blocks and record why the direction regressed.
 
+554-v540-required-term-pair-direct-budget-stability.md
+ -> v540 code explanation: run a higher-budget direct mapping check and rule out simple under-training.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

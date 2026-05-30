@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v539.0.0` tests an isolated prompt corpus for the fixed/loss pair objective and records it as a negative direction.
+Version `v540.0.0` runs a higher-budget direct colon-immediate stability check and shows the pair objective is not merely under-trained.
+
+## Latest v540 checkpoint
+
+- Re-ran the direct `colon_immediate` corpus with higher budget: `repeat=420`, `bridge_repeat=40`, `max_iters=2200`.
+- Kept the same real seeds `535, 1535, 2535` and the same tiny GPT shape for a controlled comparison against v536.
+- Pair-full dropped to `0/3`; the missed-seed diagnostic showed all three seeds still have first-token gaps.
+- Concluded that the instability is not solved by simply adding more rows and training steps.
+- Archived the v540 stability and diagnostic evidence in `e/540` and added the code explanation in `代码讲解记录_模型能力阶段/554-v540-required-term-pair-direct-budget-stability.md`.
 
 ## Latest v539 checkpoint
 
