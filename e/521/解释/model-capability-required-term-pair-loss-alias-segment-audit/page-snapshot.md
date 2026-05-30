@@ -1,0 +1,34 @@
+- main [ref=e2] [box=38,0,1180,658]:
+  - generic [ref=e3] [box=66,28,1124,77]:
+    - heading "MiniGPT loss-alias segment audit" [level=1] [ref=e4] [box=66,28,1124,36]
+    - paragraph [ref=e5] [box=66,80,1124,25]: All normalization gains came from loss characters split by newline separators.
+  - generic [ref=e6] [box=66,123,1124,114]:
+    - generic [ref=e7] [box=66,123,152,114]:
+      - generic [ref=e8] [box=80,137,123,14]: Status
+      - strong [ref=e9] [box=80,157,123,22]: pass
+    - generic [ref=e10] [box=228,123,152,114]:
+      - generic [ref=e11] [box=242,137,123,14]: Decision
+      - strong [ref=e12] [box=242,157,123,65]: loss_alias_segment_newline_split
+    - generic [ref=e13] [box=390,123,152,114]:
+      - generic [ref=e14] [box=404,137,123,14]: Cases
+      - strong [ref=e15] [box=404,157,123,22]: "4"
+    - generic [ref=e16] [box=552,123,152,114]:
+      - generic [ref=e17] [box=566,137,123,14]: Gains
+      - strong [ref=e18] [box=566,157,123,22]: "4"
+    - generic [ref=e19] [box=714,123,152,114]:
+      - generic [ref=e20] [box=728,137,123,14]: Newline gains
+      - strong [ref=e21] [box=728,157,123,22]: "4"
+    - generic [ref=e22] [box=876,123,152,114]:
+      - generic [ref=e23] [box=890,137,123,28]: Dominant separator
+      - strong [ref=e24] [box=890,172,123,22]: newline
+    - generic [ref=e25] [box=1038,123,152,114]:
+      - generic [ref=e26] [box=1052,137,123,14]: Tokenizer rows
+      - strong [ref=e27] [box=1052,157,123,22]: "4"
+  - generic [ref=e28] [box=66,255,1124,111]:
+    - heading "Next Action" [level=2] [ref=e29] [box=82,271,1091,21]
+    - paragraph [ref=e30] [box=82,308,1091,25]: test decoding cleanup or stop-token handling before changing the training corpus again
+  - generic [ref=e31] [box=66,380,1124,236]:
+    - heading "Case Rows" [level=2] [ref=e32] [box=82,396,1091,21]
+    - table [ref=e34] [box=82,430,1091,170]:
+      - rowgroup [ref=e35] [box=82,430,1091,35]
+      - rowgroup [ref=e45] [box=82,464,1091,135]

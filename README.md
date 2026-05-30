@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v520.0.0` contrasts source stability metrics with focused loss-alias metrics.
+Version `v521.0.0` audits the segment shape behind focused loss-alias normalized hits.
+
+## Latest v521 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_segment_audit`, a read-only analyzer for strict-miss/normalized-hit generation rows.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_segment_audit.py`; it reads v518 focus metrics and attempts to load the archived tokenizer.
+- Ran the real audit: all `4/4` normalization gains were newline splits, with `tokenizer_loaded_count=4`.
+- Interpreted v521 as a formatting boundary finding: `loss` is present after normalization, but strict recovery fails because continuations emit newline-segmented forms such as `los\ns`.
+- Archived the v521 segment-audit evidence in `e/521` and added the code explanation in `代码讲解记录_模型能力阶段/535-v521-model-capability-required-term-pair-loss-alias-segment-audit.md`.
 
 ## Latest v520 checkpoint
 

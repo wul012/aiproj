@@ -1,0 +1,13 @@
+status=pass
+decision=required_term_pair_loss_alias_newline_segment_boundary
+segment_audit_decision=loss_alias_segment_newline_split
+case_count=4
+strict_miss_normalized_hit_count=4
+normalization_gain_count=4
+newline_gain_count=4
+space_gain_count=0
+mixed_gain_count=0
+tokenizer_loaded_count=4
+dominant_separator_kind=newline
+model_quality_claim=tiny_loss_alias_formatting_boundary_observed
+next_action=test decoding cleanup or stop-token handling before changing the training corpus again

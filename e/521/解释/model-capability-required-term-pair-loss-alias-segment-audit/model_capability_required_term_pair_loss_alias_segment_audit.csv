@@ -1,0 +1,5 @@
+seed,case_id,case_type,alias_group,strict_hit,normalized_hit,normalization_gain,separator_kind,alnum_segment_count,normalized_expected_index,tokenizer_loaded,tokenizer_name,token_count,continuation_preview,token_pieces_preview
+515,source-loss,source,source,False,True,True,newline,5,0,True,char,12, los\ns\ns\ns\ns, |l|o|s|\n|s|\n|s|\n|s|\n|s
+515,heldout-beta-loss,heldout,greek,False,True,True,newline,5,0,True,char,12, los\ns\ns\ns\ns, |l|o|s|\n|s|\n|s|\n|s|\n|s
+515,heldout-omega-loss,heldout,greek,False,True,True,newline,4,0,True,char,12, los\nss\ns\ns\n, |l|o|s|\n|s|s|\n|s|\n|s|\n
+515,heldout-theta-loss,heldout,greek,False,True,True,newline,4,0,True,char,12, los\nss\ns\ns\n, |l|o|s|\n|s|s|\n|s|\n|s|\n
