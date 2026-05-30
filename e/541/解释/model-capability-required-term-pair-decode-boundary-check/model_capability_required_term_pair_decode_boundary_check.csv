@@ -1,0 +1,13 @@
+spec_id,seed,top_k,temperature,max_new_tokens,source_pair_full_observed,pair_full_observed,default_pair_full_variant_count,suppression_pair_full_variant_count,default_continuation_hit_count,suppression_continuation_hit_count,replay_decision
+greedy-k1-t020-n12,535,1,0.2,12,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+greedy-k1-t020-n12,1535,1,0.2,12,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+greedy-k1-t020-n12,2535,1,0.2,12,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+wider-k2-t020-n12,535,2,0.2,12,False,True,1,1,2,2,generation_profile_no_pair_coexistence_gain
+wider-k2-t020-n12,1535,2,0.2,12,False,False,0,0,0,0,generation_profile_no_pair_coexistence_gain
+wider-k2-t020-n12,2535,2,0.2,12,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+wider-k4-t020-n12,535,4,0.2,12,False,True,1,1,2,2,generation_profile_no_pair_coexistence_gain
+wider-k4-t020-n12,1535,4,0.2,12,False,False,0,0,0,0,generation_profile_no_pair_coexistence_gain
+wider-k4-t020-n12,2535,4,0.2,12,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+greedy-k1-t020-n20,535,1,0.2,20,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+greedy-k1-t020-n20,1535,1,0.2,20,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain
+greedy-k1-t020-n20,2535,1,0.2,20,False,False,0,0,1,1,generation_profile_no_pair_coexistence_gain

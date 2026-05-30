@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation profile replay",
+  "generated_at": "2026-05-30T23:49:03Z",
+  "status": "pass",
+  "decision": "generation_profile_no_pair_coexistence_gain",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_branch_retention_sweep": "",
+  "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k2-t020-n12\\seed-1535",
+  "settings": {
+    "profiles": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "variant_limit": 1,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 2,
+    "device": "cpu",
+    "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+  },
+  "terms": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed:",
+      "source_hit_rate": 1.0
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss:",
+      "source_hit_rate": 1.0
+    }
+  ],
+  "case_rows": [
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "seed-1535",
+      "branch_retention_run_id": "seed-1535",
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 1535,
+      "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed:lossss:fixs:",
+      "continuation": "lossss:fixs:",
+      "generated_preview": "fixed:lossss:fixs:",
+      "continuation_preview": "lossss:fixs:",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "seed-1535",
+      "branch_retention_run_id": "seed-1535",
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed:",
+      "generation_seed": 1535,
+      "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed:lossss:fixs:",
+      "continuation": "lossss:fixs:",
+      "generated_preview": "fixed:lossss:fixs:",
+      "continuation_preview": "lossss:fixs:",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "seed-1535",
+      "branch_retention_run_id": "seed-1535",
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 1536,
+      "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss:fixed\nfixed\n",
+      "continuation": "fixed\nfixed\n",
+      "generated_preview": "loss:fixed\\nfixed\\n",
+      "continuation_preview": "fixed\\nfixed\\n",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "seed-1535",
+      "branch_retention_run_id": "seed-1535",
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss:",
+      "generation_seed": 1536,
+      "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss:fixed:fixed:",
+      "continuation": "fixed:fixed:",
+      "generated_preview": "loss:fixed:fixed:",
+      "continuation_preview": "fixed:fixed:",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    }
+  ],
+  "variant_rows": [
+    {
+      "variant_id": "seed-1535",
+      "profile_id": "default",
+      "term_count": 2,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "seed-1535",
+      "profile_id": "suppress_newline_tokens",
+      "term_count": 2,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "pair_full_hit": false
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "default",
+      "case_count": 2,
+      "continuation_hit_count": 0,
+      "newline_cleanup_hit_count": 0,
+      "pair_full_variant_count": 0,
+      "variant_count": 1,
+      "blocked_token_count_total": 0
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "case_count": 2,
+      "continuation_hit_count": 0,
+      "newline_cleanup_hit_count": 0,
+      "pair_full_variant_count": 0,
+      "variant_count": 1,
+      "blocked_token_count_total": 2
+    }
+  ],
+  "summary": {
+    "variant_count": 1,
+    "term_count": 2,
+    "profile_count": 2,
+    "default_pair_full_variant_count": 0,
+    "suppression_pair_full_variant_count": 0,
+    "default_continuation_hit_count": 0,
+    "suppression_continuation_hit_count": 0,
+    "suppression_hit_delta": 0,
+    "suppression_pair_full_delta": 0,
+    "pair_full_rows": []
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+    "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+    "summary": {
+      "variant_count": 1,
+      "term_count": 2,
+      "profile_count": 2,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "suppression_hit_delta": 0,
+      "suppression_pair_full_delta": 0,
+      "pair_full_rows": []
+    }
+  }
+}

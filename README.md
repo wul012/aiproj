@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v540.0.0` runs a higher-budget direct colon-immediate stability check and shows the pair objective is not merely under-trained.
+Version `v541.0.0` runs a decode-boundary check over the v540 checkpoints and finds that wider `top_k` can recover one fixed/loss pair seed without retraining.
+
+## Latest v541 checkpoint
+
+- Added `model_capability_required_term_pair_decode_boundary_check`, a read-only replay wrapper over colon-immediate stability reports.
+- Reused the v540 high-budget checkpoints and tested decode specs: greedy `top_k=1`, wider `top_k=2`, wider `top_k=4`, and longer greedy output.
+- Found `best_spec_id=wider-k2-t020-n12` with `best_pair_full_seed_count=1`, improving over the v540 baseline `0/3`.
+- Kept the claim as `targeted_decode_boundary_diagnostic_only`: seed `535` can be recovered by decode width, but seeds `1535` and `2535` remain unstable.
+- Archived the v541 evidence in `e/541` and added the code explanation in `代码讲解记录_模型能力阶段/555-v541-required-term-pair-decode-boundary-check.md`.
 
 ## Latest v540 checkpoint
 

@@ -1,0 +1,2946 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair decode boundary check",
+  "generated_at": "2026-05-30T23:49:04Z",
+  "status": "pass",
+  "decision": "required_term_pair_decode_boundary_improves_pair_surface",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_colon_immediate_stability": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+  "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check",
+  "settings": {
+    "decode_specs": [
+      {
+        "spec_id": "greedy-k1-t020-n12",
+        "top_k": 1,
+        "temperature": 0.2,
+        "max_new_tokens": 12
+      },
+      {
+        "spec_id": "wider-k2-t020-n12",
+        "top_k": 2,
+        "temperature": 0.2,
+        "max_new_tokens": 12
+      },
+      {
+        "spec_id": "wider-k4-t020-n12",
+        "top_k": 4,
+        "temperature": 0.2,
+        "max_new_tokens": 12
+      },
+      {
+        "spec_id": "greedy-k1-t020-n20",
+        "top_k": 1,
+        "temperature": 0.2,
+        "max_new_tokens": 20
+      }
+    ],
+    "profiles": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "device": "cpu",
+    "experiment_boundary": "rerun fixed/loss replay under decode boundaries without retraining"
+  },
+  "rows": [
+    {
+      "spec_id": "greedy-k1-t020-n12",
+      "seed": 535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 1,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "greedy-k1-t020-n12",
+      "seed": 1535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 1,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "greedy-k1-t020-n12",
+      "seed": 2535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 1,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "wider-k2-t020-n12",
+      "seed": 535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 2,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 1,
+      "suppression_pair_full_variant_count": 1,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "pair_full_observed": true
+    },
+    {
+      "spec_id": "wider-k2-t020-n12",
+      "seed": 1535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 2,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "wider-k2-t020-n12",
+      "seed": 2535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 2,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "wider-k4-t020-n12",
+      "seed": 535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 4,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 1,
+      "suppression_pair_full_variant_count": 1,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "pair_full_observed": true
+    },
+    {
+      "spec_id": "wider-k4-t020-n12",
+      "seed": 1535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 4,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "wider-k4-t020-n12",
+      "seed": 2535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 4,
+      "temperature": 0.2,
+      "max_new_tokens": 12,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "greedy-k1-t020-n20",
+      "seed": 535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 1,
+      "temperature": 0.2,
+      "max_new_tokens": 20,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "greedy-k1-t020-n20",
+      "seed": 1535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 1,
+      "temperature": 0.2,
+      "max_new_tokens": 20,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    },
+    {
+      "spec_id": "greedy-k1-t020-n20",
+      "seed": 2535,
+      "source_pair_full_observed": false,
+      "replay_status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "top_k": 1,
+      "temperature": 0.2,
+      "max_new_tokens": 20,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    }
+  ],
+  "replay_reports": [
+    {
+      "spec_id": "greedy-k1-t020-n12",
+      "seed": 535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\greedy-k1-t020-n12\\seed-535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "fixed:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "fixed:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "loss:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "loss:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "greedy-k1-t020-n12",
+      "seed": 1535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\greedy-k1-t020-n12\\seed-1535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed\nprosss",
+            "continuation": "fixed\nprosss",
+            "generated_preview": "fixed:fixed\\nprosss",
+            "continuation_preview": "fixed\\nprosss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed:fxedxe",
+            "continuation": "fixed:fxedxe",
+            "generated_preview": "fixed:fixed:fxedxe",
+            "continuation_preview": "fixed:fxedxe",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed:fixed\n",
+            "continuation": "fixed:fixed\n",
+            "generated_preview": "loss:fixed:fixed\\n",
+            "continuation_preview": "fixed:fixed\\n",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed:fixed:",
+            "continuation": "fixed:fixed:",
+            "generated_preview": "loss:fixed:fixed:",
+            "continuation_preview": "fixed:fixed:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed"
+            ],
+            "missed_terms": [
+              "loss"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed"
+            ],
+            "missed_terms": [
+              "loss"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "greedy-k1-t020-n12",
+      "seed": 2535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\greedy-k1-t020-n12\\seed-2535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "fixed:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "fixed:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "loss:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "loss:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "wider-k2-t020-n12",
+      "seed": 535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k2-t020-n12\\seed-535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 2,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed\nfixed\n",
+            "continuation": "fixed\nfixed\n",
+            "generated_preview": "fixed:fixed\\nfixed\\n",
+            "continuation_preview": "fixed\\nfixed\\n",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed:lossss",
+            "continuation": "fixed:lossss",
+            "generated_preview": "fixed:fixed:lossss",
+            "continuation_preview": "fixed:lossss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:losssssssss\n",
+            "continuation": "losssssssss\n",
+            "generated_preview": "loss:losssssssss\\n",
+            "continuation_preview": "losssssssss\\n",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "loss:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed",
+              "loss"
+            ],
+            "missed_terms": [],
+            "hit_count": 2,
+            "pair_full_hit": true
+          },
+          {
+            "variant_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed",
+              "loss"
+            ],
+            "missed_terms": [],
+            "hit_count": 2,
+            "pair_full_hit": true
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 2,
+            "newline_cleanup_hit_count": 2,
+            "pair_full_variant_count": 1,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 2,
+            "newline_cleanup_hit_count": 2,
+            "pair_full_variant_count": 1,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 1,
+          "suppression_pair_full_variant_count": 1,
+          "default_continuation_hit_count": 2,
+          "suppression_continuation_hit_count": 2,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": [
+            {
+              "variant_id": "seed-535",
+              "profile_id": "default",
+              "term_count": 2,
+              "hit_terms": [
+                "fixed",
+                "loss"
+              ],
+              "missed_terms": [],
+              "hit_count": 2,
+              "pair_full_hit": true
+            },
+            {
+              "variant_id": "seed-535",
+              "profile_id": "suppress_newline_tokens",
+              "term_count": 2,
+              "hit_terms": [
+                "fixed",
+                "loss"
+              ],
+              "missed_terms": [],
+              "hit_count": 2,
+              "pair_full_hit": true
+            }
+          ]
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 1,
+            "suppression_pair_full_variant_count": 1,
+            "default_continuation_hit_count": 2,
+            "suppression_continuation_hit_count": 2,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": [
+              {
+                "variant_id": "seed-535",
+                "profile_id": "default",
+                "term_count": 2,
+                "hit_terms": [
+                  "fixed",
+                  "loss"
+                ],
+                "missed_terms": [],
+                "hit_count": 2,
+                "pair_full_hit": true
+              },
+              {
+                "variant_id": "seed-535",
+                "profile_id": "suppress_newline_tokens",
+                "term_count": 2,
+                "hit_terms": [
+                  "fixed",
+                  "loss"
+                ],
+                "missed_terms": [],
+                "hit_count": 2,
+                "pair_full_hit": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "wider-k2-t020-n12",
+      "seed": 1535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k2-t020-n12\\seed-1535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 2,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossss:fixs:",
+            "continuation": "lossss:fixs:",
+            "generated_preview": "fixed:lossss:fixs:",
+            "continuation_preview": "lossss:fixs:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossss:fixs:",
+            "continuation": "lossss:fixs:",
+            "generated_preview": "fixed:lossss:fixs:",
+            "continuation_preview": "lossss:fixs:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed\nfixed\n",
+            "continuation": "fixed\nfixed\n",
+            "generated_preview": "loss:fixed\\nfixed\\n",
+            "continuation_preview": "fixed\\nfixed\\n",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed:fixed:",
+            "continuation": "fixed:fixed:",
+            "generated_preview": "loss:fixed:fixed:",
+            "continuation_preview": "fixed:fixed:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [],
+            "missed_terms": [
+              "fixed",
+              "loss"
+            ],
+            "hit_count": 0,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [],
+            "missed_terms": [
+              "fixed",
+              "loss"
+            ],
+            "hit_count": 0,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 0,
+            "newline_cleanup_hit_count": 0,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 0,
+            "newline_cleanup_hit_count": 0,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 0,
+          "suppression_continuation_hit_count": 0,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 0,
+            "suppression_continuation_hit_count": 0,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "wider-k2-t020-n12",
+      "seed": 2535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k2-t020-n12\\seed-2535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 2,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssss\ns",
+            "continuation": "lossssssss\ns",
+            "generated_preview": "fixed:lossssssss\\ns",
+            "continuation_preview": "lossssssss\\ns",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "fixed:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:losssss:loss",
+            "continuation": "losssss:loss",
+            "generated_preview": "loss:losssss:loss",
+            "continuation_preview": "losssss:loss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:losssss:loss",
+            "continuation": "losssss:loss",
+            "generated_preview": "loss:losssss:loss",
+            "continuation_preview": "losssss:loss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "wider-k4-t020-n12",
+      "seed": 535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k4-t020-n12\\seed-535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 4,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed\nfixed\n",
+            "continuation": "fixed\nfixed\n",
+            "generated_preview": "fixed:fixed\\nfixed\\n",
+            "continuation_preview": "fixed\\nfixed\\n",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed:lossss",
+            "continuation": "fixed:lossss",
+            "generated_preview": "fixed:fixed:lossss",
+            "continuation_preview": "fixed:lossss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:losssssssss\n",
+            "continuation": "losssssssss\n",
+            "generated_preview": "loss:losssssssss\\n",
+            "continuation_preview": "losssssssss\\n",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "loss:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed",
+              "loss"
+            ],
+            "missed_terms": [],
+            "hit_count": 2,
+            "pair_full_hit": true
+          },
+          {
+            "variant_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed",
+              "loss"
+            ],
+            "missed_terms": [],
+            "hit_count": 2,
+            "pair_full_hit": true
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 2,
+            "newline_cleanup_hit_count": 2,
+            "pair_full_variant_count": 1,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 2,
+            "newline_cleanup_hit_count": 2,
+            "pair_full_variant_count": 1,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 1,
+          "suppression_pair_full_variant_count": 1,
+          "default_continuation_hit_count": 2,
+          "suppression_continuation_hit_count": 2,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": [
+            {
+              "variant_id": "seed-535",
+              "profile_id": "default",
+              "term_count": 2,
+              "hit_terms": [
+                "fixed",
+                "loss"
+              ],
+              "missed_terms": [],
+              "hit_count": 2,
+              "pair_full_hit": true
+            },
+            {
+              "variant_id": "seed-535",
+              "profile_id": "suppress_newline_tokens",
+              "term_count": 2,
+              "hit_terms": [
+                "fixed",
+                "loss"
+              ],
+              "missed_terms": [],
+              "hit_count": 2,
+              "pair_full_hit": true
+            }
+          ]
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 1,
+            "suppression_pair_full_variant_count": 1,
+            "default_continuation_hit_count": 2,
+            "suppression_continuation_hit_count": 2,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": [
+              {
+                "variant_id": "seed-535",
+                "profile_id": "default",
+                "term_count": 2,
+                "hit_terms": [
+                  "fixed",
+                  "loss"
+                ],
+                "missed_terms": [],
+                "hit_count": 2,
+                "pair_full_hit": true
+              },
+              {
+                "variant_id": "seed-535",
+                "profile_id": "suppress_newline_tokens",
+                "term_count": 2,
+                "hit_terms": [
+                  "fixed",
+                  "loss"
+                ],
+                "missed_terms": [],
+                "hit_count": 2,
+                "pair_full_hit": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "wider-k4-t020-n12",
+      "seed": 1535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k4-t020-n12\\seed-1535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 4,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:losss\nprixs:",
+            "continuation": "losss\nprixs:",
+            "generated_preview": "fixed:losss\\nprixs:",
+            "continuation_preview": "losss\\nprixs:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossss:fixs:",
+            "continuation": "lossss:fixs:",
+            "generated_preview": "fixed:lossss:fixs:",
+            "continuation_preview": "lossss:fixs:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed\nfixed\n",
+            "continuation": "fixed\nfixed\n",
+            "generated_preview": "loss:fixed\\nfixed\\n",
+            "continuation_preview": "fixed\\nfixed\\n",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed:fixed:",
+            "continuation": "fixed:fixed:",
+            "generated_preview": "loss:fixed:fixed:",
+            "continuation_preview": "fixed:fixed:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [],
+            "missed_terms": [
+              "fixed",
+              "loss"
+            ],
+            "hit_count": 0,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [],
+            "missed_terms": [
+              "fixed",
+              "loss"
+            ],
+            "hit_count": 0,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 0,
+            "newline_cleanup_hit_count": 0,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 0,
+            "newline_cleanup_hit_count": 0,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 0,
+          "suppression_continuation_hit_count": 0,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 0,
+            "suppression_continuation_hit_count": 0,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "wider-k4-t020-n12",
+      "seed": 2535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\wider-k4-t020-n12\\seed-2535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 4,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssss\ns",
+            "continuation": "lossssssss\ns",
+            "generated_preview": "fixed:lossssssss\\ns",
+            "continuation_preview": "lossssssss\\ns",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssss",
+            "continuation": "lossssssssss",
+            "generated_preview": "fixed:lossssssssss",
+            "continuation_preview": "lossssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:losssss:loss",
+            "continuation": "losssss:loss",
+            "generated_preview": "loss:losssss:loss",
+            "continuation_preview": "losssss:loss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:losssss:loss",
+            "continuation": "losssss:loss",
+            "generated_preview": "loss:losssss:loss",
+            "continuation_preview": "losssss:loss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "greedy-k1-t020-n20",
+      "seed": 535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:03Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\greedy-k1-t020-n20\\seed-535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 20,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "fixed:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "fixed:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "loss:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-535",
+            "branch_retention_run_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "loss:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "greedy-k1-t020-n20",
+      "seed": 1535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:04Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\greedy-k1-t020-n20\\seed-1535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 20,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed\nprosssssssssss",
+            "continuation": "fixed\nprosssssssssss",
+            "generated_preview": "fixed:fixed\\nprosssssssssss",
+            "continuation_preview": "fixed\\nprosssssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 1535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:fixed:fxedxed:fixed:",
+            "continuation": "fixed:fxedxed:fixed:",
+            "generated_preview": "fixed:fixed:fxedxed:fixed:",
+            "continuation_preview": "fixed:fxedxed:fixed:",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed:fixed\npfxed\npt",
+            "continuation": "fixed:fixed\npfxed\npt",
+            "generated_preview": "loss:fixed:fixed\\npfxed\\npt",
+            "continuation_preview": "fixed:fixed\\npfxed\\npt",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-1535",
+            "branch_retention_run_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 1536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:fixed:fixed:fxedxed:",
+            "continuation": "fixed:fixed:fxedxed:",
+            "generated_preview": "loss:fixed:fixed:fxedxed:",
+            "continuation_preview": "fixed:fixed:fxedxed:",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed"
+            ],
+            "missed_terms": [
+              "loss"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-1535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed"
+            ],
+            "missed_terms": [
+              "loss"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "greedy-k1-t020-n20",
+      "seed": 2535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-05-30T23:49:04Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "",
+        "out_dir": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-runs\\greedy-k1-t020-n20\\seed-2535",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 20,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "comparison-baseline",
+            "term": "fixed",
+            "scaffold_prompt": "fixed:",
+            "source_hit_rate": 1.0
+          },
+          {
+            "case": "factual-val-loss",
+            "term": "loss",
+            "scaffold_prompt": "loss:",
+            "source_hit_rate": 1.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "fixed:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "generation_seed": 2535,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "fixed:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "loss:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "seed-2535",
+            "branch_retention_run_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "loss:",
+            "generation_seed": 2536,
+            "checkpoint_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\540\\解释\\model-capability-required-term-pair-colon-immediate-direct-budget-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "loss:lossssssssssssssssss",
+            "continuation": "lossssssssssssssssss",
+            "generated_preview": "loss:lossssssssssssssssss",
+            "continuation_preview": "lossssssssssssssssss",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "seed-2535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "baseline_pair_full_seed_count": 0,
+    "decode_spec_count": 4,
+    "seed_count": 3,
+    "best_spec_id": "wider-k2-t020-n12",
+    "best_pair_full_seed_count": 1,
+    "best_continuation_hit_total": 3,
+    "decode_improved_pair_full": true,
+    "decode_any_pair_full": true,
+    "spec_rows": [
+      {
+        "spec_id": "greedy-k1-t020-n12",
+        "seed_count": 3,
+        "pair_full_seed_count": 0,
+        "continuation_hit_total": 3
+      },
+      {
+        "spec_id": "greedy-k1-t020-n20",
+        "seed_count": 3,
+        "pair_full_seed_count": 0,
+        "continuation_hit_total": 3
+      },
+      {
+        "spec_id": "wider-k2-t020-n12",
+        "seed_count": 3,
+        "pair_full_seed_count": 1,
+        "continuation_hit_total": 3
+      },
+      {
+        "spec_id": "wider-k4-t020-n12",
+        "seed_count": 3,
+        "pair_full_seed_count": 1,
+        "continuation_hit_total": 3
+      }
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "targeted_decode_boundary_diagnostic_only",
+    "reason": "At least one decode boundary improves pair-full coverage over the source stability report.",
+    "next_action": "promote the best decode spec into the next stability check before retraining"
+  },
+  "sidecar_outputs": {
+    "replay_reports": {
+      "greedy-k1-t020-n12/seed-535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "greedy-k1-t020-n12/seed-1535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "greedy-k1-t020-n12/seed-2535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "wider-k2-t020-n12/seed-535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "wider-k2-t020-n12/seed-1535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "wider-k2-t020-n12/seed-2535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k2-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "wider-k4-t020-n12/seed-535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "wider-k4-t020-n12/seed-1535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "wider-k4-t020-n12/seed-2535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\wider-k4-t020-n12\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "greedy-k1-t020-n20/seed-535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "greedy-k1-t020-n20/seed-1535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-1535\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "greedy-k1-t020-n20/seed-2535": {
+        "json": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\541\\解释\\model-capability-required-term-pair-decode-boundary-check\\replay-reports\\greedy-k1-t020-n20\\seed-2535\\model_capability_required_term_pair_generation_profile_replay.html"
+      }
+    }
+  }
+}

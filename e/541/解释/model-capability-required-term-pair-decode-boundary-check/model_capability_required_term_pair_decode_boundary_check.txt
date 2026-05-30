@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_decode_boundary_improves_pair_surface
+failed_count=0
+baseline_pair_full_seed_count=0
+best_spec_id=wider-k2-t020-n12
+best_pair_full_seed_count=1
+decode_improved_pair_full=True
+model_quality_claim=targeted_decode_boundary_diagnostic_only
+next_action=promote the best decode spec into the next stability check before retraining
