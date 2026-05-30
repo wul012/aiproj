@@ -221,6 +221,10 @@ e/522/解释/说明.md
 e/523/图片
 e/523/解释/说明.md
  -> v523 model capability required-term pair loss-alias focus newline cleanup metrics 的运行截图和解释
+
+e/524/图片
+e/524/解释/说明.md
+ -> v524 model capability required-term pair loss-alias newline suppression probe 的运行截图和解释
 ```
 
 写入规则：

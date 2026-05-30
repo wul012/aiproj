@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v523.0.0` carries bounded newline-cleanup metrics into the main focused loss-alias report.
+Version `v524.0.0` probes newline-token suppression as a strict-surface decoding fix for focused loss-alias outputs.
+
+## Latest v524 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_newline_suppression_probe`, which reruns v523 loss-alias prompts against the same checkpoint.
+- The probe compares `baseline_rerun` with `suppress_newline_tokens`, masking tokenizer entries that contain `\n` or `\r` during local sampling.
+- Ran the real probe: baseline strict stayed `0/4`, newline-suppressed strict became `4/4`, and focus strict became `2/2`.
+- Interpreted v524 as a decode-surface recovery signal: the checkpoint can express `loss` strictly when newline tokens are masked, so the next comparison should test this against fresh training before changing the corpus.
+- Archived the v524 newline-suppression evidence in `e/524` and added the code explanation in `代码讲解记录_模型能力阶段/538-v524-model-capability-required-term-pair-loss-alias-newline-suppression-probe.md`.
 
 ## Latest v523 checkpoint
 

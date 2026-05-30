@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability required-term pair loss-alias newline suppression probe",
+  "generated_at": "2026-05-30T10:20:24Z",
+  "status": "pass",
+  "decision": "required_term_pair_loss_alias_newline_suppression_strict_recovery",
+  "failed_count": 0,
+  "issues": [],
+  "source_loss_alias_focus": "e\\523\\解释\\model-capability-required-term-pair-loss-alias-focus-newline-cleanup-metrics\\model_capability_required_term_pair_loss_alias_focus.json",
+  "out_dir": "e\\524\\解释\\model-capability-required-term-pair-loss-alias-newline-suppression-probe",
+  "profiles": [
+    {
+      "profile_id": "baseline_rerun",
+      "exclude_token_texts": []
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "exclude_token_texts": [
+        "\n",
+        "\r"
+      ]
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "baseline_rerun",
+      "case_count": 4,
+      "focus_case_count": 2,
+      "strict_hit_count": 0,
+      "focus_strict_hit_count": 0,
+      "strict_full_coverage": false,
+      "focus_strict_full_coverage": false,
+      "strict_gain_count": 0,
+      "exclude_token_texts": []
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "case_count": 4,
+      "focus_case_count": 2,
+      "strict_hit_count": 4,
+      "focus_strict_hit_count": 2,
+      "strict_full_coverage": true,
+      "focus_strict_full_coverage": true,
+      "strict_gain_count": 4,
+      "exclude_token_texts": [
+        "\n",
+        "\r"
+      ]
+    }
+  ],
+  "case_rows": [
+    {
+      "profile_id": "baseline_rerun",
+      "seed": 515,
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "is_focus_case": true,
+      "generation_seed": 515,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": false,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": false,
+      "excluded_token_count": 0,
+      "excluded_token_texts": [],
+      "continuation_preview": " los\\ns\\ns\\ns\\ns"
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "seed": 515,
+      "case_id": "source-loss",
+      "case_type": "source",
+      "alias_group": "source",
+      "prompt": "loss:",
+      "expected_term": "loss",
+      "is_focus_case": true,
+      "generation_seed": 515,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": true,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": true,
+      "excluded_token_count": 1,
+      "excluded_token_texts": [
+        "\n",
+        "\r"
+      ],
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "profile_id": "baseline_rerun",
+      "seed": 515,
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "is_focus_case": true,
+      "generation_seed": 516,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": false,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": false,
+      "excluded_token_count": 0,
+      "excluded_token_texts": [],
+      "continuation_preview": " los\\ns\\ns\\ns\\ns"
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "seed": 515,
+      "case_id": "heldout-beta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "beta:",
+      "expected_term": "loss",
+      "is_focus_case": true,
+      "generation_seed": 516,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": true,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": true,
+      "excluded_token_count": 1,
+      "excluded_token_texts": [
+        "\n",
+        "\r"
+      ],
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "profile_id": "baseline_rerun",
+      "seed": 515,
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss",
+      "is_focus_case": false,
+      "generation_seed": 517,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": false,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": false,
+      "excluded_token_count": 0,
+      "excluded_token_texts": [],
+      "continuation_preview": " los\\nss\\ns\\ns\\n"
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "seed": 515,
+      "case_id": "heldout-omega-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "omega:",
+      "expected_term": "loss",
+      "is_focus_case": false,
+      "generation_seed": 517,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": true,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": true,
+      "excluded_token_count": 1,
+      "excluded_token_texts": [
+        "\n",
+        "\r"
+      ],
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "profile_id": "baseline_rerun",
+      "seed": 515,
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss",
+      "is_focus_case": false,
+      "generation_seed": 518,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": false,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": false,
+      "excluded_token_count": 0,
+      "excluded_token_texts": [],
+      "continuation_preview": " los\\nss\\ns\\ns\\n"
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "seed": 515,
+      "case_id": "heldout-theta-loss",
+      "case_type": "heldout",
+      "alias_group": "greek",
+      "prompt": "theta:",
+      "expected_term": "loss",
+      "is_focus_case": false,
+      "generation_seed": 518,
+      "source_strict_hit": false,
+      "source_newline_cleanup_hit": true,
+      "source_normalized_hit": true,
+      "strict_hit": true,
+      "newline_cleanup_hit": true,
+      "normalized_hit": true,
+      "strict_gain": true,
+      "excluded_token_count": 1,
+      "excluded_token_texts": [
+        "\n",
+        "\r"
+      ],
+      "continuation_preview": " losssssssss"
+    }
+  ],
+  "summary": {
+    "newline_suppression_decision": "loss_alias_newline_suppression_strict_full_recovery",
+    "profile_count": 2,
+    "case_count": 4,
+    "baseline_strict_hit_count": 0,
+    "baseline_strict_full_coverage": false,
+    "suppressed_strict_hit_count": 4,
+    "suppressed_strict_full_coverage": true,
+    "suppressed_focus_strict_hit_count": 2,
+    "suppressed_focus_strict_full_coverage": true,
+    "suppressed_strict_gain_count": 4,
+    "excluded_token_texts": [
+      "\n",
+      "\r"
+    ],
+    "strict_recovery_case_count": 4
+  },
+  "interpretation": {
+    "model_quality_claim": "tiny_loss_alias_decoding_newline_suppression_recovers_strict_surface",
+    "reason": "Masking newline tokens during decoding recovers strict loss hits for every probed loss-alias row.",
+    "next_action": "compare newline-suppressed decoding against a fresh training run before changing the corpus"
+  }
+}

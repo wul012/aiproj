@@ -1,0 +1,9 @@
+profile_id,seed,case_id,case_type,alias_group,is_focus_case,generation_seed,source_strict_hit,source_newline_cleanup_hit,source_normalized_hit,strict_hit,newline_cleanup_hit,normalized_hit,strict_gain,excluded_token_count,excluded_token_texts,continuation_preview
+baseline_rerun,515,source-loss,source,source,True,515,False,True,True,False,True,True,False,0,[], los\ns\ns\ns\ns
+suppress_newline_tokens,515,source-loss,source,source,True,515,False,True,True,True,True,True,True,1,"[""\n"", ""\r""]", losssssssss
+baseline_rerun,515,heldout-beta-loss,heldout,greek,True,516,False,True,True,False,True,True,False,0,[], los\ns\ns\ns\ns
+suppress_newline_tokens,515,heldout-beta-loss,heldout,greek,True,516,False,True,True,True,True,True,True,1,"[""\n"", ""\r""]", losssssssss
+baseline_rerun,515,heldout-omega-loss,heldout,greek,False,517,False,True,True,False,True,True,False,0,[], los\nss\ns\ns\n
+suppress_newline_tokens,515,heldout-omega-loss,heldout,greek,False,517,False,True,True,True,True,True,True,1,"[""\n"", ""\r""]", losssssssss
+baseline_rerun,515,heldout-theta-loss,heldout,greek,False,518,False,True,True,False,True,True,False,0,[], los\nss\ns\ns\n
+suppress_newline_tokens,515,heldout-theta-loss,heldout,greek,False,518,False,True,True,True,True,True,True,1,"[""\n"", ""\r""]", losssssssss
