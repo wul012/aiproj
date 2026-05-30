@@ -18,7 +18,12 @@ PAIR_COEXISTENCE_REFRESH_TEXT_FILENAME = "model_capability_required_term_pair_co
 PAIR_COEXISTENCE_REFRESH_MARKDOWN_FILENAME = "model_capability_required_term_pair_coexistence_refresh.md"
 PAIR_COEXISTENCE_REFRESH_HTML_FILENAME = "model_capability_required_term_pair_coexistence_refresh.html"
 PAIR_COEXISTENCE_REFRESH_CORPUS_FILENAME = "required_term_pair_coexistence_refresh_corpus.txt"
-PAIR_COEXISTENCE_CORPUS_MODES = ("spaced_answer", "colon_immediate", "colon_immediate_first_token_boost")
+PAIR_COEXISTENCE_CORPUS_MODES = (
+    "spaced_answer",
+    "colon_immediate",
+    "colon_immediate_first_token_boost",
+    "colon_immediate_isolated_prompt",
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 TrainFunc = Callable[[dict[str, Any]], dict[str, Any]]
@@ -207,6 +212,39 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
                     "loss:loss",
                     "fixed branch starts with f.",
                     "loss branch starts with l.",
+                ]
+            )
+    elif corpus_mode == "colon_immediate_isolated_prompt":
+        for _ in range(max(1, repeat)):
+            lines.extend(
+                [
+                    "[fixed-objective]",
+                    "prompt fixed:",
+                    "target fixed",
+                    "fixed:fixed",
+                    "fixed:f",
+                    "fixed:fi",
+                    "fixed:fix",
+                    "fixed branch answer fixed",
+                    "[/fixed-objective]",
+                    "[loss-objective]",
+                    "prompt loss:",
+                    "target loss",
+                    "loss:loss",
+                    "loss:l",
+                    "loss:lo",
+                    "loss:los",
+                    "loss branch answer loss",
+                    "[/loss-objective]",
+                ]
+            )
+        for _ in range(max(0, bridge_repeat)):
+            lines.extend(
+                [
+                    "fixed prompt stays in the fixed objective.",
+                    "loss prompt stays in the loss objective.",
+                    "fixed:fixed",
+                    "loss:loss",
                 ]
             )
     else:

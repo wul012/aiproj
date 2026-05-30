@@ -281,6 +281,10 @@ e/537/解释/说明.md
 e/538/图片
 e/538/解释/说明.md
  -> v538 required-term pair first-token boost stability 的运行截图和解释
+
+e/539/图片
+e/539/解释/说明.md
+ -> v539 required-term pair isolated prompt stability 的运行截图和解释
 ```
 
 写入规则：

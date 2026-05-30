@@ -71,6 +71,19 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertIn("loss:lo", corpus)
         self.assertNotIn("fixed: fixed", corpus)
 
+    def test_isolated_prompt_corpus_separates_fixed_and_loss_blocks(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="colon_immediate_isolated_prompt",
+        )
+
+        self.assertIn("[fixed-objective]", corpus)
+        self.assertIn("[loss-objective]", corpus)
+        self.assertIn("fixed branch answer fixed", corpus)
+        self.assertIn("loss branch answer loss", corpus)
+        self.assertNotIn("fixed: fixed", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

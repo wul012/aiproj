@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v538.0.0` tests a first-token boost corpus for the colon-immediate fixed/loss objective and keeps the result as a useful negative signal.
+Version `v539.0.0` tests an isolated prompt corpus for the fixed/loss pair objective and records it as a negative direction.
+
+## Latest v539 checkpoint
+
+- Added `colon_immediate_isolated_prompt`, a fixed/loss objective-block corpus mode.
+- Ran real seeds `535, 1535, 2535` with the isolated prompt corpus: pair-full dropped to `0/3`.
+- Re-ran the missed-seed diagnostic; all three seeds still showed first-token gaps.
+- Concluded that block-style isolation weakens the direct `fixed:` / `loss:` mapping for this tiny char-level setup.
+- Archived the v539 stability and diagnostic evidence in `e/539` and added the code explanation in `代码讲解记录_模型能力阶段/553-v539-required-term-pair-isolated-prompt-stability.md`.
 
 ## Latest v538 checkpoint
 

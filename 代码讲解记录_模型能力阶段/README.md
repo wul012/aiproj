@@ -209,6 +209,9 @@
 552-v538-required-term-pair-first-token-boost-stability.md
  -> v538 code explanation: test a first-token boost corpus and preserve the negative stability result.
 
+553-v539-required-term-pair-isolated-prompt-stability.md
+ -> v539 code explanation: test isolated prompt blocks and record why the direction regressed.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
