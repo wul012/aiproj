@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v524.0.0` probes newline-token suppression as a strict-surface decoding fix for focused loss-alias outputs.
+Version `v525.0.0` repeats newline-suppressed decoding across v518 and v523 focus checkpoints.
+
+## Latest v525 checkpoint
+
+- Added `model_capability_required_term_pair_loss_alias_newline_suppression_repeat`, which reruns the v524 probe across multiple focus reports.
+- Added `scripts/run_model_capability_required_term_pair_loss_alias_newline_suppression_repeat.py`; it accepts multiple focus JSON files or output directories.
+- Ran the real repeat over v518 and v523: both baseline reruns stayed `0/4`, both newline-suppressed probes reached `4/4`, and total strict gains were `8`.
+- Interpreted v525 as a stable decode-surface recovery signal across two archived focus checkpoints.
+- Archived the v525 repeat evidence in `e/525` and added the code explanation in `代码讲解记录_模型能力阶段/539-v525-model-capability-required-term-pair-loss-alias-newline-suppression-repeat.md`.
 
 ## Latest v524 checkpoint
 

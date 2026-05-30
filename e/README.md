@@ -225,6 +225,10 @@ e/523/解释/说明.md
 e/524/图片
 e/524/解释/说明.md
  -> v524 model capability required-term pair loss-alias newline suppression probe 的运行截图和解释
+
+e/525/图片
+e/525/解释/说明.md
+ -> v525 model capability required-term pair loss-alias newline suppression repeat 的运行截图和解释
 ```
 
 写入规则：
