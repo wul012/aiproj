@@ -200,6 +200,9 @@
 549-v535-required-term-pair-colon-immediate-refresh.md
  -> v535 code explanation: train colon-immediate fixed/loss rows and confirm the first-token whitespace drift disappears.
 
+550-v536-required-term-pair-colon-immediate-stability.md
+ -> v536 code explanation: repeat the colon-immediate fixed/loss refresh across seeds and classify partial stability.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

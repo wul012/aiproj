@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v535.0.0` adds colon-immediate fixed/loss refresh training and observes a single-seed targeted pair-full signal.
+Version `v536.0.0` repeats the colon-immediate fixed/loss refresh across three seeds and classifies the signal as partial stability.
+
+## Latest v536 checkpoint
+
+- Added `model_capability_required_term_pair_colon_immediate_stability`, a multi-seed wrapper around the v535 colon-immediate refresh.
+- Added `scripts/run_model_capability_required_term_pair_colon_immediate_stability.py`; it writes seed sidecars plus JSON/CSV/text/Markdown/HTML summaries.
+- Ran real seeds `535, 1535, 2535`: only seed `535` reached pair-full, so `pair_full_seed_count=1/3`.
+- Classified the result as `required_term_pair_colon_immediate_partial_stability`, keeping the model-quality claim at targeted partial signal.
+- Archived the v536 stability evidence in `e/536` and added the code explanation in `代码讲解记录_模型能力阶段/550-v536-required-term-pair-colon-immediate-stability.md`.
 
 ## Latest v535 checkpoint
 

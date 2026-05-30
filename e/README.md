@@ -269,6 +269,10 @@ e/534/解释/说明.md
 e/535/图片
 e/535/解释/说明.md
  -> v535 required-term pair colon-immediate refresh 的运行截图和解释
+
+e/536/图片
+e/536/解释/说明.md
+ -> v536 required-term pair colon-immediate stability 的运行截图和解释
 ```
 
 写入规则：

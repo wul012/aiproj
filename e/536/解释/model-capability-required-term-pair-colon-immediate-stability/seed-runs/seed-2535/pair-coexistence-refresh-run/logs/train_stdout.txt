@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=45377 vocab_size=34
+parameters=53,312
+data_source=data:e\536\解释\model-capability-required-term-pair-colon-immediate-stability\seed-runs\seed-2535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1471 val_loss=3.1534
+step=  350 train_loss=1.3621 val_loss=1.8854
+step=  700 train_loss=1.0260 val_loss=1.2890
+step= 1050 train_loss=1.2706 val_loss=1.7698
+step= 1400 train_loss=1.1121 val_loss=1.5359
+saved=e\536\解释\model-capability-required-term-pair-colon-immediate-stability\seed-runs\seed-2535\pair-coexistence-refresh-run
+history=e\536\解释\model-capability-required-term-pair-colon-immediate-stability\seed-runs\seed-2535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\536\解释\model-capability-required-term-pair-colon-immediate-stability\seed-runs\seed-2535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\536\解释\model-capability-required-term-pair-colon-immediate-stability\seed-runs\seed-2535\pair-coexistence-refresh-run\sample.txt
