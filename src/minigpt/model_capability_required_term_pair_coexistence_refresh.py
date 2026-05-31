@@ -10,6 +10,11 @@ from minigpt.model_capability_required_term_pair_generation_profile_replay impor
     build_model_capability_required_term_pair_generation_profile_replay,
     resolve_exit_code as _replay_exit_code,
 )
+from minigpt.model_capability_required_term_pair_coexistence_corpus import (
+    PAIR_COEXISTENCE_CORPUS_MODES,
+    build_pair_coexistence_refresh_corpus,
+    source_prompts,
+)
 from minigpt.report_utils import as_dict, utc_now
 
 
@@ -18,14 +23,6 @@ PAIR_COEXISTENCE_REFRESH_TEXT_FILENAME = "model_capability_required_term_pair_co
 PAIR_COEXISTENCE_REFRESH_MARKDOWN_FILENAME = "model_capability_required_term_pair_coexistence_refresh.md"
 PAIR_COEXISTENCE_REFRESH_HTML_FILENAME = "model_capability_required_term_pair_coexistence_refresh.html"
 PAIR_COEXISTENCE_REFRESH_CORPUS_FILENAME = "required_term_pair_coexistence_refresh_corpus.txt"
-PAIR_COEXISTENCE_CORPUS_MODES = (
-    "spaced_answer",
-    "colon_immediate",
-    "colon_immediate_first_token_boost",
-    "colon_immediate_isolated_prompt",
-    "colon_immediate_loss_calibrated",
-    "equals_surface_fixed_repair",
-)
 
 ROOT = Path(__file__).resolve().parents[2]
 TrainFunc = Callable[[dict[str, Any]], dict[str, Any]]
@@ -140,177 +137,6 @@ def build_model_capability_required_term_pair_coexistence_refresh(
     }
 
 
-def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, corpus_mode: str = "spaced_answer") -> str:
-    lines = [
-        "MiniGPT fixed/loss pair coexistence refresh corpus.",
-        "The prompt before the colon selects the exact continuation term.",
-    ]
-    if corpus_mode == "spaced_answer":
-        for _ in range(max(1, repeat)):
-            lines.extend(
-                [
-                    "fixed: fixed",
-                    "loss: loss",
-                    "comparison-baseline|fixed: fixed",
-                    "factual-val-loss|loss: loss",
-                    "term=fixed prompt=fixed: answer=fixed",
-                    "term=loss prompt=loss: answer=loss",
-                ]
-            )
-        for _ in range(max(0, bridge_repeat)):
-            lines.extend(
-                [
-                    "fixed and loss are separate branches.",
-                    "fixed: fixed ; loss: loss",
-                    "When the prefix is fixed:, continue fixed.",
-                    "When the prefix is loss:, continue loss.",
-                ]
-            )
-    elif corpus_mode == "colon_immediate":
-        for _ in range(max(1, repeat)):
-            lines.extend(
-                [
-                    "fixed:fixed",
-                    "loss:loss",
-                    "comparison-baseline|fixed:fixed",
-                    "factual-val-loss|loss:loss",
-                    "prompt=fixed:target=fixed",
-                    "prompt=loss:target=loss",
-                    "select fixed:fixed",
-                    "select loss:loss",
-                ]
-            )
-        for _ in range(max(0, bridge_repeat)):
-            lines.extend(
-                [
-                    "fixed/loss are separate branches.",
-                    "fixed:fixed;loss:loss",
-                    "prefix fixed:fixed",
-                    "prefix loss:loss",
-                ]
-            )
-    elif corpus_mode == "colon_immediate_first_token_boost":
-        for _ in range(max(1, repeat)):
-            lines.extend(
-                [
-                    "fixed:fixed",
-                    "loss:loss",
-                    "fixed:f",
-                    "loss:l",
-                    "fixed:fi",
-                    "loss:lo",
-                    "fixed:fix",
-                    "loss:los",
-                    "prompt=fixed:target=fixed",
-                    "prompt=loss:target=loss",
-                    "prefix=fixed:next=fixed",
-                    "prefix=loss:next=loss",
-                ]
-            )
-        for _ in range(max(0, bridge_repeat)):
-            lines.extend(
-                [
-                    "fixed:fixed",
-                    "loss:loss",
-                    "fixed branch starts with f.",
-                    "loss branch starts with l.",
-                ]
-            )
-    elif corpus_mode == "colon_immediate_isolated_prompt":
-        for _ in range(max(1, repeat)):
-            lines.extend(
-                [
-                    "[fixed-objective]",
-                    "prompt fixed:",
-                    "target fixed",
-                    "fixed:fixed",
-                    "fixed:f",
-                    "fixed:fi",
-                    "fixed:fix",
-                    "fixed branch answer fixed",
-                    "[/fixed-objective]",
-                    "[loss-objective]",
-                    "prompt loss:",
-                    "target loss",
-                    "loss:loss",
-                    "loss:l",
-                    "loss:lo",
-                    "loss:los",
-                    "loss branch answer loss",
-                    "[/loss-objective]",
-                ]
-            )
-        for _ in range(max(0, bridge_repeat)):
-            lines.extend(
-                [
-                    "fixed prompt stays in the fixed objective.",
-                    "loss prompt stays in the loss objective.",
-                    "fixed:fixed",
-                    "loss:loss",
-                ]
-            )
-    elif corpus_mode == "colon_immediate_loss_calibrated":
-        for _ in range(max(1, repeat)):
-            lines.extend(
-                [
-                    "fixed:fixed",
-                    "loss:loss",
-                    "loss:loss",
-                    "comparison-baseline|fixed:fixed",
-                    "factual-val-loss|loss:loss",
-                    "prompt=fixed:target=fixed",
-                    "prompt=loss:target=loss",
-                    "loss prompt selects loss",
-                    "fixed prompt selects fixed",
-                    "when prefix is loss: continue loss",
-                    "when prefix is fixed: continue fixed",
-                ]
-            )
-        for _ in range(max(0, bridge_repeat)):
-            lines.extend(
-                [
-                    "calibrate fixed:fixed against loss:loss",
-                    "loss:loss;fixed:fixed",
-                    "loss prompt should not continue fixed",
-                    "fixed prompt should not continue loss",
-                ]
-            )
-    elif corpus_mode == "equals_surface_fixed_repair":
-        for _ in range(max(1, repeat)):
-            lines.extend(
-                [
-                    "fixed=fixed",
-                    "fixed=fixed",
-                    "loss=loss",
-                    "fixed=f",
-                    "fixed=fi",
-                    "fixed=fix",
-                    "loss=l",
-                    "loss=lo",
-                    "loss=los",
-                    "prompt=fixed=target=fixed",
-                    "prompt=loss=target=loss",
-                    "equals surface fixed=fixed",
-                    "equals surface loss=loss",
-                    "fixed= selects fixed",
-                    "loss= selects loss",
-                ]
-            )
-        for _ in range(max(0, bridge_repeat)):
-            lines.extend(
-                [
-                    "repair equals prompt surface for fixed.",
-                    "fixed= should continue fixed.",
-                    "loss= should continue loss.",
-                    "fixed= is not loss.",
-                    "loss= is not fixed.",
-                ]
-            )
-    else:
-        raise ValueError(f"unknown corpus_mode: {corpus_mode}")
-    return "\n".join(lines) + "\n"
-
-
 def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
     if require_pass and report.get("status") != "pass":
         return 1
@@ -400,7 +226,7 @@ def _training_result(train_dir: Path, command: list[str], returncode: int, stdou
 
 
 def _source_report(training: dict[str, Any], *, seed: int, corpus_mode: str = "spaced_answer") -> dict[str, Any]:
-    fixed_prompt, loss_prompt = _source_prompts(corpus_mode)
+    fixed_prompt, loss_prompt = source_prompts(corpus_mode)
     return {
         "targets": [
             {
@@ -426,14 +252,6 @@ def _source_report(training: dict[str, Any], *, seed: int, corpus_mode: str = "s
             {"variant_id": "coexistence-refresh", "term": "loss", "generation_seed": seed + 1},
         ],
     }
-
-
-def _source_prompts(corpus_mode: str) -> tuple[str, str]:
-    if corpus_mode == "equals_surface_fixed_repair":
-        return "fixed=", "loss="
-    return "fixed:", "loss:"
-
-
 def _summary(training: dict[str, Any], replay_report: dict[str, Any]) -> dict[str, Any]:
     replay_summary = as_dict(replay_report.get("summary"))
     default_full = int(replay_summary.get("default_pair_full_variant_count") or 0)

@@ -251,6 +251,9 @@
 566-v552-required-term-pair-equals-surface-fixed-repair.md
  -> v552 code explanation: add an equals-surface fixed repair corpus mode and preserve its negative real-training result.
 
+567-v553-required-term-pair-coexistence-corpus-split.md
+ -> v553 code explanation: split required-term pair corpus design out of the refresh executor.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
