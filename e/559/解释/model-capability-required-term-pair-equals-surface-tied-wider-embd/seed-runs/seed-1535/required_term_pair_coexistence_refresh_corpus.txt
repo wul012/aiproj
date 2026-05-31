@@ -1,0 +1,3222 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+pair=01 fixed=fixed loss=loss
+pair=01 loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+prompt=fixed=target=fixed pair=01
+prompt=loss=target=loss pair=01
+fixed=next=fixed partner=loss
+loss=next=loss partner=fixed
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select pair=01 fixed=fixed loss=loss
+select pair=01 loss=loss fixed=fixed
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+tied equals repair keeps fixed and loss in one pair.
+pair=01 means fixed=fixed and loss=loss together.
+fixed= should continue fixed; loss= should continue loss.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss

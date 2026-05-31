@@ -361,6 +361,10 @@ e/557/解释/说明.md
 e/558/图片
 e/558/解释/说明.md
  -> v558 required-term pair constrained decode feasibility 的运行截图和解释
+
+e/559/图片
+e/559/解释/说明.md
+ -> v559 required-term pair equals-surface tied wider embedding 的运行截图和解释
 ```
 
 写入规则：

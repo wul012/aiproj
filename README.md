@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v558.0.0` adds a constrained decode feasibility check over the v556 checkpoint; blocking competing initials does not recover `fixed=` and even breaks the default `loss=` hit, so decode-only mitigation is not reliable for this tiny model.
+Version `v559.0.0` runs a wider-embedding real training check for the v556 tied equals-surface repair; `n_embd=96` still produces `0/1` pair-full and loses both `fixed=` and `loss=`, so the next repair should focus on objective/corpus design rather than simple width.
+
+## Latest v559 checkpoint
+
+- Updated the collaboration rule so future automatic continuous pushes default to 10 medium or larger versions when the direction is clear.
+- Reused `equals_surface_tied_repair` with seed `1535`, top-k `2`, temperature `0.8`, and the same training budget as v556.
+- Increased embedding width from `64` to `96` to test whether the equals-surface gap is mainly a tiny-capacity problem.
+- Confirmed `pair_full_seed_count=0/1`, `default_continuation_hit_count=0`, `suppression_continuation_hit_count=0`, and `stable_pair_full=False`.
+- Interpreted the result as capacity-negative evidence: widening alone did not recover the tied repair and even removed the earlier `loss=` hit.
+- Archived v559 evidence in `e/559` and added the code explanation in `代码讲解记录_模型能力阶段/573-v559-required-term-pair-equals-surface-tied-wider-embd.md`.
 
 ## Latest v558 checkpoint
 

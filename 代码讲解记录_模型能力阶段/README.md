@@ -269,6 +269,9 @@
 572-v558-required-term-pair-constrained-decode-feasibility.md
  -> v558 code explanation: test competing-initial decode constraints and reject decode-only mitigation for the v556 checkpoint.
 
+573-v559-required-term-pair-equals-surface-tied-wider-embd.md
+ -> v559 code explanation: rerun tied equals-surface repair with wider embedding and record the capacity-negative result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
