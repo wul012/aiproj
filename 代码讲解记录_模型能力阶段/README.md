@@ -302,6 +302,9 @@
 583-v569-required-term-pair-route-heldout-replay.md
  -> v569 code explanation: replay the selected v562-loss-balanced route on held-out prompt surfaces.
 
+584-v570-required-term-pair-route-heldout-expanded-suite.md
+ -> v570 code explanation: expand the route held-out replay suite to seven prompt surfaces.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

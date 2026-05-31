@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_pair_route_heldout_replay_artifacts 
     render_model_capability_required_term_pair_route_heldout_replay_text,
     write_model_capability_required_term_pair_route_heldout_replay_outputs,
 )
+from scripts.run_model_capability_required_term_pair_route_heldout_replay import _prompt_specs
 from tests.test_model_capability_required_term_pair_seed_config_replay import fake_generate_fixed_only, fake_generate_pair_full
 
 
@@ -89,6 +90,17 @@ class ModelCapabilityRequiredTermPairRouteHeldoutReplayTests(unittest.TestCase):
                 locate_pair_route_decision(root),
                 root / "model_capability_required_term_pair_first_token_route_decision.json",
             )
+
+    def test_cli_prompt_specs_allow_larger_heldout_suite(self) -> None:
+        specs = _prompt_specs([["colon-tight", "fixed:", "loss:"], ["equals-spaced", "fixed = ", "loss = "]])
+
+        self.assertEqual(
+            specs,
+            (
+                {"spec_id": "colon-tight", "fixed_prompt": "fixed:", "loss_prompt": "loss:"},
+                {"spec_id": "equals-spaced", "fixed_prompt": "fixed = ", "loss_prompt": "loss = "},
+            ),
+        )
 
 
 def route_decision() -> dict[str, object]:

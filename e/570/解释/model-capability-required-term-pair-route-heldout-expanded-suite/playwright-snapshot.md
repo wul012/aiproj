@@ -1,0 +1,42 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT route held-out replay" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every selected route pair-full seed also replayed pair-full coverage across held-out prompt surfaces.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_route_heldout_replay_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Selected
+      - strong [ref=e15]: v562-loss-balanced
+    - generic [ref=e16]:
+      - generic [ref=e17]: Held-out full
+      - strong [ref=e18]: 7/7
+    - generic [ref=e19]:
+      - generic [ref=e20]: Full rate
+      - strong [ref=e21]: "1.0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: All full
+      - strong [ref=e24]: "True"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: test a fresh seed or larger prompt suite before raising the capability claim
+  - generic [ref=e28]:
+    - heading "Selected Source" [level=2] [ref=e29]
+    - paragraph [ref=e30]: e\562\解释\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\model_capability_required_term_pair_colon_immediate_stability.json
+  - generic [ref=e31]:
+    - heading "Held-Out Replay Rows" [level=2] [ref=e32]
+    - table [ref=e34]:
+      - rowgroup [ref=e35]:
+        - row "Spec Seed Replay full Default full Suppression full Prompts" [ref=e36]
+      - rowgroup [ref=e43]:
+        - 'row "colon-spaced 1535 True 1 1 fixed: / loss:" [ref=e44]'
+        - row "equals 1535 True 1 1 fixed= / loss=" [ref=e51]
+        - row "arrow 1535 True 1 1 fixed -> / loss ->" [ref=e58]
+        - 'row "colon-tight 1535 True 1 1 fixed: / loss:" [ref=e65]'
+        - row "equals-spaced 1535 True 1 1 fixed = / loss =" [ref=e72]
+        - 'row "value-label 1535 True 1 1 fixed value: / loss value:" [ref=e79]'
+        - 'row "item-label 1535 True 1 1 fixed item: / loss item:" [ref=e86]'

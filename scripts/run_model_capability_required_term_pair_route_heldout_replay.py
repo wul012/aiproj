@@ -17,6 +17,7 @@ from minigpt.model_capability_required_term_pair_route_heldout_replay import (  
     read_json_report,
     resolve_exit_code,
 )
+from minigpt.model_capability_required_term_pair_seed_config_heldout_replay import DEFAULT_HELDOUT_PROMPT_SPECS  # noqa: E402
 from minigpt.model_capability_required_term_pair_route_heldout_replay_artifacts import (  # noqa: E402
     render_model_capability_required_term_pair_route_heldout_replay_text,
     write_model_capability_required_term_pair_route_heldout_replay_outputs,
@@ -28,6 +29,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("route_decision", type=Path, help="Route-decision JSON file or output directory.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "model-capability-required-term-pair-route-heldout-replay")
     parser.add_argument("--profiles", nargs="+", default=list(DEFAULT_PROFILE_IDS))
+    parser.add_argument(
+        "--prompt-spec",
+        action="append",
+        nargs=3,
+        metavar=("SPEC_ID", "FIXED_PROMPT", "LOSS_PROMPT"),
+        help="Held-out prompt spec. May be repeated. Defaults to the standard three-spec suite.",
+    )
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--require-pass", action="store_true", help="Return exit code 1 when replay execution fails.")
     parser.add_argument("--force", action="store_true", help="Delete an existing non-empty output directory first.")
@@ -42,6 +50,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         read_json_report(source),
         out_dir=args.out_dir,
         source_path=source,
+        prompt_specs=_prompt_specs(args.prompt_spec),
         profiles=tuple(str(profile) for profile in args.profiles),
         device=args.device,
     )
@@ -58,6 +67,12 @@ def prepare_output_dir(out_dir: Path, *, force: bool) -> None:
             raise SystemExit(f"output directory is not empty; pass --force to replace it: {out_dir}")
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+
+
+def _prompt_specs(values: list[list[str]] | None) -> tuple[dict[str, str], ...]:
+    if not values:
+        return DEFAULT_HELDOUT_PROMPT_SPECS
+    return tuple({"spec_id": spec_id, "fixed_prompt": fixed_prompt, "loss_prompt": loss_prompt} for spec_id, fixed_prompt, loss_prompt in values)
 
 
 if __name__ == "__main__":

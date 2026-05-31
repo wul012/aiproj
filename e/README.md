@@ -405,6 +405,10 @@ e/568/解释/说明.md
 e/569/图片
 e/569/解释/说明.md
  -> v569 required-term pair route held-out replay 的运行截图和解释
+
+e/570/图片
+e/570/解释/说明.md
+ -> v570 required-term pair route held-out expanded suite 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v569.0.0` replays the v568-selected `v562-loss-balanced` route on held-out prompt surfaces; seed `1535` keeps pair-full coverage across `colon-spaced`, `equals`, and `arrow`, so the route now has targeted held-out evidence without claiming seed stability.
+Version `v570.0.0` expands the v569 route held-out replay suite from three to seven prompt surfaces; the selected v562 seed `1535` remains `7/7` pair-full, strengthening targeted prompt-transfer evidence while leaving multi-seed stability unresolved.
+
+## Latest v570 checkpoint
+
+- Extended the route-heldout replay CLI with repeatable `--prompt-spec SPEC_ID FIXED_PROMPT LOSS_PROMPT`.
+- Preserved the default three-spec behavior when no custom prompt specs are passed.
+- Replayed `v562-loss-balanced` seed `1535` across seven prompt surfaces.
+- Confirmed `heldout_pair_full_count=7/7` and `heldout_all_pair_full=True`.
+- Kept the claim scoped to targeted single-seed prompt-transfer evidence.
+- Archived v570 evidence in `e/570` and added the code explanation in `代码讲解记录_模型能力阶段/584-v570-required-term-pair-route-heldout-expanded-suite.md`.
 
 ## Latest v569 checkpoint
 
