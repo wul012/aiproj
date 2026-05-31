@@ -1,0 +1,36 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair seed coverage tradeoff" [level=1] [ref=e4]
+    - paragraph [ref=e5]: No single configuration covers every seed, but the compared configurations cover all seeds together.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_seed_coverage_tradeoff_complementary_full_union
+    - generic [ref=e13]:
+      - generic [ref=e14]: Union pair-full
+      - strong [ref=e15]: 3/3
+    - generic [ref=e16]:
+      - generic [ref=e17]: Best config
+      - strong [ref=e18]: v544-topk2-t080
+    - generic [ref=e19]:
+      - generic [ref=e20]: Best pair-full
+      - strong [ref=e21]: "2"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Tradeoff
+      - strong [ref=e24]: "True"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: test an explicit fallback or config-selection policy before more corpus changes
+  - generic [ref=e28]:
+    - heading "Configs" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]
+      - rowgroup [ref=e40]
+  - generic [ref=e55]:
+    - heading "Seeds" [level=2] [ref=e56]
+    - table [ref=e58]:
+      - rowgroup [ref=e59]
+      - rowgroup [ref=e65]

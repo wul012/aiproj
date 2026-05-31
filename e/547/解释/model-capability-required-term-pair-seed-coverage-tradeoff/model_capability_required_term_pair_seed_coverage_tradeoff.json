@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair seed coverage tradeoff",
+  "generated_at": "2026-05-31T01:04:13Z",
+  "status": "pass",
+  "decision": "required_term_pair_seed_coverage_tradeoff_complementary_full_union",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_colon_immediate_stability_reports": [
+    "e\\544\\解释\\model-capability-required-term-pair-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+    "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json"
+  ],
+  "out_dir": "e\\547\\解释\\model-capability-required-term-pair-seed-coverage-tradeoff",
+  "settings": {
+    "labels": [
+      "v544-topk2-t080",
+      "v546-loss-calibrated-topk2-t080"
+    ],
+    "experiment_boundary": "compare already trained colon-immediate stability reports without retraining"
+  },
+  "config_rows": [
+    {
+      "config_id": "v544-topk2-t080",
+      "source_path": "e\\544\\解释\\model-capability-required-term-pair-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_partial_stability",
+      "corpus_mode": "colon_immediate",
+      "top_k": 2,
+      "temperature": 0.8,
+      "max_iters": 2200,
+      "pair_full_seed_count": 2,
+      "seed_count": 3,
+      "pair_full_seeds": [
+        535,
+        2535
+      ]
+    },
+    {
+      "config_id": "v546-loss-calibrated-topk2-t080",
+      "source_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_partial_stability",
+      "corpus_mode": "colon_immediate_loss_calibrated",
+      "top_k": 2,
+      "temperature": 0.8,
+      "max_iters": 2200,
+      "pair_full_seed_count": 1,
+      "seed_count": 3,
+      "pair_full_seeds": [
+        1535
+      ]
+    }
+  ],
+  "seed_rows": [
+    {
+      "seed": 535,
+      "covered_by_union": true,
+      "winning_config_id": "v544-topk2-t080",
+      "covering_config_ids": [
+        "v544-topk2-t080"
+      ],
+      "covering_config_count": 1,
+      "per_config_pair_full": {
+        "v544-topk2-t080": true,
+        "v546-loss-calibrated-topk2-t080": false
+      }
+    },
+    {
+      "seed": 1535,
+      "covered_by_union": true,
+      "winning_config_id": "v546-loss-calibrated-topk2-t080",
+      "covering_config_ids": [
+        "v546-loss-calibrated-topk2-t080"
+      ],
+      "covering_config_count": 1,
+      "per_config_pair_full": {
+        "v544-topk2-t080": false,
+        "v546-loss-calibrated-topk2-t080": true
+      }
+    },
+    {
+      "seed": 2535,
+      "covered_by_union": true,
+      "winning_config_id": "v544-topk2-t080",
+      "covering_config_ids": [
+        "v544-topk2-t080"
+      ],
+      "covering_config_count": 1,
+      "per_config_pair_full": {
+        "v544-topk2-t080": true,
+        "v546-loss-calibrated-topk2-t080": false
+      }
+    }
+  ],
+  "summary": {
+    "config_count": 2,
+    "seed_count": 3,
+    "union_pair_full_seed_count": 3,
+    "union_pair_full_seed_rate": 1.0,
+    "all_seed_covered_by_union": true,
+    "best_single_config_id": "v544-topk2-t080",
+    "best_single_pair_full_seed_count": 2,
+    "best_single_pair_full_seed_rate": 0.6667,
+    "tradeoff_detected": true,
+    "contributing_config_ids": [
+      "v544-topk2-t080",
+      "v546-loss-calibrated-topk2-t080"
+    ],
+    "exclusive_seed_map": {
+      "v544-topk2-t080": [
+        535,
+        2535
+      ],
+      "v546-loss-calibrated-topk2-t080": [
+        1535
+      ]
+    },
+    "uncovered_seeds": []
+  },
+  "interpretation": {
+    "model_quality_claim": "targeted_seed_coverage_tradeoff_signal",
+    "reason": "No single configuration covers every seed, but the compared configurations cover all seeds together.",
+    "next_action": "test an explicit fallback or config-selection policy before more corpus changes"
+  }
+}

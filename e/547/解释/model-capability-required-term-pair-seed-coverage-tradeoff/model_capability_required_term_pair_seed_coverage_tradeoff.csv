@@ -1,0 +1,4 @@
+seed,covered_by_union,winning_config_id,covering_config_ids,covering_config_count,per_config_pair_full
+535,True,v544-topk2-t080,"[""v544-topk2-t080""]",1,"{""v544-topk2-t080"": true, ""v546-loss-calibrated-topk2-t080"": false}"
+1535,True,v546-loss-calibrated-topk2-t080,"[""v546-loss-calibrated-topk2-t080""]",1,"{""v544-topk2-t080"": false, ""v546-loss-calibrated-topk2-t080"": true}"
+2535,True,v544-topk2-t080,"[""v544-topk2-t080""]",1,"{""v544-topk2-t080"": true, ""v546-loss-calibrated-topk2-t080"": false}"

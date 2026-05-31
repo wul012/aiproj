@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v546.0.0` adds a loss-calibrated corpus mode and shows it can recover seed `1535`, but at the cost of losing the other two seeds.
+Version `v547.0.0` compares the v544 and v546 stability reports and proves their seed coverage is complementary: the union covers all three seeds while the best single config still covers only two.
+
+## Latest v547 checkpoint
+
+- Added `model_capability_required_term_pair_seed_coverage_tradeoff`, a read-only scoreboard over archived colon-immediate stability reports.
+- Compared v544 `top_k=2, temperature=0.8` against v546 `loss_calibrated + top_k=2, temperature=0.8`.
+- Confirmed `union_pair_full_seed_count=3/3`, while `best_single_pair_full_seed_count=2/3`.
+- Interpreted this as a seed-level tradeoff signal, not as stable single-model capability.
+- Archived the v547 scoreboard and browser evidence in `e/547` and added the code explanation in `代码讲解记录_模型能力阶段/561-v547-required-term-pair-seed-coverage-tradeoff.md`.
 
 ## Latest v546 checkpoint
+
+Version `v546.0.0` adds a loss-calibrated corpus mode and shows it can recover seed `1535`, but at the cost of losing the other two seeds.
 
 - Added `colon_immediate_loss_calibrated`, a light loss-branch calibration corpus mode.
 - Ran the same high-budget three-seed stability setup with `top_k=2, temperature=0.8`.

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair seed coverage tradeoff</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair seed coverage tradeoff</h1><p>No single configuration covers every seed, but the compared configurations cover all seeds together.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>required_term_pair_seed_coverage_tradeoff_complementary_full_union</strong></div><div class="card"><span>Union pair-full</span><strong>3/3</strong></div><div class="card"><span>Best config</span><strong>v544-topk2-t080</strong></div><div class="card"><span>Best pair-full</span><strong>2</strong></div><div class="card"><span>Tradeoff</span><strong>True</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>test an explicit fallback or config-selection policy before more corpus changes</p></section>
+<section class="panel">
+<h2>Configs</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Config</th><th>Pair-full seeds</th><th>Seed count</th><th>Corpus</th><th>Decode</th><th>Source</th></tr></thead>
+<tbody><tr><td>v544-topk2-t080</td><td>2</td><td>3</td><td>colon_immediate</td><td>k=2 t=0.8</td><td>e\544\解释\model-capability-required-term-pair-topk2-t080-stability\model_capability_required_term_pair_colon_immediate_stability.json</td></tr>
+<tr><td>v546-loss-calibrated-topk2-t080</td><td>1</td><td>3</td><td>colon_immediate_loss_calibrated</td><td>k=2 t=0.8</td><td>e\546\解释\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\model_capability_required_term_pair_colon_immediate_stability.json</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Seeds</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Covered</th><th>Winning config</th><th>Covering configs</th></tr></thead>
+<tbody><tr><td>535</td><td>True</td><td>v544-topk2-t080</td><td>v544-topk2-t080</td></tr>
+<tr><td>1535</td><td>True</td><td>v546-loss-calibrated-topk2-t080</td><td>v546-loss-calibrated-topk2-t080</td></tr>
+<tr><td>2535</td><td>True</td><td>v544-topk2-t080</td><td>v544-topk2-t080</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>
