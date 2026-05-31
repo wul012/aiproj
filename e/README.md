@@ -453,6 +453,10 @@ e/580/解释/说明.md
 e/581/图片
 e/581/解释/说明.md
  -> v581 required-term pair branch binding no-space seed 3535 的运行截图和解释
+
+e/582/图片
+e/582/解释/说明.md
+ -> v582 required-term pair branch binding comparison 的运行截图和解释
 ```
 
 写入规则：

@@ -1,0 +1,2 @@
+seed,branch_competition,compared_report_count,compared_reports,fixed_hit_reports,loss_hit_reports,union_hit_terms,pair_full_profile_reports,best_next_action
+3535,False,3,"[""v571-loss-balanced"", ""v579-branch-binding"", ""v581-branch-binding-no-space""]","[""v571-loss-balanced""]",[],"[""fixed""]",[],collect another comparable equals-surface repair report before changing the objective

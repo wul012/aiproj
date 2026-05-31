@@ -1,0 +1,60 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT equals-surface repair comparison" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The compared reports do not yet show complementary fixed/loss evidence.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_equals_surface_repair_comparison_recorded
+    - generic [ref=e13]:
+      - generic [ref=e14]: Reports
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Term rows
+      - strong [ref=e18]: "12"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Branch competition
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Pair-full profiles
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: add one stronger targeted repair or reduce the comparison scope
+  - generic [ref=e28]:
+    - heading "Source Reports" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Label Status Corpus mode Pair-full seeds Source" [ref=e33]
+      - rowgroup [ref=e39]:
+        - row "v571-loss-balanced pass equals_surface_no_pair_id_loss_balanced_repair 0/1 e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e40]
+        - row "v579-branch-binding pass equals_surface_no_pair_id_branch_binding_repair 0/1 e\\579\\解释\\model-capability-required-term-pair-branch-binding-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e46]
+        - row "v581-branch-binding-no-space pass equals_surface_no_pair_id_branch_binding_no_space_repair 0/1 e\\581\\解释\\model-capability-required-term-pair-branch-binding-no-space-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e52]
+  - generic [ref=e58]:
+    - heading "Branch Rows" [level=2] [ref=e59]
+    - table [ref=e61]:
+      - rowgroup [ref=e62]:
+        - row "Seed Competition Fixed hit reports Loss hit reports Pair-full reports Action" [ref=e63]
+      - rowgroup [ref=e70]:
+        - row "3535 False v571-loss-balanced collect another comparable equals-surface repair report before changing the objective" [ref=e71]
+  - generic [ref=e78]:
+    - heading "Term Evidence" [level=2] [ref=e79]
+    - table [ref=e81]:
+      - rowgroup [ref=e82]:
+        - row "Report Seed Profile Term Hit Prompt Preview" [ref=e83]
+      - rowgroup [ref=e91]:
+        - row "v571-loss-balanced 3535 default fixed True fixed= fixed= fixed" [ref=e92]
+        - row "v571-loss-balanced 3535 suppress_newline_tokens fixed True fixed= fixed los=fi" [ref=e100]
+        - row "v571-loss-balanced 3535 default loss False loss= fixed= fixe" [ref=e108]
+        - row "v571-loss-balanced 3535 suppress_newline_tokens loss False loss= fixed= fixe" [ref=e116]
+        - row "v579-branch-binding 3535 default fixed False fixed= losss\\nbind=" [ref=e124]
+        - row "v579-branch-binding 3535 suppress_newline_tokens fixed False fixed= lossss=dss=" [ref=e132]
+        - row "v579-branch-binding 3535 default loss False loss= los= fintin" [ref=e140]
+        - row "v579-branch-binding 3535 suppress_newline_tokens loss False loss= los= fintin" [ref=e148]
+        - row "v581-branch-binding-no-space 3535 default fixed False fixed= losssss=fixe" [ref=e156]
+        - row "v581-branch-binding-no-space 3535 suppress_newline_tokens fixed False fixed= losssss=fixe" [ref=e164]
+        - row "v581-branch-binding-no-space 3535 default loss False loss= los=fixedss=" [ref=e172]
+        - row "v581-branch-binding-no-space 3535 suppress_newline_tokens loss False loss= los=fixedss=" [ref=e180]

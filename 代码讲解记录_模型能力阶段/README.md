@@ -338,6 +338,9 @@
 595-v581-required-term-pair-branch-binding-no-space-seed-3535.md
  -> v581 code explanation: test a no-space branch-binding objective on fresh seed 3535.
 
+596-v582-required-term-pair-branch-binding-comparison.md
+ -> v582 code explanation: compare v571/v579/v581 and classify branch-binding v1/v2 as regressions.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

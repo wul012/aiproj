@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v581.0.0` tests a no-space branch-binding objective for seed `3535`; it removes the natural-language binding rows that caused whitespace drift, but the fresh seed still reaches `pair_full_seed_count=0/1`, so the next step is comparison and route selection rather than more blind corpus edits.
+Version `v582.0.0` compares the old v571 loss-balanced route against the new v579/v581 branch-binding routes; only v571 preserves a partial `fixed` hit, so branch-binding v1/v2 are currently regressions rather than improvements.
+
+## Latest v582 checkpoint
+
+- Reused the equals-surface comparison over v571, v579, and v581.
+- Compared `v571-loss-balanced`, `v579-branch-binding`, and `v581-branch-binding-no-space`.
+- Confirmed `pair_full_profile_seed_count=0` and `union_hit_terms=fixed`.
+- Confirmed only `v571-loss-balanced` appears in `fixed_hit_reports`.
+- Preserved the conclusion as comparison-only, not a model quality claim.
+- Archived v582 evidence in `e/582` and added the code explanation in `代码讲解记录_模型能力阶段/596-v582-required-term-pair-branch-binding-comparison.md`.
 
 ## Latest v581 checkpoint
 
