@@ -517,6 +517,10 @@ e/596/解释/说明.md
 e/597/图片
 e/597/解释/说明.md
  -> v597 required-term pair fixed-retention objective readiness 的运行截图和解释
+
+e/598/图片
+e/598/解释/说明.md
+ -> v598 required-term pair loss-branch batch closeout 的运行截图和解释
 ```
 
 写入规则：

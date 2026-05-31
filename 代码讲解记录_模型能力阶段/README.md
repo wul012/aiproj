@@ -386,6 +386,9 @@
 611-v597-required-term-pair-fixed-retention-objective-readiness.md
  -> v597 code explanation: combine route decision and diagnostic into fixed-retention objective requirements.
 
+612-v598-required-term-pair-loss-branch-batch-closeout.md
+ -> v598 code explanation: close v589-v598 loss-branch batch and route toward fixed-retention objective.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

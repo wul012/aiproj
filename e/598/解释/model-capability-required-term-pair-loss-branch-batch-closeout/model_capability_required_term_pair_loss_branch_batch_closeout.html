@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT loss-branch batch closeout</title>
+<style>
+:root{color-scheme:light;--ink:#1b222a;--muted:#5d6b78;--line:#d8dde5;--panel:#f6f8fb;--accent:#38586d}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f6;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT loss-branch batch closeout</h1><p>Three loss-branch objectives and three targeted seeds improved loss visibility but never reached pair-full.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>close_loss_branch_batch_and_start_fixed_retention_objective</strong></div><div class="card"><span>Range</span><strong>v589-v598</strong></div><div class="card"><span>Pair-full seeds</span><strong>0</strong></div><div class="card"><span>First-token gaps</span><strong>3</strong></div><div class="card"><span>Ready</span><strong>True</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>build and train a fixed-retention objective with balanced first-token rows</p></section>
+<section class="panel">
+<h2>Evidence Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Version</th><th>Label</th><th>Status</th><th>Decision</th><th>Key result</th></tr></thead>
+<tbody><tr><td>v589</td><td>v589-corpus-contract</td><td>pass</td><td>loss_branch_objective_corpus_modes_ready</td><td>modes=3; pair_id_removed=True</td></tr>
+<tr><td>v590</td><td>v590-targeted-seed</td><td>pass</td><td>required_term_pair_coexistence_refresh_no_pair_full</td><td>pair_full=False; training=pass</td></tr>
+<tr><td>v591</td><td>v591-dual-anchor-seed</td><td>pass</td><td>required_term_pair_coexistence_refresh_no_pair_full</td><td>pair_full=False; training=pass</td></tr>
+<tr><td>v592</td><td>v592-micro-span-seed</td><td>pass</td><td>required_term_pair_coexistence_refresh_no_pair_full</td><td>pair_full=False; training=pass</td></tr>
+<tr><td>v593</td><td>v593-objective-comparison</td><td>pass</td><td>loss_branch_objectives_confirm_loss_only_tradeoff</td><td>pair_full=0; loss_only=3; terms=loss</td></tr>
+<tr><td>v594</td><td>v594-route-decision</td><td>pass</td><td>select_targeted_loss_branch_for_seed_stability_not_promotion</td><td>selected=v590-targeted; fixed_required=True</td></tr>
+<tr><td>v595</td><td>v595-targeted-stability</td><td>pass</td><td>required_term_pair_colon_immediate_not_stable</td><td>pair_full_seeds=0/3; stable=False</td></tr>
+<tr><td>v596</td><td>v596-missed-seed-diagnostic</td><td>pass</td><td>required_term_pair_colon_immediate_first_token_gap</td><td>missed=3; first_token_gaps=3</td></tr>
+<tr><td>v597</td><td>v597-fixed-retention-readiness</td><td>pass</td><td>design_fixed_retention_objective_before_more_loss_branch_training</td><td>ready=True; requirements=3</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-branch ten-version closeout",
+  "generated_at": "2026-05-31T14:57:27Z",
+  "status": "pass",
+  "decision": "close_loss_branch_batch_and_start_fixed_retention_objective",
+  "failed_count": 0,
+  "issues": [],
+  "version_range": "v589-v598",
+  "source_report_count": 9,
+  "summary": {
+    "corpus_modes_ready": true,
+    "new_corpus_mode_count": 3,
+    "single_seed_report_count": 3,
+    "single_seed_pair_full_count": 0,
+    "comparison_pair_full_report_count": 0,
+    "comparison_loss_only_tradeoff_report_count": 3,
+    "comparison_union_hit_terms": [
+      "loss"
+    ],
+    "route_selected_stability_route": "v590-targeted",
+    "route_fixed_retention_required": true,
+    "stability_seed_count": 3,
+    "stability_pair_full_seed_count": 0,
+    "stability_stable_pair_full": false,
+    "diagnostic_missed_seed_count": 3,
+    "diagnostic_first_token_gap_count": 3,
+    "readiness_fixed_retention_required": true,
+    "readiness_ready_for_design": true,
+    "readiness_required_requirement_count": 3
+  },
+  "evidence_rows": [
+    {
+      "label": "v589-corpus-contract",
+      "version": "v589",
+      "path": "e\\589\\解释\\loss-branch-objective-corpus-contract\\model_capability_required_term_pair_loss_branch_objective_corpus_contract.json",
+      "status": "pass",
+      "decision": "loss_branch_objective_corpus_modes_ready",
+      "key_result": "modes=3; pair_id_removed=True"
+    },
+    {
+      "label": "v590-targeted-seed",
+      "version": "v590",
+      "path": "e\\590\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "key_result": "pair_full=False; training=pass"
+    },
+    {
+      "label": "v591-dual-anchor-seed",
+      "version": "v591",
+      "path": "e\\591\\解释\\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "key_result": "pair_full=False; training=pass"
+    },
+    {
+      "label": "v592-micro-span-seed",
+      "version": "v592",
+      "path": "e\\592\\解释\\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "key_result": "pair_full=False; training=pass"
+    },
+    {
+      "label": "v593-objective-comparison",
+      "version": "v593",
+      "path": "e\\593\\解释\\model-capability-required-term-pair-loss-branch-objective-comparison\\model_capability_required_term_pair_loss_branch_objective_comparison.json",
+      "status": "pass",
+      "decision": "loss_branch_objectives_confirm_loss_only_tradeoff",
+      "key_result": "pair_full=0; loss_only=3; terms=loss"
+    },
+    {
+      "label": "v594-route-decision",
+      "version": "v594",
+      "path": "e\\594\\解释\\model-capability-required-term-pair-loss-branch-route-decision\\model_capability_required_term_pair_loss_branch_route_decision.json",
+      "status": "pass",
+      "decision": "select_targeted_loss_branch_for_seed_stability_not_promotion",
+      "key_result": "selected=v590-targeted; fixed_required=True"
+    },
+    {
+      "label": "v595-targeted-stability",
+      "version": "v595",
+      "path": "e\\595\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "key_result": "pair_full_seeds=0/3; stable=False"
+    },
+    {
+      "label": "v596-missed-seed-diagnostic",
+      "version": "v596",
+      "path": "e\\596\\解释\\model-capability-required-term-pair-loss-branch-targeted-missed-seed-diagnostic\\model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_first_token_gap",
+      "key_result": "missed=3; first_token_gaps=3"
+    },
+    {
+      "label": "v597-fixed-retention-readiness",
+      "version": "v597",
+      "path": "e\\597\\解释\\model-capability-required-term-pair-fixed-retention-objective-readiness\\model_capability_required_term_pair_fixed_retention_objective_readiness.json",
+      "status": "pass",
+      "decision": "design_fixed_retention_objective_before_more_loss_branch_training",
+      "key_result": "ready=True; requirements=3"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "batch_closeout_only",
+    "reason": "Three loss-branch objectives and three targeted seeds improved loss visibility but never reached pair-full.",
+    "next_action": "build and train a fixed-retention objective with balanced first-token rows"
+  }
+}

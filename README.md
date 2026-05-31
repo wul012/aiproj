@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v597.0.0` adds a fixed-retention objective readiness gate: v594 and v596 now jointly require fixed first-token retention, no extra loss-only weighting, and a real seed gate before the next training objective can be considered useful.
+Version `v598.0.0` closes the v589-v598 loss-branch batch: nine source reports now agree that loss-only routes do not reach pair-full, all missed seeds show a first-token gap, and the next objective should be fixed-retention training.
+
+## Latest v598 checkpoint
+
+- Added `model_capability_required_term_pair_loss_branch_batch_closeout`.
+- Consumed v589 corpus contract, v590-v592 real seed reports, v593 comparison, v594 route decision, v595 stability, v596 diagnostic, and v597 readiness.
+- Confirmed `single_seed_pair_full_count=0` and `stability_pair_full_seed_count=0`.
+- Confirmed `diagnostic_first_token_gap_count=3`.
+- Set decision to `close_loss_branch_batch_and_start_fixed_retention_objective`.
+- Ran full local tests: `1187 passed`.
+- Ran source-encoding hygiene: `status=pass`, `clean_count=684`.
+- Archived v598 evidence in `e/598` and added the code explanation in `代码讲解记录_模型能力阶段/612-v598-required-term-pair-loss-branch-batch-closeout.md`.
 
 ## Latest v597 checkpoint
 

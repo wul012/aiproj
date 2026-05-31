@@ -1,0 +1,91 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-branch batch closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Three loss-branch objectives and three targeted seeds improved loss visibility but never reached pair-full.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: close_loss_branch_batch_and_start_fixed_retention_objective
+    - generic [ref=e13]:
+      - generic [ref=e14]: Range
+      - strong [ref=e15]: v589-v598
+    - generic [ref=e16]:
+      - generic [ref=e17]: Pair-full seeds
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: First-token gaps
+      - strong [ref=e21]: "3"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Ready
+      - strong [ref=e24]: "True"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: build and train a fixed-retention objective with balanced first-token rows
+  - generic [ref=e28]:
+    - heading "Evidence Rows" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Version Label Status Decision Key result" [ref=e33]:
+          - columnheader "Version" [ref=e34]
+          - columnheader "Label" [ref=e35]
+          - columnheader "Status" [ref=e36]
+          - columnheader "Decision" [ref=e37]
+          - columnheader "Key result" [ref=e38]
+      - rowgroup [ref=e39]:
+        - row "v589 v589-corpus-contract pass loss_branch_objective_corpus_modes_ready modes=3; pair_id_removed=True" [ref=e40]:
+          - cell "v589" [ref=e41]
+          - cell "v589-corpus-contract" [ref=e42]
+          - cell "pass" [ref=e43]
+          - cell "loss_branch_objective_corpus_modes_ready" [ref=e44]
+          - cell "modes=3; pair_id_removed=True" [ref=e45]
+        - row "v590 v590-targeted-seed pass required_term_pair_coexistence_refresh_no_pair_full pair_full=False; training=pass" [ref=e46]:
+          - cell "v590" [ref=e47]
+          - cell "v590-targeted-seed" [ref=e48]
+          - cell "pass" [ref=e49]
+          - cell "required_term_pair_coexistence_refresh_no_pair_full" [ref=e50]
+          - cell "pair_full=False; training=pass" [ref=e51]
+        - row "v591 v591-dual-anchor-seed pass required_term_pair_coexistence_refresh_no_pair_full pair_full=False; training=pass" [ref=e52]:
+          - cell "v591" [ref=e53]
+          - cell "v591-dual-anchor-seed" [ref=e54]
+          - cell "pass" [ref=e55]
+          - cell "required_term_pair_coexistence_refresh_no_pair_full" [ref=e56]
+          - cell "pair_full=False; training=pass" [ref=e57]
+        - row "v592 v592-micro-span-seed pass required_term_pair_coexistence_refresh_no_pair_full pair_full=False; training=pass" [ref=e58]:
+          - cell "v592" [ref=e59]
+          - cell "v592-micro-span-seed" [ref=e60]
+          - cell "pass" [ref=e61]
+          - cell "required_term_pair_coexistence_refresh_no_pair_full" [ref=e62]
+          - cell "pair_full=False; training=pass" [ref=e63]
+        - row "v593 v593-objective-comparison pass loss_branch_objectives_confirm_loss_only_tradeoff pair_full=0; loss_only=3; terms=loss" [ref=e64]:
+          - cell "v593" [ref=e65]
+          - cell "v593-objective-comparison" [ref=e66]
+          - cell "pass" [ref=e67]
+          - cell "loss_branch_objectives_confirm_loss_only_tradeoff" [ref=e68]
+          - cell "pair_full=0; loss_only=3; terms=loss" [ref=e69]
+        - row "v594 v594-route-decision pass select_targeted_loss_branch_for_seed_stability_not_promotion selected=v590-targeted; fixed_required=True" [ref=e70]:
+          - cell "v594" [ref=e71]
+          - cell "v594-route-decision" [ref=e72]
+          - cell "pass" [ref=e73]
+          - cell "select_targeted_loss_branch_for_seed_stability_not_promotion" [ref=e74]
+          - cell "selected=v590-targeted; fixed_required=True" [ref=e75]
+        - row "v595 v595-targeted-stability pass required_term_pair_colon_immediate_not_stable pair_full_seeds=0/3; stable=False" [ref=e76]:
+          - cell "v595" [ref=e77]
+          - cell "v595-targeted-stability" [ref=e78]
+          - cell "pass" [ref=e79]
+          - cell "required_term_pair_colon_immediate_not_stable" [ref=e80]
+          - cell "pair_full_seeds=0/3; stable=False" [ref=e81]
+        - row "v596 v596-missed-seed-diagnostic pass required_term_pair_colon_immediate_first_token_gap missed=3; first_token_gaps=3" [ref=e82]:
+          - cell "v596" [ref=e83]
+          - cell "v596-missed-seed-diagnostic" [ref=e84]
+          - cell "pass" [ref=e85]
+          - cell "required_term_pair_colon_immediate_first_token_gap" [ref=e86]
+          - cell "missed=3; first_token_gaps=3" [ref=e87]
+        - row "v597 v597-fixed-retention-readiness pass design_fixed_retention_objective_before_more_loss_branch_training ready=True; requirements=3" [ref=e88]:
+          - cell "v597" [ref=e89]
+          - cell "v597-fixed-retention-readiness" [ref=e90]
+          - cell "pass" [ref=e91]
+          - cell "design_fixed_retention_objective_before_more_loss_branch_training" [ref=e92]
+          - cell "ready=True; requirements=3" [ref=e93]

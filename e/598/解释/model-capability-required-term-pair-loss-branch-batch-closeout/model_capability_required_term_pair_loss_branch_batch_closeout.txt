@@ -1,0 +1,11 @@
+status=pass
+decision=close_loss_branch_batch_and_start_fixed_retention_objective
+failed_count=0
+version_range=v589-v598
+source_report_count=9
+single_seed_pair_full_count=0
+stability_pair_full_seed_count=0
+diagnostic_first_token_gap_count=3
+readiness_ready_for_design=True
+model_quality_claim=batch_closeout_only
+next_action=build and train a fixed-retention objective with balanced first-token rows
