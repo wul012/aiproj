@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v578.0.0` closes the v569-v577 required-term pair route batch: held-out prompt transfer stays positive, fresh seed `3535` does not reach pair-full, and the next useful version should start a branch-binding objective instead of another first-token or width variant.
+Version `v579.0.0` starts the branch-binding objective after v578: it adds a split-out corpus component for `equals_surface_no_pair_id_branch_binding_repair`, runs seed `3535`, and preserves the first negative baseline for the new route.
+
+## Latest v579 checkpoint
+
+- Added `model_capability_required_term_pair_branch_binding_corpus.py` instead of growing the already large coexistence corpus file.
+- Registered the new `equals_surface_no_pair_id_branch_binding_repair` corpus mode.
+- Added tests for explicit fixed/loss binding rows and no numeric pair id leakage.
+- Ran real seed `3535` training with the new corpus mode.
+- Confirmed `pair_full_seed_count=0/1` and `continuation_hit_count=0`.
+- Archived v579 evidence in `e/579` and added the code explanation in `代码讲解记录_模型能力阶段/593-v579-required-term-pair-branch-binding-seed-3535.md`.
 
 ## Latest v578 checkpoint
 

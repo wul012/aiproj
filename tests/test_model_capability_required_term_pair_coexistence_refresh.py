@@ -228,6 +228,21 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertNotIn("pair=01", corpus)
         self.assertNotIn("fixed:fixed", corpus)
 
+    def test_equals_surface_no_pair_id_branch_binding_repair_adds_explicit_binding_rows(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_branch_binding_repair",
+        )
+
+        self.assertIn("branch fixed prompt fixed= answer fixed", corpus)
+        self.assertIn("branch loss prompt loss= answer loss", corpus)
+        self.assertIn("fixed= never continues loss", corpus)
+        self.assertIn("loss= never continues fixed", corpus)
+        self.assertIn("branch binding has no numeric pair id.", corpus)
+        self.assertNotIn("pair=01", corpus)
+        self.assertNotIn("fixed:fixed", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

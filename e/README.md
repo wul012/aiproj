@@ -441,6 +441,10 @@ e/577/解释/说明.md
 e/578/图片
 e/578/解释/说明.md
  -> v578 required-term pair route closeout summary 的运行截图和解释
+
+e/579/图片
+e/579/解释/说明.md
+ -> v579 required-term pair branch binding seed 3535 的运行截图和解释
 ```
 
 写入规则：
