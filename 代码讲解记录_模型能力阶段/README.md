@@ -248,6 +248,9 @@
 565-v551-required-term-pair-seed-config-heldout-gap.md
  -> v551 code explanation: diagnose the v550 equals/1535 miss down to a fixed-term surface gap.
 
+566-v552-required-term-pair-equals-surface-fixed-repair.md
+ -> v552 code explanation: add an equals-surface fixed repair corpus mode and preserve its negative real-training result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

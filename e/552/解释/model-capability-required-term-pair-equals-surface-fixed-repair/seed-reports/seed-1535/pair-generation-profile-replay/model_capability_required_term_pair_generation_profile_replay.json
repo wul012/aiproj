@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation profile replay",
+  "generated_at": "2026-05-31T03:17:57Z",
+  "status": "pass",
+  "decision": "generation_profile_partial_pair_surface_only",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_branch_retention_sweep": "",
+  "out_dir": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-generation-profile-replay",
+  "settings": {
+    "profiles": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "variant_limit": 3,
+    "max_new_tokens": 12,
+    "temperature": 0.8,
+    "top_k": 2,
+    "device": "cpu",
+    "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+  },
+  "terms": [
+    {
+      "case": "comparison-baseline",
+      "term": "fixed",
+      "scaffold_prompt": "fixed=",
+      "source_hit_rate": 1.0
+    },
+    {
+      "case": "factual-val-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss=",
+      "source_hit_rate": 1.0
+    }
+  ],
+  "case_rows": [
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "coexistence-refresh",
+      "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 1535,
+      "checkpoint_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed=fi\nfixeq\nfix",
+      "continuation": "fi\nfixeq\nfix",
+      "generated_preview": "fixed=fi\\nfixeq\\nfix",
+      "continuation_preview": "fi\\nfixeq\\nfix",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "coexistence-refresh",
+      "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 1535,
+      "checkpoint_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed=fixed=fixed=",
+      "continuation": "fixed=fixed=",
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "coexistence-refresh",
+      "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 1536,
+      "checkpoint_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss=fiossssss=fs",
+      "continuation": "fiossssss=fs",
+      "generated_preview": "loss=fiossssss=fs",
+      "continuation_preview": "fiossssss=fs",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "coexistence-refresh",
+      "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 1536,
+      "checkpoint_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss=fiossssss=fs",
+      "continuation": "fiossssss=fs",
+      "generated_preview": "loss=fiossssss=fs",
+      "continuation_preview": "fiossssss=fs",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1
+    }
+  ],
+  "variant_rows": [
+    {
+      "variant_id": "coexistence-refresh",
+      "profile_id": "default",
+      "term_count": 2,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "pair_full_hit": false
+    },
+    {
+      "variant_id": "coexistence-refresh",
+      "profile_id": "suppress_newline_tokens",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_count": 1,
+      "pair_full_hit": false
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "default",
+      "case_count": 2,
+      "continuation_hit_count": 0,
+      "newline_cleanup_hit_count": 0,
+      "pair_full_variant_count": 0,
+      "variant_count": 1,
+      "blocked_token_count_total": 0
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "case_count": 2,
+      "continuation_hit_count": 1,
+      "newline_cleanup_hit_count": 1,
+      "pair_full_variant_count": 0,
+      "variant_count": 1,
+      "blocked_token_count_total": 2
+    }
+  ],
+  "summary": {
+    "variant_count": 1,
+    "term_count": 2,
+    "profile_count": 2,
+    "default_pair_full_variant_count": 0,
+    "suppression_pair_full_variant_count": 0,
+    "default_continuation_hit_count": 0,
+    "suppression_continuation_hit_count": 1,
+    "suppression_hit_delta": 1,
+    "suppression_pair_full_delta": 0,
+    "pair_full_rows": []
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The suppression profile helped individual continuations but did not create full fixed/loss coexistence.",
+    "next_action": "Keep the profile as decode-surface hygiene and continue with pair-training changes.",
+    "summary": {
+      "variant_count": 1,
+      "term_count": 2,
+      "profile_count": 2,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 1,
+      "suppression_hit_delta": 1,
+      "suppression_pair_full_delta": 0,
+      "pair_full_rows": []
+    }
+  }
+}

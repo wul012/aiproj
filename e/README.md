@@ -333,6 +333,10 @@ e/550/解释/说明.md
 e/551/图片
 e/551/解释/说明.md
  -> v551 required-term pair seed config held-out gap diagnostic 的运行截图和解释
+
+e/552/图片
+e/552/解释/说明.md
+ -> v552 required-term pair equals-surface fixed repair 的运行截图和解释
 ```
 
 写入规则：

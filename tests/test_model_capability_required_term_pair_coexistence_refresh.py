@@ -96,6 +96,33 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertIn("fixed prompt should not continue loss", corpus)
         self.assertNotIn("loss: loss", corpus)
 
+    def test_equals_surface_fixed_repair_targets_equals_prompt(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_fixed_repair",
+        )
+
+        self.assertGreater(corpus.count("fixed=fixed"), corpus.count("loss=loss"))
+        self.assertIn("prompt=fixed=target=fixed", corpus)
+        self.assertIn("fixed= should continue fixed.", corpus)
+        self.assertNotIn("fixed:fixed", corpus)
+
+    def test_equals_surface_fixed_repair_replays_equals_prompts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            report = build_model_capability_required_term_pair_coexistence_refresh(
+                out_dir=Path(tmp) / "refresh",
+                corpus_mode="equals_surface_fixed_repair",
+                train_func=fake_train,
+                generate_func=fake_generate_pair_full,
+            )
+            case_rows = report["replay_report"]["case_rows"]
+            prompts = {row["prompt"] for row in case_rows}
+
+            self.assertIn("fixed=", prompts)
+            self.assertIn("loss=", prompts)
+            self.assertNotIn("fixed:", prompts)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

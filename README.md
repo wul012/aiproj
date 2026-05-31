@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v551.0.0` diagnoses the v550 held-out gap and classifies the only miss as `fixed_term_surface_gap` on `equals + seed 1535 + v546-loss-calibrated-topk2-t080`.
+Version `v552.0.0` tests a targeted equals-surface fixed repair candidate for seed `1535`; the run executes cleanly but remains `0/1` pair-full, showing a single-sided fixed repair is not enough.
+
+## Latest v552 checkpoint
+
+- Added `equals_surface_fixed_repair` to the existing pair-coexistence corpus modes instead of creating a new training chain.
+- Switched that mode's replay prompts to `fixed=` / `loss=` while preserving the old `fixed:` / `loss:` prompts for all existing modes.
+- Ran a real seed `1535` repair candidate with top-k `2` and temperature `0.8`.
+- Confirmed `pair_full_seed_count=0/1`; `fixed=` can hit under newline suppression, but `loss=` misses, so pair-full is still absent.
+- Archived v552 evidence in `e/552` and added the code explanation in `代码讲解记录_模型能力阶段/566-v552-required-term-pair-equals-surface-fixed-repair.md`.
 
 ## Latest v551 checkpoint
+
+Version `v551.0.0` diagnoses the v550 held-out gap and classifies the only miss as `fixed_term_surface_gap` on `equals + seed 1535 + v546-loss-calibrated-topk2-t080`.
 
 - Added `model_capability_required_term_pair_seed_config_heldout_gap`, a diagnostic layer over v550 held-out replay evidence.
 - Re-read v550 replay rows and sidecar generation-profile reports without retraining or changing the selected policy.

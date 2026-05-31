@@ -24,6 +24,7 @@ PAIR_COEXISTENCE_CORPUS_MODES = (
     "colon_immediate_first_token_boost",
     "colon_immediate_isolated_prompt",
     "colon_immediate_loss_calibrated",
+    "equals_surface_fixed_repair",
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -83,7 +84,7 @@ def build_model_capability_required_term_pair_coexistence_refresh(
         issues.append("pair coexistence refresh training failed")
     else:
         replay_report = build_model_capability_required_term_pair_generation_profile_replay(
-            _source_report(training, seed=seed),
+            _source_report(training, seed=seed, corpus_mode=corpus_mode),
             out_dir=root / "pair-generation-profile-replay",
             profiles=DEFAULT_PROFILE_IDS,
             max_new_tokens=max_new_tokens,
@@ -274,6 +275,37 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
                     "fixed prompt should not continue loss",
                 ]
             )
+    elif corpus_mode == "equals_surface_fixed_repair":
+        for _ in range(max(1, repeat)):
+            lines.extend(
+                [
+                    "fixed=fixed",
+                    "fixed=fixed",
+                    "loss=loss",
+                    "fixed=f",
+                    "fixed=fi",
+                    "fixed=fix",
+                    "loss=l",
+                    "loss=lo",
+                    "loss=los",
+                    "prompt=fixed=target=fixed",
+                    "prompt=loss=target=loss",
+                    "equals surface fixed=fixed",
+                    "equals surface loss=loss",
+                    "fixed= selects fixed",
+                    "loss= selects loss",
+                ]
+            )
+        for _ in range(max(0, bridge_repeat)):
+            lines.extend(
+                [
+                    "repair equals prompt surface for fixed.",
+                    "fixed= should continue fixed.",
+                    "loss= should continue loss.",
+                    "fixed= is not loss.",
+                    "loss= is not fixed.",
+                ]
+            )
     else:
         raise ValueError(f"unknown corpus_mode: {corpus_mode}")
     return "\n".join(lines) + "\n"
@@ -367,14 +399,15 @@ def _training_result(train_dir: Path, command: list[str], returncode: int, stdou
     }
 
 
-def _source_report(training: dict[str, Any], *, seed: int) -> dict[str, Any]:
+def _source_report(training: dict[str, Any], *, seed: int, corpus_mode: str = "spaced_answer") -> dict[str, Any]:
+    fixed_prompt, loss_prompt = _source_prompts(corpus_mode)
     return {
         "targets": [
             {
                 "pair_id": "01-fixed-loss",
                 "terms": [
-                    {"case": "comparison-baseline", "term": "fixed", "scaffold_prompt": "fixed:", "source_hit_rate": 1.0},
-                    {"case": "factual-val-loss", "term": "loss", "scaffold_prompt": "loss:", "source_hit_rate": 1.0},
+                    {"case": "comparison-baseline", "term": "fixed", "scaffold_prompt": fixed_prompt, "source_hit_rate": 1.0},
+                    {"case": "factual-val-loss", "term": "loss", "scaffold_prompt": loss_prompt, "source_hit_rate": 1.0},
                 ],
             }
         ],
@@ -393,6 +426,12 @@ def _source_report(training: dict[str, Any], *, seed: int) -> dict[str, Any]:
             {"variant_id": "coexistence-refresh", "term": "loss", "generation_seed": seed + 1},
         ],
     }
+
+
+def _source_prompts(corpus_mode: str) -> tuple[str, str]:
+    if corpus_mode == "equals_surface_fixed_repair":
+        return "fixed=", "loss="
+    return "fixed:", "loss:"
 
 
 def _summary(training: dict[str, Any], replay_report: dict[str, Any]) -> dict[str, Any]:

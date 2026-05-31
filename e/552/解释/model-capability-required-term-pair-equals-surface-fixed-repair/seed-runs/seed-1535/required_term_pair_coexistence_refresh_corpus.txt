@@ -1,0 +1,4002 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+fixed=fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+prompt=fixed=target=fixed
+prompt=loss=target=loss
+equals surface fixed=fixed
+equals surface loss=loss
+fixed= selects fixed
+loss= selects loss
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
+repair equals prompt surface for fixed.
+fixed= should continue fixed.
+loss= should continue loss.
+fixed= is not loss.
+loss= is not fixed.
