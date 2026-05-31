@@ -1,0 +1,4 @@
+source_label,corpus_mode,seed,hit_terms,missed_terms,pair_full_profiles
+v600-balanced,equals_surface_no_pair_id_fixed_retention_balanced_repair,3535,"[""loss""]","[""fixed""]",[]
+v601-first-token,equals_surface_no_pair_id_fixed_retention_first_token_repair,3535,"[""fixed""]","[""loss""]",[]
+v602-prompt-guard,equals_surface_no_pair_id_fixed_retention_prompt_guard_repair,3535,"[""loss""]","[""fixed""]",[]

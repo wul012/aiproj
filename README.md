@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v602.0.0` runs the fixed-retention prompt-guard route and confirms it falls back to loss-only behavior, leaving pair-full absent.
+Version `v603.0.0` compares the three fixed-retention objective routes and confirms mixed branch tradeoff: v601 recovers `fixed`, v600/v602 recover `loss`, and none reach pair-full.
+
+## Latest v603 checkpoint
+
+- Added `model_capability_required_term_pair_fixed_retention_objective_comparison`.
+- Compared v600 balanced, v601 first-token, and v602 prompt-guard reports.
+- Confirmed `pair_full_report_count=0`.
+- Confirmed `fixed_only_tradeoff_report_count=1` and `loss_only_tradeoff_report_count=2`.
+- Selected `v601-first-token` as the fixed recovery route, not a promotion route.
+- Archived v603 evidence in `e/603` and added the code explanation in `代码讲解记录_模型能力阶段/617-v603-required-term-pair-fixed-retention-objective-comparison.md`.
 
 ## Latest v602 checkpoint
 

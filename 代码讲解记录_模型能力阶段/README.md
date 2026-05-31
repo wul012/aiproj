@@ -401,6 +401,9 @@
 616-v602-required-term-pair-fixed-retention-prompt-guard-seed-3535.md
  -> v602 code explanation: run real prompt-guard fixed-retention seed 3535 and record loss-only tradeoff.
 
+617-v603-required-term-pair-fixed-retention-objective-comparison.md
+ -> v603 code explanation: compare fixed-retention routes and identify v601 as fixed recovery tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT fixed-retention objective comparison</title>
+<style>
+:root{color-scheme:light;--ink:#1b222a;--muted:#5d6b78;--line:#d8dde5;--panel:#f6f8fb;--accent:#335b73}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f6;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT fixed-retention objective comparison</h1><p>The routes recover different branches but no route keeps both at once.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>fixed_retention_objectives_confirm_branch_tradeoff</strong></div><div class="card"><span>Pair-full</span><strong>0</strong></div><div class="card"><span>Fixed-only</span><strong>1</strong></div><div class="card"><span>Loss-only</span><strong>2</strong></div><div class="card"><span>Fixed route</span><strong>v601-first-token</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>select the fixed recovery route for a loss-rebalance objective or stability replay</p></section>
+<section class="panel">
+<h2>Branch Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Route</th><th>Mode</th><th>Hit terms</th><th>Missed terms</th><th>Pair-full profiles</th></tr></thead>
+<tbody><tr><td>v600-balanced</td><td>equals_surface_no_pair_id_fixed_retention_balanced_repair</td><td>loss</td><td>fixed</td><td></td></tr>
+<tr><td>v601-first-token</td><td>equals_surface_no_pair_id_fixed_retention_first_token_repair</td><td>fixed</td><td>loss</td><td></td></tr>
+<tr><td>v602-prompt-guard</td><td>equals_surface_no_pair_id_fixed_retention_prompt_guard_repair</td><td>loss</td><td>fixed</td><td></td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

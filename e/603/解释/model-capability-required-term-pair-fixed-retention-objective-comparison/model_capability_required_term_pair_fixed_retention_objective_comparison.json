@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fixed-retention objective comparison",
+  "generated_at": "2026-05-31T23:44:28Z",
+  "status": "pass",
+  "decision": "fixed_retention_objectives_confirm_branch_tradeoff",
+  "failed_count": 0,
+  "issues": [],
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "v600-balanced",
+      "source_path": "e\\600\\解释\\model-capability-required-term-pair-fixed-retention-balanced-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    },
+    {
+      "index": 1,
+      "source_label": "v601-first-token",
+      "source_path": "e\\601\\解释\\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    },
+    {
+      "index": 2,
+      "source_label": "v602-prompt-guard",
+      "source_path": "e\\602\\解释\\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    }
+  ],
+  "term_rows": [
+    {
+      "source_label": "v600-balanced",
+      "source_path": "e\\600\\解释\\model-capability-required-term-pair-fixed-retention-balanced-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v600-balanced",
+      "source_path": "e\\600\\解释\\model-capability-required-term-pair-fixed-retention-balanced-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v600-balanced",
+      "source_path": "e\\600\\解释\\model-capability-required-term-pair-fixed-retention-balanced-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed\\nfixed ",
+      "continuation_preview": "fixed\\nfixed "
+    },
+    {
+      "source_label": "v600-balanced",
+      "source_path": "e\\600\\解释\\model-capability-required-term-pair-fixed-retention-balanced-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss=fixed= losss",
+      "continuation_preview": "fixed= losss"
+    },
+    {
+      "source_label": "v601-first-token",
+      "source_path": "e\\601\\解释\\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v601-first-token",
+      "source_path": "e\\601\\解释\\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v601-first-token",
+      "source_path": "e\\601\\解释\\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v601-first-token",
+      "source_path": "e\\601\\解释\\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v602-prompt-guard",
+      "source_path": "e\\602\\解释\\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed= loss\\nlos\\nlo",
+      "continuation_preview": " loss\\nlos\\nlo"
+    },
+    {
+      "source_label": "v602-prompt-guard",
+      "source_path": "e\\602\\解释\\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v602-prompt-guard",
+      "source_path": "e\\602\\解释\\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss= losss\\nlos\\nl",
+      "continuation_preview": " losss\\nlos\\nl"
+    },
+    {
+      "source_label": "v602-prompt-guard",
+      "source_path": "e\\602\\解释\\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss= losssssssss",
+      "continuation_preview": " losssssssss"
+    }
+  ],
+  "branch_rows": [
+    {
+      "source_label": "v600-balanced",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "fixed_only_tradeoff": false,
+      "loss_only_tradeoff": true,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v601-first-token",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "fixed_only_tradeoff": true,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v602-prompt-guard",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "fixed_only_tradeoff": false,
+      "loss_only_tradeoff": true,
+      "pair_full_observed": false
+    }
+  ],
+  "summary": {
+    "compared_report_count": 3,
+    "pair_full_report_count": 0,
+    "fixed_only_tradeoff_report_count": 1,
+    "loss_only_tradeoff_report_count": 2,
+    "fixed_hit_report_count": 1,
+    "loss_hit_report_count": 2,
+    "union_hit_terms": [
+      "fixed",
+      "loss"
+    ],
+    "mixed_tradeoff_observed": true,
+    "best_hit_term_count": 1,
+    "best_routes": [
+      "v600-balanced",
+      "v601-first-token",
+      "v602-prompt-guard"
+    ],
+    "fixed_recovery_route": "v601-first-token"
+  },
+  "interpretation": {
+    "model_quality_claim": "tradeoff_only",
+    "reason": "The routes recover different branches but no route keeps both at once.",
+    "next_action": "select the fixed recovery route for a loss-rebalance objective or stability replay"
+  }
+}
