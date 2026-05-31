@@ -362,6 +362,9 @@
 603-v589-required-term-pair-loss-branch-objective-corpus.md
  -> v589 code explanation: add independent loss-branch objective corpus modes.
 
+604-v590-required-term-pair-loss-branch-targeted-seed-3535.md
+ -> v590 code explanation: run real seed 3535 targeted loss-branch training and record branch tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

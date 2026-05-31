@@ -485,6 +485,10 @@ e/588/解释/说明.md
 e/589/图片
 e/589/解释/说明.md
  -> v589 required-term pair loss-branch objective corpus contract 的运行截图和解释
+
+e/590/图片
+e/590/解释/说明.md
+ -> v590 required-term pair loss-branch targeted seed 3535 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v589.0.0` starts the loss-branch objective route with three independent equals-surface corpus modes, keeping the near-threshold core corpus file as a router instead of adding more inline mode logic.
+Version `v590.0.0` runs the first real loss-branch objective checkpoint on seed `3535`: targeted repair recovers `loss` but drops `fixed`, so the result is branch-tradeoff evidence rather than pair-full.
+
+## Latest v590 checkpoint
+
+- Ran real tiny training with `equals_surface_no_pair_id_loss_branch_targeted_repair`.
+- Used seed `3535`, `max_iters=1800`, `n_embd=64`, CPU.
+- Confirmed training/checkpoint status: `pass`.
+- Confirmed `pair_full_observed=False`.
+- Confirmed replay hits `loss` and misses `fixed` in both default and newline-suppression profiles.
+- Archived v590 evidence in `e/590` and added the code explanation in `代码讲解记录_模型能力阶段/604-v590-required-term-pair-loss-branch-targeted-seed-3535.md`.
+
+## Latest v589 checkpoint
 
 ## Latest v589 checkpoint
 
