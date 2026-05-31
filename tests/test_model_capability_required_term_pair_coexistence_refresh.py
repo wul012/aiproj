@@ -275,6 +275,44 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertNotIn("branch fixed prompt fixed= answer fixed", corpus)
         self.assertNotIn("pair=01", corpus)
 
+    def test_equals_surface_no_pair_id_loss_branch_targeted_repair_weights_loss_branch(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_branch_targeted_repair",
+        )
+
+        self.assertGreater(corpus.count("loss=loss"), corpus.count("fixed=fixed"))
+        self.assertIn("loss branch target loss", corpus)
+        self.assertIn("loss= should not drift into fixed", corpus)
+        self.assertNotIn("pair=01", corpus)
+
+    def test_equals_surface_no_pair_id_loss_branch_dual_anchor_repair_keeps_both_anchors(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+        )
+
+        self.assertIn("loss=loss|fixed=fixed", corpus)
+        self.assertIn("fixed=fixed|loss=loss", corpus)
+        self.assertIn("anchor loss=loss", corpus)
+        self.assertIn("dual anchors keep loss and fixed in the same clean record.", corpus)
+        self.assertNotIn("pair=01", corpus)
+
+    def test_equals_surface_no_pair_id_loss_branch_micro_span_repair_adds_loss_prefix_spans(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_branch_micro_span_repair",
+        )
+
+        self.assertGreater(corpus.count("loss=l"), corpus.count("fixed=f"))
+        self.assertIn("loss=lo", corpus)
+        self.assertIn("loss=los", corpus)
+        self.assertIn("micro span hints expose the first loss token without pair ids.", corpus)
+        self.assertNotIn("pair=01", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

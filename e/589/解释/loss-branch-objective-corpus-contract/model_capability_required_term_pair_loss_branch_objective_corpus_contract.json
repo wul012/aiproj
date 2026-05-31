@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-branch objective corpus contract",
+  "status": "pass",
+  "decision": "loss_branch_objective_corpus_modes_ready",
+  "version": "v589.0.0",
+  "new_corpus_modes": [
+    "equals_surface_no_pair_id_loss_branch_targeted_repair",
+    "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+    "equals_surface_no_pair_id_loss_branch_micro_span_repair"
+  ],
+  "source_files": [
+    "src/minigpt/model_capability_required_term_pair_loss_branch_objective_corpus.py",
+    "src/minigpt/model_capability_required_term_pair_coexistence_corpus.py",
+    "tests/test_model_capability_required_term_pair_coexistence_refresh.py"
+  ],
+  "validation": {
+    "py_compile": "pass",
+    "pytest": "23 passed in 0.35s",
+    "git_diff_check": "pass"
+  },
+  "summary": {
+    "main_corpus_file_split_preserved": true,
+    "new_mode_count": 3,
+    "pair_id_removed": true,
+    "source_prompts": "fixed= / loss=",
+    "next_action": "run real seed 3535 training for each new loss-branch objective mode"
+  }
+}

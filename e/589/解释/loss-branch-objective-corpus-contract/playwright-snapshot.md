@@ -1,0 +1,40 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT loss-branch objective corpus contract" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v589 adds three loss-branch objective corpus modes without growing the core coexistence corpus file into another large module.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: loss_branch_objective_corpus_modes_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Modes
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Tests
+      - strong [ref=e18]: 23 passed
+  - generic [ref=e19]:
+    - heading "New Modes" [level=2] [ref=e20]
+    - table [ref=e21]:
+      - rowgroup [ref=e22]:
+        - row "Mode Role" [ref=e23]:
+          - columnheader "Mode" [ref=e24]
+          - columnheader "Role" [ref=e25]
+      - rowgroup [ref=e26]:
+        - row "equals_surface_no_pair_id_loss_branch_targeted_repair Weights the missed loss branch while preserving fixed as a target." [ref=e27]:
+          - cell "equals_surface_no_pair_id_loss_branch_targeted_repair" [ref=e28]:
+            - code [ref=e29]: equals_surface_no_pair_id_loss_branch_targeted_repair
+          - cell "Weights the missed loss branch while preserving fixed as a target." [ref=e30]
+        - row "equals_surface_no_pair_id_loss_branch_dual_anchor_repair Keeps loss and fixed together in clean dual-anchor records." [ref=e31]:
+          - cell "equals_surface_no_pair_id_loss_branch_dual_anchor_repair" [ref=e32]:
+            - code [ref=e33]: equals_surface_no_pair_id_loss_branch_dual_anchor_repair
+          - cell "Keeps loss and fixed together in clean dual-anchor records." [ref=e34]
+        - row "equals_surface_no_pair_id_loss_branch_micro_span_repair Adds short loss-prefix spans for first-token visibility." [ref=e35]:
+          - cell "equals_surface_no_pair_id_loss_branch_micro_span_repair" [ref=e36]:
+            - code [ref=e37]: equals_surface_no_pair_id_loss_branch_micro_span_repair
+          - cell "Adds short loss-prefix spans for first-token visibility." [ref=e38]
+  - generic [ref=e39]:
+    - heading "Validation" [level=2] [ref=e40]
+    - paragraph [ref=e41]: py_compile passed. Targeted pytest passed with 23 tests. git diff check passed.

@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v588.0.0` closes the v579-v588 ten-version batch: branch-binding v1/v2 were stopped, target-anchor was kept as residual-only, full tests passed with `1165 passed`, and the next training work should start from a loss-branch objective.
+Version `v589.0.0` starts the loss-branch objective route with three independent equals-surface corpus modes, keeping the near-threshold core corpus file as a router instead of adding more inline mode logic.
+
+## Latest v589 checkpoint
+
+- Added `model_capability_required_term_pair_loss_branch_objective_corpus.py`.
+- Added three corpus modes: targeted repair, dual-anchor repair, and micro-span repair.
+- Kept `coexistence_corpus.py` as a route layer for the new modes.
+- Confirmed the new modes use `fixed=` / `loss=` prompts and avoid numeric pair-id rows.
+- Ran targeted tests: `23 passed`.
+- Archived v589 evidence in `e/589` and added the code explanation in `代码讲解记录_模型能力阶段/603-v589-required-term-pair-loss-branch-objective-corpus.md`.
+
+## Latest v588 checkpoint
 
 ## Latest v588 checkpoint
 

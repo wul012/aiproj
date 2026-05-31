@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT loss-branch objective corpus contract</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+code{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>MiniGPT loss-branch objective corpus contract</h1>
+<p>v589 adds three loss-branch objective corpus modes without growing the core coexistence corpus file into another large module.</p>
+</header>
+<section class="stats">
+<div class="card"><span>Status</span><strong>pass</strong></div>
+<div class="card"><span>Decision</span><strong>loss_branch_objective_corpus_modes_ready</strong></div>
+<div class="card"><span>Modes</span><strong>3</strong></div>
+<div class="card"><span>Tests</span><strong>23 passed</strong></div>
+</section>
+<section class="panel">
+<h2>New Modes</h2>
+<table>
+<thead><tr><th>Mode</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>equals_surface_no_pair_id_loss_branch_targeted_repair</code></td><td>Weights the missed loss branch while preserving fixed as a target.</td></tr>
+<tr><td><code>equals_surface_no_pair_id_loss_branch_dual_anchor_repair</code></td><td>Keeps loss and fixed together in clean dual-anchor records.</td></tr>
+<tr><td><code>equals_surface_no_pair_id_loss_branch_micro_span_repair</code></td><td>Adds short loss-prefix spans for first-token visibility.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="panel">
+<h2>Validation</h2>
+<p>py_compile passed. Targeted pytest passed with 23 tests. git diff check passed.</p>
+</section>
+</main>
+</body>
+</html>
