@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair branch-binding route decision",
+  "generated_at": "2026-05-31T12:29:23Z",
+  "status": "pass",
+  "decision": "stop_branch_binding_v1_and_keep_residual_baseline",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "e\\582\\解释\\model-capability-required-term-pair-branch-binding-comparison\\model_capability_required_term_pair_equals_surface_repair_comparison.json",
+  "route_rows": [
+    {
+      "source_label": "v571-loss-balanced",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "route_type": "baseline",
+      "pair_full_seed_count": 0,
+      "seed_count": 1,
+      "stable_pair_full": false,
+      "hit_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "rejection_reasons": [
+        "no_pair_full_seed",
+        "loss_term_missing"
+      ]
+    },
+    {
+      "source_label": "v579-branch-binding",
+      "corpus_mode": "equals_surface_no_pair_id_branch_binding_repair",
+      "route_type": "branch_binding",
+      "pair_full_seed_count": 0,
+      "seed_count": 1,
+      "stable_pair_full": false,
+      "hit_terms": [],
+      "hit_term_count": 0,
+      "rejection_reasons": [
+        "no_pair_full_seed",
+        "no_visible_term_hit",
+        "loss_term_missing",
+        "branch_binding_not_promotable"
+      ]
+    },
+    {
+      "source_label": "v581-branch-binding-no-space",
+      "corpus_mode": "equals_surface_no_pair_id_branch_binding_no_space_repair",
+      "route_type": "branch_binding",
+      "pair_full_seed_count": 0,
+      "seed_count": 1,
+      "stable_pair_full": false,
+      "hit_terms": [],
+      "hit_term_count": 0,
+      "rejection_reasons": [
+        "no_pair_full_seed",
+        "no_visible_term_hit",
+        "loss_term_missing",
+        "branch_binding_not_promotable"
+      ]
+    }
+  ],
+  "summary": {
+    "route_count": 3,
+    "branch_binding_route_count": 2,
+    "branch_binding_pair_full_route_count": 0,
+    "branch_binding_visible_hit_route_count": 0,
+    "baseline_visible_hit_route_count": 1,
+    "pair_full_profile_seed_count": 0,
+    "union_hit_terms": [
+      "fixed"
+    ],
+    "best_residual_signal": "v571-loss-balanced",
+    "stop_branch_binding_v1": true,
+    "branch_binding_regressed_below_baseline": true
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "Compared branch-binding routes did not reach pair-full and did not preserve the baseline partial hit.",
+    "next_action": "stop branch-binding v1/v2; require a stronger objective before another training run"
+  }
+}

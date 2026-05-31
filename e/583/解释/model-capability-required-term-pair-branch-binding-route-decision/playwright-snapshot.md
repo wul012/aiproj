@@ -1,0 +1,32 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT branch-binding route decision" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Compared branch-binding routes did not reach pair-full and did not preserve the baseline partial hit.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: stop_branch_binding_v1_and_keep_residual_baseline
+    - generic [ref=e13]:
+      - generic [ref=e14]: Branch routes
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Branch visible
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Best residual
+      - strong [ref=e21]: v571-loss-balanced
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: stop branch-binding v1/v2; require a stronger objective before another training run
+  - generic [ref=e25]:
+    - heading "Route Rows" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]:
+        - row "Route Type Pair-full Hit terms Reasons" [ref=e30]
+      - rowgroup [ref=e36]:
+        - row "v571-loss-balanced baseline 0/1 fixed no_pair_full_seed,loss_term_missing" [ref=e37]
+        - row "v579-branch-binding branch_binding 0/1 no_pair_full_seed,no_visible_term_hit,loss_term_missing,branch_binding_not_promotable" [ref=e43]
+        - row "v581-branch-binding-no-space branch_binding 0/1 no_pair_full_seed,no_visible_term_hit,loss_term_missing,branch_binding_not_promotable" [ref=e49]

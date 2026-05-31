@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v582.0.0` compares the old v571 loss-balanced route against the new v579/v581 branch-binding routes; only v571 preserves a partial `fixed` hit, so branch-binding v1/v2 are currently regressions rather than improvements.
+Version `v583.0.0` turns the v582 comparison into a machine-readable branch-binding route decision: stop branch-binding v1/v2, keep v571 as the residual baseline, and require a stronger objective before another training run.
+
+## Latest v583 checkpoint
+
+- Added `model_capability_required_term_pair_branch_binding_route_decision`.
+- Consumed the v582 comparison report as the source of truth.
+- Confirmed `branch_binding_route_count=2` and `branch_binding_visible_hit_route_count=0`.
+- Preserved `best_residual_signal=v571-loss-balanced`.
+- Produced JSON/CSV/text/Markdown/HTML decision artifacts.
+- Archived v583 evidence in `e/583` and added the code explanation in `代码讲解记录_模型能力阶段/597-v583-required-term-pair-branch-binding-route-decision.md`.
 
 ## Latest v582 checkpoint
 

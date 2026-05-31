@@ -1,0 +1,8 @@
+status=pass
+decision=stop_branch_binding_v1_and_keep_residual_baseline
+failed_count=0
+branch_binding_route_count=2
+branch_binding_visible_hit_route_count=0
+best_residual_signal=v571-loss-balanced
+model_quality_claim=route_decision_only
+next_action=stop branch-binding v1/v2; require a stronger objective before another training run
