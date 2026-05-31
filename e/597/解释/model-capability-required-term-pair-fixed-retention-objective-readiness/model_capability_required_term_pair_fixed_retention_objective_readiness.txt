@@ -1,0 +1,10 @@
+status=pass
+decision=design_fixed_retention_objective_before_more_loss_branch_training
+failed_count=0
+fixed_retention_objective_required=True
+first_token_gap_confirmed=True
+missed_seed_count=3
+missed_first_token_gap_count=3
+required_requirement_count=3
+model_quality_claim=readiness_only
+next_action=build a fixed-retention corpus objective with balanced first-token rows and a real seed gate

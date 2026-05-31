@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fixed-retention objective readiness",
+  "generated_at": "2026-05-31T14:43:33Z",
+  "status": "pass",
+  "decision": "design_fixed_retention_objective_before_more_loss_branch_training",
+  "failed_count": 0,
+  "issues": [],
+  "source_route_decision": "e\\594\\解释\\model-capability-required-term-pair-loss-branch-route-decision\\model_capability_required_term_pair_loss_branch_route_decision.json",
+  "source_diagnostic": "e\\596\\解释\\model-capability-required-term-pair-loss-branch-targeted-missed-seed-diagnostic\\model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic.json",
+  "evidence_rows": [
+    {
+      "label": "loss-branch-route-decision",
+      "path": "e\\594\\解释\\model-capability-required-term-pair-loss-branch-route-decision\\model_capability_required_term_pair_loss_branch_route_decision.json",
+      "status": "pass",
+      "decision": "select_targeted_loss_branch_for_seed_stability_not_promotion",
+      "key_result": "selected=v590-targeted; fixed_retention_required=True"
+    },
+    {
+      "label": "targeted-missed-seed-diagnostic",
+      "path": "e\\596\\解释\\model-capability-required-term-pair-loss-branch-targeted-missed-seed-diagnostic\\model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_first_token_gap",
+      "key_result": "missed=3; first_token_gaps=3"
+    }
+  ],
+  "requirement_rows": [
+    {
+      "id": "fixed_first_token_retention",
+      "required": true,
+      "reason": "fixed first token ranks behind loss/space on missed seeds",
+      "acceptance": "fixed_expected_rank must improve before adding more loss weighting"
+    },
+    {
+      "id": "loss_branch_no_extra_weight",
+      "required": true,
+      "reason": "loss branch already wins while fixed drops",
+      "acceptance": "new corpus must not increase loss-only row density without fixed retention rows"
+    },
+    {
+      "id": "pair_full_seed_gate",
+      "required": true,
+      "reason": "v590-v596 found only residual single-branch evidence",
+      "acceptance": "run at least one real seed before calling the objective useful"
+    }
+  ],
+  "summary": {
+    "fixed_retention_objective_required": true,
+    "selected_stability_route": "v590-targeted",
+    "pair_full_route_count": 0,
+    "missed_seed_count": 3,
+    "missed_first_token_gap_count": 3,
+    "first_token_gap_confirmed": true,
+    "required_requirement_count": 3,
+    "ready_for_fixed_retention_objective_design": true
+  },
+  "interpretation": {
+    "model_quality_claim": "readiness_only",
+    "reason": "Loss branch is strong enough to dominate, while fixed first-token retention is weak across missed seeds.",
+    "next_action": "build a fixed-retention corpus objective with balanced first-token rows and a real seed gate"
+  }
+}

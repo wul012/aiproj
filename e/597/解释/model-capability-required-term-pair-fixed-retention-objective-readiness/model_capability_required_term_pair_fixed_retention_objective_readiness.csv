@@ -1,0 +1,4 @@
+id,required,reason,acceptance
+fixed_first_token_retention,True,fixed first token ranks behind loss/space on missed seeds,fixed_expected_rank must improve before adding more loss weighting
+loss_branch_no_extra_weight,True,loss branch already wins while fixed drops,new corpus must not increase loss-only row density without fixed retention rows
+pair_full_seed_gate,True,v590-v596 found only residual single-branch evidence,run at least one real seed before calling the objective useful

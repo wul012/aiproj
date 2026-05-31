@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v596.0.0` diagnoses the v595 targeted missed seeds and confirms a first-token gap: all three seeds miss pair-full, `loss` is usually ranked ahead, and the next objective should focus on fixed retention rather than more loss weighting.
+Version `v597.0.0` adds a fixed-retention objective readiness gate: v594 and v596 now jointly require fixed first-token retention, no extra loss-only weighting, and a real seed gate before the next training objective can be considered useful.
+
+## Latest v597 checkpoint
+
+- Added `model_capability_required_term_pair_fixed_retention_objective_readiness`.
+- Consumed v594 loss-branch route decision and v596 missed-seed diagnostic.
+- Confirmed `fixed_retention_objective_required=True`.
+- Confirmed `first_token_gap_confirmed=True`.
+- Produced three requirements: fixed first-token retention, no extra loss-only weighting, and pair-full seed gate.
+- Archived v597 evidence in `e/597` and added the code explanation in `代码讲解记录_模型能力阶段/611-v597-required-term-pair-fixed-retention-objective-readiness.md`.
 
 ## Latest v596 checkpoint
 
@@ -17,16 +26,12 @@ Version `v596.0.0` diagnoses the v595 targeted missed seeds and confirms a first
 
 ## Latest v595 checkpoint
 
-## Latest v595 checkpoint
-
 - Ran real 3-seed stability for `equals_surface_no_pair_id_loss_branch_targeted_repair`.
 - Used seeds `3535`, `4535`, `5535`.
 - Confirmed `pair_full_seed_count=0/3`.
 - Confirmed every seed had `continuation_hit_count=1`.
 - Confirmed `stable_pair_full=False`.
 - Archived v595 evidence in `e/595` and added the code explanation in `代码讲解记录_模型能力阶段/609-v595-required-term-pair-loss-branch-targeted-seed-stability.md`.
-
-## Latest v594 checkpoint
 
 ## Latest v594 checkpoint
 
@@ -39,15 +44,11 @@ Version `v596.0.0` diagnoses the v595 targeted missed seeds and confirms a first
 
 ## Latest v593 checkpoint
 
-## Latest v593 checkpoint
-
 - Added `model_capability_required_term_pair_loss_branch_objective_comparison`.
 - Added a CLI and tests for comparing single-run `coexistence_refresh` reports.
 - Compared v590 targeted, v591 dual-anchor, and v592 micro-span routes.
 - Confirmed `loss_only_tradeoff_report_count=3`, `pair_full_report_count=0`, `union_hit_terms=loss`.
 - Archived v593 evidence in `e/593` and added the code explanation in `代码讲解记录_模型能力阶段/607-v593-required-term-pair-loss-branch-objective-comparison.md`.
-
-## Latest v592 checkpoint
 
 ## Latest v592 checkpoint
 
@@ -60,16 +61,12 @@ Version `v596.0.0` diagnoses the v595 targeted missed seeds and confirms a first
 
 ## Latest v591 checkpoint
 
-## Latest v591 checkpoint
-
 - Ran real tiny training with `equals_surface_no_pair_id_loss_branch_dual_anchor_repair`.
 - Used seed `3535`, `max_iters=1800`, `n_embd=64`, CPU.
 - Confirmed training/checkpoint status: `pass`.
 - Confirmed `pair_full_observed=False`.
 - Confirmed replay hits `loss` and misses `fixed`, matching the v590 tradeoff.
 - Archived v591 evidence in `e/591` and added the code explanation in `代码讲解记录_模型能力阶段/605-v591-required-term-pair-loss-branch-dual-anchor-seed-3535.md`.
-
-## Latest v590 checkpoint
 
 ## Latest v590 checkpoint
 
@@ -82,16 +79,12 @@ Version `v596.0.0` diagnoses the v595 targeted missed seeds and confirms a first
 
 ## Latest v589 checkpoint
 
-## Latest v589 checkpoint
-
 - Added `model_capability_required_term_pair_loss_branch_objective_corpus.py`.
 - Added three corpus modes: targeted repair, dual-anchor repair, and micro-span repair.
 - Kept `coexistence_corpus.py` as a route layer for the new modes.
 - Confirmed the new modes use `fixed=` / `loss=` prompts and avoid numeric pair-id rows.
 - Ran targeted tests: `23 passed`.
 - Archived v589 evidence in `e/589` and added the code explanation in `代码讲解记录_模型能力阶段/603-v589-required-term-pair-loss-branch-objective-corpus.md`.
-
-## Latest v588 checkpoint
 
 ## Latest v588 checkpoint
 
