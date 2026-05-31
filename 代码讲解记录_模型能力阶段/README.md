@@ -320,6 +320,9 @@
 589-v575-required-term-pair-route-fresh-seed-3535-wider-embd.md
  -> v575 code explanation: test n_embd=96 on fresh seed 3535 and rule out simple width scaling.
 
+590-v576-required-term-pair-route-fresh-seed-3535-variable-comparison.md
+ -> v576 code explanation: compare v571/v573/v575 and reject first-token rows plus width scaling for seed 3535.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v575.0.0` tests whether fresh seed `3535` is simply capacity-limited by rerunning the selected loss-balanced route at `n_embd=96`; it remains `0/1` pair-full and drops partial hits to zero, so width alone is not the repair.
+Version `v576.0.0` compares the three fresh-seed `3535` variants from v571, v573, and v575; none reaches pair-full and the union hit terms remain only `fixed`, so first-token rows and width scaling are both rejected for this seed.
+
+## Latest v576 checkpoint
+
+- Reused the equals-surface comparison script across v571, v573, and v575.
+- Compared `v571-loss-balanced`, `v573-first-token`, and `v575-wider-embd`.
+- Confirmed `pair_full_profile_seed_count=0` and `union_hit_terms=fixed`.
+- Classified v573/v575 as worse than the v571 partial fixed signal.
+- Set the next step to route decision or new objective design, not more first-token/width variants.
+- Archived v576 evidence in `e/576` and added the code explanation in `代码讲解记录_模型能力阶段/590-v576-required-term-pair-route-fresh-seed-3535-variable-comparison.md`.
 
 ## Latest v575 checkpoint
 
