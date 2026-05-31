@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v572.0.0` diagnoses the v571 fresh-seed miss; seed `3535` fails because `loss=` still ranks a fixed-like first token above the expected loss token, so the next fix should target first-token preference rather than more held-out prompts.
+Version `v573.0.0` tests the existing full first-token repair mode on fresh seed `3535`; it still gets `0/1` pair-full and drops visible continuation hits from `1` to `0`, so that old repair path is not the fresh-seed fix.
+
+## Latest v573 checkpoint
+
+- Reused `equals_surface_no_pair_id_loss_balanced_first_token_repair` on fresh seed `3535`.
+- Kept v571 training and decode settings unchanged for a clean comparison.
+- Confirmed `pair_full_seed_count=0/1` and `stable_pair_full=False`.
+- Observed `continuation_hit_count=0`, worse than v571's partial hit.
+- Rejected the existing full first-token rows as the direct repair for seed `3535`.
+- Archived v573 evidence in `e/573` and added the code explanation in `代码讲解记录_模型能力阶段/587-v573-required-term-pair-route-fresh-seed-3535-first-token-repair.md`.
 
 ## Latest v572 checkpoint
 

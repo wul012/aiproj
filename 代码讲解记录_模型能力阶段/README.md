@@ -311,6 +311,9 @@
 586-v572-required-term-pair-route-fresh-seed-3535-missed-diagnostic.md
  -> v572 code explanation: diagnose fresh seed 3535 as a loss-branch first-token preference gap.
 
+587-v573-required-term-pair-route-fresh-seed-3535-first-token-repair.md
+ -> v573 code explanation: test the existing full first-token repair mode on fresh seed 3535 and preserve the negative result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
