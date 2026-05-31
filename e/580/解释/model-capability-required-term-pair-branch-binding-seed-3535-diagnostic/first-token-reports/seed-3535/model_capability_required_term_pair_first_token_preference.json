@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair first-token preference",
+  "generated_at": "2026-05-31T12:15:59Z",
+  "status": "pass",
+  "decision": "pair_first_token_whitespace_prefix_drift_confirmed",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_coexistence_refresh": "e\\579\\解释\\model-capability-required-term-pair-branch-binding-seed-3535\\seed-runs\\seed-3535",
+  "out_dir": "e\\580\\解释\\model-capability-required-term-pair-branch-binding-seed-3535-diagnostic\\first-token-runs\\seed-3535",
+  "settings": {
+    "top_k": 8,
+    "device": "cpu",
+    "experiment_boundary": "score first-token logits for v533 fixed/loss refresh without retraining"
+  },
+  "training": {
+    "checkpoint_path": "e\\579\\解释\\model-capability-required-term-pair-branch-binding-seed-3535\\seed-runs\\seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+    "tokenizer_path": "e\\579\\解释\\model-capability-required-term-pair-branch-binding-seed-3535\\seed-runs\\seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true
+  },
+  "rows": [
+    {
+      "status": "pass",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "expected_first_text": "f",
+      "expected_token_id": 16,
+      "expected_rank": 3,
+      "expected_probability": 0.1168832,
+      "top_token_id": 2,
+      "top_token_text": " ",
+      "top_probability": 0.70507479,
+      "expected_is_top": false,
+      "whitespace_prefix_is_top": true,
+      "answer_prefix_is_top": false,
+      "top_tokens": [
+        {
+          "rank": 1,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.70507479
+        },
+        {
+          "rank": 2,
+          "token_id": 21,
+          "token_text": "l",
+          "probability": 0.13051464
+        },
+        {
+          "rank": 3,
+          "token_id": 16,
+          "token_text": "f",
+          "probability": 0.1168832
+        },
+        {
+          "rank": 4,
+          "token_id": 24,
+          "token_text": "o",
+          "probability": 0.01063299
+        },
+        {
+          "rank": 5,
+          "token_id": 28,
+          "token_text": "s",
+          "probability": 0.01002936
+        },
+        {
+          "rank": 6,
+          "token_id": 29,
+          "token_text": "t",
+          "probability": 0.00613541
+        },
+        {
+          "rank": 7,
+          "token_id": 15,
+          "token_text": "e",
+          "probability": 0.00346684
+        },
+        {
+          "rank": 8,
+          "token_id": 12,
+          "token_text": "b",
+          "probability": 0.00333526
+        }
+      ],
+      "observed_replay_continuation": " losss\\nbind=",
+      "observed_replay_profile": "default"
+    },
+    {
+      "status": "pass",
+      "term": "loss",
+      "prompt": "loss=",
+      "expected_first_text": "l",
+      "expected_token_id": 21,
+      "expected_rank": 2,
+      "expected_probability": 0.13548514,
+      "top_token_id": 2,
+      "top_token_text": " ",
+      "top_probability": 0.73825479,
+      "expected_is_top": false,
+      "whitespace_prefix_is_top": true,
+      "answer_prefix_is_top": false,
+      "top_tokens": [
+        {
+          "rank": 1,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.73825479
+        },
+        {
+          "rank": 2,
+          "token_id": 21,
+          "token_text": "l",
+          "probability": 0.13548514
+        },
+        {
+          "rank": 3,
+          "token_id": 16,
+          "token_text": "f",
+          "probability": 0.09617681
+        },
+        {
+          "rank": 4,
+          "token_id": 12,
+          "token_text": "b",
+          "probability": 0.00469356
+        },
+        {
+          "rank": 5,
+          "token_id": 29,
+          "token_text": "t",
+          "probability": 0.00381109
+        },
+        {
+          "rank": 6,
+          "token_id": 24,
+          "token_text": "o",
+          "probability": 0.00377397
+        },
+        {
+          "rank": 7,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.00339914
+        },
+        {
+          "rank": 8,
+          "token_id": 28,
+          "token_text": "s",
+          "probability": 0.00299377
+        }
+      ],
+      "observed_replay_continuation": " los= fintin",
+      "observed_replay_profile": "default"
+    }
+  ],
+  "summary": {
+    "term_count": 2,
+    "expected_top_count": 0,
+    "whitespace_prefix_top_count": 2,
+    "answer_prefix_top_count": 0,
+    "ranked_count": 2,
+    "expected_all_top": false,
+    "answer_prefix_drift_observed": false,
+    "max_expected_rank": 3
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "At least one prompt ranks whitespace above the expected first token, matching the leading-space replay collapse.",
+    "next_action": "remove leading-space answer rows or add colon-immediate fixed/loss rows before retraining"
+  }
+}

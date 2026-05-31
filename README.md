@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v579.0.0` starts the branch-binding objective after v578: it adds a split-out corpus component for `equals_surface_no_pair_id_branch_binding_repair`, runs seed `3535`, and preserves the first negative baseline for the new route.
+Version `v580.0.0` diagnoses the v579 branch-binding baseline: seed `3535` misses pair-full because both `fixed=` and `loss=` drift to whitespace as the top token, so the next objective should bind whitespace/term boundaries before another sweep.
+
+## Latest v580 checkpoint
+
+- Ran the missed-seed diagnostic against v579 branch-binding evidence.
+- Confirmed `missed_seed_count=1` and `missed_first_token_gap_count=1`.
+- Captured `fixed_top_token= ` and `loss_top_token= ` in the diagnostic CSV.
+- Confirmed `fixed_expected_rank=3` and `loss_expected_rank=2`.
+- Preserved the result as diagnostic-only, not model quality improvement.
+- Archived v580 evidence in `e/580` and added the code explanation in `代码讲解记录_模型能力阶段/594-v580-required-term-pair-branch-binding-whitespace-diagnostic.md`.
 
 ## Latest v579 checkpoint
 
