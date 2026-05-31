@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair seed config held-out gap diagnostic",
+  "generated_at": "2026-05-31T03:00:33Z",
+  "status": "pass",
+  "decision": "required_term_pair_seed_config_heldout_gap_fixed_term_surface",
+  "failed_count": 0,
+  "issues": [],
+  "source_seed_config_heldout_replay": "e\\550\\解释\\model-capability-required-term-pair-seed-config-heldout-replay\\model_capability_required_term_pair_seed_config_heldout_replay.json",
+  "replay_status": "pass",
+  "replay_decision": "required_term_pair_seed_config_heldout_replay_partial",
+  "gap_rows": [
+    {
+      "spec_id": "equals",
+      "seed": 1535,
+      "selected_config_id": "v546-loss-calibrated-topk2-t080",
+      "gap_class": "fixed_term_surface_gap",
+      "fixed_prompt": "fixed=",
+      "loss_prompt": "loss=",
+      "top_k": 2,
+      "temperature": 0.8,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "source_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "best_profile_id": "suppress_newline_tokens",
+      "best_profile_hit_count": 1,
+      "missed_terms": [
+        "fixed"
+      ],
+      "profile_details": [
+        {
+          "profile_id": "default",
+          "pair_full_hit": false,
+          "hit_terms": [
+            "loss"
+          ],
+          "missed_terms": [
+            "fixed"
+          ],
+          "hit_count": 1,
+          "blocked_token_count_total": 0,
+          "case_previews": [
+            {
+              "term": "fixed",
+              "prompt": "fixed=",
+              "generation_seed": 1535,
+              "continuation_hit": false,
+              "generated_preview": "fixed=losss\\nlossss",
+              "continuation_preview": "losss\\nlossss"
+            },
+            {
+              "term": "loss",
+              "prompt": "loss=",
+              "generation_seed": 1536,
+              "continuation_hit": true,
+              "generated_preview": "loss=fixel-lossss",
+              "continuation_preview": "fixel-lossss"
+            }
+          ]
+        },
+        {
+          "profile_id": "suppress_newline_tokens",
+          "pair_full_hit": false,
+          "hit_terms": [
+            "loss"
+          ],
+          "missed_terms": [
+            "fixed"
+          ],
+          "hit_count": 1,
+          "blocked_token_count_total": 2,
+          "case_previews": [
+            {
+              "term": "fixed",
+              "prompt": "fixed=",
+              "generation_seed": 1535,
+              "continuation_hit": false,
+              "generated_preview": "fixed=los:lompromp",
+              "continuation_preview": "los:lompromp"
+            },
+            {
+              "term": "loss",
+              "prompt": "loss=",
+              "generation_seed": 1536,
+              "continuation_hit": true,
+              "generated_preview": "loss=fixel-lossss",
+              "continuation_preview": "fixel-lossss"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "row_count": 9,
+    "gap_count": 1,
+    "gap_rate": 0.1111,
+    "non_gap_count": 8,
+    "spec_gap_counts": {
+      "equals": 1
+    },
+    "seed_gap_counts": {
+      "1535": 1
+    },
+    "config_gap_counts": {
+      "v546-loss-calibrated-topk2-t080": 1
+    },
+    "gap_class_counts": {
+      "fixed_term_surface_gap": 1
+    },
+    "first_gap_spec_id": "equals",
+    "first_gap_seed": 1535,
+    "first_gap_config_id": "v546-loss-calibrated-topk2-t080",
+    "gap_free": false
+  },
+  "interpretation": {
+    "model_quality_claim": "diagnostic_only",
+    "reason": "The held-out replay gaps are now localized by prompt surface, seed, config, and missed term.",
+    "next_action": "repair the dominant missed-term surface before adding broader benchmarks"
+  }
+}

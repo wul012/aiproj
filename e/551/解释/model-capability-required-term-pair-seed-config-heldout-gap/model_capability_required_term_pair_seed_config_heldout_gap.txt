@@ -1,0 +1,11 @@
+status=pass
+decision=required_term_pair_seed_config_heldout_gap_fixed_term_surface
+failed_count=0
+row_count=9
+gap_count=1
+gap_rate=0.1111
+gap_class_counts=fixed_term_surface_gap:1
+spec_gap_counts=equals:1
+seed_gap_counts=1535:1
+model_quality_claim=diagnostic_only
+next_action=repair the dominant missed-term surface before adding broader benchmarks

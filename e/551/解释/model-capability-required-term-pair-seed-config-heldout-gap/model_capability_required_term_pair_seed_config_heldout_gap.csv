@@ -1,0 +1,2 @@
+spec_id,seed,selected_config_id,gap_class,missed_terms,best_profile_id,best_profile_hit_count,fixed_prompt,loss_prompt,top_k,temperature,replay_decision
+equals,1535,v546-loss-calibrated-topk2-t080,fixed_term_surface_gap,"[""fixed""]",suppress_newline_tokens,1,fixed=,loss=,2,0.8,generation_profile_no_pair_coexistence_gain

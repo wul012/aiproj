@@ -1,0 +1,65 @@
+- main [ref=e2] [box=47,-54,1180,761]:
+  - generic [ref=e3] [box=75,-26,1124,77]:
+    - heading "MiniGPT held-out gap diagnostic" [level=1] [ref=e4] [box=75,-26,1124,36]
+    - paragraph [ref=e5] [box=75,25,1124,25]: The held-out replay gaps are now localized by prompt surface, seed, config, and missed term.
+  - generic [ref=e6] [box=75,68,1124,136]:
+    - generic [ref=e7] [box=75,68,217,136]:
+      - generic [ref=e8] [box=90,83,188,14]: Status
+      - strong [ref=e9] [box=90,103,188,22]: pass
+    - generic [ref=e10] [box=302,68,217,136]:
+      - generic [ref=e11] [box=316,83,188,14]: Decision
+      - strong [ref=e12] [box=316,103,188,86]: required_term_pair_seed_config_heldout_gap_fixed_term_surface
+    - generic [ref=e13] [box=529,68,217,136]:
+      - generic [ref=e14] [box=543,83,188,14]: Gaps
+      - strong [ref=e15] [box=543,103,188,22]: 1/9
+    - generic [ref=e16] [box=755,68,217,136]:
+      - generic [ref=e17] [box=770,83,188,14]: Gap rate
+      - strong [ref=e18] [box=770,103,188,22]: "0.1111"
+    - generic [ref=e19] [box=982,68,217,136]:
+      - generic [ref=e20] [box=997,83,188,14]: Gap classes
+      - strong [ref=e21] [box=997,103,188,43]: fixed_term_surface_gap:1
+  - generic [ref=e22] [box=75,222,1124,111]:
+    - heading "Next Action" [level=2] [ref=e23] [box=92,238,1091,21]
+    - paragraph [ref=e24] [box=92,276,1091,25]: repair the dominant missed-term surface before adding broader benchmarks
+  - generic [ref=e25] [box=75,347,1124,135]:
+    - heading "Gap Rows" [level=2] [ref=e26] [box=92,364,1091,21]
+    - table [ref=e28] [box=92,397,1091,69]:
+      - rowgroup [ref=e29] [box=92,397,1091,35]:
+        - row "Spec Seed Config Class Missed Prompts" [ref=e30] [box=92,397,1091,35]:
+          - columnheader "Spec" [ref=e31] [box=92,397,100,35]
+          - columnheader "Seed" [ref=e32] [box=192,397,86,35]
+          - columnheader "Config" [ref=e33] [box=278,397,351,35]
+          - columnheader "Class" [ref=e34] [box=629,397,277,35]
+          - columnheader "Missed" [ref=e35] [box=906,397,110,35]
+          - columnheader "Prompts" [ref=e36] [box=1015,397,167,35]
+      - rowgroup [ref=e37] [box=92,431,1091,34]:
+        - row "equals 1535 v546-loss-calibrated-topk2-t080 fixed_term_surface_gap fixed fixed= / loss=" [ref=e38] [box=92,431,1091,34]:
+          - cell "equals" [ref=e39] [box=92,431,100,34]
+          - cell "1535" [ref=e40] [box=192,431,86,34]
+          - cell "v546-loss-calibrated-topk2-t080" [ref=e41] [box=278,431,351,34]
+          - cell "fixed_term_surface_gap" [ref=e42] [box=629,431,277,34]
+          - cell "fixed" [ref=e43] [box=906,431,110,34]
+          - cell "fixed= / loss=" [ref=e44] [box=1015,431,167,34]
+  - generic [ref=e45] [box=75,496,1124,169]:
+    - heading "Profile Evidence" [level=2] [ref=e46] [box=92,512,1091,21]
+    - table [ref=e48] [box=92,546,1091,102]:
+      - rowgroup [ref=e49] [box=92,546,1091,35]:
+        - row "Spec Profile Hit terms Missed terms Previews" [ref=e50] [box=92,546,1091,35]:
+          - columnheader "Spec" [ref=e51] [box=92,546,98,35]
+          - columnheader "Profile" [ref=e52] [box=190,546,290,35]
+          - columnheader "Hit terms" [ref=e53] [box=480,546,127,35]
+          - columnheader "Missed terms" [ref=e54] [box=607,546,174,35]
+          - columnheader "Previews" [ref=e55] [box=780,546,402,35]
+      - rowgroup [ref=e56] [box=92,580,1091,68]:
+        - row "equals default loss fixed fixed=losss\\nlossss; loss=fixel-lossss" [ref=e57] [box=92,580,1091,34]:
+          - cell "equals" [ref=e58] [box=92,580,98,34]
+          - cell "default" [ref=e59] [box=190,580,290,34]
+          - cell "loss" [ref=e60] [box=480,580,127,34]
+          - cell "fixed" [ref=e61] [box=607,580,174,34]
+          - cell "fixed=losss\\nlossss; loss=fixel-lossss" [ref=e62] [box=780,580,402,34]
+        - row "equals suppress_newline_tokens loss fixed fixed=los:lompromp; loss=fixel-lossss" [ref=e63] [box=92,614,1091,34]:
+          - cell "equals" [ref=e64] [box=92,614,98,34]
+          - cell "suppress_newline_tokens" [ref=e65] [box=190,614,290,34]
+          - cell "loss" [ref=e66] [box=480,614,127,34]
+          - cell "fixed" [ref=e67] [box=607,614,174,34]
+          - cell "fixed=los:lompromp; loss=fixel-lossss" [ref=e68] [box=780,614,402,34]

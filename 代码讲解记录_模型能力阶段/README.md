@@ -245,6 +245,9 @@
 564-v550-required-term-pair-seed-config-heldout-replay.md
  -> v550 code explanation: test selected configs against held-out prompt surfaces and isolate the equals/1535 gap.
 
+565-v551-required-term-pair-seed-config-heldout-gap.md
+ -> v551 code explanation: diagnose the v550 equals/1535 miss down to a fixed-term surface gap.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

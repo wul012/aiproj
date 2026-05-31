@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v550.0.0` tests the selected config policy on held-out prompt surfaces and finds `8/9` pair-full transfer, with the remaining gap isolated to seed `1535` on the equals prompt.
+Version `v551.0.0` diagnoses the v550 held-out gap and classifies the only miss as `fixed_term_surface_gap` on `equals + seed 1535 + v546-loss-calibrated-topk2-t080`.
+
+## Latest v551 checkpoint
+
+- Added `model_capability_required_term_pair_seed_config_heldout_gap`, a diagnostic layer over v550 held-out replay evidence.
+- Re-read v550 replay rows and sidecar generation-profile reports without retraining or changing the selected policy.
+- Confirmed `gap_count=1/9`, `gap_class_counts=fixed_term_surface_gap:1`, `spec_gap_counts=equals:1`, and `seed_gap_counts=1535:1`.
+- Captured profile/case evidence showing the remaining miss is the `fixed=` continuation, not a replay execution or artifact-path failure.
+- Archived v551 evidence in `e/551` and added the code explanation in `代码讲解记录_模型能力阶段/565-v551-required-term-pair-seed-config-heldout-gap.md`.
 
 ## Latest v550 checkpoint
+
+Version `v550.0.0` tests the selected config policy on held-out prompt surfaces and finds `8/9` pair-full transfer, with the remaining gap isolated to seed `1535` on the equals prompt.
 
 - Added `model_capability_required_term_pair_seed_config_heldout_replay`, a held-out prompt replay layer over the v548 selected policy.
 - Tested `colon-spaced`, `equals`, and `arrow` prompt surfaces across selected seeds `535`, `1535`, and `2535`.

@@ -329,6 +329,10 @@ e/549/解释/说明.md
 e/550/图片
 e/550/解释/说明.md
  -> v550 required-term pair seed config held-out replay 的运行截图和解释
+
+e/551/图片
+e/551/解释/说明.md
+ -> v551 required-term pair seed config held-out gap diagnostic 的运行截图和解释
 ```
 
 写入规则：
