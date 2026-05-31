@@ -377,6 +377,9 @@
 608-v594-required-term-pair-loss-branch-route-decision.md
  -> v594 code explanation: select targeted loss-branch only as seed-stability baseline and require fixed retention.
 
+609-v595-required-term-pair-loss-branch-targeted-seed-stability.md
+ -> v595 code explanation: run 3-seed targeted loss-branch stability and confirm stable tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

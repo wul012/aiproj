@@ -505,6 +505,10 @@ e/593/解释/说明.md
 e/594/图片
 e/594/解释/说明.md
  -> v594 required-term pair loss-branch route decision 的运行截图和解释
+
+e/595/图片
+e/595/解释/说明.md
+ -> v595 required-term pair loss-branch targeted seed stability 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v594.0.0` adds a loss-branch route decision: no current route is promotable, `v590-targeted` is selected only as a seed-stability baseline, and a fixed-retention objective is required next.
+Version `v595.0.0` runs targeted loss-branch seed stability across seeds `3535,4535,5535`: all three training runs pass, all three miss pair-full, and the targeted route is confirmed as stable tradeoff evidence rather than a promotion path.
+
+## Latest v595 checkpoint
+
+- Ran real 3-seed stability for `equals_surface_no_pair_id_loss_branch_targeted_repair`.
+- Used seeds `3535`, `4535`, `5535`.
+- Confirmed `pair_full_seed_count=0/3`.
+- Confirmed every seed had `continuation_hit_count=1`.
+- Confirmed `stable_pair_full=False`.
+- Archived v595 evidence in `e/595` and added the code explanation in `代码讲解记录_模型能力阶段/609-v595-required-term-pair-loss-branch-targeted-seed-stability.md`.
+
+## Latest v594 checkpoint
 
 ## Latest v594 checkpoint
 

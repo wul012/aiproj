@@ -1,0 +1,4782 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+loss=loss
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+loss=next loss
+loss branch target loss
+loss branch target loss
+fixed branch target fixed
+loss= should continue loss immediately
+fixed= should continue fixed immediately
+loss= should not drift into fixed
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
+loss-branch objective keeps the missed branch visible.
+loss=loss is the direct target after loss=.
+fixed=fixed remains the direct target after fixed=.
+loss= should not trade into fixed.
+fixed=fixed|loss=loss
