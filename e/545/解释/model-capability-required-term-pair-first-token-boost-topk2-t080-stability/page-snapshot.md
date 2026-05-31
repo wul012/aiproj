@@ -1,0 +1,35 @@
+- main [ref=e2] [box=82,0,1120,652]:
+  - generic [ref=e3] [box=110,28,1064,77]:
+    - heading "MiniGPT colon-immediate stability" [level=1] [ref=e4] [box=110,28,1064,36]
+    - paragraph [ref=e5] [box=110,80,1064,25]: No tested colon-immediate seed reproduced the v535 pair-full signal.
+  - generic [ref=e6] [box=110,123,1064,136]:
+    - generic [ref=e7] [box=110,123,169,136]:
+      - generic [ref=e8] [box=124,137,140,14]: Status
+      - strong [ref=e9] [box=124,157,140,22]: pass
+    - generic [ref=e10] [box=289,123,169,136]:
+      - generic [ref=e11] [box=303,137,140,14]: Decision
+      - strong [ref=e12] [box=303,157,140,86]: required_term_pair_colon_immediate_not_stable
+    - generic [ref=e13] [box=468,123,169,136]:
+      - generic [ref=e14] [box=482,137,140,14]: Seeds
+      - strong [ref=e15] [box=482,157,140,22]: "3"
+    - generic [ref=e16] [box=647,123,169,136]:
+      - generic [ref=e17] [box=661,137,140,14]: Pair-full seeds
+      - strong [ref=e18] [box=661,157,140,22]: "0"
+    - generic [ref=e19] [box=826,123,169,136]:
+      - generic [ref=e20] [box=840,137,140,14]: Pair-full rate
+      - strong [ref=e21] [box=840,157,140,22]: "0.0"
+    - generic [ref=e22] [box=1005,123,169,136]:
+      - generic [ref=e23] [box=1019,137,140,14]: Stable
+      - strong [ref=e24] [box=1019,157,140,22]: "False"
+  - generic [ref=e25] [box=110,276,1064,111]:
+    - heading "Next Action" [level=2] [ref=e26] [box=126,293,1031,21]
+    - paragraph [ref=e27] [box=126,330,1031,25]: return to corpus design before further seed sweeps
+  - generic [ref=e28] [box=110,401,1064,209]:
+    - heading "Seeds" [level=2] [ref=e29] [box=126,418,1031,21]
+    - table [ref=e31] [box=126,451,1031,143]:
+      - rowgroup [ref=e32] [box=126,451,1031,35]:
+        - row "Seed Status Pair full Default full Suppression full Output" [ref=e33] [box=126,451,1031,35]
+      - rowgroup [ref=e40] [box=126,486,1031,108]:
+        - row "535 pass False 0 0 e\\545\\解释\\model-capability-required-term-pair-first-token-boost-topk2-t080-stability\\seed-runs\\seed-535" [ref=e41] [box=126,486,1031,36]
+        - row "1535 pass False 0 0 e\\545\\解释\\model-capability-required-term-pair-first-token-boost-topk2-t080-stability\\seed-runs\\seed-1535" [ref=e48] [box=126,522,1031,36]
+        - row "2535 pass False 0 0 e\\545\\解释\\model-capability-required-term-pair-first-token-boost-topk2-t080-stability\\seed-runs\\seed-2535" [ref=e55] [box=126,558,1031,36]

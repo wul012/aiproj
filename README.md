@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v544.0.0` promotes `top_k=2, temperature=0.8` into the full colon-immediate stability runner and reaches `2/3` pair-full seeds.
+Version `v545.0.0` tests first-token boost with the best top-k2/t0.8 decode setting and records a useful negative result: pair-full regresses to `0/3`.
+
+## Latest v545 checkpoint
+
+- Reused `colon_immediate_first_token_boost` with the high-budget training setup and v544 decode config `top_k=2, temperature=0.8`.
+- Ran the same seeds `535, 1535, 2535`; pair-full regressed to `0/3`.
+- Re-ran the missed-seed diagnostic; all three seeds remained first-token gaps.
+- Interpreted the result as a negative experiment: short `fixed:f` / `loss:l` prefix boosting is not the right repair for seed `1535`.
+- Archived the v545 stability and diagnostic evidence in `e/545` and added the code explanation in `代码讲解记录_模型能力阶段/559-v545-required-term-pair-first-token-boost-topk2-t080.md`.
 
 ## Latest v544 checkpoint
 

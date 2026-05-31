@@ -227,6 +227,9 @@
 558-v544-required-term-pair-topk2-t080-stability.md
  -> v544 code explanation: promote top-k2 temperature decoding into formal stability and reach two recovered seeds.
 
+559-v545-required-term-pair-first-token-boost-topk2-t080.md
+ -> v545 code explanation: test first-token boost under the best decode setting and preserve the negative result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

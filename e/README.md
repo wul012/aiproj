@@ -305,6 +305,10 @@ e/543/解释/说明.md
 e/544/图片
 e/544/解释/说明.md
  -> v544 required-term pair top-k2 t0.8 stability 的运行截图和解释
+
+e/545/图片
+e/545/解释/说明.md
+ -> v545 required-term pair first-token boost top-k2 t0.8 stability 的运行截图和解释
 ```
 
 写入规则：
