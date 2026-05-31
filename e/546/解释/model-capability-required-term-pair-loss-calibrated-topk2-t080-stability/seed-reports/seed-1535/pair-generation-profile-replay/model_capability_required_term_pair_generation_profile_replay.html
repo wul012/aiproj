@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair generation profile replay</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair generation profile replay</h1><p>The suppression profile increased the number of variants where fixed/loss both appear.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>generation_profile_improves_pair_coexistence</strong></div><div class="card"><span>Variants</span><strong>1</strong></div><div class="card"><span>Terms</span><strong>2</strong></div><div class="card"><span>Default pair full</span><strong>0</strong></div><div class="card"><span>Suppression pair full</span><strong>1</strong></div><div class="card"><span>Suppression hit delta</span><strong>1</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>Promote the profile into the next pair benchmark before retraining.</p></section>
+<section class="panel">
+<h2>Profiles</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Profile</th><th>Hits</th><th>Pair-full variants</th><th>Blocked tokens</th></tr></thead>
+<tbody><tr><td>default</td><td>1/2</td><td>0/1</td><td>0</td></tr>
+<tr><td>suppress_newline_tokens</td><td>2/2</td><td>1/1</td><td>2</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Variants</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Variant</th><th>Profile</th><th>Hit terms</th><th>Missed terms</th><th>Pair full</th></tr></thead>
+<tbody><tr><td>coexistence-refresh</td><td>default</td><td>loss</td><td>fixed</td><td>False</td></tr>
+<tr><td>coexistence-refresh</td><td>suppress_newline_tokens</td><td>fixed,loss</td><td></td><td>True</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

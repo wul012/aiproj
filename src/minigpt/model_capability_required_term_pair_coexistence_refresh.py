@@ -23,6 +23,7 @@ PAIR_COEXISTENCE_CORPUS_MODES = (
     "colon_immediate",
     "colon_immediate_first_token_boost",
     "colon_immediate_isolated_prompt",
+    "colon_immediate_loss_calibrated",
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -245,6 +246,32 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
                     "loss prompt stays in the loss objective.",
                     "fixed:fixed",
                     "loss:loss",
+                ]
+            )
+    elif corpus_mode == "colon_immediate_loss_calibrated":
+        for _ in range(max(1, repeat)):
+            lines.extend(
+                [
+                    "fixed:fixed",
+                    "loss:loss",
+                    "loss:loss",
+                    "comparison-baseline|fixed:fixed",
+                    "factual-val-loss|loss:loss",
+                    "prompt=fixed:target=fixed",
+                    "prompt=loss:target=loss",
+                    "loss prompt selects loss",
+                    "fixed prompt selects fixed",
+                    "when prefix is loss: continue loss",
+                    "when prefix is fixed: continue fixed",
+                ]
+            )
+        for _ in range(max(0, bridge_repeat)):
+            lines.extend(
+                [
+                    "calibrate fixed:fixed against loss:loss",
+                    "loss:loss;fixed:fixed",
+                    "loss prompt should not continue fixed",
+                    "fixed prompt should not continue loss",
                 ]
             )
     else:

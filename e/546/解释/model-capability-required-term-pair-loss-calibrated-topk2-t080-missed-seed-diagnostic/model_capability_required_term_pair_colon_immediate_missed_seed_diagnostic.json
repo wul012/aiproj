@@ -1,0 +1,636 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair colon-immediate missed-seed diagnostic",
+  "generated_at": "2026-05-31T00:47:07Z",
+  "status": "pass",
+  "decision": "required_term_pair_colon_immediate_first_token_gap",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_colon_immediate_stability": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+  "out_dir": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic",
+  "settings": {
+    "top_k": 8,
+    "device": "cpu",
+    "experiment_boundary": "diagnose v536 missed seeds with first-token logits without retraining"
+  },
+  "seed_rows": [
+    {
+      "seed": 535,
+      "status": "pass",
+      "pair_full_observed": false,
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "first_token_decision": "pair_first_token_expected_terms_not_top_ranked",
+      "expected_top_count": 1,
+      "term_count": 2,
+      "expected_all_top": false,
+      "max_expected_rank": 2,
+      "fixed_expected_rank": 2,
+      "loss_expected_rank": 1,
+      "fixed_top_token": "l",
+      "loss_top_token": "l",
+      "observed_continuation_hit_count": 1
+    },
+    {
+      "seed": 1535,
+      "status": "pass",
+      "pair_full_observed": true,
+      "refresh_decision": "required_term_pair_coexistence_refresh_pair_full_observed",
+      "first_token_decision": "pair_first_token_expected_terms_not_top_ranked",
+      "expected_top_count": 1,
+      "term_count": 2,
+      "expected_all_top": false,
+      "max_expected_rank": 2,
+      "fixed_expected_rank": 2,
+      "loss_expected_rank": 1,
+      "fixed_top_token": "l",
+      "loss_top_token": "l",
+      "observed_continuation_hit_count": 1
+    },
+    {
+      "seed": 2535,
+      "status": "pass",
+      "pair_full_observed": false,
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "first_token_decision": "pair_first_token_expected_terms_not_top_ranked",
+      "expected_top_count": 0,
+      "term_count": 2,
+      "expected_all_top": false,
+      "max_expected_rank": 4,
+      "fixed_expected_rank": 4,
+      "loss_expected_rank": 3,
+      "fixed_top_token": "t",
+      "loss_top_token": "t",
+      "observed_continuation_hit_count": 1
+    }
+  ],
+  "first_token_reports": [
+    {
+      "seed": 535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair first-token preference",
+        "generated_at": "2026-05-31T00:47:07Z",
+        "status": "pass",
+        "decision": "pair_first_token_expected_terms_not_top_ranked",
+        "failed_count": 0,
+        "issues": [],
+        "source_pair_coexistence_refresh": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-535",
+        "out_dir": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-runs\\seed-535",
+        "settings": {
+          "top_k": 8,
+          "device": "cpu",
+          "experiment_boundary": "score first-token logits for v533 fixed/loss refresh without retraining"
+        },
+        "training": {
+          "checkpoint_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\checkpoint.pt",
+          "tokenizer_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-535\\pair-coexistence-refresh-run\\tokenizer.json",
+          "checkpoint_exists": true,
+          "tokenizer_exists": true
+        },
+        "rows": [
+          {
+            "status": "pass",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "expected_first_text": "f",
+            "expected_token_id": 18,
+            "expected_rank": 2,
+            "expected_probability": 0.20295998,
+            "top_token_id": 22,
+            "top_token_text": "l",
+            "top_probability": 0.42302167,
+            "expected_is_top": false,
+            "whitespace_prefix_is_top": false,
+            "answer_prefix_is_top": false,
+            "top_tokens": [
+              {
+                "rank": 1,
+                "token_id": 22,
+                "token_text": "l",
+                "probability": 0.42302167
+              },
+              {
+                "rank": 2,
+                "token_id": 18,
+                "token_text": "f",
+                "probability": 0.20295998
+              },
+              {
+                "rank": 3,
+                "token_id": 29,
+                "token_text": "t",
+                "probability": 0.19618499
+              },
+              {
+                "rank": 4,
+                "token_id": 2,
+                "token_text": " ",
+                "probability": 0.15805681
+              },
+              {
+                "rank": 5,
+                "token_id": 15,
+                "token_text": "c",
+                "probability": 0.00528792
+              },
+              {
+                "rank": 6,
+                "token_id": 16,
+                "token_text": "d",
+                "probability": 0.00438526
+              },
+              {
+                "rank": 7,
+                "token_id": 27,
+                "token_text": "r",
+                "probability": 0.00212793
+              },
+              {
+                "rank": 8,
+                "token_id": 34,
+                "token_text": "|",
+                "probability": 0.00154341
+              }
+            ],
+            "observed_replay_continuation": "loss pred\\nfi",
+            "observed_replay_profile": "default"
+          },
+          {
+            "status": "pass",
+            "term": "loss",
+            "prompt": "loss:",
+            "expected_first_text": "l",
+            "expected_token_id": 22,
+            "expected_rank": 1,
+            "expected_probability": 0.45994896,
+            "top_token_id": 22,
+            "top_token_text": "l",
+            "top_probability": 0.45994896,
+            "expected_is_top": true,
+            "whitespace_prefix_is_top": false,
+            "answer_prefix_is_top": false,
+            "top_tokens": [
+              {
+                "rank": 1,
+                "token_id": 22,
+                "token_text": "l",
+                "probability": 0.45994896
+              },
+              {
+                "rank": 2,
+                "token_id": 18,
+                "token_text": "f",
+                "probability": 0.21304832
+              },
+              {
+                "rank": 3,
+                "token_id": 29,
+                "token_text": "t",
+                "probability": 0.19295223
+              },
+              {
+                "rank": 4,
+                "token_id": 2,
+                "token_text": " ",
+                "probability": 0.12041146
+              },
+              {
+                "rank": 5,
+                "token_id": 15,
+                "token_text": "c",
+                "probability": 0.00275802
+              },
+              {
+                "rank": 6,
+                "token_id": 27,
+                "token_text": "r",
+                "probability": 0.00241001
+              },
+              {
+                "rank": 7,
+                "token_id": 16,
+                "token_text": "d",
+                "probability": 0.00147505
+              },
+              {
+                "rank": 8,
+                "token_id": 30,
+                "token_text": "u",
+                "probability": 0.00128528
+              }
+            ],
+            "observed_replay_continuation": "losssssss pt",
+            "observed_replay_profile": "default"
+          }
+        ],
+        "summary": {
+          "term_count": 2,
+          "expected_top_count": 1,
+          "whitespace_prefix_top_count": 0,
+          "answer_prefix_top_count": 0,
+          "ranked_count": 2,
+          "expected_all_top": false,
+          "answer_prefix_drift_observed": false,
+          "max_expected_rank": 2
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "Expected first tokens are not top ranked, but the dominant token is not the answer prefix.",
+          "next_action": "inspect top-token alternatives before changing corpus"
+        }
+      }
+    },
+    {
+      "seed": 1535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair first-token preference",
+        "generated_at": "2026-05-31T00:47:07Z",
+        "status": "pass",
+        "decision": "pair_first_token_expected_terms_not_top_ranked",
+        "failed_count": 0,
+        "issues": [],
+        "source_pair_coexistence_refresh": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-1535",
+        "out_dir": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-runs\\seed-1535",
+        "settings": {
+          "top_k": 8,
+          "device": "cpu",
+          "experiment_boundary": "score first-token logits for v533 fixed/loss refresh without retraining"
+        },
+        "training": {
+          "checkpoint_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+          "tokenizer_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+          "checkpoint_exists": true,
+          "tokenizer_exists": true
+        },
+        "rows": [
+          {
+            "status": "pass",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "expected_first_text": "f",
+            "expected_token_id": 18,
+            "expected_rank": 2,
+            "expected_probability": 0.20998552,
+            "top_token_id": 22,
+            "top_token_text": "l",
+            "top_probability": 0.51174682,
+            "expected_is_top": false,
+            "whitespace_prefix_is_top": false,
+            "answer_prefix_is_top": false,
+            "top_tokens": [
+              {
+                "rank": 1,
+                "token_id": 22,
+                "token_text": "l",
+                "probability": 0.51174682
+              },
+              {
+                "rank": 2,
+                "token_id": 18,
+                "token_text": "f",
+                "probability": 0.20998552
+              },
+              {
+                "rank": 3,
+                "token_id": 2,
+                "token_text": " ",
+                "probability": 0.13754249
+              },
+              {
+                "rank": 4,
+                "token_id": 29,
+                "token_text": "t",
+                "probability": 0.08310416
+              },
+              {
+                "rank": 5,
+                "token_id": 15,
+                "token_text": "c",
+                "probability": 0.01026078
+              },
+              {
+                "rank": 6,
+                "token_id": 30,
+                "token_text": "u",
+                "probability": 0.00787144
+              },
+              {
+                "rank": 7,
+                "token_id": 13,
+                "token_text": "a",
+                "probability": 0.0067574
+              },
+              {
+                "rank": 8,
+                "token_id": 27,
+                "token_text": "r",
+                "probability": 0.00670365
+              }
+            ],
+            "observed_replay_continuation": "losss\\nlossss",
+            "observed_replay_profile": "default"
+          },
+          {
+            "status": "pass",
+            "term": "loss",
+            "prompt": "loss:",
+            "expected_first_text": "l",
+            "expected_token_id": 22,
+            "expected_rank": 1,
+            "expected_probability": 0.42958549,
+            "top_token_id": 22,
+            "top_token_text": "l",
+            "top_probability": 0.42958549,
+            "expected_is_top": true,
+            "whitespace_prefix_is_top": false,
+            "answer_prefix_is_top": false,
+            "top_tokens": [
+              {
+                "rank": 1,
+                "token_id": 22,
+                "token_text": "l",
+                "probability": 0.42958549
+              },
+              {
+                "rank": 2,
+                "token_id": 18,
+                "token_text": "f",
+                "probability": 0.21547461
+              },
+              {
+                "rank": 3,
+                "token_id": 2,
+                "token_text": " ",
+                "probability": 0.14847946
+              },
+              {
+                "rank": 4,
+                "token_id": 29,
+                "token_text": "t",
+                "probability": 0.13143583
+              },
+              {
+                "rank": 5,
+                "token_id": 15,
+                "token_text": "c",
+                "probability": 0.01461643
+              },
+              {
+                "rank": 6,
+                "token_id": 13,
+                "token_text": "a",
+                "probability": 0.01359889
+              },
+              {
+                "rank": 7,
+                "token_id": 27,
+                "token_text": "r",
+                "probability": 0.00979104
+              },
+              {
+                "rank": 8,
+                "token_id": 30,
+                "token_text": "u",
+                "probability": 0.00820414
+              }
+            ],
+            "observed_replay_continuation": "fixel-lossss",
+            "observed_replay_profile": "default"
+          }
+        ],
+        "summary": {
+          "term_count": 2,
+          "expected_top_count": 1,
+          "whitespace_prefix_top_count": 0,
+          "answer_prefix_top_count": 0,
+          "ranked_count": 2,
+          "expected_all_top": false,
+          "answer_prefix_drift_observed": false,
+          "max_expected_rank": 2
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "Expected first tokens are not top ranked, but the dominant token is not the answer prefix.",
+          "next_action": "inspect top-token alternatives before changing corpus"
+        }
+      }
+    },
+    {
+      "seed": 2535,
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair first-token preference",
+        "generated_at": "2026-05-31T00:47:07Z",
+        "status": "pass",
+        "decision": "pair_first_token_expected_terms_not_top_ranked",
+        "failed_count": 0,
+        "issues": [],
+        "source_pair_coexistence_refresh": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-2535",
+        "out_dir": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-runs\\seed-2535",
+        "settings": {
+          "top_k": 8,
+          "device": "cpu",
+          "experiment_boundary": "score first-token logits for v533 fixed/loss refresh without retraining"
+        },
+        "training": {
+          "checkpoint_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\checkpoint.pt",
+          "tokenizer_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\seed-runs\\seed-2535\\pair-coexistence-refresh-run\\tokenizer.json",
+          "checkpoint_exists": true,
+          "tokenizer_exists": true
+        },
+        "rows": [
+          {
+            "status": "pass",
+            "term": "fixed",
+            "prompt": "fixed:",
+            "expected_first_text": "f",
+            "expected_token_id": 18,
+            "expected_rank": 4,
+            "expected_probability": 0.11701791,
+            "top_token_id": 29,
+            "top_token_text": "t",
+            "top_probability": 0.33322167,
+            "expected_is_top": false,
+            "whitespace_prefix_is_top": false,
+            "answer_prefix_is_top": false,
+            "top_tokens": [
+              {
+                "rank": 1,
+                "token_id": 29,
+                "token_text": "t",
+                "probability": 0.33322167
+              },
+              {
+                "rank": 2,
+                "token_id": 22,
+                "token_text": "l",
+                "probability": 0.25680071
+              },
+              {
+                "rank": 3,
+                "token_id": 2,
+                "token_text": " ",
+                "probability": 0.22942923
+              },
+              {
+                "rank": 4,
+                "token_id": 18,
+                "token_text": "f",
+                "probability": 0.11701791
+              },
+              {
+                "rank": 5,
+                "token_id": 27,
+                "token_text": "r",
+                "probability": 0.02014822
+              },
+              {
+                "rank": 6,
+                "token_id": 25,
+                "token_text": "o",
+                "probability": 0.0127208
+              },
+              {
+                "rank": 7,
+                "token_id": 17,
+                "token_text": "e",
+                "probability": 0.00681118
+              },
+              {
+                "rank": 8,
+                "token_id": 28,
+                "token_text": "s",
+                "probability": 0.00535227
+              }
+            ],
+            "observed_replay_continuation": "t=lossssss\\nw",
+            "observed_replay_profile": "default"
+          },
+          {
+            "status": "pass",
+            "term": "loss",
+            "prompt": "loss:",
+            "expected_first_text": "l",
+            "expected_token_id": 22,
+            "expected_rank": 3,
+            "expected_probability": 0.21214436,
+            "top_token_id": 29,
+            "top_token_text": "t",
+            "top_probability": 0.38675848,
+            "expected_is_top": false,
+            "whitespace_prefix_is_top": false,
+            "answer_prefix_is_top": false,
+            "top_tokens": [
+              {
+                "rank": 1,
+                "token_id": 29,
+                "token_text": "t",
+                "probability": 0.38675848
+              },
+              {
+                "rank": 2,
+                "token_id": 2,
+                "token_text": " ",
+                "probability": 0.2245654
+              },
+              {
+                "rank": 3,
+                "token_id": 22,
+                "token_text": "l",
+                "probability": 0.21214436
+              },
+              {
+                "rank": 4,
+                "token_id": 18,
+                "token_text": "f",
+                "probability": 0.10497163
+              },
+              {
+                "rank": 5,
+                "token_id": 27,
+                "token_text": "r",
+                "probability": 0.02268952
+              },
+              {
+                "rank": 6,
+                "token_id": 25,
+                "token_text": "o",
+                "probability": 0.01207699
+              },
+              {
+                "rank": 7,
+                "token_id": 17,
+                "token_text": "e",
+                "probability": 0.009552
+              },
+              {
+                "rank": 8,
+                "token_id": 28,
+                "token_text": "s",
+                "probability": 0.00863312
+              }
+            ],
+            "observed_replay_continuation": " lossss\\nprge",
+            "observed_replay_profile": "default"
+          }
+        ],
+        "summary": {
+          "term_count": 2,
+          "expected_top_count": 0,
+          "whitespace_prefix_top_count": 0,
+          "answer_prefix_top_count": 0,
+          "ranked_count": 2,
+          "expected_all_top": false,
+          "answer_prefix_drift_observed": false,
+          "max_expected_rank": 4
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "Expected first tokens are not top ranked, but the dominant token is not the answer prefix.",
+          "next_action": "inspect top-token alternatives before changing corpus"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "seed_count": 3,
+    "pair_full_seed_count": 1,
+    "missed_seed_count": 2,
+    "missed_expected_top_count": 0,
+    "missed_first_token_gap_count": 2,
+    "pair_full_expected_top_count": 0,
+    "all_missed_expected_top": false,
+    "any_missed_first_token_gap": true
+  },
+  "interpretation": {
+    "model_quality_claim": "targeted_pair_refresh_missed_seed_diagnostic_only",
+    "reason": "At least one missed seed does not rank all expected first tokens on top.",
+    "next_action": "strengthen first-token preference before extending continuation training"
+  },
+  "sidecar_outputs": {
+    "first_token_reports": {
+      "535": {
+        "json": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-535\\model_capability_required_term_pair_first_token_preference.json",
+        "csv": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-535\\model_capability_required_term_pair_first_token_preference.csv",
+        "text": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-535\\model_capability_required_term_pair_first_token_preference.txt",
+        "markdown": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-535\\model_capability_required_term_pair_first_token_preference.md",
+        "html": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-535\\model_capability_required_term_pair_first_token_preference.html"
+      },
+      "1535": {
+        "json": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-1535\\model_capability_required_term_pair_first_token_preference.json",
+        "csv": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-1535\\model_capability_required_term_pair_first_token_preference.csv",
+        "text": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-1535\\model_capability_required_term_pair_first_token_preference.txt",
+        "markdown": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-1535\\model_capability_required_term_pair_first_token_preference.md",
+        "html": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-1535\\model_capability_required_term_pair_first_token_preference.html"
+      },
+      "2535": {
+        "json": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-2535\\model_capability_required_term_pair_first_token_preference.json",
+        "csv": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-2535\\model_capability_required_term_pair_first_token_preference.csv",
+        "text": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-2535\\model_capability_required_term_pair_first_token_preference.txt",
+        "markdown": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-2535\\model_capability_required_term_pair_first_token_preference.md",
+        "html": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-missed-seed-diagnostic\\first-token-reports\\seed-2535\\model_capability_required_term_pair_first_token_preference.html"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+status=pass
+decision=generation_profile_improves_pair_coexistence
+failed_count=0
+variant_count=1
+term_count=2
+default_pair_full_variant_count=0
+suppression_pair_full_variant_count=1
+suppression_hit_delta=1
+model_quality_claim=not_claimed
+next_action=Promote the profile into the next pair benchmark before retraining.

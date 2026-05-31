@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v545.0.0` tests first-token boost with the best top-k2/t0.8 decode setting and records a useful negative result: pair-full regresses to `0/3`.
+Version `v546.0.0` adds a loss-calibrated corpus mode and shows it can recover seed `1535`, but at the cost of losing the other two seeds.
+
+## Latest v546 checkpoint
+
+- Added `colon_immediate_loss_calibrated`, a light loss-branch calibration corpus mode.
+- Ran the same high-budget three-seed stability setup with `top_k=2, temperature=0.8`.
+- Recovered seed `1535`, but seed `535` and `2535` regressed, leaving `pair_full_seed_count=1/3`.
+- Interpreted the result as evidence of a calibration tradeoff rather than a global improvement.
+- Archived the v546 stability and diagnostic evidence in `e/546` and added the code explanation in `代码讲解记录_模型能力阶段/560-v546-required-term-pair-loss-calibrated-topk2-t080.md`.
 
 ## Latest v545 checkpoint
 
