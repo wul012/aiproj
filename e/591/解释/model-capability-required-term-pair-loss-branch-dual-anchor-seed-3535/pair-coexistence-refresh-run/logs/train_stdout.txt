@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=87497 vocab_size=34
+parameters=53,312
+data_source=data:e\591\解释\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1269 val_loss=3.1456
+step=  450 train_loss=0.9008 val_loss=2.9812
+step=  900 train_loss=0.9933 val_loss=2.2609
+step= 1350 train_loss=0.9389 val_loss=2.2747
+step= 1800 train_loss=1.1047 val_loss=2.0253
+saved=e\591\解释\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\pair-coexistence-refresh-run
+history=e\591\解释\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\591\解释\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\591\解释\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\pair-coexistence-refresh-run\sample.txt

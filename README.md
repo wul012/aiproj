@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v590.0.0` runs the first real loss-branch objective checkpoint on seed `3535`: targeted repair recovers `loss` but drops `fixed`, so the result is branch-tradeoff evidence rather than pair-full.
+Version `v591.0.0` runs the dual-anchor loss-branch objective on seed `3535`: training passes, `loss` is recovered again, but `fixed` still drops, so dual-anchor rows do not solve pair-full.
+
+## Latest v591 checkpoint
+
+- Ran real tiny training with `equals_surface_no_pair_id_loss_branch_dual_anchor_repair`.
+- Used seed `3535`, `max_iters=1800`, `n_embd=64`, CPU.
+- Confirmed training/checkpoint status: `pass`.
+- Confirmed `pair_full_observed=False`.
+- Confirmed replay hits `loss` and misses `fixed`, matching the v590 tradeoff.
+- Archived v591 evidence in `e/591` and added the code explanation in `代码讲解记录_模型能力阶段/605-v591-required-term-pair-loss-branch-dual-anchor-seed-3535.md`.
+
+## Latest v590 checkpoint
 
 ## Latest v590 checkpoint
 
