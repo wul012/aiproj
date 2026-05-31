@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v570.0.0` expands the v569 route held-out replay suite from three to seven prompt surfaces; the selected v562 seed `1535` remains `7/7` pair-full, strengthening targeted prompt-transfer evidence while leaving multi-seed stability unresolved.
+Version `v571.0.0` reruns the selected `v562-loss-balanced` objective on fresh seed `3535`; the run trains cleanly but stays `0/1` pair-full, proving the v570 `7/7` result is prompt-transfer evidence for seed `1535`, not fresh-seed stability.
+
+## Latest v571 checkpoint
+
+- Reused `equals_surface_no_pair_id_loss_balanced_repair` without changing corpus, decode, model width, or training budget.
+- Trained a fresh seed `3535` with the same core settings as v562.
+- Confirmed `pair_full_seed_count=0/1` and `stable_pair_full=False`.
+- Preserved the positive v570 interpretation only as seed `1535` targeted prompt-transfer evidence.
+- Set the next step to missed-branch/seed-sensitivity diagnosis rather than raising the model capability claim.
+- Archived v571 evidence in `e/571` and added the code explanation in `代码讲解记录_模型能力阶段/585-v571-required-term-pair-route-fresh-seed-3535.md`.
 
 ## Latest v570 checkpoint
 
