@@ -221,6 +221,9 @@
 556-v542-required-term-pair-topk2-stability.md
  -> v542 code explanation: promote the v541 top-k2 finding into the full colon-immediate stability runner.
 
+557-v543-required-term-pair-temperature-boundary-check.md
+ -> v543 code explanation: parameterize decode specs and find the top-k2 temperature boundary that recovers two seeds.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

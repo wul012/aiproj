@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v542.0.0` promotes the v541 `top_k=2` decode finding into the full colon-immediate stability runner and confirms a controlled `1/3` recovery.
+Version `v543.0.0` parameterizes decode-boundary specs and finds `top_k=2, temperature=0.8` can recover two of three fixed/loss pair seeds.
+
+## Latest v543 checkpoint
+
+- Added custom `--decode-spec ID:TOP_K:TEMP:MAX_NEW_TOKENS` support to the decode boundary check CLI.
+- Replayed v542 checkpoints across a temperature/top-k matrix without retraining.
+- Found `best_spec_id=topk2-t080-n12`, improving pair-full coverage from the v542 baseline `1/3` to `2/3`.
+- Kept the claim diagnostic-only because seed `1535` still failed under every tested decode boundary.
+- Archived the v543 evidence in `e/543` and added the code explanation in `代码讲解记录_模型能力阶段/557-v543-required-term-pair-temperature-boundary-check.md`.
 
 ## Latest v542 checkpoint
 

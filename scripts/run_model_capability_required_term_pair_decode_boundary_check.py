@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from minigpt.model_capability_required_term_pair_decode_boundary_check import (  # noqa: E402
     build_model_capability_required_term_pair_decode_boundary_check,
     locate_pair_colon_immediate_stability,
+    parse_decode_specs,
     read_json_report,
     resolve_exit_code,
 )
@@ -27,6 +28,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Replay fixed/loss pair checkpoints across decode boundaries.")
     parser.add_argument("stability_report", type=Path, help="Colon-immediate stability JSON or output directory.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "model-capability-required-term-pair-decode-boundary-check")
+    parser.add_argument(
+        "--decode-spec",
+        action="append",
+        default=None,
+        metavar="ID:TOP_K:TEMP:MAX_NEW_TOKENS",
+        help="Decode boundary to replay. Repeat to provide a custom matrix; defaults to the built-in matrix.",
+    )
     parser.add_argument("--profiles", nargs="+", default=list(DEFAULT_PROFILE_IDS))
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--require-pass", action="store_true", help="Return exit code 1 when replay execution fails.")
@@ -42,6 +50,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         read_json_report(source),
         out_dir=args.out_dir,
         source_path=source,
+        decode_specs=parse_decode_specs(args.decode_spec),
         profiles=tuple(str(profile) for profile in args.profiles),
         device=args.device,
     )

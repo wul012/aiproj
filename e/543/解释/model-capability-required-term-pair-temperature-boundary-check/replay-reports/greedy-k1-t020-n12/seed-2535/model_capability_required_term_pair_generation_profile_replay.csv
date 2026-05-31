@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+seed-2535,default,fixed,fixed:,2535,False,False,0,lossssssssss
+seed-2535,suppress_newline_tokens,fixed,fixed:,2535,False,False,1,lossssssssss
+seed-2535,default,loss,loss:,2536,True,True,0,lossssssssss
+seed-2535,suppress_newline_tokens,loss,loss:,2536,True,True,1,lossssssssss

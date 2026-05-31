@@ -1,0 +1,47 @@
+- main [ref=e2] [box=42,0,1180,1051]:
+  - generic [ref=e3] [box=70,28,1124,77]:
+    - heading "MiniGPT pair decode boundary check" [level=1] [ref=e4] [box=70,28,1124,36]
+    - paragraph [ref=e5] [box=70,80,1124,25]: At least one decode boundary improves pair-full coverage over the source stability report.
+  - generic [ref=e6] [box=70,123,1124,136]:
+    - generic [ref=e7] [box=70,123,179,136]:
+      - generic [ref=e8] [box=85,137,150,14]: Status
+      - strong [ref=e9] [box=85,157,150,22]: pass
+    - generic [ref=e10] [box=259,123,179,136]:
+      - generic [ref=e11] [box=274,137,150,14]: Decision
+      - strong [ref=e12] [box=274,157,150,86]: required_term_pair_decode_boundary_improves_pair_surface
+    - generic [ref=e13] [box=448,123,179,136]:
+      - generic [ref=e14] [box=463,137,150,14]: Baseline pair-full
+      - strong [ref=e15] [box=463,157,150,22]: "1"
+    - generic [ref=e16] [box=637,123,179,136]:
+      - generic [ref=e17] [box=652,137,150,14]: Best spec
+      - strong [ref=e18] [box=652,157,150,22]: topk2-t080-n12
+    - generic [ref=e19] [box=826,123,179,136]:
+      - generic [ref=e20] [box=841,137,150,14]: Best pair-full
+      - strong [ref=e21] [box=841,157,150,22]: "2"
+    - generic [ref=e22] [box=1015,123,179,136]:
+      - generic [ref=e23] [box=1030,137,150,14]: Improved
+      - strong [ref=e24] [box=1030,157,150,22]: "True"
+  - generic [ref=e25] [box=70,276,1124,111]:
+    - heading "Next Action" [level=2] [ref=e26] [box=87,293,1091,21]
+    - paragraph [ref=e27] [box=87,330,1091,25]: promote the best decode spec into the next stability check before retraining
+  - generic [ref=e28] [box=70,401,1124,608]:
+    - heading "Decode Rows" [level=2] [ref=e29] [box=87,418,1091,21]
+    - table [ref=e31] [box=87,451,1091,541]:
+      - rowgroup [ref=e32] [box=87,451,1091,35]:
+        - row "Spec Seed Pair full Default hits Suppression hits Decision" [ref=e33] [box=87,451,1091,35]
+      - rowgroup [ref=e40] [box=87,486,1091,507]:
+        - row "greedy-k1-t020-n12 535 False 1 1 generation_profile_no_pair_coexistence_gain" [ref=e41] [box=87,486,1091,34]
+        - row "greedy-k1-t020-n12 1535 False 1 1 generation_profile_no_pair_coexistence_gain" [ref=e48] [box=87,520,1091,34]
+        - row "greedy-k1-t020-n12 2535 False 1 1 generation_profile_no_pair_coexistence_gain" [ref=e55] [box=87,553,1091,34]
+        - row "topk2-t040-n12 535 True 2 2 generation_profile_no_pair_coexistence_gain" [ref=e62] [box=87,587,1091,34]
+        - row "topk2-t040-n12 1535 False 0 0 generation_profile_no_pair_coexistence_gain" [ref=e69] [box=87,621,1091,34]
+        - row "topk2-t040-n12 2535 False 1 1 generation_profile_no_pair_coexistence_gain" [ref=e76] [box=87,655,1091,34]
+        - row "topk2-t080-n12 535 True 2 2 generation_profile_no_pair_coexistence_gain" [ref=e83] [box=87,688,1091,34]
+        - row "topk2-t080-n12 1535 False 0 0 generation_profile_no_pair_coexistence_gain" [ref=e90] [box=87,722,1091,34]
+        - row "topk2-t080-n12 2535 True 2 2 generation_profile_no_pair_coexistence_gain" [ref=e97] [box=87,756,1091,34]
+        - row "topk2-t120-n12 535 True 2 2 generation_profile_no_pair_coexistence_gain" [ref=e104] [box=87,790,1091,34]
+        - row "topk2-t120-n12 1535 False 0 0 generation_profile_no_pair_coexistence_gain" [ref=e111] [box=87,824,1091,34]
+        - row "topk2-t120-n12 2535 False 0 0 generation_profile_no_pair_coexistence_gain" [ref=e118] [box=87,857,1091,34]
+        - row "topk4-t080-n12 535 True 1 2 generation_profile_improves_pair_coexistence" [ref=e125] [box=87,891,1091,34]
+        - row "topk4-t080-n12 1535 False 0 0 generation_profile_no_pair_coexistence_gain" [ref=e132] [box=87,925,1091,34]
+        - row "topk4-t080-n12 2535 False 1 1 generation_profile_no_pair_coexistence_gain" [ref=e139] [box=87,959,1091,34]

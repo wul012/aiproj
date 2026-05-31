@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
 from minigpt.model_capability_required_term_pair_colon_immediate_stability import (
     PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME,
@@ -42,6 +42,27 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError("colon-immediate stability report must be a JSON object")
     return dict(payload)
+
+
+def parse_decode_spec(value: str) -> dict[str, Any]:
+    parts = [part.strip() for part in str(value).split(":")]
+    if len(parts) != 4 or not parts[0]:
+        raise ValueError("decode spec must use id:top_k:temperature:max_new_tokens")
+    try:
+        return {
+            "spec_id": parts[0],
+            "top_k": int(parts[1]),
+            "temperature": float(parts[2]),
+            "max_new_tokens": int(parts[3]),
+        }
+    except ValueError as exc:
+        raise ValueError(f"invalid decode spec: {value}") from exc
+
+
+def parse_decode_specs(values: Sequence[str] | None) -> tuple[dict[str, Any], ...]:
+    if not values:
+        return DEFAULT_DECODE_SPECS
+    return tuple(parse_decode_spec(value) for value in values)
 
 
 def build_model_capability_required_term_pair_decode_boundary_check(
@@ -274,6 +295,8 @@ __all__ = [
     "PAIR_DECODE_BOUNDARY_CHECK_TEXT_FILENAME",
     "build_model_capability_required_term_pair_decode_boundary_check",
     "locate_pair_colon_immediate_stability",
+    "parse_decode_spec",
+    "parse_decode_specs",
     "read_json_report",
     "resolve_exit_code",
 ]

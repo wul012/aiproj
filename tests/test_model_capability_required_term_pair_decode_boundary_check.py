@@ -6,6 +6,8 @@ import unittest
 
 from minigpt.model_capability_required_term_pair_decode_boundary_check import (
     build_model_capability_required_term_pair_decode_boundary_check,
+    parse_decode_spec,
+    parse_decode_specs,
     resolve_exit_code,
 )
 from minigpt.model_capability_required_term_pair_decode_boundary_check_artifacts import (
@@ -88,6 +90,19 @@ class ModelCapabilityRequiredTermPairDecodeBoundaryCheckTests(unittest.TestCase)
                     / "model_capability_required_term_pair_generation_profile_replay.json"
                 ).is_file()
             )
+
+    def test_parse_decode_spec_accepts_cli_shape(self) -> None:
+        spec = parse_decode_spec("topk2-t080-n12:2:0.8:12")
+
+        self.assertEqual(spec["spec_id"], "topk2-t080-n12")
+        self.assertEqual(spec["top_k"], 2)
+        self.assertEqual(spec["temperature"], 0.8)
+        self.assertEqual(spec["max_new_tokens"], 12)
+        self.assertEqual(len(parse_decode_specs(["a:1:0.2:8", "b:4:1.0:16"])), 2)
+
+    def test_parse_decode_spec_rejects_bad_shape(self) -> None:
+        with self.assertRaises(ValueError):
+            parse_decode_spec("missing-parts")
 
 
 def stability_report(root: Path, *, baseline_pair_full: int) -> dict[str, object]:
