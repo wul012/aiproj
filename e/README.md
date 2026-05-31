@@ -349,6 +349,10 @@ e/554/解释/说明.md
 e/555/图片
 e/555/解释/说明.md
  -> v555 required-term pair equals-surface repair comparison 的运行截图和解释
+
+e/556/图片
+e/556/解释/说明.md
+ -> v556 required-term pair equals-surface tied repair 的运行截图和解释
 ```
 
 写入规则：

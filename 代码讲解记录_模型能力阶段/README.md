@@ -260,6 +260,9 @@
 569-v555-required-term-pair-equals-surface-repair-comparison.md
  -> v555 code explanation: compare v552/v554 equals-surface repairs and formalize the branch-competition diagnosis.
 
+570-v556-required-term-pair-equals-surface-tied-repair.md
+ -> v556 code explanation: add a tied equals-surface corpus mode and preserve the negative seed 1535 result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

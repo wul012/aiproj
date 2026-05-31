@@ -137,6 +137,21 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertIn("loss= should not continue fixed", corpus)
         self.assertNotIn("fixed:fixed", corpus)
 
+    def test_equals_surface_tied_repair_binds_fixed_and_loss_in_same_records(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_tied_repair",
+        )
+
+        lines = corpus.splitlines()
+
+        self.assertEqual(lines.count("pair=01 fixed=fixed loss=loss"), 2)
+        self.assertEqual(lines.count("pair=01 loss=loss fixed=fixed"), 2)
+        self.assertIn("fixed=fixed|loss=loss", corpus)
+        self.assertIn("do not trade fixed for loss; keep both branches.", corpus)
+        self.assertNotIn("fixed:fixed", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

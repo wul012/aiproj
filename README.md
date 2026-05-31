@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v555.0.0` compares the v552 fixed-biased equals repair with the v554 balanced repair and confirms branch competition: fixed and loss are each recoverable across runs, but no single run/profile keeps both terms pair-full.
+Version `v556.0.0` tests a tied equals-surface repair that keeps `fixed=fixed` and `loss=loss` in the same records; the real seed `1535` run still misses `fixed=`, so the branch competition is not solved by simple pair binding.
+
+## Latest v556 checkpoint
+
+- Added `equals_surface_tied_repair` to the pair coexistence corpus modes.
+- Bound fixed/loss in shared records such as `pair=01 fixed=fixed loss=loss`.
+- Reused the same seed `1535`, top-k `2`, temperature `0.8`, and training budget as v552/v554.
+- Confirmed `pair_full_seed_count=0/1`; `loss=` hits, while `fixed=` still collapses into a loss-like continuation.
+- Archived v556 evidence in `e/556` and added the code explanation in `代码讲解记录_模型能力阶段/570-v556-required-term-pair-equals-surface-tied-repair.md`.
 
 ## Latest v555 checkpoint
 

@@ -9,6 +9,7 @@ PAIR_COEXISTENCE_CORPUS_MODES = (
     "colon_immediate_loss_calibrated",
     "equals_surface_fixed_repair",
     "equals_surface_balanced_repair",
+    "equals_surface_tied_repair",
 )
 
 
@@ -31,13 +32,15 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
         _extend_equals_surface_fixed_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
     elif corpus_mode == "equals_surface_balanced_repair":
         _extend_equals_surface_balanced_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+    elif corpus_mode == "equals_surface_tied_repair":
+        _extend_equals_surface_tied_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
     else:
         raise ValueError(f"unknown corpus_mode: {corpus_mode}")
     return "\n".join(lines) + "\n"
 
 
 def source_prompts(corpus_mode: str) -> tuple[str, str]:
-    if corpus_mode in ("equals_surface_fixed_repair", "equals_surface_balanced_repair"):
+    if corpus_mode in ("equals_surface_fixed_repair", "equals_surface_balanced_repair", "equals_surface_tied_repair"):
         return "fixed=", "loss="
     return "fixed:", "loss:"
 
@@ -247,6 +250,36 @@ def _extend_equals_surface_balanced_repair(lines: list[str], *, repeat: int, bri
                 "loss= should continue loss.",
                 "fixed= and loss= are separate equals branches.",
                 "fixed=fixed;loss=loss",
+            ]
+        )
+
+
+def _extend_equals_surface_tied_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "pair=01 fixed=fixed loss=loss",
+                "pair=01 loss=loss fixed=fixed",
+                "fixed=fixed",
+                "loss=loss",
+                "prompt=fixed=target=fixed pair=01",
+                "prompt=loss=target=loss pair=01",
+                "fixed=next=fixed partner=loss",
+                "loss=next=loss partner=fixed",
+                "fixed= continues fixed while loss= continues loss",
+                "loss= continues loss while fixed= continues fixed",
+                "select pair=01 fixed=fixed loss=loss",
+                "select pair=01 loss=loss fixed=fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "tied equals repair keeps fixed and loss in one pair.",
+                "pair=01 means fixed=fixed and loss=loss together.",
+                "fixed= should continue fixed; loss= should continue loss.",
+                "do not trade fixed for loss; keep both branches.",
+                "fixed=fixed|loss=loss",
             ]
         )
 
