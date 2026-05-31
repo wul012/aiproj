@@ -1,0 +1,8 @@
+status=pass
+decision=close_required_term_pair_route_before_new_objective
+failed_count=0
+heldout_all_pair_full=True
+fresh_seed_pair_full_count=0
+route_decision=stop_first_token_and_width_for_fresh_seed
+model_quality_claim=bounded_transfer_not_generalized
+next_action=start a branch-binding objective; do not continue first-token rows or width scaling variants

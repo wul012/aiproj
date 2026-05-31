@@ -1,0 +1,35 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT route closeout summary" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The selected route transfers across held-out surfaces but does not generalize to fresh seed 3535.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: close_required_term_pair_route_before_new_objective
+    - generic [ref=e13]:
+      - generic [ref=e14]: Held-out
+      - strong [ref=e15]: 7/7
+    - generic [ref=e16]:
+      - generic [ref=e17]: Fresh pair-full
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Route decision
+      - strong [ref=e21]: stop_first_token_and_width_for_fresh_seed
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: start a branch-binding objective; do not continue first-token rows or width scaling variants
+  - generic [ref=e25]:
+    - heading "Evidence Rows" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]:
+        - row "Label Type Status Decision Key result" [ref=e30]
+      - rowgroup [ref=e36]:
+        - row "v570-heldout-expanded heldout_replay pass required_term_pair_route_heldout_replay_ready 7/7 heldout pair-full" [ref=e37]
+        - row "v571-loss-balanced fresh_seed_stability pass required_term_pair_colon_immediate_not_stable 0/1 pair-full, hits=1" [ref=e43]
+        - row "v573-first-token fresh_seed_stability pass required_term_pair_colon_immediate_not_stable 0/1 pair-full, hits=0" [ref=e49]
+        - row "v575-wider-embd fresh_seed_stability pass required_term_pair_colon_immediate_not_stable 0/1 pair-full, hits=0" [ref=e55]
+        - row "v576-variable-comparison comparison pass required_term_pair_equals_surface_repair_comparison_recorded union_hit_terms=fixed" [ref=e61]
+        - row "v577-route-decision route_decision pass stop_first_token_and_width_for_fresh_seed best_residual_signal=v571-loss-balanced" [ref=e67]

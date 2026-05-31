@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v577.0.0` turns the v576 fresh-seed variable comparison into a machine-readable route decision: first-token rows and width scaling are stopped for seed `3535`, and the next route must be a new branch-binding objective rather than another small variant.
+Version `v578.0.0` closes the v569-v577 required-term pair route batch: held-out prompt transfer stays positive, fresh seed `3535` does not reach pair-full, and the next useful version should start a branch-binding objective instead of another first-token or width variant.
+
+## Latest v578 checkpoint
+
+- Added `model_capability_required_term_pair_route_closeout_summary`.
+- Read v570 held-out evidence, v571/v573/v575 fresh-seed stability reports, v576 comparison, and v577 route decision.
+- Confirmed `heldout_all_pair_full=True` and `fresh_seed_pair_full_count=0`.
+- Preserved the quality boundary as `bounded_transfer_not_generalized`.
+- Set the closeout decision to `close_required_term_pair_route_before_new_objective`.
+- Archived v578 evidence in `e/578` and added the code explanation in `代码讲解记录_模型能力阶段/592-v578-required-term-pair-route-closeout-summary.md`.
 
 ## Latest v577 checkpoint
 

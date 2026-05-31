@@ -437,6 +437,10 @@ e/576/解释/说明.md
 e/577/图片
 e/577/解释/说明.md
  -> v577 required-term pair fresh seed route decision 的运行截图和解释
+
+e/578/图片
+e/578/解释/说明.md
+ -> v578 required-term pair route closeout summary 的运行截图和解释
 ```
 
 写入规则：

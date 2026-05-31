@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair route closeout summary",
+  "generated_at": "2026-05-31T11:30:42Z",
+  "status": "pass",
+  "decision": "close_required_term_pair_route_before_new_objective",
+  "failed_count": 0,
+  "issues": [],
+  "summary": {
+    "heldout_pair_full_count": 7,
+    "heldout_spec_count": 7,
+    "heldout_all_pair_full": true,
+    "fresh_seed_route_count": 3,
+    "fresh_seed_pair_full_count": 0,
+    "fresh_seed_continuation_hit_count": 1,
+    "comparison_union_hit_terms": [
+      "fixed"
+    ],
+    "comparison_pair_full_profile_seed_count": 0,
+    "route_decision": "stop_first_token_and_width_for_fresh_seed",
+    "stop_first_token_route": true,
+    "stop_width_scaling": true,
+    "best_residual_signal": "v571-loss-balanced",
+    "closeout_ready": true
+  },
+  "evidence_rows": [
+    {
+      "label": "v570-heldout-expanded",
+      "evidence_type": "heldout_replay",
+      "path": "e\\570\\解释\\model-capability-required-term-pair-route-heldout-expanded-suite\\model_capability_required_term_pair_route_heldout_replay.json",
+      "status": "pass",
+      "decision": "required_term_pair_route_heldout_replay_ready",
+      "key_result": "7/7 heldout pair-full"
+    },
+    {
+      "label": "v571-loss-balanced",
+      "evidence_type": "fresh_seed_stability",
+      "path": "e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "key_result": "0/1 pair-full, hits=1"
+    },
+    {
+      "label": "v573-first-token",
+      "evidence_type": "fresh_seed_stability",
+      "path": "e\\573\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-first-token-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "key_result": "0/1 pair-full, hits=0"
+    },
+    {
+      "label": "v575-wider-embd",
+      "evidence_type": "fresh_seed_stability",
+      "path": "e\\575\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-wider-embd\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "key_result": "0/1 pair-full, hits=0"
+    },
+    {
+      "label": "v576-variable-comparison",
+      "evidence_type": "comparison",
+      "path": "e\\576\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-variable-comparison\\model_capability_required_term_pair_equals_surface_repair_comparison.json",
+      "status": "pass",
+      "decision": "required_term_pair_equals_surface_repair_comparison_recorded",
+      "key_result": "union_hit_terms=fixed"
+    },
+    {
+      "label": "v577-route-decision",
+      "evidence_type": "route_decision",
+      "path": "e\\577\\解释\\model-capability-required-term-pair-fresh-seed-route-decision\\model_capability_required_term_pair_fresh_seed_route_decision.json",
+      "status": "pass",
+      "decision": "stop_first_token_and_width_for_fresh_seed",
+      "key_result": "best_residual_signal=v571-loss-balanced"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "bounded_transfer_not_generalized",
+    "reason": "The selected route transfers across held-out surfaces but does not generalize to fresh seed 3535.",
+    "next_action": "start a branch-binding objective; do not continue first-token rows or width scaling variants"
+  }
+}
