@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v561.0.0` adds a loss-balanced no-pair-id equals-surface repair and recovers seed `1535` to `1/1` pair-full under both default and newline-suppressed replay, making it the current targeted pair objective baseline pending multi-seed and held-out checks.
+Version `v562.0.0` repeats the v561 loss-balanced no-pair-id repair across seeds `535,1535,2535`; only seed `1535` remains pair-full, so the new objective is a targeted single-seed repair rather than a stable multi-seed baseline.
+
+## Latest v562 checkpoint
+
+- Reused `equals_surface_no_pair_id_loss_balanced_repair` without changing code or training budget.
+- Ran real seeds `535`, `1535`, and `2535` with top-k `2`, temperature `0.8`, and `n_embd=64`.
+- Confirmed `pair_full_seed_count=1/3`, `pair_full_seed_rate=0.3333`, and `stable_pair_full=False`.
+- Classified seed `535` as all-miss and seed `2535` as loss-only while seed `1535` remains pair-full.
+- Kept the claim partial: the objective fixed the target seed but is not yet stable across seeds.
+- Archived v562 evidence in `e/562` and added the code explanation in `代码讲解记录_模型能力阶段/576-v562-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability.md`.
 
 ## Latest v561 checkpoint
 

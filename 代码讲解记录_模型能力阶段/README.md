@@ -278,6 +278,9 @@
 575-v561-required-term-pair-equals-surface-no-pair-id-loss-balanced-repair.md
  -> v561 code explanation: add loss-balanced no-pair-id objective and recover seed 1535 pair-full.
 
+576-v562-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability.md
+ -> v562 code explanation: replay the loss-balanced no-pair-id objective across three seeds and classify the result as partial stability.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
