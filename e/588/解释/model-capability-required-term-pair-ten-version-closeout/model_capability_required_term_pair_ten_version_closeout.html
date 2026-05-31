@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT ten-version closeout</title>
+<style>
+:root{color-scheme:light;--ink:#18212b;--muted:#607080;--line:#d7dee6;--panel:#f6f8fb;--accent:#3d5a48}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f1;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>MiniGPT ten-version closeout</h1>
+<p>v579-v588 closed the branch-binding and target-anchor batch. The next useful training run should start from a loss-branch objective.</p>
+</header>
+<section class="stats">
+<div class="card"><span>Status</span><strong>pass</strong></div>
+<div class="card"><span>Decision</span><strong>close_v579_v588_batch</strong></div>
+<div class="card"><span>Pytest</span><strong>1165 passed</strong></div>
+<div class="card"><span>Pair-full</span><strong>false</strong></div>
+<div class="card"><span>Next</span><strong>loss-branch objective</strong></div>
+</section>
+<section class="panel">
+<h2>Outcome</h2>
+<table>
+<thead><tr><th>Route</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>v579 branch-binding</td><td>no pair-full, no visible hit</td></tr>
+<tr><td>v581 branch-binding no-space</td><td>no pair-full, no visible hit</td></tr>
+<tr><td>v584 target-anchor</td><td>no pair-full, residual fixed hit</td></tr>
+<tr><td>v587 closeout</td><td>branch-binding stopped, target-anchor residual-only</td></tr>
+</tbody>
+</table>
+</section>
+<section class="panel">
+<h2>Validation</h2>
+<p>Local full pytest passed with 1165 tests. Source encoding passed with source_count=667 and syntax_error_count=0. Git diff check passed.</p>
+</section>
+</main>
+</body>
+</html>

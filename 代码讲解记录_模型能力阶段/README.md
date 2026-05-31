@@ -356,6 +356,9 @@
 601-v587-required-term-pair-objective-closeout.md
  -> v587 code explanation: close current objectives and require a loss-branch objective next.
 
+602-v588-required-term-pair-ten-version-closeout.md
+ -> v588 code explanation: close the v579-v588 batch with full local validation.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

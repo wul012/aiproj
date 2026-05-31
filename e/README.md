@@ -477,6 +477,10 @@ e/586/解释/说明.md
 e/587/图片
 e/587/解释/说明.md
  -> v587 required-term pair objective closeout 的运行截图和解释
+
+e/588/图片
+e/588/解释/说明.md
+ -> v588 required-term pair ten-version closeout 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v587.0.0` closes the current objective batch: branch-binding is stopped, target-anchor is residual-only, and the next model-capability work must design a loss-branch objective before another training run.
+Version `v588.0.0` closes the v579-v588 ten-version batch: branch-binding v1/v2 were stopped, target-anchor was kept as residual-only, full tests passed with `1165 passed`, and the next training work should start from a loss-branch objective.
+
+## Latest v588 checkpoint
+
+- Closed the v579-v588 continuous batch with a ten-version summary.
+- Preserved the key result: no route reached pair-full on seed `3535`.
+- Preserved the useful signal: v571 and v584 share residual `fixed` partial hit.
+- Confirmed branch-binding v1/v2 are stopped and target-anchor is not promoted.
+- Ran full local tests: `1165 passed`.
+- Archived v588 evidence in `e/588` and added the code explanation in `代码讲解记录_模型能力阶段/602-v588-required-term-pair-ten-version-closeout.md`.
 
 ## Latest v587 checkpoint
 

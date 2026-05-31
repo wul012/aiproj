@@ -1,0 +1,33 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT ten-version closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: v579-v588 closed the branch-binding and target-anchor batch. The next useful training run should start from a loss-branch objective.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: close_v579_v588_batch
+    - generic [ref=e13]:
+      - generic [ref=e14]: Pytest
+      - strong [ref=e15]: 1165 passed
+    - generic [ref=e16]:
+      - generic [ref=e17]: Pair-full
+      - strong [ref=e18]: "false"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Next
+      - strong [ref=e21]: loss-branch objective
+  - generic [ref=e22]:
+    - heading "Outcome" [level=2] [ref=e23]
+    - table [ref=e24]:
+      - rowgroup [ref=e25]:
+        - row "Route Result" [ref=e26]
+      - rowgroup [ref=e29]:
+        - row "v579 branch-binding no pair-full, no visible hit" [ref=e30]
+        - row "v581 branch-binding no-space no pair-full, no visible hit" [ref=e33]
+        - row "v584 target-anchor no pair-full, residual fixed hit" [ref=e36]
+        - row "v587 closeout branch-binding stopped, target-anchor residual-only" [ref=e39]
+  - generic [ref=e42]:
+    - heading "Validation" [level=2] [ref=e43]
+    - paragraph [ref=e44]: Local full pytest passed with 1165 tests. Source encoding passed with source_count=667 and syntax_error_count=0. Git diff check passed.

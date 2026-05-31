@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair ten-version closeout",
+  "status": "pass",
+  "decision": "close_v579_v588_batch_and_design_loss_branch_objective",
+  "version_range": "v579-v588",
+  "local_validation": {
+    "pytest": "1165 passed in 189.28s",
+    "source_encoding": "status=pass; source_count=667; syntax_error_count=0",
+    "diff_check": "pass"
+  },
+  "summary": {
+    "branch_binding_stopped": true,
+    "target_anchor_residual_only": true,
+    "loss_branch_required": true,
+    "pair_full_found": false,
+    "residual_signal_routes": [
+      "v571-loss-balanced",
+      "v584-target-anchor"
+    ]
+  },
+  "next_action": "design a loss-branch objective before another training run"
+}
