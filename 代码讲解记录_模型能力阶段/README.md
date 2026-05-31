@@ -380,6 +380,9 @@
 609-v595-required-term-pair-loss-branch-targeted-seed-stability.md
  -> v595 code explanation: run 3-seed targeted loss-branch stability and confirm stable tradeoff.
 
+610-v596-required-term-pair-loss-branch-targeted-missed-seed-diagnostic.md
+ -> v596 code explanation: diagnose targeted missed seeds and identify fixed first-token retention gap.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

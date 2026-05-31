@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v595.0.0` runs targeted loss-branch seed stability across seeds `3535,4535,5535`: all three training runs pass, all three miss pair-full, and the targeted route is confirmed as stable tradeoff evidence rather than a promotion path.
+Version `v596.0.0` diagnoses the v595 targeted missed seeds and confirms a first-token gap: all three seeds miss pair-full, `loss` is usually ranked ahead, and the next objective should focus on fixed retention rather than more loss weighting.
+
+## Latest v596 checkpoint
+
+- Ran missed-seed diagnostic on the v595 targeted stability report.
+- Confirmed `missed_seed_count=3`.
+- Confirmed `missed_first_token_gap_count=3`.
+- Confirmed `loss_expected_rank` is better than `fixed_expected_rank` on seeds `4535` and `5535`.
+- Reframed the next objective as fixed-retention / first-token balance.
+- Archived v596 evidence in `e/596` and added the code explanation in `代码讲解记录_模型能力阶段/610-v596-required-term-pair-loss-branch-targeted-missed-seed-diagnostic.md`.
+
+## Latest v595 checkpoint
 
 ## Latest v595 checkpoint
 
