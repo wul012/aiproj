@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fresh-seed route decision",
+  "generated_at": "2026-05-31T11:22:47Z",
+  "status": "pass",
+  "decision": "stop_first_token_and_width_for_fresh_seed",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "e\\576\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-variable-comparison\\model_capability_required_term_pair_equals_surface_repair_comparison.json",
+  "route_rows": [
+    {
+      "source_label": "v571-loss-balanced",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "pair_full_seed_count": 0,
+      "seed_count": 1,
+      "stable_pair_full": false,
+      "hit_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "route_type": "baseline",
+      "rejection_reasons": [
+        "no_pair_full_seed",
+        "loss_term_missing",
+        "not_stable"
+      ]
+    },
+    {
+      "source_label": "v573-first-token",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "pair_full_seed_count": 0,
+      "seed_count": 1,
+      "stable_pair_full": false,
+      "hit_terms": [],
+      "hit_term_count": 0,
+      "route_type": "first_token",
+      "rejection_reasons": [
+        "no_pair_full_seed",
+        "loss_term_missing",
+        "not_stable"
+      ]
+    },
+    {
+      "source_label": "v575-wider-embd",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "pair_full_seed_count": 0,
+      "seed_count": 1,
+      "stable_pair_full": false,
+      "hit_terms": [],
+      "hit_term_count": 0,
+      "route_type": "width_scaling",
+      "rejection_reasons": [
+        "no_pair_full_seed",
+        "loss_term_missing",
+        "not_stable"
+      ]
+    }
+  ],
+  "summary": {
+    "route_count": 3,
+    "pair_full_route_count": 0,
+    "first_token_route_count": 1,
+    "width_route_count": 1,
+    "union_hit_terms": [
+      "fixed"
+    ],
+    "pair_full_profile_seed_count": 0,
+    "stop_first_token_route": true,
+    "stop_width_scaling": true,
+    "best_residual_signal": "v571-loss-balanced"
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "Compared fresh-seed routes did not reach pair-full and only preserved limited fixed-term evidence.",
+    "next_action": "stop first-token rows and width scaling; design a branch-binding objective before another seed sweep"
+  }
+}

@@ -1,0 +1,4 @@
+source_label,route_type,pair_full_seed_count,seed_count,hit_terms,rejection_reasons
+v571-loss-balanced,baseline,0,1,"[""fixed""]","[""no_pair_full_seed"", ""loss_term_missing"", ""not_stable""]"
+v573-first-token,first_token,0,1,[],"[""no_pair_full_seed"", ""loss_term_missing"", ""not_stable""]"
+v575-wider-embd,width_scaling,0,1,[],"[""no_pair_full_seed"", ""loss_term_missing"", ""not_stable""]"

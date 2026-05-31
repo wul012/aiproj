@@ -1,0 +1,32 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT fresh-seed route decision" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Compared fresh-seed routes did not reach pair-full and only preserved limited fixed-term evidence.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: stop_first_token_and_width_for_fresh_seed
+    - generic [ref=e13]:
+      - generic [ref=e14]: Routes
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Pair-full routes
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Best residual
+      - strong [ref=e21]: v571-loss-balanced
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: stop first-token rows and width scaling; design a branch-binding objective before another seed sweep
+  - generic [ref=e25]:
+    - heading "Route Rows" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]:
+        - row "Route Type Pair-full Hit terms Reasons" [ref=e30]
+      - rowgroup [ref=e36]:
+        - row "v571-loss-balanced baseline 0/1 fixed no_pair_full_seed,loss_term_missing,not_stable" [ref=e37]
+        - row "v573-first-token first_token 0/1 no_pair_full_seed,loss_term_missing,not_stable" [ref=e43]
+        - row "v575-wider-embd width_scaling 0/1 no_pair_full_seed,loss_term_missing,not_stable" [ref=e49]

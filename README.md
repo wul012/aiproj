@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v576.0.0` compares the three fresh-seed `3535` variants from v571, v573, and v575; none reaches pair-full and the union hit terms remain only `fixed`, so first-token rows and width scaling are both rejected for this seed.
+Version `v577.0.0` turns the v576 fresh-seed variable comparison into a machine-readable route decision: first-token rows and width scaling are stopped for seed `3535`, and the next route must be a new branch-binding objective rather than another small variant.
+
+## Latest v577 checkpoint
+
+- Added `model_capability_required_term_pair_fresh_seed_route_decision`.
+- Consumed the v576 comparison report as the source of truth.
+- Confirmed `route_count=3`, `pair_full_route_count=0`, and `best_residual_signal=v571-loss-balanced`.
+- Produced JSON/CSV/text/Markdown/HTML decision artifacts.
+- Set the decision to `stop_first_token_and_width_for_fresh_seed`.
+- Archived v577 evidence in `e/577` and added the code explanation in `代码讲解记录_模型能力阶段/591-v577-required-term-pair-fresh-seed-route-decision.md`.
 
 ## Latest v576 checkpoint
 
