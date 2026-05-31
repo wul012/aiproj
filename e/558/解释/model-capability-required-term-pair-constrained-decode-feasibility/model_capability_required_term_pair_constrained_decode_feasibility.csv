@@ -1,0 +1,5 @@
+profile_id,term,prompt,blocked_token_texts,blocked_token_count,continuation_hit,continuation_preview
+default,fixed,fixed=,[],0,False,los paross f
+block_competing_initial,fixed,fixed=,"[""l""]",1,False,01\npt=01 1 f
+default,loss,loss=,[],0,True,loss fixes p
+block_competing_initial,loss,loss=,"[""f""]",1,False,01\npaross lo

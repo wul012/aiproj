@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v557.0.0` adds a refresh forced-choice diagnostic for the v556 checkpoint and shows the `fixed=` prompt internally prefers `loss` over `fixed`, so the failure is learned preference collapse rather than only sampling drift.
+Version `v558.0.0` adds a constrained decode feasibility check over the v556 checkpoint; blocking competing initials does not recover `fixed=` and even breaks the default `loss=` hit, so decode-only mitigation is not reliable for this tiny model.
+
+## Latest v558 checkpoint
+
+- Added `model_capability_required_term_pair_constrained_decode_feasibility`, a decode-only feasibility check over one refresh checkpoint.
+- Tested default generation against `block_competing_initial` constraints for `fixed=` and `loss=`.
+- Confirmed `default_hit_count=1`, `constrained_hit_count=0`, `hit_delta=-1`, and `constrained_pair_full=False`.
+- Interpreted the result as evidence to return to objective/capacity changes rather than promoting a decode constraint.
+- Archived v558 evidence in `e/558` and added the code explanation in `代码讲解记录_模型能力阶段/572-v558-required-term-pair-constrained-decode-feasibility.md`.
 
 ## Latest v557 checkpoint
 

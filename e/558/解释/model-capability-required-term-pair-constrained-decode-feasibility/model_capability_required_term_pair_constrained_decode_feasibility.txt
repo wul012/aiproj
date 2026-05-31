@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_constrained_decode_not_feasible
+failed_count=0
+default_hit_count=1
+constrained_hit_count=0
+hit_delta=-1
+constrained_pair_full=False
+fixed_constrained_hit=False
+model_quality_claim=decode_feasibility_only
+next_action=return to objective/capacity changes instead of decode-only mitigation

@@ -1,0 +1,44 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT constrained decode feasibility" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The constraint does not improve fixed/loss continuation hits.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_constrained_decode_not_feasible
+    - generic [ref=e13]:
+      - generic [ref=e14]: Default hits
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Constrained hits
+      - strong [ref=e18]: "0"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Hit delta
+      - strong [ref=e21]: "-1"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Pair full
+      - strong [ref=e24]: "False"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: return to objective/capacity changes instead of decode-only mitigation
+  - generic [ref=e28]:
+    - heading "Profiles" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Profile Hit terms Missed terms Pair full Blocked tokens" [ref=e33]
+      - rowgroup [ref=e39]:
+        - row "block_competing_initial fixed,loss False 2" [ref=e40]
+        - row "default loss fixed False 0" [ref=e46]
+  - generic [ref=e52]:
+    - heading "Cases" [level=2] [ref=e53]
+    - table [ref=e55]:
+      - rowgroup [ref=e56]:
+        - row "Profile Term Blocked Hit Continuation" [ref=e57]
+      - rowgroup [ref=e63]:
+        - row "default fixed False los paross f" [ref=e64]
+        - row "block_competing_initial fixed l False 01\\npt=01 1 f" [ref=e70]
+        - row "default loss True loss fixes p" [ref=e76]
+        - row "block_competing_initial loss f False 01\\npaross lo" [ref=e82]
