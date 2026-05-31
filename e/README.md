@@ -369,6 +369,10 @@ e/559/解释/说明.md
 e/560/图片
 e/560/解释/说明.md
  -> v560 required-term pair equals-surface no-pair-id repair 的运行截图和解释
+
+e/561/图片
+e/561/解释/说明.md
+ -> v561 required-term pair equals-surface no-pair-id loss-balanced repair 的运行截图和解释
 ```
 
 写入规则：

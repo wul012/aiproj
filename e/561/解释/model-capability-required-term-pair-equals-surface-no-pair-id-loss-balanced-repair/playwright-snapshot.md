@@ -1,0 +1,45 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT colon-immediate stability" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every tested colon-immediate seed produced fixed/loss pair-full coverage.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_colon_immediate_stably_pair_full
+    - generic [ref=e13]:
+      - generic [ref=e14]: Seeds
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Pair-full seeds
+      - strong [ref=e18]: "1"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Pair-full rate
+      - strong [ref=e21]: "1.0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Stable
+      - strong [ref=e24]: "True"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: promote colon-immediate as the current pair objective baseline and test held-out aliases
+  - generic [ref=e28]:
+    - heading "Seeds" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Seed Status Pair full Default full Suppression full Output" [ref=e33]:
+          - columnheader "Seed" [ref=e34]
+          - columnheader "Status" [ref=e35]
+          - columnheader "Pair full" [ref=e36]
+          - columnheader "Default full" [ref=e37]
+          - columnheader "Suppression full" [ref=e38]
+          - columnheader "Output" [ref=e39]
+      - rowgroup [ref=e40]:
+        - row "1535 pass True 1 1 e\\561\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-repair\\seed-runs\\seed-1535" [ref=e41]:
+          - cell "1535" [ref=e42]
+          - cell "pass" [ref=e43]
+          - cell "True" [ref=e44]
+          - cell "1" [ref=e45]
+          - cell "1" [ref=e46]
+          - cell "e\\561\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-repair\\seed-runs\\seed-1535" [ref=e47]

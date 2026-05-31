@@ -183,6 +183,19 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
             self.assertIn("loss=", prompts)
             self.assertNotIn("fixed:", prompts)
 
+    def test_equals_surface_no_pair_id_loss_balanced_repair_adds_loss_weight_without_pair_id(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_balanced_repair",
+        )
+
+        self.assertGreater(corpus.count("loss=loss"), corpus.count("fixed=fixed"))
+        self.assertIn("loss branch gets extra no-id balance.", corpus)
+        self.assertIn("loss= should not drift into fixed.", corpus)
+        self.assertNotIn("pair=01", corpus)
+        self.assertNotIn("fixed:fixed", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

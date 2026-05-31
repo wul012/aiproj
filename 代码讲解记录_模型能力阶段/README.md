@@ -275,6 +275,9 @@
 574-v560-required-term-pair-equals-surface-no-pair-id-repair.md
  -> v560 code explanation: remove pair-id equals competition from tied repair and record the fixed-only partial recovery.
 
+575-v561-required-term-pair-equals-surface-no-pair-id-loss-balanced-repair.md
+ -> v561 code explanation: add loss-balanced no-pair-id objective and recover seed 1535 pair-full.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

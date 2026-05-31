@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v560.0.0` adds and tests an equals-surface no-pair-id corpus repair; removing the `pair=01` equals competitor restores the `fixed=` branch but still misses `loss=`, so the remaining failure is narrower and points to loss-branch objective balance.
+Version `v561.0.0` adds a loss-balanced no-pair-id equals-surface repair and recovers seed `1535` to `1/1` pair-full under both default and newline-suppressed replay, making it the current targeted pair objective baseline pending multi-seed and held-out checks.
+
+## Latest v561 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_balanced_repair`, a no-pair-id objective that gives the loss branch extra weight without reintroducing numeric equals competitors.
+- Added tests proving the mode increases loss evidence, keeps `pair=01` out, and remains on equals replay prompts.
+- Ran real seed `1535` training with `n_embd=64`, top-k `2`, temperature `0.8`, and the v556/v560 training budget.
+- Confirmed `pair_full_seed_count=1/1`, `default_continuation_hit_count=2`, `suppression_continuation_hit_count=2`, and `stable_pair_full=True`.
+- Scoped the result as a targeted single-seed recovery signal, not general model-quality proof.
+- Archived v561 evidence in `e/561` and added the code explanation in `代码讲解记录_模型能力阶段/575-v561-required-term-pair-equals-surface-no-pair-id-loss-balanced-repair.md`.
 
 ## Latest v560 checkpoint
 

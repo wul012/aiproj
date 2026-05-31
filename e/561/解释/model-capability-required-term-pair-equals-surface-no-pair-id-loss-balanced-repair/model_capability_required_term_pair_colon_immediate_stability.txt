@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_colon_immediate_stably_pair_full
+failed_count=0
+seed_count=1
+pair_full_seed_count=1
+pair_full_seed_rate=1.0
+stable_pair_full=True
+model_quality_claim=targeted_pair_refresh_stable_signal
+next_action=promote colon-immediate as the current pair objective baseline and test held-out aliases
