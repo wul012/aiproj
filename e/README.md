@@ -341,6 +341,10 @@ e/552/解释/说明.md
 e/553/图片
 e/553/解释/说明.md
  -> v553 required-term pair coexistence corpus split 的运行截图和解释
+
+e/554/图片
+e/554/解释/说明.md
+ -> v554 required-term pair equals-surface balanced repair 的运行截图和解释
 ```
 
 写入规则：

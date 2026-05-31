@@ -254,6 +254,9 @@
 567-v553-required-term-pair-coexistence-corpus-split.md
  -> v553 code explanation: split required-term pair corpus design out of the refresh executor.
 
+568-v554-required-term-pair-equals-surface-balanced-repair.md
+ -> v554 code explanation: test a balanced equals-surface repair and preserve the branch-competition negative result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

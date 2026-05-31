@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v553.0.0` splits required-term pair coexistence corpus design out of the near-500-line refresh module, preserving behavior while reducing the core file from 488 to 306 lines.
+Version `v554.0.0` tests a balanced equals-surface repair for seed `1535`; it still reaches `0/1` pair-full, shifting the miss back to `fixed=` and showing branch competition rather than a simple sample-ratio issue.
+
+## Latest v554 checkpoint
+
+- Added `equals_surface_balanced_repair` to the pair coexistence corpus module.
+- Kept replay prompts on `fixed=` / `loss=` for the new mode.
+- Ran real seed `1535` training with top-k `2` and temperature `0.8`.
+- Confirmed `pair_full_seed_count=0/1`; `loss=` hits, but `fixed=` misses in both profiles.
+- Archived v554 evidence in `e/554` and added the code explanation in `代码讲解记录_模型能力阶段/568-v554-required-term-pair-equals-surface-balanced-repair.md`.
 
 ## Latest v553 checkpoint
+
+Version `v553.0.0` splits required-term pair coexistence corpus design out of the near-500-line refresh module, preserving behavior while reducing the core file from 488 to 306 lines.
 
 - Added `model_capability_required_term_pair_coexistence_corpus.py` for corpus modes, corpus text builders, and prompt-surface selection.
 - Kept existing imports working by re-exporting corpus modes and corpus builder through the refresh module.

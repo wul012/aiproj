@@ -1,0 +1,45 @@
+- main [ref=e2] [box=85,0,1120,581]:
+  - generic [ref=e3] [box=113,28,1064,77]:
+    - heading "MiniGPT colon-immediate stability" [level=1] [ref=e4] [box=113,28,1064,36]
+    - paragraph [ref=e5] [box=113,80,1064,25]: No tested colon-immediate seed reproduced the v535 pair-full signal.
+  - generic [ref=e6] [box=113,123,1064,136]:
+    - generic [ref=e7] [box=113,123,169,136]:
+      - generic [ref=e8] [box=127,137,140,14]: Status
+      - strong [ref=e9] [box=127,157,140,22]: pass
+    - generic [ref=e10] [box=292,123,169,136]:
+      - generic [ref=e11] [box=306,137,140,14]: Decision
+      - strong [ref=e12] [box=306,157,140,86]: required_term_pair_colon_immediate_not_stable
+    - generic [ref=e13] [box=471,123,169,136]:
+      - generic [ref=e14] [box=485,137,140,14]: Seeds
+      - strong [ref=e15] [box=485,157,140,22]: "1"
+    - generic [ref=e16] [box=650,123,169,136]:
+      - generic [ref=e17] [box=664,137,140,14]: Pair-full seeds
+      - strong [ref=e18] [box=664,157,140,22]: "0"
+    - generic [ref=e19] [box=829,123,169,136]:
+      - generic [ref=e20] [box=843,137,140,14]: Pair-full rate
+      - strong [ref=e21] [box=843,157,140,22]: "0.0"
+    - generic [ref=e22] [box=1008,123,169,136]:
+      - generic [ref=e23] [box=1022,137,140,14]: Stable
+      - strong [ref=e24] [box=1022,157,140,22]: "False"
+  - generic [ref=e25] [box=113,276,1064,111]:
+    - heading "Next Action" [level=2] [ref=e26] [box=129,293,1031,21]
+    - paragraph [ref=e27] [box=129,330,1031,25]: return to corpus design before further seed sweeps
+  - generic [ref=e28] [box=113,401,1064,137]:
+    - heading "Seeds" [level=2] [ref=e29] [box=129,418,1031,21]
+    - table [ref=e31] [box=129,451,1031,71]:
+      - rowgroup [ref=e32] [box=129,451,1031,35]:
+        - row "Seed Status Pair full Default full Suppression full Output" [ref=e33] [box=129,451,1031,35]:
+          - columnheader "Seed" [ref=e34] [box=129,451,51,35]
+          - columnheader "Status" [ref=e35] [box=181,451,61,35]
+          - columnheader "Pair full" [ref=e36] [box=241,451,70,35]
+          - columnheader "Default full" [ref=e37] [box=311,451,90,35]
+          - columnheader "Suppression full" [ref=e38] [box=401,451,127,35]
+          - columnheader "Output" [ref=e39] [box=528,451,632,35]
+      - rowgroup [ref=e40] [box=129,486,1031,36]:
+        - row "1535 pass False 0 0 e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\seed-runs\\seed-1535" [ref=e41] [box=129,486,1031,36]:
+          - cell "1535" [ref=e42] [box=129,486,51,36]
+          - cell "pass" [ref=e43] [box=181,486,61,36]
+          - cell "False" [ref=e44] [box=241,486,70,36]
+          - cell "0" [ref=e45] [box=311,486,90,36]
+          - cell "0" [ref=e46] [box=401,486,127,36]
+          - cell "e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\seed-runs\\seed-1535" [ref=e47] [box=528,486,632,36]

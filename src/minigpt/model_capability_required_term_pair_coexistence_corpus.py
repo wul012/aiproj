@@ -8,6 +8,7 @@ PAIR_COEXISTENCE_CORPUS_MODES = (
     "colon_immediate_isolated_prompt",
     "colon_immediate_loss_calibrated",
     "equals_surface_fixed_repair",
+    "equals_surface_balanced_repair",
 )
 
 
@@ -28,13 +29,15 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
         _extend_loss_calibrated(lines, repeat=repeat, bridge_repeat=bridge_repeat)
     elif corpus_mode == "equals_surface_fixed_repair":
         _extend_equals_surface_fixed_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+    elif corpus_mode == "equals_surface_balanced_repair":
+        _extend_equals_surface_balanced_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
     else:
         raise ValueError(f"unknown corpus_mode: {corpus_mode}")
     return "\n".join(lines) + "\n"
 
 
 def source_prompts(corpus_mode: str) -> tuple[str, str]:
-    if corpus_mode == "equals_surface_fixed_repair":
+    if corpus_mode in ("equals_surface_fixed_repair", "equals_surface_balanced_repair"):
         return "fixed=", "loss="
     return "fixed:", "loss:"
 
@@ -208,6 +211,42 @@ def _extend_equals_surface_fixed_repair(lines: list[str], *, repeat: int, bridge
                 "loss= should continue loss.",
                 "fixed= is not loss.",
                 "loss= is not fixed.",
+            ]
+        )
+
+
+def _extend_equals_surface_balanced_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "fixed=fixed",
+                "loss=loss",
+                "fixed=f",
+                "loss=l",
+                "fixed=fi",
+                "loss=lo",
+                "fixed=fix",
+                "loss=los",
+                "fixed=fixed",
+                "loss=loss",
+                "prompt=fixed=target=fixed",
+                "prompt=loss=target=loss",
+                "equals surface fixed=fixed",
+                "equals surface loss=loss",
+                "fixed= selects fixed",
+                "loss= selects loss",
+                "fixed= should not continue loss",
+                "loss= should not continue fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "balanced equals prompt surface.",
+                "fixed= should continue fixed.",
+                "loss= should continue loss.",
+                "fixed= and loss= are separate equals branches.",
+                "fixed=fixed;loss=loss",
             ]
         )
 
