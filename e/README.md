@@ -525,6 +525,10 @@ e/598/解释/说明.md
 e/599/图片
 e/599/解释/说明.md
  -> v599 required-term pair fixed-retention objective corpus 的运行截图和解释
+
+e/600/图片
+e/600/解释/说明.md
+ -> v600 required-term pair fixed-retention balanced seed 3535 的运行截图和解释
 ```
 
 写入规则：

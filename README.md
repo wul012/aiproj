@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v599.0.0` starts the fixed-retention objective route with three no-pair-id corpus modes that target `fixed=` first-token retention while keeping `loss=loss` visible.
+Version `v600.0.0` runs real seed `3535` training for the balanced fixed-retention corpus mode and confirms it still does not reach pair-full.
+
+## Latest v600 checkpoint
+
+- Ran real tiny training with `equals_surface_no_pair_id_fixed_retention_balanced_repair`.
+- Used seed `3535`, `max_iters=1800`, `n_embd=64`, CPU.
+- Confirmed training/checkpoint status: `pass`.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` still drifting toward `loss`; balanced rows are not enough.
+- Archived v600 evidence in `e/600` and added the code explanation in `代码讲解记录_模型能力阶段/614-v600-required-term-pair-fixed-retention-balanced-seed-3535.md`.
 
 ## Latest v599 checkpoint
 

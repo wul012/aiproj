@@ -392,6 +392,9 @@
 613-v599-required-term-pair-fixed-retention-objective-corpus.md
  -> v599 code explanation: add fixed-retention corpus modes for the next real seed route.
 
+614-v600-required-term-pair-fixed-retention-balanced-seed-3535.md
+ -> v600 code explanation: run real balanced fixed-retention seed 3535 and record no pair-full result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
