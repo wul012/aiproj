@@ -397,6 +397,10 @@ e/566/解释/说明.md
 e/567/图片
 e/567/解释/说明.md
  -> v567 required-term pair no-pair-id first-token density comparison 的运行截图和解释
+
+e/568/图片
+e/568/解释/说明.md
+ -> v568 required-term pair first-token route decision 的运行截图和解释
 ```
 
 写入规则：

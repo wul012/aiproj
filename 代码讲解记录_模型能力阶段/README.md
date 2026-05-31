@@ -296,6 +296,9 @@
 581-v567-required-term-pair-no-pair-id-first-token-density-comparison.md
  -> v567 code explanation: compare v562/v564/v566 first-token hint density and stop that route as unstable coverage migration.
 
+582-v568-required-term-pair-first-token-route-decision.md
+ -> v568 code explanation: turn v567 comparison evidence into a stop-first-token-density route decision.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

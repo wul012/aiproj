@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair first-token route decision",
+  "generated_at": "2026-05-31T07:07:07Z",
+  "status": "pass",
+  "decision": "stop_first_token_density_and_replay_best_baseline",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "e\\567\\解释\\model-capability-required-term-pair-no-pair-id-first-token-density-comparison\\model_capability_required_term_pair_equals_surface_repair_comparison.json",
+  "selected_route": {
+    "source_label": "v562-loss-balanced",
+    "source_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+    "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+    "pair_full_seed_count": 1,
+    "seed_count": 3,
+    "pair_full_seed_rate": 0.3333,
+    "stable_pair_full": false,
+    "rationale": "highest pair-full seed count with the simplest non-first-token-density objective"
+  },
+  "rejected_routes": [
+    {
+      "source_label": "v564-full-first-token",
+      "source_path": "e\\564\\解释\\model-capability-required-term-pair-no-pair-id-loss-balanced-first-token-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "pair_full_seed_count": 1,
+      "seed_count": 3,
+      "pair_full_seed_rate": 0.3333,
+      "reasons": [
+        "first_token_density_no_stable_gain",
+        "not_stable_across_seeds"
+      ]
+    },
+    {
+      "source_label": "v566-light-first-token",
+      "source_path": "e\\566\\解释\\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_light_first_token_repair",
+      "pair_full_seed_count": 0,
+      "seed_count": 3,
+      "pair_full_seed_rate": 0.0,
+      "reasons": [
+        "first_token_density_no_stable_gain",
+        "no_pair_full_seed",
+        "not_stable_across_seeds"
+      ]
+    }
+  ],
+  "summary": {
+    "source_report_count": 3,
+    "first_token_density_route_count": 2,
+    "stable_route_count": 0,
+    "max_pair_full_seed_count": 1,
+    "selected_source_label": "v562-loss-balanced",
+    "rejected_route_count": 2,
+    "source_pair_full_profile_seed_count": 1,
+    "source_branch_competition_seed_count": 0,
+    "stop_first_token_density": true
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "First-token density variants do not improve stable pair-full coverage over the simpler baseline.",
+    "next_action": "replay held-out equals-surface prompts for v562-loss-balanced before adding more corpus variants"
+  }
+}

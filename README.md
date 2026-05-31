@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v567.0.0` compares v562, v564, and v566 first-token hint densities; the result shows coverage migration rather than stable gain, so the next route should stop tuning hint density and move to a held-out or route-decision check.
+Version `v568.0.0` turns the v567 first-token density comparison into a route decision: stop first-token density tuning, keep `v562-loss-balanced` as the simplest best baseline, and replay held-out equals-surface prompts before adding corpus variants.
+
+## Latest v568 checkpoint
+
+- Added `model_capability_required_term_pair_first_token_route_decision`.
+- Added a CLI that accepts a comparison JSON or output directory and writes JSON/CSV/text/Markdown/HTML route decision artifacts.
+- Selected `v562-loss-balanced` because it ties v564 at `1/3` pair-full without first-token density complexity.
+- Rejected v564 and v566 as first-token density routes without stable gain.
+- Kept the model-quality claim scoped to `route_decision_only`; this is a planning artifact, not a new model capability claim.
+- Archived v568 evidence in `e/568` and added the code explanation in `代码讲解记录_模型能力阶段/582-v568-required-term-pair-first-token-route-decision.md`.
 
 ## Latest v567 checkpoint
 

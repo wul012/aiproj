@@ -1,0 +1,48 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT first-token route decision" [level=1] [ref=e4]
+    - paragraph [ref=e5]: First-token density variants do not improve stable pair-full coverage over the simpler baseline.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: stop_first_token_density_and_replay_best_baseline
+    - generic [ref=e13]:
+      - generic [ref=e14]: Source reports
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Density routes
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Stable routes
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Selected
+      - strong [ref=e24]: v562-loss-balanced
+  - generic [ref=e25]:
+    - heading "Selected Route" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Label
+      - definition [ref=e29]: v562-loss-balanced
+      - term [ref=e30]: Corpus mode
+      - definition [ref=e31]: equals_surface_no_pair_id_loss_balanced_repair
+      - term [ref=e32]: Pair-full seeds
+      - definition [ref=e33]: 1/3
+      - term [ref=e34]: Rationale
+      - definition [ref=e35]: highest pair-full seed count with the simplest non-first-token-density objective
+  - generic [ref=e36]:
+    - heading "Rejected Routes" [level=2] [ref=e37]
+    - table [ref=e39]:
+      - rowgroup [ref=e40]:
+        - row "Label Corpus mode Pair-full seeds Reasons" [ref=e41]
+      - rowgroup [ref=e46]:
+        - row "v564-full-first-token equals_surface_no_pair_id_loss_balanced_first_token_repair 1/3 first_token_density_no_stable_gain,not_stable_across_seeds" [ref=e47]
+        - row "v566-light-first-token equals_surface_no_pair_id_loss_balanced_light_first_token_repair 0/3 first_token_density_no_stable_gain,no_pair_full_seed,not_stable_across_seeds" [ref=e52]
+  - generic [ref=e57]:
+    - heading "Next Action" [level=2] [ref=e58]
+    - paragraph [ref=e59]: replay held-out equals-surface prompts for v562-loss-balanced before adding more corpus variants
+  - generic [ref=e60]:
+    - heading "Source Comparison" [level=2] [ref=e61]
+    - paragraph [ref=e62]: e\567\解释\model-capability-required-term-pair-no-pair-id-first-token-density-comparison\model_capability_required_term_pair_equals_surface_repair_comparison.json

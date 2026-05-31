@@ -1,0 +1,4 @@
+source_label,corpus_mode,pair_full_seed_count,seed_count,selected,reasons
+v562-loss-balanced,equals_surface_no_pair_id_loss_balanced_repair,1,3,True,highest pair-full seed count with the simplest non-first-token-density objective
+v564-full-first-token,equals_surface_no_pair_id_loss_balanced_first_token_repair,1,3,False,"[""first_token_density_no_stable_gain"", ""not_stable_across_seeds""]"
+v566-light-first-token,equals_surface_no_pair_id_loss_balanced_light_first_token_repair,0,3,False,"[""first_token_density_no_stable_gain"", ""no_pair_full_seed"", ""not_stable_across_seeds""]"
