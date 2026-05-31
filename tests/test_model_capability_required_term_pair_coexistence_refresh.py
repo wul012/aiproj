@@ -152,6 +152,37 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertIn("do not trade fixed for loss; keep both branches.", corpus)
         self.assertNotIn("fixed:fixed", corpus)
 
+    def test_equals_surface_no_pair_id_repair_removes_numeric_pair_id_competition(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_repair",
+        )
+
+        lines = corpus.splitlines()
+
+        self.assertEqual(lines.count("record fixed=fixed loss=loss"), 2)
+        self.assertEqual(lines.count("record loss=loss fixed=fixed"), 2)
+        self.assertIn("fixed=fixed|loss=loss", corpus)
+        self.assertIn("no pair id appears after equals.", corpus)
+        self.assertNotIn("pair=01", corpus)
+        self.assertNotIn("fixed:fixed", corpus)
+
+    def test_equals_surface_no_pair_id_repair_replays_equals_prompts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            report = build_model_capability_required_term_pair_coexistence_refresh(
+                out_dir=Path(tmp) / "refresh",
+                corpus_mode="equals_surface_no_pair_id_repair",
+                train_func=fake_train,
+                generate_func=fake_generate_pair_full,
+            )
+            case_rows = report["replay_report"]["case_rows"]
+            prompts = {row["prompt"] for row in case_rows}
+
+            self.assertIn("fixed=", prompts)
+            self.assertIn("loss=", prompts)
+            self.assertNotIn("fixed:", prompts)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

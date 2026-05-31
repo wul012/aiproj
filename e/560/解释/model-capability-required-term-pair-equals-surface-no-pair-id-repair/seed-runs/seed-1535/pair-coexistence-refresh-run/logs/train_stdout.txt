@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=99817 vocab_size=34
+parameters=53,312
+data_source=data:e\560\解释\model-capability-required-term-pair-equals-surface-no-pair-id-repair\seed-runs\seed-1535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9527 val_loss=3.1255
+step=  350 train_loss=1.1865 val_loss=2.4827
+step=  700 train_loss=0.8636 val_loss=1.5073
+step= 1050 train_loss=1.0780 val_loss=3.3455
+step= 1400 train_loss=1.0777 val_loss=2.2500
+saved=e\560\解释\model-capability-required-term-pair-equals-surface-no-pair-id-repair\seed-runs\seed-1535\pair-coexistence-refresh-run
+history=e\560\解释\model-capability-required-term-pair-equals-surface-no-pair-id-repair\seed-runs\seed-1535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\560\解释\model-capability-required-term-pair-equals-surface-no-pair-id-repair\seed-runs\seed-1535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\560\解释\model-capability-required-term-pair-equals-surface-no-pair-id-repair\seed-runs\seed-1535\pair-coexistence-refresh-run\sample.txt

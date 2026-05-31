@@ -365,6 +365,10 @@ e/558/解释/说明.md
 e/559/图片
 e/559/解释/说明.md
  -> v559 required-term pair equals-surface tied wider embedding 的运行截图和解释
+
+e/560/图片
+e/560/解释/说明.md
+ -> v560 required-term pair equals-surface no-pair-id repair 的运行截图和解释
 ```
 
 写入规则：

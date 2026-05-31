@@ -1,0 +1,3742 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+fixed=next fixed
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+fixed= should continue fixed; loss= should continue loss.
+the paired record keeps both branches without numeric id tokens.
+do not trade fixed for loss; keep both branches.
+fixed=fixed|loss=loss

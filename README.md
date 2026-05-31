@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v559.0.0` runs a wider-embedding real training check for the v556 tied equals-surface repair; `n_embd=96` still produces `0/1` pair-full and loses both `fixed=` and `loss=`, so the next repair should focus on objective/corpus design rather than simple width.
+Version `v560.0.0` adds and tests an equals-surface no-pair-id corpus repair; removing the `pair=01` equals competitor restores the `fixed=` branch but still misses `loss=`, so the remaining failure is narrower and points to loss-branch objective balance.
+
+## Latest v560 checkpoint
+
+- Added `equals_surface_no_pair_id_repair`, a paired fixed/loss corpus mode that avoids numeric `pair=01` tokens after equals.
+- Kept replay prompts on `fixed=` and `loss=` while preserving the existing refresh runner and artifact pipeline.
+- Added tests proving the new corpus contains paired branch records, removes `pair=01`, and replays equals prompts.
+- Ran real seed `1535` training with the v556 budget and `n_embd=64`.
+- Confirmed `pair_full_seed_count=0/1`; `fixed=` now hits, but `loss=` still misses in both replay profiles.
+- Archived v560 evidence in `e/560` and added the code explanation in `代码讲解记录_模型能力阶段/574-v560-required-term-pair-equals-surface-no-pair-id-repair.md`.
 
 ## Latest v559 checkpoint
 
