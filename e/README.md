@@ -413,6 +413,10 @@ e/570/解释/说明.md
 e/571/图片
 e/571/解释/说明.md
  -> v571 required-term pair route fresh seed 3535 的运行截图和解释
+
+e/572/图片
+e/572/解释/说明.md
+ -> v572 required-term pair route fresh seed 3535 missed diagnostic 的运行截图和解释
 ```
 
 写入规则：

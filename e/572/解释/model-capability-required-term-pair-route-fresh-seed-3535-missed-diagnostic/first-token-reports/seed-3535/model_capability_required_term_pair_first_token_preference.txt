@@ -1,0 +1,10 @@
+status=pass
+decision=pair_first_token_expected_terms_not_top_ranked
+failed_count=0
+term_count=2
+expected_top_count=1
+whitespace_prefix_top_count=0
+answer_prefix_top_count=0
+max_expected_rank=3
+model_quality_claim=not_claimed
+next_action=inspect top-token alternatives before changing corpus

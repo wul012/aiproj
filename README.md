@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v571.0.0` reruns the selected `v562-loss-balanced` objective on fresh seed `3535`; the run trains cleanly but stays `0/1` pair-full, proving the v570 `7/7` result is prompt-transfer evidence for seed `1535`, not fresh-seed stability.
+Version `v572.0.0` diagnoses the v571 fresh-seed miss; seed `3535` fails because `loss=` still ranks a fixed-like first token above the expected loss token, so the next fix should target first-token preference rather than more held-out prompts.
+
+## Latest v572 checkpoint
+
+- Reused the existing colon-immediate missed-seed diagnostic on v571.
+- Confirmed `missed_seed_count=1` and `missed_first_token_gap_count=1`.
+- Classified seed `3535` as `fixed_expected_rank=1` but `loss_expected_rank=3`.
+- Recorded that `loss_top_token=f`, meaning the loss prompt is pulled back toward the fixed branch.
+- Preserved the v571 boundary: fresh seed stability is not solved.
+- Archived v572 evidence in `e/572` and added the code explanation in `代码讲解记录_模型能力阶段/586-v572-required-term-pair-route-fresh-seed-3535-missed-diagnostic.md`.
 
 ## Latest v571 checkpoint
 

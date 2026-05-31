@@ -308,6 +308,9 @@
 585-v571-required-term-pair-route-fresh-seed-3535.md
  -> v571 code explanation: rerun the selected route on fresh seed 3535 and preserve the negative stability result.
 
+586-v572-required-term-pair-route-fresh-seed-3535-missed-diagnostic.md
+ -> v572 code explanation: diagnose fresh seed 3535 as a loss-branch first-token preference gap.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
