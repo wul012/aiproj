@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=82657 vocab_size=32
+parameters=53,184
+data_source=data:e\602\解释\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.0967 val_loss=3.1607
+step=  450 train_loss=1.0996 val_loss=2.0951
+step=  900 train_loss=1.1371 val_loss=1.8123
+step= 1350 train_loss=1.3058 val_loss=1.5491
+step= 1800 train_loss=1.1325 val_loss=2.0088
+saved=e\602\解释\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\pair-coexistence-refresh-run
+history=e\602\解释\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\602\解释\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\602\解释\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\pair-coexistence-refresh-run\sample.txt

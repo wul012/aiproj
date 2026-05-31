@@ -533,6 +533,10 @@ e/600/解释/说明.md
 e/601/图片
 e/601/解释/说明.md
  -> v601 required-term pair fixed-retention first-token seed 3535 的运行截图和解释
+
+e/602/图片
+e/602/解释/说明.md
+ -> v602 required-term pair fixed-retention prompt-guard seed 3535 的运行截图和解释
 ```
 
 写入规则：

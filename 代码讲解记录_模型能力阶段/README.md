@@ -398,6 +398,9 @@
 615-v601-required-term-pair-fixed-retention-first-token-seed-3535.md
  -> v601 code explanation: run real first-token fixed-retention seed 3535 and record fixed-only tradeoff.
 
+616-v602-required-term-pair-fixed-retention-prompt-guard-seed-3535.md
+ -> v602 code explanation: run real prompt-guard fixed-retention seed 3535 and record loss-only tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

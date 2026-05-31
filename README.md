@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v601.0.0` runs the fixed-retention first-token route and confirms a useful tradeoff: `fixed=` is recovered, but `loss=` is overwritten, so pair-full is still absent.
+Version `v602.0.0` runs the fixed-retention prompt-guard route and confirms it falls back to loss-only behavior, leaving pair-full absent.
+
+## Latest v602 checkpoint
+
+- Ran real tiny training with `equals_surface_no_pair_id_fixed_retention_prompt_guard_repair`.
+- Used seed `3535`, `max_iters=1800`, `n_embd=64`, CPU.
+- Confirmed training/checkpoint status: `pass`.
+- Confirmed `pair_full_observed=False`.
+- Observed prompt guard does not preserve v601 fixed recovery; route is loss-only.
+- Archived v602 evidence in `e/602` and added the code explanation in `代码讲解记录_模型能力阶段/616-v602-required-term-pair-fixed-retention-prompt-guard-seed-3535.md`.
 
 ## Latest v601 checkpoint
 
