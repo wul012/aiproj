@@ -1,0 +1,7142 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+record fixed=fixed loss=loss
+record loss=loss fixed=fixed
+fixed=fixed
+loss=loss
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+fixed=fixed loss=loss
+loss=loss fixed=fixed
+prompt fixed= target fixed
+prompt loss= target loss
+prompt loss= target loss
+first token fixed= f
+first token loss= l
+fixed=next fixed
+loss=next loss
+loss=next loss
+fixed= continues fixed while loss= continues loss
+loss= continues loss while fixed= continues fixed
+loss= should not continue fixed
+select fixed=fixed loss=loss
+select loss=loss fixed=fixed
+select loss=loss fixed=fixed
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss
+no pair id appears after equals.
+first token after fixed= should be f.
+first token after loss= should be l.
+loss branch keeps extra no-id balance.
+fixed= should continue fixed; loss= should continue loss.
+fixed=fixed|loss=loss

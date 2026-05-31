@@ -284,6 +284,9 @@
 577-v563-required-term-pair-no-pair-id-loss-balanced-missed-seed-diagnostic.md
  -> v563 code explanation: diagnose v562 missed seeds and locate the remaining gap at first-token preference.
 
+578-v564-required-term-pair-no-pair-id-loss-balanced-first-token-stability.md
+ -> v564 code explanation: add explicit first-token prefix rows and preserve the mixed three-seed result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

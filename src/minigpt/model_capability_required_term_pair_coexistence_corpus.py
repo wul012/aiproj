@@ -12,6 +12,7 @@ PAIR_COEXISTENCE_CORPUS_MODES = (
     "equals_surface_tied_repair",
     "equals_surface_no_pair_id_repair",
     "equals_surface_no_pair_id_loss_balanced_repair",
+    "equals_surface_no_pair_id_loss_balanced_first_token_repair",
 )
 
 
@@ -40,6 +41,12 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
         _extend_equals_surface_no_pair_id_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
     elif corpus_mode == "equals_surface_no_pair_id_loss_balanced_repair":
         _extend_equals_surface_no_pair_id_loss_balanced_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+    elif corpus_mode == "equals_surface_no_pair_id_loss_balanced_first_token_repair":
+        _extend_equals_surface_no_pair_id_loss_balanced_first_token_repair(
+            lines,
+            repeat=repeat,
+            bridge_repeat=bridge_repeat,
+        )
     else:
         raise ValueError(f"unknown corpus_mode: {corpus_mode}")
     return "\n".join(lines) + "\n"
@@ -52,6 +59,7 @@ def source_prompts(corpus_mode: str) -> tuple[str, str]:
         "equals_surface_tied_repair",
         "equals_surface_no_pair_id_repair",
         "equals_surface_no_pair_id_loss_balanced_repair",
+        "equals_surface_no_pair_id_loss_balanced_first_token_repair",
     ):
         return "fixed=", "loss="
     return "fixed:", "loss:"
@@ -366,6 +374,57 @@ def _extend_equals_surface_no_pair_id_loss_balanced_repair(
                 "fixed= should continue fixed; loss= should continue loss.",
                 "loss= should not drift into fixed.",
                 "the paired record keeps both branches without numeric id tokens.",
+                "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_equals_surface_no_pair_id_loss_balanced_first_token_repair(
+    lines: list[str],
+    *,
+    repeat: int,
+    bridge_repeat: int,
+) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "record fixed=fixed loss=loss",
+                "record loss=loss fixed=fixed",
+                "fixed=fixed",
+                "loss=loss",
+                "loss=loss",
+                "fixed=f",
+                "fixed=fi",
+                "fixed=fix",
+                "loss=l",
+                "loss=lo",
+                "loss=los",
+                "fixed=fixed loss=loss",
+                "loss=loss fixed=fixed",
+                "prompt fixed= target fixed",
+                "prompt loss= target loss",
+                "prompt loss= target loss",
+                "first token fixed= f",
+                "first token loss= l",
+                "fixed=next fixed",
+                "loss=next loss",
+                "loss=next loss",
+                "fixed= continues fixed while loss= continues loss",
+                "loss= continues loss while fixed= continues fixed",
+                "loss= should not continue fixed",
+                "select fixed=fixed loss=loss",
+                "select loss=loss fixed=fixed",
+                "select loss=loss fixed=fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "no pair id appears after equals.",
+                "first token after fixed= should be f.",
+                "first token after loss= should be l.",
+                "loss branch keeps extra no-id balance.",
+                "fixed= should continue fixed; loss= should continue loss.",
                 "fixed=fixed|loss=loss",
             ]
         )

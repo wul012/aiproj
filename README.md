@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v563.0.0` diagnoses the v562 missed seeds and shows the remaining instability is a first-token ranking gap: seeds `535` and `2535` do not put all expected first tokens on top, so the next repair should strengthen first-token preference before more continuation training.
+Version `v564.0.0` tests a no-pair-id loss-balanced first-token repair across three seeds; the run stays `1/3` pair-full, improving seed `535` to fixed-only but regressing seed `2535` to all-miss, so prefix rows alone are not a stable repair.
+
+## Latest v564 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_balanced_first_token_repair`, combining v561 loss balance with explicit `fixed=f/fi/fix` and `loss=l/lo/los` rows.
+- Added tests proving prefix targets exist, loss weighting remains higher than fixed, and `pair=01` is still absent.
+- Kept the corpus module at `407` lines after the change, below the repo's large-file split threshold.
+- Ran real seeds `535`, `1535`, and `2535` with the same training budget and decode settings as v562.
+- Confirmed `pair_full_seed_count=1/3`; seed `535` moved from all-miss to fixed-only, while seed `2535` regressed from loss-only to all-miss.
+- Archived v564 evidence in `e/564` and added the code explanation in `代码讲解记录_模型能力阶段/578-v564-required-term-pair-no-pair-id-loss-balanced-first-token-stability.md`.
 
 ## Latest v563 checkpoint
 

@@ -196,6 +196,23 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertNotIn("pair=01", corpus)
         self.assertNotIn("fixed:fixed", corpus)
 
+    def test_equals_surface_no_pair_id_loss_balanced_first_token_repair_adds_prefix_targets(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_balanced_first_token_repair",
+        )
+
+        self.assertIn("fixed=f", corpus)
+        self.assertIn("fixed=fi", corpus)
+        self.assertIn("loss=l", corpus)
+        self.assertIn("loss=lo", corpus)
+        self.assertGreater(corpus.count("loss=loss"), corpus.count("fixed=fixed"))
+        self.assertIn("first token after fixed= should be f.", corpus)
+        self.assertIn("first token after loss= should be l.", corpus)
+        self.assertNotIn("pair=01", corpus)
+        self.assertNotIn("fixed:fixed", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

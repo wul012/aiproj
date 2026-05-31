@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+coexistence-refresh,default,fixed,fixed=,535,True,True,0, loked=fixed
+coexistence-refresh,suppress_newline_tokens,fixed,fixed=,535,True,True,1, loked=fixed
+coexistence-refresh,default,loss,loss=,536,False,False,0,los= fixed=i
+coexistence-refresh,suppress_newline_tokens,loss,loss=,536,False,False,1,los= fixed l
