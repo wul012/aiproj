@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v562.0.0` repeats the v561 loss-balanced no-pair-id repair across seeds `535,1535,2535`; only seed `1535` remains pair-full, so the new objective is a targeted single-seed repair rather than a stable multi-seed baseline.
+Version `v563.0.0` diagnoses the v562 missed seeds and shows the remaining instability is a first-token ranking gap: seeds `535` and `2535` do not put all expected first tokens on top, so the next repair should strengthen first-token preference before more continuation training.
+
+## Latest v563 checkpoint
+
+- Reused the existing colon-immediate missed-seed diagnostic against the v562 stability report.
+- Scored first-token rankings for seeds `535`, `1535`, and `2535` without retraining.
+- Confirmed `missed_seed_count=2`, `missed_first_token_gap_count=2`, and `missed_expected_top_count=0`.
+- Classified seed `535` as no expected first tokens top-ranked and seed `2535` as fixed first-token rank gap.
+- Preserved v561/v562 scope: the no-pair-id loss-balanced objective helps seed `1535`, but missed seeds need first-token preference work.
+- Archived v563 evidence in `e/563` and added the code explanation in `代码讲解记录_模型能力阶段/577-v563-required-term-pair-no-pair-id-loss-balanced-missed-seed-diagnostic.md`.
 
 ## Latest v562 checkpoint
 

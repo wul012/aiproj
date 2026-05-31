@@ -1,0 +1,4 @@
+seed,status,pair_full_observed,first_token_decision,expected_top_count,term_count,expected_all_top,max_expected_rank,fixed_expected_rank,loss_expected_rank,fixed_top_token,loss_top_token,observed_continuation_hit_count
+535,pass,False,pair_first_token_expected_terms_not_top_ranked,0,2,False,4,2,4,l,o,0
+1535,pass,True,pair_first_token_whitespace_prefix_drift_confirmed,1,2,False,3,1,3,f, ,2
+2535,pass,False,pair_first_token_expected_terms_not_top_ranked,1,2,False,2,2,1,l,l,1

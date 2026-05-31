@@ -377,6 +377,10 @@ e/561/解释/说明.md
 e/562/图片
 e/562/解释/说明.md
  -> v562 required-term pair equals-surface no-pair-id loss-balanced stability 的运行截图和解释
+
+e/563/图片
+e/563/解释/说明.md
+ -> v563 required-term pair no-pair-id loss-balanced missed-seed diagnostic 的运行截图和解释
 ```
 
 写入规则：
