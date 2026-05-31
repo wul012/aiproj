@@ -1,0 +1,10 @@
+spec_id,seed,selected_config_id,status,fixed_prompt,loss_prompt,replay_pair_full,default_pair_full_variant_count,suppression_pair_full_variant_count,top_k,temperature
+colon-spaced,535,v544-topk2-t080,pass,fixed: ,loss: ,True,1,1,2,0.8
+equals,535,v544-topk2-t080,pass,fixed=,loss=,True,1,1,2,0.8
+arrow,535,v544-topk2-t080,pass,fixed -> ,loss -> ,True,1,1,2,0.8
+colon-spaced,1535,v546-loss-calibrated-topk2-t080,pass,fixed: ,loss: ,True,0,1,2,0.8
+equals,1535,v546-loss-calibrated-topk2-t080,pass,fixed=,loss=,False,0,0,2,0.8
+arrow,1535,v546-loss-calibrated-topk2-t080,pass,fixed -> ,loss -> ,True,1,1,2,0.8
+colon-spaced,2535,v544-topk2-t080,pass,fixed: ,loss: ,True,1,1,2,0.8
+equals,2535,v544-topk2-t080,pass,fixed=,loss=,True,1,0,2,0.8
+arrow,2535,v544-topk2-t080,pass,fixed -> ,loss -> ,True,1,1,2,0.8

@@ -325,6 +325,10 @@ e/548/解释/说明.md
 e/549/图片
 e/549/解释/说明.md
  -> v549 required-term pair seed config replay 的运行截图和解释
+
+e/550/图片
+e/550/解释/说明.md
+ -> v550 required-term pair seed config held-out replay 的运行截图和解释
 ```
 
 写入规则：

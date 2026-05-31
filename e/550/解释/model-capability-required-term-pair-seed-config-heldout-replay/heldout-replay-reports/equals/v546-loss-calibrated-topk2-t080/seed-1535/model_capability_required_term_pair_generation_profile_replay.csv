@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+heldout-equals-seed-1535,default,fixed,fixed=,1535,False,False,0,losss\nlossss
+heldout-equals-seed-1535,suppress_newline_tokens,fixed,fixed=,1535,False,False,1,los:lompromp
+heldout-equals-seed-1535,default,loss,loss=,1536,True,True,0,fixel-lossss
+heldout-equals-seed-1535,suppress_newline_tokens,loss,loss=,1536,True,True,1,fixel-lossss

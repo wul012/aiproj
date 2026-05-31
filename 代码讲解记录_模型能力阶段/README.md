@@ -242,6 +242,9 @@
 563-v549-required-term-pair-seed-config-replay.md
  -> v549 code explanation: reconnect selected policy to source checkpoints and replay each selected seed/config.
 
+564-v550-required-term-pair-seed-config-heldout-replay.md
+ -> v550 code explanation: test selected configs against held-out prompt surfaces and isolate the equals/1535 gap.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

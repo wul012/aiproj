@@ -4,9 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v549.0.0` reconnects the v548 per-seed config-selection policy to the source checkpoints and replays each selected seed/config, reaching replay pair-full `3/3`.
+Version `v550.0.0` tests the selected config policy on held-out prompt surfaces and finds `8/9` pair-full transfer, with the remaining gap isolated to seed `1535` on the equals prompt.
+
+## Latest v550 checkpoint
+
+- Added `model_capability_required_term_pair_seed_config_heldout_replay`, a held-out prompt replay layer over the v548 selected policy.
+- Tested `colon-spaced`, `equals`, and `arrow` prompt surfaces across selected seeds `535`, `1535`, and `2535`.
+- Confirmed `heldout_pair_full_count=8/9` and `heldout_pair_full_rate=0.8889`.
+- Isolated the only miss to `equals + seed 1535 + v546-loss-calibrated-topk2-t080`.
+- Archived v550 evidence in `e/550` and added the code explanation in `代码讲解记录_模型能力阶段/564-v550-required-term-pair-seed-config-heldout-replay.md`.
 
 ## Latest v549 checkpoint
+
+Version `v549.0.0` reconnects the v548 per-seed config-selection policy to the source checkpoints and replays each selected seed/config, reaching replay pair-full `3/3`.
+
 
 - Added `model_capability_required_term_pair_seed_config_replay`, a replay check for the v548 selected policy.
 - Reconnected selected configs to v544/v546 source stability reports and their embedded checkpoint paths.

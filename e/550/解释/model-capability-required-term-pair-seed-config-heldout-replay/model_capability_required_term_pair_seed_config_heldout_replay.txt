@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_seed_config_heldout_replay_partial
+failed_count=0
+row_count=9
+heldout_pair_full_count=8
+heldout_pair_full_rate=0.8889
+heldout_all_pair_full=False
+model_quality_claim=targeted_seed_config_heldout_partial
+next_action=inspect which prompt surfaces transfer before adding more training variants

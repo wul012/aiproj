@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+heldout-arrow-seed-2535,default,fixed,fixed -> ,2535,True,True,0,fixed -�fixed\nprged:
+heldout-arrow-seed-2535,suppress_newline_tokens,fixed,fixed -> ,2535,True,True,1,fixed -�fixed:fin-lo
+heldout-arrow-seed-2535,default,loss,loss -> ,2536,True,True,0,loss -�prgedrged\nso
+heldout-arrow-seed-2535,suppress_newline_tokens,loss,loss -> ,2536,True,True,1,loss -�prgedrged:fi

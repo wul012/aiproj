@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+heldout-colon-spaced-seed-2535,default,fixed,fixed: ,2535,True,True,0,loss:fixed:l
+heldout-colon-spaced-seed-2535,suppress_newline_tokens,fixed,fixed: ,2535,True,True,1,loss:fixed:l
+heldout-colon-spaced-seed-2535,default,loss,loss: ,2536,True,True,0,losssss:fixe
+heldout-colon-spaced-seed-2535,suppress_newline_tokens,loss,loss: ,2536,True,True,1,losssss:fixe

@@ -1,0 +1,10 @@
+status=pass
+decision=generation_profile_no_pair_coexistence_gain
+failed_count=0
+variant_count=1
+term_count=2
+default_pair_full_variant_count=1
+suppression_pair_full_variant_count=0
+suppression_hit_delta=-1
+model_quality_claim=not_claimed
+next_action=Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.
