@@ -389,6 +389,9 @@
 612-v598-required-term-pair-loss-branch-batch-closeout.md
  -> v598 code explanation: close v589-v598 loss-branch batch and route toward fixed-retention objective.
 
+613-v599-required-term-pair-fixed-retention-objective-corpus.md
+ -> v599 code explanation: add fixed-retention corpus modes for the next real seed route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

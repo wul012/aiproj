@@ -1,0 +1,9 @@
+status=pass
+decision=fixed_retention_objective_corpus_modes_ready
+version=v599.0.0
+new_mode_count=3
+pair_id_removed=True
+source_prompts=fixed= / loss=
+fixed_retention_bias=True
+loss_branch_kept_visible=True
+next_action=run real seed 3535 training for each fixed-retention objective mode

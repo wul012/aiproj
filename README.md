@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v598.0.0` closes the v589-v598 loss-branch batch: nine source reports now agree that loss-only routes do not reach pair-full, all missed seeds show a first-token gap, and the next objective should be fixed-retention training.
+Version `v599.0.0` starts the fixed-retention objective route with three no-pair-id corpus modes that target `fixed=` first-token retention while keeping `loss=loss` visible.
+
+## Latest v599 checkpoint
+
+- Added `model_capability_required_term_pair_fixed_retention_objective_corpus`.
+- Registered three fixed-retention corpus modes in the coexistence refresh corpus builder.
+- Kept `fixed=` / `loss=` replay prompts and removed pair-id competition.
+- Added tests for registration, source prompts, fixed-first-token rows, prompt guards, and loss-branch visibility.
+- Ran targeted tests: `27 passed`.
+- Archived v599 evidence in `e/599` and added the code explanation in `代码讲解记录_模型能力阶段/613-v599-required-term-pair-fixed-retention-objective-corpus.md`.
 
 ## Latest v598 checkpoint
 

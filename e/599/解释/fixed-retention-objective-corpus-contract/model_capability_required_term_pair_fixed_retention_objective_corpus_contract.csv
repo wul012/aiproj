@@ -1,0 +1,4 @@
+mode,role,source_prompts,pair_id_removed,fixed_retention_bias,loss_branch_kept_visible
+equals_surface_no_pair_id_fixed_retention_balanced_repair,balanced-fixed-retention,fixed= / loss=,True,True,True
+equals_surface_no_pair_id_fixed_retention_first_token_repair,fixed-first-token-retention,fixed= / loss=,True,True,True
+equals_surface_no_pair_id_fixed_retention_prompt_guard_repair,prompt-surface-guard,fixed= / loss=,True,True,True

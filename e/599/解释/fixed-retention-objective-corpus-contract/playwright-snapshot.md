@@ -1,0 +1,46 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT fixed-retention corpus contract" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Three fixed-retention objective corpus modes are registered without pair ids and keep the loss branch visible.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: fixed_retention_objective_corpus_modes_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Modes
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Source prompts
+      - strong [ref=e18]: fixed= / loss=
+  - generic [ref=e19]:
+    - heading "Modes" [level=2] [ref=e20]
+    - table [ref=e22]:
+      - rowgroup [ref=e23]:
+        - row "Mode Role Pair id removed Fixed retention bias Loss visible" [ref=e24]:
+          - columnheader "Mode" [ref=e25]
+          - columnheader "Role" [ref=e26]
+          - columnheader "Pair id removed" [ref=e27]
+          - columnheader "Fixed retention bias" [ref=e28]
+          - columnheader "Loss visible" [ref=e29]
+      - rowgroup [ref=e30]:
+        - row "equals_surface_no_pair_id_fixed_retention_balanced_repair balanced fixed-retention True True True" [ref=e31]:
+          - cell "equals_surface_no_pair_id_fixed_retention_balanced_repair" [ref=e32]
+          - cell "balanced fixed-retention" [ref=e33]
+          - cell "True" [ref=e34]
+          - cell "True" [ref=e35]
+          - cell "True" [ref=e36]
+        - row "equals_surface_no_pair_id_fixed_retention_first_token_repair fixed first-token retention True True True" [ref=e37]:
+          - cell "equals_surface_no_pair_id_fixed_retention_first_token_repair" [ref=e38]
+          - cell "fixed first-token retention" [ref=e39]
+          - cell "True" [ref=e40]
+          - cell "True" [ref=e41]
+          - cell "True" [ref=e42]
+        - row "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair prompt surface guard True True True" [ref=e43]:
+          - cell "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair" [ref=e44]
+          - cell "prompt surface guard" [ref=e45]
+          - cell "True" [ref=e46]
+          - cell "True" [ref=e47]
+          - cell "True" [ref=e48]
