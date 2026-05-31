@@ -353,6 +353,9 @@
 600-v586-required-term-pair-target-anchor-route-decision.md
  -> v586 code explanation: keep target-anchor as residual evidence without promotion.
 
+601-v587-required-term-pair-objective-closeout.md
+ -> v587 code explanation: close current objectives and require a loss-branch objective next.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

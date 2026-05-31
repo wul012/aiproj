@@ -1,0 +1,31 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT objective closeout" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Branch-binding was stopped and target-anchor remains residual-only; loss is still missing.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: close_current_objectives_and_design_loss_branch_objective
+    - generic [ref=e13]:
+      - generic [ref=e14]: Branch stopped
+      - strong [ref=e15]: "True"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Target residual
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Loss required
+      - strong [ref=e21]: "True"
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: design a loss-branch objective before the next training run
+  - generic [ref=e25]:
+    - heading "Evidence Rows" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]:
+        - row "Label Status Decision Key result" [ref=e30]
+      - rowgroup [ref=e35]:
+        - row "v583-branch-binding-route-decision pass stop_branch_binding_v1_and_keep_residual_baseline branch_visible=0" [ref=e36]
+        - row "v586-target-anchor-route-decision pass keep_target_anchor_as_residual_not_promoted residual=v571-loss-balanced,v584-target-anchor" [ref=e41]

@@ -1,0 +1,8 @@
+status=pass
+decision=close_current_objectives_and_design_loss_branch_objective
+failed_count=0
+branch_binding_stopped=True
+target_anchor_residual_only=True
+loss_branch_required=True
+model_quality_claim=objective_closeout_only
+next_action=design a loss-branch objective before the next training run

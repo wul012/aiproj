@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair objective closeout",
+  "generated_at": "2026-05-31T12:48:11Z",
+  "status": "pass",
+  "decision": "close_current_objectives_and_design_loss_branch_objective",
+  "failed_count": 0,
+  "issues": [],
+  "summary": {
+    "branch_binding_decision": "stop_branch_binding_v1_and_keep_residual_baseline",
+    "target_anchor_decision": "keep_target_anchor_as_residual_not_promoted",
+    "branch_binding_stopped": true,
+    "target_anchor_residual_only": true,
+    "residual_signal_routes": [
+      "v571-loss-balanced",
+      "v584-target-anchor"
+    ],
+    "residual_signal_route_count": 2,
+    "loss_branch_required": true,
+    "branch_binding_visible_hit_route_count": 0,
+    "target_anchor_loss_hit_route_count": 0
+  },
+  "evidence_rows": [
+    {
+      "label": "v583-branch-binding-route-decision",
+      "path": "e\\583\\解释\\model-capability-required-term-pair-branch-binding-route-decision\\model_capability_required_term_pair_branch_binding_route_decision.json",
+      "status": "pass",
+      "decision": "stop_branch_binding_v1_and_keep_residual_baseline",
+      "key_result": "branch_visible=0"
+    },
+    {
+      "label": "v586-target-anchor-route-decision",
+      "path": "e\\586\\解释\\model-capability-required-term-pair-target-anchor-route-decision\\model_capability_required_term_pair_target_anchor_route_decision.json",
+      "status": "pass",
+      "decision": "keep_target_anchor_as_residual_not_promoted",
+      "key_result": "residual=v571-loss-balanced,v584-target-anchor"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "objective_closeout_only",
+    "reason": "Branch-binding was stopped and target-anchor remains residual-only; loss is still missing.",
+    "next_action": "design a loss-branch objective before the next training run"
+  }
+}

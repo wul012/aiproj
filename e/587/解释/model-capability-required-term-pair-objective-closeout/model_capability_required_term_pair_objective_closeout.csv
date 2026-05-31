@@ -1,0 +1,3 @@
+label,status,decision,key_result,path
+v583-branch-binding-route-decision,pass,stop_branch_binding_v1_and_keep_residual_baseline,branch_visible=0,e\583\解释\model-capability-required-term-pair-branch-binding-route-decision\model_capability_required_term_pair_branch_binding_route_decision.json
+v586-target-anchor-route-decision,pass,keep_target_anchor_as_residual_not_promoted,"residual=v571-loss-balanced,v584-target-anchor",e\586\解释\model-capability-required-term-pair-target-anchor-route-decision\model_capability_required_term_pair_target_anchor_route_decision.json

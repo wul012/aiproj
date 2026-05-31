@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v586.0.0` turns the v585 target-anchor comparison into a route decision: keep v584 as residual evidence, do not promote it, and require a loss-branch objective before more training.
+Version `v587.0.0` closes the current objective batch: branch-binding is stopped, target-anchor is residual-only, and the next model-capability work must design a loss-branch objective before another training run.
+
+## Latest v587 checkpoint
+
+- Added `model_capability_required_term_pair_objective_closeout`.
+- Consumed v583 branch-binding decision and v586 target-anchor decision.
+- Confirmed `branch_binding_stopped=True`.
+- Confirmed `target_anchor_residual_only=True`.
+- Confirmed `loss_branch_required=True`.
+- Archived v587 evidence in `e/587` and added the code explanation in `代码讲解记录_模型能力阶段/601-v587-required-term-pair-objective-closeout.md`.
 
 ## Latest v586 checkpoint
 

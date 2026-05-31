@@ -473,6 +473,10 @@ e/585/解释/说明.md
 e/586/图片
 e/586/解释/说明.md
  -> v586 required-term pair target anchor route decision 的运行截图和解释
+
+e/587/图片
+e/587/解释/说明.md
+ -> v587 required-term pair objective closeout 的运行截图和解释
 ```
 
 写入规则：
