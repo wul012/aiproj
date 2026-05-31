@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v541.0.0` runs a decode-boundary check over the v540 checkpoints and finds that wider `top_k` can recover one fixed/loss pair seed without retraining.
+Version `v542.0.0` promotes the v541 `top_k=2` decode finding into the full colon-immediate stability runner and confirms a controlled `1/3` recovery.
+
+## Latest v542 checkpoint
+
+- Re-ran the high-budget `colon_immediate` stability setup with the same seeds `535, 1535, 2535`, keeping v540 training settings but changing replay to `top_k=2`.
+- Confirmed the v541 decode-boundary finding in the formal stability report: `pair_full_seed_count=1/3`, with seed `535` recovered.
+- Re-ran the missed-seed diagnostic; seeds `1535` and `2535` still show first-token gaps.
+- Interpreted `top_k=2` as useful decode compensation, not a final stability fix.
+- Archived the v542 stability and diagnostic evidence in `e/542` and added the code explanation in `代码讲解记录_模型能力阶段/556-v542-required-term-pair-topk2-stability.md`.
 
 ## Latest v541 checkpoint
 

@@ -1,0 +1,35 @@
+- main [ref=e2] [box=79,0,1120,652]:
+  - generic [ref=e3] [box=107,28,1064,77]:
+    - heading "MiniGPT colon-immediate stability" [level=1] [ref=e4] [box=107,28,1064,36]
+    - paragraph [ref=e5] [box=107,80,1064,25]: Some but not all colon-immediate seeds produced pair-full coverage.
+  - generic [ref=e6] [box=107,123,1064,136]:
+    - generic [ref=e7] [box=107,123,169,136]:
+      - generic [ref=e8] [box=121,137,140,14]: Status
+      - strong [ref=e9] [box=121,157,140,22]: pass
+    - generic [ref=e10] [box=286,123,169,136]:
+      - generic [ref=e11] [box=300,137,140,14]: Decision
+      - strong [ref=e12] [box=300,157,140,86]: required_term_pair_colon_immediate_partial_stability
+    - generic [ref=e13] [box=465,123,169,136]:
+      - generic [ref=e14] [box=479,137,140,14]: Seeds
+      - strong [ref=e15] [box=479,157,140,22]: "3"
+    - generic [ref=e16] [box=644,123,169,136]:
+      - generic [ref=e17] [box=658,137,140,14]: Pair-full seeds
+      - strong [ref=e18] [box=658,157,140,22]: "1"
+    - generic [ref=e19] [box=823,123,169,136]:
+      - generic [ref=e20] [box=837,137,140,14]: Pair-full rate
+      - strong [ref=e21] [box=837,157,140,22]: "0.3333"
+    - generic [ref=e22] [box=1002,123,169,136]:
+      - generic [ref=e23] [box=1016,137,140,14]: Stable
+      - strong [ref=e24] [box=1016,157,140,22]: "False"
+  - generic [ref=e25] [box=107,276,1064,111]:
+    - heading "Next Action" [level=2] [ref=e26] [box=123,293,1031,21]
+    - paragraph [ref=e27] [box=123,330,1031,25]: inspect missed seeds before increasing corpus or model size
+  - generic [ref=e28] [box=107,401,1064,209]:
+    - heading "Seeds" [level=2] [ref=e29] [box=123,418,1031,21]
+    - table [ref=e31] [box=123,451,1031,143]:
+      - rowgroup [ref=e32] [box=123,451,1031,35]:
+        - row "Seed Status Pair full Default full Suppression full Output" [ref=e33] [box=123,451,1031,35]
+      - rowgroup [ref=e40] [box=123,486,1031,108]:
+        - row "535 pass True 1 1 e\\542\\解释\\model-capability-required-term-pair-topk2-stability\\seed-runs\\seed-535" [ref=e41] [box=123,486,1031,36]
+        - row "1535 pass False 0 0 e\\542\\解释\\model-capability-required-term-pair-topk2-stability\\seed-runs\\seed-1535" [ref=e48] [box=123,522,1031,36]
+        - row "2535 pass False 0 0 e\\542\\解释\\model-capability-required-term-pair-topk2-stability\\seed-runs\\seed-2535" [ref=e55] [box=123,558,1031,36]

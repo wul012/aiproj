@@ -1,0 +1,33 @@
+{
+  "data": "e\\542\\解释\\model-capability-required-term-pair-topk2-stability\\seed-runs\\seed-1535\\required_term_pair_coexistence_refresh_corpus.txt",
+  "data_dir": null,
+  "prepared_data": null,
+  "out_dir": "e\\542\\解释\\model-capability-required-term-pair-topk2-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 16,
+  "block_size": 16,
+  "max_iters": 2200,
+  "eval_interval": 550,
+  "eval_iters": 2,
+  "learning_rate": 0.02,
+  "train_ratio": 0.9,
+  "n_layer": 1,
+  "n_head": 1,
+  "n_embd": 64,
+  "dropout": 0.1,
+  "seed": 1535,
+  "device": "cpu",
+  "sample_prompt": "fixed:",
+  "sample_tokens": 8,
+  "sample_temperature": 0.2,
+  "sample_top_k": 1,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "data",
+    "path": "e\\542\\解释\\model-capability-required-term-pair-topk2-stability\\seed-runs\\seed-1535\\required_term_pair_coexistence_refresh_corpus.txt"
+  }
+}

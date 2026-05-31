@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=73937 vocab_size=34
+parameters=53,312
+data_source=data:e\542\解释\model-capability-required-term-pair-topk2-stability\seed-runs\seed-535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1525 val_loss=3.0982
+step=  550 train_loss=1.0126 val_loss=1.9048
+step= 1100 train_loss=1.0582 val_loss=2.1423
+step= 1650 train_loss=0.9781 val_loss=1.8386
+step= 2200 train_loss=0.9806 val_loss=1.9245
+saved=e\542\解释\model-capability-required-term-pair-topk2-stability\seed-runs\seed-535\pair-coexistence-refresh-run
+history=e\542\解释\model-capability-required-term-pair-topk2-stability\seed-runs\seed-535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\542\解释\model-capability-required-term-pair-topk2-stability\seed-runs\seed-535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\542\解释\model-capability-required-term-pair-topk2-stability\seed-runs\seed-535\pair-coexistence-refresh-run\sample.txt
