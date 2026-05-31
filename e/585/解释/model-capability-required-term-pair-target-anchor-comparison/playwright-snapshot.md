@@ -1,0 +1,65 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT equals-surface repair comparison" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The compared reports do not yet show complementary fixed/loss evidence.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_equals_surface_repair_comparison_recorded
+    - generic [ref=e13]:
+      - generic [ref=e14]: Reports
+      - strong [ref=e15]: "4"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Term rows
+      - strong [ref=e18]: "16"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Branch competition
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Pair-full profiles
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: add one stronger targeted repair or reduce the comparison scope
+  - generic [ref=e28]:
+    - heading "Source Reports" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Label Status Corpus mode Pair-full seeds Source" [ref=e33]
+      - rowgroup [ref=e39]:
+        - row "v571-loss-balanced pass equals_surface_no_pair_id_loss_balanced_repair 0/1 e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e40]
+        - row "v579-branch-binding pass equals_surface_no_pair_id_branch_binding_repair 0/1 e\\579\\解释\\model-capability-required-term-pair-branch-binding-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e46]
+        - row "v581-branch-binding-no-space pass equals_surface_no_pair_id_branch_binding_no_space_repair 0/1 e\\581\\解释\\model-capability-required-term-pair-branch-binding-no-space-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e52]
+        - row "v584-target-anchor pass equals_surface_no_pair_id_target_anchor_repair 0/1 e\\584\\解释\\model-capability-required-term-pair-target-anchor-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e58]
+  - generic [ref=e64]:
+    - heading "Branch Rows" [level=2] [ref=e65]
+    - table [ref=e67]:
+      - rowgroup [ref=e68]:
+        - row "Seed Competition Fixed hit reports Loss hit reports Pair-full reports Action" [ref=e69]
+      - rowgroup [ref=e76]:
+        - row "3535 False v571-loss-balanced,v584-target-anchor collect another comparable equals-surface repair report before changing the objective" [ref=e77]
+  - generic [ref=e84]:
+    - heading "Term Evidence" [level=2] [ref=e85]
+    - table [ref=e87]:
+      - rowgroup [ref=e88]:
+        - row "Report Seed Profile Term Hit Prompt Preview" [ref=e89]
+      - rowgroup [ref=e97]:
+        - row "v571-loss-balanced 3535 default fixed True fixed= fixed= fixed" [ref=e98]
+        - row "v571-loss-balanced 3535 suppress_newline_tokens fixed True fixed= fixed los=fi" [ref=e106]
+        - row "v571-loss-balanced 3535 default loss False loss= fixed= fixe" [ref=e114]
+        - row "v571-loss-balanced 3535 suppress_newline_tokens loss False loss= fixed= fixe" [ref=e122]
+        - row "v579-branch-binding 3535 default fixed False fixed= losss\\nbind=" [ref=e130]
+        - row "v579-branch-binding 3535 suppress_newline_tokens fixed False fixed= lossss=dss=" [ref=e138]
+        - row "v579-branch-binding 3535 default loss False loss= los= fintin" [ref=e146]
+        - row "v579-branch-binding 3535 suppress_newline_tokens loss False loss= los= fintin" [ref=e154]
+        - row "v581-branch-binding-no-space 3535 default fixed False fixed= losssss=fixe" [ref=e162]
+        - row "v581-branch-binding-no-space 3535 suppress_newline_tokens fixed False fixed= losssss=fixe" [ref=e170]
+        - row "v581-branch-binding-no-space 3535 default loss False loss= los=fixedss=" [ref=e178]
+        - row "v581-branch-binding-no-space 3535 suppress_newline_tokens loss False loss= los=fixedss=" [ref=e186]
+        - row "v584-target-anchor 3535 default fixed True fixed= fixed\\nfixed=" [ref=e194]
+        - row "v584-target-anchor 3535 suppress_newline_tokens fixed True fixed= fixed=fixed=" [ref=e202]
+        - row "v584-target-anchor 3535 default loss False loss= fixed=fixed=" [ref=e210]
+        - row "v584-target-anchor 3535 suppress_newline_tokens loss False loss= fixed=fixed=" [ref=e218]

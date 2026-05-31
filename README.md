@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v584.0.0` tests a stronger target-anchor objective after stopping branch-binding v1/v2; seed `3535` still does not reach pair-full, but it recovers a partial `fixed` hit and becomes comparable with the v571 residual baseline.
+Version `v585.0.0` compares target-anchor against the earlier fresh-seed routes; v584 recovers the same partial `fixed` signal as v571, while v579/v581 remain regressions and no route reaches `loss` or pair-full.
+
+## Latest v585 checkpoint
+
+- Compared v571, v579, v581, and v584 in one equals-surface report.
+- Confirmed `compared_report_count=4`.
+- Confirmed `pair_full_profile_seed_count=0` and `union_hit_terms=fixed`.
+- Confirmed `fixed_hit_reports=[v571-loss-balanced, v584-target-anchor]`.
+- Preserved the result as comparison-only.
+- Archived v585 evidence in `e/585` and added the code explanation in `代码讲解记录_模型能力阶段/599-v585-required-term-pair-target-anchor-comparison.md`.
 
 ## Latest v584 checkpoint
 

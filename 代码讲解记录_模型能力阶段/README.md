@@ -347,6 +347,9 @@
 598-v584-required-term-pair-target-anchor-seed-3535.md
  -> v584 code explanation: add a target-anchor corpus mode and test seed 3535.
 
+599-v585-required-term-pair-target-anchor-comparison.md
+ -> v585 code explanation: compare target-anchor against v571/v579/v581 and keep it as residual-only.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_equals_surface_repair_comparison_recorded
+failed_count=0
+compared_report_count=4
+term_case_row_count=16
+branch_competition_seed_count=0
+pair_full_profile_seed_count=0
+union_hit_terms=fixed
+model_quality_claim=comparison_only
+next_action=add one stronger targeted repair or reduce the comparison scope
