@@ -368,6 +368,9 @@
 605-v591-required-term-pair-loss-branch-dual-anchor-seed-3535.md
  -> v591 code explanation: run real seed 3535 dual-anchor loss-branch training and confirm tradeoff remains.
 
+606-v592-required-term-pair-loss-branch-micro-span-seed-3535.md
+ -> v592 code explanation: run real seed 3535 micro-span loss-branch training and confirm tradeoff remains.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

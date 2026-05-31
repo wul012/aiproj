@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v591.0.0` runs the dual-anchor loss-branch objective on seed `3535`: training passes, `loss` is recovered again, but `fixed` still drops, so dual-anchor rows do not solve pair-full.
+Version `v592.0.0` runs the micro-span loss-branch objective on seed `3535`: training passes and `loss` is still recovered, but `fixed` drops again, confirming all three v590-v592 loss-branch objectives are tradeoff-only so far.
+
+## Latest v592 checkpoint
+
+- Ran real tiny training with `equals_surface_no_pair_id_loss_branch_micro_span_repair`.
+- Used seed `3535`, `max_iters=1800`, `n_embd=64`, CPU.
+- Confirmed training/checkpoint status: `pass`.
+- Confirmed `pair_full_observed=False`.
+- Confirmed replay hits `loss` and misses `fixed`; generation shows `los=loss` style span drift.
+- Archived v592 evidence in `e/592` and added the code explanation in `代码讲解记录_模型能力阶段/606-v592-required-term-pair-loss-branch-micro-span-seed-3535.md`.
+
+## Latest v591 checkpoint
 
 ## Latest v591 checkpoint
 

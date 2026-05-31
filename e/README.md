@@ -493,6 +493,10 @@ e/590/解释/说明.md
 e/591/图片
 e/591/解释/说明.md
  -> v591 required-term pair loss-branch dual-anchor seed 3535 的运行截图和解释
+
+e/592/图片
+e/592/解释/说明.md
+ -> v592 required-term pair loss-branch micro-span seed 3535 的运行截图和解释
 ```
 
 写入规则：

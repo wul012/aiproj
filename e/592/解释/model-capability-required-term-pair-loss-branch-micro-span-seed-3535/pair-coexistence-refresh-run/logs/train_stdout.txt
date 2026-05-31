@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=62237 vocab_size=32
+parameters=53,184
+data_source=data:e\592\解释\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9272 val_loss=3.1779
+step=  450 train_loss=1.0961 val_loss=3.2574
+step=  900 train_loss=0.9244 val_loss=3.4629
+step= 1350 train_loss=1.1745 val_loss=3.4490
+step= 1800 train_loss=0.9665 val_loss=3.0049
+saved=e\592\解释\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\pair-coexistence-refresh-run
+history=e\592\解释\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\592\解释\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\592\解释\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\pair-coexistence-refresh-run\sample.txt
