@@ -425,6 +425,10 @@ e/573/解释/说明.md
 e/574/图片
 e/574/解释/说明.md
  -> v574 required-term pair route fresh seed 3535 repair comparison 的运行截图和解释
+
+e/575/图片
+e/575/解释/说明.md
+ -> v575 required-term pair route fresh seed 3535 wider embedding 的运行截图和解释
 ```
 
 写入规则：

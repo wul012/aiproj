@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v574.0.0` compares v571 and v573 on fresh seed `3535`; the combined evidence still only sees the `fixed` term and no pair-full profile, confirming the existing full first-token repair is a regression route for this seed.
+Version `v575.0.0` tests whether fresh seed `3535` is simply capacity-limited by rerunning the selected loss-balanced route at `n_embd=96`; it remains `0/1` pair-full and drops partial hits to zero, so width alone is not the repair.
+
+## Latest v575 checkpoint
+
+- Reused `equals_surface_no_pair_id_loss_balanced_repair` on seed `3535`.
+- Increased `n_embd` from `64` to `96` while keeping corpus, decode, and training budget stable.
+- Confirmed `pair_full_seed_count=0/1` and `continuation_hit_count=0`.
+- Classified the result as capacity-negative for this fresh seed.
+- Preserved the next step as objective/branch-preference work, not width scaling.
+- Archived v575 evidence in `e/575` and added the code explanation in `代码讲解记录_模型能力阶段/589-v575-required-term-pair-route-fresh-seed-3535-wider-embd.md`.
 
 ## Latest v574 checkpoint
 
