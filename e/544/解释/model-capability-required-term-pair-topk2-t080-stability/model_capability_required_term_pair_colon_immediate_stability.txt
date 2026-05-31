@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_colon_immediate_partial_stability
+failed_count=0
+seed_count=3
+pair_full_seed_count=2
+pair_full_seed_rate=0.6667
+stable_pair_full=False
+model_quality_claim=targeted_pair_refresh_partial_signal
+next_action=inspect missed seeds before increasing corpus or model size

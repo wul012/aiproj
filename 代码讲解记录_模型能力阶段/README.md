@@ -224,6 +224,9 @@
 557-v543-required-term-pair-temperature-boundary-check.md
  -> v543 code explanation: parameterize decode specs and find the top-k2 temperature boundary that recovers two seeds.
 
+558-v544-required-term-pair-topk2-t080-stability.md
+ -> v544 code explanation: promote top-k2 temperature decoding into formal stability and reach two recovered seeds.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

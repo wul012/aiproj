@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v543.0.0` parameterizes decode-boundary specs and finds `top_k=2, temperature=0.8` can recover two of three fixed/loss pair seeds.
+Version `v544.0.0` promotes `top_k=2, temperature=0.8` into the full colon-immediate stability runner and reaches `2/3` pair-full seeds.
+
+## Latest v544 checkpoint
+
+- Re-ran the high-budget `colon_immediate` stability setup with `top_k=2` and `temperature=0.8`.
+- Confirmed the v543 temperature-boundary result in the formal stability runner: seeds `535` and `2535` reached pair-full, while seed `1535` still failed.
+- Re-ran the missed-seed diagnostic; only one seed remains missed, still classified as a first-token gap.
+- Interpreted the result as targeted partial model signal, not stable pair capability.
+- Archived the v544 stability and diagnostic evidence in `e/544` and added the code explanation in `代码讲解记录_模型能力阶段/558-v544-required-term-pair-topk2-t080-stability.md`.
 
 ## Latest v543 checkpoint
 

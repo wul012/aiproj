@@ -1,0 +1,35 @@
+- main [ref=e2] [box=51,0,1180,646]:
+  - generic [ref=e3] [box=79,28,1124,77]:
+    - heading "MiniGPT colon-immediate missed-seed diagnostic" [level=1] [ref=e4] [box=79,28,1124,36]
+    - paragraph [ref=e5] [box=79,80,1124,25]: At least one missed seed does not rank all expected first tokens on top.
+  - generic [ref=e6] [box=79,123,1124,136]:
+    - generic [ref=e7] [box=79,123,179,136]:
+      - generic [ref=e8] [box=93,137,150,14]: Status
+      - strong [ref=e9] [box=93,157,150,22]: pass
+    - generic [ref=e10] [box=268,123,179,136]:
+      - generic [ref=e11] [box=282,137,150,14]: Decision
+      - strong [ref=e12] [box=282,157,150,86]: required_term_pair_colon_immediate_first_token_gap
+    - generic [ref=e13] [box=457,123,179,136]:
+      - generic [ref=e14] [box=471,137,150,14]: Seeds
+      - strong [ref=e15] [box=471,157,150,22]: "3"
+    - generic [ref=e16] [box=646,123,179,136]:
+      - generic [ref=e17] [box=660,137,150,14]: Missed seeds
+      - strong [ref=e18] [box=660,157,150,22]: "1"
+    - generic [ref=e19] [box=835,123,179,136]:
+      - generic [ref=e20] [box=849,137,150,14]: Missed expected top
+      - strong [ref=e21] [box=849,157,150,22]: "0"
+    - generic [ref=e22] [box=1024,123,179,136]:
+      - generic [ref=e23] [box=1038,137,150,14]: First-token gaps
+      - strong [ref=e24] [box=1038,157,150,22]: "1"
+  - generic [ref=e25] [box=79,276,1124,111]:
+    - heading "Next Action" [level=2] [ref=e26] [box=95,293,1091,21]
+    - paragraph [ref=e27] [box=95,330,1091,25]: strengthen first-token preference before extending continuation training
+  - generic [ref=e28] [box=79,401,1124,202]:
+    - heading "Seeds" [level=2] [ref=e29] [box=95,418,1091,21]
+    - table [ref=e31] [box=95,451,1091,136]:
+      - rowgroup [ref=e32] [box=95,451,1091,35]:
+        - row "Seed Pair full First-token decision Expected top Fixed rank Loss rank Continuation hits" [ref=e33] [box=95,451,1091,35]
+      - rowgroup [ref=e41] [box=95,486,1091,101]:
+        - row "535 True pair_first_token_expected_terms_not_top_ranked 1/2 2 1 2" [ref=e42] [box=95,486,1091,34]
+        - row "1535 False pair_first_token_expected_terms_not_top_ranked 1/2 1 2 0" [ref=e50] [box=95,520,1091,34]
+        - row "2535 True pair_first_token_expected_terms_not_top_ranked 1/2 2 1 2" [ref=e58] [box=95,553,1091,34]
