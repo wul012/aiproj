@@ -287,6 +287,9 @@
 578-v564-required-term-pair-no-pair-id-loss-balanced-first-token-stability.md
  -> v564 code explanation: add explicit first-token prefix rows and preserve the mixed three-seed result.
 
+579-v565-required-term-pair-no-pair-id-first-token-migration-comparison.md
+ -> v565 code explanation: compare v562 and v564 to classify first-token rows as coverage migration rather than stable gain.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

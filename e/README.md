@@ -385,6 +385,10 @@ e/563/解释/说明.md
 e/564/图片
 e/564/解释/说明.md
  -> v564 required-term pair no-pair-id loss-balanced first-token stability 的运行截图和解释
+
+e/565/图片
+e/565/解释/说明.md
+ -> v565 required-term pair no-pair-id first-token migration comparison 的运行截图和解释
 ```
 
 写入规则：

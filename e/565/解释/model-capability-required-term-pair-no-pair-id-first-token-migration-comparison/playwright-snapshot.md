@@ -1,0 +1,287 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT equals-surface repair comparison" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one compared repair report produced a pair-full profile.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_equals_surface_pair_full_found
+    - generic [ref=e13]:
+      - generic [ref=e14]: Reports
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Term rows
+      - strong [ref=e18]: "24"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Branch competition
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Pair-full profiles
+      - strong [ref=e24]: "1"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: promote that repair candidate into held-out replay before changing the corpus again
+  - generic [ref=e28]:
+    - heading "Source Reports" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Label Status Corpus mode Pair-full seeds Source" [ref=e33]:
+          - columnheader "Label" [ref=e34]
+          - columnheader "Status" [ref=e35]
+          - columnheader "Corpus mode" [ref=e36]
+          - columnheader "Pair-full seeds" [ref=e37]
+          - columnheader "Source" [ref=e38]
+      - rowgroup [ref=e39]:
+        - row "v562-loss-balanced pass equals_surface_no_pair_id_loss_balanced_repair 1/3 e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e40]:
+          - cell "v562-loss-balanced" [ref=e41]
+          - cell "pass" [ref=e42]
+          - cell "equals_surface_no_pair_id_loss_balanced_repair" [ref=e43]
+          - cell "1/3" [ref=e44]
+          - cell "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e45]
+        - row "v564-first-token pass equals_surface_no_pair_id_loss_balanced_first_token_repair 1/3 e\\564\\解释\\model-capability-required-term-pair-no-pair-id-loss-balanced-first-token-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e46]:
+          - cell "v564-first-token" [ref=e47]
+          - cell "pass" [ref=e48]
+          - cell "equals_surface_no_pair_id_loss_balanced_first_token_repair" [ref=e49]
+          - cell "1/3" [ref=e50]
+          - cell "e\\564\\解释\\model-capability-required-term-pair-no-pair-id-loss-balanced-first-token-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e51]
+  - generic [ref=e52]:
+    - heading "Branch Rows" [level=2] [ref=e53]
+    - table [ref=e55]:
+      - rowgroup [ref=e56]:
+        - row "Seed Competition Fixed hit reports Loss hit reports Pair-full reports Action" [ref=e57]:
+          - columnheader "Seed" [ref=e58]
+          - columnheader "Competition" [ref=e59]
+          - columnheader "Fixed hit reports" [ref=e60]
+          - columnheader "Loss hit reports" [ref=e61]
+          - columnheader "Pair-full reports" [ref=e62]
+          - columnheader "Action" [ref=e63]
+      - rowgroup [ref=e64]:
+        - row "1535 False v562-loss-balanced,v564-first-token v562-loss-balanced,v564-first-token v562-loss-balanced,v564-first-token promote the pair-full repair report and test fresh held-out prompts" [ref=e65]:
+          - cell "1535" [ref=e66]
+          - cell "False" [ref=e67]
+          - cell "v562-loss-balanced,v564-first-token" [ref=e68]
+          - cell "v562-loss-balanced,v564-first-token" [ref=e69]
+          - cell "v562-loss-balanced,v564-first-token" [ref=e70]
+          - cell "promote the pair-full repair report and test fresh held-out prompts" [ref=e71]
+        - row "2535 False v562-loss-balanced collect another comparable equals-surface repair report before changing the objective" [ref=e72]:
+          - cell "2535" [ref=e73]
+          - cell "False" [ref=e74]
+          - cell [ref=e75]
+          - cell "v562-loss-balanced" [ref=e76]
+          - cell [ref=e77]
+          - cell "collect another comparable equals-surface repair report before changing the objective" [ref=e78]
+        - row "535 False v564-first-token collect another comparable equals-surface repair report before changing the objective" [ref=e79]:
+          - cell "535" [ref=e80]
+          - cell "False" [ref=e81]
+          - cell "v564-first-token" [ref=e82]
+          - cell [ref=e83]
+          - cell [ref=e84]
+          - cell "collect another comparable equals-surface repair report before changing the objective" [ref=e85]
+  - generic [ref=e86]:
+    - heading "Term Evidence" [level=2] [ref=e87]
+    - table [ref=e89]:
+      - rowgroup [ref=e90]:
+        - row "Report Seed Profile Term Hit Prompt Preview" [ref=e91]:
+          - columnheader "Report" [ref=e92]
+          - columnheader "Seed" [ref=e93]
+          - columnheader "Profile" [ref=e94]
+          - columnheader "Term" [ref=e95]
+          - columnheader "Hit" [ref=e96]
+          - columnheader "Prompt" [ref=e97]
+          - columnheader "Preview" [ref=e98]
+      - rowgroup [ref=e99]:
+        - row "v562-loss-balanced 535 default fixed False fixed= los\\nlxessslo" [ref=e100]:
+          - cell "v562-loss-balanced" [ref=e101]
+          - cell "535" [ref=e102]
+          - cell "default" [ref=e103]
+          - cell "fixed" [ref=e104]
+          - cell "False" [ref=e105]
+          - cell "fixed=" [ref=e106]
+          - cell "los\\nlxessslo" [ref=e107]
+        - row "v562-loss-balanced 535 suppress_newline_tokens fixed False fixed= los= fixeslo" [ref=e108]:
+          - cell "v562-loss-balanced" [ref=e109]
+          - cell "535" [ref=e110]
+          - cell "suppress_newline_tokens" [ref=e111]
+          - cell "fixed" [ref=e112]
+          - cell "False" [ref=e113]
+          - cell "fixed=" [ref=e114]
+          - cell "los= fixeslo" [ref=e115]
+        - row "v562-loss-balanced 535 default loss False loss= oosososs= l" [ref=e116]:
+          - cell "v562-loss-balanced" [ref=e117]
+          - cell "535" [ref=e118]
+          - cell "default" [ref=e119]
+          - cell "loss" [ref=e120]
+          - cell "False" [ref=e121]
+          - cell "loss=" [ref=e122]
+          - cell "oosososs= l" [ref=e123]
+        - row "v562-loss-balanced 535 suppress_newline_tokens loss False loss= oosososs= l" [ref=e124]:
+          - cell "v562-loss-balanced" [ref=e125]
+          - cell "535" [ref=e126]
+          - cell "suppress_newline_tokens" [ref=e127]
+          - cell "loss" [ref=e128]
+          - cell "False" [ref=e129]
+          - cell "loss=" [ref=e130]
+          - cell "oosososs= l" [ref=e131]
+        - row "v562-loss-balanced 1535 default fixed True fixed= fixed\\nlos= f" [ref=e132]:
+          - cell "v562-loss-balanced" [ref=e133]
+          - cell "1535" [ref=e134]
+          - cell "default" [ref=e135]
+          - cell "fixed" [ref=e136]
+          - cell "True" [ref=e137]
+          - cell "fixed=" [ref=e138]
+          - cell "fixed\\nlos= f" [ref=e139]
+        - row "v562-loss-balanced 1535 suppress_newline_tokens fixed True fixed= fixed=fixed=" [ref=e140]:
+          - cell "v562-loss-balanced" [ref=e141]
+          - cell "1535" [ref=e142]
+          - cell "suppress_newline_tokens" [ref=e143]
+          - cell "fixed" [ref=e144]
+          - cell "True" [ref=e145]
+          - cell "fixed=" [ref=e146]
+          - cell "fixed=fixed=" [ref=e147]
+        - row "v562-loss-balanced 1535 default loss True loss= fixed=loss=" [ref=e148]:
+          - cell "v562-loss-balanced" [ref=e149]
+          - cell "1535" [ref=e150]
+          - cell "default" [ref=e151]
+          - cell "loss" [ref=e152]
+          - cell "True" [ref=e153]
+          - cell "loss=" [ref=e154]
+          - cell "fixed=loss=" [ref=e155]
+        - row "v562-loss-balanced 1535 suppress_newline_tokens loss True loss= fixed=loss=" [ref=e156]:
+          - cell "v562-loss-balanced" [ref=e157]
+          - cell "1535" [ref=e158]
+          - cell "suppress_newline_tokens" [ref=e159]
+          - cell "loss" [ref=e160]
+          - cell "True" [ref=e161]
+          - cell "loss=" [ref=e162]
+          - cell "fixed=loss=" [ref=e163]
+        - row "v562-loss-balanced 2535 default fixed False fixed= loss=ixed=ix" [ref=e164]:
+          - cell "v562-loss-balanced" [ref=e165]
+          - cell "2535" [ref=e166]
+          - cell "default" [ref=e167]
+          - cell "fixed" [ref=e168]
+          - cell "False" [ref=e169]
+          - cell "fixed=" [ref=e170]
+          - cell "loss=ixed=ix" [ref=e171]
+        - row "v562-loss-balanced 2535 suppress_newline_tokens fixed False fixed= loss=ixed fi" [ref=e172]:
+          - cell "v562-loss-balanced" [ref=e173]
+          - cell "2535" [ref=e174]
+          - cell "suppress_newline_tokens" [ref=e175]
+          - cell "fixed" [ref=e176]
+          - cell "False" [ref=e177]
+          - cell "fixed=" [ref=e178]
+          - cell "loss=ixed fi" [ref=e179]
+        - row "v562-loss-balanced 2535 default loss True loss= loss=fixed=l" [ref=e180]:
+          - cell "v562-loss-balanced" [ref=e181]
+          - cell "2535" [ref=e182]
+          - cell "default" [ref=e183]
+          - cell "loss" [ref=e184]
+          - cell "True" [ref=e185]
+          - cell "loss=" [ref=e186]
+          - cell "loss=fixed=l" [ref=e187]
+        - row "v562-loss-balanced 2535 suppress_newline_tokens loss True loss= loss=fixed=l" [ref=e188]:
+          - cell "v562-loss-balanced" [ref=e189]
+          - cell "2535" [ref=e190]
+          - cell "suppress_newline_tokens" [ref=e191]
+          - cell "loss" [ref=e192]
+          - cell "True" [ref=e193]
+          - cell "loss=" [ref=e194]
+          - cell "loss=fixed=l" [ref=e195]
+        - row "v564-first-token 535 default fixed True fixed= loked=fixed" [ref=e196]:
+          - cell "v564-first-token" [ref=e197]
+          - cell "535" [ref=e198]
+          - cell "default" [ref=e199]
+          - cell "fixed" [ref=e200]
+          - cell "True" [ref=e201]
+          - cell "fixed=" [ref=e202]
+          - cell "loked=fixed" [ref=e203]
+        - row "v564-first-token 535 suppress_newline_tokens fixed True fixed= loked=fixed" [ref=e204]:
+          - cell "v564-first-token" [ref=e205]
+          - cell "535" [ref=e206]
+          - cell "suppress_newline_tokens" [ref=e207]
+          - cell "fixed" [ref=e208]
+          - cell "True" [ref=e209]
+          - cell "fixed=" [ref=e210]
+          - cell "loked=fixed" [ref=e211]
+        - row "v564-first-token 535 default loss False loss= los= fixed=i" [ref=e212]:
+          - cell "v564-first-token" [ref=e213]
+          - cell "535" [ref=e214]
+          - cell "default" [ref=e215]
+          - cell "loss" [ref=e216]
+          - cell "False" [ref=e217]
+          - cell "loss=" [ref=e218]
+          - cell "los= fixed=i" [ref=e219]
+        - row "v564-first-token 535 suppress_newline_tokens loss False loss= los= fixed l" [ref=e220]:
+          - cell "v564-first-token" [ref=e221]
+          - cell "535" [ref=e222]
+          - cell "suppress_newline_tokens" [ref=e223]
+          - cell "loss" [ref=e224]
+          - cell "False" [ref=e225]
+          - cell "loss=" [ref=e226]
+          - cell "los= fixed l" [ref=e227]
+        - row "v564-first-token 1535 default fixed True fixed= fixed\\nlos=fi" [ref=e228]:
+          - cell "v564-first-token" [ref=e229]
+          - cell "1535" [ref=e230]
+          - cell "default" [ref=e231]
+          - cell "fixed" [ref=e232]
+          - cell "True" [ref=e233]
+          - cell "fixed=" [ref=e234]
+          - cell "fixed\\nlos=fi" [ref=e235]
+        - row "v564-first-token 1535 suppress_newline_tokens fixed True fixed= fixed=los=lo" [ref=e236]:
+          - cell "v564-first-token" [ref=e237]
+          - cell "1535" [ref=e238]
+          - cell "suppress_newline_tokens" [ref=e239]
+          - cell "fixed" [ref=e240]
+          - cell "True" [ref=e241]
+          - cell "fixed=" [ref=e242]
+          - cell "fixed=los=lo" [ref=e243]
+        - row "v564-first-token 1535 default loss True loss= loss=fixed=l" [ref=e244]:
+          - cell "v564-first-token" [ref=e245]
+          - cell "1535" [ref=e246]
+          - cell "default" [ref=e247]
+          - cell "loss" [ref=e248]
+          - cell "True" [ref=e249]
+          - cell "loss=" [ref=e250]
+          - cell "loss=fixed=l" [ref=e251]
+        - row "v564-first-token 1535 suppress_newline_tokens loss True loss= loss=fixed l" [ref=e252]:
+          - cell "v564-first-token" [ref=e253]
+          - cell "1535" [ref=e254]
+          - cell "suppress_newline_tokens" [ref=e255]
+          - cell "loss" [ref=e256]
+          - cell "True" [ref=e257]
+          - cell "loss=" [ref=e258]
+          - cell "loss=fixed l" [ref=e259]
+        - row "v564-first-token 2535 default fixed False fixed= lo los=los=" [ref=e260]:
+          - cell "v564-first-token" [ref=e261]
+          - cell "2535" [ref=e262]
+          - cell "default" [ref=e263]
+          - cell "fixed" [ref=e264]
+          - cell "False" [ref=e265]
+          - cell "fixed=" [ref=e266]
+          - cell "lo los=los=" [ref=e267]
+        - row "v564-first-token 2535 suppress_newline_tokens fixed False fixed= lo los=los=" [ref=e268]:
+          - cell "v564-first-token" [ref=e269]
+          - cell "2535" [ref=e270]
+          - cell "suppress_newline_tokens" [ref=e271]
+          - cell "fixed" [ref=e272]
+          - cell "False" [ref=e273]
+          - cell "fixed=" [ref=e274]
+          - cell "lo los=los=" [ref=e275]
+        - row "v564-first-token 2535 default loss False loss= lo= fixed=" [ref=e276]:
+          - cell "v564-first-token" [ref=e277]
+          - cell "2535" [ref=e278]
+          - cell "default" [ref=e279]
+          - cell "loss" [ref=e280]
+          - cell "False" [ref=e281]
+          - cell "loss=" [ref=e282]
+          - cell "lo= fixed=" [ref=e283]
+        - row "v564-first-token 2535 suppress_newline_tokens loss False loss= lo= fixed=" [ref=e284]:
+          - cell "v564-first-token" [ref=e285]
+          - cell "2535" [ref=e286]
+          - cell "suppress_newline_tokens" [ref=e287]
+          - cell "loss" [ref=e288]
+          - cell "False" [ref=e289]
+          - cell "loss=" [ref=e290]
+          - cell "lo= fixed=" [ref=e291]

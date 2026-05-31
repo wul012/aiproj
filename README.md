@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v564.0.0` tests a no-pair-id loss-balanced first-token repair across three seeds; the run stays `1/3` pair-full, improving seed `535` to fixed-only but regressing seed `2535` to all-miss, so prefix rows alone are not a stable repair.
+Version `v565.0.0` compares v562 and v564 as coverage-migration evidence; first-token rows move partial coverage from seed `2535` loss-only to seed `535` fixed-only while seed `1535` stays pair-full, so they redistribute hits rather than improving stable coverage.
+
+## Latest v565 checkpoint
+
+- Reused the existing equals-surface repair comparison script over v562 and v564 reports.
+- Compared `v562-loss-balanced` against `v564-first-token` without retraining.
+- Confirmed both reports remain `1/3` pair-full and only seed `1535` is pair-full in both.
+- Classified seed `535` as fixed gained by v564 and seed `2535` as loss lost by v564.
+- Treated the built-in report's optimistic next action as too broad for this context; the actual decision is to avoid more single-direction prefix-row growth.
+- Archived v565 evidence in `e/565` and added the code explanation in `代码讲解记录_模型能力阶段/579-v565-required-term-pair-no-pair-id-first-token-migration-comparison.md`.
 
 ## Latest v564 checkpoint
 
