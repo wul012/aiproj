@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_seed_config_replay_ready
+failed_count=0
+seed_count=3
+replay_pair_full_seed_count=3
+selected_replay_ready=True
+policy_replay_gap_count=0
+model_quality_claim=targeted_seed_config_replay_ready
+next_action=test selected configs against held-out prompt variants or fresh seeds

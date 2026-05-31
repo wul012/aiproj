@@ -1,0 +1,4 @@
+seed,selected_config_id,status,policy_selected_pair_full,replay_pair_full,default_pair_full_variant_count,suppression_pair_full_variant_count,top_k,temperature,replay_decision
+535,v544-topk2-t080,pass,True,True,1,1,2,0.8,generation_profile_no_pair_coexistence_gain
+1535,v546-loss-calibrated-topk2-t080,pass,True,True,0,1,2,0.8,generation_profile_improves_pair_coexistence
+2535,v544-topk2-t080,pass,True,True,1,1,2,0.8,generation_profile_no_pair_coexistence_gain

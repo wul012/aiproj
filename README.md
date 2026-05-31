@@ -4,9 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v548.0.0` turns the v547 coverage tradeoff into a deterministic per-seed config-selection policy and verifies each selected config really has pair-full coverage in the source map.
+Version `v549.0.0` reconnects the v548 per-seed config-selection policy to the source checkpoints and replays each selected seed/config, reaching replay pair-full `3/3`.
+
+## Latest v549 checkpoint
+
+- Added `model_capability_required_term_pair_seed_config_replay`, a replay check for the v548 selected policy.
+- Reconnected selected configs to v544/v546 source stability reports and their embedded checkpoint paths.
+- Replayed selected seeds `535`, `1535`, and `2535`; all three reached pair-full again.
+- Confirmed `selected_replay_ready=True` and `policy_replay_gap_count=0`.
+- Archived v549 evidence in `e/549` and added the code explanation in `代码讲解记录_模型能力阶段/563-v549-required-term-pair-seed-config-replay.md`.
 
 ## Latest v548 checkpoint
+
+Version `v548.0.0` turns the v547 coverage tradeoff into a deterministic per-seed config-selection policy and verifies each selected config really has pair-full coverage in the source map.
+
 
 - Added `model_capability_required_term_pair_seed_config_selection`, a policy layer derived from v547's tradeoff report.
 - Verified seeds `535` and `2535` select `v544-topk2-t080`, while seed `1535` selects `v546-loss-calibrated-topk2-t080`.

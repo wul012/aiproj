@@ -1,0 +1,28 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair seed config replay" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every selected per-seed config replayed pair-full coverage from its source checkpoint.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_seed_config_replay_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Replay pair-full
+      - strong [ref=e15]: 3/3
+    - generic [ref=e16]:
+      - generic [ref=e17]: Ready
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Policy gaps
+      - strong [ref=e21]: "0"
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: test selected configs against held-out prompt variants or fresh seeds
+  - generic [ref=e25]:
+    - heading "Replay Rows" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]
+      - rowgroup [ref=e37]
