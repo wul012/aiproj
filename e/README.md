@@ -501,6 +501,10 @@ e/592/解释/说明.md
 e/593/图片
 e/593/解释/说明.md
  -> v593 required-term pair loss-branch objective comparison 的运行截图和解释
+
+e/594/图片
+e/594/解释/说明.md
+ -> v594 required-term pair loss-branch route decision 的运行截图和解释
 ```
 
 写入规则：

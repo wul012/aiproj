@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v593.0.0` adds and runs a refresh-report comparison for the v590-v592 loss-branch objectives, confirming all three routes are `loss-only tradeoff` with `pair_full_report_count=0`.
+Version `v594.0.0` adds a loss-branch route decision: no current route is promotable, `v590-targeted` is selected only as a seed-stability baseline, and a fixed-retention objective is required next.
+
+## Latest v594 checkpoint
+
+- Added `model_capability_required_term_pair_loss_branch_route_decision`.
+- Consumed the v593 comparison report.
+- Confirmed `pair_full_route_count=0` and `loss_only_tradeoff_route_count=3`.
+- Selected `v590-targeted` only for v595 seed-stability replay, not promotion.
+- Confirmed `fixed_retention_objective_required=True`.
+- Archived v594 evidence in `e/594` and added the code explanation in `代码讲解记录_模型能力阶段/608-v594-required-term-pair-loss-branch-route-decision.md`.
+
+## Latest v593 checkpoint
 
 ## Latest v593 checkpoint
 

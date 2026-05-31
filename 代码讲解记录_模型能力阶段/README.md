@@ -374,6 +374,9 @@
 607-v593-required-term-pair-loss-branch-objective-comparison.md
  -> v593 code explanation: compare v590-v592 refresh reports and confirm loss-only tradeoff.
 
+608-v594-required-term-pair-loss-branch-route-decision.md
+ -> v594 code explanation: select targeted loss-branch only as seed-stability baseline and require fixed retention.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

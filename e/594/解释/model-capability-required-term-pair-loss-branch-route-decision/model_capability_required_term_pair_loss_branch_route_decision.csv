@@ -1,0 +1,4 @@
+source_label,route_type,hit_terms,missed_terms,stability_replay_candidate,rejection_reasons
+v590-targeted,targeted,"[""loss""]","[""fixed""]",True,"[""no_pair_full"", ""fixed_missing"", ""loss_only_tradeoff""]"
+v591-dual-anchor,dual_anchor,"[""loss""]","[""fixed""]",False,"[""no_pair_full"", ""fixed_missing"", ""loss_only_tradeoff""]"
+v592-micro-span,micro_span,"[""loss""]","[""fixed""]",False,"[""no_pair_full"", ""fixed_missing"", ""loss_only_tradeoff""]"

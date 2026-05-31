@@ -1,0 +1,11 @@
+status=pass
+decision=select_targeted_loss_branch_for_seed_stability_not_promotion
+failed_count=0
+route_count=3
+pair_full_route_count=0
+loss_only_tradeoff_route_count=3
+selected_stability_route=v590-targeted
+selected_stability_corpus_mode=equals_surface_no_pair_id_loss_branch_targeted_repair
+fixed_retention_objective_required=True
+model_quality_claim=route_decision_only
+next_action=run targeted loss-branch seed stability, then design a fixed-retention objective

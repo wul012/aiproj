@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-branch route decision",
+  "generated_at": "2026-05-31T14:27:55Z",
+  "status": "pass",
+  "decision": "select_targeted_loss_branch_for_seed_stability_not_promotion",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "e\\593\\解释\\model-capability-required-term-pair-loss-branch-objective-comparison\\model_capability_required_term_pair_loss_branch_objective_comparison.json",
+  "route_rows": [
+    {
+      "source_label": "v590-targeted",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "route_type": "targeted",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "pair_full_observed": false,
+      "loss_only_tradeoff": true,
+      "complexity_score": 1,
+      "stability_replay_candidate": true,
+      "rejection_reasons": [
+        "no_pair_full",
+        "fixed_missing",
+        "loss_only_tradeoff"
+      ]
+    },
+    {
+      "source_label": "v591-dual-anchor",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "route_type": "dual_anchor",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "pair_full_observed": false,
+      "loss_only_tradeoff": true,
+      "complexity_score": 2,
+      "stability_replay_candidate": false,
+      "rejection_reasons": [
+        "no_pair_full",
+        "fixed_missing",
+        "loss_only_tradeoff"
+      ]
+    },
+    {
+      "source_label": "v592-micro-span",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "route_type": "micro_span",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "pair_full_observed": false,
+      "loss_only_tradeoff": true,
+      "complexity_score": 3,
+      "stability_replay_candidate": false,
+      "rejection_reasons": [
+        "no_pair_full",
+        "fixed_missing",
+        "loss_only_tradeoff"
+      ]
+    }
+  ],
+  "summary": {
+    "route_count": 3,
+    "pair_full_route_count": 0,
+    "loss_only_tradeoff_route_count": 3,
+    "comparison_decision": "loss_branch_objectives_confirm_loss_only_tradeoff",
+    "comparison_union_hit_terms": [
+      "loss"
+    ],
+    "promotion_ready": false,
+    "all_routes_loss_only_tradeoff": true,
+    "selected_stability_route": "v590-targeted",
+    "selected_stability_corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+    "selected_stability_route_type": "targeted",
+    "seed_stability_replay_required": true,
+    "fixed_retention_objective_required": true
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "All available loss-branch routes recover loss but miss fixed; the simplest route is selected only as a stability baseline.",
+    "next_action": "run targeted loss-branch seed stability, then design a fixed-retention objective"
+  }
+}
