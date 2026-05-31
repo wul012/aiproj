@@ -314,6 +314,9 @@
 587-v573-required-term-pair-route-fresh-seed-3535-first-token-repair.md
  -> v573 code explanation: test the existing full first-token repair mode on fresh seed 3535 and preserve the negative result.
 
+588-v574-required-term-pair-route-fresh-seed-3535-repair-comparison.md
+ -> v574 code explanation: compare v571/v573 and classify full first-token repair as a regression route for fresh seed 3535.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

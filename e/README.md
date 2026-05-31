@@ -421,6 +421,10 @@ e/572/解释/说明.md
 e/573/图片
 e/573/解释/说明.md
  -> v573 required-term pair route fresh seed 3535 first-token repair 的运行截图和解释
+
+e/574/图片
+e/574/解释/说明.md
+ -> v574 required-term pair route fresh seed 3535 repair comparison 的运行截图和解释
 ```
 
 写入规则：

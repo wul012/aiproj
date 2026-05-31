@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair equals-surface repair comparison",
+  "generated_at": "2026-05-31T11:03:02Z",
+  "status": "pass",
+  "decision": "required_term_pair_equals_surface_repair_comparison_recorded",
+  "failed_count": 0,
+  "issues": [],
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "v571-loss-balanced-fresh3535",
+      "source_path": "e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "seed_count": 1,
+      "pair_full_seed_count": 0,
+      "pair_full_seed_rate": 0.0,
+      "stable_pair_full": false
+    },
+    {
+      "index": 1,
+      "source_label": "v573-first-token-fresh3535",
+      "source_path": "e\\573\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-first-token-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "seed_count": 1,
+      "pair_full_seed_count": 0,
+      "pair_full_seed_rate": 0.0,
+      "stable_pair_full": false
+    }
+  ],
+  "term_rows": [
+    {
+      "source_label": "v571-loss-balanced-fresh3535",
+      "source_path": "e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 0,
+      "generated_preview": "fixed=fixed= fixed",
+      "continuation_preview": "fixed= fixed"
+    },
+    {
+      "source_label": "v571-loss-balanced-fresh3535",
+      "source_path": "e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1,
+      "generated_preview": "fixed=fixed los=fi",
+      "continuation_preview": "fixed los=fi"
+    },
+    {
+      "source_label": "v571-loss-balanced-fresh3535",
+      "source_path": "e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0,
+      "generated_preview": "loss= fixed= fixe",
+      "continuation_preview": " fixed= fixe"
+    },
+    {
+      "source_label": "v571-loss-balanced-fresh3535",
+      "source_path": "e\\571\\解释\\model-capability-required-term-pair-route-fresh-seed-3535\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1,
+      "generated_preview": "loss= fixed= fixe",
+      "continuation_preview": " fixed= fixe"
+    },
+    {
+      "source_label": "v573-first-token-fresh3535",
+      "source_path": "e\\573\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-first-token-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0,
+      "generated_preview": "fixed=fixt los=ixe",
+      "continuation_preview": "fixt los=ixe"
+    },
+    {
+      "source_label": "v573-first-token-fresh3535",
+      "source_path": "e\\573\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-first-token-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1,
+      "generated_preview": "fixed=fixt los=ixe",
+      "continuation_preview": "fixt los=ixe"
+    },
+    {
+      "source_label": "v573-first-token-fresh3535",
+      "source_path": "e\\573\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-first-token-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0,
+      "generated_preview": "loss=fixed\\nixefix",
+      "continuation_preview": "fixed\\nixefix"
+    },
+    {
+      "source_label": "v573-first-token-fresh3535",
+      "source_path": "e\\573\\解释\\model-capability-required-term-pair-route-fresh-seed-3535-first-token-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_balanced_first_token_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1,
+      "generated_preview": "loss=fixed fiixef",
+      "continuation_preview": "fixed fiixef"
+    }
+  ],
+  "branch_rows": [
+    {
+      "seed": "3535",
+      "compared_report_count": 2,
+      "compared_reports": [
+        "v571-loss-balanced-fresh3535",
+        "v573-first-token-fresh3535"
+      ],
+      "fixed_hit_reports": [
+        "v571-loss-balanced-fresh3535"
+      ],
+      "loss_hit_reports": [],
+      "union_hit_terms": [
+        "fixed"
+      ],
+      "pair_full_profile_reports": [],
+      "branch_competition": false,
+      "best_next_action": "collect another comparable equals-surface repair report before changing the objective"
+    }
+  ],
+  "summary": {
+    "compared_report_count": 2,
+    "term_case_row_count": 8,
+    "compared_seed_count": 1,
+    "branch_competition_seed_count": 0,
+    "pair_full_report_count": 0,
+    "pair_full_profile_seed_count": 0,
+    "union_hit_terms": [
+      "fixed"
+    ],
+    "union_hit_term_count": 1,
+    "all_target_terms_seen": false
+  },
+  "interpretation": {
+    "model_quality_claim": "comparison_only",
+    "reason": "The compared reports do not yet show complementary fixed/loss evidence.",
+    "next_action": "add one stronger targeted repair or reduce the comparison scope"
+  }
+}
