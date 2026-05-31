@@ -469,6 +469,10 @@ e/584/解释/说明.md
 e/585/图片
 e/585/解释/说明.md
  -> v585 required-term pair target anchor comparison 的运行截图和解释
+
+e/586/图片
+e/586/解释/说明.md
+ -> v586 required-term pair target anchor route decision 的运行截图和解释
 ```
 
 写入规则：

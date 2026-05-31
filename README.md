@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v585.0.0` compares target-anchor against the earlier fresh-seed routes; v584 recovers the same partial `fixed` signal as v571, while v579/v581 remain regressions and no route reaches `loss` or pair-full.
+Version `v586.0.0` turns the v585 target-anchor comparison into a route decision: keep v584 as residual evidence, do not promote it, and require a loss-branch objective before more training.
+
+## Latest v586 checkpoint
+
+- Added `model_capability_required_term_pair_target_anchor_route_decision`.
+- Consumed v585 comparison evidence.
+- Confirmed `target_anchor_route_count=1` and `target_anchor_visible_hit_route_count=1`.
+- Preserved residual routes as `v571-loss-balanced,v584-target-anchor`.
+- Set decision to `keep_target_anchor_as_residual_not_promoted`.
+- Archived v586 evidence in `e/586` and added the code explanation in `代码讲解记录_模型能力阶段/600-v586-required-term-pair-target-anchor-route-decision.md`.
 
 ## Latest v585 checkpoint
 

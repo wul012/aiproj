@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT target-anchor route decision</title>
+<style>
+:root{color-scheme:light;--ink:#18212b;--muted:#607080;--line:#d7dee6;--panel:#f6f8fb;--accent:#4f5420}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f0;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT target-anchor route decision</h1><p>Target-anchor recovered only a fixed partial hit and did not recover loss.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>keep_target_anchor_as_residual_not_promoted</strong></div><div class="card"><span>Target routes</span><strong>1</strong></div><div class="card"><span>Target visible</span><strong>1</strong></div><div class="card"><span>Residual</span><strong>v571-loss-balanced,v584-target-anchor</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>keep target-anchor as residual evidence; design a loss-branch objective before more training</p></section>
+<section class="panel">
+<h2>Route Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Route</th><th>Type</th><th>Pair-full</th><th>Hit terms</th><th>Reasons</th></tr></thead>
+<tbody><tr><td>v571-loss-balanced</td><td>baseline</td><td>0/1</td><td>fixed</td><td>no_pair_full_seed,loss_term_missing</td></tr>
+<tr><td>v579-branch-binding</td><td>branch_binding</td><td>0/1</td><td></td><td>no_pair_full_seed,loss_term_missing,no_visible_term_hit</td></tr>
+<tr><td>v581-branch-binding-no-space</td><td>branch_binding</td><td>0/1</td><td></td><td>no_pair_full_seed,loss_term_missing,no_visible_term_hit</td></tr>
+<tr><td>v584-target-anchor</td><td>target_anchor</td><td>0/1</td><td>fixed</td><td>no_pair_full_seed,loss_term_missing,target_anchor_residual_fixed_only</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+status=pass
+decision=keep_target_anchor_as_residual_not_promoted
+failed_count=0
+target_anchor_route_count=1
+target_anchor_visible_hit_route_count=1
+residual_signal_routes=v571-loss-balanced,v584-target-anchor
+model_quality_claim=route_decision_only
+next_action=keep target-anchor as residual evidence; design a loss-branch objective before more training

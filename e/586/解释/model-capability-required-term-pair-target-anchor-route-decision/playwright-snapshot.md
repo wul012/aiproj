@@ -1,0 +1,33 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT target-anchor route decision" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Target-anchor recovered only a fixed partial hit and did not recover loss.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: keep_target_anchor_as_residual_not_promoted
+    - generic [ref=e13]:
+      - generic [ref=e14]: Target routes
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Target visible
+      - strong [ref=e18]: "1"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Residual
+      - strong [ref=e21]: v571-loss-balanced,v584-target-anchor
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: keep target-anchor as residual evidence; design a loss-branch objective before more training
+  - generic [ref=e25]:
+    - heading "Route Rows" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]:
+        - row "Route Type Pair-full Hit terms Reasons" [ref=e30]
+      - rowgroup [ref=e36]:
+        - row "v571-loss-balanced baseline 0/1 fixed no_pair_full_seed,loss_term_missing" [ref=e37]
+        - row "v579-branch-binding branch_binding 0/1 no_pair_full_seed,loss_term_missing,no_visible_term_hit" [ref=e43]
+        - row "v581-branch-binding-no-space branch_binding 0/1 no_pair_full_seed,loss_term_missing,no_visible_term_hit" [ref=e49]
+        - row "v584-target-anchor target_anchor 0/1 fixed no_pair_full_seed,loss_term_missing,target_anchor_residual_fixed_only" [ref=e55]

@@ -1,0 +1,5 @@
+source_label,route_type,pair_full_seed_count,seed_count,hit_terms,rejection_reasons
+v571-loss-balanced,baseline,0,1,"[""fixed""]","[""no_pair_full_seed"", ""loss_term_missing""]"
+v579-branch-binding,branch_binding,0,1,[],"[""no_pair_full_seed"", ""loss_term_missing"", ""no_visible_term_hit""]"
+v581-branch-binding-no-space,branch_binding,0,1,[],"[""no_pair_full_seed"", ""loss_term_missing"", ""no_visible_term_hit""]"
+v584-target-anchor,target_anchor,0,1,"[""fixed""]","[""no_pair_full_seed"", ""loss_term_missing"", ""target_anchor_residual_fixed_only""]"
