@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=63917 vocab_size=31
+parameters=53,120
+data_source=data:e\601\解释\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9029 val_loss=3.1087
+step=  450 train_loss=1.0386 val_loss=3.2917
+step=  900 train_loss=0.8922 val_loss=3.7222
+step= 1350 train_loss=0.9318 val_loss=2.7174
+step= 1800 train_loss=0.9439 val_loss=3.3201
+saved=e\601\解释\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\pair-coexistence-refresh-run
+history=e\601\解释\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\601\解释\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\601\解释\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\pair-coexistence-refresh-run\sample.txt
