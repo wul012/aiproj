@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_seed_config_selection_multi_config_ready
+failed_count=0
+seed_count=3
+selection_ready_seed_count=3
+selected_config_count=2
+requires_multi_config_policy=True
+model_quality_claim=targeted_seed_config_selection_ready
+next_action=test this explicit config-selection policy against held-out prompts or fresh seeds

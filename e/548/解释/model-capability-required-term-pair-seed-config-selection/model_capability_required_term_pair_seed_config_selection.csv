@@ -1,0 +1,4 @@
+seed,selected_config_id,selection_ready,selected_pair_full,covering_config_ids,covering_config_count,fallback_required
+535,v544-topk2-t080,True,True,"[""v544-topk2-t080""]",1,True
+1535,v546-loss-calibrated-topk2-t080,True,True,"[""v546-loss-calibrated-topk2-t080""]",1,True
+2535,v544-topk2-t080,True,True,"[""v544-topk2-t080""]",1,True

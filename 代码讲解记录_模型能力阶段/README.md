@@ -236,6 +236,9 @@
 561-v547-required-term-pair-seed-coverage-tradeoff.md
  -> v547 code explanation: compare v544/v546 stability reports and formalize seed-level coverage tradeoff.
 
+562-v548-required-term-pair-seed-config-selection.md
+ -> v548 code explanation: derive and verify a deterministic per-seed config-selection policy.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

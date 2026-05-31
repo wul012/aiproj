@@ -4,9 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v547.0.0` compares the v544 and v546 stability reports and proves their seed coverage is complementary: the union covers all three seeds while the best single config still covers only two.
+Version `v548.0.0` turns the v547 coverage tradeoff into a deterministic per-seed config-selection policy and verifies each selected config really has pair-full coverage in the source map.
+
+## Latest v548 checkpoint
+
+- Added `model_capability_required_term_pair_seed_config_selection`, a policy layer derived from v547's tradeoff report.
+- Verified seeds `535` and `2535` select `v544-topk2-t080`, while seed `1535` selects `v546-loss-calibrated-topk2-t080`.
+- Confirmed `selection_ready_seed_count=3/3` and `requires_multi_config_policy=True`.
+- Kept the claim scoped: this is a ready fallback/config-selection policy, not held-out capability proof.
+- Archived v548 evidence in `e/548` and added the code explanation in `代码讲解记录_模型能力阶段/562-v548-required-term-pair-seed-config-selection.md`.
 
 ## Latest v547 checkpoint
+
+Version `v547.0.0` compares the v544 and v546 stability reports and proves their seed coverage is complementary: the union covers all three seeds while the best single config still covers only two.
 
 - Added `model_capability_required_term_pair_seed_coverage_tradeoff`, a read-only scoreboard over archived colon-immediate stability reports.
 - Compared v544 `top_k=2, temperature=0.8` against v546 `loss_calibrated + top_k=2, temperature=0.8`.

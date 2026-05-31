@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair seed config selection",
+  "generated_at": "2026-05-31T01:15:41Z",
+  "status": "pass",
+  "decision": "required_term_pair_seed_config_selection_multi_config_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_seed_coverage_tradeoff": "e\\547\\解释\\model-capability-required-term-pair-seed-coverage-tradeoff\\model_capability_required_term_pair_seed_coverage_tradeoff.json",
+  "out_dir": "e\\548\\解释\\model-capability-required-term-pair-seed-config-selection",
+  "settings": {
+    "selection_strategy": "first_covering_config_per_seed",
+    "experiment_boundary": "derive a deterministic per-seed config policy from coverage tradeoff evidence"
+  },
+  "config_rows": [
+    {
+      "config_id": "v544-topk2-t080",
+      "source_path": "e\\544\\解释\\model-capability-required-term-pair-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "pair_full_seed_count": 2,
+      "selected_seed_count": 2,
+      "corpus_mode": "colon_immediate",
+      "top_k": 2,
+      "temperature": 0.8
+    },
+    {
+      "config_id": "v546-loss-calibrated-topk2-t080",
+      "source_path": "e\\546\\解释\\model-capability-required-term-pair-loss-calibrated-topk2-t080-stability\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "pair_full_seed_count": 1,
+      "selected_seed_count": 1,
+      "corpus_mode": "colon_immediate_loss_calibrated",
+      "top_k": 2,
+      "temperature": 0.8
+    }
+  ],
+  "selection_rows": [
+    {
+      "seed": 535,
+      "selected_config_id": "v544-topk2-t080",
+      "selection_ready": true,
+      "selected_pair_full": true,
+      "covering_config_ids": [
+        "v544-topk2-t080"
+      ],
+      "covering_config_count": 1,
+      "fallback_required": true,
+      "per_config_pair_full": {
+        "v544-topk2-t080": true,
+        "v546-loss-calibrated-topk2-t080": false
+      }
+    },
+    {
+      "seed": 1535,
+      "selected_config_id": "v546-loss-calibrated-topk2-t080",
+      "selection_ready": true,
+      "selected_pair_full": true,
+      "covering_config_ids": [
+        "v546-loss-calibrated-topk2-t080"
+      ],
+      "covering_config_count": 1,
+      "fallback_required": true,
+      "per_config_pair_full": {
+        "v544-topk2-t080": false,
+        "v546-loss-calibrated-topk2-t080": true
+      }
+    },
+    {
+      "seed": 2535,
+      "selected_config_id": "v544-topk2-t080",
+      "selection_ready": true,
+      "selected_pair_full": true,
+      "covering_config_ids": [
+        "v544-topk2-t080"
+      ],
+      "covering_config_count": 1,
+      "fallback_required": true,
+      "per_config_pair_full": {
+        "v544-topk2-t080": true,
+        "v546-loss-calibrated-topk2-t080": false
+      }
+    }
+  ],
+  "summary": {
+    "seed_count": 3,
+    "selection_ready_seed_count": 3,
+    "selection_ready_seed_rate": 1.0,
+    "all_seeds_selection_ready": true,
+    "selected_config_ids": [
+      "v544-topk2-t080",
+      "v546-loss-calibrated-topk2-t080"
+    ],
+    "selected_config_count": 2,
+    "source_config_count": 2,
+    "requires_multi_config_policy": true
+  },
+  "interpretation": {
+    "model_quality_claim": "targeted_seed_config_selection_ready",
+    "reason": "Every seed has a verified selected config, and more than one config is needed.",
+    "next_action": "test this explicit config-selection policy against held-out prompts or fresh seeds"
+  }
+}

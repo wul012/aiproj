@@ -1,0 +1,33 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT pair seed config selection" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Every seed has a verified selected config, and more than one config is needed.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_seed_config_selection_multi_config_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Ready seeds
+      - strong [ref=e15]: 3/3
+    - generic [ref=e16]:
+      - generic [ref=e17]: Selected configs
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Multi-config
+      - strong [ref=e21]: "True"
+  - generic [ref=e22]:
+    - heading "Next Action" [level=2] [ref=e23]
+    - paragraph [ref=e24]: test this explicit config-selection policy against held-out prompts or fresh seeds
+  - generic [ref=e25]:
+    - heading "Selections" [level=2] [ref=e26]
+    - table [ref=e28]:
+      - rowgroup [ref=e29]
+      - rowgroup [ref=e35]
+  - generic [ref=e51]:
+    - heading "Configs" [level=2] [ref=e52]
+    - table [ref=e54]:
+      - rowgroup [ref=e55]
+      - rowgroup [ref=e61]

@@ -317,6 +317,10 @@ e/546/解释/说明.md
 e/547/图片
 e/547/解释/说明.md
  -> v547 required-term pair seed coverage tradeoff 的运行截图和解释
+
+e/548/图片
+e/548/解释/说明.md
+ -> v548 required-term pair seed config selection 的运行截图和解释
 ```
 
 写入规则：
