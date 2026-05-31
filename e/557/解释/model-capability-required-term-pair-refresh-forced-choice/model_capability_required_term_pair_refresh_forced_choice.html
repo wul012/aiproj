@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT refresh forced-choice</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT refresh forced-choice</h1><p>Teacher-forced scoring collapses both prompts to loss.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>required_term_pair_refresh_forced_choice_preference_collapse</strong></div><div class="card"><span>Prompts</span><strong>2</strong></div><div class="card"><span>Expected best</span><strong>1</strong></div><div class="card"><span>Full match</span><strong>False</strong></div><div class="card"><span>Collapse</span><strong>loss</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>avoid more simple corpus weighting and inspect objective/capacity or constrained decoding</p></section>
+<section class="panel">
+<h2>Prompt Preference</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Prompt term</th><th>Prompt</th><th>Expected</th><th>Best</th><th>Expected best</th><th>Margin</th></tr></thead>
+<tbody><tr><td>fixed</td><td>fixed=</td><td>fixed</td><td>loss</td><td>False</td><td>0.010357</td></tr>
+<tr><td>loss</td><td>loss=</td><td>loss</td><td>loss</td><td>True</td><td>0.0</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel">
+<h2>Candidate Scores</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Prompt</th><th>Candidate</th><th>Expected?</th><th>Avg NLL</th><th>First rank</th><th>Status</th></tr></thead>
+<tbody><tr><td>fixed=</td><td>fixed</td><td>True</td><td>0.598999</td><td>2</td><td>pass</td></tr>
+<tr><td>fixed=</td><td>loss</td><td>False</td><td>0.588642</td><td>1</td><td>pass</td></tr>
+<tr><td>loss=</td><td>fixed</td><td>False</td><td>1.015867</td><td>2</td><td>pass</td></tr>
+<tr><td>loss=</td><td>loss</td><td>True</td><td>0.603085</td><td>1</td><td>pass</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

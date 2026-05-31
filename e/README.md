@@ -353,6 +353,10 @@ e/555/解释/说明.md
 e/556/图片
 e/556/解释/说明.md
  -> v556 required-term pair equals-surface tied repair 的运行截图和解释
+
+e/557/图片
+e/557/解释/说明.md
+ -> v557 required-term pair refresh forced-choice 的运行截图和解释
 ```
 
 写入规则：

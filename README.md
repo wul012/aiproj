@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v556.0.0` tests a tied equals-surface repair that keeps `fixed=fixed` and `loss=loss` in the same records; the real seed `1535` run still misses `fixed=`, so the branch competition is not solved by simple pair binding.
+Version `v557.0.0` adds a refresh forced-choice diagnostic for the v556 checkpoint and shows the `fixed=` prompt internally prefers `loss` over `fixed`, so the failure is learned preference collapse rather than only sampling drift.
+
+## Latest v557 checkpoint
+
+- Added `model_capability_required_term_pair_refresh_forced_choice`, a teacher-forced candidate scoring diagnostic for one refresh checkpoint.
+- Scored `fixed=` and `loss=` against candidate continuations `fixed` and `loss`.
+- Confirmed `collapse_candidate=loss`, `expected_best_count=1/2`, and `forced_choice_full_match=False`.
+- Measured `fixed=` preferring `loss` over `fixed` by avg NLL (`0.588642` vs `0.598999`).
+- Archived v557 evidence in `e/557` and added the code explanation in `代码讲解记录_模型能力阶段/571-v557-required-term-pair-refresh-forced-choice.md`.
 
 ## Latest v556 checkpoint
 

@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh forced-choice",
+  "generated_at": "2026-05-31T04:29:21Z",
+  "status": "pass",
+  "decision": "required_term_pair_refresh_forced_choice_preference_collapse",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_coexistence_refresh": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-reports\\seed-1535\\model_capability_required_term_pair_coexistence_refresh.json",
+  "out_dir": "e\\557\\解释\\model-capability-required-term-pair-refresh-forced-choice",
+  "settings": {
+    "device": "cpu",
+    "experiment_boundary": "teacher-forced fixed/loss candidate scoring over one refresh checkpoint; no retraining"
+  },
+  "training": {
+    "checkpoint_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+    "tokenizer_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true
+  },
+  "score_rows": [
+    {
+      "checkpoint_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        18,
+        21,
+        34,
+        17,
+        16
+      ],
+      "total_nll": 2.994997,
+      "avg_nll": 0.598999,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.423187,
+      "error": ""
+    },
+    {
+      "checkpoint_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        23,
+        26,
+        30,
+        30
+      ],
+      "total_nll": 2.35457,
+      "avg_nll": 0.588642,
+      "first_token_rank": 1,
+      "first_token_logprob": -1.027083,
+      "error": ""
+    },
+    {
+      "checkpoint_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        18,
+        21,
+        34,
+        17,
+        16
+      ],
+      "total_nll": 5.079333,
+      "avg_nll": 1.015867,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.430274,
+      "error": ""
+    },
+    {
+      "checkpoint_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\556\\解释\\model-capability-required-term-pair-equals-surface-tied-repair\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        23,
+        26,
+        30,
+        30
+      ],
+      "total_nll": 2.412341,
+      "avg_nll": 0.603085,
+      "first_token_rank": 1,
+      "first_token_logprob": -1.105086,
+      "error": ""
+    }
+  ],
+  "prompt_rows": [
+    {
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "expected_term": "fixed",
+      "best_candidate_term": "loss",
+      "expected_is_best": false,
+      "expected_rank": 2,
+      "expected_avg_nll": 0.598999,
+      "best_avg_nll": 0.588642,
+      "expected_margin_vs_best": 0.010357,
+      "candidate_count": 2
+    },
+    {
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "expected_term": "loss",
+      "best_candidate_term": "loss",
+      "expected_is_best": true,
+      "expected_rank": 1,
+      "expected_avg_nll": 0.603085,
+      "best_avg_nll": 0.603085,
+      "expected_margin_vs_best": 0.0,
+      "candidate_count": 2
+    }
+  ],
+  "summary": {
+    "prompt_count": 2,
+    "score_row_count": 4,
+    "expected_best_count": 1,
+    "expected_best_rate": 0.5,
+    "forced_choice_full_match": false,
+    "best_candidate_by_prompt": {
+      "fixed": "loss",
+      "loss": "loss"
+    },
+    "collapse_candidate": "loss",
+    "preference_collapse_observed": true
+  },
+  "interpretation": {
+    "model_quality_claim": "diagnostic_only",
+    "reason": "Teacher-forced scoring collapses both prompts to loss.",
+    "next_action": "avoid more simple corpus weighting and inspect objective/capacity or constrained decoding"
+  }
+}

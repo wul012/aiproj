@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_refresh_forced_choice_preference_collapse
+failed_count=0
+prompt_count=2
+score_row_count=4
+expected_best_count=1
+forced_choice_full_match=False
+collapse_candidate=loss
+model_quality_claim=diagnostic_only
+next_action=avoid more simple corpus weighting and inspect objective/capacity or constrained decoding

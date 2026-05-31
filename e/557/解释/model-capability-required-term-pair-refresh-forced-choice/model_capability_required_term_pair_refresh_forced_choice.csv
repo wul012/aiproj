@@ -1,0 +1,3 @@
+prompt_term,prompt,expected_term,best_candidate_term,expected_is_best,expected_rank,expected_avg_nll,best_avg_nll,expected_margin_vs_best
+fixed,fixed=,fixed,loss,False,2,0.598999,0.588642,0.010357
+loss,loss=,loss,loss,True,1,0.603085,0.603085,0.0

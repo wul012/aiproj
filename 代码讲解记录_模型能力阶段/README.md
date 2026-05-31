@@ -263,6 +263,9 @@
 570-v556-required-term-pair-equals-surface-tied-repair.md
  -> v556 code explanation: add a tied equals-surface corpus mode and preserve the negative seed 1535 result.
 
+571-v557-required-term-pair-refresh-forced-choice.md
+ -> v557 code explanation: score fixed/loss candidate continuations on the v556 refresh checkpoint and diagnose preference collapse.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

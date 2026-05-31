@@ -1,0 +1,44 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT refresh forced-choice" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Teacher-forced scoring collapses both prompts to loss.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_refresh_forced_choice_preference_collapse
+    - generic [ref=e13]:
+      - generic [ref=e14]: Prompts
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Expected best
+      - strong [ref=e18]: "1"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Full match
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Collapse
+      - strong [ref=e24]: loss
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: avoid more simple corpus weighting and inspect objective/capacity or constrained decoding
+  - generic [ref=e28]:
+    - heading "Prompt Preference" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Prompt term Prompt Expected Best Expected best Margin" [ref=e33]
+      - rowgroup [ref=e40]:
+        - row "fixed fixed= fixed loss False 0.010357" [ref=e41]
+        - row "loss loss= loss loss True 0.0" [ref=e48]
+  - generic [ref=e55]:
+    - heading "Candidate Scores" [level=2] [ref=e56]
+    - table [ref=e58]:
+      - rowgroup [ref=e59]:
+        - row "Prompt Candidate Expected? Avg NLL First rank Status" [ref=e60]
+      - rowgroup [ref=e67]:
+        - row "fixed= fixed True 0.598999 2 pass" [ref=e68]
+        - row "fixed= loss False 0.588642 1 pass" [ref=e75]
+        - row "loss= fixed False 1.015867 2 pass" [ref=e82]
+        - row "loss= loss True 0.603085 1 pass" [ref=e89]
