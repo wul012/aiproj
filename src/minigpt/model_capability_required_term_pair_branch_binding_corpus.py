@@ -3,6 +3,7 @@ from __future__ import annotations
 
 PAIR_BRANCH_BINDING_CORPUS_MODES = (
     "equals_surface_no_pair_id_branch_binding_repair",
+    "equals_surface_no_pair_id_branch_binding_no_space_repair",
 )
 
 
@@ -15,6 +16,13 @@ def extend_pair_branch_binding_corpus(
 ) -> bool:
     if corpus_mode == "equals_surface_no_pair_id_branch_binding_repair":
         _extend_equals_surface_no_pair_id_branch_binding_repair(
+            lines,
+            repeat=repeat,
+            bridge_repeat=bridge_repeat,
+        )
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_branch_binding_no_space_repair":
+        _extend_equals_surface_no_pair_id_branch_binding_no_space_repair(
             lines,
             repeat=repeat,
             bridge_repeat=bridge_repeat,
@@ -63,6 +71,45 @@ def _extend_equals_surface_no_pair_id_branch_binding_repair(
                 "loss= is bound to loss.",
                 "fixed and loss are parallel labels, not replacements.",
                 "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_equals_surface_no_pair_id_branch_binding_no_space_repair(
+    lines: list[str],
+    *,
+    repeat: int,
+    bridge_repeat: int,
+) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "fixed=fixed",
+                "loss=loss",
+                "fixed=fixed loss=loss",
+                "loss=loss fixed=fixed",
+                "fixed=fixed|loss=loss",
+                "loss=loss|fixed=fixed",
+                "fixed=fixed;loss=loss",
+                "loss=loss;fixed=fixed",
+                "branch_fixed=fixed",
+                "branch_loss=loss",
+                "key_fixed=fixed",
+                "key_loss=loss",
+                "fixed=fixed_only",
+                "loss=loss_only",
+                "fixed=fixed_not_loss",
+                "loss=loss_not_fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "no-space branch binding keeps fixed=fixed and loss=loss.",
+                "after fixed= write fixed immediately.",
+                "after loss= write loss immediately.",
+                "fixed=fixed|loss=loss",
+                "loss=loss|fixed=fixed",
             ]
         )
 

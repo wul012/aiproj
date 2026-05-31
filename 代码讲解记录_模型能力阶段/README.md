@@ -335,6 +335,9 @@
 594-v580-required-term-pair-branch-binding-whitespace-diagnostic.md
  -> v580 code explanation: diagnose v579 as an equals-surface whitespace first-token gap.
 
+595-v581-required-term-pair-branch-binding-no-space-seed-3535.md
+ -> v581 code explanation: test a no-space branch-binding objective on fresh seed 3535.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

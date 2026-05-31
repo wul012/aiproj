@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v580.0.0` diagnoses the v579 branch-binding baseline: seed `3535` misses pair-full because both `fixed=` and `loss=` drift to whitespace as the top token, so the next objective should bind whitespace/term boundaries before another sweep.
+Version `v581.0.0` tests a no-space branch-binding objective for seed `3535`; it removes the natural-language binding rows that caused whitespace drift, but the fresh seed still reaches `pair_full_seed_count=0/1`, so the next step is comparison and route selection rather than more blind corpus edits.
+
+## Latest v581 checkpoint
+
+- Added `equals_surface_no_pair_id_branch_binding_no_space_repair`.
+- Kept the new logic inside `model_capability_required_term_pair_branch_binding_corpus.py`.
+- Tested direct equals target rows such as `fixed=fixed|loss=loss`.
+- Ran real seed `3535` training with no-space branch-binding.
+- Confirmed `pair_full_seed_count=0/1` and `continuation_hit_count=0`.
+- Archived v581 evidence in `e/581` and added the code explanation in `代码讲解记录_模型能力阶段/595-v581-required-term-pair-branch-binding-no-space-seed-3535.md`.
 
 ## Latest v580 checkpoint
 

@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=79797 vocab_size=36
+parameters=53,440
+data_source=data:e\581\解释\model-capability-required-term-pair-branch-binding-no-space-seed-3535\seed-runs\seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9278 val_loss=3.0733
+step=  350 train_loss=0.8380 val_loss=1.7867
+step=  700 train_loss=0.8325 val_loss=2.2044
+step= 1050 train_loss=0.7497 val_loss=2.0994
+step= 1400 train_loss=0.6693 val_loss=1.6423
+saved=e\581\解释\model-capability-required-term-pair-branch-binding-no-space-seed-3535\seed-runs\seed-3535\pair-coexistence-refresh-run
+history=e\581\解释\model-capability-required-term-pair-branch-binding-no-space-seed-3535\seed-runs\seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\581\解释\model-capability-required-term-pair-branch-binding-no-space-seed-3535\seed-runs\seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\581\解释\model-capability-required-term-pair-branch-binding-no-space-seed-3535\seed-runs\seed-3535\pair-coexistence-refresh-run\sample.txt

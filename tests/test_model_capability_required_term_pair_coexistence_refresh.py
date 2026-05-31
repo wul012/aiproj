@@ -243,6 +243,23 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertNotIn("pair=01", corpus)
         self.assertNotIn("fixed:fixed", corpus)
 
+    def test_equals_surface_no_pair_id_branch_binding_no_space_repair_keeps_direct_equals_targets(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_branch_binding_no_space_repair",
+        )
+
+        self.assertGreaterEqual(corpus.count("fixed=fixed"), 2)
+        self.assertGreaterEqual(corpus.count("loss=loss"), 2)
+        self.assertIn("fixed=fixed|loss=loss", corpus)
+        self.assertIn("loss=loss|fixed=fixed", corpus)
+        self.assertIn("after fixed= write fixed immediately.", corpus)
+        self.assertIn("after loss= write loss immediately.", corpus)
+        self.assertNotIn("branch fixed prompt fixed= answer fixed", corpus)
+        self.assertNotIn("prompt fixed= target fixed", corpus)
+        self.assertNotIn("pair=01", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
