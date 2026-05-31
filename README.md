@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v583.0.0` turns the v582 comparison into a machine-readable branch-binding route decision: stop branch-binding v1/v2, keep v571 as the residual baseline, and require a stronger objective before another training run.
+Version `v584.0.0` tests a stronger target-anchor objective after stopping branch-binding v1/v2; seed `3535` still does not reach pair-full, but it recovers a partial `fixed` hit and becomes comparable with the v571 residual baseline.
+
+## Latest v584 checkpoint
+
+- Added `model_capability_required_term_pair_target_anchor_corpus.py`.
+- Registered `equals_surface_no_pair_id_target_anchor_repair`.
+- Kept target-anchor logic out of the growing coexistence corpus file.
+- Ran real seed `3535` training with target-anchor corpus.
+- Confirmed `pair_full_seed_count=0/1` and `continuation_hit_count=1`.
+- Archived v584 evidence in `e/584` and added the code explanation in `代码讲解记录_模型能力阶段/598-v584-required-term-pair-target-anchor-seed-3535.md`.
 
 ## Latest v583 checkpoint
 

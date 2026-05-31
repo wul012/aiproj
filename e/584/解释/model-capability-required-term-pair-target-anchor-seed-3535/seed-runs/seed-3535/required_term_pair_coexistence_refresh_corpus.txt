@@ -1,0 +1,3742 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+fixed=fixed;loss=loss
+loss=loss;fixed=fixed
+anchor fixed=fixed
+anchor loss=loss
+target fixed=fixed
+target loss=loss
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed
+target anchor rows repeat exact equals continuations.
+fixed=fixed appears as a direct target.
+loss=loss appears as a direct target.
+fixed=fixed|loss=loss
+loss=loss|fixed=fixed

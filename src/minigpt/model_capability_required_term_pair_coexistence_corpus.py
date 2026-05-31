@@ -5,6 +5,11 @@ from minigpt.model_capability_required_term_pair_branch_binding_corpus import (
     extend_pair_branch_binding_corpus,
     is_pair_branch_binding_corpus_mode,
 )
+from minigpt.model_capability_required_term_pair_target_anchor_corpus import (
+    PAIR_TARGET_ANCHOR_CORPUS_MODES,
+    extend_pair_target_anchor_corpus,
+    is_pair_target_anchor_corpus_mode,
+)
 
 
 PAIR_COEXISTENCE_CORPUS_MODES = (
@@ -20,7 +25,7 @@ PAIR_COEXISTENCE_CORPUS_MODES = (
     "equals_surface_no_pair_id_loss_balanced_repair",
     "equals_surface_no_pair_id_loss_balanced_first_token_repair",
     "equals_surface_no_pair_id_loss_balanced_light_first_token_repair",
-) + PAIR_BRANCH_BINDING_CORPUS_MODES
+) + PAIR_BRANCH_BINDING_CORPUS_MODES + PAIR_TARGET_ANCHOR_CORPUS_MODES
 
 
 def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, corpus_mode: str = "spaced_answer") -> str:
@@ -62,6 +67,8 @@ def build_pair_coexistence_refresh_corpus(*, repeat: int, bridge_repeat: int, co
         )
     elif extend_pair_branch_binding_corpus(lines, corpus_mode=corpus_mode, repeat=repeat, bridge_repeat=bridge_repeat):
         pass
+    elif extend_pair_target_anchor_corpus(lines, corpus_mode=corpus_mode, repeat=repeat, bridge_repeat=bridge_repeat):
+        pass
     else:
         raise ValueError(f"unknown corpus_mode: {corpus_mode}")
     return "\n".join(lines) + "\n"
@@ -76,7 +83,7 @@ def source_prompts(corpus_mode: str) -> tuple[str, str]:
         "equals_surface_no_pair_id_loss_balanced_repair",
         "equals_surface_no_pair_id_loss_balanced_first_token_repair",
         "equals_surface_no_pair_id_loss_balanced_light_first_token_repair",
-    ) or is_pair_branch_binding_corpus_mode(corpus_mode):
+    ) or is_pair_branch_binding_corpus_mode(corpus_mode) or is_pair_target_anchor_corpus_mode(corpus_mode):
         return "fixed=", "loss="
     return "fixed:", "loss:"
 
