@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v565.0.0` compares v562 and v564 as coverage-migration evidence; first-token rows move partial coverage from seed `2535` loss-only to seed `535` fixed-only while seed `1535` stays pair-full, so they redistribute hits rather than improving stable coverage.
+Version `v566.0.0` tests a light first-token hint variant; it regresses to `0/3` pair-full and removes the seed `1535` recovery, so sparse bridge-only hints are worse than both v562 loss-balanced and v564 full prefix rows.
+
+## Latest v566 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_balanced_light_first_token_repair`, keeping v561's loss-balanced rows while moving first-token hints into bridge text only.
+- Added tests proving the light mode keeps prefix hints sparse, preserves loss weighting, and still excludes `pair=01`.
+- Kept the corpus module at `456` lines, still below the current split threshold.
+- Ran real seeds `535`, `1535`, and `2535` with the same budget and decode settings as v562/v564.
+- Confirmed `pair_full_seed_count=0/3`, `stable_pair_full=False`; seed `1535` fell from pair-full to fixed-only.
+- Archived v566 evidence in `e/566` and added the code explanation in `代码讲解记录_模型能力阶段/580-v566-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability.md`.
 
 ## Latest v565 checkpoint
 

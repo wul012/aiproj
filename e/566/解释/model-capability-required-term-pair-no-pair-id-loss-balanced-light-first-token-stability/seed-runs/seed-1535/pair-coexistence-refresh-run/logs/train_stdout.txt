@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=128477 vocab_size=35
+parameters=53,376
+data_source=data:e\566\解释\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\seed-runs\seed-1535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.0390 val_loss=3.1687
+step=  350 train_loss=1.1323 val_loss=2.0501
+step=  700 train_loss=1.2112 val_loss=2.0435
+step= 1050 train_loss=1.0121 val_loss=2.0644
+step= 1400 train_loss=1.0269 val_loss=1.8428
+saved=e\566\解释\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\seed-runs\seed-1535\pair-coexistence-refresh-run
+history=e\566\解释\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\seed-runs\seed-1535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\566\解释\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\seed-runs\seed-1535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\566\解释\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\seed-runs\seed-1535\pair-coexistence-refresh-run\sample.txt

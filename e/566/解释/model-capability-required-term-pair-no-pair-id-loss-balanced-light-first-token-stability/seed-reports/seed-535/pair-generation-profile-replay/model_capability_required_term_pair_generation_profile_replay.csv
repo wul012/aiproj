@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+coexistence-refresh,default,fixed,fixed=,535,False,False,0, losssd fixo
+coexistence-refresh,suppress_newline_tokens,fixed,fixed=,535,False,False,1, losssd fixo
+coexistence-refresh,default,loss,loss=,536,False,False,0, fixed fixes
+coexistence-refresh,suppress_newline_tokens,loss,loss=,536,False,False,1, fixed fixes
