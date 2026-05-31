@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+route-heldout-arrow-seed-1535,default,fixed,fixed -> ,1535,True,True,0,fixed -�hixed\nlosss=
+route-heldout-arrow-seed-1535,suppress_newline_tokens,fixed,fixed -> ,1535,True,True,1,fixed -�hixed=fixed=
+route-heldout-arrow-seed-1535,default,loss,loss -> ,1536,True,True,0,loss -�hos= fixed\nf
+route-heldout-arrow-seed-1535,suppress_newline_tokens,loss,loss -> ,1536,True,True,1,loss -�hos= fixed f

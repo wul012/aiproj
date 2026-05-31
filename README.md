@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v568.0.0` turns the v567 first-token density comparison into a route decision: stop first-token density tuning, keep `v562-loss-balanced` as the simplest best baseline, and replay held-out equals-surface prompts before adding corpus variants.
+Version `v569.0.0` replays the v568-selected `v562-loss-balanced` route on held-out prompt surfaces; seed `1535` keeps pair-full coverage across `colon-spaced`, `equals`, and `arrow`, so the route now has targeted held-out evidence without claiming seed stability.
+
+## Latest v569 checkpoint
+
+- Added `model_capability_required_term_pair_route_heldout_replay`.
+- Added a CLI that reads a route decision JSON or output directory and replays the selected route's pair-full seeds on held-out prompt surfaces.
+- Reused existing generation profile replay for sidecar reports rather than adding another training path.
+- Ran the v568-selected `v562-loss-balanced` route and confirmed `heldout_pair_full_count=3/3`.
+- Kept the claim scoped to `targeted_route_heldout_ready`: seed `1535` transfers across prompt surfaces, but multi-seed stability is still unsolved.
+- Archived v569 evidence in `e/569` and added the code explanation in `代码讲解记录_模型能力阶段/583-v569-required-term-pair-route-heldout-replay.md`.
 
 ## Latest v568 checkpoint
 

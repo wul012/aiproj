@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation profile replay",
+  "generated_at": "2026-05-31T10:37:50Z",
+  "status": "pass",
+  "decision": "generation_profile_no_pair_coexistence_gain",
+  "failed_count": 0,
+  "issues": [],
+  "source_required_term_pair_branch_retention_sweep": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535",
+  "out_dir": "e\\569\\解释\\model-capability-required-term-pair-route-heldout-replay\\route-heldout-replay-runs\\equals\\seed-1535",
+  "settings": {
+    "profiles": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "variant_limit": 1,
+    "max_new_tokens": 12,
+    "temperature": 0.8,
+    "top_k": 2,
+    "device": "cpu",
+    "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+  },
+  "terms": [
+    {
+      "case": "equals-fixed",
+      "term": "fixed",
+      "scaffold_prompt": "fixed=",
+      "source_hit_rate": 0.0
+    },
+    {
+      "case": "equals-loss",
+      "term": "loss",
+      "scaffold_prompt": "loss=",
+      "source_hit_rate": 0.0
+    }
+  ],
+  "case_rows": [
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "route-heldout-equals-seed-1535",
+      "branch_retention_run_id": "route-heldout-equals-seed-1535",
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 1535,
+      "checkpoint_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed=fixed\nlos= f",
+      "continuation": "fixed\nlos= f",
+      "generated_preview": "fixed=fixed\\nlos= f",
+      "continuation_preview": "fixed\\nlos= f",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "route-heldout-equals-seed-1535",
+      "branch_retention_run_id": "route-heldout-equals-seed-1535",
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 1535,
+      "checkpoint_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "fixed=fixed=fixed=",
+      "continuation": "fixed=fixed=",
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "route-heldout-equals-seed-1535",
+      "branch_retention_run_id": "route-heldout-equals-seed-1535",
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 1536,
+      "checkpoint_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss= fixed=loss=",
+      "continuation": " fixed=loss=",
+      "generated_preview": "loss= fixed=loss=",
+      "continuation_preview": " fixed=loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 0
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "pair_id": "01-fixed-loss",
+      "variant_id": "route-heldout-equals-seed-1535",
+      "branch_retention_run_id": "route-heldout-equals-seed-1535",
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 1536,
+      "checkpoint_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "checkpoint_exists": true,
+      "tokenizer_path": "e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\seed-runs\\seed-1535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "tokenizer_exists": true,
+      "generated": "loss= fixed=loss=",
+      "continuation": " fixed=loss=",
+      "generated_preview": "loss= fixed=loss=",
+      "continuation_preview": " fixed=loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1
+    }
+  ],
+  "variant_rows": [
+    {
+      "variant_id": "route-heldout-equals-seed-1535",
+      "profile_id": "default",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "hit_count": 2,
+      "pair_full_hit": true
+    },
+    {
+      "variant_id": "route-heldout-equals-seed-1535",
+      "profile_id": "suppress_newline_tokens",
+      "term_count": 2,
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "hit_count": 2,
+      "pair_full_hit": true
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "default",
+      "case_count": 2,
+      "continuation_hit_count": 2,
+      "newline_cleanup_hit_count": 2,
+      "pair_full_variant_count": 1,
+      "variant_count": 1,
+      "blocked_token_count_total": 0
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "case_count": 2,
+      "continuation_hit_count": 2,
+      "newline_cleanup_hit_count": 2,
+      "pair_full_variant_count": 1,
+      "variant_count": 1,
+      "blocked_token_count_total": 2
+    }
+  ],
+  "summary": {
+    "variant_count": 1,
+    "term_count": 2,
+    "profile_count": 2,
+    "default_pair_full_variant_count": 1,
+    "suppression_pair_full_variant_count": 1,
+    "default_continuation_hit_count": 2,
+    "suppression_continuation_hit_count": 2,
+    "suppression_hit_delta": 0,
+    "suppression_pair_full_delta": 0,
+    "pair_full_rows": [
+      {
+        "variant_id": "route-heldout-equals-seed-1535",
+        "profile_id": "default",
+        "term_count": 2,
+        "hit_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missed_terms": [],
+        "hit_count": 2,
+        "pair_full_hit": true
+      },
+      {
+        "variant_id": "route-heldout-equals-seed-1535",
+        "profile_id": "suppress_newline_tokens",
+        "term_count": 2,
+        "hit_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missed_terms": [],
+        "hit_count": 2,
+        "pair_full_hit": true
+      }
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+    "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+    "summary": {
+      "variant_count": 1,
+      "term_count": 2,
+      "profile_count": 2,
+      "default_pair_full_variant_count": 1,
+      "suppression_pair_full_variant_count": 1,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "suppression_hit_delta": 0,
+      "suppression_pair_full_delta": 0,
+      "pair_full_rows": [
+        {
+          "variant_id": "route-heldout-equals-seed-1535",
+          "profile_id": "default",
+          "term_count": 2,
+          "hit_terms": [
+            "fixed",
+            "loss"
+          ],
+          "missed_terms": [],
+          "hit_count": 2,
+          "pair_full_hit": true
+        },
+        {
+          "variant_id": "route-heldout-equals-seed-1535",
+          "profile_id": "suppress_newline_tokens",
+          "term_count": 2,
+          "hit_terms": [
+            "fixed",
+            "loss"
+          ],
+          "missed_terms": [],
+          "hit_count": 2,
+          "pair_full_hit": true
+        }
+      ]
+    }
+  }
+}

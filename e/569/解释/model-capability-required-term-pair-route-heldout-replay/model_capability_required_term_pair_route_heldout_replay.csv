@@ -1,0 +1,4 @@
+spec_id,seed,selected_source_label,status,fixed_prompt,loss_prompt,replay_pair_full,default_pair_full_variant_count,suppression_pair_full_variant_count,top_k,temperature
+colon-spaced,1535,v562-loss-balanced,pass,fixed: ,loss: ,True,1,1,2,0.8
+equals,1535,v562-loss-balanced,pass,fixed=,loss=,True,1,1,2,0.8
+arrow,1535,v562-loss-balanced,pass,fixed -> ,loss -> ,True,1,1,2,0.8

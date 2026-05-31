@@ -401,6 +401,10 @@ e/567/解释/说明.md
 e/568/图片
 e/568/解释/说明.md
  -> v568 required-term pair first-token route decision 的运行截图和解释
+
+e/569/图片
+e/569/解释/说明.md
+ -> v569 required-term pair route held-out replay 的运行截图和解释
 ```
 
 写入规则：

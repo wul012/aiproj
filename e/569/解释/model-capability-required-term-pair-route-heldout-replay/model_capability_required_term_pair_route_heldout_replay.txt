@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_route_heldout_replay_ready
+failed_count=0
+row_count=3
+heldout_pair_full_count=3
+heldout_pair_full_rate=1.0
+heldout_all_pair_full=True
+model_quality_claim=targeted_route_heldout_ready
+next_action=test a fresh seed or larger prompt suite before raising the capability claim

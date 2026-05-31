@@ -299,6 +299,9 @@
 582-v568-required-term-pair-first-token-route-decision.md
  -> v568 code explanation: turn v567 comparison evidence into a stop-first-token-density route decision.
 
+583-v569-required-term-pair-route-heldout-replay.md
+ -> v569 code explanation: replay the selected v562-loss-balanced route on held-out prompt surfaces.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
