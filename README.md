@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v603.0.0` compares the three fixed-retention objective routes and confirms mixed branch tradeoff: v601 recovers `fixed`, v600/v602 recover `loss`, and none reach pair-full.
+Version `v604.0.0` adds a fixed-retention route decision: v601 first-token is selected only as fixed recovery evidence, and the next objective must rebalance `loss`.
+
+## Latest v604 checkpoint
+
+- Added `model_capability_required_term_pair_fixed_retention_route_decision`.
+- Consumed the v603 comparison report.
+- Confirmed `pair_full_route_count=0`.
+- Selected `v601-first-token` as fixed recovery route, not promotion.
+- Set `loss_rebalance_objective_required=True`.
+- Archived v604 evidence in `e/604` and added the code explanation in `代码讲解记录_模型能力阶段/618-v604-required-term-pair-fixed-retention-route-decision.md`.
 
 ## Latest v603 checkpoint
 

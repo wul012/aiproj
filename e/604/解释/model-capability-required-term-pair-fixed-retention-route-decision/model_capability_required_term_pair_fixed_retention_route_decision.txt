@@ -1,0 +1,10 @@
+status=pass
+decision=select_fixed_recovery_route_for_loss_rebalance_not_promotion
+failed_count=0
+route_count=3
+pair_full_route_count=0
+selected_route=v601-first-token
+selected_corpus_mode=equals_surface_no_pair_id_fixed_retention_first_token_repair
+loss_rebalance_objective_required=True
+model_quality_claim=route_decision_only
+next_action=build a loss-rebalance objective using the fixed-recovery route as evidence

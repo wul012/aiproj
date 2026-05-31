@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fixed-retention route decision",
+  "generated_at": "2026-05-31T23:48:57Z",
+  "status": "pass",
+  "decision": "select_fixed_recovery_route_for_loss_rebalance_not_promotion",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "e\\603\\解释\\model-capability-required-term-pair-fixed-retention-objective-comparison\\model_capability_required_term_pair_fixed_retention_objective_comparison.json",
+  "route_rows": [
+    {
+      "source_label": "v600-balanced",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "route_type": "balanced",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "fixed_only_tradeoff": false,
+      "loss_only_tradeoff": true,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v601-first-token",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "route_type": "first-token",
+      "seed": 3535,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "fixed_only_tradeoff": true,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v602-prompt-guard",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "route_type": "prompt-guard",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "fixed_only_tradeoff": false,
+      "loss_only_tradeoff": true,
+      "pair_full_observed": false
+    }
+  ],
+  "summary": {
+    "route_count": 3,
+    "pair_full_route_count": 0,
+    "fixed_only_tradeoff_route_count": 1,
+    "loss_only_tradeoff_route_count": 2,
+    "comparison_decision": "fixed_retention_objectives_confirm_branch_tradeoff",
+    "comparison_union_hit_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "mixed_tradeoff_observed": true,
+    "selected_route": "v601-first-token",
+    "selected_corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+    "selected_route_type": "first-token",
+    "loss_rebalance_objective_required": true,
+    "seed_stability_replay_required": false
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "The first-token route recovers fixed but loses loss, so it is not a promotion route.",
+    "next_action": "build a loss-rebalance objective using the fixed-recovery route as evidence"
+  }
+}

@@ -1,0 +1,4 @@
+source_label,route_type,corpus_mode,hit_terms,missed_terms,pair_full_observed
+v600-balanced,balanced,equals_surface_no_pair_id_fixed_retention_balanced_repair,"[""loss""]","[""fixed""]",False
+v601-first-token,first-token,equals_surface_no_pair_id_fixed_retention_first_token_repair,"[""fixed""]","[""loss""]",False
+v602-prompt-guard,prompt-guard,equals_surface_no_pair_id_fixed_retention_prompt_guard_repair,"[""loss""]","[""fixed""]",False

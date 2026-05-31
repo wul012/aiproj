@@ -541,6 +541,10 @@ e/602/解释/说明.md
 e/603/图片
 e/603/解释/说明.md
  -> v603 required-term pair fixed-retention objective comparison 的运行截图和解释
+
+e/604/图片
+e/604/解释/说明.md
+ -> v604 required-term pair fixed-retention route decision 的运行截图和解释
 ```
 
 写入规则：

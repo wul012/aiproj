@@ -404,6 +404,9 @@
 617-v603-required-term-pair-fixed-retention-objective-comparison.md
  -> v603 code explanation: compare fixed-retention routes and identify v601 as fixed recovery tradeoff.
 
+618-v604-required-term-pair-fixed-retention-route-decision.md
+ -> v604 code explanation: select v601 as fixed recovery evidence and require loss rebalance.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
