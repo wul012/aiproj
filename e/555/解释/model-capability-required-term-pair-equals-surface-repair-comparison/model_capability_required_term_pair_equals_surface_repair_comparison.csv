@@ -1,0 +1,2 @@
+seed,branch_competition,compared_report_count,compared_reports,fixed_hit_reports,loss_hit_reports,union_hit_terms,pair_full_profile_reports,best_next_action
+1535,True,2,"[""v552-fixed-repair"", ""v554-balanced-repair""]","[""v552-fixed-repair""]","[""v554-balanced-repair""]","[""fixed"", ""loss""]",[],tie fixed/loss branches in one objective or isolate branch prompts before another full seed sweep

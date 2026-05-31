@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair equals-surface repair comparison",
+  "generated_at": "2026-05-31T04:02:53Z",
+  "status": "pass",
+  "decision": "required_term_pair_equals_surface_branch_competition_detected",
+  "failed_count": 0,
+  "issues": [],
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "v552-fixed-repair",
+      "source_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "corpus_mode": "equals_surface_fixed_repair",
+      "seed_count": 1,
+      "pair_full_seed_count": 0,
+      "pair_full_seed_rate": 0.0,
+      "stable_pair_full": false
+    },
+    {
+      "index": 1,
+      "source_label": "v554-balanced-repair",
+      "source_path": "e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "status": "pass",
+      "decision": "required_term_pair_colon_immediate_not_stable",
+      "corpus_mode": "equals_surface_balanced_repair",
+      "seed_count": 1,
+      "pair_full_seed_count": 0,
+      "pair_full_seed_rate": 0.0,
+      "stable_pair_full": false
+    }
+  ],
+  "term_rows": [
+    {
+      "source_label": "v552-fixed-repair",
+      "source_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_fixed_repair",
+      "seed": 1535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0,
+      "generated_preview": "fixed=fi\\nfixeq\\nfix",
+      "continuation_preview": "fi\\nfixeq\\nfix"
+    },
+    {
+      "source_label": "v552-fixed-repair",
+      "source_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_fixed_repair",
+      "seed": 1535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1,
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v552-fixed-repair",
+      "source_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_fixed_repair",
+      "seed": 1535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0,
+      "generated_preview": "loss=fiossssss=fs",
+      "continuation_preview": "fiossssss=fs"
+    },
+    {
+      "source_label": "v552-fixed-repair",
+      "source_path": "e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_fixed_repair",
+      "seed": 1535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1,
+      "generated_preview": "loss=fiossssss=fs",
+      "continuation_preview": "fiossssss=fs"
+    },
+    {
+      "source_label": "v554-balanced-repair",
+      "source_path": "e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_balanced_repair",
+      "seed": 1535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 0,
+      "generated_preview": "fixed=loss=los=ss=",
+      "continuation_preview": "loss=los=ss="
+    },
+    {
+      "source_label": "v554-balanced-repair",
+      "source_path": "e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_balanced_repair",
+      "seed": 1535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "blocked_token_count": 1,
+      "generated_preview": "fixed=loss=los=ss=",
+      "continuation_preview": "loss=los=ss="
+    },
+    {
+      "source_label": "v554-balanced-repair",
+      "source_path": "e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_balanced_repair",
+      "seed": 1535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 0,
+      "generated_preview": "loss=loss=losss=l",
+      "continuation_preview": "loss=losss=l"
+    },
+    {
+      "source_label": "v554-balanced-repair",
+      "source_path": "e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\model_capability_required_term_pair_colon_immediate_stability.json",
+      "corpus_mode": "equals_surface_balanced_repair",
+      "seed": 1535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "blocked_token_count": 1,
+      "generated_preview": "loss=loss=losss=l",
+      "continuation_preview": "loss=losss=l"
+    }
+  ],
+  "branch_rows": [
+    {
+      "seed": "1535",
+      "compared_report_count": 2,
+      "compared_reports": [
+        "v552-fixed-repair",
+        "v554-balanced-repair"
+      ],
+      "fixed_hit_reports": [
+        "v552-fixed-repair"
+      ],
+      "loss_hit_reports": [
+        "v554-balanced-repair"
+      ],
+      "union_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pair_full_profile_reports": [],
+      "branch_competition": true,
+      "best_next_action": "tie fixed/loss branches in one objective or isolate branch prompts before another full seed sweep"
+    }
+  ],
+  "summary": {
+    "compared_report_count": 2,
+    "term_case_row_count": 8,
+    "compared_seed_count": 1,
+    "branch_competition_seed_count": 1,
+    "pair_full_report_count": 0,
+    "pair_full_profile_seed_count": 0,
+    "union_hit_terms": [
+      "fixed",
+      "loss"
+    ],
+    "union_hit_term_count": 2,
+    "all_target_terms_seen": true
+  },
+  "interpretation": {
+    "model_quality_claim": "diagnostic_only",
+    "reason": "The compared repairs cover fixed and loss across runs, but no single run/profile keeps both terms together.",
+    "next_action": "tie the two branches in one objective or isolate prompt branches before spending more seed budget"
+  }
+}

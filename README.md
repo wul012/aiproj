@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v554.0.0` tests a balanced equals-surface repair for seed `1535`; it still reaches `0/1` pair-full, shifting the miss back to `fixed=` and showing branch competition rather than a simple sample-ratio issue.
+Version `v555.0.0` compares the v552 fixed-biased equals repair with the v554 balanced repair and confirms branch competition: fixed and loss are each recoverable across runs, but no single run/profile keeps both terms pair-full.
+
+## Latest v555 checkpoint
+
+- Added `model_capability_required_term_pair_equals_surface_repair_comparison`, a read-only comparison over equals-surface repair reports.
+- Compared v552 `equals_surface_fixed_repair` with v554 `equals_surface_balanced_repair`.
+- Confirmed `branch_competition_seed_count=1`, `pair_full_profile_seed_count=0`, and `union_hit_terms=fixed,loss`.
+- Kept the claim diagnostic-only: this is evidence for the next objective design, not proof of model quality.
+- Archived v555 evidence in `e/555` and added the code explanation in `代码讲解记录_模型能力阶段/569-v555-required-term-pair-equals-surface-repair-comparison.md`.
 
 ## Latest v554 checkpoint
 

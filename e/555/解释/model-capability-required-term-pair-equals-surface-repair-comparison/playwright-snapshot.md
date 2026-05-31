@@ -1,0 +1,55 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT equals-surface repair comparison" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The compared repairs cover fixed and loss across runs, but no single run/profile keeps both terms together.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_equals_surface_branch_competition_detected
+    - generic [ref=e13]:
+      - generic [ref=e14]: Reports
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Term rows
+      - strong [ref=e18]: "8"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Branch competition
+      - strong [ref=e21]: "1"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Pair-full profiles
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: tie the two branches in one objective or isolate prompt branches before spending more seed budget
+  - generic [ref=e28]:
+    - heading "Source Reports" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Label Status Corpus mode Pair-full seeds Source" [ref=e33]
+      - rowgroup [ref=e39]:
+        - row "v552-fixed-repair pass equals_surface_fixed_repair 0/1 e\\552\\解释\\model-capability-required-term-pair-equals-surface-fixed-repair\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e40]
+        - row "v554-balanced-repair pass equals_surface_balanced_repair 0/1 e\\554\\解释\\model-capability-required-term-pair-equals-surface-balanced-repair\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e46]
+  - generic [ref=e52]:
+    - heading "Branch Rows" [level=2] [ref=e53]
+    - table [ref=e55]:
+      - rowgroup [ref=e56]:
+        - row "Seed Competition Fixed hit reports Loss hit reports Pair-full reports Action" [ref=e57]
+      - rowgroup [ref=e64]:
+        - row "1535 True v552-fixed-repair v554-balanced-repair tie fixed/loss branches in one objective or isolate branch prompts before another full seed sweep" [ref=e65]
+  - generic [ref=e72]:
+    - heading "Term Evidence" [level=2] [ref=e73]
+    - table [ref=e75]:
+      - rowgroup [ref=e76]:
+        - row "Report Seed Profile Term Hit Prompt Preview" [ref=e77]
+      - rowgroup [ref=e85]:
+        - row "v552-fixed-repair 1535 default fixed False fixed= fi\\nfixeq\\nfix" [ref=e86]
+        - row "v552-fixed-repair 1535 suppress_newline_tokens fixed True fixed= fixed=fixed=" [ref=e94]
+        - row "v552-fixed-repair 1535 default loss False loss= fiossssss=fs" [ref=e102]
+        - row "v552-fixed-repair 1535 suppress_newline_tokens loss False loss= fiossssss=fs" [ref=e110]
+        - row "v554-balanced-repair 1535 default fixed False fixed= loss=los=ss=" [ref=e118]
+        - row "v554-balanced-repair 1535 suppress_newline_tokens fixed False fixed= loss=los=ss=" [ref=e126]
+        - row "v554-balanced-repair 1535 default loss True loss= loss=losss=l" [ref=e134]
+        - row "v554-balanced-repair 1535 suppress_newline_tokens loss True loss= loss=losss=l" [ref=e142]
