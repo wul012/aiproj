@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v592.0.0` runs the micro-span loss-branch objective on seed `3535`: training passes and `loss` is still recovered, but `fixed` drops again, confirming all three v590-v592 loss-branch objectives are tradeoff-only so far.
+Version `v593.0.0` adds and runs a refresh-report comparison for the v590-v592 loss-branch objectives, confirming all three routes are `loss-only tradeoff` with `pair_full_report_count=0`.
+
+## Latest v593 checkpoint
+
+- Added `model_capability_required_term_pair_loss_branch_objective_comparison`.
+- Added a CLI and tests for comparing single-run `coexistence_refresh` reports.
+- Compared v590 targeted, v591 dual-anchor, and v592 micro-span routes.
+- Confirmed `loss_only_tradeoff_report_count=3`, `pair_full_report_count=0`, `union_hit_terms=loss`.
+- Archived v593 evidence in `e/593` and added the code explanation in `代码讲解记录_模型能力阶段/607-v593-required-term-pair-loss-branch-objective-comparison.md`.
+
+## Latest v592 checkpoint
 
 ## Latest v592 checkpoint
 

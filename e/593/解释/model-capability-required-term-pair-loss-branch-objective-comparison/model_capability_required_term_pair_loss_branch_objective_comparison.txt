@@ -1,0 +1,10 @@
+status=pass
+decision=loss_branch_objectives_confirm_loss_only_tradeoff
+failed_count=0
+compared_report_count=3
+pair_full_report_count=0
+loss_only_tradeoff_report_count=3
+union_hit_terms=loss
+best_routes=v590-targeted,v591-dual-anchor,v592-micro-span
+model_quality_claim=tradeoff_only
+next_action=build a route decision and test whether one route is worth seed stability replay

@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-branch objective comparison",
+  "generated_at": "2026-05-31T14:22:24Z",
+  "status": "pass",
+  "decision": "loss_branch_objectives_confirm_loss_only_tradeoff",
+  "failed_count": 0,
+  "issues": [],
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "v590-targeted",
+      "source_path": "e\\590\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    },
+    {
+      "index": 1,
+      "source_label": "v591-dual-anchor",
+      "source_path": "e\\591\\解释\\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    },
+    {
+      "index": 2,
+      "source_label": "v592-micro-span",
+      "source_path": "e\\592\\解释\\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    }
+  ],
+  "term_rows": [
+    {
+      "source_label": "v590-targeted",
+      "source_path": "e\\590\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v590-targeted",
+      "source_path": "e\\590\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v590-targeted",
+      "source_path": "e\\590\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v590-targeted",
+      "source_path": "e\\590\\解释\\model-capability-required-term-pair-loss-branch-targeted-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss= losssssssss",
+      "continuation_preview": " losssssssss"
+    },
+    {
+      "source_label": "v591-dual-anchor",
+      "source_path": "e\\591\\解释\\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed=lossssssssss",
+      "continuation_preview": "lossssssssss"
+    },
+    {
+      "source_label": "v591-dual-anchor",
+      "source_path": "e\\591\\解释\\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed=lossssssssss",
+      "continuation_preview": "lossssssssss"
+    },
+    {
+      "source_label": "v591-dual-anchor",
+      "source_path": "e\\591\\解释\\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss=lossssssssss",
+      "continuation_preview": "lossssssssss"
+    },
+    {
+      "source_label": "v591-dual-anchor",
+      "source_path": "e\\591\\解释\\model-capability-required-term-pair-loss-branch-dual-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss=lossssssssss",
+      "continuation_preview": "lossssssssss"
+    },
+    {
+      "source_label": "v592-micro-span",
+      "source_path": "e\\592\\解释\\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed=los=los=los=",
+      "continuation_preview": "los=los=los="
+    },
+    {
+      "source_label": "v592-micro-span",
+      "source_path": "e\\592\\解释\\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed=los=los=los=",
+      "continuation_preview": "los=los=los="
+    },
+    {
+      "source_label": "v592-micro-span",
+      "source_path": "e\\592\\解释\\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss=los=loss=los",
+      "continuation_preview": "los=loss=los"
+    },
+    {
+      "source_label": "v592-micro-span",
+      "source_path": "e\\592\\解释\\model-capability-required-term-pair-loss-branch-micro-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "loss=los=loss=los",
+      "continuation_preview": "los=loss=los"
+    }
+  ],
+  "branch_rows": [
+    {
+      "source_label": "v590-targeted",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_targeted_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "loss_only_tradeoff": true,
+      "fixed_only_tradeoff": false,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v591-dual-anchor",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_dual_anchor_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "loss_only_tradeoff": true,
+      "fixed_only_tradeoff": false,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v592-micro-span",
+      "corpus_mode": "equals_surface_no_pair_id_loss_branch_micro_span_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "loss_only_tradeoff": true,
+      "fixed_only_tradeoff": false,
+      "pair_full_observed": false
+    }
+  ],
+  "summary": {
+    "compared_report_count": 3,
+    "pair_full_report_count": 0,
+    "loss_only_tradeoff_report_count": 3,
+    "fixed_only_tradeoff_report_count": 0,
+    "loss_hit_report_count": 3,
+    "fixed_hit_report_count": 0,
+    "union_hit_terms": [
+      "loss"
+    ],
+    "all_loss_branch_reports_tradeoff": true,
+    "best_hit_term_count": 1,
+    "best_routes": [
+      "v590-targeted",
+      "v591-dual-anchor",
+      "v592-micro-span"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "tradeoff_only",
+    "reason": "All compared loss-branch objectives recover loss but drop fixed.",
+    "next_action": "build a route decision and test whether one route is worth seed stability replay"
+  }
+}

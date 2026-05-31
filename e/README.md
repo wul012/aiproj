@@ -497,6 +497,10 @@ e/591/解释/说明.md
 e/592/图片
 e/592/解释/说明.md
  -> v592 required-term pair loss-branch micro-span seed 3535 的运行截图和解释
+
+e/593/图片
+e/593/解释/说明.md
+ -> v593 required-term pair loss-branch objective comparison 的运行截图和解释
 ```
 
 写入规则：

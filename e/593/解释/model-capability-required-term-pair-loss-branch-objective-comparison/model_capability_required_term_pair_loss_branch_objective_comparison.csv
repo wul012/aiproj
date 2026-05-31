@@ -1,0 +1,4 @@
+source_label,corpus_mode,seed,hit_terms,missed_terms,pair_full_observed
+v590-targeted,equals_surface_no_pair_id_loss_branch_targeted_repair,3535,"[""loss""]","[""fixed""]",False
+v591-dual-anchor,equals_surface_no_pair_id_loss_branch_dual_anchor_repair,3535,"[""loss""]","[""fixed""]",False
+v592-micro-span,equals_surface_no_pair_id_loss_branch_micro_span_repair,3535,"[""loss""]","[""fixed""]",False
