@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fixed-retention loss-rebalance corpus contract",
+  "status": "pass",
+  "decision": "fixed_retention_loss_rebalance_corpus_modes_ready",
+  "version": "v605.0.0",
+  "new_corpus_modes": [
+    "equals_surface_no_pair_id_fixed_retention_loss_rebalance_repair",
+    "equals_surface_no_pair_id_fixed_retention_dual_cycle_repair"
+  ],
+  "source_files": [
+    "src/minigpt/model_capability_required_term_pair_fixed_retention_loss_rebalance_corpus.py",
+    "src/minigpt/model_capability_required_term_pair_coexistence_corpus.py",
+    "tests/test_model_capability_required_term_pair_fixed_retention_loss_rebalance_corpus.py"
+  ],
+  "validation": {
+    "py_compile": "pass",
+    "pytest": "30 passed in 0.18s",
+    "git_diff_check": "pass"
+  },
+  "summary": {
+    "new_mode_count": 2,
+    "pair_id_removed": true,
+    "source_prompts": "fixed= / loss=",
+    "fixed_first_token_rows_preserved": true,
+    "loss_rebalance_rows_added": true,
+    "next_action": "run real seed 3535 training for the loss-rebalance objective"
+  }
+}

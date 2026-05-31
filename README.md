@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v604.0.0` adds a fixed-retention route decision: v601 first-token is selected only as fixed recovery evidence, and the next objective must rebalance `loss`.
+Version `v605.0.0` adds fixed-retention loss-rebalance corpus modes that preserve fixed first-token rows while restoring direct `loss=loss` targets.
+
+## Latest v605 checkpoint
+
+- Added `model_capability_required_term_pair_fixed_retention_loss_rebalance_corpus`.
+- Registered two loss-rebalance modes in the coexistence corpus builder.
+- Preserved `fixed=` / `loss=` replay prompts and no-pair-id surface.
+- Added tests for registration, fixed prefix rows, loss rows, and dual-cycle alternation.
+- Ran targeted tests: `30 passed`.
+- Archived v605 evidence in `e/605` and added the code explanation in `代码讲解记录_模型能力阶段/619-v605-required-term-pair-fixed-retention-loss-rebalance-corpus.md`.
 
 ## Latest v604 checkpoint
 

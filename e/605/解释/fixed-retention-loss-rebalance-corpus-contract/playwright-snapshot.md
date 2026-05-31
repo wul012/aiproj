@@ -1,0 +1,40 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT fixed-retention loss-rebalance corpus contract" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Two modes preserve fixed first-token rows while restoring loss branch rows.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: fixed_retention_loss_rebalance_corpus_modes_ready
+    - generic [ref=e13]:
+      - generic [ref=e14]: Modes
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Prompts
+      - strong [ref=e18]: fixed= / loss=
+  - generic [ref=e19]:
+    - heading "Modes" [level=2] [ref=e20]
+    - table [ref=e22]:
+      - rowgroup [ref=e23]:
+        - row "Mode Role Pair id removed Fixed prefix rows Loss rows" [ref=e24]:
+          - columnheader "Mode" [ref=e25]
+          - columnheader "Role" [ref=e26]
+          - columnheader "Pair id removed" [ref=e27]
+          - columnheader "Fixed prefix rows" [ref=e28]
+          - columnheader "Loss rows" [ref=e29]
+      - rowgroup [ref=e30]:
+        - row "equals_surface_no_pair_id_fixed_retention_loss_rebalance_repair retain fixed, rebalance loss True True True" [ref=e31]:
+          - cell "equals_surface_no_pair_id_fixed_retention_loss_rebalance_repair" [ref=e32]
+          - cell "retain fixed, rebalance loss" [ref=e33]
+          - cell "True" [ref=e34]
+          - cell "True" [ref=e35]
+          - cell "True" [ref=e36]
+        - row "equals_surface_no_pair_id_fixed_retention_dual_cycle_repair alternating dual cycle True True True" [ref=e37]:
+          - cell "equals_surface_no_pair_id_fixed_retention_dual_cycle_repair" [ref=e38]
+          - cell "alternating dual cycle" [ref=e39]
+          - cell "True" [ref=e40]
+          - cell "True" [ref=e41]
+          - cell "True" [ref=e42]

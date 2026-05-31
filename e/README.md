@@ -545,6 +545,10 @@ e/603/解释/说明.md
 e/604/图片
 e/604/解释/说明.md
  -> v604 required-term pair fixed-retention route decision 的运行截图和解释
+
+e/605/图片
+e/605/解释/说明.md
+ -> v605 required-term pair fixed-retention loss-rebalance corpus 的运行截图和解释
 ```
 
 写入规则：

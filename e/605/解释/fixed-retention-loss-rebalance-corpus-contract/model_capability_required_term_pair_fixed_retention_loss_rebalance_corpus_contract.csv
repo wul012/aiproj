@@ -1,0 +1,3 @@
+mode,role,pair_id_removed,fixed_prefix_rows,loss_rebalance_rows
+equals_surface_no_pair_id_fixed_retention_loss_rebalance_repair,retain fixed rebalance loss,True,True,True
+equals_surface_no_pair_id_fixed_retention_dual_cycle_repair,alternating dual cycle,True,True,True
