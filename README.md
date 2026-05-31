@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v566.0.0` tests a light first-token hint variant; it regresses to `0/3` pair-full and removes the seed `1535` recovery, so sparse bridge-only hints are worse than both v562 loss-balanced and v564 full prefix rows.
+Version `v567.0.0` compares v562, v564, and v566 first-token hint densities; the result shows coverage migration rather than stable gain, so the next route should stop tuning hint density and move to a held-out or route-decision check.
+
+## Latest v567 checkpoint
+
+- Reused the existing equals-surface repair comparison script without adding another corpus mode.
+- Compared `v562-loss-balanced`, `v564-full-first-token`, and `v566-light-first-token` reports.
+- Confirmed the three routes are `1/3`, `1/3`, and `0/3` pair-full respectively.
+- Classified the full first-token rows as coverage migration: seed `535` gains fixed-only while seed `2535` loses loss-only.
+- Classified light first-token hints as a regression because seed `1535` drops from pair-full to fixed-only.
+- Archived v567 evidence in `e/567` and added the code explanation in `代码讲解记录_模型能力阶段/581-v567-required-term-pair-no-pair-id-first-token-density-comparison.md`.
 
 ## Latest v566 checkpoint
 

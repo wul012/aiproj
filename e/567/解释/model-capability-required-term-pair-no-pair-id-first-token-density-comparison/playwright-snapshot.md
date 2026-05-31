@@ -1,0 +1,86 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT equals-surface repair comparison" [level=1] [ref=e4]
+    - paragraph [ref=e5]: At least one compared repair report produced a pair-full profile.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Decision
+      - strong [ref=e12]: required_term_pair_equals_surface_pair_full_found
+    - generic [ref=e13]:
+      - generic [ref=e14]: Reports
+      - strong [ref=e15]: "3"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Term rows
+      - strong [ref=e18]: "36"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Branch competition
+      - strong [ref=e21]: "0"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Pair-full profiles
+      - strong [ref=e24]: "1"
+  - generic [ref=e25]:
+    - heading "Next Action" [level=2] [ref=e26]
+    - paragraph [ref=e27]: promote that repair candidate into held-out replay before changing the corpus again
+  - generic [ref=e28]:
+    - heading "Source Reports" [level=2] [ref=e29]
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Label Status Corpus mode Pair-full seeds Source" [ref=e33]
+      - rowgroup [ref=e39]:
+        - row "v562-loss-balanced pass equals_surface_no_pair_id_loss_balanced_repair 1/3 e\\562\\解释\\model-capability-required-term-pair-equals-surface-no-pair-id-loss-balanced-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e40]
+        - row "v564-full-first-token pass equals_surface_no_pair_id_loss_balanced_first_token_repair 1/3 e\\564\\解释\\model-capability-required-term-pair-no-pair-id-loss-balanced-first-token-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e46]
+        - row "v566-light-first-token pass equals_surface_no_pair_id_loss_balanced_light_first_token_repair 0/3 e\\566\\解释\\model-capability-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability\\model_capability_required_term_pair_colon_immediate_stability.json" [ref=e52]
+  - generic [ref=e58]:
+    - heading "Branch Rows" [level=2] [ref=e59]
+    - table [ref=e61]:
+      - rowgroup [ref=e62]:
+        - row "Seed Competition Fixed hit reports Loss hit reports Pair-full reports Action" [ref=e63]
+      - rowgroup [ref=e70]:
+        - row "1535 False v562-loss-balanced,v564-full-first-token,v566-light-first-token v562-loss-balanced,v564-full-first-token v562-loss-balanced,v564-full-first-token promote the pair-full repair report and test fresh held-out prompts" [ref=e71]
+        - row "2535 False v562-loss-balanced,v566-light-first-token collect another comparable equals-surface repair report before changing the objective" [ref=e78]
+        - row "535 False v564-full-first-token collect another comparable equals-surface repair report before changing the objective" [ref=e85]
+  - generic [ref=e92]:
+    - heading "Term Evidence" [level=2] [ref=e93]
+    - table [ref=e95]:
+      - rowgroup [ref=e96]:
+        - row "Report Seed Profile Term Hit Prompt Preview" [ref=e97]
+      - rowgroup [ref=e105]:
+        - row "v562-loss-balanced 535 default fixed False fixed= los\\nlxessslo" [ref=e106]
+        - row "v562-loss-balanced 535 suppress_newline_tokens fixed False fixed= los= fixeslo" [ref=e114]
+        - row "v562-loss-balanced 535 default loss False loss= oosososs= l" [ref=e122]
+        - row "v562-loss-balanced 535 suppress_newline_tokens loss False loss= oosososs= l" [ref=e130]
+        - row "v562-loss-balanced 1535 default fixed True fixed= fixed\\nlos= f" [ref=e138]
+        - row "v562-loss-balanced 1535 suppress_newline_tokens fixed True fixed= fixed=fixed=" [ref=e146]
+        - row "v562-loss-balanced 1535 default loss True loss= fixed=loss=" [ref=e154]
+        - row "v562-loss-balanced 1535 suppress_newline_tokens loss True loss= fixed=loss=" [ref=e162]
+        - row "v562-loss-balanced 2535 default fixed False fixed= loss=ixed=ix" [ref=e170]
+        - row "v562-loss-balanced 2535 suppress_newline_tokens fixed False fixed= loss=ixed fi" [ref=e178]
+        - row "v562-loss-balanced 2535 default loss True loss= loss=fixed=l" [ref=e186]
+        - row "v562-loss-balanced 2535 suppress_newline_tokens loss True loss= loss=fixed=l" [ref=e194]
+        - row "v564-full-first-token 535 default fixed True fixed= loked=fixed" [ref=e202]
+        - row "v564-full-first-token 535 suppress_newline_tokens fixed True fixed= loked=fixed" [ref=e210]
+        - row "v564-full-first-token 535 default loss False loss= los= fixed=i" [ref=e218]
+        - row "v564-full-first-token 535 suppress_newline_tokens loss False loss= los= fixed l" [ref=e226]
+        - row "v564-full-first-token 1535 default fixed True fixed= fixed\\nlos=fi" [ref=e234]
+        - row "v564-full-first-token 1535 suppress_newline_tokens fixed True fixed= fixed=los=lo" [ref=e242]
+        - row "v564-full-first-token 1535 default loss True loss= loss=fixed=l" [ref=e250]
+        - row "v564-full-first-token 1535 suppress_newline_tokens loss True loss= loss=fixed l" [ref=e258]
+        - row "v564-full-first-token 2535 default fixed False fixed= lo los=los=" [ref=e266]
+        - row "v564-full-first-token 2535 suppress_newline_tokens fixed False fixed= lo los=los=" [ref=e274]
+        - row "v564-full-first-token 2535 default loss False loss= lo= fixed=" [ref=e282]
+        - row "v564-full-first-token 2535 suppress_newline_tokens loss False loss= lo= fixed=" [ref=e290]
+        - row "v566-light-first-token 535 default fixed False fixed= losssd fixo" [ref=e298]
+        - row "v566-light-first-token 535 suppress_newline_tokens fixed False fixed= losssd fixo" [ref=e306]
+        - row "v566-light-first-token 535 default loss False loss= fixed fixes" [ref=e314]
+        - row "v566-light-first-token 535 suppress_newline_tokens loss False loss= fixed fixes" [ref=e322]
+        - row "v566-light-first-token 1535 default fixed True fixed= fixed\\nfixed=" [ref=e330]
+        - row "v566-light-first-token 1535 suppress_newline_tokens fixed True fixed= fixed=fixed=" [ref=e338]
+        - row "v566-light-first-token 1535 default loss False loss= fixed=fixed" [ref=e346]
+        - row "v566-light-first-token 1535 suppress_newline_tokens loss False loss= fixed=fixed" [ref=e354]
+        - row "v566-light-first-token 2535 default fixed False fixed= los= filos=" [ref=e362]
+        - row "v566-light-first-token 2535 suppress_newline_tokens fixed False fixed= los= filos=" [ref=e370]
+        - row "v566-light-first-token 2535 default loss True loss= loss= los=lo" [ref=e378]
+        - row "v566-light-first-token 2535 suppress_newline_tokens loss True loss= loss= los=lo" [ref=e386]

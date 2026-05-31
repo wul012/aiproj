@@ -293,6 +293,9 @@
 580-v566-required-term-pair-no-pair-id-loss-balanced-light-first-token-stability.md
  -> v566 code explanation: test sparse first-token bridge hints and preserve the 0/3 negative result.
 
+581-v567-required-term-pair-no-pair-id-first-token-density-comparison.md
+ -> v567 code explanation: compare v562/v564/v566 first-token hint density and stop that route as unstable coverage migration.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

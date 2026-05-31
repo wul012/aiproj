@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_equals_surface_pair_full_found
+failed_count=0
+compared_report_count=3
+term_case_row_count=36
+branch_competition_seed_count=0
+pair_full_profile_seed_count=1
+union_hit_terms=fixed,loss
+model_quality_claim=targeted_equals_surface_pair_full_signal
+next_action=promote that repair candidate into held-out replay before changing the corpus again
