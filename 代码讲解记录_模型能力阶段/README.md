@@ -611,6 +611,9 @@
 686-v672-required-term-pair-dual-boundary-seed-3535.md
  -> v672 code explanation: run real seed 3535 training with the explicit dual-boundary corpus and observe pair-full generation.
 
+687-v673-required-term-pair-dual-boundary-forced-choice.md
+ -> v673 code explanation: verify the dual-boundary checkpoint with forced-choice internal pair scoring.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

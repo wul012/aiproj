@@ -845,3 +845,9 @@ e/663/解释/说明.md
 - `e/672/图片`
 - `e/672/解释/说明.md`
 - v672 required-term pair dual-boundary seed 3535 的运行截图和解释。
+
+## v673 补充索引
+
+- `e/673/图片`
+- `e/673/解释/说明.md`
+- v673 required-term pair dual-boundary forced-choice 的运行截图和解释。

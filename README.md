@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v672.0.0` runs the first real explicit dual-boundary seed and observes pair-full generation.
+Version `v673.0.0` verifies the v672 explicit dual-boundary checkpoint with forced-choice internal scoring.
+
+## Latest v673 checkpoint
+
+- Ran forced-choice diagnostic for `dual-boundary-seed-3535`.
+- Confirmed `decision=refresh_forced_choice_internal_pair_match`.
+- Confirmed `expected_best_prompt_count=2`.
+- Confirmed `forced_choice_full_match_source_count=1`.
+- Confirmed `best_internal_sources=dual-boundary-seed-3535`.
+- Preserved the boundary that this is still a single-seed signal.
+- Archived v673 evidence in `e/673` and added the code explanation in `代码讲解记录_模型能力阶段/687-v673-required-term-pair-dual-boundary-forced-choice.md`.
 
 ## Latest v672 checkpoint
 
