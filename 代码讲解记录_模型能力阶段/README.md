@@ -566,6 +566,9 @@
 671-v657-required-term-pair-loss-guarded-schedule-seed-3535.md
  -> v657 code explanation: run the loss-guarded schedule seed and record no-hit drift.
 
+672-v658-required-term-pair-schedule-approximation-batch-closeout.md
+ -> v658 code explanation: close the single-corpus schedule approximation branch as negative evidence.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

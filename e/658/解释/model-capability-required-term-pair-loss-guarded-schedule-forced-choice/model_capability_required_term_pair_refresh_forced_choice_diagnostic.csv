@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+loss-guarded-schedule,fixed,fixed,fixed,True,0.962298,0.962298
+loss-guarded-schedule,loss,fixed,loss,False,1.764683,1.697647

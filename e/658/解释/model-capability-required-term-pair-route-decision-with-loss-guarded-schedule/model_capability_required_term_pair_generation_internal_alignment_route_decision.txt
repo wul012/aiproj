@@ -1,0 +1,8 @@
+status=pass
+decision=repair_internal_preference_preserve_generation_pair_full
+failed_count=0
+selected_generation_route=loss-internal-joint-cycle
+internal_anchor_route=joint-cycle-internal-repair
+direct_promotion_ready=False
+model_quality_claim=route_decision_only
+next_action=use the selected generation route as the base and repair internal preference

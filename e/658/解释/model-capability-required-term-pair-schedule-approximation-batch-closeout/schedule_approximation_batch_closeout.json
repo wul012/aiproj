@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair schedule approximation batch closeout",
+  "generated_at": "2026-06-01T10:02:34Z",
+  "status": "pass",
+  "decision": "stop_single_corpus_schedule_approximations",
+  "failed_count": 0,
+  "included_versions": [
+    "v649",
+    "v650",
+    "v651",
+    "v652",
+    "v653",
+    "v654",
+    "v655",
+    "v656",
+    "v657",
+    "v658"
+  ],
+  "summary": {
+    "surface_first_alignment_class": "fixed_only_aligned_partial",
+    "loss_guarded_alignment_class": "internal_partial_generation_none",
+    "aligned_pair_full_count": 0,
+    "selected_generation_route": "loss-internal-joint-cycle",
+    "internal_anchor_route": "joint-cycle-internal-repair",
+    "next_action": "stop this single-corpus schedule branch; investigate real checkpoint continuation or constrained decoding instead"
+  },
+  "closeout_items": [
+    {
+      "id": "surface_first_result",
+      "status": "rejected",
+      "detail": "generation=['fixed'] internal=['fixed'] class=fixed_only_aligned_partial"
+    },
+    {
+      "id": "loss_guarded_result",
+      "status": "rejected",
+      "detail": "generation=[] internal=['fixed'] class=internal_partial_generation_none"
+    },
+    {
+      "id": "aligned_pair_full",
+      "status": "missing",
+      "detail": "aligned_pair_full_count=0"
+    },
+    {
+      "id": "selected_generation_route",
+      "status": "kept",
+      "detail": "loss-internal-joint-cycle remains selected"
+    },
+    {
+      "id": "internal_anchor_route",
+      "status": "kept",
+      "detail": "joint-cycle-internal-repair remains selected"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "negative_schedule_branch_closeout",
+    "reason": "Surface-first and loss-guarded single-corpus approximations did not produce aligned pair-full evidence.",
+    "next_action": "stop this branch and preserve v630/v640 as separate evidence anchors"
+  }
+}

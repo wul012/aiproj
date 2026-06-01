@@ -1,0 +1,5 @@
+status=pass
+decision=stop_single_corpus_schedule_approximations
+aligned_pair_full_count=0
+selected_generation_route=loss-internal-joint-cycle
+internal_anchor_route=joint-cycle-internal-repair

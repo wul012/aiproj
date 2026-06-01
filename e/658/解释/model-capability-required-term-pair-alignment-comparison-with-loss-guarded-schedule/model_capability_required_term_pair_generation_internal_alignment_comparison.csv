@@ -1,0 +1,9 @@
+source_label,corpus_mode,seed,generation_hit_terms,internal_expected_best_terms,generation_pair_full,internal_pair_full,alignment_class
+loss-internal-first-token,equals_surface_no_pair_id_loss_internal_first_token_repair,3535,"[""loss""]","[""fixed"", ""loss""]",False,True,internal_pair_full_generation_gap
+loss-internal-fixed-bridge,equals_surface_no_pair_id_loss_internal_fixed_bridge_repair,3535,"[""fixed""]","[""fixed""]",False,False,fixed_only_aligned_partial
+loss-internal-joint-cycle,equals_surface_no_pair_id_loss_internal_joint_cycle_repair,3535,"[""fixed"", ""loss""]","[""fixed""]",True,False,generation_pair_full_internal_partial
+loss-internal-balanced-anchor,equals_surface_no_pair_id_loss_internal_balanced_anchor_repair,3535,"[""fixed""]","[""fixed""]",False,False,fixed_only_aligned_partial
+joint-cycle-internal-repair,equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair,3535,[],"[""fixed"", ""loss""]",False,True,internal_pair_full_generation_none
+joint-cycle-light-merge,equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair,3535,"[""loss""]","[""fixed""]",False,False,partial_tradeoff
+surface-first-schedule,equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair,3535,"[""fixed""]","[""fixed""]",False,False,fixed_only_aligned_partial
+loss-guarded-schedule,equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair,3535,[],"[""fixed""]",False,False,internal_partial_generation_none

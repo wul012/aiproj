@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation/internal alignment comparison",
+  "generated_at": "2026-06-01T10:01:28Z",
+  "status": "pass",
+  "decision": "keep_generation_pair_full_and_repair_internal_preference",
+  "failed_count": 0,
+  "issues": [],
+  "source_rows": [
+    {
+      "index": 0,
+      "source_label": "loss-internal-first-token",
+      "refresh_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\624\\解释\\model-capability-required-term-pair-loss-internal-forced-choice-diagnostic\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_internal_pair_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "loss"
+      ],
+      "generation_missed_terms": [
+        "fixed"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "internal_missed_terms": [],
+      "internal_pair_full": true,
+      "generation_internal_disagreement_terms": [
+        "fixed"
+      ],
+      "alignment_class": "internal_pair_full_generation_gap"
+    },
+    {
+      "index": 1,
+      "source_label": "loss-internal-fixed-bridge",
+      "refresh_path": "e\\628\\解释\\model-capability-required-term-pair-loss-internal-fixed-bridge-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\628\\解释\\model-capability-required-term-pair-loss-internal-fixed-bridge-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "fixed"
+      ],
+      "generation_missed_terms": [
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "internal_missed_terms": [
+        "loss"
+      ],
+      "internal_pair_full": false,
+      "generation_internal_disagreement_terms": [],
+      "alignment_class": "fixed_only_aligned_partial"
+    },
+    {
+      "index": 2,
+      "source_label": "loss-internal-joint-cycle",
+      "refresh_path": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\631\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_pair_full_observed",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "generation_missed_terms": [],
+      "generation_pair_full": true,
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "internal_missed_terms": [
+        "loss"
+      ],
+      "internal_pair_full": false,
+      "generation_internal_disagreement_terms": [
+        "loss"
+      ],
+      "alignment_class": "generation_pair_full_internal_partial"
+    },
+    {
+      "index": 3,
+      "source_label": "loss-internal-balanced-anchor",
+      "refresh_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\635\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "fixed"
+      ],
+      "generation_missed_terms": [
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "internal_missed_terms": [
+        "loss"
+      ],
+      "internal_pair_full": false,
+      "generation_internal_disagreement_terms": [],
+      "alignment_class": "fixed_only_aligned_partial"
+    },
+    {
+      "index": 4,
+      "source_label": "joint-cycle-internal-repair",
+      "refresh_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\641\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_internal_pair_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [],
+      "generation_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "internal_missed_terms": [],
+      "internal_pair_full": true,
+      "generation_internal_disagreement_terms": [
+        "fixed",
+        "loss"
+      ],
+      "alignment_class": "internal_pair_full_generation_none"
+    },
+    {
+      "index": 5,
+      "source_label": "joint-cycle-light-merge",
+      "refresh_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\646\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "loss"
+      ],
+      "generation_missed_terms": [
+        "fixed"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "internal_missed_terms": [
+        "loss"
+      ],
+      "internal_pair_full": false,
+      "generation_internal_disagreement_terms": [
+        "fixed",
+        "loss"
+      ],
+      "alignment_class": "partial_tradeoff"
+    },
+    {
+      "index": 6,
+      "source_label": "surface-first-schedule",
+      "refresh_path": "e\\651\\解释\\model-capability-required-term-pair-surface-first-schedule-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\652\\解释\\model-capability-required-term-pair-surface-first-schedule-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "fixed"
+      ],
+      "generation_missed_terms": [
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "internal_missed_terms": [
+        "loss"
+      ],
+      "internal_pair_full": false,
+      "generation_internal_disagreement_terms": [],
+      "alignment_class": "fixed_only_aligned_partial"
+    },
+    {
+      "index": 7,
+      "source_label": "loss-guarded-schedule",
+      "refresh_path": "e\\657\\解释\\model-capability-required-term-pair-loss-guarded-schedule-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "forced_choice_path": "e\\658\\解释\\model-capability-required-term-pair-loss-guarded-schedule-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "refresh_status": "pass",
+      "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "forced_choice_status": "pass",
+      "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "generation_hit_terms": [],
+      "generation_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "internal_missed_terms": [
+        "loss"
+      ],
+      "internal_pair_full": false,
+      "generation_internal_disagreement_terms": [
+        "fixed"
+      ],
+      "alignment_class": "internal_partial_generation_none"
+    }
+  ],
+  "summary": {
+    "compared_source_count": 8,
+    "generation_pair_full_count": 1,
+    "internal_pair_full_count": 2,
+    "aligned_pair_full_count": 0,
+    "generation_only_pair_full_count": 1,
+    "internal_only_pair_full_count": 2,
+    "alignment_classes": {
+      "fixed_only_aligned_partial": 3,
+      "generation_pair_full_internal_partial": 1,
+      "internal_pair_full_generation_gap": 1,
+      "internal_pair_full_generation_none": 1,
+      "internal_partial_generation_none": 1,
+      "partial_tradeoff": 1
+    },
+    "best_source_labels": [
+      "loss-internal-first-token",
+      "loss-internal-joint-cycle"
+    ],
+    "best_alignment_class": "internal_pair_full_generation_gap"
+  },
+  "interpretation": {
+    "model_quality_claim": "generation_pair_full_internal_partial",
+    "reason": "A route generates both terms but still has partial forced-choice internal preference.",
+    "next_action": "repair internal preference while preserving generation pair-full"
+  }
+}

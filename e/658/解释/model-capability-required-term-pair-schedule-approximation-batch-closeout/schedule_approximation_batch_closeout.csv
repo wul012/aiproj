@@ -1,0 +1,6 @@
+id,status,detail
+surface_first_result,rejected,generation=['fixed'] internal=['fixed'] class=fixed_only_aligned_partial
+loss_guarded_result,rejected,generation=[] internal=['fixed'] class=internal_partial_generation_none
+aligned_pair_full,missing,aligned_pair_full_count=0
+selected_generation_route,kept,loss-internal-joint-cycle remains selected
+internal_anchor_route,kept,joint-cycle-internal-repair remains selected
