@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v628.0.0` runs the fixed-bridge seed and confirms it restores fixed but loses loss.
+Version `v629.0.0` adds joint internal/generation corpus modes after the fixed-bridge tradeoff.
+
+## Latest v629 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_internal_joint_cycle_repair`.
+- Added `equals_surface_no_pair_id_loss_internal_balanced_anchor_repair`.
+- Registered `6` loss-internal corpus modes.
+- Preserved the boundary that v629 is a corpus contract, not checkpoint evidence.
+- Ran targeted corpus tests: `7 passed`.
+- Archived v629 evidence in `e/629` and added the code explanation in `代码讲解记录_模型能力阶段/643-v629-required-term-pair-loss-internal-joint-constraint-corpus.md`.
 
 ## Latest v628 checkpoint
 

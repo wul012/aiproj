@@ -6,6 +6,8 @@ PAIR_LOSS_INTERNAL_PREFERENCE_OBJECTIVE_CORPUS_MODES = (
     "equals_surface_no_pair_id_loss_internal_first_token_repair",
     "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
     "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair",
+    "equals_surface_no_pair_id_loss_internal_joint_cycle_repair",
+    "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
 )
 
 
@@ -27,6 +29,12 @@ def extend_pair_loss_internal_preference_objective_corpus(
         return True
     if corpus_mode == "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair":
         _extend_fixed_bridge_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_loss_internal_joint_cycle_repair":
+        _extend_joint_cycle_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair":
+        _extend_balanced_anchor_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
         return True
     return False
 
@@ -163,6 +171,73 @@ def _extend_fixed_bridge_repair(lines: list[str], *, repeat: int, bridge_repeat:
                 "bridge objective restores fixed generation without erasing loss preference.",
                 "fixed= fixed is the missing generation bridge.",
                 "loss= loss remains the internal preference anchor.",
+                "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_joint_cycle_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "joint cycle fixed=fixed loss=loss",
+                "joint cycle loss=loss fixed=fixed",
+                "fixed=fixed",
+                "loss=loss",
+                "fixed=fixed",
+                "loss=loss",
+                "fixed=f fixed=fi fixed=fix fixed=fixed",
+                "loss=l loss=lo loss=los loss=loss",
+                "prompt fixed= answer fixed",
+                "prompt loss= answer loss",
+                "generation fixed= fixed",
+                "generation loss= loss",
+                "internal fixed= candidate fixed rank 1",
+                "internal loss= candidate loss rank 1",
+                "decode fixed= fixed while decode loss= loss",
+                "do not trade fixed for loss",
+                "do not trade loss for fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "joint cycle keeps generation and internal preference in the same clean record.",
+                "fixed= fixed and loss= loss are both required.",
+                "loss remains loss while fixed remains fixed.",
+                "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_balanced_anchor_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "anchor fixed prompt fixed= target fixed",
+                "anchor loss prompt loss= target loss",
+                "anchor fixed prompt fixed= target fixed",
+                "anchor loss prompt loss= target loss",
+                "fixed=fixed",
+                "loss=loss",
+                "fixed=next fixed",
+                "loss=next loss",
+                "fixed branch generation fixed",
+                "loss branch generation loss",
+                "fixed branch internal fixed",
+                "loss branch internal loss",
+                "forced choice fixed= fixed",
+                "forced choice loss= loss",
+                "balanced anchor fixed=fixed loss=loss",
+                "balanced anchor loss=loss fixed=fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "balanced anchors repeat both prompts with equal weight.",
+                "fixed generation and loss generation must coexist.",
+                "internal preference mirrors generation preference.",
                 "fixed=fixed|loss=loss",
             ]
         )

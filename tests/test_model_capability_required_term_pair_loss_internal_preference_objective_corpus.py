@@ -69,6 +69,30 @@ class LossInternalPreferenceObjectiveCorpusTests(unittest.TestCase):
         self.assertIn("fixed=fixed|loss=loss", corpus)
         self.assertNotIn("pair=01", corpus)
 
+    def test_joint_cycle_mode_keeps_generation_and_internal_rows_together(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_internal_joint_cycle_repair",
+        )
+
+        self.assertIn("joint cycle fixed=fixed loss=loss", corpus)
+        self.assertIn("internal loss= candidate loss rank 1", corpus)
+        self.assertIn("decode fixed= fixed while decode loss= loss", corpus)
+        self.assertNotIn("pair=01", corpus)
+
+    def test_balanced_anchor_mode_keeps_equal_prompt_weight(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+        )
+
+        self.assertIn("anchor fixed prompt fixed= target fixed", corpus)
+        self.assertIn("anchor loss prompt loss= target loss", corpus)
+        self.assertIn("balanced anchors repeat both prompts with equal weight.", corpus)
+        self.assertNotIn("pair=01", corpus)
+
 
 if __name__ == "__main__":
     unittest.main()

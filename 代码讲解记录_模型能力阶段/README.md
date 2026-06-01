@@ -479,6 +479,9 @@
 642-v628-required-term-pair-loss-internal-fixed-bridge-seed-3535.md
  -> v628 code explanation: run real fixed-bridge seed 3535 and confirm it restores fixed but loses loss.
 
+643-v629-required-term-pair-loss-internal-joint-constraint-corpus.md
+ -> v629 code explanation: add joint internal/generation corpus modes after the fixed-bridge tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
