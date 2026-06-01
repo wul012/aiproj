@@ -6901,6 +6901,8 @@ The required-term pair loss-guarded seed run shows that the loss guard breaks th
 
 The required-term pair schedule approximation closeout runs loss-guarded forced-choice, refreshes the alignment matrix and route decision, then stops the single-corpus schedule branch while preserving `loss-internal-joint-cycle` and `joint-cycle-internal-repair` as separate evidence anchors.
 
+The required-term pair refresh resume layer exposes real checkpoint continuation through `--resume-checkpoint`, carrying resume status into settings, training summaries, and HTML evidence before continuation experiments.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

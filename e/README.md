@@ -761,6 +761,10 @@ e/657/解释/说明.md
 e/658/图片
 e/658/解释/说明.md
  -> v658 required-term pair schedule approximation batch closeout 的运行截图和解释
+
+e/659/图片
+e/659/解释/说明.md
+ -> v659 required-term pair refresh resume contract 的运行截图和解释
 ```
 
 写入规则：

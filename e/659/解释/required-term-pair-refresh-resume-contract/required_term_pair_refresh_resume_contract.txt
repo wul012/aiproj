@@ -1,0 +1,5 @@
+status=pass
+decision=required_term_pair_refresh_resume_contract_ready
+failed_count=0
+training_mode=checkpoint_continuation
+resume_checkpoint_exists=True

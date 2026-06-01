@@ -36,6 +36,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--n-head", type=int, default=1)
     parser.add_argument("--n-embd", type=int, default=64)
     parser.add_argument("--learning-rate", type=float, default=0.02)
+    parser.add_argument("--resume-checkpoint", type=Path, default=None, help="Continue training from an existing checkpoint.pt.")
     parser.add_argument("--max-new-tokens", type=int, default=12)
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--top-k", type=int, default=1)
@@ -62,6 +63,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         n_head=args.n_head,
         n_embd=args.n_embd,
         learning_rate=args.learning_rate,
+        resume_checkpoint=args.resume_checkpoint,
         max_new_tokens=args.max_new_tokens,
         temperature=args.temperature,
         top_k=args.top_k,

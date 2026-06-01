@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh resume contract",
+  "generated_at": "2026-06-01T11:36:51Z",
+  "status": "pass",
+  "decision": "required_term_pair_refresh_resume_contract_ready",
+  "failed_count": 0,
+  "resume_checkpoint": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+  "checks": [
+    {
+      "id": "resume_checkpoint_exists",
+      "status": "pass",
+      "detail": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt"
+    },
+    {
+      "id": "training_context_receives_resume",
+      "status": "pass",
+      "detail": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt"
+    },
+    {
+      "id": "settings_mark_continuation",
+      "status": "pass",
+      "detail": "checkpoint_continuation"
+    },
+    {
+      "id": "summary_marks_continuation",
+      "status": "pass",
+      "detail": "checkpoint_continuation"
+    }
+  ],
+  "summary": {
+    "training_mode": "checkpoint_continuation",
+    "resume_checkpoint_exists": true,
+    "pair_full_observed": true
+  }
+}

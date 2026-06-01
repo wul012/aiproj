@@ -44,6 +44,7 @@ def build_model_capability_required_term_pair_coexistence_refresh(
     n_head: int = 1,
     n_embd: int = 64,
     learning_rate: float = 0.02,
+    resume_checkpoint: str | Path | None = None,
     max_new_tokens: int = 12,
     temperature: float = 0.2,
     top_k: int = 1,
@@ -58,10 +59,12 @@ def build_model_capability_required_term_pair_coexistence_refresh(
     corpus_path.parent.mkdir(parents=True, exist_ok=True)
     corpus_path.write_text(corpus_text, encoding="utf-8")
     train_dir = root / "pair-coexistence-refresh-run"
+    resume_checkpoint_path = Path(resume_checkpoint) if resume_checkpoint is not None else None
     training = _train_refresh_checkpoint(
         {
             "corpus_path": str(corpus_path),
             "train_dir": str(train_dir),
+            "resume_checkpoint": "" if resume_checkpoint_path is None else str(resume_checkpoint_path),
             "seed": seed,
             "max_iters": max_iters,
             "eval_iters": eval_iters,
@@ -117,6 +120,9 @@ def build_model_capability_required_term_pair_coexistence_refresh(
             "n_head": n_head,
             "n_embd": n_embd,
             "learning_rate": learning_rate,
+            "training_mode": "checkpoint_continuation" if resume_checkpoint_path is not None else "from_scratch",
+            "resume_checkpoint": "" if resume_checkpoint_path is None else str(resume_checkpoint_path),
+            "resume_checkpoint_exists": bool(resume_checkpoint_path and resume_checkpoint_path.is_file()),
             "max_new_tokens": max_new_tokens,
             "temperature": temperature,
             "top_k": top_k,
@@ -193,6 +199,9 @@ def _train_refresh_checkpoint(context: dict[str, Any], train_func: TrainFunc | N
         "--sample-top-k",
         "1",
     ]
+    resume_checkpoint = str(context.get("resume_checkpoint") or "")
+    if resume_checkpoint:
+        command.extend(["--resume", resume_checkpoint])
     completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True, text=True)
     stdout_path = logs_dir / "train_stdout.txt"
     stderr_path = logs_dir / "train_stderr.txt"
@@ -206,6 +215,7 @@ def _training_result(train_dir: Path, command: list[str], returncode: int, stdou
     tokenizer_path = train_dir / "tokenizer.json"
     metrics_path = train_dir / "metrics.jsonl"
     train_config_path = train_dir / "train_config.json"
+    resume_checkpoint = _command_option(command, "--resume")
     return {
         "status": "pass" if returncode == 0 and checkpoint_path.is_file() and tokenizer_path.is_file() else "fail",
         "returncode": returncode,
@@ -222,7 +232,17 @@ def _training_result(train_dir: Path, command: list[str], returncode: int, stdou
         "tokenizer_exists": tokenizer_path.is_file(),
         "metrics_exists": metrics_path.is_file(),
         "train_config_exists": train_config_path.is_file(),
+        "training_mode": "checkpoint_continuation" if resume_checkpoint else "from_scratch",
+        "resume_checkpoint": resume_checkpoint,
+        "resume_checkpoint_exists": bool(resume_checkpoint and Path(resume_checkpoint).is_file()),
     }
+
+
+def _command_option(command: list[str], option: str) -> str:
+    for index, value in enumerate(command):
+        if value == option and index + 1 < len(command):
+            return command[index + 1]
+    return ""
 
 
 def _source_report(training: dict[str, Any], *, seed: int, corpus_mode: str = "spaced_answer") -> dict[str, Any]:
@@ -258,6 +278,9 @@ def _summary(training: dict[str, Any], replay_report: dict[str, Any]) -> dict[st
     suppression_full = int(replay_summary.get("suppression_pair_full_variant_count") or 0)
     return {
         "training_status": training.get("status"),
+        "training_mode": training.get("training_mode", "from_scratch"),
+        "resume_checkpoint": training.get("resume_checkpoint", ""),
+        "resume_checkpoint_exists": bool(training.get("resume_checkpoint_exists")),
         "checkpoint_exists": bool(training.get("checkpoint_exists")),
         "tokenizer_exists": bool(training.get("tokenizer_exists")),
         "default_pair_full_variant_count": default_full,

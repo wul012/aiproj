@@ -43,6 +43,33 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
             self.assertEqual(report["decision"], "required_term_pair_coexistence_refresh_no_pair_full")
             self.assertFalse(report["summary"]["pair_full_observed"])
 
+    def test_refresh_passes_resume_checkpoint_to_training_context(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            resume = Path(tmp) / "source" / "checkpoint.pt"
+            resume.parent.mkdir(parents=True, exist_ok=True)
+            resume.write_bytes(b"checkpoint")
+            contexts: list[dict[str, object]] = []
+
+            def capture_train(context: dict[str, object]) -> dict[str, object]:
+                contexts.append(context)
+                return fake_train(context) | {
+                    "training_mode": "checkpoint_continuation",
+                    "resume_checkpoint": str(resume),
+                    "resume_checkpoint_exists": True,
+                }
+
+            report = build_model_capability_required_term_pair_coexistence_refresh(
+                out_dir=Path(tmp) / "refresh",
+                resume_checkpoint=resume,
+                train_func=capture_train,
+                generate_func=fake_generate_fixed_only,
+            )
+
+            self.assertEqual(contexts[0]["resume_checkpoint"], str(resume))
+            self.assertEqual(report["settings"]["training_mode"], "checkpoint_continuation")
+            self.assertTrue(report["settings"]["resume_checkpoint_exists"])
+            self.assertEqual(report["summary"]["training_mode"], "checkpoint_continuation")
+
     def test_corpus_contains_balanced_fixed_and_loss_rows(self) -> None:
         corpus = build_pair_coexistence_refresh_corpus(repeat=2, bridge_repeat=1)
 
