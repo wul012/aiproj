@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface policy leakage risk",
+  "generated_at": "2026-06-01T23:33:15Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_policy_contextual_risk_documented",
+  "failed_count": 0,
+  "issues": [],
+  "source_selector_path": "e\\682\\解释\\model-capability-required-term-pair-surface-policy-selector\\model_capability_required_term_pair_surface_policy_selector.json",
+  "source_minimality_path": "e\\683\\解释\\model-capability-required-term-pair-surface-policy-minimality-check\\model_capability_required_term_pair_surface_policy_minimality_check.json",
+  "selected_policy": {
+    "policy_id": "pair_context_prefix",
+    "stable_pair_full": true,
+    "pair_full_seed_count": 3,
+    "hit_case_count": 6,
+    "leakage_level": "contextual_anchor",
+    "leakage_rank": 1,
+    "prompt_template": "{other_term}={other_term} {term}=",
+    "prompt_template_length": 33,
+    "uses_boundary_sentence": false,
+    "included_in_replay": true,
+    "selection_score": 47,
+    "selection_reason": "stable contextual anchor with shorter prompt template"
+  },
+  "risk_rows": [
+    {
+      "id": "contextual_anchor",
+      "level": "medium",
+      "detail": "Prompt supplies the other term as an anchor."
+    },
+    {
+      "id": "minimal_prompt_not_stable",
+      "level": "medium",
+      "detail": "Non-leaking single-label baselines are not stable."
+    }
+  ],
+  "summary": {
+    "selected_policy_id": "pair_context_prefix",
+    "risk_count": 2,
+    "risk_level": "medium",
+    "promotion_allowed": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_decode_policy_only",
+    "reason": "The selected surface policy is useful but carries contextual-anchor risk.",
+    "next_action": "run budget and surface-variant checks without treating the policy as model baseline"
+  }
+}

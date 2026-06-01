@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v673.0.0` verifies the v672 explicit dual-boundary checkpoint with forced-choice internal scoring.
+Version `v684.0.0` documents contextual-anchor leakage risk for the selected required-term pair surface policy.
+
+## Latest v684 checkpoint
+
+- Added `model_capability_required_term_pair_surface_policy_leakage_risk`.
+- Consumed v682 surface-policy selector and v683 minimality check evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_surface_policy_contextual_risk_documented`.
+- Confirmed `selected_policy_id=pair_context_prefix`.
+- Confirmed `risk_level=medium`.
+- Confirmed `promotion_allowed=False`.
+- Preserved the claim as `contextual_decode_policy_only`, not a promoted model baseline.
+- Archived v684 evidence in `e/684` and added the code explanation in `代码讲解记录_模型能力阶段/698-v684-required-term-pair-surface-policy-leakage-risk.md`.
 
 ## Latest v673 checkpoint
 

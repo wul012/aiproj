@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>MiniGPT surface policy leakage risk</title><style>
+body{margin:0;background:#eef2f5;color:#172026;font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.stats div,section{background:white;border:1px solid #d8dee4;border-radius:8px;padding:14px;margin:14px 0}
+span{display:block;color:#5d6975;font-size:12px;text-transform:uppercase}strong{display:block;color:#0f766e;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #d8dee4;padding:9px;text-align:left;vertical-align:top}
+</style></head>
+<body><main>
+<h1>MiniGPT surface policy leakage risk</h1>
+<p>The selected surface policy is useful but carries contextual-anchor risk.</p>
+<section class="stats">
+<div><span>Selected</span><strong>pair_context_prefix</strong></div>
+<div><span>Risk</span><strong>medium</strong></div>
+<div><span>Promotion</span><strong>False</strong></div>
+</section>
+<section><h2>Next Action</h2><p>run budget and surface-variant checks without treating the policy as model baseline</p></section>
+<section><h2>Risks</h2><table><thead><tr><th>Risk</th><th>Level</th><th>Detail</th></tr></thead><tbody><tr><td>contextual_anchor</td><td>medium</td><td>Prompt supplies the other term as an anchor.</td></tr><tr><td>minimal_prompt_not_stable</td><td>medium</td><td>Non-leaking single-label baselines are not stable.</td></tr></tbody></table></section>
+</main></body></html>

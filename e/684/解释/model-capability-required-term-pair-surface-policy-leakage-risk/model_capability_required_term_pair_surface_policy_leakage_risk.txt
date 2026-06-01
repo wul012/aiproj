@@ -1,0 +1,7 @@
+status=pass
+decision=required_term_pair_surface_policy_contextual_risk_documented
+selected_policy_id=pair_context_prefix
+risk_level=medium
+promotion_allowed=False
+model_quality_claim=contextual_decode_policy_only
+next_action=run budget and surface-variant checks without treating the policy as model baseline

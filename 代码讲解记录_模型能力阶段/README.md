@@ -644,6 +644,9 @@
 697-v683-required-term-pair-surface-policy-minimality-check.md
  -> v683 code explanation: verify that the selected policy requires contextual anchoring and is not promotion-ready.
 
+698-v684-required-term-pair-surface-policy-leakage-risk.md
+ -> v684 code explanation: document contextual-anchor leakage risk for the selected surface policy and keep it out of promotion claims.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

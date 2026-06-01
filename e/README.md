@@ -901,3 +901,8 @@ e/663/解释/说明.md
 - `e/683/图片`
 - `e/683/解释/说明.md`
 - v683 required-term pair surface policy minimality check 的运行截图和解释。
+## v684 补充索引
+
+- `e/684/图片`
+- `e/684/解释/说明.md`
+- v684 required-term pair surface policy leakage risk 的运行截图和解释。
