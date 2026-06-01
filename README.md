@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v610.0.0` adds three contrast-free fixed/loss objective corpus modes for the next real seed training routes.
+Version `v611.0.0` runs the contrast-free objective route on real seed `3535` and records a cross-branch negative result.
+
+## Latest v611 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_fixed_retention_contrast_free_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` drifts toward `loss`, while `loss=` drifts toward `fixed`.
+- Archived v611 evidence in `e/611` and added the code explanation in `代码讲解记录_模型能力阶段/625-v611-required-term-pair-contrast-free-seed-3535.md`.
 
 ## Latest v610 checkpoint
 

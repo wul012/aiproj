@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=63517 vocab_size=33
+parameters=53,248
+data_source=data:e\611\解释\model-capability-required-term-pair-contrast-free-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.8767 val_loss=3.1629
+step=  450 train_loss=1.1191 val_loss=3.6401
+step=  900 train_loss=0.9282 val_loss=3.1134
+step= 1350 train_loss=0.9985 val_loss=2.8526
+step= 1800 train_loss=1.1143 val_loss=3.5574
+saved=e\611\解释\model-capability-required-term-pair-contrast-free-seed-3535\pair-coexistence-refresh-run
+history=e\611\解释\model-capability-required-term-pair-contrast-free-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\611\解释\model-capability-required-term-pair-contrast-free-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\611\解释\model-capability-required-term-pair-contrast-free-seed-3535\pair-coexistence-refresh-run\sample.txt

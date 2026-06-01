@@ -569,6 +569,10 @@ e/609/解释/说明.md
 e/610/图片
 e/610/解释/说明.md
  -> v610 required-term pair contrast-free objective corpus 的运行截图和解释
+
+e/611/图片
+e/611/解释/说明.md
+ -> v611 required-term pair contrast-free seed 3535 的运行截图和解释
 ```
 
 写入规则：
