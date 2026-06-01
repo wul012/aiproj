@@ -500,6 +500,9 @@
 649-v635-required-term-pair-loss-internal-balanced-anchor-forced-choice.md
  -> v635 code explanation: run forced-choice scoring for the balanced-anchor checkpoint and confirm fixed-side bias.
 
+650-v636-required-term-pair-alignment-comparison-with-balanced-anchor.md
+ -> v636 code explanation: add balanced-anchor to the generation/internal comparison and keep the v630 repair route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

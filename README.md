@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v635.0.0` runs forced-choice scoring for the balanced-anchor checkpoint and confirms its fixed-side bias.
+Version `v636.0.0` adds balanced-anchor to the generation/internal comparison and keeps the v630 repair route.
+
+## Latest v636 checkpoint
+
+- Re-ran generation/internal alignment comparison with four routes.
+- Added `loss-internal-balanced-anchor` to the route matrix.
+- Confirmed `generation_pair_full_count=1`.
+- Confirmed `internal_pair_full_count=1`.
+- Confirmed `aligned_pair_full_count=0`.
+- Classified balanced-anchor as `fixed_only_aligned_partial`.
+- Archived v636 evidence in `e/636` and added the code explanation in `代码讲解记录_模型能力阶段/650-v636-required-term-pair-alignment-comparison-with-balanced-anchor.md`.
 
 ## Latest v635 checkpoint
 
