@@ -916,3 +916,8 @@ e/663/解释/说明.md
 - `e/686/图片`
 - `e/686/解释/说明.md`
 - v686 required-term pair surface policy execution profile 的运行截图和解释。
+## v687 补充索引
+
+- `e/687/图片`
+- `e/687/解释/说明.md`
+- v687 required-term pair surface variant plan 的运行截图和解释。

@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface variant plan",
+  "generated_at": "2026-06-01T23:48:42Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_variant_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_profile_path": "e\\686\\解释\\model-capability-required-term-pair-surface-policy-execution-profile\\model_capability_required_term_pair_surface_policy_execution_profile.json",
+  "execution_profile": {
+    "profile_id": "pair_context_prefix_budget_8",
+    "policy_id": "pair_context_prefix",
+    "prompt_template": "{other_term}={other_term} {term}=",
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "leakage_level": "contextual_anchor",
+    "risk_level": "medium",
+    "allowed_use": "contextual_decode_surface_variant_replay",
+    "promotion_allowed": false
+  },
+  "variant_rows": [
+    {
+      "variant_id": "space_context_control",
+      "base_policy_id": "pair_context_prefix",
+      "prompt_template": "{other_term}={other_term} {term}=",
+      "separator_style": "space",
+      "leakage_level": "contextual_anchor",
+      "included_in_replay": true,
+      "rationale": "control variant from the selected profile"
+    },
+    {
+      "variant_id": "semicolon_context",
+      "base_policy_id": "pair_context_prefix",
+      "prompt_template": "{other_term}={other_term}; {term}=",
+      "separator_style": "semicolon",
+      "leakage_level": "contextual_anchor",
+      "included_in_replay": true,
+      "rationale": "tests punctuation-separated contextual anchoring"
+    },
+    {
+      "variant_id": "newline_context",
+      "base_policy_id": "pair_context_prefix",
+      "prompt_template": "{other_term}={other_term}\n{term}=",
+      "separator_style": "newline",
+      "leakage_level": "contextual_anchor",
+      "included_in_replay": true,
+      "rationale": "tests line-break separated contextual anchoring"
+    },
+    {
+      "variant_id": "compact_context",
+      "base_policy_id": "pair_context_prefix",
+      "prompt_template": "{other_term}={other_term}{term}=",
+      "separator_style": "compact",
+      "leakage_level": "contextual_anchor",
+      "included_in_replay": true,
+      "rationale": "tests whether the separator space is essential"
+    },
+    {
+      "variant_id": "worded_context",
+      "base_policy_id": "pair_context_prefix",
+      "prompt_template": "known {other_term}={other_term}; answer {term}=",
+      "separator_style": "worded",
+      "leakage_level": "contextual_anchor",
+      "included_in_replay": true,
+      "rationale": "tests a slightly more natural instruction-like surface"
+    }
+  ],
+  "summary": {
+    "profile_id": "pair_context_prefix_budget_8",
+    "policy_id": "pair_context_prefix",
+    "max_new_tokens": 8,
+    "variant_count": 5,
+    "included_variant_count": 5,
+    "promotion_ready": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_surface_variant_plan",
+    "reason": "The plan tests whether the selected contextual profile is brittle to surface separators.",
+    "next_action": "run variant replay over the dual-boundary checkpoints"
+  }
+}

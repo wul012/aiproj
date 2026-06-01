@@ -1,0 +1,7 @@
+variant_id,base_policy_id,prompt_template,separator_style,leakage_level,included_in_replay,rationale
+space_context_control,pair_context_prefix,{other_term}={other_term} {term}=,space,contextual_anchor,True,control variant from the selected profile
+semicolon_context,pair_context_prefix,{other_term}={other_term}; {term}=,semicolon,contextual_anchor,True,tests punctuation-separated contextual anchoring
+newline_context,pair_context_prefix,"{other_term}={other_term}
+{term}=",newline,contextual_anchor,True,tests line-break separated contextual anchoring
+compact_context,pair_context_prefix,{other_term}={other_term}{term}=,compact,contextual_anchor,True,tests whether the separator space is essential
+worded_context,pair_context_prefix,known {other_term}={other_term}; answer {term}=,worded,contextual_anchor,True,tests a slightly more natural instruction-like surface

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>MiniGPT surface variant plan</title><style>
+body{margin:0;background:#eef2f5;color:#172026;font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:28px}h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.stats div,section{background:white;border:1px solid #d8dee4;border-radius:8px;padding:14px;margin:14px 0}
+span{display:block;color:#5d6975;font-size:12px;text-transform:uppercase}strong{display:block;color:#0f766e;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #d8dee4;padding:9px;text-align:left;vertical-align:top}
+th{background:#f7f9fb;color:#334155}
+</style></head>
+<body><main>
+<h1>MiniGPT surface variant plan</h1>
+<p>The plan tests whether the selected contextual profile is brittle to surface separators.</p>
+<section class="stats">
+<div><span>Profile</span><strong>pair_context_prefix_budget_8</strong></div>
+<div><span>Variants</span><strong>5</strong></div>
+<div><span>Budget</span><strong>8</strong></div>
+</section>
+<section><h2>Variants</h2><table><thead><tr><th>Variant</th><th>Separator</th><th>Template</th><th>Rationale</th></tr></thead><tbody><tr><td>space_context_control</td><td>space</td><td>{other_term}={other_term} {term}=</td><td>control variant from the selected profile</td></tr><tr><td>semicolon_context</td><td>semicolon</td><td>{other_term}={other_term}; {term}=</td><td>tests punctuation-separated contextual anchoring</td></tr><tr><td>newline_context</td><td>newline</td><td>{other_term}={other_term}
+{term}=</td><td>tests line-break separated contextual anchoring</td></tr><tr><td>compact_context</td><td>compact</td><td>{other_term}={other_term}{term}=</td><td>tests whether the separator space is essential</td></tr><tr><td>worded_context</td><td>worded</td><td>known {other_term}={other_term}; answer {term}=</td><td>tests a slightly more natural instruction-like surface</td></tr></tbody></table></section>
+<section><h2>Next Action</h2><p>run variant replay over the dual-boundary checkpoints</p></section>
+</main></body></html>
