@@ -1,0 +1,5 @@
+status=pass
+decision=refresh_forced_choice_diagnostic_ready
+pytest=5 passed in 0.41s
+scoring=teacher-forced candidate NLL and first-token rank
+next_action=run real forced-choice diagnostic over v611-v613 checkpoints

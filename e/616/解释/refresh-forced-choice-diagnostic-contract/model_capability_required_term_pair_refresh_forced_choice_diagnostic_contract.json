@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh forced-choice diagnostic contract",
+  "status": "pass",
+  "decision": "refresh_forced_choice_diagnostic_ready",
+  "version": "v616.0.0",
+  "source_files": [
+    "src/minigpt/model_capability_required_term_pair_refresh_forced_choice_diagnostic.py",
+    "src/minigpt/model_capability_required_term_pair_refresh_forced_choice_diagnostic_artifacts.py",
+    "scripts/run_model_capability_required_term_pair_refresh_forced_choice_diagnostic.py",
+    "tests/test_model_capability_required_term_pair_refresh_forced_choice_diagnostic.py"
+  ],
+  "validation": {
+    "py_compile": "pass",
+    "pytest": "5 passed in 0.41s",
+    "git_diff_check": "pass"
+  },
+  "summary": {
+    "input": "one or more coexistence refresh reports",
+    "candidate_terms": "fixed/loss",
+    "scoring": "teacher-forced candidate NLL and first-token rank",
+    "output_formats": "json/csv/text/markdown/html",
+    "next_action": "run real forced-choice diagnostic over v611-v613 checkpoints"
+  }
+}

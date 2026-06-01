@@ -440,6 +440,9 @@
 629-v615-required-term-pair-contrast-free-route-decision.md
  -> v615 code explanation: stop contrast-free routes and require forced-choice diagnostics.
 
+630-v616-required-term-pair-refresh-forced-choice-diagnostic.md
+ -> v616 code explanation: add teacher-forced fixed/loss candidate scoring over refresh checkpoints.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

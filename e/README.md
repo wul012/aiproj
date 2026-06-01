@@ -589,6 +589,10 @@ e/614/解释/说明.md
 e/615/图片
 e/615/解释/说明.md
  -> v615 required-term pair contrast-free route decision 的运行截图和解释
+
+e/616/图片
+e/616/解释/说明.md
+ -> v616 required-term pair refresh forced-choice diagnostic contract 的运行截图和解释
 ```
 
 写入规则：

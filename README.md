@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v615.0.0` stops the contrast-free routes and routes the next step to forced-choice diagnostics.
+Version `v616.0.0` adds a refresh forced-choice diagnostic for teacher-forced fixed/loss candidate scoring.
+
+## Latest v616 checkpoint
+
+- Added `model_capability_required_term_pair_refresh_forced_choice_diagnostic`.
+- Added JSON/CSV/text/Markdown/HTML artifact rendering.
+- Added CLI `run_model_capability_required_term_pair_refresh_forced_choice_diagnostic.py`.
+- Covered full match, partial match, missing checkpoint, output rendering, and locator behavior.
+- Ran targeted tests: `5 passed`.
+- Archived v616 evidence in `e/616` and added the code explanation in `代码讲解记录_模型能力阶段/630-v616-required-term-pair-refresh-forced-choice-diagnostic.md`.
 
 ## Latest v615 checkpoint
 

@@ -1,0 +1,7 @@
+key,value
+status,pass
+decision,refresh_forced_choice_diagnostic_ready
+input,coexistence refresh reports
+candidate_terms,fixed/loss
+scoring,teacher-forced candidate NLL and first-token rank
+pytest,5 passed in 0.41s
