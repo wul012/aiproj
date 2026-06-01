@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v608.0.0` closes the v599-v607 fixed-retention batch and stops the current loss-rebalance branch before a new objective design.
+Version `v609.0.0` diagnoses first-token preference conflicts across v600-v607 and confirms the next objective should separate branch choice from repeated term loops.
+
+## Latest v609 checkpoint
+
+- Added `model_capability_required_term_pair_first_token_preference_diagnostic`.
+- Consumed v600, v601, v602, v606, and v607 refresh reports.
+- Confirmed `first_token_conflict_confirmed=True`.
+- Confirmed `mixed_branch_tradeoff_confirmed=True`.
+- Recorded `other_term_start_count=8`.
+- Archived v609 evidence in `e/609` and added the code explanation in `代码讲解记录_模型能力阶段/623-v609-required-term-pair-first-token-preference-diagnostic.md`.
 
 ## Latest v608 checkpoint
 

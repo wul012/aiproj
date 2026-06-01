@@ -561,6 +561,10 @@ e/607/解释/说明.md
 e/608/图片
 e/608/解释/说明.md
  -> v608 required-term pair fixed-retention batch closeout 的运行截图和解释
+
+e/609/图片
+e/609/解释/说明.md
+ -> v609 required-term pair first-token preference diagnostic 的运行截图和解释
 ```
 
 写入规则：

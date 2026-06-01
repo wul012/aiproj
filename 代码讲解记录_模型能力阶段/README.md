@@ -419,6 +419,9 @@
 622-v608-required-term-pair-fixed-retention-batch-closeout.md
  -> v608 code explanation: close v599-v607 fixed-retention/loss-rebalance batch before a new objective design.
 
+623-v609-required-term-pair-first-token-preference-diagnostic.md
+ -> v609 code explanation: diagnose first-token preference conflicts across v600-v607 before new objective design.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

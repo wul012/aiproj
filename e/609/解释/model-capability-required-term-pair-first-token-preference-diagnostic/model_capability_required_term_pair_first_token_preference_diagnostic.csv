@@ -1,0 +1,21 @@
+source_label,profile_id,term,expected_first_char,observed_first_char,first_char_expected,branch_vote,continuation_hit,continuation_preview
+v600-balanced,default,fixed,f,l,False,other,False, losssssssss
+v600-balanced,suppress_newline_tokens,fixed,f,l,False,other,False, losssssssss
+v600-balanced,default,loss,l,f,False,fixed-start,False,fixed\nfixed 
+v600-balanced,suppress_newline_tokens,loss,l,f,False,fixed-start,True,fixed= losss
+v601-first-token,default,fixed,f,f,True,fixed-start,True,fixed=fixed=
+v601-first-token,suppress_newline_tokens,fixed,f,f,True,fixed-start,True,fixed=fixed=
+v601-first-token,default,loss,l,f,False,fixed-start,False,fixed=fixed=
+v601-first-token,suppress_newline_tokens,loss,l,f,False,fixed-start,False,fixed=fixed=
+v602-prompt-guard,default,fixed,f,l,False,other,False, loss\nlos\nlo
+v602-prompt-guard,suppress_newline_tokens,fixed,f,l,False,other,False, losssssssss
+v602-prompt-guard,default,loss,l,l,True,other,True, losss\nlos\nl
+v602-prompt-guard,suppress_newline_tokens,loss,l,l,True,other,True, losssssssss
+v606-loss-rebalance,default,fixed,f,l,False,loss-start,False,lossssssssss
+v606-loss-rebalance,suppress_newline_tokens,fixed,f,l,False,loss-start,False,lossssssssss
+v606-loss-rebalance,default,loss,l,l,True,loss-start,True,lossssssssss
+v606-loss-rebalance,suppress_newline_tokens,loss,l,l,True,loss-start,True,lossssssssss
+v607-dual-cycle,default,fixed,f,f,True,fixed-start,True,fixed=fixed=
+v607-dual-cycle,suppress_newline_tokens,fixed,f,f,True,fixed-start,True,fixed=fixed=
+v607-dual-cycle,default,loss,l,f,False,fixed-start,False,fixed=los=fi
+v607-dual-cycle,suppress_newline_tokens,loss,l,f,False,fixed-start,False,fixed=los=fi
