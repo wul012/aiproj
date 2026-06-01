@@ -1,0 +1,11 @@
+status=pass
+decision=select_fixed_retention_route_for_loss_rebalance
+failed_count=0
+compared_report_count=3
+pair_full_report_count=0
+fixed_only_tradeoff_report_count=2
+loss_only_tradeoff_report_count=0
+union_hit_terms=fixed
+fixed_recovery_route=v612-delimiter-span
+model_quality_claim=comparison_only
+next_action=inspect first-token preferences before another objective

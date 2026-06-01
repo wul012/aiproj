@@ -581,6 +581,10 @@ e/612/解释/说明.md
 e/613/图片
 e/613/解释/说明.md
  -> v613 required-term pair context-switch seed 3535 的运行截图和解释
+
+e/614/图片
+e/614/解释/说明.md
+ -> v614 required-term pair contrast-free objective comparison 的运行截图和解释
 ```
 
 写入规则：

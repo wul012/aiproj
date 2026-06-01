@@ -434,6 +434,9 @@
 627-v613-required-term-pair-context-switch-seed-3535.md
  -> v613 code explanation: run real context-switch seed 3535 and record another fixed-only result.
 
+628-v614-required-term-pair-contrast-free-objective-comparison.md
+ -> v614 code explanation: compare v611-v613 and confirm only fixed recovery, no pair-full.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

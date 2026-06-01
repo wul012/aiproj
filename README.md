@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v613.0.0` runs the context-switch objective route on real seed `3535` and records another fixed-only result.
+Version `v614.0.0` compares the three contrast-free objective routes and confirms they only recover fixed, not pair-full.
+
+## Latest v614 checkpoint
+
+- Compared v611 contrast-free, v612 delimiter-span, and v613 context-switch reports.
+- Confirmed `pair_full_report_count=0`.
+- Confirmed `fixed_only_tradeoff_report_count=2` and `loss_only_tradeoff_report_count=0`.
+- Confirmed `union_hit_terms=fixed`.
+- Preserved `v612-delimiter-span` only as fixed-recovery evidence, not promotion.
+- Archived v614 evidence in `e/614` and added the code explanation in `代码讲解记录_模型能力阶段/628-v614-required-term-pair-contrast-free-objective-comparison.md`.
 
 ## Latest v613 checkpoint
 

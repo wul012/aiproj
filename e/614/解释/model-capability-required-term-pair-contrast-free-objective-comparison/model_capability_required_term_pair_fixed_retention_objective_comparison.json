@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fixed-retention objective comparison",
+  "generated_at": "2026-06-01T01:43:30Z",
+  "status": "pass",
+  "decision": "select_fixed_retention_route_for_loss_rebalance",
+  "failed_count": 0,
+  "issues": [],
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    },
+    {
+      "index": 1,
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    },
+    {
+      "index": 2,
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0
+    }
+  ],
+  "term_rows": [
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed=  lossssssss",
+      "continuation_preview": "  lossssssss"
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "fixed=  lossssssss",
+      "continuation_preview": "  lossssssss"
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "fixed=fixed=lossss",
+      "continuation_preview": "fixed=lossss"
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "fixed=fixed=lossss",
+      "continuation_preview": "fixed=lossss"
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation_hit": true,
+      "newline_cleanup_hit": true,
+      "generated_preview": "fixed=fixed=fixed=",
+      "continuation_preview": "fixed=fixed="
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixeded=fixe",
+      "continuation_preview": "fixeded=fixe"
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation_hit": false,
+      "newline_cleanup_hit": false,
+      "generated_preview": "loss=fixeded=fixe",
+      "continuation_preview": "fixeded=fixe"
+    }
+  ],
+  "branch_rows": [
+    {
+      "source_label": "v611-contrast-free",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_term_count": 0,
+      "pair_full_profiles": [],
+      "fixed_only_tradeoff": false,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "fixed_only_tradeoff": true,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false
+    },
+    {
+      "source_label": "v613-context-switch",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "hit_term_count": 1,
+      "pair_full_profiles": [],
+      "fixed_only_tradeoff": true,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false
+    }
+  ],
+  "summary": {
+    "compared_report_count": 3,
+    "pair_full_report_count": 0,
+    "fixed_only_tradeoff_report_count": 2,
+    "loss_only_tradeoff_report_count": 0,
+    "fixed_hit_report_count": 2,
+    "loss_hit_report_count": 0,
+    "union_hit_terms": [
+      "fixed"
+    ],
+    "mixed_tradeoff_observed": false,
+    "best_hit_term_count": 1,
+    "best_routes": [
+      "v612-delimiter-span",
+      "v613-context-switch"
+    ],
+    "fixed_recovery_route": "v612-delimiter-span"
+  },
+  "interpretation": {
+    "model_quality_claim": "comparison_only",
+    "reason": "The compared routes do not yet provide pair-full evidence.",
+    "next_action": "inspect first-token preferences before another objective"
+  }
+}
