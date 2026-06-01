@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+joint-cycle-internal-repair,fixed,fixed,fixed,True,1.015049,1.015049
+joint-cycle-internal-repair,loss,loss,loss,True,0.777257,0.777257

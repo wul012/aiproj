@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh forced-choice diagnostic",
+  "generated_at": "2026-06-01T07:54:04Z",
+  "status": "pass",
+  "decision": "refresh_forced_choice_internal_pair_match",
+  "failed_count": 0,
+  "issues": [],
+  "settings": {
+    "device": "cpu",
+    "candidate_terms": [
+      "fixed",
+      "loss"
+    ],
+    "experiment_boundary": "teacher-forced scoring only; no generation and no retraining"
+  },
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "joint-cycle-internal-repair",
+      "source_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    }
+  ],
+  "score_rows": [
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "source_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        21,
+        24,
+        38,
+        20,
+        19
+      ],
+      "total_nll": 5.075247,
+      "avg_nll": 1.015049,
+      "first_token_rank": 3,
+      "first_token_logprob": -2.778962
+    },
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "source_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        27,
+        30,
+        33,
+        33
+      ],
+      "total_nll": 6.115942,
+      "avg_nll": 1.528986,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.607333
+    },
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "source_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        21,
+        24,
+        38,
+        20,
+        19
+      ],
+      "total_nll": 4.417648,
+      "avg_nll": 0.88353,
+      "first_token_rank": 3,
+      "first_token_logprob": -2.058268
+    },
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "source_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        27,
+        30,
+        33,
+        33
+      ],
+      "total_nll": 3.109029,
+      "avg_nll": 0.777257,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.226602
+    }
+  ],
+  "prompt_summaries": [
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 1.015049,
+      "best_avg_nll": 1.015049,
+      "expected_first_token_rank": 3
+    },
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "prompt_term": "loss",
+      "best_candidate": "loss",
+      "expected_candidate": "loss",
+      "expected_best": true,
+      "expected_avg_nll": 0.777257,
+      "best_avg_nll": 0.777257,
+      "expected_first_token_rank": 2
+    }
+  ],
+  "source_summaries": [
+    {
+      "source_label": "joint-cycle-internal-repair",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+      "expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_best_count": 2,
+      "forced_choice_full_match": true
+    }
+  ],
+  "summary": {
+    "source_report_count": 1,
+    "prompt_summary_count": 2,
+    "source_summary_count": 1,
+    "expected_best_prompt_count": 2,
+    "fixed_prompt_expected_best_count": 1,
+    "loss_prompt_expected_best_count": 1,
+    "forced_choice_full_match_source_count": 1,
+    "best_internal_sources": [
+      "joint-cycle-internal-repair"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "forced_choice_internal_signal_only",
+    "reason": "At least one checkpoint internally prefers the expected term for both prompts.",
+    "next_action": "compare internal preference with generation failures before more training"
+  }
+}

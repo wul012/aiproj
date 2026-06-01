@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v640.0.0` runs the joint-cycle internal-repair seed and records a generation regression.
+Version `v641.0.0` runs forced-choice scoring for the internal-repair checkpoint and confirms internal pair match.
+
+## Latest v641 checkpoint
+
+- Ran forced-choice diagnostic for the v640 joint-cycle internal-repair checkpoint.
+- Confirmed `decision=refresh_forced_choice_internal_pair_match`.
+- Confirmed `expected_best_prompt_count=2`.
+- Confirmed `forced_choice_full_match_source_count=1`.
+- Observed `fixed=` prefers fixed and `loss=` prefers loss internally.
+- Preserved the boundary that v641 is internal evidence only, not generation pair-full.
+- Archived v641 evidence in `e/641` and added the code explanation in `代码讲解记录_模型能力阶段/655-v641-required-term-pair-joint-cycle-internal-repair-forced-choice.md`.
 
 ## Latest v640 checkpoint
 
