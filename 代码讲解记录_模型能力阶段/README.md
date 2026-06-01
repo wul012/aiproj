@@ -464,6 +464,9 @@
 637-v623-required-term-pair-loss-internal-preference-objective-comparison.md
  -> v623 code explanation: compare v620-v622 and confirm branch tradeoff without pair-full.
 
+638-v624-required-term-pair-loss-internal-forced-choice-diagnostic.md
+ -> v624 code explanation: run forced-choice scoring and identify v621 as an internal pair-match source.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,7 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+loss-internal-first-token,fixed,fixed,fixed,True,0.699462,0.699462
+loss-internal-first-token,loss,loss,loss,True,0.572295,0.572295
+loss-internal-preference,fixed,fixed,fixed,True,0.564308,0.564308
+loss-internal-preference,loss,fixed,loss,False,0.974691,0.5284
+loss-internal-ranked-choice,fixed,loss,fixed,False,0.824453,0.793944
+loss-internal-ranked-choice,loss,loss,loss,True,0.783144,0.783144

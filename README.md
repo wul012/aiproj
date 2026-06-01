@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v623.0.0` compares the three loss-internal-preference routes and confirms a branch tradeoff.
+Version `v624.0.0` runs forced-choice diagnostics and finds an internal pair match in the first-token route.
+
+## Latest v624 checkpoint
+
+- Ran teacher-forced forced-choice scoring over v620, v621, and v622 checkpoints.
+- Confirmed `forced_choice_full_match_source_count=1`.
+- Identified `loss-internal-first-token` as the internal pair-match source.
+- Preserved the boundary that internal match is not generation pair-full.
+- Archived v624 evidence in `e/624` and added the code explanation in `代码讲解记录_模型能力阶段/638-v624-required-term-pair-loss-internal-forced-choice-diagnostic.md`.
 
 ## Latest v623 checkpoint
 

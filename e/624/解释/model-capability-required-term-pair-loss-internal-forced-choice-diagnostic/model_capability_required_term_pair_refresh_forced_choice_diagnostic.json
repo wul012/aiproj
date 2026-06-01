@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh forced-choice diagnostic",
+  "generated_at": "2026-06-01T04:08:54Z",
+  "status": "pass",
+  "decision": "refresh_forced_choice_internal_pair_match",
+  "failed_count": 0,
+  "issues": [],
+  "settings": {
+    "device": "cpu",
+    "candidate_terms": [
+      "fixed",
+      "loss"
+    ],
+    "experiment_boundary": "teacher-forced scoring only; no generation and no retraining"
+  },
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "loss-internal-preference",
+      "source_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    },
+    {
+      "index": 1,
+      "source_label": "loss-internal-first-token",
+      "source_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    },
+    {
+      "index": 2,
+      "source_label": "loss-internal-ranked-choice",
+      "source_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    }
+  ],
+  "score_rows": [
+    {
+      "source_label": "loss-internal-preference",
+      "source_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        15,
+        18,
+        31,
+        14,
+        13
+      ],
+      "total_nll": 2.821541,
+      "avg_nll": 0.564308,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.016428
+    },
+    {
+      "source_label": "loss-internal-preference",
+      "source_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        20,
+        23,
+        26,
+        26
+      ],
+      "total_nll": 4.331756,
+      "avg_nll": 1.082939,
+      "first_token_rank": 3,
+      "first_token_logprob": -2.023524
+    },
+    {
+      "source_label": "loss-internal-preference",
+      "source_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        15,
+        18,
+        31,
+        14,
+        13
+      ],
+      "total_nll": 2.642002,
+      "avg_nll": 0.5284,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.839136
+    },
+    {
+      "source_label": "loss-internal-preference",
+      "source_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\620\\解释\\model-capability-required-term-pair-loss-internal-preference-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        20,
+        23,
+        26,
+        26
+      ],
+      "total_nll": 3.898765,
+      "avg_nll": 0.974691,
+      "first_token_rank": 3,
+      "first_token_logprob": -1.843446
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "source_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        16,
+        19,
+        31,
+        15,
+        14
+      ],
+      "total_nll": 3.497311,
+      "avg_nll": 0.699462,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.505515
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "source_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        21,
+        24,
+        27,
+        27
+      ],
+      "total_nll": 6.675099,
+      "avg_nll": 1.668775,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.476669
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "source_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        16,
+        19,
+        31,
+        15,
+        14
+      ],
+      "total_nll": 5.329653,
+      "avg_nll": 1.065931,
+      "first_token_rank": 3,
+      "first_token_logprob": -1.662453
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "source_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        21,
+        24,
+        27,
+        27
+      ],
+      "total_nll": 2.289182,
+      "avg_nll": 0.572295,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.545258
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "source_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        19,
+        22,
+        35,
+        18,
+        17
+      ],
+      "total_nll": 4.122264,
+      "avg_nll": 0.824453,
+      "first_token_rank": 3,
+      "first_token_logprob": -2.983987
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "source_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        24,
+        27,
+        30,
+        30
+      ],
+      "total_nll": 3.175777,
+      "avg_nll": 0.793944,
+      "first_token_rank": 2,
+      "first_token_logprob": -2.307082
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "source_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        19,
+        22,
+        35,
+        18,
+        17
+      ],
+      "total_nll": 4.122701,
+      "avg_nll": 0.82454,
+      "first_token_rank": 3,
+      "first_token_logprob": -2.910019
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "source_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\622\\解释\\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        24,
+        27,
+        30,
+        30
+      ],
+      "total_nll": 3.132576,
+      "avg_nll": 0.783144,
+      "first_token_rank": 2,
+      "first_token_logprob": -2.240032
+    }
+  ],
+  "prompt_summaries": [
+    {
+      "source_label": "loss-internal-first-token",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 0.699462,
+      "best_avg_nll": 0.699462,
+      "expected_first_token_rank": 2
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "prompt_term": "loss",
+      "best_candidate": "loss",
+      "expected_candidate": "loss",
+      "expected_best": true,
+      "expected_avg_nll": 0.572295,
+      "best_avg_nll": 0.572295,
+      "expected_first_token_rank": 1
+    },
+    {
+      "source_label": "loss-internal-preference",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 0.564308,
+      "best_avg_nll": 0.564308,
+      "expected_first_token_rank": 2
+    },
+    {
+      "source_label": "loss-internal-preference",
+      "prompt_term": "loss",
+      "best_candidate": "fixed",
+      "expected_candidate": "loss",
+      "expected_best": false,
+      "expected_avg_nll": 0.974691,
+      "best_avg_nll": 0.5284,
+      "expected_first_token_rank": 3
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "prompt_term": "fixed",
+      "best_candidate": "loss",
+      "expected_candidate": "fixed",
+      "expected_best": false,
+      "expected_avg_nll": 0.824453,
+      "best_avg_nll": 0.793944,
+      "expected_first_token_rank": 3
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "prompt_term": "loss",
+      "best_candidate": "loss",
+      "expected_candidate": "loss",
+      "expected_best": true,
+      "expected_avg_nll": 0.783144,
+      "best_avg_nll": 0.783144,
+      "expected_first_token_rank": 2
+    }
+  ],
+  "source_summaries": [
+    {
+      "source_label": "loss-internal-preference",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "expected_best_terms": [
+        "fixed"
+      ],
+      "expected_best_count": 1,
+      "forced_choice_full_match": false
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_best_count": 2,
+      "forced_choice_full_match": true
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "expected_best_terms": [
+        "loss"
+      ],
+      "expected_best_count": 1,
+      "forced_choice_full_match": false
+    }
+  ],
+  "summary": {
+    "source_report_count": 3,
+    "prompt_summary_count": 6,
+    "source_summary_count": 3,
+    "expected_best_prompt_count": 4,
+    "fixed_prompt_expected_best_count": 2,
+    "loss_prompt_expected_best_count": 2,
+    "forced_choice_full_match_source_count": 1,
+    "best_internal_sources": [
+      "loss-internal-first-token"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "forced_choice_internal_signal_only",
+    "reason": "At least one checkpoint internally prefers the expected term for both prompts.",
+    "next_action": "compare internal preference with generation failures before more training"
+  }
+}

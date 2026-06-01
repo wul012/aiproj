@@ -1,0 +1,8 @@
+status=pass
+decision=refresh_forced_choice_internal_pair_match
+failed_count=0
+expected_best_prompt_count=4
+forced_choice_full_match_source_count=1
+best_internal_sources=loss-internal-first-token
+model_quality_claim=forced_choice_internal_signal_only
+next_action=compare internal preference with generation failures before more training
