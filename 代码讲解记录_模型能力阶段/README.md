@@ -572,6 +572,9 @@
 673-v659-required-term-pair-refresh-resume-contract.md
  -> v659 code explanation: expose real checkpoint continuation in the required-term pair refresh wrapper.
 
+674-v660-required-term-pair-v630-internal-repair-resume.md
+ -> v660 code explanation: run real continuation from the v630 generation checkpoint into internal-repair training.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
