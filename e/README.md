@@ -613,6 +613,10 @@ e/620/解释/说明.md
 e/621/图片
 e/621/解释/说明.md
  -> v621 required-term pair loss-internal first-token seed 3535 的运行截图和解释
+
+e/622/图片
+e/622/解释/说明.md
+ -> v622 required-term pair loss-internal ranked-choice seed 3535 的运行截图和解释
 ```
 
 写入规则：

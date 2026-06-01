@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v621.0.0` runs the loss-internal first-token objective and records a loss-only tradeoff.
+Version `v622.0.0` runs the loss-internal ranked-choice objective and records another fixed-only result.
+
+## Latest v622 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_ranked_choice_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` hits fixed while `loss=` still drifts to fixed.
+- Archived v622 evidence in `e/622` and added the code explanation in `代码讲解记录_模型能力阶段/636-v622-required-term-pair-loss-internal-ranked-choice-seed-3535.md`.
 
 ## Latest v621 checkpoint
 

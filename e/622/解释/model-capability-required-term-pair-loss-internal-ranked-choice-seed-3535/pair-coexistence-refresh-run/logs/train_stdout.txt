@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=112821 vocab_size=36
+parameters=53,440
+data_source=data:e\622\解释\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1621 val_loss=3.2409
+step=  450 train_loss=1.0973 val_loss=2.1413
+step=  900 train_loss=1.2880 val_loss=2.4574
+step= 1350 train_loss=1.0926 val_loss=2.5924
+step= 1800 train_loss=1.1073 val_loss=1.7131
+saved=e\622\解释\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\pair-coexistence-refresh-run
+history=e\622\解释\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\622\解释\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\622\解释\model-capability-required-term-pair-loss-internal-ranked-choice-seed-3535\pair-coexistence-refresh-run\sample.txt
