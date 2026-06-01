@@ -733,6 +733,10 @@ e/650/解释/说明.md
 e/651/图片
 e/651/解释/说明.md
  -> v651 required-term pair surface-first schedule seed 3535 的运行截图和解释
+
+e/652/图片
+e/652/解释/说明.md
+ -> v652 required-term pair surface-first schedule forced-choice 的运行截图和解释
 ```
 
 写入规则：

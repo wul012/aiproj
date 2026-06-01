@@ -6887,6 +6887,8 @@ The required-term pair surface-first schedule corpus layer turns that plan into 
 
 The required-term pair surface-first schedule seed run shows that the runnable approximation trains and writes a checkpoint but regresses to fixed-only generation, so it is recorded as negative model evidence rather than a pair-full candidate.
 
+The required-term pair surface-first forced-choice diagnostic confirms the same checkpoint is only a partial internal match: `fixed` wins internally, while `loss` still prefers the fixed candidate.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

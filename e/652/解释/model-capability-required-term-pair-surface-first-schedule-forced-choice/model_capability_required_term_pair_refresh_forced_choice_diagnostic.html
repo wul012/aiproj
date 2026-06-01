@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT refresh forced-choice diagnostic</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#2f5f5b}
+*{box-sizing:border-box}
+body{margin:0;background:#eef4f3;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1160px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}.card strong{display:block;margin-top:6px;font-size:18px;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT refresh forced-choice diagnostic</h1><p>Some prompts internally prefer the expected term, but no checkpoint matches the pair.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>refresh_forced_choice_partial_internal_match</strong></div><div class="card"><span>Expected-best</span><strong>1</strong></div><div class="card"><span>Full match</span><strong>0</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>use prompt-level internal preference to design the next objective</p></section>
+<section class="panel"><h2>Prompt Summaries</h2><div class="table-wrap"><table>
+<thead><tr><th>Source</th><th>Prompt</th><th>Best</th><th>Expected best</th><th>Expected NLL</th><th>Best NLL</th></tr></thead>
+<tbody><tr><td>surface-first-schedule</td><td>fixed</td><td>fixed</td><td>True</td><td>0.544631</td><td>0.544631</td></tr>
+<tr><td>surface-first-schedule</td><td>loss</td><td>fixed</td><td>False</td><td>0.81721</td><td>0.549091</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

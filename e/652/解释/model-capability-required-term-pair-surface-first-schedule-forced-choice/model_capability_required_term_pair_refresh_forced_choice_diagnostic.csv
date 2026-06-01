@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+surface-first-schedule,fixed,fixed,fixed,True,0.544631,0.544631
+surface-first-schedule,loss,fixed,loss,False,0.81721,0.549091
