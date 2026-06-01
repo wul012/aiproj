@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface policy minimality check",
+  "generated_at": "2026-06-01T23:27:06Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_policy_contextual_anchor_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_selector_path": "e\\682\\解释\\model-capability-required-term-pair-surface-policy-selector\\model_capability_required_term_pair_surface_policy_selector.json",
+  "source_replay_path": "e\\681\\解释\\model-capability-required-term-pair-surface-policy-replay\\model_capability_required_term_pair_surface_policy_replay.json",
+  "check_rows": [
+    {
+      "id": "selected_policy_present",
+      "target": "pair_context_prefix",
+      "status": "pass",
+      "detail": "selector must name a selected policy"
+    },
+    {
+      "id": "selected_policy_stable",
+      "target": "pair_context_prefix",
+      "status": "pass",
+      "detail": "selected policy must be stable across seeds"
+    },
+    {
+      "id": "non_leaking_baseline_not_stable",
+      "target": "pair_context_prefix",
+      "status": "pass",
+      "detail": "minimal non-leaking baselines are not stable, so contextual anchoring is still required"
+    },
+    {
+      "id": "selected_policy_contextual_anchor",
+      "target": "pair_context_prefix",
+      "status": "pass",
+      "detail": "selected policy should be marked as contextual anchor, not model baseline"
+    },
+    {
+      "id": "promotion_blocked",
+      "target": "pair_context_prefix",
+      "status": "pass",
+      "detail": "selector must block promotion before leakage/minimality is reviewed"
+    }
+  ],
+  "summary": {
+    "selected_policy_id": "pair_context_prefix",
+    "selected_leakage_level": "contextual_anchor",
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "contextual_anchor_required": true,
+    "promotion_ready": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_decode_policy_only",
+    "reason": "The selected policy is stable, but non-leaking minimal baselines are not stable.",
+    "next_action": "treat the selected policy as a contextual decoding aid and run leakage-risk documentation"
+  }
+}

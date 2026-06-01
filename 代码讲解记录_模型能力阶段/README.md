@@ -641,6 +641,9 @@
 696-v682-required-term-pair-surface-policy-selector.md
  -> v682 code explanation: select the shorter contextual-anchor policy for minimality checks without promotion.
 
+697-v683-required-term-pair-surface-policy-minimality-check.md
+ -> v683 code explanation: verify that the selected policy requires contextual anchoring and is not promotion-ready.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

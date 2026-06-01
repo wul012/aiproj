@@ -7034,6 +7034,8 @@ The required-term pair surface-policy replay runs those candidates over the thre
 
 The required-term pair surface-policy selector chooses `pair_context_prefix` over the longer `dual_boundary_sentence` because it is equally stable but shorter and less tied to training boundary wording; the route remains selected for minimality checking, not promotion.
 
+The required-term pair surface-policy minimality check confirms that `pair_context_prefix` needs contextual anchoring: non-leaking single-label baselines are not stable, so the selected policy is useful as a decoding aid but not a minimal-prompt baseline.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

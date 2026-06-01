@@ -1,0 +1,6 @@
+id,target,status,detail
+selected_policy_present,pair_context_prefix,pass,selector must name a selected policy
+selected_policy_stable,pair_context_prefix,pass,selected policy must be stable across seeds
+non_leaking_baseline_not_stable,pair_context_prefix,pass,"minimal non-leaking baselines are not stable, so contextual anchoring is still required"
+selected_policy_contextual_anchor,pair_context_prefix,pass,"selected policy should be marked as contextual anchor, not model baseline"
+promotion_blocked,pair_context_prefix,pass,selector must block promotion before leakage/minimality is reviewed

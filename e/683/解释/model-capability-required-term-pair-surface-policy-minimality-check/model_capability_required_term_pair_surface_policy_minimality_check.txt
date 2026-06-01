@@ -1,0 +1,8 @@
+status=pass
+decision=required_term_pair_surface_policy_contextual_anchor_required
+failed_count=0
+selected_policy_id=pair_context_prefix
+contextual_anchor_required=True
+promotion_ready=False
+model_quality_claim=contextual_decode_policy_only
+next_action=treat the selected policy as a contextual decoding aid and run leakage-risk documentation

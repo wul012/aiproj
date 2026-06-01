@@ -896,3 +896,8 @@ e/663/解释/说明.md
 - `e/682/图片`
 - `e/682/解释/说明.md`
 - v682 required-term pair surface policy selector 的运行截图和解释。
+## v683 补充索引
+
+- `e/683/图片`
+- `e/683/解释/说明.md`
+- v683 required-term pair surface policy minimality check 的运行截图和解释。
