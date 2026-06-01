@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v609.0.0` diagnoses first-token preference conflicts across v600-v607 and confirms the next objective should separate branch choice from repeated term loops.
+Version `v610.0.0` adds three contrast-free fixed/loss objective corpus modes for the next real seed training routes.
+
+## Latest v610 checkpoint
+
+- Added `model_capability_required_term_pair_contrast_free_objective_corpus`.
+- Registered contrast-free, delimiter-span, and context-switch corpus modes.
+- Preserved `fixed=` / `loss=` source prompts.
+- Avoided numeric pair-id rows.
+- Ran targeted tests: `27 passed`.
+- Archived v610 evidence in `e/610` and added the code explanation in `代码讲解记录_模型能力阶段/624-v610-required-term-pair-contrast-free-objective-corpus.md`.
 
 ## Latest v609 checkpoint
 

@@ -422,6 +422,9 @@
 623-v609-required-term-pair-first-token-preference-diagnostic.md
  -> v609 code explanation: diagnose first-token preference conflicts across v600-v607 before new objective design.
 
+624-v610-required-term-pair-contrast-free-objective-corpus.md
+ -> v610 code explanation: add three contrast-free objective corpus modes after the first-token diagnostic.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

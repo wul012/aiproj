@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair contrast-free objective corpus contract",
+  "status": "pass",
+  "decision": "contrast_free_objective_corpus_modes_ready",
+  "version": "v610.0.0",
+  "new_corpus_modes": [
+    "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+    "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+    "equals_surface_no_pair_id_fixed_retention_context_switch_repair"
+  ],
+  "source_files": [
+    "src/minigpt/model_capability_required_term_pair_contrast_free_objective_corpus.py",
+    "src/minigpt/model_capability_required_term_pair_coexistence_corpus.py",
+    "tests/test_model_capability_required_term_pair_contrast_free_objective_corpus.py"
+  ],
+  "validation": {
+    "py_compile": "pass",
+    "pytest": "27 passed in 0.19s",
+    "git_diff_check": "pass"
+  },
+  "summary": {
+    "new_mode_count": 3,
+    "pair_id_removed": true,
+    "source_prompts": "fixed= / loss=",
+    "contrast_free_rows_added": true,
+    "delimiter_span_rows_added": true,
+    "context_switch_rows_added": true,
+    "next_action": "run real seed 3535 training for the three contrast-free objective modes"
+  }
+}

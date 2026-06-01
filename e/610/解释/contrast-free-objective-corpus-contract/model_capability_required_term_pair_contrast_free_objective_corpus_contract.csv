@@ -1,0 +1,4 @@
+mode,role,pair_id_removed,source_prompts,next_action
+equals_surface_no_pair_id_fixed_retention_contrast_free_repair,separate branch rows without naming the opposite term,True,fixed= / loss=,run real seed 3535
+equals_surface_no_pair_id_fixed_retention_delimiter_span_repair,stop the target span with punctuation,True,fixed= / loss=,run real seed 3535
+equals_surface_no_pair_id_fixed_retention_context_switch_repair,separate fixed/loss contexts while preserving prompt surface,True,fixed= / loss=,run real seed 3535

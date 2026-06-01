@@ -1,0 +1,7 @@
+status=pass
+decision=contrast_free_objective_corpus_modes_ready
+new_mode_count=3
+pair_id_removed=True
+source_prompts=fixed= / loss=
+pytest=27 passed in 0.19s
+next_action=run real seed 3535 training for the three contrast-free objective modes
