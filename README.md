@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v618.0.0` closes the v609-v618 contrast-free batch and routes the next work toward a loss-internal-preference objective.
+Version `v619.0.0` adds loss-internal-preference objective corpus modes for the next real tiny training batch.
+
+## Latest v619 checkpoint
+
+- Added `model_capability_required_term_pair_loss_internal_preference_objective_corpus`.
+- Registered three corpus modes in the existing pair coexistence training entry.
+- Preserved `fixed= / loss=` source prompts without pair-id leakage.
+- Covered internal preference, first-token, and ranked-choice corpus rows.
+- Archived v619 evidence in `e/619` and added the code explanation in `代码讲解记录_模型能力阶段/633-v619-required-term-pair-loss-internal-preference-corpus.md`.
 
 ## Latest v618 checkpoint
 

@@ -449,6 +449,9 @@
 632-v618-required-term-pair-contrast-free-batch-closeout.md
  -> v618 code explanation: close v609-v618 contrast-free batch and route to loss internal preference objective.
 
+633-v619-required-term-pair-loss-internal-preference-corpus.md
+ -> v619 code explanation: add loss-internal-preference objective corpus modes for the next real tiny training batch.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

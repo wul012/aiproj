@@ -601,6 +601,10 @@ e/617/解释/说明.md
 e/618/图片
 e/618/解释/说明.md
  -> v618 required-term pair contrast-free batch closeout 的运行截图和解释
+
+e/619/图片
+e/619/解释/说明.md
+ -> v619 required-term pair loss-internal-preference corpus contract 的运行截图和解释
 ```
 
 写入规则：

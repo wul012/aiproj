@@ -1,0 +1,31 @@
+{
+    "schema_version":  1,
+    "title":  "MiniGPT required-term pair loss-internal-preference objective corpus contract",
+    "status":  "pass",
+    "decision":  "loss_internal_preference_objective_corpus_modes_ready",
+    "version":  "v619.0.0",
+    "new_corpus_modes":  [
+                             "equals_surface_no_pair_id_loss_internal_preference_repair",
+                             "equals_surface_no_pair_id_loss_internal_first_token_repair",
+                             "equals_surface_no_pair_id_loss_internal_ranked_choice_repair"
+                         ],
+    "source_files":  [
+                         "src/minigpt/model_capability_required_term_pair_loss_internal_preference_objective_corpus.py",
+                         "src/minigpt/model_capability_required_term_pair_coexistence_corpus.py",
+                         "tests/test_model_capability_required_term_pair_loss_internal_preference_objective_corpus.py"
+                     ],
+    "validation":  {
+                       "py_compile":  "pass",
+                       "pytest":  "4 passed in 0.19s",
+                       "git_diff_check":  "pending final batch check"
+                   },
+    "summary":  {
+                    "new_mode_count":  3,
+                    "pair_id_removed":  true,
+                    "source_prompts":  "fixed= / loss=",
+                    "internal_preference_rows_added":  true,
+                    "first_token_preference_rows_added":  true,
+                    "ranked_choice_rows_added":  true,
+                    "next_action":  "run real seed 3535 training for the three loss-internal-preference objective modes"
+                }
+}
