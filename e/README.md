@@ -685,6 +685,10 @@ e/638/解释/说明.md
 e/639/图片
 e/639/解释/说明.md
  -> v639 required-term pair joint-cycle internal-repair corpus contract 的运行截图和解释
+
+e/640/图片
+e/640/解释/说明.md
+ -> v640 required-term pair joint-cycle internal-repair seed 3535 的运行截图和解释
 ```
 
 写入规则：

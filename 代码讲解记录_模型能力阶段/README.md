@@ -512,6 +512,9 @@
 653-v639-required-term-pair-joint-cycle-internal-repair-corpus.md
  -> v639 code explanation: add the joint-cycle internal-repair corpus mode selected by the v638 closeout.
 
+654-v640-required-term-pair-joint-cycle-internal-repair-seed-3535.md
+ -> v640 code explanation: run the joint-cycle internal-repair seed and record a generation regression.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

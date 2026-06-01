@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=235829 vocab_size=41
+parameters=53,760
+data_source=data:e\640\解释\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.2324 val_loss=3.2614
+step=  450 train_loss=1.4850 val_loss=1.7056
+step=  900 train_loss=1.6236 val_loss=2.2507
+step= 1350 train_loss=1.5903 val_loss=2.0886
+step= 1800 train_loss=1.7282 val_loss=2.2052
+saved=e\640\解释\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\pair-coexistence-refresh-run
+history=e\640\解释\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\640\解释\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\640\解释\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\pair-coexistence-refresh-run\sample.txt

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v639.0.0` adds the joint-cycle internal-repair corpus mode selected by the v638 closeout.
+Version `v640.0.0` runs the joint-cycle internal-repair seed and records a generation regression.
+
+## Latest v640 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed both `fixed=` and `loss=` drift into `l...` fragments.
+- Preserved the conclusion that direct internal repair can break generation pair-full.
+- Archived v640 evidence in `e/640` and added the code explanation in `代码讲解记录_模型能力阶段/654-v640-required-term-pair-joint-cycle-internal-repair-seed-3535.md`.
 
 ## Latest v639 checkpoint
 
