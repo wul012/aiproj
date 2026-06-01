@@ -491,6 +491,9 @@
 646-v632-required-term-pair-generation-internal-alignment-comparison.md
  -> v632 code explanation: compare generation pair-full and forced-choice internal match across loss-internal routes.
 
+647-v633-required-term-pair-generation-internal-alignment-route-decision.md
+ -> v633 code explanation: turn the alignment comparison into a generation-preserving internal-repair route decision.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

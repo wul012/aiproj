@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT generation/internal alignment route decision</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#3d5a80}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}.card strong{display:block;margin-top:6px;font-size:18px;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT generation/internal alignment route decision</h1><p>The best generation route is not internally aligned yet.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>repair_internal_preference_preserve_generation_pair_full</strong></div><div class="card"><span>Generation route</span><strong>loss-internal-joint-cycle</strong></div><div class="card"><span>Internal anchor</span><strong>loss-internal-first-token</strong></div><div class="card"><span>Promotion ready</span><strong>False</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>use the selected generation route as the base and repair internal preference</p></section>
+<section class="panel"><h2>Constraints</h2><div class="table-wrap"><table>
+<thead><tr><th>ID</th><th>Status</th><th>Source</th><th>Detail</th></tr></thead>
+<tbody><tr><td>preserve_generation_pair_full</td><td>required</td><td>loss-internal-joint-cycle</td><td>Do not lose fixed/loss generation pair-full while repairing internal preference.</td></tr>
+<tr><td>repair_loss_internal_preference</td><td>required</td><td>loss-internal-first-token</td><td>Recover the loss-side forced-choice preference without regressing fixed.</td></tr>
+<tr><td>avoid_pair_id_shortcut</td><td>required</td><td></td><td>Keep explicit pair-id leakage out of the next corpus objective.</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

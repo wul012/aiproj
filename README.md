@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v632.0.0` compares generation and internal alignment across the loss-internal routes.
+Version `v633.0.0` turns the alignment comparison into a route decision for the next training objective.
+
+## Latest v633 checkpoint
+
+- Added `model_capability_required_term_pair_generation_internal_alignment_route_decision`.
+- Selected `loss-internal-joint-cycle` as the generation-preservation route.
+- Selected `loss-internal-first-token` as the internal anchor route.
+- Confirmed `direct_promotion_ready=False`.
+- Emitted constraints for preserving generation pair-full and repairing loss-side internal preference.
+- Archived v633 evidence in `e/633` and added the code explanation in `代码讲解记录_模型能力阶段/647-v633-required-term-pair-generation-internal-alignment-route-decision.md`.
 
 ## Latest v632 checkpoint
 
