@@ -67,6 +67,22 @@ class GenerationInternalAlignmentComparisonTests(unittest.TestCase):
         self.assertEqual(report["source_rows"][0]["alignment_class"], "internal_pair_full_generation_none")
         self.assertEqual(report["source_rows"][0]["generation_hit_terms"], [])
 
+    def test_no_internal_expected_best_terms_is_a_valid_failed_route(self) -> None:
+        report = build_model_capability_required_term_pair_generation_internal_alignment_comparison(
+            [
+                source(
+                    "not-recovered",
+                    generation_terms=["loss"],
+                    internal_terms=[],
+                )
+            ]
+        )
+
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(report["failed_count"], 0)
+        self.assertEqual(report["source_rows"][0]["internal_expected_best_terms"], [])
+        self.assertEqual(report["source_rows"][0]["alignment_class"], "partial_tradeoff")
+
     def test_aligned_pair_full_wins_over_generation_only(self) -> None:
         report = build_model_capability_required_term_pair_generation_internal_alignment_comparison(
             [

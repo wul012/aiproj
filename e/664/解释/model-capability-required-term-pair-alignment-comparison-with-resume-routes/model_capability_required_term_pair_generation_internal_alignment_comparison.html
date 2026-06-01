@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT generation/internal alignment comparison</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#335c67}
+*{box-sizing:border-box}
+body{margin:0;background:#f0f4f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}.card strong{display:block;margin-top:6px;font-size:18px;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT generation/internal alignment comparison</h1><p>A route generates both terms but still has partial forced-choice internal preference.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>keep_generation_pair_full_and_repair_internal_preference</strong></div><div class="card"><span>Generation full</span><strong>1</strong></div><div class="card"><span>Internal full</span><strong>2</strong></div><div class="card"><span>Aligned full</span><strong>0</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>repair internal preference while preserving generation pair-full</p></section>
+<section class="panel"><h2>Source Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Route</th><th>Generation</th><th>Internal</th><th>Class</th></tr></thead>
+<tbody><tr><td>loss-internal-first-token</td><td>[&#x27;loss&#x27;]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td>internal_pair_full_generation_gap</td></tr>
+<tr><td>loss-internal-joint-cycle</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td>[&#x27;fixed&#x27;]</td><td>generation_pair_full_internal_partial</td></tr>
+<tr><td>joint-cycle-internal-repair</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td>internal_pair_full_generation_none</td></tr>
+<tr><td>v630-internal-repair-resume</td><td>[&#x27;loss&#x27;]</td><td>[&#x27;fixed&#x27;]</td><td>partial_tradeoff</td></tr>
+<tr><td>v630-light-merge-resume</td><td>[&#x27;loss&#x27;]</td><td>[]</td><td>partial_tradeoff</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

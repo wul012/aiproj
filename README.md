@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v648.0.0` closes the internal-repair batch and routes the next work to a two-stage schedule.
+Version `v664.0.0` compares the real resume routes against the existing generation/internal anchors.
+
+## Latest v664 checkpoint
+
+- Hardened generation/internal alignment comparison so zero internal expected-best terms are valid negative evidence.
+- Compared five routes: v621/v624, v630/v631, v640/v641, v660/v661, and v662/v663.
+- Confirmed `status=pass`.
+- Confirmed `generation_pair_full_count=1`.
+- Confirmed `internal_pair_full_count=2`.
+- Confirmed `aligned_pair_full_count=0`.
+- Confirmed naive checkpoint continuation did not beat the existing split-anchor route.
+- Archived v664 evidence in `e/664` and added the code explanation in `代码讲解记录_模型能力阶段/678-v664-required-term-pair-alignment-comparison-with-resume-routes.md`.
 
 ## Latest v648 checkpoint
 

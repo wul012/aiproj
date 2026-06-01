@@ -791,3 +791,9 @@ e/663/解释/说明.md
 - README、代码讲解和版本说明里引用 v473 及后续归档时，默认引用 `e/<version>`。
 
 一句话总览：`e/` 从 v473 开始承接模型能力阶段证据，让训练治理阶段的 `d/` 成为稳定历史归档。
+
+## v664 补充索引
+
+- `e/664/图片`
+- `e/664/解释/说明.md`
+- v664 required-term pair alignment comparison with resume routes 的运行截图和解释。

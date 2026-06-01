@@ -198,8 +198,6 @@ def _issues(source_rows: list[dict[str, Any]]) -> list[str]:
             issues.append(f"{label} checkpoint is missing")
         if row.get("forced_choice_status") != "pass":
             issues.append(f"{label} forced-choice status is not pass")
-        if not row.get("internal_expected_best_terms"):
-            issues.append(f"{label} has no internal expected-best terms")
     return issues
 
 
