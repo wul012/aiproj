@@ -656,6 +656,9 @@
 701-v687-required-term-pair-surface-variant-plan.md
  -> v687 code explanation: plan separator and wording variants for the contextual execution profile before real replay.
 
+702-v688-required-term-pair-surface-variant-replay.md
+ -> v688 code explanation: replay planned contextual variants over dual-boundary checkpoints and confirm all variants are stable.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

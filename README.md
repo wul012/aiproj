@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v687.0.0` plans surface variants for the selected contextual required-term pair execution profile.
+Version `v688.0.0` replays contextual surface variants for the selected required-term pair execution profile.
+
+## Latest v688 checkpoint
+
+- Added `model_capability_required_term_pair_surface_variant_replay`.
+- Reused the v681 replay builder over v676 dual-boundary checkpoints.
+- Replayed 5 surface variants with `max_new_tokens=8`.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_surface_variant_replay_all_variants_stable`.
+- Confirmed `stable_variant_count=5`.
+- Confirmed all planned variants are stable: compact, newline, semicolon, space-control, and worded.
+- Preserved the claim as `contextual_surface_variant_stable`, not a minimal-prompt baseline.
+- Archived v688 evidence in `e/688` and added the code explanation in `代码讲解记录_模型能力阶段/702-v688-required-term-pair-surface-variant-replay.md`.
 
 ## Latest v687 checkpoint
 

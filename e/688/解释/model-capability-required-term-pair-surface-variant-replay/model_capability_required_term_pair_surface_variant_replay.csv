@@ -1,0 +1,6 @@
+variant_id,seed_count,hit_case_count,case_count,pair_full_seed_count,stable_pair_full
+compact_context,3,6,6,3,True
+newline_context,3,6,6,3,True
+semicolon_context,3,6,6,3,True
+space_context_control,3,6,6,3,True
+worded_context,3,6,6,3,True

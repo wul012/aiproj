@@ -1,0 +1,8 @@
+status=pass
+decision=required_term_pair_surface_variant_replay_all_variants_stable
+variant_count=5
+stable_variant_count=5
+stable_variant_ids=['compact_context', 'newline_context', 'semicolon_context', 'space_context_control', 'worded_context']
+max_new_tokens=8
+model_quality_claim=contextual_surface_variant_stable
+next_action=select a preferred variant while preserving leakage-risk boundaries
