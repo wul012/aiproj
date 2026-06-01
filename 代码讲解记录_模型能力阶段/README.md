@@ -410,6 +410,9 @@
 619-v605-required-term-pair-fixed-retention-loss-rebalance-corpus.md
  -> v605 code explanation: add loss-rebalance corpus modes after fixed-only tradeoff.
 
+620-v606-required-term-pair-fixed-retention-loss-rebalance-seed-3535.md
+ -> v606 code explanation: run real loss-rebalance seed 3535 and confirm it remains loss-only.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

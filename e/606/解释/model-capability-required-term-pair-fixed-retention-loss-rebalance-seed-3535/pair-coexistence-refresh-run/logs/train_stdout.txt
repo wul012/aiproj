@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=77577 vocab_size=34
+parameters=53,312
+data_source=data:e\606\解释\model-capability-required-term-pair-fixed-retention-loss-rebalance-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1648 val_loss=3.2394
+step=  450 train_loss=0.9707 val_loss=3.3327
+step=  900 train_loss=0.8850 val_loss=3.0659
+step= 1350 train_loss=1.0438 val_loss=2.7158
+step= 1800 train_loss=0.9892 val_loss=3.1131
+saved=e\606\解释\model-capability-required-term-pair-fixed-retention-loss-rebalance-seed-3535\pair-coexistence-refresh-run
+history=e\606\解释\model-capability-required-term-pair-fixed-retention-loss-rebalance-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\606\解释\model-capability-required-term-pair-fixed-retention-loss-rebalance-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\606\解释\model-capability-required-term-pair-fixed-retention-loss-rebalance-seed-3535\pair-coexistence-refresh-run\sample.txt

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v605.0.0` adds fixed-retention loss-rebalance corpus modes that preserve fixed first-token rows while restoring direct `loss=loss` targets.
+Version `v606.0.0` runs the fixed-retention loss-rebalance route on real seed `3535` and confirms it remains a loss-only tradeoff.
+
+## Latest v606 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_fixed_retention_loss_rebalance_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` still drifts to `loss`, while `loss=` hits the loss branch.
+- Preserved the result as negative evidence and routed the next step to dual-cycle testing.
+- Archived v606 evidence in `e/606` and added the code explanation in `代码讲解记录_模型能力阶段/620-v606-required-term-pair-fixed-retention-loss-rebalance-seed-3535.md`.
 
 ## Latest v605 checkpoint
 
