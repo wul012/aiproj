@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+loss-internal-balanced-anchor,fixed,fixed,fixed,True,0.491234,0.491234
+loss-internal-balanced-anchor,loss,fixed,loss,False,0.704768,0.491615

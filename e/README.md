@@ -665,6 +665,10 @@ e/633/解释/说明.md
 e/634/图片
 e/634/解释/说明.md
  -> v634 required-term pair loss-internal balanced-anchor seed 3535 的运行截图和解释
+
+e/635/图片
+e/635/解释/说明.md
+ -> v635 required-term pair loss-internal balanced-anchor forced-choice 的运行截图和解释
 ```
 
 写入规则：

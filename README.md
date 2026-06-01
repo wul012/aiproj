@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v634.0.0` runs the balanced-anchor joint variant and records a fixed-only negative result.
+Version `v635.0.0` runs forced-choice scoring for the balanced-anchor checkpoint and confirms its fixed-side bias.
+
+## Latest v635 checkpoint
+
+- Ran forced-choice diagnostic for the v634 balanced-anchor checkpoint.
+- Confirmed `decision=refresh_forced_choice_partial_internal_match`.
+- Confirmed `expected_best_prompt_count=1`.
+- Confirmed `forced_choice_full_match_source_count=0`.
+- Observed `loss=` still internally prefers fixed.
+- Archived v635 evidence in `e/635` and added the code explanation in `代码讲解记录_模型能力阶段/649-v635-required-term-pair-loss-internal-balanced-anchor-forced-choice.md`.
 
 ## Latest v634 checkpoint
 

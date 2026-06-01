@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh forced-choice diagnostic",
+  "generated_at": "2026-06-01T07:05:51Z",
+  "status": "pass",
+  "decision": "refresh_forced_choice_partial_internal_match",
+  "failed_count": 0,
+  "issues": [],
+  "settings": {
+    "device": "cpu",
+    "candidate_terms": [
+      "fixed",
+      "loss"
+    ],
+    "experiment_boundary": "teacher-forced scoring only; no generation and no retraining"
+  },
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "loss-internal-balanced-anchor",
+      "source_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    }
+  ],
+  "score_rows": [
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "source_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        15,
+        18,
+        30,
+        14,
+        13
+      ],
+      "total_nll": 2.456169,
+      "avg_nll": 0.491234,
+      "first_token_rank": 3,
+      "first_token_logprob": -1.679216
+    },
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "source_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        19,
+        22,
+        26,
+        26
+      ],
+      "total_nll": 2.566608,
+      "avg_nll": 0.641652,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.609903
+    },
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "source_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        15,
+        18,
+        30,
+        14,
+        13
+      ],
+      "total_nll": 2.458074,
+      "avg_nll": 0.491615,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.747596
+    },
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "source_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\634\\解释\\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        19,
+        22,
+        26,
+        26
+      ],
+      "total_nll": 2.819071,
+      "avg_nll": 0.704768,
+      "first_token_rank": 3,
+      "first_token_logprob": -1.771671
+    }
+  ],
+  "prompt_summaries": [
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 0.491234,
+      "best_avg_nll": 0.491234,
+      "expected_first_token_rank": 3
+    },
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "prompt_term": "loss",
+      "best_candidate": "fixed",
+      "expected_candidate": "loss",
+      "expected_best": false,
+      "expected_avg_nll": 0.704768,
+      "best_avg_nll": 0.491615,
+      "expected_first_token_rank": 3
+    }
+  ],
+  "source_summaries": [
+    {
+      "source_label": "loss-internal-balanced-anchor",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+      "expected_best_terms": [
+        "fixed"
+      ],
+      "expected_best_count": 1,
+      "forced_choice_full_match": false
+    }
+  ],
+  "summary": {
+    "source_report_count": 1,
+    "prompt_summary_count": 2,
+    "source_summary_count": 1,
+    "expected_best_prompt_count": 1,
+    "fixed_prompt_expected_best_count": 1,
+    "loss_prompt_expected_best_count": 0,
+    "forced_choice_full_match_source_count": 0,
+    "best_internal_sources": []
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_internal_signal_only",
+    "reason": "Some prompts internally prefer the expected term, but no checkpoint matches the pair.",
+    "next_action": "use prompt-level internal preference to design the next objective"
+  }
+}
