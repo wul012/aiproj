@@ -506,6 +506,9 @@
 651-v637-required-term-pair-route-decision-with-balanced-anchor.md
  -> v637 code explanation: re-run route decision after adding balanced-anchor and keep the joint-cycle repair route.
 
+652-v638-required-term-pair-generation-internal-batch-closeout.md
+ -> v638 code explanation: close the ten-version generation/internal batch and select joint-cycle internal repair.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

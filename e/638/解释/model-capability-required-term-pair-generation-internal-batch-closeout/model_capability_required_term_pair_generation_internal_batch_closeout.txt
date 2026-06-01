@@ -1,0 +1,9 @@
+status=pass
+decision=close_batch_and_design_joint_cycle_internal_repair
+failed_count=0
+batch_version_count=10
+aligned_pair_full_count=0
+selected_generation_route=loss-internal-joint-cycle
+internal_anchor_route=loss-internal-first-token
+model_quality_claim=targeted_generation_signal_only
+next_action=design a joint-cycle internal-repair corpus and repeat across seeds

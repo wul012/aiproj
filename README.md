@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v637.0.0` confirms the route decision still selects joint-cycle after balanced-anchor is included.
+Version `v638.0.0` closes the generation/internal alignment batch and selects joint-cycle internal repair next.
+
+## Latest v638 checkpoint
+
+- Added `model_capability_required_term_pair_generation_internal_batch_closeout`.
+- Closed the v629-v638 ten-version batch.
+- Confirmed `batch_version_count=10`.
+- Confirmed `aligned_pair_full_count=0`.
+- Confirmed `selected_generation_route=loss-internal-joint-cycle`.
+- Confirmed `internal_anchor_route=loss-internal-first-token`.
+- Set next route to `joint_cycle_internal_repair`.
+- Archived v638 evidence in `e/638` and added the code explanation in `代码讲解记录_模型能力阶段/652-v638-required-term-pair-generation-internal-batch-closeout.md`.
 
 ## Latest v637 checkpoint
 
