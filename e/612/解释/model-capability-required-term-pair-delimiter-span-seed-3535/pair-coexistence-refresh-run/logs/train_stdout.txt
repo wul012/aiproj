@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=59397 vocab_size=31
+parameters=53,120
+data_source=data:e\612\解释\model-capability-required-term-pair-delimiter-span-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9339 val_loss=3.1052
+step=  450 train_loss=0.9228 val_loss=2.6781
+step=  900 train_loss=0.9325 val_loss=3.2476
+step= 1350 train_loss=0.8473 val_loss=3.9548
+step= 1800 train_loss=0.8956 val_loss=4.2420
+saved=e\612\解释\model-capability-required-term-pair-delimiter-span-seed-3535\pair-coexistence-refresh-run
+history=e\612\解释\model-capability-required-term-pair-delimiter-span-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\612\解释\model-capability-required-term-pair-delimiter-span-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\612\解释\model-capability-required-term-pair-delimiter-span-seed-3535\pair-coexistence-refresh-run\sample.txt

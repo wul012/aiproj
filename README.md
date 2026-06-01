@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v611.0.0` runs the contrast-free objective route on real seed `3535` and records a cross-branch negative result.
+Version `v612.0.0` runs the delimiter-span objective route on real seed `3535` and records a fixed-only result.
+
+## Latest v612 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_fixed_retention_delimiter_span_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` hits fixed, while `loss=` drifts toward fixed.
+- Archived v612 evidence in `e/612` and added the code explanation in `代码讲解记录_模型能力阶段/626-v612-required-term-pair-delimiter-span-seed-3535.md`.
 
 ## Latest v611 checkpoint
 

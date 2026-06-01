@@ -428,6 +428,9 @@
 625-v611-required-term-pair-contrast-free-seed-3535.md
  -> v611 code explanation: run real contrast-free seed 3535 and record a cross-branch negative result.
 
+626-v612-required-term-pair-delimiter-span-seed-3535.md
+ -> v612 code explanation: run real delimiter-span seed 3535 and record a fixed-only result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

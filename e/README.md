@@ -573,6 +573,10 @@ e/610/解释/说明.md
 e/611/图片
 e/611/解释/说明.md
  -> v611 required-term pair contrast-free seed 3535 的运行截图和解释
+
+e/612/图片
+e/612/解释/说明.md
+ -> v612 required-term pair delimiter-span seed 3535 的运行截图和解释
 ```
 
 写入规则：

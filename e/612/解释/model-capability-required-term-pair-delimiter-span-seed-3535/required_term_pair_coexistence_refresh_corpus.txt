@@ -1,0 +1,2682 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+fixed=fixed;
+loss=loss;
+fixed=fixed.
+loss=loss.
+fixed=fixed end
+loss=loss end
+fixed=f fixed=fi fixed=fix fixed=fixed;
+loss=l loss=lo loss=los loss=loss;
+prompt fixed= completion fixed;
+prompt loss= completion loss;
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
+delimiter span stops the answer after the target term.
+fixed= answer fixed; then stop.
+loss= answer loss; then stop.
+the semicolon separates answer from another prompt.
