@@ -769,6 +769,10 @@ e/659/解释/说明.md
 e/660/图片
 e/660/解释/说明.md
  -> v660 required-term pair v630-to-internal-repair resume seed 3535 的运行截图和解释
+
+e/661/图片
+e/661/解释/说明.md
+ -> v661 required-term pair v630 internal-repair resume forced-choice 的运行截图和解释
 ```
 
 写入规则：

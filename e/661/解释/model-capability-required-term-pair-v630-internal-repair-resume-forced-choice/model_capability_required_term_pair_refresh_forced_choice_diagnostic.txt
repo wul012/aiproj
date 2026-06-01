@@ -1,0 +1,8 @@
+status=pass
+decision=refresh_forced_choice_partial_internal_match
+failed_count=0
+expected_best_prompt_count=1
+forced_choice_full_match_source_count=0
+best_internal_sources=
+model_quality_claim=partial_internal_signal_only
+next_action=use prompt-level internal preference to design the next objective

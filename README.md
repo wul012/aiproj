@@ -6905,6 +6905,8 @@ The required-term pair refresh resume layer exposes real checkpoint continuation
 
 The required-term pair v630 internal-repair resume run proves checkpoint continuation works end to end, but the first continuation attempt regresses from generation pair-full into loss-only replay.
 
+The required-term pair v630 internal-repair resume forced-choice diagnostic shows the resumed checkpoint is still only a partial internal match, so the continuation does not qualify as an aligned candidate.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

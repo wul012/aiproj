@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+v630-internal-repair-resume,fixed,fixed,fixed,True,0.581696,0.581696
+v630-internal-repair-resume,loss,fixed,loss,False,0.647164,0.579538
