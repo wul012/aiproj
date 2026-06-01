@@ -6891,6 +6891,8 @@ The required-term pair surface-first forced-choice diagnostic confirms the same 
 
 The required-term pair alignment comparison with surface-first schedule folds that negative route back into the full matrix and keeps the decision on preserving the existing generation pair-full route while repairing internal preference.
 
+The required-term pair route decision with surface-first schedule confirms the selected generation route remains `loss-internal-joint-cycle` and the internal anchor remains `joint-cycle-internal-repair`; the new surface-first route is not promotion-ready.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
