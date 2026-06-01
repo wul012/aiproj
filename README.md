@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v614.0.0` compares the three contrast-free objective routes and confirms they only recover fixed, not pair-full.
+Version `v615.0.0` stops the contrast-free routes and routes the next step to forced-choice diagnostics.
+
+## Latest v615 checkpoint
+
+- Added `model_capability_required_term_pair_contrast_free_route_decision`.
+- Consumed v608 closeout, v609 diagnostic, and v614 comparison.
+- Confirmed `pair_full_route_count=0` and `fixed_only_route_count=2`.
+- Preserved `prior_loss_rebalance_stopped=True`.
+- Set decision to `stop_contrast_free_routes_and_run_forced_choice_diagnostic`.
+- Archived v615 evidence in `e/615` and added the code explanation in `代码讲解记录_模型能力阶段/629-v615-required-term-pair-contrast-free-route-decision.md`.
 
 ## Latest v614 checkpoint
 

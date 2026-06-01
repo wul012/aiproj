@@ -1,0 +1,9 @@
+status=pass
+decision=stop_contrast_free_routes_and_run_forced_choice_diagnostic
+failed_count=0
+pair_full_route_count=0
+fixed_only_route_count=2
+prior_loss_rebalance_stopped=True
+requires_forced_choice_diagnostic=True
+model_quality_claim=route_decision_only
+next_action=run teacher-forced/forced-choice diagnostics on the fixed-signal routes before designing another corpus

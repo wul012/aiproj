@@ -437,6 +437,9 @@
 628-v614-required-term-pair-contrast-free-objective-comparison.md
  -> v614 code explanation: compare v611-v613 and confirm only fixed recovery, no pair-full.
 
+629-v615-required-term-pair-contrast-free-route-decision.md
+ -> v615 code explanation: stop contrast-free routes and require forced-choice diagnostics.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

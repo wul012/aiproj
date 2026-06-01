@@ -1,0 +1,4 @@
+label,status,decision,key_result,path
+v608-fixed-retention-closeout,pass,close_fixed_retention_loss_rebalance_batch_before_new_design,stop_loss_rebalance=True,e\608\解释\model-capability-required-term-pair-fixed-retention-batch-closeout\model_capability_required_term_pair_fixed_retention_batch_closeout.json
+v609-first-token-diagnostic,pass,first_token_preference_tradeoff_confirmed,conflict=True,e\609\解释\model-capability-required-term-pair-first-token-preference-diagnostic\model_capability_required_term_pair_first_token_preference_diagnostic.json
+v614-contrast-free-comparison,pass,select_fixed_retention_route_for_loss_rebalance,pair_full=0; union=['fixed'],e\614\解释\model-capability-required-term-pair-contrast-free-objective-comparison\model_capability_required_term_pair_fixed_retention_objective_comparison.json

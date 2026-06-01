@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair contrast-free route decision",
+  "generated_at": "2026-06-01T01:49:36Z",
+  "status": "pass",
+  "decision": "stop_contrast_free_routes_and_run_forced_choice_diagnostic",
+  "failed_count": 0,
+  "issues": [],
+  "route_rows": [
+    {
+      "source_label": "v611-contrast-free",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "fixed_only_tradeoff": false,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false,
+      "route_role": "contrast-free"
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "fixed_only_tradeoff": true,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false,
+      "route_role": "delimiter-span"
+    },
+    {
+      "source_label": "v613-context-switch",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "fixed_only_tradeoff": true,
+      "loss_only_tradeoff": false,
+      "pair_full_observed": false,
+      "route_role": "context-switch"
+    }
+  ],
+  "evidence_rows": [
+    {
+      "label": "v608-fixed-retention-closeout",
+      "path": "e\\608\\解释\\model-capability-required-term-pair-fixed-retention-batch-closeout\\model_capability_required_term_pair_fixed_retention_batch_closeout.json",
+      "status": "pass",
+      "decision": "close_fixed_retention_loss_rebalance_batch_before_new_design",
+      "key_result": "stop_loss_rebalance=True"
+    },
+    {
+      "label": "v609-first-token-diagnostic",
+      "path": "e\\609\\解释\\model-capability-required-term-pair-first-token-preference-diagnostic\\model_capability_required_term_pair_first_token_preference_diagnostic.json",
+      "status": "pass",
+      "decision": "first_token_preference_tradeoff_confirmed",
+      "key_result": "conflict=True"
+    },
+    {
+      "label": "v614-contrast-free-comparison",
+      "path": "e\\614\\解释\\model-capability-required-term-pair-contrast-free-objective-comparison\\model_capability_required_term_pair_fixed_retention_objective_comparison.json",
+      "status": "pass",
+      "decision": "select_fixed_retention_route_for_loss_rebalance",
+      "key_result": "pair_full=0; union=['fixed']"
+    }
+  ],
+  "summary": {
+    "route_count": 3,
+    "pair_full_route_count": 0,
+    "fixed_only_route_count": 2,
+    "loss_only_route_count": 0,
+    "union_hit_terms": [
+      "fixed"
+    ],
+    "selected_fixed_signal_route": "v612-delimiter-span",
+    "selected_fixed_signal_role": "delimiter-span",
+    "prior_loss_rebalance_stopped": true,
+    "first_token_conflict_confirmed": true,
+    "mixed_branch_tradeoff_confirmed": true,
+    "repeat_loss_rebalance_allowed": false,
+    "requires_forced_choice_diagnostic": true,
+    "requires_new_objective_shape": true
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "Contrast-free routes only recovered fixed while prior loss-rebalance was already stopped.",
+    "next_action": "run teacher-forced/forced-choice diagnostics on the fixed-signal routes before designing another corpus"
+  }
+}

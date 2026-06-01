@@ -585,6 +585,10 @@ e/613/解释/说明.md
 e/614/图片
 e/614/解释/说明.md
  -> v614 required-term pair contrast-free objective comparison 的运行截图和解释
+
+e/615/图片
+e/615/解释/说明.md
+ -> v615 required-term pair contrast-free route decision 的运行截图和解释
 ```
 
 写入规则：
