@@ -1,0 +1,9 @@
+status=pass
+decision=select_aligned_generation_internal_pair_full_candidate
+failed_count=0
+generation_pair_full_count=2
+internal_pair_full_count=3
+aligned_pair_full_count=1
+best_source_labels=dual-boundary-seed-3535
+model_quality_claim=targeted_pair_alignment_candidate
+next_action=repeat the aligned candidate across seeds before promotion

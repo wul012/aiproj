@@ -1,0 +1,7 @@
+source_label,corpus_mode,seed,generation_hit_terms,internal_expected_best_terms,generation_pair_full,internal_pair_full,alignment_class
+loss-internal-first-token,equals_surface_no_pair_id_loss_internal_first_token_repair,3535,"[""loss""]","[""fixed"", ""loss""]",False,True,internal_pair_full_generation_gap
+loss-internal-joint-cycle,equals_surface_no_pair_id_loss_internal_joint_cycle_repair,3535,"[""fixed"", ""loss""]","[""fixed""]",True,False,generation_pair_full_internal_partial
+joint-cycle-internal-repair,equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair,3535,[],"[""fixed"", ""loss""]",False,True,internal_pair_full_generation_none
+v630-internal-repair-resume,equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair,3535,"[""loss""]","[""fixed""]",False,False,partial_tradeoff
+v630-light-merge-resume,equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair,3535,"[""loss""]",[],False,False,partial_tradeoff
+dual-boundary-seed-3535,equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair,3535,"[""fixed"", ""loss""]","[""fixed"", ""loss""]",True,True,generation_internal_pair_full

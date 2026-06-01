@@ -614,6 +614,9 @@
 687-v673-required-term-pair-dual-boundary-forced-choice.md
  -> v673 code explanation: verify the dual-boundary checkpoint with forced-choice internal pair scoring.
 
+688-v674-required-term-pair-alignment-comparison-with-dual-boundary.md
+ -> v674 code explanation: compare the dual-boundary route against historical generation/internal alignment evidence.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

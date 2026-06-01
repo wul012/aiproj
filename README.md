@@ -7012,6 +7012,12 @@ The required-term pair v630 light-merge resume run tests a lower-rate continuati
 
 The required-term pair v630 light-merge resume forced-choice diagnostic confirms that lower-rate continuation is not internally recovered either, with zero expected-best prompt matches.
 
+The required-term pair resume-route alignment and route decision close the real checkpoint-continuation branch as negative evidence, then constrained decoding shows only a partial gain: `loss` can be retained, while `fixed` still appears as an incomplete prefix fragment instead of a full required term.
+
+The required-term pair dual-objective boundary path turns that failure into a stricter corpus contract, trains seed 3535 from scratch, confirms pair-full free generation, and then verifies with forced-choice that both `fixed=` and `loss=` prompts prefer the intended terms internally.
+
+The required-term pair alignment comparison with dual-boundary folds that route back into the historical matrix and selects `dual-boundary-seed-3535` as the only current candidate with both generation pair-full and internal pair-full evidence.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

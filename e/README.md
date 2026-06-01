@@ -851,3 +851,8 @@ e/663/解释/说明.md
 - `e/673/图片`
 - `e/673/解释/说明.md`
 - v673 required-term pair dual-boundary forced-choice 的运行截图和解释。
+## v674 补充索引
+
+- `e/674/图片`
+- `e/674/解释/说明.md`
+- v674 required-term pair alignment comparison with dual-boundary 的运行截图和解释。
