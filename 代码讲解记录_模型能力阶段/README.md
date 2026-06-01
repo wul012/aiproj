@@ -473,6 +473,9 @@
 640-v626-required-term-pair-loss-internal-decode-bridge-check.md
  -> v626 code explanation: confirm the selected first-token route has a fixed generation bridge gap.
 
+641-v627-required-term-pair-loss-internal-fixed-bridge-corpus.md
+ -> v627 code explanation: add a fixed generation bridge corpus mode for the selected loss-internal route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -633,6 +633,10 @@ e/625/解释/说明.md
 e/626/图片
 e/626/解释/说明.md
  -> v626 required-term pair loss-internal decode bridge check 的运行截图和解释
+
+e/627/图片
+e/627/解释/说明.md
+ -> v627 required-term pair loss-internal fixed-bridge corpus contract 的运行截图和解释
 ```
 
 写入规则：

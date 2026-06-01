@@ -5,6 +5,7 @@ PAIR_LOSS_INTERNAL_PREFERENCE_OBJECTIVE_CORPUS_MODES = (
     "equals_surface_no_pair_id_loss_internal_preference_repair",
     "equals_surface_no_pair_id_loss_internal_first_token_repair",
     "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+    "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair",
 )
 
 
@@ -23,6 +24,9 @@ def extend_pair_loss_internal_preference_objective_corpus(
         return True
     if corpus_mode == "equals_surface_no_pair_id_loss_internal_ranked_choice_repair":
         _extend_ranked_choice_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair":
+        _extend_fixed_bridge_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
         return True
     return False
 
@@ -124,6 +128,42 @@ def _extend_ranked_choice_repair(lines: list[str], *, repeat: int, bridge_repeat
                 "loss= ranks loss before fixed.",
                 "fixed= ranks fixed before loss.",
                 "the ranking rows are training text, not promotion evidence.",
+            ]
+        )
+
+
+def _extend_fixed_bridge_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "fixed=f",
+                "fixed=fi",
+                "fixed=fix",
+                "fixed=fixed",
+                "fixed=fixed",
+                "loss=l",
+                "loss=lo",
+                "loss=los",
+                "loss=loss",
+                "loss=loss",
+                "bridge fixed= fixed while loss= remains loss",
+                "decode bridge fixed= should generate fixed",
+                "decode bridge loss= should generate loss",
+                "internal fixed= prefers fixed",
+                "internal loss= prefers loss",
+                "fixed generation bridge closes the fixed gap",
+                "loss internal preference remains visible",
+                "prompt fixed= answer fixed",
+                "prompt loss= answer loss",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "bridge objective restores fixed generation without erasing loss preference.",
+                "fixed= fixed is the missing generation bridge.",
+                "loss= loss remains the internal preference anchor.",
+                "fixed=fixed|loss=loss",
             ]
         )
 

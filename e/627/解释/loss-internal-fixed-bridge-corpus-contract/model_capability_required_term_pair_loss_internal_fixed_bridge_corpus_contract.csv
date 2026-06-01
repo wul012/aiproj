@@ -1,0 +1,5 @@
+mode,status,purpose
+equals_surface_no_pair_id_loss_internal_preference_repair,registered,prior loss internal mode
+equals_surface_no_pair_id_loss_internal_first_token_repair,registered,prior loss internal mode
+equals_surface_no_pair_id_loss_internal_ranked_choice_repair,registered,prior loss internal mode
+equals_surface_no_pair_id_loss_internal_fixed_bridge_repair,registered,bridge fixed generation gap

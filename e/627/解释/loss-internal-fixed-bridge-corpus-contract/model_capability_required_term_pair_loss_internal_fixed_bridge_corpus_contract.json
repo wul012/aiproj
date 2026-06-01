@@ -1,0 +1,30 @@
+{
+    "schema_version":  1,
+    "title":  "MiniGPT required-term pair loss-internal fixed-bridge corpus contract",
+    "status":  "pass",
+    "decision":  "loss_internal_fixed_bridge_corpus_mode_ready",
+    "version":  "v627.0.0",
+    "new_bridge_mode":  "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair",
+    "registered_mode_count":  4,
+    "validation":  {
+                       "py_compile":  "pass",
+                       "pytest":  "5 passed in 0.06s",
+                       "git_diff_check":  "pending final batch check"
+                   },
+    "summary":  {
+                    "source_bridge_gap":  "fixed",
+                    "preserve_internal_terms":  [
+                                                    "fixed",
+                                                    "loss"
+                                                ],
+                    "source_prompts":  "fixed= / loss=",
+                    "pair_id_removed":  true,
+                    "next_action":  "run real seed 3535 training for the fixed bridge corpus mode"
+                },
+    "registered_modes":  [
+                             "equals_surface_no_pair_id_loss_internal_preference_repair",
+                             "equals_surface_no_pair_id_loss_internal_first_token_repair",
+                             "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+                             "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair"
+                         ]
+}

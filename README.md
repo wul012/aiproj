@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v626.0.0` confirms the first-token route has a fixed generation bridge gap.
+Version `v627.0.0` adds a fixed-bridge corpus mode for the selected loss-internal route.
+
+## Latest v627 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_internal_fixed_bridge_repair`.
+- Preserved the prior loss-internal corpus modes and registered mode count `4`.
+- Targeted the v626 `fixed` generation bridge gap.
+- Covered the new bridge corpus rows with tests.
+- Archived v627 evidence in `e/627` and added the code explanation in `代码讲解记录_模型能力阶段/641-v627-required-term-pair-loss-internal-fixed-bridge-corpus.md`.
 
 ## Latest v626 checkpoint
 

@@ -57,6 +57,18 @@ class LossInternalPreferenceObjectiveCorpusTests(unittest.TestCase):
         self.assertIn("ranked choice rows mirror forced-choice diagnostics.", corpus)
         self.assertNotIn("pair=01", corpus)
 
+    def test_fixed_bridge_mode_targets_generation_gap(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_internal_fixed_bridge_repair",
+        )
+
+        self.assertIn("decode bridge fixed= should generate fixed", corpus)
+        self.assertIn("loss internal preference remains visible", corpus)
+        self.assertIn("fixed=fixed|loss=loss", corpus)
+        self.assertNotIn("pair=01", corpus)
+
 
 if __name__ == "__main__":
     unittest.main()

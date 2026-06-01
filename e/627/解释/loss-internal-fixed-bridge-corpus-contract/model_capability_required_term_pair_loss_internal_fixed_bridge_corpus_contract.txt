@@ -1,0 +1,7 @@
+status=pass
+decision=loss_internal_fixed_bridge_corpus_mode_ready
+registered_mode_count=4
+new_bridge_mode=equals_surface_no_pair_id_loss_internal_fixed_bridge_repair
+source_bridge_gap=fixed
+pair_id_removed=True
+next_action=run real seed 3535 training for the fixed bridge corpus mode
