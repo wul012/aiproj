@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v647.0.0` compares the light-merge route in the full generation/internal matrix.
+Version `v648.0.0` closes the internal-repair batch and routes the next work to a two-stage schedule.
+
+## Latest v648 checkpoint
+
+- Updated batch closeout tooling to accept custom version ranges and next-route labels.
+- Closed the v639-v648 ten-version batch.
+- Confirmed `batch_version_count=10`.
+- Confirmed `aligned_pair_full_count=0`.
+- Confirmed `selected_generation_route=loss-internal-joint-cycle`.
+- Confirmed `internal_anchor_route=joint-cycle-internal-repair`.
+- Set next route to `two_stage_surface_internal_schedule`.
+- Archived v648 evidence in `e/648` and added the code explanation in `代码讲解记录_模型能力阶段/662-v648-required-term-pair-internal-repair-batch-closeout.md`.
 
 ## Latest v647 checkpoint
 

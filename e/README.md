@@ -717,6 +717,10 @@ e/646/解释/说明.md
 e/647/图片
 e/647/解释/说明.md
  -> v647 required-term pair alignment comparison with light-merge 的运行截图和解释
+
+e/648/图片
+e/648/解释/说明.md
+ -> v648 required-term pair internal-repair batch closeout 的运行截图和解释
 ```
 
 写入规则：

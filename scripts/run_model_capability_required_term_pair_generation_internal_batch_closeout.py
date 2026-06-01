@@ -27,6 +27,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Close out the required-term pair generation/internal batch.")
     parser.add_argument("--comparison", type=Path, required=True, help="Alignment comparison JSON path or output dir.")
     parser.add_argument("--route-decision", type=Path, required=True, help="Route decision JSON path or output dir.")
+    parser.add_argument("--batch-start", type=int, default=629)
+    parser.add_argument("--batch-end", type=int, default=638)
+    parser.add_argument("--next-route", default="joint_cycle_internal_repair")
     parser.add_argument(
         "--out-dir",
         type=Path,
@@ -45,6 +48,9 @@ def main(argv: Sequence[str] | None = None) -> None:
     report = build_model_capability_required_term_pair_generation_internal_batch_closeout(
         read_generation_internal_batch_closeout_input(comparison_path),
         read_generation_internal_batch_closeout_input(route_path),
+        batch_start=args.batch_start,
+        batch_end=args.batch_end,
+        next_route=args.next_route,
     )
     outputs = write_generation_internal_batch_closeout_outputs(report, args.out_dir)
     print(render_generation_internal_batch_closeout_text(report), end="")

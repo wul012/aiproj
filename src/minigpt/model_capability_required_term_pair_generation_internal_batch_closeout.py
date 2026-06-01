@@ -55,10 +55,19 @@ def build_model_capability_required_term_pair_generation_internal_batch_closeout
     comparison_report: dict[str, Any],
     route_decision_report: dict[str, Any],
     *,
+    batch_start: int = 629,
+    batch_end: int = 638,
+    next_route: str = "joint_cycle_internal_repair",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     issues = _issues(comparison_report, route_decision_report)
-    summary = _summary(comparison_report, route_decision_report)
+    summary = _summary(
+        comparison_report,
+        route_decision_report,
+        batch_start=batch_start,
+        batch_end=batch_end,
+        next_route=next_route,
+    )
     closeout_items = _closeout_items(comparison_report, route_decision_report)
     status = "pass" if not issues else "fail"
     return {
@@ -69,7 +78,7 @@ def build_model_capability_required_term_pair_generation_internal_batch_closeout
         "decision": _decision(status, summary),
         "failed_count": len(issues),
         "issues": issues,
-        "included_versions": [f"v{version}" for version in range(629, 639)],
+        "included_versions": [f"v{version}" for version in range(batch_start, batch_end + 1)],
         "source_comparison": {
             "status": comparison_report.get("status"),
             "decision": comparison_report.get("decision"),
@@ -105,11 +114,20 @@ def _issues(comparison_report: dict[str, Any], route_decision_report: dict[str, 
     return issues
 
 
-def _summary(comparison_report: dict[str, Any], route_decision_report: dict[str, Any]) -> dict[str, Any]:
+def _summary(
+    comparison_report: dict[str, Any],
+    route_decision_report: dict[str, Any],
+    *,
+    batch_start: int,
+    batch_end: int,
+    next_route: str,
+) -> dict[str, Any]:
     comparison_summary = as_dict(comparison_report.get("summary"))
     route_summary = as_dict(route_decision_report.get("summary"))
     return {
-        "batch_version_count": 10,
+        "batch_version_count": max(0, batch_end - batch_start + 1),
+        "batch_start": batch_start,
+        "batch_end": batch_end,
         "compared_source_count": comparison_summary.get("compared_source_count"),
         "generation_pair_full_count": comparison_summary.get("generation_pair_full_count"),
         "internal_pair_full_count": comparison_summary.get("internal_pair_full_count"),
@@ -117,14 +135,15 @@ def _summary(comparison_report: dict[str, Any], route_decision_report: dict[str,
         "direct_promotion_ready": bool(route_summary.get("direct_promotion_ready")),
         "selected_generation_route": route_summary.get("selected_generation_route_label"),
         "internal_anchor_route": route_summary.get("internal_anchor_route_label"),
-        "next_route": "joint_cycle_internal_repair",
+        "next_route": next_route,
     }
 
 
 def _closeout_items(comparison_report: dict[str, Any], route_decision_report: dict[str, Any]) -> list[dict[str, Any]]:
     comparison_summary = as_dict(comparison_report.get("summary"))
     route_summary = as_dict(route_decision_report.get("summary"))
-    return [
+    source_rows = list_of_dicts(comparison_report.get("source_rows"))
+    items = [
         {
             "id": "joint_cycle_generation_pair_full",
             "status": "confirmed" if int(comparison_summary.get("generation_pair_full_count") or 0) > 0 else "missing",
@@ -146,6 +165,15 @@ def _closeout_items(comparison_report: dict[str, Any], route_decision_report: di
             "detail": "Preserve joint-cycle generation pair-full while repairing loss-side internal preference.",
         },
     ]
+    if any(row.get("source_label") == "joint-cycle-light-merge" for row in source_rows):
+        items.append(
+            {
+                "id": "light_merge_rejected",
+                "status": "confirmed",
+                "detail": "v645/v646 light-merge remains a partial tradeoff, not an aligned route.",
+            }
+        )
+    return items
 
 
 def _decision(status: str, summary: dict[str, Any]) -> str:
@@ -153,6 +181,8 @@ def _decision(status: str, summary: dict[str, Any]) -> str:
         return "fix_generation_internal_batch_closeout_inputs"
     if summary.get("direct_promotion_ready"):
         return "close_batch_with_aligned_candidate_repeat_required"
+    if summary.get("next_route") == "two_stage_surface_internal_schedule":
+        return "close_batch_and_design_two_stage_surface_internal_schedule"
     return "close_batch_and_design_joint_cycle_internal_repair"
 
 
@@ -166,7 +196,11 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     return {
         "model_quality_claim": "targeted_generation_signal_only",
         "reason": "The batch found a generation pair-full route but no aligned generation/internal route.",
-        "next_action": "design a joint-cycle internal-repair corpus and repeat across seeds",
+        "next_action": (
+            "design a two-stage surface/internal schedule instead of another single-corpus merge"
+            if summary.get("next_route") == "two_stage_surface_internal_schedule"
+            else "design a joint-cycle internal-repair corpus and repeat across seeds"
+        ),
     }
 
 

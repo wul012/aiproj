@@ -536,6 +536,9 @@
 661-v647-required-term-pair-alignment-comparison-with-light-merge.md
  -> v647 code explanation: compare the light-merge route in the full generation/internal matrix.
 
+662-v648-required-term-pair-internal-repair-batch-closeout.md
+ -> v648 code explanation: close the internal-repair batch and route the next work to a two-stage schedule.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -39,6 +39,21 @@ class GenerationInternalBatchCloseoutTests(unittest.TestCase):
         self.assertEqual(report["status"], "fail")
         self.assertIn("route decision has no selected generation route", report["issues"])
 
+    def test_closeout_accepts_custom_batch_range_and_next_route(self) -> None:
+        report = build_model_capability_required_term_pair_generation_internal_batch_closeout(
+            comparison_report(),
+            route_decision_report(),
+            batch_start=639,
+            batch_end=648,
+            next_route="two_stage_surface_internal_schedule",
+        )
+
+        self.assertEqual(report["decision"], "close_batch_and_design_two_stage_surface_internal_schedule")
+        self.assertEqual(report["included_versions"][0], "v639")
+        self.assertEqual(report["included_versions"][-1], "v648")
+        self.assertEqual(report["summary"]["batch_version_count"], 10)
+        self.assertEqual(report["summary"]["next_route"], "two_stage_surface_internal_schedule")
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

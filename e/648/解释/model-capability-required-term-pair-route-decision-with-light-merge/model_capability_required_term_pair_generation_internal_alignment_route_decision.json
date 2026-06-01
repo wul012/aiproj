@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation/internal alignment route decision",
+  "generated_at": "2026-06-01T08:20:02Z",
+  "status": "pass",
+  "decision": "repair_internal_preference_preserve_generation_pair_full",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": {
+    "status": "pass",
+    "decision": "keep_generation_pair_full_and_repair_internal_preference",
+    "summary": {
+      "compared_source_count": 6,
+      "generation_pair_full_count": 1,
+      "internal_pair_full_count": 2,
+      "aligned_pair_full_count": 0,
+      "generation_only_pair_full_count": 1,
+      "internal_only_pair_full_count": 2,
+      "alignment_classes": {
+        "fixed_only_aligned_partial": 2,
+        "generation_pair_full_internal_partial": 1,
+        "internal_pair_full_generation_gap": 1,
+        "internal_pair_full_generation_none": 1,
+        "partial_tradeoff": 1
+      },
+      "best_source_labels": [
+        "loss-internal-first-token",
+        "loss-internal-joint-cycle"
+      ],
+      "best_alignment_class": "internal_pair_full_generation_gap"
+    }
+  },
+  "selected_generation_route": {
+    "index": 2,
+    "source_label": "loss-internal-joint-cycle",
+    "refresh_path": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+    "forced_choice_path": "e\\631\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+    "refresh_status": "pass",
+    "refresh_decision": "required_term_pair_coexistence_refresh_pair_full_observed",
+    "forced_choice_status": "pass",
+    "forced_choice_decision": "refresh_forced_choice_partial_internal_match",
+    "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_repair",
+    "seed": 3535,
+    "training_status": "pass",
+    "checkpoint_exists": true,
+    "generation_hit_terms": [
+      "fixed",
+      "loss"
+    ],
+    "generation_missed_terms": [],
+    "generation_pair_full": true,
+    "internal_expected_best_terms": [
+      "fixed"
+    ],
+    "internal_missed_terms": [
+      "loss"
+    ],
+    "internal_pair_full": false,
+    "generation_internal_disagreement_terms": [
+      "loss"
+    ],
+    "alignment_class": "generation_pair_full_internal_partial"
+  },
+  "internal_anchor_route": {
+    "index": 4,
+    "source_label": "joint-cycle-internal-repair",
+    "refresh_path": "e\\640\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+    "forced_choice_path": "e\\641\\解释\\model-capability-required-term-pair-joint-cycle-internal-repair-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+    "refresh_status": "pass",
+    "refresh_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+    "forced_choice_status": "pass",
+    "forced_choice_decision": "refresh_forced_choice_internal_pair_match",
+    "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+    "seed": 3535,
+    "training_status": "pass",
+    "checkpoint_exists": true,
+    "generation_hit_terms": [],
+    "generation_missed_terms": [
+      "fixed",
+      "loss"
+    ],
+    "generation_pair_full": false,
+    "internal_expected_best_terms": [
+      "fixed",
+      "loss"
+    ],
+    "internal_missed_terms": [],
+    "internal_pair_full": true,
+    "generation_internal_disagreement_terms": [
+      "fixed",
+      "loss"
+    ],
+    "alignment_class": "internal_pair_full_generation_none"
+  },
+  "aligned_route": {},
+  "constraints": [
+    {
+      "id": "preserve_generation_pair_full",
+      "status": "required",
+      "source": "loss-internal-joint-cycle",
+      "detail": "Do not lose fixed/loss generation pair-full while repairing internal preference."
+    },
+    {
+      "id": "repair_loss_internal_preference",
+      "status": "required",
+      "source": "joint-cycle-internal-repair",
+      "detail": "Recover the loss-side forced-choice preference without regressing fixed."
+    },
+    {
+      "id": "avoid_pair_id_shortcut",
+      "status": "required",
+      "detail": "Keep explicit pair-id leakage out of the next corpus objective."
+    }
+  ],
+  "summary": {
+    "source_count": 6,
+    "selected_generation_route_label": "loss-internal-joint-cycle",
+    "internal_anchor_route_label": "joint-cycle-internal-repair",
+    "aligned_route_label": "",
+    "direct_promotion_ready": false,
+    "requires_internal_repair": true,
+    "requires_generation_preservation": true,
+    "expected_target_terms": [
+      "fixed",
+      "loss"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "The best generation route is not internally aligned yet.",
+    "next_action": "use the selected generation route as the base and repair internal preference"
+  }
+}
