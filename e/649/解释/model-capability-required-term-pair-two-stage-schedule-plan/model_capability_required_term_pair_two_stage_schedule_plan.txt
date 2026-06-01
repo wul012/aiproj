@@ -1,0 +1,8 @@
+status=pass
+decision=two_stage_surface_internal_schedule_ready
+failed_count=0
+stage_count=2
+stage_gate_pass_count=2
+guardrail_fail_count=0
+model_quality_claim=schedule_plan_only
+next_action=run a surface-first single-corpus approximation while keeping the no-resume boundary visible

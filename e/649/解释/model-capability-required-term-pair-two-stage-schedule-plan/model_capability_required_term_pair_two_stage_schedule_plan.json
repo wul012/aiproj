@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair two-stage schedule plan",
+  "generated_at": "2026-06-01T09:21:36Z",
+  "status": "pass",
+  "decision": "two_stage_surface_internal_schedule_ready",
+  "failed_count": 0,
+  "issues": [],
+  "schedule_boundary": {
+    "training_semantics": "not_checkpoint_resume",
+    "reason": "The current training CLI has no checkpoint-continuation flag; this plan is an auditable schedule contract."
+  },
+  "source_comparison": {
+    "status": "pass",
+    "decision": "keep_generation_pair_full_and_repair_internal_preference",
+    "summary": {
+      "compared_source_count": 2,
+      "generation_pair_full_count": 1,
+      "internal_pair_full_count": 1,
+      "aligned_pair_full_count": 0,
+      "generation_only_pair_full_count": 1,
+      "internal_only_pair_full_count": 1,
+      "alignment_classes": {
+        "generation_pair_full_internal_partial": 1,
+        "internal_pair_full_generation_none": 1
+      },
+      "best_source_labels": [
+        "loss-internal-joint-cycle"
+      ],
+      "best_alignment_class": "generation_pair_full_internal_partial"
+    }
+  },
+  "stage_rows": [
+    {
+      "stage": "surface_generation_stage",
+      "source_label": "loss-internal-joint-cycle",
+      "goal": "preserve_generation_pair_full",
+      "gate": "generation_pair_full",
+      "gate_passed": true,
+      "checkpoint_exists": true,
+      "generation_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "internal_expected_best_terms": [
+        "fixed"
+      ],
+      "alignment_class": "generation_pair_full_internal_partial"
+    },
+    {
+      "stage": "internal_repair_stage",
+      "source_label": "joint-cycle-internal-repair",
+      "goal": "repair_internal_preference_without_claiming_generation_alignment",
+      "gate": "internal_pair_full",
+      "gate_passed": true,
+      "checkpoint_exists": true,
+      "generation_hit_terms": [],
+      "internal_expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "alignment_class": "internal_pair_full_generation_none"
+    }
+  ],
+  "guardrails": [
+    {
+      "id": "not_checkpoint_resume",
+      "status": "active",
+      "detail": "The plan does not claim checkpoint continuation; it only schedules a runnable corpus approximation."
+    },
+    {
+      "id": "no_aligned_route_claim",
+      "status": "pass",
+      "detail": "Aligned generation/internal pair-full must remain unclaimed unless comparison proves it."
+    },
+    {
+      "id": "surface_generation_pair_full_required",
+      "status": "pass",
+      "detail": "The first stage must start from the route that already releases both required terms."
+    },
+    {
+      "id": "internal_pair_full_required",
+      "status": "pass",
+      "detail": "The second stage must be backed by forced-choice internal pair-full evidence."
+    }
+  ],
+  "summary": {
+    "stage_count": 2,
+    "stage_gate_pass_count": 2,
+    "guardrail_pass_count": 4,
+    "guardrail_fail_count": 0,
+    "comparison_decision": "keep_generation_pair_full_and_repair_internal_preference",
+    "next_action": "run_surface_first_schedule_approximation"
+  },
+  "interpretation": {
+    "model_quality_claim": "schedule_plan_only",
+    "reason": "Surface generation pair-full and internal forced-choice pair-full exist in separate routes.",
+    "next_action": "run a surface-first single-corpus approximation while keeping the no-resume boundary visible"
+  }
+}

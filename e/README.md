@@ -721,6 +721,10 @@ e/647/解释/说明.md
 e/648/图片
 e/648/解释/说明.md
  -> v648 required-term pair internal-repair batch closeout 的运行截图和解释
+
+e/649/图片
+e/649/解释/说明.md
+ -> v649 required-term pair two-stage schedule plan 的运行截图和解释
 ```
 
 写入规则：
