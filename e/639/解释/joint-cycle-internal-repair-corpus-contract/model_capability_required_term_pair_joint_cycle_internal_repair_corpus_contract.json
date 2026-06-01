@@ -1,0 +1,18 @@
+﻿{
+    "schema_version":  1,
+    "title":  "MiniGPT required-term pair joint-cycle internal-repair corpus contract",
+    "status":  "pass",
+    "decision":  "joint_cycle_internal_repair_corpus_ready",
+    "version":  "v639.0.0",
+    "new_mode":  "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
+    "registered_mode_count":  7,
+    "source_route":  "v638 close_batch_and_design_joint_cycle_internal_repair",
+    "preserves_generation_route":  "loss-internal-joint-cycle",
+    "internal_anchor_route":  "loss-internal-first-token",
+    "validation":  {
+                       "py_compile":  "pass",
+                       "pytest":  "8 passed in 0.11s",
+                       "pair_id_removed":  true
+                   },
+    "next_action":  "run real seed 3535 training for joint-cycle internal-repair"
+}

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v638.0.0` closes the generation/internal alignment batch and selects joint-cycle internal repair next.
+Version `v639.0.0` adds the joint-cycle internal-repair corpus mode selected by the v638 closeout.
+
+## Latest v639 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair`.
+- Increased registered loss-internal corpus modes to `7`.
+- Preserved v630 generation rows while adding teacher-forced/internal loss repair rows.
+- Covered the new corpus mode with targeted tests: `8 passed`.
+- Archived v639 evidence in `e/639` and added the code explanation in `代码讲解记录_模型能力阶段/653-v639-required-term-pair-joint-cycle-internal-repair-corpus.md`.
 
 ## Latest v638 checkpoint
 

@@ -8,6 +8,7 @@ PAIR_LOSS_INTERNAL_PREFERENCE_OBJECTIVE_CORPUS_MODES = (
     "equals_surface_no_pair_id_loss_internal_fixed_bridge_repair",
     "equals_surface_no_pair_id_loss_internal_joint_cycle_repair",
     "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair",
+    "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
 )
 
 
@@ -35,6 +36,9 @@ def extend_pair_loss_internal_preference_objective_corpus(
         return True
     if corpus_mode == "equals_surface_no_pair_id_loss_internal_balanced_anchor_repair":
         _extend_balanced_anchor_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair":
+        _extend_joint_cycle_internal_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
         return True
     return False
 
@@ -238,6 +242,46 @@ def _extend_balanced_anchor_repair(lines: list[str], *, repeat: int, bridge_repe
                 "balanced anchors repeat both prompts with equal weight.",
                 "fixed generation and loss generation must coexist.",
                 "internal preference mirrors generation preference.",
+                "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_joint_cycle_internal_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "joint cycle fixed=fixed loss=loss",
+                "joint cycle loss=loss fixed=fixed",
+                "generation fixed= fixed",
+                "generation loss= loss",
+                "fixed=f fixed=fi fixed=fix fixed=fixed",
+                "loss=l loss=lo loss=los loss=loss",
+                "prompt fixed= answer fixed",
+                "prompt loss= answer loss",
+                "teacher forced fixed= fixed",
+                "teacher forced loss= loss",
+                "forced choice fixed= fixed",
+                "forced choice loss= loss",
+                "internal fixed= candidate fixed rank 1",
+                "internal fixed= candidate loss rank 2",
+                "internal loss= candidate loss rank 1",
+                "internal loss= candidate fixed rank 2",
+                "score fixed= fixed lower than loss",
+                "score loss= loss lower than fixed",
+                "preserve generation fixed= fixed",
+                "preserve generation loss= loss",
+                "repair internal loss= prefers loss",
+                "do not trade fixed for loss",
+                "do not trade loss for fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "joint-cycle internal repair keeps the v630 generation pair-full route.",
+                "loss= must internally prefer loss while fixed= keeps fixed.",
+                "teacher-forced loss rows repair the v631 internal gap.",
                 "fixed=fixed|loss=loss",
             ]
         )

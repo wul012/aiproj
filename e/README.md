@@ -681,6 +681,10 @@ e/637/解释/说明.md
 e/638/图片
 e/638/解释/说明.md
  -> v638 required-term pair generation/internal batch closeout 的运行截图和解释
+
+e/639/图片
+e/639/解释/说明.md
+ -> v639 required-term pair joint-cycle internal-repair corpus contract 的运行截图和解释
 ```
 
 写入规则：
