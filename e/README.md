@@ -881,3 +881,8 @@ e/663/解释/说明.md
 - `e/679/图片`
 - `e/679/解释/说明.md`
 - v679 required-term pair surface failure diagnostic 的运行截图和解释。
+## v680 补充索引
+
+- `e/680/图片`
+- `e/680/解释/说明.md`
+- v680 required-term pair surface policy plan 的运行截图和解释。

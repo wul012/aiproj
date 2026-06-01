@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_surface_policy_plan_ready
+failed_count=0
+failure_terms=['loss']
+policy_count=5
+replay_policy_count=4
+recommended_replay_policy_ids=['single_label_default', 'single_label_suppress_newline', 'pair_context_prefix', 'dual_boundary_sentence']
+model_quality_claim=surface_policy_plan_only
+next_action=run surface policy replay over the dual-boundary seed reports

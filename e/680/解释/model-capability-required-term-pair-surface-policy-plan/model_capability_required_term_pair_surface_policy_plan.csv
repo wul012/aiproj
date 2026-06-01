@@ -1,0 +1,6 @@
+policy_id,prompt_template,generation_profile,leakage_level,replay_scope,included_in_replay,target_failure_terms,purpose
+single_label_default,{term}=,default,none,baseline,True,"[""loss""]",Measure the current minimal label prompt without changing decoding.
+single_label_suppress_newline,{term}=,suppress_newline_tokens,none,decode_surface_hygiene,True,"[""loss""]",Check whether newline suppression alone repairs the missing surface term.
+pair_context_prefix,{other_term}={other_term} {term}=,suppress_newline_tokens,contextual_anchor,paired_surface_policy,True,"[""loss""]",Test whether preserving the other learned term before the target label stabilizes the missed term.
+dual_boundary_sentence,dual boundary surface {other_term}={other_term} {term}=,suppress_newline_tokens,contextual_anchor,boundary_surface_policy,True,"[""loss""]",Replay the corpus boundary wording at inference time without writing the target value.
+target_echo_upper_bound,{term}={term},suppress_newline_tokens,target_echo,upper_bound_only,False,"[""loss""]",Keep a documented upper-bound policy out of replay because it already contains the answer.

@@ -632,6 +632,9 @@
 693-v679-required-term-pair-surface-failure-diagnostic.md
  -> v679 code explanation: isolate seed 2535 `loss` as the remaining internal-stable/free-generation surface failure.
 
+694-v680-required-term-pair-surface-policy-plan.md
+ -> v680 code explanation: convert the isolated surface failure into replay policies while excluding target-echo leakage.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

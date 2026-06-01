@@ -7028,6 +7028,8 @@ The required-term pair dual-boundary batch closeout joins those two layers by se
 
 The required-term pair surface-failure diagnostic narrows that remaining weakness to seed 2535 missing `loss` in free generation while still passing internal forced-choice, turning the next step into generation-surface policy replay rather than more internal-preference training.
 
+The required-term pair surface-policy plan converts that isolated `loss` miss into replay candidates, separating non-leaking baselines and contextual anchors from an excluded target-echo upper bound.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

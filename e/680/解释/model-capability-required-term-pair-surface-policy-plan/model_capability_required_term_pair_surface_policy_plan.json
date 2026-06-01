@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface policy plan",
+  "generated_at": "2026-06-01T23:14:36Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_policy_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_surface_failure_path": "e\\679\\解释\\model-capability-required-term-pair-surface-failure-diagnostic\\model_capability_required_term_pair_surface_failure_diagnostic.json",
+  "source_surface_failure": {
+    "status": "pass",
+    "decision": "required_term_pair_single_term_surface_failure_isolated",
+    "summary": {
+      "seed_count": 3,
+      "generation_pair_full_seed_count": 2,
+      "internal_pair_full_seed_count": 3,
+      "surface_failure_seed_count": 1,
+      "surface_failure_seeds": [
+        2535
+      ],
+      "surface_failure_terms": [
+        "loss"
+      ],
+      "single_surface_failure_term": "loss"
+    }
+  },
+  "policy_rows": [
+    {
+      "policy_id": "single_label_default",
+      "prompt_template": "{term}=",
+      "generation_profile": "default",
+      "leakage_level": "none",
+      "replay_scope": "baseline",
+      "included_in_replay": true,
+      "purpose": "Measure the current minimal label prompt without changing decoding.",
+      "target_failure_terms": [
+        "loss"
+      ]
+    },
+    {
+      "policy_id": "single_label_suppress_newline",
+      "prompt_template": "{term}=",
+      "generation_profile": "suppress_newline_tokens",
+      "leakage_level": "none",
+      "replay_scope": "decode_surface_hygiene",
+      "included_in_replay": true,
+      "purpose": "Check whether newline suppression alone repairs the missing surface term.",
+      "target_failure_terms": [
+        "loss"
+      ]
+    },
+    {
+      "policy_id": "pair_context_prefix",
+      "prompt_template": "{other_term}={other_term} {term}=",
+      "generation_profile": "suppress_newline_tokens",
+      "leakage_level": "contextual_anchor",
+      "replay_scope": "paired_surface_policy",
+      "included_in_replay": true,
+      "purpose": "Test whether preserving the other learned term before the target label stabilizes the missed term.",
+      "target_failure_terms": [
+        "loss"
+      ]
+    },
+    {
+      "policy_id": "dual_boundary_sentence",
+      "prompt_template": "dual boundary surface {other_term}={other_term} {term}=",
+      "generation_profile": "suppress_newline_tokens",
+      "leakage_level": "contextual_anchor",
+      "replay_scope": "boundary_surface_policy",
+      "included_in_replay": true,
+      "purpose": "Replay the corpus boundary wording at inference time without writing the target value.",
+      "target_failure_terms": [
+        "loss"
+      ]
+    },
+    {
+      "policy_id": "target_echo_upper_bound",
+      "prompt_template": "{term}={term}",
+      "generation_profile": "suppress_newline_tokens",
+      "leakage_level": "target_echo",
+      "replay_scope": "upper_bound_only",
+      "included_in_replay": false,
+      "purpose": "Keep a documented upper-bound policy out of replay because it already contains the answer.",
+      "target_failure_terms": [
+        "loss"
+      ]
+    }
+  ],
+  "summary": {
+    "failure_terms": [
+      "loss"
+    ],
+    "policy_count": 5,
+    "replay_policy_count": 4,
+    "non_leaking_replay_policy_count": 2,
+    "contextual_anchor_policy_count": 2,
+    "excluded_upper_bound_policy_count": 1,
+    "recommended_replay_policy_ids": [
+      "single_label_default",
+      "single_label_suppress_newline",
+      "pair_context_prefix",
+      "dual_boundary_sentence"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "surface_policy_plan_only",
+    "reason": "The plan separates non-leaking baselines from contextual-anchor replay and excludes target-echo upper bounds.",
+    "next_action": "run surface policy replay over the dual-boundary seed reports"
+  }
+}
