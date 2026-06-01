@@ -737,6 +737,10 @@ e/651/解释/说明.md
 e/652/图片
 e/652/解释/说明.md
  -> v652 required-term pair surface-first schedule forced-choice 的运行截图和解释
+
+e/653/图片
+e/653/解释/说明.md
+ -> v653 required-term pair alignment comparison with surface-first schedule 的运行截图和解释
 ```
 
 写入规则：

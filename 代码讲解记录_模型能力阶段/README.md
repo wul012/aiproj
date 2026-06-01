@@ -551,6 +551,9 @@
 666-v652-required-term-pair-surface-first-schedule-forced-choice.md
  -> v652 code explanation: run forced-choice scoring for the surface-first checkpoint and confirm loss-side internal failure.
 
+667-v653-required-term-pair-alignment-comparison-with-surface-first-schedule.md
+ -> v653 code explanation: add surface-first schedule to the generation/internal alignment matrix.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

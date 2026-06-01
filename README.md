@@ -6889,6 +6889,8 @@ The required-term pair surface-first schedule seed run shows that the runnable a
 
 The required-term pair surface-first forced-choice diagnostic confirms the same checkpoint is only a partial internal match: `fixed` wins internally, while `loss` still prefers the fixed candidate.
 
+The required-term pair alignment comparison with surface-first schedule folds that negative route back into the full matrix and keeps the decision on preserving the existing generation pair-full route while repairing internal preference.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
