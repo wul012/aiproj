@@ -7022,6 +7022,8 @@ The required-term pair route decision with dual-boundary keeps the older generat
 
 The required-term pair aligned-candidate seed stability layer generalizes the repeat check for selected routes; the dual-boundary run reproduces pair-full on seeds 1535 and 3535 but misses seed 2535, so the candidate remains a partial-stability signal instead of a promotion-ready baseline.
 
+The required-term pair dual-boundary multi-seed forced-choice run then shows all three seeds internally prefer the expected `fixed` and `loss` terms, narrowing the remaining weakness to generation surface stability rather than internal term preference.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

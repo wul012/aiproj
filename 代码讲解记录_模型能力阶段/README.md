@@ -623,6 +623,9 @@
 690-v676-required-term-pair-dual-boundary-seed-stability.md
  -> v676 code explanation: add a generic aligned-candidate seed stability runner and record dual-boundary partial stability.
 
+691-v677-required-term-pair-dual-boundary-multi-seed-forced-choice.md
+ -> v677 code explanation: score the dual-boundary stability seeds internally and isolate generation-surface instability.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -866,3 +866,8 @@ e/663/解释/说明.md
 - `e/676/图片`
 - `e/676/解释/说明.md`
 - v676 required-term pair dual-boundary seed stability 的运行截图和解释。
+## v677 补充索引
+
+- `e/677/图片`
+- `e/677/解释/说明.md`
+- v677 required-term pair dual-boundary multi-seed forced-choice 的运行截图和解释。
