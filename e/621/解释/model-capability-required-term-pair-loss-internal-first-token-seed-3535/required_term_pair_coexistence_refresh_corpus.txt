@@ -1,0 +1,5858 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss=l
+loss=lo
+loss=los
+loss=loss
+first token after fixed= is f
+first token after loss= is l
+loss internal first token prefers l
+fixed internal first token prefers f
+prompt loss= answer loss
+prompt fixed= answer fixed
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss
+first-token preference is trained before full-word generation.
+loss= chooses l before completing loss.
+fixed= chooses f before completing fixed.
+loss=l loss=lo loss=los loss=loss

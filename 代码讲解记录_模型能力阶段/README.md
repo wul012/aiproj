@@ -455,6 +455,9 @@
 634-v620-required-term-pair-loss-internal-preference-seed-3535.md
  -> v620 code explanation: run real loss-internal-preference seed 3535 and record a fixed-only result.
 
+635-v621-required-term-pair-loss-internal-first-token-seed-3535.md
+ -> v621 code explanation: run real loss-internal first-token seed 3535 and record a loss-only tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

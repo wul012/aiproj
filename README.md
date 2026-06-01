@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v620.0.0` runs the first loss-internal-preference seed and records that it still misses `loss=`.
+Version `v621.0.0` runs the loss-internal first-token objective and records a loss-only tradeoff.
+
+## Latest v621 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_first_token_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `loss=` hits loss while `fixed=` drifts into loss.
+- Archived v621 evidence in `e/621` and added the code explanation in `代码讲解记录_模型能力阶段/635-v621-required-term-pair-loss-internal-first-token-seed-3535.md`.
 
 ## Latest v620 checkpoint
 
