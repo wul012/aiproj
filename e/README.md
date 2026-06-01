@@ -709,6 +709,10 @@ e/644/解释/说明.md
 e/645/图片
 e/645/解释/说明.md
  -> v645 required-term pair joint-cycle light-merge seed 3535 的运行截图和解释
+
+e/646/图片
+e/646/解释/说明.md
+ -> v646 required-term pair joint-cycle light-merge forced-choice 的运行截图和解释
 ```
 
 写入规则：

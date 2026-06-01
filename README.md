@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v645.0.0` runs the joint-cycle light-merge seed and records a loss-side tradeoff.
+Version `v646.0.0` runs forced-choice scoring for the light-merge checkpoint and confirms internal mismatch.
+
+## Latest v646 checkpoint
+
+- Ran forced-choice diagnostic for the v645 light-merge checkpoint.
+- Confirmed `decision=refresh_forced_choice_partial_internal_match`.
+- Confirmed `expected_best_prompt_count=1`.
+- Confirmed `forced_choice_full_match_source_count=0`.
+- Observed `loss=` still internally prefers fixed.
+- Archived v646 evidence in `e/646` and added the code explanation in `代码讲解记录_模型能力阶段/660-v646-required-term-pair-joint-cycle-light-merge-forced-choice.md`.
 
 ## Latest v645 checkpoint
 

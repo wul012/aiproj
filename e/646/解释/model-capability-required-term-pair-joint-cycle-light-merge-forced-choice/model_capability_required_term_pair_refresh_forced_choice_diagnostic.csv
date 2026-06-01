@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+joint-cycle-light-merge,fixed,fixed,fixed,True,0.592738,0.592738
+joint-cycle-light-merge,loss,fixed,loss,False,0.651486,0.588658

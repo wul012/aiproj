@@ -530,6 +530,9 @@
 659-v645-required-term-pair-joint-cycle-light-merge-seed-3535.md
  -> v645 code explanation: run the joint-cycle light-merge seed and record a loss-side tradeoff.
 
+660-v646-required-term-pair-joint-cycle-light-merge-forced-choice.md
+ -> v646 code explanation: run forced-choice scoring for the light-merge checkpoint and confirm internal mismatch.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
