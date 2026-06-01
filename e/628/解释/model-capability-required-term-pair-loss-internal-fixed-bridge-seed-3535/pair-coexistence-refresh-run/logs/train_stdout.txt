@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=139221 vocab_size=33
+parameters=53,248
+data_source=data:e\628\解释\model-capability-required-term-pair-loss-internal-fixed-bridge-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1059 val_loss=3.1370
+step=  450 train_loss=1.6622 val_loss=2.4055
+step=  900 train_loss=1.4082 val_loss=1.9747
+step= 1350 train_loss=1.4964 val_loss=1.5725
+step= 1800 train_loss=1.5958 val_loss=1.9598
+saved=e\628\解释\model-capability-required-term-pair-loss-internal-fixed-bridge-seed-3535\pair-coexistence-refresh-run
+history=e\628\解释\model-capability-required-term-pair-loss-internal-fixed-bridge-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\628\解释\model-capability-required-term-pair-loss-internal-fixed-bridge-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\628\解释\model-capability-required-term-pair-loss-internal-fixed-bridge-seed-3535\pair-coexistence-refresh-run\sample.txt

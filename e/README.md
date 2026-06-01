@@ -637,6 +637,10 @@ e/626/解释/说明.md
 e/627/图片
 e/627/解释/说明.md
  -> v627 required-term pair loss-internal fixed-bridge corpus contract 的运行截图和解释
+
+e/628/图片
+e/628/解释/说明.md
+ -> v628 required-term pair loss-internal fixed-bridge seed 3535 的运行截图和解释
 ```
 
 写入规则：

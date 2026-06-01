@@ -476,6 +476,9 @@
 641-v627-required-term-pair-loss-internal-fixed-bridge-corpus.md
  -> v627 code explanation: add a fixed generation bridge corpus mode for the selected loss-internal route.
 
+642-v628-required-term-pair-loss-internal-fixed-bridge-seed-3535.md
+ -> v628 code explanation: run real fixed-bridge seed 3535 and confirm it restores fixed but loses loss.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

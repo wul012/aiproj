@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v627.0.0` adds a fixed-bridge corpus mode for the selected loss-internal route.
+Version `v628.0.0` runs the fixed-bridge seed and confirms it restores fixed but loses loss.
+
+## Latest v628 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_fixed_bridge_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` hits fixed while `loss=` drifts back to fixed.
+- Ran forced-choice sidecar and confirmed `forced_choice_full_match_source_count=0`.
+- Archived v628 evidence in `e/628` and added the code explanation in `代码讲解记录_模型能力阶段/642-v628-required-term-pair-loss-internal-fixed-bridge-seed-3535.md`.
 
 ## Latest v627 checkpoint
 
