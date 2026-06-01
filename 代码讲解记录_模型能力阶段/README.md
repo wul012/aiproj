@@ -446,6 +446,9 @@
 631-v617-required-term-pair-refresh-forced-choice-diagnostic.md
  -> v617 code explanation: run forced-choice scoring over v611-v613 real checkpoints.
 
+632-v618-required-term-pair-contrast-free-batch-closeout.md
+ -> v618 code explanation: close v609-v618 contrast-free batch and route to loss internal preference objective.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

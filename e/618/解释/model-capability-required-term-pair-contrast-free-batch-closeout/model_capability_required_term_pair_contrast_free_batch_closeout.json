@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair contrast-free batch closeout",
+  "generated_at": "2026-06-01T02:05:03Z",
+  "status": "pass",
+  "decision": "close_contrast_free_batch_and_design_loss_internal_preference_objective",
+  "failed_count": 0,
+  "issues": [],
+  "version_range": "v609-v618",
+  "summary": {
+    "new_mode_count": 3,
+    "refresh_report_count": 3,
+    "refresh_pair_full_count": 0,
+    "all_refresh_training_passed": true,
+    "comparison_pair_full_report_count": 0,
+    "comparison_union_hit_terms": [
+      "fixed"
+    ],
+    "route_requires_forced_choice": true,
+    "route_decision": "stop_contrast_free_routes_and_run_forced_choice_diagnostic",
+    "forced_choice_expected_best_prompt_count": 3,
+    "forced_choice_full_match_source_count": 0,
+    "forced_choice_best_internal_sources": [],
+    "closeout_ready": true
+  },
+  "evidence_rows": [
+    {
+      "label": "v610-corpus-contract",
+      "path": "e\\610\\解释\\contrast-free-objective-corpus-contract\\model_capability_required_term_pair_contrast_free_objective_corpus_contract.json",
+      "status": "pass",
+      "decision": "contrast_free_objective_corpus_modes_ready",
+      "key_result": "modes=3"
+    },
+    {
+      "label": "v611-refresh",
+      "path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "key_result": "pair_full=False; training=pass"
+    },
+    {
+      "label": "v612-refresh",
+      "path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "key_result": "pair_full=False; training=pass"
+    },
+    {
+      "label": "v613-refresh",
+      "path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "key_result": "pair_full=False; training=pass"
+    },
+    {
+      "label": "v614-comparison",
+      "path": "e\\614\\解释\\model-capability-required-term-pair-contrast-free-objective-comparison\\model_capability_required_term_pair_fixed_retention_objective_comparison.json",
+      "status": "pass",
+      "decision": "select_fixed_retention_route_for_loss_rebalance",
+      "key_result": "pair_full=0; union=['fixed']"
+    },
+    {
+      "label": "v615-route-decision",
+      "path": "e\\615\\解释\\model-capability-required-term-pair-contrast-free-route-decision\\model_capability_required_term_pair_contrast_free_route_decision.json",
+      "status": "pass",
+      "decision": "stop_contrast_free_routes_and_run_forced_choice_diagnostic",
+      "key_result": "forced_choice=True"
+    },
+    {
+      "label": "v617-forced-choice",
+      "path": "e\\617\\解释\\model-capability-required-term-pair-refresh-forced-choice-diagnostic\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+      "status": "pass",
+      "decision": "refresh_forced_choice_partial_internal_match",
+      "key_result": "full_match=0; expected_best=3"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "negative_internal_preference_evidence",
+    "reason": "Contrast-free routes did not reach pair-full and forced-choice scoring found no full internal match.",
+    "next_action": "design a loss-internal-preference objective instead of more contrast-free variants"
+  }
+}

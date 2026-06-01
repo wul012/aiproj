@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v617.0.0` runs forced-choice scoring over v611-v613 real checkpoints and confirms no checkpoint internally matches both prompts.
+Version `v618.0.0` closes the v609-v618 contrast-free batch and routes the next work toward a loss-internal-preference objective.
+
+## Latest v618 checkpoint
+
+- Added `model_capability_required_term_pair_contrast_free_batch_closeout`.
+- Consumed v610, v611, v612, v613, v614, v615, and v617 evidence.
+- Confirmed `refresh_pair_full_count=0`.
+- Confirmed `forced_choice_full_match_source_count=0`.
+- Set decision to `close_contrast_free_batch_and_design_loss_internal_preference_objective`.
+- Archived v618 evidence in `e/618` and added the code explanation in `代码讲解记录_模型能力阶段/632-v618-required-term-pair-contrast-free-batch-closeout.md`.
 
 ## Latest v617 checkpoint
 

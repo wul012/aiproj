@@ -597,6 +597,10 @@ e/616/解释/说明.md
 e/617/图片
 e/617/解释/说明.md
  -> v617 required-term pair refresh forced-choice diagnostic 的运行截图和解释
+
+e/618/图片
+e/618/解释/说明.md
+ -> v618 required-term pair contrast-free batch closeout 的运行截图和解释
 ```
 
 写入规则：

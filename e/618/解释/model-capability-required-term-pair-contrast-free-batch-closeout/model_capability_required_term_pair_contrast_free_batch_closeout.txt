@@ -1,0 +1,8 @@
+status=pass
+decision=close_contrast_free_batch_and_design_loss_internal_preference_objective
+failed_count=0
+refresh_pair_full_count=0
+forced_choice_full_match_source_count=0
+closeout_ready=True
+model_quality_claim=negative_internal_preference_evidence
+next_action=design a loss-internal-preference objective instead of more contrast-free variants

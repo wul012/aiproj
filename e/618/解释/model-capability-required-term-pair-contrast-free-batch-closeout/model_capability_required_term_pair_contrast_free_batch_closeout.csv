@@ -1,0 +1,8 @@
+label,status,decision,key_result,path
+v610-corpus-contract,pass,contrast_free_objective_corpus_modes_ready,modes=3,e\610\解释\contrast-free-objective-corpus-contract\model_capability_required_term_pair_contrast_free_objective_corpus_contract.json
+v611-refresh,pass,required_term_pair_coexistence_refresh_no_pair_full,pair_full=False; training=pass,e\611\解释\model-capability-required-term-pair-contrast-free-seed-3535\model_capability_required_term_pair_coexistence_refresh.json
+v612-refresh,pass,required_term_pair_coexistence_refresh_no_pair_full,pair_full=False; training=pass,e\612\解释\model-capability-required-term-pair-delimiter-span-seed-3535\model_capability_required_term_pair_coexistence_refresh.json
+v613-refresh,pass,required_term_pair_coexistence_refresh_no_pair_full,pair_full=False; training=pass,e\613\解释\model-capability-required-term-pair-context-switch-seed-3535\model_capability_required_term_pair_coexistence_refresh.json
+v614-comparison,pass,select_fixed_retention_route_for_loss_rebalance,pair_full=0; union=['fixed'],e\614\解释\model-capability-required-term-pair-contrast-free-objective-comparison\model_capability_required_term_pair_fixed_retention_objective_comparison.json
+v615-route-decision,pass,stop_contrast_free_routes_and_run_forced_choice_diagnostic,forced_choice=True,e\615\解释\model-capability-required-term-pair-contrast-free-route-decision\model_capability_required_term_pair_contrast_free_route_decision.json
+v617-forced-choice,pass,refresh_forced_choice_partial_internal_match,full_match=0; expected_best=3,e\617\解释\model-capability-required-term-pair-refresh-forced-choice-diagnostic\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json

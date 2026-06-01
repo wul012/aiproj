@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT contrast-free batch closeout</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#4f5d75}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}.card strong{display:block;margin-top:6px;font-size:18px;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT contrast-free batch closeout</h1><p>Contrast-free routes did not reach pair-full and forced-choice scoring found no full internal match.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>close_contrast_free_batch_and_design_loss_internal_preference_objective</strong></div><div class="card"><span>Pair-full</span><strong>0</strong></div><div class="card"><span>FC full match</span><strong>0</strong></div><div class="card"><span>Ready</span><strong>True</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>design a loss-internal-preference objective instead of more contrast-free variants</p></section>
+<section class="panel"><h2>Evidence</h2><div class="table-wrap"><table>
+<thead><tr><th>Label</th><th>Status</th><th>Decision</th><th>Key result</th></tr></thead>
+<tbody><tr><td>v610-corpus-contract</td><td>pass</td><td>contrast_free_objective_corpus_modes_ready</td><td>modes=3</td></tr>
+<tr><td>v611-refresh</td><td>pass</td><td>required_term_pair_coexistence_refresh_no_pair_full</td><td>pair_full=False; training=pass</td></tr>
+<tr><td>v612-refresh</td><td>pass</td><td>required_term_pair_coexistence_refresh_no_pair_full</td><td>pair_full=False; training=pass</td></tr>
+<tr><td>v613-refresh</td><td>pass</td><td>required_term_pair_coexistence_refresh_no_pair_full</td><td>pair_full=False; training=pass</td></tr>
+<tr><td>v614-comparison</td><td>pass</td><td>select_fixed_retention_route_for_loss_rebalance</td><td>pair_full=0; union=[&#x27;fixed&#x27;]</td></tr>
+<tr><td>v615-route-decision</td><td>pass</td><td>stop_contrast_free_routes_and_run_forced_choice_diagnostic</td><td>forced_choice=True</td></tr>
+<tr><td>v617-forced-choice</td><td>pass</td><td>refresh_forced_choice_partial_internal_match</td><td>full_match=0; expected_best=3</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
