@@ -452,6 +452,9 @@
 633-v619-required-term-pair-loss-internal-preference-corpus.md
  -> v619 code explanation: add loss-internal-preference objective corpus modes for the next real tiny training batch.
 
+634-v620-required-term-pair-loss-internal-preference-seed-3535.md
+ -> v620 code explanation: run real loss-internal-preference seed 3535 and record a fixed-only result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

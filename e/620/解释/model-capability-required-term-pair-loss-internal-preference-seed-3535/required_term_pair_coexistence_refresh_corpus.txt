@@ -1,0 +1,4898 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+fixed=fixed
+loss=loss
+fixed=fixed
+loss=loss
+prompt fixed= answer fixed
+prompt loss= answer loss
+prompt loss= answer loss
+forced choice fixed= prefers fixed
+forced choice loss= prefers loss
+internal preference fixed= fixed
+internal preference loss= loss
+score fixed= fixed lower than loss
+score loss= loss lower than fixed
+loss=loss is the preferred continuation after loss=
+fixed=fixed is the preferred continuation after fixed=
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss
+internal preference rows train the hidden choice before decoding.
+loss= should internally prefer loss even when fixed also exists.
+fixed= should internally prefer fixed while keeping loss available.
+fixed=fixed|loss=loss

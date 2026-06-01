@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_coexistence_refresh_no_pair_full
+failed_count=0
+training_status=pass
+checkpoint_exists=True
+default_pair_full_variant_count=0
+suppression_pair_full_variant_count=0
+pair_full_observed=False
+model_quality_claim=not_claimed
+next_action=increase pair objective diversity or inspect first-token preference before more training

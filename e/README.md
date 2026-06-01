@@ -605,6 +605,10 @@ e/618/解释/说明.md
 e/619/图片
 e/619/解释/说明.md
  -> v619 required-term pair loss-internal-preference corpus contract 的运行截图和解释
+
+e/620/图片
+e/620/解释/说明.md
+ -> v620 required-term pair loss-internal-preference seed 3535 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v619.0.0` adds loss-internal-preference objective corpus modes for the next real tiny training batch.
+Version `v620.0.0` runs the first loss-internal-preference seed and records that it still misses `loss=`.
+
+## Latest v620 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_preference_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` hits fixed while `loss=` still drifts to fixed.
+- Archived v620 evidence in `e/620` and added the code explanation in `代码讲解记录_模型能力阶段/634-v620-required-term-pair-loss-internal-preference-seed-3535.md`.
 
 ## Latest v619 checkpoint
 
