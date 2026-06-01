@@ -482,6 +482,9 @@
 643-v629-required-term-pair-loss-internal-joint-constraint-corpus.md
  -> v629 code explanation: add joint internal/generation corpus modes after the fixed-bridge tradeoff.
 
+644-v630-required-term-pair-loss-internal-joint-cycle-seed-3535.md
+ -> v630 code explanation: run real joint-cycle seed 3535 and record the first pair-full checkpoint in this route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

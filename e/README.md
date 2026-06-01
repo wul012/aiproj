@@ -645,6 +645,10 @@ e/628/解释/说明.md
 e/629/图片
 e/629/解释/说明.md
  -> v629 required-term pair loss-internal joint-constraint corpus contract 的运行截图和解释
+
+e/630/图片
+e/630/解释/说明.md
+ -> v630 required-term pair loss-internal joint-cycle seed 3535 的运行截图和解释
 ```
 
 写入规则：

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v629.0.0` adds joint internal/generation corpus modes after the fixed-bridge tradeoff.
+Version `v630.0.0` runs the joint-cycle seed and records the first loss-internal pair-full checkpoint in this route.
+
+## Latest v630 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_joint_cycle_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=True`.
+- Confirmed both default and newline-suppression replay profiles reached pair-full.
+- Kept the model quality claim scoped to `targeted_pair_refresh_signal_only`.
+- Archived v630 evidence in `e/630` and added the code explanation in `代码讲解记录_模型能力阶段/644-v630-required-term-pair-loss-internal-joint-cycle-seed-3535.md`.
 
 ## Latest v629 checkpoint
 
