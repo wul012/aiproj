@@ -1,0 +1,5 @@
+max_new_tokens,status,decision,seed_count,case_count,hit_case_count,pair_full_seed_count,stable_pair_full
+4,pass,required_term_pair_surface_policy_replay_no_gain,3,6,3,0,False
+8,pass,required_term_pair_surface_policy_replay_stable_pair_full_policy_found,3,6,6,3,True
+12,pass,required_term_pair_surface_policy_replay_stable_pair_full_policy_found,3,6,6,3,True
+16,pass,required_term_pair_surface_policy_replay_stable_pair_full_policy_found,3,6,6,3,True

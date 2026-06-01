@@ -906,3 +906,8 @@ e/663/解释/说明.md
 - `e/684/图片`
 - `e/684/解释/说明.md`
 - v684 required-term pair surface policy leakage risk 的运行截图和解释。
+## v685 补充索引
+
+- `e/685/图片`
+- `e/685/解释/说明.md`
+- v685 required-term pair surface policy budget sweep 的运行截图和解释。

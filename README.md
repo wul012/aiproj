@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v684.0.0` documents contextual-anchor leakage risk for the selected required-term pair surface policy.
+Version `v685.0.0` sweeps continuation budgets for the selected contextual required-term pair surface policy.
+
+## Latest v685 checkpoint
+
+- Added `model_capability_required_term_pair_surface_policy_budget_sweep`.
+- Reused the v681 surface-policy replay builder over the v676 dual-boundary checkpoints.
+- Swept `max_new_tokens=4,8,12,16` for `pair_context_prefix`.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_surface_policy_budget_stable_window_found`.
+- Confirmed `stable_budgets=[8, 12, 16]`.
+- Confirmed `minimal_stable_budget=8`.
+- Preserved the claim as `contextual_decode_budget_candidate`, not a model baseline.
+- Archived v685 evidence in `e/685` and added the code explanation in `代码讲解记录_模型能力阶段/699-v685-required-term-pair-surface-policy-budget-sweep.md`.
 
 ## Latest v684 checkpoint
 

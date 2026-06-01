@@ -647,6 +647,9 @@
 698-v684-required-term-pair-surface-policy-leakage-risk.md
  -> v684 code explanation: document contextual-anchor leakage risk for the selected surface policy and keep it out of promotion claims.
 
+699-v685-required-term-pair-surface-policy-budget-sweep.md
+ -> v685 code explanation: sweep continuation budgets for the selected contextual surface policy and find the minimal stable budget.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
