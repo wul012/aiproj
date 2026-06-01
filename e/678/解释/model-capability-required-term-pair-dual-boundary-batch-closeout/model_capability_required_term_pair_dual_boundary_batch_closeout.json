@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair dual-boundary batch closeout",
+  "generated_at": "2026-06-01T14:23:35Z",
+  "status": "pass",
+  "decision": "required_term_pair_dual_boundary_internal_stable_generation_surface_unstable",
+  "failed_count": 0,
+  "issues": [],
+  "source_stability_path": "e\\676\\解释\\model-capability-required-term-pair-dual-boundary-seed-stability\\model_capability_required_term_pair_aligned_candidate_seed_stability.json",
+  "source_forced_choice_path": "e\\677\\解释\\model-capability-required-term-pair-dual-boundary-multi-seed-forced-choice\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+  "source_stability": {
+    "status": "pass",
+    "decision": "required_term_pair_aligned_candidate_partial_stability",
+    "summary": {
+      "seed_count": 3,
+      "pair_full_seed_count": 2,
+      "failed_seed_count": 0,
+      "pair_full_seed_rate": 0.6667,
+      "stable_pair_full": false,
+      "partial_pair_full": true
+    }
+  },
+  "source_forced_choice": {
+    "status": "pass",
+    "decision": "refresh_forced_choice_internal_pair_match",
+    "summary": {
+      "source_report_count": 3,
+      "prompt_summary_count": 6,
+      "source_summary_count": 3,
+      "expected_best_prompt_count": 6,
+      "fixed_prompt_expected_best_count": 3,
+      "loss_prompt_expected_best_count": 3,
+      "forced_choice_full_match_source_count": 3,
+      "best_internal_sources": [
+        "dual-boundary-seed-1535",
+        "dual-boundary-seed-2535",
+        "dual-boundary-seed-3535"
+      ]
+    }
+  },
+  "seed_rows": [
+    {
+      "seed": 1535,
+      "generation_pair_full": true,
+      "internal_pair_full": true,
+      "aligned_pair_full": true,
+      "generation_decision": "required_term_pair_coexistence_refresh_pair_full_observed",
+      "internal_expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "classification": "generation_internal_pair_full"
+    },
+    {
+      "seed": 2535,
+      "generation_pair_full": false,
+      "internal_pair_full": true,
+      "aligned_pair_full": false,
+      "generation_decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "internal_expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "classification": "internal_only_generation_surface_miss"
+    },
+    {
+      "seed": 3535,
+      "generation_pair_full": true,
+      "internal_pair_full": true,
+      "aligned_pair_full": true,
+      "generation_decision": "required_term_pair_coexistence_refresh_pair_full_observed",
+      "internal_expected_best_terms": [
+        "fixed",
+        "loss"
+      ],
+      "classification": "generation_internal_pair_full"
+    }
+  ],
+  "summary": {
+    "seed_count": 3,
+    "generation_pair_full_seed_count": 2,
+    "internal_pair_full_seed_count": 3,
+    "aligned_pair_full_seed_count": 2,
+    "internal_only_seed_count": 1,
+    "stable_generation_pair_full": false,
+    "stable_internal_pair_full": true,
+    "promotion_ready": false
+  },
+  "interpretation": {
+    "model_quality_claim": "targeted_internal_preference_stable_signal_only",
+    "reason": "Internal forced-choice is stable across seeds, but generation pair-full is not stable.",
+    "next_action": "focus next experiments on generation surface stability or decoding policy, not internal preference repair"
+  }
+}

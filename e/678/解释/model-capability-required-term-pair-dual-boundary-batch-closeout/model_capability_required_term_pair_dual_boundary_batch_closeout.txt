@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_dual_boundary_internal_stable_generation_surface_unstable
+failed_count=0
+seed_count=3
+generation_pair_full_seed_count=2
+internal_pair_full_seed_count=3
+aligned_pair_full_seed_count=2
+promotion_ready=False
+model_quality_claim=targeted_internal_preference_stable_signal_only
+next_action=focus next experiments on generation surface stability or decoding policy, not internal preference repair

@@ -7024,6 +7024,8 @@ The required-term pair aligned-candidate seed stability layer generalizes the re
 
 The required-term pair dual-boundary multi-seed forced-choice run then shows all three seeds internally prefer the expected `fixed` and `loss` terms, narrowing the remaining weakness to generation surface stability rather than internal term preference.
 
+The required-term pair dual-boundary batch closeout joins those two layers by seed and stops short of promotion: internal forced-choice is stable across seeds, but generation pair-full is only 2/3, so the next work should target generation surface stability or decoding policy.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

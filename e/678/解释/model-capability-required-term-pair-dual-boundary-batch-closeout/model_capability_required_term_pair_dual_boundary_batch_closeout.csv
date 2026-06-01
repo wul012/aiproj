@@ -1,0 +1,4 @@
+seed,generation_pair_full,internal_pair_full,aligned_pair_full,generation_decision,internal_expected_best_terms,classification
+1535,True,True,True,required_term_pair_coexistence_refresh_pair_full_observed,"[""fixed"", ""loss""]",generation_internal_pair_full
+2535,False,True,False,required_term_pair_coexistence_refresh_no_pair_full,"[""fixed"", ""loss""]",internal_only_generation_surface_miss
+3535,True,True,True,required_term_pair_coexistence_refresh_pair_full_observed,"[""fixed"", ""loss""]",generation_internal_pair_full
