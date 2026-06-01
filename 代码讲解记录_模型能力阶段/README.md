@@ -596,6 +596,9 @@
 681-v667-required-term-pair-v630-constrained-decode-feasibility.md
  -> v667 code explanation: run constrained decode feasibility on the v630 generation anchor and preserve the partial-gain boundary.
 
+682-v668-required-term-pair-resume-batch-closeout.md
+ -> v668 code explanation: close the v659-v668 resume/constrained-decode batch and record verification evidence.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

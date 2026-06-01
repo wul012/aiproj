@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v667.0.0` checks constrained decode feasibility on the v630 generation anchor after closing naive resume variants.
+Version `v668.0.0` closes the v659-v668 resume/constrained-decode batch with verification evidence.
+
+## Latest v668 checkpoint
+
+- Added a v659-v668 batch closeout page under `e/668`.
+- Summarized real resume support, two continuation failures, matrix/route decisions, branch closeout, and constrained decode partial gain.
+- Preserved the conclusion `stop_naive_checkpoint_continuation_variants`.
+- Preserved the next route `constrained_decode_or_explicit_dual_objective_boundary`.
+- Clarified that this batch improves engineering diagnostics, not general tiny LLM quality.
+- Archived v668 evidence in `e/668` and added the code explanation in `代码讲解记录_模型能力阶段/682-v668-required-term-pair-resume-batch-closeout.md`.
 
 ## Latest v667 checkpoint
 

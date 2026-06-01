@@ -815,3 +815,9 @@ e/663/解释/说明.md
 - `e/667/图片`
 - `e/667/解释/说明.md`
 - v667 required-term pair v630 constrained decode feasibility 的运行截图和解释。
+
+## v668 补充索引
+
+- `e/668/图片`
+- `e/668/解释/说明.md`
+- v668 required-term pair v659-v668 batch closeout 的运行截图和解释。

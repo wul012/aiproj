@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>MiniGPT v659-v668 batch closeout</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 32px; color: #1f2937; }
+    header { border-bottom: 1px solid #d1d5db; margin-bottom: 24px; padding-bottom: 16px; }
+    h1 { margin: 0 0 8px; }
+    h2 { margin-top: 28px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+    .pass { color: #047857; font-weight: 700; }
+    .warn { color: #b45309; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MiniGPT v659-v668 batch closeout</h1>
+    <p>Real checkpoint continuation was implemented and tested, then closed as negative model evidence. The next route is constrained decode or explicit dual-objective boundary design.</p>
+  </header>
+  <section>
+    <h2>Decision</h2>
+    <table>
+      <tr><th>Field</th><th>Value</th></tr>
+      <tr><td>Status</td><td class="pass">pass</td></tr>
+      <tr><td>Batch</td><td><code>v659-v668</code></td></tr>
+      <tr><td>Main decision</td><td><code>stop_naive_checkpoint_continuation_variants</code></td></tr>
+      <tr><td>Selected generation route</td><td><code>loss-internal-joint-cycle</code></td></tr>
+      <tr><td>Internal anchor route</td><td><code>joint-cycle-internal-repair</code></td></tr>
+      <tr><td>Promotion readiness</td><td class="warn">not promotion-ready</td></tr>
+      <tr><td>Next route</td><td><code>constrained_decode_or_explicit_dual_objective_boundary</code></td></tr>
+    </table>
+  </section>
+  <section>
+    <h2>Version Summary</h2>
+    <table>
+      <tr><th>Version</th><th>Role</th><th>Result</th></tr>
+      <tr><td>v659</td><td>Resume contract</td><td>Refresh wrapper accepts <code>--resume-checkpoint</code>.</td></tr>
+      <tr><td>v660</td><td>Internal-repair resume</td><td>Continuation runs, but v630 pair-full regresses to loss-only.</td></tr>
+      <tr><td>v661</td><td>Internal-repair forced-choice</td><td>Partial internal match only.</td></tr>
+      <tr><td>v662</td><td>Light-merge resume</td><td>Lower-rate continuation still regresses to loss-only.</td></tr>
+      <tr><td>v663</td><td>Light-merge forced-choice</td><td>No expected-best prompt recovered.</td></tr>
+      <tr><td>v664</td><td>Alignment matrix</td><td>Resume routes included as valid negative evidence.</td></tr>
+      <tr><td>v665</td><td>Route decision</td><td>Route remains split-anchor: v630 generation, v640 internal.</td></tr>
+      <tr><td>v666</td><td>Resume branch closeout</td><td>Naive continuation branch closed.</td></tr>
+      <tr><td>v667</td><td>Constrained decode feasibility</td><td>Partial gain only; loss recovers but fixed remains missed.</td></tr>
+      <tr><td>v668</td><td>Batch verification</td><td>Full validation and push gate for the batch.</td></tr>
+    </table>
+  </section>
+  <section>
+    <h2>Evidence Boundary</h2>
+    <p>This batch improves engineering capability and diagnostic confidence, not the underlying tiny model's production quality. The model remains educational and targeted; no general LLM quality claim is made.</p>
+  </section>
+</body>
+</html>
