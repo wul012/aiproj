@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v622.0.0` runs the loss-internal ranked-choice objective and records another fixed-only result.
+Version `v623.0.0` compares the three loss-internal-preference routes and confirms a branch tradeoff.
+
+## Latest v623 checkpoint
+
+- Added `model_capability_required_term_pair_loss_internal_preference_objective_comparison`.
+- Compared v620, v621, and v622 real checkpoints.
+- Confirmed `pair_full_report_count=0`.
+- Confirmed `fixed_only_tradeoff_report_count=2` and `loss_only_tradeoff_report_count=1`.
+- Archived v623 evidence in `e/623` and added the code explanation in `代码讲解记录_模型能力阶段/637-v623-required-term-pair-loss-internal-preference-objective-comparison.md`.
 
 ## Latest v622 checkpoint
 

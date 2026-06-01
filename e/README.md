@@ -617,6 +617,10 @@ e/621/解释/说明.md
 e/622/图片
 e/622/解释/说明.md
  -> v622 required-term pair loss-internal ranked-choice seed 3535 的运行截图和解释
+
+e/623/图片
+e/623/解释/说明.md
+ -> v623 required-term pair loss-internal-preference objective comparison 的运行截图和解释
 ```
 
 写入规则：

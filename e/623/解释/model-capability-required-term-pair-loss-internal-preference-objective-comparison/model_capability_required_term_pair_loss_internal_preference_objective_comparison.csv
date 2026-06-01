@@ -1,0 +1,4 @@
+source_label,corpus_mode,seed,hit_terms,missed_terms,pair_full_observed
+loss-internal-preference,equals_surface_no_pair_id_loss_internal_preference_repair,3535,"[""fixed""]","[""loss""]",False
+loss-internal-first-token,equals_surface_no_pair_id_loss_internal_first_token_repair,3535,"[""loss""]","[""fixed""]",False
+loss-internal-ranked-choice,equals_surface_no_pair_id_loss_internal_ranked_choice_repair,3535,"[""fixed""]","[""loss""]",False

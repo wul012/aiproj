@@ -461,6 +461,9 @@
 636-v622-required-term-pair-loss-internal-ranked-choice-seed-3535.md
  -> v622 code explanation: run real loss-internal ranked-choice seed 3535 and record another fixed-only result.
 
+637-v623-required-term-pair-loss-internal-preference-objective-comparison.md
+ -> v623 code explanation: compare v620-v622 and confirm branch tradeoff without pair-full.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

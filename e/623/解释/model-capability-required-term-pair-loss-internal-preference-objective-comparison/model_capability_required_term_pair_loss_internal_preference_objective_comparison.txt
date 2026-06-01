@@ -1,0 +1,9 @@
+status=pass
+decision=loss_internal_preference_objectives_confirm_branch_tradeoff
+failed_count=0
+pair_full_report_count=0
+fixed_only_tradeoff_report_count=2
+loss_only_tradeoff_report_count=1
+union_hit_terms=fixed,loss
+model_quality_claim=tradeoff_only
+next_action=run forced-choice diagnostics to separate generation failure from internal preference
