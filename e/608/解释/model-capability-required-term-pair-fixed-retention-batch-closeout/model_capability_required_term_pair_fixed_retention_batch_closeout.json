@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair fixed-retention batch closeout",
+  "generated_at": "2026-06-01T00:09:15Z",
+  "status": "pass",
+  "decision": "close_fixed_retention_loss_rebalance_batch_before_new_design",
+  "failed_count": 0,
+  "issues": [],
+  "summary": {
+    "initial_report_count": 3,
+    "loss_rebalance_report_count": 2,
+    "total_refresh_report_count": 5,
+    "all_refresh_passed": true,
+    "all_training_passed": true,
+    "all_checkpoints_exist": true,
+    "pair_full_report_count": 0,
+    "fixed_only_tradeoff_report_count": 2,
+    "loss_only_tradeoff_report_count": 3,
+    "loss_rebalance_pair_full_count": 0,
+    "loss_rebalance_fixed_only_count": 1,
+    "loss_rebalance_loss_only_count": 1,
+    "loss_rebalance_tradeoff_confirmed": true,
+    "route_selected": "v601-first-token",
+    "route_selected_corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+    "route_requires_loss_rebalance": true,
+    "comparison_decision": "fixed_retention_objectives_confirm_branch_tradeoff",
+    "route_decision": "select_fixed_recovery_route_for_loss_rebalance_not_promotion",
+    "stop_current_loss_rebalance_routes": true
+  },
+  "evidence_rows": [
+    {
+      "label": "v603-comparison",
+      "phase": "control",
+      "path": "e\\603\\解释\\model-capability-required-term-pair-fixed-retention-objective-comparison\\model_capability_required_term_pair_fixed_retention_objective_comparison.json",
+      "status": "pass",
+      "decision": "fixed_retention_objectives_confirm_branch_tradeoff",
+      "key_result": "pair_full=0; mixed=True"
+    },
+    {
+      "label": "v604-route-decision",
+      "phase": "control",
+      "path": "e\\604\\解释\\model-capability-required-term-pair-fixed-retention-route-decision\\model_capability_required_term_pair_fixed_retention_route_decision.json",
+      "status": "pass",
+      "decision": "select_fixed_recovery_route_for_loss_rebalance_not_promotion",
+      "key_result": "selected=v601-first-token; loss_rebalance_required=True"
+    },
+    {
+      "label": "v600-balanced",
+      "phase": "initial-objective",
+      "index": 0,
+      "path": "e\\600\\解释\\model-capability-required-term-pair-fixed-retention-balanced-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_balanced_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "branch_class": "loss-only",
+      "key_result": "hits=loss; pair_full=False"
+    },
+    {
+      "label": "v601-first-token",
+      "phase": "initial-objective",
+      "index": 1,
+      "path": "e\\601\\解释\\model-capability-required-term-pair-fixed-retention-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_first_token_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "branch_class": "fixed-only",
+      "key_result": "hits=fixed; pair_full=False"
+    },
+    {
+      "label": "v602-prompt-guard",
+      "phase": "initial-objective",
+      "index": 2,
+      "path": "e\\602\\解释\\model-capability-required-term-pair-fixed-retention-prompt-guard-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_prompt_guard_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "branch_class": "loss-only",
+      "key_result": "hits=loss; pair_full=False"
+    },
+    {
+      "label": "v606-loss-rebalance",
+      "phase": "loss-rebalance",
+      "index": 0,
+      "path": "e\\606\\解释\\model-capability-required-term-pair-fixed-retention-loss-rebalance-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_loss_rebalance_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "branch_class": "loss-only",
+      "key_result": "hits=loss; pair_full=False"
+    },
+    {
+      "label": "v607-dual-cycle",
+      "phase": "loss-rebalance",
+      "index": 1,
+      "path": "e\\607\\解释\\model-capability-required-term-pair-fixed-retention-dual-cycle-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_dual_cycle_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "branch_class": "fixed-only",
+      "key_result": "hits=fixed; pair_full=False"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "negative_tradeoff_evidence",
+    "reason": "Loss-rebalance routes split into loss-only and fixed-only outcomes; no route keeps both terms.",
+    "next_action": "stop this fixed-retention/loss-rebalance branch and inspect first-token preference or a new objective shape"
+  }
+}

@@ -1,0 +1,8 @@
+status=pass
+decision=close_fixed_retention_loss_rebalance_batch_before_new_design
+failed_count=0
+loss_rebalance_pair_full_count=0
+loss_rebalance_tradeoff_confirmed=True
+stop_current_loss_rebalance_routes=True
+model_quality_claim=negative_tradeoff_evidence
+next_action=stop this fixed-retention/loss-rebalance branch and inspect first-token preference or a new objective shape

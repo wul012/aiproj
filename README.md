@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v607.0.0` runs the fixed-retention dual-cycle route on real seed `3535` and confirms it remains a fixed-only tradeoff.
+Version `v608.0.0` closes the v599-v607 fixed-retention batch and stops the current loss-rebalance branch before a new objective design.
+
+## Latest v608 checkpoint
+
+- Added `model_capability_required_term_pair_fixed_retention_batch_closeout`.
+- Consumed v600-v602 refresh reports, v603 comparison, v604 route decision, and v606-v607 loss-rebalance reports.
+- Confirmed `loss_rebalance_pair_full_count=0`.
+- Confirmed v606 is loss-only and v607 is fixed-only, so `loss_rebalance_tradeoff_confirmed=True`.
+- Set decision to `close_fixed_retention_loss_rebalance_batch_before_new_design`.
+- Ran full local tests: `1208 passed`.
+- Ran source-encoding hygiene: `status=pass`, `clean_count=700`.
+- Archived v608 evidence in `e/608` and added the code explanation in `代码讲解记录_模型能力阶段/622-v608-required-term-pair-fixed-retention-batch-closeout.md`.
 
 ## Latest v607 checkpoint
 
