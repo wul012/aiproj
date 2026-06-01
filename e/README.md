@@ -661,6 +661,10 @@ e/632/解释/说明.md
 e/633/图片
 e/633/解释/说明.md
  -> v633 required-term pair generation/internal alignment route decision 的运行截图和解释
+
+e/634/图片
+e/634/解释/说明.md
+ -> v634 required-term pair loss-internal balanced-anchor seed 3535 的运行截图和解释
 ```
 
 写入规则：

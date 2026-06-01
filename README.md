@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v633.0.0` turns the alignment comparison into a route decision for the next training objective.
+Version `v634.0.0` runs the balanced-anchor joint variant and records a fixed-only negative result.
+
+## Latest v634 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_balanced_anchor_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` and `loss=` both generate fixed-like continuations.
+- Preserved v633's route decision that v630 joint-cycle remains the generation base.
+- Archived v634 evidence in `e/634` and added the code explanation in `代码讲解记录_模型能力阶段/648-v634-required-term-pair-loss-internal-balanced-anchor-seed-3535.md`.
 
 ## Latest v633 checkpoint
 

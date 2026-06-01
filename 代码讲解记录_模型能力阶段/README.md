@@ -494,6 +494,9 @@
 647-v633-required-term-pair-generation-internal-alignment-route-decision.md
  -> v633 code explanation: turn the alignment comparison into a generation-preserving internal-repair route decision.
 
+648-v634-required-term-pair-loss-internal-balanced-anchor-seed-3535.md
+ -> v634 code explanation: run the balanced-anchor joint variant and record a fixed-only negative result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

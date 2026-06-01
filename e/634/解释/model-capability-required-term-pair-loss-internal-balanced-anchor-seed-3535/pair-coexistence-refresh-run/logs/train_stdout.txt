@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=147797 vocab_size=32
+parameters=53,184
+data_source=data:e\634\解释\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1123 val_loss=3.1309
+step=  450 train_loss=1.2050 val_loss=1.7787
+step=  900 train_loss=1.3041 val_loss=2.0378
+step= 1350 train_loss=1.3344 val_loss=2.5383
+step= 1800 train_loss=1.1550 val_loss=2.4822
+saved=e\634\解释\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\pair-coexistence-refresh-run
+history=e\634\解释\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\634\解释\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\634\解释\model-capability-required-term-pair-loss-internal-balanced-anchor-seed-3535\pair-coexistence-refresh-run\sample.txt
