@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v631.0.0` runs forced-choice scoring for the v630 joint-cycle checkpoint and keeps the result scoped.
+Version `v632.0.0` compares generation and internal alignment across the loss-internal routes.
+
+## Latest v632 checkpoint
+
+- Added `model_capability_required_term_pair_generation_internal_alignment_comparison`.
+- Compared v621, v628, and v630 against their forced-choice diagnostics.
+- Confirmed `generation_pair_full_count=1`.
+- Confirmed `internal_pair_full_count=1`.
+- Confirmed `aligned_pair_full_count=0`.
+- Selected the route direction: preserve v630 generation pair-full while repairing internal preference.
+- Archived v632 evidence in `e/632` and added the code explanation in `代码讲解记录_模型能力阶段/646-v632-required-term-pair-generation-internal-alignment-comparison.md`.
 
 ## Latest v631 checkpoint
 

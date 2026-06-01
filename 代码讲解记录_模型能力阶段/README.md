@@ -488,6 +488,9 @@
 645-v631-required-term-pair-loss-internal-joint-cycle-forced-choice.md
  -> v631 code explanation: run forced-choice scoring for the v630 joint-cycle checkpoint and keep the result scoped.
 
+646-v632-required-term-pair-generation-internal-alignment-comparison.md
+ -> v632 code explanation: compare generation pair-full and forced-choice internal match across loss-internal routes.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
