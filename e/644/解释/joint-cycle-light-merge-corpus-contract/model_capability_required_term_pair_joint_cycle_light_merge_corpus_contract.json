@@ -1,0 +1,19 @@
+﻿{
+    "schema_version":  1,
+    "title":  "MiniGPT required-term pair joint-cycle light-merge corpus contract",
+    "status":  "pass",
+    "decision":  "joint_cycle_light_merge_corpus_ready",
+    "version":  "v644.0.0",
+    "new_mode":  "equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair",
+    "registered_mode_count":  8,
+    "source_route":  "v643 repair_internal_preference_preserve_generation_pair_full",
+    "generation_base":  "loss-internal-joint-cycle",
+    "internal_anchor":  "joint-cycle-internal-repair",
+    "validation":  {
+                       "py_compile":  "pass",
+                       "pytest":  "9 passed in 0.08s",
+                       "heavy_teacher_forced_rows_removed":  true,
+                       "pair_id_removed":  true
+                   },
+    "next_action":  "run real seed 3535 training for joint-cycle light-merge"
+}

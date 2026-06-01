@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v643.0.0` updates the route decision to use joint-cycle internal-repair as the current internal anchor.
+Version `v644.0.0` adds a lighter joint-cycle merge corpus after the heavy internal-repair regression.
+
+## Latest v644 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair`.
+- Increased registered loss-internal corpus modes to `8`.
+- Preserved generation rows from v630 while using softer internal rank rows.
+- Avoided the heavy teacher-forced rows that regressed generation in v640.
+- Covered the new corpus mode with targeted tests: `9 passed`.
+- Archived v644 evidence in `e/644` and added the code explanation in `代码讲解记录_模型能力阶段/658-v644-required-term-pair-joint-cycle-light-merge-corpus.md`.
 
 ## Latest v643 checkpoint
 

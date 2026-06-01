@@ -524,6 +524,9 @@
 657-v643-required-term-pair-route-decision-with-internal-repair.md
  -> v643 code explanation: update route decision to use joint-cycle internal-repair as the current internal anchor.
 
+658-v644-required-term-pair-joint-cycle-light-merge-corpus.md
+ -> v644 code explanation: add a lighter joint-cycle merge corpus after the heavy internal-repair regression.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
