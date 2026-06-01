@@ -1,0 +1,8 @@
+status=pass
+decision=surface_first_schedule_fixed_collapse_confirmed
+failed_count=0
+generation_hit_terms=fixed
+forced_choice_expected_terms=fixed
+alignment_class=fixed_only_aligned_partial
+fixed_collapse_confirmed=True
+next_objective=loss_guarded_surface_schedule_repair

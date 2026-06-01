@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface-first failure analysis",
+  "generated_at": "2026-06-01T09:49:42Z",
+  "status": "pass",
+  "decision": "surface_first_schedule_fixed_collapse_confirmed",
+  "failed_count": 0,
+  "issues": [],
+  "source_label": "surface-first-schedule",
+  "evidence_rows": [
+    {
+      "id": "generation_replay",
+      "status": "observed",
+      "value": [
+        "fixed"
+      ],
+      "detail": "Surface-first generation replay hit terms."
+    },
+    {
+      "id": "forced_choice",
+      "status": "observed",
+      "value": [
+        "fixed"
+      ],
+      "detail": "Surface-first expected-best forced-choice terms."
+    },
+    {
+      "id": "alignment_class",
+      "status": "fixed_only_aligned_partial",
+      "value": "fixed_only_aligned_partial",
+      "detail": "How the full comparison classifies the surface-first route."
+    },
+    {
+      "id": "route_selection",
+      "status": "not_selected",
+      "value": "loss-internal-joint-cycle",
+      "detail": "The route decision selected a different generation route when surface-first was added."
+    }
+  ],
+  "summary": {
+    "generation_hit_terms": [
+      "fixed"
+    ],
+    "forced_choice_expected_terms": [
+      "fixed"
+    ],
+    "alignment_class": "fixed_only_aligned_partial",
+    "fixed_collapse_confirmed": true,
+    "selected_generation_route": "loss-internal-joint-cycle",
+    "internal_anchor_route": "joint-cycle-internal-repair",
+    "next_objective": "loss_guarded_surface_schedule_repair"
+  },
+  "recommendations": [
+    {
+      "id": "stop_surface_first_repeat",
+      "action": "do not repeat the same surface-first schedule without a loss guard"
+    },
+    {
+      "id": "keep_generation_baseline",
+      "action": "keep loss-internal-joint-cycle as the generation baseline"
+    },
+    {
+      "id": "try_loss_guard",
+      "action": "add loss-guarded rows before running the next tiny training seed"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "negative_route_diagnosis",
+    "reason": "Surface-first schedule collapsed to fixed-only generation and fixed-only internal preference.",
+    "next_action": "try a loss-guarded schedule approximation or stop this branch"
+  }
+}

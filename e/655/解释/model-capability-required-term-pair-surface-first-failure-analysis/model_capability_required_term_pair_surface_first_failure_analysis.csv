@@ -1,0 +1,5 @@
+id,status,value,detail
+generation_replay,observed,"[""fixed""]",Surface-first generation replay hit terms.
+forced_choice,observed,"[""fixed""]",Surface-first expected-best forced-choice terms.
+alignment_class,fixed_only_aligned_partial,fixed_only_aligned_partial,How the full comparison classifies the surface-first route.
+route_selection,not_selected,loss-internal-joint-cycle,The route decision selected a different generation route when surface-first was added.
