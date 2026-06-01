@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v644.0.0` adds a lighter joint-cycle merge corpus after the heavy internal-repair regression.
+Version `v645.0.0` runs the joint-cycle light-merge seed and records a loss-side tradeoff.
+
+## Latest v645 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `loss=` hits loss while `fixed=` drifts to loss-like output.
+- Preserved the conclusion that light-merge is less destructive than v640 but still not aligned.
+- Archived v645 evidence in `e/645` and added the code explanation in `代码讲解记录_模型能力阶段/659-v645-required-term-pair-joint-cycle-light-merge-seed-3535.md`.
 
 ## Latest v644 checkpoint
 

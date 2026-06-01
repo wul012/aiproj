@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=144405 vocab_size=40
+parameters=53,696
+data_source=data:e\645\解释\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.2290 val_loss=3.2912
+step=  450 train_loss=1.5883 val_loss=2.1165
+step=  900 train_loss=1.6340 val_loss=2.1784
+step= 1350 train_loss=1.5438 val_loss=2.5458
+step= 1800 train_loss=1.6075 val_loss=2.2347
+saved=e\645\解释\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\pair-coexistence-refresh-run
+history=e\645\解释\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\645\解释\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\645\解释\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\pair-coexistence-refresh-run\sample.txt

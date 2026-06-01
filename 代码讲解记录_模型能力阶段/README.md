@@ -527,6 +527,9 @@
 658-v644-required-term-pair-joint-cycle-light-merge-corpus.md
  -> v644 code explanation: add a lighter joint-cycle merge corpus after the heavy internal-repair regression.
 
+659-v645-required-term-pair-joint-cycle-light-merge-seed-3535.md
+ -> v645 code explanation: run the joint-cycle light-merge seed and record a loss-side tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair coexistence refresh",
+  "generated_at": "2026-06-01T08:11:10Z",
+  "status": "pass",
+  "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+  "failed_count": 0,
+  "issues": [],
+  "out_dir": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535",
+  "settings": {
+    "seed": 3535,
+    "corpus_mode": "equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair",
+    "repeat": 320,
+    "bridge_repeat": 24,
+    "max_iters": 1800,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 16,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 64,
+    "learning_rate": 0.02,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "train a tiny direct fixed/loss coexistence corpus after generation profiles failed to repair archived pair checkpoints"
+  },
+  "corpus": {
+    "path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\required_term_pair_coexistence_refresh_corpus.txt",
+    "char_count": 144405,
+    "line_count": 4258,
+    "repeat": 320,
+    "bridge_repeat": 24
+  },
+  "training": {
+    "status": "pass",
+    "returncode": 0,
+    "command": [
+      "D:\\python\\python.exe",
+      "-B",
+      "D:\\aiproj\\scripts\\train.py",
+      "--data",
+      "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\required_term_pair_coexistence_refresh_corpus.txt",
+      "--out-dir",
+      "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run",
+      "--device",
+      "cpu",
+      "--tokenizer",
+      "char",
+      "--max-iters",
+      "1800",
+      "--eval-interval",
+      "450",
+      "--eval-iters",
+      "2",
+      "--batch-size",
+      "16",
+      "--block-size",
+      "16",
+      "--n-layer",
+      "1",
+      "--n-head",
+      "1",
+      "--n-embd",
+      "64",
+      "--learning-rate",
+      "0.02",
+      "--seed",
+      "3535",
+      "--sample-prompt",
+      "fixed:",
+      "--sample-tokens",
+      "8",
+      "--sample-temperature",
+      "0.2",
+      "--sample-top-k",
+      "1"
+    ],
+    "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\required_term_pair_coexistence_refresh_corpus.txt --out-dir e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run --device cpu --tokenizer char --max-iters 1800 --eval-interval 450 --eval-iters 2 --batch-size 16 --block-size 16 --n-layer 1 --n-head 1 --n-embd 64 --learning-rate 0.02 --seed 3535 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1",
+    "stdout": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\logs\\train_stdout.txt",
+    "stderr": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\logs\\train_stderr.txt",
+    "run_dir": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run",
+    "checkpoint_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+    "tokenizer_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+    "metrics_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\metrics.jsonl",
+    "train_config_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\train_config.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true,
+    "metrics_exists": true,
+    "train_config_exists": true
+  },
+  "replay_report": {
+    "schema_version": 1,
+    "title": "MiniGPT required-term pair generation profile replay",
+    "generated_at": "2026-06-01T08:11:10Z",
+    "status": "pass",
+    "decision": "generation_profile_no_pair_coexistence_gain",
+    "failed_count": 0,
+    "issues": [],
+    "source_required_term_pair_branch_retention_sweep": "",
+    "out_dir": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-generation-profile-replay",
+    "settings": {
+      "profiles": [
+        "default",
+        "suppress_newline_tokens"
+      ],
+      "variant_limit": 3,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "device": "cpu",
+      "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+    },
+    "terms": [
+      {
+        "case": "comparison-baseline",
+        "term": "fixed",
+        "scaffold_prompt": "fixed=",
+        "source_hit_rate": 1.0
+      },
+      {
+        "case": "factual-val-loss",
+        "term": "loss",
+        "scaffold_prompt": "loss=",
+        "source_hit_rate": 1.0
+      }
+    ],
+    "case_rows": [
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "coexistence-refresh",
+        "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+        "profile_id": "default",
+        "term": "fixed",
+        "prompt": "fixed=",
+        "generation_seed": 3535,
+        "checkpoint_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "fixed=los=loss=los",
+        "continuation": "los=loss=los",
+        "generated_preview": "fixed=los=loss=los",
+        "continuation_preview": "los=loss=los",
+        "continuation_hit": false,
+        "newline_cleanup_hit": false,
+        "blocked_token_count": 0
+      },
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "coexistence-refresh",
+        "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+        "profile_id": "suppress_newline_tokens",
+        "term": "fixed",
+        "prompt": "fixed=",
+        "generation_seed": 3535,
+        "checkpoint_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "fixed=los=loss=los",
+        "continuation": "los=loss=los",
+        "generated_preview": "fixed=los=loss=los",
+        "continuation_preview": "los=loss=los",
+        "continuation_hit": false,
+        "newline_cleanup_hit": false,
+        "blocked_token_count": 1
+      },
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "coexistence-refresh",
+        "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+        "profile_id": "default",
+        "term": "loss",
+        "prompt": "loss=",
+        "generation_seed": 3536,
+        "checkpoint_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "loss=loss=loss=lo",
+        "continuation": "loss=loss=lo",
+        "generated_preview": "loss=loss=loss=lo",
+        "continuation_preview": "loss=loss=lo",
+        "continuation_hit": true,
+        "newline_cleanup_hit": true,
+        "blocked_token_count": 0
+      },
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "coexistence-refresh",
+        "branch_retention_run_id": "01-fixed-loss-coexistence-refresh",
+        "profile_id": "suppress_newline_tokens",
+        "term": "loss",
+        "prompt": "loss=",
+        "generation_seed": 3536,
+        "checkpoint_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "loss=loss=loss=lo",
+        "continuation": "loss=loss=lo",
+        "generated_preview": "loss=loss=loss=lo",
+        "continuation_preview": "loss=loss=lo",
+        "continuation_hit": true,
+        "newline_cleanup_hit": true,
+        "blocked_token_count": 1
+      }
+    ],
+    "variant_rows": [
+      {
+        "variant_id": "coexistence-refresh",
+        "profile_id": "default",
+        "term_count": 2,
+        "hit_terms": [
+          "loss"
+        ],
+        "missed_terms": [
+          "fixed"
+        ],
+        "hit_count": 1,
+        "pair_full_hit": false
+      },
+      {
+        "variant_id": "coexistence-refresh",
+        "profile_id": "suppress_newline_tokens",
+        "term_count": 2,
+        "hit_terms": [
+          "loss"
+        ],
+        "missed_terms": [
+          "fixed"
+        ],
+        "hit_count": 1,
+        "pair_full_hit": false
+      }
+    ],
+    "profile_rows": [
+      {
+        "profile_id": "default",
+        "case_count": 2,
+        "continuation_hit_count": 1,
+        "newline_cleanup_hit_count": 1,
+        "pair_full_variant_count": 0,
+        "variant_count": 1,
+        "blocked_token_count_total": 0
+      },
+      {
+        "profile_id": "suppress_newline_tokens",
+        "case_count": 2,
+        "continuation_hit_count": 1,
+        "newline_cleanup_hit_count": 1,
+        "pair_full_variant_count": 0,
+        "variant_count": 1,
+        "blocked_token_count_total": 2
+      }
+    ],
+    "summary": {
+      "variant_count": 1,
+      "term_count": 2,
+      "profile_count": 2,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "suppression_hit_delta": 0,
+      "suppression_pair_full_delta": 0,
+      "pair_full_rows": []
+    },
+    "interpretation": {
+      "model_quality_claim": "not_claimed",
+      "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+      "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+      "summary": {
+        "variant_count": 1,
+        "term_count": 2,
+        "profile_count": 2,
+        "default_pair_full_variant_count": 0,
+        "suppression_pair_full_variant_count": 0,
+        "default_continuation_hit_count": 1,
+        "suppression_continuation_hit_count": 1,
+        "suppression_hit_delta": 0,
+        "suppression_pair_full_delta": 0,
+        "pair_full_rows": []
+      }
+    }
+  },
+  "summary": {
+    "training_status": "pass",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true,
+    "default_pair_full_variant_count": 0,
+    "suppression_pair_full_variant_count": 0,
+    "best_pair_full_variant_count": 0,
+    "suppression_hit_delta": 0,
+    "pair_full_observed": false
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The refresh run completed but still did not produce full fixed/loss continuation coverage.",
+    "next_action": "increase pair objective diversity or inspect first-token preference before more training"
+  },
+  "sidecar_outputs": {
+    "pair_generation_profile_replay": {
+      "json": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-generation-profile-replay\\model_capability_required_term_pair_generation_profile_replay.json",
+      "csv": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-generation-profile-replay\\model_capability_required_term_pair_generation_profile_replay.csv",
+      "text": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-generation-profile-replay\\model_capability_required_term_pair_generation_profile_replay.txt",
+      "markdown": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-generation-profile-replay\\model_capability_required_term_pair_generation_profile_replay.md",
+      "html": "e\\645\\解释\\model-capability-required-term-pair-joint-cycle-light-merge-seed-3535\\pair-generation-profile-replay\\model_capability_required_term_pair_generation_profile_replay.html"
+    }
+  }
+}
