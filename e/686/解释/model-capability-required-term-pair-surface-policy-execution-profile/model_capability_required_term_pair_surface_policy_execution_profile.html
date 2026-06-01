@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>MiniGPT surface policy execution profile</title><style>
+body{margin:0;background:#eef2f5;color:#172026;font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:28px}h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.stats div,section{background:white;border:1px solid #d8dee4;border-radius:8px;padding:14px;margin:14px 0}
+span{display:block;color:#5d6975;font-size:12px;text-transform:uppercase}strong{display:block;color:#0f766e;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}td{border-bottom:1px solid #d8dee4;padding:9px;text-align:left;vertical-align:top}
+</style></head>
+<body><main>
+<h1>MiniGPT surface policy execution profile</h1>
+<p>The selected profile carries the minimal stable budget while preserving the promotion block.</p>
+<section class="stats">
+<div><span>Profile</span><strong>pair_context_prefix_budget_8</strong></div>
+<div><span>Budget</span><strong>8</strong></div>
+<div><span>Promotion</span><strong>False</strong></div>
+</section>
+<section><h2>Profile Fields</h2><table><tbody><tr><td>profile_id</td><td>pair_context_prefix_budget_8</td></tr><tr><td>policy_id</td><td>pair_context_prefix</td></tr><tr><td>prompt_template</td><td>{other_term}={other_term} {term}=</td></tr><tr><td>max_new_tokens</td><td>8</td></tr><tr><td>temperature</td><td>0.2</td></tr><tr><td>top_k</td><td>1</td></tr><tr><td>allowed_use</td><td>contextual_decode_surface_variant_replay</td></tr><tr><td>promotion_allowed</td><td>False</td></tr></tbody></table></section>
+<section><h2>Next Action</h2><p>run surface-variant replay with this profile</p></section>
+</main></body></html>

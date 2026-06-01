@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v685.0.0` sweeps continuation budgets for the selected contextual required-term pair surface policy.
+Version `v686.0.0` selects an executable contextual surface policy profile from leakage and budget evidence.
+
+## Latest v686 checkpoint
+
+- Added `model_capability_required_term_pair_surface_policy_execution_profile`.
+- Consumed v684 leakage-risk and v685 budget-sweep evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_surface_policy_execution_profile_selected`.
+- Confirmed `profile_id=pair_context_prefix_budget_8`.
+- Confirmed `max_new_tokens=8`.
+- Confirmed `promotion_allowed=False`.
+- Archived v686 evidence in `e/686` and added the code explanation in `代码讲解记录_模型能力阶段/700-v686-required-term-pair-surface-policy-execution-profile.md`.
 
 ## Latest v685 checkpoint
 

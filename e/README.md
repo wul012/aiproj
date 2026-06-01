@@ -911,3 +911,8 @@ e/663/解释/说明.md
 - `e/685/图片`
 - `e/685/解释/说明.md`
 - v685 required-term pair surface policy budget sweep 的运行截图和解释。
+## v686 补充索引
+
+- `e/686/图片`
+- `e/686/解释/说明.md`
+- v686 required-term pair surface policy execution profile 的运行截图和解释。

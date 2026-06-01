@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface policy execution profile",
+  "generated_at": "2026-06-01T23:44:55Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_policy_execution_profile_selected",
+  "failed_count": 0,
+  "issues": [],
+  "source_leakage_path": "e\\684\\解释\\model-capability-required-term-pair-surface-policy-leakage-risk\\model_capability_required_term_pair_surface_policy_leakage_risk.json",
+  "source_budget_path": "e\\685\\解释\\model-capability-required-term-pair-surface-policy-budget-sweep\\model_capability_required_term_pair_surface_policy_budget_sweep.json",
+  "profile": {
+    "profile_id": "pair_context_prefix_budget_8",
+    "policy_id": "pair_context_prefix",
+    "prompt_template": "{other_term}={other_term} {term}=",
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "leakage_level": "contextual_anchor",
+    "risk_level": "medium",
+    "allowed_use": "contextual_decode_surface_variant_replay",
+    "promotion_allowed": false
+  },
+  "summary": {
+    "profile_id": "pair_context_prefix_budget_8",
+    "policy_id": "pair_context_prefix",
+    "max_new_tokens": 8,
+    "promotion_ready": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_decode_execution_profile",
+    "reason": "The selected profile carries the minimal stable budget while preserving the promotion block.",
+    "next_action": "run surface-variant replay with this profile"
+  }
+}

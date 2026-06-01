@@ -1,0 +1,2 @@
+profile_id,policy_id,prompt_template,max_new_tokens,temperature,top_k,allowed_use,promotion_allowed
+pair_context_prefix_budget_8,pair_context_prefix,{other_term}={other_term} {term}=,8,0.2,1,contextual_decode_surface_variant_replay,False

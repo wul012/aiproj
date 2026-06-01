@@ -650,6 +650,9 @@
 699-v685-required-term-pair-surface-policy-budget-sweep.md
  -> v685 code explanation: sweep continuation budgets for the selected contextual surface policy and find the minimal stable budget.
 
+700-v686-required-term-pair-surface-policy-execution-profile.md
+ -> v686 code explanation: combine leakage-risk and budget-sweep evidence into a reusable contextual execution profile.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
