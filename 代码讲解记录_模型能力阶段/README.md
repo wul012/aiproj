@@ -503,6 +503,9 @@
 650-v636-required-term-pair-alignment-comparison-with-balanced-anchor.md
  -> v636 code explanation: add balanced-anchor to the generation/internal comparison and keep the v630 repair route.
 
+651-v637-required-term-pair-route-decision-with-balanced-anchor.md
+ -> v637 code explanation: re-run route decision after adding balanced-anchor and keep the joint-cycle repair route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

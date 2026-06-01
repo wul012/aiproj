@@ -1,0 +1,4 @@
+id,status,source,detail
+preserve_generation_pair_full,required,loss-internal-joint-cycle,Do not lose fixed/loss generation pair-full while repairing internal preference.
+repair_loss_internal_preference,required,loss-internal-first-token,Recover the loss-side forced-choice preference without regressing fixed.
+avoid_pair_id_shortcut,required,,Keep explicit pair-id leakage out of the next corpus objective.

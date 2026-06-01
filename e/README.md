@@ -673,6 +673,10 @@ e/635/解释/说明.md
 e/636/图片
 e/636/解释/说明.md
  -> v636 required-term pair alignment comparison with balanced-anchor 的运行截图和解释
+
+e/637/图片
+e/637/解释/说明.md
+ -> v637 required-term pair route decision with balanced-anchor 的运行截图和解释
 ```
 
 写入规则：

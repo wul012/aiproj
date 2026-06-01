@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v636.0.0` adds balanced-anchor to the generation/internal comparison and keeps the v630 repair route.
+Version `v637.0.0` confirms the route decision still selects joint-cycle after balanced-anchor is included.
+
+## Latest v637 checkpoint
+
+- Re-ran generation/internal route decision from the v636 four-route comparison.
+- Confirmed `selected_generation_route=loss-internal-joint-cycle`.
+- Confirmed `internal_anchor_route=loss-internal-first-token`.
+- Confirmed `direct_promotion_ready=False`.
+- Kept the next action scoped to internal repair while preserving generation pair-full.
+- Archived v637 evidence in `e/637` and added the code explanation in `代码讲解记录_模型能力阶段/651-v637-required-term-pair-route-decision-with-balanced-anchor.md`.
 
 ## Latest v636 checkpoint
 
