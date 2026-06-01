@@ -876,3 +876,8 @@ e/663/解释/说明.md
 - `e/678/图片`
 - `e/678/解释/说明.md`
 - v678 required-term pair dual-boundary batch closeout 的运行截图和解释。
+## v679 补充索引
+
+- `e/679/图片`
+- `e/679/解释/说明.md`
+- v679 required-term pair surface failure diagnostic 的运行截图和解释。

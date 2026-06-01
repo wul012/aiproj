@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_single_term_surface_failure_isolated
+failed_count=0
+seed_count=3
+surface_failure_seed_count=1
+surface_failure_seeds=[2535]
+surface_failure_terms=['loss']
+model_quality_claim=targeted_surface_failure_diagnostic
+next_action=design a generation-surface policy replay before retraining

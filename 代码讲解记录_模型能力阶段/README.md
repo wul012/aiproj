@@ -629,6 +629,9 @@
 692-v678-required-term-pair-dual-boundary-batch-closeout.md
  -> v678 code explanation: close the dual-boundary batch as internal-stable but generation-surface unstable.
 
+693-v679-required-term-pair-surface-failure-diagnostic.md
+ -> v679 code explanation: isolate seed 2535 `loss` as the remaining internal-stable/free-generation surface failure.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

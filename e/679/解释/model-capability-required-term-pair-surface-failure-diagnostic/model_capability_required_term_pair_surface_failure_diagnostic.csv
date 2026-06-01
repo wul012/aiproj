@@ -1,0 +1,4 @@
+seed,generation_pair_full,generation_hit_terms,generation_missed_terms,internal_pair_full,internal_expected_best_terms,surface_failure_terms,dominant_failure_term,best_generation_preview,classification
+1535,True,"[""fixed"", ""loss""]",[],True,"[""fixed"", ""loss""]",[],,,aligned_pair_full
+2535,False,"[""fixed""]","[""loss""]",True,"[""fixed"", ""loss""]","[""loss""]",loss, candidate l,internal_stable_surface_failure
+3535,True,"[""fixed"", ""loss""]",[],True,"[""fixed"", ""loss""]",[],,,aligned_pair_full
