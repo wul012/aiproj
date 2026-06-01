@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v666.0.0` closes the real checkpoint continuation branch and routes the next work away from naive resume variants.
+Version `v667.0.0` checks constrained decode feasibility on the v630 generation anchor after closing naive resume variants.
+
+## Latest v667 checkpoint
+
+- Ran decode-only constrained feasibility on `e/630`.
+- Confirmed `decision=required_term_pair_constrained_decode_partial_gain`.
+- Confirmed `default_hit_count=0`.
+- Confirmed `constrained_hit_count=1`.
+- Confirmed `constrained_pair_full=False`.
+- Confirmed `fixed_constrained_hit=False`.
+- Preserved the conclusion that constrained decode has partial gain but is not a promotion profile.
+- Archived v667 evidence in `e/667` and added the code explanation in `代码讲解记录_模型能力阶段/681-v667-required-term-pair-v630-constrained-decode-feasibility.md`.
 
 ## Latest v666 checkpoint
 

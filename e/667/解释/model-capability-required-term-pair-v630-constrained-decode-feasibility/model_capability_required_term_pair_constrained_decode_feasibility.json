@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair constrained decode feasibility",
+  "generated_at": "2026-06-01T12:10:21Z",
+  "status": "pass",
+  "decision": "required_term_pair_constrained_decode_partial_gain",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_coexistence_refresh": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+  "out_dir": "e\\667\\解释\\model-capability-required-term-pair-v630-constrained-decode-feasibility",
+  "settings": {
+    "max_new_tokens": 12,
+    "temperature": 0.8,
+    "top_k": 2,
+    "device": "cpu",
+    "experiment_boundary": "decode-only feasibility check; no retraining and no checkpoint mutation"
+  },
+  "training": {
+    "checkpoint_path": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+    "tokenizer_path": "e\\630\\解释\\model-capability-required-term-pair-loss-internal-joint-cycle-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true
+  },
+  "terms": [
+    {
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 3535
+    },
+    {
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 3536
+    }
+  ],
+  "case_rows": [
+    {
+      "status": "pass",
+      "error": "",
+      "profile_id": "default",
+      "blocked_reason": "none",
+      "blocked_token_texts": [],
+      "blocked_token_count": 0,
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 3535,
+      "generated": "fixed= d= los\nd=fi",
+      "continuation": " d= los\nd=fi",
+      "generated_preview": "fixed= d= los\\nd=fi",
+      "continuation_preview": " d= los\\nd=fi",
+      "continuation_hit": false
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "profile_id": "block_competing_initial",
+      "blocked_reason": "block competing initial for loss",
+      "blocked_token_texts": [
+        "l"
+      ],
+      "blocked_token_count": 1,
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generation_seed": 3535,
+      "generated": "fixed= d= cans\nfix",
+      "continuation": " d= cans\nfix",
+      "generated_preview": "fixed= d= cans\\nfix",
+      "continuation_preview": " d= cans\\nfix",
+      "continuation_hit": false
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "profile_id": "default",
+      "blocked_reason": "none",
+      "blocked_token_texts": [],
+      "blocked_token_count": 0,
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 3536,
+      "generated": "loss= fixe fixed=",
+      "continuation": " fixe fixed=",
+      "generated_preview": "loss= fixe fixed=",
+      "continuation_preview": " fixe fixed=",
+      "continuation_hit": false
+    },
+    {
+      "status": "pass",
+      "error": "",
+      "profile_id": "block_competing_initial",
+      "blocked_reason": "block competing initial for fixed",
+      "blocked_token_texts": [
+        "f"
+      ],
+      "blocked_token_count": 1,
+      "term": "loss",
+      "prompt": "loss=",
+      "generation_seed": 3536,
+      "generated": "loss= lossssssss=",
+      "continuation": " lossssssss=",
+      "generated_preview": "loss= lossssssss=",
+      "continuation_preview": " lossssssss=",
+      "continuation_hit": true
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "block_competing_initial",
+      "case_count": 2,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "hit_count": 1,
+      "pair_full_hit": false,
+      "blocked_token_count_total": 2
+    },
+    {
+      "profile_id": "default",
+      "case_count": 2,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_count": 0,
+      "pair_full_hit": false,
+      "blocked_token_count_total": 0
+    }
+  ],
+  "summary": {
+    "term_count": 2,
+    "profile_count": 2,
+    "default_hit_count": 0,
+    "constrained_hit_count": 1,
+    "hit_delta": 1,
+    "default_pair_full": false,
+    "constrained_pair_full": false,
+    "best_profile_id": "block_competing_initial",
+    "best_hit_count": 1,
+    "fixed_default_hit": false,
+    "fixed_constrained_hit": false
+  },
+  "interpretation": {
+    "model_quality_claim": "decode_feasibility_only",
+    "reason": "The constraint improves some continuations but does not recover the fixed/loss pair.",
+    "next_action": "inspect which term remains missed before promoting a decode profile"
+  }
+}

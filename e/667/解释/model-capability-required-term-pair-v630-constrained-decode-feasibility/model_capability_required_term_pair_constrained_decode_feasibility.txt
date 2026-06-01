@@ -1,0 +1,10 @@
+status=pass
+decision=required_term_pair_constrained_decode_partial_gain
+failed_count=0
+default_hit_count=0
+constrained_hit_count=1
+hit_delta=1
+constrained_pair_full=False
+fixed_constrained_hit=False
+model_quality_claim=decode_feasibility_only
+next_action=inspect which term remains missed before promoting a decode profile

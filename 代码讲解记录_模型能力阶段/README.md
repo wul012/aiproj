@@ -593,6 +593,9 @@
 680-v666-required-term-pair-resume-branch-closeout.md
  -> v666 code explanation: generalize batch closeout wording and close the real checkpoint continuation branch as negative evidence.
 
+681-v667-required-term-pair-v630-constrained-decode-feasibility.md
+ -> v667 code explanation: run constrained decode feasibility on the v630 generation anchor and preserve the partial-gain boundary.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

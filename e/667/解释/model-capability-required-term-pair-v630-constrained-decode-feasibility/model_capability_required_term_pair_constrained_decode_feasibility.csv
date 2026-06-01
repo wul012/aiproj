@@ -1,0 +1,5 @@
+profile_id,term,prompt,blocked_token_texts,blocked_token_count,continuation_hit,continuation_preview
+default,fixed,fixed=,[],0,False, d= los\nd=fi
+block_competing_initial,fixed,fixed=,"[""l""]",1,False, d= cans\nfix
+default,loss,loss=,[],0,False, fixe fixed=
+block_competing_initial,loss,loss=,"[""f""]",1,True, lossssssss=

@@ -809,3 +809,9 @@ e/663/解释/说明.md
 - `e/666/图片`
 - `e/666/解释/说明.md`
 - v666 required-term pair resume branch closeout 的运行截图和解释。
+
+## v667 补充索引
+
+- `e/667/图片`
+- `e/667/解释/说明.md`
+- v667 required-term pair v630 constrained decode feasibility 的运行截图和解释。
