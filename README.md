@@ -6909,6 +6909,8 @@ The required-term pair v630 internal-repair resume forced-choice diagnostic show
 
 The required-term pair v630 light-merge resume run tests a lower-rate continuation and still regresses from pair-full into loss-only replay, narrowing the continuation branch.
 
+The required-term pair v630 light-merge resume forced-choice diagnostic confirms that lower-rate continuation is not internally recovered either, with zero expected-best prompt matches.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

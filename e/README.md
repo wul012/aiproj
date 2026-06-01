@@ -777,6 +777,10 @@ e/661/解释/说明.md
 e/662/图片
 e/662/解释/说明.md
  -> v662 required-term pair v630 light-merge resume seed 3535 的运行截图和解释
+
+e/663/图片
+e/663/解释/说明.md
+ -> v663 required-term pair v630 light-merge resume forced-choice 的运行截图和解释
 ```
 
 写入规则：

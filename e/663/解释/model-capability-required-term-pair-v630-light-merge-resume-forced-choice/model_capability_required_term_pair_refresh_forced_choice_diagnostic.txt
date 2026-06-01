@@ -1,0 +1,8 @@
+status=pass
+decision=refresh_forced_choice_not_recovered
+failed_count=0
+expected_best_prompt_count=0
+forced_choice_full_match_source_count=0
+best_internal_sources=
+model_quality_claim=not_claimed
+next_action=change objective shape rather than decoding settings

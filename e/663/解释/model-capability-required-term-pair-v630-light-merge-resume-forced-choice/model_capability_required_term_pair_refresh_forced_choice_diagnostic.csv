@@ -1,0 +1,3 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+v630-light-merge-resume,fixed,loss,fixed,False,0.664305,0.655179
+v630-light-merge-resume,loss,fixed,loss,False,0.688572,0.625132

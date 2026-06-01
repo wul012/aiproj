@@ -581,6 +581,9 @@
 676-v662-required-term-pair-v630-light-merge-resume.md
  -> v662 code explanation: run a lower-rate light-merge continuation from the v630 generation checkpoint.
 
+677-v663-required-term-pair-v630-light-merge-resume-forced-choice.md
+ -> v663 code explanation: run forced-choice scoring for the v630 light-merge resumed checkpoint.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
