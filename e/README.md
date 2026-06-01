@@ -861,3 +861,8 @@ e/663/解释/说明.md
 - `e/675/图片`
 - `e/675/解释/说明.md`
 - v675 required-term pair route decision with dual-boundary 的运行截图和解释。
+## v676 补充索引
+
+- `e/676/图片`
+- `e/676/解释/说明.md`
+- v676 required-term pair dual-boundary seed stability 的运行截图和解释。

@@ -620,6 +620,9 @@
 689-v675-required-term-pair-route-decision-with-dual-boundary.md
  -> v675 code explanation: route the aligned dual-boundary candidate to multi-seed repeat before promotion.
 
+690-v676-required-term-pair-dual-boundary-seed-stability.md
+ -> v676 code explanation: add a generic aligned-candidate seed stability runner and record dual-boundary partial stability.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

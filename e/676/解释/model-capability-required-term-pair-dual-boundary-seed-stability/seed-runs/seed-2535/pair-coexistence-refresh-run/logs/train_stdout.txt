@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=201405 vocab_size=40
+parameters=53,696
+data_source=data:e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-2535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.3741 val_loss=3.4304
+step=  550 train_loss=0.4654 val_loss=1.4688
+step= 1100 train_loss=0.4384 val_loss=0.6895
+step= 1650 train_loss=0.3717 val_loss=1.6674
+step= 2200 train_loss=0.3426 val_loss=0.9495
+saved=e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-2535\pair-coexistence-refresh-run
+history=e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-2535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-2535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-2535\pair-coexistence-refresh-run\sample.txt

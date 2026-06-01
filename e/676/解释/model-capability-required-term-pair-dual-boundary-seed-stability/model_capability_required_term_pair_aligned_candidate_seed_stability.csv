@@ -1,0 +1,4 @@
+seed,status,decision,pair_full_observed,default_pair_full_variant_count,suppression_pair_full_variant_count,best_pair_full_variant_count,training_status,checkpoint_exists,out_dir
+1535,pass,required_term_pair_coexistence_refresh_pair_full_observed,True,1,1,1,pass,True,e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-1535
+2535,pass,required_term_pair_coexistence_refresh_no_pair_full,False,0,0,0,pass,True,e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-2535
+3535,pass,required_term_pair_coexistence_refresh_pair_full_observed,True,1,1,1,pass,True,e\676\解释\model-capability-required-term-pair-dual-boundary-seed-stability\seed-runs\seed-3535

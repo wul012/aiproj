@@ -1,0 +1,12 @@
+status=pass
+decision=required_term_pair_coexistence_refresh_pair_full_observed
+failed_count=0
+training_status=pass
+training_mode=from_scratch
+resume_checkpoint_exists=False
+checkpoint_exists=True
+default_pair_full_variant_count=1
+suppression_pair_full_variant_count=1
+pair_full_observed=True
+model_quality_claim=targeted_pair_refresh_signal_only
+next_action=repeat the refresh across seeds before promoting it as stable pair coexistence
