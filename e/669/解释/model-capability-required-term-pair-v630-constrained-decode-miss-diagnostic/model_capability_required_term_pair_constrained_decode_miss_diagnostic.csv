@@ -1,0 +1,5 @@
+term,profile_id,continuation_hit,miss_class,term_prefix_present,full_term_present,blocked_token_texts,continuation_preview
+fixed,default,False,equals_surface_drift_without_term,False,False,[], d= los\nd=fi
+fixed,block_competing_initial,False,prefix_fragment_without_full_term,True,False,"[""l""]", d= cans\nfix
+loss,default,False,equals_surface_drift_without_term,False,False,[], fixe fixed=
+loss,block_competing_initial,True,not_missed,True,True,"[""f""]", lossssssss=

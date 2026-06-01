@@ -821,3 +821,9 @@ e/663/解释/说明.md
 - `e/668/图片`
 - `e/668/解释/说明.md`
 - v668 required-term pair v659-v668 batch closeout 的运行截图和解释。
+
+## v669 补充索引
+
+- `e/669/图片`
+- `e/669/解释/说明.md`
+- v669 required-term pair constrained decode miss diagnostic 的运行截图和解释。

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair constrained decode miss diagnostic",
+  "generated_at": "2026-06-01T13:34:10Z",
+  "status": "pass",
+  "decision": "fixed_branch_still_missed_after_constrained_decode",
+  "failed_count": 0,
+  "issues": [],
+  "source_constrained_decode_feasibility": "e\\667\\解释\\model-capability-required-term-pair-v630-constrained-decode-feasibility\\model_capability_required_term_pair_constrained_decode_feasibility.json",
+  "source_status": "pass",
+  "source_decision": "required_term_pair_constrained_decode_partial_gain",
+  "diagnostic_rows": [
+    {
+      "term": "fixed",
+      "profile_id": "default",
+      "continuation_hit": false,
+      "blocked_token_texts": [],
+      "blocked_reason": "none",
+      "continuation_preview": " d= los\\nd=fi",
+      "miss_class": "equals_surface_drift_without_term",
+      "term_prefix_present": false,
+      "full_term_present": false
+    },
+    {
+      "term": "fixed",
+      "profile_id": "block_competing_initial",
+      "continuation_hit": false,
+      "blocked_token_texts": [
+        "l"
+      ],
+      "blocked_reason": "block competing initial for loss",
+      "continuation_preview": " d= cans\\nfix",
+      "miss_class": "prefix_fragment_without_full_term",
+      "term_prefix_present": true,
+      "full_term_present": false
+    },
+    {
+      "term": "loss",
+      "profile_id": "default",
+      "continuation_hit": false,
+      "blocked_token_texts": [],
+      "blocked_reason": "none",
+      "continuation_preview": " fixe fixed=",
+      "miss_class": "equals_surface_drift_without_term",
+      "term_prefix_present": false,
+      "full_term_present": false
+    },
+    {
+      "term": "loss",
+      "profile_id": "block_competing_initial",
+      "continuation_hit": true,
+      "blocked_token_texts": [
+        "f"
+      ],
+      "blocked_reason": "block competing initial for fixed",
+      "continuation_preview": " lossssssss=",
+      "miss_class": "not_missed",
+      "term_prefix_present": true,
+      "full_term_present": true
+    }
+  ],
+  "summary": {
+    "source_constrained_pair_full": false,
+    "source_hit_delta": 1,
+    "fixed_constrained_hit": false,
+    "loss_constrained_hit": true,
+    "fixed_miss_class": "prefix_fragment_without_full_term",
+    "loss_miss_class": "not_missed",
+    "remaining_missed_terms": [
+      "fixed"
+    ],
+    "fixed_term_prefix_present": true,
+    "recommended_next_route": "explicit_dual_objective_boundary_for_fixed_retention"
+  },
+  "interpretation": {
+    "model_quality_claim": "decode_diagnostic_only",
+    "reason": "Blocking the competing initial recovers loss, but fixed remains a miss.",
+    "next_action": "design an explicit dual-objective boundary that preserves fixed while retaining loss"
+  }
+}

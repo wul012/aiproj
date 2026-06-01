@@ -1,0 +1,10 @@
+status=pass
+decision=fixed_branch_still_missed_after_constrained_decode
+failed_count=0
+fixed_constrained_hit=False
+loss_constrained_hit=True
+fixed_miss_class=prefix_fragment_without_full_term
+remaining_missed_terms=fixed
+recommended_next_route=explicit_dual_objective_boundary_for_fixed_retention
+model_quality_claim=decode_diagnostic_only
+next_action=design an explicit dual-objective boundary that preserves fixed while retaining loss

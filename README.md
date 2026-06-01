@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v668.0.0` closes the v659-v668 resume/constrained-decode batch with verification evidence.
+Version `v669.0.0` diagnoses the remaining fixed miss after constrained decoding.
+
+## Latest v669 checkpoint
+
+- Added `model_capability_required_term_pair_constrained_decode_miss_diagnostic`.
+- Added JSON/CSV/text/Markdown/HTML artifact rendering and CLI support.
+- Read v667 constrained decode feasibility evidence.
+- Confirmed `decision=fixed_branch_still_missed_after_constrained_decode`.
+- Confirmed `fixed_miss_class=prefix_fragment_without_full_term`.
+- Confirmed `recommended_next_route=explicit_dual_objective_boundary_for_fixed_retention`.
+- Archived v669 evidence in `e/669` and added the code explanation in `代码讲解记录_模型能力阶段/683-v669-required-term-pair-constrained-decode-miss-diagnostic.md`.
 
 ## Latest v668 checkpoint
 
