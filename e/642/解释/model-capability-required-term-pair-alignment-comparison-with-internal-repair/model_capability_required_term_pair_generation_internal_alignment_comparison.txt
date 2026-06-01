@@ -1,0 +1,9 @@
+status=pass
+decision=keep_generation_pair_full_and_repair_internal_preference
+failed_count=0
+generation_pair_full_count=1
+internal_pair_full_count=2
+aligned_pair_full_count=0
+best_source_labels=loss-internal-first-token,loss-internal-joint-cycle
+model_quality_claim=generation_pair_full_internal_partial
+next_action=repair internal preference while preserving generation pair-full

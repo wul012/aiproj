@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v641.0.0` runs forced-choice scoring for the internal-repair checkpoint and confirms internal pair match.
+Version `v642.0.0` compares the internal-repair route and supports zero-hit generation negatives.
+
+## Latest v642 checkpoint
+
+- Hardened generation/internal comparison so zero-generation-hit routes are valid negative evidence.
+- Added `joint-cycle-internal-repair` to the alignment matrix.
+- Confirmed `generation_pair_full_count=1`.
+- Confirmed `internal_pair_full_count=2`.
+- Confirmed `aligned_pair_full_count=0`.
+- Classified the internal-repair route as `internal_pair_full_generation_none`.
+- Archived v642 evidence in `e/642` and added the code explanation in `代码讲解记录_模型能力阶段/656-v642-required-term-pair-alignment-comparison-with-internal-repair.md`.
 
 ## Latest v641 checkpoint
 

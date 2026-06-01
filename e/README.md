@@ -693,6 +693,10 @@ e/640/解释/说明.md
 e/641/图片
 e/641/解释/说明.md
  -> v641 required-term pair joint-cycle internal-repair forced-choice 的运行截图和解释
+
+e/642/图片
+e/642/解释/说明.md
+ -> v642 required-term pair alignment comparison with internal-repair 的运行截图和解释
 ```
 
 写入规则：

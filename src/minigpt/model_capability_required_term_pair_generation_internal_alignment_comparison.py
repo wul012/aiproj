@@ -169,6 +169,12 @@ def _alignment_class(generation_terms: set[str], internal_terms: set[str]) -> st
         return "generation_internal_pair_full"
     if generation_pair_full:
         return "generation_pair_full_internal_partial"
+    if not generation_terms and internal_pair_full:
+        return "internal_pair_full_generation_none"
+    if not generation_terms and internal_terms:
+        return "internal_partial_generation_none"
+    if not generation_terms:
+        return "generation_none"
     if internal_pair_full:
         return "internal_pair_full_generation_gap"
     if generation_terms == {"fixed"} and internal_terms == {"fixed"}:
@@ -192,8 +198,6 @@ def _issues(source_rows: list[dict[str, Any]]) -> list[str]:
             issues.append(f"{label} checkpoint is missing")
         if row.get("forced_choice_status") != "pass":
             issues.append(f"{label} forced-choice status is not pass")
-        if not row.get("generation_hit_terms"):
-            issues.append(f"{label} has no generation hit terms")
         if not row.get("internal_expected_best_terms"):
             issues.append(f"{label} has no internal expected-best terms")
     return issues
@@ -204,7 +208,11 @@ def _summary(source_rows: list[dict[str, Any]]) -> dict[str, Any]:
     generation_only = [
         row for row in source_rows if row.get("alignment_class") == "generation_pair_full_internal_partial"
     ]
-    internal_only = [row for row in source_rows if row.get("alignment_class") == "internal_pair_full_generation_gap"]
+    internal_only = [
+        row
+        for row in source_rows
+        if row.get("alignment_class") in {"internal_pair_full_generation_gap", "internal_pair_full_generation_none"}
+    ]
     best_rows = _best_rows(source_rows)
     return {
         "compared_source_count": len(source_rows),
