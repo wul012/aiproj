@@ -563,6 +563,9 @@
 670-v656-required-term-pair-loss-guarded-schedule-corpus.md
  -> v656 code explanation: add a loss-guarded schedule corpus mode after surface-first collapse.
 
+671-v657-required-term-pair-loss-guarded-schedule-seed-3535.md
+ -> v657 code explanation: run the loss-guarded schedule seed and record no-hit drift.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
