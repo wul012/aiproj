@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair dual-objective boundary plan",
+  "generated_at": "2026-06-01T13:40:42Z",
+  "status": "pass",
+  "decision": "explicit_dual_objective_boundary_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_closeout": {
+    "status": "pass",
+    "decision": "close_batch_and_design_constrained_decode_or_explicit_dual_objective_boundary",
+    "summary": {
+      "batch_version_count": 8,
+      "batch_start": 659,
+      "batch_end": 666,
+      "compared_source_count": 5,
+      "generation_pair_full_count": 1,
+      "internal_pair_full_count": 2,
+      "aligned_pair_full_count": 0,
+      "direct_promotion_ready": false,
+      "selected_generation_route": "loss-internal-joint-cycle",
+      "internal_anchor_route": "joint-cycle-internal-repair",
+      "next_route": "constrained_decode_or_explicit_dual_objective_boundary"
+    }
+  },
+  "source_miss_diagnostic": {
+    "status": "pass",
+    "decision": "fixed_branch_still_missed_after_constrained_decode",
+    "summary": {
+      "source_constrained_pair_full": false,
+      "source_hit_delta": 1,
+      "fixed_constrained_hit": false,
+      "loss_constrained_hit": true,
+      "fixed_miss_class": "prefix_fragment_without_full_term",
+      "loss_miss_class": "not_missed",
+      "remaining_missed_terms": [
+        "fixed"
+      ],
+      "fixed_term_prefix_present": true,
+      "recommended_next_route": "explicit_dual_objective_boundary_for_fixed_retention"
+    }
+  },
+  "proposed_corpus_mode": "equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair",
+  "constraints": [
+    {
+      "id": "preserve_generation_anchor",
+      "source": "loss-internal-joint-cycle",
+      "required": true,
+      "detail": "Keep the generation pair-full surface route visible before adding new internal rows."
+    },
+    {
+      "id": "preserve_internal_anchor",
+      "source": "joint-cycle-internal-repair",
+      "required": true,
+      "detail": "Keep the internal forced-choice pair match visible as anchor evidence."
+    },
+    {
+      "id": "repair_fixed_after_constrained_decode",
+      "source": "prefix_fragment_without_full_term",
+      "required": true,
+      "detail": "Add explicit fixed retention rows because constrained decode still misses fixed."
+    },
+    {
+      "id": "retain_loss_after_constrained_decode",
+      "source": "loss_constrained_hit",
+      "required": true,
+      "detail": "Do not erase the loss-side hit recovered by constrained decoding."
+    },
+    {
+      "id": "avoid_naive_resume",
+      "source": "constrained_decode_or_explicit_dual_objective_boundary",
+      "required": true,
+      "detail": "Do not continue lower-rate or light-merge checkpoint continuation variants."
+    }
+  ],
+  "summary": {
+    "constraint_count": 5,
+    "required_constraint_count": 5,
+    "selected_generation_route": "loss-internal-joint-cycle",
+    "internal_anchor_route": "joint-cycle-internal-repair",
+    "fixed_miss_class": "prefix_fragment_without_full_term",
+    "remaining_missed_terms": [
+      "fixed"
+    ],
+    "loss_constrained_hit": true,
+    "proposed_corpus_mode": "equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair",
+    "ready_to_add_corpus_mode": true
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The evidence points to fixed-side repair while preserving loss and the existing split anchors.",
+    "next_action": "add corpus mode equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair"
+  }
+}

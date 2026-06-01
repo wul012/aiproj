@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MiniGPT dual-objective boundary plan</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 32px; color: #1f2937; }
+header { border-bottom: 1px solid #d1d5db; margin-bottom: 20px; padding-bottom: 12px; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin: 20px 0; }
+.metrics div { border: 1px solid #d1d5db; padding: 10px; border-radius: 6px; background: #f9fafb; }
+.metrics strong { display: block; font-size: 12px; color: #4b5563; }
+table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+th, td { border: 1px solid #d1d5db; padding: 8px; text-align: left; vertical-align: top; }
+th { background: #f3f4f6; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT dual-objective boundary plan</h1><p>The evidence points to fixed-side repair while preserving loss and the existing split anchors.</p></header>
+<section class="metrics"><div><strong>Status</strong><span>pass</span></div>
+<div><strong>Decision</strong><span>explicit_dual_objective_boundary_plan_ready</span></div>
+<div><strong>Proposed corpus mode</strong><span>equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair</span></div>
+<div><strong>Constraint count</strong><span>5</span></div>
+<div><strong>Fixed miss class</strong><span>prefix_fragment_without_full_term</span></div>
+<div><strong>Ready to add corpus mode</strong><span>True</span></div></section>
+<section>
+<h2>Constraints</h2>
+<table>
+<thead><tr><th>ID</th><th>Source</th><th>Required</th><th>Detail</th></tr></thead>
+<tbody><tr><td>preserve_generation_anchor</td><td>loss-internal-joint-cycle</td><td>True</td><td>Keep the generation pair-full surface route visible before adding new internal rows.</td></tr>
+<tr><td>preserve_internal_anchor</td><td>joint-cycle-internal-repair</td><td>True</td><td>Keep the internal forced-choice pair match visible as anchor evidence.</td></tr>
+<tr><td>repair_fixed_after_constrained_decode</td><td>prefix_fragment_without_full_term</td><td>True</td><td>Add explicit fixed retention rows because constrained decode still misses fixed.</td></tr>
+<tr><td>retain_loss_after_constrained_decode</td><td>loss_constrained_hit</td><td>True</td><td>Do not erase the loss-side hit recovered by constrained decoding.</td></tr>
+<tr><td>avoid_naive_resume</td><td>constrained_decode_or_explicit_dual_objective_boundary</td><td>True</td><td>Do not continue lower-rate or light-merge checkpoint continuation variants.</td></tr></tbody>
+</table>
+</section>
+<section>
+<h2>Next Action</h2>
+<p>add corpus mode equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair</p>
+</section>
+</body>
+</html>

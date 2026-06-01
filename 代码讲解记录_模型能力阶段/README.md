@@ -602,6 +602,9 @@
 683-v669-required-term-pair-constrained-decode-miss-diagnostic.md
  -> v669 code explanation: diagnose the remaining fixed miss after constrained decoding and route the next objective boundary.
 
+684-v670-required-term-pair-dual-objective-boundary-plan.md
+ -> v670 code explanation: turn closeout and miss diagnostic evidence into an explicit dual-objective boundary corpus plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v669.0.0` diagnoses the remaining fixed miss after constrained decoding.
+Version `v670.0.0` turns the resume closeout and constrained-decode miss diagnostic into an explicit dual-objective boundary plan.
+
+## Latest v670 checkpoint
+
+- Added `model_capability_required_term_pair_dual_objective_boundary_plan`.
+- Consumed v666 closeout and v669 miss diagnostic.
+- Confirmed `decision=explicit_dual_objective_boundary_plan_ready`.
+- Confirmed `proposed_corpus_mode=equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair`.
+- Confirmed five constraints: preserve generation anchor, preserve internal anchor, repair fixed, retain loss, avoid naive resume.
+- Archived v670 evidence in `e/670` and added the code explanation in `代码讲解记录_模型能力阶段/684-v670-required-term-pair-dual-objective-boundary-plan.md`.
 
 ## Latest v669 checkpoint
 

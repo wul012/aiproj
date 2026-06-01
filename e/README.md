@@ -827,3 +827,9 @@ e/663/解释/说明.md
 - `e/669/图片`
 - `e/669/解释/说明.md`
 - v669 required-term pair constrained decode miss diagnostic 的运行截图和解释。
+
+## v670 补充索引
+
+- `e/670/图片`
+- `e/670/解释/说明.md`
+- v670 required-term pair dual-objective boundary plan 的运行截图和解释。
