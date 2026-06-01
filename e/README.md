@@ -749,6 +749,10 @@ e/654/解释/说明.md
 e/655/图片
 e/655/解释/说明.md
  -> v655 required-term pair surface-first failure analysis 的运行截图和解释
+
+e/656/图片
+e/656/解释/说明.md
+ -> v656 required-term pair loss-guarded schedule corpus contract 的运行截图和解释
 ```
 
 写入规则：

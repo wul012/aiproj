@@ -1,0 +1,8 @@
+id,status,detail
+mode_registered,pass,mode is accepted by the loss-internal objective corpus registry
+loss_guard_rows_present,pass,loss guard rows directly counter fixed-only collapse
+loss_weight_exceeds_fixed_weight,pass,loss generation rows outnumber fixed generation rows
+internal_rank_rows_present,pass,both internal rank targets remain visible
+resume_boundary_present,pass,corpus states this is not checkpoint resume
+no_teacher_forced_loss_row,pass,mode avoids the heavy teacher-forced loss row
+no_pair_id,pass,mode remains pair-id free

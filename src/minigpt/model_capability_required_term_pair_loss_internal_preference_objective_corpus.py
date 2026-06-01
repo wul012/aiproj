@@ -11,6 +11,7 @@ PAIR_LOSS_INTERNAL_PREFERENCE_OBJECTIVE_CORPUS_MODES = (
     "equals_surface_no_pair_id_loss_internal_joint_cycle_internal_repair",
     "equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair",
     "equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair",
+    "equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair",
 )
 
 
@@ -47,6 +48,9 @@ def extend_pair_loss_internal_preference_objective_corpus(
         return True
     if corpus_mode == "equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair":
         _extend_surface_first_schedule_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair":
+        _extend_loss_guarded_schedule_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
         return True
     return False
 
@@ -357,6 +361,44 @@ def _extend_surface_first_schedule_repair(lines: list[str], *, repeat: int, brid
                 "generation pair-full remains the gate before internal repair.",
                 "loss internal repair is a soft second-stage hint.",
                 "not checkpoint resume; this is a corpus schedule approximation.",
+                "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_loss_guarded_schedule_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "loss guard surface loss=loss fixed=fixed",
+                "loss guard surface fixed=fixed loss=loss",
+                "generation loss= loss",
+                "generation loss= loss",
+                "generation loss= loss",
+                "generation fixed= fixed",
+                "generation fixed= fixed",
+                "loss=l loss=lo loss=los loss=loss",
+                "fixed=f fixed=fi fixed=fix fixed=fixed",
+                "prompt loss= answer loss",
+                "prompt loss= answer loss",
+                "prompt fixed= answer fixed",
+                "loss guard first token after loss= is l",
+                "loss guard continuation after loss= is loss",
+                "internal stage loss candidate loss rank 1",
+                "internal stage loss candidate fixed rank 2",
+                "internal stage fixed candidate fixed rank 1",
+                "internal stage fixed candidate loss rank 2",
+                "do not collapse loss into fixed",
+                "fixed stays fixed while loss stays loss",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "loss-guarded schedule counters the fixed-only collapse from surface-first.",
+                "loss= must stay loss before fixed repair is accepted.",
+                "generation pair-full remains required after adding the loss guard.",
+                "not checkpoint resume; this is a loss-guarded corpus approximation.",
                 "fixed=fixed|loss=loss",
             ]
         )

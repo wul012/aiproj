@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-guarded schedule corpus contract",
+  "generated_at": "2026-06-01T09:53:55Z",
+  "status": "pass",
+  "decision": "loss_guarded_schedule_corpus_contract_ready",
+  "corpus_mode": "equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair",
+  "repeat": 2,
+  "bridge_repeat": 1,
+  "failed_count": 0,
+  "checks": [
+    {
+      "id": "mode_registered",
+      "status": "pass",
+      "detail": "mode is accepted by the loss-internal objective corpus registry"
+    },
+    {
+      "id": "loss_guard_rows_present",
+      "status": "pass",
+      "detail": "loss guard rows directly counter fixed-only collapse"
+    },
+    {
+      "id": "loss_weight_exceeds_fixed_weight",
+      "status": "pass",
+      "detail": "loss generation rows outnumber fixed generation rows"
+    },
+    {
+      "id": "internal_rank_rows_present",
+      "status": "pass",
+      "detail": "both internal rank targets remain visible"
+    },
+    {
+      "id": "resume_boundary_present",
+      "status": "pass",
+      "detail": "corpus states this is not checkpoint resume"
+    },
+    {
+      "id": "no_teacher_forced_loss_row",
+      "status": "pass",
+      "detail": "mode avoids the heavy teacher-forced loss row"
+    },
+    {
+      "id": "no_pair_id",
+      "status": "pass",
+      "detail": "mode remains pair-id free"
+    }
+  ],
+  "summary": {
+    "line_count": 47,
+    "generation_loss_rows": 6,
+    "generation_fixed_rows": 4,
+    "internal_rank_rows": 8,
+    "boundary": "not_checkpoint_resume"
+  },
+  "sample_lines": [
+    "MiniGPT fixed/loss pair coexistence refresh corpus.",
+    "The prompt before the colon selects the exact continuation term.",
+    "loss guard surface loss=loss fixed=fixed",
+    "loss guard surface fixed=fixed loss=loss",
+    "generation loss= loss",
+    "generation loss= loss",
+    "generation loss= loss",
+    "generation fixed= fixed",
+    "generation fixed= fixed",
+    "loss=l loss=lo loss=los loss=loss",
+    "fixed=f fixed=fi fixed=fix fixed=fixed",
+    "prompt loss= answer loss",
+    "prompt loss= answer loss",
+    "prompt fixed= answer fixed",
+    "loss guard first token after loss= is l",
+    "loss guard continuation after loss= is loss",
+    "internal stage loss candidate loss rank 1",
+    "internal stage loss candidate fixed rank 2",
+    "internal stage fixed candidate fixed rank 1",
+    "internal stage fixed candidate loss rank 2",
+    "do not collapse loss into fixed",
+    "fixed stays fixed while loss stays loss",
+    "loss guard surface loss=loss fixed=fixed",
+    "loss guard surface fixed=fixed loss=loss",
+    "generation loss= loss",
+    "generation loss= loss",
+    "generation loss= loss",
+    "generation fixed= fixed",
+    "generation fixed= fixed",
+    "loss=l loss=lo loss=los loss=loss",
+    "fixed=f fixed=fi fixed=fix fixed=fixed",
+    "prompt loss= answer loss",
+    "prompt loss= answer loss",
+    "prompt fixed= answer fixed",
+    "loss guard first token after loss= is l",
+    "loss guard continuation after loss= is loss"
+  ]
+}

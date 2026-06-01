@@ -1,0 +1,6 @@
+status=pass
+decision=loss_guarded_schedule_corpus_contract_ready
+failed_count=0
+generation_loss_rows=6
+generation_fixed_rows=4
+boundary=not_checkpoint_resume

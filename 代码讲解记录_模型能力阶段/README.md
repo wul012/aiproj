@@ -560,6 +560,9 @@
 669-v655-required-term-pair-surface-first-failure-analysis.md
  -> v655 code explanation: diagnose surface-first fixed-only collapse and select a loss-guarded follow-up.
 
+670-v656-required-term-pair-loss-guarded-schedule-corpus.md
+ -> v656 code explanation: add a loss-guarded schedule corpus mode after surface-first collapse.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

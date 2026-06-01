@@ -6895,6 +6895,8 @@ The required-term pair route decision with surface-first schedule confirms the s
 
 The required-term pair surface-first failure analysis combines replay, forced-choice, alignment, and route-decision evidence to confirm fixed-only collapse and route the next experiment to a loss-guarded schedule variant.
 
+The required-term pair loss-guarded schedule corpus layer implements that follow-up by increasing loss-side generation rows, keeping internal rank anchors, and preserving the `not_checkpoint_resume` boundary before the next training run.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
