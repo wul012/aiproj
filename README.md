@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v606.0.0` runs the fixed-retention loss-rebalance route on real seed `3535` and confirms it remains a loss-only tradeoff.
+Version `v607.0.0` runs the fixed-retention dual-cycle route on real seed `3535` and confirms it remains a fixed-only tradeoff.
+
+## Latest v607 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_fixed_retention_dual_cycle_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` hits the fixed branch, while `loss=` drifts back toward fixed.
+- Preserved v607 as the fixed-only counterpart to the v606 loss-only result.
+- Archived v607 evidence in `e/607` and added the code explanation in `代码讲解记录_模型能力阶段/621-v607-required-term-pair-fixed-retention-dual-cycle-seed-3535.md`.
 
 ## Latest v606 checkpoint
 

@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=48417 vocab_size=35
+parameters=53,376
+data_source=data:e\607\解释\model-capability-required-term-pair-fixed-retention-dual-cycle-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9788 val_loss=3.2496
+step=  450 train_loss=0.6942 val_loss=4.5577
+step=  900 train_loss=0.7873 val_loss=4.6842
+step= 1350 train_loss=0.7253 val_loss=4.7170
+step= 1800 train_loss=0.6755 val_loss=4.1398
+saved=e\607\解释\model-capability-required-term-pair-fixed-retention-dual-cycle-seed-3535\pair-coexistence-refresh-run
+history=e\607\解释\model-capability-required-term-pair-fixed-retention-dual-cycle-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\607\解释\model-capability-required-term-pair-fixed-retention-dual-cycle-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\607\解释\model-capability-required-term-pair-fixed-retention-dual-cycle-seed-3535\pair-coexistence-refresh-run\sample.txt
