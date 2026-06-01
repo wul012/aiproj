@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v612.0.0` runs the delimiter-span objective route on real seed `3535` and records a fixed-only result.
+Version `v613.0.0` runs the context-switch objective route on real seed `3535` and records another fixed-only result.
+
+## Latest v613 checkpoint
+
+- Ran real seed `3535` training with `equals_surface_no_pair_id_fixed_retention_context_switch_repair`.
+- Confirmed training passed and checkpoint artifacts were created.
+- Confirmed `pair_full_observed=False`.
+- Observed `fixed=` hits fixed, while `loss=` still drifts toward fixed.
+- Archived v613 evidence in `e/613` and added the code explanation in `代码讲解记录_模型能力阶段/627-v613-required-term-pair-context-switch-seed-3535.md`.
 
 ## Latest v612 checkpoint
 

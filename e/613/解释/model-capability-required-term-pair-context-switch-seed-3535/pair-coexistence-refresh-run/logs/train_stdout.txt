@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=45937 vocab_size=32
+parameters=53,184
+data_source=data:e\613\解释\model-capability-required-term-pair-context-switch-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.0627 val_loss=3.2723
+step=  450 train_loss=0.8976 val_loss=4.6508
+step=  900 train_loss=0.7859 val_loss=4.9206
+step= 1350 train_loss=0.9987 val_loss=4.2559
+step= 1800 train_loss=0.8266 val_loss=4.4722
+saved=e\613\解释\model-capability-required-term-pair-context-switch-seed-3535\pair-coexistence-refresh-run
+history=e\613\解释\model-capability-required-term-pair-context-switch-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\613\解释\model-capability-required-term-pair-context-switch-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\613\解释\model-capability-required-term-pair-context-switch-seed-3535\pair-coexistence-refresh-run\sample.txt

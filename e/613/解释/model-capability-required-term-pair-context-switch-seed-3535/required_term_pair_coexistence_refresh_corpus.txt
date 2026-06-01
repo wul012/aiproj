@@ -1,0 +1,3722 @@
+MiniGPT fixed/loss pair coexistence refresh corpus.
+The prompt before the colon selects the exact continuation term.
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+[fixed-context]
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+answer fixed
+[/fixed-context]
+[loss-context]
+loss=l
+loss=lo
+loss=los
+loss=loss
+answer loss
+[/loss-context]
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
+context switch separates fixed rows from loss rows.
+inside fixed context the next term is fixed.
+inside loss context the next term is loss.
+the prompt surface remains fixed= and loss=.
