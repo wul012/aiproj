@@ -50,7 +50,10 @@ def build_model_capability_required_term_pair_generation_internal_alignment_rout
     issues = _issues(comparison_report)
     source_rows = list_of_dicts(comparison_report.get("source_rows"))
     selected_generation_route = _first_by_class(source_rows, "generation_pair_full_internal_partial")
-    internal_anchor_route = _first_by_class(source_rows, "internal_pair_full_generation_gap")
+    internal_anchor_route = _first_by_classes(
+        source_rows,
+        ("internal_pair_full_generation_none", "internal_pair_full_generation_gap"),
+    )
     aligned_route = _first_by_class(source_rows, "generation_internal_pair_full")
     summary = _summary(source_rows, selected_generation_route, internal_anchor_route, aligned_route)
     status = "pass" if not issues else "fail"
@@ -95,6 +98,14 @@ def _first_by_class(source_rows: list[dict[str, Any]], alignment_class: str) -> 
     for row in source_rows:
         if row.get("alignment_class") == alignment_class:
             return dict(row)
+    return {}
+
+
+def _first_by_classes(source_rows: list[dict[str, Any]], alignment_classes: tuple[str, ...]) -> dict[str, Any]:
+    for alignment_class in alignment_classes:
+        found = _first_by_class(source_rows, alignment_class)
+        if found:
+            return found
     return {}
 
 

@@ -521,6 +521,9 @@
 656-v642-required-term-pair-alignment-comparison-with-internal-repair.md
  -> v642 code explanation: compare the internal-repair route and support zero-generation-hit negative evidence.
 
+657-v643-required-term-pair-route-decision-with-internal-repair.md
+ -> v643 code explanation: update route decision to use joint-cycle internal-repair as the current internal anchor.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -47,6 +47,23 @@ class GenerationInternalAlignmentRouteDecisionTests(unittest.TestCase):
         self.assertTrue(report["summary"]["direct_promotion_ready"])
         self.assertEqual(report["summary"]["aligned_route_label"], "aligned")
 
+    def test_route_decision_prefers_internal_repair_anchor_when_available(self) -> None:
+        payload = comparison_report()
+        payload["source_rows"].append(
+            {
+                "source_label": "internal-repair",
+                "alignment_class": "internal_pair_full_generation_none",
+                "generation_hit_terms": [],
+                "internal_expected_best_terms": ["fixed", "loss"],
+                "generation_pair_full": False,
+                "internal_pair_full": True,
+            }
+        )
+        report = build_model_capability_required_term_pair_generation_internal_alignment_route_decision(payload)
+
+        self.assertEqual(report["decision"], "repair_internal_preference_preserve_generation_pair_full")
+        self.assertEqual(report["summary"]["internal_anchor_route_label"], "internal-repair")
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

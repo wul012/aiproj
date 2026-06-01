@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v642.0.0` compares the internal-repair route and supports zero-hit generation negatives.
+Version `v643.0.0` updates the route decision to use joint-cycle internal-repair as the current internal anchor.
+
+## Latest v643 checkpoint
+
+- Re-ran route decision from the v642 alignment comparison.
+- Hardened anchor selection to prefer `internal_pair_full_generation_none`.
+- Confirmed `selected_generation_route=loss-internal-joint-cycle`.
+- Confirmed `internal_anchor_route=joint-cycle-internal-repair`.
+- Confirmed `direct_promotion_ready=False`.
+- Archived v643 evidence in `e/643` and added the code explanation in `代码讲解记录_模型能力阶段/657-v643-required-term-pair-route-decision-with-internal-repair.md`.
 
 ## Latest v642 checkpoint
 
