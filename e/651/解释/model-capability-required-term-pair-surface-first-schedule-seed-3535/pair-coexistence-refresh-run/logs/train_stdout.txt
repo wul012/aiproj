@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=219349 vocab_size=37
+parameters=53,504
+data_source=data:e\651\解释\model-capability-required-term-pair-surface-first-schedule-seed-3535\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=3.1877 val_loss=3.2802
+step=  450 train_loss=1.8822 val_loss=2.3768
+step=  900 train_loss=1.9131 val_loss=2.5019
+step= 1350 train_loss=1.7830 val_loss=2.3035
+step= 1800 train_loss=1.7594 val_loss=2.3579
+saved=e\651\解释\model-capability-required-term-pair-surface-first-schedule-seed-3535\pair-coexistence-refresh-run
+history=e\651\解释\model-capability-required-term-pair-surface-first-schedule-seed-3535\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\651\解释\model-capability-required-term-pair-surface-first-schedule-seed-3535\pair-coexistence-refresh-run\run_manifest.json
+sample=e\651\解释\model-capability-required-term-pair-surface-first-schedule-seed-3535\pair-coexistence-refresh-run\sample.txt

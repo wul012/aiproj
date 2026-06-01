@@ -545,6 +545,9 @@
 664-v650-required-term-pair-surface-first-schedule-corpus.md
  -> v650 code explanation: add a runnable surface-first schedule corpus mode without claiming checkpoint resume.
 
+665-v651-required-term-pair-surface-first-schedule-seed-3535.md
+ -> v651 code explanation: run the surface-first schedule seed and record a fixed-only generation regression.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
