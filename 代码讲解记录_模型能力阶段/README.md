@@ -590,6 +590,9 @@
 679-v665-required-term-pair-route-decision-with-resume-routes.md
  -> v665 code explanation: re-run route decision after adding real resume routes and keep the split-anchor strategy.
 
+680-v666-required-term-pair-resume-branch-closeout.md
+ -> v666 code explanation: generalize batch closeout wording and close the real checkpoint continuation branch as negative evidence.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,9 @@
+status=pass
+decision=close_batch_and_design_constrained_decode_or_explicit_dual_objective_boundary
+failed_count=0
+batch_version_count=8
+aligned_pair_full_count=0
+selected_generation_route=loss-internal-joint-cycle
+internal_anchor_route=joint-cycle-internal-repair
+model_quality_claim=targeted_generation_signal_only
+next_action=design constrained_decode_or_explicit_dual_objective_boundary

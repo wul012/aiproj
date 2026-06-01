@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair generation/internal batch closeout",
+  "generated_at": "2026-06-01T12:07:25Z",
+  "status": "pass",
+  "decision": "close_batch_and_design_constrained_decode_or_explicit_dual_objective_boundary",
+  "failed_count": 0,
+  "issues": [],
+  "included_versions": [
+    "v659",
+    "v660",
+    "v661",
+    "v662",
+    "v663",
+    "v664",
+    "v665",
+    "v666"
+  ],
+  "source_comparison": {
+    "status": "pass",
+    "decision": "keep_generation_pair_full_and_repair_internal_preference",
+    "summary": {
+      "compared_source_count": 5,
+      "generation_pair_full_count": 1,
+      "internal_pair_full_count": 2,
+      "aligned_pair_full_count": 0,
+      "generation_only_pair_full_count": 1,
+      "internal_only_pair_full_count": 2,
+      "alignment_classes": {
+        "generation_pair_full_internal_partial": 1,
+        "internal_pair_full_generation_gap": 1,
+        "internal_pair_full_generation_none": 1,
+        "partial_tradeoff": 2
+      },
+      "best_source_labels": [
+        "loss-internal-first-token",
+        "loss-internal-joint-cycle"
+      ],
+      "best_alignment_class": "internal_pair_full_generation_gap"
+    }
+  },
+  "source_route_decision": {
+    "status": "pass",
+    "decision": "repair_internal_preference_preserve_generation_pair_full",
+    "summary": {
+      "source_count": 5,
+      "selected_generation_route_label": "loss-internal-joint-cycle",
+      "internal_anchor_route_label": "joint-cycle-internal-repair",
+      "aligned_route_label": "",
+      "direct_promotion_ready": false,
+      "requires_internal_repair": true,
+      "requires_generation_preservation": true,
+      "expected_target_terms": [
+        "fixed",
+        "loss"
+      ]
+    }
+  },
+  "closeout_items": [
+    {
+      "id": "generation_pair_full_route_present",
+      "status": "confirmed",
+      "detail": "loss-internal-joint-cycle is the selected generation route."
+    },
+    {
+      "id": "internal_alignment_not_ready",
+      "status": "confirmed",
+      "detail": "No route has both generation pair-full and internal pair-full."
+    },
+    {
+      "id": "internal_anchor_preserved",
+      "status": "confirmed",
+      "detail": "joint-cycle-internal-repair is the selected internal anchor."
+    },
+    {
+      "id": "next_route_selected",
+      "status": "confirmed",
+      "detail": "Preserve the selected generation route while repairing internal preference."
+    },
+    {
+      "id": "resume_routes_rejected",
+      "status": "confirmed",
+      "detail": "Resume routes were compared but did not become aligned pair-full candidates."
+    }
+  ],
+  "summary": {
+    "batch_version_count": 8,
+    "batch_start": 659,
+    "batch_end": 666,
+    "compared_source_count": 5,
+    "generation_pair_full_count": 1,
+    "internal_pair_full_count": 2,
+    "aligned_pair_full_count": 0,
+    "direct_promotion_ready": false,
+    "selected_generation_route": "loss-internal-joint-cycle",
+    "internal_anchor_route": "joint-cycle-internal-repair",
+    "next_route": "constrained_decode_or_explicit_dual_objective_boundary"
+  },
+  "interpretation": {
+    "model_quality_claim": "targeted_generation_signal_only",
+    "reason": "The batch found a generation pair-full route but no aligned generation/internal route.",
+    "next_action": "design constrained_decode_or_explicit_dual_objective_boundary"
+  }
+}

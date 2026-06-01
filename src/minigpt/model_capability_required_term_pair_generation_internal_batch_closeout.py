@@ -143,11 +143,14 @@ def _closeout_items(comparison_report: dict[str, Any], route_decision_report: di
     comparison_summary = as_dict(comparison_report.get("summary"))
     route_summary = as_dict(route_decision_report.get("summary"))
     source_rows = list_of_dicts(comparison_report.get("source_rows"))
+    source_labels = {str(row.get("source_label") or "") for row in source_rows}
+    selected_generation = str(route_summary.get("selected_generation_route_label") or "")
+    internal_anchor = str(route_summary.get("internal_anchor_route_label") or "")
     items = [
         {
-            "id": "joint_cycle_generation_pair_full",
+            "id": "generation_pair_full_route_present",
             "status": "confirmed" if int(comparison_summary.get("generation_pair_full_count") or 0) > 0 else "missing",
-            "detail": "v630 joint-cycle is the only generation pair-full route in this batch.",
+            "detail": f"{selected_generation or 'no selected route'} is the selected generation route.",
         },
         {
             "id": "internal_alignment_not_ready",
@@ -155,22 +158,30 @@ def _closeout_items(comparison_report: dict[str, Any], route_decision_report: di
             "detail": "No route has both generation pair-full and internal pair-full.",
         },
         {
-            "id": "balanced_anchor_rejected",
-            "status": "confirmed",
-            "detail": "v634/v635 balanced-anchor remains fixed-only in generation and internal scoring.",
+            "id": "internal_anchor_preserved",
+            "status": "confirmed" if internal_anchor else "missing",
+            "detail": f"{internal_anchor or 'no internal anchor'} is the selected internal anchor.",
         },
         {
             "id": "next_route_selected",
-            "status": "confirmed" if route_summary.get("selected_generation_route_label") else "missing",
-            "detail": "Preserve joint-cycle generation pair-full while repairing loss-side internal preference.",
+            "status": "confirmed" if selected_generation else "missing",
+            "detail": "Preserve the selected generation route while repairing internal preference.",
         },
     ]
-    if any(row.get("source_label") == "joint-cycle-light-merge" for row in source_rows):
+    if "joint-cycle-light-merge" in source_labels:
         items.append(
             {
                 "id": "light_merge_rejected",
                 "status": "confirmed",
                 "detail": "v645/v646 light-merge remains a partial tradeoff, not an aligned route.",
+            }
+        )
+    if any("resume" in label for label in source_labels):
+        items.append(
+            {
+                "id": "resume_routes_rejected",
+                "status": "confirmed",
+                "detail": "Resume routes were compared but did not become aligned pair-full candidates.",
             }
         )
     return items
@@ -181,9 +192,7 @@ def _decision(status: str, summary: dict[str, Any]) -> str:
         return "fix_generation_internal_batch_closeout_inputs"
     if summary.get("direct_promotion_ready"):
         return "close_batch_with_aligned_candidate_repeat_required"
-    if summary.get("next_route") == "two_stage_surface_internal_schedule":
-        return "close_batch_and_design_two_stage_surface_internal_schedule"
-    return "close_batch_and_design_joint_cycle_internal_repair"
+    return f"close_batch_and_design_{summary.get('next_route') or 'next_route'}"
 
 
 def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
@@ -196,11 +205,7 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     return {
         "model_quality_claim": "targeted_generation_signal_only",
         "reason": "The batch found a generation pair-full route but no aligned generation/internal route.",
-        "next_action": (
-            "design a two-stage surface/internal schedule instead of another single-corpus merge"
-            if summary.get("next_route") == "two_stage_surface_internal_schedule"
-            else "design a joint-cycle internal-repair corpus and repeat across seeds"
-        ),
+        "next_action": f"design {summary.get('next_route') or 'the next route'}",
     }
 
 

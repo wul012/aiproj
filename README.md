@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v665.0.0` re-runs route decision after adding real resume routes to the alignment matrix.
+Version `v666.0.0` closes the real checkpoint continuation branch and routes the next work away from naive resume variants.
+
+## Latest v666 checkpoint
+
+- Generalized generation/internal batch closeout so custom `next_route` drives decision and next action.
+- Added `resume_routes_rejected` closeout evidence when compared routes include resume labels.
+- Closed v659-v666 as an eight-version resume branch.
+- Confirmed `decision=close_batch_and_design_constrained_decode_or_explicit_dual_objective_boundary`.
+- Confirmed `aligned_pair_full_count=0`.
+- Confirmed `selected_generation_route=loss-internal-joint-cycle`.
+- Confirmed `internal_anchor_route=joint-cycle-internal-repair`.
+- Archived v666 evidence in `e/666` and added the code explanation in `代码讲解记录_模型能力阶段/680-v666-required-term-pair-resume-branch-closeout.md`.
 
 ## Latest v665 checkpoint
 

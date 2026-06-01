@@ -53,6 +53,23 @@ class GenerationInternalBatchCloseoutTests(unittest.TestCase):
         self.assertEqual(report["included_versions"][-1], "v648")
         self.assertEqual(report["summary"]["batch_version_count"], 10)
         self.assertEqual(report["summary"]["next_route"], "two_stage_surface_internal_schedule")
+        self.assertEqual(report["interpretation"]["next_action"], "design two_stage_surface_internal_schedule")
+
+    def test_closeout_records_resume_routes_as_rejected_when_compared(self) -> None:
+        report = build_model_capability_required_term_pair_generation_internal_batch_closeout(
+            resume_comparison_report(),
+            route_decision_report(),
+            batch_start=659,
+            batch_end=666,
+            next_route="constrained_decode_or_explicit_dual_objective_boundary",
+        )
+
+        self.assertEqual(
+            report["decision"],
+            "close_batch_and_design_constrained_decode_or_explicit_dual_objective_boundary",
+        )
+        self.assertIn("v666", report["included_versions"])
+        self.assertIn("resume_routes_rejected", [item["id"] for item in report["closeout_items"]])
 
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -84,6 +101,16 @@ def comparison_report() -> dict[str, object]:
         },
         "source_rows": [{"source_label": "loss-internal-joint-cycle"}],
     }
+
+
+def resume_comparison_report() -> dict[str, object]:
+    report = comparison_report()
+    report["source_rows"] = [
+        {"source_label": "loss-internal-joint-cycle"},
+        {"source_label": "v630-internal-repair-resume"},
+        {"source_label": "v630-light-merge-resume"},
+    ]
+    return report
 
 
 def route_decision_report() -> dict[str, object]:
