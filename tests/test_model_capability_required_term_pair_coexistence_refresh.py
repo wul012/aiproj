@@ -340,6 +340,22 @@ class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
         self.assertIn("micro span hints expose the first loss token without pair ids.", corpus)
         self.assertNotIn("pair=01", corpus)
 
+    def test_equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair_preserves_constraints(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair",
+        )
+
+        self.assertIn("dual boundary surface fixed=fixed loss=loss", corpus)
+        self.assertIn("dual boundary surface loss=loss fixed=fixed", corpus)
+        self.assertIn("fixed retention after constrained miss fixed=fixed", corpus)
+        self.assertIn("loss retention after constrained hit loss=loss", corpus)
+        self.assertIn("do not accept fixed prefix without full fixed", corpus)
+        self.assertIn("do not erase loss while repairing fixed", corpus)
+        self.assertIn("the boundary rejects naive checkpoint continuation variants.", corpus)
+        self.assertNotIn("pair=01", corpus)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

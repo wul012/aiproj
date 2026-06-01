@@ -605,6 +605,9 @@
 684-v670-required-term-pair-dual-objective-boundary-plan.md
  -> v670 code explanation: turn closeout and miss diagnostic evidence into an explicit dual-objective boundary corpus plan.
 
+685-v671-required-term-pair-dual-boundary-corpus.md
+ -> v671 code explanation: register the explicit dual-objective boundary corpus mode and verify its constraints.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

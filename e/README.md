@@ -833,3 +833,9 @@ e/663/解释/说明.md
 - `e/670/图片`
 - `e/670/解释/说明.md`
 - v670 required-term pair dual-objective boundary plan 的运行截图和解释。
+
+## v671 补充索引
+
+- `e/671/图片`
+- `e/671/解释/说明.md`
+- v671 required-term pair dual-boundary corpus contract 的运行截图和解释。

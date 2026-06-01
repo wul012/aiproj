@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v670.0.0` turns the resume closeout and constrained-decode miss diagnostic into an explicit dual-objective boundary plan.
+Version `v671.0.0` registers the explicit dual-objective boundary corpus mode.
+
+## Latest v671 checkpoint
+
+- Added `equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair`.
+- Preserved generation pair surface rows, fixed-retention rows, loss-retention rows, internal rank rows, and stop-naive-resume boundary rows.
+- Confirmed the corpus has no `pair=01` pair-id competition.
+- Ran targeted corpus tests: `25 passed`.
+- Archived v671 evidence in `e/671` and added the code explanation in `代码讲解记录_模型能力阶段/685-v671-required-term-pair-dual-boundary-corpus.md`.
 
 ## Latest v670 checkpoint
 

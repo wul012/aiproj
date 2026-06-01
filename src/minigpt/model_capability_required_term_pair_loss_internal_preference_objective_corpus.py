@@ -12,6 +12,7 @@ PAIR_LOSS_INTERNAL_PREFERENCE_OBJECTIVE_CORPUS_MODES = (
     "equals_surface_no_pair_id_loss_internal_joint_cycle_light_merge_repair",
     "equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair",
     "equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair",
+    "equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair",
 )
 
 
@@ -51,6 +52,9 @@ def extend_pair_loss_internal_preference_objective_corpus(
         return True
     if corpus_mode == "equals_surface_no_pair_id_loss_internal_loss_guarded_schedule_repair":
         _extend_loss_guarded_schedule_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair":
+        _extend_explicit_dual_boundary_repair(lines, repeat=repeat, bridge_repeat=bridge_repeat)
         return True
     return False
 
@@ -399,6 +403,48 @@ def _extend_loss_guarded_schedule_repair(lines: list[str], *, repeat: int, bridg
                 "loss= must stay loss before fixed repair is accepted.",
                 "generation pair-full remains required after adding the loss guard.",
                 "not checkpoint resume; this is a loss-guarded corpus approximation.",
+                "fixed=fixed|loss=loss",
+            ]
+        )
+
+
+def _extend_explicit_dual_boundary_repair(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    for _ in range(max(1, repeat)):
+        lines.extend(
+            [
+                "dual boundary surface fixed=fixed loss=loss",
+                "dual boundary surface loss=loss fixed=fixed",
+                "generation anchor fixed= fixed",
+                "generation anchor loss= loss",
+                "fixed retention after constrained miss fixed=fixed",
+                "fixed retention after constrained miss fixed=fixed",
+                "loss retention after constrained hit loss=loss",
+                "loss retention after constrained hit loss=loss",
+                "fixed=f fixed=fi fixed=fix fixed=fixed",
+                "loss=l loss=lo loss=los loss=loss",
+                "prompt fixed= answer fixed",
+                "prompt loss= answer loss",
+                "boundary fixed side must finish fixed",
+                "boundary loss side must remain loss",
+                "internal fixed= candidate fixed rank 1",
+                "internal fixed= candidate loss rank 2",
+                "internal loss= candidate loss rank 1",
+                "internal loss= candidate fixed rank 2",
+                "score fixed= fixed lower than loss",
+                "score loss= loss lower than fixed",
+                "do not accept fixed prefix without full fixed",
+                "do not erase loss while repairing fixed",
+                "fixed=fixed|loss=loss",
+                "loss=loss|fixed=fixed",
+            ]
+        )
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "explicit dual-objective boundary preserves generation pair-full before internal repair.",
+                "fixed constrained miss requires full fixed, not only fix.",
+                "loss constrained hit remains an anchor and must stay loss.",
+                "the boundary rejects naive checkpoint continuation variants.",
                 "fixed=fixed|loss=loss",
             ]
         )
