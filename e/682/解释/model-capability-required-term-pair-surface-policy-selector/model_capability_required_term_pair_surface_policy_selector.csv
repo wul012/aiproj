@@ -1,0 +1,5 @@
+policy_id,stable_pair_full,leakage_level,leakage_rank,prompt_template_length,uses_boundary_sentence,selection_score,selection_reason
+dual_boundary_sentence,True,contextual_anchor,1,55,True,25,stable but longer and tied to training boundary wording
+pair_context_prefix,True,contextual_anchor,1,33,False,47,stable contextual anchor with shorter prompt template
+single_label_default,False,none,0,7,False,-1000,not stable across seeds
+single_label_suppress_newline,False,none,0,7,False,-1000,not stable across seeds

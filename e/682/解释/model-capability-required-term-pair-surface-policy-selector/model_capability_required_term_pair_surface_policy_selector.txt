@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_surface_policy_selected_for_minimality_check
+failed_count=0
+stable_candidate_count=2
+selected_policy_id=pair_context_prefix
+selected_leakage_level=contextual_anchor
+promotion_ready=False
+model_quality_claim=decode_surface_policy_selected_not_promoted
+next_action=run minimality and leakage checks for the selected policy

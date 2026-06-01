@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface policy selector",
+  "generated_at": "2026-06-01T23:23:16Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_policy_selected_for_minimality_check",
+  "failed_count": 0,
+  "issues": [],
+  "source_policy_plan_path": "e\\680\\解释\\model-capability-required-term-pair-surface-policy-plan\\model_capability_required_term_pair_surface_policy_plan.json",
+  "source_policy_replay_path": "e\\681\\解释\\model-capability-required-term-pair-surface-policy-replay\\model_capability_required_term_pair_surface_policy_replay.json",
+  "candidate_rows": [
+    {
+      "policy_id": "dual_boundary_sentence",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "leakage_level": "contextual_anchor",
+      "leakage_rank": 1,
+      "prompt_template": "dual boundary surface {other_term}={other_term} {term}=",
+      "prompt_template_length": 55,
+      "uses_boundary_sentence": true,
+      "included_in_replay": true,
+      "selection_score": 25,
+      "selection_reason": "stable but longer and tied to training boundary wording"
+    },
+    {
+      "policy_id": "pair_context_prefix",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "leakage_level": "contextual_anchor",
+      "leakage_rank": 1,
+      "prompt_template": "{other_term}={other_term} {term}=",
+      "prompt_template_length": 33,
+      "uses_boundary_sentence": false,
+      "included_in_replay": true,
+      "selection_score": 47,
+      "selection_reason": "stable contextual anchor with shorter prompt template"
+    },
+    {
+      "policy_id": "single_label_default",
+      "stable_pair_full": false,
+      "pair_full_seed_count": 2,
+      "hit_case_count": 5,
+      "leakage_level": "none",
+      "leakage_rank": 0,
+      "prompt_template": "{term}=",
+      "prompt_template_length": 7,
+      "uses_boundary_sentence": false,
+      "included_in_replay": true,
+      "selection_score": -1000,
+      "selection_reason": "not stable across seeds"
+    },
+    {
+      "policy_id": "single_label_suppress_newline",
+      "stable_pair_full": false,
+      "pair_full_seed_count": 2,
+      "hit_case_count": 5,
+      "leakage_level": "none",
+      "leakage_rank": 0,
+      "prompt_template": "{term}=",
+      "prompt_template_length": 7,
+      "uses_boundary_sentence": false,
+      "included_in_replay": true,
+      "selection_score": -1000,
+      "selection_reason": "not stable across seeds"
+    }
+  ],
+  "selected_policy": {
+    "policy_id": "pair_context_prefix",
+    "stable_pair_full": true,
+    "pair_full_seed_count": 3,
+    "hit_case_count": 6,
+    "leakage_level": "contextual_anchor",
+    "leakage_rank": 1,
+    "prompt_template": "{other_term}={other_term} {term}=",
+    "prompt_template_length": 33,
+    "uses_boundary_sentence": false,
+    "included_in_replay": true,
+    "selection_score": 47,
+    "selection_reason": "stable contextual anchor with shorter prompt template"
+  },
+  "summary": {
+    "candidate_count": 4,
+    "stable_candidate_count": 2,
+    "selected_policy_id": "pair_context_prefix",
+    "selected_leakage_level": "contextual_anchor",
+    "selected_uses_boundary_sentence": false,
+    "selected_prompt_template": "{other_term}={other_term} {term}=",
+    "promotion_ready": false,
+    "requires_minimality_check": true
+  },
+  "interpretation": {
+    "model_quality_claim": "decode_surface_policy_selected_not_promoted",
+    "reason": "A stable contextual policy was selected by leakage rank and prompt minimality, but it is not promotion-ready.",
+    "next_action": "run minimality and leakage checks for the selected policy"
+  }
+}

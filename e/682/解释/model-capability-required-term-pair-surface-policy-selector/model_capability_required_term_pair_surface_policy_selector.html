@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT surface policy selector</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT surface policy selector</h1><p>A stable contextual policy was selected by leakage rank and prompt minimality, but it is not promotion-ready.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>required_term_pair_surface_policy_selected_for_minimality_check</strong></div><div class="card"><span>Stable candidates</span><strong>2</strong></div><div class="card"><span>Selected</span><strong>pair_context_prefix</strong></div><div class="card"><span>Leakage</span><strong>contextual_anchor</strong></div><div class="card"><span>Promotion ready</span><strong>False</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>run minimality and leakage checks for the selected policy</p></section>
+<section class="panel">
+<h2>Candidates</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Policy</th><th>Stable</th><th>Leakage</th><th>Boundary</th><th>Score</th><th>Reason</th></tr></thead>
+<tbody><tr><td>dual_boundary_sentence</td><td>True</td><td>contextual_anchor</td><td>True</td><td>25</td><td>stable but longer and tied to training boundary wording</td></tr>
+<tr><td>pair_context_prefix</td><td>True</td><td>contextual_anchor</td><td>False</td><td>47</td><td>stable contextual anchor with shorter prompt template</td></tr>
+<tr><td>single_label_default</td><td>False</td><td>none</td><td>False</td><td>-1000</td><td>not stable across seeds</td></tr>
+<tr><td>single_label_suppress_newline</td><td>False</td><td>none</td><td>False</td><td>-1000</td><td>not stable across seeds</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

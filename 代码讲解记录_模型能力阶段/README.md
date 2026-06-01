@@ -638,6 +638,9 @@
 695-v681-required-term-pair-surface-policy-replay.md
  -> v681 code explanation: replay planned surface policies over dual-boundary checkpoints and identify contextual-anchor pair-full candidates.
 
+696-v682-required-term-pair-surface-policy-selector.md
+ -> v682 code explanation: select the shorter contextual-anchor policy for minimality checks without promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -891,3 +891,8 @@ e/663/解释/说明.md
 - `e/681/图片`
 - `e/681/解释/说明.md`
 - v681 required-term pair surface policy replay 的运行截图和解释。
+## v682 补充索引
+
+- `e/682/图片`
+- `e/682/解释/说明.md`
+- v682 required-term pair surface policy selector 的运行截图和解释。
