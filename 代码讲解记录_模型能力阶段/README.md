@@ -635,6 +635,9 @@
 694-v680-required-term-pair-surface-policy-plan.md
  -> v680 code explanation: convert the isolated surface failure into replay policies while excluding target-echo leakage.
 
+695-v681-required-term-pair-surface-policy-replay.md
+ -> v681 code explanation: replay planned surface policies over dual-boundary checkpoints and identify contextual-anchor pair-full candidates.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

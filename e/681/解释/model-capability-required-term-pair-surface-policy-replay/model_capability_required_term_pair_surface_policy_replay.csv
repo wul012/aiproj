@@ -1,0 +1,25 @@
+seed,policy_id,profile_id,leakage_level,term,prompt,continuation_hit,blocked_token_count,continuation_preview
+1535,single_label_default,default,none,fixed,fixed=,True,0,fixed\nloss=l
+1535,single_label_default,default,none,loss,loss=,True,0,loss\nfixed=f
+1535,single_label_suppress_newline,suppress_newline_tokens,none,fixed,fixed=,True,1,fixed|loss=l
+1535,single_label_suppress_newline,suppress_newline_tokens,none,loss,loss=,True,1,loss loss=lo
+1535,pair_context_prefix,suppress_newline_tokens,contextual_anchor,fixed,loss=loss fixed=,True,1,fixed|loss=l
+1535,pair_context_prefix,suppress_newline_tokens,contextual_anchor,loss,fixed=fixed loss=,True,1,ixed=fixed loss=loss loss=lo
+1535,dual_boundary_sentence,suppress_newline_tokens,contextual_anchor,fixed,dual boundary surface loss=loss fixed=,True,1,loss=loss fixed=fixed|loss=l
+1535,dual_boundary_sentence,suppress_newline_tokens,contextual_anchor,loss,dual boundary surface fixed=fixed loss=,True,1,ixed=fixed loss=loss loss=lo
+2535,single_label_default,default,none,fixed,fixed=,True,0,fixed\ngenera
+2535,single_label_default,default,none,loss,loss=,False,0, candidate l
+2535,single_label_suppress_newline,suppress_newline_tokens,none,fixed,fixed=,True,1,fixed loss=l
+2535,single_label_suppress_newline,suppress_newline_tokens,none,loss,loss=,False,1, candidate l
+2535,pair_context_prefix,suppress_newline_tokens,contextual_anchor,fixed,loss=loss fixed=,True,1,fixed loss=l
+2535,pair_context_prefix,suppress_newline_tokens,contextual_anchor,loss,fixed=fixed loss=,True,1,ixed=fixed loss=loss loss=lo
+2535,dual_boundary_sentence,suppress_newline_tokens,contextual_anchor,fixed,dual boundary surface loss=loss fixed=,True,1,loss=loss fixed=fixed loss=l
+2535,dual_boundary_sentence,suppress_newline_tokens,contextual_anchor,loss,dual boundary surface fixed=fixed loss=,True,1,ixed=fixed loss=loss loss=lo
+3535,single_label_default,default,none,fixed,fixed=,True,0,fixed\ngenera
+3535,single_label_default,default,none,loss,loss=,True,0,loss\nloss re
+3535,single_label_suppress_newline,suppress_newline_tokens,none,fixed,fixed=,True,1,fixed loss=l
+3535,single_label_suppress_newline,suppress_newline_tokens,none,loss,loss=,True,1,loss loss=lo
+3535,pair_context_prefix,suppress_newline_tokens,contextual_anchor,fixed,loss=loss fixed=,True,1,fixed|loss=l
+3535,pair_context_prefix,suppress_newline_tokens,contextual_anchor,loss,fixed=fixed loss=,True,1,ixed=fixed loss=loss loss=lo
+3535,dual_boundary_sentence,suppress_newline_tokens,contextual_anchor,fixed,dual boundary surface loss=loss fixed=,True,1,loss=loss fixed=fixed|loss=l
+3535,dual_boundary_sentence,suppress_newline_tokens,contextual_anchor,loss,dual boundary surface fixed=fixed loss=,True,1,ixed=fixed loss=loss loss=lo

@@ -7030,6 +7030,8 @@ The required-term pair surface-failure diagnostic narrows that remaining weaknes
 
 The required-term pair surface-policy plan converts that isolated `loss` miss into replay candidates, separating non-leaking baselines and contextual anchors from an excluded target-echo upper bound.
 
+The required-term pair surface-policy replay runs those candidates over the three dual-boundary checkpoints and finds stable pair-full contextual-anchor policies, while preserving the boundary that this is a decoding-surface candidate rather than a minimal-prompt model-quality claim.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

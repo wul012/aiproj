@@ -1,0 +1,9 @@
+status=pass
+decision=required_term_pair_surface_policy_replay_stable_pair_full_policy_found
+failed_count=0
+case_count=24
+stable_pair_full_policy_count=2
+stable_pair_full_policy_ids=['dual_boundary_sentence', 'pair_context_prefix']
+best_policy_id=dual_boundary_sentence
+model_quality_claim=decode_surface_policy_candidate
+next_action=compare stable policy leakage and minimality before promotion
