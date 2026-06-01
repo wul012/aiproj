@@ -443,6 +443,9 @@
 630-v616-required-term-pair-refresh-forced-choice-diagnostic.md
  -> v616 code explanation: add teacher-forced fixed/loss candidate scoring over refresh checkpoints.
 
+631-v617-required-term-pair-refresh-forced-choice-diagnostic.md
+ -> v617 code explanation: run forced-choice scoring over v611-v613 real checkpoints.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

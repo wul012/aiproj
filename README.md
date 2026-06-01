@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v616.0.0` adds a refresh forced-choice diagnostic for teacher-forced fixed/loss candidate scoring.
+Version `v617.0.0` runs forced-choice scoring over v611-v613 real checkpoints and confirms no checkpoint internally matches both prompts.
+
+## Latest v617 checkpoint
+
+- Ran real forced-choice diagnostic over v611, v612, and v613 checkpoints.
+- Confirmed `expected_best_prompt_count=3`.
+- Confirmed `forced_choice_full_match_source_count=0`.
+- Observed every `loss=` prompt still internally prefers `fixed`.
+- Archived v617 evidence in `e/617` and added the code explanation in `代码讲解记录_模型能力阶段/631-v617-required-term-pair-refresh-forced-choice-diagnostic.md`.
 
 ## Latest v616 checkpoint
 

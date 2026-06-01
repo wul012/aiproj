@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair refresh forced-choice diagnostic",
+  "generated_at": "2026-06-01T01:58:47Z",
+  "status": "pass",
+  "decision": "refresh_forced_choice_partial_internal_match",
+  "failed_count": 0,
+  "issues": [],
+  "settings": {
+    "device": "cpu",
+    "candidate_terms": [
+      "fixed",
+      "loss"
+    ],
+    "experiment_boundary": "teacher-forced scoring only; no generation and no retraining"
+  },
+  "source_reports": [
+    {
+      "index": 0,
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    },
+    {
+      "index": 1,
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    },
+    {
+      "index": 2,
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "checkpoint_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json"
+    }
+  ],
+  "score_rows": [
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        15,
+        18,
+        32,
+        14,
+        13
+      ],
+      "total_nll": 2.014709,
+      "avg_nll": 0.402942,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.174953
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        21,
+        24,
+        27,
+        27
+      ],
+      "total_nll": 2.22038,
+      "avg_nll": 0.555095,
+      "first_token_rank": 3,
+      "first_token_logprob": -1.202785
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        15,
+        18,
+        32,
+        14,
+        13
+      ],
+      "total_nll": 1.8346,
+      "avg_nll": 0.36692,
+      "first_token_rank": 1,
+      "first_token_logprob": -1.013556
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "source_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\611\\解释\\model-capability-required-term-pair-contrast-free-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        21,
+        24,
+        27,
+        27
+      ],
+      "total_nll": 2.577646,
+      "avg_nll": 0.644412,
+      "first_token_rank": 3,
+      "first_token_logprob": -1.307482
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        16,
+        19,
+        30,
+        15,
+        14
+      ],
+      "total_nll": 1.371831,
+      "avg_nll": 0.274366,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.908229
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        20,
+        23,
+        26,
+        26
+      ],
+      "total_nll": 1.970308,
+      "avg_nll": 0.492577,
+      "first_token_rank": 2,
+      "first_token_logprob": -0.971072
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        16,
+        19,
+        30,
+        15,
+        14
+      ],
+      "total_nll": 1.408142,
+      "avg_nll": 0.281628,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.890199
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "source_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\612\\解释\\model-capability-required-term-pair-delimiter-span-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        20,
+        23,
+        26,
+        26
+      ],
+      "total_nll": 2.192502,
+      "avg_nll": 0.548126,
+      "first_token_rank": 2,
+      "first_token_logprob": -0.960811
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        18,
+        20,
+        31,
+        17,
+        16
+      ],
+      "total_nll": 1.607427,
+      "avg_nll": 0.321485,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.427697
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "fixed",
+      "prompt": "fixed=",
+      "candidate_term": "loss",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        21,
+        24,
+        27,
+        27
+      ],
+      "total_nll": 2.582798,
+      "avg_nll": 0.645699,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.078126
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "fixed",
+      "is_expected_candidate": false,
+      "status": "pass",
+      "token_count": 5,
+      "candidate_token_ids": [
+        18,
+        20,
+        31,
+        17,
+        16
+      ],
+      "total_nll": 1.785578,
+      "avg_nll": 0.357116,
+      "first_token_rank": 1,
+      "first_token_logprob": -0.417093
+    },
+    {
+      "source_label": "v613-context-switch",
+      "source_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "seed": 3535,
+      "checkpoint_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\checkpoint.pt",
+      "tokenizer_path": "e\\613\\解释\\model-capability-required-term-pair-context-switch-seed-3535\\pair-coexistence-refresh-run\\tokenizer.json",
+      "device": "cpu",
+      "prompt_term": "loss",
+      "prompt": "loss=",
+      "candidate_term": "loss",
+      "is_expected_candidate": true,
+      "status": "pass",
+      "token_count": 4,
+      "candidate_token_ids": [
+        21,
+        24,
+        27,
+        27
+      ],
+      "total_nll": 2.341042,
+      "avg_nll": 0.58526,
+      "first_token_rank": 2,
+      "first_token_logprob": -1.086255
+    }
+  ],
+  "prompt_summaries": [
+    {
+      "source_label": "v611-contrast-free",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 0.402942,
+      "best_avg_nll": 0.402942,
+      "expected_first_token_rank": 2
+    },
+    {
+      "source_label": "v611-contrast-free",
+      "prompt_term": "loss",
+      "best_candidate": "fixed",
+      "expected_candidate": "loss",
+      "expected_best": false,
+      "expected_avg_nll": 0.644412,
+      "best_avg_nll": 0.36692,
+      "expected_first_token_rank": 3
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 0.274366,
+      "best_avg_nll": 0.274366,
+      "expected_first_token_rank": 1
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "prompt_term": "loss",
+      "best_candidate": "fixed",
+      "expected_candidate": "loss",
+      "expected_best": false,
+      "expected_avg_nll": 0.548126,
+      "best_avg_nll": 0.281628,
+      "expected_first_token_rank": 2
+    },
+    {
+      "source_label": "v613-context-switch",
+      "prompt_term": "fixed",
+      "best_candidate": "fixed",
+      "expected_candidate": "fixed",
+      "expected_best": true,
+      "expected_avg_nll": 0.321485,
+      "best_avg_nll": 0.321485,
+      "expected_first_token_rank": 1
+    },
+    {
+      "source_label": "v613-context-switch",
+      "prompt_term": "loss",
+      "best_candidate": "fixed",
+      "expected_candidate": "loss",
+      "expected_best": false,
+      "expected_avg_nll": 0.58526,
+      "best_avg_nll": 0.357116,
+      "expected_first_token_rank": 2
+    }
+  ],
+  "source_summaries": [
+    {
+      "source_label": "v611-contrast-free",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_contrast_free_repair",
+      "expected_best_terms": [
+        "fixed"
+      ],
+      "expected_best_count": 1,
+      "forced_choice_full_match": false
+    },
+    {
+      "source_label": "v612-delimiter-span",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_delimiter_span_repair",
+      "expected_best_terms": [
+        "fixed"
+      ],
+      "expected_best_count": 1,
+      "forced_choice_full_match": false
+    },
+    {
+      "source_label": "v613-context-switch",
+      "corpus_mode": "equals_surface_no_pair_id_fixed_retention_context_switch_repair",
+      "expected_best_terms": [
+        "fixed"
+      ],
+      "expected_best_count": 1,
+      "forced_choice_full_match": false
+    }
+  ],
+  "summary": {
+    "source_report_count": 3,
+    "prompt_summary_count": 6,
+    "source_summary_count": 3,
+    "expected_best_prompt_count": 3,
+    "fixed_prompt_expected_best_count": 3,
+    "loss_prompt_expected_best_count": 0,
+    "forced_choice_full_match_source_count": 0,
+    "best_internal_sources": []
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_internal_signal_only",
+    "reason": "Some prompts internally prefer the expected term, but no checkpoint matches the pair.",
+    "next_action": "use prompt-level internal preference to design the next objective"
+  }
+}

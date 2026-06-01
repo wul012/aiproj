@@ -1,0 +1,7 @@
+source_label,prompt_term,best_candidate,expected_candidate,expected_best,expected_avg_nll,best_avg_nll
+v611-contrast-free,fixed,fixed,fixed,True,0.402942,0.402942
+v611-contrast-free,loss,fixed,loss,False,0.644412,0.36692
+v612-delimiter-span,fixed,fixed,fixed,True,0.274366,0.274366
+v612-delimiter-span,loss,fixed,loss,False,0.548126,0.281628
+v613-context-switch,fixed,fixed,fixed,True,0.321485,0.321485
+v613-context-switch,loss,fixed,loss,False,0.58526,0.357116
