@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v630.0.0` runs the joint-cycle seed and records the first loss-internal pair-full checkpoint in this route.
+Version `v631.0.0` runs forced-choice scoring for the v630 joint-cycle checkpoint and keeps the result scoped.
+
+## Latest v631 checkpoint
+
+- Ran forced-choice diagnostic for the v630 joint-cycle checkpoint.
+- Confirmed `decision=refresh_forced_choice_partial_internal_match`.
+- Confirmed `expected_best_prompt_count=1`.
+- Confirmed `forced_choice_full_match_source_count=0`.
+- Preserved the boundary: generation pair-full is not internal pair-full.
+- Archived v631 evidence in `e/631` and added the code explanation in `代码讲解记录_模型能力阶段/645-v631-required-term-pair-loss-internal-joint-cycle-forced-choice.md`.
 
 ## Latest v630 checkpoint
 

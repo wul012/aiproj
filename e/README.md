@@ -649,6 +649,10 @@ e/629/解释/说明.md
 e/630/图片
 e/630/解释/说明.md
  -> v630 required-term pair loss-internal joint-cycle seed 3535 的运行截图和解释
+
+e/631/图片
+e/631/解释/说明.md
+ -> v631 required-term pair loss-internal joint-cycle forced-choice 的运行截图和解释
 ```
 
 写入规则：
