@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v646.0.0` runs forced-choice scoring for the light-merge checkpoint and confirms internal mismatch.
+Version `v647.0.0` compares the light-merge route in the full generation/internal matrix.
+
+## Latest v647 checkpoint
+
+- Added `joint-cycle-light-merge` to the alignment matrix.
+- Confirmed `generation_pair_full_count=1`.
+- Confirmed `internal_pair_full_count=2`.
+- Confirmed `aligned_pair_full_count=0`.
+- Classified light-merge as `partial_tradeoff`.
+- Preserved the conclusion that no v639-v647 route is aligned pair-full.
+- Archived v647 evidence in `e/647` and added the code explanation in `代码讲解记录_模型能力阶段/661-v647-required-term-pair-alignment-comparison-with-light-merge.md`.
 
 ## Latest v646 checkpoint
 

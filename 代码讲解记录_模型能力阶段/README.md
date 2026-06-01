@@ -533,6 +533,9 @@
 660-v646-required-term-pair-joint-cycle-light-merge-forced-choice.md
  -> v646 code explanation: run forced-choice scoring for the light-merge checkpoint and confirm internal mismatch.
 
+661-v647-required-term-pair-alignment-comparison-with-light-merge.md
+ -> v647 code explanation: compare the light-merge route in the full generation/internal matrix.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

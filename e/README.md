@@ -713,6 +713,10 @@ e/645/解释/说明.md
 e/646/图片
 e/646/解释/说明.md
  -> v646 required-term pair joint-cycle light-merge forced-choice 的运行截图和解释
+
+e/647/图片
+e/647/解释/说明.md
+ -> v647 required-term pair alignment comparison with light-merge 的运行截图和解释
 ```
 
 写入规则：
