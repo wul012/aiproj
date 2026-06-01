@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface-first schedule corpus contract",
+  "generated_at": "2026-06-01T09:30:21Z",
+  "status": "pass",
+  "decision": "surface_first_schedule_corpus_contract_ready",
+  "corpus_mode": "equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair",
+  "repeat": 2,
+  "bridge_repeat": 1,
+  "failed_count": 0,
+  "checks": [
+    {
+      "id": "mode_registered",
+      "status": "pass",
+      "detail": "mode is accepted by the loss-internal objective corpus registry"
+    },
+    {
+      "id": "surface_generation_rows_present",
+      "status": "pass",
+      "detail": "surface stage has both generation targets"
+    },
+    {
+      "id": "internal_rank_rows_present",
+      "status": "pass",
+      "detail": "internal stage has both forced-choice rank targets"
+    },
+    {
+      "id": "resume_boundary_present",
+      "status": "pass",
+      "detail": "corpus states this is not checkpoint resume"
+    },
+    {
+      "id": "no_teacher_forced_loss_row",
+      "status": "pass",
+      "detail": "surface-first mode avoids the heavy teacher-forced loss row"
+    },
+    {
+      "id": "no_pair_id",
+      "status": "pass",
+      "detail": "mode remains pair-id free"
+    }
+  ],
+  "summary": {
+    "line_count": 45,
+    "surface_first_rows": 4,
+    "generation_fixed_rows": 4,
+    "generation_loss_rows": 4,
+    "internal_rank_rows": 8,
+    "boundary": "not_checkpoint_resume"
+  },
+  "sample_lines": [
+    "MiniGPT fixed/loss pair coexistence refresh corpus.",
+    "The prompt before the colon selects the exact continuation term.",
+    "surface stage fixed=fixed loss=loss",
+    "surface stage loss=loss fixed=fixed",
+    "generation fixed= fixed",
+    "generation fixed= fixed",
+    "generation loss= loss",
+    "generation loss= loss",
+    "fixed=f fixed=fi fixed=fix fixed=fixed",
+    "loss=l loss=lo loss=los loss=loss",
+    "prompt fixed= answer fixed",
+    "prompt loss= answer loss",
+    "fixed surface target remains fixed",
+    "loss surface target remains loss",
+    "schedule boundary no checkpoint resume",
+    "internal stage fixed candidate fixed rank 1",
+    "internal stage fixed candidate loss rank 2",
+    "internal stage loss candidate loss rank 1",
+    "internal stage loss candidate fixed rank 2",
+    "surface first keeps fixed before internal repair",
+    "surface first keeps loss before internal repair",
+    "surface stage fixed=fixed loss=loss",
+    "surface stage loss=loss fixed=fixed",
+    "generation fixed= fixed",
+    "generation fixed= fixed",
+    "generation loss= loss",
+    "generation loss= loss",
+    "fixed=f fixed=fi fixed=fix fixed=fixed",
+    "loss=l loss=lo loss=los loss=loss",
+    "prompt fixed= answer fixed",
+    "prompt loss= answer loss",
+    "fixed surface target remains fixed"
+  ]
+}

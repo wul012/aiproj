@@ -121,6 +121,22 @@ class LossInternalPreferenceObjectiveCorpusTests(unittest.TestCase):
         self.assertNotIn("teacher forced loss= loss", corpus)
         self.assertNotIn("pair=01", corpus)
 
+    def test_surface_first_schedule_approximates_two_stage_without_resume_claim(self) -> None:
+        corpus = build_pair_coexistence_refresh_corpus(
+            repeat=2,
+            bridge_repeat=1,
+            corpus_mode="equals_surface_no_pair_id_loss_internal_surface_first_schedule_repair",
+        )
+
+        self.assertIn("surface stage fixed=fixed loss=loss", corpus)
+        self.assertIn("generation fixed= fixed", corpus)
+        self.assertIn("generation loss= loss", corpus)
+        self.assertIn("schedule boundary no checkpoint resume", corpus)
+        self.assertIn("internal stage loss candidate loss rank 1", corpus)
+        self.assertIn("surface-first schedule approximates two-stage training in one corpus.", corpus)
+        self.assertNotIn("teacher forced loss= loss", corpus)
+        self.assertNotIn("pair=01", corpus)
+
 
 if __name__ == "__main__":
     unittest.main()

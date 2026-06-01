@@ -1,0 +1,5 @@
+status=pass
+decision=surface_first_schedule_corpus_contract_ready
+failed_count=0
+line_count=45
+boundary=not_checkpoint_resume

@@ -542,6 +542,9 @@
 663-v649-required-term-pair-two-stage-schedule-plan.md
  -> v649 code explanation: turn the two-stage surface/internal direction into an auditable schedule contract.
 
+664-v650-required-term-pair-surface-first-schedule-corpus.md
+ -> v650 code explanation: add a runnable surface-first schedule corpus mode without claiming checkpoint resume.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

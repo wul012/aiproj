@@ -6883,6 +6883,8 @@ The generation quality evidence-chain layer carries that status into the run reg
 
 The required-term pair two-stage schedule plan layer reads the split generation/full-choice evidence from v630-v641, verifies that surface generation pair-full and internal forced-choice pair-full exist in separate routes, and records the `not_checkpoint_resume` boundary before any runnable schedule approximation is attempted.
 
+The required-term pair surface-first schedule corpus layer turns that plan into a registered training corpus mode, placing generation-preserving surface rows before soft internal rank hints while keeping the no-resume boundary explicit.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

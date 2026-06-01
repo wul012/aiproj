@@ -725,6 +725,10 @@ e/648/解释/说明.md
 e/649/图片
 e/649/解释/说明.md
  -> v649 required-term pair two-stage schedule plan 的运行截图和解释
+
+e/650/图片
+e/650/解释/说明.md
+ -> v650 required-term pair surface-first schedule corpus contract 的运行截图和解释
 ```
 
 写入规则：
