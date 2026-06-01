@@ -7018,6 +7018,8 @@ The required-term pair dual-objective boundary path turns that failure into a st
 
 The required-term pair alignment comparison with dual-boundary folds that route back into the historical matrix and selects `dual-boundary-seed-3535` as the only current candidate with both generation pair-full and internal pair-full evidence.
 
+The required-term pair route decision with dual-boundary keeps the older generation/internal anchors as comparisons, but routes the next real work to repeating the aligned dual-boundary candidate across seeds before any promotion claim.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

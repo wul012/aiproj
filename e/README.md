@@ -856,3 +856,8 @@ e/663/解释/说明.md
 - `e/674/图片`
 - `e/674/解释/说明.md`
 - v674 required-term pair alignment comparison with dual-boundary 的运行截图和解释。
+## v675 补充索引
+
+- `e/675/图片`
+- `e/675/解释/说明.md`
+- v675 required-term pair route decision with dual-boundary 的运行截图和解释。

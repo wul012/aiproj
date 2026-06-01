@@ -1,0 +1,2 @@
+id,status,source,detail
+repeat_aligned_candidate,required,,An aligned pair-full route exists; repeat it across seeds before promotion.
