@@ -1,0 +1,3 @@
+term,generation_hit,forced_choice_expected_best,bridge_gap,best_candidate
+fixed,False,True,True,fixed
+loss,True,True,False,loss

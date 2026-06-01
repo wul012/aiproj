@@ -470,6 +470,9 @@
 639-v625-required-term-pair-loss-internal-preference-route-decision.md
  -> v625 code explanation: select v621 for decode bridge checks rather than promotion.
 
+640-v626-required-term-pair-loss-internal-decode-bridge-check.md
+ -> v626 code explanation: confirm the selected first-token route has a fixed generation bridge gap.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

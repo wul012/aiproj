@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-internal decode bridge check",
+  "generated_at": "2026-06-01T04:20:28Z",
+  "status": "pass",
+  "decision": "loss_internal_decode_bridge_gap_confirmed",
+  "failed_count": 0,
+  "issues": [],
+  "source_refresh_report": "e\\621\\解释\\model-capability-required-term-pair-loss-internal-first-token-seed-3535\\model_capability_required_term_pair_coexistence_refresh.json",
+  "source_forced_choice": "e\\624\\解释\\model-capability-required-term-pair-loss-internal-forced-choice-diagnostic\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+  "source_route_decision": "e\\625\\解释\\model-capability-required-term-pair-loss-internal-preference-route-decision\\model_capability_required_term_pair_loss_internal_preference_route_decision.json",
+  "selected_source": "loss-internal-first-token",
+  "bridge_rows": [
+    {
+      "term": "fixed",
+      "generation_hit": false,
+      "forced_choice_expected_best": true,
+      "bridge_gap": true,
+      "best_candidate": "fixed",
+      "expected_avg_nll": 0.699462,
+      "best_avg_nll": 0.699462,
+      "expected_first_token_rank": 2
+    },
+    {
+      "term": "loss",
+      "generation_hit": true,
+      "forced_choice_expected_best": true,
+      "bridge_gap": false,
+      "best_candidate": "loss",
+      "expected_avg_nll": 0.572295,
+      "best_avg_nll": 0.572295,
+      "expected_first_token_rank": 1
+    }
+  ],
+  "summary": {
+    "selected_source": "loss-internal-first-token",
+    "refresh_status": "pass",
+    "forced_choice_status": "pass",
+    "route_status": "pass",
+    "route_bridge_required": true,
+    "generation_hit_terms": [
+      "loss"
+    ],
+    "forced_choice_expected_best_terms": [
+      "fixed",
+      "loss"
+    ],
+    "bridge_gap_terms": [
+      "fixed"
+    ],
+    "bridge_gap_count": 1,
+    "internal_pair_match": true,
+    "generation_pair_full": false,
+    "decode_bridge_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "decode_bridge_gap_evidence",
+    "reason": "The selected checkpoint has internal pair match but generation misses at least one term.",
+    "next_action": "train a bridge objective that preserves internal loss while restoring the missed generation term"
+  }
+}

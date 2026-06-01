@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v625.0.0` selects the first-token route for decode bridge checks rather than promotion.
+Version `v626.0.0` confirms the first-token route has a fixed generation bridge gap.
+
+## Latest v626 checkpoint
+
+- Added `model_capability_required_term_pair_loss_internal_decode_bridge_check`.
+- Consumed v621, v624, and v625 evidence.
+- Confirmed `forced_choice_expected_best_terms=fixed,loss`.
+- Confirmed `generation_hit_terms=loss` and `bridge_gap_terms=fixed`.
+- Archived v626 evidence in `e/626` and added the code explanation in `代码讲解记录_模型能力阶段/640-v626-required-term-pair-loss-internal-decode-bridge-check.md`.
 
 ## Latest v625 checkpoint
 

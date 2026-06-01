@@ -1,0 +1,10 @@
+status=pass
+decision=loss_internal_decode_bridge_gap_confirmed
+failed_count=0
+selected_source=loss-internal-first-token
+generation_hit_terms=loss
+forced_choice_expected_best_terms=fixed,loss
+bridge_gap_terms=fixed
+decode_bridge_ready=True
+model_quality_claim=decode_bridge_gap_evidence
+next_action=train a bridge objective that preserves internal loss while restoring the missed generation term

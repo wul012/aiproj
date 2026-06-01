@@ -629,6 +629,10 @@ e/624/解释/说明.md
 e/625/图片
 e/625/解释/说明.md
  -> v625 required-term pair loss-internal-preference route decision 的运行截图和解释
+
+e/626/图片
+e/626/解释/说明.md
+ -> v626 required-term pair loss-internal decode bridge check 的运行截图和解释
 ```
 
 写入规则：

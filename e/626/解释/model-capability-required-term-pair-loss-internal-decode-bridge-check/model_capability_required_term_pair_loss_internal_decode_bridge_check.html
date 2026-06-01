@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT loss-internal decode bridge check</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#4f5d75}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}.card strong{display:block;margin-top:6px;font-size:18px;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT loss-internal decode bridge check</h1><p>The selected checkpoint has internal pair match but generation misses at least one term.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>loss_internal_decode_bridge_gap_confirmed</strong></div><div class="card"><span>Selected</span><strong>loss-internal-first-token</strong></div><div class="card"><span>Gap terms</span><strong>[&#x27;fixed&#x27;]</strong></div><div class="card"><span>Ready</span><strong>True</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>train a bridge objective that preserves internal loss while restoring the missed generation term</p></section>
+<section class="panel"><h2>Bridge Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Term</th><th>Generation Hit</th><th>Internal Best</th><th>Bridge Gap</th><th>Best Candidate</th></tr></thead>
+<tbody><tr><td>fixed</td><td>False</td><td>True</td><td>True</td><td>fixed</td></tr>
+<tr><td>loss</td><td>True</td><td>True</td><td>False</td><td>loss</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
