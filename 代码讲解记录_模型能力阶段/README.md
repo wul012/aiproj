@@ -587,6 +587,9 @@
 678-v664-required-term-pair-alignment-comparison-with-resume-routes.md
  -> v664 code explanation: fold both resume routes into the generation/internal alignment matrix and keep failed internal matches as valid negative evidence.
 
+679-v665-required-term-pair-route-decision-with-resume-routes.md
+ -> v665 code explanation: re-run route decision after adding real resume routes and keep the split-anchor strategy.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

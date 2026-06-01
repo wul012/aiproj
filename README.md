@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v664.0.0` compares the real resume routes against the existing generation/internal anchors.
+Version `v665.0.0` re-runs route decision after adding real resume routes to the alignment matrix.
+
+## Latest v665 checkpoint
+
+- Consumed the v664 alignment comparison with five route sources.
+- Confirmed `status=pass`.
+- Confirmed `decision=repair_internal_preference_preserve_generation_pair_full`.
+- Confirmed `selected_generation_route=loss-internal-joint-cycle`.
+- Confirmed `internal_anchor_route=joint-cycle-internal-repair`.
+- Confirmed `direct_promotion_ready=False`.
+- Preserved the conclusion that naive checkpoint continuation does not change the selected route.
+- Archived v665 evidence in `e/665` and added the code explanation in `代码讲解记录_模型能力阶段/679-v665-required-term-pair-route-decision-with-resume-routes.md`.
 
 ## Latest v664 checkpoint
 
