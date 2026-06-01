@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair loss-internal-preference route decision",
+  "generated_at": "2026-06-01T04:14:42Z",
+  "status": "pass",
+  "decision": "select_loss_internal_first_token_for_decode_bridge_not_promotion",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "e\\623\\解释\\model-capability-required-term-pair-loss-internal-preference-objective-comparison\\model_capability_required_term_pair_loss_internal_preference_objective_comparison.json",
+  "source_forced_choice": "e\\624\\解释\\model-capability-required-term-pair-loss-internal-forced-choice-diagnostic\\model_capability_required_term_pair_refresh_forced_choice_diagnostic.json",
+  "route_rows": [
+    {
+      "source_label": "loss-internal-preference",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_preference_repair",
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "forced_choice_pair_full": false,
+      "decode_bridge_candidate": false,
+      "promotion_candidate": false,
+      "rejection_reasons": [
+        "generation_not_pair_full",
+        "forced_choice_not_pair_full",
+        "fixed_only_generation"
+      ]
+    },
+    {
+      "source_label": "loss-internal-first-token",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "generation_pair_full": false,
+      "forced_choice_pair_full": true,
+      "decode_bridge_candidate": true,
+      "promotion_candidate": false,
+      "rejection_reasons": [
+        "generation_not_pair_full",
+        "loss_only_generation"
+      ]
+    },
+    {
+      "source_label": "loss-internal-ranked-choice",
+      "corpus_mode": "equals_surface_no_pair_id_loss_internal_ranked_choice_repair",
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "generation_pair_full": false,
+      "forced_choice_pair_full": false,
+      "decode_bridge_candidate": false,
+      "promotion_candidate": false,
+      "rejection_reasons": [
+        "generation_not_pair_full",
+        "forced_choice_not_pair_full",
+        "fixed_only_generation"
+      ]
+    }
+  ],
+  "summary": {
+    "comparison_decision": "loss_internal_preference_objectives_confirm_branch_tradeoff",
+    "forced_choice_decision": "refresh_forced_choice_internal_pair_match",
+    "route_count": 3,
+    "generation_pair_full_route_count": 0,
+    "forced_choice_full_match_source_count": 1,
+    "mixed_generation_tradeoff": true,
+    "decode_bridge_candidate_count": 1,
+    "promotion_candidate_count": 0,
+    "selected_decode_bridge_source": "loss-internal-first-token",
+    "selected_decode_bridge_corpus_mode": "equals_surface_no_pair_id_loss_internal_first_token_repair",
+    "internal_to_generation_bridge_required": true,
+    "new_training_required": false
+  },
+  "interpretation": {
+    "model_quality_claim": "internal_pair_match_not_generation_pair_full",
+    "reason": "The selected route has internal pair match but no generation pair-full.",
+    "next_action": "build a decode bridge check around the selected first-token checkpoint"
+  }
+}

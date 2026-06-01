@@ -1,0 +1,9 @@
+status=pass
+decision=select_loss_internal_first_token_for_decode_bridge_not_promotion
+failed_count=0
+forced_choice_full_match_source_count=1
+decode_bridge_candidate_count=1
+selected_decode_bridge_source=loss-internal-first-token
+internal_to_generation_bridge_required=True
+model_quality_claim=internal_pair_match_not_generation_pair_full
+next_action=build a decode bridge check around the selected first-token checkpoint

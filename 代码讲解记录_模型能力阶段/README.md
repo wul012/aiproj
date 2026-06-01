@@ -467,6 +467,9 @@
 638-v624-required-term-pair-loss-internal-forced-choice-diagnostic.md
  -> v624 code explanation: run forced-choice scoring and identify v621 as an internal pair-match source.
 
+639-v625-required-term-pair-loss-internal-preference-route-decision.md
+ -> v625 code explanation: select v621 for decode bridge checks rather than promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

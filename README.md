@@ -4,7 +4,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v624.0.0` runs forced-choice diagnostics and finds an internal pair match in the first-token route.
+Version `v625.0.0` selects the first-token route for decode bridge checks rather than promotion.
+
+## Latest v625 checkpoint
+
+- Added `model_capability_required_term_pair_loss_internal_preference_route_decision`.
+- Consumed v623 comparison and v624 forced-choice evidence.
+- Selected `loss-internal-first-token` as the decode bridge source.
+- Preserved the boundary that internal pair match is not generation pair-full.
+- Archived v625 evidence in `e/625` and added the code explanation in `代码讲解记录_模型能力阶段/639-v625-required-term-pair-loss-internal-preference-route-decision.md`.
 
 ## Latest v624 checkpoint
 

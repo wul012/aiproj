@@ -625,6 +625,10 @@ e/623/解释/说明.md
 e/624/图片
 e/624/解释/说明.md
  -> v624 required-term pair loss-internal forced-choice diagnostic 的运行截图和解释
+
+e/625/图片
+e/625/解释/说明.md
+ -> v625 required-term pair loss-internal-preference route decision 的运行截图和解释
 ```
 
 写入规则：
