@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v671.0.0` registers the explicit dual-objective boundary corpus mode.
+Version `v672.0.0` runs the first real explicit dual-boundary seed and observes pair-full generation.
+
+## Latest v672 checkpoint
+
+- Trained seed `3535` with `equals_surface_no_pair_id_loss_internal_explicit_dual_boundary_repair`.
+- Confirmed `training_status=pass`.
+- Confirmed `checkpoint_exists=True`.
+- Confirmed `decision=required_term_pair_coexistence_refresh_pair_full_observed`.
+- Confirmed `default_pair_full_variant_count=1`.
+- Confirmed `suppression_pair_full_variant_count=1`.
+- Kept the claim scoped to single-seed targeted pair refresh signal.
+- Archived v672 evidence in `e/672` and added the code explanation in `代码讲解记录_模型能力阶段/686-v672-required-term-pair-dual-boundary-seed-3535.md`.
 
 ## Latest v671 checkpoint
 

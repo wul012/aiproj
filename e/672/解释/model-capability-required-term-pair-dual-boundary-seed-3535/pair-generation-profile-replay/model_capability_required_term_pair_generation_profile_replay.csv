@@ -1,0 +1,5 @@
+variant_id,profile_id,term,prompt,generation_seed,continuation_hit,newline_cleanup_hit,blocked_token_count,continuation_preview
+coexistence-refresh,default,fixed,fixed=,3535,True,True,0,fixed\ngenera
+coexistence-refresh,suppress_newline_tokens,fixed,fixed=,3535,True,True,1,fixed loss=l
+coexistence-refresh,default,loss,loss=,3536,True,True,0,loss\nloss re
+coexistence-refresh,suppress_newline_tokens,loss,loss=,3536,True,True,1,loss loss=lo

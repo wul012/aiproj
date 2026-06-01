@@ -839,3 +839,9 @@ e/663/解释/说明.md
 - `e/671/图片`
 - `e/671/解释/说明.md`
 - v671 required-term pair dual-boundary corpus contract 的运行截图和解释。
+
+## v672 补充索引
+
+- `e/672/图片`
+- `e/672/解释/说明.md`
+- v672 required-term pair dual-boundary seed 3535 的运行截图和解释。
