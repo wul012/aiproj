@@ -839,6 +839,9 @@
 762-v748-fixed-preserving-transfer-corpus-materialization.md
  -> v748 code explanation: materialize the fixed-preserving transfer contract patch into a 6400-line corpus and heldout fixture.
 
+763-v749-fixed-preserving-transfer-training-run.md
+ -> v749 code explanation: train the fixed-preserving corpus under the larger-tiny settings and record the direct pair-probe hit before independent replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
