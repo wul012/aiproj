@@ -1276,3 +1276,8 @@ e/663/解释/说明.md
 - `e/758/图片`
 - `e/758/解释/说明.md`
 - v758 exact-surface repair route closeout 的运行截图和解释。
+## v759 补充索引
+
+- `e/759/图片`
+- `e/759/解释/说明.md`
+- v759 objective-or-decoding alternative selector 的运行截图和解释。

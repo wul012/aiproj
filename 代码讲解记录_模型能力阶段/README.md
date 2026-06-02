@@ -869,6 +869,9 @@
 772-v758-exact-surface-repair-route-closeout.md
  -> v758 code explanation: convert the ineffective exact-surface repair comparison into a closed-route boundary and next-route candidates.
 
+773-v759-objective-or-decoding-alternative-selector.md
+ -> v759 code explanation: score objective, decoding, and fresh-seed alternatives after v758 closeout and select objective-level contrast.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

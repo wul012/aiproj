@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-or-decoding alternative selector</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#7c3aed}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-or-decoding alternative selector</h1><p>Near-exact surface rows are closed; the next route should change the objective before more training data is added.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_or_decoding_alternative_selected</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Selected</span><strong>objective_level_contrast</strong></div><div class="card"><span>Score</span><strong>92</strong></div><div class="card"><span>Next</span><strong>pair_readiness_objective_level_contrast_plan</strong></div></section>
+<section class="panel"><h2>Route Scores</h2><div class="table-wrap"><table>
+<thead><tr><th>Route</th><th>Score</th><th>Selected</th><th>Next artifact</th><th>Selection reason</th><th>Risk control</th></tr></thead>
+<tbody><tr><td>objective_level_contrast</td><td>92</td><td>True</td><td>pair_readiness_objective_level_contrast_plan</td><td>changes the learning objective instead of adding more near-exact surface rows</td><td>keep heldout exact pair prompts out of training rows</td></tr><tr><td>decode_side_constraint_probe</td><td>78</td><td>False</td><td>pair_readiness_decode_side_constraint_probe</td><td>can diagnose first-token or separator sensitivity before another training run</td><td>report as diagnostic only; do not treat constrained hits as promotion</td></tr><tr><td>fresh_seed_stability</td><td>64</td><td>False</td><td>pair_readiness_fresh_seed_stability_replay</td><td>checks whether partial pair-readiness is seed-specific</td><td>run after a selected objective/decoding route has a concrete hypothesis</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Non Goals</h2><ul><li>do not add more near-exact surface rows</li><li>do not promote constrained decoding as model-quality proof</li><li>do not start fresh-seed training without a sharper route hypothesis</li></ul></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>closeout_passed</td><td>pass</td><td>pass</td><td>source closeout must pass</td></tr><tr><td>closeout_decision</td><td>pass</td><td>pair_readiness_exact_surface_repair_route_closed</td><td>selector follows only the exact-surface repair route closeout</td></tr><tr><td>closeout_ready</td><td>pass</td><td>True</td><td>closeout must be ready</td></tr><tr><td>closed_near_exact_route</td><td>pass</td><td>near_exact_surface_bridge_rows</td><td>near-exact bridge rows must be the closed route</td></tr><tr><td>recommended_alternative_plan</td><td>pass</td><td>objective_or_decoding_alternative_plan</td><td>selector should only run after the objective-or-decoding recommendation</td></tr><tr><td>candidate_count</td><td>pass</td><td>3</td><td>closeout should provide objective, decoding, and fresh-seed candidates</td></tr><tr><td>objective_candidate_present</td><td>pass</td><td>[&#x27;decode_side_constraint_probe&#x27;, &#x27;fresh_seed_stability&#x27;, &#x27;objective_level_contrast&#x27;]</td><td>objective route must be available</td></tr><tr><td>decoding_candidate_present</td><td>pass</td><td>[&#x27;decode_side_constraint_probe&#x27;, &#x27;fresh_seed_stability&#x27;, &#x27;objective_level_contrast&#x27;]</td><td>decoding route must be available</td></tr><tr><td>fresh_seed_candidate_present</td><td>pass</td><td>[&#x27;decode_side_constraint_probe&#x27;, &#x27;fresh_seed_stability&#x27;, &#x27;objective_level_contrast&#x27;]</td><td>fresh-seed route must be available</td></tr><tr><td>no_repair_improvement</td><td>pass</td><td>[]</td><td>closed route should have no improved replay surfaces</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>build pair_readiness_objective_level_contrast_plan</p></section>
+</main>
+</body>
+</html>

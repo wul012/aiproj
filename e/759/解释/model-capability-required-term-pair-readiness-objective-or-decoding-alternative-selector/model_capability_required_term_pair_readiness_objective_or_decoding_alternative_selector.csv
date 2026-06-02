@@ -1,0 +1,4 @@
+route,score,selected,next_artifact,selection_reason,risk_control
+objective_level_contrast,92,True,pair_readiness_objective_level_contrast_plan,changes the learning objective instead of adding more near-exact surface rows,keep heldout exact pair prompts out of training rows
+decode_side_constraint_probe,78,False,pair_readiness_decode_side_constraint_probe,can diagnose first-token or separator sensitivity before another training run,report as diagnostic only; do not treat constrained hits as promotion
+fresh_seed_stability,64,False,pair_readiness_fresh_seed_stability_replay,checks whether partial pair-readiness is seed-specific,run after a selected objective/decoding route has a concrete hypothesis

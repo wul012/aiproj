@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v758.0.0` closes the ineffective near-exact repair route and points the next model-capability work toward objective or decoding alternatives.
+Version `v759.0.0` selects objective-level contrast as the next model-capability route after closing the ineffective near-exact repair path.
+
+## Latest v759 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_or_decoding_alternative_selector`.
+- Consumed v758 exact-surface repair route closeout.
+- Confirmed `decision=pair_readiness_objective_or_decoding_alternative_selected`.
+- Selected `objective_level_contrast` with score `92`.
+- Proposed `pair_readiness_objective_level_contrast_plan` as the next artifact.
+- Archived v759 evidence in `e/759` and added the code explanation in `代码讲解记录_模型能力阶段/773-v759-objective-or-decoding-alternative-selector.md`.
 
 ## Latest v758 checkpoint
 

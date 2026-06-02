@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-or-decoding alternative selector",
+  "generated_at": "2026-06-02T10:35:57Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_or_decoding_alternative_selected",
+  "failed_count": 0,
+  "issues": [],
+  "source_closeout_path": "e\\758\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-route-closeout\\model_capability_required_term_pair_readiness_exact_surface_repair_route_closeout.json",
+  "source_closeout": {
+    "status": "pass",
+    "decision": "pair_readiness_exact_surface_repair_route_closed",
+    "summary": {
+      "closeout_ready": true,
+      "closed_route": "near_exact_surface_bridge_rows",
+      "recommended_next_route": "objective_or_decoding_alternative_plan",
+      "candidate_route_count": 3,
+      "failed_check_count": 0
+    },
+    "closeout": {
+      "closed_route": "near_exact_surface_bridge_rows",
+      "recommended_next_route": "objective_or_decoding_alternative_plan",
+      "closed_reason": "independent replay deltas stayed at zero for exact, spaced, and arrow surfaces"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "closeout_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source closeout must pass"
+    },
+    {
+      "id": "closeout_decision",
+      "status": "pass",
+      "actual": "pair_readiness_exact_surface_repair_route_closed",
+      "detail": "selector follows only the exact-surface repair route closeout"
+    },
+    {
+      "id": "closeout_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "closeout must be ready"
+    },
+    {
+      "id": "closed_near_exact_route",
+      "status": "pass",
+      "actual": "near_exact_surface_bridge_rows",
+      "detail": "near-exact bridge rows must be the closed route"
+    },
+    {
+      "id": "recommended_alternative_plan",
+      "status": "pass",
+      "actual": "objective_or_decoding_alternative_plan",
+      "detail": "selector should only run after the objective-or-decoding recommendation"
+    },
+    {
+      "id": "candidate_count",
+      "status": "pass",
+      "actual": 3,
+      "detail": "closeout should provide objective, decoding, and fresh-seed candidates"
+    },
+    {
+      "id": "objective_candidate_present",
+      "status": "pass",
+      "actual": [
+        "decode_side_constraint_probe",
+        "fresh_seed_stability",
+        "objective_level_contrast"
+      ],
+      "detail": "objective route must be available"
+    },
+    {
+      "id": "decoding_candidate_present",
+      "status": "pass",
+      "actual": [
+        "decode_side_constraint_probe",
+        "fresh_seed_stability",
+        "objective_level_contrast"
+      ],
+      "detail": "decoding route must be available"
+    },
+    {
+      "id": "fresh_seed_candidate_present",
+      "status": "pass",
+      "actual": [
+        "decode_side_constraint_probe",
+        "fresh_seed_stability",
+        "objective_level_contrast"
+      ],
+      "detail": "fresh-seed route must be available"
+    },
+    {
+      "id": "no_repair_improvement",
+      "status": "pass",
+      "actual": [],
+      "detail": "closed route should have no improved replay surfaces"
+    }
+  ],
+  "route_rows": [
+    {
+      "route": "objective_level_contrast",
+      "score": 92,
+      "selected": true,
+      "next_artifact": "pair_readiness_objective_level_contrast_plan",
+      "selection_reason": "changes the learning objective instead of adding more near-exact surface rows",
+      "risk_control": "keep heldout exact pair prompts out of training rows",
+      "source_why": "the current corpus teaches surface patterns but not a stable required exact response",
+      "source_risk": "may still overfit tiny prompt forms"
+    },
+    {
+      "route": "decode_side_constraint_probe",
+      "score": 78,
+      "selected": false,
+      "next_artifact": "pair_readiness_decode_side_constraint_probe",
+      "selection_reason": "can diagnose first-token or separator sensitivity before another training run",
+      "risk_control": "report as diagnostic only; do not treat constrained hits as promotion",
+      "source_why": "arrow surface can produce both terms, so decoding may expose whether exact prompt is first-token or separator sensitive",
+      "source_risk": "decode constraints can mask model weakness"
+    },
+    {
+      "route": "fresh_seed_stability",
+      "score": 64,
+      "selected": false,
+      "next_artifact": "pair_readiness_fresh_seed_stability_replay",
+      "selection_reason": "checks whether partial pair-readiness is seed-specific",
+      "risk_control": "run after a selected objective/decoding route has a concrete hypothesis",
+      "source_why": "confirm whether the partial pattern is seed-specific before investing in another corpus patch",
+      "source_risk": "costs more training time"
+    }
+  ],
+  "selector": {
+    "ready": true,
+    "selected_route": "objective_level_contrast",
+    "selected_score": 92,
+    "proposed_next_artifact": "pair_readiness_objective_level_contrast_plan",
+    "route_order": [
+      "objective_level_contrast",
+      "decode_side_constraint_probe",
+      "fresh_seed_stability"
+    ],
+    "non_goals": [
+      "do not add more near-exact surface rows",
+      "do not promote constrained decoding as model-quality proof",
+      "do not start fresh-seed training without a sharper route hypothesis"
+    ]
+  },
+  "summary": {
+    "selector_ready": true,
+    "selected_route": "objective_level_contrast",
+    "selected_score": 92,
+    "proposed_next_artifact": "pair_readiness_objective_level_contrast_plan",
+    "route_count": 3,
+    "passed_check_count": 10,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "selection_only",
+    "reason": "Near-exact surface rows are closed; the next route should change the objective before more training data is added.",
+    "next_action": "build pair_readiness_objective_level_contrast_plan"
+  }
+}
