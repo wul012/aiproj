@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_objective_level_contrast_contract_ready
+failed_count=0
+contract_ready=True
+training_row_count=26
+row_family_count=4
+evaluation_probe_count=3
+model_quality_claim=contract_only
+next_action=materialize the objective-level contrast contract and train a fresh tiny checkpoint

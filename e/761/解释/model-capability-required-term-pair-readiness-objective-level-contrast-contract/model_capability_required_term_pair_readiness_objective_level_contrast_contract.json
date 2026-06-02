@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast contract",
+  "generated_at": "2026-06-02T10:50:16Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_plan_path": "e\\760\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-plan\\model_capability_required_term_pair_readiness_objective_level_contrast_plan.json",
+  "source_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_level_contrast_plan_ready",
+    "summary": {
+      "plan_ready": true,
+      "selected_route": "objective_level_contrast",
+      "proposed_next_artifact": "pair_readiness_objective_level_contrast_contract",
+      "contract_design_row_count": 4,
+      "planned_training_row_count": 26,
+      "heldout_boundary_count": 3,
+      "acceptance_check_count": 4,
+      "failed_check_count": 0
+    }
+  },
+  "contract": {
+    "contract_version": 11,
+    "training_rows": [
+      "objective pair_terms answer_target fixed loss response fixed loss",
+      "task pair_terms required_terms fixed loss output fixed loss",
+      "goal emit both required terms first fixed second loss answer fixed loss",
+      "instruction provide required terms fixed and loss reply fixed loss",
+      "objective required_pair fixed before loss answer fixed loss",
+      "task paired_required_terms result tokens fixed loss",
+      "branch fixed_role asks fixed target answer fixed",
+      "branch fixed_signal keeps fixed answer fixed",
+      "branch fixed_objective excludes loss answer fixed",
+      "branch fixed_named_output returns fixed",
+      "branch loss_role asks loss target answer loss",
+      "branch loss_signal keeps loss answer loss",
+      "branch loss_objective excludes fixed answer loss",
+      "branch loss_named_output returns loss",
+      "paired objective both branches fixed term and loss term answer fixed loss",
+      "paired contrast fixed branch plus loss branch answer fixed loss",
+      "required pair tokens are fixed then loss response fixed loss",
+      "two term objective fixed term followed by loss term answer fixed loss",
+      "pair task first branch fixed second branch loss output fixed loss",
+      "joint required terms fixed loss answer exactly fixed loss",
+      "contrast pair keeps fixed with loss response fixed loss",
+      "objective pair answer includes fixed and loss response fixed loss",
+      "separator neutral pair answer fixed then loss",
+      "separator neutral required terms fixed plus loss",
+      "separator neutral combined answer fixed and loss",
+      "separator neutral compact answer fixed loss"
+    ],
+    "row_families": [
+      {
+        "family": "objective_header",
+        "role": "objective_first_pair_answer",
+        "target_term": "fixed+loss",
+        "rows": [
+          "objective pair_terms answer_target fixed loss response fixed loss",
+          "task pair_terms required_terms fixed loss output fixed loss",
+          "goal emit both required terms first fixed second loss answer fixed loss",
+          "instruction provide required terms fixed and loss reply fixed loss",
+          "objective required_pair fixed before loss answer fixed loss",
+          "task paired_required_terms result tokens fixed loss"
+        ]
+      },
+      {
+        "family": "branch_role_contrast",
+        "role": "balanced_branch_identity",
+        "target_term": "fixed/loss",
+        "rows": [
+          "branch fixed_role asks fixed target answer fixed",
+          "branch fixed_signal keeps fixed answer fixed",
+          "branch fixed_objective excludes loss answer fixed",
+          "branch fixed_named_output returns fixed",
+          "branch loss_role asks loss target answer loss",
+          "branch loss_signal keeps loss answer loss",
+          "branch loss_objective excludes fixed answer loss",
+          "branch loss_named_output returns loss"
+        ]
+      },
+      {
+        "family": "pair_answer_contrast",
+        "role": "paired_objective_variants",
+        "target_term": "fixed+loss",
+        "rows": [
+          "paired objective both branches fixed term and loss term answer fixed loss",
+          "paired contrast fixed branch plus loss branch answer fixed loss",
+          "required pair tokens are fixed then loss response fixed loss",
+          "two term objective fixed term followed by loss term answer fixed loss",
+          "pair task first branch fixed second branch loss output fixed loss",
+          "joint required terms fixed loss answer exactly fixed loss",
+          "contrast pair keeps fixed with loss response fixed loss",
+          "objective pair answer includes fixed and loss response fixed loss"
+        ]
+      },
+      {
+        "family": "separator_neutral_answer",
+        "role": "answer_separator_variants",
+        "target_term": "fixed+loss",
+        "rows": [
+          "separator neutral pair answer fixed then loss",
+          "separator neutral required terms fixed plus loss",
+          "separator neutral combined answer fixed and loss",
+          "separator neutral compact answer fixed loss"
+        ]
+      }
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "exact-heldout-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "direct fixed/loss hits must transfer to the heldout pair replay before promotion",
+    "leakage_policy": "train objective descriptions and answer terms, never the exact heldout prompt surfaces",
+    "template_family": "objective_level_contrast",
+    "source_selected_route": "objective_level_contrast",
+    "source_objective": {
+      "id": "paired_required_terms_exact_response",
+      "intent": "teach the tiny model to answer the required-term task, not to copy near-exact prompt surfaces",
+      "answer_terms": [
+        "fixed",
+        "loss"
+      ],
+      "required_pair_order": [
+        "fixed",
+        "loss"
+      ]
+    }
+  },
+  "check_rows": [
+    {
+      "id": "plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective-level contrast plan must pass"
+    },
+    {
+      "id": "plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_plan_ready",
+      "detail": "contract follows only a ready objective-level contrast plan"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_contract",
+      "detail": "plan must request this contract artifact"
+    },
+    {
+      "id": "training_row_count_matches_plan",
+      "status": "pass",
+      "actual": "actual=26, planned=26",
+      "detail": "contract rows must match planned row count"
+    },
+    {
+      "id": "row_families_present",
+      "status": "pass",
+      "actual": 4,
+      "detail": "all four planned row families must be present"
+    },
+    {
+      "id": "branch_role_balance",
+      "status": "pass",
+      "actual": "fixed=3, loss=3",
+      "detail": "fixed and loss branch answer rows must be balanced"
+    },
+    {
+      "id": "evaluation_probes_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "fixed, loss, and exact pair probes must be preserved"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must stay out of training rows"
+    },
+    {
+      "id": "no_near_exact_pipe_prompt",
+      "status": "pass",
+      "actual": "pipe_or_equals_absent",
+      "detail": "objective-level rows must avoid near-exact pipe/equals prompt surfaces"
+    }
+  ],
+  "summary": {
+    "contract_ready": true,
+    "training_row_count": 26,
+    "row_family_count": 4,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0,
+    "heldout_pair_probe": "fixed=|loss=",
+    "template_family": "objective_level_contrast",
+    "objective_header_row_count": 6,
+    "branch_role_row_count": 8,
+    "pair_answer_row_count": 8,
+    "separator_neutral_row_count": 4
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_only",
+    "reason": "The contract teaches objective-level paired answers while avoiding heldout prompt surfaces.",
+    "next_action": "materialize the objective-level contrast contract and train a fresh tiny checkpoint"
+  }
+}

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v760.0.0` turns the selected objective-level contrast route into a contract design plan with explicit heldout boundaries.
+Version `v761.0.0` materializes the objective-level contrast plan into a checked 26-row contract and registers it for corpus materialization.
+
+## Latest v761 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_contract`.
+- Consumed v760 objective-level contrast plan.
+- Confirmed `decision=pair_readiness_objective_level_contrast_contract_ready`.
+- Generated 26 training rows across 4 row families.
+- Registered the new contract decision and JSON filename with pair-readiness corpus materialization.
+- Archived v761 evidence in `e/761` and added the code explanation in `代码讲解记录_模型能力阶段/775-v761-objective-level-contrast-contract.md`.
 
 ## Latest v760 checkpoint
 

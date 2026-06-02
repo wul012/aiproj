@@ -1286,3 +1286,8 @@ e/663/解释/说明.md
 - `e/760/图片`
 - `e/760/解释/说明.md`
 - v760 objective-level contrast plan 的运行截图和解释。
+## v761 补充索引
+
+- `e/761/图片`
+- `e/761/解释/说明.md`
+- v761 objective-level contrast contract 的运行截图和解释。

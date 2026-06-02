@@ -1,0 +1,5 @@
+family,role,target_term,row_count
+objective_header,objective_first_pair_answer,fixed+loss,6
+branch_role_contrast,balanced_branch_identity,fixed/loss,8
+pair_answer_contrast,paired_objective_variants,fixed+loss,8
+separator_neutral_answer,answer_separator_variants,fixed+loss,4
