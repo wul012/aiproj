@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v779.0.0` extracts maturity narrative release-context normalization from the portfolio summary workflow.
+Version `v780.0.0` extracts release readiness dashboard panel builders from the dashboard workflow.
+
+## Latest v780 checkpoint
+
+- Added `release_readiness_panels`.
+- Reduced `release_readiness.py` from 701 to 391 lines.
+- Moved registry, bundle, audit, gate, request history, benchmark history, maturity, CI workflow, and coverage panel construction into a focused panel module.
+- Kept path resolution, JSON loading, dashboard assembly, summary, actions, evidence, and output exports in the main release readiness module.
+- Verified with `14 passed` release readiness focused tests.
+- Archived v780 evidence in `e/780` and added the code explanation in `代码讲解记录_模型能力阶段/794-v780-release-readiness-panel-split.md`.
 
 ## Latest v779 checkpoint
 

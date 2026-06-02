@@ -1394,3 +1394,9 @@ e/663/解释/说明.md
 - `e/779/图片`
 - `e/779/解释/说明.md`
 - v779 maturity narrative release summary split 的运行截图和解释。
+
+## v780 补充索引
+
+- `e/780/图片`
+- `e/780/解释/说明.md`
+- v780 release readiness panel split 的运行截图和解释。
