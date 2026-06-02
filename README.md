@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v775.0.0` extracts promoted training-scale comparison recommendations from the comparison builder.
+Version `v776.0.0` extracts promoted seed handoff receipt text renderers from the receipt workflow.
+
+## Latest v776 checkpoint
+
+- Added `promoted_training_scale_seed_handoff_receipt_outputs`.
+- Reduced `promoted_training_scale_seed_handoff_receipt.py` from 774 to 505 lines.
+- Kept receipt loaders, check builders, sidecar verification, and write orchestration in the main receipt module.
+- Moved the two long text renderers into the outputs module.
+- Verified with `50 passed` receipt focused tests.
+- Archived v776 evidence in `e/776` and added the code explanation in `代码讲解记录_模型能力阶段/790-v776-receipt-outputs-split.md`.
 
 ## Latest v775 checkpoint
 

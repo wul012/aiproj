@@ -920,6 +920,9 @@
 789-v775-promoted-comparison-recommendations-split.md
  -> v775 code explanation: extract promoted training-scale comparison recommendation text from the comparison builder.
 
+790-v776-receipt-outputs-split.md
+ -> v776 code explanation: extract promoted seed handoff receipt text renderers from the receipt workflow module.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

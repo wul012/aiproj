@@ -1370,3 +1370,9 @@ e/663/解释/说明.md
 - `e/775/图片`
 - `e/775/解释/说明.md`
 - v775 promoted comparison recommendations split 的运行截图和解释。
+
+## v776 补充索引
+
+- `e/776/图片`
+- `e/776/解释/说明.md`
+- v776 receipt outputs split 的运行截图和解释。
