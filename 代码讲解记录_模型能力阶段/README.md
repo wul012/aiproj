@@ -719,6 +719,9 @@
 722-v708-pair-readiness-heldout-failure-diagnostic.md
  -> v708 code explanation: diagnose the v707 held-out direct failure as loss prompt absorption by the fixed branch.
 
+723-v709-pair-readiness-loss-retention-repair-plan.md
+ -> v709 code explanation: convert the held-out failure diagnosis into a loss-retention repair plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

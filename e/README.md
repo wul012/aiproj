@@ -1026,3 +1026,8 @@ e/663/解释/说明.md
 - `e/708/图片`
 - `e/708/解释/说明.md`
 - v708 pair-readiness heldout failure diagnostic 的运行截图和解释。
+## v709 补充索引
+
+- `e/709/图片`
+- `e/709/解释/说明.md`
+- v709 pair-readiness loss-retention repair plan 的运行截图和解释。

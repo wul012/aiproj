@@ -1,0 +1,5 @@
+id,status,actual,detail
+diagnostic_passed,pass,pass,source diagnostic must pass
+diagnostic_decision,pass,pair_readiness_loss_prompt_absorbed_by_fixed,loss-retention repair follows only loss-prompt fixed-pollution
+loss_missing,pass,0,loss direct probe should be missing before this repair
+fixed_dominance_observed,pass,1,loss prompt must show fixed pollution

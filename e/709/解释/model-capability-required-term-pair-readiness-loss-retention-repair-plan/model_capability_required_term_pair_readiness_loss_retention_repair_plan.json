@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness loss-retention repair plan",
+  "generated_at": "2026-06-02T02:08:54Z",
+  "status": "pass",
+  "decision": "pair_readiness_loss_retention_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_diagnostic_path": "e\\708\\解释\\model-capability-required-term-pair-readiness-heldout-failure-diagnostic\\model_capability_required_term_pair_readiness_heldout_failure_diagnostic.json",
+  "source_diagnostic": {
+    "status": "pass",
+    "decision": "pair_readiness_loss_prompt_absorbed_by_fixed",
+    "summary": {
+      "training_status": "pass",
+      "pair_full_observed": false,
+      "default_row_count": 2,
+      "fixed_hit_count": 1,
+      "loss_hit_count": 0,
+      "loss_prompt_fixed_pollution_count": 1,
+      "fixed_prompt_loss_pollution_count": 0,
+      "miss_count": 0,
+      "dominant_failure": "loss_prompt_absorbed_by_fixed"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_decision",
+      "status": "pass",
+      "actual": "pair_readiness_loss_prompt_absorbed_by_fixed",
+      "detail": "loss-retention repair follows only loss-prompt fixed-pollution"
+    },
+    {
+      "id": "loss_missing",
+      "status": "pass",
+      "actual": 0,
+      "detail": "loss direct probe should be missing before this repair"
+    },
+    {
+      "id": "fixed_dominance_observed",
+      "status": "pass",
+      "actual": 1,
+      "detail": "loss prompt must show fixed pollution"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_next_artifact": "pair_readiness_loss_retention_contract_patch",
+    "repair_focus": "restore loss direct retention without sacrificing fixed direct retention",
+    "contract_patch": [
+      "duplicate loss prefix progression rows",
+      "add loss anti-fixed contamination rows",
+      "keep fixed direct rows unchanged",
+      "keep heldout pair probe excluded from training"
+    ],
+    "training_policy": "rebalance loss rows in corpus materialization before another real training run",
+    "success_guard": "loss= and fixed= must both hit on heldout direct replay"
+  },
+  "summary": {
+    "check_count": 4,
+    "passed_check_count": 4,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "proposed_next_artifact": "pair_readiness_loss_retention_contract_patch",
+    "repair_focus": "restore loss direct retention without sacrificing fixed direct retention"
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The heldout loss prompt is absorbed by fixed, so the next contract patch should reinforce loss retention.",
+    "next_action": "build pair_readiness_loss_retention_contract_patch"
+  }
+}

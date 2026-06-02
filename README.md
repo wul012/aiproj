@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v708.0.0` diagnoses the v707 held-out direct failure as loss prompt absorption by the fixed branch.
+Version `v709.0.0` converts the held-out failure diagnosis into a loss-retention repair plan.
+
+## Latest v709 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_loss_retention_repair_plan`.
+- Consumed v708 `pair_readiness_loss_prompt_absorbed_by_fixed`.
+- Confirmed `decision=pair_readiness_loss_retention_repair_plan_ready`.
+- Proposed `pair_readiness_loss_retention_contract_patch`.
+- Kept `model_quality_claim=plan_only`.
+- Archived v709 evidence in `e/709` and added the code explanation in `代码讲解记录_模型能力阶段/723-v709-pair-readiness-loss-retention-repair-plan.md`.
 
 ## Latest v708 checkpoint
 
