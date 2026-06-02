@@ -794,6 +794,9 @@
 747-v733-direct-prompt-bridge-training-run.md
  -> v733 code explanation: train the direct-prompt bridge corpus and record that it still has zero direct hits with renewed fixed pollution.
 
+748-v734-bridge-comparison.md
+ -> v734 code explanation: compare v729 and v733, close the bridge route after no hit improvement and introduced fixed pollution.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1151,3 +1151,8 @@ e/663/解释/说明.md
 - `e/733/图片`
 - `e/733/解释/说明.md`
 - v733 direct-prompt bridge training run 的运行截图和解释。
+## v734 补充索引
+
+- `e/734/图片`
+- `e/734/解释/说明.md`
+- v734 bridge comparison 的运行截图和解释。

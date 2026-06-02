@@ -1,0 +1,3 @@
+label,default_continuation_hit_count,default_missed_terms,loss_prompt_fixed_pollution_count,non_term_surface_count
+objective-structure,0,"[""fixed"", ""loss""]",0,2
+direct-prompt-bridge,0,"[""fixed"", ""loss""]",1,1

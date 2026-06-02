@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v733.0.0` trains the direct-prompt bridge corpus and records that it still has zero direct hits.
+Version `v734.0.0` compares the bridge route against objective-structure training and closes the bridge patch after no improvement.
+
+## Latest v734 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_bridge_comparison`.
+- Compared v729 objective-structure training with v733 direct-prompt bridge training.
+- Confirmed `decision=pair_readiness_bridge_no_improvement_introduced_fixed_pollution`.
+- Confirmed `default_hit_delta=0` and `bridge_pollution_introduced=True`.
+- Kept `model_quality_claim=comparison_only`.
+- Archived v734 evidence in `e/734` and added the code explanation in `代码讲解记录_模型能力阶段/748-v734-bridge-comparison.md`.
 
 ## Latest v733 checkpoint
 

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness bridge comparison",
+  "generated_at": "2026-06-02T05:29:08Z",
+  "status": "pass",
+  "decision": "pair_readiness_bridge_no_improvement_introduced_fixed_pollution",
+  "failed_count": 0,
+  "issues": [],
+  "comparison_rows": [
+    {
+      "label": "objective-structure",
+      "path": "e\\729\\解释\\model-capability-required-term-pair-readiness-objective-structure-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "default_hit_terms": [],
+      "default_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "loss_prompt_fixed_pollution_count": 0,
+      "fixed_prompt_loss_pollution_count": 0,
+      "non_term_surface_count": 2,
+      "continuation_previews": [
+        "fixed:d | | | | |",
+        "loss:d | | | | |"
+      ]
+    },
+    {
+      "label": "direct-prompt-bridge",
+      "path": "e\\733\\解释\\model-capability-required-term-pair-readiness-direct-prompt-bridge-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "default_hit_terms": [],
+      "default_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "loss_prompt_fixed_pollution_count": 1,
+      "fixed_prompt_loss_pollution_count": 0,
+      "non_term_surface_count": 1,
+      "continuation_previews": [
+        "fixed: | | | ted |",
+        "loss:fixed | | |"
+      ]
+    }
+  ],
+  "summary": {
+    "objective_default_hit_count": 0,
+    "bridge_default_hit_count": 0,
+    "default_hit_delta": 0,
+    "bridge_improved": false,
+    "bridge_pair_full_observed": false,
+    "objective_non_term_surface_count": 2,
+    "bridge_non_term_surface_count": 1,
+    "bridge_loss_prompt_fixed_pollution_count": 1,
+    "bridge_pollution_introduced": true,
+    "failure_shape_changed": true,
+    "recommended_next_artifact": "pair_readiness_bridge_closeout"
+  },
+  "interpretation": {
+    "model_quality_claim": "comparison_only",
+    "reason": "The bridge route did not improve hit count and introduced loss-prompt fixed pollution.",
+    "next_action": "close this bridge patch and plan a different objective surface instead of adding more bridge rows"
+  }
+}

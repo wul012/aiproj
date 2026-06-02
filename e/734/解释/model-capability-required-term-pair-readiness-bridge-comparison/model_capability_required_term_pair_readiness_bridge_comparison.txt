@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_bridge_no_improvement_introduced_fixed_pollution
+failed_count=0
+objective_default_hit_count=0
+bridge_default_hit_count=0
+default_hit_delta=0
+bridge_pollution_introduced=True
+model_quality_claim=comparison_only
+next_action=close this bridge patch and plan a different objective surface instead of adding more bridge rows
