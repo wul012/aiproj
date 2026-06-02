@@ -821,6 +821,9 @@
 756-v742-pair-prompt-transfer-contract-patch.md
  -> v742 code explanation: add non-heldout pair-transfer rows to the direct-completion surface contract and register the patch with materialization.
 
+757-v743-pair-prompt-transfer-corpus-materialization.md
+ -> v743 code explanation: materialize the pair prompt transfer contract patch into a 7680-line training corpus and heldout fixture without leaking the exact pair prompt.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

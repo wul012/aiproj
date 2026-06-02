@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "pair_readiness_heldout_eval_fixture",
+  "probes": [
+    {
+      "id": "fixed-direct",
+      "prompt": "fixed=",
+      "expected_term": "fixed",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "loss-direct",
+      "prompt": "loss=",
+      "expected_term": "loss",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "fixed-loss-pair",
+      "prompt": "fixed=|loss=",
+      "expected_term": "fixed+loss",
+      "split": "heldout-pair"
+    }
+  ],
+  "heldout_pair_probe": "fixed=|loss=",
+  "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair-probe promotion",
+  "training_rows": [
+    "fixed=fixed",
+    "loss=loss",
+    "fixed=f",
+    "fixed=fi",
+    "fixed=fix",
+    "loss=l",
+    "loss=lo",
+    "loss=los",
+    "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+    "pair_surface forward fixed token fixed and loss token loss",
+    "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+    "pair_surface reverse loss token loss and fixed token fixed",
+    "direct_completion fixed branch keeps fixed not loss",
+    "direct_completion loss branch keeps loss not fixed",
+    "direct_completion fixed surface cannot answer loss",
+    "direct_completion loss surface cannot answer fixed",
+    "pair_transfer pipe surrogate fixed | loss => fixed loss",
+    "pair_transfer slash surrogate fixed/loss => fixed loss",
+    "pair_transfer comma surrogate fixed, loss => fixed loss",
+    "pair_transfer words fixed plus loss => fixed loss",
+    "pair_transfer bracket [fixed][loss] => fixed loss",
+    "pair_transfer reverse loss | fixed => loss fixed",
+    "pair_transfer reverse loss/fixed => loss fixed",
+    "pair_transfer boundary answer contains fixed and loss together"
+  ]
+}

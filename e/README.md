@@ -1196,3 +1196,8 @@ e/663/解释/说明.md
 - `e/742/图片`
 - `e/742/解释/说明.md`
 - v742 pair prompt transfer contract patch 的运行截图和解释。
+## v743 补充索引
+
+- `e/743/图片`
+- `e/743/解释/说明.md`
+- v743 pair prompt transfer corpus materialization 的运行截图和解释。
