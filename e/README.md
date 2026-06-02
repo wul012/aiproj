@@ -1291,3 +1291,8 @@ e/663/解释/说明.md
 - `e/761/图片`
 - `e/761/解释/说明.md`
 - v761 objective-level contrast contract 的运行截图和解释。
+## v762 补充索引
+
+- `e/762/图片`
+- `e/762/解释/说明.md`
+- v762 objective-level contrast corpus materialization 的运行截图和解释。

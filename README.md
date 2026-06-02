@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v761.0.0` materializes the objective-level contrast plan into a checked 26-row contract and registers it for corpus materialization.
+Version `v762.0.0` materializes the objective-level contrast contract into an 8320-line training corpus and heldout fixture.
+
+## Latest v762 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_corpus_materialization`.
+- Consumed v761 objective-level contrast contract.
+- Confirmed `decision=pair_readiness_corpus_materialized`.
+- Generated `training_line_count=8320` with `repeat=320`.
+- Preserved 3 heldout eval probes.
+- Archived v762 evidence in `e/762` and added the code explanation in `代码讲解记录_模型能力阶段/776-v762-objective-level-contrast-corpus-materialization.md`.
 
 ## Latest v761 checkpoint
 

@@ -878,6 +878,9 @@
 775-v761-objective-level-contrast-contract.md
  -> v761 code explanation: materialize the objective-level contrast plan into a 26-row contract and register it with corpus materialization.
 
+776-v762-objective-level-contrast-corpus-materialization.md
+ -> v762 code explanation: materialize the objective-level contrast contract into an 8320-line corpus and heldout fixture.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
