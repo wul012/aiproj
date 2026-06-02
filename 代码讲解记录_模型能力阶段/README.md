@@ -848,6 +848,9 @@
 765-v751-prompt-surface-sensitivity-diagnostic.md
  -> v751 code explanation: combine v749 training and v750 replay evidence to diagnose prompt-surface sensitivity and block promotion.
 
+766-v752-exact-surface-repair-plan.md
+ -> v752 code explanation: turn prompt-surface sensitivity into a bounded exact-surface repair plan without leaking the heldout prompt.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

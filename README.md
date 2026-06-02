@@ -7489,6 +7489,8 @@ The pair-readiness fixed-preserving transfer pair-probe replay layer reloads tha
 
 The pair-readiness fixed-preserving transfer prompt-surface sensitivity layer combines the training observation and independent replay to block promotion and route the next work toward a minimal exact-surface repair.
 
+The pair-readiness exact-surface repair plan layer turns that sensitivity diagnosis into a bounded patch plan: preserve the fixed-preserving route, add at most four near-exact bridge rows, and keep `fixed=|loss=` held out.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

@@ -1241,3 +1241,8 @@ e/663/解释/说明.md
 - `e/751/图片`
 - `e/751/解释/说明.md`
 - v751 prompt-surface sensitivity diagnostic 的运行截图和解释。
+## v752 补充索引
+
+- `e/752/图片`
+- `e/752/解释/说明.md`
+- v752 exact-surface repair plan 的运行截图和解释。

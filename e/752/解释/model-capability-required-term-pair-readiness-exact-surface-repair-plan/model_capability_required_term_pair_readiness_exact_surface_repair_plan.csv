@@ -1,0 +1,6 @@
+id,status,actual,detail
+diagnostic_passed,pass,pass,sensitivity diagnostic must pass
+diagnostic_decision,pass,pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_found,plan follows only the prompt-surface sensitivity route
+promotion_blocked,pass,True,promotion must be blocked before repair
+exact_surface_missed,pass,"[""exact-heldout-pair""]",exact heldout pair surface must be the missed required surface
+optional_surface_signal_present,pass,"[""arrow-heldout-pair""]",at least one optional surface should show pair-full signal before minimal repair

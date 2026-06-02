@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT exact-surface repair plan</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT exact-surface repair plan</h1><p>The checkpoint shows pair-full on an optional surface while missing the exact required pair surface.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_exact_surface_repair_plan_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Next artifact</span><strong>pair_readiness_exact_surface_repair_contract_patch</strong></div><div class="card"><span>Row budget</span><strong>4</strong></div><div class="card"><span>Claim</span><strong>plan_only</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>diagnostic_passed</td><td>pass</td><td>pass</td><td>sensitivity diagnostic must pass</td></tr><tr><td>diagnostic_decision</td><td>pass</td><td>pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_found</td><td>plan follows only the prompt-surface sensitivity route</td></tr><tr><td>promotion_blocked</td><td>pass</td><td>True</td><td>promotion must be blocked before repair</td></tr><tr><td>exact_surface_missed</td><td>pass</td><td>[&#x27;exact-heldout-pair&#x27;]</td><td>exact heldout pair surface must be the missed required surface</td></tr><tr><td>optional_surface_signal_present</td><td>pass</td><td>[&#x27;arrow-heldout-pair&#x27;]</td><td>at least one optional surface should show pair-full signal before minimal repair</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Patch Strategy</h2><ul><li>preserve exact direct rows fixed=fixed and loss=loss</li><li>preserve the four fixed-preserving transfer rows from v747</li><li>add at most four near-exact surface bridge rows that mention pipe/equals structure without using fixed=|loss=</li><li>avoid adding the exact heldout prompt as a training row</li><li>rerun materialization, training, and independent pair-probe replay before any promotion</li></ul></section>
+<section class="panel"><h2>Next Action</h2><p>build a checked exact-surface repair contract patch without leaking the heldout prompt</p></section>
+</main>
+</body>
+</html>

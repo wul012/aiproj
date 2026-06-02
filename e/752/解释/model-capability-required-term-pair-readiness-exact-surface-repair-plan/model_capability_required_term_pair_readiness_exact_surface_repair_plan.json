@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness exact-surface repair plan",
+  "generated_at": "2026-06-02T09:28:42Z",
+  "status": "pass",
+  "decision": "pair_readiness_exact_surface_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_sensitivity_diagnostic_path": "e\\751\\解释\\model-capability-required-term-pair-readiness-fixed-preserving-transfer-prompt-surface-sensitivity-diagnostic\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_diagnostic.json",
+  "source_sensitivity_diagnostic": {
+    "status": "pass",
+    "decision": "pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_found",
+    "summary": {
+      "training_pair_full_observed": true,
+      "training_default_hit_count": 2,
+      "replay_decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial",
+      "exact_heldout_pair_full": false,
+      "required_all_pair_full": false,
+      "pair_full_count": 1,
+      "surface_count": 3,
+      "required_missed_surface_ids": [
+        "exact-heldout-pair"
+      ],
+      "optional_pair_full_surface_ids": [
+        "arrow-heldout-pair"
+      ],
+      "surface_sensitivity_observed": true,
+      "promotion_blocked": true,
+      "recommended_next_artifact": "exact_surface_repair_plan"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "sensitivity diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_decision",
+      "status": "pass",
+      "actual": "pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_found",
+      "detail": "plan follows only the prompt-surface sensitivity route"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": true,
+      "detail": "promotion must be blocked before repair"
+    },
+    {
+      "id": "exact_surface_missed",
+      "status": "pass",
+      "actual": [
+        "exact-heldout-pair"
+      ],
+      "detail": "exact heldout pair surface must be the missed required surface"
+    },
+    {
+      "id": "optional_surface_signal_present",
+      "status": "pass",
+      "actual": [
+        "arrow-heldout-pair"
+      ],
+      "detail": "at least one optional surface should show pair-full signal before minimal repair"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_next_artifact": "pair_readiness_exact_surface_repair_contract_patch",
+    "base_contract_artifact": "pair_readiness_fixed_preserving_transfer_contract_patch",
+    "repair_row_budget": 4,
+    "missed_required_surfaces": [
+      "exact-heldout-pair"
+    ],
+    "observed_pair_full_surfaces": [
+      "arrow-heldout-pair"
+    ],
+    "heldout_pair_prompt_must_remain_absent": "fixed=|loss=",
+    "objective": "transfer the arrow-surface pair-full behavior toward the exact heldout pipe surface without training on the exact heldout prompt",
+    "patch_strategy": [
+      "preserve exact direct rows fixed=fixed and loss=loss",
+      "preserve the four fixed-preserving transfer rows from v747",
+      "add at most four near-exact surface bridge rows that mention pipe/equals structure without using fixed=|loss=",
+      "avoid adding the exact heldout prompt as a training row",
+      "rerun materialization, training, and independent pair-probe replay before any promotion"
+    ],
+    "success_guard": "exact-heldout-pair must replay pair-full independently before promotion guard"
+  },
+  "summary": {
+    "plan_ready": true,
+    "proposed_next_artifact": "pair_readiness_exact_surface_repair_contract_patch",
+    "base_contract_artifact": "pair_readiness_fixed_preserving_transfer_contract_patch",
+    "repair_row_budget": 4,
+    "missed_required_surfaces": [
+      "exact-heldout-pair"
+    ],
+    "observed_pair_full_surfaces": [
+      "arrow-heldout-pair"
+    ],
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The checkpoint shows pair-full on an optional surface while missing the exact required pair surface.",
+    "next_action": "build a checked exact-surface repair contract patch without leaking the heldout prompt"
+  }
+}

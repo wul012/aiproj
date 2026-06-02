@@ -1,0 +1,10 @@
+status=pass
+decision=pair_readiness_exact_surface_repair_plan_ready
+failed_count=0
+plan_ready=True
+proposed_next_artifact=pair_readiness_exact_surface_repair_contract_patch
+repair_row_budget=4
+missed_required_surfaces=['exact-heldout-pair']
+observed_pair_full_surfaces=['arrow-heldout-pair']
+model_quality_claim=plan_only
+next_action=build a checked exact-surface repair contract patch without leaking the heldout prompt
