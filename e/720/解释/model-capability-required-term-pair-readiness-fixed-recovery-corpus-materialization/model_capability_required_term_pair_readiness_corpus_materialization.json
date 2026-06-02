@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair-readiness corpus materialization",
+  "generated_at": "2026-06-02T03:41:57Z",
+  "status": "pass",
+  "decision": "pair_readiness_corpus_materialized",
+  "failed_count": 0,
+  "issues": [],
+  "source_contract_path": "e\\719\\解释\\model-capability-required-term-pair-readiness-fixed-recovery-contract-patch\\model_capability_required_term_pair_readiness_fixed_recovery_contract_patch.json",
+  "source_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_fixed_recovery_contract_patch_ready",
+    "summary": {
+      "base_training_row_count": 14,
+      "patched_training_row_count": 22,
+      "added_training_row_count": 8,
+      "loss_row_count": 11,
+      "evaluation_probe_count": 3,
+      "failed_check_count": 0,
+      "patch_ready": true
+    }
+  },
+  "settings": {
+    "repeat": 320
+  },
+  "materialized_paths": {
+    "training_corpus": "e\\720\\解释\\model-capability-required-term-pair-readiness-fixed-recovery-corpus-materialization\\pair_readiness_training_corpus.txt",
+    "heldout_eval_fixture": "e\\720\\解释\\model-capability-required-term-pair-readiness-fixed-recovery-corpus-materialization\\pair_readiness_heldout_eval_fixture.json"
+  },
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source contract must pass"
+    },
+    {
+      "id": "contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_fixed_recovery_contract_patch_ready",
+      "detail": "materialization requires a ready pair-readiness contract"
+    },
+    {
+      "id": "repeat_positive",
+      "status": "pass",
+      "actual": 320,
+      "detail": "repeat must be positive"
+    },
+    {
+      "id": "training_rows_present",
+      "status": "pass",
+      "actual": 22,
+      "detail": "training rows must be present"
+    },
+    {
+      "id": "heldout_not_in_training_rows",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must not be a training row"
+    },
+    {
+      "id": "heldout_not_in_corpus",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must not appear as a corpus line"
+    }
+  ],
+  "training_corpus": {
+    "line_count": 7040,
+    "char_count": 341439,
+    "preview": [
+      "task: complete required term | prompt: fixed= | answer: fixed",
+      "task: complete required term | prompt: loss= | answer: loss",
+      "case=fixed | prompt=fixed= | expected=fixed | answer=fixed",
+      "case=loss | prompt=loss= | expected=loss | answer=loss",
+      "fixed direct template -> fixed",
+      "loss direct template -> loss",
+      "fixed route target term is fixed",
+      "loss route target term is loss"
+    ]
+  },
+  "heldout_eval_fixture": {
+    "schema_version": 1,
+    "kind": "pair_readiness_heldout_eval_fixture",
+    "probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct must both hit before pair probe or baseline promotion is claimed",
+    "training_rows": [
+      "task: complete required term | prompt: fixed= | answer: fixed",
+      "task: complete required term | prompt: loss= | answer: loss",
+      "case=fixed | prompt=fixed= | expected=fixed | answer=fixed",
+      "case=loss | prompt=loss= | expected=loss | answer=loss",
+      "fixed direct template -> fixed",
+      "loss direct template -> loss",
+      "fixed route target term is fixed",
+      "loss route target term is loss",
+      "when prompt begins fixed= complete fixed",
+      "when prompt begins loss= complete loss",
+      "required term fixed stays on fixed branch",
+      "required term loss stays on loss branch",
+      "fixed branch answer uses fixed and avoids loss",
+      "loss branch answer uses loss and avoids fixed",
+      "task: complete required term | prompt: fixed= | answer: fixed | recovery: fixed",
+      "case=fixed-recovery | prompt=fixed= | expected=fixed | answer=fixed",
+      "fixed direct answer confirmation -> fixed",
+      "fixed prompt should complete fixed before loss",
+      "fixed branch keeps fixed and rejects loss completion",
+      "fixed recovery row preserves fixed token sequence",
+      "when prompt begins fixed= the answer remains fixed",
+      "required term fixed stays fixed while loss rows stay present"
+    ]
+  },
+  "summary": {
+    "materialization_ready": true,
+    "training_line_count": 7040,
+    "evaluation_probe_count": 3,
+    "check_count": 6,
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "data_artifact_only",
+    "reason": "Training corpus and heldout eval fixture are materialized from a checked split contract.",
+    "next_action": "train on the materialized corpus and replay heldout probes"
+  }
+}

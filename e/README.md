@@ -1081,3 +1081,8 @@ e/663/解释/说明.md
 - `e/719/图片`
 - `e/719/解释/说明.md`
 - v719 fixed-recovery contract patch 的运行截图和解释。
+## v720 补充索引
+
+- `e/720/图片`
+- `e/720/解释/说明.md`
+- v720 fixed-recovery corpus materialization 的运行截图和解释。
