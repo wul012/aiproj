@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v709.0.0` converts the held-out failure diagnosis into a loss-retention repair plan.
+Version `v710.0.0` applies the loss-retention repair plan as a checked contract patch.
+
+## Latest v710 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_loss_retention_contract_patch`.
+- Consumed v709 repair plan and v705 base split contract.
+- Confirmed `decision=pair_readiness_loss_retention_contract_patch_ready`.
+- Increased training rows from 12 to 20 by adding 8 loss-retention rows.
+- Preserved heldout probes and kept `fixed=|loss=` out of training rows.
+- Archived v710 evidence in `e/710` and added the code explanation in `代码讲解记录_模型能力阶段/724-v710-pair-readiness-loss-retention-contract-patch.md`.
 
 ## Latest v709 checkpoint
 

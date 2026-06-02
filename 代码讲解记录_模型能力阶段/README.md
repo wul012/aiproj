@@ -722,6 +722,9 @@
 723-v709-pair-readiness-loss-retention-repair-plan.md
  -> v709 code explanation: convert the held-out failure diagnosis into a loss-retention repair plan.
 
+724-v710-pair-readiness-loss-retention-contract-patch.md
+ -> v710 code explanation: apply the loss-retention repair plan as a checked contract patch.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

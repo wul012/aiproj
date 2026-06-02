@@ -132,9 +132,9 @@ def _checks(contract_report: dict[str, Any], contract: dict[str, Any], corpus_li
         _check("contract_passed", contract_report.get("status") == "pass", contract_report.get("status"), "source contract must pass"),
         _check(
             "contract_decision",
-            contract_report.get("decision") == "pair_readiness_split_contract_ready",
+            contract_report.get("decision") in {"pair_readiness_split_contract_ready", "pair_readiness_loss_retention_contract_patch_ready"},
             contract_report.get("decision"),
-            "materialization requires a ready split contract",
+            "materialization requires a ready split contract or loss-retention contract patch",
         ),
         _check("repeat_positive", repeat > 0, repeat, "repeat must be positive"),
         _check("training_rows_present", len(training_rows) >= 8, len(training_rows), "training rows must be present"),

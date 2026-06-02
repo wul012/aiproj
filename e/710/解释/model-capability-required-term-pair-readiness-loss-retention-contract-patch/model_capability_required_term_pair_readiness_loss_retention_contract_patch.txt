@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_loss_retention_contract_patch_ready
+failed_count=0
+patch_ready=True
+base_training_row_count=12
+patched_training_row_count=20
+added_training_row_count=8
+model_quality_claim=contract_patch_only
+next_action=materialize the patched contract and rerun pair-readiness training

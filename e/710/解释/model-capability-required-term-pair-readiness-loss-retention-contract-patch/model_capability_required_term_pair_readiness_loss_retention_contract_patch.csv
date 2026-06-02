@@ -1,0 +1,8 @@
+id,status,actual,detail
+repair_plan_passed,pass,pass,repair plan must pass
+repair_plan_decision,pass,pair_readiness_loss_retention_repair_plan_ready,patch follows only a ready loss-retention repair plan
+base_contract_passed,pass,pass,base contract must pass
+base_contract_decision,pass,pair_readiness_split_contract_ready,base must be the original split contract
+loss_rows_added,pass,all loss rows,all loss-retention rows must be present
+heldout_pair_absent,pass,False,heldout pair probe must not be a training row
+evaluation_probes_preserved,pass,3,"fixed, loss, and pair probes must be preserved"

@@ -1031,3 +1031,8 @@ e/663/解释/说明.md
 - `e/709/图片`
 - `e/709/解释/说明.md`
 - v709 pair-readiness loss-retention repair plan 的运行截图和解释。
+## v710 补充索引
+
+- `e/710/图片`
+- `e/710/解释/说明.md`
+- v710 pair-readiness loss-retention contract patch 的运行截图和解释。

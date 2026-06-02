@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness loss-retention contract patch",
+  "generated_at": "2026-06-02T02:13:44Z",
+  "status": "pass",
+  "decision": "pair_readiness_loss_retention_contract_patch_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_plan_path": "e\\709\\解释\\model-capability-required-term-pair-readiness-loss-retention-repair-plan\\model_capability_required_term_pair_readiness_loss_retention_repair_plan.json",
+  "source_base_contract_path": "e\\705\\解释\\model-capability-required-term-pair-readiness-split-contract\\model_capability_required_term_pair_readiness_split_contract.json",
+  "source_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_loss_retention_repair_plan_ready",
+    "summary": {
+      "check_count": 4,
+      "passed_check_count": 4,
+      "failed_check_count": 0,
+      "plan_ready": true,
+      "proposed_next_artifact": "pair_readiness_loss_retention_contract_patch",
+      "repair_focus": "restore loss direct retention without sacrificing fixed direct retention"
+    }
+  },
+  "source_base_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_split_contract_ready",
+    "summary": {
+      "training_row_count": 12,
+      "evaluation_probe_count": 3,
+      "check_count": 7,
+      "passed_check_count": 7,
+      "failed_check_count": 0,
+      "heldout_pair_probe": "fixed=|loss=",
+      "contract_ready": true
+    }
+  },
+  "contract": {
+    "contract_version": 2,
+    "training_rows": [
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "fixed=fixed",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss",
+      "fixed branch starts with f",
+      "loss branch starts with l",
+      "fixed branch does not start loss",
+      "loss branch does not start fixed",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss",
+      "loss branch keeps l before fixed",
+      "loss branch resists fixed completion",
+      "loss prompt should not become fixed",
+      "loss direct retention beats fixed pollution"
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair capability is claimed",
+    "leakage_policy": "evaluation prompts may be prefixes but exact heldout pair probes must not appear in training rows",
+    "patch_kind": "loss_retention",
+    "patch_note": "loss rows are duplicated and protected from fixed-pollution after v708 diagnostic"
+  },
+  "patch": {
+    "added_rows": [
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss",
+      "loss branch keeps l before fixed",
+      "loss branch resists fixed completion",
+      "loss prompt should not become fixed",
+      "loss direct retention beats fixed pollution"
+    ],
+    "added_row_count": 8,
+    "patch_focus": "loss direct retention"
+  },
+  "check_rows": [
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repair plan must pass"
+    },
+    {
+      "id": "repair_plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_loss_retention_repair_plan_ready",
+      "detail": "patch follows only a ready loss-retention repair plan"
+    },
+    {
+      "id": "base_contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "base contract must pass"
+    },
+    {
+      "id": "base_contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_split_contract_ready",
+      "detail": "base must be the original split contract"
+    },
+    {
+      "id": "loss_rows_added",
+      "status": "pass",
+      "actual": "all loss rows",
+      "detail": "all loss-retention rows must be present"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must not be a training row"
+    },
+    {
+      "id": "evaluation_probes_preserved",
+      "status": "pass",
+      "actual": 3,
+      "detail": "fixed, loss, and pair probes must be preserved"
+    }
+  ],
+  "summary": {
+    "base_training_row_count": 12,
+    "patched_training_row_count": 20,
+    "added_training_row_count": 8,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0,
+    "patch_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_patch_only",
+    "reason": "The base split contract now includes loss-retention rows while preserving heldout probes.",
+    "next_action": "materialize the patched contract and rerun pair-readiness training"
+  }
+}
