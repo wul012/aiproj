@@ -1111,3 +1111,8 @@ e/663/解释/说明.md
 - `e/725/图片`
 - `e/725/解释/说明.md`
 - v725 five-route pair-readiness comparison 的运行截图和解释。
+## v726 补充索引
+
+- `e/726/图片`
+- `e/726/解释/说明.md`
+- v726 objective-structure plan 的运行截图和解释。

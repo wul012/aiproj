@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v725.0.0` compares five pair-readiness routes and closes the light capacity-bump path after it remains fixed-only.
+Version `v726.0.0` converts the five-route capacity-probe closeout into a checked objective-structure contract plan.
+
+## Latest v726 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_structure_plan`.
+- Consumed the v725 five-route comparison and required `pair_readiness_capacity_probe_no_improvement_fixed_only`.
+- Confirmed `decision=pair_readiness_objective_structure_plan_ready`.
+- Proposed `pair_readiness_objective_structure_contract` as the next artifact.
+- Kept `model_quality_claim=plan_only`; this is a design gate before changing corpus semantics.
+- Archived v726 evidence in `e/726` and added the code explanation in `代码讲解记录_模型能力阶段/740-v726-objective-structure-plan.md`.
 
 ## Latest v725 checkpoint
 

@@ -1,0 +1,9 @@
+id,status,actual,detail
+route_comparison_passed,pass,pass,source five-route comparison must pass
+route_comparison_decision,pass,pair_readiness_capacity_probe_no_improvement_fixed_only,objective-structure planning follows only a closed capacity-probe no-improvement result
+no_pair_full_route,pass,False,no compared route should already be pair-full
+five_routes_present,pass,5,"comparison should include baseline, repairs, and capacity probe"
+capacity_probe_no_improvement,pass,True,capacity probe must be measured as no improvement
+capacity_probe_no_delta,pass,0,capacity probe should not improve default hit count
+capacity_probe_still_misses_loss,pass,"[""loss""]",loss must remain missed before changing objective structure
+capacity_probe_row_present,pass,True,capacity-probe route row must be present for auditability

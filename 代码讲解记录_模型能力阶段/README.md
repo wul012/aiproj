@@ -770,6 +770,9 @@
 739-v725-five-route-comparison.md
  -> v725 code explanation: compare baseline, repair, structured, fixed-recovery, and capacity-probe routes and close the light capacity-bump path.
 
+740-v726-objective-structure-plan.md
+ -> v726 code explanation: convert the capacity-probe no-improvement result into a checked objective-structure contract plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
