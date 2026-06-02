@@ -1,0 +1,10 @@
+status=pass
+decision=minimal_prompt_loss_first_token_repair_plan_ready
+failed_count=0
+plan_ready=True
+proposed_corpus_mode=minimal_prompt_loss_first_token_repair_objective
+seed_to_rerun=3535
+repair_focus=loss_first_token_and_branch_separation
+expected_change=increase loss first-token pressure while retaining fixed direct rows
+model_quality_claim=repair_plan_only
+next_action=rerun seed 3535 with corpus_mode=minimal_prompt_loss_first_token_repair_objective

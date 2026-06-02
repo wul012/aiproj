@@ -971,3 +971,8 @@ e/663/解释/说明.md
 - `e/697/图片`
 - `e/697/解释/说明.md`
 - v697 minimal prompt branch-bias diagnostic 的运行截图和解释。
+## v698 补充索引
+
+- `e/698/图片`
+- `e/698/解释/说明.md`
+- v698 minimal prompt loss first-token repair plan 的运行截图和解释。

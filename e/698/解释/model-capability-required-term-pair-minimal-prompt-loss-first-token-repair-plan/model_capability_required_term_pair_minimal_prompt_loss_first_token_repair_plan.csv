@@ -1,0 +1,6 @@
+id,status,actual,detail
+diagnostic_passed,pass,pass,branch-bias diagnostic must pass
+fixed_absorbs_loss_confirmed,pass,minimal_prompt_branch_bias_fixed_absorbs_loss,repair plan requires confirmed fixed-absorbs-loss failure
+loss_hit_absent,pass,0,loss branch should be absent before applying loss-first-token repair
+fixed_hit_present,pass,2,fixed branch should remain a known signal while repairing loss
+dominant_bias_fixed,pass,fixed,dominant bias must be fixed

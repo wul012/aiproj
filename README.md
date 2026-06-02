@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v697.0.0` diagnoses the first minimal-prompt training failure as fixed-dominant branch bias.
+Version `v698.0.0` turns the fixed-dominant minimal-prompt failure into a loss-first-token repair plan.
+
+## Latest v698 checkpoint
+
+- Added `minimal_prompt_loss_first_token_repair_objective`.
+- Added `model_capability_required_term_pair_minimal_prompt_loss_first_token_repair_plan`.
+- Consumed v697 branch-bias diagnostic evidence.
+- Confirmed `decision=minimal_prompt_loss_first_token_repair_plan_ready`.
+- Confirmed `proposed_corpus_mode=minimal_prompt_loss_first_token_repair_objective`.
+- Confirmed `seed_to_rerun=3535` and `repair_focus=loss_first_token_and_branch_separation`.
+- Archived v698 evidence in `e/698` and added the code explanation in `代码讲解记录_模型能力阶段/712-v698-minimal-prompt-loss-first-token-repair-plan.md`.
+
+## Latest v697 checkpoint
 
 ## Latest v697 checkpoint
 
@@ -15,8 +27,6 @@ Version `v697.0.0` diagnoses the first minimal-prompt training failure as fixed-
 - Confirmed `dominant_bias=fixed`.
 - Kept `model_quality_claim=diagnostic_only`.
 - Archived v697 evidence in `e/697` and added the code explanation in `代码讲解记录_模型能力阶段/711-v697-minimal-prompt-branch-bias-diagnostic.md`.
-
-## Latest v696 checkpoint
 
 ## Latest v696 checkpoint
 

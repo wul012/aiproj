@@ -686,6 +686,9 @@
 711-v697-minimal-prompt-branch-bias-diagnostic.md
  -> v697 code explanation: diagnose the first minimal-prompt failure as fixed-dominant branch bias.
 
+712-v698-minimal-prompt-loss-first-token-repair-plan.md
+ -> v698 code explanation: convert fixed-dominant branch-bias evidence into a loss-first-token repair corpus plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

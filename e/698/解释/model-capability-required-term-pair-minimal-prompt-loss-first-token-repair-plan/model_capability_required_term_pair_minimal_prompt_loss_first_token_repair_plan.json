@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair minimal prompt loss-first-token repair plan",
+  "generated_at": "2026-06-02T01:08:29Z",
+  "status": "pass",
+  "decision": "minimal_prompt_loss_first_token_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_branch_bias_diagnostic_path": "e\\697\\解释\\model-capability-required-term-pair-minimal-prompt-branch-bias-diagnostic\\model_capability_required_term_pair_minimal_prompt_branch_bias_diagnostic.json",
+  "source_branch_bias_diagnostic": {
+    "status": "pass",
+    "decision": "minimal_prompt_branch_bias_fixed_absorbs_loss",
+    "summary": {
+      "corpus_mode": "minimal_prompt_equals_surface_objective",
+      "seed": 3535,
+      "prompt_row_count": 4,
+      "fixed_prompt_count": 2,
+      "loss_prompt_count": 2,
+      "fixed_hit_count": 2,
+      "loss_hit_count": 0,
+      "loss_prompt_fixed_start_count": 2,
+      "fixed_prompt_loss_start_count": 0,
+      "expected_first_char_match_count": 2,
+      "pair_full_observed": false,
+      "checkpoint_exists": true,
+      "training_status": "pass",
+      "dominant_bias": "fixed"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "branch-bias diagnostic must pass"
+    },
+    {
+      "id": "fixed_absorbs_loss_confirmed",
+      "status": "pass",
+      "actual": "minimal_prompt_branch_bias_fixed_absorbs_loss",
+      "detail": "repair plan requires confirmed fixed-absorbs-loss failure"
+    },
+    {
+      "id": "loss_hit_absent",
+      "status": "pass",
+      "actual": 0,
+      "detail": "loss branch should be absent before applying loss-first-token repair"
+    },
+    {
+      "id": "fixed_hit_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "fixed branch should remain a known signal while repairing loss"
+    },
+    {
+      "id": "dominant_bias_fixed",
+      "status": "pass",
+      "actual": "fixed",
+      "detail": "dominant bias must be fixed"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_corpus_mode": "minimal_prompt_loss_first_token_repair_objective",
+    "source_corpus_mode": "minimal_prompt_equals_surface_objective",
+    "seed_to_rerun": 3535,
+    "repair_focus": "loss_first_token_and_branch_separation",
+    "kept_boundary": "minimal prompt only; no contextual answer-bearing anchor",
+    "expected_prompt_surface": [
+      "fixed=",
+      "loss="
+    ],
+    "expected_change": "increase loss first-token pressure while retaining fixed direct rows",
+    "recommended_next_action": "rerun seed 3535 with corpus_mode=minimal_prompt_loss_first_token_repair_objective"
+  },
+  "summary": {
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "proposed_corpus_mode": "minimal_prompt_loss_first_token_repair_objective",
+    "seed_to_rerun": 3535,
+    "repair_focus": "loss_first_token_and_branch_separation"
+  },
+  "interpretation": {
+    "model_quality_claim": "repair_plan_only",
+    "reason": "The previous run learned fixed but started loss prompts with fixed, so the next corpus should strengthen loss first-token pressure.",
+    "next_action": "rerun seed 3535 with corpus_mode=minimal_prompt_loss_first_token_repair_objective"
+  }
+}
