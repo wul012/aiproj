@@ -1,0 +1,9 @@
+status=pass
+decision=minimal_prompt_surface_objective_ready_for_corpus_contract
+failed_count=0
+objective_ready=True
+objective_id=minimal_prompt_surface_objective
+recommended_corpus_mode=minimal_prompt_equals_surface_objective
+success_criterion=both fixed= and loss= produce their exact terms without contextual anchor across selected seeds
+model_quality_claim=objective_readiness_only
+next_action=add a minimal-prompt corpus contract before running another real checkpoint

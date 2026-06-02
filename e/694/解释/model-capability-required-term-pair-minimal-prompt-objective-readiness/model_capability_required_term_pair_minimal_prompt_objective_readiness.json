@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair minimal prompt objective readiness",
+  "generated_at": "2026-06-02T00:45:53Z",
+  "status": "pass",
+  "decision": "minimal_prompt_surface_objective_ready_for_corpus_contract",
+  "failed_count": 0,
+  "issues": [],
+  "source_surface_branch_closeout_path": "e\\692\\解释\\model-capability-required-term-pair-surface-branch-closeout\\model_capability_required_term_pair_surface_branch_closeout.json",
+  "source_surface_branch_closeout": {
+    "status": "pass",
+    "decision": "required_term_pair_surface_branch_closed_as_contextual_decode_aid",
+    "summary": {
+      "milestone_count": 7,
+      "passed_milestone_count": 7,
+      "contextual_decode_aid_ready": true,
+      "promotion_allowed": false,
+      "recommended_next_route": "minimal_prompt_surface_objective"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "closeout_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "surface branch closeout must pass before opening the next objective"
+    },
+    {
+      "id": "contextual_aid_closed",
+      "status": "pass",
+      "actual": true,
+      "detail": "previous branch must be closed as contextual decode aid"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "previous branch must not be promotable as a baseline"
+    },
+    {
+      "id": "minimal_prompt_route_selected",
+      "status": "pass",
+      "actual": "minimal_prompt_surface_objective",
+      "detail": "recommended next route must be minimal_prompt_surface_objective"
+    },
+    {
+      "id": "model_quality_not_promoted",
+      "status": "pass",
+      "actual": "contextual_decode_aid_closed_branch",
+      "detail": "readiness must preserve the no-promotion model-quality boundary"
+    }
+  ],
+  "objective": {
+    "objective_id": "minimal_prompt_surface_objective",
+    "ready": true,
+    "claim_boundary": "minimal prompt only; no contextual answer-bearing anchor",
+    "source_branch": "required_term_pair_contextual_surface_policy",
+    "entry_condition": "contextual decode aid closed and promotion blocked",
+    "target_prompt_surface": "fixed= / loss=",
+    "blocked_prompt_surface": "contextual variants that reveal the other answer before the target prompt",
+    "success_criterion": "both fixed= and loss= produce their exact terms without contextual anchor across selected seeds",
+    "recommended_corpus_mode": "minimal_prompt_equals_surface_objective",
+    "recommended_next_version": "v695",
+    "recommended_next_action": "add a minimal-prompt corpus contract before running another real checkpoint",
+    "source_recommended_route": "minimal_prompt_surface_objective"
+  },
+  "summary": {
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "objective_ready": true,
+    "objective_id": "minimal_prompt_surface_objective",
+    "recommended_corpus_mode": "minimal_prompt_equals_surface_objective",
+    "recommended_next_version": "v695"
+  },
+  "interpretation": {
+    "model_quality_claim": "objective_readiness_only",
+    "reason": "The previous branch is closed as contextual decode aid, so the next model-quality question must remove the contextual anchor.",
+    "next_action": "add a minimal-prompt corpus contract before running another real checkpoint"
+  }
+}

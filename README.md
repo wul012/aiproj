@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v693.0.0` verifies the v679-v692 contextual surface-policy branch with full local checks.
+Version `v694.0.0` opens the minimal-prompt objective route with a readiness contract that preserves the no-promotion boundary.
+
+## Latest v694 checkpoint
+
+- Added `model_capability_required_term_pair_minimal_prompt_objective_readiness`.
+- Consumed v692 surface branch closeout evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=minimal_prompt_surface_objective_ready_for_corpus_contract`.
+- Confirmed `objective_ready=True`.
+- Confirmed `recommended_corpus_mode=minimal_prompt_equals_surface_objective`.
+- Preserved the model-quality boundary as `objective_readiness_only`, not a baseline promotion.
+- Archived v694 evidence in `e/694` and added the code explanation in `代码讲解记录_模型能力阶段/708-v694-minimal-prompt-objective-readiness.md`.
 
 ## Latest v693 checkpoint
 

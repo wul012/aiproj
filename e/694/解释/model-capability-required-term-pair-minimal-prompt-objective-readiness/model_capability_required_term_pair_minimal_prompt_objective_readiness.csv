@@ -1,0 +1,6 @@
+id,status,actual,detail
+closeout_passed,pass,pass,surface branch closeout must pass before opening the next objective
+contextual_aid_closed,pass,True,previous branch must be closed as contextual decode aid
+promotion_blocked,pass,False,previous branch must not be promotable as a baseline
+minimal_prompt_route_selected,pass,minimal_prompt_surface_objective,recommended next route must be minimal_prompt_surface_objective
+model_quality_not_promoted,pass,contextual_decode_aid_closed_branch,readiness must preserve the no-promotion model-quality boundary
