@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness pair prompt transfer contract patch",
+  "generated_at": "2026-06-02T08:01:47Z",
+  "status": "pass",
+  "decision": "pair_readiness_pair_prompt_transfer_contract_patch_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_repair_plan_path": "e\\741\\解释\\model-capability-required-term-pair-readiness-pair-prompt-transfer-repair-plan\\model_capability_required_term_pair_readiness_pair_prompt_transfer_repair_plan.json",
+  "source_base_contract_path": "e\\736\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-contract\\model_capability_required_term_pair_readiness_direct_completion_surface_contract.json",
+  "source_repair_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_pair_prompt_transfer_repair_plan_ready",
+    "summary": {
+      "plan_ready": true,
+      "check_count": 5,
+      "passed_check_count": 5,
+      "failed_check_count": 0,
+      "proposed_next_artifact": "pair_readiness_pair_prompt_transfer_contract_patch",
+      "repair_requirement_count": 5,
+      "non_goal_count": 3
+    }
+  },
+  "source_base_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_direct_completion_surface_contract_ready",
+    "summary": {
+      "contract_ready": true,
+      "training_row_count": 16,
+      "row_family_count": 6,
+      "evaluation_probe_count": 3,
+      "failed_check_count": 0,
+      "heldout_pair_probe": "fixed=|loss=",
+      "template_family": "direct_completion_surface_balanced_prefix_ladder",
+      "exact_completion_row_count": 2,
+      "fixed_prefix_row_count": 3,
+      "loss_prefix_row_count": 3,
+      "paired_order_row_count": 4,
+      "boundary_contrast_row_count": 4
+    }
+  },
+  "contract": {
+    "contract_version": 8,
+    "training_rows": [
+      "fixed=fixed",
+      "loss=loss",
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+      "pair_surface forward fixed token fixed and loss token loss",
+      "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+      "pair_surface reverse loss token loss and fixed token fixed",
+      "direct_completion fixed branch keeps fixed not loss",
+      "direct_completion loss branch keeps loss not fixed",
+      "direct_completion fixed surface cannot answer loss",
+      "direct_completion loss surface cannot answer fixed",
+      "pair_transfer pipe surrogate fixed | loss => fixed loss",
+      "pair_transfer slash surrogate fixed/loss => fixed loss",
+      "pair_transfer comma surrogate fixed, loss => fixed loss",
+      "pair_transfer words fixed plus loss => fixed loss",
+      "pair_transfer bracket [fixed][loss] => fixed loss",
+      "pair_transfer reverse loss | fixed => loss fixed",
+      "pair_transfer reverse loss/fixed => loss fixed",
+      "pair_transfer boundary answer contains fixed and loss together"
+    ],
+    "row_families": [
+      {
+        "family": "exact_direct_completion",
+        "role": "direct_completion_surface",
+        "target_term": "fixed/loss",
+        "rows": [
+          "fixed=fixed",
+          "loss=loss"
+        ]
+      },
+      {
+        "family": "fixed_prefix_ladder",
+        "role": "direct_completion_prefix",
+        "target_term": "fixed",
+        "rows": [
+          "fixed=f",
+          "fixed=fi",
+          "fixed=fix"
+        ]
+      },
+      {
+        "family": "loss_prefix_ladder",
+        "role": "direct_completion_prefix",
+        "target_term": "loss",
+        "rows": [
+          "loss=l",
+          "loss=lo",
+          "loss=los"
+        ]
+      },
+      {
+        "family": "paired_order_forward",
+        "role": "paired_order_surface",
+        "target_term": "fixed+loss",
+        "rows": [
+          "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+          "pair_surface forward fixed token fixed and loss token loss"
+        ]
+      },
+      {
+        "family": "paired_order_reverse",
+        "role": "paired_order_surface",
+        "target_term": "loss+fixed",
+        "rows": [
+          "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+          "pair_surface reverse loss token loss and fixed token fixed"
+        ]
+      },
+      {
+        "family": "direct_boundary_contrast",
+        "role": "anti_contamination",
+        "target_term": "fixed/loss",
+        "rows": [
+          "direct_completion fixed branch keeps fixed not loss",
+          "direct_completion loss branch keeps loss not fixed",
+          "direct_completion fixed surface cannot answer loss",
+          "direct_completion loss surface cannot answer fixed"
+        ]
+      }
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair-probe promotion",
+    "leakage_policy": "train exact direct completions and balanced prefixes, but keep exact heldout prompts and pair probe out of training rows",
+    "template_family": "direct_completion_surface_balanced_prefix_ladder",
+    "source_route_boundary": "created after direct-prompt bridge patch had zero hit improvement and introduced fixed pollution",
+    "patch_kind": "pair_prompt_transfer",
+    "patch_note": "adds surrogate pair-transfer rows while preserving exact heldout pair prompt isolation"
+  },
+  "patch": {
+    "added_rows": [
+      "pair_transfer pipe surrogate fixed | loss => fixed loss",
+      "pair_transfer slash surrogate fixed/loss => fixed loss",
+      "pair_transfer comma surrogate fixed, loss => fixed loss",
+      "pair_transfer words fixed plus loss => fixed loss",
+      "pair_transfer bracket [fixed][loss] => fixed loss",
+      "pair_transfer reverse loss | fixed => loss fixed",
+      "pair_transfer reverse loss/fixed => loss fixed",
+      "pair_transfer boundary answer contains fixed and loss together"
+    ],
+    "added_row_count": 8,
+    "patch_focus": "non-heldout pair prompt transfer rows that bind fixed and loss together"
+  },
+  "check_rows": [
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repair plan must pass"
+    },
+    {
+      "id": "repair_plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_pair_prompt_transfer_repair_plan_ready",
+      "detail": "patch follows only a ready pair prompt transfer repair plan"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_pair_prompt_transfer_contract_patch",
+      "detail": "repair plan must request this patch artifact"
+    },
+    {
+      "id": "base_contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "base direct-completion contract must pass"
+    },
+    {
+      "id": "base_contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_direct_completion_surface_contract_ready",
+      "detail": "base must be the direct-completion surface contract"
+    },
+    {
+      "id": "pair_transfer_rows_added",
+      "status": "pass",
+      "actual": "all pair-transfer rows",
+      "detail": "all pair-transfer patch rows must be present"
+    },
+    {
+      "id": "pair_transfer_row_count",
+      "status": "pass",
+      "actual": 8,
+      "detail": "patch should add a meaningful set of transfer rows"
+    },
+    {
+      "id": "exact_direct_rows_preserved",
+      "status": "pass",
+      "actual": [
+        "fixed=fixed",
+        "loss=loss"
+      ],
+      "detail": "direct completion rows must be preserved"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair prompt must stay out of training rows"
+    },
+    {
+      "id": "heldout_pair_absent_from_patch",
+      "status": "pass",
+      "actual": false,
+      "detail": "patch rows must not train on exact heldout pair prompt"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    }
+  ],
+  "summary": {
+    "patch_ready": true,
+    "base_training_row_count": 16,
+    "patched_training_row_count": 24,
+    "added_training_row_count": 8,
+    "pair_transfer_row_count": 8,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_patch_only",
+    "reason": "The patched contract adds surrogate pair-transfer rows while keeping the exact heldout pair prompt isolated.",
+    "next_action": "materialize the pair-transfer patched contract and rerun training plus pair-probe replay"
+  }
+}

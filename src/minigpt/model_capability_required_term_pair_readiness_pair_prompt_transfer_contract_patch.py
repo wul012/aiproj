@@ -1,0 +1,215 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+from minigpt.model_capability_required_term_pair_readiness_direct_completion_surface_contract import (
+    PAIR_READINESS_DIRECT_COMPLETION_SURFACE_CONTRACT_JSON_FILENAME,
+)
+from minigpt.model_capability_required_term_pair_readiness_pair_prompt_transfer_repair_plan import (
+    PAIR_READINESS_PAIR_PROMPT_TRANSFER_REPAIR_PLAN_JSON_FILENAME,
+)
+from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+
+
+PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_JSON_FILENAME = (
+    "model_capability_required_term_pair_readiness_pair_prompt_transfer_contract_patch.json"
+)
+PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_CSV_FILENAME = (
+    "model_capability_required_term_pair_readiness_pair_prompt_transfer_contract_patch.csv"
+)
+PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_TEXT_FILENAME = (
+    "model_capability_required_term_pair_readiness_pair_prompt_transfer_contract_patch.txt"
+)
+PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_MARKDOWN_FILENAME = (
+    "model_capability_required_term_pair_readiness_pair_prompt_transfer_contract_patch.md"
+)
+PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_HTML_FILENAME = (
+    "model_capability_required_term_pair_readiness_pair_prompt_transfer_contract_patch.html"
+)
+
+
+PAIR_PROMPT_TRANSFER_ROWS = [
+    "pair_transfer pipe surrogate fixed | loss => fixed loss",
+    "pair_transfer slash surrogate fixed/loss => fixed loss",
+    "pair_transfer comma surrogate fixed, loss => fixed loss",
+    "pair_transfer words fixed plus loss => fixed loss",
+    "pair_transfer bracket [fixed][loss] => fixed loss",
+    "pair_transfer reverse loss | fixed => loss fixed",
+    "pair_transfer reverse loss/fixed => loss fixed",
+    "pair_transfer boundary answer contains fixed and loss together",
+]
+
+
+def locate_pair_prompt_transfer_contract_patch_plan(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / PAIR_READINESS_PAIR_PROMPT_TRANSFER_REPAIR_PLAN_JSON_FILENAME
+    return source
+
+
+def locate_pair_prompt_transfer_contract_patch_base(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / PAIR_READINESS_DIRECT_COMPLETION_SURFACE_CONTRACT_JSON_FILENAME
+    return source
+
+
+def read_json_report(path: str | Path) -> dict[str, Any]:
+    payload = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError("pair prompt transfer contract patch input must be a JSON object")
+    return dict(payload)
+
+
+def build_pair_prompt_transfer_contract_patch(
+    *,
+    repair_plan: dict[str, Any],
+    base_contract_report: dict[str, Any],
+    repair_plan_path: str | Path | None = None,
+    base_contract_path: str | Path | None = None,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
+    base_contract = as_dict(base_contract_report.get("contract"))
+    patched_contract = _patched_contract(base_contract)
+    checks = _checks(repair_plan, base_contract_report, patched_contract)
+    failed = [row for row in checks if row.get("status") != "pass"]
+    status = "pass" if not failed else "fail"
+    return {
+        "schema_version": 1,
+        "title": "MiniGPT pair-readiness pair prompt transfer contract patch",
+        "generated_at": generated_at or utc_now(),
+        "status": status,
+        "decision": _decision(status),
+        "failed_count": len(failed),
+        "issues": [{"id": row["id"], "detail": row["detail"]} for row in failed],
+        "source_repair_plan_path": str(repair_plan_path or ""),
+        "source_base_contract_path": str(base_contract_path or ""),
+        "source_repair_plan": {
+            "status": repair_plan.get("status"),
+            "decision": repair_plan.get("decision"),
+            "summary": as_dict(repair_plan.get("summary")),
+        },
+        "source_base_contract": {
+            "status": base_contract_report.get("status"),
+            "decision": base_contract_report.get("decision"),
+            "summary": as_dict(base_contract_report.get("summary")),
+        },
+        "contract": patched_contract,
+        "patch": {
+            "added_rows": PAIR_PROMPT_TRANSFER_ROWS,
+            "added_row_count": len(PAIR_PROMPT_TRANSFER_ROWS),
+            "patch_focus": "non-heldout pair prompt transfer rows that bind fixed and loss together",
+        },
+        "check_rows": checks,
+        "summary": _summary(base_contract, patched_contract, checks),
+        "interpretation": _interpretation(status),
+    }
+
+
+def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
+    if require_pass and report.get("status") != "pass":
+        return 1
+    return 0
+
+
+def _patched_contract(base_contract: dict[str, Any]) -> dict[str, Any]:
+    training_rows = [str(row) for row in base_contract.get("training_rows", [])]
+    return {
+        **base_contract,
+        "contract_version": 8,
+        "training_rows": training_rows + PAIR_PROMPT_TRANSFER_ROWS,
+        "patch_kind": "pair_prompt_transfer",
+        "patch_note": "adds surrogate pair-transfer rows while preserving exact heldout pair prompt isolation",
+    }
+
+
+def _checks(repair_plan: dict[str, Any], base_contract_report: dict[str, Any], patched_contract: dict[str, Any]) -> list[dict[str, Any]]:
+    plan = as_dict(repair_plan.get("plan"))
+    training_rows = [str(row) for row in patched_contract.get("training_rows", [])]
+    probes = list_of_dicts(patched_contract.get("evaluation_probes"))
+    probe_prompts = [str(row.get("prompt")) for row in probes]
+    heldout = str(patched_contract.get("heldout_pair_probe") or "")
+    return [
+        _check("repair_plan_passed", repair_plan.get("status") == "pass", repair_plan.get("status"), "repair plan must pass"),
+        _check(
+            "repair_plan_decision",
+            repair_plan.get("decision") == "pair_readiness_pair_prompt_transfer_repair_plan_ready",
+            repair_plan.get("decision"),
+            "patch follows only a ready pair prompt transfer repair plan",
+        ),
+        _check(
+            "next_artifact_matches",
+            plan.get("proposed_next_artifact") == "pair_readiness_pair_prompt_transfer_contract_patch",
+            plan.get("proposed_next_artifact"),
+            "repair plan must request this patch artifact",
+        ),
+        _check("base_contract_passed", base_contract_report.get("status") == "pass", base_contract_report.get("status"), "base direct-completion contract must pass"),
+        _check(
+            "base_contract_decision",
+            base_contract_report.get("decision") == "pair_readiness_direct_completion_surface_contract_ready",
+            base_contract_report.get("decision"),
+            "base must be the direct-completion surface contract",
+        ),
+        _check("pair_transfer_rows_added", all(row in training_rows for row in PAIR_PROMPT_TRANSFER_ROWS), "all pair-transfer rows", "all pair-transfer patch rows must be present"),
+        _check("pair_transfer_row_count", len(PAIR_PROMPT_TRANSFER_ROWS) >= 8, len(PAIR_PROMPT_TRANSFER_ROWS), "patch should add a meaningful set of transfer rows"),
+        _check("exact_direct_rows_preserved", {"fixed=fixed", "loss=loss"}.issubset(set(training_rows)), sorted({"fixed=fixed", "loss=loss"} & set(training_rows)), "direct completion rows must be preserved"),
+        _check("heldout_pair_absent", heldout not in training_rows, heldout in training_rows, "heldout pair prompt must stay out of training rows"),
+        _check("heldout_pair_absent_from_patch", HELDOUT_PAIR_PROBE not in PAIR_PROMPT_TRANSFER_ROWS, HELDOUT_PAIR_PROBE in PAIR_PROMPT_TRANSFER_ROWS, "patch rows must not train on exact heldout pair prompt"),
+        _check("no_exact_eval_row_overlap", not (set(training_rows) & set(probe_prompts)), sorted(set(training_rows) & set(probe_prompts)), "exact eval prompts must not be training rows"),
+    ]
+
+
+def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
+    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
+
+
+def _summary(base_contract: dict[str, Any], patched_contract: dict[str, Any], checks: list[dict[str, Any]]) -> dict[str, Any]:
+    base_rows = [str(row) for row in base_contract.get("training_rows", [])]
+    patched_rows = [str(row) for row in patched_contract.get("training_rows", [])]
+    return {
+        "patch_ready": all(row.get("status") == "pass" for row in checks),
+        "base_training_row_count": len(base_rows),
+        "patched_training_row_count": len(patched_rows),
+        "added_training_row_count": len(patched_rows) - len(base_rows),
+        "pair_transfer_row_count": len(PAIR_PROMPT_TRANSFER_ROWS),
+        "evaluation_probe_count": len(patched_contract.get("evaluation_probes", [])),
+        "failed_check_count": sum(1 for row in checks if row.get("status") != "pass"),
+    }
+
+
+def _decision(status: str) -> str:
+    if status == "pass":
+        return "pair_readiness_pair_prompt_transfer_contract_patch_ready"
+    return "fix_pair_readiness_pair_prompt_transfer_contract_patch"
+
+
+def _interpretation(status: str) -> dict[str, Any]:
+    if status != "pass":
+        return {
+            "model_quality_claim": "not_claimed",
+            "reason": "The pair-transfer patch failed repair-plan, base-contract, balance, or leakage checks.",
+            "next_action": "repair pair-transfer patch before corpus materialization",
+        }
+    return {
+        "model_quality_claim": "contract_patch_only",
+        "reason": "The patched contract adds surrogate pair-transfer rows while keeping the exact heldout pair prompt isolated.",
+        "next_action": "materialize the pair-transfer patched contract and rerun training plus pair-probe replay",
+    }
+
+
+__all__ = [
+    "PAIR_PROMPT_TRANSFER_ROWS",
+    "PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_CSV_FILENAME",
+    "PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_HTML_FILENAME",
+    "PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_JSON_FILENAME",
+    "PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_MARKDOWN_FILENAME",
+    "PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_TEXT_FILENAME",
+    "build_pair_prompt_transfer_contract_patch",
+    "locate_pair_prompt_transfer_contract_patch_base",
+    "locate_pair_prompt_transfer_contract_patch_plan",
+    "read_json_report",
+    "resolve_exit_code",
+]

@@ -1,0 +1,32 @@
+# MiniGPT Pair Prompt Transfer Contract Patch
+
+- Status: `pass`
+- Decision: `pair_readiness_pair_prompt_transfer_contract_patch_ready`
+- Added rows: `8`
+
+## Added Rows
+
+- `pair_transfer pipe surrogate fixed | loss => fixed loss`
+- `pair_transfer slash surrogate fixed/loss => fixed loss`
+- `pair_transfer comma surrogate fixed, loss => fixed loss`
+- `pair_transfer words fixed plus loss => fixed loss`
+- `pair_transfer bracket [fixed][loss] => fixed loss`
+- `pair_transfer reverse loss | fixed => loss fixed`
+- `pair_transfer reverse loss/fixed => loss fixed`
+- `pair_transfer boundary answer contains fixed and loss together`
+
+## Checks
+
+| Check | Status | Actual | Detail |
+| --- | --- | --- | --- |
+| repair_plan_passed | pass | pass | repair plan must pass |
+| repair_plan_decision | pass | pair_readiness_pair_prompt_transfer_repair_plan_ready | patch follows only a ready pair prompt transfer repair plan |
+| next_artifact_matches | pass | pair_readiness_pair_prompt_transfer_contract_patch | repair plan must request this patch artifact |
+| base_contract_passed | pass | pass | base direct-completion contract must pass |
+| base_contract_decision | pass | pair_readiness_direct_completion_surface_contract_ready | base must be the direct-completion surface contract |
+| pair_transfer_rows_added | pass | all pair-transfer rows | all pair-transfer patch rows must be present |
+| pair_transfer_row_count | pass | 8 | patch should add a meaningful set of transfer rows |
+| exact_direct_rows_preserved | pass | ['fixed=fixed', 'loss=loss'] | direct completion rows must be preserved |
+| heldout_pair_absent | pass | False | heldout pair prompt must stay out of training rows |
+| heldout_pair_absent_from_patch | pass | False | patch rows must not train on exact heldout pair prompt |
+| no_exact_eval_row_overlap | pass | [] | exact eval prompts must not be training rows |

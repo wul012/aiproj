@@ -1191,3 +1191,8 @@ e/663/解释/说明.md
 - `e/741/图片`
 - `e/741/解释/说明.md`
 - v741 pair prompt transfer repair plan 的运行截图和解释。
+## v742 补充索引
+
+- `e/742/图片`
+- `e/742/解释/说明.md`
+- v742 pair prompt transfer contract patch 的运行截图和解释。

@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_pair_prompt_transfer_contract_patch_ready
+failed_count=0
+patch_ready=True
+base_training_row_count=16
+patched_training_row_count=24
+pair_transfer_row_count=8
+model_quality_claim=contract_patch_only
+next_action=materialize the pair-transfer patched contract and rerun training plus pair-probe replay
