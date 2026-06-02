@@ -941,3 +941,8 @@ e/663/解释/说明.md
 - `e/691/图片`
 - `e/691/解释/说明.md`
 - v691 required-term pair surface route decision 的运行截图和解释。
+## v692 补充索引
+
+- `e/692/图片`
+- `e/692/解释/说明.md`
+- v692 required-term pair surface branch closeout 的运行截图和解释。

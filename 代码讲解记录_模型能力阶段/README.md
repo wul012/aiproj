@@ -668,6 +668,9 @@
 705-v691-required-term-pair-surface-route-decision.md
  -> v691 code explanation: close the contextual decode-aid branch and route future model work to minimal-prompt objectives.
 
+706-v692-required-term-pair-surface-branch-closeout.md
+ -> v692 code explanation: close v679-v691 as a contextual decode-aid branch with minimal-prompt capability still unsolved.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

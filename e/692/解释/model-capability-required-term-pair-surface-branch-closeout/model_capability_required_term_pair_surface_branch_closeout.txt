@@ -1,0 +1,8 @@
+status=pass
+decision=required_term_pair_surface_branch_closed_as_contextual_decode_aid
+milestone_count=7
+contextual_decode_aid_ready=True
+promotion_allowed=False
+recommended_next_route=minimal_prompt_surface_objective
+model_quality_claim=contextual_decode_aid_closed_branch
+next_action=run final verification, then treat minimal-prompt capability as a new objective if needed

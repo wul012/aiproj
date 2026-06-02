@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface branch closeout",
+  "generated_at": "2026-06-02T00:11:47Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_branch_closed_as_contextual_decode_aid",
+  "failed_count": 0,
+  "issues": [],
+  "source_paths": {
+    "surface_failure": "e\\679\\解释\\model-capability-required-term-pair-surface-failure-diagnostic\\model_capability_required_term_pair_surface_failure_diagnostic.json",
+    "policy_replay": "e\\681\\解释\\model-capability-required-term-pair-surface-policy-replay\\model_capability_required_term_pair_surface_policy_replay.json",
+    "leakage_risk": "e\\684\\解释\\model-capability-required-term-pair-surface-policy-leakage-risk\\model_capability_required_term_pair_surface_policy_leakage_risk.json",
+    "budget_sweep": "e\\685\\解释\\model-capability-required-term-pair-surface-policy-budget-sweep\\model_capability_required_term_pair_surface_policy_budget_sweep.json",
+    "variant_replay": "e\\688\\解释\\model-capability-required-term-pair-surface-variant-replay\\model_capability_required_term_pair_surface_variant_replay.json",
+    "baseline_contrast": "e\\690\\解释\\model-capability-required-term-pair-surface-baseline-contrast\\model_capability_required_term_pair_surface_baseline_contrast.json",
+    "route_decision": "e\\691\\解释\\model-capability-required-term-pair-surface-route-decision\\model_capability_required_term_pair_surface_route_decision.json"
+  },
+  "milestone_rows": [
+    {
+      "id": "surface_failure",
+      "version": "v679",
+      "status": "pass",
+      "decision": "required_term_pair_single_term_surface_failure_isolated",
+      "value": [
+        2535
+      ],
+      "finding": "isolated generation surface failure"
+    },
+    {
+      "id": "policy_replay",
+      "version": "v681",
+      "status": "pass",
+      "decision": "required_term_pair_surface_policy_replay_stable_pair_full_policy_found",
+      "value": [
+        "dual_boundary_sentence",
+        "pair_context_prefix"
+      ],
+      "finding": "contextual policies recover pair-full"
+    },
+    {
+      "id": "leakage_risk",
+      "version": "v684",
+      "status": "pass",
+      "decision": "required_term_pair_surface_policy_contextual_risk_documented",
+      "value": "medium",
+      "finding": "contextual-anchor risk documented"
+    },
+    {
+      "id": "budget_sweep",
+      "version": "v685",
+      "status": "pass",
+      "decision": "required_term_pair_surface_policy_budget_stable_window_found",
+      "value": 8,
+      "finding": "minimal stable budget selected"
+    },
+    {
+      "id": "variant_replay",
+      "version": "v688",
+      "status": "pass",
+      "decision": "required_term_pair_surface_variant_replay_all_variants_stable",
+      "value": [
+        "compact_context",
+        "newline_context",
+        "semicolon_context",
+        "space_context_control",
+        "worded_context"
+      ],
+      "finding": "surface variants stable"
+    },
+    {
+      "id": "baseline_contrast",
+      "version": "v690",
+      "status": "pass",
+      "decision": "required_term_pair_contextual_variant_needed_over_non_leaking_baselines",
+      "value": true,
+      "finding": "non-leaking baselines remain unstable"
+    },
+    {
+      "id": "route_decision",
+      "version": "v691",
+      "status": "pass",
+      "decision": "close_contextual_decode_branch_and_design_minimal_prompt_objective",
+      "value": "minimal_prompt_surface_objective",
+      "finding": "route closed to contextual decode aid"
+    }
+  ],
+  "summary": {
+    "milestone_count": 7,
+    "passed_milestone_count": 7,
+    "contextual_decode_aid_ready": true,
+    "promotion_allowed": false,
+    "recommended_next_route": "minimal_prompt_surface_objective"
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_decode_aid_closed_branch",
+    "reason": "The branch produced a stable contextual decode aid but did not produce a promotable minimal-prompt baseline.",
+    "next_action": "run final verification, then treat minimal-prompt capability as a new objective if needed"
+  }
+}

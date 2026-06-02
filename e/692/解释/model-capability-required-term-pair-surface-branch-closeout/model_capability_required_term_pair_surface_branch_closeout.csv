@@ -1,0 +1,8 @@
+id,version,status,decision,value,finding
+surface_failure,v679,pass,required_term_pair_single_term_surface_failure_isolated,[2535],isolated generation surface failure
+policy_replay,v681,pass,required_term_pair_surface_policy_replay_stable_pair_full_policy_found,"[""dual_boundary_sentence"", ""pair_context_prefix""]",contextual policies recover pair-full
+leakage_risk,v684,pass,required_term_pair_surface_policy_contextual_risk_documented,medium,contextual-anchor risk documented
+budget_sweep,v685,pass,required_term_pair_surface_policy_budget_stable_window_found,8,minimal stable budget selected
+variant_replay,v688,pass,required_term_pair_surface_variant_replay_all_variants_stable,"[""compact_context"", ""newline_context"", ""semicolon_context"", ""space_context_control"", ""worded_context""]",surface variants stable
+baseline_contrast,v690,pass,required_term_pair_contextual_variant_needed_over_non_leaking_baselines,True,non-leaking baselines remain unstable
+route_decision,v691,pass,close_contextual_decode_branch_and_design_minimal_prompt_objective,minimal_prompt_surface_objective,route closed to contextual decode aid

@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v691.0.0` decides to close the contextual surface branch and route future model work to minimal prompts.
+Version `v692.0.0` closes the required-term pair surface branch as a contextual decode aid.
+
+## Latest v692 checkpoint
+
+- Added `model_capability_required_term_pair_surface_branch_closeout`.
+- Consumed seven milestones from v679, v681, v684, v685, v688, v690, and v691.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_surface_branch_closed_as_contextual_decode_aid`.
+- Confirmed `milestone_count=7`.
+- Confirmed `contextual_decode_aid_ready=True`.
+- Confirmed `promotion_allowed=False`.
+- Confirmed `recommended_next_route=minimal_prompt_surface_objective`.
+- Archived v692 evidence in `e/692` and added the code explanation in `代码讲解记录_模型能力阶段/706-v692-required-term-pair-surface-branch-closeout.md`.
 
 ## Latest v691 checkpoint
 

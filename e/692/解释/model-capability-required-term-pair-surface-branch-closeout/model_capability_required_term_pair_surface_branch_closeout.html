@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>MiniGPT surface branch closeout</title><style>
+body{margin:0;background:#eef2f5;color:#172026;font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:18px 0}
+.stats div,section{background:white;border:1px solid #d8dee4;border-radius:8px;padding:14px;margin:14px 0}
+span{display:block;color:#5d6975;font-size:12px;text-transform:uppercase}strong{display:block;color:#0f766e;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #d8dee4;padding:9px;text-align:left;vertical-align:top}
+th{background:#f7f9fb;color:#334155}
+</style></head>
+<body><main>
+<h1>MiniGPT surface branch closeout</h1>
+<p>The branch produced a stable contextual decode aid but did not produce a promotable minimal-prompt baseline.</p>
+<section class="stats">
+<div><span>Milestones</span><strong>7</strong></div>
+<div><span>Contextual aid</span><strong>True</strong></div>
+<div><span>Next route</span><strong>minimal_prompt_surface_objective</strong></div>
+</section>
+<section><h2>Milestones</h2><table><thead><tr><th>Id</th><th>Version</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td>surface_failure</td><td>v679</td><td>pass</td><td>isolated generation surface failure</td></tr><tr><td>policy_replay</td><td>v681</td><td>pass</td><td>contextual policies recover pair-full</td></tr><tr><td>leakage_risk</td><td>v684</td><td>pass</td><td>contextual-anchor risk documented</td></tr><tr><td>budget_sweep</td><td>v685</td><td>pass</td><td>minimal stable budget selected</td></tr><tr><td>variant_replay</td><td>v688</td><td>pass</td><td>surface variants stable</td></tr><tr><td>baseline_contrast</td><td>v690</td><td>pass</td><td>non-leaking baselines remain unstable</td></tr><tr><td>route_decision</td><td>v691</td><td>pass</td><td>route closed to contextual decode aid</td></tr></tbody></table></section>
+<section><h2>Next Action</h2><p>run final verification, then treat minimal-prompt capability as a new objective if needed</p></section>
+</main></body></html>
